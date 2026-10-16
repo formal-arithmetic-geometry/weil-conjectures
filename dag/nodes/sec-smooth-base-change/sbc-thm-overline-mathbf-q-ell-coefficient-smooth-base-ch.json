@@ -3,38 +3,175 @@
  "blueprint": {
   "is": "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\overline{\\mathbf Q}_\\ell$-coefficient smooth base change",
- "statement": "Assume the hypotheses of ambient $E$-coefficient smooth base change\n([sbc-thm-e-coefficient-smooth-base-change]) hold for every finite\nstage representative under consideration and are preserved by passage\nto a common finite overfield. The finite-stage exchange isomorphisms\ndefine an isomorphism\n\n$$\nLf^*_{\\mathrm{comp},\\overline{\\mathbf Q}_\\ell}\nRg_{*,\\mathrm{comp},\\overline{\\mathbf Q}_\\ell}K\n\\xrightarrow{\\ \\sim\\ }\nRh_{*,\\mathrm{comp},\\overline{\\mathbf Q}_\\ell}\nLe^*_{\\mathrm{comp},\\overline{\\mathbf Q}_\\ell}K\n\\quad\\text{in }D_{\\mathrm{comp}}(S,\\overline{\\mathbf Q}_\\ell)\n$$\n\nfor every $K\\in\\Dbc(T,\\overline{\\mathbf Q}_\\ell)$ represented by a\nfinite-level etale admissible lattice at a finite stage. The\nconstruction is independent of the common stage.",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Qlb=\\overline{\\mathbf Q}_\\ell$. In the Cartesian square [sbc-def-base-change-square]\n$$\\begin{array}{ccc}Y&\\xrightarrow{e}&T\\\\ h\\downarrow&&\\downarrow g\\\\ X&\\xrightarrow{f}&S,\\end{array}$$\nassume $f$ smooth, $g$ quasi-compact and quasi-separated, all four schemes noetherian and finite-dimensional, and $\\ell$ invertible on $S$, as required by the finite-stage coefficient theorem. Use $\\Dbc(T,\\Qlb)$ of [def-weil-pbc-qbar-category] and the ambient complete coefficient categories of [def-sbc-ambient-complete-coefficient-categories]. Assume the hypotheses of ambient $E$-coefficient smooth base change [sbc-thm-e-coefficient-smooth-base-change] hold for every finite-stage representative under consideration and are preserved by passage to a common finite overfield. In particular, $K\\in\\Dbc(T,\\Qlb)$ has a representative $(E,K_E)$ admitting a finite-level etale admissible lattice [sbc-def-admissible-lattices].\n\nThe completed direct images and inverse images, evaluated at finite stages and descended by their scalar-extension comparisons, give an exchange isomorphism\n$$\n Lf^*_{\\mathrm{comp},\\Qlb}Rg_{*,\\mathrm{comp},\\Qlb}K\n \\xrightarrow{\\ \\sim\\ }\n Rh_{*,\\mathrm{comp},\\Qlb}Le^*_{\\mathrm{comp},\\Qlb}K\n \\quad\\text{in }D_{\\mathrm{comp}}(X,\\Qlb).\n$$\nIt is represented at stage $E$ by the image of the canonical raw $E$-coefficient exchange under the identity-idempotent inclusion into the ambient Karoubi category, and at every common finite overfield by its coefficient extension. The construction is independent of the common stage (and of the chosen admissible lattice). No constructible landing of the ambient direct images is asserted.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch.md",
   "place": "node sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch, order 1446"
  },
  "stmt_deps": [
-  "sbc-thm-e-coefficient-smooth-base-change"
+  "sbc-def-base-change-square",
+  "def-weil-pbc-qbar-category",
+  "def-sbc-ambient-complete-coefficient-categories",
+  "sbc-thm-e-coefficient-smooth-base-change",
+  "sbc-def-admissible-lattices",
+  "prop-weil-pbc-scalar-extension",
+  "lem-sbc-coherent-pair-functor-descent"
  ],
  "proof": [
   {
-   "text": "The finite-stage exchange isomorphisms of\n[sbc-thm-e-coefficient-smooth-base-change] are compatible with\nthe reduction maps and with the common-stage calculus (the\ncompatibility of the finite-level exchange with the coefficient tower of\nthe smooth-base-change chapter), so their derived inverse limit over the directed set of\nfinite stages is an isomorphism; the independence of the common stage\nis the unicity of the derived inverse limits.",
+   "text": "Write $F_E=Lf^*_{\\mathrm{comp},E}Rg_{*,\\mathrm{comp},E}$ and $G_E=Rh_{*,\\mathrm{comp},E}Le^*_{\\mathrm{comp},E}$. The square has $g:T\\to S$, $f:X\\to S$, $e:Y\\to T$, $h:Y\\to X$ [sbc-def-base-change-square], so both functors take their values on $X$. The integral completed operations are additive and $\\mathcal O_E$-linear, preserve the derived-complete categories, and have the canonical natural integral completed exchange of [lem-sbc-completed-operations-linear-natural-exchange]. For fixed $E\\subset M$, write $P_E^u=Lu^*_{\\mathrm{comp},\\mathcal O_E}$ and $D_E^u=Ru_{*,\\mathcal O_E}$ on the ambient complete integral categories. The comparisons in [prop-weil-pbc-scalar-extension] are $p^f:C_XP_E^f\\xrightarrow{\\sim}P_M^fC_S$, $p^e:C_YP_E^e\\xrightarrow{\\sim}P_M^eC_T$, $d^g:C_SD_E^g\\xrightarrow{\\sim}D_M^gC_T$, and $d^h:C_XD_E^h\\xrightarrow{\\sim}D_M^hC_Y$, where $C_W=C_{M/E,W}$. Their composites $(P_M^f d^g)\\circ(p^fD_E^g)$ and $(D_M^h p^e)\\circ(d^hP_E^e)$ compare the integral $F$ and $G$ composites, respectively. After rationalization and Karoubi extension these give coherent isomorphisms $b^F_{M/E}:T^X_{M/E}F_E\\xrightarrow{\\sim}F_MT^T_{M/E}$ and $b^G_{M/E}:T^X_{M/E}G_E\\xrightarrow{\\sim}G_MT^T_{M/E}$. They pass to the ambient rational and Karoubi categories [def-sbc-ambient-complete-coefficient-categories] using the formula for each integral linear operation $H$: $u\\otimes c\\mapsto H(u)\\otimes c$ and $(A,p)\\mapsto(HA,H(p))$, and extending the components of the comparisons by the same formulas. For a natural comparison $b:H\\Rightarrow J$, the arrow on $(A,p)$ is $J(p)b_AH(p)$ and its inverse is $H(p)b_A^{-1}J(p)$. Naturality and $p^2=p$ make their two composites $H(p)$ and $J(p)$, the identities of the corresponding Karoubi objects. The unit, tower and exchange equations survive these operations since both operations preserve composition and identities. This uses the ambient part of the scalar-extension statement, without asserting a constructible direct-image functor.",
    "uses": [
+    "sbc-def-base-change-square",
+    "prop-weil-pbc-scalar-extension",
+    "def-sbc-ambient-complete-coefficient-categories",
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Ambient E categories and functors, lines 1191-1228; finite-stage scalar extension, lines 1291-1321"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-coherent-pair-functor-descent] to the ambient coefficient systems [def-sbc-ambient-complete-coefficient-categories] and the comparisons of step 1. This constructs the four ambient operations on pair categories and their Karoubi envelopes. Applying its composition clause identifies their composites with the functors descended from $F_E,G_E$. If $u:T_{M/E}K_E\\to T_{M/F}L_F$ represents an input morphism, the corresponding composite functor sends it to $[M,(b^F_{M/F})^{-1}F_M(u)b^F_{M/E}]$, and $G$ sends it to $[M,(b^G_{M/F})^{-1}G_M(u)b^G_{M/E}]$. Thus the two sides of the claimed arrow have precisely these descended object values, including for a constructible pair embedded in the ambient category.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-sbc-ambient-complete-coefficient-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "The two Qbar_l-coefficient categories, lines 1412-1438"
+   }
+  },
+  {
+   "text": "Let $\\alpha_E:F_E\\Rightarrow G_E$ be the rationalized and Karoubi-extended canonical natural integral exchange of [lem-sbc-completed-operations-linear-natural-exchange], using the formulas of step 1. Scalar extension of that exchange is the exchange at $M$ by [prop-weil-pbc-scalar-extension], namely\n$$\\alpha_M(T^T_{M/E}K_E)b^F_{M/E,K_E}=b^G_{M/E,K_E}T^X_{M/E}(\\alpha_E(K_E)).$$\nThese are exactly the transformation-compatibility equations in [lem-sbc-coherent-pair-functor-descent]. It therefore gives a descended natural transformation $\\alpha:F\\Rightarrow G$ with component at $(E,K_E)$ represented by $[E,\\alpha_E(K_E)]$. This constructs the specified exchange, rather than just some isomorphism between its source and target.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-sbc-coherent-pair-functor-descent",
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "E-coefficient smooth base change and its finite-extension compatibility, lines 1262-1279; ambient operations, lines 1424-1438"
+   }
+  },
+  {
+   "text": "Choose the finite-stage representative $(E,K_E)$ of $K$ in [def-weil-pbc-qbar-category]. The admissible lattice of [sbc-def-admissible-lattices] is a pair $(L,\\iota)$ with $L\\in\\Dbc(T_{\\Proet},\\mathcal O_E)$ and $\\iota:L[1/\\varpi]\\xrightarrow{\\sim}K_E$ in the raw rationalization. Its reductions are $L_n=L\\otimes^L_{\\widehat A_T}(A/\\varpi^{n+1})_T$ for $n\\geq0$, with $A=\\mathcal O_E$; for each $n$ there is $M_n\\in\\Dbc(T_{\\Et},A/\\varpi^{n+1})$ with $\\nu_T^*M_n\\cong L_n$. These are exactly the current finite-level etale admissibility condition. Here $f$ is smooth, $g$ is quasi-compact and quasi-separated, all four schemes are noetherian, $X$ and $T$ have finite dimension, and $\\ell$ is invertible on $S$. Thus every hypothesis of [sbc-thm-e-coefficient-smooth-base-change] holds; the conditional hypothesis ensures these conditions at later coefficient fields too. That theorem gives a canonical exchange $\\alpha_E^{\\mathrm{raw}}(K_E)$ and its inverse $v_E^{\\mathrm{raw}}$ in the raw category $\\mathcal R_E(X)=\\mathcal B_E(X)[1/\\varpi]$, with output corner $X$, independent of $(L,\\iota)$. Its notation $D_{\\mathrm{comp}}(X,E)$ denotes this raw category. In contrast, the finite-stage ambient category $\\mathcal C_E(X)$ of [def-sbc-ambient-complete-coefficient-categories] is $\\Kar(\\mathcal R_E(X))$. Apply the explicit inclusion $j_E:A\\mapsto(A,1_A)$, $u\\mapsto u$ of [def-weil-karoubi-envelope]. The localized functors and exchange in steps 1-3 extend by these same formulas, so $j_E(\\alpha_E^{\\mathrm{raw}}(K_E))=\\alpha_E(j_EK_E)$. Set $v_E=j_E(v_E^{\\mathrm{raw}})$. Both composites are $j_E(1)=1$, hence this is an inverse in $\\mathcal C_E(X)$. No equivalence between the raw category and its Karoubi envelope, no idempotent-pair lattice comparison, and no square-constructible hypothesis is needed.",
+   "uses": [
+    "def-weil-pbc-qbar-category",
+    "sbc-def-admissible-lattices",
+    "sbc-thm-e-coefficient-smooth-base-change",
+    "def-sbc-ambient-complete-coefficient-categories",
+    "def-weil-karoubi-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Qbar_l-coefficient smooth base change, lines 1439-1455; E-coefficient theorem, lines 1262-1287"
+   }
+  },
+  {
+   "text": "In the ambient pair category [def-sbc-ambient-complete-coefficient-categories], $[E,v_E]$ is an inverse for $[E,\\alpha_E(K_E)]$: their two composites are $[E,v_E\\alpha_E(K_E)]=[E,1_{F_EK_E}]$ and $[E,\\alpha_E(K_E)v_E]=[E,1_{G_EK_E}]$. The outer Karoubi inclusion [def-weil-karoubi-envelope] sends an arrow and its inverse to the same arrows between objects with identity idempotent, so the descended component is an isomorphism in $D_{\\mathrm{comp}}(X,\\Qlb)$. If $t:(E,K_E)\\xrightarrow{\\sim}K$ is the chosen identification in the ambient category, naturality from step 3 identifies the component with $G(t)\\alpha_{(E,K_E)}F(t)^{-1}$, which is invertible with inverse $F(t)[E,v_E]G(t)^{-1}$.",
+   "uses": [
+    "def-sbc-ambient-complete-coefficient-categories",
+    "def-weil-karoubi-envelope"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Qbar_l-coefficient smooth base change, finite-stage inverse and Karoubi passage, lines 1439-1455"
+   }
+  },
+  {
+   "text": "At $M\\supset E$ the canonical identifications of the source and target are $b^F_{M/E}$ and $b^G_{M/E}$. The equation in step 3 identifies the transported representative with $\\alpha_M(T_{M/E}K_E)$. If fields $M,N$ are chosen, their compositum is a further finite field [def-weil-finite-subextension-directed-set]; the two transported arrows there are the same exchange by this equation and its tower compatibility. They consequently define the same morphism class by [def-sbc-ambient-complete-coefficient-categories]. Their inverses agree too, since $\\alpha v=v\\alpha=1$ determines an inverse uniquely. Finally a change of lattice at a fixed finite stage leaves $\\alpha_E$ unchanged by [sbc-thm-e-coefficient-smooth-base-change]; changing the finite-stage presentation gives the same component through the naturality equation of step 3. This proves the required stage and lattice independence.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "def-sbc-ambient-complete-coefficient-categories",
     "sbc-thm-e-coefficient-smooth-base-change"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Qbar_l-coefficient smooth base change, independence of common stage, lines 1439-1455; finite common-stage principle, lines 1347-1359"
+   }
   }
  ],
  "proof_deps": [
-  "sbc-thm-e-coefficient-smooth-base-change"
+  "sbc-def-base-change-square",
+  "prop-weil-pbc-scalar-extension",
+  "def-sbc-ambient-complete-coefficient-categories",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "lem-sbc-coherent-pair-functor-descent",
+  "def-weil-pbc-qbar-category",
+  "sbc-def-admissible-lattices",
+  "sbc-thm-e-coefficient-smooth-base-change",
+  "def-weil-karoubi-envelope",
+  "def-weil-finite-subextension-directed-set"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+  "place": "Qbar_l-coefficient smooth base change, lines 1439-1469; explicit common-stage descent proof replacing the imported inverse-limit claim"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change for derived complete rational l-adic complexes with algebraically closed coefficients by finite coefficient extension",
+   "results": "Hits: BDeRhamPlus, instCommRingBDeRhamPlus, BDeRham, RingHom.FormallySmooth.isStableUnderBaseChange, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, RingHom.Smooth.isStableUnderBaseChange, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange. Perfectoid period rings and scalar completion, not the smooth exchange theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale smooth base change exchange isomorphism of derived pushforward and pullback for constructible sheaves",
+   "results": "Hits: SheafOfModules.pullbackComp, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pullbackIso, SheafOfModules.pushforwardComp_inv_app_val_app, TopCat.Sheaf.pushforwardForgetIso. Underived module-sheaf pullback/pushforward comparisons, not smooth base change for l-adic complexes.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\"",
+   "results": "Hits: Submodule.baseChange, LinearMap.baseChange, LinearEquiv.baseChange, LinearMap.baseChange_id, Submodule.baseChange_bot, Submodule.baseChange_top, Submodule.tmul_mem_baseChange_of_mem, Submodule.baseChange_mono. Module tensor base change, not the derived sheaf exchange.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*base.?change|base.?change.*smooth|derived.*complete|[Qq]bar",
+   "results": "25 hits; first files: Mathlib/CategoryTheory/Abelian/Pseudoelements.lean, Mathlib/CategoryTheory/Abelian/Pseudoelements.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Normalization.lean. No common-stage ambient complete coefficient category or smooth sheaf exchange theorem; the closest functorExtension₂ is only Karoubi extension.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth base change theorem for l-adic sheaves over an algebraic closure of the l-adic numbers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change exchange for complete adic sheaf complexes with algebraic closure of l-adic coefficients is induced by finite extension stages",
+   "results": "Second reader: 8 hits; top: AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct_naturality.  AdicCompletion tensor results concern ordinary modules. ElladicCohomology defines the coefficient sheaf and cohomology, and smooth_isStableUnderBaseChange concerns morphisms of schemes; none states the exchange theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*smooth|pro[Ee]tale|Pro[Ee]tale",
+   "results": "Second reader: 15 hits; top: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean.  AdicCompletion tensor results concern ordinary modules. ElladicCohomology defines the coefficient sheaf and cohomology, and smooth_isStableUnderBaseChange concerns morphisms of schemes; none states the exchange theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -56,5 +193,29 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch",
+  "worker": "stage1",
+  "summary": "Repaired the returned delivery against the current DAG, re-reading all nine proof citations. The admissible-lattice definition now uses the completed coefficient sheaf, n+1 reductions and an explicit raw lattice presentation; step 4 checks these exact conditions and all current finite-E hypotheses. The finite-E theorem now has the correct output X and a raw ambient rationalization; step 4 explicitly includes its exchange and inverse into the finite-stage Karoubi category, rather than identifying those categories. Refreshed all citation quotations. The common-stage descent route and two statement-only prerequisites are retained. The second reading adds the existing integral-linearity/natural-exchange lemma explicitly to steps 1 and 3, closing the uncited premise of rational extension and identifying the canonical natural transformation.",
+  "blueprint": "Realizes the imported proof paragraph: common-stage compatibility in steps 1-3; finite-E isomorphy and the explicit raw-to-Karoubi inclusion in step 4; passage to algebraically closed coefficients by inverse equations in step 5; independence in step 6. The imported inverse-limit-over-fields claim remains corrected by the source common-stage pair construction. This repair uses the current admissible-lattice and finite-E statements, including their completed coefficient sheaves, raw categories and corrected output X.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Steps 1 and 3 use its ambient scalar-extension comparisons, associator coherence and compatibility with the canonical exchange. This is coefficient-descent infrastructure, not a replacement of smooth base change; no node of sk-rem-rest supplies that generic coherence statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-1dea6fdb1",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-1dea6fdb1 (reviewer sub-agent of L); spot-checked: The split and both new nodes were read and checked in full. One statement fault: the item adds ℓ-invertibility on X, T, and Y, while the cited finite-stage master theorem assumes it only on S; this weakens the target. A corrected complete item JSON is in fixes/dag/nodes/sec-smooth-base-change/sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

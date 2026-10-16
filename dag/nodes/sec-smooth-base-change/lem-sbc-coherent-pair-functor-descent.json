@@ -1,0 +1,186 @@
+{
+ "id": "lem-sbc-coherent-pair-functor-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch",
+   "place": "Proof of the parent, compatibility with the common-stage calculus and independence of the common stage; sketch32 \"Finite common-stage principle\" and \"The two Qbar_l-coefficient categories\", lines 1347-1359, 1424-1438; sketch42 Proposition prop:pseudocone-functor and Theorems thm:pair-universal, thm:karoubi-universal",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coherent functors and transformations on common-stage pair categories",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$. Let $I=\\mathsf{FinExt}_\\ell$ be the small directed poset of finite intermediate fields [def-weil-finite-subextension-directed-set], using [def-weil-size-convention]. Let $(\\mathcal A_E,U_{F/E},a^A)$ and $(\\mathcal B_E,V_{F/E},a^B)$ be diagrams of additive categories [def-weil-additive-category], with additive transition functors [def-weil-pbc-additive-functor], identity transitions $U_{E/E}=1$ and $V_{E/E}=1$, and specified natural associator isomorphisms $a^A_{G,F,E}:U_{G/F}U_{F/E}\\xrightarrow{\\sim}U_{G/E}$ and $a^B_{G,F,E}:V_{G/F}V_{F/E}\\xrightarrow{\\sim}V_{G/E}$ for $E\\subseteq F\\subseteq G$. Assume the associators with a repeated adjacent field are identities and the pentagon equations hold. Form their pair categories $P_A,P_B$: objects of $P_A$ are $(E,K)$ with $K\\in\\mathcal A_E$; morphisms from $(E,K)$ to $(F,L)$ are represented over $M\\supseteq E,F$ by common-field maps $u:U_{M/E}K\\to U_{M/F}L$, modulo equality after further transport $u_N=a^A_{N,M,F,L}U_{N/M}(u)(a^A_{N,M,E,K})^{-1}$, and likewise for $B$; identities, sums and composites are calculated at one common stage. These prescriptions are well-defined additive categories.\n\nLet $\\Phi_E:\\mathcal A_E\\to\\mathcal B_E$ be additive functors with natural isomorphisms\n$$b_{F/E}:V_{F/E}\\Phi_E\\xrightarrow{\\sim}\\Phi_F U_{F/E}.$$\nAssume $b_{E/E}=1$ and the tower equation\n$$b_{G/E}\\circ(a^B_{G,F,E}\\Phi_E)=(\\Phi_G a^A_{G,F,E})\\circ(b_{G/F}U_{F/E})\\circ(V_{G/F}b_{F/E}).$$\nThen the formulas\n$$\\Phi(E,K)=(E,\\Phi_EK),\\qquad\n \\Phi[M,u]=[M,b_{M/F,L}^{-1}\\circ\\Phi_M(u)\\circ b_{M/E,K}]\n$$\ndefine an additive functor $P_A\\to P_B$, independent of the representative and common field. If $\\Psi_E$ is another such family with comparisons $c$, and natural transformations $\\eta_E:\\Phi_E\\Rightarrow\\Psi_E$ satisfy\n$$\\eta_F U_{F/E}\\circ b_{F/E}=c_{F/E}\\circ V_{F/E}\\eta_E,$$\nthen the components $[E,\\eta_{E,K}]$ give a natural transformation $\\Phi\\Rightarrow\\Psi$. Identities, composition of functor families with the composite comparisons, and equations of compatible transformations are preserved by this construction. The descended functors and transformations extend to $\\Kar(P_A)\\to\\Kar(P_B)$ [def-weil-karoubi-envelope]: a functor sends $(P,p)$ to $(\\Phi P,\\Phi p)$ and a transformation has component $\\Psi(p)\\eta_P\\Phi(p)$.",
+ "source": {
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+  "place": "Proof of the parent, compatibility with the common-stage calculus and independence of the common stage; sketch32 \"Finite common-stage principle\" and \"The two Qbar_l-coefficient categories\", lines 1347-1359, 1424-1438; sketch42 Proposition prop:pseudocone-functor and Theorems thm:pair-universal, thm:karoubi-universal",
+  "also": [
+   {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/42_qbarl_triangulated_colimit.tex",
+    "place": "Proposition prop:pseudocone-functor; Theorems thm:pair-universal and thm:karoubi-universal; generic additive form without the unused exactness assertion"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-size-convention",
+  "def-weil-additive-category",
+  "def-weil-karoubi-envelope",
+  "def-weil-pbc-additive-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent families of functors and compatible natural transformations descend to the filtered pair category and its Karoubi envelope",
+   "results": "Hits: CategoryTheory.IsFiltered.SmallFilteredIntermediate.factoringCompInclusion, CategoryTheory.Idempotents.natTrans_eq, CategoryTheory.Functor.Final.exists_coeq, CategoryTheory.Idempotents.FunctorExtension₁.map, CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp, CategoryTheory.Idempotents.functor_category_isIdempotentComplete, CategoryTheory.Idempotents.functorExtension₂_map_app_f, CategoryTheory.Functor.Final.exists_coeq_of_locally_small. Idempotents/FunctorExtension.lean provides the Karoubi step only, not the preceding common-stage descent.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Induced functor on a category whose objects are pairs and whose morphisms are maps over a common stage modulo eventual equality",
+   "results": "Hits: CategoryTheory.Functor.ofSequence, CategoryTheory.Pi.comap, CategoryTheory.inducedFunctor, CategoryTheory.NonemptyParallelPairPresentationAux.F₂, CategoryTheory.Functor.Fiber.inducedFunctor, CategoryTheory.Discrete.functor, CategoryTheory.Grothendieck.functorFrom_obj, CategoryTheory.NonemptyParallelPairPresentationAux.F₁. Grothendieck.functorFrom has a strict category-valued diagram and base-arrow morphisms; it does not give this pseudocoherent quotient descent in one specialization.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"Functor\"",
+   "results": "Hits: CategoryTheory.Limits.instHasColimitObjFunctorConstInitial, CategoryTheory.Functor.preservesColimitsOfSize_of_isZero, CategoryTheory.Functor.preservesColimitsOfShape_of_isZero, CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor, CategoryTheory.instPreservesFiniteColimitsObjFunctorRightExactFunctor, CategoryTheory.Functor.ColimitType, CategoryTheory.Functor.CoconeTypes.IsColimit, CategoryTheory.Functor.CoconeTypes.IsColimitCore. Ordinary Type colimits and preservation, not descent of pseudocoherent category diagrams.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*(two.?colimit|2.colimit)|common.stage|pair.category|functorExtension₂",
+   "results": "5 hits; first files: Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean. No common-stage ambient complete coefficient category or smooth sheaf exchange theorem; the closest functorExtension₂ is only Karoubi extension.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "def functorExtension₂|def Grothendieck.functorFrom|def functorFrom|filtered.*colimit.*categor",
+   "results": "14 hits; first files: Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Grothendieck.lean, Mathlib/CategoryTheory/Filtered/Basic.lean, Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean, Mathlib/CategoryTheory/Presentable/Basic.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Filtered.lean, Mathlib/CategoryTheory/Limits/Filtered.lean. No common-stage ambient complete coefficient category or smooth sheaf exchange theorem; the closest functorExtension₂ is only Karoubi extension.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible functors and natural transformations on a filtered system of categories descend to common stage morphism categories",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudonatural transformation between filtered diagrams of additive categories induces a functor between their bicategorical colimits",
+   "results": "8 hits; top: AddMonCat.FilteredColimits.M.map_mk, AddMonCat.FilteredColimits.colimit_add_mk_eq, CategoryTheory.Limits.ColimitPresentation.bind, AddMonCat.FilteredColimits.colimit_add_mk_eq', AddGrpCat.FilteredColimits.colimit_add_mk_eq, CategoryTheory.Limits.ColimitPresentation.bind_ι_app, AddMonCat.FilteredColimits.colimitAddAux, AddGrpCat.FilteredColimits.colimit_add_mk_eq'; Karoubi-complex functors, filtered colimits of additive groups, or general bicategory terminology do not state the complete finite-field pair construction or its coherent functor descent.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Karoubi\", \"map\"",
+   "results": "12 hits; top: CategoryTheory.Idempotents.toKaroubi_map_f, CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.map, CategoryTheory.Idempotents.karoubiFunctorCategoryEmbedding_map, CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.map_app_f, CategoryTheory.Idempotents.KaroubiFunctorCategoryEmbedding.obj_map_f, AlgebraicTopology.karoubi_alternatingFaceMapComplex_d, CategoryTheory.Abelian.LeftResolution.karoubi.F_map_f, CategoryTheory.Abelian.LeftResolution.karoubi.F'_map_f; Karoubi-complex functors, filtered colimits of additive groups, or general bicategory terminology do not state the complete finite-field pair construction or its coherent functor descent.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudocolimit|pseudonatural|Pseudonatural|Pseudocolimit|filteredColimit|FilteredColimit",
+   "results": "25 hits; first files: Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/Types/Monomorphisms.lean, Mathlib/CategoryTheory/Types/Monomorphisms.lean, Mathlib/CategoryTheory/Bicategory/Monad/Basic.lean, Mathlib/CategoryTheory/Core.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Presentable/Type.lean. No common-stage ambient complete coefficient category or smooth sheaf exchange theorem; the closest functorExtension₂ is only Karoubi extension.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent additive functors between filtered common-stage pair categories with natural associators descend to functors and natural transformations",
+   "results": "8 hits: AddMonCat.FilteredColimits.cocone_naturality, AddMonCat.FilteredColimits.M.map_mk, CategoryTheory.IsFiltered.SmallFilteredIntermediate.factoringCompInclusion, CategoryTheory.IsFiltered.toSup_commutes, AddMonCat.FilteredColimits.colimit_add_mk_eq, AddCommMonCat.FilteredColimits.M, AddMonCat.FilteredColimits.colimitAddAux, AddMonCat.FilteredColimits.colimitAddAux_eq_of_rel_left. Filtered colimits of additive monoids, filtered-category cones, and Karoubi maps supply ingredients but do not state the coherent category quotient/descent theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudocolimit|common.stage|functorExtension₂",
+   "results": "5 hits: Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean. Filtered colimits of additive monoids, filtered-category cones, and Karoubi maps supply ingredients but do not state the coherent category quotient/descent theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent additive functors descend to a filtered pseudocolimit category of common-stage pairs",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive pseudofunctor on a directed poset has a category of pairs with morphisms represented at a common upper bound and pseudonatural functors descend to it",
+   "results": "Second reader: 8 hits; top: CategoryTheory.Pseudofunctor.CoGrothendieck, CategoryTheory.Pseudofunctor.Grothendieck, CategoryTheory.Pseudofunctor.ObjectProperty.map, CategoryTheory.Pseudofunctor.CoGrothendieck.ι, CategoryTheory.Pseudofunctor.DescentData, CategoryTheory.Pseudofunctor.IsPrestackFor, CategoryTheory.WithInitial.pseudofunctor, CategoryTheory.Functor.IsLocallyDirected.  The Grothendieck construction retains base-arrow morphisms; functorExtension₂ supplies only Karoubi extension. Neither states the common-upper-bound quotient and coherent descent.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Pseudocolimit|pseudocolimit|filtered.*Karoubi|Karoubi.*filtered|pseudonatural",
+   "results": "Second reader: 2 hits; top: Mathlib/CategoryTheory/Core.lean, Mathlib/CategoryTheory/Bicategory/Monad/Basic.lean.  The Grothendieck construction retains base-arrow morphisms; functorExtension₂ supplies only Karoubi extension. Neither states the common-upper-bound quotient and coherent descent.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Idempotents.functorExtension₂",
+   "results": "Second reader: 12 hits; top: CategoryTheory.Idempotents.functorExtension₂, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiFunctorExtension₂, CategoryTheory.Idempotents.functorExtension₂_obj_obj_X, CategoryTheory.Idempotents.karoubiUniversal₂_functor_eq, CategoryTheory.Idempotents.functorExtension_obj_obj, CategoryTheory.Idempotents.functorExtension₂CompWhiskeringLeftToKaroubiIso, CategoryTheory.Idempotents.functorExtension₂_obj_obj_p, CategoryTheory.Idempotents.functorExtension_obj_map.  The Grothendieck construction retains base-arrow morphisms; functorExtension₂ supplies only Karoubi extension. Neither states the common-upper-bound quotient and coherent descent.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered pseudocolimit of additive categories with coherent transition functors and descent of pseudonatural transformations",
+   "results": "Fresh second reading: 8 hits; AddMonCat.FilteredColimits.colimitAddAux, AddMonCat.FilteredColimits.colimit_add_mk_eq, AddMonCat.FilteredColimits.colimitCocone, AddMonCat.FilteredColimits.colimit_add_mk_eq', AddMonCat.FilteredColimits.M, AddMonCat.FilteredColimits.colimitAdd, AddMonCat.FilteredColimits.colimit, AddGrpCat.FilteredColimits.colimitCocone. These are colimits of algebraic objects or local cohomology/period-ring constructions, not the stated coherent common-stage coefficient category/descent.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedComplete|pseudocolimit|Pseudocolimit|commonStage",
+   "results": "Fresh second reading: 0 hits; . These are colimits of algebraic objects or local cohomology/period-ring constructions, not the stated coherent common-stage coefficient category/descent.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudonatural maps of directed diagrams of preadditive categories induce functors on their localization colimit",
+   "results": "Independent second reading: 8 hits; top: CategoryTheory.Localization.liftNatTrans_add, CategoryTheory.Localization.Construction.NatTransExtension.app, CategoryTheory.Localization.Construction.natTransExtension, CategoryTheory.Localization.functor_additive_iff, CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit, CategoryTheory.Localization.functor_additive, CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.inverse, CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor_obj_obj_map. Read Grothendieck.lean:75-115, Localization/Construction.lean:250-280, Localization/Predicate.lean:305-337, and Idempotents/FunctorExtension.lean:175-225. Grothendieck retains a base arrow, localization assumes an already identified localization, and Karoubi extension assumes a functor already constructed. None states the common-upper-field quotient category or its coherent descent.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudocolimit|PseudoColimit|common.?stage|Preadditive.*[Cc]olimit",
+   "results": "Independent second reading: 10 hits; top: Mathlib/CategoryTheory/Preadditive/Indization.lean, Mathlib/CategoryTheory/Abelian/Injective/Basic.lean, Mathlib/CategoryTheory/Abelian/Injective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Generator/Indization.lean, Mathlib/CategoryTheory/Sites/Coherent/ExtensiveColimits.lean, Mathlib/CategoryTheory/Abelian/Projective/Basic.lean. Read Grothendieck.lean:75-115, Localization/Construction.lean:250-280, Localization/Predicate.lean:305-337, and Idempotents/FunctorExtension.lean:175-225. Grothendieck retains a base arrow, localization assumes an already identified localization, and Karoubi extension assumes a functor already constructed. None states the common-upper-field quotient category or its coherent descent.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.Grothendieck",
+   "results": "Independent second reading: 12 hits; top: CategoryTheory.Pseudofunctor.Grothendieck, CategoryTheory.Pseudofunctor.Grothendieck.base, CategoryTheory.Pseudofunctor.Grothendieck.category, CategoryTheory.Pseudofunctor.Grothendieck.categoryStruct, CategoryTheory.Pseudofunctor.Grothendieck.Hom, CategoryTheory.Pseudofunctor.Grothendieck.forget, CategoryTheory.Pseudofunctor.Grothendieck.instInhabitedHom, CategoryTheory.Pseudofunctor.Grothendieck.forget_obj. Read Grothendieck.lean:75-115, Localization/Construction.lean:250-280, Localization/Predicate.lean:305-337, and Idempotents/FunctorExtension.lean:175-225. Grothendieck retains a base arrow, localization assumes an already identified localization, and Karoubi extension assumes a functor already constructed. None states the common-upper-field quotient category or its coherent descent.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest"
+}
