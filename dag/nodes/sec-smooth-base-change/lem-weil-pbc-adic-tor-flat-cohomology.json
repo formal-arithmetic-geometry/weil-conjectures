@@ -413,5 +413,30 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-8d8b4eb04 (reviewer sub-agent of L); spot-checked: Read all eleven steps, all 34 cited node statements, sources and unit/chapter route. Verified the DVR Tor calculation, canonical reduction maps, coefficient distinctions and complete-model comparison. No new nodes or dependency cycle back to the item. Accepted all 21 declared tool uses; inherited issues documented in review.md. No repairs required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e370816f5",
+  "group": "ND",
+  "result": "pass",
+  "note": "Checked immutable statements, all seven dependencies, sources, canonical maps, universes, edge cases, docstrings, report sections, and verbatim signature. scompile.py passed without errors or warnings; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicTorFlatCohomology",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_adic_tor_flat_cohomology",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcCohomologyScalarExtension",
+   "AlgebraicGeometry.Scheme.PbcSuppliedModelCohomologyFlat",
+   "AlgebraicGeometry.Scheme.pbc_adic_tor_flat_cohomology",
+   "AlgebraicGeometry.Scheme.pbc_adic_flat_cohomology_reduction"
+  ],
+  "file": "lean/Sheaf/Paper/AdicTorFlatCohomology.lean",
+  "statement": "theorem pbc_adic_tor_flat_cohomology [IsNoetherian T] (_hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n) (_hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t)) (K : PbcBoundedConstructibleComplete T (pbcPadicCoefficientDatum l E)) : ((∀ m : ℤ, PbcLevelwiseTorVanishing T (pbcPadicCoefficientDatum l E) (pbcReductionAdicTower T (pbcPadicCoefficientDatum l E) K.obj) m) ↔ ∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology T) (R := pbcAdicCompletion T (pbcPadicCoefficientDatum l E)) ((DerivedCategory.homologyFunctor _ q).obj K.obj)) ∧ ((∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology T) (R := pbcAdicCompletion T (pbcPadicCoefficientDatum l E)) ((DerivedCategory.homologyFunctor _ q).obj K.obj)) ↔ PbcSuppliedModelCohomologyFlat T (pbcPadicCoefficientDatum l E) K.obj)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Three-condition equivalence with the all-cutoff Tor predicate, exact sheaf-tensor flatness, and every supplied common local-model system. The clause theorem gives invertibility of the canonical cohomology reduction arrow (constructed from the normalized scalar adjunctions) and flatness over each quotient ring. All helper definitions belong to this node; no prerequisite is restated."
  }
 }
