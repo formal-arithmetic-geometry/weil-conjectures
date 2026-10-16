@@ -41,13 +41,12 @@
    "AlgebraicGeometry.Scheme.proEtaleRingDerivedOpenExtension",
    "AlgebraicGeometry.Scheme.proEtaleRingCompactSupportImage"
   ],
-  "file": "lean/Sheaf/Paper/ProjectionCompactification.lean",
   "statement": "def proEtaleRingCompactSupportImage {Y : Scheme.{u}} {f : X ⟶ Y} (d : Compactification f) [QuasiCompact d.i] (RY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (RZ : Sheaf (ProEt.topology d.Z) CommRingCat.{u + 1}) (RX : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (cp : (proEtaleSheafInverseImage d.g CommRingCat.{u + 1}).obj RY ≅ RZ) (cj : (proEtaleSheafInverseImage d.i CommRingCat.{u + 1}).obj RZ ≅ RX) : DerivedCategory (proEtaleRingModules X RX) ⥤ DerivedCategory (proEtaleRingModules Y RY)",
   "branch": "newtargets-dag",
-  "by": "Q09",
+  "by": "Q01",
   "date": "2026-10-16",
-  "existing": false,
-  "note": "The recorded Etale functor acts on etale sheaves in a fixed abelian category, not the ringed pro-etale modules needed here. This module supplies canonical open extension via the adjoint universal property, its exact derived descent, and Rp_*j_! for the chosen quasi-compact open/proper compactification; the identity compactification is upstream Compactification.ofIsProper."
+  "existing": true,
+  "note": "Return 2e6c6ef0fcde, duplicate-declaration repair: reuse the now-published ringed pro-etale compact-support construction in Sheaf.Paper.ProjectionCompactification exactly. Its quasi-compact open hypothesis follows from the item’s QuasiCompact f by Compactification.quasiCompact_openImmersion. The old fixed-coefficient etale record is superseded; no replacement open extension or compact-support functor is delivered."
  },
  "blueprint_lean": [
   "AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactification"
@@ -119,9 +118,9 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-ac491448d",
-  "group": "Q09",
+  "reviewer": "NT-stage2-Codex-96fd79354",
+  "group": "Q01",
   "result": "pass",
-  "note": "Wrote review.md. Audited immutable files, sources, dependencies, canonical arrows, hypotheses, universes, signatures, and edge cases. All three modules passed scompile.py without warnings or errors. No repairs needed."
+  "note": "Statement, dependencies, canonical constructions, docstrings, edge cases, reports, and compiler evidence checked; no substantive or mechanical defects found."
  }
 }

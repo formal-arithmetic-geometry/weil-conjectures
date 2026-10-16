@@ -404,5 +404,30 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-079bcebcf (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, unit/chapter route, report, and cited source passages. All five proof steps check against their hypotheses, including compatible uniform witnesses, canonical reduction bounds, and exact A-linearity. Edge cases and whole-DAG duplicate/cycle checks found no fault. All sixteen declared tool uses accepted. Detailed review written to review.md; no fixes required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-96fd79354",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical constructions, docstrings, edge cases, reports, and compiler evidence checked; no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCompactSupportUniformRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.cbcIntegralCompactSupport_uniformRestriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcCompletedCoefficientIso",
+   "AlgebraicGeometry.Scheme.cbcIntegralCompactSupport",
+   "AlgebraicGeometry.Scheme.cbcIntegralCompactSupport_commShift",
+   "AlgebraicGeometry.Scheme.cbcIntegralCompactSupport_uniformRestriction"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralCompactSupportUniformRestriction.lean",
+  "statement": "theorem cbcIntegralCompactSupport_uniformRestriction (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (_hXdim : ∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞)) (_hYdim : ∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞)) (_hXl : IsUnit (l : Γ(X, ⊤))) (_hYl : IsUnit (l : Γ(Y, ⊤))) (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (cp : Compactification f) : (∀ K, IsPbcBoundedConstructibleComplete X l E K → IsPbcBoundedConstructibleComplete Y l E ((cbcIntegralCompactSupport l E cp).obj K)) ∧ (∀ K L, IsPbcBoundedConstructibleComplete X l E K → IsPbcBoundedConstructibleComplete X l E L → ∀ a b : K ⟶ L, (cbcIntegralCompactSupport l E cp).map (a + b) = (cbcIntegralCompactSupport l E cp).map a + (cbcIntegralCompactSupport l E cp).map b) ∧ (∀ K L, IsPbcBoundedConstructibleComplete X l E K → IsPbcBoundedConstructibleComplete X l E L → ∀ (a : Padic.coefficientExtensionIntegers l E) (b : K ⟶ L), (cbcIntegralCompactSupport l E cp).map (a • b) = a • (cbcIntegralCompactSupport l E cp).map b) ∧ (∀ T : Triangle (DerivedCategory (pbcModules X (pbcAdicCompletion X (pbcPadicCoefficientDatum l E)))), T ∈ distTriang _ → IsPbcBoundedConstructibleComplete X l E T.obj₁ → IsPbcBoundedConstructibleComplete X l E T.obj₂ → IsPbcBoundedConstructibleComplete X l E T.obj₃ → (cbcIntegralCompactSupport l E cp).mapTriangle.obj T ∈ distTriang _)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Return 2e6c6ef0fcde repaired: imports the published ProjectionCompactification construction. cbcCompletedCoefficientIso is declared only in this module; the duplicated ProEtaleProjectionCompactification module is removed. The main theorem signature is unchanged."
  }
 }
