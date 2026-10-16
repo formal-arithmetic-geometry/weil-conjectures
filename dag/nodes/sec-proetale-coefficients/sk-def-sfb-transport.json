@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-def-sfb-transport",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Transport of module objects and projection formulas",
@@ -15,35 +15,100 @@
  "stmt_deps": [
   "sk-def-sfb-ring-object",
   "sk-def-sfb-module-objects",
-  "sk-def-sfb-change-of-scalars"
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-modobj-transport",
+  "def-sfb-modobj-transport-adjunction",
+  "def-sfb-projection-formula",
+  "def-sfb-modobj-linearization",
+  "def-sfb-modobj-linearization-right-adjoint",
+  "def-sfb-modobj-linearized-adjunction",
+  "def-sfb-adjunction-has-projection-formula",
+  "def-sfb-adjunction-projection-formula",
+  "def-sfb-modobj-linearization-transport-adjunction"
  ],
  "proof": [
   {
-   "text": "Part 1 is [def-sfb-modobj-transport]. Part 2 is [def-sfb-modobj-transport-adjunction].",
+   "text": "For part 1 use [def-sfb-modobj-transport] with the given lax monoidal functor $F$ and monoid $\\mathcal R$. Its multiplication and unit on $F\\mathcal R$ are $F(\\mu)\\circ\\mu^F_{\\mathcal R,\\mathcal R}$ and $F(\\eta)\\circ\\varepsilon^F$. Its module action is exactly the displayed composite in part 1; its morphism assignment is $f\\mapsto Ff$. The cited construction gives both module axioms, linearity of this assignment and the equality of the underlying functors, hence the stated functor commuting with forgetful functors.",
    "uses": [
-    "def-sfb-modobj-transport",
-    "def-sfb-modobj-transport-adjunction"
+    "def-sfb-modobj-transport"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/sk-def-sfb-transport.proof.md",
+    "place": "paragraph 1, part 1"
+   }
   },
   {
-   "text": "Part 3: projection formulas are defined in [def-sfb-projection-formula]. The\nlinearization $P_{\\mathcal B}$ is [def-sfb-modobj-linearization], and\n$G_{\\mathcal B}$ is [def-sfb-modobj-linearization-right-adjoint]. The adjunction\n$P_{\\mathcal B}\\dashv G_{\\mathcal B}$ is [def-sfb-modobj-linearized-adjunction].",
+   "text": "For part 2 the hypotheses are precisely those of [def-sfb-modobj-transport-adjunction]: $F$ is strong monoidal and the lax structure on $G$ is its adjoint mate. That statement makes $u_{\\mathcal R}$ a monoid morphism and restricts the original adjunction bijection to $F\\mathcal R$-linear maps $FM\\to N$ and $\\mathcal R$-linear maps $M\\to GN$, with the latter action restricted through $u_{\\mathcal R}$. These natural bijections give exactly the adjunction of part 2.",
+   "uses": [
+    "def-sfb-modobj-transport-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/sk-def-sfb-transport.proof.md",
+    "place": "paragraph 1, part 2"
+   }
+  },
+  {
+   "text": "For part 3 the coherent natural isomorphisms are the data of [def-sfb-projection-formula]. Apply [def-sfb-modobj-linearization] to these data and the given monoid $\\mathcal B$: its action is $P(\\gamma_M)\\circ\\pi^{-1}_{\\mathcal B,M}$, its maps are $Pf$, and its source is modules over the transported monoid $S\\mathcal B$. Thus it supplies precisely $P_{\\mathcal B}$ and the displayed action; no commutativity of $\\mathcal B$ is required.",
    "uses": [
     "def-sfb-projection-formula",
-    "def-sfb-modobj-linearization",
+    "def-sfb-modobj-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/sk-def-sfb-transport.proof.md",
+    "place": "paragraph 2, projection formula and left linearization"
+   }
+  },
+  {
+   "text": "Given any specified adjunction $P\\dashv G$ with counit $c$, [def-sfb-modobj-linearization-right-adjoint] defines $\\theta_{L,N}:SL\\otimes GN\\to G(L\\otimes N)$ as the mate of $(L\\otimes c_N)\\circ\\pi_{L,GN}$ and gives the action $G(\\gamma_N)\\circ\\theta_{\\mathcal B,N}$ on $GN$. This gives $G_{\\mathcal B}$ on objects and on morphisms. The statement [def-sfb-modobj-linearized-adjunction] restricts the same adjunction bijection to the two kinds of linear maps and gives $P_{\\mathcal B}\\dashv G_{\\mathcal B}$. This proves the remaining assertions of part 3.",
+   "uses": [
     "def-sfb-modobj-linearization-right-adjoint",
     "def-sfb-modobj-linearized-adjunction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/sk-def-sfb-transport.proof.md",
+    "place": "paragraph 2, right linearization and adjunction"
+   }
   },
   {
-   "text": "Part 4: the projection formula map and the condition that it is invertible are\n[def-sfb-adjunction-has-projection-formula]. The resulting projection formula is\n[def-sfb-adjunction-projection-formula]. The adjunction\n$P_{\\mathcal B}\\dashv\\operatorname{mapMod}(S)$ is\n[def-sfb-modobj-linearization-transport-adjunction].",
+   "text": "For part 4 apply [def-sfb-adjunction-has-projection-formula] to the specified adjunction $P\\dashv S$: the mate defining its projection formula map is exactly $\\mu^S_{L,PM}\\circ(SL\\otimes u_M)$. When those maps are isomorphisms, [def-sfb-adjunction-projection-formula] asserts their naturality and their unit and associativity compatibilities, so they supply the projection formula required in part 3.",
    "uses": [
     "def-sfb-adjunction-has-projection-formula",
-    "def-sfb-adjunction-projection-formula",
+    "def-sfb-adjunction-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/sk-def-sfb-transport.proof.md",
+    "place": "paragraph 3, canonical map and coherent projection formula"
+   }
+  },
+  {
+   "text": "Identify the right linearization in part 4 explicitly. Put $G=S$ in [def-sfb-modobj-linearization-right-adjoint] and write $c$ for the counit of $P\\dashv S$. By the mate formula in [def-sfb-adjunction-has-projection-formula], naturality of the adjunction bijection in its target gives $\\theta_{L,N}=S(L\\otimes c_N)\\circ\\mu^S_{L,PSN}\\circ(SL\\otimes u_{SN})$. Naturality of $\\mu^S$ rewrites this as $\\mu^S_{L,N}\\circ(SL\\otimes(S(c_N)\\circ u_{SN}))=\\mu^S_{L,N}$ by the triangle identity. Hence the action on $SN$ is $S(\\gamma_N)\\circ\\mu^S_{\\mathcal B,N}$, exactly the action of [def-sfb-modobj-transport]; both functors send a morphism $f$ to $Sf$. Thus $G_{\\mathcal B}=\\operatorname{mapMod}(S)$ as claimed.",
+   "uses": [
+    "def-sfb-modobj-linearization-right-adjoint",
+    "def-sfb-adjunction-has-projection-formula",
+    "def-sfb-modobj-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/sk-def-sfb-transport.proof.md",
+    "place": "paragraph 3, identification of the right linearization; expanded mate computation"
+   }
+  },
+  {
+   "text": "With this identification, the adjunction $P_{\\mathcal B}\\dashv G_{\\mathcal B}$ of [def-sfb-modobj-linearized-adjunction] is $P_{\\mathcal B}\\dashv\\operatorname{mapMod}(S)$. Its hom bijection takes a $\\mathcal B$-linear map $PM\\to N$ to its original adjoint $M\\to SN$, which is the construction specified by [def-sfb-modobj-linearization-transport-adjunction]. This proves the last assertion of part 4.",
+   "uses": [
+    "def-sfb-modobj-linearized-adjunction",
     "def-sfb-modobj-linearization-transport-adjunction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/sk-def-sfb-transport.proof.md",
+    "place": "paragraph 3, final adjunction"
+   }
   }
  ],
  "proof_deps": [
@@ -62,9 +127,66 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/_section.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapMod|ProjectionFormula|mapModAdjunction",
+   "results": "1 hit: Mathlib/CategoryTheory/Monoidal/Mon.lean:856 is the TODO for mapMod. Read lines 850–879; mapMon at 867 transports monoids only.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projection formula for a functor lifts it and its right adjoint to categories of module objects",
+   "results": "8 hits: Adjunction.map_projective, CostructuredArrow.grothendieckProj, SheafOfModules.PullbackConstruction.adjunction, evaluationRightAdjoint_map_app, ModuleCat.instIsRightAdjointForget, preservesProjectiveObjects_of_adjunction_of_preservesEpimorphisms, PresheafOfModules.instIsRightAdjointPushforward, coneOfIsRightKanExtension_π. None addresses general monoidal module transport with projection formulas.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectionFormula\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport module objects by a lax monoidal functor and lift adjunctions using projection formulas",
+   "results": "8 hits: Adjunction.mapMon, Adjunction.rightAdjointLaxMonoidal and its structure lemmas; representation restriction, tensorObj, and closed functor category adjunctions. Read pinned Mon.lean:1064–1075 and Functor.lean:934–965: these give monoid-object adjunctions and a lax structure, not the four-part module construction.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.formula|mapMon|mapMod|monoidal.adjunction",
+   "results": "18 hits for mapMon in Mon.lean and related monoid, group, bimon and over-category files; no projection formula construction. Mon.lean:856 retains the mapMod TODO, and mapMon at 867 and Adjunction.mapMon at 1072 concern monoids only.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"map\"",
+   "results": "12 hits, all unrelated String.Model/String.Slice.Model map lemmas and Std.DHashMap.Internal.AssocList modify definitions.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lax monoidal functor induces a functor on left modules over a monoid object; projection formula adjunction",
+   "results": "8 hits: Functor.LeftLinear.toLaxLeftLinear, Mod_.comap, action functor monoidal instances, Rep.linearization_μ_hom, Action.functorCategoryEquivalenceFunctorMonoidal, Functor.LaxLeftLinear and an action equivalence tensorator. Read LinearFunctor.lean:1–150 and Mod.lean:390–421: lineator coherence and scalar restriction are partial ingredients, not the module lifts and adjunctions claimed here.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "LaxLeftLinear|LeftLinear|mapMod",
+   "results": "6 hits: Mon.lean:856 TODO mapMod and Action/LinearFunctor.lean:15,19,23,24,48, defining coherent lineators. Read the file: this is not a declaration of module transport and the three adjunction constructions.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -101,5 +223,20 @@
   "sketch"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-transport",
+  "worker": "stage1",
+  "summary": "Audited the current four-part definition against its blueprint source and all nine existing construction nodes. Kept the statement intact, made its construction dependencies explicit, separated its proof into seven sourced steps, and expanded the mate/triangle-identity calculation identifying the right linearization with transport. No new nodes are needed; project Lean covers only the first part and Mathlib does not cover the complete aggregate.",
+  "blueprint": "Paragraph 1 is realized by steps 1–2, paragraph 2 by steps 3–4, and paragraph 3 by steps 5–7, following exactly the existing nine-node route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N8-b70724aad",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-b70724aad (reviewer sub-agent of L); spot-checked: Read the full item, blueprint proof, chapter route, report, and all nine cited DAG node statements and source proofs. All four clauses and seven steps are mathematically faithful; the typed mate/triangle calculation identifying right linearization with transport is valid. Identity adjunction, unit monoid, and noncommutative ring-module cases check out. No new nodes, duplicates, missing hypotheses, route violations, or repairs found. Review written to review.md."
+ }
 }
