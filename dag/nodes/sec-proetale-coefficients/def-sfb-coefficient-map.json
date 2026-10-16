@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-coefficient-map",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The coefficient change $a_X$",
@@ -19,11 +19,15 @@
  ],
  "proof": [
   {
-   "text": "The inverse image $p_X^*$ is a strong monoidal functor, and the ring structures of $\\Lambda_X$,\n$\\Lambda'_X$ are the images of those of $\\Lambda$, $\\Lambda'$\n([sk-def-sfb-pulled-back-coefficients]). A monoidal functor sends a morphism of monoid objects\nto a morphism of monoid objects between the image monoids, so $p_X^*a$ is a morphism of ring\nobjects.",
+   "text": "For the given scheme $X$, use the functor on ring objects of [sk-def-sfb-pulled-back-coefficients], whose object assignment is $\\Lambda\\mapsto p_X^*\\Lambda=\\Lambda_X$ and whose ring structures are transported along $p_X^*$. Apply this functor to the given ring-object morphism $a\\colon\\Lambda\\to\\Lambda'$. Its underlying morphism is $p_X^*a$, with source $\\Lambda_X$ and target $\\Lambda'_X$, and it is a ring-object morphism because it is a morphism in that functor's target category. Define $a_X$ to be this morphism. This is precisely the displayed definition.",
    "uses": [
     "sk-def-sfb-pulled-back-coefficients"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/def-sfb-coefficient-map.proof.md",
+    "place": "sole proof paragraph, applying the already defined functor on ring objects"
+   }
   }
  ],
  "proof_deps": [
@@ -31,12 +35,69 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/def-sfb-coefficient-map.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/def-sfb-coefficient-map.proof.md",
+  "place": "sole proof paragraph; specialized using the functor already stated in sk-def-sfb-pulled-back-coefficients"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficientMap|upperStarFromPoint|condensedRingObj|mapMon_map_hom|instIsMonHom",
+   "results": "2 hits; returned names/files: Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean; scope: all Mathlib",
+   "date": "2026-10-16",
+   "verdict": "no match for the full node; mapMon and map.instIsMonHom give the generic monoidal-functor construction, but the pro-etale inverse image and coefficient objects are project-specific"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image functor of a pro-etale scheme maps a morphism of condensed rings to a morphism of pulled back coefficient rings",
+   "results": "8 hits; returned names/files: CategoryTheory.MorphismProperty.inverseImage, AlgebraicGeometry.Spec.preimage, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern structure sheaves, scheme morphisms or module pullback, not this condensed coefficient construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMon",
+   "results": "12 hits; returned names/files: CategoryTheory.Functor.mapMon, CategoryTheory.Functor.Faithful.mapMon, CategoryTheory.Functor.mapMonIdIso, CategoryTheory.Functor.FullyFaithful.mapMon, CategoryTheory.Functor.Full.mapMon, CategoryTheory.Functor.mapMon_obj_X, CategoryTheory.Functor.instLaxMonoidalMonMapMon, CategoryTheory.Functor.essImage_mapMon",
+   "date": "2026-10-16",
+   "verdict": "no match for the full node; mapMon and map.instIsMonHom give the generic monoidal-functor construction, but the pro-etale inverse image and coefficient objects are project-specific"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of a morphism of condensed rings on the pro-etale site of a scheme is the coefficient ring morphism p_X star a",
+   "results": "8 hits; returned names/files: AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Spec.map_appLE, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap, AlgebraicGeometry.Spec.sheafedSpaceMap, AlgebraicGeometry.Spec.map_app, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc, AlgebraicGeometry.Spec.sheafedSpaceMap_hom_c_app",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern structure sheaves, scheme morphisms or module pullback, not this condensed coefficient construction"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapMon|map.instIsMonHom|mapMon_map",
+   "results": "5 hits; returned names/files: 850, 867, 891, 898, 909; the wrapper parsed line numbers as filenames for a single-file search; repeated against the containing directory and read Mon.lean:850-870 directly.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full node; mapMon and map.instIsMonHom give the generic monoidal-functor construction, but the pro-etale inverse image and coefficient objects are project-specific"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lax monoidal functor maps a homomorphism of monoid objects to a homomorphism between the image monoid objects",
+   "results": "8 hits; returned names/files: CategoryTheory.Functor.map.instIsMonHom, CategoryTheory.Functor.mapMon_map_hom, CategoryTheory.Functor.mapMonFunctor, CategoryTheory.Functor.mapMon, CategoryTheory.Functor.mapMonFunctor_map_app_hom, CategoryTheory.Functor.mapMonFunctor_obj, CategoryTheory.Functor.mapMonNatTrans, CategoryTheory.Mon.EquivLaxMonoidalFunctorPUnit.laxMonoidalToMon_map",
+   "date": "2026-10-16",
+   "verdict": "no match for the full node; mapMon and map.instIsMonHom give the generic monoidal-functor construction, but the pro-etale inverse image and coefficient objects are project-specific"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapMon|map.instIsMonHom|mapMon_map",
+   "results": "5 hits; returned names/files: Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean; scope: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "no match for the full node; mapMon and map.instIsMonHom give the generic monoidal-functor construction, but the pro-etale inverse image and coefficient objects are project-specific"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal functor induces a functor between categories of internal monoids with underlying map given by the functor map",
+   "results": "8 hits; returned names: CategoryTheory.Functor.mapMon, CategoryTheory.Functor.mapMonFunctor, CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.functor, CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.functorObj, CategoryTheory.Functor.mapMon_obj_X, CategoryTheory.Functor.mapMonFunctor_obj, CategoryTheory.Functor.homMonoidHom_apply, CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.functorObjObj",
+   "date": "2026-10-16",
+   "verdict": "Generic machinery already supplied by the cited dependency, not a complete match for the project-specific inverse image and coefficient objects. Read CategoryTheory.Functor.mapMon at Mathlib/CategoryTheory/Monoidal/Mon.lean:867-869 and map.instIsMonHom at 850-852; mapMon maps a morphism by F.map on its underlying morphism."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -55,5 +116,20 @@
   "AlgebraicGeometry.ProEtale.coefficientMap"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-coefficient-map",
+  "worker": "stage1",
+  "summary": "Retained the source definition for arbitrary, possibly noncommutative, condensed rings. All three notions are existing statement dependencies. The sole construction step applies the functor on ring objects explicitly stated by sk-def-sfb-pulled-back-coefficients; this is elementary relative to that interface. Searched the project, DAG, blueprint and Mathlib; no exact project attachment or complete Mathlib match was found. No new nodes are needed. Corrected the proof-source path and recorded seven searches actually run with msearch.py.",
+  "blueprint": "Realizes the sole paragraph of def-sfb-coefficient-map.proof.md by applying the already stated ring-object functor. The parent unit sk-prop-sfb-cartesian-coefficients concerns coefficient pullback; this definition supplies coefficient-change maps without changing that route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q08-0b474a1cc",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q08-0b474a1cc (reviewer sub-agent of L); spot-checked: Read the full item, cited statements and sources, and chapter/unit route. The sole step correctly applies the existing ring-object functor; upstream coefficientMap matches p_X^*a. Edge cases, duplicate candidates and dependency cycles checked. No new nodes, repairs or accepted tool_uses. Review written to review.md."
+ }
 }
