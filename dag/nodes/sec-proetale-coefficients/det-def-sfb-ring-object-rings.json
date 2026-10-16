@@ -202,5 +202,34 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-7e9ea0de2 (reviewer sub-agent of L); spot-checked: Read the required governance files, packet, report, item, blueprint route, Stacks Tag 00CX, and both cited DAG nodes in full. All seven proof steps are valid for arbitrary unital rings, including zero and positive-characteristic cases; tensor generation, unitors, morphism compatibility, functoriality, and commutativity are correctly handled. No new nodes, duplicates, cycles, forbidden SGA sources, or base-change/coefficient-category errors were found. Review written to review.md."
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-ring-object"
+ "unit": "sk-def-sfb-ring-object",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-baaa53c9a",
+  "group": "N5",
+  "result": "pass",
+  "note": "Wrote review.md. All three clauses, both dependencies, exact declarations, universe and edge cases match the source. Both existing modules compiled cleanly through scompile.py with the local side overlay. No fixes needed; snapshot and branch head unchanged."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.RingObjects.RingPresheaf",
+  "declaration": "CategoryTheory.RingCat.toMonAb",
+  "declarations": [
+   "CategoryTheory.RingCat.toMonAb",
+   "AddCommGrpCat.monoidalCategory",
+   "AddCommGrpCat.symmetricCategory",
+   "AddCommGrpCat.ringMonObj",
+   "AddCommGrpCat.ringMonObj_one_apply",
+   "AddCommGrpCat.ringMonObj_mul_tmul",
+   "AddCommGrpCat.isMonHom_ofHom_ringHom",
+   "AddCommGrpCat.isCommMonObj_of_commRing",
+   "CategoryTheory.RingCat.toMonAb_comp_forget"
+  ],
+  "statement": "def toMonAb : RingCat.{w} ⥤ Mon Ab.{w}",
+  "branch": "slopmaster2",
+  "by": "N5",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact existing published side-overlay declarations, confirmed with scompile.py --source. The primary functor is in RingPresheaf; its public import RingObjects.Ab supplies the tensor monoidal and symmetric structures, the ring object with integer-cast unit and pure-tensor multiplication, preservation by arbitrary unital ring homomorphisms, and commutativity for commutative rings. All three clauses hold in Ab itself. The branch value slopmaster2 is the prescribed existing-record value for the WeilConjectures root, although these sources are supplied by the published newtargets side overlay rather than the older local slopmaster2 checkout."
+ }
 }

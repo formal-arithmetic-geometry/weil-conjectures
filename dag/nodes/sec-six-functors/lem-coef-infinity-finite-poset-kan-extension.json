@@ -271,5 +271,46 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-7abd7ae5a (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes and cited dependency statements in full. Verified all nine steps against exact official HTT 4.3.2.2, 4.3.2.15–18 and Kerodon 02ZW/02ZP, 030M, 02FV/02F1; checked empty cases, cone compatibility, adjunction domains and duplicate candidates. Accepted the generic cone-calculus tool. No repairs or SGA uses; review.md written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a4c11aaf6",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Reviewed packet, node, dependencies, source, report, declarations, edge cases, and compiler evidence. scompile.py compiled sandbox and library successfully; no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FinitePosetKanExtension",
+  "declaration": "SSet.Enhanced.FinitePosetKan.finitePosetKanExtension",
+  "declarations": [
+   "SSet.Enhanced.FinitePosetKan.diagram",
+   "SSet.Enhanced.FinitePosetKan.restriction",
+   "SSet.Enhanced.FinitePosetKan.Interval",
+   "SSet.Enhanced.FinitePosetKan.intervalPartialOrder",
+   "SSet.Enhanced.FinitePosetKan.intervalInclusion",
+   "SSet.Enhanced.FinitePosetKan.intervalDiagram",
+   "SSet.Enhanced.FinitePosetKan.cone",
+   "SSet.Enhanced.FinitePosetKan.IsUniversal",
+   "SSet.Enhanced.FinitePosetKan.HasLocal",
+   "SSet.Enhanced.FinitePosetKan.interpolation",
+   "SSet.Enhanced.FinitePosetKan.inequalityHomotopy",
+   "SSet.Enhanced.FinitePosetKan.orderTransformation",
+   "SSet.Enhanced.FinitePosetKan.intervalTransformation",
+   "SSet.Enhanced.FinitePosetKan.IsPointwise",
+   "SSet.Enhanced.FinitePosetKan.sourceDomain",
+   "SSet.Enhanced.FinitePosetKan.targetDomain",
+   "SSet.Enhanced.FinitePosetKan.domainRestriction",
+   "SSet.Enhanced.FinitePosetKan.HasFinite",
+   "SSet.Enhanced.FinitePosetKan.Data",
+   "SSet.Enhanced.FinitePosetKan.finitePosetKanExtension"
+  ],
+  "file": "lean/Sheaf/Paper/FinitePosetKanExtension.lean",
+  "statement": "theorem finitePosetKanExtension {A B : Type u} [PartialOrder A] [PartialOrder B] [Finite A] [Finite B] (j : A ↪o B) (E : SSet.{u}) [Quasicategory E] : ∀ right : Bool, Nonempty (Data j.toOrderHom E right (HasLocal j.toOrderHom E right)) ∧ (HasFinite E right → Nonempty (Data j.toOrderHom E right (fun _ ↦ True)))",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the normalized section choice explicitly made in HTT 4.3.2.17. For each direction independently, gives a coherent extension functor on the exact local-existence full subcategory, canonical interval cones with their actual apex and transformation, equivalences of the actual mapping-space restriction maps for arbitrary target diagrams, and the natural other unit/counit as the mate of the identity. Finite (co)completeness gives the all-diagrams specialization. Helpers have real simplicial data; the single theorem is postponed."
  }
 }
