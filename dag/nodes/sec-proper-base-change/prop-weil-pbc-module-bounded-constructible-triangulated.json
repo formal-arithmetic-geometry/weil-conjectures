@@ -30,6 +30,13 @@
     "prop-constructible-derived-subcategory"
    ],
    "elementary": false
+  },
+  {
+   "text": "Publish the isomorphism, zero and shift closure of bounded constructible complexes separately, without any Serre or noetherian hypothesis. The generic homologyProperty construction is invariant under isomorphism and stable under all integer shifts for any isomorphism-invariant property P, and contains zero if P does. Intersect these properties with the bounded part of the canonical t-structure. Consequently the full subcategory has its canonical zero object and integer shifts independently of triangulated closure; consumers requiring only those structures do not use the false arbitrary-coefficient noetherian assertion, which is retired.",
+   "uses": [
+    "prop-constructible-derived-subcategory"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -37,8 +44,9 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "lean/WeilConjectures/ConstructibleSheaf/ProEtaleModule/DerivedCategory.lean",
-  "place": "B4 corrected instance, specializing the existing general weak Serre class theorem; zero and isomorphism arguments written directly from the definitions"
+  "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/HomologyProperty.lean",
+  "place": "The homologyProperty isomorphism, ContainsZero and IsStableUnderShift instances and homologyProperty_isTriangulated; Mathlib canonical t-structure bounded object property.",
+  "note": "C4 retains the conditional triangulated proof, retires the false noetherian-only duplicate, and publishes the unconditional zero/isomorphism/shift closure needed by the existing full-subcategory consumers."
  },
  "mathlib_searches": [
   {
@@ -100,7 +108,13 @@
   "statement": "instance isTriangulated_boundedConstructible_of_serre [ObjectProperty.IsClosedUnderKernels (IsConstructibleModuleObject R)] [ObjectProperty.IsClosedUnderCokernels (IsConstructibleModuleObject R)] [ObjectProperty.IsClosedUnderExtensions (IsConstructibleModuleObject R)] : (boundedConstructible R).IsTriangulated",
   "branch": "sheaf-dag",
   "by": "B4",
-  "date": "2026-10-15"
+  "date": "2026-10-15",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.isTriangulated_boundedConstructible_of_serre",
+   "AlgebraicGeometry.ProEtale.isClosedUnderIsomorphisms_boundedConstructible",
+   "AlgebraicGeometry.ProEtale.containsZero_boundedConstructible",
+   "AlgebraicGeometry.ProEtale.isStableUnderShift_boundedConstructible"
+  ]
  },
  "import_flags": [
   "unreachable"
@@ -117,13 +131,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-5e974",
-  "group": "B4",
+  "reviewer": "COMPILER",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261015T154153-L-159101",
+  "landing": "20261016T221601-L-1612345",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with its node, recorded signature correction, weak Serre theorem and published-source diff; all three direct importers compile against the delivery, and all four proved declarations use only the three permitted axioms."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
