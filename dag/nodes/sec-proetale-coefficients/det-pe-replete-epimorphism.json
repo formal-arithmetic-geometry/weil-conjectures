@@ -181,5 +181,23 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-429d315ae (reviewer sub-agent of L); spot-checked: Read the item, all five cited node statements, the unit record and the main-20261015 blueprint .md and .proof.md, and Bhatt–Scholze Def 3.1.1 (p.16), Def 3.2.1 and Prop 3.2.3(1) with its proof (pp.17–18) and Prop 4.2.8 (p.29). The statement matches the blueprint word for word and the B–S definition of replete; nothing is weakened and no hypothesis is added. Step 1 reduces to local surjectivity: the definition node and the Mathlib leaf Sheaf.isLocallySurjective_iff_epi say the same thing, so citing the leaf is redundant but correct. Step 2: det-pe-wcb-cover covers an arbitrary U (no quasi-compactness needed) and the last sentence of det-pe-weak-contractible-equivalences makes each Spec D_i weakly contractible. Step 3: the every-m projection-surjectivity clause of det-pe-replete-on-contractible applies to the original sequence on X_proét. Step 4 applies the local-surjectivity quantifiers without needing the lifts to agree on overlaps. proof_deps equals the union of the uses. The route stays within unit sk-prop-pe-replete and the units it cites, and realized (step 1 by on-contractible, step 2 and the statement by this item) is correct. Edge cases checked: m=0, empty F_m(U), empty X or U, non-quasi-compact or disconnected U, constant towers. No new nodes, no duplicate (rg replete over dag/nodes), Mathlib searches cover all three kinds, no tool_uses needed, no SGA. Not this delivery's fault: chapter nodes cite two pro-étale site definitions (sk-def-pe-site and def-weil-pbc-proetale-site) that differ only in universe convention; worth unifying at stage 2. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-753449298",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Commit adds only report, node lean record and ProEtaleReplete.lean; node differs from shared only in lean; statement verbatim = blueprint. Lean isReplete_proEtale (X : Scheme.{u}) : IsReplete.{u+1,u,w} (ProEt.topology X) expands via landed IsReplete to: all F : ℕᵒᵖ ⥤ Sheaf (Type (max (u+1) w)), adjacent transitions epi → ∀ m, Epi (limit.π F (op m)) — exact clause by clause, on Mathlib Scheme.ProEt/ProEt.topology (sk-def-pe-site leaf), site universes kept distinct, no extra hypotheses; edge cases m=0, empty scheme/sections, constant towers, non-qc covered. Framework ProEtale/Replete.lean only has ModuleCat/index-0 results; Mathlib coherent result needs extra hypotheses; no duplicate. No definitions, sorry only, source+blueprint docstrings with 4 proof steps, lean.statement verbatim, no >100-char lines. nt_compile.py --json: rc 0, no errors; axioms propext, sorryAx, Classical.choice, Quot.sound. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleReplete",
+  "declaration": "AlgebraicGeometry.Scheme.isReplete_proEtale",
+  "statement": "theorem isReplete_proEtale (X : Scheme.{u}) : CategoryTheory.GrothendieckTopology.IsReplete.{u + 1, u, w} (ProEt.topology X)",
+  "by": "Q21",
+  "date": "2026-10-16",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleReplete.lean",
+  "branch": "newtargets-dag",
+  "existing": false
  }
 }

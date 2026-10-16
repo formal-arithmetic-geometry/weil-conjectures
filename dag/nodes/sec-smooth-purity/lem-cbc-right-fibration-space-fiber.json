@@ -8,7 +8,8 @@
   "place": "Corollary 4.4.3.8 (01NV), implication (3) to (1); Proposition 3.4.0.7 in Section 3.4 (0106), with the second leg the inclusion of a vertex, for the constant-path comparison. These are Kerodon references, not Stacks tags; read online. The assertion that X is Kan follows by first filling each projected horn in S and then lifting it."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations"
  ],
  "proof": [
   {
@@ -224,5 +225,27 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-f21094a83 (reviewer sub-agent of L); spot-checked: I read the item, the new node and all five cited statements in full, plus Kerodon 01H0, 01NV, 0329 and 010B online. Item statement: agrees with 01NV (3)=>(1) and with 0329 (Kan-fibration leg q, vertex inclusion) using the 010B endpoint order; not weakened. Steps: Step 1's quasicategory, inner-fibration and every-edge-equivalence arguments correctly verify the hypothesis of the final-horn converse. Step 2 meets every hypothesis of the new node. I checked Step 3's dimension-one inverse-triangle and Lambda_2^2 construction by hand: correct horn convention, faces and projections. Step 4 is correct. In Step 5, ev1 from Lambda_1^1 into Delta^1 and the op-dual rho_0 are trivial Kan, and I checked degreewise that L is the pullback giving r. In Step 6, trivial Kan => Kan fibration => weak equivalence via the fiber criterion; ec=id and rc=constant-path map are elementary; empty fibers are handled. Step 7 commutes strictly. New node lem-cbc-inner-fibration-equivalence-outer-horn-lift: it is exactly 01H0 plus its op-dual and keeps all hypotheses (inner fibration of quasicategories, n>=2, filler over the prescribed beta). I tested it on p=id, p to a point, functor nerves at n=2, and counterexamples that show the equivalence-edge and n>=2 hypotheses are needed. It is statement-only, self-contained, blueprint from/via correct, searches recorded. It duplicates no DAG node: the def of p-cocartesian edges only defines; the prism, relative-initial-boundary and cartesian-boundary nodes concern other inclusions or hypotheses. It is strictly smaller than the item and not a restated clause. No dependency closure reaches the item, nothing cited is missing or merged, and proof_deps equals the union of uses. Accepted tool_use: lem-coef-infinity-right-fibration-exponentiation (generic black box). FIX (B5/C, citation): the item's source.place still cited 'Section 3.4 (0106)' although the report says it was replaced. The corrected item file in fixes/ cites Proposition 3.4.0.7 (0329) and Construction 3.4.0.3 (010B), both verified online; no other field changed. If source is not split-owned, the maintainer should apply it.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c23828beb",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Node changes only in lean and stmt_deps (+def-coef-infinity-fibrations, already landed and used for rightFibration/fiber). Lean statement verbatim. Clauses match node, 01NV and 0329: Kan base, rightFibration hypothesis, all-horn lifting for n>=1 incl. i=0, KanComplex X, constant-path comparison fiber q s -> homotopyFiber q s uniquely characterized through mono commaSubcomplex.ι (endpoint 0 = q x, 1 = s) and a weak homotopy equivalence, naturality over squares with g s = s' and induced map f ⊗ g_*. Edge cases: n=0 excluded, n=1, empty X/fibers/S, identity. No definitions, only sorry, docstrings carry source, blueprint and 7 proof steps. No duplicate (kan_pullback_path_comparison is a different all-Kan statement). nt_compile --json on the snapshot: rc 0, no errors (error control confirmed a real compile). Cosmetic only: Kerodon numbers sanitized to 'the project server' in report.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightFibrationSpaceFiber",
+  "declaration": "SSet.Enhanced.right_fibration_space_fiber",
+  "declarations": [
+   "SSet.Enhanced.right_fibration_space_fiber"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RightFibrationSpaceFiber.lean",
+  "statement": "theorem right_fibration_space_fiber {X S : SSet.{u}} (q : X ⟶ S) [KanComplex S] (hq : rightFibration q) : (∀ (n : ℕ) (i : Fin (n + 1)), 1 ≤ n → HasLiftingProperty (horn n i).ι q) ∧ KanComplex X ∧ ∃ c : ∀ s : S _⦋0⦌, fiber q s ⟶ homotopyFiber q s, (∀ s : S _⦋0⦌, c s ≫ (commaSubcomplex X S q s true).ι = lift (pullback.snd (SSet.const (X := Δ[0]) s) q) (SSet.const (diagramVertex (SSet.const (X := Δ[1]) s))) ∧ IsWeakHomotopyEquivalence (c s)) ∧ ∀ (X' S' : SSet.{u}) (q' : X' ⟶ S') [KanComplex S'] (hq' : rightFibration q') (f : X ⟶ X') (g : S ⟶ S') (comm : q ≫ g = f ≫ q') (s : S _⦋0⦌) (s' : S' _⦋0⦌) (hs : g.app _ s = s') (c' : fiber q' s' ⟶ homotopyFiber q' s'), c' ≫ (commaSubcomplex X' S' q' s' true).ι = lift (pullback.snd (SSet.const (X := Δ[0]) s') q') (SSet.const (diagramVertex (SSet.const (X := Δ[1]) s'))) → ∃ h : homotopyFiber q s ⟶ homotopyFiber q' s', (h ≫ (commaSubcomplex X' S' q' s' true).ι = (commaSubcomplex X S q s true).ι ≫ (f ⊗ₘ (ihom Δ[1]).map g)) ∧ (pullback.map (SSet.const (X := Δ[0]) s) q (SSet.const (X := Δ[0]) s') q' (𝟙 _) f g (by simp [hs]) (by simp [comm])) ≫ c' = c s ≫ h",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the existing rightFibration, fiber and homotopyFiber definitions. The existential family is uniquely specified by both ambient path coordinates; naturality is asserted for every target constant-path comparison and the induced maps on both fibers. Adds the already landed definition node def-coef-infinity-fibrations to stmt_deps; no definitions or additional postponed theorems are introduced."
  }
 }

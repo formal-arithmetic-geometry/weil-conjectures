@@ -22,7 +22,8 @@
   "place": "Kerodon, Example 3.1.8.10, Path Fibrations (tag 0101), together with Remark 3.4.0.6, Homotopy Fibers (tag 0328); online source, archival copy WANTED."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-kan-fibration-fiber-criterion"
  ],
  "proof": [
   {
@@ -198,5 +199,28 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-2cf41cd7b (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the unit and chapter, the main-20261015 ancestor proof paragraph 2, Kerodon 0101 and 00TM online, and the Mathlib source PushoutProduct.lean 70-93 and 144-147. The item is true as stated. Its orientations agree with 0101: ev0 attaches P and ev1 gives p. Kan fibrations include outer horns. I tested the empty, point, identity, missed-component and n=1 outer-horn cases. All six steps check: Step 1 by degreewise formulas giving ri=id and pi=f; Step 3 by two successive lifts whose compatibility on the horn I verified; Step 4 by the min-contraction formula with both endpoints checked; Step 5 because i*r*=id and the edge aH make r*i* the identity on edge components, so the cited realization criterion applies; Step 6 because the strict fiber is literally the definition node's homotopy fiber. I accept the declared tool use of lem-cbc-realization-weak-equivalence. Fault (C5): the new node is a special case of the existing Mathlib leaf lem-cbc-internal-hom-fibration-corner-map (SSet.fibration_pullbackObjObjπ), taken with the inclusion of the boundary of Delta^1 into Delta^1 and the map Q to Delta^0. Step 6 of lem-cbc-kan-fibration-fiber-criterion already makes this specialization. Fix: I dropped the node and rewrote Step 2 to cite that leaf with the explicit identification Fun(boundary of Delta^1, Q)_n = Q_n x Q_n; proof_deps and the summary are updated and there is no cycle. Maintainer note: the existing lem-cbc-kan-fibration-fiber-criterion already states the item's fibration and constant-path weak-equivalence clauses, and its step 9 gives the fiber equality. This is a duplicate candidate for a merge, or for the parent to cite it. I kept the item's correct, lighter proof.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b4fd2213",
+  "group": "Q27",
+  "result": "pass",
+  "note": "All 9 statement clauses match the Lean exactly: SSet.{u}, KanComplex P/Q, mappingPath (ev0 attaches P), mappingPathProjection (ev1), Fibration with outer horns, IsWeakHomotopyEquivalence of the constant-path inclusion, i≫p=f, and a degreewise-verified IsPullback square identifying homotopyFiber f q as the strict fiber over q. The helper homotopyFiberToMappingPath has real Subcomplex.homOfLE data and no sorry; only the main theorem is sorry. The added stmt_dep lem-cbc-kan-fibration-fiber-criterion is landed (allowed by brief-stage2 l.140), with no cycle. The node changes only lean/stmt_deps and lean.statement is verbatim. No exact existing declaration; edge cases checked; docstrings and gates OK. nt_compile.py clean (rc=0), with error reporting confirmed on a test copy. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.PathFibrationReplacement",
+  "declaration": "SSet.Enhanced.path_fibration_replacement",
+  "declarations": [
+   "SSet.Enhanced.homotopyFiberToMappingPath",
+   "SSet.Enhanced.path_fibration_replacement"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/PathFibrationReplacement.lean",
+  "statement": "theorem path_fibration_replacement {P Q : SSet.{u}} [KanComplex P] [KanComplex Q] (f : P ⟶ Q) : Fibration (mappingPathProjection f) ∧ IsWeakHomotopyEquivalence (mappingPathInclusion f) ∧ mappingPathInclusion f ≫ mappingPathProjection f = f ∧ ∀ q : Q _⦋0⦌, IsPullback (homotopyFiberToMappingPath f q) (stdSimplex.isTerminalObj₀.from (homotopyFiber f q)) (mappingPathProjection f) (SSet.const (X := Δ[0]) q)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the landed mappingPath, mappingPathProjection and mappingPathInclusion constructions of lem-cbc-kan-fibration-fiber-criterion; the strict-fiber identification is expressed by its canonical pullback square, rather than equality between different chosen pullback models."
  }
 }

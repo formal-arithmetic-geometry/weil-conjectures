@@ -29,7 +29,8 @@
   "def-weil-pbc-simplicial-set",
   "lem-coef-simplicial-interval-lifting",
   "lem-coef-joyal-model-structure",
-  "lem-coef-simplicial-interval-cell-stability"
+  "lem-coef-simplicial-interval-cell-stability",
+  "lem-coef-pinched-rigidification-resolution"
  ],
  "proof": [
   {
@@ -219,5 +220,24 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-6dda53e2f (reviewer sub-agent of L); spot-checked: I read the full item (8 steps), the full statement of every cited node, the parent lem-coef-coherent-nerve-comparison, and the HTT places 2.2.5.1(W), 2.2.5.2, 2.2.5.8, 2.2.2.7 and 2.2.4.1. HTT is not archived locally, so I checked those places from my own knowledge of the text. The statement is unchanged and matches HTT 2.2.5.1(W) with the hFun test; edge cases hold: empty to empty, empty to nonempty, identities. Step 2 is correct: in the cube, K is the boundary minus the open face t_i=0; innerness is used through the faces d_n and d_0; the raise-t_i retraction stays in |K| and n=2 gives the endpoint; U-attachments over two objects make U(K)->U(B) a J-cof map. Steps 1, 3, 4, 5 and 8 check against the cited statements; the Mathlib leaf applies with kappa=omega because horns are finite. One missing citation (C1/C2), repaired: steps 6 and 7 used 'isomorphic in the generated hB/hFun implies equivalence edge' with no node. That is the non-elementary Boardman-Vogt identification, and the second reading's justification for it was insufficient. Both steps now cite the same-unit lem-coef-infinity-mapping-composition (no cycle; full transitive-closure check), and step 6 writes out the comparison: relations respected, full, and faithful by reducing words with inner 2-horn fills plus the (id_x,u,u') 1-simplices of Map^R. Step 7 is now non-elementary, and proof_deps gains the node. I accept the declared tool_use of lem-cbc-enhanced-functor-cone-calculus: no node in the unit gives it, and the in-unit route would be circular. There are no new nodes and no SGA citations, and the blueprint same_as=[] is confirmed. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-rigidification-equivalence-detection.json; details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-211062f34",
+  "group": "NH",
+  "result": "pass",
+  "note": "Node diff: only a new lean record and stmt_deps gaining the landed lem-coef-pinched-rigidification-resolution (§5 'stmt_deps may gain landed nodes'; it owns SSet.Pinched.rigidification used in the signature and was already a proof_dep, so no cycle). Module: one sorry theorem, no definitions; docstrings carry HTT 2.2.5.1(W)/2.2.5.8, the blueprint tag and all 8 node steps verbatim. Left side: canonical Pinched.rigidification.map f (Mathlib SimplicialThickening subset-poset enrichment, empty for i>j, union composition, image functoriality; leftKanExtension = simplex colimit in SCat) under the recorded Bergner.dwyerKanEquivalences (local weak equivalences + pi0 bijections + pi0 essential surjectivity). Right side: character-for-character the testing clause of SSet.exists_joyal_model_structure (Fun(T,Z)->Fun(S,Z), every quasicategory in SSet.{max u v}). iff, no extra hypotheses or universe restriction. Edge cases checked: n=0, i>j, non-injective maps, empty S/T, identities, u=0, v=0. lean.statement verbatim in the file. Both report sections present. nt_compile.py --json: 30 modules, rc=0, no errors or warnings. Informational: pre-existing duplicate SSet.PinchedCube.rigidification in another node's module, not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RigidificationEquivalenceDetection",
+  "declaration": "SSet.rigidification_equivalence_detection",
+  "file": "lean/Sheaf/AlgebraicTopology/RigidificationEquivalenceDetection.lean",
+  "statement": "theorem rigidification_equivalence_detection {S T : SSet.{u}} (f : S ⟶ T) : Bergner.dwyerKanEquivalences (Pinched.rigidification.map f) ↔ ∀ (Z : SSet.{max u v}), Z.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map f)).app Z)).toFunctor).IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reuses SSet.Pinched.rigidification, the already landed subset-poset simplex-colimit construction; the landed owning node is added to stmt_deps. The categorical-equivalence side is verbatim the testing expression of exists_joyal_model_structure, allowing every enlargement max u v, with no quasicategory assumption on S or T."
  }
 }
