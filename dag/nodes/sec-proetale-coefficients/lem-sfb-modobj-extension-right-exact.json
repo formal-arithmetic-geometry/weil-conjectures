@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-modobj-extension-right-exact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension of scalars is right exact",
@@ -13,28 +13,90 @@
   "place": "node lem-sfb-modobj-extension-right-exact, order 1588"
  },
  "stmt_deps": [
-  "def-sfb-modobj-extension"
+  "def-sfb-modobj-extension",
+  "def-galois-finite-limits-colimits"
  ],
  "proof": [
   {
-   "text": "$\\operatorname{Ext}_\\varphi$ is a left adjoint by [def-sfb-modobj-extend-restrict-adjunction],\nso it preserves all colimits.",
+   "text": "Under precisely the hypotheses of [def-sfb-modobj-extension], [def-sfb-modobj-extend-restrict-adjunction] gives the natural adjunction $\\operatorname{Ext}_\\varphi\\dashv\\operatorname{Res}_\\varphi$ between $\\Mod_{\\mathcal R}(\\mathcal C)$ and $\\Mod_{\\mathcal S}(\\mathcal C)$. Thus the extension functor in the statement is a left adjoint.",
    "uses": [
     "def-sfb-modobj-extend-restrict-adjunction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/lem-sfb-modobj-extension-right-exact.proof.md",
+    "place": "Proof, first clause; unit sk-def-sfb-change-of-scalars, part 2"
+   }
+  },
+  {
+   "text": "Let $I$ be any finite category, and let $M:I\\to\\Mod_{\\mathcal R}(\\mathcal C)$ have a colimit cocone $(L,(\\iota_i)_i)$. Finite categories are small, so apply [lem-weil-pbc-left-adjoint-preserves-colimits] to the adjunction of step 1, with its $L$ equal to $\\operatorname{Ext}_\\varphi$ and its $R$ equal to $\\operatorname{Res}_\\varphi$. It states that $(\\operatorname{Ext}_\\varphi L,(\\operatorname{Ext}_\\varphi\\iota_i)_i)$ is a colimit cocone of $\\operatorname{Ext}_\\varphi\\circ M$. Since finite colimits are exactly the colimits indexed by finite categories [def-galois-finite-limits-colimits], this is preservation of finite colimits. Only preservation of existing colimits is asserted; existence of all finite colimits in the source is not required.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-galois-finite-limits-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, Lemma lemma-adjoint-exact, part (1) and proof; specialize the index category to a finite category"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-modobj-extend-restrict-adjunction"
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-galois-finite-limits-colimits"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/lem-sfb-modobj-extension-right-exact.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/lem-sfb-modobj-extension-right-exact.proof.md",
+  "place": "Proof; its preservation implication is supplied by Stacks Tag 0038 (lemma-adjoint-exact (1)) via the existing Mathlib leaf"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "preservesFiniteColimits_extendScalars|leftAdjoint_preservesColimits|extendRestrictAdjunction",
+   "results": "Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean; 20 hits; Adjunction/Limits.lean:92 states leftAdjoint_preservesColimits, read lines 44-98",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the extension-of-scalars functor of module objects. The general adjunction-preservation theorem, when returned, is already represented by lem-weil-pbc-left-adjoint-preserves-colimits and is used in the split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left adjoint functor preserves all finite colimits",
+   "results": "CategoryTheory.Limits.IsColimit.ofLeftAdjoint, CategoryTheory.Adjunction.leftAdjoint_preservesColimits, CategoryTheory.Limits.instIsLeftAdjointFunctorColim, CategoryTheory.Limits.PreservesColimitsOfSize.preservesFiniteColimits, CategoryTheory.Limits.preservesFiniteColimits_of_preservesFiniteColimitsOfSize, CategoryTheory.Limits.preservesFiniteColimits_of_leftOp, CategoryTheory.Functor.instPreservesColimitsOfShapeOfIsLeftAdjoint, CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint; 8 hits",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the extension-of-scalars functor of module objects. The general adjunction-preservation theorem, when returned, is already represented by lem-weil-pbc-left-adjoint-preserves-colimits and is used in the split."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Limits.PreservesColimits",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the extension-of-scalars functor of module objects. The general adjunction-preservation theorem, when returned, is already represented by lem-weil-pbc-left-adjoint-preserves-colimits and is used in the split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars for module objects over monoid objects in a braided monoidal category preserves finite colimits",
+   "results": "FDRep.instPreservesFiniteColimitsRepForget₂, FGModuleCat.instPreservesFiniteColimitsModuleCatForget₂, Rep.instPreservesColimitsModuleCatForget₂, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits, CategoryTheory.Abelian.FreydMitchell.instPreservesFiniteColimitsModuleCatEmbeddingRingFunctor, CategoryTheory.Mod_.scalarRestriction, ModuleCat.preservesColimit_restrictScalars, FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂; 8 hits",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the extension-of-scalars functor of module objects. The general adjunction-preservation theorem, when returned, is already represented by lem-weil-pbc-left-adjoint-preserves-colimits and is used in the split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If F is left adjoint to G then F preserves colimits of every shape",
+   "results": "CategoryTheory.Adjunction.leftAdjoint_preservesColimits, CategoryTheory.Functor.instPreservesColimitsOfShapeOfIsLeftAdjoint, CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint, CategoryTheory.Adjunction.colim_preservesColimits, CategoryTheory.hasColimitsOfShape_of_reflective, CategoryTheory.hasColimits_of_reflective, CategoryTheory.monadicCreatesColimitsOfPreservesColimits, CategoryTheory.Adjunction.hasExactColimitsOfShape; 8 hits",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the extension-of-scalars functor of module objects. The general adjunction-preservation theorem, when returned, is already represented by lem-weil-pbc-left-adjoint-preserves-colimits and is used in the split."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|extension.of.scalars|extendRestrict|scalarExtension",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the extension-of-scalars functor of module objects. The general adjunction-preservation theorem, when returned, is already represented by lem-weil-pbc-left-adjoint-preserves-colimits and is used in the split."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -52,5 +114,20 @@
   "CategoryTheory.Mod.preservesFiniteColimits_extendScalars"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-modobj-extension-right-exact",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses unchanged. Made the extension/restriction adjunction explicit, then applied the existing reviewed Mathlib leaf for preservation of small colimits to an arbitrary finite colimit cocone. Added the existing finite-colimit definition dependency and verbatim citation evidence. No new nodes or attachments.",
+  "blueprint": "Realizes both clauses of lem-sfb-modobj-extension-right-exact.proof.md and part 2 of sk-def-sfb-change-of-scalars: extension is a left adjoint, hence preserves colimits. No change of route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q49-0e32946a9",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q49-0e32946a9 (reviewer sub-agent of L); spot-checked: Read the item, all four cited statements, current blueprint chapter/unit route, Stacks 0038 and 04AS, and Mathlib declarations. Both proof steps are valid under the exact hypotheses; edge cases pass. No new nodes, citation gaps, cycles, or repairs. Detailed checks are in review.md."
+ }
 }
