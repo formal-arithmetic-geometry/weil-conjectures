@@ -284,7 +284,6 @@ noncomputable def boundedConstructibleLowerShriekBaseChange (sq : IsPullback g' 
     Functor.whiskerLeft _ (boundedConstructibleLowerShriekOfCompactificationIso ℓ E
       ((compactificationOverField f).ofIsPullback sq.overLeft) (compactificationOverField f')).hom
 
-omit [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] in
 lemma boundedConstructibleLowerShriekBaseChange_eq (sq : IsPullback g' f' f g) :
     boundedConstructibleLowerShriekBaseChange ℓ E sq =
       boundedConstructibleLowerShriekOfCompactificationBaseChangePasting _ ℓ

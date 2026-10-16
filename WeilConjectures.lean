@@ -2482,6 +2482,7 @@ public import WeilConjectures.Compactification.IsomorphismNearClosure
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.Noetherian
 public import WeilConjectures.Compactification.Over
+public import WeilConjectures.Compactification.OverRefinement
 public import WeilConjectures.Compactification.ProjectiveSpace
 public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.RefinementPullback
@@ -3538,6 +3539,10 @@ public import WeilConjectures.NumberTheory.Padics.IntegersMap
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
 public import WeilConjectures.NumberTheory.Padics.Logarithm
 public import WeilConjectures.NumberTheory.TateModule
+public import WeilConjectures.PoincareDuality.Abstract
+public import WeilConjectures.PoincareDuality.Poincare
+public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.PoincareDuality.Verdier
 public import WeilConjectures.PointCount
 public import WeilConjectures.PointCountBound
 public import WeilConjectures.RepresentationTheory.Clifford
@@ -4327,6 +4332,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShr
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
