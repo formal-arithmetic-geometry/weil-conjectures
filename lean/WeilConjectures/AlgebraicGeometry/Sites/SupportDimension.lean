@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
+import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 
 /-!
 # Étale sheaves supported in low dimension
@@ -62,6 +63,27 @@ noncomputable def supportedInι (N : Sheaf B.smallEtaleTopology AddCommGrpCat.{u
     (U : B.Opens) : supportedIn N U ⟶ N :=
   kernel.ι _
 
+/-- The geometric support argument before taking the kernel lift.
+
+Source: Stacks Project, Étale Cohomology, Tag 04FR, together with the finite-type
+dimension argument in Tag 0B1C.  It says that, after an étale refinement, the
+restriction of a section to the complement of a closed set of bounded dimension
+vanishes.  The final lift through `supportedIn` is a separate formal kernel
+construction in `exists_covering_supportedIn`.
+(blueprint: new-lem-sc-support-dimension-zero-off-closed) -/
+theorem exists_covering_section_zero_off_closed {K : Type u} [Field K]
+    (b : B ⟶ Spec (.of K)) [LocallyOfFiniteType b] [QuasiCompact b] (a : ℕ)
+    (N : Sheaf B.smallEtaleTopology AddCommGrpCat.{u + 1}) (hN : N.IsTorsion)
+    (hstalk : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ B),
+      (a : Cardinal.{u}) < Scheme.residueFieldTrdeg b (s (IsLocalRing.closedPoint Ω)) →
+        IsZero ((s)^*[AddCommGrpCat.{u + 1}].obj N)) :
+    ∀ (V : B.Etale) (s : N.obj.obj (Opposite.op V)), ∃ R ∈ B.smallEtaleTopology V,
+      ∀ ⦃W : B.Etale⦄ (g : W ⟶ V), R g → ∃ (U : B.Opens)
+        (_ : topologicalKrullDim ((U : Set B)ᶜ : Set B) ≤ a),
+        ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} U.ι).unit.app N).hom.app _
+          (N.obj.map g.op s) = 0 := by
+  sorry
+
 /-- Blueprint `lem-sc-support-dimension-union`: A sheaf supported in low dimension is a filtered
 union.
 
@@ -84,8 +106,15 @@ theorem exists_covering_supportedIn {K : Type u} [Field K] (b : B ⟶ Spec (.of 
       ∀ ⦃W : B.Etale⦄ (g : W ⟶ V), R g → ∃ (U : B.Opens)
         (_ : topologicalKrullDim ((U : Set B)ᶜ : Set B) ≤ a)
         (t : (supportedIn N U).obj.obj (Opposite.op W)),
-          (supportedInι N U).hom.app _ t = N.obj.map g.op s :=
-  sorry
+          (supportedInι N U).hom.app _ t = N.obj.map g.op s := by
+  intro V s
+  obtain ⟨R, hR, hRs⟩ := exists_covering_section_zero_off_closed b a N hN hstalk V s
+  refine ⟨R, hR, fun W g hg ↦ ?_⟩
+  obtain ⟨U, hU, hz⟩ := hRs g hg
+  obtain ⟨t, ht⟩ := exists_kernel_ι_app_eq
+    ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} U.ι).unit.app N)
+    (N.obj.map g.op s) hz
+  exact ⟨U, hU, t, ht⟩
 
 end Etale
 
