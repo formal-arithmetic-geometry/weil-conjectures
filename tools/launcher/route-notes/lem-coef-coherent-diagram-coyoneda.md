@@ -1,0 +1,5 @@
+# Circular split rejected by maintenance, 2026-10-17
+
+The prior split was invalidated in authoritative DAG commit afb0e1c8437eb2d3733c802288435fe171f25e3a. Its theorem statement is unchanged and status is unsplit. Steps 3 and 9 used lem-coef-space-valued-straightening; the new lem-coef-twisted-arrow-graph-cofinality also requires that theorem. This is circular because straightening uses coherent-nerve-comparison -> model-colimit-localization-comparison -> small-diagram-model-rectification -> this co-Yoneda node.
+
+Split the unchanged theorem using independent density/cofinality tools. Do not cite lem-coef-space-valued-straightening, lem-coef-space-transport-classification, or any other node whose dependency closure already reaches co-Yoneda. Substituting one general classification theorem for another does not remove the cycle. Keep all conclusions and hypotheses. The rejected proof is preserved in the server file's .bak-maint-Q60-foundation-conventions backup and in earlier Git history.
