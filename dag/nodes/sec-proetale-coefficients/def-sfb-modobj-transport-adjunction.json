@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-modobj-transport-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Monoidal adjunctions lift to module objects",
@@ -18,31 +18,212 @@
  ],
  "proof": [
   {
-   "text": "For a monoidal adjunction the unit $u\\colon\\mathrm{id}\\to GF$ is a monoidal natural\ntransformation, and the components of a monoidal natural transformation at a monoid object\nare morphisms of monoid objects.",
-   "uses": [],
-   "elementary": null
+   "text": "Write $\\mu^F,\\mu^G$ for the tensor structure maps, $e^F,e^G$ for their unit maps, $\\delta=(\\mu^F)^{-1}$, and $u,c$ for the adjunction unit and counit. By [lem-sfb-monoidal-adjunction-unit-counit], both $u$ and $c$ are monoidal. Expanding the composite lax structures gives $u_{X\\otimes Y}=G(\\mu^F_{X,Y})\\mu^G_{FX,FY}(u_X\\otimes u_Y)$ and $u_{\\mathbf1}=G(e^F)e^G$. Composing the tensor identity with $G\\delta$ gives\n$$G(\\delta_{X,Y})u_{X\\otimes Y}=\\mu^G_{FX,FY}(u_X\\otimes u_Y).$$\nLikewise, monoidality of $c$ says $c_{A\\otimes B}F(\\mu^G_{A,B})\\mu^F_{GA,GB}=c_A\\otimes c_B$. Precomposing with $\\delta_{GA,GB}$ gives\n$$c_{A\\otimes B}F(\\mu^G_{A,B})=(c_A\\otimes c_B)\\delta_{GA,GB}.$$\nThese equations use invertibility only of the structure maps of $F$.",
+   "uses": [
+    "lem-sfb-monoidal-adjunction-unit-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport-adjunction.proof.md",
+    "place": "First paragraph, monoidality; second paragraph, tensor identity and its counit analogue"
+   }
   },
   {
-   "text": "Let $\\varphi\\colon FM\\to N$ correspond to $\\psi=G(\\varphi)u_M\\colon M\\to GN$. Write\n$\\delta=(\\mu^F)^{-1}$. Linearity of $\\varphi$ reads\n$\\varphi\\circ F(\\gamma_M)=\\gamma_N(F\\mathcal R\\otimes\\varphi)\\delta_{\\mathcal R,M}$. Since\n$u$ is monoidal, $G(\\delta_{\\mathcal R,M})u_{\\mathcal R\\otimes M}\n=\\mu^G_{F\\mathcal R,FM}(u_{\\mathcal R}\\otimes u_M)$. Hence, by naturality of $u$ and\n$\\mu^G$,\n$$\n\\psi\\gamma_M=G(\\varphi F\\gamma_M)u_{\\mathcal R\\otimes M}\n=G(\\gamma_N)\\mu^G_{F\\mathcal R,N}(u_{\\mathcal R}\\otimes\\psi).\n$$\nThe right side is the action of $\\mathcal R$ on $GN$ through $u_{\\mathcal R}$\n([def-sfb-modobj-restriction], [def-sfb-modobj-transport]), applied after\n$\\mathcal R\\otimes\\psi$. So $\\psi$ is $\\mathcal R$-linear. The converse is the same\ncomputation with the counit. Naturality of the bijection is inherited from $F\\dashv G$.",
+   "text": "The twice-transported monoid structure is the one in [def-sfb-modobj-transport]. Write $m$ and $a$ for the multiplication and unit of $\\mathcal R$. Naturality and the monoidal equations of [lem-sfb-monoidal-adjunction-unit-counit] give\n$$u_{\\mathcal R}m=GF(m)u_{\\mathcal R\\otimes\\mathcal R}=GF(m)G(\\mu^F_{\\mathcal R,\\mathcal R})\\mu^G_{F\\mathcal R,F\\mathcal R}(u_{\\mathcal R}\\otimes u_{\\mathcal R})=m_{GF\\mathcal R}(u_{\\mathcal R}\\otimes u_{\\mathcal R}),$$\n$$u_{\\mathcal R}a=GF(a)u_{\\mathbf1}=GF(a)G(e^F)e^G=a_{GF\\mathcal R}.$$\nThus $u_{\\mathcal R}$ is a monoid morphism, and restriction along it is defined by [def-sfb-modobj-restriction].",
    "uses": [
-    "def-sfb-modobj-restriction",
-    "def-sfb-modobj-transport"
+    "lem-sfb-monoidal-adjunction-unit-counit",
+    "def-sfb-modobj-transport",
+    "def-sfb-modobj-restriction"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport-adjunction.proof.md",
+    "place": "First paragraph, components of the unit at monoid objects"
+   }
+  },
+  {
+   "text": "For an $\\mathcal R$-module $M$ and an $F\\mathcal R$-module $N$, write $\\gamma_M,\\gamma_N$ for their actions. By [def-sfb-modobj-transport] and [def-sfb-modobj-restriction], the restricted action on $GN$ is $\\beta_N=G(\\gamma_N)\\mu^G_{F\\mathcal R,N}(u_{\\mathcal R}\\otimes GN)$. By the linearity definition in [sk-def-sfb-module-objects], an $F\\mathcal R$-linear $\\varphi:FM\\to N$ satisfies $\\varphi F(\\gamma_M)=\\gamma_N(F\\mathcal R\\otimes\\varphi)\\delta_{\\mathcal R,M}$. Set $\\psi=G(\\varphi)u_M$. Naturality of $u$, the unit tensor equation obtained from [lem-sfb-monoidal-adjunction-unit-counit], and naturality of $\\mu^G$ give\n$$\\begin{aligned}\n\\psi\\gamma_M&=G(\\varphi F(\\gamma_M))u_{\\mathcal R\\otimes M}\\\\\n&=G(\\gamma_N)G(F\\mathcal R\\otimes\\varphi)G(\\delta_{\\mathcal R,M})u_{\\mathcal R\\otimes M}\\\\\n&=G(\\gamma_N)G(F\\mathcal R\\otimes\\varphi)\\mu^G_{F\\mathcal R,FM}(u_{\\mathcal R}\\otimes u_M)\\\\\n&=G(\\gamma_N)\\mu^G_{F\\mathcal R,N}(u_{\\mathcal R}\\otimes G(\\varphi)u_M)=\\beta_N(\\mathcal R\\otimes\\psi).\n\\end{aligned}$$\nThis is precisely $\\mathcal R$-linearity of $\\psi$.",
+   "uses": [
+    "def-sfb-modobj-transport",
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-module-objects",
+    "lem-sfb-monoidal-adjunction-unit-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport-adjunction.proof.md",
+    "place": "Second paragraph, forward linearity calculation"
+   }
+  },
+  {
+   "text": "Conversely, let $\\psi:M\\to GN$ be $\\mathcal R$-linear for the action $\\beta_N$ just specified by [def-sfb-modobj-transport] and [def-sfb-modobj-restriction], and put $\\varphi=c_NF(\\psi)$. Then $\\psi\\gamma_M=G(\\gamma_N)\\mu^G_{F\\mathcal R,N}(u_{\\mathcal R}\\otimes\\psi)$. Apply $F$ and postcompose with $c_N$. Naturality of $c$ at $\\gamma_N$, its tensor equation from [lem-sfb-monoidal-adjunction-unit-counit], naturality of $\\delta$, and the triangle $c_{F\\mathcal R}F(u_{\\mathcal R})=\\mathrm{id}_{F\\mathcal R}$ give\n$$\\begin{aligned}\n\\varphi F(\\gamma_M)&=c_NF(G(\\gamma_N))F(\\mu^G_{F\\mathcal R,N})F(u_{\\mathcal R}\\otimes\\psi)\\\\\n&=\\gamma_Nc_{F\\mathcal R\\otimes N}F(\\mu^G_{F\\mathcal R,N})F(u_{\\mathcal R}\\otimes\\psi)\\\\\n&=\\gamma_N(c_{F\\mathcal R}\\otimes c_N)\\delta_{GF\\mathcal R,GN}F(u_{\\mathcal R}\\otimes\\psi)\\\\\n&=\\gamma_N(c_{F\\mathcal R}F(u_{\\mathcal R})\\otimes c_NF(\\psi))\\delta_{\\mathcal R,M}\\\\\n&=\\gamma_N(F\\mathcal R\\otimes\\varphi)\\delta_{\\mathcal R,M}.\n\\end{aligned}$$\nPrecomposing this equality with $\\mu^F_{\\mathcal R,M}$ turns this into $\\varphi F(\\gamma_M)\\mu^F_{\\mathcal R,M}=\\gamma_N(F\\mathcal R\\otimes\\varphi)$, the linearity condition of [sk-def-sfb-module-objects] for the transported module $FM$.",
+   "uses": [
+    "def-sfb-modobj-transport",
+    "def-sfb-modobj-restriction",
+    "lem-sfb-monoidal-adjunction-unit-counit",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport-adjunction.proof.md",
+    "place": "Second paragraph, the omitted converse computation with the counit"
+   }
+  },
+  {
+   "text": "The maps $\\varphi\\mapsto G(\\varphi)u_M$ and $\\psi\\mapsto c_NF(\\psi)$ are inverse because they are the given underlying adjunction bijection and its inverse. Steps 3–4 show that they restrict to module morphisms. Module morphisms are the underlying morphisms satisfying the action equation, with underlying composition, by [sk-def-sfb-module-objects]. For module maps $a:M'\\to M$ and $b:N\\to N'$, naturality of the underlying adjunction therefore reads $\\Phi(\\varphi F(a))=\\Phi(\\varphi)a$ and $\\Phi(b\\varphi)=G(b)\\Phi(\\varphi)$ as identities of module morphisms. By [lem-weil-pbc-adjunction-of-natural-bijection] these restricted natural bijections define the required adjunction between $\\operatorname{mapMod}(F)$ and $\\operatorname{Res}_{u_{\\mathcal R}}\\circ\\operatorname{mapMod}(G)$; its hom bijection is exactly the one stated in the item.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport-adjunction.proof.md",
+    "place": "Final sentence, naturality and construction of the adjunction"
+   }
   }
  ],
  "proof_deps": [
   "def-sfb-modobj-restriction",
-  "def-sfb-modobj-transport"
+  "def-sfb-modobj-transport",
+  "lem-sfb-monoidal-adjunction-unit-counit",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "sk-def-sfb-module-objects"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport-adjunction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport-adjunction.proof.md",
+  "place": "Both paragraphs; converse and monoid equations expanded in full"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "monoidal adjunction unit monoidal natural transformation components monoid object",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; CategoryTheory.Adjunction.mapMon_unit; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.unit_app_unit_comp_map_η; CategoryTheory.Adjunction.mapCommMon_unit; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: mapMon concerns monoid objects, while ModuleCat and Rep results have special ambient categories; general coherence hits are used only in the new Mathlib leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.IsMonoidal, NatTrans.IsMonoidal.unit, NatTrans.IsMonoidal.isMonHom_app",
+   "results": "No hits; loogle: unknown identifier 'Adjunction.IsMonoidal'",
+   "date": "2026-10-16",
+   "verdict": "query error (unqualified identifier), not evidence of absence; repeated with the fully qualified CategoryTheory.Adjunction.IsMonoidal query"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMonoidal\\.unit|isMonHom_app|mapModAdjunction",
+   "results": "No hits; directory argument: Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "unusable search: the directory argument redundantly included Mathlib/; repeated with the correct CategoryTheory/Monoidal directory"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMonoidal.*unit|isMonHom_app|mapModAdjunction",
+   "results": "No hits; directory argument: Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "unusable search: the directory argument redundantly included Mathlib/; repeated with the correct CategoryTheory/Monoidal directory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unit of monoidal adjunction is monoidal natural transformation",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit; CategoryTheory.Adjunction.instIsMonoidalId; CategoryTheory.Adjunction.mapMon_unit; CategoryTheory.Adjunction.Equivalence.instIsMonoidalUnit; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.instIsMonoidal",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: mapMon concerns monoid objects, while ModuleCat and Rep results have special ambient categories; general coherence hits are used only in the new Mathlib leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.IsMonoidal _",
+   "results": "No hits; loogle: Unknown identifier `NatTrans.IsMonoidal`",
+   "date": "2026-10-16",
+   "verdict": "query error (unqualified identifier), not evidence of absence; repeated with the fully qualified CategoryTheory.Adjunction.IsMonoidal query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "components of a monoidal natural transformation at a monoid object are monoid morphisms",
+   "results": "CategoryTheory.SingleObj.natTrans_app; CategoryTheory.Functor.mapMonNatTrans_app_hom; CategoryTheory.NatTrans.IsMonoidal.of_cartesianMonoidalCategory; CategoryTheory.NatTrans.IsMonoidal.mk; CategoryTheory.Functor.mapCommMonNatTrans_app_hom_hom; CategoryTheory.Functor.mapGrpNatTrans_app_hom_hom; CategoryTheory.SingleObj.natTrans; CategoryTheory.Functor.mapMonNatTrans",
+   "date": "2026-10-16",
+   "verdict": "related monoidal coherence or monoid natural-transformation results, not the module-object adjunction; used to locate the coherence leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal adjunction lifts to an adjunction between module objects over a monoid and its image, by restriction along the adjunction unit",
+   "results": "CategoryTheory.Adjunction.mapMon; Rep.instIsLeftAdjointActionModuleCatRes; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.extendRestrictScalarsAdj; ModuleCat.instIsRightAdjointRestrictScalars; Rep.resCoindAdjunction; ModuleCat.instIsLeftAdjointRestrictScalars; Rep.resCoindAdjunction_unit_app_hom_hom",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: mapMon concerns monoid objects, while ModuleCat and Rep results have special ambient categories; general coherence hits are used only in the new Mathlib leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "mapModAdjunction|modAdjunction|mapMod|mapMon_unit",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean; directory argument: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "related monoidal coherence or monoid natural-transformation results, not the module-object adjunction; used to locate the coherence leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, CategoryTheory.Adjunction",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match for this query; additional phrasings and corrected-directory searches are recorded"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsMonoidalUnit|instIsMonoidalCounit|unit_app_tensor_comp_map_δ|map_μ_comp_counit_app_tensor|IsMonoidal",
+   "results": "No hits; directory argument: CategoryTheory/Monoidal/Functor",
+   "date": "2026-10-16",
+   "verdict": "no match for this query; additional phrasings and corrected-directory searches are recorded"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal left adjoint and its lax monoidal right adjoint induce an adjunction on module objects over a monoid",
+   "results": "CategoryTheory.Adjunction.mapMon; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.Adjunction.mapGrp; CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.IsMonoidal.recOn; CategoryTheory.Adjunction.mapCommMon; CategoryTheory.Adjunction.instIsMonoidal",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: mapMon concerns monoid objects, while ModuleCat and Rep results have special ambient categories; general coherence hits are used only in the new Mathlib leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsMonoidalUnit|instIsMonoidalCounit|unit_app_tensor_comp_map_δ|map_μ_comp_counit_app_tensor|class IsMonoidal",
+   "results": "Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean; Mathlib/CategoryTheory/Monoidal/Subcategory.lean; Mathlib/CategoryTheory/Monoidal/Subcategory.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; directory argument: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "related monoidal coherence or monoid natural-transformation results, not the module-object adjunction; used to locate the coherence leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit and counit of a monoidal adjunction are monoidal natural transformations",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit; CategoryTheory.Adjunction.mapMon_counit; CategoryTheory.Adjunction.unit; CategoryTheory.ihom.coev; CategoryTheory.Adjunction.mapMon; CategoryTheory.NatTrans.IsMonoidal.of_cartesianMonoidalCategory; CategoryTheory.NatTrans.IsMonoidal.mk",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: mapMon concerns monoid objects, while ModuleCat and Rep results have special ambient categories; general coherence hits are used only in the new Mathlib leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.IsMonoidal",
+   "results": "CategoryTheory.Adjunction.instIsMonoidalId; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.Adjunction.instIsMonoidal_1; CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit; CategoryTheory.Adjunction.unit_app_unit_comp_map_η",
+   "date": "2026-10-16",
+   "verdict": "related compatibility class and coherence lemmas, not an adjunction of module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit and counit of a monoidal adjunction are monoidal natural transformations when the left adjoint is strong monoidal",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.mapMon_unit; CategoryTheory.Adjunction.mapMon_counit; CategoryTheory.Adjunction.instIsMonoidalId; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.Functor.Monoidal.map_η_ε; CategoryTheory.Adjunction.isMonoidal_comp",
+   "date": "2026-10-16",
+   "verdict": "no match for this item: mapMon concerns monoid objects, while ModuleCat and Rep results have special ambient categories; general coherence hits are used only in the new Mathlib leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*[Ii]sMonoidal|namespace IsMonoidal",
+   "results": "50; 54; 56; 69; 81; directory argument: CategoryTheory/Monoidal/NaturalTransformation.lean",
+   "date": "2026-10-16",
+   "verdict": "related monoidal coherence or monoid natural-transformation results, not the module-object adjunction; used to locate the coherence leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "^instance : NatTrans.IsMonoidal adj\\.(unit|counit)",
+   "results": "Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean; Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean; directory argument: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "related monoidal coherence or monoid natural-transformation results, not the module-object adjunction; used to locate the coherence leaf"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -62,5 +243,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-transport"
+ "unit": "sk-def-sfb-transport",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-transport-adjunction",
+  "worker": "stage1",
+  "summary": "Retained the source statement and route. Replaced the prior implicit use of monoidal coherence by a checked Mathlib leaf, proved the unit is a monoid morphism by its two defining equations, expanded both linearity calculations (including the counit converse), and cited the existing Hom-bijection adjunction construction. No new module adjunction theorem or clause-restatement node was introduced.",
+  "blueprint": "Realizes the two paragraphs of the current blueprint proof: monoidal unit and monoid morphism in steps 1–2; forward calculation in step 3; previously omitted converse in step 4; naturality and adjunction in step 5.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-41bdb3f39",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-41bdb3f39 (reviewer sub-agent of L); spot-checked: Read the mathematics in full. All five steps and the coherence leaf agree with the current blueprint and cited Mathlib/Stacks sources; small-case checks pass, with no duplicate or dependency cycle. Completed omitted new-node metadata in fixes/dag/nodes/sec-proetale-coefficients/lem-sfb-monoidal-adjunction-unit-counit.json. Detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

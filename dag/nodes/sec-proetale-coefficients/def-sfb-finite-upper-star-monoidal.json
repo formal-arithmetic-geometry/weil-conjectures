@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-finite-upper-star-monoidal",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Strong monoidal structure on $g^*$",
@@ -18,12 +18,112 @@
   "def-sfb-finite-lower-star-lax-monoidal",
   "lem-sfb-finite-upper-star-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Write $\\mathcal C=\\Sh(Y_{\\mathrm{proét}},\\mathcal A)$ and $\\mathcal D=\\Sh(Z_{\\mathrm{proét}},\\mathcal A)$. They carry the sheaf tensor monoidal structures by [sk-def-sfb-sheaf-tensor], applied to the closed symmetric monoidal Grothendieck abelian category of the item. Put $L=g^*$ and $R=g_*$. By [def-sfb-finite-upper-lower-star-adjunction] fix its natural Hom bijections $\\Phi$ and unit $u_F:F\\to RL F$. By [def-sfb-finite-lower-star-lax-monoidal] take the given lax unit $e:\\mathbf 1_{\\mathcal C}\\to R\\mathbf 1_{\\mathcal D}$ and lax tensor maps $m_{V,W}:RV\\otimes RW\\to R(V\\otimes W)$. Apply [lem-sfb-adjunction-oplax-mate] to this adjunction and this lax structure. It equips the actual functor $L$ with the oplax maps\n$$\n d_0=\\Phi_{\\mathbf 1_{\\mathcal C},\\mathbf 1_{\\mathcal D}}^{-1}(e),\\qquad\n d_{F,G}=\\Phi_{F\\otimes G,LF\\otimes LG}^{-1}\\bigl(m_{LF,LG}\\circ(u_F\\otimes u_G)\\bigr).\n$$\nThus the construction satisfies oplax associativity and both unit axioms. These are precisely the mates specified in the item; the tensor mate uses the two adjunction unit components before the lax tensor map.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "def-sfb-finite-lower-star-lax-monoidal",
+    "lem-sfb-adjunction-oplax-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/def-sfb-finite-upper-star-monoidal.md",
+    "place": "First sentence: construct the oplax mate with its coherence, using the generic Mathlib mate lemma."
+   }
+  },
+  {
+   "text": "The formula for $d_0$ is exactly the mate of the lax unit appearing in [lem-sfb-finite-upper-star-unit], so that lemma makes $d_0$ invertible. For arbitrary $F,G\\in\\mathcal C$, the formula for $d_{F,G}$ is the tensor mate appearing in [lem-sfb-finite-upper-star-tensor], so that lemma makes every $d_{F,G}$ invertible. Both lemmas have exactly the present closed symmetric monoidal Grothendieck abelian coefficients and arbitrary scheme morphism; neither requires $g$ weakly étale.",
+   "uses": [
+    "lem-sfb-finite-upper-star-unit",
+    "lem-sfb-finite-upper-star-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/def-sfb-finite-upper-star-monoidal.md",
+    "place": "Last sentence: identify and apply the two existing comparison isomorphism lemmas."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-strong-monoidal-of-invertible-oplax] to the oplax structure of step 1 and the isomorphisms of step 2. Define the lax unit to be $d_0^{-1}$ and the lax tensor map on $F,G$ to be $d_{F,G}^{-1}$. The cited construction gives a strong monoidal structure with these maps and with the original oplax maps. This is the monoidal structure prescribed by the item: it is built from the fixed adjunction and fixed pushforward lax structure and introduces no unrelated choice of tensor comparisons.",
+   "uses": [
+    "lem-sfb-strong-monoidal-of-invertible-oplax"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/def-sfb-finite-upper-star-monoidal.md",
+    "place": "Last sentence: promote the specified oplax structure to a strong monoidal structure by inverting its comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "lem-sfb-adjunction-oplax-mate",
+  "lem-sfb-finite-upper-star-unit",
+  "lem-sfb-finite-upper-star-tensor",
+  "lem-sfb-strong-monoidal-of-invertible-oplax"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/def-sfb-finite-upper-star-monoidal.md",
+  "place": "Construction specified by both sentences of the definition; expanded using the cited generic Mathlib constructions and the two existing comparison lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal structure on pullback g star as oplax mate of lax right adjoint",
+   "results": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε; CategoryTheory.frobeniusMorphism",
+   "date": "2026-10-16",
+   "verdict": "Related generic Mathlib tools only; this search does not state the pro-étale construction with its fixed functors and comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Monoidal.ofOplaxMonoidal, Adjunction.leftAdjointOplaxMonoidal",
+   "results": " | loogle: unknown identifier 'Functor.Monoidal.ofOplaxMonoidal'",
+   "date": "2026-10-16",
+   "verdict": "Related generic Mathlib tools only; this search does not state the pro-étale construction with its fixed functors and comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "monoidal_upperStar|ofOplaxMonoidal|leftAdjointOplaxMonoidal",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "Related generic Mathlib tools only; this search does not state the pro-étale construction with its fixed functors and comparisons. The subdirectory SixFunctors/ProEtale does not exist in Mathlib; this zero-hit query is not evidence of absence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "strong monoidal pullback functor defined from oplax mate and invertible unit and tensor comparisons",
+   "results": "CategoryTheory.Functor.Monoidal.ofBifunctor; CategoryTheory.Functor.Monoidal.mk; CategoryTheory.Functor.CoreMonoidal.toMonoidal; CategoryTheory.Functor.Monoidal.ofLaxMonoidal; CategoryTheory.Functor.Monoidal.ofOplaxMonoidal; CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal; CategoryTheory.Functor.CoreMonoidal.mk; CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_pullback_obj",
+   "date": "2026-10-16",
+   "verdict": "Related generic Mathlib tools only; this search does not state the pro-étale construction with its fixed functors and comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "upperStar|sheafPullback.*[Mm]onoidal|[Mm]onoidal.*sheafPullback",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "No match for the exact project pullback construction; related sheafification or generic monoidal constructions only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of sheaves with values in a closed symmetric monoidal category is a strong monoidal functor on the pro etale site",
+   "results": "LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf; instMonoidalLightProfiniteLightCondSetLightProfiniteToLightCondSet; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; CategoryTheory.Sheaf.symmetricCategory; CategoryTheory.Sheaf.monoidalCategory",
+   "date": "2026-10-16",
+   "verdict": "No match for the exact project pullback construction; related sheafification or generic monoidal constructions only."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback|pullback.*Monoidal|Monoidal.*pullback",
+   "results": "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean; Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean; Mathlib/CategoryTheory/Monoidal/Arrow.lean; Mathlib/CategoryTheory/Monoidal/Arrow.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact match: hits concern Cartesian slice pullbacks, pullback-hom/arrow structures, and sheaf fibers, rather than the specified tensor structure on arbitrary coefficient sheaves and the fixed pro-étale pullback."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -45,5 +145,21 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-finite-pushforward-pullback"
+ "unit": "sk-def-sfb-finite-pushforward-pullback",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-finite-upper-star-monoidal",
+  "worker": "stage1",
+  "summary": "Preserved the imported statement and its four statement dependencies. Expanded its construction into the adjunction-mate oplax structure, identification of the unit and tensor maps with the existing isomorphism lemmas, and inversion of those maps to obtain the prescribed strong structure. Added two generic Mathlib leaves for mate coherence and promotion of invertible oplax maps. The local slopmaster2 source contains monoidal_upperStar at lines 114-115, but the server refused the prior attachment against its pinned sorry map; the explicit instruction to split instead is followed. All facts are cited by their statements, with verbatim quotes in citations.json.",
+  "blueprint": "Step 1 realizes the first sentence of blueprint node def-sfb-finite-upper-star-monoidal; steps 2-3 realize its second sentence. The route is the monoidal clause of sk-def-sfb-finite-pushforward-pullback.",
+  "metadata_repair": "Rebased onto the fetched main DAG after the maintainer installed sk-def-sfb-finite-pushforward-pullback and bound this item to it. Both new Mathlib leaves now inherit that existing unit and sec-proetale-coefficients chapter. Historical blueprint ancestry, source places, statements and mathematical steps are retained. All five existing proof-citation statements were re-read on the fetched base and all seven verbatim quotes still match."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q46-7e9c7e570",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q46-7e9c7e570 (reviewer sub-agent of L); spot-checked: Reviewed item, new Mathlib leaves, all cited node statements, blueprint unit/chapter route, sources, edge cases, duplicate searches, and delivery-errors A–F. The mate formulas are well typed, comparison hypotheses and coefficient category match exactly, and no off-unit tool uses or repairs are needed. Review written to review.md."
+ }
 }

@@ -1,0 +1,91 @@
+{
+ "id": "lem-sfb-adjunction-oplax-mate",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sfb-finite-upper-star-monoidal",
+   "place": "The statement clause \"the oplax monoidal structure mate, under g^* ⊣ g_* ... of the lax structure\"; generic coherence of the mate construction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The oplax mate of a lax monoidal right adjoint",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories [def-nagata-category] equipped with monoidal structures [def-sfb-monoidal-category], that is, tensor bifunctors, unit objects $\\mathbf 1_{\\mathcal C},\\mathbf 1_{\\mathcal D}$, and natural associator and left and right unitor isomorphisms satisfying the pentagon and triangle identities. Let $L:\\mathcal C\\to\\mathcal D$ and $R:\\mathcal D\\to\\mathcal C$ be functors (preserving identities and compositions), and let $L\\dashv R$ be an adjunction with natural Hom bijections $\\Phi_{X,V}:\\operatorname{Hom}_{\\mathcal D}(LX,V)\\cong\\operatorname{Hom}_{\\mathcal C}(X,RV)$ and unit $u_X=\\Phi_{X,LX}(\\mathrm{id}_{LX})$. Give $R$ a lax monoidal structure: a map $e:\\mathbf 1_{\\mathcal C}\\to R\\mathbf 1_{\\mathcal D}$ and natural maps $m_{V,W}:RV\\otimes RW\\to R(V\\otimes W)$ satisfying the associativity and the two unit compatibility identities. Then the maps\n$$\n d_0=\\Phi_{\\mathbf 1_{\\mathcal C},\\mathbf 1_{\\mathcal D}}^{-1}(e),\\qquad\n d_{X,Y}=\\Phi_{X\\otimes Y,LX\\otimes LY}^{-1}\\bigl(m_{LX,LY}\\circ(u_X\\otimes u_Y)\\bigr)\n$$\nmake $L$ oplax monoidal: $d_0:L\\mathbf 1_{\\mathcal C}\\to\\mathbf 1_{\\mathcal D}$ and $d_{X,Y}:L(X\\otimes Y)\\to LX\\otimes LY$ are natural and satisfy the associativity and the two unit compatibility identities in the reversed directions.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+  "place": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, lines 1064-1106; the unit and tensor formulas are the fields at lines 1065-1066."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A lax monoidal right adjoint induces an oplax monoidal left adjoint by taking mates of its unit and tensor maps",
+   "results": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; CategoryTheory.Adjunction.mapMon; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.IsMonoidal",
+   "date": "2026-10-16",
+   "verdict": "related adjunction APIs; the exact construction is located by Loogle and grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal",
+   "results": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal; CategoryTheory.Adjunction.instIsMonoidal_1; CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_η; CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_δ",
+   "date": "2026-10-16",
+   "verdict": "match: exact generic mate construction"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointOplaxMonoidal",
+   "results": "Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean",
+   "date": "2026-10-16",
+   "verdict": "match: Mathlib/CategoryTheory/Monoidal/Functor.lean:1064; source read through line 1106"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lax monoidal right adjoint induces an oplax monoidal structure on the left adjoint",
+   "results": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Functor.OplaxMonoidal.ofBifunctor; CategoryTheory.LaxMonoidalFunctor.noConfusion; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit; CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal; CategoryTheory.Adjunction.instIsMonoidal",
+   "date": "2026-10-16",
+   "verdict": "related right-adjoint and oplax APIs; exact match supplied by Loogle and grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Doctrinal adjunction: colax tensor comparisons on a left adjoint are adjoint transposes of the lax comparisons on its right adjoint",
+   "results": "{\"t\": \"2026-10-16T14:29:06Z\", \"tool\": \"leanfinder\", \"query\": \"Doctrinal adjunction: colax tensor comparisons on a left adjoint are adjoint transposes of the lax comparisons on its right adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\", \"CategoryTheory.Adjunction.isMonoidal_comp\"], \"digest\": \"1841f32bbe0d799f\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: related mate identities only; exact constructor found independently by the class-based Loogle query and checked at Functor.lean:1064-1106."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.OplaxMonoidal",
+   "results": "{\"t\": \"2026-10-16T14:30:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.Functor.OplaxMonoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointOplaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\", \"CategoryTheory.Adjunction.map_ε_comp_counit_app_unit\"], \"digest\": \"905d1421bacfcf69\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: independent query; exact construction and hypotheses checked in the pinned Mathlib source."
+  },
+  {
+   "tool": "grep",
+   "query": "def leftAdjointOplaxMonoidal|noncomputable def (Monoidal\\.)?ofOplaxMonoidal",
+   "results": "{\"t\": \"2026-10-16T14:29:37Z\", \"tool\": \"grep\", \"query\": \"def leftAdjointOplaxMonoidal|noncomputable def (Monoidal\\\\.)?ofOplaxMonoidal\", \"sub\": \"CategoryTheory/Monoidal/Functor.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"743\", \"764\", \"1064\"], \"digest\": \"9dc0c6faa5397fa8\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: independent query; exact construction and hypotheses checked in the pinned Mathlib source."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal",
+  "file": "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+  "line": 1064,
+  "how": "exact: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, lines 1064-1106; the unit and tensor formulas are the fields at lines 1065-1066."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-finite-upper-star-monoidal",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-finite-pushforward-pullback"
+}

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-module-lower-shriek",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Lower shriek of module objects",
@@ -18,26 +18,191 @@
  ],
  "proof": [
   {
-   "text": "The underlying sheaf of $i_!M$ is $i^{\\Ab}_!M$ ([def-sfb-module-open-lower-shriek]),\nand that of $g_*N$ is $g^{\\Ab}_*N$ ([def-sfb-module-lower-star]); this gives the\nunderlying sheaf functor. The extension by zero $i_!$ is exact and the pushforward\n$g_*$ is left exact, so their composite is left exact; both are additive.",
+   "text": "Choose a compactification $c=(X\\xrightarrow{i}\\bar X\\xrightarrow{g}Y)$ of $f$, as the hypothesis permits. By [def-sfb-module-compactification-lower-shriek], $f^c_!=g_*\\circ i_!$ is a functor $\\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_Y}$. Define $f_!:=f^c_!$ for this choice; no independence of compactification is asserted.",
+   "uses": [
+    "def-sfb-module-compactification-lower-shriek"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-lower-shriek.md",
+    "place": "statement, first sentence and chosen-compactification definition"
+   }
+  },
+  {
+   "text": "Write $U_T$ for the forgetful functor from $\\Lambda_T$-module objects to abelian sheaves on $T_{\\mathrm{proét}}$, as defined in [sk-def-sfb-module-objects], clauses 2–3. By [def-sfb-module-open-lower-shriek], $i_!=i^{\\mathrm{lin}}_!\\circ\\operatorname{Res}_{\\alpha_i}$; restriction is the identity on underlying objects and morphisms ([sk-def-sfb-change-of-scalars], clause 1), and the underlying sheaf functor of $i^{\\mathrm{lin}}_!$ is $i^{\\Ab}_!$ ([def-sfb-module-linear-open-lower-shriek]). By [def-sfb-module-lower-star], $g_*=\\operatorname{Res}_{\\eta_g}\\circ\\operatorname{mapMod}(g_*^{\\Ab})$; transport commutes with forgetful functors ([sk-def-sfb-transport], clause 1), and restriction again changes neither objects nor morphisms. Consequently\n$$U_Y\\circ g_*\\circ i_!=g_*^{\\Ab}\\circ U_{\\bar X}\\circ i_!=g_*^{\\Ab}\\circ i_!^{\\Ab}\\circ U_X.$$\nBy [sk-def-sfb-finite-lower-shriek] with $\\mathcal A=\\Ab$, the right-hand composite is the abelian-sheaf lower shriek for the same compactification $c$.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-sfb-module-open-lower-shriek",
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-module-linear-open-lower-shriek",
+    "def-sfb-module-lower-star",
+    "sk-def-sfb-transport",
+    "sk-def-sfb-finite-lower-shriek"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-lower-shriek.proof.md",
+    "place": "proof paragraph, first sentence: underlying sheaves of i_! and g_*"
+   }
+  },
+  {
+   "text": "By [def-sfb-module-open-lower-shriek] and [def-sfb-module-lower-star], both $i_!$ and $g_*$ are additive. For parallel module morphisms $a,b$, $f_!(a+b)=g_*(i_!(a)+i_!(b))=g_*i_!(a)+g_*i_!(b)$ and $f_!(0)=g_*i_!(0)=0$. Thus $f_!$ is additive.",
    "uses": [
     "def-sfb-module-open-lower-shriek",
     "def-sfb-module-lower-star"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-lower-shriek.proof.md",
+    "place": "proof paragraph, final clause: both are additive"
+   }
+  },
+  {
+   "text": "The exactness of $i_!$ in [def-sfb-module-open-lower-shriek] includes preservation of finite limits, and [def-sfb-module-lower-star] states that $g_*$ is left exact. Applying $i_!$ and then $g_*$ to any finite limit cone gives a finite limit cone with vertex $g_*i_!L=f_!L$; hence the composite is left exact, including preservation of the empty limit.",
+   "uses": [
+    "def-sfb-module-open-lower-shriek",
+    "def-sfb-module-lower-star"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-lower-shriek.proof.md",
+    "place": "proof paragraph, second sentence: exact i_!, left exact g_*, left exact composite"
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-module-compactification-lower-shriek",
+  "sk-def-sfb-module-objects",
   "def-sfb-module-open-lower-shriek",
-  "def-sfb-module-lower-star"
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-module-linear-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "sk-def-sfb-transport",
+  "sk-def-sfb-finite-lower-shriek"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-lower-shriek.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-lower-shriek.proof.md",
+  "place": "proof paragraph"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The lower shriek functor for module objects over a commutative condensed ring on a scheme pro-etale site is pushforward after extension by zero along a compactification and is additive and left exact",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; AlgebraicGeometry.Scheme.Modules.pseudofunctor; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.pushforward; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: generic sheaf/module APIs do not state this condensed pro-etale lower-shriek definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition of extension by zero and proper pushforward for module sheaves preserves finite limits and addition",
+   "results": "SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforward_map_val; SheafOfModules.pushforwardSections; PresheafOfModules.pushforward₀CompToPresheaf; SheafOfModules.pushforwardSections_coe; SheafOfModules.pushforward_obj_val; SheafOfModules.pushforwardNatTrans_comp; SheafOfModules.pushforwardComp",
+   "date": "2026-10-16",
+   "verdict": "no match: generic sheaf/module APIs do not state this condensed pro-etale lower-shriek definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Additive, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "CategoryTheory.Functor.preservesFiniteLimits_of_preservesHomology; CategoryTheory.Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono; CategoryTheory.Functor.exact_tfae; CategoryTheory.Functor.preservesFiniteLimits_tfae; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match: generic sheaf/module APIs do not state this condensed pro-etale lower-shriek definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "lowerShriek compactificationLowerShriek",
+   "results": "loogle: Unknown identifier `lowerShriek`",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: Loogle rejected the query because lowerShriek is an unknown identifier; this is not a negative search result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lower shriek of module objects defined by compactification extension by zero followed by pushforward and left exact additive",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward; PresheafOfModules.pushforward₀_obj; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullback; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; PresheafOfModules.pushforward₀_obj_obj_isModule; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward",
+   "date": "2026-10-16",
+   "verdict": "no match: generic sheaf/module APIs do not state this condensed pro-etale lower-shriek definition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "underlying sheaf of lower shriek module functor g pushforward i extension by zero",
+   "results": "TopCat.Sheaf.pushforward; AlgebraicGeometry.Scheme.Modules.pushforward; PresheafOfModules.pushforward₀_obj; SheafOfModules.pushforward_obj_val; SheafOfModules.pushforward; SheafOfModules.pushforward_map_val; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback; SheafOfModules.forget",
+   "date": "2026-10-16",
+   "verdict": "no match: generic sheaf/module APIs do not state this condensed pro-etale lower-shriek definition."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactificationLowerShriek",
+   "sub": "",
+   "results": "0 hits: (none)",
+   "date": "2026-10-16",
+   "verdict": "No occurrence in the correctly rooted pinned Mathlib source; no exact lower-shriek construction found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor on modules in sheaves obtained by extending by zero along an open embedding and direct image along a proper map",
+   "sub": "",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor; AlgebraicGeometry.Scheme.Modules.pushforward; LightCondMod.LocallyConstant.functor; CompHausLike.LocallyConstantModule.functorToPresheaves; AlgebraicGeometry.Scheme.Modules.restrictFunctor; SheafOfModules.pushforward; AlgebraicGeometry.Scheme.Modules.restrict; LightCondensed.free",
+   "date": "2026-10-16",
+   "verdict": "The returned condensed locally constant and ringed-space module pushforwards do not construct the pro-etale compactification lower shriek."
+  },
+  {
+   "tool": "grep",
+   "query": "comp_preservesFiniteLimits|comp_additive",
+   "sub": "CategoryTheory",
+   "results": "19 hits: Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/Action/Limits.lean; Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean; Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean; Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean; Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean; Mathlib/CategoryTheory/Sites/Pullback.lean",
+   "date": "2026-10-16",
+   "verdict": "Composition of finite-limit-preserving functors is available as comp_preservesFiniteLimits; this only verifies the elementary composition in step 4, not the complete item."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactificationLowerShriek|openImmersionLowerShriek",
+   "sub": "",
+   "results": "0 hits: (none)",
+   "date": "2026-10-16",
+   "verdict": "No occurrence of the compactification or open-immersion lower-shriek names in pinned Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image composed with extension by zero defines a functor on sheaves of modules over a condensed ring on the proetale site",
+   "sub": "",
+   "results": "8 hits: Condensed.profiniteSolid; CondensedMod.LocallyConstant.functor; Condensed.profiniteFree; CondensedMod.LocallyConstant.functorToPresheaves; CompHausLike.LocallyConstantModule.functor; LightCondMod.LocallyConstant.functor; LightCondMod.LocallyConstant.functorToPresheaves; LightCondensed.free",
+   "date": "2026-10-16",
+   "verdict": "No exact declaration: the semantic hits concern condensed locally constant/free modules and profinite functors, not compactification lower shriek on the scheme pro-etale site."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactificationLowerShriek|extensionByZero",
+   "sub": "",
+   "results": "0 hits: (none)",
+   "date": "2026-10-16",
+   "verdict": "No occurrence of the searched lower-shriek or extension-by-zero names in pinned Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero followed by direct image induces the additive left exact compactly supported direct image on modules over a ring object in proetale sheaves",
+   "sub": "",
+   "results": "8 hits: Condensed.profiniteSolid; LightCondMod.LocallyConstant.functorToPresheaves; CondensedMod.ofSheafProfinite; Condensed.profiniteFree; SheafOfModules.pushforward; CompHausLike.LocallyConstantModule.functor; LightCondMod.ofSheafLightProfinite; CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-16",
+   "verdict": "No exact match: returned condensed module constructors and general sheaf pushforward do not define compactification lower shriek on pro-etale module objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor between sheaves of modules on a proetale site whose underlying functor is extension by zero along an open subscheme followed by proper direct image",
+   "sub": "",
+   "results": "8 hits: LightCondMod.LocallyConstant.functorToPresheaves; SheafOfModules.pushforward; SheafOfModules.pushforwardSections; SheafOfModules.pushforwardPushforwardAdj; Condensed.profiniteSolid; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pushforward_obj_val; SheafOfModules.unitToPushforwardObjUnit",
+   "date": "2026-10-16",
+   "verdict": "No exact match: generic sheaf-module direct image and condensed-module constructors do not define the compactification lower shriek on pro-etale module objects."
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|extension.?by.?zero",
+   "sub": "CategoryTheory",
+   "results": "0 hits: (none)",
+   "date": "2026-10-16",
+   "verdict": "No matching shriek or extension-by-zero terminology in pinned Mathlib CategoryTheory source."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -59,5 +224,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-module-lower-shriek"
+ "unit": "sk-def-sfb-module-lower-shriek",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-module-lower-shriek",
+  "worker": "stage1",
+  "summary": "Audited the module-object lower shriek definition against the main-20261015 blueprint and the existing compactification, open extension-by-zero, pushforward, and finite-sheaf lower-shriek statements. No new node is needed: the underlying-sheaf identification, additivity, and left exactness follow by composing the cited factor properties. The statement and hypotheses are unchanged. Second reading makes the underlying-functor equality explicit on morphisms using existing restriction, linearization, and transport statements; invalid-path grep requests are replaced by correctly rooted searches.",
+  "blueprint": "Realizes the proof paragraph of def-sfb-module-lower-shriek.proof.md: choose the compactification, identify the underlying sheaf through i_! and g_*, then compose additivity and exact/left-exactness.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-module-lower-star",
+    "why": "The generic module-object pushforward statement supplies the underlying abelian-sheaf functor, additivity, and left exactness of g_*; this coefficient-category tool lies outside the lower-shriek unit and is not reproved here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-module-lower-star"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q13-67290e76d",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-67290e76d (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all four proof steps, eight cited nodes, blueprint sources, unit/chapter route, edge cases, searches, and coefficient/base-change typing. The split is mathematically correct, fully cited, and introduces no new nodes or duplicate/restated claims."
+ }
 }

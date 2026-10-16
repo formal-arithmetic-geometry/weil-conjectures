@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-monoidal-adjunction-unit-counit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sfb-modobj-transport-adjunction",
+   "place": "Proof, first paragraph: 'For a monoidal adjunction the unit ... is a monoidal natural transformation'; second paragraph: the tensor coherence used in the forward calculation and 'the same computation with the counit'.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Unit and counit of a monoidal adjunction are monoidal",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be monoidal categories, let $F:\\mathcal C\\to\\mathcal D$ be strong monoidal and $G:\\mathcal D\\to\\mathcal C$ lax monoidal, and let $F\\dashv G$ be an adjunction whose lax structure on $G$ is the mate of the inverse monoidal structure on $F$ (mates in the sense of [def-weil-pbc-adjunction-mate]). Write $u:\\mathrm{id}_{\\mathcal C}\\Rightarrow GF$ and $c:FG\\Rightarrow\\mathrm{id}_{\\mathcal D}$ for its unit and counit, with the natural Hom-bijection convention of [lem-weil-pbc-adjunction-of-natural-bijection]. Then $u$ and $c$ are monoidal natural transformations, for the composite lax monoidal structures on $GF$ and $FG$. Here a natural transformation $t:H\\Rightarrow K$ of lax monoidal functors is monoidal when $t_{\\mathbf1}\\circ\\varepsilon^H=\\varepsilon^K$ and $t_{X\\otimes Y}\\circ\\mu^H_{X,Y}=\\mu^K_{X,Y}\\circ(t_X\\otimes t_Y)$ for all objects $X,Y$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport-adjunction.proof.md",
+  "place": "Proof, first paragraph (unit); converse calculation in the second paragraph (counit). Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, lines 137–156."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit and counit of a monoidal adjunction are monoidal natural transformations",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit; CategoryTheory.Adjunction.mapMon_counit; CategoryTheory.Adjunction.unit; CategoryTheory.ihom.coev; CategoryTheory.Adjunction.mapMon; CategoryTheory.NatTrans.IsMonoidal.of_cartesianMonoidalCategory; CategoryTheory.NatTrans.IsMonoidal.mk",
+   "date": "2026-10-16",
+   "verdict": "match: the unit and counit instances; source read at lines 137–156"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.IsMonoidal",
+   "results": "CategoryTheory.Adjunction.instIsMonoidalId; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.Adjunction.instIsMonoidal_1; CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit; CategoryTheory.Adjunction.unit_app_unit_comp_map_η",
+   "date": "2026-10-16",
+   "verdict": "related: the compatibility class and mate equations; the unit and counit instances are found by both semantic searches and the source grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit and counit of a monoidal adjunction are monoidal natural transformations when the left adjoint is strong monoidal",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.mapMon_unit; CategoryTheory.Adjunction.mapMon_counit; CategoryTheory.Adjunction.instIsMonoidalId; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.Functor.Monoidal.map_η_ε; CategoryTheory.Adjunction.isMonoidal_comp",
+   "date": "2026-10-16",
+   "verdict": "match: the unit and counit instances; source read at lines 137–156"
+  },
+  {
+   "tool": "grep",
+   "query": "^instance : NatTrans.IsMonoidal adj\\.(unit|counit)",
+   "results": "Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean:140: instance : NatTrans.IsMonoidal adj.unit where; :150: instance : NatTrans.IsMonoidal adj.counit where; directory argument: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "match: the unit and counit instances; source read at lines 137–156"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible adjunction between monoidal functors has monoidal unit and counit transformations",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.Functor.Monoidal.map_η_ε; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.Adjunction.unit_app_unit_comp_map_η; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: match for the unit and counit instances; declaration source and hypotheses read at NaturalTransformation.lean lines 137–156."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.IsMonoidal, CategoryTheory.Adjunction.unit",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: match for the unit instance; declaration source and hypotheses read at NaturalTransformation.lean lines 137–156."
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.IsMonoidal adj\\.(unit|counit)",
+   "results": "Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean; Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean; exact declarations at lines 140 and 150; directory argument: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: match for the unit and counit instances; declaration source and hypotheses read at NaturalTransformation.lean lines 137–156."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction between a tensor functor and its lax right adjoint has tensor-compatible unit and counit",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.mapMon_unit",
+   "date": "2026-10-16",
+   "verdict": "Final independent second reading: match for the unit and counit instances; checked the declarations and their hypotheses at NaturalTransformation.lean:137–156, and the mate compatibility class at Functor.lean:1002–1006."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.IsMonoidal, CategoryTheory.Adjunction.counit",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit",
+   "date": "2026-10-16",
+   "verdict": "Final independent second reading: match for the counit instance; checked the declarations and their hypotheses at NaturalTransformation.lean:137–156, and the mate compatibility class at Functor.lean:1002–1006."
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.IsMonoidal adj\\.(unit|counit)|class IsMonoidal",
+   "results": "Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean; Mathlib/CategoryTheory/Monoidal/Subcategory.lean; Mathlib/CategoryTheory/Monoidal/Subcategory.lean; Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean; Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean; Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; actual hits read: Widesubcategory.lean:54, Subcategory.lean:64,69, NaturalTransformation.lean:46,140,150, Functor.lean:1002; directory argument: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "Final independent second reading: match for the unit and counit instances; checked the declarations and their hypotheses at NaturalTransformation.lean:137–156, and the mate compatibility class at Functor.lean:1002–1006."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit",
+  "file": "Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+  "how": "exact: with [F.Monoidal], [G.LaxMonoidal], [adj.IsMonoidal] at line 137, the unit instance is declared at line 140 (proof through line 148) and the counit instance at line 150 (proof through line 156). The displayed definition of monoidal natural transformation is NatTrans.IsMonoidal at lines 46–48. No assumption that G is strong, no braiding, and no module objects are needed.",
+  "line": 140
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-modobj-transport-adjunction",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-transport",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -24,9 +24,102 @@
   "def-pc-flat-sheaf-modules",
   "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $U$. Use the locally finite presentation hypothesis to choose a covering $\\{W_\\alpha\\to U\\}$ and, on each $W=W_\\alpha$, a presentation $\\mathcal O_W^{\\oplus r}\\xrightarrow{A}\\mathcal O_W^{\\oplus s}\\xrightarrow{q}N|_W\\to0$. By [def-pur-localized-ringed-site], the object $W/W$ is terminal in the slice and $(N|_W)(W/W)=N(W)$. A morphism $\\mathcal O_W^{\\oplus s}\\to N|_W$ is specified by sections $u_1,\\ldots,u_s\\in N(W)$: on $T\\to W$ it sends $(x_p)$ to $\\sum_p x_p u_p|_T$, by the linearity and naturality in [def-weil-sheaf-of-modules-category]. Likewise $A$ is a matrix $(a_{pj})$ over $\\mathcal O(W)$. Finite direct sums here have section groups given by finite tuples, since finite products of sheaves satisfy the sheaf axiom and are biproducts of module sheaves. The equality $qA=0$ reads $\\sum_p a_{pj}u_p=0$ for every column $j$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08FD (lemma-flat-locally-finite-presentation), choose the finite presentation; sectionwise reading of maps on the localized site"
+   }
+  },
+  {
+   "text": "We prove the following claim by induction on $m$, simultaneously for every object $W$ and every $n\\ge0$: if $\\mathcal O_W^{\\oplus m}\\xrightarrow{A}\\mathcal O_W^{\\oplus n}\\xrightarrow{g}N|_W$ has $gA=0$, there is a covering $\\{V\\to W\\}$ on which $g=pB$, with $B:\\mathcal O_V^{\\oplus n}\\to\\mathcal O_V^{\\oplus l}$ and $p:\\mathcal O_V^{\\oplus l}\\to N|_V$ for a finite $l\\ge0$, and $BA|_V=0$. For $m=0$, take the identity covering, $l=n$, $B=\\operatorname{id}$, $p=g$. The identity covering is permitted by [def-weil-pbc-sites-and-cohomology]. Relocalization in [def-pur-localized-ringed-site] identifies each further restriction with the restriction directly to $V$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08FC (lemma-flat-eq), proof of (2) implies (3), induction statement and base case"
+   }
+  },
+  {
+   "text": "For the induction step $m>0$, write $u_p=g(e_p)\\in N(W)$ and let $(a_p)$ be the last column of $A$. The relation $\\sum_p a_pu_p=0$ satisfies exactly the hypotheses of [lem-weil-pbc-site-flat-equational-criterion], applied to the original flat sheaf $N$ on $\\mathcal C$ and the object $W$. This gives a covering $\\{W_i\\to W\\}$, integers $l_i\\ge0$, coefficients $b_{ipq}\\in\\mathcal O(W_i)$ and sections $t_{iq}\\in N(W_i)$ such that $u_p|_{W_i}=\\sum_q b_{ipq}t_{iq}$ and $\\sum_p a_p|_{W_i}b_{ipq}=0$. Define $B_i(e_p)=\\sum_q b_{ipq}e_q$ and $p_i(e_q)=t_{iq}$, extended by the sectionwise linear formulas of Step 1. Then $p_iB_i=g|_{W_i}$ and the last column of $B_iA|_{W_i}$ is zero. The criterion is used only for a single relation, exactly as its statement provides; no assertion about flatness of section modules is made.",
+   "uses": [
+    "lem-weil-pbc-site-flat-equational-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08FC (lemma-flat-eq), implication (1) to (2) and first part of the induction (2) to (3)"
+   }
+  },
+  {
+   "text": "Let $A_i'$ consist of the first $m-1$ columns of $B_iA|_{W_i}$. We have $p_iA_i'=0$, since $p_iB_iA|_{W_i}=gA|_{W_i}=0$. The induction hypothesis applies to $A_i',p_i$ on $W_i$, with source rank $m-1$ and middle rank $l_i$. Thus on a covering $\\{V_{ih}\\to W_i\\}$ there are $C_{ih},p_{ih}$ with $p_{ih}C_{ih}=p_i|_{V_{ih}}$ and $C_{ih}A_i'|_{V_{ih}}=0$. Put $B_{ih}=C_{ih}B_i|_{V_{ih}}$. Its composite with $A|_{V_{ih}}$ kills the first $m-1$ columns by this equality and the last column because $B_iA|_{W_i}$ already kills it. Moreover $p_{ih}B_{ih}=p_i|_{V_{ih}}B_i|_{V_{ih}}=g|_{V_{ih}}$. The composite family $\\{V_{ih}\\to W\\}$ covers by covering transitivity in [def-weil-pbc-sites-and-cohomology]; restrictions compose by [def-pur-localized-ringed-site]. This completes the induction. All these are matrix compositions, the induction hypothesis and the covering axiom, not additional factorization lemmas.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08FC (lemma-flat-eq), proof of (2) implies (3), induction on the number of columns"
+   }
+  },
+  {
+   "text": "Apply the established claim to the presentation $A,q$ from Step 1, with $m=r$ and $n=s$. On a covering $V\\to W$ it gives maps $B:\\mathcal O_V^{\\oplus s}\\to\\mathcal O_V^{\\oplus l}$ and $p:\\mathcal O_V^{\\oplus l}\\to N|_V$ with $pB=q|_V$ and $BA|_V=0$. By [lem-pur-site-restriction-module-adjunction-exact], applied to the ringed slice $(\\mathcal C/W,\\mathcal O_W)$ and its object $V/W$, restriction preserves the exact presentation, so $\\mathcal O_V^{\\oplus r}\\xrightarrow{A|_V}\\mathcal O_V^{\\oplus s}\\xrightarrow{q|_V}N|_V\\to0$ is exact. Relocalization and the finite-tuple description in Step 1 identify the restricted modules and maps with those displayed. In particular $q|_V$ is a cokernel of $A|_V$ in the abelian category of module sheaves.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08FD (lemma-flat-locally-finite-presentation), finite-relation factorization; exact restriction on the localized ringed site"
+   }
+  },
+  {
+   "text": "Since $BA|_V=0$, the universal property of the cokernel $q|_V$ gives a unique module-sheaf map $i:N|_V\\to\\mathcal O_V^{\\oplus l}$ with $i(q|_V)=B$. It satisfies $(pi)(q|_V)=pB=q|_V$. A cokernel is an epimorphism, so cancellation gives $pi=\\operatorname{id}_{N|_V}$. These are the defining universal properties of cokernel and epimorphism in the abelian module category [def-weil-sheaf-of-modules-category]. In particular we construct a section of $p$; no sectionwise lifting of sections through $q$ is assumed.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08FD (lemma-flat-locally-finite-presentation), final sentence, cokernel descent and the explicit section"
+   }
+  },
+  {
+   "text": "Compose the coverings $V\\to W_\\alpha\\to U$ using [def-weil-pbc-sites-and-cohomology]. On each resulting member take $n_j=l$ and the maps $i_j=i$, $p_j=p$ just constructed. The identities $p_ji_j=\\operatorname{id}$ give the required conclusion for the original arbitrary object $U$. The argument permits all ranks to be zero: for $r=0$ the induction uses the identity factorization; for $s=0$ the epimorphism $0\\to N|_W$ forces $N|_W=0$, and the same cokernel argument works with rank zero. Empty covering families, when allowed by the topology, also cause no exception to the covering conclusion.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08FD (lemma-flat-locally-finite-presentation), compose local choices to obtain a covering of the original object"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-flat-equational-criterion",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08FD (lemma-flat-locally-finite-presentation), using the explicit induction (2) to (3) in Tag 08FC (lemma-flat-eq); the cokernel section in the final sentence is written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -83,10 +176,66 @@
    "results": "{\"t\": \"2026-10-16T11:40:16Z\", \"tool\": \"grep\", \"query\": \"SheafOfModules.*(Flat|Projective)|IsFinitePresentation.*(retract|projective)|locally.*projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\"], \"digest\": \"dce60e1254ed04ca\"} Second reader inspected Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:74-122,267-286. The returned presentation declarations construct presentations from an existing cokernel; they do not split an epimorphism from flatness. Module.Flat.projective_of_finitePresentation in Mathlib/RingTheory/Flat/EquationalCriterion.lean:287 applies to ordinary modules. The grep hits concern derived Ext and a projective spectrum, not this local sheaf assertion.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented sheaf of modules on a ringed site is locally a direct summand of a finite free sheaf",
+   "results": "{\"t\": \"2026-10-16T13:37:53Z\", \"tool\": \"leanfinder\", \"query\": \"A flat locally finitely presented sheaf of modules on a ringed site is locally a direct summand of a finite free sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\"], \"digest\": \"44e9d5a3276e08e7\"} Read the returned signatures. SheafOfModules.IsFinitePresentation and the QuasicoherentData results provide presentations or generators only (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:267-286), not a local splitting. Module.Flat.exists_factorization_of_finitePresentation and Module.Flat.projective_of_finitePresentation (Mathlib/RingTheory/Flat/EquationalCriterion.lean:270,287) concern modules over one ring and do not specialize to module sheaves. The sheaf-directory grep finds no flatness declaration; the ordinary-ring grep finds precisely these ordinary-module results.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"FinitePresentation\"",
+   "results": "{\"t\": \"2026-10-16T13:38:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"FinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.projective_of_finitePresentation\", \"Module.Flat.exists_factorization_of_finitePresentation\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"RingHom.FinitePresentation.codescendsAlong_faithfullyFlat\", \"Algebra.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.Scheme.instEffectiveEpiOfLocallyOfFinitePresentationOfSurjectiveOfFlat\"], \"digest\": \"843b4157cf0541d8\"} Read the returned signatures. SheafOfModules.IsFinitePresentation and the QuasicoherentData results provide presentations or generators only (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:267-286), not a local splitting. Module.Flat.exists_factorization_of_finitePresentation and Module.Flat.projective_of_finitePresentation (Mathlib/RingTheory/Flat/EquationalCriterion.lean:270,287) concern modules over one ring and do not specialize to module sheaves. The sheaf-directory grep finds no flatness declaration; the ordinary-ring grep finds precisely these ordinary-module results.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat|Flat",
+   "results": "{\"t\": \"2026-10-16T13:38:18Z\", \"tool\": \"grep\", \"query\": \"flat|Flat\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures. SheafOfModules.IsFinitePresentation and the QuasicoherentData results provide presentations or generators only (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:267-286), not a local splitting. Module.Flat.exists_factorization_of_finitePresentation and Module.Flat.projective_of_finitePresentation (Mathlib/RingTheory/Flat/EquationalCriterion.lean:270,287) concern modules over one ring and do not specialize to module sheaves. The sheaf-directory grep finds no flatness declaration; the ordinary-ring grep finds precisely these ordinary-module results.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat sheaf of modules of finite presentation is locally a retract of a finite free module sheaf on a site",
+   "results": "{\"t\": \"2026-10-16T13:38:25Z\", \"tool\": \"leansearch\", \"query\": \"A flat sheaf of modules of finite presentation is locally a retract of a finite free module sheaf on a site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.projective_of_finitePresentation\", \"SheafOfModules.free\", \"Module.Flat.of_retract\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation\", \"Module.Flat.of_free\", \"SheafOfModules.ιFree\"], \"digest\": \"353f50f4c7ba8a2b\"} Read the returned signatures. SheafOfModules.IsFinitePresentation and the QuasicoherentData results provide presentations or generators only (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:267-286), not a local splitting. Module.Flat.exists_factorization_of_finitePresentation and Module.Flat.projective_of_finitePresentation (Mathlib/RingTheory/Flat/EquationalCriterion.lean:270,287) concern modules over one ring and do not specialize to module sheaves. The sheaf-directory grep finds no flatness declaration; the ordinary-ring grep finds precisely these ordinary-module results.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor-exact module object with a finite presentation locally has a splitting into a finite coproduct of the structure sheaf",
+   "results": "{\"t\": \"2026-10-16T13:38:36Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor-exact module object with a finite presentation locally has a splitting into a finite coproduct of the structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.Presentation.IsFinite\"], \"digest\": \"8c37aa466305c97a\"} Read the returned signatures. SheafOfModules.IsFinitePresentation and the QuasicoherentData results provide presentations or generators only (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:267-286), not a local splitting. Module.Flat.exists_factorization_of_finitePresentation and Module.Flat.projective_of_finitePresentation (Mathlib/RingTheory/Flat/EquationalCriterion.lean:270,287) concern modules over one ring and do not specialize to module sheaves. The sheaf-directory grep finds no flatness declaration; the ordinary-ring grep finds precisely these ordinary-module results.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(finitePresentation|finite_presentation)|finitePresentation.*flat",
+   "results": "{\"t\": \"2026-10-16T13:39:00Z\", \"tool\": \"grep\", \"query\": \"flat.*(finitePresentation|finite_presentation)|finitePresentation.*flat\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\"], \"digest\": \"d718ffbb5ab3c567\"} Read the returned signatures. SheafOfModules.IsFinitePresentation and the QuasicoherentData results provide presentations or generators only (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:267-286), not a local splitting. Module.Flat.exists_factorization_of_finitePresentation and Module.Flat.projective_of_finitePresentation (Mathlib/RingTheory/Flat/EquationalCriterion.lean:270,287) concern modules over one ring and do not specialize to module sheaves. The sheaf-directory grep finds no flatness declaration; the ordinary-ring grep finds precisely these ordinary-module results.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizable|projective|flat",
+   "results": "{\"t\": \"2026-10-16T14:32:06Z\", \"tool\": \"grep\", \"query\": \"dualizable|projective|flat\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Independent second reading: inspected Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:74-122,267-286 and Mathlib/RingTheory/Flat/EquationalCriterion.lean:250-290. Sheaf hits supply presentations, not their local splitting. The ordinary-module factorization and projectivity results do not specialize to sheaves on an arbitrary site. The sheaf-directory grep has zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally split presentations for dualizable module sheaves: finite presentation and exact tensor imply local projectivity on a ringed Grothendieck site",
+   "results": "{\"t\": \"2026-10-16T14:32:08Z\", \"tool\": \"leanfinder\", \"query\": \"Locally split presentations for dualizable module sheaves: finite presentation and exact tensor imply local projectivity on a ringed Grothendieck site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.presentationOfIsCokernelFree\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\"], \"digest\": \"c07034d36123d9f3\"} Independent second reading: inspected Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:74-122,267-286 and Mathlib/RingTheory/Flat/EquationalCriterion.lean:250-290. Sheaf hits supply presentations, not their local splitting. The ordinary-module factorization and projectivity results do not specialize to sheaves on an arbitrary site. The sheaf-directory grep has zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sf-site-perfect-tor-window",
   "by": "worker",
@@ -102,5 +251,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-site-flat-fp-finite-retract",
+  "worker": "stage1",
+  "summary": "Kept the statement and all its hypotheses after checking Stacks 08FD. No exact slopmaster2 declaration or Mathlib theorem found. Reused the existing single-relation site-flatness criterion and the exact module-slice restriction theorem; wrote out the finite-column induction, its matrix compositions, and the cokernel section. No new nodes. Corrected only the source proof notation n_r/n_1 in the exposition, not the statement.",
+  "blueprint": "thm-sf-hom-ctf, sharper-assertion sentence choosing the finite projective model in [a,b], through lem-sf-site-perfect-tor-window: this proves its flat finitely presented endpoint is locally a finite-free retract. The main-20261015 proof in sec-smooth-purity/sk-lem-sp-tower retains that sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-flat-equational-criterion",
+    "why": "The 08FD finite-presentation argument needs the local single-relation factorization criterion for flat module sheaves. It is a generic ringed-site tool, absent as a statement of this unit; the finite-column induction is proved here."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Restriction of the finite presentation to a covering member must stay exact in module sheaves. This generic slice-exactness tool supplies that assertion for arbitrary ringed sites; this unit has no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-flat-equational-criterion",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-c519329dc",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-c519329dc (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, Stacks 08FD/08FC, and unit/chapter route. All seven steps are valid; edge cases and duplicate candidates checked. Accept both declared generic tool uses. No new nodes, repairs, or target weakening. Detailed findings written to review.md."
  }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-dc-lower-star",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "$Rf_*$ on $D_{\\mathrm{cons}}$",
@@ -20,9 +20,73 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructible.*LowerStar|lowerStar.*boundedConstructible",
+   "results": "0 hits: none; supplied subdirectory Mathlib duplicates the root component; this invocation is not evidence of absence and was rerun correctly",
+   "date": "2026-10-16",
+   "verdict": "invalid directory; corrected search recorded separately"
+  },
+  {
+   "tool": "grep",
+   "query": "ObjectProperty\\.lift|liftCompιIso",
+   "results": "0 hits: none; supplied subdirectory Mathlib duplicates the root component; this invocation is not evidence of absence and was rerun correctly",
+   "date": "2026-10-16",
+   "verdict": "invalid directory; corrected search recorded separately"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pushforward restricts to bounded constructible complexes",
+   "results": "8 hits: TopCat.Sheaf.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pushforward_map_app",
+   "date": "2026-10-16",
+   "verdict": "no match: exact-functor derived maps and underived sheaf pushforwards do not state this project-specific definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Restrict, DerivedCategory.boundedConstructible",
+   "results": "0 hits: none; loogle: unknown identifier 'Functor.Restrict'",
+   "date": "2026-10-16",
+   "verdict": "query rejected: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.lift, Functor.IsFull",
+   "results": "0 hits: none; loogle: unknown identifier 'ObjectProperty.lift'",
+   "date": "2026-10-16",
+   "verdict": "query rejected: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ambient derived pushforward restricted along a full subcategory preserving an object property",
+   "results": "8 hits: CategoryTheory.ObjectProperty.lift, CategoryTheory.LocalizerMorphism.Derives, CategoryTheory.wideSubcategoryInclusion, CategoryTheory.wideInducedFunctor, CategoryTheory.ObjectProperty.ιOfLE, CategoryTheory.ObjectProperty.fullyFaithfulιOfLE, CategoryTheory.InducedWideCategory, CategoryTheory.InducedWideCategory.category",
+   "date": "2026-10-16",
+   "verdict": "generic full-subcategory construction supports the definition; no match for its coefficient-specific preservation examples"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of derived pushforward to bounded constructible complexes",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.sheafPushforwardCocontinuous, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism_functor",
+   "date": "2026-10-16",
+   "verdict": "no match: exact-functor derived maps and underived sheaf pushforwards do not state this project-specific definition"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible.*LowerStar|lowerStar.*boundedConstructible",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|def liftCompιIso",
+   "results": "3 hits: Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean",
+   "date": "2026-10-16",
+   "verdict": "generic full-subcategory construction supports the definition; no match for its coefficient-specific preservation examples"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -36,5 +100,21 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-dc-restricted-functors"
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-dc-lower-star",
+  "worker": "stage1",
+  "summary": "Audited the imported definition against the current main-20261015 blueprint and the read-only slopmaster2 source. No finished declaration states this project-specific restricted pushforward. The definition is complete from its three existing statement dependencies, so no child node was created; proof and proof dependencies remain empty.",
+  "blueprint": "The split realizes the complete definition statement at node def-sfb-dc-lower-star, order 1782; as a definition it has no proof steps.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q51-b1a350027",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q51-b1a350027 (reviewer sub-agent of L); spot-checked: Read the full definition, three dependency statements and cited blueprint sources, unit/chapter route, packet and report. Verified the restriction construction, coefficient category, inclusion compatibility and small cases; checked the archived proper-target interface. No new nodes, circular split, forbidden source use or repair needed. Detailed checks are in review.md; accepted tool_uses: none."
+ }
 }

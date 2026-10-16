@@ -1,0 +1,92 @@
+{
+ "id": "lem-sfb-strong-monoidal-of-invertible-oplax",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sfb-finite-upper-star-monoidal",
+   "place": "The statement clause \"Its structure maps are invertible ... so g^* is a strong monoidal functor\"; generic promotion of an oplax structure.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invertible oplax comparisons define a strong monoidal structure",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories [def-nagata-category] equipped with monoidal structures [def-sfb-monoidal-category], that is, tensor bifunctors, unit objects $\\mathbf 1_{\\mathcal C},\\mathbf 1_{\\mathcal D}$, and natural associator and left and right unitor isomorphisms satisfying the pentagon and triangle identities. Let $L:\\mathcal C\\to\\mathcal D$ be a functor, equipped with an oplax monoidal structure: a map $d_0:L\\mathbf 1_{\\mathcal C}\\to\\mathbf 1_{\\mathcal D}$ and natural maps $d_{X,Y}:L(X\\otimes Y)\\to LX\\otimes LY$ satisfying the oplax associativity and the two unit identities. Suppose $d_0$ and every $d_{X,Y}$ are isomorphisms. Then $L$ has the strong monoidal structure [def-sfb-strong-monoidal-functor] with lax unit $d_0^{-1}:\\mathbf 1_{\\mathcal D}\\to L\\mathbf 1_{\\mathcal C}$ and lax tensor maps $d_{X,Y}^{-1}:LX\\otimes LY\\to L(X\\otimes Y)$; its oplax comparison maps are the given $d_0,d_{X,Y}$.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+  "place": "CategoryTheory.Functor.Monoidal.ofOplaxMonoidal, lines 764-766, using CoreMonoidal.ofOplaxMonoidal at lines 743-751 (inverse unit/tensor isomorphisms at 745-746) and CoreMonoidal.toMonoidal at lines 727-730."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An oplax monoidal functor whose unit and tensor comparison maps are isomorphisms has a strong monoidal structure with inverse lax maps",
+   "results": "CategoryTheory.Functor.Monoidal.ofOplaxMonoidal; CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal; CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_μIso; CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_εIso; CategoryTheory.Functor.Monoidal.inv_δ; CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal_δ; CategoryTheory.Functor.Monoidal.μIso_inv; CategoryTheory.Functor.CoreMonoidal.ofLaxMonoidal",
+   "date": "2026-10-16",
+   "verdict": "match: Monoidal.ofOplaxMonoidal and CoreMonoidal.ofOplaxMonoidal"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal.ofOplaxMonoidal",
+   "results": "CategoryTheory.Functor.Monoidal.ofOplaxMonoidal",
+   "date": "2026-10-16",
+   "verdict": "match: exact promotion construction"
+  },
+  {
+   "tool": "grep",
+   "query": "def Monoidal.ofOplaxMonoidal|def ofOplaxMonoidal|def leftAdjointOplaxMonoidal",
+   "results": "Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean",
+   "date": "2026-10-16",
+   "verdict": "match: Mathlib/CategoryTheory/Monoidal/Functor.lean:764 and 743; definitions read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An oplax monoidal functor with invertible unit and tensor comparison maps is strong monoidal",
+   "results": "CategoryTheory.Functor.Monoidal.ofBifunctor; CategoryTheory.Functor.Monoidal.mk; CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal; CategoryTheory.Functor.CoreMonoidal.toMonoidal; CategoryTheory.Functor.Monoidal.ofLaxMonoidal; CategoryTheory.Functor.OplaxMonoidal.ofBifunctor; CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_μIso; CategoryTheory.Functor.Monoidal.ofOplaxMonoidal",
+   "date": "2026-10-16",
+   "verdict": "match: Monoidal.ofOplaxMonoidal, with the inverse constraints supplied by CoreMonoidal.ofOplaxMonoidal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A colax tensor functor is strong precisely when its comultiplication and counit are invertible, with their inverses as tensorators",
+   "results": "{\"t\": \"2026-10-16T14:29:21Z\", \"tool\": \"leanfinder\", \"query\": \"A colax tensor functor is strong precisely when its comultiplication and counit are invertible, with their inverses as tensorators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_εIso\", \"CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal_δ\", \"CategoryTheory.Functor.Monoidal.inv_δ\", \"CategoryTheory.Functor.Monoidal.μIso_inv\", \"CategoryTheory.Functor.Monoidal.εIso_inv\", \"CategoryTheory.Functor.Monoidal.instIsIsoδ\", \"CategoryTheory.unitOfTensorIsoUnit\", \"CategoryTheory.Functor.obj.ε_def_assoc\"], \"digest\": \"ddd9c72bf847b39e\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: independent query; exact construction and hypotheses checked in the pinned Mathlib source."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal, CategoryTheory.Functor.Monoidal",
+   "results": "{\"t\": \"2026-10-16T14:30:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.OplaxMonoidal, CategoryTheory.Functor.Monoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.toOplaxMonoidal\", \"CategoryTheory.Functor.Monoidal.toOplaxMonoidal_injective\", \"CategoryTheory.Functor.Monoidal.ofOplaxMonoidal\", \"CategoryTheory.Functor.Monoidal.mk\"], \"digest\": \"0c98c2126c74ea2d\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: independent query; exact construction and hypotheses checked in the pinned Mathlib source."
+  },
+  {
+   "tool": "grep",
+   "query": "def leftAdjointOplaxMonoidal|noncomputable def (Monoidal\\.)?ofOplaxMonoidal",
+   "results": "{\"t\": \"2026-10-16T14:29:37Z\", \"tool\": \"grep\", \"query\": \"def leftAdjointOplaxMonoidal|noncomputable def (Monoidal\\\\.)?ofOplaxMonoidal\", \"sub\": \"CategoryTheory/Monoidal/Functor.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"743\", \"764\", \"1064\"], \"digest\": \"9dc0c6faa5397fa8\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: independent query; exact construction and hypotheses checked in the pinned Mathlib source."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.Monoidal.ofOplaxMonoidal",
+  "file": "Mathlib/CategoryTheory/Monoidal/Functor.lean",
+  "line": 764,
+  "how": "exact: CategoryTheory.Functor.Monoidal.ofOplaxMonoidal, lines 764-766, using CoreMonoidal.ofOplaxMonoidal at lines 743-751 (inverse unit/tensor isomorphisms at 745-746) and CoreMonoidal.toMonoidal at lines 727-730."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-finite-upper-star-monoidal",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-finite-pushforward-pullback"
+}
