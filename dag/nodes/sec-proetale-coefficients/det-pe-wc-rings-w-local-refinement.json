@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-wc-rings-w-local-refinement",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A w-local refinement over the closed points",
@@ -13,47 +13,153 @@
   "place": "node det-pe-wc-rings-w-local-refinement, order None"
  },
  "stmt_deps": [
-  "det-pe-wlocal-strict-contractible"
+  "det-pe-wlocal-strict-contractible",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-faithfully-flat-ring-map"
  ],
  "proof": [
   {
-   "text": "Let $B^w$ be the w-localization of $B$ ([def-weil-pbc-w-localization]). By\n[lem-weil-pbc-w-localization-points] its points are pairs $(x,y)$ of primes of $B$ with\n$y\\subset x$, with local ring $B_y$ and with contraction $y$ to $B$; its closed points are\nthe pairs $(x,x)$, and they form a closed subset.",
+   "text": "Put $C=B^w$ using [def-weil-pbc-w-localization]. By [lem-weil-pbc-w-localization-points], every point of $\\operatorname{Spec}C$ has the form $(x,y)$ with $y\\subseteq x$ prime ideals of $B$, contracts to $y$, and has local ring canonically $B_y$. Its closed points are $t_x=(x,x)$ and form a closed subset. The map $B\\to C$ is ind-Zariski by its defining presentation.",
    "uses": [
     "def-weil-pbc-w-localization",
     "lem-weil-pbc-w-localization-points"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-w-local-refinement.proof.md",
+    "place": "Proof, paragraph 1 (cf. Stacks Tag 0975, lemma-make-w-local)"
+   }
   },
   {
-   "text": "Since $R$ is w-local, its set of maximal ideals is closed, say $V(I)$ with $I$ radical. Let\n$T\\subset\\operatorname{Spec}B^w$ be the set of closed points $(x,x)$ lying in\n$V(IB^w)$. A closed point $(x,x)$ contracts to $x$ in $B$, so it lies in $V(IB^w)$ iff\n$I\\subset x\\cap R$, i.e. iff $x\\cap R$ is maximal. Thus $T$ is closed (an intersection of\ntwo closed sets), consists of closed points, and corresponds to the primes of $B$ lying\nover maximal ideals of $R$.",
-   "uses": [],
-   "elementary": null
+   "text": "By the definition of w-locality in [det-pe-wlocal-strict-contractible], the maximal ideals of $R$ form a closed subset $V(I)$; choose any ideal cutting it out. Set $T=(\\operatorname{Spec}C)^c\\cap V(IC)$. Both factors are closed, so $T$ is Zariski closed and consists of closed points of $\\operatorname{Spec}C$. Since $t_x$ contracts to $x$ in $B$, it belongs to $V(IC)$ exactly when $I\\subseteq x\\cap R$. The contraction $x\\cap R$ is prime, so this is equivalent to $x\\cap R\\in V(I)$, hence to $x\\cap R$ being maximal. Thus $T=\\{t_x:x\\cap R\\text{ is maximal}\\}$.",
+   "uses": [
+    "det-pe-wlocal-strict-contractible",
+    "lem-weil-pbc-w-localization-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-w-local-refinement.proof.md",
+    "place": "Proof, paragraph 2"
+   }
   },
   {
-   "text": "Put $B'=(B^w)_{[T]}$ ([def-weil-pbc-retained-localization]). By\n[lem-weil-pbc-retained-localization], $B^w\\to B'$ is ind-Zariski, its points are the points\nof $\\operatorname{Spec}B^w$ generalizing a point of $T$, with unchanged local rings, and,\nsince all points of $T$ are closed, $\\operatorname{Spec}B'$ is w-local with closed point set\n$T$. This gives 2 and 4, and the first half of 3. The map $B\\to B^w$ is ind-Zariski, so\n$B\\to B'$ is ind-Zariski and $R\\to B'$ is ind-étale by\n[lem-weil-pbc-ind-etale-stability]; this is 1. For surjectivity in 3: a maximal ideal\n$\\mathfrak m$ of $R$ is the image of some prime $x$ of $B$ because $R\\to B$ is faithfully\nflat, and then $(x,x)\\in T$ maps to $\\mathfrak m$.",
+   "text": "Apply [def-weil-pbc-retained-localization] and [lem-weil-pbc-retained-localization] with the ring $C$ and the closed subset $T$, and put $B'=C_{[T]}$. The map $C\\to B'$ is ind-Zariski. Its points are pairs $(t,q)$ of primes of $C$ with $t\\in T$ and $q\\subseteq t$, and their local rings are canonically $C_q$. Because every point of $T$ is closed, the lemma makes $\\operatorname{Spec}B'$ w-local, with closed points $(t,t)$ indexed by $t\\in T$. This proves clause 2.",
    "uses": [
     "def-weil-pbc-retained-localization",
+    "lem-weil-pbc-retained-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-w-local-refinement.proof.md",
+    "place": "Proof, paragraph 3, construction and w-locality (cf. Stacks Tag 0979, lemma-localize-along-closed-profinite)"
+   }
+  },
+  {
+   "text": "For a point $(t,q)$ of $\\operatorname{Spec}B'$, write the point $q$ of $\\operatorname{Spec}C$ as $(x,y)$ by [lem-weil-pbc-w-localization-points]. The canonical maps identify $B_y\\cong C_q\\cong B'_{(t,q)}$, the second identification being [lem-weil-pbc-retained-localization]. Their composite is the map induced by $B\\to C\\to B'$, since each map is the canonical localized structural map. In particular its contraction to $B$ is $y$, and every local ring of $B'$ is the corresponding local ring of $B$, as required in clause 4. A closed point of $B'$ is $(t_x,t_x)$ for $t_x\\in T$; its contraction to $R$ is $x\\cap R$, which is maximal by step 2. This proves the first assertion of clause 3.",
+   "uses": [
+    "lem-weil-pbc-w-localization-points",
+    "lem-weil-pbc-retained-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-w-local-refinement.proof.md",
+    "place": "Proof, paragraph 3, local rings and images of closed points"
+   }
+  },
+  {
+   "text": "The two maps $B\\to C$ and $C\\to B'$ are ind-Zariski by [def-weil-pbc-w-localization] and [lem-weil-pbc-retained-localization]. Their composite $B\\to B'$ is ind-Zariski by [lem-weil-pbc-ind-etale-stability]. An ind-Zariski presentation is in particular an ind-étale presentation, by [def-weil-pbc-ind-etale-algebra]. Applying the composition assertion of [lem-weil-pbc-ind-etale-stability] to the hypothesized ind-étale map $R\\to B$ and this ind-étale map $B\\to B'$ proves clause 1.",
+   "uses": [
+    "def-weil-pbc-w-localization",
     "lem-weil-pbc-retained-localization",
+    "def-weil-pbc-ind-etale-algebra",
     "lem-weil-pbc-ind-etale-stability"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-w-local-refinement.proof.md",
+    "place": "Proof, paragraph 3, composition of algebra maps"
+   }
+  },
+  {
+   "text": "For a maximal ideal $\\mathfrak m$ of $R$, faithful flatness of $R\\to B$ and [lem-weil-pbc-faithfully-flat-surjective-spectrum] give a prime $x$ of $B$ with $x\\cap R=\\mathfrak m$. By step 2, $t_x=(x,x)$ belongs to $T$; the closed point $(t_x,t_x)$ of $\\operatorname{Spec}B'$ supplied in step 3 therefore contracts to $\\mathfrak m$. This proves surjectivity on closed points, completing clause 3. If $R$ is the zero ring there are no maximal ideals, so the same argument asserts the required vacuous surjectivity; the constructions permit empty spectra.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-w-local-refinement.proof.md",
+    "place": "Proof, paragraph 3, final sentence (Stacks Tag 00HQ, lemma-ff-rings)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-w-localization",
-  "lem-weil-pbc-w-localization-points",
+  "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-retained-localization",
+  "def-weil-pbc-w-localization",
+  "det-pe-wlocal-strict-contractible",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-ind-etale-stability",
   "lem-weil-pbc-retained-localization",
-  "lem-weil-pbc-ind-etale-stability"
+  "lem-weil-pbc-w-localization-points"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-w-local-refinement.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-w-local-refinement.proof.md",
+  "place": "Proof, all three paragraphs; retained-localization pairs and canonical local-ring maps made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WLocalization|IsWLocalRing|IndZariski|retained.localization",
+   "results": "0 hits; returned entries: none",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned results do not state a w-local ind-Zariski refinement with these four properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every faithfully flat ind etale algebra over a w local ring has a w local ind Zariski refinement with local rings unchanged and surjective on closed points",
+   "results": "8 hits; returned entries: Module.FaithfullyFlat.of_flat_of_isLocalHom, Algebra.Etale.formallyEtale, Algebra.Etale, RingHom.Etale.propertyIsLocal, Algebra.instEtaleOfIsStandardEtale, Algebra.Etale.of_isLocalizationAway, Algebra.FormallyEtale.localization_map, Algebra.exists_etale_of_isEtaleAt",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned results do not state a w-local ind-Zariski refinement with these four properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IndEtale, Algebra.IndZariski",
+   "results": "0 hits; returned entries: none; loogle: unknown identifier 'Algebra.IndEtale'",
+   "date": "2026-10-16",
+   "verdict": "no match returned; unknown identifier makes this query inconclusive, so a second valid quoted-name query was run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a faithfully flat ind etale algebra over a w local ring admits an ind Zariski w local refinement surjective on closed points with unchanged local rings",
+   "results": "8 hits; returned entries: RingHom.Etale.propertyIsLocal, RingHom.Etale.ofLocalizationSpan, Algebra.Etale, RingHom.Etale.ofLocalizationSpanTarget, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.of_isLocalizationAway, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.exists_etale_of_isEtaleAt",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned results do not state a w-local ind-Zariski refinement with these four properties"
+  },
+  {
+   "tool": "grep",
+   "query": "w.local|ind.?[Zz]ariski|retained.*localization",
+   "results": "25 hits; returned entries: Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Linear.lean, Mathlib/CategoryTheory/Shift/Linear.lean, Mathlib/CategoryTheory/Shift/Linear.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: these are category-localization occurrences of W.Localization, not a construction of a w-local ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"w-local\"",
+   "results": "0 hits; returned entries: none",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned results do not state a w-local ind-Zariski refinement with these four properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "construct a ring with w local prime spectrum by retaining closed components of an ind Zariski localization; preserve local rings and map onto the maximal spectrum",
+   "results": "8 hits; returned entries: MaximalSpectrum.PiLocalization, OfLocalizationMaximal, PrimeSpectrum.PiLocalization, PrimeSpectrum.piLocalizationToMaximal, AlgebraicGeometry.StructureSheaf.Localizations, RingHom.OfLocalizationPrime, AlgebraicGeometry.Spec.locallyRingedSpaceObj, Localization.AtPrime",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned results do not state a w-local ind-Zariski refinement with these four properties"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -67,5 +173,39 @@
   "det-pe-wlocal-strict-contractible"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-wc-rings-w-local-refinement",
+  "worker": "stage1",
+  "summary": "Checked the current main-20261015 statement and all three proof paragraphs against every cited statement, Stacks Tags 0975, 0979, 097A and 00HQ, and the source-library declarations. Kept the statement unchanged. Repaired the earlier split by using the actual retained-localization pairs (t,q), explicitly composing the canonical local-ring isomorphisms, citing faithfully-flat spectrum surjectivity and the definition making ind-Zariski a special case of ind-etale, and recording the Mathlib searches actually rerun. No new nodes.",
+  "blueprint": "Step 1 realizes paragraph 1; step 2 realizes paragraph 2; steps 3-6 realize paragraph 3 (construction, local rings and closed points, composition, and surjectivity). The unit first refines the cover by ind-Zariski operations; this remains exactly that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-w-localization-points",
+    "why": "The point and local-ring description of the affine w-localization is a generic ring-theoretic tool supplied by the proper-base-change unit."
+   },
+   {
+    "node": "lem-weil-pbc-retained-localization",
+    "why": "The retained-localization point, w-locality, and unchanged-local-ring properties are used as a generic construction theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Stability of ind-etale and ind-Zariski maps under composition supplies the final algebra-map property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-w-localization-points",
+  "lem-weil-pbc-retained-localization",
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q63-98611f850",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-98611f850 (reviewer sub-agent of L); spot-checked: Read the item, report, current blueprint proof, every cited DAG statement, Stacks Tags 0975/0979/00HQ, and the unit route. All six steps are mathematically valid with exact hypotheses, pair parametrization, local-ring maps, ind-Zariski-to-ind-etale composition, and faithful-flat spectrum surjectivity. Edge cases and duplicate/generalization searches check out; no SGA or target weakening occurs. Wrote review.md; no repairs needed."
+ }
 }
