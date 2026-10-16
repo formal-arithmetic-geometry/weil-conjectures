@@ -626,6 +626,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Curve.IntegralOpenExtensionComparison
 public import WeilConjectures.AlgebraicGeometry.Curve.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+public import WeilConjectures.AlgebraicGeometry.Curve.KummerTransition
 public import WeilConjectures.AlgebraicGeometry.Curve.LocalCommensurable
 public import WeilConjectures.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit
 public import WeilConjectures.AlgebraicGeometry.Curve.NormalizationComparisonOnIsoLocus
