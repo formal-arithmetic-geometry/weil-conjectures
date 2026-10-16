@@ -3,66 +3,276 @@
  "blueprint": {
   "is": "det-sp-tower-gluing",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Gluing the local tower adjunctions",
- "statement": "Let $f:X\\to Y$ be smooth of pure relative dimension $d$. For each\n$K_\\bullet\\in\\Dctf(Y_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$ there is a pair\n$(f^!_\\bullet K_\\bullet,\\varepsilon_\\bullet(K_\\bullet))$ with\n$f^!_\\bullet K_\\bullet\\in\\Dctf(X_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$ and\n$\\varepsilon_\\bullet(K_\\bullet):Rf_{!,\\bullet}f^!_\\bullet K_\\bullet\\to K_\\bullet$ representing\n$M_\\bullet\\mapsto\\operatorname{Hom}(Rf_{!,\\bullet}M_\\bullet,K_\\bullet)$ on\n$\\Dctf(X_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$, such that:\n\n1. on each coordinate chart $f|_U=p_d\\circ e$ ($e:U\\to\\mathbf A^d_Y$ étale),\n   $f^!_\\bullet K_\\bullet|_U\\simeq e_\\bullet^*p_{d,\\bullet}^*K_\\bullet(d)[2d]$ with counit\n   the iterated projective-line integration followed by the fibre sum of $e$;\n2. the pair is unique up to unique isomorphism, hence $K_\\bullet\\mapsto f^!_\\bullet K_\\bullet$\n   is a functor right adjoint to $Rf_{!,\\bullet}$;\n3. $(f^!_\\bullet K_\\bullet)_n\\simeq f^!_{\\mathcal O_E/\\ell^n}K_n$ compatibly with\n   counits and units, and the reduction maps of $f^!_\\bullet K_\\bullet$ are the\n   composites of the coefficient comparisons $c_{n,m}$ of\n   [det-sp-reduction-exceptional] with $f^!$ of the reduction maps of $K_\\bullet$.",
+ "statement": "In the standing setting [sk-def-sfb-dc-setting], fix a prime $\\ell\\ne\\operatorname{char}k$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a smooth separated morphism of finite type, of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms]. Put $A_n=\\mathcal O_E/\\ell^n$. Use the ordinary derived category of the strict varying-coefficient towers [sk-def-sp-coefficient-towers] and its uniformly bounded constructible finite-Tor subcategory [sk-def-sp-normalized-towers], with $Rf_{!,\\bullet}$ and its finite evaluations as in [det-sp-tower-shriek-levels]. Tate twists are taken levelwise as in [def-coefficient-twists-detailed].\n\nFor each $K_\\bullet\\in\\Dctf(Y_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$ there is a pair $(G_\\bullet,\\varepsilon_\\bullet(K_\\bullet))$, with $G_\\bullet=f^!_\\bullet K_\\bullet\\in\\Dctf(X_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$ and $\\varepsilon_\\bullet(K_\\bullet):Rf_{!,\\bullet}G_\\bullet\\to K_\\bullet$, such that\n$$a\\longmapsto\\varepsilon_\\bullet(K_\\bullet)\\circ Rf_{!,\\bullet}(a):\\operatorname{Hom}(M_\\bullet,G_\\bullet)\\xrightarrow{\\sim}\\operatorname{Hom}(Rf_{!,\\bullet}M_\\bullet,K_\\bullet)$$\nis a bijection for every $M_\\bullet$ in that category, natural in $M_\\bullet$, and:\n\n1. On every coordinate chart $f|_U=p_d\\circ e$, $e:U\\to\\mathbf A^d_Y$ etale, there is a counit-preserving isomorphism $G_\\bullet|_U\\simeq e_\\bullet^*p_{d,\\bullet}^*K_\\bullet(d)[2d]$. The local counit applies the fibre sum for $e$ followed by iterated projective-line integration.\n2. The pair is unique up to unique counit-preserving isomorphism, and $K_\\bullet\\mapsto f^!_\\bullet K_\\bullet$ is a functor right adjoint to $Rf_{!,\\bullet}$.\n3. There are natural isomorphisms $(f^!_\\bullet K_\\bullet)_n\\simeq f^!_{A_n}K_n$, compatible with counits and units. Under them the reduction map from level $n$ to $m\\leq n$ is\n$$ (f^!_{A_n}K_n)\\otimes^L_{A_n}A_m\\xrightarrow{c_{n,m}(K_n)}f^!_{A_m}(K_n\\otimes^L_{A_n}A_m)\\xrightarrow{f^!_{A_m}(r^K_{n,m})}f^!_{A_m}K_m,$$\nwhere $c_{n,m}$ is the coefficient comparison of [det-sp-reduction-exceptional].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.md",
   "place": "node det-sp-tower-gluing, order None"
  },
  "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers",
+  "det-sp-tower-shriek-levels",
+  "def-coefficient-twists-detailed",
   "det-sp-reduction-exceptional"
  ],
  "proof": [
   {
-   "text": "*Local pairs.* By [det-sp-tower-p1-adjunction], restricting to\n$\\mathbf A^1_S\\subset\\mathbf P^1_S$ by extension by zero (the open-immersion\nadjunction $j_{!,\\bullet}\\dashv j^*_\\bullet$ composes with the projective-line one),\nwe get an adjunction $Rp_{1,!,\\bullet}\\dashv p^*_{1,\\bullet}(-)(1)[2]$ for\n$\\mathbf A^1_S\\to S$; iterating $d$ times gives one for $p_d:\\mathbf A^d_Y\\to Y$\nwith right adjoint $p_{d,\\bullet}^*(-)(d)[2d]$, and composing with the étale\nadjunction $e_{!,\\bullet}\\dashv e^*_\\bullet$ (levelwise extension by zero, counit\nthe fibre sum) gives on a chart $U$ the pair\n$(e_\\bullet^*p_{d,\\bullet}^*K_\\bullet(d)[2d],\\varepsilon_U)$ representing\n$\\operatorname{Hom}(R(f|_U)_{!,\\bullet}-,K_\\bullet)$. These local counits are the iterated\nintegrations and fibre sums, as maps of towers.",
+   "text": "Fix $K=K_\\bullet$ and abbreviate $F_Z=R(f|_Z)_{!,\\bullet}$ for opens $Z\\subseteq X$. The standing schemes are Noetherian: a field has just the ideals $0,(1)$ and [lem-weil-pbc-finite-type-over-noetherian] applies to the structure morphisms. The statement [lem-weil-pbc-noetherian-open-subscheme-noetherian] then says that $X$ and every open in it are Noetherian and quasi-compact. By [lem-sc-standard-smooth-local-relative-dimension] every point has a standard-smooth affine neighbourhood of relative dimension $d$ over an affine open $T\\subseteq Y$. The etale polynomial chart of [lem-sc-standard-smooth-etale-polynomial-chart] gives $U\\to\\mathbf A^d_T$; composing with $\\mathbf A^d_T\\hookrightarrow\\mathbf A^d_Y$ remains etale by [lem-weil-pbc-etale-composition-cancellation]. Thus choose a finite cover $X=\\bigcup_{i=1}^rU_i$ by such charts. Every open subset of a chart is again a chart by the same etale composition statement. If $X$ is empty, the zero pair represents the zero functor; henceforth use induction on $r\\geq1$.",
    "uses": [
-    "det-sp-tower-p1-adjunction"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sc-standard-smooth-local-relative-dimension",
+    "lem-sc-standard-smooth-etale-polynomial-chart",
+    "lem-weil-pbc-etale-composition-cancellation"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Local pairs and Gluing: existence of a finite coordinate cover"
+   }
   },
   {
-   "text": "*Gluing.* For an open cover $X=U\\cup V$ with the representing pairs on $U$,\n$V$, $U\\cap V$, the restriction maps between them are determined by\nuniqueness of representing pairs; form the cone of\n$G_U\\oplus G_V\\to G_{U\\cap V}$ (pushed forward by extension along the open\nimmersions, i.e. the open-cover triangle for $M_\\bullet$:\n$j_{U\\cap V,!}M\\to j_{U,!}M\\oplus j_{V,!}M\\to M$). Applying\n$\\operatorname{Hom}(Rf_{!,\\bullet}(-),K_\\bullet)$ to this triangle gives a long exact Hom\nsequence; the compatible local counits define an element of the fibre product\nof the Hom groups of $U$ and $V$ over $U\\cap V$, which lifts by exactness to a\ncounit on the glued object, and the five lemma applied to the two Hom sequences\n(for the glued pair and for $\\operatorname{Hom}(Rf_{!,\\bullet}-,K_\\bullet)$) shows that the glued\npair represents the functor on $X$. By quasi-compactness, finitely many charts\nsuffice and induction on their number gives the pair on $X$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Uniformity.* On each chart the glued object is\n$e_\\bullet^*p_{d,\\bullet}^*K_\\bullet(d)[2d]$, whose levels have the cohomological and\nTor bounds of $K_\\bullet$ shifted by $2d$, independent of $n$; with\n[det-sp-tower-bound-uniform] for $Rf_{!,\\bullet}$ this shows that both functors\nstay inside the constructible tower categories.",
+   "text": "Check the domain of the current projective-line adjunction before composing it. Every scheme here (including each intermediate affine or projective space) is separated and of finite type over $k$, hence Noetherian and qcqs by Step 1's argument, and $\\ell$ is invertible since $\\ell\\ne\\operatorname{char}k$. Each $A_n$ is finite and Noetherian. The finite-category identification proved in Step 3 below identifies every ctf level used here with the ordinary intrinsic finite-coefficient ctf category. Therefore [det-pe-finite-tor-comparison-noetherian] supplies an etale-origin witness for each such level. Uniform cohomological vanishing makes these towers bounded below: their cohomology is computed levelwise in the Grothendieck tower category. Thus they lie in the actual $\\mathscr C^+$ domains of [det-sp-tower-p1-adjunction], whose last sentence explicitly restricts its adjunction to the uniform ctf subcategories. In particular $j_{!,\\bullet}M$ is in that domain by [lem-sp-coefficient-tower-shriek-calculus](2). The same check applies at every successive affine-line projection, and the inverse images and twists remain ctf by Step 3. The witnesses are chosen separately at each level; no compatibility of witnesses as a tower is needed or asserted. Let $q:\\mathbf P^1_S\\to S$, $j:\\mathbf A^1_S\\hookrightarrow\\mathbf P^1_S$, and $p=qj$. By [lem-sp-coefficient-tower-shriek-calculus] and [det-sp-tower-p1-adjunction], the adjunction bijections are\n$$\\operatorname{Hom}(Rp_{!,\\bullet}M,K)=\\operatorname{Hom}(Rq_{*,\\bullet}j_{!,\\bullet}M,K)\\simeq\\operatorname{Hom}(j_{!,\\bullet}M,q_\\bullet^*K(1)[2])\\simeq\\operatorname{Hom}(M,p_\\bullet^*K(1)[2]).$$\nThe base-change-compatible finite twist identification of [lem-pur-finite-kummer-level] applies with uniformizer exponent $en$ and $N=n$, because $\\ell$ is a unit times $\\varpi^e$. The base-change maps for roots of unity send a section $u$ to its pullback; they commute with $u\\mapsto u^\\ell$ because pullback preserves multiplication. After tensoring by $A_n$ these are compatible maps of the twist towers. Apply the monoidal derived pullback isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the ringed inverse-system topoi, and use the tensor-power definition of [def-coefficient-twists-detailed]. Their tensor associators identify the successive pulled-back twists with the sum twist as an actual tower isomorphism. This constructs the comparison before evaluating it; levelwise base change is used to check invertibility, not equality of derived tower morphisms. Compose the bijections for the $d$ successive affine-line projections and then for $e_!\\dashv e^*$ on a chart $U$. This gives the local right adjoint $H_UK=e^*p_d^*K(d)[2d]$ and local representing counit $\\varepsilon_U:F_UH_UK\\to K$. For $d=0$ the projection part is the identity adjunction. The formula for the composite counit is $\\varepsilon_{p_d}\\circ Rp_{d!}(\\varepsilon_e)$, so fibre summation precedes integration. Both cited statements specify finite evaluations of their adjunctions, so all these local maps are actual tower morphisms with the specified finite units and counits.",
    "uses": [
-    "det-sp-tower-bound-uniform"
+    "lem-sp-coefficient-tower-shriek-calculus",
+    "det-sp-tower-p1-adjunction",
+    "lem-pur-finite-kummer-level",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-coefficient-twists-detailed",
+    "det-pe-finite-tor-comparison-noetherian"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Local pairs: affine line, iteration, etale composition"
+   }
   },
   {
-   "text": "*Uniqueness and functoriality.* A representing pair with its counit is unique\nup to unique isomorphism, so the construction defines the functor $f^!_\\bullet$\nand its action on morphisms without choosing cones functorially; the counits\nthen form a natural transformation and $Rf_{!,\\bullet}\\dashv f^!_\\bullet$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Levels.* Evaluation at level $n$ is exact, commutes with the operations\n([det-sp-tower-shriek-levels]) and carries the local counits to the finite local\ncounits. Repeating the gluing argument after evaluation shows that\n$((f^!_\\bullet K_\\bullet)_n,\\varepsilon_n)$ represents the finite functor\n$\\operatorname{Hom}(Rf_{!,\\mathcal O_E/\\ell^n}-,K_n)$; uniqueness identifies it with\n$f^!_{\\mathcal O_E/\\ell^n}K_n$ compatibly with counits, hence with units. The\ncoefficient comparisons $c_{n,m}$ have the same chart description (the\ncanonical isomorphisms of [det-sp-reduction-exceptional]), so by uniqueness the\ntransition maps of $f^!_\\bullet K_\\bullet$ are identified with them.",
+   "text": "At each finite level we work in the ordinary module category over the constant ring $A_n$ of the coefficient-tower definition. Its constructibility condition in [sk-def-sfb-constructible] agrees with intrinsic finite-coefficient constructibility [def-weil-proetale-constructible-sheaf]: by [def-weil-l-adic-coefficient-extension], $A_n=\\mathcal O_E/\\varpi_E^{en}$ is finite; a finitely presented $A_n$-module is finite as a quotient of $A_n^r$, and a finite $A_n$-module has a finite presentation since the kernel of $A_n^r\\twoheadrightarrow P$ is a finite set. A finite scalar matrix gives the constant sheaf of its cokernel, since [lem-weil-pbc-sheafification-exact](2) says sheafification preserves colimits; thus the two definitions give the same local models on the same strata. Their Tor conditions quantify over exactly the same ordinary module sheaves and derived tensor product, as in [def-weil-proetale-tor-amplitude]. Moreover a finite ring is Noetherian because its set of ideals is finite, and all schemes and opens used here are qcqs by Step 1 (their open intersections are quasi-compact). Hence [det-pe-finite-tor-comparison-noetherian] supplies etale-origin representatives and preserves each specified Tor interval whenever the current finite-level bound requires them. This does not identify completed or condensed module categories with ordinary ones: the levels already are ordinary constant-ring module sheaves. The local pair belongs to the required category. By [sk-lem-sp-tower-levels], ordinary constant-coefficient inverse image on towers is exact and computed levelwise. Inverse image preserves the finite local models and finite stratifications in [sk-def-sfb-constructible]: pull back the stratification and each displayed local presentation. It also preserves a Tor interval: [lem-sf-flat-model] supplies a bounded flat model in precisely that interval on the small pro-etale site; [lem-weil-pbc-ringed-topos-flat-module-pullback] says every pulled-back term is flat. Exactness preserves its quasi-isomorphism to the pulled-back complex, so this is a flat model in the same interval. The finite quotient $\\mathcal O_E/\\ell^n$ is $\\mathcal O_E/\\varpi^{en}$, since $\\ell$ is a unit times $\\varpi^e$, so the finite-coefficient hypothesis of the flat-model lemma is satisfied. The twist is locally free of rank one by [lem-pur-twist-sheaf-locally-free], applied to the finite quotient $\\mathcal O_E/\\ell^n$ (a power of the uniformizer); tensoring with it preserves these bounds. Hence if the cohomological and Tor intervals of $K_n$ are $[a,b]$ and $[u,v]$, those of $H_UK_n$ are $[a-2d,b-2d]$ and $[u-2d,v-2d]$, uniformly in $n$. The definition [sk-def-sp-normalized-towers] requires exactly these levelwise conditions. An open restriction of $f$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]; it has the same pure fibre dimension $d$, because its fibres are open in the smooth pure-$d$ fibres of $f$. By [lem-sbc-smooth-relative-dimension-permanence](1), base change to any geometric point remains smooth of relative dimension $d$; thus every nonempty geometric fibre of each restriction has dimension $d$. Also $F_Z$ preserves this tower category for every such open $Z$ by [sk-lem-sp-tower-bound]; its uniform compact-support bounds are [det-sp-tower-bound-uniform], applied with these geometric-fibre bounds, the finite commutative discrete rings $A_n$, the ordinary finite-Tor categories just identified, and their etale-origin representatives. The theorem gives the common Tor interval $[u,v+2d]$ and cohomology vanishing outside it for the compact-support image.",
    "uses": [
+    "sk-lem-sp-tower-levels",
+    "sk-def-sfb-constructible",
+    "lem-sf-flat-model",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pur-twist-sheaf-locally-free",
+    "sk-def-sp-normalized-towers",
+    "sk-lem-sp-tower-bound",
+    "det-sp-tower-bound-uniform",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-proetale-constructible-sheaf",
+    "def-weil-proetale-tor-amplitude",
+    "det-pe-finite-tor-comparison-noetherian",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Uniformity: local right-adjoint and compact-support bounds"
+   }
+  },
+  {
+   "text": "Suppose $U,V$ cover an open $Z\\subseteq X$, with pairs $(G_U,\\varepsilon_U)$ and $(G_V,\\varepsilon_V)$ already representing the local functors; put $W=U\\cap V$. For an open inclusion $i:W\\hookrightarrow U$, [lem-sp-coefficient-tower-shriek-calculus] gives $F_W=F_Ui_!$ and $i_!\\dashv i^*$, with $i_!$ preserving the constructible tower category. Thus\n$$\\operatorname{Hom}(N,G_U|_W)\\simeq\\operatorname{Hom}(i_!N,G_U)\\simeq\\operatorname{Hom}(F_WN,K).$$\nThe associated counit is $\\varepsilon_U\\circ F_U(i_!i^*G_U\\to G_U)$. With $i_V:W\\hookrightarrow V$ the second restriction has the bijection $\\operatorname{Hom}(N,G_V|_W)\\simeq\\operatorname{Hom}(i_{V!}N,G_V)\\simeq\\operatorname{Hom}(F_WN,K)$ and counit $\\varepsilon_V\\circ F_V(i_{V!}i_V^*G_V\\to G_V)$. There is a unique counit-preserving isomorphism $c:G_U|_W\\to G_V|_W$: apply the second representing bijection to the first counit to get $c$, and reverse the roles to get its inverse; injectivity of the two bijections makes both composites identities. This argument uses representing pairs on $W$, rather than asserting that arbitrary local derived isomorphisms glue uniquely.",
+   "uses": [
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing: the canonical overlap identification"
+   }
+  },
+  {
+   "text": "By [det-sp-coefficient-towers-abelian], the coefficient towers on $Z$ are modules over the ring object $\\mathcal O_{E,Z}/\\ell^\\bullet$ in the Grothendieck topos of inverse systems of pro-etale sheaves. The constant inverse systems of the subterminal sheaves $U,V,W$ are open subtopoi with $U\\cup V=Z$. For each open $D=U,V,W$, [lem-weil-proetale-weakly-etale-localization](1) identifies $D_{\\mathrm{proét}}$ with $Z_{\\mathrm{proét}}/D$, and (2) identifies the restricted constant ring $A_n$ with its constant ring on $D$. These identifications preserve the constant-section quotient maps $A_n\\to A_m$. Applying them levelwise identifies the slice module category with the coefficient-tower category on $D$: its objects and arrows are the restricted module sheaves and semilinear transitions. Apply [lem-sp-ringed-topos-binary-descent](1) in this ringed topos to $G_U,G_V,c$. It gives an actual object $G\\in D(\\operatorname{Tow}(Z,\\mathcal O_E))$ with the prescribed restrictions. Concretely it is the fibre, not the unshifted cone, of\n$$Rj_{U*}G_U\\oplus Rj_{V*}G_V\\longrightarrow Rj_{W*}(G_V|_W).$$\nThe intermediate derived direct images need not be constructible; the glued object is. Exact restriction and evaluation show its cohomology vanishes outside the common local interval. Each cohomology sheaf is constructible by [sk-def-sfb-constructible]: combine the finitely many local stratifications, refining their finitely many intersections and complements to a finite locally closed stratification of the Noetherian scheme. The same restriction test applied to $G_n\\otimes^L N$ gives its common Tor interval. A sheaf vanishing on both members is zero by the sheaf condition. Consequently $G$ belongs to the category of [sk-def-sp-normalized-towers].",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-sp-ringed-topos-binary-descent",
+    "sk-def-sfb-constructible",
+    "sk-def-sp-normalized-towers",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing and Uniformity: construct the global object correctly"
+   }
+  },
+  {
+   "text": "Apply [lem-sp-ringed-topos-binary-descent](2) to $G$ and then the exact compact-support functor $F_Z$ of [lem-sp-coefficient-tower-shriek-calculus]. The result is the triangle\n$$F_W(G|_W)\\to F_U(G|_U)\\oplus F_V(G|_V)\\to F_ZG\\longrightarrow.$$\nUnder the selected restriction isomorphisms, the map $(\\varepsilon_U,\\varepsilon_V)$ to $K$ kills the first arrow: its two components are the same overlap counit by the definition of $c$ in Step 4, and the first arrow has signs $(1,-1)$. By [lem-weil-pbc-hom-out-of-triangle-exact](i) it factors through a map $\\varepsilon:F_ZG\\to K$. This is the needed global counit. Only existence of this lift has been used.",
+   "uses": [
+    "lem-sp-ringed-topos-binary-descent",
+    "lem-sp-coefficient-tower-shriek-calculus",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing: lift the compatible local counits"
+   }
+  },
+  {
+   "text": "For arbitrary $M$ in the constructible tower category, apply the two contravariant functors $\\operatorname{Hom}(-,G)$ and $\\operatorname{Hom}(F_Z(-),K)$ to the open-cover triangle of Step 6 with $M$ in place of $G$. The arrows $\\theta_N:a\\mapsto\\varepsilon F_Z(a)$ form a morphism of these exact Hom sequences: for each triangle arrow $t:N\\to N'$ one has $\\varepsilon F_Z(a\\circ t)=\\varepsilon F_Z(a)\\circ F_Z(t)$, including the shifted boundary arrow. Exactness at all positions follows by rotations and shifts from [lem-weil-pbc-hom-out-of-triangle-exact]. By [lem-sp-coefficient-tower-shriek-calculus] and the local adjunctions, $\\theta$ is a bijection on all shifts of $j_{U!}(M|_U)$, $j_{V!}(M|_V)$ and $j_{W!}(M|_W)$. Indeed transposing $a:j_{U!}N\\to G$ gives $a_U:N\\to G_U$, and $\\theta(a)=\\varepsilon_UF_U(a_U)$ by the restriction equation of Step 6. For $D=U,V,W$, let $j_D:D\\hookrightarrow Z$ and let $\\varepsilon_D$ be the restricted representing counit. For every integer $t$, the open adjunction sends $a:j_{D!}(N[t])\\to G$ to $a_D:N[t]\\to G|_D$, and the restriction equation gives $\\theta(a)=\\varepsilon_DF_D(a_D)$. Thus each shifted vertical map is exactly the corresponding local representing bijection. In the five-term segment of the two exact sequences with $\\theta_M$ in the centre, the other four vertical arrows are bijective. To see the central bijectivity directly, lift the image of a bottom central element to the top term on its right; its next image is zero by the rightmost injection, so exactness lifts it to the top centre, and the residual bottom element comes from the left and can be lifted using the left surjection. For injectivity a central kernel element has zero right image, hence comes from the top left; its bottom left image lies in the image of the preceding bottom term, which lifts by the leftmost surjection, leaving zero by the adjacent left injection. Thus $\\theta_M$ is a bijection, natural in $M$. This proves representability of $(G,\\varepsilon)$.",
+   "uses": [
+    "lem-sp-ringed-topos-binary-descent",
+    "lem-sp-coefficient-tower-shriek-calculus",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing: the complete Hom-sequence argument"
+   }
+  },
+  {
+   "text": "Use induction on the finite cover in Step 1. For a single chart the pair is Step 2. Given the pair on $Z=U_1\\cup\\cdots\\cup U_{r-1}$, use $U=Z$, $V=U_r$ in Steps 4–7. The intersection is an open of the chart $U_r$, so its chart pair is available, and Step 4 also identifies the restriction of the pair from $Z$ with it. This constructs the pair on $X$. For an additional coordinate chart $j:D\\hookrightarrow X$, open adjunction and $F_Xj_!=F_D$ give $\\operatorname{Hom}(N,G|_D)\\simeq\\operatorname{Hom}(j_!N,G)\\simeq\\operatorname{Hom}(F_DN,K)$, with counit $\\varepsilon F_X(j_!j^*G\\to G)$. The unique counit-preserving comparison of representing pairs therefore identifies $G|_D$ with the chart pair in Step 2. This proves clause 1 for every chart, not just the chosen atlas.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing: finite induction and arbitrary charts"
+   }
+  },
+  {
+   "text": "If $(G,\\varepsilon)$ and $(G',\\varepsilon')$ represent the same functor, take $M=G$ in the second bijection to obtain the unique $a:G\\to G'$ with $\\varepsilon'F(a)=\\varepsilon$. Reversing the roles gives $b:G'\\to G$; injectivity gives $ba=1$ and $ab=1$. For $u:K\\to L$, define $G(u)$ as the unique map with $\\varepsilon_LF(G(u))=u\\varepsilon_K$. Applying this equation twice proves preservation of identities and composition. It also proves naturality in $K$ of the representing bijections. Set $\\eta_M$ equal to the transpose of $1_{FM}$. The transpose equations give $\\varepsilon_{FM}F(\\eta_M)=1_{FM}$ and, by injectivity, $G(\\varepsilon_K)\\eta_{GK}=1_{GK}$. These are the two adjunction identities and prove clause 2 without requiring a functorial choice of cones.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Uniqueness and functoriality: explicit inverse maps and adjunction"
+   }
+  },
+  {
+   "text": "Evaluation at $n$ is exact by [det-sp-coefficient-towers-abelian] and therefore induces a triangulated functor by [lem-sf-exact-functor-derived-triangulated]. For compact support, [det-sp-tower-shriek-levels](1) applies because every tower evaluated here is bounded below by its uniform cohomological bound; it gives exactly the finite operation for the chosen compactification. Open extension and its finite adjunction maps are supplied by [lem-sp-coefficient-tower-shriek-calculus](2). No projection formula from [det-sp-tower-shriek-levels](2)(a), whose field hypothesis is more restrictive, is invoked. By [det-sp-tower-p1-adjunction], the evaluated chart adjunction of Step 2 has the finite unit and counit. Prove finite representability by induction on the actual chart cover used in Step 8. The empty case is the zero category, and the single-chart case is the finite chart adjunction. Its finite test objects and all their open extensions are ordinary ctf objects over finite Noetherian $A_n$ on qcqs schemes; [det-pe-finite-tor-comparison-noetherian] gives their etale-origin representatives by the same finite-category check as Step 3. Thus the restricted projective-line adjunction used in Step 2 applies, and its evaluation gives the required finite counit even with the current etale-origin domain. For the binary induction step $Z=U\\cup V$, put $W=U\\cap V$ and let $G_{Z,n},\\varepsilon_{Z,n}$ be the evaluated constructed pair. Its restrictions to $U,V,W$ have the finite representing counits by induction, the finite chart case for the overlap, and the evaluated restriction equation of Step 6. Take an arbitrary finite ctf object $M$ on $Z$, without assuming that it lifts to a tower. By [lem-sp-ringed-topos-binary-descent](2), put $A=j_{W!}(M|_W)$, $B=j_{U!}(M|_U)\\oplus j_{V!}(M|_V)$ in the triangle $A\\to B\\to M\\to A[1]$. Applying [lem-weil-pbc-hom-out-of-triangle-exact] and its rotated shifts gives the exact segment\n$$\\operatorname{Hom}(B[1],G_{Z,n})\\to\\operatorname{Hom}(A[1],G_{Z,n})\\to\\operatorname{Hom}(M,G_{Z,n})\\to\\operatorname{Hom}(B,G_{Z,n})\\to\\operatorname{Hom}(A,G_{Z,n}),$$\nand the segment with terms $\\operatorname{Hom}(F_{Z,n}(-),K_n)$. The vertical map at $N$ is $a\\mapsto\\varepsilon_{Z,n}F_{Z,n}(a)$; it commutes with each arrow $t$ because $\\varepsilon_{Z,n}F_{Z,n}(a\\circ t)=\\varepsilon_{Z,n}F_{Z,n}(a)F_{Z,n}(t)$, also for the boundary $M\\to A[1]$. Open adjunction identifies the four outer vertical maps with the finite local representing bijections, including shifted ones. For surjectivity at the centre, lift the image in the fourth bottom term through the fourth vertical bijection; its image in the fifth top term vanishes, so exactness lifts it to the top centre. The residual bottom central element comes from the second bottom term and lifts through its bijection. For injectivity, a central kernel element comes from the second top term; its image below comes from the first bottom term, which lifts through the first bijection. Subtract that first top image; injectivity at the second term makes the remainder zero. Hence the central map is bijective. This completes induction and proves finite representability for every finite test object. The current statement of [det-sp-reduction-exceptional] names the constructible adjunction on the ordinary constant-ring categories in the standing scheme setting, with the fixed coefficient-independent compactification. These are exactly our finite categories and chosen compactification; $f$ has pure relative dimension $d\\geq0$, and $A_n$ is finite and annihilated by $\\ell^n$. Its representing finite adjoint $f^!_{A_n}$ therefore has a unique counit-preserving comparison with $G_n$. Evaluating $\\varepsilon_LF(G(u))=u\\varepsilon_K$ identifies the action on every tower morphism with the action of the finite adjoint. Finally $\\varepsilon_{FM}F(\\eta_M)=1$ evaluates to the finite transpose equation for $1_{F_nM_n}$, so injectivity of the finite bijection identifies the units. This proves the first part of clause 3.",
+   "uses": [
+    "lem-sp-ringed-topos-binary-descent",
+    "det-sp-coefficient-towers-abelian",
+    "lem-sf-exact-functor-derived-triangulated",
     "det-sp-tower-shriek-levels",
-    "det-sp-reduction-exceptional"
+    "lem-sp-coefficient-tower-shriek-calculus",
+    "det-sp-tower-p1-adjunction",
+    "det-sp-reduction-exceptional",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "det-pe-finite-tor-comparison-noetherian"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Levels: finite representability and units, without exchanging evaluation and Hom"
+   }
+  },
+  {
+   "text": "Use the chosen compactification $f=\\bar f\\circ j$ supplied by [sk-def-sfb-dc-setting], the same compactification used in [det-sp-tower-shriek-levels](1), whose bounded-below hypothesis follows from the uniform cohomological bounds of $G$ and $K$. To apply [det-sp-reduction-direct-image], take its coefficient map to be $A=A_n\\to B=A_m$, its object $M=G_n$, and its compactification to be this $j,\\bar f$. Indeed $f$ is separated and of finite type; if $\\ell=u\\varpi_E^e$ with $u$ a unit, then $A_n=\\mathcal O_E/\\varpi_E^{en}$ and $A_m=\\mathcal O_E/\\varpi_E^{em}$ are finite commutative rings by [def-weil-l-adic-coefficient-extension], killed by $\\ell^n$ and $\\ell^m$. The quotient map exists since $m\\leq n$, and $G_n\\in\\Dctf(X_{\\mathrm{proét}},A_n)$ by Steps 3, 5 and 10. For [det-sp-reduction-exceptional] this quotient is unital, $N=\\ell^n$ is a common annihilator of $A_n,A_m$, and the same coefficient-independent compactification and ordinary constant-ring ctf categories are used. The finite identifications from Step 10 preserve the specified counits, so its defining transpose identity uses precisely the $\\varepsilon_n$, $\\varepsilon_m$ and canonical $b_f$ below; no chartwise detection of equality is needed. Thus the cited statement gives the isomorphism\n$$b_f(G_n):(R\\bar f_*j_!G_n)\\otimes^L_{A_{n,Y}}A_{m,Y}\\xrightarrow{\\sim}R\\bar f_*j_!\\bigl(G_n\\otimes^L_{A_{n,X}}A_{m,X}\\bigr).$$\nHere the proper comparison is the $A_m$-linear adjoint transpose of the $A_n$-counit after extension of scalars, followed by the canonical open-extension tensor comparison, exactly as specified by the current direct-image statement. Step 3 identifies its intrinsic ordinary finite-coefficient ctf category with the actual tower levels. This is exactly the finite coefficient comparison in [lem-sp-coefficient-tower-shriek-calculus](3); no change of compactification or choice of a different level isomorphism is being made. Let $r_G:(G_n)_{A_m}\\to G_m$ and $r_K:(K_n)_{A_m}\\to K_m$ be the natural reduction maps of [det-sp-coefficient-towers-abelian], and use the counit-preserving finite identifications of Step 10. Naturality of reduction for the actual tower map $\\varepsilon:FG\\to K$, together with calculus (3), gives\n$$\\varepsilon_m F_{f,m}(r_G)b_f(G_n)=r_K(\\varepsilon_n)_{A_m},$$\nhence\n$$\\varepsilon_m F_{f,m}(r_G)=r_K(\\varepsilon_n)_{A_m}b_f(G_n)^{-1}.$$\nThe common source is $F_{f,m}((G_n)_{A_m})$ and the common target is $K_m$. Naturality of the finite counit and the defining transpose equation of [det-sp-reduction-exceptional], applied with the same coefficient map $A_n\\to A_m$ and $K_n\\in\\Dctf(Y_{\\mathrm{proét}},A_n)$, give\n$$\\begin{aligned}\n\\varepsilon_m F_{f,m}\\bigl(f^!_{A_m}(r_K)c_{n,m}(K_n)\\bigr)\n&=r_K\\varepsilon_{m,(K_n)_{A_m}}F_{f,m}(c_{n,m}(K_n))\\\\\n&=r_K(\\varepsilon_n)_{A_m}b_f(G_n)^{-1}.\n\\end{aligned}$$\nThe inverse of $b_f(G_n)$ exists by the quoted direct-image statement, which imposes no flatness or finite projective dimension hypothesis on $A_m$ over $A_n$. Injectivity of the finite adjunction bijection with test object $(G_n)_{A_m}$ therefore gives $r_G=f^!_{A_m}(r_K)c_{n,m}(K_n)$. This proves the reduction formula for arbitrary, possibly nonnormalized towers. When $n=m$ both reductions and their canonical comparisons are identities; for $n\\geq m\\geq r$, the composition clause of the direct-image comparison and the reduction-map composition law identify both iterated transposes with that for $A_n\\to A_r$. The argument uses equality of global transposes, rather than testing equality of derived morphisms only after local restriction.",
+   "uses": [
+    "lem-sp-coefficient-tower-shriek-calculus",
+    "det-sp-reduction-exceptional",
+    "det-sp-reduction-direct-image",
+    "det-sp-coefficient-towers-abelian",
+    "sk-def-sfb-dc-setting",
+    "det-sp-tower-shriek-levels",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Levels: global counit-transpose calculation for reduction maps"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sc-standard-smooth-local-relative-dimension",
+  "lem-sc-standard-smooth-etale-polynomial-chart",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sp-coefficient-tower-shriek-calculus",
   "det-sp-tower-p1-adjunction",
+  "lem-pur-finite-kummer-level",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-coefficient-twists-detailed",
+  "det-pe-finite-tor-comparison-noetherian",
+  "sk-lem-sp-tower-levels",
+  "sk-def-sfb-constructible",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pur-twist-sheaf-locally-free",
+  "sk-def-sp-normalized-towers",
+  "sk-lem-sp-tower-bound",
   "det-sp-tower-bound-uniform",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-sheafification-exact",
+  "det-sp-coefficient-towers-abelian",
+  "lem-sp-ringed-topos-binary-descent",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-sf-exact-functor-derived-triangulated",
   "det-sp-tower-shriek-levels",
-  "det-sp-reduction-exceptional"
+  "det-sp-reduction-exceptional",
+  "det-sp-reduction-direct-image",
+  "sk-def-sfb-dc-setting"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs, Gluing, Uniformity, Uniqueness and functoriality, Levels; repaired using the binary Rj_* fibre construction of Stacks 08DG and explicit Hom and transpose arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tower.*adjunction|adjunction.*tower|smooth.*shriek|shriek.*smooth",
+   "results": "0 hit(s): none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary scheme/module sheaf adjunctions, general adjunction constructors or smooth-morphism definitions, not the tower smooth compact-support adjunction and all its clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint to compactly supported pushforward for a smooth morphism on coefficient towers",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.sheafAdjunctionContinuous, TopCat.Sheaf.pullback, TopCat.Sheaf.pullbackPushforwardAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary scheme/module sheaf adjunctions, general adjunction constructors or smooth-morphism definitions, not the tower smooth compact-support adjunction and all its clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "12 hit(s): CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary scheme/module sheaf adjunctions, general adjunction constructors or smooth-morphism definitions, not the tower smooth compact-support adjunction and all its clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism has a right adjoint to compactly supported direct image on derived categories of constructible coefficient towers, locally given by twisted pullback",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, TopCat.Sheaf.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary scheme/module sheaf adjunctions, general adjunction constructors or smooth-morphism definitions, not the tower smooth compact-support adjunction and all its clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing a right adjoint locally on a finite open cover of a ringed topos using Mayer Vietoris triangles and constructible sheaf coefficient towers",
+   "results": "8 hit(s): SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData, TopCat.Sheaf.existsUnique_gluing', TopCat.Sheaf.existsUnique_gluing, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.SheafedSpace.GlueData, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CategoryTheory.GrothendieckTopology.MayerVietorisSquare",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary scheme/module sheaf adjunctions, general adjunction constructors or smooth-morphism definitions, not the tower smooth compact-support adjunction and all its clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth separated scheme morphism has an exceptional pullback on derived inverse systems of finite coefficient sheaves locally equal to pullback tensor Tate twist and shift",
+   "results": "8 hit(s): AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.pullbackSpecIso, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary scheme/module sheaf adjunctions, general adjunction constructors or smooth-morphism definitions, not the tower smooth compact-support adjunction and all its clauses."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -78,5 +288,134 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sp-tower-geometric"
+ "unit": "sk-prop-sp-tower-geometric",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-sp-tower-gluing",
+  "worker": "stage1",
+  "summary": "Made the standing scheme/coefficient hypotheses explicit and corrected the order of the chart counit. Replaced the incorrect extension-by-zero cone construction by binary ringed-topos descent and an explicit counit lift, Hom-sequence proof, finite-cover induction, finite evaluation argument and global reduction-transpose calculation. Added two statement-only general prerequisites; no Lean attachment or Mathlib leaf was found. Second reading expands overlap, shifted-Hom and arbitrary-chart calculations, and writes the finite-level induction and five-term argument explicitly. Return repair: revalidated the current direct-image comparison and exceptional transpose statement; Step 11 now supplies the chosen compactification, the precise finite coefficient quotients, finite-Tor object and source/target checks for b and its inverse. Fetched-main repair also validates the revised uniform-bound theorem: identifies finite ordinary constructibility and Tor conditions explicitly, supplies etale-origin representatives by the existing finite-Tor comparison, and verifies geometric-fibre dimension by smooth relative-dimension base change. The tower-calculus prerequisite now spells out the canonical coefficient-map normalization. Current P1-domain return repair: Step 2 now verifies bounded-below etale-origin domains for every intermediate object using the finite-site ctf equivalence; Step 10 verifies its finite test-object application and cites only the unrestricted shriek evaluation clause, not its special-field projection formula. Step 11 also checks bounded-below evaluation explicitly. Exceptional-comparison landing return repair: re-read the current expanded standing hypotheses and counit-preserving chart normalization; Steps 10 and 11 now explicitly verify the fixed compactification, ordinary constant-ring ctf domains, unital finite quotient and common annihilator before using the unchanged global transpose identity. Both affected quotation certificates were refreshed against the current statement.",
+  "blueprint": "Steps 1–3 realize Local pairs and Uniformity; Steps 4–8 repair and realize Gluing; Step 9 realizes Uniqueness and functoriality; Steps 10–11 realize Levels. The projective-line/coordinate-chart route is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Step 1 obtains Noetherianity from finite type over the field; the tower unit does not supply the general scheme permanence result."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Step 1 obtains quasi-compactness of all opens used in chart induction; the tower unit does not state Noetherian-open permanence."
+   },
+   {
+    "node": "lem-sc-standard-smooth-local-relative-dimension",
+    "why": "Step 1 obtains local standard-smooth presentations of the specified dimension; the tower unit begins with coordinate charts and does not construct them."
+   },
+   {
+    "node": "lem-sc-standard-smooth-etale-polynomial-chart",
+    "why": "Step 1 turns a standard-smooth presentation into an etale polynomial chart; no tower-unit node supplies this commutative algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Step 1 composes the affine-base chart with an open inclusion and restricts charts to opens; no tower-unit node states etale composition."
+   },
+   {
+    "node": "lem-pur-finite-kummer-level",
+    "why": "Step 2 identifies the actual ell-power quotient twist with the finite roots-of-unity model, using exponent en; this generic coefficient identification is not a tower-adjunction result."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Step 2 uses monoidal derived pullback on the ringed tower topoi to combine twists; the tower unit does not state this general tensor theorem."
+   },
+   {
+    "node": "def-coefficient-twists-detailed",
+    "why": "Step 2 uses the tensor-power definition of Tate twists; it supplies notation and coefficient objects rather than a different adjunction route."
+   },
+   {
+    "node": "sk-lem-sp-tower-levels",
+    "why": "Step 3 uses the exact levelwise inverse-image operation; it is an explicitly cited input of the current tower-geometric unit."
+   },
+   {
+    "node": "sk-def-sfb-constructible",
+    "why": "Steps 3 and 5 use the finite-stratification, local-presentation and Tor-amplitude definitions to check category membership; the tower unit does not redefine these notions."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Step 3 chooses a bounded flat resolution in the prescribed Tor interval; no tower-unit node states this general finite-coefficient flat-model theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Step 3 preserves flat terms under pullback of module sheaves; no tower-unit node states this general ringed-topos theorem."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Step 3 verifies the smoothness hypothesis for every open used in the compact-support bounds; this is generic scheme permanence."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Step 3 uses finite twists locally free of rank one to preserve the two amplitude intervals; no tower-unit node supplies this coefficient-sheaf fact."
+   },
+   {
+    "node": "sk-def-sp-normalized-towers",
+    "why": "Steps 3 and 5 check the definition of the uniformly bounded ctf tower subcategory, without imposing normalization; it is a named input of this unit."
+   },
+   {
+    "node": "sk-lem-sp-tower-bound",
+    "why": "Step 3 restricts compact support to the ctf tower subcategory; it is a named input of the current tower-geometric unit."
+   },
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "Steps 6, 7 and 10 use exactness of contravariant Hom on distinguished triangles to lift a counit and prove representability; this is generic triangulated-category infrastructure."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Step 10 uses exact evaluation descending to a triangulated functor; the tower unit does not state the general descent theorem."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Step 5 identifies localized pro-etale sites and constant coefficient rings on opens before applying abstract ringed-topos descent; the tower unit supplies the tower category but not this site equivalence."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Step 3 supplies etale-origin representatives with the same precise Tor interval for finite discrete coefficients, as required by the current uniform-bound statement; the tower unit does not prove the generic finite-site comparison."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Step 3 preserves the specified relative dimension under geometric-point base change, verifying the revised uniform-bound theorem's geometric-fibre hypothesis; this is generic scheme geometry."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Step 3 compares finite scalar-matrix local models with constant finite module sheaves by sheafifying their cokernel presentations; this is generic site infrastructure not supplied by the tower unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sc-standard-smooth-local-relative-dimension",
+  "lem-sc-standard-smooth-etale-polynomial-chart",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-pur-finite-kummer-level",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-coefficient-twists-detailed",
+  "sk-lem-sp-tower-levels",
+  "sk-def-sfb-constructible",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pur-twist-sheaf-locally-free",
+  "sk-def-sp-normalized-towers",
+  "sk-lem-sp-tower-bound",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-proetale-weakly-etale-localization",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-3645768e7",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-3645768e7 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, all 42 cited statements, the current main-20261015 gluing statement/proof and the sk-prop-sp-tower-geometric unit/section, and Stacks 08DG/08BU/0F7J/03S5. Statement: it keeps all three blueprint clauses and makes explicit only the standing setting of sk-def-sfb-dc-setting; nothing is weakened. Two source corrections are accepted. (1) Counit order: for f|_U=p_d e the composite counit is eps_p∘Rp_!(eps_e), so the fibre sum comes first; this agrees with the current det-sp-reduction-exceptional. (2) Gluing object: the cone of (1,-1):G+G->G is G[1] for U=V=X, so the Rj_* fibre of 08DG is used instead. Steps 1-11 checked against the cited statements and their hypotheses. The P1 domain holds: every level has an etale-origin witness via det-pe-finite-tor-comparison-noetherian, and the towers are bounded below. The Kummer level uses exponent en. The shifted Tor/cohomology intervals and the geometric-fibre hypothesis of the uniform bound are satisfied. The topos slice/subterminal set-up for the descent is correct. The signed overlap counits cancel. The five-term chases are complete. The finite induction tests all finite ctf objects, not only tower lifts. I recomputed the Step 11 transpose identity: both sides equal r_K(eps_n)_{A_m} b^{-1}, and it needs no flatness. New lem-sp-ringed-topos-binary-descent: true (j^*Rj_* = id for subterminals, plus local split exactness) and not a duplicate; every existing gluing node is for ringed spaces or for a fixed Z/l^n. New lem-sp-coefficient-tower-shriek-calculus: true; I verified (3) for j_! and Rp_*. It is not a duplicate (existing nodes have a fixed coefficient or a fixed ring, and det-sp-composition-comparisons would make a cycle) and does not restate a clause of the item. Accepted the 22 declared generic tool_uses. Minor form remark, not fixed: the new nodes' created has no group and they have no lean_audit field. No fixes written."
+ }
 }

@@ -32,11 +32,121 @@
  },
  "stmt_deps": [
   "lem-coef-model-infinity-derived-adjunction",
-  "lem-coef-combinatorial-localization-presentability"
+  "lem-coef-combinatorial-localization-presentability",
+  "def-sfb-monoidal-category",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-associative-word-filtration] to the underlying biclosed monoidal category. It supplies the explicit tensor-word monad $P=UT$, its identification of algebras with strict associative unital algebras, the adjunction $T\\dashv U$, creation of filtered colimits, and the initial algebra $\\mathbf1$. Since $P$ preserves filtered colimits, it preserves $\\aleph_0$-filtered colimits. Apply [lem-coef-accessible-monad-presentability] with a singleton set of sorts and base $\\mathcal M$: $\\operatorname{Alg}(\\mathcal M)$ is locally presentable and complete and cocomplete. All sets and filtered diagrams here use the fixed universe of the hypotheses.",
+   "uses": [
+    "lem-coef-associative-word-filtration",
+    "lem-coef-accessible-monad-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Section 3.2, tensor-word construction and Theorem 3.8; accessible-monad presentability input."
+   }
+  },
+  {
+   "text": "Fix any generating sets $I,J$ as in the statement. Put $W'=U^{-1}W$ and $F'=U^{-1}F$. Adjunction identifies a square with left side $T(i)$ and right side $p$ with the corresponding square with left side $i$ and right side $U(p)$; the bijection also identifies their diagonal fillers. Consequently $T(I)^{\\square}=F'\\cap W'$ and $T(J)^{\\square}=F'$. Define $C'={}^{\\square}(F'\\cap W')$ and $D'={}^{\\square}F'$. Apply [lem-coef-presentable-small-object-factorization] to each of the small sets $T(I),T(J)$ in the locally presentable algebra category. It gives functorial factorizations into $(C',F'\\cap W')$ and $(D',F')$. These pairs are weak factorization systems: for either set $S=T(I)$ or $S=T(J)$, let $R=S^{\\square}$ and $L={}^{\\square}R$. Every member of $S$ belongs to $L$, so $L^{\\square}\\subseteq S^{\\square}=R$; the defining lifting property of $L$ gives $R\\subseteq L^{\\square}$. Thus $R=L^{\\square}$ as well as $L={}^{\\square}R$, and the displayed functorial factorizations supply the remaining axiom.",
+   "uses": [
+    "lem-coef-presentable-small-object-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 3.8, small-object factorizations and adjunction on lifting squares."
+   }
+  },
+  {
+   "text": "Let $\\mathcal K$ be the weakly saturated class of maps specified in the nonsymmetric monoid axiom of the statement, so $\\mathcal K\\subseteq W$. If $f:X\\to Y$ is a trivial cofibration and $T(X)\\to A$ is any algebra morphism, the filtration of [lem-coef-associative-word-filtration] presents $U(A)\\to U(A\\amalg_{T(X)}T(Y))$ as a countable composite of pushouts of $q_n$. Each $q_n$ is an alternating iterated pushout product of copies of $f$ and $0\\to U(A)$, with $n\\geq1$, so is one of the generators of $\\mathcal K$. In particular $U(A)$ is not assumed cofibrant. Thus this underlying pushout map belongs to $\\mathcal K$. A small coproduct of trivial cofibrations is a trivial cofibration: against a fibration, choose a filler on each summand and combine them by the coproduct universal property. Because $T$ is a left adjoint, coproducts of maps $T(j)$ are $T(\\coprod j)$. Therefore the same conclusion applies to pushouts of small coproducts of maps of $T(J)$.",
+   "uses": [
+    "lem-coef-associative-word-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 3.10 and proof of Corollary 3.14; use the arbitrary-object monoid axiom of Muro Definition 9.1, not Haugseng Definition 3.11 as printed."
+   }
+  },
+  {
+   "text": "Consider a relative $T(J)$-cell complex, a continuous small ordinal chain of the pushouts in step 3. By creation of filtered colimits in [lem-coef-associative-word-filtration], its underlying chain is continuous at each nonzero limit ordinal. Refine each successor map by its countable filtration from step 3, and concatenate these countable chains in ordinal order. At the inserted and original limit ordinals take the colimits; these give the same objects by the colimit universal property. This exhibits the underlying composite in $\\mathcal K$, and hence in $W$. Now take any $d\\in D'$ and factor it, using [lem-coef-presentable-cellular-factorization] for $T(J)$, as $p\\circ c$ with $c$ a relative $T(J)$-cell map and $p\\in T(J)^{\\square}=F'$. The left lifting property of $d$ against $p$ makes $d$ an arrow retract of $c$: for $d:X\\to Y$ and $c:X\\to Z$, lift the square with top $c$, bottom $1_Y$ to obtain $h:Y\\to Z$ with $hd=c$ and $ph=1_Y$; the retract squares are $(1_X,h)$ and $(1_X,p)$. Thus $U(d)$ is a retract of the weak equivalence $U(c)$, so $D'\\subseteq W'$.",
+   "uses": [
+    "lem-coef-associative-word-filtration",
+    "lem-coef-presentable-cellular-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 3.8 and Corollary 3.14; cellular acyclicity, refining the filtration instead of asserting arbitrary transfinite closure of W."
+   }
+  },
+  {
+   "text": "Since $F'\\cap W'\\subseteq F'$, left orthogonality gives $D'\\subseteq C'$, and step 4 gives $D'\\subseteq C'\\cap W'$. Conversely let $f\\in C'\\cap W'$ and use the second functorial factorization of step 2 to write $f=p\\circ d$ with $d\\in D'$ and $p\\in F'$. Step 4 and two-out-of-three for $W'$ give $p\\in W'$, so $f$ lifts against $p$. The explicit retract construction of step 4 makes $f$ a retract of $d$. Since the left lifting class $D'$ is retract closed by [lem-coef-lifting-class-closure], $f\\in D'$. Hence $D'=C'\\cap W'$. The classes $W'$ inherit retract closure and two-out-of-three from $W$ under the functor $U$. Step 1 gives completeness and cocompleteness, and step 2 now gives exactly the two functorial weak factorization systems required in [lem-coef-model-infinity-derived-adjunction]. These establish the claimed model structure; local presentability and the generating sets in step 2 make it combinatorial.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 3.8, recognition by the two lifting systems; Definition 3.6 and Corollary 3.14."
+   }
+  },
+  {
+   "text": "For any cofibration $i$ of $\\mathcal M$ and any algebra trivial fibration $p$, the adjoint lifting-square bijection of step 2 turns lifting $T(i)$ against $p$ into lifting $i$ against the trivial fibration $U(p)$. Thus $T(i)\\in C'$. If $i$ is a trivial cofibration and $p\\in F'$, then $U(p)$ is a fibration; every square from $i$ to $U(p)$ has a filler by the model lifting axiom. The adjunction sends that filler to a filler for the original square from $T(i)$ to $p$, proving $T(i)\\in D'=C'\\cap W'$. This is precisely the claimed Quillen condition in the model-category convention [lem-coef-model-infinity-derived-adjunction]. The explicit formula for $T$, its unit and multiplication are already supplied in step 1 by [lem-coef-associative-word-filtration].",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-associative-word-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Definition 3.6 and Corollary 3.14: Quillen property from the adjunction on lifting squares."
+   }
+  },
+  {
+   "text": "We next prove that any relative $T(I)$-cell complex starting at the initial algebra has cofibrant underlying objects and cofibration underlying structure maps. The initial underlying object is $\\mathbf1$, cofibrant by hypothesis. Suppose the current algebra $A$ has cofibrant underlying object and a successor attaches a small coproduct of $T(i)$, $i\\in I$. Write it as a single free attachment $T(f)$, where $f=\\coprod i$ is a cofibration (fill against each trivial fibration summand by summand). In [lem-coef-associative-word-filtration], $j:0\\to U(A)$ is now a cofibration. The pushout-product hypothesis, iterated over the displayed alternating factors $j,f,\\ldots,j,f,j$, makes each $q_n$ a cofibration. Pushouts remain cofibrations by [lem-coef-lifting-class-closure], and the countable composite remains a cofibration by [lem-coef-transfinite-left-lifting], with the fixed right class the trivial fibrations of $\\mathcal M$. Hence the successor object is cofibrant. At any nonzero limit stage, $U$ creates the filtered colimit; apply [lem-coef-transfinite-left-lifting] with right class the trivial fibrations to the continuous chain, including the initial cofibration $0\\to\\mathbf1$, to conclude that the limit object is cofibrant. This completes transfinite induction, without requiring the domains of the generating maps $I$ to be cofibrant.",
+   "uses": [
+    "lem-coef-associative-word-filtration",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Corollary 3.15; the word-filtration argument for Muro Lemma 9.4, specialized directly to associative algebras."
+   }
+  },
+  {
+   "text": "Finally let $A$ be a cofibrant algebra. Apply [lem-coef-presentable-cellular-factorization] to its initial map using $T(I)$, giving $\\mathbf1\\xrightarrow{c}Z\\xrightarrow{p}A$ with $c$ cellular and $p\\in T(I)^{\\square}=F'\\cap W'$. Cofibrancy of $A$ gives a section $s:A\\to Z$ of $p$ by lifting its initial map against $p$. Thus $U(A)$ is a retract of $U(Z)$, which is cofibrant by step 7. Retract closure of cofibrations from [lem-coef-lifting-class-closure] applied to the initial maps proves that $U(A)$ is cofibrant. This proves the last clause.",
+   "uses": [
+    "lem-coef-presentable-cellular-factorization",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Corollary 3.15 and Muro Lemma 9.4: retract of a free-cell algebra."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-associative-word-filtration",
+  "lem-coef-accessible-monad-presentability",
+  "lem-coef-presentable-small-object-factorization",
+  "lem-coef-presentable-cellular-factorization",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-transfinite-left-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2; ordinary transfer argument written out from the online Haugseng Section 3.2 route, which is not archived locally; see WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +175,52 @@
    "results": "{\"t\": \"2026-10-16T17:00:21Z\", \"tool\": \"grep\", \"query\": \"monoid.?axiom|admissib.*monad|sifted.*homotop|homotop.*sifted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\"], \"digest\": \"215087b9f5273403\"}",
    "date": "2026-10-16",
    "verdict": "no match: Read the returned model-category axioms, ordinary monoid limits/localizations and simplicial-object constructions; none transfers a model structure to associative algebras or states preservation of homotopy sifted colimits."
+  },
+  {
+   "tool": "grep",
+   "query": "monoid.?axiom|admissib.*monad|transfer.*model.?structure",
+   "results": "{\"t\": \"2026-10-16T18:31:23Z\", \"tool\": \"grep\", \"query\": \"monoid.?axiom|admissib.*monad|transfer.*model.?structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\"], \"digest\": \"76c434bb4424cc76\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The returned model-category constructor, ordinary monoids and monad-colimit lemmas do not transfer a model structure to associative algebras. The second phrasing also gave no transfer theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"MonoidalCategory\"",
+   "results": "{\"t\": \"2026-10-16T18:31:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"ModelCategory\\\", \\\"MonoidalCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The returned model-category constructor, ordinary monoids and monad-colimit lemmas do not transfer a model structure to associative algebras. The second phrasing also gave no transfer theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transfer a cofibrantly generated model structure to monoids in a monoidal category using the monoid axiom",
+   "results": "{\"t\": \"2026-10-16T18:31:23Z\", \"tool\": \"leansearch\", \"query\": \"Transfer a cofibrantly generated model structure to monoids in a monoidal category using the monoid axiom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.mk'\", \"CategoryTheory.Mon.mk\", \"CategoryTheory.Mon.monMonoidalStruct\", \"CategoryTheory.Functor.FullyFaithful.monObj\", \"CategoryTheory.Mon.monMonoidal\", \"CategoryTheory.Functor.FullyFaithful.mon_Class\", \"HomotopicalAlgebra.ModelCategory.categoryWithCofibrations\", \"CategoryTheory.Mon.lift_hom\"], \"digest\": \"9f1a44b3c44d847f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The returned model-category constructor, ordinary monoids and monad-colimit lemmas do not transfer a model structure to associative algebras. The second phrasing also gave no transfer theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associative unital algebras in a nonsymmetric monoidal model category satisfying the monoid axiom have a transferred model structure",
+   "results": "{\"t\": \"2026-10-16T18:31:33Z\", \"tool\": \"leanfinder\", \"query\": \"Associative unital algebras in a nonsymmetric monoidal model category satisfying the monoid axiom have a transferred model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.MonModuleEquivalenceAlgebra.functor\", \"CategoryTheory.Monad.instMonObjFunctor\", \"AlgCat.instMonoidalCategory\", \"SSet.Truncated.instMonoidalOfNatNatCatHoFunctor₂\", \"SSet.Truncated.hoFunctor.monoidal\", \"MonTypeEquivalenceMon.monMonoid\", \"ModuleCat.MonModuleEquivalenceAlgebra.inverse\", \"ModuleCat.monModuleEquivalenceAlgebra\"], \"digest\": \"a6d618bf68880282\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The returned model-category constructor, ordinary monoids and monad-colimit lemmas do not transfer a model structure to associative algebras. The second phrasing also gave no transfer theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "ModelCategory|admissib|transfer",
+   "results": "{\"t\": \"2026-10-16T18:31:42Z\", \"tool\": \"grep\", \"query\": \"ModelCategory|admissib|transfer\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Grp.lean\", \"Mathlib/CategoryTheory/Monoidal/Grp.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\"], \"digest\": \"c23d163656741404\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The returned model-category constructor, ordinary monoids and monad-colimit lemmas do not transfer a model structure to associative algebras. The second phrasing also gave no transfer theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right induced cofibrantly generated model structure on algebras over a filtered colimit preserving monad",
+   "results": "{\"t\": \"2026-10-16T18:31:53Z\", \"tool\": \"leanfinder\", \"query\": \"Right induced cofibrantly generated model structure on algebras over a filtered colimit preserving monad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monad.beckAlgebraCoequalizer\", \"CategoryTheory.Monad.forgetCreatesColimit\", \"CategoryTheory.Monad.forget_creates_colimits_of_monad_preserves\", \"CategoryTheory.Monad.ForgetCreatesColimits.coconePoint\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCoconeIsColimit\", \"CategoryTheory.Monad.MonadicityInternal.leftAdjointComparison\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.Monad.beckCoequalizer\"], \"digest\": \"f9c9dd74cc4a6b96\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The returned model-category constructor, ordinary monoids and monad-colimit lemmas do not transfer a model structure to associative algebras. The second phrasing also gave no transfer theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-fixed-object-dg-free-model",
@@ -76,5 +228,21 @@
   "group": "NN"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-associative-algebra-model-transfer",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary-auxiliary-object nonsymmetric monoid axiom and the full statement unchanged. Exposed the tensor-word pushout filtration as one algebraic input, reused accessible-monad presentability and both existing small-object factorization nodes, and proved transfer and underlying cofibrancy by explicit cellular/refinement and retract arguments. No arbitrary transfinite closure of weak equivalences is used.",
+  "blueprint": "Realizes the finite-level mapping-complex adjunction input of paragraph 2 of the main-20261015 ancestor through the fixed-object dg-graph algebra model. The algebraic free-cell filtration realizes the generic transfer substep recorded in this item's existing blueprint ancestry. No chapter or unit route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N6-afa8cf38a",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-afa8cf38a (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, the new node lem-coef-associative-word-filtration and the statements of all 9 cited nodes. Haugseng arXiv:1312.3881v4 §3.2 was read online: Defs 3.2, 3.6, 3.11, Thms 3.8, 3.10, Cors 3.14, 3.15. The new node's layer maps q_n=(j□f)^{□n}□j match Thm 3.10 exactly; checked directly (j□f=A⊙f because 0⊙–=0, giving the 'some Y-letter from X' boundary) and on small cases n=1, f=id, A=1 with X=0, the zero algebra, and an empty attachment. The source-error note is correct: Def 3.11 as printed requires cofibrant X_i, but Cor 3.14 needs 0→U(A) for an arbitrary A. The item keeps its unchanged arbitrary-object monoid axiom. Muro Def 9.1 was not reopened; the item's statement is unchanged by this delivery. Steps 1-8 checked against the cited statements: accessible monad with one sort and ℵ0; adjoint lifting gives T(I)^□=F'∩W' and T(J)^□=F'; cell complexes land in K⊆W through creation of filtered colimits; the retract argument gives D'=C'∩W'; the Quillen property; induction from the cofibrant unit using the pushout-product axiom, the closure leaf and the transfinite leaf; the section/retract argument for cofibrant algebras. No unstated hypothesis (left properness, cofibrant domains of I) is used. New node: B1-B9 hold, it is strictly below the item, there are no duplicates (rg over dag/nodes) and no cycle. All cited nodes are in the same unit or are Mathlib leaves; tool_uses is empty. No fixes."
+ }
 }

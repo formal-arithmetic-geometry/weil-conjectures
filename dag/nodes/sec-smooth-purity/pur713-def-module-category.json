@@ -3,25 +3,100 @@
  "blueprint": {
   "is": "pur713-def-module-category",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Non-finite-coefficient derived category",
- "statement": "For $T\\in\\{\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, the ambient category is the ordinary derived category of the abelian category of module objects (Input “Abelian structure of module objects” (`pur713-input-module-abelian`, in [sk-def-sf-setting])) over the coefficient ring $\\mathcal R_{X,T}$ of Definition [pur713-def-coefficient-rings]:\n\n$$\nD(X_{\\Proet},T)\n:=D\\bigl(\\mathsf{Mod}(X_{\\Proet},T)\\bigr),\n$$\n\nwith $D(-)$ as in Definition “Finite-coefficient étale derived categories” (`pur456-pbc-finite-category`, in [sk-thm-sf-comp-composition]). The superscripts $+$ and $b$ denote the full subcategories of objects whose cohomology module objects vanish in all sufficiently negative degrees, respectively outside a finite interval. No derived-completeness condition, rationalization construction, or colimit of coefficient categories is part of this definition. Comparisons with such constructions require separate results.",
+ "statement": "Let $X$ be a scheme, $\\ell$ a prime, $E/\\mathbf Q_\\ell$ a finite extension, and $T\\in\\{\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Use the small pro-étale site and universe convention of [def-weil-pbc-proetale-site] and [def-weil-size-convention]. Let $\\mathcal R_{X,T}$ be the commutative ring object of [pur713-def-coefficient-rings], and put $\\mathsf{Mod}(X_{\\Proet},T)=\\mathsf{Mod}_{\\mathcal R_{X,T}}(\\mathsf{Sh}(X_{\\Proet},\\mathsf{Ab}))$, with module objects as in [pur713-def-modules]. Give abelian sheaves their sheafified tensor product over $\\mathbf Z$ [sk-def-sfb-sheaf-tensor]. This sheaf category is abelian, its tensor is additive and preserves colimits [lem-weil-pbc-sheaf-tensor-closed]; consequently [lem-sfb-modobj-abelian] supplies the abelian structure on $\\mathsf{Mod}(X_{\\Proet},T)$.\n\nDefine the ambient category to be its ordinary unbounded derived category [def-weil-abstract-derived-category]:\n$$\nD(X_{\\Proet},T):=D\\bigl(\\mathsf{Mod}(X_{\\Proet},T)\\bigr).\n$$\nThe superscripts $+$ and $b$ denote the full subcategories of objects whose cohomology module objects vanish in all sufficiently negative degrees, respectively outside a finite interval [def-weil-pbc-bounded-derived-subcategories]. No derived-completeness condition, rationalization construction, or colimit of coefficient categories is part of this definition. Comparisons with such constructions require separate results.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-module-category.md",
   "place": "node pur713-def-module-category, order 2479"
  },
  "stmt_deps": [
-  "sk-def-sf-setting",
-  "pur713-def-coefficient-rings"
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "pur713-def-coefficient-rings",
+  "pur713-def-modules",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def DerivedCategory|def Plus|def Bounded|def IsBounded|def IsGE",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:87 DerivedCategory; HomotopyCategory/Plus.lean:85 plus; CochainComplexPlus.lean:30 CochainComplex.plus.",
+   "date": "2026-10-16",
+   "verdict": "match: DerivedCategory; other hits are different categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category of module objects over a sheaf of rings with bounded below and bounded cohomology",
+   "results": "HasDerivedCategory.standard, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, HasDerivedCategory, SheafOfModules.noConfusionType, SheafOfModules, DerivedCategory, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat.",
+   "date": "2026-10-16",
+   "verdict": "match: generic DerivedCategory; SheafOfModules hits are not used to identify internal modules with sectionwise modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory",
+   "results": "DerivedCategory, instCategoryDerivedCategory, DerivedCategory.instHasZeroObject, DerivedCategory.instPreadditive, DerivedCategory.instHasShiftInt, DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor, DerivedCategory.instPretriangulated, DerivedCategory.instIsTriangulated, DerivedCategory.instAdditiveShiftFunctorInt, DerivedCategory.Q.",
+   "date": "2026-10-16",
+   "verdict": "match: DerivedCategory and Q are the ordinary localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ordinary unbounded derived category of an abelian category and its full subcategories of cohomologically bounded below and bounded objects",
+   "results": "HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.instCategory, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.TStructure.t. Read Basic.lean:74-98 and TStructure.lean:84-108,200-218.",
+   "date": "2026-10-16",
+   "verdict": "match: arbitrary abelian category construction specializes to the module-object category, with the abelian instance supplied by the cited nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev Plus|abbrev Bounded|isGE_iff|isLE_iff",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:90 isGE_iff,98 CochainComplex.isGE_iff,107 isLE_iff,115 CochainComplex.isLE_iff,126 isGE_iff.",
+   "date": "2026-10-16",
+   "verdict": "match: bounds are characterized by vanishing cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "DerivedCategory.Plus and DerivedCategory.Bounded defined by vanishing cohomology in an abelian category",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE.",
+   "date": "2026-10-16",
+   "verdict": "match: cohomological bounds; Plus and Bounded confirmed by the source grep"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev Plus|abbrev Bounded|def homologyFunctor",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:34 homologyFunctor,39 homologyFunctorFactors,55 homologyFunctorFactorsh; TStructure.lean:204 Plus,207 Bounded,215 Plus.ι,218 Bounded.ι; Plus.lean:151 homologyFunctor.",
+   "date": "2026-10-16",
+   "verdict": "match: full subcategories and cohomology functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Bounded",
+   "results": "2 hits: DerivedCategory.Bounded and DerivedCategory.Bounded.ι, both in Mathlib.Algebra.Homology.DerivedCategory.TStructure; the former takes an arbitrary abelian category with HasDerivedCategory and the latter is its inclusion into DerivedCategory C.",
+   "date": "2026-10-17",
+   "verdict": "match: generic bounded category specializes directly to the internal-module category; source read at TStructure.lean:207,218"
+  },
+  {
+   "tool": "grep",
+   "query": "HasDerivedCategory.standard|abbrev Plus|abbrev Bounded",
+   "results": "25 hits, including DerivedCategory/Basic.lean:81 HasDerivedCategory.standard and DerivedCategory/TStructure.lean:204 Plus,207 Bounded,215 Plus.ι,218 Bounded.ι; other hits concern homotopy categories, cochain complexes or unrelated bounded order.",
+   "date": "2026-10-17",
+   "verdict": "match: source inspection confirms the ordinary localization and its two required full subcategories"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "DerivedCategory, DerivedCategory.Plus, DerivedCategory.Bounded",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+  "how": "specializes in one line per clause: set C = Mod_{R_{X,T}}(Sh(X_proet, Ab)), the actual internal-module category of pur713-def-modules, with its abelian structure from lem-sfb-modobj-abelian. DerivedCategory C (Basic.lean:87) with Q (95) and Q.IsLocalization (98) is the ordinary derived category; HasDerivedCategory.standard (81) supplies localization in a sufficiently large universe. DerivedCategory.homologyFunctor and homologyFunctorFactors (Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:34,39) give module-object cohomology. DerivedCategory.Plus and DerivedCategory.Bounded (Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:204,207) are the full subcategories for the standard t-structure; isGE_iff (90) and isLE_iff (107) identify their bounds with the displayed cohomology vanishing. No equivalence with SheafOfModules or alternate coefficient category is used."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -35,5 +110,21 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sp-coefficient-towers"
+ "unit": "sk-def-sp-coefficient-towers",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur713-def-module-category",
+  "worker": "stage1",
+  "summary": "Revalidated after the landing return against the current DAG statement of pur713-def-coefficient-rings. Its current definition still supplies exactly the commutative ring object R_{X,T}=p_X^* underline T used here, for all three T choices, with no sectionwise-value formula; therefore the existing stmt_dep and specialized DerivedCategory/Plus/Bounded Mathlib leaf remain exact. No new nodes or statement changes are required.",
+  "blueprint": "Realizes the displayed ordinary-derived-category definition and the following sentence defining the + and b superscripts in pur713-def-module-category.md, order 2479. The unit is a coefficient-tower definition with no proof steps; this item is not its key node. Whole-blueprint searches found no other node stating the same full specialized definition. sk-def-sfb-derived-categories overlaps its O_E and E cases but also defines unrelated derived functors and lacks this item's explicit bounded variant and Qbar coefficient convention. Repair 2026-10-17: reread current pur713-def-coefficient-rings and confirmed the cited ring-object clause is unchanged in meaning; no dependency adjustment is required.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-b2f2f6b96",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-b2f2f6b96 (reviewer sub-agent of L); spot-checked: Read the item in full against the blueprint main-20261015 pur713-def-module-category (order 2479) and Stacks derived.tex Def 05RU (lines 3690-3723). The three coefficient choices T=O_E,E,Qbar_l, the ordinary unbounded derived category of the internal R_{X,T}-module objects, the cohomological definitions of + and b, and the exclusion of completion, rationalization and colimit constructions all agree with the sources; the added X, l, E only name parameters the source leaves implicit, with no new hypothesis. The two blueprint references pur713-input-module-abelian and pur456-pbc-finite-category occur in the DAG only as prose, not as node files (rg). Replacing them with existing nodes is a correct cross-reference repair. Each of the nine stmt_deps says what the item takes from it. The site and size nodes give essential smallness through a V-small skeleton. lem-weil-pbc-sheaf-tensor-closed (1)-(3), applied with A=Ab, gives an abelian sheaf category with an additive tensor that preserves colimits. Those are exactly the hypotheses of lem-sfb-modobj-abelian, applied to the monoid R_{X,T}=p_X^*T. Its Mod_R from sk-def-sfb-module-objects is the same definition as pur713-def-modules. These two definition nodes are an older near-duplicate already in the DAG, not created by this delivery. The Mathlib leaf was checked in the source: HasDerivedCategory.standard at Basic.lean:81, DerivedCategory at 87, Q at 95, IsLocalization at 97-98; homologyFunctor and homologyFunctorFactors at HomologySequence.lean:34,39; isGE_iff and isLE_iff at TStructure.lean:90,107; Plus and Bounded at 204,207. This is a one-line specialization with no SheafOfModules comparison. There are no new nodes and no proof steps; the rg duplicate search found only consumers of this notion. Edge cases checked: X empty, the zero object, a module in one degree, unbounded complexes, T=O_E without completion, l not invertible. No tool_uses, no SGA, no fixes."
+ }
 }

@@ -26,9 +26,109 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-algebroid-segal-localization-model], choose a small monoidal infinity category $B$ and a monoidally compatible small set $S$ with $\\mathcal V\\simeq P^S(B)$. Use its natural equivalence $\\operatorname{Algd}(\\mathcal V)\\simeq Q_B^S\\subset P(B_\\otimes)$ to represent the given coherent diagram by $F_\\bullet$. The inclusions here are full subcategories. Under this equivalence $F_n([0])=X_n$, and the mapping presheaf $H_{F_n}(x,y)$ represents $C_n(x,y)$ in the full subcategory $P^S(B)\\subset P(B)$. It is $S$-local. In the rest of the proof all limits, fibers and products of spaces are homotopy limits, fibers and products. The indexing category $\\Delta^{\\mathrm{op}}$ and the label category $B_\\otimes$ are small, in the universe convention of [def-coef-complete-algebroid].",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-algebroid-segal-localization-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definition 4.3, Proposition 5.1, Proposition 8.2 and Observation 8.4; use the fiberwise localization characterization of the cited DAG model, rather than the uncorrected wording of Proposition 8.5"
+   }
+  },
+  {
+   "text": "Fix a label $q=[r](b_1,\\ldots,b_r)$ and a structure arrow $m\\to n$ of $\\Delta^{\\mathrm{op}}$. Consider the endpoint square with top row $F_m(q)\\to F_n(q)$ and bottom row $X_m^{r+1}\\to X_n^{r+1}$. Over a tuple $(x_0,\\ldots,x_r)\\in X_m^{r+1}$, the Segal condition identifies the homotopy fiber of its top-left corner over the bottom-left corner with $\\prod_{i=1}^r H_{F_m}(x_{i-1},x_i)(b_i)$; the analogous fiber of the pullback of the top-right corner is $\\prod_{i=1}^r H_{F_n}(f x_{i-1},f x_i)(b_i)$. Full faithfulness of $C_m\\to C_n$ makes each factor map an equivalence, by the mapping-object identification in [lem-coef-algebroid-segal-localization-model]. Thus the pullback comparison is an equivalence on every homotopy fiber. Apply the fiberwise comparison criterion of [lem-coef-space-geometric-descent] with the identity cover of $X_m^{r+1}$ to conclude that the endpoint square is cartesian. For $r=0$ the vertical maps are identities, so the same conclusion holds. These are the actual naturality squares of the given coherent diagram, since the equivalence of models is natural on diagrams and maps.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-algebroid-segal-localization-model",
+    "lem-coef-space-geometric-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.6.2, proof paragraph beginning with the pointwise presheaf colimit; expand its structural cartesian squares using Theorem 4.5.3 and the labelled Segal formula"
+   }
+  },
+  {
+   "text": "Form the pointwise presheaf colimit $F=\\operatorname{colim}_{\\Delta^{\\mathrm{op}}}F_n$ in $P(B_\\otimes)$, which exists by [lem-coef-algebroid-segal-localization-model], and put $X=F([0])=|X_\\bullet|$. For the fixed label $q$ of step 2, the transformation of simplicial spaces $F_\\bullet(q)\\to X_\\bullet^{r+1}$ is cartesian on every arrow. Cartesian geometric descent and finite-product compatibility in [lem-coef-space-geometric-descent] therefore give, for every degree $n$, a natural equivalence over $X_n^{r+1}$,\n$$F_n(q)\\simeq X_n^{r+1}\\times_{X^{r+1}}F(q).$$\nThe lower comparison $|X_\\bullet^{r+1}|\\simeq X^{r+1}$ is the finite-product comparison, not a claim that arbitrary pullbacks commute with geometric realization. All maps in the displayed equivalence are induced by the original cocone and endpoint maps.",
+   "uses": [
+    "lem-coef-algebroid-segal-localization-model",
+    "lem-coef-space-geometric-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.6.2, pointwise-colimit and cartesian-square paragraphs; HTT Theorem 6.1.3.9(4), applied to small simplicial diagrams"
+   }
+  },
+  {
+   "text": "We check that $F$ is Segal. For $r\\geq2$ consider the Segal map over $X^{r+1}$,\n$$s_q:F(q)\\longrightarrow F([1](b_1))\\times_X\\cdots\\times_X F([1](b_r)).$$\nPull it back along $X_0^{r+1}\\to X^{r+1}$. Step 3 identifies its source with $F_0(q)$. For each edge factor, the same step with $r=1$ identifies its pullback along the corresponding pair of coordinates $X_0^2\\to X^2$ with $F_0([1](b_i))$. Rearranging these finite pullbacks identifies the pulled-back target with $F_0([1](b_1))\\times_{X_0}\\cdots\\times_{X_0}F_0([1](b_r))$. The pulled-back map is exactly the Segal map of $F_0$, hence an equivalence. By [lem-coef-space-geometric-descent], $X_0\\to X$ is surjective on $\\pi_0$, so $X_0^{r+1}\\to X^{r+1}$ is also surjective on $\\pi_0$ (choose a lift component independently in each coordinate). Apply its fiberwise comparison criterion to the square with top row $s_q$ and bottom row $\\mathrm{id}_{X^{r+1}}$: the comparison is an equivalence on every fiber after that cover, hence $s_q$ is an equivalence. By [def-coef-segal-presheaf-localization], this proves $F\\in Q_B$.",
+   "uses": [
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-space-geometric-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.6.2, paragraph concluding that the pointwise colimit is already a Segal presheaf; make the endpoint-cover and finite-pullback argument explicit"
+   }
+  },
+  {
+   "text": "The presheaf $F$ also has local mapping objects. For every degree $n$ and $x,y\\in X_n$, take the fiber at $(x,y)$ of the equivalence in step 3 with $q=[1](b)$. As $b$ varies, this gives the natural equivalence of presheaves\n$$H_{F_n}(x,y)\\xrightarrow{\\ \\sim\\ }H_F(\\bar x,\\bar y),$$\nwhere the arrow is induced by the cocone. Every pair of points of $X$ is connected by a pair of paths to the image of some pair of points of $X_0$, since $X_0^2\\to X^2$ is surjective on $\\pi_0$. Homotopy fibers at points connected by those paths are equivalent, naturally in the label $b$. Consequently every $H_F(u,v)$ is equivalent to some $H_{F_0}(x,y)$ and is $S$-local: for each arrow $\\phi\\to\\psi$ of $S$, the map $\\operatorname{Map}(\\psi,H_F(u,v))\\to\\operatorname{Map}(\\phi,H_F(u,v))$ is identified with the corresponding equivalence for $H_{F_0}(x,y)$. The fiberwise characterization in [lem-coef-algebroid-segal-localization-model] now implies $F\\in Q_B^S$. If $X$ is empty there are no pairs to check, so this argument requires no nonemptiness assumption.",
+   "uses": [
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-algebroid-segal-localization-model",
+    "lem-coef-space-geometric-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Observation 8.4 and the fiberwise version of Proposition 8.5 provided by the cited corrected model; GH Theorem 5.6.2, mapping-object fiber paragraph"
+   }
+  },
+  {
+   "text": "Because $Q_B^S$ is a full subcategory of $P(B_\\otimes)$ and $F$ lies in it, the pointwise colimit cocone already is colimiting in $Q_B^S$. Indeed the category of cocones of $F_\\bullet$ in $Q_B^S$ is the full subcategory of ambient cocones whose apices belong to $Q_B^S$. The ambient initial cocone with apex $F$ belongs to this subcategory and remains initial there: its mapping space to any such cocone is the same contractible mapping space as in the ambient cocone category. This is the definition of a colimiting cocone in [def-cbc-enhanced-diagrams-cones]. The equivalence of models in [lem-coef-algebroid-segal-localization-model] has a coherent inverse. Apply the two functors to every vertex and simplex of a cocone; their inverse homotopies give inverse equivalences of the two cocone categories, so their initial objects correspond. Thus this cocone gives the geometric realization $C$ of $C_\\bullet$ in $\\operatorname{Algd}(\\mathcal V)$, with its specified cocone.",
+   "uses": [
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-algebroid-segal-localization-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.6.2, assertion that the pointwise colimit is already local; elementary universal-property check for a full subcategory"
+   }
+  },
+  {
+   "text": "The model identification of object spaces gives $U(C)\\simeq F([0])=X=|X_\\bullet|$, and the equivalence identifies every cocone map on object spaces with $X_n\\to X$. For every $n$ and $x,y\\in X_n$, the natural presheaf equivalence of step 5 represents exactly the map $C_n(x,y)\\to C(\\bar x,\\bar y)$, by naturality of [lem-coef-algebroid-segal-localization-model]. Both sides are $S$-local presheaves. Since $P^S(B)$ is a full subcategory of $P(B)$, this equivalence is an equivalence in $P^S(B)\\simeq\\mathcal V$: its inverse and inverse homotopies also lie in that full subcategory. Thus all these maps of mapping objects are equivalences in $\\mathcal V$, and [def-coef-complete-algebroid] says exactly that every cocone $C_n\\to C$ is fully faithful. Steps 2-5 used only full faithfulness of the structure maps; no essential-surjectivity assumption on those maps was used.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-algebroid-segal-localization-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.6.2, conclusion from mapping-object fibers; Theorem 4.5.3 and the definition of full faithfulness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-complete-algebroid",
+  "def-coef-segal-presheaf-localization",
+  "lem-coef-algebroid-segal-localization-model",
+  "lem-coef-space-geometric-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Generalization of the Segal-presheaf/cartesian-descent paragraphs of Theorem 5.6.2 to an arbitrary fully faithful simplicial diagram, using the existing corrected small-presentation model (arXiv:2311.13362v1, sections 4-5 and 8) and HTT Theorem 6.1.3.9(4). Sources read online, not archived in literature/; WANTED entries in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,10 +178,66 @@
    "results": "{\"t\": \"2026-10-16T16:37:48Z\", \"tool\": \"grep\", \"query\": \"quasicategor.*(local|groupoid|cotensor|colimit)|Rezk|SegalSpace|effective.*groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\"], \"digest\": \"815092eb62aa2ccf\"}",
    "date": "2026-10-16",
    "verdict": "no match: the sole hit is a Rezk bibliographic reference in CategoryTheory/LiftingProperties/PushoutProduct.lean:22, not a declaration of this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "algebroid|SegalPresheaf|fullyFaithful.*realization|realization.*fullyFaithful",
+   "results": "{\"t\": \"2026-10-16T18:31:05Z\", \"tool\": \"grep\", \"query\": \"algebroid|SegalPresheaf|fullyFaithful.*realization|realization.*fullyFaithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/LieRinehartAlgebra/Defs.lean\"], \"digest\": \"40e397c2a6144fb4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary fully faithful functors/creation of ordinary colimits, ordinary category nerves and strict Segal simplicial sets, or the unrelated Lie-algebroid comment. None gives colimits of coherent simplicial diagrams of operadic infinity algebroids or their mapping objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial diagram of fully faithful enriched infinity categories has fully faithful geometric realization cocone maps",
+   "results": "{\"t\": \"2026-10-16T18:31:06Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial diagram of fully faithful enriched infinity categories has fully faithful geometric realization cocone maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.createsColimitOfFullyFaithfulOfLift'\", \"CategoryTheory.createsColimitOfFullyFaithfulOfIso'\", \"CategoryTheory.createsColimitOfFullyFaithfulOfLift\", \"SSet.Truncated.sk.fullyFaithful\", \"CategoryTheory.createsColimitOfFullyFaithfulOfIso\", \"CategoryTheory.SimplicialObject.Truncated.sk.fullyFaithful\", \"CategoryTheory.Limits.fullyFaithful_reflectsColimits\", \"CategoryTheory.createsLimitOfFullyFaithfulOfLift\"], \"digest\": \"c976575eef127704\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary fully faithful functors/creation of ordinary colimits, ordinary category nerves and strict Segal simplicial sets, or the unrelated Lie-algebroid comment. None gives colimits of coherent simplicial diagrams of operadic infinity algebroids or their mapping objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T18:31:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary fully faithful functors/creation of ordinary colimits, ordinary category nerves and strict Segal simplicial sets, or the unrelated Lie-algebroid comment. None gives colimits of coherent simplicial diagrams of operadic infinity algebroids or their mapping objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric realization of a coherent simplicial diagram of fully faithful enriched infinity algebroids preserves object spaces and mapping objects",
+   "results": "{\"t\": \"2026-10-16T18:31:17Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric realization of a coherent simplicial diagram of fully faithful enriched infinity algebroids preserves object spaces and mapping objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.SimplicialThickening.functor_id\", \"CategoryTheory.SimplicialThickening.functor\", \"CategoryTheory.SimplicialNerve\", \"SSet.Augmented\", \"TopCat.toSSet\", \"DeltaGenerated.deltaGeneratedToTop_obj\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\"], \"digest\": \"70b8cb6299836584\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary fully faithful functors/creation of ordinary colimits, ordinary category nerves and strict Segal simplicial sets, or the unrelated Lie-algebroid comment. None gives colimits of coherent simplicial diagrams of operadic infinity algebroids or their mapping objects."
+  },
+  {
+   "tool": "grep",
+   "query": "Segal|CreatesColimitOfFullyFaithful|createsColimitOfFullyFaithful",
+   "results": "{\"t\": \"2026-10-16T18:31:28Z\", \"tool\": \"grep\", \"query\": \"Segal|CreatesColimitOfFullyFaithful|createsColimitOfFullyFaithful\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FintypeCat.lean\", \"Mathlib/CategoryTheory/Limits/FullSubcategory.lean\", \"Mathlib/CategoryTheory/Limits/Creates.lean\", \"Mathlib/CategoryTheory/Limits/Creates.lean\", \"Mathlib/CategoryTheory/Limits/Creates.lean\", \"Mathlib/CategoryTheory/Limits/Creates.lean\", \"Mathlib/CategoryTheory/Limits/Creates.lean\", \"Mathlib/CategoryTheory/Limits/MorphismProperty.lean\"], \"digest\": \"2f09bc77a3892877\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary fully faithful functors/creation of ordinary colimits, ordinary category nerves and strict Segal simplicial sets, or the unrelated Lie-algebroid comment. None gives colimits of coherent simplicial diagrams of operadic infinity algebroids or their mapping objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian descent of labelled Segal presheaves under geometric realization in spaces gives equivalences on enriched hom objects",
+   "results": "{\"t\": \"2026-10-16T18:31:39Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian descent of labelled Segal presheaves under geometric realization in spaces gives equivalences on enriched hom objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.prodStdSimplex.isoNerve\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.unitHomEquiv\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\"], \"digest\": \"982f520520e6a48d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary fully faithful functors/creation of ordinary colimits, ordinary category nerves and strict Segal simplicial sets, or the unrelated Lie-algebroid comment. None gives colimits of coherent simplicial diagrams of operadic infinity algebroids or their mapping objects."
+  },
+  {
+   "tool": "grep",
+   "query": "SegalSpace|cartesian.*[Cc]olimit|[Rr]ealization.*[Ff]iber",
+   "results": "{\"t\": \"2026-10-16T19:13:48Z\", \"tool\": \"grep\", \"query\": \"SegalSpace|cartesian.*[Cc]olimit|[Rr]ealization.*[Ff]iber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/BicartesianSq.lean\"], \"digest\": \"52cfa807994aa101\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading. Coskeletal.lean:186-226 proves strict set-valued Segal simplicial sets are 2-coskeletal; StrictSegal.lean:42-60 gives strict spine bijections. BicartesianSq.lean:293-295 packages an ordinary pullback/pushout square. None gives homotopy Cartesian descent or enriched infinity-algebroid realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sifted colimits of Segal objects along cartesian natural transformations preserve homotopy fibres over vertices",
+   "results": "{\"t\": \"2026-10-16T19:13:49Z\", \"tool\": \"leanfinder\", \"query\": \"Sifted colimits of Segal objects along cartesian natural transformations preserve homotopy fibres over vertices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux\\u2083\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux\\u2081\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux\\u2082\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.Truncated.liftOfStrictSegal.naturalityProperty\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\"], \"digest\": \"ddb5d566f1b737e2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading. Coskeletal.lean:186-226 proves strict set-valued Segal simplicial sets are 2-coskeletal; StrictSegal.lean:42-60 gives strict spine bijections. BicartesianSq.lean:293-295 packages an ordinary pullback/pushout square. None gives homotopy Cartesian descent or enriched infinity-algebroid realization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-completion",
@@ -89,5 +245,21 @@
   "group": "NK"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-algebroid-ff-simplicial-realization",
+  "worker": "stage1",
+  "summary": "NY checked the exact item against GH Theorem 5.6.2 and expanded the fully faithful simplicial case through the existing corrected Segal-presheaf model and geometric descent. Seven explicit steps prove the cartesian endpoint squares, pointwise realization, Segal condition after the degree-zero endpoint cover, local mapping objects, the colimit universal property, and all cocone mapping equivalences. No new nodes, no statement change, no attachment, and no Lean work. Mathlib hits are ordinary categorical or strict Segal results, not this infinity-algebroid statement.",
+  "blueprint": "The inherited ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, finite coefficient mapping-complex adjunction before R lim, via the recorded enriched localization/completion chain. The steps expand the fully faithful realization argument needed in the completion support lemma, following the same Segal-presheaf/cartesian-square route. No unit or chapter route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NY-e5220efbf",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-e5220efbf (reviewer sub-agent of L); spot-checked: I read the item, all five cited statements (def-coef-complete-algebroid, def-coef-segal-presheaf-localization, lem-coef-algebroid-segal-localization-model, lem-coef-space-geometric-descent, def-cbc-enhanced-diagrams-cones) and the parent lem-coef-algebroid-completion, whose steps 3-4 use exactly this statement. Steps: (2) the fiber of F_m(q)->X_m^{r+1} is a product of H_{F_m} terms by Segal, and full faithfulness gives fiberwise equivalences, so the endpoint squares are cartesian (r=0 has identity vertical maps); (3) pointwise colimit plus cartesian descent and finite-product compatibility (Delta^op sifted) give F_n(q) = X_n^{r+1} x_{X^{r+1}} F(q); (4) pulling back along the pi_0-surjective X_0^{r+1}->X^{r+1} turns the Segal map into F_0's Segal map, and fiber detection makes it an equivalence; (5) fixed-endpoint fibers give H_{F_n}(x,y) = H_F(xbar,ybar), every component of X^2 is reached from X_0^2, and the model's fiberwise criterion gives Q_B^S membership; (6)-(7) colimits in a full subcategory and read-off are rightly elementary. Moving algebroids across V = P^S(B) is postcomposition, definition-level. Small cases checked: empty X_0 forces every X_n empty, and constant diagrams return C. No new nodes. No duplicate in sec-six-functors (the colorwise-sifted-colimits node has a fixed object set; the object-space-fibration node does not treat realization). No cycle; the route stays in sk-prop-sf-biduality-general and no tool_uses are needed. The GH, Haugseng and HTT sources are not archived: the report has WANTED lines and the proof is marked agent. I checked the argument on its own terms, not against the source text. No SGA is used. No target is involved, so the base-change and coefficient-category checks do not apply. No fixes."
+ }
 }

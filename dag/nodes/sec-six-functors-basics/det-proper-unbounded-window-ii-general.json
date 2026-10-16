@@ -3,38 +3,158 @@
  "blueprint": {
   "is": "det-proper-unbounded-window-ii-general",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Direct sums of arbitrary ind-constructible families",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$, $p\\colon X\\to Y$ proper with geometric fibres of dimension $\\leq d$, and\n$(K_\\alpha)$ any family in $\\Dic(X,\\Lambda)$. Then $\\bigoplus_\\alpha Rp_*K_\\alpha\\to Rp_*(\\bigoplus_\\alpha K_\\alpha)$\nis an isomorphism.",
+ "statement": "Let $\\ell$ be a prime, let $\\Qlb$ be a fixed algebraic closure of $\\mathbf Q_\\ell$, and let $E\\subseteq\\Qlb$ be a finite extension of $\\mathbf Q_\\ell$. Let $\\Lambda=E$ or $\\Qlb$, let $d\\in\\mathbf Z$, let $X,Y$ be schemes, and let $p\\colon X\\to Y$ be proper with geometric fibres of dimension $\\leq d$. For $(K_\\alpha)$ any family in $\\Dic(X,\\Lambda)$, the map $\\bigoplus_\\alpha Rp_*K_\\alpha\\to Rp_*(\\bigoplus_\\alpha K_\\alpha)$\nis an isomorphism.\n\nHere coefficients mean the condensed rings [sk-def-sfb-condensed-ring; sk-def-sfb-qlbar-condensed], pulled back to $\\Lambda_X$ and $\\Lambda_Y$ [sk-def-sfb-pulled-back-coefficients]. The ambient categories are the ordinary unbounded derived categories of module sheaves [sk-def-sfb-derived-categories], and $Rp_*$ is the total derived pushforward of module objects [sk-def-sfb-module-derived-pushpull]. Write $\\Cons(X,\\Lambda)$ for the constructible module sheaves [sk-def-sfb-constructible], $\\IndCons(X,\\Lambda)$ for their small filtered colimits in the ambient module-sheaf category, and $\\Dic(X,\\Lambda)$ for the full subcategory of complexes all of whose cohomology sheaves lie in $\\IndCons(X,\\Lambda)$. The family is indexed by any small set in the chosen universe [def-weil-size-convention]. Properness, geometric fibres and dimension have the meanings of [def-weil-proper-morphism; def-weil-geometric-fibre; def-kun-topological-krull-dimension]. The comparison is the unique map whose restriction to the $\\alpha$-th summand is $Rp_*(\\iota_\\alpha)$, where $\\iota_\\alpha:K_\\alpha\\to\\bigoplus_\\beta K_\\beta$ is the coprojection.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.md",
   "place": "node det-proper-unbounded-window-ii-general, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "def-weil-size-convention",
+  "def-weil-proper-morphism",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension"
+ ],
  "proof": [
   {
-   "text": "Fix $q$ and put $W=\\tau_{\\geq q-2d-1}\\tau_{\\leq q}$. Direct sums of sheaves are exact, so\n$\\mathcal H^n(\\bigoplus K_\\alpha)=\\bigoplus\\mathcal H^n(K_\\alpha)$ and $W(\\bigoplus K_\\alpha)\\cong\\bigoplus W(K_\\alpha)$,\ncompatibly with the truncation maps. Consider the commutative diagram\n\n$$\n\\begin{matrix}\n\\bigoplus_\\alpha\\mathcal H^q(Rp_*K_\\alpha)&\\longrightarrow&\\mathcal H^q(Rp_*\\bigoplus_\\alpha K_\\alpha)\\\\\n\\downarrow&&\\downarrow\\\\\n\\bigoplus_\\alpha\\mathcal H^q(Rp_*WK_\\alpha)&\\longrightarrow&\\mathcal H^q(Rp_*\\bigoplus_\\alpha WK_\\alpha)\n\\end{matrix}\n$$\n\n(left: sums commute with $\\mathcal H^q$). The vertical maps are isomorphisms by the window isomorphism of\n[sk-lem-proper-unbounded-window], applied to each $K_\\alpha$ and to $\\bigoplus K_\\alpha\\in\\Dic(X,\\Lambda)$ (both\nvertical maps are zig-zags of truncation maps, and these are compatible with sums). The family $(WK_\\alpha)$\nhas cohomology in $[q-2d-1,q]$, so the bottom map is an isomorphism by\n[det-proper-unbounded-window-ii-bounded]. Hence the top map, which is $\\mathcal H^q$ of the comparison\nmap, is an isomorphism. As $q$ is arbitrary, the comparison map is a quasi-isomorphism, i.e. an\nisomorphism in $\\D(Y_{\\mathrm{proét}},\\Lambda)$.",
+   "text": "Put $L=\\bigoplus_\\alpha K_\\alpha$ and let $c_K:\\bigoplus_\\alpha Rp_*K_\\alpha\\to Rp_*L$ be the comparison defined in the statement. By [det-ambient-ind-derived-sums](1), $L\\in\\Dic(X,\\Lambda)$ and, on $Y$, $H^q(\\bigoplus_\\alpha Rp_*K_\\alpha)=\\bigoplus_\\alpha H^q(Rp_*K_\\alpha)$ for every integer $q$. Thus it suffices to show that the map from this last direct sum to $H^q(Rp_*L)$ induced by $Rp_*(\\iota_\\alpha)$ is an isomorphism in every degree.",
    "uses": [
+    "det-ambient-ind-derived-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+    "place": "First two sentences and the top row of the diagram"
+   }
+  },
+  {
+   "text": "Fix $q\\in\\mathbf Z$. Enlarge the given fibre-dimension bound to a nonnegative integer $d$ if necessary, and put $a=q-2d-1$ and $W=\\tau_{\\ge a}\\tau_{\\le q}$. The truncation formulas of [def-kun-truncations] give $H^n(WT)=H^n(T)$ for $a\\le n\\le q$ and zero otherwise. For each coprojection $\\iota_\\alpha:K_\\alpha\\to L$, apply $W$ and assemble the resulting maps to obtain $b:\\bigoplus_\\alpha WK_\\alpha\\to WL$. In every degree $n$, [det-ambient-ind-derived-sums](1) identifies $H^n(b)$ with the canonical identity on $\\bigoplus_\\alpha H^n(K_\\alpha)$ if $a\\le n\\le q$, and with $0\\to0$ otherwise. Hence $b$ is an isomorphism by [lem-weil-pbc-unbounded-derived-iso-cohomology]. This proves the required compatibility of windows with sums by a specified canonical map, without assuming that $Rp_*$ commutes with sums. By [det-ambient-ind-derived-sums](2), each $WK_\\alpha$ and $WL$ lies in $\\Dic(X,\\Lambda)$.",
+   "uses": [
+    "def-kun-truncations",
+    "det-ambient-ind-derived-sums",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+    "place": "First two sentences: cohomology and finite windows commute with direct sums"
+   }
+  },
+  {
+   "text": "For $T\\in\\Dic(X,\\Lambda)$, let $u_T:\\tau_{\\le q}T\\to T$ and $v_T:\\tau_{\\le q}T\\to WT$ be the canonical truncation maps [def-kun-truncations]. By [det-proper-unbounded-window-iso], which states the window assertion of [sk-lem-proper-unbounded-window] arrow by arrow for the same $p$, $\\Lambda$ and fibre bound $d$, both $H^q(Rp_*u_T)$ and $H^q(Rp_*v_T)$ are isomorphisms. Define $\\theta_T=H^q(Rp_*v_T)\\,H^q(Rp_*u_T)^{-1}:H^q(Rp_*T)\\to H^q(Rp_*WT)$. For a morphism $f:T\\to T'$ between these objects, functoriality of truncations gives $f u_T=u_{T'}(\\tau_{\\le q}f)$ and $(Wf)v_T=v_{T'}(\\tau_{\\le q}f)$. Applying $H^q Rp_*$ and cancelling the isomorphisms $H^q(Rp_*u_T)$ shows $\\theta_{T'} H^q(Rp_*f)=H^q(Rp_*Wf)\\theta_T$. In particular this holds for each $f=\\iota_\\alpha:K_\\alpha\\to L$.",
+   "uses": [
+    "def-kun-truncations",
     "sk-lem-proper-unbounded-window",
+    "det-proper-unbounded-window-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+    "place": "The two vertical arrows: the natural zig-zag of truncation maps"
+   }
+  },
+  {
+   "text": "The family $(WK_\\alpha)$ has cohomology in the single common finite interval $[a,q]$ by [def-kun-truncations], and it belongs to $\\Dic(X,\\Lambda)$ by [det-ambient-ind-derived-sums](2). Apply [det-proper-unbounded-window-ii-bounded] with this family, the same proper morphism $p$ and the same coefficient ring. It gives an isomorphism $c_W:\\bigoplus_\\alpha Rp_*WK_\\alpha\\to Rp_*(\\bigoplus_\\alpha WK_\\alpha)$. No bound on the original family $(K_\\alpha)$ has been imposed.",
+   "uses": [
+    "def-kun-truncations",
+    "det-ambient-ind-derived-sums",
     "det-proper-unbounded-window-ii-bounded"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+    "place": "The bottom arrow: application to the common interval [q-2d-1,q]"
+   }
+  },
+  {
+   "text": "Write $j_K:\\bigoplus_\\alpha H^q(Rp_*K_\\alpha)\\xrightarrow{\\sim}H^q(\\bigoplus_\\alpha Rp_*K_\\alpha)$ and $j_W:\\bigoplus_\\alpha H^q(Rp_*WK_\\alpha)\\xrightarrow{\\sim}H^q(\\bigoplus_\\alpha Rp_*WK_\\alpha)$ for the canonical cohomology/coproduct isomorphisms of step 1. Put $A_q=H^q(Rp_*b)H^q(c_W)j_W$. This map from $\\bigoplus_\\alpha H^q(Rp_*WK_\\alpha)$ to $H^q(Rp_*WL)$ is invertible, since $b$, $c_W$ and $j_W$ are invertible. Let $\\kappa_\\alpha$ and $\\kappa^W_\\alpha$ denote the coprojections into $\\bigoplus K_\\alpha$ and $\\bigoplus WK_\\alpha$. By definition of $b$, $b\\kappa^W_\\alpha=W\\kappa_\\alpha$. The definition of each comparison and the naturality equation of step 3 therefore give, on every cohomology summand, $\\theta_L H^q(c_K)j_K=A_q(\\bigoplus_\\alpha\\theta_{K_\\alpha})$. Equality on all coprojections proves this equation. The sum of the inverse maps $\\theta_{K_\\alpha}^{-1}$ is inverse to $\\bigoplus_\\alpha\\theta_{K_\\alpha}$, since both composites restrict to the identity on every coprojection. Thus $H^q(c_K)=\\theta_L^{-1}A_q(\\bigoplus_\\alpha\\theta_{K_\\alpha})j_K^{-1}$ is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+    "place": "Commutativity of the diagram, checked on each coprojection, and cancellation of its three isomorphisms"
+   }
+  },
+  {
+   "text": "The preceding argument applies to every $q\\in\\mathbf Z$. Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] in the abelian category of $\\Lambda_Y$-module sheaves: a morphism in its ordinary unbounded derived category is invertible exactly when all its cohomology maps are invertible. Consequently $c_K$ is an isomorphism, as required.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+    "place": "Last sentence: cohomology in all degrees detects isomorphisms (Stacks Tag 05RT, lemma-acyclic)"
+   }
   }
  ],
  "proof_deps": [
+  "det-ambient-ind-derived-sums",
+  "def-kun-truncations",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
   "sk-lem-proper-unbounded-window",
+  "det-proper-unbounded-window-iso",
   "det-proper-unbounded-window-ii-bounded"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
+  "place": "Entire proof; canonical-map and naturality details supplied in steps 2, 3 and 5; the final criterion is Stacks Tag 05RT (derived.tex, lemma-acyclic), represented by the existing Mathlib leaf."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(coproduct|direct.sum|PreservesColimits).*([Pp]roper|[Ii]nd[Cc]onstructible)|([Pp]roper|[Ii]nd[Cc]onstructible).*(coproduct|direct.sum|PreservesColimits)",
+   "results": "25 hits; Mathlib/Condensed/TopComparison.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FunctorCategory/PreservesLimits.lean, Mathlib/GroupTheory/Coprod/Basic.lean, Mathlib/GroupTheory/Coprod/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state proper direct-image preservation for arbitrary ind-constructible condensed-field complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper direct image on unbounded derived categories of ind constructible l-adic sheaves preserves coproducts",
+   "results": "8 hits; CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, CategoryTheory.Limits.PreservesCoproduct.iso, CategoryTheory.Limits.PreservesFiniteCoproducts, CategoryTheory.MorphismProperty.IsStableUnderCoproductsOfShape, CategoryTheory.Sheaf.instHasFiniteCoproducts, CategoryTheory.IsGrothendieckAbelian.ab4OfSize, CategoryTheory.MorphismProperty.IsStableUnderCoproducts, CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state proper direct-image preservation for arbitrary ind-constructible condensed-field complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesColimitsOfShape\", \"DerivedCategory\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state proper direct-image preservation for arbitrary ind-constructible condensed-field complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism of schemes with geometric fibres of bounded dimension, derived direct image preserves arbitrary direct sums of complexes with ind-constructible cohomology over l-adic field coefficients.",
+   "results": "8 hits; LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, instAbelianLightCondMod, AlgebraicGeometry.Scheme.isLocallyDirected_of_equifibered_of_injective, Condensed.instAB5CondensedMod, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state proper direct-image preservation for arbitrary ind-constructible condensed-field complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "IndCons|indConstructible|ind.constructible|proper.*preserves.*(coproduct|sum)|preserves.*(coproduct|sum).*proper",
+   "results": "0 hits; ; source directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state proper direct-image preservation for arbitrary ind-constructible condensed-field complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right derived functor of finite cohomological dimension that commutes with direct sums on uniformly bounded complexes commutes with direct sums on all complexes in an ind-constructible derived subcategory.",
+   "results": "8 hits; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state proper direct-image preservation for arbitrary ind-constructible condensed-field complexes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -48,5 +168,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-proper-unbounded-window-ii"
+ "unit": "sk-lem-proper-unbounded-window-ii",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-proper-unbounded-window-ii-general",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint finite-window argument into six steps. Reused the existing coproduct/truncation closure and unbounded cohomology-detection nodes, so no new nodes are needed. Constructed the canonical window/coproduct map and proved naturality of the window zig-zag on each coprojection. Added explicit meanings of coefficient, ind-constructibility and comparison notation without changing the hypotheses or conclusion. No Lean attachment was found.",
+  "blueprint": "The proof realizes the second paragraph of unit sk-lem-proper-unbounded-window-ii and every sentence of det-proper-unbounded-window-ii-general.proof.md: sums/window compatibility (steps 1-2), natural window zig-zags (3), bounded-family comparison (4), commutative square (5), all-degree detection (6).",
+  "tool_uses": [
+   {
+    "node": "det-ambient-ind-derived-sums",
+    "why": "The unit explicitly uses cohomology commuting with sums and closure under sums and truncations; this existing generic interface supplies those statements, without replacing the proper finite-window route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-ambient-ind-derived-sums"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-2b986b0b4",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-2b986b0b4 (reviewer sub-agent of L); spot-checked: I read the full item and its six steps against the main-20261015 blueprint (sk-lem-proper-unbounded-window-ii-general.md and .proof.md, the unit's two proof paragraphs) and every cited statement. The statement matches the blueprint hypothesis by hypothesis: Lambda=E or Qlbar via the pulled-back condensed ring, ordinary unbounded D(Mod_{Lambda_T}), any small family in Dic, p proper with geometric fibres of dimension <= d. The comparison is defined by its coprojections. No bound is added and the target is not weakened. Step 1 is det-ambient-ind-derived-sums(1) applied on X and on Y. Step 2: the map b from the sum of the windows WK_alpha to WL is an isomorphism in every degree, by def-kun-truncations and the Mathlib leaf DerivedCategory.isIso_iff (HomologySequence.lean:88-89, all n in Z; Stacks 05RT). Step 4 uses the bounded detail node with the common interval [q-2d-1,q]. I checked the step 3 naturality algebra and the step 5 per-summand computation by hand. Step 6 is the unbounded cohomology criterion. One fault, C4, repaired: step 3 needs H^q(Rp_* u_T) and H^q(Rp_* v_T) to be isomorphisms one by one, but sk-lem-proper-unbounded-window only says the zig-zag induces an isomorphism. The fix cites det-proper-unbounded-window-iso, which is in the same window unit (on route), has identical hypotheses and states both arrows as isomorphisms. I added it to step 3 uses and to proof_deps and confirmed it creates no cycle. I also confirmed both isomorphisms independently from the cohomological amplitude of Rp_*. There are no new nodes. The duplicate search across the DAG found no restatement: the window-iso, finite-window, ind-heart sums and quasi-coherent sum lemmas all state different results. The det-ambient-ind-derived-sums tool_use is on the transitive route and redundant, but harmless, so I accept it. Edge cases checked: empty and singleton families, d=0, negative or enlarged d, negative q, families with no common bounds. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ }
 }

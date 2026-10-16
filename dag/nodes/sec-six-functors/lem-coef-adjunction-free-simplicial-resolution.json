@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Paragraph 2 of main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, middle finite-level mapping-complex adjunction: free simplicial resolutions for each of the two graph adjunctions in the monadic comparison supporting coherent realization.",
+   "place": "Paragraph beginning For K in main-20261015 prop-coef-integral-exceptional-adjoint.proof.md: the middle finite-level derived mapping-complex adjunction. This general free-resolution auxiliary supports its coherent enhancement through the recorded ancestry; it is not explicitly named in that paragraph.",
    "via": [
     "lem-coef-infinity-monadic-comparison",
     "lem-coef-fixed-object-enriched-rectification",
@@ -28,9 +28,51 @@
   "def-coef-complete-algebroid",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "In [lem-coef-infinity-monadic-bar] substitute $\\mathcal C=\\mathcal B$, $\\mathcal D=\\mathcal X$ and $U=R$, leaving $L$ unchanged. The adjunction has the same orientation. Its hypotheses hold: $\\mathcal X$ admits geometric realizations and $R$ preserves them by assumption, and conservative means exactly the assumed reflection of equivalences. Both statements use coherent diagrams and colimiting cocones in the conventions of [def-cbc-enhanced-diagrams-cones]. The simplex category is small in the fixed universe, so the small-realization hypothesis covers its indexing shape.",
+   "uses": [
+    "lem-coef-infinity-monadic-bar",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary specialization of the hypotheses of lem-coef-infinity-monadic-bar; compare Higher Algebra Theorem 4.7.3.5(c), printed p.685."
+   }
+  },
+  {
+   "text": "Apply the augmented-bar conclusion of [lem-coef-infinity-monadic-bar] to $Z=x$. It supplies a coherent simplicial object $P=B_\\bullet x$ and its counit augmentation $P\\to\\operatorname{const}(x)$ having geometric realization $x$. This is the colimiting cocone required here: the cited statement explicitly uses the coherent comma-cocone definition of colimitingness. Its assertion includes the coherent face and degeneracy data, rather than only maps in a homotopy category.",
+   "uses": [
+    "lem-coef-infinity-monadic-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Generic bar foundation for the middle finite-level mapping-complex adjunction; Higher Algebra Proposition 4.7.3.14 and Remark 4.7.3.15, printed p.689."
+   }
+  },
+  {
+   "text": "For each $n\\geq0$ set $b_n=(RL)^nRx\\in\\mathcal B$: start with $b_0=Rx$ and iterate the endofunctor $RL$ of $\\mathcal B$. The formula $B_nx=L(RL)^nRx$ in [lem-coef-infinity-monadic-bar] gives $P_n\\simeq L(b_n)$. These choices are made separately in each degree. The statement asks for no simplicial structure on $b_n$, so the diagram and cocone of step 2 together with these objects satisfy every clause.",
+   "uses": [
+    "lem-coef-infinity-monadic-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Extraction of degree objects from the existing bar formula; Higher Algebra Remark 4.7.3.15, printed p.689."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-monadic-bar",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Specialization of the existing general monadic/bar node, checked against Higher Algebra Proposition 4.7.3.14 online. The blueprint paragraph supplies the application, not this foundational proof; HA is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +129,73 @@
    "results": "{\"t\": \"2026-10-16T16:57:18Z\", \"tool\": \"grep\", \"query\": \"essImage|fullyFaithful|barConstruction|comonad\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: no matching declaration under AlgebraicTopology/Quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A conservative geometric realization preserving right adjoint between infinity categories gives a simplicial free resolution of every object",
+   "results": "{\"t\": \"2026-10-16T18:49:28Z\", \"tool\": \"leanfinder\", \"query\": \"A conservative geometric realization preserving right adjoint between infinity categories gives a simplicial free resolution of every object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerveAdjunction\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\"], \"digest\": \"5e094393fd584fcc\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: returned nerve and homotopy-category adjunctions and model-category cofibrant replacements, not this arbitrary coherent adjunction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.toComonad",
+   "results": "{\"t\": \"2026-10-16T18:49:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.toComonad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.toComonad\", \"CategoryTheory.Adjunction.adjToComonadIso\", \"CategoryTheory.Comonad.comparison\", \"CategoryTheory.Adjunction.toComonad_coe\", \"CategoryTheory.Comonad.comparison_faithful_of_faithful\", \"CategoryTheory.ComonadicLeftAdjoint.mk\", \"CategoryTheory.Coreflective.comparison_full\", \"CategoryTheory.Adjunction.toComonad_ε\"], \"digest\": \"8f3acddb7a23acc3\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: source Monad/Adjunction.lean:67 constructs an ordinary-category comonad, not a coherent simplicial resolution in an arbitrary infinity-category."
+  },
+  {
+   "tool": "grep",
+   "query": "comonad|barConstruction|extraDegeneracy|geometricRealization",
+   "results": "{\"t\": \"2026-10-16T18:49:23Z\", \"tool\": \"grep\", \"query\": \"comonad|barConstruction|extraDegeneracy|geometricRealization\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: zero hits under AlgebraicTopology/Quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every object is a geometric realization of free objects for an adjunction of infinity categories",
+   "results": "{\"t\": \"2026-10-16T18:49:24Z\", \"tool\": \"leansearch\", \"query\": \"Every object is a geometric realization of free objects for an adjunction of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"sSetTopAdj\", \"CategoryTheory.Free\", \"MonCat.adj\", \"CategoryTheory.Quiv.adj\", \"SSet.toTop\", \"AddMonCat.adj\", \"GrpCat.adj\", \"Compactum.adj\"], \"digest\": \"d5b8c61b49c0c80f\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: specific free-object and realization adjunctions, not this general free-resolution assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit augmented comonadic bar construction of a quasicategory adjunction has colimit the original object when the right adjoint is conservative and preserves realizations",
+   "results": "{\"t\": \"2026-10-16T18:49:27Z\", \"tool\": \"leanfinder\", \"query\": \"The counit augmented comonadic bar construction of a quasicategory adjunction has colimit the original object when the right adjoint is conservative and preserves realizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.comp_comparison_forget_hasColimit\", \"CategoryTheory.nerveAdjunction.isIso_counit\", \"CategoryTheory.comp_comparison_hasColimit\", \"CategoryTheory.comonadicCreatesColimits\", \"CategoryTheory.Monad.MonadicityInternal.counitCoequalizerOfReflectsCoequalizer\", \"CategoryTheory.LiftLeftAdjoint.counitCoequalises\", \"CategoryTheory.ObjectProperty.isColocal_adj_counit_app\", \"CategoryTheory.Monad.MonadicityInternal.unitColimitOfPreservesCoequalizer\"], \"digest\": \"07e95566bb4bfaee\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: ordinary Beck coequalizers and ordinary comonadic colimit creation require Category instances; these do not assert the coherent bar theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "structure ExtraDegeneracy|def toComonad|def isColimit|theorem isColimit",
+   "results": "{\"t\": \"2026-10-16T18:49:23Z\", \"tool\": \"grep\", \"query\": \"structure ExtraDegeneracy|def toComonad|def isColimit|theorem isColimit\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Split.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonsingularColimit.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean\"], \"digest\": \"3ead9b9521f9eb6c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: ExtraDegeneracy.lean:72 is ordinary categorical extra-degeneracy data; SimplicialObject/Split.lean:233 is a coproduct decomposition in a fixed degree, not realization of an augmented diagram."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A conservative functor which is a right adjoint and preserves simplicial colimits resolves objects by iterated applications of the counit",
+   "results": "{\"t\": \"2026-10-16T19:10:11Z\", \"tool\": \"leanfinder\", \"query\": \"A conservative functor which is a right adjoint and preserves simplicial colimits resolves objects by iterated applications of the counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.hasRightResolutions\", \"CategoryTheory.LocalizerMorphism.RightResolution\", \"CategoryTheory.LocalizerMorphism.functorialRightResolutions.ι\", \"CategoryTheory.LocalizerMorphism.functorialRightResolutions.Φ_functor_map_ι_app\", \"CategoryTheory.LocalizerMorphism.HasRightResolutions\", \"CategoryTheory.LocalizerMorphism.functorialRightResolutions.W₁_ι_app\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\"], \"digest\": \"ae810ffbe4a3b442\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: returned ordinary localization-resolution and derivability interfaces, not a coherent simplicial free resolution for quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "barResolution|ExtraDegeneracy|Barr.Beck|geometricRealization",
+   "results": "{\"t\": \"2026-10-16T19:10:12Z\", \"tool\": \"grep\", \"query\": \"barResolution|ExtraDegeneracy|Barr.Beck|geometricRealization\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: zero hits under AlgebraicTopology/Quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an adjunction of quasicategories every object is a colimit of a simplicial diagram of free objects if the right adjoint detects equivalences and preserves simplicial colimits",
+   "results": "{\"t\": \"2026-10-16T19:10:35Z\", \"tool\": \"leansearch\", \"query\": \"For an adjunction of quasicategories every object is a colimit of a simplicial diagram of free objects if the right adjoint detects equivalences and preserves simplicial colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftAdjointObjIsDefined_colimit\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.Limits.colimConstAdj\", \"CategoryTheory.monadicCreatesColimitsOfShapeOfPreservesColimitsOfShape\", \"CategoryTheory.Adjunction.hasColimitsOfShape_of_equivalence\", \"CategoryTheory.Limits.IsColimit.ofLeftAdjoint\", \"CategoryTheory.Adjunction.isEquivalence_preservesColimits\", \"CategoryTheory.SimplicialObject.coskAdj\"], \"digest\": \"214d980a9ebe85b3\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: ordinary partial adjoints, functor-category colimits and monadic colimit creation; no arbitrary quasicategory free-resolution theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-monadic-comparison",
@@ -98,5 +203,21 @@
   "group": "Q27"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-adjunction-free-simplicial-resolution",
+  "worker": "stage1",
+  "summary": "Reused the already existing general infinity-categorical monadic/bar theorem instead of creating overlapping helpers. Checked its hypotheses under C=B, D=X and U=R, applied its colimiting coherent bar augmentation, and extracted b_n=(RL)^nRx. Statement unchanged; zero new nodes and zero Mathlib leaves.",
+  "blueprint": "The recorded ancestry serves the middle finite-level mapping-complex adjunction in the paragraph beginning For K of the main-20261015 ancestor proof. The blueprint does not explicitly mention free simplicial resolutions; this is a generic foundational auxiliary below that paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N3-e5e60721e",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-e5e60721e (reviewer sub-agent of L); spot-checked: I read the item, its report and the full statements of lem-coef-infinity-monadic-bar, def-cbc-enhanced-diagrams-cones, def-coef-complete-algebroid and the citer lem-coef-infinity-monadic-comparison; review.md has the details. The split creates no new nodes and leaves the statement unchanged. It cites the existing unsplit bar theorem, which is in the same unit sk-prop-sf-biduality-general, so tool_uses is correctly empty. Step 1 is hypothesis matching under C=B, D=X, U=R: the left/right orientation agrees, 'conservative' is the assumed reflection of equivalences, and the item's mapping-space form of the adjunction is the standard equivalent of the bar node's unit/counit form. Step 2 takes the augmented coherent bar object and its colimiting counit augmentation from the bar node's statement, not its proof. Step 3 sets b_n=(RL)^nRx from the degree formula B_n=L(RL)^nR; I checked degrees 0 and 1 and the types. proof_deps is the union of the step uses. There is no cycle, since the bar node has no proof_deps. The citer's step 3 uses exactly the item's conclusion, a colimiting coherent P with P_n equivalent to F(b_n) chosen degree by degree. Small cases: the identity adjunction gives a constant diagram whose colimit is x because Delta^op is weakly contractible. Empty X makes the statement vacuous. The free-module bar resolution satisfies it. Dropping conservativity breaks it, so that hypothesis is needed. I searched the coef/cbc nodes for duplicates; the extra-degeneracy node, the algebroid simplicial-realization node and the Yoneda nodes do not state this. The item is a weaker consequence of an existing node, so citing that node is correct and is neither relabelling (D1) nor moving content (D2). This is not a target node, so the base-change and coefficient checks do not apply. No SGA source is used. Limitation: Higher Algebra 4.7.3.14 and 4.7.3.5 are not archived, so I could not read the cited pages. The statement agrees with my knowledge of the result; WANTED is recorded and proof_origin is agent. No fixes."
+ }
 }

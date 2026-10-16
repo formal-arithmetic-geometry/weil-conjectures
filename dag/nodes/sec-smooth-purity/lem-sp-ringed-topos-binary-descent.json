@@ -1,0 +1,156 @@
+{
+ "id": "lem-sp-ringed-topos-binary-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Gluing paragraph: existence of a glued object on U union V and the open-cover triangle used to lift its counit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Binary derived open descent for modules on a ringed topos",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let $\\mathcal T$ be a Grothendieck topos (a category of sheaves of sets on a small site), $R$ a commutative ring object of $\\mathcal T$, and $D(\\mathcal T,R)$ the ordinary derived category of sheaves of $R$-modules [def-weil-sheaf-of-modules-category], [def-weil-abstract-derived-category]. Let $U,V\\hookrightarrow1$ be subterminal objects (monomorphisms into the terminal object) whose union is $1$, and put $W=U\\times V$. Write $\\mathcal T/U$, $\\mathcal T/V$, $\\mathcal T/W$ for the slice topoi, $R_U,R_V,R_W$ for the restricted rings, and $j_Z^*$ for restriction to a slice. The exact extension-by-zero left adjoint is denoted $j_{Z!}$ and the derived right adjoint of restriction is denoted $Rj_{Z*}$, for $Z=U,V,W$.\n\n(1) Given $A\\in D(\\mathcal T/U,R_U)$, $B\\in D(\\mathcal T/V,R_V)$ and an isomorphism $c:A|_W\\xrightarrow{\\sim}B|_W$, there exist $G\\in D(\\mathcal T,R)$ and isomorphisms $a:G|_U\\xrightarrow{\\sim}A$, $b:G|_V\\xrightarrow{\\sim}B$ with $b|_W=c\\circ a|_W$. One may take $G$ in a distinguished triangle\n$$G\\longrightarrow Rj_{U*}A\\oplus Rj_{V*}B\\xrightarrow{(Rj_*c,-1)}Rj_{W*}(B|_W)\\longrightarrow G[1],$$\nwhere each component is the derived restriction-adjunction map, with $c$ applied in the first component. If $A,B$ have cohomology in a common interval $[a_0,b_0]$, so does $G$.\n\n(2) For every $M\\in D(\\mathcal T,R)$ there is the natural distinguished open-cover triangle\n$$j_{W!}(M|_W)\\xrightarrow{(1,-1)}j_{U!}(M|_U)\\oplus j_{V!}(M|_V)\\xrightarrow{(1,1)}M\\longrightarrow j_{W!}(M|_W)[1].$$\nThe arrows are the canonical nested-open maps and the adjunction counits. Restriction and extension by zero here act termwise on complexes. No uniqueness of a gluing of arbitrary derived morphisms is asserted.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DG (lemma-glue), first assertion and its Rj_* cone construction; Tag 08BU (lemma-exact-sequence-lower-shriek). The ringed-space arguments are to be extended to open subtopoi of a ringed Grothendieck topos; this extension is the agent-stated prerequisite, not a claim that these tags already state it."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Mayer.Vietoris|glue.*complex|complex.*glue|derived.*descent|descent.*derived",
+   "results": "17 hit(s): Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/Analysis/Convex/SimplicialComplex/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the MayerVietorisSquare and sheaf-cohomology files, the DerivedCategory directory and module-sheaf gluing hits. They give abelian sheaf cohomology, gluing of ordinary sheaves/spaces or derived-category infrastructure, not binary gluing of derived R-modules on open subtopoi."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing two objects in the derived category of module sheaves on a ringed topos along an open cover and Mayer Vietoris triangle",
+   "results": "8 hit(s): CategoryTheory.GrothendieckTopology.MayerVietorisSquare.noConfusion, CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk, Opens.mayerVietorisSquare', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, AlgebraicGeometry.Scheme.Modules.instHasColimits",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the MayerVietorisSquare and sheaf-cohomology files, the DerivedCategory directory and module-sheaf gluing hits. They give abelian sheaf cohomology, gluing of ordinary sheaves/spaces or derived-category infrastructure, not binary gluing of derived R-modules on open subtopoi."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.DerivedCategory",
+   "results": "0 hit(s): none; loogle: unknown identifier 'CategoryTheory.DerivedCategory'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.DerivedCategory'; replaced by the successful DerivedCategory search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Binary open descent for derived modules on a ringed Grothendieck topos: glue two complexes with an isomorphism on the intersection and obtain the extension by zero Mayer Vietoris triangle",
+   "results": "8 hit(s): CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, SheafOfModules.Presentation.isColimit",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the MayerVietorisSquare and sheaf-cohomology files, the DerivedCategory directory and module-sheaf gluing hits. They give abelian sheaf cohomology, gluing of ordinary sheaves/spaces or derived-category infrastructure, not binary gluing of derived R-modules on open subtopoi."
+  },
+  {
+   "tool": "grep",
+   "query": "glue|MayerVietoris|descent",
+   "results": "0 hit(s): none; searched Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the MayerVietorisSquare and sheaf-cohomology files, the DerivedCategory directory and module-sheaf gluing hits. They give abelian sheaf cohomology, gluing of ordinary sheaves/spaces or derived-category infrastructure, not binary gluing of derived R-modules on open subtopoi."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory",
+   "results": "12 hit(s): DerivedCategory, instCategoryDerivedCategory, DerivedCategory.instHasZeroObject, DerivedCategory.instPreadditive, DerivedCategory.instHasShiftInt, DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the MayerVietorisSquare and sheaf-cohomology files, the DerivedCategory directory and module-sheaf gluing hits. They give abelian sheaf cohomology, gluing of ordinary sheaves/spaces or derived-category infrastructure, not binary gluing of derived R-modules on open subtopoi."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given two derived objects of sheaves of modules on open subtopoi and an isomorphism on their intersection, there exists a global derived module object with those restrictions",
+   "results": "8 hit(s): SheafOfModules.Presentation.map, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.GeneratingSections, SheafOfModules.Presentation, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData.X",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the MayerVietorisSquare and sheaf-cohomology files, the DerivedCategory directory and module-sheaf gluing hits. They give abelian sheaf cohomology, gluing of ordinary sheaves/spaces or derived-category infrastructure, not binary gluing of derived R-modules on open subtopoi."
+  },
+  {
+   "tool": "grep",
+   "query": "open.*glue|glue.*open|gluing.*derived|derived.*gluing",
+   "results": "25 hit(s): Mathlib/CategoryTheory/GlueData.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean, Mathlib/Analysis/SpecialFunctions/SmoothTransition.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the MayerVietorisSquare and sheaf-cohomology files, the DerivedCategory directory and module-sheaf gluing hits. They give abelian sheaf cohomology, gluing of ordinary sheaves/spaces or derived-category infrastructure, not binary gluing of derived R-modules on open subtopoi."
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|MayerVietoris|glue",
+   "results": "1 hit(s): Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; searched Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the MayerVietorisSquare and sheaf-cohomology files, the DerivedCategory directory and module-sheaf gluing hits. They give abelian sheaf cohomology, gluing of ordinary sheaves/spaces or derived-category infrastructure, not binary gluing of derived R-modules on open subtopoi."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris distinguished triangle for complexes of sheaves and gluing derived objects over two open subobjects of a topos",
+   "results": "8 hit(s): CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare, Opens.mayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact",
+   "date": "2026-10-16",
+   "verdict": "no match: MayerVietorisSquare gives a short exact sequence of free additive sheaves, not gluing arbitrary derived ringed-topos modules. The derived-category grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietoris|glue|extensionByZero|shriek",
+   "results": "0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: MayerVietorisSquare gives a short exact sequence of free additive sheaves, not gluing arbitrary derived ringed-topos modules. The derived-category grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recollement of derived sheaves of modules: an object is obtained as the homotopy fibre of the difference between right direct images from a binary open covering",
+   "results": "8 hit(s): CategoryTheory.GrothendieckTopology.MayerVietorisSquare, SheafOfModules.Presentation.map, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, SheafOfModules.sheafificationCompPullback, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f",
+   "date": "2026-10-16",
+   "verdict": "no match: MayerVietorisSquare.shortComplex (lines 231–265) is the free abelian sheaf sequence associated with a site square; it does not glue arbitrary derived modules. The algebra-source grep returns no result."
+  },
+  {
+   "tool": "grep",
+   "query": "recollement|homotopy.?pullback|openCover.*triangle|triangle.*openCover",
+   "results": "0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: MayerVietorisSquare.shortComplex (lines 231–265) is the free abelian sheaf sequence associated with a site square; it does not glue arbitrary derived modules. The algebra-source grep returns no result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing objects of the unbounded derived category of sheaves of modules using a homotopy fibre over an open cover",
+   "results": "8 hit(s): CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected MayerVietorisSquare.lean:231-265 and HomotopyFiber.lean:39-56; these give free abelian sheaf sequences and homotopy fibres of complexes, not open descent of arbitrary derived modules. The other hits give light condensed module functors and instances, not derived compact-support composition or varying-ring towers."
+  },
+  {
+   "tool": "grep",
+   "query": "recollement|homotopy[Ff]iber|compactSupport.*[Cc]omp",
+   "results": "25 hit(s): Mathlib/Algebra/Homology/Precylinder.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Topology/UrysohnsLemma.lean, Mathlib/Topology/UrysohnsLemma.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected MayerVietorisSquare.lean:231-265 and HomotopyFiber.lean:39-56; these give free abelian sheaf sequences and homotopy fibres of complexes, not open descent of arbitrary derived modules. The other hits give light condensed module functors and instances, not derived compact-support composition or varying-ring towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of complexes of sheaves of modules from a cover by two open subtoposes and the Mayer Vietoris distinguished triangle",
+   "results": "8 hit(s): CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:231-265 (free additive sheaves associated to a site square) and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139-143 (ordinary module-sheaf pushforward composition). Neither states derived ringed-topos object gluing or varying-coefficient compact-support calculus."
+  },
+  {
+   "tool": "grep",
+   "query": "recollement|[Ss]hriek|[Dd]erived.*[Gg]luing|[Gg]luing.*[Dd]erived",
+   "results": "0 hit(s): none",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:231-265 (free additive sheaves associated to a site square) and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139-143 (ordinary module-sheaf pushforward composition). Neither states derived ringed-topos object gluing or varying-coefficient compact-support calculus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-gluing",
+  "date": "2026-10-16"
+ }
+}

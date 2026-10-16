@@ -1,0 +1,137 @@
+{
+ "id": "lem-coef-associative-word-filtration",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, the middle finite-level mapping-complex adjunction in the displayed derived inverse-limit comparison; associative-algebra transfer for the fixed-object dg-graph realization, specifically its free-algebra pushout calculation.",
+   "via": [
+    "lem-coef-associative-algebra-model-transfer",
+    "lem-coef-fixed-object-dg-free-model",
+    "lem-coef-fixed-object-enriched-rectification",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor-word monad and free associative algebra pushout filtration",
+ "statement": "Fix a universe $\\mathcal U$ and a category $\\mathcal C$ with $\\mathcal U$-small Hom sets and all $\\mathcal U$-small colimits [def-weil-pbc-category-colimit]. Equip it with a monoidal structure $(\\odot,\\mathbf1)$ [def-sfb-monoidal-category], not assumed symmetric. Suppose that, for each object $X$, both $X\\odot-$ and $-\\odot X$ have right adjoints. Write $0$ for the initial object. A strict associative unital algebra is an object $A$ with multiplication $A\\odot A\\to A$ and unit $\\mathbf1\\to A$ satisfying associativity and the two unit identities with the monoidal constraints; algebra morphisms preserve these maps. Let $U:\\operatorname{Alg}(\\mathcal C)\\to\\mathcal C$ be the forgetful functor.\n\nThe tensor-word functor $P(X)=\\coprod_{n\\geq0}X^{\\odot n}$, with $X^{\\odot0}=\\mathbf1$, has a monad structure: its unit inserts the length-one summand and its multiplication concatenates words of words, using the monoidal constraints. Its monad algebras identify with the strict associative unital algebras just defined. The free algebra $T(X)$ has underlying object $P(X)$, unit the length-zero summand and multiplication concatenating words. There is an adjunction $T\\dashv U$. The monad $P$ preserves small filtered colimits, and $U$ creates these colimits: the underlying colimit has a unique algebra structure making the colimit maps algebra morphisms and is a colimit in algebras. Here filtered means nonempty with cocones on every finite diagram. The initial algebra has underlying object $\\mathbf1$ and its canonical unit-algebra structure.\n\nFor every arrow $f:X\\to Y$ and algebra morphism $g:T(X)\\to A$, the pushout $B=A\\amalg_{T(X)}T(Y)$ exists in algebras. Its underlying map admits a filtration\n$$U(A)=B_0\\longrightarrow B_1\\longrightarrow B_2\\longrightarrow\\cdots,\\qquad U(B)\\cong\\varinjlim_{n\\geq0}B_n,$$\ncompatible with $U(A)\\to U(B)$, in which, for each $n\\geq1$, the arrow $B_{n-1}\\to B_n$ is a pushout in $\\mathcal C$ of\n$$q_n=(j\\mathbin\\square f)\\mathbin\\square\\cdots\\mathbin\\square(j\\mathbin\\square f)\\mathbin\\square j,$$\nwith $n$ copies of $f$ and $n+1$ copies of $j:0\\to U(A)$, in the displayed alternating order. For arrows $a:K\\to L$ and $b:M\\to N$, their pushout product is $(L\\odot M)\\amalg_{K\\odot M}(K\\odot N)\\to L\\odot N$. Parenthesize iterated products to the left; the canonical monoidal and colimit isomorphisms identify other parenthesizations. No model structure, cofibrancy, monoid axiom or symmetry is assumed.",
+ "source": {
+  "document": "https://arxiv.org/html/1312.3881v4",
+  "place": "Section 3.2, Theorem 3.10 (Schwede--Shipley, section 6); the ordinary tensor-word construction and filtered-colimit argument preceding transfer. Theorem 3.10 uses model-category hypotheses, but its word construction uses only cocompleteness and biclosedness; this algebraic generality is agent-formulated. Read online; not archived. No Stacks tag states the free-algebra pushout filtration.",
+  "external": [
+   {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Section 8, free-algebra formula and Theorem 8.3, for the ordinary word-filtration construction; no model structure enters the construction."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "free.*monoid|monoid.*pushout|pushout.*monoid|word.*filtration",
+   "results": "{\"t\": \"2026-10-16T18:31:23Z\", \"tool\": \"grep\", \"query\": \"free.*monoid|monoid.*pushout|pushout.*monoid|word.*filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ArithmeticFunction/Defs.lean\", \"Mathlib/Control/Fold.lean\", \"Mathlib/Control/Fold.lean\", \"Mathlib/Control/Fold.lean\", \"Mathlib/Control/Fold.lean\", \"Mathlib/Control/Fold.lean\", \"Mathlib/Algebra/Algebra/Basic.lean\", \"Mathlib/LinearAlgebra/FreeAlgebra.lean\"], \"digest\": \"95474609069c9ab1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits concern ordinary monoid pushouts, free algebras over rings, free monoidal categories, or colimit preservation. None states the tensor-word pushout filtration for a general nonsymmetric biclosed monoidal category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Underlying object of a free associative algebra pushout filtered by alternating words in the algebra and newly adjoined generators",
+   "results": "{\"t\": \"2026-10-16T18:31:23Z\", \"tool\": \"leansearch\", \"query\": \"Underlying object of a free associative algebra pushout filtered by alternating words in the algebra and newly adjoined generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsPushoutPolynomial\", \"FreeAlgebra.Pre.ctorElimType\", \"Algebra.pushoutDesc\", \"FreeAlgebra\", \"FreeAlgebra.Pre.brecOn.go\", \"FreeRing\", \"FreeAlgebra.Pre\", \"Algebra.IsAlgebraic.instIsPushout_1\"], \"digest\": \"7b224925b58202f1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits concern ordinary monoid pushouts, free algebras over rings, free monoidal categories, or colimit preservation. None states the tensor-word pushout filtration for a general nonsymmetric biclosed monoidal category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mon\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-16T18:31:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Mon\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Std.Format.MonadPrettyFormat.pushOutput\", \"CategoryTheory.Limits.pushout.instIsSplitMonoInl\", \"CategoryTheory.Limits.pushout.instIsSplitMonoInr\", \"CategoryTheory.MorphismProperty.pushouts_monotone\", \"CategoryTheory.Abelian.mono_pushout_of_mono_f\", \"CategoryTheory.Abelian.mono_pushout_of_mono_g\", \"AddMonoidAlgebra.instIsPushout\", \"AddMonoidAlgebra.instIsPushout'\"], \"digest\": \"f5526b05a4c4745f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits concern ordinary monoid pushouts, free algebras over rings, free monoidal categories, or colimit preservation. None states the tensor-word pushout filtration for a general nonsymmetric biclosed monoidal category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pushout of free monoids in a cocomplete monoidal category has a word length filtration by iterated pushout products",
+   "results": "{\"t\": \"2026-10-16T18:31:34Z\", \"tool\": \"leanfinder\", \"query\": \"A pushout of free monoids in a cocomplete monoidal category has a word length filtration by iterated pushout products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Monoid.PushoutI.monoid\", \"Monoid.PushoutI.mul\", \"Monoid.PushoutI\", \"Monoid.PushoutI.induction_on\", \"Monoid.PushoutI.NormalWord.prod\", \"Monoid.PushoutI.ofCoprodI\", \"Monoid.PushoutI.NormalWord.Pair.toPair\", \"Monoid.PushoutI.NormalWord\"], \"digest\": \"b95bf9e8c71582f7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits concern ordinary monoid pushouts, free algebras over rings, free monoidal categories, or colimit preservation. None states the tensor-word pushout filtration for a general nonsymmetric biclosed monoidal category."
+  },
+  {
+   "tool": "grep",
+   "query": "free|filtrat|pushout",
+   "results": "{\"t\": \"2026-10-16T18:31:42Z\", \"tool\": \"grep\", \"query\": \"free|filtrat|pushout\", \"sub\": \"CategoryTheory/Monoidal/Free\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean\"], \"digest\": \"f750374512403ec2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits concern ordinary monoid pushouts, free algebras over rings, free monoidal categories, or colimit preservation. None states the tensor-word pushout filtration for a general nonsymmetric biclosed monoidal category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalCategory\", \"Monad\"",
+   "results": "{\"t\": \"2026-10-16T18:31:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidalCategory\\\", \\\"Monad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits concern ordinary monoid pushouts, free algebras over rings, free monoidal categories, or colimit preservation. None states the tensor-word pushout filtration for a general nonsymmetric biclosed monoidal category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor algebra monad on a biclosed monoidal category preserves filtered colimits and algebra pushouts have Schwede Shipley filtration",
+   "results": "{\"t\": \"2026-10-16T18:31:53Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor algebra monad on a biclosed monoidal category preserves filtered colimits and algebra pushouts have Schwede Shipley filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"CategoryTheory.instPreservesColimitsTensorLeft\", \"CommMonCat.FilteredColimits.colimitCoconeIsColimit\", \"CommMonCat.FilteredColimits.colimit\", \"CommMonCat.FilteredColimits.forget_preservesFilteredColimits\", \"CategoryTheory.IsGrothendieckAbelian.tensorObj\", \"LightCondensed.internallyProjective_iff_tensor_condition\"], \"digest\": \"3893bd5db57eb3b2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits concern ordinary monoid pushouts, free algebras over rings, free monoidal categories, or colimit preservation. None states the tensor-word pushout filtration for a general nonsymmetric biclosed monoidal category."
+  },
+  {
+   "tool": "grep",
+   "query": "forgetCreatesColimit|forget_creates_colimits_of_monad_preserves",
+   "results": "{\"t\": \"2026-10-16T18:46:08Z\", \"tool\": \"grep\", \"query\": \"forgetCreatesColimit|forget_creates_colimits_of_monad_preserves\", \"sub\": \"CategoryTheory/Monad\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\"], \"digest\": \"339395975c83f000\"}",
+   "date": "2026-10-16",
+   "verdict": "partial match only: CategoryTheory.Monad.forgetCreatesColimitsOfShape, Mathlib/CategoryTheory/Monad/Limits.lean:254-255, creates colimits for a supplied colimit-preserving monad. Read lines 234-265. It does not construct the tensor-word monad, establish its filtered-colimit preservation, or state the free-algebra pushout filtration; the whole node is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Mon_.*[Ff]ree|[Ff]reeMon|[Tt]ensorAlgebra|[Mm]onoid.*[Ff]iltration",
+   "results": "{\"t\": \"2026-10-16T18:57:02Z\", \"tool\": \"grep\", \"query\": \"Mon_.*[Ff]ree|[Ff]reeMon|[Tt]ensorAlgebra|[Mm]onoid.*[Ff]iltration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Control/Fold.lean\", \"Mathlib/Control/Fold.lean\", \"Mathlib/Control/Fold.lean\", \"Mathlib/Control/Fold.lean\", \"Mathlib/Control/Fold.lean\", \"Mathlib/Algebra/FreeMonoid/UniqueProds.lean\", \"Mathlib/Algebra/FreeMonoid/UniqueProds.lean\", \"Mathlib/Algebra/FreeMonoid/UniqueProds.lean\"], \"digest\": \"40b4e5247aa5960a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The capped 25 returned hits concern FreeMonoid on types, its fold maps and elementary word structures; none states the categorical filtration. A separate focused search of the Monoidal/Mon file follows."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mon\", \"free\"",
+   "results": "{\"t\": \"2026-10-16T18:57:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"Mon\\\", \\\"free\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"FreeAddMonoid\", \"FreeMonoid\", \"FreeAddMonoid.instAddCancelMonoid\", \"FreeAddMonoid.instInhabited\", \"FreeAddMonoid.length\", \"FreeAddMonoid.of\", \"FreeMonoid.instCancelMonoid\", \"FreeMonoid.instInhabited\"], \"digest\": \"3a40a39d16657106\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: FreeMonoid and FreeAddMonoid are lists on an alphabet, with additive and multiplicative structure declarations; no arbitrary monoidal-category word filtration is stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a monoidal category the forgetful functor from monoid objects has a free monoid left adjoint and free extensions admit a filtration",
+   "results": "{\"t\": \"2026-10-16T18:57:04Z\", \"tool\": \"leanfinder\", \"query\": \"In a monoidal category the forgetful functor from monoid objects has a free monoid left adjoint and free extensions admit a filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonCat.adj\", \"MonCat.instIsRightAdjointForget\", \"MonCat.free\", \"AddMonCat.adj\", \"AddCommMonCat.adj\", \"CommMonCat.instIsRightAdjointForget\", \"AddCommMonCat.instIsLeftAdjointFree\", \"MonCat.FilteredColimits.forget_preservesFilteredColimits\"], \"digest\": \"6aae90291ec6210e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: MonCat.adj and MonCat.free (Mathlib/Algebra/Category/MonCat/Adjunctions.lean, read definitions and adjunction) concern monoids in Type only. They do not construct free monoids or free-extension filtrations in an arbitrary biclosed monoidal category. The filtered-colimit hit is also specific to MonCat."
+  },
+  {
+   "tool": "grep",
+   "query": "free|Free|pushout|Pushout|filtrat|Filtrat",
+   "results": "{\"t\": \"2026-10-16T18:57:50Z\", \"tool\": \"grep\", \"query\": \"free|Free|pushout|Pushout|filtrat|Filtrat\", \"sub\": \"CategoryTheory/Monoidal/Mon.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The focused grep in CategoryTheory/Monoidal/Mon.lean returned zero hits; it supplies no free-algebra pushout filtration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-associative-algebra-model-transfer",
+  "date": "2026-10-17",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
