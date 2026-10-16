@@ -3,51 +3,175 @@
  "blueprint": {
   "is": "det-proper-heart-bound-indcons",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-lem-proper-heart-bound"
+  ]
  },
  "kind": "statement",
  "title": "Proper direct image on ind-constructible sheaves",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$ and $p\\colon X\\to Y$ proper with geometric fibres of dimension $\\leq d$. For\n$M\\in\\IndCons(X,\\Lambda)$ and $q\\geq0$, $R^qp_*M\\in\\IndCons(Y,\\Lambda)$, $R^qp_*M=0$ for $q>2d+1$, and\n$R^qp_*$ commutes with arbitrary direct sums of objects of $\\IndCons(X,\\Lambda)$.",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of positive characteristic different from $\\ell$. Let $X,Y$ be separated schemes of finite type over $k$, and let $p\\colon X\\to Y$ be a proper $k$-morphism [sk-def-sfb-dc-setting, def-weil-proper-morphism]. Let $E/\\mathbf Q_\\ell$ be a finite subextension of a fixed algebraic closure $\\Qlb$. Take $\\Lambda=\\underline E$ or $\\underline{\\Qlb}$ with the condensed coefficient conventions of [sk-def-sfb-condensed-ring, sk-def-sfb-qlbar-condensed]; the latter is the finite-subextension-valued condensed ring. For $T=X,Y$, put $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and work in $\\Mod_{\\Lambda_T}$ [sk-def-sfb-module-objects]. Write $\\Cons(T,\\Lambda)$ for constructible module sheaves [sk-def-sfb-constructible], and define $\\IndCons(T,\\Lambda)$ to be the full subcategory of module sheaves isomorphic to small filtered colimits of objects of $\\Cons(T,\\Lambda)$, computed in $\\Mod_{\\Lambda_T}$.\n\nLet $d\\in\\mathbf Z$ bound the Krull dimensions [def-kun-topological-krull-dimension] of all geometric fibres [def-weil-geometric-fibre] of $p$. Let $Rp_*$ be the ordinary derived module pushforward [sk-def-sfb-module-derived-pushpull], and put $R^qp_*M=\\mathcal H^q(Rp_*(M[0]))$, with cohomology sheaves as in [def-weil-derived-cohomology-sheaves]. For every $M\\in\\IndCons(X,\\Lambda)$ and $q\\ge0$, $R^qp_*M\\in\\IndCons(Y,\\Lambda)$ and $R^qp_*M=0$ if $q>2d+1$. Moreover for every small family $(M_i)_{i\\in I}$ in $\\IndCons(X,\\Lambda)$, the canonical map\n$$\n\\bigoplus_{i\\in I}R^qp_*M_i\\longrightarrow R^qp_*\\Bigl(\\bigoplus_{i\\in I}M_i\\Bigr)\n$$\nis an isomorphism in $\\IndCons(Y,\\Lambda)$; the sums are the ambient module-sheaf sums.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-indcons.md",
   "place": "node det-proper-heart-bound-indcons, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-proper-morphism",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "def-kun-topological-krull-dimension",
+  "def-weil-geometric-fibre",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-derived-cohomology-sheaves"
+ ],
  "proof": [
   {
-   "text": "Write $M=\\varinjlim_\\alpha C_\\alpha$, a filtered colimit of constructible sheaves. By\n[sk-cor-pe-bounded-continuity], $R^qp_*M=\\varinjlim_\\alpha R^qp_*C_\\alpha$.",
-   "uses": [],
-   "elementary": null
+   "text": "The continuity theorem requires $p$ to be quasi-compact and quasi-separated. By [def-weil-proper-morphism], $p$ is of finite type and has a closed-immersion diagonal. Finite type includes quasi-compactness [def-weil-finite-type-morphism]. By the affine description of a closed immersion [def-weil-closed-immersion], the inverse image of an affine open under the diagonal is affine, hence quasi-compact. Thus the diagonal is quasi-compact, which is exactly quasi-separatedness [def-weil-quasi-separated-morphism].",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-indcons.proof.md",
+    "place": "first paragraph: elementary verification of the qcqs hypothesis of continuity"
+   }
   },
   {
-   "text": "*Ind-constructibility.* By [sk-thm-sfb-proper-base-change], $Rp_*C_\\alpha\\in\\Dbc(Y,\\Lambda)$, so\n$R^qp_*C_\\alpha\\in\\Cons(Y,\\Lambda)$; hence $R^qp_*M$ is a filtered colimit of constructible sheaves, i.e. lies\nin $\\IndCons(Y,\\Lambda)$.",
-   "uses": [],
-   "elementary": null
+   "text": "By the definition of $\\IndCons$ in the statement, choose a small filtered diagram $(C_\\alpha)$ of constructible $\\Lambda_X$-modules and an isomorphism $M\\simeq\\varinjlim_\\alpha C_\\alpha$ in the ambient module category. Apply [det-proper-heart-continuity-direct-image] to $A=\\Lambda_X$ and the qcqs morphism of Step 1. Its natural comparison gives\n$$\nR^qp_*M\\simeq\\varinjlim_\\alpha R^qp_*C_\\alpha.\n$$\nAll these are sheaves of $\\Lambda_Y$-modules for the pulled-back coefficient system fixed in the statement.",
+   "uses": [
+    "det-proper-heart-continuity-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-indcons.proof.md",
+    "place": "first paragraph: filtered-colimit reduction"
+   }
   },
   {
-   "text": "*Vanishing.* For $q>2d+1$ each $R^qp_*C_\\alpha=0$ by [det-proper-heart-bound-rational], so the colimit\nvanishes.",
+   "text": "A constructible sheaf $C_\\alpha$ placed in degree zero is bounded constructible: its only possibly nonzero cohomology sheaf is $C_\\alpha$, by the definition [sk-def-sfb-bounded-constructible]. Our coefficients are $E$ or $\\Qlb$, and $p$ is proper between the standing schemes specified in the statement. Consequently clause (2) of [det-thm-sfb-proper-base-change-rational] gives $Rp_*C_\\alpha\\in\\Dbc(Y,\\Lambda)$. The same bounded-constructible definition says that $R^qp_*C_\\alpha$ is constructible for every $q$. The small filtered colimit of these sheaves in Step 2 is, by our definition of $\\IndCons$, an object of $\\IndCons(Y,\\Lambda)$.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible",
+    "det-thm-sfb-proper-base-change-rational"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-indcons.proof.md",
+    "place": "Ind-constructibility paragraph"
+   }
+  },
+  {
+   "text": "If $q>2d+1$, [det-proper-heart-bound-rational] applies to every $C_\\alpha$: the coefficient choice, proper morphism and geometric-fibre bound are exactly those of the statement. It gives $R^qp_*C_\\alpha=0$ for every $\\alpha$. In the colimit identification of Step 2 the whole diagram is therefore zero; its colimit is zero by the colimit universal property. Hence $R^qp_*M=0$.",
    "uses": [
     "det-proper-heart-bound-rational"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-indcons.proof.md",
+    "place": "Vanishing paragraph"
+   }
   },
   {
-   "text": "*Direct sums.* $R^qp_*$ commutes with direct sums by [sk-cor-pe-bounded-continuity], and the sum lies\nin $\\IndCons$ by part (2) of [sk-prop-ind-heart].",
-   "uses": [],
-   "elementary": null
+   "text": "For a small family $(M_i)$ in $\\IndCons(X,\\Lambda)$, [det-ind-heart-filtered-colimits] applied on $X$ shows that its ambient sum is again in $\\IndCons(X,\\Lambda)$. Thus Step 3 applies both to every $M_i$ and to their sum. The direct-sum assertion of [det-proper-heart-continuity-direct-image], with the qcqs hypothesis verified in Step 1, says precisely that the canonical map in the statement is an isomorphism of ambient module sheaves. By [det-ind-heart-filtered-colimits] on $Y$, its source is in $\\IndCons(Y,\\Lambda)$; its target is there by Step 3. Since $\\IndCons$ is a full subcategory, this ambient isomorphism and its inverse are morphisms in it. For the same reason an ambient sum whose object lies in this full subcategory satisfies its coproduct universal property there. This proves preservation of arbitrary direct sums in $\\IndCons$.",
+   "uses": [
+    "det-ind-heart-filtered-colimits",
+    "det-proper-heart-continuity-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-indcons.proof.md",
+    "place": "Direct sums paragraph"
+   }
   }
  ],
  "proof_deps": [
-  "det-proper-heart-bound-rational"
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "det-ind-heart-filtered-colimits",
+  "det-proper-heart-bound-rational",
+  "det-proper-heart-continuity-direct-image",
+  "det-thm-sfb-proper-base-change-rational",
+  "sk-def-sfb-bounded-constructible"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-indcons.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-indcons.proof.md",
+  "place": "all four proof paragraphs; qcqs verification and category bookkeeping expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper direct image on ind-constructible sheaves with bounded cohomological dimension and direct sums",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, Condensed.lanSheafProfinite, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts, LightCondAb.ofSheafLightProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: general condensed, ordinary sheaf-module or constructible-set infrastructure does not state proper higher direct image on ind-constructible rational-coefficient sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "IndCons, R^q p_*, filtered colimit, direct sums",
+   "results": "0 hits: ; loogle: <input>:1:16: expected term",
+   "date": "2026-10-16",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "IndCons|ind-constructible|proper.*direct image|R\\^q p_\\*",
+   "results": "0 hits in Mathlib/: ",
+   "date": "2026-10-16",
+   "verdict": "invalid directory argument: the command already starts in Mathlib; not evidence of absence; corrected grep was run"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper direct image on ind-constructible sheaves commutes with direct sums and vanishes above a fibre dimension bound",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.IdealSheafData.map_inf, instInhabitedDirectSum, DirectSum, IsBaseChange.directSumPow, SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf, DirectSum.induction_lon, Module.Flat.directSum",
+   "date": "2026-10-16",
+   "verdict": "no match: general condensed, ordinary sheaf-module or constructible-set infrastructure does not state proper higher direct image on ind-constructible rational-coefficient sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits, DirectSum, FilteredColimit",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Limits'",
+   "date": "2026-10-16",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "IndCons|ind.?constructible|proper.*direct.image|constructible.*pushforward",
+   "results": "5 hits: Mathlib/Lean/Environment.lean, Mathlib/Lean/Environment.lean, Mathlib/Lean/Environment.lean, Mathlib/Lean/Environment.lean, Mathlib/Lean/Environment.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: these are Lean.Environment.findConstVal utilities, not constructible module sheaves; a focused AlgebraicGeometry grep was run"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"preserves\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: general condensed, ordinary sheaf-module or constructible-set infrastructure does not state proper higher direct image on ind-constructible rational-coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher pushforward of a filtered colimit of constructible l adic sheaves along a proper scheme morphism preserves ind constructibility",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.Scheme.Modules.pushforwardComp, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, instHasColimitsCondensedMod",
+   "date": "2026-10-16",
+   "verdict": "no match: general condensed, ordinary sheaf-module or constructible-set infrastructure does not state proper higher direct image on ind-constructible rational-coefficient sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bIndCons\\b|ind.constructible|constructible.{0,80}(pushforward|direct.image)|(pushforward|direct.image).{0,80}constructible",
+   "results": "0 hits in AlgebraicGeometry: ",
+   "date": "2026-10-16",
+   "verdict": "no match: general condensed, ordinary sheaf-module or constructible-set infrastructure does not state proper higher direct image on ind-constructible rational-coefficient sheaves"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -63,5 +187,44 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-proper-heart-bound"
+ "unit": "sk-lem-proper-heart-bound",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-proper-heart-bound-indcons",
+  "worker": "stage1",
+  "summary": "Reworked the previous sandbox attempt into five explicit steps using existing nodes only. Restored the standing scheme and rational condensed coefficient conventions omitted from the standalone imported statement, defined IndCons inline from the blueprint ind-heart unit, verified qcqs elementarily, and checked the proper-image, bound and direct-sum statements. No new nodes. All actual Mathlib queries, including invalid exploratory queries, are recorded accurately.",
+  "blueprint": "Step 1 checks the hypothesis behind the first paragraph; Step 2 realizes that paragraph; Steps 3, 4 and 5 realize Ind-constructibility, Vanishing and Direct sums respectively. same_as records the unit key node sk-lem-proper-heart-bound, which states the same three conclusions; it is not cited as a proof dependency.",
+  "tool_uses": [
+   {
+    "node": "det-proper-heart-continuity-direct-image",
+    "why": "The unit explicitly invokes the bounded-continuity unit. This detail supplies the actual higher-direct-image continuity statement on module sheaves, not a replacement geometric route."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-rational",
+    "why": "The final unit step explicitly uses proper direct image preserving bounded constructibility; this rational-coefficient detail supplies clause (2) of that theorem."
+   },
+   {
+    "node": "det-ind-heart-filtered-colimits",
+    "why": "The final unit step explicitly uses closure of IndCons under sums from the ind-heart unit; this detail states exactly that closure."
+   },
+   {
+    "node": "sk-def-sfb-bounded-constructible",
+    "why": "The definition identifies degree-zero constructible sheaves as bounded constructible complexes and reads constructible cohomology off the proper-image theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-proper-heart-continuity-direct-image",
+  "det-thm-sfb-proper-base-change-rational",
+  "det-ind-heart-filtered-colimits",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q51-2c54aa448",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q51-2c54aa448 (reviewer sub-agent of L); spot-checked: Read the complete item, blueprint proof, unit/chapter route, all statement and proof dependencies, and cited source statements. Verified standing-scheme hypotheses, condensed coefficient categories, base-change target, qcqs reduction, filtered-colimit continuity, constructibility, the strict q>2d+1 bound, direct-sum closure, edge cases, duplicate search, route/tool uses, and Mathlib searches. No new nodes or repairs are needed; review.md records the checks."
+ }
 }
