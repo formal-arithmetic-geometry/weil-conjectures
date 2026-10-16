@@ -1,0 +1,130 @@
+{
+ "id": "lem-cbc-affine-etale-cover-presentation",
+ "kind": "statement",
+ "title": "Finite affine pro-étale covering families have covering affine étale presentations",
+ "statement": "Let Y be affine, V→Y affine ind-étale, and U_a→V a Fin n-indexed pro-étale covering such that each U_a→Y is affine ind-étale [def-weil-pbc-ind-etale-basis]. There exist a small cofiltered category I and a relative-limit presentation P of this fixed indexed family along Y.Etale→Y.ProEt, with covering stage families, affine base and members at each stage, and underlying scheme limit cones for the original base and every member. Empty families and empty schemes are allowed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U, condition (3), finite Čech limit reductions; Tags 099T, 01ZM, 01ZN and 07RP. The proof also uses the explicitly named, already proved WeilConjectures and Mathlib declarations."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-etale-site",
+  "lem-cbc-cech-nerve-presentation-construction"
+ ],
+ "proof": [
+  {
+   "text": "Use the dense inclusion AffineProEt.toProEt to transfer the given cover to the affine site. The already proved AffineProEt.exists_finite_jointly_surjective_of_mem_topology gives a jointly surjective refinement. Factorizations through the original sieve imply joint surjectivity of the original family.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the already proved AffineProEt.exists_surjective_factorization to the ULift-reindexed finite family. This explicitly constructs its affine disjoint union and a single surjection q, with the original members forming a finite affine open cover of its source. Apply AffineProEt.singleton_inf_le_relativelyPresentable. The singleton index has exactly one member, yielding presentations pW,pB and a presentation morphism pq whose stage arrows are covering.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Scheme.OpenCover.exists_of_isCofiltered_of_finite to the finite affine open cover of the source and the underlying scheme limit of pW. Its descended opens and pullback squares give RelativeLimitPresentation.restrict presentations of all original members over Over i. Compose restrictHom with the whiskered pq; cone-leg equations prove that the resulting map is the original family arrow.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Convert affine-site presentations to étale-site presentations with the proved presentationDiagram, presentationCone and isLimitPresentationCone APIs. Faithfulness on underlying schemes proves compatibility. A point of a base stage lifts along the covering pq stage; its source point lies in a descended open. Scheme.Pullback.exists_preimage_pullback then lifts the compatible pair to a member stage. This proves the covering condition. The same limit API proves the base and member scheme limits, and every stage is affine by construction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E2",
+  "date": "2026-10-16",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U; constructed and proved in Lean during this session"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Limits commute with wide pullbacks in a category",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite affine open covering of the limit of a cofiltered system of affine schemes descends to a stage as a covering by pullbacks",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.exists_isAffineOpen_preimage_eq, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit",
+   "verdict": "Used the matching library API where applicable; no existing theorem gives the assembled finite comparison cocycle descent statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsLimit.ofRightAdjoint",
+   "date": "2026-10-16",
+   "results": "2 hits: CategoryTheory.Limits.IsLimit.ofRightAdjoint, CategoryTheory.WithTerminal.isLimitEquiv_apply_lift_left",
+   "verdict": "Used the matching library API where applicable; no existing theorem gives the assembled finite comparison cocycle descent statement."
+  },
+  {
+   "tool": "grep",
+   "query": "RelativeLimitPresentation|exists_of_isCofiltered_of_finite",
+   "date": "2026-10-16",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "verdict": "Used the matching library API where applicable; no existing theorem gives the assembled finite comparison cocycle descent statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonCechCocycleDescent",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-proetale-stalk-conservative",
+   "place": "Proof step 4, affine comparison input: geometric part of Tag 099U condition (3)",
+   "via": [
+    "lem-cbc-abelian-affine-comparison-vanishing-aux",
+    "lem-cbc-abelian-affine-comparison-vanishing",
+    "lem-cbc-abelian-comparison-injective-acyclicity",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "lem-cbc-proetale-functions-quotient-sections",
+    "lem-cbc-affine-comparison-cech-cocycle-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineComparisonEtaleCoverPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineComparisonEtaleCoverPresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_affine_etale_cover_presentation",
+  "statement": "theorem exists_affine_etale_cover_presentation\n    (Y : Scheme.{u}) [IsAffine Y]\n    (V : Y.ProEt) (hV : proAffineEtale V.hom)\n    {n : ℕ} (U : Fin n → Over V)\n    (hU : ∀ a, proAffineEtale (U a).left.hom)\n    (hcover : Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈\n      Scheme.ProEt.topology Y V) :\n    ∃ (I : Type u) (_ : SmallCategory I) (_ : IsCofiltered I)\n      (P : (finiteCover U).RelativeLimitPresentation (Scheme.toProEt Y) I),\n      (∀ i, Sieve.ofArrows (fun a ↦ (P.pres₀ a).diag.obj i)\n        (fun a ↦ (P.f a).natTrans.app i) ∈ Y.smallEtaleTopology (P.pres.diag.obj i)) ∧\n      (∀ i, IsAffine (P.pres.diag.obj i).left) ∧\n      (∀ i a, IsAffine ((P.pres₀ a).diag.obj i).left) ∧\n      Nonempty (IsLimit ((Scheme.ProEt.forget Y ⋙ Over.forget Y).mapCone P.pres.cone)) ∧\n      ∀ a, Nonempty (IsLimit\n        ((Scheme.ProEt.forget Y ⋙ Over.forget Y).mapCone (P.pres₀ a).cone))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T030335-L-1617670",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T030335-L-1617670",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,109 @@
+{
+ "id": "def-cbc-affine-etale-cech-system",
+ "kind": "definition",
+ "title": "Compatible affine étale covering systems with every Čech intersection",
+ "statement": "For a scheme Y [def-pc-scheme], a pro-étale Y-object V, a finite family U indexed by Fin n over V, and a small category I, an AffineEtaleCechSystem consists of étale covering families T(i,a)→W(i), affine nonempty repeated intersections, functorial transition maps between these intersections, and cone legs from the corresponding original intersection. The cone legs are natural and both they and transitions commute with every omitted-factor map. Its nerve and nerveCone are the associated diagram and cone. No limit property is included in this data type.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U, condition (3), finite Čech limit reductions; Tags 099T, 01ZM, 01ZN and 07RP. The proof also uses the explicitly named, already proved WeilConjectures and Mathlib declarations."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E2",
+  "date": "2026-10-16",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U; constructed and proved in Lean during this session"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Limits commute with wide pullbacks in a category",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite affine open covering of the limit of a cofiltered system of affine schemes descends to a stage as a covering by pullbacks",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.exists_isAffineOpen_preimage_eq, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit",
+   "verdict": "Used the matching library API where applicable; no existing theorem gives the assembled finite comparison cocycle descent statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsLimit.ofRightAdjoint",
+   "date": "2026-10-16",
+   "results": "2 hits: CategoryTheory.Limits.IsLimit.ofRightAdjoint, CategoryTheory.WithTerminal.isLimitEquiv_apply_lift_left",
+   "verdict": "Used the matching library API where applicable; no existing theorem gives the assembled finite comparison cocycle descent statement."
+  },
+  {
+   "tool": "grep",
+   "query": "RelativeLimitPresentation|exists_of_isCofiltered_of_finite",
+   "date": "2026-10-16",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "verdict": "Used the matching library API where applicable; no existing theorem gives the assembled finite comparison cocycle descent statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonCechCocycleDescent",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-proetale-stalk-conservative",
+   "place": "Proof step 4, affine comparison input: geometric part of Tag 099U condition (3)",
+   "via": [
+    "lem-cbc-abelian-affine-comparison-vanishing-aux",
+    "lem-cbc-abelian-affine-comparison-vanishing",
+    "lem-cbc-abelian-comparison-injective-acyclicity",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "lem-cbc-proetale-functions-quotient-sections",
+    "lem-cbc-affine-comparison-cech-cocycle-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineComparisonEtaleCechSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineComparisonEtaleCechSystem.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineEtaleCechSystem",
+  "statement": "structure AffineEtaleCechSystem (Y : Scheme.{u}) (V : Y.ProEt)\n    {n : ℕ} (U : Fin n → Over V) (I : Type u) [SmallCategory I]",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T030335-L-1617670",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T030335-L-1617670",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-cbc-affine-cech-system-cocycle-lift",
+ "kind": "statement",
+ "title": "Cocycles in finite affine Čech systems lift to one stage",
+ "statement": "Let S be an AffineEtaleCechSystem [def-cbc-affine-etale-cech-system] over a small cofiltered I. Assume every nerveCone is a scheme limit. For any étale abelian sheaf J on Y, any degree k, and any degree-k cocycle c in the original comparison ordered Čech complex, there exist a stage i and a degree-k stage cocycle x whose image under the canonical unit-and-restriction complex morphism S.toOriginal J i is c. This includes k=0 and empty tuple sets.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U, condition (3), finite Čech limit reductions; Tags 099S, 099T, 01ZM, 01ZN and 07RP. The proof also uses the explicitly named, already proved WeilConjectures and Mathlib declarations."
+ },
+ "stmt_deps": [
+  "def-cbc-affine-etale-cech-system",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Construct stage complexes and transitions coordinatewise, using J.map on the stage nerve maps. Apply the comparison unit and restriction along each cone leg to construct toOriginal. Naturality and the face equations prove all chain-map and cocone identities.",
+   "uses": [
+    "def-cbc-affine-etale-cech-system"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The proved isColimit_comparisonUpperStar_mapCocone_of_isAffine and the invertible comparison unit identify sectionCocone with a filtered colimit for each repeated intersection. Transport the universal property along the unit natural isomorphism; this uses only the already proved Continuity API.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Concrete.isColimit_exists_rep supplies a stage representative for each of the finitely many tuple coordinates. IsFiltered.sup_objs_exists gives a common stage. Naturality verifies that the assembled cochain maps to c.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The differential of this cochain maps to zero by chain-map compatibility and the cocycle equation. Concrete.isColimit_exists_of_rep_eq gives eventual zero for every differential coordinate. IsFiltered.wideSpan gives one common transition killing all of them. Transport the cochain; the chain-map equation proves its differential zero and cocone naturality preserves its image.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-affine-etale-cech-system"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E2",
+  "date": "2026-10-16",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U; constructed and proved in Lean during this session"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Limits commute with wide pullbacks in a category",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite affine open covering of the limit of a cofiltered system of affine schemes descends to a stage as a covering by pullbacks",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.exists_isAffineOpen_preimage_eq, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit",
+   "verdict": "Used the matching library API where applicable; no existing theorem gives the assembled finite comparison cocycle descent statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsLimit.ofRightAdjoint",
+   "date": "2026-10-16",
+   "results": "2 hits: CategoryTheory.Limits.IsLimit.ofRightAdjoint, CategoryTheory.WithTerminal.isLimitEquiv_apply_lift_left",
+   "verdict": "Used the matching library API where applicable; no existing theorem gives the assembled finite comparison cocycle descent statement."
+  },
+  {
+   "tool": "grep",
+   "query": "RelativeLimitPresentation|exists_of_isCofiltered_of_finite",
+   "date": "2026-10-16",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "verdict": "Used the matching library API where applicable; no existing theorem gives the assembled finite comparison cocycle descent statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonCechCocycleDescent",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-proetale-stalk-conservative",
+   "place": "Proof step 4, affine comparison input: geometric part of Tag 099U condition (3)",
+   "via": [
+    "lem-cbc-abelian-affine-comparison-vanishing-aux",
+    "lem-cbc-abelian-affine-comparison-vanishing",
+    "lem-cbc-abelian-comparison-injective-acyclicity",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "lem-cbc-proetale-functions-quotient-sections",
+    "lem-cbc-affine-comparison-cech-cocycle-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineComparisonCechSystemSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineComparisonCechSystemSections.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineEtaleCechSystem.exists_cocycle_lift",
+  "statement": "theorem exists_cocycle_lift [IsCofiltered I]\n    (hS : ∀ k y, Nonempty (IsLimit\n      ((Scheme.ProEt.forget Y ⋙ Over.forget Y).mapCone (S.nerveCone k y))))\n    (k : ℕ) (c : (S.cocone J).pt.X k)\n    (hc : (S.cocone J).pt.d k (k + 1) c = 0) :\n    ∃ (i : I) (x : (S.stageComplex J i).X k),\n      (S.stageComplex J i).d k (k + 1) x = 0 ∧ (S.toOriginal J i).f k x = c",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T030335-L-1617670",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T030335-L-1617670",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
