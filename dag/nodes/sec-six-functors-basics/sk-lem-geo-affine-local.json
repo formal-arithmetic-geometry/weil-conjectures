@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-lem-geo-affine-local",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Affine space and étale localization",
- "statement": "Let $S$ be of finite type over the standing field $k$.\n\n1. For the projection $a:\\mathbf A^d_S\\to S$, the right adjoint $a^!$ of\n   $Ra_!\\colon D_{\\mathrm{class}}((\\mathbf A^d_S)_{\\mathrm{proét}},\\Lambda)\\to D_{\\mathrm{class}}(S_{\\mathrm{proét}},\\Lambda)$\n   is $a^*(d)[2d]$, with unit and counit compatible with base change.\n2. Let $f:X\\to S$ be separated of finite type, let\n   $N\\in D_{\\mathrm{class}}(S_{\\mathrm{proét}},\\Lambda)$, and let $u:U\\to X$ be\n   separated, étale and of finite type. There is a canonical identification\n\n   $$\n   u^*f^!N=(fu)^!N\\quad\\text{in }D_{\\mathrm{class}}(U_{\\mathrm{proét}},\\Lambda).\n   \\qquad\\text{(G10)}\n   $$\n\n   It is compatible with units, counits, composition, and further étale\n   localization.",
+ "statement": "Let $k$ be the standing field, a finite or algebraically closed field of characteristic $p>0$. Fix a prime $\\ell\\ne p$ and a finite discrete commutative ring $\\Lambda$ with $\\ell^r\\Lambda=0$ for some $r\\geq1$. Let $S$ be a finite-type $k$-scheme [def-weil-finite-type-morphism]. For every finite-type $k$-scheme $T$, use ordinary constant-$\\Lambda$ module sheaves and their unbounded derived category on the small pro-etale site [def-weil-pbc-proetale-modules]. Let $D_{\\mathrm{class}}(T_{\\mathrm{proet}},\\Lambda)$ be its full subcategory of complexes with classical cohomology sheaves [sk-def-pe-classical-definition]. Via the comparison $\\nu_T$ [def-weil-pbc-site-comparison-morphism], use the finite etale Tate sheaf $\\Lambda_T(1)=\\mu_{\\ell^r,T}\\otimes_{\\mathbf Z/\\ell^r}\\Lambda_T$, its nonnegative tensor powers, and $K(d)=K\\otimes^L_\\Lambda\\Lambda_T(d)$ [def-asd-finite-etale-tate-twist, def-kun-derived-tensor]. Here these sheaves and twists on the pro-etale site are the exact inverse images of the displayed etale sheaves. For a separated finite-type $f:X\\to S$ [def-weil-proper-morphism, def-weil-finite-type-morphism], $Rf_!$ on the classical categories is the restriction of $R\\bar f_*Dj_!$ for a compactification $X\\xrightarrow{j}\\bar X\\xrightarrow{\\bar f}S$ [def-weil-compactifications-refinements, def-weil-extension-by-zero]; $f^!$ denotes its right adjoint on these classical categories.\n\n1. For $d\\in\\mathbb N$ and the affine-space projection $a:\\mathbf A^d_S\\to S$ [def-sbc-affine-space], this right adjoint exists and is canonically $a^*(-)(d)[2d]$. The unit and counit of this adjunction commute with every change of base $v:S'\\to S$ between finite-type $k$-schemes, under the canonical compact-support exchange and the pullback-of-twist identifications.\n2. For every separated finite-type $f:X\\to S$ this classical right adjoint exists. If $u:U\\to X$ is separated, etale and of finite type [def-weil-etale-morphism], then there is a canonical natural isomorphism\n$$u^*f^!N\\xrightarrow{\\sim}(fu)^!N\\quad\\text{in }D_{\\mathrm{class}}(U_{\\mathrm{proet}},\\Lambda)\\qquad\\text{(G10)}$$\nfor every $N\\in D_{\\mathrm{class}}(S_{\\mathrm{proet}},\\Lambda)$. Here $Du_!$ is the transport to the classical categories of termwise etale sum extension [def-weil-pbc-etale-sum-extension]. It identifies the composite adjunction $Rf_!Du_!\\dashv u^*f^!$ with $R(fu)_!\\dashv(fu)^!$; thus it respects units and counits, composition of compact supports, and further separated finite-type etale localization. No adjunction on the whole pro-etale derived categories is asserted.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/_section.md",
   "place": "node sk-lem-geo-affine-local, order 1547",
@@ -30,33 +30,261 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-modules",
+  "sk-def-pe-classical-definition",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-asd-finite-etale-tate-twist",
+  "def-kun-derived-tensor",
+  "def-weil-proper-morphism",
+  "def-weil-compactifications-refinements",
+  "def-weil-extension-by-zero",
+  "def-sbc-affine-space",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-sum-extension"
+ ],
  "proof": [
   {
-   "text": "By the classical comparison ([sk-prop-pe-unbounded-classical]), the following\nétale computations calculate the pro-étale adjoints together with their units\nand counits.",
-   "uses": [],
-   "elementary": null
+   "text": "First note the elementary geometric closure checks. A composite of finite-type maps is finite type: over finite affine covers combine the two finite lists of algebra generators, since if $B=A[b_1,\\ldots,b_m]$ and $C=B[c_1,\\ldots,c_n]$, then $C=A[b_1,\\ldots,b_m,c_1,\\ldots,c_n]$. For separatedness of $fu$, factor its diagonal as $U\\to U\\times_XU\\to U\\times_SU$: the first is the closed diagonal of $u$, and the second is a base change of the closed diagonal of $f$ [lem-weil-pbc-closed-immersion-base-change]; the composite is closed by [lem-weil-pbc-closed-immersion-comp]. This applies also to the further maps. The compactification $\\bar X$ is finite type over $k$ because $S$ is finite type over $k$ and $\\bar X\\to S$ is finite type; no separatedness of $S$ over $k$ is needed. Every scheme occurring, including $X$, $U$, the $X_i$, and the compactifications, is finite type over $k$ by the finite-type composition calculation above. They are Noetherian: the only ideals of the field $k$ are $0$ and $k$, so $k$ is Noetherian and [lem-weil-pbc-finite-type-over-noetherian] applies to their finite-type structure maps. They are quasi-compact by the definition of Noetherian, and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Every separated finite-type map under consideration has a compactification by [thm-nagata-compactification]. Put $X_i=\\mathbf A^i_S$ and let $a_i:X_i\\to X_{i-1}$ forget the last coordinate. On $\\operatorname{Spec}R\\subseteq S$ the polynomial-ring equality $R[x_1,\\ldots,x_i]=R[x_1,\\ldots,x_{i-1}][x_i]$ identifies $a_i$ with the affine line over $X_{i-1}$ [def-sbc-affine-space]. Polynomial generators give finite type, and the diagonal is the closed subscheme defined by differences of the two sets of coordinates, giving separatedness [def-weil-finite-type-morphism, def-weil-proper-morphism]. For any such base $T$ the standard chart $j:\\mathbf A^1_T\\hookrightarrow\\mathbf P^1_T$ and proper projection $q:\\mathbf P^1_T\\to T$ are a compactification [lemma-nagata-relative-affine-space-open-immersion, lemma-nagata-projective-space-base-change-proper]. The integer $\\ell^r$ is invertible on every $k$-scheme here and kills $\\Lambda$, and $k$ is finite or algebraically closed with $\\ell$ invertible in $k$, as the comparison statements of Step 2 require. Thus all coefficient, Noetherian and compactification hypotheses used below hold.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification",
+    "def-sbc-affine-space",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lemma-nagata-relative-affine-space-open-immersion",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+    "place": "Proof (1), geometry of the standard affine-line compactification and the successive projections"
+   }
   },
   {
-   "text": "(1) Let $j:\\mathbf A^1_S\\hookrightarrow\\mathbf P^1_S$ be the open immersion, so\nthat $Ra_!=Rp_*j_!$ for $d=1$. Since $j_!\\dashv j^*$, (G4) of\n[sk-prop-geo-p1-adjunction] gives $a^!=j^*p^*(1)[2]=a^*(1)[2]$. For general\n$d$, write $a$ as a composite of $d$ affine-line projections and use Stacks,\nTag [0F7J](https://stacks.math.columbia.edu/tag/0F7J). The counit is the\nsuccessive composite of the $d$ projective-line traces and the open-immersion\ncounits. Associativity (Stacks, Tag\n[0F7K](https://stacks.math.columbia.edu/tag/0F7K)) and compatibility with base\nchange (Stacks, Tag [0F7L](https://stacks.math.columbia.edu/tag/0F7L)) show\nthat this is the counit for the canonical composition isomorphism, and that it\ncommutes with base change.",
-   "uses": [],
-   "elementary": null
+   "text": "Write $E_T=\\nu_T^*$ for a finite-type $k$-scheme $T$. By [lem-sfb-unbounded-site-comparison] $E_T$ is fully faithful on the entire ordinary etale derived category, so the unit $1\\to R\\nu_{T,*}E_T$ of $E_T\\dashv R\\nu_{T,*}$ is an isomorphism. By [lem-sfb-finite-classical-unbounded-comparison] $E_T$ takes values in $D_{\\mathrm{class}}(T_{\\mathrm{proet}},\\Lambda)$ and the counit $E_TR\\nu_{T,*}K\\to K$ is an isomorphism for every classical $K$. With unit and counit invertible, $E_T$ is an equivalence from the entire ordinary etale derived category onto the entire classical pro-etale category, with quasi-inverse $E_T^{-1}=R\\nu_{T,*}$. The square comparison [lem-weil-pbc-comparison-pullback] intertwines inverse images. The current statement of [sk-thm-pe-direct-image-comparison] gives this inverse-image square on all unbounded complexes, compatibly with composition, because all four inverse-image functors are exact; its direct-image assertion is only bounded below. The unbounded direct-image comparison used here is [lem-sfb-unbounded-direct-image-comparison]: for every finite-type $g$ between finite-type $k$-schemes, the mate $\\nu^*Rg_{\\mathrm{et},*}K\\to Rg_{\\mathrm{proet},*}\\nu^*K$ of that inverse-image square is an isomorphism for every unbounded $K$; the field, finite-type and finite-coefficient hypotheses were verified in Step 1. Composing $g$ pastes the inverse-image squares along the composite inverse-image/direct-image adjunctions, so by [lem-weil-pbc-mate-pasting] (2) the comparison for a composite is the pasted composite of the two comparisons, and by (4) the comparison for an identity is the identity. For an open $j$, pro-etale extension by zero is exact by [lem-weil-extension-by-zero-exact], and [lem-cbc-proetale-extension-zero-comparison] intertwines the two exact extensions by zero, again termwise. Consequently for any compactification $c=(j,\\bar f)$ there is a natural isomorphism\n$$E_SRf_{!,\\mathrm{et}}^c\\cong E_SR\\bar f_{\\mathrm{et},*}Dj_{!,\\mathrm{et}}\\cong R\\bar f_{\\mathrm{proet},*}Dj_{!,\\mathrm{proet}}E_X.$$\nThe ordinary candidate is [def-amb-etale-compact-support]. Conjugate each unbounded refinement, composition and base-change isomorphism of [lem-amb-unbounded-compact-support-comparisons] by the equivalences $E$: explicitly replace $F$ by $E_{\\rm target}FE_{\\rm source}^{-1}$ and $t:F\\to G$ by $E_{\\rm target}tE_{\\rm source}^{-1}$, inserting the equivalence counits between composite functors. Functoriality preserves $t_2\\circ t_1$; the equivalence triangle identities cancel inserted units/counits. Hence each stated identity and associativity diagram commutes after this conjugation. Their maps are the canonical ones: the direct-image comparisons are mates of the inverse-image square, and the open comparison is the adjunction comparison; pasting these squares commutes with taking mates by [lem-weil-pbc-mate-pasting]. Thus their identity, associativity and base-change equations remain equations after applying $E$.",
+   "uses": [
+    "lem-sfb-finite-classical-unbounded-comparison",
+    "lem-sfb-unbounded-site-comparison",
+    "lem-sfb-unbounded-direct-image-comparison",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "def-amb-etale-compact-support",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-extension-by-zero-exact",
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+    "place": "Proof, first paragraph: classical comparison, expanded to the actual whole unbounded categories"
+   }
   },
   {
-   "text": "(2) Extension by zero\n$u_!\\colon\\Mod(U_{\\mathrm{ét}},\\Lambda)\\to\\Mod(X_{\\mathrm{ét}},\\Lambda)$ is exact\nand left adjoint to $u^*$ by its elementary sheaf-theoretic construction\n(Stacks, Tag [03S2](https://stacks.math.columbia.edu/tag/03S2)), and the\nadjunction extends to derived categories because both functors are exact. For\nevery $A\\in D(U_{\\mathrm{ét}},\\Lambda)$,\n\n$$\n\\Hom(A,u^*f^!N)=\\Hom(u_!A,f^!N)=\\Hom(Rf_!u_!A,N)=\\Hom(R(fu)_!A,N),\n$$\n\nwith the Hom groups taken in $D(U_{\\mathrm{ét}},\\Lambda)$,\n$D(X_{\\mathrm{ét}},\\Lambda)$ and $D(S_{\\mathrm{ét}},\\Lambda)$, the last step by\nthe composition isomorphism of Stacks, Tag\n[0F7J](https://stacks.math.columbia.edu/tag/0F7J). The Yoneda lemma gives\n(G10), and since these bijections use exactly that composition isomorphism,\nthe counit of $R(fu)_!\\dashv(fu)^!$ is the composite of the two counits.\nRepeating the argument for a further étale map gives the compatibilities with\ncomposition and localization.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $G_f$ be an ordinary-etale compact-support right adjoint given by [thm-amb-etale-exceptional-adjoint]. Define on classical objects $f^!=E_XG_fE_S^{-1}$. For etale $M,L$ the equivalences and Step 2 give natural bijections\n$$\\operatorname{Hom}(Rf_!E_XM,E_SL)\\cong\\operatorname{Hom}(Rf_{!,\\mathrm{et}}M,L)\\cong\\operatorname{Hom}(M,G_fL)\\cong\\operatorname{Hom}(E_XM,E_XG_fL).$$\nEvery classical object has this form, so this proves the adjunction on exactly the stated categories. The canonical comparison of two choices is the unique counit-preserving comparison of right adjoints [det-sp-unique-right-adjoint]. It is an isomorphism, and its uniqueness makes comparison transitive. Hence the notation $f^!$ is independent of choices in this sense.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-sfb-finite-classical-unbounded-comparison",
+    "det-sp-unique-right-adjoint",
+    "lem-sfb-unbounded-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+    "place": "Proof, first paragraph and (2): existence and normalization of the classical right adjoints"
+   }
+  },
+  {
+   "text": "It suffices now to compute on the ordinary etale categories. For $a=qj:\\mathbf A^1_T\\to T$, [def-amb-etale-compact-support] and Step 2 identify $Ra_!$ with $Rq_*Dj_!$. The first assertion of [lem-amb-etale-adjoint-locality], applied to the open immersion $j$, which is etale by [lem-weil-pbc-open-immersion-etale], gives $Dj_!\\dashv j^*$. Fix the source trace convention first: for $R=\\mathbf Z/\\ell^r\\mathbf Z$, [det-sp-p1-trace] (1)--(2) says that the twisted unit/Kummer-class decomposition has trace equal to projection onto its Kummer-class summand, with value $1$ on that class. Under the exact comparison of Step 2 the unit and the defining Kummer connecting class are their inverse images, so this convention also specifies the ordinary etale trace. In the cyclic case $A=R$, the decomposition $b_q$ and trace $t_q=\\operatorname{pr}_2b_q^{-1}$ in [lem-asd-ordinary-finite-p1-adjunction] have precisely these two component maps and this projection. For arbitrary $A=\\Lambda$, that theorem explicitly uses the scalar-extended Kummer class and the same projection definition. Apply it with $N=\\ell^r$ to obtain $Rq_*\\dashv q^*(-)(1)[2]$, including its specified base-change-compatible trace counit. The composite-adjunction formula [def-weil-pbc-composite-adjunction] gives\n$$\\operatorname{Hom}(Ra_!M,L)\\cong\\operatorname{Hom}(Dj_!M,q^*L(1)[2])\\cong\\operatorname{Hom}(M,j^*q^*L(1)[2])\\cong\\operatorname{Hom}(M,a^*L(1)[2]).$$\nThe final identification uses the pullback of the twist [lem-asd-etale-finite-twist-pullback] and the module-linear composition of inverse images [lem-weil-pbc-inverse-image-composition-module-linear], applied termwise using [prop-weil-pbc-inverse-image-modules-exact]. If $H=q^*(-)(1)[2]$, this adjunction has unit $\\eta^j$ followed by $j^*\\eta^q Dj_!$, and counit $Rq_*\\epsilon^j H$ followed by $\\epsilon^q$. These are actual composites of the two units and counits, not an arbitrary choice of an adjunction on isomorphic functors.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "lem-amb-etale-adjoint-locality",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-open-immersion-etale",
+    "det-sp-p1-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+    "place": "Proof (1), d=1: open adjunction composed with the projective-line adjunction"
+   }
+  },
+  {
+   "text": "The finite Tate factors are flat by [lem-asd-finite-etale-twist-line]. Thus tensoring with them computes their derived tensor on any complex: the exact tensor functor preserves kernels and images, hence preserves quasi-isomorphisms. By their tensor-power definition [def-asd-finite-etale-tate-twist], reassociation sends $((x\\otimes(l_1\\otimes\\cdots\\otimes l_i))\\otimes l)$ to $x\\otimes(l_1\\otimes\\cdots\\otimes l_i\\otimes l)$, with inverse regrouping. It gives $(K(i)[2i])(1)[2]\\cong K(i+1)[2i+2]$. The shifts are even, so both differential signs are unchanged; for $i=0$ use the scalar unit map. Pullback commutes with these identifications by [lem-asd-etale-finite-twist-pullback]. For the site comparison itself, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies the tensor powers and derived twists with their pro-etale inverse images. Hence the same twist calculation is valid on the classical categories.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "def-asd-finite-etale-tate-twist",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+    "place": "Proof (1), addition of twists and shifts in the affine-space induction"
+   }
+  },
+  {
+   "text": "Induct on $i$ for the projection $p_i:X_i\\to S$, using the claim $Rp_{i!}\\dashv p_i^*(-)(i)[2i]$. At $i=0$, $X_0=S$ by [def-sbc-affine-space]; the identity compactification gives the identity functor by [def-amb-etale-compact-support], and the identity adjunction of [def-weil-pbc-composite-adjunction] starts the induction. Suppose the claim holds for $i$. Step 4 over the base $X_i$ gives $Ra_{i+1,!}\\dashv a_{i+1}^*(-)(1)[2]$. The composition isomorphism [lem-amb-unbounded-compact-support-comparisons] and the Hom bijections for the composite adjunction give\n$$\\operatorname{Hom}(Rp_{i+1,!}M,L)\\cong\\operatorname{Hom}(Ra_{i+1,!}M,p_i^*L(i)[2i])\\cong\\operatorname{Hom}(M,a_{i+1}^*(p_i^*L(i)[2i])(1)[2]).$$\nBy Step 5 and inverse-image composition [lem-weil-pbc-inverse-image-composition-module-linear], the last object is $p_{i+1}^*L(i+1)[2i+2]$. This proves the induction for all $d$. Transporting along Step 2 and using the uniqueness in [det-sp-unique-right-adjoint] identifies this computed right adjoint with the chosen $a^!$.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-amb-etale-compact-support",
+    "def-weil-pbc-composite-adjunction",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+    "place": "Proof (1), d=0 and general d via successive affine-line projections"
+   }
+  },
+  {
+   "text": "For base change of the affine-line computation, the projective-line adjunction of [lem-asd-ordinary-finite-p1-adjunction] commutes with proper exchange. For the open adjunction, write $b:T'\\to T$, $b_U:U'\\to U$ and $j':U'\\hookrightarrow T'$ for a base change of $j$. The inverse open exchange $\\beta:Dj'_!b_U^*\\to b^*Dj_!$ is the map of [def-weil-pbc-etale-shriek-base-change-map], an isomorphism by [lem-weil-pbc-etale-shriek-base-change-modules], also on complexes by degreewise exactness. Identify $j'^*b^*=b_U^*j^*$. For the unit equation, use the sum-extension presheaf [def-weil-pbc-etale-sum-extension] and the sheafified inverse-image construction [def-weil-pbc-inverse-image]. Locally a section of $b_U^*M$ is represented by a section $m$ of $M$ on an etale object over $U$. The unit of sum extension sends $m$ to the summand indexed by that object's lift to $U$. The canonical exchange in the cited formula restricts this section to the fibre product; its transposed map $\\beta$ therefore sends the pulled-back lift summand to the same summand in $b^*j_!M$. Restriction by $j'^*$ identifies that summand with the pulled-back section of $M$. Both composites below consequently send every such local generator to the same pulled-back section; additivity and sheafification give the equation:\n$$j'^*\\beta_M\\circ\\eta^{j'}_{b_U^*M}=b_U^*\\eta^j_M.$$\nThis is the unit equation. For $K$ on $T$, the counit equation is\n$$b^*\\epsilon^j_K\\circ\\beta_{j^*K}=\\epsilon^{j'}_{b^*K}.$$\nThe transpose of the left side under $Dj'_!\\dashv j'^*$ is, using the unit equation,\n$$b_U^*(j^*\\epsilon^j_K\\circ\\eta^j_{j^*K})=1_{b_U^*j^*K}.$$\nThe transpose of the right side is the same identity by the triangle identity for $j'$. Injectivity of transposition proves the counit equation. These equations hold in each degree, so they descend to unbounded complexes. The forward open exchange is $\\beta^{-1}$ and agrees with [sbc-prop-extension-by-zero-and-arbitrary-base-change]. By the explicit normalization in [lem-amb-unbounded-compact-support-comparisons], composing this exchange with proper exchange is exactly compact-support exchange. Thus the two constituent unit and counit squares of Step 4 commute. Pasting them, [lem-weil-pbc-mate-pasting] (2) says that the resulting square is the square for the composite adjunction with unit and counit as written in Step 4. For the induction, [lem-amb-unbounded-compact-support-comparisons] makes compact-support exchange compatible with composition, and [lem-asd-etale-finite-twist-pullback] makes the right-adjoint pullback identifications compatible with the twist reassociations in Step 5. More explicitly, put $L_i=Rp_{i!}$, $R_i=p_i^*(-)(i)[2i]$, $A_i=Ra_{i+1,!}$ and $B_i=a_{i+1}^*(-)(1)[2]$. Before the twist identification, the induction step has unit $B_i\\eta^{p_i}A_i\\circ\\eta^{a_{i+1}}$ and counit $\\epsilon^{p_i}\\circ L_i\\epsilon^{a_{i+1}}R_i$ [def-weil-pbc-composite-adjunction]. Pulling back these displayed composites gives the composites of the pulled-back units and counits by functoriality. Replace each constituent by its primed-base unit or counit using the two constituent base-change squares already proved. The interchange law for natural transformations identifies the resulting composites with $B'_i\\eta^{p'_i}A'_i\\circ\\eta^{a'_{i+1}}$ and $\\epsilon^{p'_i}\\circ L'_i\\epsilon^{a'_{i+1}}R'_i$. The mate-pasting identity just cited identifies their left comparison with compact-support exchange, and twist pullback identifies their right comparison with that for $R_{i+1}$. These are the required unit and counit squares at $i+1$, proving the base-change induction for every $d$. The identity case has identity maps. Fully faithful transport in Step 2 proves the asserted equations on the classical pro-etale categories as well.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-weil-pbc-mate-pasting",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-asd-etale-finite-twist-pullback",
+    "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lem-amb-etale-adjoint-locality",
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+    "place": "Proof (1), last three sentences: counit, associativity and base-change compatibility"
+   }
+  },
+  {
+   "text": "For (2) first work on the ordinary etale categories, writing $G_f$ for the right adjoint of Step 3. The first assertion of [lem-amb-etale-adjoint-locality] gives $Du_!\\dashv u^*$ on the whole unbounded categories; [lem-sfb-quasifinite-compact-support-exact] identifies $Ru_!$ with this exact sum extension, compatibly with further etale composition. The composition comparison $\\alpha_{f,u}:Rf_!Du_!\\xrightarrow{\\sim}R(fu)_!$ of [lem-amb-unbounded-compact-support-comparisons] therefore gives for every $M,L$ natural bijections\n$$\\operatorname{Hom}(M,u^*G_fL)\\cong\\operatorname{Hom}(Du_!M,G_fL)\\cong\\operatorname{Hom}(Rf_!Du_!M,L)\\cong\\operatorname{Hom}(R(fu)_!M,L).$$\nThis exhibits $u^*G_f$ as a right adjoint of $R(fu)_!$. Compare it to $G_{fu}$ by [det-sp-unique-right-adjoint]. The resulting canonical isomorphism transports by Step 2, whose pullback comparison is [lem-weil-pbc-comparison-pullback], to exactly $u^*f^!N\\cong(fu)^!N$. No boundedness or constructibility condition entered any Hom bijection.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "det-sp-unique-right-adjoint",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-sfb-quasifinite-compact-support-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+    "place": "Proof (2), four Hom groups and the canonical identification (G10)"
+   }
+  },
+  {
+   "text": "Write $L_f=Rf_!$, $L_u=Du_!$, $R_f=G_f$, $R_u=u^*$. The composite unit and counit are\n$$\\eta^{f,u}=R_u\\eta^f L_u\\circ\\eta^u,\\qquad \\epsilon^{f,u}=\\epsilon^f\\circ L_f\\epsilon^u R_f$$\nby [def-weil-pbc-composite-adjunction]. After identifying $L_fL_u$ with $L_{fu}$ by $\\alpha_{f,u}$, let $\\theta:u^*G_f\\xrightarrow{\\sim}G_{fu}$ be the comparison in Step 8. Its defining equation is\n$$\\epsilon^{fu}\\circ L_{fu}\\theta=\\epsilon^{f,u}\\circ\\alpha_{f,u}^{-1}(u^*G_f).$$\nThus it preserves the counit, and by adjunction the same equation preserves the unit. For a further separated finite-type etale $v:V\\to U$, let $L_v=Dv_!$, $R_v=v^*$. There is a canonical $L_uL_v\\cong L_{uv}$: both left adjoints of $v^*u^*=(uv)^*$ are identified by their adjunctions, and the sum-extension comparison of [lem-sfb-quasifinite-compact-support-exact] sends each nested lift summand to its composite lift. Its counit is evaluation on that summand, so it is precisely the counit-preserving left-adjoint comparison. After identifying compact supports by the same node, both parenthesizations of the triple composite adjunction have counit\n$$\\epsilon^f\\circ L_f\\epsilon^uR_f\\circ L_fL_u\\epsilon^vR_uR_f.$$\nIndeed the $f,u$-then-$v$ parenthesization substitutes $\\epsilon^{f,u}=\\epsilon^f\\circ L_f\\epsilon^uR_f$; the $f$-then-$u,v$ parenthesization substitutes $\\epsilon^{u,v}=\\epsilon^u\\circ L_u\\epsilon^vR_u$, and functoriality of $L_f$ gives the same displayed expression. Associativity of $\\alpha$ [lem-amb-unbounded-compact-support-comparisons] identifies the two left functors with $L_{fuv}$. Therefore the two comparisons of right adjoints preserve the same counit, and are equal by [det-sp-unique-right-adjoint]. Identity units, counits and $\\alpha$ give identity comparisons. If another compact-support functor $L_g$ is composed on the left, both expanded counits are $\\epsilon^g\\circ L_g\\epsilon^fR_g\\circ L_gL_f\\epsilon^uR_fR_g$; the same associativity and uniqueness prove the requested compatibility with compact-support composition. Finally the pullback comparison [lem-weil-pbc-comparison-pullback] respects compositions, so transporting these equations gives the claimed unit, counit, composition and further-localization compatibilities for (G10).",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "det-sp-unique-right-adjoint",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-sfb-quasifinite-compact-support-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+    "place": "Proof (2), final sentences: expand the counit and compare the two parenthesizations"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "def-sbc-affine-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-sfb-finite-classical-unbounded-comparison",
+  "lem-sfb-unbounded-site-comparison",
+  "lem-sfb-unbounded-direct-image-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-amb-etale-compact-support",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-extension-by-zero-exact",
+  "sk-thm-pe-direct-image-comparison",
+  "thm-amb-etale-exceptional-adjoint",
+  "det-sp-unique-right-adjoint",
+  "lem-amb-etale-adjoint-locality",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "def-weil-pbc-composite-adjunction",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-open-immersion-etale",
+  "det-sp-p1-trace",
+  "lem-asd-finite-etale-twist-line",
+  "def-asd-finite-etale-tate-twist",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-inverse-image",
+  "lem-sfb-quasifinite-compact-support-exact"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+  "place": "Entire proof, expanded with Bhatt-Scholze unbounded classical comparison and the existing ordinary-etale projective-line/compact-support calculus"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint of compactly supported pushforward along affine space is pullback with a Tate twist and cohomological shift and respects etale localization",
+   "results": "8 hits. Returned: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp. Generic structure-module/sheaf pullback adjunctions in Mathlib/AlgebraicGeometry/Modules/Sheaf.lean and Mathlib/Algebra/Category/ModuleCat/Sheaf/{PullbackContinuous,PushforwardContinuous}.lean are not exceptional inverse-image adjunctions; the second phrasing also returned manifold/test-function and condensed-module facts.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace, CategoryTheory.Adjunction",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|upperShriek|lowerShriek|exceptionalInverseImage",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint of compactly supported pushforward along affine space is pullback with a Tate twist and cohomological shift",
+   "results": "8 hits. Returned: TopCat.Sheaf.pullback, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, TopCat.Sheaf.instIsLeftAdjointPullback, TopCat.Sheaf.pullbackPushforwardAdjunction. Generic structure-module/sheaf pullback adjunctions in Mathlib/AlgebraicGeometry/Modules/Sheaf.lean and Mathlib/Algebra/Category/ModuleCat/Sheaf/{PullbackContinuous,PushforwardContinuous}.lean are not exceptional inverse-image adjunctions; the second phrasing also returned manifold/test-function and condensed-module facts.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth duality for affine space: extraordinary inverse image of compact supports is inverse image shifted twice the dimension and Tate twisted",
+   "results": "8 hits. Returned: smoothSheafAddCommGroup.compLeft, TestFunction.coe_ofSupportedInLM, TestFunction.coe_ofSupportedInCLM, LightCondensed.ihomPoints_symm_comp, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction. Generic structure-module/sheaf pullback adjunctions in Mathlib/AlgebraicGeometry/Modules/Sheaf.lean and Mathlib/Algebra/Category/ModuleCat/Sheaf/{PullbackContinuous,PushforwardContinuous}.lean are not exceptional inverse-image adjunctions; the second phrasing also returned manifold/test-function and condensed-module facts.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -73,5 +301,124 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-geo-affine-local"
+ "unit": "sk-lem-geo-affine-local",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-geo-affine-local",
+  "worker": "stage1",
+  "summary": "Made the implicit finite ell-primary coefficient convention and classical unbounded categories explicit; supplied classical adjoint existence, expanded the affine-space induction including d=0, and wrote the unit/counit and localization coherence equations. Two new statement-only lemmas supply the unbounded classical comparison and the quasi-finite exact-support comparison. All other inputs reuse existing nodes. The returned delivery exposed missing chapter/unit records in the then-current side snapshot; the current DAG now contains sec-six-functors-basics and sk-lem-geo-affine-local, and the two new nodes retain those bindings. The route is the standard projective-line/open-extension computation, with no SGA source. Refreshed against the current DAG after the metadata return, filled the current unit realization, and distinguished the changed comparison node’s unbounded inverse-image square from its bounded-below direct-image assertion. Maintainer-reader fix (2026-10-17): the new comparison node is reduced to the unbounded essential-image/counit assertion; full faithfulness and unbounded direct images now cite the existing lem-sfb-unbounded-site-comparison and lem-sfb-unbounded-direct-image-comparison; the standing field is stated as finite or algebraically closed instead of only the algebraic closure of a finite field.",
+  "blueprint": "Step 2 realizes the opening comparison; Steps 1 and 4-7 realize (1) through the standard projective-line compactification, iteration, and canonical exchanges; Steps 3, 8 and 9 realize existence, the Hom argument and all coherences in (2).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Step 1 takes preservation of Noetherianness under finite-type maps, needed for the ordinary etale interfaces; the unit has no separate geometry lemma."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Step 1 needs existence of compactifications for general f and fu; this is the chapter-prescribed Nagata input."
+   },
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "Step 1 takes the standard affine chart of projective space to form the prescribed affine-line compactification."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Step 1 takes properness of the projective-line projection, the proper half of that compactification."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Steps 2, 8 and 9 take the canonical pullback comparison and its composition law for passage between the two sites."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Step 2 needs comparison of etale and pro-etale open extension, a generic site-comparison input missing from this unit."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Steps 2 and 6-9 need unbounded compact-support refinement, composition and base-change maps with their canonical normalization; bounded-below inputs are insufficient."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Steps 2 and 7 need the general categorical equations for mates of pasted squares to identify the canonical exchange maps."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Step 3 needs existence of the ordinary unbounded etale compact-support right adjoint before transporting it; the unit does not supply an existence proof."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Steps 4, 7 and 8 take only exactness and the unbounded etale sum-extension adjunction from its first assertion; G10 is proved here by the Hom calculation."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Steps 4 and 7 take the normalized finite-coefficient ordinary P1 adjunction and its base-change law, exactly the projective-line route prescribed by the unit."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Steps 4, 5 and 7 need canonical pullback of finite Tate lines, powers and shifts, to identify the computed right adjoint."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Steps 4 and 6 need the module-linear inverse-image composition comparison, applied termwise in the induction."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Step 4 needs exactness of constant-module inverse image to use its composition and shift maps on unbounded complexes."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Step 5 needs flatness of the finite Tate lines; their definition alone would not justify computing derived tensor termwise."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Step 5 needs monoidality of derived pullback for the comparison of the two sites; the unit has no replacement for this ringed-topos tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
+    "why": "Step 7 needs invertibility of the canonical module base-change mate for open extension, applied degreewise."
+   },
+   {
+    "node": "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "why": "Step 7 identifies the forward open exchange with the whole-complex extension-by-zero base-change comparison used by compact support."
+   },
+   {
+    "node": "lem-sfb-unbounded-site-comparison",
+    "why": "Step 2 takes full faithfulness of the unbounded etale-to-pro-etale pullback for finite l-primary coefficients; it states part of the blueprint's cited unbounded comparison (sk-prop-pe-unbounded-classical) and no node of this unit restates it."
+   },
+   {
+    "node": "lem-sfb-unbounded-direct-image-comparison",
+    "why": "Step 2 takes the unbounded direct-image comparison for finite-type maps; it states the blueprint's cited unbounded comparison (sk-prop-pe-unbounded-classical) and duplicating it in this unit would repeat an existing node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-mate-pasting",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-amb-etale-adjoint-locality",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-asd-finite-etale-twist-line",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+  "lem-sfb-unbounded-site-comparison",
+  "lem-sfb-unbounded-direct-image-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-1040a2384",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-1040a2384 (reviewer sub-agent of L); spot-checked: Read the item, the 9 steps and every cited statement, both new nodes, the unit/chapter records, the main-20261015 blueprint sources (affine-local, pe-unbounded-classical and sub-nodes, geo-p1-adjunction, base-field-cd, dc-setting, citers), Bhatt-Scholze 5.2.6-5.4.6 incl. Rem 5.2.8/5.4.4 and Prop 5.3.2, and Stacks more-etale 0F4Y/0F5F/0F7H/0GKM. The steps are correct: geometry, transport by equivalence, Hom adjunction, P1 plus open composite adjunction, twists, explicit induction, the base-change unit/counit transpose argument, G10 by uniqueness and the threefold-counit coherence. No dependency is SGA-sourced. Two faults repaired. (1) C5/D1: new node lem-sfb-finite-classical-unbounded-comparison restated the existing unsplit nodes lem-sfb-unbounded-direct-image-comparison (same unbounded mate comparison, same hypotheses) and lem-sfb-unbounded-site-comparison (full faithfulness); the report did not list either. The node is reduced to the new content: nu^* lands in D_class and the counit is invertible on unbounded classical complexes (BS Rem 5.2.8, Prop 5.2.6(3), 5.3.2). Step 2 now cites the two existing nodes and gets composition compatibility from mate pasting (2),(4); both are declared as tool_uses. (2) The item narrowed the standing field to the algebraic closure of F_q; it is restated as finite or algebraically closed, which every input supports and which matches the DAG's reading of sk-prop-pe-unbounded-classical. The finite l-primary Lambda clarification is accepted (Lambda=Z is untyped and all citers use finite coefficients). lem-sfb-quasifinite-compact-support-exact is accepted as a substantive Stacks 0GKM/0F5F/0F4Y comparison. Corrected files: fixes/dag/nodes/sec-six-functors-basics/{sk-lem-geo-affine-local,lem-sfb-finite-classical-unbounded-comparison}.json; full checks in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
