@@ -27,78 +27,70 @@
  ],
  "proof": [
   {
-   "text": "Choose injective resolutions of $X$ and $Y$ and Cartan--Eilenberg resolutions of their $F$-images as in [lem-sp-cartan-eilenberg-exists]. That node indexes $I^{p,q}$ with columns $I^{p,\\bullet}$ resolving $K^p$, so $p$ is the complex degree and $q$ the resolution degree. [lem-weil-pbc-cartesian-eilenberg-functorial] uses the exchanged convention $C^{p,q}=I^{q,p}$ (rows $C^{\\bullet,q}$ resolve $K^q$, augmentation into $C^{0,\\bullet}$); under this exchange its clauses (1)--(6) are exactly the properties supplied by [lem-sp-cartan-eilenberg-exists], and its first degree is the resolution degree here, while the second-degree filtration in its conclusion is the complex-degree filtration, which is not the one used here. A comparison lift of $f$ is supplied by [lem-weil-pbc-cartesian-eilenberg-functorial] with the identity exact functor on $\\mathcal B$ and $u=F(\\beta)$ for a lift $\\beta:J_X^\\bullet\\to J_Y^\\bullet$ of $f$. Being a morphism of double complexes, it preserves bidegrees, so after applying the additive functor $G$ its total map preserves the resolution-degree filtration ${}''F$ of [def-sp-double-complex-total] (in the indexing $I^{p,q}$); thus it is a filtered chain map.",
+   "text": "Use the supplied presentations, rather than choose new resolutions. Apply the bounded-below second-filtration construction with bound zero to their mapped bicomplexes. A degreewise map preserving the finite supremum of diagonal images lifts through each filtration step, giving the filtered comparison maps. Identity and composite comparisons are explicit structures.",
    "uses": [
-    "lem-sp-cartan-eilenberg-exists",
-    "lem-weil-pbc-cartesian-eilenberg-functorial",
+    "lem-sp-bounded-below-second-filtration",
+    "def-sp-double-complex-total",
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-filtration"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib InjectiveResolution.descHomotopy to the two injective-resolution lifts of the same original morphism. Extend the homotopy by zero and apply F. Subtract the two CE comparisons and apply the double-complex null-homotopy theorem directly. Homotopy.equivSubZero restores the comparison homotopy. An additive functor preserves the finite diagonal coproducts because all but finitely many summands vanish. The second-filtration steps are split summand subobjects, so their splittings transport through G. The map/extend natural isomorphism then transports the filtered homotopy to the mapped presentations.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-double-complex-homotopy",
     "def-sp-double-complex-total"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Definition 015H, Lemma 015I, and Remark 015K"
-   }
+   "elementary": false
   },
   {
-   "text": "If two comparison lifts are chosen, their underlying lifts $\\beta,\\beta':J_X^\\bullet\\to J_Y^\\bullet$ of $f$ may differ. Applying [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] with $\\alpha$ the quasi-isomorphism from $X$ (in degree $0$) to $J_X^\\bullet$ gives a homotopy $k$ between $\\beta$ and $\\beta'$, so $F(k)$ is a homotopy between $u=F(\\beta)$ and $u'=F(\\beta')$, $F$ being additive. Apply [lem-sp-cartan-eilenberg-comparison-homotopy] to the identity exact functor on $\\mathcal B$, the complexes $F(J_X^\\bullet)$ and $F(J_Y^\\bullet)$ (zero in negative degrees), their Cartan--Eilenberg resolutions from [lem-sp-cartan-eilenberg-exists], and the homotopic maps $u,u'$. The resulting total homotopy $H$ lowers the resolution-degree filtration by one; since $G$ is additive, $G(H)$ is a homotopy between the two total maps after applying $G$ with the same one-step filtration shift.",
+   "text": "Apply filtered homotopy invariance to the resulting one-step-lowering homotopy to obtain equality of the entire spectral-sequence maps. Compare arbitrary identity and composite lifts with the explicit identity and composite comparisons; use the functor laws of M.S.",
    "uses": [
-    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
-    "lem-sp-cartan-eilenberg-comparison-homotopy",
-    "lem-sp-cartan-eilenberg-exists"
+    "lem-sp-filtered-homotopy-spectral-sequence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Remark 015K, functoriality of Cartan--Eilenberg resolutions"
-   }
+   "elementary": false
   },
   {
-   "text": "The Cartan--Eilenberg double complexes are first-quadrant, so the resolution-degree filtrations on their total complexes are bounded in each total degree. Apply [lem-sp-filtered-homotopy-spectral-sequence] with its one-step filtration shift to the homotopy from Step 2. Their maps on every page $E_r$ for $r\\ge2$ coincide, as do the maps on the abutment filtration and its graded pieces [def-sp-convergence]. Thus the comparison maps are independent of all choices from the second page onward.",
+   "text": "Apply the natural two-column image computation to the bicomplex obtained by applying G before extension. Compose its image isomorphism with M.pageIso. M.naturality and cancellation of the target image inclusion prove the page-two naturality square. Evaluate horizontal cohomology termwise: injective cycles and boundaries give the normalized left-exact cohomology comparison. Preserve kernels to identify its cycle map as an isomorphism; the normalization and epi cancellation make the comparisons natural, and componentwise naturality assembles them into isomorphisms of the vertical complexes. The horizontal augmentation determines an explicit injective resolution of H^q(F(J)); Mathlib isoRightDerivedObj and its naturality identify the iterated cohomology with R^pG(R^qF(X)).",
    "uses": [
-    "lem-sp-filtered-homotopy-spectral-sequence",
-    "def-sp-filtration",
-    "def-sp-convergence"
+    "lem-sp-second-filtration-two-column-image",
+    "def-sp-filtered-page-two-model",
+    "lem-sp-cart-eilenberg-left-exact-cohomology",
+    "def-sp-left-exact-additive"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "functoriality and homotopy invariance of the spectral sequence of a filtered complex"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose the identity lift for an identity map and compare any other lift with it by Steps 2--3; this makes the induced page maps identities. For composable maps, choose comparison lifts whose middle Cartan--Eilenberg resolution is shared. Their composite satisfies the augmentation equation for the composite map, so it can be compared by Steps 2--3 with any independently chosen lift of that composite; [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] handles the possible difference in the underlying injective-resolution lift. Functoriality of [thm-sp-double-complex-spectral-sequences] then identifies the induced page maps with those of the corresponding complex maps. Its first-page and abutment formulas for the second filtration, together with the Cartan--Eilenberg resolution properties in [lem-sp-cartan-eilenberg-exists] (the horizontal cycles and boundaries in each resolution degree are injective), [lem-sp-cart-eilenberg-left-exact-cohomology] (so $H^p_I(G(I^{\\bullet,q}))\\cong G(H^p_I(I^{\\bullet,q}))$ on the first page, naturally in the comparison maps), and the derived-functor computation in [def-sp-left-exact-additive], identify the second page with $R^pG(R^qF(-))$ and the abutment with $H^{p+q}(\\operatorname{Tot}G(I))$; these identifications are induced by the same filtered maps and hence commute with them.",
+   "text": "Take the abutment objects to be total cohomology and use the image filtration. The degreewise stable quotient theorem gives finite image filtrations and stable cycle-boundary quotient pages. Compare these quotients with M.pageIso using the quotient-image comparison and uniqueness of the transition map. Homotopic maps have equal cohomology maps. The induced image maps preserve the image filtration; functoriality gives identity and composition.",
    "uses": [
-    "thm-sp-double-complex-spectral-sequences",
-    "lem-sp-cartan-eilenberg-exists",
-    "def-sp-left-exact-additive",
-    "lem-sp-filtered-homotopy-spectral-sequence",
-    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
-    "lem-sp-cart-eilenberg-left-exact-cohomology"
+    "lem-sp-degreewise-filtered-stable-quotient",
+    "lem-sp-filtered-complex-quotient-image-comparison",
+    "lem-sp-filtered-cohomology-image-finite"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Remark 015K and Lemma 015N, functoriality"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sp-cartan-eilenberg-exists",
-  "lem-weil-pbc-cartesian-eilenberg-functorial",
+  "def-sp-cartan-eilenberg-presentation",
   "def-sp-double-complex-total",
-  "lem-sp-cartan-eilenberg-comparison-homotopy",
-  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "def-sp-filtered-page-two-model",
   "def-sp-filtration",
-  "def-sp-convergence",
-  "lem-sp-filtered-homotopy-spectral-sequence",
-  "thm-sp-double-complex-spectral-sequences",
   "def-sp-left-exact-additive",
-  "lem-sp-cart-eilenberg-left-exact-cohomology"
+  "lem-sp-bounded-below-second-filtration",
+  "lem-sp-cart-eilenberg-left-exact-cohomology",
+  "lem-sp-cartan-eilenberg-double-complex-homotopy",
+  "lem-sp-degreewise-filtered-stable-quotient",
+  "lem-sp-filtered-cohomology-image-finite",
+  "lem-sp-filtered-complex-quotient-image-comparison",
+  "lem-sp-filtered-homotopy-spectral-sequence",
+  "lem-sp-second-filtration-two-column-image"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Remark 015K and Lemma 015N, functoriality"
+  "place": "Tags 015K and 015N, with Homology Tags 0130 and 012K",
+  "note": "N2: compiled implementation with the natural two-column image calculation also proved in this delivery. Mathlib handles injective-resolution homotopy and derived-functor naturality. No existing statement or target signature changed. Second reading: the filtered-map construction and its total-complex specialization are reused from SecondFiltrationTwoColumnImage via proof-only import all, rather than duplicated in this module."
  },
  "mathlib_searches": [
   {
@@ -209,5 +201,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261016T011146-L-266083",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

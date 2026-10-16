@@ -1,0 +1,204 @@
+{
+ "id": "lem-sp-second-filtration-two-column-image",
+ "kind": "statement",
+ "title": "Natural two-column cohomology image of a first-quadrant bicomplex",
+ "statement": "Let C be a Grothendieck abelian category [def-sp-grothendieck-abelian], and I_a a family of commuting cochain bicomplexes indexed by Z times N [def-sp-double-complex-total], zero in negative horizontal degree. Extend the N degree by zero, totalize, and give each total a subcomplex filtration L_a whose degreewise steps are the second-filtration diagonal image sums [def-sp-filtration, def-sp-filtered-complex-subquotients]. For p in N let phi_{a,p}: L_a^p/L_a^{p+2} -> L_a^{p-1}/L_a^{p+1} be any map with the canonical quotient-projection equation. For all p,q in N there are isomorphisms image H^{p+q}(phi_{a,p}) ≅ H^p(H^q(I_a)). They are natural for all bicomplex maps f:I_a -> I_b: if s is the step-(p-1) restriction of Tot(f), and beta is the induced map L_a^{p-1}/L_a^{p+1} -> L_b^{p-1}/L_b^{p+1}, then e_a^{-1} followed by the source image inclusion and H^{p+q}(beta) equals H^p(H^q(f)) followed by e_b^{-1} and the target image inclusion. The step and quotient map are specified by their commuting inclusion and projection squares.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0130, lemma-ss-double-complex, clauses (2), (4), (6); Tag 012K, quotient-complex image description; https://stacks.math.columbia.edu/tag/0130 and https://stacks.math.columbia.edu/tag/012K"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Use the generic internal graded-term inclusion and projection lemmas of the row-graded-cycles module to identify the resolution-degree graded terms with the horizontal column, shifted by p. Prove compatibility with the horizontal differential directly from the total differential formula; the vertical component factors through the next step and vanishes on the quotient. Reuse the generic pullback-of-kernel, kernel-of-cokernel, and equal-kernel quotient isomorphism lemmas from SecondFiltrationRowCycleComparison; these calculations identify concrete first-page quotients with horizontal cohomology, normalized on actual horizontal cycles.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-second-filtration-row-graded-cycles",
+    "lem-sp-filtered-complex-first-page-cycles-boundaries",
+    "def-sp-filtration",
+    "lem-sp-second-filtration-row-cycle-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the representative-normalized page differential to a horizontal cocycle. Its remaining total differential is q.negOnePow times the vertical differential. Conjugate the degree-p isomorphism by (q*p).negOnePow, then compose with the evaluation/homology comparison. Mathlib homologyIsoOfComponents gives an actual isomorphism from homology of page one to iterated cohomology. At p=0 its missing predecessor is the negative extended column, which is zero; apply the generic gradedPiece_isZero_of_complexStep_eq_bot lemma imported from SecondFiltrationRowCohomology, then use monicity of the cycle inclusion and the epic page projection.",
+   "uses": [
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-second-filtration-row-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the uniquely normalized successor homology isomorphism. The generic quotient-image comparison identifies the concrete second page with image H(phi); cancellation of the epic quotient projection identifies its canonical transition with the supplied phi. The representative-epis theorem proves the normalization map is epic. Compose the inverse image comparison, inverse successor comparison, and signed component homology isomorphism. The data chosen here are determined by their displayed normalization equations.",
+   "uses": [
+    "lem-sp-filtered-complex-normalized-homology",
+    "lem-sp-filtered-complex-quotient-image-comparison",
+    "lem-sp-filtered-complex-representative-epis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the filtered total map from the diagonal image-sum inclusions. Graded quotient components yield cycle and page maps. Differential representative covers prove these page maps commute with the differentials. Successor-cycle covers and epi cancellation give naturality of the normalized successor comparison. For the quotient-image comparison construct the actual map of cycle representatives, descend the source quotient map, and use its commuting square with phi and the supplied beta; normalized image cancellation gives naturality after the target image inclusion. The given step restriction and beta agree with these constructions by monic and epic cancellation. Naturality of total inclusions, evaluation/homology, and the sign multipliers gives the iterated-cohomology square. Combine the three squares to obtain the stated equation.",
+   "uses": [
+    "lem-weil-pbc-filtered-quotient-components",
+    "lem-sp-filtered-complex-differential-representatives-cover",
+    "lem-sp-filtered-complex-successor-cycles-cover",
+    "lem-sp-filtered-quotient-map-restrictions",
+    "lem-sp-filtered-quotient-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "lem-sp-filtered-complex-differential-representatives-cover",
+  "lem-sp-filtered-complex-first-page-cycles-boundaries",
+  "lem-sp-filtered-complex-normalized-homology",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-complex-quotient-image-comparison",
+  "lem-sp-filtered-complex-representative-epis",
+  "lem-sp-filtered-complex-successor-cycles-cover",
+  "lem-sp-filtered-quotient-comparisons",
+  "lem-sp-filtered-quotient-map-restrictions",
+  "lem-sp-second-filtration-row-cohomology",
+  "lem-sp-second-filtration-row-cycle-comparison",
+  "lem-sp-second-filtration-row-graded-cycles",
+  "lem-weil-pbc-filtered-quotient-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0130, lemma-ss-double-complex, clauses (2), (4), (6); Tag 012K, quotient-complex image description; https://stacks.math.columbia.edu/tag/0130 and https://stacks.math.columbia.edu/tag/012K",
+  "note": "N2: fully compiled proof from the existing graded-term, normalized-page, representative-cover and quotient-image APIs; no new sorry. The signed first-page and all required naturality squares are proved here. Repair of the returned delivery: removed four duplicate private proofs and reused the existing Functor helpers via proof-only import all; no signature changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "secondFiltration|twoColumn|iteratedHomology",
+   "results": "0 hits. ",
+   "date": "2026-10-16",
+   "verdict": "No matching natural two-column image comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.image, HomologicalComplex.homologyMap",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "No matching natural two-column image comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of cohomology between two adjacent two-column quotients of a total bicomplex is vertical cohomology of horizontal cohomology, naturally in bicomplex maps",
+   "results": "8 hits. groupCohomology.isoCocycles₂_hom_comp_i, groupCohomology.toCocycles_comp_isoCocycles₂_hom, groupCohomology.isoCocycles₂_hom_comp_i_assoc, groupCohomology.isoCocycles₂_inv_comp_iCocycles_assoc, groupCohomology.toCocycles_comp_isoCocycles₂_hom_apply, groupCohomology.toCocycles_comp_isoCocycles₂_hom_assoc, groupCohomology.isoCocycles₂_inv_comp_iCocycles, groupCohomology.comp_d₂₃_eq",
+   "date": "2026-10-16",
+   "verdict": "No matching natural two-column image comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of cohomology between adjacent two-column quotients of a first-quadrant total bicomplex is iterated cohomology, naturally for bicomplex morphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a first quadrant double cochain complex, the second spectral sequence page is naturally the homology of its horizontal homology complex",
+   "results": "8 hits. CochainComplex.ConnectData.homologyIsoPos; CochainComplex.ConnectData.homologyIsoNeg; CochainComplex.HomComplex.leftHomologyData'; CochainComplex.HomComplex.leftHomologyData; CochainComplex.ConnectData.homologyMap_map_of_eq_succ; CochainComplex.mappingCone.homologySequenceδ_triangleh; CochainComplex.isZero_of_isLE; CochainComplex.isZero_of_isGE",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: no natural two-column cohomology-image comparison; the returned results concern general homology or spectral-sequence infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "spectral.*sequence|double.*complex",
+   "results": "25 hits. Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean; Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean; Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean; Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean; Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean; Mathlib/Algebra/Homology/SpectralSequence/Basic.lean; Mathlib/Algebra/Homology/SpectralSequence/Basic.lean; Mathlib/Algebra/Homology/SpectralSequence/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: no natural two-column cohomology-image comparison; the returned results concern general homology or spectral-sequence infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap, CategoryTheory.Limits.image",
+   "results": "0 hits. ",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: no natural two-column cohomology-image comparison; the returned results concern general homology or spectral-sequence infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homology, CategoryTheory.Limits.image",
+   "results": "0 hits. ",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading after duplicate-proof repair: the results provide generic bicomplex or low-degree cohomology APIs, not this natural two-column image comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered double complex has second page equal to cohomology of cohomology, canonically and naturally",
+   "results": "8 hits. groupCohomology.isoShortComplexH2; groupCohomology.isoShortComplexH2_hom; groupCohomology.isoCocycles₂_inv_comp_iCocycles; groupCohomology.isoCocycles₂_hom_comp_i; CochainComplex.HomComplex.leftHomologyData'_H_coe; groupCohomology.isoCocycles₂_inv_comp_iCocycles_assoc; groupCohomology.isoShortComplexH2_inv; groupCohomology.toCocycles_comp_isoCocycles₂_hom_apply",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading after duplicate-proof repair: the results provide generic bicomplex or low-degree cohomology APIs, not this natural two-column image comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "bicomplex|double.complex|iterated.homology",
+   "results": "21 hits. Mathlib/Algebra/Homology/Bifunctor.lean; Mathlib/Algebra/Homology/Bifunctor.lean; Mathlib/Algebra/Homology/Bifunctor.lean; Mathlib/Algebra/Homology/ComplexShapeSigns.lean; Mathlib/Algebra/Homology/TotalComplexSymmetry.lean; Mathlib/Algebra/Homology/TotalComplexSymmetry.lean; Mathlib/Algebra/Homology/TotalComplexSymmetry.lean; Mathlib/Algebra/Homology/TotalComplexShift.lean",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading after duplicate-proof repair: the results provide generic bicomplex or low-degree cohomology APIs, not this natural two-column image comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergComparisonIndependence",
+  "date": "2026-10-16",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "proof, first paragraph, final sentence: everything is functorial in X; natural second-page identification",
+   "via": [
+    "lem-sp-cartan-eilenberg-comparison-independence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SecondFiltrationTwoColumnImage",
+  "file": "lean/Sheaf/CategoryTheory/SecondFiltrationTwoColumnImage.lean",
+  "declaration": "CategoryTheory.secondFiltration_two_column_image",
+  "statement": "theorem secondFiltration_two_column_image\n    {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]\n    {ι : Type uI}\n    (I : ι → HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (hzero : ∀ (a : ι) (k : ℤ), k < 0 → IsZero ((I a).X k))\n    (L : ∀ a : ι, DecreasingFiltration\n      (HomologicalComplex₂.total\n        (((ComplexShape.embeddingUpNat.extendFunctor C).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj (I a)) (ComplexShape.up ℤ)))\n    (hL : ∀ (a : ι) (p n : ℤ), (L a).complexStep p n =\n      ((HomologicalComplex₂.secondFiltration\n        (((ComplexShape.embeddingUpNat.extendFunctor C).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj (I a)) n).step p))\n    (φ : ∀ (a : ι) (p : ℕ),\n      (L a).complexQuotient (p : ℤ) ((p : ℤ) + 2) (by omega) ⟶\n        (L a).complexQuotient ((p : ℤ) - 2 + 1) ((p : ℤ) + 1) (by omega))\n    (hφ : ∀ (a : ι) (p : ℕ),\n      (L a).complexQuotientπ (p : ℤ) ((p : ℤ) + 2) (by omega) ≫ φ a p =\n        Subobject.ofLE ((L a).step (p : ℤ)) ((L a).step ((p : ℤ) - 2 + 1))\n          ((L a).antitone_step (by omega)) ≫\n            (L a).complexQuotientπ ((p : ℤ) - 2 + 1) ((p : ℤ) + 1) (by omega)) :\n    ∃ e : ∀ (a : ι) (p q : ℕ),\n        image (HomologicalComplex.homologyMap (φ a p) ((p : ℤ) + (q : ℤ))) ≅\n          ((I a).homology (q : ℤ)).homology p,\n      ∀ (a b : ι) (f : I a ⟶ I b) (p q : ℕ)\n        (s : ((L a).step ((p : ℤ) - 2 + 1) : CochainComplex C ℤ) ⟶\n          ((L b).step ((p : ℤ) - 2 + 1) : CochainComplex C ℤ))\n        (β : (L a).complexQuotient ((p : ℤ) - 2 + 1) ((p : ℤ) + 1) (by omega) ⟶\n          (L b).complexQuotient ((p : ℤ) - 2 + 1) ((p : ℤ) + 1) (by omega)),\n        s ≫ ((L b).step ((p : ℤ) - 2 + 1)).arrow =\n          ((L a).step ((p : ℤ) - 2 + 1)).arrow ≫ HomologicalComplex₂.total.map\n            (((ComplexShape.embeddingUpNat.extendFunctor C).mapHomologicalComplex\n              (ComplexShape.up ℤ)).map f) (ComplexShape.up ℤ) →\n        (L a).complexQuotientπ ((p : ℤ) - 2 + 1) ((p : ℤ) + 1) (by omega) ≫ β =\n          s ≫ (L b).complexQuotientπ ((p : ℤ) - 2 + 1) ((p : ℤ) + 1) (by omega) →\n        (e a p q).inv ≫\n            image.ι (HomologicalComplex.homologyMap (φ a p) ((p : ℤ) + (q : ℤ))) ≫\n            HomologicalComplex.homologyMap β ((p : ℤ) + (q : ℤ)) =\n          HomologicalComplex.homologyMap (HomologicalComplex.homologyMap f (q : ℤ)) p ≫\n            (e b p q).inv ≫\n              image.ι (HomologicalComplex.homologyMap (φ b p) ((p : ℤ) + (q : ℤ)))",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261016T011146-L-266083",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261016T011146-L-266083",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
