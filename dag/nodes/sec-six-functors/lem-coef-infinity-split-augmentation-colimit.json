@@ -217,5 +217,43 @@
   "group": "Q122",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-24c45d2f7 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-infinity-right-adjoint-reindexing, all four cited statements, the unit and the parent monadic-bar in full. Sources were checked on the extracted public PDFs: HA 4.7.2.1-4 (p. 677-678) and HTT 6.1.3.16, 4.1.1.7-8 and 4.1.3.1. The item statement matches HA, including the least-element convention, the definition of 'split' and absoluteness. Step 1: j adds a least element, r forgets which element is distinguished, j ⊣ r, so r^op ⊣ j^op; checked at m=-1 and n=m=0, and j is not full. Step 2: in the nerve of D^op the vertex t=[-1] is final and the right-pinched mapping spaces are discrete; the cocone a with a_t=1 is the nerve of the unique-arrow transformation. Step 3: final-index plus the cone-calculus criterion, then two-out-of-three, fixes the specific cocone. Step 4: R=j^op, L=r^op is the right direction; the restricted transformation is the nerve of Δ^op×[1]→Δ_+^op→D^op, which strictly equals the augmentation cocone. Step 5: the dual Yoneda clause gives a limit over Δ; universes are enlargeable. Step 6: the argument is written out for QX̃, with no 'similarly' gap. The new node is true by HTT 4.1.3.1 (j/R has initial object (Lj,η_j)) with 4.1.1.7-8, and HTT itself uses this left-adjoint argument. It was tested on the identity adjunction, a terminal object picked out by R, and the empty case. It is statement-only and self-contained, its blueprint from/via is correct, and it has 3 kinds of logged searches with Mathlib's final_of_isRightAdjoint correctly judged ordinary-only. It is not a clause of the item. It is not a duplicate of filtered-cofinal-pullback, anodyne-cocones (needs right anodyne), kan-mapping-restriction (needs full), sifted-nerve or cocone-restriction-initial. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus as the generic cocone criterion, already a tool use of the same-unit yoneda node. There is no cycle (walked 237 dependency nodes), all cited nodes are split and unmerged, and no SGA is used. No changes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e8681c4fb",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Read node, HA 4.7.2.1-4 source place, module, report (real Worker report + Second reading by Q20), dependency EnhancedDiagramsCones and the imported proof-dep modules. One commit, 3 files; node differs from base only in lean; lean.statement verbatim. Δ_{-∞} encoded as the wide subcategory of SimplexCategory maps fixing vertex 0 (exact morphism set); inclusion Δ₊→Δ_{-∞} built with successor extension and WithInitial.lift; IsSplitAugmented is a coherent extension. IsSplitAugmentationColimit = for every e, the evaluation leg at [-1] (always an equivalence since [-1] is terminal in Δ₊^op) and the restriction leg are weak equivalences, which is exactly the mapping-space colimit criterion for the given augmentation, neither weaker nor stronger. Absoluteness for an arbitrary Q with no extra hypotheses. Edge cases checked: [-1], [0], empty E, Q=id, variance, universes (one ambient u, as in the dependency). No hollow defs; only the theorem is sorry; docstrings/blueprint/six-step plan present; imports follow brief §104; no line over 100 chars. nt_compile --json at the real module path: clean, 1.4 s, rc 0, reproduced. Non-blocking: own colimit predicate instead of IsColimiting, justified (equivalent, built from the dependency's notions); a bridge lemma will help stage 3."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinitySplitAugmentationColimit",
+  "declaration": "SSet.Enhanced.infinity_split_augmentation_colimit",
+  "declarations": [
+   "SSet.Enhanced.splitSimplexMaps",
+   "SSet.Enhanced.splitSimplexMaps_multiplicative",
+   "SSet.Enhanced.SplitSimplexCategory",
+   "SSet.Enhanced.splitSimplexExtend",
+   "SSet.Enhanced.splitSimplexInclusion",
+   "SSet.Enhanced.splitAugmentedInclusion",
+   "SSet.Enhanced.splitSimplicialIndex",
+   "SSet.Enhanced.splitAugmentedIndex",
+   "SSet.Enhanced.splitExtendedIndex",
+   "SSet.Enhanced.splitAugmentationIndexMap",
+   "SSet.Enhanced.splitExtensionIndexMap",
+   "SSet.Enhanced.splitAugmentationVertex",
+   "SSet.Enhanced.IsSplitAugmented",
+   "SSet.Enhanced.splitAugmentationRestriction",
+   "SSet.Enhanced.splitAugmentationEvaluation",
+   "SSet.Enhanced.IsSplitAugmentationColimit",
+   "SSet.Enhanced.infinity_split_augmentation_colimit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinitySplitAugmentationColimit.lean",
+  "statement": "theorem infinity_split_augmentation_colimit {E : SSet.{u}} [Quasicategory E] (X : splitAugmentedIndex.{u} ⟶ E) (hX : IsSplitAugmented X) : IsSplitAugmentationColimit X ∧ ∀ (F : SSet.{u}) [Quasicategory F] (Q : E ⟶ F), IsSplitAugmentationColimit (X ≫ Q)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The canonical evaluation/restriction span gives the augmentation mapping-space universal property, with coherent cocones modeled by mapping spaces in the internal functor simplicial set. Indexing and comparison helpers belong to this node. No other colimit existence is assumed."
  }
 }
