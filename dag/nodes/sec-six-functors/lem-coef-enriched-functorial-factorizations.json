@@ -28,7 +28,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-coef-simplicial-tensor-cotensor"
  ],
  "proof": [
   {
@@ -298,5 +299,27 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-7adab9405 (reviewer sub-agent of L); spot-checked: I read the item in full and the statements of all 8 cited nodes, which are all Mathlib leaves. The statement is unchanged. It is Riehl 13.2.1 specialized to sSet, and it holds on these test cases: sSet with boundary inclusions, J empty, and the terminal one-object category. I checked each of the 10 steps. Step 1: the enriched colimit property comes from the cotensor adjunction on vertices, and K⊗- preserves colimits. Steps 2-4: pointwise colimits and the single pushout V(f) along the coproduct of Sq(j,f)⊗j are enriched; the evaluation square commutes by the equalizer equation. Step 5: a uniform regular λ above every τ_j comes from the presentability-rank and regular-bound leaves, and the empty J is fine. Step 6: the enriched transfinite records and the invariant p_β t_αβ = p_α hold. Step 7: i_f is in L by the tensor hypothesis, by coproduct fillers written out, by the pushout leaf and by the transfinite-lifting leaf. Steps 8-9: the square descends because the codomain is fixed, and the filler satisfies hj=a and p_f h=b with α+1<λ. Step 10: correct unpacking. The J-empty remark that Z_α(f)=X holds only up to the chosen-colimit isomorphism, which is harmless. The delivery has no new nodes: the second reader rightly dropped the two author nodes, and one of them restated the item. Every citation is a Mathlib leaf, so there is no route departure and no tool_uses. No duplicate: the existing small-object nodes are ordinary or about dg categories. No SGA is used. The blueprint from/via fields match the parent. The parent's uses in steps 0, 2 and 6 agree with the item. Riehl is not archived (WANTED) and the reviewer has no network access, so I could not check the source pages; the proof is self-contained and I verified it independently. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d08ad03a4",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Read the node, both stmt deps, the new def-coef-simplicial-tensor-cotensor node, both modules, the report (Worker report and Second reading by Q63 present) and the Mathlib declarations used. All 12 hypothesis and conclusion clauses match Riehl 13.2.1 as stated in the node: SimplicialCategory, HasCo/LimitsOfSize.{v,v}, IsLocallyPresentable.{v} (regular κ, κ-presentable generators), canonical universal-element tensor/cotensor isos and tensorMap, J.IsSmall, rlp/llp, hT for all K. The arrow enrichment is Mathlib enrichedOrdinaryCategory on Fin 2 ⥤ C, which is the square equalizer. The naturality conjuncts have the right eHomWhisker directions (i_g b = E(b,c) i_f, p_g E(b,c) = c p_f). Only lean and stmt_deps (gaining the new node) changed on the item; the deps are byte-identical; lean.statement strings are verbatim; the new-node fields conform to H12. No duplicate in Mathlib or the project. No hollow data, only sorry, docstrings present, universes u and v independent. nt_compile.py --json: both files clean (0.9 s and 1.1 s), axioms propext/sorryAx/choice/Quot.sound. No findings of substance."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedFunctorialFactorizations",
+  "declaration": "CategoryTheory.exists_enriched_functorial_factorization",
+  "declarations": [
+   "CategoryTheory.simplicialArrowCategory",
+   "CategoryTheory.exists_enriched_functorial_factorization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedFunctorialFactorizations.lean",
+  "statement": "theorem exists_enriched_functorial_factorization (C : Type u) [Category.{v} C] [SimplicialCategory C] [HasColimitsOfSize.{v, v} C] [HasLimitsOfSize.{v, v} C] [IsLocallyPresentable.{v} C] (T : SimplicialTensorCotensor C) (J : MorphismProperty C) [J.IsSmall.{v}] (hT : ∀ (K : SSet.{v}) {X Y : C} (j : X ⟶ Y), J j → J.rlp.llp (T.tensorMap K j)) : ∃ (E : EnrichedFunctor SSet.{v} (ComposableArrows C 1) C) (i : ∀ f : ComposableArrows C 1, f.left ⟶ E.obj f) (p : ∀ f : ComposableArrows C 1, E.obj f ⟶ f.right), (∀ f, i f ≫ p f = f.hom) ∧ (∀ f, J.rlp.llp (i f)) ∧ (∀ f, J.rlp (p f)) ∧ (∀ (f g : ComposableArrows C 1), enrichedHomπ SSet.{v} f g 0 ≫ eHomWhiskerLeft SSet.{v} f.left (i g) = E.map f g ≫ eHomWhiskerRight SSet.{v} (i f) (E.obj g)) ∧ (∀ (f g : ComposableArrows C 1), E.map f g ≫ eHomWhiskerLeft SSet.{v} (E.obj f) (p g) = enrichedHomπ SSet.{v} f g 1 ≫ eHomWhiskerRight SSet.{v} (p f) g.right)",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

@@ -238,5 +238,36 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-c38dc81b6 (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes (presheaf-dg-function-complex, cosimplicial-complex-holim, hypercover-localization-generation), every cited statement (size, abstract-derived-category, enhanced-diagrams-cones, sheafification, presentable, infinity-small-localization-saturation), the parent bounded-below-hypersheaf-model steps 4-5, and the unit, chapter and main-20261015 opening. Item statement unchanged and true: objects local for local quasi-isos are the hypercomplete sheaves, which are the objects with hyperdescent; no boundedness needed. Step 2: I recomputed the sign regrading eps=(-1)^{rn+n(n-1)/2}. It gives D=delta+(-1)^n d_G, and eps(r,0)=1 so the augmentation is restriction. Step 3: H^0 RHom(X[k],G)=H^{-k}, so all shifts cover all degrees. Steps 4-6: the generation node supplies a small set S and the HTT tool's closure conventions match. The new nodes are true by K-projectivity of bounded-above complexes of projectives with Dold-Kan of tau<=0, the filtered/Milnor proof that Tot_Pi computes holim over Delta, and the Bousfield localization at hypercovers in the style of Dugger-Hollander-Isaksen. I tested them on the empty site, the topology where the empty sieve covers, the trivial topology, Lambda=0 and a constant cosimplicial diagram. They are not duplicates of K-projective, mapping-comparison, Roos-limit, coproduct-total or hypercover-free-module nodes; none restates a parent clause and there is no cycle. Accepted tool_use: lem-coef-infinity-small-localization-saturation, a generic HTT black box. Caveat: Choudhury-Gallauer arXiv:1511.02828 is not archived and this machine has no network, so the cited place numbers are unverified; it stays WANTED with proof_origin agent, as for the accepted parent. No SGA source. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d92638904",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read the node, the 4 statement deps, report.md and the module; the node differs from the repo node only in `lean`, and the signature is copied verbatim. Clause by clause: arbitrary site (J used, no pullbacks or subcanonicity), independent universes u v w t, CommRing Λ, presheaf modules, Mathlib's quasiIso localization Q with derived Hom bijective into every shift (= all-degree RHom quasi-iso), local quasi-iso via presheafToSheaf on the forgotten homology maps (equivalent to module sheafification), hypercover as a real augmented simplicial presheaf with coproduct-of-representable terms and matching sections covering (local surjectivity), descent map = free alternating-face augmentation ε placed in degrees -n with target L_T[0], tested in all degrees; product totalisation is the canonical holim model (no enhanced D(Λ) model exists in the project; source Def 5.3, Lemma 3.19). The statement is true (DHI / Choudhury-Gallauer Thm 5.7/5.11). Edge cases: empty site, empty index sets, Λ=0, degree 0, unbounded complexes. No hollow defs; sorryAx only in the main theorem; docstrings carry the source, blueprint id and 6 proof steps. nt_compile --json on the snapshot: rc 0, no diagnostics (injected error was reported). Non-blocking: stale worker-report text about the removed PresheafDgFunctionComplex, superseded by the Q23 second reading."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.HyperdescentLocalOrthogonality",
+  "declaration": "CategoryTheory.PresheafHyperdescent.hyperdescent_local_orthogonality",
+  "declarations": [
+   "CategoryTheory.PresheafHyperdescent.AugmentedFamily",
+   "CategoryTheory.PresheafHyperdescent.MatchingSection",
+   "CategoryTheory.PresheafHyperdescent.matchingLiftSieve",
+   "CategoryTheory.PresheafHyperdescent.IsHypercover",
+   "CategoryTheory.PresheafHyperdescent.freeAugmented",
+   "CategoryTheory.PresheafHyperdescent.augmentationMap",
+   "CategoryTheory.PresheafHyperdescent.HomQuasiIso",
+   "CategoryTheory.PresheafHyperdescent.derivedQ",
+   "CategoryTheory.PresheafHyperdescent.DerivedHomQuasiIso",
+   "CategoryTheory.PresheafHyperdescent.IsLocalQuasiIso"
+  ],
+  "file": "lean/Sheaf/Paper/HyperdescentLocalOrthogonality.lean",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-17",
+  "existing": false,
+  "statement": "theorem hyperdescent_local_orthogonality {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) {Λ : Type w} [CommRing Λ] (G : CochainComplex (Cᵒᵖ ⥤ ModuleCat.{max u v w t} Λ) ℤ) : (∀ U : AugmentedFamily.{u, v, max w t} C, IsHypercover J U → HomQuasiIso (augmentationMap.{u, v, w, t} Λ U) G) ↔ (∀ (P Q : CochainComplex (Cᵒᵖ ⥤ ModuleCat.{max u v w t} Λ) ℤ) (f : P ⟶ Q), IsLocalQuasiIso.{u, v, w, t} J f → DerivedHomQuasiIso (A := Cᵒᵖ ⥤ ModuleCat.{max u v w t} Λ) f G)",
+  "note": "Second reading replaced unconstrained predicates with semirepresentable augmented simplicial presheaves, local matching lifts, and the canonical free alternating-face augmentation. Both quasi-isomorphism conclusions are tested in every degree via Mathlib Hom-complex/homotopy-category and derived-localization Hom identifications. The underlying-set sheafification test detects exactly isomorphisms of sheafified module maps. Independent site/coefficient universes are retained by the canonical ULift scalar transport of ModuleCat.free. No arbitrary enhancement is an assumption."
  }
 }

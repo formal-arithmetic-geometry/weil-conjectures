@@ -25,7 +25,9 @@
   "place": "Proposition 3.3.7.1 (Kerodon Tag 00ZN), specializing the base weak equivalence to the identity. Its proof uses Ex-infinity to remove the Kan-base hypothesis. Read online, not archived in literature/. This is a Kerodon identifier, not a Stacks tag."
  },
  "stmt_deps": [
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "def-coef-infinity-fibrations",
+  "lem-coef-right-straightening-fiber-comparison"
  ],
  "proof": [
   {
@@ -254,5 +256,27 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-72c36b5fb (reviewer sub-agent of L); spot-checked: I read the whole item, the full statements of all four cited nodes, the unit record and the one node that uses the item. The statement is unchanged and not weakened, and the user's step 6 and step 8 need exactly the two directions it states. Step 1: strict-fibre horn fillers lie over the constant simplex, so the fibres are Kan, and empty fibres are vacuously Kan. The realization-serre node gives Serre fibrations without assuming any object is Kan. The finite-limits node identifies |E_b| with the k-space fibre. The empty-fibre case follows from path lifting. Step 2: the orbit sets are total components over [b]; the stabilizers im P_* and im Q_* are equal because U_* is an isomorphism; with equal stabilizers each orbit maps bijectively. Steps 3 and 5: I redid the injectivity and surjectivity diagram chases; the products are in the right order for n=1, and the n=1 surjectivity case correctly uses pointed-set exactness and the bijection on pi_0. Step 4: the inverse bijection is equivariant and every component of |B| contains a vertex. Step 6: basepoint transport along a path is an isomorphism compatible with continuous maps, and B with no vertices forces E=T=∅; I accept it as elementary. Edge cases tested: B empty, B a point, Delta^1 as a non-Kan base, a fibre empty on only one side, E empty mapping to nonempty T, and identities. All four cited nodes are in the item's own unit sk-prop-sf-biduality-general, so there is no tool use. The item's dependency closure (87 nodes) does not contain it, so there is no cycle. Of the 47 DAG nodes matching Kan fibration, fibre and weak equivalence, none is a duplicate: the homotopy-fibre detection node needs all objects Kan and uses homotopy fibres, and the two fibre-criterion nodes test contractible fibres of one fibration. My grep of Mathlib found no match. Kerodon 00ZN and 00XC could not be opened: network is blocked and they are not archived. I checked the statement and the proof independently instead; the node is already marked agent-origin and the report lists both tags as WANTED. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4fe7ab0c7",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Clause-by-clause match of SSet.weakEquivalence_iff_strictFiberwise to the node: arbitrary B,E,T : SSet.{u}; p,q Kan fibrations (Fibration = horn rlp); u ≫ q = p; both strict-fiber Kan clauses; iff with ∀ b on the right. Read the exact declarations: Enhanced.fiber = pullback (const b) p, the strict fiber with factors swapped; Straightening.fiberMap with 𝟙 B = canonical pullback.map; IsWeakHomotopyEquivalence = realization π0 and πr bijections, the right-proper node's notion. No extra assumptions, single unrestricted universe. Edge cases: empty B, empty fibers, non-Kan base. Statement, proof and proof_deps identical to the shared clone; the two added stmt_deps own the helper declarations and create no cycle; lean.statement is verbatim. No defs, sorry only, docstrings carry the source, blueprint and six proof steps. Report sections present. nt_compile.py rc=0 with no errors or warnings in the output. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanFibrationArbitraryBaseFibers",
+  "declaration": "SSet.weakEquivalence_iff_strictFiberwise",
+  "declarations": [
+   "SSet.weakEquivalence_iff_strictFiberwise"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/KanFibrationArbitraryBaseFibers.lean",
+  "statement": "theorem weakEquivalence_iff_strictFiberwise {B E T : SSet.{u}} (p : E ⟶ B) (q : T ⟶ B) (u : E ⟶ T) (h : u ≫ q = p) (hp : Fibration p) (hq : Fibration q) : (∀ b : B.obj (op ⦋0⦌), KanComplex (Enhanced.fiber p b)) ∧ (∀ b : B.obj (op ⦋0⦌), KanComplex (Enhanced.fiber q b)) ∧ (Enhanced.IsWeakHomotopyEquivalence u ↔ ∀ b : B.obj (op ⦋0⦌), Enhanced.IsWeakHomotopyEquivalence (Straightening.fiberMap p q u (𝟙 B) (by simpa using h.symm) b))",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the landed SSet.Enhanced.fiber (point-first pullback, canonically the node's strict fiber) and SSet.Straightening.fiberMap specialized to the identity base map. Second reading removed duplicate fiber definitions, restored the six-step DAG proof docstring and stated proof-dependency imports, and synchronized the verbatim signature."
  }
 }

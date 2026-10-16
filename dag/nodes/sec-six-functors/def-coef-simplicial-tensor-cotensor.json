@@ -1,0 +1,114 @@
+{
+ "id": "def-coef-simplicial-tensor-cotensor",
+ "kind": "definition",
+ "title": "Simplicial tensors and cotensors by universal elements",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a category enriched over $\\mathcal U$-small simplicial sets [def-weil-pbc-simplicial-set], with associative composition, identity vertices and underlying morphisms identified with mapping-set vertices. Chosen simplicial tensors and cotensors consist of objects $K\\otimes X$ and $Y^K$ for every small simplicial set $K$ and objects $X,Y$, together with universal simplicial maps $\\eta_{K,X}:K\\to\\underline{\\operatorname{Map}}(X,K\\otimes X)$ and $\\epsilon_{K,Y}:K\\to\\underline{\\operatorname{Map}}(Y^K,Y)$. Require the maps induced by composition with these elements and cartesian-closed currying to be isomorphisms of simplicial sets:\n$$\\underline{\\operatorname{Map}}(K\\otimes X,Y)\\xrightarrow{\\sim}[K,\\underline{\\operatorname{Map}}(X,Y)],\\qquad \\underline{\\operatorname{Map}}(X,Y^K)\\xrightarrow{\\sim}[K,\\underline{\\operatorname{Map}}(X,Y)].$$\nHere the first comparison curries $(k,a)\\mapsto a\\eta_{K,X}(k)$ and the second curries $(k,b)\\mapsto\\epsilon_{K,Y}(k)b$; they are enriched natural by the composition laws. The tensor of $f:X\\to Y$ is the unique map $K\\otimes f:K\\otimes X\\to K\\otimes Y$ corresponding under the first representing isomorphism on vertices to the simplicial map $K\\xrightarrow{\\eta_{K,Y}}\\underline{\\operatorname{Map}}(Y,K\\otimes Y)\\xrightarrow{f^*}\\underline{\\operatorname{Map}}(X,K\\otimes Y)$. These data express the enriched natural tensor and cotensor adjunctions.",
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "source": {
+  "document": "https://emilyriehl.github.io/files/cathtpy.pdf",
+  "place": "Categorical Homotopy Theory, Definitions 3.7.2 and 3.7.3 and Remark 3.7.4, printed p.38 (PDF p.53); enriched universal-element formulation by composition and the enriched Yoneda lemma."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A tensor or cotensor in a simplicial category represents the enriched hom functor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.eHomFunctor\", \"module\": \"Mathlib.CategoryTheory.Enriched.Ordinary.Basic\", \"type\": \": Cᵒᵖ ⥤ C ⥤ V\", \"doc\": \"The enriched hom-functor is a functor from the opposite category $\\\\mathcal{C}^\\\\text{op}$ to the category of functors $[\\\\mathcal{C}, \\\\mathcal{V}]$, where $\\\\mathcal{V}$ is a monoidal category. For an ob\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialCategory.Basic\", \"type\": \": Cᵒᵖ ⥤ C ⥤ SSet.{v}\", \"doc\": \"The simplicial hom-functor is a functor from the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of functors $[\\\\mathcal{C}, \\\\mathbf{SSet}]$, assigning to each object $X \\\\in \\\\mathcal{C}^{\\\\t\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHom\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialCategory.Basic\", \"type\": \"(K L : C) : SSet.{v}\", \"doc\": \"For objects $K$ and $L$ in a category $\\\\mathcal{C}$ enriched over simplicial sets $\\\\mathbf{SSet}$, this denotes the simplicial set of morphisms from $K$ to $L$, defined as the internal hom $K \\\\Rightar\"}\n  {\"name\": \"CategoryTheory.SimplicialNerve\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialNerve\", \"type\": \"(C : Type u) [Category.{v} C] [SimplicialCategory C] : SSet.{max u v}\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a simplicial category structure (enriched over simplicial sets), the simplicial nerve is a simplicial set where each $n$-simplex corresponds to an enriched\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialCategory.SimplicialObject\", \"type\": \": EnrichedCategory SSet.{v} (SimplicialObject D)\", \"doc\": \"For any category $ \\\\mathcal{D} $, the category of simplicial objects in $ \\\\mathcal{D} $ is enriched over the category of simplicial sets. This means that the hom-objects between any two simplicial obj\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialCategory.Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max (max u (v + 1)) v)\", \"doc\": \"The ordinary category structure on a category $\\\\mathcal{C}$ obtained by enriching it over the monoidal category of simplicial sets $\\\\mathbf{SSet}$, where hom-objects are simplicial sets and compositio\"}\n  {\"name\": \"CategoryTheory.SimplicialObject\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max v u)\", \"doc\": \"A simplicial object in a category $\\\\mathcal{C}$ is a functor from the opposite of the simplex category $\\\\Delta^\\\\text{op}$ to $\\\\mathcal{C}$. The simplex category $\\\\Delta$ has objects given by finite or\"}\n  {\"name\": \"SSet.instMonoidalClosed\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Monoidal\", \"type\": \": MonoidalClosed (SSet.{u})\", \"doc\": \"The category of simplicial sets is equipped with a monoidal closed structure, where the internal hom-functor is defined via the Hom-tensor adjunction. This structure arises from the fact that simplici\"}\n",
+   "date": "2026-10-16",
+   "verdict": "No simplicial tensor/cotensor interface: semantic hits give hom-functors, simplicial enrichment and the closed monoidal structure on simplicial sets; grep finds only an unrelated cotensorator. The TODO in Mathlib.AlgebraicTopology.SimplicialCategory.Basic explicitly says to develop simplicial tensors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor and cotensor of an object in a simplicial category enriched adjunction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/SimplicialObject\", \"type\": \"{D : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} D] → CategoryTheory.EnrichedCategory SSet (CategoryTheory.SimplicialObject D)\", \"doc\": \"For any category $ \\\\mathcal{D} $, the category of simplicial objects in $ \\\\mathcal{D} $ is enriched over the category of simplicial sets. This means that the hom-objects between any two simplicial obj\"}\n  {\"name\": \"SSet.instMonoidalClosed\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal\", \"type\": \"CategoryTheory.MonoidalClosed SSet\", \"doc\": \"The category of simplicial sets is equipped with a monoidal closed structure, where the internal hom-functor is defined via the Hom-tensor adjunction. This structure arises from the fact that simplici\"}\n  {\"name\": \"AugmentedSimplexCategory.instMonoidalCategoryStruct\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal\", \"type\": \"CategoryTheory.MonoidalCategoryStruct AugmentedSimplexCategory\", \"doc\": \"The augmented simplex category is equipped with a monoidal structure where: (1) the tensor product of objects $[m]$ and $[n]$ from the simplex category is $[m + n + 1]$, and the initial object $[-1]$ \"}\n  {\"name\": \"AugmentedSimplexCategory.tensorObjOf\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal\", \"type\": \"SimplexCategory → SimplexCategory → SimplexCategory\", \"doc\": \"Given two objects $[m]$ and $[n]$ in the simplex category (represented by natural numbers $m$ and $n$), their tensor product is defined as the object $[m + n + 1]$, corresponding to the finite ordinal\"}\n  {\"name\": \"AugmentedSimplexCategory.tensorObj\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal\", \"type\": \"AugmentedSimplexCategory → AugmentedSimplexCategory → AugmentedSimplexCategory\", \"doc\": \"The tensor product operation on objects in the augmented simplex category, defined by cases: if both objects are from the original simplex category $\\\\Delta$ (represented as $[m]$ and $[n]$), their ten\"}\n  {\"name\": \"AugmentedSimplexCategory.instMonoidalCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal\", \"type\": \"CategoryTheory.MonoidalCategory AugmentedSimplexCategory\", \"doc\": \"The augmented simplex category is equipped with a monoidal structure where the tensor product of objects $[m]$ and $[n]$ is $[m + n + 1]$, and the initial object $[-1]$ serves as the unit. The associa\"}\n  {\"name\": \"AugmentedSimplexCategory.tensorHom\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal\", \"type\": \"{x₁ y₁ x₂ y₂ : AugmentedSimplexCategory} → (x₁ ⟶ y₁) → (x₂ ⟶ y₂) → (x₁.tensorObj x₂ ⟶ y₁.tensorObj y₂)\", \"doc\": \"Given two morphisms $f_1: x_1 \\to y_1$ and $f_2: x_2 \\to y_2$ in the augmented simplex category, their tensor product is a morphism from the tensor product object $[x_1.len + x_2.len + 1]$ to $[y_1.len \"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHomComp\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.SimplicialCategory C] →\\n      (K L M : C) →\\n        CategoryTheory.MonoidalCategoryStruct.tensorObj (CategoryTheory.SimplicialCategory.sHom K L)\\n            (CategoryTheory.SimplicialCategory.sHom L M) ⟶\\n      \", \"doc\": \"The composition morphism in a simplicial category, defined as the enriched composition map $\\\\mathbf{SSet}(K, L) \\\\otimes \\\\mathbf{SSet}(L, M) \\\\to \\\\mathbf{SSet}(K, M)$ using the Cartesian monoidal struct\"}\n",
+   "date": "2026-10-16",
+   "verdict": "No simplicial tensor/cotensor interface: semantic hits give hom-functors, simplicial enrichment and the closed monoidal structure on simplicial sets; grep finds only an unrelated cotensorator. The TODO in Mathlib.AlgebraicTopology.SimplicialCategory.Basic explicitly says to develop simplicial tensors."
+  },
+  {
+   "tool": "grep",
+   "query": "cotensor|simplicial tensor",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"line\": \"254\", \"text\": \"  /-- the cotensorator of an oplax monoidal functor -/\"}\n",
+   "date": "2026-10-16",
+   "verdict": "No simplicial tensor/cotensor interface: semantic hits give hom-functors, simplicial enrichment and the closed monoidal structure on simplicial sets; grep finds only an unrelated cotensorator. The TODO in Mathlib.AlgebraicTopology.SimplicialCategory.Basic explicitly says to develop simplicial tensors."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicialtensor|simplicialcotensor|simplicial tensor|simplicial cotensor|enriched.*small.object|small.object.*enriched",
+   "results": "/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupCosimplicialAW.lean:63:    (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C) :\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupAWComponents.lean:32:    (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupAWComponents.lean:55:    (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupAWComponents.lean:65:    (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupAWComponents.lean:80:    (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C) :\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupGodementFMapModels.lean:701:    ∃ (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupGodementFMapModels.lean:702:      (μ₁ : moduleCup_cosimplicialTensor X' A₁ B₁ ⟶ C₁)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupGodementFMapSummands.lean:97:      ∃ (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupGodementFMapSummands.lean:98:        (μ₁ : moduleCup_cosimplicialTensor X' A₁ B₁ ⟶ C₁),\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupCosimplicialAWNaturality.lean:45:    (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupCosimplicialAWNaturality.lean:46:    (μ₁ : moduleCup_cosimplicialTensor X A₁ B₁ ⟶ C₁)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupCosimplicialAWNaturality.lean:75:    (μ : moduleCup_cosimplicialTensor X A B ⟶ C) :\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupCosimplicialAWNaturality.lean:127:    (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupCosimplicialAWNaturality.lean:128:    (μ₁ : moduleCup_cosimplicialTensor X A₁ B₁ ⟶ C₁)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupGodementCoefficientModels.lean:340:      (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupGodementCoefficientModels.lean:341:      (μ₁ : moduleCup_cosimplicialTensor X A₁ B₁ ⟶ C₁)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupAWLeibniz.lean:256:    (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupAWLeibniz.lean:337:    (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupGodementCosimplicialInput.lean:48:def moduleCup_cosimplicialTensor (X : Scheme.{u})\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupGodementCosimplicialInput.lean:53:/-- The degree-zero pairing induced by a pointwise cosimplicial tensor morphism.\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupGodementCosimplicialInput.lean:56:    (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C) :\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupGodementCosimplicialInput.lean:152:      (μ : moduleCup_cosimplicialTensor X A B ⟶ C),\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupCosimplicialFMapSummands.lean:128:    (μ : moduleCup_cosimplicialTensor X A B ⟶ C)\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ModuleCupCosimplicialFMapSummands.lean:129:    (μ₁ : moduleCup_cosimplicialTensor X' A₁ B₁ ⟶ C₁)\n",
+   "date": "2026-10-16",
+   "verdict": "No project declaration provides simplicial tensors/cotensors or enriched small-object factorizations."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-enriched-functorial-factorizations",
+  "date": "2026-10-16",
+  "group": "Q63"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Enriched tensors and cotensors used in the hypotheses of the generic enriched small-object theorem, supplying the attaching-square tensors for global enriched factorizations.",
+   "via": [
+    "lem-coef-enriched-functorial-factorizations",
+    "lem-coef-simplicial-small-chunks",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-simplicial-presheaf-localization-comparison",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialTensorCotensor",
+  "declaration": "CategoryTheory.SimplicialTensorCotensor",
+  "declarations": [
+   "CategoryTheory.SimplicialTensorCotensor",
+   "CategoryTheory.SimplicialTensorCotensor.tensorMap"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialTensorCotensor.lean",
+  "statement": "structure SimplicialTensorCotensor (C : Type u) [Category.{v} C] [SimplicialCategory C]",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d08ad03a4",
+  "group": "Q63",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d08ad03a4",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Read the node, both stmt deps, the new def-coef-simplicial-tensor-cotensor node, both modules, the report (Worker report and Second reading by Q63 present) and the Mathlib declarations used. All 12 hypothesis and conclusion clauses match Riehl 13.2.1 as stated in the node: SimplicialCategory, HasCo/LimitsOfSize.{v,v}, IsLocallyPresentable.{v} (regular κ, κ-presentable generators), canonical universal-element tensor/cotensor isos and tensorMap, J.IsSmall, rlp/llp, hT for all K. The arrow enrichment is Mathlib enrichedOrdinaryCategory on Fin 2 ⥤ C, which is the square equalizer. The naturality conjuncts have the right eHomWhisker directions (i_g b = E(b,c) i_f, p_g E(b,c) = c p_f). Only lean and stmt_deps (gaining the new node) changed on the item; the deps are byte-identical; lean.statement strings are verbatim; the new-node fields conform to H12. No duplicate in Mathlib or the project. No hollow data, only sorry, docstrings present, universes u and v independent. nt_compile.py --json: both files clean (0.9 s and 1.1 s), axioms propext/sorryAx/choice/Quot.sound. No findings of substance."
+ }
+}

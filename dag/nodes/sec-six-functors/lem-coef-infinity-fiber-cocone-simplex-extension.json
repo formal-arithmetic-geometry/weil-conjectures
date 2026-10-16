@@ -267,5 +267,31 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-446a35a9b (reviewer sub-agent of L); spot-checked: I read the item, its six steps, the three new nodes and the full statements of the cited nodes (def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, lem-cbc-enhanced-relative-exponential); the item uses the colimit hypothesis only at vertex 0. Its only citer, parent lem-coef-infinity-fiber-colimit-collage step 4, applies it correctly. Kerodon sources, read online: 02ZR (Lemma 7.3.4.5), 02XB (7.1.6.13), 02WU (7.1.5.19(2)), 02WS (7.1.5.17). The split follows 02ZR's proof exactly: relative functor categories (0472), an isofibration/inner-fibration restriction, 02XB fiberwise, 02WU promotion, then the boundary filler; 02WS replaces 06A5, which is equivalent for a single simplex. Step checks: (1) the horn analysis holds; the Λ^3_0 uniqueness argument with u=v is right and nerves are 2-coskeletal. (2) The opposite dual of the relative-exponential node gives cartesian H_Z with the right edge criterion, and R preserves cartesian edges. (3) a and b are well defined and Ra=b on the boundary. (4) The fiber of H_Y over 0 is Fun(K^▷,E), and the test covers every base diagram. (5) All hypotheses of the boundary-lift node hold. (6) The uncurrying is exact on X and on the boundary preimage, whose union is B_V. New nodes: relative-exponential-restriction is true by flatness of cocartesian fibrations, left properness of the Joyal model structure and 2-out-of-3; the S=pt case is Mathlib's instInnerFibrationAppPreOfMonoOfQuasicategory, a special case only, not a leaf. cocone-restriction-initial is the colimit dual of 02XB; small cases K empty and K a point check out. cartesian-initial-boundary-lift is 02WU(2) plus 02WS; n=1, R=id and S=pt check out, and n=0 is correctly excluded. None restates a clause of the item. The duplicate search found no match among relative-kan-existence, parameter-cone-extension, kan-mapping-restriction, isofibration-exponentiation, join-cone-calculus, anodyne-cocones or cbc-terminal-boundary-extension. No cycles. Accepted tool_use: lem-cbc-enhanced-relative-exponential, a generic construction that this unit's route does not supply. No SGA is cited, no target is touched, and I made no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-763e36f24",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: K_V=Grothendieck V; P_V=published Collage (mixed homs singleton iff r<=s, none right->left); ∂Δ^n=Mathlib boundary via isoNerve; B_V=range(nerve collageLeft) ⊔ preimage of the boundary. hcolim is exactly 'the induced cocone is colimiting' because a cocone is determined by its apex and homotopy; direction time0=fiber, time1=apex; b witnesses exist and are unique for n>=1. Conclusion is the literal equality ι≫Fbar=F. Edge cases n=0 excluded, n=1, empty fiber (apex clause), empty E, single universe as in the parent: all fine. Helpers are real, only sorry is the theorem, docstrings complete, lean.statement byte-identical, no name collisions, commit shape ok (module, report, node lean field), cycle import correctly omitted. nt_compile --json on the snapshot: rc 0, no errors or warnings. Maintainer note only: add the RelativeExponentialRestriction and CartesianInitialBoundaryLift proof imports after the next build."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiberCoconeSimplexExtension",
+  "declaration": "CategoryTheory.fiber_cocone_simplex_extension",
+  "declarations": [
+   "CategoryTheory.simplexIndex",
+   "CategoryTheory.simplexBoundary",
+   "CategoryTheory.simplexBoundaryCollage",
+   "CategoryTheory.simplexFiberMap",
+   "CategoryTheory.fiber_cocone_simplex_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiberCoconeSimplexExtension.lean",
+  "statement": "theorem fiber_cocone_simplex_extension (n : ℕ) (hn : 1 ≤ n) (V : simplexIndex.{u} n ⥤ Cat.{u, u}) {E : SSet.{u}} [E.Quasicategory] (F : (simplexBoundaryCollage V : SSet) ⟶ E) (hcolim : ∀ r : simplexIndex n, ∃ c : (SSet.Enhanced.coconeCategory (simplexFiberMap V r ≫ F)) _⦋0⦌, (∃ b : (simplexBoundaryCollage V : SSet) _⦋0⦌, b.1 = (nerveMap (collageRight (I := simplexIndex n) (U := V))).app (op ⦋0⦌) (ComposableArrows.mk₀ r) ∧ c.1.1 = F.app _ b) ∧ SSet.Enhanced.IsColimiting (simplexFiberMap V r ≫ F) c ∧ ∀ (m : ℕ) (s : (nerve (V.obj r)) _⦋m⦌) (a : (Δ[1] : SSet.{u}) _⦋m⦌), ∃ b : (simplexBoundaryCollage V : SSet) _⦋m⦌, b.1 = (collageFiberPrism V r).app (op ⦋m⦌) (s, a) ∧ (SSet.Enhanced.coconeHomotopy (simplexFiberMap V r ≫ F) c).app (op ⦋m⦌) (s, a) = F.app _ b) : ∃ Fbar : nerve (Collage (simplexIndex n) V) ⟶ E, (simplexBoundaryCollage V).ι ≫ Fbar = F",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the published canonical Collage and collageFiberPrism helpers. The hypothesis identifies the supplied colimiting cocone with the prescribed apex and entire prism, including empty fibers; subtype witnesses only express membership in the prescribed union. The boundary is Mathlib boundary transported by stdSimplex.isoNerve."
  }
 }
