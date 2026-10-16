@@ -26,9 +26,97 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-system-localization-universal] to the stated system $W$. Denote its finite-product-preserving left adjoint by $L$, its fully faithful right adjoint by $G$, and its unit by $\\eta$. Put $\\mathcal D=L(\\mathcal C,W)$ and let $q$ be the underlying component of $\\eta_{\\mathcal C,W}$. The cited full functor-category restriction equivalence gives the required underlying localization, including transformations and higher homotopies.",
+   "uses": [
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.7.1, Proposition 4.1.7.2 and Notation 4.1.7.3."
+   }
+  },
+  {
+   "text": "By [lem-coef-symmetric-monoidal-segal-classification], classify $\\mathcal C^{\\otimes}$ by a Segal diagram $F$. Mark $F(\\langle n\\rangle)\\simeq\\mathcal C^n$ with $W^n$. This gives a diagram $F_W:N(\\mathsf{Fin}_*)\\to\\mathsf{WCat}_\\infty$ as defined in [lem-coef-system-localization-universal]. Indeed, over $\\alpha:\\langle n\\rangle\\to\\langle m\\rangle$, the $j$th output is the tensor of the inputs with $\\alpha(i)=j$. The tensor of finitely many arrows $w_i\\in W$ is a composite of arrows changing one tensor factor at a time; each belongs to $W$ by tensor stability, so the composite belongs to $W$. A block with no input gives the identity of the unit, and an input sent to $*$ is discarded. Thus every $F(\\alpha)$ preserves the coordinatewise systems. All functorial coherence equivalences also preserve them, since $W$ contains equivalences and is closed under homotopy and composition. The mapping spaces defining $\\mathsf{WCat}_\\infty$ are precisely unions of the corresponding components, so the entire coherent diagram lifts, with its given coherences.",
+   "uses": [
+    "lem-coef-symmetric-monoidal-segal-classification",
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.7.1; the paragraph between Propositions 4.1.7.2 and 4.1.7.4; Definition 2.4.2.1 and Example 2.4.2.4."
+   }
+  },
+  {
+   "text": "Form the actual diagram $LF_W$ by composition. Finite-product preservation in [lem-coef-system-localization-universal] identifies its inert comparison at every $n$ with $L((\\mathcal C,W)^n)\\simeq L(\\mathcal C,W)^n$, also for $n=0$. Hence it is a Segal diagram. Unstraighten it by [lem-coef-symmetric-monoidal-segal-classification] to obtain $\\mathcal D^{\\otimes}$. Forgetting markings in the natural transformation $\\eta F_W:F_W\\to GLF_W$ gives a transformation of Segal diagrams, hence a strong symmetric monoidal functor $q^{\\otimes}$; at $\\langle1\\rangle$ it is the $q$ of step 1. In particular the construction provides all the higher coherences, rather than only a binary tensor on a homotopy category.",
+   "uses": [
+    "lem-coef-system-localization-universal",
+    "lem-coef-symmetric-monoidal-segal-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "The paragraph preceding Proposition 4.1.7.4 and Example 2.4.2.4; the product preservation is Proposition 4.1.7.2."
+   }
+  },
+  {
+   "text": "First prove the universal property on spaces of strong functors. For a symmetric monoidal target with Segal diagram $H$, the adjunction of [lem-coef-system-localization-universal] gives\n$$\\operatorname{Map}_{\\operatorname{Fun}(N(\\mathsf{Fin}_*),\\mathsf{Cat}_\\infty)}(LF_W,H)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(\\mathsf{Fin}_*),\\mathsf{WCat}_\\infty)}(F_W,GH).$$\nExplicitly, the forward map takes $t$ to $Gt\\circ\\eta F_W$ and the inverse takes $s$ to $\\epsilon H\\circ Ls$, with $\\epsilon$ the counit. Their composites are homotopic to the identities by the adjunction triangle identities, componentwise and coherently by naturality. Segal diagrams form full subcategories of the diagram categories. A transformation on the right is exactly a transformation of the underlying Segal diagrams whose component at $\\langle1\\rangle$ sends $W$ to equivalences: its component at $\\langle n\\rangle$ is the product of that component, as follows by naturality for the inert projections. The classification of [lem-coef-symmetric-monoidal-segal-classification] therefore identifies the displayed equivalence with restriction along $q^{\\otimes}$ on spaces of strong symmetric monoidal functors inverting $W$.",
+   "uses": [
+    "lem-coef-system-localization-universal",
+    "lem-coef-symmetric-monoidal-segal-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "The adjunction on commutative monoid diagrams in the paragraph preceding Proposition 4.1.7.4; Example 2.4.2.4 and Remark 2.4.2.6. The componentwise mate maps are written explicitly here."
+   }
+  },
+  {
+   "text": "To include noninvertible monoidal transformations, take any small infinity category $K$ and apply step 4 to the pointwise symmetric monoidal target $\\operatorname{Fun}(K,\\mathcal E)$ supplied by [lem-coef-symmetric-monoidal-segal-classification]. Its currying equivalence identifies the resulting spaces with\n$$\\operatorname{Fun}(K,\\operatorname{Fun}^{\\otimes}(\\mathcal D,\\mathcal E))^{\\simeq}\\simeq\\operatorname{Fun}(K,\\operatorname{Fun}^{\\otimes}_W(\\mathcal C,\\mathcal E))^{\\simeq}.$$\nHere the subscript denotes the full subcategory on $W$-inverting functors: a morphism in $\\operatorname{Fun}(K,\\mathcal E)$ is an equivalence precisely when all its components are equivalences, so its $W$ condition is exactly that every vertex of the $K$-diagram lies in this full subcategory. The displayed equivalences are the maps induced by the same restriction functor, naturally in $K$. They are equivalences on mapping spaces from every $K$ in $\\mathsf{Cat}_\\infty$. Explicitly, write $R:A\\to B$ for restriction. At $K=B$, lift $1_B$ to $S:B\\to A$, obtaining $RS\\simeq1_B$. At $K=A$, the images of $SR$ and $1_A$ are equivalent, so full faithfulness of the mapping-space equivalence gives $SR\\simeq1_A$. Thus $R$ is an equivalence. This proves the asserted full infinity-category universal property, with all transformations and higher homotopies.",
+   "uses": [
+    "lem-coef-symmetric-monoidal-segal-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 4.1.7.4(1); Remark 2.1.3.4 and Definition 2.1.3.7, with the parameter argument written out."
+   }
+  },
+  {
+   "text": "The natural transformation of Segal diagrams constructed in step 3 commutes with the active maps $\\langle2\\rangle\\to\\langle1\\rangle$ and $\\langle0\\rangle\\to\\langle1\\rangle$. Under the classification of [lem-coef-symmetric-monoidal-segal-classification], these squares give $q(X)\\otimes q(Y)\\simeq q(X\\otimes Y)$ and $\\mathbf1_{\\mathcal D}\\simeq q(\\mathbf1_{\\mathcal C})$. Its naturality for every composite and every simplex of $N(\\mathsf{Fin}_*)$ gives the associativity, unit, symmetry and higher coherence constraints.",
+   "uses": [
+    "lem-coef-symmetric-monoidal-segal-classification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.4.2.1, Remark 2.4.2.3 and Definition 2.1.3.7; the two squares of the constructed natural transformation."
+   }
+  },
+  {
+   "text": "For an ordinary symmetric monoidal category $A$, [lem-coef-symmetric-monoidal-segal-classification] supplies the symmetric monoidal infinity category $N(A^{\\otimes})$ with underlying $N(A)$. Regard a system of arrows of $A$ satisfying the stated tensor stability as a system in this nerve. Composition, equivalences and the tensor operations are the original ones, so all hypotheses checked in steps 1-3 apply. Steps 4-6 give the same localization and both universal properties for this nerve.",
+   "uses": [
+    "lem-coef-symmetric-monoidal-segal-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Example 2.1.2.21 (not Example 4.1.6.18) and Proposition 4.1.7.4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-system-localization-universal",
+  "lem-coef-symmetric-monoidal-segal-classification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Construction 4.1.7.1 and Proposition 4.1.7.2; the Segal-diagram adjunction underlying Proposition 4.1.7.4, using Definition 2.4.2.1, Example 2.4.2.4, Remark 2.4.2.6 and the parameter construction of Remark 2.1.3.4. The componentwise mate calculation and parameter argument are written out in the steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,12 +148,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-combinatorial-localization-presentability",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-relative-symmetric-monoidal-localization",
+  "worker": "stage1",
+  "summary": "Second reader replaced the near-restatement operadic-lift prerequisite by the general Segal-diagram classification; the localization prerequisite now explicitly supplies the finite-product-preserving adjunction. Seven steps construct the marked diagram, localize it objectwise, check every Segal fiber including arity zero, prove the functor-space adjunction with explicit mate maps, upgrade it to the full functor infinity category using arbitrary diagram parameters, and extract comparisons and the ordinary nerve specialization. Two proper foundational nodes, no Mathlib leaves; target statement unchanged.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2 in the current main-20261015 snapshot (sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md): the coherent finite-coefficient models supporting the displayed derived mapping-complex adjunction. This is the tensor-localization foundation used by the existing combinatorial-localization node, not a replacement of the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q21-eaa3f34c3",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-eaa3f34c3 (reviewer sub-agent of L); spot-checked: Mathematics and all seven steps checked against Higher Algebra §§2.1.3, 2.4.2 and 4.1.7. Corrected B9: both new nodes truncated blueprint ancestry; whole corrected JSON files are under fixes/. No statement changes, cycles, duplicates, target weakening, or tool_uses. Full review written to review.md.; 2 file(s) fixed by the reviewer"
+ }
 }

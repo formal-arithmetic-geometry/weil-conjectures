@@ -3,42 +3,162 @@
  "blueprint": {
   "is": "det-pe-milnor-epimorphic",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Towers with epimorphic transitions have no derived limit terms",
- "statement": "Let $(M_n,t_n)$ be a tower of $\\mathcal R$-modules on $X_{\\mathrm{proét}}$ whose transition\nmaps $t_n\\colon M_{n+1}\\to M_n$ are epimorphisms. Then $1-T\\colon\\prod_nM_n\\to\\prod_nM_n$ is\nan epimorphism, $R^1\\varprojlim_nM_n=0$, and $\\varprojlim_nM_n\\to R\\varprojlim_nM_n$ is an\nisomorphism in $D(X_{\\mathrm{proét}},\\mathcal R)$.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with small pro-étale site $X_{\\mathrm{proét}}$\n[def-weil-pbc-proetale-site], and let $\\mathcal R$ be a sheaf of rings on this site.\nLet $(M_n,t_n)_{n\\geq0}$ be a tower of sheaves of $\\mathcal R$-modules\n[def-weil-sheaf-of-modules-category], with epimorphic transition maps\n$t_n\\colon M_{n+1}\\to M_n$. Put $P=\\prod_{n\\geq0}M_n$ and let $T\\colon P\\to P$\nbe the morphism whose $n$th coordinate is $t_n$ composed with the $(n+1)$st projection.\nUse the convention $R\\varprojlim_nM_n=\\operatorname{Cone}(1-T)[-1]$ of\n[det-pe-milnor-sequence], and $R^p\\varprojlim_nM_n=H^p(R\\varprojlim_nM_n)$.\nWrite $D(X_{\\mathrm{proét}},\\mathcal R)$ for the derived category of these module\nsheaves [def-weil-abstract-derived-category]. Then $1-T\\colon P\\to P$ is an epimorphism,\n$R^1\\varprojlim_nM_n=0$, and the canonical map from the ordinary inverse limit [def-pur-sheaf-inverse-limit]\n$\\varprojlim_nM_n[0]\\to R\\varprojlim_nM_n$ is an isomorphism in\n$D(X_{\\mathrm{proét}},\\mathcal R)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-epimorphic.md",
   "place": "node det-pe-milnor-epimorphic, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "det-pe-milnor-sequence",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-inverse-limit"
+ ],
  "proof": [
   {
-   "text": "Let $W$ be an affine weakly contractible object. The maps $t_n(W)$ are surjective (part 3 of\n[det-pe-weak-contractible-equivalences]), and $(\\prod_nM_n)(W)=\\prod_nM_n(W)$\n([det-pe-sections-limits-colimits]). Given $(a_n)\\in\\prod_nM_n(W)$, put $m_0=0$ and choose\nrecursively $m_{n+1}\\in M_{n+1}(W)$ with $t_n(m_{n+1})=m_n-a_n$. Then\n$((1-T)(m))_n=m_n-t_n(m_{n+1})=a_n$. So $1-T$ is surjective on every such $W$, i.e. the sequence\n$\\prod_nM_n\\xrightarrow{1-T}\\prod_nM_n\\to0$ is exact on every $W$, and\n[det-pe-sections-conservative] shows that $1-T$ is an epimorphism of sheaves. By [det-pe-milnor-sequence], 2,\n$R^1\\varprojlim_nM_n=\\coker(1-T)=0$ and $R^p\\varprojlim_nM_n=0$ for $p\\neq0,1$, so\n$R\\varprojlim_nM_n$ has cohomology only in degree $0$, equal to $\\varprojlim_nM_n$; the\ninclusion of $\\varprojlim_nM_n=\\ker(1-T)$ in degree $0$ of the two-term complex is\ntherefore a quasi-isomorphism.",
+   "text": "Fix an affine weakly contractible object $W$. By [det-pe-sections-limits-colimits], evaluation $\\Gamma(W,-)$ on $\\mathcal R$-modules preserves all limits and colimits. In particular $P(W)=\\prod_n M_n(W)$ and it preserves cokernels and the zero object. Since $t_n$ is an epimorphism, $\\coker t_n=0$, hence $\\coker(t_n(W))=(\\coker t_n)(W)=0$. A module homomorphism has zero cokernel exactly when its image is its target (its cokernel is the quotient by its image). Thus every $t_n(W)$ is surjective. This uses the module-valued evaluation statement, without assuming that an arbitrary epimorphism of sheaves is surjective on arbitrary objects.",
    "uses": [
-    "det-pe-weak-contractible-equivalences",
     "det-pe-sections-limits-colimits",
-    "det-pe-sections-conservative",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-epimorphic.proof.md",
+    "place": "first two sentences: surjectivity of t_n(W) and product evaluation"
+   }
+  },
+  {
+   "text": "For an arbitrary $a=(a_n)\\in\\prod_n M_n(W)$, choose, using the surjectivity in step 1, a set-theoretic right inverse $s_n\\colon M_n(W)\\to M_{n+1}(W)$ of each $t_n(W)$. Define $m_0=0$ and $m_{n+1}=s_n(m_n-a_n)$ recursively. The induction is well-defined: if $m_n\\in M_n(W)$, then $m_n-a_n\\in M_n(W)$ and $m_{n+1}\\in M_{n+1}(W)$. For every $n\\geq0$ one has $t_n(W)(m_{n+1})=m_n-a_n$, so $((1-T)(W)(m))_n=m_n-t_n(W)(m_{n+1})=a_n$. Therefore $(1-T)(W)$ is surjective. The choices are made separately for each $W$; no compatible choices with respect to restrictions, and no splitting in the sheaf category, are asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-epimorphic.proof.md",
+    "place": "Given (a_n), put m_0=0 and choose recursively m_{n+1}; displayed coordinate calculation"
+   }
+  },
+  {
+   "text": "For every affine weakly contractible $W$, step 2 says that $P(W)\\xrightarrow{(1-T)(W)}P(W)\\to0$ is exact at the second term. Apply assertion 1 of [det-pe-sections-conservative] to the sequence $P\\xrightarrow{1-T}P\\to0$, whose composite is zero. It is exact at the second term as a sequence of module sheaves. Thus the image of $1-T$ is all of $P$, or equivalently its cokernel is zero, and $1-T$ is an epimorphism.",
+   "uses": [
+    "det-pe-sections-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-epimorphic.proof.md",
+    "place": "So 1-T is surjective on every such W; sections-conservative detects exactness"
+   }
+  },
+  {
+   "text": "Apply assertion 2 of [det-pe-milnor-sequence] to the given tower of modules concentrated in degree zero. It identifies $R^1\\varprojlim_n M_n$ with $\\coker(1-T)$, which vanishes by step 3, identifies $H^0(R\\varprojlim_n M_n)$ with $\\varprojlim_nM_n$, and gives zero cohomology in every degree outside $\\{0,1\\}$. In particular the derived limit has cohomology only in degree zero.",
+   "uses": [
     "det-pe-milnor-sequence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-epimorphic.proof.md",
+    "place": "By det-pe-milnor-sequence, 2: cokernel and higher cohomology vanishing"
+   }
+  },
+  {
+   "text": "To verify that it is the stated canonical map which is invertible, put $L=\\varprojlim_nM_n$, the inverse limit of [def-pur-sheaf-inverse-limit] (reindex its positive integers by $r=n+1$). A map into $P$ is killed by $1-T$ precisely when its coordinates $u_n$ satisfy $u_n=t_nu_{n+1}$ for all $n$; the universal properties of product, kernel and inverse limit therefore identify $L$ with $\\ker(1-T)$, with its natural inclusion into $P$. By the cone convention in [det-pe-milnor-sequence] and the cone and shift formulas of [def-weil-abstract-derived-category], $\\operatorname{Cone}(1-T)[-1]$ has $P$ in degrees $0,1$ and differential $-(1-T)$; multiplying its degree-one term by $-1$ gives the isomorphic two-term complex $C=[P\\xrightarrow{1-T}P]$. The kernel inclusion in degree zero and zero in every other degree define the canonical chain map $i\\colon L[0]\\to C$, since $(1-T)i^0=0$. On $H^0$ it is the identity of $L=\\ker(1-T)$; in degree one both sides vanish by step 4, and in all other degrees both sides vanish because of their degrees. Let $j\\colon C\\to\\operatorname{Cone}(1-T)[-1]$ have degree-zero component $1$ and degree-one component $-1$. It is a chain isomorphism since $-(1-T)\\circ 1=(-1)\\circ(1-T)$. Thus $j\\circ i$ is the canonical comparison to the stated cone model and is a quasi-isomorphism. By the definition of the derived category as localization at quasi-isomorphisms [def-weil-abstract-derived-category], its image is the claimed isomorphism.",
+   "uses": [
+    "det-pe-milnor-sequence",
+    "def-weil-abstract-derived-category",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-epimorphic.proof.md",
+    "place": "last sentence: the kernel inclusion into the two-term complex is a quasi-isomorphism"
+   }
   }
  ],
  "proof_deps": [
-  "det-pe-weak-contractible-equivalences",
   "det-pe-sections-limits-colimits",
+  "def-weil-sheaf-of-modules-category",
   "det-pe-sections-conservative",
-  "det-pe-milnor-sequence"
+  "det-pe-milnor-sequence",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-inverse-limit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-epimorphic.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-epimorphic.proof.md",
+  "place": "entire proof, expanded into five steps; module evaluation argument in step 1"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Mittag|lim1|derivedLimit|derivedInverseLimit|one_sub_shift",
+   "results": "Mathlib/CategoryTheory/CofilteredSystem.lean; Mathlib/CategoryTheory/CofilteredSystem.lean; Mathlib/CategoryTheory/CofilteredSystem.lean; Mathlib/CategoryTheory/CofilteredSystem.lean; Mathlib/CategoryTheory/CofilteredSystem.lean; Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean; Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean; Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: these results do not state the epimorphism of one minus shift and both derived-limit conclusions for module sheaves on a pro-étale site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Epimorphic countable inverse systems of sheaves of modules on the pro etale site have no higher derived inverse limits",
+   "results": "SheafOfModules.hasLimit; CategoryTheory.coherentTopology.epi_π_app_zero_of_epi; SheafOfModules.hasLimitsOfSize; InverseSystem.isNatEquiv_piEquivLim; SheafOfModules.GeneratingSections.ofEpi; SheafOfModules.hasLimitsOfShape; InverseSystem.invLimEquiv.congr_simp; CategoryTheory.CountableAB4Star",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: these results do not state the epimorphism of one minus shift and both derived-limit conclusions for module sheaves on a pro-étale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.limit",
+   "results": "CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map; CategoryTheory.coherentTopology.epi_π_app_zero_of_epi",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: these results do not state the epimorphism of one minus shift and both derived-limit conclusions for module sheaves on a pro-étale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A countable inverse system of sheaves of modules on a pro-etale site with epimorphic transition maps has surjective one minus shift and vanishing higher derived inverse limits",
+   "results": "LightCondensed.epi_π_app_zero_of_epi; LightCondMod.ofSheafLightProfinite; Profinite.NobelingProof.succ_exact; CondensedMod.ofSheafProfinite; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightProfinite.surjective_transitionMap; LightCondensed.instPreservesEpimorphismsFunctorDiscreteNatLightCondModLim; SheafOfModules.GeneratingSections.opEpi_comp",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: these results do not state the epimorphism of one minus shift and both derived-limit conclusions for module sheaves on a pro-étale site"
+  },
+  {
+   "tool": "grep",
+   "query": "one.?minus|[Mm]ilnor|Roos|[Dd]erived.*[Ll]imit",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: these results do not state the epimorphism of one minus shift and both derived-limit conclusions for module sheaves on a pro-étale site",
+   "sub": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lim\", \"surjective\"",
+   "results": "CategoryTheory.Functor.ιColimitType_jointly_surjective; CategoryTheory.Functor.CoconeTypes.IsColimit.ι_jointly_surjective; CategoryTheory.Functor.CoconeTypes.descColimitType_surjective_iff; CategoryTheory.Limits.Types.jointly_surjective'; CategoryTheory.Limits.Types.jointly_surjective; CategoryTheory.Limits.Types.jointly_surjective_of_isColimit; CategoryTheory.Limits.Types.FilteredColimit.jointly_surjective_of_isColimit₂; AddMonCat.FilteredColimits.M.mk_surjective",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: these results do not state the epimorphism of one minus shift and both derived-limit conclusions for module sheaves on a pro-étale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a tower of modules with surjective bonding homomorphisms the map on the product sending x to x minus its shifted image is surjective and the derived limit equals the ordinary inverse limit",
+   "results": "LightProfinite.surjective_transitionMap; CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map_aux; CategoryTheory.Limits.Concrete.surjective_π_app_zero_of_surjective_map; AdicCompletion.map_surjective; AdicCompletion.evalOneₐ_surjective; AdicCompletion.surjective_evalₐ; AdicCompletion.eval_surjective; AdicCompletion.of_surjective",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: these results do not state the epimorphism of one minus shift and both derived-limit conclusions for module sheaves on a pro-étale site"
+  },
+  {
+   "tool": "grep",
+   "query": "IsHomotopyLimit|surjective.*sub|sub.*surjective",
+   "results": "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean; Mathlib/RepresentationTheory/Coinvariants.lean; Mathlib/RepresentationTheory/Coinvariants.lean; Mathlib/NumberTheory/ModularForms/Cusps.lean; Mathlib/NumberTheory/MulChar/Duality.lean; Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean; Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean; Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: unrelated algebraic surjectivity results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse sequence of modules with surjective bonding maps has derived limit concentrated in degree zero",
+   "results": "CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map_aux; CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map; DerivedCategory.isZero_of_isGE; DerivedCategory.isGE_iff; DerivedCategory.isZero_of_isLE; DerivedCategory.isLE_iff; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-16",
+   "verdict": "no match: the Types results are surjectivity of limit projections; the derived-category results characterize cohomological bounds or injectives. None computes one minus shift or the derived limit of epimorphic module-sheaf towers."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -54,5 +174,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-pe-milnor"
+ "unit": "sk-prop-pe-milnor",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-milnor-epimorphic",
+  "worker": "stage1",
+  "summary": "Expanded the recurrence proof into five steps with exact module-evaluation, exactness-detection and Milnor citations. Used preservation of cokernels to justify sectionwise surjectivity directly for modules. Made the ambient scheme, ring sheaf, shift T and canonical comparison map explicit without changing the hypotheses or conclusions. No new nodes; no exact project attachment or Mathlib match. The newly imported item lacks chapter/unit metadata and corresponding records; the current blueprint section and unit sources were read instead.",
+  "blueprint": "Steps 1-2 realize the opening evaluation and recursive lifting sentences of det-pe-milnor-epimorphic.proof.md; step 3 realizes detection of exactness; step 4 realizes the Milnor cohomology calculation; step 5 realizes its final kernel-inclusion sentence. The unit sk-prop-pe-milnor epimorphic-transition paragraph is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-3fa405b72",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-3fa405b72 (reviewer sub-agent of L); spot-checked: Read the item, all five steps, every cited dependency statement, and cited sources in full. Verified module-valued evaluation, recursion, exactness detection, Milnor cohomology, cone signs, and the canonical comparison. Edge cases pass; no duplicate replacement, missing dependency, or cycle found. No repairs or off-route tool uses needed. Detailed checks are in review.md."
+ }
 }

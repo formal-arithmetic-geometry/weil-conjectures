@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-prop-p1-adjunction-rational-triangle",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Triangle identities for the rational projective line",
@@ -18,34 +18,266 @@
  ],
  "proof": [
   {
-   "text": "The calculation in the proof of [sk-prop-geo-p1-adjunction] for torsion\ncoefficients uses only three kinds of identification: the projection formula\nfor proper morphisms, proper base change, and the composition isomorphisms\n$R(gh)_*\\simeq Rg_*Rh_*$, each applied to the canonical maps and used with\ntheir standard compatibilities (naturality, compatibility with composition\nof squares, and compatibility of the projection formula with the base change\nmap). On the categories $\\Loc(\\Dbc(-,\\Lambda))$ these hold by\n[sk-thm-sf-pf-field], and composition of direct images holds on the ambient\nderived categories. So the calculation goes through verbatim; we recall its\nshape.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*First identity.* In $\\varepsilon_{Rq_*M}\\circ Rq_*(\\eta_M)$, write\n$Rq_*Rp_{2*}=R(qp_2)_*=R(qp_1)_*=Rq_*Rp_{1*}$. The projection formula for\n$p_1$ moves the factor $M$ outside:\n$Rp_{1*}(p_1^*M\\otimes^{\\mathbf L}N)\\simeq M\\otimes^{\\mathbf L}Rp_{1*}N$. The base\nchange map in $\\eta$ is defined by the counit of $p_1^*\\dashv Rp_{1*}$, and\nunder these identifications it cancels against the restriction to the\ndiagonal, $Rp_{1*}\\Delta_*=\\mathrm{id}$. The trace in $\\varepsilon$ becomes,\nunder base change, $\\operatorname{Tr}_{p_1}$. What remains is\n$Rq_*$ of $1_M$ tensored with the endomorphism\n$\\operatorname{Tr}_{p_1}\\circ Rp_{1*}\\delta_\\Lambda$ of $\\Lambda_{\\mathbf P^1_Y}$\n(identified via the projection formula for $p_1$).",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Second identity.* Symmetrically, for $M=q^*K(1)[2]$ the factor $q^*K$ is\nmoved outside $Rp_{2*}$ by the projection formula for $p_2$, the base change\nmap cancels against $Rp_{2*}\\Delta_*=\\mathrm{id}$, and what remains is\n$1_{q^*K(1)[2]}$ tensored with\n$\\operatorname{Tr}_{p_2}\\circ Rp_{2*}\\delta_\\Lambda$.\n\nBy the integration identities of [sk-prop-diagonal-tower],\n$\\operatorname{Tr}_{p_i}\\circ Rp_{i*}\\delta_\\Lambda=1$ for $i=1,2$. Hence both\ncomposites are identities: these are the triangle identities, and\n$(\\eta,\\varepsilon)$ exhibits $q^*(1)[2]$ as right adjoint to $Rq_*$ on the\nlocalizing categories. Since $q$ is proper, $Rq_!=Rq_*$ there (trivial\ncompactification), and $q^!$ is by definition a right adjoint of $Rq_!$\n([sk-prop-sf-existence]). Right adjoints are unique up to unique isomorphism\ncompatible with the counits, so $q^!\\simeq q^*(1)[2]$.",
+   "text": "Fix the notation and the canonical unit and counit of [det-prop-p1-adjunction-rational-unit-counit]. Write $L=q^*$, $R=Rq_*$, $A=p_1^*$, $B=p_2^*$, $S=Rp_{1*}$, $U=Rp_{2*}$ and $T_Z=\\Lambda_Z(1)[2]$; all tensor products below are derived. The module-object convention [sk-def-sfb-module-objects](3) gives sheaves with a $\\Lambda_Z$-action. More precisely [sk-def-sfb-module-pushforward-pullback] identifies their functors with the ringed-topos functors: underlying abelian direct image with the structural ring action, and $f^*M=\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\mathrm{Ab}}M$. Thus the ambient unbounded module derived categories, and their adjunctions [def-sfb-module-derived-pushpull-adjunction], are the ones in the ringed-topos results used below. On derived categories the symbol $f^*$ below denotes the total derived pullback $Lf^*$; no discrete constant-$E$ etale category is substituted.\n\nThe maps $q,p_1,p_2$ are relative projective lines, over $Y,P,P$ respectively; [lemma-nagata-projective-space-base-change-proper] with two homogeneous coordinates makes all three proper. Hence [det-thm-sf-pf-field-localizing] makes their canonical projection maps invertible for both arbitrary localizing factors. The unit/counit node supplies the invertible canonical exchange $\\beta_M:LRM\\to UAM$ and its version $\\bar\\beta_N:LRN\\to SBN$ with the projections interchanged. Use [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to identify $RU=RS=R(qp_i)_*$ and $S\\Delta_*=U\\Delta_*=\\mathrm{id}$. All these are canonical comparisons. The projection/exchange equality is [lem-weil-pbc-ringed-exchange-tensor-coherence], including its naturality in both factors. Define\n$$b_M:LRM\\otimes T_P\\xrightarrow{\\beta_M\\otimes1}UAM\\otimes T_P\\xrightarrow{\\mathrm{projection}}U(AM\\otimes T_W).$$\nThe unit is $b_M^{-1}\\circ U((1\\otimes\\delta_\\Lambda)c_M)$, where $c_M:\\Delta_*M\\simeq AM\\otimes\\Delta_*\\Lambda_P$ is the canonical identification in that node. This makes precise the twist in the last arrow of its definition.",
    "uses": [
-    "sk-prop-sf-existence"
+    "det-prop-p1-adjunction-rational-unit-counit",
+    "sk-def-sfb-module-objects",
+    "def-sfb-module-derived-pushpull-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "det-thm-sf-pf-field-localizing",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lemma-nagata-projective-space-base-change-proper"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+    "place": "Opening paragraph: canonical maps, composition and projection/exchange coherence"
+   }
+  },
+  {
+   "text": "We first verify the comparison needed for the first triangle, without using integration. For localizing $M,N$ on $P$ consider the following two maps, with all projection arrows written in their displayed factor order using the canonical tensor symmetry:\n$$\\begin{aligned}\nRM\\otimes RN&\\longrightarrow R(LRM\\otimes N)\\xrightarrow{R(\\beta_M\\otimes1)}R(UAM\\otimes N)\\longrightarrow RU(AM\\otimes BN),\\\\\nRM\\otimes RN&\\longrightarrow R(M\\otimes LRN)\\xrightarrow{R(1\\otimes\\bar\\beta_N)}R(M\\otimes SBN)\\longrightarrow RS(AM\\otimes BN).\n\\end{aligned}$$\nTheir targets agree by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. To check that these maps agree as maps, let $v_M:LRM\\to M$ be the counit of the original $L\\dashv R$, not the counit we are proving. By [def-weil-pbc-adjunction-mate], the transpose of $\\beta_M$ under $B\\dashv U$ is $A(v_M)$, after $BL=AL$; the transpose of $\\bar\\beta_N$ under $A\\dashv S$ is $B(v_N)$. A projection arrow has transpose counit tensor identity, by [lem-weil-pbc-ringed-exchange-tensor-coherence]. Take the transpose of each displayed composite under $(qp_2)^*\\dashv RU$ or $(qp_1)^*\\dashv RS$, using the composite-counit formula of [def-weil-pbc-composite-adjunction]. The first transpose applies $A(v_M)$ to the first tensor factor and then $B(v_N)$ to the second; the second applies them in reverse order. Both are\n$$ (qp_i)^*(RM\\otimes RN)\\simeq ALRM\\otimes BLRN\\xrightarrow{A(v_M)\\otimes B(v_N)}AM\\otimes BN.$$\nFunctoriality of tensor gives equality, and injectivity of the adjunction bijection gives equality of the two original maps. Call this map $\\kappa_{M,N}$. Its displayed factors are invertible by step 1.\n\nPut $N=T_P$, $t=\\operatorname{Tr}_q:RT_P\\to\\Lambda_Y$, and $t_1=\\operatorname{Tr}_{p_1}:ST_W\\to\\Lambda_P$. Clause (3) of [det-prop-diagonal-tower-coefficients], applied to the separated finite-type map $q:P\\to Y$, says explicitly $t_1\\circ\\bar\\beta_{T_P}=L(t)$. In the first presentation of $\\kappa$, its last two arrows are $R(b_M)$. Consequently substituting the unit and counit of [det-prop-p1-adjunction-rational-unit-counit] expresses the first triangle as\n$$Rq_*M\\simeq RS\\Delta_*M\\xrightarrow{RS((1\\otimes\\delta_\\Lambda)c_M)}RS(AM\\otimes T_W)\\xrightarrow{\\kappa_{M,T_P}^{-1}}RM\\otimes RT_P\\xrightarrow{1\\otimes t}RM.$$\nUse the second presentation of $\\kappa$ and $t_1\\bar\\beta_{T_P}=L(t)$. Naturality of the projection map for $q$ with respect to $t$ gives the last two arrows as\n$$RS(AM\\otimes T_W)\\xrightarrow{R(\\mathrm{projection}^{-1})}R(M\\otimes ST_W)\\xrightarrow{R(1\\otimes t_1)}RM.$$\nFinally, naturality of the projection map for $p_1$ with respect to $\\delta_\\Lambda$ identifies the class arrow with $1_M\\otimes S\\delta_\\Lambda$. Its source normalization is canonical: $c_M^{-1}$ is the projection map for $\\Delta$, whose transpose is the identity under $\\Delta^*A=\\mathrm{id}$; applying the composite-counit formula to $p_1\\Delta=\\mathrm{id}$ gives the identity of $M$ under $S\\Delta_*=\\mathrm{id}$. Thus the resulting composite is exactly $Rq_*(1_M\\otimes(t_1\\circ Rp_{1*}\\delta_\\Lambda))$. This proves the first equality before using integration.",
+   "uses": [
+    "det-prop-p1-adjunction-rational-unit-counit",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "det-prop-diagonal-tower-coefficients",
+    "det-thm-sf-pf-field-localizing",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+    "place": "First identity: expansion of the kernel, exchange and projection square"
+   }
+  },
+  {
+   "text": "For the second triangle set $M=LK\\otimes T_P=q^*K(1)[2]$. The canonical comparisons give $AM=BM$, since $AL=BL$ and $AT_P=BT_P=T_W$. To check the map following the class arrow, apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to $(f,f',g,g')=(q,p_2,q,p_1)$, with its $E=T_P$ and $Q=K$. In displayed factor order the resulting equality is\n$$\\beta_{LK\\otimes T_P}\\circ L(\\mathrm{projection}_q)=\\mathrm{projection}_{p_2}\\circ(1_{LK}\\otimes\\beta_{T_P}):LK\\otimes LRT_P\\longrightarrow U(BLK\\otimes T_W).$$\nAll projections here are invertible by [det-thm-sf-pf-field-localizing]. With $t=\\operatorname{Tr}_q$ and $t_2=\\operatorname{Tr}_{p_2}$, [det-prop-diagonal-tower-coefficients](3) gives $t_2\\beta_{T_P}=L(t)$. The definition of $\\varepsilon_K$ is $(1_K\\otimes t)\\circ\\mathrm{projection}_q^{-1}$. Invert the displayed coherence equality, compose with $1_{LK}\\otimes L(t)$, tensor with the outside $T_P$, and use the projection map for this outside factor. Naturality of that projection map gives the explicit equality\n$$ (L\\varepsilon_K\\otimes1_{T_P})\\circ b_M^{-1}=(1_M\\otimes t_2)\\circ\\mathrm{projection}_{p_2}^{-1}:U(AM\\otimes T_W)\\longrightarrow M,$$\nwhere on the right $AM$ is identified with $BM$. Substitution of the unit of [det-prop-p1-adjunction-rational-unit-counit] therefore gives the complete composite\n$$M\\simeq U\\Delta_*M\\xrightarrow{U((1\\otimes\\delta_\\Lambda)c_M)}U(BM\\otimes T_W)\\xrightarrow{\\mathrm{projection}^{-1}}M\\otimes UT_W\\xrightarrow{1\\otimes t_2}M.$$\nHere $U\\Delta_*=\\mathrm{id}$ is the canonical comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The canonical $c_M$ also equals the inverse diagonal projection with $B$ in place of $A$: their transposes are both $1_M$ under $\\Delta^*A=\\Delta^*B=\\mathrm{id}$, by [def-weil-pbc-adjunction-mate]. Under the $p_2$ projection its source is $M\\otimes U\\Delta_*\\Lambda_P=M$, because [def-weil-pbc-composite-adjunction] gives the identity counit for $p_2\\Delta=\\mathrm{id}$. Naturality with respect to $\\delta_\\Lambda$ now makes the class arrow $1_M\\otimes U\\delta_\\Lambda$. This proves that the second composite is $1_{q^*K(1)[2]}\\otimes(t_2\\circ Rp_{2*}\\delta_\\Lambda)$. The only extra shift interchanges above move the outside degree-two Tate shift past another factor, with sign $(-1)^{2r}=1$ in degree $r$.",
+   "uses": [
+    "det-prop-p1-adjunction-rational-unit-counit",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "det-thm-sf-pf-field-localizing",
+    "det-prop-diagonal-tower-coefficients",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+    "place": "Second identity: common pulled-back factor and naturality with respect to the diagonal class"
+   }
+  },
+  {
+   "text": "The identity $\\operatorname{Tr}_{p_i}\\circ Rp_{i*}\\delta_{\\mathbf Z_\\ell}=1$ for both $i=1,2$, with source $Rp_{i*}\\Delta_*\\mathbf Z_\\ell=\\mathbf Z_\\ell$, is [det-prop-diagonal-tower-trace](2). Clauses (1) and (2) of [det-prop-diagonal-tower-coefficients] give precisely these equalities for $\\Lambda=E$ and $\\Qlb$, as equalities of morphisms over the pulled-back coefficient sheaf. Substitute them into steps 2 and 3. Tensoring an identity with $1_M$ is the identity and $Rq_*$ preserves identity maps. Both displayed triangle composites are therefore identities for every $M,K$ of the statement, with no boundedness imposed on them.",
+   "uses": [
+    "det-prop-diagonal-tower-trace",
+    "det-prop-diagonal-tower-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+    "place": "Integration identities, after the second identity"
+   }
+  },
+  {
+   "text": "Write $F=Rq_*$ and $G=q^*(1)[2]$. The naturality supplied by [det-prop-p1-adjunction-rational-unit-counit] and the two triangles just proved give the adjunction directly: send $a:M\\to GK$ to $\\varepsilon_K\\circ F(a)$, and send $b:FM\\to K$ to $G(b)\\circ\\eta_M$. Their composites are\n$$\\varepsilon_K F(G(b)\\eta_M)=b\\,\\varepsilon_{FM}F\\eta_M=b,$$\n$$G(\\varepsilon_KF(a))\\eta_M=G\\varepsilon_K\\,\\eta_{GK}\\,a=a,$$\nusing naturality of $\\varepsilon$ and $\\eta$, respectively, and step 4. The bijections are natural in $M,K$ since these transformations and the functors are natural. The images of the identity maps are exactly the prescribed $\\eta$ and $\\varepsilon$. This proves $F\\dashv G$ with those unit and counit.",
+   "uses": [
+    "det-prop-p1-adjunction-rational-unit-counit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+    "place": "Triangle identities exhibit the asserted adjunction; elementary Hom calculation"
+   }
+  },
+  {
+   "text": "To compare with Brown's right adjoint, use [det-def-localizing-closure-ctf-equals-bc](2) to identify $\\Loc(\\Dctf(-,\\Lambda))$ with $\\Loc(\\Dbc(-,\\Lambda))$ at these field stages. The standing schemes are qcqs (finite type over a field gives quasi-compactness, and the separated diagonal is quasi-compact). The projection $q$ is proper by [lemma-nagata-projective-space-base-change-proper] with two homogeneous coordinates. The compactification $(\\mathrm{id}_P,q)$ gives $Rq_!=Rq_*\\mathrm{id}_!=Rq_*$; for the compactification chosen in [sk-prop-sf-existence], [det-sf-comp-coherence-cocycle] supplies the comparison to this trivial one. Write this comparison as $\\phi:Rq_!^{c}\\xrightarrow{\\sim}Rq_*$. For $b:Rq_*M\\to K$, the Brown transpose of $b\\circ\\phi_M$ gives a bijection $\\operatorname{Hom}(Rq_*M,K)\\simeq\\operatorname{Hom}(M,q^!K)$; its inverse sends a Brown adjunct $a:Rq_!^{c}M\\to K$ to $a\\circ\\phi_M^{-1}$. These maps are natural and inverse, since $\\phi$ is a natural isomorphism. In particular, if $e^{c}$ is Brown's counit, the counit for $Rq_*\\dashv q^!$ is $e^c_K\\circ\\phi_{q^!K}^{-1}$. Thus $q^!$ and the functor $G$ of step 5 are right adjoints of the same $Rq_*$. Apply [det-sp-unique-right-adjoint]: the component $q^!K\\to GK$ is the $G$-transpose of Brown's counit and its inverse is the $q^!$-transpose of $\\varepsilon_K$. Its statement gives naturality, inverse identities and counit compatibility. Hence $q^!\\simeq q^*(1)[2]$ on the stated localizing categories.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc",
+    "lemma-nagata-projective-space-base-change-proper",
+    "sk-prop-sf-existence",
+    "det-sf-comp-coherence-cocycle",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+    "place": "Final paragraph: trivial compactification and uniqueness of right adjoints"
+   }
   }
  ],
  "proof_deps": [
-  "sk-prop-sf-existence"
+  "det-prop-p1-adjunction-rational-unit-counit",
+  "sk-def-sfb-module-objects",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "det-thm-sf-pf-field-localizing",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lemma-nagata-projective-space-base-change-proper",
+  "det-prop-diagonal-tower-coefficients",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "det-prop-diagonal-tower-trace",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "sk-prop-sf-existence",
+  "det-sf-comp-coherence-cocycle",
+  "det-sp-unique-right-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Opening paragraph, First identity, Second identity and final paragraph; mate calculations expanded using Stacks 0D6E, 07A7 and 0E48"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projective.*line.*adjunction|triangle.*identity|Tr_p|diagonal.*integration",
+   "results": {
+    "hits": 16,
+    "top": [
+     "Mathlib/CategoryTheory/GradedObject/Unitor.lean",
+     "Mathlib/CategoryTheory/GradedObject/Unitor.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+     "Mathlib/CategoryTheory/Category/Quiv.lean",
+     "Mathlib/CategoryTheory/Bicategory/Basic.lean",
+     "Mathlib/Probability/Kernel/Composition/MapComap.lean",
+     "Mathlib/Probability/Kernel/Composition/MapComap.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the rational projective-line diagonal/trace identities; generic adjunctions and right-adjoint uniqueness alone do not prove the geometric calculation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "rational projective line pushforward adjunction pullback Tate twist shifted two triangle identities",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "CategoryTheory.PullbackShift.adjunction",
+     "CategoryTheory.Adjunction.IsTriangulated.commShift",
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+     "CategoryTheory.Adjunction.IsTriangulated.mk''",
+     "CategoryTheory.Adjunction.IsTriangulated.mk'",
+     "CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated",
+     "CategoryTheory.MorphismProperty.Over.mapPullbackAdj"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the rational projective-line diagonal/trace identities; generic adjunctions and right-adjoint uniqueness alone do not prove the geometric calculation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.rightAdjointUniq",
+     "CategoryTheory.Adjunction.rightAdjointUniq_refl",
+     "CategoryTheory.Adjunction.rightAdjointUniq_inv_app",
+     "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit",
+     "CategoryTheory.Adjunction.unit_rightAdjointUniq_hom",
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans",
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans_app",
+     "CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the rational projective-line diagonal/trace identities; generic adjunctions and right-adjoint uniqueness alone do not prove the geometric calculation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Triangle identities for the projective line adjunction over E or Qbar with diagonal class and trace",
+   "results": {
+    "hits": 8,
+    "top": [
+     "WeierstrassCurve.Projective.PointClass",
+     "Projectivization.map_id",
+     "BrauerGroup",
+     "OnePoint.smul_infty_def",
+     "galLift_galRestrict'",
+     "InfiniteGalois.proj_adjoin_singleton_val",
+     "Configuration.ofField.instMembershipProjectivizationForallFinOfNatNat",
+     "Projectivization.mk'_eq_mk"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the rational projective-line diagonal/trace identities; generic adjunctions and right-adjoint uniqueness alone do not prove the geometric calculation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective line direct image is left adjoint to pullback with Tate twist and shift two via diagonal cycle class and integration trace on rational proetale derived categories",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+     "SheafOfModules.pushforwardPushforwardAdj"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the rational projective-line diagonal/trace identities; generic adjunctions and right-adjoint uniqueness alone do not prove the geometric calculation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"DerivedCategory\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the rational projective-line diagonal/trace identities; generic adjunctions and right-adjoint uniqueness alone do not prove the geometric calculation"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*(trace|adjunction)|proetale.*(trace|adjunction)|diagonal.*integral",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the rational projective-line diagonal/trace identities; generic adjunctions and right-adjoint uniqueness alone do not prove the geometric calculation",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"triangle\"",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.left_triangle_components",
+     "CategoryTheory.Adjunction.right_triangle_components",
+     "CategoryTheory.Adjunction.left_triangle_components_assoc",
+     "CategoryTheory.Adjunction.right_triangle_components_assoc",
+     "CategoryTheory.Adjunction.CoreUnitCounit.left_triangle",
+     "CategoryTheory.Adjunction.CoreUnitCounit.right_triangle",
+     "CategoryTheory.Adjunction.left_triangle",
+     "CategoryTheory.Adjunction.right_triangle"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "Generic triangle identities assume an already constructed adjunction; they do not prove the diagonal/trace transformations satisfy them. No match for this geometric item."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -62,5 +294,75 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-p1-adjunction-rational"
+ "unit": "sk-prop-p1-adjunction-rational",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-prop-p1-adjunction-rational-triangle",
+  "worker": "stage1",
+  "group": "Q56",
+  "summary": "Statement unchanged. Replaced nonexistent aggregate labels in the imported proof by existing component statements. Expanded both diagonal-kernel composites, including canonical exchange/projection compatibility, naturality for the diagonal class, trace base change and even shifts. Wrote the Hom bijections proving the adjunction, and cited finite-Tor equality and compactification comparison before applying existing Mathlib right-adjoint uniqueness. No new nodes. Second reading adds explicit ringed-module and properness citations, proves the first exchange comparison by equal tensor-counit transposes, writes the second coherence equality, and gives the compactification transport Hom maps.",
+  "blueprint": "Opening paragraph and First identity are realized in steps 1–2, Second identity in step 3, integration in step 4, and the concluding adjunction/uniqueness paragraph in steps 5–6. This retains unit sk-prop-p1-adjunction-rational step 2 and its diagonal-class/trace route; the finite-coefficient adjunction is a comparison pointer, not used for rational coefficients.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic unbounded composition on ringed topoi, applied to the pulled-back coefficient sheaves; the bounded rational adic composition node would not cover arbitrary localizing objects."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic equality of canonical projection and exchange transformations, precisely the formal compatibility invoked by the unit route; no purity or geometric adjunction is imported."
+   },
+   {
+    "node": "det-def-localizing-closure-ctf-equals-bc",
+    "why": "Coefficient Tor equality identifies the exact category on which Brown supplies the adjoint with the category of the item."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic properness of relative projective space verifies the hypothesis for the trivial compactification."
+   },
+   {
+    "node": "det-sf-comp-coherence-cocycle",
+    "why": "Generic compactification comparison identifies the chosen compact-support functor with the trivial-compactification direct image before uniqueness."
+   },
+   {
+    "node": "det-thm-sf-pf-field-localizing",
+    "why": "Existing localizing proper projection formula component is the rational projection input named by the unit, whose aggregate sk-thm-sf-pf-field label is not a DAG node."
+   },
+   {
+    "node": "det-prop-diagonal-tower-coefficients",
+    "why": "Existing coefficient/base-change component of the diagonal-tower unit supplies rational traces and their pullbacks, as required by the unit route."
+   },
+   {
+    "node": "det-prop-diagonal-tower-trace",
+    "why": "Existing trace component of the diagonal-tower unit supplies the two normalized integration identities, as required by the unit route."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Generic mate definition used to compute the transposes of the two exchanges and diagonal projections."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Generic composite-counit formula computes both Kunneth transposes and the identity normalization along each projection of the diagonal."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "lemma-nagata-projective-space-base-change-proper",
+  "det-sf-comp-coherence-cocycle",
+  "det-thm-sf-pf-field-localizing",
+  "det-prop-diagonal-tower-coefficients",
+  "det-prop-diagonal-tower-trace",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q56-ee09d8e95",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q56-ee09d8e95 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, report, unit/chapter route, cited nodes, and source passages. All six proof steps are supported with correct coefficient categories, base-change maps, properness, trace identities, edge cases, and Brown-adjoint transport. No new nodes or repairs are required. Review written to review.md."
+ }
 }

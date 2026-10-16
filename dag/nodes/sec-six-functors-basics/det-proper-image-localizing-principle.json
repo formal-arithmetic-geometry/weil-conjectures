@@ -3,43 +3,177 @@
  "blueprint": {
   "is": "det-proper-image-localizing-principle",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Functors preserving sums and generators preserve the localizing closures",
- "statement": "Let $\\mathcal T,\\mathcal T'$ be triangulated categories with arbitrary direct sums, $\\mathcal G\\subset\\mathcal T$ and\n$\\mathcal G'\\subset\\mathcal T'$ full subcategories, and $F\\colon\\mathcal T\\to\\mathcal T'$ an exact functor preserving\ndirect sums with $F(\\mathcal G)\\subset\\Loc(\\mathcal G')$. Then $F(\\Loc(\\mathcal G))\\subset\\Loc(\\mathcal G')$, and the\nrestriction $\\Loc(\\mathcal G)\\to\\Loc(\\mathcal G')$ is exact and preserves direct sums. In particular this applies\nwith $\\mathcal T=\\D(X_{\\mathrm{proét}},\\Lambda)$, $\\mathcal G=\\Dctf(X,\\Lambda)$ ([sk-def-localizing-closure]).",
+ "statement": "Let $\\mathcal T,\\mathcal T'$ be triangulated categories with arbitrary direct sums, $\\mathcal G\\subset\\mathcal T$ and\n$\\mathcal G'\\subset\\mathcal T'$ full subcategories, and $F\\colon\\mathcal T\\to\\mathcal T'$ an exact functor preserving\ndirect sums with $F(\\mathcal G)\\subset\\Loc(\\mathcal G')$. Then $F(\\Loc(\\mathcal G))\\subset\\Loc(\\mathcal G')$, and the\nrestriction $\\Loc(\\mathcal G)\\to\\Loc(\\mathcal G')$ is exact and preserves direct sums. In particular this applies\nwith $\\mathcal T=\\D(X_{\\mathrm{proét}},\\Lambda)$, $\\mathcal G=\\Dctf(X,\\Lambda)$ ([sk-def-localizing-closure]).\n\nHere triangulated categories and exact functors have the meaning of [def-weil-triangulated-category]. All direct sums are indexed by sets in a fixed indexing universe. For any class of objects $\\mathcal H$ of such a category $\\mathcal C$, $\\Loc(\\mathcal H)$ denotes the full subcategory on the objects belonging to every full replete triangulated subcategory of $\\mathcal C$ containing $\\mathcal H$ and closed under these ambient sums. Replete means closed under isomorphisms; the triangulated structure on a full triangulated subcategory is induced from its ambient category [def-weil-triangulated-subcategory]. In the final specialization the coefficient and derived-category conventions are precisely those of [sk-def-localizing-closure].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-principle.md",
   "place": "node det-proper-image-localizing-principle, order None"
  },
  "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-triangulated-subcategory",
   "sk-def-localizing-closure"
  ],
  "proof": [
   {
-   "text": "Let $\\mathcal S=\\{K\\in\\Loc(\\mathcal G):F(K)\\in\\Loc(\\mathcal G')\\}$. It contains $\\mathcal G$. It is closed under\nshifts and cones: $F$ is exact, so $F$ of a cone is a cone of objects of $\\Loc(\\mathcal G')$, which is\ntriangulated. It is closed under direct sums: $F(\\bigoplus K_s)\\cong\\bigoplus F(K_s)$, and $\\Loc(\\mathcal G')$ is\nclosed under direct sums. It is closed under isomorphisms. Hence $\\mathcal S$ is a localizing subcategory of\n$\\mathcal T$ containing $\\mathcal G$, so $\\mathcal S\\supset\\Loc(\\mathcal G)$ by minimality\n([sk-def-localizing-closure]).",
+   "text": "Unpack the intersection defining $\\Loc(\\mathcal H)$. The ambient category is a candidate. Every candidate contains $\\mathcal H$ and zero, is replete, is stable under every integer shift, and has the distinguished-triangle closure condition of [def-weil-triangulated-subcategory]. Each of these conditions is preserved by intersection of object predicates: an object, a shifted object, or a required vertex of a distinguished triangle lies in every candidate as soon as the given vertices do. The same argument applies to a small ambient coproduct of objects in every candidate. Thus the intersection is itself a full replete triangulated subcategory closed under small sums, and is contained in every candidate. This proves the closure properties and minimality used below, for arbitrary $\\mathcal H$, without a smallness assumption on the class of candidates.",
    "uses": [
-    "sk-def-localizing-closure"
+    "def-weil-triangulated-subcategory"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-principle.proof.md",
+    "place": "first paragraph, unpacking the definition before the minimality inference; full triangulated subcategories: Stacks Tag 05QM and Tag 05QX"
+   }
   },
   {
-   "text": "The restricted functor is exact because the triangulated structures on the localizing subcategories are\ninduced from $\\mathcal T$, $\\mathcal T'$. Direct sums in $\\Loc(\\mathcal G)$ and $\\Loc(\\mathcal G')$ are the ambient ones,\nso $F$ preserves them.",
+   "text": "Put $\\mathcal L=\\Loc(\\mathcal G)$ and $\\mathcal L'=\\Loc(\\mathcal G')$, and let $\\mathcal S$ be the full subcategory of $\\mathcal T$ on $K\\in\\mathcal L$ with $F(K)\\in\\mathcal L'$. The hypothesis puts every object of $\\mathcal G$ in $\\mathcal S$. Exactness means that $F$ is additive, commutes with shifts, and maps distinguished triangles to distinguished triangles [def-weil-triangulated-category]. In particular $F(0)\\simeq0$, so zero lies in $\\mathcal S$; $F(K[n])\\simeq F(K)[n]$ shows shift closure. If $K\\to L\\to M\\to K[1]$ is distinguished and $K,M\\in\\mathcal S$, $K,M\\in\\mathcal L$ imply $L\\in\\mathcal L$ by triangle closure; its image is distinguished, and $F(K),F(M)\\in\\mathcal L'$ force $F(L)\\in\\mathcal L'$. Thus $L\\in\\mathcal S$, which is the full triangulated-subcategory criterion [def-weil-triangulated-subcategory]. An isomorphism $K\\simeq L$ induces $F(K)\\simeq F(L)$, proving repleteness. For any small family $K_i\\in\\mathcal S$, its sum belongs to $\\mathcal L$ and $F(\\bigoplus_iK_i)\\simeq\\bigoplus_iF(K_i)$ belongs to $\\mathcal L'$; hence its sum lies in $\\mathcal S$. Thus $\\mathcal S$ is a localizing candidate containing $\\mathcal G$. Minimality from step 1 gives $\\mathcal L\\subseteq\\mathcal S$, proving $F(\\mathcal L)\\subseteq\\mathcal L'$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-principle.proof.md",
+    "place": "first paragraph, subcategory S, closure checks and minimality; exactness: Stacks Tag 014V, triangulated-subcategory criterion: Tags 05QM and 05QX"
+   }
+  },
+  {
+   "text": "Restrict $F$ on objects and morphisms using step 2; fullness makes its identity and composition laws the ambient laws. By [def-weil-triangulated-subcategory] both localizing subcategories carry the ambient shifts and precisely the ambient distinguished triangles whose vertices lie in them. The shift isomorphism of $F$ restricts because both subcategories are shift-stable. Every distinguished triangle in $\\mathcal L$ is ambient distinguished, so its $F$-image is ambient distinguished by [def-weil-triangulated-category] and has all vertices in $\\mathcal L'$ by step 2. It is therefore distinguished in $\\mathcal L'$. The restricted functor is exact.",
+   "uses": [
+    "def-weil-triangulated-subcategory",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-principle.proof.md",
+    "place": "second paragraph, exactness of the restriction; Stacks Tags 014V and 05QX"
+   }
+  },
+  {
+   "text": "For a small family $K_i\\in\\mathcal L$, let $K=\\bigoplus_iK_i$ be the ambient coproduct, which lies in $\\mathcal L$ by step 1. For every $A\\in\\mathcal L$, fullness identifies the coproduct universal-property map with the ambient bijection $\\operatorname{Hom}_{\\mathcal T}(K,A)\\simeq\\prod_i\\operatorname{Hom}_{\\mathcal T}(K_i,A)$, so the same coprojections exhibit $K$ as a coproduct in $\\mathcal L$. The identical argument holds in $\\mathcal L'$. Since $F$ preserves ambient coproduct cocones, its restricted functor therefore preserves these coproducts. For the empty family this argument says that the ambient zero is still initial in the full subcategory, so it covers empty sums too.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-principle.proof.md",
+    "place": "second paragraph, ambient direct sums; universal property written out"
+   }
+  },
+  {
+   "text": "For the final example use exactly the ambient module-object derived category and $\\Dctf$ specified in [sk-def-localizing-closure], not a category of derived-complete objects. It is an unbounded derived category under that convention, and has all small direct sums by [det-def-localizing-closure-existence] (1). Its closure of $\\Dctf$ is the same full replete coproduct-closed triangulated intersection by [sk-def-localizing-closure]. Thus steps 1--4 apply with this $\\mathcal T$ and $\\mathcal G$, whenever $F$ satisfies the stated hypotheses. No particular functor, geometric preservation theorem, or additional conclusion about coefficients is asserted.",
+   "uses": [
+    "sk-def-localizing-closure",
+    "det-def-localizing-closure-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-principle.proof.md",
+    "place": "statement, final sentence, and proof first paragraph; the existing localizing-closure definition and its existence lemma"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-localizing-closure"
+  "def-weil-triangulated-subcategory",
+  "def-weil-triangulated-category",
+  "sk-def-localizing-closure",
+  "det-def-localizing-closure-existence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-principle.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-principle.proof.md",
+  "place": "both paragraphs; intersection and coproduct universal properties expanded, generic definitions supplied inline"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localizing|localising|triangulated.*coproduct|preserv.*direct sums",
+   "results": "0 hit(s). ; subdirectory argument Mathlib/CategoryTheory/Triangulated",
+   "date": "2026-10-16",
+   "verdict": "invalid subdirectory argument (Mathlib prefix duplicated by wrapper); zero hits are not evidence of absence; rerun below with CategoryTheory/Triangulated"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact coproduct-preserving functor sends the localizing subcategory generated by G into that generated by G prime",
+   "results": "8 hit(s). CategoryTheory.exactFunctor; CategoryTheory.ExactFunctor.of; CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor; CategoryTheory.Limits.PreservesCoproduct.iso.congr_simp; CategoryTheory.Limits.PreservesColimitPair.iso; CategoryTheory.exactFunctor_iff; CategoryTheory.Limits.instPreservesFiniteCoproductsOfPreservesFiniteColimits; CategoryTheory.Limits.preservesFiniteCoproducts_of_reflects_of_preserves",
+   "date": "2026-10-16",
+   "verdict": "no match for the full theorem; inspected triangulated subcategory, finite triangulated envelope and Verdier-localizing sources; none supplies this coproduct-generated closure principle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.Subcategory, CategoryTheory.ObjectProperty.IsTriangulated, coproduct",
+   "results": "0 hit(s). ; loogle: unknown identifier 'CategoryTheory.Triangulated.Subcategory'",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier; no absence conclusion; subsequent valid identifier search recorded"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between triangulated categories preserving arbitrary direct sums and sending generators into a localizing subcategory preserves the localizing closure",
+   "results": "8 hit(s). CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Triangulated.Localization.isTriangulated; CategoryTheory.Triangulated.Localization.isTriangulated_functor; CategoryTheory.Functor.essImageDistTriang; CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle; CategoryTheory.ObjectProperty.IsTriangulatedClosed₂; CategoryTheory.ObjectProperty.IsTriangulatedClosed₃",
+   "date": "2026-10-16",
+   "verdict": "no match for the full theorem; inspected triangulated subcategory, finite triangulated envelope and Verdier-localizing sources; none supplies this coproduct-generated closure principle"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulatedClosed|PreservesCoproduct|localizing",
+   "results": "0 hit(s). ; subdirectory argument Mathlib/CategoryTheory/Triangulated",
+   "date": "2026-10-16",
+   "verdict": "invalid subdirectory argument (Mathlib prefix duplicated by wrapper); zero hits are not evidence of absence; rerun below with CategoryTheory/Triangulated"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.Subcategory.W, CategoryTheory.ObjectProperty.IsTriangulatedClosed₃",
+   "results": "0 hit(s). ; loogle: unknown identifier 'CategoryTheory.Triangulated.Subcategory.W'",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier; no absence conclusion; subsequent valid identifier search recorded"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If F is exact and preserves arbitrary direct sums and F G is contained in Loc G prime then F maps Loc G into Loc G prime",
+   "results": "8 hit(s). CategoryTheory.exactFunctor; CategoryTheory.leftExactFunctor; CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor; CategoryTheory.ExactFunctor.of; CategoryTheory.ExactFunctor; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.RightExactFunctor.ofExact_obj; CategoryTheory.rightExactFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match for the full theorem; inspected triangulated subcategory, finite triangulated envelope and Verdier-localizing sources; none supplies this coproduct-generated closure principle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing subcategory generated by a full subcategory is preserved by an exact functor that preserves all coproducts",
+   "results": "8 hit(s). CategoryTheory.LocalizerMorphism.liftingLocalizedFunctor; CategoryTheory.LocalizerMorphism.Derives; CategoryTheory.LocalizerMorphism.localizedFunctor; CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'; CategoryTheory.Functor.IsLocalization; CategoryTheory.Functor.q_isLocalization; CategoryTheory.Localization.LeftBousfield.isLocalization; CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ",
+   "date": "2026-10-16",
+   "verdict": "no match for the full theorem; inspected triangulated subcategory, finite triangulated envelope and Verdier-localizing sources; none supplies this coproduct-generated closure principle"
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|localising|IsTriangulatedClosed|PreservesCoproduct",
+   "results": "23 hit(s). Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean; subdirectory argument CategoryTheory/Triangulated",
+   "date": "2026-10-16",
+   "verdict": "no match for the full theorem; inspected triangulated subcategory, finite triangulated envelope and Verdier-localizing sources; none supplies this coproduct-generated closure principle"
+  },
+  {
+   "tool": "grep",
+   "query": "triangEnvelope|coproduct|colimit|inverseImage",
+   "results": "21 hit(s). Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean; Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean; subdirectory argument CategoryTheory/Triangulated",
+   "date": "2026-10-16",
+   "verdict": "no match for the full theorem; inspected triangulated subcategory, finite triangulated envelope and Verdier-localizing sources; none supplies this coproduct-generated closure principle"
+  },
+  {
+   "tool": "grep",
+   "query": "localizingClosure|localisingClosure|localizingHull|localisingHull|localizing.*coproduct|coproduct.*localizing",
+   "results": "0 hit(s). ; subdirectory argument CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match for the full theorem; inspected triangulated subcategory, finite triangulated envelope and Verdier-localizing sources; none supplies this coproduct-generated closure principle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated",
+   "results": "12 hit(s). CategoryTheory.ObjectProperty.IsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated.toContainsZero; CategoryTheory.ObjectProperty.IsTriangulated.toIsStableUnderShift; CategoryTheory.ObjectProperty.instIsClosedUnderBinaryProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms; CategoryTheory.ObjectProperty.instIsClosedUnderFiniteProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂",
+   "date": "2026-10-16",
+   "verdict": "no match for the full theorem; inspected triangulated subcategory, finite triangulated envelope and Verdier-localizing sources; none supplies this coproduct-generated closure principle"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -52,5 +186,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-proper-image-localizing"
+ "unit": "sk-prop-proper-image-localizing",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-proper-image-localizing-principle",
+  "worker": "stage1",
+  "summary": "Expanded the generic localizing closure inline rather than misapplying the pro-etale-specific definition. Proved intersection closure, the inverse-image localizing argument, exactness of the restriction, its coproduct universal property, and the pro-etale specialization in five steps. Reused existing triangulated definitions and the existing derived-coproduct existence statement; no new nodes or Mathlib leaves. Added exact citations, actual searches, and source places.",
+  "blueprint": "Step 1 expands the definition used by the first proof paragraph; step 2 realizes that paragraph. Steps 3--4 expand the second paragraph. Step 5 checks the statement final sentence. This imported detail node is not the unit key statement, so no unit realization record is changed. The blueprint ancestor is the item itself, hence from=null; searches found no other node stating the same theorem.",
+  "tool_uses": [
+   {
+    "node": "det-def-localizing-closure-existence",
+    "why": "Clause (1) supplies triangulated ambient pro-etale derived categories and small sums for the final example. This foundational tool of the already cited localizing-closure definition does not replace the proper-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-localizing-closure-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q11-c2f962abb",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-c2f962abb (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, current blueprint route and Stacks source locations. All five steps check; coefficient specialization uses the unbounded condensed-module derived category. Accepted coproduct-existence tool use. No new nodes, duplicates, cycles or repairs. Detailed checks recorded in review.md."
+ }
 }

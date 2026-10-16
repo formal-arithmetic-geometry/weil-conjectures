@@ -1,0 +1,73 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-relative-symmetric-monoidal-localization",
+  "date": "2026-10-16",
+  "group": "Q21"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction: encode the coherent tensor on coefficient models by its finite-pointed-set diagram before descending operations and their coherent comparisons.",
+   "via": [
+    "lem-coef-relative-symmetric-monoidal-localization",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "status": "unsplit",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "id": "lem-coef-symmetric-monoidal-segal-classification",
+ "title": "Symmetric monoidal infinity categories as Segal diagrams",
+ "statement": "Use the infinity-category and universe conventions of [def-coef-complete-algebroid], enlarging universes as necessary. Let $\\mathsf{Fin}_*$ be the category of finite pointed sets, write $\\langle n\\rangle=\\{*,1,\\ldots,n\\}$, and let $\\rho_i:\\langle n\\rangle\\to\\langle1\\rangle$ send $i$ to $1$ and every other element to $*$. An inert map has exactly one preimage for each non-basepoint of its target. A Segal diagram is a functor $F:N(\\mathsf{Fin}_*)\\to\\mathsf{Cat}_\\infty$ for which $(F(\\rho_i))_i:F(\\langle n\\rangle)\\to F(\\langle1\\rangle)^n$ is an equivalence for every $n\\geq0$, including $F(\\langle0\\rangle)\\simeq *$. Here $N$ denotes the simplicial nerve. A symmetric monoidal infinity category is encoded by a cocartesian fibration $p:\\mathcal A^{\\otimes}\\to N(\\mathsf{Fin}_*)$ whose fiber over $\\langle n\\rangle$ is identified with $\\mathcal A^n$, $\\mathcal A=p^{-1}(\\langle1\\rangle)$, by pushforward along the $\\rho_i$. Straightening, which assigns to a cocartesian fibration its fibers and pushforward functors, identifies symmetric monoidal infinity categories with Segal diagrams: the inverse, unstraightening, produces a cocartesian fibration over $N(\\mathsf{Fin}_*)$ with those fibers. The underlying category is $F(\\langle1\\rangle)$; the active maps $\\langle n\\rangle\\to\\langle1\\rangle$ sending all non-basepoints to $1$ give its $n$-ary tensor operations, including the unit when $n=0$. Natural transformations between Segal diagrams correspond to strong symmetric monoidal functors, meaning functors over $N(\\mathsf{Fin}_*)$ preserving cocartesian arrows, and this correspondence identifies their spaces of equivalences and higher homotopies.\n\nFor symmetric monoidal $\\mathcal A^{\\otimes},\\mathcal B^{\\otimes}$, let $\\operatorname{Fun}^{\\otimes}(\\mathcal A,\\mathcal B)$ be the full infinity subcategory of functors between their total categories over $N(\\mathsf{Fin}_*)$ spanned by these strong functors; its morphisms are monoidal natural transformations, not necessarily invertible. For every small infinity category $K$, the functor category $\\operatorname{Fun}(K,\\mathcal B)$ has the pointwise symmetric monoidal structure, classified by $\\langle n\\rangle\\mapsto\\operatorname{Fun}(K,F_{\\mathcal B}(\\langle n\\rangle))$, and currying gives a natural equivalence\n$$\\operatorname{Fun}^{\\otimes}(\\mathcal A,\\operatorname{Fun}(K,\\mathcal B))\\simeq\\operatorname{Fun}(K,\\operatorname{Fun}^{\\otimes}(\\mathcal A,\\mathcal B)).$$\nFor an ordinary symmetric monoidal category $A$, its operadic nerve $N(A^{\\otimes})$ is such a symmetric monoidal infinity category, with underlying category $N(A)$. Here objects of $A^{\\otimes}$ are finite tuples, and a morphism over $\\alpha:\\langle n\\rangle\\to\\langle m\\rangle$ consists of maps $\\bigotimes_{\\alpha(i)=j}X_i\\to Y_j$ for $1\\leq j\\leq m$.",
+ "stmt_deps": [
+  "def-coef-complete-algebroid"
+ ],
+ "source": {
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Definition 2.4.2.1, Example 2.4.2.4 and Remark 2.4.2.6 (printed pp. 293-294); Definition 2.1.3.7 and Remark 2.1.3.4 (printed p. 185) for strong functors and pointwise diagram categories; Example 2.1.2.21 (printed p. 183) for ordinary nerves. Read online; no Stacks tag states this infinity-categorical classification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Symmetric monoidal infinity categories classified by Segal functors from finite pointed sets to Cat infinity and strong monoidal functors by natural transformations",
+   "results": "{\"t\": \"2026-10-16T14:58:20Z\", \"tool\": \"leanfinder\", \"query\": \"Symmetric monoidal infinity categories classified by Segal functors from finite pointed sets to Cat infinity and strong monoidal functors by natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.Augmented\", \"SSet.QCat.bicategory\", \"SSet.StrictSegal\", \"SSet\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.StrictSegalCore\"], \"digest\": \"4ee9ac6bf8092aea\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:15-34,49-74 and SimplicialSet/StrictSegal.lean:39-58. QCat is a strict bicategory with homotopy-category homs; StrictSegal concerns unique simplex spine extensions. Neither classifies symmetric monoidal infinity categories or strong functor infinity categories."
+  },
+  {
+   "tool": "grep",
+   "query": "Straighten|Unstraighten|Monoidal.*QCat|Segal.*[Mm]onoid|[Mm]onoid.*Segal",
+   "results": "{\"t\": \"2026-10-16T14:58:39Z\", \"tool\": \"grep\", \"query\": \"Straighten|Unstraighten|Monoidal.*QCat|Segal.*[Mm]onoid|[Mm]onoid.*Segal\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:15-34,49-74 and SimplicialSet/StrictSegal.lean:39-58. QCat is a strict bicategory with homotopy-category homs; StrictSegal concerns unique simplex spine extensions. Neither classifies symmetric monoidal infinity categories or strong functor infinity categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "CoCartesian fibrations over finite pointed sets with Segal product fibres classify symmetric monoidal infinity categories and strong monoidal functors",
+   "results": "{\"t\": \"2026-10-16T14:58:40Z\", \"tool\": \"leansearch\", \"query\": \"CoCartesian fibrations over finite pointed sets with Segal product fibres classify symmetric monoidal infinity categories and strong monoidal functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.whiskerRight_app_apply\", \"CategoryTheory.Functor.IsFibered\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"SSet.instCartesianMonoidalCategory\", \"SSet.instFiniteTensorUnit\", \"SSet.instFiniteObjOppositeSimplexCategoryTensorObj\", \"CategoryTheory.Functor.Monoidal.ofChosenFiniteProducts.congr_simp\", \"CategoryTheory.symmetricOfHasFiniteProducts\"], \"digest\": \"2924c3937026113d\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:15-34,49-74 and SimplicialSet/StrictSegal.lean:39-58. QCat is a strict bicategory with homotopy-category homs; StrictSegal concerns unique simplex spine extensions. Neither classifies symmetric monoidal infinity categories or strong functor infinity categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\"",
+   "results": "{\"t\": \"2026-10-16T14:58:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.ofCore\"], \"digest\": \"7ad685949eb87375\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:15-34,49-74 and SimplicialSet/StrictSegal.lean:39-58. QCat is a strict bicategory with homotopy-category homs; StrictSegal concerns unique simplex spine extensions. Neither classifies symmetric monoidal infinity categories or strong functor infinity categories."
+  }
+ ],
+ "kind": "statement"
+}
