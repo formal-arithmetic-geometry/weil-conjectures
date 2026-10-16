@@ -27,9 +27,85 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=\\Delta^n$, $X=N(K_V)$ and $Y=N(P_V)$, with their projections to $S$. Let $V^+(r)$ be $V(r)$ with one new final object $*_r$; extend each $V(r\\leq s)$ by $*_r\\mapsto *_s$ and send the unique arrows into $*_r$ to the unique arrows into $*_s$. This is a strict functor. Its Grothendieck category has exactly the arrows of $P_V$: arrows between old objects have the stated fiber component, arrows from an old object over $r$ to $*_s$ exist uniquely for $r\\leq s$, arrows between new objects are the order arrows, and arrows from new to old objects do not exist. Hence the identification with $P_V$ commutes with composition and projection. Both $X\\to S$ and $Y\\to S$ are cocartesian fibrations in the horn sense of [def-coef-infinity-fibrations]. Indeed an inner horn in a nerve is filled by composing the consecutive arrows; the two composites on its overlap agree by associativity. For an arrow $r\\leq s$, the chosen lift from $x$ is $(r\\leq s,1_{V(r\\leq s)x})$, with the same formula in $V^+$. Every arrow over $r\\leq t$ factors uniquely through this lift followed by an arrow over $s\\leq t$. In the defining $\\Lambda_0^2$ lifting problem this factorization supplies the missing edge; in a $\\Lambda_0^3$ problem the two possible composites agree by uniqueness, and for $m>3$ every missing face is forced by the same factorization and associativity (the remaining faces already lie in the horn). These are exactly the required cocartesian-edge horn fillers. The inclusion $j:X\\hookrightarrow Y$ preserves these lifts. More generally the $\\Lambda_0^2$ condition for an edge $e$ gives existence of each factor through $e$. For uniqueness, if $ue=ve=h$, take the $\\Lambda_0^3$ with vertices $(x,y,y,z)$ and edges $01=02=e$, $03=h$, $12=1_y$, $13=u$, $23=v$; its missing face forces $u=v$. Thus a cocartesian arrow $(r\\leq s,\\alpha)$ has the unique factorization property. Factoring the displayed chosen lift through it gives $\\beta\\alpha=1$; uniqueness applied to $(\\alpha\\beta)\\alpha=\\alpha$ gives $\\alpha\\beta=1$. Conversely an invertible component has the same unique factorization property and hence the horn fillers just described. Since $V(r)\\subseteq V^+(r)$ preserves isomorphisms, $j$ preserves every cocartesian edge. All these simplicial sets fit in the chosen universe.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Opening construction of the relative join fibration; explicit ordinary Grothendieck-category verification replaces Lemma 5.2.3.17."
+   }
+  },
+  {
+   "text": "For $Z=X,Y$ form $H_Z\\to S$ with $m$-simplices $(\\sigma:\\Delta^m\\to S,h:\\Delta^m\\times_S Z\\to\\mathcal E)$ as in [lem-coef-infinity-relative-exponential-restriction]. The projections are cartesian fibrations by the opposite dual of [lem-cbc-enhanced-relative-exponential]. To specify this dual precisely, reverse every ordinal using $\\alpha^{\\mathrm{rev}}(i)=m-\\alpha(k-i)$ for $\\alpha:[k]\\to[m]$. This interchanges first and last horns and identifies the opposite of a pullback with the pullback of the opposites. Thus $Z^{\\mathrm{op}}\\to S^{\\mathrm{op}}$ is cartesian. Apply the cited theorem with target $\\mathcal E^{\\mathrm{op}}$ and take opposites: its resulting cocartesian fibration becomes the stated cartesian fibration $H_Z\\to S$. The degreewise identification sends $(\\sigma,h)$ to the reversed map on the reversed pullback. Equivalences are preserved under reversal since their two inverse-triangle witnesses reverse. Its edge criterion therefore says that an edge of $H_Z$ is cartesian precisely when its associated map $\\Delta^1\\times_S Z\\to\\mathcal E$ sends every cocartesian edge to an equivalence. Restriction $R:H_Y\\to H_X$ preserves cartesian edges: by Step 1, the pullback of $j$ carries cocartesian edges to cocartesian edges, so the restriction of such a map retains this property. Here the pullbacks along an edge are exactly the Grothendieck categories of the restricted two-term strict functors, with the same invertible-component criterion. The fibers identify degreewise with $\\operatorname{Fun}(Z_r,\\mathcal E)$, since a constant base simplex gives $\\Delta^m\\times Z_r$. Finally [lem-coef-infinity-relative-exponential-restriction] applies to $j$, which is degreewise injective, and supplies the inner-fibration property of $R$.",
+   "uses": [
+    "lem-coef-infinity-relative-exponential-restriction",
+    "lem-cbc-enhanced-relative-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Relative functor categories and their cartesian projections, as in equation 7.22; the isofibration assertion is used only as an inner fibration."
+   }
+  },
+  {
+   "text": "Write $Q=F|_X$. Define $b:S\\to H_X$ by $b(\\sigma)=(\\sigma,Q\\circ\\operatorname{pr}_X)$ for each simplex $\\sigma:\\Delta^m\\to S$. Define $a:\\partial S\\to H_Y$ by $a(\\sigma)=(\\sigma,F\\circ\\operatorname{pr}_Y)$; this is defined because $\\operatorname{pr}_Y$ has image in $(N\\pi_V)^{-1}(\\partial S)\\subseteq B_V$. Pulling back along a face or degeneracy just precomposes the displayed maps, so $a,b$ are simplicial and $Ra=b|_{\\partial S}$. The projection of $b$ is the identity of $S$. At a vertex $r$, the strict fiber of $X$ is $N(V(r))$ and that of $Y$ is $N(V(r)^{\\triangleright})$. The latter equals the right join cone on $N(V(r))$: every chain consists of an initial chain of old objects followed by new final vertices, with precisely the faces and degeneracies of the join. The vertex $a(r)$ is the actual prescribed map on this fiber, not a replacement chosen up to equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Unwinding the relative-exponential adjunction and the given lifting square (7.21)."
+   }
+  },
+  {
+   "text": "Let $r=0$ and write $c=a(0):N(V(0))^{\\triangleright}\\to\\mathcal E$. The vertex $0$ lies in $\\partial\\Delta^n$ because $n\\geq1$. The induced coherent cocone is precisely the cocone in the hypothesis: on $N(V(0))\\times\\Delta^1$ the time-zero vertices remain old and the time-one vertices become the new final object. Hence it is colimiting. Apply [lem-coef-infinity-cocone-restriction-initial] with $K=N(V(0))$. For every $t$ in the fiber $(H_Y)_0=\\operatorname{Fun}(K^{\\triangleright},\\mathcal E)$ it gives the equivalence\n$$\\operatorname{Map}_{(H_Y)_0}(a(0),t)\\longrightarrow\\operatorname{Map}_{(H_X)_0}(Ra(0),Rt).$$\nThe target cone $t$ may have any base diagram, exactly as required by that node. This establishes relative initiality in the entire fiber, rather than only initiality in the subcategory with base $Q|_K$ fixed.",
+   "uses": [
+    "lem-coef-infinity-cocone-restriction-initial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Condition (*) gives fiberwise relative initiality, Proposition 7.1.6.13 (colimit dual)."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-cartesian-initial-boundary-lift] with $\\mathcal A=H_Y$, $\\mathcal D=H_X$, base $S$, and the square $(a,b)$ of Step 3. Step 2 gives both cartesian fibrations, the inner fibration $R$, and preservation of cartesian edges. Step 4 gives every outgoing mapping-space equivalence required at the initial vertex. The dimension is positive. We obtain $\\widetilde a:S\\to H_Y$ with $\\widetilde a|_{\\partial S}=a$ and $R\\widetilde a=b$ exactly. Its projection to $S$ is the identity because the projection of $b$ is the identity and $R$ lies over $S$.",
+   "uses": [
+    "lem-coef-infinity-cartesian-initial-boundary-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Promotion through the cartesian family and boundary filling: Proposition 7.1.5.19(2), Corollary 7.1.5.17."
+   }
+  },
+  {
+   "text": "Uncurry this section explicitly. For an $m$-simplex $y:\\Delta^m\\to Y$ put $\\sigma=\\pi_Vy$ and write $\\widetilde a(\\sigma)=(\\sigma,h_\\sigma)$. Set $\\widetilde F(y)=h_\\sigma(\\operatorname{id}_{\\Delta^m},y)$, evaluated on the diagonal simplex in $\\Delta^m\\times_S Y$. The simplicial identities for $\\widetilde a$ say $h_{\\sigma\\alpha}=h_\\sigma\\circ(\\alpha\\times\\operatorname{id})$ on the corresponding pullback, so this rule commutes with every simplicial operator. The equality $R\\widetilde a=b$ implies $\\widetilde F|_X=Q$; the equality $\\widetilde a|_{\\partial S}=a$ implies $\\widetilde F=F$ on $(N\\pi_V)^{-1}(\\partial S)$. These two subsets have union $B_V$, and the maps agree on their intersection because they both equal the original $F$ there. Thus $\\widetilde F|_{B_V}=F$ exactly. Every vertex fiber lies in that boundary preimage, so every prescribed fiber cocone, including every higher simplex in it, is fixed. The construction used the given colimit at vertex $0$ and the hypothesis supplies it even when $V(0)$ is empty, in which case it means the specified apex is initial. No transition functor was asked to preserve a colimit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Uncurrying the solution of equation 7.21 and checking exact agreement on both pieces of the prescribed union."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-relative-exponential-restriction",
+  "lem-cbc-enhanced-relative-exponential",
+  "lem-coef-infinity-cocone-restriction-initial",
+  "lem-coef-infinity-cartesian-initial-boundary-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02ZR",
+  "place": "Lemma 7.3.4.5, proof via relative exponentials, relative initiality and exact boundary lifting. Online sources read; absent from literature/. Explicit ordinary nerve calculations and currying supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -121,10 +197,45 @@
    "results": "{\"t\": \"2026-10-16T16:49:05Z\", \"tool\": \"leanfinder\", \"query\": \"A diagram valued in an infinity category admits extension along a mapping cylinder of a Grothendieck opfibration, relative to the boundary of an ordinal, when each fiber cone is universal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\"], \"digest\": \"65ad976a8c797b09\"}",
    "date": "2026-10-16",
    "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:53-69,182-187,222-240 and Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean. These hits construct ordinary right Kan extensions of simplicial objects and prove 2-coskeletality under StrictSegal; arbitrary quasicategories need not be strict Segal. They do not extend a quasicategory-valued diagram on the prescribed collage boundary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "prescribed-boundary extension for a cocartesian fibration over a simplex with colimiting fiber cocones",
+   "results": "{\"t\": \"2026-10-16T18:26:12Z\", \"tool\": \"leanfinder\", \"query\": \"prescribed-boundary extension for a cocartesian fibration over a simplex with colimiting fiber cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"CategoryTheory.Functor.IsCocartesian.map\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\"], \"digest\": \"8b1740a6afd6fe1c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary fiberwise colimits, StrictSegal right Kan extensions, and ordinary horn-filling statements; the read source files do not assert extension of arbitrary quasicategory-valued collage diagrams with a prescribed boundary. The first Loogle query reports unknown identifier cocartesianFibration, so that query alone is inconclusive. The valid restriction and inner-fibration Loogle queries for the prerequisites were also inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, cocartesianFibration, IsColimit",
+   "results": "{\"t\": \"2026-10-16T18:26:13Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, cocartesianFibration, IsColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'cocartesianFibration'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary fiberwise colimits, StrictSegal right Kan extensions, and ordinary horn-filling statements; the read source files do not assert extension of arbitrary quasicategory-valued collage diagrams with a prescribed boundary. The first Loogle query reports unknown identifier cocartesianFibration, so that query alone is inconclusive. The valid restriction and inner-fibration Loogle queries for the prerequisites were also inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesianFibration|relative.?Kan|fiberwise.?relative",
+   "results": "{\"t\": \"2026-10-16T18:26:13Z\", \"tool\": \"grep\", \"query\": \"cocartesianFibration|relative.?Kan|fiberwise.?relative\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary fiberwise colimits, StrictSegal right Kan extensions, and ordinary horn-filling statements; the read source files do not assert extension of arbitrary quasicategory-valued collage diagrams with a prescribed boundary. The first Loogle query reports unknown identifier cocartesianFibration, so that query alone is inconclusive. The valid restriction and inner-fibration Loogle queries for the prerequisites were also inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a diagram over a cocartesian fibration from the boundary of a simplex when fiberwise cocones are colimits",
+   "results": "{\"t\": \"2026-10-16T18:26:13Z\", \"tool\": \"leansearch\", \"query\": \"Extend a diagram over a cocartesian fibration from the boundary of a simplex when fiberwise cocones are colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone\", \"CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone\", \"CategoryTheory.extendCofanIsColimit\", \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.colimit.desc_extend\", \"CategoryTheory.Limits.Cocone.extend_pt\"], \"digest\": \"ffd604088145bc66\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary fiberwise colimits, StrictSegal right Kan extensions, and ordinary horn-filling statements; the read source files do not assert extension of arbitrary quasicategory-valued collage diagrams with a prescribed boundary. The first Loogle query reports unknown identifier cocartesianFibration, so that query alone is inconclusive. The valid restriction and inner-fibration Loogle queries for the prerequisites were also inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative cocartesian fibration lifting problem over boundary simplex",
+   "results": "{\"t\": \"2026-10-16T18:26:33Z\", \"tool\": \"leanfinder\", \"query\": \"relative cocartesian fibration lifting problem over boundary simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn₃₁.exists_desc\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.KanComplex.hornFilling\", \"SSet.RelativeMorphism.ofSimplex₀\"], \"digest\": \"7ffbffee318db15b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary fiberwise colimits, StrictSegal right Kan extensions, and ordinary horn-filling statements; the read source files do not assert extension of arbitrary quasicategory-valued collage diagrams with a prescribed boundary. The first Loogle query reports unknown identifier cocartesianFibration, so that query alone is inconclusive. The valid restriction and inner-fibration Loogle queries for the prerequisites were also inspected."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-fiber-colimit-collage",
@@ -132,5 +243,29 @@
   "group": "Q20"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-fiber-cocone-simplex-extension",
+  "worker": "stage1",
+  "summary": "Retain the statement and split the local extension by constructing the two relative functor simplicial sets. Reuse the existing relative-exponential theorem by opposites for their cartesian fibrations. Three smaller statement-only prerequisites supply restriction inner fibrancy, the relative-initial mapping test of a colimit, and fiberwise relative-initial boundary lifting. Verify the strict Grothendieck and nerve identifications, curry the exact prescribed map, and uncurry the exact filler. No global collage assembly or finite-poset Kan extension is cited.",
+  "blueprint": "Proof paragraph 2, derived coefficient adjunction and coherent tower realization, through the pointed-model stability foundation and the finite pushout grid in lem-coef-suspension-square-comparison: the underlying fiber-cone assembly used to construct a finite-poset extension, before proving its unit or its Kan universal property. Local relative extension over one positive-dimensional simplex, with the boundary already fixed, in the skeletal assembly proof. Steps 1--6 realize the local fiber-cone extension required by the skeletal assembly, below the finite pushout grid and coherent realization in paragraph 2 of prop-coef-integral-exceptional-adjoint.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-relative-exponential",
+    "why": "Generic relative-exponential theorem, used by opposites for the cartesian projections and their edge criterion. The unit has no substitute for this parametrized functor-category construction; no compactification or other off-route proof is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-relative-exponential"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NA-446a35a9b",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-446a35a9b (reviewer sub-agent of L); spot-checked: I read the item, its six steps, the three new nodes and the full statements of the cited nodes (def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, lem-cbc-enhanced-relative-exponential); the item uses the colimit hypothesis only at vertex 0. Its only citer, parent lem-coef-infinity-fiber-colimit-collage step 4, applies it correctly. Kerodon sources, read online: 02ZR (Lemma 7.3.4.5), 02XB (7.1.6.13), 02WU (7.1.5.19(2)), 02WS (7.1.5.17). The split follows 02ZR's proof exactly: relative functor categories (0472), an isofibration/inner-fibration restriction, 02XB fiberwise, 02WU promotion, then the boundary filler; 02WS replaces 06A5, which is equivalent for a single simplex. Step checks: (1) the horn analysis holds; the Λ^3_0 uniqueness argument with u=v is right and nerves are 2-coskeletal. (2) The opposite dual of the relative-exponential node gives cartesian H_Z with the right edge criterion, and R preserves cartesian edges. (3) a and b are well defined and Ra=b on the boundary. (4) The fiber of H_Y over 0 is Fun(K^▷,E), and the test covers every base diagram. (5) All hypotheses of the boundary-lift node hold. (6) The uncurrying is exact on X and on the boundary preimage, whose union is B_V. New nodes: relative-exponential-restriction is true by flatness of cocartesian fibrations, left properness of the Joyal model structure and 2-out-of-3; the S=pt case is Mathlib's instInnerFibrationAppPreOfMonoOfQuasicategory, a special case only, not a leaf. cocone-restriction-initial is the colimit dual of 02XB; small cases K empty and K a point check out. cartesian-initial-boundary-lift is 02WU(2) plus 02WS; n=1, R=id and S=pt check out, and n=0 is correctly excluded. None restates a clause of the item. The duplicate search found no match among relative-kan-existence, parameter-cone-extension, kan-mapping-restriction, isofibration-exponentiation, join-cone-calculus, anodyne-cocones or cbc-terminal-boundary-extension. No cycles. Accepted tool_use: lem-cbc-enhanced-relative-exponential, a generic construction that this unit's route does not supply. No SGA is cited, no target is touched, and I made no fixes."
+ }
 }

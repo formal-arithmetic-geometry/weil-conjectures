@@ -1,0 +1,96 @@
+{
+ "id": "lem-coef-infinity-relative-exponential-restriction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction and coherent tower realization, through the pointed-model stability foundation and the finite pushout grid in lem-coef-suspension-square-comparison: the underlying fiber-cone assembly used to construct a finite-poset extension, before proving its unit or its Kan universal property. Local relative extension over one positive-dimensional simplex, with the boundary already fixed, in the skeletal assembly proof. Prerequisite: Restriction of relative exponentials is an inner fibration.",
+   "via": [
+    "lem-coef-infinity-fiber-cocone-simplex-extension",
+    "lem-coef-infinity-fiber-colimit-collage",
+    "lem-coef-infinity-finite-poset-kan-extension",
+    "lem-coef-suspension-square-comparison",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Restriction of relative exponentials is an inner fibration",
+ "statement": "Use quasicategories, simplicial products, pullbacks and mapping spaces of [def-cbc-enhanced-diagrams-cones] and cocartesian fibrations of [def-coef-infinity-fibrations]. Let $S,X,Y,\\mathcal E$ be quasicategories in a fixed universe, let $p:X\\to S$ and $q:Y\\to S$ be cocartesian fibrations, and let $j:X\\hookrightarrow Y$ be a degreewise injective simplicial map satisfying $qj=p$. For $Z=X,Y$ define $H_Z\\to S$ by\n$$ (H_Z)_m=\\{(\\sigma,h):\\ \\sigma:\\Delta^m\\to S,\\quad h:\\Delta^m\\times_S Z\\to\\mathcal E\\}, $$\nwith simplicial operators given by pulling back $\\sigma$ and restricting $h$; projection forgets $h$. Then $H_X,H_Y$ are quasicategories and the restriction map\n$$ R:H_Y\\longrightarrow H_X,\\qquad (\\sigma,h)\\longmapsto(\\sigma,h|_{\\Delta^m\\times_S X}) $$\nis an inner fibration: every commutative lifting square for $R$ against $\\Lambda_i^m\\hookrightarrow\\Delta^m$, $0<i<m$, has a filler agreeing exactly on the horn. No colimit hypothesis on $\\mathcal E$ and no fullness hypothesis on $j$ are imposed.",
+ "source": {
+  "document": "https://kerodon.net/tag/02ZR",
+  "place": "Lemma 7.3.4.5, proof of the isofibration assertion for V, with target base a point: the same proof applies to a monomorphism X -> Y between cocartesian fibrations. Only its inner-fibration consequence is asserted here. Relative exponentials: Corollary 5.3.6.9 (0472). Read online; not archived. Kerodon tags, not Stacks tags."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of relative exponential simplicial sets along a monomorphism between cocartesian fibrations is an isofibration",
+   "results": "{\"t\": \"2026-10-16T18:32:07Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of relative exponential simplicial sets along a monomorphism between cocartesian fibrations is an isofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.Subcomplex.instIsIsoToRangeOfMono\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\"], \"digest\": \"1b97535e38ca8f9c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, instInnerFibrationAppPreOfMonoOfQuasicategory. It proves the ordinary internal-Hom restriction is an inner fibration; our relative exponential allows the base simplex sigma to vary, so its horns pull back X,Y along that varying sigma and are not ordinary products with one fixed simplicial set. This is not a one-line specialization. Basic.lean:39-50 only supplies inner-horn filling for a quasicategory. CategoryWithFibrations.lean:77-85 concerns Kan fibrations; ordinary FiberedCategory results have ordinary categories as targets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative exponential restriction is an inner fibration for a monomorphism of cocartesian fibrations",
+   "results": "{\"t\": \"2026-10-16T18:32:08Z\", \"tool\": \"leansearch\", \"query\": \"Relative exponential restriction is an inner fibration for a monomorphism of cocartesian fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExponentiableMorphism.noConfusionType\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.ExponentiableMorphism.mk.noConfusion\", \"CategoryTheory.ExponentiableMorphism.noConfusion\", \"CategoryTheory.exponentialIdealReflective\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"HomotopicalAlgebra.instIsMultiplicativeFibrations\", \"CategoryTheory.ExponentiableMorphism.OverMkHom\"], \"digest\": \"e2d2c5bd99451b0b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, instInnerFibrationAppPreOfMonoOfQuasicategory. It proves the ordinary internal-Hom restriction is an inner fibration; our relative exponential allows the base simplex sigma to vary, so its horns pull back X,Y along that varying sigma and are not ordinary products with one fixed simplicial set. This is not a one-line specialization. Basic.lean:39-50 only supplies inner-horn filling for a quasicategory. CategoryWithFibrations.lean:77-85 concerns Kan fibrations; ordinary FiberedCategory results have ordinary categories as targets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InnerFibration\", \"pre\"",
+   "results": "{\"t\": \"2026-10-16T18:32:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"pre\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.instInnerFibrationAppPreOfMonoOfQuasicategory\"], \"digest\": \"e48d737d9d2e7766\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, instInnerFibrationAppPreOfMonoOfQuasicategory. It proves the ordinary internal-Hom restriction is an inner fibration; our relative exponential allows the base simplex sigma to vary, so its horns pull back X,Y along that varying sigma and are not ordinary products with one fixed simplicial set. This is not a one-line specialization. Basic.lean:39-50 only supplies inner-horn filling for a quasicategory. CategoryWithFibrations.lean:77-85 concerns Kan fibrations; ordinary FiberedCategory results have ordinary categories as targets."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?exponential|cocartesian|isofibration",
+   "results": "{\"t\": \"2026-10-16T18:32:08Z\", \"tool\": \"grep\", \"query\": \"relative.?exponential|cocartesian|isofibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, instInnerFibrationAppPreOfMonoOfQuasicategory. It proves the ordinary internal-Hom restriction is an inner fibration; our relative exponential allows the base simplex sigma to vary, so its horns pull back X,Y along that varying sigma and are not ordinary products with one fixed simplicial set. This is not a one-line specialization. Basic.lean:39-50 only supplies inner-horn filling for a quasicategory. CategoryWithFibrations.lean:77-85 concerns Kan fibrations; ordinary FiberedCategory results have ordinary categories as targets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dependent functor restriction over a common base lifts inner horns when the exponent inclusion is a monomorphism",
+   "results": "{\"t\": \"2026-10-16T18:32:19Z\", \"tool\": \"leanfinder\", \"query\": \"Dependent functor restriction over a common base lifts inner horns when the exponent inclusion is a monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.horn₃₂.exists_desc\", \"SSet.skeletonOfMono\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.horn₃₁.exists_desc\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.J\", \"SSet.skeletonOfMono_obj_eq_top\"], \"digest\": \"9eb88d581678111d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, instInnerFibrationAppPreOfMonoOfQuasicategory. It proves the ordinary internal-Hom restriction is an inner fibration; our relative exponential allows the base simplex sigma to vary, so its horns pull back X,Y along that varying sigma and are not ordinary products with one fixed simplicial set. This is not a one-line specialization. Basic.lean:39-50 only supplies inner-horn filling for a quasicategory. CategoryWithFibrations.lean:77-85 concerns Kan fibrations; ordinary FiberedCategory results have ordinary categories as targets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a quasicategory, restriction from dependent function objects associated to an inclusion of left fibered simplicial sets is an inner fibration",
+   "results": "{\"t\": \"2026-10-16T19:14:14Z\", \"tool\": \"leanfinder\", \"query\": \"In a quasicategory, restriction from dependent function objects associated to an inclusion of left fibered simplicial sets is an inner fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.Quasicategory.hornFilling'\", \"SSet.StrictSegal.quasicategory\", \"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling\", \"SSet.StrictSegal.quasicategory'\", \"SSet.modelCategoryQuillen.I\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"6145a7d92cad2979\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The semantic hits are Quasicategory.hornFilling, StrictSegal.quasicategory and Quillen generating horns. PushoutProduct.lean:142-145 states ordinary internal-Hom restriction for a monomorphism; it does not state a relative exponential with varying base simplex. The grep hit at line 139 uses ofIsInitial for an initial simplicial set, not a relatively initial object or dependent exponent. Ordinary FiberedCategory.Cocartesian.lean:43-80 concerns categories with Hom sets."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeInitial|relativeExponential|IsInitial.*InnerFibration|InnerFibration.*IsInitial|cocartesian",
+   "results": "{\"t\": \"2026-10-16T19:14:45Z\", \"tool\": \"grep\", \"query\": \"relativeInitial|relativeExponential|IsInitial.*InnerFibration|InnerFibration.*IsInitial|cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\"], \"digest\": \"051a9cc3ad30f2c3\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. The semantic hits are Quasicategory.hornFilling, StrictSegal.quasicategory and Quillen generating horns. PushoutProduct.lean:142-145 states ordinary internal-Hom restriction for a monomorphism; it does not state a relative exponential with varying base simplex. The grep hit at line 139 uses ofIsInitial for an initial simplicial set, not a relatively initial object or dependent exponent. Ordinary FiberedCategory.Cocartesian.lean:43-80 concerns categories with Hom sets."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-fiber-cocone-simplex-extension",
+  "date": "2026-10-17",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

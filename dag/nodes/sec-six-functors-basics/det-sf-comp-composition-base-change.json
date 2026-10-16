@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-sf-comp-composition-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change for $Rf_!$ on the localizing category",
- "statement": "Let $\\Lambda$ be admissible, let $f:X\\to Y$ be separated of finite type, let\n$v:Y'\\to Y$ be a morphism with $Y'$ qcqs, and form the cartesian square with\n$f':X'=X\\times_YY'\\to Y'$ and $u:X'\\to X$. For a compactification $f=p\\circ j$,\n$j:X\\to\\overline X$, let $f'=p'\\circ j'$ be its base change, with\n$v':\\overline X'=\\overline X\\times_YY'\\to\\overline X$. Then:\n\n1. there is a canonical isomorphism $v'^*j_!\\simeq j'_!u^*$ of functors\n$D(X_{\\mathrm{proét}},\\Lambda)\\to D(\\overline X'_{\\mathrm{proét}},\\Lambda)$;\n2. the composite\n$\\beta:v^*Rp_*j_!\\xrightarrow{\\ \\sim\\ }Rp'_*v'^*j_!\\xrightarrow{\\ \\sim\\ }Rp'_*j'_!u^*$\nof proper base change and (1) is an isomorphism of functors\n$\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(Y',\\Lambda))$;\n3. $\\beta$ is compatible with the comparison isomorphisms between\ncompactifications of $f$ and of $f'$.",
+ "statement": "Work in the standing scheme setting of [sk-def-sfb-dc-setting]: fix a prime $\\ell$ and a\nfield $k$ of characteristic $p>0$ with $p\\ne\\ell$; all schemes are separated and of finite\ntype over $k$, and all morphisms are $k$-morphisms. Let $\\Lambda$ be an admissible coefficient\nin the sense of [sk-def-localizing-closure]. Let $f:X\\to Y$ be separated of finite type and\nlet $v:Y'\\to Y$ be a morphism in this setting (so $Y'$ is a standing scheme), with $Y'$ qcqs.\nForm the cartesian square with $f':X'=X\\times_YY'\\to Y'$ and $u:X'\\to X$. For a\ncompactification $f=p\\circ j$, $j:X\\to\\overline X$, let $f'=p'\\circ j'$ be its base\nchange, with $v':\\overline X'=\\overline X\\times_YY'\\to\\overline X$. Then:\n\n1. there is a canonical isomorphism $v'^*j_!\\simeq j'_!u^*$ of functors\n$D(X_{\\mathrm{proét}},\\Lambda)\\to D(\\overline X'_{\\mathrm{proét}},\\Lambda)$;\n2. the composite\n$\\beta:v^*Rp_*j_!\\xrightarrow{\\ \\sim\\ }Rp'_*v'^*j_!\\xrightarrow{\\ \\sim\\ }Rp'_*j'_!u^*$\nof proper base change and (1) is an isomorphism of functors\n$\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(Y',\\Lambda))$;\n3. $\\beta$ is compatible with the comparison isomorphisms between\ncompactifications of $f$ and of $f'$.\n",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.md",
   "place": "node det-sf-comp-composition-base-change, order None",
@@ -18,42 +18,216 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-constructible",
+  "def-nagata-compactification",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism"
+ ],
  "proof": [
   {
-   "text": "*(1)* Both $v'^*j_!$ and $j'_!u^*$ are left adjoint to the same functor\n$u_*j'^*\\simeq j^*v'_*$ (restriction to an open commutes with direct image, as\nin [det-sf-comp-coherence-single]); hence they are canonically isomorphic.\nConcretely, both restrict to $u^*$ on the open $X'\\subset\\overline X'$ and vanish\non its closed complement, which characterizes extensions by zero (Stacks, Tag\n09AH). Both functors are exact on sheaves, so the isomorphism passes to\nderived categories termwise.",
+   "text": "The pulled-back factorization is a compactification by [lemma-nagata-compactification-base-change]; in particular $j'$ is quasi-compact open and $p'$ is proper. For an open immersion, module extension by zero is additive and exact by [def-sfb-module-open-lower-shriek] and is left adjoint to module pullback by [def-sfb-module-open-lower-shriek-adjunction]. Module pullback is exact by [sk-prop-sfb-cartesian-coefficients]. Use the module pullback/direct-image adjunctions of [sk-def-sfb-module-pushforward-pullback]. On an object $V\\to X$, the two sheaf functors $u_*j'^*$ and $j^*v'_*$ evaluate a sheaf $M$ on the same object $V\\times_X X'=V\\times_{\\overline X}\\overline X'$: open restriction is site localization by [lem-weil-proetale-weakly-etale-localization](1), and direct image is evaluation on the fibre product by [def-sfb-finite-lower-star]. The identification respects the coefficient actions because module direct image has precisely that underlying sheaf with action through the canonical coefficient map [def-sfb-module-lower-star]. Hence $u_*j'^*\\simeq j^*v'_*$ naturally. The composite-adjunction formula [def-weil-pbc-composite-adjunction] makes $v'^*j_!$ and $j'_!u^*$ left adjoints to these identified functors. The unit-compatible isomorphism between them exists by [lem-weil-pbc-conjugate-iso-unit-equation]; denote it $O_c$. Since all these left adjoints are exact, the same isomorphism applies termwise to complexes and descends through quasi-isomorphisms, as in [sk-def-sfb-derived-categories]. This proves (1). Its restriction to $X'$ is the identity of $u^*K$: the open unit is the canonical $j^*j_!\\simeq\\mathrm{id}$ of [lem-weil-pbc-proetale-ringed-open-closed], and the common-right-adjoint identification on an object over $X'$ is the identity fibre-product identification. The unit equation characterizing $O_c$ therefore restricts to the identity. The ringed-site formulation applies to the internal module objects by [def-weil-pbc-internal-abelian-sheaf-module-equivalence], with coefficients identified by the Cartesian coefficient theorem.",
    "uses": [
-    "det-sf-comp-coherence-single"
+    "lemma-nagata-compactification-base-change",
+    "def-sfb-module-open-lower-shriek",
+    "def-sfb-module-open-lower-shriek-adjunction",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-sfb-finite-lower-star",
+    "def-sfb-module-lower-star",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "sk-def-sfb-derived-categories",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+    "place": "Clause (1): common right adjoint, exact descent, and open-unit normalization"
+   }
   },
   {
-   "text": "*(2)* The functor $v^*$ is exact, preserves direct sums and carries\n$\\Dctf(-,\\Lambda)$ into $\\Dctf(-,\\Lambda)$ (flat constructible models for finite\nrings, pulled-back local coefficient models otherwise), so it preserves\n$\\Loc(\\Dctf(-,\\Lambda))$; the same holds for $u^*$ and $v'^*$. For\n$K\\in\\Loc(\\Dctf(X,\\Lambda))$ we have $j_!K\\in\\Loc(\\Dctf(\\overline X,\\Lambda))$ by\n[det-sf-comp-coherence-single], so proper base change for $p$ along $v$ on\nthe localizing category ([sk-prop-proper-base-change-unbounded]) gives\n$v^*Rp_*j_!K\\simeq Rp'_*v'^*j_!K$, and (1) gives $Rp'_*v'^*j_!K\\simeq Rp'_*j'_!u^*K$.",
+   "text": "All schemes in the compactifications and their pullbacks are in the standing setting, so both $p$ and $p'$ are proper between standing schemes. By [det-proper-base-change-unbounded-pullback], $v^*,u^*,v'^*$ preserve $\\Dctf$, direct sums and the localizing closures. By [det-proper-image-localizing-open], $j_!K\\in\\Loc(\\Dctf(\\overline X,\\Lambda))$ when $K\\in\\Loc(\\Dctf(X,\\Lambda))$. Apply [det-sf-comp-coherence-single] to $c=(j,p)$ and to its base change $c'=(j',p')$. Together with the pullback statement this puts $v^*Rp_*j_!$ and $Rp'_*j'_!u^*$ in $\\Loc(\\Dctf(Y',\\Lambda))$; (1) identifies the latter with $Rp'_*v'^*j_!$. This uses the stated conclusions of those nodes, not the proof of an extension node. On $\\Dctf(\\overline X,\\Lambda)$, the canonical proper base-change map is invertible by [det-thm-sfb-proper-base-change-finite](2) for finite $\\Lambda$, [det-thm-sfb-proper-base-change-integral](3) for $\\mathcal O_E$, and [det-thm-sfb-proper-base-change-rational](3) for $E,\\overline{\\mathbf Q}_\\ell$. Here $\\Dctf\\subset\\Dbc$ by definition, so the integral and rational clauses apply; $\\mathbf Z_\\ell,\\mathbf Q_\\ell$ are the cases $E=\\mathbf Q_\\ell$. The standing assumption on $Y'$ also permits the proper-image input for $p'$ in the integral theorem. By [det-proper-base-change-unbounded-extension] the same map is invertible on $\\Loc(\\Dctf(\\overline X,\\Lambda))$. Evaluate it on $j_!K$ and compose with $Rp'_*O_c$ to obtain the isomorphism $\\beta_c$ of (2).",
    "uses": [
-    "det-sf-comp-coherence-single"
+    "det-proper-base-change-unbounded-pullback",
+    "det-proper-image-localizing-open",
+    "det-sf-comp-coherence-single",
+    "det-thm-sfb-proper-base-change-finite",
+    "det-thm-sfb-proper-base-change-integral",
+    "det-thm-sfb-proper-base-change-rational",
+    "det-proper-base-change-unbounded-extension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+    "place": "Clause (2): stated localizing targets and coefficient-level base change extended to the localizing closure"
+   }
   },
   {
-   "text": "*(3)* Let $h:Z'\\to Z$ be a refinement of dense compactifications of $f$, with\nbase change $h':Z'_{Y'}\\to Z_{Y'}$, a refinement of compactifications of $f'$\n(not necessarily dense; [det-sf-comp-coherence-cocycle] allows dense\nreplacement). The two composites $v^*Rp_*j_!K\\to Rp'_*Rh'_*j''_!u^*K$ obtained\nby first comparing compactifications and then base changing, or conversely,\nare both obtained by applying $Rp'_*$ to maps\n$v_Z^*j_!K\\to Rh'_*j''_!u^*K$ which restrict to the identity of $u^*K$ over the\nopen $X'$ (the refinement maps and the isomorphism (1) restrict to identities,\nand proper base change for $h$ is compatible with restriction to the open\n$X'$ on which $h'$ is the identity). By adjunction for the open immersion,\nsuch a map is unique, so the two composites agree; hence $\\beta$ is\nindependent of the compactification.",
+   "text": "Fix the following comparison conventions on the ordinary unbounded module-object derived categories. The adjunction $a^*\\dashv Ra_*$ is [sk-def-sfb-module-derived-pushpull], since pullback is exact by [sk-prop-sfb-cartesian-coefficients]. For a Cartesian square with vertical map $a$ and horizontal maps $b,b_1$, write $B_a:b^*Ra_*\\to Ra'_*b_1^*$ for the mate of the canonical pullback square isomorphism $a'^*b^*\\simeq b_1^*a^*$. In components this is $Ra'_*b_1^*\\varepsilon_a\\circ Ra'_*(\\theta Ra_*)\\circ\\eta_{a'}b^*Ra_*$, exactly the unit/square/counit formula of [def-weil-pbc-adjunction-mate]. Thus this notation specifies the same canonical map used in step 2 for every coefficient, without passing to a completed category. The pullback compositions are those of [sk-def-sfb-module-pushforward-pullback], applied termwise. Their associativity can be checked before localization: both parenthesizations use the same iterated fibre product and the coefficient balancing map $((m\\otimes a)\\otimes b)\\otimes c\\mapsto m\\otimes abc$. Use the canonical $R(ab)_*\\simeq Ra_*Rb_*$ of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], transported to internal modules by [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. These comparisons are the conjugates of pullback composition under the derived adjunctions: a K-injective $I$ remains K-injective under each direct image by [lem-weil-pbc-right-adjoint-preserves-kinjective] and exactness of pullback, so the normalization in the composition node can use the identity resolution of $b_*I$. Both successive comparison routes are then the same sectionwise composition isomorphism. To check the adjunction normalization, write the two derived Hom adjunctions for a composite $ab$: they send $\\operatorname{Hom}(b^*a^*M,N)$ first to $\\operatorname{Hom}(a^*M,Rb_*N)$ and then to $\\operatorname{Hom}(M,Ra_*Rb_*N)$. On a K-injective representative these are the underived module-complex Hom bijections modulo homotopy, whose composite is the Hom bijection for $ab$ by [def-weil-pbc-composite-adjunction] and the underived composition adjunction of [sk-def-sfb-module-pushforward-pullback]. The identity on a left adjoint determines its unit, and the identity on a right adjoint determines its counit under these bijections, so the units and counits agree with the composite ones. Consequently [lem-weil-pbc-mate-pasting](2),(3) gives, in these canonical composition coordinates,\n$$B_{ab}=(Ra'_*B_b)\\circ(B_aRb_*).$$\nThis is an equality of actual natural transformations, including their units and counits, rather than an identification of abstract isomorphic functors.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-weil-pbc-adjunction-mate",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+    "place": "Clause (3): unit/square/counit construction and the proper-composition pasting used below"
+   }
+  },
+  {
+   "text": "Let $c_a=(j_a:X\\hookrightarrow Z_a,p_a:Z_a\\to Y)$, $a=1,2$, be arbitrary compactifications of $f$, and put $F_c=Rp_*j_!$. Choose a common scheme-theoretically dense refinement $d=(j_d:X\\hookrightarrow D,q:D\\to Y)$ with maps $h_a:D\\to Z_a$ by [det-nagata-refinement-common-dense]. Let primes denote base change along $v$. Do not assume that $d'$ or $c_a'$ is dense. Apply the finite-family clause of the same node to $c_1',c_2',d'$ to obtain a scheme-theoretically dense compactification $d''=(j'':X'\\hookrightarrow W,r:W\\to Y')$, with refinements $k:W\\to D'$ and $k_a:W\\to Z_a'$. Both $h'_ak$ and $k_a$ are $Y'$-morphisms from $W$ to $Z_a'$ extending the given map on $X'$. Since the source $d''$ is scheme-theoretically dense, [det-nagata-refinement-morphisms](3) gives $h'_ak=k_a$. Every cited compactification open is quasi-compact. The bases $Y,Y'$ are qcqs by the statement and standing setting, as required by the common-dense-refinement node. For a refinement $h$ with dense source, even if its target is not dense, apply [det-sf-comp-composition-interchange](2),(3) with $p=\\mathrm{id}$, $i$ the target open, and $r=h$. This supplies $e_h:j_!K\\xrightarrow{\\sim}Rh_*j_{\\mathrm{source}!}K$ on the localizing domain, uniquely normalized to identity on the open. Define $\\rho_h=Rp_*e_h$ followed by the inverse proper-composition comparison of step 3. The compactification comparisons of [det-sf-comp-coherence-cocycle] are therefore computed as $\\phi_{c_2,c_1}=\\rho_{h_2}^{-1}\\rho_{h_1}$, and after base change as $\\phi_{c_2',c_1'}=\\rho_{k_2}^{-1}\\rho_{k_1}$. All refinements for which an $e$ or $\\rho$ is used here have dense source $d$ or $d''$, not the possibly nondense $d'$.",
+   "uses": [
+    "det-nagata-refinement-common-dense",
+    "det-nagata-refinement-morphisms",
+    "det-sf-comp-composition-interchange",
+    "det-sf-comp-coherence-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+    "place": "Clause (3): dense replacement of all pulled-back compactifications and identification of refinement maps"
+   }
+  },
+  {
+   "text": "Write $v_a:Z_a'\\to Z_a$ and $w:D'\\to D$ for the projections, and let $O_a:v_a^*j_{a!}\\simeq j'_{a!}u^*$ and $O_d:w^*j_{d!}\\simeq j'_{d!}u^*$ be step 1. For fixed $a$ and $K$, consider the two maps into $Rk_{a*}j''_!u^*K$, using $h'_ak=k_a$ and the proper-composition coordinates of step 3:\n$$\nL_a=e_{k_a,u^*K}\\circ O_a,\n$$\n$$\nM_a=Rh'_{a*}(e_{k,u^*K})\\circ Rh'_{a*}(O_d)\\circ B_{h_a,j_{d!}K}\\circ v_a^*(e_{h_a,K}).\n$$\nBoth have source $v_a^*j_{a!}K\\simeq j'_{a!}u^*K$. Here $u^*K$ lies in the required localizing category by [det-proper-base-change-unbounded-pullback]. Check the open restriction explicitly. A refinement has inverse image of $X$ equal to its source open and is identity there. For an object $V\\to X$, [def-sfb-finite-lower-star] and [def-sfb-module-lower-star] give $(h_*I)(V)=I(V\\times_{Z_a}D)=I(V)$ with the same module action. Open restriction is site localization by [lem-weil-proetale-weakly-etale-localization](1). For a K-injective resolution $I$, restriction to the open is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective], since it is right adjoint to exact extension by zero [def-sfb-module-open-lower-shriek-adjunction, def-sfb-module-open-lower-shriek]. Hence these section identities also give the canonical derived restriction identities and preserve the proper-composition coordinates of step 3. Restrict the unit/square/counit formula for $B_{h_a}$ to $X'$: the vertical maps become identities on $X$ and $X'$, the horizontal map is $u$, and the section formulas for the vertical unit and counit send a section to itself. The pullback square map becomes the identity of $u^*$, because both pullback composites are $u^*$. The formula therefore gives the identity of $u^*K$, not merely an unspecified isomorphism. The maps $e_{h_a},e_k,e_{k_a}$ restrict to identity by their defining uniqueness in [det-sf-comp-composition-interchange](2), and $O_a,O_d$ do so by step 1. Thus both $L_a$ and $M_a$ restrict to identity. Apply interchange (2) with $p=\\mathrm{id}_{X'}$, $i=j_a'$ and dense compactification $X'\\hookrightarrow W\\xrightarrow{k_a}Z_a'$: after the isomorphism $O_a$ it gives $M_a=L_a$. This uniqueness application uses density of $W$, never density of $D'$.\n\nApply $Rp'_{a*}$ to $L_a=M_a$ and precompose with $B_{p_a,j_{a!}K}:v^*Rp_{a*}j_{a!}K\\to Rp'_{a*}v_a^*j_{a!}K$. Naturality of $B_{p_a}$ in the morphism $e_{h_a}$ and the mate-pasting equation of step 3 for $q=p_ah_a$ identify the right-hand side with $\\rho_k\\beta_dv^*(\\rho_{h_a})$. The left-hand side is $\\rho_{k_a}\\beta_{c_a}$. More explicitly the proper factors on the right are $(Rp'_{a*}B_{h_a})\\circ(B_{p_a}Rh_{a*})=B_q$ by [lem-weil-pbc-mate-pasting](2),(3); the open factors are $O_d$ followed by $e_k$, exactly those in $\\rho_k\\beta_d$. We have proved the typed equality of natural transformations\n$$\\rho_{k_a}\\beta_{c_a}=\\rho_k\\beta_dv^*(\\rho_{h_a}):v^*F_{c_a}\\longrightarrow F_{d''}u^*.$$\nThe construction and section calculations are natural in $K$, so this is a functor-level equality.",
+   "uses": [
+    "det-proper-base-change-unbounded-pullback",
+    "def-sfb-finite-lower-star",
+    "def-sfb-module-lower-star",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-sfb-module-open-lower-shriek-adjunction",
+    "def-sfb-module-open-lower-shriek",
+    "det-sf-comp-composition-interchange",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+    "place": "Clause (3): explicit restriction of both local maps, dense-source uniqueness, and proper mate pasting"
+   }
+  },
+  {
+   "text": "Use the two equations from step 5 and cancel only the isomorphisms $\\rho_{k_a}$. The common-dense-refinement descriptions in [det-sf-comp-coherence-cocycle] give\n$$\n\\begin{aligned}\n\\phi_{c_2',c_1'}\\beta_{c_1}\n&=\\rho_{k_2}^{-1}\\rho_{k_1}\\beta_{c_1}\n=\\rho_{k_2}^{-1}\\rho_k\\beta_dv^*\\rho_{h_1}\\\\\n&=\\beta_{c_2}(v^*\\rho_{h_2})^{-1}v^*\\rho_{h_1}\n=\\beta_{c_2}v^*\\phi_{c_2,c_1}.\n\\end{aligned}\n$$\nThis is compatibility with arbitrary comparisons on both bases. The same cocycle makes it independent of the chosen $d,d''$ and allows comparison of $c_a'$ with any other compactification of $f'$. This proves (3).",
    "uses": [
     "det-sf-comp-coherence-cocycle"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+    "place": "Clause (3): cancellation and independence under the cocycle"
+   }
   }
  ],
  "proof_deps": [
+  "lemma-nagata-compactification-base-change",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-open-lower-shriek-adjunction",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-sfb-finite-lower-star",
+  "def-sfb-module-lower-star",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-proper-base-change-unbounded-pullback",
+  "det-proper-image-localizing-open",
   "det-sf-comp-coherence-single",
+  "det-thm-sfb-proper-base-change-finite",
+  "det-thm-sfb-proper-base-change-integral",
+  "det-thm-sfb-proper-base-change-rational",
+  "det-proper-base-change-unbounded-extension",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-mate-pasting",
+  "det-nagata-refinement-common-dense",
+  "det-nagata-refinement-morphisms",
+  "det-sf-comp-composition-interchange",
   "det-sf-comp-coherence-cocycle"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+  "place": "Clauses (1)--(3), reconstructed with exact module pullback, stated localizing targets, dense replacement, an explicit open-restriction calculation, mate pasting, and the cocycle."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper base change for compactly supported derived pushforward independent of compactification on localizing constructible categories",
+   "results": "8 hits: CategoryTheory.Functor.sheafPushforwardContinuousComp, sheafPushforwardContinuousComp′; AlgebraicGeometry.Scheme.Modules.pushforwardComp; SheafOfModules.pushforward_assoc, pushforwardComp_inv_app_val_app, pushforwardComp_hom_app_val_app, pushforward_id_comp, pushforwardComp. Read Continuous.lean:365--395 and PushforwardContinuous.lean: normalization declarations. These are underived pushforward compositions.",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"hcomp\"",
+   "results": "2 hits: CategoryTheory.mateEquiv_hcomp; CategoryTheory.Bicategory.mateEquiv_hcomp. Read Mathlib/CategoryTheory/Adjunction/Mates.lean:199--220 (the generic tool already recorded by lem-weil-pbc-mate-pasting).",
+   "date": "2026-10-17",
+   "verdict": "partial generic tool only; no exact item match"
+  },
+  {
+   "tool": "grep",
+   "query": "properBaseChange|compactSupport|compactification.*[Bb]ase[Cc]hange|baseChange.*[Cc]ompact",
+   "results": "25 capped hits in topology/dynamics: baseChangeCompactsInside and HasCompactSupport facts; none concerns the derived compactification functor.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived direct image with compact support base change for admissible condensed coefficients on localizing constructible categories",
+   "results": "8 hits: Condensed; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; CondensedSet.LocallyConstant.functorFullyFaithful; instHasLimitsOfShapeCondensed; Condensed.epi_iff_locallySurjective_on_compHaus; LightCondensed.discreteUnderlyingAdj; CategoryTheory.Adjunction.derived. Generic definitions/existence/adjunctions only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley exchange morphism for extension by zero commutes with compactification refinement",
+   "results": "8 hits: ComplexShape.Embedding.homRestrict_comp_extendMap and its assoc variant; Condensed.lanPresheafExt_hom; CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso; LightCondensed.lanPresheafExt_hom; CompHausLike.LocallyConstant.counitApp; Condensed.profiniteSolidCounit; CompHausLike.LocallyConstant.adjunction_left_triangle. These concern complex-shape or condensed discrete functors, not compactifications.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "properBaseChange|compactSupport|compactification.*[Bb]ase[Cc]hange|baseChange.*[Cc]ompact",
+   "results": "Directory AlgebraicGeometry; one hit: Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:166, MorphismProperty.IsStableUnderBaseChange @QuasiCompact. This is stability of quasi-compact morphisms, not the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image commutes with extension by zero along an open immersion in a Cartesian square of sheaves",
+   "results": "8 hits, all sheafed-space or locally-ringed-space IsOpenImmersion.invApp/app_inv_app identities in Mathlib/Geometry/RingedSpace/OpenImmersion. These identify the structure presheaf on open subsets; none states the extension-by-zero exchange, derived proper base change, or compactification comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension.*[Zz]ero|baseChange.*[Ss]hriek|[Ss]hriek.*baseChange",
+   "results": "Scope CategoryTheory. Nine lexical hits: extensionProduct_*_zero, IsClosedUnderExtensions (IsZero ...), and a zero-arrow pseudoelement lemma. None concerns sheaf extension by zero or the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -69,5 +243,144 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sf-comp-composition"
+ "unit": "sk-thm-sf-comp-composition",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-sf-comp-composition-base-change",
+  "worker": "stage1",
+  "summary": "Corrected the statement to the standing scheme setting; repaired sheaf-level exactness and localizing-target citations; replaced the invalid density-after-base-change argument by common dense refinement, explicitly normalized unit/square/counit pasting and open restriction, and the final comparison equation. Six complete proof steps, no new nodes. Independent second reading expanded the composite-adjunction normalization and made the precomposition in step 5 explicit. Added the existing closed compactification-base-change citation for the pulled-back geometric hypotheses.",
+  "blueprint": "Step 1 realizes (1). Step 2 realizes (2). Steps 3--6 realize (3): canonical mate conventions, dense replacement of c1′,c2′,d′, the local refinement identity with proper pasting, and the cocycle cancellation.",
+  "tool_uses": [
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Exactness of the underived module pullback, required for the termwise argument and K-injective normalization."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies restriction to a pro-etale open with the localized site in the fibre-product and open-restriction calculations."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Provides the unit-normalized open extension/restriction identity for arbitrary ring sheaves."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Allows the generic ringed-site open and derived-composition tools to apply to the same internal module objects, preserving section groups and actions."
+   },
+   {
+    "node": "sk-def-sfb-module-derived-pushpull",
+    "why": "Gives the unbounded derived module adjunctions used to specify the actual base-change mate."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Specifies the canonical unbounded direct-image composition with its K-injective normalization."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic exact-adjoint criterion used to check composition and restriction on the same K-injective resolutions."
+   },
+   {
+    "node": "det-nagata-refinement-common-dense",
+    "why": "Common dense refinement for finite families, including the nondense pulled-back compactifications."
+   },
+   {
+    "node": "det-nagata-refinement-morphisms",
+    "why": "Uniqueness of the two maps from the new scheme-theoretically dense source to each pulled-back compactification."
+   },
+   {
+    "node": "det-proper-base-change-unbounded-pullback",
+    "why": "Clause (2) needs exact sum-preserving pullback and preservation of Dctf/localizing closures."
+   },
+   {
+    "node": "det-proper-image-localizing-open",
+    "why": "Clause (2) needs preservation of localizing closures by extension by zero along the compactification open."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-finite",
+    "why": "This supplies the finite-coefficient proper base-change hypothesis for the generic localizing extension."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-integral",
+    "why": "This supplies the integral proper-base-change hypothesis for the generic localizing extension."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-rational",
+    "why": "This supplies the field and algebraic-closure proper-base-change hypotheses for the generic localizing extension."
+   },
+   {
+    "node": "det-proper-base-change-unbounded-extension",
+    "why": "Promotes the coefficient-level proper base-change isomorphism to the ambient localizing closure; it is not used for functor target preservation."
+   }
+  ],
+  "statement_change": {
+   "date": "2026-10-17",
+   "by": "Q20 stage 1 repair",
+   "old_statement": "Let $\\Lambda$ be admissible, let $f:X\\to Y$ be separated of finite type, let\n$v:Y'\\to Y$ be a morphism with $Y'$ qcqs, and form the cartesian square with\n$f':X'=X\\times_YY'\\to Y'$ and $u:X'\\to X$. For a compactification $f=p\\circ j$,\n$j:X\\to\\overline X$, let $f'=p'\\circ j'$ be its base change, with\n$v':\\overline X'=\\overline X\\times_YY'\\to\\overline X$. Then:\n\n1. there is a canonical isomorphism $v'^*j_!\\simeq j'_!u^*$ of functors\n$D(X_{\\mathrm{proét}},\\Lambda)\\to D(\\overline X'_{\\mathrm{proét}},\\Lambda)$;\n2. the composite\n$\\beta:v^*Rp_*j_!\\xrightarrow{\\ \\sim\\ }Rp'_*v'^*j_!\\xrightarrow{\\ \\sim\\ }Rp'_*j'_!u^*$\nof proper base change and (1) is an isomorphism of functors\n$\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(Y',\\Lambda))$;\n3. $\\beta$ is compatible with the comparison isomorphisms between\ncompactifications of $f$ and of $f'$.",
+   "what": "The imported statement omitted the standing scheme setting required by every coefficient, proper-base-change, extension, and coherence input. In particular the integral coefficient argument applies its proper-base-change clause to the base-changed proper map, so Y' must also be a standing scheme. The corrected statement states the global standing setting and makes v a morphism in it, preserving all three clauses and the source hypotheses.",
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.md",
+    "place": "node statement, read in the standing setting of sk-def-sfb-dc-setting"
+   },
+   "citers": [
+    {
+     "id": "det-prop-int-brown-construction",
+     "holds": true,
+     "note": "Its cartesian base-change clause is applied only for standing schemes, exactly the corrected setting."
+    }
+   ],
+   "old_stmt_deps": [],
+   "old_proof": [
+    {
+     "text": "*(1)* Both $v'^*j_!$ and $j'_!u^*$ are left adjoint to the same functor\n$u_*j'^*\\simeq j^*v'_*$ (restriction to an open commutes with direct image, as\nin [det-sf-comp-coherence-single]); hence they are canonically isomorphic.\nConcretely, both restrict to $u^*$ on the open $X'\\subset\\overline X'$ and vanish\non its closed complement, which characterizes extensions by zero (Stacks, Tag\n09AH). Both functors are exact on sheaves, so the isomorphism passes to\nderived categories termwise.",
+     "uses": [
+      "det-sf-comp-coherence-single"
+     ],
+     "elementary": false
+    },
+    {
+     "text": "*(2)* The functor $v^*$ is exact, preserves direct sums and carries\n$\\Dctf(-,\\Lambda)$ into $\\Dctf(-,\\Lambda)$ (flat constructible models for finite\nrings, pulled-back local coefficient models otherwise), so it preserves\n$\\Loc(\\Dctf(-,\\Lambda))$; the same holds for $u^*$ and $v'^*$. For\n$K\\in\\Loc(\\Dctf(X,\\Lambda))$ we have $j_!K\\in\\Loc(\\Dctf(\\overline X,\\Lambda))$ by\n[det-sf-comp-coherence-single], so proper base change for $p$ along $v$ on\nthe localizing category ([sk-prop-proper-base-change-unbounded]) gives\n$v^*Rp_*j_!K\\simeq Rp'_*v'^*j_!K$, and (1) gives $Rp'_*v'^*j_!K\\simeq Rp'_*j'_!u^*K$.",
+     "uses": [
+      "det-sf-comp-coherence-single"
+     ],
+     "elementary": false
+    },
+    {
+     "text": "*(3)* Let $h:Z'\\to Z$ be a refinement of dense compactifications of $f$, with\nbase change $h':Z'_{Y'}\\to Z_{Y'}$, a refinement of compactifications of $f'$\n(not necessarily dense; [det-sf-comp-coherence-cocycle] allows dense\nreplacement). The two composites $v^*Rp_*j_!K\\to Rp'_*Rh'_*j''_!u^*K$ obtained\nby first comparing compactifications and then base changing, or conversely,\nare both obtained by applying $Rp'_*$ to maps\n$v_Z^*j_!K\\to Rh'_*j''_!u^*K$ which restrict to the identity of $u^*K$ over the\nopen $X'$ (the refinement maps and the isomorphism (1) restrict to identities,\nand proper base change for $h$ is compatible with restriction to the open\n$X'$ on which $h'$ is the identity). By adjunction for the open immersion,\nsuch a map is unique, so the two composites agree; hence $\\beta$ is\nindependent of the compactification.",
+     "uses": [
+      "det-sf-comp-coherence-cocycle"
+     ],
+     "elementary": false
+    }
+   ],
+   "old_proof_deps": [
+    "det-sf-comp-coherence-single",
+    "det-sf-comp-coherence-cocycle"
+   ]
+  }
+ },
+ "tool_uses": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "det-nagata-refinement-common-dense",
+  "det-nagata-refinement-morphisms",
+  "det-proper-base-change-unbounded-pullback",
+  "det-proper-image-localizing-open",
+  "det-thm-sfb-proper-base-change-finite",
+  "det-thm-sfb-proper-base-change-integral",
+  "det-thm-sfb-proper-base-change-rational",
+  "det-proper-base-change-unbounded-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-54fe9fe6c",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-54fe9fe6c (reviewer sub-agent of L); spot-checked: I read the whole item: statement, six steps, split_report and statement_change. I also read the main-20261015 blueprint statement and proof, the unit and sk-prop-proper-base-change-unbounded unit records, sk-thm-sfb-proper-base-change and sk-def-sfb-base-change-morphism, every cited node's statement (7 stmt_deps, 29 proof_deps), and the full proofs of det-sf-comp-coherence-cocycle and det-sf-comp-coherence-refinement. All four points of the previous return are repaired. E1 (statement): the standing setting of sk-def-sfb-dc-setting is restored, including Y'. All three clauses and the coefficient categories are unchanged. The old statement is recorded verbatim, and the sole citer det-prop-int-brown-construction still holds. C4 (step 1): exactness of the underived module pullback is now cited from sk-prop-sfb-cartesian-coefficients. I recomputed the common-right-adjoint fibre product V x_X X' = V x_Xbar Xbar'. C3 (step 2): the Loc(Dctf(Y')) targets now come from det-sf-comp-coherence-single on both c and c', plus the pullback node. E1/D5 (steps 4-6): the step-3 argument now uses a common dense refinement d'' of c1', c2', d'. It gets h_a'k = k_a from det-nagata-refinement-morphisms (3), whose source d'' is dense. It builds e_h and rho_h exactly as cocycle steps 2 and 4 do, so phi = rho_{h2}^{-1} rho_{h1} is the cocycle's comparison. It applies interchange (2) only to dense sources. I checked the typing of L_a and M_a and the open restriction of B_{h_a}. I also checked the pasting B_q = (Rp'_{a*}B_{h_a})(B_{p_a}Rh_{a*}) against lem-weil-pbc-mate-pasting (2) with L1 = p_a^*, L3 = h_a^*, and recomputed the final cancellation phi' beta_1 = beta_2 v^* phi. The base-change map is the unit/theta/counit mate in the ordinary module-object D. It matches sk-prop-proper-base-change-unbounded and sk-def-sfb-base-change-morphism, and no completed category is used. Coefficient cases: finite (2), integral (3) for O_E and Z_l, rational (3) for E, Q_l and Qlbar, with Dctf contained in Dbc. I rechecked the density counterexample: D(t) in A^1 pulled back to the origin gives W empty, and the argument still holds. There are no new nodes. I found no duplicate (rg over dag/nodes), no restated clause, no cycle and no SGA citation. Accepted tool_uses: all 15 declared; every off-route statement is declared, and the other off-route citations are definitions. For maintenance: the unit record sk-thm-sf-comp-composition is still the stale master version. No fixes written."
+ }
 }

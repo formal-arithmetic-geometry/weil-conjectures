@@ -25,9 +25,140 @@
   "sk-prop-sf-existence",
   "det-sf-comp-coherence-cocycle"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Throughout use the ordinary unbounded categories $D(\\Mod_{\\Lambda_T})$ and their full subcategories $\\mathcal T_T$, with exactly the coefficient convention of the statement. Every standing scheme is qcqs: finite type gives quasi-compactness and separatedness gives a quasi-compact closed diagonal. Choose dense compactifications $f=pj$, $g=qi$, with $j:X\\hookrightarrow\\overline X$, $i:Y\\hookrightarrow\\overline Y$, using [sk-thm-nagata-compactification]. The intermediate schemes are again separated and finite type over $k$. The morphism $ip:\\overline X\\to\\overline Y$ is separated and finite type: separatedness and local finite type compose by [lem-weil-pbc-proper-fp-permanence], and quasi-compactness composes by taking successive finite affine covers. Nagata gives a dense compactification $ip=ru$, $u:\\overline X\\hookrightarrow W$, $r:W\\to\\overline Y$ proper. Thus $gf=(qr)(uj)$ is a compactification: properness of $qr$ is clause (a) of [lem-weil-pbc-proper-fp-permanence], and composing the identifications with open subschemes gives the quasi-compact open $uj$. It is scheme-theoretically dense: the injections $\\mathcal O_W\\to u_*\\mathcal O_{\\overline X}$ and $\\mathcal O_{\\overline X}\\to j_*\\mathcal O_X$ compose to an injection, since direct image preserves injections. The same argument applies to all dense composites of opens below.",
+   "uses": [
+    "sk-thm-nagata-compactification",
+    "lem-weil-pbc-proper-fp-permanence",
+    "sk-def-nagata-sketch-data",
+    "sk-def-sfb-dc-setting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+    "place": "The composition isomorphism, first paragraph: the three compactifications and the composite model."
+   }
+  },
+  {
+   "text": "Fix the comparison conventions used in the calculation. By [sk-def-sfb-module-lower-shriek], open extension is exact and left adjoint to open pullback. The module pullback is exact by [sk-prop-sfb-cartesian-coefficients], including its stated transport of the coefficient action along $\\alpha_j^{-1}$. Thus both $j_!$ and $j^*$ send quasi-isomorphisms to quasi-isomorphisms and induce the termwise functors $D(j_!)$ and $D(j^*)$ on the unbounded categories of [sk-def-sfb-derived-categories]. Apply their module adjunction degreewise on complexes. Its unit and counit are chain maps; their naturality lets them descend through localization at quasi-isomorphisms. Their triangle identities still hold after localization, so they give $D(j_!)\\dashv D(j^*)$. This establishes the derived open adjunction using exactness alone. For successive opens $a,b$, the composite $b_!a_!$ is left adjoint to $a^*b^*\\simeq(ba)^*$, using [sk-def-sfb-module-pushforward-pullback]. The two adjunction Hom bijections therefore identify $b_!a_!$ naturally with $(ba)_!$: take the adjoint of the unit for $(ba)_!$ in one direction and of the composite unit in the other; the triangle identities make them inverse. This identification restricts to the identity on the source open. For direct images use $R(ba)_*\\simeq Rb_*Ra_*$ of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], for the ringed pro-etale topoi with rings $\\Lambda_T$. Its resolution normalization also fixes all reassociations: inverse images are exact by [sk-prop-sfb-cartesian-coefficients], so direct images preserve K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective]. A single K-injective complex then computes every successive direct image in a string. Both ways of reassociating are the same underived comparison of [def-sfb-module-lower-star-comp], evaluated on the canonical identifications of the same iterated fibre products. Thus the derived comparisons commute with reassociation and with restriction to an open whenever the inverse image of that open is the specified source open. For the latter assertion, on a site object over that open, the formula $(a_*M)(V)=M(V\\times_T S)$ in [def-sfb-finite-lower-star], with the module action in [def-sfb-module-lower-star], is just direct image for the restricted map, and restriction preserves K-injectives because it is right adjoint to exact extension by zero. These are comparisons of module objects: the ring actions are the pulled-back coefficient actions, not a change of coefficient category.",
+   "uses": [
+    "sk-def-sfb-module-lower-shriek",
+    "sk-def-sfb-derived-categories",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-sfb-module-lower-star-comp",
+    "def-sfb-finite-lower-star",
+    "def-sfb-module-lower-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+    "place": "The composition isomorphism, displayed calculation; expand the open and proper composition identifications."
+   }
+  },
+  {
+   "text": "For $K\\in\\mathcal T_X$, [det-proper-image-localizing-open] gives $j_!K\\in\\mathcal T_{\\overline X}$. Apply [det-sf-comp-composition-interchange] to $p,i,(u,r)$. Clause (1) identifies $r^{-1}(Y)=\\overline X$ and $r|_{\\overline X}=p$. Here $E$ and $\\overline{\\mathbf Q}_\\ell$ are admissible, $p$ is proper, $i$ is a quasi-compact open immersion, and $(u,r)$ is dense by Step 1, so all the hypotheses of the current interchange statement hold. With $j'=u$ in that statement, write $\\rho_A:i^*Rr_*u_!A\\xrightarrow{\\sim}Rp_*A$ for the canonical restriction identification of Step 2 and clause (1). Clause (2) gives the unique ambient derived map $I_A:i_!Rp_*A\\to Rr_*u_!A$ satisfying\n$$\\rho_A\\circ i^*I_A\\circ\\eta_{i,Rp_*A}=\\operatorname{id}_{Rp_*A},$$\nwhere $\\eta_i:\\operatorname{id}\\xrightarrow{\\sim}i^*i_!$ is the open-extension unit. Clause (3) makes this map invertible for $A\\in\\mathcal T_{\\overline X}$; this is precisely why the preceding open-preservation check is needed. In subsequent steps, restriction to the identity always means this equation with the same canonical restriction identifications. Naturality follows directly from the uniqueness in clause (2): for $A\\to B$ the two composites have the same restriction to $Y$, and the adjunction $i_!\\dashv i^*$ identifies maps out of $i_!Rp_*A$ with maps on $Y$. Set $A=j_!K$, apply $Rq_*$, and use Step 2 to define\n$$\\alpha_{g,f}^{j,p,i,q,u,r}(K):Rq_*i_!Rp_*j_!K\\xrightarrow{Rq_*I_{j_!K}}Rq_*Rr_*u_!j_!K\\xrightarrow{\\sim}R(qr)_*(uj)_!K.$$\nThis is a natural isomorphism on all of $\\mathcal T_X$. Its endpoints lie in $\\mathcal T_Z$ by [det-sf-comp-coherence-single], applied to $f,g,gf$ and their displayed compactifications. Since these localizing subcategories are full, the ambient isomorphism is the asserted isomorphism with this codomain. No extension of an equality of transformations from generators is assumed.",
+   "uses": [
+    "det-proper-image-localizing-open",
+    "det-sf-comp-composition-interchange",
+    "det-sf-comp-coherence-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+    "place": "The composition isomorphism, interchange and final displayed calculation."
+   }
+  },
+  {
+   "text": "First change only the auxiliary dense compactification $(u,r)$ of $ip$. For a dense refinement $s:(u',r')\\to(u,r)$, proper by [det-nagata-refinement-morphisms], write $r'=rs$. The refinement map $e_s^u:u_!A\\to Rs_*u'_!A$ of [det-sf-comp-coherence-refinement] restricts to $\\mathrm{id}_A$ over $\\overline X$. Consequently $Rr_*(e_s^u)\\circ I_A$ and the interchange map for $(u',rs)$ are maps $i_!Rp_*A\\to R(rs)_*u'_!A$ restricting to $\\mathrm{id}_{Rp_*A}$ over $Y$, under the comparisons of Step 2. For the refined model the adjunction sends each of these maps to $\\rho'_A\\circ i^*(-)\\circ\\eta_{i,Rp_*A}=\\operatorname{id}_{Rp_*A}$, where $\\rho'_A$ is the restriction identification for $r'=rs$. The normalization of $e_s^u$ and the restriction compatibility proved in Step 2 give this equality for the first map; Step 3 gives it for the second. Clause (2) of [det-sf-comp-composition-interchange], applied to the dense compactification $(u',rs)$, therefore equates them. After $A=j_!K$, the map $e_s^u(j_!K)$ is the refinement map for the composite open $uj$: both are maps $(uj)_!K\\to Rs_*(u'j)_!K$ restricting to $\\mathrm{id}_K$, so clause (1) of [det-sf-comp-coherence-refinement] identifies them. The relevant composite compactifications are dense by Step 1. After $Rq_*$ this proves that the two $\\alpha$ maps commute with the refinement comparison for $gf$. For any two auxiliary compactifications use their common dense refinement from [det-nagata-refinement-common-dense]; the cocycle of [det-sf-comp-coherence-cocycle] identifies the resulting comparison with the prescribed one. Thus the construction is independent of the auxiliary choice.",
+   "uses": [
+    "det-sf-comp-coherence-refinement",
+    "det-sf-comp-composition-interchange",
+    "det-nagata-refinement-common-dense",
+    "det-sf-comp-coherence-cocycle",
+    "det-nagata-refinement-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+    "place": "Canonicity and associativity, first two sentences: changing the auxiliary compactification."
+   }
+  },
+  {
+   "text": "Now refine the dense compactification of $f$ by $h:\\overline X'\\to\\overline X$, with $hj'=j$, $p'=ph$ and $h^{-1}(X)=X$. The refinement is proper by [det-nagata-refinement-morphisms]. The composite $uh$ is separated and of finite type: properness of $h$ supplies these properties, and the separated/locally-finite-type composition clauses already used in Step 1 apply to the open immersion $u$. Hence [sk-thm-nagata-compactification] applies to give a dense compactification $\\overline X'\\xrightarrow{v}W'\\xrightarrow{s}W$ of $uh$. Then $(v,rs)$ compactifies $ip'$. Apply [det-sf-comp-composition-interchange] to the proper map $h$, the open $u$, and this compactification, obtaining $J_A:u_!Rh_*A\\xrightarrow{\\sim}Rs_*v_!A$. Its geometric clause gives $s^{-1}(\\overline X)=\\overline X'$ and $s|_{\\overline X'}=h$. In particular $s^{-1}(X)=X$, since $h^{-1}(X)=X$, so $s$ refines the composite compactifications of $gf$. For $A\\in\\mathcal T_{\\overline X'}$ one has\n$$Rr_*J_A\\circ I_{Rh_*A}=I'_A:i_!Rp_*Rh_*A\\longrightarrow R(rs)_*v_!A.$$\nIndeed both maps restrict to the identity of $Rp_*Rh_*A=R(ph)_*A$ over $Y$ by Step 2 and the defining restriction of $J$, hence have the same adjoint under $i_!\\dashv i^*$. Clause (2) of [det-sf-comp-composition-interchange] for the proper map $p'=ph$, the same quasi-compact open $i$, and dense compactification $(v,rs)$ therefore equates them. This use is of its uniqueness clause on the ambient unbounded category; it does not require extending equality of transformations from generators. Proper pushforward sends $\\mathcal T_{\\overline X'}$ into $\\mathcal T_{\\overline X}$ by [det-sf-comp-coherence-single] with compactification $(\\mathrm{id},h)$, so the expression is typed. For $K\\in\\mathcal T_X$, [det-proper-image-localizing-open] applied to the quasi-compact open immersion $j'$ gives $j'_!K\\in\\mathcal T_{\\overline X'}$. Apply this equality to $A=j'_!K$ and use naturality of $I$ for $e_h^j:j_!K\\to Rh_*j'_!K$. The remaining map\n$$u_!j_!K\\xrightarrow{u_!e_h^j}u_!Rh_*j'_!K\\xrightarrow{J_{j'_!K}}Rs_*v_!j'_!K$$\nis exactly $e_s^{uj}$: its source is $(uj)_!K$ by Step 2, and its restriction to $X$ is the identity, so [det-sf-comp-coherence-refinement] (1) gives equality. Pushing by $Rq_*Rr_*$ proves the required refinement square: replacing $Rf_!$ by $Rp'_*j'_!$ before $\\alpha$ has the same effect as replacing the composite compactification by $(vj',qrs)$ after $\\alpha$. Step 4 permits any other auxiliary choice.",
+   "uses": [
+    "det-nagata-refinement-morphisms",
+    "lem-weil-pbc-proper-fp-permanence",
+    "sk-thm-nagata-compactification",
+    "det-sf-comp-composition-interchange",
+    "det-sf-comp-coherence-single",
+    "det-sf-comp-coherence-refinement",
+    "det-proper-image-localizing-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+    "place": "Canonicity and associativity, first two sentences: refinement of the first compactification."
+   }
+  },
+  {
+   "text": "Next refine the dense compactification of $g$ by $t:\\overline Y'\\to\\overline Y$, with $ti'=i$, $q'=qt$ and $t^{-1}(Y)=Y$. The map $t$ is proper by [det-nagata-refinement-morphisms]. Choose a dense compactification $\\overline X\\xrightarrow{u'}W'\\xrightarrow{r'}\\overline Y'$ of $i'p$ using [sk-thm-nagata-compactification] (the composite $i'p$ is separated and of finite type by the same permanence argument as in Step 1). Use this $W',u'$ as the auxiliary model for $ip$ and put $r=tr'$; properness follows from [lem-weil-pbc-proper-fp-permanence]. The two resulting compactifications of $gf$ are literally the same $(u'j,qtr')$. For $A\\in\\mathcal T_{\\overline X}$, the two maps\n$$i_!Rp_*A\\xrightarrow{e_t^i}Rt_*i'_!Rp_*A\\xrightarrow{Rt_*I'_A}Rt_*Rr'_*u'_!A=R(tr')_*u'_!A$$\nand $I_A$ both restrict to $\\mathrm{id}_{Rp_*A}$ over $Y$. Here $e_t^i$ is the normalized refinement map from [det-sf-comp-coherence-refinement], and restriction and reassociation are those of Step 2. More explicitly, after the restriction identification $\\rho_A:i^*R(tr')_*u'_!A\\simeq Rp_*A$ from Step 2, both have adjoint $\\rho_A\\circ i^*(-)\\circ\\eta_{i,Rp_*A}=\\operatorname{id}_{Rp_*A}$. Clause (2) of [det-sf-comp-composition-interchange] applies to the proper $p$, quasi-compact open $i$, and dense compactification $(u',tr')$ and makes these maps equal. Set $A=j_!K$ and push by $Rq_*$. This is precisely compatibility with the refinement comparison for $g$; on the composite endpoint the comparison is the identity. Step 4 removes the special auxiliary choice.",
+   "uses": [
+    "sk-thm-nagata-compactification",
+    "lem-weil-pbc-proper-fp-permanence",
+    "det-sf-comp-coherence-refinement",
+    "det-sf-comp-composition-interchange",
+    "det-nagata-refinement-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+    "place": "Canonicity and associativity, first two sentences: refinement of the second compactification."
+   }
+  },
+  {
+   "text": "To return to arbitrary chosen compactifications $c_f,c_g,c_{gf}$, choose dense refinements $d_f\\to c_f$, $d_g\\to c_g$ by [det-nagata-refinement-common-dense] (apply its pair assertion to a compactification twice). Construct $\\alpha^d$ by Steps 1--3, with composite model $d_{gf}$. Using the comparison notation of [det-sf-comp-coherence-cocycle], define\n$$\\alpha^c=\\phi_{c_{gf},d_{gf}}\\circ\\alpha^d\\circ(\\phi_{d_g,c_g}*\\phi_{d_f,c_f}),$$\nwhere $*$ is whiskering and horizontal composition of natural transformations. This is a natural isomorphism $Rg_!^{c_g}Rf_!^{c_f}\\to R(gf)_!^{c_{gf}}$ on $\\mathcal T_X$. For two dense choices, choose common dense refinements for $f$ and for $g$. Steps 5 and 6 compare their constructions after these refinements, and Step 4 compares their auxiliary models. Canceling the intervening comparison isomorphisms and using $\\phi_{c_3,c_2}\\phi_{c_2,c_1}=\\phi_{c_3,c_1}$ shows that the two displayed expressions for $\\alpha^c$ agree. Replacing any one of $c_f,c_g,c_{gf}$ changes this formula only by composing the corresponding $\\phi$, again by that cocycle. This proves compatibility with every compactification comparison and hence the independence asserted in the item.",
+   "uses": [
+    "det-nagata-refinement-common-dense",
+    "det-sf-comp-coherence-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+    "place": "Canonicity and associativity: descend through common dense refinements and the cocycle."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-nagata-compactification",
+  "lem-weil-pbc-proper-fp-permanence",
+  "sk-def-nagata-sketch-data",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-sfb-module-lower-star-comp",
+  "def-sfb-finite-lower-star",
+  "def-sfb-module-lower-star",
+  "det-proper-image-localizing-open",
+  "det-sf-comp-composition-interchange",
+  "det-sf-comp-coherence-single",
+  "det-sf-comp-coherence-refinement",
+  "det-nagata-refinement-common-dense",
+  "det-sf-comp-coherence-cocycle",
+  "det-nagata-refinement-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+  "place": "The composition isomorphism and first two sentences of Canonicity and associativity; explicit refinement-square arguments supplied in Steps 4--7."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -98,10 +229,66 @@
    "date": "2026-10-16",
    "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Hom.comp_appIso; SheafOfModules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.IdealSheafData.map_comp",
    "verdict": "no match: ordinary presheaf/sheaf pushforward comparisons do not construct the compactification-defined derived proper-support composition isomorphism on rational pro-etale localizing categories."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactSupport|withProperSupport",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf/module pushforward comparisons and unrelated compact-support functions do not state compactification-defined rational pro-etale composition on the localizing hull."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\"",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf/module pushforward comparisons and unrelated compact-support functions do not state compactification-defined rational pro-etale composition on the localizing hull."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of derived direct image with compact support for rational l-adic sheaves on schemes",
+   "results": "8 hits: HasCompactSupport.comp_isClosedEmbedding; SheafOfModules.pushforwardComp; CategoryTheory.Functor.sheafPushforwardContinuousComp'; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf/module pushforward comparisons and unrelated compact-support functions do not state compactification-defined rational pro-etale composition on the localizing hull."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compactly supported derived pushforward of a composite of separated finite type scheme morphisms is the composite on localizing categories of rational pro-etale constructible modules",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf/module pushforward comparisons and unrelated compact-support functions do not state compactification-defined rational pro-etale composition on the localizing hull."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|lowerShriek|withProperSupport|compactlySupported",
+   "results": "25 hits: Mathlib/MeasureTheory/Measure/Haar/Extension.lean; Mathlib/MeasureTheory/Measure/Haar/Extension.lean; Mathlib/MeasureTheory/Measure/Haar/Extension.lean; Mathlib/MeasureTheory/Measure/Haar/Extension.lean; Mathlib/MeasureTheory/Measure/Haar/Extension.lean; Mathlib/MeasureTheory/Measure/Prokhorov.lean; Mathlib/MeasureTheory/Integral/CompactlySupported.lean; Mathlib/MeasureTheory/Integral/CompactlySupported.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf/module pushforward comparisons and unrelated compact-support functions do not state compactification-defined rational pro-etale composition on the localizing hull."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"comp\"",
+   "results": "12 hits: PresheafOfModules.pushforward₀CompToPresheaf; PresheafOfModules.pushforwardCompToPresheaf; PresheafOfModules.pushforwardComp; PresheafOfModules.pushforward_id_comp; PresheafOfModules.pushforward_comp_id; PresheafOfModules.pushforwardCompCoyonedaFreeYonedaCorepresentableBy; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp; PresheafOfModules.instMonoidalCompOppositeCommRingCatRingCatForget₂RingHomCarrierCarrierOpPushforward₀OfCommRingCat",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf/module pushforward comparisons and unrelated compact-support functions do not state compactification-defined rational pro-etale composition on the localizing hull."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary direct image with proper support constructed from open extension by zero and proper pushforward commutes with composition and compactification refinements",
+   "results": "8 hits: Condensed.lanPresheaf; TopCat.Sheaf.pushforward; TopCat.Presheaf.Pushforward.comp; Condensed.lanCondensedSet; TopCat.Presheaf.Pushforward.comp_eq; TopCat.Presheaf.pushforward; LightCondensed.lanPresheaf; Condensed.lanSheafProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf/module pushforward comparisons and unrelated compact-support functions do not state compactification-defined rational pro-etale composition on the localizing hull."
+  },
+  {
+   "tool": "grep",
+   "query": "^def pushforwardComp|^def sheafPushforwardContinuousComp",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf/module pushforward comparisons and unrelated compact-support functions do not state compactification-defined rational pro-etale composition on the localizing hull."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-cor-affine-space-rational-induction",
@@ -109,5 +296,79 @@
   "group": "Q20"
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-cor-affine-space-rational"
+ "unit": "sk-cor-affine-space-rational",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-localizing-lower-shriek-composition",
+  "worker": "stage1",
+  "summary": "Reused the existing localizing interchange, open preservation, derived pushforward comparison, refinement uniqueness and cocycle nodes. Constructed the composition isomorphism and checked changes of the auxiliary compactification and refinements of each input separately before descent to arbitrary compactifications. Statement unchanged; no new nodes or Mathlib leaves. The previous missing-node blocker is resolved. Repair of the returned landing: reread every cited statement in the server live and side DAGs; make the interchange adjunction/unit normalization and the precise dense models used for uniqueness explicit in Steps 3--6, and refresh their verbatim quotations against the current statement. The item statement and route are unchanged. Step 2 now descends the exact open adjunction through localization and retains the transported coefficient action, respecting the revised derived-category and Cartesian-coefficient statements.",
+  "blueprint": "Supplies the lower-shriek composition input for the first paragraph of det-cor-affine-space-rational-induction (its composition mate). Follows main-20261015 sk-thm-sf-comp-composition, clause (1), The composition isomorphism and compactification-independence in Canonicity and associativity.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-nagata-compactification",
+    "why": "Existence of the dense auxiliary compactifications; generic geometric tool required by the composition route, not a substitute for affine-space induction."
+   },
+   {
+    "node": "det-proper-image-localizing-open",
+    "why": "Types j_!K in the localizing hull before applying interchange; the affine-space unit has no general open-extension preservation statement."
+   },
+   {
+    "node": "det-sf-comp-composition-interchange",
+    "why": "Interchanges a proper pushforward with an open extension on the precise localizing categories and characterizes its map; this is the smaller input needed to supply the composition mate in the affine-space unit."
+   },
+   {
+    "node": "det-sf-comp-coherence-single",
+    "why": "Types the compactification functors and the proper intermediate pushforward on localizing hulls; no claim about affine-space purity is taken."
+   },
+   {
+    "node": "det-sf-comp-coherence-refinement",
+    "why": "Uses the normalized refinement map and uniqueness on the source open to check the comparison squares."
+   },
+   {
+    "node": "det-sf-comp-coherence-cocycle",
+    "why": "Uses the prescribed comparison isomorphisms and their cocycle to descend from dense to arbitrary compactifications."
+   },
+   {
+    "node": "det-nagata-refinement-common-dense",
+    "why": "Provides common dense refinements for comparing the finite number of auxiliary choices."
+   },
+   {
+    "node": "det-nagata-refinement-morphisms",
+    "why": "Properness of the refinement of f, needed to apply the open/proper interchange lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Canonical unbounded ringed-topos direct-image comparison, rather than the finite-coefficient bounded-below composition theorem."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Computes successive direct images on one K-injective representative to justify reassociation and open restriction."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Exactness of module inverse image makes the K-injective comparison calculation apply to these coefficient sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-nagata-compactification",
+  "det-proper-image-localizing-open",
+  "det-sf-comp-composition-interchange",
+  "det-sf-comp-coherence-single",
+  "det-sf-comp-coherence-refinement",
+  "det-sf-comp-coherence-cocycle",
+  "det-nagata-refinement-common-dense",
+  "det-nagata-refinement-morphisms",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-b7cc045df",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-b7cc045df (reviewer sub-agent of L); spot-checked: Read the whole item, its 7 statement dependencies and 20 proof dependencies, and the main-20261015 sources: sk-thm-sf-comp-composition _section.md clause (1), the proof's 'composition isomorphism' and 'canonicity' paragraphs, and the interchange statement and proof. Also read the unit sk-cor-affine-space-rational and its parent det-cor-affine-space-rational-induction. The statement is unchanged and is clause (1) with coefficients E or Qlbar, on Loc(Dctf) inside the ordinary unbounded D(Mod_{Lambda_T}). There is no completion and no finite coefficients, and the parent's composition-mate step uses only what it states. No existing DAG node states this rational localizing pro-etale composition. thm-sf-comp-composition and lem-weil-pbc-etale-shriek-qcqs-composition are finite-coefficient or bounded-below etale results, so same_as=[] is right. Step 1: Nagata applies twice because the bases Y-bar and W are proper over standing schemes and hence qcqs. ip and uh are separated and of finite type by permanence clause (e). The density of uj follows from left-exactness of u_*. Step 2: the derived open adjunction descends from exact functors without needing K-flatness. The pushforward composition and restriction to an open use the ringed-topoi node and K-injective preservation (hypotheses checked). Step 3: interchange clauses (1)-(3) are applied with j_!K in the localizing hull, and naturality follows from adjunction uniqueness. Steps 4-6: I wrote out the refinement squares and each commutes as claimed. s^{-1}(uj X)=u'j X and s^{-1}(uj X)=h^{-1}(jX)=j'X, so each s is a refinement of the composite models. Interchange uniqueness is used for (u',rs), (ph,i,(v,rs)) and (p,i,(u',tr')), and every one of these is dense. Step 7: the cocycle and common dense refinements extend the result to nondense compactifications. Small cases checked: identities, two proper maps, two opens, empty source. All 11 declared tool_uses are accepted. They are generic inputs from the composition and coherence units that the affine-space route needs through sk-lem-sf-mate. FIX (C1/C4): Step 5 applies its equality at A=j'_!K, which needs j'_!K in T_{Xbar'}, but the step did not cite det-proper-image-localizing-open. The corrected node in fixes/ adds that sentence and the citation to Step 5's uses; the node was already in proof_deps. No new nodes, nothing to drop.; 1 file(s) fixed by the reviewer"
+ }
 }

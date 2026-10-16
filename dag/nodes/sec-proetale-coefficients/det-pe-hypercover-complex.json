@@ -3,49 +3,166 @@
  "blueprint": {
   "is": "det-pe-hypercover-complex",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomology via a weakly contractible hypercover",
- "statement": "Let $W_\\bullet\\to U$ be a hypercovering with every $W_r$ weakly contractible\n([det-pe-hypercover-existence]), and let $K^\\bullet$ be a complex of $\\mathcal R$-modules\nwith $K^b=0$ for $b<a$. Let $C^{r,b}=K^b(W_r)$ with horizontal differential\n$\\delta=\\sum_{i=0}^{r+1}(-1)^id_i^*\\colon C^{r,b}\\to C^{r+1,b}$ and vertical differential\n$(-1)^rd_K\\colon C^{r,b}\\to C^{r,b+1}$, and let $\\operatorname{Tot}(C)^q=\n\\bigoplus_{r+b=q}C^{r,b}=\\bigoplus_{0\\leq r\\leq q-a}K^{q-r}(W_r)$. Then there is an\nisomorphism $R\\Gamma(U,K^\\bullet)\\simeq\\operatorname{Tot}(C)$ in the derived category of\nabelian groups, natural in $K^\\bullet$.",
+ "statement": "Let $X$ be a scheme, let $\\mathcal R$ be a sheaf of rings on its small pro-étale site [def-weil-pbc-proetale-site], and let $a\\in\\mathbf Z$. Let $W_\\bullet\\to U$ be a hypercovering of an object $U$ of this site (the matching-cover condition of [det-pe-hypercover-existence]), with each $W_r$ weakly contractible [sk-def-pe-weak-contractible]. Let $K^\\bullet$ be a complex of sheaves of $\\mathcal R$-modules [def-weil-sheaf-of-modules-category] with $K^b=0$ for $b<a$. Put $C^{r,b}=K^b(W_r)$ for $r\\geq0$, with horizontal differential $\\delta=\\sum_{i=0}^{r+1}(-1)^id_i^*:C^{r,b}\\to C^{r+1,b}$ and signed vertical differential $(-1)^rd_K:C^{r,b}\\to C^{r,b+1}$. Set $\\operatorname{Tot}(C)^q=\\bigoplus_{r+b=q,\\ r\\geq0}C^{r,b}=\\bigoplus_{0\\leq r\\leq q-a}K^{q-r}(W_r)$, with differential $\\delta+(-1)^rd_K$. Let $R\\Gamma(U,-)$ mean the right derived functor of the additive section functor $\\operatorname{Mod}(\\mathcal R)\\to\\mathbf{Ab}$, $F\\mapsto F(U)$ [def-sfb-right-derived-functor]. Then there is an isomorphism $R\\Gamma(U,K^\\bullet)\\simeq\\operatorname{Tot}(C)$ in the derived category of abelian groups [def-weil-abstract-derived-category], natural in $K^\\bullet$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-complex.md",
   "place": "node det-pe-hypercover-complex, order None"
  },
  "stmt_deps": [
-  "det-pe-hypercover-existence"
+  "def-weil-pbc-proetale-site",
+  "det-pe-hypercover-existence",
+  "sk-def-pe-weak-contractible",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-right-derived-functor",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [
   {
-   "text": "*Finiteness.* $C^{r,b}\\neq0$ only for $r\\geq0$ and $b\\geq a$, so in total degree $q$ only\n$0\\leq r\\leq q-a$ contribute, and $\\operatorname{Tot}$ is a finite direct sum in each\ndegree. The two differentials commute up to the sign $(-1)^r$, so the total differential\nsquares to zero.",
+   "text": "For $r\\geq0$, the naturality of $d_K$ makes it commute with all face pullbacks, and the simplicial identities pair the terms of $\\delta^2$ with opposite signs. Thus the unsigned horizontal and vertical differentials commute and each squares to zero. On $C^{r,b}$ the two mixed terms in the square of the signed total differential are $(-1)^{r+1}d_K\\delta$ and $(-1)^r\\delta d_K$, which cancel. If $r+b=q$ and $b\\geq a$, then $0\\leq r\\leq q-a$. This proves the asserted finite direct-sum formula, including zero when $q<a$. A coefficient chain map acts on every summand by its map on sections and therefore defines a functor $T(K)=\\operatorname{Tot}(K^b(W_r))$.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2 (lemma-compute-cohomology), total complex; explicit signs and finite diagonals as in blueprint Finiteness"
+   }
   },
   {
-   "text": "*Injective case.* Choose a bounded-below injective resolution $K^\\bullet\\to I^\\bullet$ with\n$I^b=0$ for $b<a$ (possible since $K^\\bullet$ is bounded below). Then\n$R\\Gamma(U,K^\\bullet)=I^\\bullet(U)$. For an injective $\\mathcal R$-module $J$, the\naugmented complex $0\\to J(U)\\to J(W_0)\\to J(W_1)\\to\\cdots$ (alternating sums of face maps)\nis exact: this is the hypercovering theorem (Verdier; Stacks Project, Hypercoverings), which says that $\\Hom(\\mathbf Z[W_\\bullet],J)$\ncomputes $\\Hom(\\mathbf Z[U],J)$ with no higher cohomology, $\\mathbf Z[W_\\bullet]\\to\n\\mathbf Z[U]$ being a resolution after sheafification. Applying this to each $I^b$, the\ndouble complex $I^b(W_r)$ augmented by the column $I^b(U)$ has exact rows (fixed $b$). It\nlies in the region $r\\geq-1$, $b\\geq a$, so the standard first-quadrant argument (filter by\n$b$; the filtration is finite in each total degree) shows that\n$I^\\bullet(U)\\to\\operatorname{Tot}(I^b(W_r))$ is a quasi-isomorphism.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Comparison.* For each $r$, $K^\\bullet(W_r)\\to I^\\bullet(W_r)$ is a quasi-isomorphism,\nbecause evaluation at the weakly contractible $W_r$ is exact\n([det-pe-wc-sections-exact]) and so carries the acyclic cone of $K^\\bullet\\to I^\\bullet$\nto an acyclic complex. The map of double complexes $K^b(W_r)\\to I^b(W_r)$ is thus a\nquasi-isomorphism on every column (fixed $r$, up to the sign $(-1)^r$ which does not affect\ncohomology). Both lie in the region $r\\geq0$, $b\\geq a$; filtering by $r$ (finite in each\ntotal degree) shows that the induced map of total complexes is a quasi-isomorphism.\nCombining, $R\\Gamma(U,K^\\bullet)=I^\\bullet(U)\\simeq\\operatorname{Tot}(I^b(W_r))\\simeq\n\\operatorname{Tot}(C)$. A map $K^\\bullet\\to K'^\\bullet$ extends to the injective\nresolutions, uniquely up to homotopy, and all maps above are compatible with it, which\ngives naturality.",
+   "text": "Evaluation at every $W_r$ is exact, without requiring affineness. Work in the $\\mathcal V$-small skeleton of [def-weil-pbc-proetale-site] (see step 3), on which every presheaf of abelian groups has a sheafification, as that definition already uses for the constant sheaf $A_Y$; this is the site hypothesis of [lem-weil-pbc-module-sheaves-colimits-forgetful]. Indeed [def-weil-sheaf-of-modules-category] describes kernels sectionwise and cokernels by sheafifying the sectionwise cokernels, and [lem-weil-pbc-module-sheaves-colimits-forgetful] states that forgetting the module structure preserves both kernels and cokernels. Thus the underlying abelian-sheaf functor is exact. A module epimorphism is therefore an epimorphism of abelian sheaves. By [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] it is locally surjective, and by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] its underlying set-sheaf morphism is epi. The weak-contractibility property [sk-def-pe-weak-contractible] makes its evaluation at $W_r$ surjective. Hence evaluation preserves kernels and epimorphisms, so is exact. For any complex $E$, apply exact evaluation to $0\\to Z^b(E)\\to E^b\\to B^{b+1}(E)\\to0$ and $0\\to B^b(E)\\to Z^b(E)\\to H^b(E)\\to0$. The resulting kernel and quotient identify $H^b(E(W_r))$ with $H^b(E)(W_r)$, functorially in $E$. Thus evaluation preserves cohomology and in particular carries every quasi-isomorphism to a quasi-isomorphism.",
    "uses": [
-    "det-pe-wc-sections-exact"
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "sk-def-pe-weak-contractible",
+    "def-weil-pbc-proetale-site"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2 (lemma-compute-cohomology), exact evaluation; sites-modules.tex Tag 03DA; sites.tex Tag 00WN"
+   }
+  },
+  {
+   "text": "Use throughout the $\\mathcal V$-small skeleton stipulated in [def-weil-pbc-proetale-site], with all coefficient and derived categories formed in $\\mathcal V$. Clause 3 of [det-pe-topos-functoriality-site] supplies essential smallness in this larger universe; no essential-smallness assertion in the smaller scheme universe is needed. Choose $s:K\\to I$ by [lem-sc-bounded-below-injective-resolution], applied to this small ringed site. Thus $s$ is a quasi-isomorphism, $I$ is bounded below, every $I^b$ is an injective module sheaf, and $I$ is K-injective. Let $c$ be any lower bound for $I$, and put $N=\\min(a,c)$; no assertion that the resolution has exactly the original lower bound is needed. The right derived functor $R\\Gamma(U,-)$ of the statement exists: on this $\\mathcal V$-small site, $\\operatorname{Mod}(\\mathcal R)$ is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck] (no commutativity of $\\mathcal R$ is assumed there), so by [lem-sfb-grothendieck-k-injective] every complex, bounded or not, has a quasi-isomorphism to a K-injective complex; this is the standing hypothesis of [def-sfb-right-derived-functor]. By [def-sfb-right-derived-functor], the K-injective resolution computes $R\\Gamma(U,K)$ as the complex $I(U)$.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution",
+    "def-sfb-right-derived-functor",
+    "def-weil-pbc-proetale-site",
+    "det-pe-topos-functoriality-site",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2 (lemma-compute-cohomology), second paragraph: choose a bounded-below injective resolution; derived.tex Tags 05TI and 070I"
+   }
+  },
+  {
+   "text": "The pro-étale covering precoverage on the small skeleton contains isomorphisms, is stable under composition and base change, and admits the covering pullbacks; it is subcanonical by [det-pe-topos-functoriality-site]. For any compatible family of lower simplices over $T\\to U$, the matching universal property gives a map $T$ to the matching object. Pulling back the hypercover matching covering along that map gives local lifts to $W_n$. In degree zero this is just the pullback of $W_0\\to U$. These verify exactly the local-matching hypothesis of [lem-sc-ringed-hypercover-injective-augmentation-ring]. Apply that theorem with ring sheaf $\\mathcal R$, base object $U$, simplicial object $W_\\bullet$, and injective module $I^b$. It gives the exact augmented row $0\\to I^b(U)\\to I^b(W_0)\\to I^b(W_1)\\to\\cdots$ for every $b$, with the stated alternating restriction maps. The module coefficient category is used throughout; injectivity of the underlying abelian sheaf is never required.",
+   "uses": [
+    "det-pe-topos-functoriality-site",
+    "lem-sc-ringed-hypercover-injective-augmentation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tags 01GE (lemma-acyclic-hypercover-sheaves) and 01GW (lemma-injective-trivial-cech); ringed-module version of the free-sheaf/injective-Hom argument"
+   }
+  },
+  {
+   "text": "For every coefficient complex $E$, define $\\alpha_E:E(U)\\to T(E)$ by restriction to $W_0$, inserted in total bidegree $(0,b)$ in degree $b$. The two face restrictions to $W_1$ agree because both augment to $U$, so their alternating difference vanishes. Restriction commutes with $d_E$, and the vertical sign at $r=0$ is $1$, so $\\alpha_E$ is a chain map, natural in $E$. With $E=I$, put $A=I(U)$ and use the bicomplex $D^{r,b}=I^b(W_r)$ extended by zero for $r<0$. It and $A$ vanish below $b=N$. Step 4 says precisely that the maps from $I^b(U)[0]$ to the fixed-$b$ rows are quasi-isomorphisms. The outgoing horizontal differential kills the column-zero augmentation, as just checked. The abelian category of abelian groups has countable coproducts (coordinatewise direct sums). Thus [lem-weil-pbc-bounded-below-row-augmentation] applies and gives that $\\alpha_I:I(U)\\to T(I)$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-row-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2 (lemma-compute-cohomology), final paragraph; homology.tex Tags 0132 (lemma-first-quadrant-ss) and 0133 (lemma-double-complex-gives-resolution)"
+   }
+  },
+  {
+   "text": "By step 2, evaluation takes $s:K\\to I$ to a quasi-isomorphism $K(W_r)\\to I(W_r)$ for every $r$. Both section bicomplexes vanish for $r<0$ or $b<N$. Apply [lem-weil-pbc-bounded-below-total-column-comparison] with common bounds $P=0$ and $Q=N$ to obtain a quasi-isomorphism $T(s):T(K)\\to T(I)$. For any quasi-isomorphism $u:E\\to F$ between bounded-below coefficient complexes, choose lower bounds $e,f$ and put $B=\\min(e,f)$. Step 2 makes each column map $E(W_r)\\to F(W_r)$ a quasi-isomorphism, and both bicomplexes vanish for $r<0$ or $b<B$. The cited column-comparison theorem with $P=0,Q=B$ therefore makes $T(u)$ a quasi-isomorphism. In the derived category the composite $R\\Gamma(U,K)\\simeq I(U)\\xrightarrow{\\alpha_I}T(I)\\xrightarrow{T(s)^{-1}}T(K)$ is therefore an isomorphism and has exactly the total complex stated in the item.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-total-column-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2 (lemma-compute-cohomology), column comparison; homology.tex Tag 0132 (lemma-first-quadrant-ss)"
+   }
+  },
+  {
+   "text": "We verify naturality and independence of the resolution rather than merely choosing isomorphisms objectwise. For a chain map $f:K\\to L$ and resolutions $s:K\\to I$, $t:L\\to J$ chosen as in step 3, [lem-weil-pbc-kinjective-hom-derived], applied with source $I$ and target $J$, lifts the derived map $(Qt)(Qf)(Qs)^{-1}:QI\\to QJ$ to a chain map $g:I\\to J$, unique up to homotopy. Applying the injectivity of the same Hom bijection with source $K$ and target $J$ to $Q(gs)=Q(tf)$ gives $gs\\simeq tf$. The functor $T$ preserves chain homotopies: if $h:E^b\\to F^{b-1}$ is a coefficient homotopy, take on the summand of horizontal degree $r$ the total homotopy $(-1)^rh(W_r)$. Writing $u-v=d_Fh+hd_E$ for the coefficient homotopy equation, the vertical part of $d_{T(F)}H+Hd_{T(E)}$ on horizontal degree $r$ is $(-1)^r(-1)^r(d_Fh+hd_E)=u-v$. Its horizontal part is $(-1)^r\\delta_Fh+(-1)^{r+1}h\\delta_E=0$, since $h$ commutes with every restriction. Thus $dH+Hd=T(u)-T(v)$. Hence $T(g)T(s)=T(t)T(f)$ in the derived category. Naturality of restriction gives $T(g)\\alpha_I=\\alpha_Jg(U)$. These two equalities and inversion of $T(s),T(t)$ show that the isomorphisms of step 6 commute with $f$ and $R\\Gamma(U,f)$, the latter being $g(U)$ under the K-injective computation [def-sfb-right-derived-functor]. Taking $f=\\mathrm{id}$ gives independence of the chosen resolution. Since step 6 inverts quasi-isomorphisms, the same naturality passes to derived morphisms.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), homotopy-to-derived Hom bijection; explicit comparison/naturality calculation completing proetale.tex Tag 09A2"
+   }
   }
  ],
  "proof_deps": [
-  "det-pe-wc-sections-exact",
-  "det-pe-wc-sections-derived"
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "sk-def-pe-weak-contractible",
+  "def-weil-pbc-proetale-site",
+  "lem-sc-bounded-below-injective-resolution",
+  "def-sfb-right-derived-functor",
+  "det-pe-topos-functoriality-site",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-sc-ringed-hypercover-injective-augmentation-ring",
+  "lem-weil-pbc-bounded-below-row-augmentation",
+  "lem-weil-pbc-bounded-below-total-column-comparison",
+  "lem-weil-pbc-kinjective-hom-derived"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-complex.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2 (lemma-compute-cohomology), expanded along the blueprint Finiteness/Injective case/Comparison route, using Hypercoverings Tags 01GE/01GW in the ringed-module form and Derived Categories Tag 070I for naturality"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below complex of sheaves on a site has derived sections computed by the total cochain complex of a weakly contractible hypercover",
+   "results": "OK 8 hits: CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.isLimit; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.lift; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'; CategoryTheory.GrothendieckTopology.OneHypercover.isLimitMultifork; subdirectory=",
+   "date": "2026-10-16",
+   "verdict": "no exact match for bounded-below hypercover total computation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hypercover\"",
+   "results": "OK 12 hits: CategoryTheory.PreZeroHypercover; CategoryTheory.PreZeroHypercover.empty; CategoryTheory.Precoverage.ZeroHypercover; CategoryTheory.PreZeroHypercover.HasPullbacks; CategoryTheory.PreZeroHypercover.I₀; CategoryTheory.PreZeroHypercover.instCategory; CategoryTheory.PreZeroHypercover.presieve₀; CategoryTheory.PreZeroHypercover.shrink; subdirectory=",
+   "date": "2026-10-16",
+   "verdict": "no exact match for bounded-below hypercover total computation"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover|alternatingCoface",
+   "results": "OK 25 hits: Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean; Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean; Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean; Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean; Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean; Mathlib/CategoryTheory/Sites/MorphismProperty.lean; Mathlib/CategoryTheory/Sites/MorphismProperty.lean; Mathlib/CategoryTheory/Sites/MorphismProperty.lean; subdirectory=CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "no exact match for bounded-below hypercover total computation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly contractible hypercovers compute derived sections of bounded below complexes of sheaves by a total complex",
+   "results": "OK 8 hits: CategoryTheory.GrothendieckTopology.OneHypercover.toPreOneHypercover; CategoryTheory.GrothendieckTopology.OneHypercover; CategoryTheory.GrothendieckTopology.OneHypercover.amalgamate; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.isSheaf_iff; CategoryTheory.Presheaf.isSheaf_iff_of_isGeneratedByOneHypercovers; CategoryTheory.GrothendieckTopology.OneHypercover.mk; CategoryTheory.GrothendieckTopology.OneHypercover.isSheafFor_presieve₀; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac; subdirectory=",
+   "date": "2026-10-16",
+   "verdict": "no exact match for bounded-below hypercover total computation"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -64,5 +181,69 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-pe-hypercover"
+ "unit": "sk-prop-pe-hypercover",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-pe-hypercover-complex",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks 09A2/blueprint argument into seven steps, reusing existing generic ringed-site injective augmentation, resolution, and total-complex comparison lemmas. No new nodes. Explicitly treats arbitrary weakly contractible terms, checks site and matching hypotheses, and proves naturality by signed total homotopies. Repaired omitted ambient binders X, ring sheaf R and integer a; no affineness or qcqs hypothesis is added. Repair of the returned landing: revalidated the current site-axioms/subcanonicity/smallness statement, made the larger-universe skeleton and its citation explicit in step 3, and refreshed all affected verbatim quotations against the current DAG. Second reading expanded the arbitrary quasi-isomorphism comparison, the two K-injective Hom applications, and the signed total-homotopy equation; no new nodes or changed hypotheses.",
+  "blueprint": "Step 1 realizes Finiteness; steps 3-5 realize Injective case; steps 2,6,7 realize Comparison, including naturality. The broader search found an existing ringed-site row theorem so the candidate new row lemma was removed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "Identifies underlying abelian-sheaf epimorphisms with locally surjective morphisms to apply weak contractibility; no affine assumption. It is a generic tool in the existing route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "Converts the same local lifts into a set-sheaf epimorphism, the hypothesis in weak contractibility. It is a generic tool in the existing route, not a replacement route."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Supplies a bounded-below termwise-injective K-injective resolution on an arbitrary small ringed site. It is a generic tool in the existing route, not a replacement route."
+   },
+   {
+    "node": "lem-sc-ringed-hypercover-injective-augmentation-ring",
+    "why": "The generic ringed-site injective-row theorem supplies the exact augmented hypercover rows used by the blueprint. It is a generic tool in the existing route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-row-augmentation",
+    "why": "The generic bounded-below bicomplex augmentation theorem turns the exact rows into the blueprint injective total comparison. It is a generic tool in the existing route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-total-column-comparison",
+    "why": "The generic bicomplex comparison theorem turns exact evaluation into the blueprint columnwise total comparison. It is a generic tool in the existing route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "The generic K-injective Hom bijection supplies comparison maps up to homotopy for the naturality calculation. It is a generic tool in the existing route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Supplies that Mod(R) on the small pro-etale skeleton is Grothendieck abelian, needed for the existence hypothesis of the right derived functor RΓ(U,-) in the statement; the same tool use is accepted on det-pe-wc-sections-derived of this chapter."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Gives K-injective resolutions of all complexes in a Grothendieck abelian category, the standing hypothesis of def-sfb-right-derived-functor; same accepted tool use as det-pe-wc-sections-derived."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-sc-ringed-hypercover-injective-augmentation-ring",
+  "lem-weil-pbc-bounded-below-row-augmentation",
+  "lem-weil-pbc-bounded-below-total-column-comparison",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NY-34eec113d",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-34eec113d (reviewer sub-agent of L); spot-checked: I read all of the following in full: the item, the blueprint det-pe-hypercover-complex statement and proof, the unit, the parent proposition, Stacks proetale.tex Tag 09A2 (lemma-compute-cohomology), and every cited statement. The statement is faithful to the blueprint. It only adds binders for X, R, a and RΓ:Mod(R)→Ab, with no affine or qcqs hypothesis and no weakening. The report's source error in the 09A2 proof (it writes RΓ(X) where RΓ(U) is meant) is confirmed. Step checks: step 1 sign conventions agree with def-sp-double-complex-total. Step 2 gets exact evaluation from the categorical weak contractibility plus the two general-site epimorphism criteria, so it covers non-affine W_r. In step 4 every hypothesis of lem-sc-ringed-hypercover-injective-augmentation-ring is verified: small site, precoverage axioms and subcanonicity from clauses 1–2 of the site node, and local matching by pulling back the matching cover. In step 5 the row-augmentation hypotheses hold, with δ∘a=0 and common bound N. Step 6 is a correct column comparison with P=0, Q=N. Step 7 is sound: g is lifted through the K-injective Hom bijection, the homotopy (−1)^r h(W_r) is correct, and compatibility with RΓ(U,f) follows from naturality of the unit η. Small cases checked: the identity hypercover, q<a, q=a, negative a, and K=0. The dependency closure has no cycle and no missing or merged node, and no SGA source is cited. There are no new nodes. lem-weil-pbc-proetale-hypercover-computes-bounded-complex is not a duplicate: it needs commutative R and lands in D(R(W)-Mod). FIX, three repairs. (1) C4/E1 in step 3: def-sfb-right-derived-functor assumes every complex has a K-injective resolution, and the step never established this. I cited lem-weil-pbc-ring-sheaves-grothendieck and lem-sfb-grothendieck-k-injective and added both to tool_uses, as on the reviewed det-pe-wc-sections-derived. (2) In step 2 the forgetful-functor lemma needs sheafification on the site; the step now states this for the V-small skeleton and cites def-weil-pbc-proetale-site. (3) The unit's realized.statement omitted det-pe-hypercover-existence, which carries the existence half of the unit statement; I added it. I accept the seven declared tool uses and the two added ones. Full details are in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }

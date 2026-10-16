@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-sf-comparison-affine-continuity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Pro-étale cohomology of a pro-étale affine",
- "statement": "Let $X$ be a scheme, $\\Lambda$ a ring, $K\\in D^+(X_{\\mathrm{ét}},\\Lambda)$, and let\n$U=\\varprojlim_{i\\in I}U_i$ be a pro-étale affine over $X$, the limit being\ncofiltered with affine transition maps and each $U_i$ affine and étale over\n$X$. Write $K_i=K|_{U_i}\\in D^+((U_i)_{\\mathrm{ét}},\\Lambda)$ and $K_U$ for the\ninverse image of $K$ on $U_{\\mathrm{ét}}$. Then for every $n\\in\\mathbf Z$ the\ncanonical maps\n\n$$\n\\varinjlim_iH^n((U_i)_{\\mathrm{ét}},K_i)\\xrightarrow{\\ \\sim\\ }\nH^n(U_{\\mathrm{ét}},K_U)\\xrightarrow{\\ \\sim\\ }\nH^n(U_{\\mathrm{proét}},(\\nu_X^*K)|_U)\n$$\n\nare isomorphisms; equivalently\n$R\\Gamma(U_{\\mathrm{proét}},(\\nu_X^*K)|_U)\\simeq\\varinjlim_iR\\Gamma((U_i)_{\\mathrm{ét}},K_i)$\nas a filtered derived colimit.",
+ "statement": "Let $X$ be a scheme, $\\Lambda$ a ring, $K\\in D^+(X_{\\mathrm{ét}},\\Lambda)$, and let\n$U=\\varprojlim_{i\\in I}U_i$ be a pro-étale affine over $X$, the limit being\ncofiltered with affine transition maps and each $U_i$ affine and étale over\n$X$. Write $K_i=K|_{U_i}\\in D^+((U_i)_{\\mathrm{ét}},\\Lambda)$ and $K_U$ for the\ninverse image of $K$ on $U_{\\mathrm{ét}}$. Then for every $n\\in\\mathbf Z$ the\ncanonical maps\n\n$$\n\\varinjlim_iH^n((U_i)_{\\mathrm{ét}},K_i)\\xrightarrow{\\ \\sim\\ }\nH^n(U_{\\mathrm{ét}},K_U)\\xrightarrow{\\ \\sim\\ }\nH^n(U_{\\mathrm{proét}},(\\nu_X^*K)|_U)\n$$\n\nare isomorphisms; equivalently\n$R\\Gamma(U_{\\mathrm{proét}},(\\nu_X^*K)|_U)\\simeq\\varinjlim_iR\\Gamma((U_i)_{\\mathrm{ét}},K_i)$\nas a filtered derived colimit.\n\nHere rings have a unit and modules are left modules. The coefficient ring sheaf on either site is the sheafification of the constant presheaf of rings with value $\\Lambda$; $D^+$ is the bounded-below derived category of its module sheaves. The functor $\\nu_X^*$ applies the geometric inverse image to the underlying sheaf and its addition and scalar action; this is exact. Cohomology means right-derived sections at the terminal object, in $\\Lambda$-modules. The presentation index is small and nonempty, and the colimits are indexed by $I^{\\mathrm{op}}$, in the universes of [def-weil-size-convention]. The filtered derived colimit is formed from any bounded-below complex $I^\\bullet$ of injective [def-sp-injective-resolutions] $\\Lambda$-module sheaves on $X_{\\mathrm{ét}}$ representing $K$: the section complexes $I^\\bullet(U_i)$, with the sheaf restriction maps along the transitions $U_j\\to U_i$, form a strict $I^{\\mathrm{op}}$-diagram of complexes of $\\Lambda$-modules, each $I^\\bullet(U_i)$ computes $R\\Gamma((U_i)_{\\mathrm{ét}},K_i)$, and $\\varinjlim_iR\\Gamma((U_i)_{\\mathrm{ét}},K_i)$ denotes the degreewise colimit of this diagram, which is also its left-derived colimit. The asserted isomorphism in $D^+(\\Lambda\\text{-}\\mathrm{Mod})$ induces on $H^n$ the composite of the two displayed maps.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/det-sf-comparison-affine-continuity.md",
   "place": "node det-sf-comparison-affine-continuity, order None",
@@ -18,47 +18,203 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "sk-def-pe-morphisms",
+  "sk-def-pe-site",
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-sp-injective-resolutions"
+ ],
  "proof": [
   {
-   "text": "*Step 1: restriction to $U$.* The pro-étale site of $U$ is the localization\n$X_{\\mathrm{proét}}/U$, and restriction to a localized site commutes with the\ncomparison morphisms: $(\\nu_X^*K)|_U=\\nu_U^*(K_U)$, where $K_U$ is the\ninverse image of $K$ along the (weakly étale) morphism $U\\to X$ on small\nétale sites. Both sides are computed termwise on a bounded-below complex\nrepresenting $K$, since $\\nu^*$ and restriction are exact on sheaves.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 2: global sections on $U$.* Apply the global-sections comparison\n[lem-weil-pbc-comparison-global-cohomology] (which is the global-sections\nform of the unit isomorphism [thm-weil-pbc-site-comparison]) on the scheme\n$U$: the derived unit $K_U\\to R\\nu_{U,*}\\nu_U^*K_U$ is an isomorphism, and\napplying $R\\Gamma(U_{\\mathrm{ét}},-)$ gives\n$R\\Gamma(U_{\\mathrm{ét}},K_U)\\simeq R\\Gamma(U_{\\mathrm{proét}},\\nu_U^*K_U)$, because\n$R\\Gamma(U_{\\mathrm{ét}},-)\\circ R\\nu_{U,*}=R\\Gamma(U_{\\mathrm{proét}},-)$ (composition\nof derived right adjoints; $\\nu_{U,*}$ preserves injectives since its left\nadjoint $\\nu_U^*$ is exact). The argument of\n[thm-weil-pbc-site-comparison] uses only the acyclicity of pulled-back\ninjectives, which holds for every coefficient ring.",
+   "text": "*Step 1: coefficients and forgetting scalars.* For any of the small sites in the statement, use sheaves of left modules over its constant ring sheaf. By [lem-weil-pbc-module-sheaves-colimits-forgetful] the forgetful functor to abelian sheaves is exact and preserves colimits. A geometric inverse image is exact on abelian sheaves by [lem-weil-pbc-site-pullback-abelian-exact]. For each $r\\in\\Lambda$, multiplication by $r$ is an endomorphism of the underlying abelian sheaf, even when it is not $\\Lambda$-linear. Applying the additive inverse image to these maps gives the scalar action on the inverse image, with the same underlying abelian sheaf. The module identities remain true because they are equalities of maps; kernels and cokernels are preserved because they are preserved after forgetting. Constant coefficients are preserved: a constant sheaf is inverse image from sets at a point, and composing the left adjoints defining inverse image identifies its pullback with the constant sheaf on the target. This reasoning applies to noncommutative rings as well. Abelian sheaves are the same as modules over the constant integer sheaf: the action is $n\\cdot x=x+\\cdots+x$ for $n\\geq0$ and its additive inverse for $n<0$. Consequently [lem-weil-pbc-ring-sheaves-grothendieck] also makes the abelian-sheaf categories Grothendieck, as required by the complex acyclicity criterion below.\n\nDerived sections can also be computed after forgetting. Indeed [lem-weil-pbc-ring-sheaves-grothendieck] and [lem-sp-grothendieck-enough-injectives] supply enough injectives, and [lem-weil-pbc-dplus-injective-representative] supplies bounded-below injective representatives. For an injective module sheaf $J$, positive derived evaluation in module sheaves vanishes, hence [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] implies $H^q(V,J_{ab})=0$ for every site object $V$ and $q>0$. Forgetting a bounded-below module injective resolution therefore gives an exact resolution by objects acyclic for abelian evaluation. The complex version of [lemma-weil-pbc-leray-acyclicity] identifies its section complex with the abelian derived sections. The comparison is induced by the identity of underived section functors, so is natural in coefficient maps and the usual section pullbacks. In particular no assertion that $J_{ab}$ is injective is needed.",
    "uses": [
-    "lem-weil-pbc-comparison-global-cohomology",
-    "thm-weil-pbc-site-comparison"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "lemma-weil-pbc-leray-acyclicity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/det-sf-comparison-affine-continuity.proof.md",
+    "place": "Steps 1–2: exactness and the coefficient-independent meaning of derived sections; Stacks 03FD, label lemma-cohomology-modules-abelian-agree"
+   }
   },
   {
-   "text": "*Step 3: continuity.* $U$ is the limit of the qcqs schemes $U_i$ along\naffine transition maps, and $K_U$ is the inverse image of $K_{i_0}$ for any\n$i_0$. For a sheaf $F$ on $(U_{i_0})_{\\mathrm{ét}}$ the restriction maps induce\n$\\varinjlim_iH^n((U_i)_{\\mathrm{ét}},F|_{U_i})\\simeq H^n(U_{\\mathrm{ét}},F|_U)$\n(Stacks, Tag 03Q6). For a bounded-below complex this is\n[lem-weil-pbc-derived-cohomology-continuity]: in the hypercohomology spectral\nsequence $E_2^{p,q}=H^p(-,\\mathcal H^q)$ only finitely many terms contribute\nto each total degree because $K$ is bounded below, filtered colimits are\nexact, and so the sheaf case propagates to complexes by the five lemma\napplied to the truncation triangles\n$\\tau^{\\le m}K\\to K\\to\\tau^{>m}K$.",
+   "text": "*Step 2: restriction to $U$.* The presentation in the statement is exactly the small-cofiltered $X$-scheme presentation in clause 1 of [det-pe-classical-definition-continuity-map], with arrows $a:j\\to i$, transitions $u_a:U_j\\to U_i$, and projections $u_i:U\\to U_i$. That clause supplies $U$ and the $U_i$ as site objects and the transitions and projections as site arrows. Only this geometric clause is used: its optional commutative coefficient ring may be chosen as $\\mathbf Z$, independently of our arbitrary $\\Lambda$. No module-classicality assertion and no affine-base ind-étale identification from that node is used. Apply the site assertion (1) of [lem-weil-proetale-weakly-etale-localization] (with the auxiliary ring there chosen as $\\mathbf Z$) to identify $U_{\\mathrm{proét}}$ with $X_{\\mathrm{proét}}/U$. On an object $V\\to U$, [lem-cbc-comparison-pullback-sections] identifies the underlying sheaf of $(\\nu_X^*F)|_U$ with $\\Gamma(V_{\\mathrm{ét}},(V\\to X)^{-1}F)$. The same statement applied on $U$ identifies $\\nu_U^*(u_{\\mathrm{ét}}^{-1}F)$ there with $\\Gamma(V_{\\mathrm{ét}},(V\\to U)^{-1}u_{\\mathrm{ét}}^{-1}F)$. The composition isomorphism [lem-weil-pbc-inverse-image-composition] identifies these expressions, compatibly with restrictions. Naturality with addition and every scalar endomorphism makes the identification $\\Lambda$-linear. Restriction is exact by [lem-weil-pbc-site-restriction-exact], and inverse images are exact by step 1, so applying these sheaf isomorphisms degreewise gives the canonical derived identification $(\\nu_X^*K)|_U\\cong\\nu_U^*K_U$.",
    "uses": [
-    "lem-weil-pbc-derived-cohomology-continuity"
+    "det-pe-classical-definition-continuity-map",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-cbc-comparison-pullback-sections",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-site-restriction-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/det-sf-comparison-affine-continuity.proof.md",
+    "place": "Step 1: restriction to U"
+   }
   },
   {
-   "text": "*Step 4: conclusion.* Composing Steps 1–3 gives the two displayed\nisomorphisms, natural in $K$. Since filtered colimits of complexes of\n$\\Lambda$-modules are exact, the filtered colimit of the complexes\n$R\\Gamma((U_i)_{\\mathrm{ét}},K_i)$ represents the derived colimit and has the\ncolimit of the cohomology groups as its cohomology, which is the derived form.",
-   "uses": [],
-   "elementary": null
+   "text": "*Step 3: global-sections comparison without a coefficient restriction.* Choose a bounded-below complex $J$ of injective $\\Lambda_U$-module sheaves representing $K_U$, using step 1 and [lem-weil-pbc-dplus-injective-representative]. For every $J^m$, [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] gives $H^p(U_{\\mathrm{ét}},J^m_{ab})=0$ for $p>0$. Apply [lem-cbc-abelian-etale-proetale-cohomology-comparison] to $J^m_{ab}$: the underlying abelian sheaf of $\\nu_U^*J^m$ is sections-acyclic on $U_{\\mathrm{proét}}$, and the canonical degree-zero map $\\Gamma(U_{\\mathrm{ét}},J^m)\\to\\Gamma(U_{\\mathrm{proét}},\\nu_U^*J^m)$ is an isomorphism. The evaluation comparison on the pro-étale site makes $\\nu_U^*J^m$ sections-acyclic in module sheaves as well. By step 1, using [lem-weil-pbc-site-pullback-abelian-exact], $\\nu_U^*J$ represents $\\nu_U^*K_U$. Thus the complex acyclic-resolution criterion [lemma-weil-pbc-leray-acyclicity] makes $\\Gamma(U_{\\mathrm{proét}},\\nu_U^*J)$ a model for its module derived sections. The degree-zero section comparisons commute with the differentials, since section pullback is natural, and are $\\Lambda$-linear by construction. They give an isomorphism of $\\Lambda$-module complexes from $\\Gamma(U_{\\mathrm{ét}},J)$ to this pro-étale section complex. This proves the canonical derived comparison in $D^+(\\Lambda\\text{-}\\mathrm{Mod})$, and step 2 identifies its target with the one in the statement. Taking cohomology proves the second displayed arrow for every integer $n$.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/det-sf-comparison-affine-continuity.proof.md",
+    "place": "Step 2: global sections on U; Stacks 099W, label lemma-compare-cohomology, and 099V, label lemma-relative-comparison"
+   }
+  },
+  {
+   "text": "*Step 4: continuity.* Each $U_i$ is an affine object of $X_{\\mathrm{proét}}$, hence is quasi-compact and quasi-separated by [lem-weil-pbc-proetale-qcqs-finite-family-geometry]. Apply [lem-weil-pbc-derived-etale-cohomology-limit] with $T=X$, $Y_i=U_i$, $Y=U$, and the underlying abelian complex of $K$. Its hypotheses are precisely the small cofiltered presentation, affine transition maps, qcqs stages, and bounded-below complex pulled back from $X$. It gives the first displayed canonical map as an isomorphism in every integer degree. By step 1 it computes module cohomology as well. All transition and comparison maps commute with the scalar endomorphisms of $K$, so these are isomorphisms of $\\Lambda$-modules. This continuity statement uses the entire given index category; no unproved change from the presentation to a stage overcategory is made.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/det-sf-comparison-affine-continuity.proof.md",
+    "place": "Step 3: continuity; Stacks 0GIT, label lemma-colimit-complexes (via 0EZM, label lemma-colimit-variant-complexes)"
+   }
+  },
+  {
+   "text": "*Step 5: a compatible complex model for the derived-colimit assertion.* Let $I^\\bullet$ be a bounded-below complex of injective module sheaves representing $K$ on $X_{\\mathrm{ét}}$, as in the statement; such a complex exists by [lem-weil-pbc-ring-sheaves-grothendieck], [lem-sp-grothendieck-enough-injectives] and [lem-weil-pbc-dplus-injective-representative]. Put $C_i^m=I^m(U_i)$, with differential induced by $I^\\bullet$ and transition maps the literal sheaf restrictions. These form a strict $I^{\\mathrm{op}}$-diagram of $\\Lambda$-module complexes with one lower bound. By [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison], the underlying abelian sheaf of $I^m$ is acyclic for evaluation at $U_i$. By [lem-weil-pbc-etale-site-localization-open], the localized étale site $X_{\\mathrm{ét}}/U_i$ is $(U_i)_{\\mathrm{ét}}$: its objects and arrows are the same étale maps over $U_i$, with the same jointly surjective coverings. The canonical identification of inverse image with restriction follows from these site descriptions. [lem-weil-pbc-cohomology-over-object-localization] identifies evaluation cohomology with the cohomology of this restriction, and [lem-weil-pbc-site-restriction-exact] ensures that restriction still represents $K_i$. Therefore [lemma-weil-pbc-leray-acyclicity] and step 1 show that $C_i^\\bullet$ computes $R\\Gamma((U_i)_{\\mathrm{ét}},K_i)$, compatibly with the restriction transitions.\n\nLet $u:U\\to X$, and put $C_U^\\bullet=\\Gamma(U_{\\mathrm{ét}},u^{-1}I^\\bullet)$, where module inverse image is as in step 1. Apply the continuity assertion of step 4 to each $I^m[0]$. Its positive stage cohomology groups vanish by the preceding evaluation argument, so $u^{-1}I^m$ is acyclic for sections on $U$. Its degree-zero assertion gives $\\varinjlim_i I^m(U_i)\\cong\\Gamma(U_{\\mathrm{ét}},u^{-1}I^m)$. These maps commute with differentials, since all are induced by section pullback and are natural in $I^m$. Thus $\\varinjlim_i C_i^\\bullet\\cong C_U^\\bullet$ as complexes. Exact inverse image and the same acyclic-resolution criterion identify $C_U^\\bullet$ with $R\\Gamma(U_{\\mathrm{ét}},K_U)$. This supplies compatible representatives and their actual comparison maps, rather than choosing unrelated derived representatives at the stages.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-site-restriction-exact",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/det-sf-comparison-affine-continuity.proof.md",
+    "place": "Steps 3–4: compatible section complexes and the derived formulation"
+   }
+  },
+  {
+   "text": "*Step 6: filtered derived colimit and conclusion.* Filtered colimits of abelian groups are exact by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. For left $\\Lambda$-modules the colimit has representatives $[i,x]$, with addition formed at a common later stage and scalar action $r[i,x]=[i,rx]$; the equality relation is eventual equality. Thus its underlying abelian group is the abelian-group filtered colimit, and it is exact as well. Applying exactness to the kernel, image and quotient sequences defining cohomology gives $H^n(\\varinjlim_i C_i)=\\varinjlim_i H^n(C_i)$, for every $n\\in\\mathbf Z$. In particular degreewise filtered colimit carries objectwise quasi-isomorphisms of strict diagrams of complexes to quasi-isomorphisms. Therefore degreewise colimit on the category of strict $I^{\\mathrm{op}}$-diagrams of complexes already sends the weak equivalences (objectwise quasi-isomorphisms) to quasi-isomorphisms. Its left-derived functor on that diagram category is computed by the same degreewise colimit: replacing a diagram by a quasi-isomorphic resolution does not change the result. The diagram of the statement is exactly the strict diagram $C_i^\\bullet=I^\\bullet(U_i)$ of step 5, so its degreewise colimit is also its left-derived colimit, and step 5 shows that each $C_i^\\bullet$ computes $R\\Gamma((U_i)_{\\mathrm{ét}},K_i)$. Step 5 therefore identifies the filtered derived colimit with $R\\Gamma(U_{\\mathrm{ét}},K_U)$; composing with step 3 gives the stated pro-étale derived isomorphism. Its cohomology maps are exactly the two displayed restriction maps, because the complexes and cocone maps in step 5 are the section pullbacks themselves. This also explains the equivalence of the cohomological and derived formulations in the statement.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/det-sf-comparison-affine-continuity.proof.md",
+    "place": "Step 4: conclusion; elementary exact-colimit calculation"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-comparison-global-cohomology",
-  "thm-weil-pbc-site-comparison",
-  "lem-weil-pbc-derived-cohomology-continuity"
+  "det-pe-classical-definition-continuity-map",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "lem-cbc-comparison-pullback-sections",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lemma-weil-pbc-leray-acyclicity"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/det-sf-comparison-affine-continuity.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/det-sf-comparison-affine-continuity.proof.md",
+  "place": "Steps 1–4, using unrestricted abelian comparison and continuity instead of the finite-coefficient special cases; compatible complex models supplied explicitly"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived global sections pro etale comparison and continuity for inverse limits of schemes",
+   "results": "; hits: CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.preservesLimit_rightOp_Γ, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.inv_appTop, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.AffineScheme.Γ_preservesLimits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuity of bounded below derived etale sheaf cohomology for cofiltered affine transition limits and pro etale site comparison",
+   "results": "; hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"etale\"",
+   "results": "; 0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStar|cohomology.*[Ee]tale|[Ee]tale.*cohomology",
+   "results": "; 0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|etale.*[Cc]ohomology|[Cc]ohomology.*etale|comparisonUpperStar",
+   "results": "; 0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proetale\", \"cohomology\"",
+   "results": "; 0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inverse system of schemes with affine transition maps, bounded below étale hypercohomology commutes with the limit",
+   "results": "; hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Proetale.*[Cc]ohomology|[Cc]ohomology.*Proetale|[Ee]tale.*[Cc]ohomology|[Cc]ohomology.*[Ee]tale",
+   "results": "; 0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of an inverse image on the etale site commute with filtered inverse limits of affine schemes",
+   "results": "; hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality, AlgebraicGeometry.Spec_Γ_naturality_assoc, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -74,5 +230,104 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sf-comparison"
+ "unit": "sk-prop-sf-comparison",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-sf-comparison-affine-continuity",
+  "worker": "stage1",
+  "summary": "Replaced the earlier sandbox attempt, which had unjustifiably restricted the ring to finite commutative coefficients. The source statement remains valid for arbitrary unital rings and left modules. The proof now derives global comparison from unrestricted abelian sheaf comparison and acyclic resolutions, uses the existing arbitrary-coefficient abelian derived continuity theorem, and supplies a single compatible diagram of section complexes for the filtered derived colimit. No new nodes are necessary. The ringed-site module/abelian comparison is used without assuming that forgetting preserves injectives. Second-reader repairs to the Grothendieck hypothesis, noncommutative scalar action, module-complex comparison and strict derived diagram are retained. Revalidated the changed continuity-map node: step 2 uses only its current geometric presentation clause with small categorical indexing, independently of its commutative module coefficients and affine-base-only ind-étale identification.",
+  "blueprint": "Steps 1–2 realize restriction in blueprint Step 1; Step 3 realizes global sections in Step 2; Step 4 realizes continuity in Step 3; Steps 5–6 supply the coherent complex model and exact-colimit argument of Step 4. The finite-ring existing nodes are special cases and do not supply the arbitrary-ring assertion.",
+  "tool_uses": [
+   {
+    "node": "det-pe-classical-definition-continuity-map",
+    "why": "Only clause 1: it specifies the small cofiltered affine étale presentation, its projections, and their status as pro-étale site objects and arrows; no module-coefficient or classicality clause is used. This is presentation bookkeeping for the unit restriction step, not a different proof route."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic tool: Grothendieck abelian categories have enough injectives. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "Generic tool: Cohomology over an object is cohomology on its localized site. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-etale-cohomology-limit",
+    "why": "Generic tool: Derived etale cohomology over an inverse limit. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic tool: Every object of D^+ is represented by a bounded below K-injective complex of injectives. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic tool: The localized small etale site at an etale open is the small etale site of the open. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "why": "Generic tool: Filtered colimits of abelian groups are exact. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic tool: Inverse images along a composite: the canonical isomorphism compatible with the units. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic tool: Colimits of sheaves of modules and the forgetful functor to abelian sheaves. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "why": "Generic tool: Geometry of the qcqs finite-cover pro-etale subsite. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic tool: Module sheaves over arbitrary ring sheaves are Grothendieck. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic tool: Module and abelian cohomology over an object of a ringed site agree. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic tool: The inverse image of abelian sheaves along a morphism of sites is exact. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Generic tool: Restriction to a localized site is exact. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic tool: The small pro-etale site of a weakly etale X-scheme is the localization of X_proet. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Generic tool: Leray acyclicity criterion. It supplies the precise sheaf, derived-category, or exact-colimit fact used in the proof; no step of this unit is replaced by a different geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-classical-definition-continuity-map",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NU-ac110523c",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-ac110523c (reviewer sub-agent of L); spot-checked: I read the whole item, all 18 proof-dependency statements, the main-20261015 statement and proof, and Stacks 099W (proetale.tex l.3986 lemma-compare-cohomology) and 0GIT (etale-cohomology.tex l.7852 lemma-colimit-complexes); every tag/label pair matches tags/tags. The statement is the blueprint's verbatim, for an arbitrary scheme and an arbitrary unital ring. It is true and not weakened. Step 1 shows that module and abelian RΓ agree through acyclicity, using 03FD evaluation comparison and Leray (3) with Ab made Grothendieck through the constant integer sheaf; it does not assume that forgetting preserves injectives. Step 2 uses only site clause 1 of the presentation node, the weakly-étale localization node with A=Z, the 0GLZ sectionwise formula and the uniqueness-characterized composition isomorphism. Step 3 uses unrestricted 099W(1) on the underlying sheaves of injective modules. Step 4 applies lem-weil-pbc-derived-etale-cohomology-limit with T=X; it needs only qcqs affine stages and affine transitions. This replaces the DAG's finite-commutative continuity node, which cannot cover arbitrary Λ. Step 5 builds one injective model on X and gets the degreewise colimit from step 4 applied to each I^m[0]. Step 6 is genuinely elementary from exact filtered colimits. There are no new nodes. A closure traversal of 1016 nodes finds no cycle, and the DAG has no duplicate or generalization of the item. No SGA source is used. One fault (B2/B7) is fixed in fixes/dag/nodes/sec-proetale-coefficients/det-sf-comparison-affine-continuity.json. The convention 'left-derived colimit of the coherent geometric diagram ..., as justified in the proof' was undefined. It is now the explicit degreewise colimit of the strict diagram I^•(U_i), for any bounded-below injective representative I^• of K, which inducing the displayed composite on H^n. def-sp-injective-resolutions is added to stmt_deps, and steps 5 and 6 are aligned with the new wording; the displayed assertion is unchanged. Recommended tool_uses (maintainer-owned): the 12 off-unit lem-weil-pbc-*/lem-weil-proetale-*/lemma-weil-pbc-* statement tools listed in review.md. The unit record sk-prop-sf-comparison is stale maintainer metadata: it carries chapter sec-smooth-purity, the old finite-ring statement, uses=[] and no steps.; 1 file(s) fixed by the reviewer"
+ }
 }

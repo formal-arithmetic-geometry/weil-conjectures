@@ -29,55 +29,143 @@
   "def-weil-pbc-simplicial-set",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "grep",
-   "query": "lastVertex|last.vertex|category.of.simplices",
-   "results": "{\"t\": \"2026-10-16T15:53:16Z\", \"tool\": \"grep\", \"query\": \"lastVertex|last.vertex|category.of.simplices\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Simplices.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Simplices.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Simplices.lean\"], \"digest\": \"6d4644d2ed121b90\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: simplicial nerves, truncated homotopy categories and simplex-preorder notions do not give the last-vertex weak equivalence; Simplices.lean was read and explicitly distinguishes its preorder from the simplex category."
+   "text": "Composition in $E(K)$ is composition of ordinal maps: if $K(a)y=x$ and $K(b)z=y$, then $K(ba)z=x$. Identities satisfy the same condition. The nerve operators are restriction of functors $[p]\\to E(K)$, hence satisfy the simplicial identities. The vertex map $v$ is monotone because $a_{i+1}(n_i)\\leq n_{i+1}$. If $\\theta:[r]\\to[p]$ restricts a chain and $b:[n_{\\theta(r)}]\\to[n_p]$ is its remaining tail composite, its last-vertex map $v'$ satisfies $bv'=v\\theta$, while $x_{\\theta(r)}=K(b)x_p$. Thus $K(v')x_{\\theta(r)}=K(\\theta)K(v)x_p$, proving simpliciality for every operator, including repetitions and omission of the final object. A simplicial map $f:K\\to L$ carries $([n],x)$ to $([n],f_nx)$ and leaves the ordinal maps unchanged; $f_pK(v)x_p=L(v)f_{n_p}x_p$. This proves the claimed naturality.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01N8",
+    "place": "Construction 11.9.11.2 (01NA) and Corollary 11.9.11.5 (02QS); agent proof by a bisimplicial resolution, rather than the localization theorem used in the published proof."
+   }
   },
   {
-   "tool": "leansearch",
-   "query": "Nerve of the simplex category of a simplicial set is weakly equivalent to the simplicial set",
-   "results": "{\"t\": \"2026-10-16T15:53:34Z\", \"tool\": \"leansearch\", \"query\": \"Nerve of the simplex category of a simplicial set is weakly equivalent to the simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\", \"CategoryTheory.instCategoryObjOppositeSimplexCategoryNerve\", \"CategoryTheory.nerveFunctor_obj\", \"SSet.Truncated.nerve₂Adj\"], \"digest\": \"50bb9702b65dd148\"}",
+   "text": "Define a bisimplicial set $W$ by taking $W_{p,q}$ to consist of a chain $c_0\\to\\cdots\\to c_p$ in $E(K)$, where $c_i=([n_i],x_i)$, together with a monotone map $t:[q]\\to[n_0]$. Vertical operators precompose $t$. Horizontal operators restrict the chain; when its first object is omitted, replace $t$ by its image under the composite from the old first object to the new first object. This rule satisfies all identities by associativity of ordinal maps and commutes with precomposition of $t$. There are bisimplicial maps $P:W\\to A$ and $Q:W\\to B$, with $A_{p,q}=NE(K)_p$ constant in $q$, $B_{p,q}=K_q$ constant in $p$: $P$ forgets $t$, and $Q$ takes $K(t)x_0$. Horizontal compatibility of $Q$ is the equation $K(at)y=K(t)K(a)y$; vertical compatibility is functoriality. All sets and indexing categories here are small.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01N8",
+    "place": "Construction 11.9.11.2 (01NA) and Corollary 11.9.11.5 (02QS); agent proof by a bisimplicial resolution, rather than the localization theorem used in the published proof."
+   }
+  },
+  {
+   "text": "For fixed $p$, $P_{p,\\bullet}$ is the coproduct, over its chains, of $\\Delta^{n_0}\\to\\Delta^0$. Identify $\\Delta^n$ directly with the nerve of the ordered category $[n]$: in degree $q$ both have the monotone maps $[q]\\to[n]$. The unique maps $i\\to n$ define a natural transformation from the identity functor of $[n]$ to the constant functor at $n$. By [lem-coef-nerve-natural-homotopy-equivalence], the projection $\\Delta^n\\to\\Delta^0$ is a weak homotopy equivalence. A disjoint union of these maps is again one: the realization quotient relations never change the chain label, and every path, based sphere and based homotopy lies in one summand. Thus $P$ is a vertical weak equivalence in every horizontal degree, also when the chain set is empty.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01N8",
+    "place": "Construction 11.9.11.2 (01NA) and Corollary 11.9.11.5 (02QS); agent proof by a bisimplicial resolution, rather than the localization theorem used in the published proof."
+   }
+  },
+  {
+   "text": "For fixed $q$, let $C_q$ have objects $([n],x,t)$ with $t:[q]\\to[n]$ and arrows $a:([n],x,t)\\to([m],y,s)$ satisfying $K(a)y=x$ and $at=s$. Then $W_{\\bullet,q}=NC_q$: a chain of these triples is determined by the underlying chain in $E(K)$ and its initial $t$. The value $z=K(t)x$ is constant on arrows, so $C_q$ is the disjoint union of its full categories $C_{q,z}$, $z\\in K_q$. Each has initial object $([q],z,\\mathrm{id})$, since the unique arrow from it to $([n],x,t)$ is $t$. The unique arrows from this initial object give a natural transformation from its constant functor to the identity. Apply [lem-coef-nerve-natural-homotopy-equivalence] to the projection to the point and the initial-object section. Each $NC_{q,z}\\to\\Delta^0$ is a weak equivalence. The disjoint-union argument of step 3 proves $Q_{\\bullet,q}:W_{\\bullet,q}\\to\\operatorname{const}K_q$ is a weak equivalence, including $K_q=\\varnothing$.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01N8",
+    "place": "Construction 11.9.11.2 (01NA) and Corollary 11.9.11.5 (02QS); agent proof by a bisimplicial resolution, rather than the localization theorem used in the published proof."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-bisimplicial-diagonal-equivalence] to $P$ using step 3, and to $Q$ using its exchanged-direction assertion and step 4. Since $\\operatorname{diag}A=NE(K)$ and $\\operatorname{diag}B=K$, obtain weak equivalences $p=\\operatorname{diag}P:D\\to NE(K)$ and $q=\\operatorname{diag}Q:D\\to K$, where $D=\\operatorname{diag}W$. This invocation does not use either Bousfield--Kan comparison or Thomason's theorem.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01N8",
+    "place": "Construction 11.9.11.2 (01NA) and Corollary 11.9.11.5 (02QS); agent proof by a bisimplicial resolution, rather than the localization theorem used in the published proof."
+   }
+  },
+  {
+   "text": "Compare $q$ with $\\lambda_Kp$ explicitly. On a degree-$r$ element of $D$, put $b=a_r\\cdots a_1:[n_0]\\to[n_r]$, $u(i)=b(t(i))$, and let $v(i)=a_r\\cdots a_{i+1}(n_i)$. Then $q$ takes the value $K(u)x_r$, whereas $\\lambda_Kp$ takes $K(v)x_r$. Put $w(i)=\\max(u(i),v(i))$. For a simplex $\\epsilon:[r]\\to[1]$ of $\\Delta^1$, define $h_u(i)=u(i)$ if $\\epsilon(i)=0$ and $h_u(i)=w(i)$ if $\\epsilon(i)=1$. This is monotone: at a switch, $u(i)\\leq u(j)\\leq w(j)$. The analogous rule with $v$ is monotone too. Both yield maps $D\\times\\Delta^1\\to K$, via $K(h_u)x_r$ and $K(h_v)x_r$, with endpoints $(q,K(w)x_r)$ and $(\\lambda_Kp,K(w)x_r)$. To check all operators, restrict by $\\theta:[s]\\to[r]$ and let $c:[n_{\\theta(s)}]\\to[n_r]$ be the tail composite. The restricted data give $cu'=u\\theta$ and $cv'=v\\theta$; since every monotone map preserves binary maximum, $cw'=w\\theta$ and $ch'=h\\theta$. Together with $x_{\\theta(s)}=K(c)x_r$, these equations prove simpliciality, including end-face deletion. By the finite-product preservation of realization in [lem-coef-realization-finite-limits], these simplicial homotopies realize to homotopies with interval $|\\Delta^1|=[0,1]$ in k-spaces. They therefore induce homotopies on every compact test cube or sphere: its product with the interval maps continuously to the k-product by its universal property. Thus the realized maps $q$ and $\\lambda_Kp$ induce the same component map and conjugate homotopy-group maps under their basepoint paths.",
+   "uses": [
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01N8",
+    "place": "Construction 11.9.11.2 (01NA) and Corollary 11.9.11.5 (02QS); agent proof by a bisimplicial resolution, rather than the localization theorem used in the published proof."
+   }
+  },
+  {
+   "text": "Step 5 says $q$ is a weak homotopy equivalence. The homotopies of step 6 therefore imply that $\\lambda_Kp$ is one as well: its component map agrees with that of $q$, and the change-of-basepoint isomorphism along the homotopy path identifies their homotopy-group maps. Finally the model structure in [lem-coef-kan-quillen-right-proper] gives two-out-of-three for weak homotopy equivalences; since $p$ and $\\lambda_Kp$ are weak equivalences, so is $\\lambda_K$. For $K=\\varnothing$, all resolution sets and both source and target of $\\lambda_K$ are empty, so the same argument includes this case.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01N8",
+    "place": "Construction 11.9.11.2 (01NA) and Corollary 11.9.11.5 (02QS); agent proof by a bisimplicial resolution, rather than the localization theorem used in the published proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-realization-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01N8",
+  "place": "Construction 11.9.11.2 (01NA) and Corollary 11.9.11.5 (02QS); agent proof by a bisimplicial resolution, rather than the localization theorem used in the published proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "last vertex map from the nerve of the category of simplices of a simplicial set is a weak homotopy equivalence",
+   "results": "{\"t\": \"2026-10-16T17:20:11Z\", \"tool\": \"leanfinder\", \"query\": \"last vertex map from the nerve of the category of simplices of a simplicial set is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.stdSimplex.isoNerve\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"SSet.OneTruncation₂.ofNerve₂\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_map\"], \"digest\": \"fcea82c76ed502d8\"}",
    "date": "2026-10-16",
-   "verdict": "no match: simplicial nerves, truncated homotopy categories and simplex-preorder notions do not give the last-vertex weak equivalence; Simplices.lean was read and explicitly distinguishes its preorder from the simplex category."
+   "verdict": "no match: hits give ordinary nerves, the 2-truncated homotopy-category adjunction and standard simplices as nerves; none proves a last-vertex weak homotopy equivalence. Simplices.lean explicitly distinguishes its preorder from the full category of simplices."
   },
   {
    "tool": "loogle",
    "query": "\"lastVertex\"",
-   "results": "{\"t\": \"2026-10-16T15:53:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"lastVertex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-16T17:20:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"lastVertex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: simplicial nerves, truncated homotopy categories and simplex-preorder notions do not give the last-vertex weak equivalence; Simplices.lean was read and explicitly distinguishes its preorder from the simplex category."
+   "verdict": "no match: hits give ordinary nerves, the 2-truncated homotopy-category adjunction and standard simplices as nerves; none proves a last-vertex weak homotopy equivalence. Simplices.lean explicitly distinguishes its preorder from the full category of simplices."
+  },
+  {
+   "tool": "grep",
+   "query": "lastVertex|last.vertex|category.of.simplices",
+   "results": "{\"t\": \"2026-10-16T17:20:11Z\", \"tool\": \"grep\", \"query\": \"lastVertex|last.vertex|category.of.simplices\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Simplices.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Simplices.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Simplices.lean\"], \"digest\": \"6d4644d2ed121b90\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary nerves, the 2-truncated homotopy-category adjunction and standard simplices as nerves; none proves a last-vertex weak homotopy equivalence. Simplices.lean explicitly distinguishes its preorder from the full category of simplices."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nerve of the simplex category of a simplicial set is weakly equivalent to the simplicial set",
+   "results": "{\"t\": \"2026-10-16T17:20:12Z\", \"tool\": \"leansearch\", \"query\": \"Nerve of the simplex category of a simplicial set is weakly equivalent to the simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\", \"CategoryTheory.instCategoryObjOppositeSimplexCategoryNerve\", \"CategoryTheory.nerveFunctor_obj\", \"SSet.Truncated.nerve₂Adj\"], \"digest\": \"50bb9702b65dd148\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary nerves, the 2-truncated homotopy-category adjunction and standard simplices as nerves; none proves a last-vertex weak homotopy equivalence. Simplices.lean explicitly distinguishes its preorder from the full category of simplices."
   },
   {
    "tool": "leanfinder",
-   "query": "The last vertex map from the nerve of the category of simplices of a simplicial set is a weak homotopy equivalence",
-   "results": "{\"t\": \"2026-10-16T15:53:13Z\", \"tool\": \"leanfinder\", \"query\": \"The last vertex map from the nerve of the category of simplices of a simplicial set is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.stdSimplex.isoNerve\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.stdSimplex.isoNerve_hom_app_apply\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"CategoryTheory.nerve.homEquiv\"], \"digest\": \"974e37783cf60571\"}",
+   "query": "A simplicial set is weakly equivalent to the nerve of its category of elements via the last vertex natural transformation",
+   "results": "{\"t\": \"2026-10-16T17:20:51Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial set is weakly equivalent to the nerve of its category of elements via the last vertex natural transformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.isoNerve\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerveAdjunction\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerve.functorOfNerveMap_obj\"], \"digest\": \"c943c097c5f6a219\"}",
    "date": "2026-10-16",
-   "verdict": "no match: simplicial nerves, truncated homotopy categories and simplex-preorder notions do not give the last-vertex weak equivalence; Simplices.lean was read and explicitly distinguishes its preorder from the simplex category."
+   "verdict": "no match: hits give ordinary nerves, the 2-truncated homotopy-category adjunction and standard simplices as nerves; none proves a last-vertex weak homotopy equivalence. Simplices.lean explicitly distinguishes its preorder from the full category of simplices."
   },
   {
-   "tool": "leanfinder",
-   "query": "The first and last vertex maps from nerves of categories of elements of a simplicial set are weak equivalences",
-   "results": "{\"t\": \"2026-10-16T15:53:52Z\", \"tool\": \"leanfinder\", \"query\": \"The first and last vertex maps from nerves of categories of elements of a simplicial set are weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.left_edge\", \"CategoryTheory.nerve.right_edge\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.nerve.mk₁_homEquiv_apply\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.nerve.homEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\"], \"digest\": \"a13a6a22cfe8af03\"}",
+   "tool": "grep",
+   "query": "Elements|Nerve|lastVertex",
+   "results": "{\"t\": \"2026-10-16T17:20:51Z\", \"tool\": \"grep\", \"query\": \"Elements|Nerve|lastVertex\", \"sub\": \"AlgebraicTopology/SimplicialSet/Simplices.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"8\", \"21\", \"42\", \"118\", \"149\"], \"digest\": \"f2d01ff821ed80b1\"}",
    "date": "2026-10-16",
-   "verdict": "no match: simplicial nerves, truncated homotopy categories and simplex-preorder notions do not give the last-vertex weak equivalence; Simplices.lean was read and explicitly distinguishes its preorder from the simplex category."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"SSet\", \"vertex\"",
-   "results": "{\"t\": \"2026-10-16T15:54:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"vertex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Path.vertex\", \"SSet.Path.congr_vertex\", \"SSet.Truncated.Path₁.vertex\", \"SSet.Truncated.Path.vertex\", \"SSet.spine_vertex\", \"SSet.Path.map_vertex\", \"SSet.stdSimplex.spineId_vertex\", \"SSet.spine_map_vertex\"], \"digest\": \"edc1a772f67974b0\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: simplicial nerves, truncated homotopy categories and simplex-preorder notions do not give the last-vertex weak equivalence; Simplices.lean was read and explicitly distinguishes its preorder from the simplex category."
+   "verdict": "no match: hits give ordinary nerves, the 2-truncated homotopy-category adjunction and standard simplices as nerves; none proves a last-vertex weak homotopy equivalence. Simplices.lean explicitly distinguishes its preorder from the full category of simplices."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-bousfield-kan-comparison-calculus",
@@ -85,5 +173,21 @@
   "group": "Q18"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplex-category-last-vertex",
+  "worker": "stage1",
+  "summary": "Constructed a bisimplicial resolution using an ordinal simplex at the initial object of a chain. Proved both augmentations weak equivalences by the existing nerve-homotopy and diagonal lemmas, then compared the diagonal augmentation with the specified last-vertex map using a maximum-based simplicial homotopy. No new nodes, no statement changes, no circular Bousfield--Kan or Thomason citation.",
+  "blueprint": "Realizes the historical ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 (derived coefficient adjunction), through the recorded cosimplicial-resolution/Low Lemma 1.4 ancestry; the current blueprint has no duplicate last-vertex node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NP-ef9fecdb6",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-ef9fecdb6 (reviewer sub-agent of L); spot-checked: I read all seven steps and the five cited statements in full; the review is in review.md and I wrote no fixes. Source: the statement matches Kerodon 01NA (Construction 11.9.11.2, the last vertex map N(Δ_S)→S, with vertex i sent to the image of the last vertex of [n_i]) and 02QS (Corollary 11.9.11.5: it is a weak homotopy equivalence for every simplicial set S). Kerodon was read online because there is no local copy. No hypothesis is added or dropped. Steps: steps 1–2 are elementary and correct; I checked the restriction identity K(v')x=K(θ)K(v)x, and the resolution puts its ordinal simplex at the initial object with a forward pushout. Step 3 uses the nerve lemma with the terminal object of [n]. In step 4, ([q],z,id) is initial in C_{q,z}, because the only arrow to ([n],x,t) is a=t and its existence is exactly K(t)x=z. Step 5 uses the rowwise form of the diagonal lemma for P and the exchanged form for Q. In step 6 the max homotopies are monotone and simplicial; I checked cu'=uθ, cv'=vθ and cw'=wθ, and realization preserves finite products by the cited node. Step 7 is two-out-of-three in the Kan–Quillen structure. Edge cases: empty K, Δ^0, Δ^1, discrete K and degree 0. Structure: there are no new nodes, and a whole-DAG grep found no duplicate. The item's 80 transitive dependencies do not include it, so there is no cycle. Every citation is in the same unit sk-prop-sf-biduality-general apart from a mathlib definition, so no tool uses are needed. No SGA is cited, and this is not a target node."
+ }
 }
