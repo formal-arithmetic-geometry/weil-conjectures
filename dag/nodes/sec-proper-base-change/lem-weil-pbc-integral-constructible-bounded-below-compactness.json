@@ -34,7 +34,8 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-bounded-derived-subcategories",
   "def-weil-pbc-category-colimit",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-global-derived-hom"
  ],
  "proof": [
   {
@@ -445,5 +446,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralConstructibleBoundedBelowCompactness",
+  "declaration": "AlgebraicGeometry.Scheme.integralConstructible_boundedBelow_compactness",
+  "file": "lean/Sheaf/Paper/IntegralConstructibleBoundedBelowCompactness.lean",
+  "statement": "theorem integralConstructible_boundedBelow_compactness (T : Scheme.{u}) [IsNoetherian T] (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (hdim : ∃ N : ℕ, topologicalKrullDim T ≤ (N : WithBot ℕ∞)) (hℓ : ∀ x : T, IsUnit (ℓ : T.presheaf.stalk x)) (K : PbcIntegralCategory ℓ E T hdim hℓ) (I : Type (u + 1)) (M : I → DerivedCategory (pbcModules T (pbcAdicCompletion T (pbcIntegralDatum ℓ E)))) (_hM : ∃ n : ℤ, ∀ i : I, DerivedCategory.IsGE (M i) n) (s : Cofan M) (_hs : IsColimit s) (t : Cofan (fun i : I ↦ (adicGlobalRHom T (pbcIntegralDatum ℓ E) K.obj).obj (M i))) (ht : IsColimit t) : IsIso (ht.desc (Cofan.mk ((adicGlobalRHom T (pbcIntegralDatum ℓ E) K.obj).obj s.pt) (fun i : I ↦ (adicGlobalRHom T (pbcIntegralDatum ℓ E) K.obj).map (s.inj i))))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Coproducts are arbitrary colimit cofans in the two ambient derived categories. The conclusion uses their universal-property comparison induced by RHom of the coprojections; no coproduct preservation hypothesis or completion of the sum is imposed. Uses the now-landed Q06 PbcIntegralCategory and pbcIntegralDatum, including its ULift of the valuation ring into the site coefficient universe. Invertibility of ℓ is expressed directly in every local ring."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-51d4d9558",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, universes, reports, and per-file scompile evidence checked; no substantive or mechanical defects found."
  }
 }

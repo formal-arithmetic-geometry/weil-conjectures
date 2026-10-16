@@ -1,0 +1,153 @@
+{
+ "id": "def-weil-pbc-adic-global-derived-hom",
+ "kind": "definition",
+ "title": "Global derived Hom for completed adic coefficients",
+ "status": "split",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], and let $A$ be a commutative ring with an adic coefficient datum $d$ and completed sheaf $A_T$ on the small pro-etale site as in [def-weil-pbc-adic-coefficient-datum]. Write $\\operatorname{Mod}(A_T)$ for [def-weil-sheaf-of-modules-category] and $D$ for its unbounded derived category [def-weil-abstract-derived-category]. Use the continuous-function presentation and module-category notation of [def-weil-pbc-bounded-constructible-tower]. For every object $U$ of the small pro-etale site, define the scalar map $A\\to\\Gamma(U,A_T)$ to be the unique ring homomorphism whose projection to each positive finite quotient is the sheafification of the constant residue section. Define $\\Gamma(T,-):\\operatorname{Mod}(A_T)\\to\\operatorname{Mod}(A)$ by evaluation on the final object of $T_{\\mathrm{proet}}$ and restriction of scalars along that map. Define global derived Hom as the bifunctor $R\\operatorname{Hom}_{A_T}(-,-):=R\\Gamma(T,R\\mathcal{H}om_{A_T}(-,-)):D^{\\mathrm{op}}\\times D\\to D(\\operatorname{Mod}(A))$, where internal derived Hom is [def-pur-derived-internal-hom] and $R\\Gamma$ is the unbounded right derived functor computed using K-injective resolutions. Its fixed-source functor is denoted $R\\operatorname{Hom}_{A_T}(K,-)$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pur-derived-internal-hom"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1) and Lemma 6.8.12; Stacks Project, Tag 08JA"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global derived Hom of module sheaves over a completed adic coefficient ring, valued in derived modules over its scalar ring",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "adicGlobal|globalDerivedHom|adic.*[Gg]lobal.*[Hh]om",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"globalSections\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global derived Hom of module sheaves over a completed adic coefficient ring, valued in derived modules over its scalar ring",
+   "results": "8 hits: localCohomology.diagram, AdicCompletion.of, AdicCompletion.module, Hausdorffification.of, AdicCompletion.map, AdicCompletion.incl, AdicCompletion, AdicCompletion.eval",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep source",
+   "query": "adicGlobal|globalDerivedHom|adic.*[Gg]lobal.*[Hh]om",
+   "results": "Only adic constant-section lemmas in WeilSheaf/Finiteness and LisseStalk; no global derived Hom functor.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep lean/Sheaf",
+   "query": "global derived Hom; adicGlobal|globalDerivedHom|adic.*[Gg]lobal.*[Hh]om",
+   "results": "GlobalDerivedHom is for the Zariski structure sheaf of a scheme, not an arbitrary pro-etale completed coefficient ring. RhomGlobalSections gives H0 with additive-group coefficients only.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep DAG",
+   "query": "global derived Hom",
+   "results": "Existing def-pc-global-derived-rhom is for the structure sheaf on a scheme; no completed-pro-etale global derived Hom node.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "global derived Hom",
+   "results": "0 blueprint nodes match.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global derived Hom as derived sections of internal Hom for module sheaves over completed coefficients",
+   "results": "8 hits: LightCondensed.ihomPoints, AlgebraicGeometry.Scheme.Modules.Hom, CategoryTheory.sheafHom', CategoryTheory.Sheaf.Γ, SheafOfModules.Hom, SheafOfModules.Hom.recOn, SheafOfModules.sectionsFunctor_obj, SheafOfModules.unitHomEquiv_symm_comp.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf Hom, sections, or light condensed internal Hom, not the unbounded completed-coefficient global derived Hom bifunctor"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+  "date": "2026-10-16",
+  "group": "Q22"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral lattice step: global derived Hom continuity used in the integral-to-rational realization.",
+   "via": [
+    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.AdicGlobalDerivedHom",
+  "declaration": "AlgebraicGeometry.Scheme.adicGlobalDerivedHom",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicFiniteConstant",
+   "AlgebraicGeometry.Scheme.adicScalar_exists",
+   "AlgebraicGeometry.Scheme.adicScalar",
+   "AlgebraicGeometry.Scheme.adicGlobalSections",
+   "AlgebraicGeometry.Scheme.adicGlobalSections_additive",
+   "AlgebraicGeometry.Scheme.adicDerivedGlobalSections",
+   "AlgebraicGeometry.Scheme.adicGlobalDerivedHom",
+   "AlgebraicGeometry.Scheme.adicGlobalRHom"
+  ],
+  "file": "lean/Sheaf/Paper/AdicGlobalDerivedHom.lean",
+  "statement": "def adicGlobalDerivedHom : (DerivedCategory (pbcModules T (pbcAdicCompletion T d)))ᵒᵖ × DerivedCategory (pbcModules T (pbcAdicCompletion T d)) ⥤ DerivedCategory (ModuleCat.{u + 1} A)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-51d4d9558",
+  "group": "Q22",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-51d4d9558",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, universes, reports, and per-file scompile evidence checked; no substantive or mechanical defects found."
+ }
+}
