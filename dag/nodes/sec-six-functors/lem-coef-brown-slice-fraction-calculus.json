@@ -32,9 +32,183 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=F\\cap W$. Products exist by pulling back maps to $1$, and their projections lie in $F$. For any $f:X\\to Y$, factor its graph as $X\\xrightarrow{i}H\\xrightarrow{r}X\\times Y$, with $i\\in W$ and $r\\in F$. Set $d=\\operatorname{pr}_Xr$ and $e=\\operatorname{pr}_Yr$. Then $di=1_X$, $ei=f$, and $d,e\\in F$. Two-out-of-three gives $d\\in T$; if $f\\in W$, it also gives $e\\in T$. Thus every weak equivalence has the split factorization required by the fraction-model theorem, without functorial choices.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.13, graph-factorization proof"
+   }
+  },
+  {
+   "text": "For any $b$, the terminal object of $\\mathcal C(b)$ is $1_b$, and the map from $(X,p)$ to it is $p\\in F$. Underlying pullbacks of fibrations stay in this full slice: the structure map of the pullback is a composite of fibrations. The same holds for trivial fibrations. To factor $f:(X,p)\\to(Y,r)$, factor $f=v w$ in $\\mathcal C$, and give the intermediate object the structure map $rv$; it is in $F$. Composition, two-out-of-three and the retract closure of $W$ are inherited on underlying maps. These verify every Brown hypothesis for $\\mathcal C(b)$, so the graph argument of Step 1 applies there too.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Paragraph 7.6.12 and Proposition 7.4.15, fibrant slices"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-trivial-fibration-fraction-model] to $\\mathcal C$ and to every $\\mathcal C(b)$, using Steps 1-2. In each case $T$ contains isomorphisms and is closed under composition and arbitrary pullback, by the given hypotheses; Step 1 supplies the required split weak-equivalence factorizations. Obtain essentially surjective localizations with the entire coherent-functor-category universal property. Write $R(x,y)$ for its fraction category of spans $x\\xleftarrow{s}v\\xrightarrow{a}y$, $s\\in T$, with arbitrary commuting apex maps. Its nerve models $\\operatorname{Map}_{L\\mathcal C}(qx,qy)$, naturally under target maps and relative functors. A different localization specified in the question is equivalent to this one by applying its universal property in both directions; the two composite functors restrict to the identity, and full faithfulness of restriction supplies the coherent inverse equivalences. We may therefore use this model for $q$.",
+   "uses": [
+    "lem-coef-trivial-fibration-fraction-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 7.6.13; explicit fraction-space proof for ordinary Brown categories"
+   }
+  },
+  {
+   "text": "If $v:b'\\to b$ is any arrow, pullback gives $v^*:\\mathcal C(b)\\to\\mathcal C(b')$ preserving underlying trivial fibrations. For a weak equivalence $f$ in $\\mathcal C(b)$, the graph construction there gives $f=e i$, $di=1$, with $d,e$ trivial fibrations. After pullback, $v^*d,v^*e\\in W$, and $(v^*d)(v^*i)=1$ implies $v^*i\\in W$; hence $v^*f\\in W$. This proves preservation of weak equivalences between fibrations over a fixed base directly from the axioms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 7.4.14 and Proposition 7.4.15, graph argument written out"
+   }
+  },
+  {
+   "text": "We need right properness on underlying arrows. First suppose $j:b'\\to b$ is a section of $d:b\\to b'$ in $T$, and let $p:E\\to b$ be in $F$. Form $E_0=b\\times_{b'}E$, where $E\\to b'$ is $dp$. The projection $d_0:E_0\\to E$ is in $T$, the other projection $r_0:E_0\\to b$ is in $F$, and $i=(p,1_E):E\\to E_0$ satisfies $d_0i=1_E$. Thus $i\\in W$ and is an arrow of $\\mathcal C(b)$. Step 4 makes $j^*i$ a weak equivalence. The identity $dj=1$ identifies $j^*E_0=b'\\times_b E_0$ with $E$ by $(b',b,e)\\mapsto e$, with inverse $e\\mapsto(dp(e),jdp(e),e)$. Under this identification $j^*i$ is the projection $b'\\times_b E\\to E$, which is therefore in $W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.16, section case of right properness"
+   }
+  },
+  {
+   "text": "For an arbitrary $v:b'\\to b$ in $W$, Step 1 gives $v=e i$ with $e:H\\to b$ and $d:H\\to b'$ in $T$, and $di=1$. If $p:E\\to b$ is in $F$, then $E_H=H\\times_b E\\to E$ is in $T$ and $E_H\\to H$ is in $F$. Step 5 applied to the section $i$ gives $b'\\times_H E_H\\to E_H$ in $W$. Its composite with $E_H\\to E$ is the projection $b'\\times_b E\\to E$ under the iterated-pullback isomorphism. Hence this projection is in $W$. This establishes right properness without a saturation or model-structure assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.16, reduction using Brown graph factorization"
+   }
+  },
+  {
+   "text": "Use [lem-coef-infinity-slice-arrow-equivalence] to identify the join slice $D_{/d}$ with the fixed-target arrow slice, and apply [lem-cbc-enhanced-functor-cone-calculus] with singleton shape. For $p:x\\to d$ and $r:y\\to d$ this gives, naturally, $\\operatorname{Map}_{D_{/d}}(p,r)\\simeq\\operatorname{hofib}_p(\\operatorname{Map}_D(x,y)\\xrightarrow{r\\circ-}\\operatorname{Map}_D(x,d))$. An arrow of this slice whose underlying arrow is an equivalence is itself an equivalence: for each testing object postcomposition is an equivalence on ambient mapping spaces (compose with an inverse and the two inverse homotopies), with identity on the base mapping space. [lem-coef-spaces-homotopy-fiber-detection] then gives equivalences on the displayed fibers. Surjectivity on components at the target yields a right inverse in the slice; injectivity at the source gives the other inverse equation. [lem-coef-infinity-mapping-composition] turns these inverse equations into equivalence edges. This argument also proves that such an underlying equivalence reflects correctly with its triangle homotopy.",
+   "uses": [
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 7.6.13; explicit fraction-space proof for ordinary Brown categories"
+   }
+  },
+  {
+   "text": "The simplicial map on join slices induced by $q$ restricts to $N\\mathcal C(b)\\to(L\\mathcal C)_{/qb}$; a simplex of an ordinary slice is exactly a chain followed by its structure map to $b$. An underlying $W$-arrow is sent to an equivalence in $L\\mathcal C$, so Step 7 shows its slice image is an equivalence. The coherent universal property in [lem-coef-trivial-fibration-fraction-model] therefore gives the comparison $G_b:L\\mathcal C(b)\\to(L\\mathcal C)_{/qb}$. It remains to prove it fully faithful and essentially surjective; no slice comparison has yet been assumed.",
+   "uses": [
+    "lem-coef-trivial-fibration-fraction-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 7.6.13; explicit fraction-space proof for ordinary Brown categories"
+   }
+  },
+  {
+   "text": "Fix fibrations $p:x\\to b$, $r:y\\to b$, and let $U:R(x,y)\\to R(x,b)$ postcompose the right leg with $r$. For $a=(s:u\\to x,c:u\\to b)$ in $R(x,b)$ put $y_a=u\\times_b y$ with structure map $s\\operatorname{pr}_u:y_a\\to x$, a fibration. An object of $(U\\downarrow a)$ consists of $(t:v\\to x,g:v\\to y)$ and $h:v\\to u$ with $sh=t$, $ch=rg$. The pair $(h,g)$ is uniquely an arrow $v\\to y_a$ over $x$. This identifies $(U\\downarrow a)$ with the fraction category from $1_x$ to $(y_a,s\\operatorname{pr}_u)$ in $\\mathcal C(x)$. On morphisms both categories require an apex map $k:v\\to v'$ with $t'k=t$, $g'k=g$, $h'k=h$; the last two equations are exactly equality after the two pullback projections. Thus the identification is an isomorphism of categories, and Step 3 identifies its nerve with the corresponding localized slice mapping space.",
+   "uses": [
+    "lem-coef-trivial-fibration-fraction-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 7.6.13; explicit fraction-space proof for ordinary Brown categories"
+   }
+  },
+  {
+   "text": "For a morphism $a_0\\to a_1$ of $R(x,b)$ with underlying $h:u_0\\to u_1$, the equation $s_1h=s_0$ and $s_0,s_1\\in T$ give $h\\in W$. Its induced map $h_y:y_{a_0}\\to y_{a_1}$ is a pullback of $h$ along the fibration $y_{a_1}\\to u_1$, so belongs to $W$ by Step 6. It is an arrow of $\\mathcal C(x)$ and is inverted there. Under Step 9, the comma transition is precisely postcomposition by $h_y$. The naturality clause of [lem-coef-trivial-fibration-fraction-model] and composition with an inverse to the image of $h_y$ prove that $N(U\\downarrow a_0)\\to N(U\\downarrow a_1)$ is a weak homotopy equivalence. This verifies every transition hypothesis needed for Quillen B.",
+   "uses": [
+    "lem-coef-trivial-fibration-fraction-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 7.6.13; explicit fraction-space proof for ordinary Brown categories"
+   }
+  },
+  {
+   "text": "Take $a_p=(1_x,p)$ in $\\mathcal B=R(x,b)$ and let $V:\\mathcal B_{/a_p}\\to\\mathcal B$ be the domain projection. It is a discrete fibration: the unique lift of $\\beta:a'\\to a$ with specified target $(a,\\gamma:a\\to a_p)$ has source $(a',\\gamma\\beta)$. Its domain has terminal object $(a_p,1)$, and the unique arrows into this object give a natural transformation from its identity functor to the constant functor there. [lem-coef-nerve-natural-homotopy-equivalence] contracts its nerve. The strict pullback $R(x,y)\\times_{\\mathcal B}\\mathcal B_{/a_p}$ is exactly $(U\\downarrow a_p)$. Apply [lem-coef-quillen-b-discrete-fibration-base-change], using Step 10. It identifies $N(U\\downarrow a_p)$ with the homotopy fiber over $a_p$ of $NR(x,y)\\to NR(x,b)$. The comparison retains the path supplied by the comma arrow, as it is induced by the strict pullback square and the contraction just specified.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-quillen-b-discrete-fibration-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 7.6.13; explicit fraction-space proof for ordinary Brown categories"
+   }
+  },
+  {
+   "text": "At $a_p=(1_x,p)$ the comma condition of Step 9 forces $h=t$, and its remaining equation is $pt=rg$. Consequently $(U\\downarrow a_p)$ is exactly the fraction category in $\\mathcal C(b)$ from $(x,p)$ to $(y,r)$: $v$ has structure map $pt\\in F$, $t\\in T$, and $g$ is over $b$. Its morphisms are precisely the same commuting apex maps. The fraction models, their coherent naturality under target maps, and Step 11 now give $\\operatorname{Map}_{L\\mathcal C(b)}(p,r)\\simeq\\operatorname{hofib}_{qp}(\\operatorname{Map}_{L\\mathcal C}(qx,qy)\\to\\operatorname{Map}_{L\\mathcal C}(qx,qb))$. Here $a_p$ maps to $qp$, and a commuting fraction maps to its fraction together with the triangle over $qb$. Thus, by Step 7, this is the map on mapping spaces induced by $G_b$, not merely an abstract equivalence of the two spaces. [lem-coef-spaces-homotopy-fiber-detection] justifies passage through the equivalences of total and base fraction spaces. Since every source object is equivalent to an ordinary slice object by Step 3, precomposition and postcomposition with these equivalences extend the result to all source objects. Hence $G_b$ is fully faithful.",
+   "uses": [
+    "lem-coef-trivial-fibration-fraction-model",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 7.6.13; explicit fraction-space proof for ordinary Brown categories"
+   }
+  },
+  {
+   "text": "For an arbitrary slice object $\\alpha:z\\to qb$, choose an equivalence $e:qx\\to z$ by the essential surjectivity of [lem-coef-trivial-fibration-fraction-model]. Its fraction clause gives $s:u\\to x$ in $T$ and $f:u\\to b$ with a path from $qf(qs)^{-1}$ to $\\alpha e$ in the mapping space. Equivalently this supplies a triangle $qf\\simeq\\alpha e\\,qs$. Factor $f=r w$, with $w:u\\to y$ in $W$ and $r:y\\to b$ in $F$. In the target slice, the object $qf:qu\\to qb$ maps both to $\\alpha:z\\to qb$ by $e\\,qs$ with the specified triangle, and to $qr:qy\\to qb$ by $qw$ with its strict triangle. Both underlying arrows are equivalences; Step 7 makes both slice arrows equivalences. Thus $\\alpha$ is equivalent to $G_b(y,r)$, proving essential surjectivity, including for objects $z$ not originally in the image of $q$.",
+   "uses": [
+    "lem-coef-trivial-fibration-fraction-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 7.6.13; explicit fraction-space proof for ordinary Brown categories"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-full-essential-image] to the fully faithful $G_b$ of Step 12. Step 13 says its full essential image is the whole target slice. That node supplies a coherent quasi-inverse and coherent natural inverse equivalences. This proves the claimed equivalence of quasicategories, with its prescribed comparison functor.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 7.6.13; explicit fraction-space proof for ordinary Brown categories"
+   }
+  },
+  {
+   "text": "Finally take $b=P$. The objects $1_P$ and $t:T\\to P$ lie in $\\mathcal C(P)$ since $t\\in F$. Regard the specified section, with its given triangle homotopy, as a point of the mapping space from $q1_P$ to $qt$ in the target slice. Full faithfulness of $G_P$ lifts its component to $\\operatorname{Map}_{L\\mathcal C(P)}(1_P,t)$. Apply [lem-coef-trivial-fibration-fraction-model] inside $\\mathcal C(P)$: it represents this component by $1_P\\xleftarrow{s}(Z,z)\\xrightarrow{a}(T,t)$, with underlying $s\\in F\\cap W$. Being over $P$ means $z=s$ and $ta=z=s$ exactly. Its fraction maps to the originally specified component in the slice mapping space; the resulting homotopy is in that space, so includes the prescribed triangle homotopy rather than merely the equation $[qt][h]=1$ in the ordinary homotopy category.",
+   "uses": [
+    "lem-coef-trivial-fibration-fraction-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 7.6.13; explicit fraction-space proof for ordinary Brown categories"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-quillen-b-discrete-fibration-base-change",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-trivial-fibration-fraction-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Independent explicit fraction/Quillen-B proof of Corollary 7.6.13 for ordinary all-fibrant Brown categories; graph and right-properness arguments of Propositions 7.4.13-7.4.16. Online source read; archival source WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -86,10 +260,58 @@
    "date": "2026-10-16",
    "verdict": "No match. Independent second reading: ModelCategory/FibrantObjectHomotopy.lean:34-155 assumes a model category and constructs an ordinary quotient; CategoryTheory/Localization/LocalizerMorphism.lean:12-24,161-167 is ordinary localization. Neither states the coherent Brown/Reedy or slice equivalence. AlgebraicTopology/Reedy/Basic.lean:22-25 leaves diagram model structures as TODO.",
    "sub": "AlgebraicTopology/ModelCategory"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*slice|slice.*localization|fibrant.*[Oo]ver|[Oo]ver.*fibrant",
+   "sub": "AlgebraicTopology",
+   "results": "{\"t\": \"2026-10-16T22:58:26Z\", \"tool\": \"grep\", \"query\": \"localization.*slice|slice.*localization|fibrant.*[Oo]ver|[Oo]ver.*fibrant\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Over.lean:14-25,64-109,143-145 provides ordinary slice/model structures under ModelCategory; CofibrantObjectHomotopy.lean:30-83 concerns an ordinary quotient, and BrownLemma.lean:40-48 assumes ModelCategory. None compares coherent Brown localizations and their slice mapping spaces, or retains a specified section triangle."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of fibrant objects over an object computes the slice infinity category and specified coherent sections are trivial fibration fractions",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T22:58:26Z\", \"tool\": \"leansearch\", \"query\": \"Localization of fibrant objects over an object computes the slice infinity category and specified coherent sections are trivial fibration fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject\", \"HomotopicalAlgebra.FibrantObject.mk\", \"HomotopicalAlgebra.fibrantObjects\", \"HomotopicalAlgebra.IsFibrant\", \"CategoryTheory.MorphismProperty.Localization'\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.instHasFactorizationOverCofibrationsTrivialFibrations\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization\"], \"digest\": \"80162b9a1a4b64d7\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Over.lean:14-25,64-109,143-145 provides ordinary slice/model structures under ModelCategory; CofibrantObjectHomotopy.lean:30-83 concerns an ordinary quotient, and BrownLemma.lean:40-48 assumes ModelCategory. None compares coherent Brown localizations and their slice mapping spaces, or retains a specified section triangle."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopicalAlgebra\", \"Over\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T22:58:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopicalAlgebra\\\", \\\"Over\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.LeftHomotopy.covering_homotopy\", \"HomotopicalAlgebra.instCategoryWithCofibrationsOver\", \"HomotopicalAlgebra.instCategoryWithFibrationsOver\", \"HomotopicalAlgebra.instCategoryWithWeakEquivalencesOver\", \"HomotopicalAlgebra.ModelCategory.over\", \"HomotopicalAlgebra.instHasTwoOutOfThreePropertyOverWeakEquivalences\", \"HomotopicalAlgebra.instIsStableUnderRetractsOverCofibrations\", \"HomotopicalAlgebra.instIsStableUnderRetractsOverFibrations\"], \"digest\": \"e7ba3a481c839d3f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Over.lean:14-25,64-109,143-145 provides ordinary slice/model structures under ModelCategory; CofibrantObjectHomotopy.lean:30-83 concerns an ordinary quotient, and BrownLemma.lean:40-48 assumes ModelCategory. None compares coherent Brown localizations and their slice mapping spaces, or retains a specified section triangle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity localization of a Brown category of fibrant objects over a base is equivalent to the coherent slice of its localization",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T22:58:30Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity localization of a Brown category of fibrant objects over a base is equivalent to the coherent slice of its localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"CategoryTheory.Localization.qCompEquivalenceFromModelFunctorIso\"], \"digest\": \"2050d2a3f386bdad\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Over.lean:14-25,64-109,143-145 provides ordinary slice/model structures under ModelCategory; CofibrantObjectHomotopy.lean:30-83 concerns an ordinary quotient, and BrownLemma.lean:40-48 assumes ModelCategory. None compares coherent Brown localizations and their slice mapping spaces, or retains a specified section triangle."
+  },
+  {
+   "tool": "grep",
+   "query": "Brown|fibrantObjects|ModelCategory.over",
+   "sub": "AlgebraicTopology/ModelCategory",
+   "results": "{\"t\": \"2026-10-16T22:58:58Z\", \"tool\": \"grep\", \"query\": \"Brown|fibrantObjects|ModelCategory.over\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\"], \"digest\": \"77bcf7da4e6d7fe4\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Over.lean:14-25,64-109,143-145 provides ordinary slice/model structures under ModelCategory; CofibrantObjectHomotopy.lean:30-83 concerns an ordinary quotient, and BrownLemma.lean:40-48 assumes ModelCategory. None compares coherent Brown localizations and their slice mapping spaces, or retains a specified section triangle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy coherent section of a fibration in a Brown localization can be represented by a strict map over the base after a trivial fibration refinement",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T22:59:00Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy coherent section of a fibration in a Brown localization can be represented by a strict map over the base after a trivial fibration refinement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantBrownFactorization.toMapFactorizationData\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk'_p\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk'_r\", \"HomotopicalAlgebra.FibrantBrownFactorization\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk'\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk'_Z\", \"HomotopicalAlgebra.FibrantBrownFactorization.r\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk'_i\"], \"digest\": \"312fe8978b1ae6e4\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Over.lean:14-25,64-109,143-145 provides ordinary slice/model structures under ModelCategory; CofibrantObjectHomotopy.lean:30-83 concerns an ordinary quotient, and BrownLemma.lean:40-48 assumes ModelCategory. None compares coherent Brown localizations and their slice mapping spaces, or retains a specified section triangle."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-brown-finite-direct-rectification",
@@ -97,5 +319,29 @@
   "group": "Q50"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-brown-slice-fraction-calculus",
+  "worker": "stage1",
+  "summary": "Statement preserved. Explicit graph factorizations, Brown slice axioms and right properness allow the existing fraction-space theorem and discrete-fibration Quillen B theorem to compute the slice mapping spaces. Fully faithful and essential-image comparisons give the equivalence; fraction representation inside the slice retains the specified section homotopy. No new nodes and no Mathlib leaves.",
+  "blueprint": "Realizes the fibrant-slice technical subargument in the inherited from.place: finite-direct rectification used in paragraph 2 of prop-coef-integral-exceptional-adjoint, the derived coefficient-adjunction and inverse-limit calculation. Current main-20261015 proof read. The unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Singleton cone mapping-fiber formula is the general tool needed to identify the arrow slice mapping spaces; no same-unit statement supplies that cone formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NG-17b231210",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-17b231210 (reviewer sub-agent of L); spot-checked: I read the item and all 15 steps in full, plus the statement of every cited node. Shape: one commit, only the item and the report; no new nodes; proof_deps equals the union of the step uses; no cycle (the item is not in its 163-node closure); its only citer is lem-coef-brown-finite-direct-rectification step 6, which uses exactly the section clause. Steps 1-6 are elementary and I rechecked them: the graph factorization gives d in T, and e in T when f is in W; the Brown axioms hold in C(b); pullback preserves weak equivalences between fibrations; the section case of right properness, including the identification j*E_0 = E via dj=1; and the general case through the iterated pullback. Step 3 meets every hypothesis of lem-coef-trivial-fibration-fraction-model (T=F∩W contains isomorphisms and is closed under composition and pullback; split factorization). Step 7: the item's slice is exactly S_y of lem-coef-infinity-slice-arrow-equivalence. Singleton-shape cone calculus gives hofib_p(Map(x,y)->Map(x,d)). Homotopy-fiber detection and the mapping-composition criterion give conservativity. Steps 9-12: I verified the comma isomorphisms (U|a) = R_{C(x)}(1_x,y_a) and (U|a_p) = R_{C(b)}(p,r) on objects and morphisms. The transitions are postcompositions with h_y, which is in W by right properness. B/a_p -> B is a discrete fibration with a contractible domain. The Quillen-B node is applied as stated, and I checked that it is true. The claim in step 12 that the composite is G_b's map is the most condensed point; the naturality clauses of the fraction-model statement support it. Steps 13-15 cover essential surjectivity with arbitrary z, the full-essential-image quasi-inverse, and a strict section ta=s whose slice homotopy keeps the triangle. Small cases b=1, W=isomorphisms, W=all arrows and Kan complexes are all consistent. No duplicate among the Brown/slice nodes. The tool use of lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) is accepted as a generic cone formula. Not a target node, so no base-change morphism or coefficient category is involved. No SGA. Source: Cisinski CatLR 7.5.18/7.6.13 is not archived in literature/; the delivery records it as WANTED and marks the proof agent-written. I verified the mathematics independently. No fixes."
+ }
 }

@@ -31,9 +31,105 @@
   "lem-coef-joyal-model-structure",
   "lem-coef-reedy-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All products, pushouts and limits below are formed degreewise in sets, with the induced commuting operators, as follows directly from the functor definition in [def-weil-pbc-simplicial-set]. Use $\\Delta^q_r=\\operatorname{Hom}_{\\Delta}([r],[q])$, the representable standard simplex explicitly defined in [lem-coef-kan-quillen-right-proper]. Define the operators on $U\\backslash X$ and $X/V$ by precomposition with the corresponding standard-simplex maps. To establish the adjunctions explicitly, a map $g:U\\boxtimes V\\to X$ sends $v\\in V_q$ to the map $U\\boxtimes\\Delta^q\\to X$ whose $(p,r)$ component sends $(u,\\alpha:[r]\\to[q])$ to $g_{p,r}(u,V(\\alpha)v)$. Conversely, a simplicial map $h:V\\to U\\backslash X$ gives $g_{p,q}(u,v)=h_q(v)_{p,q}(u,1_{[q]})$. Naturality of $h$ makes these formulas inverse and makes $g$ natural in both degrees. For the other adjunction, send $u\\in U_p$ to the map $\\Delta^p\\boxtimes V\\to X$ whose $(r,q)$ component is $(\\alpha:[r]\\to[p],v)\\mapsto g_{r,q}(U(\\alpha)u,v)$. Conversely $k:U\\to X/V$ gives $g_{p,q}(u,v)=k_p(u)_{p,q}(1_{[p]},v)$; naturality of $k$ proves that these formulas are inverse. Each formula commutes with precomposition in $U,V$ and postcomposition in $X$. In particular, evaluation on the identity simplex identifies $\\Delta^p\\backslash X$ with the column $X_{p,\\bullet}$, and $X/\\Delta^q$ with the row $X_{\\bullet,q}$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Section 2, definitions preceding Proposition 2.1; explicit degreewise adjunction formulas."
+   }
+  },
+  {
+   "text": "Unpack a square from $a\\boxtimes' b$ to $f$. Its upper map is exactly a pair of maps $U'\\boxtimes V\\to X$ and $U\\boxtimes V'\\to X$ agreeing on $U\\boxtimes V$; its lower map is $U'\\boxtimes V'\\to Y$, and its square equation gives the two required compatibilities with $f$. Under the adjunctions of step 1, these data are exactly a square from $b$ to $\\langle a\\backslash f\\rangle$, and also exactly a square from $a$ to $\\langle f/b\\rangle$: the agreement is the equation required to map into the indicated pullback. A filler in each description is the same map $U'\\boxtimes V'\\to X$ restricting to both upper maps and mapping to the lower map. The inverse formulas in step 1 preserve these equations, so they give bijections of squares and of their filler sets, natural in all three arrows. Taking $Y=*$ gives the stated abbreviations, since there is one map from every bisimplicial set to $*$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proposition 2.1; the pushout and pullback equations give the lifting correspondence directly."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-reedy-model-structure] to the small category $\\Delta^{\\mathrm{op}}$, first with the Kan model category of [lem-coef-kan-quillen-right-proper], then with the Joyal model category of [lem-coef-joyal-model-structure]. In either ground category cofibrations are monomorphisms. Here is the latching calculation, valid for either ordering of the two simplicial directions. Fix the inner degree and write $T$ for the resulting simplicial set in the outer degree. The latching colimit at $n$ maps to $T_n$ by the proper degeneracy surjections. The unique nondegenerate decomposition of [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] identifies this map with the subset $D_nT$ of degenerate simplices: a representation $T(\\sigma)x$ reduces by decomposing $x$ to its unique nondegenerate ancestor, and that reduction is precisely an identification in the latching colimit. Two representations with the same image have the same ancestor and total surjection, so are identified there. This works for every inner degree. An inner operator sends $T(\\sigma)x$ to $T(\\sigma)$ of the image of $x$, since the two directions commute, so it preserves the degenerate subset. The canonical latching-to-$T_n$ maps are natural in these operators, hence their identifications with this subset commute with the operators as well; naturality of the chosen nondegenerate ancestors is not needed. If $i:X\\hookrightarrow Y$ is a monomorphism and $z\\in X_{n,q}$ has decomposition $z=Y(\\sigma)y$ in $Y$, choose an order-preserving section $t$ of $\\sigma$; then $y=Y(t)z$ belongs to $X$, since $X$ is a simplicial subset. Thus $X_{n,q}\\cap D_nY_{\\bullet,q}=D_nX_{\\bullet,q}$. The relative latching map is consequently the inclusion of the union $X_{n,q}\\cup D_nY_{\\bullet,q}$ into $Y_{n,q}$. It is injective, hence is a ground cofibration. Conversely the objectwise-cofibration clause of the Reedy node makes every Reedy cofibration a monomorphism. Thus the Reedy cofibrations are exactly the monomorphisms in both cases. At $n=0$ the latching category is empty and this is the inclusion $X_{0,q}\\hookrightarrow Y_{0,q}$.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-joyal-model-structure",
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Theorem 2.6 and Proposition 2.10, identification of cofibrations; latching calculation expanded using Stacks Tag 017R (lemma-splitting-simplicial-sets)."
+   }
+  },
+  {
+   "text": "Identify the matching maps without changing either direction. A simplex of $\\partial\\Delta^p$ is an order-preserving map to $[p]$ whose image is a proper subset. It factors uniquely through the injective map of that image, and all such injections have domain of degree $<p$. A map from $\\partial\\Delta^p\\boxtimes\\Delta^q$ to $X$ is therefore exactly a family of elements in the lower columns, compatible under these proper face maps: restrict to each face; conversely define the value at an arbitrary boundary simplex through its image face, with compatibility ensuring agreement on intersections. This identifies $\\partial\\Delta^p\\backslash X$ with the outer matching object $M_pX$. By step 1 the relative matching map of [lem-coef-reedy-model-structure] is precisely $\\langle\\delta_p\\backslash f\\rangle$. Its objectwise weak equivalences are $X_{p,\\bullet}\\to Y_{p,\\bullet}$ weak homotopy equivalences by [lem-coef-kan-quillen-right-proper]. This is the asserted vertical model. For the horizontal model a $p$-simplex of $X/\\partial\\Delta^q$ is a map $\\Delta^p\\boxtimes\\partial\\Delta^q\\to X$. Restricting to each proper injection $\\iota:[s]\\hookrightarrow[q]$ gives $x_\\iota\\in X_{p,s}$, with $X(1,\\theta)x_\\iota=x_{\\iota\\theta}$ for every injection $\\theta$ between these faces. Conversely, for a boundary simplex $\\beta:[t]\\to[q]$, write $\\beta=\\iota\\rho$ with $\\rho$ surjective and $\\iota$ its proper image injection; the prescribed value is $X(1,\\rho)x_\\iota$. For an arbitrary operator $\\gamma$, factor $\\rho\\gamma=\\theta\\rho_0$ into its image injection and surjection; the compatibility equation gives $X(1,\\gamma)X(1,\\rho)x_\\iota=X(1,\\rho_0)x_{\\iota\\theta}$, so the prescription is simplicial and inverse to restriction. This identifies $X/\\partial\\Delta^q$ with the matching object in $q$, naturally in $p$. Thus its relative matching map is $\\langle f/\\delta_q\\rangle$. Taking [lem-coef-joyal-model-structure] as ground model gives the stated Joyal fibrations and rowwise Joyal weak equivalences, hence the horizontal model. The empty boundary at degree zero gives the terminal matching object and the ordinary degree-zero component of $f$ in each case. Step 3 makes every initial map a cofibration, hence every object cofibrant. Both factorizations are functorial by the functorial-ground-factorization and functorial-extension clauses of the Reedy node, using the functorial Kan and Joyal factorizations. All indices are small in the fixed universes.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Theorem 2.6 and Proposition 2.10, matching-map identification; functoriality from the existing Reedy theorem (Hovey Remark 5.2.3 and Theorem 5.2.5)."
+   }
+  },
+  {
+   "text": "Suppose $f$ is a vertical Reedy fibration, $a:U\\hookrightarrow U'$ a monomorphism, and $b:V\\to V'$ a Kan trivial cofibration. At horizontal degree $p$, the map $a\\boxtimes' b$ is the coproduct of an identity on one copy of $V'$ for each $u\\in U_p$ and a copy of $b$ for each $u\\in U'_p\\setminus U_p$: this follows by taking the degreewise pushout of sets and identifying $U_p$ with its image. This column map is a Kan trivial cofibration. Indeed, a square from that coproduct to any Kan fibration is a family of squares for $b$ and identities; fill the former by the Kan weak factorization system of [lem-coef-kan-quillen-right-proper] and [lem-coef-reedy-model-structure], and the latter uniquely. The resulting family is the filler of the coproduct square, so the same weak factorization system identifies its left map as a trivial cofibration. Hence $a\\boxtimes' b$ is a monomorphism and a columnwise weak equivalence, thus a vertical trivial cofibration by steps 3-4. The Reedy lifting axiom gives $(a\\boxtimes' b)\\pitchfork f$. Step 2 now gives $b\\pitchfork\\langle a\\backslash f\\rangle$ for every Kan trivial cofibration $b$, so $\\langle a\\backslash f\\rangle$ is a Kan fibration. It also gives $a\\pitchfork\\langle f/b\\rangle$ for every monomorphism $a$, which is the other asserted test. Conversely the all-monomorphism division test includes $a=\\delta_p$, and hence gives the matching criterion. If instead only the last test is assumed, step 2 gives $b\\pitchfork\\langle\\delta_p\\backslash f\\rangle$ for every Kan trivial cofibration $b$ and every $p$. The Kan weak factorization system makes these relative matching maps Kan fibrations, so $f$ is a vertical Reedy fibration. This proves both equivalences, without fibrancy assumptions on $X$ or $Y$.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proposition 2.5; explicit coproduct-and-lifting proof of the all-monomorphism and all-anodyne criteria."
+   }
+  },
+  {
+   "text": "Put $cL=*\\boxtimes L$. For the mapping object in the item, operators are precomposition on $\\Delta^q$. Composition sends maps $X\\times c\\Delta^q\\to Y$ and $Y\\times c\\Delta^q\\to Z$ to their composite using the same parameter in both places; the identity is the projection followed by $1_X$. Associativity and units hold pointwise. The tensor is $X\\otimes L=X\\times cL$, and the cotensor is specified by $(X^L)_{p,q}=\\operatorname{Hom}_{\\mathrm{sSet}}(L\\times\\Delta^q,X_{p,\\bullet})$, with operators by precomposition and the outer operators of $X$. The evaluation/currying formulas of step 1, with an extra factor $L$, identify maps $X\\times cL\\to Y$ with maps $L\\to\\operatorname{Map}_{\\mathrm{ss}}(X,Y)$ and with maps $X\\to Y^L$. For clarity, write $H=\\operatorname{Map}_{\\mathrm{ss}}(X,Y)$ and define $(H^L)_n=\\operatorname{Hom}_{\\mathrm{sSet}}(L\\times\\Delta^n,H)$. The ordinary currying bijection just proved, applied to $L\\times\\Delta^n$, identifies this set with $\\operatorname{Hom}_{\\mathrm{ss}}(X\\times cL\\times c\\Delta^n,Y)=\\operatorname{Map}_{\\mathrm{ss}}(X\\otimes L,Y)_n$. Also $\\operatorname{Map}_{\\mathrm{ss}}(X,Y^L)_n=\\operatorname{Hom}_{\\mathrm{ss}}(X\\times c\\Delta^n,Y^L)$ is identified by the cotensor adjunction with $\\operatorname{Hom}_{\\mathrm{ss}}(X\\times c\\Delta^n\\times cL,Y)$. Swapping the last two factors identifies this with the preceding set. These bijections commute with every $\\Delta^m\\to\\Delta^n$ by precomposition, which proves both enriched adjunctions. These are actual functors by the commuting-operator definition of simplicial sets in [def-weil-pbc-simplicial-set].",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proposition 2.4 and the enrichment preceding it; degreewise tensor and cotensor formulas."
+   }
+  },
+  {
+   "text": "Let $u:A\\to B$ be a vertical Reedy cofibration and $b:L\\to M$ a Kan cofibration. The tensor pushout product is $w:(B\\times cL)\\amalg_{A\\times cL}(A\\times cM)\\to B\\times cM$. It is a monomorphism in every bidegree, since its source is the union of the two indicated subsets of the product. Its column at $p$ is the ordinary simplicial pushout product of $u_p$ and $b$. If $u$ is vertically weak, each $u_p$ is a Kan trivial cofibration; if $b$ is weak, $b$ is a Kan trivial cofibration. A Kan trivial cofibration is exactly anodyne in the lifting-property sense of [lem-coef-sset-anodyne-pushout-product], because both mean left lifting against Kan fibrations by [lem-coef-kan-quillen-right-proper] and the weak factorization systems in [lem-coef-reedy-model-structure]. That pushout-product node, using symmetry to interchange the factors when $u_p$ is trivial, therefore makes each column of $w$ a Kan trivial cofibration in either case. Thus $w$ is a vertical Reedy cofibration, trivial when $u$ or $b$ is weak. Transpose lifting squares using step 6. For a vertical Reedy fibration $f:X\\to Y$, a square from $b$ to the relative simplicial mapping map for $(u,f)$ is exactly a square from $w$ to $f$, with the same filler. When $b$ is a Kan trivial cofibration, $w$ is vertically trivial, so such a filler exists. The relative mapping map is therefore a Kan fibration. If $u$ is weak, $w$ is vertically trivial for every Kan cofibration $b$; if $f$ is weak, $f$ lifts every vertical cofibration $w$. In either situation the relative mapping map lifts every monomorphism and is a Kan trivial fibration. This proves the simplicial-model lifting axiom, including its two triviality clauses. For the tensor unit, $X\\otimes\\Delta^0=X$ canonically, and $\\Delta^0$ is Kan cofibrant because its initial map is a monomorphism. Taking its identity as cofibrant replacement verifies the unit condition directly. Together with step 6 this is the asserted simplicial vertical model structure.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Theorem 2.6, simplicial-model assertion; expanded tensor pushout-product verification using the existing Mathlib anodyne leaf."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-sset-anodyne-pushout-product",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/math/0607820",
+  "place": "Section 2, Proposition 2.1, Proposition 2.4, Proposition 2.5, Theorem 2.6 and Proposition 2.10 read online; direct degreewise expansion of their Reedy/division argument using existing DAG statements. The paper is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +165,66 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [CategoryTheory.Mono f], HomotopicalAlgebra.Cofibration f\", \"doc\": \"In the category of simplicial sets equipped with the Quillen model structure, every monomorphism $ f $ is a cofibration. This establishes that the class of cofibrations coincides with the class of mon\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithCofibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.cofibrations SSet = CategoryTheory.MorphismProperty.monomorphisms SSet\", \"doc\": \"In the category of simplicial sets equipped with the Quillen model structure, the class of cofibrations coincides with the class of monomorphisms.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y), HomotopicalAlgebra.Cofibration f ↔ CategoryTheory.Mono f\", \"doc\": \"In the category of simplicial sets, a morphism $ f $ is a cofibration if and only if it is a monomorphism.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [HomotopicalAlgebra.Cofibration f], CategoryTheory.Mono f\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"SSet.modelCategoryQuillen.J ≤ CategoryTheory.MorphismProperty.monomorphisms SSet\", \"doc\": \"In the category of simplicial sets, the morphism property generated by all horn inclusions (corresponding to the generating acyclic cofibrations in the Quillen model structure) is contained within the\"}\n  {\"name\": \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"SSet.modelCategoryQuillen.I ≤ CategoryTheory.MorphismProperty.monomorphisms SSet\", \"doc\": \"For each natural number $n$, the canonical inclusion morphism $\\\\iota: \\\\partial\\\\Delta[n] \\\\to \\\\Delta[n]$ from the boundary of the standard $n$-simplex to the $n$-simplex is a monomorphism in the categor\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}",
    "date": "2026-10-17",
    "verdict": "no match: the hits concern the Kan model on simplicial sets or the definition of a Reedy category. Mathlib/AlgebraicTopology/Reedy/Basic.lean lines 21-24 explicitly list constructing the Reedy model structure as TODO; no bisimplicial division/model theorem is supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "bisimplicial|Reedy|pushout.product|boxtimes",
+   "results": "{\"t\": \"2026-10-16T22:57:53Z\", \"tool\": \"grep\", \"query\": \"bisimplicial|Reedy|pushout.product|boxtimes\", \"sub\": \"Mathlib/AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match returned, but the subdirectory argument incorrectly repeated Mathlib/. This query is not evidence of absence; replaced by the recorded whole-Mathlib grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural lifting problem bijections for bisimplicial box products and division maps",
+   "results": "{\"t\": \"2026-10-16T22:57:54Z\", \"tool\": \"leansearch\", \"query\": \"Natural lifting problem bijections for bisimplicial box products and division maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.homEquivFunctor\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.Truncated.liftOfStrictSegal.naturalityProperty\", \"SSet.uliftFunctor\", \"SSet.yonedaEquiv\", \"CategoryTheory.Localization.Lifting₂\", \"CategoryTheory.Localization.lift₂NatIso\", \"CategoryTheory.Localization.Lifting₂.ctorIdx\"], \"digest\": \"4822050fbe051ca7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give Kan cofibration/fibration classes or general model-category notions, not the bisimplicial division and two Reedy structures. Read pinned Reedy/Basic.lean:14-24 (the diagram model structure is TODO), SimplicialSet/CategoryWithFibrations.lean:35-103, and the existing anodyne pushout-product leaf. A second semantic phrasing also returned no matching declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "Reedy ModelCategory bisimplicial",
+   "results": "{\"t\": \"2026-10-16T22:57:54Z\", \"tool\": \"loogle\", \"query\": \"Reedy ModelCategory bisimplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `Reedy`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match returned: query reported loogle: Unknown identifier `Reedy`; this parser error is not evidence of absence. The semantic searches and whole-source grep supply the negative check."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bisimplicial sets Reedy model structures lifting division calculus",
+   "results": "{\"t\": \"2026-10-16T22:57:54Z\", \"tool\": \"leanfinder\", \"query\": \"bisimplicial sets Reedy model structures lifting division calculus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.cosk\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.SimplicialObject.cosk\", \"SSet.modelCategoryQuillen.I\"], \"digest\": \"fe4c19d25a58baae\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give Kan cofibration/fibration classes or general model-category notions, not the bisimplicial division and two Reedy structures. Read pinned Reedy/Basic.lean:14-24 (the diagram model structure is TODO), SimplicialSet/CategoryWithFibrations.lean:35-103, and the existing anodyne pushout-product leaf. A second semantic phrasing also returned no matching declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "bisimplicial|Reedy|reedy|boxProduct",
+   "results": "{\"t\": \"2026-10-16T23:02:01Z\", \"tool\": \"grep\", \"query\": \"bisimplicial|Reedy|reedy|boxProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/Covering/Besicovitch.lean\", \"Mathlib/MeasureTheory/Covering/Besicovitch.lean\", \"Mathlib/MeasureTheory/Covering/Besicovitch.lean\", \"Mathlib/MeasureTheory/Covering/BesicovitchVectorSpace.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\"], \"digest\": \"986ce1948736daf3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give Kan cofibration/fibration classes or general model-category notions, not the bisimplicial division and two Reedy structures. Read pinned Reedy/Basic.lean:14-24 (the diagram model structure is TODO), SimplicialSet/CategoryWithFibrations.lean:35-103, and the existing anodyne pushout-product leaf. A second semantic phrasing also returned no matching declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor categories of simplicial objects have Reedy model structures with relative matching fibrations and monomorphism cofibrations",
+   "results": "{\"t\": \"2026-10-16T23:02:02Z\", \"tool\": \"leanfinder\", \"query\": \"Functor categories of simplicial objects have Reedy model structures with relative matching fibrations and monomorphism cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.BifibrantObject.ι\", \"HomotopicalAlgebra.CategoryWithFibrations\", \"HomotopicalAlgebra.CategoryWithCofibrations\", \"HomotopicalAlgebra.FibrantObject.ι\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.BifibrantObject\"], \"digest\": \"0473182ebc6fd005\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give Kan cofibration/fibration classes or general model-category notions, not the bisimplicial division and two Reedy structures. Read pinned Reedy/Basic.lean:14-24 (the diagram model structure is TODO), SimplicialSet/CategoryWithFibrations.lean:35-103, and the existing anodyne pushout-product leaf. A second semantic phrasing also returned no matching declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial objects in simplicial sets with the Reedy model category structure and enriched mapping spaces",
+   "results": "8 hits: CategoryTheory.SimplicialObject.instEnrichedCategorySSet, CategoryTheory.SimplicialObject.instSimplicialCategorySSet, SSet.QCat.catEnrichedOrdinaryCategory, SSet.QCat, CategoryTheory.SimplicialCategory.sHom, SSet, CategoryTheory.SimplicialObject.instSimplicialCategory, SSet.modelCategoryQuillen.instCategoryWithFibrations. Read Mathlib/AlgebraicTopology/SimplicialCategory/SimplicialObject.lean:34-41: generic simplicial enrichment instances only, no Reedy model structure or relative division criterion. Reedy/Basic.lean:21-24 still lists the model structure as TODO.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy.*ModelCategory|ModelCategory.*Reedy|bisimplicial",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-categorical-constancy",
@@ -80,5 +232,21 @@
   "group": "Q06"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-bisimplicial-reedy-division-calculus",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Wrote seven proof steps for division, its lifting adjunctions, both Reedy cofibration/matching calculations, all-monomorphism division tests, and the vertical simplicial axiom. Reused six existing nodes; no new nodes. Checked Joyal–Tierney Section 2 online and the pinned Mathlib sources. No sorry-free attachment exists in the source checkout.",
+  "blueprint": "Supports prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient derived mapping adjunction before R lim, through the existing enrichment-change and complete-Segal comparison chain. This item supplies only the Section 2 bisimplicial division/Reedy foundation, before the horizontal-regularity comparison and first-row Quillen equivalence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N9-399ebed8a",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-399ebed8a (reviewer sub-agent of L); spot-checked: I read the item, all six cited statements, unit sk-prop-sf-biduality-general and the pinned Mathlib leaf (PushoutProduct.lean:95-103, Basic.lean:71-75). The imported statement is unchanged. I checked it against Joyal–Tierney §2 as I know it, because the paper is not archived (cited by URL, WANTED, origin agent): definitions before Prop 2.1, Props 2.1 and 2.5. It is true, including p=0, where ∂Δ^0\\X=* and the test is f_0. Step 1: the Yoneda currying formulas are inverse. Step 2: square and filler bijections hold. Step 3: the latching colimit for Δ^op injects onto D_nT by unique decomposition, using (σ,T(τ)y)∼(τσ,y). The section argument gives X_n∩D_nY=D_nX, so Reedy cofibrations are exactly the monos in both models. Step 4: matching objects ∂Δ^p\\X and X/∂Δ^q are correct; I checked the extension formula ργ=θρ_0. Functoriality comes from the Reedy node's extension clause. Step 5: the column of a⊠'b is copies of id plus copies of b, a trivial cofibration by the WFS; both converses hold. Step 6: columnwise currying for tensor and cotensor. Step 7: SM7 holds through the exact anodyne pushout-product leaf, with the symmetric case and both triviality clauses. Edge cases checked: U empty, U=U', V empty, identity b or f. proof_deps is the union of the uses. The walk from the cited nodes is acyclic. Off-unit inputs are only a definition and a Mathlib leaf, so no tool_uses and none accepted. No SGA. There are no new nodes. lem-coef-simplicial-space-reedy-cartesian overlaps only the vertical clauses and is not a duplicate. No fixes."
+ }
 }

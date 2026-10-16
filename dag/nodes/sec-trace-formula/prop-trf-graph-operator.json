@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-trf-graph-operator",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Graph construction of the global operator",
@@ -13,32 +13,143 @@
   "place": "node prop-trf-graph-operator, order 2293"
  },
  "stmt_deps": [
-  "def-trf-global-operator"
+  "def-trf-global-operator",
+  "def-trf-graph-correspondence",
+  "def-weil-proper-morphism",
+  "def-weil-derived-direct-image",
+  "def-compact-support-direct-image-detailed"
  ],
  "proof": [
   {
-   "text": "For the graph correspondence $c_1=\\operatorname{id}_X$ and $c_2=h$,\nthe display of [def-trf-global-operator] reads\n\n$$\n\\begin{aligned}\nR\\Gamma_c(X,K)&\\xrightarrow{\\eta^*_h}\nR\\Gamma_c(X,Rh_*Lh^*K)\n\\xrightarrow{\\ \\sim\\ }R\\Gamma_c(X,Lh^*K)\\\\\n&\\xrightarrow{R\\Gamma_c(X,v)}\nR\\Gamma_c(X,K),\n\\end{aligned}\n$$\n\nwhere the second arrow is the identification of\n[def-weil-derived-direct-image] for the proper $h$\n($Rh_*\\simeq Rh_!$ composed with the compact-support direct-image\nidentification of [def-compact-support-direct-image-detailed]), and the\nlast arrow is the counit of the identity adjunction. This is the\ndisplayed composite. Functoriality, additivity over triangles, and\ncompatibility with composition are the corresponding properties of the\nunit-counit calculus, of $R\\Gamma_c$, and of the identifications\nquoted above.",
+   "text": "Put $H=R\\Gamma_c(X,-)=\\operatorname{Fib}_s\\circ Ra_{X!}$, using the coefficient conventions already included in [def-trf-global-operator]. For the graph of [def-trf-graph-correspondence], $C=X$, $c_1=\\operatorname{id}_X$, $c_2=h$, and $u=v:Lh^*K\\to K$. In the defining composite of [def-trf-global-operator], the last composition identification and the exceptional counit for $c_1=\\operatorname{id}_X$ cancel: the identity adjunction has identity counit by [def-weil-pbc-composite-adjunction], and the identity composition comparison is the identity by [prop-functor-package], clause (3). Write $\\rho_h:Rh_*\\xrightarrow{\\sim}Rh_!$ for the inverse of the proper comparison, and $\\alpha_{a,h}:Ra_{X!}Rh_!\\xrightarrow{\\sim}R(a_Xh)_!=Ra_{X!}$ for compact-support composition (followed by $\\operatorname{Fib}_s$ when applied to $H$). The latter equality uses that $h$ is a $k$-endomorphism. Then the remaining composite is exactly\n$$q_{h,K}=\\alpha_{a,h,Lh^*K}\\circ H(\\rho_{h,Lh^*K})\\circ H(\\eta_{h,K}):H(K)\\longrightarrow H(Lh^*K),\\qquad T_{h,v}=H(v)\\circ q_{h,K}.$$\nHere $\\eta_h$ is the ordinary pullback/direct-image unit, not an exceptional counit. Properness is precisely the hypothesis needed for $\\rho_h$; no properness of $X/k$ is assumed.",
    "uses": [
     "def-trf-global-operator",
-    "def-weil-derived-direct-image",
-    "def-compact-support-direct-image-detailed"
+    "def-trf-graph-correspondence",
+    "def-weil-pbc-composite-adjunction",
+    "prop-functor-package"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/prop-trf-graph-operator.proof.md",
+    "place": "displayed graph specialization and the sentence identifying the proper comparison and identity counit"
+   }
+  },
+  {
+   "text": "For fixed $h$, apply [lem-trf-global-operator-naturality] to its graph: a map $f:K\\to K'$ of coefficient pairs satisfies $f\\circ v=v'\\circ Lh^*f$ and hence $H(f)\\circ T_{h,v}=T_{h,v'}\\circ H(f)$. Explicitly, naturality of the unit, proper comparison and composition comparison in Step 1 gives $q_{h,K'}\\circ H(f)=H(Lh^*f)\\circ q_{h,K}$; composing with $H(v')$ and substituting the pair relation gives the claimed square. The graph has identity exceptional leg, so it is admissible, and its ordinary leg is proper by hypothesis. This proves functoriality in $(K,v)$.",
+   "uses": [
+    "lem-trf-global-operator-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/prop-trf-graph-operator.proof.md",
+    "place": "last sentence: functoriality"
+   }
+  },
+  {
+   "text": "Let $K_1\\to K_2\\to K_3\\to K_1[1]$ be a distinguished triangle and let $v_i:Lh^*K_i\\to K_i$ be a morphism from its pulled-back triangle to itself, including the square for the connecting arrow. Specialize [lem-trf-global-operator-triangulated] to $c_1=\\operatorname{id}_X$, $c_2=h$. Its conclusion says that the three maps $T_{h,v_i}=H(v_i)q_{h,K_i}$ form an endomorphism of the compact-cohomology distinguished triangle. Thus all three squares, including the connecting square with its shift comparison, commute. This is the distinguished-triangle compatibility (the additivity clause) of the global operator. It concerns compatible coefficient triangles; it does not assert a trace identity for arbitrary triangle endomorphisms.",
+   "uses": [
+    "lem-trf-global-operator-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/prop-trf-graph-operator.proof.md",
+    "place": "last sentence: additivity over distinguished triangles"
+   }
+  },
+  {
+   "text": "Let $g,h:X\\to X$ be proper $k$-endomorphisms. Their composite $h\\circ g$ is proper by [lem-weil-pbc-proper-composition]. Use $L(h\\circ g)^*\\simeq Lg^*Lh^*$. With $f=g$ and the outer morphism $h$, clause (3) of [fix-prop-adjunctions] gives the typed identity\n$$\\eta_{h\\circ g,K}=Rh_*(\\eta_{g,Lh^*K})\\circ\\eta_{h,K}$$\nunder the ordinary composition comparisons. Apply $H$ and then the proper and compact-support comparisons of Step 1. By [prop-functor-package], clause (3), and the identity/composition coherence of [fix-prop-coherence], the comparison $H R(h\\circ g)_*\\simeq H R(h\\circ g)_!\\simeq H$ is the composite $H Rh_*Rg_*\\simeq H Rh_!Rg_!\\simeq H Rg_!\\simeq H$. For clarity, put $b_{h,N}=\\alpha_{a,h,N}\\circ H(\\rho_{h,N}):H(Rh_*N)\\to H(N)$. Its naturality on $\\eta_{g,Lh^*K}$ reads $H(\\eta_g)\\circ b_{h,Lh^*K}=b_{h,Rg_*Lg^*Lh^*K}\\circ H(Rh_*\\eta_g)$, and coherence reads $b_{h\\circ g}=b_g\\circ b_h Rg_*$ under the composition comparisons. Thus $q_g\\circ q_h=b_g H(\\eta_g)b_h H(\\eta_h)=b_g b_h Rg_* H(Rh_*\\eta_g)H(\\eta_h)=b_{h\\circ g}H(\\eta_{h\\circ g})$. In other words the displayed unit equation becomes\n$$q_{h\\circ g,K}=q_{g,Lh^*K}\\circ q_{h,K}:H(K)\\longrightarrow H(Lg^*Lh^*K).$$\nFor an identity endomorphism the same comparisons and the identity adjunction of [def-weil-pbc-composite-adjunction] give $q_{\\operatorname{id},K}=\\operatorname{id}_{H(K)}$. These assertions are at finite coefficient level $A=A_{E,n}$ on the constructible domains of the graph correspondence; no completed or rational pullback is substituted.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "fix-prop-adjunctions",
+    "prop-functor-package",
+    "fix-prop-coherence",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/prop-trf-graph-operator.proof.md",
+    "place": "last sentence: compatibility with composition; expanded using the existing composite-unit and composition-coherence statements"
+   }
+  },
+  {
+   "text": "For coefficient maps $v:Lh^*K\\to K$ and $w:Lg^*K\\to K$, the coefficient map for the ordered composite $h\\circ g$ is $w\\circ Lg^*v:Lg^*Lh^*K\\to K$. Naturality of $q_g$ (Step 2, applied to the underlying map $v:Lh^*K\\to K$) and the equation of Step 4 give\n$$\\begin{aligned}\nT_{g,w}\\circ T_{h,v}\n &=H(w)\\circ q_{g,K}\\circ H(v)\\circ q_{h,K}\\\\\n &=H(w)\\circ H(Lg^*v)\\circ q_{g,Lh^*K}\\circ q_{h,K}\\\\\n &=H(w\\circ Lg^*v)\\circ q_{h\\circ g,K}\n =T_{h\\circ g,w\\circ Lg^*v}.\n\\end{aligned}$$\nThe identity pair has identity operator by Step 4. For three endomorphisms, the two parenthesizations give the same composite of the three operators by associativity, with the coefficient maps identified by the coherent pullback composition comparisons used in Step 4. This proves composition compatibility with its order and identity specified.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/prop-trf-graph-operator.proof.md",
+    "place": "last sentence: explicit composition calculation from Steps 1, 2 and 4"
+   }
   }
  ],
  "proof_deps": [
   "def-trf-global-operator",
-  "def-weil-derived-direct-image",
-  "def-compact-support-direct-image-detailed"
+  "def-trf-graph-correspondence",
+  "def-weil-pbc-composite-adjunction",
+  "prop-functor-package",
+  "lem-trf-global-operator-naturality",
+  "lem-trf-global-operator-triangulated",
+  "lem-weil-pbc-proper-composition",
+  "fix-prop-adjunctions",
+  "fix-prop-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-operator/prop-trf-graph-operator.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/prop-trf-graph-operator.proof.md",
+  "place": "whole proof; graph substitution followed by expanded naturality, triangle, and composite-unit calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.map",
+   "results": "CategoryTheory.Adjunction.comp_map_bijective_iff, CategoryTheory.Adjunction.left_triangle_components, CategoryTheory.Adjunction.map_comp_bijective_iff, CategoryTheory.Adjunction.right_triangle_components, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.unit_naturality, CategoryTheory.Adjunction.left_triangle_components_assoc, CategoryTheory.Adjunction.right_triangle_components_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: general adjunction or sheaf/module pullback facts, not the graph operator on compact cohomology and its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "globalOperator|compactly.supported|graph.correspondence",
+   "results": "25 hits; Mathlib/Algebra/Algebra/NonUnitalHom.lean, Mathlib/Algebra/Algebra/NonUnitalHom.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean, Mathlib/Analysis/Distribution/Support.lean, Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean, Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean; searched Mathlib/",
+   "date": "2026-10-16",
+   "verdict": "no match: compactly supported functions are unrelated; no graph-correspondence compact-cohomology operator found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The operator on compact support cohomology induced by a proper graph correspondence is adjunction unit followed by pullback coefficient map.",
+   "results": "CompHausLike.LocallyConstant.adjunction_unit, CategoryTheory.ChosenPullbacksAlong.mapPullbackAdj, CategoryTheory.ExponentiableMorphism.coev, CompHausLike.LocallyConstant.adjunction, SheafOfModules.pullbackObjUnitToUnit, CompHausLike.LocallyConstant.counit_app_val, CategoryTheory.ExponentiableMorphism.coev_def, CompHausLike.LocallyConstant.counit",
+   "date": "2026-10-16",
+   "verdict": "no match: general adjunction or sheaf/module pullback facts, not the graph operator on compact cohomology and its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper endomorphism of a scheme, the compactly supported cohomology operator of its graph is induced by the pullback adjunction unit followed by the coefficient morphism.",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-16",
+   "verdict": "no match: general adjunction or sheaf/module pullback facts, not the graph operator on compact cohomology and its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial compact cohomology pullback along proper maps and composition of graph correspondence actions",
+   "results": "CompHausLike.LocallyConstant.incl_comap, LocallyConstant.comap_comp, CompHausLike.LocallyConstant.functorToPresheaves_obj_map, topCatToSheafCompHausLike_map_val_app, LocallyConstant.comap_comap, TopologicalSpace.Opens.mapComp, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map, CompHausLike.pullback.condition_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: general adjunction or sheaf/module pullback facts, not the graph operator on compact cohomology and its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "graph|shriek|compactSupport",
+   "results": "0 hits; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: compactly supported functions are unrelated; no graph-correspondence compact-cohomology operator found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.comp\"",
+   "results": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.comp_map_bijective_iff, CategoryTheory.Adjunction.compCoyonedaIso, CategoryTheory.Adjunction.compUliftCoyonedaIso, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.compYonedaIso, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app",
+   "date": "2026-10-16",
+   "verdict": "no match: general adjunction or sheaf/module pullback facts, not the graph operator on compact cohomology and its clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -65,5 +176,44 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-operator"
+ "unit": "sk-d-operator",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-trf-graph-operator",
+  "worker": "stage1",
+  "summary": "Expanded the imported one-paragraph proof into the graph substitution, a typed naturality square, the general triangle specialization, the normalized composite-unit calculation, and the explicit ordered composition of operators. Reused existing nodes throughout; added no nodes and made no statement correction. Added the graph and properness definitions to statement dependencies. Searched both phrasings in Mathlib and the project source; no declaration states all clauses.",
+  "blueprint": "The displayed formula and proper/identity identifications are Step 1; the final sentence is realized by Step 2 (functoriality), Step 3 (distinguished triangles), and Steps 4–5 (proper composition). The unit sk-d-operator is a definition with no proof steps; this item is its graph specialization, not its key definition.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "Its proper coincidence and coherent compact-support composition are the operation data used by sk-d-six; they identify the arrows defining the graph operator."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Clause (3) gives the ordinary composite-unit equation with the correct typing; sk-d-operator assumes the operation package but has no separate theorem spelling out this identity."
+   },
+   {
+    "node": "fix-prop-coherence",
+    "why": "It supplies coherence of the canonical proper and composition comparisons when the two unit insertions are compared; this implements the sk-d-six package, not a replacement route."
+   },
+   {
+    "node": "lem-trf-global-operator-triangulated",
+    "why": "The general correspondence triangle statement specializes to a graph and supplies the triangle clause; the operator unit has no more specialized triangle theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "fix-prop-adjunctions",
+  "fix-prop-coherence",
+  "lem-trf-global-operator-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-4fcc2afeb",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-4fcc2afeb (reviewer sub-agent of L); spot-checked: I read the item and every cited node statement in full. The statement is unchanged and agrees with the main-20261015 and master blueprint copies. The coefficient category is D^b_ctf(X,A_{E,n}) throughout; this is not a target node. Step 1: for the graph (C=X, c_1=id, c_2=h), the identity composition law (prop-functor-package (3)) and the identity adjunction (def-weil-pbc-composite-adjunction) remove the exceptional leg, leaving unit, then Rh_*≃Rh_!, then the composition law for a_X h=a_X, then H(v). Step 2: lem-trf-global-operator-naturality applies; the graph is admissible because its exceptional leg is id, the naturality square needs no invertibility, and q_h is natural in K. Step 3: lem-trf-global-operator-triangulated with c_1=id, c_2=h gives the triangle clause, including the connecting square, and makes no trace claim. Step 4: the unit formula η_{hg}=(Rh_*η_g Lh^*)∘η_h of fix-prop-adjunctions (3) is correctly typed and agrees with def-weil-pbc-composite-adjunction and Stacks 0DV0 (categories lemma-compose-counits). I re-derived q_g q_h = b_{hg}H(η_{hg}) from naturality of b_h and the composition coherence of fix-prop-coherence. Step 5: re-derived T_{g,w}T_{h,v}=T_{hg,w∘Lg^*v}; the order matches (hg)^*=g^*h^*, checked on finite sets of points with noncommuting maps; the identity, zero and split-triangle cases also hold, and the Frobenius users all take the Step 1 composite. Route: prop-functor-package, fix-prop-coherence, fix-prop-adjunctions and lem-trf-global-operator-triangulated lie outside the route of sk-d-operator; they are declared tool uses, and I accept them as black-box formal six-functor and triangle data. No cycles (checked by transitive closure). There are no new nodes, and no duplicate exists: prop-trf-graph-frobenius-operator and lem-trf-compactification-graph-operator are specializations that use the item. Two fixes in fixes/dag/nodes/sec-trace-formula/prop-trf-graph-operator.json: (1) added def-weil-derived-direct-image and def-compact-support-direct-image-detailed to stmt_deps, since the statement uses Rh_*, its unit and Rh_! (B3); (2) Step 1 now writes H=Fib_s∘Ra_{X!}, as def-trf-coefficient-conventions defines it. The mathematics is unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }

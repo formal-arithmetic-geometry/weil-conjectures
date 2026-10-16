@@ -1,124 +1,301 @@
 {
-  "id": "lem-kun-0f1i-normal",
-  "blueprint": {
-    "is": "lem-kun-0f1i-normal",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "The normal integral case",
-  "statement": "Let $K$ be a field and let $n\\ge1$ be an integer invertible in\n$K$. Let $X$ be a scheme of finite type over $K$, let $S'$\nbe an affine, integral and normal $K$-scheme with algebraically\nclosed function field $L$, set $X'=X\\times_KS'$,\n$Y=X'\\times_{S'}\\Spec(L)$, and let $h:Y\\to X'$ be the projection.\nThen $R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for all $q>0$\nand all $d\\mid n$. (*Source:* Stacks Project, Tag\n[0F1I](https://stacks.math.columbia.edu/tag/0F1I), final\nreduction.)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1i-normal.md",
-    "place": "node lem-kun-0f1i-normal, order 1776",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0F1I"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-kun-constant-sheaf",
-    "def-kun-separably-closed",
-    "def-kun-torsion-invertible",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "Write $S'=\\Spec(B)$, so that $L$ is the fraction field of $B$.\nBy [lem-kun-algebra-union] write $B=\\bigcup_{i\\in I}B_i$ as the\nunion of its finite type $K$-subalgebras $B_i$. Let $J$ be the\nset of pairs $(i,g)$ with $i\\in I$ and $g\\in B_i$ nonzero,\nordered by $(i',g')\\ge(i,g)$ if and only if $B_i\\subset B_{i'}$\nand $g$ maps to an invertible element of $(B_{i'})_{g'}$. Then\n$L=\\varinjlim_{(i,g)\\in J}(B_i)_g$ by\n[lem-kun-colim-of-localizations]. For $j=(i,g)\\in J$ set\n$S_j=\\Spec(B_i)$ and $U_j=\\Spec((B_i)_g)$. Then the diagram\n\n$$\n\\begin{array}{ccc}\nX'&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{}\\\\\nS'&\\longleftarrow&\\Spec(L)\n\\end{array}\n\\qquad\\text{is the limit of}\\qquad\n\\begin{array}{ccc}\nX\\times_KS_j&\\xleftarrow{\\;h_j\\;}&X\\times_KU_j\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{}\\\\\nS_j&\\longleftarrow&U_j\n\\end{array}\n$$\n\nby [lem-kun-fibre-product-limits] (limits and fibre products\ncommute) and [lem-kun-colim-of-localizations]: the rings $(B_i)_g$\nhave filtered colimit $L$, so their spectra have limit $\\Spec(L)$, and\nthe resulting maps exhibit the diagram $S'\\leftarrow\\Spec(L)$ as the\nlimit of the diagrams $S_j\\leftarrow U_j$. Thus we may\napply [lem-kun-0ezt] to see that it suffices to prove that the\nexchange morphisms (of [def-kun-unbounded-exchange]) hold in the\ndiagrams on the right. Each right-hand diagram is the diagram of\n[lem-kun-0f1h] for the open immersion $j:U_j\\to S_j$ of finite\ntype $K$-schemes and the scheme $X$ of finite type over $K$,\napplied to the sheaf $\\underline{\\mathbf Z/d\\mathbf Z}$, a sheaf of\n$\\mathbf Z/d\\mathbf Z$-modules whose stalks are $d$-torsion, with\n$d\\mid n$ invertible in $K$, hence of orders invertible in $K$\nby [lem-kun-zn-sheaf-invertible-orders].\nHence [lem-kun-0f1h] gives\n\n$$\n(X\\times_KS_j\\to S_j)^{-1}R^q(U_j\\to S_j)_*\\underline{\\mathbf Z/d\\mathbf Z}\n\\;\\cong\\;R^qh_{j,*}\\underline{\\mathbf Z/d\\mathbf Z}\n$$\n\nfor all $q\\ge0$. Passing to the limit with\n[lem-kun-0ezt] we obtain\n\n$$\n(X'\\to S')^{-1}R^q(\\Spec(L)\\to S')_*\\underline{\\mathbf Z/d\\mathbf Z}\n\\;\\cong\\;R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}\n$$\n\nfor all $q$. But $\\Spec(L)$ is integral and normal with\nalgebraically closed (hence separably closed) function field, so\n$R^q(\\Spec(L)\\to S')_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for\n$q>0$ by [lem-kun-0ezp]. Hence\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for $q>0$, as\ndesired.",
-      "uses": [
-        "lem-kun-algebra-union",
-        "lem-kun-colim-of-localizations",
-        "lem-kun-fibre-product-limits",
-        "lem-kun-0ezt",
-        "def-kun-unbounded-exchange",
-        "lem-kun-0f1h",
-        "lem-kun-zn-sheaf-invertible-orders",
-        "lem-kun-0ezp"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-kun-0f1i-normal",
+ "blueprint": {
+  "is": "lem-kun-0f1i-normal",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The normal integral case",
+ "statement": "Let $K$ be a field and let $n\\ge1$ be an integer invertible in\n$K$. Let $X$ be a scheme of finite type over $K$, let $S'$\nbe an affine, integral and normal $K$-scheme with algebraically\nclosed function field $L$, set $X'=X\\times_KS'$,\n$Y=X'\\times_{S'}\\Spec(L)$, and let $h:Y\\to X'$ be the projection.\nThen $R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for all $q>0$\nand all $d\\mid n$. (*Source:* Stacks Project, Tag\n[0F1I](https://stacks.math.columbia.edu/tag/0F1I), final\nreduction.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1i-normal.md",
+  "place": "node lem-kun-0f1i-normal, order 1776",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F1I"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-integral-scheme",
+  "def-sbc-normal-dominant-galois",
+  "def-sc-function-field",
+  "def-weil-algebraic-closure",
+  "def-pc-fibre-product",
+  "def-kun-constant-sheaf",
+  "def-kun-torsion-invertible",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Write $S'=\\operatorname{Spec}B$. The whole affine open of the integral scheme $S'$ is nonempty, so [lem-sc-integral-function-field-affine-fraction] identifies its function field $L$ with $\\operatorname{Frac}(B)$ and makes $B$ a domain. By [lem-kun-algebra-union], take $I$ to be the set of finitely generated $K$-subalgebras $B_i\\subseteq B$, ordered by inclusion, with union $B$. Form the small directed preorder $J$ of pairs $(i,g)$, $0\\ne g\\in B_i$, with $(i,g)\\le(i',g')$ exactly when $B_i\\subseteq B_{i'}$ and $g$ is a unit in $(B_{i'})_{g'}$. By [lem-kun-colim-of-localizations], the canonical transition maps are defined, $J$ is filtered, and $L=\\varinjlim_J(B_i)_g$. In particular this indexing family is nonempty; $(K,1)$ is an index.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
     "lem-kun-algebra-union",
-    "lem-kun-colim-of-localizations",
-    "lem-kun-fibre-product-limits",
-    "lem-kun-0ezt",
-    "def-kun-unbounded-exchange",
-    "lem-kun-0f1h",
+    "lem-kun-colim-of-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0F1I (lemma-punctual-base-change), final paragraph of proof"
+   }
+  },
+  {
+   "text": "For $j=(i,g)$ put $S_j=\\operatorname{Spec}B_i$, $U_j=\\operatorname{Spec}(B_i)_g$, $X_j=X\\times_K S_j$, and $Y_j=X\\times_K U_j$, with projections $f_j:X_j\\to S_j$, $e_j:Y_j\\to U_j$, $g_j:U_j\\to S_j$, and $h_j:Y_j\\to X_j$. These are compatible cartesian squares, by the universal property [def-pc-fibre-product]. The repeated diagram $j\\mapsto B_i$ also has colimit $B$: a compatible cocone sends $b\\in B_i$ to its image at $(i,1)$; a common upper bound of any two pairs proves this independent of the representing stage and pair, and proves that addition and multiplication are preserved. This gives exactly one ring map from $B$, extending every cocone map. Thus [lem-weil-pbc-spec-colimit-limit] gives $S'=\\varprojlim_JS_j$ and $\\operatorname{Spec}L=\\varprojlim_JU_j$, and says their transition maps are affine. For any test scheme $T$, compatible maps $T\\to X_j$ are exactly a single map $T\\to X$ together with compatible maps $T\\to S_j$, all over $K$: the $X$-components agree because any two indices have a common upper bound. By the fibre-product universal property they are exactly maps $T\\to X\\times_KS'$. The same argument gives $\\varprojlim_JY_j=X\\times_K\\operatorname{Spec}L=Y$. The limit maps agree with the prescribed $h,e,f,g$ by their projections. Each transition $X_{j'}\\to X_j$ (respectively $Y_{j'}\\to Y_j$) is the base change of $S_{j'}\\to S_j$ (respectively $U_{j'}\\to U_j$), hence affine by [lem-weil-pbc-affine-morphism-permanence]. This constructs all four limits rather than assuming their existence.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0F1I (lemma-punctual-base-change), final paragraph of proof"
+   }
+  },
+  {
+   "text": "The schemes $S_j$ and $U_j$ are of finite type over $K$: if $b_1,\\ldots,b_r$ generate $B_i$, then $b_1,\\ldots,b_r,1/g$ generate $(B_i)_g$, directly by the description of localization as fractions. This is finite generation in [def-weil-pbc-finite-type-algebra], and gives finite type of the two affine schemes by [def-weil-finite-type-morphism]. By [lem-weil-pbc-principal-localization-open-immersion], $g_j$ is the principal-open immersion. Since both schemes are affine, [lem-weil-pbc-morphism-affine-schemes-affine] makes $g_j$ affine. It is therefore quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence]. Thus these are finite-type open-immersion squares, with the other factor the given finite-type scheme $X$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0F1I (lemma-punctual-base-change), final paragraph of proof"
+   }
+  },
+  {
+   "text": "It suffices to consider positive divisors: if the notation $d\\mid n$ allows signed integer divisors, then $d\\ne0$ since $n\\ge1$, and $d\\mathbf Z=|d|\\mathbf Z$ gives the identical quotient group. Fix a positive divisor $d$ of $n$, and put $M=\\mathbf Z/d\\mathbf Z$ and $F_j=\\underline M$ on $U_{j,\\mathrm{Et}}$, using [def-kun-constant-sheaf]. Since $n=d a$ for an integer $a$, $nM=0$ and $M$ is a $\\mathbf Z/n\\mathbf Z$-module by reduction modulo $d$. Hence $F_j$ has torsion stalks of orders invertible in $K$ by [lem-kun-zn-sheaf-invertible-orders], used with the given $n$ (there is no need to change the annihilator to $d$). Use the canonical constant-sheaf pullback isomorphisms of [lem-kun-pullback-constant] as the transition maps; these obey identity and composition, since on the constant presheaf they send each value $m$ to the same value $m$, and sheafification preserves these equalities. The same identifications make every $p_j^{-1}F_j$ on $\\operatorname{Spec}L$ equal to $\\underline M$ with identity transition maps. Their colimit is $\\underline M$: by [def-weil-pbc-category-colimit] a cocone to any sheaf $G$ consists of one map $\\underline M\\to G$, since a common upper bound forces any two components to agree. Also $e_j^{-1}F_j=\\underline M$ on $Y_j$, and $e^{-1}\\underline M=\\underline M$ on $Y$, by the same pullback lemma.",
+   "uses": [
+    "def-kun-constant-sheaf",
     "lem-kun-zn-sheaf-invertible-orders",
-    "lem-kun-0ezp"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1i-normal.md",
-    "place": "## Proof"
+    "lem-kun-pullback-constant",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0F1I (lemma-punctual-base-change), final paragraph of proof"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1776,
-  "blueprint_uses": [
-    "def-kun-constant-sheaf",
-    "def-kun-separably-closed",
-    "def-kun-torsion-invertible",
-    "def-kun-unbounded-exchange",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-scheme-conventions",
-    "lem-kun-0ezp",
-    "lem-kun-0ezt",
+  {
+   "text": "Apply [lem-kun-0f1h] to $g_j:U_j\\hookrightarrow S_j$, the other factor $X$, and $F_j$, for every $j$. It gives the canonical derived exchange $f_j^{-1}Rg_{j,*}F_j\\to Rh_{j,*}e_j^{-1}F_j$ as an isomorphism. Use abelian-group coefficients, equivalently $\\Lambda=\\mathbf Z$, throughout. The sheaf $F_j[0]$ is bounded below; [sk-def-exchange] identifies the restriction of the unbounded exchange with the bounded below mate, with the same unit and counit. By [lem-kun-bc-map-on-cohomology], its degree-$q$ cohomology is precisely the canonical map $f_j^{-1}R^qg_{j,*}F_j\\to R^qh_{j,*}e_j^{-1}F_j$. A functor carries an isomorphism and its inverse to inverse morphisms. Thus this higher-direct-image map is an isomorphism for every $q\\ge0$, as required in the next step.",
+   "uses": [
     "lem-kun-0f1h",
-    "lem-kun-algebra-union",
-    "lem-kun-colim-of-localizations",
-    "lem-kun-fibre-product-limits",
-    "lem-kun-zn-sheaf-invertible-orders"
-  ],
-  "uses_not_cited": [
-    "def-kun-constant-sheaf",
-    "def-kun-separably-closed",
-    "def-kun-torsion-invertible",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "sk-def-exchange",
+    "lem-kun-bc-map-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0F1I (lemma-punctual-base-change), final paragraph of proof"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $K$ be a field and let $n\\ge1$ be an integer invertible in\n$K$. Let $X$ be a scheme of finite type over $K$, let $S'$\nbe an affine, integral and normal $K$-scheme with algebraically\nclosed function field $L$, set $X'=X\\times_KS'$,\n$Y=X'\\times_{S'}\\Spec(L)$, and let $h:Y\\to X'$ be the projection.\nThen $R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for all $q>0$\nand all $d\\mid n$.",
-    "proof": [
-      {
-        "text": "Write $S'=\\Spec(B)$, so that $L$ is the fraction field of $B$.\nBy [lem-kun-algebra-union] write $B=\\bigcup_{i\\in I}B_i$ as the\nunion of its finite type $K$-subalgebras $B_i$. Let $J$ be the\nset of pairs $(i,g)$ with $i\\in I$ and $g\\in B_i$ nonzero,\nordered by $(i',g')\\ge(i,g)$ if and only if $B_i\\subset B_{i'}$\nand $g$ maps to an invertible element of $(B_{i'})_{g'}$. Then\n$L=\\varinjlim_{(i,g)\\in J}(B_i)_g$ by\n[lem-kun-colim-of-localizations]. For $j=(i,g)\\in J$ set\n$S_j=\\Spec(B_i)$ and $U_j=\\Spec((B_i)_g)$. Then the diagram\n\n$$\n\\begin{array}{ccc}\nX'&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{}\\\\\nS'&\\longleftarrow&\\Spec(L)\n\\end{array}\n\\qquad\\text{is the limit of}\\qquad\n\\begin{array}{ccc}\nX\\times_KS_j&\\xleftarrow{\\;h_j\\;}&X\\times_KU_j\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{}\\\\\nS_j&\\longleftarrow&U_j\n\\end{array}\n$$\n\nby [lem-kun-fibre-product-limits] (limits and fibre products\ncommute) and [lem-kun-colim-of-localizations]: the rings $(B_i)_g$\nhave filtered colimit $L$, so their spectra have limit $\\Spec(L)$, and\nthe resulting maps exhibit the diagram $S'\\leftarrow\\Spec(L)$ as the\nlimit of the diagrams $S_j\\leftarrow U_j$. Thus we may\napply [lem-kun-0ezt] to see that it suffices to prove that the\nexchange morphisms (of [def-kun-unbounded-exchange]) hold in the\ndiagrams on the right. Each right-hand diagram is the diagram of\n[lem-kun-0f1h] for the open immersion $j:U_j\\to S_j$ of finite\ntype $K$-schemes and the scheme $X$ of finite type over $K$,\napplied to the sheaf $\\underline{\\mathbf Z/d\\mathbf Z}$, a sheaf of\n$\\mathbf Z/d\\mathbf Z$-modules whose stalks are $d$-torsion, with\n$d\\mid n$ invertible in $K$, hence of orders invertible in $K$\nby [lem-kun-zn-sheaf-invertible-orders].\nHence [lem-kun-0f1h] gives\n\n$$\n(X\\times_KS_j\\to S_j)^{-1}R^q(U_j\\to S_j)_*\\underline{\\mathbf Z/d\\mathbf Z}\n\\;\\cong\\;R^qh_{j,*}\\underline{\\mathbf Z/d\\mathbf Z}\n$$\n\nfor all $q\\ge0$. Passing to the limit with\n[lem-kun-0ezt] we obtain\n\n$$\n(X'\\to S')^{-1}R^q(\\Spec(L)\\to S')_*\\underline{\\mathbf Z/d\\mathbf Z}\n\\;\\cong\\;R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}\n$$\n\nfor all $q$. But $\\Spec(L)$ is integral and normal with\nalgebraically closed (hence separably closed) function field, so\n$R^q(\\Spec(L)\\to S')_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for\n$q>0$ by [lem-kun-0ezp]. Hence\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for $q>0$, as\ndesired.",
-        "uses": [
-          "lem-kun-algebra-union",
-          "lem-kun-colim-of-localizations",
-          "lem-kun-fibre-product-limits",
-          "lem-kun-0ezt",
-          "def-kun-unbounded-exchange",
-          "lem-kun-0f1h",
-          "lem-kun-zn-sheaf-invertible-orders",
-          "lem-kun-0ezp"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Fix $q>0$. Apply [lem-kun-0ezt] to the directed system of cartesian squares constructed above. The index is a set; all four systems have affine transitions; each $g_j$ is quasi-compact and quasi-separated; and the compatible $F_j$ are torsion abelian sheaves with colimit $F=\\underline M$ on $\\operatorname{Spec}L$. The preceding step supplies the required isomorphism at each stage for this fixed $q$. The resulting limit base-change map is therefore an isomorphism\n$$f^{-1}R^qg_*\\underline M\\xrightarrow{\\sim}R^qh_*e^{-1}\\underline M=R^qh_*\\underline M,$$\nwhere $f:X'\\to S'$ and $g:\\operatorname{Spec}L\\to S'$ are the original projections.",
+   "uses": [
+    "lem-kun-0ezt"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0F1I (lemma-punctual-base-change), final paragraph of proof"
+   }
+  },
+  {
+   "text": "An algebraically closed field has no proper finite algebraic extension: a minimal polynomial of any element of such an extension is irreducible and, having a root in the base field, must be linear. Thus the hypothesis on $L$ in [def-weil-algebraic-closure] implies it is separably closed in [def-kun-separably-closed]. Apply the consequent clause of [lem-kun-0ezp] to the morphism $g:\\operatorname{Spec}L\\to S'$ and the abelian sheaf $\\underline M$ on $\\operatorname{Spec}L$. It gives $R^qg_*\\underline M=0$ for $q>0$. The exact inverse-image functor of [prop-weil-pbc-inverse-image-exact] preserves the zero object (as a finite limit), so the left side of the isomorphism in the preceding step is zero. Hence $R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$. The choices of $q>0$ and positive $d\\mid n$ were arbitrary, proving all clauses.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-kun-separably-closed",
+    "lem-kun-0ezp",
+    "prop-weil-pbc-inverse-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0F1I (lemma-punctual-base-change), penultimate and final paragraphs; Lemma Tag 0EZP (lemma-Rf-star-zero-normal-with-alg-closed-function-field), specialized to a field spectrum"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-kun-algebra-union",
+  "lem-kun-colim-of-localizations",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "def-kun-constant-sheaf",
+  "lem-kun-zn-sheaf-invertible-orders",
+  "lem-kun-pullback-constant",
+  "def-weil-pbc-category-colimit",
+  "lem-kun-0f1h",
+  "sk-def-exchange",
+  "lem-kun-bc-map-on-cohomology",
+  "lem-kun-0ezt",
+  "def-weil-algebraic-closure",
+  "def-kun-separably-closed",
+  "lem-kun-0ezp",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0F1I (lemma-punctual-base-change), final two paragraphs, with explicit verification of the inverse-system and coefficient hypotheses"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|punctual_base_change|normal.*functionField",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing of higher direct images of a finite constant etale sheaf along the generic fibre of a product over a normal integral base with algebraically closed function field",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.res_const, CategoryTheory.Sheaf.IsConstant.casesOn, AlgebraicGeometry.StructureSheaf.res_const', CategoryTheory.Sheaf.IsConstant.recOn, LightCondensed.IsDiscrete, AlgebraicGeometry.finite_appTop_of_universallyClosed, CategoryTheory.Sheaf.IsConstant.rec, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Functor.rightDerived",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of the constant finite torsion etale sheaf vanish for the geometric generic fibre over an integral normal base with algebraically closed function field",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, Algebra.etaleLocus, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.IsEtaleAt, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Ii]so|[Ii]sZero.*[Dd]erived|[Rr]ightDerived",
+   "results": "7 hits: Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalIso.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomological base change for a product with a finite type scheme over a field and a morphism from the spectrum of an algebraically closed fraction field",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.baseChange, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.Etale.comp, AlgebraicGeometry.IsEtale.of_comp, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.instForallOfFinite",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"etale\"",
+   "results": "12 hits: SimplexCategory.skeletalEquivalence, Algebra.Etale.inst, Algebra.FormallyEtale.inst, Algebra.Etale, Algebra.FormallyEtale, RingHom.FormallyEtale, Algebra.Etale.formallyEtale, Algebra.Etale.instSmooth",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1776,
+ "blueprint_uses": [
+  "def-kun-constant-sheaf",
+  "def-kun-separably-closed",
+  "def-kun-torsion-invertible",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-0ezp",
+  "lem-kun-0ezt",
+  "lem-kun-0f1h",
+  "lem-kun-algebra-union",
+  "lem-kun-colim-of-localizations",
+  "lem-kun-fibre-product-limits",
+  "lem-kun-zn-sheaf-invertible-orders"
+ ],
+ "uses_not_cited": [
+  "def-kun-constant-sheaf",
+  "def-kun-separably-closed",
+  "def-kun-torsion-invertible",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $K$ be a field and let $n\\ge1$ be an integer invertible in\n$K$. Let $X$ be a scheme of finite type over $K$, let $S'$\nbe an affine, integral and normal $K$-scheme with algebraically\nclosed function field $L$, set $X'=X\\times_KS'$,\n$Y=X'\\times_{S'}\\Spec(L)$, and let $h:Y\\to X'$ be the projection.\nThen $R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for all $q>0$\nand all $d\\mid n$.",
+  "proof": [
+   {
+    "text": "Write $S'=\\Spec(B)$, so that $L$ is the fraction field of $B$.\nBy [lem-kun-algebra-union] write $B=\\bigcup_{i\\in I}B_i$ as the\nunion of its finite type $K$-subalgebras $B_i$. Let $J$ be the\nset of pairs $(i,g)$ with $i\\in I$ and $g\\in B_i$ nonzero,\nordered by $(i',g')\\ge(i,g)$ if and only if $B_i\\subset B_{i'}$\nand $g$ maps to an invertible element of $(B_{i'})_{g'}$. Then\n$L=\\varinjlim_{(i,g)\\in J}(B_i)_g$ by\n[lem-kun-colim-of-localizations]. For $j=(i,g)\\in J$ set\n$S_j=\\Spec(B_i)$ and $U_j=\\Spec((B_i)_g)$. Then the diagram\n\n$$\n\\begin{array}{ccc}\nX'&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{}\\\\\nS'&\\longleftarrow&\\Spec(L)\n\\end{array}\n\\qquad\\text{is the limit of}\\qquad\n\\begin{array}{ccc}\nX\\times_KS_j&\\xleftarrow{\\;h_j\\;}&X\\times_KU_j\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{}\\\\\nS_j&\\longleftarrow&U_j\n\\end{array}\n$$\n\nby [lem-kun-fibre-product-limits] (limits and fibre products\ncommute) and [lem-kun-colim-of-localizations]: the rings $(B_i)_g$\nhave filtered colimit $L$, so their spectra have limit $\\Spec(L)$, and\nthe resulting maps exhibit the diagram $S'\\leftarrow\\Spec(L)$ as the\nlimit of the diagrams $S_j\\leftarrow U_j$. Thus we may\napply [lem-kun-0ezt] to see that it suffices to prove that the\nexchange morphisms (of [def-kun-unbounded-exchange]) hold in the\ndiagrams on the right. Each right-hand diagram is the diagram of\n[lem-kun-0f1h] for the open immersion $j:U_j\\to S_j$ of finite\ntype $K$-schemes and the scheme $X$ of finite type over $K$,\napplied to the sheaf $\\underline{\\mathbf Z/d\\mathbf Z}$, a sheaf of\n$\\mathbf Z/d\\mathbf Z$-modules whose stalks are $d$-torsion, with\n$d\\mid n$ invertible in $K$, hence of orders invertible in $K$\nby [lem-kun-zn-sheaf-invertible-orders].\nHence [lem-kun-0f1h] gives\n\n$$\n(X\\times_KS_j\\to S_j)^{-1}R^q(U_j\\to S_j)_*\\underline{\\mathbf Z/d\\mathbf Z}\n\\;\\cong\\;R^qh_{j,*}\\underline{\\mathbf Z/d\\mathbf Z}\n$$\n\nfor all $q\\ge0$. Passing to the limit with\n[lem-kun-0ezt] we obtain\n\n$$\n(X'\\to S')^{-1}R^q(\\Spec(L)\\to S')_*\\underline{\\mathbf Z/d\\mathbf Z}\n\\;\\cong\\;R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}\n$$\n\nfor all $q$. But $\\Spec(L)$ is integral and normal with\nalgebraically closed (hence separably closed) function field, so\n$R^q(\\Spec(L)\\to S')_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for\n$q>0$ by [lem-kun-0ezp]. Hence\n$R^qh_*\\underline{\\mathbf Z/d\\mathbf Z}=0$ for $q>0$, as\ndesired.",
+    "uses": [
+     "lem-kun-algebra-union",
+     "lem-kun-colim-of-localizations",
+     "lem-kun-fibre-product-limits",
+     "lem-kun-0ezt",
+     "def-kun-unbounded-exchange",
+     "lem-kun-0f1h",
+     "lem-kun-zn-sheaf-invertible-orders",
+     "lem-kun-0ezp"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-0f1i-normal",
+  "worker": "stage1",
+  "summary": "Expanded the current-blueprint normal integral reduction into seven checked steps. Kept the statement unchanged; supplied its missing integral/normal/function-field/algebraic-closedness and fibre-product notions, constructed the repeated-base colimit and all four inverse limits, verified finite type and affine/qcqs transitions, fixed the compatible constant-coefficient system, and identified the derived exchange on cohomology before applying 0EZT and the field-spectrum clause of 0EZP. Reused existing nodes throughout; no new nodes. No exact project attachment or Mathlib match found.",
+  "blueprint": "Realizes the current main-20261015 proof of lem-kun-0f1i-normal: algebraic approximation and J in step 1; the displayed limit diagrams in steps 2–3; constant coefficients and the 0F1H exchange in steps 4–5; the 0EZT limit in step 6; the 0EZP vanishing in step 7. The categorical fibre-product argument is written out rather than citing the existence of limits from a lemma that assumes them.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Identifies the function field of the affine integral base with its fraction field; this is a generic scheme-theoretic tool, not another cohomological route, and no node of this unit states the identification."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Uses only that the small-etale inverse image preserves the zero object to conclude vanishing from the limit isomorphism; no statement of this unit gives exactness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-ab9ee5c57",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-ab9ee5c57 (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, no new nodes, statement unchanged (same as main-20261015). Read every cited node's statement and Stacks 0F1I (etale-cohomology.tex l.20596-20703), 0EZT (l.16409), 0F1H (l.20402) and 0EZP (l.14368). Steps 1-2: B is a domain with Frac B=L; J is filtered with L=colim; colim_J B_i=B is proved by an explicit cocone argument; the four limits are built by the test-scheme property, not assumed, so dropping lem-kun-fibre-product-limits is justified; transitions are affine by base change. Step 3: finite type, principal open immersion and qcqs, which are the 0F1H and 0EZT hypotheses. Step 4: Z/d is a Z/n-module, so orders are invertible; the constant system is compatible with colimit Z/d. Step 5: 0F1H gives the def-kun-unbounded-exchange iso; sk-def-exchange restricts it to D+ with Lambda=Z, and lem-kun-bc-map-on-cohomology turns it into the usual R^q base-change map, so the coefficient category is unchanged. Step 6: every 0EZT hypothesis holds, including cartesian squares by pasting. Step 7: algebraically closed implies separably closed; the field clause of 0EZP (source Spec L) and exact inverse image give 0. Edge cases d=1, X empty, S'=Spec L and non-noetherian B all hold. Dropping K algebraically closed (Stacks has it at this point of the proof) is harmless and does not weaken the item. No cycle; the only citer is lem-kun-0f1i. Unit uses=[]; the off-unit statements are Mathlib leaves plus the Lean-closed prop-weil-pbc-inverse-image-exact. I accept both declared tool_uses. No SGA. No changes."
+ }
 }

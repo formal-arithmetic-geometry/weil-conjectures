@@ -30,9 +30,64 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-right-anodyne"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-cbc-enhanced-diagrams-cones], weak contractibility means that $|B|$ has one path component and its based homotopy groups are trivial. In particular $|B|$ is nonempty. Its realization quotient has a representative belonging to $B_n\\times|\\Delta^n|$ for some $n$, so restriction to a vertex of that simplex gives $b\\in B_0$. The vertex map $\\Delta^0\\to B$ is degreewise injective, since its domain has one simplex in each degree. Its realization induces the bijection between the singleton sets of path components and, at its unique base point, isomorphisms between trivial homotopy groups in every positive degree. Thus $j:\\{b\\}\\hookrightarrow B$ is a weak homotopy equivalence. Here $\\{b\\}$ means the simplicial image of the vertex map, including all its degeneracies, and is isomorphic to $\\Delta^0$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.6, printed p. 251: nonemptiness and the chosen vertex weak equivalence; expanded directly from the realization definition."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-cone-mono-right-anodyne] to the degreewise injective $u:A_0\\hookrightarrow A$. Let $e:\\Delta^0\\to\\{b\\}$ be the isomorphism sending the unique simplex in degree $n$ to the $n$-fold degeneracy of $b$. For $X=A_0,A$, define $\\alpha_X:X\\star\\Delta^0\\to X\\star\\{b\\}$ by the identity on the pure $X$ summand, $e$ on the pure point summand, and $(x,t)\\mapsto(x,e(t))$ on each mixed summand. These formulas commute with the block-restriction operators, and replacing $e$ by $e^{-1}$ gives their inverses. They give a commutative square from $u\\star\\operatorname{id}_{\\Delta^0}$ to $u\\star\\operatorname{id}_{\\{b\\}}$. This square is a pushout: for maps $s:A\\star\\Delta^0\\to T$ and $t:A_0\\star\\{b\\}\\to T$ agreeing on $A_0\\star\\Delta^0$, its unique extension is $s\\alpha_A^{-1}$, whose restriction is $t$ by commutativity and the agreement. Thus $A_0\\star\\{b\\}\\hookrightarrow A\\star\\{b\\}$ is right anodyne by pushout closure in [def-coef-infinity-right-anodyne]. Put $P=(A_0\\star B)\\amalg_{A_0\\star\\{b\\}}(A\\star\\{b\\})$. Degreewise the two indicated subsets of $A\\star B$ intersect in $A_0\\star\\{b\\}$: the pure $A$ intersection is $(A_0)_n$, the pure $B$ intersection is $\\{b\\}_n$, and each mixed intersection is $(A_0)_a\\times\\{b\\}_b$. Maps on their union are exactly maps on both subsets agreeing on this intersection, degree by degree and compatibly with operators. Hence this union is their simplicial pushout, and $A_0\\star B\\hookrightarrow P$ is right anodyne by a second use of the same pushout closure.",
+   "uses": [
+    "lem-coef-infinity-cone-mono-right-anodyne",
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.6, printed p. 251: point-factor case and first pushout inclusion."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-join-pushout-right-anodyne] with $i=u$ and $j:\\{b\\}\\hookrightarrow B$ from Step 1. Both are inclusions of small simplicial sets, and Step 1 proved the required weak homotopy equivalence. Its displayed source is exactly $P$ of Step 2. Consequently $P\\hookrightarrow A\\star B$ is right anodyne.",
+   "uses": [
+    "lem-coef-join-pushout-right-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.6, printed p. 251: apply Lemma 4.2.3.5 to the second inclusion."
+   }
+  },
+  {
+   "text": "Put $Z_0=A_0\\star B$, $Z_1=P$ and $Z_2=A\\star B$, with the inclusions of Steps 2 and 3. The composite fixes the pure $B$ summand, acts by $u$ on the pure $A_0$ summand, and sends $(a,b)$ to $(u(a),b)$ on every mixed summand. It is therefore $u\\star\\operatorname{id}_B$. The ordinal chain $(Z_\\alpha)_{\\alpha\\leq2}$ has two successor arrows and no nonzero limit stages. Thus the transfinite-composition closure of [def-coef-infinity-right-anodyne] makes its composite right anodyne.",
+   "uses": [
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 4.2.3.6, printed p. 251: composition of the two inclusions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-right-anodyne",
+  "lem-coef-infinity-cone-mono-right-anodyne",
+  "lem-coef-join-pushout-right-anodyne"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded HTT Lemma 4.2.3.6, printed p. 251, using Lemma 4.2.3.5 and the existing point-cone lemma; online source read, archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -117,10 +172,80 @@
    "results": "{\"t\": \"2026-10-16T21:24:29Z\", \"tool\": \"leanfinder\", \"query\": \"For a weakly contractible simplicial set B the inclusion A join B into X join B is right anodyne whenever A is a simplicial subset of X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.Subcomplex.BicartSq\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\"], \"digest\": \"9137579417e03d09\"}",
    "date": "2026-10-16",
    "verdict": "Renewed review: no match. Read the returned signatures: the Quillen J class uses all horn inclusions, the cofibration statements only assert monomorphisms, and ordinary CategoryTheory.Join embeddings have Hom sets. The Loogle jointly-surjective cell maps and adjoints do not assert a right-anodyne join theorem. The broader AlgebraicTopology grep returns zero hits; the second semantic phrasing has the same mismatch."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?anodyne|[Jj]oin|weak.*[Ee]quiv",
+   "results": "{\"t\": \"2026-10-16T22:57:54Z\", \"tool\": \"grep\", \"query\": \"right.?anodyne|[Jj]oin|weak.*[Ee]quiv\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\"], \"digest\": \"38e741b116c5be80\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The scoped hits do not state an ordered simplicial join right-anodyne theorem; the precise word-boundary query has no hits. The broader query includes jointly-surjective and adjoint substrings, not joins."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"join\", SSet",
+   "results": "{\"t\": \"2026-10-16T22:57:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"join\\\", SSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.relativeCellComplexOfMono.ιSigmaStdSimplex_jointly_surjective\", \"SSet.Subcomplex.Pairing.RankFunction.ιSigmaStdSimplex_jointly_surjective\", \"SSet.Subcomplex.Pairing.RankFunction.ιSigmaHorn_jointly_surjective\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.instIsLeftAdjointSd\", \"SSet.instIsRightAdjointEx\", \"instIsLeftAdjointSSetTopCatToTop\", \"instIsRightAdjointSSetTopCatToSSet\"], \"digest\": \"48315b3fa1118d28\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Returned jointly-surjective cell-cover lemmas and adjoint instances; none has the ordered simplicial join or right-anodyne conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "RightAnodyne|rightAnodyne|right_anodyne|[Jj]oin",
+   "results": "{\"t\": \"2026-10-16T22:58:39Z\", \"tool\": \"grep\", \"query\": \"RightAnodyne|rightAnodyne|right_anodyne|[Jj]oin\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\"], \"digest\": \"6244619a213b1288\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The scoped hits do not state an ordered simplicial join right-anodyne theorem; the precise word-boundary query has no hits. The broader query includes jointly-surjective and adjoint substrings, not joins."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a weakly contractible simplicial set B and a simplicial subset A0 of A the map A0 join B into A join B is right anodyne",
+   "results": "{\"t\": \"2026-10-16T22:58:41Z\", \"tool\": \"leanfinder\", \"query\": \"For a weakly contractible simplicial set B and a simplicial subset A0 of A the map A0 join B into A join B is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.KanComplex.hornFilling\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.horn.isColimit\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\"], \"digest\": \"f2fa3df2863100e2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Read the returned signatures: Quillen all-horn generators, ordinary horn pushouts, cofibrations and generic pushout weak equivalences do not give the ordered join or its right-horn conclusion. This remains so under the second phrasing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Joining a simplicial monomorphism with a weakly contractible right factor is right anodyne",
+   "results": "{\"t\": \"2026-10-16T22:59:14Z\", \"tool\": \"leansearch\", \"query\": \"Joining a simplicial monomorphism with a weakly contractible right factor is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.instHasFactorizationP_σP_δ\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.nonDegenerate_iff_of_mono\", \"SSet.degenerate_iff_of_mono\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"CategoryTheory.MorphismProperty.IsWeakFactorizationSystem.rlp\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.cofibration_iff\"], \"digest\": \"40458bfb20dcaaa1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Read the returned signatures: Quillen all-horn generators, ordinary horn pushouts, cofibrations and generic pushout weak equivalences do not give the ordered join or its right-horn conclusion. This remains so under the second phrasing."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(rightAnodyne|RightAnodyne|right_anodyne|join|Join)\\b",
+   "results": "{\"t\": \"2026-10-16T22:59:53Z\", \"tool\": \"grep\", \"query\": \"\\\\b(rightAnodyne|RightAnodyne|right_anodyne|join|Join)\\\\b\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The scoped hits do not state an ordered simplicial join right-anodyne theorem; the precise word-boundary query has no hits. The broader query includes jointly-surjective and adjoint substrings, not joins."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For simplicial cofibrations f and an acyclic cofibration g the Leibniz join f star g is right anodyne",
+   "results": "{\"t\": \"2026-10-16T23:12:55Z\", \"tool\": \"leanfinder\", \"query\": \"For simplicial cofibrations f and an acyclic cofibration g the Leibniz join f star g is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"269e2fcb94696602\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no match. Semantic results concern all-horn Quillen generators or inner-horn filling, not the ordered join theorem for right horns. Loogle anodyne results were checked at Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:66-92: they use every horn, without a right-horn restriction. Grep star hits denote the augmented simplex initial object or a constant functor, not a simplicial join or this conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(star|Star|join|Join|rightAnodyne|RightAnodyne)\\b",
+   "results": "{\"t\": \"2026-10-16T23:13:22Z\", \"tool\": \"grep\", \"query\": \"\\\\b(star|Star|join|Join|rightAnodyne|RightAnodyne)\\\\b\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/FundamentalGroupoid/PUnit.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic.lean\"], \"digest\": \"a1507ca9fe826cc5\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no match. Semantic results concern all-horn Quillen generators or inner-horn filling, not the ordered join theorem for right horns. Loogle anodyne results were checked at Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:66-92: they use every horn, without a right-horn restriction. Grep star hits denote the augmented simplex initial object or a constant functor, not a simplicial join or this conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"anodyne\", SSet",
+   "results": "{\"t\": \"2026-10-16T23:13:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"anodyne\\\", SSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsAnodyneExtensions\", \"SSet.instIsStableUnderRetractsAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionAnodyneExtensions\", \"SSet.instRespectsIsoAnodyneExtensions\", \"SSet.instRespectsIsoStrongAnodyneExtensions\", \"SSet.anodyneExtensions\"], \"digest\": \"e628c2cf94db43d8\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no match. Semantic results concern all-horn Quillen generators or inner-horn filling, not the ordered join theorem for right horns. Loogle anodyne results were checked at Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:66-92: they use every horn, without a right-horn restriction. Grep star hits denote the augmented simplex initial object or a constant functor, not a simplicial join or this conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Leibniz join of a simplicial subset inclusion and a weak homotopy equivalence is generated by horns with positive missing vertex",
+   "results": "{\"t\": \"2026-10-16T23:14:24Z\", \"tool\": \"leanfinder\", \"query\": \"The Leibniz join of a simplicial subset inclusion and a weak homotopy equivalence is generated by horns with positive missing vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.Quasicategory.hornFilling\", \"SSet.horn\", \"SSet.horn_eq_iSup\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.quasicategory_of_filler\"], \"digest\": \"474ebcaab0a50f90\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no match. Semantic results concern all-horn Quillen generators or inner-horn filling, not the ordered join theorem for right horns. Loogle anodyne results were checked at Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:66-92: they use every horn, without a right-horn restriction. Grep star hits denote the augmented simplex initial object or a constant functor, not a simplicial join or this conclusion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-directed-cover-colimit-assembly",
@@ -140,5 +265,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-contractible-join-right-anodyne",
+  "worker": "stage1",
+  "summary": "Repaired the earlier attempt against HTT 4.2.3.5 and 4.2.3.6. Four steps derive a vertex weak equivalence directly from the realization definition, form the pushout of the existing cone lemma, apply one statement-only mixed pushout-join helper and compose. Defined the join inline in the helper, corrected source URLs and citation quotes, reran and recorded actual Mathlib searches with a second phrasing. Item statement unchanged; no project Lean attachment or Mathlib match. Second reading expanded the point-isomorphism pushout and finite ordinal chain, and independently repeated Mathlib searches; statements unchanged.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the finite-coefficient mapping-complex adjunction infrastructure, through the filtered-subdiagram assembly of lem-coef-directed-cover-colimit-assembly: its HTT 4.2.3.6 join attachment is realized by Steps 1–4.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Uses only the generic simplicial-set, realization and weak-homotopy-equivalence definitions to verify the chosen vertex map; the unit has no alternative definition of these notions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NH-8c41687a8",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-8c41687a8 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-join-pushout-right-anodyne, the statements of every cited node (def-cbc-enhanced-diagrams-cones, def-coef-infinity-right-anodyne, lem-coef-infinity-cone-mono-right-anodyne), the unit record and the item's citers. Source: HTT Lemmas 4.2.3.5 and 4.2.3.6, p. 251. HTT is not in the local literature tree, so I checked from my own reading of HTT; the delivery correctly lists it as WANTED and marks proof_origin as agent. The item statement is unchanged and matches 4.2.3.6. The helper matches 4.2.3.5: its hypothesis is that B0 into B is a weak homotopy equivalence, which is correct, since a right-anodyne hypothesis would not fit the use in 4.2.3.6. Join and horn conventions agree across all three nodes. Step 1: weak contractibility gives a nonempty realization, hence a vertex b, and {b} into B is a weak equivalence (one component, trivial homotopy groups at the single base point). Step 2: A0*{b} into A*{b} is isomorphic to the cone map u^▷, so it is right anodyne by the cone lemma and pushout closure. I checked the union summand by summand: the pure parts meet in A0 and {b}, the mixed parts meet in (A0)_a x {b}_c, so A0*B into P is a pushout. Step 3 is the helper with i=u and j={b} into B; its domain is exactly P. Step 4 is a two-step composite, equal to u*id_B. proof_deps equals the union of the step uses. Helper checked on small cases: Lambda^2_1 and Lambda^2_2 into Delta^2; identity cases; the generator case gives a horn with missing index n+1+k, always at least 1. It is statement-only, self-contained, true and does not restate the item. Duplicate search: grep of the DAG for 4.2.3.5/4.2.3.6, join with right anodyne, and join with weak homotopy equivalence; I read about 15 nearby join and anodyne nodes and none states it. Mathlib has no simplicial join, so no leaf. Route: the only node from another unit is the definition def-cbc-enhanced-diagrams-cones, which is a notion, not a route step. I accepted the declared tool_use for it. No fixes."
  }
 }
