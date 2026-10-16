@@ -3,24 +3,73 @@
  "blueprint": {
   "is": "sk-d-six",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The geometric operation package",
- "statement": "Over a base scheme $s$, use the pro-étale functors\n\n$$\nf^*,\\quad Rf_*,\\quad Rf_!,\\quad f^!,\\quad\\otimes_A^{\\mathrm L},\\quad\\RHom_A,\n$$\n\nwith the adjunctions $f^*\\dashv Rf_*$ and $Rf_!\\dashv f^!$, the latter whenever\n$f$ is compactifiable and $Rf_!$ has a right adjoint. Here $f^*$ and $f^!$\nalready denote derived functors; the functors and the two adjunctions are\ngiven, not part of the package. A *geometric operation package* consists of the\ncoefficient subcategories $D^b_{ctf}(X,A)$ of [sk-d-setup] together with:\n\n- for every $a_X:X\\to s$, a *dualizing complex* $\\omega_X$ with\n  $\\omega_X\\simeq a_X^!A$ whenever $a_X$ is compactifiable, a normalization\n  $\\omega_s\\simeq A_s$, and dualizing composition isomorphisms\n  $f^!\\omega_Y\\simeq\\omega_X$;\n- isomorphisms $Rf_!\\simeq Rf_*$ for proper $f$,\n  $Rg_!Rf_!\\simeq R(gf)_!$, and $R(\\mathrm{id}_X)_!\\simeq\\mathrm{id}$;\n- $!$-base change isomorphisms $g^*Rf_!\\simeq Rf'_!g'^*$ for Cartesian squares;\n- the projection formula $Rf_!K\\otimes_A^{\\mathrm L}L\\simeq Rf_!(K\\otimes_A^{\\mathrm L}f^*L)$,\n  natural in both variables;\n- a monoidal structure on every $f^*$, compatible with the braidings of the\n  derived categories (these braidings carry the Koszul sign: the braiding of\n  $A_X[1]$ with itself is $-1$).\n\nThese data satisfy the coherence conditions: the unit axioms of\n$R(\\mathrm{id})_!\\simeq\\mathrm{id}$ against composition; at $f=\\mathrm{id}$, the\nmaps $Rf_!\\simeq Rf_*$, $\\omega_s\\simeq A_s$, $f^!\\omega\\simeq\\omega$ and the unit\nof the monoidal structure of $f^*$ are the identity isomorphisms; $Rf_!\\simeq Rf_*$\nand $f^!\\omega_Y\\simeq\\omega_X$ are compatible with composition; and $!$-base\nchange is compatible with vertical pasting of Cartesian squares. Put\n\n$$\n\\begin{gathered}\nD_XK=\\RHom_A(K,\\omega_X),\\qquad\nR\\Gamma_c(X,K)=Ra_{X!}K,\\qquad\nM\\boxt N=p_X^*M\\otimes_A^{\\mathrm L}p_Y^*N.\n\\end{gathered}\n$$\n\nFinally, two canonical maps are required to be invertible. *Biduality:* for\n$K\\in D^b_{ctf}(X,A)$, the evaluation-adjoint map $K\\to D_XD_XK$ is an\nisomorphism. *Künneth–Verdier:* if $s$ is the spectrum of a field, then for\n$X$, $Y$ quasi-compact and compactifiable over $s$, $M\\in D^b_{ctf}(X,A)$ and\n$N\\in D^b_{ctf}(Y,A)$, the canonical map\n$M\\boxt D_YN\\to\\RHom_A(p_Y^*N,p_X^!M)$ on $X\\times_sY$, built from the monoidal\nstructure of $p_Y^*$, the projection formula for $p_X$, $!$-base change, the\nidentification $\\omega_Y\\simeq a_Y^!A$ and the counit of $Ra_{Y!}\\dashv a_Y^!$,\nis an isomorphism.\nCoherence always means equality of component morphisms in ordinary categories.",
+ "statement": "Over a base scheme $s$, use the coefficient ring $A$, geometric schemes\n$a_X:X\\to s$ and categories $D(X,A)$ and $D^b_{ctf}(X,A)$ of [sk-d-setup].\nFor morphisms $f:X\\to Y$ over $s$, use the pro-étale functors of\n[sk-def-sf-operations]\n\n$$\nf^*,\\quad Rf_*,\\quad Rf_!,\\quad f^!,\\quad\\otimes_A^{\\mathrm L},\\quad\\RHom_A,\n$$\n\nwith the adjunctions $f^*\\dashv Rf_*$ and $Rf_!\\dashv f^!$, the latter whenever\n$f$ is compactifiable [def-nagata-compactifiable] and $Rf_!$ has a right\nadjoint on the categories in question. In particular the exceptional adjunction\nbelow is on $D^b_{ctf}$; no right adjoint on the whole unbounded pro-étale\nderived category is asserted. Here $f^*$ and $f^!$\nalready denote derived functors; the functors and the two adjunctions are\ngiven, not part of the package. A *geometric operation package* consists of the\ncoefficient subcategories $D^b_{ctf}(X,A)$ of [sk-d-setup] together with\nthe following data. All operation comparisons are on these subcategories,\nwith compactifiable morphisms wherever $Rf_!$ or $f^!$ is used; the\nmonoidal structure on pullback is on $D(-,A)$.\n\n- for every $a_X:X\\to s$, a *dualizing complex* $\\omega_X\\in D^b_{ctf}(X,A)$ for geometric $X$, with\n  $\\omega_X\\simeq a_X^!A$ whenever $a_X$ is compactifiable, a normalization\n  $\\omega_s\\simeq A_s$, and dualizing composition isomorphisms\n  $f^!\\omega_Y\\simeq\\omega_X$;\n- isomorphisms $Rf_!\\simeq Rf_*$ for proper $f$ [def-weil-proper-morphism],\n  $Rg_!Rf_!\\simeq R(gf)_!$, and $R(\\mathrm{id}_X)_!\\simeq\\mathrm{id}$;\n- $!$-base change isomorphisms $g^*Rf_!\\simeq Rf'_!g'^*$ for Cartesian\n  squares [def-weil-pbc-cartesian-square] with $f:X\\to Y$, $g:Y'\\to Y$,\n  $g':X'\\to X$ and $f':X'\\to Y'$;\n- the projection formula $Rf_!K\\otimes_A^{\\mathrm L}L\\simeq Rf_!(K\\otimes_A^{\\mathrm L}f^*L)$,\n  natural for $K\\in D^b_{ctf}(X,A)$ and $L\\in D^b_{ctf}(Y,A)$;\n- a strong monoidal structure [def-sfb-strong-monoidal-functor] on every $f^*$, compatible with the braidings of the\n  derived categories (these braidings carry the Koszul sign: the braiding of\n  $A_X[1]$ with itself is $-1$).\n\nThese data satisfy the following coherence conditions, read through the\ncanonical identity and composition comparisons of the given functors.\nThe isomorphism $R(\\mathrm{id})_!\\simeq\\mathrm{id}$ satisfies the left and\nright unit axioms against $Rg_!Rf_!\\simeq R(gf)_!$.\nAt $f=\\mathrm{id}_X$, the proper comparison is\n$R(\\mathrm{id}_X)_!\\simeq\\mathrm{id}\\simeq R(\\mathrm{id}_X)_*$.\nThe normalization is the composite\n$\\omega_s\\simeq(\\mathrm{id}_s)^!A_s\\simeq A_s$, the first map being the\nspecified compactifiable identification of $\\omega_s$ and the second the\nidentity comparison of $(\\mathrm{id}_s)^!$ obtained by adjunction from\n$R(\\mathrm{id}_s)_!\\simeq\\mathrm{id}$.\nThe map $(\\mathrm{id}_X)^!\\omega_X\\simeq\\omega_X$ is that same adjoint\nidentity comparison at $\\omega_X$, and the monoidal unit map for\n$(\\mathrm{id}_X)^*$ is the canonical identity pullback comparison.\nThe proper comparisons and the maps $f^!\\omega_Y\\simeq\\omega_X$ commute\nwith composition (using the adjoint composition comparison for $f^!$);\n$!$-base change commutes with vertical pasting of Cartesian squares. Put\n\n$$\n\\begin{gathered}\nD_XK=\\RHom_A(K,\\omega_X),\\qquad\nR\\Gamma_c(X,K)=Ra_{X!}K,\\qquad\nM\\boxt N=p_X^*M\\otimes_A^{\\mathrm L}p_Y^*N.\n\\end{gathered}\n$$\n\nHere $p_X:X\\times_sY\\to X$ and $p_Y:X\\times_sY\\to Y$ are the product\nprojections. For every complex $K$, evaluation\n$D_XK\\otimes_A^{\\mathrm L}K\\to\\omega_X$ is the tensor--internal-Hom\nadjoint of $\\mathrm{id}_{D_XK}$. The biduality map is the adjunct of\n$K\\otimes_A^{\\mathrm L}D_XK\\to D_XK\\otimes_A^{\\mathrm L}K\\to\\omega_X$,\nwhere the first arrow is the braiding.\n\nFinally, two canonical maps are required to be invertible. *Biduality:* for\n$K\\in D^b_{ctf}(X,A)$, the evaluation-adjoint map $K\\to D_XD_XK$ is an\nisomorphism. *Künneth–Verdier:* if $s$ is the spectrum of a field, then for\n$X$, $Y$ quasi-compact and compactifiable over $s$, $M\\in D^b_{ctf}(X,A)$ and\n$N\\in D^b_{ctf}(Y,A)$, the canonical map\n$M\\boxt D_YN\\to\\RHom_A(p_Y^*N,p_X^!M)$ on $X\\times_sY$, built from the monoidal\nstructure of $p_Y^*$, the projection formula for $p_X$, $!$-base change, the\nidentification $\\omega_Y\\simeq a_Y^!A$ and the counit of $Ra_{Y!}\\dashv a_Y^!$,\nis an isomorphism. More explicitly, form the trace\n$$\n\\begin{aligned}\nt:Rp_{X!}p_Y^*\\omega_Y\n&\\xrightarrow{\\sim}a_X^*Ra_{Y!}\\omega_Y\n\\xrightarrow{\\sim}a_X^*Ra_{Y!}a_Y^!A_s\\\\\n&\\xrightarrow{a_X^*\\varepsilon}a_X^*A_s\n\\xrightarrow{\\sim}A_X,\n\\end{aligned}\n$$\nwhere the first arrow is inverse $!$-base change for the product square,\nthe second uses $\\omega_Y\\simeq a_Y^!A_s$, and the last is inverse\nmonoidal unit. The object $p_X^*M\\otimes_A^{\\mathrm L}p_Y^*\\omega_Y$ lies in\n$D^b_{ctf}(X\\times_sY,A)$ by stability of $D^b_{ctf}$ under derived pullback\nand derived tensor [thm-sf-ctf-stability] (i), (ii), and $A_s\\in D^b_{ctf}(s,A)$\n(constant, Tor amplitude $[0,0]$), so the exceptional adjunction on $D^b_{ctf}$\napplies to the following maps. Let $\\alpha_M:p_X^*M\\otimes_A^{\\mathrm L}p_Y^*\\omega_Y\\to p_X^!M$\nbe the exceptional adjunct of\n$$\nRp_{X!}(p_X^*M\\otimes_A^{\\mathrm L}p_Y^*\\omega_Y)\n\\xrightarrow{\\sim}Rp_{X!}p_Y^*\\omega_Y\\otimes_A^{\\mathrm L}M\n\\xrightarrow{t\\otimes1}A_X\\otimes_A^{\\mathrm L}M\\xrightarrow{\\sim}M;\n$$\nthe first map uses the braiding and inverse projection formula.\nThe required Künneth--Verdier map is the tensor--internal-Hom adjunct of\n$$\n\\begin{aligned}\n(M\\boxt D_YN)\\otimes_A^{\\mathrm L}p_Y^*N\n&\\longrightarrow p_X^*M\\otimes_A^{\\mathrm L}p_Y^*(D_YN\\otimes_A^{\\mathrm L}N)\\\\\n&\\xrightarrow{1\\otimes p_Y^*\\operatorname{ev}_N}\n p_X^*M\\otimes_A^{\\mathrm L}p_Y^*\\omega_Y\n\\xrightarrow{\\alpha_M}p_X^!M,\n\\end{aligned}\n$$\nwhere the first arrow uses associativity and the tensor comparison of\n$p_Y^*$; the tensor--Hom adjunction uses the braiding to put $p_Y^*N$\nin its prescribed tensor slot.\nCoherence always means equality of component morphisms in ordinary categories.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-six/_section.md",
   "place": "node sk-d-six, order 2612"
  },
  "stmt_deps": [
-  "sk-d-setup"
+  "sk-d-setup",
+  "sk-def-sf-operations",
+  "def-nagata-compactifiable",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-cartesian-square",
+  "def-sfb-strong-monoidal-functor",
+  "thm-sf-ctf-stability"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "geometric operation package for pro-etale six functors with dualizing complexes, projection formula, base change, biduality and Kunneth Verdier",
+   "results": "Hits were AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction and related underived sheaf-module constructions; none states the pro-etale package.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric operation package pro-etale six functors dualizing complex biduality Kunneth Verdier",
+   "results": "Hits were AlgebraicGeometry.Scheme.Modules pullback/pushforward adjunctions and unrelated condensed constructions; none states the package.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "GeometricOperations",
+   "results": "0 hits; unknown identifier GeometricOperations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricOperations|dualizing|kunnethVerdierMap in Mathlib/",
+   "results": "0 hits in the pinned Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Six functor formalism symmetric monoidal derived category with exceptional adjunction and Verdier duality",
+   "results": "8 hits, headed by CategoryTheory.Adjunction.IsTriangulated and its constructors, followed by derived-category triangulated functor and adjunction lemmas. None defines a six-operation package with the displayed duality and comparison data.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SixFunctor|Verdier|Dualizing|GrothendieckDuality",
+   "results": "25 displayed hits are references to Verdier, order dualization, IsVerdierRightLocalizing, or the dualizing functor on Cat; none is the geometric operation package.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -70,5 +119,20 @@
    ],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-d-six",
+  "worker": "stage1",
+  "summary": "Definition split only: the current main-20261015 source specifies the geometric operation package as data and coherence axioms, with no proof steps or auxiliary theorem hidden in the definition. I retained its sole blueprint statement dependency sk-d-setup, which fixes the base scheme, geometric schemes, coefficient ring, products, and derived-category setting. The package's functors and adjunctions are explicitly given inputs, while dualizing complexes, compact-support operations, base change, projection, monoidal pullback, biduality, and Kunneth–Verdier invertibility are the fields and required properties of this definition rather than separate proof obligations. The slopmaster2 structure GeometricOperations has the same field-level content but is not an attachment because the prior audit found sorried declarations reachable from it. Second reading adds the existing definition dependencies for the given operations, compactifiability, properness, Cartesian squares and strong monoidal structures; makes the finite-Tor domains explicit; spells out the biduality and Künneth–Verdier arrows; and replaces the ill-typed literal identity shorthand by canonical composites. There are still no proof steps or new nodes.",
+  "blueprint": "The full defining paragraph of literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-six/_section.md; this definition has no proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-305ff8eac",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-305ff8eac (reviewer sub-agent of L); spot-checked: Read in full: the definition item sk-d-six (no new nodes, no proof steps), the current blueprint main-20261015 sk-d-six (order 2612) diffed against the master copy, the six cited definition nodes, and the slopmaster2 Defs.lean GeometricOperations fields. Every clause agrees with the main-20261015 source. The D^b_ctf domains, ω_X∈D^b_ctf, the strong braided pullback on D(-,A), and the composites replacing the source's ill-typed 'identity isomorphisms' are correct clarifications: they match Lean fields ctf_dualizing, projectionFormula, upperStarMonoidal, dualizingBase_eq, properComparison_id and dualizingComp_id, and the report names them under Source error. Checked the biduality map against curry(β≫ev); the two agree because the braiding is symmetric. Checked the Künneth–Verdier composite step by step (base change orientation for the product square, trace, α_M, evaluation, adjunct), and it matches kunnethVerdierMapOf. The definition is not a target and is not weakened. Checked possible duplicates (def-trf-dualizing-complex, def-trf-external-product, sk-def-sf-kv-maps, def-sf-datum, sk-def-ops): none restates the package. No cycle. Small cases: over X=Y=s with perfect complexes, and with zero objects, the maps are the standard ones. One repairable fault, now fixed: α_M applies the exceptional adjunction, which the node itself restricts to D^b_ctf, to p_X^*M⊗p_Y^*ω_Y. sk-d-setup gives only f^* and Rf_! stability, so the well-definedness claim was uncited. I added one sentence citing thm-sf-ctf-stability (i),(ii), plus the elementary fact A_s∈D^b_ctf, and added it to stmt_deps; sk-def-sf-operations already depends on that theorem, so the dependency is acyclic. Maintainer note: the unit record's statement text is still the stale master version; the worker cannot change it.; 1 file(s) fixed by the reviewer"
  }
 }
