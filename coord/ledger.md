@@ -15326,8 +15326,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:11 L: returned deliver/C4/Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound (reviewer RETURN: (the landing tools, head 7f515dae9) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 01:11 L: returned deliver/D4/Sheaf.CategoryTheory.GoodTruncationTotalBoundaryImage (reviewer RETURN: (the landing tools, head 8488f376f) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 01:11 L: merged deliver/A4/Sheaf.Paper.RingedTopoiCanonicalTensorPullback (stage 3; reviewer PASS; first push; landing 20261016T011142-L-263526 (interface); batch 20261016T011139; modules 3; new nodes 2; change records: coord/changes/A4-canonical-tensor-comparison-data.md, coord/changes/A4-ringed-tensor-preadditive-proof-api.md)
-- 01:11 L: merged deliver/B3/Sheaf.Paper.FiniteDiscreteExchangeComparison (stage 3; reviewer PASS; first push; landing 20261016T011143-L-264282 (interface); batch 20261016T011139; modules 7; new nodes 7; change records: coord/changes/FiniteDiscreteExchangeComparisonImports.md)
-- 01:11 L: merged deliver/D3/Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux (stage 3; reviewer PASS; first push; landing 20261016T011144-L-264795 (interface); batch 20261016T011139; modules 2; new nodes 1)
-- 01:11 L: merged deliver/G2/WeilConjectures.AlgebraicGeometry.Sites.SupportDimension (stage 3; reviewer PASS; first push; landing 20261016T011144-L-265347 (proof); batch 20261016T011139; modules 1; new nodes 1)
 - 01:11 L: merged deliver/H3/Sheaf.Paper.CondensedLocalPieceHomContinuity (stage 3; reviewer PASS; after a return; landing 20261016T011145-L-265743 (interface); batch 20261016T011139; modules 9; new nodes 7; change records: coord/changes/condensed-constructible-piece-coefficient-abstraction.md)
 - 01:11 L: merged deliver/N2/Sheaf.CategoryTheory.CartanEilenbergComparisonIndependence (stage 3; reviewer PASS; after a return; landing 20261016T011146-L-266083 (interface); batch 20261016T011139; modules 2; new nodes 1)
+
+- 09:19 L: batch 20261016T011139 dependency take-out
