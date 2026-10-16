@@ -26,9 +26,119 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $E=\\{\\mathfrak p:A_{\\mathfrak p}\\text{ is regular local}\\}$. This property is stable under passing to smaller primes. Indeed, if $\\mathfrak q\\subseteq\\mathfrak p$ and $\\mathfrak p\\in E$, [lem-weil-pbc-primes-of-localization] gives the prime $Q=\\mathfrak qA_{\\mathfrak p}$ of $A_{\\mathfrak p}$. Its localization is regular local by [lem-weil-pbc-regular-local-localization], and [lem-weil-pbc-localize-localization-at-prime] identifies it with $A_{\\mathfrak q}$. This proves hypothesis (i) of the criterion to be used in step 7.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-localize-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P9 via Tag 07P8, lemma-J-1: generalization stability; algebra.tex Tag 0AFS."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak p\\in E$. By the definition of regular local [def-weil-regular-scheme], its maximal ideal $\\mathfrak pA_{\\mathfrak p}$ admits $r=\\dim A_{\\mathfrak p}$ generators. Represent them by fractions $a_i/s_i$, with $a_i\\in\\mathfrak p$ and $s_i\\notin\\mathfrak p$, using [def-weil-pbc-localization-at-prime]. Since each $s_i/1$ is a unit, $f_i=a_i$ have images $f_i/1$ generating the same maximal ideal. Apply [lem-weil-pbc-regular-local-generators-regular-sequence] to these $r$ generators: their images form a regular sequence in $A_{\\mathfrak p}$. This includes $r=0$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P9, first three sentences; algebra.tex Tag 00NQ."
+   }
+  },
+  {
+   "text": "Apply [lem-exc-regular-sequence-principal-neighbourhood] to $A$, $\\mathfrak p$ and the sequence $f_i$. Obtain $g\\notin\\mathfrak p$ such that the images of the $f_i$ form a regular sequence in $A_g$.",
+   "uses": [
+    "lem-exc-regular-sequence-principal-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P9: applying algebra.tex Tag 061L."
+   }
+  },
+  {
+   "text": "We now make the same $f_i$ generate $\\mathfrak p$ on a smaller neighbourhood, spelling out the second replacement in the source. By [def-weil-pbc-noetherian-ring], write $\\mathfrak p=(a_1,\\ldots,a_m)$ and put $I=(f_1,\\ldots,f_r)\\subseteq\\mathfrak p$. The generator equality in step 2 expresses $a_j/1=\\sum_i(f_i/1)(c_{ij}/t_{ij})$ with $t_{ij}\\notin\\mathfrak p$. Multiplying by the product of these denominators, and then by an element outside $\\mathfrak p$ witnessing equality of fractions [def-weil-pbc-localization-at-prime], gives $s_j\\notin\\mathfrak p$ with $s_ja_j\\in I$. Put $h=g\\prod_js_j\\notin\\mathfrak p$. In $B=A[1/h]$ all these factors are units, so $\\mathfrak pB=IB$. The map $A_g\\to B$ is localization at the image of $\\prod_js_j$: its fractions are obtained by inverting this product. By [lem-weil-pbc-localization-module-exact], localization preserves the injective multiplication maps on each successive quotient that define the regular sequence in step 3. Put $C=A_g$, $s=\\prod_js_j$ (viewed in $C$), and $J_i=(f_1,\\ldots,f_{i-1})C$. The identification $(C/J_i)[1/s]\\cong B/J_iB$ sends $(c+J_i)/s^n$ to $c/s^n+J_iB$. It is surjective because every element of $B$ is $c/s^n$; its kernel is zero because $c/s^n\\in J_iB$ exactly when $s^Nc\\in J_i$ for some $N$, exactly the criterion that $(c+J_i)/s^n=0$. For the forward implication, write the ideal membership as a finite sum of fractions with numerators in $J_i$, multiply by a common power of $s$, and multiply by the further power witnessing equality of fractions. Conversely $s^Nc\\in J_i$ gives the ideal membership after inverting $s$. This map commutes with multiplication by every $f_i$ by its displayed formula. Apply exactness to $0\\to C/J_i\\xrightarrow{f_i}C/J_i$ to obtain the required injectivity on $B/J_iB$. The final quotient is nonzero since $IB\\subseteq\\mathfrak pB$, a proper prime ideal: explicitly $\\mathfrak pB=\\{a/h^n:a\\in\\mathfrak p\\}$ and $1$ is not of this form because $h\\notin\\mathfrak p$. Hence the $f_i$ are a regular sequence in $B$ by [def-weil-pbc-regular-sequence].",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P9: \"After another replacement we may also assume f_1,...,f_r generate p\"; denominator and localization-exactness argument expanded."
+   }
+  },
+  {
+   "text": "Use the given nonempty regular open $U_{\\mathfrak p}$ of $\\operatorname{Spec}(A/\\mathfrak p)$. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes], its closed complement is $V(J)$ for an ideal $J$ of $A/\\mathfrak p$. Nonemptiness implies $J\\ne0$: otherwise the complement is the whole spectrum. Choose $0\\ne\\bar b\\in J$ and lift it to $b\\in A\\setminus\\mathfrak p$. Then $D(\\bar b)\\subseteq U_{\\mathfrak p}$. Set $k=hb\\notin\\mathfrak p$. For every prime $\\mathfrak q\\supseteq\\mathfrak p$ with $k\\notin\\mathfrak q$, the ideal $\\bar{\\mathfrak q}=\\mathfrak q/\\mathfrak p$ is a prime of $A/\\mathfrak p$ (multiplication and membership are inherited from the quotient), avoids $\\bar b$, and thus belongs to $U_{\\mathfrak p}$. Consequently $(A/\\mathfrak p)_{\\bar{\\mathfrak q}}$ is regular local. Also $h\\notin\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P9: nonempty open in V(p) from the J-0 assumption; principal open chosen explicitly."
+   }
+  },
+  {
+   "text": "Fix such a prime $\\mathfrak q$. In $B=A_h$ the prime $Q=\\{a/h^n:a\\in\\mathfrak q\\}$ contains every image of $f_i$, and $B_Q\\cong A_{\\mathfrak q}$. Concretely the isomorphism sends $(a/h^n)/(c/h^m)$ to $ah^m/(ch^n)$, where $c\\notin\\mathfrak q$; its inverse sends $a/s$ to $(a/1)/(s/1)$, and cross multiplication checks the two inverses. Apply [lem-weil-pbc-weakly-regular-sequence-localization-prime] to the regular sequence of step 4 and $Q$. It gives a regular sequence $f_i/1$ in $A_{\\mathfrak q}$. The equality $\\mathfrak pB=IB$ implies $\\mathfrak pA_{\\mathfrak q}=(f_i)A_{\\mathfrak q}$. By [lem-weil-pbc-localization-at-prime-of-quotient], its quotient is isomorphic to $(A/\\mathfrak p)_{\\bar{\\mathfrak q}}$, regular by step 5. The local ring $A_{\\mathfrak q}$ is Noetherian by [lem-weil-pbc-localization-noetherian]. Apply [lem-exc-regular-local-lift-regular-sequence-quotient] to conclude $A_{\\mathfrak q}$ is regular local. Thus the element $k$ constructed in step 5 verifies hypothesis (ii) of the criterion for this $\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-exc-regular-local-lift-regular-sequence-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P9, final three sentences; algebra.tex Tag 00NU."
+   }
+  },
+  {
+   "text": "Apply [lem-exc-nagata-principal-open-criterion] to the predicate on ideals which means that the ideal is prime and its localization is regular local (assign it false on nonprime ideals). Step 1 gives hypothesis (i) and steps 2-6 give hypothesis (ii). Therefore every $\\mathfrak p\\in E$ belongs to some principal open $D(t)\\subseteq E$. Principal opens are open directly from the closed-set description in [lem-weil-pbc-spec-irreducible-closed-subsets-primes], since $D(t)=\\operatorname{Spec}A\\setminus V((t))$. Their union is exactly $E$, so $E$ is open. For the zero ring the spectrum and this union are empty; no regular prime was chosen.",
+   "uses": [
+    "lem-exc-nagata-principal-open-criterion",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P9, first sentence, applying Tag 07P8 lemma-J-1 and topology.tex Tag 0541, in its proved affine Nagata-criterion formulation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-localize-localization-at-prime",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-exc-regular-local-lift-regular-sequence-quotient",
+  "lem-exc-nagata-principal-open-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07P9, lemma-intersection-regular-with-closed; the elementary denominator calculation and the affine Nagata criterion make both neighbourhood arguments explicit."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,15 +195,79 @@
    "results": "[loogle] OK 0 hit(s)\n",
    "date": "2026-10-16",
    "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian ring has open regular locus if every prime quotient contains a nonempty regular open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat}, AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Noetherian if and only if the commutative ring $R$ is Noetherian (i.e., every ideal of $R$ is finitely generated).\"}\n  {\"name\": \"PrimeSpectrum.instNoetherianSpace\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Noetherian\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] [IsNoetherianRing R], TopologicalSpace.NoetherianSpace (PrimeSpectrum R)\", \"doc\": \"For any Noetherian ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of Zariski-clo\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}\n  {\"name\": \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], TopologicalSpace.NoetherianSpace ↥(AlgebraicGeometry.Spec R)\", \"doc\": \"For any Noetherian commutative ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of\"}\n  {\"name\": \"PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Jacobson\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsJacobsonRing R] (x : PrimeSpectrum R),\\n  [IsOpen {x}, IsClopen {x}, IsClosed {x} ∧ StableUnderGeneralization {x}].TFAE\", \"doc\": \"In a Noetherian Jacobson ring $ R $, for any prime ideal $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, the following are equivalent: (1) the singleton set $ \\\\{x\\\\} $ is open in the Zariski to\"}\n  {\"name\": \"IsNoetherianRing.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_2 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_3 : (P : Ideal R) → [inst_3 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_4 : P.IsMaxima\", \"doc\": \"If $ R $ is a commutative semiring such that for every maximal ideal $ P $, the localization $ R_P $ at $ P $ is a Noetherian ring, then $ R $ itself is a Noetherian ring. This criterion establishes t\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherianRing_of_away\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Finset R),\\n  Ideal.span ↑S = ⊤ → (∀ (s : ↥S), IsNoetherianRing (Localization.Away ↑s)) → IsNoetherianRing R\", \"doc\": \"If the localization of a commutative ring $ R $ away from an element $ x $ forms a Noetherian ring, then $ R $ itself is a Noetherian ring. This follows from the property that every ideal in $ R $ is \"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat}, AlgebraicGeometry.IsNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"For a commutative ring $ R $, the scheme $ \\\\operatorname{Spec}(R) $ is Noetherian if and only if $ R $ is a Noetherian ring.\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern Noetherianity, relative smooth loci, general opens, or unrelated J identifiers; none gives the prime-quotient regular-locus criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "J1 criterion every prime quotient J0",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MixedCharZero.reduce_to_maximal_ideal\", \"module\": \"Mathlib/Algebra/CharP/MixedCharZero\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {p : ℕ},\\n  Nat.Prime p → ((∃ I, I ≠ ⊤ ∧ CharP (R ⧸ I) p) ↔ ∃ I, I.IsMaximal ∧ CharP (R ⧸ I) p)\", \"doc\": \"For any prime number $ p $, the existence of a proper ideal $ I $ in a ring $ R $ such that the quotient ring $ R/I $ has characteristic $ p $ is equivalent to the existence of a maximal ideal $ I $ i\"}\n  {\"name\": \"MixedCharZero.reduce_to_p_prime\", \"module\": \"Mathlib/Algebra/CharP/MixedCharZero\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {P : Prop},\\n  (∀ p > 0, MixedCharZero R p → P) ↔ ∀ (p : ℕ), Nat.Prime p → MixedCharZero R p → P\", \"doc\": \"For a commutative ring $ R $, a property $ P $ holds for all positive integers $ p $ such that $ R $ has mixed characteristic zero with respect to $ p $ if and only if $ P $ holds for all prime number\"}\n  {\"name\": \"PreTilt.exists_smodEq_untiltAux\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsPrecomplete (Ideal.span {↑p}) O] (x : PreTilt O p),\\n  ∃ y, ∀ (n : ℕ), x.untiltAux n ≡ y [SMOD Ideal.span {↑p} ^ n • ⊤]\", \"doc\": \"For any element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, there exists an element $ y $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $ y $ modul\"}\n  {\"name\": \"PreTilt.instCommRing\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(O : Type u₂) → [inst : CommRing O] → (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → CommRing (PreTilt O p)\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo $ p $, defined as the perfection of the quotient ring $ O/(p) $, inherits a canonical commutative ring structure through componentwise addition and multi\"}\n  {\"name\": \"MixedCharZero.charP_quotient\", \"module\": \"Mathlib/Algebra/CharP/MixedCharZero\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {p : ℕ} [self : MixedCharZero R p], ∃ I, I ≠ ⊤ ∧ CharP (R ⧸ I) p\", \"doc\": \"For a commutative ring $ R $ with mixed characteristic zero with respect to a natural number $ p $, there exists a proper ideal $ I $ of $ R $ such that the quotient ring $ R/I $ has characteristic $ \"}\n  {\"name\": \"EqualCharZero.to_not_mixedCharZero\", \"module\": \"Mathlib/Algebra/CharP/MixedCharZero\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R], (∀ (I : Ideal R), I ≠ ⊤ → CharZero (R ⧸ I)) → ∀ p > 0, ¬MixedCharZero R p\", \"doc\": \"If every proper quotient of a commutative ring $ R $ has characteristic zero, then $ R $ does not have mixed characteristic $ p $ for any prime $ p > 0 $.\"}\n  {\"name\": \"PreTilt.instPerfectRing\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ (O : Type u₂) [inst : CommRing O] (p : ℕ) [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p],\\n  PerfectRing (PreTilt O p) p\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo a prime $ p $, defined as the perfection of the quotient ring $ O/(p) $, is a perfect ring with respect to $ p $. This means every element in the pretilt\"}\n  {\"name\": \"PreTilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(O : Type u₂) → [CommRing O] → ℕ → Type u₂\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo $ p $ is defined as the perfection of the quotient ring $ O/(p) $ with respect to the prime $ p $. This perfection consists of all sequences $ (f_n)_{n \\\\\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern Noetherianity, relative smooth loci, general opens, or unrelated J identifiers; none gives the prime-quotient regular-locus criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, IsOpen",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern Noetherianity, relative smooth loci, general opens, or unrelated J identifiers; none gives the prime-quotient regular-locus criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "regularLocus|regular_locus|JOne|JZero",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/FactorisationProperties.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2024 Colin Jones. All rights reserved.\"}\n  {\"file\": \"Mathlib/NumberTheory/FactorisationProperties.lean\", \"line\": \"4\", \"text\": \"Authors: Colin Jones\"}\n  {\"file\": \"Mathlib/Control/Monad/Writer.lean\", \"line\": \"20\", \"text\": \"- [Original Mark P Jones article introducing `Writer`](https://web.cecs.pdx.edu/~mpj/pubs/springschool.html)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"103\", \"text\": \"  convert_to x - GradedRing.projZeroRingHom 𝒜 x ∈ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"104\", \"text\": \"  · rw [GradedRing.projZeroRingHom_apply, ← GradedRing.proj_apply,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"112\", \"text\": \"    rw [GradedRing.projZeroRingHom_apply]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"128\", \"text\": \"        (Ideal.mul_mem_right (GradedRing.projZeroRingHom 𝒜 y) _ hx') using 1\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Noetherian.lean\", \"line\": \"31\", \"text\": \"    A (𝒜 0) (GradedRing.projZeroRingHom' 𝒜) (GradedRing.projZeroRingHom'_surjective 𝒜)\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"line\": \"259\", \"text\": \"def GradedRing.projZeroRingHom : A →+* A where\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"line\": \"289\", \"text\": \"def GradedRing.projZeroRingHom' : A →+* 𝒜 0 :=\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"line\": \"290\", \"text\": \"  ((GradedRing.projZeroRingHom 𝒜).codRestrict _ fun _x => SetLike.coe_mem _ :\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"line\": \"293\", \"text\": \"@[simp] lemma GradedRing.coe_projZeroRingHom'_apply (a : A) :\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"line\": \"294\", \"text\": \"    (GradedRing.projZeroRingHom' 𝒜 a : A) = GradedRing.projZeroRingHom 𝒜 a := rfl\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"line\": \"576\", \"text\": \"  ⟨RingHom.ker (GradedRing.projZeroRingHom 𝒜), fun i r (hr : (decompose 𝒜 r 0 : A) = 0) => by\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"line\": \"591\", \"text\": \"    𝒜₊.toIdeal = RingHom.ker (GradedRing.projZeroRingHom 𝒜) :=\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern Noetherianity, relative smooth loci, general opens, or unrelated J identifiers; none gives the prime-quotient regular-locus criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open regular locus from regular opens of prime quotients",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-j2-residue-field-criterion",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-regular-locus-open-from-prime-quotients",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven steps follow 07P9, with explicit denominator clearing, a principal open in each prime quotient, and a regular-sequence lifting argument. Two new unsplit algebra lemmas (061L, 00NU) and one new exact project attachment for the affine Nagata openness criterion (0541); no new Mathlib leaves. Existing parameter regularity, localization and quotient lemmas are reused.",
+  "blueprint": "Proof, second paragraph: \"finite-type field algebras are excellent\"; the J-2 condition for the ground field in the field-excellence input. These seven steps supply the J-1 input used by the J-2 criterion below that field-excellence sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic localization of regular local rings, used for generalization stability exactly as in 07P8; no node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic regular-parameter theorem 00NQ, used at a chosen regular prime as explicitly required by 07P9; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-local-generators-regular-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-8a737712b",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-8a737712b (reviewer sub-agent of L); spot-checked: Read all delivery mathematics, cited statements, sources, and unit/chapter route. Verified all seven steps, three new nodes, edge cases, duplicate candidates, and the exact Nagata project attachment. Accepted both declared regular-local tool uses; no repairs needed. Concrete findings are in review.md."
+ }
 }
