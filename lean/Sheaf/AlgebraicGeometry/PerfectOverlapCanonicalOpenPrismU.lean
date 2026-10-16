@@ -5,7 +5,6 @@ Authors: SHEAF group W4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectOverlapOpenSquareCube
 public import Sheaf.AlgebraicGeometry.PerfectOverlapProjectionSchemeSquare
 public import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
 public import Sheaf.AlgebraicGeometry.PerfectHomComparisonTriangle
