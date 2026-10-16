@@ -12,36 +12,51 @@
  ],
  "proof": [
   {
-   "text": "Realize the pulled continuous integral coefficient ring as the sheaf of continuous O_E-valued functions. On a presentation cover, evaluate a finite matrix at geometric points. Flat going-down lifts specializations through the cover. A continuous function to the Hausdorff ring O_E agrees on comparable points, so the Smith invariants of the fiber modules are invariant under specialization. Independence of the algebraically closed representative follows by base change of the same finite matrix. A noetherian scheme has finitely many irreducible components with generic points, and components meeting each other have the same invariants. Hence each connected component has one finite module type and there are finitely many types.",
+   "text": "Use the one-pivot cover of integralMatrix_pivot_cover. Strong induction on the number of source generators proves local finite presentation of the kernel of a finite free matrix with locally free rational cokernel. The zero branch uses the free source. In the pivot branch the categorical pivotKernelIso identifies the kernel with the kernel of d-r*c, with strictly fewer source generators. The proved pivotCokernelIso and mappedPivotCokernelIso identify the rational cokernel with that of d-r*c because the rational pivot is invertible. The proved rationalCokernelFree_pullback transports local freeness through the covering and coefficient comparison. Thus the induction hypothesis applies. No full Smith form or finite integral module classification is needed.",
    "uses": [
+    "lem-weil-pbc-integral-matrix-pivot-cover",
     "def-weil-pbc-continuous-integral-coefficients"
    ],
    "elementary": false
   },
   {
-   "text": "Over a connected component, the local presentation matrices thus have fixed Smith invariants. A smallest nonzero valuation entry stays of this valuation on a neighborhood. Divide by it continuously, perform integral elementary row and column operations, and repeat on the smaller matrix. All division quotients are integral by the minimal valuation choice. A remainder whose fiber entries all vanish is zero as a matrix of continuous functions. This identifies the module locally with a fixed finite O_E-module model, including the zero matrix case.",
+   "text": "For a finite free cokernel presentation descended from a locally finitely presented module P on the noetherian base, use the proved lfp_extend helper to extend P to E. Apply exists_finiteFree_cover_of_condensedField_lfp, lifting E to ULift E for the scheme universe and transporting by liftCoefficientIso. Pull that free cover through both presentation covers. The proved scalar-extension/pullback comparison and extendScalarsComapSquareIso transport its local freeness to the actual coefficient ring on the covering scheme. Apply the matrix-kernel induction and transport back.",
    "uses": [
-    "def-weil-pbc-continuous-integral-coefficients"
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension"
    ],
    "elementary": false
   },
   {
-   "text": "Refine the source and target stratifications with a constructible stratification of their cokernel, using the proved generic cokernel closure. On each connected component of each stratum, the preceding finite-model comparison gives fixed finite fiber module types for all three. Choose presentations M=coker A and N=coker B, and locally lift the finitely many source generators to obtain a matrix F for the map. The augmented free matrix D=(F,-B) presents its cokernel, so B and D have fixed Smith invariants. Continuous pivot operations diagonalize both, and their kernels are finite free since multiplication by a nonzero constant of O_E is injective on continuous functions. Lift the columns of FA through B locally, by local surjectivity of the epimorphism onto its image. The resulting map from the source relation module, together with ker B, presents the kernel as a cokernel into ker D. All three modules in this presentation are finite free. Exact inverse image identifies these local kernels with the original kernel on each stratum. This avoids assuming free source and target in the presence of torsion; zero ranks and empty strata are included.",
+   "text": "Generic cokernel closure makes coker f locally finitely presented. On a common finite-presentation cover, choose presentations M=coker a and N=coker b. The existing freeEpiLocalSplitting lifts the source generators through the free presentation of N on a further covering, giving t and the augmented map delta=(b,t) which presents coker f. The preceding descended-matrix assertion gives locally finitely presented kernels of b and delta. The fully proved kernelCokernelCompIso identifies the cokernel of their natural map with ker(pi_M followed by f). The fully proved kernelDescCokernelIso then identifies the cokernel of the source relation map into this module with ker f. Apply generic lfp_cokernel twice and glue the presentation covers.",
    "uses": [
-    "lem-weil-pbc-constructible-cokernels-extensions"
+    "lem-weil-pbc-constructible-cokernels-extensions",
+    "lem-weil-pbc-proetale-free-epi-local-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing common_lfp_stratification helper from CondensedConstructibleSerre to refine the source and target stratifications. An immersion is a topological embedding, so every stratum has noetherian underlying space. Apply the locally finitely presented kernel result on each stratum, use exact inverse image and the coefficient comap equivalence to identify it with the restricted kernel, and transport the canonical kernel to an arbitrary kernel cone.",
+   "uses": [
+    "lem-weil-pbc-condensed-constructible-serre"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-integral-matrix-pivot-cover",
   "def-weil-pbc-continuous-integral-coefficients",
-  "lem-weil-pbc-constructible-cokernels-extensions"
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+  "lem-weil-pbc-constructible-cokernels-extensions",
+  "lem-weil-pbc-proetale-free-epi-local-splitting",
+  "lem-weil-pbc-condensed-constructible-serre"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 6.8.10 and Proposition 6.8.11(1), integral finite model comparison",
-  "note": "The sole remaining sorry. This is now strictly narrower than the initial Serre split: cokernels and extensions have been fully proved generically. What remains is the integral finite-model comparison and its coefficient-dependent kernel finiteness. Second reading B4: the torsion-module step is made explicit using two augmented free matrices and a finite relation presentation, rather than an unsupported Smith form for maps between arbitrary finite modules."
+  "place": "Section 6.8, Lemma 6.8.7 and Proposition 6.8.11(1), one-pivot reduction and augmented presentations",
+  "note": "H2: the original kernel-closure hole is reduced by a complete Lean proof to one local integral pivot chart. Strong induction, rational cokernel preservation under a pivot, scalar/pullback comparisons, the two exact cokernel calculations and constructible gluing are all proved. The remaining chart does not assert kernel finiteness or constructibility. Full finite-integral-model invariance and Smith diagonalization are pruned."
  },
  "mathlib_searches": [
   {
@@ -136,13 +151,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B4",
+  "reviewer": "X-ee755",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261015T235420-L-3518326",
+  "landing": "20261016T021741-L-1028349",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched both Lean declarations with their DAG statements and the kernel reduction with its recorded dependencies; delivered modules, axiom probes, and direct importer IntegralConstructibleSerre compile cleanly. Existing signatures are unchanged; the sole new sorry is the documented pivot theorem."
  }
 }
