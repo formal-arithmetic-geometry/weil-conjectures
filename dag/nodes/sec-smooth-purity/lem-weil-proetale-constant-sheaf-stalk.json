@@ -25,65 +25,41 @@
  ],
  "proof": [
   {
-   "text": "Put $P(U)=M$ with identity restrictions, and put $O(U)=\\Lambda$ with identity restrictions. The module sheafification interface, applied to the constant presheaf of rings $O$ and its module presheaf $P$, identifies the underlying abelian sheaf of $\\underline M_Y$ with the abelian sheafification $P^\\#$, and identifies its unit with $P\\to P^\\#$. Its scalar action extends the original multiplication $(a,m)\\mapsto am$. This is precisely the constant module sheaf in the statement, not a completed or condensed coefficient object.",
+   "text": "Restrict the actual constant module presheaf to pointed neighbourhoods. It is definitionally the constant additive diagram. The neighbourhood category is cofiltered, so its opposite is connected. Apply Mathlib isColimitConstCocone (the existing constant-connected-colimit leaf) and colimit.isoColimitCocone to prove that the coprojection at (Y,y) is an isomorphism. The geometric-stalk sheafification comparison makes the colimit map induced by the abelian sheafification unit an isomorphism. By colimit.ι_map their composite is definitionally the canonical additive germ, proving bijectivity.",
    "uses": [
     "def-weil-proetale-locally-constant-sheaf",
-    "lem-pc-sites-module-sheafification-interface"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CY (lemma-sheafification-presheaf-modules)"
-   }
-  },
-  {
-   "text": "Let $I=\\mathcal N_{\\bar y}^{\\mathrm{op}}$ be the pointed-neighbourhood index category. The geometric stalk definition supplies its smallness in the larger universe and its filteredness; it is nonempty, containing $(Y,\\bar y)$. Thus it is connected: any two objects have a common receiving object, yielding a zigzag. The restricted presheaf diagram $P$ is constant with value the additive group of $M$. The constant-connected-diagram lemma identifies its colimit with $M$; in particular the coprojection at $(Y,\\bar y)$ is an isomorphism.",
-   "uses": [
     "def-weil-proetale-geometric-stalk",
-    "lem-weil-pbc-colimit-constant-connected-diagram"
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "lem-cbc-proetale-sheafification-geometric-stalk"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0F6B (lemma-cofinal-etale); constant-diagram universal property as in Mathlib Limits/Connected.lean:83"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply preservation of geometric stalks by abelian sheafification to $P$: the map $\\varinjlim_I P(U)\\to\\varinjlim_I P^\\#(U)$ induced by the actual unit is an additive isomorphism. By Step 1 the latter colimit is the additive group of $(\\underline M_Y)_{\\bar y}$. Composing with the coprojection of Step 2 sends $m$ to the class of its unit image at $(Y,\\bar y)$, exactly the canonical map specified in the statement. This proves additive bijectivity without presupposing that ordinary geometric points detect every pro-etale sheaf.",
-   "uses": [
-    "lem-cbc-proetale-sheafification-geometric-stalk",
-    "def-weil-proetale-geometric-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00Y8 (lemma-point-pushforward-sheaf), clause (3), with proetale.tex Tags 0F6B and 0F6C"
-   }
-  },
-  {
-   "text": "Give the stalk its $\\Lambda$-action by restriction of scalars along the ring homomorphism $\\Lambda\\to(\\Lambda_Y)_{\\bar y}$ sending $a$ to the germ of $\\theta_O(a)$ at $(Y,\\bar y)$. For $a\\in\\Lambda$ and $m\\in M$, represent the scalar and module germ at the same object $(Y,\\bar y)$. Compatibility of the sheafification action with the presheaf action gives $\\theta(am)=\\theta_O(a)\\theta(m)$ there, so passing to germs gives $c(am)=a c(m)$. The common-refinement definition of the stalk action is exactly this action. Hence the additive bijection $c$ of Step 3 is $\\Lambda$-linear. Its inverse is linear: if $c(m)=t$, then $c(am)=at$, so $c^{-1}(at)=a c^{-1}(t)$; if $c(m)=t$ and $c(n)=u$, additivity of $c$ gives $c(m+n)=t+u$, hence $c^{-1}(t+u)=m+n=c^{-1}(t)+c^{-1}(u)$, and $c^{-1}(0)=0$ because $c(0)=0$. This is the required module isomorphism. For finite $M$, bijectivity gives a finite underlying set at every geometric point (and also preserves finite generation if finite is used in that module sense).",
+   "text": "Use the unit of Mathlib PresheafOfModules.sheafificationAdjunction for the actual constant-ring sheafification unit. Its component at the identity neighbourhood is linear into the restriction of scalars of the sheafified module, and its underlying additive map is definitionally the abelian sheafification unit. Apply the additive stalk coprojection to its map_smul equality. PresheafOfModules.ModuleColimit.smul_eq identifies the result with the product of the canonical ring and module germs, proving exactly the scalar clause.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface",
+    "def-weil-proetale-locally-constant-sheaf",
     "def-weil-proetale-geometric-stalk"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CY (lemma-sheafification-presheaf-modules); action and inverse verified on representatives"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Transport finiteness of the underlying set along the surjective canonical additive germ, using Finite.of_surjective.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-proetale-locally-constant-sheaf",
-  "lem-pc-sites-module-sheafification-interface",
   "def-weil-proetale-geometric-stalk",
   "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-cbc-proetale-sheafification-geometric-stalk"
+  "lem-cbc-proetale-sheafification-geometric-stalk",
+  "lem-pc-sites-module-sheafification-interface"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 0F6B, 0F6C and geometric-point paragraph before 0993; sites.tex Tag 00Y8(3); sites-modules.tex Tag 03CY"
+  "by": "agent",
+  "document": "Mathlib and existing project interfaces",
+  "place": "isColimitConstCocone, colimit.ι_map, proEtaleGeometricStalk_sheafification, sheafificationAdjunction, ModuleColimit.smul_eq, Finite.of_surjective; E2 second reading, 2026-10-16"
  },
  "mathlib_searches": [
   {
@@ -203,5 +179,15 @@
   "by": "NX",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261016T133216-L-3233835",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
