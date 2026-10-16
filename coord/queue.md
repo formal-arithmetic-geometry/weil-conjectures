@@ -1,6 +1,6 @@
 # Work queue
 
-66 items; claim with `tools/claim.py next <group> [--stage N]`.
+67 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (66)
+## Stage 3: modules to prove (67)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -72,6 +72,7 @@
 | `Sheaf.AlgebraicGeometry.FormalCompletionPullbackNormalized` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SectionsOverQuasiCompactOpen` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting` | 21 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.TorsionLocalModelRestriction` | 21 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.IdealPowerEvaluationAffineEventuallyZero` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorHomRestrictionScalar` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IdealPowerLocalMapsEventuallyAgree` | 23 | 1 | proof |
