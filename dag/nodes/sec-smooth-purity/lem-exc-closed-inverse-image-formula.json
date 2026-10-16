@@ -231,5 +231,23 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-1103c501b (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, master blueprint, and Stacks 09BK/09BL, 00WH/00WJ and 0B65. All six steps are valid, including triangle identities and noncommutative coefficient transport. No new nodes or repairs. Accepted all four tool requests. review.md records edge cases, target coefficient/morphism distinctions, and inherited dependency cycles not introduced by this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.ClosedInverseImageFormula",
+  "declaration": "AlgebraicGeometry.Scheme.AffineProEt.closed_inverseImage_sheafification",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/ClosedInverseImageFormula.lean",
+  "statement": "theorem closed_inverseImage_sheafification (A : Type u) [CommRing A] (I : Ideal A) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (F : ProEtale.FiniteCoefficientModules (Spec (.of A)) Λ) : Nonempty (((toProEt (Spec (.of (A ⧸ I)))).sheafPushforwardContinuous (ModuleCat.{u + 1} Λ) (topology (Spec (.of (A ⧸ I)))) (ProEt.topology (Spec (.of (A ⧸ I))))).obj ((ProEtale.upperStar (ModuleCat.{u + 1} Λ) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))).obj ((ProEtale.finiteCoefficientRealization (Spec (.of A)) Λ).asEquivalence.inverse.obj F)) ≅ (presheafToSheaf (topology (Spec (.of (A ⧸ I)))) (ModuleCat.{u + 1} Λ)).obj ((closedSiteLift A I ⋙ toProEt (Spec (.of A))).op ⋙ ((ProEtale.finiteCoefficientRealization (Spec (.of A)) Λ).asEquivalence.inverse.obj F).obj))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b0733bd37",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source alignment, universes, edge cases, docstrings, and exact Lean declaration. Reproduced scompile.py successfully for sandbox and library; no substantive or mechanical errors found. Wrote review.md."
  }
 }
