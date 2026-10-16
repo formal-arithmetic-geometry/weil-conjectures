@@ -243,5 +243,29 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-1b423bf9a (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, unit/chapter route, and sources 0990, 0946, 0947, 03CY and 03DA. All five steps hold, including noncommutative coefficients and unbounded complexes. Accepted the three declared generic tool uses. No new nodes or repairs; detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleVanishingDetection",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficient_isZero_iff_forall_affine_weaklyContractible",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCoefficient_isZero_iff_forall_affine_weaklyContractible",
+   "AlgebraicGeometry.ProEtale.finiteCoefficient_acyclic_iff_forall_affine_weaklyContractible",
+   "AlgebraicGeometry.ProEtale.finiteCoefficient_isIso_iff_forall_affine_weaklyContractible"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleVanishingDetection.lean",
+  "statement": "theorem finiteCoefficient_isZero_iff_forall_affine_weaklyContractible (F : FiniteCoefficientModules T Λ) : IsZero F ↔ ∀ (W : T.ProEt), IsAffine W.left → (Scheme.ProEt.topology T).IsWeaklyContractible.{u + 1} W → Subsingleton ((SheafOfModules.evaluation (finiteCoefficientRingSheaf T Λ) (op W)).obj F)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The listed declarations state clauses (i), (ii), and the concluding joint conservativity for the canonical finite Ring coefficient module category, including noncommutative rings. The generic source theorems assume CommRing, so do not cover this exact statement. The existing stalk counterexample is imported from ProEtaleStalkConservative. The module uses the smaller owning ProEtaleFiniteModules import re-exported by the dependency record, to avoid duplicate legacy/reorganized UpperLowerStar declarations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-63a9c6260",
+  "group": "NG",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all statement dependencies, source passages, exact declarations, universes, edge cases, docstrings and pilot gates. Primary signature matches verbatim; local side-overlay per-file compilation passed. No findings or fixes; branch head unchanged."
  }
 }

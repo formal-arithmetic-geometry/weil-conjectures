@@ -167,21 +167,26 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-68ff94781 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, unit/chapter route, and Stacks 03DI, 03CY, and 09AE. All four steps give a linear, inverse, natural Hom correspondence; edge cases pass. No new nodes, circular dependencies, or implicit coefficient comparisons. Accepted localization tool use; detailed findings recorded in review.md."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-4ff68f69c",
-  "group": "NY",
+  "reviewer": "NT-stage2-Codex-6e72840f7",
+  "group": "NG",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable files, dependencies, sources, exact signatures, universes, edge cases, docstrings, and framework alternatives. Server-only compilation passed without diagnostics. No delivery errors found; branch head unchanged."
+  "note": "Wrote review.md. Verified immutable statements, all dependencies, canonical adjunction and unit, sources, universes, edge cases, docstrings, report sections, and verbatim signatures. Both delivered modules compile cleanly through scompile.py in dependency order. No delivery errors found; branch unchanged."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleExtensionByZeroAdjunction",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleExtensionByZero_adjunction",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleExtensionByZeroAdjunction.lean",
-  "statement": "theorem proEtaleExtensionByZero_adjunction (X : Scheme.{u}) (U : X.ProEt) [IsOpenImmersion U.hom] (A : CommRingCat.{u + 1}) [Finite A] : Nonempty (proEtaleExtensionByZero X U A ⊣ SheafOfModules.overFunctor.{u + 1} ((constantSheaf (ProEt.topology X) RingCat.{u + 1}).obj (RingCat.of A)) U)",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction",
+  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicExtensionByZeroAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleIntrinsicExtensionByZeroAdjunction.lean",
+  "statement": "def sfIntrinsicExtensionByZeroAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] : sfIntrinsicExtensionByZero j A ⊣ sfIntrinsicOpenRestriction j A",
   "branch": "newtargets-dag",
-  "by": "NY",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "NG",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Section 1(B): the recorded localized-site adjunction uses proEtaleExtensionByZero on a slice-site category, whereas def-weil-extension-by-zero now records sfIntrinsicExtensionByZero on intrinsic constant-ring modules. Reexport the recorded localized-site interface and construct the canonical intrinsic adjunction by composing the published fixed-scalar localization adjunction with sfIntrinsicModuleEquivalence. The right adjoint is sectionwise open restriction transported through that same canonical realization, with no arbitrary map or coefficient identification.",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfIntrinsicOpenRestriction",
+   "AlgebraicGeometry.Scheme.sfIntrinsicExtensionByZeroAdjunction"
+  ]
  }
 }

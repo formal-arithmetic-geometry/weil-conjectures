@@ -193,5 +193,23 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-1455352b1 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, dependencies, unit/chapter route, blueprint and cited Stacks sources. The finite-morphism lemma supplies positive-degree vanishing and constructibility of f_*F; the degree-zero kernel computation is valid in the constant-Λ module category, and the zero-sheaf constructibility argument is correct. Hypotheses, base-change morphism, coefficient category, edge cases, searches, duplicate audit, and accepted tool uses all check out. No repairs or dropped nodes required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteMorphismsConstructible",
+  "declaration": "AlgebraicGeometry.Etale.finiteMorphisms_constructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteMorphismsConstructible.lean",
+  "statement": "theorem finiteMorphisms_constructible (k : Type u) [Field k] {X S : Scheme.{u}} [S.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (f : X ⟶ S) [IsFinite f] (N : ℕ) (Λ : Type (u + 1)) [CommRing Λ] (hcoeff : IsSmoothBaseChangeCoefficients N Λ S) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : @Scheme.IsConstructibleEtaleModuleSheaf X Λ _ hcoeff.2.1 F) : (∀ q : ℕ, @Scheme.IsConstructibleEtaleModuleSheaf S Λ _ hcoeff.2.1 ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))) ∧ (∀ q : ℕ, q > 0 → IsZero ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))))",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-75435299e",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable declarations, all statement dependencies, blueprint and Stacks sources, hypotheses, conclusions, universes, edge cases, docstrings, report sections, and verbatim statement equality. Reproduced per-file compilation through scompile.py without diagnostics. No delivery faults or repairs required."
  }
 }

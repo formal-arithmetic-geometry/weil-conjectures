@@ -22,7 +22,9 @@
   "def-weil-algebraically-closed-coefficients",
   "def-weil-proetale-geometric-stalk",
   "def-weil-l-adic-coefficient-extension",
-  "def-weil-derived-complete-integral-detailed"
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-finite-subextension-directed-set"
  ],
  "proof": [
   {
@@ -364,5 +366,30 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-7dd055c83 (reviewer sub-agent of L); spot-checked: Mathematics, citations, routes, hypotheses, base-change morphism, coefficient categories, edge cases, and Mathlib searches were checked. The new node's created record omitted required by/date/group fields; corrected full DAG JSON is in fixes/dag/nodes/sec-smooth-purity/lem-fix-geometric-stalk-topos-point.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeometricStalkPerfect",
+  "declaration": "AlgebraicGeometry.Scheme.finiteTorConstructible_proEtale_stalk_finiteFree",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteTorConstructible_proEtale_stalk_finiteFree",
+   "AlgebraicGeometry.Scheme.finiteTorConstructible_etale_stalk_finiteFree",
+   "WeilConjectures.fieldGeometricStalkComplex",
+   "WeilConjectures.rationalConstructible_stalk_perfect",
+   "WeilConjectures.commonStageConstructible_stalk_perfect"
+  ],
+  "file": "lean/Sheaf/Paper/GeometricStalkPerfect.lean",
+  "statement": "theorem finiteTorConstructible_proEtale_stalk_finiteFree (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (hn : 1 ≤ n) (y : Spec (.of Ω) ⟶ Y) (K : CochainComplex (SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).obj (CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)))))) ℤ) (hK : WeilConjectures.finiteTorConstructible l E n hn Y (DerivedCategory.Q.obj K)) : ∃ (P : CochainComplex (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) ℤ) (a b : ℤ), P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧ (∀ i : ℤ, Module.Free (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) (P.X i) ∧ Module.Finite (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) (P.X i)) ∧ Nonempty (DerivedCategory.Q.obj ((Functor.mapHomologicalComplex (finiteCoefficientModuleStalkFunctor y (Padic.coefficientExtensionRing l E n)) (ComplexShape.up ℤ)).obj K) ≅ DerivedCategory.Q.obj P)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-129030f54",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Reviewed node, source, dependencies, all delivered Lean modules, docstrings, edge cases, and report sections; no substantive errors found. Wrote review.md. scompile reproduction was attempted; shared compiler queue delayed final confirmation, while the worker’s recorded per-file compiles were successful.; reverted the delivery's change of existing node(s) def-weil-derived-complete-integral-detailed (--revert-nodes; kept as on newtargets-dag)"
  }
 }

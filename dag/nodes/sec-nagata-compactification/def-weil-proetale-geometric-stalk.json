@@ -197,35 +197,28 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-9cff46f55 (reviewer sub-agent of L); spot-checked: Reviewed item, all cited nodes, unit/chapter route, exact Stacks sources, Mathlib searches, edge cases, and archived target coefficient/base-change definitions. The filteredness, quotient colimits, module interpretation, universe handling, and declared generic tool use are valid; no duplicates, false statements, or repairs found. Review written to review.md."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-77b4478c7",
-  "group": "NA",
+  "reviewer": "NT-stage2-Codex-129030f54",
+  "group": "Q19",
   "result": "pass",
-  "note": "Wrote review.md. Checked all statement clauses, dependencies, sources, declarations, universes, edge cases, docstrings, report sections and duplicate searches. Snapshot server compilation reproduced cleanly. No delivery errors or upstream blockers found; no repository changes made."
+  "note": "Reviewed node, source, dependencies, all delivered Lean modules, docstrings, edge cases, and report sections; no substantive errors found. Wrote review.md. scompile reproduction was attempted; shared compiler queue delayed final confirmation, while the worker’s recorded per-file compiles were successful.; reverted the delivery's change of existing node(s) def-weil-derived-complete-integral-detailed (--revert-nodes; kept as on newtargets-dag)"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleGeometricStalk",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor",
+  "declaration": "AlgebraicGeometry.Scheme.geometricRingModuleStalkFunctor",
   "declarations": [
-   "AlgebraicGeometry.Scheme.ProEtaleGeometricNeighbourhood",
-   "AlgebraicGeometry.Scheme.proEtaleGeometricNeighbourhoodForget",
-   "AlgebraicGeometry.Scheme.proEtaleGeometricNeighbourhood_isCofiltered",
-   "AlgebraicGeometry.Scheme.proEtaleGeometricNeighbourhood_initiallySmall",
-   "AlgebraicGeometry.Scheme.proEtaleGeometricNeighbourhood_hasColimitsOfShape",
-   "AlgebraicGeometry.Scheme.proEtaleGeometricStalkDiagram",
-   "AlgebraicGeometry.Scheme.proEtaleGeometricStalk",
-   "AlgebraicGeometry.Scheme.proEtaleGeometricSetStalk",
-   "AlgebraicGeometry.Scheme.proEtaleGeometricFixedModuleStalk",
-   "AlgebraicGeometry.Scheme.proEtaleGeometricStalkRingDiagram",
-   "AlgebraicGeometry.Scheme.proEtaleGeometricStalkRing",
-   "AlgebraicGeometry.Scheme.proEtaleGeometricModuleStalk"
+   "AlgebraicGeometry.Scheme.geometricRingModuleStalkFunctor",
+   "AlgebraicGeometry.Scheme.geometricRingModuleStalkFunctor_additive",
+   "AlgebraicGeometry.Scheme.finiteCoefficientModuleStalkFunctor",
+   "AlgebraicGeometry.Scheme.finiteCoefficientModuleStalkFunctorAdditive"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleGeometricStalk.lean",
-  "statement": "def proEtaleGeometricStalk [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) {C : Type v} [Category.{w} C] [HasColimitsOfSize.{u + 1, u + 1} C] (F : Sheaf (ProEt.topology Y) C) : C",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModuleStalkFunctor.lean",
+  "statement": "def geometricRingModuleStalkFunctor (y : Spec (.of Ω) ⟶ Y) (O : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O) ⥤ ModuleCat.{u + 1} (proEtaleGeometricStalkRing y O)",
   "branch": "newtargets-dag",
-  "by": "NA",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "Q19",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "§1(B): the recorded module supplies module-stalk objects and scalar operations, but not their functor on module maps or its additivity, needed to take stalks of complexes. Publicly imports the recorded construction unchanged and extends precisely that colimit module to a functor; the constant-coefficient specialization uses the existing constant-ring germ for restriction of scalars."
  }
 }

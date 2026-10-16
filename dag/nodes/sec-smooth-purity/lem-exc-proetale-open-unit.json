@@ -14,7 +14,8 @@
  },
  "stmt_deps": [
   "def-weil-extension-by-zero",
-  "def-weil-pbc-proetale-operations"
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-extension-by-zero-adjunction"
  ],
  "proof": [
   {
@@ -76,10 +77,22 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-open-closed-triangle",
  "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.isIso_openImmersionLowerShriekAdjunction_unit"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-15 22:53 UTC for group NJ, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_7d675a26.jsonl.gz: gives the isomorphism of the open-immersion adjunction unit \\(M \\to j^*j_!M\\) for pro-etale sheaves."
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleIntrinsicOpenUnit",
+  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicOpenUnit_isIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleIntrinsicOpenUnit.lean",
+  "statement": "theorem sfIntrinsicOpenUnit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] (M : proEtaleRingModules U (proEtaleConstantRing U A)) : IsIso ((sfIntrinsicExtensionByZeroAdjunction j A).unit.app M)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The previous upstream attachment states invertibility in a fixed coefficient category. This statement uses the currently recorded intrinsic extension-by-zero construction and its canonical transported adjunction, retaining the original mathematical statement and finite constant coefficient convention of def-weil-extension-by-zero."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6e72840f7",
+  "group": "NG",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable statements, all dependencies, canonical adjunction and unit, sources, universes, edge cases, docstrings, report sections, and verbatim signatures. Both delivered modules compile cleanly through scompile.py in dependency order. No delivery errors found; branch unchanged."
  }
 }

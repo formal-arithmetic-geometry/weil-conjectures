@@ -23,7 +23,9 @@
   "def-weil-scheme-morphism-properties",
   "def-weil-pbc-proetale-site",
   "def-weil-derived-pullback-tensor-hom",
-  "def-weil-proetale-inverse-image"
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-proetale-constant-exact"
  ],
  "proof": [
   {
@@ -237,5 +239,28 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-106c72402 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and chapter/unit route. All five proof steps check, including localization triangles and coefficient-linear identification of the quasi-inverse. No new nodes or repairs needed. Accepted the declared geometric sheaf-equivalence tool use. Master target coefficient categories remain distinct. Detailed checks and two pre-existing missing dependency IDs are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsomorphismDerivedPullbackEquivalence",
+  "declaration": "AlgebraicGeometry.Scheme.finiteTorsionDerivedPullback_isEquivalence_of_isIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteTorsionDerivedPullback",
+   "AlgebraicGeometry.Scheme.finiteTorsionDerivedPullback_isEquivalence_of_isIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IsomorphismDerivedPullbackEquivalence.lean",
+  "statement": "theorem finiteTorsionDerivedPullback_isEquivalence_of_isIso (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : ∃ e : proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E n) ≌ proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n), e.functor = finiteTorsionDerivedPullback l E n hn g ∧ Nonempty (DerivedCategory.Q ⋙ e.inverse ≅ (proEtaleConstantModuleDirectImage g (Padic.coefficientExtensionRing l E n)).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ∧ Nonempty (e.inverse ≅ finiteTorsionDerivedPullback l E n hn (inv g))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The finite-level operation is the recorded proEtaleRingDerivedPullback specialized to the canonical constant coefficient isomorphism, with no supplied coefficient identification. The ambient derived categories are the original proEtaleDerivedCategory. The two added landed dependencies expose this exact finite clause of the broad derived-operations definition and the canonical coefficient isomorphism; no integral, rational, tensor, or internal-Hom operation is needed by this item. Second reading expresses termwise direct image by its natural localization factorization, without existential exactness-instance clauses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4dfda5ba7",
+  "group": "NI",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all seven dependencies, canonical constructions, sources, universes, edge cases, docstrings, report sections, and verbatim signature. Snapshot module compiled cleanly through scompile.py in sandbox and library modes. No defects found; no branch changes."
  }
 }
