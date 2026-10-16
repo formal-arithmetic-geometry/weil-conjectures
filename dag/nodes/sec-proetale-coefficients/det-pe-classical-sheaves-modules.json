@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-classical-sheaves-modules",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The module form of the classical equivalence",
@@ -12,52 +12,169 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.md",
   "place": "node det-pe-classical-sheaves-modules, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "det-pe-classical-definition-continuity-map"
+ ],
  "proof": [
   {
-   "text": "The inverse image $\\nu_X^*$ preserves finite products, so it carries the\naction map $\\Lambda_{X,\\Et}\\times M\\to M$ of a $\\Lambda$-module sheaf and the\naddition $M\\times M\\to M$ to the corresponding maps for $\\nu_X^*M$, and the\nmodule axioms (equalities of maps built from finite products) are preserved.\nThe direct image $\\nu_{X,*}$ is restriction, so it carries a\n$\\Lambda_X$-module structure on $G$ to a $\\nu_{X,*}\\Lambda_X$-module structure,\nand $\\nu_{X,*}\\Lambda_X=\\nu_{X,*}\\nu_X^*\\Lambda_{X,\\Et}\\cong\\Lambda_{X,\\Et}$ by\n[det-pe-classical-sheaves-unit]. The unit and counit are linear because they\nare natural transformations between functors commuting with finite products,\nso the adjunction restricts to module sheaves.",
+   "text": "Write $L=\\nu_X^*$ and $R=\\nu_{X,*}$ for the set-sheaf adjunction of [def-weil-pbc-site-comparison-morphism]. Its left adjoint preserves finite limits and its right adjoint is restriction; both preserve finite products. Apply $L$ to the addition, zero, negation and action $\\Lambda_{X,\\Et}\\times M\\to M$ of a module sheaf ([def-weil-sheaf-of-modules-category]). Under the product identifications these maps satisfy the module identities because those identities are equalities of maps and $L$ is a functor. This constructs an $L\\Lambda_{X,\\Et}=\\Lambda_X$-module $LM$ and carries linear maps to linear maps. Restriction similarly makes $RG$ an $R\\Lambda_X$-module; restrict scalars along $\\eta_{\\Lambda_{X,\\Et}}:\\Lambda_{X,\\Et}\\to R\\Lambda_X$. This ring map is an isomorphism by [det-pe-classical-sheaves-unit], and is a ring map since its naturality with addition, multiplication, zero and one gives the corresponding compatibility equations. Naturality with the projections identifies $\\eta_{A\\times B}$ with $\\eta_A\\times\\eta_B$ and $\\varepsilon_{G\\times H}$ with $\\varepsilon_G\\times\\varepsilon_H$ under product identifications. Naturality with every module structure map therefore makes $\\eta_M$ and $\\varepsilon_G$ additive and linear, using the triangle identity $\\varepsilon_{L\\Lambda_{X,\\Et}}\\circ L\\eta_{\\Lambda_{X,\\Et}}=1$ for the coefficients of the counit. The usual mutually inverse adjunct maps $a\\mapsto R(a)\\circ\\eta_M$ and $b\\mapsto\\varepsilon_G\\circ L(b)$ consequently carry linear maps to linear maps. Their inverse and naturality identities are those of the set-sheaf adjunction. Thus they define the asserted module adjunction for arbitrary discrete $\\Lambda$, without using the finite-ring assertion of the comparison-definition node.",
    "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-sheaf-of-modules-category",
     "det-pe-classical-sheaves-unit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
+    "place": "paragraph 1; explicit product/naturality verification of the module adjunction"
+   }
   },
   {
-   "text": "Exactness: on module sheaves $\\nu_X^*$ preserves kernels (finite limits) and\ncokernels (it is a left adjoint), as recorded in\n[prop-weil-pbc-site-comparison-finite-level] for finite rings; the argument\nuses only that $\\nu_X^*$ preserves finite limits and colimits, so it applies to\nany discrete $\\Lambda$.",
+   "text": "Apply [lem-weil-pbc-site-pullback-abelian-exact] to the comparison morphism of [def-weil-pbc-site-comparison-morphism], using the same larger-universe small skeletons as the sites. The underlying abelian inverse image is exact for this morphism of sites; the transported addition in step 1 is precisely its abelian-group structure. By [lem-weil-pbc-module-sheaves-colimits-forgetful], forgetting a module structure preserves kernels and cokernels, which are respectively sectionwise kernels and sheafified sectionwise cokernels. Accordingly the abelian comparisons $L(\\ker f)\\cong\\ker(Lf)$ and $L(\\operatorname{coker}f)\\cong\\operatorname{coker}(Lf)$ are linear: their maps are induced by the linear kernel inclusion and cokernel quotient, and their inverses are linear because the maps are bijective locally. Thus the module inverse image preserves kernels and cokernels, and is additive by the transported addition. It is exact. This argument needs no finiteness assumption on $\\Lambda$; the finite-coefficient node in the imported proof did not itself justify this conclusion.",
    "uses": [
-    "prop-weil-pbc-site-comparison-finite-level"
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
+    "place": "paragraph 2, with the finite-coefficient citation replaced by generic exactness; Stacks Tags 04JC and 03DA"
+   }
   },
   {
-   "text": "Full faithfulness: a $\\Lambda$-linear map is in particular a map of sheaves,\nand by [det-pe-classical-sheaves-unit] every map of sheaves\n$\\nu_X^*M\\to\\nu_X^*M'$ is $\\nu_X^*\\varphi$ for a unique map of sheaves\n$\\varphi\\colon M\\to M'$. If $\\nu_X^*\\varphi$ is linear, then so is $\\varphi$:\nthe two maps $\\Lambda_{X,\\Et}\\times M\\to M'$ expressing linearity agree after\n$\\nu_X^*$, hence agree by faithfulness.",
+   "text": "For module sheaves $M,M'$, [det-pe-classical-sheaves-unit] gives a unique underlying set-sheaf map $\\varphi:M\\to M'$ lifting each set-sheaf map $h:LM\\to LM'$. If $h$ is linear, the equations $\\varphi\\circ+_M=+_{M'}\\circ(\\varphi\\times\\varphi)$, $\\varphi\\circ0_M=0_{M'}$ and $\\varphi\\circ a_M=a_{M'}\\circ(1_{\\Lambda_{X,\\Et}}\\times\\varphi)$ become true after applying $L$, by the product and action identifications in step 1. Faithfulness on all set-sheaf Hom sets, including those with domain $M\\times M$, the terminal sheaf and $\\Lambda_{X,\\Et}\\times M$, reflects each of these equalities. Hence $\\varphi$ is additive and linear in the sense of [def-weil-sheaf-of-modules-category]. Conversely $L$ sends linear maps to linear maps by step 1. The bijection of underlying Hom sets therefore restricts to a bijection of module Hom sets: $L$ is fully faithful on module sheaves.",
    "uses": [
+    "det-pe-classical-sheaves-unit",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
+    "place": "paragraph 3; addition and zero included in the reflection of linearity"
+   }
+  },
+  {
+   "text": "For the continuity maps of [det-pe-classical-definition-continuity-map], a filtered colimit of $\\Lambda$-modules has the same underlying set as the filtered colimit of their sets: represent an element by $[i,x]$, put two representatives at a common later index to add them, and put $r[i,x]=[i,rx]$. Equality means equality after mapping to some common later index, so these operations are well defined and give precisely the module-colimit universal property. Every restriction is linear, so the resulting continuity map is the set continuity map with these operations. A bijective linear map has a linear inverse: if $y=c(x)$ and $y'=c(x')$, then $c^{-1}(y+y')=x+x'$ and $c^{-1}(ry)=rx$. Thus a module sheaf is classical if and only if its underlying set sheaf is classical.",
+   "uses": [
+    "det-pe-classical-definition-continuity-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
+    "place": "paragraph 4, first sentence; elementary representative computation supplying the omitted module/set comparison"
+   }
+  },
+  {
+   "text": "By [det-pe-classical-sheaves-image], the underlying set sheaf of $LM$ is classical, and for any classical underlying set sheaf $G$ its counit $LRG\\to G$ is an isomorphism. Step 4 converts both statements to classicality of module sheaves. Step 1 has shown that this counit is linear, hence its inverse is linear by the same calculation as in step 4, applied on sections. The unit is also linear and is an isomorphism on underlying sheaves by [det-pe-classical-sheaves-unit], hence is an isomorphism of modules. Therefore $L$ takes values in the full subcategory of classical module sheaves and its restriction and $R$ have the displayed unit and counit as natural isomorphisms. Their triangle identities are unchanged from step 1. They are mutually quasi-inverse equivalences, with the exactness and full faithfulness proved in steps 2 and 3.",
+   "uses": [
+    "det-pe-classical-sheaves-image",
     "det-pe-classical-sheaves-unit"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Essential image: a module sheaf is classical if and only if its underlying\nsheaf of sets is ([det-pe-classical-definition-continuity-map]). If $G$ is a\nclassical $\\Lambda_X$-module sheaf, then by [det-pe-classical-sheaves-image]\nthe linear counit $\\nu_X^*\\nu_{X,*}G\\to G$ is an isomorphism of sheaves, hence\nof module sheaves. Conversely every $\\nu_X^*M$ is classical. Together with the\nunit isomorphism this shows that $\\nu_X^*$ and $\\nu_{X,*}$ are inverse\nequivalences between $\\Mod(X_{\\Et},\\Lambda)$ and classical\n$\\Lambda_X$-modules.",
-   "uses": [
-    "det-pe-classical-definition-continuity-map",
-    "det-pe-classical-sheaves-image"
-   ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
+    "place": "paragraph 4, remaining sentences; linearity and the actual unit/counit identify the quasi-inverse"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-sheaf-of-modules-category",
   "det-pe-classical-sheaves-unit",
-  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "det-pe-classical-definition-continuity-map",
   "det-pe-classical-sheaves-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
+  "place": "All four paragraphs, with the module-adjunction and continuity-map details supplied and arbitrary-coefficient exactness justified by Stacks 04JC/03DA."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact fully faithful equivalence of module sheaves induced by comparison of etale and proetale sites",
+   "results": "Hits concerned fully faithful forgetful functors for scheme modules, condensed locally constant modules, and etale morphisms; no etale/proetale comparison equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.sheafPullbackConstruction.preservesFiniteLimits, PreservesFiniteColimits, Adjunction.isIso_unit",
+   "results": "0 hits; Loogle reported unknown identifier Functor.sheafPullbackConstruction.preservesFiniteLimits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullbackConstruction|preservesFiniteLimits|preservesFiniteColimits",
+   "results": "Mathlib/CategoryTheory/Sites/Pullback.lean:93-95 gives finite-limit preservation for sheafPullback under a finite-limit hypothesis on the Kan extension; no complete etale/proetale module equivalence.",
+   "date": "2026-10-16",
+   "verdict": "generalization: generic sheaf pullback finite-limit result only",
+   "directory": "Mathlib/CategoryTheory/Sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact fully faithful equivalence of module sheaves induced by comparison of etale and proetale sites",
+   "results": "Hits were generic dense-subsite sheaf equivalences and etale-morphism full faithfulness; no complete coefficient comparison theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale proetale comparison inverse image exact fully faithful on sheaves of modules over any discrete ring",
+   "results": "8 hits, including CondensedMod.LocallyConstant.fullyFaithfulFunctor and AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful. The former compares ordinary modules with condensed locally constant modules; the latter compares categories of etale schemes. Neither is this comparison of scheme sites.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\"",
+   "results": "10 hits in CategoryTheory.Sites.Pullback and Topology.Sheaves.Functors. Read Mathlib/CategoryTheory/Sites/Pullback.lean:49-140: generic adjunction and finite-limit preservation under representable flatness/Kan-extension hypotheses; no identification of classical scheme sheaves or module essential image.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "classical|proetale|pro.etale",
+   "results": "AlgebraicGeometry search returned 25 hits consisting of uses of classical proof mode; repeated with proetale|pro.etale to avoid truncation noise.",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "directory": "Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful geometric inverse image induces an exact equivalence from module sheaves onto modules whose underlying sheaves are in its essential image",
+   "results": "8 hits including CategoryTheory.Equivalence.fullyFaithfulToEssImage and SheafOfModules.PullbackConstruction.adjunction. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:44-100. These give a formal essential-image equivalence or ringed-site module adjunction; neither identifies the module essential image of the etale/proetale comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale",
+   "results": "AlgebraicGeometry search: 10 hits in Mathlib/AlgebraicGeometry/Sites/Proetale.lean and ElladicCohomology.lean. Read Proetale.lean:1-110: definitions of proetale topology and site, no full module comparison theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "directory": "Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulFunctor|functorIsoDiscrete",
+   "results": "Condensed/Discrete search: 5 hits in Mathlib/Condensed/Discrete/Module.lean:78-88; read lines 100-145: comparison of locally constant condensed modules with discrete modules, not etale/proetale sheaves on a scheme.",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "directory": "Mathlib/Condensed/Discrete"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -70,5 +187,34 @@
   "prop-weil-pbc-site-comparison-finite-level"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-classical-sheaves-modules",
+  "worker": "stage1",
+  "summary": "Five steps implement the four blueprint paragraphs: explicit transport of module structures and the adjunction, arbitrary-coefficient exactness, full faithfulness including addition and zero, the elementary module/set filtered-colimit comparison, and the linear unit/counit equivalence. Reused existing nodes only. The finite-coefficient theorem cannot be applied to arbitrary discrete rings, so exactness uses the generic abelian site theorem and the existing module-forgetful kernel/cokernel theorem.",
+  "blueprint": "Steps 1, 2 and 3 realize paragraphs 1, 2 and 3 of the module proof; steps 4 and 5 supply paragraph 4. This is the module clause in the last sentence of the recognizing-classical-part unit proof. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic exactness of abelian inverse image is needed in paragraph 2 for arbitrary discrete coefficients; the unit's finite-ring comparison theorem does not cover those coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic preservation of kernels and cokernels by the module-to-abelian forgetful functor converts abelian exactness into module exactness; the classical-equivalence unit has no such general module theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q39-211f9fd75",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-211f9fd75 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and source passages. All five steps are sound for arbitrary discrete coefficients; Stacks 04JC/03DA justify exactness. Accepted both declared generic tool uses. No cycles, duplicate nodes, target weakening or prohibited SGA route found. Concrete checks recorded in review.md; no fixes needed."
+ }
 }
