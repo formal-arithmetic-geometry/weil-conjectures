@@ -105,11 +105,15 @@
   }
  ],
  "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "CochainComplex.exists_quasiIso_flat_kFlat"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 15:30 UTC for group NZ, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: The declaration supplies a quasi-isomorphism from a complex Q to every L and proves Q K-flat; its additional termwise-flatness clause is stronger than required."
+  "module": "Sheaf.CategoryTheory.DerivedCategory.AbstractKFlatResolution",
+  "declaration": "CochainComplex.exists_quasiIso_isKFlatForTotalTensor",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/AbstractKFlatResolution.lean",
+  "statement": "theorem exists_quasiIso_isKFlatForTotalTensor {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C] [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C] (B : C ⥤ C) (hB : ∀ X : C, ObjectProperty.flat (B.obj X)) (ε : B ⟶ 𝟭 C) [∀ X : C, Epi (ε.app X)] (L : CochainComplex C ℤ) : ∃ (Q : CochainComplex C ℤ) (q : Q ⟶ L), QuasiIso q ∧ Q.IsKFlatForTotalTensor",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "States only the requested two-sided binary total-tensor K-flat resolution, using the recorded dependency predicate. The upstream exists_quasiIso_flat_kFlat additionally asserts termwise flatness and uses the monoidal kFlat interface; it is a proof source, not a verbatim statement match."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -129,5 +133,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-47d9df6ec",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, declarations, universes, edge cases, docstrings, and verbatim signature. Per-file scompile.py reproduction passed cleanly; no fixes needed."
  }
 }
