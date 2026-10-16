@@ -12,33 +12,46 @@
  ],
  "proof": [
   {
-   "text": "Choose the supplied cover and a finite free rational-cokernel basis of rank q on each member. Pull the cokernel presentation to an algebraic closure of each residue field; inverse image preserves the presentation.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Use exact final-object evaluation over the algebraically closed field. Identify the coefficient ring with E and the evaluated map with the pointwise continuous coefficient matrix via the canonical chart. The evaluated target and cokernel have dimensions t and q.",
+   "text": "Choose the supplied cover and a basis of rank q for the rational cokernel on each member. Obtain the coefficient-transport functor, its regular-module comparison, and its free-cokernel comparison.",
    "uses": [
-    "lem-weil-pbc-geometric-field-proetale-evaluation",
-    "lem-weil-pbc-continuous-coefficient-realizations"
+    "lem-weil-pbc-integral-matrix-coefficient-transport"
    ],
    "elementary": false
   },
   {
-   "text": "Rank-nullity gives matrix rank t-q at every point of the member. The scalar inclusion carries each integral entry to its E-valued entry. Empty members and zero ranks require no extra assumptions.",
-   "uses": [],
+   "text": "At each point choose an algebraic closure of its residue field. Lift E to ULift E in the scheme universe, apply compatible geometric-field evaluation, then restrict scalars back along the lift ring equivalence. Transport along the explicit pointwise continuous-function ring isomorphism. The resulting functor is additive, preserves finite colimits, sends the regular continuous coefficient module to E, and evaluates every regular endomorphism at the chosen point.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-presentation-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose coefficient transport with evaluation. Use the existing, universe-generalized finiteFreeEvaluationCoords and finiteFreeEvaluationCoords_matrix API in the corank module. The existing matrix_coefficient_pullback theorem identifies each integral pullback coefficient with the original coefficient at the image point.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-presentation-corank",
+    "lem-weil-pbc-integral-matrix-functions-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Preservation of cokernels and the transported free cokernel basis give cokernel dimension q. Use the existing, universe-generalized finrank_cokernel_of_matrix lemma in the corank module to obtain t minus matrix rank equals q. Since matrix rank is at most t, this determines the rank uniquely at every point on the cover member. Zero ranks and empty members need no extra hypotheses.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-presentation-corank"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-continuous-coefficient-realizations",
-  "lem-weil-pbc-geometric-field-proetale-evaluation"
+  "lem-weil-pbc-condensed-field-presentation-corank",
+  "lem-weil-pbc-condensed-field-presentation-evaluation",
+  "lem-weil-pbc-integral-matrix-coefficient-transport",
+  "lem-weil-pbc-integral-matrix-functions-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Section 6.8, continuous coefficient framework; analytic matrix-chart reduction",
-  "note": "The matrix argument is an agent reduction, not a matrix argument stated in Lemma 6.8.7."
+  "place": "Section 6.8, continuous coefficient framework, and geometric-field evaluation; scalar coefficient transport followed by ordinary finite-dimensional rank-nullity",
+  "note": "E4 proves the evaluation and linear-algebra part, including the universe lift for the small coefficient field, and proves the coefficient-transport theorem in the same delivery. Existing coordinate, cokernel-dimension and matrix-pullback lemmas are reused, with their original APIs generalized or exposed in place. No local sorry remains; the original target statement is unchanged."
  },
  "mathlib_searches": [
   {
@@ -112,11 +125,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-35556",
-  "group": "C1",
+  "reviewer": "X-66bd4",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261016T064221-L-581921",
+  "landing": "20261016T093726-L-2050747",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, definitions, proofs and residual statements against the packet, original library, DAG nodes and change record; compiled all delivery modules and both direct importers."
+  "note": "independent Codex review: Matched delivered Lean signatures, constructions and proofs against the original library, both DAG nodes, change records and report; compiled all delivered modules, originals and direct consumers."
  }
 }

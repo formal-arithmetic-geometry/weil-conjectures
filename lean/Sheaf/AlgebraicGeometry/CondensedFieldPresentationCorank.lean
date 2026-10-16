@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CondensedFieldPresentationMatrix
 import Sheaf.AlgebraicGeometry.CondensedFieldPresentationEvaluation
-import Mathlib.Algebra.Category.ModuleCat.Biproducts
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
 import Mathlib.Algebra.Category.ModuleCat.Kernels
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
@@ -21,7 +21,7 @@ Hemo--Richarz--Scholbach, Example 3.1.
 
 @[expose] public section
 
-universe u v₁ w₁
+universe u v w v₁ w₁
 
 open CategoryTheory MonoidalCategory Limits
 open scoped CategoryTheory.Obj
@@ -30,13 +30,13 @@ namespace AlgebraicGeometry.ProEtale
 
 section FiniteFreeCoordinates
 
-variable {E : Type u} [Field E]
+variable {E : Type v} [Field E]
 variable {D : Type v₁} [Category.{w₁} D] [Preadditive D] [HasFiniteBiproducts D]
-variable (A : D) (F : D ⥤ ModuleCat.{u + 1} E) [F.Additive]
+variable (A : D) (F : D ⥤ ModuleCat.{w} E) [F.Additive]
 variable (e : F.obj A ≃ₗ[E] E)
 
 /-- Coordinates obtained from the biproduct comparison and the regular-module coordinates. -/
-@[irreducible] private noncomputable def finiteFreeEvaluationCoords (k : ℕ) :
+@[irreducible] noncomputable def finiteFreeEvaluationCoords (k : ℕ) :
     F.obj (⨁ fun _ : Fin k ↦ A) ≃ₗ[E] (Fin k → E) :=
   ((F.mapBiproduct (fun _ : Fin k ↦ A)).toLinearEquiv.trans
     (ModuleCat.biproductIsoPi (fun _ : Fin k ↦ F.obj A)).toLinearEquiv).trans
@@ -73,7 +73,7 @@ private lemma finiteFreeEvaluationCoords_symm_single (k : ℕ) (j : Fin k) (x : 
     simp
   · simp [h]
 
-private lemma finiteFreeEvaluationCoords_matrix (m n : ℕ)
+lemma finiteFreeEvaluationCoords_matrix (m n : ℕ)
     (f : (⨁ fun _ : Fin m ↦ A) ⟶ ⨁ fun _ : Fin n ↦ A)
     (M : Matrix (Fin n) (Fin m) E)
     (h : ∀ i j, e (F.map (biproduct.ι _ j ≫ f ≫ biproduct.π _ i) (e.symm 1)) =
@@ -92,12 +92,12 @@ private lemma finiteFreeEvaluationCoords_matrix (m n : ℕ)
 
 end FiniteFreeCoordinates
 
-private lemma finrank_cokernel_of_matrix
-    {E : Type u} [Field E] {A B : ModuleCat.{u + 1} E}
+lemma finrank_cokernel_of_matrix
+    {E : Type v} [Field E] {A B : ModuleCat.{w} E}
     {m n : ℕ} (a : A ≃ₗ[E] (Fin m → E)) (b : B ≃ₗ[E] (Fin n → E))
     (f : A ⟶ B) (M : Matrix (Fin n) (Fin m) E)
     (hf : b.toLinearMap ∘ₗ f.hom ∘ₗ a.symm.toLinearMap = M.mulVecLin) :
-    Module.finrank E (cokernel f : ModuleCat.{u + 1} E) = n - M.rank := by
+    Module.finrank E (cokernel f : ModuleCat.{w} E) = n - M.rank := by
   have : Module.Finite E B := Module.Finite.of_injective b.toLinearMap b.injective
   have hr : M.rank = Module.finrank E (LinearMap.range f.hom) := by
     change Module.finrank E (LinearMap.range M.mulVecLin) = _
@@ -105,7 +105,7 @@ private lemma finrank_cokernel_of_matrix
       LinearMap.range_eq_top.2 a.symm.surjective, Submodule.map_top]
     exact b.finrank_map_eq _
   calc
-    Module.finrank E (cokernel f : ModuleCat.{u + 1} E) =
+    Module.finrank E (cokernel f : ModuleCat.{w} E) =
         Module.finrank E (B ⧸ LinearMap.range f.hom) :=
       (ModuleCat.cokernelIsoRangeQuotient f).toLinearEquiv.finrank_eq
     _ = Module.finrank E B - Module.finrank E (LinearMap.range f.hom) :=

@@ -57,7 +57,7 @@ private theorem pulled_matrix_entry (ℓ : ℕ) [Fact ℓ.Prime]
     Functor.map_comp]
   rw [reassoc_of% hπ]
 
-private theorem matrix_coefficient_pullback (ℓ : ℕ) [Fact ℓ.Prime]
+theorem matrix_coefficient_pullback (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     {X Y : Scheme.{u}} (f : Y ⟶ X) {n t : ℕ}
     (a : Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) n ⟶

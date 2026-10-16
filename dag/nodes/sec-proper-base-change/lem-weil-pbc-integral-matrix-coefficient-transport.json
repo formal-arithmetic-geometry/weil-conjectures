@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-integral-matrix-coefficient-transport",
+ "kind": "statement",
+ "title": "Scalar extension and inverse image transport integral regular coefficients",
+ "statement": "Let E be a normed Q_l-algebra which is a field and g:Y→X a morphism of schemes. Put R=O_E,X and let A be the abelian sheaf underlying continuous E-valued functions on Y. There is an additive, finite-colimit-preserving functor from internal R-modules to internal A-modules, with a specified isomorphism from its value on the regular R-module to the regular A-module, such that the conjugated image of each regular endomorphism has at y the E-valued integral coefficient of that endomorphism at g(y). Moreover, any rank-q finite-free trivialization of the rationalized, pulled-back cokernel of an integral finite-free matrix induces a rank-q finite-free trivialization of its image under this functor. Coefficients and matrices use [def-weil-pbc-integral-matrix-analytic-data].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, continuous integral coefficients and scalar extension; the functor and coefficient comparison are an agent reduction of that framework."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-matrix-analytic-data"
+ ],
+ "proof": [
+  {
+   "text": "E is ultrametric as a normed Q_l-algebra, hence totally disconnected. The comparison from g*(E_X) to continuous E-valued functions on Y is therefore an isomorphism of monoids. Compose scalar extension R→E_X, inverse image g*, and restriction along the inverse comparison. All three functors are additive and preserve finite colimits.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing Mod.regularExtensionIso for scalar extension of the regular module. Its hom is the extension of the coefficient map; the scalar-extension unit composed with it is that coefficient map. Naturality of the adjunction unit gives the commuting square for each conjugated rational regular endomorphism. Combine the regular comparison with the canonical regular-module comparisons for monoidal inverse image and restriction of scalars.",
+   "uses": [
+    "lem-weil-pbc-regular-extension-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse conjugated_morphism_square and continuous_function_unit_naturality from the existing integral regular-coefficient module. Naturality of the canonical charts in the scalar inclusion identifies the coefficient of the conjugated rational endomorphism with the E-valued integral coefficient. Scheme naturality of the charts then identifies its inverse-image coefficient at y with this coefficient at g(y). Apply this identity to an abstract transport functor and regular isomorphism to avoid kernel conversion through the concrete inverse-image construction.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-weil-pbc-continuous-chart-scheme-naturality",
+    "lem-weil-pbc-integral-regular-coefficient-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply restriction along the inverse coefficient comparison to the given free-cokernel trivialization. Its biproduct comparison and regular-module comparison identify the resulting module with A^q. This includes q=0 and empty schemes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-chart-scheme-naturality",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-integral-regular-coefficient-pullback",
+  "lem-weil-pbc-regular-extension-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, coefficient realization and scalar-extension framework",
+  "note": "E4 proves the entire scalar-extension, inverse-image and coefficient comparison. The biproduct transport calculation is proved for an abstract monoidal functor, and the coefficient identity is applied to the abstract resulting transport, avoiding costly conversion through concrete inverse image. No sorry remains and no geometric evaluation, matrix rank or cover constancy is asserted here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars of a regular internal module is the regular module and commutes with continuous coefficient realization",
+   "date": "2026-10-16",
+   "results": "Eight hits, including ModuleCat.ExtendScalars.obj′ and ModuleCat.extendRestrictScalarsAdj. These concern ordinary modules; none identifies the internal-module scalar and scheme coefficient comparisons here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension and inverse image of internal modules preserve the regular module and continuous coefficients",
+   "date": "2026-10-16",
+   "results": "Eight hits, including IsModuleTopology.isoₛₗ and ContinuousLinearEquiv.submoduleMap; these concern ordinary topological modules, not the internal Mod category and scheme coefficient charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "Mod.regular",
+   "date": "2026-10-16",
+   "results": "Zero hits; the search service reported unknown identifier Mod.regular. Local rg and the imported source expose Mod.regular and the scalar-extension adjunction, but not this coefficient-transport theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*regular|regular.*extendScalars",
+   "date": "2026-10-16",
+   "results": "No Mathlib hits. Local rg in WeilConjectures finds scalar-extension tensor comparisons and private regular comparisons, but no integral coefficient-transport interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor from internal modules induced by scalar extension and monoidal inverse image preserves the regular module and its scalar endomorphisms",
+   "date": "2026-10-16",
+   "results": "Second reading: eight hits, including CategoryTheory.Mod_.scalarRestriction and ModuleCat.extendScalars. These provide generic restriction or ordinary scalar extension, not the combined internal coefficient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapMod, Mod.regular",
+   "date": "2026-10-16",
+   "results": "Second reading: no hits; service does not know Functor.mapMod. Local library search finds private mapRegularIso, mapFiniteFreeIso and extendScalarsRegularIso, but no theorem supplying the combined scalar-and-scheme coefficient equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralMatrixPointwiseRank",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Scalar coefficient transport in the pointwise-rank reduction",
+   "via": [
+    "lem-weil-pbc-integral-matrix-pointwise-rank",
+    "lem-weil-pbc-integral-matrix-analytic-cover",
+    "lem-weil-pbc-integral-matrix-pivot-cover",
+    "lem-weil-pbc-integral-constructible-kernels",
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralMatrixCoefficientTransport",
+  "file": "lean/Sheaf/Paper/IntegralMatrixCoefficientTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.nonempty_integralMatrixCoefficientTransport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralMatrixCoefficientTransport",
+   "AlgebraicGeometry.ProEtale.CondensedRing.nonempty_integralMatrixCoefficientTransport"
+  ],
+  "statement": "theorem nonempty_integralMatrixCoefficientTransport (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    {X Y : Scheme.{u}} (g : Y ⟶ X) : Nonempty (IntegralMatrixCoefficientTransport ℓ E g)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-66bd4",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T093726-L-2050747",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-66bd4",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T093726-L-2050747",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, constructions and proofs against the original library, both DAG nodes, change records and report; compiled all delivered modules, originals and direct consumers."
+ }
+}

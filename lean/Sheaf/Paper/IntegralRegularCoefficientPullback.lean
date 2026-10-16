@@ -78,7 +78,7 @@ private theorem regular_pullback_naturality (ℓ : ℕ) [Fact ℓ.Prime]
     Category.assoc] using congrArg (fun h ↦ h ≫
       (ProEtale.lowerStar Ab.{u + 1} f).map α) (adj.unit.naturality p.hom)
 
-private theorem conjugated_morphism_square
+theorem conjugated_morphism_square
     {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
     (G : C ⥤ D) {A B : C} {R S : D}
     (eX : R ⟶ S) [IsIso eX] (eY : A ⟶ B) [IsIso eY]
@@ -99,7 +99,7 @@ private theorem conjugated_morphism_square
       simp only [Category.assoc, IsIso.hom_inv_id_assoc]
       rw [← hs]
 
-private theorem continuous_function_unit_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
+theorem continuous_function_unit_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
     (O : Type) [TopologicalSpace O] [Ring O] [IsTopologicalRing O]
     (p : (sheafCompose (Scheme.ProEt.topology X)
       (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (continuousMapRingSheaf X O) ⟶
