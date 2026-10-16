@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.RingTheory.CohenRing
+public import WeilConjectures.RingTheory.CohenRing
 public import Sheaf.RingTheory.FormallySmoothAdic
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 import Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic

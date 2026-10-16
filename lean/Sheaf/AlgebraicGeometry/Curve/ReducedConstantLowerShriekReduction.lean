@@ -9,11 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
-import Sheaf.AlgebraicGeometry.ReducedCurveNormalization
+import WeilConjectures.AlgebraicGeometry.ReducedCurveNormalization
 import Sheaf.AlgebraicGeometry.Curve.SmoothConstantLowerShriekLocalization
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenAssertions
 import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardAssertions
-import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 

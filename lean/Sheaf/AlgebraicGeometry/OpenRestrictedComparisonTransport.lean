@@ -72,13 +72,13 @@ theorem exists_open_restricted_comparison_transport
     ∃ η : H ≅ derivedPullback (pullback.fst g' U.ι) ⋙ HU,
       ∀ (K : schemeDerivedCategory X)
         (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-        (hP : P.IsKFlat)
+        (hP : P.IsAcyclicTensorKFlat)
         (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
         (eP : DerivedCategory.Q.obj P ≅ K),
       let Q : CochainComplex
           (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=
         ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P
-      ∃ (hQ : Q.IsKFlat) (hcQ : IsIso ((counit (pullback.snd g' U.ι)).app
+      ∃ (hQ : Q.IsAcyclicTensorKFlat) (hcQ : IsIso ((counit (pullback.snd g' U.ι)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))
         (eQ : DerivedCategory.Q.obj Q ≅ (derivedPullback U.ι).obj K),
       let a := F.map (comparisonIntoPullback f f' g g' sq

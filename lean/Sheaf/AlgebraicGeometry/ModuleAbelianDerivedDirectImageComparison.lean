@@ -15,10 +15,10 @@ import Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
 import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
 import Sheaf.CategoryTheory.InjectiveModulePresheaf
 import Mathlib.Algebra.Homology.ShortComplex.Ab
-import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
-import Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison
-import Sheaf.Paper.HigherDirectImageSheafifiedPresheaf
-import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
+import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
+import WeilConjectures.AlgebraicGeometry.EtaleSiteCechComplexComparison
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageSheafifiedPresheaf
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison
 
 /-! # Canonical derived direct image comparison for module coefficients
 
@@ -172,7 +172,7 @@ theorem isIso_moduleAbelianDerivedLowerStarComparison
     (moduleAbelianLowerStarIso Λ f)
   intro I hI n
   let G := (moduleAbelianForget Λ X).obj I
-  obtain ⟨c⟩ := higherDirectImageSheafifiedPresheaf f G (n + 1)
+  let c := higherDirectImageSheafifiedPresheaf f G (n + 1)
   have hz : IsZero ((presheafToSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       ((MorphismProperty.Over.pullback @Etale ⊤ f).op ⋙
         { obj := fun W ↦

@@ -136,8 +136,8 @@ theorem exists_local_kflat_tensor_roof
   have : QuasiIso r := hr
   -- Tensor pullback preserves these maps; the over-site equivalence is exact.
   have hpres {A B : CochainComplex U.toScheme.Modules ℤ} (c : A ⟶ B)
-      (hA : CochainComplex.IsKFlat (R := U.toScheme.sheaf) A)
-      (hB : CochainComplex.IsKFlat (R := U.toScheme.sheaf) B) (hc : QuasiIso c) :
+      (hA : CochainComplex.IsAcyclicTensorKFlat (R := U.toScheme.sheaf) A)
+      (hB : CochainComplex.IsAcyclicTensorKFlat (R := U.toScheme.sheaf) B) (hc : QuasiIso c) :
       QuasiIso (H.map c) := by
     have := tensorPullback_quasiIso_of_isKFlat g c hA hB hc
     change QuasiIso ((E.inverse.mapHomologicalComplex (.up ℤ)).map

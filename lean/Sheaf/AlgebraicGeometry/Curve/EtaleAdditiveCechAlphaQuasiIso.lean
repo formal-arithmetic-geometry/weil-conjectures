@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
 import Sheaf.AlgebraicGeometry.EtaleOpenCechInjectiveAugmentation
 import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
-import Sheaf.Paper.ZariskiEtaleCore
+import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore
 
 /-! # Global restriction augmentation quasi-isomorphism
 Source: Stacks Project, Tag 01EQ, Lemma 20.11.2. -/

@@ -3,7 +3,7 @@ module
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
-public import Sheaf.FieldTheory.SeparableExtension
+public import WeilConjectures.FieldTheory.SeparableExtension
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.RingTheory.RegularLocalFibreFinrankComparison
 import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 import Sheaf.AlgebraicGeometry.FinitePushforwardConstantClosedEffacement

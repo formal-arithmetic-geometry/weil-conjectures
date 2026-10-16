@@ -77,7 +77,7 @@ theorem derivedChangeOfRings
         E.map a = eqToHom (h M) ≫ changeOfRingsHom.{u, u, u} φ M a ≫ eqToHom (h N).symm)
       (_ : E.Additive),
       (∀ {P Q : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ} (α : P ⟶ Q),
-        P.IsKFlat → Q.IsKFlat → QuasiIso α →
+        P.IsAcyclicTensorKFlat → Q.IsAcyclicTensorKFlat → QuasiIso α →
           QuasiIso ((E.mapHomologicalComplex (ComplexShape.up ℤ)).map α)) ∧
       (E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙
           DerivedCategory.Qh).HasPointwiseLeftDerivedFunctor
@@ -89,7 +89,7 @@ theorem derivedChangeOfRings
         LF.IsLeftDerivedFunctor ε
             (HomotopyCategory.quasiIso (SheafOfModules.{u} (𝓡 O)) (ComplexShape.up ℤ)) ∧
           (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧
-          ∀ P : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ, P.IsKFlat →
+          ∀ P : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ, P.IsAcyclicTensorKFlat →
             IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
   have hscalar (U : Cᵒᵖ) : (ModuleCat.extendScalars (φ.hom.app U).hom).Additive :=
     (ModuleCat.extendRestrictScalarsAdj (φ.hom.app U).hom).left_adjoint_additive
@@ -125,7 +125,7 @@ theorem derivedChangeOfRings
   · intro M N a
     simp [E, E₀, changeOfRingsHom]
   · have hinv : ∀ {P Q : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ} (α : P ⟶ Q),
-        P.IsKFlat → Q.IsKFlat → QuasiIso α →
+        P.IsAcyclicTensorKFlat → Q.IsAcyclicTensorKFlat → QuasiIso α →
           QuasiIso ((E.mapHomologicalComplex (ComplexShape.up ℤ)).map α) :=
       changeOfRings_kFlat_quasiIso φ E (fun _ ↦ rfl)
         (by intro M N a; simp [E, E₀, changeOfRingsHom])
@@ -133,7 +133,7 @@ theorem derivedChangeOfRings
     let F := E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh
     let S : Set (HomotopyCategory (SheafOfModules.{u} (𝓡 O)) (ComplexShape.up ℤ)) :=
       { X | ∃ P : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ,
-          P.IsKFlat ∧ (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P = X }
+          P.IsAcyclicTensorKFlat ∧ (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P = X }
     have hres : ∀ X : HomotopyCategory (SheafOfModules.{u} (𝓡 O)) (ComplexShape.up ℤ),
         ∃ (X' : HomotopyCategory (SheafOfModules.{u} (𝓡 O)) (ComplexShape.up ℤ))
           (s : X' ⟶ X), X' ∈ S ∧ HomotopyCategory.quasiIso _ _ s := by

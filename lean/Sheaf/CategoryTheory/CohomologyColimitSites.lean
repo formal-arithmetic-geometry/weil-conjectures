@@ -5,7 +5,7 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.CategoryTheory.ColimitSites
+public import WeilConjectures.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.ConcreteCategory.EpiMono

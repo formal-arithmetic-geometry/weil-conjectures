@@ -151,7 +151,7 @@ open MonoidalCategory in
 private theorem tensor_exactAt_of_vanishes (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (L : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (hL : CochainComplex.IsKFlat (R := Y.sheaf) L)
+    (hL : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) L)
     (E : schemeDerivedCategory Y) (e : DerivedCategory.Q.obj L ≅ E)
     (G : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (i : ℤ)
     (h : schemeDerivedTensorCohomologyVanishes Y E G i) :

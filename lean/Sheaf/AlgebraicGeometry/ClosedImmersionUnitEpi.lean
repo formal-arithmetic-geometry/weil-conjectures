@@ -3,7 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
 import Mathlib.RingTheory.TensorProduct.Basic
 

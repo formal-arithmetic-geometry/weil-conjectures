@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.EtaleMayerVietorisConnectingPullback
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 /-! # Joint kernel of restrictions in a principal two-open cover
 

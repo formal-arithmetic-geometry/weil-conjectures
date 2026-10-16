@@ -60,7 +60,7 @@ theorem schemeDerivedTensorCohomologyVanishes_of_upper_bound
     ⟨K, (CochainComplex.isStrictlyLE_iff K b).1 hK⟩
   let P := Q.obj K'
   have hP := hQ K'
-  have hflat : CochainComplex.IsKFlat (R := X.sheaf) P :=
+  have hflat : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P :=
     CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace X.toRingedSpace P
       ⟨b, hP.2.1⟩ hP.1
   have : QuasiIso (ε.app K') := hP.2.2.2

@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.StrictHenselizationAbelianStalkExchangeLocalization
-import Sheaf.AlgebraicGeometry.StrictLocalAbelianTotalExchange
+import WeilConjectures.AlgebraicGeometry.StrictLocalAbelianTotalExchange
 
 /-! # Original abelian stalk exchange on total strict-local projective lines
 

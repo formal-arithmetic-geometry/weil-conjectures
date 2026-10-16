@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.ResolutionSectionClassZeroAugmentation
 import Sheaf.AlgebraicGeometry.TensorUnitOpenDegreeZero
 import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.Paper.HigherDirectImagePresheaf
 import Sheaf.Topology.PresheafModuleStalkFunctor
@@ -203,9 +203,9 @@ theorem formalFunctions_degreeZero_augmented_sections {X Y : Scheme.{u}}
         (homOfLE hV).op
           ((((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction
             (formalFibreι f y n))).unit.app F).val.app (op (f ⁻¹ᵁ V))).hom t)) := by
-  let : EnoughInjectives X.Modules := Scheme.Modules.enoughInjectives X
+  let : EnoughInjectives X.Modules := Scheme.Modules.enoughInjectives (X := X)
   let : EnoughInjectives (formalFibre f y n).Modules :=
-    Scheme.Modules.enoughInjectives (formalFibre f y n)
+    Scheme.Modules.enoughInjectives (X := (formalFibre f y n))
   have I := injectiveResolution F
   have J := injectiveResolution ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F)
   obtain ⟨D⟩ := Scheme.Modules.openChoices_nonempty f (formalFibreBaseMap Y y n) F I J V

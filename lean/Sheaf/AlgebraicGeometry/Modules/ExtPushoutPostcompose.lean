@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.CategoryTheory.PushoutShortExactSequence
+public import WeilConjectures.CategoryTheory.PushoutShortExactSequence
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-!

@@ -75,7 +75,7 @@ by K-flatness, so the total tensor of the coproduct is acyclic. -/
 theorem isKFlat_coproduct_nat
     (K : ℕ → CochainComplex
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
-    (hK : ∀ n : ℕ, (K n).IsKFlat) : (∐ K).IsKFlat := by
+    (hK : ∀ n : ℕ, (K n).IsAcyclicTensorKFlat) : (∐ K).IsAcyclicTensorKFlat := by
   let := SheafOfModules.monoidalCategory R
   let := (SheafOfModules.tensorClosed R).2.1.some
   let := (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions J R).1
@@ -98,8 +98,8 @@ tensor-triangle two-out-of-three property makes the third acyclic as well. -/
 theorem isKFlat_mappingCone
     {K₁ K₂ : CochainComplex
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
-    (f : K₁ ⟶ K₂) (h₁ : K₁.IsKFlat) (h₂ : K₂.IsKFlat) :
-    (mappingCone f).IsKFlat := by
+    (f : K₁ ⟶ K₂) (h₁ : K₁.IsAcyclicTensorKFlat) (h₂ : K₂.IsAcyclicTensorKFlat) :
+    (mappingCone f).IsAcyclicTensorKFlat := by
   let := SheafOfModules.monoidalCategory R
   intro A hA
   exact (SheafOfModules.tensor_mappingCone_two_out_of_three R A K₁ K₂ f hA

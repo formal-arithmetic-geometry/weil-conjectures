@@ -107,8 +107,8 @@
  "unit": "sk-def-exchange",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleAbelianDirectImageInternal",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAbelianDirectImageInternal.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleAbelianDirectImageInternal",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleAbelianDirectImageInternal.lean",
   "declaration": "AlgebraicGeometry.etaleAbelianDirectImageInternal",
   "statement": "theorem etaleAbelianDirectImageInternal (U V : Scheme.{u}) (f : U ⟶ V) :\n    let R : Sheaf U.smallEtaleTopology (Type (u + 1)) ⥤\n        Sheaf V.smallEtaleTopology (Type (u + 1)) :=\n      (MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous\n      (Type (u + 1)) (V.smallGrothendieckTopology @Etale)\n      (U.smallGrothendieckTopology @Etale)\n    letI : R.Braided := Functor.Braided.ofChosenFiniteProducts R\n    ∃ (eV : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1} ≌\n          CommGrp (Sheaf V.smallEtaleTopology (Type (u + 1))))\n      (eU : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1} ≌\n          CommGrp (Sheaf U.smallEtaleTopology (Type (u + 1))))\n      (iV : eV.functor ⋙ CommGrp.forget _ ≅\n        sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology)\n      (iU : eU.functor ⋙ CommGrp.forget _ ≅\n        sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology)\n      (β : eU.functor ⋙ R.mapCommGrp ≅\n        Etale.lowerStar AddCommGrpCat.{u + 1} f ⋙ eV.functor),\n      ∀ F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1},\n        (CommGrp.forget _).map (β.hom.app F) ≫\n            iV.hom.app ((Etale.lowerStar AddCommGrpCat.{u + 1} f).obj F) =\n          R.map (iU.hom.app F)",
   "branch": "sheaf-dag",

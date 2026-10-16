@@ -116,16 +116,13 @@ lemma finrank_cokernel_of_matrix
 private lemma matrix_of_regular_endomorphisms
     (E : Type u) [NormedField E] (V : Scheme.{u})
     {R : Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}} [MonObj R]
-    (e : R ⟶ (sheafCompose (Scheme.ProEt.topology V)
-      (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj
-        (continuousCoefficientRingSheaf V E)) [IsIso e]
+    (e : R ⟶ condensedFieldContinuousCoefficientObj E V) [IsIso e]
     (F : Mod (Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}) R ⥤
       ModuleCat.{u + 1} E) [F.Additive]
     (b : F.obj (Mod.regular R) ≃ₗ[E] E) (v : V)
     (h : ∀ f : Mod.regular R ⟶ Mod.regular R,
       b (F.map f (b.symm 1)) =
-        (((inv e ≫ f.hom ≫ e).hom.app (Opposite.op (Scheme.ProEt.mk (𝟙 V))))
-          (ULift.up 1)).down v)
+        condensedFieldContinuousCoefficientMap E V (inv e ≫ f.hom ≫ e) v)
     {m n : ℕ} (f : Mod.finiteFree R m ⟶ Mod.finiteFree R n) :
     (finiteFreeEvaluationCoords (Mod.regular R) F b n).toLinearMap ∘ₗ (F.map f).hom ∘ₗ
       (finiteFreeEvaluationCoords (Mod.regular R) F b m).symm.toLinearMap =
@@ -156,15 +153,15 @@ theorem condensedField_presentation_corank_eq
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     (X : Scheme.{u})
     (P : Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
-      (condensedRingObj (Profinite.continuousCoefficientRingObj E) X))
+      (condensedRingObj (condensedFieldCoefficientRingObj E) X))
     (C : Scheme.Cover.{u} Scheme.proetalePrecoverage X)
     (n m : C.I₀ → ℕ)
     (f : ∀ i, Mod.finiteFree ((upperStar AddCommGrpCat.{u + 1} (C.f i)).obj
-      (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)) (m i) ⟶
+      (condensedRingObj (condensedFieldCoefficientRingObj E) X)) (m i) ⟶
       Mod.finiteFree ((upperStar AddCommGrpCat.{u + 1} (C.f i)).obj
-        (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)) (n i))
+        (condensedRingObj (condensedFieldCoefficientRingObj E) X)) (n i))
     (e : ∀ i, (((upperStar AddCommGrpCat.{u + 1} (C.f i)).mapMod
-      (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)).obj P) ≅ cokernel (f i))
+      (condensedRingObj (condensedFieldCoefficientRingObj E) X)).obj P) ≅ cokernel (f i))
     (i j : C.I₀) (v : C.X i) (w : C.X j) (h : C.f i v = C.f j w) :
     n i - ((continuousFieldPresentationMatrix E (C.X i)
       (condensedFieldPullbackRealization E (C.f i)) (f i)).map (fun a ↦ a v)).rank =
@@ -201,9 +198,9 @@ theorem condensedField_presentation_corank_eq
   let := hFc
   let := hGc
   let Ri := (upperStar AddCommGrpCat.{u + 1} (C.f i)).obj
-    (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)
+    (condensedRingObj (condensedFieldCoefficientRingObj E) X)
   let Rj := (upperStar AddCommGrpCat.{u + 1} (C.f j)).obj
-    (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)
+    (condensedRingObj (condensedFieldCoefficientRingObj E) X)
   let bi := finiteFreeEvaluationCoords (Mod.regular Ri) F b
   let bj := finiteFreeEvaluationCoords (Mod.regular Rj) G c
   have hbi := matrix_of_regular_endomorphisms E (C.X i)

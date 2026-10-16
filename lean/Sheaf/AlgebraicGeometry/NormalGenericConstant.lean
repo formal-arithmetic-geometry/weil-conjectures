@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Sheaf.AlgebraicGeometry.NormalScheme
 public import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.ConstructibleSheaf.FinitePushforward
-import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison
 
 /-!
 # Constant abelian sheaves at the generic point of a normal scheme

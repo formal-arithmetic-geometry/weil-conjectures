@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import Mathlib.GroupTheory.PGroup
 
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.RepresentationTheory.SylowModuleFiltration
+import WeilConjectures.RepresentationTheory.SylowModuleFiltration
 import Sheaf.FieldTheory.OpenSubgroupFixedField
 import Sheaf.AlgebraicGeometry.Curve.GenericPrimaryCoarseFiltrationCore
 import Sheaf.AlgebraicGeometry.Curve.GenericPrimaryAnnihilator

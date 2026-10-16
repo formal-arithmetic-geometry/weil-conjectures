@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.PthRootAlgebraLocal
 public import Mathlib.RingTheory.Kaehler.Basic
 
 import Sheaf.RingTheory.PthRootMonomialDimension
-import Sheaf.FieldTheory.PthRootsExtensionDegree
+import WeilConjectures.FieldTheory.PthRootsExtensionDegree
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 

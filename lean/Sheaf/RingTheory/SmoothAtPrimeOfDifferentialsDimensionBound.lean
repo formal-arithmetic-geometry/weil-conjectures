@@ -12,8 +12,8 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Sheaf.RingTheory.SingularIdeal
 import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
-import Sheaf.RingTheory.AlgClosedDifferentialFiberAtClosedPoint
-import Sheaf.Paper.SmoothAtMaximalIdeal
+import WeilConjectures.RingTheory.AlgClosedDifferentialFiberAtClosedPoint
+import WeilConjectures.AlgebraicGeometry.SmoothAtMaximalIdeal
 import Sheaf.RingTheory.ClosedPointDimensionLocalRing
 import Sheaf.RingTheory.SmoothAtPrimeFieldExtensionDescent
 

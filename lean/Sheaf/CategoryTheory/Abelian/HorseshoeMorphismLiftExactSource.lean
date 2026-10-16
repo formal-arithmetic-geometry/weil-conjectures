@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Mathlib.Tactic.Abel
-import all Sheaf.CategoryTheory.Abelian.HorseshoeDefectFactorization
+import all WeilConjectures.CategoryTheory.Abelian.HorseshoeDefectFactorization
 
 /-!
 # Horseshoe morphism lifts from exact augmented source complexes

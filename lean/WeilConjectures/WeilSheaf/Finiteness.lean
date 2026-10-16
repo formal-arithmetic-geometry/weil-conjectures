@@ -62,6 +62,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 /-- The global sections of a zero Weil sheaf vanish. -/

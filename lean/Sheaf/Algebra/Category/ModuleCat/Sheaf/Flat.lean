@@ -17,7 +17,7 @@ Source: Stacks Project, Modules on Sites, Definition 03ER, item (3)
 The tensor product is the one of `def-pur-sheaf-tensor-product`, the source's
 `SheafOfModules.monoidalCategory R` (the sheafification of the sectionwise tensor product,
 `SheafOfModules.tensorObjIsoSheafification`), on a site `C : Type u`, `Category.{u} C` in the
-universe of the rings and modules, as for the K-flat complexes (`CochainComplex.IsKFlat`).
+universe of the rings and modules, as for the K-flat complexes (`CochainComplex.IsAcyclicTensorKFlat`).
 The source's `CategoryTheory.ObjectProperty.flat` asks both `tensorLeft` and `tensorRight` to
 be exact; the node asks it of `G ↦ G ⊗ F` only.
 -/

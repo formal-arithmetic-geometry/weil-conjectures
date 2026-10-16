@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Restrict
-import Sheaf.AlgebraicGeometry.EtaleCohomologyOpenRestrictionNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyOpenRestrictionNaturality
 import Sheaf.AlgebraicGeometry.EtaleMayerVietorisConnectingPullback
 
 /-!

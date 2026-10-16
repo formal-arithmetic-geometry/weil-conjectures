@@ -5,7 +5,7 @@ Authors: SHEAF group Y2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleMayerVietorisSectionComplex
+public import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisSectionComplex
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 import Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomology
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor

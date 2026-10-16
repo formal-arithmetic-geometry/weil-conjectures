@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Ideal.Maps
-import Sheaf.Paper.FreeComplexMapsToResolution
+import WeilConjectures.AlgebraicGeometry.FreeComplexMapsToResolution
 import Sheaf.RingTheory.TorIdealConnectingFormula
 import Sheaf.RingTheory.TorIdealComparisonCompatibility
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings

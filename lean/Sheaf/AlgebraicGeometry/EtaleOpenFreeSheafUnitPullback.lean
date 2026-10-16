@@ -6,8 +6,8 @@ Authors: SHEAF group H4
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleOpenFreeSheafPullback
-import Sheaf.AlgebraicGeometry.ConstantSectionAdjunctPullback
-import Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit
+import WeilConjectures.AlgebraicGeometry.ConstantSectionAdjunctPullback
+import WeilConjectures.AlgebraicGeometry.OpenRestrictionPullbackUnit
 import all Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalWholeToOpen
 
 /-! # Pullback of the open identity generator

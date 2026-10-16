@@ -155,9 +155,9 @@
   "note": "4 steps following Stacks 07DQ: the projection matrices E_I; part (1) by adjugates (new leaf Matrix.adjugate_mul / mul_adjugate, Adjugate.lean:269/264 verified by L); det(f.1) = f^m; part (2) by Cauchy-Binet (new unsplit node, Stacks item 0F0K, stated without proof there; not in Mathlib). Statement now cites def-weil-matrix and def-weil-submatrix; the determinant stays a basic notion."
  },
  "lean": {
-  "module": "Sheaf.LinearAlgebra.Matrix.LeftInverseMinors",
+  "module": "WeilConjectures.LinearAlgebra.Matrix.LeftInverseMinors",
   "declaration": "Matrix.scalar_left_inverse_maximal_minors",
-  "file": "lean/Sheaf/LinearAlgebra/Matrix/LeftInverseMinors.lean",
+  "file": "lean/WeilConjectures/LinearAlgebra/Matrix/LeftInverseMinors.lean",
   "statement": "theorem scalar_left_inverse_maximal_minors {R : Type u} [CommRing R] (n m : ℕ) (_hmn : m ≤ n) (A : Matrix (Fin n) (Fin m) R) : let J : Ideal R := Ideal.span (Set.range (fun I : {I : Finset (Fin n) // I.card = m} ↦ (A.submatrix (I.val.orderEmbOfFin I.property) id).det)) (∀ f : R, f ∈ J → ∃ B : Matrix (Fin m) (Fin n) R, B * A = f • 1) ∧ (∀ (f : R) (B : Matrix (Fin m) (Fin n) R), B * A = f • 1 → f ^ m ∈ J ∧ f ^ m = ∑ I : {I : Finset (Fin n) // I.card = m}, (B.submatrix id (I.val.orderEmbOfFin I.property)).det * (A.submatrix (I.val.orderEmbOfFin I.property) id).det)",
   "branch": "sheaf-dag",
   "by": "M1",

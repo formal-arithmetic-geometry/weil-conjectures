@@ -7,9 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.AffineLocalAcyclicOpenRestriction
+import WeilConjectures.AlgebraicGeometry.AffineLocalAcyclicOpenRestriction
 import Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleVanishing
-import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
+import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 
 /-! # Finite affine cover bound from local acyclicity
 

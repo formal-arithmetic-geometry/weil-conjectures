@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity
-import Sheaf.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
+import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 

@@ -106,8 +106,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.TailOpenCohomologyLegNaturality",
-  "file": "lean/Sheaf/AlgebraicGeometry/TailOpenCohomologyLegNaturality.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.TailOpenCohomologyLegNaturality",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/TailOpenCohomologyLegNaturality.lean",
   "declaration": "AlgebraicGeometry.Etale.tailOpenCohomologyCoconeLeg_naturality",
   "statement": "theorem tailOpenCohomologyCoconeLeg_naturality\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)\n    (L : Cocone G)\n    {X : Scheme.{u}} (i₀ : I) (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens) (n : ℕ)\n    (j k : Set.Ici i₀) (f : j ⟶ k) :\n    tailOpenCohomologyArrow D g₀ W F φ n f ≫\n      tailOpenCohomologyCoconeLeg D c g₀ W F G eG L n k =\n      tailOpenCohomologyCoconeLeg D c g₀ W F G eG L n j",
   "branch": "sheaf-dag",

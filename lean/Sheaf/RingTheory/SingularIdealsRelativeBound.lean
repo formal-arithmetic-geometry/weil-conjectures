@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.AnnihilatorElementFlatBaseChange
+import WeilConjectures.RingTheory.AnnihilatorElementFlatBaseChange
 import Mathlib.RingTheory.Smooth.Flat
 
 /-!

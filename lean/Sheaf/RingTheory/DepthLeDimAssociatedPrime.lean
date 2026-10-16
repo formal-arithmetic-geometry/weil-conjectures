@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import Sheaf.RingTheory.AssociatedPrimePowerQuotient
+import WeilConjectures.RingTheory.AssociatedPrimePowerQuotient
 import Sheaf.RingTheory.DepthQuotSMulTop
 import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors

@@ -2,7 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineBound
-import Sheaf.AlgebraicGeometry.ModuleSubobjectEqOnCover
+import WeilConjectures.AlgebraicGeometry.ModuleSubobjectEqOnCover
 
 @[expose] public section
 universe u

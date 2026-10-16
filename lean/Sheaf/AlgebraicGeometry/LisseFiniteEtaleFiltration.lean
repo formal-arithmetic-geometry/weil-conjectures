@@ -14,7 +14,7 @@ import Sheaf.Paper.GaloisLisseRepresentations
 import Sheaf.AlgebraicGeometry.FundamentalGroup.OpenSubgroups
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
 import Sheaf.RepresentationTheory.PrimaryPGroupFiltration
-import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceDegree
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.Affine

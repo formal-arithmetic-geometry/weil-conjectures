@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.LinearAlgebra.TensorProduct.Map
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineChartUnit
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineChartUnit
 
 /-!
 # Bijectivity of the affine tensor-sections map

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
-import Sheaf.Paper.DirectedColimitBaseChangeElementwise
+import WeilConjectures.AlgebraicGeometry.DirectedColimitBaseChangeElementwise
 
 /-!
 # Eventual vanishing of finitely many tensor elements

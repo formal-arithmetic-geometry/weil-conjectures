@@ -12,7 +12,7 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.Algebra.Category.Grp.Limits
 import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsGeometry
 import Sheaf.AlgebraicGeometry.ZeroDimensionalSingletonNeighbourhoods
-import Sheaf.AlgebraicGeometry.AbelianStrictlyHenselianOpenGerm
+import WeilConjectures.AlgebraicGeometry.AbelianStrictlyHenselianOpenGerm
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 
 /-!

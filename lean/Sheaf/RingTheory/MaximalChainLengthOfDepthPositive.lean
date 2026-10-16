@@ -8,7 +8,7 @@ public import Mathlib.Order.RelSeries
 public import Sheaf.RingTheory.Depth
 
 import Sheaf.RingTheory.AssociatedPrimeMinimalOfDepth
-import Sheaf.RingTheory.AssociatedPrimePowerQuotient
+import WeilConjectures.RingTheory.AssociatedPrimePowerQuotient
 import Sheaf.RingTheory.DepthQuotientNonzerodivisor
 import Sheaf.RingTheory.IsRegularOfDimensionDrop
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian

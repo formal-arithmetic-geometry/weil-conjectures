@@ -12,10 +12,10 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.RepresentationTheory.SylowModuleFiltration
+import WeilConjectures.RepresentationTheory.SylowModuleFiltration
 import Sheaf.FieldTheory.OpenSubgroupFixedField
-import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
-import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTrace
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceDegree
 import WeilConjectures.SixFunctors.Finite.GlobalSections
 import WeilConjectures.SixFunctors.Finite.Exact
 import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk

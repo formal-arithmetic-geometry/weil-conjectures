@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Sheaf.AlgebraicGeometry.EventuallyAffine
+import WeilConjectures.AlgebraicGeometry.EventuallyAffine
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic

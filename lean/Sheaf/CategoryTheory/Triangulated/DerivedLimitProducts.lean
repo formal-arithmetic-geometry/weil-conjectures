@@ -5,7 +5,7 @@ public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 
 import Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsExistence
-import Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsProperties
+import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsProperties
 
 @[expose] public section
 universe t w v u

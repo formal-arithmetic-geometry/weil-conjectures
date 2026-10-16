@@ -50,8 +50,8 @@ set_option synthInstance.maxSize 1024 in
 
 private theorem kFlat_of_iso {Y : Scheme.{u}}
     {K L : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ}
-    (e : K ≅ L) (hK : CochainComplex.IsKFlat (R := Y.sheaf) K) :
-    CochainComplex.IsKFlat (R := Y.sheaf) L := by
+    (e : K ≅ L) (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K) :
+    CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) L := by
   let := SheafOfModules.monoidalCategory Y.sheaf
   let := SheafOfModules.symmetricCategory Y.sheaf
   intro F hF i
@@ -63,8 +63,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 1024 in
 
 private theorem kFlat_pullback {X Y : Scheme.{u}} (g : X ⟶ Y)
-    (K : CochainComplex Y.Modules ℤ) (hK : CochainComplex.IsKFlat (R := Y.sheaf) K) :
-    CochainComplex.IsKFlat (R := X.sheaf)
+    (K : CochainComplex Y.Modules ℤ) (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K) :
+    CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf)
       (((pullback g).mapHomologicalComplex (.up ℤ)).obj K) := by
   have : (tensorPullback g).Additive :=
     (Classical.choice (nonempty_tensorPullbackAdjunction g)).left_adjoint_additive
@@ -79,8 +79,8 @@ set_option synthInstance.maxSize 1024 in
 
 private theorem quasiIso_pullback_of_kFlat {X Y : Scheme.{u}} (g : X ⟶ Y)
     {K L : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ} (s : K ⟶ L)
-    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K)
-    (hL : CochainComplex.IsKFlat (R := Y.sheaf) L) (hs : QuasiIso s) :
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K)
+    (hL : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) L) (hs : QuasiIso s) :
     QuasiIso (((pullback g).mapHomologicalComplex (.up ℤ)).map s) := by
   have : (tensorPullback g).Additive :=
     (Classical.choice (nonempty_tensorPullbackAdjunction g)).left_adjoint_additive
@@ -131,11 +131,11 @@ theorem local_finiteFree_homology_comparison {T : Scheme.{u}} (U : T.Opens)
   have _ := he
   have : C.IsStrictlyLE (d : ℤ) := hCle
   have : P.IsStrictlyLE (d : ℤ) := hstruct.2.2.1
-  have hC : CochainComplex.IsKFlat (R := U.toScheme.sheaf) C :=
+  have hC : CochainComplex.IsAcyclicTensorKFlat (R := U.toScheme.sheaf) C :=
     CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace U.toScheme.toRingedSpace C
       ⟨d, fun n hn ↦ C.isZero_of_isStrictlyLE d n hn⟩
       (fun n ↦ isFlat_of_affineFlatOver_identity (C.X n) (hCflat n))
-  have hP : CochainComplex.IsKFlat (R := V.toScheme.sheaf) P :=
+  have hP : CochainComplex.IsAcyclicTensorKFlat (R := V.toScheme.sheaf) P :=
     CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace V.toScheme.toRingedSpace P
       ⟨d, fun n hn ↦ P.isZero_of_isStrictlyLE d n hn⟩
       (fun n ↦ flat_of_finiteFree (P.X n) (hstruct.2.2.2 n))

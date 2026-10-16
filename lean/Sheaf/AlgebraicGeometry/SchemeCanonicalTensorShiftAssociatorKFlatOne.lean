@@ -52,9 +52,9 @@ characteristic two. No cancellation of noninvertible maps is used. -/
 theorem schemeCanonicalTensorShift_associator_kFlat_one (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)
-    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+    (hT : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) T)
+    (hU : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) U) :
     letI := schemeCanonicalTensorShift X
     letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=
       fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B

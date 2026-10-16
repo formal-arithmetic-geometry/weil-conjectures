@@ -128,8 +128,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.TailOpenCohomologyArrowLaws",
-  "file": "lean/Sheaf/AlgebraicGeometry/TailOpenCohomologyArrowLaws.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.TailOpenCohomologyArrowLaws",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/TailOpenCohomologyArrowLaws.lean",
   "declaration": "AlgebraicGeometry.Etale.tailOpenCohomologyArrow_laws",
   "statement": "theorem tailOpenCohomologyArrow_laws\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    {X : Scheme.{u}} (i₀ : I) (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens) (n : ℕ) :\n    (∀ j : Set.Ici i₀, tailOpenCohomologyArrow D g₀ W F φ n (𝟙 j) = 𝟙 _) ∧\n    (∀ (j k l : Set.Ici i₀) (f : j ⟶ k) (g : k ⟶ l),\n      tailOpenCohomologyArrow D g₀ W F φ n (f ≫ g) =\n        tailOpenCohomologyArrow D g₀ W F φ n f ≫\n          tailOpenCohomologyArrow D g₀ W F φ n g)",
   "branch": "sheaf-dag",

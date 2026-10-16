@@ -5,6 +5,8 @@ Authors: SHEAF group A2
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import Sheaf.Paper.ContinuousIntegralComparisons
 
 /-! # Coherence of integral localization and the specified exchange map -/
@@ -82,23 +84,23 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))
 private lemma baseChange_adjunct
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (sq : CommSq g' f' f g) (N : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
-    (boundedConstructibleUpperStar Λ ℓ k f').map
-        ((boundedConstructibleBaseChange Λ ℓ k sq).app N) ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f').counit.app
-        ((boundedConstructibleUpperStar Λ ℓ k g').obj N) =
-    (boundedConstructiblePullbackSquareComparison Λ ℓ k sq).hom.app
-        ((boundedConstructibleLowerStar Λ ℓ k f).obj N) ≫
-      (boundedConstructibleUpperStar Λ ℓ k g').map
-        ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f).counit.app N) := by
-  exact boundedConstructibleBaseChange_adjunct Λ ℓ k sq N
+    (boundedConstructibleUpperStar Λ ℓ (f'.asOver (Spec (.of k)))).map
+        ((boundedConstructibleBaseChange Λ ℓ (sq.asOver (Spec (.of k)))).app N) ≫
+      (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (f'.asOver (Spec (.of k)))).counit.app
+        ((boundedConstructibleUpperStar Λ ℓ (g'.asOver (Spec (.of k)))).obj N) =
+    (boundedConstructiblePullbackSquareComparison Λ ℓ (sq.asOver (Spec (.of k)))).hom.app
+        ((boundedConstructibleLowerStar Λ ℓ (f.asOver (Spec (.of k)))).obj N) ≫
+      (boundedConstructibleUpperStar Λ ℓ (g'.asOver (Spec (.of k)))).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (f.asOver (Spec (.of k)))).counit.app N) := by
+  exact boundedConstructibleBaseChange_adjunct Λ ℓ (sq.asOver (Spec (.of k))) N
 
 private lemma bounded_counit_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :
-    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f).counit.app K).hom =
+    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (f.asOver (Spec (.of k)))).counit.app K).hom =
       (derivedUpperStarLowerStarAdjunction Λ f).counit.app K.obj := by
   change (ProEtale.boundedConstructible (condensedRingObj Λ X)).ι.map
-    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f).counit.app K) = _
+    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (f.asOver (Spec (.of k)))).counit.app K) = _
   rw [boundedConstructibleUpperStarLowerStarAdjunction,
     Adjunction.map_restrictFullyFaithful_counit_app]
   dsimp only [boundedConstructibleUpperStar, boundedConstructibleLowerStar,
@@ -108,16 +110,14 @@ private lemma bounded_counit_hom
     Iso.symm, Iso.refl, NatTrans.id_app]
 
 private lemma integral_push_counit (K : integralConstructible ℓ E X) :
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k f).map
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f.asOver (Spec (.of k)))).map
         (integralConstructiblePushHom ℓ E k f K) ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction
-        (Profinite.continuousMapRingObj E) ℓ k f).counit.app
+      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ (f.asOver (Spec (.of k)))).counit.app
           ((integralScalarConstructible ℓ E X).obj K) =
     (integralConstructiblePullIso ℓ E k f
-      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)).inv ≫
+      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)).inv ≫
       (integralScalarConstructible ℓ E X).map
-        ((boundedConstructibleUpperStarLowerStarAdjunction
-          (integralCoeff ℓ E) ℓ k f).counit.app K) := by
+        ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K) := by
   let : IsCommMonObj (condensedRingObj (integralCoeff ℓ E) X) :=
     ProEtale.isCommMonObj_condensedRingObj _ X
   let : IsCommMonObj (condensedRingObj (integralCoeff ℓ E) Y) :=
@@ -152,50 +152,45 @@ comparison followed by scalar extension of the integral counit. These substituti
 the displayed composite. -/
 theorem integralConstructible_exchange_source_adjunct
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
-    ((boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.continuousMapRingObj E) ℓ k f').homEquiv _ _).symm
+    ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).homEquiv _ _).symm
       (integralConstructibleSourceHom ℓ E k f g K ≫
-        (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k sq).app
+        (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).app
           ((integralScalarConstructible ℓ E X).obj K)) =
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k f').map
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).map
         (integralConstructiblePullHom ℓ E k g
-          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)) ≫
-      (boundedConstructiblePullbackSquareComparison
-        (Profinite.continuousMapRingObj E) ℓ k sq).hom.app
+          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)) ≫
+      (boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).hom.app
           ((integralScalarConstructible ℓ E Y).obj
-            ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)) ≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g').map
+            ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)) ≫
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
         (integralConstructiblePullIso ℓ E k f
-          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)).inv ≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g').map
+          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)).inv ≫
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).map
         ((integralScalarConstructible ℓ E X).map
-          ((boundedConstructibleUpperStarLowerStarAdjunction
-            (integralCoeff ℓ E) ℓ k f).counit.app K)) := by
+          ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K)) := by
   simpa only [integralConstructibleSourceHom] using source_normal_form
-    (boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.continuousMapRingObj E) ℓ k f)
-    (boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.continuousMapRingObj E) ℓ k f')
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g)
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g')
-    (boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ k sq)
-    (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k sq)
+    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ (f.asOver (Spec (.of k))))
+    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k))))
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g.asOver (Spec (.of k))))
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k))))
+    (boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k))))
+    (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k))))
     ((integralScalarConstructible ℓ E X).obj K)
     ((integralScalarConstructible ℓ E Y).obj
-      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K))
+      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))
     ((integralScalarConstructible ℓ E Y').obj
-      ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k g).obj
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)))
+      ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)))
     (integralConstructiblePullHom ℓ E k g
-      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K))
+      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K))
     (integralConstructiblePushHom ℓ E k f K)
     ((integralScalarConstructible ℓ E X).obj
-      ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k f).obj
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)))
+      ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)))
     (integralConstructiblePullIso ℓ E k f
-      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)).inv
+      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)).inv
     ((integralScalarConstructible ℓ E X).map
-      ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ k f).counit.app K))
+      ((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).counit.app K))
     (baseChange_adjunct ℓ k f g f' g' (Profinite.continuousMapRingObj E) sq _)
     (integral_push_counit ℓ E k f K)
 

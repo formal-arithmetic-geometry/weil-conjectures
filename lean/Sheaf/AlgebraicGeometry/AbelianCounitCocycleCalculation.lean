@@ -6,7 +6,7 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.AbelianCounitCocycleDefinitions
-import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 import Sheaf.AlgebraicGeometry.AbelianInjectiveCounitCocycle
 

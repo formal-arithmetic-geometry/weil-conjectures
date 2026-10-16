@@ -134,9 +134,9 @@ theorem open_localized_restriction_isKFlat
     (P : CochainComplex (SheafOfModules.{u} ((sheafCompose
       (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
-    (hP : IsKFlat (R := R) P) :
+    (hP : IsAcyclicTensorKFlat (R := R) P) :
     letI := hzero
-    IsKFlat (R := R.over U)
+    IsAcyclicTensorKFlat (R := R.over U)
       (((SheafOfModules.overFunctor.{u} ((sheafCompose
         (Opens.grothendieckTopology X)
         (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U).mapHomologicalComplex

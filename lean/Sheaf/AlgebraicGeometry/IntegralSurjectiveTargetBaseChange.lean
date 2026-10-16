@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.CumulativeUniversalBaseChangeProperty
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Integral.BaseChange
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor

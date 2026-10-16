@@ -50,19 +50,19 @@ Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
 (blueprint: def-weil-pbc-ringed-tensor-square-presentation). -/
 structure RingedTensorModel (A : RingedTensorCorner.{u, w}) where
   representative : ((ObjectProperty.ι (fun P : CochainComplex (SheafOfModules.{u} ((sheafCompose
-      A.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj A.ring)) ℤ ↦ P.IsKFlat ∧ ∀ n : ℤ, (P.X
+      A.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj A.ring)) ℤ ↦ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X
       n).IsFlat : ObjectProperty _)).prod (ObjectProperty.ι (fun P : CochainComplex
       (SheafOfModules.{u} ((sheafCompose A.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj
-      A.ring)) ℤ ↦ P.IsKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat : ObjectProperty _))) ⋙
+      A.ring)) ℤ ↦ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat : ObjectProperty _))) ⋙
     Functor.uncurry.obj
       ((@MonoidalCategory.curriedTensor (SheafOfModules.{u} ((sheafCompose A.topology (forget₂
       CommRingCat.{u} RingCat.{u})).obj A.ring)) _ (monoidalCategory A.ring)).map₂HomologicalComplex
         (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q ≅
     (((ObjectProperty.ι (fun P : CochainComplex (SheafOfModules.{u} ((sheafCompose A.topology
-      (forget₂ CommRingCat.{u} RingCat.{u})).obj A.ring)) ℤ ↦ P.IsKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat
+      (forget₂ CommRingCat.{u} RingCat.{u})).obj A.ring)) ℤ ↦ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat
       : ObjectProperty _)) ⋙ DerivedCategory.Q).prod
       ((ObjectProperty.ι (fun P : CochainComplex (SheafOfModules.{u} ((sheafCompose A.topology
-      (forget₂ CommRingCat.{u} RingCat.{u})).obj A.ring)) ℤ ↦ P.IsKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat
+      (forget₂ CommRingCat.{u} RingCat.{u})).obj A.ring)) ℤ ↦ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat
       : ObjectProperty _)) ⋙ DerivedCategory.Q)) ⋙ A.tensor
 
 /-- A ringed-topos inverse image and its total derived module pullback. All comparisons
@@ -118,9 +118,9 @@ noncomputable def RingedTensorEdge.tensorComparison
   ringedTopoiCanonicalDerivedTensorComparison e.inverse e.direct e.adjunction
     e.algebraic e.ringMap e.pullback e.object_eq e.map_eq e.left e.epsilon e.isLeftDerived
     (fun P : CochainComplex (SheafOfModules.{u} ((sheafCompose A.topology (forget₂ CommRingCat.{u}
-      RingCat.{u})).obj A.ring)) ℤ ↦ P.IsKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat : ObjectProperty _) (fun
+      RingCat.{u})).obj A.ring)) ℤ ↦ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat : ObjectProperty _) (fun
       P : CochainComplex (SheafOfModules.{u} ((sheafCompose B.topology (forget₂ CommRingCat.{u}
-      RingCat.{u})).obj B.ring)) ℤ ↦ P.IsKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat : ObjectProperty _) (fun
+      RingCat.{u})).obj B.ring)) ℤ ↦ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat : ObjectProperty _) (fun
       _ ↦ Iff.rfl) (fun _ ↦ Iff.rfl)
     A.tensor B.tensor a.representative b.representative e.ordinaryTensor
     e.pushforward e.moduleAdjunction

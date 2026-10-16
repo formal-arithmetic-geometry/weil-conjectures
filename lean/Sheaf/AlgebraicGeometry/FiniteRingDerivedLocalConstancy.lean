@@ -25,13 +25,13 @@ import Mathlib.Topology.Connected.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.ConstantEtaleSheafShortExact
+import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
 import Sheaf.AlgebraicGeometry.FiniteFreeConstantLocalLift
 import Sheaf.RingTheory.FiniteConeFreeModel
 import Sheaf.AlgebraicGeometry.ConnectiveSingleHom
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.Paper.FiniteFreeEtaleLocalActual
-import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 /-!

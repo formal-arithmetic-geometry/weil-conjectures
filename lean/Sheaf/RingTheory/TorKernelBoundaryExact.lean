@@ -4,7 +4,7 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
-import Sheaf.Paper.TorLongExactFirstVariable
+import WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 
 @[expose] public section
 

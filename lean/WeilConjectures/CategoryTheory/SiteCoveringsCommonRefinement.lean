@@ -1,9 +1,8 @@
 /-
-Copyright (c) 2026 Bin Wu. All rights reserved.
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Bin Wu
+Authors: SHEAF group F1
 -/
-
 module
 
 public import Mathlib.CategoryTheory.Sites.Hypercover.Zero
@@ -16,6 +15,8 @@ Source: Stacks Project, Sites, Lemma 7.10.5 (Tag 00W6) and its proof
 -/
 
 @[expose] public section
+
+set_option autoImplicit false
 
 universe u w w' t
 
@@ -51,7 +52,27 @@ theorem siteCoverings_common_refinement {C : Type u} [SmallCategory C]
     (∃ r : PreZeroHypercover.Hom
       { I₀ := E.I₀ × F.I₀, X := W, f := fun ij => q ij ≫ E.f ij.1 }
       F.toPreZeroHypercover, r.s₀ = _root_.Prod.snd ∧ HEq r.h₀ p) := by
-  sorry
+  let G : PreZeroHypercover U :=
+    { I₀ := E.I₀ × F.I₀
+      X := W
+      f := fun ij => q ij ≫ E.f ij.1 }
+  let e : G ≅ (E.inter F).toPreZeroHypercover :=
+    PreZeroHypercover.isoMk (Equiv.refl _) (fun ij ↦ (h ij).flip.isoPullback) (fun ij ↦ by
+      change (h ij).flip.isoPullback.hom ≫ pullback.fst (E.f ij.1) (F.f ij.2) ≫ E.f ij.1 =
+        q ij ≫ E.f ij.1
+      rw [← Category.assoc, (h ij).flip.isoPullback_hom_fst])
+  have hG : G.presieve₀ ∈ J U := by
+    exact (PreZeroHypercover.mem_iff_of_iso (K := J) e).mpr (E.inter F).mem₀
+  refine ⟨hG, ?_, ?_⟩
+  · let r : G.Hom E.toPreZeroHypercover :=
+      { s₀ := _root_.Prod.fst
+        h₀ := q }
+    exact ⟨r, rfl, HEq.rfl⟩
+  · let r : G.Hom F.toPreZeroHypercover :=
+      { s₀ := _root_.Prod.snd
+        h₀ := p
+        w₀ := fun ij ↦ (h ij).w }
+    exact ⟨r, rfl, HEq.rfl⟩
 
 /-- Any finite family of coverings of an object has a common refinement.
 Source: Stacks Project, Sites, Lemma 7.10.5 (Tag 00W6), finite iteration
@@ -69,6 +90,28 @@ theorem siteCoverings_finite_common_refinement {C : Type u} [SmallCategory C]
     [J.IsStableUnderBaseChange] [J.HasPullbacks] {U : C}
     (K : Type t) [Finite K] (E : K → ZeroHypercover.{w} J U) :
     ∃ W : ZeroHypercover.{w} J U, ∀ k : K, Nonempty (ZeroHypercover.Hom J W (E k)) := by
-  sorry
+  classical
+  induction K using Finite.induction_empty_option with
+  | @of_equiv K₁ K₂ e ih =>
+      obtain ⟨W, hW⟩ := ih (E := E ∘ e)
+      exact ⟨W, fun k ↦ by simpa using hW (e.symm k)⟩
+  | h_empty =>
+      let W : ZeroHypercover.{w} J U :=
+        ZeroHypercover.singleton (𝟙 U) (J.mem_coverings_of_isIso (𝟙 U))
+      exact ⟨W, fun k ↦ k.elim⟩
+  | @h_option K₁ _ ih =>
+      obtain ⟨W, hW⟩ := ih (E := fun k ↦ E (.some k))
+      let V := W.inter (E .none)
+      refine ⟨V, ?_⟩
+      intro k
+      cases k with
+      | none =>
+          exact ⟨PreZeroHypercover.interSnd W.toPreZeroHypercover
+            (E .none).toPreZeroHypercover⟩
+      | some k =>
+          let a : ZeroHypercover.Hom J V W :=
+            PreZeroHypercover.interFst W.toPreZeroHypercover
+              (E .none).toPreZeroHypercover
+          exact ⟨PreZeroHypercover.Hom.comp a (hW k).some⟩
 
 end CategoryTheory.Precoverage

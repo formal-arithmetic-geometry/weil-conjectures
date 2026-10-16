@@ -15,8 +15,8 @@ public import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.Flat.CategoryTheory
 import Mathlib.CategoryTheory.Abelian.Exact
 import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
-import Sheaf.Algebra.Category.ModuleCat.TorSymmetry
-import Sheaf.Paper.TorLongExactFirstVariable
+import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
+import WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 
 /-!
 # Tor as the kernel of a tensor image inclusion

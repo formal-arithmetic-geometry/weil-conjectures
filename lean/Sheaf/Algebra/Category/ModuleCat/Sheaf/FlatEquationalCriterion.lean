@@ -13,6 +13,11 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import Mathlib.LinearAlgebra.TensorProduct.Vanishing
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import Mathlib.Algebra.Homology.ExactSequence
+import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 
 /-!

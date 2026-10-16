@@ -13,10 +13,10 @@ public import Mathlib.Algebra.Ring.ULift
 
 import Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficientsForward
 import Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficientsBackward
-import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 
 /-!

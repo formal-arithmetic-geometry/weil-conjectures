@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import Sheaf.AlgebraicGeometry.EtaleInverseImageRingComparisonOperations
-import Sheaf.CategoryTheory.TransportScalarActionDiagrams
+import WeilConjectures.CategoryTheory.TransportScalarActionDiagrams
 
 /-! # Associativity and unit of the transported scalar action
 

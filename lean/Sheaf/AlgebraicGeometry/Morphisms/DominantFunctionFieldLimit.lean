@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.AlgebraicGeometry.FunctionField
-import Sheaf.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
+import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
 
 /-!
 # Function fields in a dominant affine transition limit

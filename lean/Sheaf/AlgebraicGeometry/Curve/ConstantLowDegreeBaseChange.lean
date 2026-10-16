@@ -11,8 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 
 import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 import Sheaf.AlgebraicGeometry.AlgClosedExtensionModuleSections
-import Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparisonZero
-import Sheaf.AlgebraicGeometry.KilledSheafModuleLift
+import WeilConjectures.AlgebraicGeometry.ModuleAcyclicCohomologyComparisonZero
+import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import Sheaf.AlgebraicGeometry.IsProperOrIsAffine
 import Sheaf.AlgebraicGeometry.Curve.RootTrivializationBaseChange
 import Sheaf.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility

@@ -5,6 +5,8 @@ Authors: SHEAF group A2
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import Sheaf.Paper.ContinuousIntegralComparisons
 import Sheaf.Paper.ContinuousIntegralPushComparison
 import Sheaf.Paper.ContinuousIntegralExchangeEquality
@@ -68,19 +70,18 @@ theorem continuousIntegral_exchange_square [IsProper f]
       (condensedRingObj (Profinite.continuousMapRingObj E) X) :=
       ⟨(integralScalarExtension ℓ E X).obj M.obj, hM⟩
     ∃ (s : (integralScalarExtension ℓ E Y').obj
-          (((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f ⋙
-            boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k g).obj M).obj) ≅
-        ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f ⋙
-          boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).obj N).obj)
+          (((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k))) ⋙
+            boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj M).obj) ≅
+        ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ (f.asOver (Spec (.of k))) ⋙
+          boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g.asOver (Spec (.of k)))).obj N).obj)
       (t : (integralScalarExtension ℓ E Y').obj
-          (((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k g' ⋙
-            boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f').obj M).obj) ≅
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g' ⋙
-          boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f').obj N).obj),
-      s.hom ≫ ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k
-          sq.toCommSq).app N).hom =
+          (((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k))) ⋙
+            boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f'.asOver (Spec (.of k)))).obj M).obj) ≅
+        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k))) ⋙
+          boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).obj N).obj),
+      s.hom ≫ ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app N).hom =
         (integralScalarExtension ℓ E Y').map
-          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq.toCommSq).app M).hom ≫
+          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app M).hom ≫
             t.hom := by
   have : IsProper f' := MorphismProperty.of_isPullback (P := @IsProper) sq inferInstance
   have hf : IsIso (integralConstructiblePushHom ℓ E k f M) := by
@@ -90,13 +91,13 @@ theorem continuousIntegral_exchange_square [IsProper f]
       integralScalarPushHom_isIso ℓ E f M
     exact isIso_of_reflects_iso _ ι
   have hf' : IsIso (integralConstructiblePushHom ℓ E k f'
-      ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k g').obj M)) := by
+      ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj M)) := by
     let ι := (ProEtale.boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) Y')).ι
     have : IsIso (ι.map (integralConstructiblePushHom ℓ E k f'
-        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k g').obj M))) :=
+        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj M))) :=
       integralScalarPushHom_isIso ℓ E f'
-        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k g').obj M)
+        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj M)
     exact isIso_of_reflects_iso _ ι
   have : IsIso (integralConstructibleSourceHom ℓ E k f g M) := by
     unfold integralConstructibleSourceHom integralConstructiblePullHom

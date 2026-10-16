@@ -5,7 +5,7 @@ Authors: SHEAF group S2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleCohomologyTriangleLaws
+public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyTriangleLaws
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import all Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
 import Mathlib.CategoryTheory.Presentable.Directed

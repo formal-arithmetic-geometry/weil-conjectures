@@ -5,7 +5,7 @@ Authors: SHEAF group U2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
+public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselizationCore

@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.DerivedCompleteModuleComplex
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Sheaf.RingTheory.ModuleLocalizationTowerVanishing
 
 /-!

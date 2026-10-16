@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 import Sheaf.Paper.FiniteCoproductCohomologyAssembly
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 

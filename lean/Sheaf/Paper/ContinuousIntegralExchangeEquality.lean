@@ -5,6 +5,8 @@ Authors: SHEAF group A2
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import Sheaf.Paper.ContinuousIntegralComparisons
 import Sheaf.Paper.ContinuousIntegralExchangeSourceAdjunct
 import Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct
@@ -49,13 +51,12 @@ and target adjunct calculations identify both sides with the same explicit compo
 theorem integralConstructible_exchange_equality
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
     integralConstructibleSourceHom ℓ E k f g K ≫
-        (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k sq).app
+        (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).app
           ((integralScalarConstructible ℓ E X).obj K) =
       (integralScalarConstructible ℓ E Y').map
-          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq).app K) ≫
+          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app K) ≫
         integralConstructibleTargetHom ℓ E k f' g' K := by
-  apply ((boundedConstructibleUpperStarLowerStarAdjunction
-    (Profinite.continuousMapRingObj E) ℓ k f').homEquiv _ _).symm.injective
+  apply ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).homEquiv _ _).symm.injective
   exact (integralConstructible_exchange_source_adjunct ℓ E k f g f' g' sq K).trans
     (integralConstructible_exchange_target_adjunct ℓ E k f g f' g' sq K).symm
 

@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Curve.FieldExtension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
+public import WeilConjectures.SmoothPurity.Defs
+public import WeilConjectures.PoincareDuality.Poincare
 public import Sheaf.Targets.EtaleSmooth
 public import Sheaf.Targets.EtaleSmoothRing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
@@ -17,8 +19,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 /-!
 # Library target statements
 
-Imports the modules of the six target declarations of `Challenge` (batch 1) and of the four new targets (batch 2,
-coord/new-targets.txt in ~/weil-newtargets) and nothing else; what this
+Imports the modules of the six target declarations of `Challenge` (batch 1) of the four batch-2 targets, and of smooth purity (batch 3). What this
 file reaches is what the targets need. `tools/target_types.sh check` compares their elaborated
 types with Challenge and prints their axioms. See `coord/target-migration.md`.
 -/

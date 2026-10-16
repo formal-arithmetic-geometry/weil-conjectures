@@ -10,12 +10,23 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
 public import Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import Sheaf.Paper.ProEtaleLisseFiniteModels
 import Sheaf.Paper.ProEtaleLisseFiniteModelsFromLisse
 import Sheaf.Paper.ProEtaleOriginFromFiniteModels
 import Sheaf.Paper.ProEtaleFiniteModelStalks
 import Sheaf.Paper.ProEtaleFiniteModelLocalConstancy
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.CategoryTheory.Sites.Sheafification
+import Sheaf.CategoryTheory.SiteConstantModuleIsomSheaf
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
+import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+import Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
 
 /-!
 # Lisse pro-etale module sheaves have etale origin

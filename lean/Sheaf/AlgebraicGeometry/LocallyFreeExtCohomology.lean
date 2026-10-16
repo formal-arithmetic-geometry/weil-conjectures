@@ -12,7 +12,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.ExtEvaluation
 import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.CategoryTheory.RightDerivedExactComposite
 import Sheaf.Paper.PQFCohomology
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom

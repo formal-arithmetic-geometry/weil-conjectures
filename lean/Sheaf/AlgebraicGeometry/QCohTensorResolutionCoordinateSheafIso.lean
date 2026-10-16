@@ -1,5 +1,5 @@
 module
-public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartComparisonIso
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionCoordinateChartIso
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionHomologyCoherence
 
 @[expose] public section
@@ -7,17 +7,10 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
-noncomputable local instance TensorResolutionCoordinateSheafIso_localInst1 (X : Scheme.{u}) : MonoidalCategory X.Modules :=
-  SheafOfModules.monoidalCategory X.sheaf
-local instance TensorResolutionCoordinateSheafIso_localInst2 (X : Scheme.{u}) : (curriedTensor X.Modules).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
-local instance TensorResolutionCoordinateSheafIso_localInst3 (X : Scheme.{u}) (M : X.Modules) :
-    ((curriedTensor X.Modules).obj M).PreservesZeroMorphisms :=
-  SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf M
+attribute [local instance] TensorResolutionCoordinateSheafIso_localInst1 TensorResolutionCoordinateSheafIso_localInst2 TensorResolutionCoordinateSheafIso_localInst3
 
-set_option maxHeartbeats 800000 in
 /-- Affine ordinary tensor coordinates obtained through one global second resolution. -/
 noncomputable def tensorResolutionCoordinateSheafIso
     (Y : Scheme.{u}) (M N : Y.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent]
@@ -27,8 +20,8 @@ noncomputable def tensorResolutionCoordinateSheafIso
     (P : ProjectiveResolution MA) (K F : CochainComplex Y.Modules ℤ)
     (q : K ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj M)
     (s : F ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj N)
-    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K)
-    (hF : CochainComplex.IsKFlat (R := Y.sheaf) F)
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K)
+    (hF : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) F)
     (hq : QuasiIso q) (hs : QuasiIso s) (n : ℕ) :
     tilde (R := Γ(Y, U.1))
         ((((tensorRight NA).mapHomologicalComplex (.down ℕ)).obj P.complex).homology n) ≅
@@ -36,8 +29,7 @@ noncomputable def tensorResolutionCoordinateSheafIso
         ((CochainComplex.mapBifunctor K
           ((CochainComplex.singleFunctor Y.Modules 0).obj N)
           (curriedTensor Y.Modules)).homology (-(n : ℤ))) := by
-  exact tensorResolutionChartHomologyIso N U MA NA sN P n ≪≫
-    tensorResolutionChartComparisonIso Y M N U MA sM P K F q s hK hF hq hs (-(n : ℤ)) ≪≫
+  exact tensorResolutionCoordinateChartIso Y M N U MA NA sM sN P K F q s hK hF hq hs n ≪≫
     (tensorResolutionNormalizedRestrictHomologyIso U.2.fromSpec K
       ((CochainComplex.singleFunctor Y.Modules 0).obj N) (-(n : ℤ))).symm
 

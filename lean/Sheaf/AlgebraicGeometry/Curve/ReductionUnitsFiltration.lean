@@ -10,7 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerQuotient
 import Sheaf.AlgebraicGeometry.Curve.ReductionNilradicalNilpotence
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance

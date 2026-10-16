@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.EtaleSectionProperSupport
 public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.EtaleCohomology.EtaleSectionZeroOpen
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Compactification.Defs
@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
 import Sheaf.AlgebraicGeometry.ClosedProperSupportLocality
 import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
 import Sheaf.AlgebraicGeometry.OpenImmersionExtensionZeroBaseChange
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-! # Geometric stalks of a proper-support subsheaf

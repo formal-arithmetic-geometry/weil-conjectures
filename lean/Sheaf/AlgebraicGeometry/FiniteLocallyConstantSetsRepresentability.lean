@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsLocalModels
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSetsLocalModels
 import Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsDescent
 
 /-! # Representability of finite locally constant sheaves of sets

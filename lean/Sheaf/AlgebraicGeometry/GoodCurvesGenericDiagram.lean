@@ -19,13 +19,13 @@ public import Sheaf.AlgebraicGeometry.Thickening
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Sheaf.FieldTheory.PurelyInseparableDegreePIntermediate
+import WeilConjectures.FieldTheory.PurelyInseparableDegreePIntermediate
 import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.DescendFinite
-import Sheaf.AlgebraicGeometry.DescendSurjective
+import WeilConjectures.AlgebraicGeometry.DescendSurjective
 import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
 import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.AlgebraicGeometry.DescendClosedImmersion

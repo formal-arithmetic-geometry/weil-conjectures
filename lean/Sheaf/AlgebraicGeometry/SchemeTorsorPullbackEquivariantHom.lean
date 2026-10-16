@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
-import Sheaf.AlgebraicGeometry.EtaleConstantSheafPullbackUnitContinuousMap
+import WeilConjectures.AlgebraicGeometry.EtaleConstantSheafPullbackUnitContinuousMap
 
 
 /-!

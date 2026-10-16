@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import Sheaf.AlgebraicGeometry.TruncatedHigherImageQuasiCoherent
-import Sheaf.AlgebraicGeometry.QuasiCoherentModuleColimitEvaluation
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentModuleColimitEvaluation
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Affine evaluation of coproducts of lower-truncated higher images

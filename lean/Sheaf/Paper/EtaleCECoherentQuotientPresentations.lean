@@ -10,7 +10,7 @@ public import Sheaf.CategoryTheory.FilteredComplexQuotientCoherence
 import Sheaf.CategoryTheory.CartanEilenbergExists
 import Sheaf.CategoryTheory.HypercohomologyFirstPage
 import Sheaf.CategoryTheory.FilteredComplexPageHomology
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.CategoryTheory.FilteredComplexPageDifferential
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 

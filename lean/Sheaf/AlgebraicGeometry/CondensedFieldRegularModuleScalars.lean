@@ -82,26 +82,26 @@ theorem condensedField_geometric_evaluation_scalars
     (X V : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (p : V ⟶ X) (a : Spec (.of Ω) ⟶ V) (z : Spec (.of Ω))
     (H : Mod (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) AddCommGrpCat.{u + 1})
-      (condensedRingObj (Profinite.continuousCoefficientRingObj E) (Spec (.of Ω))) ⥤
+      (condensedRingObj (condensedFieldCoefficientRingObj E) (Spec (.of Ω))) ⥤
       ModuleCat.{u + 1} E)
     (hH : CondensedFieldPointScalarProperty E Ω z H) :
-    let R := condensedRingObj (Profinite.continuousCoefficientRingObj E) X
+    let R := condensedRingObj (condensedFieldCoefficientRingObj E) X
     let Ri := (upperStar AddCommGrpCat.{u + 1} p).obj R
     let F :=
-      condensedFieldGeometricModulePullback (Profinite.continuousCoefficientRingObj E) p a ⋙ H
+      condensedFieldGeometricModulePullback (condensedFieldCoefficientRingObj E) p a ⋙ H
     ∃ b : F.obj (Mod.regular Ri) ≃ₗ[E] E,
       ∀ f : Mod.regular Ri ⟶ Mod.regular Ri,
         b (F.map f (b.symm 1)) =
-          (((inv (condensedFieldPullbackRealization E p) ≫ f.hom ≫
-          condensedFieldPullbackRealization E p).hom.app
-            (Opposite.op (Scheme.ProEt.mk (𝟙 V)))) (ULift.up 1)).down (a z) := by
+          condensedFieldContinuousCoefficientMap E V
+            (inv (condensedFieldPullbackRealization E p) ≫ f.hom ≫
+              condensedFieldPullbackRealization E p) (a z) := by
   dsimp (config := { proj := false }) only
   apply condensedField_coordinates_of_conjugacy
-    (condensedFieldGeometricModulePullback (Profinite.continuousCoefficientRingObj E) p a)
+    (condensedFieldGeometricModulePullback (condensedFieldCoefficientRingObj E) p a)
     H (Mod.regular ((upperStar AddCommGrpCat.{u + 1} p).obj
-      (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)))
-    (Mod.regular (condensedRingObj (Profinite.continuousCoefficientRingObj E) (Spec (.of Ω))))
-    (condensedFieldGeometricRegularIso (Profinite.continuousCoefficientRingObj E) p a)
+      (condensedRingObj (condensedFieldCoefficientRingObj E) X)))
+    (Mod.regular (condensedRingObj (condensedFieldCoefficientRingObj E) (Spec (.of Ω))))
+    (condensedFieldGeometricRegularIso (condensedFieldCoefficientRingObj E) p a)
     (condensedFieldPointCoefficient E Ω z) hH
   intro f
   exact condensedField_geometric_regular_coefficient E Ω p a z f

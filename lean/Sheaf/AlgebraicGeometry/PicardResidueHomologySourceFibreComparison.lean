@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import Sheaf.AlgebraicGeometry.Picard.FlatInvertibleCanonicalDerivedBaseChange
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
@@ -49,7 +49,7 @@ private theorem derivedFiberDirectImageCohomology
   let a := pullback.fst q g
   let p := pullback.snd q g
   let N := (Modules.pullback a).obj M
-  have : EnoughInjectives (pullback q g).Modules := Modules.enoughInjectives _
+  have : EnoughInjectives (pullback q g).Modules := Modules.enoughInjectives (X := _)
   have : SheafOfModules.IsInvertible.{v, v, v} M :=
     Modules.IsInvertible.sheafOfModules_isInvertible M
   have : IsIso (schemeDerivedBaseChangeMap q p g a (pullback.condition ..)

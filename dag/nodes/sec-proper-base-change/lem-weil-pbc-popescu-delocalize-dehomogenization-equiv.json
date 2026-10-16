@@ -107,8 +107,8 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.PopescuDelocalizeDehomogenizationEquiv",
-  "file": "lean/Sheaf/AlgebraicGeometry/PopescuDelocalizeDehomogenizationEquiv.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.PopescuDelocalizeDehomogenizationEquiv",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PopescuDelocalizeDehomogenizationEquiv.lean",
   "declaration": "Algebra.popescu_delocalize_dehomogenization_equiv_exists",
   "statement": "theorem popescu_delocalize_dehomogenization_equiv_exists\n    (R : Type u) [CommRing R]\n    (n m c t : ℕ)\n    (f : Fin c → MvPolynomial (Fin (n + m)) R)\n    (g : Fin t → MvPolynomial (Fin n) R)\n    (s : Fin (t + 1) → R)\n    (hg : ∀ j : Fin t,\n      C (s j.succ) * rename (Fin.castLE (Nat.le_add_right n m)) (g j) ∈\n        Ideal.span (Set.range f))\n    (d : Fin c → ℕ)\n    (hdegree : ∀ j : Fin c, ∀ e ∈ (f j).support,\n      (∑ i : Fin (n + m), if n ≤ i.val then e i else 0) ≤ d j)\n    (F : Fin c → MvPolynomial (Fin (n + m + 2)) R)\n    (hF : ∀ j : Fin c, F j =\n      ∑ e ∈ (f j).support,\n        C ((f j).coeff e) *\n          (∏ i : Fin (n + m), X i.castSucc.succ ^ e i) *\n          X (Fin.last (n + m + 1)) ^\n            (d j - ∑ i : Fin (n + m), if n ≤ i.val then e i else 0)) :\n    Nonempty (Localization.Away\n      (Ideal.Quotient.mk\n        (Ideal.span\n          (Set.range (fun j : Fin t =>\n            rename (fun i : Fin n =>\n              (Fin.castLE (Nat.le_add_right n m) i).castSucc.succ) (g j)) ∪\n            Set.range (fun j : Fin c => X (0 : Fin (n + m + 2)) * F j)))\n        (X (0 : Fin (n + m + 2)) * X (Fin.last (n + m + 1)) *\n          C (∏ j : Fin (t + 1), s j))) ≃ₐ[R]\n      Localization.Away (Ideal.Quotient.mk\n        (Ideal.span (Set.range (fun j : Fin c =>\n          rename (fun i : Fin (n + m) => i.castSucc.succ) (f j))))\n        (X (0 : Fin (n + m + 2)) * X (Fin.last (n + m + 1))\n          * C (∏ j : Fin (t + 1), s j))))",
   "branch": "sheaf-dag",

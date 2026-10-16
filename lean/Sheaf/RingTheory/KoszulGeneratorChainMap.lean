@@ -5,7 +5,7 @@ Authors: SHEAF group Q2
 -/
 module
 
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.RingTheory.Ideal.Quotient.Defs

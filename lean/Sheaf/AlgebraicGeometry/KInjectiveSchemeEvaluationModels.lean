@@ -53,7 +53,7 @@ private theorem ordinaryHomComparison_isIso (Y : Scheme.{u})
 private theorem tensorModel_isIso_right (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (F V : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (hV : V.IsKFlat) :
+    (hV : V.IsAcyclicTensorKFlat) :
     IsIso (pullbackTensorModelMap Y F V) := by
   let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
   let := pullbackDescentModuleTensor Y
@@ -121,7 +121,7 @@ theorem exists_kInjective_scheme_evaluation_models (Y : Scheme.{u})
       QuasiIso t → QuasiIso (((homComplexFunctor (R := Y.sheaf)).obj (op P)).map t))
     (hdual : (homComplex (R := Y.sheaf) P
       ((HomologicalComplex.single _ (.up ℤ) 0).obj
-        (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))).IsKFlat)
+        (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace))))).IsAcyclicTensorKFlat)
     (eK : DerivedCategory.Q.obj P ≅ K) (eN : DerivedCategory.Q.obj F ≅ N)
     (f : pullbackTensorTotal Y F
         (homComplex (R := Y.sheaf) P

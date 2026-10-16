@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.Paper.BoundaryCechInjectiveMiddle
 
 /-!
@@ -161,7 +161,7 @@ theorem boundary_cech_compatibility (X : Scheme.{u})
       c (((CategoryTheory.cechComplexFunctor U).obj S.X₁.presheafModuleCat).homologyπ 1 z) =
         RingedSpace.moduleCohomologyBoundary X.toRingedSpace S hS 0
           ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app S.X₃ s) := by
-  let := enoughInjectives X
+  let := enoughInjectives (X := X)
   let : Mono S.f := hS.mono_f
   let : Epi S.g := hS.epi_g
   let φ := Injective.ι S.X₂

@@ -52,7 +52,7 @@ Source: Stacks Project, Tags 079W and 08FE
 noncomputable def exactMateComparison :
     F.rightDerivedFunctor ⋙ G.mapDerivedCategory ≅
       H.mapDerivedCategory ⋙ K.rightDerivedFunctor :=
-  (rightDerivedFunctorCompMapDerivedCategoryIso F G).symm ≪≫
+  (rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived F G).symm ≪≫
     rightDerivedFunctorNatIso m ≪≫ rightDerivedFunctorCompIso H K ≪≫
       isoWhiskerRight (rightDerivedFunctorIsoMapDerivedCategory H) K.rightDerivedFunctor
 
@@ -96,7 +96,7 @@ theorem exactMateComparison_eq :
           (isoWhiskerRight H.rightDerivedFunctorIsoMapDerivedCategory
             K.rightDerivedFunctor).hom := by
     ext X
-    simp [exactMateComparison, rightDerivedFunctorCompMapDerivedCategoryIso,
+    simp [exactMateComparison, rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived,
       rightDerivedFunctorCompIso, rightDerivedFunctorNatIso,
       rightDerivedFunctorNatTrans, Category.assoc]
   have : P.PreservesKInjectiveComplexes := ah.preservesKInjectiveComplexes

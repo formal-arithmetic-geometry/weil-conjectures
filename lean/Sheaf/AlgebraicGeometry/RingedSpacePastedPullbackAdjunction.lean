@@ -51,7 +51,7 @@ private theorem tensorPullback_preserves_kFlat
         eqToHom (h N).symm)
     [P.Additive] :
     ∀ K : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ,
-      K.IsKFlat → CochainComplex.IsKFlat (R := X.sheaf)
+      K.IsAcyclicTensorKFlat → CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf)
         ((P.mapHomologicalComplex (.up ℤ)).obj K) := by
   intro K hK
   let e : (P.mapHomologicalComplex (.up ℤ)).obj K ≅
@@ -173,7 +173,7 @@ theorem exists_pasted_tensorPullback_adjunction
       (adj' : L ⊣ R)
       (α : DerivedCategory.Qh ⋙ L ⟶ G ⋙ DerivedCategory.Qh),
       (∀ K : CochainComplex (SheafOfModules.{u} (moduleRings Z)) ℤ,
-        K.IsKFlat → IsIso
+        K.IsAcyclicTensorKFlat → IsIso
           (α.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) ∧
       ∀ K, adj'.unit.app (DerivedCategory.Qh.obj K) ≫ R.map (α.app K) =
         DerivedCategory.Qh.map (adj.unit.app K) ≫ β.app (G.obj K) := by

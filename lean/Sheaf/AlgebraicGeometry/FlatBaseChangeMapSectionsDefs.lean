@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
-public import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Mathlib.AlgebraicGeometry.Pullbacks
 

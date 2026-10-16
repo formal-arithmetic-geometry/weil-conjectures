@@ -1,8 +1,8 @@
 module
 
-public import Sheaf.CategoryTheory.ColimitSites
+public import WeilConjectures.CategoryTheory.ColimitSites
 public import WeilConjectures.CategoryTheory.SiteCechComplex
-import Sheaf.CategoryTheory.ColimitSiteCoveringConstructionParts
+import WeilConjectures.CategoryTheory.ColimitSiteCoveringConstructionParts
 
 @[expose] public section
 

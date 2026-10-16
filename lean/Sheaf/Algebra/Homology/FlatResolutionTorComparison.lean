@@ -12,8 +12,8 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.RingTheory.Flat.Basic
 import Sheaf.Algebra.Homology.TensorBicomplex
-import Sheaf.Algebra.Homology.DoubleComplexCokernelHomologyIso
-import Sheaf.Algebra.Category.ModuleCat.TorSymmetry
+import WeilConjectures.Algebra.Homology.DoubleComplexCokernelHomologyIso
+import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import Mathlib.RingTheory.Flat.CategoryTheory
 import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 

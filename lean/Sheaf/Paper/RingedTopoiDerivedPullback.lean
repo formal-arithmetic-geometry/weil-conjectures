@@ -261,7 +261,7 @@ private theorem isKFlat_of_iso
     {R : Sheaf J CommRingCat.{u}}
     {P Q : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ}
-    (e : P ≅ Q) (hP : P.IsKFlat) : Q.IsKFlat := by
+    (e : P ≅ Q) (hP : P.IsAcyclicTensorKFlat) : Q.IsAcyclicTensorKFlat := by
   let := monoidalCategory R
   intro A hA n
   let F := (MonoidalCategory.curriedTensor (SheafOfModules.{u}
@@ -283,8 +283,8 @@ private theorem isKFlat_inverseImage
     [PreservesFiniteLimits L] (I : AlgebraicInverseImage L R RI) [I.modules.Additive]
     (P : CochainComplex (SheafOfModules.{u}
       ((sheafCompose JC (forget₂ CommRingCat RingCat)).obj R)) ℤ)
-    (hP : P.IsKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) :
-    CochainComplex.IsKFlat
+    (hP : P.IsAcyclicTensorKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) :
+    CochainComplex.IsAcyclicTensorKFlat
       ((I.modules.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) := by
   have := algebraicInverseImage_finiteLimits L I
   have : I.modules.Additive := Functor.additive_of_preserves_binary_products I.modules
@@ -355,29 +355,29 @@ theorem ringedTopoiDerivedPullback
       (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧
       (∀ {P Q : CochainComplex (SheafOfModules.{u}
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ} (s : P ⟶ Q),
-        P.IsKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
-        Q.IsKFlat → (∀ n : ℤ, (Q.X n).IsFlat) → QuasiIso s →
+        P.IsAcyclicTensorKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
+        Q.IsAcyclicTensorKFlat → (∀ n : ℤ, (Q.X n).IsFlat) → QuasiIso s →
           QuasiIso ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).map s)) ∧
       (∀ (P : CochainComplex (SheafOfModules.{u}
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ),
-        P.IsKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
+        P.IsAcyclicTensorKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
           IsIso (epsilon.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))) ∧
       ∃ (alpha : ∀ {A P : CochainComplex (SheafOfModules.{u}
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
-        (p : P ⟶ A), P.IsKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
+        (p : P ⟶ A), P.IsAcyclicTensorKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
           QuasiIso p → (LF.obj (DerivedCategory.Q.obj A) ≅
             DerivedCategory.Q.obj
               ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P))),
         (∀ {A P : CochainComplex (SheafOfModules.{u}
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ} (p : P ⟶ A)
-          (hp : P.IsKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) [hq : QuasiIso p],
+          (hp : P.IsAcyclicTensorKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) [hq : QuasiIso p],
           (alpha p hp hf hq).hom = inv (LF.map (DerivedCategory.Q.map p)) ≫
             epsilon.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) ∧
         (∀ {A A' P P' : CochainComplex (SheafOfModules.{u}
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
           (p : P ⟶ A) (p' : P' ⟶ A') (a : P ⟶ P') (b : A ⟶ A')
-          (hp : P.IsKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) (hq : QuasiIso p)
-          (hp' : P'.IsKFlat) (hf' : ∀ n : ℤ, (P'.X n).IsFlat) (hq' : QuasiIso p'),
+          (hp : P.IsAcyclicTensorKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) (hq : QuasiIso p)
+          (hp' : P'.IsAcyclicTensorKFlat) (hf' : ∀ n : ℤ, (P'.X n).IsFlat) (hq' : QuasiIso p'),
           p ≫ b = a ≫ p' →
           LF.map (DerivedCategory.Q.map b) ≫ (alpha p' hp' hf' hq').hom =
             (alpha p hp hf hq).hom ≫ DerivedCategory.Q.map
@@ -385,22 +385,22 @@ theorem ringedTopoiDerivedPullback
         (∀ {A P P' : CochainComplex (SheafOfModules.{u}
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
           (p : P ⟶ A) (p' : P' ⟶ A) (a : P ⟶ P')
-          (hp : P.IsKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) (hq : QuasiIso p)
-          (hp' : P'.IsKFlat) (hf' : ∀ n : ℤ, (P'.X n).IsFlat) (hq' : QuasiIso p'),
+          (hp : P.IsAcyclicTensorKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) (hq : QuasiIso p)
+          (hp' : P'.IsAcyclicTensorKFlat) (hf' : ∀ n : ℤ, (P'.X n).IsFlat) (hq' : QuasiIso p'),
           a ≫ p' = p →
           (alpha p hp hf hq).inv ≫ (alpha p' hp' hf' hq').hom =
             DerivedCategory.Q.map
               ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).map a)) ∧
         (∀ {A P : CochainComplex (SheafOfModules.{u}
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ} (p : P ⟶ A)
-          (hp : P.IsKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) (hq : QuasiIso p),
+          (hp : P.IsAcyclicTensorKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) (hq : QuasiIso p),
           (alpha p hp hf hq).inv ≫ (alpha p hp hf hq).hom = 𝟙 _) ∧
         (∀ {A P P' P'' : CochainComplex (SheafOfModules.{u}
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
           (p : P ⟶ A) (p' : P' ⟶ A) (p'' : P'' ⟶ A)
-          (hp : P.IsKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) (hq : QuasiIso p)
-          (hp' : P'.IsKFlat) (hf' : ∀ n : ℤ, (P'.X n).IsFlat) (hq' : QuasiIso p')
-          (hp'' : P''.IsKFlat) (hf'' : ∀ n : ℤ, (P''.X n).IsFlat) (hq'' : QuasiIso p''),
+          (hp : P.IsAcyclicTensorKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) (hq : QuasiIso p)
+          (hp' : P'.IsAcyclicTensorKFlat) (hf' : ∀ n : ℤ, (P'.X n).IsFlat) (hq' : QuasiIso p')
+          (hp'' : P''.IsAcyclicTensorKFlat) (hf'' : ∀ n : ℤ, (P''.X n).IsFlat) (hq'' : QuasiIso p''),
           ((alpha p hp hf hq).inv ≫ (alpha p' hp' hf' hq').hom) ≫
               ((alpha p' hp' hf' hq').inv ≫ (alpha p'' hp'' hf'' hq'').hom) =
             (alpha p hp hf hq).inv ≫ (alpha p'' hp'' hf'' hq'').hom) := by
@@ -413,8 +413,8 @@ theorem ringedTopoiDerivedPullback
   let H := HomotopyCategory.quotient A (ComplexShape.up ℤ)
   let F := uStar.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh
   have hpres : ∀ {P Q : CochainComplex A ℤ} (s : P ⟶ Q),
-      P.IsKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
-      Q.IsKFlat → (∀ n : ℤ, (Q.X n).IsFlat) → QuasiIso s → QuasiIso (T.map s) := by
+      P.IsAcyclicTensorKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
+      Q.IsAcyclicTensorKFlat → (∀ n : ℤ, (Q.X n).IsFlat) → QuasiIso s → QuasiIso (T.map s) := by
     have := algebraicInverseImage_finiteLimits uInv I
     have : I.modules.Additive := Functor.additive_of_preserves_binary_products I.modules
     have := algebraicInverseImage_epi uInv uPush adj I
@@ -449,7 +449,7 @@ theorem ringedTopoiDerivedPullback
       (Arrow.isoMk (e'.app P) (e'.app Q) (e'.hom.naturality s).symm)).2 ht
   let K : Set (HomotopyCategory A (ComplexShape.up ℤ)) :=
     {X | ∃ P : CochainComplex A ℤ, H.obj P = X ∧
-      P.IsKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat}
+      P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat}
   have hres : ∀ X : HomotopyCategory A (ComplexShape.up ℤ),
       ∃ (X' : HomotopyCategory A (ComplexShape.up ℤ)) (s : X' ⟶ X),
         X' ∈ K ∧ HomotopyCategory.quasiIso A (ComplexShape.up ℤ) s := by
@@ -475,12 +475,12 @@ theorem ringedTopoiDerivedPullback
       ((HomotopyCategory.quotient_map_mem_quasiIso_iff (T.map s)).2 ht)
   obtain ⟨_, LF, ε, hLF, hex, hε⟩ :=
     Functor.leftDerived_from_resolvingClass A (DerivedCategory B) F K hres hinv
-  have hcomp (P : CochainComplex A ℤ) (hp : P.IsKFlat)
+  have hcomp (P : CochainComplex A ℤ) (hp : P.IsAcyclicTensorKFlat)
       (hf : ∀ n : ℤ, (P.X n).IsFlat) : IsIso (ε.app (H.obj P)) :=
     hε (H.obj P) ⟨P, rfl, hp, hf⟩
   refine ⟨LF, ε, hLF, hex, hpres, hcomp, ?_⟩
   let α : ∀ {G P : CochainComplex A ℤ} (p : P ⟶ G),
-      P.IsKFlat → (∀ n : ℤ, (P.X n).IsFlat) → QuasiIso p →
+      P.IsAcyclicTensorKFlat → (∀ n : ℤ, (P.X n).IsFlat) → QuasiIso p →
         (LF.obj (DerivedCategory.Q.obj G) ≅ DerivedCategory.Q.obj (T.obj P)) :=
     fun {G P} p hp hf hq ↦ by
       letI := hq
@@ -488,13 +488,13 @@ theorem ringedTopoiDerivedPullback
       exact (asIso (LF.map (DerivedCategory.Q.map p))).symm ≪≫
         asIso (ε.app (H.obj P))
   have hα {G P : CochainComplex A ℤ} (p : P ⟶ G)
-      (hp : P.IsKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) (hq : QuasiIso p) :
+      (hp : P.IsAcyclicTensorKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) (hq : QuasiIso p) :
       (α p hp hf hq).hom = inv (LF.map (DerivedCategory.Q.map p)) ≫ ε.app (H.obj P) :=
     rfl
   have hnat {G G' P P' : CochainComplex A ℤ}
       (p : P ⟶ G) (p' : P' ⟶ G') (a : P ⟶ P') (b : G ⟶ G')
-      (hp : P.IsKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) (hq : QuasiIso p)
-      (hp' : P'.IsKFlat) (hf' : ∀ n : ℤ, (P'.X n).IsFlat) (hq' : QuasiIso p')
+      (hp : P.IsAcyclicTensorKFlat) (hf : ∀ n : ℤ, (P.X n).IsFlat) (hq : QuasiIso p)
+      (hp' : P'.IsAcyclicTensorKFlat) (hf' : ∀ n : ℤ, (P'.X n).IsFlat) (hq' : QuasiIso p')
       (hsq : p ≫ b = a ≫ p') :
       LF.map (DerivedCategory.Q.map b) ≫ (α p' hp' hf' hq').hom =
         (α p hp hf hq).hom ≫ DerivedCategory.Q.map (T.map a) := by

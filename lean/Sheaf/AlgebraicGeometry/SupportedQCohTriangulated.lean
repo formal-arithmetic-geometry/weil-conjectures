@@ -64,7 +64,7 @@ private theorem qcoh_extensions (X : Scheme.{u}) :
   intro S hS h₁ h₃
   have := h₁
   have := h₃
-  exact Scheme.Modules.isQuasicoherent_of_shortExact (X := X) S hS
+  exact Scheme.Modules.isQuasicoherent_of_shortExact (X := X) (S := S) hS
 
 /-- The supported quasi-coherent property contains a zero object.
 Source: Stacks Project, Derived Categories of Schemes, definition preceding Tag 0A9A.

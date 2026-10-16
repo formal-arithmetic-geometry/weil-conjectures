@@ -1,7 +1,7 @@
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
-import Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparisonZero
+import WeilConjectures.AlgebraicGeometry.ModuleAcyclicCohomologyComparisonZero
 import Sheaf.AlgebraicGeometry.ModuleAcyclicEffacementLadder
 import Mathlib.Algebra.FiveLemma
 

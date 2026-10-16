@@ -16,7 +16,7 @@ public import Mathlib.Algebra.Field.ZMod
 import Mathlib.Algebra.MvPolynomial.CommRing
 import Mathlib.FieldTheory.Perfect
 import Mathlib.RingTheory.Finiteness.Basic
-import Sheaf.FieldTheory.ExistsPBasis
+import WeilConjectures.FieldTheory.ExistsPBasis
 import Sheaf.RingTheory.PowerSeriesRingSubfields
 
 /-!

@@ -5,6 +5,8 @@ Authors: SHEAF group C1
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import Sheaf.Paper.CondensedQbarComparisons
 import Sheaf.Paper.CondensedQbarPullbackCube
 import Sheaf.Paper.CondensedQbarExchangeRightAdjunct
@@ -55,6 +57,47 @@ private theorem path_exchange {C : Type*} [Category C]
   simp only [Category.assoc]
   rw [h₅, ← Category.assoc w v u, h₆, Category.assoc]
 
+private theorem left_normalization
+    {A B C D A' B' C' D' : Type*}
+    [Category A] [Category B] [Category C] [Category D]
+    [Category A'] [Category B'] [Category C'] [Category D']
+    {lf : B ⥤ A} {rf : A ⥤ B} {lg : B ⥤ D}
+    {lp : D ⥤ C} {gp : A ⥤ C} {rp : C ⥤ D}
+    {Lf : B' ⥤ A'} {Rf : A' ⥤ B'} {Lg : B' ⥤ D'}
+    {Lp : D' ⥤ C'} {Gp : A' ⥤ C'} {Rp : C' ⥤ D'}
+    {tA : A ⥤ A'} {tB : B ⥤ B'} {tC : C ⥤ C'} {tD : D ⥤ D'}
+    (εf : rf ⋙ lf ⟶ 𝟭 A) (εp : rp ⋙ lp ⟶ 𝟭 C)
+    (εF : Rf ⋙ Lf ⟶ 𝟭 A') (εP : Rp ⋙ Lp ⟶ 𝟭 C')
+    (αf : ∀ V, tA.obj (lf.obj V) ≅ Lf.obj (tB.obj V))
+    (αg : ∀ V, tD.obj (lg.obj V) ≅ Lg.obj (tB.obj V))
+    (αp : ∀ V, tC.obj (lp.obj V) ≅ Lp.obj (tD.obj V))
+    (αq : ∀ V, tC.obj (gp.obj V) ≅ Gp.obj (tA.obj V))
+    (hn : ∀ {U V : A} (v : U ⟶ V),
+      tC.map (gp.map v) ≫ (αq V).hom = (αq U).hom ≫ Gp.map (tA.map v))
+    (sqE : lg ⋙ lp ⟶ lf ⋙ gp) (sqΩ : Lg ⋙ Lp ⟶ Lf ⋙ Gp)
+    (β : rf ⋙ lg ⟶ gp ⋙ rp) (Β : Rf ⋙ Lg ⟶ Gp ⋙ Rp)
+    (K : A) (δ : tB.obj (rf.obj K) ⟶ Rf.obj (tA.obj K))
+    (hβ : coefficientAdjunctCondition εf εp sqE β K)
+    (hΒ : coefficientAdjunctCondition εF εP sqΩ Β (tA.obj K))
+    (hδ : Lf.map δ ≫ εF.app (tA.obj K) =
+      (αf (rf.obj K)).inv ≫ tA.map (εf.app K))
+    (hc : coefficientPullbackCube αf αg αp αq sqE sqΩ (rf.obj K)) :
+    Lp.map (((αg (rf.obj K)).hom ≫ Lg.map δ) ≫ Β.app (tA.obj K)) ≫
+        εP.app (Gp.obj (tA.obj K)) =
+      (αp (lg.obj (rf.obj K))).inv ≫
+        tC.map (lp.map (β.app K) ≫ εp.app (gp.obj K)) ≫ (αq K).hom := by
+  dsimp only [coefficientAdjunctCondition] at hβ hΒ
+  dsimp only [coefficientPullbackCube] at hc
+  have hz := sqΩ.naturality δ
+  have hah := hn (εf.app K)
+  have hmδ := Gp.congr_map hδ
+  have hmβ := tC.congr_map hβ
+  simp only [Functor.comp_obj, Functor.comp_map] at hz
+  simp only [Functor.comp_obj, Functor.id_obj] at hah
+  simp only [Functor.map_comp] at hmδ hmβ
+  have hp := path_exchange hΒ hz hmδ hc.symm hah.symm hmβ.symm
+  simpa only [Functor.map_comp, Category.assoc] using hp
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -74,16 +117,24 @@ variable {T U : Scheme.{u}} [T.Over (Spec (.of k))] [U.Over (Spec (.of k))]
 private theorem pull_hom_naturality {K M : PadicSubfieldConstructible U ℓ E}
     (v : K ⟶ M) :
     (constructibleToPadicAlgCl T ℓ E).map
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k h).map v) ≫
+        ((boundedConstructibleUpperStar (k := k)
+      (X := T.asOver (Spec (.of k))) (Y := U.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))).map v) ≫
       (constructibleToQbarPullIso ℓ k E h M).hom =
     (constructibleToQbarPullIso ℓ k E h K).hom ≫
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k h).map
+      (boundedConstructibleUpperStar (k := k)
+      (X := T.asOver (Spec (.of k))) (Y := U.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ (h.asOver (Spec (.of k)))).map
         ((constructibleToPadicAlgCl U ℓ E).map v) := by
   exact lifted_naturality _ _ _ _
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ k h K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (k := k)
+      (X := T.asOver (Spec (.of k))) (Y := U.asOver (Spec (.of k))) _ ℓ (h.asOver (Spec
+        (.of k))) K.obj K.property)
     (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj T ℓ E K.obj K.property)
     (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj U ℓ E K.obj K.property)
-    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ k h K.obj K.property)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (k := k)
+      (X := T.asOver (Spec (.of k))) (Y := U.asOver (Spec (.of k))) _ ℓ (h.asOver (Spec
+        (.of k))) K.obj K.property)
     (derivedPullIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) h) v
 
 end Edge
@@ -108,6 +159,7 @@ attribute [local irreducible] constructibleToQbarPullIso constructibleToQbarPush
 
 set_option backward.isDefEq.respectTransparency true in
 attribute [-instance] catToReflQuiver in
+set_option backward.isDefEq.respectTransparency true in
 /-- Normalization of the left side of coefficient exchange under the pullback adjunction.
 Source: ModuleObject/Colimit/TwoColimit.lean, final transport paragraph;
 ChangeOfCoefficients.lean, derivedPullIso and derivedPushHom;
@@ -131,45 +183,200 @@ map and its counit, giving exactly the displayed middle expression. Only pullbac
 comparisons are inverted. No properness or Cartesianity is required. -/
 theorem constructibleToQbar_exchange_left_adjunct
     (sq : CommSq g' f' f g) (K : PadicSubfieldConstructible X ℓ E) :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k f').map
+    (boundedConstructibleUpperStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ (f'.asOver (Spec (.of k)))).map
       (constructibleToQbarSourceHom ℓ k E f g K ≫
-        (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ k sq).app
+        (boundedConstructibleBaseChange (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ (sq.asOver (Spec (.of k)))).app
           ((constructibleToPadicAlgCl X ℓ E).obj K)) ≫
-      (boundedConstructibleUpperStarLowerStarAdjunction
-        (Profinite.padicAlgClRingObj ℓ) ℓ k f').counit.app
-          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g').obj
+      (boundedConstructibleUpperStarLowerStarAdjunction (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ (f'.asOver (Spec (.of k)))).counit.app
+          ((boundedConstructibleUpperStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := X.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ (g'.asOver (Spec (.of k)))).obj
             ((constructibleToPadicAlgCl X ℓ E).obj K)) =
     (constructibleToQbarPullIso ℓ k E f'
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).obj
-          ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f).obj K))).inv ≫
+        ((boundedConstructibleUpperStar (k := k)
+      (X := Y'.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ (g.asOver (Spec (.of k)))).obj
+          ((boundedConstructibleLowerStar (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ (f.asOver (Spec (.of k)))).obj K))).inv ≫
       (constructibleToPadicAlgCl X' ℓ E).map
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k f').map
-            ((boundedConstructibleBaseChange
-              (Profinite.continuousMapRingObj E) ℓ k sq).app K) ≫
-          (boundedConstructibleUpperStarLowerStarAdjunction
-            (Profinite.continuousMapRingObj E) ℓ k f').counit.app
-              ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g').obj K)) ≫
+        ((boundedConstructibleUpperStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).map
+            ((boundedConstructibleBaseChange (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).app K) ≫
+          (boundedConstructibleUpperStarLowerStarAdjunction (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).counit.app
+              ((boundedConstructibleUpperStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := X.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).obj K)) ≫
       (constructibleToQbarPullIso ℓ k E g' K).hom := by
-  have hc := constructibleToQbar_pullback_cube ℓ k E f g f' g' sq
-    ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f).obj K)
-  have hz := (boundedConstructiblePullbackSquareComparison
-    (Profinite.padicAlgClRingObj ℓ) ℓ k sq).hom.naturality
-      (constructibleToQbarPushHom ℓ k E f K)
-  have hδ := constructibleToQbar_push_counit ℓ k E f K
-  have hβ := boundedConstructibleBaseChange_adjunct
-    (Profinite.continuousMapRingObj E) ℓ k sq K
-  have hβ' := boundedConstructibleBaseChange_adjunct
-    (Profinite.padicAlgClRingObj ℓ) ℓ k sq ((constructibleToPadicAlgCl X ℓ E).obj K)
-  have hah := pull_hom_naturality ℓ k E g'
-    ((boundedConstructibleUpperStarLowerStarAdjunction
-      (Profinite.continuousMapRingObj E) ℓ k f).counit.app K)
-  simp only [Functor.comp_obj, Functor.comp_map] at hz
-  simp only [Functor.comp_obj, Functor.id_obj] at hah
-  have hmδ := (boundedConstructibleUpperStar
-    (Profinite.padicAlgClRingObj ℓ) ℓ k g').congr_map hδ
-  have hmβ := (constructibleToPadicAlgCl X' ℓ E).congr_map hβ
-  simp only [Functor.map_comp] at hmδ hmβ
-  have hp := path_exchange hβ' hz hmδ hc.symm hah.symm hmβ.symm
-  simpa only [constructibleToQbarSourceHom, Functor.map_comp, Category.assoc] using hp
+  dsimp only [constructibleToQbarSourceHom]
+  exact left_normalization
+    (A := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.continuousMapRingObj E) (X.asOver (Spec (.of k))).left))
+    (B := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.continuousMapRingObj E) (Y.asOver (Spec (.of k))).left))
+    (C := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.continuousMapRingObj E) (X'.asOver (Spec (.of k))).left))
+    (D := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.continuousMapRingObj E) (Y'.asOver (Spec (.of k))).left))
+    (A' := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.padicAlgClRingObj ℓ) (X.asOver (Spec (.of k))).left))
+    (B' := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.padicAlgClRingObj ℓ) (Y.asOver (Spec (.of k))).left))
+    (C' := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.padicAlgClRingObj ℓ) (X'.asOver (Spec (.of k))).left))
+    (D' := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.padicAlgClRingObj ℓ) (Y'.asOver (Spec (.of k))).left))
+    (lf := boundedConstructibleUpperStar (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (f.asOver (Spec (.of k))))
+    (rf := boundedConstructibleLowerStar (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (f.asOver (Spec (.of k))))
+    (lg := boundedConstructibleUpperStar (k := k)
+      (X := Y'.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (g.asOver (Spec (.of k))))
+    (lp := boundedConstructibleUpperStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (f'.asOver (Spec (.of k))))
+    (gp := boundedConstructibleUpperStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := X.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (g'.asOver (Spec (.of k))))
+    (rp := boundedConstructibleLowerStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (f'.asOver (Spec (.of k))))
+    (Lf := boundedConstructibleUpperStar (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (f.asOver (Spec (.of k))))
+    (Rf := boundedConstructibleLowerStar (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (f.asOver (Spec (.of k))))
+    (Lg := boundedConstructibleUpperStar (k := k)
+      (X := Y'.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (g.asOver (Spec (.of k))))
+    (Lp := boundedConstructibleUpperStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (f'.asOver (Spec (.of k))))
+    (Gp := boundedConstructibleUpperStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := X.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (g'.asOver (Spec (.of k))))
+    (Rp := boundedConstructibleLowerStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (f'.asOver (Spec (.of k))))
+    (tA := constructibleToPadicAlgCl X ℓ E)
+    (tB := constructibleToPadicAlgCl Y ℓ E)
+    (tC := constructibleToPadicAlgCl X' ℓ E)
+    (tD := constructibleToPadicAlgCl Y' ℓ E)
+    (boundedConstructibleUpperStarLowerStarAdjunction (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (f.asOver (Spec (.of k)))).counit
+    (boundedConstructibleUpperStarLowerStarAdjunction (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (f'.asOver (Spec (.of k)))).counit
+    (boundedConstructibleUpperStarLowerStarAdjunction (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (f.asOver (Spec (.of k)))).counit
+    (boundedConstructibleUpperStarLowerStarAdjunction (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (f'.asOver (Spec (.of k)))).counit
+    (fun V ↦ constructibleToQbarPullIso ℓ k E f V)
+    (fun V ↦ constructibleToQbarPullIso ℓ k E g V)
+    (fun V ↦ constructibleToQbarPullIso ℓ k E f' V)
+    (fun V ↦ constructibleToQbarPullIso ℓ k E g' V)
+    (fun v ↦ pull_hom_naturality ℓ k E g' v)
+    (boundedConstructiblePullbackSquareComparison (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (sq.asOver (Spec (.of k)))).hom
+    (boundedConstructiblePullbackSquareComparison (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (sq.asOver (Spec (.of k)))).hom
+    (boundedConstructibleBaseChange (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (sq.asOver (Spec (.of k))))
+    (boundedConstructibleBaseChange (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (sq.asOver (Spec (.of k))))
+    K (constructibleToQbarPushHom ℓ k E f K)
+    (coefficientAdjunctCondition_of_eq
+    (boundedConstructibleUpperStarLowerStarAdjunction (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (Profinite.continuousMapRingObj E) ℓ (f.asOver (Spec (.of k))))
+    (boundedConstructibleUpperStarLowerStarAdjunction (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+      (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k))))
+    (boundedConstructiblePullbackSquareComparison (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+      (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k))))
+    (boundedConstructibleBaseChange (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+      (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k))))
+    (boundedConstructibleBaseChange_eq_squareExchange (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+      (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))) K)
+    (coefficientAdjunctCondition_of_eq
+    (boundedConstructibleUpperStarLowerStarAdjunction (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (Profinite.padicAlgClRingObj ℓ) ℓ (f.asOver (Spec (.of k))))
+    (boundedConstructibleUpperStarLowerStarAdjunction (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+      (Profinite.padicAlgClRingObj ℓ) ℓ (f'.asOver (Spec (.of k))))
+    (boundedConstructiblePullbackSquareComparison (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+      (Profinite.padicAlgClRingObj ℓ) ℓ (sq.asOver (Spec (.of k))))
+    (boundedConstructibleBaseChange (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+      (Profinite.padicAlgClRingObj ℓ) ℓ (sq.asOver (Spec (.of k))))
+    (boundedConstructibleBaseChange_eq_squareExchange (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+      (Profinite.padicAlgClRingObj ℓ) ℓ (sq.asOver (Spec (.of k))))
+        ((constructibleToPadicAlgCl X ℓ E).obj K))
+    (constructibleToQbar_push_counit ℓ k E f K)
+    (constructibleToQbar_pullback_cube ℓ k E f g f' g' sq
+      ((boundedConstructibleLowerStar (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+        (f.asOver (Spec (.of k)))).obj K))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

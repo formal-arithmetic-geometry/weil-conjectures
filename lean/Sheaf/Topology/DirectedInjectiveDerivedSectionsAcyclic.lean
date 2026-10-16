@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 import Mathlib.CategoryTheory.Sites.Precoverage.Generates
 import Sheaf.CategoryTheory.SiteCechVanishingCriterion
-import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
+import WeilConjectures.CategoryTheory.SiteInjectiveCechAcyclic
 import Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections
 import Sheaf.Topology.CompactCechDirectedColimit
 

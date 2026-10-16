@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 import Sheaf.AlgebraicGeometry.LimitDerivedDirectImageExchange
-import Sheaf.AlgebraicGeometry.KilledSheafModuleLift
+import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived

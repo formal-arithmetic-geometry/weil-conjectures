@@ -140,8 +140,8 @@ theorem derivedPullback_tensor_unit {T X : Scheme.{uModel}} (g : T ⟶ X)
     (μ : curriedTensorPre (derivedPullback g) ≅ curriedTensorPost (derivedPullback g))
     (hμ : ∀ P N : CochainComplex
             (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,
-          CochainComplex.IsKFlat (R := X.sheaf) P →
-          CochainComplex.IsKFlat (R := X.sheaf) N →
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P →
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N →
           ((μ.app (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj N)).hom ≫
               (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
               ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj

@@ -3,7 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficients
-import Sheaf.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 

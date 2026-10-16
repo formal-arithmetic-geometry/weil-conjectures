@@ -97,12 +97,12 @@ theorem openImmersion_tensor_vanishing_test {X Y : Scheme.{u}} (j : Y ⟶ X)
     (by rw [CategoryTheory.rightExactFunctor_iff]; infer_instance)
   let t : T ≅ R := (Scheme.Modules.nonempty_tensorPullbackAdjunction j).some.leftAdjointUniq
     (Scheme.Modules.restrictAdjunction j)
-  have hTC : CochainComplex.IsKFlat (R := Y.sheaf)
+  have hTC : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf)
       ((T.mapHomologicalComplex (.up ℤ)).obj C) := by
     have h' := CochainComplex.isKFlat_pullback j.base Y.sheaf X.sheaf ⟨j.c⟩ C hC
     convert h' using 1
     rfl
-  have hRC : CochainComplex.IsKFlat (R := Y.sheaf)
+  have hRC : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf)
       ((R.mapHomologicalComplex (.up ℤ)).obj C) := by
     intro F hF n
     exact (hTC F hF n).of_iso

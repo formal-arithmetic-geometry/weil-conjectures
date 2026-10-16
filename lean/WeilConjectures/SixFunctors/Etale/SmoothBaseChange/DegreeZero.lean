@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingleZero
 import Sheaf.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres
-import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison
 import Sheaf.AlgebraicGeometry.EtaleChartSectionsArrowComparison
 
 /-!

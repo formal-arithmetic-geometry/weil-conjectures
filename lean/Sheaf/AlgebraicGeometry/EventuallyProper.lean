@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.ChowFiniteType
+import WeilConjectures.AlgebraicGeometry.ChowFiniteType
 import Sheaf.AlgebraicGeometry.ClosedChowStage
 import Sheaf.AlgebraicGeometry.ExistsIsSeparatedOverPullbackMap
 

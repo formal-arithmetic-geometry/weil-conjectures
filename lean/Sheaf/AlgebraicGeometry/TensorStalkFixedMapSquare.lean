@@ -188,7 +188,7 @@ theorem tensorStalkComparison_fixedMap_square
       (((derivedPullback g').obj E.obj) ⊗ K'.obj)
       (τ E.obj K.obj ≫ ((derivedPullback g').obj E.obj ◁ φ)))
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (eP : DerivedCategory.Q.obj P ≅ E.obj) (hP : P.IsKFlat) (z : X') :
+    (eP : DerivedCategory.Q.obj P ≅ E.obj) (hP : P.IsAcyclicTensorKFlat) (z : X') :
     letI := SingleComplexBaseChange.leftAlgebra f g' z
     letI := SingleComplexBaseChange.rightAlgebra f f' g g' sq z
     letI := (SingleComplexBaseChange.tensorMap f f' g g' sq z).toAlgebra

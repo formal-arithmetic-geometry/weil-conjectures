@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 
 /-!

@@ -13,14 +13,14 @@ public import Mathlib.Algebra.Ring.ULift
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
-import Sheaf.AlgebraicGeometry.Curve.DenseIrreducibleOpens
+import WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
+import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks
-import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 
 /-! # Finite cohomology of the dense-open boundary
 

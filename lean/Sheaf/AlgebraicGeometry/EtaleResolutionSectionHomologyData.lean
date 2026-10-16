@@ -6,7 +6,7 @@ Authors: SHEAF group C2
 module
 
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
+public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionTransfer
 import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
 import Mathlib.CategoryTheory.Abelian.Injective.Ext
 import Mathlib.Algebra.Category.Grp.Ulift

@@ -97,8 +97,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Module.AdicCompletionStableRanges",
-  "file": "lean/Sheaf/Algebra/Module/AdicCompletionStableRanges.lean",
+  "module": "WeilConjectures.Algebra.Module.AdicCompletionStableRanges",
+  "file": "lean/WeilConjectures/Algebra/Module/AdicCompletionStableRanges.lean",
   "declaration": "adicCompletion_iso_of_stable_ranges",
   "statement": "theorem adicCompletion_iso_of_stable_ranges {A : Type u} [CommRing A]\n    (I : Ideal A) (H : ModuleCat.{u} A) (M : ℕᵒᵖ ⥤ ModuleCat.{u} A)\n    (ρ : ∀ n : ℕ, H →ₗ[A] M.obj (op n))\n    (θ : ∀ n : ℕ, (H ⧸ (I ^ (n + 1) • ⊤ : Submodule A H)) →ₗ[A]\n      M.obj (op n))\n    (hθ : ∀ n, (θ n).comp (Submodule.mkQ (I ^ (n + 1) • ⊤)) = ρ n)\n    (htrans : ∀ (n m : ℕ) (h : n ≤ m),\n      (M.map (homOfLE h).op).hom.comp (θ m) =\n        (θ n).comp (AdicCompletion.transitionMap I H (Nat.succ_le_succ h)))\n    (c : ℕ)\n    (hker : ∀ n : ℕ, LinearMap.ker (ρ (n + c)) ≤\n      I ^ (n + 1) • (⊤ : Submodule A H))\n    (hrange : ∀ n : ℕ, Set.range (M.map (homOfLE (Nat.le_add_right n c)).op).hom =\n      Set.range (ρ n)) :\n    ∃ e : ModuleCat.of A (AdicCompletion I H) ≅ limit M,\n      ∀ n : ℕ, e.hom ≫ limit.π M (op n) =\n        ModuleCat.ofHom ((θ n).comp (AdicCompletion.eval I H (n + 1)))",
   "branch": "sheaf-dag",

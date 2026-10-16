@@ -129,7 +129,7 @@ theorem stalk_kFlat_tensor_homology_iso
     (e : A ≅ Z.presheaf.stalk x)
     [HasDerivedCategory.{v} (ModuleCat.{u} A)]
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Z)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := Z.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := Z.sheaf) P) :
     let S := RingedSpace.moduleStalkFunctor Z x ⋙ ModuleCat.restrictScalars e.hom.hom
     ∀ (F : SheafOfModules.{u} (moduleRings Z)) (i : ℤ),
       Nonempty ((TopCat.Sheaf.forget AddCommGrpCat.{u} Z.carrier ⋙

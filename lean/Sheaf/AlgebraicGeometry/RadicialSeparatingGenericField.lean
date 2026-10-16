@@ -10,9 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-public import Sheaf.FieldTheory.SeparableExtension
+public import WeilConjectures.FieldTheory.SeparableExtension
 
-import Sheaf.FieldTheory.MakeSeparablyGenerated
+import WeilConjectures.FieldTheory.MakeSeparablyGenerated
 import Sheaf.AlgebraicGeometry.GenericFibreDominantField
 import Sheaf.AlgebraicGeometry.PurelyInseparableGenericBaseSpread
 import Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbedding

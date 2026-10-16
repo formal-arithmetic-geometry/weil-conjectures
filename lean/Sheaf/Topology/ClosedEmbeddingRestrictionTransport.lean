@@ -8,7 +8,7 @@ module
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 import Sheaf.Topology.EmbeddingPushforwardTransport
-import Sheaf.CategoryTheory.InverseMateEquivalence
+import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-!
 # Comparison of restriction units under a change of topological universe

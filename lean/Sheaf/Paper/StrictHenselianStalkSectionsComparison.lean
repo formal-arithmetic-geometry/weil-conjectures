@@ -5,9 +5,9 @@ Authors: SHEAF group J2
 -/
 module
 
-public import Sheaf.Paper.EtaleObjectCohomologyStalkComplex
+public import WeilConjectures.AlgebraicGeometry.EtaleObjectCohomologyStalkComplex
 public import Mathlib.CategoryTheory.Functor.EpiMono
-import Sheaf.Paper.StrictHenselianStalkSectionsComparisonCore
+import WeilConjectures.AlgebraicGeometry.StrictHenselianStalkSectionsComparisonCore
 import Sheaf.Paper.StrictHenselianStalkSectionsComparisonIso
 
 /-! # Degree-zero continuity for etale sections

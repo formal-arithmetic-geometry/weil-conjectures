@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.GlobalGenerationNonvanishingCover
-import Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus
+import WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
 
 /-!
 # Finite nonvanishing covers from global generation

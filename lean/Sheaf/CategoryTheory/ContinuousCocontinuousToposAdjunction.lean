@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.SpecialCocontinuousCoverings
 public import Mathlib.CategoryTheory.Sites.Limits
-import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
+import WeilConjectures.CategoryTheory.SiteContinuousPushforwardSheaf
 import Mathlib.CategoryTheory.Sites.Sheafification
 
 /-!

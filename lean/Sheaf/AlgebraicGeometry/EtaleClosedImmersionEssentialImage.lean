@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.EtaleSupport
 public import Mathlib.CategoryTheory.EssentialImage
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 import WeilConjectures.SixFunctors.OpenClosed.Stalk

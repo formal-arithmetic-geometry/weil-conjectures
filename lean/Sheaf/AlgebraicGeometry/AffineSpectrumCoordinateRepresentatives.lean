@@ -76,7 +76,7 @@ theorem exists_affineSpectrum_coordinate_representatives
   let N₀ : CochainComplex
       (SheafOfModules.{u} (moduleRings (Spec Γ(X', ⊤)).toRingedSpace)) ℤ :=
     ((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex (.up ℤ)).obj c.N
-  have hP₀ : CochainComplex.IsKFlat (R := (Spec Γ(X, ⊤)).sheaf) P₀ := by
+  have hP₀ : CochainComplex.IsAcyclicTensorKFlat (R := (Spec Γ(X, ⊤)).sheaf) P₀ := by
     have h := CochainComplex.isKFlat_pullback X.isoSpec.inv.base
       (Spec Γ(X, ⊤)).sheaf X.sheaf ⟨X.isoSpec.inv.c⟩ c.P c.isKFlat
     convert h using 1

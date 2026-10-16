@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.Paper.EtaleRestrictionPullbackUnit
+import WeilConjectures.AlgebraicGeometry.EtaleRestrictionPullbackUnit
 
 /-! # Evaluation on an étale object and global sections
 

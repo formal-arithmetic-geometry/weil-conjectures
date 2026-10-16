@@ -74,7 +74,7 @@ theorem finiteTensor_constructible_cohomology
     (K L P : CochainComplex (proEtaleRingModules T
       (proEtaleConstantRing T (Padic.coefficientExtensionRing l E n))) ℤ)
     (f : P ⟶ K) (hf : QuasiIso f)
-    (hP : CochainComplex.IsKFlat
+    (hP : CochainComplex.IsAcyclicTensorKFlat
       (R := proEtaleConstantRing T (Padic.coefficientExtensionRing l E n)) P)
     (hK : intrinsicFiniteTorsionConstructible l E n hn T (DerivedCategory.Q.obj K))
     (hL : intrinsicFiniteTorsionConstructible l E n hn T (DerivedCategory.Q.obj L))

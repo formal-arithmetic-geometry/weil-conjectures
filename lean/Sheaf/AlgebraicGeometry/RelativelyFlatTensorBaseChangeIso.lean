@@ -41,8 +41,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 private theorem tensorPullback_kFlat {X Y : Scheme.{u}} (f : X ⟶ Y)
     [(Scheme.Modules.tensorPullback f).Additive]
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := Y.sheaf) P) :
-    CochainComplex.IsKFlat (R := X.sheaf)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P) :
+    CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf)
       (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)).obj P) := by
   have h := CochainComplex.isKFlat_pullback f.base X.sheaf Y.sheaf ⟨f.c⟩ P hP
   convert h using 1

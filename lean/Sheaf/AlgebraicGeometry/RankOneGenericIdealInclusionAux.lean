@@ -5,7 +5,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.LinearAlgebra.Dimension.Finite
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import Mathlib.LinearAlgebra.Dimension.Free
 

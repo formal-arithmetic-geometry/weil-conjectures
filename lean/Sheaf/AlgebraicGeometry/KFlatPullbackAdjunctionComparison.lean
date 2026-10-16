@@ -26,7 +26,7 @@ private theorem counit_isIso {S S' : Scheme.{u}} (g : S' ⟶ S)
     (hε : (derivedPullback g).IsLeftDerivedFunctor ε
       (HomotopyCategory.quasiIso _ (.up ℤ)))
     (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := S.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P) :
     IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨_, _, _, _, _, _, _, F, hF, hmap, hAdd, δ, hδ, _, hK⟩ :=
     Classical.choose_spec (exists_derivedPullback g)
@@ -72,13 +72,13 @@ theorem kFlat_pullback_adjunction_comparison
     {S S' : Scheme.{u}} (g : S' ⟶ S) :
     ∃ (_hL : (Scheme.Modules.tensorPullback g).Additive)
       (e : ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
-        (_ : CochainComplex.IsKFlat (R := S.sheaf) P),
+        (_ : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P),
           (DerivedCategory.Q
               (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace))).obj
               (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P) ≅
             (derivedPullback g).obj (DerivedCategory.Q.obj P)),
       ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
-        (hP : CochainComplex.IsKFlat (R := S.sheaf) P)
+        (hP : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P)
         (I : CochainComplex (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ)
         (α : P ⟶ ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).mapHomologicalComplex
           (.up ℤ)).obj I),
@@ -109,10 +109,10 @@ theorem kFlat_pullback_adjunction_comparison
   let uT := DerivedCategory.quotientCompQhIso
     (SheafOfModules.{u} (moduleRings S'.toRingedSpace))
   have hεP (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
-      (hP : CochainComplex.IsKFlat (R := S.sheaf) P) : IsIso (ε.app (q.obj P)) :=
+      (hP : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P) : IsIso (ε.app (q.obj P)) :=
     counit_isIso g ε hε P hP
   let e (P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
-      (hP : CochainComplex.IsKFlat (R := S.sheaf) P) :
+      (hP : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P) :
       (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings S'.toRingedSpace))).obj
         ((E.mapHomologicalComplex (.up ℤ)).obj P) ≅
           (derivedPullback g).obj (DerivedCategory.Q.obj P) := by

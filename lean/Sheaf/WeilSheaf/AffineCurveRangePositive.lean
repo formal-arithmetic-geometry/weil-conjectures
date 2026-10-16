@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 import WeilConjectures.WeilSheaf.Category
-import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 
 @[expose] public section
 

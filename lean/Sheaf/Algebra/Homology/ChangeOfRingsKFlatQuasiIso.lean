@@ -57,12 +57,12 @@ theorem changeOfRings_kFlat_quasiIso
       E.map a = eqToHom (h M) ≫ changeOfRingsHom.{u, u, u} φ M a ≫ eqToHom (h N).symm)
     [E.Additive] :
     ∀ {P Q : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ} (α : P ⟶ Q),
-      P.IsKFlat → Q.IsKFlat → QuasiIso α →
+      P.IsAcyclicTensorKFlat → Q.IsAcyclicTensorKFlat → QuasiIso α →
         QuasiIso ((E.mapHomologicalComplex (ComplexShape.up ℤ)).map α) := by
   intro P Q α hP hQ hα
   have hcone : (CochainComplex.mappingCone α).Acyclic :=
     (CochainComplex.mappingCone.quasiIso_iff_acyclic α).1 hα
-  have hkcone : (CochainComplex.mappingCone α).IsKFlat :=
+  have hkcone : (CochainComplex.mappingCone α).IsAcyclicTensorKFlat :=
     CochainComplex.isKFlat_mappingCone α hP hQ
   have hEcone := changeOfRings_acyclic_of_isKFlat φ E h hm
     (CochainComplex.mappingCone α) hkcone hcone

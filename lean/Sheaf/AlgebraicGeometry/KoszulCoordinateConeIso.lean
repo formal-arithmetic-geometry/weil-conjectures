@@ -6,7 +6,7 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.Linear

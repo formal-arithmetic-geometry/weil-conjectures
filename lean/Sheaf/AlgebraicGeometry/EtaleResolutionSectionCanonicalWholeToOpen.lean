@@ -6,7 +6,7 @@ Authors: SHEAF groups J3 and T1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
-import Sheaf.AlgebraicGeometry.ConstantSectionAdjunctPullback
+import WeilConjectures.AlgebraicGeometry.ConstantSectionAdjunctPullback
 
 /-!
 # Whole-to-open restriction of normalized resolution comparisons

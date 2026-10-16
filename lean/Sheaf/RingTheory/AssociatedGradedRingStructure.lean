@@ -5,7 +5,7 @@ Authors: SHEAF group NB
 -/
 module
 
-public import Sheaf.RingTheory.AssociatedGradedRing
+public import WeilConjectures.RingTheory.AssociatedGradedRing
 public import Mathlib.Data.Finset.NatAntidiagonal
 
 /-!

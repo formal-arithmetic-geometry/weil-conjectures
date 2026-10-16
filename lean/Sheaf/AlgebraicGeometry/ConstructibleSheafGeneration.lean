@@ -6,10 +6,10 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Mathlib.CategoryTheory.Sites.Limits
 import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
-import Sheaf.AlgebraicGeometry.AffineEtaleRankOneSeparating
+import WeilConjectures.AlgebraicGeometry.AffineEtaleRankOneSeparating
 
 /-!
 # Constructible module sheaves generate the small etale topos

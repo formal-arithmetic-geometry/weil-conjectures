@@ -6,7 +6,7 @@ Authors: SHEAF group H2
 module
 
 import all Sheaf.AlgebraicGeometry.AmpleIso
-import all Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus
+import all WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
 
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula

@@ -5,11 +5,11 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.EtaleInverseImageSmallUniverse
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 

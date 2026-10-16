@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 import Sheaf.AlgebraicGeometry.ConstructibleModuleIntegralStalkEmbedding
 import Sheaf.AlgebraicGeometry.ConstructibleModuleIntegralMapFactorization

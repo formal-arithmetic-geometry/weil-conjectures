@@ -6,7 +6,7 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.RingTheory.StrictlyStandardElement
-import Sheaf.LinearAlgebra.Matrix.LeftInverseMinors
+import WeilConjectures.LinearAlgebra.Matrix.LeftInverseMinors
 import Sheaf.RingTheory.PopescuTranslatedPresentation
 import Mathlib.Tactic.LinearCombination
 

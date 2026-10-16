@@ -11,7 +11,21 @@ public import WeilConjectures.CategoryTheory.Sites.CechComplex
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 
 import Sheaf.AlgebraicGeometry.AffineComparisonCechCocycleDescent
-import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
+import WeilConjectures.CategoryTheory.InjectiveSheafCechAcyclic
+import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
+import Sheaf.RingTheory.IndEtaleStability
+import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
+import Sheaf.AlgebraicGeometry.FibreProductLimit
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.CategoryTheory.InjectiveSheafCechAcyclic
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimitStatement
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.RingTheory.IndPrincipalZariski
+import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import WeilConjectures.CategoryTheory.SiteCechComplex
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Finite affine Čech exactness for comparison pullbacks of injectives

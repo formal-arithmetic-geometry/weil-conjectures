@@ -5,14 +5,14 @@ Authors: SHEAF group A2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FiberDegreeBound
+public import WeilConjectures.AlgebraicGeometry.FiberDegreeBound
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Sheaf.AlgebraicGeometry.FlatFpLqfMaximalDegreeEtaleNeighborhood
-import Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange
-import Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfDegreeOfEtaleCover
+import WeilConjectures.AlgebraicGeometry.FiniteFiberDegreeBaseChange
+import WeilConjectures.AlgebraicGeometry.IsFiniteLocallyFreeOfDegreeOfEtaleCover
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-!

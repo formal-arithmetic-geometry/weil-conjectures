@@ -8,6 +8,24 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
 import Sheaf.AlgebraicGeometry.DerivedModuleUnderlyingComparison
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.EtaleCohomologyContinuity
+import WeilConjectures.AlgebraicGeometry.HypercoverCohomology
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import Sheaf.AlgebraicGeometry.BaseChangeTargetLimitGeometry
+import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso
+import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
+import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
+import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.CategoryTheory.TruncationTriangle
 
 /-!
 # Continuity for bounded-below étale complexes

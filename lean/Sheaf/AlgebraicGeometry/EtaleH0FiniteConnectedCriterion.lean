@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 import Sheaf.AlgebraicGeometry.EtaleAbelianH0FiniteConnectedCriterion
-import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison
 
 /-!
 # A finite-cover connectedness criterion for étale module sections

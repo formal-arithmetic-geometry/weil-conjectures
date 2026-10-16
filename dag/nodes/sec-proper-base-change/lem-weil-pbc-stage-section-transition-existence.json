@@ -57,8 +57,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.StageSectionTransitionExistence",
-  "file": "lean/Sheaf/CategoryTheory/StageSectionTransitionExistence.lean",
+  "module": "WeilConjectures.CategoryTheory.StageSectionTransitionExistence",
+  "file": "lean/WeilConjectures/CategoryTheory/StageSectionTransitionExistence.lean",
   "declaration": "CategoryTheory.stage_section_transition_existence",
   "statement": "theorem stage_section_transition_existence\n    (J : Type u) [SmallCategory J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    (i : J) :\n    ∃ (θ : ∀ (t t' : Under i) (b : t ⟶ t'),\n        sheafPullback (F.map t.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t.right).toGrothendieck ⟶\n        sheafPullback (F.map t'.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t'.right).toGrothendieck ⋙\n          (F.map b.right).toFunctor.sheafPushforwardContinuous (Type u)\n            (P t.right).toGrothendieck (P t'.right).toGrothendieck),\n      ∀ (G : Sheaf (P i).toGrothendieck (Type u))\n        (t t' : Under i) (b : t ⟶ t') (X : F.obj i),\n        Arrow.mk (((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app\n            (op X) ≫ ((θ t t' b).app G).hom.app\n              (op ((F.map t.hom).toFunctor.obj X))) =\n        Arrow.mk (((sheafAdjunctionContinuous (F.map t'.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t'.right).toGrothendieck).unit.app G).hom.app\n            (op X))",
   "branch": "sheaf-dag",

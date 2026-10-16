@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitCharts
-import Sheaf.AlgebraicGeometry.FlatOfFpqcCover
+import WeilConjectures.AlgebraicGeometry.FlatOfFpqcCover
 import Mathlib.LinearAlgebra.StdBasis
 
 /-!

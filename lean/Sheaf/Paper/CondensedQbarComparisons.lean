@@ -5,6 +5,8 @@ Authors: SHEAF group NJ
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
@@ -46,8 +48,8 @@ TwoColimit.lean, final transport paragraph
 (blueprint: prop-weil-pbc-qbar-condensed-basechange-compatibility). -/
 noncomputable def constructibleToQbarPullIso (K : PadicSubfieldConstructible U ℓ E) :
     (constructibleToPadicAlgCl T ℓ E).obj
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k h).obj K) ≅
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k h).obj
+        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))).obj K) ≅
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (h.asOver (Spec (.of k)))).obj
         ((constructibleToPadicAlgCl U ℓ E).obj K) :=
   ObjectProperty.isoMk _
     ((derivedPullIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) h).app K.obj)
@@ -58,8 +60,8 @@ TwoColimit.lean, final transport paragraph
 (blueprint: prop-weil-pbc-qbar-condensed-basechange-compatibility). -/
 noncomputable def constructibleToQbarPushHom (K : PadicSubfieldConstructible T ℓ E) :
     (constructibleToPadicAlgCl U ℓ E).obj
-        ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k h).obj K) ⟶
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ k h).obj
+        ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))).obj K) ⟶
+      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (h.asOver (Spec (.of k)))).obj
         ((constructibleToPadicAlgCl T ℓ E).obj K) :=
   ObjectProperty.homMk
     ((derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) h).app K.obj)
@@ -87,14 +89,14 @@ pullback of the push comparison for `f`. Source: TwoColimit.lean, final transpor
 (blueprint: prop-weil-pbc-qbar-condensed-basechange-compatibility). -/
 noncomputable def constructibleToQbarSourceHom (K : PadicSubfieldConstructible X ℓ E) :
     (constructibleToPadicAlgCl Y' ℓ E).obj
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).obj
-          ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f).obj K)) ⟶
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g).obj
-        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ k f).obj
+        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g.asOver (Spec (.of k)))).obj
+          ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ (f.asOver (Spec (.of k)))).obj K)) ⟶
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (g.asOver (Spec (.of k)))).obj
+        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (f.asOver (Spec (.of k)))).obj
           ((constructibleToPadicAlgCl X ℓ E).obj K)) :=
   (constructibleToQbarPullIso ℓ k E g
-      ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f).obj K)).hom ≫
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g).map
+      ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ (f.asOver (Spec (.of k)))).obj K)).hom ≫
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (g.asOver (Spec (.of k)))).map
       (constructibleToQbarPushHom ℓ k E f K)
 
 /-- The specified target comparison `U_K`: first the push comparison for `f'`, then the
@@ -102,14 +104,14 @@ pushforward of the pull comparison for `g'`. Source: TwoColimit.lean, final tran
 (blueprint: prop-weil-pbc-qbar-condensed-basechange-compatibility). -/
 noncomputable def constructibleToQbarTargetHom (K : PadicSubfieldConstructible X ℓ E) :
     (constructibleToPadicAlgCl Y' ℓ E).obj
-        ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f').obj
-          ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g').obj K)) ⟶
-      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ k f').obj
-        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g').obj
+        ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).obj
+          ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).obj K)) ⟶
+      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (f'.asOver (Spec (.of k)))).obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (g'.asOver (Spec (.of k)))).obj
           ((constructibleToPadicAlgCl X ℓ E).obj K)) :=
   constructibleToQbarPushHom ℓ k E f'
-      ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g').obj K) ≫
-    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ k f').map
+      ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).obj K) ≫
+    (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (f'.asOver (Spec (.of k)))).map
       (constructibleToQbarPullIso ℓ k E g' K).hom
 
 end Square

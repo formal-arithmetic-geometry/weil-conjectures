@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.CategoryTheory.Filtered.Final
-import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
+import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
 
 /-! # Relative flatness on stalks
 

@@ -11,7 +11,7 @@ import Mathlib.RingTheory.TensorProduct.IsBaseChangeRightExact
 import Mathlib.RingTheory.TensorProduct.IsBaseChangePi
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Sheaf.RingTheory.BaseChangeDiagramElementwise
+import WeilConjectures.RingTheory.BaseChangeDiagramElementwise
 /-!
 # Cokernels of a descended matrix on a later tail
 Source: Stacks Project, Algebra, Tag 00QX (the choice of λ₂), and Tag 00R1.

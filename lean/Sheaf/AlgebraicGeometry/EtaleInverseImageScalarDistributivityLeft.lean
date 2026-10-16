@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLiftOperations
-import Sheaf.AlgebraicGeometry.ProductComparisonDistributivity
+import WeilConjectures.AlgebraicGeometry.ProductComparisonDistributivity
 
 /-! # Distributivity of the transported scalar action
 

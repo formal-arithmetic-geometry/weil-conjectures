@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
-public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
+public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionTransfer
 
 @[expose] public section
 

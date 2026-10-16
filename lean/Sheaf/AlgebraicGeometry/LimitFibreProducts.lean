@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 import Sheaf.AlgebraicGeometry.LimitResidueField
-import Sheaf.AlgebraicGeometry.AffineFibreProductTransition
+import WeilConjectures.AlgebraicGeometry.AffineFibreProductTransition
 import Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Pullbacks
 
 /-!

@@ -132,7 +132,7 @@ private theorem tensorUnit_counit_kFlat_isIso {T X : Scheme.{uModel}} (g : T ⟶
       (HomotopyCategory.quasiIso
         (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)))
     (P : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P) :
     IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
   have hFE : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
@@ -350,8 +350,8 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
     (μ : curriedTensorPre (derivedPullback g) ≅ curriedTensorPost (derivedPullback g))
     (hμ : ∀ P N : CochainComplex
             (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,
-          CochainComplex.IsKFlat (R := X.sheaf) P →
-          CochainComplex.IsKFlat (R := X.sheaf) N →
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P →
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N →
           ((μ.app (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj N)).hom ≫
               (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
               ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
@@ -365,7 +365,7 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
     [IsIso (ε.app (𝟙_ (HomotopyCategory
       (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ))))]
     (P : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
     : (let η := derivedPullback_tensorUnitIso g F mF ε
        let A := DerivedCategory.Q.obj P
        (λ_ ((derivedPullback g).obj A)).hom =
@@ -389,7 +389,7 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
     (fun n ↦ hφ U P 0 n n (zero_add n))
   have huR := tensorUnit_complex_right F mF P (φ P U)
     (fun n ↦ hφ P U n 0 n (add_zero n))
-  have hU : CochainComplex.IsKFlat (R := X.sheaf) U := by
+  have hU : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) U := by
     intro N hN i
     exact (hN i).of_iso (ρ_ N).symm
   have hEP : IsIso (ε.app ((HomotopyCategory.quotient AX (ComplexShape.up ℤ)).obj P)) :=
@@ -409,8 +409,8 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
     intro K N f
     exact ε.naturality ((HomotopyCategory.quotient AX (ComplexShape.up ℤ)).map f)
   have hδ : ∀ K N : CochainComplex AX ℤ,
-      CochainComplex.IsKFlat (R := X.sheaf) K →
-      CochainComplex.IsKFlat (R := X.sheaf) N →
+      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) K →
+      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N →
       ((μ.inv.app (QX.obj K)).app (QX.obj N)) ≫ (e K ⊗ₘ e N) ≫
         Functor.LaxMonoidal.μ QT (FC.obj K) (FC.obj N) =
       (derivedPullback g).map (Functor.LaxMonoidal.μ QX K N) ≫ e (K ⊗ N) ≫

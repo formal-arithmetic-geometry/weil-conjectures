@@ -6,7 +6,7 @@ Authors: SHEAF group K2
 module
 
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
-public import Sheaf.AlgebraicGeometry.GradedSheafStructures
+public import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.Algebra.Category.Grp.Abelian

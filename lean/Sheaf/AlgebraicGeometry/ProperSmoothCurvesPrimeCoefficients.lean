@@ -15,12 +15,12 @@ public import Mathlib.Data.ZMod.Basic
 public import Mathlib.Algebra.Field.ULift
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 import Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionData
 import Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionExact
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.AlgebraicGeometry.ConstructibleAbelianSheaf
 import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierDimension
 import Sheaf.AlgebraicGeometry.EtaleFiniteStalkSpecializationCriterion

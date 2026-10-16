@@ -117,7 +117,7 @@ Source: blueprint order 1255, construction step 1; Stacks Tag 06YS
 structure AdicKFlatModel (X : Scheme.{t}) (Λ : Type t) [CommRing Λ]
     (K : proEtaleDerivedCategory X Λ) where
   complex : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X Λ)) ℤ
-  isKFlat : CochainComplex.IsKFlat (R := adicConstantRing X Λ) complex
+  isKFlat : CochainComplex.IsAcyclicTensorKFlat (R := adicConstantRing X Λ) complex
   flatTerms : ∀ p : ℤ, CategoryTheory.exactFunctor _ _
     (@MonoidalCategory.tensorRight _ _
       (SheafOfModules.monoidalCategory (adicConstantRing X Λ)) (complex.X p))
@@ -268,7 +268,7 @@ lem-pur-derived-change-of-rings, without a flatness assumption on the quotient o
 theorem adicReductionModel_isKFlat (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
     (d : CompleteCoefficientDatum Λ) {K : proEtaleDerivedCategory X Λ}
     (M : AdicKFlatModel X Λ K) (n : ℕ+) :
-    CochainComplex.IsKFlat (R := adicConstantRing X (Λ ⧸ d.ideal ^ (n : ℕ)))
+    CochainComplex.IsAcyclicTensorKFlat (R := adicConstantRing X (Λ ⧸ d.ideal ^ (n : ℕ)))
       (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n : ℕ))) M.complex) ∧
       ∀ p : ℤ, CategoryTheory.exactFunctor _ _
         (@MonoidalCategory.tensorRight _ _

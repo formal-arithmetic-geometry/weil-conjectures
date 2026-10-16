@@ -111,8 +111,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.BalancedActionAffineOpen",
-  "file": "lean/Sheaf/Paper/BalancedActionAffineOpen.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.BalancedActionAffineOpen",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/BalancedActionAffineOpen.lean",
   "declaration": "AlgebraicGeometry.balancedAction_affine_open",
   "statement": "theorem balancedAction_affine_open\n    {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of A))\n    (M : X.Modules) (_hM : M.IsQuasicoherent)\n    (rho : B →+* End M)\n    (hscalar : ∀ a : A, rho (algebraMap A B a) =\n      M.smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a))\n    (U : X.affineOpens) :\n    let g := Spec.map (CommRingCat.ofHom (algebraMap A B))\n    let Y := pullback f g\n    let pi : Y ⟶ X := pullback.fst f g\n    let fB : Y ⟶ Spec (.of B) := pullback.snd f g\n    let C := (TopCat.Sheaf.pushforward CommRingCat.{u} pi.base).obj Y.sheaf\n    ∃! tau : C.obj.obj (op U.val) →+* AddMonoid.End (M.val.obj (op U.val)),\n      (∀ (r : X.presheaf.obj (op U.val)) (x : M.val.obj (op U.val)),\n        tau (pi.app U.val r) x = r • x) ∧\n      (∀ (b : B) (x : M.val.obj (op U.val)),\n        tau (Y.presheaf.map (homOfLE (le_top (a := pi ⁻¹ᵁ U.val))).op\n          (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b)) x =\n            (rho b).val.app (op U.val) x)",
   "branch": "sheaf-dag",

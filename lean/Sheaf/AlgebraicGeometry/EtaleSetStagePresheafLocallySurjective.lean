@@ -6,7 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Sheaf.AlgebraicGeometry.EtaleSetFiniteLocalStageRepresentatives
 import Sheaf.AlgebraicGeometry.EtaleSetEventualLocalStageMatching

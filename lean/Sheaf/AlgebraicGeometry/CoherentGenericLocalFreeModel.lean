@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Sheaf.AlgebraicGeometry.CoherentStalkMapExtends
 import Sheaf.AlgebraicGeometry.CoherentLocalIsomorphism
 import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover

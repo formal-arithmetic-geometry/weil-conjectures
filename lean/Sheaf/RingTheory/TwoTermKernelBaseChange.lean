@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.RingTheory.Flat.Equalizer
 import Sheaf.Algebra.TorDimensionShiftFree
-import Sheaf.Paper.TorLongExactFirstVariable
+import WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-!

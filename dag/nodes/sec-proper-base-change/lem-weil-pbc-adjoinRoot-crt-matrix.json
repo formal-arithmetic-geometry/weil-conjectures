@@ -94,8 +94,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.AdjoinRootCRTMatrix",
-  "file": "lean/Sheaf/RingTheory/AdjoinRootCRTMatrix.lean",
+  "module": "WeilConjectures.RingTheory.AdjoinRootCRTMatrix",
+  "file": "lean/WeilConjectures/RingTheory/AdjoinRootCRTMatrix.lean",
   "declaration": "Polynomial.adjoinRoot_crt_matrix",
   "statement": "theorem adjoinRoot_crt_matrix {A : Type u} [CommRing A] (I : Ideal A) [Nontrivial (A ⧸ I)] (f : A[X]) (hf : f.Monic) (g h : (A ⧸ I)[X]) (hg : g.Monic) (hh : h.Monic) (hcoprime : IsCoprime g h) (hfactor : f.map (Ideal.Quotient.mk I) = g * h) (e : AdjoinRoot f) (he₁ : AdjoinRoot.map (Ideal.Quotient.mk I) f g (hfactor.symm ▸ dvd_mul_right g h) e = 1) (he₀ : AdjoinRoot.map (Ideal.Quotient.mk I) f h (hfactor.symm ▸ dvd_mul_left h g) e = 0) : let b := (AdjoinRoot.powerBasis' hf).basis; let T := Algebra.leftMulMatrix b (AdjoinRoot.root f); let P := Algebra.leftMulMatrix b e; let Tg := Algebra.leftMulMatrix (AdjoinRoot.powerBasis' hg).basis (AdjoinRoot.root g); let Th := Algebra.leftMulMatrix (AdjoinRoot.powerBasis' hh).basis (AdjoinRoot.root h); ∃ (d : Fin f.natDegree ≃ (Fin g.natDegree ⊕ Fin h.natDegree)) (U : (Matrix (Fin g.natDegree ⊕ Fin h.natDegree) (Fin g.natDegree ⊕ Fin h.natDegree) (A ⧸ I))ˣ), U.val * Matrix.reindex d d (T.map (Ideal.Quotient.mk I)) * U⁻¹.val = Matrix.fromBlocks Tg 0 0 Th ∧ U.val * Matrix.reindex d d (P.map (Ideal.Quotient.mk I)) * U⁻¹.val = Matrix.fromBlocks 1 0 0 0",
   "branch": "sheaf-dag",

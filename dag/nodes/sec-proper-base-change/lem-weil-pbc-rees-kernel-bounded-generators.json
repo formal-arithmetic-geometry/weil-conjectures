@@ -100,8 +100,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Module.ReesKernelGenerators",
-  "file": "lean/Sheaf/Algebra/Module/ReesKernelGenerators.lean",
+  "module": "WeilConjectures.Algebra.Module.ReesKernelGenerators",
+  "file": "lean/WeilConjectures/Algebra/Module/ReesKernelGenerators.lean",
   "declaration": "ReesAlgebra.bounded_generators",
   "statement": "theorem bounded_generators\n    (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)\n    (M : ℕ → Type v) [∀ n, AddCommGroup (M n)] [∀ n, Module A (M n)]\n    (mu : ∀ (k m : ℕ) (a : A), a ∈ I ^ k → M m →ₗ[A] M (m + k))\n    (mod : Module (reesAlgebra I) (⨁ n : ℕ, M n))\n    (hfin : @Module.Finite (reesAlgebra I) (⨁ n : ℕ, M n) _ _ mod)\n    (hact : ∀ (b : reesAlgebra I) (x : ⨁ n : ℕ, M n),\n      @SMul.smul _ _ mod.toSMul b x =\n        ∑ k ∈ b.val.support, ∑ m ∈ x.support,\n          DirectSum.of M (m + k) (mu k m (b.val.coeff k) (b.property k) (x m)))\n    (K : ∀ n, Submodule A (M n))\n    (hK : ∀ (k m : ℕ) (a : A) (ha : a ∈ I ^ k) (y : M m),\n      y ∈ K m → mu k m a ha y ∈ K (m + k)) :\n    ∃ c0 : ℕ, ∀ n : ℕ, K n ≤ Submodule.span A\n      {z : M n | ∃ (d k : ℕ) (h : d + k = n), d ≤ c0 ∧\n        ∃ (a : A) (ha : a ∈ I ^ k) (y : M d),\n          y ∈ K d ∧ z = h ▸ mu k d a ha y}",
   "branch": "sheaf-dag",

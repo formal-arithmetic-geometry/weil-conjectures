@@ -5,8 +5,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 import WeilConjectures.SixFunctors.Finite.BaseChange
-import Sheaf.AlgebraicGeometry.EtaleEdgeMapBaseChange
-import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
+import WeilConjectures.AlgebraicGeometry.EtaleEdgeMapBaseChange
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison
 /-! # Finite pushforward H¹ lifting over a henselian local ring
 
 Source: Stacks Project, Lemma 0A5H, finite-pushforward lifting argument.

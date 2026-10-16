@@ -540,7 +540,7 @@ given by the covers and their composites with the differential of G, hence is ep
 is a homotopy equivalence, so K remains K-flat and the new augmentation is a
 quasi-isomorphism. Its components are epi and its terms are finite sums of flat
 objects. Finally apply categorical K-flatness to the quasi-isomorphism 0 → Z
-for an acyclic complex Z to obtain precisely `IsKFlat K`. -/
+for an acyclic complex Z to obtain precisely `IsAcyclicTensorKFlat K`. -/
 theorem exists_isKFlatResolutionGeneral
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{max u v}}
@@ -548,7 +548,7 @@ theorem exists_isKFlatResolutionGeneral
       ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) :
     ∃ (K : CochainComplex (SheafOfModules.{max u v}
       ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ)
-      (f : K ⟶ G), CochainComplex.IsKFlat K ∧
+      (f : K ⟶ G), CochainComplex.IsAcyclicTensorKFlat K ∧
         (∀ i : ℤ, exactFunctor _ _
           (@MonoidalCategory.tensorRight _ _ (SheafOfModules.monoidalCategory R) (K.X i))) ∧
         QuasiIso f ∧ (∀ i : ℤ, Epi (f.f i)) := by

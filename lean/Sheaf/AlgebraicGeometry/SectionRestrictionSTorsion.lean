@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import WeilConjectures.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus
+import WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
 
 /-! # Restriction-zero sections are killed by a power of an invertible section
 

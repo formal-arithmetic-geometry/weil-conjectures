@@ -2,7 +2,7 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import Sheaf.AlgebraicGeometry.EtaleOpenFreeSheafPullback
-import Sheaf.CategoryTheory.ExactFunctorResolutionCocycle
+import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 
 @[expose] public section
 

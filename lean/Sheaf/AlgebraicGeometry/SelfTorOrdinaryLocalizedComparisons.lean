@@ -70,7 +70,7 @@ private theorem kFlat_tensor_right_of_quasiIso
     {E E' K : CochainComplex
       (SheafOfModules.{u}
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
-    (α : E ⟶ E') (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (α : E ⟶ E') (hα : QuasiIso α) (hK : K.IsAcyclicTensorKFlat) :
     (letI := SheafOfModules.monoidalCategory R
      QuasiIso (HomologicalComplex.mapBifunctorMap α (𝟙 K) (curriedTensor _) (.up ℤ))) := by
   let := SheafOfModules.monoidalCategory R
@@ -90,7 +90,7 @@ private theorem kFlat_tensor_left_of_quasiIso
     {K L L' : CochainComplex
       (SheafOfModules.{u}
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
-    (α : L ⟶ L') (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (α : L ⟶ L') (hα : QuasiIso α) (hK : K.IsAcyclicTensorKFlat) :
     (letI := SheafOfModules.monoidalCategory R
      QuasiIso (HomologicalComplex.mapBifunctorMap (𝟙 K) α (curriedTensor _) (.up ℤ))) := by
   let := SheafOfModules.monoidalCategory R
@@ -133,8 +133,8 @@ private theorem site_kFlat_tensor_quasiIso
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
     (α : E ⟶ E')
     (hα : QuasiIso α)
-    (hE : E.IsKFlat)
-    (hE' : E'.IsKFlat) :
+    (hE : E.IsAcyclicTensorKFlat)
+    (hE' : E'.IsAcyclicTensorKFlat) :
     (letI := SheafOfModules.monoidalCategory R
      QuasiIso (HomologicalComplex.mapBifunctorMap α (𝟙 N) (curriedTensor _) (.up ℤ))) := by
   let := SheafOfModules.monoidalCategory R
@@ -163,7 +163,7 @@ Source: Stacks Project, Tags 06YB and 06YT. -/
 private theorem tensor_homology_iso_of_resolutions
     (Y : Scheme.{u})
     (E K N T : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (r : E ⟶ T) (q : K ⟶ T) (hE : E.IsKFlat) (hK : K.IsKFlat)
+    (r : E ⟶ T) (q : K ⟶ T) (hE : E.IsAcyclicTensorKFlat) (hK : K.IsAcyclicTensorKFlat)
     (hr : QuasiIso r) (hq : QuasiIso q) (j : ℤ) :
     letI := SheafOfModules.monoidalCategory Y.sheaf
     Nonempty ((CochainComplex.mapBifunctor E N (curriedTensor _)).homology j ≅
@@ -243,7 +243,7 @@ theorem exists_selfTor_ordinary_localized_comparisons
     (q : K ⟶ (CochainComplex.singleFunctor
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
         ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)))
-    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K) (hq : QuasiIso q) (n : ℕ) :
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K) (hq : QuasiIso q) (n : ℕ) :
     letI := SheafOfModules.monoidalCategory Y.sheaf
     let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
     let S := CochainComplex.singleFunctor
@@ -298,7 +298,7 @@ theorem exists_selfTor_ordinary_localized_comparisons
   let E := F.obj ⟨T, hT⟩
   let r := ε.app ⟨T, hT⟩
   obtain ⟨hflat, hbound, _, hr⟩ := hF ⟨T, hT⟩
-  have hE : E.IsKFlat := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
+  have hE : E.IsAcyclicTensorKFlat := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
     Y.toRingedSpace E ⟨0, hbound⟩ hflat
   let := SheafOfModules.monoidalCategory Y.sheaf
   obtain ⟨e⟩ := tensor_homology_iso_of_resolutions Y E K T T r q hE hK hr hq

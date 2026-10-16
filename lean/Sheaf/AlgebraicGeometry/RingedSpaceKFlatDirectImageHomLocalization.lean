@@ -54,7 +54,7 @@ theorem moduleDirectImage_kFlat_hom_localization_bijective
     [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z))]
     (f : X ⟶ Y) (g : Y ⟶ Z)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) [I.IsKInjective]
-    (K : CochainComplex (SheafOfModules.{u} (moduleRings Z)) ℤ) (hK : K.IsKFlat) :
+    (K : CochainComplex (SheafOfModules.{u} (moduleRings Z)) ℤ) (hK : K.IsAcyclicTensorKFlat) :
     Function.Bijective (DerivedCategory.Qh.map :
       (((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K) ⟶
         ((moduleDirectImage g).mapHomotopyCategory (ComplexShape.up ℤ)).obj
@@ -69,7 +69,7 @@ theorem moduleDirectImage_kFlat_hom_localization_bijective
   let I₀ := (HomotopyCategory.quotient _ (.up ℤ)).obj I
   have hres : ∀ T : HomotopyCategory (SheafOfModules.{u} (moduleRings Z)) (.up ℤ),
       ∃ (A : CochainComplex (SheafOfModules.{u} (moduleRings Z)) ℤ),
-        A.IsKFlat ∧ ∃ z : q.obj A ⟶ T, IsIso (Q.map z) := by
+        A.IsAcyclicTensorKFlat ∧ ∃ z : q.obj A ⟶ T, IsIso (Q.map z) := by
     intro T
     obtain ⟨T, rfl⟩ := HomotopyCategory.quotient_obj_surjective T
     obtain ⟨A, z, hA, _, hz, _⟩ := CochainComplex.exists_isKFlatResolution T
@@ -79,7 +79,7 @@ theorem moduleDirectImage_kFlat_hom_localization_bijective
     simpa only [HomotopyCategory.quotient_map_mem_quasiIso_iff,
       HomologicalComplex.mem_quasiIso_iff] using hz
   have hinv : ∀ (A B : CochainComplex (SheafOfModules.{u} (moduleRings Z)) ℤ),
-      A.IsKFlat → B.IsKFlat → ∀ s : q.obj A ⟶ q.obj B,
+      A.IsAcyclicTensorKFlat → B.IsAcyclicTensorKFlat → ∀ s : q.obj A ⟶ q.obj B,
         IsIso (Q.map s) → IsIso (QX.map (G.map s)) := by
     intro A B hA hB s hs
     let := hs

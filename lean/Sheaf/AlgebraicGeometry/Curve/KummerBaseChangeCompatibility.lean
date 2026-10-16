@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import Sheaf.AlgebraicGeometry.GmPicardPullback
 import Sheaf.AlgebraicGeometry.Curve.AffinePicardTorsionBaseChange
 import Sheaf.AlgebraicGeometry.BaseChangeCurve
-import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 
 /-!
 # Kummer compatibility under algebraically closed base change

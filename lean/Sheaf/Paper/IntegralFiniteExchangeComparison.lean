@@ -5,6 +5,8 @@ Authors: SHEAF group A2
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
@@ -83,7 +85,7 @@ theorem integralFiniteExchange_comparison
       (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology
         (ModuleCat.{u + 1} (ULift.{u + 1} (integralResidue ℓ E))))),
       Nonempty (Arrow.mk ((integralReduction ℓ E Y').map
-          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq).app M).hom) ≅
+          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app M).hom) ≅
         Arrow.mk (F.map ((Etale.baseChange
           (ModuleCat.{u + 1} (ULift.{u + 1} (integralResidue ℓ E))) sq).app L))) := by
   obtain ⟨N, _, ⟨e₁⟩⟩ := integralResidueExchange_comparison ℓ E k sq M

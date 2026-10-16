@@ -12,7 +12,7 @@ public import Mathlib.GroupTheory.Index
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
 import Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 
 /-!

@@ -6,10 +6,10 @@ Authors: SHEAF group D3
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.AB
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Sheaf.Paper.ProEtaleModelTypePartition
 import Sheaf.Paper.ProEtaleUniformModelEtaleCover
-import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 
 /-! # Descent of finite pro-etale models to an etale trivializing cover
 

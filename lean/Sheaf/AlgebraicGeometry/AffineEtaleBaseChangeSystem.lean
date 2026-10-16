@@ -5,9 +5,9 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 public import Mathlib.CategoryTheory.Sites.Continuous
-import Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeGeometry
+import WeilConjectures.AlgebraicGeometry.AffineEtaleBaseChangeGeometry
 import Sheaf.AlgebraicGeometry.AffineEtaleCartesianSheafAdjunction
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 

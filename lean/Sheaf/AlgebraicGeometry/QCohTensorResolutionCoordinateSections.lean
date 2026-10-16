@@ -23,8 +23,8 @@ noncomputable def tensorResolutionCoordinateSections
     (P : ProjectiveResolution MA) (K F : CochainComplex Y.Modules ℤ)
     (q : K ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj M)
     (s : F ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj N)
-    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K)
-    (hF : CochainComplex.IsKFlat (R := Y.sheaf) F)
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K)
+    (hF : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) F)
     (hq : QuasiIso q) (hs : QuasiIso s) (n : ℕ) :
     ((((tensorRight NA).mapHomologicalComplex (.down ℕ)).obj P.complex).homology n) ≃ₗ[Γ(Y, U.1)]
     ((CochainComplex.mapBifunctor K

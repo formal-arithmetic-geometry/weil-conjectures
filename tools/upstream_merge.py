@@ -252,7 +252,7 @@ def resolved_index(d):
         for l in (d / "index.tsv").read_text().splitlines():
             f = l.split("\t")
             if len(f) >= 4 and not l.startswith("#"):
-                idx[(f[0], f[1], f[2])] = f[3:]
+                idx[(f[0], f[1] or None, f[2] or None)] = f[3:]
     return idx
 
 
@@ -370,7 +370,7 @@ def redirect_text(text, rel, mapping):
         masked = lean_code_mask(text)
         edits = [(m.start(), m.end(), make(m)) for m in pattern.finditer(masked)]
         for start, end, value in reversed(edits): text = text[:start] + value + text[end:]
-    imports = mapping.get("imports", {})
+    imports = mapping.get("imports", {}) if rel not in mapping.get("preserve_imports_in", []) else {}
     masked = lean_code_mask(text)
     edits = []
     for line in re.finditer(r"(?m)^[ \t]*(?:(?:public|meta|private)\s+)*import[ \t]+([^\n]*)", masked):
@@ -397,6 +397,72 @@ def redirect_text(text, rel, mapping):
             changes[f"predicate .{rule['from']} -> {rule['to']}"] += 1
             return f"({rule['to']} {m.group(1)})"
         replace(pat, predicate)
+    for rule in mapping.get("implicit_first_arguments", []):
+        if not allowed(rule) or rule["name"] not in text: continue
+        masked = lean_code_mask(text); edits = []
+        pattern = re.compile(r"(?<![\w'.])" + re.escape(rule["name"]) + r"(?![\w'.])")
+        for match in pattern.finditer(masked):
+            line_start = masked.rfind("\n", 0, match.start()) + 1
+            if re.match(r"\s*attribute\b", masked[line_start:match.start()]): continue
+            pos = match.end()
+            # Only an actual same-line application; a bare reference or attribute
+            # must not consume the next command, including intervening comments.
+            while pos < len(masked) and masked[pos] in " \t": pos += 1
+            start = pos
+            if pos < len(masked) and masked[pos] == "(":
+                depth = 1; pos += 1
+                while pos < len(masked) and depth:
+                    if masked[pos] == "(": depth += 1
+                    elif masked[pos] == ")": depth -= 1
+                    pos += 1
+                if depth: continue
+                value = text[start:pos]
+                if re.match(r"\(\s*[\w']+\s*:=", value): continue
+            else:
+                arg = re.match(r"[\w']+(?:\.[\w']+)*", masked[pos:])
+                if not arg: continue
+                pos += len(arg.group()); value = text[start:pos]
+            edits.append((match.end(), pos, " (" + rule["argument"] + " := " + value + ")"))
+            changes["implicit argument " + rule["name"]] += 1
+        for start, end, value in reversed(edits): text = text[:start] + value + text[end:]
+    # Bundle Scheme morphisms/squares using the canonical over-category API. This
+    # retains the caller's Scheme-level hypotheses and the exact exchange map.
+    over_edits = []
+    for rule in mapping.get("over_applications", []):
+        if not allowed(rule) or rule["name"] not in text: continue
+        masked = lean_code_mask(text)
+        def argument(pos):
+            while pos < len(masked) and masked[pos].isspace(): pos += 1
+            start = pos
+            if pos >= len(masked): raise ValueError("missing argument")
+            if masked[pos] in "([{":
+                stack = [masked[pos]]; pos += 1
+                while stack:
+                    if masked[pos] in "([{": stack.append(masked[pos])
+                    elif masked[pos] in ")]}": stack.pop()
+                    pos += 1
+            else:
+                match = re.match(r"[\w'.]+", masked[pos:])
+                if not match: raise ValueError("not an atomic argument")
+                pos += len(match.group())
+            return pos, text[start:pos]
+        for match in re.finditer(r"(?<![\w'.])" + re.escape(rule["name"]) + r"(?![\w'])", masked):
+            try:
+                pos, coefficient = argument(match.end())
+                pos, ell = argument(pos); pos, field = argument(pos)
+                if ell != "ℓ" or field != "k": continue
+                values = []
+                for _ in range(rule["arity"]):
+                    pos, value = argument(pos); values.append(value)
+                replacement = match.group() + " " + coefficient + " ℓ " + " ".join(
+                    "(" + value + ".asOver (Spec (.of k)))" for value in values)
+                over_edits.append((match.start(), pos, replacement))
+                changes["over application " + rule["name"]] += 1
+            except (ValueError, IndexError): continue
+    for start, end, replacement in sorted(over_edits, reverse=True):
+        text = text[:start] + replacement + text[end:]
+    if over_edits and "import Sheaf.AlgebraicGeometry.OverSquare" not in text:
+        text = text.replace("module\n", "module\n\npublic import Sheaf.AlgebraicGeometry.OverSquare\n", 1)
     for rule in mapping.get("structural_witnesses", []):
         if not allowed(rule): continue
         for chooser, theorem in (("choose_spec", "strictHenselizationStructuralMap_eq"), ("choose", "strictHenselizationStructuralMap")):
@@ -448,7 +514,11 @@ def migrate(args):
         if isinstance(old, str) and old in node_rules:
             rule = node_rules[old]; rule = {"declaration": rule} if isinstance(rule, str) else rule
             record["declaration"] = rule["declaration"]
-            if "module" in rule: record["module"] = rule["module"]
+            if "module" in rule:
+                record["module"] = rule["module"]
+                if "file" in record:
+                    record["file"] = "lean/" + rule["module"].replace(".", "/") + ".lean"
+            if "statement" in rule: record["statement"] = rule["statement"]
             changes[old] = rule["declaration"]
         values = record.get("declarations")
         if isinstance(values, list):

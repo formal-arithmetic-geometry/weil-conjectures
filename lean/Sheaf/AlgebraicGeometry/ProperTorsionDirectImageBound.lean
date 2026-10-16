@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 import Sheaf.Topology.DimensionSupremumLocalDimensions
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
 import Mathlib.AlgebraicGeometry.Sites.Etale
 import Mathlib.CategoryTheory.Sites.Sheaf
@@ -23,7 +23,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm

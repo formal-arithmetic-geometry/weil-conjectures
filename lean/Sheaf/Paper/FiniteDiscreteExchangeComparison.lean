@@ -9,6 +9,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 import Sheaf.Paper.FiniteDiscreteExchangeRealization
 import Sheaf.Paper.ConstantInternalModuleSheafEquivalence
+public import Sheaf.AlgebraicGeometry.OverSquare
+
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 
 /-! # Finite discrete internal coefficients and etale exchange
@@ -140,14 +143,15 @@ theorem finiteDiscreteExchange_comparison
           (condensedRingObj (Profinite.continuousMapRingObj.{u} B) Y')))
       (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology
         (ModuleCat.{u + 1} (ULift.{u + 1} B)))),
-      Nonempty (Arrow.mk ((boundedConstructibleBaseChange
-          (Profinite.continuousMapRingObj.{u} B) ℓ k sq).app N).hom ≅
+      Nonempty (Arrow.mk ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj.{u} B) ℓ (sq.asOver (Spec (.of k)))).app N).hom ≅
         Arrow.mk (F.map ((Etale.baseChange
           (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).app L))) := by
   obtain ⟨F0, cs, hfull, htri, hsingle, F1, hsteps⟩ :=
     finiteDiscreteExchange_stepRealization B ℓ k hB sq (fun T ↦ by
       have : ((Scheme.ProEt.topology T).W (A := Ab.{u + 1})).IsMonoidal :=
         GrothendieckTopology.W.monoidal (J := Scheme.ProEt.topology T) (A := Ab.{u + 1})
+      have : HasLimitsOfSize.{u, u + 1} (ModuleCat.{u + 1} (ULift.{u + 1} B)) :=
+        hasLimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} _
       exact constantInternalModuleSheaf_equivalence (Scheme.ProEt.topology T)
         (ULift.{u + 1} B))
   let := cs
@@ -159,11 +163,23 @@ theorem finiteDiscreteExchange_comparison
   have : P.IsClosedUnderIsomorphisms :=
     ⟨fun e h ↦ _root_.constructible_of_iso e h⟩
   refine ⟨F1, ?_⟩
-  refine boundedArrowComparison F0 P
+  -- Specify the bundled schemes before elaborating the exchange transformation.
+  refine boundedArrowComparison
+    (C := FiniteDiscreteInternalModules B X)
+    (A := DerivedCategory.Plus (Sheaf X.smallEtaleTopology
+      (ModuleCat.{u + 1} (ULift.{u + 1} B))))
+    (D := DerivedCategory (FiniteDiscreteInternalModules B Y'))
+    (E := DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology
+      (ModuleCat.{u + 1} (ULift.{u + 1} B)))) F0 P
     (ProEtale.boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X))
     (fun _ ↦ Iff.rfl)
-    (boundedConstructibleBaseChange (Profinite.continuousMapRingObj.{u} B) ℓ k sq)
+    (boundedConstructibleBaseChange (Profinite.continuousMapRingObj.{u} B) ℓ
+      (k := k) (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+      (f := f.asOver (Spec (.of k))) (g := g.asOver (Spec (.of k)))
+      (f' := f'.asOver (Spec (.of k))) (g' := g'.asOver (Spec (.of k)))
+      (sq.asOver (Spec (.of k))))
     (Etale.baseChange (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq) F1 hsingle ?_ N
   intro L hL
   obtain ⟨H⟩ := hsteps L hL

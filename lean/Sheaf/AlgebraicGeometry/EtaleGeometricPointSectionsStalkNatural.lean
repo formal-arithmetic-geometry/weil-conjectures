@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
+import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 
 /-! # Global sections of the inverse image at a geometric point
 

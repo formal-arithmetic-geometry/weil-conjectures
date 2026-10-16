@@ -57,8 +57,8 @@ private theorem restriction_unit_normalization :
       G.rightDerivedFunctorUnit.app ((LX.mapHomotopyCategory (ComplexShape.up ℤ)).obj K) := by
   have h₁ := NatTrans.congr_app
     (Functor.rightDerivedNatTrans_fac (F ⋙ LY).rightDerivedFunctor
-      (F.rightDerivedFunctor ⋙ LY.rightDerivedFunctor)
-      (F ⋙ LY).rightDerivedFunctorUnit (Functor.rightDerivedFunctorCompUnit F LY)
+      (F.rightDerivedFunctor ⋙ LY.mapDerivedCategory)
+      (F ⋙ LY).rightDerivedFunctorUnit (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit F LY)
       (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) (𝟙 _)) K
   have h₂ := NatTrans.congr_app
     (Functor.rightDerivedNatTrans_fac (F ⋙ LY).rightDerivedFunctor
@@ -93,12 +93,12 @@ private theorem restriction_unit_normalization :
     simp only [Functor.rightDerivedFunctorCompMapDerivedCategoryIso, Iso.trans_hom,
       NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
       Functor.rightDerivedUnique, Functor.rightDerivedNatIso_hom]
-    erw [reassoc_of% h₁]
-    simp only [Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app,
+    simp only [Iso.refl_hom]
+    erw [h₁]
+    simp only [Functor.rightDerivedFunctorCompMapDerivedCategoryUnit, NatTrans.comp_app,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Category.id_comp, Category.comp_id,
       Category.assoc]
-    rw [hn, reassoc_of% hLY]
   have hfirst' : LY.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app K) ≫
       (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F LY).inv.app
         (DerivedCategory.Qh.obj K) =

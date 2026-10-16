@@ -43,8 +43,8 @@ theorem tensorResolutionChartComparisonIso_hom_eq
     (P : ProjectiveResolution MA) (K F : CochainComplex Y.Modules ℤ)
     (q : K ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj M)
     (s : F ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj N)
-    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K)
-    (hF : CochainComplex.IsKFlat (R := Y.sheaf) F)
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K)
+    (hF : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) F)
     (hq : QuasiIso q) (hs : QuasiIso s) (i : ℤ) :
   let R := Scheme.Modules.restrictFunctor U.2.fromSpec
   let RC := R.mapHomologicalComplex (.up ℤ)
@@ -52,7 +52,7 @@ theorem tensorResolutionChartComparisonIso_hom_eq
   let M0 := (CochainComplex.singleFunctor Y.Modules 0).obj M
   let N0 := (CochainComplex.singleFunctor Y.Modules 0).obj N
   let r := tensorResolutionChartAugmentation M U MA sM P
-  let hE : CochainComplex.IsKFlat (R := (Spec Γ(Y, U.1)).sheaf) E :=
+  let hE : CochainComplex.IsAcyclicTensorKFlat (R := (Spec Γ(Y, U.1)).sheaf) E :=
     tensorResolution_isKFlat_bundledRing Γ(Y, U.1) MA P
   let hK' := isKFlat_restrict U.2.fromSpec K hK
   let hF' := isKFlat_restrict U.2.fromSpec F hF

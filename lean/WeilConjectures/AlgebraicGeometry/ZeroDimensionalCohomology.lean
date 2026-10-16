@@ -5,8 +5,12 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.Topology.KrullDimension
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+
 public import Mathlib.AlgebraicGeometry.Artinian
-public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
+public import WeilConjectures.AlgebraicGeometry.ClosedPointResidueField
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
@@ -391,5 +395,14 @@ theorem zero_dimensional_etale_cohomology
   ⟨Scheme.finite_of_topologicalKrullDim_le_zero f hdim,
     Etale.subsingleton_cohomology_of_topologicalKrullDim_le_zero f hdim F,
     Etale.isIso_toPresheafFiber_of_topologicalKrullDim_le_zero f hdim F Ω s hs⟩
+
+theorem zero_dimensional_etale_finite
+    (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u})
+    (f : C ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] (hdim : topologicalKrullDim C ≤ 0) : Finite C := by
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsLocallyArtinian C := IsLocallyArtinian.of_topologicalKrullDim_le_zero hdim
+  exact finite_of_compact_of_discrete
 
 end AlgebraicGeometry

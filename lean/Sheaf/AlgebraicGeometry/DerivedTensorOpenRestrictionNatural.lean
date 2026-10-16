@@ -145,7 +145,7 @@ theorem derivedTensor_openRestriction_natIso (X : Scheme.{u}) (U : X.Opens)
   let QX := DerivedCategory.Q (C := A)
   let QU := DerivedCategory.Q (C := B)
   let K : ObjectProperty (CochainComplex A ℤ) :=
-    fun P ↦ CochainComplex.IsKFlat (R := X.sheaf) P
+    fun P ↦ CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P
   let F := K.ι
   obtain ⟨a⟩ := kFlat_derivedTensor_comparison_natIso X F F (fun P ↦ P.property)
   obtain ⟨c⟩ := kFlat_derivedTensor_comparison_natIso U.toScheme (F ⋙ RC) (F ⋙ RC)

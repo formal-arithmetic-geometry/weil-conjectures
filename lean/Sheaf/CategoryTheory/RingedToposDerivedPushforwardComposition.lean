@@ -325,7 +325,7 @@ private def flatKFlat
       (ringedSiteModules.{u, u, u, u}
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
       (ComplexShape.up ℤ)) :=
-  fun X ↦ CochainComplex.IsKFlat X.as ∧
+  fun X ↦ CochainComplex.IsAcyclicTensorKFlat X.as ∧
     ∀ n : ℤ, SheafOfModules.IsFlat (X.as.X n)
 
 private theorem flatKFlat_resolutions
@@ -358,8 +358,8 @@ private theorem flatKFlat_inverts
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A)) [F.Additive]
     (hinv : ∀ (P Q : CochainComplex (ringedSiteModules.{u, u, u, u}
           ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj B)) ℤ) (s : P ⟶ Q),
-        P.IsKFlat → (∀ n : ℤ, SheafOfModules.IsFlat (P.X n)) →
-        Q.IsKFlat → (∀ n : ℤ, SheafOfModules.IsFlat (Q.X n)) →
+        P.IsAcyclicTensorKFlat → (∀ n : ℤ, SheafOfModules.IsFlat (P.X n)) →
+        Q.IsAcyclicTensorKFlat → (∀ n : ℤ, SheafOfModules.IsFlat (Q.X n)) →
         QuasiIso s → QuasiIso ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map s)) :
     ∀ {X Y}, flatKFlat K B X → flatKFlat K B Y → ∀ s : X ⟶ Y,
       IsIso (DerivedCategory.Qh.{w}.map s) →

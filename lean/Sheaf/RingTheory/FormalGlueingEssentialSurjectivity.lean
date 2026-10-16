@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Sheaf.RingTheory.FormalGlueingInjectiveApproximation
 import Sheaf.RingTheory.FormalGlueingExtensionTransport
 import Mathlib.Algebra.Module.LocalizedModule.Exact
-import Sheaf.Paper.TorsionModuleFlatBaseChangeIso
+import WeilConjectures.AlgebraicGeometry.TorsionModuleFlatBaseChangeIso
 import Sheaf.RingTheory.TorsionExtensionFlatDescent
 
 /-!

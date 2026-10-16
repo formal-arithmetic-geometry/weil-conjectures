@@ -71,7 +71,7 @@ theorem tensor_acyclic_of_isKFlat
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {O : Sheaf J CommRingCat.{u}}
     (K : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ)
-    (hK : K.IsKFlat) (hA : K.Acyclic)
+    (hK : K.IsAcyclicTensorKFlat) (hA : K.Acyclic)
     (F : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ) :
     (letI := monoidalCategory O
      (CochainComplex.mapBifunctor F K (curriedTensor _)).Acyclic) := by

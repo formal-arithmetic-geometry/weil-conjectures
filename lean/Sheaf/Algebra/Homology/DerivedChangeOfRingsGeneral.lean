@@ -102,7 +102,7 @@ theorem derivedChangeOfRingsGeneral
         E.map a = eqToHom (h M) ≫ changeOfRingsHom.{v, u, max u v} φ M a ≫ eqToHom (h N).symm)
       (_ : E.Additive),
       (∀ {P Q : CochainComplex (SheafOfModules.{max u v} (derivedChangeRing J O)) ℤ} (α : P ⟶ Q),
-        P.IsKFlat → Q.IsKFlat → QuasiIso α →
+        P.IsAcyclicTensorKFlat → Q.IsAcyclicTensorKFlat → QuasiIso α →
           QuasiIso ((E.mapHomologicalComplex (ComplexShape.up ℤ)).map α)) ∧
       (E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙
           DerivedCategory.Qh).HasPointwiseLeftDerivedFunctor
@@ -116,7 +116,7 @@ theorem derivedChangeOfRingsGeneral
             (HomotopyCategory.quasiIso (SheafOfModules.{max u v} (derivedChangeRing J O))
               (ComplexShape.up ℤ)) ∧
           (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧
-          ∀ P : CochainComplex (SheafOfModules.{max u v} (derivedChangeRing J O)) ℤ, P.IsKFlat →
+          ∀ P : CochainComplex (SheafOfModules.{max u v} (derivedChangeRing J O)) ℤ, P.IsAcyclicTensorKFlat →
             IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
   sorry
 

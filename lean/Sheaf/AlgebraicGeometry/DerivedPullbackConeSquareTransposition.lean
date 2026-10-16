@@ -28,7 +28,7 @@ private theorem replacement (S : Scheme.{u})
     (t : A ⟶ B) :
     ∃ (P Q : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
       (p : P ⟶ Q) (x : P ⟶ A) (y : Q ⟶ B) (_h : p ≫ y = x ≫ t),
-      P.IsKFlat ∧ Q.IsKFlat ∧ QuasiIso x ∧ QuasiIso y := by
+      P.IsAcyclicTensorKFlat ∧ Q.IsAcyclicTensorKFlat ∧ QuasiIso x ∧ QuasiIso y := by
   classical
   let E := SheafOfModules.{u} (moduleRings S.toRingedSpace)
   let := SheafOfModules.monoidalCategory S.sheaf
@@ -45,7 +45,7 @@ private theorem replacement (S : Scheme.{u})
   let Λ := (inferInstance : Abelian.HasFunctorialFlatResolution E).some.reduced
   let R := Λ.kFlatResolutionFunctor ObjectProperty.flat.essImage_ι_le
   let ε := Λ.kFlatResolutionNatTrans ObjectProperty.flat.essImage_ι_le
-  have toLean (K : CochainComplex.KFlat E) : CochainComplex.IsKFlat (R := S.sheaf) K.obj := by
+  have toLean (K : CochainComplex.KFlat E) : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) K.obj := by
     have h := (HomotopyCategory.kFlat_quotient_obj_iff K.obj).2 K.property
     rw [HomotopyCategory.kFlat_iff_preserves_acyclic] at h
     intro N hN

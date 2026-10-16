@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.Smooth.Basic
-public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 import Mathlib.RingTheory.Extension.Cotangent.Basis
 import Sheaf.RingTheory.SmoothQuotientFibreDifferentialRank
 import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension

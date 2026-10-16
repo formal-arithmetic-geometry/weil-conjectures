@@ -26,7 +26,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 import Sheaf.AlgebraicGeometry.IsProperOrIsAffine
 import Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierProperDegreeZero
 import Sheaf.AlgebraicGeometry.Curve.ProperConstantBaseChangeZero
 import Sheaf.AlgebraicGeometry.Curve.ProperConstantBaseChangeOne
@@ -36,10 +36,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 import Sheaf.AlgebraicGeometry.PrimeInjectiveCohomologyComparison
 import Sheaf.AlgebraicGeometry.AlgClosedExtensionModuleSections
 import Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic
-import Sheaf.AlgebraicGeometry.CohomologyRestrictionSquareTransport
+import WeilConjectures.AlgebraicGeometry.CohomologyRestrictionSquareTransport
 import Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertions
-import Sheaf.AlgebraicGeometry.Curve.PrimeAnnihilatedPrimaryCases
-import Sheaf.AlgebraicGeometry.Curve.PrimeTorsionNonunitCohomology
+import WeilConjectures.AlgebraicGeometry.Curve.PrimeAnnihilatedPrimaryCases
+import WeilConjectures.AlgebraicGeometry.Curve.PrimeTorsionNonunitCohomology
 
 /-!
 # The curve assertions for constant coefficients on smooth curves

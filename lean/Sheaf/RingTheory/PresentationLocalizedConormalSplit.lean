@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Extension.Presentation.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
+import WeilConjectures.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
 
 /-! # Localized conormal complement of a finite polynomial presentation
 

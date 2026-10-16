@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 import Mathlib.FieldTheory.IsSepClosed
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 import Sheaf.Paper.StrictHenselizationPointedMap
-import Sheaf.Paper.EtalePointedMapRigidity
+import WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity
 import Sheaf.Paper.StrictHenselizationMapExists
 
 /-! # Strict henselization functoriality

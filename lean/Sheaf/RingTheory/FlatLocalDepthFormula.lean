@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Sheaf.RingTheory.AnnihilatorElementFlatBaseChange
+import WeilConjectures.RingTheory.AnnihilatorElementFlatBaseChange
 import Sheaf.RingTheory.DepthLeSupportDimension
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Sheaf.RingTheory.FlatLocalDepthReduction

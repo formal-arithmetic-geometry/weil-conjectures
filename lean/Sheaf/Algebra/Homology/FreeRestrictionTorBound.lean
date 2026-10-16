@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.CategoryTheory.Monoidal.Tor
-import Sheaf.Algebra.Category.ModuleCat.TorSymmetry
+import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence

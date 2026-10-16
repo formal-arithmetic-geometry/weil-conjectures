@@ -82,7 +82,7 @@ lemma homToΓHomObj_comp_smulHom {M N : X.Modules} (φ : M ⟶ N) (r : Γ(X, ⊤
   ext x
   rfl
 
-lemma H.zeroLinearEquiv_map {M N : X.Modules} (φ : M ⟶ N) (x : M.H 0) :
+lemma H.zeroLinearEquiv_map_homObj {M N : X.Modules} (φ : M ⟶ N) (x : M.H 0) :
     H.zeroLinearEquiv N (H.map φ 0 x) = φ.app ⊤ (H.zeroLinearEquiv M x) :=
   (Sheaf.H.equiv₀_naturality (hT := isTerminalTop)
     ((SheafOfModules.toSheaf X.ringCatSheaf).map φ) x).symm
@@ -104,7 +104,7 @@ lemma homObjHZeroAddEquiv_map {M' M N : X.Modules} (f : M' ⟶ M)
       f ≫ homObjHZeroAddEquiv M N x := by
   apply homToΓHomObj_injective
   rw [homToΓHomObj_homObjHZeroAddEquiv, homToΓHomObj_comp, homToΓHomObj_homObjHZeroAddEquiv,
-    H.zeroLinearEquiv_map]
+    H.zeroLinearEquiv_map_homObj]
 
 /-- `homObjHZeroAddEquiv` turns multiplication by a global function into composition with the
 multiplication on the target. -/

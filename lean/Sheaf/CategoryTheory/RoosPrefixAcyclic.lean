@@ -9,7 +9,7 @@ public import Sheaf.CategoryTheory.RoosFinitePrefixes
 import Mathlib.Algebra.Category.Grp.EpiMono
 import Sheaf.CategoryTheory.InjectiveTowerEmbedding
 import Sheaf.CategoryTheory.InjectiveSplitTower
-import Sheaf.CategoryTheory.MittagLefflerLimitExact
+import WeilConjectures.CategoryTheory.MittagLefflerLimitExact
 import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 

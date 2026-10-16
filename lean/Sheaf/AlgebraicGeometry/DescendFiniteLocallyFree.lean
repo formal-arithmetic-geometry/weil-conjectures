@@ -11,8 +11,8 @@ import Sheaf.AlgebraicGeometry.DescendFinite
 import all Sheaf.AlgebraicGeometry.DescendClosedImmersion
 import all Sheaf.AlgebraicGeometry.DescendFiniteAffineOpen
 import Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
-import Sheaf.AlgebraicGeometry.LimitContainedInConstructible
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
+import WeilConjectures.AlgebraicGeometry.LimitContainedInConstructible
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!

@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Group.Units.Hom
 import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 import Mathlib.RingTheory.RingHom.EssFiniteType
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 
 /-! # Localizing a filtered ring system at a local target
 

@@ -5,7 +5,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Limits
 import Sheaf.AlgebraicGeometry.ProperFinitePresentationClosedLimit
 import Sheaf.AlgebraicGeometry.ProperNoetherianStage
-import Sheaf.AlgebraicGeometry.ClosedImageLimitSystem
+import WeilConjectures.AlgebraicGeometry.ClosedImageLimitSystem
 import Mathlib.CategoryTheory.Presentable.Directed
 
 @[expose] public section

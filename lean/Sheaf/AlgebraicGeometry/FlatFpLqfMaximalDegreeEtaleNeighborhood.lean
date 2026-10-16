@@ -5,13 +5,13 @@ Authors: SHEAF group A2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FiberDegreeBound
+public import WeilConjectures.AlgebraicGeometry.FiberDegreeBound
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.EtaleSplitsOffQuasiFinitePart
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
+import WeilConjectures.AlgebraicGeometry.EtaleSplitsOffQuasiFinitePart
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
 
 /-!
 # Étale neighbourhoods of points of maximal fibre degree

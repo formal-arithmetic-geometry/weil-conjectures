@@ -5,7 +5,7 @@ Authors: SHEAF group D2
 -/
 module
 
-public import Sheaf.Paper.LocalStalkSectionsComparisonMap
+public import WeilConjectures.AlgebraicGeometry.LocalStalkSectionsComparisonMap
 import Sheaf.Paper.LocalStalkSectionsAffineVanishing
 
 /-! # Descent of equality for local-scheme sections

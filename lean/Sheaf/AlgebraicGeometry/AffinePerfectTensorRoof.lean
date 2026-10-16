@@ -53,12 +53,12 @@ private theorem affinePerfectTensorRoof_aux
             (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))
             (Modules.overEquiv U)).mapDerivedCategory.obj E'.obj)
     (P : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
     (eA : DerivedCategory.Q.obj P ≅ A) :
     let := SheafOfModules.monoidalCategory X.sheaf
     let := (SheafOfModules.tensorClosed X.sheaf).1.some
     ∃ J : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ,
-      CochainComplex.IsKFlat (R := X.sheaf) J ∧ IsPerfect X (DerivedCategory.Q.obj J) ∧
+      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) J ∧ IsPerfect X (DerivedCategory.Q.obj J) ∧
       ∃ u : J ⟶ HomologicalComplex.tensorUnit
           (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ),
         let B := DerivedCategory.Q.obj (CochainComplex.mapBifunctor P J (curriedTensor _))
@@ -143,12 +143,12 @@ theorem exists_affine_perfect_tensor_roof
             (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))
             (Modules.overEquiv U)).mapDerivedCategory.obj E'.obj)
     (P : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
     (eA : DerivedCategory.Q.obj P ≅ A) :
     letI := SheafOfModules.monoidalCategory X.sheaf
     letI := (SheafOfModules.tensorClosed X.sheaf).1.some
     ∃ J : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ,
-      CochainComplex.IsKFlat (R := X.sheaf) J ∧ IsPerfect X (DerivedCategory.Q.obj J) ∧
+      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) J ∧ IsPerfect X (DerivedCategory.Q.obj J) ∧
       ∃ u : J ⟶ HomologicalComplex.tensorUnit
           (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ),
         let B := DerivedCategory.Q.obj (CochainComplex.mapBifunctor P J (curriedTensor _))

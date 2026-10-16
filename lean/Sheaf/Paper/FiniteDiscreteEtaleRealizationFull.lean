@@ -10,7 +10,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 
 /-! # Full faithfulness of bounded below etale realization -/
 

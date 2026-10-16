@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 import Mathlib.Algebra.Homology.ShortComplex.Ab
-import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMapBijective
+import WeilConjectures.AlgebraicGeometry.EtaleOpenObjectCohomologyMapBijective
 import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
 
 /-!

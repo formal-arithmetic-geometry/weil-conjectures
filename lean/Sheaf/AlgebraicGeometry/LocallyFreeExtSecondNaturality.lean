@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 import Sheaf.AlgebraicGeometry.ExtEvaluation
 import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 import Sheaf.CategoryTheory.RightDerivedExactComposite
 import Sheaf.Topology.RingedSpaceModuleCohomology

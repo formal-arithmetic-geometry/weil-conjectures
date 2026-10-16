@@ -10,7 +10,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.GabberH1TorsorCohomologyBridge
+import WeilConjectures.AlgebraicGeometry.GabberH1TorsorCohomologyBridge
 import Sheaf.AlgebraicGeometry.GabberFiniteConstantTorsorsTrivial
 
 /-!

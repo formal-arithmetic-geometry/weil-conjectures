@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Sheaf.Algebra.Category.ModuleCat.TorSymmetry
+import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Flat morphisms give stalkwise Tor-independent squares

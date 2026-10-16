@@ -52,8 +52,8 @@ theorem derivedPullback_kFlat_cone_counit_eq
             (ε.app X)⟦(1 : ℤ)⟧') :
     ∀ (P Q : CochainComplex
             (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (p : P ⟶ Q),
-      CochainComplex.IsKFlat (R := Y.sheaf) P →
-      CochainComplex.IsKFlat (R := Y.sheaf) Q →
+      CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
+      CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) Q →
       let C := CochainComplex.mappingCone.triangleh p
       let T := (DerivedCategory.Qh : HomotopyCategory
             (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ) ⥤

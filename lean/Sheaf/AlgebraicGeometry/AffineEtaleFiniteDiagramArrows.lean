@@ -5,8 +5,8 @@ Authors: SHEAF group B2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
-import Sheaf.AlgebraicGeometry.FinitePullbackHomDescent
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
+import WeilConjectures.AlgebraicGeometry.FinitePullbackHomDescent
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.AffineEtalePullbackArrowComparison
 

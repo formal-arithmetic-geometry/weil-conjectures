@@ -60,9 +60,9 @@ theorem relativeTensorPullback_kFlat_model
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     (A : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hA : CochainComplex.IsKFlat (R := X.sheaf) A)
+    (hA : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) A)
     (L : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ)
-    (hL : CochainComplex.IsKFlat (R := S.sheaf) L) (i : ℤ) :
+    (hL : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) L) (i : ℤ) :
     Nonempty
       ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj
           ((DerivedCategory.homologyFunctor _ i).obj

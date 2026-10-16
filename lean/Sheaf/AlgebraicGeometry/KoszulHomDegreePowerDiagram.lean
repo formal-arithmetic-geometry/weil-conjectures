@@ -9,7 +9,7 @@ public import Sheaf.Paper.ShiftedKoszulAugmentation
 public import Sheaf.AlgebraicGeometry.FiniteLocalizationPowerColimit
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
 public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
-import Sheaf.Paper.KoszulComplex
+import WeilConjectures.AlgebraicGeometry.KoszulComplex
 
 /-! # The degreewise Koszul Hom power diagram
 

@@ -7,7 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.EtaleNeighbourhoodPrescribedResidueField
+import WeilConjectures.AlgebraicGeometry.EtaleNeighbourhoodPrescribedResidueField
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 
 /-! # Spreading a finite étale generic residue field

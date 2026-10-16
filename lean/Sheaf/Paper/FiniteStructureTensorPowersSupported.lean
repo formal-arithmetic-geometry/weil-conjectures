@@ -6,7 +6,7 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian

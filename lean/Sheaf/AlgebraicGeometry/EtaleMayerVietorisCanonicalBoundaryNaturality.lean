@@ -6,7 +6,7 @@ Authors: SHEAF group S3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleMayerVietorisCanonicalBoundary
-public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCocone
+public import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenCohomologyCocone
 import Sheaf.AlgebraicGeometry.EtaleSectionShortComplexCoefficientComparison
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
 

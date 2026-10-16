@@ -5,9 +5,9 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 /-!
 # Constructibility after forgetting module structure
@@ -101,7 +101,7 @@ theorem isConstructibleEtaleSheafOfSets_of_module
       ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
         ((sheafCompose X.smallEtaleTopology
           (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)) := by
-  obtain ⟨S, _, hS⟩ := hF
+  obtain ⟨S, hS⟩ := hF
   let T : Stratification X :=
     { toStratification := S.toStratification
       domain := S.domain

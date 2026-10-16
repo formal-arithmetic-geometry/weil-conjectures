@@ -83,8 +83,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleLimitReindexTransitionCoherence",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitReindexTransitionCoherence.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleLimitReindexTransitionCoherence",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleLimitReindexTransitionCoherence.lean",
   "declaration": "AlgebraicGeometry.Etale.etale_limit_reindex_transition_coherence",
   "statement": "theorem etale_limit_reindex_transition_coherence\n    {I J : Type u} [Preorder I] [Preorder J]\n    (t : J ⥤ I) (D : Iᵒᵖ ⥤ Scheme.{u})\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    :\n    let D' := t.op ⋙ D\n    let F' (i : J) := F (t.obj i)\n    let φ' {i j : J} (f : i ⟶ j) := φ (t.map f)\n    ((∀ i : J, φ' (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D'.map_id (op i)))).hom.app\n        (F' i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D'.obj (op i))).hom.app (F' i)) ∧\n    (∀ (i j k : J) (f : i ⟶ j) (g : j ⟶ k),\n      φ' (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D'.map g.op) (D'.map f.op)\n          (D'.map (f ≫ g).op) (D'.map_comp g.op f.op)).hom.app (F' i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D'.map g.op)).map (φ' f) ≫ φ' g))",
   "branch": "sheaf-dag",

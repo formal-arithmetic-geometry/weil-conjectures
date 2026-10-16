@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.AbelianPullbackGlobalSectionsComparison
 import Sheaf.AlgebraicGeometry.EtaleSetSectionAffineEventualEquality
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 
 /-! # Finite-stage vanishing for one fixed sheaf in degree zero

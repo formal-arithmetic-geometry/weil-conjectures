@@ -47,7 +47,7 @@ theorem isFlat_cycles_of_acyclic_isKFlat
     {R : Sheaf J CommRingCat.{u}}
     (A : CochainComplex
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
-    (hA : A.Acyclic) (hK : A.IsKFlat)
+    (hA : A.Acyclic) (hK : A.IsAcyclicTensorKFlat)
     (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (R := R) (A.X i)) (n : ℤ) :
     SheafOfModules.IsFlat (R := R) (A.cycles n) := by
   let := SheafOfModules.monoidalCategory R

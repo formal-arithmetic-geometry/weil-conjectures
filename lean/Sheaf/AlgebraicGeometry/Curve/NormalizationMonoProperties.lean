@@ -12,7 +12,7 @@ import WeilConjectures.ConstructibleSheaf.OpenClosed
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardOpenQuotientConstant
-import Sheaf.AlgebraicGeometry.Curve.NormalizationComparisonOnIsoLocus
+import WeilConjectures.AlgebraicGeometry.Curve.NormalizationComparisonOnIsoLocus
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 
 /-!

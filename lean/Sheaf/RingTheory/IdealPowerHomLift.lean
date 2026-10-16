@@ -8,8 +8,8 @@ module
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Sheaf.Paper.TorsionModuleFlatBaseChangeIso
-import Sheaf.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
+import WeilConjectures.AlgebraicGeometry.TorsionModuleFlatBaseChangeIso
+import WeilConjectures.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
 import Mathlib.RingTheory.Finiteness.Ideal
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 import Mathlib.LinearAlgebra.Isomorphisms

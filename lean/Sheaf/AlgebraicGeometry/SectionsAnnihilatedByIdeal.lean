@@ -10,9 +10,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.AnnihilatorSubsheaf
-import Sheaf.AlgebraicGeometry.AnnihilatorAffineCriterion
-import Sheaf.AlgebraicGeometry.AnnihilatorQuasicoherent
+import WeilConjectures.AlgebraicGeometry.AnnihilatorSubsheaf
+import WeilConjectures.AlgebraicGeometry.AnnihilatorAffineCriterion
+import WeilConjectures.AlgebraicGeometry.AnnihilatorQuasicoherent
 import Sheaf.AlgebraicGeometry.AnnihilatorStalkLocalLift
 
 /-! # The subsheaf of sections annihilated by an ideal

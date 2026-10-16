@@ -6,11 +6,11 @@ Authors: SHEAF groups E1 and M1
 module
 
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-public import Sheaf.AlgebraicGeometry.FiberDegreeBound
+public import WeilConjectures.AlgebraicGeometry.FiberDegreeBound
 import Mathlib.Algebra.Module.SpanRankOperations
 import Sheaf.AlgebraicGeometry.BoundsFiberDegreesComp
-import Sheaf.AlgebraicGeometry.FiniteOpenCoverDegreeSum
-import Sheaf.AlgebraicGeometry.ImmersionFiberDegreeOne
+import WeilConjectures.AlgebraicGeometry.FiniteOpenCoverDegreeSum
+import WeilConjectures.AlgebraicGeometry.ImmersionFiberDegreeOne
 import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
 import Sheaf.AlgebraicGeometry.QuasiFiniteAffineOpenInFinite
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite

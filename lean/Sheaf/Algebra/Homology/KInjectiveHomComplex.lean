@@ -49,7 +49,7 @@ theorem isKInjective_homComplex_of_isKFlat
     (L I : CochainComplex
       (SheafOfModules.{max u v} ((sheafCompose J
         (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ)
-    (hL : L.IsKFlat) [I.IsKInjective] :
+    (hL : L.IsAcyclicTensorKFlat) [I.IsKInjective] :
     (CategoryTheory.homComplex L I).IsKInjective := by
   classical
   let := SheafOfModules.monoidalCategory R

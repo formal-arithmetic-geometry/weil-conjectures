@@ -5,7 +5,7 @@ Authors: SHEAF group R2
 -/
 module
 
-public import Sheaf.CategoryTheory.ColimitSites
+public import WeilConjectures.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
 import Sheaf.CategoryTheory.CohomologyColimitSitesShortExactSystems
 import Sheaf.CategoryTheory.CohomologyColimitSitesBoundaryDiagrams

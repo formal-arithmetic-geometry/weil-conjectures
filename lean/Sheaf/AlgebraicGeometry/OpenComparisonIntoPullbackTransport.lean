@@ -41,7 +41,7 @@ private theorem additive_comparisonIntoPullback_naturality
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) (z : X')
     (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) (hQ : Q.IsKFlat)
+    (hP : P.IsAcyclicTensorKFlat) (hQ : Q.IsAcyclicTensorKFlat)
     (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
     (hcQ : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))
     (d : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) (i : ℤ) :
@@ -125,7 +125,7 @@ theorem exists_open_comparisonIntoPullback_transport
       ∀ (K : schemeDerivedCategory X)
         (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
         (Q : CochainComplex (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ)
-        (hP : P.IsKFlat) (hQ : Q.IsKFlat)
+        (hP : P.IsAcyclicTensorKFlat) (hQ : Q.IsAcyclicTensorKFlat)
         (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
         (hcQ : IsIso ((counit (pullback.snd g' U.ι)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))

@@ -108,8 +108,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Category.ModuleCat.AdicTowerCompletedFreeSurjection",
-  "file": "lean/Sheaf/Algebra/Category/ModuleCat/AdicTowerCompletedFreeSurjection.lean",
+  "module": "WeilConjectures.Algebra.Category.ModuleCat.AdicTowerCompletedFreeSurjection",
+  "file": "lean/WeilConjectures/Algebra/Category/ModuleCat/AdicTowerCompletedFreeSurjection.lean",
   "declaration": "ModuleCat.adicTower_completedFreeSurjection",
   "statement": "theorem adicTower_completedFreeSurjection (A : Type u) [CommRing A]\n    (I : Ideal A) (T : ℕᵒᵖ ⥤ ModuleCat.{u} A)\n    (hfinite : Module.Finite A (T.obj (op 0)))\n    (hzero : ∀ n : ℕ, I ^ (n + 1) • (⊤ : Submodule A (T.obj (op n))) = ⊥)\n    (htrans : ∀ n : ℕ,\n      Function.Surjective (T.map (homOfLE (Nat.le_succ n)).op) ∧\n      LinearMap.ker (T.map (homOfLE (Nat.le_succ n)).op).hom =\n        I ^ (n + 1) • (⊤ : Submodule A (T.obj (op (n + 1)))))\n    (N : ModuleCat.{u} (AdicCompletion I A))\n    (e : (restrictScalars (algebraMap A (AdicCompletion I A))).obj N ≅ limit T)\n    (hscalar : ∀ (n : ℕ) (r : AdicCompletion I A) (a : A) (x : N),\n      AdicCompletion.evalₐ I (n + 1) r = Ideal.Quotient.mk (I ^ (n + 1)) a →\n      (e.hom ≫ limit.π T (op n)) (r • x) =\n        a • (e.hom ≫ limit.π T (op n)) x) :\n    ∃ (d : ℕ) (q : AdicCompletion I (Fin d → A) →ₗ[AdicCompletion I A] N),\n      Function.Surjective q",
   "branch": "sheaf-dag",

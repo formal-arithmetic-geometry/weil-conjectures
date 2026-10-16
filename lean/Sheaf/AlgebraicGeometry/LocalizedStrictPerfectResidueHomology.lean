@@ -46,7 +46,7 @@ private theorem strictlyPerfect_overEquiv_isKFlat (S : Scheme.{u}) (U : S.Opens)
     (hP : Scheme.IsStrictlyPerfect S U P) :
     letI : (Scheme.Modules.overEquiv U).functor.Additive :=
       Functor.additive_of_preserves_binary_products _
-    CochainComplex.IsKFlat (R := U.toScheme.sheaf)
+    CochainComplex.IsAcyclicTensorKFlat (R := U.toScheme.sheaf)
       (((Scheme.Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj P) := by
   classical
   let O := (Scheme.Modules.overEquiv U).functor

@@ -19,7 +19,7 @@ the geometric fiber `W ⊗_k k̄` of a nonempty open `W ⊆ ℙ¹_k` is irreduci
 
 ## Main statements
 
-- `AlgebraicGeometry.ProjectiveLine.geometricallyIrreducible`: `ℙ¹_k` is geometrically
+- `AlgebraicGeometry.ProjectiveLine.geometricallyIrreducible_viaBaseChange`: `ℙ¹_k` is geometrically
   irreducible over `k`.
 - `AlgebraicGeometry.ProjectiveLine.irreducibleSpace_geometricFiber_opens`: the geometric fiber of
   a nonempty open subscheme of `ℙ¹_k` is irreducible.
@@ -38,7 +38,7 @@ variable (k : Type u) [Field k]
 /-- The projective line over a field is geometrically irreducible: its base change to a field
 `K` is the projective line over `K` (`AlgebraicGeometry.ProjectiveSpace.isPullback_map`), which
 is integral. -/
-instance geometricallyIrreducible :
+instance geometricallyIrreducible_viaBaseChange :
     GeometricallyIrreducible (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) := by
   refine ⟨geometrically_iff_of_isClosedUnderIsomorphisms.mpr fun K _ y ↦ ?_⟩
   obtain ⟨φ, rfl⟩ := Spec.map_surjective y

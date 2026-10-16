@@ -6,7 +6,7 @@ Authors: SHEAF group M3
 module
 
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic

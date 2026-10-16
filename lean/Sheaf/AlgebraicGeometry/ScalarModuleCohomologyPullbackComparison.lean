@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.FieldScalarRestrictionInjectives
 import Mathlib.Algebra.Homology.ConcreteCategory
-import Sheaf.CategoryTheory.ExactFunctorResolutionCocycle
+import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 
 /-! # Scalar and module pullback comparison
 

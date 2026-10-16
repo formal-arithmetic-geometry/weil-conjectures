@@ -7,8 +7,8 @@ module
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
-import Sheaf.Algebra.Homology.UpperTruncationStepQuotient
-import Sheaf.Algebra.Homology.TwoTermCoimageQuasiIso
+import WeilConjectures.Algebra.Homology.UpperTruncationStepQuotient
+import WeilConjectures.Algebra.Homology.TwoTermCoimageQuasiIso
 
 /-!
 # Successive canonical upper truncations

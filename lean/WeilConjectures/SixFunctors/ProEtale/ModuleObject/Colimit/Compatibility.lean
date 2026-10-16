@@ -7,15 +7,18 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 import WeilConjectures.ConstructibleSheaf.FreeLifting
 import WeilConjectures.CategoryTheory.ModuleObjects.Free
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Sheaf.CategoryTheory.CoefficientPushCopowerCriterion
+
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
+
 import Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis
-import Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisPushforward
+
 import Sheaf.AlgebraicGeometry.CondensedSubfieldBoundedCopowers
 
 /-!
@@ -43,8 +46,9 @@ coefficient changes. This file supplies the coefficient-specific input:
   derived categories, and (Pull) is an isomorphism there;
 * for a finite extension `F/E`, (Push) is an isomorphism on all unbounded objects, hence so is
   (Shriek);
-* for `E ⊆ Ω` and proper `f`, (Push) is an isomorphism at bounded-below objects, by
-  the scalar-basis decomposition and uniformly bounded-below coproduct continuity.
+* for `E ⊆ Ω`, (Push) is an isomorphism on all unbounded objects when `f` is proper, but not
+  for an arbitrary `f`. Since the proper part of a compactification is proper, (Shriek) is an
+  isomorphism on all unbounded objects for every `f` with a compactification.
 
 ## Coefficient-specific input
 
@@ -61,12 +65,12 @@ coefficient changes. This file supplies the coefficient-specific input:
 * `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjMap`: for a finite extension
   `F/E`, (Push) is an isomorphism on all unbounded objects, since `F_X ≅ E_X^n` reduces it to
   the compatibility of `Rf_*` with finite direct sums.
-* `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE`:
-  for `E ⊆ Ω` and `f` proper, (Push) is invertible at bounded-below complexes. Restriction
-  of scalars reflects isomorphisms; the unit-mate identity identifies the restricted
-  comparison with the coproduct comparison for copies with a common lower bound.
-  This is the scope needed by the bounded constructible consumer. The formerly disputed
-  ambient instance and its all-unbounded (Shriek) example have been retired.
+* `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper`:
+  for `E ⊆ Ω` and `f` proper, (Push) is an isomorphism on all unbounded objects: `Rf_*` has a
+  right adjoint `Rf^!`, hence commutes with the coproducts through which `ℚ̄_ℓ,X ⊗ᴸ_{E_X} -` is
+  computed from the finite stages. For a general `f` this fails, and (Push) is an isomorphism
+  only at objects at which `Rf_*` commutes with the relevant coproducts; no such statement is
+  made here.
 
 -/
 
@@ -78,14 +82,11 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
-set_option backward.isDefEq.respectTransparency false
-
 section PrivateHelpers
 
 universe v₁ v₂ u₁ u₂ v
 open MonoidalCategory MonObj BraidedCategory
 set_option backward.isDefEq.respectTransparency false
-
 
 namespace CategoryTheory.Mod
 variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
@@ -146,21 +147,21 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
 private theorem additive_mapMod : (F.mapMod R).Additive where
   map_add := hom_ext _ _ F.map_add
 
-@[no_expose] private noncomputable def mapRegularIso :
+private noncomputable def mapRegularIso :
     (F.mapMod R).obj (regular R) ≅ regular (F.obj R) :=
   isoMk (Iso.refl _) (by simp only [Iso.refl_hom, Category.comp_id,
     MonoidalCategory.whiskerLeft_id, Category.id_comp])
-@[no_expose] private noncomputable def mapFiniteFreeIso (n : ℕ) :
+private noncomputable def mapFiniteFreeIso (n : ℕ) :
     (F.mapMod R).obj (finiteFree R n) ≅ finiteFree (F.obj R) n := by
   have : (F.mapMod R).Additive := additive_mapMod F
   exact (F.mapMod R).mapBiproduct (fun _ : Fin n ↦ regular R) ≪≫
     biproduct.mapIso (fun _ ↦ mapRegularIso F)
-@[no_expose] private noncomputable def mapRestrictedRegularIso :
+private noncomputable def mapRestrictedRegularIso :
     (F.mapMod R).obj ((comap a).obj (regular S)) ≅
       (comap (F.map a)).obj (regular (F.obj S)) :=
   (F.mapModComapIso a).app (regular S) ≪≫
     (comap (F.map a)).mapIso (mapRegularIso F)
-@[no_expose] private noncomputable def mapFreeRestrictedRegularIso (n : ℕ)
+private noncomputable def mapFreeRestrictedRegularIso (n : ℕ)
     (e : (comap a).obj (regular S) ≅ finiteFree R n) :
     (comap (F.map a)).obj (regular (F.obj S)) ≅ finiteFree (F.obj R) n :=
   (mapRestrictedRegularIso F a).symm ≪≫ (F.mapMod R).mapIso e ≪≫ mapFiniteFreeIso F n
@@ -169,7 +170,7 @@ section RingIso
 variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   [Abelian C] [MonoidalPreadditive C] [MonoidalClosed C]
   {R S : C} [MonObj R] [MonObj S]
-@[no_expose] private noncomputable def regularRingIso (r : R ≅ S) [IsMonHom r.hom] :
+private noncomputable def regularRingIso (r : R ≅ S) [IsMonHom r.hom] :
     (comap r.inv).obj (regular R) ≅ regular S :=
   isoMk r (by
     change (r.inv ▷ R ≫ μ[R]) ≫ r.hom = S ◁ r.hom ≫ μ[S]
@@ -177,7 +178,7 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
     rw [MonoidalCategory.tensorHom_def]
     rw [Category.assoc, ← comp_whiskerRight_assoc, r.inv_hom_id,
       id_whiskerRight, Category.id_comp])
-@[no_expose] private noncomputable def comapFreeIso (e : R ≅ S) [IsMonHom e.hom] (n : ℕ) :
+private noncomputable def comapFreeIso (e : R ≅ S) [IsMonHom e.hom] (n : ℕ) :
     (comap e.inv).obj (finiteFree R n) ≅ finiteFree S n := by
   letI : PreservesBiproduct (fun _ : Fin n ↦ regular R) (comap e.inv) :=
     preservesBiproduct_of_preservesProduct _
@@ -186,7 +187,7 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
     biproduct.mapIso (fun _ ↦ er)
 
 variable {R' S' : C} [MonObj R'] [MonObj S']
-@[no_expose] private noncomputable def restrictedRegularIsoOfRingIso
+private noncomputable def restrictedRegularIsoOfRingIso
     (a : R ⟶ S) [IsMonHom a] (a' : R' ⟶ S') [IsMonHom a']
     (r : R ≅ R') (s : S ≅ S') [IsMonHom r.hom] [IsMonHom s.hom]
     (h : a' ≫ s.inv = r.inv ≫ a) :
@@ -195,7 +196,7 @@ variable {R' S' : C} [MonObj R'] [MonObj S']
   let es := regularRingIso s
   exact (comap a').mapIso es.symm ≪≫
     ((comapComp a' s.inv).symm ≪≫ comapCongr h ≪≫ comapComp r.inv a).app _
-@[no_expose] private noncomputable def freeRestrictedRegularIsoOfRingIso
+private noncomputable def freeRestrictedRegularIsoOfRingIso
     (a : R ⟶ S) [IsMonHom a] (a' : R' ⟶ S') [IsMonHom a']
     (r : R ≅ R') (s : S ≅ S') [IsMonHom r.hom] [IsMonHom s.hom]
     (h : a' ≫ s.inv = r.inv ≫ a)
@@ -210,7 +211,7 @@ end CategoryTheory.Mod
 module morphism, and the coordinate maps of a finite basis give inverse biproduct maps. -/
 namespace Profinite
 
-@[no_expose] private noncomputable def continuousAddHomPresheaf
+private noncomputable def continuousAddHomPresheaf
     {S T : Type} [Ring S] [TopologicalSpace S] [IsTopologicalRing S]
     [Ring T] [TopologicalSpace T] [IsTopologicalRing T]
     (l : S →+ T) (hl : Continuous l) :
@@ -230,7 +231,7 @@ namespace Profinite
         exact map_add l _ _ }
   naturality _ _ _ := rfl
 
-@[no_expose] private noncomputable def continuousLinearPresheafHom
+private noncomputable def continuousLinearPresheafHom
     {R S : Type} [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
     [CommRing S] [TopologicalSpace S] [IsTopologicalRing S] [Algebra R S]
     (ha : Continuous (algebraMap R S)) (l : S →ₗ[R] R) (hl : Continuous l) :
@@ -251,7 +252,7 @@ namespace Profinite
     simpa only [Algebra.smul_def, Algebra.algebraMap_self, RingHom.id_apply] using
       l.map_smul (r.down x) (s.down x))
 
-@[no_expose] private noncomputable def continuousLinearPresheafHomFrom
+private noncomputable def continuousLinearPresheafHomFrom
     {R S : Type} [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
     [CommRing S] [TopologicalSpace S] [IsTopologicalRing S] [Algebra R S]
     (ha : Continuous (algebraMap R S)) (l : R →ₗ[R] S) (hl : Continuous l) :
@@ -271,7 +272,7 @@ namespace Profinite
     simpa only [Algebra.smul_def, Algebra.algebraMap_self, RingHom.id_apply] using
       l.map_smul (r.down x) (s.down x))
 
-@[no_expose] private noncomputable def continuousBasisIso
+private noncomputable def continuousBasisIso
     {R S : Type} [Field R] [TopologicalSpace R] [IsTopologicalRing R]
     [Field S] [TopologicalSpace S] [IsTopologicalRing S] [Algebra R S]
     (ha : Continuous (algebraMap R S)) (n : ℕ) (b : Module.Basis (Fin n) R S)
@@ -348,9 +349,7 @@ namespace Profinite
       change b.coord i ((f.down x) • b j) = 0
       simp [hij]
 
-attribute [local irreducible] continuousBasisIso
-
-@[no_expose] private noncomputable def continuousBasisSheafIso
+private noncomputable def continuousBasisSheafIso
     {R S : Type} [Field R] [TopologicalSpace R] [IsTopologicalRing R]
     [Field S] [TopologicalSpace S] [IsTopologicalRing S] [Algebra R S]
     (ha : Continuous (algebraMap R S)) (n : ℕ) (b : Module.Basis (Fin n) R S)
@@ -368,28 +367,6 @@ attribute [local irreducible] continuousBasisIso
     (by rw [Sheaf.sheafCompose_map_eq]; simp [sh, a, continuousMapRingSheafMap_hom]) n
     (Mod.mapFreeRestrictedRegularIso sh a n (continuousBasisIso ha n b hc))
 
-attribute [local irreducible] continuousBasisSheafIso
-
-/-- Finite-dimensional continuous coordinates give a free condensed scalar module. -/
-private theorem isFree_continuousMapRingObj
-    {K R S : Type} [NontriviallyNormedField K] [CompleteSpace K]
-    [Field R] [TopologicalSpace R] [IsTopologicalRing R]
-    [Field S] [TopologicalSpace S] [IsTopologicalRing S] [T2Space S]
-    [Algebra K R] [Algebra K S] [Algebra R S] [IsScalarTower K R S]
-    [ContinuousSMul K R] [ContinuousSMul K S] [FiniteDimensional K S]
-    (ha : Continuous (algebraMap R S)) :
-    Mod.IsFree (continuousMapRingObj.{u} R)
-      ((Mod.comap ((sheafCompose (coherentTopology Profinite.{u})
-        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-          (continuousMapRingSheafMap (algebraMap R S) ha))).obj
-            (Mod.regular (continuousMapRingObj S))) := by
-  have : FiniteDimensional R S := FiniteDimensional.right K R S
-  obtain ⟨n, ⟨b⟩⟩ : ∃ n : ℕ, Nonempty (Module.Basis (Fin n) R S) :=
-    ⟨_, ⟨Module.finBasis R S⟩⟩
-  refine ⟨n, ⟨continuousBasisSheafIso ha n b ?_⟩⟩
-  intro i
-  exact ((b.coord i).restrictScalars K).continuous_of_finiteDimensional
-
 private theorem padicSubfield_isFree (ℓ : ℕ) [Fact ℓ.Prime]
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
     Mod.IsFree (continuousMapRingObj.{u} E)
@@ -398,8 +375,12 @@ private theorem padicSubfield_isFree (ℓ : ℕ) [Fact ℓ.Prime]
   let : Algebra E F := (IntermediateField.inclusion h).toAlgebra
   have : IsScalarTower ℚ_[ℓ] E F := IsScalarTower.of_algebraMap_eq' rfl
   have : FiniteDimensional ℚ_[ℓ] F := F.2
-  exact isFree_continuousMapRingObj (K := ℚ_[ℓ])
-    (continuous_subtype_val.subtype_mk _)
+  have : FiniteDimensional E F := FiniteDimensional.right ℚ_[ℓ] E F
+  let b := Module.finBasis E F
+  refine ⟨Module.finrank E F, ⟨continuousBasisSheafIso
+    (continuous_subtype_val.subtype_mk _) _ b ?_⟩⟩
+  intro i
+  exact ((b.coord i).restrictScalars ℚ_[ℓ]).continuous_of_finiteDimensional
 end Profinite
 
 namespace CategoryTheory.Mod
@@ -423,7 +404,7 @@ private theorem restrictionReflectsIsomorphisms : (comap (D := C) φ).ReflectsIs
     infer_instance
   exact isIso_of_reflects_iso f (forget S)
 
-@[no_expose] private noncomputable def restrictExtendTensorIso (M : Mod C R) :
+private noncomputable def restrictExtendTensorIso (M : Mod C R) :
     (comap φ).obj ((extendScalars φ).obj M) ≅ ((comap φ).obj (regular S)) ⊗ M :=
   isoMk (extendForgetTensorObjIso φ M) (by
     dsimp only [extendForgetTensorObjIso]
@@ -438,14 +419,41 @@ private theorem restrictionReflectsIsomorphisms : (comap (D := C) φ).ReflectsIs
       tensorObjπ ((comap φ).obj (regular S)) M
     rw [comp_whiskerRight, Category.assoc])
 
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] in
+private lemma tensorπ_leftUnitor_hom (M : Mod C S) :
+    tensorObjπ (regular S) M ≫ (λ_ M).hom.hom = γ[S,M.X] := by
+  change coequalizer.π _ _ ≫
+    ((_root_.Bimod.whiskerRight (toBimodRegularIso (R := S)).hom
+        ((toBimod S).obj M)).hom ≫
+      _root_.Bimod.LeftUnitorBimod.hom ((toBimod S).obj M)) = _
+  rw [← Category.assoc]
+  dsimp only [_root_.Bimod.whiskerRight]
+  change (colimit.ι _ WalkingParallelPair.one ≫ colimMap _) ≫ _ = _
+  rw [ι_colimMap]
+  simp only [parallelPairHom_app_one, toBimodRegularIso_hom_hom, id_whiskerRight]
+  change (𝟙 (S ⊗ M.X) ≫ coequalizer.π _ _) ≫
+    _root_.Bimod.LeftUnitorBimod.hom ((toBimod S).obj M) = _
+  rw [Category.id_comp]
+  dsimp only [_root_.Bimod.LeftUnitorBimod.hom]
+  exact coequalizer.π_desc _ _
 
-private noncomputable abbrev scalarEndo (b : 𝟙_ C ⟶ S) (M : Mod C S) : M ⟶ M :=
-  CategoryTheory.Mod.qbar_scalarEndo b M
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] in
+private lemma leftUnitor_inv_hom (M : Mod C S) :
+    (λ_ M).inv.hom = (λ_ M.X).inv ≫ η[S] ▷ M.X ≫ tensorObjπ (regular S) M := by
+  apply (cancel_mono (λ_ M).hom.hom).1
+  rw [← comp_hom', Iso.inv_hom_id, id_hom']
+  simp only [Category.assoc]
+  rw [tensorπ_leftUnitor_hom, one_act, Iso.inv_hom_id]
+
+private noncomputable def scalarEndo (b : 𝟙_ C ⟶ S) (M : Mod C S) : M ⟶ M :=
+  (λ_ M).inv ≫ (regularLift (regular S) b ▷ M) ≫ (λ_ M).hom
 
 omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] in
 private lemma scalarEndo_hom (b : 𝟙_ C ⟶ S) (M : Mod C S) :
     (scalarEndo b M).hom = (λ_ M.X).inv ≫ b ▷ M.X ≫ γ[S,M.X] := by
-  exact qbar_scalarEndo_hom b M
+  simp only [scalarEndo, comp_hom', leftUnitor_inv_hom, Category.assoc]
+  rw [tensorObjπ_whiskerRight_assoc, tensorπ_leftUnitor_hom]
+  rw [← comp_whiskerRight_assoc, one_comp_regularLift]
 
 omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] in
 private lemma extendUnit_scalarEndo (b : 𝟙_ C ⟶ S) (M : Mod C R) :
@@ -476,7 +484,7 @@ private lemma extendUnit_scalarEndo_tensor (q : regular R ⟶ (comap φ).obj (re
   rw [tensorObjπ_whiskerRight, comp_whiskerRight]
   simp only [Category.assoc]
 
-@[no_expose] private noncomputable def freeTensorIso (n : ℕ) (M : Mod C R)
+private noncomputable def freeTensorIso (n : ℕ) (M : Mod C R)
     (e : (comap φ).obj (regular S) ≅ finiteFree R n) :
     (⨁ fun _ : Fin n ↦ M) ≅ ((comap φ).obj (regular S)) ⊗ M :=
   biproduct.mapIso (fun _ ↦ (λ_ M).symm) ≪≫
@@ -533,42 +541,48 @@ private lemma isIso_basisAdjUnitDesc (n : ℕ) (M : Mod C R)
   rw [extendAdj_unit]
   exact isIso_basisUnitDesc φ n M e
 
-private noncomputable abbrev scalarNatEndo (b : 𝟙_ C ⟶ S) :
-    𝟭 (Mod C S) ⟶ 𝟭 (Mod C S) :=
-  CategoryTheory.Mod.qbar_scalarNatEndo b
+private noncomputable def scalarNatEndo (b : 𝟙_ C ⟶ S) :
+    𝟭 (Mod C S) ⟶ 𝟭 (Mod C S) where
+  app M := scalarEndo b M
+  naturality M N f := by
+    apply hom_ext
+    simp only [CategoryTheory.Functor.id_map, comp_hom', scalarEndo_hom]
+    rw [leftUnitor_inv_naturality_assoc f.hom, whisker_exchange_assoc, ← act_hom]
+    simp only [Category.assoc]
 
 end CategoryTheory.Mod
 
-
-namespace CategoryTheory.Mod
-section BasisUnitProperty
-variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
-  [MonoidalPreadditive C] [BraidedCategory C] [MonoidalClosed C]
-  [IsGrothendieckAbelian.{v} C]
-  {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] (φ : R ⟶ S) [IsMonHom φ]
-attribute [local instance] Abelian.hasFiniteBiproducts
-
-/-- The ordinary extension unit is a scalar-basis decomposition. Naming the property
-keeps concrete module structures folded in the finite-basis record. -/
-private def BasisUnitIsIso {I : Type*} [Finite I] (τ : I → CatCenter (Mod C S)) : Prop :=
-  ∀ M : Mod C R, IsIso (biproduct.desc fun i ↦
-    (extendRestrictAdjunction φ).unit.app M ≫ (comap φ).map ((τ i).app _))
-end BasisUnitProperty
-end CategoryTheory.Mod
 
 namespace CategoryTheory
 variable {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
-private noncomputable abbrev complexCenter (τ : CatCenter A) :
-    CatCenter (CochainComplex A ℤ) :=
-  CategoryTheory.qbar_complexCenter τ
+private noncomputable def complexCenter (τ : CatCenter A) :
+    CatCenter (CochainComplex A ℤ) where
+  app K :=
+    { f i := τ.app (K.X i)
+      comm' i j _ := by simpa using (τ.naturality (K.d i j)).symm }
+  naturality K L f := by
+    ext i
+    exact τ.naturality (f.f i)
 
-private noncomputable abbrev homotopyCenter (τ : CatCenter A) :
-    CatCenter (HomotopyCategory A (.up ℤ)) :=
-  CategoryTheory.qbar_homotopyCenter τ
+private noncomputable def homotopyCenter (τ : CatCenter A) :
+    CatCenter (HomotopyCategory A (.up ℤ)) where
+  app K := (HomotopyCategory.quotient A (.up ℤ)).map ((complexCenter τ).app K.as)
+  naturality K L f := by
+    let f' : K.as ⟶ L.as := (HomotopyCategory.quotient A (.up ℤ)).preimage f
+    have hf : (HomotopyCategory.quotient A (.up ℤ)).map f' = f :=
+      (HomotopyCategory.quotient A (.up ℤ)).map_preimage f
+    simp only [CategoryTheory.Functor.id_map]
+    rw [← hf, ← CategoryTheory.Functor.map_comp, ← CategoryTheory.Functor.map_comp]
+    exact congrArg (HomotopyCategory.quotient A (.up ℤ)).map
+      ((complexCenter τ).naturality f')
 
-private noncomputable abbrev derivedCenter (τ : CatCenter A) : CatCenter (DerivedCategory A) :=
-  CategoryTheory.qbar_derivedCenter τ
+private noncomputable def derivedCenter (τ : CatCenter A) : CatCenter (DerivedCategory A) :=
+  (homotopyCenter τ).localization DerivedCategory.Qh (HomotopyCategory.quasiIso A (.up ℤ))
 
+private lemma derivedCenter_Qh (τ : CatCenter A) (K : HomotopyCategory A (.up ℤ)) :
+    (derivedCenter τ).app (DerivedCategory.Qh.obj K) =
+      DerivedCategory.Qh.map ((homotopyCenter τ).app K) :=
+  CatCenter.localization_app _ _ _ _
 end CategoryTheory
 
 namespace CategoryTheory.Mod
@@ -605,11 +619,7 @@ private lemma isIso_derivedBasisUnitDesc {I : Type} [Finite I]
             ((complexCenter (τ i)).app (((extendScalars φ).mapHomologicalComplex _).obj K)))) =
           fun i ↦ (extendRestrictAdjunction φ).unit.app (K.X n) ≫
             (comap φ).map ((τ i).app _) := by
-        funext i
-        change (extendRestrictAdjunction φ).unit.app (K.X n) ≫
-          (comap φ).map (((qbar_complexCenter (τ i)).app
-            (((extendScalars φ).mapHomologicalComplex _).obj K)).f n) = _
-        rw [qbar_complexCenter_app_f]
+        ext i
         rfl
       have : IsIso (biproduct.desc fun i ↦ (HomologicalComplex.eval _ _ n).map
           (((extendRestrictAdjunction φ).mapHomologicalComplex _).unit.app K ≫
@@ -646,7 +656,7 @@ private lemma isIso_derivedBasisUnitDesc {I : Type} [Finite I]
       ((extendScalars φ).mapDerivedCategoryFactorsh.hom.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj K))
     dsimp only [CategoryTheory.Functor.comp_obj] at e₁
-    rw [qbar_derivedCenter_Qh] at e₁
+    rw [derivedCenter_Qh] at e₁
     have e₂ := (comap φ).mapDerivedCategoryFactorsh.hom.naturality
       ((homotopyCenter (τ i)).app (((extendScalars φ).mapHomotopyCategory _).obj
         ((HomotopyCategory.quotient _ (.up ℤ)).obj K)))
@@ -657,7 +667,6 @@ private lemma isIso_derivedBasisUnitDesc {I : Type} [Finite I]
       (comap φ).mapDerivedCategory.map_comp_assoc]
     rw [e₂, reassoc_of% hfac]
     simp only [CategoryTheory.Functor.comp_map]
-    simp only [homotopyCenter, qbar_homotopyCenter_app]
     congr 2
   let e := DerivedCategory.Qh.objObjPreimageIso M
   refine isIso_biproductDesc_of_iso _ _ e.symm
@@ -677,10 +686,84 @@ section Central
 variable {A B : Type*} [Category A] [Category B]
   (F : A ⥤ B) {G : B ⥤ A} (adj : F ⊣ G)
   (τA : CatCenter A) (τB : CatCenter B)
+include adj in
+private lemma map_center_rightAdjoint
+    (hF : ∀ X, F.map (τA.app X) = τB.app (F.obj X)) (Y : B) :
+    G.map (τB.app Y) = τA.app (G.obj Y) := by
+  apply (adj.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, hF]
+  rw [adj.counit_naturality]
+  exact τB.naturality (adj.counit.app Y)
 
 end Central
 end CategoryTheory
 
+namespace CategoryTheory.Mod
+section MapScalar
+variable {C : Type u₁} [Category.{v₁} C] [Abelian C] [MonoidalCategory C]
+  [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
+  [IsGrothendieckAbelian.{v₁} C] [Abelian.HasFunctorialFlatResolution C]
+  {D : Type u₂} [Category.{v₂} D] [Abelian D] [MonoidalCategory D]
+  [MonoidalPreadditive D] [SymmetricCategory D] [MonoidalClosed D]
+  [IsGrothendieckAbelian.{v₂} D] [Abelian.HasFunctorialFlatResolution D]
+  (F : C ⥤ D) [F.Monoidal] {S : C} [MonObj S] [IsCommMonObj S]
+  [IsCommMonObj (F.obj S)]
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C]
+  [MonoidalPreadditive D] [Abelian.HasFunctorialFlatResolution D] in
+private lemma map_scalarEndo (b : 𝟙_ C ⟶ S) (M : Mod C S) :
+    (F.mapMod S).map (scalarEndo b M) =
+      scalarEndo (Functor.LaxMonoidal.ε F ≫ F.map b) ((F.mapMod S).obj M) := by
+  apply hom_ext
+  change F.map (scalarEndo b M).hom = _
+  rw [scalarEndo_hom, scalarEndo_hom]
+  simp only [CategoryTheory.Functor.map_comp, comp_whiskerRight, Category.assoc]
+  change F.map (λ_ M.X).inv ≫ F.map (b ▷ M.X) ≫ F.map γ[S,M.X] =
+    (λ_ (F.obj M.X)).inv ≫ Functor.LaxMonoidal.ε F ▷ F.obj M.X ≫
+      F.map b ▷ F.obj M.X ≫ Functor.LaxMonoidal.μ F S M.X ≫ F.map γ[S,M.X]
+  rw [Functor.LaxMonoidal.μ_natural_left_assoc]
+  have hunit : F.map (λ_ M.X).inv =
+      (λ_ (F.obj M.X)).inv ≫ Functor.LaxMonoidal.ε F ▷ F.obj M.X ≫
+        Functor.LaxMonoidal.μ F (𝟙_ C) M.X := by
+    apply (cancel_mono (F.map (λ_ M.X).hom)).1
+    simp only [Category.assoc, ← F.map_comp, Iso.inv_hom_id, CategoryTheory.Functor.map_id]
+    rw [← Functor.LaxMonoidal.left_unitality F M.X]
+    exact (Iso.inv_hom_id _).symm
+  rw [hunit]
+  simp only [Category.assoc]
+end MapScalar
+end CategoryTheory.Mod
+
+namespace CategoryTheory
+variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+  [HasDerivedCategory A] [HasDerivedCategory B] (F : A ⥤ B)
+  [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  (τA : CatCenter A) (τB : CatCenter B)
+private lemma map_derivedCenter
+    (hF : ∀ X, F.map (τA.app X) = τB.app (F.obj X)) (M : DerivedCategory A) :
+    F.mapDerivedCategory.map ((derivedCenter τA).app M) =
+      (derivedCenter τB).app (F.mapDerivedCategory.obj M) := by
+  have h : CategoryTheory.Functor.whiskerRight (derivedCenter τA) F.mapDerivedCategory =
+      CategoryTheory.Functor.whiskerLeft F.mapDerivedCategory (derivedCenter τB) := by
+    apply Localization.natTrans_ext DerivedCategory.Qh (HomotopyCategory.quasiIso A (.up ℤ))
+    intro K
+    dsimp only [CategoryTheory.Functor.whiskerRight_app, CategoryTheory.Functor.whiskerLeft_app]
+    apply (cancel_mono (F.mapDerivedCategoryFactorsh.hom.app K)).1
+    simp only [derivedCenter_Qh]
+    have h₁ := F.mapDerivedCategoryFactorsh.hom.naturality ((homotopyCenter τA).app K)
+    have h₂ := (derivedCenter τB).naturality (F.mapDerivedCategoryFactorsh.hom.app K)
+    dsimp only [CategoryTheory.Functor.comp_obj, CategoryTheory.Functor.comp_map] at h₁ h₂
+    rw [derivedCenter_Qh] at h₂
+    rw [← h₂, h₁]
+    apply congrArg (F.mapDerivedCategoryFactorsh.hom.app K ≫ ·)
+    apply congrArg DerivedCategory.Qh.map
+    change (F.mapHomotopyCategory (.up ℤ)).map
+      ((HomotopyCategory.quotient _ (.up ℤ)).map ((complexCenter τA).app K.as)) = _
+    rw [CategoryTheory.Functor.mapHomotopyCategory_map]
+    apply congrArg (HomotopyCategory.quotient _ (.up ℤ)).map
+    ext n
+    exact hF (K.as.X n)
+  exact NatTrans.congr_app h M
+end CategoryTheory
 
 namespace CategoryTheory.Adjunction
 variable {A B A' B' : Type*} [Category A] [Category B] [Category A'] [Category B']
@@ -776,6 +859,36 @@ private lemma isIso_leftDerivedBasisUnitDesc {I : Type} [Finite I]
   rw [← Category.assoc, derivedExtend_unit_comp_iso]
 end CategoryTheory.Mod
 
+namespace CategoryTheory.Mod
+variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
+  [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
+  [IsGrothendieckAbelian.{v} C] [Abelian.HasFunctorialFlatResolution C]
+  {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+  (φ : R ⟶ S) [IsMonHom φ]
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] in
+private lemma comap_scalarEndo (b : 𝟙_ C ⟶ R) (N : Mod C S) :
+    (comap φ).map (scalarEndo (b ≫ φ) N) = scalarEndo b ((comap φ).obj N) := by
+  apply hom_ext
+  change (scalarEndo (b ≫ φ) N).hom = (scalarEndo b ((comap φ).obj N)).hom
+  simp only [scalarEndo_hom, comp_whiskerRight, Category.assoc]
+  rfl
+
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] in
+private lemma extendIso_scalarEndo [IsIso φ] (b : 𝟙_ C ⟶ R) (M : Mod C R) :
+    (extendScalars φ).map (scalarEndo b M) =
+      scalarEndo (b ≫ φ) ((extendScalars φ).obj M) := by
+  let e := extendScalarsIsoComapInv φ
+  apply (cancel_mono (e.hom.app M)).1
+  rw [e.hom.naturality]
+  have h := (scalarNatEndo (b ≫ φ)).naturality (e.hom.app M)
+  dsimp only [CategoryTheory.Functor.id_map, scalarNatEndo] at h
+  rw [← h]
+  congr 1
+  have hb : b ≫ φ ≫ inv φ = b := by simp
+  change (comap (inv φ)).map (scalarEndo b M) = _
+  simpa only [asIso_inv, Category.assoc, IsIso.hom_inv_id, Category.comp_id] using
+    (comap_scalarEndo (inv φ) (b ≫ φ) M)
+end CategoryTheory.Mod
 
 namespace CategoryTheory.Mod
 section BasisMap
@@ -847,7 +960,12 @@ end CategoryTheory.Mod
 namespace CategoryTheory
 section CenterTransport
 variable {A B : Type*} [Category A] [Category B] {F G : A ⥤ B}
-
+private lemma map_center_of_iso (e : F ≅ G) (τA : CatCenter A) (τB : CatCenter B)
+    (hG : ∀ X, G.map (τA.app X) = τB.app (G.obj X)) (X : A) :
+    F.map (τA.app X) = τB.app (F.obj X) := by
+  apply (cancel_mono (e.hom.app X)).1
+  rw [e.hom.naturality, hG]
+  exact τB.naturality _
 end CenterTransport
 end CategoryTheory
 
@@ -886,18 +1004,6 @@ end MappedBasis
 end CategoryTheory.Mod
 
 end PrivateHelpers
-
-set_option backward.isDefEq.respectTransparency false
-
--- Use the characterizing lemmas above without expanding the finite-basis transports.
-attribute [local irreducible] CategoryTheory.Mod.mapRegularIso
-  CategoryTheory.Mod.mapFiniteFreeIso CategoryTheory.Mod.mapRestrictedRegularIso
-  CategoryTheory.Mod.mapFreeRestrictedRegularIso CategoryTheory.Mod.regularRingIso
-  CategoryTheory.Mod.comapFreeIso CategoryTheory.Mod.restrictedRegularIsoOfRingIso
-  CategoryTheory.Mod.freeRestrictedRegularIsoOfRingIso
-  CategoryTheory.Functor.leftDerivedFunctor CategoryTheory.Functor.mapDerivedCategory
-  CategoryTheory.Functor.leftDerivedFunctorIsoMapDerivedCategory
-  CategoryTheory.Functor.rightDerivedFunctor CategoryTheory.Mod.extendScalars
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -967,6 +1073,35 @@ set_option backward.isDefEq.respectTransparency false
 section ScalarCompatibility
 variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
+private lemma upperStar_scalarEndo
+    (b : 𝟙_ (Sheaf (ProEt.topology Y) Ab.{u + 1}) ⟶ condensedRingObj Λ Y)
+    (M : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
+    (f)^*⟦Λ⟧.map (Mod.scalarEndo b M) =
+      Mod.scalarEndo
+        (CategoryTheory.Functor.LaxMonoidal.ε (f)^*[Ab.{u + 1}] ≫
+          (f)^*[Ab.{u + 1}].map b ≫ condensedPullbackHom Λ f) ((f)^*⟦Λ⟧.obj M) := by
+  change (Mod.extendScalars (condensedPullbackHom Λ f)).map
+    ((((f)^*[Ab.{u + 1}]).mapMod _).map (Mod.scalarEndo b M)) = _
+  rw [Mod.map_scalarEndo, Mod.extendIso_scalarEndo]
+  simp only [Category.assoc]
+  rfl
+private lemma lowerStar_derivedScalarEndo
+    (b : 𝟙_ (Sheaf (ProEt.topology Y) Ab.{u + 1}) ⟶ condensedRingObj Λ Y)
+    (M : DerivedCategory
+      (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
+    R((f)_*⟦Λ⟧).map
+        ((CategoryTheory.derivedCenter (Mod.scalarNatEndo
+          (CategoryTheory.Functor.LaxMonoidal.ε (f)^*[Ab.{u + 1}] ≫
+            (f)^*[Ab.{u + 1}].map b ≫ condensedPullbackHom Λ f))).app M) =
+      (CategoryTheory.derivedCenter (Mod.scalarNatEndo b)).app (R((f)_*⟦Λ⟧).obj M) := by
+  apply CategoryTheory.map_center_rightAdjoint L((f)^*⟦Λ⟧)
+    (derivedUpperStarLowerStarAdjunction Λ f)
+  intro N
+  apply CategoryTheory.map_center_of_iso
+    (f)^*⟦Λ⟧.leftDerivedFunctorIsoMapDerivedCategory
+  apply CategoryTheory.map_derivedCenter
+  intro K
+  exact upperStar_scalarEndo f b K
 private lemma lowerStar_derivedScalarEndo_of_eq
     (bX : 𝟙_ (Sheaf (ProEt.topology X) Ab.{u + 1}) ⟶ condensedRingObj Λ X)
     (bY : 𝟙_ (Sheaf (ProEt.topology Y) Ab.{u + 1}) ⟶ condensedRingObj Λ Y)
@@ -976,16 +1111,11 @@ private lemma lowerStar_derivedScalarEndo_of_eq
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
     R((f)_*⟦Λ⟧).map ((CategoryTheory.derivedCenter (Mod.scalarNatEndo bX)).app M) =
       (CategoryTheory.derivedCenter (Mod.scalarNatEndo bY)).app (R((f)_*⟦Λ⟧).obj M) := by
-  exact qbar_lowerStar_derivedScalarEndo_of_eq f bX bY hb M
-
+  rw [hb]
+  exact lowerStar_derivedScalarEndo f bY M
 end ScalarCompatibility
 
 section FiniteFreePush
-
-
-set_option backward.isDefEq.respectTransparency true
-
-
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [MonObj Λ'] [IsCommMonObj Λ] [IsCommMonObj Λ']
   (a : Λ ⟶ Λ') [IsMonHom a]
@@ -997,16 +1127,19 @@ private structure FiniteFreePushData (n : ℕ) where
     (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ' Y))
   τX : Fin n → CatCenter
     (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X))
-  hY : Mod.BasisUnitIsIso (C := Sheaf (ProEt.topology Y) Ab.{u + 1})
-    (R := condensedRingObj Λ Y) (S := condensedRingObj Λ' Y) (coefficientMap a Y) τY
-  hX : Mod.BasisUnitIsIso (C := Sheaf (ProEt.topology X) Ab.{u + 1})
-    (R := condensedRingObj Λ X) (S := condensedRingObj Λ' X) (coefficientMap a X) τX
+  hY : ∀ N : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y),
+    IsIso (biproduct.desc fun i ↦
+      (Mod.extendRestrictAdjunction (coefficientMap a Y)).unit.app N ≫
+        (Mod.comap (coefficientMap a Y)).map ((τY i).app _))
+  hX : ∀ N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X),
+    IsIso (biproduct.desc fun i ↦
+      (Mod.extendRestrictAdjunction (coefficientMap a X)).unit.app N ≫
+        (Mod.comap (coefficientMap a X)).map ((τX i).app _))
   hscalar : ∀ (i : Fin n) (N : DerivedCategory
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X))),
     R((f)_*⟦Λ'⟧).map ((CategoryTheory.derivedCenter (τX i)).app N) =
       (CategoryTheory.derivedCenter (τY i)).app (R((f)_*⟦Λ'⟧).obj N)
 
-set_option backward.isDefEq.respectTransparency false in
 /-- Construct the scalar basis on both sites, transporting it along pullback. -/
 @[irreducible] private noncomputable def finiteFreePushData (n : ℕ)
     (eY : (Mod.comap (coefficientMap a Y)).obj (Mod.regular (condensedRingObj Λ' Y)) ≅
@@ -1022,43 +1155,33 @@ set_option backward.isDefEq.respectTransparency false in
   have hsquare : coefficientMap a X ≫ s.inv = r.inv ≫ P.map (coefficientMap a Y) := by
     exact CategoryTheory.isoSquare_inv (P.map (coefficientMap a Y))
       (coefficientMap a X) r s (map_coefficientMap_comp_condensedPullbackHom a f)
+  let eX := Mod.freeRestrictedRegularIsoOfRingIso (P.map (coefficientMap a Y))
+    (coefficientMap a X) r s hsquare n eP
   let bY (i : Fin n) : 𝟙_ (Sheaf (ProEt.topology Y) Ab.{u + 1}) ⟶
       condensedRingObj Λ' Y :=
     η[condensedRingObj Λ Y] ≫ (biproduct.ι _ i ≫ eY.inv).hom
-  let htransport : ∃ eX :
-      (Mod.comap (coefficientMap a X)).obj (Mod.regular (condensedRingObj Λ' X)) ≅
-        Mod.finiteFree (condensedRingObj Λ X) n,
-      ∀ i : Fin n, η[condensedRingObj Λ X] ≫ (biproduct.ι _ i ≫ eX.inv).hom =
-        CategoryTheory.Functor.LaxMonoidal.ε P ≫ P.map (bY i) ≫ s.hom := by
-    refine ⟨Mod.freeRestrictedRegularIsoOfRingIso (P.map (coefficientMap a Y))
-      (coefficientMap a X) r s hsquare n eP, ?_⟩
-    intro i
+  let bX (i : Fin n) : 𝟙_ (Sheaf (ProEt.topology X) Ab.{u + 1}) ⟶
+      condensedRingObj Λ' X :=
+    η[condensedRingObj Λ X] ≫ (biproduct.ι _ i ≫ eX.inv).hom
+  have hb (i : Fin n) : bX i =
+      CategoryTheory.Functor.LaxMonoidal.ε P ≫ P.map (bY i) ≫ s.hom := by
     exact Mod.mappedRingIsoBasisVector
       (C := Sheaf (ProEt.topology Y) Ab.{u + 1})
       (D := Sheaf (ProEt.topology X) Ab.{u + 1})
       (R := condensedRingObj Λ Y) (S := condensedRingObj Λ' Y)
       P (coefficientMap a Y) (coefficientMap a X) r s hsquare n eY i
-  let eX := Classical.choose htransport
-  have hb := Classical.choose_spec htransport
-  let bX (i : Fin n) : 𝟙_ (Sheaf (ProEt.topology X) Ab.{u + 1}) ⟶
-      condensedRingObj Λ' X :=
-    η[condensedRingObj Λ X] ≫ (biproduct.ι _ i ≫ eX.inv).hom
   let τY (i : Fin n) := Mod.scalarNatEndo (bY i)
   let τX (i : Fin n) := Mod.scalarNatEndo (bX i)
   have hY (N : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
       IsIso (biproduct.desc fun i ↦
         (Mod.extendRestrictAdjunction (coefficientMap a Y)).unit.app N ≫
-          (Mod.comap (coefficientMap a Y)).map ((τY i).app _)) := by
-    simpa only [τY, bY, Mod.scalarNatEndo, Mod.scalarEndo, Mod.qbar_scalarNatEndo_app,
-      CategoryTheory.Functor.id_obj] using
-      Mod.isIso_basisAdjUnitDesc (coefficientMap a Y) n N eY
+          (Mod.comap (coefficientMap a Y)).map ((τY i).app _)) :=
+    Mod.isIso_basisAdjUnitDesc (coefficientMap a Y) n N eY
   have hX (N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
       IsIso (biproduct.desc fun i ↦
         (Mod.extendRestrictAdjunction (coefficientMap a X)).unit.app N ≫
-          (Mod.comap (coefficientMap a X)).map ((τX i).app _)) := by
-    simpa only [τX, bX, Mod.scalarNatEndo, Mod.scalarEndo, Mod.qbar_scalarNatEndo_app,
-      CategoryTheory.Functor.id_obj] using
-      Mod.isIso_basisAdjUnitDesc (coefficientMap a X) n N eX
+          (Mod.comap (coefficientMap a X)).map ((τX i).app _)) :=
+    Mod.isIso_basisAdjUnitDesc (coefficientMap a X) n N eX
   have hscalar (i : Fin n) (N : DerivedCategory
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X))) :
       R((f)_*⟦Λ'⟧).map
@@ -1068,9 +1191,6 @@ set_option backward.isDefEq.respectTransparency false in
     exact lowerStar_derivedScalarEndo_of_eq f (bX i) (bY i) (hb i) N
   exact ⟨τY, τX, hY, hX, hscalar⟩
 
--- The finite-unit construction above computes these actions; later arguments use its API.
-
-set_option backward.isDefEq.respectTransparency false in
 /-- The canonical mate is invertible when its units are finite basis decompositions. -/
 private theorem derivedPushHom_of_finiteFree (n : ℕ)
     (eY : (Mod.comap (coefficientMap a Y)).obj (Mod.regular (condensedRingObj Λ' Y)) ≅
@@ -1226,11 +1346,27 @@ by
   let eY := Mod.mapFreeRestrictedRegularIso (upperStarFromPoint Y) a n e
   exact derivedPushHom_of_finiteFree a f n eY
 
+/-- **(Push)** is an isomorphism for `E ⊆ ℚ̄_ℓ` and `f` *proper*, on all unbounded objects: `Rf_*`
+then admits a right adjoint `Rf^!`, hence commutes with the coproducts through which the derived
+extension of scalars along the flat `E_X ⟶ ℚ̄_ℓ,X` is computed. See the module docstring. -/
+/- STATEMENT-DISPUTED: the asserted all-unbounded scope is stronger than the available
+bounded-below continuity input. The proposed ambient right adjoint is not supplied by
+ModuleObject.Derived.UpperShriek, which constructs an adjoint only on bounded constructible
+categories with additional geometric hypotheses. AmbientCounterexampleCoproducts disproves the
+analogous ambient coproduct claim for ordinary coefficient sheaves; transferring that example
+to these exact internal condensed modules remains to be formalized. The finite-basis argument
+above is valid, but an infinite basis additionally needs the copower comparison isolated in
+CategoryTheory.Adjunction.isIso_iff_unitCoproductComparison. No claim of a Lean-certified
+counterexample to this exact coefficient instance is made here. -/
+instance isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper [IsProper f]
+    (E : FiniteIntermediateField ℓ) :
+    IsIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=
+  sorry
+
 -- Keep the chosen derived adjunction and sheaf pullbacks folded during the unit comparisons.
 -- Unfold the canonical comparison only for the explicit mate calculation below.
-attribute [local irreducible] derivedPushHom derivedComapLowerStarIso derivedLowerShriekHom
+attribute [local irreducible] derivedPushHom derivedComapLowerStarIso
   Mod.derivedExtendMapDerivedCategoryAdjunction upperStarFromPoint ProEtale.upperStar
-  Profinite.padicSubfieldRingObjToPadicAlgCl
 
 /-- Exact restriction detects derived isomorphisms through its homology comparison. -/
 private theorem reflectsDerivedIsomorphisms
@@ -1304,7 +1440,6 @@ private theorem coefficientDerivedCoproducts (Λ : Sheaf
     HasColimitsOfShape.of_small.{u + 1, u + 1} C (Discrete J)
   exact CategoryTheory.derived_hasCoproducts
 
-
 set_option maxHeartbeats 400000 in
 -- The explicit mate and coproduct comparison are elaborated in several large derived categories.
 /-- **(Push)** for `E ⊆ ℚ̄_ℓ` is invertible at every bounded-below complex when `f` is proper.
@@ -1365,6 +1500,20 @@ theorem isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE [IsPro
   · exact hunit X M
   · exact hunit Y (R((f)_*⟦Profinite.continuousMapRingObj E⟧).obj M)
   · exact condensedSubfield_bounded_copower_comparison.{u} ℓ E f I M N
+
+
+variable [HasCompactification f]
+
+/-- **(Shriek)** is an isomorphism for a finite extension `F/E`, on all unbounded objects. -/
+example {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
+    IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
+  inferInstance
+
+/-- **(Shriek)** is an isomorphism for `E ⊆ ℚ̄_ℓ`, on all unbounded objects: the proper part of
+the compactification contributes (Push) for a proper morphism, which is an isomorphism. -/
+example (E : FiniteIntermediateField ℓ) :
+    IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=
+  inferInstance
 
 end Push
 

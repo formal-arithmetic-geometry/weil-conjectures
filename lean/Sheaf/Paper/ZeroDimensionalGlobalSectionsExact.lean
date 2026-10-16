@@ -9,8 +9,8 @@ import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.AlgebraicGeometry.Artinian
 import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Products
 import Sheaf.Paper.ZeroDimensionalEtaleCohomologyIso
-import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
 
 @[expose] public section

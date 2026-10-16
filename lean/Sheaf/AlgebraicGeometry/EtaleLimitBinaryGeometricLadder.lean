@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Exact.Basic
-public import Sheaf.AlgebraicGeometry.StageCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.StageCohomologyComparison
 import Sheaf.AlgebraicGeometry.EtaleLimitBinaryZeroRestrictionRow
 import Sheaf.AlgebraicGeometry.EtaleLimitBinarySuccessorCoconeSegment
 import Mathlib.CategoryTheory.Limits.Connected

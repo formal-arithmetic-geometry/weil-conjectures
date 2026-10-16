@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 import Sheaf.AlgebraicGeometry.FinitelyPresentedComplexDescent
 import Sheaf.AlgebraicGeometry.ChosenComplexFlatProperRefinement
 

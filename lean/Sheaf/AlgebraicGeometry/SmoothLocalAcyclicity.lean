@@ -15,12 +15,12 @@ import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import WeilConjectures.ConstructibleSheaf.Defs
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.ExchangeStrictLocalCohomology
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 import Sheaf.AlgebraicGeometry.StrictLocalGeometricFibreTest

@@ -5,8 +5,8 @@ Authors: SHEAF group NK
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekComparison
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 import Mathlib.AlgebraicGeometry.Morphisms.Etale

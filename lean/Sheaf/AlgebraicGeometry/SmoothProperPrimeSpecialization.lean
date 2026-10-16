@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Data.ZMod.Basic
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
-public import Sheaf.Paper.InverseImageStalkGerm
+public import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import Sheaf.AlgebraicGeometry.LocallyConstantTorsionLocalAcyclicity
 import Sheaf.AlgebraicGeometry.ProperLocallyAcyclicSpecialization

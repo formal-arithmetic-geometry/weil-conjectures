@@ -75,7 +75,7 @@ theorem exists_affineBaseChangeSourceModel
       ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K))
     (P : CochainComplex
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) (e : DerivedCategory.Q.obj P ≅ K)
+    (hP : P.IsAcyclicTensorKFlat) (e : DerivedCategory.Q.obj P ≅ K)
     (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φg'))).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) (i : ℤ) :
     ∃ d : affineDerivedCohomologyModules A' i ⋙
@@ -129,7 +129,7 @@ theorem exists_affineBaseChangeSourceModel
       (E.functor.mapIso
         (asIso (DerivedCategory.Q.map sM) ≪≫
           DerivedCategory.Q.objObjPreimageIso (E.inverse.obj Kq)) ≪≫ E.counitIso.app Kq)
-  have hP₀ : CochainComplex.IsKFlat (R := (Spec (.of A)).sheaf) P₀ :=
+  have hP₀ : CochainComplex.IsAcyclicTensorKFlat (R := (Spec (.of A)).sheaf) P₀ :=
     isKFlat_tilde A M (by
       intro F hF
       have h := (HomotopyCategory.kFlat_iff_preserves_acyclic

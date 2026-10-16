@@ -49,7 +49,7 @@ theorem exists_derivedPullback_kFlat_counit_adjustment_factor
           schemeDerivedCategory Z))
     (hε₀ : ∀ P : CochainComplex
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
-      CochainComplex.IsKFlat (R := Y.sheaf) P →
+      CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
       IsIso (ε₀.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)))
     (ε : DerivedCategory.Qh ⋙ derivedPullback f ⟶
       (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
@@ -58,7 +58,7 @@ theorem exists_derivedPullback_kFlat_counit_adjustment_factor
           schemeDerivedCategory Z))
     (hε : ∀ P : CochainComplex
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
-      CochainComplex.IsKFlat (R := Y.sheaf) P →
+      CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
       IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))) :
     ∃ a : (DerivedCategory.Qh ⋙ derivedPullback f) ≅
           (DerivedCategory.Qh ⋙ derivedPullback f), a.hom ≫ ε₀ = ε
@@ -79,7 +79,7 @@ theorem exists_derivedPullback_kFlat_counit_adjustment_factor
         (DerivedCategory.Qh : HomotopyCategory
           (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ) ⥤
             schemeDerivedCategory Z)),
-      (∀ P : CochainComplex A ℤ, CochainComplex.IsKFlat (R := Y.sheaf) P →
+      (∀ P : CochainComplex A ℤ, CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
         IsIso (β.app (q.obj P))) →
       IsIso ((derivedPullback f).leftDerivedLift δ W (derivedPullback f) β) := by
     intro β hβ

@@ -108,8 +108,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.FieldTheory.TriangularFieldModelCoefficientDescent",
-  "file": "lean/Sheaf/FieldTheory/TriangularFieldModelCoefficientDescent.lean",
+  "module": "WeilConjectures.FieldTheory.TriangularFieldModelCoefficientDescent",
+  "file": "lean/WeilConjectures/FieldTheory/TriangularFieldModelCoefficientDescent.lean",
   "declaration": "FieldTheory.triangularFieldModel_coefficient_descent",
   "statement": "theorem triangularFieldModel_coefficient_descent\n    (k : Type u) [Field k] (d n : ℕ) (h : MvPolynomial (Fin d) k)\n    (p : (i : Fin (n + 1)) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))\n    (e : Fin (n + 1) → ℕ)\n    (hp : (p (Fin.last n)).Monic)\n    (he : (p (Fin.last n)).natDegree = e (Fin.last n))\n    (psi : Localization.Away h →ₐ[k]\n      (MvPolynomial (Fin (d + 1 + (n + 1))) k ⧸\n        Ideal.ofList (triangularFieldModelEquations k d (n + 1) h p)))\n    (hpsi : ∀ r : MvPolynomial (Fin d) k,\n      psi (algebraMap _ (Localization.Away h) r) = Ideal.Quotient.mk _\n        (MvPolynomial.rename (fun j : Fin d ↦\n          (⟨j.val, by omega⟩ : Fin (d + 1 + (n + 1)))) r))\n    (psi₀ : Localization.Away h →ₐ[k]\n      (MvPolynomial (Fin (d + 1 + n)) k ⧸\n        Ideal.ofList (triangularFieldModelEquations k d n h (fun i ↦ p i.castSucc))))\n    (hpsi₀ : ∀ r : MvPolynomial (Fin d) k,\n      psi₀ (algebraMap _ (Localization.Away h) r) = Ideal.Quotient.mk _\n        (MvPolynomial.rename (fun j : Fin d ↦\n          (⟨j.val, by omega⟩ : Fin (d + 1 + n))) r))\n    (c : (((i : Fin (n + 1)) → Fin (e i)) → Localization.Away h))\n    (hc : (∑ a : ((i : Fin (n + 1)) → Fin (e i)),\n        psi (c a) * (∏ i : Fin (n + 1),\n          (Ideal.Quotient.mk _ (MvPolynomial.X\n            (⟨d + 1 + i.val, by omega⟩ : Fin (d + 1 + (n + 1))))) ^ (a i).val)) = 0)\n    (j : Fin (e (Fin.last n))) :\n    (∑ a : ((i : Fin n) → Fin (e i.castSucc)),\n      psi₀ (c (Fin.snoc a j)) * (∏ i : Fin n,\n        (Ideal.Quotient.mk _ (MvPolynomial.X\n          (⟨d + 1 + i.val, by omega⟩ : Fin (d + 1 + n)))) ^ (a i).val)) = 0",
   "branch": "sheaf-dag",

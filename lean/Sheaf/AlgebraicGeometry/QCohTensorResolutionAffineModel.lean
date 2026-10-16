@@ -72,7 +72,7 @@ set_option maxHeartbeats 800000 in
 /-- The nonpositive cochain model of an ordinary projective resolution is K-flat. -/
 theorem tensorResolution_isKFlat (A : Type u) [CommRing A]
     (M : ModuleCat.{u} A) (P : ProjectiveResolution M) :
-    CochainComplex.IsKFlat (R := (Spec (.of A)).sheaf)
+    CochainComplex.IsAcyclicTensorKFlat (R := (Spec (.of A)).sheaf)
       (((tilde.functor (.of A)).mapHomologicalComplex (.up ℤ)).obj
         (P.complex.extend ComplexShape.embeddingDownNat)) := by
   apply isKFlat_tilde A
@@ -217,7 +217,7 @@ theorem exists_tensorResolutionSections (A : Type u) [CommRing A]
     (K : CochainComplex (Spec (.of A)).Modules ℤ)
     (q : K ⟶ (CochainComplex.singleFunctor (Spec (.of A)).Modules 0).obj
       (tilde (R := .of A) M))
-    (hK : CochainComplex.IsKFlat (R := (Spec (.of A)).sheaf) K)
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := (Spec (.of A)).sheaf) K)
     (hq : QuasiIso q) (n : ℕ) :
     Nonempty (
       ((((tensorRight N).mapHomologicalComplex (.down ℕ)).obj P.complex).homology n) ≃ₗ[A]

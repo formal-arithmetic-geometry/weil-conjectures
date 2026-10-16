@@ -5,7 +5,7 @@ Authors: SHEAF group NP
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
+public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionTransfer
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift

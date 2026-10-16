@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import Sheaf.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
 
 /-!
 # Subsheaves of constructible module sheaves on Noetherian schemes

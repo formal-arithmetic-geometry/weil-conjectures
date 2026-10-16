@@ -10,7 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
-import Sheaf.AlgebraicGeometry.StrictLocalAbelianTotalExchange
+import WeilConjectures.AlgebraicGeometry.StrictLocalAbelianTotalExchange
 import Sheaf.AlgebraicGeometry.ModuleAbelianStalkExchange
 
 /-!

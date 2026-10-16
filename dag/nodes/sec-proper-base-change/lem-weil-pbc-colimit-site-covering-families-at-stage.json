@@ -83,8 +83,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.ColimitSiteCoveringFamiliesAtStage",
-  "file": "lean/Sheaf/CategoryTheory/ColimitSiteCoveringFamiliesAtStage.lean",
+  "module": "WeilConjectures.CategoryTheory.ColimitSiteCoveringFamiliesAtStage",
+  "file": "lean/WeilConjectures/CategoryTheory/ColimitSiteCoveringFamiliesAtStage.lean",
   "declaration": "CategoryTheory.colimit_site_covering_families_at_stage",
   "statement": "theorem colimit_site_covering_families_at_stage\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X → Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V)) (Q : Precoverage V.pt)\n    (hQ : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔\n      ∃ (j : J) (X : F.obj j) (S : Presieve X)\n        (h : (V.ι.app j).toFunctor.obj X = Y),\n        S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R)\n    {κ : Type u} [Finite κ] (j₀ : J) (T₀ : κ → F.obj j₀)\n    {S : κ → V.pt} (hT₀ : ∀ i, (V.ι.app j₀).toFunctor.obj (T₀ i) = S i)\n    {τ : κ → Type u} [∀ i, Finite (τ i)] {X : ∀ i, τ i → V.pt}\n    (f : ∀ i t, X i t ⟶ S i)\n    (hf : ∀ i, Presieve.ofArrows (X i) (f i) ∈ Q (S i)) :\n    ∃ (j : J) (e : j₀ ⟶ j) (A : ∀ i, τ i → F.obj j)\n      (a : ∀ i t, A i t ⟶ (F.map e).toFunctor.obj (T₀ i)),\n      (∀ i, Presieve.ofArrows (A i) (a i) ∈ P j ((F.map e).toFunctor.obj (T₀ i))) ∧\n      (∀ i t, Arrow.mk ((V.ι.app j).toFunctor.map (a i t)) = Arrow.mk (f i t))",
   "branch": "sheaf-dag",

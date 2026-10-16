@@ -86,8 +86,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.RightDerivedPairSequence",
-  "file": "lean/Sheaf/CategoryTheory/RightDerivedPairSequence.lean",
+  "module": "WeilConjectures.CategoryTheory.RightDerivedPairSequence",
+  "file": "lean/WeilConjectures/CategoryTheory/RightDerivedPairSequence.lean",
   "declaration": "CategoryTheory.rightDerived_pair_sequence",
   "statement": "theorem rightDerived_pair_sequence\n    {C : Type u} [Category.{v} C] [Abelian C] [HasInjectiveResolutions C]\n    (A B D E : C ⥤ AddCommGrpCat.{w})\n    [A.Additive] [B.Additive] [D.Additive] [E.Additive]\n    (a : A ⟶ B) (b : A ⟶ D) (c : B ⟶ E) (d : D ⟶ E)\n    (hinj : ∀ (I : C), Injective I →\n      Function.Injective (fun x => (a.app I x, b.app I x)))\n    (hexact : ∀ (I : C), Injective I →\n      Function.Exact (fun x => (a.app I x, b.app I x))\n        (fun x => c.app I x.1 - d.app I x.2))\n    (hsurj : ∀ (I : C), Injective I →\n      Function.Surjective (fun x : B.obj I × D.obj I => c.app I x.1 - d.app I x.2)) :\n    ∃ δ : ∀ n : ℕ, E.rightDerived n ⟶ A.rightDerived (n + 1),\n      ∀ M : C,\n        ∀ n : ℕ,\n          Function.Exact (fun x => ((a.rightDerived n).app M x,\n            (b.rightDerived n).app M x))\n            (fun x => (c.rightDerived n).app M x.1 - (d.rightDerived n).app M x.2) ∧\n          Function.Exact\n            (fun x : (B.rightDerived n).obj M × (D.rightDerived n).obj M =>\n              (c.rightDerived n).app M x.1 - (d.rightDerived n).app M x.2)\n            ((δ n).app M) ∧\n          Function.Exact ((δ n).app M)\n            (fun x => ((a.rightDerived (n + 1)).app M x,\n              (b.rightDerived (n + 1)).app M x))",
   "branch": "sheaf-dag",

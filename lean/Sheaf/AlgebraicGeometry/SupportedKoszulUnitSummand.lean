@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Retract
 import Sheaf.AlgebraicGeometry.SupportedKoszulRelativeDetector
 import Sheaf.AlgebraicGeometry.SupportedOpenUnitConeProperties
 import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
-import Sheaf.AlgebraicGeometry.Modules.QuasicoherentBinarySum
+import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.Grp.Zero
 

@@ -10,8 +10,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 import Sheaf.ConstructibleSheaf.FiniteMonodromyTrivializingTorsor
-import Sheaf.ConstructibleSheaf.ConnectedTorsorSubgroupQuotient
-import Sheaf.ConstructibleSheaf.ConnectedTorsorModuleDescent
+import WeilConjectures.ConstructibleSheaf.ConnectedTorsorSubgroupQuotient
+import WeilConjectures.ConstructibleSheaf.ConnectedTorsorModuleDescent
 import Mathlib.GroupTheory.Sylow
 
 @[expose] public section

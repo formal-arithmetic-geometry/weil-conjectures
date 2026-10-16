@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 

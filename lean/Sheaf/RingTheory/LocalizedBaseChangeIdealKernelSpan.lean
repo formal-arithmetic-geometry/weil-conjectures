@@ -12,7 +12,7 @@ public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 import Sheaf.RingTheory.BaseChangeIdealKernelGenerators
 import Sheaf.RingTheory.LocalizationIdealKernelGenerators
-import Sheaf.Algebra.TorOneSurjectiveChangeRings
+import WeilConjectures.Algebra.TorOneSurjectiveChangeRings
 import Sheaf.RingTheory.TorIdealKernelNaturality
 import Sheaf.RingTheory.TorOneSurjectiveFlatMiddle
 

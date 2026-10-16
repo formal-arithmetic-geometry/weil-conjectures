@@ -59,7 +59,7 @@ theorem changeOfRings_acyclic_of_isKFlat
       E.map a = eqToHom (h M) ≫ changeOfRingsHom.{u, u, u} φ M a ≫ eqToHom (h N).symm)
     [E.Additive]
     (K : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ)
-    (hK : K.IsKFlat) (hA : K.Acyclic) :
+    (hK : K.IsAcyclicTensorKFlat) (hA : K.Acyclic) :
     ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K).Acyclic  := by
   apply changeOfRings_acyclic_of_tensor_acyclic φ E h hm K
   intro F

@@ -5,6 +5,8 @@ Authors: SHEAF group Y3
 -/
 module
 
+public import Mathlib.Algebra.Category.Grp.Adjunctions
+
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 import Sheaf.AlgebraicGeometry.AbelianPullbackSingleComposition
 import Sheaf.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift

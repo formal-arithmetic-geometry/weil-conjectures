@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 public import Mathlib.RingTheory.TensorProduct.Maps
 import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Sheaf.Paper.DirectedColimitBaseChangeElementwise
+import WeilConjectures.AlgebraicGeometry.DirectedColimitBaseChangeElementwise
 
 /-!
 # Descent of a finite family of integral tensor elements

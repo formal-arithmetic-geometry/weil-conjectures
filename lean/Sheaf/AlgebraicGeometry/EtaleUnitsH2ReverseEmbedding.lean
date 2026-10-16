@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import Sheaf.AlgebraicGeometry.EtaleFieldSectionsInvariants
 import Sheaf.AlgebraicGeometry.EtaleUnitsStalkRepresentation
 import Sheaf.RepresentationTheory.DiscreteInvariantsContinuousComparison
-import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import Mathlib.FieldTheory.Galois.Profinite
 
 /-! Directional degree-two comparison over a field. -/

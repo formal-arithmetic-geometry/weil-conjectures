@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk
 public import Mathlib.Algebra.Category.ModuleCat.AB
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 import Mathlib.CategoryTheory.Sites.Point.Over

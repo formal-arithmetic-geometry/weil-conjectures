@@ -4,7 +4,7 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Mathlib.AlgebraicGeometry.FunctionField
 import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
-import Sheaf.AlgebraicGeometry.IntegralIdealAffineSections
+import WeilConjectures.AlgebraicGeometry.IntegralIdealAffineSections
 
 @[expose] public section
 

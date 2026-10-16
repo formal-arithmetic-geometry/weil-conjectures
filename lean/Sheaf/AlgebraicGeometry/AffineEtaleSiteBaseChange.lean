@@ -5,12 +5,12 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.AffineEtaleRestrictionUnit
-import Sheaf.AlgebraicGeometry.AffineEtaleRestrictionLargeSets
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageExact
+import WeilConjectures.AlgebraicGeometry.AffineEtaleRestrictionLargeSets
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 
 /-!
 # Base change on the full affine étale sites

@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 import Sheaf.AlgebraicGeometry.ConstructibleModuleSupportGeneral
-import Sheaf.AlgebraicGeometry.AffineFreeFiniteStalkGeneration
+import WeilConjectures.AlgebraicGeometry.AffineFreeFiniteStalkGeneration
 import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
 import Sheaf.Topology.SpectralConstructibleFiniteIntersection
 import WeilConjectures.ConstructibleSheaf.FreeLifting

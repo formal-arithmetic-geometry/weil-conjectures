@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenFiniteComplement
-import Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 
 /-! # Vanishing for a dense-open closed complement after open restriction
 

@@ -7,7 +7,7 @@ import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierBaseChangeModel
 import Sheaf.AlgebraicGeometry.PrimeInjectiveCohomologyComparison
 import Sheaf.AlgebraicGeometry.AlgClosedExtensionModuleSections
 import Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic
-import Sheaf.AlgebraicGeometry.CohomologyRestrictionSquareTransport
+import WeilConjectures.AlgebraicGeometry.CohomologyRestrictionSquareTransport
 @[expose] public section
 universe u
 open CategoryTheory

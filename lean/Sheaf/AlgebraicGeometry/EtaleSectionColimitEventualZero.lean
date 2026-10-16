@@ -10,9 +10,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Sites.Sheaf
 
-import Sheaf.AlgebraicGeometry.EtaleSectionColimitEventualZeroAux
+import WeilConjectures.AlgebraicGeometry.EtaleSectionColimitEventualZeroAux
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-! # Eventual vanishing in filtered etale sheaf colimits
 

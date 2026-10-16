@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 
 /-! # Kernel of the pullback unit at a point on the closed image

@@ -5,7 +5,7 @@ Authors: SHEAF group M3
 -/
 module
 
-public import Sheaf.RingTheory.AssociatedGradedRing
+public import WeilConjectures.RingTheory.AssociatedGradedRing
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.RingTheory.AssociatedGradedIdealApproximation

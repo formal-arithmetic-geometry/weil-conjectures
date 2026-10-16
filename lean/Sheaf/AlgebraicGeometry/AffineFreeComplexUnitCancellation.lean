@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.Homotopy
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.Algebra.Homology.UnitEntrySplits
+import WeilConjectures.Algebra.Homology.UnitEntrySplits
 import Sheaf.Algebra.Homology.SplitIdentityHomotopyEquiv
 import Sheaf.AlgebraicGeometry.AffineFreeComplexModuleLift
 

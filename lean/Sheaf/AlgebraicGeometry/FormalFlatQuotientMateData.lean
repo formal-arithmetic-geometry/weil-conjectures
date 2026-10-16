@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 import Sheaf.AlgebraicGeometry.FormalCompletionPullbackNormalized
 import Sheaf.AlgebraicGeometry.OrdinaryFlatExchangePrescribedAdjunction
-import Sheaf.AlgebraicGeometry.FormalSystemExchangeMateCompatibility
+import WeilConjectures.AlgebraicGeometry.FormalSystemExchangeMateCompatibility
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 

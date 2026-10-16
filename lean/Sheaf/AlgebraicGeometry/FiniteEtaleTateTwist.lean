@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Module.ZMod
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.CategoryTheory.Sites.Monoidal
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-public import Sheaf.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
 public import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!

@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SheafHExtResolutionSectionsIso
-public import Sheaf.AlgebraicGeometry.ExtPullbackHomComplex
+public import WeilConjectures.AlgebraicGeometry.SheafHExtResolutionSectionsIso
+public import WeilConjectures.AlgebraicGeometry.ExtPullbackHomComplex
 import Sheaf.CategoryTheory.ExtCoefficientCocycle
 
 /-! # Ext coefficient naturality before sections evaluation

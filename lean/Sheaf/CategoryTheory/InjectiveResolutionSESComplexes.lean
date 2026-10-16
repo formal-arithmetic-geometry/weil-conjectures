@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
-import Sheaf.CategoryTheory.PushoutShortExactSequence
+import WeilConjectures.CategoryTheory.PushoutShortExactSequence
 import Mathlib.Algebra.Homology.ModelCategory.Injective
 
 /-!

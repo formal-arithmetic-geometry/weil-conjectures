@@ -1,6 +1,6 @@
 module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 import Sheaf.AlgebraicGeometry.KoszulBasicOpenExact
 import Sheaf.AlgebraicGeometry.OpenCoverRestrictionExact
 public import Mathlib.AlgebraicGeometry.Modules.Tilde

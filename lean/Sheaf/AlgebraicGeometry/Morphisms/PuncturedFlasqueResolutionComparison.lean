@@ -5,7 +5,7 @@ public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedSectionsComplex
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedTildeSectionsComparison
 import Sheaf.AlgebraicGeometry.Morphisms.InjectiveModuleTildeFlasque
-import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import WeilConjectures.Mathlib.Topology.Sheaves.Flasque
 

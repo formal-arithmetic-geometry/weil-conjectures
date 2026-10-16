@@ -48,7 +48,7 @@ theorem exists_tensorHomUncurry_descent_representative (X : Scheme.{u})
         X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M),
       ∀ (P L M : CochainComplex
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ),
-        P.IsKFlat →
+        P.IsAcyclicTensorKFlat →
         ∀ φ : P ⟶ homComplex (R := X.sheaf) L
             ((schemeHomKInjectiveResolution X).obj M),
           t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)
@@ -64,7 +64,7 @@ theorem exists_tensorHomUncurry_descent_representative (X : Scheme.{u})
         X.toRingedSpace.sheaf).obj (op L, M)) (g : K ⊗ L ⟶ M) : Prop :=
     ∃ (P Lc Mc : CochainComplex
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-      (hP : P.IsKFlat)
+      (hP : P.IsAcyclicTensorKFlat)
       (φ : P ⟶ homComplex (R := X.sheaf) Lc
         ((schemeHomKInjectiveResolution X).obj Mc)),
       DerivedCategory.Q.obj P = K ∧ DerivedCategory.Q.obj Lc = L ∧

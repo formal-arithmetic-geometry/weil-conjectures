@@ -2,7 +2,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.TensorProduct.Basic
-public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 import Mathlib.RingTheory.Extension.Presentation.Basic
 import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
 

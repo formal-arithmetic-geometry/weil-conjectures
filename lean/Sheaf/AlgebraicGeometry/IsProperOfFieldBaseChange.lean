@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.FieldExtensionFpqcCover
-import Sheaf.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange
+import WeilConjectures.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange
 import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 /-!

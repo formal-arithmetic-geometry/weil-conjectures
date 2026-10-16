@@ -3,7 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.CategoryTheory.SiteCechComplex
-import all Sheaf.CategoryTheory.SiteSesCechH1Surjective
+import all WeilConjectures.CategoryTheory.SiteSesCechH1Surjective
 import Sheaf.Topology.SheafCokernelLocalImage
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.Algebra.Category.Grp.EpiMono

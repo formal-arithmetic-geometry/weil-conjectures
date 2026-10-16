@@ -73,7 +73,7 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
     (_hhom : ∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),
       QuasiIso t → QuasiIso (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t))
-    (_hdual : (localEvaluationDual X U P).IsKFlat)
+    (_hdual : (localEvaluationDual X U P).IsAcyclicTensorKFlat)
     (_eK : (Equivalence.functor
       (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
       (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))

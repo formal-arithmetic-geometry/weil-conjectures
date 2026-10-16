@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Mathlib.Algebra.Homology.ShortComplex.Linear
 import Mathlib.Algebra.Homology.Linear
 

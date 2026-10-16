@@ -86,11 +86,11 @@ left adjoints, to tensor pullback along the inverse isomorphism. Pullback preser
 K-flatness. The termwise comparison and invariance under isomorphism give the result. -/
 theorem affineCoordinateComplex_isKFlat (a : AffineComparisonCoordinate.{u, w})
     (M : CochainComplex (ModuleCat.{u} a.A) ℤ) (hM : AffineComparisonKFlat a.A M) :
-    CochainComplex.IsKFlat (R := a.X.sheaf) ((affineCoordinateComplex a).obj M) := by
+    CochainComplex.IsAcyclicTensorKFlat (R := a.X.sheaf) ((affineCoordinateComplex a).obj M) := by
   let T := @Functor.mapHomologicalComplex ℤ (ModuleCat.{u} a.A)
     (SheafOfModules.{u} (moduleRings (Spec a.A).toRingedSpace)) _ _ _ _
     (tilde.functor a.A) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
-  have hT : CochainComplex.IsKFlat (R := (Spec a.A).sheaf) (T.obj M) :=
+  have hT : CochainComplex.IsAcyclicTensorKFlat (R := (Spec a.A).sheaf) (T.obj M) :=
     isKFlat_tilde a.A M hM
   let e := affineCoordinateModuleEquivalence a.σ
   obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction a.σ.inv
@@ -99,7 +99,7 @@ theorem affineCoordinateComplex_isKFlat (a : AffineComparisonCoordinate.{u, w})
   have : e.functor.Additive := Functor.additive_of_preserves_binary_products _
   have : (Scheme.Modules.tensorPullback a.σ.inv).Additive := Functor.additive_of_iso θ
   let q := (NatIso.mapHomologicalComplex θ (.up ℤ)).app (T.obj M)
-  have hP : CochainComplex.IsKFlat (R := a.X.sheaf)
+  have hP : CochainComplex.IsAcyclicTensorKFlat (R := a.X.sheaf)
       (((Scheme.Modules.tensorPullback a.σ.inv).mapHomologicalComplex (.up ℤ)).obj
         (T.obj M)) := by
     have h := CochainComplex.isKFlat_pullback a.σ.inv.base a.X.sheaf

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.CategoryTheory.Sites.Adjunction
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
-import Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
 

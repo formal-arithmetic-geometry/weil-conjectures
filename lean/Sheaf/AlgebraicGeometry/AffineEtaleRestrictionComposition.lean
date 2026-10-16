@@ -5,10 +5,10 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.AffineEtaleRestrictionCompositionGamma
+import WeilConjectures.AlgebraicGeometry.AffineEtaleRestrictionCompositionGamma
 import Sheaf.AlgebraicGeometry.AffineEtaleRestrictionCompositionMates
 
 /-! # Affine étale inverse-image composition coherence -/

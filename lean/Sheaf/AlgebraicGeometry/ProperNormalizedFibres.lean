@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Fiber
 import Sheaf.AlgebraicGeometry.ProperFibreIdempotentImage
-import Sheaf.AlgebraicGeometry.SchemeClopenIdempotent
-import Sheaf.AlgebraicGeometry.SteinUniversallyClosedFactor
+import WeilConjectures.AlgebraicGeometry.SchemeClopenIdempotent
+import WeilConjectures.AlgebraicGeometry.SteinUniversallyClosedFactor
 
 /-!
 # Connected fibres of a normalized proper morphism to an affine scheme

@@ -73,8 +73,8 @@
  "unit": "sk-def-exchange",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.SheavesAlgebraicStructuresRingMorphism",
-  "file": "lean/Sheaf/CategoryTheory/SheavesAlgebraicStructuresRingMorphism.lean",
+  "module": "WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingMorphism",
+  "file": "lean/WeilConjectures/CategoryTheory/SheavesAlgebraicStructuresRingMorphism.lean",
   "declaration": "CategoryTheory.sheavesAlgebraicStructuresRing_morphism",
   "statement": "theorem sheavesAlgebraicStructuresRing_morphism\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (F : Sheaf J CommRingCat.{max u v w} ⥤\n      CommRingObjCat (Sheaf J (Type (max u v w))))\n    (G : CommRingObjCat (Sheaf J (Type (max u v w))) ⥤\n      Sheaf J CommRingCat.{max u v w})\n    (hF : F ⋙ CommRingObjCat.forget _ =\n      sheafCompose J (forget CommRingCat.{max u v w}))\n    (_h₁ : G ⋙ sheafCompose J (forget CommRingCat.{max u v w}) =\n      CommRingObjCat.forget _)\n    (h₂ : F ⋙ G = 𝟭 (Sheaf J CommRingCat.{max u v w}))\n    (h₃ : G ⋙ F = 𝟭 (CommRingObjCat (Sheaf J (Type (max u v w))))) :\n    ∀ (A B : Sheaf J CommRingCat.{max u v w})\n      (α : (sheafCompose J (forget CommRingCat.{max u v w})).obj A ⟶\n        (sheafCompose J (forget CommRingCat.{max u v w})).obj B),\n      (∃ f : A ⟶ B, (sheafCompose J (forget CommRingCat.{max u v w})).map f = α) ↔\n        IsRingHom (show (F.obj A).X ⟶ (F.obj B).X from\n          (eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) ∧\n        AddGrpObj.neg (X := (F.obj A).X) ≫\n            ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) =\n          ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) ≫\n            AddGrpObj.neg (X := (F.obj B).X)",
   "branch": "sheaf-dag",

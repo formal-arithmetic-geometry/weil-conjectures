@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import Sheaf.AlgebraicGeometry.EtaleSetSectionEventualEquality
 import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
-import Sheaf.AlgebraicGeometry.EtalePairRestrictionDetection
+import WeilConjectures.AlgebraicGeometry.EtalePairRestrictionDetection
 
 /-! # One overlap equation remains effective at later stages
 Source: Stacks Project, Tags 03Q4 and 09YQ, finite overlap reduction.

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 
 /-! # Homotopy comparison of the auxiliary injective complexes
 

@@ -7,7 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.GrothendieckHypercoverBaseChange
 import Sheaf.AlgebraicGeometry.FiniteSplitHypercoverTruncation
 import Sheaf.AlgebraicGeometry.FiniteSplitHypercoverExtension
-import Sheaf.Paper.FiniteHypercoverDescentParts
+import WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
+import WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
 /-! # Descent of a finite hypercover skeleton to a full stage hypercover -/
 @[expose] public section
 universe u

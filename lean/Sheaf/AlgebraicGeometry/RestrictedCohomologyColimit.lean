@@ -2,9 +2,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Mathlib.CategoryTheory.Presentable.Directed
-import Sheaf.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
+import WeilConjectures.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
 import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-!
 # Canonical filtered colimit cocones of restricted cohomology

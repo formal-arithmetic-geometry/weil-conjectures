@@ -5,7 +5,7 @@ Authors: SHEAF group R3
 -/
 module
 
-public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Sheaf.Topology.DimensionSupremumLocalDimensions

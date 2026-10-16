@@ -13,9 +13,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 
 import Sheaf.AlgebraicGeometry.AlgClosedExtensionModuleSections
 import Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic
-import Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparisonZero
+import WeilConjectures.AlgebraicGeometry.ModuleAcyclicCohomologyComparisonZero
 import Sheaf.AlgebraicGeometry.ModuleAcyclicEffacementLadder
-import Sheaf.AlgebraicGeometry.KilledSheafModuleLift
+import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import Mathlib.Algebra.FiveLemma
 
 /-!

@@ -11,7 +11,13 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
-import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+
+import Sheaf.CategoryTheory.LanContinuityFromRepresentables
+
+import Sheaf.CategoryTheory.LanContinuityFromRepresentables
+
+import Sheaf.CategoryTheory.LanContinuityFromRepresentables
 
 import Sheaf.CategoryTheory.LanContinuityFromRepresentables
 

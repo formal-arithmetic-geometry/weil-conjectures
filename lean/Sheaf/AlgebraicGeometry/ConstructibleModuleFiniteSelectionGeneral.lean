@@ -4,7 +4,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ConstructibleModuleSupportGeneral
-import Sheaf.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
 import Sheaf.Topology.SpectralConstructibleFiniteIntersection
 import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
 

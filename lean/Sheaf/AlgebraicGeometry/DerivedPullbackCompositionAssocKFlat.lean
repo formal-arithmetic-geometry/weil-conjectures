@@ -55,7 +55,7 @@ theorem derivedPullbackComposition_assoc_kflat
             (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)))
     (hK : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y)
       (P : CochainComplex (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) ℤ),
-      CochainComplex.IsKFlat (R := Y.sheaf) P →
+      CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
         IsIso ((ε f).app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)))
     (c : ∀ {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z),
         derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g))
@@ -85,7 +85,7 @@ theorem derivedPullbackComposition_assoc_kflat
           (C := SheafOfModules.{u₁} (moduleRings X.toRingedSpace)))))
     {W X Y Z : Scheme.{u₁}} (h : W ⟶ X) (f : X ⟶ Y) (g : Y ⟶ Z)
     (P : CochainComplex (SheafOfModules.{u₁} (moduleRings Z.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := Z.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := Z.sheaf) P) :
     (Functor.isoWhiskerRight (c f g) (derivedPullback h) ≪≫ c h (f ≫ g)).hom.app
       (DerivedCategory.Qh.obj
         ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) =

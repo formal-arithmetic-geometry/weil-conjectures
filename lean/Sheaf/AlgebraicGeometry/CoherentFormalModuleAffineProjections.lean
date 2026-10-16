@@ -4,8 +4,8 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.RingTheory.Ideal.Operations
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineOpenSectionsAdic
-import Sheaf.Algebra.Category.ModuleCat.AdicTowerCompletedScalarLimit
-import Sheaf.Algebra.Category.ModuleCat.AdicTowerFiniteLimit
+import WeilConjectures.Algebra.Category.ModuleCat.AdicTowerCompletedScalarLimit
+import WeilConjectures.Algebra.Category.ModuleCat.AdicTowerFiniteLimit
 
 @[expose] public section
 

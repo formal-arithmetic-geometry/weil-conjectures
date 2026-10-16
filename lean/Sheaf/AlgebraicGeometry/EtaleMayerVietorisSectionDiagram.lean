@@ -5,8 +5,8 @@ Authors: SHEAF group B2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyMaps
-import Sheaf.AlgebraicGeometry.EtaleMayerVietorisInjectiveSectionsExact
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyMaps
+import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisInjectiveSectionsExact
 import Sheaf.AlgebraicGeometry.EtaleMayerVietorisSectionComparison
 import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 

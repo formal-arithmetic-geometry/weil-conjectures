@@ -72,7 +72,7 @@ theorem exists_selfTor_ordinary_resolution_sections
     (q : K ⟶ (CochainComplex.singleFunctor
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
         ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)))
-    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K) (hq : QuasiIso q) (n : ℕ) :
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K) (hq : QuasiIso q) (n : ℕ) :
     letI := SheafOfModules.monoidalCategory Y.sheaf
     let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
     let S := CochainComplex.singleFunctor

@@ -96,8 +96,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.AffineBasisRingActionGluing",
-  "file": "lean/Sheaf/Paper/AffineBasisRingActionGluing.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineBasisRingActionGluing",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineBasisRingActionGluing.lean",
   "declaration": "AlgebraicGeometry.affineBasis_ringAction_gluing",
   "statement": "theorem affineBasis_ringAction_gluing\n    (X : Scheme.{u}) (R : TopCat.Sheaf RingCat.{u} X)\n    (F : TopCat.Sheaf AddCommGrpCat.{u} X)\n    (tau : ∀ U : X.affineOpens,\n      R.obj.obj (op U.val) →+* AddMonoid.End (F.obj.obj (op U.val)))\n    (htau : ∀ (U V : X.affineOpens) (i : U.val ⟶ V.val)\n      (r : R.obj.obj (op V.val)) (x : F.obj.obj (op V.val)),\n      F.obj.map i.op (tau V r x) =\n        tau U (R.obj.map i.op r) (F.obj.map i.op x)) :\n    ∃! sigma : ∀ U : X.Opens,\n      R.obj.obj (op U) →+* AddMonoid.End (F.obj.obj (op U)),\n      (∀ (U V : X.Opens) (i : U ⟶ V)\n        (r : R.obj.obj (op V)) (x : F.obj.obj (op V)),\n        F.obj.map i.op (sigma V r x) =\n          sigma U (R.obj.map i.op r) (F.obj.map i.op x)) ∧\n      (∀ U : X.affineOpens, sigma U.val = tau U)",
   "branch": "sheaf-dag",

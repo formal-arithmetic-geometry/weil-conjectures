@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Topology.Constructible
 import Sheaf.AlgebraicGeometry.EtaleAffineCoverStratification
 import Sheaf.AlgebraicGeometry.EtaleSeparatedStratifiedFinite
-import Sheaf.AlgebraicGeometry.EtaleStratificationLocalGluing
+import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluing
 import Mathlib.AlgebraicGeometry.Cover.Open
 import Sheaf.AlgebraicGeometry.ConstructibleStratificationAssembly
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
-import Sheaf.Paper.ZariskiEtaleCore
+import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore
 
 /-! # Explicit Zariski restriction and section transport
 

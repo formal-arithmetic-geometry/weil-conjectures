@@ -22,7 +22,7 @@ theorem tensorResolution_quasiIso_tensor_right
     {E E' K : CochainComplex
       (SheafOfModules.{u}
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
-    (α : E ⟶ E') (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (α : E ⟶ E') (hα : QuasiIso α) (hK : K.IsAcyclicTensorKFlat) :
     (letI := SheafOfModules.monoidalCategory R
      QuasiIso (HomologicalComplex.mapBifunctorMap α (𝟙 K) (curriedTensor _) (.up ℤ))) := by
   let := SheafOfModules.monoidalCategory R
@@ -42,7 +42,7 @@ theorem tensorResolution_quasiIso_tensor_left
     {K L L' : CochainComplex
       (SheafOfModules.{u}
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
-    (α : L ⟶ L') (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (α : L ⟶ L') (hα : QuasiIso α) (hK : K.IsAcyclicTensorKFlat) :
     (letI := SheafOfModules.monoidalCategory R
      QuasiIso (HomologicalComplex.mapBifunctorMap (𝟙 K) α (curriedTensor _) (.up ℤ))) := by
   let := SheafOfModules.monoidalCategory R
@@ -91,7 +91,7 @@ noncomputable local instance TensorResolutionComparison_localInst1 : MonoidalCat
 noncomputable def tensorResolutionComparison
     (E K M F N : CochainComplex C ℤ)
     (r : E ⟶ M) (q : K ⟶ M) (s : F ⟶ N)
-    (hE : E.IsKFlat) (hK : K.IsKFlat) (hF : F.IsKFlat)
+    (hE : E.IsAcyclicTensorKFlat) (hK : K.IsAcyclicTensorKFlat) (hF : F.IsAcyclicTensorKFlat)
     (hr : QuasiIso r) (hq : QuasiIso q) (hs : QuasiIso s) (i : ℤ) :
     (CochainComplex.mapBifunctor E N (curriedTensor C)).homology i ≅
       (CochainComplex.mapBifunctor K N (curriedTensor C)).homology i := by

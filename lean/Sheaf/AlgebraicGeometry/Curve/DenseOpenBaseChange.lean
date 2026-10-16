@@ -10,8 +10,8 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.CategoryTheory.Sites.Point.Linear
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomology
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenLowBaseChange
-import Sheaf.AlgebraicGeometry.Curve.DenseOpenPulledCounitHigh
-import Sheaf.AlgebraicGeometry.Curve.PrimeTorsionNonunitCohomology
+import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenPulledCounitHigh
+import WeilConjectures.AlgebraicGeometry.Curve.PrimeTorsionNonunitCohomology
 
 /-! # Field extension across a dense open -/
 

@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.AdicCompletion.Basic
 import Sheaf.AlgebraicGeometry.EtaleOpenOfInfinitesimalRestrictions
-import Sheaf.AlgebraicGeometry.ProperEtaleOpen
+import WeilConjectures.AlgebraicGeometry.ProperEtaleOpen
 
 /-!
 # Étaleness detected by infinitesimal restrictions with proper source

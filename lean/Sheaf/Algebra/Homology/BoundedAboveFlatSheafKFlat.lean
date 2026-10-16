@@ -73,7 +73,7 @@ theorem isKFlat_of_boundedAbove_flat
     (P : CochainComplex
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
     (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i))
-    (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (P.X i)) : P.IsKFlat := by
+    (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (P.X i)) : P.IsAcyclicTensorKFlat := by
   let := SheafOfModules.monoidalCategory R
   intro A hA
   let M := SheafOfModules.{u}

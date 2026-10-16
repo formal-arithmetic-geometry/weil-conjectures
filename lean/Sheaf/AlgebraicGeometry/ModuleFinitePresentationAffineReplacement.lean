@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 import Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineGenerators
-import all Sheaf.AlgebraicGeometry.CoherentKernelConditionRestriction
+import all WeilConjectures.AlgebraicGeometry.CoherentKernelConditionRestriction
 import Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineCapture
 import all Sheaf.AlgebraicGeometry.QuasiCoherentExtensionQcOpen
 import Sheaf.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType

@@ -6,14 +6,14 @@ Authors: SHEAF group Q2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSheafComparison
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 import Sheaf.AlgebraicGeometry.EtaleSetEventualLocalStageCompatibility
 import Sheaf.AlgebraicGeometry.EtaleSetLocalStageImageEquations
 import Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Eventual matching of local stage representatives

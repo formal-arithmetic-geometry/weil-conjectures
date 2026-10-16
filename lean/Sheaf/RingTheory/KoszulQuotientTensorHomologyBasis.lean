@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic

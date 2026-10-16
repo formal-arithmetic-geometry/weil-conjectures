@@ -13,7 +13,7 @@ public import Mathlib.FieldTheory.SeparableClosure
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import WeilConjectures.PointCount
 import Sheaf.RingTheory.StrictHenselizationTriplesPresentation

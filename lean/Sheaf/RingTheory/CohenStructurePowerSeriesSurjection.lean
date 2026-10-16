@@ -6,11 +6,11 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import Sheaf.RingTheory.CohenRing
+public import WeilConjectures.RingTheory.CohenRing
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 import Sheaf.RingTheory.CohenRingsExist
-import Sheaf.RingTheory.CoefficientResidueSection
+import WeilConjectures.RingTheory.CoefficientResidueSection
 import Sheaf.RingTheory.CohenRingLiftToCompleteLocal
 import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
 import Mathlib.RingTheory.AdicCompletion.Completeness

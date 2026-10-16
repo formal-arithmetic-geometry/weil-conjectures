@@ -11,8 +11,8 @@ import Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomology
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimaryFiniteness
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenBaseChange
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenAssertions
-import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
-import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 
 /-! # Dense-open comparison for prime-torsion module sheaves -/

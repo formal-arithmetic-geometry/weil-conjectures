@@ -5,7 +5,7 @@ Authors: SHEAF group S2
 -/
 module
 
-public import Sheaf.CategoryTheory.ColimitSites
+public import WeilConjectures.CategoryTheory.ColimitSites
 import Sheaf.CategoryTheory.VaryingSiteIntermediateUnitZero
 
 /-! # Detection of zero for sections on varying sites

@@ -77,8 +77,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.NatSplitFunctionalsHomotopy",
-  "file": "lean/Sheaf/Algebra/Homology/NatSplitFunctionalsHomotopy.lean",
+  "module": "WeilConjectures.Algebra.Homology.NatSplitFunctionalsHomotopy",
+  "file": "lean/WeilConjectures/Algebra/Homology/NatSplitFunctionalsHomotopy.lean",
   "declaration": "ChainComplex.exists_nat_homotopy_equiv_of_split_functionals",
   "statement": "theorem exists_nat_homotopy_equiv_of_split_functionals\n    {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℕ)\n    (j : ℕ) (α : C.X (j + 1) →ₗ[R] R) (β : C.X j →ₗ[R] R)\n    (z : C.X (j + 1)) (w : C.X j)\n    (hz : α z = 1) (hw : β w = 1)\n    (hd : ∀ x, β ((C.d (j + 1) j).hom x) = α x)\n    (hdz : (C.d (j + 1) j).hom z = w)\n    (hin : ∀ x, α ((C.d (j + 2) (j + 1)).hom x) = 0)\n    (hout : (C.d j (j - 1)).hom w = 0) :\n    let S : ∀ i : ℕ, Submodule R (C.X i) := fun i ↦\n      if h : i = j + 1 then h ▸ LinearMap.ker α\n      else if h : i = j then h ▸ LinearMap.ker β else ⊤\n    ∃ (C' : ChainComplex (ModuleCat.{max u v} R) ℕ)\n      (g : ∀ i, C'.X i ≃ₗ[R] S i) (e : HomotopyEquiv C' C),\n      ∀ i : ℕ, Function.Injective (e.hom.f i).hom",
   "branch": "sheaf-dag",

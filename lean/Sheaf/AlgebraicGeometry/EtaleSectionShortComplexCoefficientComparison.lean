@@ -6,10 +6,10 @@ Authors: SHEAF groups S3 and N4
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
-public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCocone
+public import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenCohomologyCocone
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCanonicalCoefficientTransfer
 import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyPullback
-import Sheaf.CategoryTheory.ExactFunctorResolutionCocycle
+import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-! # A coefficient comparison of fixed normalized section complexes

@@ -62,7 +62,7 @@ theorem exists_tensorHomUncurry_descent (X : Scheme.{u})
         X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M),
       (∀ (P L M : CochainComplex
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ),
-        P.IsKFlat →
+        P.IsAcyclicTensorKFlat →
         ∀ φ : P ⟶ homComplex (R := X.sheaf) L
             ((schemeHomKInjectiveResolution X).obj M),
           t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)

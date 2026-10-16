@@ -111,7 +111,7 @@ theorem schemeHomOriginalTensorSpec {X Y : Scheme.{u}} (f : X ⟶ Y) :
             (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ)) ∧
         (∃ (_ : (derivedPullback f).CommShift ℤ), (derivedPullback f).IsTriangulated) ∧
         ∀ P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
-          CochainComplex.IsKFlat (R := Y.sheaf) P →
+          CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
             IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   have s₀ := Classical.choose_spec (exists_derivedPullback.{u, w} f)
   have s₁ := Classical.choose_spec s₀
@@ -290,7 +290,7 @@ def IsSchemeHomOriginalCounitTensorComparison {T X : Scheme.{u}} (g : T ⟶ X)
   letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
   letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj T.sheaf
   (∀ P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,
-    P.IsKFlat → N.IsKFlat →
+    P.IsAcyclicTensorKFlat → N.IsAcyclicTensorKFlat →
     ∃ φ : ((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj
         (pullbackTensorTotal X P N) ≅
       pullbackTensorTotal T

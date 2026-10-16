@@ -5,7 +5,8 @@ Authors: SHEAF group A4
 -/
 module
 public import Sheaf.AlgebraicGeometry.GrothendieckEtaleSectionColimit
-import all Sheaf.Paper.FiniteHypercoverDescentParts
+import all WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
+import all WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
 import Sheaf.AlgebraicGeometry.FiniteSplitHypercoverTruncation
 /-! # Coherent-site continuity of the three hypercover section terms -/
 @[expose] public section

@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.RingTheory.GRing
-public import Sheaf.RingTheory.CohenRing
+public import WeilConjectures.RingTheory.CohenRing
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import Sheaf.RingTheory.AdicCompletionNoetherian

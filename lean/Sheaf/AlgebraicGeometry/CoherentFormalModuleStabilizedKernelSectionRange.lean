@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 import all Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineKernelImageComparison
 import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.AdicKernelImageBound
+import WeilConjectures.RingTheory.AdicKernelImageBound
 
 /-! # Stabilized kernel section ranges
 Source: Stacks Project, Lemma 087X, proof of claim (a).

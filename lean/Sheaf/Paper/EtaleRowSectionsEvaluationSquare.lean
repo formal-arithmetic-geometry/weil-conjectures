@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ExtPullbackHomComplex
+public import WeilConjectures.AlgebraicGeometry.ExtPullbackHomComplex
 public import Sheaf.Paper.EtaleCETotalSections
-public import Sheaf.AlgebraicGeometry.SheafHExtResolutionSectionsIso
-import Sheaf.AlgebraicGeometry.ConstantSheafPullbackTranspose
+public import WeilConjectures.AlgebraicGeometry.SheafHExtResolutionSectionsIso
+import WeilConjectures.AlgebraicGeometry.ConstantSheafPullbackTranspose
 
 /-! # Evaluation square for integer-indexed sections
 

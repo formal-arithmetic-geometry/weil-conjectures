@@ -18,15 +18,15 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 import Mathlib.Algebra.Category.ModuleCat.Biproducts
 import Mathlib.CategoryTheory.Category.ULift
-import Sheaf.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.InjectiveModuleAnnihilatorAcyclic
 import Sheaf.AlgebraicGeometry.HenselianBoundedAbelianSurjectivity
 import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 import Sheaf.AlgebraicGeometry.CofilteredEtaleCohomologyCocone
 import Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
 
 /-!
@@ -221,14 +221,9 @@ theorem exists_isConstructibleSheaf_hom_of_henselianRing [Finite Λ] {A : Type u
     have eH := Functor.isoWhiskerRight e (Sheaf.functorH _ q)
     obtain ⟨C, hC, ι, c', hc'⟩ := exists_constructible_restriction_class i Λ F q
       ((eH.inv.app F) c)
-    obtain ⟨S, hS, hCS⟩ := hC
+    obtain ⟨S, hCS⟩ := hC
     have hC' : IsConstructibleSheaf C := by
-      let T : Stratification (Spec (.of A)) :=
-        { toStratification := S.toStratification
-          domain := S.domain
-          immersion := S.immersion
-          isImmersion := S.isImmersion
-          range_immersion := S.range_immersion }
+      let T : Stratification (Spec (.of A)) := S
       refine ⟨⟨T, ?_⟩⟩
       intro k
       exact (finite_locally_constant_module_values_iff _).1.mp (hCS k)

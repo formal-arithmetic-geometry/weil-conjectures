@@ -24,8 +24,8 @@ namespace AlgebraicGeometry
 private theorem tensorPullback_kFlat {X Y : Scheme.{u₁}} (f : X ⟶ Y)
     [(Scheme.Modules.tensorPullback f).Additive]
     (P : CochainComplex (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := Y.sheaf) P) :
-    CochainComplex.IsKFlat (R := X.sheaf)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P) :
+    CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf)
       (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) := by
   have h := CochainComplex.isKFlat_pullback f.base X.sheaf Y.sheaf ⟨f.c⟩ P hP
   convert h using 1
@@ -57,7 +57,7 @@ theorem isIso_derivedPullbackCompositionLift
             (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)))
     (hK : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y)
       (P : CochainComplex (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) ℤ),
-      CochainComplex.IsKFlat (R := Y.sheaf) P →
+      CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
         IsIso ((ε f).app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)))
     {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     IsIso ((derivedPullback (f ≫ g)).leftDerivedLift (ε (f ≫ g))
@@ -105,7 +105,7 @@ theorem isIso_derivedPullbackCompositionLift
   change IsIso τ
   have hflat (P : CochainComplex
       (SheafOfModules.{u₁} (moduleRings Z.toRingedSpace)) ℤ)
-      (hP : CochainComplex.IsKFlat (R := Z.sheaf) P) :
+      (hP : CochainComplex.IsAcyclicTensorKFlat (R := Z.sheaf) P) :
       IsIso (τ.app (DerivedCategory.Qh.obj
         ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))) := by
     have hg := hK g P hP

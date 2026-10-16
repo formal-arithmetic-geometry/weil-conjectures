@@ -9,7 +9,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.GenericFiniteNoetherianSchemeSplitting
-import Sheaf.AlgebraicGeometry.DisjointOpenDirectImageRetract
+import WeilConjectures.AlgebraicGeometry.DisjointOpenDirectImageRetract
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance

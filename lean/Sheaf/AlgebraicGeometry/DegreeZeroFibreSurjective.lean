@@ -43,7 +43,7 @@ def degreeZeroFibreSurjective (X : Scheme.{uF})
     [HasDerivedCategory.{wF} (SheafOfModules.{uF} (moduleRings X.toRingedSpace))]
     (K : schemeDerivedCategory X) (s : X) : Prop :=
   ∃ P : CochainComplex (SheafOfModules.{uF} (moduleRings X.toRingedSpace)) ℤ,
-    CochainComplex.IsKFlat (R := X.sheaf) P ∧
+    CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P ∧
       Nonempty (DerivedCategory.Q.obj P ≅ K) ∧
       Epi (ModuleCat.cohomologyBaseChange (B := IsLocalRing.ResidueField (X.presheaf.stalk s))
         (((RingedSpace.moduleStalkFunctor X.toRingedSpace s).mapHomologicalComplex

@@ -1,5 +1,5 @@
 module
-public import Sheaf.RingTheory.CohenRing
+public import WeilConjectures.RingTheory.CohenRing
 import Sheaf.RingTheory.CohenRingModPowFormallySmoothCore
 import Mathlib.Algebra.Algebra.ZMod
 

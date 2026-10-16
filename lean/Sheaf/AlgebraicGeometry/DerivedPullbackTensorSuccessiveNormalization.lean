@@ -86,7 +86,7 @@ satisfy the same calculation, as do the unique maps on empty schemes.
 theorem derivedPullback_tensor_successive_normalization
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) (hN : N.IsKFlat)
+    (hP : P.IsAcyclicTensorKFlat) (hN : N.IsAcyclicTensorKFlat)
     (φ : ((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj
         (pullbackTensorTotal Z P N) ≅
       pullbackTensorTotal X
@@ -154,10 +154,10 @@ theorem derivedPullback_tensor_successive_normalization
       (Scheme.Modules.pushforwardComp f g).symm) (.up ℤ)
   let Pg := ((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P
   let Ng := ((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj N
-  have hPg : CochainComplex.IsKFlat (R := Y.sheaf) Pg := by
+  have hPg : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) Pg := by
     convert CochainComplex.isKFlat_pullback g.base Y.sheaf Z.sheaf ⟨g.c⟩ P hP using 1
     rfl
-  have hNg : CochainComplex.IsKFlat (R := Y.sheaf) Ng := by
+  have hNg : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) Ng := by
     convert CochainComplex.isKFlat_pullback g.base Y.sheaf Z.sheaf ⟨g.c⟩ N hN using 1
     rfl
   have hg : IsCanonicalPullbackTensorComparison g

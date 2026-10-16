@@ -149,7 +149,7 @@ private theorem tensor_right_quasiIso
     {R : Sheaf J CommRingCat.{u}}
     {E E' K : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ} (α : E ⟶ E')
-    (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (hα : QuasiIso α) (hK : K.IsAcyclicTensorKFlat) :
     let := monoidalCategory R
     QuasiIso (HomologicalComplex.mapBifunctorMap α (𝟙 K)
       (MonoidalCategory.curriedTensor _) (.up ℤ)) := by
@@ -171,7 +171,7 @@ private theorem tensor_left_quasiIso
     {R : Sheaf J CommRingCat.{u}}
     {K E E' : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ} (α : E ⟶ E')
-    (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (hα : QuasiIso α) (hK : K.IsAcyclicTensorKFlat) :
     let := monoidalCategory R
     QuasiIso (HomologicalComplex.mapBifunctorMap (𝟙 K) α
       (MonoidalCategory.curriedTensor _) (.up ℤ)) := by
@@ -248,7 +248,7 @@ theorem site_derived_tensor_descent
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))] :
     ∃ P : ObjectProperty (HomotopyCategory (SheafOfModules.{u}
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (ComplexShape.up ℤ)),
-      (∀ X, P X ↔ CochainComplex.IsKFlat X.as ∧ ∀ n : ℤ, SheafOfModules.IsFlat (X.as.X n)) ∧
+      (∀ X, P X ↔ CochainComplex.IsAcyclicTensorKFlat X.as ∧ ∀ n : ℤ, SheafOfModules.IsFlat (X.as.X n)) ∧
       (∃ F : ((HomotopyCategory.quasiIso (SheafOfModules.{u}
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (ComplexShape.up
           ℤ)).inverseImage P.ι).Localization ⥤ (DerivedCategory (SheafOfModules.{u}
@@ -291,7 +291,7 @@ theorem site_derived_tensor_descent
   let A := SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
   let P : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun X ↦
-    CochainComplex.IsKFlat X.as ∧ ∀ n : ℤ, SheafOfModules.IsFlat (X.as.X n)
+    CochainComplex.IsAcyclicTensorKFlat X.as ∧ ∀ n : ℤ, SheafOfModules.IsFlat (X.as.X n)
   let W := HomotopyCategory.quasiIso A (.up ℤ)
   let V := W.inverseImage P.ι
   let L := P.ι ⋙ (DerivedCategory.Qh : HomotopyCategory A (.up ℤ) ⥤ DerivedCategory A)

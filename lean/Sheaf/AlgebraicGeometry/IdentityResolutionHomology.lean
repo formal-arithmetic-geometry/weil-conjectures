@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 
 /-! # Resolution homology square for the identity scheme morphism
 

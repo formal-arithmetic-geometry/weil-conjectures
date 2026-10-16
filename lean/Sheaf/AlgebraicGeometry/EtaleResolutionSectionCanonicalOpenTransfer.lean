@@ -7,9 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 import Sheaf.AlgebraicGeometry.EtaleResolutionSectionOpenTransferExt
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
-import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
+import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionTransfer
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 

@@ -200,8 +200,8 @@ theorem isKFlat_pullback
     (K : CochainComplex (SheafOfModules.{w}
       ((sheafCompose (Opens.grothendieckTopology Y)
         (forget₂ CommRingCat.{w} RingCat.{w})).obj OY)) ℤ)
-    (hK : K.IsKFlat) :
-    IsKFlat (R := OX) (tensorPullbackComplex f OX OY φ K) := by
+    (hK : K.IsAcyclicTensorKFlat) :
+    IsAcyclicTensorKFlat (R := OX) (tensorPullbackComplex f OX OY φ K) := by
   let RX : AlgebraicGeometry.RingedSpace.{w} :=
     { carrier := X, presheaf := OX.obj, IsSheaf := OX.property }
   let RY : AlgebraicGeometry.RingedSpace.{w} :=

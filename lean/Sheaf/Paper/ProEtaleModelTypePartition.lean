@@ -5,12 +5,12 @@ Authors: SHEAF group D3
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.Algebra.Category.ModuleCat.AB
 import all Sheaf.Paper.ProEtaleFiniteModelStalks
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent
-import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 
 /-! # ProEtaleModelTypePartition

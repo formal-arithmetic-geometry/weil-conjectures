@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent
+import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
 
 /-!
 # Descent of opens in an etale base change of an fpqc covering

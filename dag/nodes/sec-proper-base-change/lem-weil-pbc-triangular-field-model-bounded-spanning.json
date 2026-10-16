@@ -109,8 +109,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.FieldTheory.TriangularFieldModelBoundedSpanning",
-  "file": "lean/Sheaf/FieldTheory/TriangularFieldModelBoundedSpanning.lean",
+  "module": "WeilConjectures.FieldTheory.TriangularFieldModelBoundedSpanning",
+  "file": "lean/WeilConjectures/FieldTheory/TriangularFieldModelBoundedSpanning.lean",
   "declaration": "FieldTheory.triangularFieldModel_bounded_spanning",
   "statement": "theorem triangularFieldModel_bounded_spanning\n    (k : Type u) [Field k] (d m : ℕ) (h : MvPolynomial (Fin d) k)\n    (p : (i : Fin m) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))\n    (e : Fin m → ℕ) (hp : ∀ i, (p i).Monic)\n    (he : ∀ i, (p i).natDegree = e i)\n    (psi : Localization.Away h →ₐ[k]\n      (MvPolynomial (Fin (d + 1 + m)) k ⧸\n        Ideal.ofList (triangularFieldModelEquations k d m h p)))\n    (hpsi : ∀ r : MvPolynomial (Fin d) k,\n      psi (algebraMap _ (Localization.Away h) r) = Ideal.Quotient.mk _\n        (MvPolynomial.rename (fun j : Fin d ↦\n          (⟨j.val, by omega⟩ : Fin (d + 1 + m))) r))\n    (q : (MvPolynomial (Fin (d + 1 + m)) k ⧸\n        Ideal.ofList (triangularFieldModelEquations k d m h p))) :\n    ∃ c : (((i : Fin m) → Fin (e i)) → Localization.Away h), (∑ a : ((i : Fin m) → Fin (e i)),\n        psi (c a) * (∏ i : Fin m,\n          (Ideal.Quotient.mk _ (MvPolynomial.X\n            (⟨d + 1 + i.val, by omega⟩ : Fin (d + 1 + m)))) ^ (a i).val)) = q",
   "branch": "sheaf-dag",

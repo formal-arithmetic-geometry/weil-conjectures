@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
-import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraColimit
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebraColimit
 import Mathlib.CategoryTheory.Limits.FullSubcategory
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 import Mathlib.CategoryTheory.Adjunction.Limits

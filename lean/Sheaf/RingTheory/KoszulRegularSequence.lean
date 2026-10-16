@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 
 /-!
 # Koszul-regular and H₁-regular sequences

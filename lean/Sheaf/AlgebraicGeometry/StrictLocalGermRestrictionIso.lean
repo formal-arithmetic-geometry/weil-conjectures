@@ -7,9 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 import Sheaf.Paper.StrictHenselizationFunctoriality
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.RingTheory.StrictHenselizationTriples
 

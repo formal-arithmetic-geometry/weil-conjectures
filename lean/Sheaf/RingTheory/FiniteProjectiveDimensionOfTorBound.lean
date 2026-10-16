@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.LocalProperties.ProjectiveDimension
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 import Mathlib.RingTheory.Flat.EquationalCriterion
-import Sheaf.Algebra.FlatTorIdealCriterion
+import WeilConjectures.Algebra.FlatTorIdealCriterion
 import Sheaf.Algebra.TorDimensionShiftFree
 
 /-! # Projective dimension from a Tor bound for finite modules

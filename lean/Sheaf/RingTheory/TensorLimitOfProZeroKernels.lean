@@ -12,7 +12,7 @@ public import Mathlib.LinearAlgebra.TensorProduct.Map
 import Mathlib.LinearAlgebra.TensorProduct.Pi
 import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.AlgebraicGeometry.MLSetsTowerLimitNonempty
+import WeilConjectures.AlgebraicGeometry.MLSetsTowerLimitNonempty
 
 /-!
 # Finite tensor comparison for towers with eventually zero tensor kernels

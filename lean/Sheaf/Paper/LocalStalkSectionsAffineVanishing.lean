@@ -1,8 +1,8 @@
 module
 
-public import Sheaf.Paper.LocalStalkSectionsComparisonMap
+public import WeilConjectures.AlgebraicGeometry.LocalStalkSectionsComparisonMap
 import Sheaf.Paper.LocalStalkSectionsCoconeColimit
-import Sheaf.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
+import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
 import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 

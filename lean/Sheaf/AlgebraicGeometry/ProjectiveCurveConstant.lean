@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.FiniteConstructibleDirectImage
 import Sheaf.AlgebraicGeometry.FiniteGenericCurveModel
 import Sheaf.AlgebraicGeometry.ConstantFiniteComparison
 import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import WeilConjectures.ConstructibleSheaf.Biproduct
 import WeilConjectures.ConstructibleSheaf.Defs
@@ -27,7 +27,7 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.ConstructibleSheaf.Pullback
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper

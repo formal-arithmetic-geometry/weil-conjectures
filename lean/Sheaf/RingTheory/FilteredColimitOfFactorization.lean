@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.RingTheory.FinitePresentation
-import Sheaf.RingTheory.ColimitFinitelyPresentedAlgebras
+import WeilConjectures.RingTheory.ColimitFinitelyPresentedAlgebras
 import Mathlib.Algebra.Category.CommAlgCat.FiniteType
 import Mathlib.CategoryTheory.Filtered.Final
 

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
 import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentLocalLifts

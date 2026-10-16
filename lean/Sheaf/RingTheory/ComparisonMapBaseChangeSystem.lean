@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 
 import Mathlib.RingTheory.TensorProduct.Pi
 import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Sheaf.RingTheory.ComparisonTensorCocones
+import WeilConjectures.RingTheory.ComparisonTensorCocones
 import Sheaf.RingTheory.DirectedTensorCoconesColimit
 
 /-! # Extending a tensor comparison by base change

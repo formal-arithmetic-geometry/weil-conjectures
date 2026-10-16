@@ -14,7 +14,7 @@ import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.RingTheory.RingPseudoCoherent
@@ -111,7 +111,7 @@ theorem locallyConstantFiniteType_derivedTensor
     (P Q : CochainComplex (SheafOfModules.{u} ((sheafCompose J.toGrothendieck
       (forget₂ CommRingCat.{u} RingCat.{u})).obj
         ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj (CommRingCat.of B)))) ℤ)
-    (hP : CochainComplex.IsKFlat P) (hQ : CochainComplex.IsKFlat Q)
+    (hP : CochainComplex.IsAcyclicTensorKFlat P) (hQ : CochainComplex.IsAcyclicTensorKFlat Q)
     (eP : DerivedCategory.Q.obj P ≅ K) (eQ : DerivedCategory.Q.obj Q ≅ L) :
     ∀ i : ℤ, IsLocallyConstantFiniteType J.toGrothendieck B
       ((CochainComplex.mapBifunctor P Q

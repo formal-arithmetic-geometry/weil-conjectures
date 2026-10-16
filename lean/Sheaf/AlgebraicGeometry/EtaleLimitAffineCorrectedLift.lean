@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
-import Sheaf.AlgebraicGeometry.EtaleLimitAffineExactLadder
+import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineExactLadder
 import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyClassDescent
 import Mathlib.CategoryTheory.Filtered.Final
 

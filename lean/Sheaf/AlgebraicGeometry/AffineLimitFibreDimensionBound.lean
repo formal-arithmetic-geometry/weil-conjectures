@@ -15,7 +15,7 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.Topology.DimensionSupremumLocalDimensions
 import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 

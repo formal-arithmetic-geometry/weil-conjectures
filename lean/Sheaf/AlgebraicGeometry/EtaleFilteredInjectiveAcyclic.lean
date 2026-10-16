@@ -9,8 +9,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
-import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
-import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
+import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
+import WeilConjectures.CategoryTheory.InjectiveSheafCechAcyclic
 import Sheaf.AlgebraicGeometry.FiniteEtaleCechFilteredColimit
 
 /-!

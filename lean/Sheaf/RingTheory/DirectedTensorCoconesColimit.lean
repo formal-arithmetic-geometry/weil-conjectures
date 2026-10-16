@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.Algebra.Category.Ring.Colimits
-import Sheaf.Paper.DirectedColimitBaseChangeElementwise
+import WeilConjectures.AlgebraicGeometry.DirectedColimitBaseChangeElementwise
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.LinearAlgebra.TensorProduct.DirectLimit
 

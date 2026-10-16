@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.Modules.QuasicoherentBinarySum
+import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Iso
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

@@ -6,8 +6,8 @@ Authors: SHEAF group A4
 module
 public import Sheaf.AlgebraicGeometry.AbelianCounitResolutionCalculation
 import Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCoreParts
-import Sheaf.Algebra.Homology.MappingCylinderSplitFactorization
-import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import WeilConjectures.Algebra.Homology.MappingCylinderSplitFactorization
+import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 import Mathlib.Algebra.Homology.ModelCategory.Injective
 /-! # Constructing the section homotopies before acyclicity
 

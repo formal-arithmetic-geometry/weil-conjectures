@@ -6,7 +6,7 @@ Authors: SHEAF group H2
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap
-import Sheaf.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
+import WeilConjectures.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
 import Mathlib.Algebra.Category.Ring.Constructions
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.AdicCompletion.LocalRing

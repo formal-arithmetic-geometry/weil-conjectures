@@ -38,13 +38,17 @@ theorem tensorResolutionCoordinateSheafIso_factors
     (P : ProjectiveResolution MA) (K F : CochainComplex Y.Modules ℤ)
     (q : K ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj M)
     (s : F ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj N)
-    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K)
-    (hF : CochainComplex.IsKFlat (R := Y.sheaf) F)
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K)
+    (hF : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) F)
     (hq : QuasiIso q) (hs : QuasiIso s) (n : ℕ) :
     tensorResolutionCoordinateSheafIso Y M N U MA NA sM sN P K F q s hK hF hq hs n =
       (tensorResolutionChartHomologyIso N U MA NA sN P n ≪≫
         tensorResolutionChartComparisonIso Y M N U MA sM P K F q s hK hF hq hs (-(n : ℤ)) ≪≫
         (tensorResolutionNormalizedRestrictHomologyIso U.2.fromSpec K
           ((CochainComplex.singleFunctor Y.Modules 0).obj N) (-(n : ℤ))).symm) := by
-  rfl
+  change (tensorResolutionChartHomologyIso N U MA NA sN P n ≪≫
+    tensorResolutionChartComparisonIso Y M N U MA sM P K F q s hK hF hq hs (-(n : ℤ))) ≪≫
+      (tensorResolutionNormalizedRestrictHomologyIso U.2.fromSpec K
+        ((CochainComplex.singleFunctor Y.Modules 0).obj N) (-(n : ℤ))).symm = _
+  exact Iso.trans_assoc _ _ _
 end AlgebraicGeometry

@@ -26,8 +26,8 @@ noncomputable def tensorResolutionChartComparisonIso
     (P : ProjectiveResolution MA) (K F : CochainComplex Y.Modules ℤ)
     (q : K ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj M)
     (s : F ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj N)
-    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K)
-    (hF : CochainComplex.IsKFlat (R := Y.sheaf) F)
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K)
+    (hF : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) F)
     (hq : QuasiIso q) (hs : QuasiIso s) (i : ℤ) :
     (CochainComplex.mapBifunctor (tensorResolutionChartComplex U MA P)
       (((Scheme.Modules.restrictFunctor U.2.fromSpec).mapHomologicalComplex (.up ℤ)).obj
@@ -44,7 +44,7 @@ noncomputable def tensorResolutionChartComparisonIso
   let M0 := (CochainComplex.singleFunctor Y.Modules 0).obj M
   let N0 := (CochainComplex.singleFunctor Y.Modules 0).obj N
   let r := tensorResolutionChartAugmentation M U MA sM P
-  have hE : CochainComplex.IsKFlat (R := (Spec Γ(Y, U.1)).sheaf) E :=
+  have hE : CochainComplex.IsAcyclicTensorKFlat (R := (Spec Γ(Y, U.1)).sheaf) E :=
     tensorResolution_isKFlat_bundledRing Γ(Y, U.1) MA P
   have hK' := isKFlat_restrict U.2.fromSpec K hK
   have hF' := isKFlat_restrict U.2.fromSpec F hF

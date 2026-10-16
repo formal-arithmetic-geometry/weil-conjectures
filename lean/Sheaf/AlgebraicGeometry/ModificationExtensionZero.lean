@@ -12,11 +12,11 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-public import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
-public import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
+public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
 import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients

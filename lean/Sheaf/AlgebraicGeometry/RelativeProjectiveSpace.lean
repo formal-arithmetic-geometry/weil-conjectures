@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.SymmetricAlgebraSheafConstruction
 public import Sheaf.AlgebraicGeometry.RelativeProjExists
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Sheaf.LinearAlgebra.SymmetricAlgebra.Graded
+import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraCore
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
 import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis

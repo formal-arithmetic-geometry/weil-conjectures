@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.RingTheory.AnnihilatorElementFlatBaseChange
+import WeilConjectures.RingTheory.AnnihilatorElementFlatBaseChange
 import Mathlib.RingTheory.Nakayama
 
 /-! # Local elimination of the desingularization relations

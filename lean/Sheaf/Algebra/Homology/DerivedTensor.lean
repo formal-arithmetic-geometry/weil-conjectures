@@ -44,7 +44,7 @@ local notation "𝓢" =>
 
 /-- Derived tensor with a chosen K-flat resolution `f : P ⟶ K₁`.
 
-The K-flat condition is the existing `CochainComplex.IsKFlat` for the constant
+The K-flat condition is the existing `CochainComplex.IsAcyclicTensorKFlat` for the constant
 sheaf of commutative rings.
 The representative is the total complex with degree `n` term `⨁ p + q = n, Pᵖ ⊗ K₂ᵠ`
 and differential `d_P ⊗ 1 + (-1)^p 1 ⊗ d_K₂`, mapped into the derived category.
@@ -55,7 +55,7 @@ Source: blueprint `def-weil-derived-tensor`, order 663; Stacks Project, Tags 06Y
 noncomputable def derivedTensor
     (K₁ K₂ P : CochainComplex (SheafOfModules.{w + 1} 𝓢) ℤ)
     (_f : P ⟶ K₁) (_hf : QuasiIso _f)
-    (_hP : CochainComplex.IsKFlat.{w + 1, w} (R := 𝓡) P) :
+    (_hP : CochainComplex.IsAcyclicTensorKFlat.{w + 1, w} (R := 𝓡) P) :
     proEtaleDerivedCategory Y A :=
   letI := SheafOfModules.monoidalCategory 𝓡
   letI := HasDerivedCategory.standard (SheafOfModules.{w + 1} 𝓢)
@@ -73,7 +73,7 @@ noncomputable def derivedTensorRing
     (B : Type w) [CommRing B] (φ : A →+* B)
     (K₁ P : CochainComplex (SheafOfModules.{w + 1} 𝓢) ℤ)
     (f : P ⟶ K₁) (hf : QuasiIso f)
-    (hP : CochainComplex.IsKFlat.{w + 1, w} (R := 𝓡) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat.{w + 1, w} (R := 𝓡) P) :
     proEtaleDerivedCategory Y A :=
   let RB := (constantSheaf (ProEt.topology Y) CommRingCat.{w + 1}).obj
     (CommRingCat.of (ULift.{w + 1, w} B))

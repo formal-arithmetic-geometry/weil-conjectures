@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Homology.QuasiIso
 import Sheaf.AlgebraicGeometry.AlternatingCechRestrictionHomotopy
-import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
+import WeilConjectures.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 
 /-! # The increasing-tuple augmented Čech row of an injective module

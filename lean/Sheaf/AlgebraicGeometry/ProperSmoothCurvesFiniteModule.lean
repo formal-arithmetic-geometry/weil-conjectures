@@ -14,11 +14,11 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import Sheaf.AlgebraicGeometry.ConstructibleAbelianSheaf
 import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import WeilConjectures.ConstructibleSheaf.Defs

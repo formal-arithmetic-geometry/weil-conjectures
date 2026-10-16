@@ -4,9 +4,9 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import Sheaf.AlgebraicGeometry.AlgClosedExtensionModuleSections
-import Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparisonZero
-import Sheaf.AlgebraicGeometry.KilledSheafModuleLift
-import Sheaf.AlgebraicGeometry.CohomologyRestrictionSquareTransport
+import WeilConjectures.AlgebraicGeometry.ModuleAcyclicCohomologyComparisonZero
+import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
+import WeilConjectures.AlgebraicGeometry.CohomologyRestrictionSquareTransport
 @[expose] public section
 universe u
 open CategoryTheory

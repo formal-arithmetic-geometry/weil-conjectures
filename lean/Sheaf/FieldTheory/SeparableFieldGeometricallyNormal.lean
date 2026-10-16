@@ -5,12 +5,12 @@ Authors: SHEAF group NQ
 -/
 module
 
-public import Sheaf.FieldTheory.SeparableExtension
+public import WeilConjectures.FieldTheory.SeparableExtension
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.FieldTheory.PurelyInseparable.PerfectClosure
-import Sheaf.FieldTheory.SeparablyGeneratedTensorReduced
+import WeilConjectures.FieldTheory.SeparablyGeneratedTensorReduced
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.RingTheory.GeometricallyNormalPerfectClosureCriterion

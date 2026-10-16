@@ -11,7 +11,7 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 import Sheaf.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections

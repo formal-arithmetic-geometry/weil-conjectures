@@ -6,7 +6,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import Sheaf.AlgebraicGeometry.GrothendieckEtaleLocalEpimorphism
-import Sheaf.Paper.FiniteSplitHypercoverRefinement
+import WeilConjectures.AlgebraicGeometry.FiniteSplitHypercoverRefinement
+import WeilConjectures.AlgebraicGeometry.FiniteSplitHypercoverRefinement
 import Mathlib.AlgebraicGeometry.LimitsOver
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 

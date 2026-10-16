@@ -6,7 +6,7 @@ Authors: SHEAF group C2
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 import Sheaf.AlgebraicGeometry.ModuleCohomologyExtStandardResolutionFormula
 

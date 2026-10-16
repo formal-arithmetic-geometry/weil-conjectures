@@ -5,7 +5,7 @@ Authors: SHEAF group A2
 -/
 module
 
-public import Sheaf.LinearAlgebra.IdempotentCharpoly
+public import WeilConjectures.LinearAlgebra.IdempotentCharpoly
 import Sheaf.LinearAlgebra.IdempotentCharpolyLocalCharpoly
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 import Mathlib.RingTheory.LocalProperties.Submodule

@@ -28,7 +28,7 @@ of the tensor product of presheaves of modules); it is not an instance and is us
 
 ## Main definitions
 
-- `CochainComplex.IsKFlat`: a complex `K` of `R`-modules is K-flat if `Tot(F ⊗ K)` is acyclic
+- `CochainComplex.IsAcyclicTensorKFlat`: a complex `K` of `R`-modules is K-flat if `Tot(F ⊗ K)` is acyclic
   for every acyclic complex `F` of `R`-modules.
 - `CochainComplex.IsKFlatResolution`: a morphism `K ⟶ G` is a K-flat resolution of `G` if it is
   a quasi-isomorphism and `K` is K-flat.
@@ -350,7 +350,7 @@ A cochain complex `K` of sheaves of `R`-modules is *K-flat* if for every acyclic
 product is `SheafOfModules.monoidalCategory R`. This differs from the source's
 `CochainComplex.KFlat` (`FromJoel`: tensoring on both sides preserves quasi-isomorphisms, for a
 monoidal preadditive abelian category), which is a different name and a different notion. -/
-def IsKFlat
+def IsAcyclicTensorKFlat
     (K : CochainComplex
       (SheafOfModules.{max u v} ((sheafCompose J
           (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) :
@@ -363,13 +363,13 @@ def IsKFlat
 
 /-- (blueprint: def-pc-kflat-complex) Let `R` be a sheaf of commutative rings on a site `(C, J)`.
 A *K-flat resolution* of a cochain complex `G` of sheaves of `R`-modules is a quasi-isomorphism
-`f : K ⟶ G` of complexes of `R`-modules with `K` K-flat (`CochainComplex.IsKFlat`); Stacks,
+`f : K ⟶ G` of complexes of `R`-modules with `K` K-flat (`CochainComplex.IsAcyclicTensorKFlat`); Stacks,
 Tag 06YN, the term as used in Tag 06YS. -/
 def IsKFlatResolution
     {K G : CochainComplex
       (SheafOfModules.{max u v} ((sheafCompose J
           (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ}
     (f : K ⟶ G) : Prop :=
-  QuasiIso f ∧ K.IsKFlat
+  QuasiIso f ∧ K.IsAcyclicTensorKFlat
 
 end CochainComplex

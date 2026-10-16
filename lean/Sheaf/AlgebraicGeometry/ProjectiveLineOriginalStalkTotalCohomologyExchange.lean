@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.ModuleAbelianStalkExchange
-import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
+import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 import Sheaf.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange
 
 /-! # Stalk exchange under compatible strict localization

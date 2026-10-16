@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.FieldTheory.Separable
 
-import Sheaf.RingTheory.ArtinianSeparableResidueLift
+import WeilConjectures.RingTheory.ArtinianSeparableResidueLift
 import Mathlib.RingTheory.RingHom.FaithfullyFlat
 import Mathlib.RingTheory.Unramified.LocalRing
 import Mathlib.RingTheory.Etale.Field

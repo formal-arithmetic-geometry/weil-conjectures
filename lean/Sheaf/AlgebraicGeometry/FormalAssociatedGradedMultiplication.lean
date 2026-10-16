@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
-import Sheaf.AlgebraicGeometry.AffineBilinearExtension
+import WeilConjectures.AlgebraicGeometry.AffineBilinearExtension
 import Sheaf.AlgebraicGeometry.FormalPolynomialPowerLifts
 import Sheaf.AlgebraicGeometry.FormalAssociatedGradedAffineMultiplication
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections

@@ -5,7 +5,7 @@ Authors: SHEAF group K3
 -/
 module
 
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.Algebra.Homology.Homotopy
 
 /-! # A Koszul generator acts by a null-homotopic map

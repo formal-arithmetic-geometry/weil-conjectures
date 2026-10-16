@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.FieldTheory.FieldTower
-public import Sheaf.FieldTheory.SeparableExtension
+public import WeilConjectures.FieldTheory.SeparableExtension
 public import Mathlib.FieldTheory.Separable
 
 /-!

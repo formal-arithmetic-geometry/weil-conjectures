@@ -74,16 +74,16 @@ theorem kFlat_bifunctor_iso_descent (X : Scheme.{uModel})
     (U V : schemeDerivedCategory X ⥤ schemeDerivedCategory X ⥤ E)
     (e : ∀ (P N : CochainComplex
           (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ),
-        CochainComplex.IsKFlat (R := X.sheaf) P →
-        CochainComplex.IsKFlat (R := X.sheaf) N →
+        CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P →
+        CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N →
           ((U.obj (DerivedCategory.Q.obj P)).obj (DerivedCategory.Q.obj N) ≅
           (V.obj (DerivedCategory.Q.obj P)).obj (DerivedCategory.Q.obj N)))
     (he : ∀ (P P' N N' : CochainComplex
           (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
-        (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-        (hP' : CochainComplex.IsKFlat (R := X.sheaf) P')
-        (hN : CochainComplex.IsKFlat (R := X.sheaf) N)
-        (hN' : CochainComplex.IsKFlat (R := X.sheaf) N') (a : P ⟶ P') (b : N ⟶ N'),
+        (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+        (hP' : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P')
+        (hN : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N)
+        (hN' : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N') (a : P ⟶ P') (b : N ⟶ N'),
       (U.map (DerivedCategory.Q.map a)).app (DerivedCategory.Q.obj N) ≫
           (U.obj (DerivedCategory.Q.obj P')).map (DerivedCategory.Q.map b) ≫
           (e P' N' hP' hN').hom =
@@ -92,8 +92,8 @@ theorem kFlat_bifunctor_iso_descent (X : Scheme.{uModel})
           (V.obj (DerivedCategory.Q.obj P')).map (DerivedCategory.Q.map b)) :
     ∃ μ : U ≅ V, ∀ (P N : CochainComplex
         (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
-      (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-      (hN : CochainComplex.IsKFlat (R := X.sheaf) N),
+      (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+      (hN : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N),
       ((μ.app (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj N)).hom =
         (e P N hP hN).hom := by
   classical
@@ -118,7 +118,7 @@ theorem kFlat_bifunctor_iso_descent (X : Scheme.{uModel})
     LocalizerMorphism.IsLocalizedEquivalence.isLocalization
       W.localizerMorphismKFlat DerivedCategory.Q
   have toLean (P : CochainComplex.KFlat A) :
-      CochainComplex.IsKFlat (R := X.sheaf) P.obj := by
+      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P.obj := by
     have h := (HomotopyCategory.kFlat_quotient_obj_iff P.obj).2 P.property
     rw [HomotopyCategory.kFlat_iff_preserves_acyclic] at h
     intro N hN
@@ -126,7 +126,7 @@ theorem kFlat_bifunctor_iso_descent (X : Scheme.{uModel})
       ((h ((HomotopyCategory.quotient A (.up ℤ)).obj N)
         ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic N).2 hN)).2)
   have fromLean (P : CochainComplex A ℤ)
-      (hP : CochainComplex.IsKFlat (R := X.sheaf) P) : W.kFlat P := by
+      (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P) : W.kFlat P := by
     rw [← HomotopyCategory.kFlat_quotient_obj_iff]
     rw [HomotopyCategory.kFlat_iff_preserves_acyclic]
     intro N hN

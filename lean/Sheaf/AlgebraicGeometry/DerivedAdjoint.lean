@@ -83,7 +83,7 @@ theorem nonempty_derivedPullbackAdjunction (f : X ⟶ Y) :
   have : G.Additive := hEadd
   have toIsKFlat (P : CochainComplex A ℤ)
       (hP : (HomologicalComplex.quasiIso A (.up ℤ)).kFlat P) :
-      CochainComplex.IsKFlat (R := Y.sheaf) P := by
+      CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P := by
     intro F hF
     have h := (HomotopyCategory.kFlat_iff_preserves_acyclic
       ((HomotopyCategory.quotient A (.up ℤ)).obj P)).mp

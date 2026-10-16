@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import Sheaf.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
 import Mathlib.CategoryTheory.Generator.Basic
 
 /-!

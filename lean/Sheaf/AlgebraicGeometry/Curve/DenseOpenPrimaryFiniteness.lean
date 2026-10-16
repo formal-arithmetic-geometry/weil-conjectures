@@ -11,8 +11,8 @@ import WeilConjectures.ConstructibleSheaf.OpenClosed
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomology
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenCohomologyFiniteness
-import Sheaf.AlgebraicGeometry.Curve.PrimeAnnihilatedPrimaryCases
-import Sheaf.AlgebraicGeometry.Curve.PrimeAnnihilatedInvertibleCases
+import WeilConjectures.AlgebraicGeometry.Curve.PrimeAnnihilatedPrimaryCases
+import WeilConjectures.AlgebraicGeometry.Curve.PrimeAnnihilatedInvertibleCases
 
 /-! # Primary vanishing and finiteness across a dense open -/
 

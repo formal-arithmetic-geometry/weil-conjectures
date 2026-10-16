@@ -120,7 +120,7 @@ theorem exists_selfTor_nonpositive_chosen_comparisons
   let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
   let S := CochainComplex.singleFunctor M 0
   let T := S.obj B
-  have hK : K.IsKFlat := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
+  have hK : K.IsAcyclicTensorKFlat := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
     Y.toRingedSpace K ⟨0, hbounded⟩ hflat
   let F := (Functor.const PUnit.{1}).obj K
   let G := (Functor.const PUnit.{1}).obj T

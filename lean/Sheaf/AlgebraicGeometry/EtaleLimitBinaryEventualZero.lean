@@ -5,7 +5,7 @@ Authors: SHEAF group W3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleCohomologyStageContinuity
+public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyStageContinuity
 import Sheaf.AlgebraicGeometry.EtaleLimitBinaryComparisonLadder
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic

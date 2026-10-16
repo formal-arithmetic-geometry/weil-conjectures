@@ -16,7 +16,7 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 import Sheaf.AlgebraicGeometry.KoszulExtOffRankStalk
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Rank support of scalar Koszul Ext

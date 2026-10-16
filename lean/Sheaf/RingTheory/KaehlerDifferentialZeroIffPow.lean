@@ -8,9 +8,9 @@ module
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.FieldTheory.Perfect
 import Mathlib.Algebra.CharP.Algebra
-import Sheaf.FieldTheory.ExistsPBasis
-import Sheaf.FieldTheory.PBasisDifferentialsBasis
-import Sheaf.FieldTheory.PBasisZeroDifferentialCoefficients
+import WeilConjectures.FieldTheory.ExistsPBasis
+import WeilConjectures.FieldTheory.PBasisDifferentialsBasis
+import WeilConjectures.FieldTheory.PBasisZeroDifferentialCoefficients
 
 /-!
 # Vanishing differentials over a perfect field

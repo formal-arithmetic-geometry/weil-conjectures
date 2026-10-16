@@ -5,7 +5,7 @@ Authors: SHEAF group Q4
 -/
 module
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
-public import Sheaf.AlgebraicGeometry.GradedSheafStructures
+public import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
 import Sheaf.AlgebraicGeometry.FormalAssociatedGradedAlgebraExists
 import Sheaf.AlgebraicGeometry.FormalKernelGradedActionExists
 import Sheaf.AlgebraicGeometry.FormalKernelGradedActionLocalGenerators

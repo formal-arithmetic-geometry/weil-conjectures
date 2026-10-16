@@ -170,7 +170,7 @@ theorem schemeCanonicalTensorShift_rightUnitor (Y : Scheme.{u})
     letI : ∀ M : schemeDerivedCategory Y, (tensorRight M).CommShift ℤ :=
       fun M ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) M
     ∀ P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
-      CochainComplex.IsKFlat (R := Y.sheaf) P →
+      CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
       let K := DerivedCategory.Q.obj P
       let τ := (rightUnitorNatIso (schemeDerivedCategory Y)).hom
       ((tensorRight (𝟙_ (schemeDerivedCategory Y))).commShiftIso (1 : ℤ)).hom.app K ≫

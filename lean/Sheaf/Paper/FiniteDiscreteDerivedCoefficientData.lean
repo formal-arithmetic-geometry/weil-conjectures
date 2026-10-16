@@ -8,7 +8,11 @@ public import Sheaf.Paper.CoefficientDerivedFunctorAPI
 import Sheaf.Paper.FiniteDiscreteCoefficientCoherentPullbacks
 import Sheaf.Paper.FiniteDiscreteCoefficientDirectImageOrigin
 import Sheaf.CategoryTheory.FullyFaithfulMate
-import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
 
 /-! # Coherent inverse-image comparisons for the common coefficient encoding -/
 

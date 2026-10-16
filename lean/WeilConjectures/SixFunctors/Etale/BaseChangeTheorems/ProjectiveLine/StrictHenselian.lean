@@ -21,7 +21,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.StrictLocalTotalCohomologyExchange
-import Sheaf.AlgebraicGeometry.CohomologyRestrictionSquareTransport
+import WeilConjectures.AlgebraicGeometry.CohomologyRestrictionSquareTransport
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic

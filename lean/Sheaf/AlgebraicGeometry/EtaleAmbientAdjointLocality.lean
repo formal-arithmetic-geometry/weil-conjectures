@@ -5,10 +5,12 @@ Authors: SHEAF group NE
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
+
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.CompactifiableOverField
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
@@ -86,21 +88,6 @@ first assertion (blueprint: lem-amb-etale-adjoint-locality).
 Both sheaf functors are exact; the degreewise unit and counit descend through localization,
 and their triangle identities descend as well. The construction uses the existing sheaf
 adjunction and the general exact-functor derived-adjunction construction. -/
-noncomputable def derivedEtaleLowerShriekUpperStarAdjunction
-    (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}}
-    (u : U ⟶ X) [Etale u] [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u] :
-    (etaleLowerShriek (ModuleCat.{u + 1} A) u inferInstance).mapDerivedCategory ⊣
-      (upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory :=
-  (etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) u
-    inferInstance).mapDerivedCategoryAdjunction
-
-/-- The specified left-adjoint comparison `Rf_! Du_Σ! ≅ R(fu)_!`.
-Use the graph-normalized comparison for the etale map, the proper/open composition
-comparison on compatible compactifications, and the common-refinement comparison.
-The auxiliary compactification is the existing closure construction `d.ofComp c`.
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-amb-etale-adjoint-locality.md,
-Proof, steps 3–7; SGA 4 XVII 5.2.2 and 6.2.11
-(blueprint: lem-amb-etale-adjoint-locality). -/
 noncomputable def etaleAmbientLeftComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : EtaleCompactSupportNormalization A)
@@ -360,7 +347,7 @@ theorem existsUnique_etaleAmbientAdjointLocalityIso
           (etaleAmbientLeftComparison A N u f c d).inv.app
               ((upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory.obj (F.obj K)) ≫
             (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
-              ((derivedEtaleLowerShriekUpperStarAdjunction A u).counit.app (F.obj K)) ≫
+              ((derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) u inferInstance).counit.app (F.obj K)) ≫
             adjF.counit.app K := by
   sorry
 

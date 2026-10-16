@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.RingTheory.ProEtale.IndEtale
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.RingTheory.EtaleResidueTriplesColimit
 
 /-! # The strict henselization is ind-etale over an affine chart

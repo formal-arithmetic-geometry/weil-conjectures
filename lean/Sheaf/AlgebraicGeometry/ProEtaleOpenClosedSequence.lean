@@ -5,12 +5,12 @@ Authors: SHEAF groups D3, B3, E2
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import Mathlib.Algebra.Homology.ExactSequence
 public import Mathlib.Algebra.Category.ModuleCat.AB
 
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
-import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.FullyFaithful
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
 import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-! # The pro-étale open-closed sequence

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Sheaf.Paper.ProEtaleStratifiedEssentialImage
 import Sheaf.Paper.ProEtaleFiniteModelLocalConstancy
 import Sheaf.Paper.ProEtaleFiniteModelStalks

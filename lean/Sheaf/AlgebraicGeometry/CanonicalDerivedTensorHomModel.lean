@@ -122,7 +122,7 @@ def IsCanonicalDerivedTensorHom (X : Scheme.{uCD})
       (a ⊗ₘ b) ≫ e K L M f ≫ c) ∧
   (∀ (P L M : CochainComplex
       (SheafOfModules.{uCD} (moduleRings X.toRingedSpace)) ℤ),
-    P.IsKFlat →
+    P.IsAcyclicTensorKFlat →
     ∀ φ : P ⟶ homComplex (R := X.sheaf) L
         ((schemeHomKInjectiveResolution X).obj M),
       ∃ ψ : pullbackTensorTotal X P L ⟶
@@ -160,7 +160,7 @@ def IsCanonicalDerivedTensorHomMap (X : Scheme.{uCD})
       (a ⊗ₘ b) ≫ e K L M f ≫ c) ∧
   (∀ (P L M : CochainComplex
       (SheafOfModules.{uCD} (moduleRings X.toRingedSpace)) ℤ),
-    P.IsKFlat →
+    P.IsAcyclicTensorKFlat →
     ∀ φ : P ⟶ homComplex (R := X.sheaf) L
         ((schemeHomKInjectiveResolution X).obj M),
       ∃ ψ : pullbackTensorTotal X P L ⟶

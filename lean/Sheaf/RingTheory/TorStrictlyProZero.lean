@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 import Sheaf.Algebra.TorDimensionShiftNatural
-import Sheaf.Paper.TorLongExactFirstVariable
+import WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 import Mathlib.RingTheory.Filtration
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
 import Mathlib.RingTheory.Ideal.Quotient.Operations

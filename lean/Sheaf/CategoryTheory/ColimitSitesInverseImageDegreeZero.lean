@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.CategoryTheory.ColimitSites
+import WeilConjectures.CategoryTheory.ColimitSites
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 

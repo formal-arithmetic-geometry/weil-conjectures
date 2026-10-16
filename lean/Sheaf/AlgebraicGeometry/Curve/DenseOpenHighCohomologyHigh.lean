@@ -4,9 +4,9 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
-import Sheaf.AlgebraicGeometry.Curve.DenseIrreducibleOpens
-import Sheaf.Paper.ZeroDimensionalCohomology
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.SixFunctors.OpenClosed.Exact

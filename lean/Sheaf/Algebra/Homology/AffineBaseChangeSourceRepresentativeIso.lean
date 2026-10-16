@@ -83,7 +83,7 @@ theorem exists_affineBaseChangeIntoPullback_representativeIso
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) (K : schemeDerivedCategory X)
     (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) (hQ : Q.IsKFlat)
+    (hP : P.IsAcyclicTensorKFlat) (hQ : Q.IsAcyclicTensorKFlat)
     (eP : DerivedCategory.Q.obj P ≅ K) (eQ : DerivedCategory.Q.obj Q ≅ K)
     (hcP : IsIso ((SingleComplexBaseChange.counit g').app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))

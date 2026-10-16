@@ -71,7 +71,7 @@ theorem derivedFiberCohomology_baseChange_iso (X Y : Scheme.{u})
   let eP : DerivedCategory.Q.obj P ≅ E :=
     asIso (DerivedCategory.Q.map s) ≪≫ DerivedCategory.Q.objObjPreimageIso E
   let Pg := (G.mapHomologicalComplex (.up ℤ)).obj P
-  have hPg : CochainComplex.IsKFlat (R := Y.sheaf) Pg := by
+  have hPg : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) Pg := by
     convert CochainComplex.isKFlat_pullback g.base Y.sheaf X.sheaf ⟨g.c⟩ P hP using 1
     rfl
   obtain ⟨_, _, _, _, _, _, _, F, hF, hmap, hAdd, ε, _, _, hcompute⟩ :=

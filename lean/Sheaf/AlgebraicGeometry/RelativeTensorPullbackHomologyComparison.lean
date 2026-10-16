@@ -44,7 +44,7 @@ private theorem kFlat_tensor_right_of_quasiIso
       (SheafOfModules.{u}
         ((sheafCompose (Opens.grothendieckTopology X)
           (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
-    (α : E ⟶ E') (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (α : E ⟶ E') (hα : QuasiIso α) (hK : K.IsAcyclicTensorKFlat) :
     (letI := SheafOfModules.monoidalCategory (R)
      QuasiIso (HomologicalComplex.mapBifunctorMap α (𝟙 K) (curriedTensor _) (.up ℤ))) := by
   let := SheafOfModules.monoidalCategory (R)
@@ -60,7 +60,7 @@ private theorem kFlat_tensor_left_of_quasiIso
       (SheafOfModules.{u}
         ((sheafCompose (Opens.grothendieckTopology X)
           (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
-    (α : L ⟶ L') (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (α : L ⟶ L') (hα : QuasiIso α) (hK : K.IsAcyclicTensorKFlat) :
     (letI := SheafOfModules.monoidalCategory (R)
      QuasiIso (HomologicalComplex.mapBifunctorMap (𝟙 K) α (curriedTensor _) (.up ℤ))) := by
   let := SheafOfModules.monoidalCategory (R)
@@ -129,7 +129,7 @@ theorem relativeTensorPullback_homology_comparison
       ((sheafCompose (Opens.grothendieckTopology X)
         (forget₂ CommRingCat.{u} RingCat.{u})).obj
           (TopCat.Sheaf.inverseImageRing f.base S.sheaf))) ℤ)
-    (hP : CochainComplex.IsKFlat (R := TopCat.Sheaf.inverseImageRing f.base S.sheaf) P)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := TopCat.Sheaf.inverseImageRing f.base S.sheaf) P)
     (q : P ⟶ ((SheafOfModules.restrictScalars
       ((sheafCompose (Opens.grothendieckTopology X)
         (forget₂ CommRingCat.{u} RingCat.{u})).map
@@ -176,7 +176,7 @@ theorem relativeTensorPullback_homology_comparison
   have : QuasiIso a := ha
   have : QuasiIso l := hl
   have : QuasiIso q := hq
-  have hIL : CochainComplex.IsKFlat (R := R) (Ic.obj L) := by
+  have hIL : CochainComplex.IsAcyclicTensorKFlat (R := R) (Ic.obj L) := by
     obtain ⟨J, hJ, hJmap, hJadd, _, _, hJres⟩ := exists_inverseImage_exact_kFlat f
     have heq : J = I := by
       exact CategoryTheory.Functor.ext hJ (fun _ _ b ↦ hJmap b)

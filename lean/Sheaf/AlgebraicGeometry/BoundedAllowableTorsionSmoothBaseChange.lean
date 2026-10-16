@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 import Sheaf.AlgebraicGeometry.AbelianDerivedExchangePlusCompatibility
 import Sheaf.AlgebraicGeometry.AllowableTorsionInverseImage
 import WeilConjectures.SixFunctors.BaseChange.DerivedForget
-import Sheaf.AlgebraicGeometry.GeometricPointFieldExtension
+import WeilConjectures.AlgebraicGeometry.GeometricPointFieldExtension
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Sheaf.AlgebraicGeometry.QcqsHigherImagesPrimeTorsion
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper

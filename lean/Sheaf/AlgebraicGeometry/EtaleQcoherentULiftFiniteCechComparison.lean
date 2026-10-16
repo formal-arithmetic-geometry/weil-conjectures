@@ -10,14 +10,14 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
+import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import Sheaf.AlgebraicGeometry.EtaleAffineTensorCechVanishing
 import Sheaf.AlgebraicGeometry.EtaleAffineOpenCechDerivedEvaluation
 import Sheaf.AlgebraicGeometry.EtaleTensorOpenSections
-import Sheaf.Paper.ZariskiEtaleCore
+import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore
 import WeilConjectures.Topology.Sheaves.CechComparison
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 
 /-! # Lifted étale cohomology computed by a finite affine section complex
 

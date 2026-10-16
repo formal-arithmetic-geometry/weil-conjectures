@@ -10,9 +10,9 @@ public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
-import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
-import Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
 
 /-!
 # Étale sheaves and discrete Galois sets

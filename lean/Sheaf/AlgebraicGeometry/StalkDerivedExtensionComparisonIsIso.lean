@@ -62,7 +62,7 @@ theorem stalkDerivedExtensionComparison_isIso (z : X') :
         derivedPullback g' ⋙ comparisonDerivedStalk X' z)
       (_hj :
       ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-        (_hP : P.IsKFlat)
+        (_hP : P.IsAcyclicTensorKFlat)
         (_hcP : IsIso ((counit g').app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj P))),
         L.map ((RingedSpace.moduleStalkFunctor X.toRingedSpace
@@ -90,7 +90,7 @@ theorem stalkDerivedExtensionComparison_isIso (z : X') :
   let := HasDerivedCategory.standard (ModuleCat.{u} (C z))
   intro L ε hL j hj
   have hcomp (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-      (hP : P.IsKFlat)
+      (hP : P.IsAcyclicTensorKFlat)
       (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) :
       IsIso (j.app (DerivedCategory.Q.obj P)) := by
     have := hcP

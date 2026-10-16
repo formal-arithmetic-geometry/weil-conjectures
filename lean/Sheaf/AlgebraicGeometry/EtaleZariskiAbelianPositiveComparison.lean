@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.Paper.ZariskiEtaleCore
+import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore
 import Sheaf.AlgebraicGeometry.EtaleTensorDirectImageIdentification
 import Sheaf.AlgebraicGeometry.EtaleTensorPositiveDirectImageVanishing
 import Sheaf.AlgebraicGeometry.EtaleZariskiNaturalAcyclicLeray
@@ -109,7 +109,7 @@ theorem etaleZariskiAbelianPositiveComparison (X : Scheme.{u})
   let : HasExt.{u}
       (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u}) :=
     hasExt_of_enoughInjectives _
-  obtain ⟨i, hi, _, hlim, ⟨hterminal⟩, hcont, _, _⟩ := zariski_to_etale_core X
+  obtain ⟨i, hi, _, hlim, ⟨hterminal⟩, hcont, _⟩ := zariski_to_etale_core X
   let := hcont
   let := hlim
   let T := i.sheafPushforwardContinuous AddCommGrpCat.{u}

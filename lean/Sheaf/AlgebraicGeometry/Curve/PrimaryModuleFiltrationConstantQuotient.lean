@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationFixedFieldComparison
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.FieldTheory.GaloisAutomorphismExtension
 import WeilConjectures.ConstructibleSheaf.Defs
 import Mathlib.Algebra.Field.ULift

@@ -61,7 +61,7 @@ theorem derivedPullback_tensor_preserve_QCoh {X Y : Scheme.{uX}} (f : X ⟶ Y)
     (∀ E : schemeDerivedCategory Y, schemeDerivedQCohProperty Y E →
       schemeDerivedQCohProperty X ((derivedPullback f).obj E)) ∧
     (∀ P N : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ,
-      CochainComplex.IsKFlat (R := X.sheaf) P →
+      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P →
       schemeDerivedQCohProperty X (DerivedCategory.Q.obj P) →
       schemeDerivedQCohProperty X (DerivedCategory.Q.obj N) →
         schemeDerivedQCohProperty X

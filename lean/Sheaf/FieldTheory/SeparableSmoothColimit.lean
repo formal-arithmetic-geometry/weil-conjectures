@@ -7,7 +7,7 @@ module
 
 public import Sheaf.FieldTheory.FgSeparableSmooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.FieldTheory.SeparablyGeneratedSeparable
+import WeilConjectures.FieldTheory.SeparablyGeneratedSeparable
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction

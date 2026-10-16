@@ -98,14 +98,14 @@ private theorem kFlat_over_transport (X : Scheme.{u}) (U : X.Opens)
     (K : CochainComplex (localEvaluationModules X U) ℤ)
     (D : CochainComplex (SheafOfModules.{u} U.toScheme.ringCatSheaf) ℤ)
     (d : ((Scheme.Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj K ≅ D)
-    (hK : K.IsKFlat)
+    (hK : K.IsAcyclicTensorKFlat)
     (ht : ∀ A : CochainComplex (localEvaluationModules X U) ℤ,
       Nonempty (((Scheme.Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj
           (CochainComplex.mapBifunctor A K (curriedTensor _)) ≅
         CochainComplex.mapBifunctor
           (((Scheme.Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj A)
           (((Scheme.Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj K)
-          (curriedTensor _))) : D.IsKFlat := by
+          (curriedTensor _))) : D.IsAcyclicTensorKFlat := by
   let : (Scheme.Modules.overEquiv U).functor.Additive :=
     Functor.additive_of_preserves_binary_products _
   let E := (Scheme.Modules.overEquiv U).mapHomologicalComplex (.up ℤ)
@@ -161,7 +161,7 @@ theorem exists_ordinaryEvaluation_over_transport (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
     (hhom : ∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),
       QuasiIso t → QuasiIso (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t))
-    (hdual : (localEvaluationDual X U P).IsKFlat)
+    (hdual : (localEvaluationDual X U P).IsAcyclicTensorKFlat)
     (f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F)
     (hf : IsLocalOrdinaryEvaluation X U P F f) [F.IsKInjective] :
     let L := Equivalence.functor
@@ -181,7 +181,7 @@ theorem exists_ordinaryEvaluation_over_transport (X : Scheme.{u}) (U : X.Opens)
             (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ) (a : M ⟶ M'),
           QuasiIso a →
             QuasiIso (((homComplexFunctor (R := U.toScheme.sheaf)).obj (op P')).map a)) ∧
-        D'.IsKFlat ∧ CochainComplex.IsKInjective F' ∧
+        D'.IsAcyclicTensorKFlat ∧ CochainComplex.IsKInjective F' ∧
         IsSchemeOrdinaryEvaluation U.toScheme P' F' (t.inv ≫ T.map f ≫ b.hom) := by
   dsimp only
   obtain ⟨b, hb, d, ht⟩ := exists_ordinaryEvaluation_over_comparisons X U P

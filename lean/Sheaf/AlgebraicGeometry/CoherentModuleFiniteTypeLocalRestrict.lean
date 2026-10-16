@@ -4,7 +4,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Restrict
 
-import all Sheaf.AlgebraicGeometry.CoherentKernelConditionRestriction
+import all WeilConjectures.AlgebraicGeometry.CoherentKernelConditionRestriction
 
 @[expose] public section
 universe u

@@ -41,7 +41,7 @@ private theorem tensorDerivedCounit {X Y : Scheme.{u₁}} (f : X ⟶ Y)
         (HomotopyCategory.quasiIso
           (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)) ∧
       ∀ P : CochainComplex (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) ℤ,
-        CochainComplex.IsKFlat (R := Y.sheaf) P →
+        CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
           IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=

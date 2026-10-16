@@ -6,7 +6,7 @@ Authors: SHEAF group E2
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-public import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
 import Mathlib.Algebra.Homology.Factorizations.CM5a

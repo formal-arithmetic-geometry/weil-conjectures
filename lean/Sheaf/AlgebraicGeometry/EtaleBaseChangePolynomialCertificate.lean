@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.EtalePolynomialCertificate
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.TensorProduct.Maps
 import Sheaf.RingTheory.EtaleRingMapConormalCriterion
-import Sheaf.AlgebraicGeometry.TensorMapPolynomialPresentation
+import WeilConjectures.AlgebraicGeometry.TensorMapPolynomialPresentation
 import Sheaf.RingTheory.ConormalPolynomialInverse
 
 /-! # A uniform polynomial certificate for etaleness of a base-changed presentation

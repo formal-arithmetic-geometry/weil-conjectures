@@ -110,7 +110,7 @@ theorem tensorHomUncurry_representative_coherence (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P L M P' L' M' : CochainComplex
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) (hP' : P'.IsKFlat)
+    (hP : P.IsAcyclicTensorKFlat) (hP' : P'.IsAcyclicTensorKFlat)
     (φ : P ⟶ homComplex (R := X.sheaf) L
       ((schemeHomKInjectiveResolution X).obj M))
     (φ' : P' ⟶ homComplex (R := X.sheaf) L'

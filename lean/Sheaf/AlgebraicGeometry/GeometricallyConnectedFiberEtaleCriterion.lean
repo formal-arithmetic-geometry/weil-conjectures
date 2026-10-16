@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.EtaleNeighbourhoodPrescribedResidueField
+import WeilConjectures.AlgebraicGeometry.EtaleNeighbourhoodPrescribedResidueField
 import Sheaf.AlgebraicGeometry.GeometricallyConnectedFiniteSeparableTest
 
 /-!

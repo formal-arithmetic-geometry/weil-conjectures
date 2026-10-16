@@ -213,7 +213,7 @@ private lemma bounded_tri_of_serre {X : Scheme.{u}}
     exact P.prop_of_iso ((cokernelIsCokernel f).coconePointUniqueUpToIso hk)
       (hker _ _ f h.1 h.2).2⟩
   have : P.IsClosedUnderExtensions := ⟨fun h h₁ h₃ ↦ hext _ h h₁ h₃⟩
-  exact isTriangulated_boundedConstructible R
+  exact isTriangulated_boundedConstructible_of_serre R
 -- Build the specific condensed-field triangulated structures from their Serre closure
 -- statements; no arbitrary-coefficient closure assertion is used.
 /-- Bounded constructible complexes over a finite coefficient field form a triangulated

@@ -5,11 +5,11 @@ Authors: SHEAF group R1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree
+public import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.Algebra.Exact.Basic
 
-import Sheaf.AlgebraicGeometry.EtaleLimitOpenRestrictionTransform
+import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenRestrictionTransform
 import Sheaf.AlgebraicGeometry.EtaleLimitOpenBoundaryTransform
 
 /-! # Compatible Mayer--Vietoris maps on canonical open diagrams

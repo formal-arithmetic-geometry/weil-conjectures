@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 import Sheaf.Paper.StrictHenselizationPointEvaluationPointed
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-import Sheaf.Paper.EtalePointedMapRigidity
+import WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity
 import Sheaf.Paper.StrictHenselizationMapExists
 import Sheaf.Paper.StrictHenselizationPointedMap
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal

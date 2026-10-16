@@ -10,12 +10,12 @@ import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
 import Sheaf.AlgebraicGeometry.StrictHenselization
-import Sheaf.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Sheaf.RingTheory.FiniteOverHenselianLocalProduct
 import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.AlgebraicGeometry.FinitePushforwardSetStalkAux
-import Sheaf.AlgebraicGeometry.FinitePushforwardSetStalkFiberFinite
+import WeilConjectures.AlgebraicGeometry.FinitePushforwardSetStalkAux
+import WeilConjectures.AlgebraicGeometry.FinitePushforwardSetStalkFiberFinite
 
 /-!
 # Stalks of finite direct images of étale sheaves of sets

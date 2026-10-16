@@ -17,7 +17,7 @@ Source: RefactorInstruction, Section 4, coefficient realization and geometric fi
 
 @[expose] public section
 
-universe u
+universe u v v' w w'
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
@@ -106,6 +106,51 @@ private theorem fieldFiber_smul (ℓ : ℕ) [Fact ℓ.Prime]
   rw [AddCommGrpCat.comp_apply,
     AddCommGrpCat.MonoidalCategory.whiskerRight_tmul]
 
+private theorem comap_map_action
+    {C : Type v} [Category.{v'} C] [MonoidalCategory C]
+    {D : Type w} [Category.{w'} D] [MonoidalCategory D]
+    (H : C ⥤ D) [H.LaxMonoidal] (F : D ⥤ Ab.{u + 1}) [F.LaxMonoidal]
+    (A : C) [MonObj A] (B : D) [MonObj B]
+    (α : B ⟶ H.obj A) [IsMonHom α] (M : Mod C A)
+    (r : F.obj B) (m : F.obj (H.obj M.X)) :
+    (Mod.act ((F.mapMod B).obj ((Mod.comap α).obj ((H.mapMod A).obj M))).X).hom
+        (r ⊗ₜ[ℤ] m) =
+      (Functor.LaxMonoidal.μ (H ⋙ F) A M.X ≫
+        (H ⋙ F).map (Mod.act M.X)).hom ((F.map α).hom r ⊗ₜ[ℤ] m) := by
+  change (Functor.LaxMonoidal.μ F _ _ ≫
+    F.map (α ▷ H.obj M.X ≫ Functor.LaxMonoidal.μ H A M.X ≫
+      H.map (Mod.act M.X))).hom _ = _
+  rw [Functor.map_comp, ← Category.assoc, ← Functor.LaxMonoidal.μ_natural_left]
+  simp only [Category.assoc]
+  rw [AddCommGrpCat.comp_apply, AddCommGrpCat.MonoidalCategory.whiskerRight_tmul]
+  simp only [Functor.LaxMonoidal.comp_μ, Functor.comp_map, Functor.map_comp,
+    Category.assoc]
+  rfl
+
+private theorem pullbackFiber_smul_aux (ℓ : ℕ) [Fact ℓ.Prime]
+    (K' : Type u) [Field K'] [IsAlgClosed K']
+    {C : Type v} [Category.{v'} C] [MonoidalCategory C]
+    (H : C ⥤ Sheaf (Scheme.ProEt.topology (Spec (.of K'))) Ab.{u + 1})
+    [H.LaxMonoidal] (A : C) [MonObj A]
+    (α : H.obj A ⟶ condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K')))
+    [IsIso α] [IsMonHom α] (M : Mod C A)
+    (r : PadicAlgCl ℓ) (m : (ev K').obj (H.obj M.X)) :
+    let N := (CondensedQbarGeometricEvaluation.fieldFiber K' ℓ).obj
+      ((Mod.comap (inv α)).obj ((H.mapMod A).obj M))
+    (N.smul r).hom m =
+      (Functor.LaxMonoidal.μ (H ⋙ ev K') A M.X ≫
+        (H ⋙ ev K').map (Mod.act M.X)).hom
+          (((ev K').map (inv α))
+            ((inv (CondensedQbarGeometricEvaluation.fieldCoefficientIso K' ℓ).hom.hom)
+              (ULift.up r)) ⊗ₜ[ℤ] m) := by
+  dsimp only
+  let M' := (Mod.comap (inv α)).obj ((H.mapMod A).obj M)
+  have hs := fieldFiber_smul ℓ K' M' r m
+  refine hs.trans ?_
+  exact comap_map_action H (ev K') A
+    (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K')))
+    (inv α) M _ m
+
 private theorem pullbackFiber_smul (ℓ : ℕ) [Fact ℓ.Prime]
     (K K' : Type u) [Field K] [IsAlgClosed K] [Field K'] [IsAlgClosed K']
     (i : K →+* K')
@@ -117,8 +162,8 @@ private theorem pullbackFiber_smul (ℓ : ℕ) [Fact ℓ.Prime]
     let A := condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K))
     let H := upperStar Ab.{u + 1} f
     let α := condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f
-    let N := ((H.mapMod A ⋙ Mod.comap (inv α)) ⋙
-      CondensedQbarGeometricEvaluation.fieldFiber K' ℓ).obj M
+    let N := (CondensedQbarGeometricEvaluation.fieldFiber K' ℓ).obj
+      ((Mod.comap (inv α)).obj ((H.mapMod A).obj M))
     (N.smul r).hom m =
       (Functor.LaxMonoidal.μ (H ⋙ ev K') A M.X ≫
         (H ⋙ ev K').map (Mod.act M.X)).hom
@@ -126,20 +171,9 @@ private theorem pullbackFiber_smul (ℓ : ℕ) [Fact ℓ.Prime]
             ((inv (CondensedQbarGeometricEvaluation.fieldCoefficientIso K' ℓ).hom.hom)
               (ULift.up r)) ⊗ₜ[ℤ] m) := by
   dsimp only
-  let f := Spec.map (CommRingCat.ofHom i)
-  let A := condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K))
-  let H := upperStar Ab.{u + 1} f
-  let α := condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f
-  let M' := (Mod.comap (inv α)).obj ((H.mapMod A).obj M)
-  have hs := fieldFiber_smul ℓ K' M' r m
-  refine hs.trans ?_
-  change (Functor.LaxMonoidal.μ (ev K') _ _ ≫
-    (ev K').map ((inv α) ▷ (H.obj M.X) ≫
-      Functor.LaxMonoidal.μ H A M.X ≫ H.map (Mod.act M.X))).hom _ = _
-  rw [Functor.map_comp, ← Category.assoc, ← Functor.LaxMonoidal.μ_natural_left]
-  simp only [Category.assoc]
-  rw [AddCommGrpCat.comp_apply, AddCommGrpCat.MonoidalCategory.whiskerRight_tmul]
-  rfl
+  exact pullbackFiber_smul_aux ℓ K' (upperStar Ab (Spec.map (CommRingCat.ofHom i)))
+    _ (condensedPullbackHom (Profinite.padicAlgClRingObj ℓ)
+      (Spec.map (CommRingCat.ofHom i))) M r m
 set_option backward.isDefEq.respectTransparency false in
 
 private theorem main_of_coeff (ℓ : ℕ) [Fact ℓ.Prime]
@@ -159,8 +193,8 @@ private theorem main_of_coeff (ℓ : ℕ) [Fact ℓ.Prime]
     let A := condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K))
     let H := upperStar Ab.{u + 1} f
     let α := condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f
-    let N := ((H.mapMod A ⋙ Mod.comap (inv α)) ⋙
-      CondensedQbarGeometricEvaluation.fieldFiber K' ℓ).obj M
+    let N := (CondensedQbarGeometricEvaluation.fieldFiber K' ℓ).obj
+      ((Mod.comap (inv α)).obj ((H.mapMod A).obj M))
     (geometricFieldEvaluationComparison f Ab).app M.X ≫ N.smul r =
       ((CondensedQbarGeometricEvaluation.fieldFiber K ℓ).obj M).smul r ≫
         (geometricFieldEvaluationComparison f Ab).app M.X := by
@@ -168,10 +202,10 @@ private theorem main_of_coeff (ℓ : ℕ) [Fact ℓ.Prime]
   apply AddCommGrpCat.ext
   intro m
   simp only [AddCommGrpCat.comp_apply]
-  change (((((upperStar Ab (Spec.map (CommRingCat.ofHom i))).mapMod _ ⋙
-    Mod.comap (inv (condensedPullbackHom (Profinite.padicAlgClRingObj ℓ)
-      (Spec.map (CommRingCat.ofHom i))))) ⋙
-    CondensedQbarGeometricEvaluation.fieldFiber K' ℓ).obj M).smul r).hom
+  change (((CondensedQbarGeometricEvaluation.fieldFiber K' ℓ).obj
+    ((Mod.comap (inv (condensedPullbackHom (Profinite.padicAlgClRingObj ℓ)
+      (Spec.map (CommRingCat.ofHom i))))).obj
+        (((upperStar Ab (Spec.map (CommRingCat.ofHom i))).mapMod _).obj M))).smul r).hom
       (((geometricFieldEvaluationComparison _ Ab).app M.X).hom m) =
     ((geometricFieldEvaluationComparison _ Ab).app M.X).hom
       ((((CondensedQbarGeometricEvaluation.fieldFiber K ℓ).obj M).smul r).hom m)

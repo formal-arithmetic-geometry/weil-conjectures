@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
-import Sheaf.AlgebraicGeometry.PullbackIsoNsmulDevissage
+import WeilConjectures.AlgebraicGeometry.PullbackIsoNsmulDevissage
 import Sheaf.AlgebraicGeometry.PullbackIsoTorsionColimit
 
 /-!

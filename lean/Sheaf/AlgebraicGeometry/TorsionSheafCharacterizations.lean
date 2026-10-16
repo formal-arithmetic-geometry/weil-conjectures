@@ -14,7 +14,7 @@ public import Mathlib.GroupTheory.Torsion
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90Etale
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.AlgebraicGeometry.GeometricStalkColimits
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 

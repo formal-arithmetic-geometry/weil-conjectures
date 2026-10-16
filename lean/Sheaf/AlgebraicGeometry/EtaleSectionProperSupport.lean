@@ -5,7 +5,7 @@ Authors: SHEAF group NR
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Proper support of an individual etale section

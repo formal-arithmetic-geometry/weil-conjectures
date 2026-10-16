@@ -46,8 +46,8 @@ The reverse implication of the stalk criterion proves the result. On an empty X
 the criterion is vacuous; neither quasi-coherence nor boundedness is needed. -/
 theorem isKFlat_restrict {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]
     (K : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K) :
-    CochainComplex.IsKFlat (R := X.sheaf)
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K) :
+    CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf)
       (((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).obj K) := by
   have hstalk :=
     (RingedSpace.isKFlat_iff_stalk_isKFlat Y.toRingedSpace K).mp hK

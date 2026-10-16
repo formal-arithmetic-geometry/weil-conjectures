@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import WeilConjectures.ZetaSeries
 import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.Paper.StrictHenselizationFunctoriality
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 

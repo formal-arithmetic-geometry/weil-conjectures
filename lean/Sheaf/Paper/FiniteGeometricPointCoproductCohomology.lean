@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.GeometricPointCohomology
 import Sheaf.Paper.FiniteCoproductCohomologyAssembly
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 
 /-! # Étale cohomology of a finite coproduct of geometric points
 

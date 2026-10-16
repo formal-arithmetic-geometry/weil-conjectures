@@ -5,6 +5,8 @@ Authors: SHEAF group NJ
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Sheaf.Paper.CondensedQbarComparisons
 
@@ -96,11 +98,9 @@ theorem constructibleToQbar_baseChange_compatibility [IsProper f]
       IsIso (constructibleToQbarSourceHom ℓ k E f g K) ∧
       IsIso (constructibleToQbarTargetHom ℓ k E f' g' K) ∧
       constructibleToQbarSourceHom ℓ k E f g K ≫
-          (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ k
-            sq.toCommSq).app ((constructibleToPadicAlgCl X ℓ E).obj K) =
+          (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app ((constructibleToPadicAlgCl X ℓ E).obj K) =
         (constructibleToPadicAlgCl Y' ℓ E).map
-            ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k
-              sq.toCommSq).app K) ≫
+            ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app K) ≫
           constructibleToQbarTargetHom ℓ k E f' g' K) := by
   have : IsProper f' := by
     rw [← sq.hom_snd]
@@ -115,7 +115,7 @@ theorem constructibleToQbar_baseChange_compatibility [IsProper f]
   intro K
   have := hpush K
   have : IsIso (constructibleToQbarPushHom ℓ k E f'
-      ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g').obj K)) :=
+      ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).obj K)) :=
     hpush' _
   constructor
   · dsimp [constructibleToQbarSourceHom]

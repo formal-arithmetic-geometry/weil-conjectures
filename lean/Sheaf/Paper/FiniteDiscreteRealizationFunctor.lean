@@ -5,6 +5,8 @@ Authors: SHEAF group B3
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
@@ -185,20 +187,16 @@ def finiteDiscreteExchangeSteps (sq : CommSq g' f' f g)
       let N : ProEtale.BoundedConstructible
           (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X) := ⟨F0.obj L, hL⟩
       Nonempty (FiniteDiscreteFactoredComparison
-        (((boundedConstructibleBaseChangeUnitStep
-          (Profinite.continuousMapRingObj B) ℓ k f g f').app N).hom)
-        (((boundedConstructibleBaseChangeSquareStep
-          (Profinite.continuousMapRingObj B) ℓ k sq).hom.app N).hom)
-        (((boundedConstructibleBaseChangeCounitStep
-          (Profinite.continuousMapRingObj B) ℓ k f f' g').app N).hom)
+        (((boundedConstructibleBaseChangeUnitStep (Profinite.continuousMapRingObj B) ℓ (f.asOver (Spec (.of k))) (g.asOver (Spec (.of k))) (f'.asOver (Spec (.of k)))).app N).hom)
+        (((boundedConstructibleBaseChangeSquareStep (Profinite.continuousMapRingObj B) ℓ (sq.asOver (Spec (.of k)))).hom.app N).hom)
+        (((boundedConstructibleBaseChangeCounitStep (Profinite.continuousMapRingObj B) ℓ (f.asOver (Spec (.of k))) (f'.asOver (Spec (.of k))) (g'.asOver (Spec (.of k)))).app N).hom)
         (F1.map ((Etale.baseChangeUnitStep
           (ModuleCat.{u + 1} (ULift.{u + 1} B)) f g f').app L))
         (F1.map ((Etale.baseChangeSquareStep
           (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).hom.app L))
         (F1.map ((Etale.baseChangeCounitStep
           (ModuleCat.{u + 1} (ULift.{u + 1} B)) f f' g').app L))
-        (((boundedConstructibleBaseChange
-          (Profinite.continuousMapRingObj B) ℓ k sq).app N).hom)
+        (((boundedConstructibleBaseChange (Profinite.continuousMapRingObj B) ℓ (sq.asOver (Spec (.of k)))).app N).hom)
         (F1.map ((Etale.baseChange
           (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).app L)))
 

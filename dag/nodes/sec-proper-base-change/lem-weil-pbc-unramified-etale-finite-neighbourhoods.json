@@ -133,8 +133,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.UnramifiedEtaleFiniteNeighbourhoods",
-  "file": "lean/Sheaf/AlgebraicGeometry/UnramifiedEtaleFiniteNeighbourhoods.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.UnramifiedEtaleFiniteNeighbourhoods",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/UnramifiedEtaleFiniteNeighbourhoods.lean",
   "declaration": "AlgebraicGeometry.exists_etale_finite_unramified_neighbourhoods",
   "statement": "theorem exists_etale_finite_unramified_neighbourhoods\n    {X S : Scheme.{u}} (f : X ⟶ S) (s : S)\n    (n : ℕ) (x : Fin n → X) (hx : ∀ i, f.base (x i) = s)\n    (hunramified : ∀ i, ∃ O : X.Opens, x i ∈ O ∧\n      LocallyOfFiniteType (O.ι ≫ f) ∧ IsOpenImmersion (pullback.diagonal (O.ι ≫ f))) :\n    ∃ (U : Scheme.{u}) (g : U ⟶ S) (u : U), Etale g ∧ g.base u = s ∧\n      ∃ (m : Fin n → ℕ) (V : (Σ i : Fin n, Fin (m i)) → (pullback f g).Opens)\n        (v : (a : Σ i : Fin n, Fin (m i)) → (V a).toScheme),\n        (∀ a, IsFinite ((V a).ι ≫ pullback.snd f g) ∧\n          (LocallyOfFiniteType ((V a).ι ≫ pullback.snd f g) ∧\n            IsOpenImmersion (pullback.diagonal ((V a).ι ≫ pullback.snd f g))) ∧\n          ((V a).ι ≫ pullback.snd f g) (v a) = u ∧\n          (∀ w : (V a).toScheme,\n            ((V a).ι ≫ pullback.snd f g) w = u → w = v a) ∧\n          (letI : Algebra (U.residueField (((V a).ι ≫ pullback.snd f g) (v a)))\n              ((V a).toScheme.residueField (v a)) :=\n            (((V a).ι ≫ pullback.snd f g).residueFieldMap (v a)).hom.toAlgebra\n           IsPurelyInseparable\n             (U.residueField (((V a).ι ≫ pullback.snd f g) (v a)))\n             ((V a).toScheme.residueField (v a)))) ∧\n        Function.Injective (fun a ↦ (V a).ι (v a)) ∧\n        (∀ (i : Fin n) (p : ↥(pullback f g)),\n          (pullback.snd f g).base p = u → (pullback.fst f g).base p = x i →\n            ∃ a, p = (V a).ι (v a))",
   "branch": "sheaf-dag",

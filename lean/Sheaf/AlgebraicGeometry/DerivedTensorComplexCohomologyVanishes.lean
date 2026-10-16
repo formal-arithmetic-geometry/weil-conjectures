@@ -37,7 +37,7 @@ def schemeDerivedTensorComplexCohomologyVanishes (X : Scheme.{u})
     (E L : schemeDerivedCategory X) (i : ℤ) : Prop :=
   letI := SheafOfModules.monoidalCategory X.sheaf
   ∃ K N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,
-    CochainComplex.IsKFlat (R := X.sheaf) K ∧
+    CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) K ∧
       Nonempty (DerivedCategory.Q.obj K ≅ E) ∧
       Nonempty (DerivedCategory.Q.obj N ≅ L) ∧
       IsZero ((CochainComplex.mapBifunctor K N (curriedTensor _)).homology i)

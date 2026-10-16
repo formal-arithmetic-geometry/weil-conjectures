@@ -7,9 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.KilledSheafModuleLift
+import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass
-import Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 import Sheaf.AlgebraicGeometry.ConstructibleModuleClosedEffacement
 import Mathlib.CategoryTheory.Abelian.Basic
 

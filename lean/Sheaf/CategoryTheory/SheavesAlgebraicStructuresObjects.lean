@@ -5,14 +5,16 @@ Authors: SHEAF group F1
 -/
 module
 
+public import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresObjects
+
 public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 public import Mathlib.CategoryTheory.Sites.Whiskering
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Ring
 public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Ring.Limits
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresAbelian
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresRing
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRing
 
 /-!
 # Algebraic sheaves as internal algebraic objects
@@ -63,7 +65,7 @@ Proof:
    distributivity hold sectionwise if and only if they hold as sheaf-map equations.
    Ring homomorphisms preserve zero and negation as well as addition, multiplication
    and one (00YR, proof of 00YV, rings as sextuples). -/
-theorem sheaves_algebraicStructures_objects
+theorem sheaves_algebraicStructures_objects_with_finiteProducts
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) :
     Nonempty (HasFiniteProducts (Sheaf J (Type (max u v w)))) ∧
     (∀ (F G : Sheaf J (Type (max u v w))) (U : Cᵒᵖ),

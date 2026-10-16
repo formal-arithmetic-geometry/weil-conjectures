@@ -99,7 +99,7 @@ theorem exists_stalkDerivedExtensionComparison (z : X') :
       ∃ j : comparisonDerivedStalk X (g' z) ⋙ L ≅
           derivedPullback g' ⋙ comparisonDerivedStalk X' z,
         ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-          (hP : P.IsKFlat)
+          (hP : P.IsAcyclicTensorKFlat)
           (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))),
           ∃ hsP : IsIso (ε.app
               ((HomotopyCategory.quotient _ (.up ℤ)).obj (stalkComplex g' z P))),

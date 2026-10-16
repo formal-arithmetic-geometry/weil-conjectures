@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 import Mathlib.CategoryTheory.Sites.Limits
 import Sheaf.CategoryTheory.ColimitSystemArrowProductTransitions
-import Sheaf.CategoryTheory.ColimitSystemTransitionIdentityDefect
+import WeilConjectures.CategoryTheory.ColimitSystemTransitionIdentityDefect
 
 /-! # Transitions on an augmented product of direct images
 

@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.IsLimit
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.EtaleCohomologyContinuity
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.Sites.AffineLimitSheafReconstruction
 import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf

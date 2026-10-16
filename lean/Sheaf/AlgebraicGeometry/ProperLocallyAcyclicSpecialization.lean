@@ -12,14 +12,14 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
-import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
+import WeilConjectures.AlgebraicGeometry.CohomologyPullbackDerivedUnit
 import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.QcqsHigherImagesPrimeTorsion
 import Sheaf.Paper.StrictlyHenselianEtaleAcyclic
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
 import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance

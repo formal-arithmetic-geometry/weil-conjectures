@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.Submodule
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.Ideal.Height
-import Sheaf.RingTheory.AdjoinSingletonAssociatedContraction
+import WeilConjectures.RingTheory.AdjoinSingletonAssociatedContraction
 import Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimesHeight
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.Valuation.LocalSubring

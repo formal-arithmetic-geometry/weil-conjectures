@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.GabberQuotientLocalizations
 import Sheaf.AlgebraicGeometry.GabberQuotientPrincipalH1
-import Sheaf.AlgebraicGeometry.ConstantEtaleCohomologyIsoComparison
+import WeilConjectures.AlgebraicGeometry.ConstantEtaleCohomologyIsoComparison
 import Sheaf.Paper.GabberCriterion
 
 /-! # Gabber vanishing for absolutely algebraically closed normal domains

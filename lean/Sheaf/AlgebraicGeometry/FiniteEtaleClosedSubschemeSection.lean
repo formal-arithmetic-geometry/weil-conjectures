@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Sheaf.AlgebraicGeometry.FiniteClopenOpenCoverSection
+import WeilConjectures.AlgebraicGeometry.FiniteClopenOpenCoverSection
 import Sheaf.AlgebraicGeometry.FiniteEtaleClosedSubschemeSectionOpens
 
 /-!

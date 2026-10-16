@@ -64,7 +64,7 @@ private theorem mixedPullbackCounit_isIso {S T : Scheme.{u}} (g : T ⟶ S)
     [(derivedPullback g).IsLeftDerivedFunctor ε
       (HomotopyCategory.quasiIso
         (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (.up ℤ))]
-    (hC : CochainComplex.IsKFlat (R := S.sheaf) C) :
+    (hC : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) C) :
     IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj C)) := by
   classical
   let A := SheafOfModules.{u} (moduleRings S.toRingedSpace)
@@ -176,8 +176,8 @@ theorem exists_mixedAffineSections_pullback_unit_normalization
     (Classical.choose (Classical.choose_spec (Classical.choose_spec
       exists_derivedPullbackComposition.{u, w}))) g
   have : (tilde.functor Γ(S, ⊤)).Additive := ⟨by intros; exact tilde.map_add _ _⟩
-  have hC : CochainComplex.IsKFlat (R := S.sheaf) C := by
-    change CochainComplex.IsKFlat (R := S.sheaf)
+  have hC : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) C := by
+    change CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf)
       (((Scheme.Modules.restrictFunctor S.toSpecΓ).mapHomologicalComplex (.up ℤ)).obj
         (((tilde.functor Γ(S, ⊤)).mapHomologicalComplex (.up ℤ)).obj P))
     apply isKFlat_restrict S.toSpecΓ

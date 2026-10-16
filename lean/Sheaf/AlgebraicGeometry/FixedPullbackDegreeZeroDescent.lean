@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.AbelianPullbackGlobalSectionsComparison
 import Sheaf.AlgebraicGeometry.EtaleSetSectionLift
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 
 /-! # Descent of degree-zero classes of a fixed inverse-image sheaf
 Source: Stacks Project, Tag 09YQ, via Tags 0EYL, 04HR, 09YN, and 03S2. -/

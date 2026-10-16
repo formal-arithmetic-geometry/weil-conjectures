@@ -158,7 +158,7 @@ theorem schemeDerivedDirectImage_preserves_QCoh_of_isGE
       (fun T hT h₁ h₃ ↦ by
         have : T.X₁.IsQuasicoherent := h₁
         have : T.X₃.IsQuasicoherent := h₃
-        exact Scheme.Modules.isQuasicoherent_of_shortExact T hT)
+        exact Scheme.Modules.isQuasicoherent_of_shortExact (S := T) hT)
       (FH n) (max 0 (n - a + 1)).toNat (hFHfull n 0 (by omega))
     · apply hFHzero
       omega

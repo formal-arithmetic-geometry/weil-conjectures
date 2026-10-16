@@ -14,7 +14,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
 import Mathlib.CategoryTheory.Sites.Precoverage
 import Sheaf.AlgebraicGeometry.UniversallyClosedOfFpqcCover
 import Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFiniteTypeOfFpqcCover
-import Sheaf.AlgebraicGeometry.OverPullbackDiagonalClosedImmersion
+import WeilConjectures.AlgebraicGeometry.OverPullbackDiagonalClosedImmersion
 import Sheaf.AlgebraicGeometry.FpqcClosedImmersionDescent
 
 /-!

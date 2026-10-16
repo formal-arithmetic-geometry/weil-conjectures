@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import Mathlib.CategoryTheory.Filtered.Basic
 import Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
-import Sheaf.AlgebraicGeometry.EtaleFreeSheafDerivedSections
+import WeilConjectures.AlgebraicGeometry.EtaleFreeSheafDerivedSections
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
 
 /-!

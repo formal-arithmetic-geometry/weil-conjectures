@@ -5,8 +5,8 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FiberDegreeBound
-import Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange
+public import WeilConjectures.AlgebraicGeometry.FiberDegreeBound
+import WeilConjectures.AlgebraicGeometry.FiniteFiberDegreeBaseChange
 
 /-!
 # Testing fibre degree bounds on field-valued points

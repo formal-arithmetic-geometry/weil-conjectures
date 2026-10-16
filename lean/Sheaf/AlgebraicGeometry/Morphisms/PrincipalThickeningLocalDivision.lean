@@ -6,7 +6,7 @@ Authors: SHEAF group T4
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
-import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
+import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
 
 /-! # Local division in the kernel of a principal thickening
 

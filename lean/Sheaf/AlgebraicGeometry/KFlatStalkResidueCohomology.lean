@@ -58,7 +58,7 @@ theorem nonempty_kFlat_stalk_residueCohomology_linearEquiv
     [HasDerivedCategory.{w} (SheafOfModules.{u}
       (moduleRings (Spec (X.residueField x)).toRingedSpace))]
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
     (eP : DerivedCategory.Q.obj P ≅ E) (i : ℤ) :
     Nonempty (derivedFiberCohomology X E i x ≃ₗ[IsLocalRing.ResidueField
       (X.presheaf.stalk x)]

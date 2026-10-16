@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop

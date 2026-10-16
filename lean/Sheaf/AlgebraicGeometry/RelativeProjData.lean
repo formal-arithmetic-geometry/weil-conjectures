@@ -5,8 +5,8 @@ Authors: SHEAF group NA
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.GradedSheafStructures
-public import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebra
+public import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
+public import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebra
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 public import Mathlib.AlgebraicGeometry.RelativeGluing
 public import Mathlib.AlgebraicGeometry.Cover.Directed

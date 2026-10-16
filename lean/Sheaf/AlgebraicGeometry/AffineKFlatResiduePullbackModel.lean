@@ -144,7 +144,7 @@ theorem affine_kFlat_residuePullback_model (X : Scheme.{u})
     infer_instance
   let K := ((affinePerfectSheafification X U hU).mapHomologicalComplex (.up ℤ)).obj F
   let P := (T.mapHomologicalComplex (.up ℤ)).obj F
-  have hP : CochainComplex.IsKFlat (R := (Spec A).sheaf) P := by
+  have hP : CochainComplex.IsAcyclicTensorKFlat (R := (Spec A).sheaf) P := by
     apply isKFlat_tilde A F
     intro G hG
     have h := (HomotopyCategory.kFlat_iff_preserves_acyclic
@@ -160,7 +160,7 @@ theorem affine_kFlat_residuePullback_model (X : Scheme.{u})
   let θ : Modules.tensorPullback hU.isoSpec.hom ≅ R :=
     (Modules.nonempty_tensorPullbackAdjunction _).some.leftAdjointUniq
       (Modules.restrictAdjunction _)
-  have hRP : CochainComplex.IsKFlat (R := U.toScheme.sheaf)
+  have hRP : CochainComplex.IsAcyclicTensorKFlat (R := U.toScheme.sheaf)
       ((R.mapHomologicalComplex (.up ℤ)).obj P) := by
     have h := CochainComplex.isKFlat_pullback hU.isoSpec.hom.base U.toScheme.sheaf
       (Spec A).sheaf ⟨hU.isoSpec.hom.c⟩ P hP

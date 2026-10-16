@@ -46,8 +46,8 @@ provides the termwise complex functor.
 theorem tensorPullback_quasiIso_of_isKFlat {T S : Scheme.{u}} (g : T ⟶ S)
     [(Scheme.Modules.tensorPullback g).Additive]
     {P Q : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ}
-    (s : P ⟶ Q) (hP : CochainComplex.IsKFlat (R := S.sheaf) P)
-    (hQ : CochainComplex.IsKFlat (R := S.sheaf) Q) (hs : QuasiIso s) :
+    (s : P ⟶ Q) (hP : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P)
+    (hQ : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) Q) (hs : QuasiIso s) :
     QuasiIso (((Scheme.Modules.tensorPullback g).mapHomologicalComplex
       (ComplexShape.up ℤ)).map s) := by
   obtain ⟨I, hI, hImap, hIa, _, _, hIr⟩ := exists_inverseImage_exact_kFlat g

@@ -12,8 +12,8 @@ import Sheaf.AlgebraicGeometry.FormalSystemsPullback
 import Sheaf.AlgebraicGeometry.FormalModuleSupportConstant
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
+import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import Sheaf.AlgebraicGeometry.FormalSystemClosedSupportPushforward
 
 /-! # Extension of pulled formal systems across a proper compactification

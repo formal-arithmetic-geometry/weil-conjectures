@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.ConstructibleSheaf.Refinement
 import WeilConjectures.PointCount
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
-import Sheaf.Paper.WeilPbcNormalizationInResidueFieldExtension
+import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 import Sheaf.AlgebraicGeometry.NormalConstantGenericUnit
 
 /-! # General-ring integral stalk detectors

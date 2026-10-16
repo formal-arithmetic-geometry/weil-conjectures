@@ -14,8 +14,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.GabberConstantH1Vanishing
-import Sheaf.AlgebraicGeometry.GabberPrincipalOpenClosedPresentation
-import Sheaf.AlgebraicGeometry.ConstantEtaleCohomologyIsoComparison
+import WeilConjectures.AlgebraicGeometry.GabberPrincipalOpenClosedPresentation
+import WeilConjectures.AlgebraicGeometry.ConstantEtaleCohomologyIsoComparison
 import WeilConjectures.ConstructibleSheaf.Defs
 
 /-! # Degree-one vanishing on principal opens of a quotient

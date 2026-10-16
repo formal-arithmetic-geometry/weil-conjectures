@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
-import Sheaf.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
+import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!

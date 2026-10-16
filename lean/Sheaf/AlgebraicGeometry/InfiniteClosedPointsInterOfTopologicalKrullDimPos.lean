@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.ClosedPointOfAffineOpen
 import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.RingTheory.InfiniteSetOfIsMaximalOfRingKrullDimPos
 
 /-!

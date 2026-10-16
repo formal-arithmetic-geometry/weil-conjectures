@@ -11,9 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.AmpleSeparated
-import Sheaf.AlgebraicGeometry.AmpleFinitePowerCover
+import WeilConjectures.AlgebraicGeometry.AmpleFinitePowerCover
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfAmple
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceFiniteIndexIso
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceFiniteIndexIso
 
 /-! # An ample module gives an immersion into projective space over an affine base
 

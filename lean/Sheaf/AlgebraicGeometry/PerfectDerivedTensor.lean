@@ -174,8 +174,8 @@ theorem perfect_derivedTensor (X : Scheme.{uT})
     (K L : schemeDerivedCategory X)
     (hK : Scheme.IsPerfect X K) (hL : Scheme.IsPerfect X L)
     (P N : CochainComplex (SheafOfModules.{uT} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-    (hN : CochainComplex.IsKFlat (R := X.sheaf) N)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+    (hN : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N)
     (eP : DerivedCategory.Q.obj P ≅ K) (eN : DerivedCategory.Q.obj N ≅ L) :
     Scheme.IsPerfect X (DerivedCategory.Q.obj
       (CochainComplex.mapBifunctor P N

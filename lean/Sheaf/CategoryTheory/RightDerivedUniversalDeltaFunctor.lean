@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.DeltaFunctor
-import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
+import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 
 /-!

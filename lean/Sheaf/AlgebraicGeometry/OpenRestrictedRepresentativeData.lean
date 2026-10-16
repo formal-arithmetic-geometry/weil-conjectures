@@ -32,11 +32,11 @@ theorem exists_open_restricted_representative_data
     {X T : Scheme.{u}} (U : X.Opens) (q : T ⟶ U.toScheme)
     (K : schemeDerivedCategory X)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) (eP : DerivedCategory.Q.obj P ≅ K) :
+    (hP : P.IsAcyclicTensorKFlat) (eP : DerivedCategory.Q.obj P ≅ K) :
     let Q : CochainComplex
         (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=
       ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P
-    ∃ (_hQ : Q.IsKFlat)
+    ∃ (_hQ : Q.IsAcyclicTensorKFlat)
       (_hcQ : IsIso ((counit q).app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))
       (_eQ : DerivedCategory.Q.obj Q ≅ (derivedPullback U.ι).obj K), True := by
   classical
@@ -44,7 +44,7 @@ theorem exists_open_restricted_representative_data
   let Q : CochainComplex
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=
       ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P
-  have hQ : Q.IsKFlat := isKFlat_restrict U.ι P hP
+  have hQ : Q.IsAcyclicTensorKFlat := isKFlat_restrict U.ι P hP
   have hcQ := counit_isIso_kFlat q Q hQ
   let T : SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) :=

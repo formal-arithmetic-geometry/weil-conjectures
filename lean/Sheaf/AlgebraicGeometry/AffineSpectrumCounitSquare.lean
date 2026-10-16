@@ -59,7 +59,7 @@ theorem affineSpectrum_counit_square
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X X' : Scheme.{u}} [IsAffine X] [IsAffine X'] (g' : X' ⟶ X)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat)
+    (hP : P.IsAcyclicTensorKFlat)
     (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
     (hcQ : IsIso ((counit (Spec.map g'.appTop)).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj

@@ -116,7 +116,7 @@ theorem globalTensorPullback_kflat
   let φ := CochainComplex.tensorPullbackRingMap (toGlobalSectionsPoint X).hom.base
     X.toRingedSpace.sheaf Y.sheaf ⟨(toGlobalSectionsPoint X).hom.c⟩
   have inverse_isKFlat (K : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ)
-      (hK : K.IsKFlat) : CochainComplex.IsKFlat ((I.mapHomologicalComplex (.up ℤ)).obj K) := by
+      (hK : K.IsAcyclicTensorKFlat) : CochainComplex.IsAcyclicTensorKFlat ((I.mapHomologicalComplex (.up ℤ)).obj K) := by
     obtain ⟨c⟩ := TopCat.Sheaf.exists_inverseImage_tensorPullback_iso
       (toGlobalSectionsPoint X).hom.base Y.sheaf K
     have ht := CochainComplex.isKFlat_pullback (toGlobalSectionsPoint X).hom.base
@@ -131,11 +131,11 @@ theorem globalTensorPullback_kflat
       (((curriedTensor _).map₂CochainComplex.obj F).mapIso c)
   have hp (K : CochainComplex A ℤ)
       (hK : (HomologicalComplex.quasiIso A (.up ℤ)).kFlat K) :
-      CochainComplex.IsKFlat (R := X.toRingedSpace.sheaf)
+      CochainComplex.IsAcyclicTensorKFlat (R := X.toRingedSpace.sheaf)
         ((P.mapHomologicalComplex (.up ℤ)).obj K) := by
     let K' : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ :=
       (e.inverse.mapHomologicalComplex (.up ℤ)).obj K
-    have hK' : K'.IsKFlat := RingedSpace.pointInverseEvaluation_isKFlat Y e he K hK
+    have hK' : K'.IsAcyclicTensorKFlat := RingedSpace.pointInverseEvaluation_isKFlat Y e he K hK
     let c : (P.mapHomologicalComplex (.up ℤ)).obj K ≅
         CochainComplex.tensorPullbackComplex (toGlobalSectionsPoint X).hom.base
           X.toRingedSpace.sheaf Y.sheaf ⟨(toGlobalSectionsPoint X).hom.c⟩ K' :=

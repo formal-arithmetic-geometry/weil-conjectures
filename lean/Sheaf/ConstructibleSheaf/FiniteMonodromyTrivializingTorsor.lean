@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import Sheaf.Paper.LisseModuleSheaves
 import Sheaf.ConstructibleSheaf.FiniteSetMonodromyTorsor
 import Sheaf.ConstructibleSheaf.ModuleConstantOfSetPullback

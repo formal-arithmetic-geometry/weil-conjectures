@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 import all Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
-import all Sheaf.AlgebraicGeometry.UnderivedGlobalGermExchange
+import all WeilConjectures.AlgebraicGeometry.UnderivedGlobalGermExchange
 
 /-! # Exchange on pointed representatives
 

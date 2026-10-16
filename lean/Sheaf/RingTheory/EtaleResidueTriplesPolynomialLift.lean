@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
+public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.FieldTheory.IsSepClosed
 

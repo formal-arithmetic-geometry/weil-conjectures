@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.Ring.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.RingTheory.FiniteType
-import Sheaf.Paper.DirectedColimitBaseChangeElementwise
+import WeilConjectures.AlgebraicGeometry.DirectedColimitBaseChangeElementwise
 
 /-!
 # Descent of surjectivity along a directed colimit of rings

@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import Sheaf.AlgebraicGeometry.ConstantExtensionCokernelPresentation
-import Sheaf.AlgebraicGeometry.ConstantEtaleSheafShortExact
+import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
 import Sheaf.AlgebraicGeometry.EtaleShortExactLocalLift
 import WeilConjectures.ConstructibleSheaf.Biproduct
 

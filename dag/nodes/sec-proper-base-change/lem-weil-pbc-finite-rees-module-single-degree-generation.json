@@ -96,8 +96,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.FiniteReesModuleGeneration",
-  "file": "lean/Sheaf/Algebra/FiniteReesModuleGeneration.lean",
+  "module": "WeilConjectures.Algebra.FiniteReesModuleGeneration",
+  "file": "lean/WeilConjectures/Algebra/FiniteReesModuleGeneration.lean",
   "declaration": "AlgebraicGeometry.finite_rees_module_single_degree_generation",
   "statement": "theorem finite_rees_module_single_degree_generation\n    (A : Type v) [CommRing A] (I : Ideal A)\n    (M : ℕ → Type v) [∀ n, AddCommGroup (M n)] [∀ n, Module A (M n)]\n    (L : ∀ (k n : ℕ) (a : A), a ∈ I ^ k → M n →ₗ[A] M (n + k))\n    (hzero : ∀ (n : ℕ) (a : A) (ha : a ∈ I ^ 0) (x : M n),\n      L 0 n a ha x = a • x)\n    (mod : Module (reesAlgebra I) (⨁ n, M n))\n    (hfin : @Module.Finite (reesAlgebra I) (⨁ n, M n) _ _ mod)\n    (hact : ∀ (b : reesAlgebra I) (x : ⨁ n, M n),\n      @SMul.smul _ _ mod.toSMul b x =\n        ∑ k ∈ b.val.support, ∑ n ∈ x.support,\n          DirectSum.of M (n + k) (L k n (b.val.coeff k) (b.property k) (x n))) :\n    ∃ c0 : ℕ, ∀ c : ℕ, c0 ≤ c → ∀ k : ℕ,\n      Submodule.span A (Set.range (fun p : (↥(I ^ k)) × M c ↦ L k c p.1 p.1.property p.2)) =\n        (⊤ : Submodule A (M (c + k)))",
   "branch": "sheaf-dag",

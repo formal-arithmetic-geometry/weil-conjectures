@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Sheaf.RingTheory.CoverModuleExact
-import Sheaf.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
+import WeilConjectures.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
 import Mathlib.RingTheory.Finiteness.Ideal
 import Mathlib.LinearAlgebra.TensorProduct.Pi
 

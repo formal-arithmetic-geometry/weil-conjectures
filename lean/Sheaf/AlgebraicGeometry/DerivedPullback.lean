@@ -98,7 +98,7 @@ theorem exists_derivedPullback {T S : Scheme.{u}} (g : T ⟶ S)
                 (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (ComplexShape.up ℤ)) ∧
             (∃ (_ : L.CommShift ℤ), L.IsTriangulated) ∧
             ∀ P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ,
-              CochainComplex.IsKFlat (R := S.sheaf) P →
+              CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P →
                 IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres⟩ :=
     exists_inverseImage_exact_kFlat g
@@ -118,7 +118,7 @@ theorem exists_derivedPullback {T S : Scheme.{u}} (g : T ⟶ S)
     set_option synthInstance.maxSize 512 in infer_instance
   let C : Set (HomotopyCategory A (ComplexShape.up ℤ)) :=
     {X | ∃ P : CochainComplex A ℤ,
-      CochainComplex.IsKFlat (R := S.sheaf) P ∧ q.obj P = X}
+      CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P ∧ q.obj P = X}
   have hres : ∀ X : HomotopyCategory A (ComplexShape.up ℤ),
       ∃ (X' : HomotopyCategory A (ComplexShape.up ℤ)) (s : X' ⟶ X),
         X' ∈ C ∧ HomotopyCategory.quasiIso A (ComplexShape.up ℤ) s := by

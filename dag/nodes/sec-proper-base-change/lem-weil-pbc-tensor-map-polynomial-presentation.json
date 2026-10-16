@@ -86,8 +86,8 @@
   }
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.TensorMapPolynomialPresentation",
-  "file": "lean/Sheaf/AlgebraicGeometry/TensorMapPolynomialPresentation.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.TensorMapPolynomialPresentation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/TensorMapPolynomialPresentation.lean",
   "declaration": "Algebra.tensorMap_polynomialPresentation",
   "statement": "theorem tensorMap_polynomialPresentation\n    {A : Type u} [CommRing A]\n    {B C : Type v} [CommRing B] [CommRing C]\n    [Algebra A B] [Algebra A C] (φ : B →ₐ[A] C)\n    {n m : ℕ} :\n    letI : Algebra B C := φ.toRingHom.toAlgebra\n    ∀ (P : Presentation B C (Fin n) (Fin m))\n      (T : Type u) [CommRing T] [Algebra A T],\n      let ψ := TensorProduct.map (AlgHom.id A T) φ\n      letI : Algebra (T ⊗[A] B) (T ⊗[A] C) := ψ.toRingHom.toAlgebra\n      ∃ Q : Presentation (T ⊗[A] B) (T ⊗[A] C) (Fin n) (Fin m),\n        Q.relation = fun j ↦ MvPolynomial.map\n          (TensorProduct.includeRight.toRingHom : B →+* T ⊗[A] B) (P.relation j)",
   "branch": "sheaf-dag",

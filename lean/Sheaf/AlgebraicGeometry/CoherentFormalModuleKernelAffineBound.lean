@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.AdicKernelImageBound
+import WeilConjectures.RingTheory.AdicKernelImageBound
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineKernelImageComparison
 
 /-! # Affine Artin--Rees bound for formal kernel images

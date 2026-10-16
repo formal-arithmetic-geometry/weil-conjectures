@@ -57,7 +57,7 @@ theorem exists_diagram_isKFlatResolution
       ((sheafCompose T (forget₂ CommRingCat RingCat)).obj R)) ℤ) :
     ∃ (P : J ⥤ CochainComplex (ringedSiteModules.{u, u, u, u}
       ((sheafCompose T (forget₂ CommRingCat RingCat)).obj R)) ℤ) (p : P ⟶ M),
-      (∀ j : J, (P.obj j).IsKFlat) ∧
+      (∀ j : J, (P.obj j).IsAcyclicTensorKFlat) ∧
       (∀ (j : J) (q : ℤ), SheafOfModules.IsFlat ((P.obj j).X q)) ∧
       (∀ j : J, QuasiIso (p.app j)) ∧
       (∀ (j : J) (q : ℤ), Epi ((p.app j).f q)) := by
@@ -95,8 +95,8 @@ theorem diagram_pullback_quasiIso
     {P Q : J ⥤ CochainComplex (ringedSiteModules.{u, u, u, u}
       ((sheafCompose T (forget₂ CommRingCat RingCat)).obj R)) ℤ}
     (α : P ⟶ Q)
-    (hP : ∀ j : J, (P.obj j).IsKFlat)
-    (hQ : ∀ j : J, (Q.obj j).IsKFlat)
+    (hP : ∀ j : J, (P.obj j).IsAcyclicTensorKFlat)
+    (hQ : ∀ j : J, (Q.obj j).IsAcyclicTensorKFlat)
     (hPf : ∀ (j : J) (q : ℤ), SheafOfModules.IsFlat ((P.obj j).X q))
     (hQf : ∀ (j : J) (q : ℤ), SheafOfModules.IsFlat ((Q.obj j).X q))
     (hα : ∀ j : J, QuasiIso (α.app j)) :

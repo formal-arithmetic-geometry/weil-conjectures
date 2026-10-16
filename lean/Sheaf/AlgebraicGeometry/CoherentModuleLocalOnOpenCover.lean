@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Restrict
-import Sheaf.AlgebraicGeometry.CoherentKernelConditionRestriction
-import Sheaf.AlgebraicGeometry.CoherentKernelConditionDescent
+import WeilConjectures.AlgebraicGeometry.CoherentKernelConditionRestriction
+import WeilConjectures.AlgebraicGeometry.CoherentKernelConditionDescent
 import Sheaf.AlgebraicGeometry.CoherentModuleFiniteTypeLocalCore
 
 /-! # Coherence of a module is local on an open covering

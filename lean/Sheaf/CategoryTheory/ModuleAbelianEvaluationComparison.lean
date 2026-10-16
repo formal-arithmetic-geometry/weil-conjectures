@@ -16,7 +16,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 
 import Sheaf.CategoryTheory.DeltaFunctor
 import Sheaf.CategoryTheory.SiteCechComplex
-import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
+import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechExact

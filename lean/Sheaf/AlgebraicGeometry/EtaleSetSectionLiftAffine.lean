@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleSetStageSheafColimit
-import Sheaf.AlgebraicGeometry.AffineSectionsColimit
+import WeilConjectures.AlgebraicGeometry.AffineSectionsColimit
 import Mathlib.CategoryTheory.Filtered.Final
 import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality

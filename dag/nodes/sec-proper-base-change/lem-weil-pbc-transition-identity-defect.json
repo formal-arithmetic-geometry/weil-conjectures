@@ -75,9 +75,9 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.ColimitSystemTransitionIdentityDefect",
+  "module": "WeilConjectures.CategoryTheory.ColimitSystemTransitionIdentityDefect",
   "declaration": "CategoryTheory.colimitSystem_transition_identity_defect",
-  "file": "lean/Sheaf/CategoryTheory/ColimitSystemTransitionIdentityDefect.lean",
+  "file": "lean/WeilConjectures/CategoryTheory/ColimitSystemTransitionIdentityDefect.lean",
   "statement": "theorem colimitSystem_transition_identity_defect\n    {J : Type u} [SmallCategory J]\n    (F : J ⥤ Cat.{u, u}) (T : ∀ j : J, GrothendieckTopology (F.obj j))\n    [∀ (j k : J) (a : j ⟶ k), (F.map a).toFunctor.IsContinuous (T j) (T k)]\n    (Fs : ∀ j : J, Sheaf (T j) AddCommGrpCat.{u})\n    (φ : ∀ {j k : J} (a : j ⟶ k),\n      Fs j ⟶ ((F.map a).toFunctor.sheafPushforwardContinuous\n        AddCommGrpCat.{u} (T j) (T k)).obj (Fs k))\n    (hφ : ∀ {j k l : J} (a : j ⟶ k) (b : k ⟶ l),\n      φ (a ≫ b) = φ a ≫\n        ((F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u}\n          (T j) (T k)).map (φ b) ≫\n        (Functor.sheafPushforwardContinuousComp'\n          (eqToIso (congrArg Cat.Hom.toFunctor (F.map_comp a b).symm))\n          AddCommGrpCat.{u} (T j) (T k) (T l)).hom.app (Fs l))\n    (A : ∀ j : J, Sheaf (T j) AddCommGrpCat.{u}) (ι : ∀ j, Fs j ⟶ A j) :\n    let R := fun {j k : J} (a : j ⟶ k) ↦\n      (F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (T j) (T k)\n    let E := fun j ↦ Functor.sheafPushforwardContinuousId'\n      (eqToIso (congrArg Cat.Hom.toFunctor (F.map_id j))) AddCommGrpCat.{u} (T j)\n    ∀ {j k : J} (a : j ⟶ k),\n      φ a ≫ (R a).map\n        ((𝟙 (Fs k) - (φ (𝟙 k) ≫ (E k).hom.app (Fs k) : Fs k ⟶ Fs k)) ≫ ι k) =\n          0",
   "branch": "sheaf-dag",
   "by": "F3",

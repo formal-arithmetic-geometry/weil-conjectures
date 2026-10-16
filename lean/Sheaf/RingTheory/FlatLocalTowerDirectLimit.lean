@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Colimit.DirectLimit
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
+import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
 import Mathlib.Algebra.Category.ModuleCat.Limits
 
 /-!

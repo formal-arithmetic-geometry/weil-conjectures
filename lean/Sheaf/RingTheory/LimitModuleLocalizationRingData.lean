@@ -7,10 +7,10 @@ module
 public import Sheaf.RingTheory.LimitModuleRingData
 import Sheaf.RingTheory.LocalizedPushoutTensor
 import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
-import Sheaf.Algebra.LimitFinitePresentation.Colimits
+import WeilConjectures.Algebra.LimitFinitePresentation.Colimits
 import Mathlib.RingTheory.RingHom.EssFiniteType
 import Mathlib.RingTheory.RingHom.FiniteType
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 import Mathlib.Algebra.Algebra.Shrink
 import Mathlib.RingTheory.Finiteness.Small
 /-!

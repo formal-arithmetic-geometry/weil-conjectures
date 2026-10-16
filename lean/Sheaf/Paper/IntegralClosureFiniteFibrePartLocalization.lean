@@ -9,8 +9,8 @@ public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.IsIso
-import Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreChooseG
-import Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreImageClopen
+import WeilConjectures.AlgebraicGeometry.IntegralClosureFiniteFibreChooseG
+import WeilConjectures.AlgebraicGeometry.IntegralClosureFiniteFibreImageClopen
 import Sheaf.RingTheory.FiniteQuotientComponentQuasiFinite
 import Mathlib.RingTheory.ZariskisMainTheorem
 

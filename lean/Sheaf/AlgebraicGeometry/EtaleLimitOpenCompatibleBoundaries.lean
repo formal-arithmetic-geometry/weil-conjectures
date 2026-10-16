@@ -5,8 +5,8 @@ Authors: SHEAF group J3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree
-public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyMaps
+public import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyMaps
 public import Mathlib.Algebra.Exact.Basic
 import Sheaf.AlgebraicGeometry.EtaleMayerVietorisCanonicalBoundaryExact
 import Sheaf.AlgebraicGeometry.EtaleMayerVietorisCanonicalBoundaryNaturality

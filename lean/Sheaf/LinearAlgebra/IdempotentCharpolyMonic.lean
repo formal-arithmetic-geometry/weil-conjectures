@@ -5,7 +5,7 @@ Authors: SHEAF group G2
 -/
 module
 
-public import Sheaf.LinearAlgebra.IdempotentCharpoly
+public import WeilConjectures.LinearAlgebra.IdempotentCharpoly
 public import Mathlib.RingTheory.Jacobson.Ideal
 import Sheaf.LinearAlgebra.IdempotentCharpolyLeadingCoeff
 

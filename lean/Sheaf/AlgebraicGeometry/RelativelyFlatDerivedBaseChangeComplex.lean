@@ -146,7 +146,7 @@ theorem relativelyFlat_derivedBaseChange_complex
     (hqc : ∀ i : ℤ, (G.X i).IsQuasicoherent)
     (hflat : ∀ i : ℤ, Scheme.Modules.IsFlatOver (G.X i) f)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
     (e : DerivedCategory.Q.obj P ≅ E)
     (α : E ⊗ DerivedCategory.Q.obj G ≅
       DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G

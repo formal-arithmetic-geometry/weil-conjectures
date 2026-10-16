@@ -48,7 +48,7 @@ structure RecordedPullbackData {X Y : Scheme.{u}} (f : X ⟶ Y) where
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))
   kFlat : letI := additive
     ∀ P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
-      CochainComplex.IsKFlat (R := Y.sheaf) P →
+      CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
         IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))
 
 /-- Project the complete original witness used to define `derivedPullback`.
@@ -153,7 +153,7 @@ theorem recordedDerivedPullbackCounit_universal {X Y : Scheme.{u}} (f : X ⟶ Y)
 Source: Stacks Project, Tag 06YJ (blueprint: lem-pc-recorded-pullback-composition). -/
 theorem recordedDerivedPullbackCounit_kFlat {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := Y.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P) :
     IsIso ((recordedDerivedPullbackCounit f).app
       ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
   let : (Scheme.Modules.tensorPullback f).Additive := by

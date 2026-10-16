@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.EtaleQcoherentCohomologyULift
 import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
 import Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology
 import Sheaf.AlgebraicGeometry.ZariskiDimensionBound
-import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-! # Degree-two vanishing for the infinitesimal units kernel on a curve
 

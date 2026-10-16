@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.RingTheory.AnalyticallyUnramified
+public import WeilConjectures.RingTheory.AnalyticallyUnramified
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.AdicCompletionNoetherian

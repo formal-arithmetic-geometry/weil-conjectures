@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.RingTheory.CohenRing
+public import WeilConjectures.RingTheory.CohenRing
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 import Sheaf.RingTheory.CohenRingModPowFormallySmooth
 import Mathlib.RingTheory.AdicCompletion.RingHom

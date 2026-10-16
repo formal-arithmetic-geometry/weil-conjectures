@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Extension.Cotangent.Basic
 public import Mathlib.RingTheory.Localization.Ideal
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.Data.Matrix.Mul
-import Sheaf.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
+import WeilConjectures.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
 import Mathlib.LinearAlgebra.Matrix.ToLin
 import Mathlib.Algebra.Module.LocalizedModule.Submodule
 import Mathlib.RingTheory.Localization.BaseChange

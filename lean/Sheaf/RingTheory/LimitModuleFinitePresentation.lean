@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.FinitePresentation
-import Sheaf.Algebra.LimitFinitePresentation
+import WeilConjectures.Algebra.LimitFinitePresentation
 import Sheaf.RingTheory.FinitePresentationModuleDiagram
 import Sheaf.RingTheory.ModuleBaseChangeAcrossPushout
 

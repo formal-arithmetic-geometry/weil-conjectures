@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
-import Sheaf.AlgebraicGeometry.AnnihilatorQuasicoherent
+import WeilConjectures.AlgebraicGeometry.AnnihilatorQuasicoherent
 import all Sheaf.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence
 import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 

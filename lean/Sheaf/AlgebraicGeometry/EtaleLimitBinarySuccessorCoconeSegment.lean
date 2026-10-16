@@ -7,10 +7,10 @@ module
 
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Exact.Basic
-public import Sheaf.AlgebraicGeometry.StageCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.StageCohomologyComparison
 public import Mathlib.CategoryTheory.Limits.Final
-import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree
-import Sheaf.AlgebraicGeometry.EtaleLimitOpenComparisonCertificateDegree
+import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree
+import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenComparisonCertificateDegree
 import Sheaf.AlgebraicGeometry.EtaleLimitOpenMayerVietorisMaps
 import Mathlib.CategoryTheory.Filtered.Final
 

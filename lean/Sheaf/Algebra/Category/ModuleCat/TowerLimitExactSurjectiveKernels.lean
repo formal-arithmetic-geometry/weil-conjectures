@@ -11,8 +11,8 @@ public import Mathlib.Algebra.Exact.Basic
 
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Sheaf.Algebra.Category.ModuleCat.TowerLimitInducedMaps
-import Sheaf.Algebra.Category.ModuleCat.TowerLimitExactCoordinateMaps
+import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitInducedMaps
+import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitExactCoordinateMaps
 
 /-!
 # Inverse limits of towers and exact sequences

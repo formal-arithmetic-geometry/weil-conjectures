@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleGenericReflection
-import Sheaf.AlgebraicGeometry.Curve.DiscreteSchemeModuleLocallyConstant
+import WeilConjectures.AlgebraicGeometry.Curve.DiscreteSchemeModuleLocallyConstant
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenFiniteComplement
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian

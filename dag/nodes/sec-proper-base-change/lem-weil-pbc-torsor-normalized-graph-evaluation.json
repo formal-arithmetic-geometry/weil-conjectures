@@ -121,8 +121,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.ConstructibleSheaf.TorsorNormalizedGraphEvaluation",
-  "file": "lean/Sheaf/ConstructibleSheaf/TorsorNormalizedGraphEvaluation.lean",
+  "module": "WeilConjectures.ConstructibleSheaf.TorsorNormalizedGraphEvaluation",
+  "file": "lean/WeilConjectures/ConstructibleSheaf/TorsorNormalizedGraphEvaluation.lean",
   "declaration": "AlgebraicGeometry.Scheme.GaloisCover.ordinaryGraphEvaluation_bijective",
   "statement": "theorem Scheme.GaloisCover.ordinaryGraphEvaluation_bijective\n    {V : Scheme.{u}} [ConnectedSpace V] (ℓ : ℕ) [Fact ℓ.Prime]\n    (P : Type u) [Group P] [Finite P]\n    (c : Scheme.GaloisCover (ULift.{u + 1} P) V) [ConnectedSpace c.P]\n    (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))\n    (A : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))\n    (h : Nonempty ((c.π)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj F ≅\n      (constantSheaf c.P.smallEtaleTopology\n        (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj A))\n    (β : ∀ T : V.Etaleᵒᵖ, F.obj.obj T →ₗ[ULift.{u + 1} (ZMod ℓ)]\n      LocallyConstant (c.sectionSpace T.unop) (F.obj.obj (Opposite.op c.sectionObject)))\n    (hβ : ∀ (T T' : V.Etaleᵒᵖ) (g : T ⟶ T') (s : F.obj.obj T)\n        (x : c.sectionSpace T'.unop),\n      β T' (F.obj.map g s) x = β T s (c.sectionRestriction g.unop x))\n    (hΔ : ∀ (s : F.obj.obj (Opposite.op c.sectionObject)) (y : c.P),\n      β (Opposite.op c.sectionObject) s\n        (pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) (by simp) y) = s) (W : V.Etaleᵒᵖ)\n    (f : W.unop ⟶ c.sectionObject) :\n    Function.Bijective (fun s : F.obj.obj W ↦\n      LocallyConstant.comap\n        (pullback.lift (f := W.unop.hom) (g := c.π) (𝟙 W.unop.left) f.left\n          (by simpa using (MorphismProperty.Over.w f).symm)).base.hom\n        (β W s))",
   "branch": "sheaf-dag",

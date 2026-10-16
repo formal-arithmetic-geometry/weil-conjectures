@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.ProperFinitePresentationClosedLimitEnvelope
+import WeilConjectures.AlgebraicGeometry.ProperFinitePresentationClosedLimitEnvelope
 
 /-! # Proper schemes as limits of proper finitely presented schemes
 

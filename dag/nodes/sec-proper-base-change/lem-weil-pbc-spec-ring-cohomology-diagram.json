@@ -96,8 +96,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SpecRingCohomologyDiagram",
-  "file": "lean/Sheaf/AlgebraicGeometry/SpecRingCohomologyDiagram.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SpecRingCohomologyDiagram",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SpecRingCohomologyDiagram.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_spec_ring_cohomology_diagram",
   "statement": "theorem exists_spec_ring_cohomology_diagram\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (T : Scheme.{u}) (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (v : ∀ i : I, Spec (R.obj i) ⟶ T)\n    (wv : ∀ (i j : I) (f : i ⟶ j), v j = Spec.map (R.map f) ≫ v i)\n    (vLimit : Spec c.pt ⟶ T) (wLimit : ∀ i : I, vLimit = Spec.map (c.ι.app i) ≫ v i)\n    (p : ℕ) :\n    ∃ (H : I ⥤ AddCommGrpCat.{u + 1})\n    (eH : ∀ i : I, H.obj i ≅\n      AddCommGrpCat.of (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (v i)).obj G) p)),\n    (∀ (i j : I) (f : i ⟶ j), H.map f =\n      (eH i).hom ≫ AddCommGrpCat.ofHom\n        (cohomologyMap (Spec.map (R.map f))\n          ((upperStar AddCommGrpCat.{u + 1} (v i)).obj G) p) ≫\n        AddCommGrpCat.ofHom (Sheaf.H.map\n          ((upperStarComp AddCommGrpCat.{u + 1} (Spec.map (R.map f)) (v i)\n            (v j) (wv i j f)).inv.app G) p) ≫ (eH j).inv) ∧\n    ∃ (B : Cocone H) (eB : B.pt ≅\n      AddCommGrpCat.of (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} vLimit).obj G) p)),\n    (∀ i : I, B.ι.app i ≫ eB.hom =\n      (eH i).hom ≫ AddCommGrpCat.ofHom\n        (cohomologyMap (Spec.map (c.ι.app i))\n          ((upperStar AddCommGrpCat.{u + 1} (v i)).obj G) p) ≫\n        AddCommGrpCat.ofHom (Sheaf.H.map\n          ((upperStarComp AddCommGrpCat.{u + 1} (Spec.map (c.ι.app i)) (v i)\n            vLimit (wLimit i)).inv.app G) p))",
   "branch": "sheaf-dag",

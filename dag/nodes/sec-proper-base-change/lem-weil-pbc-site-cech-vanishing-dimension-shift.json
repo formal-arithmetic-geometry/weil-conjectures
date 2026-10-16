@@ -111,8 +111,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.SiteCechVanishingStep",
-  "file": "lean/Sheaf/CategoryTheory/SiteCechVanishingStep.lean",
+  "module": "WeilConjectures.CategoryTheory.SiteCechVanishingStep",
+  "file": "lean/WeilConjectures/CategoryTheory/SiteCechVanishingStep.lean",
   "declaration": "CategoryTheory.Sheaf.siteCech_vanishing_dimension_shift",
   "statement": "theorem siteCech_vanishing_dimension_shift\n    {C : Type u} [SmallCategory C]\n    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]\n    [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    [HasSheafify J.toGrothendieck AddCommGrpCat.{u}]\n    [HasExt.{r} (Sheaf J.toGrothendieck AddCommGrpCat.{u})]\n    (B : Set C)\n    (Cov : ∀ (U : C) (T : Type u) (V : T → C), (∀ t, V t ⟶ U) → Prop)\n    (S : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U),\n      Cov U T V f → SiteCechComplex V f)\n    (F : Sheaf J.toGrothendieck AddCommGrpCat.{u})\n    (hcover : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U),\n      Cov U T V f → Presieve.ofArrows V f ∈ J U)\n    (hB : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U)\n      (h : Cov U T V f), U ∈ B ∧ (∀ t, V t ∈ B) ∧\n        ∀ (p : ℕ) (a : Fin (p + 1) → T), (S U T V f h).W p a ∈ B)\n    (hcofinal : ∀ (U : C), U ∈ B →\n      ∀ (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U),\n        Presieve.ofArrows V f ∈ J U →\n        ∃ (K : Type u) (W : K → C) (g : ∀ k, W k ⟶ U),\n          Cov U K W g ∧ ∀ k, ∃ (t : T) (a : W k ⟶ V t), a ≫ f t = g k)\n    (hcech : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U)\n      (h : Cov U T V f) (p : ℕ), 0 < p →\n        IsZero (((S U T V f h).cohomologyFunctor p).obj F.obj)) :\n    ∀ U, U ∈ B →\n      IsZero (H' F 1 U) ∧\n        ∀ p, 1 < p → IsZero (H' F (p - 1) U) → IsZero (H' F p U)",
   "branch": "sheaf-dag",

@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.RingTheory.FiniteType
 import Sheaf.AlgebraicGeometry.ProperLimitNoetherian
-import Sheaf.AlgebraicGeometry.AffineApproximationRingPresentation
-import Sheaf.AlgebraicGeometry.QuotientFibreLimitTransfer
+import WeilConjectures.AlgebraicGeometry.AffineApproximationRingPresentation
+import WeilConjectures.AlgebraicGeometry.QuotientFibreLimitTransfer
 
 /-!
 # Closed fibres of proper Noetherian approximations

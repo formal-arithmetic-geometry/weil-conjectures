@@ -10,7 +10,7 @@ public import Mathlib.FieldTheory.Perfect
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 import Sheaf.FieldTheory.CommonExtensionFields
-import Sheaf.FieldTheory.SeparableExtension
+import WeilConjectures.FieldTheory.SeparableExtension
 import Mathlib.FieldTheory.SeparablyGenerated
 import Mathlib.AlgebraicGeometry.FunctionField
 import Mathlib.RingTheory.TensorProduct.Basic

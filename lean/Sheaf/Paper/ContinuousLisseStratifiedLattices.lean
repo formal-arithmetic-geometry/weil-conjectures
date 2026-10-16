@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
+import all Sheaf.Paper.ContinuousLissePullbackSystem
+import all Sheaf.Paper.ContinuousLisseStratumDescent
+import all Sheaf.Paper.ContinuousLisseCoefficientDescent
 import Sheaf.Paper.ContinuousEtaleLocalLattices
 import Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent
 import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
@@ -50,44 +53,50 @@ private lemma locallyFree_constructible {X : Scheme.{u}}
       range_immersion := fun _ ↦ Set.range_id' }
   exact ⟨S, fun s ↦ locallyFree_lfp (locallyFree_map (S.immersion s) hP)⟩
 
-private structure PullbackSystem
-    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] where
-  integral : ∀ {X Y : Scheme.{u}}, (Y ⟶ X) →
-    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (integralCoeff ℓ E) X) ⥤
-    Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (integralCoeff ℓ E) Y)
-  rational : ∀ {X Y : Scheme.{u}}, (Y ⟶ X) →
-    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj E) X) ⥤
-    Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj E) Y)
-  rationalIso : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X),
-    rational f ≅ CondensedRing.upperStar (Profinite.continuousMapRingObj E) f
-  scalar : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X),
-    integral f ⋙ Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) Y) ≅
-      Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X) ⋙ rational f
-  comp : ∀ {X Y Z : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X),
-    rational (f ≫ g) ≅ rational g ⋙ rational f
-  integralFree : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
-    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (integralCoeff ℓ E) X)},
-    LocallyFree _ M → LocallyFree _ ((integral f).obj M)
-  rationalFree : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
-    {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj E) X)},
-    LocallyFree _ P → LocallyFree _ ((rational f).obj P)
+private theorem continuousLisse_stratified_lattices_of_system
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+    (D : PullbackSystem.{u} ℓ E)
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
+    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj E) X))
+    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
+      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj
+        (condensedRingObj (Profinite.continuousMapRingObj E) X))
+        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) :
+    ∃ S : Scheme.Stratification X, ∀ s : Fin S.n,
+      ∃ M : Mod (Sheaf (Scheme.ProEt.topology (S.domain s)) Ab.{u + 1})
+          (condensedRingObj (integralCoeff ℓ E) (S.domain s)),
+        ProEtale.IsConstructibleModuleObject
+          (condensedRingObj (integralCoeff ℓ E) (S.domain s)) M ∧
+        Nonempty ((Mod.extendScalars
+          (coefficientMap (integralScalarMap ℓ E) (S.domain s))).obj M ≅
+            (CondensedRing.upperStar (Profinite.continuousMapRingObj E)
+              (S.immersion s)).obj P) := by
+  obtain ⟨U, p, hp, hs, hc, hqs, M, hM, ⟨e⟩⟩ :=
+    continuousLisse_etale_lattice ℓ E X P hP
+  let : Etale p := hp
+  let : Surjective p := hs
+  let : CompactSpace U := hc
+  let : QuasiSeparatedSpace U := hqs
+  obtain ⟨T, _, hT⟩ := Scheme.exists_etale_stratified_finite p
+  let S : Scheme.Stratification X := T
+  refine ⟨S, fun s ↦ ?_⟩
+  let j := S.immersion s
+  let : IsImmersion j := S.isImmersion s
+  let V := Limits.pullback p j
+  let r : V ⟶ U := Limits.pullback.fst p j
+  let q : V ⟶ S.domain s := Limits.pullback.snd p j
+  let : IsFinite q := (hT s).1
+  let : Etale q := (hT s).2
+  let : Surjective q := inferInstanceAs (Surjective (Limits.pullback.snd p j))
+  let : TopologicalSpace.NoetherianSpace (S.domain s) :=
+    j.isEmbedding.isInducing.noetherianSpace
+  exact continuousLisse_coefficient_lattice_on_stratum ℓ E D
+    (X := X) (U := U) (V := V) (W := S.domain s) p j r q
+    (Limits.pullback.condition (f := p) (g := j)) P hP M hM e
 
-private noncomputable def canonicalPullbackSystem
-    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] :
-    PullbackSystem.{u} ℓ E where
-  integral := CondensedRing.upperStar (integralCoeff ℓ E)
-  rational := CondensedRing.upperStar (Profinite.continuousMapRingObj E)
-  rationalIso _ := Iso.refl _
-  scalar := pullIso (integralScalarMap ℓ E)
-  comp f g := upperStarComp (Profinite.continuousMapRingObj E) f g
-  integralFree := locallyFree_upperStar (integralCoeff ℓ E)
-  rationalFree := locallyFree_upperStar (Profinite.continuousMapRingObj E)
+
 
 /-- A locally finite free rational sheaf admits lisse integral lattices after a finite
 stratification. Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph.
@@ -125,56 +134,7 @@ theorem continuousLisse_stratified_lattices
           (coefficientMap (integralScalarMap ℓ E) (S.domain s))).obj M ≅
             (CondensedRing.upperStar (Profinite.continuousMapRingObj E)
               (S.immersion s)).obj P) := by
-  obtain ⟨D⟩ : Nonempty (PullbackSystem.{u} ℓ E) := ⟨canonicalPullbackSystem ℓ E⟩
-  obtain ⟨U, p, hp, hs, hc, hqs, M, hM, ⟨e⟩⟩ :=
-    continuousLisse_etale_lattice ℓ E X P hP
-  let : Etale p := hp
-  let : Surjective p := hs
-  let : CompactSpace U := hc
-  let : QuasiSeparatedSpace U := hqs
-  obtain ⟨T, _, hT⟩ := Scheme.exists_etale_stratified_finite p
-  let S : Scheme.Stratification X :=
-    { toStratification := T.toStratification
-      domain := T.domain
-      immersion := T.immersion
-      isImmersion := T.isImmersion
-      range_immersion := T.range_immersion }
-  refine ⟨S, fun s ↦ ?_⟩
-  let j := S.immersion s
-  let : IsImmersion j := S.isImmersion s
-  obtain ⟨V, r, q, w, hf, he, hs⟩ :
-      ∃ (V : Scheme.{u}) (r : V ⟶ U) (q : V ⟶ S.domain s),
-        r ≫ p = q ≫ j ∧ IsFinite q ∧ Etale q ∧ Surjective q :=
-    ⟨Limits.pullback p j, Limits.pullback.fst p j, Limits.pullback.snd p j,
-      Limits.pullback.condition, (hT s).1, (hT s).2, inferInstance⟩
-  let : IsFinite q := hf
-  let : Etale q := he
-  let : Surjective q := hs
-  let : TopologicalSpace.NoetherianSpace (S.domain s) :=
-    j.isEmbedding.isInducing.noetherianSpace
-  obtain ⟨P', hP', ⟨iP⟩⟩ : ∃ P' : Mod _
-      (condensedRingObj (Profinite.continuousMapRingObj E) (S.domain s)),
-      LocallyFree _ P' ∧ Nonempty
-        (P' ≅ (D.rational j).obj P) :=
-    ⟨_, D.rationalFree j hP, ⟨Iso.refl _⟩⟩
-  obtain ⟨M', hM', ⟨iM⟩⟩ : ∃ M' : Mod _
-      (condensedRingObj (integralCoeff ℓ E) V),
-      LocallyFree _ M' ∧ Nonempty
-        (M' ≅ (D.integral r).obj M) :=
-    ⟨_, D.integralFree r hM, ⟨Iso.refl _⟩⟩
-  have e' : (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) _)).obj M' ≅
-      (D.rational q).obj P' :=
-    (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) _)).mapIso iM ≪≫
-      (D.scalar r).app M ≪≫
-      (D.rational r).mapIso (e ≪≫ (D.rationalIso p).symm.app P) ≪≫
-      (D.comp r p).symm.app P ≪≫
-      eqToIso (congrArg
-        (fun f ↦ (D.rational f).obj P)
-        w) ≪≫
-      (D.comp q j).app P ≪≫
-      (D.rational q).mapIso iP.symm
-  obtain ⟨N, hN, eN⟩ := continuousLisse_finiteEtale_lattice ℓ E (S.domain s) P' hP'
-    q M' hM' ⟨e' ≪≫ (D.rationalIso q).app P'⟩
-  exact ⟨N, locallyFree_constructible hN, ⟨eN.some ≪≫ iP ≪≫ (D.rationalIso j).app P⟩⟩
+  exact continuousLisse_stratified_lattices_of_system ℓ E
+    (canonicalPullbackSystem ℓ E) X P hP
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -11,6 +11,8 @@ import Sheaf.Paper.GeometricFieldProEtaleEvaluation
 import WeilConjectures.CategoryTheory.Sites.MonObj
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import all Sheaf.Paper.InternalModuleAbEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+import Sheaf.Paper.InternalModuleAbEquivalence
 
 /-! # Evaluation of condensed-field modules over one geometric point
 

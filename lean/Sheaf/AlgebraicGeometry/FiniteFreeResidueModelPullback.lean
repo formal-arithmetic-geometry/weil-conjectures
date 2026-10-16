@@ -34,7 +34,7 @@ private theorem pullback_Q_iso {X Y : Scheme.{u}} (g : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := Y.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P) :
     Nonempty ((derivedPullback g).obj (DerivedCategory.Q.obj P) ≅
       DerivedCategory.Q.obj (((Modules.pullback g).mapHomologicalComplex (.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,

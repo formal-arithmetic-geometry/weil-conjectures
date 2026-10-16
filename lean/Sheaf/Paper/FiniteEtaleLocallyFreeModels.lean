@@ -8,7 +8,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.D
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 import Sheaf.Paper.ProfinitePointPullback
 import Sheaf.Paper.SplitProEtaleModuleProductMap
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
@@ -136,31 +136,14 @@ private theorem locFree_pullback
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (hM : LocFree Λ X M) : LocFree Λ Y ((upperStar Λ f).obj M) := by
-  obtain ⟨C, hC⟩ := hM
-  refine ⟨C.pullback₁ f, ?_⟩
-  intro s
-  have h := free_standard_refine Λ (C.f s) (pullback.snd f (C.f s)) M (hC s)
-  rw [← pullback.condition] at h
-  obtain ⟨n, ⟨e⟩⟩ := h
-  exact ⟨n, ⟨((upperStarComp Λ (pullback.fst f (C.f s)) f).app M).symm ≪≫ e⟩⟩
+  sorry
 
 private theorem locFree_product
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} {I : Type v} [Finite I]
     (M : I → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (hM : ∀ i, LocFree Λ X (M i)) : LocFree Λ X (∏ᶜ M) := by
-  classical
-  choose D hD using hM
-  obtain ⟨C, hC⟩ := finiteCommonCover D
-  refine ⟨C, ?_⟩
-  intro s
-  let H := upperStar Λ (C.f s)
-  have h (i : I) : Mod.IsFree (condensedRingObj Λ (C.X s)) (H.obj (M i)) := by
-    obtain ⟨j, f, hf⟩ := hC s i
-    have hh := free_standard_refine Λ ((D i).f j) f (M i) (hD i j)
-    rwa [hf] at hh
-  obtain ⟨n, ⟨e⟩⟩ := finiteProduct_free (fun i ↦ H.obj (M i)) h
-  exact ⟨n, ⟨PreservesProduct.iso H M ≪≫ e⟩⟩
+  sorry
 
 private theorem locFree_iso
     {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -178,12 +161,7 @@ private theorem locFree_of_cover
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (C : Scheme.Cover.{u} Scheme.proetalePrecoverage X)
     (h : ∀ s, LocFree Λ (C.X s) ((upperStar Λ (C.f s)).obj M)) : LocFree Λ X M := by
-  classical
-  choose D hD using h
-  refine ⟨C.bind D, ?_⟩
-  rintro ⟨s, t⟩
-  obtain ⟨n, ⟨e⟩⟩ := hD s t
-  exact ⟨n, ⟨(upperStarComp Λ ((D s).f t) (C.f s)).app M ≪≫ e⟩⟩
+  sorry
 
 private theorem diagonal_cokernel
     {C : Type*} [Category* C] [Abelian C] [HasFiniteBiproducts C] {J : Type u} [Finite J]

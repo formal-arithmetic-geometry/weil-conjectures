@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.MvPolynomial.Rename
 import Sheaf.RingTheory.PrincipalLocalizationAlgEquiv

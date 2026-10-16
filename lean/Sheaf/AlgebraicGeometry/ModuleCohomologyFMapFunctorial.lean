@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapComparison
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapCompData
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-! # Functoriality of cohomology maps induced by scheme maps
 
@@ -34,7 +34,7 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 
 private instance schemeEnoughInjectives (X : Scheme.{u}) : EnoughInjectives X.Modules :=
-  enoughInjectives X
+  enoughInjectives (X := X)
 
 private instance sectionsAdditive (X : Scheme.{u}) :
     (RingedSpace.globalSectionsFunctor X.toRingedSpace).Additive :=

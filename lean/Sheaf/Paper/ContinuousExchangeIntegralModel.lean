@@ -5,6 +5,8 @@ Authors: SHEAF group A2
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 
@@ -48,6 +50,8 @@ variable (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
 
+set_option maxHeartbeats 400000 in
+-- Elaborating both bundled coefficient exchange arrows needs the extra budget.
 /-- A continuous E exchange arrow is realized by scalar extension of an integral one.
 Source: Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2), with the exchange
 compatibility of `lem-weil-pbc-condensed-e-realization`
@@ -76,9 +80,8 @@ theorem continuousExchange_integral_model [IsProper f]
       (condensedRingObj (Profinite.continuousMapRingObj E) X)) :
     ∃ M : ProEtale.BoundedConstructible (condensedRingObj (integralCoeff ℓ E) X),
       Nonempty (Arrow.mk ((integralScalarExtension ℓ E Y').map
-          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq.toCommSq).app M).hom) ≅
-        Arrow.mk ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k
-          sq.toCommSq).app K).hom) := by
+          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app M).hom) ≅
+        Arrow.mk ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app K).hom) := by
   let : IsNoetherian (Spec (.of k)) := {}
   let : IsNoetherian X := AlgebraicGeometry.isNoetherian_of_locallyOfFiniteType
     (X ↘ Spec (.of k))
@@ -93,22 +96,20 @@ theorem continuousExchange_integral_model [IsProper f]
     ⟨(integralScalarExtension ℓ E X).obj M.obj, hM⟩
   let eN : N ≅ K := ObjectProperty.isoMk _ e
   obtain ⟨s, t, h⟩ := continuousIntegral_exchange_square ℓ E k sq M hM
-  let S := boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f ⋙
-    boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g
-  let T := boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g' ⋙
-    boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f'
+  let S := boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ (f.asOver (Spec (.of k))) ⋙
+    boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g.asOver (Spec (.of k)))
+  let T := boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k))) ⋙
+    boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))
   let ι := (ProEtale.boundedConstructible
     (condensedRingObj (Profinite.continuousMapRingObj E) Y')).ι
   refine ⟨M, ⟨Arrow.isoMk (s ≪≫ ι.mapIso (S.mapIso eN))
     (t ≪≫ ι.mapIso (T.mapIso eN)) ?_⟩⟩
   change (s.hom ≫ (S.map eN.hom).hom) ≫
-      ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k
-        sq.toCommSq).app K).hom =
+      ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app K).hom =
     (integralScalarExtension ℓ E Y').map
-      ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq.toCommSq).app M).hom ≫
+      ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app M).hom ≫
         (t.hom ≫ (T.map eN.hom).hom)
-  have hn := (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k
-    sq.toCommSq).naturality eN.hom
+  have hn := (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ (sq.toCommSq.asOver (Spec (.of k)))).naturality eN.hom
   have hn' := congrArg (fun a ↦ a.hom) hn
   change (S.map eN.hom).hom ≫ _ = _ ≫ (T.map eN.hom).hom at hn'
   rw [Category.assoc, hn', ← Category.assoc, h, Category.assoc]

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 import Sheaf.AlgebraicGeometry.DescendFinite
-import Sheaf.AlgebraicGeometry.DescendMonomorphism
+import WeilConjectures.AlgebraicGeometry.DescendMonomorphism
 
 /-!
 # Descent of closed immersions to a stage of an inverse limit

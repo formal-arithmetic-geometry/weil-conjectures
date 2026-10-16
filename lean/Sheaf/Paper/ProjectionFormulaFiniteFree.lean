@@ -102,8 +102,8 @@ theorem ringedProjectionFormula_finiteFree
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ))
     (PS : ObjectProperty (CochainComplex (SheafOfModules.{u}
       ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) ℤ))
-    (hPR : ∀ P, PR P ↔ P.IsKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)
-    (hPS : ∀ P, PS P ↔ P.IsKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)
+    (hPR : ∀ P, PR P ↔ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)
+    (hPS : ∀ P, PS P ↔ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)
     (TR : (DerivedCategory (SheafOfModules.{u}
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) × (DerivedCategory
       (SheafOfModules.{u}
@@ -147,7 +147,7 @@ theorem ringedProjectionFormula_finiteFree
       IsIso (derivedPushforwardComplexComparison V RF eta K))
     (computeL : ∀ P : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R)) ℤ,
-      P.IsKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
+      P.IsAcyclicTensorKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
         IsIso (derivedPullbackComplexComparison uStar LF epsilon P))
     (adjD : LF ⊣ RF)
     (canonicalAdj : ∀ K : CochainComplex (SheafOfModules.{u} ((sheafCompose JD (forget₂

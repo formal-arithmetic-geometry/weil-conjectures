@@ -6,7 +6,7 @@ Authors: SHEAF group E3
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Sheaf.AlgebraicGeometry.EtaleLimitAffineDegreeZeroKernel
 import Sheaf.AlgebraicGeometry.EtaleLimitAffineCorrectedLift
 

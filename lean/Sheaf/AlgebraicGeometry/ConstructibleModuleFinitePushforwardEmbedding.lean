@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 import Sheaf.AlgebraicGeometry.ConstructibleModuleNoetherianDescent
 import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardNoetherian

@@ -1,11 +1,11 @@
 module
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant
-import Sheaf.Paper.WeilPbcNormalizationInResidueFieldExtension
+import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.ConstructibleSheaf.FinitePushforward
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence

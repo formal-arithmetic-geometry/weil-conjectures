@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.RingTheory.Ideal.Quotient.Basic
 
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
-import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
+import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf

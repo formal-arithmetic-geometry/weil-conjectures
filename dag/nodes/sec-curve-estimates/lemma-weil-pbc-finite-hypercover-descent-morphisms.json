@@ -136,9 +136,9 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.Paper.FiniteHypercoverDescentParts",
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts",
   "declaration": "AlgebraicGeometry.finite_hypercover_descent_morphisms",
-  "file": "lean/Sheaf/Paper/FiniteHypercoverDescentParts.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteHypercoverDescentParts.lean",
   "statement": "theorem finite_hypercover_descent_morphisms\n    {I : Type w} [SmallCategory I] [IsFiltered I]\n    (D : Iᵒᵖ ⥤ Scheme.{w})\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    (c : Cone D) (hc : IsLimit c) :\n    ∀ (r : ℕ) (i : Iᵒᵖ)\n      (U V : TruncatedFiniteSplitEtaleHypercover (D.obj i) r)\n      (φ : U.diagram ⋙ Over.pullback (c.π.app i) ⟶\n        V.diagram ⋙ Over.pullback (c.π.app i)),\n      ∃ (j : Iᵒᵖ) (h : j ⟶ i)\n        (ψ : U.diagram ⋙ Over.pullback (D.map h) ⟶\n          V.diagram ⋙ Over.pullback (D.map h)),\n        ∀ Δ : (SimplexCategory.Truncated r)ᵒᵖ,\n          (Over.pullback (c.π.app j)).map (ψ.app Δ) ≫\n              (((Over.pullbackComp (c.π.app j) (D.map h)).symm ≪≫\n                eqToIso (congrArg (fun f : c.pt ⟶ D.obj i ↦ Over.pullback f)\n                  (c.w h))).app (V.diagram.obj Δ)).hom =\n            (((Over.pullbackComp (c.π.app j) (D.map h)).symm ≪≫\n              eqToIso (congrArg (fun f : c.pt ⟶ D.obj i ↦ Over.pullback f)\n                (c.w h))).app (U.diagram.obj Δ)).hom ≫ φ.app Δ",
   "branch": "sheaf-dag",
   "by": "T1",

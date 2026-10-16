@@ -90,8 +90,8 @@
  "unit": "sk-def-exchange",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.CartesianScalarDistributivityTransport",
-  "file": "lean/Sheaf/CategoryTheory/CartesianScalarDistributivityTransport.lean",
+  "module": "WeilConjectures.CategoryTheory.CartesianScalarDistributivityTransport",
+  "file": "lean/WeilConjectures/CategoryTheory/CartesianScalarDistributivityTransport.lean",
   "declaration": "CategoryTheory.cartesianScalarDistributivityTransport",
   "statement": "theorem cartesianScalarDistributivityTransport {C : Type u} [Category.{v} C] {D : Type u} [Category.{v} D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (L : Sheaf J (Type u) ⥤ Sheaf K (Type u)) [PreservesFiniteLimits L] (X Y : Sheaf J (Type u)) (X' Y' : Sheaf K (Type u)) (ex : X' ≅ L.obj X) (ey : Y' ≅ L.obj Y) (axV : X ⊗ X ⟶ X) (ayV : Y ⊗ Y ⟶ Y) (ax : X' ⊗ X' ⟶ X') (ay : Y' ⊗ Y' ⟶ Y') (muV : X ⨯ Y ⟶ Y) : let eV := fun (P Q : Sheaf J (Type u)) ↦ (limit.isLimit (pair P Q)).conePointUniqueUpToIso (CartesianMonoidalCategory.tensorProductIsBinaryProduct P Q) let eU := fun (P Q : Sheaf K (Type u)) ↦ (limit.isLimit (pair P Q)).conePointUniqueUpToIso (CartesianMonoidalCategory.tensorProductIsBinaryProduct P Q) let cx := (eU X' X').inv ≫ prod.map ex.hom ex.hom ≫ inv (prodComparison L X X) ≫ L.map (eV X X).hom let cy := (eU Y' Y').inv ≫ prod.map ey.hom ey.hom ≫ inv (prodComparison L Y Y) ≫ L.map (eV Y Y).hom let nuV := (eV X Y).inv ≫ muV let nu := (eU X' Y').inv ≫ prod.map ex.hom ey.hom ≫ inv (prodComparison L X Y) ≫ L.map muV ≫ ey.inv cx ≫ L.map axV ≫ ex.inv = ax → cy ≫ L.map ayV ≫ ey.inv = ay → (∀ (W : Cᵒᵖ) (r s : X.obj.obj W) (x : Y.obj.obj W), nuV.hom.app W (axV.hom.app W (r, s), x) = ayV.hom.app W (nuV.hom.app W (r, x), nuV.hom.app W (s, x))) → ∀ (W : Dᵒᵖ) (r s : X'.obj.obj W) (x : Y'.obj.obj W), nu.hom.app W (ax.hom.app W (r, s), x) = ay.hom.app W (nu.hom.app W (r, x), nu.hom.app W (s, x))",
   "branch": "sheaf-dag",

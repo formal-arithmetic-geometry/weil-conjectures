@@ -2,8 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.Paper.ObjectCohomologyPresheafResolution
-import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import WeilConjectures.AlgebraicGeometry.ObjectCohomologyPresheafResolution
+import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift

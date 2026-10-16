@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.PopescuLiftPresentation
 public import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.AnnihilatorElementFlatBaseChange
+import WeilConjectures.RingTheory.AnnihilatorElementFlatBaseChange
 import Sheaf.RingTheory.PopescuLiftChartComparison
 
 /-! # Flat local maps on the prepared Popescu charts

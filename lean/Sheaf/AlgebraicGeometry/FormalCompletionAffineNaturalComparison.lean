@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.RingTheory.AdicCompletion.Functoriality
 import Sheaf.AlgebraicGeometry.FormalCompletionAffineQuotients
-import Sheaf.Algebra.Module.AdicCompletionStableRanges
+import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesIsoEquivalence
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections

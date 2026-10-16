@@ -1,5 +1,7 @@
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
@@ -49,8 +51,7 @@ theorem isIso_boundedConstructibleBaseChange_continuousMap_app
     [FiniteDimensional ℚ_[ℓ] E] [IsProper f]
     (sq : IsPullback g' f' f g) :
     ∀ K : _,
-      IsIso ((boundedConstructibleBaseChange
-        (Profinite.continuousMapRingObj E) ℓ k sq.toCommSq).app K) := by
+      IsIso ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app K) := by
   intro K
   let : IsNoetherian (Spec (.of k)) := {}
   let : IsNoetherian Y' := AlgebraicGeometry.isNoetherian_of_locallyOfFiniteType
@@ -58,14 +59,12 @@ theorem isIso_boundedConstructibleBaseChange_continuousMap_app
   let : TopologicalSpace.NoetherianSpace Y' := by infer_instance
   obtain ⟨M, ⟨e⟩⟩ := continuousExchange_integral_model ℓ E k sq K
   have hred := integralExchange_reduction_isIso ℓ E k sq M
-  have hM : IsIso ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k
-      sq.toCommSq).app M) :=
+  have hM : IsIso ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app M) :=
     integralReduction_reflects_isIso ℓ E Y' _ hred
   have hscalar : IsIso ((integralScalarExtension ℓ E Y').map
-      ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq.toCommSq).app M).hom) :=
+      ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app M).hom) :=
     inferInstance
-  have hE : IsIso ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k
-      sq.toCommSq).app K).hom :=
+  have hE : IsIso ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app K).hom :=
     ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff e).1 hscalar
   exact (ObjectProperty.isIso_hom_iff _).mp hE
 
@@ -81,8 +80,7 @@ two-colimit presentation. This is strictly the componentwise part; assembly is s
 theorem isIso_boundedConstructibleBaseChange_padicAlgCl_app [IsProper f]
     (sq : IsPullback g' f' f g) :
     ∀ K : _,
-      IsIso ((boundedConstructibleBaseChange
-        (Profinite.padicAlgClRingObj.{u} ℓ) ℓ k sq.toCommSq).app K) := by
+      IsIso ((boundedConstructibleBaseChange (Profinite.padicAlgClRingObj.{u} ℓ) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app K) := by
   intro K
   let : IsNoetherian (Spec (.of k)) := {}
   let : IsNoetherian X := AlgebraicGeometry.isNoetherian_of_locallyOfFiniteType
@@ -103,15 +101,14 @@ theorem isIso_boundedConstructibleBaseChange_padicAlgCl_app [IsProper f]
   have htarget : IsIso (constructibleToQbarTargetHom ℓ k E f' g' K₀) :=
     (hcompat.2.2 K₀).2.1
   let : IsIso (constructibleToQbarSourceHom ℓ k E f g K₀ ≫
-      (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ k sq.toCommSq).app
+      (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app
         ((AlgebraicGeometry.ProEtale.constructibleToPadicAlgCl X ℓ E).obj K₀)) := by
     rw [(hcompat.2.2 K₀).2.2]
     infer_instance
-  have hcomp : IsIso ((boundedConstructibleBaseChange
-      (Profinite.padicAlgClRingObj ℓ) ℓ k sq.toCommSq).app
+  have hcomp : IsIso ((boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app
         ((AlgebraicGeometry.ProEtale.constructibleToPadicAlgCl X ℓ E).obj K₀)) :=
     IsIso.of_isIso_comp_left (constructibleToQbarSourceHom ℓ k E f g K₀) _
   exact (NatTrans.isIso_app_iff_of_iso
-    (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ k sq.toCommSq) e).1 hcomp
+    (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ (sq.toCommSq.asOver (Spec (.of k)))) e).1 hcomp
 
 end AlgebraicGeometry.ProEtale.CondensedRing

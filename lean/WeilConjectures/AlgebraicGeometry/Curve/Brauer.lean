@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 import Sheaf.AlgebraicGeometry.Curve.BrauerReductionInjection
 import Sheaf.AlgebraicGeometry.Curve.BrauerFiniteModificationInjection
-import Sheaf.AlgebraicGeometry.ReducedCurveNormalization
+import WeilConjectures.AlgebraicGeometry.ReducedCurveNormalization
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.EtaleAffineQcoherent
 import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf

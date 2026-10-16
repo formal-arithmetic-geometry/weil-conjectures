@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.OpenImmersion
-import Sheaf.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful

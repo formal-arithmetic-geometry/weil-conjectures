@@ -13,7 +13,7 @@ public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import WeilConjectures.ZetaSeries
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.FunctionField
 import WeilConjectures.PointCount

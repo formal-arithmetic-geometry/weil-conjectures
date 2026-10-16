@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
 import Sheaf.CategoryTheory.ExactCouple
 import Sheaf.CategoryTheory.ExactCoupleMorphism

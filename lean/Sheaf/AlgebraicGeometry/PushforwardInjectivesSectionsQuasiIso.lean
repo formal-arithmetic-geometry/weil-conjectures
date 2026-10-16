@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Homology.QuasiIso
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 
 /-! # Global sections of a resolution of the direct image of injectives
@@ -67,7 +67,7 @@ theorem quasiIso_globalSections_pushforward_injectives
       QuasiIso (((SheafOfModules.evaluation.{u} Y.ringCatSheaf (op (⊤ : Y.Opens)) ⋙
         forget₂ (ModuleCat.{u} (Y.ringCatSheaf.obj.obj (op (⊤ : Y.Opens))))
           AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℤ)).map φ) := by
-  let : EnoughInjectives Y.Modules := enoughInjectives Y
+  let : EnoughInjectives Y.Modules := enoughInjectives (X := Y)
   let F := SheafOfModules.forget Y.ringCatSheaf ⋙
     PresheafOfModules.evaluation Y.ringCatSheaf.obj (op (⊤ : Y.Opens))
   have : I.IsStrictlyGE 0 := (CochainComplex.isStrictlyGE_iff I 0).2 hI0

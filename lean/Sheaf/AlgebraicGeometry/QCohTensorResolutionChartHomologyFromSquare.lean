@@ -79,15 +79,6 @@ noncomputable def tensorResolutionChartHomologyIso_formula_naturality_of_square
             (tensorResolutionChartTensorIso N V MB NB sB PB).hom (-(n : ℤ)) := by
   dsimp only
   intro k l hl
-  let φ := Y.presheaf.map (homOfLE h).op
-  let R := Scheme.Modules.restrictFunctor (Spec.map φ)
-  let LA := ((tensorRight NA).mapHomologicalComplex (.down ℕ)).obj PA.complex
-  let LB := ((tensorRight NB).mapHomologicalComplex (.down ℕ)).obj PB.complex
-  let cA := tensorResolutionChartTensorIso N U MA NA sA PA
-  let cB := tensorResolutionChartTensorIso N V MB NB sB PB
-  let k' := tensorResolutionSemilinearComplexMap φ (.up ℤ)
-    (LA.extend ComplexShape.embeddingDownNat) (LB.extend ComplexShape.embeddingDownNat)
-    (tensorResolutionExtendSemilinear φ.hom ComplexShape.embeddingDownNat LA LB k)
   have h₁ := tensorResolutionChartTensor_homology_square
     Y N V U h MA NA MB NB sA sB PA PB n k l hl
   have h₂ := tensorResolutionChartExtendedHomology_naturality
@@ -96,6 +87,9 @@ noncomputable def tensorResolutionChartHomologyIso_formula_naturality_of_square
     tilde_preservesHomology (Γ(Y, U.1) : Type u)
   letI : (tilde.functor Γ(Y, V.1)).PreservesHomology :=
     tilde_preservesHomology (Γ(Y, V.1) : Type u)
-  exact tensorResolution_paste_homology _ _ _ _ _ _ _ _ _ h₁ h₂
+  erw [h₁]
+  simpa only [Category.assoc] using
+    congrArg (fun a ↦ a ≫ HomologicalComplex.homologyMap
+      (tensorResolutionChartTensorIso N V MB NB sB PB).hom (-(n : ℤ))) h₂
 
 end AlgebraicGeometry

@@ -24,8 +24,8 @@ private theorem inverseImage_isKFlat
     (R : Sheaf (Opens.grothendieckTopology Y) CommRingCat.{u})
     (K : CochainComplex (SheafOfModules.{u}
       ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
-    (hK : K.IsKFlat) :
-    CochainComplex.IsKFlat (((TopCat.Sheaf.inverseImageModuleFunctor f R).mapHomologicalComplex
+    (hK : K.IsAcyclicTensorKFlat) :
+    CochainComplex.IsAcyclicTensorKFlat (((TopCat.Sheaf.inverseImageModuleFunctor f R).mapHomologicalComplex
       (ComplexShape.up ℤ)).obj K) := by
   obtain ⟨e⟩ := TopCat.Sheaf.exists_inverseImage_tensorPullback_iso f R K
   have hk := CochainComplex.isKFlat_pullback f
@@ -174,7 +174,7 @@ theorem exists_tensorPullback_leftDerived
         (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y))
           (ComplexShape.up ℤ)) ∧
       (∀ K : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ,
-        K.IsKFlat → IsIso
+        K.IsAcyclicTensorKFlat → IsIso
           (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) := by
   let I := TopCat.Sheaf.inverseImageModuleFunctor g.hom.base Y.sheaf
   let φ := CochainComplex.tensorPullbackRingMap
@@ -225,7 +225,7 @@ theorem exists_tensorPullback_leftDerived
       simp only [Category.assoc, eqToHom_trans, eqToHom_trans_assoc]
       dsimp [hobj, I, TopCat.Sheaf.inverseImageModuleFunctor])
   have hinv : ∀ {K K' : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ}
-      (a : K ⟶ K'), K.IsKFlat → K'.IsKFlat → QuasiIso a →
+      (a : K ⟶ K'), K.IsAcyclicTensorKFlat → K'.IsAcyclicTensorKFlat → QuasiIso a →
         QuasiIso ((P.mapHomologicalComplex (ComplexShape.up ℤ)).map a) := by
     intro K K' a hK hK' ha
     have : QuasiIso a := ha
@@ -239,7 +239,7 @@ theorem exists_tensorPullback_leftDerived
   let S : Set (HomotopyCategory (SheafOfModules.{u} (moduleRings Y))
       (ComplexShape.up ℤ)) :=
     { Z | ∃ K : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ,
-        K.IsKFlat ∧ (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K = Z }
+        K.IsAcyclicTensorKFlat ∧ (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K = Z }
   have hres : ∀ Z : HomotopyCategory (SheafOfModules.{u} (moduleRings Y))
       (ComplexShape.up ℤ), ∃ (Z' : HomotopyCategory (SheafOfModules.{u} (moduleRings Y))
           (ComplexShape.up ℤ)) (s : Z' ⟶ Z),
@@ -304,7 +304,7 @@ theorem leftDerived_tensorPullback_absolute
       (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y))
         (ComplexShape.up ℤ)))
     (hK : ∀ K : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ,
-      K.IsKFlat → IsIso
+      K.IsAcyclicTensorKFlat → IsIso
         (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) :
     ∀ H : DerivedCategory (SheafOfModules.{u} (moduleRings X)) ⥤
         DerivedCategory (SheafOfModules.{u} (moduleRings Y)),
@@ -317,7 +317,7 @@ theorem leftDerived_tensorPullback_absolute
   let S : Set (HomotopyCategory (SheafOfModules.{u} (moduleRings Y))
       (ComplexShape.up ℤ)) :=
     { Z | ∃ K : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ,
-        K.IsKFlat ∧ (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K = Z }
+        K.IsAcyclicTensorKFlat ∧ (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K = Z }
   have hres : ∀ Z : HomotopyCategory (SheafOfModules.{u} (moduleRings Y))
       (ComplexShape.up ℤ), ∃ (Z' : HomotopyCategory (SheafOfModules.{u} (moduleRings Y))
           (ComplexShape.up ℤ)) (s : Z' ⟶ Z),

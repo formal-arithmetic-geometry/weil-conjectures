@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangeGeometricPoints
-import Sheaf.AlgebraicGeometry.GlobalSectionsStalkComparison
+import WeilConjectures.AlgebraicGeometry.GlobalSectionsStalkComparison
 import Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks
 
 /-!

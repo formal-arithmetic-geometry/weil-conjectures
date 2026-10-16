@@ -5,9 +5,6 @@ Authors: Edison Xie, Nailin Guan
 -/
 module
 
-public import Mathlib
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -47,9 +44,9 @@ is transported under `R` on the left and `R'` on the right (with the reassociati
 
 ## Main definitions
 
-- `CategoryTheory.Functor.squareTransport`: transport of a natural isomorphism under an
-  outer functor on each side, with its component lemmas `squareTransport_hom_app`,
-  `squareTransport_inv_app` and `squareTransport_app`.
+- `CategoryTheory.Functor.squareTransport` (in
+  `WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport`): transport of a natural
+  isomorphism under an outer functor on each side, with its component lemmas.
 - `AlgebraicGeometry.Etale.pullbackSquareComparison`: the pullback comparison `θ_sq`
   of a commutative square on the bounded below derived categories.
 - `AlgebraicGeometry.Etale.baseChangeUnitStep`, `Etale.baseChangeSquareStep`,

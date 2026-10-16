@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.AdicCompletion.Completeness
-import Sheaf.RingTheory.AssociatedGradedFiniteType
+import WeilConjectures.RingTheory.AssociatedGradedFiniteType
 import Sheaf.RingTheory.CompleteIdealFiniteOfAssociatedGraded
 
 /-!

@@ -119,8 +119,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.LimitFinitePresentation.Core",
-  "file": "lean/Sheaf/Algebra/LimitFinitePresentation/Core.lean",
+  "module": "WeilConjectures.Algebra.LimitFinitePresentation.Core",
+  "file": "lean/WeilConjectures/Algebra/LimitFinitePresentation/Core.lean",
   "declaration": "Algebra.exists_limit_finite_presentation_core",
   "statement": "theorem exists_limit_finite_presentation_core\n    {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S)\n    (hφ : RingHom.FinitePresentation φ) :\n    ∃ (Λ : Type u) (_hpo : Preorder Λ) (_hne : Nonempty Λ)\n      (_hdir : IsDirected Λ (fun a b => a ≤ b))\n      (Rfun : Λ ⥤ CommRingCat) (Sfun : Λ ⥤ CommRingCat)\n      (η : Rfun ⟶ Sfun) (cR : Cocone Rfun) (cS : Cocone Sfun),\n      cR.pt = CommRingCat.of R ∧ cS.pt = CommRingCat.of S ∧\n      (∀ l (hR : cR.pt = CommRingCat.of R) (hS : cS.pt = CommRingCat.of S),\n        η.app l ≫ cS.ι.app l = cR.ι.app l ≫\n          (eqToHom hR ≫ CommRingCat.ofHom φ ≫ eqToHom hS.symm)) ∧\n      (∀ l, RingHom.FiniteType (η.app l).hom) ∧\n      (∀ l, RingHom.FiniteType (algebraMap ℤ (Rfun.obj l))) ∧\n      (∀ l m (h : l ≤ m),\n        Nonempty (CategoryTheory.IsPushout (η.app l) (Rfun.map (homOfLE h))\n          (Sfun.map (homOfLE h)) (η.app m))) ∧\n      (∀ l (hR : cR.pt = CommRingCat.of R) (hS : cS.pt = CommRingCat.of S),\n        Nonempty (CategoryTheory.IsPushout (η.app l) (cR.ι.app l) (cS.ι.app l)\n          (eqToHom hR ≫ CommRingCat.ofHom φ ≫ eqToHom hS.symm))) ∧\n      Nonempty (IsColimit cR)",
   "branch": "sheaf-dag",

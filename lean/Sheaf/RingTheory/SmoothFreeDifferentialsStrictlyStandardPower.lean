@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Sheaf.RingTheory.StrictlyStandardElement
-import Sheaf.LinearAlgebra.Matrix.LeftInverseMinors
+import WeilConjectures.LinearAlgebra.Matrix.LeftInverseMinors
 import Sheaf.RingTheory.PresentationLocalizedConormalSplit
 import Sheaf.RingTheory.SmoothStableConormalBasis
 import Sheaf.RingTheory.LocalizedConormalBasisJacobian

@@ -10,8 +10,8 @@ public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 
-import Sheaf.AlgebraicGeometry.AnnihilatorSubsheaf
-import Sheaf.AlgebraicGeometry.AnnihilatorAffineCriterion
+import WeilConjectures.AlgebraicGeometry.AnnihilatorSubsheaf
+import WeilConjectures.AlgebraicGeometry.AnnihilatorAffineCriterion
 import Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
 import Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections

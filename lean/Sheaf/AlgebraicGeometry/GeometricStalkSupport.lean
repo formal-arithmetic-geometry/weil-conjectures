@@ -6,7 +6,7 @@ Authors: SHEAF worker J1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!

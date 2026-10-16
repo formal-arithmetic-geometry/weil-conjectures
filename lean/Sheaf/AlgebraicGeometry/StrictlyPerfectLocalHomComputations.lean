@@ -126,7 +126,7 @@ theorem strictlyPerfect_localHom_computations (X : Scheme.{u}) (U : X.Opens)
     (hstrict : Scheme.IsStrictlyPerfect X U P) :
     (∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),
       QuasiIso t → QuasiIso (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t)) ∧
-      (localEvaluationDual X U P).IsKFlat := by
+      (localEvaluationDual X U P).IsAcyclicTensorKFlat := by
   classical
   have hhom : ∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),
       QuasiIso t → QuasiIso (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t) := by

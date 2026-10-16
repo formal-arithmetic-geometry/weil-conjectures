@@ -21,9 +21,9 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import Mathlib.RingTheory.TensorProduct.Maps
 import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.AlgebraicGeometry.AffineChartBaseChangeIso
+import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal
-import Sheaf.FieldTheory.SeparableExtension
+import WeilConjectures.FieldTheory.SeparableExtension
 import Sheaf.RingTheory.RegularLocalSeparableResidueSmooth
 import Sheaf.RingTheory.SmoothAtPrimeFieldExtensionDescent
 

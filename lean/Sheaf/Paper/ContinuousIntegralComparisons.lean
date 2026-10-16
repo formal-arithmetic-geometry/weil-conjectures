@@ -5,6 +5,8 @@ Authors: SHEAF group A2
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import Sheaf.Paper.ContinuousIntegralScalarExact
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars
@@ -58,8 +60,8 @@ Bhatt--Scholze, Remark 6.8.15
 (blueprint: def-weil-pbc-continuous-integral-comparisons). -/
 noncomputable def integralConstructiblePullIso (K : integralConstructible ℓ E U) :
     (integralScalarConstructible ℓ E T).obj
-        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k h).obj K) ≅
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k h).obj
+        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (h.asOver (Spec (.of k)))).obj K) ≅
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))).obj
         ((integralScalarConstructible ℓ E U).obj K) :=
   ObjectProperty.isoMk _
     ((derivedPullIso (integralScalarMap ℓ E) h).app K.obj)
@@ -76,8 +78,8 @@ Bhatt--Scholze, Remark 6.8.15
 (blueprint: def-weil-pbc-continuous-integral-comparisons). -/
 noncomputable def integralConstructiblePushHom (K : integralConstructible ℓ E T) :
     (integralScalarConstructible ℓ E U).obj
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k h).obj K) ⟶
-      (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k h).obj
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (h.asOver (Spec (.of k)))).obj K) ⟶
+      (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))).obj
         ((integralScalarConstructible ℓ E T).obj K) :=
   ObjectProperty.homMk
     ((derivedPushHom (integralScalarMap ℓ E) h).app K.obj)
@@ -105,14 +107,14 @@ pullback of the push comparison for `f`. Source: Bhatt--Scholze, Remark 6.8.15
 (blueprint: def-weil-pbc-continuous-integral-comparisons). -/
 noncomputable def integralConstructibleSourceHom (K : integralConstructible ℓ E X) :
     (integralScalarConstructible ℓ E Y').obj
-        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k g).obj
-          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K)) ⟶
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).obj
-        ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f).obj
+        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
+          ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K)) ⟶
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g.asOver (Spec (.of k)))).obj
+        ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ (f.asOver (Spec (.of k)))).obj
           ((integralScalarConstructible ℓ E X).obj K)) :=
   integralConstructiblePullHom ℓ E k g
-      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f).obj K) ≫
-    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).map
+      ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f.asOver (Spec (.of k)))).obj K) ≫
+    (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g.asOver (Spec (.of k)))).map
       (integralConstructiblePushHom ℓ E k f K)
 
 /-- The specified target comparison `U_K`: first the push comparison for `f'`, then the
@@ -120,14 +122,14 @@ pushforward of the pull comparison for `g'`. Source: Bhatt--Scholze, Remark 6.8.
 (blueprint: def-weil-pbc-continuous-integral-comparisons). -/
 noncomputable def integralConstructibleTargetHom (K : integralConstructible ℓ E X) :
     (integralScalarConstructible ℓ E Y').obj
-        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ k f').obj
-          ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k g').obj K)) ⟶
-      (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f').obj
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g').obj
+        ((boundedConstructibleLowerStar (integralCoeff ℓ E) ℓ (f'.asOver (Spec (.of k)))).obj
+          ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj K)) ⟶
+      (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).obj
+        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).obj
           ((integralScalarConstructible ℓ E X).obj K)) :=
   integralConstructiblePushHom ℓ E k f'
-      ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k g').obj K) ≫
-    (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f').map
+      ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj K) ≫
+    (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ (f'.asOver (Spec (.of k)))).map
       (integralConstructiblePullHom ℓ E k g' K)
 
 end Square

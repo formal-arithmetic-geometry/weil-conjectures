@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import WeilConjectures.SixFunctors.Finite.BaseChange
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import Sheaf.AlgebraicGeometry.FiniteCoverKillsConstantCohomology
-import Sheaf.AlgebraicGeometry.EtaleFinitePushforwardUnitEdgeCompatibility
+import WeilConjectures.AlgebraicGeometry.EtaleFinitePushforwardUnitEdgeCompatibility
 import Mathlib.Algebra.Category.ModuleCat.Colimits
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
 

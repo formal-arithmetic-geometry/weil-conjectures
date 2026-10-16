@@ -53,6 +53,8 @@ private theorem qc_overEquiv_inverse (X : Scheme.{u}) (U : X.Opens)
     (U.overEquivalence.functor) _
     (U.sheafOfModulesEquivOverInverseUnit X.ringCatSheaf)
 
+set_option maxHeartbeats 400000 in
+-- Elaborating the canonical quasi-coherent extension instance needs additional reductions.
 /-- The middle of a short exact sequence has quasi-coherent cohomology when both ends do.
 
 Source: Stacks Project, Tag 0117, long exact sequence, and Tag 01IE, extension closure.
@@ -98,7 +100,7 @@ theorem localized_complex_qc_homology_extension
     intro T hT h₁ h₃
     let : T.X₁.IsQuasicoherent := h₁
     let : T.X₃.IsQuasicoherent := h₃
-    exact Scheme.Modules.isQuasicoherent_of_shortExact T hT⟩
+    exact Scheme.Modules.isQuasicoherent_of_shortExact (S := T) hT⟩
   have h₀ := (hS.homology_exact₁ (n - 1) n (by simp)).map F
   have hmid := (hS.homology_exact₂ n).map F
   have hlast := (hS.homology_exact₃ n (n + 1) (by simp)).map F

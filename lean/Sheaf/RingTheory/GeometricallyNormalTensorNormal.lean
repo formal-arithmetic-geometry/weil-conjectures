@@ -18,8 +18,8 @@ import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.RingTheory.FilteredColimitNormalRing
-import Sheaf.FieldTheory.GeometricallyReducedExtensionSeparable
-import Sheaf.FieldTheory.SeparableExtension
+import WeilConjectures.FieldTheory.GeometricallyReducedExtensionSeparable
+import WeilConjectures.FieldTheory.SeparableExtension
 import Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
 import Sheaf.RingTheory.SmoothNormalRing
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian

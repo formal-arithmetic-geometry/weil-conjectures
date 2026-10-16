@@ -103,28 +103,34 @@ private theorem exactCompUnit_fac
     G.mapDerivedCategoryFactorsh.inv.app ((H.mapHomotopyCategory (.up ℤ)).obj J) ≫
       G.mapDerivedCategory.map (H.rightDerivedFunctorUnit.app J ≫
         a.hom.app (DerivedCategory.Qh.obj J)) := by
-  have := Functor.isRightDerivedFunctor_rightDerivedFunctor_comp_of_exact H G
   have he : (H ⋙ G).rightDerivedFunctorUnit.app J ≫
       (Functor.rightDerivedUnique (H ⋙ G).rightDerivedFunctor
-        (H.rightDerivedFunctor ⋙ G.rightDerivedFunctor)
-        (H ⋙ G).rightDerivedFunctorUnit (Functor.rightDerivedFunctorCompUnit H G)
+        (H.rightDerivedFunctor ⋙ G.mapDerivedCategory)
+        (H ⋙ G).rightDerivedFunctorUnit (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit H G)
         (HomotopyCategory.quasiIso C (.up ℤ))).hom.app (DerivedCategory.Qh.obj J) =
-      (Functor.rightDerivedFunctorCompUnit H G).app J := by
+      (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit H G).app J := by
     simpa only [Functor.rightDerivedUnique, Functor.rightDerivedNatIso_hom,
       Iso.refl_hom, NatTrans.id_app, Category.id_comp] using
       Functor.rightDerivedNatTrans_app (H ⋙ G).rightDerivedFunctor
-        (H.rightDerivedFunctor ⋙ G.rightDerivedFunctor)
-        (H ⋙ G).rightDerivedFunctorUnit (Functor.rightDerivedFunctorCompUnit H G)
+        (H.rightDerivedFunctor ⋙ G.mapDerivedCategory)
+        (H ⋙ G).rightDerivedFunctorUnit (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit H G)
         (HomotopyCategory.quasiIso C (.up ℤ)) (𝟙 _) J
   simp only [Functor.rightDerivedFunctorCompMapDerivedCategoryIso, Iso.trans_hom,
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, ← Category.assoc]
   erw [he]
-  erw [normalizedCompUnit_app]
-  have hf := congrArg (fun n ↦ n.app ((H.mapHomotopyCategory (.up ℤ)).obj J))
-    G.rightDerivedFunctorIsoMapDerivedCategory_hom_fac
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hf
-  rw [← Category.assoc, hf, Category.assoc, ← Functor.map_comp]
+  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective J
+  simp only [Functor.rightDerivedFunctorCompMapDerivedCategoryUnit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id, Functor.comp_obj, Category.assoc]
+  have hc : (Functor.mapHomotopyCategoryCompIso (Iso.refl (H ⋙ G)) (.up ℤ)).inv.app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj K) = 𝟙 _ := by
+    change (HomotopyCategory.quotient E (.up ℤ)).map (𝟙 _) = 𝟙 _
+    exact CategoryTheory.Functor.map_id _ _
+  erw [hc, CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [← Functor.map_comp]
+
 
 private theorem homotopy_whiskerRight_app
     {C D E : Type*} [Category* C] [Category* D] [Category* E]

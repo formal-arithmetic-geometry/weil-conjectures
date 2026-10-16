@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Sheaf.RingTheory.FinitePresentationModuleBaseChangeDiagram
-import Sheaf.RingTheory.BaseChangeDiagramElementwise
+import WeilConjectures.RingTheory.BaseChangeDiagramElementwise
 
 /-! # Descent of a finite presentation along a directed ring diagram
 Source: Stacks Project, Algebra, Tags 00QX and 00R1, the presentation-matrix construction.

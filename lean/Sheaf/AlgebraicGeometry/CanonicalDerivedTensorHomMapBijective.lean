@@ -71,7 +71,7 @@ private theorem localizedHomEquiv_map (X : Scheme.{uCD})
 private theorem tensorModelMap_isIso (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]
     (P N : CochainComplex (SheafOfModules.{uCD} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) : IsIso (pullbackTensorModelMap X P N) := by
+    (hP : P.IsAcyclicTensorKFlat) : IsIso (pullbackTensorModelMap X P N) := by
   let C := SheafOfModules.{uCD} (moduleRings X.toRingedSpace)
   let := SheafOfModules.monoidalCategory X.sheaf
   let := SheafOfModules.symmetricCategory X.sheaf
@@ -166,7 +166,7 @@ theorem canonicalDerivedTensorHomMap_bijective (X : Scheme.{uCD})
   have : IsGrothendieckAbelian.{uCD} C := SheafOfModules.isGrothendieckAbelian _
   have : Limits.HasColimitsOfSize.{0, 0} C :=
     Limits.hasColimitsOfSizeShrink.{0, 0, uCD, uCD} C
-  have hrep (P L M : CochainComplex C ℤ) (hP : P.IsKFlat) (hL : L.IsKFlat) :
+  have hrep (P L M : CochainComplex C ℤ) (hP : P.IsAcyclicTensorKFlat) (hL : L.IsAcyclicTensorKFlat) :
       Function.Bijective (t (Q.obj P) (Q.obj L) (Q.obj M)) := by
     let q := HomotopyCategory.quotient C (.up ℤ)
     let I := (schemeHomKInjectiveResolution X).obj M

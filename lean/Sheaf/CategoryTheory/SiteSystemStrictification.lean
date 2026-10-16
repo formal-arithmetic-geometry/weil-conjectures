@@ -5,10 +5,10 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.CategoryTheory.ColimitSites
+public import WeilConjectures.CategoryTheory.ColimitSites
 public import Mathlib.CategoryTheory.Category.Preorder
 import Sheaf.CategoryTheory.SiteSystemStrictificationData
-import Sheaf.CategoryTheory.FilteredColimitFunctorDescent
+import WeilConjectures.CategoryTheory.FilteredColimitFunctorDescent
 
 /-!
 # Strictification of a directed system of sites

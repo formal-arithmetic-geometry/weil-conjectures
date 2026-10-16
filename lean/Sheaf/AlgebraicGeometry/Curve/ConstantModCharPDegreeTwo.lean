@@ -6,9 +6,9 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierDimension
 import Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest
-import Sheaf.AlgebraicGeometry.Curve.ConstantModCharPFiniteSumColimit
+import WeilConjectures.AlgebraicGeometry.Curve.ConstantModCharPFiniteSumColimit
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 import Mathlib.Algebra.Category.Grp.Zero

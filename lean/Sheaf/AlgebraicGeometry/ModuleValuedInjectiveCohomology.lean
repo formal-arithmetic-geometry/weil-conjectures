@@ -8,8 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.AlgebraicGeometry.ConstantRingModuleSheafEquivalence
-import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import WeilConjectures.AlgebraicGeometry.ConstantRingModuleSheafEquivalence
+import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 
 /-!
 # Comparison of the two encodings of injective module sheaves

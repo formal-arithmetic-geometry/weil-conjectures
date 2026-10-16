@@ -5,11 +5,11 @@ Authors: SHEAF group NL
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.Paper.ProEtaleConstructibleSheaf
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.AlgebraicGeometry.ConstructiblePartitionLocalClosedStratum
 import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle

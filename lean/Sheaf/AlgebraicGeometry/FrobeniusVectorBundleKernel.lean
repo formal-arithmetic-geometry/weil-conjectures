@@ -26,7 +26,7 @@ import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.FiniteEtaleYonedaLocalTrivializations
 import Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget
-import Sheaf.AlgebraicGeometry.EtaleStratificationLocalGluingCore
+import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Mathlib.CategoryTheory.Sites.Sheafification

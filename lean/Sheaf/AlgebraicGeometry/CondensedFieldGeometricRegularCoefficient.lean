@@ -27,22 +27,28 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 private noncomputable abbrev coeff (E : Type u) [NormedField E] (X : Scheme.{u}) :=
-  (sheafCompose (Scheme.ProEt.topology X)
-    (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj
-      (continuousCoefficientRingSheaf X E)
+  condensedFieldContinuousCoefficientObj E X
 
 -- Keep scalar evaluation folded while composing identities: reducing the concrete
 -- realization and pullback morphisms here expands their underlying constructions.
 @[irreducible] private noncomputable def coefficientValue
     (E : Type u) [NormedField E] (X : Scheme.{u}) (x : X)
     (g : coeff E X ⟶ coeff E X) : E :=
-  ((g.hom.app (op (Scheme.ProEt.mk (𝟙 X)))) (ULift.up 1)).down x
+  condensedFieldContinuousCoefficientMap E X g x
+
+private lemma coefficientValue_eq
+    (E : Type u) [NormedField E] (X : Scheme.{u}) (x : X)
+    (g : coeff E X ⟶ coeff E X) :
+    coefficientValue E X x g =
+      ((g.hom.app (op (Scheme.ProEt.mk (𝟙 X)))) (ULift.up 1)).down x := by
+  unfold coefficientValue condensedFieldContinuousCoefficientMap
+  rfl
 
 @[irreducible] private noncomputable def ringScalar
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     (X : Scheme.{u}) (x : X)
-    (g : condensedRingObj (Profinite.continuousCoefficientRingObj E) X ⟶
-      condensedRingObj (Profinite.continuousCoefficientRingObj E) X) : E :=
+    (g : condensedRingObj (condensedFieldCoefficientRingObj E) X ⟶
+      condensedRingObj (condensedFieldCoefficientRingObj E) X) : E :=
   coefficientValue E X x ((condensedFieldContinuousMapIso E X).inv.hom ≫ g ≫
     (condensedFieldContinuousMapIso E X).hom.hom)
 
@@ -78,22 +84,22 @@ private lemma realization_adjoint (E : Type u) [NormedField E]
 
 private theorem realization_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E] :
-    condensedPushforwardHom (Profinite.continuousCoefficientRingObj E) f ≫
+    condensedPushforwardHom (condensedFieldCoefficientRingObj E) f ≫
       (lowerStar AddCommGrpCat.{u + 1} f).map (condensedFieldContinuousMapIso E Y).hom.hom =
     (condensedFieldContinuousMapIso E X).hom.hom ≫ continuousPush E f := by
   let adjX := pointUpperStarLowerStarAdjunction.comp
     (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (toSpecZ X))
   have hleft := CondensedRing.chartMate_homEquiv f (toSpecZ X) (toSpecZ Y)
-    (comp_toSpecZ f) (pointUpperStar.obj (Profinite.continuousCoefficientRingObj E))
+    (comp_toSpecZ f) (pointUpperStar.obj (condensedFieldCoefficientRingObj E))
     (coeff E Y) (condensedFieldContinuousMapIso E Y).hom.hom
-  rw [← condensedPullbackHom_eq (Profinite.continuousCoefficientRingObj E) f] at hleft
+  rw [← condensedPullbackHom_eq (condensedFieldCoefficientRingObj E) f] at hleft
   apply (adjX.homEquiv _ _).injective
   conv_rhs => rw [adjX.homEquiv_naturality_right]
   rw [show adjX.homEquiv _ _ (condensedFieldContinuousMapIso E X).hom.hom =
     comparisonAdjoint X E from realization_adjoint E X]
   simp only [adjX, Adjunction.comp_homEquiv]
   erw [Equiv.trans_apply]
-  simp only [← unitAlgHom_comp_map_condensedPullbackHom, Category.assoc]
+  simp only [condensedPushforwardHom, Adjunction.unitAlgHom, Category.assoc]
   erw [hleft, pointUpperStarLowerStarAdjunction.homEquiv_naturality_right]
   have hY := realization_adjoint E Y
   simp only [Adjunction.comp_homEquiv] at hY
@@ -167,7 +173,7 @@ private theorem continuous_unit_scalar_value {X Y : Scheme.{u}} (f : Y ⟶ X)
     (h : continuousPush E f ≫ (lowerStar AddCommGrpCat.{u + 1} f).map q =
       p ≫ continuousPush E f) (y : Y) :
     coefficientValue E Y y q = coefficientValue E X (f y) p := by
-  delta coefficientValue
+  delta coefficientValue condensedFieldContinuousCoefficientMap
   exact continuous_unit_scalar f E p q h y
 
 private theorem adjunction_conjugation
@@ -182,25 +188,23 @@ private theorem adjunction_conjugation
 
 private theorem scalar_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
-    (p : condensedRingObj (Profinite.continuousCoefficientRingObj E) X ⟶
-      condensedRingObj (Profinite.continuousCoefficientRingObj E) X) (y : Y) :
+    (p : condensedRingObj (condensedFieldCoefficientRingObj E) X ⟶
+      condensedRingObj (condensedFieldCoefficientRingObj E) X) (y : Y) :
     ringScalar E Y y
-      (inv (condensedPullbackHom (Profinite.continuousCoefficientRingObj E) f) ≫
+      (inv (condensedPullbackHom (condensedFieldCoefficientRingObj E) f) ≫
         (upperStar AddCommGrpCat.{u + 1} f).map p ≫
-          condensedPullbackHom (Profinite.continuousCoefficientRingObj E) f) =
+          condensedPullbackHom (condensedFieldCoefficientRingObj E) f) =
       ringScalar E X (f y) p := by
   delta ringScalar
   apply continuous_unit_scalar_value f E
-  have hc := adjunction_conjugation (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
-      (condensedPullbackHom (Profinite.continuousCoefficientRingObj E) f) p
-  rw [unitAlgHom_comp_map_condensedPullbackHom] at hc
   have h := CondensedRing.conjugated_morphism_square
     (lowerStar AddCommGrpCat.{u + 1} f)
     (condensedFieldContinuousMapIso E X).hom.hom
     (condensedFieldContinuousMapIso E Y).hom.hom
-    (condensedPushforwardHom (Profinite.continuousCoefficientRingObj E) f)
+    (condensedPushforwardHom (condensedFieldCoefficientRingObj E) f)
     (continuousPush E f) p _ (realization_naturality f E)
-    hc
+    (adjunction_conjugation (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
+      (condensedPullbackHom (condensedFieldCoefficientRingObj E) f) p)
   have hX : inv (condensedFieldContinuousMapIso E X).hom.hom =
       (condensedFieldContinuousMapIso E X).inv.hom := by
     simpa only [IsIso.Iso.inv_hom, Mon.forget] using
@@ -277,43 +281,44 @@ private lemma realization_conjugate
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     {X V : Scheme.{u}} (p : V ⟶ X)
     (f : (upperStar AddCommGrpCat.{u + 1} p).obj
-      (condensedRingObj (Profinite.continuousCoefficientRingObj E) X) ⟶
+      (condensedRingObj (condensedFieldCoefficientRingObj E) X) ⟶
       (upperStar AddCommGrpCat.{u + 1} p).obj
-        (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)) :
+        (condensedRingObj (condensedFieldCoefficientRingObj E) X)) :
     inv (condensedFieldPullbackRealization E p) ≫ f ≫
         condensedFieldPullbackRealization E p =
       (condensedFieldContinuousMapIso E V).inv.hom ≫
-        (inv (condensedPullbackHom (Profinite.continuousCoefficientRingObj E) p) ≫ f ≫
-          condensedPullbackHom (Profinite.continuousCoefficientRingObj E) p) ≫
+        (inv (condensedPullbackHom (condensedFieldCoefficientRingObj E) p) ≫ f ≫
+          condensedPullbackHom (condensedFieldCoefficientRingObj E) p) ≫
         (condensedFieldContinuousMapIso E V).hom.hom := by
   simp only [condensedFieldPullbackRealization_eq]
-  exact conjugate_comp (condensedPullbackHom (Profinite.continuousCoefficientRingObj E) p)
+  exact conjugate_comp (condensedPullbackHom (condensedFieldCoefficientRingObj E) p)
     ((Mon.forget _).mapIso (condensedFieldContinuousMapIso E V)) f
 
 private lemma pointCoefficient_eq
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     (Ω : Type u) [Field Ω] (z : Spec (.of Ω))
     (g : Mod.regular
-      (condensedRingObj (Profinite.continuousCoefficientRingObj E) (Spec (.of Ω))) ⟶
+      (condensedRingObj (condensedFieldCoefficientRingObj E) (Spec (.of Ω))) ⟶
       Mod.regular
-        (condensedRingObj (Profinite.continuousCoefficientRingObj E) (Spec (.of Ω)))) :
+        (condensedRingObj (condensedFieldCoefficientRingObj E) (Spec (.of Ω)))) :
     condensedFieldPointCoefficient E Ω z g = ringScalar E (Spec (.of Ω)) z g.hom := by
   delta condensedFieldPointCoefficient ringScalar coefficientValue
+    condensedFieldContinuousCoefficientMap
   rfl
 
 private lemma pointCoefficient_from_hom
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     (Ω : Type u) [Field Ω] (z : Spec (.of Ω)) {V : Scheme.{u}}
     (a : Spec (.of Ω) ⟶ V)
-    (p : condensedRingObj (Profinite.continuousCoefficientRingObj E) V ⟶
-      condensedRingObj (Profinite.continuousCoefficientRingObj E) V)
+    (p : condensedRingObj (condensedFieldCoefficientRingObj E) V ⟶
+      condensedRingObj (condensedFieldCoefficientRingObj E) V)
     (g : Mod.regular
-      (condensedRingObj (Profinite.continuousCoefficientRingObj E) (Spec (.of Ω))) ⟶
+      (condensedRingObj (condensedFieldCoefficientRingObj E) (Spec (.of Ω))) ⟶
       Mod.regular
-        (condensedRingObj (Profinite.continuousCoefficientRingObj E) (Spec (.of Ω))))
-    (h : g.hom = inv (condensedPullbackHom (Profinite.continuousCoefficientRingObj E) a) ≫
+        (condensedRingObj (condensedFieldCoefficientRingObj E) (Spec (.of Ω))))
+    (h : g.hom = inv (condensedPullbackHom (condensedFieldCoefficientRingObj E) a) ≫
       (upperStar AddCommGrpCat.{u + 1} a).map p ≫
-        condensedPullbackHom (Profinite.continuousCoefficientRingObj E) a) :
+        condensedPullbackHom (condensedFieldCoefficientRingObj E) a) :
     condensedFieldPointCoefficient E Ω z g = ringScalar E V (a z) p := by
   have hg := congrArg (ringScalar E (Spec (.of Ω)) z) h
   exact (pointCoefficient_eq E Ω z g).trans (hg.trans (scalar_naturality a E p z))
@@ -322,14 +327,14 @@ private lemma pullbackScalar_eq
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     {X V : Scheme.{u}} (p : V ⟶ X) (x : V)
     (f : (upperStar AddCommGrpCat.{u + 1} p).obj
-      (condensedRingObj (Profinite.continuousCoefficientRingObj E) X) ⟶
+      (condensedRingObj (condensedFieldCoefficientRingObj E) X) ⟶
       (upperStar AddCommGrpCat.{u + 1} p).obj
-        (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)) :
+        (condensedRingObj (condensedFieldCoefficientRingObj E) X)) :
     coefficientValue E V x (inv (condensedFieldPullbackRealization E p) ≫ f ≫
       condensedFieldPullbackRealization E p) =
       ringScalar E V x
-        (inv (condensedPullbackHom (Profinite.continuousCoefficientRingObj E) p) ≫ f ≫
-          condensedPullbackHom (Profinite.continuousCoefficientRingObj E) p) := by
+        (inv (condensedPullbackHom (condensedFieldCoefficientRingObj E) p) ≫ f ≫
+          condensedPullbackHom (condensedFieldCoefficientRingObj E) p) := by
   delta ringScalar
   exact congrArg (coefficientValue E V x) (realization_conjugate E p f)
 
@@ -339,24 +344,24 @@ private lemma geometric_scalar_value
     (Ω : Type u) [Field Ω] {X V : Scheme.{u}}
     (p : V ⟶ X) (a : Spec (.of Ω) ⟶ V) (z : Spec (.of Ω))
     (f : Mod.regular ((upperStar AddCommGrpCat.{u + 1} p).obj
-      (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)) ⟶
+      (condensedRingObj (condensedFieldCoefficientRingObj E) X)) ⟶
       Mod.regular ((upperStar AddCommGrpCat.{u + 1} p).obj
-        (condensedRingObj (Profinite.continuousCoefficientRingObj E) X))) :
+        (condensedRingObj (condensedFieldCoefficientRingObj E) X))) :
     condensedFieldPointCoefficient E Ω z
-      ((condensedFieldGeometricRegularIso (Profinite.continuousCoefficientRingObj E) p a).inv ≫
+      ((condensedFieldGeometricRegularIso (condensedFieldCoefficientRingObj E) p a).inv ≫
         (condensedFieldGeometricModulePullback
-          (Profinite.continuousCoefficientRingObj E) p a).map f ≫
-        (condensedFieldGeometricRegularIso (Profinite.continuousCoefficientRingObj E) p a).hom) =
+          (condensedFieldCoefficientRingObj E) p a).map f ≫
+        (condensedFieldGeometricRegularIso (condensedFieldCoefficientRingObj E) p a).hom) =
       coefficientValue E V (a z)
         (inv (condensedFieldPullbackRealization E p) ≫ f.hom ≫
           condensedFieldPullbackRealization E p) := by
   have h := pointCoefficient_from_hom E Ω z a
-    (inv (condensedPullbackHom (Profinite.continuousCoefficientRingObj E) p) ≫ f.hom ≫
-      condensedPullbackHom (Profinite.continuousCoefficientRingObj E) p)
-    ((condensedFieldGeometricRegularIso (Profinite.continuousCoefficientRingObj E) p a).inv ≫
-      (condensedFieldGeometricModulePullback (Profinite.continuousCoefficientRingObj E) p a).map f ≫
-      (condensedFieldGeometricRegularIso (Profinite.continuousCoefficientRingObj E) p a).hom)
-    (regular_conjugate (Profinite.continuousCoefficientRingObj E) p a f)
+    (inv (condensedPullbackHom (condensedFieldCoefficientRingObj E) p) ≫ f.hom ≫
+      condensedPullbackHom (condensedFieldCoefficientRingObj E) p)
+    ((condensedFieldGeometricRegularIso (condensedFieldCoefficientRingObj E) p a).inv ≫
+      (condensedFieldGeometricModulePullback (condensedFieldCoefficientRingObj E) p a).map f ≫
+      (condensedFieldGeometricRegularIso (condensedFieldCoefficientRingObj E) p a).hom)
+    (regular_conjugate (condensedFieldCoefficientRingObj E) p a f)
   exact h.trans (pullbackScalar_eq E p (a z) f.hom).symm
 
 
@@ -383,17 +388,17 @@ theorem condensedField_geometric_regular_coefficient
     (Ω : Type u) [Field Ω] {X V : Scheme.{u}}
     (p : V ⟶ X) (a : Spec (.of Ω) ⟶ V) (z : Spec (.of Ω))
     (f : Mod.regular ((upperStar AddCommGrpCat.{u + 1} p).obj
-      (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)) ⟶
+      (condensedRingObj (condensedFieldCoefficientRingObj E) X)) ⟶
       Mod.regular ((upperStar AddCommGrpCat.{u + 1} p).obj
-        (condensedRingObj (Profinite.continuousCoefficientRingObj E) X))) :
+        (condensedRingObj (condensedFieldCoefficientRingObj E) X))) :
     condensedFieldPointCoefficient E Ω z
-      ((condensedFieldGeometricRegularIso (Profinite.continuousCoefficientRingObj E) p a).inv ≫
+      ((condensedFieldGeometricRegularIso (condensedFieldCoefficientRingObj E) p a).inv ≫
         (condensedFieldGeometricModulePullback
-          (Profinite.continuousCoefficientRingObj E) p a).map f ≫
-        (condensedFieldGeometricRegularIso (Profinite.continuousCoefficientRingObj E) p a).hom) =
-      (((inv (condensedFieldPullbackRealization E p) ≫ f.hom ≫
-        condensedFieldPullbackRealization E p).hom.app
-          (op (Scheme.ProEt.mk (𝟙 V)))) (ULift.up 1)).down (a z) := by
+          (condensedFieldCoefficientRingObj E) p a).map f ≫
+        (condensedFieldGeometricRegularIso (condensedFieldCoefficientRingObj E) p a).hom) =
+      condensedFieldContinuousCoefficientMap E V
+        (inv (condensedFieldPullbackRealization E p) ≫ f.hom ≫
+          condensedFieldPullbackRealization E p) (a z) := by
   simpa only [coefficientValue] using geometric_scalar_value E Ω p a z f
 
 end AlgebraicGeometry.ProEtale

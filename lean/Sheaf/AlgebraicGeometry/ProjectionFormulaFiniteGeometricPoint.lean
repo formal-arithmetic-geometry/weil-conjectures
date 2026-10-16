@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
-import Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
+import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
 import Sheaf.AlgebraicGeometry.ProperGeometricPointDerivedCoproducts
 import Sheaf.AlgebraicGeometry.ProjectionFormulaTriangleClosure

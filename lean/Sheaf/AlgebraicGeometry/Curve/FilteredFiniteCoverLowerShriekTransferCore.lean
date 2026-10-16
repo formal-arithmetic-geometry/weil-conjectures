@@ -2,8 +2,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.Curve.FiniteEtaleCoverReducedCompactification
-import Sheaf.AlgebraicGeometry.Curve.OpenLowerShriekConstantFiltrationSteps
+import WeilConjectures.AlgebraicGeometry.Curve.FiniteEtaleCoverReducedCompactification
+import WeilConjectures.AlgebraicGeometry.Curve.OpenLowerShriekConstantFiltrationSteps
 import Sheaf.AlgebraicGeometry.Curve.PrimeModuleFiniteOpenAssertionsTransfer
 
 @[expose] public section

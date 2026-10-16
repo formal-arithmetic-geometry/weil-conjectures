@@ -154,9 +154,9 @@
  },
  "reviewed": "Reviewed by L 2026-10-10: faithful to the proof of Smoothing 07F9 with the implicit isomorphism B_b ≅ C = Q/(f, x_0 x_{n+m+1} y − 1, s z − 1) written out in both directions (dehomogenization identity, steps 1, 4-6) and C shown standard smooth by the Jacobian Δ·x_0x_{n+m+1}·s, a unit by (i) (step 3); smooth by the existing standard-smooth-is-smooth node. No new nodes; no Mathlib match.",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.PopescuDelocalizeWeakLocalizationSmooth",
+  "module": "WeilConjectures.AlgebraicGeometry.PopescuDelocalizeWeakLocalizationSmooth",
   "declaration": "Algebra.popescu_delocalize_weak_localization_smooth",
-  "file": "lean/Sheaf/AlgebraicGeometry/PopescuDelocalizeWeakLocalizationSmooth.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PopescuDelocalizeWeakLocalizationSmooth.lean",
   "statement": "theorem popescu_delocalize_weak_localization_smooth (R : Type u) [CommRing R] (n m c t : ℕ) (hc : c ≤ n + m) (f : Fin c → MvPolynomial (Fin (n + m)) R) (g : Fin t → MvPolynomial (Fin n) R) (s : Fin (t + 1) → R) (h : MvPolynomial (Fin (n + m)) R) (hs : C (s 0) - h * Matrix.det (fun i j : Fin c => pderiv (Fin.castLE hc i) (f j)) ∈ Ideal.span (Set.range f)) (hg : ∀ j : Fin t, C (s j.succ) * rename (Fin.castLE (Nat.le_add_right n m)) (g j) ∈ Ideal.span (Set.range f)) (d : Fin c → ℕ) (hdegree : ∀ j : Fin c, ∀ e ∈ (f j).support, (∑ i : Fin (n + m), if n ≤ i.val then e i else 0) ≤ d j) (F : Fin c → MvPolynomial (Fin (n + m + 2)) R) (hF : ∀ j : Fin c, F j = ∑ e ∈ (f j).support, C ((f j).coeff e) * (∏ i : Fin (n + m), X i.castSucc.succ ^ e i) * X (Fin.last (n + m + 1)) ^ (d j - ∑ i : Fin (n + m), if n ≤ i.val then e i else 0)) : Algebra.Smooth R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range (fun j : Fin t => rename (fun i : Fin n => (Fin.castLE (Nat.le_add_right n m) i).castSucc.succ) (g j)) ∪ Set.range (fun j : Fin c => X (0 : Fin (n + m + 2)) * F j))) (X (0 : Fin (n + m + 2)) * X (Fin.last (n + m + 1)) * C (∏ j : Fin (t + 1), s j))))",
   "branch": "sheaf-dag",
   "by": "H1",

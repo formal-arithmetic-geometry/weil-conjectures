@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.CategoryTheory.Limits.Preserves.Basic
 import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
-import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraColimit
-import Sheaf.AlgebraicGeometry.AffineAlgebraLocalMaps
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebraColimit
+import WeilConjectures.AlgebraicGeometry.AffineAlgebraLocalMaps
 
 /-! # Including a limit of affine schemes in all schemes over the base
 

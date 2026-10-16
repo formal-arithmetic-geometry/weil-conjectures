@@ -6,7 +6,7 @@ Authors: SHEAF group W3
 module
 
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
-public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
+public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionTransfer
 public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
 
 /-!

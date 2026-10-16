@@ -54,7 +54,7 @@ theorem derived_tensor_stalk_vanishing
     (A : schemeDerivedCategory X)
     (P J : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)
     (eA : DerivedCategory.Q.obj P ≅ A)
-    (hJ : CochainComplex.IsKFlat (R := X.sheaf) J) (x : X)
+    (hJ : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) J) (x : X)
     (hx : ∀ n : ℤ, Subsingleton (↑(TopCat.Presheaf.stalk
       ((DerivedCategory.homologyFunctor
         (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) n).obj A).val.presheaf x))) :

@@ -10,7 +10,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
 import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.AlgebraicGeometry.Sites.MorphismProperty

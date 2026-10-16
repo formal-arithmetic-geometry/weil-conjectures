@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 
 import all Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.Algebra.Module.AdicCompletionStableRanges
+import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
 
 /-! # Affine sections of a module completion
 

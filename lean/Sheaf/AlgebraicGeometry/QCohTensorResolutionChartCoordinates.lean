@@ -78,7 +78,7 @@ theorem exists_tensorResolutionChartCoordinates
     (P : ∀ U, ProjectiveResolution (MA U))
     (K : CochainComplex Y.Modules ℤ)
     (q : K ⟶ (CochainComplex.singleFunctor Y.Modules 0).obj M)
-    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K) (hq : QuasiIso q) (n : ℕ) :
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K) (hq : QuasiIso q) (n : ℕ) :
     ∀ U : Y.affineOpens, Nonempty (
       ((((tensorRight (NA U)).mapHomologicalComplex (.down ℕ)).obj
         (P U).complex).homology n) ≃ₗ[Γ(Y, U.1)]

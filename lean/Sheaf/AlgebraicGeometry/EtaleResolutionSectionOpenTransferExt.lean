@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
-public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
+public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionTransfer
 public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
 import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransferExtClass
 import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyPullback

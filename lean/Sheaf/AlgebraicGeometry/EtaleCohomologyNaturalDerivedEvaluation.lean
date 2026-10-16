@@ -8,8 +8,8 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import Mathlib.Algebra.Category.Grp.AB
 
 import Mathlib.CategoryTheory.Abelian.Injective.Ext
-import all Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
-import all Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import all WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import all WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 @[expose] public section
 

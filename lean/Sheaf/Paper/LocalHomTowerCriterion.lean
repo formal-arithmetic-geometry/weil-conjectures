@@ -9,7 +9,7 @@ public import Sheaf.CategoryTheory.LocalCoefficientLocalization
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Sheaf.Algebra.Homology.HomComplex
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom

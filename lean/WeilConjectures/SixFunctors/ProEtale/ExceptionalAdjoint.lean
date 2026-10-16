@@ -8,8 +8,10 @@ module
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
-public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek
 import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
 import Sheaf.CategoryTheory.FiniteCohomologicalDimensionInjectiveCoproducts
 import Sheaf.AlgebraicGeometry.ProEtaleGrothendieckSectionCoproducts
@@ -66,8 +68,9 @@ the fields: the repository has no refinement relation between compactifications 
 against.
 
 The constructible intervals and `Dctf` are those of
-`WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude`, whose bounded constructibility is
-étale origin; these agree with the blueprint's only at the finite coefficient stages.
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude`, whose bounded
+constructibility is étale origin; these agree with the blueprint's only at the finite coefficient
+stages.
 
 The purity chapter itself is stated on the small *étale* site, with
 `AlgebraicGeometry.Etale.rightDerivedUpperShriek`, while the data here are about the pro-étale

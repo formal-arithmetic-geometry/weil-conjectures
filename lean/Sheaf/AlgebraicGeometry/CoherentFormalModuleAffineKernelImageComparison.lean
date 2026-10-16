@@ -12,8 +12,8 @@ import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineOpenSectionsAdic
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import Sheaf.Algebra.Category.ModuleCat.AdicTowerCompletedScalarLimit
-import Sheaf.Algebra.Category.ModuleCat.AdicTowerFiniteLimit
+import WeilConjectures.Algebra.Category.ModuleCat.AdicTowerCompletedScalarLimit
+import WeilConjectures.Algebra.Category.ModuleCat.AdicTowerFiniteLimit
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Affine comparison of formal kernel images with module quotients

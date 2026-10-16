@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.CategoryTheory.ExactFunctorResolutionCocycle
+import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 
 /-!
 # Canonical global transfer with a coefficient morphism

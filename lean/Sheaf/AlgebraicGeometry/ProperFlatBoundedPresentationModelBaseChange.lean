@@ -68,11 +68,11 @@ theorem proper_flat_boundedPresentation_model_baseChange
           (higherDirectImage f' q).obj ((Modules.pullback g').obj F))) := by
   have : C.IsStrictlyLE (b : ℤ) := hCle
   have : D.IsStrictlyLE (d : ℤ) := hDle
-  have hC : CochainComplex.IsKFlat (R := U.toScheme.sheaf) C :=
+  have hC : CochainComplex.IsAcyclicTensorKFlat (R := U.toScheme.sheaf) C :=
     CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace U.toScheme.toRingedSpace C
       ⟨b, fun n hn ↦ C.isZero_of_isStrictlyLE b n hn⟩
       (fun n ↦ isFlat_of_affineFlatOver_identity (C.X n) (hCflat n))
-  have hD : CochainComplex.IsKFlat (R := U.toScheme.sheaf) D :=
+  have hD : CochainComplex.IsAcyclicTensorKFlat (R := U.toScheme.sheaf) D :=
     CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace U.toScheme.toRingedSpace D
       ⟨d, fun n hn ↦ D.isZero_of_isStrictlyLE d n hn⟩
       (fun n ↦ isFlat_of_affineFlatOver_identity (D.X n) (hDflat n))

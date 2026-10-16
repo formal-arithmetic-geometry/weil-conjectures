@@ -77,8 +77,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.ArrowProductTransitionsExistence",
-  "file": "lean/Sheaf/CategoryTheory/ArrowProductTransitionsExistence.lean",
+  "module": "WeilConjectures.CategoryTheory.ArrowProductTransitionsExistence",
+  "file": "lean/WeilConjectures/CategoryTheory/ArrowProductTransitionsExistence.lean",
   "declaration": "CategoryTheory.exists_arrow_product_transitions",
   "statement": "theorem exists_arrow_product_transitions\n    {J : Type u} [SmallCategory J]\n    (F : J ⥤ Cat.{u, u}) (T : ∀ j : J, GrothendieckTopology (F.obj j))\n    [∀ (j k : J) (a : j ⟶ k), (F.map a).toFunctor.IsContinuous (T j) (T k)]\n    (A : ∀ j : J, Sheaf (T j) AddCommGrpCat.{u}) :\n    let R := fun {j k : J} (a : j ⟶ k) ↦\n      (F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (T j) (T k)\n    let B := fun j ↦ ∏ᶜ fun t : Σ k : J, j ⟶ k ↦ (R t.2).obj (A t.1)\n    ∃ (q : ∀ {j k : J} (a : j ⟶ k), B j ⟶ (R a).obj (B k)),\n      ∀ {j k : J} (a : j ⟶ k) (t : Σ l : J, k ⟶ l),\n        q a ≫ (R a).map (Pi.π _ t) =\n          Pi.π _ ⟨t.1, a ≫ t.2⟩ ≫\n            (Functor.sheafPushforwardContinuousComp'\n              (eqToIso (congrArg Cat.Hom.toFunctor (F.map_comp a t.2).symm))\n              AddCommGrpCat.{u} (T j) (T k) (T t.1)).inv.app (A t.1)",
   "branch": "sheaf-dag",

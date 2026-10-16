@@ -10,9 +10,9 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
+import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import Sheaf.AlgebraicGeometry.EtaleAffineTensorCechVanishing
-import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 
 /-!
 # Affine quasi-coherent acyclicity with lifted coefficients

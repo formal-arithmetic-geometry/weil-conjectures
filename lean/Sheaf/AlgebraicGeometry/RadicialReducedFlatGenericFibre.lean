@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 import Sheaf.AlgebraicGeometry.RadicialSeparatingGenericField
-import Sheaf.FieldTheory.SeparablyGeneratedTensorReduced
+import WeilConjectures.FieldTheory.SeparablyGeneratedTensorReduced
 
 /-! # The radicial extension step for a reduced affine flat family
 

@@ -190,7 +190,7 @@ theorem qcoh_ordinary_tensor_resolution_comparison_independence
     (K : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (q : K ⟶ (CochainComplex.singleFunctor
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M)
-    (hK : CochainComplex.IsKFlat (R := Y.sheaf) K) (hq : QuasiIso q) (n : ℕ) :
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K) (hq : QuasiIso q) (n : ℕ) :
     letI := SheafOfModules.monoidalCategory Y.sheaf
     let S := CochainComplex.singleFunctor
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0

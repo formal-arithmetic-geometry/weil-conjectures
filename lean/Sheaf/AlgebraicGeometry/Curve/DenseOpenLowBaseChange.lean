@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenClosedTerm
-import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import Mathlib.Algebra.FiveLemma
 
 /-! # Dense-open field-extension comparison ingredients -/

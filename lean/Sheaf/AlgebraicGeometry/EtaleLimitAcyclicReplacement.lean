@@ -8,9 +8,9 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
-import Sheaf.AlgebraicGeometry.EtaleLimitReplacementExactSystems
+import WeilConjectures.AlgebraicGeometry.EtaleLimitReplacementExactSystems
 import Sheaf.AlgebraicGeometry.EtaleLimitInjectiveColimitAcyclic
-import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 
 /-! # Acyclic replacement of an inverse system of etale sheaves
 

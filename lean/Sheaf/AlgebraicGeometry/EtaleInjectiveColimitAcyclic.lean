@@ -6,9 +6,9 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
+import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
-import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
+import WeilConjectures.CategoryTheory.InjectiveSheafCechAcyclic
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 

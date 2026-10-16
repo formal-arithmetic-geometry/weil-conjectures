@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Quotient.Basic
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 import Sheaf.RingTheory.LimitModuleRingDataCore
 @[expose] public section
 universe u v p

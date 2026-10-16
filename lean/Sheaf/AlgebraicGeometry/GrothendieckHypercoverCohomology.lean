@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.CategoryTheory.InducedCategory
 public import Mathlib.CategoryTheory.Quotient
 public import Mathlib.CategoryTheory.Filtered.Basic
-import Sheaf.Paper.FiniteSplitHypercoverRefinement
+import WeilConjectures.AlgebraicGeometry.FiniteSplitHypercoverRefinement
 import Mathlib.AlgebraicTopology.SimplicialObject.ChainHomotopy
 import Mathlib.Algebra.Homology.Opposite
 

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
-import Sheaf.AlgebraicGeometry.IsolatedFibrePointBaseChange
+import WeilConjectures.AlgebraicGeometry.IsolatedFibrePointBaseChange
 import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 

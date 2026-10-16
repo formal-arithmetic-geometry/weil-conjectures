@@ -14,7 +14,7 @@ public import Mathlib.Topology.KrullDimension
 
 import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-!
 # Torsion cohomological dimension of arbitrary curves

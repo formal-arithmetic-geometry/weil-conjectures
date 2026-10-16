@@ -79,8 +79,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FinitePullbackHomDescent",
-  "file": "lean/Sheaf/AlgebraicGeometry/FinitePullbackHomDescent.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FinitePullbackHomDescent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FinitePullbackHomDescent.lean",
   "declaration": "AlgebraicGeometry.Scheme.finite_pullback_hom_descent",
   "statement": "theorem finite_pullback_hom_descent\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ (i : Iᵒᵖ), CompactSpace (D.obj i)]\n    [∀ (i : Iᵒᵖ), QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i : I) (n : ℕ)\n    (V : Fin n → Scheme.{u}) (W : Scheme.{u})\n    (pV : ∀ a, V a ⟶ D.obj (op i)) (pW : W ⟶ D.obj (op i))\n    [∀ a, LocallyOfFinitePresentation (pV a)] [∀ a, QuasiCompact (pV a)]\n    [∀ a, QuasiSeparated (pV a)]\n    [LocallyOfFinitePresentation pW] [QuasiCompact pW] [QuasiSeparated pW]\n    (ψ : ∀ a, pullback (pV a) (c.π.app (op i)) ⟶ W)\n    (hψ : ∀ a, ψ a ≫ pW = pullback.fst (pV a) (c.π.app (op i)) ≫ pV a) :\n    ∃ (j : I) (h : i ≤ j)\n      (ψj : ∀ a, pullback (pV a) (D.map (homOfLE h).op) ⟶ W),\n      (∀ a, ψj a ≫ pW = pullback.fst (pV a) (D.map (homOfLE h).op) ≫ pV a) ∧\n      ∀ a,\n        pullback.map (pV a) (c.π.app (op i)) (pV a) (D.map (homOfLE h).op)\n          (𝟙 _) (c.π.app (op j)) (𝟙 _) (by simp) (by simp) ≫ ψj a = ψ a",
   "branch": "sheaf-dag",

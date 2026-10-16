@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 import Sheaf.RingTheory.KoszulLastGeneratorAssembly
 import Mathlib.LinearAlgebra.TensorProduct.Prod
 

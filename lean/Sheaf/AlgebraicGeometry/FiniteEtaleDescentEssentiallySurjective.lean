@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteEtaleDescentDataExistence
 import Sheaf.AlgebraicGeometry.AffineFpqcDescent
 import Sheaf.AlgebraicGeometry.FpqcDescentEtale
-import Sheaf.AlgebraicGeometry.IsFiniteOfFpqcCover
+import WeilConjectures.AlgebraicGeometry.IsFiniteOfFpqcCover
 
 /-!
 # Essential surjectivity of finite etale descent

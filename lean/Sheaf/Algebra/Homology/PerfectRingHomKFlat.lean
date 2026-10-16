@@ -93,20 +93,20 @@ bounded-above flat K-flat lemma. Associativity of total tensor products gives
 `Tot(F ⊗ Tot(Pᵛ ⊗ Q)) ≅ Tot(Tot(F ⊗ Pᵛ) ⊗ Q)`, with the usual Koszul signs;
 Q being K-flat makes the latter acyclic. Transport acyclicity through these chain
 isomorphisms and through the one-object evaluation equivalence. This is exactly the
-predicate `IsKFlat` for the shared Hom complex. -/
+predicate `IsAcyclicTensorKFlat` for the shared Hom complex. -/
 theorem perfectRingHom_isKFlat {A : Type u} [CommRing A]
     (P Q : CochainComplex (RingSiteModules A) ℤ)
     (hb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n))
     (hp : ∀ n : ℤ, Module.Projective A ((P.X n).val.obj (op ⟨PUnit.unit⟩)))
     (hf : ∀ n : ℤ, Module.Finite A ((P.X n).val.obj (op ⟨PUnit.unit⟩)))
-    (hQ : Q.IsKFlat) :
-    (homComplex (R := CochainComplex.onePointRingSheaf A) P Q).IsKFlat := by
+    (hQ : Q.IsAcyclicTensorKFlat) :
+    (homComplex (R := CochainComplex.onePointRingSheaf A) P Q).IsAcyclicTensorKFlat := by
   let R := CochainComplex.onePointRingSheaf A
   let := SheafOfModules.monoidalCategory R
   let := SheafOfModules.symmetricCategory R
   let := (SheafOfModules.tensorClosed R).1.some
   let := (SheafOfModules.tensorClosed R).2.1.some
-  have hD : (perfectRingDual P).IsKFlat :=
+  have hD : (perfectRingDual P).IsAcyclicTensorKFlat :=
     CochainComplex.isKFlat_of_boundedAbove_flat (perfectRingDual P)
       (perfectRingDual_boundedAbove P hb) (perfectRingDual_term_isFlat P hp hf)
   obtain ⟨e⟩ := perfectRingHom_tensorDual_iso P Q hb hp hf

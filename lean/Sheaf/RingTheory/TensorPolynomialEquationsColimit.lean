@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.Algebra.MvPolynomial.Eval
-import Sheaf.Paper.DirectedColimitBaseChangeElementwise
+import WeilConjectures.AlgebraicGeometry.DirectedColimitBaseChangeElementwise
 import Mathlib.RingTheory.TensorProduct.MvPolynomial
 import Mathlib.Data.Fintype.Order
 

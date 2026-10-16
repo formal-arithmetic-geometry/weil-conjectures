@@ -107,8 +107,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.FreeCechComplexDecomposition",
-  "file": "lean/Sheaf/Paper/FreeCechComplexDecomposition.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FreeCechComplexDecomposition",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FreeCechComplexDecomposition.lean",
   "declaration": "AlgebraicGeometry.freeCechComplex_exact_iff_fibres",
   "statement": "theorem freeCechComplex_exact_iff_fibres (X : Scheme.{u}) (ι : Type u) (U₀ : X.Etale)\n    (U : ι → X.Etale) (f : ∀ i : ι, U i ⟶ U₀) (O : X.Etaleᵒᵖ ⥤ RingCat.{u})\n    (W : X.Etale) (p : ℕ) :\n    (((PresheafOfModules.evaluation O (op W)).mapHomologicalComplex _).obj\n      ((AlgebraicTopology.alternatingFaceMapComplex (PresheafOfModules.{u} O)).obj\n        ((FormalCoproduct.mk ι fun i ↦ Over.mk (f i)).cech ⋙\n          (FormalCoproduct.eval (Over U₀) (PresheafOfModules.{u} O)).obj\n            (Over.forget U₀ ⋙ yoneda ⋙ PresheafOfModules.free O)))).ExactAt (p + 1) ↔\n      ∀ φ : W ⟶ U₀,\n        let S := Σ i : ι, {g : W ⟶ U i // g ≫ f i = φ}\n        LinearMap.range (Algebra.powerSetComplexDifferential (O.obj (op W)) S (p + 1)) =\n          LinearMap.ker (Algebra.powerSetComplexDifferential (O.obj (op W)) S p)",
   "branch": "sheaf-dag",

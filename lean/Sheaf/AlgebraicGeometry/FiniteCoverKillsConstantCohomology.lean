@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
-import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import Sheaf.AlgebraicGeometry.CofilteredEtaleCohomologyCocone
 import Sheaf.Paper.IntegralCoverTrivialCohomology
 import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation

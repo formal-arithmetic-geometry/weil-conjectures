@@ -5,9 +5,9 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
+public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionTransfer
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit
+import WeilConjectures.AlgebraicGeometry.OpenRestrictionPullbackUnit
 import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalData
 import Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomologyNaturality
 

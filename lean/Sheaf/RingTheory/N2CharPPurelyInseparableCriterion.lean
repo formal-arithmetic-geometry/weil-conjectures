@@ -8,7 +8,7 @@ module
 public import Sheaf.RingTheory.JapaneseDomain
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.Algebra.CharP.Basic
-import Sheaf.FieldTheory.NormalExtensionFixedField
+import WeilConjectures.FieldTheory.NormalExtensionFixedField
 import Mathlib.FieldTheory.Normal.Closure
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.RingTheory.DedekindDomain.IntegralClosure

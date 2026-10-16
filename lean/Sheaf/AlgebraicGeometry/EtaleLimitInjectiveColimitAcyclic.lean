@@ -9,9 +9,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
 
 import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechComplexColimit
-import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
-import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
+import WeilConjectures.CategoryTheory.InjectiveSheafCechAcyclic
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence

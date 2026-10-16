@@ -10,7 +10,7 @@ import Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalkEquivalences
-import Sheaf.AlgebraicGeometry.IntegralIdealAffineSections
+import WeilConjectures.AlgebraicGeometry.IntegralIdealAffineSections
 
 /-!
 # Nonzero ideals on integral schemes and their generic stalks

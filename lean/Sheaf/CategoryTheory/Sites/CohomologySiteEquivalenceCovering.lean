@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Sheaf.Paper.SiteCoveringIsomorphicFamily
+import WeilConjectures.AlgebraicGeometry.SiteCoveringIsomorphicFamily
 
 @[expose] public section
 

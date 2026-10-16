@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkModel
 import Sheaf.Algebra.Homology.BoundedProjectiveNonpositiveModel
 import Mathlib.Algebra.Homology.Embedding.RestrictionHomology
 import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 
 /-! # Bounded projective resolutions of closed-pushforward stalks
 

@@ -11,6 +11,11 @@ import Sheaf.AlgebraicGeometry.AffineComparisonEtaleCechPresentation
 import Sheaf.AlgebraicGeometry.AffineComparisonCategoricalCechSystem
 import Sheaf.CategoryTheory.CategoricalInjectiveCechExactness
 import Sheaf.CategoryTheory.CategoricalFiniteCechCriterion
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent
+import Sheaf.RingTheory.IndEtaleStability
+import Sheaf.RingTheory.IndPrincipalZariski
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 import Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishing
 

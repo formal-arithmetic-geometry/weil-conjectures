@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.SixFunctors.Finite.Stalk
-import Sheaf.Paper.EtaleFiniteDataDescent
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent
 import WeilConjectures.AlgebraicGeometry.FunctionFieldLimit
 import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
 

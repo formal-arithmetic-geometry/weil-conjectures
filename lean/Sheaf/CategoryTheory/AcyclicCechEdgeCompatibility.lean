@@ -9,7 +9,7 @@ public import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 public import Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
+import WeilConjectures.CategoryTheory.SiteInjectiveCechAcyclic
 import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
 import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 
@@ -22,7 +22,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.CategoryTheory.Abelian.RightDerived
 import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Mathlib.Algebra.Homology.ModelCategory.Injective
-import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.CategoryTheory.SiteCohomologyPullback
 import Sheaf.CategoryTheory.SitePullbackAbelianExact

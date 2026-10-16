@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.EtaleCohomologyLocalRingColimit
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 
 /-! # Spreading vanishing from the local scheme

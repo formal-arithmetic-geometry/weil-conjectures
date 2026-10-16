@@ -5,6 +5,8 @@ Authors: SHEAF group A2
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 
@@ -65,7 +67,7 @@ theorem integralExchange_reduction_isIso [IsProper f]
     (sq : IsPullback g' f' f g)
     (M : integralConstructible ℓ E X) :
     IsIso ((integralReduction ℓ E Y').map
-      ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq.toCommSq).app M).hom) := by
+      ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.toCommSq.asOver (Spec (.of k)))).app M).hom) := by
   obtain ⟨F, L, ⟨e⟩⟩ := integralFiniteExchange_comparison ℓ E k sq.toCommSq M
   have htors : IsAddTorsion (ULift.{u + 1} (integralResidue ℓ E)) := by
     intro x

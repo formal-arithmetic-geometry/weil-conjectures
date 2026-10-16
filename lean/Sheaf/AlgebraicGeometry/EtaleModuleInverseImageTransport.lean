@@ -10,7 +10,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleConstruction
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleLinearCriterion
-import Sheaf.AlgebraicGeometry.EtaleModuleRingIsoAdjunction
+import WeilConjectures.AlgebraicGeometry.EtaleModuleRingIsoAdjunction
 import Sheaf.AlgebraicGeometry.EtaleModuleRingIsoTensor
 
 /-!

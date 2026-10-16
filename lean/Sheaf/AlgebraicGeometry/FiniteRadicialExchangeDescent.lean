@@ -17,10 +17,10 @@ import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.CategoryTheory.MateIsoAlongEquivalences
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 import WeilConjectures.ConstructibleSheaf.Defs
-import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Descent of open direct image and exchange along finite radicial covers

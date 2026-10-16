@@ -118,7 +118,7 @@ theorem derivedPullback_tensorProduct
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map b) (curriedTensor _)
                 (ComplexShape.up ℤ)) ∧
         ∀ P N : CochainComplex (SheafOfModules.{uPull} (moduleRings S.toRingedSpace)) ℤ,
-          CochainComplex.IsKFlat (R := S.sheaf) P → CochainComplex.IsKFlat (R := S.sheaf) N →
+          CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) P → CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) N →
             IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
                 (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
               DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
@@ -177,7 +177,7 @@ theorem derivedPullback_tensorProduct
   · intro P P' N N' a b
     exact HomologicalComplex.mapBifunctorComparison_naturality τ (.up ℤ) a b
   · intro P N hP hN
-    have hflat := CochainComplex.IsKFlat.mapBifunctor
+    have hflat := CochainComplex.IsAcyclicTensorKFlat.mapBifunctor
       (X := S.toRingedSpace) P N hP hN
     let := hε (CochainComplex.mapBifunctor P N (curriedTensor _)) hflat
     infer_instance

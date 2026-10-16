@@ -13,8 +13,8 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
 import Sheaf.CategoryTheory.InjectiveModulePresheaf
 import Mathlib.Algebra.Homology.ShortComplex.Ab
-import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
-import Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison
+import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
+import WeilConjectures.AlgebraicGeometry.EtaleSiteCechComplexComparison
 
 /-!
 # Abelian cohomology of injective etale module sheaves

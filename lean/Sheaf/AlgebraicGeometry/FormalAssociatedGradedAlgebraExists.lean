@@ -6,7 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
-public import Sheaf.AlgebraicGeometry.GradedSheafStructures
+public import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
 import Sheaf.AlgebraicGeometry.FormalAssociatedGradedMultiplication
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent

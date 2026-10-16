@@ -10,8 +10,8 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
+import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
 import Sheaf.AlgebraicGeometry.ThickeningSystemsEquivalence
 import Sheaf.AlgebraicGeometry.ThickeningSystemsCompletionComparison
 

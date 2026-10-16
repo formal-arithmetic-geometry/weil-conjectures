@@ -6,10 +6,10 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
-import Sheaf.AlgebraicGeometry.EtaleOpenFreeSheafUnitCoherence
+import WeilConjectures.AlgebraicGeometry.EtaleOpenFreeSheafUnitCoherence
 import Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison
 import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
-import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
+import WeilConjectures.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
 
 /-!
 # Canonical restriction on resolution-section cocycles

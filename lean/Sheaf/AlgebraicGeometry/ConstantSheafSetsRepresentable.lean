@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.LeftExact
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen
-import Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
 
 /-!
 # Constant sheaves of sets represented by disjoint unions

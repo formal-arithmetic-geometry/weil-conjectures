@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import WeilConjectures.SixFunctors.BaseChange.Derived
+import Sheaf.CategoryTheory.ExactCoupleMorphism
+
 import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
 import Sheaf.CategoryTheory.ExactFunctorHalfPlane
 import Sheaf.CategoryTheory.FiniteFiltrationInduction

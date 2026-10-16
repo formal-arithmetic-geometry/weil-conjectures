@@ -687,14 +687,14 @@ theorem RingedToposMorphism.exists_kFlatPullback
       (_ : F.Additive) (_ : F ⊣ f.modules),
       (∀ P : CochainComplex (ringedSiteModules.{u, u, u, u}
           ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) ℤ,
-        P.IsKFlat → (∀ n : ℤ, SheafOfModules.IsFlat (P.X n)) →
-        CochainComplex.IsKFlat ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ∧
+        P.IsAcyclicTensorKFlat → (∀ n : ℤ, SheafOfModules.IsFlat (P.X n)) →
+        CochainComplex.IsAcyclicTensorKFlat ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ∧
           ∀ n : ℤ, SheafOfModules.IsFlat
             (((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P).X n)) ∧
       ∀ (P Q : CochainComplex (ringedSiteModules.{u, u, u, u}
           ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) ℤ) (s : P ⟶ Q),
-        P.IsKFlat → (∀ n : ℤ, SheafOfModules.IsFlat (P.X n)) →
-        Q.IsKFlat → (∀ n : ℤ, SheafOfModules.IsFlat (Q.X n)) →
+        P.IsAcyclicTensorKFlat → (∀ n : ℤ, SheafOfModules.IsFlat (P.X n)) →
+        Q.IsAcyclicTensorKFlat → (∀ n : ℤ, SheafOfModules.IsFlat (Q.X n)) →
         QuasiIso s → QuasiIso ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map s) := by
   let _ := f.leftExact
   obtain ⟨RI, ⟨I⟩⟩ := algebraic_image K J f.inverse f.direct f.adj B

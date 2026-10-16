@@ -6,7 +6,7 @@ Authors: SHEAF group Q2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSheafComparison
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 import Sheaf.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent
 import Sheaf.AlgebraicGeometry.EtaleInverseImageKanRepresentative
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
@@ -15,9 +15,9 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-! # Finite local stage representatives
 

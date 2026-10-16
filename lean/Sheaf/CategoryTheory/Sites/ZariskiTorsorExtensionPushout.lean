@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Sheaf.CategoryTheory.Sites.ZariskiContractedProductPresentation
-import Sheaf.CategoryTheory.PushoutShortExactSequence
+import WeilConjectures.CategoryTheory.PushoutShortExactSequence
 import Sheaf.Topology.AbelianSheafShortExactStalkwise
 
 /-!

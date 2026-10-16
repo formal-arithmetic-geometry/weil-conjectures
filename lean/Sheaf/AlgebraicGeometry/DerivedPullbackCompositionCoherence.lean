@@ -30,7 +30,7 @@ private theorem derived_natTrans_ext_kflat
     {X Y : Scheme.{u₁}} {F G : schemeDerivedCategory X ⥤ schemeDerivedCategory Y}
     (τ τ' : F ⟶ G)
     (h : ∀ P : CochainComplex (SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) ℤ,
-      CochainComplex.IsKFlat (R := X.sheaf) P →
+      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P →
       τ.app (DerivedCategory.Qh.obj
         ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) =
       τ'.app (DerivedCategory.Qh.obj
@@ -182,7 +182,7 @@ theorem derivedPullbackComposition_coherence
             (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)))
     (hK : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y)
       (P : CochainComplex (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) ℤ),
-      CochainComplex.IsKFlat (R := Y.sheaf) P →
+      CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
         IsIso ((ε f).app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)))
     (c : ∀ {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z),
         derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g))

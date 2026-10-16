@@ -8,7 +8,7 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
-import Sheaf.Paper.ObjectCohomologyPresheafResolution
+import WeilConjectures.AlgebraicGeometry.ObjectCohomologyPresheafResolution
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.CategoryTheory.Sites.LocallyInjective
 

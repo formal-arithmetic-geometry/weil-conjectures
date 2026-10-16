@@ -12,7 +12,7 @@ import Mathlib.Algebra.Homology.HomologySequenceLemmas
 import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 import Sheaf.CategoryTheory.Abelian.HorseshoeResolutions
-import Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift
+import WeilConjectures.CategoryTheory.Abelian.HorseshoeMorphismLift
 
 /-!
 # Horseshoe connecting morphisms for right derived functors

@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.Topology.KrullDimension
-import Sheaf.Paper.NoetherianPrincipalCoverModel
+import WeilConjectures.AlgebraicGeometry.NoetherianPrincipalCoverModel
 import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Mathlib.RingTheory.Localization.BaseChange

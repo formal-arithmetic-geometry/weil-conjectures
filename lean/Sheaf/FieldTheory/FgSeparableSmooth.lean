@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.FieldTheory.SeparableExtension
+public import WeilConjectures.FieldTheory.SeparableExtension
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.EssentialFiniteness
 import Sheaf.FieldTheory.SmoothFractionFieldLocalizations

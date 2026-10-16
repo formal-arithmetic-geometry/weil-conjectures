@@ -9,11 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.CategoryTheory.Linear.FunctorCategory
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists
-import Sheaf.Paper.DirectImageSplitCoverProduct
-import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceExists
+import WeilConjectures.AlgebraicGeometry.DirectImageSplitCoverProduct
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.FiniteEtaleModuleTraceData
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleModuleTraceData
 
 /-!
 # Coefficient-linear finite étale trace with prescribed degree

@@ -5,7 +5,7 @@ Authors: SHEAF group NB
 -/
 module
 
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Homology.BifunctorShift

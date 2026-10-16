@@ -7,7 +7,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.Paper.AlgebraizeFiniteStructureAlgebra
 import Sheaf.AlgebraicGeometry.CoherentAlgebraAffineFiniteProper
-import Sheaf.AlgebraicGeometry.AffineAlgebraReductionsCartesian
+import WeilConjectures.AlgebraicGeometry.AffineAlgebraReductionsCartesian
 import Sheaf.AlgebraicGeometry.RelativeSpectrumAffineRealization
 
 /-!

@@ -8,10 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.CategoryTheory.SiteCechComplex
-import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
+import WeilConjectures.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
 import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 import Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 /-!
@@ -72,7 +72,7 @@ theorem module_cohomology_isZero_of_cech_vanishing (X : Scheme.{u}) (F : X.Modul
       IsZero ((RingedSpace.moduleCohomology U.toScheme.toRingedSpace p).obj
         ((restrictFunctor U.ι).obj F)) := by
   classical
-  let : EnoughInjectives X.Modules := enoughInjectives X
+  let : EnoughInjectives X.Modules := enoughInjectives (X := X)
   let : Preadditive (TopCat.Presheaf AddCommGrpCat.{u} X) :=
     inferInstanceAs (Preadditive (X.Opensᵒᵖ ⥤ AddCommGrpCat.{u}))
   let : Abelian (TopCat.Presheaf AddCommGrpCat.{u} X) :=
@@ -184,7 +184,7 @@ theorem module_cohomology_isZero_of_cech_vanishing (X : Scheme.{u}) (F : X.Modul
       let R := restrictFunctor U.ι
       let : R.Additive := ⟨by intros; rfl⟩
       have hRS := (hrestrict U).1 S hS
-      let : EnoughInjectives U.toScheme.Modules := enoughInjectives U.toScheme
+      let : EnoughInjectives U.toScheme.Modules := enoughInjectives (X := U.toScheme)
       let : Injective (R.obj S.X₂) := (hrestrict U).2 S.X₂ inferInstance
       obtain ⟨δ, _, hall⟩ := hRS.exists_rightDerived_full_long_exact E
       obtain ⟨_, w₁, w₂, h₁, h₂⟩ := hall 0
@@ -215,7 +215,7 @@ theorem module_cohomology_isZero_of_cech_vanishing (X : Scheme.{u}) (F : X.Modul
       let R := restrictFunctor U.ι
       let : R.Additive := ⟨by intros; rfl⟩
       have hRS := (hrestrict U).1 S hS
-      let : EnoughInjectives U.toScheme.Modules := enoughInjectives U.toScheme
+      let : EnoughInjectives U.toScheme.Modules := enoughInjectives (X := U.toScheme)
       let : Injective (R.obj S.X₂) := (hrestrict U).2 S.X₂ inferInstance
       obtain ⟨δ, _, hall⟩ := hRS.exists_rightDerived_full_long_exact E
       obtain ⟨_, w₁, w₂, _, h₂⟩ := hall (q + 1)

@@ -507,21 +507,26 @@ private lemma fiber_scalar (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) (x : Y)
     regularScalarValue (CondensedQbarGeometricEvaluation.fiber ℓ Y x)
       (CondensedQbarGeometricEvaluation.fiberRegularCoordinates ℓ Y x)
       (condensedQbarScalar ℓ Y a) = a.1 x := by
-  let g := CondensedQbarGeometricEvaluation.geometricPoint Y x
-  let H := CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) g
-  let E := CondensedQbarGeometricEvaluation.fieldFiber (AlgebraicClosure (Y.residueField x)) ℓ
-  let e := condensedQbarRegularPullbackIso ℓ g
-  let c := CondensedQbarGeometricEvaluation.fieldRegularCoordinates
-    (AlgebraicClosure (Y.residueField x)) ℓ
-  have hpoint : g default = x := Scheme.fromSpecResidueField_apply x _
-  change regularScalarValue (H ⋙ E) ((E.mapIso e).toLinearEquiv.trans c)
+  have hpoint : (CondensedQbarGeometricEvaluation.geometricPoint Y x) default = x :=
+    Scheme.fromSpecResidueField_apply x _
+  change regularScalarValue ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
+    (CondensedQbarGeometricEvaluation.geometricPoint Y x)) ⋙
+    (CondensedQbarGeometricEvaluation.fieldFiber (AlgebraicClosure (Y.residueField x)) ℓ))
+    (((CondensedQbarGeometricEvaluation.fieldFiber (AlgebraicClosure (Y.residueField x)) ℓ).mapIso
+    (condensedQbarRegularPullbackIso ℓ (CondensedQbarGeometricEvaluation.geometricPoint Y
+    x))).toLinearEquiv.trans (CondensedQbarGeometricEvaluation.fieldRegularCoordinates
+    (AlgebraicClosure (Y.residueField x)) ℓ))
     (condensedQbarScalar ℓ Y a) = _
-  rw [regularScalarValue_comp, regularScalarValue_conjugate E e c _ _
-    (condensedQbar_scalar_pullback ℓ g a)]
+  rw [regularScalarValue_comp, regularScalarValue_conjugate
+    (CondensedQbarGeometricEvaluation.fieldFiber (AlgebraicClosure (Y.residueField x)) ℓ)
+    (condensedQbarRegularPullbackIso ℓ (CondensedQbarGeometricEvaluation.geometricPoint Y x))
+    (CondensedQbarGeometricEvaluation.fieldRegularCoordinates (AlgebraicClosure (Y.residueField x))
+    ℓ) _ _
+    (condensedQbar_scalar_pullback ℓ (CondensedQbarGeometricEvaluation.geometricPoint Y x) a)]
   exact (regularScalarValue_def _ _ _).trans
-    ((field_scalar _ ℓ (CondensedQbarScalarConstruction.boundedComp ℓ g.base.hom a)).trans
+    ((field_scalar _ ℓ (CondensedQbarScalarConstruction.boundedComp ℓ
+      (CondensedQbarGeometricEvaluation.geometricPoint Y x).base.hom a)).trans
       (congrArg a.1 hpoint))
-
 
 end FiberScalar
 

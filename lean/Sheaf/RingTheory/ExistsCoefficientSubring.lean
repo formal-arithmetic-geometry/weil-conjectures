@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.Algebra.Ring.Subring.Defs
 public import Mathlib.Algebra.CharP.Defs
 import Sheaf.RingTheory.CohenRingsExist
-import Sheaf.RingTheory.CoefficientResidueSection
+import WeilConjectures.RingTheory.CoefficientResidueSection
 import Sheaf.RingTheory.CohenRingLiftToCompleteLocal
 import Sheaf.RingTheory.CoefficientSubringOfPrincipalSource
 

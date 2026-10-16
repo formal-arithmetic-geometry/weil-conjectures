@@ -90,7 +90,7 @@ theorem exists_exactSource_evaluation_local_comparisons (X : Scheme.{u})
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
     (_hhom : ∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),
       QuasiIso t → QuasiIso (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t))
-    (_hdual : (localEvaluationDual X U P).IsKFlat)
+    (_hdual : (localEvaluationDual X U P).IsAcyclicTensorKFlat)
     (_eK : (SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj K ≅ DerivedCategory.Q.obj P)
     (_eN : (SheafOfModules.overFunctor.{u}

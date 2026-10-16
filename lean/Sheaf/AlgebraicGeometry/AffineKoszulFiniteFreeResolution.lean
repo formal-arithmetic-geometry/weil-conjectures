@@ -6,7 +6,7 @@ Authors: SHEAF group N1
 module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

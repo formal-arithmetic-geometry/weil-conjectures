@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.Defs
 import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Artinian.Defs
-import Sheaf.RingTheory.ArtinianSeparableResidueLift
+import WeilConjectures.RingTheory.ArtinianSeparableResidueLift
 import Sheaf.RingTheory.ArtinianTranscendentalLocalization
 import Mathlib.Algebra.CharP.Basic
 import Mathlib.RingTheory.HopkinsLevitzki

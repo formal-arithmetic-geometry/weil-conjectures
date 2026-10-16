@@ -56,7 +56,7 @@ private theorem tensor_quasiIso_of_isKFlat
     {R : Sheaf J CommRingCat.{u}}
     {M M' D : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ}
-    (t : M ⟶ M') (ht : QuasiIso t) (hD : D.IsKFlat) :
+    (t : M ⟶ M') (ht : QuasiIso t) (hD : D.IsAcyclicTensorKFlat) :
     QuasiIso (HomologicalComplex.mapBifunctorMap t (𝟙 D) (curriedTensor _) (.up ℤ)) := by
   let : MonoidalPreadditive (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :=
@@ -122,7 +122,7 @@ theorem exists_exactSource_evaluation_open_models (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
     (_hhom : ∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),
       QuasiIso t → QuasiIso (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t))
-    (_hdual : (localEvaluationDual X U P).IsKFlat)
+    (_hdual : (localEvaluationDual X U P).IsAcyclicTensorKFlat)
     (_eK : (Equivalence.functor
       (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
       (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))

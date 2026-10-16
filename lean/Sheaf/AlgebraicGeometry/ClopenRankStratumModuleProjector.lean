@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
-import Sheaf.AlgebraicGeometry.SchemeClopenIdempotent
+import WeilConjectures.AlgebraicGeometry.SchemeClopenIdempotent
 
 /-! # The characteristic idempotent acts on module sheaves
 

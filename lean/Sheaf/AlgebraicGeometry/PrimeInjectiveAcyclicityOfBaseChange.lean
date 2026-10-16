@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
 public import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.DerivedCategories
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

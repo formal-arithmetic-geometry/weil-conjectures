@@ -5,6 +5,8 @@ Authors: SHEAF group C2
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
@@ -58,6 +60,8 @@ variable (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
 
 
 
+set_option maxHeartbeats 400000 in
+-- Checking both coefficient-ring base-change comparisons needs the extra elaboration budget.
 /-- Derived coefficient reduction compares integral exchange to residue exchange.
 Source: Bhatt--Scholze, Lemma 6.5.9(3) and Proposition 6.8.11(3), using the
 two-term finite free resolution of O_E/ℓ over O_E
@@ -106,9 +110,8 @@ theorem integralResidueExchange_comparison
         (condensedRingObj (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) X),
       Nonempty (N.obj ≅ (integralReduction ℓ E X).obj M.obj) ∧
       Nonempty (Arrow.mk ((integralReduction ℓ E Y').map
-          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq).app M).hom) ≅
-        Arrow.mk ((boundedConstructibleBaseChange
-          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) ℓ k sq).app N).hom) := by
+          ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app M).hom) ≅
+        Arrow.mk ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) ℓ (sq.asOver (Spec (.of k)))).app N).hom) := by
   obtain ⟨c, hc⟩ := integralResidue_comparisons ℓ E hPerfect hTensor
   have : IsLocallyNoetherian X :=
     LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
@@ -132,10 +135,9 @@ theorem integralResidueExchange_comparison
       (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f').mapIso
       ((c.pull g').app M.obj)
   refine ⟨Arrow.isoMk S T ?_⟩
-  change S.hom ≫ ((boundedConstructibleBaseChange
-      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) ℓ k sq).app N).hom =
+  change S.hom ≫ ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) ℓ (sq.asOver (Spec (.of k)))).app N).hom =
     (integralReduction ℓ E Y').map
-      ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq).app M).hom ≫ T.hom
+      ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ (sq.asOver (Spec (.of k)))).app M).hom ≫ T.hom
   rw [boundedConstructibleBaseChange_hom_eq_ambient _ ℓ k sq N,
     boundedConstructibleBaseChange_hom_eq_ambient _ ℓ k sq M]
   dsimp only [S, T, N, Iso.trans_hom, CategoryTheory.Functor.mapIso_hom,

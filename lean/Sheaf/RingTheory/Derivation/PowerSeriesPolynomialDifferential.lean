@@ -13,9 +13,9 @@ public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 
 import Mathlib.Algebra.CharP.Algebra
 import Sheaf.RingTheory.PowerSeriesFiniteSubfieldFamily
-import Sheaf.FieldTheory.IntersectionSubfieldsDifferentials
+import WeilConjectures.FieldTheory.IntersectionSubfieldsDifferentials
 import Sheaf.RingTheory.KaehlerDifferentialZeroIffPow
-import Sheaf.FieldTheory.ExistsPBasis
+import WeilConjectures.FieldTheory.ExistsPBasis
 import Sheaf.RingTheory.PowerSeriesRingSubfields
 
 /-!

@@ -27,6 +27,30 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
+@[irreducible] noncomputable def residueRestrictedRegularPullIso
+    (Λ A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj A] [IsCommMonObj A]
+    (φ : Λ ⟶ A) [IsMonHom φ]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (residueExchangeUpperStar Λ f).obj
+      ((DerivedCategory.singleFunctor _ 0).obj
+        ((Mod.comap (coefficientMap φ Y)).obj (Mod.regular (condensedRingObj A Y)))) ≅
+    (DerivedCategory.singleFunctor _ 0).obj
+      ((Mod.comap (coefficientMap φ X)).obj (Mod.regular (condensedRingObj A X))) := by
+  let P := Mod.regular (condensedRingObj A Y)
+  let SY := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+    (coefficientMap φ Y)
+  let SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (coefficientMap φ X)
+  letI := residueOrdinaryUpperStarMonoidal A f
+  let e : (f)^*⟦Λ⟧.obj (SY.obj P) ≅
+      SX.obj (Mod.regular (condensedRingObj A X)) :=
+    (comapUpperStarIso φ f).symm.app P ≪≫
+      SX.mapIso (Functor.Monoidal.εIso (f)^*⟦A⟧).symm
+  unfold residueExchangeUpperStar
+  exact ((f)^*⟦Λ⟧.singleFunctorCompLeftDerivedFunctorIso).app (SY.obj P) ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso e
+
 /-- Pullback identifies the restricted residue regular coefficient in degree zero.
 The isomorphism is constructed using exact pullback and its ordinary unit comparison.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
@@ -34,21 +58,10 @@ Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor compariso
 @[irreducible] noncomputable def residueExchangeCoefficientPullIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (residueExchangeUpperStar (integralCoeff ℓ E) f).obj
-        (residueExchangeCoefficient ℓ E Y) ≅ residueExchangeCoefficient ℓ E X := by
-  let A := Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)
-  let P := Mod.regular (condensedRingObj A Y)
-  let SY := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-    (coefficientMap (integralReductionMap ℓ E) Y)
-  let SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (coefficientMap (integralReductionMap ℓ E) X)
-  letI := residueOrdinaryUpperStarMonoidal A f
-  let e : (f)^*⟦integralCoeff ℓ E⟧.obj (SY.obj P) ≅
-      SX.obj (Mod.regular (condensedRingObj A X)) :=
-    (comapUpperStarIso (integralReductionMap ℓ E) f).symm.app P ≪≫
-      SX.mapIso (Functor.Monoidal.εIso (f)^*⟦A⟧).symm
-  unfold residueExchangeUpperStar
-  exact ((f)^*⟦integralCoeff ℓ E⟧.singleFunctorCompLeftDerivedFunctorIso).app (SY.obj P) ≪≫
-    (DerivedCategory.singleFunctor _ 0).mapIso e
+        (residueExchangeCoefficient ℓ E Y) ≅ residueExchangeCoefficient ℓ E X :=
+  residueRestrictedRegularPullIso (integralCoeff ℓ E)
+    (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E))
+    (integralReductionMap ℓ E) f
 
 /-- The tensor presentation on X, with its coefficient identified with pullback from Y.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.

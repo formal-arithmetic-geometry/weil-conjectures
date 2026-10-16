@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.Order.Directed
-import Sheaf.Paper.DirectedColimitBaseChangeElementwise
+import WeilConjectures.AlgebraicGeometry.DirectedColimitBaseChangeElementwise
 
 /-! # Maps of finitely presented algebras over a directed colimit
 

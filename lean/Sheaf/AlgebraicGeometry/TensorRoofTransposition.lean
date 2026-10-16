@@ -110,7 +110,7 @@ theorem tensor_roof_transposition
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))]
     (A E : schemeDerivedCategory X)
     (P : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
     (eA : DerivedCategory.Q.obj P ≅ A) :
     letI := SheafOfModules.monoidalCategory X.sheaf
     letI := (SheafOfModules.tensorClosed X.sheaf).1.some
@@ -125,7 +125,7 @@ theorem tensor_roof_transposition
       X.toRingedSpace.sheaf).obj (op A, E)
     ∃ e : (R.obj (DerivedCategory.Q.obj T) ⟶ R.obj H) ≃ (R.obj A ⟶ R.obj E),
       ∀ (J : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)
-        (hJ : CochainComplex.IsKFlat (R := X.sheaf) J) (u : J ⟶ T),
+        (hJ : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) J) (u : J ⟶ T),
         IsIso (R.map (DerivedCategory.Q.map u)) →
         ∀ (ξ : DerivedCategory.Q.obj J ⟶ H)
           (s : R.obj (DerivedCategory.Q.obj T) ⟶ R.obj H),

@@ -8,9 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyNatural
+import WeilConjectures.AlgebraicGeometry.EtaleOpenObjectCohomologyNatural
 import Sheaf.AlgebraicGeometry.EtaleRestrictedCohomologyNeighbourhoodColimit
-import Sheaf.AlgebraicGeometry.EtaleCohomologyTriangleLaws
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyTriangleLaws
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 

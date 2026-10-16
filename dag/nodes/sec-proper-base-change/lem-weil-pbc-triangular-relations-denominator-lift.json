@@ -125,8 +125,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.FieldTheory.TriangularRelationsDenominatorLift",
-  "file": "lean/Sheaf/FieldTheory/TriangularRelationsDenominatorLift.lean",
+  "module": "WeilConjectures.FieldTheory.TriangularRelationsDenominatorLift",
+  "file": "lean/WeilConjectures/FieldTheory/TriangularRelationsDenominatorLift.lean",
   "declaration": "FieldTheory.exists_triangularRelations_denominatorLift",
   "statement": "theorem exists_triangularRelations_denominatorLift\n    (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]\n    (d : ℕ) (x : Fin d → K) (hx : AlgebraicIndependent k x)\n    (m : ℕ)\n    (q : (i : Fin m) →\n      Polynomial (MvPolynomial (Fin i.val) (IntermediateField.adjoin k (Set.range x))))\n    (hq : ∀ i, (q i).Monic) :\n    ∃ (h : MvPolynomial (Fin d) k)\n      (p : (i : Fin m) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k)),\n      h ≠ 0 ∧ (∀ i, (p i).Monic) ∧\n      (∀ i, (p i).natDegree = (q i).natDegree) ∧\n      (∀ (i : Fin m) (z : Fin (d + 1 + i.val) → K),\n        (∀ j : Fin d, z ⟨j.val, by omega⟩ = x j) →\n        z ⟨d, by omega⟩ = (MvPolynomial.aeval x h)⁻¹ →\n        (p i).map (MvPolynomial.aeval z).toRingHom =\n          (q i).map (MvPolynomial.aeval\n            (fun j : Fin i.val ↦ z ⟨d + 1 + j.val, by omega⟩)).toRingHom)",
   "branch": "sheaf-dag",

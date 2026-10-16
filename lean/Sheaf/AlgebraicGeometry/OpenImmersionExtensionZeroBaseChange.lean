@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
 public import Mathlib.Algebra.Homology.Additive
-import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!

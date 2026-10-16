@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import WeilConjectures.SixFunctors.Finite.BaseChange
-import Sheaf.AlgebraicGeometry.EtaleEdgeMapBaseChange
+import WeilConjectures.AlgebraicGeometry.EtaleEdgeMapBaseChange
 import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleConstructibleReflection
 
 /-! # Finite direct image of module-valued curve assertions

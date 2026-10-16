@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.RingTheory.PopescuSolutionModulo
-import Sheaf.RingTheory.ArtinianSeparableResidueLift
+import WeilConjectures.RingTheory.ArtinianSeparableResidueLift
 import Sheaf.RingTheory.ArtinianTranscendentalLocalization
 import Mathlib.RingTheory.HopkinsLevitzki
 import Mathlib.FieldTheory.PurelyInseparable.Basic

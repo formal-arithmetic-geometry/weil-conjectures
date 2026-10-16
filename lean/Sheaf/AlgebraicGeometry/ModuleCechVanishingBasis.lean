@@ -10,10 +10,10 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.Algebra.Category.Grp.EpiMono
-import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
+import WeilConjectures.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
 import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 import Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 /-!
@@ -89,7 +89,7 @@ theorem isZero_moduleCohomology_restrict_of_cech_basis
         ((restrictFunctor W.ι).obj F)) := by
   classical
   -- Cofinality and the intersection condition suffice for this dimension-shifting proof.
-  let : EnoughInjectives X.Modules := enoughInjectives X
+  let : EnoughInjectives X.Modules := enoughInjectives (X := X)
   let : Preadditive (TopCat.Presheaf AddCommGrpCat.{u} X) :=
     inferInstanceAs (Preadditive (X.Opensᵒᵖ ⥤ AddCommGrpCat.{u}))
   let : Abelian (TopCat.Presheaf AddCommGrpCat.{u} X) :=

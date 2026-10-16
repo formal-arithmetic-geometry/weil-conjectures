@@ -4,11 +4,11 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
-public import Sheaf.FieldTheory.SeparableExtension
+public import WeilConjectures.FieldTheory.SeparableExtension
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 
-import Sheaf.FieldTheory.SeparablyGeneratedDifferentialsDimension
-import Sheaf.Paper.SeparableResidueCotangentInjective
+import WeilConjectures.FieldTheory.SeparablyGeneratedDifferentialsDimension
+import WeilConjectures.AlgebraicGeometry.SeparableResidueCotangentInjective
 import Mathlib.RingTheory.Etale.Kaehler
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra

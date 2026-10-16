@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 import Sheaf.AlgebraicGeometry.AffineClosedHenselianNeighborhoodColimit
-import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
+import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 import WeilConjectures.SixFunctors.Etale.Gabber
 
 /-! # Cohomology comparison with affine etale neighborhoods

@@ -84,8 +84,8 @@
  "unit": "sk-def-exchange",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.Adjunction.FiniteProductRingFunctor",
-  "file": "lean/Sheaf/CategoryTheory/Adjunction/FiniteProductRingFunctor.lean",
+  "module": "WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor",
+  "file": "lean/WeilConjectures/CategoryTheory/Adjunction/FiniteProductRingFunctor.lean",
   "declaration": "CategoryTheory.Adjunction.finiteProductRingFunctor",
   "statement": "theorem finiteProductRingFunctor\n    {A : Type uA} [Category.{vA} A] [CartesianMonoidalCategory A]\n    {B : Type uB} [Category.{vB} B] [CartesianMonoidalCategory B]\n    (F : A ⥤ B) [PreservesFiniteProducts F] :\n    letI : BraidedCategory A := BraidedCategory.ofCartesianMonoidalCategory\n    letI : BraidedCategory B := BraidedCategory.ofCartesianMonoidalCategory\n    ∃ (FF : CommRingObjCat A ⥤ CommRingObjCat B)\n      (hF : FF ⋙ CommRingObjCat.forget B = CommRingObjCat.forget A ⋙ F),\n      let eF := eqToIso hF\n      (∀ X : CommRingObjCat A,\n            AddMonObj.add (X := (FF.obj X).X) ≫ eF.hom.app X =\n              (eF.hom.app X ⊗ₘ eF.hom.app X) ≫\n                (prodComparisonIso F X.X X.X).inv ≫ F.map (AddMonObj.add (X := X.X)) ∧\n            AddMonObj.zero (X := (FF.obj X).X) ≫ eF.hom.app X =\n              (preservesTerminalIso F).inv ≫ F.map (AddMonObj.zero (X := X.X)) ∧\n            AddGrpObj.neg (X := (FF.obj X).X) ≫ eF.hom.app X =\n              eF.hom.app X ≫ F.map (AddGrpObj.neg (X := X.X)) ∧\n            MonObj.mul (X := (FF.obj X).X) ≫ eF.hom.app X =\n              (eF.hom.app X ⊗ₘ eF.hom.app X) ≫\n                (prodComparisonIso F X.X X.X).inv ≫ F.map (MonObj.mul (X := X.X)) ∧\n            MonObj.one (X := (FF.obj X).X) ≫ eF.hom.app X =\n              (preservesTerminalIso F).inv ≫ F.map (MonObj.one (X := X.X)))",
   "branch": "sheaf-dag",

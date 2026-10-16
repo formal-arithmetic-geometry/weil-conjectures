@@ -5,6 +5,8 @@ Authors: SHEAF group C1
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import Sheaf.Paper.CondensedQbarComparisons
 import Sheaf.Paper.CondensedQbarExchangeLeftAdjunct
 import Sheaf.Paper.CondensedQbarExchangeRightAdjunct
@@ -85,13 +87,12 @@ inverted; properness and Cartesianity are unnecessary. -/
 theorem constructibleToQbar_exchange_equality
     (sq : CommSq g' f' f g) (K : PadicSubfieldConstructible X ℓ E) :
     constructibleToQbarSourceHom ℓ k E f g K ≫
-        (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ k sq).app
+        (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ (sq.asOver (Spec (.of k)))).app
           ((constructibleToPadicAlgCl X ℓ E).obj K) =
       (constructibleToPadicAlgCl Y' ℓ E).map
-          ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k sq).app K) ≫
+          ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).app K) ≫
         constructibleToQbarTargetHom ℓ k E f' g' K := by
-  apply ((boundedConstructibleUpperStarLowerStarAdjunction
-    (Profinite.padicAlgClRingObj ℓ) ℓ k f').homEquiv _ _).symm.injective
+  apply ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (f'.asOver (Spec (.of k)))).homEquiv _ _).symm.injective
   exact (constructibleToQbar_exchange_left_adjunct ℓ k E f g f' g' sq K).trans
     (constructibleToQbar_exchange_right_adjunct ℓ k E f g f' g' sq K).symm
 

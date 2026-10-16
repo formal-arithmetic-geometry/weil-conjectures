@@ -116,7 +116,7 @@ theorem affine_derivedTensor_chart_comparison (X : Scheme.{u}) [IsAffine X]
     have hF' := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).2 hF
     exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).1
       (hk _ hF').2
-  have hCP : CochainComplex.IsKFlat (R := X.sheaf) (R.obj (T.obj P)) :=
+  have hCP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) (R.obj (T.obj P)) :=
     isKFlat_restrict X.toSpecΓ (T.obj P) (isKFlat_tilde (Γ(X, ⊤) : Type u) P hPac)
   obtain ⟨e⟩ := kFlat_derivedTensor_comparison_natIso X
     ((Functor.const (Discrete Unit)).obj (R.obj (T.obj P)))

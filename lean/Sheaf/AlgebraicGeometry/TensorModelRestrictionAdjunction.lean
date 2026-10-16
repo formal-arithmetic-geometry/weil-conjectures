@@ -119,7 +119,7 @@ theorem exists_tensorModel_restriction_adjunction
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))]
     (A : schemeDerivedCategory X)
     (P : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
     (eA : DerivedCategory.Q.obj P ≅ A) :
     letI := SheafOfModules.monoidalCategory X.sheaf
     letI := (SheafOfModules.tensorClosed X.sheaf).1.some

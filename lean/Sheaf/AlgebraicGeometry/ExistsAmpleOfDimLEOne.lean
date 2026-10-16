@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.AmpleIso
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ExistsAmpleOfReducedDimLEOne
 import Sheaf.AlgebraicGeometry.PicardLift
-import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-! # Ample invertible modules in dimension at most one
 

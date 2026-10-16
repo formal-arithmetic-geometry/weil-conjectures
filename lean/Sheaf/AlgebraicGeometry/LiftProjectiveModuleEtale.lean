@@ -3,7 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import Sheaf.LinearAlgebra.IdempotentImageBaseChange
+import WeilConjectures.LinearAlgebra.IdempotentImageBaseChange
 import Sheaf.AlgebraicGeometry.EtaleLiftFiniteFreeProjector
 import Mathlib.RingTheory.Finiteness.Projective
 

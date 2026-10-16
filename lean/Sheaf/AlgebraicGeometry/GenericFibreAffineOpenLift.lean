@@ -6,7 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Birational.Birational
 import Mathlib.RingTheory.SimpleRing.Field
-import Sheaf.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
+import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Lifting an affine open from a generic fibre

@@ -40,7 +40,7 @@ private noncomputable local instance derivedTensorOpenRestrictionUniversesTensor
 private theorem tensor_model_iso (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P) :
     Nonempty ((DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N) ≅
       DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N
         (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))))) := by

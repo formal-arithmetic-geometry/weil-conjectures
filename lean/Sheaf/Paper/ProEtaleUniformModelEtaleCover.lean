@@ -5,14 +5,14 @@ Authors: SHEAF group D3
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.CategoryTheory.Sites.SheafHom
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 
 /-! # ProEtaleUniformModelEtaleCover

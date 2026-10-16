@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.SingleSupportedFiniteFreeHomQC
 import Sheaf.AlgebraicGeometry.LocalizedComplexQCHomologyExtension
 import Sheaf.Algebra.Homology.StupidTailHomShortExact
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
-import Sheaf.AlgebraicGeometry.Modules.QuasicoherentBinarySum
+import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
 import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
@@ -31,6 +31,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 400000 in
+-- The canonical quasi-coherent comparison adds elaboration work to the finite filtration.
 /-- Hom from a bounded complex of finite free modules preserves quasi-coherent cohomology.
 
 Source: Stacks Project, Tag 0A6H (2), using the finite-column calculation in Tag 08I5.

@@ -13,9 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.AffineStructureAlgebraFullyFaithful
+import WeilConjectures.AlgebraicGeometry.AffineStructureAlgebraFullyFaithful
 import Sheaf.AlgebraicGeometry.RelativeSpectrumAffineRealization
-import Sheaf.AlgebraicGeometry.RelativeSpecMorphismChart
+import WeilConjectures.AlgebraicGeometry.RelativeSpecMorphismChart
 
 /-! # Affine morphisms and quasi-coherent algebras (relative spectrum)
 

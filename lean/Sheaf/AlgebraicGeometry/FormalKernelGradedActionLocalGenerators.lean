@@ -6,7 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
-public import Sheaf.AlgebraicGeometry.GradedSheafStructures
+public import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineOpenSectionsAdic
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange

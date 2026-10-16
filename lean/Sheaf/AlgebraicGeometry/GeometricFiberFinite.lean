@@ -5,6 +5,8 @@ Authors: SHEAF group ND
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.IsAlgClosed.Basic

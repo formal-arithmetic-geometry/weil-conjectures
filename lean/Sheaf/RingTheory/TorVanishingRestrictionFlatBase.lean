@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Category.ModuleCat.TorSymmetry
+import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Restricting a Tor bound along a flat base map

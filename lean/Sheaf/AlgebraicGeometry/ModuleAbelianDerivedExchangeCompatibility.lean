@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import Sheaf.AlgebraicGeometry.ModuleAbelianUnderivedExchange
-import Sheaf.CategoryTheory.RightDerivedPlusCube
+import WeilConjectures.CategoryTheory.RightDerivedPlusCube
 
 /-! # Compatibility of canonical coefficient comparisons with derived exchange
 

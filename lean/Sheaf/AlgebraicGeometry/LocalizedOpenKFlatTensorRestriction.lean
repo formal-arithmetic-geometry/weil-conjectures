@@ -156,13 +156,13 @@ theorem localizedOpen_kFlat_tensor_restriction (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-    (hN : CochainComplex.IsKFlat (R := X.sheaf) N) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+    (hN : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N) :
     let R := SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U
     let P' := (R.mapHomologicalComplex (.up ℤ)).obj P
     let N' := (R.mapHomologicalComplex (.up ℤ)).obj N
-    CochainComplex.IsKFlat (R := X.sheaf.over U) P' ∧
-      CochainComplex.IsKFlat (R := X.sheaf.over U) N' ∧
+    CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf.over U) P' ∧
+      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf.over U) N' ∧
       Nonempty (R.mapDerivedCategory.obj
         (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N
           (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≅
@@ -177,8 +177,8 @@ theorem localizedOpen_kFlat_tensor_restriction (X : Scheme.{u}) (U : X.Opens)
   let EC := E.mapHomologicalComplex (.up ℤ)
   have hrestrict (K : CochainComplex
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-      (hK : CochainComplex.IsKFlat (R := X.sheaf) K) :
-      CochainComplex.IsKFlat (R := X.sheaf.over U) (RC.obj K) := by
+      (hK : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) K) :
+      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf.over U) (RC.obj K) := by
     have h := openRestriction_isKFlat X U K hK
     change ∀ F : CochainComplex
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,

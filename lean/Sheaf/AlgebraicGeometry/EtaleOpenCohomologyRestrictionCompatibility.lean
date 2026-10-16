@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
 import Sheaf.AlgebraicGeometry.AbelianRepresentableGeneratorCoherence
-import Sheaf.AlgebraicGeometry.ConstantSectionAdjunctPullback
+import WeilConjectures.AlgebraicGeometry.ConstantSectionAdjunctPullback
+import WeilConjectures.AlgebraicGeometry.ConstantSectionAdjunctPullback
 
 /-! # Compatibility of the canonical comparison with smaller opens
 

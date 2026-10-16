@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.CategoryTheory.ColimitSites
+public import WeilConjectures.CategoryTheory.ColimitSites
 public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Sheaf.CategoryTheory.ColimitSiteCechTransport
 import Sheaf.CategoryTheory.ColimitSiteCechColimit

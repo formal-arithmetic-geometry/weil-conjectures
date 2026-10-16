@@ -51,7 +51,7 @@ private theorem counit_isIso
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) :
+    (hP : P.IsAcyclicTensorKFlat) :
     IsIso ((SingleComplexBaseChange.counit f).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
@@ -83,7 +83,7 @@ private theorem modelMap_isIso
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (X : Scheme.{u})
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) : IsIso (pullbackTensorModelMap X P N) := by
+    (hP : P.IsAcyclicTensorKFlat) : IsIso (pullbackTensorModelMap X P N) := by
   let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
   let : MonoidalCategory C := SheafOfModules.monoidalCategory X.sheaf
   let : SymmetricCategory C := SheafOfModules.symmetricCategory X.sheaf
@@ -145,7 +145,7 @@ theorem tensorCounit_oneKFlat_coordinates
     {X T : Scheme.{u}} (k : T ⟶ X)
     [@MonoidalPreadditive _ _ _ (SheafOfModules.monoidalCategory X.sheaf)]
     (P G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
     (τ : ∀ A B : schemeDerivedCategory X,
       (derivedPullback k).obj (A ⊗ B) ⟶
         (derivedPullback k).obj A ⊗ (derivedPullback k).obj B)
@@ -206,7 +206,7 @@ theorem tensorCounit_oneKFlat_coordinates
   let K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ ⥤
       CochainComplex (SheafOfModules.{u} (moduleRings T.toRingedSpace)) ℤ :=
     (Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)
-  have hPull : CochainComplex.IsKFlat (R := T.sheaf) (K.obj P) := by
+  have hPull : CochainComplex.IsAcyclicTensorKFlat (R := T.sheaf) (K.obj P) := by
     convert CochainComplex.isKFlat_pullback k.base T.sheaf X.sheaf ⟨k.c⟩ P hP using 1
     rfl
   have := modelMap_isIso X P G hP

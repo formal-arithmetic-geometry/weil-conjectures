@@ -15,7 +15,7 @@ import Sheaf.Paper.EtaleHypercohomologySupportedResolutionMaps
 import Sheaf.Paper.EtaleKInjectivePullbackAbutment
 import Sheaf.Paper.DerivedEtaleCohomologyPullbackLaws
 import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 /-! # Quantitative stabilization for functorial hypercohomology
 
 Source: Stacks Project, Tags 015J and 0EZM.

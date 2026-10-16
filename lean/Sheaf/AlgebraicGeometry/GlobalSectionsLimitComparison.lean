@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 

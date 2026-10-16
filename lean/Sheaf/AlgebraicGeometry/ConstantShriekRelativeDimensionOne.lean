@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
@@ -17,7 +17,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportBaseChangeQcqs
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.ConstructibleSheaf.Defs
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.GoodCurvesGenericDiagram
 import Sheaf.AlgebraicGeometry.ConstructibleSurjectivePullback
 import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
@@ -30,7 +30,7 @@ import Sheaf.AlgebraicGeometry.EtaleShriekQcqsComposition
 import Sheaf.AlgebraicGeometry.EtaleShriekRelativeMayerVietoris
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import Sheaf.AlgebraicGeometry.ConstructibleStratificationAssembly
-import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 
 /-!
 # Constructible compact support for constant finite coefficients on affine smooth curves

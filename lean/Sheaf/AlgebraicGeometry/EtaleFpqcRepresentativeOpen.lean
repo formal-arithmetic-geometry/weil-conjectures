@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpenEtaleCriterion
 import Sheaf.AlgebraicGeometry.EtaleFpqcAgreementOpenCompatibility
-import Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent
+import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
 
 /-! # Descending the agreement open of a single local representative
 

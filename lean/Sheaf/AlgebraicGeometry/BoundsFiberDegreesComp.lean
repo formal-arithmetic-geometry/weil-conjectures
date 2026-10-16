@@ -5,8 +5,8 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FiberDegreeBound
-import Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange
+public import WeilConjectures.AlgebraicGeometry.FiberDegreeBound
+import WeilConjectures.AlgebraicGeometry.FiniteFiberDegreeBaseChange
 import Sheaf.AlgebraicGeometry.FiniteFieldTowerDegreeBound
 
 /-!

@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 
 /-! # Étale cohomology over an open object

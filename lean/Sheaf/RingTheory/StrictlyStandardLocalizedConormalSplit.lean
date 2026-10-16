@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.StrictlyStandardElement
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Sheaf.LinearAlgebra.Matrix.LeftInverseMinors
+import WeilConjectures.LinearAlgebra.Matrix.LeftInverseMinors
 import Mathlib.LinearAlgebra.Matrix.ToLin
 
 /-!

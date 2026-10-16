@@ -5,6 +5,8 @@ Authors: SHEAF group U2
 -/
 module
 
+public import Mathlib.Algebra.Category.Grp.Adjunctions
+
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint

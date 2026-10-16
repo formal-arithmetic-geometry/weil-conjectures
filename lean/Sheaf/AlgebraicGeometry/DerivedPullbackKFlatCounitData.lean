@@ -40,7 +40,7 @@ theorem exists_derivedPullback_kFlat_counit_data
               schemeDerivedCategory Z),
     ∀ P : CochainComplex
             (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
-          CochainComplex.IsKFlat (R := Y.sheaf) P →
+          CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
           IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
   obtain ⟨e⟩ := exists_derivedPullback_shifted_unit_iso f
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,

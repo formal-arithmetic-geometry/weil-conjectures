@@ -6,10 +6,10 @@ Authors: SHEAF group A4
 module
 
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 import WeilConjectures.CategoryTheory.Pro.Generating
 import Mathlib.CategoryTheory.Sites.Whiskering
-import all Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import all WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 import WeilConjectures.Mathlib.CategoryTheory.Sites.DenseSubsite.Basic
 
 /-! # Exact coefficient change on affine etale sections -/

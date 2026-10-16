@@ -5,6 +5,8 @@ Authors: SHEAF group H1
 -/
 module
 
+public import Mathlib.Algebra.Category.Grp.Adjunctions
+
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import Sheaf.AlgebraicGeometry.HigherDirectImageLimitAffineClassRep

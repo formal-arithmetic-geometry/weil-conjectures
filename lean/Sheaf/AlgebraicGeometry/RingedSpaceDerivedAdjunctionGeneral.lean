@@ -85,7 +85,7 @@ theorem derivedModulePullback_adjunction
           (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y))
             (ComplexShape.up ℤ)) ∧
         (∀ K : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ,
-          K.IsKFlat → IsIso
+          K.IsAcyclicTensorKFlat → IsIso
             (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) ∧
         Nonempty (L ⊣ derivedModuleDirectImage g) := by
   obtain ⟨P, h, hm, hP, ⟨adj⟩⟩ := exists_tensorModulePullback g

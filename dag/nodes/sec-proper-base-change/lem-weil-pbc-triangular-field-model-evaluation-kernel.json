@@ -132,8 +132,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.FieldTheory.TriangularFieldModelEvaluationKernel",
-  "file": "lean/Sheaf/FieldTheory/TriangularFieldModelEvaluationKernel.lean",
+  "module": "WeilConjectures.FieldTheory.TriangularFieldModelEvaluationKernel",
+  "file": "lean/WeilConjectures/FieldTheory/TriangularFieldModelEvaluationKernel.lean",
   "declaration": "FieldTheory.exists_triangularFieldModel_evaluation_kernel",
   "statement": "theorem exists_triangularFieldModel_evaluation_kernel\n    (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]\n    (d : ℕ) (x : Fin d → K) (hx : IsTranscendenceBasis k x)\n    (m : ℕ) (b : Fin m → K) :\n    ∃ (h : MvPolynomial (Fin d) k)\n      (p : (i : Fin m) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))\n      (y : Fin (d + 1 + m) → K),\n      h ≠ 0 ∧ (∀ i, (p i).Monic) ∧\n      (∀ j : Fin d, y ⟨j.val, by omega⟩ = x j) ∧\n      y ⟨d, by omega⟩ = (MvPolynomial.aeval x h)⁻¹ ∧\n      (∀ i : Fin m, y ⟨d + 1 + i.val, by omega⟩ = b i) ∧\n      RingHom.ker (MvPolynomial.aeval y).toRingHom =\n        Ideal.ofList (triangularFieldModelEquations k d m h p)",
   "branch": "sheaf-dag",

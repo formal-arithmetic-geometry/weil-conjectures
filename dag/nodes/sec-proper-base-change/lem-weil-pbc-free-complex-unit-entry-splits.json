@@ -165,9 +165,9 @@
  },
  "reviewed": "2026-10-10 L: 6 steps following 00MT, the two changes of basis justified by the new node lem-weil-pbc-triangular-change-of-basis (triangular with unit diagonal is a basis; Mathlib candidates recorded), the splitting isomorphism written out; statement completed with the meaning of the direct sum and of a chain isomorphism (accepted); 1 new node",
  "lean": {
-  "module": "Sheaf.Algebra.Homology.UnitEntrySplits",
+  "module": "WeilConjectures.Algebra.Homology.UnitEntrySplits",
   "declaration": "ChainComplex.exists_splitting_of_isUnit_entry",
-  "file": "lean/Sheaf/Algebra/Homology/UnitEntrySplits.lean",
+  "file": "lean/WeilConjectures/Algebra/Homology/UnitEntrySplits.lean",
   "statement": "theorem exists_splitting_of_isUnit_entry {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℤ) (n : ℤ → ℕ) (b : ∀ j : ℤ, Module.Basis (Fin (n j)) R (C.X j)) (i : ℤ) (p : Fin (n i)) (q : Fin (n (i - 1))) (hunit : IsUnit (LinearMap.toMatrix (b i) (b (i - 1)) (C.d i (i - 1)).hom q p)) : ∃ (C' T : ChainComplex (ModuleCat.{max u v} R) ℤ) (n' : ℤ → ℕ), (∀ j : ℤ, Nonempty (Module.Basis (Fin (n' j)) R (C'.X j))) ∧ n' i + 1 = n i ∧ n' (i - 1) + 1 = n (i - 1) ∧ (∀ j : ℤ, j ≠ i → j ≠ i - 1 → n' j = n j) ∧ (∀ j : ℤ, j ≠ i → j ≠ i - 1 → Subsingleton (T.X j)) ∧ ∃ (e : T.X i ≃ₗ[R] R) (f : T.X (i - 1) ≃ₗ[R] R), (∀ t : T.X i, f ((T.d i (i - 1)).hom t) = e t) ∧ let M : ℤ → Bool → ModuleCat.{max u v} R := fun j s ↦ if s then T.X j else C'.X j ∃ ψ : ∀ j : ℤ, (⨁ s : Bool, M j s) ≃ₗ[R] C.X j, ∀ (j : ℤ) (x : C'.X j) (t : T.X j), (C.d j (j - 1)).hom (ψ j (DirectSum.lof R Bool (fun s ↦ M j s) false x + DirectSum.lof R Bool (fun s ↦ M j s) true t)) = ψ (j - 1) (DirectSum.lof R Bool (fun s ↦ M (j - 1) s) false ((C'.d j (j - 1)).hom x) + DirectSum.lof R Bool (fun s ↦ M (j - 1) s) true ((T.d j (j - 1)).hom t))",
   "branch": "sheaf-dag",
   "by": "C1",

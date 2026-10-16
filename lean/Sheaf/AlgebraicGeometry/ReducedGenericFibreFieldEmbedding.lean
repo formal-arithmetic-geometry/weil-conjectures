@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-public import Sheaf.FieldTheory.SeparableExtension
+public import WeilConjectures.FieldTheory.SeparableExtension
 
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 

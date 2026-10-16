@@ -12,7 +12,7 @@ public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Sheaf.RingTheory.RegularBaseChange
 import Mathlib.RingTheory.TensorProduct.Quotient
-import Sheaf.Algebra.IndSmoothQuotientCompatibility
+import WeilConjectures.Algebra.IndSmoothQuotientCompatibility
 import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 
 /-! # Maximal bad quotients for Popescu's theorem -/

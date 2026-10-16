@@ -6,7 +6,7 @@ Authors: SHEAF group ND
 module
 
 public import Sheaf.Paper.CompleteCoefficientDatum
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Sheaf.CategoryTheory.SiteConstantModuleFunctorGeneral
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
@@ -276,7 +276,7 @@ Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completio
 def intrinsicKoszulCompletion (_d : CompleteCoefficientDatum Λ) (r : ℕ) (f : Fin r → Λ)
     (_hf : Ideal.span (Set.range f) = _d.ideal) (K : proEtaleDerivedCategory X Λ)
     (C : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X Λ)) ℤ)
-    (_hC : CochainComplex.IsKFlat (R := adicConstantRing X Λ) C)
+    (_hC : CochainComplex.IsAcyclicTensorKFlat (R := adicConstantRing X Λ) C)
     (_e : (adicLocalization X Λ).obj C ≅ K) : proEtaleDerivedCategory X Λ :=
   (adicLocalization X Λ).obj (koszulCompletionComplex X Λ r f C)
 
@@ -285,7 +285,7 @@ Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completio
 def intrinsicKoszulCompletionUnit (d : CompleteCoefficientDatum Λ) (r : ℕ) (f : Fin r → Λ)
     (hf : Ideal.span (Set.range f) = d.ideal) (K : proEtaleDerivedCategory X Λ)
     (C : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X Λ)) ℤ)
-    (hC : CochainComplex.IsKFlat (R := adicConstantRing X Λ) C)
+    (hC : CochainComplex.IsAcyclicTensorKFlat (R := adicConstantRing X Λ) C)
     (e : (adicLocalization X Λ).obj C ≅ K) :
     K ⟶ intrinsicKoszulCompletion X Λ d r f hf K C hC e :=
   e.inv ≫ (adicLocalization X Λ).map (koszulCompletionUnitComplex X Λ r f C)
@@ -295,7 +295,7 @@ Source: blueprint order 1257 (blueprint: def-weil-pbc-intrinsic-koszul-completio
 def IsIntrinsicallyDerivedComplete (d : CompleteCoefficientDatum Λ) (r : ℕ) (f : Fin r → Λ)
     (hf : Ideal.span (Set.range f) = d.ideal) (K : proEtaleDerivedCategory X Λ)
     (C : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X Λ)) ℤ)
-    (hC : CochainComplex.IsKFlat (R := adicConstantRing X Λ) C)
+    (hC : CochainComplex.IsAcyclicTensorKFlat (R := adicConstantRing X Λ) C)
     (e : (adicLocalization X Λ).obj C ≅ K) : Prop :=
   IsIso (intrinsicKoszulCompletionUnit X Λ d r f hf K C hC e)
 

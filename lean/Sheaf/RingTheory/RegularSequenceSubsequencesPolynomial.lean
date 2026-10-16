@@ -4,7 +4,7 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.Data.List.OfFn
 import Mathlib.Data.List.FinRange
-import Sheaf.Paper.PolynomialIdealCoefficientsMonomial
+import WeilConjectures.AlgebraicGeometry.PolynomialIdealCoefficientsMonomial
 
 /-! Equivalence between subsequence regularity and polynomial-variable regularity.
 Source: Stacks Project, Algebra, Lemma 10.68.10, Tag 07DW.

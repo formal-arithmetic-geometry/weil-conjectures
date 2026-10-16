@@ -14,7 +14,7 @@ import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.RingTheory.TensorProduct.Pi
 import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
 import Mathlib.Data.Fintype.Order
-import Sheaf.FieldTheory.SeparableSplitPurelyInseparableResidueFields
+import WeilConjectures.FieldTheory.SeparableSplitPurelyInseparableResidueFields
 
 /-!
 # Splitting the reduction of a finite algebra after a separable extension

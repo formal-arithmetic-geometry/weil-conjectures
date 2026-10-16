@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Filtered.Basic
 import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import Sheaf.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Mathlib.CategoryTheory.Abelian.Basic
 

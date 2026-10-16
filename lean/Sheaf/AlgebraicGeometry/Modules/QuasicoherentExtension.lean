@@ -5,6 +5,8 @@ Authors: SHEAF group M1
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
+
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.Modules.AffineExtensionSectionSurjectivity
@@ -84,7 +86,7 @@ Proof:
    quasi-coherent (lem-weil-pbc-spec-module-tilde-sections).
 3. Quasi-coherence on the affine open cover implies quasi-coherence on the scheme
    (pqf-def-coherent). -/
-theorem isQuasicoherent_of_shortExact {X : Scheme.{u}} (S : ShortComplex X.Modules)
+private theorem isQuasicoherent_of_shortExact_via_tilde {X : Scheme.{u}} (S : ShortComplex X.Modules)
     (hS : S.ShortExact) [S.X₁.IsQuasicoherent] [S.X₃.IsQuasicoherent] :
     S.X₂.IsQuasicoherent := by
   refine isQuasicoherent_of_iSup_opensRange_eq_top S.X₂

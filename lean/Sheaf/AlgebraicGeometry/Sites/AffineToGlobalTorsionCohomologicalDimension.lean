@@ -12,7 +12,7 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
 import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 import WeilConjectures.CategoryTheory.SpectralSequence.Vanishing
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.Paper.ZariskiEtaleCore
+import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore
 
 /-!
 # From affine to global torsion cohomological dimension
@@ -233,7 +233,7 @@ theorem subsingleton_H_of_two_mul_add_lt_of_affine_bound
     (hq : 2 * d + c < q) : Subsingleton (Sheaf.H F q) :=
     open CategoryTheory.Limits TopologicalSpace Opposite in by
   classical
-  obtain ⟨i, hi, _, hlim, ⟨htop⟩, hcont, hflat, _⟩ := zariski_to_etale_core X
+  obtain ⟨i, hi, _, hlim, ⟨htop⟩, hcont, hflat⟩ := zariski_to_etale_core X
   let := hcont
   let := hlim
   let := hflat

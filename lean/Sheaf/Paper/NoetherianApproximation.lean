@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.Algebra.MvPolynomial.Basic
 import Sheaf.RingTheory.PolynomialQuotientDimensionLowerBound

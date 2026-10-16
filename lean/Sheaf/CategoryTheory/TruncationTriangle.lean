@@ -7,7 +7,7 @@ public import Mathlib.CategoryTheory.Triangulated.Triangulated
 import Sheaf.Algebra.Homology.UpperTruncationStepSES
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Sheaf.CategoryTheory.Triangulated.TriangleMorphismExtension
+import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
 
 /-!
 # Distinguished triangle for canonical truncations

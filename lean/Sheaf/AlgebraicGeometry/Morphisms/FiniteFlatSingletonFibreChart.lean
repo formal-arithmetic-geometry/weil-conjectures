@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.EtaleLocalFiniteAtPoint
+import WeilConjectures.AlgebraicGeometry.EtaleLocalFiniteAtPoint
 import Sheaf.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 

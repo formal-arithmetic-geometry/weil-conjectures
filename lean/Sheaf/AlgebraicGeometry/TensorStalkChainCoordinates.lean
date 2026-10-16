@@ -74,7 +74,7 @@ theorem exists_tensorStalk_chain_coordinates
     (hτ : IsCanonicalPullbackTensorComparison g' τ)
     (c : SingleComplexBaseChange.Coordinates g' K.obj K'.obj φ)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (eP : DerivedCategory.Q.obj P ≅ E.obj) (hP : P.IsKFlat) (z : X') :
+    (eP : DerivedCategory.Q.obj P ≅ E.obj) (hP : P.IsAcyclicTensorKFlat) (z : X') :
     letI := SingleComplexBaseChange.leftAlgebra f g' z
     letI := SingleComplexBaseChange.rightAlgebra f f' g g' sq z
     letI := (SingleComplexBaseChange.tensorMap f f' g g' sq z).toAlgebra

@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.Topology.Constructible
 import Sheaf.AlgebraicGeometry.EtaleSeparatedStratifiedFinite
-import Sheaf.AlgebraicGeometry.ImmersionAffineConstructiblePieces
-import Sheaf.AlgebraicGeometry.SeparatedAffineCoverCriterion
+import WeilConjectures.AlgebraicGeometry.ImmersionAffineConstructiblePieces
+import WeilConjectures.AlgebraicGeometry.SeparatedAffineCoverCriterion
 import WeilConjectures.ConstructibleSheaf.Refinement
 import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 

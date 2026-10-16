@@ -34,7 +34,7 @@ local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
 -- The `max u v` module universe makes the `HasMapBifunctor` instance term exceed the default
--- `synthInstance.maxSize` of 128 (as for `CochainComplex.IsKFlat`).
+-- `synthInstance.maxSize` of 128 (as for `CochainComplex.IsAcyclicTensorKFlat`).
 set_option synthInstance.maxSize 256 in
 /-- The Hom-total-tensor isomorphism, natural contravariantly in `K` and `L` and
 covariantly in `M`. Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1

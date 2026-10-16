@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
-import Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent
+import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
 
 /-!
 # Descended overlap transitions before gluing

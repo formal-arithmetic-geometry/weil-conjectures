@@ -92,7 +92,7 @@ theorem exists_open_restricted_canonical_square
       AddCommGrpCat.{u}
     let HU := comparisonStalkCohomology (pullback g' U.ι) z i ⋙ FU
     ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-        (hP : P.IsKFlat)
+        (hP : P.IsAcyclicTensorKFlat)
         (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
       ,
       let Q : CochainComplex

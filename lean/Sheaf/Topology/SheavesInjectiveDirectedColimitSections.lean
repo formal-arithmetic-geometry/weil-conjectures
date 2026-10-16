@@ -8,7 +8,7 @@ module
 public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Mathlib.Topology.Compactness.Compact
-import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!

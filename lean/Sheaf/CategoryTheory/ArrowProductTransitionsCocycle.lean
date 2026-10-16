@@ -4,8 +4,8 @@ public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.CategoryTheory.ArrowProductTransitionsExistence
-import Sheaf.CategoryTheory.ArrowProductTransitionsCocycleLaw
+import WeilConjectures.CategoryTheory.ArrowProductTransitionsExistence
+import WeilConjectures.CategoryTheory.ArrowProductTransitionsCocycleLaw
 
 @[expose] public section
 universe u

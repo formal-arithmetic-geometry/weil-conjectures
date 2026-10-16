@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
 
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomology
-import Sheaf.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit
+import WeilConjectures.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit
 
 /-!
 # DenseOpenRestrictionComparison

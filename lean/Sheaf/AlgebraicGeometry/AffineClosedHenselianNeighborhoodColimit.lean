@@ -7,9 +7,9 @@ module
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.AlgebraicGeometry.AffineClosedHenselianRingPresentation
-import Sheaf.AlgebraicGeometry.SpecRingCohomologyDiagram
+import WeilConjectures.AlgebraicGeometry.SpecRingCohomologyDiagram
 import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
+import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 
 /-! # Continuity at the henselization of a closed affine pair -/
 

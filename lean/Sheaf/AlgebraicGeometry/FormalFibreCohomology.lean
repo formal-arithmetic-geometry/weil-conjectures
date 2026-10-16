@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-public import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Stalk

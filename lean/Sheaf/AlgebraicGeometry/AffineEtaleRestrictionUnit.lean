@@ -5,11 +5,11 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.AffineEtaleRestrictionLargeSets
-import Sheaf.CategoryTheory.InverseMateEquivalence
+import WeilConjectures.AlgebraicGeometry.AffineEtaleRestrictionLargeSets
+import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! # Affine étale inverse-image restriction units -/
 

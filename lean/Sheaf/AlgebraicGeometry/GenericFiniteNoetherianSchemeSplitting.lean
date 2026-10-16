@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.GenericFiniteSchemeSplitting
-import Sheaf.AlgebraicGeometry.FiniteSplittingClosedImmersionDescent
+import WeilConjectures.AlgebraicGeometry.FiniteSplittingClosedImmersionDescent
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 

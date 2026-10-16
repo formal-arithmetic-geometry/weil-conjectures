@@ -49,8 +49,8 @@ private noncomputable def tensorPullbackRestrictIso {X Y : Scheme.{u}} (f : X �
 
 private theorem isKFlat_of_iso {X : Scheme.{u}}
     {K L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ}
-    (e : K ≅ L) (hK : CochainComplex.IsKFlat (R := X.sheaf) K) :
-    CochainComplex.IsKFlat (R := X.sheaf) L := by
+    (e : K ≅ L) (hK : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) K) :
+    CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) L := by
   let := SheafOfModules.monoidalCategory X.sheaf
   intro F hF i
   exact (hK F hF i).of_iso
@@ -133,7 +133,7 @@ theorem affine_kFlat_pullback_chart_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     tensorPullback_additive X.toSpecΓ
   let K := (TY.mapHomologicalComplex (.up ℤ)).obj P
   let C := (RY.mapHomologicalComplex (.up ℤ)).obj K
-  have hK : CochainComplex.IsKFlat (R := (Spec Γ(Y, ⊤)).sheaf) K := by
+  have hK : CochainComplex.IsAcyclicTensorKFlat (R := (Spec Γ(Y, ⊤)).sheaf) K := by
     apply isKFlat_tilde Γ(Y, ⊤) P
     intro F hF
     have h := (HomotopyCategory.kFlat_iff_preserves_acyclic
@@ -141,7 +141,7 @@ theorem affine_kFlat_pullback_chart_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
         ((HomotopyCategory.kFlat_quotient_obj_iff P).mpr hP)
     exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
       (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).mpr hF)).2
-  have hC : CochainComplex.IsKFlat (R := Y.sheaf) C := by
+  have hC : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) C := by
     have h := CochainComplex.isKFlat_pullback Y.toSpecΓ.base Y.sheaf
       (Spec Γ(Y, ⊤)).sheaf ⟨Y.toSpecΓ.c⟩ K hK
     apply isKFlat_of_iso

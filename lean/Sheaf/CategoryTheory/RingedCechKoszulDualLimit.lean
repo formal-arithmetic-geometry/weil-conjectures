@@ -206,7 +206,7 @@ theorem ringed_cech_koszul_dual_limit :
         CochainComplex.mappingCone.inr _ ≫ t =
           CochainComplex.telescopeToColimit O (ringedKoszulDiagram O r b) ≫ alpha.hom ∧
         QuasiIso t) ∧
-    (∀ m : ℕ, CochainComplex.IsKFlat ((ringedKoszulDualTower O r b).obj (op m))) ∧
+    (∀ m : ℕ, CochainComplex.IsAcyclicTensorKFlat ((ringedKoszulDualTower O r b).obj (op m))) ∧
     Nonempty (RingedKoszulCechComparison O r b) := by
   sorry
 

@@ -42,7 +42,7 @@ def HasFiniteTorDimensionOver {X S : Scheme.{u₀}} (f : X ⟶ S)
     ∃ P : CochainComplex (SheafOfModules.{u₀} ((sheafCompose (Opens.grothendieckTopology X)
         (forget₂ CommRingCat.{u₀} RingCat.{u₀})).obj
           (TopCat.Sheaf.inverseImageRing f.base S.sheaf))) ℤ,
-      CochainComplex.IsKFlat (R := TopCat.Sheaf.inverseImageRing f.base S.sheaf) P ∧
+      CochainComplex.IsAcyclicTensorKFlat (R := TopCat.Sheaf.inverseImageRing f.base S.sheaf) P ∧
       ∃ q : P ⟶ ((SheafOfModules.restrictScalars
           ((sheafCompose (Opens.grothendieckTopology X)
             (forget₂ CommRingCat.{u₀} RingCat.{u₀})).map

@@ -11,7 +11,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpenExistence
 import Sheaf.AlgebraicGeometry.EtaleCechSectionsConnectedGeometricFibre
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
 
 /-! # Compatibility of sections on connected geometric fibres
 

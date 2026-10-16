@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyAffineComparison
-import Sheaf.AlgebraicGeometry.EtaleLimitReindexTransitionCoherence
+import WeilConjectures.AlgebraicGeometry.EtaleLimitReindexTransitionCoherence
 
 /-! # The comparison cocone on the affine tail
 

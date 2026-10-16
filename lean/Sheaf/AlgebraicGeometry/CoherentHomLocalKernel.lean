@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
 import Sheaf.AlgebraicGeometry.CoherentLocalFinitePresentation
-import Sheaf.AlgebraicGeometry.HomLocalKernelOfPresentation
+import WeilConjectures.AlgebraicGeometry.HomLocalKernelOfPresentation
 
 /-!
 # Local kernel models for Hom out of a coherent module

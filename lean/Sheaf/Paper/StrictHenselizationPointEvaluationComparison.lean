@@ -6,8 +6,8 @@ Authors: SHEAF group N2
 module
 
 public import Sheaf.Paper.StrictHenselizationPointEvaluation
-public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 
 /-! # Compatibility of the affine-chart colimit comparison
 

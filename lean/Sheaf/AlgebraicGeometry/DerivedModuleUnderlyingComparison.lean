@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.EtaleComplexPullbackTransport
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 public import Sheaf.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
 public import Sheaf.CategoryTheory.DerivedExactSquare
-import Sheaf.CategoryTheory.RightDerivedPlusCube
+import WeilConjectures.CategoryTheory.RightDerivedPlusCube
 
 /-! # Derived cohomology and passage to underlying abelian sheaves
 

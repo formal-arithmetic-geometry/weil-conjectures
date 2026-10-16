@@ -8,6 +8,27 @@ module
 public import Sheaf.Paper.LatticeSheafBasic
 import Sheaf.Paper.LatticeClassDescent
 import Sheaf.Paper.LatticeCosetLocalSurjectivity
+public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+public import Sheaf.NumberTheory.Padics.CoefficientExtension
+public import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
+public import Mathlib.Topology.ContinuousMap.Algebra
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.Analysis.Normed.Field.WithAbs
+public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
+public import Mathlib.GroupTheory.Coset.Defs
+import Sheaf.CategoryTheory.SiteModuleSheafGluing
+import Sheaf.NumberTheory.Padics.LatticeStabilizerOpen
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Mathlib.AlgebraicGeometry.Sites.Etale
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+import Mathlib.RingTheory.Flat.Basic
+import Mathlib.LinearAlgebra.TensorProduct.Pi
 
 /-!
 # Local constancy of the sheaf of integral lattices

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.IntegralResiduePullSquareData
 import Sheaf.Paper.IntegralResidueOrdinaryRestrictPullComp
-import WeilConjectures.SixFunctors.ProEtale.Derived.RestrictScalars
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 
 /-! # Composition of restriction and derived pullback -/
 

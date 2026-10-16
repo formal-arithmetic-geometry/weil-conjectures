@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.EtaleLimitAcyclicReplacement
-import Sheaf.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
+import WeilConjectures.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 
 /-! # Degree reduction for etale limit cohomology

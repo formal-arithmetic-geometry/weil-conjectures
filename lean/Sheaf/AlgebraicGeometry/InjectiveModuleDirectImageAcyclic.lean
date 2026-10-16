@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
-import Sheaf.Paper.HigherDirectImageSheafifiedPresheaf
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageSheafifiedPresheaf
 
 /-!
 # Higher direct images of an injective module sheaf
@@ -54,7 +54,7 @@ theorem isZero_higherDirectImage_of_injective_module
         ((DerivedCategory.Plus.singleFunctor
           (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj
           ((SheafOfModules.toSheaf _).obj I)))) := by
-  obtain ⟨e⟩ := higherDirectImageSheafifiedPresheaf p ((SheafOfModules.toSheaf _).obj I) q
+  let e := higherDirectImageSheafifiedPresheaf p ((SheafOfModules.toSheaf _).obj I) q
   apply e.isZero_iff.mp
   apply Functor.map_isZero
   apply Functor.isZero

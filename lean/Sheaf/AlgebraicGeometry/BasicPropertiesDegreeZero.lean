@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-! # DegreeZero property of module cohomology maps
 
@@ -55,8 +55,8 @@ theorem moduleCohomologyFMap_basic_degree_zero {X Y : Scheme.{u}} (h : X ⟶ Y)
             (forget₂ _ AddCommGrpCat).map eF.hom := by
   let S := RingedSpace.globalSectionsFunctor Y.toRingedSpace
   let T := RingedSpace.globalSectionsFunctor X.toRingedSpace
-  have : EnoughInjectives Y.Modules := enoughInjectives Y
-  have : EnoughInjectives X.Modules := enoughInjectives X
+  have : EnoughInjectives Y.Modules := enoughInjectives (X := Y)
+  have : EnoughInjectives X.Modules := enoughInjectives (X := X)
   have : PreservesFiniteLimits S :=
     inferInstanceAs (PreservesFiniteLimits
       (SheafOfModules.evaluation (moduleRings Y.toRingedSpace) (op ⊤)))

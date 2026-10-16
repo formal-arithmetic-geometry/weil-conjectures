@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 import Sheaf.AlgebraicGeometry.DescendClosedImmersion
-import Sheaf.AlgebraicGeometry.OverPullbackDiagonalClosedImmersion
+import WeilConjectures.AlgebraicGeometry.OverPullbackDiagonalClosedImmersion
 
 /-!
 # Separatedness descends to a finite stage

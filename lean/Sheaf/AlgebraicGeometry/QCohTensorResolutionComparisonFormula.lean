@@ -26,7 +26,7 @@ maps are inverted, and the second and fourth are composed in order.
 theorem tensorResolutionComparison_hom
     (E K M F N : CochainComplex C ℤ)
     (r : E ⟶ M) (q : K ⟶ M) (s : F ⟶ N)
-    (hE : E.IsKFlat) (hK : K.IsKFlat) (hF : F.IsKFlat)
+    (hE : E.IsAcyclicTensorKFlat) (hK : K.IsAcyclicTensorKFlat) (hF : F.IsAcyclicTensorKFlat)
     (hr : QuasiIso r) (hq : QuasiIso q) (hs : QuasiIso s) (i : ℤ) :
     (tensorResolutionComparison R E K M F N r q s hE hK hF hr hq hs i).hom =
       (let a := HomologicalComplex.mapBifunctorMap (𝟙 E) s (curriedTensor C) (.up ℤ)

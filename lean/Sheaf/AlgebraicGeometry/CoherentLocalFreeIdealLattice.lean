@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.SectionAvoidance
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Clearing denominators in a supplied local closed free model
 

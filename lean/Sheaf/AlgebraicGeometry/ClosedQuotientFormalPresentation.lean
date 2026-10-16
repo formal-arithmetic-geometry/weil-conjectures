@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
+import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
 
 /-! # Presentation of a formal module on its closed quotient
 

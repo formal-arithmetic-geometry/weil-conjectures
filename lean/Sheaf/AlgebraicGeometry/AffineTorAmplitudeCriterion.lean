@@ -174,7 +174,7 @@ theorem affine_torAmplitude_iff (A : Type u) [CommRing A]
     let := SheafOfModules.monoidalCategory (Spec (.of A)).sheaf
     change ∃ R : CochainComplex
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ,
-      CochainComplex.IsKFlat (R := (Spec (.of A)).sheaf) R ∧
+      CochainComplex.IsAcyclicTensorKFlat (R := (Spec (.of A)).sheaf) R ∧
         Nonempty (DerivedCategory.Q.obj R ≅ DerivedCategory.Q.obj (T.obj M)) ∧ _
     refine ⟨T.obj P, hk, ⟨e'⟩, ?_⟩
     let β := CochainComplex.mapBifunctorSingle₂Iso

@@ -263,7 +263,7 @@ structure Coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCategory 
   N : CochainComplex (SheafOfModules.{uSC} (moduleRings X'.toRingedSpace)) ℤ
   e : DerivedCategory.Q.obj P ≅ K
   e' : DerivedCategory.Q.obj N ≅ K'
-  isKFlat : P.IsKFlat
+  isKFlat : P.IsAcyclicTensorKFlat
   counit_isIso : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
   t : ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P ⟶ N
   represents : (counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
@@ -272,7 +272,7 @@ structure Coordinates (K : schemeDerivedCategory X) (K' : schemeDerivedCategory 
 
 private theorem counit_isIso_of_isKFlat
     (P : CochainComplex (SheafOfModules.{uSC} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) :
+    (hP : P.IsAcyclicTensorKFlat) :
     IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=

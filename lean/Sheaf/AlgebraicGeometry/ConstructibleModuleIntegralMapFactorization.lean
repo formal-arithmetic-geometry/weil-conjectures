@@ -5,10 +5,10 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import Sheaf.AlgebraicGeometry.IntegralConstantModulePushforwardColimit
 import WeilConjectures.ConstructibleSheaf.FinitePushforward
 
@@ -66,7 +66,7 @@ theorem exists_finite_lowerStar_factorization
             ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)),
         ψ ≫ κ = φ := by
   classical
-  obtain ⟨S, _, hS⟩ := hF
+  obtain ⟨S, hS⟩ := hF
   have : ∀ i : Fin S.n, IsImmersion (S.immersion i) := S.isImmersion
   have : Scheme.IsConstructibleSheaf F :=
     Scheme.IsConstructibleSheaf.of_noetherianSpace F S.stratum S.isLocallyClosed_stratum

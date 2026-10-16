@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 import Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertionsFirst
 import Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertionsLast
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
 import Sheaf.Paper.FiniteCoproductCohomologyAssembly
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen

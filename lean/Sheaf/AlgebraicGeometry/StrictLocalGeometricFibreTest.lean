@@ -13,9 +13,9 @@ import Mathlib.CategoryTheory.Sites.Point.Basic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
+import WeilConjectures.AlgebraicGeometry.CohomologyPullbackDerivedUnit
 import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.AffineSepclosedEtaleAcyclic
 import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows
 import Sheaf.AlgebraicGeometry.StrictHenselization

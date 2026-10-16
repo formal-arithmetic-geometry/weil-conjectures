@@ -50,14 +50,14 @@ terms or boundedness is used. For the empty open the stalk condition is vacuous.
 (blueprint: lem-pc-open-restriction-kflat-model). -/
 theorem openRestriction_isKFlat (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P) :
     let R :=
     SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
       Equivalence.functor
         (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
         (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv U)
-    CochainComplex.IsKFlat (R := U.toScheme.sheaf)
+    CochainComplex.IsAcyclicTensorKFlat (R := U.toScheme.sheaf)
       ((R.mapHomologicalComplex (.up ℤ)).obj P) := by
   classical
   -- Tensor pullback and restriction are left adjoints to the same pushforward.
@@ -76,13 +76,13 @@ theorem openRestriction_isKFlat (X : Scheme.{u}) (U : X.Opens)
   let c : T ≅ R := e ≪≫ (Scheme.Modules.overFunctorEquiv U).symm
   have : R.Additive := Functor.additive_of_iso c
   -- The explicit pullback complex has exactly the termwise tensor-pullback formula.
-  have hT : CochainComplex.IsKFlat (R := U.toScheme.sheaf)
+  have hT : CochainComplex.IsAcyclicTensorKFlat (R := U.toScheme.sheaf)
       ((T.mapHomologicalComplex (.up ℤ)).obj P) := by
     have h := CochainComplex.isKFlat_pullback U.ι.base U.toScheme.sheaf X.sheaf
       ⟨U.ι.c⟩ P hP
     convert h using 1
     rfl
-  change CochainComplex.IsKFlat (R := U.toScheme.sheaf)
+  change CochainComplex.IsAcyclicTensorKFlat (R := U.toScheme.sheaf)
     ((R.mapHomologicalComplex (.up ℤ)).obj P)
   let := SheafOfModules.monoidalCategory U.toScheme.sheaf
   -- Total tensor with any fixed acyclic complex preserves this chain isomorphism.

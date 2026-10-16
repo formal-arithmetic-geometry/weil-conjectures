@@ -89,7 +89,7 @@ theorem p1_ext_pullback_cech_multiplication (k : Type v) [Field k] [IsAlgClosed 
       let m := (dualMap (X := X) s ▷ ω) ≫ unitMap
       ∃ (hM : P (A.obj ((dual (X := X) L) ⊗ ω))) (hω : P (A.obj ω))
         (e : P.ι ⋙ TopCat.Sheaf.cechCohomologyFunctor U 1 ≅
-          P.ι ⋙ CategoryTheory.Sheaf.functorH.{v} (Opens.grothendieckTopology X) 1),
+          P.ι ⋙ CategoryTheory.Sheaf.functorH.{v, v} (Opens.grothendieckTopology X) 1),
         (∀ z : Ext L ω 1,
           (e.app ⟨A.obj ω, hω⟩).hom
             ((TopCat.Sheaf.cechCohomologyFunctor U 1).map (A.map m)

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalData
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
-import Sheaf.AlgebraicGeometry.EtaleMayerVietorisInjectiveSectionsExact
+import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisInjectiveSectionsExact
 import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 

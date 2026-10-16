@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.AffineKoszulCechDerivedComparison
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.Paper.AffinePerfectKoszulPrincipalUnit
-import Sheaf.Paper.KoszulComplex
+import WeilConjectures.AlgebraicGeometry.KoszulComplex
 import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyCore
 import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyColimit
 

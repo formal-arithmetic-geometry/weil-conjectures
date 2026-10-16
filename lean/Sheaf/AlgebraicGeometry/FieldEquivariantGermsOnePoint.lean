@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 import Sheaf.FieldTheory.GaloisAutomorphismExtension
 import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
-import Sheaf.AlgebraicGeometry.GeometricPointMorphismStalkBijection
+import WeilConjectures.AlgebraicGeometry.GeometricPointMorphismStalkBijection
 import Mathlib.FieldTheory.AlgebraicClosure
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 

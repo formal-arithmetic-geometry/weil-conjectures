@@ -5,7 +5,7 @@ Authors: SHEAF group NH
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
+public import WeilConjectures.AlgebraicGeometry.CohomologyPullbackDerivedUnit
 
 /-!
 # Named canonical Leray and derived restriction arrows

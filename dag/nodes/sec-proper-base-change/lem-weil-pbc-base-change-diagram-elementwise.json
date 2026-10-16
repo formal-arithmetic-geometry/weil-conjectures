@@ -122,8 +122,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.BaseChangeDiagramElementwise",
-  "file": "lean/Sheaf/RingTheory/BaseChangeDiagramElementwise.lean",
+  "module": "WeilConjectures.RingTheory.BaseChangeDiagramElementwise",
+  "file": "lean/WeilConjectures/RingTheory/BaseChangeDiagramElementwise.lean",
   "declaration": "Module.baseChange_diagram_elementwise",
   "statement": "theorem baseChange_diagram_elementwise {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (B : I ⥤ CommRingCat.{u}) (S : Type u) [CommRing S] (κ : B ⟶ (Functor.const I).obj (CommRingCat.of S)) (hκ : Nonempty (IsColimit (Cocone.mk (CommRingCat.of S) κ))) (M : Type v) [AddCommGroup M] [Module S M] (D : I ⥤ AddCommGrpCat.{v}) (ν : D ⟶ (Functor.const I).obj (AddCommGrpCat.of M)) [∀ i, Module (B.obj i) (D.obj i)] (hν : ∀ i (y : B.obj i) (x : D.obj i), (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) (y • x) = (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app i)) y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x) (hbase : ∀ (i j : I) (h : i ≤ j), letI := (B.map (homOfLE h)).hom.toAlgebra ∃ e : B.obj j ⊗[B.obj i] D.obj i ≃ₗ[B.obj j] D.obj j, ∀ (y : B.obj j) (x : D.obj i), e (y ⊗ₜ[B.obj i] x) = y • (D.map (homOfLE h)).hom x) (hS : ∀ i, letI := (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app i)).toAlgebra ∃ e : S ⊗[B.obj i] D.obj i ≃ₗ[S] M, ∀ (y : S) (x : D.obj i), e (y ⊗ₜ[B.obj i] x) = y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x) : (∀ x : M, ∃ (i : I) (y : D.obj i), (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) y = x) ∧ (∀ (i : I) (x : D.obj i), (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x = 0 → ∃ (j : I) (h : i ≤ j), (D.map (homOfLE h)).hom x = 0)",
   "branch": "sheaf-dag",

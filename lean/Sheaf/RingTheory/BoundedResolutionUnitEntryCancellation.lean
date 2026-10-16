@@ -4,7 +4,7 @@ public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.LinearAlgebra.Matrix.ToLin
-import Sheaf.Algebra.Homology.NatUnitEntryHomotopyCancellation
+import WeilConjectures.Algebra.Homology.NatUnitEntryHomotopyCancellation
 import Mathlib.Algebra.Category.ModuleCat.Abelian
 import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic

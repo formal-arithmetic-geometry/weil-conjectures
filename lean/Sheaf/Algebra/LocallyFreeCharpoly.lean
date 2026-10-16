@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.Algebra.CharpolyLocallyFree
+public import WeilConjectures.Algebra.CharpolyLocallyFree
 
 /-! # Characteristic polynomial of a finite locally free module of constant rank
 

@@ -10,13 +10,13 @@ public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Sheaf.Paper.SliceSiteLocalization
-import Sheaf.CategoryTheory.SiteMorphismComposition
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageExact
+import WeilConjectures.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.Paper.SiteRestrictionExact
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 

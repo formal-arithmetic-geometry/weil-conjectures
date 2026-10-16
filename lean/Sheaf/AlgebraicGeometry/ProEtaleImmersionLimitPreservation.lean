@@ -23,7 +23,7 @@ import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageLeftAdjoint
 import all Sheaf.AlgebraicGeometry.ProEtaleOperations
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImageLimitsZariskiLocal
 import Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageComparison
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresAbelian
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
 
 /-!
 # Limits under inverse image along a pro-etale immersion

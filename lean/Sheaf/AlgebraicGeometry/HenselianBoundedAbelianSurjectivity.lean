@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 
 import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 import Sheaf.AlgebraicGeometry.EtaleAbelianH0FiniteConnectedCriterion
 import Sheaf.AlgebraicGeometry.HenselianBoundedAbelianComparisonStep
 

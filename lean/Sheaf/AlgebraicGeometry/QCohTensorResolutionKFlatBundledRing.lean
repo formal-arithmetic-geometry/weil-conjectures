@@ -20,7 +20,7 @@ rebuilt bundled ring in clients of the comparison construction.
 (blueprint: new-h4-qcoh-kflat-bundled-ring) -/
 theorem tensorResolution_isKFlat_bundledRing
     (A : CommRingCat.{u}) (M : ModuleCat.{u} A) (P : ProjectiveResolution M) :
-    CochainComplex.IsKFlat (R := (Spec A).sheaf)
+    CochainComplex.IsAcyclicTensorKFlat (R := (Spec A).sheaf)
       (((tilde.functor A).mapHomologicalComplex (.up ℤ)).obj
         (P.complex.extend ComplexShape.embeddingDownNat)) := by
   cases A

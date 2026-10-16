@@ -17,7 +17,7 @@ import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
 import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
 import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
-import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.CategoryTheory.DoubleComplexTotal
 import Sheaf.CategoryTheory.SiteCoveringAxioms

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.Grp.Basic
-import Sheaf.Paper.EtaleSectionZeroNeighbourhood
+import WeilConjectures.AlgebraicGeometry.EtaleSectionZeroNeighbourhood
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Detection of zero sections at an affine stage -/

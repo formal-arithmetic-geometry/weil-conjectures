@@ -73,7 +73,7 @@ theorem higherDirectImage_affine_cohomology_presentation
   obtain ⟨c, hc⟩ := higherDirectImage_coefficient_comparison f p
   refine ⟨c, ?_⟩
   intro N Q a b hab
-  let : EnoughInjectives X.Modules := Scheme.Modules.enoughInjectives X
+  let : EnoughInjectives X.Modules := Scheme.Modules.enoughInjectives (X := X)
   let I := injectiveResolution
     (show SheafOfModules (moduleRings X.toRingedSpace) from N)
   let K := ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex

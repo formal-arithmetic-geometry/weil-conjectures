@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Localization.Away.Basic
 
-import Sheaf.AlgebraicGeometry.EtaleAwayOfLocalizedCotangentVanishing
+import WeilConjectures.AlgebraicGeometry.EtaleAwayOfLocalizedCotangentVanishing
 import Sheaf.AlgebraicGeometry.SmoothSectionDifferentialBasis
 import Sheaf.RingTheory.SectionDifferentialBasisQuotient
 

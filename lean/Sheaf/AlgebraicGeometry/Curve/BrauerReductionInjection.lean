@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Sheaf.AlgebraicGeometry.Curve.ReductionUnitsEpi
 import Sheaf.AlgebraicGeometry.Curve.ReductionUnitsKernelVanishing
-import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-! # Brauer pullback to the reduction of a curve
 

@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Adjunction.Limits
 public import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 public import Mathlib.CategoryTheory.Sites.PreservesSheafification
-import Sheaf.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
+import WeilConjectures.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
 
 /-! # The canonical scalar-forgetting inverse-image comparison
 

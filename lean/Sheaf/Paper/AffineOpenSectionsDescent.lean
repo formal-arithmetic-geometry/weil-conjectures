@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.Paper.AffineOpenEtaleMapFactorization
+import WeilConjectures.AlgebraicGeometry.AffineOpenEtaleMapFactorization
 import Sheaf.Paper.AffineOpenInverseImageUnitRepresentatives
 
 /-! # Every section of the inverse image on the affine limit descends to an affine stage. -/

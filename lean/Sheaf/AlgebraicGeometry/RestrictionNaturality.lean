@@ -2,7 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import all Sheaf.AlgebraicGeometry.ModuleCohomologyFMapComparison
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-! # Target isomorphisms and module cohomology maps
 
@@ -171,8 +171,8 @@ private theorem data_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
     (C' : ModuleCohomologyFMapData h G F' (φ ≫ (pushforward h).map b)) (p : ℕ) :
     C.map p ≫ (forget₂ _ AddCommGrpCat.{u}).map
       ((RingedSpace.moduleCohomology X.toRingedSpace p).map b) = C'.map p := by
-  have : EnoughInjectives X.Modules := enoughInjectives X
-  have : EnoughInjectives Y.Modules := enoughInjectives Y
+  have : EnoughInjectives X.Modules := enoughInjectives (X := X)
+  have : EnoughInjectives Y.Modules := enoughInjectives (X := Y)
   have : (RingedSpace.globalSectionsFunctor X.toRingedSpace).Additive := sectionsAdditive X
   have : (RingedSpace.globalSectionsFunctor Y.toRingedSpace).Additive := sectionsAdditive Y
   obtain ⟨e, hl, hb⟩ := target_comparison h φ b C C'

@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Spectrum.Prime.Module
-import Sheaf.LinearAlgebra.Matrix.CauchyBinet
+import WeilConjectures.LinearAlgebra.Matrix.CauchyBinet
 import Mathlib.LinearAlgebra.Matrix.Adjugate
 
 /-!

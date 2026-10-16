@@ -61,7 +61,7 @@ theorem exists_condensedField_compatible_evaluations
     (p : V ⟶ X) (g : W ⟶ X)
     (a : Spec (.of Ω) ⟶ V) (d : Spec (.of Ω) ⟶ W)
     (had : a ≫ p = d ≫ g) (z : Spec (.of Ω)) :
-    let R := condensedRingObj (Profinite.continuousCoefficientRingObj E) X
+    let R := condensedRingObj (condensedFieldCoefficientRingObj E) X
     let Ri := (upperStar AddCommGrpCat.{u + 1} p).obj R
     let Rj := (upperStar AddCommGrpCat.{u + 1} g).obj R
     ∃ (F : Mod (Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}) Ri ⥤
@@ -75,21 +75,21 @@ theorem exists_condensedField_compatible_evaluations
         (c : G.obj (Mod.regular Rj) ≃ₗ[E] E),
         (∀ f : Mod.regular Ri ⟶ Mod.regular Ri,
           b (F.map f (b.symm 1)) =
-            (((inv (condensedFieldPullbackRealization E p) ≫ f.hom ≫
-              condensedFieldPullbackRealization E p).hom.app
-                (Opposite.op (Scheme.ProEt.mk (𝟙 V)))) (ULift.up 1)).down (a z)) ∧
+            condensedFieldContinuousCoefficientMap E V
+              (inv (condensedFieldPullbackRealization E p) ≫ f.hom ≫
+                condensedFieldPullbackRealization E p) (a z)) ∧
         (∀ f : Mod.regular Rj ⟶ Mod.regular Rj,
           c (G.map f (c.symm 1)) =
-            (((inv (condensedFieldPullbackRealization E g) ≫ f.hom ≫
-              condensedFieldPullbackRealization E g).hom.app
-                (Opposite.op (Scheme.ProEt.mk (𝟙 W)))) (ULift.up 1)).down (d z)) := by
-  let Λ := Profinite.continuousCoefficientRingObj E
+            condensedFieldContinuousCoefficientMap E W
+              (inv (condensedFieldPullbackRealization E g) ≫ f.hom ≫
+                condensedFieldPullbackRealization E g) (d z)) := by
+  let Λ := condensedFieldCoefficientRingObj E
   let R := condensedRingObj Λ X
   obtain ⟨H, hHa, hHc, hHs⟩ := exists_condensedField_point_evaluation E Ω z
   let := hHa
   let := hHc
-  let P := condensedFieldGeometricModulePullback (Profinite.continuousCoefficientRingObj E) p a
-  let Q := condensedFieldGeometricModulePullback (Profinite.continuousCoefficientRingObj E) g d
+  let P := condensedFieldGeometricModulePullback (condensedFieldCoefficientRingObj E) p a
+  let Q := condensedFieldGeometricModulePullback (condensedFieldCoefficientRingObj E) g d
   let F := P ⋙ H
   let G := Q ⋙ H
   let e : (upperStar AddCommGrpCat.{u + 1} p).mapMod R ⋙ F ≅

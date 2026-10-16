@@ -5,7 +5,7 @@ Authors: SHEAF group A2
 -/
 module
 
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.TensorProduct.Basis

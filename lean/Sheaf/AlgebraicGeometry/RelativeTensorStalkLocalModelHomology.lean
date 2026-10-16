@@ -72,7 +72,7 @@ theorem relativeTensor_stalk_localModel_homology_iso
       (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u} RingCat.{u})).obj
         (TopCat.Sheaf.inverseImageRing f.base Y.sheaf))) ℤ)
-    (hP : CochainComplex.IsKFlat (R := TopCat.Sheaf.inverseImageRing f.base Y.sheaf) P)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := TopCat.Sheaf.inverseImageRing f.base Y.sheaf) P)
     (q : P ⟶ ((SheafOfModules.restrictScalars
       ((sheafCompose (Opens.grothendieckTopology X)
         (forget₂ CommRingCat.{u} RingCat.{u})).map

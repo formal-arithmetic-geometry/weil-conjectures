@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Properties
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.Topology.PresheafModuleStalkFunctor
 import Mathlib.Algebra.Category.Grp.Zero
 

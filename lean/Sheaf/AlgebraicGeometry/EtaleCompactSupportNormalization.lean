@@ -5,9 +5,11 @@ Authors: SHEAF group NH
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
-public import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
+public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
@@ -23,7 +25,7 @@ import Sheaf.AlgebraicGeometry.OpenSectionClopen
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 

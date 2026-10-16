@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.CategoryTheory.InjectiveModulePresheaf
 import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechExact
-import Sheaf.CategoryTheory.SiteSesCechH1Surjective
+import WeilConjectures.CategoryTheory.SiteSesCechH1Surjective
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.Algebra.Homology.HomologySequence

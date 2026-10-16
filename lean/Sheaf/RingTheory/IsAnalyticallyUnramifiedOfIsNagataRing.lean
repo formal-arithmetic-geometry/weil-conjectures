@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.RingTheory.NagataRing
-public import Sheaf.RingTheory.AnalyticallyUnramified
+public import WeilConjectures.RingTheory.AnalyticallyUnramified
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 import Sheaf.RingTheory.AdicCompletionRingEquiv

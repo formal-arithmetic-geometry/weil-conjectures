@@ -62,7 +62,7 @@ theorem RingedTensorSquare.derivedComparison_existsUnique
     ∃! theta : g.left ⋙ k.left ≅ f.left ⋙ h.left,
       ∀ (P : CochainComplex (SheafOfModules.{u} ((sheafCompose Y.topology (forget₂ CommRingCat.{u}
       RingCat.{u})).obj Y.ring)) ℤ),
-        P.IsKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
+        P.IsAcyclicTensorKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
         theta.hom.app (DerivedCategory.Q.obj P) ≫
           h.left.map (derivedPullbackComplexComparison f.pullback f.left f.epsilon P) ≫
           derivedPullbackComplexComparison h.pullback h.left h.epsilon

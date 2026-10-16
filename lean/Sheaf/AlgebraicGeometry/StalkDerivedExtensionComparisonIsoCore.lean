@@ -112,7 +112,7 @@ theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
     ∃ j : comparisonDerivedStalk X (g' z) ⋙ L ⟶
         derivedPullback g' ⋙ comparisonDerivedStalk X' z,
       ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-        (hP : P.IsKFlat)
+        (hP : P.IsAcyclicTensorKFlat)
         (hcP : IsIso ((counit g').app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj P))),
         L.map ((RingedSpace.moduleStalkFunctor X.toRingedSpace
@@ -174,7 +174,7 @@ theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
       intro P Q hP hQ s hs
       have toIsKFlat (P : CochainComplex A₀ ℤ)
           (hP : (HomologicalComplex.quasiIso A₀ (.up ℤ)).kFlat P) :
-          CochainComplex.IsKFlat (R := X.sheaf) P := by
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P := by
         intro F hF
         have h := (HomotopyCategory.kFlat_iff_preserves_acyclic
           ((HomotopyCategory.quotient A₀ (.up ℤ)).obj P)).mp

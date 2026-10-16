@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.CohomologyPowersIdealReesFinite
-import Sheaf.Algebra.Module.ReesKernelGenerators
+import WeilConjectures.Algebra.Module.ReesKernelGenerators
 
 @[expose] public section
 

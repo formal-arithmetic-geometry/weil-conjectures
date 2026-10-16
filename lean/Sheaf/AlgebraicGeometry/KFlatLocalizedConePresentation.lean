@@ -52,8 +52,8 @@ theorem exists_kFlat_localized_cone_presentation (Y : Scheme.{u})
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))) :
     ∃ (P Q : CochainComplex
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (p : P ⟶ Q),
-      CochainComplex.IsKFlat (R := Y.sheaf) P ∧
-      CochainComplex.IsKFlat (R := Y.sheaf) Q ∧
+      CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P ∧
+      CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) Q ∧
       Nonempty (DerivedCategory.Qh.mapTriangle.obj T₀ ≅
         DerivedCategory.Qh.mapTriangle.obj (CochainComplex.mappingCone.triangleh p))  := by
   let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)

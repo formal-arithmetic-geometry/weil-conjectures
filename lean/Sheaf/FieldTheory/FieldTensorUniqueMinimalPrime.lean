@@ -10,11 +10,11 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.AlgebraicGeometry.Scheme
 import Sheaf.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
-import Sheaf.Paper.FlatFibresIrreducible
-import Sheaf.RingTheory.TensorFiniteTypeLimit
+import WeilConjectures.AlgebraicGeometry.FlatFibresIrreducible
+import WeilConjectures.RingTheory.TensorFiniteTypeLimit
 import WeilConjectures.Mathlib.RingTheory.Nilpotent.GeometricallyReduced
-import Sheaf.FieldTheory.AlgClosedFiniteTypeTensorDomain
-import Sheaf.FieldTheory.SepClosedTensorReduction
+import WeilConjectures.FieldTheory.AlgClosedFiniteTypeTensorDomain
+import WeilConjectures.FieldTheory.SepClosedTensorReduction
 import Mathlib.RingTheory.TensorProduct.Nontrivial
 import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 

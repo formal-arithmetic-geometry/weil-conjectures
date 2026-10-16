@@ -10,6 +10,17 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.Paper.ContinuousLatticeIntersectionLocalModel
 import Sheaf.Paper.ContinuousLatticeIntersectionRationalization
 import all Sheaf.Paper.IntegralMatrixKernelLocallyFree
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.CategoryTheory.SiteModuleSheafGluing
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import Sheaf.Paper.ContinuousCoefficientRealizations
 
 /-! # Integral lattices descend along finite etale surjections
 

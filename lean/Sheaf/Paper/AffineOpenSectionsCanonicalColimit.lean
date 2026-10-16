@@ -3,7 +3,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.Paper.AffineOpenSectionsCanonicalTransformation
+import WeilConjectures.AlgebraicGeometry.AffineOpenSectionsCanonicalTransformation
 import Sheaf.Paper.AffineOpenSectionsCanonicalColimitCore
 
 @[expose] public section

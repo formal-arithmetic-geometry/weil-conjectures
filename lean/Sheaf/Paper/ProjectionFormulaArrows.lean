@@ -246,7 +246,7 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
       (forget₂ CommRingCat.{u} RingCat.{u})).obj R))]
   (PR : ObjectProperty (CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R)) ℤ))
-  (hPR : ∀ P, PR P ↔ P.IsKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)
+  (hPR : ∀ P, PR P ↔ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)
   (TR : DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R)) × DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂
       CommRingCat.{u} RingCat.{u})).obj R)) ⥤ DerivedCategory (SheafOfModules.{u} ((sheafCompose J
@@ -303,7 +303,7 @@ theorem StrictPerfectCoefficientPackage.isKFlat_flat
       RingCat.{u})).obj R)) ℤ) (P : StrictPerfectCoefficientPackage ((sheafCompose J (forget₂
       CommRingCat.{u} RingCat.{u})).obj R) F)
     (hbounded : ∃ a b : ℤ, ∀ r : ℤ, r < a ∨ b < r → IsZero (F.X r)) :
-    F.IsKFlat ∧ ∀ n : ℤ, (F.X n).IsFlat := sorry
+    F.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (F.X n).IsFlat := sorry
 
 end SheafOfModules
 
@@ -369,8 +369,8 @@ noncomputable def ringedProjectionFormulaArrows
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ))
     (PS : ObjectProperty (CochainComplex (SheafOfModules.{u}
       ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) ℤ))
-    (hPR : ∀ P, PR P ↔ P.IsKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)
-    (hPS : ∀ P, PS P ↔ P.IsKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)
+    (hPR : ∀ P, PR P ↔ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)
+    (hPS : ∀ P, PS P ↔ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)
     (TR : (DerivedCategory (SheafOfModules.{u}
       ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) × (DerivedCategory
       (SheafOfModules.{u}
@@ -414,7 +414,7 @@ noncomputable def ringedProjectionFormulaArrows
       IsIso (derivedPushforwardComplexComparison V RF eta K))
     (computeL : ∀ P : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R)) ℤ,
-      P.IsKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
+      P.IsAcyclicTensorKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
         IsIso (derivedPullbackComplexComparison uStar LF epsilon P))
     (adjD : LF ⊣ RF)
     (canonicalAdj : ∀ K : CochainComplex (SheafOfModules.{u} ((sheafCompose JD (forget₂

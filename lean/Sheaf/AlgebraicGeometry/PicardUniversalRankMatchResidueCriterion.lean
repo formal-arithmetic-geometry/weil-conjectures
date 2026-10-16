@@ -71,8 +71,8 @@ private theorem flat_image_iso {X S T Y : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S
     Nonempty ((Modules.tensorPullback g).obj ((Modules.pushforward f).obj E) ≅
       (Modules.pushforward p).obj ((Modules.tensorPullback q).obj E)) := by
   classical
-  let := Modules.enoughInjectives X
-  let := Modules.enoughInjectives (pullback g f)
+  let := Modules.enoughInjectives (X := X)
+  let := Modules.enoughInjectives (X := (pullback g f))
   let I := injectiveResolution E
   let J := injectiveResolution ((Modules.tensorPullback (pullback.snd g f)).obj E)
   obtain ⟨t, ht⟩ := Modules.flatBaseChangeResolutionLift f g I J

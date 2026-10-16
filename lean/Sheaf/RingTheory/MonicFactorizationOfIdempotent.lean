@@ -10,8 +10,8 @@ public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.RingTheory.Coprime.Basic
 public import Mathlib.Algebra.Group.Idempotent
 import Sheaf.LinearAlgebra.IdempotentCharpolyMonic
-import Sheaf.LinearAlgebra.IdempotentCharpolyMulComplement
-import Sheaf.RingTheory.AdjoinRootIdempotentCharpolyMap
+import WeilConjectures.LinearAlgebra.IdempotentCharpolyMulComplement
+import WeilConjectures.RingTheory.AdjoinRootIdempotentCharpolyMap
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
 import Mathlib.Tactic.NoncommRing
 

@@ -42,7 +42,7 @@ the zero complexes and the empty scheme cause no exceptions. -/
 theorem kFlat_tensorModel_naturalComparison (X : Scheme.{uX})
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]
     (P : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P) :
     letI := SheafOfModules.monoidalCategory X.sheaf
     letI := (SheafOfModules.tensorClosed X.sheaf).1.some
     Nonempty

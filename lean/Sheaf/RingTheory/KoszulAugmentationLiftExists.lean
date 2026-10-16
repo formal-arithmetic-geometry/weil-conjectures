@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 import Mathlib.Algebra.Category.ModuleCat.Projective

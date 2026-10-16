@@ -47,10 +47,11 @@ instance isLocalSite_smallEtaleTopology_of_isSepClosed :
 
 variable (Λ : Type (u + 1)) [Ring Λ]
 
-local instance : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+local instance localInstance_PointConstantSheaf_1 : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
   hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
 
-local instance : HasColimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+local instance localInstance_PointConstantSheaf_2 :
+    HasColimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
   hasColimitsOfSizeShrink.{u, u, u + 1, u + 1} _
 
 /-- Over a separably closed field `k`, the counit `Λ_{Γ(F)} ⟶ F` of the adjunction between the

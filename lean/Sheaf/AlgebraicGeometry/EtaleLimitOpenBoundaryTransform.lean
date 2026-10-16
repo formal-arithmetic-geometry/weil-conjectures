@@ -5,10 +5,10 @@ Authors: SHEAF group T1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree
+public import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.Algebra.Exact.Basic
-import Sheaf.AlgebraicGeometry.EtaleLimitOpenDifferenceNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenDifferenceNaturality
 import Sheaf.AlgebraicGeometry.EtaleLimitOpenCompatibleBoundaries
 
 /-! # Difference and boundary maps on canonical open diagrams

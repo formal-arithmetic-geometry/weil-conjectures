@@ -97,7 +97,7 @@ theorem moduleDirectImage_pastedUnit_kFlat_hom_bijective
     [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z))]
     (f : X ⟶ Y) (g : Y ⟶ Z)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) [I.IsKInjective]
-    (K : CochainComplex (SheafOfModules.{u} (moduleRings Z)) ℤ) (hK : K.IsKFlat) :
+    (K : CochainComplex (SheafOfModules.{u} (moduleRings Z)) ℤ) (hK : K.IsAcyclicTensorKFlat) :
     Function.Bijective (fun
       (a : DerivedCategory.Q.obj K ⟶ DerivedCategory.Qh.obj
         (((moduleDirectImage g).mapHomotopyCategory (ComplexShape.up ℤ)).obj

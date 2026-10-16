@@ -5,9 +5,9 @@ Authors: SHEAF group R2
 -/
 module
 
-public import Sheaf.LinearAlgebra.IdempotentCharpoly
+public import WeilConjectures.LinearAlgebra.IdempotentCharpoly
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.LinearAlgebra.IdempotentImageBaseChange
+import WeilConjectures.LinearAlgebra.IdempotentImageBaseChange
 import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.LinearAlgebra.Matrix.SchurComplement

@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.EssentialFiniteness
 import Sheaf.RingTheory.ArtinianCoefficientEventualFlatness
 import Sheaf.RingTheory.ArtinianCoefficientSubalgebraStructure
-import Sheaf.RingTheory.ArtinianLocalEssentiallyFiniteTypeResidue
+import WeilConjectures.RingTheory.ArtinianLocalEssentiallyFiniteTypeResidue
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 
 /-!

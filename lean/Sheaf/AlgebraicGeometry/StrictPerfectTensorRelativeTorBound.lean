@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.StrictPerfectRelativeTensorModel
 import Sheaf.AlgebraicGeometry.OpenKFlatTensorHomologyComparison
-import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
+import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.Algebra.Homology.KFlatPullback
 import Sheaf.Algebra.Homology.KFlatResolution
@@ -108,7 +108,7 @@ theorem strictPerfect_tensor_relativeTor_bound
     let A := (sheafCompose (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u} RingCat.{u})).obj R
     ∀ (P : CochainComplex (SheafOfModules.{u} A) ℤ),
-      CochainComplex.IsKFlat (R := R) P →
+      CochainComplex.IsAcyclicTensorKFlat (R := R) P →
       ∀ q : P ⟶ ((SheafOfModules.restrictScalars
           ((sheafCompose (Opens.grothendieckTopology X)
             (forget₂ CommRingCat.{u} RingCat.{u})).map

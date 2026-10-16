@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import all Mathlib.CategoryTheory.Functor.TypeValuedFlat
 import Mathlib.CategoryTheory.Sites.Point.Over
 import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
-import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf

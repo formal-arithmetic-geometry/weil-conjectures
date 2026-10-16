@@ -82,7 +82,7 @@ private theorem additive_representative_transport
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) (z : X')
     (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) (hQ : Q.IsKFlat)
+    (hP : P.IsAcyclicTensorKFlat) (hQ : Q.IsAcyclicTensorKFlat)
     (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
     (hcQ : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))
     (a : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) (i : ℤ) :
@@ -187,7 +187,7 @@ theorem exists_singleComplexOpen_normalized_transport
     (e : DerivedCategory.Q.obj P ≅ K)
     (a : DerivedCategory.Q.obj Q ≅
       (schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.obj K)
-    (hP : P.IsKFlat) (hQ : Q.IsKFlat)
+    (hP : P.IsAcyclicTensorKFlat) (hQ : Q.IsAcyclicTensorKFlat)
     (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
     (hcQ : IsIso ((counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))
     (z : (f' ⁻¹ᵁ V').toScheme) (i : ℤ) :

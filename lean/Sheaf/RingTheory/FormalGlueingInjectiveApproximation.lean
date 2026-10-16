@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.FormalGlueingData
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Sheaf.RingTheory.FormalGlueingH0Localization
-import Sheaf.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
+import WeilConjectures.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
 
 /-!
 # An injective approximation to formal glueing data

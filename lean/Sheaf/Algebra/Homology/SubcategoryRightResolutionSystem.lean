@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 import Mathlib.CategoryTheory.Abelian.CommSq
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Kernels
-import Sheaf.Algebra.Homology.SubcategoryRightResolutionAssembly
+import WeilConjectures.Algebra.Homology.SubcategoryRightResolutionAssembly
 
 /-!
 # The ascending pushout system for a right resolution

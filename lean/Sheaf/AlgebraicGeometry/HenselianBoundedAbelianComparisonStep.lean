@@ -3,7 +3,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.AlgebraicGeometry.BoundedAbelianClosedEffacement
-import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 
 /-! # The finite-coefficient successor step for henselian comparison -/
 

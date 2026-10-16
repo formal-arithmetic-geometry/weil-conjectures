@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.Data.ZMod.Basic
-public import Sheaf.RingTheory.CohenRing
+public import WeilConjectures.RingTheory.CohenRing
 import Sheaf.RingTheory.CohenRingModPowFormallySmoothCore
 import Sheaf.RingTheory.CohenRingModPowFormallySmoothExplicit
 

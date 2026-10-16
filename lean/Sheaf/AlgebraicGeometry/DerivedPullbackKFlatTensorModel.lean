@@ -143,7 +143,7 @@ private theorem comparisonSquare_natural {D : Type*} [Category* D]
 private theorem tensorModel_isIso (X : Scheme.{uModel})
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     (P N : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P) :
     IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q P N) := by
   let C := SheafOfModules.{uModel} (moduleRings X.toRingedSpace)
   have : Limits.HasColimitsOfSize.{0, 0} C :=
@@ -201,7 +201,7 @@ private theorem counitModel_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)
     (hε : (derivedPullback g).IsLeftDerivedFunctor ε
       (HomotopyCategory.quasiIso _ (.up ℤ)))
     (P : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P) :
     IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   have hF' : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun M N a ↦ hmap a)
@@ -292,22 +292,22 @@ theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map b) (curriedTensor _)
                 (ComplexShape.up ℤ))
     (hiso : ∀ P N : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,
-          CochainComplex.IsKFlat (R := X.sheaf) P → CochainComplex.IsKFlat (R := X.sheaf) N →
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P → CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N →
             IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
                 (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
               DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
                 (φ P N).hom)))
     : ∃ e : ∀ (P N : CochainComplex
           (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ),
-        CochainComplex.IsKFlat (R := X.sheaf) P →
-        CochainComplex.IsKFlat (R := X.sheaf) N →
+        CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P →
+        CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N →
           (((derivedPullback g).obj (DerivedCategory.Q.obj P) ⊗
             (derivedPullback g).obj (DerivedCategory.Q.obj N)) ≅
           (derivedPullback g).obj (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N)),
       (∀ (P N : CochainComplex
           (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
-        (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-        (hN : CochainComplex.IsKFlat (R := X.sheaf) N),
+        (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+        (hN : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N),
         (e P N hP hN).hom ≫
             (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
             ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj
@@ -320,10 +320,10 @@ theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)
               ((F.mapHomologicalComplex (.up ℤ)).obj N)) ∧
       (∀ (P P' N N' : CochainComplex
           (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
-        (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-        (hP' : CochainComplex.IsKFlat (R := X.sheaf) P')
-        (hN : CochainComplex.IsKFlat (R := X.sheaf) N)
-        (hN' : CochainComplex.IsKFlat (R := X.sheaf) N') (a : P ⟶ P') (b : N ⟶ N'),
+        (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+        (hP' : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P')
+        (hN : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N)
+        (hN' : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N') (a : P ⟶ P') (b : N ⟶ N'),
         ((curriedTensorPre (derivedPullback g)).map (DerivedCategory.Q.map a)).app
             (DerivedCategory.Q.obj N) ≫
             ((curriedTensorPre (derivedPullback g)).obj (DerivedCategory.Q.obj P')).map
@@ -352,15 +352,15 @@ theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)
     Qt.map (φ P N).hom
   let C P N := (ε.app (q.obj P) ⊗ₘ ε.app (q.obj N)) ≫
     Functor.LaxMonoidal.μ Qt (Fc.obj P) (Fc.obj N)
-  have hA P N (hP : CochainComplex.IsKFlat (R := X.sheaf) P) : IsIso (A P N) := by
+  have hA P N (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P) : IsIso (A P N) := by
     have := tensorModel_isIso X P N hP
     dsimp only [A]
     infer_instance
-  have hB P N (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-      (hN : CochainComplex.IsKFlat (R := X.sheaf) N) : IsIso (B P N) := hiso P N hP hN
-  have hC P N (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-      (hN : CochainComplex.IsKFlat (R := X.sheaf) N) : IsIso (C P N) := by
-    have hFP : CochainComplex.IsKFlat (R := T.sheaf) (Fc.obj P) := by
+  have hB P N (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+      (hN : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N) : IsIso (B P N) := hiso P N hP hN
+  have hC P N (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+      (hN : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N) : IsIso (C P N) := by
+    have hFP : CochainComplex.IsAcyclicTensorKFlat (R := T.sheaf) (Fc.obj P) := by
       clear hA hB A B C ε hε φ hnatural hiso hF hmap
       subst F
       convert CochainComplex.isKFlat_pullback g.base T.sheaf X.sheaf ⟨g.c⟩ P hP using 1
@@ -371,8 +371,8 @@ theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)
     have : IsIso (Functor.LaxMonoidal.μ Qt (Fc.obj P) (Fc.obj N)) :=
       tensorModel_isIso T (Fc.obj P) (Fc.obj N) hFP
     infer_instance
-  let e P N (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-      (hN : CochainComplex.IsKFlat (R := X.sheaf) N) :=
+  let e P N (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+      (hN : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N) :=
     have := hA P N hP
     have := hB P N hP hN
     have := hC P N hP hN

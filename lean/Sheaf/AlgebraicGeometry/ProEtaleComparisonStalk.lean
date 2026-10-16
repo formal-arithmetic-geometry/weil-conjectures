@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 import Sheaf.Paper.StrictHenselizationPointedMap
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalStalk
-import Sheaf.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Mathlib.CategoryTheory.Sites.Point.Basic

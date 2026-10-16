@@ -7,7 +7,7 @@ public import Sheaf.Paper.FiniteDiscreteCoefficientEncoding
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 import Sheaf.Paper.FiniteDiscreteEncodedPresentation
 import Sheaf.Paper.FiniteConstantCokernel
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 
 /-! # One stratum of finite discrete coefficient constructibility -/
 

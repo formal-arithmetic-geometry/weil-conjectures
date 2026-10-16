@@ -12,7 +12,7 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import Mathlib.FieldTheory.FinTrdeg
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Sheaf.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel
+import WeilConjectures.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel
 import Sheaf.RingTheory.FractionFieldCompleteIntersectionCotangent
 
 /-!

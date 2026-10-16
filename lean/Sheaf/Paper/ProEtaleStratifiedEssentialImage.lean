@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.ProEtale.Derived.OpenCover
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover
 import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 import Sheaf.AlgebraicGeometry.ConstructiblePartitionLocalClosedStratum
 import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequence

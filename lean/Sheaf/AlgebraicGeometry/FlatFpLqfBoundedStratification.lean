@@ -5,15 +5,15 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FiberDegreeBound
+public import WeilConjectures.AlgebraicGeometry.FiberDegreeBound
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.Topology.Basic
 import Sheaf.AlgebraicGeometry.FlatFpLqfMaximalDegreeLocus
-import Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.FiniteFiberDegreeBaseChange
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
 
 /-!

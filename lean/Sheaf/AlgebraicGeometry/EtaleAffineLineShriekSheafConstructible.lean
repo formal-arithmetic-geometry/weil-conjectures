@@ -6,7 +6,7 @@ Authors: SHEAF group NZ
 module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs

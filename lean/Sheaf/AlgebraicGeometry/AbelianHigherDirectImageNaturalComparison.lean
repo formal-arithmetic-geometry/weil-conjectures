@@ -5,6 +5,8 @@ Authors: SHEAF group J2
 -/
 module
 
+public import Mathlib.Algebra.Category.Grp.Adjunctions
+
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 import all Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility

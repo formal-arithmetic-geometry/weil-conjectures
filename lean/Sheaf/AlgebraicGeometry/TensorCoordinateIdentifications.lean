@@ -48,7 +48,7 @@ private theorem counit_isIso
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) :
+    (hP : P.IsAcyclicTensorKFlat) :
     IsIso ((SingleComplexBaseChange.counit f).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
@@ -80,7 +80,7 @@ private theorem modelMap_isIso
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (X : Scheme.{u})
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) : IsIso (pullbackTensorModelMap X P N) := by
+    (hP : P.IsAcyclicTensorKFlat) : IsIso (pullbackTensorModelMap X P N) := by
   let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
   let : MonoidalCategory C := SheafOfModules.monoidalCategory X.sheaf
   let : SymmetricCategory C := SheafOfModules.symmetricCategory X.sheaf
@@ -208,7 +208,7 @@ theorem exists_tensor_coordinate_identifications
         τ A B ≫ ((derivedPullback g').map a ⊗ₘ (derivedPullback g').map b))
     (c : SingleComplexBaseChange.Coordinates g' K K' φ)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (eP : DerivedCategory.Q.obj P ≅ E) (hP : P.IsKFlat)
+    (eP : DerivedCategory.Q.obj P ≅ E) (hP : P.IsAcyclicTensorKFlat)
     (χ : ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj
         (pullbackTensorTotal X P c.P) ≅
       pullbackTensorTotal X'
@@ -233,7 +233,7 @@ theorem exists_tensor_coordinate_identifications
       HomologicalComplex.mapBifunctorMap (𝟙 _) c.t (curriedTensor _) (.up ℤ)
     ∃ (e : DerivedCategory.Q.obj T ≅ E ⊗ K)
       (e' : DerivedCategory.Q.obj N ≅ (derivedPullback g').obj E ⊗ K'),
-      T.IsKFlat ∧
+      T.IsAcyclicTensorKFlat ∧
       IsIso ((SingleComplexBaseChange.counit g').app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj T)) ∧
       (SingleComplexBaseChange.counit g').app
@@ -245,11 +245,11 @@ theorem exists_tensor_coordinate_identifications
   let H : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ ⥤
       CochainComplex (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) ℤ :=
     (Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)
-  have hPull : CochainComplex.IsKFlat (R := X'.sheaf) (H.obj P) := by
+  have hPull : CochainComplex.IsAcyclicTensorKFlat (R := X'.sheaf) (H.obj P) := by
     convert CochainComplex.isKFlat_pullback g'.base X'.sheaf X.sheaf ⟨g'.c⟩ P hP using 1
     rfl
-  have hflat : (pullbackTensorTotal X P c.P).IsKFlat :=
-    CochainComplex.IsKFlat.mapBifunctor P c.P hP c.isKFlat
+  have hflat : (pullbackTensorTotal X P c.P).IsAcyclicTensorKFlat :=
+    CochainComplex.IsAcyclicTensorKFlat.mapBifunctor P c.P hP c.isKFlat
   have := modelMap_isIso X P c.P hP
   have := modelMap_isIso X' (H.obj P) c.N hPull
   have := modelMap_isIso X' (H.obj P) (H.obj c.P) hPull

@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 import Sheaf.AlgebraicGeometry.BoundedBelowTruncationCriterion
 import Sheaf.AlgebraicGeometry.BoundedAllowableTorsionSmoothBaseChange
 import Sheaf.AlgebraicGeometry.AllowableTorsionInverseImage
-import Sheaf.AlgebraicGeometry.GeometricPointFieldExtension
+import WeilConjectures.AlgebraicGeometry.GeometricPointFieldExtension
 import Sheaf.AlgebraicGeometry.QcqsHigherImagesPrimeTorsion
 
 /-!

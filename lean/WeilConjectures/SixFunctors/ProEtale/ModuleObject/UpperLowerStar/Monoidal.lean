@@ -66,20 +66,6 @@ namespace AlgebraicGeometry
 
 open Scheme ProEtale
 
--- Compatibility with the live monoidal sheaf framework, which predates these instances.
-noncomputable instance ProEtale.sheafSymmetricCategory {A : Type u'} [Category.{u + 1} A]
-    [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [SymmetricCategory A]
-    [MonoidalClosed A] (Y : Scheme.{u}) :
-    SymmetricCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
-  Sheaf.symmetricCategory _ _
-
-instance ProEtale.preservesFiniteColimits_tensorLeft_sheaf {A : Type u'}
-    [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
-    [SymmetricCategory A] [MonoidalClosed A] {Y : Scheme.{u}}
-    (F : Sheaf (Scheme.ProEt.topology Y) A) :
-    PreservesFiniteColimits (tensorLeft F) :=
-  PreservesColimitsOfSize.preservesFiniteColimits.{0, 0} _
-
 /-! ### The strong monoidal structure on the pullback -/
 
 section UpperStar

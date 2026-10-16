@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.RankOneGenericIdealInclusionAux
 import Sheaf.AlgebraicGeometry.GenericIdealStalkEmbeddingExtension
 import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

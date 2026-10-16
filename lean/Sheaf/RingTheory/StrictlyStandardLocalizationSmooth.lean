@@ -8,7 +8,7 @@ module
 public import Sheaf.RingTheory.StrictlyStandardElement
 public import Mathlib.RingTheory.Smooth.Basic
 import Sheaf.RingTheory.StrictlyStandardLocalizedConormalSplit
-import Sheaf.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
+import WeilConjectures.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
 import Mathlib.RingTheory.Localization.Away.AdjoinRoot
 
 /-!

@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import WeilConjectures.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.ProjPolynomialTwistChart
+import WeilConjectures.AlgebraicGeometry.ProjPolynomialTwistChart
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 import Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersData
 import Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersLocus

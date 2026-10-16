@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.AbelianCounitResolutionCalculation
 import Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCore
 import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-! # Comparing module replacements with the abelian counit lift
 
@@ -41,7 +41,7 @@ private theorem quasiIso_of_replacement_section_homotopy {X Y : Scheme.{u}} (f :
       ((a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l) ≫ q)
       (((abelianSections X).mapHomologicalComplex (.up ℕ)).map
         (forgottenResolutionMap X I)))) : QuasiIso q := by
-  let : EnoughInjectives Y.Modules := enoughInjectives Y
+  let : EnoughInjectives Y.Modules := enoughInjectives (X := Y)
   let G := SheafOfModules.forget Y.ringCatSheaf ⋙
     PresheafOfModules.evaluation Y.ringCatSheaf.obj (op (⊤ : Y.Opens))
   let V := forget₂ (ModuleCat.{u} (Y.ringCatSheaf.obj.obj (op (⊤ : Y.Opens))))

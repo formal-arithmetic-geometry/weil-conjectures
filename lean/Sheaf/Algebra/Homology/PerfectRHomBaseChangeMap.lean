@@ -65,7 +65,7 @@ structure RingRHomBaseChangeData {A B : Type u} [CommRing A] [CommRing B]
     ringExtensionHomotopy extension additive ⋙ DerivedCategory.Qh
   isDerived : derived.IsLeftDerivedFunctor counit
     (HomotopyCategory.quasiIso (RingSiteModules A) (.up ℤ))
-  counit_kFlat : ∀ P : CochainComplex (RingSiteModules A) ℤ, P.IsKFlat →
+  counit_kFlat : ∀ P : CochainComplex (RingSiteModules A) ℤ, P.IsAcyclicTensorKFlat →
     IsIso (counit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
   homMap : ∀ P Q : CochainComplex (RingSiteModules A) ℤ,
     (ringExtensionComplex extension additive).obj
@@ -193,7 +193,7 @@ structure PerfectRHomBaseChangeModel {A B : Type u} [CommRing A] [CommRing B]
   finite : ∀ n : ℤ, Module.Finite A ((source.X n).val.obj (op ⟨PUnit.unit⟩))
   sourceIso : DerivedCategory.Q.obj source ≅ E
   targetIso : DerivedCategory.Q.obj target ≅ K
-  target_kFlat : target.IsKFlat
+  target_kFlat : target.IsAcyclicTensorKFlat
   extended_bounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n →
     IsZero (((ringExtensionComplex d.extension d.additive).obj source).X n)
   extended_projective : ∀ n : ℤ, Module.Projective B
@@ -233,7 +233,7 @@ theorem perfectRHomBaseChangeModel_exists {A B : Type u} [CommRing A] [CommRing 
   obtain ⟨Q, s, hQ, _, hs, _⟩ := CochainComplex.exists_isKFlatResolution Q₀
   have : IsIso (DerivedCategory.Q.map s) :=
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hs
-  have hc (T : CochainComplex (RingSiteModules A) ℤ) (hT : T.IsKFlat) :
+  have hc (T : CochainComplex (RingSiteModules A) ℤ) (hT : T.IsAcyclicTensorKFlat) :
       IsIso (ringDerivedExtensionCounit d T) := by
     have : IsIso (d.counit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj T)) :=
       d.counit_kFlat T hT

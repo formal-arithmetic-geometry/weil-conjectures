@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.Paper.EtaleObjectCohomologyStalkComplex
+public import WeilConjectures.AlgebraicGeometry.EtaleObjectCohomologyStalkComplex
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 
 import Sheaf.Paper.LocalStalkSectionsDescentEquality

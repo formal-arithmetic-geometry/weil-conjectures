@@ -66,10 +66,10 @@ the two differential terms, including the sign (-1)^a on the second term
 acyclic. Steps 4 and 1 give acyclicity of Tot(F tensor_S (K tensor_R S)), which is
 K-flatness of the changed complex (def-pc-kflat-complex). Combine with step 3. -/
 theorem changeOfRings_isKFlat_of_flat_terms
-    (hK : CochainComplex.IsKFlat K)
+    (hK : CochainComplex.IsAcyclicTensorKFlat K)
     (hflat : ∀ p : ℤ, exactFunctor _ _
       (@MonoidalCategory.tensorRight _ _ (monoidalCategory R) (K.X p))) :
-    CochainComplex.IsKFlat (changeOfRingsComplex φ K) ∧
+    CochainComplex.IsAcyclicTensorKFlat (changeOfRingsComplex φ K) ∧
       ∀ p : ℤ, exactFunctor _ _
         (@MonoidalCategory.tensorRight _ _ (monoidalCategory S)
           ((changeOfRingsComplex φ K).X p)) := by

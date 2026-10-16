@@ -44,6 +44,10 @@ that right derivation commutes with the constructions preserved by `mapDerivedCa
   `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp`, which holds
   for arbitrary additive functors but takes `F.PreservesKInjectiveComplexes` instead of
   exactness.
+- `Functor.rightDerivedFunctorCompMapDerivedCategoryIso`: the composition isomorphism
+  `R(F ⋙ G) ≅ RF ⋙ D(G)` for an arbitrary additive `F` and an *exact* `G`: right deriving a
+  composite whose second factor is exact amounts to right deriving the first factor and
+  applying the second levelwise.
 
 The functoriality of `rightDerivedFunctor` in natural isomorphisms is *not* repeated
 here: `Functor.rightDerivedFunctorNatIso` of
@@ -195,8 +199,8 @@ D(C) --R(F ⋙ G)--> D(E)
 D(D) ------G-------'
 ```
 -/
-noncomputable def rightDerivedFunctorCompMapDerivedCategoryIso (F : C ⥤ D) (G : D ⥤ E)
-    [F.Additive] [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
+noncomputable def rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived (F : C ⥤ D)
+    (G : D ⥤ E) [F.Additive] [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
     (F ⋙ G).rightDerivedFunctor ≅ F.rightDerivedFunctor ⋙ G.mapDerivedCategory :=
   have := isRightDerivedFunctor_rightDerivedFunctor_comp_of_exact F G
   rightDerivedUnique (F ⋙ G).rightDerivedFunctor
@@ -206,5 +210,88 @@ noncomputable def rightDerivedFunctorCompMapDerivedCategoryIso (F : C ⥤ D) (G 
     isoWhiskerLeft F.rightDerivedFunctor G.rightDerivedFunctorIsoMapDerivedCategory
 
 end Composition
+
+section CompositionExactRight
+
+variable {E : Type uE} [Category.{vE} E] [Abelian E] [HasDerivedCategory.{wE} E]
+  [HasKInjectiveResolutions C]
+  (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+
+/-- The unit exhibiting `RF ⋙ D(G)` as a candidate right derived functor of
+`(F ⋙ G).mapHomotopyCategory ⋙ Qh`, for an exact functor `G`: it is assembled from the unit
+of `RF`, the comparison `G.mapDerivedCategoryFactorsh` and the composition isomorphism of
+`mapHomotopyCategory`. -/
+noncomputable def rightDerivedFunctorCompMapDerivedCategoryUnit :
+    (F ⋙ G).mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ⟶
+      DerivedCategory.Qh ⋙ (F.rightDerivedFunctor ⋙ G.mapDerivedCategory) :=
+  Functor.whiskerRight
+      (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (ComplexShape.up ℤ)).inv
+      DerivedCategory.Qh ≫
+    (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft (F.mapHomotopyCategory (ComplexShape.up ℤ))
+      G.mapDerivedCategoryFactorsh.inv ≫
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight F.rightDerivedFunctorUnit G.mapDerivedCategory ≫
+    (Functor.associator _ _ _).hom
+
+/-- If `G` is exact, then `RF ⋙ D(G)`, equipped with the unit
+`rightDerivedFunctorCompMapDerivedCategoryUnit`, is a right derived functor of
+`(F ⋙ G).mapHomotopyCategory ⋙ Qh`: by the K-injective right derivability structure it
+suffices that the unit is an isomorphism on K-injective complexes, which holds since the unit
+of `RF` is, and `D(G)` is computed levelwise. -/
+instance isRightDerivedFunctor_rightDerivedFunctor_comp_mapDerivedCategory :
+    (F.rightDerivedFunctor ⋙ G.mapDerivedCategory).IsRightDerivedFunctor
+      (rightDerivedFunctorCompMapDerivedCategoryUnit F G)
+      (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) := by
+  refine (HomotopyCategory.KInjectives.localizerMorphism_derives
+    ((F ⋙ G).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+      DerivedCategory.Qh)).isRightDerivedFunctor_of_isIso _ (fun X₁ => ?_)
+  obtain ⟨K, _, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective X₁
+  change IsIso ((rightDerivedFunctorCompMapDerivedCategoryUnit F G).app
+    ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K))
+  have h₁ : IsIso (F.rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K)) := inferInstance
+  dsimp [rightDerivedFunctorCompMapDerivedCategoryUnit]
+  infer_instance
+
+/-- **Composition with an exact functor**: for an additive functor `F : C ⥤ D` and an *exact*
+functor `G : D ⥤ E` between abelian categories, `R(F ⋙ G) ≅ RF ⋙ D(G)`: the right derived
+functor of the composite is computed by applying `G` levelwise to `RF`. In contrast with
+`Functor.rightDerivedFunctorCompIso`, no hypothesis on `F` is needed. -/
+noncomputable def rightDerivedFunctorCompMapDerivedCategoryIso :
+    (F ⋙ G).rightDerivedFunctor ≅ F.rightDerivedFunctor ⋙ G.mapDerivedCategory :=
+  rightDerivedUnique (F ⋙ G).rightDerivedFunctor
+    (F.rightDerivedFunctor ⋙ G.mapDerivedCategory)
+    (F ⋙ G).rightDerivedFunctorUnit (rightDerivedFunctorCompMapDerivedCategoryUnit F G)
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+
+end CompositionExactRight
+
+section RetainedComparison
+
+variable {E : Type uE} [Category.{vE} E] [Abelian E]
+ [HasDerivedCategory.{wE} E]
+ [HasKInjectiveResolutions C] [HasKInjectiveResolutions D]
+
+/-- The retained exact-composition comparison agrees with the upstream direct one. -/
+lemma rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived_eq
+ (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+ [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
+ rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived F G =
+ rightDerivedFunctorCompMapDerivedCategoryIso F G := by
+ apply Iso.ext
+ apply (F ⋙ G).rightDerivedFunctor.rightDerived_ext
+   (F ⋙ G).rightDerivedFunctorUnit (HomotopyCategory.quasiIso C (.up ℤ))
+ ext J
+ simp [rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived,
+   rightDerivedFunctorCompMapDerivedCategoryIso, rightDerivedFunctorCompUnit,
+   rightDerivedFunctorCompMapDerivedCategoryUnit, Category.assoc]
+ have h := NatTrans.congr_app G.rightDerivedFunctorIsoMapDerivedCategory_hom_fac
+   ((F.mapHomotopyCategory (.up ℤ)).obj J)
+ dsimp only [NatTrans.comp_app, whiskerLeft_app] at h
+ rw [← Category.assoc (G.rightDerivedFunctorUnit.app _) _ _, h]
+
+end RetainedComparison
 
 end CategoryTheory.Functor

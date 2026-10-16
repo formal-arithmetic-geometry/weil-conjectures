@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Ideal.Over
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Smooth.Basic
 import Mathlib.RingTheory.TensorProduct.Quotient
-import Sheaf.Algebra.IndSmoothQuotientCompatibility
+import WeilConjectures.Algebra.IndSmoothQuotientCompatibility
 import Sheaf.RingTheory.FilteredColimitOfFactorization
 import Sheaf.RingTheory.PopescuLiftOnce
 import Sheaf.RingTheory.PopescuLiftTwice

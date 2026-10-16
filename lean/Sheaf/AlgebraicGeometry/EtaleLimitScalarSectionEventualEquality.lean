@@ -9,8 +9,8 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.EtaleAbelianSectionColimitEventualEquality
 import Sheaf.AlgebraicGeometry.EtaleInverseImageUnitEventualEquality
-import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionPullbackCompatibility
-import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionMapLaws
+import WeilConjectures.AlgebraicGeometry.EtaleLimitScalarSectionPullbackCompatibility
+import WeilConjectures.AlgebraicGeometry.EtaleLimitScalarSectionMapLaws
 
 /-! # Eventual equality of descended scalar sections
 

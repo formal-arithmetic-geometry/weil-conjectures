@@ -6,7 +6,7 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
-import Sheaf.CategoryTheory.ExactFunctorResolutionCocycle
+import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 
 /-!
 # Pointwise canonical global transfer identity

@@ -4,7 +4,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegreeTrace
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceDegreeTrace
 import Mathlib.Data.Int.GCD
 
 /-! # Rescaled trace transported through a commuting generic-point square

@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise
 import Sheaf.RingTheory.FilteredColimitAlgebrasUnderlyingModule
-import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
+import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
 import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
 /-!

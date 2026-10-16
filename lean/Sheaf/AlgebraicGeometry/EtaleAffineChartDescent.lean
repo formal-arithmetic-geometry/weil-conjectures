@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 import Sheaf.AlgebraicGeometry.EtaleDirectedColimitDescent
-import Sheaf.AlgebraicGeometry.AffineChartDirectedRingModel
+import WeilConjectures.AlgebraicGeometry.AffineChartDirectedRingModel
 
 /-!
 # Descent on one affine chart of an inverse system

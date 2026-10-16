@@ -121,7 +121,7 @@ private theorem exists_small_evaluation
   change (b₀ ((F.map (Q.map p)) (b₀.symm (ULift.up 1)))).down = _
   change (b ((F.map r.hom) ((F.map (Q.map p))
     ((F.map r.inv) (b.symm 1))))).down = _
-  simpa only [q, Functor.map_comp, ModuleCat.comp_apply] using hp' 
+  simpa only [q, Functor.map_comp, ModuleCat.comp_apply] using hp'
 
 private theorem exists_continuous_evaluation
     (E : Type) [NormedField E] [TotallyDisconnectedSpace E]

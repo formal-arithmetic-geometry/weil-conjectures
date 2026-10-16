@@ -100,7 +100,7 @@ theorem exists_singleComplexOpen_termwise_comparison
     (hj : j ≫ (f ⁻¹ᵁ V).ι = (f' ⁻¹ᵁ V').ι ≫ g')
     (sq₀ : IsPullback j (f' ∣_ V') (f ∣_ V) (g.resLE V V' hV'))
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat)
+    (hP : P.IsAcyclicTensorKFlat)
     (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
     (z : (f' ⁻¹ᵁ V').toScheme) (i : ℤ) :
     letI : (schemeOpenRestriction X (f ⁻¹ᵁ V)).Additive :=
@@ -118,7 +118,7 @@ theorem exists_singleComplexOpen_termwise_comparison
     let H := comparisonStalkCohomology X' z.val i
     let θ := singleComplexRestrictedCoefficient g' K ((derivedPullback g').obj K) (𝟙 _)
       (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj
-    ∃ (_hP₀ : CochainComplex.IsKFlat (R := (f ⁻¹ᵁ V).toScheme.sheaf) Q),
+    ∃ (_hP₀ : CochainComplex.IsAcyclicTensorKFlat (R := (f ⁻¹ᵁ V).toScheme.sheaf) Q),
     ∃ (hcP₀ : IsIso ((counit j).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj Q))),
     let ν := openDerivedAdditiveStalkIso X' (f' ⁻¹ᵁ V') z i
@@ -135,7 +135,7 @@ theorem exists_singleComplexOpen_termwise_comparison
     schemeOpenRestriction_additive X (f ⁻¹ᵁ V)
   have : (schemeOpenRestriction X (f ⁻¹ᵁ V)).PreservesZeroMorphisms :=
     Functor.preservesZeroMorphisms_of_additive _
-  have hQ : CochainComplex.IsKFlat (R := (f ⁻¹ᵁ V).toScheme.sheaf)
+  have hQ : CochainComplex.IsAcyclicTensorKFlat (R := (f ⁻¹ᵁ V).toScheme.sheaf)
       (((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapHomologicalComplex (.up ℤ)).obj P) :=
     openRestriction_isKFlat X (f ⁻¹ᵁ V) P hP
   let Q := ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapHomologicalComplex (.up ℤ)).obj P

@@ -78,7 +78,7 @@ private theorem kflat_arrow_rep (X : Scheme.{u})
     ∃ (F F' : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
       (g : F' ⟶ F) (e : DerivedCategory.Q.obj F ≅ DerivedCategory.Q.obj P)
       (e' : DerivedCategory.Q.obj F' ≅ DerivedCategory.Q.obj P'),
-      F.IsKFlat ∧ F'.IsKFlat ∧ e'.hom ≫ a = DerivedCategory.Q.map g ≫ e.hom := by
+      F.IsAcyclicTensorKFlat ∧ F'.IsAcyclicTensorKFlat ∧ e'.hom ≫ a = DerivedCategory.Q.map g ≫ e.hom := by
   obtain ⟨F, s, hF, _, hs, _⟩ := CochainComplex.exists_isKFlatResolution (R := X.sheaf) P
   have := hs
   have : IsIso (DerivedCategory.Q.map s) :=
@@ -186,7 +186,7 @@ theorem tensorHomUncurry_chain_natural (X : Scheme.{u})
         X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M))
     (ht : ∀ (P L M : CochainComplex
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ),
-        P.IsKFlat →
+        P.IsAcyclicTensorKFlat →
         ∀ φ : P ⟶ homComplex (R := X.sheaf) L
             ((schemeHomKInjectiveResolution X).obj M),
           t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)

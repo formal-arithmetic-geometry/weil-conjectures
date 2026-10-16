@@ -6,7 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-public import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import Sheaf.Topology.OpenModuleCohomology
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

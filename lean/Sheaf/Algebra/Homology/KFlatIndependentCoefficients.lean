@@ -176,7 +176,7 @@ theorem isKFlatIndependentCoefficients_iff_isKFlat
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{max u v}}
     (K : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J
       (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) :
-    IsKFlatIndependentCoefficients K ↔ IsKFlat K := by
+    IsKFlatIndependentCoefficients K ↔ IsAcyclicTensorKFlat K := by
   rfl
 
 /-- The independent resolution predicate specializes to the live resolution predicate

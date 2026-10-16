@@ -86,7 +86,7 @@ private theorem kFlat_tensor_right_of_quasiIso
     {E E' K : CochainComplex
       (SheafOfModules.{u}
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
-    (α : E ⟶ E') (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (α : E ⟶ E') (hα : QuasiIso α) (hK : K.IsAcyclicTensorKFlat) :
     (letI := SheafOfModules.monoidalCategory R
      QuasiIso (HomologicalComplex.mapBifunctorMap α (𝟙 K) (curriedTensor _) (.up ℤ))) := by
   let := SheafOfModules.monoidalCategory R
@@ -103,7 +103,7 @@ private theorem kFlat_tensor_left_of_quasiIso
     {K L L' : CochainComplex
       (SheafOfModules.{u}
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
-    (α : L ⟶ L') (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (α : L ⟶ L') (hα : QuasiIso α) (hK : K.IsAcyclicTensorKFlat) :
     (letI := SheafOfModules.monoidalCategory R
      QuasiIso (HomologicalComplex.mapBifunctorMap (𝟙 K) α (curriedTensor _) (.up ℤ))) := by
   let := SheafOfModules.monoidalCategory R
@@ -143,8 +143,8 @@ private theorem site_kFlat_tensor_quasiIso
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
     (α : E ⟶ E')
     (hα : QuasiIso α)
-    (hE : E.IsKFlat)
-    (hE' : E'.IsKFlat) :
+    (hE : E.IsAcyclicTensorKFlat)
+    (hE' : E'.IsAcyclicTensorKFlat) :
     (letI := SheafOfModules.monoidalCategory R
      QuasiIso (HomologicalComplex.mapBifunctorMap α (𝟙 N) (curriedTensor _) (.up ℤ))) := by
   let := SheafOfModules.monoidalCategory R
@@ -196,10 +196,10 @@ theorem open_kFlat_tensor_homology_comparison
     (P Q : CochainComplex (SheafOfModules.{u} ((sheafCompose
       (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
-    (hP : IsKFlat (R := R) P) (q : P ⟶ Q) (hq : QuasiIso q)
+    (hP : IsAcyclicTensorKFlat (R := R) P) (q : P ⟶ Q) (hq : QuasiIso q)
     (T H : CochainComplex (SheafOfModules.{u} ((sheafCompose ((Opens.grothendieckTopology X).over U)
       (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))) ℤ)
-    (hT : IsKFlat (R := R.over U) T)
+    (hT : IsAcyclicTensorKFlat (R := R.over U) T)
     (s : H ⟶ ((SheafOfModules.overFunctor.{u} ((sheafCompose
       (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U).mapHomologicalComplex
@@ -222,7 +222,7 @@ theorem open_kFlat_tensor_homology_comparison
     (forget₂ CommRingCat.{u} RingCat.{u})).obj R
   let V := SheafOfModules.overFunctor.{u} A U
   let VC := V.mapHomologicalComplex (.up ℤ)
-  have hVP : IsKFlat (R := R.over U) (VC.obj P) :=
+  have hVP : IsAcyclicTensorKFlat (R := R.over U) (VC.obj P) :=
     open_localized_restriction_isKFlat R U inferInstance P hP
   have : QuasiIso q := hq
   have hVq : QuasiIso (VC.map q) :=

@@ -10,9 +10,9 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.CategoryTheory.SiteCechComplex
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
-import Sheaf.CategoryTheory.SiteSesCechH1Surjective
-import Sheaf.CategoryTheory.SiteCechVanishingStep
+import WeilConjectures.CategoryTheory.SiteInjectiveCechAcyclic
+import WeilConjectures.CategoryTheory.SiteSesCechH1Surjective
+import WeilConjectures.CategoryTheory.SiteCechVanishingStep
 
 /-!
 # The Čech vanishing criterion for a general site

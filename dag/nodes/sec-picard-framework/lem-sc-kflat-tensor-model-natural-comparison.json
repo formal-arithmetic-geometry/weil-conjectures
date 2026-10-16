@@ -93,7 +93,7 @@
   "module": "Sheaf.AlgebraicGeometry.KFlatTensorModelNaturalComparison",
   "file": "lean/Sheaf/AlgebraicGeometry/KFlatTensorModelNaturalComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.kFlat_tensorModel_naturalComparison",
-  "statement": "theorem kFlat_tensorModel_naturalComparison (X : Scheme.{uX})\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]\n    (P : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := X.sheaf) P) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    letI := (SheafOfModules.tensorClosed X.sheaf).1.some\n    Nonempty\n      (DerivedCategory.Q ⋙ (curriedTensor (schemeDerivedCategory X)).obj\n        (DerivedCategory.Q.obj P) ≅\n        ((curriedTensor\n          (SheafOfModules.{uX} (moduleRings X.toRingedSpace))).map₂CochainComplex.obj P) ⋙\n            DerivedCategory.Q)",
+  "statement": "theorem kFlat_tensorModel_naturalComparison (X : Scheme.{uX})\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]\n    (P : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    letI := (SheafOfModules.tensorClosed X.sheaf).1.some\n    Nonempty\n      (DerivedCategory.Q ⋙ (curriedTensor (schemeDerivedCategory X)).obj\n        (DerivedCategory.Q.obj P) ≅\n        ((curriedTensor\n          (SheafOfModules.{uX} (moduleRings X.toRingedSpace))).map₂CochainComplex.obj P) ⋙\n            DerivedCategory.Q)",
   "branch": "sheaf-dag",
   "by": "M3",
   "date": "2026-10-13"

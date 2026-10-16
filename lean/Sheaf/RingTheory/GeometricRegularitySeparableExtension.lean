@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.FieldTheory.Separable
-import Sheaf.FieldTheory.SeparableTensorPurelyInseparable
+import WeilConjectures.FieldTheory.SeparableTensorPurelyInseparable
 import Sheaf.RingTheory.GeometricRegularitySubfields
 import Sheaf.RingTheory.GeometricallyRegularFieldExtension
 import Sheaf.RingTheory.GeometricallyRegularSmoothAscent

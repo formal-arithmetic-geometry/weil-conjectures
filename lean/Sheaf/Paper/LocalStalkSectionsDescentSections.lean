@@ -5,9 +5,9 @@ Authors: SHEAF group D2
 -/
 module
 
-public import Sheaf.Paper.LocalStalkSectionsComparisonMap
+public import WeilConjectures.AlgebraicGeometry.LocalStalkSectionsComparisonMap
 import Sheaf.Paper.LocalStalkSectionsCoconeColimit
-import Sheaf.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
+import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
 import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-! # Descent of sections from the local scheme

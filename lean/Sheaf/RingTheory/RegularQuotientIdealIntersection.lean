@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.RingTheory.Regular.RegularSequence
-import Sheaf.Paper.KoszulComplex
+import WeilConjectures.AlgebraicGeometry.KoszulComplex
 import Sheaf.RingTheory.KoszulRegularSequence
 import Sheaf.RingTheory.RegularSequenceKoszulRegular
 import Sheaf.RingTheory.RegularQuotientIdealIntersectionAux

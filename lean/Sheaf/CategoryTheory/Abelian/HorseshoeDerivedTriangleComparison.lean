@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 import Sheaf.CategoryTheory.Abelian.HorseshoeComparisonBoundary
 import Sheaf.CategoryTheory.Abelian.InjectiveResolutionDerivedComparisonNaturality
-import Sheaf.CategoryTheory.Triangulated.TriangleMorphismExtension
+import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-!

@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraAffineInclusion
 import Mathlib.AlgebraicGeometry.RelativeGluing
-import Sheaf.AlgebraicGeometry.RelativeSpectrumStructureAlgebra
+import WeilConjectures.AlgebraicGeometry.RelativeSpectrumStructureAlgebra
 
 /-! # Existence of an affine realization of a quasi-coherent algebra
 

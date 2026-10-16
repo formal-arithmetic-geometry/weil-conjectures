@@ -107,8 +107,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.AffineOpenSectionsEventualCompatibility",
-  "file": "lean/Sheaf/Paper/AffineOpenSectionsEventualCompatibility.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineOpenSectionsEventualCompatibility",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineOpenSectionsEventualCompatibility.lean",
   "declaration": "affineOpenSections_pair_eventual_agreement",
   "statement": "theorem affineOpenSections_pair_eventual_agreement\n    {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]\n    (D : J ⥤ X.Etale)\n    [∀ j, IsAffine (D.obj j).left] [∀ j, IsOpenImmersion (D.obj j).hom]\n    (c : Cone (D ⋙ Scheme.Etale.forget X ⋙ Over.forget X))\n    (p : c.pt ⟶ X) (hp : ∀ j, c.π.app j ≫ (D.obj j).hom = p)\n    (hc : IsLimit c)\n    (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤\n      Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hH : H ⊣ p.Etale.sheafPushforwardContinuous\n      AddCommGrpCat.{u + 1} X.smallEtaleTopology c.pt.smallEtaleTopology)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (t : (H.obj F).obj.obj (op (Scheme.Etale.mk (𝟙 c.pt))))\n    (j : J) (V W : X.Etale) (v : V ⟶ D.obj j) (w : W ⟶ D.obj j)\n    (s : F.obj.obj (op V)) (r : F.obj.obj (op W))\n    (πV : p.Etale.obj V ⟶ Scheme.Etale.mk (𝟙 c.pt))\n    (πW : p.Etale.obj W ⟶ Scheme.Etale.mk (𝟙 c.pt))\n    (hV : IsAffine V.left) (hW : IsAffine W.left)\n    (hs : (H.obj F).obj.map πV.op t = (hH.unit.app F).hom.app (op V) s)\n    (hr : (H.obj F).obj.map πW.op t = (hH.unit.app F).hom.app (op W) r) :\n    ∃ (k : J) (f : k ⟶ j),\n      ∀ (U : X.Etale) (a : U ⟶ V) (a' : U ⟶ W) (q : U ⟶ D.obj k),\n        a ≫ v = q ≫ D.map f → a' ≫ w = q ≫ D.map f →\n        F.obj.map a.op s = F.obj.map a'.op r",
   "by": "E2",

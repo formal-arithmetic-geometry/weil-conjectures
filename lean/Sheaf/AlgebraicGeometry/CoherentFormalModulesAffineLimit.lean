@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineSectionsAdic
-import Sheaf.Algebra.Category.ModuleCat.AdicTowerCompletedScalarLimit
-import Sheaf.Algebra.Category.ModuleCat.AdicTowerFiniteLimit
+import WeilConjectures.Algebra.Category.ModuleCat.AdicTowerCompletedScalarLimit
+import WeilConjectures.Algebra.Category.ModuleCat.AdicTowerFiniteLimit
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # CoherentFormalModulesAffineLimit

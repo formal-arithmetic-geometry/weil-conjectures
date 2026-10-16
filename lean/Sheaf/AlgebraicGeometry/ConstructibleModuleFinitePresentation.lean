@@ -5,18 +5,18 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 
 import Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteEpimorphism
-import Sheaf.AlgebraicGeometry.FreeEtaleModuleShriekComparison
+import WeilConjectures.AlgebraicGeometry.FreeEtaleModuleShriekComparison
 import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.Monoidal
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport
-import Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteStalks
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteStalks
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import Sheaf.Topology.SpectralConstructibleFiniteIntersection
 import WeilConjectures.ConstructibleSheaf.KernelCokernel

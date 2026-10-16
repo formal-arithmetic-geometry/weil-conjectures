@@ -5,12 +5,12 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 public import Mathlib.CategoryTheory.Category.Cat
 public import Mathlib.CategoryTheory.Sites.Pullback
 
 import Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramDescent
-import Sheaf.AlgebraicGeometry.AffineEtaleCoveringEventually
+import WeilConjectures.AlgebraicGeometry.AffineEtaleCoveringEventually
 
 /-!
 # AffineEtaleDescentData

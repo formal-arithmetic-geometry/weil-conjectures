@@ -5,6 +5,8 @@ Authors: SHEAF group F1
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.OverSquare
+
 public import Sheaf.Paper.ContinuousIntegralComparisons
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
@@ -112,9 +114,10 @@ private lemma comp_map_fac (F : C ⥤ D) (S : D ⥤ D') [F.Additive] [S.Additive
           (DerivedCategory.Qh.obj K) =
       S.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj K) ≫
         S.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app K) := by
+  rw [← Functor.rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived_eq F S]
   have hn := S.rightDerivedFunctorIsoMapDerivedCategory.hom.naturality
     (F.rightDerivedFunctorUnit.app K)
-  simp only [Functor.rightDerivedFunctorCompMapDerivedCategoryIso, Iso.trans_hom,
+  simp only [Functor.rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived, Iso.trans_hom,
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
     ← Category.assoc]
   simp only [Functor.rightDerivedUnique, Functor.rightDerivedNatIso_hom]
@@ -454,10 +457,10 @@ private lemma bounded_comp_hom
     [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))]
     [IsSeparated (V ↘ Spec (.of k))] (j : U ⟶ V) [j.IsOver (Spec (.of k))]
     (K : ProEtale.BoundedConstructible (condensedRingObj Λ V)) :
-    ((boundedConstructibleUpperStarComp Λ ℓ k h j).hom.app K).hom =
+    ((boundedConstructibleUpperStarComp Λ ℓ (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).hom.app K).hom =
       (leftDerivedUpperStarComp Λ h j).hom.app K.obj := by
   change (boundedConstructible _).ι.map
-    ((boundedConstructibleUpperStarComp Λ ℓ k h j).hom.app K) = _
+    ((boundedConstructibleUpperStarComp Λ ℓ (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).hom.app K) = _
   simp only [ObjectProperty.ι_obj, Functor.comp_obj, boundedConstructibleUpperStarComp,
     Functor.FullyFaithful.preimageIso, Functor.whiskeringRight_obj_obj,
     boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso, Iso.trans_hom,
@@ -509,24 +512,24 @@ theorem integralConstructiblePullIso_comp
     [IsSeparated (V ↘ Spec (.of k))] (j : U ⟶ V) [j.IsOver (Spec (.of k))]
     (K : integralConstructible ℓ E V) :
     (integralScalarConstructible ℓ E T).mapIso
-        ((boundedConstructibleUpperStarComp (integralCoeff ℓ E) ℓ k h j).app K) ≪≫
+        ((boundedConstructibleUpperStarComp (integralCoeff ℓ E) ℓ (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).app K) ≪≫
       integralConstructiblePullIso ℓ E k h
-        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k j).obj K) ≪≫
-      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k h).mapIso
+        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (j.asOver (Spec (.of k)))).obj K) ≪≫
+      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))).mapIso
         (integralConstructiblePullIso ℓ E k j K) =
     integralConstructiblePullIso ℓ E k (h ≫ j) K ≪≫
-      (boundedConstructibleUpperStarComp (Profinite.continuousMapRingObj E) ℓ k h j).app
+      (boundedConstructibleUpperStarComp (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).app
         ((integralScalarConstructible ℓ E V).obj K) := by
   apply Iso.ext
   apply ObjectProperty.hom_ext
   change (integralScalarExtension ℓ E T).map
-        (((boundedConstructibleUpperStarComp (integralCoeff ℓ E) ℓ k h j).hom.app K).hom) ≫
+        (((boundedConstructibleUpperStarComp (integralCoeff ℓ E) ℓ (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).hom.app K).hom) ≫
       (derivedPullIso (integralScalarMap ℓ E) h).hom.app
         (L((j)^*⟦integralCoeff ℓ E⟧).obj K.obj) ≫
       L((h)^*⟦Profinite.continuousMapRingObj E⟧).map
         ((derivedPullIso (integralScalarMap ℓ E) j).hom.app K.obj) =
     (derivedPullIso (integralScalarMap ℓ E) (h ≫ j)).hom.app K.obj ≫
-      ((boundedConstructibleUpperStarComp (Profinite.continuousMapRingObj E) ℓ k h j).hom.app
+      ((boundedConstructibleUpperStarComp (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).hom.app
         ((integralScalarConstructible ℓ E V).obj K)).hom
   rw [bounded_comp_hom ℓ k (integralCoeff ℓ E) h j K,
     bounded_comp_hom ℓ k (Profinite.continuousMapRingObj E) h j

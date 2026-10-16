@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Sites.CoverPreserving
 import Sheaf.AlgebraicGeometry.EtaleOpenCechProductComparison
-import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
+import WeilConjectures.CategoryTheory.InjectiveSheafCechAcyclic
 import WeilConjectures.Topology.Sheaves.CechComparison
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 import Mathlib.Algebra.Homology.SingleHomology

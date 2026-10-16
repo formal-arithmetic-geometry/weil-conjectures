@@ -7,8 +7,8 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.FieldTheory.IntermediateField.Basic
-import Sheaf.FieldTheory.FinitePurelyInseparableScalarDescent
-import Sheaf.FieldTheory.FinitePresentationSubfieldModel
+import WeilConjectures.FieldTheory.FinitePurelyInseparableScalarDescent
+import WeilConjectures.FieldTheory.FinitePresentationSubfieldModel
 
 /-!
 # Geometric regularity over a directed union of subfields

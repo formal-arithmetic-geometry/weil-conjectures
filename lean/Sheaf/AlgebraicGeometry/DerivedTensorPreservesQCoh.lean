@@ -53,7 +53,7 @@ This works in all degrees, including unbounded complexes and the empty open.
 theorem derivedTensor_cohomology_over_affine {X : Scheme.{uX}}
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]
     (P N : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
     (hPQ : schemeDerivedQCohProperty X (DerivedCategory.Q.obj P))
     (hNQ : schemeDerivedQCohProperty X (DerivedCategory.Q.obj N))
     (n : ℤ) (U : X.Opens) (hU : IsAffineOpen U) :

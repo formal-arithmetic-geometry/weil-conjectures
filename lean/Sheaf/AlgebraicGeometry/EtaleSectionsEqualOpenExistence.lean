@@ -2,9 +2,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.EtaleSubsheafFinalOpen
+import WeilConjectures.AlgebraicGeometry.EtaleSubsheafFinalOpen
 import Sheaf.AlgebraicGeometry.EtaleSectionsEqualitySubterminal
-import Sheaf.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 @[expose] public section

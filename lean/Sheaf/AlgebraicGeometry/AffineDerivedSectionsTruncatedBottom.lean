@@ -11,7 +11,7 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
+import WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB

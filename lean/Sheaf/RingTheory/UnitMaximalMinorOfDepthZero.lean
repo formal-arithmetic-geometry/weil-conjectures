@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Sheaf.LinearAlgebra.NonzeroMaximalMinorOfInjective
+import WeilConjectures.LinearAlgebra.NonzeroMaximalMinorOfInjective
 
 /-!
 # Unit maximal minors over a local ring of depth zero

@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Mathlib.CategoryTheory.Presentable.Directed
 import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-! # Continuity of Ext cohomology for large filtered diagrams -/
 

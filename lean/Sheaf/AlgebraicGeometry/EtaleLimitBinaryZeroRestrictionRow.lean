@@ -6,9 +6,9 @@ Authors: SHEAF group H2
 module
 
 public import Mathlib.Algebra.Category.Grp.Colimits
-public import Sheaf.AlgebraicGeometry.StageCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.StageCohomologyComparison
 public import Mathlib.CategoryTheory.Limits.Final
-import Sheaf.AlgebraicGeometry.EtaleLimitSingleOpenComparison
+import WeilConjectures.AlgebraicGeometry.EtaleLimitSingleOpenComparison
 import Sheaf.AlgebraicGeometry.EtaleMayerVietorisConnectingPullback
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.CategoryTheory.Filtered.Final

@@ -9,7 +9,7 @@ public import Mathlib.FieldTheory.Perfect
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.FieldTheory.MakeSeparable
+import WeilConjectures.FieldTheory.MakeSeparable
 import Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
 import Sheaf.RingTheory.SmoothNormalRing
 import Sheaf.RingTheory.FilteredColimitNormalRing

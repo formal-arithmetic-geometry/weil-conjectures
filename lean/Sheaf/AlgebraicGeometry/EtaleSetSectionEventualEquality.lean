@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleSetSectionAffineEventualEquality
-import Sheaf.AlgebraicGeometry.EtaleFiniteAffineRestrictionDetection
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteAffineRestrictionDetection
 import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
 import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import Mathlib.CategoryTheory.Filtered.Final

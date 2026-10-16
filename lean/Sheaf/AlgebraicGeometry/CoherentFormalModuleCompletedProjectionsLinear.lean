@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineOpenSectionsAdic
-import Sheaf.Algebra.Category.ModuleCat.AdicTowerCompletedScalarLimit
-import Sheaf.Algebra.Category.ModuleCat.AdicTowerFiniteLimit
+import WeilConjectures.Algebra.Category.ModuleCat.AdicTowerCompletedScalarLimit
+import WeilConjectures.Algebra.Category.ModuleCat.AdicTowerFiniteLimit
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Completed linear projections of formal modules

@@ -6,7 +6,7 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import Mathlib.Algebra.Category.Grp.Zero
 import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 @[expose] public section
 
@@ -40,9 +40,9 @@ theorem module_sections_acyclic_of_cohomology_vanishing (S : Scheme.{u}) (F : S.
     ∀ V : S.Opens,
       (SheafOfModules.forget.{u} S.ringCatSheaf ⋙
         PresheafOfModules.evaluation.{u} S.ringCatSheaf.obj (op V)).rightAcyclic F := by
-  let : EnoughInjectives S.Modules := enoughInjectives S
+  let : EnoughInjectives S.Modules := enoughInjectives (X := S)
   intro V q
-  let : EnoughInjectives V.toScheme.Modules := enoughInjectives V.toScheme
+  let : EnoughInjectives V.toScheme.Modules := enoughInjectives (X := V.toScheme)
   let R := restrictFunctor V.ι
   obtain ⟨hlim, hcolim, hleft, _, ⟨adj⟩⟩ :=
     open_restriction_adjunction_exact S.toRingedSpace V

@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
 
 import Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficients
-import Sheaf.AlgebraicGeometry.Curve.IntegralOpenExtensionComparison
+import WeilConjectures.AlgebraicGeometry.Curve.IntegralOpenExtensionComparison
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenIntegralCohomologyFiniteness
 import WeilConjectures.ConstructibleSheaf.OpenClosed
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme

@@ -6,7 +6,7 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 import Sheaf.AlgebraicGeometry.FormalModuleSupportSucc
 import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import Sheaf.Topology.PresheafModuleStalkFunctor

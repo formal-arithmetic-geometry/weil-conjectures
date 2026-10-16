@@ -16,7 +16,7 @@ import WeilConjectures.SixFunctors.Integral.BaseChange
 import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.Paper.ExchangeIdentityPasting
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 import Sheaf.AlgebraicGeometry.IntegralEtaleDirectImageExact
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

@@ -5,12 +5,12 @@ Authors: SHEAF group D3
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 /-! # ProEtaleLisseFiniteModels
 

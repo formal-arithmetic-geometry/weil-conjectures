@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Ring
 import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.CategoryTheory.Adjunction.LiftedCommRingBranch
+import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 
 /-!
 # Lifting a product preserving adjunction to group and ring objects

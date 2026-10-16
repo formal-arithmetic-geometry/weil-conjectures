@@ -162,7 +162,7 @@ private theorem exists_kFlat_derived_iso (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (K : schemeDerivedCategory X) :
     ∃ P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,
-      CochainComplex.IsKFlat (R := X.sheaf) P ∧ Nonempty (DerivedCategory.Q.obj P ≅ K) := by
+      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P ∧ Nonempty (DerivedCategory.Q.obj P ≅ K) := by
   obtain ⟨P, s, hP, _, hs, _⟩ :=
     CochainComplex.exists_isKFlatResolution (R := X.sheaf) (DerivedCategory.Q.objPreimage K)
   have : QuasiIso s := hs
@@ -209,7 +209,7 @@ theorem schemeCanonicalTensorShift_associator (X : Scheme.{u})
     apply associator_core_of_iso_right (DerivedCategory.Q.obj T) eM (1 : ℤ)
     apply core_of_iso_representatives
       (tensorRightTensor (DerivedCategory.Q.obj T) (DerivedCategory.Q.obj U)).hom
-      (fun P ↦ DerivedCategory.Q.obj P) (CochainComplex.IsKFlat (R := X.sheaf))
+      (fun P ↦ DerivedCategory.Q.obj P) (CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf))
       (exists_kFlat_derived_iso X)
     intro P hP
     simpa only [tensorRightTensor_hom_app, Functor.commShiftIso_comp_hom_app,

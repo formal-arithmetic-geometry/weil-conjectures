@@ -88,7 +88,7 @@ theorem exists_properFlatDirectImagePerfectChart
       (Modules.isFlatOver_of_isFiniteLocallyFree f F) V hV
   have : D.IsStrictlyGE 0 := hDge
   have : D.IsStrictlyLE (d : ℤ) := hDle
-  have hD : CochainComplex.IsKFlat (R := V.toScheme.sheaf) D :=
+  have hD : CochainComplex.IsAcyclicTensorKFlat (R := V.toScheme.sheaf) D :=
     CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace V.toScheme.toRingedSpace D
       ⟨d, fun i hi ↦ D.isZero_of_isStrictlyLE d i hi⟩
       (fun i ↦ isFlat_of_affineFlatOver_identity (D.X i) (hDflat i))

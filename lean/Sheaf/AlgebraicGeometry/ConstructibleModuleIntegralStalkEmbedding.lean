@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
@@ -13,9 +13,9 @@ import Sheaf.AlgebraicGeometry.ConstructibleModuleNormalizedGenericData
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.Paper.WeilPbcNormalizationInResidueFieldExtension
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.ConstructibleSheaf.FinitePushforward
 import WeilConjectures.ConstructibleSheaf.Pullback

@@ -2,7 +2,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
-import Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsCore
+import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 
 @[expose] public section
 universe w v u

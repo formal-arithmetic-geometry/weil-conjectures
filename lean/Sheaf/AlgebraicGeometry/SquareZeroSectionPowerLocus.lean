@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Sheaf.AlgebraicGeometry.SquareZeroSectionPowerLift
 import Sheaf.AlgebraicGeometry.NonvanishingTensorPullback
-import Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus
+import WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
 import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 
 /-! # Lifting the nonvanishing open of a section across a square-zero immersion

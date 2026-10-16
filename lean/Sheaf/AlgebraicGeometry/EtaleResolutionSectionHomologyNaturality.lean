@@ -6,7 +6,7 @@ Authors: SHEAF group W3
 module
 
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
+public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionTransfer
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalRestriction
 import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalTransfer

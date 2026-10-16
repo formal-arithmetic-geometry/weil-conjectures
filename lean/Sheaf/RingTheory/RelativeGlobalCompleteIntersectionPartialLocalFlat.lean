@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 public import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.Paper.NoetherianApproximation
 import Sheaf.Paper.RelativeGlobalCompleteIntersectionBaseChange

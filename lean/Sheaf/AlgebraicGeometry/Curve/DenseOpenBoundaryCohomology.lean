@@ -10,12 +10,12 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
-import Sheaf.AlgebraicGeometry.Curve.DenseIrreducibleOpens
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.ConstructibleSheaf.Monoidal
-import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 
 /-!
 # Cohomology of the closed boundary of a dense open curve

@@ -5,7 +5,7 @@ Authors: SHEAF group W3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
+public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Sheaf.RingTheory.IsStrictHenselization
 
 /-!

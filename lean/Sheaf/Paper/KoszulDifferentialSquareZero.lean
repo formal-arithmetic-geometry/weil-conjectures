@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.Paper.KoszulDifferential
+public import WeilConjectures.AlgebraicGeometry.KoszulDifferential
 public import Mathlib.LinearAlgebra.ExteriorAlgebra.Grading
 
 /-!

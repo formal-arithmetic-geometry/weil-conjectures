@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-import Sheaf.FieldTheory.MakeSeparable
+import WeilConjectures.FieldTheory.MakeSeparable
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Finiteness.Small

@@ -176,7 +176,7 @@ def IsCanonicalPullbackTensorComparison {T X : Scheme.{uTC}} (g : T ⟶ X)
   letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
   letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj T.sheaf
   (∀ P N : CochainComplex (SheafOfModules.{uTC} (moduleRings X.toRingedSpace)) ℤ,
-    P.IsKFlat → N.IsKFlat →
+    P.IsAcyclicTensorKFlat → N.IsAcyclicTensorKFlat →
     ∃ φ : ((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj
         (pullbackTensorTotal X P N) ≅
       pullbackTensorTotal T
@@ -216,7 +216,7 @@ private theorem sharedCounit_leftDerived {T X : Scheme.{uTC}} (g : T ⟶ X) :
 
 private theorem counit_isIso {T X : Scheme.{uTC}} (g : T ⟶ X)
     (P : CochainComplex (SheafOfModules.{uTC} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) :
+    (hP : P.IsAcyclicTensorKFlat) :
     IsIso ((SingleComplexBaseChange.counit g).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨_, _, _, _, _, _, _, F, hF, hmap, hAdd, ε, hε, _, hK⟩ :=
@@ -234,7 +234,7 @@ private theorem counit_isIso {T X : Scheme.{uTC}} (g : T ⟶ X)
 
 private theorem modelMap_isIso (X : Scheme.{uTC})
     (P N : CochainComplex (SheafOfModules.{uTC} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) : IsIso (pullbackTensorModelMap X P N) := by
+    (hP : P.IsAcyclicTensorKFlat) : IsIso (pullbackTensorModelMap X P N) := by
   let C := SheafOfModules.{uTC} (moduleRings X.toRingedSpace)
   let : MonoidalCategory C := pullbackDescentModuleTensor X
   let : SymmetricCategory C := moduleSymmetric X
@@ -394,7 +394,7 @@ theorem IsCanonicalPullbackTensorComparison.unique {T X : Scheme.{uTC}} {g : T �
   dsimp only [IsCanonicalPullbackTensorComparison] at h h'
   have hflat (P N : CochainComplex
       (SheafOfModules.{uTC} (moduleRings X.toRingedSpace)) ℤ)
-      (hP : P.IsKFlat) (hN : N.IsKFlat) :
+      (hP : P.IsAcyclicTensorKFlat) (hN : N.IsAcyclicTensorKFlat) :
       τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) =
         τ' (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) := by
     obtain ⟨φ, hφ, heq⟩ := h.1 P N hP hN
@@ -417,7 +417,7 @@ theorem IsCanonicalPullbackTensorComparison.unique {T X : Scheme.{uTC}} {g : T �
       calc
         φ.hom = φ.hom ≫ (φ.inv ≫ ψ.hom) := by rw [hφψ, Category.comp_id]
         _ = ψ.hom := by simp only [← Category.assoc, φ.hom_inv_id, Category.id_comp]
-    have hPull : CochainComplex.IsKFlat (R := T.sheaf)
+    have hPull : CochainComplex.IsAcyclicTensorKFlat (R := T.sheaf)
         (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P) := by
       convert CochainComplex.isKFlat_pullback g.base T.sheaf X.sheaf ⟨g.c⟩ P hP using 1
       rfl

@@ -6,7 +6,7 @@ Authors: SHEAF group Y3
 module
 
 public import Sheaf.Topology.OpenModuleCohomology
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 import Sheaf.Topology.RestrictInjectiveResolution

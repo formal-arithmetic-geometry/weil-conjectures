@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Sheaf.AlgebraicGeometry.DescendSurjective
+import WeilConjectures.AlgebraicGeometry.DescendSurjective
 import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
 
 /-!

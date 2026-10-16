@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Finite
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Adjunction.Whiskering
-import Sheaf.CategoryTheory.SiteFilteredColimitSections
+import WeilConjectures.CategoryTheory.SiteFilteredColimitSections
 import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 
 /-! # Degree-zero representatives on a fixed site

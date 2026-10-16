@@ -6,7 +6,7 @@ module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 public import Mathlib.AlgebraicGeometry.Limits
-import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import Sheaf.Paper.ContinuousLocallyFreePullback
 import Sheaf.Paper.ProfinitePointPullback
 import all Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
@@ -142,19 +142,19 @@ private lemma pull_biproduct_shriek_inclusion_isIso
       F.map_sum, Finset.sum_eq_single t (fun s _ hst ↦ ?_) (by simp)]
     rw [F.map_comp, (hz s hst).eq_zero_of_tgt (F.map (biproduct.π G s)), zero_comp]
 
-private noncomputable def pull_biproduct_shriek_iso
+private theorem nonempty_pull_biproduct_shriek_iso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {I : Type u} [Finite I]
     (Y : I → Scheme.{u})
     (M : ∀ i, Mod (Sheaf (Scheme.ProEt.topology (Y i)) Ab.{u + 1})
       (condensedRingObj Λ (Y i))) (t : I) :
-    (upperStar Λ (Sigma.ι Y t)).obj
-      (⨁ fun i ↦ (openImmersionLowerShriek Λ (Sigma.ι Y i)).obj (M i)) ≅ M t := by
+    Nonempty ((upperStar Λ (Sigma.ι Y t)).obj
+      (⨁ fun i ↦ (openImmersionLowerShriek Λ (Sigma.ι Y i)).obj (M i)) ≅ M t) := by
   have := pull_biproduct_shriek_inclusion_isIso Λ Y M t
   have := openUnitIsIso Λ (Sigma.ι Y t)
-  exact (asIso ((upperStar Λ (Sigma.ι Y t)).map (biproduct.ι _ t))).symm ≪≫
+  exact ⟨(asIso ((upperStar Λ (Sigma.ι Y t)).map (biproduct.ι _ t))).symm ≪≫
     (asIso ((openImmersionLowerShriekUpperStarAdjunction Λ (Sigma.ι Y t)).unit.app
-      (M t))).symm
+      (M t))).symm⟩
 
 private lemma biproduct_shriek_counit_isIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -189,6 +189,73 @@ private lemma biproduct_shriek_counit_isIso
     pull_biproduct_shriek_inclusion_isIso Λ Y (fun i ↦
       (upperStar Λ (Sigma.ι Y i)).obj G) t
   exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ hι ‹_›
+
+/-- The finite-disjoint-union lattice calculation for an arbitrary coefficient morphism. -/
+theorem continuousLattice_finite_coproduct_of_coefficients
+    (Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+    (φ : Λ ⟶ Λ') [IsMonHom φ]
+    (X : Scheme.{u})
+    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Λ') X))
+    {I : Type u} [Finite I] (Y : I → Scheme.{u}) (p : ∀ i, Y i ⟶ X)
+    (M : ∀ i, Mod (Sheaf (Scheme.ProEt.topology (Y i)) Ab.{u + 1})
+      (condensedRingObj (Λ) (Y i)))
+    (hM : ∀ i, ∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage (Y i), ∀ s : D.I₀,
+      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj
+        (condensedRingObj (Λ) (Y i)))
+        (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj (M i)))
+    (e : ∀ i, Nonempty
+      ((Mod.extendScalars (coefficientMap (φ) (Y i))).obj (M i) ≅
+        (CondensedRing.upperStar (Λ') (p i)).obj P)) :
+    ∃ M : Mod (Sheaf (Scheme.ProEt.topology (∐ Y)) Ab.{u + 1})
+        (condensedRingObj (Λ) (∐ Y)),
+      (∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage (∐ Y), ∀ s : D.I₀,
+        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj
+          (condensedRingObj (Λ) (∐ Y)))
+          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M)) ∧
+      Nonempty ((Mod.extendScalars (coefficientMap (φ) (∐ Y))).obj M ≅
+        (CondensedRing.upperStar (Λ') (Sigma.desc p)).obj P) := by
+  classical
+  let G := fun i ↦ (openImmersionLowerShriek Λ (Sigma.ι Y i)).obj (M i)
+  let N := ⨁ G
+  refine ⟨N, ?_, ?_⟩
+  · have hlocal (i : I) : LocallyFree
+        ((ProEtale.upperStar Ab.{u + 1} (Sigma.ι Y i)).obj (condensedRingObj Λ (∐ Y)))
+        (((ProEtale.upperStar Ab.{u + 1} (Sigma.ι Y i)).mapMod _).obj N) := by
+      apply locallyFree_of_extendScalars (condensedPullbackHom Λ (Sigma.ι Y i))
+      exact locallyFree_of_iso (nonempty_pull_biproduct_shriek_iso Λ Y M i).some.symm (hM i)
+    choose D hD using hlocal
+    let C : Scheme.Cover.{u} Scheme.proetalePrecoverage (∐ Y) :=
+      { I₀ := I
+        X := Y
+        f := Sigma.ι Y
+        mem₀ := Scheme.zariskiPrecoverage_le_proetalePrecoverage _
+          (sigmaOpenCover Y).mem₀ }
+    refine ⟨C.bind D, fun ij ↦ ?_⟩
+    rcases ij with ⟨i, j⟩
+    exact (ProEtale.free_pullback_comp_iff ((D i).f j) (Sigma.ι Y i) N).mpr (hD i j)
+  · let Q := (upperStar Λ' (Sigma.desc p)).obj P
+    have hcomp (i : I) :
+        (upperStar Λ' (p i)).obj P ≅ (upperStar Λ' (Sigma.ι Y i)).obj Q :=
+      (eqToIso (congrArg (fun f ↦ (upperStar Λ' f).obj P)
+        (Sigma.ι_desc p i).symm)) ≪≫ (upperStarComp Λ' (Sigma.ι Y i) (Sigma.desc p)).app P
+    have ec (i : I) :
+        (Mod.extendScalars (coefficientMap (φ) (∐ Y))).obj (G i) ≅
+          (openImmersionLowerShriek Λ' (Sigma.ι Y i)).obj
+            ((upperStar Λ' (Sigma.ι Y i)).obj Q) :=
+      (openImmersionShriekIso (φ) (Sigma.ι Y i)).app (M i) ≪≫
+        (openImmersionLowerShriek Λ' (Sigma.ι Y i)).mapIso ((e i).some ≪≫ hcomp i)
+    let : PreservesBiproduct G
+        (Mod.extendScalars (coefficientMap (φ) (∐ Y))) :=
+      preservesBiproduct_of_preservesCoproduct _
+    let eout : (⨁ fun i ↦ (openImmersionLowerShriek Λ' (Sigma.ι Y i)).obj
+        ((upperStar Λ' (Sigma.ι Y i)).obj Q)) ≅ Q :=
+      @asIso _ _ _ _ (biproduct.desc (fun i ↦
+        (openImmersionLowerShriekUpperStarAdjunction Λ' (Sigma.ι Y i)).counit.app Q))
+          (biproduct_shriek_counit_isIso Λ' Y Q)
+    exact ⟨(Mod.extendScalars (coefficientMap (φ) (∐ Y))).mapBiproduct G ≪≫
+      biproduct.mapIso ec ≪≫ eout⟩
 
 /-- Integral lattice data assemble on a finite disjoint union of schemes.
 
@@ -237,47 +304,8 @@ theorem continuousLattice_finite_coproduct
           (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M)) ∧
       Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) (∐ Y))).obj M ≅
         (CondensedRing.upperStar (Profinite.continuousMapRingObj E) (Sigma.desc p)).obj P) := by
-  classical
-  let Λ := integralCoeff ℓ E
-  let Λ' := Profinite.continuousMapRingObj E
-  let G := fun i ↦ (openImmersionLowerShriek Λ (Sigma.ι Y i)).obj (M i)
-  let N := ⨁ G
-  refine ⟨N, ?_, ?_⟩
-  · have hlocal (i : I) : LocallyFree
-        ((ProEtale.upperStar Ab.{u + 1} (Sigma.ι Y i)).obj (condensedRingObj Λ (∐ Y)))
-        (((ProEtale.upperStar Ab.{u + 1} (Sigma.ι Y i)).mapMod _).obj N) := by
-      apply locallyFree_of_extendScalars (condensedPullbackHom Λ (Sigma.ι Y i))
-      exact locallyFree_of_iso (pull_biproduct_shriek_iso Λ Y M i).symm (hM i)
-    choose D hD using hlocal
-    let C : Scheme.Cover.{u} Scheme.proetalePrecoverage (∐ Y) :=
-      { I₀ := I
-        X := Y
-        f := Sigma.ι Y
-        mem₀ := Scheme.zariskiPrecoverage_le_proetalePrecoverage _
-          (sigmaOpenCover Y).mem₀ }
-    refine ⟨C.bind D, fun ij ↦ ?_⟩
-    rcases ij with ⟨i, j⟩
-    exact (ProEtale.free_pullback_comp_iff ((D i).f j) (Sigma.ι Y i) N).mpr (hD i j)
-  · let Q := (upperStar Λ' (Sigma.desc p)).obj P
-    have hcomp (i : I) :
-        (upperStar Λ' (p i)).obj P ≅ (upperStar Λ' (Sigma.ι Y i)).obj Q :=
-      (eqToIso (congrArg (fun f ↦ (upperStar Λ' f).obj P)
-        (Sigma.ι_desc p i).symm)) ≪≫ (upperStarComp Λ' (Sigma.ι Y i) (Sigma.desc p)).app P
-    have ec (i : I) :
-        (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) (∐ Y))).obj (G i) ≅
-          (openImmersionLowerShriek Λ' (Sigma.ι Y i)).obj
-            ((upperStar Λ' (Sigma.ι Y i)).obj Q) :=
-      (openImmersionShriekIso (integralScalarMap ℓ E) (Sigma.ι Y i)).app (M i) ≪≫
-        (openImmersionLowerShriek Λ' (Sigma.ι Y i)).mapIso ((e i).some ≪≫ hcomp i)
-    let : PreservesBiproduct G
-        (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) (∐ Y))) :=
-      preservesBiproduct_of_preservesCoproduct _
-    let eout : (⨁ fun i ↦ (openImmersionLowerShriek Λ' (Sigma.ι Y i)).obj
-        ((upperStar Λ' (Sigma.ι Y i)).obj Q)) ≅ Q :=
-      @asIso _ _ _ _ (biproduct.desc (fun i ↦
-        (openImmersionLowerShriekUpperStarAdjunction Λ' (Sigma.ι Y i)).counit.app Q))
-          (biproduct_shriek_counit_isIso Λ' Y Q)
-    exact ⟨(Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) (∐ Y))).mapBiproduct G ≪≫
-      biproduct.mapIso ec ≪≫ eout⟩
+  exact continuousLattice_finite_coproduct_of_coefficients
+    (integralCoeff ℓ E) (Profinite.continuousMapRingObj E) (integralScalarMap ℓ E)
+    X P Y p M hM e
 
 end AlgebraicGeometry.ProEtale.CondensedRing

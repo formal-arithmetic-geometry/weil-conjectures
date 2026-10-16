@@ -6,10 +6,10 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.FiniteTypeEpiImage
+import WeilConjectures.AlgebraicGeometry.FiniteTypeEpiImage
 import Sheaf.AlgebraicGeometry.CoherentCokernelRelationsLocal
 import all Sheaf.AlgebraicGeometry.CoherentFiniteTypeSubKernel
-import all Sheaf.AlgebraicGeometry.CoherentKernelConditionRestriction
+import all WeilConjectures.AlgebraicGeometry.CoherentKernelConditionRestriction
 
 /-! # Coherent CokernelRelations
 

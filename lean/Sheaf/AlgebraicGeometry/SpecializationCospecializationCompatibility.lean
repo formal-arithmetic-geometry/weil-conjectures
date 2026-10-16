@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.DerivedCategories
 import Sheaf.AlgebraicGeometry.StrictLocalGermRestrictionIso
 import Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
-import Sheaf.AlgebraicGeometry.UnderivedGlobalGermExchange
+import WeilConjectures.AlgebraicGeometry.UnderivedGlobalGermExchange
 import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows

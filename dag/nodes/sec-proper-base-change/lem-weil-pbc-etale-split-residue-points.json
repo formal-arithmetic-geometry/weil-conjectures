@@ -161,8 +161,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleSplitResiduePoints",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSplitResiduePoints.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleSplitResiduePoints",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleSplitResiduePoints.lean",
   "declaration": "AlgebraicGeometry.exists_etale_split_residue_points",
   "statement": "theorem exists_etale_split_residue_points\n    {X S : Scheme.{u}} (f : X ⟶ S) (s : S) (n : ℕ) (x : Fin n → X)\n    (hx : ∀ i, f (x i) = s)\n    (hfinite : ∀ i, letI := (f.residueFieldMap (x i)).hom.toAlgebra\n      Module.Finite (S.residueField (f (x i))) (X.residueField (x i))) :\n    ∃ (U : Scheme.{u}) (φ : U ⟶ S) (u : U), Etale φ ∧ φ u = s ∧\n      ∃ (m : Fin n → ℕ) (y : (i : Fin n) → Fin (m i) → ↥(pullback f φ)),\n        (∀ i, Function.Injective (y i)) ∧\n        (∀ i j, pullback.fst f φ (y i j) = x i) ∧\n        (∀ i j, ∃ (hy : pullback.snd f φ (y i j) = u),\n          letI := ((U.residueFieldCongr hy.symm).hom ≫\n            (pullback.snd f φ).residueFieldMap (y i j)).hom.toAlgebra\n          Module.Finite (U.residueField u) ((pullback f φ).residueField (y i j)) ∧\n            IsPurelyInseparable (U.residueField u)\n              ((pullback f φ).residueField (y i j))) ∧\n        (∀ (i : Fin n) (w : ↥(pullback f φ)),\n          pullback.snd f φ w = u → pullback.fst f φ w = x i →\n            ∃ j : Fin (m i), w = y i j)",
   "branch": "sheaf-dag",

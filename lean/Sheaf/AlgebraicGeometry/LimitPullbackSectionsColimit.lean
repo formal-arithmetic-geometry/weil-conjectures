@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Sheaf.AlgebraicGeometry.PullbackSectionsDiagram
+import WeilConjectures.AlgebraicGeometry.PullbackSectionsDiagram
 import Sheaf.AlgebraicGeometry.PullbackSectionsIsColimit
 
 /-!

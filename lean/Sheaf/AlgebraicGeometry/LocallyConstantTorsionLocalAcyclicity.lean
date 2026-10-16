@@ -9,8 +9,8 @@ public import Sheaf.AlgebraicGeometry.LocalAcyclicityAbelianSheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.GroupTheory.OrderOfElement
 import Sheaf.Paper.StrictHenselizationFunctoriality
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.Paper.ConstantSheafSectionsLocallyConstant
 import Mathlib.GroupTheory.FiniteAbelian.Basic
 import Mathlib.CategoryTheory.Sites.GlobalSections

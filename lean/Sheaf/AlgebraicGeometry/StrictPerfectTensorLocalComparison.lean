@@ -88,7 +88,7 @@ private theorem strictPerfect_isKFlat_local (X : Scheme.{u}) (U : X.Opens)
     (A : CochainComplex
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
     (hA : Scheme.IsStrictlyPerfect X U A) :
-    CochainComplex.IsKFlat (R := X.sheaf.over U) A := by
+    CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf.over U) A := by
   classical
   let C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)
   let : MonoidalCategory C := SheafOfModules.monoidalCategory (X.sheaf.over U)
@@ -120,8 +120,8 @@ private theorem local_kFlat_tensor_invariance (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
     (P N A B : CochainComplex
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
-    (hN : CochainComplex.IsKFlat (R := X.sheaf.over U) N)
-    (hA : CochainComplex.IsKFlat (R := X.sheaf.over U) A)
+    (hN : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf.over U) N)
+    (hA : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf.over U) A)
     (eA : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj A)
     (eB : DerivedCategory.Q.obj N ≅ DerivedCategory.Q.obj B) :
     Nonempty (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N
@@ -210,8 +210,8 @@ theorem strictPerfect_tensor_localComparison (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-    (hN : CochainComplex.IsKFlat (R := X.sheaf) N)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+    (hN : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N)
     (A B : CochainComplex
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
     (hA : Scheme.IsStrictlyPerfect X U A) (hB : Scheme.IsStrictlyPerfect X U B)

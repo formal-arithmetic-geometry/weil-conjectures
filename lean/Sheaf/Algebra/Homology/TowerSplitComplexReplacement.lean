@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
-import Sheaf.CategoryTheory.TowerSplitEnvelope
-import Sheaf.Algebra.Homology.KernelShiftedMappingCone
+import WeilConjectures.CategoryTheory.TowerSplitEnvelope
+import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 
 /-! # Replacing a tower complex by a complex with split terms
 

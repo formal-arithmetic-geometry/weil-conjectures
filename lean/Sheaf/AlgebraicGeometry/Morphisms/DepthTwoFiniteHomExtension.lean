@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Sheaf.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
-import Sheaf.AlgebraicGeometry.AffineAlgebraLocalMaps
+import WeilConjectures.AlgebraicGeometry.AffineAlgebraLocalMaps
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Extension of morphisms from finite depth-two schemes

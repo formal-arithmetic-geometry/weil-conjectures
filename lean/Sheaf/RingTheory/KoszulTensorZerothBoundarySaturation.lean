@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.RingTheory.Regular.RegularSequence
 import Mathlib.LinearAlgebra.ExteriorPower.Basic
 

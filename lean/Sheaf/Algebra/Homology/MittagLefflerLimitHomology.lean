@@ -15,7 +15,7 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
 import Sheaf.CategoryTheory.MittagLefflerExactSequence
-import Sheaf.CategoryTheory.MittagLefflerLimitExact
+import WeilConjectures.CategoryTheory.MittagLefflerLimitExact
 
 /-!
 # Homology of the limit of a Mittag-Leffler system of four-term complexes

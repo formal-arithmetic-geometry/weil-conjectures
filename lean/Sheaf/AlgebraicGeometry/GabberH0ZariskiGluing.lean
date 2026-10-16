@@ -10,7 +10,7 @@ public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
 import Sheaf.AlgebraicGeometry.GabberH0ZariskiLocalData
-import Sheaf.Paper.GabberZariskiEtaleRestrictionInjective
+import WeilConjectures.AlgebraicGeometry.GabberZariskiEtaleRestrictionInjective
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 /-! # Zariski gluing after a local refinement of an étale representative

@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.RingTheory.AdicCompletion.Basic
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceFiniteCoordinates
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceFiniteCoordinates
 import Sheaf.AlgebraicGeometry.FormalSystemsPullback
 import Sheaf.AlgebraicGeometry.GrothendieckExistenceProjective
 import WeilConjectures.AlgebraicGeometry.ChowLemma

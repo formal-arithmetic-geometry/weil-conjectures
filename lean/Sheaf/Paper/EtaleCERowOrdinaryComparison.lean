@@ -6,7 +6,7 @@ Authors: SHEAF group M4
 module
 
 public import Sheaf.Paper.EtaleCETotalSections
-public import Sheaf.AlgebraicGeometry.SheafHExtResolutionSectionsIso
+public import WeilConjectures.AlgebraicGeometry.SheafHExtResolutionSectionsIso
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.Paper.EtaleRowSectionsExtend
 

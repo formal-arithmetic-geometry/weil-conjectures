@@ -1,7 +1,7 @@
 module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.Data.ZMod.Basic
-public import Sheaf.RingTheory.CohenRing
+public import WeilConjectures.RingTheory.CohenRing
 import Sheaf.RingTheory.ExistsLiftOfFieldCharP
 import Sheaf.RingTheory.CohenRingModPowFormallySmoothStep
 import Mathlib.Algebra.CharP.Basic

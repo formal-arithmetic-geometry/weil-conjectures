@@ -220,7 +220,7 @@ private theorem strictPerfect_openTensor_comparison
     change (A.map i ≫ ei.hom) ≫ ei.inv ≫ A.map r = 𝟙 (A.obj (L.X n))
     simp only [Category.assoc, Iso.hom_inv_id_assoc, ← Functor.map_comp, hir]
     exact A.map_id _
-  have hP : CochainComplex.IsKFlat (R := U.toScheme.sheaf) P :=
+  have hP : CochainComplex.IsAcyclicTensorKFlat (R := U.toScheme.sheaf) P :=
     CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
       U.toScheme.toRingedSpace P hPbounded hPflat
   obtain ⟨t⟩ := derivedTensor_openRestriction_iso_universes X U E (DerivedCategory.Q.obj G)

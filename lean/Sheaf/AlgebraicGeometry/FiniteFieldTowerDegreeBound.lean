@@ -5,6 +5,8 @@ Authors: SHEAF group K2
 -/
 module
 
+import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 import WeilConjectures.AlgebraicGeometry.FiniteOverField
 import Sheaf.RingTheory.SemilocalFiberGenerators

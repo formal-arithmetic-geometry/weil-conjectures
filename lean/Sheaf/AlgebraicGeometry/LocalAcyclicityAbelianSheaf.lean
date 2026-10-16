@@ -10,8 +10,8 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Data.ZMod.Basic
 import Sheaf.Paper.StrictHenselizationFunctoriality
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 
 /-!
 # Local acyclicity relative to an abelian étale sheaf

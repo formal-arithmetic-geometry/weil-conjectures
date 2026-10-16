@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import all Sheaf.Paper.FiniteEtaleLocallyFreeModels
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 import Sheaf.Paper.RegularExtensionComparison
 import Sheaf.Paper.ContinuousIntegralUnderivedPushComparison
 import Sheaf.Paper.ProfinitePointPullback

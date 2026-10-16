@@ -134,8 +134,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.FieldTheory.TriangularFieldModelData",
-  "file": "lean/Sheaf/FieldTheory/TriangularFieldModelData.lean",
+  "module": "WeilConjectures.FieldTheory.TriangularFieldModelData",
+  "file": "lean/WeilConjectures/FieldTheory/TriangularFieldModelData.lean",
   "declaration": "FieldTheory.exists_triangularFieldModel_data",
   "statement": "theorem exists_triangularFieldModel_data\n    (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]\n    (d : ℕ) (x : Fin d → K) (hx : IsTranscendenceBasis k x)\n    (m : ℕ) (b : Fin m → K) :\n    ∃ (h : MvPolynomial (Fin d) k)\n      (p : (i : Fin m) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))\n      (y : Fin (d + 1 + m) → K) (e : Fin m → ℕ),\n      h ≠ 0 ∧ (∀ i, (p i).Monic) ∧ (∀ i, (p i).natDegree = e i) ∧\n      (∀ j : Fin d, y ⟨j.val, by omega⟩ = x j) ∧\n      y ⟨d, by omega⟩ = (MvPolynomial.aeval x h)⁻¹ ∧\n      (∀ i : Fin m, y ⟨d + 1 + i.val, by omega⟩ = b i) ∧\n      (∀ q ∈ triangularFieldModelEquations k d m h p, MvPolynomial.aeval y q = 0) ∧\n      LinearIndependent (IntermediateField.adjoin k (Set.range x))\n        (fun a : ((i : Fin m) → Fin (e i)) => ∏ i, b i ^ (a i).val)",
   "branch": "sheaf-dag",

@@ -2,7 +2,7 @@ module
 
 public import Sheaf.CategoryTheory.TruncationCouple
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
-import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
+import WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 @[expose] public section

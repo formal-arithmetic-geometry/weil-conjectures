@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.LinearAlgebra.Dual.Defs
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.AlgebraicGeometry.TildeScalarSectionAction
-import Sheaf.AlgebraicGeometry.QuasicoherentSheafHom
+import WeilConjectures.AlgebraicGeometry.QuasicoherentSheafHom
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.InternalHomOverEquiv
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver

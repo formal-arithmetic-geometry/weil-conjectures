@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.Topology.Sheaves.Module
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.Topology.ModuleColimitRestriction
 import Sheaf.Topology.SheafIsomorphismLocalOpenCover

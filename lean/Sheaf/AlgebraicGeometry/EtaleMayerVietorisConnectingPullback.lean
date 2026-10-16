@@ -5,7 +5,7 @@ Authors: SHEAF group D2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyMaps
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyMaps
 import Sheaf.AlgebraicGeometry.EtaleMayerVietorisSectionDiagram
 
 /-!

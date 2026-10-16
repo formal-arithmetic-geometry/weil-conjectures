@@ -5,7 +5,7 @@ Authors: SHEAF group E3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleCohomologyStageContinuity
+public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyStageContinuity
 import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyClassDescent
 import Sheaf.AlgebraicGeometry.EtaleLimitAffineStageEventualZero
 import Mathlib.Algebra.Category.Grp.FilteredColimits

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 public import Mathlib.AlgebraicGeometry.ResidueField
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # The distinguished section of a closed-point ideal quotient
 

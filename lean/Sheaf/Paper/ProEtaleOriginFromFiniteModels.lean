@@ -5,15 +5,15 @@ Authors: SHEAF group D3
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.Paper.ProEtaleComparisonLocalization
 import Sheaf.Paper.ProEtaleEtaleFiniteModels
 import all Sheaf.Paper.ProEtaleLisseFiniteModels
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 /-! # ProEtaleOriginFromFiniteModels
 

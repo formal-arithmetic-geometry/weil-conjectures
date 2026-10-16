@@ -139,7 +139,7 @@ theorem exists_functorial_ringComplex
       (∀ (A B : CommRingCat.{u}) (φ : A →+* B)
         (I : {I : Ideal A // I.FG}) (J : {J : Ideal B // J.FG})
         (h : I.val.map φ = J.val) (P : CochainComplex (RingSiteModules A) ℤ)
-        (p : P ⟶ K A I), P.IsKFlat → QuasiIso p →
+        (p : P ⟶ K A I), P.IsAcyclicTensorKFlat → QuasiIso p →
         ∃ (E : CochainComplex (RingSiteModules B) ℤ)
           (t : ∀ n : ℤ, E.X n ≅
             SheafOfModules.changeOfRings.{u, u, u} (ringSiteMap.{u} φ) (P.X n)),

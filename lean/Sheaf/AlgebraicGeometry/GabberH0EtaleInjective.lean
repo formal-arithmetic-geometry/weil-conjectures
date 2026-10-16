@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescent
-import Sheaf.Paper.GabberZariskiEtaleRestrictionInjective
-import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
+import WeilConjectures.AlgebraicGeometry.GabberZariskiEtaleRestrictionInjective
+import WeilConjectures.AlgebraicGeometry.ZariskiEtaleInclusionMorphismOfSites
 
 /-! # Injectivity of étale restriction from Zariski restriction
 

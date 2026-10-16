@@ -5,8 +5,8 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 /-!
 # Comparing constructibility of etale module sheaves
@@ -45,7 +45,7 @@ theorem isConstructibleEtaleModuleSheaf_iff
       IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ => M →ₗ[Λ] N)
         (CA := fun M : ModuleCat.{u + 1} Λ => M) F := by
   constructor
-  · rintro ⟨S, _, hF⟩
+  · rintro ⟨S, hF⟩
     let T : Stratification X :=
       { toStratification := S.toStratification
         domain := S.domain
@@ -55,13 +55,13 @@ theorem isConstructibleEtaleModuleSheaf_iff
     refine ⟨T, fun k => ?_⟩
     exact (finite_locally_constant_module_values_iff _).1.mp (hF k)
   · rintro ⟨S, hF⟩
-    let T : LocallyClosedStratification X :=
+    let T : Stratification X :=
       { toStratification := S.toStratification
         domain := S.domain
         immersion := S.immersion
         isImmersion := S.isImmersion
         range_immersion := S.range_immersion }
-    refine ⟨T, fun k => S.isConstructible_stratum k, fun k => ?_⟩
+    refine ⟨T, fun k => ?_⟩
     exact (finite_locally_constant_module_values_iff _).1.mpr (hF k)
 
 end AlgebraicGeometry.Scheme

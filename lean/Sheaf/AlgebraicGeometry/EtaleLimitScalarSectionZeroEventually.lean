@@ -6,7 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionMapLaws
+import WeilConjectures.AlgebraicGeometry.EtaleLimitScalarSectionMapLaws
 import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionColimit
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered

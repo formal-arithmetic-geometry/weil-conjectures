@@ -2,9 +2,9 @@ module
 
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.Data.ZMod.Basic
-public import Sheaf.RingTheory.CohenRing
+public import WeilConjectures.RingTheory.CohenRing
 import Mathlib.RingTheory.Smooth.Quotient
-import Sheaf.RingTheory.CohenRingModPowFlat
+import WeilConjectures.RingTheory.CohenRingModPowFlat
 import Sheaf.RingTheory.ModPowFormallySmoothReduction
 
 @[expose] public section

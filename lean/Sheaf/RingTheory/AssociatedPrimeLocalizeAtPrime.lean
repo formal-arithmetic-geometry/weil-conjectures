@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.RingTheory.AnnihilatorAssociatedPrimes
+public import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimes
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
 

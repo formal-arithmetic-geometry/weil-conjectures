@@ -47,7 +47,7 @@ noncomputable def HasProEtaleTorAmplitude (Y : Scheme.{t}) (A : Type t) [CommRin
   a ≤ b ∧ ∀ (L P : CochainComplex C ℤ),
     Nonempty (DerivedCategory.Q.obj L ≅ K) →
     ∀ (f : P ⟶ L) (hf : QuasiIso f)
-      (hP : CochainComplex.IsKFlat.{t + 1, t} (R := R) P)
+      (hP : CochainComplex.IsAcyclicTensorKFlat.{t + 1, t} (R := R) P)
       (M : C) (i : ℤ),
       (i < a ∨ b < i) →
       IsZero ((DerivedCategory.homologyFunctor C i).obj

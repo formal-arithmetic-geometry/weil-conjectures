@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenIntegralBoundaryFiniteness
-import Sheaf.AlgebraicGeometry.Curve.IntegralOpenExtensionComparison
+import WeilConjectures.AlgebraicGeometry.Curve.IntegralOpenExtensionComparison
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.SixFunctors.Etale.Gabber
 import Mathlib.Algebra.Homology.ShortComplex.Ab

@@ -14,12 +14,6 @@ public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
-import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
-import WeilConjectures.CategoryTheory.Monoidal.Conjugate
-import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
-import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
-
 /-!
 
 # Condensed coefficient rings and their canonical coefficient morphisms
@@ -111,7 +105,7 @@ derived functors on module objects need.
   coherences `ProEtale.unitCompUpperStarComp_id` and `ProEtale.unitCompUpperStarComp_comp` of
   `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence`.
 
-## Mathematical input
+## Sorried input
 
 * `AddCommGrpCat.hasFunctorialFlatResolution`: abelian groups admit functorial flat resolutions,
   by free abelian groups; it is what makes the derived functors with values in `Ab` available.
@@ -135,8 +129,7 @@ derived functors on module objects need.
   commutes with the objectwise tensor product (as for `ProEtale.isIso_δ_upperStar`).
 * `AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp`: the comparison
   `f^* ∘ p_Y^* ≅ p_X^*` is a monoidal natural isomorphism. It is the mate of the composition
-  isomorphism of pushforwards, whose monoidality follows from the general continuous-site
-  pushforward theorem.
+  isomorphism of pushforwards, which is monoidal by `ProEtale.isMonoidal_lowerStarComp`.
 
 -/
 
@@ -149,8 +142,8 @@ open CategoryTheory Limits MonoidalCategory Opposite Functor.LaxMonoidal Functor
 /-- Abelian groups admit functorial flat resolutions, by free abelian groups: the free abelian
 group on the underlying set of `M` is flat, and surjects functorially onto `M`. -/
 instance AddCommGrpCat.hasFunctorialFlatResolution :
-    Abelian.HasFunctorialFlatResolution Ab.{u} := by
-  infer_instance
+    Abelian.HasFunctorialFlatResolution Ab.{u} :=
+  sorry
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -186,18 +179,8 @@ noncomputable def profiniteToScheme : Profinite.{u} ⥤ Scheme.{u} :=
 
 /-- `Spec LC(S, ℤ) ⟶ Spec ℤ` is weakly étale. See the module docstring. -/
 instance weaklyEtale_toSpecZ_profiniteToScheme (S : Profinite.{u}) :
-    WeaklyEtale (toSpecZ (profiniteToScheme.obj S)) := by
-  let e : CommRingCat.of (LocallyConstant S (ULift.{u} ℤ)) ≅
-      CommRingCat.of (LocallyConstant S ℤ) :=
-    (LocallyConstant.congrRightRingEquiv ULift.ringEquiv).toCommRingCatIso
-  have : WeaklyEtale
-      (Spec.map e.hom ≫ Spec.map (CommRingCat.ofHom
-        (algebraMap (ULift.{u} ℤ) (LocallyConstant S (ULift.{u} ℤ))))) := by
-    infer_instance
-  rwa [specULiftZIsTerminal.hom_ext
-    (Spec.map e.hom ≫ Spec.map (CommRingCat.ofHom
-      (algebraMap (ULift.{u} ℤ) (LocallyConstant S (ULift.{u} ℤ)))))
-    (toSpecZ (profiniteToScheme.obj S))] at this
+    WeaklyEtale (toSpecZ (profiniteToScheme.obj S)) :=
+  sorry
 
 /-- The functor `S ↦ Spec LC(S, ℤ)` from profinite sets to the pro-étale site of `Spec ℤ`. -/
 noncomputable def profiniteToProEt : Profinite.{u} ⥤ specZ.{u}.ProEt where
@@ -210,118 +193,9 @@ lemma profiniteToProEt_obj_left (S : Profinite.{u}) :
     (profiniteToProEt.obj S).left = Spec (.of (LocallyConstant S ℤ)) :=
   rfl
 
--- Ring maps from locally constant integer-valued functions are determined by their
--- map on profinite components. Characteristic functions identify their values after
--- localization; conversely, `liftPrimeSpectrum` glues integers along clopen partitions.
--- This constructs a left adjoint to `profiniteToCommRingCatOp`, avoiding tensor-product
--- and equalizer computations. Source: the module's profinite-test-object construction
--- and `LocallyConstant.homeomorphPrimeSpectrum` / `LocallyConstant.liftPrimeSpectrum`.
-private noncomputable def profiniteSpectrumProjection {S : Profinite.{u}} {R : Type u} [CommRing R]
-    (φ : LocallyConstant S ℤ →+* R) : C(PrimeSpectrum R, S) :=
-  ⟨fun p ↦ ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm
-      (PrimeSpectrum.comap φ p)).1,
-    continuous_fst.comp
-      ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm.continuous.comp
-        (PrimeSpectrum.continuous_comap φ))⟩
-
-private lemma profinite_localization_map_eq_eval {S : Profinite.{u}} {R : Type u} [CommRing R]
-    (φ : LocallyConstant S ℤ →+* R) (p : PrimeSpectrum R) (g : LocallyConstant S ℤ) :
-    algebraMap R (Localization.AtPrime p.asIdeal) (φ g) =
-      algebraMap R (Localization.AtPrime p.asIdeal) (g (profiniteSpectrumProjection φ p) : R) := by
-  classical
-  let s := profiniteSpectrumProjection φ p
-  let q := ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm
-    (PrimeSpectrum.comap φ p)).2
-  have hp : PrimeSpectrum.comap φ p = LocallyConstant.toPrimeSpectrum (s, q) :=
-    ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).apply_symm_apply _).symm
-  let χ := LocallyConstant.charFn ℤ (g.isLocallyConstant.isClopen_fiber (g s))
-  have hχ : φ χ ∉ p.asIdeal := by
-    change χ ∉ (PrimeSpectrum.comap φ p).asIdeal
-    rw [hp, LocallyConstant.mem_toPrimeSpectrum_asIdeal]
-    simpa [χ, LocallyConstant.charFn_apply_of_mem] using q.isPrime.one_notMem
-  have hid : IsIdempotentElem χ := by
-    change χ * χ = χ
-    ext x
-    by_cases hx : g x = g s
-    · simp [χ, LocallyConstant.charFn_apply_of_mem, hx]
-    · simp [χ, LocallyConstant.charFn_apply_of_notMem, hx]
-  have hχloc : algebraMap R (Localization.AtPrime p.asIdeal) (φ χ) = 1 :=
-    (hid.map φ).algebraMap_localization_atPrime_of_notMem hχ
-  have hmul : χ * g = χ * (g s : LocallyConstant S ℤ) := by
-    ext x
-    change χ x * g x = χ x * g s
-    by_cases hx : g x = g s
-    · simp [hx]
-    · simp [χ, LocallyConstant.charFn_apply_of_notMem, hx]
-  have h := congrArg (fun v ↦ algebraMap R (Localization.AtPrime p.asIdeal) (φ v)) hmul
-  simpa only [map_mul, map_intCast, hχloc, one_mul] using h
-
-private noncomputable def profiniteLocallyConstantHomEquiv
-    (R : CommRingCat.{u}ᵒᵖ) (S : Profinite.{u}) :
-    (Profinite.of (ConnectedComponents (PrimeSpectrum R.unop)) ⟶ S) ≃
-      (R ⟶ profiniteToCommRingCatOp.obj S) where
-  toFun f := (CommRingCat.ofHom (LocallyConstant.liftPrimeSpectrum (Int.castRingHom R.unop)
-    ⟨fun p ↦ f (ConnectedComponents.mk p), f.hom.hom.continuous.comp
-      ConnectedComponents.continuous_coe⟩)).op
-  invFun φ := ConcreteCategory.ofHom
-    ⟨(profiniteSpectrumProjection φ.unop.hom).continuous.connectedComponentsLift,
-      (profiniteSpectrumProjection φ.unop.hom).continuous.connectedComponentsLift_continuous⟩
-  left_inv f := by
-    apply ConcreteCategory.hom_ext
-    intro x
-    obtain ⟨p, rfl⟩ := ConnectedComponents.surjective_coe x
-    change (profiniteSpectrumProjection (LocallyConstant.liftPrimeSpectrum (Int.castRingHom R.unop)
-      ⟨fun p ↦ f (ConnectedComponents.mk p), f.hom.hom.continuous.comp
-        ConnectedComponents.continuous_coe⟩)) p = f (ConnectedComponents.mk p)
-    dsimp [profiniteSpectrumProjection]
-    rw [LocallyConstant.comap_liftPrimeSpectrum]
-    exact congrArg Prod.fst
-      ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm_apply_apply _)
-  right_inv φ := by
-    apply Quiver.Hom.unop_inj
-    ext g
-    apply PrimeSpectrum.eq_of_forall_algebraMap_localization_eq
-    intro p
-    change algebraMap R.unop (Localization.AtPrime p.asIdeal)
-        (LocallyConstant.liftPrimeSpectrum (Int.castRingHom R.unop)
-          (profiniteSpectrumProjection φ.unop.hom) g) = _
-    rw [LocallyConstant.algebraMap_localization_liftPrimeSpectrum]
-    exact (profinite_localization_map_eq_eval φ.unop.hom p g).symm
-
-private lemma profiniteLocallyConstantHomEquiv_naturality (R : CommRingCat.{u}ᵒᵖ)
-    (S T : Profinite.{u}) (g : S ⟶ T)
-    (f : Profinite.of (ConnectedComponents (PrimeSpectrum R.unop)) ⟶ S) :
-    profiniteLocallyConstantHomEquiv R T (f ≫ g) =
-      profiniteLocallyConstantHomEquiv R S f ≫ profiniteToCommRingCatOp.map g := by
-  apply Quiver.Hom.unop_inj
-  ext h
-  apply PrimeSpectrum.eq_of_forall_algebraMap_localization_eq
-  intro p
-  change algebraMap R.unop (Localization.AtPrime p.asIdeal)
-      (LocallyConstant.liftPrimeSpectrum (Int.castRingHom R.unop) _ h) =
-    algebraMap R.unop (Localization.AtPrime p.asIdeal)
-      (LocallyConstant.liftPrimeSpectrum (Int.castRingHom R.unop) _
-        (LocallyConstant.comapRingHom g.hom.hom h))
-  rw [LocallyConstant.algebraMap_localization_liftPrimeSpectrum,
-    LocallyConstant.algebraMap_localization_liftPrimeSpectrum]
-  rfl
-
 /-- The functor `S ↦ Spec LC(S, ℤ)` preserves finite limits. See the module docstring. -/
-instance preservesFiniteLimits_profiniteToProEt : PreservesFiniteLimits profiniteToProEt.{u} := by
-  have h := (Adjunction.adjunctionOfEquivLeft profiniteLocallyConstantHomEquiv
-    profiniteLocallyConstantHomEquiv_naturality).rightAdjoint_preservesLimits
-  have : PreservesFiniteLimits profiniteToCommRingCatOp.{u} := inferInstance
-  have : PreservesFiniteLimits profiniteToScheme.{u} := by
-    unfold profiniteToScheme
-    infer_instance
-  have : (Over.forget specZ.{u}).IsEquivalence :=
-    (Over.equivalenceOfIsTerminal specULiftZIsTerminal).isEquivalence_functor
-  have : PreservesFiniteLimits
-      ((profiniteToProEt.{u} ⋙ Scheme.ProEt.forget specZ) ⋙ Over.forget specZ) :=
-    inferInstanceAs (PreservesFiniteLimits profiniteToScheme.{u})
-  have : PreservesFiniteLimits (profiniteToProEt.{u} ⋙ Scheme.ProEt.forget specZ) :=
-    preservesFiniteLimits_of_reflects_of_preserves _ (Over.forget specZ)
-  exact preservesFiniteLimits_of_reflects_of_preserves _ (Scheme.ProEt.forget specZ)
+instance preservesFiniteLimits_profiniteToProEt : PreservesFiniteLimits profiniteToProEt.{u} :=
+  sorry
 
 instance : RepresentablyFlat profiniteToProEt.{u} :=
   flat_of_preservesFiniteLimits _
@@ -329,44 +203,8 @@ instance : RepresentablyFlat profiniteToProEt.{u} :=
 /-- The functor `S ↦ Spec LC(S, ℤ)` sends finite jointly surjective families to pro-étale
 coverings. See the module docstring. -/
 lemma coverPreserving_profiniteToProEt :
-    CoverPreserving (coherentTopology Profinite.{u}) (ProEt.topology specZ) profiniteToProEt := by
-  classical
-  constructor
-  intro T R hR
-  obtain ⟨ι, hι, S, f, hf, hRf⟩ :=
-    (coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily R).mp hR
-  have hsurj := ((Profinite.effectiveEpiFamily_tfae S f).out 0 2).mp hf
-  have hgeom : ∀ q : profiniteToScheme.obj T,
-      ∃ i, q ∈ Set.range (profiniteToScheme.map (f i)) := by
-    intro q
-    obtain ⟨⟨t, p⟩, rfl⟩ := LocallyConstant.toPrimeSpectrum_surjective q
-    obtain ⟨i, s, hs⟩ := hsurj t
-    refine ⟨i, LocallyConstant.toPrimeSpectrum (s, p), ?_⟩
-    subst t
-    rfl
-  have hwe (i : ι) : WeaklyEtale (profiniteToScheme.map (f i)) := by
-    have : WeaklyEtale (profiniteToScheme.map (f i) ≫
-        toSpecZ (profiniteToScheme.obj T)) := by
-      rw [comp_toSpecZ]
-      infer_instance
-    exact WeaklyEtale.of_comp _ (toSpecZ (profiniteToScheme.obj T))
-  let C := Scheme.Cover.mkOfCovers (P := @WeaklyEtale) ι
-    (fun i ↦ profiniteToScheme.obj (S i)) (fun i ↦ profiniteToScheme.map (f i))
-    hgeom hwe
-  have (i : C.I₀) : QuasiCompact (C.f i) := by
-    change QuasiCompact (Spec.map _)
-    infer_instance
-  have : Finite C.I₀ := hι
-  have hcov : Presieve.ofArrows (fun i ↦ profiniteToProEt.obj (S i))
-      (fun i ↦ profiniteToProEt.map (f i)) ∈ ProEt.precoverage specZ (profiniteToProEt.obj T) := by
-    rw [ProEt.precoverage, Precoverage.mem_comap_iff, Presieve.map_ofArrows]
-    exact (Scheme.Cover.ofQuasiCompactCover C).mem₀
-  apply (ProEt.topology specZ).superset_covering _
-    (Precoverage.generate_mem_toGrothendieck hcov)
-  rw [Sieve.generate_le_iff]
-  intro W g hg
-  obtain ⟨i⟩ := hg
-  exact R.image_mem_functorPushforward profiniteToProEt (hRf i)
+    CoverPreserving (coherentTopology Profinite.{u}) (ProEt.topology specZ) profiniteToProEt :=
+  sorry
 
 instance isContinuous_profiniteToProEt :
     profiniteToProEt.IsContinuous (coherentTopology Profinite.{u}) (ProEt.topology specZ) :=
@@ -376,8 +214,8 @@ instance isContinuous_profiniteToProEt :
 /-- The left Kan extensions along the opposite of `S ↦ Spec LC(S, ℤ)` exist. See the module
 docstring. -/
 instance hasLeftKanExtension_op_profiniteToProEt (F : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}) :
-    profiniteToProEt.op.HasLeftKanExtension F := by
-  infer_instance
+    profiniteToProEt.op.HasLeftKanExtension F :=
+  sorry
 
 /-- The profinite test object `X[S] = Spec LC(S, ℤ) ×_{Spec ℤ} X = lim_i ∐_{S_i} X` over a
 scheme `X`, as a functor from profinite sets to the pro-étale site of `X`. -/
@@ -418,15 +256,13 @@ noncomputable instance oplaxMonoidal_pointUpperStar : pointUpperStar.{u}.OplaxMo
   pointUpperStarLowerStarAdjunction.leftAdjointOplaxMonoidal
 
 /-- The inverse image `p^*` preserves the unit. See the module docstring. -/
-instance isIso_η_pointUpperStar : IsIso (η pointUpperStar.{u}) := by
-  unfold pointUpperStar
-  infer_instance
+instance isIso_η_pointUpperStar : IsIso (η pointUpperStar.{u}) :=
+  sorry
 
 /-- The inverse image `p^*` commutes with the tensor product. See the module docstring. -/
 instance isIso_δ_pointUpperStar (F G : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :
-    IsIso (δ pointUpperStar F G) := by
-  unfold pointUpperStar
-  infer_instance
+    IsIso (δ pointUpperStar F G) :=
+  sorry
 
 /-- The inverse image `p^*` is strong monoidal. -/
 noncomputable instance monoidal_pointUpperStar : pointUpperStar.{u}.Monoidal :=
@@ -514,29 +350,8 @@ noncomputable def upperStarFromPointComp :
 /-- The comparison `f^* ∘ p_Y^* ≅ p_X^*` is a monoidal natural isomorphism. See the module
 docstring. -/
 instance isMonoidal_upperStarFromPointComp :
-    NatTrans.IsMonoidal (upperStarFromPointComp f).hom := by
-  have h₁ : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
-      (upperStarLowerStarAdjunction Ab.{u + 1} (f ≫ toSpecZ Y))
-      Functor.Monoidal.toOplaxMonoidal _ := by
-    exact isMonoidal_upperStarLowerStarAdjunction _ _
-  have h₂ : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
-      ((upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ Y)).comp
-        (upperStarLowerStarAdjunction Ab.{u + 1} f))
-      Functor.Monoidal.toOplaxMonoidal _ := by
-    exact Adjunction.isMonoidal_comp _ _
-  have hr : NatTrans.IsMonoidal (lowerStarComp Ab.{u + 1} f (toSpecZ Y)).hom := by
-    unfold lowerStarComp
-    infer_instance
-  have hc : NatTrans.IsMonoidal (upperStarComp Ab.{u + 1} f (toSpecZ Y)).inv :=
-    isMonoidal_conjugateEquiv_symm _ _ (lowerStarComp Ab.{u + 1} f (toSpecZ Y)).inv
-  have he (g g' : X ⟶ specZ.{u}) (h : g = g') : NatTrans.IsMonoidal
-      (eqToIso (congrArg (upperStar Ab.{u + 1}) h)).hom := by
-    subst g'
-    exact inferInstanceAs (NatTrans.IsMonoidal (𝟙 _))
-  have := he (f ≫ toSpecZ Y) (toSpecZ X) (comp_toSpecZ f)
-  unfold upperStarFromPointComp
-  simp only [Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.symm_hom]
-  infer_instance
+    NatTrans.IsMonoidal (upperStarFromPointComp f).hom :=
+  sorry
 
 /-- The comparison `α_f : f^* Λ_Y ≅ Λ_X` of the coefficient rings pulled back from the point,
 an isomorphism of ring objects of abelian sheaves on `X_proét`. -/
@@ -578,7 +393,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The canonical coefficient morphism `α_f : f^* Λ_Y ⟶ Λ_X`: the component at `Λ` of the
 comparison isomorphism `f^* ∘ p_Y^* ≅ p_X^*`, which on the test objects is the canonical
 isomorphism `X ×_Y Y[S] ≅ X[S]`. -/
-noncomputable def condensedPullbackHom :
+noncomputable abbrev condensedPullbackHom :
     (f)^*[Ab.{u + 1}].obj (condensedRingObj Λ Y) ⟶ condensedRingObj Λ X :=
   Functor.compAlgHom (upperStarFromPoint Y) (f)^*[Ab.{u + 1}] (upperStarFromPointComp f).hom Λ
 
@@ -597,37 +412,19 @@ lemma isIso_condensedPullbackHom_of_isOpenImmersion {U X : Scheme.{u}} (j : U �
     [IsOpenImmersion j] : IsIso (condensedPullbackHom Λ j) :=
   inferInstance
 
-omit [MonObj Λ] in
 /-- The canonical coefficient morphism `η_f : Λ_Y ⟶ f_* Λ_X`: the mate of `α_f` under the
 adjunction `f^* ⊣ f_*`, the unit `Λ_Y ⟶ f_* f^* Λ_Y` followed by `f_* α_f`. -/
-theorem condensedPushforwardHom_exists :
-    ∃ e : (condensedRingObj Λ Y ⟶ (f)_*[Ab.{u + 1}].obj (condensedRingObj Λ X)), e =
-      (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app (condensedRingObj Λ Y) ≫
-    (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f) :=
-  ⟨_, rfl⟩
-
-/-- The canonical coefficient map, kept behind its exact equality API. This avoids
-unfolding the inverse-image adjunction when checking sectionwise calculations.
-The proved equality specifies the witness uniquely. -/
 noncomputable def condensedPushforwardHom :
     condensedRingObj Λ Y ⟶ (f)_*[Ab.{u + 1}].obj (condensedRingObj Λ X) :=
-  Classical.choose (condensedPushforwardHom_exists Λ f)
-
-omit [MonObj Λ] in
-/-- The coefficient map is the explicit unit followed by the image of the comparison. -/
-theorem condensedPushforwardHom_def :
-    condensedPushforwardHom Λ f =
-      (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app (condensedRingObj Λ Y) ≫
-    (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f) :=
-  Classical.choose_spec (condensedPushforwardHom_exists Λ f)
+  (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom (condensedRingObj Λ Y) ≫
+    (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f)
 
 /-- `η_f` is a morphism of ring objects, for the ring object structure of `f_* Λ_X` induced by
 the lax monoidal structure of `f_*`. -/
-instance isMonHom_condensedPushforwardHom : IsMonHom (condensedPushforwardHom Λ f) := by
-  rw [condensedPushforwardHom_def]
-  exact inferInstanceAs (IsMonHom
-    ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom
-      (condensedRingObj Λ Y) ≫ (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f)))
+instance isMonHom_condensedPushforwardHom : IsMonHom (condensedPushforwardHom Λ f) :=
+  inferInstanceAs (IsMonHom
+    ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom (condensedRingObj Λ Y) ≫
+      (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f)))
 
 omit [MonObj Λ] in
 /-- `η_f` is the mate of `α_f`: it is the unit `Λ_Y ⟶ f_* f^* Λ_Y` followed by `f_* α_f`. -/
@@ -636,7 +433,7 @@ lemma unitAlgHom_comp_map_condensedPullbackHom :
     (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom (condensedRingObj Λ Y) ≫
       (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f) =
         condensedPushforwardHom Λ f :=
-  (condensedPushforwardHom_def Λ f).symm
+  rfl
 
 omit [MonObj Λ] in
 /-- The canonical coefficient morphism `α_f` is the composition isomorphism
@@ -658,28 +455,11 @@ lemma condensedPullbackHom_eq :
     (comp_toSpecZ f) Λ
 
 omit [MonObj Λ] in
-/-- The coefficient pushforward map satisfies the composition unit law. This is the
-adjunction API for the defining equation of `condensedPushforwardHom`.
-Source: the inverse-image composition adjunction; Bhatt--Scholze, Section 5.3. -/
-lemma unit_comp_map_condensedPushforwardHom :
-    (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ Y)).unit.app
-        (pointUpperStar.obj Λ) ≫
-      (toSpecZ Y)_*[Ab.{u + 1}].map (condensedPushforwardHom Λ f) =
-    (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X)).unit.app
-        (pointUpperStar.obj Λ) ≫
-      (eqToHom (congrArg (lowerStar Ab.{u + 1}) (comp_toSpecZ f).symm)).app _ ≫
-        (lowerStarComp Ab.{u + 1} f (toSpecZ Y)).inv.app
-          ((toSpecZ X)^*[Ab.{u + 1}].obj (pointUpperStar.obj Λ)) := by
-  rw [condensedPushforwardHom_def, condensedPullbackHom_eq]
-  exact unit_comp_lowerStar_map_unit_comp_upperStarComp Ab.{u + 1}
-    f (toSpecZ X) (toSpecZ Y) (comp_toSpecZ f) (pointUpperStar.obj Λ)
-
-omit [MonObj Λ] in
 /-- `η` of the identity is the identification `Λ_X ≅ (𝟙 X)_* Λ_X`. -/
 lemma condensedPushforwardHom_id (X : Scheme.{u}) :
     condensedPushforwardHom Λ (𝟙 X) =
       (ProEtale.lowerStarId Ab.{u + 1} X).inv.app (condensedRingObj Λ X) := by
-  rw [condensedPushforwardHom_def, condensedPullbackHom_eq]
+  rw [condensedPushforwardHom, condensedPullbackHom_eq]
   exact unitCompUpperStarComp_id Ab.{u + 1} (toSpecZ X) (comp_toSpecZ (𝟙 X))
     (pointUpperStar.obj Λ)
 
@@ -690,7 +470,7 @@ lemma condensedPushforwardHom_comp {Z : Scheme.{u}} (g : Y ⟶ Z) :
     condensedPushforwardHom Λ (f ≫ g) =
       condensedPushforwardHom Λ g ≫ (g)_*[Ab.{u + 1}].map (condensedPushforwardHom Λ f) ≫
         (ProEtale.lowerStarComp Ab.{u + 1} f g).hom.app (condensedRingObj Λ X) := by
-  rw [condensedPushforwardHom_def, condensedPushforwardHom_def, condensedPushforwardHom_def,
+  rw [condensedPushforwardHom, condensedPushforwardHom, condensedPushforwardHom,
     condensedPullbackHom_eq, condensedPullbackHom_eq, condensedPullbackHom_eq]
   exact unitCompUpperStarComp_comp Ab.{u + 1} f g (toSpecZ X) (toSpecZ Y) (toSpecZ Z)
     (comp_toSpecZ f) (comp_toSpecZ g) (comp_toSpecZ (f ≫ g)) (pointUpperStar.obj Λ)

@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
-import Sheaf.Algebra.Homology.KernelShiftedMappingCone
+import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 
 /-! # Roos comparison for complexes with split transitions
 

@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
 import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfield
 import Sheaf.FieldTheory.GaloisAutomorphismExtension
-import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!

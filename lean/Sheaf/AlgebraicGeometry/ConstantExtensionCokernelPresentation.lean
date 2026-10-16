@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 import Sheaf.AlgebraicGeometry.ConstantExtensionCokernelAux
 import Sheaf.AlgebraicGeometry.ConstantExtensionPresentationLift
-import Sheaf.AlgebraicGeometry.ConstantEtaleSheafShortExact
+import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
 import Sheaf.AlgebraicGeometry.EtaleShortExactLocalLift
 import WeilConjectures.ConstructibleSheaf.Biproduct
 

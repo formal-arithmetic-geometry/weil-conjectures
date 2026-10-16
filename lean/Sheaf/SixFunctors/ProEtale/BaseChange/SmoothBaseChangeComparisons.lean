@@ -5,8 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 
 /-! # Canonical comparison isomorphisms for derived base change

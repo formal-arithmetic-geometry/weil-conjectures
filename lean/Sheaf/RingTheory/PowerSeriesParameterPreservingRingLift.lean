@@ -6,7 +6,7 @@ Authors: SHEAF group A3
 module
 
 public import Sheaf.RingTheory.FormallySmoothAdic
-public import Sheaf.RingTheory.CohenRing
+public import WeilConjectures.RingTheory.CohenRing
 public import Sheaf.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete

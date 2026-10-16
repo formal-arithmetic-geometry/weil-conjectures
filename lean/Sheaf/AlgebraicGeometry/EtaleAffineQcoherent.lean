@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
 import Sheaf.AlgebraicGeometry.EtaleULiftInjectiveResolution
-import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 
 /-!
 # Étale acyclicity of a quasi-coherent module on an affine scheme

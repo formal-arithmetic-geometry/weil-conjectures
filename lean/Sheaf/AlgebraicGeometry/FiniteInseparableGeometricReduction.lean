@@ -12,9 +12,9 @@ public import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteAffineTensorBaseChange
 import Sheaf.Topology.PresheafModuleStalkFunctor
 import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.FieldTheory.MakeSeparable
-import Sheaf.FieldTheory.SeparableExtension
-import Sheaf.FieldTheory.SeparablyGeneratedTensorReduced
+import WeilConjectures.FieldTheory.MakeSeparable
+import WeilConjectures.FieldTheory.SeparableExtension
+import WeilConjectures.FieldTheory.SeparablyGeneratedTensorReduced
 import Sheaf.AlgebraicGeometry.GeometricReducednessFromGenericStalks
 import Sheaf.RingTheory.PowerGeneratedSpectrumHomeomorphism
 

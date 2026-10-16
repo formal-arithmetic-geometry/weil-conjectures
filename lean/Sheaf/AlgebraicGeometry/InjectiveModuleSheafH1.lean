@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.InjectiveEtaleModuleCechH1
-import Sheaf.AlgebraicGeometry.EtaleSectionsSurjectiveOfCechH1
+import WeilConjectures.AlgebraicGeometry.EtaleSectionsSurjectiveOfCechH1
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-!

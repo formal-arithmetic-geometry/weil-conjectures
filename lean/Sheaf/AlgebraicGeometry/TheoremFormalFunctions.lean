@@ -16,7 +16,7 @@ import Mathlib.RingTheory.AdicCompletion.Functoriality
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Sheaf.Paper.MLCohomologyPowersIdeal
 import Sheaf.AlgebraicGeometry.FormalFunctionsPowerKernel
-import Sheaf.Algebra.Module.AdicCompletionStableRanges
+import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
 
 /-! # The theorem on formal functions
 

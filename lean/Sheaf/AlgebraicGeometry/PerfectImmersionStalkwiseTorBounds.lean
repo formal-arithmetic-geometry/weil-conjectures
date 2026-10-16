@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 import Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkResolution
-import Sheaf.Algebra.Category.ModuleCat.TorSymmetry
+import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardCokernel
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 

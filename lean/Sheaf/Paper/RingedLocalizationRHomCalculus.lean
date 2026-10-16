@@ -218,8 +218,8 @@ No bound on the target complex occurs. -/
 theorem ringedLocalization_kflat_models (R : Sheaf J CommRingCat.{u})
     (P : CochainComplex (localizationModules R) ℤ) (hP : IsBoundedLocalizationComplex R P)
     (U : C) (f : R.obj.obj (op U)) :
-    CochainComplex.IsKFlat ((localizationComplexRestriction R U).obj P) ∧
-    CochainComplex.IsKFlat
+    CochainComplex.IsAcyclicTensorKFlat ((localizationComplexRestriction R U).obj P) ∧
+    CochainComplex.IsAcyclicTensorKFlat
       ((HomologicalComplex.single (localizationModules (R.over U)) (.up ℤ) 0).obj
         (localizationSliceCoefficient R U f)) ∧
     Nonempty (CochainComplex.mapBifunctor

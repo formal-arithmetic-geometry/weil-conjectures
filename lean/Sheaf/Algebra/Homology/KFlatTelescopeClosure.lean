@@ -67,7 +67,7 @@ private theorem isKFlat_coproduct_small
     (R : Sheaf J CommRingCat.{u}) {I : Type*} [Small.{u} I]
     (K : I → CochainComplex (SheafOfModules.{u} ((sheafCompose J
       (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
-    (hK : ∀ i : I, (K i).IsKFlat) : (∐ K).IsKFlat := by
+    (hK : ∀ i : I, (K i).IsAcyclicTensorKFlat) : (∐ K).IsAcyclicTensorKFlat := by
   let := SheafOfModules.monoidalCategory R
   let := SheafOfModules.symmetricCategory R
   let := (SheafOfModules.tensorClosed R).2.1.some
@@ -112,20 +112,20 @@ theorem kFlat_closure
     (∀ K : CochainComplex (SheafOfModules.{u} ((sheafCompose J
         (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ,
       (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (K.X i)) →
-      (∀ i : ℤ, SheafOfModules.IsFlat (K.X i)) → K.IsKFlat) ∧
+      (∀ i : ℤ, SheafOfModules.IsFlat (K.X i)) → K.IsAcyclicTensorKFlat) ∧
     (∀ (K L : CochainComplex (SheafOfModules.{u} ((sheafCompose J
         (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (f : K ⟶ L),
-      K.IsKFlat → L.IsKFlat → (mappingCone f).IsKFlat) ∧
+      K.IsAcyclicTensorKFlat → L.IsAcyclicTensorKFlat → (mappingCone f).IsAcyclicTensorKFlat) ∧
     (∀ (I : Type u) [Countable I],
       ∀ K : I → CochainComplex (SheafOfModules.{u} ((sheafCompose J
         (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ,
-      (∀ i : I, (K i).IsKFlat) → (∐ K).IsKFlat) ∧
+      (∀ i : I, (K i).IsAcyclicTensorKFlat) → (∐ K).IsAcyclicTensorKFlat) ∧
     (∀ (K : ℕ → CochainComplex (SheafOfModules.{u} ((sheafCompose J
         (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
         (t : ∀ n : ℕ, K n ⟶ K (n + 1)),
-      (∀ n : ℕ, (K n).IsKFlat) →
+      (∀ n : ℕ, (K n).IsAcyclicTensorKFlat) →
       (mappingCone (𝟙 (∐ K) -
-        Sigma.desc (fun n : ℕ => t n ≫ Sigma.ι K (n + 1)))).IsKFlat) ∧
+        Sigma.desc (fun n : ℕ => t n ≫ Sigma.ι K (n + 1)))).IsAcyclicTensorKFlat) ∧
     (∀ (I : Type u) [Countable I],
       ∀ F : I → SheafOfModules.{u} ((sheafCompose J
         (forget₂ CommRingCat.{u} RingCat.{u})).obj R),

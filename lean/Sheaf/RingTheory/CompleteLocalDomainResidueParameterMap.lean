@@ -5,7 +5,7 @@ Authors: SHEAF groups E1 and H1
 -/
 module
 
-public import Sheaf.RingTheory.CohenRing
+public import WeilConjectures.RingTheory.CohenRing
 public import Mathlib.Algebra.Module.Torsion.Basic
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic

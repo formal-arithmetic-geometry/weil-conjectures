@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import Mathlib.GroupTheory.PGroup
 
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.RepresentationTheory.SylowModuleFiltration
+import WeilConjectures.RepresentationTheory.SylowModuleFiltration
 import Mathlib.FieldTheory.Galois.Profinite
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 import Sheaf.FieldTheory.OpenSubgroupFixedField

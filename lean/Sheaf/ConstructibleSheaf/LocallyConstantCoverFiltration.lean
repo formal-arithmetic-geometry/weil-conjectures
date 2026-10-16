@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.ConstructibleSheaf.Defs
 import Sheaf.ConstructibleSheaf.SylowCoverAssociatedSheaf
-import Sheaf.RepresentationTheory.InvariantFlagCategoricalFiltration
+import WeilConjectures.RepresentationTheory.InvariantFlagCategoricalFiltration
 import WeilConjectures.Mathlib.RepresentationTheory.Invariants
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 

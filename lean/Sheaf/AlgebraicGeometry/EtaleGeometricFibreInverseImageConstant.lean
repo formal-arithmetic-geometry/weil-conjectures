@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.EtaleGeometricPointSectionsStalkNatural
 import Sheaf.AlgebraicGeometry.EtaleConstantTrivializationPullback
-import Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
+import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 
 /-!
 # Inverse image over a geometric point is constant

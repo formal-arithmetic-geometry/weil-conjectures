@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.AlgebraicGeometry.IdealPowerAffineDenominatorMap
-import Sheaf.AlgebraicGeometry.AffineSectionLinearMapExtension
+import WeilConjectures.AlgebraicGeometry.AffineSectionLinearMapExtension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # Affine lifting into ideal-power annihilator quotients
 

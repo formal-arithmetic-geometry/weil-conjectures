@@ -13,8 +13,8 @@ public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 
 import Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionData
 import Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionExact
-import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierPullbackRows
-import Sheaf.AlgebraicGeometry.Curve.AdditiveScalarBaseChange
+import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierPullbackRows
+import WeilConjectures.AlgebraicGeometry.Curve.AdditiveScalarBaseChange
 import Sheaf.AlgebraicGeometry.ArtinSchreier
 import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 import WeilConjectures.AlgebraicGeometry.Regular

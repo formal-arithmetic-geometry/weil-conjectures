@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselization
 public import Mathlib.AlgebraicGeometry.ResidueField
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.Paper.StrictHenselizationPointEvaluationPointed
 import Sheaf.Paper.StrictHenselizationPointEvaluationProperties

@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 import Mathlib.CategoryTheory.Presentable.Directed
 import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import Sheaf.AlgebraicGeometry.DescendFinite
-import Sheaf.AlgebraicGeometry.DescendSurjective
+import WeilConjectures.AlgebraicGeometry.DescendSurjective
 import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 

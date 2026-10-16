@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 import Sheaf.Paper.AffineOpenInverseImageFiniteLocalLifts
-import Sheaf.Paper.AffineOpenInverseImageCompatibleRefinement
+import WeilConjectures.AlgebraicGeometry.AffineOpenInverseImageCompatibleRefinement
 import Mathlib.CategoryTheory.Sites.Whiskering
 
 /-! # Unit representatives of inverse-image sections -/

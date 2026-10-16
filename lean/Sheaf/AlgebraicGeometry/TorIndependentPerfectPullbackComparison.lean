@@ -48,7 +48,7 @@ private theorem kFlat_pullback_stalk_cohomology
       (SheafOfModules.{u₁} (moduleRings (Limits.pullback f g).toRingedSpace))]
     (P : schemeDerivedCategory X) (z : ↥(Limits.pullback f g))
     (K : CochainComplex (SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) ℤ)
-    (hK : K.IsKFlat) (eK : DerivedCategory.Q.obj K ≅ P) (i : ℤ) :
+    (hK : K.IsAcyclicTensorKFlat) (eK : DerivedCategory.Q.obj K ≅ P) (i : ℤ) :
     Nonempty
       ((PullbackStalkTensor.stalkTensorComplex f g z K).homology i ≅
         (RingedSpace.moduleStalkFunctor (Limits.pullback f g).toRingedSpace z).obj
@@ -151,7 +151,7 @@ theorem torIndependent_perfect_pullback_comparison
   -- The algebraic argument applies to all K-flat stalks; perfection is unnecessary here.
   have _perfect := hP
   intro z
-  change ∀ K, K.IsKFlat → Nonempty (DerivedCategory.Q.obj K ≅ P) → ∀ i, _
+  change ∀ K, K.IsAcyclicTensorKFlat → Nonempty (DerivedCategory.Q.obj K ≅ P) → ∀ i, _
   intro K hK ⟨eK⟩ i
   refine ⟨kFlat_pullback_stalk_cohomology f g P z K hK eK i, ?_⟩
   intro e

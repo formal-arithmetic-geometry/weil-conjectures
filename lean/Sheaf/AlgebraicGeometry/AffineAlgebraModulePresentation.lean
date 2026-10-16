@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.AffineAlgebraModuleGenerators
+import WeilConjectures.AlgebraicGeometry.AffineAlgebraModuleGenerators
 import Sheaf.AlgebraicGeometry.AffineAlgebraModuleKernel
 
 /-! # Algebra-module presentations on an affine open

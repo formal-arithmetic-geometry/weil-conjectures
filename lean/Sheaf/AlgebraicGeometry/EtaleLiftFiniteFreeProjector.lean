@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Sheaf.AlgebraicGeometry.IntegralModelFiniteFreeProjector
+import WeilConjectures.AlgebraicGeometry.IntegralModelFiniteFreeProjector
 import Sheaf.RingTheory.LiftIdempotentUpstairs
 import Mathlib.RingTheory.TensorProduct.Maps
 

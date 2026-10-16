@@ -5,9 +5,10 @@ Authors: Nailin Guan
 -/
 module
 
+import Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperApp
+
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
-import Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperApp
 
 /-!
 
@@ -45,7 +46,7 @@ subextensions `E`. Both are currently `sorry`.
 As for the bounded constructible six functors
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`), all schemes are
 separated and of finite type over a field `k` of characteristic `p > 0` with `p ≠ ℓ`, and all
-morphisms are morphisms over `Spec k`.
+morphisms are morphisms of `Over (Spec (.of k))`.
 
 ## Main statements
 
@@ -74,19 +75,13 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
   (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-  (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
-  [X'.Over (Spec (.of k))] [Y'.Over (Spec (.of k))]
-  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-  [IsSeparated (X ↘ Spec (.of k))]
-  [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
-  [IsSeparated (Y ↘ Spec (.of k))]
-  [LocallyOfFiniteType (X' ↘ Spec (.of k))] [QuasiCompact (X' ↘ Spec (.of k))]
-  [IsSeparated (X' ↘ Spec (.of k))]
-  [LocallyOfFiniteType (Y' ↘ Spec (.of k))] [QuasiCompact (Y' ↘ Spec (.of k))]
-  [IsSeparated (Y' ↘ Spec (.of k))]
-  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} [f.IsOver (Spec (.of k))]
-  [g.IsOver (Spec (.of k))] [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
+  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {X Y X' Y' : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+
 
 include ℓ k in
 /-- **The proper base change theorem** for bounded constructible `E`-sheaves, `E` a finite
@@ -102,22 +97,46 @@ Y' --g---> Y
 
 with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an
 isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`. -/
-theorem isIso_boundedConstructibleBaseChange_of_isProper [IsProper f]
+theorem isIso_boundedConstructibleBaseChange_of_isProper [IsProper f.left]
     (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k sq.toCommSq) := by
+    IsIso (boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ sq.toCommSq) := by
+  have : LocallyOfFiniteType (X.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType X.hom›
+  have : QuasiCompact (X.left ↘ Spec (.of k)) := ‹QuasiCompact X.hom›
+  have : IsSeparated (X.left ↘ Spec (.of k)) := ‹IsSeparated X.hom›
+  have : LocallyOfFiniteType (Y.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType Y.hom›
+  have : QuasiCompact (Y.left ↘ Spec (.of k)) := ‹QuasiCompact Y.hom›
+  have : IsSeparated (Y.left ↘ Spec (.of k)) := ‹IsSeparated Y.hom›
+  have : LocallyOfFiniteType (X'.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType X'.hom›
+  have : QuasiCompact (X'.left ↘ Spec (.of k)) := ‹QuasiCompact X'.hom›
+  have : IsSeparated (X'.left ↘ Spec (.of k)) := ‹IsSeparated X'.hom›
+  have : LocallyOfFiniteType (Y'.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType Y'.hom›
+  have : QuasiCompact (Y'.left ↘ Spec (.of k)) := ‹QuasiCompact Y'.hom›
+  have : IsSeparated (Y'.left ↘ Spec (.of k)) := ‹IsSeparated Y'.hom›
   rw [NatTrans.isIso_iff_isIso_app]
-  exact isIso_boundedConstructibleBaseChange_continuousMap_app ℓ E k sq
+  exact isIso_boundedConstructibleBaseChange_continuousMap_app ℓ E k sq.overLeft
 
 /-- **The proper base change theorem** for bounded constructible `ℚ̄_ℓ`-sheaves: for a cartesian
 square of schemes `sq : IsPullback g' f' f g` with `f` proper, the base-change morphism
 `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an isomorphism of functors
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y')⟦ℚ̲̄_ℓ⟧`, for the condensed ring
 `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`. -/
-theorem isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl [IsProper f]
+theorem isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl [IsProper f.left]
     (sq : IsPullback g' f' f g) :
     IsIso (boundedConstructibleBaseChange
-      (Profinite.padicAlgClRingObj ℓ) ℓ k sq.toCommSq) := by
+      (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq) := by
+  have : LocallyOfFiniteType (X.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType X.hom›
+  have : QuasiCompact (X.left ↘ Spec (.of k)) := ‹QuasiCompact X.hom›
+  have : IsSeparated (X.left ↘ Spec (.of k)) := ‹IsSeparated X.hom›
+  have : LocallyOfFiniteType (Y.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType Y.hom›
+  have : QuasiCompact (Y.left ↘ Spec (.of k)) := ‹QuasiCompact Y.hom›
+  have : IsSeparated (Y.left ↘ Spec (.of k)) := ‹IsSeparated Y.hom›
+  have : LocallyOfFiniteType (X'.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType X'.hom›
+  have : QuasiCompact (X'.left ↘ Spec (.of k)) := ‹QuasiCompact X'.hom›
+  have : IsSeparated (X'.left ↘ Spec (.of k)) := ‹IsSeparated X'.hom›
+  have : LocallyOfFiniteType (Y'.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType Y'.hom›
+  have : QuasiCompact (Y'.left ↘ Spec (.of k)) := ‹QuasiCompact Y'.hom›
+  have : IsSeparated (Y'.left ↘ Spec (.of k)) := ‹IsSeparated Y'.hom›
   rw [NatTrans.isIso_iff_isIso_app]
-  exact isIso_boundedConstructibleBaseChange_padicAlgCl_app ℓ k sq
+  exact isIso_boundedConstructibleBaseChange_padicAlgCl_app ℓ k sq.overLeft
 
 end AlgebraicGeometry.ProEtale.CondensedRing

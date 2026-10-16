@@ -6,10 +6,10 @@ Authors: SHEAF group V3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSheafComparison
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpen
 import Sheaf.AlgebraicGeometry.EtaleSetCartesianUnitEquality
-import Sheaf.AlgebraicGeometry.EtalePairRestrictionDetection
+import WeilConjectures.AlgebraicGeometry.EtalePairRestrictionDetection
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated

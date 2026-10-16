@@ -5,7 +5,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Sheaf.Paper.FiniteSplitHypercoverRefinement
+import WeilConjectures.AlgebraicGeometry.FiniteSplitHypercoverRefinement
 import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels

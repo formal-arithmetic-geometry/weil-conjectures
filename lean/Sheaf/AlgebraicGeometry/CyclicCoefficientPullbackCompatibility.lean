@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.CyclicDerivedHomComparisonMap
-import Sheaf.AlgebraicGeometry.ConstantPullbackCompositionCoherence
+import WeilConjectures.AlgebraicGeometry.ConstantPullbackCompositionCoherence
 
 @[expose] public section
 universe u

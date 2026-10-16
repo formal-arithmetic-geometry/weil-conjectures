@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CyclicDerivedHomComparisonMap
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Sheaf.AlgebraicGeometry.ConstantSectionAdjunctPullback
+import WeilConjectures.AlgebraicGeometry.ConstantSectionAdjunctPullback
 
 /-! # Naturality of the abelian representable generator
 

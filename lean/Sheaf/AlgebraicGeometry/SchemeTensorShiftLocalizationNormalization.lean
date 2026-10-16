@@ -186,7 +186,7 @@ noncomputable local instance SchemeTensorShiftLocalizationNormalization_laxMonoi
 omit [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] in
 private theorem upstreamKFlat
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P) :
     (HomologicalComplex.quasiIso
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).kFlat P := by
   rw [← HomotopyCategory.kFlat_quotient_obj_iff,
@@ -232,9 +232,9 @@ Source: Stacks Project, Tag 06YH, localization normalization calculation.
 set_option linter.unusedVariables false in
 theorem schemeTensorShift_targetComparison_isIso
     (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)
-    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+    (hT : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) T)
+    (hU : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) U) :
     letI := schemeCanonicalTensorShift X
     letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=
       fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B
@@ -254,9 +254,9 @@ The proof unfolds all local abbreviations in the localization calculation.
 (blueprint: aux-sc-target-comparison-first-core). -/
 theorem schemeTensorShift_first_normalization_core
     (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)
-    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+    (hT : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) T)
+    (hU : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) U) :
     letI := schemeCanonicalTensorShift X
     letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=
       fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B
@@ -280,9 +280,9 @@ theorem schemeTensorShift_first_normalization_core
 
 theorem schemeTensorShift_first_normalization
     (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)
-    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+    (hT : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) T)
+    (hU : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) U) :
     letI := schemeCanonicalTensorShift X
     letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=
       fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B
@@ -308,9 +308,9 @@ Source: Stacks Project, Tag 06YH, second localization normalization calculation.
 (blueprint: aux-sc-target-comparison-second) -/
 theorem schemeTensorShift_second_normalization
     (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)
-    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+    (hT : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) T)
+    (hU : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) U) :
     letI := schemeCanonicalTensorShift X
     letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=
       fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B
@@ -347,9 +347,9 @@ theorem schemeTensorShift_second_normalization
 
 theorem schemeTensorShift_localization_normalization
     (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-    (hT : CochainComplex.IsKFlat (R := X.sheaf) T)
-    (hU : CochainComplex.IsKFlat (R := X.sheaf) U) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+    (hT : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) T)
+    (hU : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) U) :
     letI := schemeCanonicalTensorShift X
     letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=
       fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B

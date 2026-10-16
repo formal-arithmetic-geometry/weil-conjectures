@@ -90,8 +90,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleCoefficientProductIdentityComponent",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoefficientProductIdentityComponent.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleCoefficientProductIdentityComponent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleCoefficientProductIdentityComponent.lean",
   "declaration": "AlgebraicGeometry.Etale.etale_coefficient_product_identity_component",
   "statement": "theorem etale_coefficient_product_identity_component\n    {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (i : I)\n    (t : Σ l : I, i ⟶ l) :\n    ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map (𝟙 i).op)).homEquiv _ _).symm\n      (Pi.π (fun t : Σ l : I, i ⟶ l ↦\n          (lowerStar AddCommGrpCat.{u + 1} (D.map t.2.op)).obj\n            (Injective.under (F t.1))) ⟨t.1, (𝟙 i) ≫ t.2⟩ ≫\n        (lowerStarComp AddCommGrpCat.{u + 1} (D.map t.2.op) (D.map (𝟙 i).op)\n          (D.map ((𝟙 i) ≫ t.2).op) (D.map_comp t.2.op (𝟙 i).op)).inv.app\n            (Injective.under (F t.1))) =\n      ((eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (etaleCoefficientInjectiveTarget D F i) ≫\n      (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app\n        (etaleCoefficientInjectiveTarget D F i)) ≫ Pi.π (fun t : Σ l : I, i ⟶ l ↦\n          (lowerStar AddCommGrpCat.{u + 1} (D.map t.2.op)).obj\n            (Injective.under (F t.1))) t",
   "branch": "sheaf-dag",

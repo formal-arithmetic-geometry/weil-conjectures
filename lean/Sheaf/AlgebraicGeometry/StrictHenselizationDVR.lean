@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselization
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.RingTheory.StrictHenselizationDimension
 import Sheaf.RingTheory.StrictHenselizationNoetherian
 import Sheaf.RingTheory.StrictHenselizationRegular

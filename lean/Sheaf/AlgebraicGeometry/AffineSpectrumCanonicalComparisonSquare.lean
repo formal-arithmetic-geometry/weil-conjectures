@@ -81,7 +81,7 @@ theorem exists_affineSpectrum_canonicalComparison_square
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (Q : CochainComplex
       (SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) (hQ : Q.IsKFlat)
+    (hP : P.IsAcyclicTensorKFlat) (hQ : Q.IsAcyclicTensorKFlat)
     (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
     (hcQ : IsIso ((counit (Spec.map g'.appTop)).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))

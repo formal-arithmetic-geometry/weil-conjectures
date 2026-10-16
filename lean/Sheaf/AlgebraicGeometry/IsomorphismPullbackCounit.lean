@@ -36,7 +36,7 @@ theorem counit_isIso_kFlat
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     {Y Z : Scheme.{u}} (j : Y ⟶ Z)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := Z.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := Z.sheaf) P) :
     IsIso ((counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=

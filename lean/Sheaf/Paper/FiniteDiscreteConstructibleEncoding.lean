@@ -6,6 +6,10 @@ module
 public import Sheaf.Paper.FiniteDiscreteCoefficientEncoding
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 import Sheaf.Paper.FiniteDiscreteConstructibleLocalPiece
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Finite presentations under the common coefficient encoding -/
 

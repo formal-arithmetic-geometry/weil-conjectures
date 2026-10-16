@@ -1,5 +1,5 @@
 module
-public import Sheaf.FieldTheory.SeparableExtension
+public import WeilConjectures.FieldTheory.SeparableExtension
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
 @[expose] public section
 set_option autoImplicit false

@@ -6,7 +6,7 @@ Authors: SHEAF group U2
 module
 
 public import Sheaf.RingTheory.NagataRing
-public import Sheaf.RingTheory.AnalyticallyUnramified
+public import WeilConjectures.RingTheory.AnalyticallyUnramified
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.Submodule

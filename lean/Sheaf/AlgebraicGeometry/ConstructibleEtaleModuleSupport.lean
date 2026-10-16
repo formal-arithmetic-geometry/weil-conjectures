@@ -5,10 +5,10 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.EtaleSupport
 import Sheaf.AlgebraicGeometry.GeometricStalkSupport
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
@@ -189,7 +189,8 @@ theorem constructibleEtaleModuleSupport {X : Scheme.{u}}
     obtain ⟨Ω', hfield, hclosed, s', hs', hnz⟩ := hmem
     exact hnz ((hind x Ω Ω' s s' hs hs').mp hz)
   · classical
-    obtain ⟨S, hSc, hS⟩ := hG
+    obtain ⟨S, hS⟩ := hG
+    have hSc := S.isConstructible_stratum
     have hpart (k : Fin S.n) :
         Topology.IsConstructible (etaleSheafSupport F ∩ S.stratum k) := by
       obtain ⟨d, hd⟩ := hS k

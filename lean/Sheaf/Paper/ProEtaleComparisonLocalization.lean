@@ -6,7 +6,7 @@ Authors: SHEAF group D3
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 

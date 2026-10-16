@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResiduePolynomialCore
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.AlgebraicGeometry.CompatibleStrictHenselizationResiduePolynomialCore
 import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueSeparability
 import Sheaf.RingTheory.StrictHenselizationTriples
 

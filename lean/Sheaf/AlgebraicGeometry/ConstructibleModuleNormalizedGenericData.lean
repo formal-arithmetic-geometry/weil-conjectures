@@ -5,12 +5,12 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.NormalizedGenericDataWithFactorization
-import Sheaf.AlgebraicGeometry.NormalizedGenericDataLifts
+import WeilConjectures.AlgebraicGeometry.NormalizedGenericDataLifts
 
 /-!
 # Normalized generic trivialization data

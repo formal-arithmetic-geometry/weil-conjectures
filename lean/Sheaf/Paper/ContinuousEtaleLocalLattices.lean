@@ -25,6 +25,80 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+private theorem finite_affine_etale_cover_geometry
+    (X : Scheme.{u}) {I : Type u} [Finite I]
+    (Y : I → Scheme.{u}) (p : ∀ i, Y i ⟶ X)
+    [∀ i, IsAffine (Y i)] [∀ i, Etale (p i)]
+    (hcover : ∀ x : X, ∃ (i : I) (y : Y i), p i y = x) :
+    Etale (Limits.Sigma.desc p) ∧ Surjective (Limits.Sigma.desc p) ∧
+      CompactSpace (∐ Y : Scheme.{u}) ∧ QuasiSeparatedSpace (∐ Y : Scheme.{u}) := by
+  classical
+  let f : (∐ Y) ⟶ X := Limits.Sigma.desc p
+  have hf : Etale f := by
+    rw [IsZariskiLocalAtSource.iff_of_openCover (P := @Etale) (sigmaOpenCover Y)]
+    intro i
+    simpa [f] using (inferInstance : Etale (p i))
+  have hsurj : Surjective f := by
+    refine ⟨fun x ↦ ?_⟩
+    obtain ⟨i, y, hy⟩ := hcover x
+    refine ⟨Limits.Sigma.ι Y i y, ?_⟩
+    rw [← Scheme.Hom.comp_apply, Limits.Sigma.ι_desc]
+    exact hy
+  let : IsAffine (∐ Y) := inferInstance
+  exact ⟨hf, hsurj, inferInstance, inferInstance⟩
+
+private theorem etale_lattice_of_finite_affine_lattices
+    (Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+    (φ : Λ ⟶ Λ') [IsMonHom φ]
+    (X : Scheme.{u})
+    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X))
+    {I : Type u} [Finite I] (Y : I → Scheme.{u}) (p : ∀ i, Y i ⟶ X)
+    [∀ i, IsAffine (Y i)] [∀ i, Etale (p i)]
+    (hcover : ∀ x : X, ∃ (i : I) (y : Y i), p i y = x)
+    (M : ∀ i, Mod (Sheaf (Scheme.ProEt.topology (Y i)) Ab.{u + 1})
+      (condensedRingObj Λ (Y i)))
+    (hM : ∀ i, ∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage (Y i), ∀ t : D.I₀,
+      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f t)).obj
+        (condensedRingObj Λ (Y i)))
+        (((ProEtale.upperStar Ab.{u + 1} (D.f t)).mapMod _).obj (M i)))
+    (e : ∀ i, Nonempty ((Mod.extendScalars (coefficientMap φ (Y i))).obj (M i) ≅
+      (upperStar Λ' (p i)).obj P)) :
+    ∃ (U : Scheme.{u}) (p : U ⟶ X), Etale p ∧ Surjective p ∧
+      CompactSpace U ∧ QuasiSeparatedSpace U ∧
+      ∃ M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+          (condensedRingObj (Λ) U),
+      (∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : D.I₀,
+        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj
+          (condensedRingObj (Λ) U))
+          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M)) ∧
+      Nonempty ((Mod.extendScalars (coefficientMap (φ) U)).obj M ≅
+        (CondensedRing.upperStar (Λ') p).obj P) := by
+  obtain ⟨hf, hs, hc, hq⟩ := finite_affine_etale_cover_geometry X Y p hcover
+  obtain ⟨N, hN, eN⟩ := continuousLattice_finite_coproduct_of_coefficients Λ Λ' φ X P Y p M hM e
+  exact ⟨∐ Y, Limits.Sigma.desc p, hf, hs, hc, hq, N, hN, eN⟩
+
+private theorem exists_finite_affine_etale_cover_with_property
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
+    (Q : ∀ U : Scheme.{u}, (U ⟶ X) → Prop)
+    (hlocal : ∀ x : X, ∃ (U : Scheme.{u}) (p : U ⟶ X),
+      IsAffine U ∧ Etale p ∧ x ∈ Set.range p ∧ Q U p) :
+    ∃ (I : Type u) (_ : Finite I) (Y : I → Scheme.{u}) (p : ∀ i, Y i ⟶ X),
+      (∀ i, IsAffine (Y i)) ∧ (∀ i, Etale (p i)) ∧
+      (∀ x : X, ∃ (i : I) (y : Y i), p i y = x) ∧ (∀ i, Q (Y i) (p i)) := by
+  classical
+  choose Y p hY hp hcover hQ using hlocal
+  let (x : X) : Etale (p x) := hp x
+  obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover
+    (fun x : X ↦ Set.range (p x))
+    (fun x ↦ (p x).isOpenMap.isOpen_range)
+    (fun x _ ↦ Set.mem_iUnion.mpr ⟨x, hcover x⟩)
+  refine ⟨s, inferInstance, (fun i ↦ Y i.val), (fun i ↦ p i.val),
+    (fun i ↦ hY i.val), (fun i ↦ hp i.val), ?_, (fun i ↦ hQ i.val)⟩
+  intro x
+  obtain ⟨i, hi, y, hy⟩ := Set.mem_iUnion₂.mp (hs (Set.mem_univ x))
+  exact ⟨⟨i, hi⟩, y, hy⟩
+
 /-- Integral lattices exist on a quasi-compact quasi-separated etale cover.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), and the first paragraph of Lemma 6.8.13.
 (blueprint: lem-weil-pbc-continuous-etale-local-lattice)
@@ -64,31 +138,25 @@ theorem continuousLisse_etale_lattice
       Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) U)).obj M ≅
         (CondensedRing.upperStar (Profinite.continuousMapRingObj E) p).obj P) := by
   classical
-  choose Y p hY hp hcover M hM e using continuousLisse_affine_etale_lattice ℓ E X P hP
-  let (x : X) : IsAffine (Y x) := hY x
-  let (x : X) : Etale (p x) := hp x
-  obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover
-    (fun x : X ↦ Set.range (p x))
-    (fun x ↦ (p x).isOpenMap.isOpen_range)
-    (fun x _ ↦ Set.mem_iUnion.mpr ⟨x, hcover x⟩)
-  let Z : s → Scheme.{u} := fun i ↦ Y i.val
-  let q : ∀ i : s, Z i ⟶ X := fun i ↦ p i.val
-  let U : Scheme.{u} := ∐ Z
-  let f : U ⟶ X := Limits.Sigma.desc q
-  have hf : Etale f := by
-    rw [IsZariskiLocalAtSource.iff_of_openCover (P := @Etale) (sigmaOpenCover Z)]
-    intro i
-    simpa [f] using hp i.val
-  have hsurj : Surjective f := by
-    refine ⟨fun x ↦ ?_⟩
-    obtain ⟨i, hi, y, hy⟩ := Set.mem_iUnion₂.mp (hs (Set.mem_univ x))
-    refine ⟨Limits.Sigma.ι Z ⟨i, hi⟩ y, ?_⟩
-    rw [← Scheme.Hom.comp_apply, Limits.Sigma.ι_desc]
-    exact hy
-  have hU : IsAffine U := by dsimp [U, Z]; infer_instance
-  let : IsAffine U := hU
-  obtain ⟨N, hN, eN⟩ := continuousLattice_finite_coproduct ℓ E X P Z q
-    (fun i ↦ M i.val) (fun i ↦ hM i.val) (fun i ↦ e i.val)
-  exact ⟨U, f, hf, hsurj, inferInstance, inferInstance, N, hN, eN⟩
+  let Q : ∀ U : Scheme.{u}, (U ⟶ X) → Prop := fun U p ↦
+    ∃ M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+          (condensedRingObj (integralCoeff ℓ E) U),
+      (∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : D.I₀,
+        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj
+          (condensedRingObj (integralCoeff ℓ E) U))
+          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M)) ∧
+      Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) U)).obj M ≅
+        (CondensedRing.upperStar (Profinite.continuousMapRingObj E) p).obj P)
+  obtain ⟨I, hI, Y, p, hY, hp, hcover, hQ⟩ :=
+    exists_finite_affine_etale_cover_with_property X Q
+      (continuousLisse_affine_etale_lattice ℓ E X P hP)
+  let : Finite I := hI
+  let (i : I) : IsAffine (Y i) := hY i
+  let (i : I) : Etale (p i) := hp i
+  dsimp only [Q] at hQ
+  choose M hM e using hQ
+  exact etale_lattice_of_finite_affine_lattices
+    (integralCoeff ℓ E) (Profinite.continuousMapRingObj E) (integralScalarMap ℓ E)
+    X P Y p hcover M hM e
 
 end AlgebraicGeometry.ProEtale.CondensedRing

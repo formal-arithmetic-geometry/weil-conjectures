@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 /-! # Degree-zero comparison of the formal fibre systems
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 02OD

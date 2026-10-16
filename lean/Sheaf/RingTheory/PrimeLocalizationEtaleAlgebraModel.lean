@@ -6,7 +6,7 @@ Authors: SHEAF groups M4 and F3
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.EtaleAlgebraFilteredColimitDescent
+import WeilConjectures.AlgebraicGeometry.EtaleAlgebraFilteredColimitDescent
 import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.Localization.BaseChange

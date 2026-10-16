@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.CategoryTheory.ColimitSites
+public import WeilConjectures.CategoryTheory.ColimitSites
 import Sheaf.CategoryTheory.ColimitSiteScalarSectionComparison
 import Mathlib.CategoryTheory.Filtered.Final
-import Sheaf.CategoryTheory.ColimitSiteSections
+import WeilConjectures.CategoryTheory.ColimitSiteSections
 
 /-! # Finite products of sections on a filtered colimit of sites
 

@@ -5,7 +5,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Sheaf.Paper.HypercoverResolutionModel
 import Sheaf.Paper.HypercoverInjectiveModuleRow
 import Sheaf.Paper.HypercoverBottomRefinement
-import Sheaf.Paper.FiniteSplitHypercoverRefinement
+import WeilConjectures.AlgebraicGeometry.FiniteSplitHypercoverRefinement
 import Mathlib.AlgebraicTopology.SimplicialObject.ChainHomotopy
 import Mathlib.Algebra.Homology.Opposite
 

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
 import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 
 /-! # Injectivity of finite surjective descent

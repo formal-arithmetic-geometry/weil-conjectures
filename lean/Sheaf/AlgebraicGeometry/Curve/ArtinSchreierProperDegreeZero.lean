@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 import WeilConjectures.AlgebraicGeometry.Regular
 import Sheaf.AlgebraicGeometry.ArtinSchreier
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-! # Degree-zero Artin–Schreier surjectivity on proper curves
 

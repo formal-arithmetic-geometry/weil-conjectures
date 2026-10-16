@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 
-import Sheaf.AlgebraicGeometry.AnnihilatorAffineCriterion
+import WeilConjectures.AlgebraicGeometry.AnnihilatorAffineCriterion
 import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 

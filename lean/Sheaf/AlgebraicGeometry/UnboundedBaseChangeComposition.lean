@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 import Sheaf.AlgebraicGeometry.DerivedSquareIsoPasting
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Localization.Predicate

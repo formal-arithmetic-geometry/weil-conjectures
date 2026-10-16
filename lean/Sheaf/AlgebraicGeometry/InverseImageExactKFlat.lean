@@ -31,8 +31,8 @@ private theorem isKFlat_of_iso {X : TopCat.{u}}
     {K L : CochainComplex (SheafOfModules.{u}
       ((sheafCompose (Opens.grothendieckTopology X)
         (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
-    (e : K ≅ L) (hK : CochainComplex.IsKFlat (R := R) K) :
-    CochainComplex.IsKFlat (R := R) L := by
+    (e : K ≅ L) (hK : CochainComplex.IsAcyclicTensorKFlat (R := R) K) :
+    CochainComplex.IsAcyclicTensorKFlat (R := R) L := by
   let := SheafOfModules.monoidalCategory R
   intro F hF i
   exact (hK F hF i).of_iso

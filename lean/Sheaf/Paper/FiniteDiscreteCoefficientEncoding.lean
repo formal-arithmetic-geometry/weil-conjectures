@@ -5,6 +5,7 @@ module
 
 public import Sheaf.Paper.FiniteDiscreteRealizationFunctor
 public import Sheaf.Paper.ConstantInternalModuleSheafEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Sheaf.Paper.FiniteDiscreteSchemeRing
 
 /-! # A common sectionwise finite-coefficient encoding
@@ -35,6 +36,9 @@ variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
     ModuleCat.{u + 1} (ULift.{u + 1} B)) [G.IsEquivalence]
   (hG : G ⋙ forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1} =
     Mod.forget (AddCommGrpCat.of (ULift.{u + 1} B)))
+
+local instance : HasLimitsOfSize.{u, u + 1} (ModuleCat.{u + 1} (ULift.{u + 1} B)) :=
+  ModuleCat.hasLimitsOfSize.{u, u + 1, u + 1, u + 1}
 
 /-- Encode coefficient sheaves using a single sectionwise encoding and point ring.
 Source: Bhatt--Scholze, Proposition 5.3.2; the constructive constant-ring encoding

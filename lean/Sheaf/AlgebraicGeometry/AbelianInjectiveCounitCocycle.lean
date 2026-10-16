@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.AbelianCounitCocycleDefinitions
 import Sheaf.AlgebraicGeometry.AbelianExtSectionsCocycleNormalization
 import Sheaf.AlgebraicGeometry.TerminalSourceSectionsEvaluation
-import Sheaf.CategoryTheory.ExactFunctorResolutionCocycle
+import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 
 /-! # The injective-resolution cocycle calculation used by the abelian counit
 

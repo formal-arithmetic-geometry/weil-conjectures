@@ -12,7 +12,7 @@ import Sheaf.RingTheory.ResidueConormalSnakeSequence
 import Sheaf.Paper.CartierEquality
 import Mathlib.Algebra.Module.LinearMap.Index
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Sheaf.FieldTheory.PthRootsExtensionDegree
+import WeilConjectures.FieldTheory.PthRootsExtensionDegree
 import Sheaf.RingTheory.JacobiZariskiConnectingMapNaturality
 import Sheaf.RingTheory.JacobiZariskiHomologySequence
 import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing

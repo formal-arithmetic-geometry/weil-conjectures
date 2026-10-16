@@ -6,7 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-import Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
+import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!

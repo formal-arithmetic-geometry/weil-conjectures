@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Sheaf.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
+import WeilConjectures.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
 
 /-!
 # Hom comparison for a torsion source along a flat neighbourhood

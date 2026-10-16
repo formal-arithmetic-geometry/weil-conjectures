@@ -97,7 +97,7 @@ theorem exists_isKFlatResolution
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) :
     ∃ (K : CochainComplex
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
-      (f : K ⟶ G), K.IsKFlat ∧ (∀ i : ℤ, SheafOfModules.IsFlat (K.X i)) ∧
+      (f : K ⟶ G), K.IsAcyclicTensorKFlat ∧ (∀ i : ℤ, SheafOfModules.IsFlat (K.X i)) ∧
         QuasiIso f ∧ (∀ i : ℤ, Epi (f.f i)) := by
   obtain ⟨E, t, q, hbounded, hflat, hq, hepi, hcompat⟩ := exists_flat_truncation_tower G
   let s : (∐ E) ⟶ G := Limits.Sigma.desc (fun n : ℕ ↦ q n ≫ G.ιTruncLE (n : ℤ))
@@ -119,7 +119,7 @@ theorem exists_isKFlatResolution
   have hinr : mappingCone.inr φ ≫ f = s := mappingCone.inr_desc φ 0 s hdesc
   have hinl : (mappingCone.inl φ).comp (HomComplex.Cochain.ofHom f) (add_zero _) = 0 :=
     mappingCone.inl_desc φ 0 s hdesc
-  have hk : (mappingCone φ).IsKFlat := by
+  have hk : (mappingCone φ).IsAcyclicTensorKFlat := by
     apply (kFlat_closure R).2.2.2.1 E t
     intro n
     exact (kFlat_closure R).1 (E n) (hbounded n) (hflat n)

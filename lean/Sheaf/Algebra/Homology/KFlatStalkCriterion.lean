@@ -59,7 +59,7 @@ theorem isKFlat_iff_stalk_isKFlat (X : RingedSpace.{v})
     (K : CochainComplex (SheafOfModules.{v}
       ((sheafCompose (Opens.grothendieckTopology X)
         (forget₂ CommRingCat.{v} RingCat.{v})).obj X.sheaf)) ℤ) :
-    K.IsKFlat ↔ ∀ x : X,
+    K.IsAcyclicTensorKFlat ↔ ∀ x : X,
       ∀ F : CochainComplex (ModuleCat.{v} (X.presheaf.stalk x)) ℤ,
         F.Acyclic →
           (CochainComplex.mapBifunctor F

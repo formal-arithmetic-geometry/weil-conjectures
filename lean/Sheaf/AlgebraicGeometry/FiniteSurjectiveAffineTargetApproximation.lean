@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.CategoryTheory.Presentable.Directed
 import Sheaf.AlgebraicGeometry.DescendFinite
-import Sheaf.AlgebraicGeometry.DescendSurjective
-import Sheaf.AlgebraicGeometry.IsSeparatedOfSurjectiveUniversallyClosed
+import WeilConjectures.AlgebraicGeometry.DescendSurjective
+import WeilConjectures.AlgebraicGeometry.IsSeparatedOfSurjectiveUniversallyClosed
 import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 

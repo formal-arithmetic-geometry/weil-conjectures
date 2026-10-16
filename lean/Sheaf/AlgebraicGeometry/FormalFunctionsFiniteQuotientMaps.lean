@@ -66,7 +66,7 @@ theorem formalFunctions_finite_quotient_maps {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Scheme.fromSpecStalk_local_properties Y y).2.2.2.2.2
   have : Flat (pullback.snd (Y.fromSpecStalk y) f) := inferInstance
   have : EnoughInjectives (pullback (Y.fromSpecStalk y) f).Modules :=
-    Scheme.Modules.enoughInjectives _
+    Scheme.Modules.enoughInjectives (X := _)
   intro I J V hy D xi
   let K := injectiveResolution
     ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)

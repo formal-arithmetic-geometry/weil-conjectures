@@ -84,8 +84,8 @@
  "unit": "sk-def-exchange",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.SheafAbelianObjectsInjective",
-  "file": "lean/Sheaf/CategoryTheory/SheafAbelianObjectsInjective.lean",
+  "module": "WeilConjectures.CategoryTheory.SheafAbelianObjectsInjective",
+  "file": "lean/WeilConjectures/CategoryTheory/SheafAbelianObjectsInjective.lean",
   "declaration": "CategoryTheory.sheafAbelianObjects_injective",
   "statement": "theorem sheafAbelianObjects_injective\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (F : Sheaf J AddCommGrpCat.{max u v w} ⥤ CommGrp (Sheaf J (Type (max u v w))))\n    (hF : F ⋙ CommGrp.forget _ = sheafCompose J (forget AddCommGrpCat.{max u v w}))\n    (hsections : (∀ (A : Sheaf J AddCommGrpCat.{max u v w}) (U : Cᵒᵖ),\n        (∀ a b : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((MonObj.mul (X := (F.obj A).X)).hom.app U (a, b)) =\n            (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a) +\n              (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U b)) ∧\n        (∀ t : (𝟙_ (Sheaf J (Type (max u v w)))).obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((MonObj.one (X := (F.obj A).X)).hom.app U t) =\n            (0 : A.obj.obj U)) ∧\n        (∀ a : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((GrpObj.inv (X := (F.obj A).X)).hom.app U a) =\n            -(show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a)))) :\n    ∀ A B, F.obj A = F.obj B → A = B",
   "branch": "sheaf-dag",

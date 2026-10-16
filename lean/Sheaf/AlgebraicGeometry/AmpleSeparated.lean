@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.NonvanishingCommonDegree
+import WeilConjectures.AlgebraicGeometry.NonvanishingCommonDegree
 import Sheaf.AlgebraicGeometry.NonvanishingTransitionFunctions
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 

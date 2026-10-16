@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.Etale.Locus
 public import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.AlgebraicGeometry.EtaleAwayOfLocalizedCotangentVanishing
+import WeilConjectures.AlgebraicGeometry.EtaleAwayOfLocalizedCotangentVanishing
 import Sheaf.RingTheory.OpenFlatLocus
 
 /-!

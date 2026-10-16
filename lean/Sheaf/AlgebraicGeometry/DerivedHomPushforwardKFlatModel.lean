@@ -32,7 +32,7 @@ private theorem model_same_localization
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     [(Scheme.Modules.tensorPullback i).Additive]
     (P : CochainComplex Y.Modules ℤ) (J : CochainComplex Z.Modules ℤ)
-    (hP : CochainComplex.IsKFlat (R := Y.sheaf) P) (hJ : J.IsKInjective) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P) (hJ : J.IsKInjective) :
     let F := (Scheme.Modules.pushforward i).mapHomologicalComplex (.up ℤ)
     let T := ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P
     Nonempty (((derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf).obj
@@ -61,7 +61,7 @@ private theorem model_same_localization
       asIso (ε.app ((HomotopyCategory.quotient AY (.up ℤ)).obj P)) ≪≫
       DerivedCategory.Qh.mapIso ((E.mapHomotopyCategoryFactors (.up ℤ)).app P) ≪≫
       (DerivedCategory.quotientCompQhIso AZ).app T
-  have hT : CochainComplex.IsKFlat (R := Z.sheaf) T := by
+  have hT : CochainComplex.IsAcyclicTensorKFlat (R := Z.sheaf) T := by
     convert CochainComplex.isKFlat_pullback i.base Z.sheaf Y.sheaf ⟨i.c⟩ P hP using 1
     rfl
   have : J.IsKInjective := hJ
@@ -106,7 +106,7 @@ theorem nonempty_derivedHom_pushforward_kFlat_model
     [hY : HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [(Scheme.Modules.tensorPullback i).Additive]
     (P : CochainComplex Y.Modules ℤ) (J : CochainComplex Z.Modules ℤ)
-    (hP : CochainComplex.IsKFlat (R := Y.sheaf) P) (hJ : J.IsKInjective) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P) (hJ : J.IsKInjective) :
     let F := (Scheme.Modules.pushforward i).mapHomologicalComplex (.up ℤ)
     let T := ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P
     Nonempty (((derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf).obj

@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.AlgebraicGeometry.FormalSystemsPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.ChowModificationData
+import WeilConjectures.AlgebraicGeometry.ChowModificationData
 import Sheaf.AlgebraicGeometry.ChowAlgebraizationData
 import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase

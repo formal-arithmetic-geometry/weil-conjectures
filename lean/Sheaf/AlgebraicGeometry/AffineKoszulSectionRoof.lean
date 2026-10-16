@@ -43,7 +43,7 @@ private theorem kflat_augmentation_realization
     (T : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)
     (a : P ⟶ DerivedCategory.Q.obj T) :
     ∃ J : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ,
-      CochainComplex.IsKFlat (R := X.sheaf) J ∧
+      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) J ∧
       ∃ (c : DerivedCategory.Q.obj J ≅ P) (u : J ⟶ T),
         DerivedCategory.Q.map u = c.hom ≫ a := by
   let C := SheafOfModules.{uX} (moduleRings X.toRingedSpace)
@@ -107,7 +107,7 @@ theorem affine_koszul_section_roof
         (Modules.overEquiv U)).mapDerivedCategory
     ∀ s : R.obj (DerivedCategory.Q.obj T) ⟶ R.obj E.obj,
       ∃ J : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ,
-        CochainComplex.IsKFlat (R := X.sheaf) J ∧ IsPerfect X (DerivedCategory.Q.obj J) ∧
+        CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) J ∧ IsPerfect X (DerivedCategory.Q.obj J) ∧
         ∃ (u : J ⟶ T) (ξ : DerivedCategory.Q.obj J ⟶ E.obj),
           IsIso (R.map (DerivedCategory.Q.map u)) ∧
           R.map (DerivedCategory.Q.map u) ≫ s = R.map ξ := by

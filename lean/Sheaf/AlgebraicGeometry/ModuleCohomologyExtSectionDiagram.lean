@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Sheaf.AlgebraicGeometry.StandardAbelianExtSectionDiagram
 import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
-import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 
 /-! # The abelian Ext map in the common section-complex diagram
 

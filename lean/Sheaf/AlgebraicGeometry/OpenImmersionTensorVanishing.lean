@@ -116,7 +116,7 @@ theorem openImmersion_tensor_vanishing {X Y : Scheme.{u}} (j : X ⟶ Y)
     exact ⟨e₁ ≪≫ HomologicalComplex₂.total.mapIso e₂ (.up ℤ)⟩
   intro G
   obtain ⟨P, hP, ⟨eP⟩, hz⟩ := h ((Scheme.Modules.pushforward j).obj G)
-  have hRP : CochainComplex.IsKFlat (R := X.sheaf) (RC.obj P) := by
+  have hRP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) (RC.obj P) := by
     have hk := isKFlat_restrict j P hP
     intro F hF n
     exact (hk F hF n).of_iso

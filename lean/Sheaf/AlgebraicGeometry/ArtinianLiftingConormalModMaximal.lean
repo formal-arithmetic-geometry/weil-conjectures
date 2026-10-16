@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.Filtration
 import Sheaf.AlgebraicGeometry.ArtinianLiftingTruncatedSection
-import Sheaf.AlgebraicGeometry.TruncatedSectionConormalResidueKernel
+import WeilConjectures.AlgebraicGeometry.TruncatedSectionConormalResidueKernel
 
 /-!
 # Artinian lifting splits the conormal map modulo the maximal ideal

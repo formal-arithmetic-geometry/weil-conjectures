@@ -12,7 +12,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.BaseChange.Square
 
 import Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsos
-import Sheaf.AlgebraicGeometry.GeometricPointFieldExtension
+import WeilConjectures.AlgebraicGeometry.GeometricPointFieldExtension
 
 /-! # Localization of an abelian stalk exchange to strict henselian bases
 

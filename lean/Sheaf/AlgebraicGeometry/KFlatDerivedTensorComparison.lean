@@ -52,7 +52,7 @@ theorem kFlat_derivedTensor_comparison_natIso (X : Scheme.{u})
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (G : J ⥤ CochainComplex
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hF : ∀ P, CochainComplex.IsKFlat (R := X.sheaf) (F.obj P)) :
+    (hF : ∀ P, CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) (F.obj P)) :
     Nonempty
       (F ⋙ DerivedCategory.Q ⋙ curriedTensor (schemeDerivedCategory X) ⋙
         (Functor.whiskeringLeft J (schemeDerivedCategory X)

@@ -9,7 +9,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.AlgebraicGeometry.ModuleUnitLocalSupport
-import Sheaf.AlgebraicGeometry.ModuleSupportRestrictionEnlargement
+import WeilConjectures.AlgebraicGeometry.ModuleSupportRestrictionEnlargement
 
 /-! # Finite support of finite free maps
 

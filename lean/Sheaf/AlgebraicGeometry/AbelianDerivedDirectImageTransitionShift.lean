@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
-import Sheaf.AlgebraicGeometry.DerivedAdjunctionCommShift
+import WeilConjectures.AlgebraicGeometry.DerivedAdjunctionCommShift
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! # Shift compatibility of the derived direct-image transition

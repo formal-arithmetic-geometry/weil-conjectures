@@ -6,11 +6,11 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.Data.ZMod.Basic
 import Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget
-import Sheaf.AlgebraicGeometry.FiniteLocalCyclicModuleForget
-import Sheaf.AlgebraicGeometry.KilledSheafModuleLift
+import WeilConjectures.AlgebraicGeometry.FiniteLocalCyclicModuleForget
+import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
@@ -274,14 +274,14 @@ theorem constructible_torsion_modules_agree
         _ = e.hom ≫ eN.inv := by rw [h]
   · constructor
     · rintro ⟨S, hS⟩
-      let T : LocallyClosedStratification C :=
+      let T : Stratification C :=
         { toStratification := S.toStratification
           domain := S.domain
           immersion := S.immersion
           isImmersion := S.isImmersion
           range_immersion := S.range_immersion }
-      exact ⟨T, S.isConstructible_stratum, fun i ↦ (hlocal (S.immersion i)).mp (hS i)⟩
-    · rintro ⟨S, _, hS⟩
+      exact ⟨T, fun i ↦ (hlocal (S.immersion i)).mp (hS i)⟩
+    · rintro ⟨S, hS⟩
       let T : Stratification C :=
         { toStratification := S.toStratification
           domain := S.domain

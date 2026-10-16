@@ -7,7 +7,7 @@ public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
 import Mathlib.CategoryTheory.Sites.LocallyInjective
 import Sheaf.Paper.StrictHenselianCohomologyLocallyZero
-import Sheaf.Paper.ZariskiEtaleCanonicalLeray
+import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCanonicalLeray
 
 /-!
 # Étale and Zariski cohomology over strictly henselian schemes

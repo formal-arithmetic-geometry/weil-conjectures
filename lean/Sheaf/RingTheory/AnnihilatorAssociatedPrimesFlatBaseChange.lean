@@ -5,13 +5,13 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.RingTheory.AnnihilatorAssociatedPrimes
+public import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimes
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Module.Submodule.Pointwise
 public import Mathlib.Algebra.Module.TransferInstance
 import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
-import Sheaf.RingTheory.AnnihilatorAssociatedPrimesExactSequence
+import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimesExactSequence
 import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
 

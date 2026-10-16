@@ -8,7 +8,7 @@ module
 public import Mathlib.Order.DirectedInverseSystem
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Sheaf.RingTheory.CompatibleRingTowerRecursion
+import WeilConjectures.RingTheory.CompatibleRingTowerRecursion
 import Sheaf.RingTheory.FlatLocalMonogenicExtension
 import Sheaf.RingTheory.FlatLocalTowerDirectLimit
 

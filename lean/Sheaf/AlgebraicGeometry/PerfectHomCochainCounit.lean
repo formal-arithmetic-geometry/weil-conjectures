@@ -50,7 +50,7 @@ private theorem tensorDerivedCounit {X Y : Scheme.{u}} (f : X ⟶ Y) :
         (HomotopyCategory.quasiIso
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ)) ∧
       ∀ P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
-        CochainComplex.IsKFlat (R := Y.sheaf) P →
+        CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
           IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
@@ -69,7 +69,7 @@ composition. Its comparison is an isomorphism, so the fixed counit is invertible
 on the same models. -/
 theorem perfectHomTensorCounit_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := Y.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P) :
     IsIso ((perfectHomTensorCounit f).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
   let := perfectHomTensorAdditive f

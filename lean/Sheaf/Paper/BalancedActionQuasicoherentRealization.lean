@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import Sheaf.Paper.BalancedActionDirectImageModule
+import WeilConjectures.AlgebraicGeometry.BalancedActionDirectImageModule
 import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
 
 /-! # Realization of a balanced algebra action

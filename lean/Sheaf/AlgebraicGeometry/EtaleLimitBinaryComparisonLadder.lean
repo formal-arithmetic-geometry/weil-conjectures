@@ -5,11 +5,11 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleCohomologyStageContinuity
+public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyStageContinuity
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Exact.Basic
 import Sheaf.AlgebraicGeometry.EtaleLimitBinaryGeometricLadder
-import Sheaf.AlgebraicGeometry.StageCohomologyComparisonBijective
+import WeilConjectures.AlgebraicGeometry.StageCohomologyComparisonBijective
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Exact comparison ladder for binary continuity

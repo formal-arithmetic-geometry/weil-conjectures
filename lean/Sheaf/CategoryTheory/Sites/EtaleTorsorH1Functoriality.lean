@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 import Sheaf.CategoryTheory.Sites.EtaleInverseImageLiftingTorsor
 import Sheaf.CategoryTheory.Sites.EtaleContractedProductExists
 

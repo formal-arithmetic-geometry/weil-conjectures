@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 import Sheaf.AlgebraicGeometry.SmoothSectionEtaleNeighbourhoods
-import Sheaf.AlgebraicGeometry.EtaleLocalizeUpstairs
+import WeilConjectures.AlgebraicGeometry.EtaleLocalizeUpstairs
 import Sheaf.AlgebraicGeometry.EtaleSectionQuotientCutout
 
 /-! # Sections of smooth algebras modulo an ideal lift over an étale neighbourhood

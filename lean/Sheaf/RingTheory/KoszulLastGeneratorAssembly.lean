@@ -7,7 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Mathlib.LinearAlgebra.Finsupp.Defs
-import Sheaf.Paper.KoszulComplex
+import WeilConjectures.AlgebraicGeometry.KoszulComplex
 
 /-!
 # Assembly of the last-generator exterior-power summands

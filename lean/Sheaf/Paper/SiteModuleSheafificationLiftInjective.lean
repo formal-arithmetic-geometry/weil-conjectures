@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 

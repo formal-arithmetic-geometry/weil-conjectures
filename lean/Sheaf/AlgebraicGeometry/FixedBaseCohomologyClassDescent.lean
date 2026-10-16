@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.CompatiblePullbackSheafSystem
-import Sheaf.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
+import WeilConjectures.AlgebraicGeometry.CompatiblePullbackSheafSystem
+import WeilConjectures.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
 import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Filtered.Connected

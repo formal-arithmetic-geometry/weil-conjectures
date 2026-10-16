@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
 import Sheaf.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionAffineLimit
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-!
 # Torsion cohomological dimension of an inverse limit

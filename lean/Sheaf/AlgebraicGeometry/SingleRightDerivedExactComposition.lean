@@ -59,15 +59,9 @@ theorem single_rightDerived_exact_composition (F : C ⥤ A) (T : A ⥤ B)
   simp only [rightDerivedFunctorCompMapDerivedCategoryIso, Iso.trans_hom,
     NatTrans.comp_app, isoWhiskerLeft_hom, whiskerLeft_app]
   rw [rightDerivedNatIso_hom]
-  erw [rightDerivedNatTrans_app_assoc]
-  dsimp [rightDerivedFunctorCompUnit]
+  erw [rightDerivedNatTrans_app]
+  dsimp [rightDerivedFunctorCompMapDerivedCategoryUnit]
   simp only [Category.id_comp, Category.comp_id, Category.assoc, Functor.map_comp]
-  rw [T.rightDerivedFunctorIsoMapDerivedCategory.hom.naturality]
-  have h := NatTrans.congr_app T.rightDerivedFunctorIsoMapDerivedCategory_hom_fac
-    ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj
-      ((HomotopyCategory.singleFunctor C 0).obj M))
-  dsimp only [NatTrans.comp_app, whiskerLeft_app] at h
-  rw [← Category.assoc (T.rightDerivedFunctorUnit.app _) _ _, h]
   simp only [← Category.assoc]
   apply congrArg (fun f ↦ f ≫ T.mapDerivedCategory.map
     (F.rightDerivedFunctorUnit.app ((HomotopyCategory.singleFunctor C 0).obj M)))

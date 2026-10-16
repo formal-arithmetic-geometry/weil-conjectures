@@ -6,8 +6,8 @@ Authors: SHEAF group NH
 module
 
 public import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
-public import Sheaf.AlgebraicGeometry.DerivedGlobalGerm
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+public import WeilConjectures.AlgebraicGeometry.DerivedGlobalGerm
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 
 /-!
 # The canonical germ at the identity geometric point

@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import Mathlib.CategoryTheory.Adjunction.Mates
-import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 
 /-!
 # The closed counit on abelian pro-etale sheaves

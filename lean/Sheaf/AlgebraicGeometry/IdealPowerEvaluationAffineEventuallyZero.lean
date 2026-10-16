@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import Sheaf.AlgebraicGeometry.FormalPolynomialPowerLifts
-import all Sheaf.AlgebraicGeometry.AffineSectionCoverTwistGeneration
+import all WeilConjectures.AlgebraicGeometry.AffineSectionCoverTwistGeneration
 import all Sheaf.AlgebraicGeometry.CoherentAffineMapSupportRadical
 import all Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 

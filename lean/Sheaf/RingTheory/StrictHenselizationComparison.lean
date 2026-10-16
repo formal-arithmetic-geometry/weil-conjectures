@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group B4
 -/
 module
-public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
+public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 import Sheaf.RingTheory.StrictHenselizationTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.RingTheory.EtaleHenselianRingLift

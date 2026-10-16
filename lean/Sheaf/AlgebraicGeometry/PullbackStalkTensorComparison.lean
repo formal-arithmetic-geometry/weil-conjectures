@@ -241,7 +241,7 @@ noncomputable def IsComparisonIso
   letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g z))
   letI := HasDerivedCategory.standard (ModuleCat.{u} (B f g z))
   ∀ K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,
-    K.IsKFlat → Nonempty (DerivedCategory.Q.obj K ≅ P) →
+    K.IsAcyclicTensorKFlat → Nonempty (DerivedCategory.Q.obj K ≅ P) →
     ∀ i : ℤ,
       Nonempty
         ((stalkTensorComplex f g z K).homology i ≅

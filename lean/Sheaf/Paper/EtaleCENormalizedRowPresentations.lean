@@ -13,7 +13,7 @@ import Sheaf.CategoryTheory.CartanEilenbergSecondFiltration
 import Sheaf.CategoryTheory.CartanEilenbergTotalResolution
 import all Sheaf.CategoryTheory.SecondFiltrationRowCohomology
 import all Sheaf.CategoryTheory.SecondFiltrationSignedFirstPage
-import all Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import all WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-! # Prescribed normalized CE presentations
 

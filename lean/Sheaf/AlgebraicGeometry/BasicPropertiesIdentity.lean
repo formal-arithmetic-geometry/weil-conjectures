@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.IdentityResolutionHomology
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-! # Identity property of module cohomology maps
 
@@ -22,7 +22,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
 private instance schemeEnoughInjectives (X : Scheme.{u}) : EnoughInjectives X.Modules :=
-  enoughInjectives X
+  enoughInjectives (X := X)
 
 private instance sectionsAdditive (X : Scheme.{u}) :
     (RingedSpace.globalSectionsFunctor X.toRingedSpace).Additive :=

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import all Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import all Sheaf.AlgebraicGeometry.ModuleCohomologyFMapComparison
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-! # Common-target diagram for composition of module cohomology maps
 
@@ -155,7 +155,7 @@ theorem moduleCohomologyFMap_comp_data {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y
     forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
   let Hp := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
   let T := Functor.mapHomologicalComplexCompIso (pushforwardComp h k) (ComplexShape.up ℕ)
-  have : EnoughInjectives Z.Modules := enoughInjectives Z
+  have : EnoughInjectives Z.Modules := enoughInjectives (X := Z)
   obtain ⟨L, μ, hL, hμ⟩ := nat_complex_injective_resolution (PY.obj Ch.K)
   have : QuasiIso μ := hμ
   have : QuasiIso Ck.lambda := Ck.quasiIso

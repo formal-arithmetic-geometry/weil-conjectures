@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Sheaf.Paper.EtaleClassVanishingSpreads
 import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap

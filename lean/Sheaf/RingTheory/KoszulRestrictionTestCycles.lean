@@ -5,7 +5,7 @@ Authors: SHEAF groups T2 and A2
 -/
 module
 
-public import Sheaf.Paper.KoszulComplex
+public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective

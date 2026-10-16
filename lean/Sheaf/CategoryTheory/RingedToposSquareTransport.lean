@@ -8,7 +8,8 @@ module
 public import Sheaf.CategoryTheory.RingedToposMorphism
 public import Mathlib.CategoryTheory.Equivalence
 import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
-import Sheaf.CategoryTheory.Adjunction.FiniteProductRingFunctor
+import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
+import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.Paper.FiniteCoproductCohomologyAssembly
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 /-! # Product coordinates for constant-coefficient base change
 

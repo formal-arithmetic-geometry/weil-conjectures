@@ -5,7 +5,7 @@ Authors: SHEAF group B2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
 import Mathlib.Data.Finset.Order
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit

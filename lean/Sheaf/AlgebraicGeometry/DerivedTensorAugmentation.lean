@@ -41,8 +41,8 @@ def IsDerivedTensorAugmentation (X : Scheme.{u})
   letI := SheafOfModules.monoidalCategory X.sheaf
   letI := (SheafOfModules.tensorClosed X.sheaf).1.some
   ∃ P J : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,
-    CochainComplex.IsKFlat (R := X.sheaf) P ∧
-    CochainComplex.IsKFlat (R := X.sheaf) J ∧
+    CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P ∧
+    CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) J ∧
     ∃ (eA : DerivedCategory.Q.obj P ≅ A) (_eI : DerivedCategory.Q.obj J ≅ I)
       (eB : DerivedCategory.Q.obj (CochainComplex.mapBifunctor P J (curriedTensor _)) ≅ B)
       (u : J ⟶ HomologicalComplex.tensorUnit

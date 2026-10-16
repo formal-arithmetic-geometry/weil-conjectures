@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 import Sheaf.RingTheory.ColimitFlatRingMap
-import Sheaf.AlgebraicGeometry.FlatDescentAffineCharts
+import WeilConjectures.AlgebraicGeometry.FlatDescentAffineCharts
 
 /-!
 # Descent of flatness to a finite stage

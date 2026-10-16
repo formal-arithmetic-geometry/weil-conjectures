@@ -111,8 +111,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineChartTensorComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartTensorComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineChartTensorComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineChartTensorComparison.lean",
   "declaration": "AlgebraicGeometry.exists_affineChart_tensorComparison",
   "statement": "theorem exists_affineChart_tensorComparison\n    {S : Scheme.{u}} (X₀ Y₀ : Over S) (f₀ : X₀ ⟶ Y₀)\n    [LocallyOfFinitePresentation f₀.left]\n    (W : S.Opens) (hW : IsAffineOpen W)\n    (V : Y₀.left.Opens) (hV : IsAffineOpen V) (eV : V ≤ Y₀.hom ⁻¹ᵁ W)\n    (U : X₀.left.Opens) (hU : IsAffineOpen U) (eU : U ≤ f₀.left ⁻¹ᵁ V)\n    (R : CommRingCat.{u}) (e0 : W.toScheme ≅ Spec R) :\n    ∃ (B C : CommRingCat.{u}) (aB : Algebra R B) (aC : Algebra R C),\n      letI := aB\n      letI := aC\n      ∃ φ : B →ₐ[R] C, φ.FinitePresentation ∧\n        ∀ (T : Scheme.{u}) (t : T ⟶ S) (A : CommRingCat.{u}) (aA : Algebra R A),\n          letI := aA\n          ∀ (e : (t ⁻¹ᵁ W).toScheme ≅ Spec A),\n            t.resLE W _ le_rfl ≫ e0.hom =\n              e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R A)) →\n            ∃ g : ((pullback.fst X₀.hom t) ⁻¹ᵁ U).toScheme ⟶\n                ((pullback.fst Y₀.hom t) ⁻¹ᵁ V).toScheme,\n              g ≫ ((pullback.fst Y₀.hom t) ⁻¹ᵁ V).ι =\n                ((pullback.fst X₀.hom t) ⁻¹ᵁ U).ι ≫\n                  ((Over.pullback t).map f₀).left ∧\n              Nonempty (Arrow.mk g ≅ Arrow.mk (Spec.map (CommRingCat.ofHom\n                (Algebra.TensorProduct.map (AlgHom.id R A) φ).toRingHom)))",
   "branch": "sheaf-dag",

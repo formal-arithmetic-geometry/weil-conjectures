@@ -120,8 +120,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.FieldTheory.TriangularFieldModelLocalizedNormalForm",
-  "file": "lean/Sheaf/FieldTheory/TriangularFieldModelLocalizedNormalForm.lean",
+  "module": "WeilConjectures.FieldTheory.TriangularFieldModelLocalizedNormalForm",
+  "file": "lean/WeilConjectures/FieldTheory/TriangularFieldModelLocalizedNormalForm.lean",
   "declaration": "FieldTheory.triangularFieldModel_localized_normal_form",
   "statement": "theorem triangularFieldModel_localized_normal_form\n    (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]\n    (d : ℕ) (x : Fin d → K) (m : ℕ) (b : Fin m → K)\n    (h : MvPolynomial (Fin d) k)\n    (p : (i : Fin m) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))\n    (y : Fin (d + 1 + m) → K) (e : Fin m → ℕ)\n    (hp : ∀ i, (p i).Monic) (he : ∀ i, (p i).natDegree = e i)\n    (hyx : ∀ j : Fin d, y ⟨j.val, by omega⟩ = x j)\n    (hyt : y ⟨d, by omega⟩ = (MvPolynomial.aeval x h)⁻¹)\n    (hyb : ∀ i : Fin m, y ⟨d + 1 + i.val, by omega⟩ = b i)\n    (hzero : ∀ q ∈ triangularFieldModelEquations k d m h p,\n      MvPolynomial.aeval y q = 0)\n    (phi : Localization.Away h →ₐ[k] K)\n    (hphi : ∀ r : MvPolynomial (Fin d) k,\n      phi (algebraMap _ (Localization.Away h) r) = MvPolynomial.aeval x r) :\n    ∃ nf : (MvPolynomial (Fin (d + 1 + m)) k ⧸\n        Ideal.ofList (triangularFieldModelEquations k d m h p)) ≃ₗ[k]\n        (((i : Fin m) → Fin (e i)) → Localization.Away h),\n      ∀ q : MvPolynomial (Fin (d + 1 + m)) k,\n        MvPolynomial.aeval y q =\n          ∑ a : ((i : Fin m) → Fin (e i)),\n            phi (nf (Ideal.Quotient.mk _ q) a) * (∏ i, b i ^ (a i).val)",
   "branch": "sheaf-dag",

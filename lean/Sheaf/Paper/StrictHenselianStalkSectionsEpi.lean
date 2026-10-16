@@ -5,7 +5,7 @@ Authors: SHEAF group R3
 -/
 module
 
-public import Sheaf.Paper.EtaleObjectCohomologyStalkComplex
+public import WeilConjectures.AlgebraicGeometry.EtaleObjectCohomologyStalkComplex
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.CategoryTheory.Functor.EpiMono
 import Sheaf.Paper.StrictHenselianStalkSectionsComparison

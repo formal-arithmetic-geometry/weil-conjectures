@@ -6,7 +6,7 @@ Authors: SHEAF group NP
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
-public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

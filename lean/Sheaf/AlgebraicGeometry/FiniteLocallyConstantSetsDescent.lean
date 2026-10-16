@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.ConstructibleSheaf.Defs
 import Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatum
 import Sheaf.AlgebraicGeometry.EtaleRepresentableDescentGlue
-import Sheaf.AlgebraicGeometry.FiniteEtaleDescent
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleDescent
 import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence

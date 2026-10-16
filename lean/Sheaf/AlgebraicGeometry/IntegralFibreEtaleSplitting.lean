@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Sheaf.AlgebraicGeometry.EtaleSplitResiduePoints
+import WeilConjectures.AlgebraicGeometry.EtaleSplitResiduePoints
 import Sheaf.RingTheory.LiftIdempotentUpstairs
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Pullbacks

@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
-import Sheaf.AlgebraicGeometry.Modules.QuasicoherentBinarySum
+import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Mathlib.CategoryTheory.Abelian.Basic
 

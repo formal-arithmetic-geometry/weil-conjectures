@@ -2,7 +2,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Continuous
-import Sheaf.CategoryTheory.SiteEquivalenceMorphismOfSites
+import WeilConjectures.CategoryTheory.SiteEquivalenceMorphismOfSites
 import Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections
 
 @[expose] public section

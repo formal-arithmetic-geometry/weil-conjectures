@@ -56,7 +56,7 @@ theorem ringBoundedProjectiveExtension {A B : Type u} [CommRing A] [CommRing B]
         (onePointRingSheaf A))) ℤ)
     (hb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n))
     (hp : ∀ n : ℤ, Module.Projective A ((P.X n).val.obj (op ⟨PUnit.unit⟩))) :
-    P.IsKFlat ∧
+    P.IsAcyclicTensorKFlat ∧
       (∀ n : ℤ, Module.Projective B
         ((((F.mapHomologicalComplex (.up ℤ)).obj P).X n).val.obj
           (op ⟨PUnit.unit⟩))) := by

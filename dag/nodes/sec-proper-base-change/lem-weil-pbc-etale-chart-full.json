@@ -106,8 +106,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleChartResidueTriplesFull",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleChartResidueTriplesFull.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleChartResidueTriplesFull",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleChartResidueTriplesFull.lean",
   "declaration": "AlgebraicGeometry.Scheme.etale_chart_residue_triples_full",
   "statement": "theorem etale_chart_residue_triples_full\n    (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]\n    (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]\n    (xU : Spec (.of Ω) ⟶ Spec A) :\n    let x := xU ≫ i\n    let p := (SpecToEquivOfField Ω (Spec A) xU).1\n    let F := (Spec A).residueField p\n    let e := (SpecToEquivOfField Ω (Spec A) xU).2\n    letI : Algebra F Ω := e.hom.toAlgebra\n    let K := separableClosure F Ω\n    let χ : F ⟶ CommRingCat.of K := CommRingCat.ofHom (algebraMap F K)\n    let Nall := (pointSmallEtale x).fiber.Elements\n    let P : ObjectProperty Nall := fun c ↦ IsAffine c.1.left\n    let N := P.FullSubcategory\n    let Q : ObjectProperty N := fun c ↦ ∃ g : c.obj.1.left ⟶ Spec A, g ≫ i = c.obj.1.hom\n    let NU := Q.FullSubcategory\n    let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙\n      Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ\n    let DU := Q.ι.op ⋙ D\n    let T := EtaleResidueTriples A p K χ\n    let DT := etaleResidueTriplesRingDiagram A p K χ\n    ∀ (H : NUᵒᵖ ⥤ T) (δ : DU ≅ H ⋙ DT),\n        (∀ c : NU,\n          let t := H.obj (op c)\n          (∀ g : c.obj.obj.1.left ⟶ Spec A, g ≫ i = c.obj.obj.1.hom →\n            (ΓSpecIso A).inv ≫ g.appTop ≫ δ.hom.app (op c) = t.α) ∧\n          c.obj.obj.2.left ≫ c.obj.obj.1.left.toSpecΓ =\n            Spec.map (CommRingCat.ofHom K.subtype) ≫\n              Spec.map ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ) ≫\n              Spec.map (δ.hom.app (op c))) → H.Full",
   "branch": "sheaf-dag",

@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.Noetherian.Basic
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import Sheaf.Algebra.FlatTorIdealCriterion
+import WeilConjectures.Algebra.FlatTorIdealCriterion
 import Mathlib.CategoryTheory.Monoidal.Tor
 import Mathlib.RingTheory.Flat.EquationalCriterion
 

@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 import Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramObjects
 import Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramArrows
 

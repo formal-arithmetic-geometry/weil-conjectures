@@ -158,7 +158,7 @@ the cokernel of the identity on the rank-zero free module; the identity cover an
 one-stratum stratification show it is constructible. The weak Serre class theorem now
 makes the property of having constructible cohomology triangulated. Intersect this with
 the bounded part of the canonical t-structure, which is also triangulated. -/
-instance isTriangulated_boundedConstructible
+instance (priority := 2000) isTriangulated_boundedConstructible_of_serre
     [ObjectProperty.IsClosedUnderKernels (IsConstructibleModuleObject R)]
     [ObjectProperty.IsClosedUnderCokernels (IsConstructibleModuleObject R)]
     [ObjectProperty.IsClosedUnderExtensions (IsConstructibleModuleObject R)] :
@@ -170,5 +170,12 @@ instance isTriangulated_boundedConstructible
   change (DerivedCategory.TStructure.t.bounded ⊓
     DerivedCategory.homologyProperty (IsConstructibleModuleObject R)).IsTriangulated
   infer_instance
+
+/-- The bounded constructible complexes on a topologically noetherian scheme form a triangulated
+subcategory. -/
+instance isTriangulated_boundedConstructible [TopologicalSpace.NoetherianSpace X] :
+    (boundedConstructible R).IsTriangulated :=
+  sorry
+
 
 end AlgebraicGeometry.ProEtale

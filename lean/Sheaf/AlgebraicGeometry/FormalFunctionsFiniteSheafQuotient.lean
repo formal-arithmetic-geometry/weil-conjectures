@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
+import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore
 

@@ -78,7 +78,7 @@ theorem proEtale_torAmplitude_iff_residue_tensor
     (K P : CochainComplex (proEtaleRingModules T
       (proEtaleConstantRing T (Padic.coefficientExtensionRing l E n))) ℤ)
     (f : P ⟶ K) (hf : QuasiIso f)
-    (hP : CochainComplex.IsKFlat.{u + 1, u}
+    (hP : CochainComplex.IsAcyclicTensorKFlat.{u + 1, u}
       (R := proEtaleConstantRing T (Padic.coefficientExtensionRing l E n)) P)
     (_hK : intrinsicFiniteTorsionConstructible l E n hn T (DerivedCategory.Q.obj K))
     (a b : ℤ) (_hab : a ≤ b) :

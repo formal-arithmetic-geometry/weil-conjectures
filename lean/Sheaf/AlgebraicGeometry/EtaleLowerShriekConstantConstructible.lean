@@ -6,11 +6,11 @@ Authors: SHEAF group K1
 module
 
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
-import Sheaf.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant
+import WeilConjectures.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf

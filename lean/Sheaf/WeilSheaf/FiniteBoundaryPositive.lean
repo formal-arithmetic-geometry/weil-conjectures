@@ -6,9 +6,9 @@ Authors: SHEAF group F3
 module
 
 public import WeilConjectures.WeilSheaf.LowerShriek
-import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 import WeilConjectures.WeilSheaf.Category
-import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 
 @[expose] public section
 

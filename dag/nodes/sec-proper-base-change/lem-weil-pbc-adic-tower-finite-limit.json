@@ -172,8 +172,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Category.ModuleCat.AdicTowerFiniteLimit",
-  "file": "lean/Sheaf/Algebra/Category/ModuleCat/AdicTowerFiniteLimit.lean",
+  "module": "WeilConjectures.Algebra.Category.ModuleCat.AdicTowerFiniteLimit",
+  "file": "lean/WeilConjectures/Algebra/Category/ModuleCat/AdicTowerFiniteLimit.lean",
   "declaration": "ModuleCat.adicTower_finiteLimit",
   "statement": "theorem adicTower_finiteLimit (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (T : ℕᵒᵖ ⥤ ModuleCat.{u} A)\n    (hfinite : ∀ n : ℕ, Module.Finite A (T.obj (op n)))\n    (hzero : ∀ n : ℕ, I ^ (n + 1) • (⊤ : Submodule A (T.obj (op n))) = ⊥)\n    (htrans : ∀ n : ℕ,\n      Function.Surjective (T.map (homOfLE (Nat.le_succ n)).op) ∧\n      LinearMap.ker (T.map (homOfLE (Nat.le_succ n)).op).hom =\n        I ^ (n + 1) • (⊤ : Submodule A (T.obj (op (n + 1)))))\n    (N : ModuleCat.{u} (AdicCompletion I A))\n    (e : (restrictScalars (algebraMap A (AdicCompletion I A))).obj N ≅ limit T)\n    (hscalar : ∀ (n : ℕ) (r : AdicCompletion I A) (a : A) (x : N),\n      AdicCompletion.evalₐ I (n + 1) r = Ideal.Quotient.mk (I ^ (n + 1)) a →\n      (e.hom ≫ limit.π T (op n)) (r • x) =\n        a • (e.hom ≫ limit.π T (op n)) x) :\n    Module.Finite (AdicCompletion I A) N ∧\n    ∀ n : ℕ, Function.Surjective (e.hom ≫ limit.π T (op n)) ∧\n      LinearMap.ker (e.hom ≫ limit.π T (op n)).hom =\n        I ^ (n + 1) • (⊤ : Submodule A\n          ((restrictScalars (algebraMap A (AdicCompletion I A))).obj N))",
   "branch": "sheaf-dag",

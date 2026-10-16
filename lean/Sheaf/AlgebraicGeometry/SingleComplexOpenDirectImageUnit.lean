@@ -68,26 +68,19 @@ private theorem exact_postcomposition_unit
         (DerivedCategory.Qh.obj I) =
       G.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I) ≫
         G.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app I) := by
-  simp only [Functor.rightDerivedFunctorCompMapDerivedCategoryIso, Iso.trans_hom,
-    NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+  simp only [Functor.rightDerivedFunctorCompMapDerivedCategoryIso,
     Functor.rightDerivedUnique, Functor.rightDerivedNatIso_hom]
-  rw [Functor.rightDerivedNatTrans_app_assoc]
-  simp only [Category.id_comp, Functor.rightDerivedFunctorCompUnit,
-    NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+  rw [Functor.rightDerivedNatTrans_app]
+  simp only [Iso.refl_hom, NatTrans.id_app, Category.id_comp,
+    Functor.rightDerivedFunctorCompMapDerivedCategoryUnit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Category.comp_id, Category.assoc]
+    Category.id_comp, Category.comp_id]
   have hi := Iso.hom_inv_id_app
     (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)) I
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp] at hi
-  simp only [Iso.refl_hom, NatTrans.id_app, Category.id_comp, hi]
+  simp only [hi]
   erw [DerivedCategory.Qh.map_id, Category.id_comp]
-  erw [G.rightDerivedFunctorIsoMapDerivedCategory.hom.naturality
-    (F.rightDerivedFunctorUnit.app I)]
-  have hf := congr_app G.rightDerivedFunctorIsoMapDerivedCategory_hom_fac
-    ((F.mapHomotopyCategory (.up ℤ)).obj I)
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hf
-  erw [← hf]
-  simp only [Functor.comp_obj, Category.assoc]
 
 private theorem exact_precomposition_unit
     {C D E : Type*} [Category C] [Category D] [Category E]

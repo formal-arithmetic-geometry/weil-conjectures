@@ -71,7 +71,7 @@ theorem exists_absolute_leftDerived_tensorModulePullback
         (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y))
           (ComplexShape.up ℤ)) ∧
       (∀ K : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ,
-        K.IsKFlat → IsIso
+        K.IsAcyclicTensorKFlat → IsIso
           (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) ∧
       ∀ H : DerivedCategory (SheafOfModules.{u} (moduleRings X)) ⥤
           DerivedCategory (SheafOfModules.{u} (moduleRings Y)),

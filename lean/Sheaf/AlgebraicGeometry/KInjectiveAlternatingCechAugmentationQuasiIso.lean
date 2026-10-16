@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.InjectiveTermsAlternatingCechAugmentation
 import Sheaf.AlgebraicGeometry.AlternatingCechTotalHomotopy
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import Sheaf.AlgebraicGeometry.AlternatingCechComputes
-import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
+import WeilConjectures.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Čech augmentation of a K-injective complex

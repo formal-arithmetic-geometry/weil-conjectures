@@ -8,8 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.AmpleFinitePowerCover
-import Sheaf.AlgebraicGeometry.AffineSectionCoverTwistGeneration
+import WeilConjectures.AlgebraicGeometry.AmpleFinitePowerCover
+import WeilConjectures.AlgebraicGeometry.AffineSectionCoverTwistGeneration
 import Sheaf.AlgebraicGeometry.AmpleSeparated
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 

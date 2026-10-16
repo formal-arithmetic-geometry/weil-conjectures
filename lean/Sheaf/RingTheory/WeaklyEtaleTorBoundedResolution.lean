@@ -6,7 +6,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.FlatTorIdealCriterion
+import WeilConjectures.Algebra.FlatTorIdealCriterion
 
 /-! # Bounded flat resolutions from uniform Tor vanishing
 

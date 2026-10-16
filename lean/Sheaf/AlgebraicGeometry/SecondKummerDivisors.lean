@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
-import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import WeilConjectures.AlgebraicGeometry.Curve.Brauer
 import WeilConjectures.AlgebraicGeometry.Sites.Gm
 import WeilConjectures.AlgebraicGeometry.Sites.Kummer

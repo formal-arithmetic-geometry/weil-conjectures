@@ -102,8 +102,8 @@
  ],
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleOpenSquareDiagramIdentity",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenSquareDiagramIdentity.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleOpenSquareDiagramIdentity",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleOpenSquareDiagramIdentity.lean",
   "declaration": "AlgebraicGeometry.Etale.openSquareCoefficient_diagram_identity",
   "statement": "theorem openSquareCoefficient_diagram_identity\n    {I J : Type u} [Preorder I] [Preorder J]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (E : Jᵒᵖ ⥤ Scheme.{u}) (σ : J → I)\n    (a : ∀ j, E.obj (op j) ⟶ D.obj (op (σ j)))\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (h : ∀ j, a j ≫ D.map (homOfLE (le_refl (σ j))).op =\n      E.map (homOfLE (le_refl j)).op ≫ a j)\n    (F' : ∀ j, Sheaf (E.obj (op j)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hF' : ∀ j, F' j = (upperStar AddCommGrpCat.{u + 1} (a j)).obj (F (σ j)))\n    (ψ : ∀ j, (upperStar AddCommGrpCat.{u + 1}\n      (E.map (homOfLE (le_refl j)).op)).obj (F' j) ⟶ F' j)\n    (hψ : ∀ j, HEq (ψ j)\n      (openSquareCoefficient (D.map (homOfLE (le_refl (σ j))).op) (a j) (a j)\n        (E.map (homOfLE (le_refl j)).op) (h j) (F (σ j)) (F (σ j))\n        (φ (homOfLE (le_refl (σ j))))))\n    (j : J) :\n    ψ j =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (E.map_id (op j)))).hom.app\n        (F' j) ≫ (upperStarId AddCommGrpCat.{u + 1} (E.obj (op j))).hom.app (F' j)",
   "branch": "sheaf-dag",

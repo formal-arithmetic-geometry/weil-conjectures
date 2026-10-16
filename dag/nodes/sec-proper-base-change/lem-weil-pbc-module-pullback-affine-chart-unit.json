@@ -105,8 +105,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ModulePullbackAffineChartUnit",
-  "file": "lean/Sheaf/AlgebraicGeometry/ModulePullbackAffineChartUnit.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ModulePullbackAffineChartUnit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ModulePullbackAffineChartUnit.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.affineChart_pullback_unit",
   "statement": "theorem affineChart_pullback_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.affineOpens) (U : X.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) (G : Y.Modules) (s : Γ(G, V.1)) : let jV := V.2.fromSpec let jU := U.2.fromSpec let ρ := f.appLE V.1 U.1 hUV let ψ := Spec.map ρ let hsq : ψ ≫ jV = jU ≫ f := V.2.SpecMap_appLE_fromSpec f U.2 hUV let adj₁ := (restrictAdjunction jV).comp (pullbackPushforwardAdjunction ψ) let adj₂ := (pullbackPushforwardAdjunction f).comp (restrictAdjunction jU) let rightIso : pushforward ψ ⋙ pushforward jV ≅ pushforward jU ⋙ pushforward f := pushforwardComp ψ jV ≪≫ pushforwardCongr hsq ≪≫ (pushforwardComp jU f).symm let k : restrictFunctor jV ⋙ pullback ψ ≅ pullback f ⋙ restrictFunctor jU := adj₁.leftAdjointUniq (adj₂.ofNatIsoRight rightIso.symm) let eV := sectionsRestrictFromSpecLinearEquiv G V.2 let eU := sectionsRestrictFromSpecLinearEquiv ((pullback f).obj G) U.2 eU (((k.hom.app G).app ⊤) ((pullbackUnit ψ (G.restrict jV)).app ⊤ (eV.symm s))) = ((pullback f).obj G).presheaf.map (homOfLE hUV).op ((pullbackUnit f G).app V.1 s)",
   "branch": "sheaf-dag",

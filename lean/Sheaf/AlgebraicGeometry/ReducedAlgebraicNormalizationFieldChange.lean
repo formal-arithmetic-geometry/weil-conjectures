@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ReducedNormalization
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.FieldTheory.SeparableExtension
+public import WeilConjectures.FieldTheory.SeparableExtension
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 import Mathlib.RingTheory.Localization.Integral

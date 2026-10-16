@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.LocallyFreeCharpoly
 public import Mathlib.Logic.Equiv.Fin.Basic
 public import Mathlib.Algebra.Module.LinearMap.Prod
-import Sheaf.Algebra.CharpolyLocallyFree
+import WeilConjectures.Algebra.CharpolyLocallyFree
 import Sheaf.Algebra.LocallyFreeCharpolyProdCover
 import Sheaf.Algebra.LocallyFreeCharpolyProdIdentity
 

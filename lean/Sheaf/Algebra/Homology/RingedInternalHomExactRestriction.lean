@@ -170,7 +170,7 @@ theorem ringedInternalHom_tensor_adjunction
     RingCat.{u})).obj R))]
     (P : ObjectProperty (CochainComplex (ringedSiteModules.{u} ((sheafCompose J (forget₂
     CommRingCat.{u} RingCat.{u})).obj R)) ℤ))
-    (hP : ∀ X, P X ↔ X.IsKFlat)
+    (hP : ∀ X, P X ↔ X.IsAcyclicTensorKFlat)
     (T : (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u}
     RingCat.{u})).obj R))) × (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂
     CommRingCat.{u} RingCat.{u})).obj R))) ⥤ (DerivedCategory (ringedSiteModules.{u}

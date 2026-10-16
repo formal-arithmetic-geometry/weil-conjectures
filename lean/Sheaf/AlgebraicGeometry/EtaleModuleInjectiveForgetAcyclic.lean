@@ -11,8 +11,8 @@ import Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
 import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
 import Sheaf.CategoryTheory.InjectiveModulePresheaf
 import Mathlib.Algebra.Homology.ShortComplex.Ab
-import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
-import Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison
+import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
+import WeilConjectures.AlgebraicGeometry.EtaleSiteCechComplexComparison
 
 /-!
 # Underlying abelian acyclicity of injective module-valued étale sheaves

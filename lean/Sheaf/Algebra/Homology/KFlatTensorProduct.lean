@@ -42,12 +42,12 @@ Proof: For any acyclic complex `M`, K-flatness of `K` makes `Tot(M ⊗ K)` acycl
 K-flatness of `L` then makes `Tot(Tot(M ⊗ K) ⊗ L)` acyclic. The canonical associativity
 isomorphism of total tensor complexes identifies this with `Tot(M ⊗ Tot(K ⊗ L))`, including
 the Koszul signs. Hence `Tot(K ⊗ L)` is K-flat. -/
-theorem IsKFlat.mapBifunctor
+theorem IsAcyclicTensorKFlat.mapBifunctor
     (K L : CochainComplex
       (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology (X : Type u))
         (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)) ℤ)
-    (hK : K.IsKFlat) (hL : L.IsKFlat) :
-    (mapBifunctor K L (curriedTensor _)).IsKFlat := by
+    (hK : K.IsAcyclicTensorKFlat) (hL : L.IsAcyclicTensorKFlat) :
+    (mapBifunctor K L (curriedTensor _)).IsAcyclicTensorKFlat := by
   let := SheafOfModules.symmetricCategory X.sheaf
   let := (SheafOfModules.tensorClosed X.sheaf).1.some
   let := (SheafOfModules.tensorClosed X.sheaf).2.1.some

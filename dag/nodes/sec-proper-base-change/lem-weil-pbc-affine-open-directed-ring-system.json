@@ -102,8 +102,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineOpenDirectedRingSystem",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenDirectedRingSystem.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineOpenDirectedRingSystem",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineOpenDirectedRingSystem.lean",
   "declaration": "AlgebraicGeometry.exists_affineOpen_directedRingSystem",
   "statement": "theorem exists_affineOpen_directedRingSystem\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    (W : (D.obj (op i₀)).Opens) (hW : IsAffineOpen W) :\n    ∃ (F : {i : I // i₀ ≤ i} ⥤ CommRingCat.{u})\n      (e0 : W.toScheme ≅ Spec (F.obj ⟨i₀, le_rfl⟩)),\n      (∀ i : {i : I // i₀ ≤ i},\n        ∃ e : (D.map (homOfLE i.property).op ⁻¹ᵁ W).toScheme ≅ Spec (F.obj i),\n          (D.map (homOfLE i.property).op).resLE W _ le_rfl ≫ e0.hom =\n            e.hom ≫ Spec.map (F.map (homOfLE i.property))) ∧\n      ∃ eL : (c.π.app (op i₀) ⁻¹ᵁ W).toScheme ≅ Spec (colimit F),\n        (c.π.app (op i₀)).resLE W _ le_rfl ≫ e0.hom =\n          eL.hom ≫ Spec.map (colimit.ι F ⟨i₀, le_rfl⟩)",
   "branch": "sheaf-dag",

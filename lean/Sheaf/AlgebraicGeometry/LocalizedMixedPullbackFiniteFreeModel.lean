@@ -56,7 +56,7 @@ private theorem tensor_derived_model {X Y : Scheme.{u}} (g : X ⟶ Y)
     [HasDerivedCategory.{wT} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [HasDerivedCategory.{wT} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := Y.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P) :
     Nonempty ((derivedPullback g).obj (DerivedCategory.Q.obj P) ≅
       DerivedCategory.Q.obj
         (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P)) := by

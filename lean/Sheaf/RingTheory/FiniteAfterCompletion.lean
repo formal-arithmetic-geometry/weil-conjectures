@@ -4,7 +4,7 @@ public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Finiteness.Defs
-import Sheaf.Algebra.ChangeIdealCompletion
+import WeilConjectures.Algebra.ChangeIdealCompletion
 import Mathlib.RingTheory.Artinian.Module
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 import Mathlib.RingTheory.AdicCompletion.LocalRing

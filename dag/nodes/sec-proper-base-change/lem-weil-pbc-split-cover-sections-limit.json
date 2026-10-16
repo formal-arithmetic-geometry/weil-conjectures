@@ -122,8 +122,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.SplitCoverSectionsLimit",
-  "file": "lean/Sheaf/Paper/SplitCoverSectionsLimit.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SplitCoverSectionsLimit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SplitCoverSectionsLimit.lean",
   "declaration": "AlgebraicGeometry.splitCoverSectionsLimit",
   "statement": "theorem splitCoverSectionsLimit\n    {X Y : Scheme.{u}} {J : Type w} [Finite J]\n    {Λ : Type (u + 1)} [CommRing Λ]\n    (f : Y ⟶ X) (V : J → Scheme.{u}) (i : ∀ j, V j ⟶ Y)\n    (t : ∀ j, X ⟶ V j)\n    (hcolim : IsColimit (Cofan.mk Y i))\n    (hinv₁ : ∀ j, t j ≫ i j ≫ f = 𝟙 X)\n    (hinv₂ : ∀ j, i j ≫ f ≫ t j = 𝟙 (V j))\n    (hopens : ∀ j, AlgebraicGeometry.IsOpenImmersion (i j))\n    (hclosed : ∀ j, AlgebraicGeometry.IsClosedImmersion (i j))\n    (H : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (W : X.Etale) :\n    letI : ∀ j, IsOpenImmersion (i j) := hopens\n    letI : ∀ j, IsIso (t j) := fun j ↦\n      ⟨⟨i j ≫ f, hinv₁ j, hinv₂ j⟩⟩\n    let s := fun j ↦ t j ≫ i j\n    Nonempty (IsLimit (Fan.mk\n      (H.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W)))\n      (fun j ↦ H.obj.map (MorphismProperty.Over.homMk\n        (A := (MorphismProperty.Over.map ⊤ (inferInstance : Etale (s j))).obj W)\n        (B := (MorphismProperty.Over.pullback @Etale ⊤ f).obj W)\n        (pullback.lift (𝟙 W.left) (W.hom ≫ s j)\n          (by\n            change (𝟙 W.left) ≫ W.hom = (W.hom ≫ s j) ≫ f\n            simp [s, Category.assoc, hinv₁ j]))\n        (by simp)).op)))",
   "branch": "sheaf-dag",

@@ -10,8 +10,8 @@ public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.CategoryTheory.Sites.Whiskering
 
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresRingCore
-import Sheaf.CategoryTheory.SheafRingObjectReconstruction
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingCore
+import WeilConjectures.CategoryTheory.SheafRingObjectReconstruction
 import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 
 /-!

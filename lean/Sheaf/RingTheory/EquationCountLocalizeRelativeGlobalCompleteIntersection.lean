@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.Paper.RelativeGlobalCompleteIntersection
+public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersection
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.MvPolynomial.Rename

@@ -118,8 +118,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.FieldTheory.TriangularFieldModelNormalForm",
-  "file": "lean/Sheaf/FieldTheory/TriangularFieldModelNormalForm.lean",
+  "module": "WeilConjectures.FieldTheory.TriangularFieldModelNormalForm",
+  "file": "lean/WeilConjectures/FieldTheory/TriangularFieldModelNormalForm.lean",
   "declaration": "FieldTheory.triangularFieldModel_normal_form",
   "statement": "theorem triangularFieldModel_normal_form\n    (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]\n    (d : ℕ) (x : Fin d → K) (hx : AlgebraicIndependent k x)\n    (m : ℕ) (b : Fin m → K) (h : MvPolynomial (Fin d) k)\n    (p : (i : Fin m) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))\n    (y : Fin (d + 1 + m) → K) (e : Fin m → ℕ)\n    (hh : h ≠ 0) (hp : ∀ i, (p i).Monic) (he : ∀ i, (p i).natDegree = e i)\n    (hyx : ∀ j : Fin d, y ⟨j.val, by omega⟩ = x j)\n    (hyt : y ⟨d, by omega⟩ = (MvPolynomial.aeval x h)⁻¹)\n    (hyb : ∀ i : Fin m, y ⟨d + 1 + i.val, by omega⟩ = b i)\n    (hzero : ∀ q ∈ triangularFieldModelEquations k d m h p,\n      MvPolynomial.aeval y q = 0)\n    : ∃ coord :\n      (MvPolynomial (Fin (d + 1 + m)) k ⧸\n        Ideal.ofList (triangularFieldModelEquations k d m h p)) →ₗ[k]\n        (((i : Fin m) → Fin (e i)) → IntermediateField.adjoin k (Set.range x)),\n      Function.Injective coord ∧\n      ∀ q : MvPolynomial (Fin (d + 1 + m)) k,\n        MvPolynomial.aeval y q =\n          ∑ a : ((i : Fin m) → Fin (e i)),\n            coord (Ideal.Quotient.mk _ q) a • (∏ i, b i ^ (a i).val)",
   "branch": "sheaf-dag",

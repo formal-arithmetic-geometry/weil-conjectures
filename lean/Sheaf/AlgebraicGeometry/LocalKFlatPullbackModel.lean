@@ -56,7 +56,7 @@ theorem derivedPullback_local_kFlat_model {T X : Scheme.{u}} (f : T ⟶ X)
     (E : schemeDerivedCategory X)
     (K : CochainComplex (SheafOfModules.{u}
       ((moduleRings X.toRingedSpace).over U)) ℤ)
-    (hK : CochainComplex.IsKFlat (R := U.toScheme.sheaf)
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := U.toScheme.sheaf)
       (((Scheme.Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj K))
     (hmodel : Nonempty ((SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅

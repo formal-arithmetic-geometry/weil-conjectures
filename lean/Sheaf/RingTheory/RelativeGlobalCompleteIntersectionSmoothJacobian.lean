@@ -5,14 +5,14 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 import Mathlib.RingTheory.Localization.Ideal
 import Mathlib.RingTheory.Localization.Module
-import Sheaf.LinearAlgebra.Matrix.CauchyBinet
+import WeilConjectures.LinearAlgebra.Matrix.CauchyBinet
 import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionConormalFree
 import Sheaf.RingTheory.SmoothLocalizationConormalSplit
 

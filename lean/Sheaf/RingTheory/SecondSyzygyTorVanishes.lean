@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.LinearAlgebra.Basis.Prod
 import Mathlib.RingTheory.MvPolynomial.Ideal
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Sheaf.Algebra.Category.ModuleCat.TorSymmetry
+import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import Sheaf.Algebra.TorDimensionShifting
 import Sheaf.AlgebraicGeometry.ProjectiveSpace.KoszulResolution
 

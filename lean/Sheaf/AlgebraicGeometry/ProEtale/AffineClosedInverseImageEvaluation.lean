@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.CategoryTheory.InverseMateEquivalence
+import WeilConjectures.CategoryTheory.InverseMateEquivalence
 import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 

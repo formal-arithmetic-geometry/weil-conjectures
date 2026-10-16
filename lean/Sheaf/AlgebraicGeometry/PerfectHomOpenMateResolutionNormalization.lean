@@ -338,6 +338,7 @@ theorem perfectHomOpenComparison_counit_resolution
       (asIso (perfectHomOpenModuleMate s B r))).hom ht hm (DerivedCategory.Q.obj I)
   dsimp only at hh ⊢
   simpa only [perfectHomOpenDerivedComparison, Functor.exactMateComparison,
+    Functor.rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived_eq,
     k, F, K, G, H, P, Q, f, f', b, a, a', ag, ah, ag₀, ah₀,
     eqToIso.hom, eqToIso.inv, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
     NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,

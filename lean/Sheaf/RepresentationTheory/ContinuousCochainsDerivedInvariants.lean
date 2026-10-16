@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
 import WeilConjectures.CategoryTheory.DeltaFunctor
-import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
+import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.RepresentationTheory.CoinducedContinuousAcyclic
 import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding

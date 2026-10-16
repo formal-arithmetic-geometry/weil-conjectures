@@ -5,7 +5,7 @@ Authors: SHEAF group J4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
+public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.RingTheory.PrimeLocalizationEtaleAlgebraModel
 import Sheaf.RingTheory.EtaleResidueTripleUnitRefinement

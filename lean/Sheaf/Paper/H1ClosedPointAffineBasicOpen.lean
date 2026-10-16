@@ -9,7 +9,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Paper.PQFCohomology
 import Sheaf.Paper.H1ClosedPointIdealQuotient
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 /-! # Affine basic neighbourhoods of closed points

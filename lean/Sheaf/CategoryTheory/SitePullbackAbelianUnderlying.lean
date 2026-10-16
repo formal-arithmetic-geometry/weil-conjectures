@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresAbelian
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
 
 /-!
 # Underlying sets of abelian inverse image

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNormalization
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-public import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.AlgebraicGeometry.AbelianReplacementSectionHomotopies
 
 /-! # The standard-source abelian Ext section calculation

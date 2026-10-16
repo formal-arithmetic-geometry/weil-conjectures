@@ -13,6 +13,8 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Global-section continuity for inverse systems of affine schemes -/
 

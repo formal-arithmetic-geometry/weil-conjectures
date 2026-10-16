@@ -90,8 +90,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.ColimitPresieveIndexedPresentation",
-  "file": "lean/Sheaf/CategoryTheory/ColimitPresieveIndexedPresentation.lean",
+  "module": "WeilConjectures.CategoryTheory.ColimitPresieveIndexedPresentation",
+  "file": "lean/WeilConjectures/CategoryTheory/ColimitPresieveIndexedPresentation.lean",
   "declaration": "CategoryTheory.colimit_presieve_indexed_presentation",
   "statement": "theorem colimit_presieve_indexed_presentation\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (j₀ k₀ : J) (T₀ : F.obj j₀) (U₀ : F.obj k₀) (R₀ : Presieve U₀)\n    [Finite R₀.uncurry] {S : V.pt}\n    (hT : (V.ι.app j₀).toFunctor.obj T₀ = S)\n    (hU : (V.ι.app k₀).toFunctor.obj U₀ = S)\n    {τ : Type u} [Finite τ] {X : τ → V.pt} (f : ∀ t, X t ⟶ S)\n    (hR : hU ▸ R₀.map (V.ι.app k₀).toFunctor = Presieve.ofArrows X f) :\n    ∃ (j : J) (e : j₀ ⟶ j) (d : k₀ ⟶ j)\n      (h : (F.map d).toFunctor.obj U₀ = (F.map e).toFunctor.obj T₀)\n      (A : τ → F.obj j) (a : ∀ t, A t ⟶ (F.map e).toFunctor.obj T₀),\n      Presieve.ofArrows A a = h ▸ R₀.map (F.map d).toFunctor ∧\n      ∀ t, Arrow.mk ((V.ι.app j).toFunctor.map (a t)) = Arrow.mk (f t)",
   "branch": "sheaf-dag",

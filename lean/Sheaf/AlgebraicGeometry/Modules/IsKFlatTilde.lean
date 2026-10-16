@@ -99,7 +99,7 @@ implies that the associated sheaf complex is K-flat. -/
 theorem isKFlat_tilde (A : Type u) [CommRing A] (K : CochainComplex (ModuleCat.{u} A) ℤ)
     (hK : ∀ F : CochainComplex (ModuleCat.{u} A) ℤ,
       F.Acyclic → (CochainComplex.mapBifunctor F K (curriedTensor (ModuleCat A))).Acyclic) :
-    CochainComplex.IsKFlat (R := (Spec (.of A)).sheaf)
+    CochainComplex.IsAcyclicTensorKFlat (R := (Spec (.of A)).sheaf)
       ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (Spec (.of A)).Modules
         _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ => tilde.map_zero⟩
         (ComplexShape.up ℤ)).obj K) :=

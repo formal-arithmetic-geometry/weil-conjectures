@@ -313,7 +313,7 @@ theorem pointInverseEvaluation_isKFlat
     [e.inverse.Additive]
     (K : CochainComplex (ModuleCat.{u} ((moduleRings Y).obj.obj (op ⊤))) ℤ)
     (hK : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat K) :
-    CochainComplex.IsKFlat (R := Y.sheaf)
+    CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf)
       ((e.inverse.mapHomologicalComplex (.up ℤ)).obj K) := by
   obtain ⟨he⟩ := he
   have : e.functor.Additive := Functor.additive_of_iso he.symm

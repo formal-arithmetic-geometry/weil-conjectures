@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 import Mathlib.CategoryTheory.Generator.Basic
 import Sheaf.AlgebraicGeometry.ConstructibleSheafGeneration

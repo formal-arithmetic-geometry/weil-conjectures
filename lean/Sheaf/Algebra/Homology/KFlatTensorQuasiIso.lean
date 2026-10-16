@@ -19,7 +19,7 @@ Source: Stacks Project, Lemma 15.60.12, Tag 064L
 (blueprint: lem-pc-kflat-tensor-quasi-iso).
 
 The ring is regarded as a constant sheaf on the one-point site with the bottom topology.
-K-flatness is the landed `CochainComplex.IsKFlat` for sheaves of modules on this site.
+K-flatness is the landed `CochainComplex.IsAcyclicTensorKFlat` for sheaves of modules on this site.
 -/
 
 @[expose] public section
@@ -59,7 +59,7 @@ private theorem kFlat_tensor_right_of_quasiIso
     {E E' K : CochainComplex
       (SheafOfModules.{u}
         ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (onePointRingSheaf R))) ℤ}
-    (α : E ⟶ E') (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (α : E ⟶ E') (hα : QuasiIso α) (hK : K.IsAcyclicTensorKFlat) :
     (letI := SheafOfModules.monoidalCategory (onePointRingSheaf R)
      QuasiIso (HomologicalComplex.mapBifunctorMap α (𝟙 K) (curriedTensor _) (.up ℤ))) := by
   let := SheafOfModules.monoidalCategory (onePointRingSheaf R)
@@ -74,7 +74,7 @@ private theorem kFlat_tensor_left_of_quasiIso
     {K L L' : CochainComplex
       (SheafOfModules.{u}
         ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (onePointRingSheaf R))) ℤ}
-    (α : L ⟶ L') (hα : QuasiIso α) (hK : K.IsKFlat) :
+    (α : L ⟶ L') (hα : QuasiIso α) (hK : K.IsAcyclicTensorKFlat) :
     (letI := SheafOfModules.monoidalCategory (onePointRingSheaf R)
      QuasiIso (HomologicalComplex.mapBifunctorMap (𝟙 K) α (curriedTensor _) (.up ℤ))) := by
   let := SheafOfModules.monoidalCategory (onePointRingSheaf R)
@@ -148,8 +148,8 @@ theorem kFlat_tensor_quasiIso
         ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (onePointRingSheaf R))) ℤ}
     (α : E ⟶ E')
     (hα : QuasiIso α)
-    (hE : E.IsKFlat)
-    (hE' : E'.IsKFlat) :
+    (hE : E.IsAcyclicTensorKFlat)
+    (hE' : E'.IsAcyclicTensorKFlat) :
     (letI := SheafOfModules.monoidalCategory (onePointRingSheaf R)
      QuasiIso (HomologicalComplex.mapBifunctorMap α (𝟙 N) (curriedTensor _) (.up ℤ))) := by
   let := SheafOfModules.monoidalCategory (onePointRingSheaf R)

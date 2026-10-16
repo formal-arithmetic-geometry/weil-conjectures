@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
 import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionBijective
 import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
+import WeilConjectures.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
 import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroExact
 /-! # Ext transport from an open subscheme to its ambient scheme
 

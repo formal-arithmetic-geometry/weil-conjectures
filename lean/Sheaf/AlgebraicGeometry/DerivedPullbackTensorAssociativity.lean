@@ -168,8 +168,8 @@ private theorem pullback_preservesKFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
       SheafOfModules.{uModel} (moduleRings T.toRingedSpace)) [F.Additive]
     (hFE : F = Scheme.Modules.tensorPullback g)
     (K : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
-    (hK : CochainComplex.IsKFlat (R := X.sheaf) K) :
-    CochainComplex.IsKFlat (R := T.sheaf)
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) K) :
+    CochainComplex.IsAcyclicTensorKFlat (R := T.sheaf)
       ((F.mapHomologicalComplex (.up ℤ)).obj K) := by
   subst F
   convert CochainComplex.isKFlat_pullback g.base T.sheaf X.sheaf ⟨g.c⟩ K hK using 1
@@ -192,7 +192,7 @@ private theorem pullback_counit_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)
         (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)))
     (K : CochainComplex
       (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
-    (hK : CochainComplex.IsKFlat (R := X.sheaf) K) :
+    (hK : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) K) :
     IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj K)) := by
   have hFE : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
@@ -221,7 +221,7 @@ private theorem localization_tensor_isIso (S : Scheme.{uModel})
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings S.toRingedSpace))]
     (K L : CochainComplex
       (SheafOfModules.{uModel} (moduleRings S.toRingedSpace)) ℤ)
-    (hL : CochainComplex.IsKFlat (R := S.sheaf) L) :
+    (hL : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) L) :
     IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q K L) := by
   have : CategoryTheory.Limits.HasColimitsOfSize.{0, 0}
       (SheafOfModules.{uModel} (moduleRings S.toRingedSpace)) :=
@@ -312,8 +312,8 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
     (μ : curriedTensorPre (derivedPullback g) ≅ curriedTensorPost (derivedPullback g))
     (hμ : ∀ P N : CochainComplex
             (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,
-          CochainComplex.IsKFlat (R := X.sheaf) P →
-          CochainComplex.IsKFlat (R := X.sheaf) N →
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P →
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N →
           ((μ.app (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj N)).hom ≫
               (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
               ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
@@ -326,9 +326,9 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N))
     (P N R : CochainComplex
       (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
-    (hN : CochainComplex.IsKFlat (R := X.sheaf) N)
-    (hR : CochainComplex.IsKFlat (R := X.sheaf) R)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P)
+    (hN : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N)
+    (hR : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) R)
     : let A := DerivedCategory.Q.obj P;
       let B := DerivedCategory.Q.obj N;
       let C := DerivedCategory.Q.obj R;
@@ -371,8 +371,8 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
       (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ} (a : K ⟶ L) :
       (derivedPullback g).map (QX.map a) ≫ e L = e K ≫ QT.map (Fc.map a) := by
     exact ε.naturality ((HomotopyCategory.quotient _ (.up ℤ)).map a)
-  have hδ (K L) (hK : CochainComplex.IsKFlat (R := X.sheaf) K)
-      (hL : CochainComplex.IsKFlat (R := X.sheaf) L) :
+  have hδ (K L) (hK : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) K)
+      (hL : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) L) :
       (μ.inv.app (QX.obj K)).app (QX.obj L) ≫ (e K ⊗ₘ e L) ≫
           Functor.LaxMonoidal.μ QT (Fc.obj K) (Fc.obj L) =
         (derivedPullback g).map (Functor.LaxMonoidal.μ QX K L) ≫ e (K ⊗ L) ≫
@@ -392,9 +392,9 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
     localization_tensor_isIso T (Fc.obj P ⊗ Fc.obj N) (Fc.obj R) (hFp R hR)
   apply tensor_associativity_of_inverse (derivedPullback g) μ
   exact oplax_associativity_on_class (Q₁ := QX) (Q₂ := QT) (F := Fc) μ.inv e (fun {_ _} a ↦ he a)
-    (CochainComplex.IsKFlat (R := X.sheaf)) hδ P N R hP hN hR
-    (CochainComplex.IsKFlat.mapBifunctor P N hP hN)
-    (CochainComplex.IsKFlat.mapBifunctor N R hN hR)
+    (CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf)) hδ P N R hP hN hR
+    (CochainComplex.IsAcyclicTensorKFlat.mapBifunctor P N hP hN)
+    (CochainComplex.IsAcyclicTensorKFlat.mapBifunctor N R hN hR)
 
 
 /-- The extended natural tensor comparison satisfies the associativity law.
@@ -448,8 +448,8 @@ theorem derivedPullback_tensor_associativity {T X : Scheme.{uModel}} (g : T ⟶ 
     (μ : curriedTensorPre (derivedPullback g) ≅ curriedTensorPost (derivedPullback g))
     (hμ : ∀ P N : CochainComplex
             (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,
-          CochainComplex.IsKFlat (R := X.sheaf) P →
-          CochainComplex.IsKFlat (R := X.sheaf) N →
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P →
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N →
           ((μ.app (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj N)).hom ≫
               (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
               ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj

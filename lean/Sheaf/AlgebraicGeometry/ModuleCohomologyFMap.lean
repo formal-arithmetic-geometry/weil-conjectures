@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import Mathlib.Algebra.Homology.Factorizations.CM5a
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 import Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-! # Maps on module cohomology induced by scheme maps
 
@@ -214,8 +214,8 @@ on homology. The unit, restriction unit, and identity specialize the same constr
 theorem moduleCohomologyFMapData_nonempty {X Y : Scheme.{u}} (h : X ⟶ Y)
     (G : SheafOfModules.{u} Y.ringCatSheaf) (F : SheafOfModules.{u} X.ringCatSheaf)
     (φ : G ⟶ (pushforward h).obj F) : Nonempty (ModuleCohomologyFMapData h G F φ) := by
-  have : EnoughInjectives X.Modules := enoughInjectives X
-  have : EnoughInjectives Y.Modules := enoughInjectives Y
+  have : EnoughInjectives X.Modules := enoughInjectives (X := X)
+  have : EnoughInjectives Y.Modules := enoughInjectives (X := Y)
   let I := injectiveResolution F
   let J := injectiveResolution G
   let P := pushforward h

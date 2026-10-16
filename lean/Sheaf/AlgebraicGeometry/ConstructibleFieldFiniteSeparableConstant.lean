@@ -5,16 +5,16 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-import Sheaf.AlgebraicGeometry.SpecFieldPointResidueField
+import WeilConjectures.AlgebraicGeometry.SpecFieldPointResidueField
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstantDatum
-import Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstantCore
+import WeilConjectures.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstantDatum
+import WeilConjectures.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstantCore
 
 /-!
 # Constructible sheaves over a field become constant after finite separable extension

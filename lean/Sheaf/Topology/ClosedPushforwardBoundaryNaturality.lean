@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Topology.Sheaves.Functors
 public import Sheaf.Topology.AbelianCohomologyDeltaFunctor
 import WeilConjectures.CategoryTheory.DeltaFunctor
-import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
+import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.Topology.ClosedImmersionPushforwardCohomology
 import Sheaf.Topology.ClosedImmersionPushforwardExact

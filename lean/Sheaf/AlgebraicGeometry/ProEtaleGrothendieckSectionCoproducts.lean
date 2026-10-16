@@ -7,7 +7,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.ProEtaleQcqsSiteLimits
 import Sheaf.CategoryTheory.FiniteHypercoverColimits
 import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv

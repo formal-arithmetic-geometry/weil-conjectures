@@ -135,8 +135,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.SplitIdentityFromFunctionals",
-  "file": "lean/Sheaf/Algebra/Homology/SplitIdentityFromFunctionals.lean",
+  "module": "WeilConjectures.Algebra.Homology.SplitIdentityFromFunctionals",
+  "file": "lean/WeilConjectures/Algebra/Homology/SplitIdentityFromFunctionals.lean",
   "declaration": "ChainComplex.exists_splitting_of_split_functionals",
   "statement": "theorem exists_splitting_of_split_functionals\n    {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℤ)\n    (i : ℤ) (α : C.X i →ₗ[R] R) (β : C.X (i - 1) →ₗ[R] R)\n    (z : C.X i) (w : C.X (i - 1))\n    (hz : α z = 1) (hw : β w = 1)\n    (hd : ∀ x, β ((C.d i (i - 1)).hom x) = α x)\n    (hdz : (C.d i (i - 1)).hom z = w)\n    (hin : ∀ x, α ((C.d (i + 1) i).hom x) = 0)\n    (hout : (C.d (i - 1) (i - 2)).hom w = 0) :\n    let S : ∀ j : ℤ, Submodule R (C.X j) := fun j ↦\n      if h : j = i then h ▸ LinearMap.ker α\n      else if h : j = i - 1 then h ▸ LinearMap.ker β else ⊤\n    ∃ (C' T : ChainComplex (ModuleCat.{max u v} R) ℤ)\n      (g : ∀ j, C'.X j ≃ₗ[R] S j),\n      (∀ j : ℤ, j ≠ i → j ≠ i - 1 → Subsingleton (T.X j)) ∧\n      ∃ (e : T.X i ≃ₗ[R] R) (f : T.X (i - 1) ≃ₗ[R] R),\n        (∀ t : T.X i, f ((T.d i (i - 1)).hom t) = e t) ∧\n        let M : ℤ → Bool → ModuleCat.{max u v} R :=\n          fun j s ↦ if s then T.X j else C'.X j\n        ∃ ψ : ∀ j : ℤ, (⨁ s : Bool, M j s) ≃ₗ[R] C.X j,\n          ∀ (j : ℤ) (x : C'.X j) (t : T.X j),\n            (C.d j (j - 1)).hom\n                (ψ j (DirectSum.lof R Bool (fun s ↦ M j s) false x +\n                  DirectSum.lof R Bool (fun s ↦ M j s) true t)) =\n              ψ (j - 1)\n                (DirectSum.lof R Bool (fun s ↦ M (j - 1) s) false\n                    ((C'.d j (j - 1)).hom x) +\n                  DirectSum.lof R Bool (fun s ↦ M (j - 1) s) true\n                    ((T.d j (j - 1)).hom t))",
   "branch": "sheaf-dag",

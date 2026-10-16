@@ -4,9 +4,9 @@ public import WeilConjectures.Algebra.Homology.ZigzagModule
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Sheaf.Algebra.Homology.ZigzagModuleFunctorial
+import WeilConjectures.Algebra.Homology.ZigzagModuleFunctorial
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Sheaf.Algebra.Homology.ZigzagToRowCokernel
+import WeilConjectures.Algebra.Homology.ZigzagToRowCokernel
 
 /-! # Removing the zeroth component of a row boundary
 

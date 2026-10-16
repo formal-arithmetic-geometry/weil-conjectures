@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.Polynomial.ScaleRoots
 import Sheaf.RingTheory.FilteredColimitIsDomain
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 
 /-!
 # Integral closedness of filtered colimits of normal domains

@@ -9,7 +9,7 @@ public import Sheaf.Paper.PQFCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import Sheaf.AlgebraicGeometry.ModuleCechVanishingCriterion
-import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveCechVanishing
+import WeilConjectures.AlgebraicGeometry.ModulePushforwardInjectiveCechVanishing
 import Sheaf.AlgebraicGeometry.ModuleSectionsAcyclicOfCohomologyVanishing
 
 /-!

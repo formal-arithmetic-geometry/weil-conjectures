@@ -125,7 +125,7 @@ theorem strictPerfect_relativeTensor_model
       ((sheafCompose ((Opens.grothendieckTopology X).over U)
         (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))) ℤ),
       (∀ n : ℤ, n < a + c ∨ b + d < n → IsZero (T.X n)) ∧
-      CochainComplex.IsKFlat (R := R.over U) T ∧
+      CochainComplex.IsAcyclicTensorKFlat (R := R.over U) T ∧
       ∃ (s : H ⟶ ((SheafOfModules.overFunctor.{u} A U).mapHomologicalComplex
           (ComplexShape.up ℤ)).obj
             (((SheafOfModules.restrictScalars
@@ -138,7 +138,7 @@ theorem strictPerfect_relativeTensor_model
   have hTb : ∀ n : ℤ, n < a + c ∨ b + d < n → IsZero (T.X n) :=
     relativeTensorComplex_bound f U L G a b c d hLb hGb
   have hTf := strictPerfect_relativeTensor_terms_flat f U L G hL hGflat
-  have hTk : CochainComplex.IsKFlat
+  have hTk : CochainComplex.IsAcyclicTensorKFlat
       (R := (TopCat.Sheaf.inverseImageRing f.base S.sheaf).over U) T :=
     CochainComplex.isKFlat_of_boundedAbove_flat T
       ⟨b + d, fun n hn ↦ hTb n (Or.inr hn)⟩ hTf

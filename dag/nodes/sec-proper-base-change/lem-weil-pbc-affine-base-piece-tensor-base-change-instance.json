@@ -134,8 +134,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineBasePieceTensorBaseChangeInstance",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineBasePieceTensorBaseChangeInstance.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineBasePieceTensorBaseChangeInstance",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineBasePieceTensorBaseChangeInstance.lean",
   "declaration": "AlgebraicGeometry.affine_base_piece_tensor_base_change_instance",
   "statement": "theorem affine_base_piece_tensor_base_change_instance\n    {S T : Scheme.{u}} (d : T ⟶ S)\n    (X₀ Y₀ : Over S) (f₀ : X₀ ⟶ Y₀)\n    (V : Y₀.left.Opens) (W : S.Opens)\n    (R B C : CommRingCat.{u}) (aB : R →+* B) (aC : R →+* C)\n    (e0 : (d ⁻¹ᵁ W).toScheme ≅ Spec R)\n    (q : ((pullback.fst Y₀.hom d) ⁻¹ᵁ V).toScheme ⟶ (d ⁻¹ᵁ W).toScheme)\n    (hq : q ≫ (d ⁻¹ᵁ W).ι =\n      ((pullback.fst Y₀.hom d) ⁻¹ᵁ V).ι ≫ pullback.snd Y₀.hom d)\n    (eB : ((pullback.fst Y₀.hom d) ⁻¹ᵁ V).toScheme ≅ Spec B)\n    (eC : ((((Over.pullback d).map f₀).left) ⁻¹ᵁ\n      ((pullback.fst Y₀.hom d) ⁻¹ᵁ V)).toScheme ≅ Spec C)\n    : letI : Algebra R B := aB.toAlgebra\n      letI : Algebra R C := aC.toAlgebra\n      ∀ (φ : B →ₐ[R] C),\n        eB.hom ≫ Spec.map (CommRingCat.ofHom aB) = q ≫ e0.hom →\n        eC.hom ≫ Spec.map (CommRingCat.ofHom φ.toRingHom) =\n          ((((Over.pullback d).map f₀).left) ∣_\n            ((pullback.fst Y₀.hom d) ⁻¹ᵁ V)) ≫ eB.hom →\n        ∀ (L : Scheme.{u}) (t : L ⟶ T) (A : CommRingCat.{u})\n          (aA : Algebra R A) (e : (t ⁻¹ᵁ (d ⁻¹ᵁ W)).toScheme ≅ Spec A),\n          t.resLE (d ⁻¹ᵁ W) _ le_rfl ≫ e0.hom =\n            e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R A)) →\n          Nonempty\n            (Arrow.mk ((((Over.pullback (t ≫ d)).map f₀).left) ∣_\n              ((pullback.fst Y₀.hom (t ≫ d)) ⁻¹ᵁ V)) ≅\n              Arrow.mk (Spec.map (CommRingCat.ofHom\n                (Algebra.TensorProduct.map (AlgHom.id R A) φ).toRingHom)))",
   "branch": "sheaf-dag",

@@ -124,7 +124,7 @@ theorem derivedPullback_tensor_comparison_exists {T X : Scheme.{uModel}} (g : T 
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map b) (curriedTensor _)
                 (ComplexShape.up ℤ))
     (hiso : ∀ P N : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,
-          CochainComplex.IsKFlat (R := X.sheaf) P → CochainComplex.IsKFlat (R := X.sheaf) N →
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P → CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N →
             IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
                 (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
               DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
@@ -133,8 +133,8 @@ theorem derivedPullback_tensor_comparison_exists {T X : Scheme.{uModel}} (g : T 
         curriedTensorPost (derivedPullback g),
         ∀ P N : CochainComplex
             (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,
-          CochainComplex.IsKFlat (R := X.sheaf) P →
-          CochainComplex.IsKFlat (R := X.sheaf) N →
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P →
+          CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) N →
           ((μ.app (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj N)).hom ≫
               (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
               ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj

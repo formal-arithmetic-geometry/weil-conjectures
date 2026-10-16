@@ -46,7 +46,7 @@ private theorem exists_kFlat_model (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X) :
     ∃ P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,
-      CochainComplex.IsKFlat (R := X.sheaf) P ∧ Nonempty (DerivedCategory.Q.obj P ≅ E) := by
+      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P ∧ Nonempty (DerivedCategory.Q.obj P ≅ E) := by
   let M := DerivedCategory.Q.objPreimage E
   obtain ⟨P, s, hP, _, hs, _⟩ :=
     CochainComplex.exists_isKFlatResolution (R := X.sheaf) M
@@ -57,7 +57,7 @@ private theorem exists_kFlat_model (X : Scheme.{u})
 private theorem tensor_model_iso (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := X.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P) :
     Nonempty (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N ≅
       DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N (curriedTensor _))) := by
   obtain ⟨e⟩ := kFlat_derivedTensor_comparison_natIso X
@@ -92,7 +92,7 @@ private theorem open_pullback_model_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    (hP : CochainComplex.IsKFlat (R := Y.sheaf) P) :
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P) :
     Nonempty ((derivedPullback f).obj (DerivedCategory.Q.obj P) ≅ DerivedCategory.Q.obj
       (((Scheme.Modules.restrictFunctor f).mapHomologicalComplex (.up ℤ)).obj P)) := by
   classical

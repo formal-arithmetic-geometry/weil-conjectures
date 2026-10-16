@@ -75,7 +75,7 @@ private theorem tensorDerivedCounit {X Y : Scheme.{u}} (f : X ⟶ Y)
         (HomotopyCategory.quasiIso
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)) ∧
       ∀ P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
-        CochainComplex.IsKFlat (R := Y.sheaf) P →
+        CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) P →
           IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
   have d := Classical.choose_spec (exists_derivedPullback f)
   obtain ⟨E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
@@ -116,12 +116,12 @@ private theorem pullbackCompIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (derivedPullback g ⋙ derivedPullback f) β
   have hflat (P : CochainComplex
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)
-      (hP : CochainComplex.IsKFlat (R := Z.sheaf) P) :
+      (hP : CochainComplex.IsAcyclicTensorKFlat (R := Z.sheaf) P) :
       IsIso (τ.app (DerivedCategory.Qh.{w}.obj
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
     have hg := hKg P hP
     have hfg := hKc P hP
-    have hPg : CochainComplex.IsKFlat (R := Y.sheaf)
+    have hPg : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf)
         (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P) := by
       exact CochainComplex.isKFlat_pullback g.base Y.sheaf Z.sheaf ⟨g.c⟩ P hP
     have hf := hKf _ hPg

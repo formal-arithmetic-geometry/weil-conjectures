@@ -5,21 +5,21 @@ Authors: SHEAF group NW
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Data.List.TFAE
 import WeilConjectures.ConstructibleSheaf.Refinement
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import Sheaf.AlgebraicGeometry.EtaleStratificationLocalGluingCore
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
 import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Adjunction.Basic
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
 import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 

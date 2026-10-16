@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.RingTheory.RingHom.FiniteType
 public import Mathlib.RingTheory.Length
 public import Mathlib.RingTheory.LocalRing.Basic
-import Sheaf.AlgebraicGeometry.SmoothAtPrimeArtinianLiftingForward
+import WeilConjectures.AlgebraicGeometry.SmoothAtPrimeArtinianLiftingForward
 import Sheaf.AlgebraicGeometry.SmoothAtPrimeArtinianLiftingReverse
 
 /-!

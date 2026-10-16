@@ -5,10 +5,10 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.RingTheory.CohenRing
+public import WeilConjectures.RingTheory.CohenRing
 import Mathlib.NumberTheory.Padics.RingHoms
 import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Sheaf.RingTheory.CohenCompletionDVR
+import WeilConjectures.RingTheory.CohenCompletionDVR
 import Sheaf.RingTheory.FlatLocalExtensionGivenResidueField
 
 /-!

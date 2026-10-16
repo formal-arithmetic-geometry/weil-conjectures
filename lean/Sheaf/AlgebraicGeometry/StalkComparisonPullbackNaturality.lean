@@ -83,7 +83,7 @@ Tag 06YB (K-flat stalks), and Tag 06Y6 (derived tensor functoriality).
 (blueprint: lem-pc-stalk-comparison-pullback-naturality). -/
 theorem comparisonIntoPullback_naturality (z : X')
     (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) (hQ : Q.IsKFlat)
+    (hP : P.IsAcyclicTensorKFlat) (hQ : Q.IsAcyclicTensorKFlat)
     (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
     (hcQ : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))
     (a : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) (i : ℤ) :

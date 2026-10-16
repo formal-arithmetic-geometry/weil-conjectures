@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProjPolynomialTwistChart
+public import WeilConjectures.AlgebraicGeometry.ProjPolynomialTwistChart
 public import Sheaf.Paper.NonvanishingSectionTrivializes
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.TensorPullback

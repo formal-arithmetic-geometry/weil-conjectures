@@ -8,8 +8,8 @@ module
 public import Mathlib.RingTheory.Extension.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Sheaf.Algebra.TwoTermHomotopyEquivalenceDirectSum
-import Sheaf.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
+import WeilConjectures.Algebra.TwoTermHomotopyEquivalenceDirectSum
+import WeilConjectures.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
 import Mathlib.RingTheory.Localization.BaseChange
 
 /-!

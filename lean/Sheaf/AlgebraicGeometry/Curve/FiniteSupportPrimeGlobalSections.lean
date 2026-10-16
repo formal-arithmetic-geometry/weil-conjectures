@@ -6,9 +6,9 @@ Authors: SHEAF group M1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
-import Sheaf.AlgebraicGeometry.Curve.DenseIrreducibleOpens
-import Sheaf.Paper.ZeroDimensionalCohomology
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.SixFunctors.Etale.Gabber

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.Flat.CategoryTheory
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Sheaf.Algebra.FlatTorIdealCriterion
+import WeilConjectures.Algebra.FlatTorIdealCriterion
 import Sheaf.CategoryTheory.OpcyclesTorSurjection
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 

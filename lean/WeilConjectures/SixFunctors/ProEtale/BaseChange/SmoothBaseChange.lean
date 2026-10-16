@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import Sheaf.SixFunctors.ProEtale.BaseChange.SmoothBaseChangeComparisons
 import Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonCounit

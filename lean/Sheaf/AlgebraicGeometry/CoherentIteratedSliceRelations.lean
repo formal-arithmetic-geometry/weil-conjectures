@@ -6,7 +6,7 @@ Authors: SHEAF groups V4, N2
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-import all Sheaf.AlgebraicGeometry.CoherentKernelConditionRestriction
+import all WeilConjectures.AlgebraicGeometry.CoherentKernelConditionRestriction
 
 /-! # Relations of a coherent sheaf on an iterated open slice
 

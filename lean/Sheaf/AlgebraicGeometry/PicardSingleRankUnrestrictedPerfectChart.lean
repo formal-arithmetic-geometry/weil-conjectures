@@ -102,7 +102,7 @@ private theorem zero_tensor_vanishes (X : Scheme.{u})
     (M : X.Modules) (i : ℤ) :
     schemeDerivedTensorCohomologyVanishes X (0 : schemeDerivedCategory X) M i := by
   let D : CochainComplex X.Modules ℤ := HomologicalComplex.zero
-  have hD : CochainComplex.IsKFlat (R := X.sheaf) D := by
+  have hD : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) D := by
     apply CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace X.toRingedSpace D
     · exact ⟨0, fun _ _ ↦ isZero_zero _⟩
     · intro n
@@ -220,7 +220,7 @@ theorem exists_picardSingleRankUnrestrictedPerfectChart
           (Modules.isFlatOver_of_isFiniteLocallyFree f F) V hV
       have : D.IsStrictlyGE 0 := hDge
       have : D.IsStrictlyLE (d : ℤ) := hDle
-      have hD : CochainComplex.IsKFlat (R := V.toScheme.sheaf) D :=
+      have hD : CochainComplex.IsAcyclicTensorKFlat (R := V.toScheme.sheaf) D :=
         CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace V.toScheme.toRingedSpace D
           ⟨d, fun i hi ↦ D.isZero_of_isStrictlyLE d i hi⟩
           (fun i ↦ isFlat_of_affineFlatOver_identity (D.X i) (hDflat i))

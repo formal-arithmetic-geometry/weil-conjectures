@@ -19,7 +19,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 import Sheaf.CategoryTheory.TruncationDescends
-import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver

@@ -13,8 +13,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Homology.QuasiIso
 import Sheaf.RingTheory.WeaklyEtaleTorBoundedResolution
 import Sheaf.Algebra.Homology.FlatResolutionTorComparison
-import Sheaf.Algebra.Homology.DoubleComplexCokernelHomologyIso
-import Sheaf.Algebra.Category.ModuleCat.TorSymmetry
+import WeilConjectures.Algebra.Homology.DoubleComplexCokernelHomologyIso
+import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 
 /-! # Tor and flat resolution bounds for weakly etale algebras
 

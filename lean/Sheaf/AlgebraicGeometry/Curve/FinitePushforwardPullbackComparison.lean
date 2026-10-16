@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
-import Sheaf.AlgebraicGeometry.EtaleEdgeMapBaseChange
+import WeilConjectures.AlgebraicGeometry.EtaleEdgeMapBaseChange
 import WeilConjectures.SixFunctors.Finite.BaseChange
 import Mathlib.CategoryTheory.Whiskering
 

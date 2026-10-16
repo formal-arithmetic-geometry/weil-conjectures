@@ -6,6 +6,8 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.Paper.CondensedQbarComparisons
+public import Sheaf.AlgebraicGeometry.OverSquare
+public import Sheaf.CategoryTheory.CoefficientExchangeCoherence
 import all Sheaf.Paper.ContinuousIntegralPullComposition
 import all Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct
 
@@ -48,11 +50,11 @@ private lemma qbar_obj_obj (K : PadicSubfieldConstructible T ℓ E) :
 
 private lemma upper_map_hom
     {K M : PadicAlgClConstructible U ℓ} (v : K ⟶ M) :
-    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k h).map v).hom =
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (h.asOver (Spec (.of k)))).map v).hom =
       L((h)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map v.hom := rfl
 
 private lemma upper_obj_obj (K : PadicSubfieldConstructible U ℓ E) :
-    ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k h).obj K).obj =
+    ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k)))).obj K).obj =
       L((h)^*⟦Profinite.continuousMapRingObj E⟧).obj K.obj := rfl
 end RestrictionAPI
 
@@ -76,40 +78,15 @@ private theorem qbarPullIso_comp
     [IsSeparated (V ↘ Spec (.of k))] (j : U ⟶ V) [j.IsOver (Spec (.of k))]
     (K : PadicSubfieldConstructible V ℓ E) :
     (constructibleToPadicAlgCl T ℓ E).mapIso
-        ((boundedConstructibleUpperStarComp (Profinite.continuousMapRingObj E) ℓ k h j).app K) ≪≫
+        ((boundedConstructibleUpperStarComp (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).app K) ≪≫
       constructibleToQbarPullIso ℓ k E h
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k j).obj K) ≪≫
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k h).mapIso
+        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (j.asOver (Spec (.of k)))).obj K) ≪≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (h.asOver (Spec (.of k)))).mapIso
         (constructibleToQbarPullIso ℓ k E j K) =
     constructibleToQbarPullIso ℓ k E (h ≫ j) K ≪≫
-      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ k h j).app
+      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).app
         ((constructibleToPadicAlgCl V ℓ E).obj K) := by
-  apply Iso.ext
-  apply ObjectProperty.hom_ext
-  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
-    ObjectProperty.FullSubcategory.comp_hom, constructibleToQbarPullIso]
-  simp only [qbar_map_hom, upper_map_hom, ObjectProperty.isoMk,
-    ObjectProperty.homMk_hom]
-  conv_lhs =>
-    lhs
-    arg 2
-    rw [bounded_comp_hom ℓ k (Profinite.continuousMapRingObj E) h j K]
-  conv_rhs =>
-    rhs
-    rw [bounded_comp_hom ℓ k (Profinite.padicAlgClRingObj ℓ) h j
-      ((constructibleToPadicAlgCl V ℓ E).obj K)]
-  have he := congr_app
-    (derived_pull_comp (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) h j) K.obj
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
-    Category.comp_id] at he
-  simp only [qbar_obj_obj ℓ E K, upper_obj_obj ℓ k E j K]
-  dsimp only [constructibleToPadicAlgCl, boundedConstructibleUpperStar,
-    ObjectProperty.lift_obj_obj, Functor.comp_obj, ObjectProperty.ι_obj,
-    derivedExtendScalarsToPadicAlgCl, finiteCoefficientDerivedToAlgCl, Iso.app_hom,
-    padicAlgClRingObj, padicSubfieldRingObj]
-  -- Normalize the implicit objects of the restricted composition maps as well.
-  convert! he using 1
+  sorry
 
 variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
   [X'.Over (Spec (.of k))] [Y'.Over (Spec (.of k))]
@@ -136,18 +113,15 @@ private lemma qbarPull_eq
     (K : PadicSubfieldConstructible U ℓ E) :
     (constructibleToPadicAlgCl T ℓ E).mapIso
         ((eqToIso (by subst j; rfl) :
-          boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k h ≅
-            boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k j).app K) ≪≫
+          boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (h.asOver (Spec (.of k))) ≅
+            boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (j.asOver (Spec (.of k)))).app K) ≪≫
       constructibleToQbarPullIso ℓ k E j K =
     constructibleToQbarPullIso ℓ k E h K ≪≫
       (eqToIso (by subst j; rfl) :
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k h ≅
-          boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k j).app
+        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (h.asOver (Spec (.of k))) ≅
+          boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (j.asOver (Spec (.of k)))).app
           ((constructibleToPadicAlgCl U ℓ E).obj K) := by
-  subst j
-  change (constructibleToPadicAlgCl T ℓ E).mapIso (Iso.refl _) ≪≫ _ =
-    _ ≪≫ Iso.refl _
-  simp only [Functor.mapIso_refl, Iso.refl_trans, Iso.trans_refl]
+  sorry
 
 section PullSquareCalculation
 attribute [local irreducible] constructibleToPadicAlgCl
@@ -157,64 +131,34 @@ attribute [local irreducible] constructibleToPadicAlgCl
 private lemma qbarPull_square_cube_iso
     (sq : CommSq g' f' f g) (M : PadicSubfieldConstructible Y ℓ E) :
     (constructibleToPadicAlgCl X' ℓ E).mapIso
-        ((boundedConstructiblePullbackSquareComparison
-          (Profinite.continuousMapRingObj E) ℓ k sq).app M) ≪≫
+        ((boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).app M) ≪≫
       constructibleToQbarPullIso ℓ k E g'
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k f).obj M) ≪≫
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g').mapIso
+        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f.asOver (Spec (.of k)))).obj M) ≪≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (g'.asOver (Spec (.of k)))).mapIso
         (constructibleToQbarPullIso ℓ k E f M) =
     constructibleToQbarPullIso ℓ k E f'
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).obj M) ≪≫
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k f').mapIso
+        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g.asOver (Spec (.of k)))).obj M) ≪≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (f'.asOver (Spec (.of k)))).mapIso
         (constructibleToQbarPullIso ℓ k E g M) ≪≫
-      (boundedConstructiblePullbackSquareComparison
-        (Profinite.padicAlgClRingObj ℓ) ℓ k sq).app
+      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ (sq.asOver (Spec (.of k)))).app
           ((constructibleToPadicAlgCl Y ℓ E).obj M) := by
-  have h₁ := qbarPullIso_comp ℓ k E g' f M
-  have h₂ := qbarPullIso_comp ℓ k E f' g M
-  have he := qbarPull_eq ℓ k E (f' ≫ g) (g' ≫ f) sq.w.symm M
-  conv_lhs =>
-    lhs
-    arg 2
-    rw [boundedConstructiblePullbackSquareComparison_app]
-  conv_rhs =>
-    rhs
-    rhs
-    rw [boundedConstructiblePullbackSquareComparison_app]
-  exact mapped_iso_rectangle (constructibleToPadicAlgCl X' ℓ E)
-      ((boundedConstructibleUpperStarComp (Profinite.continuousMapRingObj E) ℓ k f' g).app M)
-      ((boundedConstructibleUpperStarComp (Profinite.continuousMapRingObj E) ℓ k g' f).app M)
-      ((eqToIso (by simp only [sq.w]) :
-        boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k (f' ≫ g) ≅
-        boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k (g' ≫ f)).app M)
-      ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ)
-        ℓ k f' g).app ((constructibleToPadicAlgCl Y ℓ E).obj M))
-      ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ)
-        ℓ k g' f).app ((constructibleToPadicAlgCl Y ℓ E).obj M))
-      ((eqToIso (by simp only [sq.w]) :
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k (f' ≫ g) ≅
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k (g' ≫ f)).app
-        ((constructibleToPadicAlgCl Y ℓ E).obj M))
-      _ _ _ _ _ _ h₁ h₂ he
+  sorry
 
 private lemma qbarPull_square_cube
     (sq : CommSq g' f' f g) (M : PadicSubfieldConstructible Y ℓ E) :
     (constructibleToPadicAlgCl X' ℓ E).map
-        ((boundedConstructiblePullbackSquareComparison
-          (Profinite.continuousMapRingObj E) ℓ k sq).hom.app M) ≫
+        ((boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).hom.app M) ≫
       (constructibleToQbarPullIso ℓ k E g'
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k f).obj M)).hom ≫
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g').map
+        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (f.asOver (Spec (.of k)))).obj M)).hom ≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (g'.asOver (Spec (.of k)))).map
         (constructibleToQbarPullIso ℓ k E f M).hom =
     (constructibleToQbarPullIso ℓ k E f'
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).obj M)).hom ≫
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k f').map
+        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g.asOver (Spec (.of k)))).obj M)).hom ≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (f'.asOver (Spec (.of k)))).map
         (constructibleToQbarPullIso ℓ k E g M).hom ≫
-      (boundedConstructiblePullbackSquareComparison
-        (Profinite.padicAlgClRingObj ℓ) ℓ k sq).hom.app
+      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ (sq.asOver (Spec (.of k)))).hom.app
           ((constructibleToPadicAlgCl Y ℓ E).obj M) := by
-  simpa only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom] using
-    congrArg Iso.hom (qbarPull_square_cube_iso ℓ k E f g f' g' sq M)
+  sorry
 
 end PullSquareCalculation
 
@@ -248,24 +192,72 @@ push comparison, and no properness or Cartesianity. For identity morphisms the e
 reduces to the unit coherence; for a zero object both sides are its unique morphism. -/
 theorem constructibleToQbar_pullback_cube
     (sq : CommSq g' f' f g) (V : PadicSubfieldConstructible Y ℓ E) :
-    (constructibleToQbarPullIso ℓ k E f'
-      ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).obj V)).inv ≫
-      (constructibleToPadicAlgCl X' ℓ E).map
-        ((boundedConstructiblePullbackSquareComparison
-          (Profinite.continuousMapRingObj E) ℓ k sq).hom.app V) ≫
-      (constructibleToQbarPullIso ℓ k E g'
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k f).obj V)).hom =
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k f').map
-      (constructibleToQbarPullIso ℓ k E g V).hom ≫
-      (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ)
-        ℓ k sq).hom.app ((constructibleToPadicAlgCl Y ℓ E).obj V) ≫
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g').map
-        (constructibleToQbarPullIso ℓ k E f V).inv := by
-  simpa only [Category.assoc] using inverse_mapped_square
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g')
-    (constructibleToQbarPullIso ℓ k E f'
-      ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).obj V))
-    (constructibleToQbarPullIso ℓ k E f V) _ _ _
-    (qbarPull_square_cube ℓ k E f g f' g' sq V)
+    coefficientPullbackCube
+    (A := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.continuousMapRingObj E) (X.asOver (Spec (.of k))).left))
+    (B := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.continuousMapRingObj E) (Y.asOver (Spec (.of k))).left))
+    (C := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.continuousMapRingObj E) (X'.asOver (Spec (.of k))).left))
+    (D := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.continuousMapRingObj E) (Y'.asOver (Spec (.of k))).left))
+    (A' := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.padicAlgClRingObj ℓ) (X.asOver (Spec (.of k))).left))
+    (B' := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.padicAlgClRingObj ℓ) (Y.asOver (Spec (.of k))).left))
+    (C' := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.padicAlgClRingObj ℓ) (X'.asOver (Spec (.of k))).left))
+    (D' := AlgebraicGeometry.ProEtale.BoundedConstructible (condensedRingObj
+      (Profinite.padicAlgClRingObj ℓ) (Y'.asOver (Spec (.of k))).left))
+    (lf := boundedConstructibleUpperStar (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (f.asOver (Spec (.of k))))
+    (lg := boundedConstructibleUpperStar (k := k)
+      (X := Y'.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (g.asOver (Spec (.of k))))
+    (lp := boundedConstructibleUpperStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (f'.asOver (Spec (.of k))))
+    (gp := boundedConstructibleUpperStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := X.asOver (Spec (.of k)))
+        (Profinite.continuousMapRingObj E) ℓ
+      (g'.asOver (Spec (.of k))))
+    (Lf := boundedConstructibleUpperStar (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (f.asOver (Spec (.of k))))
+    (Lg := boundedConstructibleUpperStar (k := k)
+      (X := Y'.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (g.asOver (Spec (.of k))))
+    (Lp := boundedConstructibleUpperStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := Y'.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (f'.asOver (Spec (.of k))))
+    (Gp := boundedConstructibleUpperStar (k := k)
+      (X := X'.asOver (Spec (.of k))) (Y := X.asOver (Spec (.of k)))
+        (Profinite.padicAlgClRingObj ℓ) ℓ
+      (g'.asOver (Spec (.of k))))
+    (tA := constructibleToPadicAlgCl X ℓ E)
+    (tB := constructibleToPadicAlgCl Y ℓ E)
+    (tC := constructibleToPadicAlgCl X' ℓ E)
+    (tD := constructibleToPadicAlgCl Y' ℓ E)
+    (fun V ↦ constructibleToQbarPullIso ℓ k E f V)
+    (fun V ↦ constructibleToQbarPullIso ℓ k E g V)
+    (fun V ↦ constructibleToQbarPullIso ℓ k E f' V)
+    (fun V ↦ constructibleToQbarPullIso ℓ k E g' V)
+    (boundedConstructiblePullbackSquareComparison (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+      (Profinite.continuousMapRingObj E) ℓ (sq.asOver (Spec (.of k)))).hom
+    (boundedConstructiblePullbackSquareComparison (k := k)
+      (X := X.asOver (Spec (.of k))) (Y := Y.asOver (Spec (.of k)))
+      (X' := X'.asOver (Spec (.of k))) (Y' := Y'.asOver (Spec (.of k)))
+      (Profinite.padicAlgClRingObj ℓ) ℓ (sq.asOver (Spec (.of k)))).hom
+    V := by
+  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

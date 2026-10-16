@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.EtaleCETotalSections
-public import Sheaf.AlgebraicGeometry.SheafHExtResolutionSectionsIso
+public import WeilConjectures.AlgebraicGeometry.SheafHExtResolutionSectionsIso
 import Sheaf.Paper.EtaleRowExtHomologySquare
 import Sheaf.Paper.EtaleRowSectionsEvaluationSquare
 

@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
-public import Sheaf.AlgebraicGeometry.GradedSheafStructures
+public import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
 import Sheaf.AlgebraicGeometry.FormalPolynomialPowerLifts
 import Sheaf.AlgebraicGeometry.FormalPolynomialQuotientSpan
 

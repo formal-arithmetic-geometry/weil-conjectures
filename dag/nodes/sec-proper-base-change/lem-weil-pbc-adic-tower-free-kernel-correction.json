@@ -112,8 +112,8 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Category.ModuleCat.AdicTowerFreeKernelCorrection",
-  "file": "lean/Sheaf/Algebra/Category/ModuleCat/AdicTowerFreeKernelCorrection.lean",
+  "module": "WeilConjectures.Algebra.Category.ModuleCat.AdicTowerFreeKernelCorrection",
+  "file": "lean/WeilConjectures/Algebra/Category/ModuleCat/AdicTowerFreeKernelCorrection.lean",
   "declaration": "ModuleCat.adicTower_freeKernelCorrection",
   "statement": "theorem adicTower_freeKernelCorrection (A : Type u) [CommRing A]\n    (I : Ideal A) (T : ℕᵒᵖ ⥤ ModuleCat.{u} A)\n    (hzero : ∀ n : ℕ, I ^ (n + 1) • (⊤ : Submodule A (T.obj (op n))) = ⊥)\n    (htrans : ∀ n : ℕ,\n      Function.Surjective (T.map (homOfLE (Nat.le_succ n)).op) ∧\n      LinearMap.ker (T.map (homOfLE (Nat.le_succ n)).op).hom =\n        I ^ (n + 1) • (⊤ : Submodule A (T.obj (op (n + 1)))))\n    (N : ModuleCat.{u} (AdicCompletion I A))\n    (e : (restrictScalars (algebraMap A (AdicCompletion I A))).obj N ≅ limit T)\n    (hscalar : ∀ (n : ℕ) (r : AdicCompletion I A) (a : A) (x : N),\n      AdicCompletion.evalₐ I (n + 1) r = Ideal.Quotient.mk (I ^ (n + 1)) a →\n      (e.hom ≫ limit.π T (op n)) (r • x) =\n        a • (e.hom ≫ limit.π T (op n)) x)\n    (d : ℕ) (q : AdicCompletion I (Fin d → A) →ₗ[AdicCompletion I A] N)\n    (hq : Function.Surjective q) (n : ℕ) (y : AdicCompletion I (Fin d → A))\n    (hy : (e.hom ≫ limit.π T (op n)) (q y) = 0) :\n    ∃ z : AdicCompletion I (Fin d → A), q z = 0 ∧\n      AdicCompletion.eval I (Fin d → A) (n + 1) z =\n        AdicCompletion.eval I (Fin d → A) (n + 1) y",
   "branch": "sheaf-dag",

@@ -65,7 +65,7 @@ empty schemes require no separate assumptions. -/
 theorem derivedPullbackComposition_tensor_kFlat
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)
-    (hP : P.IsKFlat) (hN : N.IsKFlat) :
+    (hP : P.IsAcyclicTensorKFlat) (hN : N.IsAcyclicTensorKFlat) :
     let c : ∀ {U V W : Scheme.{u}} (a : U ⟶ V) (b : V ⟶ W),
         derivedPullback b ⋙ derivedPullback a ≅ derivedPullback (a ≫ b) :=
       fun a b ↦ (Classical.choose (Classical.choose_spec (Classical.choose_spec
@@ -98,7 +98,7 @@ theorem derivedPullbackComposition_tensor_kFlat
   have hflat := hτ.1
   have hmodels := hflat P N hP hN
   rcases hmodels with ⟨φ, hφ, heq⟩
-  have hpull : CochainComplex.IsKFlat (R := X.sheaf)
+  have hpull : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf)
       (((Scheme.Modules.tensorPullback (f ≫ g)).mapHomologicalComplex (.up ℤ)).obj P) := by
     convert CochainComplex.isKFlat_pullback (f ≫ g).base X.sheaf Z.sheaf
       ⟨(f ≫ g).c⟩ P hP using 1

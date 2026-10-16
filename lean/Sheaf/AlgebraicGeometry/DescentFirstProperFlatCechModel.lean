@@ -184,11 +184,11 @@ theorem ordinary_pullback_model_resolution {X Y : Scheme.{u}} (g : X ⟶ Y)
   have : C.IsStrictlyLE (d : ℤ) := hle
   have : Q.IsStrictlyLE (d : ℤ) := hQle
   let F := (Modules.pullback g).mapHomologicalComplex (.up ℤ)
-  have hkC : CochainComplex.IsKFlat (R := Y.sheaf) C :=
+  have hkC : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) C :=
     CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace Y.toRingedSpace C
       ⟨d, fun n hn ↦ C.isZero_of_isStrictlyLE d n hn⟩
       (fun n ↦ isFlat_of_affineFlatOver_identity (C.X n) (hflat n))
-  have hkQ : CochainComplex.IsKFlat (R := Y.sheaf) Q :=
+  have hkQ : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) Q :=
     CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace Y.toRingedSpace Q
       ⟨d, fun n hn ↦ Q.isZero_of_isStrictlyLE d n hn⟩
       (fun n ↦ finiteFreeTerm_flat (Q.X n) (hfree n))

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.Nilpotent.GeometricallyReduced
-public import Sheaf.FieldTheory.SeparableExtension
+public import WeilConjectures.FieldTheory.SeparableExtension
 import Sheaf.FieldTheory.FiniteInseparableElement
 import Sheaf.FieldTheory.InseparableTensorNilpotent
 

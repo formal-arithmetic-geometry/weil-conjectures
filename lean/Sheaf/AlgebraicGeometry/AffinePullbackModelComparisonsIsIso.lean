@@ -110,7 +110,7 @@ theorem affinePullbackModelComparisons_isIso
       (tilde.functor R) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M
   constructor
   · let A := SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace)
-    have hK : CochainComplex.IsKFlat (R := (Spec R).sheaf) K := by
+    have hK : CochainComplex.IsAcyclicTensorKFlat (R := (Spec R).sheaf) K := by
       apply isKFlat_tilde R M
       intro F hF
       have h := (HomotopyCategory.kFlat_iff_preserves_acyclic

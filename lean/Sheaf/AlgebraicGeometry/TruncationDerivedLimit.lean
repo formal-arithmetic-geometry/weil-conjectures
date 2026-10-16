@@ -10,7 +10,7 @@ public import Sheaf.Topology.OpenModuleCohomology
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Sheaf.CategoryTheory.Triangulated.RingedSpaceDerivedProducts
 import Sheaf.Topology.PointwiseTruncationLimit
 

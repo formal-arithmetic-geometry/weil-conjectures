@@ -6,34 +6,33 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
-import Sheaf.AlgebraicGeometry.Curve.ConstructiblePrimeDevissage
+import WeilConjectures.AlgebraicGeometry.Curve.ConstructiblePrimeDevissage
 import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleAssertions
 import Sheaf.AlgebraicGeometry.Curve.NormalizationAssertionsTransfer
 import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardOpenQuotientConstant
 import Sheaf.AlgebraicGeometry.Curve.ConstructibleApproximationAssertions
-import Sheaf.AlgebraicGeometry.Curve.ReductionModuleAssertions
+import WeilConjectures.AlgebraicGeometry.Curve.ReductionModuleAssertions
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
-import Sheaf.AlgebraicGeometry.Curve.DenseIrreducibleOpens
+import WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimeAssertions
-import Sheaf.AlgebraicGeometry.Curve.DisjointOpenPrimeAssertions
+import WeilConjectures.AlgebraicGeometry.Curve.DisjointOpenPrimeAssertions
 import Sheaf.AlgebraicGeometry.Curve.PrimeConstructiblePullback
 import Sheaf.AlgebraicGeometry.PullbackIsoPrimeTorsionDevissage
 import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
-import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
-import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
-import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections
 import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
-import Sheaf.Paper.ZeroDimensionalCohomology
-import Sheaf.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
-import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
+import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.SixFunctors.Etale.Gabber
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
@@ -119,66 +118,7 @@ theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
       Sheaf.H.map (c.ι.app j) q y = x) ∧
     ∀ (j : J) (y : Sheaf.H (D.obj j) q), Sheaf.H.map (c.ι.app j) q y = 0 →
       ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 :=
-  by
-    let E := Sheaf.functorH.{u + 1} X.smallEtaleTopology q
-    let R := DerivedCategory.singleFunctor
-      (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙
-        Etale.cohomology AddCommGrpCat.{u + 1} X (q : ℤ)
-    let e : E ≅ R := (Scheme.nonempty_sheafH_extDerivedIso X q).some
-    have hR : IsColimit (R.mapCocone c) :=
-      (Scheme.etaleCohomology_isColimit_of_isFiltered X hc q).some
-    have hE : IsColimit (E.mapCocone c) := by
-      exact IsColimit.mapCoconeEquiv e.symm hR
-    have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
-      preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}
-        (CategoryTheory.forget AddCommGrpCat.{u + 1})
-    constructor
-    · intro x
-      exact Concrete.isColimit_exists_rep (D ⋙ E) hE x
-    · intro j y hy
-      have hz : (E.mapCocone c).ι.app j y = (E.mapCocone c).ι.app j 0 := by
-        change Sheaf.H.map (c.ι.app j) q y = Sheaf.H.map (c.ι.app j) q 0
-        rw [(Sheaf.H.map (c.ι.app j) q).map_zero]
-        exact hy
-      obtain ⟨j', φ, ψ, hφ⟩ :=
-        Concrete.isColimit_exists_of_rep_eq (D ⋙ E) hE y 0 hz
-      refine ⟨j', φ, ?_⟩
-      change Sheaf.H.map (D.map φ) q y = Sheaf.H.map (D.map ψ) q 0 at hφ
-      rwa [(Sheaf.H.map (D.map ψ) q).map_zero] at hφ
-
-/-- The coefficient-size indexing variant of filtered-colimit continuity for sheaf cohomology. -/
-theorem Scheme.H_map_isColimit_of_isFiltered_coefficientSize
-    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
-    {J : Type (u + 1)} [SmallCategory J] [IsFiltered J]
-    {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
-    (hc : IsColimit c) (q : ℕ) :
-    (∀ x : Sheaf.H c.pt q, ∃ (j : J) (y : Sheaf.H (D.obj j) q),
-      Sheaf.H.map (c.ι.app j) q y = x) ∧
-    ∀ (j : J) (y : Sheaf.H (D.obj j) q), Sheaf.H.map (c.ι.app j) q y = 0 →
-      ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 := by
-  let E := Sheaf.functorH.{u + 1} X.smallEtaleTopology q
-  let R := DerivedCategory.singleFunctor
-    (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙
-      Etale.cohomology AddCommGrpCat.{u + 1} X (q : ℤ)
-  let e : E ≅ R := (Scheme.nonempty_sheafH_extDerivedIso X q).some
-  have hR : IsColimit (R.mapCocone c) :=
-    (Scheme.etaleCohomology_isColimit_of_isFiltered_coefficientSize X hc q).some
-  have hE : IsColimit (E.mapCocone c) := IsColimit.mapCoconeEquiv e.symm hR
-  have : PreservesFilteredColimitsOfSize.{u + 1, u + 1}
-      (CategoryTheory.forget AddCommGrpCat.{u + 1}) := inferInstance
-  constructor
-  · intro x
-    exact Concrete.isColimit_exists_rep (D ⋙ E) hE x
-  · intro j y hy
-    have hz : (E.mapCocone c).ι.app j y = (E.mapCocone c).ι.app j 0 := by
-      change Sheaf.H.map (c.ι.app j) q y = Sheaf.H.map (c.ι.app j) q 0
-      rw [(Sheaf.H.map (c.ι.app j) q).map_zero]
-      exact hy
-    obtain ⟨j', φ, ψ, hφ⟩ :=
-      Concrete.isColimit_exists_of_rep_eq (D ⋙ E) hE y 0 hz
-    refine ⟨j', φ, ?_⟩
-    change Sheaf.H.map (D.map φ) q y = Sheaf.H.map (D.map ψ) q 0 at hφ
-    rwa [(Sheaf.H.map (D.map ψ) q).map_zero] at hφ
+  Scheme.H_map_isColimit_of_isFiltered_of_large X hc q
 
 /-! ### Dévissage -/
 

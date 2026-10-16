@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCoverDescent
-import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientData
+import WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientData
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
 import Mathlib.CategoryTheory.Limits.MorphismProperty
 

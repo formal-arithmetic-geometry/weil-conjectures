@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Sheaf.AlgebraicGeometry.AffineBasePieceTensorPresentation
+import WeilConjectures.AlgebraicGeometry.AffineBasePieceTensorPresentation
 import Sheaf.RingTheory.FiniteMapColimitDescent
 
 /-!

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 
 /-!

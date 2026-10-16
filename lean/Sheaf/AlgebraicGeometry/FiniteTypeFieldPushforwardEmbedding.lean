@@ -5,7 +5,7 @@ Authors: SHEAF group NV
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
@@ -15,15 +15,15 @@ public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Mathlib.AlgebraicGeometry.Properties
-import Sheaf.Paper.WeilPbcNormalizationInResidueFieldExtension
+import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 import Sheaf.AlgebraicGeometry.NormalGenericConstant
 import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 import WeilConjectures.ConstructibleSheaf.Defs
-import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import WeilConjectures.SixFunctors.Finite.Stalk
 import Sheaf.AlgebraicGeometry.ConstructibleFiniteSelection
 

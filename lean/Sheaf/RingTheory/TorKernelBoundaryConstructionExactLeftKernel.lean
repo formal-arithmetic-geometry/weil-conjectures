@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.TorKernelBoundaryConstruction
 import Sheaf.RingTheory.TorKernelBoundaryHorseshoeComparison
-import all Sheaf.Paper.TorLongExactFirstVariable
+import all WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 
 /-!
 # Exactness on the left of the constructed Tor boundary

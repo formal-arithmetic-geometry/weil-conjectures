@@ -5,8 +5,8 @@ Authors: SHEAF group S2
 -/
 module
 
-public import Sheaf.CategoryTheory.ColimitSites
-import Sheaf.CategoryTheory.SiteFilteredColimitSections
+public import WeilConjectures.CategoryTheory.ColimitSites
+import WeilConjectures.CategoryTheory.SiteFilteredColimitSections
 import Sheaf.CategoryTheory.VaryingSiteInverseImageZeroDetection
 
 /-! # Detection of zero for sections on varying sites

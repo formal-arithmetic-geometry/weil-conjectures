@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatCodimensionOneEtaleNeighbourhood
-import Sheaf.AlgebraicGeometry.EtaleLocalFiniteAtPoint
+import WeilConjectures.AlgebraicGeometry.EtaleLocalFiniteAtPoint
 import Sheaf.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 

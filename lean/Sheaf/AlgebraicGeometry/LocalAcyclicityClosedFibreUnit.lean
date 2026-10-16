@@ -9,8 +9,8 @@ public import Sheaf.AlgebraicGeometry.LocalAcyclicityAbelianSheaf
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import Sheaf.Paper.StrictHenselizationFunctoriality
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
