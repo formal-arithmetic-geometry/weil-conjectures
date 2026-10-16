@@ -75,7 +75,10 @@ complexes out of the functors above. For a compactification `c = (X ⟶[i] Z ⟶
 
 The adjunctions `Lf^* ⊣ Rf_*` and `j_! ⊣ j^*` restrict along the fully faithful inclusions
 (`Adjunction.restrictFullyFaithful`), and so does the composition isomorphism
-`L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` (`boundedConstructibleUpperStarComp`). The adjunction
+`L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` (`boundedConstructibleUpperStarComp`). Its conjugates under these
+adjunctions are the composition isomorphisms `Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*`
+(`boundedConstructibleLowerStarComp`) and `(j ≫ j')_! ≅ j_! ⋙ j'_!` for open immersions
+(`boundedConstructibleOpenImmersionLowerShriekComp`). The adjunction
 `- ⊗ᴸ - ⊣₂ RHom(-, -)` is the tensor-hom adjunction of the monoidal closed category
 `Dᵇc(X)⟦Λ⟧` (`boundedConstructibleTensorHomAdjunction₂`).
 
@@ -212,6 +215,18 @@ instance isRightAdjoint_boundedConstructibleLowerStar :
     (boundedConstructibleLowerStar Λ ℓ f).IsRightAdjoint :=
   (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f).isRightAdjoint
 
+/-- The composition isomorphism `Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*` on bounded constructible complexes:
+the conjugate of `boundedConstructibleUpperStarComp` under the adjunctions
+`L(f ≫ g)^* ⊣ R(f ≫ g)_*` and `Lg^* ⋙ Lf^* ⊣ Rf_* ⋙ Rg_*`. -/
+noncomputable def boundedConstructibleLowerStarComp {Z : Over (Spec (.of k))}
+    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (g : Y ⟶ Z) :
+    boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleLowerStar Λ ℓ g ≅
+      boundedConstructibleLowerStar Λ ℓ (f ≫ g) :=
+  (conjugateIsoEquiv (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (f ≫ g))
+    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ g).comp
+      (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f))
+    (boundedConstructibleUpperStarComp Λ ℓ f g).symm).symm
+
 end UpperLowerStar
 
 /-! ### The extension by zero along an open immersion -/
@@ -270,6 +285,21 @@ right adjoint, its left adjoint being `boundedConstructibleOpenImmersionLowerShr
 instance isRightAdjoint_boundedConstructibleUpperStar_of_isOpenImmersion :
     (boundedConstructibleUpperStar Λ ℓ j).IsRightAdjoint :=
   (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).isRightAdjoint
+
+/-- The composition isomorphism `(j ≫ j')_! ≅ j_! ⋙ j'_!` of the extensions by zero along open
+immersions on bounded constructible complexes: the conjugate of
+`boundedConstructibleUpperStarComp` under the adjunctions `(j ≫ j')_! ⊣ L(j ≫ j')^*` and
+`j_! ⋙ j'_! ⊣ Lj'^* ⋙ Lj^*`. -/
+noncomputable def boundedConstructibleOpenImmersionLowerShriekComp {V : Over (Spec (.of k))}
+    [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom] (j' : X ⟶ V)
+    [IsOpenImmersion j'.left] [IsOpenImmersion (j ≫ j').left] :
+    boundedConstructibleOpenImmersionLowerShriek Λ ℓ (j ≫ j') ≅
+      boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙
+        boundedConstructibleOpenImmersionLowerShriek Λ ℓ j' :=
+  ((conjugateIsoEquiv (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ (j ≫ j'))
+    ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).comp
+      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j'))).symm
+    (boundedConstructibleUpperStarComp Λ ℓ j j')).symm
 
 end OpenImmersion
 
