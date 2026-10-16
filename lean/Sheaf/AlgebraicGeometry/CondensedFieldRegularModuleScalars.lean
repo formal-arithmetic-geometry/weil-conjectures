@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CondensedFieldEvaluationFunctors
 public import Sheaf.AlgebraicGeometry.CondensedFieldPresentationMatrix
-import Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization
-import Sheaf.Paper.ProfinitePointPullback
+
+import Sheaf.AlgebraicGeometry.CondensedFieldGeometricRegularCoefficient
 
 /-! # Transport of regular-module scalars to a geometric point
 
@@ -95,6 +95,15 @@ theorem condensedField_geometric_evaluation_scalars
           (((inv (condensedFieldPullbackRealization E p) ≫ f.hom ≫
           condensedFieldPullbackRealization E p).hom.app
             (Opposite.op (Scheme.ProEt.mk (𝟙 V)))) (ULift.up 1)).down (a z) := by
-  sorry
+  dsimp (config := { proj := false }) only
+  apply condensedField_coordinates_of_conjugacy
+    (condensedFieldGeometricModulePullback (Profinite.continuousCoefficientRingObj E) p a)
+    H (Mod.regular ((upperStar AddCommGrpCat.{u + 1} p).obj
+      (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)))
+    (Mod.regular (condensedRingObj (Profinite.continuousCoefficientRingObj E) (Spec (.of Ω))))
+    (condensedFieldGeometricRegularIso (Profinite.continuousCoefficientRingObj E) p a)
+    (condensedFieldPointCoefficient E Ω z) hH
+  intro f
+  exact condensedField_geometric_regular_coefficient E Ω p a z f
 
 end AlgebraicGeometry.ProEtale

@@ -1,0 +1,138 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1; geometric evaluation construction"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: finite-stage descent of constructible coefficients; the local-freeness bridge, geometric evaluation in the common-fibre corank argument.",
+   "via": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-field-presentation-corank",
+    "lem-weil-pbc-condensed-field-presentation-evaluation",
+    "lem-weil-pbc-condensed-field-regular-module-scalars"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-condensed-field-geometric-regular-coefficient",
+ "title": "Regular coefficient compatibility with geometric pullback",
+ "statement": "For a totally disconnected normed field E, scheme maps p:V to X and a:Spec Omega to V for an arbitrary field Omega, a point z of Spec Omega, and a regular-module endomorphism f over the coefficient ring pulled back by p, the coefficient at z of the regular-module endomorphism conjugated along geometric pullback equals the value at a(z) of the continuous coefficient obtained by conjugating f by condensedFieldPullbackRealization E p. No evaluation functor H or normalized coordinate is involved.",
+ "stmt_deps": [
+  "lem-weil-pbc-condensed-field-evaluation-functors",
+  "def-weil-pbc-condensed-field-presentation-matrix"
+ ],
+ "proof": [
+  {
+   "text": "Identify regular-module conjugation by regular_conjugate, using the explicit restriction-of-scalars isomorphism and extension-of-scalars regular comparison. No coordinate transport or H is used.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-evaluation-functors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the continuous-realization comparison by the composite point and scheme inverse-image adjunctions. Use its canonical adjoint-test equation, chartMate_homEquiv, and the explicit pullback-composition projections to prove the continuous pushforward square (realization_naturality). The construction works for E in Type u; no integral-only chart specialization is used.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "lem-weil-pbc-continuous-chart-scheme-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the square by the realization isomorphisms, using adjunction-unit naturality and conjugated_morphism_square. Apply it to the constant section 1 at the terminal pro-etale object. Its pullback has a canonical section over the source scheme; naturality along the terminal projection identifies evaluation at y upstairs with evaluation at a(y) downstairs. This proves scalar_naturality. Combine it with regular_conjugate and the inverse-of-composite identity realization_conjugate to obtain geometric_scalar_value. The remaining open step is conversion from coefficientValue to the raw evaluation in the theorem statement; no H-coordinate transport occurs in this node.",
+   "uses": [
+    "lem-weil-pbc-integral-regular-coefficient-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-field-evaluation-functors",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-weil-pbc-continuous-chart-scheme-naturality",
+  "lem-weil-pbc-integral-regular-coefficient-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1",
+  "note": "B4: scalar compatibility split after sustained proof work. All private folded-value identities are proved, ending in geometric_scalar_value. The public raw-evaluation statement remains sorry: unfolding coefficientValue and exacting the folded identity triggers a kernel deterministic timeout. Second reading reproduced this; no public definition or signature was changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the scalar obtained by evaluating the image of one under a regular module endomorphism after pullback of sheaves",
+   "digest": "ae564417fc9823bf",
+   "date": "2026-10-16",
+   "results": "ModuleCat.smul_naturality; PresheafOfModules.Hom.naturality; PresheafOfModules.Hom.naturality_assoc; AlgebraicGeometry.Scheme.evaluation_naturality_apply; SheafOfModules.PullbackConstruction.adjunction; PresheafOfModules.pullback; PresheafOfModules.restrictScalars; SheafOfModules.freeFunctorCompPullbackIso",
+   "verdict": "These concern ordinary module sheaves or residue-field evaluation, rather than the canonical continuous realization and internal condensed regular modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of evaluating coefficients of regular module endomorphisms under pullback of sheaves",
+   "digest": "dba4041cd7f47d80",
+   "date": "2026-10-16",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; PresheafOfModules.Hom.naturality; CondensedMod.hom_naturality_apply; PresheafOfModules.Hom.naturality_assoc; AlgebraicGeometry.Scheme.Modules.map_smul; PresheafOfModules.naturality_apply; LightCondMod.hom_naturality_apply",
+   "verdict": "These are ordinary module-sheaf naturality lemmas; none computes coefficients for the internal condensed-module pullback and canonical realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"regular\", \"mapMod\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "results": "No hits.",
+   "verdict": "These are ordinary module-sheaf naturality lemmas; none computes coefficients for the internal condensed-module pullback and canonical realization."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*regular|regular.*mapMod|regularIsoOfIsIso",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "results": "No hits.",
+   "verdict": "These are ordinary module-sheaf naturality lemmas; none computes coefficients for the internal condensed-module pullback and canonical realization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedFieldRegularModuleScalars",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedFieldGeometricRegularCoefficient",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedFieldGeometricRegularCoefficient.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedField_geometric_regular_coefficient",
+  "statement": "theorem condensedField_geometric_regular_coefficient\n    (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]\n    (Ω : Type u) [Field Ω] {X V : Scheme.{u}}\n    (p : V ⟶ X) (a : Spec (.of Ω) ⟶ V) (z : Spec (.of Ω))\n    (f : Mod.regular ((upperStar AddCommGrpCat.{u + 1} p).obj\n      (condensedRingObj (Profinite.continuousCoefficientRingObj E) X)) ⟶\n      Mod.regular ((upperStar AddCommGrpCat.{u + 1} p).obj\n        (condensedRingObj (Profinite.continuousCoefficientRingObj E) X))) :\n    condensedFieldPointCoefficient E Ω z\n      ((condensedFieldGeometricRegularIso (Profinite.continuousCoefficientRingObj E) p a).inv ≫\n        (condensedFieldGeometricModulePullback\n          (Profinite.continuousCoefficientRingObj E) p a).map f ≫\n        (condensedFieldGeometricRegularIso (Profinite.continuousCoefficientRingObj E) p a).hom) =\n      (((inv (condensedFieldPullbackRealization E p) ≫ f.hom ≫\n        condensedFieldPullbackRealization E p).hom.app\n          (op (Scheme.ProEt.mk (𝟙 V)))) (ULift.up 1)).down (a z)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T090411-L-1837879",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T090411-L-1837879",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
