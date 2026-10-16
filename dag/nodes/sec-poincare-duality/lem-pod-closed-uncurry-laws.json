@@ -1,0 +1,107 @@
+{
+ "id": "lem-pod-closed-uncurry-laws",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Registered binding sk-thm-sf-identification, proof, first paragraph: the chain of sk-thm-sf-tensor-hom is the transpose of exactly the cup, evaluation and normalized-trace composite. This leaf supplies inverse cancellation, precomposition naturality and the evaluation formula for that transpose, used in item steps 1 and 3.",
+   "via": [
+    "nt-target-poincare-uncurry"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Uncurrying a transpose, precomposing and evaluating in a monoidal closed category",
+ "statement": "Let $C$ be a monoidal category [def-sfb-monoidal-category] with tensor $\\otimes$ and, for each object $A$, a chosen right adjoint $[A,-]$ to $A\\otimes-$. Write $\\operatorname{curry}:\\operatorname{Hom}(A\\otimes X,Y)\\simeq\\operatorname{Hom}(X,[A,Y])$ for the adjunction bijection, natural in $X$ and $Y$, and $\\operatorname{uncurry}$ for its inverse. For every $u:A\\otimes X\\to Y$,\n$$\\operatorname{uncurry}(\\operatorname{curry}(u))=u.$$\nFor every $a:X\\to X'$ and $v:X'\\to[A,Y]$,\n$$\\operatorname{uncurry}(a;v)=(1_A\\otimes a);\\operatorname{uncurry}(v).$$\nHere $a;v$ means first $a$, then $v$. Write $\\mathrm{ev}_{A,Y}:A\\otimes[A,Y]\\to Y$ for the counit of this adjunction at $Y$ (evaluation). For every $v:X\\to[A,Y]$,\n$$\\operatorname{uncurry}(v)=(1_A\\otimes v);\\mathrm{ev}_{A,Y}.$$",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+  "place": "CategoryTheory.MonoidalClosed.uncurry_curry, line 180; CategoryTheory.MonoidalClosed.uncurry_natural_left, line 175; CategoryTheory.MonoidalClosed.uncurry_eq, line 194 (ev = CategoryTheory.ihom.ev, the adjunction counit, line 92)"
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a monoidal closed category uncurrying a curry gives back the morphism and uncurrying commutes with precomposition",
+   "results": "8 hits: MonoidalClosed.uncurry_pre_app, uncurry'_curry', uncurry_curry, uncurry_pre_app_assoc, uncurry_pre, curry_uncurry, uncurry_eq and CategoryTheory.uncurry_pre. uncurry_curry is the first clause; other hits checked against Basic.lean.",
+   "date": "2026-10-17",
+   "verdict": "match for cancellation; naturality found by LeanSearch and Loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry_curry",
+   "results": "1 hit: CategoryTheory.MonoidalClosed.uncurry_curry, Mathlib.CategoryTheory.Monoidal.Closed.Basic.",
+   "date": "2026-10-17",
+   "verdict": "match: first clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry_natural_left",
+   "results": "1 hit: CategoryTheory.MonoidalClosed.uncurry_natural_left, Mathlib.CategoryTheory.Monoidal.Closed.Basic.",
+   "date": "2026-10-17",
+   "verdict": "match: second clause"
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem uncurry_natural_left|^theorem uncurry_curry|^theorem uncurry_eq",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:175 uncurry_natural_left, :180 uncurry_curry, :194 uncurry_eq (search directory CategoryTheory/Monoidal). Read lines 150–198; first two declarations state the two clauses exactly.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "uncurrying is natural under precomposition and cancels currying in a closed monoidal category",
+   "results": "8 hits: MonoidalClosed.uncurry_natural_left, uncurry_pre_app, uncurry_natural_right, uncurry, uncurry_eq, curryHomEquiv', CategoryTheory.uncurry_pre, CartesianClosed.uncurry. First hit states second clause.",
+   "date": "2026-10-17",
+   "verdict": "match: second clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry_curry, CategoryTheory.MonoidalClosed.uncurry_natural_left",
+   "results": "0 hits; combined name-pattern query did not match. The separately queried declarations remain the exact match.",
+   "date": "2026-10-17",
+   "verdict": "no match for this query"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry_curry|uncurry_natural_left",
+   "results": "0 hits with subdirectory Mathlib/CategoryTheory/Monoidal/Closed; this wrapper subdirectory spelling did not locate the declarations. The prior successful CategoryTheory/Monoidal search and the source read identify lines 175 and 180.",
+   "date": "2026-10-17",
+   "verdict": "no match for this query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the tensor Hom adjunction hom equivalence in its source object",
+   "results": "{\"t\": \"2026-10-16T19:26:49Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of the tensor Hom adjunction hom equivalence in its source object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorRightHomEquiv_naturality\", \"CategoryTheory.tensorLeftHomEquiv_naturality\", \"CategoryTheory.tensorLeftHomEquiv_symm_naturality\", \"CategoryTheory.tensorRightHomEquiv_symm_naturality\", \"CategoryTheory.ihom.ev_naturality\", \"CategoryTheory.ihom.coev_naturality\", \"CategoryTheory.ihom.coev_naturality_assoc\", \"CategoryTheory.Functor.homObjEquiv_apply_app\"], \"digest\": \"d571f6c89139728f\"}",
+   "date": "2026-10-16",
+   "verdict": "second reading: generic rigid tensor-Hom and evaluation naturality hits do not replace these two closed-category clauses; pinned Basic.lean:175–181 confirms the exact existing leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry_natural|uncurry_curry",
+   "results": "{\"t\": \"2026-10-16T19:27:01Z\", \"tool\": \"grep\", \"query\": \"uncurry_natural|uncurry_curry\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\"], \"digest\": \"cd10cf86bfdf6248\"}",
+   "date": "2026-10-16",
+   "verdict": "second reading: exact declarations read at Basic.lean:175 and 180; retain Mathlib leaf"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.MonoidalClosed.uncurry_curry; CategoryTheory.MonoidalClosed.uncurry_natural_left; CategoryTheory.MonoidalClosed.uncurry_eq",
+  "file": "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+  "line": 180,
+  "how": "exact, one declaration per clause: first clause is uncurry_curry at line 180; second is uncurry_natural_left at line 175; third is uncurry_eq at line 194 (proved by rfl), with ev_{A,Y} = (ihom.ev A).app Y and ihom.ev defined as the counit of ihom.adjunction at line 92, all in the same file. Mathlib writes composition as ≫ and 1_A tensor a as A ◁ a. No geometric or coefficient hypotheses."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "nt-target-poincare-uncurry",
+  "date": "2026-10-17",
+  "group": "N4"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-identification"
+}

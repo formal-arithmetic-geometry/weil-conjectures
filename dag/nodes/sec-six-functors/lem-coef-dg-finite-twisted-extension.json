@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md: use the reduction of integral compact supports in [lem-coef-integral-compact-support] and derived coefficient adjunction to compute the three displayed derived Hom objects. This supplies the generic dg-quotient mapping-complex infrastructure through the recorded intervening nodes.",
+   "place": "Proof paragraph 2, the three displayed derived Hom objects: generic dg-quotient infrastructure through the recorded ancestry, specifically the finite-cone argument in the final step of lem-coef-dg-quotient-hom-cone.",
    "via": [
     "lem-coef-dg-quotient-hom-cone",
     "lem-coef-dg-module-projective-resolution",
@@ -24,11 +24,108 @@
  },
  "stmt_deps": [
   "lem-coef-dgcat-model-structure",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-coef-dgcat-formal-cone-enlargement"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Realize $T$ by the labelled right module $M_T=\\bigoplus_i h_{B_i}[r_i]$ with differential $D_T=d_0+q$, where $d_0$ is the differential of the shifted summands. The module convention and strict dg Yoneda isomorphism are those of [lem-coef-dgcat-formal-cone-enlargement]. The degree-one entries of $q$ are module maps, so $D_T$ satisfies the module Leibniz identity, and $D_T^2=d_0^2+d_0q+qd_0+q^2=dq+q^2=0$. Conversely, a module differential whose difference from $d_0$ is strictly upper triangular is given by such a matrix, and its square-zero identity is precisely the Maurer-Cartan equation. Strict Yoneda, applied to each pair of shifted summands, identifies all homogeneous module maps with the stipulated matrices. Their differential is $D_{T'}f-(-1)^{|f|}fD_T$, the displayed differential of the item. It squares to $D_{T'}^2f-fD_T^2=0$, and expansion gives $d(gf)=d(g)f+(-1)^{|g|}g\\,d(f)$. Matrix associativity and diagonal identities give a dg category. For single unshifted summands with $q=0$ this is precisely the original Hom complex, composition and unit. Thus the embedding is strictly fully faithful on mapping complexes, without deriving Yoneda or resolving any module.",
+   "uses": [
+    "lem-coef-dgcat-formal-cone-enlargement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Strict dg module and Yoneda conventions; compare section-review, before Situation dga-situation-ABC."
+   }
+  },
+  {
+   "text": "The empty list realizes zero. Concatenation of lists with block diagonal twisting realizes direct sums. Shifting every summand by $n$ and multiplying its twisting by $(-1)^n$ realizes $M_T[n]$ under the canonical graded shift identifications; a homogeneous map of degree $r$ is shifted with factor $(-1)^{nr}$, so this commutes with the Hom differential. For a closed degree-zero matrix $f:T\\to U$, put the summands of $U$ first and those of $T[1]$ second. The cone differential is $\\left(\\begin{smallmatrix}D_U&f\\\\0&-D_T\\end{smallmatrix}\\right)$; it squares to zero because $D_Uf-fD_T=0$. Its off-diagonal part is strictly upper triangular, including the two old triangular blocks. This cone is therefore another allowed finite twisted expression. The module realization is fully faithful by step 1, and its labelled modules satisfy exactly the zero, binary-sum, integer-shift and closed-map-cone hypotheses of [lem-coef-dg-module-cone-triangulation]. Apply that criterion. It gives the asserted triangulated category $H^0\\operatorname{pretr}(\\mathcal B)$, with formal cone triangles and final arrow the negative projection, consistently with [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-coef-dg-module-cone-triangulation",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09QY (dga-proposition-ABC-homotopy-category-triangulated) and 09QU (dga-lemma-cone-homotopy); the matrix checks verify their hypotheses."
+   }
+  },
+  {
+   "text": "For a dg functor $F$, send each labelled summand $B_i[r_i]$ to $F(B_i)[r_i]$ and apply its chain maps to all matrix entries. Since it preserves sums of morphisms, compositions and differentials, $d(Fq)+(Fq)^2=F(dq+q^2)=0$, and applying $F$ to the formula for $d(f)$ gives the formula for $d(Ff)$. Units and matrix products are preserved. This constructs $\\operatorname{pretr}(F)$. The empty list, shifted lists, and the two-block cone matrix of step 2 go respectively to the same constructions for the images, including the inclusions and negative projections. Hence its $H^0$ functor commutes with shift and carries each distinguished cone triangle to a distinguished cone triangle, which is exactness by [def-weil-triangulated-category]. Entrywise identity and composition give $\\operatorname{pretr}(1)=1$ and $\\operatorname{pretr}(GF)=\\operatorname{pretr}(G)\\operatorname{pretr}(F)$.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Situation dga-situation-ABC and lemma-functor-between-ABC: exactness checked directly on the stipulated cone triangles."
+   }
+  },
+  {
+   "text": "Every finite expression is obtained by finitely many shifts and cones from its single summands. More precisely induct on the number $m$. For $m=0$ it is zero. For $m>0$ let $A$ be the first $m-1$ summands with their triangular block and let $P=B_m[r_m]$. Then $D_T=\\left(\\begin{smallmatrix}D_A&v\\\\0&D_P\\end{smallmatrix}\\right)$ and $D_T^2=0$ says $D_Av+vD_P=0$. Thus the last column is a closed degree-zero map $w:P[-1]\\to A$. The cone $C(w)=A\\oplus P$ has precisely $D_T$ (since $-D_{P[-1]}=D_P$), so it realizes $T$. This also covers $m=1$, where $A=0$. This is a finite induction with explicit attachment maps, not an assertion that every matrix can be lifted through $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Finite upper triangular differential expanded into a graded-split extension; compare dga-situation-ABC."
+   }
+  },
+  {
+   "text": "Suppose $F$ is a quasi-equivalence in the sense of [lem-coef-dgcat-model-structure]. For $T$ with $m$ summands and $U$ with $n$ summands, give a Hom-matrix entry in source column $a$ and target row $b$ weight $a-b$. Filter the Hom complex by entries of weight at least $p$. Its untwisted differential preserves weight; multiplying by the strictly upper triangular $q_U$ decreases the target row, and multiplying on the right by $q_T$ increases the source column. Thus each twisting term strictly increases weight. This is a finite decreasing filtration, preserved by the entrywise map induced by $F$. Its associated graded is a finite direct sum of shifted original mapping complexes, and the associated-graded comparison is a direct sum of shifts of quasi-isomorphisms $\\mathcal B(B_a,U_b)\\to\\mathcal E(FB_a,FU_b)$. Such sums and shifts induce the corresponding sums and shifts on kernels, images and cohomology, so they remain quasi-isomorphisms. By [lem-pur-quasi-iso-cone-acyclic] the graded comparison cones are acyclic. The comparison cone has the same finite filtration. A cycle in it projects to a boundary in its first nonzero graded layer; lift that boundary and subtract its differential. The remainder is in the next layer. Iteration ends at zero, proving the comparison cone acyclic, with no boundedness assumption on the complexes. The same cited criterion now proves that the Hom comparison is a quasi-isomorphism. If either list is empty both Hom complexes are zero and the assertion holds directly. Consequently $H^0\\operatorname{pretr}(F)$ is fully faithful.",
+   "uses": [
+    "lem-coef-dgcat-model-structure",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Elementary finite-filtration argument on cochain complexes; compare Tag 09QY cone conventions."
+   }
+  },
+  {
+   "text": "Write $\\widetilde F=\\operatorname{pretr}(F)$. Prove essential surjectivity by the finite-cone decomposition of step 4. The zero expression is in the image. Every single target object is isomorphic in $H^0\\mathcal E$ to some $F(B)$ by the definition of quasi-equivalence [lem-coef-dgcat-model-structure]; the fully faithful embeddings of step 1 and the shifts of step 2 retain these isomorphisms in the hull. For the induction step write a target expression as $C(w:P[-1]\\to A)$ as in step 4. Choose isomorphisms $\\alpha:\\widetilde F(S)\\cong A$ and $\\beta:\\widetilde F(R)\\cong P[-1]$ by induction and the single-summand case. Fullness from step 5 lifts $\\alpha^{-1}[w]\\beta$ to a class $[u]:R\\to S$; choose a closed degree-zero representative $u$. Exactness from step 3 makes the image of its cone triangle distinguished. The square with vertical maps $\\beta$ and $\\alpha$ commutes in $H^0$, by the chosen equation for $[u]$. Axiom TR3 of [def-weil-triangulated-category] completes this square to a morphism from the image cone triangle to the cone triangle of $w$. Its first two components are isomorphisms, so [lem-sf-triangle-morphism-iso] makes its third component an isomorphism. Thus the target expression is isomorphic to $\\operatorname{pretr}(F)(C(u))$. Together with step 5 this proves preservation of quasi-equivalences. This argument lifts a cohomology class after replacing the end objects; it never assumes that a quasi-isomorphism of Hom complexes is degreewise surjective.",
+   "uses": [
+    "lem-coef-dgcat-model-structure",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09QY and 09QU supply the cone triangulation; essential surjectivity is the finite-cone induction, with TR3 and the two-isomorphism criterion."
+   }
+  },
+  {
+   "text": "Finally suppose $\\mathcal B$ is pretriangulated in the stated module sense. The full dg category of right modules is closed under zero, sums, shifts and cones, so [lem-coef-dg-module-cone-triangulation], in a larger universe, gives its triangulated $H^0$. Induct along step 4 on the modules $M_T$. The base zero is homotopy equivalent to a representable by hypothesis, and a single shifted representable is so as well. At the cone step write the module as $C(w:V\\to W)$ and choose isomorphisms $a:h_X\\cong V$ and $b:h_Y\\cong W$ in the module $H^0$ category from the induction hypothesis. Strict dg Yoneda from [lem-coef-dgcat-formal-cone-enlargement] identifies $b^{-1}[w]a$ with a degree-zero cohomology class in $\\mathcal B(X,Y)$; choose a closed representative $u:X\\to Y$. Its module cone $C(h_u)$ is homotopy equivalent to a representable by the closure hypothesis. The equation $b[h_u]=[w]a$ gives a commuting square between the first two arrows of the distinguished cone triangles of $h_u$ and $w$. TR3 of [def-weil-triangulated-category] extends $(a,b)$ to a triangle morphism $(a,b,c)$. Since $a$ and $b$ are isomorphisms, [lem-sf-triangle-morphism-iso] makes $c:C(h_u)\\to C(w)$ an isomorphism in $H^0$, hence a homotopy equivalence. Composing this equivalence with the chosen representation of $C(h_u)$ represents $C(w)$. Thus $M_T$ is homotopy equivalent to some $h_B$. The full matrix-to-module identification of step 1 identifies this homotopy equivalence, its inverse and their degree-minus-one homotopies with maps in the hull. Hence $\\mathcal B\\to\\operatorname{pretr}(\\mathcal B)$ is essentially surjective on $H^0$; its mapping-complex maps were isomorphisms in step 1. It is therefore a quasi-equivalence. All functoriality claims were already proved entrywise in step 3.",
+   "uses": [
+    "lem-coef-dg-module-cone-triangulation",
+    "lem-coef-dgcat-formal-cone-enlargement",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "General module cone criterion (Tags 09QY, 09QU), strict Yoneda, and finite-cone induction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dgcat-formal-cone-enlargement",
+  "lem-coef-dg-module-cone-triangulation",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-coef-dgcat-model-structure",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, generic dg infrastructure through lem-coef-dg-quotient-hom-cone; explicit finite-matrix and filtration arguments, with Stacks dga.tex Tags 09QY and 09QU for triangulation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,15 +175,67 @@
    "results": "{\"t\": \"2026-10-16T15:25:11Z\", \"tool\": \"grep\", \"query\": \"twisted.?complex|pretriangulated|differential.?graded|two.?sided.?bar|semi.?free\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\"], \"digest\": \"49311228a49d9b61\"}",
    "date": "2026-10-16",
    "verdict": "no match: fresh second-reader source search returned ordinary pretriangulated-category instances and subcategory definitions. Read CategoryTheory/Localization/Triangulated.lean:35-63 and CategoryTheory/Triangulated/Subcategory.lean:50-85; they assume an ordinary triangulated source and do not state any dg free-cell, module bar or finite twisted-hull theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite twisted complexes over a differential graded category form a pretriangulated hull functor preserving quasi equivalences",
+   "results": "{\"t\": \"2026-10-16T16:32:23Z\", \"tool\": \"leanfinder\", \"query\": \"Finite twisted complexes over a differential graded category form a pretriangulated hull functor preserving quasi equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.Localization.pretriangulated\", \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"CategoryTheory.Functor.isHomological_of_localization\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"DerivedCategory.instIsTriangulated\", \"CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctor\", \"DerivedCategory.instPretriangulated\", \"HomotopyCategory.instPretriangulatedIntUp\"], \"digest\": \"54c0afd0e6d2d580\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HomotopyCategory.instPretriangulatedIntUp and instIsTriangulatedIntUp concern ordinary cochain complexes in a fixed preadditive category. Read HomotopyCategory/Pretriangulated.lean:574-586 and Triangulated.lean (the mapping-cone octahedron). DifferentialObject.lean:12-17,80-100 identifies complexes with differential objects; it does not construct the dg homotopy category of modules over an arbitrary dg category. Functor.IsTriangulated (Triangulated/Functor.lean:186-188) assumes the triangulated structures. None is a one-line instance of the module-action version here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pretriangulated\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-16T16:32:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pretriangulated\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.contractibleTriangleFunctor\", \"CategoryTheory.Pretriangulated.contractibleTriangleFunctor_obj\", \"CategoryTheory.Pretriangulated.contractibleTriangleFunctor_map_hom₁\", \"CategoryTheory.Pretriangulated.contractibleTriangleFunctor_map_hom₂\", \"CategoryTheory.Pretriangulated.Triangle.functorMk\", \"CategoryTheory.Pretriangulated.contractibleTriangleFunctor_map_hom₃\", \"CategoryTheory.Pretriangulated.Triangle.functorMk_obj\", \"CategoryTheory.Pretriangulated.Triangle.functorMk_map_hom₁\"], \"digest\": \"ebabac90795044c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HomotopyCategory.instPretriangulatedIntUp and instIsTriangulatedIntUp concern ordinary cochain complexes in a fixed preadditive category. Read HomotopyCategory/Pretriangulated.lean:574-586 and Triangulated.lean (the mapping-cone octahedron). DifferentialObject.lean:12-17,80-100 identifies complexes with differential objects; it does not construct the dg homotopy category of modules over an arbitrary dg category. Functor.IsTriangulated (Triangulated/Functor.lean:186-188) assumes the triangulated structures. None is a one-line instance of the module-action version here."
+  },
+  {
+   "tool": "grep",
+   "query": "twisted.?complex|pretriangulated.?hull|DGCategory",
+   "results": "{\"t\": \"2026-10-16T16:32:24Z\", \"tool\": \"grep\", \"query\": \"twisted.?complex|pretriangulated.?hull|DGCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HomotopyCategory.instPretriangulatedIntUp and instIsTriangulatedIntUp concern ordinary cochain complexes in a fixed preadditive category. Read HomotopyCategory/Pretriangulated.lean:574-586 and Triangulated.lean (the mapping-cone octahedron). DifferentialObject.lean:12-17,80-100 identifies complexes with differential objects; it does not construct the dg homotopy category of modules over an arbitrary dg category. Functor.IsTriangulated (Triangulated/Functor.lean:186-188) assumes the triangulated structures. None is a one-line instance of the module-action version here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite twisted complexes over dg categories and exact functors between their triangulated hulls",
+   "results": "{\"t\": \"2026-10-16T16:33:10Z\", \"tool\": \"leansearch\", \"query\": \"Finite twisted complexes over dg categories and exact functors between their triangulated hulls\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CategoryTheory.Functor.IsTriangulated\", \"DerivedCategory.instIsTriangulated\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.ExactFunctor.of\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.map_distinguished_op_exact\", \"CategoryTheory.IsTriangulated.mk\"], \"digest\": \"b65d69dc93f7dea9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HomotopyCategory.instPretriangulatedIntUp and instIsTriangulatedIntUp concern ordinary cochain complexes in a fixed preadditive category. Read HomotopyCategory/Pretriangulated.lean:574-586 and Triangulated.lean (the mapping-cone octahedron). DifferentialObject.lean:12-17,80-100 identifies complexes with differential objects; it does not construct the dg homotopy category of modules over an arbitrary dg category. Functor.IsTriangulated (Triangulated/Functor.lean:186-188) assumes the triangulated structures. None is a one-line instance of the module-action version here."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-quotient-hom-cone",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-finite-twisted-extension",
+  "worker": "stage1",
+  "summary": "Realized finite twisted complexes as labelled dg modules, checked cone matrices and exactness, proved quasi-full-faithfulness by a finite matrix-weight filtration and essential surjectivity by cone induction, and proved the pretriangulated-source assertion by module representability. Reused strict dg Yoneda and existing cone/triangle lemmas. One new statement-only input isolates Stacks 09QY/09QU for general cone-closed labelled module categories.",
+  "blueprint": "Proof paragraph 2, the three displayed derived Hom objects: generic dg-quotient infrastructure through the recorded ancestry, specifically the finite-cone argument in the final step of lem-coef-dg-quotient-hom-cone.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Ordinary cochain comparison cones test quasi-isomorphisms in the finite matrix filtration; it is a generic homological tool, not a replacement of the coefficient-adjunction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NU-8f202754a",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-8f202754a (reviewer sub-agent of L); spot-checked: PASS, no changes. I read Drinfeld (arXiv:math/0210114, §§2.3-2.5, pp. 8-9) directly from the PDF. Its one-sided twisted complexes (n>=0, q_ij=0 for i>=j, dq+q^2=0), its Hom differential d_naive f+q'f-(-1)^l fq, Cone(f)=(Y+X[1], q12=f), its definitions of pretriangulated and quasi-equivalence, and Prop. 2.5 all match the item statement. The item's 'zero representable' replaces Drinfeld's 'nonempty'; the two are equivalent under cone closure, so nothing is weakened. I read Stacks dga.tex: axioms (A)/(B) at lines 3460ff, situation-ABC at line 3545, 09QU lemma-cone-homotopy (cone triangle ending in -c), and 09QY proposition-ABC-homotopy-category-triangulated. New node lem-coef-dg-module-cone-triangulation is true: it is the dg-module specialization of Situation ABC. I checked the Leibniz sign of the shift, that p is closed, and the -p sign. Closure up to isomorphism is handled by passing to the strict closure. It is statement-only and self-contained (B1-B9 pass), a general criterion also used in step 7 on all modules, so it does not restate the item (D1). rg over the DAG for 09QY/09QU/ABC and for dg+triangulated found no duplicate; the dg-quotient node depends on the item. The seven steps are correct as written. Step 1: strict Yoneda gives the matrix Hom, and Leibniz makes the twisting difference a module map. Step 2: shift sign (-1)^{nr} and the target-first upper-triangular cone check out. Step 4: the attachment w:P[-1]->A is closed because D_A v+vD_P=0. Step 5: both twistings raise weight a-b, so the filtration is finite; the cone criterion is applied to complexes of abelian groups; cycle-lifting needs no boundedness. Step 6: only a class is lifted; TR3 and the two-of-three lemma finish it. Step 7: Yoneda lift, closure, TR3 and two-of-three, then the homotopies are pulled back into the hull. The dependency walk (239 nodes) finds no cycle, and no SGA source is used. I accept the tool_use of lem-pur-quasi-iso-cone-acyclic."
+ }
 }

@@ -1,0 +1,130 @@
+{
+ "id": "lem-coef-dg-module-cone-triangulation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, the three displayed derived Hom objects: generic dg-quotient infrastructure through the recorded ancestry, specifically the finite-cone argument in the final step of lem-coef-dg-quotient-hom-cone. The triangulated structure is obtained from a general cone-closed module-category criterion, before proving invariance of the finite hull.",
+   "via": [
+    "lem-coef-dg-finite-twisted-extension",
+    "lem-coef-dg-quotient-hom-cone",
+    "lem-coef-dg-module-projective-resolution",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Triangulation of a dg category of modules closed under shifts and cones",
+ "statement": "Let $\\mathcal B$ be a small cochain dg category over $\\mathbf Z$ as in [lem-coef-dgcat-model-structure]. Use right dg modules, homogeneous module maps, their Hom differential, and the representable modules as in [lem-coef-dgcat-formal-cone-enlargement]. Work in universes large enough for the sets of modules used. Let $S$ be a set of labels, with a right dg module $M_s$ for each $s\\in S$. Define a dg category $\\mathcal C$ on $S$ by taking all homogeneous module maps between the labelled modules, with differential $\\partial f=d_{M_t}f-(-1)^{|f|}fd_{M_s}$ and ordinary composition. Assume the following closure properties, each up to isomorphism of dg modules (a closed degree-zero module map with a strict inverse). The zero module is isomorphic to some $M_s$; for each $s,t$ the module $M_s\\oplus M_t$ is isomorphic to some labelled module; for each $s$ and $n\\in\\mathbf Z$, the shift $M_s[n]$ is isomorphic to some labelled module, where $M[n]^j=M^{j+n}$, $d_{M[n]}=(-1)^n d_M$, and the right graded action is unchanged; and for each closed degree-zero map $f:M_s\\to M_t$, its module cone $C(f)=M_t\\oplus M_s[1]$, with differential $(y,x)\\mapsto(dy+f(x),-dx)$, is isomorphic to some labelled module.\n\nThen $H^0\\mathcal C$, with morphisms the closed degree-zero module maps modulo the boundaries of degree-minus-one module maps, is triangulated in the sense of [def-weil-triangulated-category]. Its shift is induced by module shift and its distinguished triangles are precisely the triangles isomorphic to the cone triangles $M_s\\xrightarrow{f}M_t\\xrightarrow{i}C(f)\\xrightarrow{-p}M_s[1]$, after choosing the indicated labelled representatives. These structures are independent up to the induced equivalence of these choices.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09QY, TeX label proposition-ABC-homotopy-category-triangulated (global label dga-proposition-ABC-homotopy-category-triangulated), in Situation situation-ABC; Tag 09QU, TeX label lemma-cone-homotopy (global label dga-lemma-cone-homotopy), identifies cone triangles with distinguished triangles. Specialization to full labelled dg subcategories of right dg modules, using objectwise sums, shifts and cones."
+ },
+ "stmt_deps": [
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-dgcat-formal-cone-enlargement",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Differential graded category with graded split mapping cones and shifts has a triangulated homotopy category",
+   "results": "{\"t\": \"2026-10-16T16:33:14Z\", \"tool\": \"leanfinder\", \"query\": \"Differential graded category with graded split mapping cones and shifts has a triangulated homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.trianglehOfDegreewiseSplit\", \"HomotopyCategory.instIsTriangulatedIntUp\", \"HomotopyCategory.instPretriangulatedIntUp\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"CochainComplex.mappingCone.triangleh\", \"HomotopyCategory.spectralObjectMappingCone\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"DerivedCategory.instIsTriangulated\"], \"digest\": \"cc9cbd4d9c482c33\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HomotopyCategory.instPretriangulatedIntUp and instIsTriangulatedIntUp concern ordinary cochain complexes in a fixed preadditive category. Read HomotopyCategory/Pretriangulated.lean:574-586 and Triangulated.lean (the mapping-cone octahedron). DifferentialObject.lean:12-17,80-100 identifies complexes with differential objects; it does not construct the dg homotopy category of modules over an arbitrary dg category. Functor.IsTriangulated (Triangulated/Functor.lean:186-188) assumes the triangulated structures. None is a one-line instance of the module-action version here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyCategory\", \"triangulated\"",
+   "results": "{\"t\": \"2026-10-16T16:33:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyCategory\\\", \\\"triangulated\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopyCategory.Pretriangulated.distinguishedTriangles\", \"HomotopyCategory.instPretriangulatedIntUp\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"HomotopyCategory.Pretriangulated.contractible_distinguished\", \"HomotopyCategory.Pretriangulated.invRotate_distinguished_triangle'\", \"HomotopyCategory.Pretriangulated.rotate_distinguished_triangle'\", \"HomotopyCategory.Pretriangulated.rotate_distinguished_triangle\", \"HomotopyCategory.Pretriangulated.isomorphic_distinguished\"], \"digest\": \"e5aebc6832076e85\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HomotopyCategory.instPretriangulatedIntUp and instIsTriangulatedIntUp concern ordinary cochain complexes in a fixed preadditive category. Read HomotopyCategory/Pretriangulated.lean:574-586 and Triangulated.lean (the mapping-cone octahedron). DifferentialObject.lean:12-17,80-100 identifies complexes with differential objects; it does not construct the dg homotopy category of modules over an arbitrary dg category. Functor.IsTriangulated (Triangulated/Functor.lean:186-188) assumes the triangulated structures. None is a one-line instance of the module-action version here."
+  },
+  {
+   "tool": "grep",
+   "query": "graded.?categor|dg.?categor|HomotopyCategory",
+   "results": "{\"t\": \"2026-10-16T16:34:22Z\", \"tool\": \"grep\", \"query\": \"graded.?categor|dg.?categor|HomotopyCategory\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\"], \"digest\": \"6b46f952f67f14b0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HomotopyCategory.instPretriangulatedIntUp and instIsTriangulatedIntUp concern ordinary cochain complexes in a fixed preadditive category. Read HomotopyCategory/Pretriangulated.lean:574-586 and Triangulated.lean (the mapping-cone octahedron). DifferentialObject.lean:12-17,80-100 identifies complexes with differential objects; it does not construct the dg homotopy category of modules over an arbitrary dg category. Functor.IsTriangulated (Triangulated/Functor.lean:186-188) assumes the triangulated structures. None is a one-line instance of the module-action version here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A differential graded category with zero direct sums shifts and graded split cones has a triangulated homotopy category",
+   "results": "{\"t\": \"2026-10-16T16:34:23Z\", \"tool\": \"leansearch\", \"query\": \"A differential graded category with zero direct sums shifts and graded split cones has a triangulated homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.instIsTriangulatedIntUp\", \"DerivedCategory.instIsTriangulated\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"HomotopyCategory.instPretriangulatedIntUp\", \"CategoryTheory.IsTriangulated.mk\", \"CategoryTheory.Pretriangulated\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"HomotopyCategory.mappingCone_triangleh_distinguished\"], \"digest\": \"26d8016ce6e2a451\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HomotopyCategory.instPretriangulatedIntUp and instIsTriangulatedIntUp concern ordinary cochain complexes in a fixed preadditive category. Read HomotopyCategory/Pretriangulated.lean:574-586 and Triangulated.lean (the mapping-cone octahedron). DifferentialObject.lean:12-17,80-100 identifies complexes with differential objects; it does not construct the dg homotopy category of modules over an arbitrary dg category. Functor.IsTriangulated (Triangulated/Functor.lean:186-188) assumes the triangulated structures. None is a one-line instance of the module-action version here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stacks 09QY axioms A B C for differential graded categories imply Verdier triangulation on degree zero cohomology",
+   "results": "{\"t\": \"2026-10-16T16:34:33Z\", \"tool\": \"leanfinder\", \"query\": \"Stacks 09QY axioms A B C for differential graded categories imply Verdier triangulation on degree zero cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"DerivedCategory.instIsTriangulated\", \"HomotopyCategory.instIsTriangulatedIntUp\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"DerivedCategory.instPretriangulated\", \"HomotopyCategory.instPretriangulatedIntUp\", \"DerivedCategory.TStructure.t\", \"HomotopyCategory.mappingCone_triangleh_distinguished\"], \"digest\": \"308ad45f73343ec5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HomotopyCategory.instPretriangulatedIntUp and instIsTriangulatedIntUp concern ordinary cochain complexes in a fixed preadditive category. Read HomotopyCategory/Pretriangulated.lean:574-586 and Triangulated.lean (the mapping-cone octahedron). DifferentialObject.lean:12-17,80-100 identifies complexes with differential objects; it does not construct the dg homotopy category of modules over an arbitrary dg category. Functor.IsTriangulated (Triangulated/Functor.lean:186-188) assumes the triangulated structures. None is a one-line instance of the module-action version here."
+  },
+  {
+   "tool": "grep",
+   "query": "differential.?graded|DGCategory|DGModule",
+   "results": "{\"t\": \"2026-10-16T16:35:13Z\", \"tool\": \"grep\", \"query\": \"differential.?graded|DGCategory|DGModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\"], \"digest\": \"b00540e86065b3f2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HomotopyCategory.instPretriangulatedIntUp and instIsTriangulatedIntUp concern ordinary cochain complexes in a fixed preadditive category. Read HomotopyCategory/Pretriangulated.lean:574-586 and Triangulated.lean (the mapping-cone octahedron). DifferentialObject.lean:12-17,80-100 identifies complexes with differential objects; it does not construct the dg homotopy category of modules over an arbitrary dg category. Functor.IsTriangulated (Triangulated/Functor.lean:186-188) assumes the triangulated structures. None is a one-line instance of the module-action version here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy category of enriched functors to cochain complexes closed under mapping cones is triangulated",
+   "results": "{\"t\": \"2026-10-16T16:50:56Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy category of enriched functors to cochain complexes closed under mapping cones is triangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.triangleh\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"HomotopyCategory.instIsTriangulatedIntUp\", \"HomotopyCategory.spectralObjectMappingCone\", \"CochainComplex.mappingConeCompTriangleh\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"HomotopyCategory.mappingCone_triangleh_distinguished\", \"DerivedCategory.instIsTriangulated\"], \"digest\": \"285c02e0c6ac3617\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:574-586 and Triangulated.lean:191-211. The homotopy-category instances and mapping-cone triangles concern ordinary complexes in a fixed preadditive category, not right modules over an arbitrary dg category with its own nonzero differential."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyCategory\", \"FunctorCategory\"",
+   "results": "{\"t\": \"2026-10-16T16:50:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyCategory\\\", \\\"FunctorCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: fresh independent second-reader search returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DifferentialGraded|enriched.*complex|complex.*enriched",
+   "results": "{\"t\": \"2026-10-16T16:50:52Z\", \"tool\": \"grep\", \"query\": \"DGModule|DifferentialGraded|enriched.*complex|complex.*enriched\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: fresh independent second-reader search returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full differential graded subcategory of right modules closed under shifts and cones has a triangulated H0 category",
+   "results": "{\"t\": \"2026-10-16T19:09:28Z\", \"tool\": \"leanfinder\", \"query\": \"Full differential graded subcategory of right modules closed under shifts and cones has a triangulated H0 category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"DerivedCategory.instIsTriangulated\", \"HomotopyCategory.instIsTriangulatedIntUp\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"DerivedCategory.instPretriangulated\", \"CategoryTheory.Functor.instIsTriangulatedHomologicalKernel\", \"DerivedCategory.TStructure.t\"], \"digest\": \"13e271c96216218a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read pinned Mathlib Algebra/Homology/HomotopyCategory/Pretriangulated.lean:574-586, Triangulated.lean:191-211, Acyclic.lean:34-45, and DerivedCategory/Basic.lean:169-178. These concern ordinary complexes or subcategories of their homotopy category, not modules over an arbitrary dg category with nonzero differential. No exact declaration or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyCategory\", \"Enriched\"",
+   "results": "{\"t\": \"2026-10-16T19:09:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyCategory\\\", \\\"Enriched\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: fresh independent second-reader Loogle query returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "dgMod|dgModule|differential.?graded.?categor|pretriangulated.?hull|twisted.?complex",
+   "results": "{\"t\": \"2026-10-16T19:09:25Z\", \"tool\": \"grep\", \"query\": \"dgMod|dgModule|differential.?graded.?categor|pretriangulated.?hull|twisted.?complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: fresh independent second-reader whole-Mathlib source search returned zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dg-finite-twisted-extension",
+  "date": "2026-10-17",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

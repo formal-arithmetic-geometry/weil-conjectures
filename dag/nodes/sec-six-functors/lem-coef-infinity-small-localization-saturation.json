@@ -27,9 +27,79 @@
   "def-coef-complete-algebroid",
   "lem-coef-presentable-infinity-adjoints"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $G=\\langle S\\rangle$ as defined in the statement, and let $E$ be the class of arrows detected as equivalences by mapping into every $S$-local object. We first prove $G\\subseteq E$. By [lem-coef-infinity-yoneda-presheaf-limits], arrow colimits are objectwise and $\\operatorname{Map}(-,Z)$ takes small colimits to limits. By [lem-cbc-enhanced-functor-cone-calculus], a transformation of space-valued diagrams with equivalence components is an equivalence; taking its limit preserves its inverse. Consequently $E$ is closed under all small arrow colimits. For a pushout of $A\\to B$ along $A\\to A'$, mapping to a local $Z$ gives the pullback of $\\operatorname{Map}(B,Z)\\to\\operatorname{Map}(A,Z)$ along $\\operatorname{Map}(A',Z)\\to\\operatorname{Map}(A,Z)$; if the first map is an equivalence, this pullback projection is an equivalence. Two-out-of-three follows by composing the precomposition maps. For retracts, the precomposition map of a retract arrow is a retract of the precomposition map of the original arrow. In the homotopy category of spaces, a retract $u:P\\to Q$ of an invertible $v:P'\\to Q'$, with sections $a:P\\to P'$, $b:Q\\to Q'$ and retractions $r:P'\\to P$, $t:Q'\\to Q$, has inverse $rv^{-1}b$: the two inverse equations follow from $va=bu$, $ur=tv$, $ra=1$ and $tb=1$. These equations are homotopies of maps of spaces, so $u$ is an equivalence. Finally $E$ contains $S$ by locality and contains all equivalences by precomposing with inverses. Thus the defining minimality of $G$ gives $G\\subseteq E$. This also proves the statement's objectwise arrow-colimit assertion.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.5.4.5 and Lemma 5.5.4.11; objectwise colimits: Proposition 5.1.2.2; explicit retract calculation added"
+   }
+  },
+  {
+   "text": "Let $W$ be the smallest replete class containing $S$ and equivalences, closed under pushouts and small arrow colimits and satisfying two-out-of-three, without separately imposing retract closure. Replete means invariant under equivalences of arrows. The class $G$ is replete: replacing an arrow by an equivalent arrow changes it by composition with source and target equivalences, and composition closure follows from two-out-of-three. Hence $W\\subseteq G\\subseteq E$. For any object $X$, [lem-coef-small-saturated-coslice-presentability] applies to this exact $W$ and makes the full coherent coslice $\\mathcal D_X\\subset\\mathcal C_{X/}$ on $W$-arrows presentable. By the small-limit assertion of [lem-coef-presentable-infinity-adjoints], $\\mathcal D_X$ has a terminal object $s:X\\to Y$ (the limit of the empty diagram). In particular $s\\in W$. Smallness is used for the generating set $S$, not for all of $W$ or for the object set of $\\mathcal D_X$.",
+   "uses": [
+    "lem-coef-small-saturated-coslice-presentability",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.5.14, first paragraph; Definition 5.5.4.5 for W"
+   }
+  },
+  {
+   "text": "We prove $Y$ is $W$-local. Given $u:A\\to B$ in $W$ and $g:A\\to Y$, form $Z=Y\\amalg_A B$ with $u':Y\\to Z$. Pushout closure and composition closure put $u'$ and $s'=u's$ in $W$. Terminality and fullness give contractible spaces $\\operatorname{Map}_{\\mathcal C_{X/}}(s',s)$ and $\\operatorname{Map}_{\\mathcal C_{X/}}(s,s)$. Precomposition with the triangle $s\\to s'$ is a map between these contractible spaces, hence an equivalence. Its homotopy fiber at $1_s$ is contractible by [lem-coef-space-contractible-fiber-equivalence]. We identify that fiber explicitly. Put $P=\\operatorname{Map}(Z,Y)$, $Q=\\operatorname{Map}(Y,Y)$ and $R=\\operatorname{Map}(X,Y)$. The dual cone formula of [lem-cbc-enhanced-functor-cone-calculus] identifies the preceding map with $P\\times_R^h\\{s\\}\\to Q\\times_R^h\\{s\\}$ induced by $u'^*:P\\to Q$. Taking its fiber at $1_s$, and associating the homotopy pullbacks, gives the fiber of $u'^*$ at $1_Y$. By the pushout mapping formula of [lem-coef-infinity-yoneda-presheaf-limits], $P\\simeq Q\\times^h_{\\operatorname{Map}(A,Y)}\\operatorname{Map}(B,Y)$, with $u'^*$ its projection to $Q$. Its fiber at $1_Y$ is therefore the fiber of $\\operatorname{Map}(B,Y)\\to\\operatorname{Map}(A,Y)$ at $g$. Every such fiber is contractible. The mapping spaces are Kan by the cone-calculus node, so [lem-coef-space-contractible-fiber-equivalence] proves this map an equivalence. The assertion includes an empty space $\\operatorname{Map}(A,Y)$, when the fiber criterion is vacuous. Since $S\\subseteq W$, the object $Y$ is in particular $S$-local.",
+   "uses": [
+    "lem-coef-space-contractible-fiber-equivalence",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.5.14, second paragraph; the fiber identifications of Lemmas 5.5.5.12-13 expanded using the cited general formulas"
+   }
+  },
+  {
+   "text": "By step 1, $s\\in W\\subseteq E$ means that restriction along $s$ is an equivalence into every local object. The reflector of [lem-coef-presentable-infinity-adjoints] gives the same universal property for its unit $\\eta_X:X\\to iLX$, where $i$ is the full inclusion. Both $Y$ and $iLX$ are local. These two restriction equivalences supply maps $k:Y\\to iLX$ and $h:iLX\\to Y$ with $ks\\simeq\\eta_X$ and $h\\eta_X\\simeq s$. Precomposing $hk$ and $1_Y$ with $s$ gives the same map; injectivity on components of $\\operatorname{Map}(Y,Y)\\to\\operatorname{Map}(X,Y)$ gives $hk\\simeq1_Y$. Likewise restriction along $\\eta_X$ gives $kh\\simeq1_{iLX}$. Thus $k$ is an equivalence. Since $s\\in W\\subseteq G$, equivalences and composition closure give $\\eta_X=ks\\in G$. This proves the unit assertion for every $X$, without assuming the desired description of the inverted class.",
+   "uses": [
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.15(1),(3) and the mapping-space universal property of the unit"
+   }
+  },
+  {
+   "text": "For $f:A\\to B$, the mapping-space adjunction in [lem-coef-presentable-infinity-adjoints] identifies restriction into a local $Z$ with $\\operatorname{Map}_{\\mathcal C_S}(LB,Z)\\to\\operatorname{Map}_{\\mathcal C_S}(LA,Z)$ induced by $Lf$. If $Lf$ is an equivalence, composing with its inverse makes every such restriction an equivalence. Conversely suppose every restriction is an equivalence and put $v=Lf:LA\\to LB$. Taking $Z=LA$ and surjectivity on components supplies $w:LB\\to LA$ with $wv\\simeq1_{LA}$. Taking $Z=LB$ and injectivity on components gives $vw\\simeq1_{LB}$, because $(vw)v\\simeq v\\simeq1_{LB}v$. These two homotopies exhibit $v$ as an equivalence. This proves equivalence of the first two conditions. Step 1 proves that membership in $G$ implies the second condition. Finally, if $Lf$ is an equivalence, the coherent unit naturality square supplied by that same adjunction is $iL(f)\\eta_A\\simeq\\eta_B f$. Step 4 puts both units in $G$, and $iL(f)$ is an equivalence and thus in $G$. Composition followed by two-out-of-three yields $f\\in G$. All three conditions are now equivalent.",
+   "uses": [
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.15(4); explicit inverse argument in place of an uncited equivalence detector"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-small-saturated-coslice-presentability",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-space-contractible-fiber-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Directly checked against Definition 5.5.4.5, Lemma 5.5.4.11, Proposition 5.5.4.15 and Lemma 5.5.5.14. HTT is read online but not archived in literature/; proof written out using existing DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,10 +149,94 @@
    "results": "{\"t\": \"2026-10-16T16:37:48Z\", \"tool\": \"grep\", \"query\": \"quasicategor.*(local|groupoid|cotensor|colimit)|Rezk|SegalSpace|effective.*groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\"], \"digest\": \"815092eb62aa2ccf\"}",
    "date": "2026-10-16",
    "verdict": "no match: the sole hit is a Rezk bibliographic reference in CategoryTheory/LiftingProperties/PushoutProduct.lean:22, not a declaration of this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "strongly.?saturated|[Qq]uasicategor.*local|leftBousfieldW",
+   "results": "{\"t\": \"2026-10-16T18:30:25Z\", \"tool\": \"grep\", \"query\": \"strongly.?saturated|[Qq]uasicategor.*local|leftBousfieldW\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Category/Hom-set orthogonality, ordinary localization, or unrelated algebraic localization; no declaration for mapping-space saturation of a presentable quasicategory. Read Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean:73-103,410-445 and Mathlib/CategoryTheory/Localization/Bousfield.lean:41-61."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reflective localization of a presentable quasicategory inverts exactly the strongly saturated closure of its generating maps",
+   "results": "{\"t\": \"2026-10-16T18:30:25Z\", \"tool\": \"leansearch\", \"query\": \"Reflective localization of a presentable quasicategory inverts exactly the strongly saturated closure of its generating maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.mk\", \"CategoryTheory.MorphismProperty.Localization'\", \"CategoryTheory.Localization.LeftBousfield.isLocalization\", \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_reflection\", \"CategoryTheory.MorphismProperty.instIsLocalizationLocalization'Q'\", \"CategoryTheory.OrthogonalReflection.isLocal_reflectionObj\", \"CategoryTheory.Localization.instIsEquivalenceLocalizationLift\", \"CategoryTheory.MorphismProperty.Localization\"], \"digest\": \"305d021382bda0d8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Category/Hom-set orthogonality, ordinary localization, or unrelated algebraic localization; no declaration for mapping-space saturation of a presentable quasicategory. Read Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean:73-103,410-445 and Mathlib/CategoryTheory/Localization/Bousfield.lean:41-61."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocal\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-16T18:30:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocal\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddSubmonoid.IsLocalizationMap\", \"Submonoid.IsLocalizationMap\", \"AddSubmonoid.isLocalizationMap_top_nat_int\", \"AddSubmonoid.isLocalizationMap_id\", \"Submonoid.isLocalizationMap_id\", \"AddSubmonoid.isLocalizationMap_nat_int\", \"AddSubmonoid.LocalizationMap.isLocalizationMap\", \"Submonoid.LocalizationMap.isLocalizationMap\"], \"digest\": \"7f6d5b897ab742a2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Category/Hom-set orthogonality, ordinary localization, or unrelated algebraic localization; no declaration for mapping-space saturation of a presentable quasicategory. Read Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean:73-103,410-445 and Mathlib/CategoryTheory/Localization/Bousfield.lean:41-61."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small set of morphisms in a presentable infinity category generates a strongly saturated class detected by mapping spaces into local objects",
+   "results": "{\"t\": \"2026-10-16T18:30:35Z\", \"tool\": \"leanfinder\", \"query\": \"A small set of morphisms in a presentable infinity category generates a strongly saturated class detected by mapping spaces into local objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.IsCardinalLocallyPresentable.iff_exists_isStrongGenerator\", \"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\", \"CategoryTheory.MorphismProperty.ind_iff_exists\", \"CategoryTheory.ObjectProperty.ind_iff_exists\", \"CategoryTheory.isClosedUnderColimitsOfShape_isCardinalPresentable\"], \"digest\": \"4384df3fb69a5322\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Category/Hom-set orthogonality, ordinary localization, or unrelated algebraic localization; no declaration for mapping-space saturation of a presentable quasicategory. Read Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean:73-103,410-445 and Mathlib/CategoryTheory/Localization/Bousfield.lean:41-61."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a quasicategory at generators is detected by mapping spaces into local objects",
+   "results": "{\"t\": \"2026-10-16T18:31:05Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of a quasicategory at generators is detected by mapping spaces into local objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.q_isLocalization\", \"CategoryTheory.MorphismProperty.HasLocalization.standard\", \"CategoryTheory.MorphismProperty.HasLocalization.hL\", \"CategoryTheory.MorphismProperty.instIsLocalizationLocalization'Q'\", \"CategoryTheory.Localization.strictUniversalPropertyFixedTargetQ\", \"CategoryTheory.Localization.instInhabitedStrictUniversalPropertyFixedTargetLocalizationQ\", \"CategoryTheory.MorphismProperty.HasLocalization\", \"CategoryTheory.Functor.IsLocalization.mk'\"], \"digest\": \"ea980e7d3062af90\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Category/Hom-set orthogonality, ordinary localization, or unrelated algebraic localization; no declaration for mapping-space saturation of a presentable quasicategory. Read Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean:73-103,410-445 and Mathlib/CategoryTheory/Localization/Bousfield.lean:41-61."
+  },
+  {
+   "tool": "grep",
+   "query": "OrthogonalReflection|isLocal_reflectionObj|LeftBousfield.isLocalization",
+   "results": "{\"t\": \"2026-10-16T18:31:19Z\", \"tool\": \"grep\", \"query\": \"OrthogonalReflection|isLocal_reflectionObj|LeftBousfield.isLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\"], \"digest\": \"626ae7d91ccf00fb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Category/Hom-set orthogonality, ordinary localization, or unrelated algebraic localization; no declaration for mapping-space saturation of a presentable quasicategory. Read Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean:73-103,410-445 and Mathlib/CategoryTheory/Localization/Bousfield.lean:41-61."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasicategory local equivalences are closed under pushouts retracts and colimits of arrows",
+   "results": "{\"t\": \"2026-10-16T18:31:19Z\", \"tool\": \"leansearch\", \"query\": \"Quasicategory local equivalences are closed under pushouts retracts and colimits of arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instIsStableUnderRetractsQuasiIso\", \"CategoryTheory.ObjectProperty.instIsStableUnderRetractsOfIsClosedUnderColimitsOfShapeWalkingParallelPair\", \"CategoryTheory.Adjunction.isEquivalence_preservesColimits\", \"CategoryTheory.ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence\", \"CategoryTheory.Limits.IsColimit.whiskerEquivalence\", \"CategoryTheory.ObjectProperty.isClosedUnderColimitsOfShape_iff_of_equivalence\", \"HomotopicalAlgebra.instIsStableUnderRetractsTrivialCofibrationsOfCofibrationsOfWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\"], \"digest\": \"4bb7172509f3a245\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Category/Hom-set orthogonality, ordinary localization, or unrelated algebraic localization; no declaration for mapping-space saturation of a presentable quasicategory. Read Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean:73-103,410-445 and Mathlib/CategoryTheory/Localization/Bousfield.lean:41-61."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reflective localization of a presentable infinity category inverts exactly the strongly saturated closure of a small set of arrows",
+   "results": "{\"t\": \"2026-10-16T18:48:32Z\", \"tool\": \"leanfinder\", \"query\": \"Reflective localization of a presentable infinity category inverts exactly the strongly saturated closure of a small set of arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OrthogonalReflection.isLocal_isLocal_reflection\", \"CategoryTheory.Localization.LeftBousfield.isLocalization\", \"CategoryTheory.MorphismProperty.le_leftBousfieldW_isLocal\", \"CategoryTheory.OrthogonalReflection.isLocal_reflectionObj\", \"CategoryTheory.OrthogonalReflection.leftBousfieldW_isLocal_toSucc\", \"CategoryTheory.MorphismProperty.Q_inverts\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.inverts\"], \"digest\": \"faf643e97a2e9548\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary Category/Hom-set orthogonality, algebraic localization, simplicial model-category generators or site saturation, not the presentable-quasicategory mapping-space statement. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:38-65 and Presentable/OrthogonalReflection.lean:405-445."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocal\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-16T18:48:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocal\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddSubmonoid.IsLocalizationMap\", \"Submonoid.IsLocalizationMap\", \"AddSubmonoid.isLocalizationMap_top_nat_int\", \"AddSubmonoid.isLocalizationMap_id\", \"Submonoid.isLocalizationMap_id\", \"AddSubmonoid.isLocalizationMap_nat_int\", \"AddSubmonoid.LocalizationMap.isLocalizationMap\", \"Submonoid.LocalizationMap.isLocalizationMap\"], \"digest\": \"7f6d5b897ab742a2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary Category/Hom-set orthogonality, algebraic localization, simplicial model-category generators or site saturation, not the presentable-quasicategory mapping-space statement. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:38-65 and Presentable/OrthogonalReflection.lean:405-445."
+  },
+  {
+   "tool": "grep",
+   "query": "strongly.?saturated|[Qq]uasicategor.*local|leftBousfieldW",
+   "results": "{\"t\": \"2026-10-16T18:48:34Z\", \"tool\": \"grep\", \"query\": \"strongly.?saturated|[Qq]uasicategor.*local|leftBousfieldW\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary Category/Hom-set orthogonality, algebraic localization, simplicial model-category generators or site saturation, not the presentable-quasicategory mapping-space statement. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:38-65 and Presentable/OrthogonalReflection.lean:405-445."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small collection of morphisms in a presentable quasicategory generates the maps orthogonal to all local objects via mapping spaces",
+   "results": "{\"t\": \"2026-10-16T18:53:34Z\", \"tool\": \"leanfinder\", \"query\": \"A small collection of morphisms in a presentable quasicategory generates the maps orthogonal to all local objects via mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OrthogonalReflection.corepresentableBy\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"CategoryTheory.OrthogonalReflection.isLocal_reflectionObj\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_reflection\", \"CategoryTheory.OrthogonalReflection.leftBousfieldW_isLocal_toSucc\", \"CategoryTheory.SmallObject.rlp_πObj\"], \"digest\": \"2a1fcb6d78fbb6f6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary Category/Hom-set orthogonality, algebraic localization, simplicial model-category generators or site saturation, not the presentable-quasicategory mapping-space statement. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:38-65 and Presentable/OrthogonalReflection.lean:405-445."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A small set of maps in a presentable infinity category generates a saturated class detected by mapping spaces to local objects",
+   "results": "{\"t\": \"2026-10-16T18:53:34Z\", \"tool\": \"leansearch\", \"query\": \"A small set of maps in a presentable infinity category generates a saturated class detected by mapping spaces to local objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.locallySmall\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.presentable\", \"CategoryTheory.IsCardinalLocallyPresentable.iff_exists_isStrongGenerator\", \"CategoryTheory.IsCardinalLocallyPresentable.toHasCardinalFilteredGenerator\", \"CategoryTheory.Coverage.mem_toGrothendieck\", \"CategoryTheory.Precoverage.mem_toGrothendieck_iff\", \"CategoryTheory.HasCardinalFilteredGenerator.toLocallySmall\", \"CategoryTheory.Precoverage.Saturate\"], \"digest\": \"219f150eb78dd70e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary Category/Hom-set orthogonality, algebraic localization, simplicial model-category generators or site saturation, not the presentable-quasicategory mapping-space statement. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:38-65 and Presentable/OrthogonalReflection.lean:405-445."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-completion",
@@ -90,5 +244,29 @@
   "group": "NK"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-small-localization-saturation",
+  "worker": "stage1",
+  "summary": "Proved the mapping-space equivalence closure, constructed a terminal W-arrow using the existing presentable saturated coslice, proved its target local by explicit homotopy-fiber computations, identified it with the unit, and obtained the three equivalent conditions by an explicit inverse and the naturality square. No new nodes or Mathlib leaves. Distinguished W without a separately imposed retract condition from the item closure G; only W subset G is needed, avoiding an unstated retract-closure equivalence. Statement unchanged. All cited node statements read, quotes supplied in citations.json, and dependency closures checked for a path back to the item.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2 (finite-coefficient mapping-complex adjunction before R lim), via the existing algebroid-completion/enriched-calculus ancestry; realizes the general localization input of the item from.place. The main-20261015 sk-thm-sf-package proof has the same paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "General coherent coslice mapping-space fiber formula, Kan mapping spaces, and objectwise equivalence criterion are used in steps 1 and 3. This is an enhancement tool; no node of this unit replaces that generic calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N1-4e7ad088b",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-4e7ad088b (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited statement in full, plus def-cbc-enhanced-diagrams-cones for the coslice/cocone category and its mapping spaces, and the parent lem-coef-algebroid-completion. Source checked: HTT text already on this machine at /tmp/q11src/htt.txt, read only. The statement matches HTT Prop. 5.5.4.15(1),(3),(4) and Def. 5.5.4.5. The item's extra 'equivalences, retracts' in <S> are automatic in a strongly saturated class by Remark 5.5.4.6, so there is no weakening; the unit claim is the remark in the proof of (4). Step 1 checks the closure of mapping-space-detected arrows (Lemma 5.5.4.11) using only the Yoneda and cone-calculus statements; I verified the retract inverse rv^-1 b. Step 2 defines W exactly as the coslice node does, W is contained in <S>, and D_X is presentable, so it has a terminal object s, as in the first paragraph of HTT 5.5.5.14. Step 3: I checked the dual cocone formula with K = Delta^0. Map_X/(s',s) and Map_X/(s,s) are homotopy fibers over s of Map(Z,Y)->Map(X,Y) and Map(Y,Y)->Map(X,Y); the fiber at 1_s is the fiber of u'^* at 1_Y; by the pushout formula this is the fiber of Map(B,Y)->Map(A,Y) at g. The step is correct, keeps homotopy fibers and the Kan hypothesis explicit, and follows the second paragraph of HTT 5.5.5.14. Steps 4-5 are genuinely elementary universal-arrow, inverse and naturality-square arguments from the adjoints node's statement. No cycle (101-node dependency closure). No new nodes, and the dag/nodes search found no duplicate. Small cases checked: S empty, S of equivalences, {empty->pt} in spaces. All three kinds of Mathlib search are recorded with verdict no match. The off-unit use of lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) is declared and accepted: it is a generic coslice/Kan/componentwise-equivalence tool, already accepted on many nodes of this unit. No changes made."
+ }
 }
