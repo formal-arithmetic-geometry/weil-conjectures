@@ -14,7 +14,7 @@
 |---|---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 1 | disputed |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 5 | 1 | disputed |
-| `Sheaf.Paper.CondensedQbarExchangeEquality` | 3 | 1 | proof |
+| `Sheaf.Paper.CondensedQbarPullbackCube` | 5 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientExchange` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedLocalModelGluing` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarFunctionCoefficients` | 7 | 1 | proof |
