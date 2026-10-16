@@ -257,5 +257,38 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-92ff66fa4 (reviewer sub-agent of L); spot-checked: Read the full item, all three new nodes, cited node statements, Kerodon sources, unit/chapter route, and delivery report. Verified hypotheses, boundary cases, relative cone equations, right-pinched mapping model, duplicate searches, and declared tool uses. Wrote review.md with detailed checks; no repairs required."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KanMappingRestriction",
+  "declaration": "SSet.Enhanced.kan_mapping_restriction",
+  "declarations": [
+   "SSet.Enhanced.kanPrependFirst",
+   "SSet.Enhanced.kanExtend",
+   "SSet.Enhanced.kanFace",
+   "SSet.Enhanced.kanEndpoint",
+   "SSet.Enhanced.kanSlice",
+   "SSet.Enhanced.kanSliceProjection",
+   "SSet.Enhanced.kanPrism",
+   "SSet.Enhanced.kanSliceTransformation",
+   "SSet.Enhanced.IsPointwiseKanDiagram",
+   "SSet.Enhanced.diagramRestriction",
+   "SSet.Enhanced.diagramMappingRestriction",
+   "SSet.Enhanced.kan_mapping_restriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KanMappingRestriction.lean",
+  "statement": "theorem kan_mapping_restriction {C E : SSet.{u}} [Quasicategory C] [Quasicategory E] (P : C _⦋0⦌ → Prop) (F G : C ⟶ E) (h : IsPointwiseKanDiagram (fullSubcomplex C P) F true ∨ IsPointwiseKanDiagram (fullSubcomplex C P) G false) : IsWeakHomotopyEquivalence (diagramMappingRestriction (fullSubcomplex C P) F G) ∧ ∀ (K : SSet.{u}) (H : K ⟶ (ihom C).obj E), MonoidalClosed.uncurry (H ≫ diagramRestriction (fullSubcomplex C P) E) = (fullSubcomplex C P).ι ▷ K ≫ MonoidalClosed.uncurry H",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the recorded enhanced-diagram definitions. Helpers define the slices and canonical contraction explicitly in this node; the pointwise predicate fixes the full apex/transformation pair uniquely. The comparison is simplicial restriction, and its arbitrary-parameter uncurry identity states coherent naturality."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-91083e0b2",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, all twelve declarations, universes, edge cases, docstrings, and verbatim signature. Per-file sandbox and library compiles passed cleanly. No defects found; branch unchanged."
  }
 }

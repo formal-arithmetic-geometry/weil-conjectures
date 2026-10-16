@@ -26,7 +26,9 @@
   "def-sbc-standard-tstructure-derived-category",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-constant-sheaf",
-  "def-kun-derived-tensor"
+  "def-kun-derived-tensor",
+  "def-weil-geometric-fibre",
+  "lem-kun-tensor-sym"
  ],
  "proof": [
   {
@@ -489,5 +491,30 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-391e5dd50 (reviewer sub-agent of L); spot-checked: Read the mathematics in full. Repaired C4: the open-tensor citation covered pro-étale special coefficients, not ordinary étale arbitrary finite rings; added a statement-only lemma from Stacks 0GL1 and replaced all citations. Completed child metadata. Verified Zheng’s specified mate, Bhatt–Scholze compact generation, all ten steps, edge cases, duplicates and acyclicity. Review and corrected JSON files written.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleExceptionalConstantTensor",
+  "declaration": "AlgebraicGeometry.Etale.exceptionalConstantTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleExceptionalConstantTensor.lean",
+  "statement": "theorem exceptionalConstantTensor (k : Type u) [Field k] [IsAlgClosed k] (p ell : ℕ) [Fact p.Prime] [Fact ell.Prime] [CharP k p] (hne : ell ≠ p) {X Y : Scheme.{u}} (xk : X ⟶ Spec (.of k)) (yk : Y ⟶ Spec (.of k)) [LocallyOfFiniteType xk] [LocallyOfFiniteType yk] [QuasiCompact xk] [QuasiCompact yk] (f : X ⟶ Y) (hf : f ≫ yk = xk) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : ∃ Nf : ℕ, ∀ (c : Compactification f) (C : Type (u + 1)) [CommRing C] [Finite C], (∃ n : ℕ, ∀ z : C, (ell : C) ^ n * z = 0) → (∀ (a : ℤ) (K : DerivedCategoryModule C X), _root_.DerivedCategory.IsLE K a → _root_.DerivedCategory.IsLE ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c).obj K) (a + Nf)) ∧ (∀ (d : ℕ), (∀ y : Y, topologicalKrullDim (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y)) ≤ (d : ℕ∞)) → ∀ (a : ℤ) (K : DerivedCategoryModule C X), _root_.DerivedCategory.IsLE K a → _root_.DerivedCategory.IsLE ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c).obj K) (a + 2 * (d : ℤ))) ∧ (∀ (G : DerivedCategoryModule C Y ⥤ DerivedCategoryModule C X) (adj : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c ⊣ G), ∃ P : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c ⋙ exceptionalCoefficientTensor C Y ≅ exceptionalCoefficientTensor C X ⋙ (Functor.whiskeringRight _ _ _).obj (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c), (∀ (V : DerivedCategory (ModuleCat.{u + 1} C)) (K : DerivedCategoryModule C X), (P.hom.app K).app V = exceptionalConstantProjectionMap C c V K) ∧ ∃ A : G ⋙ exceptionalCoefficientTensor C X ≅ exceptionalCoefficientTensor C Y ⋙ (Functor.whiskeringRight _ _ _).obj G, ∀ (V : DerivedCategory (ModuleCat.{u + 1} C)) (M : DerivedCategoryModule C Y), (A.hom.app M).app V = adj.homEquiv _ _ ((P.inv.app (G.obj M)).app V ≫ ((derivedTensor (ModuleCat.{u + 1} C) Y).obj ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} C)).mapDerivedCategory.obj V)).map (adj.counit.app M)))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.exceptionalCoefficientTensor",
+   "AlgebraicGeometry.Etale.exceptionalConstantPullbackIso",
+   "AlgebraicGeometry.Etale.exceptionalConstantProjectionMap",
+   "AlgebraicGeometry.Etale.exceptionalConstantTensor"
+  ],
+  "note": "The signature includes the input IsLE premise, a coefficient-uniform bound, geometric fibres, and an arbitrary fixed adjunction. Both natural isomorphisms are characterized by the canonical compact-support projection and its counit mate. The three helper definitions compose existing functors and canonical maps with real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-af52ddafb",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Checked snapshot, all ten statement dependencies, source passages, canonical maps, hypotheses, universes, edge cases, docstrings, report sections, and verbatim signature. Immutable module compiled cleanly through scompile.py in sandbox and library forms."
  }
 }
