@@ -25,9 +25,108 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-coef-cocomplete-monoidal-tensor] to form $V\\otimes_{\\mathrm{coc}}W$, with universal strong monoidal $\\mu$, and factor $b\\simeq\\bar b\\mu$, where $\\bar b$ preserves small colimits. By [lem-coef-algebroid-cocontinuous-base-change], all the algebroid categories in question have small colimits and $\\bar b_*$ preserves them. Functoriality of the external product under changes of enrichment in [lem-coef-algebroid-external-product] identifies the bifunctor of the statement with $\\bar b_*\\,G$, where $G(A,B)=\\mu_*(A\\boxtimes B)$. We prove separate cocontinuity of $G$ in steps 2-6, without claiming that $b$ or $\\mu$ preserves colimits of the cartesian product category.",
+   "uses": [
+    "lem-coef-cocomplete-monoidal-tensor",
+    "lem-coef-algebroid-cocontinuous-base-change",
+    "lem-coef-algebroid-external-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Observation 3.9 and reduction to the universal case"
+   }
+  },
+  {
+   "text": "For small monoidal $C,D$, the presheaf external product of [def-coef-segal-presheaf-localization] preserves colimits separately: evaluate at $[n](\\boldsymbol c,\\boldsymbol d)$, compute the colimit pointwise, and commute that colimit with product by the fixed space in the other factor. These two facts are supplied by [lem-coef-algebroid-segal-localization-model]. By [lem-coef-segal-external-local-equivalences], the product takes Segal equivalences to Segal equivalences and takes two Segal objects to a Segal object. The localization unit maps therefore give an equivalence\n$$L_{C\\times D}(P\\boxtimes Q)\\simeq L_C(P)\\boxtimes L_D(Q):$$\nboth maps from $P\\boxtimes Q$ to these objects are inverted by reflection, and the right-hand object is already local. For a diagram $X:K\\to Q_C$ and $Y\\in Q_D$, put $P=\\operatorname{colim}_K i_CX$ in presheaves. The reflector colimit formula of [lem-coef-presentable-infinity-adjoints] gives\n$$(\\operatorname{colim}_{Q_C}X)\\boxtimes Y\\simeq L_{C\\times D}(P\\boxtimes i_DY)\\simeq\\operatorname{colim}_{Q_{C\\times D},k}(X_k\\boxtimes Y).$$\nFor a diagram $Y:K\\to Q_D$ and fixed $X\\in Q_C$, put $Q=\\operatorname{colim}_K i_DY$ in presheaves. The product of $i_CX$ with the unit $Q\\to i_DL_DQ$ is a Segal equivalence, and its target is Segal. Pointwise preservation in the second variable and the reflector colimit formula therefore give\n$$X\\boxtimes\\operatorname{colim}_{Q_D}Y\\simeq L_{C\\times D}(i_CX\\boxtimes Q)\\simeq L_{C\\times D}(\\operatorname{colim}_k(i_CX\\boxtimes i_DY_k))\\simeq\\operatorname{colim}_{Q_{C\\times D},k}(X\\boxtimes Y_k).$$",
+   "uses": [
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-algebroid-segal-localization-model",
+    "lem-coef-segal-external-local-equivalences",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Observations 4.9, Lemma 4.10, Corollaries 7.6-7.7"
+   }
+  },
+  {
+   "text": "Now fix monoidally compatible $S,T$ as in [def-coef-segal-presheaf-localization]. Here $Q_C^S,Q_D^T$ use the fixed-endpoint free-edge generators $E_C(S),E_D(T)$, so that locality tests mapping fibres and includes algebroids with empty or disconnected object spaces, by [lem-coef-algebroid-segal-localization-model]. Write $R=L_{C\\times D}^{S\\odot T}$ and $H(X,Y)=R(i_C^SX\\boxtimes i_D^TY)$ on $Q_C^S\\times Q_D^T$. For a diagram $X:K\\to Q_C^S$, set $P=\\operatorname{colim}_{Q_C,k}i_C^SX_k$. The unit $P\\to i_C^SL_C^SP$ is an $S$-local Segal equivalence. By [lem-coef-segal-external-local-equivalences], tensoring it with $i_D^TY$ is an $S\\odot T$-local Segal equivalence. Applying $R$ and then step 2 gives\n$$H(\\operatorname{colim}X,Y)\\simeq R(P\\boxtimes i_D^TY)\\simeq R\\operatorname{colim}_k(i_C^SX_k\\boxtimes i_D^TY)\\simeq\\operatorname{colim}_kH(X_k,Y).$$\nThe last equality uses that a reflector is a left adjoint; [lem-coef-presentable-infinity-adjoints] gives both reflector colimit formulas. For a diagram $Y:K\\to Q_D^T$, set $Q=\\operatorname{colim}_{Q_D,k}i_D^TY_k$ and apply the other-variable clause to $Q\\to i_D^TL_D^TQ$; this gives\n$$H(X,\\operatorname{colim}Y)\\simeq R(i_C^SX\\boxtimes Q)\\simeq R(\\operatorname{colim}_{Q_{C\\times D},k}(i_C^SX\\boxtimes i_D^TY_k))\\simeq\\operatorname{colim}_{Q_{C\\times D}^{S\\odot T},k}H(X,Y_k).$$\nThe first equivalence inverts the product of the displayed unit with $i_C^SX$; the second is step 2 in the second variable, and the third is preservation of colimits by $R$.\nThe model theorem [lem-coef-algebroid-segal-localization-model] supplies the reflective localizations used here.",
+   "uses": [
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-segal-external-local-equivalences",
+    "lem-coef-algebroid-segal-localization-model",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Corrected fixed-endpoint version of Corollaries 8.14-8.15; the localization-unit computation works for the hom-fibre-local reflectors."
+   }
+  },
+  {
+   "text": "Suppose $V,W$ are presentably monoidal. Choose $V\\simeq P^S(C)$ and $W\\simeq P^T(D)$ using [lem-coef-algebroid-segal-localization-model]. Use that node's corrected equivalences: an algebroid $A$ corresponds to a Segal presheaf $X$ with object space $X([0])=\\operatorname{Ob}(A)$ and mapping presheaves $H_X(x,x')=A(x,x')$, each of which is $S$-local. Thus the localization imposes no locality condition on the total edge space without fixing its endpoints. The same node identifies $V\\otimes_{\\mathrm{coc}}W$ with $P^{S\\odot T}(C\\times D)$ and $G$ with $H$ of step 3, on coherent diagrams and their canonical maps. For clarity, their object space is the product of the two object spaces, and their mapping presheaves are the coefficient reflection of $H_X(x,x')\\boxtimes H_Y(y,y')$; this is precisely the model node's tensor comparison. An equivalence of infinity categories carries a colimit cone to a colimit cone, since its mapping-space equivalences carry $\\operatorname{Map}(c,z)\\simeq\\lim_k\\operatorname{Map}(X_k,z)$ to the same universal property. Therefore both canonical colimit comparisons for $G$ are equivalences by step 3. In particular terminal $C$ with $S=\\{\\varnothing\\to *\\}$ gives $Q_C^S\\simeq\\mathrm{Spc}$, retaining the empty and two-point object spaces.",
+   "uses": [
+    "lem-coef-algebroid-segal-localization-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Proposition 8.2, Lemma 8.3, Observation 8.4, and the hom-fibre correction of Proposition 8.5; Corollary 8.16."
+   }
+  },
+  {
+   "text": "For general cocomplete $V,W$, apply [lem-coef-algebroid-universe-embeddings] after choosing the larger universe to contain the coefficient categories and their cocomplete tensor. The repaired node requires no local smallness in the original universe, so its hypotheses follow from those of the item. In a larger universe obtain $J_V,J_W,J_{VW}$, fully faithful and preserving the original small colimits, and a coherent comparison $J_{VW}G\\simeq\\widehat G(J_V\\times J_W)$. The lower bifunctor $\\widehat G$ has presentably monoidal coefficient categories, so step 4 applies relative to the larger universe. A diagram small in the original universe is also small there. This does not impose presentability on the original coefficient categories.",
+   "uses": [
+    "lem-coef-algebroid-universe-embeddings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Section 9, paragraphs before Corollary 9.1"
+   }
+  },
+  {
+   "text": "Let $A:K\\to\\operatorname{Algd}(V)$ be small and fix $B$. Using step 5, the image under $J_{VW}$ of the canonical comparison $\\operatorname{colim}_kG(A_k,B)\\to G(\\operatorname{colim}_k A_k,B)$ identifies with\n$$\\operatorname{colim}_k\\widehat G(J_VA_k,J_WB)\\longrightarrow\\widehat G(\\operatorname{colim}_kJ_VA_k,J_WB),$$\nwhich is an equivalence by step 4. The preservation and full faithfulness asserted in [lem-coef-algebroid-universe-embeddings] justify both identifications and reflection of this equivalence. Indeed full faithfulness lifts an inverse and its two inverse identities in mapping spaces. For fixed $A$ and a small diagram $B:K\\to\\operatorname{Algd}(W)$, the image of the other comparison is $\\operatorname{colim}_k\\widehat G(J_VA,J_WB_k)\\to\\widehat G(J_VA,\\operatorname{colim}_kJ_WB_k)$, again an equivalence. This proves both comparisons for $G$, including $K=\\varnothing$.",
+   "uses": [
+    "lem-coef-algebroid-universe-embeddings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Section 9, commutative diagram and Corollary 9.1"
+   }
+  },
+  {
+   "text": "Finally [lem-coef-algebroid-cocontinuous-base-change] applies to the genuinely cocontinuous unary functor $\\bar b$ from step 1. Consequently\n$$b_*((\\operatorname{colim}_k A_k)\\boxtimes B)\\simeq\\bar b_*G(\\operatorname{colim}_k A_k,B)\\simeq\\bar b_*\\operatorname{colim}_kG(A_k,B)\\simeq\\operatorname{colim}_k b_*(A_k\\boxtimes B).$$\nFor the second variable use $\\bar b_*G(A,\\operatorname{colim}_k B_k)\\simeq\\bar b_*\\operatorname{colim}_kG(A,B_k)\\simeq\\operatorname{colim}_k b_*(A\\boxtimes B_k)$. The factorization and naturality in step 1 show these are the canonical comparisons. The empty diagram is allowed throughout, so preservation includes the initial algebroid.",
+   "uses": [
+    "lem-coef-algebroid-cocontinuous-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Observation 3.9 and Corollary 9.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cocomplete-monoidal-tensor",
+  "lem-coef-algebroid-cocontinuous-base-change",
+  "lem-coef-algebroid-external-product",
+  "def-coef-segal-presheaf-localization",
+  "lem-coef-algebroid-segal-localization-model",
+  "lem-coef-segal-external-local-equivalences",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-algebroid-universe-embeddings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/2311.13362v1",
+  "place": "Reconstruction of Corollaries 7.7, 8.15-8.16 and 9.1-9.2, with the explicit fixed-endpoint/hom-fibre correction to Proposition 8.5 and Observations 8.6-8.7 documented in report.md; online source not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,15 +169,65 @@
    "results": "{\"t\": \"2026-10-16T12:28:50Z\", \"tool\": \"leanfinder\", \"query\": \"Bilinear functors on presentable monoidal quasicategories induce separately cocontinuous tensor products of categorical algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape\", \"CategoryTheory.instPreservesColimitsTensorLeft\", \"CategoryTheory.Localization.Monoidal.tensorBifunctor\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitRightUnit\", \"CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitRight\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft\", \"CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorLeftObjFunctorTensorBifunctor\"], \"digest\": \"150a8e03f4e87381\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reading; the returned declarations concern ordinary category enrichment, ordinary localization or homotopy-category constructions; none states this operadic infinity-category result."
+  },
+  {
+   "tool": "grep",
+   "query": "algebroid|Segal.*presheaf|enrich.*colimit",
+   "results": "{\"t\": \"2026-10-16T13:32:38Z\", \"tool\": \"grep\", \"query\": \"algebroid|Segal.*presheaf|enrich.*colimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary strict transport of enrichment, PreservesColimit2 and tensor-left preservation do not state operadic infinity algebroid cocontinuity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bilinear monoidal change of enrichment on infinity algebroids preserves small colimits separately",
+   "results": "{\"t\": \"2026-10-16T13:32:39Z\", \"tool\": \"leansearch\", \"query\": \"Bilinear monoidal change of enrichment on infinity algebroids preserves small colimits separately\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PreservesColimit₂.mk\", \"CategoryTheory.Limits.PreservesColimit₂.of_preservesColimits_in_each_variable\", \"CategoryTheory.Limits.PreservesColimit₂\", \"CategoryTheory.Limits.isColimitOfPreserves₂\", \"CategoryTheory.instPreservesColimitsTensorLeft\", \"CategoryTheory.MonoidalCategory.Limits.preservesColimit_of_braided_and_preservesColimit_tensor_right\", \"CategoryTheory.MonoidalCategory.Limits.preservesColimit_of_braided_and_preservesColimit_tensor_left\", \"CategoryTheory.instPreservesFiniteProductsFunctorColimOfPreadditive\"], \"digest\": \"9939e59283de72fc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary strict transport of enrichment, PreservesColimit2 and tensor-left preservation do not state operadic infinity algebroid cocontinuity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Enriched\", \"PreservesColimits\"",
+   "results": "{\"t\": \"2026-10-16T13:32:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Enriched\\\", \\\"PreservesColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary strict transport of enrichment, PreservesColimit2 and tensor-left preservation do not state operadic infinity algebroid cocontinuity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bilinear monoidal change of enrichment on infinity algebroids preserves small colimits separately",
+   "results": "{\"t\": \"2026-10-16T13:32:44Z\", \"tool\": \"leanfinder\", \"query\": \"Bilinear monoidal change of enrichment on infinity algebroids preserves small colimits separately\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TransportEnrichment\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_functor\", \"CategoryTheory.TransportEnrichment.enrichedOrdinaryCategory\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor_obj\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor\", \"CategoryTheory.ForgetEnrichment\", \"CategoryTheory.instEnrichedCategoryTransportEnrichment\", \"CategoryTheory.TransportEnrichment.eComp_eq\"], \"digest\": \"b3c44287841eafdf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary strict transport of enrichment, PreservesColimit2 and tensor-left preservation do not state operadic infinity algebroid cocontinuity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor products of categorical algebras in cocomplete monoidal quasicategories preserve colimits in each argument",
+   "results": "{\"t\": \"2026-10-16T13:34:44Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor products of categorical algebras in cocomplete monoidal quasicategories preserve colimits in each argument\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape\", \"CategoryTheory.instPreservesColimitsTensorLeft\", \"CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor\", \"id_tensor_π_preserves_coequalizer_inv_colimMap_desc\", \"π_tensor_id_preserves_coequalizer_inv_colimMap_desc\", \"id_tensor_π_preserves_coequalizer_inv_desc\", \"π_tensor_id_preserves_coequalizer_inv_desc\", \"CategoryTheory.IsMonoidalLeftDistrib.preservesBinaryCoproducts_tensorLeft\"], \"digest\": \"21298945bfa51417\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary strict transport of enrichment, PreservesColimit2 and tensor-left preservation do not state operadic infinity algebroid cocontinuity."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-enriched-category-tensor-calculus",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-algebroid-bilinear-colimits",
+  "worker": "stage1",
+  "summary": "Repair of E2/E7 and E3: replaced raw fibre-Lan edge localization by free edges formed under two fixed endpoints; localized Segal objects now have local mapping fibres, not necessarily local total edge spaces. Rechecked all seven steps and six new nodes; step 4 uses the corrected model and explicitly retains empty and disconnected object spaces. The item statement and blueprint route are unchanged. Independent second reading removed the universe-embedding lemma's unsupported local-smallness hypothesis and clarified its tensor embedding, repairing the applicability of step 5; fresh semantic, grep and Loogle searches were recorded for all six new nodes.",
+  "blueprint": "Supports paragraph 2 of prop-coef-integral-exceptional-adjoint through the existing enriched-calculus ancestry: coherent finite coefficient mapping-complex adjunction before R lim. The new nodes expose the corrected Haugseng sections 4-9 foundations; no unit/chapter route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: Read the item, its seven steps, the six new nodes and every cited statement in full (def-coef-complete-algebroid, external-product, presentable-infinity-adjoints, enrichment-change-adjunction, algebroid-presentability). The source arXiv:2311.13362v1 is not in literature/ (listed as WANTED); I read it online. Item hypotheses match Corollary 9.2 exactly: V, W cocomplete with compatible tensors; b strong monoidal and separately cocontinuous; T cocomplete. No target is weakened. Source error E7 confirmed: Proposition 8.5's condition (restriction to C^op lies in P^S(C)) fails for terminal C and S={empty -> point}, where Z_1=X^2 is not contractible although Algd(P^S C) is Spc. I rederived the fixed-endpoint correction. Map(E_C(phi),Z) is Map(phi,Z_1) over Map(phi,const Z_0^2) pulled back to Z_0^2, with fibre Map(phi,H_Z(x,y)). Hence Q_C^S is the Segal presheaves with S-local mapping fibres, which is Algd(P^S C), and the terminal case gives Spc. Steps 1-7 use only what the cited statements say. Step 2 uses L(P boxtimes Q) = LP boxtimes LQ and the reflector colimit formula. Step 3 applies the unit P -> iLP inside Q_C as the S-local clause requires. Step 4 uses the model identifications (Proposition 8.2, Lemma 8.3, ⊗_coc equal to the Pr^L tensor). Step 5: the localized Yoneda embedding is fully faithful, preserves U-small colimits and is strong monoidal; dropping local U-smallness is correct. Step 6 reflects the comparison through the fully faithful J_VW. Step 7 uses the cocontinuous b-bar_*. Small cases checked: empty diagrams, empty object spaces, terminal coefficients (pt tensor pt = pt), S=T=empty, and the S-local external product checked through algebroids (Corollary 8.14). All six new nodes are statement-only, self-contained, from.node prop-coef-integral-exceptional-adjoint with the correct via, same_as [], and carry three kinds of recorded search. They are not duplicates of enrichment-change-adjunction, algebroid-presentability, complete-algebroid or enriched-category-tensor-calculus (checked by rg over dag/nodes). All citations are in the same unit, so no tool_uses are needed. No SGA, no cycle. No changes made."
+ }
 }

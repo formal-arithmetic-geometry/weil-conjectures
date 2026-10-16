@@ -1,0 +1,135 @@
+{
+ "id": "def-coef-segal-presheaf-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: enriched tensor cocontinuity foundation; Haugseng sections 4 and 8, with the fixed-endpoint correction to Observations 8.6-8.7.",
+   "via": [
+    "lem-coef-algebroid-bilinear-colimits",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Segal presheaves and coefficient localization",
+ "statement": "Use the infinity-category and universe conventions of [def-coef-complete-algebroid]. For a small monoidal infinity category $C$, put $P(C)=\\operatorname{Fun}(C^{\\mathrm{op}},\\mathrm{Spc})$. Day convolution on $P(C)$ is left Kan extension of the external cartesian product of presheaves along the opposite of the tensor functor $C\\times C\\to C$. Write $C_\\otimes\\to\\Delta$ for the cartesian fibration corresponding to $C^\\otimes\\to\\Delta^{\\mathrm{op}}$; its fibre at $[n]$ is $C^n$. Write $[n](c_1,\\ldots,c_n)$ for its objects, $\\Delta^n(\\boldsymbol c)$ for their represented presheaves on $C_\\otimes$, and $v=\\Delta^0$ for the vertex representable. The labelled spine is the iterated pushout of edge representables over their common vertex representables. A Segal presheaf is $Z\\in P(C_\\otimes)$ for which\n$$Z([n](\\boldsymbol c))\\longrightarrow Z([1](c_1))\\times_{Z([0])}\\cdots\\times_{Z([0])}Z([1](c_n))$$\nis an equivalence for every $n\\geq2$ and every list $\\boldsymbol c$. Their full subcategory is $Q_C$.\n\nFor $\\phi\\in P(C)$ let $J_C(\\phi)$ be left Kan extension along the fibre inclusion $C^{\\mathrm{op}}=(C_\\otimes^{\\mathrm{op}})_{[1]}\\hookrightarrow C_\\otimes^{\\mathrm{op}}$, and let $a_\\phi=\\operatorname{colim}_{C^{\\mathrm{op}}}\\phi$. For a space $a$ and presheaf $F$, the copower $a\\cdot F$ has values $a\\times F(-)$. Define the free edge with two specified endpoints by the presheaf pushout\n$$E_C(\\phi)=J_C(\\phi)\\amalg_{a_\\phi\\cdot(v\\amalg v)}(v\\amalg v).$$\nThe two maps $v\\to\\Delta^1(c)$, natural in $c$, give the first leg of this pushout after the Yoneda colimit expression of $\\phi$; the second leg forgets $a_\\phi$. Equivalently this is the colimit of the represented edges $\\Delta^1(c)$ indexed by the category of elements of $\\phi$, taken in the category of presheaves under $v\\amalg v$. In particular $E_C(\\varnothing)=v\\amalg v$.\n\nFor a small set $S$ of arrows of $P(C)$, let $P^S(C)$ be the full subcategory of $S$-local objects: $M$ is local if $\\operatorname{Map}(\\psi,M)\\to\\operatorname{Map}(\\phi,M)$ is an equivalence for each $(\\phi\\to\\psi)\\in S$. Call $S$ monoidally compatible if tensoring any arrow of $S$ on either side with any presheaf becomes an equivalence after $S$-localization. Let $Q_C^S\\subset Q_C$ consist of the Segal presheaves local for all arrows $E_C(\\phi)\\to E_C(\\psi)$ induced by $S$. For $Z\\in Q_C$ and $(x,y)\\in Z([0])^2$, write\n$$H_Z(x,y)(c)=\\operatorname{fib}_{(x,y)}\\bigl(Z([1](c))\\longrightarrow Z([0])^2\\bigr)$$\nfor its mapping presheaf. A Segal equivalence is a map inverted by reflection into $Q_C$; an $S$-local Segal equivalence is a map in $Q_C$ inverted by reflection into $Q_C^S$. Denote these reflectors, when they exist, by $L_C$ and $L_C^S$; denote inclusions by $i_C$ and $i_C^S$, respectively.\n\nFor small monoidal $C,D$, define $X\\boxtimes Y$ by\n$$(X\\boxtimes Y)([n](\\boldsymbol c,\\boldsymbol d))=X([n](\\boldsymbol c))\\times Y([n](\\boldsymbol d)).$$\nFor monoidally compatible sets $S,T$, let $S\\odot T$ consist of $s\\boxtimes y(d)$ and $y(c)\\boxtimes t$ in $P(C\\times D)$, for $s\\in S,t\\in T,c\\in C,d\\in D$, where $y$ is Yoneda and this external product is the product of presheaf values. Its domain distinguishes this notation from the operadic algebroid external product.",
+ "source": {
+  "document": "https://arxiv.org/html/2311.13362v1",
+  "place": "Definitions 4.3 and 8.1; Notation 4.8; section 5 (Day convolution); Lemma 8.3; Observations 8.6-8.7 corrected by the fixed-endpoint presheaf pushout recorded in report.md (the raw fibre left Kan extension is not a free edge for empty labels). Agent reconstruction, no Stacks tag for this infinity-categorical notion."
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Segal presheaves on a monoidal infinity category with Day convolution and localization at edge relations",
+   "results": "{\"t\": \"2026-10-16T13:33:57Z\", \"tool\": \"leanfinder\", \"query\": \"Segal presheaves on a monoidal infinity category with Day convolution and localization at edge relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"SSet.instMonoidalClosed\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore\"], \"digest\": \"4d85871ddfe222a1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: StrictSegal.lean:42-60 is a set-valued strict Segal condition; DayConvolution.lean:61-89 is an ordinary functor Kan extension. Neither defines labelled space-valued Segal presheaves or their coefficient localization."
+  },
+  {
+   "tool": "grep",
+   "query": "Segal|DayConvolution",
+   "results": "{\"t\": \"2026-10-16T13:33:58Z\", \"tool\": \"grep\", \"query\": \"Segal|DayConvolution\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean\"], \"digest\": \"77768b81107f3047\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: StrictSegal.lean:42-60 is a set-valued strict Segal condition; DayConvolution.lean:61-89 is an ordinary functor Kan extension. Neither defines labelled space-valued Segal presheaves or their coefficient localization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\"",
+   "results": "{\"t\": \"2026-10-16T13:33:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.ofCore\"], \"digest\": \"7ad685949eb87375\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: StrictSegal.lean:42-60 is a set-valued strict Segal condition; DayConvolution.lean:61-89 is an ordinary functor Kan extension. Neither defines labelled space-valued Segal presheaves or their coefficient localization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Segal presheaves on a monoidal infinity category with Day convolution and localization at edge relations",
+   "results": "{\"t\": \"2026-10-16T13:33:59Z\", \"tool\": \"leansearch\", \"query\": \"Segal presheaves on a monoidal infinity category with Day convolution and localization at edge relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.DayConvolution\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitLeftUnit\", \"CategoryTheory.MonoidalCategory.DayFunctor.η_comp_isoPointwiseLeftKanExtension_hom\", \"CategoryTheory.MonoidalCategory.DayConvolution.leftKanExtension\", \"CategoryTheory.MonoidalCategory.DayConvolution.mk\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.convolutions\", \"CategoryTheory.LocalizedMonoidal\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.mkLawfulDayConvolutionMonoidalCategoryStruct\"], \"digest\": \"327bf0efb881858a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: StrictSegal.lean:42-60 is a set-valued strict Segal condition; DayConvolution.lean:61-89 is an ordinary functor Kan extension. Neither defines labelled space-valued Segal presheaves or their coefficient localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Labelled simplices and spines define Segal presheaves for enrichment",
+   "results": "{\"t\": \"2026-10-16T13:34:27Z\", \"tool\": \"leanfinder\", \"query\": \"Labelled simplices and spines define Segal presheaves for enrichment\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal\", \"SSet.StrictSegal.spineToSimplex\", \"SSet.IsStrictSegal\", \"SSet.StrictSegal.mk.inj\", \"SSet.StrictSegalCore\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.StrictSegalCore.spineToSimplex\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"35413c821b867f42\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: StrictSegal.lean:42-60 is a set-valued strict Segal condition; DayConvolution.lean:61-89 is an ordinary functor Kan extension. Neither defines labelled space-valued Segal presheaves or their coefficient localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Segal presheaf coefficient localization tested on free enriched edges with two fixed endpoints",
+   "results": "{\"t\": \"2026-10-16T17:16:13Z\", \"tool\": \"leanfinder\", \"query\": \"Segal presheaf coefficient localization tested on free enriched edges with two fixed endpoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.liftOfStrictSegal.hσ'₁\", \"SSet.Truncated.liftOfStrictSegal_app_1\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"SSet.StrictSegal.spineToSimplex\", \"SSet.Truncated.liftOfStrictSegal_app_0\", \"SSet.Truncated.StrictSegal.spineToDiagonal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.Truncated.liftOfStrictSegal\"], \"digest\": \"27cb3f508ada20df\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read StrictSegal.lean:42-60 (set-valued strict Segal data), Enriched/Basic.lean:58-70 (ordinary enriched categories), Sites/Monoidal.lean:51-55 (ordinary enriched presheaf Hom), Localization/Monoidal/Basic.lean:36-47 (ordinary monoidal localization), and Monoidal/DayConvolution.lean:61-89 (ordinary Day convolution). None gives the labelled space-valued Segal construction, fixed-endpoint localization or operadic infinity-algebroid equivalence; no one-line specialization applies."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\"",
+   "results": "{\"t\": \"2026-10-16T17:16:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.ofCore\"], \"digest\": \"7ad685949eb87375\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read StrictSegal.lean:42-60 (set-valued strict Segal data), Enriched/Basic.lean:58-70 (ordinary enriched categories), Sites/Monoidal.lean:51-55 (ordinary enriched presheaf Hom), Localization/Monoidal/Basic.lean:36-47 (ordinary monoidal localization), and Monoidal/DayConvolution.lean:61-89 (ordinary Day convolution). None gives the labelled space-valued Segal construction, fixed-endpoint localization or operadic infinity-algebroid equivalence; no one-line specialization applies."
+  },
+  {
+   "tool": "grep",
+   "query": "Segal.*local|free.*enrich.*edge|algebroid",
+   "results": "{\"t\": \"2026-10-16T17:16:14Z\", \"tool\": \"grep\", \"query\": \"Segal.*local|free.*enrich.*edge|algebroid\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read StrictSegal.lean:42-60 (set-valued strict Segal data), Enriched/Basic.lean:58-70 (ordinary enriched categories), Sites/Monoidal.lean:51-55 (ordinary enriched presheaf Hom), Localization/Monoidal/Basic.lean:36-47 (ordinary monoidal localization), and Monoidal/DayConvolution.lean:61-89 (ordinary Day convolution). None gives the labelled space-valued Segal construction, fixed-endpoint localization or operadic infinity-algebroid equivalence; no one-line specialization applies."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Segal presheaf coefficient localization tested on free enriched edges with two fixed endpoints",
+   "results": "{\"t\": \"2026-10-16T17:16:15Z\", \"tool\": \"leansearch\", \"query\": \"Segal presheaf coefficient localization tested on free enriched edges with two fixed endpoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.epi_toLocalizationPresheaf\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf\", \"CategoryTheory.FreeGroupoid.instIsLocalizationOfTopMorphismProperty\", \"PresheafOfModules.freeYonedaEquiv\", \"CategoryTheory.Sheaf.freeYoneda\"], \"digest\": \"bcdfbdd2b012bfd7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read StrictSegal.lean:42-60 (set-valued strict Segal data), Enriched/Basic.lean:58-70 (ordinary enriched categories), Sites/Monoidal.lean:51-55 (ordinary enriched presheaf Hom), Localization/Monoidal/Basic.lean:36-47 (ordinary monoidal localization), and Monoidal/DayConvolution.lean:61-89 (ordinary Day convolution). None gives the labelled space-valued Segal construction, fixed-endpoint localization or operadic infinity-algebroid equivalence; no one-line specialization applies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrewise localization of mapping presheaves over the square of the object space",
+   "results": "{\"t\": \"2026-10-16T17:16:22Z\", \"tool\": \"leanfinder\", \"query\": \"Fibrewise localization of mapping presheaves over the square of the object space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.localPreimage\", \"CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.presheafFiberDesc\", \"CategoryTheory.GrothendieckTopology.Point.presheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_apply\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_presheafFiberDesc\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber\"], \"digest\": \"16f135a26d1c2755\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read StrictSegal.lean:42-60 (set-valued strict Segal data), Enriched/Basic.lean:58-70 (ordinary enriched categories), Sites/Monoidal.lean:51-55 (ordinary enriched presheaf Hom), Localization/Monoidal/Basic.lean:36-47 (ordinary monoidal localization), and Monoidal/DayConvolution.lean:61-89 (ordinary Day convolution). None gives the labelled space-valued Segal construction, fixed-endpoint localization or operadic infinity-algebroid equivalence; no one-line specialization applies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Space valued labelled simplicial presheaves with Segal localization and endpoint fixed free arrows",
+   "results": "{\"t\": \"2026-10-16T17:28:06Z\", \"tool\": \"leanfinder\", \"query\": \"Space valued labelled simplicial presheaves with Segal localization and endpoint fixed free arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegalCore\", \"SSet.StrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegalCore.spineToSimplex\", \"SSet.Path\", \"SSet.StrictSegal.ofCore\", \"SSet.StrictSegal.spineToSimplex\", \"SSet.IsStrictSegal\"], \"digest\": \"22ab54eec910e59b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search. StrictSegal.lean:42-60 is set-valued strict Segal data; Quasicategory/StrictBicategory.lean:16-32,54-59 uses ordinary Cat enrichment; Enriched/Basic.lean:58-70 is ordinary enrichment; DayConvolution.lean:61-89 and ExternalProduct/KanExtension.lean:50-61 concern ordinary Kan extensions; Presentable/Basic.lean:170-179 concerns filtered-colimit preservation by coyoneda; Monoidal/Transport.lean:47-89 transports an ordinary monoidal structure. None states these operadic infinity-category constructions or the required preservation of all small colimits."
+  },
+  {
+   "tool": "grep",
+   "query": "Algd|SegalPresheaf|cocompleteTensor|freeEdge|changeOfEnrichment",
+   "results": "{\"t\": \"2026-10-16T17:27:35Z\", \"tool\": \"grep\", \"query\": \"Algd|SegalPresheaf|cocompleteTensor|freeEdge|changeOfEnrichment\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search. StrictSegal.lean:42-60 is set-valued strict Segal data; Quasicategory/StrictBicategory.lean:16-32,54-59 uses ordinary Cat enrichment; Enriched/Basic.lean:58-70 is ordinary enrichment; DayConvolution.lean:61-89 and ExternalProduct/KanExtension.lean:50-61 concern ordinary Kan extensions; Presentable/Basic.lean:170-179 concerns filtered-colimit preservation by coyoneda; Monoidal/Transport.lean:47-89 transports an ordinary monoidal structure. None states these operadic infinity-category constructions or the required preservation of all small colimits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T17:27:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search. StrictSegal.lean:42-60 is set-valued strict Segal data; Quasicategory/StrictBicategory.lean:16-32,54-59 uses ordinary Cat enrichment; Enriched/Basic.lean:58-70 is ordinary enrichment; DayConvolution.lean:61-89 and ExternalProduct/KanExtension.lean:50-61 concern ordinary Kan extensions; Presentable/Basic.lean:170-179 concerns filtered-colimit preservation by coyoneda; Monoidal/Transport.lean:47-89 transports an ordinary monoidal structure. None states these operadic infinity-category constructions or the required preservation of all small colimits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-algebroid-bilinear-colimits",
+  "date": "2026-10-16",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
