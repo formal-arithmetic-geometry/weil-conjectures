@@ -4,22 +4,24 @@
   "is": null,
   "from": {
    "node": "def-weil-finite-coefficient-point",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement, the sentence beginning 'Let $D^b_{\\mathrm{fg}}(\\mathcal O_E)$ be the full subcategory of $D(\\mathcal O_E)$' and ending 'generated cohomology modules': the integral point coefficient category",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Bounded derived-complete complexes with finitely generated cohomology",
- "statement": "Let $A$ be a commutative ring, $I\\subset A$ an ideal, and $D(A)$ the derived category [def-weil-abstract-derived-category] of $A$-modules, with cohomology modules $H^i(K)$. Define\n\n$$\n D^b_{\\mathrm{fg}}(A,I)\\subset D(A)\n$$\n\nto be the full subcategory of the objects $K$ such that $H^i(K)=0$ for all but finitely many $i$, every $H^i(K)$ is a finitely generated $A$-module, and $K$ is derived complete with respect to $I$ [def-weil-point-derived-complete-module-complex]. For a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-finite-field-fiber], write $D^b_{\\mathrm{fg}}(\\mathcal O_E)=D^b_{\\mathrm{fg}}(\\mathcal O_E,(\\varpi_E))$.",
+ "statement": "Let $A$ be a commutative ring, $I\\subset A$ an ideal, and $D(A)$ the derived category [def-weil-abstract-derived-category] of $A$-modules, with cohomology modules $H^i(K)$. Define\n\n$$\n D^b_{\\mathrm{fg}}(A,I)\\subset D(A)\n$$\n\nto be the full subcategory of the objects $K$ satisfying all three conditions:\n\n1. $K$ is bounded [def-weil-pbc-bounded-derived-subcategories], meaning $H^i(K)=0$ for all but finitely many $i\\in\\mathbf Z$.\n2. Every $H^i(K)$ is a finitely generated $A$-module [def-weil-finitely-generated-module].\n3. $K$ is derived complete with respect to $I$ [def-weil-point-derived-complete-module-complex].\n\nHere full subcategory means that, for two such objects $K,L$, its morphisms from $K$ to $L$ are exactly $\\operatorname{Hom}_{D(A)}(K,L)$, with identities and composition inherited from $D(A)$.\n\nFor a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and chosen uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension], write $D^b_{\\mathrm{fg}}(\\mathcal O_E)=D^b_{\\mathrm{fg}}(\\mathcal O_E,(\\varpi_E))$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
   "place": "the definition of $D^b_{\\mathrm{fg}}(\\mathcal O_E)$ in the statement"
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-finitely-generated-module",
   "def-weil-point-derived-complete-module-complex",
-  "def-weil-finite-field-fiber"
+  "def-weil-l-adic-coefficient-extension"
  ],
  "proof": [],
  "proof_deps": [],
@@ -27,21 +29,126 @@
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "grep -n 'abbrev Bounded' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
-   "results": "DerivedCategory.Bounded: boundedness only",
-   "date": "2026-10-09",
+   "query": "DerivedComplete|derived.complete|bounded.*finite.*cohomology|cohomology.*finitely.generated",
+   "date": "2026-10-16",
+   "results": "0 hits in the pinned Mathlib source",
    "verdict": "no match"
   },
   {
-   "tool": "grep",
-   "query": "grep -rn 'derived complete\\|DerivedComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-   "results": "none",
-   "date": "2026-10-09",
+   "tool": "loogle",
+   "query": "DerivedCategory, Module.Finite",
+   "date": "2026-10-16",
+   "results": "0 hits",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of the derived category of modules consisting of bounded complexes with finitely generated cohomology which are derived complete with respect to an ideal",
+   "date": "2026-10-16",
+   "results": "Eight hits: DerivedCategory.IsGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.IsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff. Read the DerivedCategory/TStructure.lean definitions and cohomological characterizations; these describe boundedness and truncations only.",
+   "verdict": "no match: none defines the full subcategory imposing finite generation and derived completeness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of bounded derived complete complexes with finitely generated cohomology over a commutative ring",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Bounded|FullSubcategory|Module.Finite",
+   "date": "2026-10-16",
+   "results": "16 hits in Algebra/Homology/DerivedCategory: TStructure.lean:201 DerivedCategory.Minus, :204 DerivedCategory.Plus, :207 DerivedCategory.Bounded (read :195-220), and their use in DerivabilityStructureInjectives, Plus, RightDerivedFunctorPlus and Ext/TStructure. Boundedness only.",
+   "verdict": "no match for the combined definition; boundedness already has the existing Mathlib leaf def-weil-pbc-bounded-derived-subcategories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedComplete\"",
+   "date": "2026-10-16",
+   "results": "0 hits",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category full subcategory of I-adically complete objects whose cohomology modules are finite over the base ring and vanish outside a finite range",
+   "date": "2026-10-16",
+   "results": "Eight hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.IsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsLE, DerivedCategory.isLE_Q_obj_iff. Read the DerivedCategory/TStructure.lean definitions and cohomological characterizations; these describe boundedness and truncations only.",
+   "verdict": "no match: none defines the full subcategory imposing finite generation and derived completeness"
+  },
+  {
+   "tool": "grep",
+   "query": "protected class Finite|fg_top|class Finite",
+   "results": "Five hits from the single-file input RingTheory/Finiteness/Defs.lean:118 of_fg_top, :119 fg_top, :121 inherit_doc Module.Finite, :130 fg_top equivalence, :137 AddMonoid.fg equivalence. The command formats single-file rg output without a filename; the input file and these lines were read directly. This is finite generation only, already represented by def-weil-finitely-generated-module.",
+   "date": "2026-10-16",
+   "verdict": "no match for the combined definition; confirms the existing ingredient Module.Finite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full subcategory of bounded cochain complexes whose homology is module finite and which are complete in the derived sense for an ideal",
+   "date": "2026-10-16",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.IsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.IsLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isLE. Read DerivedCategory/TStructure.lean:195-220; these concern boundedness only.",
+   "verdict": "no match for the combined subcategory"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedComplete|DerivedComplete|IsAdicComplete|FullSubcategory",
+   "date": "2026-10-16",
+   "results": "20 hits in Algebra/Homology: full-subcategory machinery, homotopy/cochain Plus, local cohomology, factorizations and DerivedCategory.Minus/Plus/Bounded at DerivedCategory/TStructure.lean:201/204/207. No derived-completeness declaration. The earlier invocation with the literal subdirectory --sub searched the wrong path and supplies no evidence; this entry records the corrected positional subdirectory Algebra/Homology.",
+   "verdict": "no match for the combined definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDerivedComplete\"",
+   "date": "2026-10-16",
+   "results": "0 hits.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full subcategory of the derived category of modules with bounded finitely generated cohomology and derived ideal completeness",
+   "date": "2026-10-16",
+   "results": "8 hits. DerivedCategory.IsGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.IsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff Read DerivedCategory/TStructure.lean:80-115,160-218: these are cohomological bounds and bounded representatives only.",
+   "verdict": "no match for the combined category"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Bounded, Module.Finite",
+   "date": "2026-10-16",
+   "results": "0 hits. ",
+   "verdict": "no match for the combined category"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedComplete|IsDerivedComplete|pointFgComplete|fgComplete",
+   "date": "2026-10-16",
+   "results": "0 hits.  Searched Algebra/Homology.",
+   "verdict": "no match for the combined category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded derived complete complexes of modules with finitely generated cohomology",
+   "date": "2026-10-16",
+   "results": "8 hits. DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory, HomologicalComplex.isGrothendieckAbelian, HomologicalComplex.instHasLimit Results concern bounded representatives, localized morphisms, existence of the ambient derived category, and ordinary complexes and their limits; none imposes finite generation and derived completeness.",
+   "verdict": "no match for the combined category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ideal complete objects of D(R) with finite homology modules in only finitely many degrees",
+   "date": "2026-10-16",
+   "results": "8 hits. IsAdicComplete, IsAdicComplete.toIsPrecomplete, AdicCompletion.map_exact, isAdicComplete_iff, AdicCompletion.flat_of_isNoetherian, IsPrecomplete, AdicCompletion.map_injective, localCohomology Read Mathlib/RingTheory/AdicCompletion/Basic.lean:45-61: IsAdicComplete is an ordinary module predicate (Hausdorff and precomplete); it is not derived completeness for arbitrary objects of D(R). The other hits concern ordinary module completion or local cohomology.",
+   "verdict": "no match for the combined category"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev Bounded|def Bounded|Module.Finite|class Finite",
+   "date": "2026-10-16",
+   "results": "2 hits. Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean Searched Algebra/Homology/DerivedCategory. DerivedCategory.Bounded at Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:207 and Bounded.ι at :218; read :195-218, boundedness only.",
+   "verdict": "no match for the combined category"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -83,5 +190,20 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "The node has no recorded Lean declaration or exact Mathlib match. This delivery supplies its existing DAG notion rather than a new helper notion. Defines the full-subcategory predicate including the existing DerivedCategory.IsDerivedComplete."
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-weil-point-fg-complete-complexes",
+  "worker": "stage1",
+  "summary": "Read the archived blueprint integral point-category sentence and Stacks definitions 05RU, 0518 and 091S. The definition has no theorem clauses. Exposed existing boundedness and finite-generation nodes, replaced the broad finite-field convention dependency by its precise coefficient-extension definition, and made full-subcategory morphisms explicit. Kept ordinary module derived completeness for arbitrary (A,I), without Noetherian, finite-Tor-amplitude or sheaf hypotheses. No new nodes. No exact project declaration or Mathlib match was found in two search phrasings; LeanSearch was unavailable. Fresh recheck confirms these five statement dependencies; six further logged searches include a now-successful LeanSearch query and exclude ordinary IsAdicComplete as a match. Replaced the local Ql macro with explicit Q_ell notation.",
+  "blueprint": "Realizes only the integral point coefficient-category sentence of def-weil-finite-coefficient-point, not its fibre-equivalence assertions. The general notation D^b_fg(A,I) specializes to the stated O_E category. This auxiliary definition is not the unit key node, so no unit realization fields are changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q09-c11642d41",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-c11642d41 (reviewer sub-agent of L); spot-checked: Read the item, full report, all five dependency statements, cited source passages, and unit/chapter route. All three category conditions match the source; edge cases pass. No new nodes, cycles, missing citations, or unsupported coefficient comparisons found. Exact archived target morphisms and categories checked. Detailed review written to review.md; no repairs or tool_uses needed."
  }
 }
