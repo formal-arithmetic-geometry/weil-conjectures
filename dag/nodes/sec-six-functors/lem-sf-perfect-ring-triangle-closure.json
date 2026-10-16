@@ -22,132 +22,161 @@
   "def-weil-abstract-derived-category",
   "def-pc-perfect-ring-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the given triangle as $T=(C_1\\xrightarrow{u}C_2\\xrightarrow{v}C_3\\xrightarrow{\\delta}C_1[1])$. By [def-pc-perfect-ring-complex], choose bounded complexes $P_1,P_3$ of finitely generated projective $A$-modules and isomorphisms $e_1:Q(P_1)\\xrightarrow{\\sim}C_1$ and $e_3:Q(P_3)\\xrightarrow{\\sim}C_3$. Choose bounds $a_j\\le b_j$ such that $P_j^i=0$ outside $[a_j,b_j]$ for $j=1,3$; zero complexes permit any bounds. The complex $P_1[1]$ has term $P_1^{i+1}$, differential $-d_{P_1}$, and bounds $[a_1-1,b_1-1]$. By the commutation of $Q$ with shifts in [def-weil-abstract-derived-category], $e_1$ induces an isomorphism $s:Q(P_1[1])\\xrightarrow{\\sim}C_1[1]$. Keep the chosen localization universe of $D(A)$ throughout; no equality with the universe of module carriers is assumed.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066R, lemma-two-out-of-three-perfect, first/third case; direct bounded-projective cone argument, setup (agent proof)."
+   }
+  },
+  {
+   "text": "Form $g=s^{-1}\\circ\\delta\\circ e_3:Q(P_3)\\to Q(P_1[1])$. Apply [lem-pc-ring-derived-map-representative] to the abelian category of $A$-modules, the source $P_3$, and the target complex $P_1[1]$. The source is bounded above by $b_3$ and all its terms are projective. Surjectivity of the stated bijection gives a homotopy class of chain maps; choose a representative $f:P_3\\to P_1[1]$. By definition of the canonical map from the homotopy category to the derived category, $Q(f)=g$, equivalently $s\\circ Q(f)=\\delta\\circ e_3$. The lemma places no bound or projectivity restriction on its target and works in the specified localization universe.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064B, lemma-morphisms-from-projective-complex; bounded-above projective Hom bijection used in the agent direct cone proof of the first/third case of Tag 066R, lemma-two-out-of-three-perfect."
+   }
+  },
+  {
+   "text": "Let $F=C(f)$ be the actual mapping cone of [def-weil-abstract-derived-category]. Explicitly $F^i=P_1^{i+1}\\oplus P_3^{i+1}$ and $d_F^i(y,x)=(-d_{P_1}^{i+1}y+f^{i+1}x,-d_{P_3}^{i+1}x)$. It is zero outside $[L,U]$, where $L=\\min(a_1-1,a_3-1)$ and $U=\\max(b_1-1,b_3-1)$. Each term is finitely generated: if $(y_r)$ and $(x_t)$ generate the two summands, then $(y_r,0)$ and $(0,x_t)$ generate their sum. Each term is projective by the lifting characterization of [def-weil-pbc-projective-module]: given a surjection and a map from the sum, lift its restrictions to the two projective summands and add the two lifts. Thus $F$ is a bounded complex of finitely generated projective modules, without any Noetherian hypothesis. By [def-weil-abstract-derived-category], its cone triangle $Q(P_3)\\xrightarrow{Q(f)}Q(P_1[1])\\to Q(F)\\to Q(P_3)[1]$ is distinguished.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066R, lemma-two-out-of-three-perfect; explicit cone calculation using derived-category cone convention (agent proof)."
+   }
+  },
+  {
+   "text": "Twice rotate $T$ using (TR2) of [def-weil-triangulated-category]. The resulting distinguished triangle has vertices $C_3,C_1[1],C_2[1]$ and arrows $\\delta,-u[1],-v[1]$. The equality $s\\circ Q(f)=\\delta\\circ e_3$ of Step 2 supplies the commuting first square from the distinguished cone triangle of Step 3 to this twice-rotated triangle. By (TR3) of [def-weil-triangulated-category], extend $(e_3,s)$ to a morphism of these triangles, with third component $c:Q(F)\\to C_2[1]$. Both $e_3$ and $s$ are isomorphisms, so [lem-sf-triangle-morphism-iso] makes $c$ an isomorphism. This proves $Q(F)\\cong C_2[1]$, rather than assuming that an unspecified derived arrow already has a finite-projective cone.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066R, lemma-two-out-of-three-perfect, direct first/third cone argument; TR2/TR3 and two-isomorphisms triangle comparison."
+   }
+  },
+  {
+   "text": "Shift the isomorphism of Step 4 by $[-1]$. Since $Q$ commutes with shifts [def-weil-abstract-derived-category], compose it with $Q(F[-1])\\cong Q(F)[-1]$ and the cancellation isomorphism $(C_2[1])[-1]\\cong C_2$ to obtain $Q(F[-1])\\cong C_2$. The term in degree $i$ of $F[-1]$ is $F^{i-1}$, its differential is $-d_F$, and it is zero outside $[L+1,U+1]$. Its terms are precisely the finitely generated projective modules of Step 3 with reindexed degrees. Thus $F[-1]$ and the displayed isomorphism are the bounded finite-projective model required by [def-pc-perfect-ring-complex]; $C_2$ is perfect.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066R, lemma-two-out-of-three-perfect, deshift the explicit cone model (agent proof)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pc-ring-derived-map-representative",
+  "def-weil-pbc-projective-module",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066R, lemma-two-out-of-three-perfect: independent direct bounded-projective cone proof. The second reader read the tagged TeX in /home/ubuntu/weil-launcher-nt/literature/stacks-project/more-algebra.tex:18949 and the representative lemma Tag 064B in derived.tex:6822. The direct argument was also checked against WeilConjectures/CategoryTheory/DerivedCategory/Perfect.lean:215-243 without importing its restricted-universe conclusion."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "perfect complexes over a ring are closed under distinguished triangle extensions",
-   "results": "{\"t\": \"2026-10-16T01:25:14Z\", \"tool\": \"leanfinder\", \"query\": \"perfect complexes over a ring are closed under distinguished triangle extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.mem_distTriang_iff\", \"DerivedCategory.TStructure.t\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"DerivedCategory.instPretriangulated\", \"DerivedCategory.instIsTriangulated\", \"CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished\", \"DerivedCategory.triangleOfSES_distinguished\", \"CategoryTheory.Functor.instIsTriangulatedHomologicalKernel\"], \"digest\": \"d257a51e8559b282\"}",
+   "query": "distinguished triangle of derived modules with perfect first and third object has perfect middle object universe HasDerivedCategory",
+   "results": "{\"t\": \"2026-10-16T03:08:43Z\", \"tool\": \"leanfinder\", \"query\": \"distinguished triangle of derived modules with perfect first and third object has perfect middle object universe HasDerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsTriangulated\", \"DerivedCategory.mem_distTriang_iff\", \"DerivedCategory.instPretriangulated\", \"DerivedCategory.TStructure.t\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\"], \"digest\": \"7b11ab222540419b\"}",
    "date": "2026-10-16",
-   "verdict": "no match: generic triangle and cohomological-support infrastructure does not state closure of ring perfect complexes"
+   "verdict": "no match: read the returned types; only general derived-category, K-projective, cone, or triangle infrastructure appears, with no closure assertion for bounded finite-projective models. Existing DAG leaves supply the infrastructure used in the proof."
   },
   {
    "tool": "loogle",
-   "query": "DerivedCategory.isPerfect_obj₂_of_distTriang",
-   "results": "{\"t\": \"2026-10-16T01:25:15Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.isPerfect_obj₂_of_distTriang\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'DerivedCategory.isPerfect_obj₂_of_distTriang'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "DerivedCategory.isPerfect_obj₂_of_distTriang, DerivedCategory.isPerfect_Q_obj_mappingCone, CochainComplex.IsKProjective.exists_Q_map_eq",
+   "results": "{\"t\": \"2026-10-16T03:08:44Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.isPerfect_obj₂_of_distTriang, DerivedCategory.isPerfect_Q_obj_mappingCone, CochainComplex.IsKProjective.exists_Q_map_eq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'DerivedCategory.isPerfect_obj₂_of_distTriang'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: generic triangle and cohomological-support infrastructure does not state closure of ring perfect complexes"
+   "verdict": "inconclusive: Loogle rejected this query for an unknown identifier; it returned no declaration types. This query supplies no evidence of absence. The second reader ran a valid query with existing Mathlib constants and independent semantic/source searches."
   },
   {
    "tool": "grep",
-   "query": "isPerfect_obj|perfect.*distTriang",
-   "results": "{\"t\": \"2026-10-16T01:25:15Z\", \"tool\": \"grep\", \"query\": \"isPerfect_obj|perfect.*distTriang\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "isPerfect_obj₂_of_distTriang|isPerfect_Q_obj_mappingCone|isKProjective_of_projective",
+   "results": "{\"t\": \"2026-10-16T03:08:44Z\", \"tool\": \"grep\", \"query\": \"isPerfect_obj₂_of_distTriang|isPerfect_Q_obj_mappingCone|isKProjective_of_projective\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"88ae4fd8c8af6889\"}",
    "date": "2026-10-16",
-   "verdict": "no match: generic triangle and cohomological-support infrastructure does not state closure of ring perfect complexes"
+   "verdict": "no match: read the returned types; only general derived-category, K-projective, cone, or triangle infrastructure appears, with no closure assertion for bounded finite-projective models. Existing DAG leaves supply the infrastructure used in the proof."
   },
   {
    "tool": "leansearch",
-   "query": "middle term of distinguished triangle is perfect when first and third are perfect",
-   "results": "{\"t\": \"2026-10-16T01:25:16Z\", \"tool\": \"leansearch\", \"query\": \"middle term of distinguished triangle is perfect when first and third are perfect\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "perfect middle object in distinguished triangle of module derived category with perfect endpoints",
+   "results": "{\"t\": \"2026-10-16T03:08:45Z\", \"tool\": \"leansearch\", \"query\": \"perfect middle object in distinguished triangle of module derived category with perfect endpoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.triangleOfSES_obj₁\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished\", \"CategoryTheory.Triangulated.SpectralObject.triangle_distinguished\", \"DerivedCategory.triangleOfSES_obj₃\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"DerivedCategory.triangleOfSES_distinguished\", \"CategoryTheory.Pretriangulated.Triangle.distinguished_iff_of_isZero₁\", \"DerivedCategory.mem_distTriang_iff\"], \"digest\": \"90b1e720771e23a9\"}",
    "date": "2026-10-16",
-   "verdict": "unavailable"
+   "verdict": "no match: read the returned types; only general derived-category, K-projective, cone, or triangle infrastructure appears, with no closure assertion for bounded finite-projective models. Existing DAG leaves supply the infrastructure used in the proof."
   },
   {
    "tool": "leanfinder",
-   "query": "In the derived category of modules over a ring a cone of a map between perfect complexes is perfect and perfect objects are closed under finite extensions",
-   "results": "{\"t\": \"2026-10-16T01:25:52Z\", \"tool\": \"leanfinder\", \"query\": \"In the derived category of modules over a ring a cone of a map between perfect complexes is perfect and perfect objects are closed under finite extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.IsKInjective.rightOrthogonal\"], \"digest\": \"79d37792a8c6d1d2\"}",
+   "query": "mapping cone of a map between bounded complexes of finitely generated projective modules is perfect",
+   "results": "{\"t\": \"2026-10-16T03:11:43Z\", \"tool\": \"leanfinder\", \"query\": \"mapping cone of a map between bounded complexes of finitely generated projective modules is perfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\"], \"digest\": \"8c7de42212556463\"}",
    "date": "2026-10-16",
-   "verdict": "no match: generic triangle and cohomological-support infrastructure does not state closure of ring perfect complexes"
+   "verdict": "no match: read the returned types; only general derived-category, K-projective, cone, or triangle infrastructure appears, with no closure assertion for bounded finite-projective models. Existing DAG leaves supply the infrastructure used in the proof."
   },
   {
    "tool": "loogle",
-   "query": "\"Perfect\", \"triangle\"",
-   "results": "{\"t\": \"2026-10-16T01:25:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Perfect\\\", \\\"triangle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "DerivedCategory.isPerfect_Q_obj_mappingCone, Pretriangulated.exists_iso_of_arrow_iso",
+   "results": "{\"t\": \"2026-10-16T03:11:43Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.isPerfect_Q_obj_mappingCone, Pretriangulated.exists_iso_of_arrow_iso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'DerivedCategory.isPerfect_Q_obj_mappingCone'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: generic triangle and cohomological-support infrastructure does not state closure of ring perfect complexes"
+   "verdict": "inconclusive: Loogle rejected this query for an unknown identifier; it returned no declaration types. This query supplies no evidence of absence. The second reader ran a valid query with existing Mathlib constants and independent semantic/source searches."
   },
   {
    "tool": "grep",
-   "query": "perfect|IsPerfect",
-   "results": "{\"t\": \"2026-10-16T01:25:53Z\", \"tool\": \"grep\", \"query\": \"perfect|IsPerfect\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "mappingCone.*IsPerfect|exists_iso_of_arrow_iso",
+   "results": "{\"t\": \"2026-10-16T03:11:43Z\", \"tool\": \"grep\", \"query\": \"mappingCone.*IsPerfect|exists_iso_of_arrow_iso\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: generic triangle and cohomological-support infrastructure does not state closure of ring perfect complexes"
+   "verdict": "no match: read the returned types; only general derived-category, K-projective, cone, or triangle infrastructure appears, with no closure assertion for bounded finite-projective models. Existing DAG leaves supply the infrastructure used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "mapping cone bounded projective complexes perfect",
+   "results": "{\"t\": \"2026-10-16T03:11:44Z\", \"tool\": \"leansearch\", \"query\": \"mapping cone bounded projective complexes perfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone\", \"CochainComplex.mappingCone.triangle_obj₃\", \"CochainComplex.mappingCone.congr_simp\", \"CochainComplex.mappingCone.mapHomologicalComplexIso\", \"CochainComplex.mappingCone.ext_to_iff\", \"CochainComplex.mappingCone.inl_snd\", \"CochainComplex.mappingCone.desc\", \"CochainComplex.mappingCone.inr_snd\"], \"digest\": \"af65a5515440f839\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned types; only general derived-category, K-projective, cone, or triangle infrastructure appears, with no closure assertion for bounded finite-projective models. Existing DAG leaves supply the infrastructure used in the proof."
   },
   {
    "tool": "grep",
-   "query": "IsPerfect|perfect.*complex|complex.*perfect",
-   "results": "{\"t\": \"2026-10-16T01:37:15Z\", \"tool\": \"grep\", \"query\": \"IsPerfect|perfect.*complex|complex.*perfect\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "IsPerfect|PerfectComplex|perfect.*complex|complex.*perfect",
+   "results": "{\"t\": \"2026-10-16T03:17:37Z\", \"tool\": \"grep\", \"query\": \"IsPerfect|PerfectComplex|perfect.*complex|complex.*perfect\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: no perfect-complex declaration in Mathlib/Algebra"
+   "verdict": "no match: source search in Mathlib/Algebra/Homology returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, Module.Finite",
+   "results": "{\"t\": \"2026-10-16T03:17:38Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.mappingCone, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: valid query with known Mathlib constants, zero hits, and no query error."
   },
   {
    "tool": "leanfinder",
-   "query": "The full subcategory of bounded complexes of finite projective modules is stable under extensions in the derived category",
-   "results": "{\"t\": \"2026-10-16T01:37:15Z\", \"tool\": \"leanfinder\", \"query\": \"The full subcategory of bounded complexes of finite projective modules is stable under extensions in the derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hasExt_of_enoughProjectives\", \"isZero_Ext_succ_of_projective\", \"CategoryTheory.HasProjectiveDimensionLT.mk'\", \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"instHasExtModuleCatOfSmall\", \"CategoryTheory.hasProjectiveDimensionLT_iff\", \"CategoryTheory.HasProjectiveDimensionLT.mk\", \"CategoryTheory.projective_iff_subsingleton_ext_one\"], \"digest\": \"c2e7b8a25208f56e\"}",
+   "query": "strictly bounded complexes with finite projective terms form a triangulated subcategory of the derived category of modules",
+   "results": "{\"t\": \"2026-10-16T03:17:38Z\", \"tool\": \"leanfinder\", \"query\": \"strictly bounded complexes with finite projective terms form a triangulated subcategory of the derived category of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.TStructure.t\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.IsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.IsLE\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.instIsLEObjSingleFunctor\"], \"digest\": \"326291535b79d1d6\"}",
    "date": "2026-10-16",
-   "verdict": "no match: Ext existence and projective-dimension characterizations do not assert closure of perfect derived objects under extensions"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"IsPerfect\"",
-   "results": "{\"t\": \"2026-10-16T01:37:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPerfect\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearMap.IsPerfectCompl\", \"LinearMap.IsPerfectCompl.left_top_iff\", \"LinearMap.IsPerfectCompl.right_top_iff\", \"LinearMap.IsPerfectCompl.flip\", \"LinearMap.IsPerfectCompl.flip_iff\", \"LinearMap.IsPerfectCompl.isCompl_left\", \"LinearMap.IsPerfectCompl.isCompl_right\", \"LinearMap.IsPerfectCompl.mk\"], \"digest\": \"dc92a8732669a075\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: results concern perfect pairings and graph matchings, not perfect complexes"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A distinguished triangle in a module derived category has perfect middle object when its outer objects have bounded finitely generated projective models",
-   "results": "{\"t\": \"2026-10-16T02:04:17Z\", \"tool\": \"leanfinder\", \"query\": \"A distinguished triangle in a module derived category has perfect middle object when its outer objects have bounded finitely generated projective models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.leftOrthogonal\", \"DerivedCategory.TStructure.t\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.IsLE\"], \"digest\": \"d8918ca98a4800a5\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: results concern K-projectivity, the standard t-structure and bounded representatives, with no finite-projective-model closure assertion"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"perfect\", \"cone\"",
-   "results": "{\"t\": \"2026-10-16T02:04:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"perfect\\\", \\\"cone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: zero hits"
-  },
-  {
-   "tool": "grep",
-   "query": "perfect|IsPerfect|PerfectComplex",
-   "results": "{\"t\": \"2026-10-16T02:04:49Z\", \"tool\": \"grep\", \"query\": \"perfect|IsPerfect|PerfectComplex\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: zero hits in Mathlib/Algebra/Homology"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The subcategory of compact objects in the derived category of modules, represented by bounded complexes of finite projectives, is extension closed",
-   "results": "{\"t\": \"2026-10-16T02:40:41Z\", \"tool\": \"leanfinder\", \"query\": \"The subcategory of compact objects in the derived category of modules, represented by bounded complexes of finite projectives, is extension closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hasExt_of_enoughProjectives\", \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"CategoryTheory.hasExt_iff\", \"CategoryTheory.hasExt_of_enoughInjectives\", \"CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE\", \"CategoryTheory.HasExt\", \"CategoryTheory.hasExt_of_hasDerivedCategory\", \"instHasExtModuleCatOfSmall\"], \"digest\": \"04af477797918876\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: all eight results concern existence or smallness of Ext and localized Hom sets, not extension closure of finite-projective models"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"IsPerfect\", \"Triangle\"",
-   "results": "{\"t\": \"2026-10-16T02:40:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPerfect\\\", \\\"Triangle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: zero hits"
-  },
-  {
-   "tool": "grep",
-   "query": "IsPerfect|PerfectComplex|perfect complex|perfect.*triangle|triangle.*perfect",
-   "results": "{\"t\": \"2026-10-16T02:40:41Z\", \"tool\": \"grep\", \"query\": \"IsPerfect|PerfectComplex|perfect complex|perfect.*triangle|triangle.*perfect\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: zero hits in Mathlib/Algebra"
-  },
-  {
-   "tool": "grep",
-   "query": "\\bIsPerfect\\b|PerfectComplex|perfect complex|perfect.*triangle|triangle.*perfect",
-   "results": "{\"t\": \"2026-10-16T02:40:59Z\", \"tool\": \"grep\", \"query\": \"\\\\bIsPerfect\\\\b|PerfectComplex|perfect complex|perfect.*triangle|triangle.*perfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/IsPerfect.lean\", \"Mathlib/GroupTheory/IsPerfect.lean\", \"Mathlib/GroupTheory/IsPerfect.lean\", \"Mathlib/GroupTheory/IsPerfect.lean\", \"Mathlib/GroupTheory/IsPerfect.lean\", \"Mathlib/LinearAlgebra/Projectivization/PSL/PSL2.lean\", \"Mathlib/LinearAlgebra/Projectivization/PSL/PSL2.lean\", \"Mathlib/LinearAlgebra/Projectivization/PSL/PSL2.lean\"], \"digest\": \"1bcc36f81f35515d\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: the eight hits in the whole Mathlib tree concern Group.IsPerfect and projective special linear groups, not complexes"
+   "verdict": "no exact match: the eight results concern the derived t-structure and bounded complex representatives; none requires finite projective terms or states extension closure of such models."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sf-perfect-cohomology-assembly",
   "by": "worker",
@@ -167,5 +196,21 @@
    "sorry": false,
    "note": "Exact match read at lines 215-243 including docstring: arbitrary commutative ring, HasDerivedCategory for modules, distinguished triangle, perfect endpoints imply perfect middle. IsPerfect is defined by bounded finite-projective models at lines 94-102. Pinned local/sorry_map_slopmaster2_7d675a26.jsonl.gz records this declaration at lines 215-243; its owner-grouped transitive project dependency closure has 15 owners, all present and with s=false and ts=false. Candidate reported for maintainer attachment; no audit state is asserted by the delivery."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-perfect-ring-triangle-closure",
+  "worker": "stage1",
+  "summary": "Kept the statement and arbitrary localization universe. Rejected the earlier isPerfect_obj₂_of_distTriang attachment because its HasDerivedCategory universe equals the module-carrier universe. Reused the existing generic chain-map-representative and triangle-isomorphism Mathlib leaves, wrote the finite-projective mapping-cone argument and shifts explicitly, and created no nodes. Second reading verified cached Stacks and blueprint sources, corrected the representative source tag, and distinguished rejected Loogle queries from valid negative searches. The direct proof remains marked agent-written.",
+  "blueprint": "Realizes the ancestor lem-weil-coefficient-frobenius proof, second paragraph 'It is a regular ring, so bounded complexes with finite cohomology are perfect', via lem-sf-perfect-cohomology-assembly: supplies exactly the triangle-extension step in its finite truncation induction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N9-466a7827a",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-466a7827a (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources, and unit/chapter route. All five proof steps are correct, including arbitrary localization universe, cone signs, and triangle comparison. No new nodes, cycles, duplicate ring-level theorem, or target weakening. review.md records edge-case tests and a nonblocking report-only sign typo; no DAG repairs or tool_uses needed."
+ }
 }
