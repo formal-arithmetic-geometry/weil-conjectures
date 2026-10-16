@@ -14,11 +14,8 @@ import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
 import Sheaf.Algebra.Homology.TorAmplitudeFlatModel
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import all Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
+import Sheaf.AlgebraicGeometry.TildePreservesFiniteLimits
 
 /-! # Quasi-coherent tests on an affine scheme
 
@@ -65,6 +62,109 @@ theorem affineQCoh_torAmplitude_detection (X : Scheme.{u}) [IsAffine X]
         schemeDerivedTensorCohomologyVanishes X E F i) :
     ∀ G : SheafOfModules.{u} (moduleRings X.toRingedSpace),
       ∀ i : ℤ, i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes X E G i := by
-  sorry
+  classical
+  let := HasDerivedCategory.standard (ModuleCat.{u} Γ(X, ⊤))
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace))
+  let := SheafOfModules.monoidalCategory X.sheaf
+  let T : ModuleCat.{u} Γ(X, ⊤) ⥤
+      SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace) :=
+    tilde.functor Γ(X, ⊤)
+  let : T.IsLeftAdjoint := (tilde.adjunction (R := Γ(X, ⊤))).isLeftAdjoint
+  let : T.Additive := ⟨by intros; exact tilde.map_add _ _⟩
+  let : T.Faithful := (tilde.fullyFaithfulFunctor (R := Γ(X, ⊤))).faithful
+  let : PreservesFiniteLimits T := tilde_preserves_finite_limits Γ(X, ⊤)
+  let R : SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace) ⥤
+      SheafOfModules.{u} (moduleRings X.toRingedSpace) :=
+    Scheme.Modules.restrictFunctor X.toSpecΓ
+  have : R.Additive := by
+    change (Scheme.Modules.restrictFunctor X.toSpecΓ).Additive
+    infer_instance
+  have : PreservesFiniteLimits R := by
+    dsimp [R, Scheme.Modules.restrictFunctor]
+    infer_instance
+  have : PreservesFiniteColimits R := by
+    change PreservesFiniteColimits (Scheme.Modules.restrictFunctor X.toSpecΓ)
+    infer_instance
+  let S := Scheme.Modules.restrictFunctor X.isoSpec.inv
+  have eRS : R ⋙ S ≅ 𝟭 _ :=
+    (Scheme.Modules.restrictFunctorComp X.isoSpec.inv X.toSpecΓ).symm ≪≫
+      Scheme.Modules.restrictFunctorCongr (by
+        rw [← Scheme.isoSpec_hom]
+        exact X.isoSpec.inv_hom_id) ≪≫ Scheme.Modules.restrictFunctorId
+  have : R.Faithful := eRS.faithful_of_comp
+  let U := T.mapHomologicalComplex (.up ℤ)
+  let V := R.mapHomologicalComplex (.up ℤ)
+  obtain ⟨M, ⟨eM⟩⟩ := exists_affine_module_complex_representative X E hE
+  change E ≅ DerivedCategory.Q.obj (V.obj (U.obj M)) at eM
+  obtain ⟨P, s, hs, _, hk⟩ := CochainComplex.exists_quasiIso_flat_kFlat M
+  have : QuasiIso s := hs
+  have htor : DerivedCategory.torAmplitudeIn (ModuleCat.{u} Γ(X, ⊤)) a b
+      (DerivedCategory.Q.obj M) := by
+    intro N
+    have hN (i : ℤ) (hi : i < a ∨ b < i) :
+        IsZero ((DerivedCategory.homologyFunctor _ i).obj
+          (DerivedCategory.Q.obj M ⊗ (DerivedCategory.singleFunctor _ 0).obj N)) := by
+      let N₀ := (HomologicalComplex.single (ModuleCat.{u} Γ(X, ⊤)) (.up ℤ) 0).obj N
+      let K := CochainComplex.mapBifunctor P N₀ (curriedTensor (ModuleCat.{u} Γ(X, ⊤)))
+      let eK : DerivedCategory.Q.obj M ⊗ (DerivedCategory.singleFunctor _ 0).obj N ≅
+          DerivedCategory.Q.obj K :=
+        whiskerRightIso (asIso (DerivedCategory.Q.map s)).symm _ ≪≫
+          whiskerLeftIso (DerivedCategory.Q.obj P)
+            ((DerivedCategory.singleFunctorIsoCompQ _ 0).app N) ≪≫
+          DerivedCategory.QObjTensorQObjIsoOfKFlatLeft P N₀ hk
+      have hq : (R.obj (T.obj N)).IsQuasicoherent := by
+        have : (T.obj N).IsQuasicoherent := by
+          change (tilde.{u} (R := Γ(X, ⊤)) N).IsQuasicoherent
+          infer_instance
+        exact Scheme.Modules.isQuasicoherent_restrictFunctor X.toSpecΓ (T.obj N)
+      have hz := (tensor_vanishes_iff X E (R.obj (T.obj N)) i).1 (h _ hq i hi)
+      let eN : DerivedCategory.Q.obj (V.obj (U.obj N₀)) ≅
+          (DerivedCategory.singleFunctor _ 0).obj (R.obj (T.obj N)) :=
+        DerivedCategory.Q.mapIso
+          (V.mapIso ((HomologicalComplex.singleMapHomologicalComplex T (.up ℤ) 0).app N) ≪≫
+            (HomologicalComplex.singleMapHomologicalComplex R (.up ℤ) 0).app (T.obj N)) ≪≫
+          ((DerivedCategory.singleFunctorIsoCompQ _ 0).app _).symm
+      obtain ⟨cmp⟩ := affine_derivedTensor_chart_comparison X M N₀ P s hs hk
+      have hzK := hz.of_iso ((DerivedCategory.homologyFunctor _ i).mapIso
+        ((tensorIso eM eN.symm) ≪≫ cmp).symm)
+      let eH : (DerivedCategory.homologyFunctor _ i).obj
+          (DerivedCategory.Q.obj (V.obj (U.obj K))) ≅ R.obj (T.obj (K.homology i)) :=
+        (DerivedCategory.homologyFunctorFactors _ i).app _ ≪≫
+          (R.mapHomologicalComplexHomologyIso (.up ℤ) i).app (U.obj K) ≪≫
+          R.mapIso ((T.mapHomologicalComplexHomologyIso (.up ℤ) i).app K)
+      have hzRT := hzK.of_iso eH.symm
+      have hzModule : IsZero (K.homology i) := by
+        apply (IsZero.iff_id_eq_zero _).2
+        apply T.map_injective
+        apply R.map_injective
+        rw [T.map_id, T.map_zero, R.map_id, R.map_zero]
+        exact hzRT.eq_of_src _ _
+      exact hzModule.of_iso ((DerivedCategory.homologyFunctor _ i).mapIso eK ≪≫
+        (DerivedCategory.homologyFunctorFactors _ i).app K)
+    exact ⟨(DerivedCategory.isGE_iff _ a).2 (fun i hi ↦ hN i (Or.inl hi)),
+      (DerivedCategory.isLE_iff _ b).2 (fun i hi ↦ hN i (Or.inr hi))⟩
+  obtain ⟨B, hflat, hzero, ⟨eB⟩⟩ :=
+    (DerivedCategory.module_torAmplitudeIn_iff_exists_flat_model M a b hab).mp htor
+  let eBE : DerivedCategory.Q.obj (V.obj (U.obj B)) ≅ E :=
+    (R.mapDerivedCategoryFactors.app _).symm ≪≫
+      R.mapDerivedCategory.mapIso
+        ((T.mapDerivedCategoryFactors.app B).symm ≪≫
+          T.mapDerivedCategory.mapIso eB.symm ≪≫ T.mapDerivedCategoryFactors.app M) ≪≫
+      R.mapDerivedCategoryFactors.app _ ≪≫ eM.symm
+  have hB := isKFlat_tilde Γ(X, ⊤) B
+    (CochainComplex.acyclic_mapBifunctor_of_boundedAbove_flat B
+      ⟨b, fun i hi ↦ hzero i (Or.inr hi)⟩ hflat)
+  have hVB := isKFlat_restrict X.toSpecΓ (U.obj B) hB
+  intro G i hi
+  refine ⟨V.obj (U.obj B), hVB, ⟨eBE⟩, ?_⟩
+  let β := CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) G (V.obj (U.obj B))
+  apply IsZero.of_iso _ ((HomologicalComplex.homologyFunctor _ (.up ℤ) i).mapIso β)
+  apply HomologicalComplex.ExactAt.isZero_homology
+  apply HomologicalComplex.ExactAt.of_isZero
+  change IsZero ((tensorRight G).obj (R.obj (T.obj (B.X i))))
+  let : (tensorRight G).PreservesZeroMorphisms := ⟨fun M N ↦
+    congrArg (fun t ↦ t.app G) ((curriedTensor _).map_zero M N)⟩
+  exact (tensorRight G).map_isZero (R.map_isZero (T.map_isZero (hzero i hi)))
 
 end AlgebraicGeometry
