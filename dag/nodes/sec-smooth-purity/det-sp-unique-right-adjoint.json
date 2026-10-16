@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-sp-unique-right-adjoint",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Right adjoints are unique up to a unique counit-compatible isomorphism",
@@ -13,37 +13,134 @@
   "place": "node det-sp-unique-right-adjoint, order None"
  },
  "stmt_deps": [],
- "proof": [
-  {
-   "text": "*Transposes.* For an adjunction $F\\dashv J$ with counit $\\varepsilon^J$, the map\n$\\operatorname{Hom}(A,JK)\\to\\operatorname{Hom}(FA,K)$, $\\phi\\mapsto\\varepsilon^J(K)\\circ F\\phi$, is\na bijection, natural in $A$ and $K$. So $\\gamma(K)$ and $\\delta(K)$ exist and are\nunique.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Naturality.* For $u:K\\to K'$, both $\\gamma(K')\\circ Gu$ and $Ju\\circ\\gamma(K)$\nhave $J$-transpose $u\\circ\\varepsilon^G(K)$: the first by naturality of\n$\\varepsilon^G$, $\\varepsilon^J(K')\\circ F\\gamma(K')\\circ FGu=\\varepsilon^G(K')\\circ FGu=u\\circ\\varepsilon^G(K)$;\nthe second by naturality of $\\varepsilon^J$,\n$\\varepsilon^J(K')\\circ FJu\\circ F\\gamma(K)=u\\circ\\varepsilon^J(K)\\circ F\\gamma(K)=u\\circ\\varepsilon^G(K)$.\nHence they are equal. Likewise for $\\delta$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Inverse.* The $G$-transpose of $\\delta(K)\\circ\\gamma(K)$ is\n$\\varepsilon^G(K)\\circ F\\delta(K)\\circ F\\gamma(K)=\\varepsilon^J(K)\\circ F\\gamma(K)=\\varepsilon^G(K)$,\nwhich is also the $G$-transpose of $\\mathrm{id}_{GK}$; so\n$\\delta(K)\\circ\\gamma(K)=\\mathrm{id}$. Symmetrically\n$\\gamma(K)\\circ\\delta(K)=\\mathrm{id}_{JK}$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Uniqueness.* If $\\gamma'(K):GK\\to JK$ satisfies\n$\\varepsilon^J(K)\\circ F\\gamma'(K)=\\varepsilon^G(K)$, its $J$-transpose is\n$\\varepsilon^G(K)$, the same as that of $\\gamma(K)$, so $\\gamma'(K)=\\gamma(K)$.",
-   "uses": [],
-   "elementary": null
-  }
- ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.proof.md",
+  "place": "The four blueprint paragraphs (Transposes, Naturality, Inverse, Uniqueness); provenance retained for the preflight schema, with all clauses discharged by the recorded Mathlib match and no separate proof steps."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|right adjoint",
+   "results": "0 hit(s). ; the supplied subdirectory included an extra Mathlib/ prefix, so the zero hits are not evidence of absence; corrected searches follow",
+   "date": "2026-10-16",
+   "verdict": "no match from this query; later searches and the local source identify the match",
+   "subdirectory": "Mathlib/CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq",
+   "results": "0 hit(s). ; the supplied subdirectory included an extra Mathlib/ prefix, so the zero hits are not evidence of absence; corrected searches follow",
+   "date": "2026-10-16",
+   "verdict": "no match from this query; later searches and the local source identify the match",
+   "subdirectory": "Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "uniqueness of right adjoints and counit compatible natural isomorphism",
+   "results": "8 hit(s). CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc, CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_assoc",
+   "date": "2026-10-16",
+   "verdict": "match: rightAdjointUniq and its transpose/counit compatibility; local source read at Unique.lean:102-140"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit",
+   "results": "1 hit(s). CategoryTheory.Adjunction.rightAdjointUniq_hom_counit",
+   "date": "2026-10-16",
+   "verdict": "match: rightAdjointUniq and its transpose/counit compatibility; local source read at Unique.lean:102-140"
+  },
+  {
+   "tool": "leansearch",
+   "query": "rightAdjointUniq hom counit",
+   "results": "8 hit(s). CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit_assoc, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk.injEq, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc, CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app, CategoryTheory.Adjunction.rightAdjointUniq_trans_assoc",
+   "date": "2026-10-16",
+   "verdict": "match: rightAdjointUniq and its transpose/counit compatibility; local source read at Unique.lean:102-140"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- Adjunction.rightAdjointUniq",
+   "results": "0 hit(s). ; loogle: Unknown identifier `Adjunction.rightAdjointUniq`",
+   "date": "2026-10-16",
+   "verdict": "no match from this query; later searches and the local source identify the match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unique right adjoint natural isomorphism compatible with counits",
+   "results": "8 hit(s). CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc, CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit_assoc, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app, CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc",
+   "date": "2026-10-16",
+   "verdict": "match: rightAdjointUniq and its transpose/counit compatibility; local source read at Unique.lean:102-140"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "transpose counit two right adjoints inverse natural transformations",
+   "results": "8 hit(s). CategoryTheory.Adjunction.comp_counit, CategoryTheory.conjugateEquiv_counit_symm, CategoryTheory.Adjunction.Triple.rightToLeft_eq_counits, CategoryTheory.conjugateEquiv_counit, CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.Triple.map_adj₂_counit_app_leftToRight_app, CategoryTheory.Adjunction.comp_counit_app",
+   "date": "2026-10-16",
+   "verdict": "related adjunction counit and mate formulas; exact comparison found by the first phrasing"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq",
+   "results": "6 hit(s). Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean",
+   "date": "2026-10-16",
+   "verdict": "match: rightAdjointUniq and its transpose/counit compatibility; local source read at Unique.lean:102-140",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq",
+   "results": "6 hit(s). Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean",
+   "date": "2026-10-16",
+   "verdict": "match: rightAdjointUniq and its transpose/counit compatibility; local source read at Unique.lean:102-140",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_symm_apply|homEquiv_symm_apply_eq|homEquiv.*injective",
+   "results": "25 hit(s). Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Quadruple.lean, Mathlib/CategoryTheory/Adjunction/Quadruple.lean, Mathlib/CategoryTheory/Adjunction/Quadruple.lean",
+   "date": "2026-10-16",
+   "verdict": "supporting Hom equivalence; source read at Basic.lean:160-182",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem rightAdjointUniq_hom_app_counit|theorem rightAdjointUniq_inv_app|def rightAdjointUniq",
+   "results": "3 hit(s). Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-16",
+   "verdict": "match: rightAdjointUniq and its transpose/counit compatibility; local source read at Unique.lean:102-140",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "def homEquiv|invFun := fun g|homEquiv_counit",
+   "results": "5 hit(s). 19, 99, 160, 163, 182",
+   "date": "2026-10-16",
+   "verdict": "supporting Hom equivalence; wrapper misparsed single-file line prefixes, source read directly at Basic.lean:160-182",
+   "subdirectory": "CategoryTheory/Adjunction/Basic.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_symm_rightAdjointUniq|rightAdjointUniq_inv_app|homEquiv_symm_apply",
+   "results": "4 hit(s). Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: direct grep confirms the exact transpose and inverse-component declarations at Unique.lean:105 and :138, and the counit alias at Basic.lean:182.",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given two adjunctions with the same left functor, the comparison of the right functors is an invertible mate of the identity natural transformation.",
+   "results": "8 hit(s). CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.mateEquiv_apply, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id, CategoryTheory.mateEquiv_counit_symm",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: related general mate-equivalence API; retain the more direct rightAdjointUniq match verified in the pinned local source."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.rightAdjointUniq",
+  "file": "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+  "how": "One Mathlib declaration per clause, with elementary identification by a Hom equivalence. For adjG : F ⊣ G and adjJ : F ⊣ J, take e = adjG.rightAdjointUniq adjJ (Unique.lean:102-103), a natural isomorphism G ≅ J. CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app (Unique.lean:105-108) says that the inverse adjJ.homEquiv sends e.hom.app K to adjG.counit.app K; hence e.hom.app K is exactly the prescribed gamma(K). CategoryTheory.Adjunction.homEquiv (Mathlib/CategoryTheory/Adjunction/Basic.lean:160-171) is an equivalence whose inverse sends a to F.map a ≫ adjJ.counit.app K (line 163); the generated homEquiv_symm_apply, aliased as CategoryTheory.Adjunction.homEquiv_counit at line 182, is this formula. CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit (Unique.lean:127-130) is precisely the required counit equation. CategoryTheory.Adjunction.rightAdjointUniq_inv_app (Unique.lean:138-140) identifies e.inv.app K with (adjJ.rightAdjointUniq adjG).hom.app K; Unique.lean:105-108 instantiated with adj1 = adjJ and adj2 = adjG says (adjG.homEquiv (J.obj K) K).symm ((adjJ.rightAdjointUniq adjG).hom.app K) = adjJ.counit.app K. Thus e.inv.app K has precisely the defining G-transpose of delta(K), and injectivity of that equivalence identifies the two. Naturality and both inverse identities are the fields of e : G ≅ J. For any family a(K) with the required counit equation, (adjJ.homEquiv (G.obj K) K).symm a(K) = adjG.counit.app K = (adjJ.homEquiv (G.obj K) K).symm (e.hom.app K); injectivity of this equivalence gives a(K) = e.hom.app K separately for every K. This last uniqueness is a one-line application of equivalence injectivity and requires no naturality hypothesis."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -52,5 +149,21 @@
  "blueprint_order": null,
  "blueprint_uses": [],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sp-unique-right-adjoint",
+  "worker": "stage1",
+  "summary": "Checked the current blueprint statement and four proof paragraphs against the generic Mathlib adjunction API. No exact project declaration was found in WeilConjectures. The item is a Mathlib leaf: rightAdjointUniq supplies the natural isomorphism, its component transpose theorem identifies the prescribed gamma, rightAdjointUniq_inv_app identifies delta, and injectivity of the Hom equivalence proves the uniqueness of arbitrary counit-compatible families. Statement unchanged; no new nodes or external proof dependencies.",
+  "blueprint": "Realizes all four paragraphs (Transposes, Naturality, Inverse, Uniqueness) of sk-prop-sp-unique-adjoint-categorical.proof.md through the Mathlib match. Blueprint-wide searches found no second node with the same general statement; the unit proposition is its geometric specialization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-53306dee5",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-53306dee5 (reviewer sub-agent of L); spot-checked: Read the full item, report, blueprint proof and unit/chapter route, and pinned Mathlib sources. Verified both transpose comparisons, naturality, inverse identities, and uniqueness for arbitrary counit-compatible families. Checked small cases and DAG duplicate candidates. No new nodes, missing citations, target changes, or tool uses. Detailed independent checks are in review.md."
+ }
 }
