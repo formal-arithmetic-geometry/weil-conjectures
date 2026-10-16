@@ -1,0 +1,206 @@
+{
+ "id": "lem-weil-pbc-inverse-image-composition-module-linear-core",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 2 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules')",
+   "via": [
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "lem-weil-pbc-underived-exchange-module-linear",
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Existence of the module composition comparisons",
+ "statement": "Let $u:Y\\to X$ and $v:Z\\to Y$ be morphisms of schemes [def-pc-scheme], $\\Lambda$ a commutative ring and, for a scheme $T$, $\\Mod(T_{\\Et},\\Lambda)$ the category of sheaves of $\\Lambda_T$-modules on the small etale site $T_{\\Et}$ [def-weil-pbc-etale-site], [def-weil-pbc-constant-sheaf], [def-weil-sheaf-of-modules-category]. For $w\\in\\{u,v,u\\circ v\\}$ let $w^{-1}$ and $w_*$ be the inverse and direct images of sheaves of $\\Lambda$-modules of [prop-weil-pbc-inverse-image-modules-exact] (on underlying abelian sheaves the inverse image [def-weil-pbc-inverse-image] and the direct image [def-weil-pbc-direct-image] of abelian sheaves). Let $d_{u,v}:(u\\circ v)_*\\xrightarrow{\\sim}u_*\\circ v_*$ and $c_{u,v}:v^{-1}\\circ u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$ be the isomorphisms of functors on abelian sheaves of [lem-weil-pbc-inverse-image-composition] (1), (2). Then: (1) for every $F\\in\\Mod(Z_{\\Et},\\Lambda)$ the morphism $d_{u,v,F}:(u\\circ v)_*F\\to u_*v_*F$ is $\\Lambda_X$-linear for the module structures of [prop-weil-pbc-inverse-image-modules-exact]; (2) for every $G\\in\\Mod(X_{\\Et},\\Lambda)$ the morphism $c_{u,v,G}:v^{-1}u^{-1}G\\to(u\\circ v)^{-1}G$ is $\\Lambda_Z$-linear for the module structures of [prop-weil-pbc-inverse-image-modules-exact] (that of $v^{-1}u^{-1}G$ obtained by applying the module inverse image twice). Hence $d_{u,v}$ and $c_{u,v}$ are isomorphisms of functors $\\Mod(Z_{\\Et},\\Lambda)\\to\\Mod(X_{\\Et},\\Lambda)$ and $\\Mod(X_{\\Et},\\Lambda)\\to\\Mod(Z_{\\Et},\\Lambda)$ whose underlying morphisms of abelian sheaves are those of [lem-weil-pbc-inverse-image-composition]. The inverse-image functors may be any lifts equipped with the specified forgetful isomorphisms e_u, e_v, e_uv and module adjunctions a_u, a_v, a_uv whose hom-equivalences agree with the abelian ones after these isomorphisms. The comparisons satisfy, for each module sheaf G on X, (a_u.comp a_v).unit_G followed by the direct-image composite applied to c_G = (a_uv).unit_G followed by d at (L_uv G); explicitly, in Lean composition order, (aU.comp aV).unit.app G ≫ (PV ⋙ PU).map (c.hom.app G) = aUV.unit.app G ≫ d.hom.app (LUV.obj G). No uniqueness assertion is included.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236, 'clear from the definitions', with Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197; the isomorphism (g o f)^* = f^* g^* is the one conjugate to (g o f)_* = g_* f_*"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "**Step 1 (the ring maps).** For $w\\in\\{u,v,u\\circ v\\}$ with source $S$ and target $T$ let $\\gamma_w:\\Lambda_T\\to w_*\\Lambda_S$ be the morphism of sheaves of rings of [prop-weil-pbc-inverse-image-modules-exact] (1): for an object $W$ of $T_{\\Et}$, $\\gamma_{w,W}$ sends the image in $\\Lambda_T(W)$ of the constant section $r\\in\\Lambda$ to the image of the constant section $r$ in $\\Lambda_S(W\\times_TS)$; by [prop-weil-pbc-inverse-image-modules-exact] (3) the $\\Lambda_T$-module structure of the direct image $w_*F$ of a sheaf of $\\Lambda_S$-modules $F$ is: $a\\in\\Lambda_T(W)$ acts on $(w_*F)(W)=F(W\\times_TS)$ as $\\gamma_{w,W}(a)$. We claim $d_{u,v,\\Lambda_Z}\\circ\\gamma_{u\\circ v}=u_*(\\gamma_v)\\circ\\gamma_u$ as morphisms of sheaves of rings $\\Lambda_X\\to u_*v_*\\Lambda_Z$, where $d_{u,v,\\Lambda_Z}(W)=\\Lambda_Z(\\phi_W)$ is restriction along the $Z$-isomorphism $\\phi_W:(W\\times_XY)\\times_YZ\\xrightarrow{\\sim}W\\times_XZ$ of [lem-weil-pbc-inverse-image-composition] (1) (a ring map, $\\Lambda_Z$ being a sheaf of rings [def-weil-pbc-constant-sheaf]), and $u_*(\\gamma_v)(W)=\\gamma_{v,W\\times_XY}$ [def-weil-pbc-direct-image]. Both sides are morphisms of sheaves of rings out of the constant sheaf $\\Lambda_X$ on $X_{\\Et}$, whose final object is $\\mathrm{id}_X$ [def-weil-pbc-etale-site]; by [lem-weil-pbc-constant-sheaf-maps-global-sections] (for rings) they are equal once they agree on the images $c_\\Lambda(r)\\in\\Lambda_X(X)$ of the constant sections. The left side sends $c_\\Lambda(r)$ to the constant section $r$ of $\\Lambda_Z(X\\times_XZ)$ and then, by restriction along $\\phi_X$, to the constant section $r$ of $\\Lambda_Z((X\\times_XY)\\times_YZ)$ (restriction maps of the sheafification commute with the maps from the constant presheaf, whose restriction maps are the identity [def-weil-pbc-constant-sheaf]); the right side sends it to the constant section $r$ of $\\Lambda_Y(X\\times_XY)$ and then, by $\\gamma_{v,X\\times_XY}$, to the constant section $r$ of $\\Lambda_Z((X\\times_XY)\\times_YZ)$. So the two agree and the claim holds.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-constant-sheaf-maps-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236, 'clear from the definitions'; Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197"
+   }
+  },
+  {
+   "text": "**Step 2 (clause (1): $d_{u,v,F}$ is $\\Lambda_X$-linear).** Let $F\\in\\Mod(Z_{\\Et},\\Lambda)$, $W$ an object of $X_{\\Et}$, $a\\in\\Lambda_X(W)$ and $x\\in((u\\circ v)_*F)(W)=F(W\\times_XZ)$. By [prop-weil-pbc-inverse-image-modules-exact] (3) (step 1), $a$ acts on $((u\\circ v)_*F)(W)$ as $\\gamma_{u\\circ v,W}(a)\\in\\Lambda_Z(W\\times_XZ)$, and, applying the module direct image twice, on $(u_*v_*F)(W)=(v_*F)(W\\times_XY)=F((W\\times_XY)\\times_YZ)$ as $\\gamma_{v,W\\times_XY}(\\gamma_{u,W}(a))$. The component $d_{u,v,F}(W)=F(\\phi_W)$ of [lem-weil-pbc-inverse-image-composition] (1) is the restriction map of $F$ along the morphism $\\phi_W$ of $Z_{\\Et}$, hence semilinear over $\\Lambda_Z(\\phi_W)$ [def-weil-sheaf-of-modules-category]: $d_{u,v,F}(W)(\\gamma_{u\\circ v,W}(a)\\,x)=\\Lambda_Z(\\phi_W)(\\gamma_{u\\circ v,W}(a))\\,d_{u,v,F}(W)(x)=\\gamma_{v,W\\times_XY}(\\gamma_{u,W}(a))\\,d_{u,v,F}(W)(x)$ by step 1. So $d_{u,v,F}(W)(ax)=a\\,d_{u,v,F}(W)(x)$: $d_{u,v,F}$ is a morphism of $\\Mod(X_{\\Et},\\Lambda)$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236, 'clear from the definitions'; Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197"
+   }
+  },
+  {
+   "text": "**Step 3 (the adjoint of a linear map under the composite adjunction is linear).** Let $G\\in\\Mod(X_{\\Et},\\Lambda)$, $M\\in\\Mod(Z_{\\Et},\\Lambda)$ and $\\varphi:G\\to u_*v_*M$ a $\\Lambda_X$-linear morphism. Under the composite adjunction $v^{-1}u^{-1}\\dashv u_*v_*$ of abelian sheaves [def-weil-pbc-composite-adjunction] (of $u^{-1}\\dashv u_*$ and $v^{-1}\\dashv v_*$ [def-weil-pbc-inverse-image]), with unit $\\eta_{1,G}=u_*(\\eta_{v,u^{-1}G})\\circ\\eta_{u,G}$, the hom bijection $\\operatorname{Hom}_{\\Ab}(v^{-1}u^{-1}G,M)\\to\\operatorname{Hom}_{\\Ab}(G,u_*v_*M)$, $\\chi\\mapsto u_*v_*(\\chi)\\circ\\eta_{1,G}$, is the composite of the bijections $\\chi\\mapsto v_*(\\chi)\\circ\\eta_{v,u^{-1}G}$ and $\\psi\\mapsto u_*(\\psi)\\circ\\eta_{u,G}$. By [prop-weil-pbc-inverse-image-modules-exact] (3) for $u$ (with the $\\Lambda_Y$-module $v_*M$) and for $v$, each of these two bijections restricts to a bijection between linear morphisms (for the module structures of [prop-weil-pbc-inverse-image-modules-exact] (2), (3): $u^{-1}G$ a $\\Lambda_Y$-module, $v^{-1}u^{-1}G$ a $\\Lambda_Z$-module, $v_*M$ a $\\Lambda_Y$-module, $u_*v_*M$ a $\\Lambda_X$-module). Hence the unique abelian morphism $\\chi:v^{-1}u^{-1}G\\to M$ with $u_*v_*(\\chi)\\circ\\eta_{1,G}=\\varphi$ is $\\Lambda_Z$-linear.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-inverse-image",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236, 'clear from the definitions'; Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197"
+   }
+  },
+  {
+   "text": "**Step 4 (clause (2): $c_{u,v,G}$ is $\\Lambda_Z$-linear).** Let $G\\in\\Mod(X_{\\Et},\\Lambda)$ and $M=(u\\circ v)^{-1}G$ with its $\\Lambda_Z$-module structure of [prop-weil-pbc-inverse-image-modules-exact] (2). The unit $\\eta_{u\\circ v,G}:G\\to(u\\circ v)_*M$ is $\\Lambda_X$-linear, the unit of the module adjunction being the abelian one [prop-weil-pbc-inverse-image-modules-exact] (3), and $d_{u,v,M}:(u\\circ v)_*M\\to u_*v_*M$ is $\\Lambda_X$-linear by step 2; so $\\varphi=d_{u,v,M}\\circ\\eta_{u\\circ v,G}$ is $\\Lambda_X$-linear. By [lem-weil-pbc-inverse-image-composition] (2), $u_*v_*(c_{u,v,G})\\circ\\eta_{1,G}=\\varphi$, so $c_{u,v,G}$ is the unique abelian morphism $\\chi$ of step 3 for this $\\varphi$, hence $\\Lambda_Z$-linear.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236, 'clear from the definitions'; Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197"
+   }
+  },
+  {
+   "text": "**Step 5 (isomorphisms of functors on modules).** By steps 2 and 4 the components $d_{u,v,F}$ ($F\\in\\Mod(Z_{\\Et},\\Lambda)$) and $c_{u,v,G}$ ($G\\in\\Mod(X_{\\Et},\\Lambda)$) are morphisms of sheaves of modules; they are isomorphisms of abelian sheaves [lem-weil-pbc-inverse-image-composition] (1), (2), and the inverse of a bijective $\\Lambda_T(W)$-linear map is linear, so they are isomorphisms in $\\Mod(-,\\Lambda)$ [def-weil-sheaf-of-modules-category]. The module functors $w_*$, $w^{-1}$ act on morphisms as the abelian ones [prop-weil-pbc-inverse-image-modules-exact] (2), (3), so the naturality squares of $d_{u,v}$ and $c_{u,v}$ for module morphisms are among those of [lem-weil-pbc-inverse-image-composition] (1), (2): $d_{u,v}$ and $c_{u,v}$ are isomorphisms of functors $\\Mod(Z_{\\Et},\\Lambda)\\to\\Mod(X_{\\Et},\\Lambda)$ and $\\Mod(X_{\\Et},\\Lambda)\\to\\Mod(Z_{\\Et},\\Lambda)$ with the abelian ones as underlying morphisms. The unit of the composite module adjunction $v^{-1}u^{-1}\\dashv u_*v_*$ is $u_*\\eta_vu^{-1}\\circ\\eta_u$ [def-weil-pbc-composite-adjunction] with the module units equal to the abelian ones [prop-weil-pbc-inverse-image-modules-exact] (3), so $c_{u,v}$ carries it to $d_{u,v}\\circ\\eta_{u\\circ v}$ by [lem-weil-pbc-inverse-image-composition] (2).",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236, 'clear from the definitions'; Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-constant-sheaf-maps-global-sections",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236 ('clear from the definitions'), with Lemma 03D7, line 1197; the definitions written out by an agent for the small etale sites and the module structures of prop-weil-pbc-inverse-image-modules-exact"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of the composition isomorphisms for inverse images of sheaves of modules with forgetting to abelian sheaves",
+   "results": "SheafOfModules.pullbackComp, conjugateEquiv_pullbackComp_inv, toSheaf and its reflects-isomorphisms instance; Functor.sheafPushforwardContinuousComp'_inv_app_val_app. These supply ingredients, not the compatibility for the arbitrary lifted adjunctions of this statement.",
+   "date": "2026-10-16",
+   "verdict": "no exact match; categorical ingredients available"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism of sheaf module pushforwards along naturally isomorphic continuous functors with compatible ring maps",
+   "results": "SheafOfModules.pushforwardNatIso and pushforwardCongr construct the module direct-image comparison once ring-map compatibility is proved. Neither identifies the arbitrary compatible inverse-image adjunction data with the abelian composition comparison.",
+   "date": "2026-10-16",
+   "verdict": "partial construction only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": "CategoryTheory.conjugateIsoEquiv and its component lemmas transpose isomorphisms of right adjoints to left adjoints. They require the module direct-image comparison first and do not supply its compatibility with the abelian forgetful functor.",
+   "date": "2026-10-16",
+   "verdict": "general categorical ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardCongr₂|pushforwardNatIso|unit_conjugateEquiv_symm",
+   "results": "Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous:228,250 and Mathlib.CategoryTheory.Adjunction.Mates:311 provide pushforward transport and its mate unit identity. No exact specialization of the core statement.",
+   "date": "2026-10-16",
+   "verdict": "partial construction only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear",
+  "date": "2026-10-16",
+  "group": "F2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinearCore",
+  "declaration": "AlgebraicGeometry.etaleInverseImageCompositionModuleLinearCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageCompositionModuleLinearCore.lean",
+  "statement": "theorem etaleInverseImageCompositionModuleLinearCore (X Y Z : Scheme.{u}) (uMap : Y ⟶ X) (vMap : Z ⟶ Y) (R : CommRingCat.{u + 1}) : (fun (RX : Sheaf (X.smallGrothendieckTopology @Etale) CommRingCat.{u + 1}) (RY : Sheaf (Y.smallGrothendieckTopology @Etale) CommRingCat.{u + 1}) (RZ : Sheaf (Z.smallGrothendieckTopology @Etale) CommRingCat.{u + 1}) (etaX : ((Functor.const X.Etaleᵒᵖ).obj R) ⟶ RX.obj) (etaY : ((Functor.const Y.Etaleᵒᵖ).obj R) ⟶ RY.obj) (etaZ : ((Functor.const Z.Etaleᵒᵖ).obj R) ⟶ RZ.obj) => ∀ (gammaU : RX ⟶ ((MorphismProperty.Over.pullback @Etale ⊤ uMap).sheafPushforwardContinuous CommRingCat.{u + 1} (X.smallGrothendieckTopology @Etale) (Y.smallGrothendieckTopology @Etale)).obj RY) (gammaV : RY ⟶ ((MorphismProperty.Over.pullback @Etale ⊤ vMap).sheafPushforwardContinuous CommRingCat.{u + 1} (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).obj RZ) (gammaUV : RX ⟶ ((MorphismProperty.Over.pullback @Etale ⊤ (vMap ≫ uMap)).sheafPushforwardContinuous CommRingCat.{u + 1} (X.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).obj RZ), (∀ (W : X.Etaleᵒᵖ) (r : R), gammaU.hom.app W (etaX.app W r) = etaY.app ((MorphismProperty.Over.pullback @Etale ⊤ uMap).op.obj W) r) → (∀ (W : Y.Etaleᵒᵖ) (r : R), gammaV.hom.app W (etaY.app W r) = etaZ.app ((MorphismProperty.Over.pullback @Etale ⊤ vMap).op.obj W) r) → (∀ (W : X.Etaleᵒᵖ) (r : R), gammaUV.hom.app W (etaX.app W r) = etaZ.app ((MorphismProperty.Over.pullback @Etale ⊤ (vMap ≫ uMap)).op.obj W) r) → (fun (UX : SheafOfModules.{u + 1} ((sheafCompose (X.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX) ⥤ Sheaf (X.smallGrothendieckTopology @Etale) AddCommGrpCat.{u + 1}) (UY : SheafOfModules.{u + 1} ((sheafCompose (Y.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RY) ⥤ Sheaf (Y.smallGrothendieckTopology @Etale) AddCommGrpCat.{u + 1}) (UZ : SheafOfModules.{u + 1} ((sheafCompose (Z.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RZ) ⥤ Sheaf (Z.smallGrothendieckTopology @Etale) AddCommGrpCat.{u + 1}) (PU : SheafOfModules.{u + 1} ((sheafCompose (Y.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RY) ⥤ SheafOfModules.{u + 1} ((sheafCompose (X.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX)) (PV : SheafOfModules.{u + 1} ((sheafCompose (Z.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RZ) ⥤ SheafOfModules.{u + 1} ((sheafCompose (Y.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RY)) (PUV : SheafOfModules.{u + 1} ((sheafCompose (Z.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RZ) ⥤ SheafOfModules.{u + 1} ((sheafCompose (X.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX)) (pU : PU ⋙ UX ≅ UY ⋙ Etale.lowerStar AddCommGrpCat.{u + 1} uMap) (pV : PV ⋙ UY ≅ UZ ⋙ Etale.lowerStar AddCommGrpCat.{u + 1} vMap) (pUV : PUV ⋙ UX ≅ UZ ⋙ Etale.lowerStar AddCommGrpCat.{u + 1} (vMap ≫ uMap)) => ∀ (LU : SheafOfModules.{u + 1} ((sheafCompose (X.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX) ⥤ SheafOfModules.{u + 1} ((sheafCompose (Y.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RY)) (eU : LU ⋙ UY ≅ UX ⋙ Etale.upperStar AddCommGrpCat.{u + 1} uMap) (aU : LU ⊣ PU), (∀ (G : SheafOfModules.{u + 1} ((sheafCompose (X.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX)) (F : SheafOfModules.{u + 1} ((sheafCompose (Y.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RY)) (h : LU.obj G ⟶ F), UX.map (aU.homEquiv G F h) ≫ pU.hom.app F = (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} uMap).homEquiv (UX.obj G) (UY.obj F) (eU.inv.app G ≫ UY.map h)) → ∀ (LV : SheafOfModules.{u + 1} ((sheafCompose (Y.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RY) ⥤ SheafOfModules.{u + 1} ((sheafCompose (Z.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RZ)) (eV : LV ⋙ UZ ≅ UY ⋙ Etale.upperStar AddCommGrpCat.{u + 1} vMap) (aV : LV ⊣ PV), (∀ (G : SheafOfModules.{u + 1} ((sheafCompose (Y.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RY)) (F : SheafOfModules.{u + 1} ((sheafCompose (Z.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RZ)) (h : LV.obj G ⟶ F), UY.map (aV.homEquiv G F h) ≫ pV.hom.app F = (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} vMap).homEquiv (UY.obj G) (UZ.obj F) (eV.inv.app G ≫ UZ.map h)) → ∀ (LUV : SheafOfModules.{u + 1} ((sheafCompose (X.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX) ⥤ SheafOfModules.{u + 1} ((sheafCompose (Z.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RZ)) (eUV : LUV ⋙ UZ ≅ UX ⋙ Etale.upperStar AddCommGrpCat.{u + 1} (vMap ≫ uMap)) (aUV : LUV ⊣ PUV), (∀ (G : SheafOfModules.{u + 1} ((sheafCompose (X.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX)) (F : SheafOfModules.{u + 1} ((sheafCompose (Z.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RZ)) (h : LUV.obj G ⟶ F), UX.map (aUV.homEquiv G F h) ≫ pUV.hom.app F = (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (vMap ≫ uMap)).homEquiv (UX.obj G) (UZ.obj F) (eUV.inv.app G ≫ UZ.map h)) → ∃ (d : PUV ≅ PV ⋙ PU) (c : LU ⋙ LV ≅ LUV), (∀ F : SheafOfModules.{u + 1} ((sheafCompose (Z.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RZ), UX.map (d.hom.app F) ≫ pU.hom.app (PV.obj F) ≫ (Etale.lowerStar AddCommGrpCat.{u + 1} uMap).map (pV.hom.app F) = pUV.hom.app F ≫ (Etale.lowerStarComp AddCommGrpCat.{u + 1} vMap uMap).inv.app (UZ.obj F)) ∧ (∀ G : SheafOfModules.{u + 1} ((sheafCompose (X.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX), UZ.map (c.hom.app G) ≫ eUV.hom.app G = eV.hom.app (LU.obj G) ≫ (Etale.upperStar AddCommGrpCat.{u + 1} vMap).map (eU.hom.app G) ≫ (Etale.upperStarComp AddCommGrpCat.{u + 1} vMap uMap).inv.app (UX.obj G)) ∧ (∀ G : SheafOfModules.{u + 1} ((sheafCompose (X.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX), (aU.comp aV).unit.app G ≫ (PV ⋙ PU).map (c.hom.app G) = aUV.unit.app G ≫ d.hom.app (LUV.obj G)) ) (SheafOfModules.toSheaf ((sheafCompose (X.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX)) (SheafOfModules.toSheaf ((sheafCompose (Y.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RY)) (SheafOfModules.toSheaf ((sheafCompose (Z.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RZ)) (SheafOfModules.pushforward (J := (X.smallGrothendieckTopology @Etale)) (K := (Y.smallGrothendieckTopology @Etale)) (F := MorphismProperty.Over.pullback @Etale ⊤ uMap) ((sheafCompose (X.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (Y := ((MorphismProperty.Over.pullback @Etale ⊤ uMap).sheafPushforwardContinuous CommRingCat.{u + 1} (X.smallGrothendieckTopology @Etale) (Y.smallGrothendieckTopology @Etale)).obj RY) gammaU)) (SheafOfModules.pushforward (J := (Y.smallGrothendieckTopology @Etale)) (K := (Z.smallGrothendieckTopology @Etale)) (F := MorphismProperty.Over.pullback @Etale ⊤ vMap) ((sheafCompose (Y.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (Y := ((MorphismProperty.Over.pullback @Etale ⊤ vMap).sheafPushforwardContinuous CommRingCat.{u + 1} (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).obj RZ) gammaV)) (SheafOfModules.pushforward (J := (X.smallGrothendieckTopology @Etale)) (K := (Z.smallGrothendieckTopology @Etale)) (F := MorphismProperty.Over.pullback @Etale ⊤ (vMap ≫ uMap)) ((sheafCompose (X.smallGrothendieckTopology @Etale) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (Y := ((MorphismProperty.Over.pullback @Etale ⊤ (vMap ≫ uMap)).sheafPushforwardContinuous CommRingCat.{u + 1} (X.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).obj RZ) gammaUV)) (Iso.refl _) (Iso.refl _) (Iso.refl _)) ((constantSheaf (X.smallGrothendieckTopology @Etale) CommRingCat.{u + 1}).obj R) ((constantSheaf (Y.smallGrothendieckTopology @Etale) CommRingCat.{u + 1}).obj R) ((constantSheaf (Z.smallGrothendieckTopology @Etale) CommRingCat.{u + 1}).obj R) (toSheafify (X.smallGrothendieckTopology @Etale) ((Functor.const X.Etaleᵒᵖ).obj R)) (toSheafify (Y.smallGrothendieckTopology @Etale) ((Functor.const Y.Etaleᵒᵖ).obj R)) (toSheafify (Z.smallGrothendieckTopology @Etale) ((Functor.const Z.Etaleᵒᵖ).obj R))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261016T133216-L-3234007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261016T133216-L-3234007",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

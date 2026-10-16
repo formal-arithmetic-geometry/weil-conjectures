@@ -6,8 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinearCore
 
 /-!
 # Linearity of the composition comparisons on constant-ring etale modules
@@ -24,6 +23,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 1000000 in
+-- The dependent core application exceeds the default heartbeat limit.
 set_option backward.defeqAttrib.useBackward true in
 /-- The abelian composition comparisons lift to module isomorphisms, uniquely for inverse
 image with the specified unit equation. Source: Stacks Project, Tags 03D8 and 03D7
@@ -188,6 +189,18 @@ theorem etaleInverseImageCompositionModuleLinear
       (toSheafify (Y.smallGrothendieckTopology @Etale) ((Functor.const Y.Etaleᵒᵖ).obj R))
       (toSheafify (Z.smallGrothendieckTopology @Etale) ((Functor.const Z.Etaleᵒᵖ).obj R))
  := by
-  sorry
+  dsimp
+  intros gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV
+  obtain ⟨d, c, hd, hc, hu⟩ :=
+    etaleInverseImageCompositionModuleLinearCore X Y Z uMap vMap R
+      gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV
+  refine ⟨d, c, hd, hc, hu, ?_⟩
+  intro c' hc'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext G
+  apply ((aU.comp aV).homEquiv G (LUV.obj G)).injective
+  rw [Adjunction.homEquiv_apply, Adjunction.homEquiv_apply]
+  exact (hc' G).trans (hu G).symm
 
 end AlgebraicGeometry

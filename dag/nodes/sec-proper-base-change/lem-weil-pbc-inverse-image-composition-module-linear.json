@@ -34,90 +34,24 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (the ring maps).** For $w\\in\\{u,v,u\\circ v\\}$ with source $S$ and target $T$ let $\\gamma_w:\\Lambda_T\\to w_*\\Lambda_S$ be the morphism of sheaves of rings of [prop-weil-pbc-inverse-image-modules-exact] (1): for an object $W$ of $T_{\\Et}$, $\\gamma_{w,W}$ sends the image in $\\Lambda_T(W)$ of the constant section $r\\in\\Lambda$ to the image of the constant section $r$ in $\\Lambda_S(W\\times_TS)$; by [prop-weil-pbc-inverse-image-modules-exact] (3) the $\\Lambda_T$-module structure of the direct image $w_*F$ of a sheaf of $\\Lambda_S$-modules $F$ is: $a\\in\\Lambda_T(W)$ acts on $(w_*F)(W)=F(W\\times_TS)$ as $\\gamma_{w,W}(a)$. We claim $d_{u,v,\\Lambda_Z}\\circ\\gamma_{u\\circ v}=u_*(\\gamma_v)\\circ\\gamma_u$ as morphisms of sheaves of rings $\\Lambda_X\\to u_*v_*\\Lambda_Z$, where $d_{u,v,\\Lambda_Z}(W)=\\Lambda_Z(\\phi_W)$ is restriction along the $Z$-isomorphism $\\phi_W:(W\\times_XY)\\times_YZ\\xrightarrow{\\sim}W\\times_XZ$ of [lem-weil-pbc-inverse-image-composition] (1) (a ring map, $\\Lambda_Z$ being a sheaf of rings [def-weil-pbc-constant-sheaf]), and $u_*(\\gamma_v)(W)=\\gamma_{v,W\\times_XY}$ [def-weil-pbc-direct-image]. Both sides are morphisms of sheaves of rings out of the constant sheaf $\\Lambda_X$ on $X_{\\Et}$, whose final object is $\\mathrm{id}_X$ [def-weil-pbc-etale-site]; by [lem-weil-pbc-constant-sheaf-maps-global-sections] (for rings) they are equal once they agree on the images $c_\\Lambda(r)\\in\\Lambda_X(X)$ of the constant sections. The left side sends $c_\\Lambda(r)$ to the constant section $r$ of $\\Lambda_Z(X\\times_XZ)$ and then, by restriction along $\\phi_X$, to the constant section $r$ of $\\Lambda_Z((X\\times_XY)\\times_YZ)$ (restriction maps of the sheafification commute with the maps from the constant presheaf, whose restriction maps are the identity [def-weil-pbc-constant-sheaf]); the right side sends it to the constant section $r$ of $\\Lambda_Y(X\\times_XY)$ and then, by $\\gamma_{v,X\\times_XY}$, to the constant section $r$ of $\\Lambda_Z((X\\times_XY)\\times_YZ)$. So the two agree and the claim holds.",
+   "text": "Apply the split core theorem for the three compatibility equations, then prove uniqueness componentwise by injectivity of the composite adjunction hom-equivalence.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-constant-sheaf-maps-global-sections"
+    "lem-weil-pbc-inverse-image-composition-module-linear-core"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236, 'clear from the definitions'; Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197"
-   }
-  },
-  {
-   "text": "**Step 2 (clause (1): $d_{u,v,F}$ is $\\Lambda_X$-linear).** Let $F\\in\\Mod(Z_{\\Et},\\Lambda)$, $W$ an object of $X_{\\Et}$, $a\\in\\Lambda_X(W)$ and $x\\in((u\\circ v)_*F)(W)=F(W\\times_XZ)$. By [prop-weil-pbc-inverse-image-modules-exact] (3) (step 1), $a$ acts on $((u\\circ v)_*F)(W)$ as $\\gamma_{u\\circ v,W}(a)\\in\\Lambda_Z(W\\times_XZ)$, and, applying the module direct image twice, on $(u_*v_*F)(W)=(v_*F)(W\\times_XY)=F((W\\times_XY)\\times_YZ)$ as $\\gamma_{v,W\\times_XY}(\\gamma_{u,W}(a))$. The component $d_{u,v,F}(W)=F(\\phi_W)$ of [lem-weil-pbc-inverse-image-composition] (1) is the restriction map of $F$ along the morphism $\\phi_W$ of $Z_{\\Et}$, hence semilinear over $\\Lambda_Z(\\phi_W)$ [def-weil-sheaf-of-modules-category]: $d_{u,v,F}(W)(\\gamma_{u\\circ v,W}(a)\\,x)=\\Lambda_Z(\\phi_W)(\\gamma_{u\\circ v,W}(a))\\,d_{u,v,F}(W)(x)=\\gamma_{v,W\\times_XY}(\\gamma_{u,W}(a))\\,d_{u,v,F}(W)(x)$ by step 1. So $d_{u,v,F}(W)(ax)=a\\,d_{u,v,F}(W)(x)$: $d_{u,v,F}$ is a morphism of $\\Mod(X_{\\Et},\\Lambda)$.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236, 'clear from the definitions'; Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197"
-   }
-  },
-  {
-   "text": "**Step 3 (the adjoint of a linear map under the composite adjunction is linear).** Let $G\\in\\Mod(X_{\\Et},\\Lambda)$, $M\\in\\Mod(Z_{\\Et},\\Lambda)$ and $\\varphi:G\\to u_*v_*M$ a $\\Lambda_X$-linear morphism. Under the composite adjunction $v^{-1}u^{-1}\\dashv u_*v_*$ of abelian sheaves [def-weil-pbc-composite-adjunction] (of $u^{-1}\\dashv u_*$ and $v^{-1}\\dashv v_*$ [def-weil-pbc-inverse-image]), with unit $\\eta_{1,G}=u_*(\\eta_{v,u^{-1}G})\\circ\\eta_{u,G}$, the hom bijection $\\operatorname{Hom}_{\\Ab}(v^{-1}u^{-1}G,M)\\to\\operatorname{Hom}_{\\Ab}(G,u_*v_*M)$, $\\chi\\mapsto u_*v_*(\\chi)\\circ\\eta_{1,G}$, is the composite of the bijections $\\chi\\mapsto v_*(\\chi)\\circ\\eta_{v,u^{-1}G}$ and $\\psi\\mapsto u_*(\\psi)\\circ\\eta_{u,G}$. By [prop-weil-pbc-inverse-image-modules-exact] (3) for $u$ (with the $\\Lambda_Y$-module $v_*M$) and for $v$, each of these two bijections restricts to a bijection between linear morphisms (for the module structures of [prop-weil-pbc-inverse-image-modules-exact] (2), (3): $u^{-1}G$ a $\\Lambda_Y$-module, $v^{-1}u^{-1}G$ a $\\Lambda_Z$-module, $v_*M$ a $\\Lambda_Y$-module, $u_*v_*M$ a $\\Lambda_X$-module). Hence the unique abelian morphism $\\chi:v^{-1}u^{-1}G\\to M$ with $u_*v_*(\\chi)\\circ\\eta_{1,G}=\\varphi$ is $\\Lambda_Z$-linear.",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "def-weil-pbc-inverse-image",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236, 'clear from the definitions'; Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197"
-   }
-  },
-  {
-   "text": "**Step 4 (clause (2): $c_{u,v,G}$ is $\\Lambda_Z$-linear).** Let $G\\in\\Mod(X_{\\Et},\\Lambda)$ and $M=(u\\circ v)^{-1}G$ with its $\\Lambda_Z$-module structure of [prop-weil-pbc-inverse-image-modules-exact] (2). The unit $\\eta_{u\\circ v,G}:G\\to(u\\circ v)_*M$ is $\\Lambda_X$-linear, the unit of the module adjunction being the abelian one [prop-weil-pbc-inverse-image-modules-exact] (3), and $d_{u,v,M}:(u\\circ v)_*M\\to u_*v_*M$ is $\\Lambda_X$-linear by step 2; so $\\varphi=d_{u,v,M}\\circ\\eta_{u\\circ v,G}$ is $\\Lambda_X$-linear. By [lem-weil-pbc-inverse-image-composition] (2), $u_*v_*(c_{u,v,G})\\circ\\eta_{1,G}=\\varphi$, so $c_{u,v,G}$ is the unique abelian morphism $\\chi$ of step 3 for this $\\varphi$, hence $\\Lambda_Z$-linear.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-composite-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236, 'clear from the definitions'; Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197"
-   }
-  },
-  {
-   "text": "**Step 5 (isomorphisms of functors on modules, and uniqueness).** By steps 2 and 4 the components $d_{u,v,F}$ ($F\\in\\Mod(Z_{\\Et},\\Lambda)$) and $c_{u,v,G}$ ($G\\in\\Mod(X_{\\Et},\\Lambda)$) are morphisms of sheaves of modules; they are isomorphisms of abelian sheaves [lem-weil-pbc-inverse-image-composition] (1), (2), and the inverse of a bijective $\\Lambda_T(W)$-linear map is linear, so they are isomorphisms in $\\Mod(-,\\Lambda)$ [def-weil-sheaf-of-modules-category]. The module functors $w_*$, $w^{-1}$ act on morphisms as the abelian ones [prop-weil-pbc-inverse-image-modules-exact] (2), (3), so the naturality squares of $d_{u,v}$ and $c_{u,v}$ for module morphisms are among those of [lem-weil-pbc-inverse-image-composition] (1), (2): $d_{u,v}$ and $c_{u,v}$ are isomorphisms of functors $\\Mod(Z_{\\Et},\\Lambda)\\to\\Mod(X_{\\Et},\\Lambda)$ and $\\Mod(X_{\\Et},\\Lambda)\\to\\Mod(Z_{\\Et},\\Lambda)$ with the abelian ones as underlying morphisms. The unit of the composite module adjunction $v^{-1}u^{-1}\\dashv u_*v_*$ is $u_*\\eta_vu^{-1}\\circ\\eta_u$ [def-weil-pbc-composite-adjunction] with the module units equal to the abelian ones [prop-weil-pbc-inverse-image-modules-exact] (3), so $c_{u,v}$ carries it to $d_{u,v}\\circ\\eta_{u\\circ v}$ by [lem-weil-pbc-inverse-image-composition] (2). Uniqueness: if $c'$ is an isomorphism of functors on modules with $u_*v_*(c'_G)\\circ\\eta_{1,G}=d_{u,v,(u\\circ v)^{-1}G}\\circ\\eta_{u\\circ v,G}$ for every $G$, then $c'_G$ and $c_{u,v,G}$ have the same image under the bijection $\\chi\\mapsto u_*v_*(\\chi)\\circ\\eta_{1,G}$ of step 3, so $c'_G=c_{u,v,G}$ for every $G$.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-composite-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236, 'clear from the definitions'; Lemma 03D7 (lemma-adjoint-pullback-pushforward-modules), line 1197"
+    "place": "Lemma 03D8 (lemma-push-pull-composition-modules); uniqueness is the worker argument using Adjunction.homEquiv_apply and injectivity"
    }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-inverse-image-composition",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-constant-sheaf-maps-global-sections",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-inverse-image"
+  "lem-weil-pbc-inverse-image-composition-module-linear-core"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Lemma 03D8 (lemma-push-pull-composition-modules), line 1236 ('clear from the definitions'), with Lemma 03D7, line 1197; the definitions written out by an agent for the small etale sites and the module structures of prop-weil-pbc-inverse-image-modules-exact"
+  "place": "Lemma 03D8; existence and compatibility remain the core obligation, while uniqueness is proved using Adjunction.homEquiv_apply and injectivity"
  },
  "mathlib_searches": [
   {
@@ -204,5 +138,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261016T133216-L-3234007",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
