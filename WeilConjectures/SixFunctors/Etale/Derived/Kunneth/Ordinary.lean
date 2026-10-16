@@ -13,6 +13,16 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
+public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGeneration
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionUnit
+public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
+public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 
 /-!
 # The Künneth map in ordinary étale cohomology
@@ -189,7 +199,6 @@ lemma tensorBaseChangeMap_naturality (h : Y ⟶ X') (e : Y ⟶ T) (f' : X' ⟶ S
   rw [← whiskerLeft_comp, hv, whiskerLeft_comp, whisker_exchange_assoc]
   simp only [whiskerLeft_comp, Category.assoc]
 
-
 /-- The composition isomorphism `Rp_* ⋙ Rf_* ≅ Rc_*` for `p ≫ f = c`: the conjugate of the
 composition isomorphism `Lc^* ≅ Lf^* ⋙ Lp^*` (`AlgebraicGeometry.Etale.leftDerivedUpperStarComp`)
 under the derived adjunctions `Lc^* ⊣ Rc_*` and `Lf^* ⋙ Lp^* ⊣ Rp_* ⋙ Rf_*`. -/
@@ -308,6 +317,43 @@ lemma kunnethMap_naturality (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶
 
 end Maps
 
+section MonoidalEquivalence
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] (X : Scheme.{u})
+  {B : Type u'} [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
+  [HasDerivedCategory.{u + 1} B] [MonoidalCategory B] [MonoidalClosed B] [MonoidalPreadditive B]
+  [BraidedCategory B] [Abelian.HasFunctorialFlatResolution B]
+
+/-- A monoidal additive equivalence `F : B ⥤ X_ét` onto the category of `A`-valued étale sheaves
+on `X` commutes with the derived tensor products:
+`D(F)(N ⊗ᴸ M) ≅ D(F) N ⊗ᴸ D(F) M`. -/
+noncomputable def mapDerivedCategoryObjTensorIsoDerivedTensor
+    (F : B ⥤ Sheaf X.smallEtaleTopology A) [F.Monoidal] [F.IsEquivalence] [F.Additive]
+    (N M : DerivedCategory B) :
+    F.mapDerivedCategory.obj (N ⊗ M) ≅
+      ((derivedTensor A X).obj (F.mapDerivedCategory.obj N)).obj (F.mapDerivedCategory.obj M) :=
+  (DerivedCategory.tensorLeftCompMapDerivedCategoryIso F N).app M
+
+end MonoidalEquivalence
+
+section DirectSums
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
+
+/-- Blueprint `lem-kun-derived-tensor-direct-sums`: the derived tensor product `K ⊗ᴸ -` with a
+fixed complex commutes with direct sums, being left adjoint to `RHom(K, -)`
+(`AlgebraicGeometry.Etale.derivedTensorHomAdjunction`). -/
+instance preservesColimitsOfShape_derivedTensor_obj
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) (J : Type*) :
+    PreservesColimitsOfShape (Discrete J) ((-⊗ᴸ-(X)[A]).obj K) :=
+  (derivedTensorHomAdjunction A K).leftAdjoint_preservesColimits.preservesColimitsOfShape
+
+end DirectSums
+
 section Constant
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
@@ -321,24 +367,15 @@ noncomputable def constantFunctor :
       DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapDerivedCategory
 
-/-- Blueprint `def-kun-cd` (for sheaves of `Λ`-modules): the scheme `X` has *finite
-cohomological dimension* for sheaves of `Λ`-modules if there is a `d` with `H^q(X, F) = 0` for
-every étale sheaf `F` of `Λ`-modules and every `q > d`. For a torsion ring `Λ` every such sheaf
-is a torsion abelian sheaf, so this follows from finiteness of the torsion étale cohomological
-dimension `cd(X)` of the blueprint. -/
-def HasFiniteCohomologicalDimension : Prop :=
-  ∃ d : ℤ, ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), d < q →
-    IsZero ((cohomology (ModuleCat.{u + 1} Λ) X q).obj
-      ((DerivedCategory.singleFunctor _ 0).obj F))
+/-- The constant complex functor commutes with the shifts. -/
+noncomputable instance : (constantFunctor Λ X).CommShift ℤ :=
+  inferInstanceAs
+    ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapDerivedCategory.CommShift ℤ)
 
-variable {X} in
-/-- Blueprint `def-kun-cd` (for morphisms, and sheaves of `Λ`-modules): the morphism `f` has
-*finite cohomological dimension* for sheaves of `Λ`-modules if there is a `d` with
-`R^q f_* F = 0` for every étale sheaf `F` of `Λ`-modules and every `q > d`. -/
-def HasFiniteCohomologicalDimensionMorphism {Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
-  ∃ d : ℤ, ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), d < q →
-    IsZero ((DerivedCategory.homologyFunctor _ q).obj
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj F)))
+/-- The constant complex functor is a triangulated functor. -/
+instance : (constantFunctor Λ X).IsTriangulated :=
+  inferInstanceAs
+    ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapDerivedCategory.IsTriangulated)
 
 end Constant
 
@@ -355,71 +392,6 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 section Inputs
-
-/-- Blueprint `lem-kun-0f10`: finite cohomological dimension of finite-type morphisms, part (1).
-
-Let `K` be a field and `f : X ⟶ Y` a morphism between `K`-schemes of finite type. For a torsion
-coefficient ring `Λ`, the higher direct images `R^q f_*` of étale sheaves of `Λ`-modules vanish
-in all large degrees `q`. -/
-theorem hasFiniteCohomologicalDimensionMorphism (hΛ : IsAddTorsion Λ) {K : Type u} [Field K]
-    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))
-    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
-    (f : X ⟶ Y) (_hf : f ≫ aY = aX) :
-    HasFiniteCohomologicalDimensionMorphism Λ f :=
-  sorry
-
-/-- Blueprint `lem-kun-0f10`: finite cohomological dimension of finite-type morphisms, part (2).
-
-Over a separably closed field `K`, a `K`-scheme `X` of finite type has finite étale
-cohomological dimension: for a torsion coefficient ring `Λ`, `H^q(X, F) = 0` for every étale
-sheaf `F` of `Λ`-modules and all large `q`. -/
-theorem hasFiniteCohomologicalDimension_of_isSepClosed (hΛ : IsAddTorsion Λ) {K : Type u}
-    [Field K] [IsSepClosed K] {X : Scheme.{u}} (aX : X ⟶ Spec (.of K))
-    [LocallyOfFiniteType aX] [QuasiCompact aX] :
-    HasFiniteCohomologicalDimension Λ X :=
-  sorry
-
-/-- Blueprint `lem-kun-0f12`: tensor product with a constant complex.
-
-Let `k` be a separably closed field, `Λ` a torsion ring, and `a : X ⟶ Spec k` a morphism from a
-quasi-compact quasi-separated scheme `X` of finite cohomological dimension. For
-`E ∈ D(X_ét, Λ)` and `C ∈ D((Spec k)_ét, Λ)` the projection map
-(`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`)
-
-`Ra_* E ⊗ᴸ C ⟶ Ra_*(E ⊗ᴸ La^* C)`
-
-is an isomorphism. Under the equivalence of étale sheaves on `Spec k` with `Λ`-modules
-(`AlgebraicGeometry.Etale.constantSheafEquivalenceOfIsSepClosed`), `Ra_*` is `RΓ(X, -)` and
-`La^*` is the constant complex functor `C ↦ C_X`
-(`AlgebraicGeometry.Etale.constantFunctorCompLeftDerivedUpperStarIso`), and the projection map
-is the canonical map `RΓ(X, E) ⊗ᴸ C ⟶ RΓ(X, E ⊗ᴸ C_X)` of the blueprint: it is adjoint to
-`La^*(Ra_* E ⊗ᴸ C) ≅ La^* Ra_* E ⊗ᴸ La^* C ⟶ E ⊗ᴸ La^* C`, as in the proof of
-`lem-kun-kunneth-via-0f1n`. -/
-theorem isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed (hΛ : IsAddTorsion Λ)
-    {k : Type u} [Field k] [IsSepClosed k] {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
-    [CompactSpace X] [QuasiSeparatedSpace X] (hX : HasFiniteCohomologicalDimension Λ X)
-    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) a).app E).app C) :=
-  sorry
-
-/-- Blueprint `lem-kun-0f11`: direct sums and finite cohomological dimension.
-
-For a quasi-compact quasi-separated morphism `f` of finite cohomological dimension and a torsion
-ring `Λ`, `Rf_* : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` commutes with direct sums. -/
-theorem preservesCoproducts_rightDerivedLowerStar (hΛ : IsAddTorsion Λ) {X Y : Scheme.{u}}
-    (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
-    (hf : HasFiniteCohomologicalDimensionMorphism Λ f) (ι : Type (u + 1)) :
-    PreservesColimitsOfShape (Discrete ι) (R((f)_*[ModuleCat.{u + 1} Λ])) :=
-  sorry
-
-/-- Blueprint `lem-kun-0f11`, part (2): for a quasi-compact quasi-separated scheme `X` of finite
-cohomological dimension and a torsion ring `Λ`, `RΓ(X, -)` commutes with direct sums. -/
-theorem preservesCoproducts_rightDerivedGlobalSections (hΛ : IsAddTorsion Λ) (X : Scheme.{u})
-    [CompactSpace X] [QuasiSeparatedSpace X] (hX : HasFiniteCohomologicalDimension Λ X)
-    (ι : Type (u + 1)) :
-    PreservesColimitsOfShape (Discrete ι) (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X) :=
-  sorry
 
 /-- Blueprint `lem-kun-0f1j`: base change for a pushforward tensored with a bounded below complex
 of finite Tor amplitude.
@@ -667,7 +639,6 @@ theorem nonempty_iso_constantFunctor_rightDerivedGlobalSections_of_isSepClosed
   ⟨((constantSheafEquivalenceOfIsSepClosed Λ).mapDerivedCategory.counitIso.app C).symm ≪≫
     (constantFunctor Λ _).mapIso ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app C).symm⟩
 
-
 /-- Blueprint `lem-kun-03qu-global-generation` (for sheaves of `Λ`-modules): over a separably
 closed field `k`, every étale sheaf of `Λ`-modules on `Spec k` is globally generated. -/
 theorem isGloballyGenerated_of_isSepClosed
@@ -700,8 +671,105 @@ theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_of_isSepClosed
     Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C).obj C') ≅
       (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C ⊗
-        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C') :=
-  sorry
+        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C') := by
+  let E := constantSheafEquivalenceOfIsSepClosed Λ (k := k)
+  let _ : E.functor.Additive := additive_constantSheaf Λ _
+  let _ : E.inverse.Additive := additive_sheafSections_obj Λ _
+  let F := constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
+  have : F.IsEquivalence := E.isEquivalence_functor
+  let R := rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))
+  let T := derivedTensor (ModuleCat.{u + 1} Λ) (Spec (.of k))
+  let e (X) : F.mapDerivedCategory.obj (R.obj X) ≅ X :=
+    F.mapDerivedCategory.mapIso ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app X) ≪≫
+      E.mapDerivedCategory.counitIso.app X
+  let e' (N) : R.obj (F.mapDerivedCategory.obj N) ≅ N :=
+    (rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app _ ≪≫
+      (E.mapDerivedCategory.unitIso.app N).symm
+  let i : (T.obj C).obj C' ≅ F.mapDerivedCategory.obj (R.obj C ⊗ R.obj C') :=
+    (T.mapIso (e C).symm).app C' ≪≫ (T.obj _).mapIso (e C').symm ≪≫
+      (mapDerivedCategoryObjTensorIsoDerivedTensor _ _ F (R.obj C) (R.obj C')).symm
+  exact ⟨R.mapIso i ≪≫ e' (R.obj C ⊗ R.obj C')⟩
+
+/-- Over a separably closed field `k`, a morphism `a : X ⟶ Spec k` has finite cohomological
+dimension as soon as `X` has: by the Leray isomorphism, the global sections of the sheaf
+`R^q a_* F` on `Spec k`, which determine it, are `H^q(X, F)`. -/
+theorem hasFiniteCohomologicalDimensionMorphism_of_isSepClosed {X : Scheme.{u}}
+    (a : X ⟶ Spec (.of k)) (hX : HasFiniteCohomologicalDimension Λ X) :
+    HasFiniteCohomologicalDimensionMorphism Λ a := by
+  obtain ⟨d, hd⟩ := hX
+  refine ⟨d, fun F q hq ↦ ?_⟩
+  let Γ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+    (op (etalePoint k))
+  have : Γ.IsEquivalence := isEquivalence_sheafSections_etalePoint Λ
+  let K := (R((a)_*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj F)
+  have hz : IsZero (Γ.obj ((DerivedCategory.homologyFunctor _ q).obj K)) :=
+    (hd F q hq).of_iso ((Γ.mapDerivedCategoryHomologyFunctorIso q).app K ≪≫
+      (DerivedCategory.homologyFunctor _ q).mapIso
+        ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app K).symm ≪≫
+      (DerivedCategory.homologyFunctor _ q).mapIso
+        ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ a).app _))
+  exact (IsZero.iff_id_eq_zero _).2 (Γ.map_injective (by
+    rw [Γ.map_id, Γ.map_zero]
+    exact hz.eq_of_src _ _))
+
+/-- Blueprint `lem-kun-0f12`: tensor product with a constant complex.
+
+Let `k` be a separably closed field, `Λ` a torsion ring, and `a : X ⟶ Spec k` a morphism from a
+quasi-compact quasi-separated scheme `X` of finite cohomological dimension. For
+`E ∈ D(X_ét, Λ)` and `C ∈ D((Spec k)_ét, Λ)` the projection map
+(`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`)
+
+`Ra_* E ⊗ᴸ C ⟶ Ra_*(E ⊗ᴸ La^* C)`
+
+is an isomorphism. Under the equivalence of étale sheaves on `Spec k` with `Λ`-modules
+(`AlgebraicGeometry.Etale.constantSheafEquivalenceOfIsSepClosed`), `Ra_*` is `RΓ(X, -)` and
+`La^*` is the constant complex functor `C ↦ C_X`
+(`AlgebraicGeometry.Etale.constantFunctorCompLeftDerivedUpperStarIso`), and the projection map
+is the canonical map `RΓ(X, E) ⊗ᴸ C ⟶ RΓ(X, E ⊗ᴸ C_X)` of the blueprint: it is adjoint to
+`La^*(Ra_* E ⊗ᴸ C) ≅ La^* Ra_* E ⊗ᴸ La^* C ⟶ E ⊗ᴸ La^* C`, as in the proof of
+`lem-kun-kunneth-via-0f1n`. -/
+theorem isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed {X : Scheme.{u}}
+    (a : X ⟶ Spec (.of k)) [CompactSpace X] [QuasiSeparatedSpace X]
+    (hX : HasFiniteCohomologicalDimension Λ X)
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) a).app E).app C) := by
+  have : QuasiCompact a := (HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)).2 ‹_›
+  have : QuasiSeparated a := (HasAffineProperty.iff_of_isAffine (P := @QuasiSeparated)).2 ‹_›
+  have (J : Type (u + 1)) := preservesCoproducts_rightDerivedLowerStar Λ a
+    (hasFiniteCohomologicalDimensionMorphism_of_isSepClosed Λ a hX) J
+  let e := constantSheafEquivalenceOfIsSepClosed Λ (k := k)
+  have : e.functor.Additive := additive_constantSheaf Λ _
+  have : e.inverse.Additive := additive_sheafSections_obj Λ _
+  -- the constant complex functor `D(Λ) ⥤ D((Spec k)_ét, Λ)`, an equivalence
+  have : (constantFunctor Λ (Spec (.of k))).IsEquivalence :=
+    e.mapDerivedCategory.isEquivalence_functor
+  let τ : (-⊗ᴸ-(Spec (.of k))[ModuleCat.{u + 1} Λ]).obj ((R((a)_*[ModuleCat.{u + 1} Λ])).obj E) ⟶
+      (L((a)^*[ModuleCat.{u + 1} Λ]) ⋙ (-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj E) ⋙
+        R((a)_*[ModuleCat.{u + 1} Λ]) :=
+    (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) a).app E
+  have h₂ (J : Type (u + 1)) : PreservesColimitsOfShape (Discrete J)
+      ((L((a)^*[ModuleCat.{u + 1} Λ]) ⋙ (-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj E) ⋙
+        R((a)_*[ModuleCat.{u + 1} Λ])) :=
+    have : PreservesColimitsOfShape (Discrete J) (L((a)^*[ModuleCat.{u + 1} Λ])) :=
+      (derivedUpperStarLowerStarAdjunction _ a).leftAdjoint_preservesColimits
+        |>.preservesColimitsOfShape
+    inferInstance
+  have hτ : IsIso (Functor.whiskerLeft (constantFunctor Λ (Spec (.of k))) τ) := by
+    refine DerivedCategory.isIso_of_isIso_app_singleFunctor_obj_self (T := DerivedCategory _)
+      (Functor.whiskerLeft (constantFunctor Λ (Spec (.of k))) τ) ?_
+    dsimp only [Functor.whiskerLeft_app]
+    have hunit : IsIso (τ.app (𝟙_ _)) :=
+      isIso_rightDerivedLowerStarProjectionMap_app_app_tensorUnit _ a E
+    refine (NatTrans.isIso_app_iff_of_iso τ ?_).2 hunit
+    exact (Functor.mapDerivedCategorySingleFunctor _ 0).app _ ≪≫
+      (DerivedCategory.singleFunctor _ 0).mapIso (Functor.Monoidal.εIso
+        (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))).symm ≪≫
+      singleFunctorObjUnitIso _ _
+  have := (NatTrans.isIso_iff_isIso_app _).1 hτ
+    ((constantFunctor Λ (Spec (.of k))).objPreimage C)
+  exact (NatTrans.isIso_app_iff_of_iso τ
+    ((constantFunctor Λ (Spec (.of k))).objObjPreimageIso C)).1 this
 
 end Point
 
@@ -721,11 +789,11 @@ instance isIso_rightDerivedLowerStarProjectionMap_app_app
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) aX).app E).app C) :=
-  have hΛ : IsAddTorsion Λ := isAddTorsion_of_finite
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
-  isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed Λ hΛ aX
-    (hasFiniteCohomologicalDimension_of_isSepClosed Λ hΛ aX) E C
+  isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed Λ aX
+    (hasFiniteCohomologicalDimension_of_isSepClosed Λ (fun x ↦ isOfFinAddOrder_of_finite x) aX)
+    E C
 
 omit [HasInvertibleExponent Λ (Spec (.of k))] in
 /-- `RΓ(X, E) ⊗ᴸ RΓ(Spec k, C) ≅ RΓ(X, E ⊗ᴸ La_X^* C)` for a finite-type scheme `X` over a

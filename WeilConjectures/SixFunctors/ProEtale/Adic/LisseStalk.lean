@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Restriction
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Restriction
 
 /-!
 # Sections of lisse `ℓ`-adic sheaves at geometric points

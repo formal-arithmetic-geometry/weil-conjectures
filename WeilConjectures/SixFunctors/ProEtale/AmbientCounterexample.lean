@@ -10,14 +10,14 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.InjectiveCoseparato
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.RepresentationTheory.GroupCohomology.CupNonvanishing
-public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSite
-public import WeilConjectures.SixFunctors.ProEtale.Derived.FlatModel
-public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtPullback
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.FlatModel
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtPullback
 public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 
 /-!

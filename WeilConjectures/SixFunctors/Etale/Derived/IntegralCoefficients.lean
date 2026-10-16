@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Functor.OfSequence
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
@@ -41,7 +42,7 @@ restriction of scalars to `Λ`, and the reduction `K ⊗ᴸ_Λ A_n` through
 the derived base change `K ⊗ᴸ_Λ A_n ∈ D(X_ét, A_n)` is characterised by its universal property
 (`AlgebraicGeometry.Etale.IsDerivedBaseChange`): it is left adjoint to restriction of scalars.
 The comparison maps of the blueprint are only asserted to exist, as in
-`WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison`.
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison`.
 -/
 
 @[expose] public section
@@ -75,9 +76,10 @@ section RestrictScalars
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ') (X : Scheme.{u})
 
 /-- Restriction of scalars `D(X_ét, Λ') ⥤ D(X_ét, Λ)` along a ring morphism `φ : Λ →+* Λ'`,
-induced by the exact restriction of scalars of étale sheaves. -/
+induced by the exact restriction of scalars of étale sheaves: the case of the small étale site
+of `CategoryTheory.Sheaf.derivedRestrictScalars`. -/
 noncomputable abbrev derivedRestrictScalars : 𝐃(X, Λ') ⥤ 𝐃(X, Λ) :=
-  (Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategory
+  Sheaf.derivedRestrictScalars X.smallEtaleTopology φ
 
 variable {φ X}
 
@@ -112,10 +114,11 @@ lemma smul_id_derivedRestrictScalars_obj {J : Ideal Λ} {r : Λ} (hr : r ∈ J)
 `K' ∈ D(X_ét, Λ')` *exhibits `K'` as the derived base change `K ⊗ᴸ_Λ Λ'`* if it is universal
 among morphisms from `K` to restrictions of scalars: derived base change is left adjoint to
 restriction of scalars. For `Λ' = Λ ⧸ J` the restriction of scalars of `K'` is then the
-reduction `K ⊗ᴸ (Λ ⧸ J)_X` (`AlgebraicGeometry.Etale.reductionModIdeal`). -/
-def IsDerivedBaseChange {K : 𝐃(X, Λ)} {K' : 𝐃(X, Λ')}
+reduction `K ⊗ᴸ (Λ ⧸ J)_X` (`AlgebraicGeometry.Etale.reductionModIdeal`). This is the case of
+the small étale site of `CategoryTheory.Sheaf.IsDerivedBaseChange`. -/
+abbrev IsDerivedBaseChange {K : 𝐃(X, Λ)} {K' : 𝐃(X, Λ')}
     (η : K ⟶ (derivedRestrictScalars φ X).obj K') : Prop :=
-  ∀ N : 𝐃(X, Λ'), Function.Bijective fun g : K' ⟶ N ↦ η ≫ (derivedRestrictScalars φ X).map g
+  Sheaf.IsDerivedBaseChange η
 
 end RestrictScalars
 

@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 
 /-!
@@ -202,15 +203,16 @@ structure SixOperationsPackage : Prop where
 /-- Blueprint `sk-thm-sf-package`: The six-operations package.
 
 The eight clauses of `AlgebraicGeometry.Etale.SixOperationsPackage` hold for a finite `Λ` whose
-exponent is invertible on `k`. Every clause is one of the propositions of this directory, and
-the proof is the assembly: smooth base change is
+exponent is invertible on `k`, for `k` algebraically closed as in the blueprint (Verdier
+biduality is proved over algebraically closed fields). Every clause is one of the propositions of
+this directory, and the proof is the assembly: smooth base change is
 `AlgebraicGeometry.Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder`,
 every sheaf of `Λ`-modules being torsion of order invertible on `Y`, and the orientation is
 smooth purity (`AlgebraicGeometry.Etale.Orientation.nonempty`). The Tate twist datum is assumed
 normalized: for the untwisted datum `Λ_X(m) = Λ_X` the orientation clause fails over `ℚ`,
 where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for `𝔸¹_ℚ ⟶ Spec ℚ`. -/
-theorem sixOperationsPackage [HasTateTwist.IsNormalized Λ] [HasInvertibleExponent Λ (Spec (.of k))]
-    [IsSeparated f] :
+theorem sixOperationsPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
+    [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated f] :
     SixOperationsPackage Λ k f aY where
   upperStarLowerStarAdjunction := ⟨derivedUpperStarLowerStarAdjunction _ f⟩
   lowerShriekUpperShriekAdjunction := ⟨rightDerivedUpperShriekAdjunction _ f⟩
