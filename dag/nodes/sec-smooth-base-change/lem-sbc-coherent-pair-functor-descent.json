@@ -403,46 +403,26 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-c18507bfa",
-  "group": "Q06",
+  "reviewer": "NT-stage2-Codex-03d712e1b",
+  "group": "NU",
   "result": "pass",
-  "note": "Wrote review.md. Checked all statement clauses, dependencies, source passages, canonical constructions, universes, edge cases, docstrings, and verbatim signature. Per-file scompile.py reproduction passed with exit code 0. No delivery faults found; branch and project clones unchanged."
+  "note": "Wrote review.md. Checked all snapshot modules, statement dependencies, source clauses, universes, canonical constructions, both Karoubi layers, records, and edge cases. All three per-file compiles passed through scompile.py. No delivery errors found; branch and clones unchanged."
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.CoherentPairFunctorDescent",
-  "declaration": "CategoryTheory.CommonStage.coherent_pair_functor_descent",
+  "module": "Sheaf.CategoryTheory.StageSystemFunctorDescent",
+  "declaration": "CategoryTheory.StageSystem.coefficientPairFunctor_exists",
   "declarations": [
-   "CategoryTheory.CommonStage.Diagram",
-   "CategoryTheory.CommonStage.Pair",
-   "CategoryTheory.CommonStage.Rep",
-   "CategoryTheory.CommonStage.transport",
-   "CategoryTheory.CommonStage.EventuallyEqual",
-   "CategoryTheory.CommonStage.Hom",
-   "CategoryTheory.CommonStage.repr",
-   "CategoryTheory.CommonStage.PairStructure",
-   "CategoryTheory.CommonStage.PairStructure.Obj",
-   "CategoryTheory.CommonStage.pairCategory",
-   "CategoryTheory.CommonStage.pairPreadditive",
-   "CategoryTheory.CommonStage.PairStructure.repr",
-   "CategoryTheory.CommonStage.PairStructure.IsCanonical",
-   "CategoryTheory.CommonStage.Family",
-   "CategoryTheory.CommonStage.Family.Coherent",
-   "CategoryTheory.CommonStage.Family.obj",
-   "CategoryTheory.CommonStage.Family.rep",
-   "CategoryTheory.CommonStage.Family.identity",
-   "CategoryTheory.CommonStage.Family.comp",
-   "CategoryTheory.CommonStage.Compatible",
-   "CategoryTheory.CommonStage.IsDescent",
-   "CategoryTheory.CommonStage.transformationRep",
-   "CategoryTheory.CommonStage.DescentSystem",
-   "CategoryTheory.CommonStage.coherent_pair_functor_descent"
+   "CategoryTheory.StageSystem.pairFunctorCoherent",
+   "CategoryTheory.StageSystem.coefficientPairFunctorObject",
+   "CategoryTheory.StageSystem.coefficientPairFunctor_exists",
+   "CategoryTheory.StageSystem.coefficientPairFunctor"
   ],
-  "file": "lean/Sheaf/CategoryTheory/CoherentPairFunctorDescent.lean",
-  "statement": "theorem coherent_pair_functor_descent (l : ℕ) [Fact l.Prime] (K : Type w) [Field K] [Algebra ℚ_[l] K] [IsAlgClosure ℚ_[l] K] : Nonempty (DescentSystem.{w, u, v} (Padic.FiniteCoefficientFields l K))",
+  "file": "lean/Sheaf/CategoryTheory/StageSystemFunctorDescent.lean",
+  "statement": "theorem coefficientPairFunctor_exists (hb : pairFunctorCoherent S T φ b) : ∃! F : S.PairCategory ⥤ T.PairCategory, (∀ P, F.obj P = coefficientPairFunctorObject S T φ P) ∧ (∀ {P Q : S.PairCategory} (M : I) (hP : P.stage ≤ M) (hQ : Q.stage ≤ M) (f : P.toStage hP ⟶ Q.toStage hQ), HEq (F.map (PairCategory.mkHom M hP hQ f)) (PairCategory.mkHom (X := coefficientPairFunctorObject S T φ P) (Y := coefficientPairFunctorObject S T φ Q) M hP hQ ((b hP).hom.app P.obj ≫ (φ M).map f ≫ (b hQ).inv.app Q.obj)))",
   "branch": "newtargets-dag",
-  "by": "Q06",
+  "by": "NU",
   "date": "2026-10-16",
   "existing": false,
-  "note": "The theorem states the simultaneous existence of the canonical pair-category structures, descended functors and compatible transformations, characterized by the node's formulas on the explicit quotient Hom sets. Helper structures and definitions package the constructions introduced by this node; no data is selected from an unspecified existence theorem."
+  "note": "Interface repair under §1(B). The original CommonStage.Diagram/PairStructure carrier is not the independently existing StageSystem.PairCategory carrier used by the coefficient nodes, so its functor cannot be applied directly there. Publicly reexports the original complete interface (canonical additive quotient structures, compatible transformations and outer Karoubi extension) and adds its uniquely representative-characterized descent on the actual upstream StageSystem quotient. This is an equivalent transport, not a new pair category or an arbitrary functor. The source tower equation alone suffices for this quotient: identity representatives cancel the comparison and its inverse. The original node statement and all dependency fields remain unchanged."
  }
 }
