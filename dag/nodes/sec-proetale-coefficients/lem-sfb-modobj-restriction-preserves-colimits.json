@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-modobj-restriction-preserves-colimits",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Restriction of scalars preserves colimits",
@@ -17,24 +17,97 @@
  ],
  "proof": [
   {
-   "text": "$\\operatorname{Res}_\\varphi$ is a left adjoint by\n[def-sfb-modobj-restrict-coextend-adjunction].",
+   "text": "By [def-sfb-modobj-restrict-coextend-adjunction], there is an adjunction $L\\dashv R$ with $L=\\operatorname{Res}_\\varphi\\colon\\Mod_{\\mathcal S}(\\mathcal C)\\to\\Mod_{\\mathcal R}(\\mathcal C)$ and $R=\\operatorname{Coext}_\\varphi$. Thus restriction is the left adjoint in this adjunction.",
    "uses": [
     "def-sfb-modobj-restrict-coextend-adjunction"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/_section.md",
+    "place": "Part 3, coextension is right adjoint to restriction"
+   }
+  },
+  {
+   "text": "Let $I$ be any small category, and let $M\\colon I\\to\\Mod_{\\mathcal S}(\\mathcal C)$ have a colimit $(P,(\\iota_i)_i)$. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to the adjunction in step 1: it says that $(\\operatorname{Res}_\\varphi P,(\\operatorname{Res}_\\varphi\\iota_i)_i)$ is a colimit of $\\operatorname{Res}_\\varphi\\circ M$ in $\\Mod_{\\mathcal R}(\\mathcal C)$. Since $I$, $M$, and its colimit cocone were arbitrary, $\\operatorname{Res}_\\varphi$ preserves colimits. This asserts preservation of colimits that exist; no existence of all colimits in either module category is required.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact, part (1), lines 3472–3505"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-modobj-restrict-coextend-adjunction"
+  "def-sfb-modobj-restrict-coextend-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/lem-sfb-modobj-restriction-preserves-colimits.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/_section.md",
+  "place": "Part 3, final implication; expanded using Stacks Tag 0038 (lemma-adjoint-exact), part (1)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comap|scalarRestriction|coextend|restrictCoextend|PreservesColimit",
+   "results": "Directory queried: Mathlib/CategoryTheory/Monoidal/Mod. No hits (0 hits)",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: this path does not exist; the wrapper reported OK with no hits. Repeated against the existing CategoryTheory/Monoidal directory and CategoryTheory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for module objects in a monoidal category preserves colimits",
+   "results": "ModuleCat.preservesColimit_restrictScalars; CategoryTheory.Mod_.scalarRestriction; ModuleCat.preservesLimit_restrictScalars; ModuleCat.RestrictScalars.obj'; CategoryTheory.Mod_.scalarRestriction_hom; ModuleCat.instPreservesMonomorphismsRestrictScalars; CategoryTheory.Mod_.comap; ModuleCat.restrictScalars (8 hits)",
+   "date": "2026-10-16",
+   "verdict": "no exact match: ordinary ModuleCat or representation results are narrower; scalarRestriction/comap only define the module-object restriction functor. Read ModuleCat.preservesColimit_restrictScalars at Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:940–949."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_.comap, CategoryTheory.Limits.PreservesColimitsOfSize",
+   "results": "No hits (0 hits)",
+   "date": "2026-10-16",
+   "verdict": "no exact match: ordinary ModuleCat or representation results are narrower; scalarRestriction/comap only define the module-object restriction functor. Read ModuleCat.preservesColimit_restrictScalars at Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:940–949."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for module objects over monoid objects in a closed monoidal category preserves colimits",
+   "results": "ModuleCat.preservesColimit_restrictScalars; Rep.instPreservesColimitsModuleCatForget₂; CategoryTheory.Mod_.scalarRestriction_hom; CategoryTheory.Mod_.scalarRestriction; FDRep.instPreservesFiniteColimitsRepForget₂; CategoryTheory.instPreservesColimitsTensorLeft; PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap; CategoryTheory.Mod_.scalarRestriction_smul (8 hits)",
+   "date": "2026-10-16",
+   "verdict": "no exact match: ordinary ModuleCat or representation results are narrower; scalarRestriction/comap only define the module-object restriction functor. Read ModuleCat.preservesColimit_restrictScalars at Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:940–949."
+  },
+  {
+   "tool": "grep",
+   "query": "def comap|scalarRestriction|restrictCoextend|coextendScalars|PreservesColimits.*comap",
+   "results": "Directory queried: Mathlib/CategoryTheory/Monoidal. Mathlib/CategoryTheory/Monoidal/Mod.lean; Mathlib/CategoryTheory/Monoidal/Mod.lean; Mathlib/CategoryTheory/Monoidal/Mod.lean; Mathlib/CategoryTheory/Monoidal/Mod.lean; Mathlib/CategoryTheory/Monoidal/Mod.lean (5 hits) Read Mathlib/CategoryTheory/Monoidal/Mod.lean lines 343–419: scalarRestriction at 363 and comap at 403 define restriction, with no preservation or coextension theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match: module-object restriction is defined, but its left-adjoint structure and colimit preservation are not established here."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Limits.PreservesColimitsOfSize",
+   "results": "CategoryTheory.Adjunction.leftAdjoint_preservesColimits; CategoryTheory.Adjunction.preservesColimitsOfSize_iff (2 hits)",
+   "date": "2026-10-16",
+   "verdict": "general theorem found; reuse existing Mathlib leaf lem-weil-pbc-left-adjoint-preserves-colimits. This does not itself construct the project-specific adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint functor preserves all colimits of any small diagram",
+   "results": "CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint; CategoryTheory.Functor.instPreservesColimitsOfShapeOfIsLeftAdjoint; CategoryTheory.Adjunction.leftAdjoint_preservesColimits; CategoryTheory.Functor.leftAdjointObjIsDefined_colimit; CategoryTheory.Adjunction.colim_preservesColimits; CategoryTheory.Functor.leftAdjointObjIsDefined_of_isColimit; CategoryTheory.Limits.IsColimit.ofLeftAdjoint; CategoryTheory.Limits.PreservesColimitsOfSize (8 hits)",
+   "date": "2026-10-16",
+   "verdict": "general theorem found; reuse existing Mathlib leaf lem-weil-pbc-left-adjoint-preserves-colimits. This does not itself construct the project-specific adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "^def comap|lemma leftAdjoint_preservesColimits",
+   "results": "Directory queried: Mathlib/CategoryTheory. Mathlib/CategoryTheory/Adjunction/Limits.lean; Mathlib/CategoryTheory/Sites/Point/Comap.lean; Mathlib/CategoryTheory/Sites/Precoverage.lean; Mathlib/CategoryTheory/Monoidal/Mod.lean; Mathlib/CategoryTheory/Subfunctor/SubmonoidFunctor.lean; Mathlib/CategoryTheory/Pi/Basic.lean; Mathlib/CategoryTheory/Pi/Basic.lean; Mathlib/CategoryTheory/Pi/Basic.lean (12 hits) Verified comap at Mathlib/CategoryTheory/Monoidal/Mod.lean:403 and leftAdjoint_preservesColimits at Mathlib/CategoryTheory/Adjunction/Limits.lean:92.",
+   "date": "2026-10-16",
+   "verdict": "general theorem found; reuse existing Mathlib leaf lem-weil-pbc-left-adjoint-preserves-colimits, retaining the separate module-object adjunction dependency."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -51,5 +124,20 @@
   "CategoryTheory.Mod.instPreservesColimitsOfSizeComap_weilConjectures"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-modobj-restriction-preserves-colimits",
+  "worker": "stage1",
+  "summary": "Rechecked the earlier sandbox against the current blueprint, both cited statements, Stacks Tag 0038 and Mathlib sources. Retained the two-step proof and unchanged statement, repeated semantic and source searches, and corrected the interpretation of nonexistent-path grep results. No attachment or new node was needed.",
+  "blueprint": "Realizes sk-def-sfb-change-of-scalars part 3, final implication, and the imported item proof identifying restriction as a left adjoint. The imported blueprint.is is retained and from remains null; same_as was searched."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q50-886d03e03",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q50-886d03e03 (reviewer sub-agent of L); spot-checked: Read all required instructions, packet/report, item and cited nodes, blueprint chapter/unit route, Stacks Tag 0038 proof, and Mathlib preservation theorem. The two-step proof is valid: restriction is the left adjoint, and left adjoints preserve each existing colimit for small diagrams. Hypotheses, functor directions, coefficient categories, and edge cases were checked; no duplicates, circularity, hidden cocompleteness, or SGA citations found. Review written to review.md; no repairs needed."
+ }
 }
