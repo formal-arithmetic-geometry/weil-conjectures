@@ -26,37 +26,47 @@
  ],
  "proof": [
   {
-   "text": "Work on the affine etale bases over the fixed affine base S and over the affine stages. Affine etale finite-presentation objects at the limit, their arrows, equalities, finite covers, and covering pullbacks descend simultaneously to sufficiently late stages. Their model categories are filtered, and later-stage restrictions are independent of every choice by eventual equality. The later base changes of any fixed model are cofinal among all models, by descent of comparison maps and eventual equality. This computes each required colimit over a u-small upper tail.",
+   "text": "For abelian-group coefficients apply globalSections_limit_comparison. Stage representatives prove surjectivity of colimit.desc, and eventual vanishing proves its kernel zero. Thus colimit.desc is an isomorphism and the normalized supplied cocone is a colimit.",
    "uses": [
-    "lem-weil-pbc-etale-finite-data-descent"
+    "lem-weil-pbc-global-sections-limit-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "For each limit affine etale object V form Q(V) as the filtered colimit in A over all its stage presentations of the stage inverse-image sections. Lift arrows at common stages and use the colimit universal property for restrictions. Descend a finite affine cover together with its matching diagram. AB5 commutes its finite matching limit with this filtered colimit, so Q is a sheaf on the affine etale basis; the empty cover gives zero. Extend along the affine basis equivalence.",
+   "text": "For module coefficients use forget_2 to abelian groups and its coinduction right adjoint. Apply the coefficient/pullback section comparison to the supplied object and cocone-point isomorphisms. The preceding abelian-group result gives a colimit after forgetting; reflect it to modules.",
    "uses": [
-    "lem-weil-pbc-etale-finite-data-descent"
+    "lem-weil-pbc-exact-coefficient-affine-section-naturality"
    ],
    "elementary": false
   },
   {
-   "text": "Write p_j for the limit projection. A morphism from Q to M is a compatible family of morphisms pi_j^*G -> (p_j)_*M. By the stage adjunction these are morphisms G -> (pi_j)_*(p_j)_*M; composition of direct images identifies these Hom sets and their transition maps with the constant set Hom(G,p_*M). Directedness and nonemptiness identify a compatible family with one such morphism. Identity presentations and adjunction units show the constructions are inverse, identifying Q with p^*G and its comparison maps with the canonical units. Evaluate at the terminal affine object and transport by the supplied component and point isomorphisms. This proves the universal property of K without choosing arbitrary data from a holed existence theorem.",
+   "text": "Choose a separator T of A. Use Mathlib GabrielPopescu.full and GabrielPopescu.preservesFiniteLimits for tensorObj T left adjoint to preadditiveCoyonedaObj T. Objectwise application of the fully faithful right adjoint gives a module-valued sheaf M. The sheaf adjunction counit identifies L#M with G. This is a real constructed lift, not arbitrary data selected from an existence claim.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-global-sections-functor"
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the canonical module-valued diagram of pullback sections and its cone-point cocone using rho. Its functor and cocone laws are rho identity/composition. The module result makes it colimiting. The exact left adjoint preserves its colimit. Affine coefficient comparison and the counit give a diagram isomorphism to H and a point isomorphism to K. Their naturality is precisely the proved coefficient normalization and rho sheaf naturality, followed by hH and hK. Transport this colimit along both isomorphisms to obtain IsColimit K.",
+   "uses": [
+    "lem-weil-pbc-exact-coefficient-affine-section-naturality",
+    "def-weil-pbc-global-sections-functor",
+    "def-weil-pbc-inverse-image"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-finite-data-descent",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-global-sections-functor"
+  "lem-weil-pbc-global-sections-limit-comparison",
+  "lem-weil-pbc-exact-coefficient-affine-section-naturality",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-pbc-inverse-image"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
-  "place": "Detailed proof paragraph 2, categorical finite-matching extension of Stacks 09YQ degree zero and 0738(4)."
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ degree zero via the proved scalar comparison; general coefficients by the exact Gabriel-Popescu localization in Mathlib, with the affine finite-matching coefficient comparison proved by A4 on 2026-10-16."
  },
  "mathlib_searches": [
   {
@@ -132,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-357ec",
-  "group": "C3",
+  "reviewer": "COMPILER",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261016T081350-L-1435770",
+  "landing": "20261016T092211-L-1941205",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proof reductions with both DAG nodes, the published interface, change record, report, and earlier return; compiled both modules and the sole direct importer; audited all declarations' axioms."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

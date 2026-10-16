@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-exact-coefficient-affine-section-naturality",
+ "kind": "statement",
+ "title": "Exact coefficient change respects canonical affine pullback section maps",
+ "statement": "Let A,B be Grothendieck abelian categories [def-sp-grothendieck-abelian], L:B -> A left adjoint to U, with L preserving finite limits. Coefficient change L# is objectwise application of L followed by sheafification. For f:X -> Y with X affine, there is an isomorphism theta_f:L(Gamma(X,f_B^*F)) -> Gamma(X,f_A^*(L#F)) [def-weil-pbc-inverse-image, def-weil-pbc-global-sections-functor]. It is the affine sheafification-unit isomorphism followed by the unique left-adjoint comparison. For h:X -> Y with X,Y affine, f:Y -> S, g:X -> S and g=h f, and B-valued sheaf F on S, L(rho_F(h,f,g)) then theta_g equals theta_f then rho_(L#F)(h,f,g), where rho is the adjunction-unit section map followed by inverse-image composition [lem-weil-pbc-inverse-image-composition].",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0738(4), finite matching; adjunction unit and uniqueness of left adjoints, Mathlib CategoryTheory/Adjunction/Unique.lean and Mates.lean."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-global-sections-functor",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Construct coefficientPullbackIso by leftAdjointUniq: coefficient right adjoints and direct images commute objectwise. Its conjugate is identity. For the affine section comparison evaluate the sheafification unit at the chosen terminal etale object, which is isomorphic to the affine base.",
+   "uses": [
+    "lem-weil-pbc-exact-coefficient-affine-sheafification",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-global-sections-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the unit equation for leftAdjointUniq at etale objects and apply the adjunction hom equivalence to obtain compatibility with the inverse-image unit. Combine this with naturality of restrictions to compare pullback of global sections.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-global-sections-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply conjugateEquiv to compare the two composite coefficient/pullback routes. Mates of associators and whiskered transformations reduce the equality to the objectwise coefficient naturality of lowerStarComp. Combining this composition equation with the section-unit equation gives the stated normalized equality. The module also proves identity, composition and sheaf naturality of rho.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-coefficient-affine-sheafification",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-global-sections-functor",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0738(4), finite matching; adjunction unit and uniqueness of left adjoints, Mathlib CategoryTheory/Adjunction/Unique.lean and Mates.lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Postcomposition with a finite limit preserving functor preserves sheaves on a finite pretopology",
+   "results": "CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp; CategoryTheory.Presheaf.isSheaf_comp_of_isSheaf; CategoryTheory.GrothendieckTopology.HasSheafCompose.isSheaf; CategoryTheory.Presheaf.isSheaf_iff_isSheaf_comp; CategoryTheory.GrothendieckTopology.sheafificationWhiskerRightIso_hom_app; CategoryTheory.GrothendieckTopology.HasSheafCompose.mk; CategoryTheory.hasSheafCompose_of_preservesLimitsOfSize; CategoryTheory.preservesFiniteLimits_presheafToSheaf",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no exact coefficient/affine comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointUniq_refl; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq_trans; CategoryTheory.Adjunction.leftAdjointUniq_trans_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no exact coefficient/affine comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor with a right adjoint commutes with affine etale sheaf sections and inverse image",
+   "results": "AlgebraicGeometry.AffineScheme.ΓIsEquiv; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.preservesColimit_Γ; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.Scheme.instFullEtaleOverForget",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no exact coefficient/affine comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "isLimitMapOfPreserves|conjugateEquiv_comp|unit_leftAdjointUniq|GabrielPopescu.preservesFiniteLimits",
+   "results": "Mathlib/CategoryTheory/Limits/Preserves/Shapes/Multiequalizer.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no exact coefficient/affine comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckAffineGlobalSectionColimit",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-grothendieck-affine-global-section-colimit",
+   "place": "Exact coefficient-change route",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExactFunctorAffinePullbackSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExactFunctorAffinePullbackSections.lean",
+  "declaration": "AlgebraicGeometry.Etale.coefficientPullbackSectionsIso_comp",
+  "statement": "theorem coefficientPullbackSectionsIso_comp {S X Y : Scheme.{u}}\n    [IsAffine X] [IsAffine Y] [PreservesFiniteLimits L]\n    (F : Sheaf S.smallEtaleTopology B) (h : X ⟶ Y) (f : Y ⟶ S)\n    (g : X ⟶ S) (w : g = h ≫ f) :\n    L.map (pullbackSectionMap F h f g w) ≫\n        (coefficientPullbackSectionsIso L U adj g F).hom =\n      (coefficientPullbackSectionsIso L U adj f F).hom ≫\n        pullbackSectionMap ((Sheaf.composeAndSheafify S.smallEtaleTopology L).obj F)\n          h f g w",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T092211-L-1941205",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T092211-L-1941205",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
