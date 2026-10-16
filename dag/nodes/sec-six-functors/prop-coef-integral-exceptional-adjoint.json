@@ -3,55 +3,237 @@
  "blueprint": {
   "is": "prop-coef-integral-exceptional-adjoint",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The integral exceptional adjoint on constructible complexes",
- "statement": "For a separated finite-type $f:X\\to Y$, define\n\n$$\nG_fL=R\\varprojlim_n\\operatorname{Res}_n Rf_n^!L_n.\n$$\n\nThen $G_f$ maps $D^b_c(Y,R)$ to $D^b_c(X,R)$, is right\nadjoint to integral $Rf_!$ on these categories, and has canonical\nidentifications\n\n$$\nG_fL\\cong D_{X,R}f^*_{\\mathrm{comp}}D_{Y,R}L,\n\\qquad (G_fL)\\otimes_R^L A_n\\cong Rf_n^!L_n.\n$$\n\nHere $f^*_{\\mathrm{comp}}$ is completed pullback. For input\nreduction Tor interval $[a,b]$, one output interval is\n$[a-2\\dim X,b+2\\dim Y]$. The comparison identifies the\ncanonical units and counits; in particular the dualizing object\nof [prop-coef-integral-dualizing] is $G_aR$.\nThis is an adjunction on the stated constructible categories.",
+ "statement": "Fix the global finite-field datum with $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Put $A_n=R/(\\varpi^n)$ for $n\\geq1$. On each small pro-etale site $W_{\\mathrm{proet}}$ use modules over the completed sheaf $R_W=\\varprojlim_n(A_n)_W$ [def-weil-completed-integral-coefficients], the derived-complete constructible category $D^b_c(W,R)$ [def-weil-derived-complete-integral-detailed], and the uniform finite-reduction Tor condition [def-weil-finite-tor-amplitude]. Write $L_n=L\\otimes^L_{R_Y}(A_n)_Y$ for derived reduction [def-weil-integral-derived-reduction] and $\\operatorname{Res}_n$ for restriction from $(A_n)_W$ to $R_W$ [def-weil-integral-derived-restriction-of-scalars]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism [def-weil-scheme-morphism-properties]. Use the finite constructible exceptional functors $Rf_n^!$ [def-weil-exceptional-inverse-image] and integral compact supports [def-weil-integral-rational-qbar-compact-support]. Define\n\n$$\nG_fL=R\\varprojlim_{n\\geq1}\\operatorname{Res}_n Rf_n^!L_n\n\\qquad(L\\in D^b_c(Y,R)).\n$$\n\nThe transitions are adjoint to the coefficient-normalization comparisons of [lem-coef-finite-exceptional], with the quotient cocycle of [def-coef-normalized-dvr-tower]. Specify their functorial coherent realization to be $\\mathcal E_f\\mathcal R_YL$ of [lem-coef-finite-adjunction-diagram-realization], using the strict coefficient-system reduction/limit adjunction of [lem-coef-derived-system-evaluation-calculus]. This fixes the lift and its maps before applying the total derived inverse limit. Here $R\\varprojlim$ is the total derived inverse-limit functor on coherent towers, with its natural Roos triangle [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Then $G_f$ maps $D^b_c(Y,R)$ to $D^b_c(X,R)$, is right adjoint to integral $Rf_!$ on these categories, and has canonical identifications\n\n$$\nG_fL\\cong D_{X,R}f^*_{\\mathrm{comp}}D_{Y,R}L,\n\\qquad (G_fL)\\otimes^L_{R_X}(A_n)_X\\cong Rf_n^!L_n.\n$$\n\nHere $f^*_{\\mathrm{comp}}M=R\\varprojlim_n\\operatorname{Res}_nf_n^*M_n$ is the integral completed pullback [def-pur-integral-derived-operations], and $D_{W,R}M=R\\mathcal Hom_{R_W}(M,\\omega_{W,R})$ is derived internal Hom [def-pur-derived-internal-hom] into the dualizing object of [prop-coef-integral-dualizing]. If the reductions of $L$ have Tor interval $[a,b]$, $a\\leq b$, and $d_X,d_Y$ are nonnegative integer dimension bounds for $X,Y$ [def-kun-topological-krull-dimension], one output interval is $[a-2d_X,b+2d_Y]$. For nonempty schemes one may take $d_X=\\dim X$ and $d_Y=\\dim Y$; for an empty scheme use the bound $0$. The comparisons identify the canonical units and counits with the finite ones after reduction. In particular, for the structure morphism $a_X:X\\to\\operatorname{Spec}k$, the dualizing object of [prop-coef-integral-dualizing] is $G_{a_X}R$. This is an adjunction on the stated constructible categories.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
   "place": "node prop-coef-integral-exceptional-adjoint, order 2149"
  },
  "stmt_deps": [
-  "prop-coef-integral-dualizing"
+  "def-weil-finite-field-fiber",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-derived-reduction",
+  "def-weil-integral-derived-restriction-of-scalars",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-coef-finite-exceptional",
+  "def-coef-normalized-dvr-tower",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-pur-integral-derived-operations",
+  "def-pur-derived-internal-hom",
+  "prop-coef-integral-dualizing",
+  "def-kun-topological-krull-dimension",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "def-weil-l-adic-coefficient-extension"
  ],
  "proof": [
   {
-   "text": "By [lem-coef-finite-exceptional] the displayed exceptional\ntower is normalized, including its adjunction maps. Alternatively,\nconsider the integral object\n$H=D_{X,R}f^*_{\\mathrm{comp}}D_{Y,R}L$.\nIt exists in the integral category by\n[thm-coef-integral-verdier] and\n[lemma-weil-pbc-completed-pullback-reduction].\nThe latter gives finite reductions equal to ordinary pullback;\npullback preserves the reduction Tor interval. Applying the two\nduality bounds gives $[a-2\\dim X,b+2\\dim Y]$.\nThe finite dual formula in [lem-coef-finite-exceptional]\nidentifies its reductions with $Rf_n^!L_n$, compatibly with\nthe transition maps. Reconstruction, or\n[lem-coef-normalized-dvr-effectivity], gives $H\\cong G_fL$.",
+   "text": "Let $F=f^*_{\\mathrm{comp}}D_{Y,R}L$ and $H=D_{X,R}F$. The integral Verdier theorem makes $D_{Y,R}L$ constructible and complete; the pullback clause of [lem-pur-integral-operations-preserve-constructible] gives $F\\in D^b_c(X,R)$, so integral Verdier duality also gives $H\\in D^b_c(X,R)$. The finite-reduction clause of the same integral operation theorem gives $F_n\\cong f_n^*D_{Y,n}L_n$, compatibly with quotient maps. All these finite objects have finite Tor amplitude, by $D^b_c=D^b_{ctf}$ in [thm-coef-integral-verdier]. For input interval $[a,b]$, the dual on $Y$ has interval $[-b-2d_Y,-a]$; [lem-sf-pullback-tor-amplitude] leaves that interval unchanged, and the dual on $X$ has interval $[-(-a)-2d_X,-(-b-2d_Y)]=[a-2d_X,b+2d_Y]$.",
    "uses": [
-    "lem-coef-finite-exceptional",
     "thm-coef-integral-verdier",
-    "lemma-weil-pbc-completed-pullback-reduction",
-    "lem-coef-normalized-dvr-effectivity"
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-sf-pullback-tor-amplitude"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof, first paragraph: construct the integral duality expression and compute its interval"
+   }
   },
   {
-   "text": "For $K\\in D^b_c(X,R)$, use the reduction of integral compact\nsupports in [lem-coef-integral-compact-support] and derived\ncoefficient adjunction to compute\n\n$$\n\\begin{aligned}\nR\\operatorname{Hom}_Y(Rf_!K,L)\n&\\cong R\\varprojlim_n R\\operatorname{Hom}_{Y,A_n}(Rf_{!,n}K_n,L_n)\\\\\n&\\cong R\\varprojlim_n R\\operatorname{Hom}_{X,A_n}(K_n,Rf_n^!L_n)\\\\\n&\\cong R\\operatorname{Hom}_X(K,G_fL).\n\\end{aligned}\n$$\n\nFinite units and counits commute with the transition maps by\n[lem-coef-finite-exceptional]. Hence this calculation defines\nthe adjunction and its specified maps; the triangle identities\nfollow from the same identities before taking the derived limit.\nFor the structure morphism and $L=R$, the defining tower is\nthe one in [prop-coef-integral-dualizing]. This proves the\nlast identification with its adjunction, without an assertion about\nunrestricted unbounded pro-etale inputs.",
+   "text": "First prove the particular reconstruction map needed here. For any $P\\in D^b_c(W,R)$ use the derived reduction/limit adjunction of [lem-coef-derived-system-evaluation-calculus] and put $T(P)=\\mathcal L_W\\mathcal R_WP$. Quotient tensor associativity makes $\\mathcal R_WP$ normalized. By [lem-coef-normalized-dvr-effectivity], the counit evaluations $e_{P,n}:T(P)_n\\to P_n$ are isomorphisms and $T(P)$ is derived complete. Since these are the reductions of $P$, they have the same constructibility and one bounded interval; hence $T(P)\\in D^b_c(W,R)$ by [def-weil-derived-complete-integral-detailed]. The unit identity gives $e_{P,n}(u_P)_n=1_{P_n}$, so $(u_P)_n=e_{P,n}^{-1}$. On a K-flat model this identity sends $x\\otimes b$ to $x\\otimes b$; it concerns the actual scalar-extension adjoint of the limit projection. Take the cone $C$ of the actual unit $u_P:P\\to T(P)$. The triangulated integral-constructible theorem [lem-weil-integral-constructible-triangulated] puts $C$ in the same category, and exactness of derived change of rings [lem-pur-derived-change-of-rings] gives $C_n=0$ for all $n$. In the completeness Roos triangle of [def-weil-derived-complete] both products for $C$ are zero, so $C=0$ and $u_P$ is an isomorphism by [lem-kun-distinguished-cone-zero]. Naturality was supplied by the adjunction unit before this invertibility argument. This proves natural reconstruction into the specified total-limit model under the exact Roos-completeness convention; no natural comparison is extracted from Verdier's object-only reconstruction.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-normalized-dvr-effectivity",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-derived-complete",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 1, reconstruction: specified unit and complete-cone argument"
+   }
+  },
+  {
+   "text": "Use the functorial normalized finite system $\\mathcal E_f\\mathcal R_YL$ of [lem-coef-finite-adjunction-diagram-realization] as the specified exceptional tower, and put $G_f=\\mathcal L_X\\mathcal E_f\\mathcal R_Y$. Its normalization maps are those of [lem-coef-finite-exceptional]. We construct the coherent comparison with $H$ of step 1 explicitly. Use the canonical finite dualizing systems $\\Omega_W$ of the diagram-realization lemma and their integral limits $\\omega_{W,R}$ of [prop-coef-integral-dualizing]; the coefficient-system counit identifies $\\mathcal R_W\\omega_{W,R}$ with $\\Omega_W$, by effectivity. The $\\beta$ maps of [lem-coef-derived-system-evaluation-calculus] therefore identify reductions of integral duals with $\\mathcal D_W$ as system maps; each is invertible by the evaluation-defined comparisons of [thm-coef-integral-verdier]. For $M=D_{Y,R}L$, completed pullback is the total limit of $f^*\\mathcal R_YM$, by [def-pur-integral-derived-operations]. This system is normalized by tensor associativity. The counit $e:\\mathcal R_X(f^*_{\\mathrm{comp}}M)\\to f^*\\mathcal R_YM$ is a system isomorphism by [lem-coef-normalized-dvr-effectivity]. Its evaluations are the completed-pullback comparisons of [lem-pur-integral-operations-preserve-constructible], since both are adjoint to the finite projections. Write $v_{W,P}:\\mathcal R_WD_{W,R}P\\xrightarrow{\\sim}\\mathcal D_W\\mathcal R_WP$ for the preceding dual reduction comparison, including the counit on the dualizing input. For $M=D_{Y,R}L$, put $q_L=f^*(v_{Y,L})\\circ e:\\mathcal R_XF\\xrightarrow{\\sim}f^*\\mathcal D_Y\\mathcal R_YL$. If $\\theta:\\mathcal E_f\\xrightarrow{\\sim}\\mathcal D_Xf^*\\mathcal D_Y$ is the system dual-formula comparison, define\n$$b_L=\\theta_{\\mathcal R_YL}^{-1}\\circ\\mathcal D_X(q_L^{-1})\\circ v_{X,F}:\\mathcal R_XH\\xrightarrow{\\sim}\\mathcal E_f\\mathcal R_YL.$$\nIn particular both $e$ and the pullback of $v_{Y,L}$ are inverted inside the contravariant dual; the middle arrow goes from $\\mathcal D_X\\mathcal R_XF$ to $\\mathcal D_Xf^*\\mathcal D_Y\\mathcal R_YL$. Each constituent is a specified natural system isomorphism. Apply $\\mathcal L_X$ and compose with $u_H$ from step 2 to get the natural $H\\xrightarrow{\\sim}G_fL$. Constructibility and the interval follow from step 1. Effectivity supplies the canonical reductions of $G_fL$. Write $E=\\mathcal E_f\\mathcal R_YL$. Naturality of the system counit says $e_E\\mathcal R_X\\mathcal L_X(b_L)=b_Le_{\\mathcal R_XH}$. Composing with $\\mathcal R_Xu_H$ and using the unit/counit identity gives $e_E\\mathcal R_X(\\mathcal L_X(b_L)u_H)=b_L$. Thus the actual isomorphism reduces to the specified finite dual-formula maps.",
+   "uses": [
+    "lem-coef-finite-adjunction-diagram-realization",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-finite-exceptional",
+    "thm-coef-integral-verdier",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-coef-normalized-dvr-effectivity",
+    "prop-coef-integral-dualizing",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 1, specified exceptional system, dual formula, natural reconstruction and actual reductions"
+   }
+  },
+  {
+   "text": "For $P,Q\\in D^b_c(W,R)$, put $N=\\mathcal R_WQ$. This is a normalized derived coefficient system by tensor associativity, and step 2 gives the actual natural reconstruction isomorphism $u_Q:Q\\xrightarrow{\\sim}\\mathcal L_WN$. Use the enriched reduction/limit adjunction $\\gamma$ of [lem-coef-derived-system-evaluation-calculus] to define\n$$\\lambda_{P,Q}=\\gamma_{P,\\mathcal R_WQ}\\circ R\\operatorname{Hom}_{W,R}(P,u_Q):R\\operatorname{Hom}_{W,R}(P,Q)\\xrightarrow{\\sim}R\\lim\\,\\mathcal H_W(\\mathcal R_WP,\\mathcal R_WQ).$$\nBoth arrows are specified natural isomorphisms. The first uses completeness of the second input $Q$; no completeness or reduction theorem for the internal Hom is needed. Check its actual projections, rather than choosing a map between Roos cones. The unit/counit identity of the calculus gives $e_{\\mathcal R_WQ,n}\\circ(u_Q)_n=1_{Q_n}$. Hence the stated projection formula for $\\gamma$ sends any $h:P\\to Q$ to\n$$e_{\\mathcal R_WQ,n}\\circ(u_Q)_n\\circ h_n=h_n.$$\nThis is precisely ordinary derived scalar-extension adjunction [lem-weil-derived-scalar-extension-restriction-adjunction], with only the first Hom input extended and its second input restricted. It does not tensor an integral internal Hom with $A_n$. The same formula holds after shifts and is compatible with composition by the calculus statement. Finally [lem-pur-rhom-global-sections] identifies $H^0$ of the global derived mapping complexes with categorical Hom. Thus $\\lambda$ is natural in both variables, and its finite projections really are reduction of integral morphisms.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, natural first and last mapping-limit comparisons"
+   }
+  },
+  {
+   "text": "Let $K\\in D^b_c(X,R)$. The equality $D^b_c=D^b_{ctf}$ in [thm-coef-integral-verdier] supplies a single finite Tor interval for all $K_n$. Choose a nonnegative integer dimension bound for $X$ by [lem-kun-dimension-finite-type], applied to the finite-type structure morphism to the field. Thus all hypotheses of [lem-coef-integral-compact-support] hold, and $Rf_!K$ is constructible and $(Rf_!K)_n\\cong Rf_{!,n}K_n$, with the canonical coefficient maps. At each level the constructible exceptional adjunction gives the natural isomorphism of derived global mapping complexes\n$$\nR\\operatorname{Hom}_{Y,A_n}(Rf_{!,n}K_n,L_n)\\cong R\\operatorname{Hom}_{X,A_n}(K_n,Rf_n^!L_n).\n$$\nFor completeness, the enriched assertion here does not use an ambient pro-etale adjoint: [lem-sf-proetale-constructible-origin] gives etale representatives of $K_n,L_n$. The schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied over the field, and [thm-nagata-compactification] gives a compactification of $f$. On the ordinary etale sites [prop-asd-internal-adjunction] gives the internal-Hom isomorphism for this compactification and the finite commutative ring $A_n$; applying derived global sections gives its mapping-complex version. The identity $R\\Gamma_Y Rf_* = R\\Gamma_X$ here is the canonical derived-composition comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] for the map to the point. The compact-support comparison [lem-sf-class-compact-support-comparison] identifies the left input after passage to pro-etale sites, while the formula of [def-weil-exceptional-inverse-image] identifies the right input. The induced maps on global mapping complexes are quasi-isomorphisms: in degree $r$ their cohomology maps are precisely the fully faithful Hom maps of [thm-weil-pbc-site-comparison] with target shifted by $r$, by [lem-pur-rhom-global-sections]. The finite maps commute with all coefficient transitions by the unit/counit clause of [lem-coef-finite-exceptional]. For the passage to towers, use the specified natural transformation $\\mathcal A$ of [lem-coef-finite-adjunction-diagram-realization] at $M=\\mathcal R_XK$, $N=\\mathcal R_YL$. Their levels are finite-Tor constructible by [thm-coef-integral-verdier]. The coefficient-system counits give natural isomorphisms\n$$c_K:\\mathcal R_Y(Rf_!K)\\xrightarrow{\\sim}\\mathcal F_f\\mathcal R_XK,\\qquad c_L:\\mathcal R_XG_fL\\xrightarrow{\\sim}\\mathcal E_f\\mathcal R_YL.$$\nHere $Rf_!=\\mathcal L_Y\\mathcal F_f\\mathcal R_X$ as a functor by the diagram-realization lemma; effectivity [lem-coef-normalized-dvr-effectivity] makes both counits isomorphisms at every level, hence in the system category. Compose $\\mathcal H_Y(c_K^{-1},1)$, then $\\mathcal A$, then $\\mathcal H_X(1,c_L^{-1})$. Contravariance in the first variable fixes this order. This is a specified natural isomorphism from $\\mathcal H_Y(\\mathcal R_YRf_!K,\\mathcal R_YL)$ to $\\mathcal H_X(\\mathcal R_XK,\\mathcal R_XG_fL)$ in the derived category of strict abelian-group towers, without an arbitrary choice of a lift of evaluated maps.",
    "uses": [
     "lem-coef-integral-compact-support",
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification",
+    "prop-asd-internal-adjunction",
+    "lem-sf-class-compact-support-comparison",
+    "def-weil-exceptional-inverse-image",
+    "thm-weil-pbc-site-comparison",
+    "lem-pur-rhom-global-sections",
     "lem-coef-finite-exceptional",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-finite-adjunction-diagram-realization",
+    "thm-coef-integral-verdier",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, finite enriched adjunction and its strict-system transformation"
+   }
+  },
+  {
+   "text": "Apply total derived inverse limit to the actual system isomorphism of step 5 and use $\\lambda$ from step 4 at both ends. This gives a natural mapping-complex isomorphism and, on $H^0$, a bijection $\\Phi_{K,L}:\\operatorname{Hom}_Y(Rf_!K,L)\\cong\\operatorname{Hom}_X(K,G_fL)$. Put $\\eta_K=\\Phi_{K,Rf_!K}(1)$ and $\\epsilon_L=\\Phi^{-1}_{G_fL,L}(1)$. Naturality gives $\\Phi(u)=G_f(u)\\eta_K$ and $\\Phi^{-1}(v)=\\epsilon_L Rf_!(v)$. Applying the inverse identities to identity maps gives $\\epsilon_{Rf_!K}Rf_!(\\eta_K)=1$ and $G_f(\\epsilon_L)\\eta_{G_fL}=1$, the triangle identities.\n\nCheck reduction of these actual adjuncts using the projection formula of [lem-coef-derived-system-evaluation-calculus]. For $u:Rf_!K\\to L$, the left projection of $\\lambda$ is $u_n:(Rf_!K)_n\\to L_n$ by step 4. Under $c_{K,n}$ of step 5 it becomes $u_n c_{K,n}^{-1}:Rf_{!,n}K_n\\to L_n$. The evaluated transformation $\\mathcal A$ of [lem-coef-finite-adjunction-diagram-realization] sends this to its finite adjunct, and then $c_{L,n}^{-1}$ identifies its target with $(G_fL)_n$. Thus\n$$c_{L,n}(\\Phi_{K,L}(u))_n=\\operatorname{adj}_n(u_n c_{K,n}^{-1}).$$\nFor the unit take $L=Rf_!K$, $u=1$; this says its reduction is the finite unit after the compact-support comparison $c_{K,n}$. For the counit use the inverse bijection with $K=G_fL$ and $v=1$; it says the reduction is the finite counit after $c_{L,n}$ and the compact-support comparison on $G_fL$. These are exactly the units and counits specified in [lem-coef-finite-exceptional]. No conclusion that integral maps are equal merely because their reductions are equal is used. The projection identities come from the actual enriched scalar-extension adjunction, without an internal-Hom base-change claim.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-finite-adjunction-diagram-realization",
+    "lem-coef-finite-exceptional",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, adjunction and normalized maps from the natural total-limit comparison"
+   }
+  },
+  {
+   "text": "For $a_X:X\\to\\operatorname{Spec}k$ and $L=R$, one has $L_n=A_n$ and hence $G_{a_X}R=R\\varprojlim_n\\operatorname{Res}_nRa_{X,n}^!A_n$. This is exactly the defining tower, with its same quotient comparisons, of $\\omega_{X,R}$ in [prop-coef-integral-dualizing]. Use the identification with this same defining total-limit object to equip $\\omega_{X,R}$ with the specialized adjunction from step 6. Its reduction maps are the specified finite projections by step 3, and its adjunction maps reduce to the finite adjunction maps by step 6. Thus $\\omega_{X,R}$ is the value of the constructed right adjoint at $R$, with the stated finite normalization.",
+   "uses": [
     "prop-coef-integral-dualizing"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof, second paragraph: structure-morphism specialization and dualizing object"
+   }
   }
  ],
  "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-exceptional-inverse-image",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-finite-adjunction-diagram-realization",
   "lem-coef-finite-exceptional",
-  "thm-coef-integral-verdier",
-  "lemma-weil-pbc-completed-pullback-reduction",
-  "lem-coef-normalized-dvr-effectivity",
   "lem-coef-integral-compact-support",
-  "prop-coef-integral-dualizing"
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-kun-dimension-finite-type",
+  "lem-kun-distinguished-cone-zero",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-rhom-global-sections",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-asd-internal-adjunction",
+  "prop-coef-integral-dualizing",
+  "thm-coef-integral-verdier",
+  "thm-nagata-compactification",
+  "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
-  "place": "## Proof"
+  "place": "Both proof paragraphs, expanded to specified coherent system maps; mapping-limit comparison repaired through reconstruction of the second input and enriched scalar adjunction, without internal-Hom base change."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "integral exceptional adjoint on constructible complexes derived inverse limit",
+   "results": "8 hits: localCohomology.diagram; CategoryTheory.Functor.mapDerivedCategoryFactors; Condensed.profiniteSolidification; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategoryFactorsh; DerivedCategory.left_fac_of_isStrictlyGE. None states the project-specific exceptional adjoint.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.boundedConstructibleIntegral, IsHomotopyLimit, rightDerivedUpperShriekAdjunction",
+   "results": "0 hits; unknown identifier boundedConstructibleIntegral in Loogle.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriek|boundedConstructibleIntegral|derivedCompletion [Mathlib subdirectory SixFunctors]",
+   "results": "0 hits in Mathlib/SixFunctors.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived inverse limit exceptional adjoint constructible integral coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|UpperShriek|CompactSupport",
+   "results": "Mathlib/LinearAlgebra/Matrix/Cartan.lean; Mathlib/LinearAlgebra/Matrix/Cartan.lean; Mathlib/LinearAlgebra/Matrix/Cartan.lean; Mathlib/LinearAlgebra/Matrix/Cartan.lean; Mathlib/LinearAlgebra/Matrix/Cartan.lean; Mathlib/Topology/Algebra/ConstMulAction.lean; Mathlib/Topology/Algebra/ConstMulAction.lean; Mathlib/LinearAlgebra/Transvection/Generation.lean; hits concern exceptional linear algebra or supports of functions, not six-functor direct images",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint of compactly supported direct image with complete discrete valuation ring coefficients",
+   "results": "CondensedMod.LocallyConstant.adjunction; LightCondMod.LocallyConstant.adjunction; CompHausLike.LocallyConstant.adjunction; Condensed.freeForgetAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; LightCondSet.LocallyConstant.adjunction; LightCondensed.freeForgetAdjunction; CondensedSet.compactlyGeneratedAdjunction; ordinary condensed/sheaf adjunctions, not an integral exceptional adjoint",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"homEquiv\"",
+   "results": "CategoryTheory.Adjunction.mkOfHomEquiv; CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.homEquiv'; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit; generic adjunction Hom formulas only, no constructible complete-coefficient theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -81,5 +263,109 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "prop-coef-integral-exceptional-adjoint",
+  "worker": "stage1",
+  "summary": "Repaired C4/E5/D5 in seven steps: a specified reduction/total-limit adjunction and effectivity prove the actual reconstruction unit invertible by the complete-cone argument. Two new statement-only tools isolate coherent varying-coefficient evaluation and the finite enriched system adjunction. Exceptional and mapping comparisons are natural transformations before Rlim; arbitrary evaluation lifts were removed. Repair of E2/E7/C4 return: completely replaced step 4 by reconstruction of the second input followed by the enriched reduction/limit scalar adjunction, specified in the existing new calculus node with an exact projection formula. Rebuilt step 6 using that formula to compute finite adjuncts. Removed every direct use of lem-coef-integral-hom-reduction and cor-coef-integral-internal-hom; neither an arbitrary-input nor a constructible Hom/tensor base-change isomorphism is used in these steps. Recorded the derived residue-field check correcting the review counterexample in report.md.",
+  "blueprint": "Step 1 gives the dual expression and bound; steps 2–3 give reconstruction and the exceptional tower of proof paragraph 1. Steps 4–6 realize the three mapping-complex comparisons and adjunction maps of paragraph 2; step 7 gives the structure-morphism specialization.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Completed-pullback preservation is needed before applying integral Verdier duality to its output; the original reduction comparison alone does not assert constructibility."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Uniform preservation of the finite-level Tor interval in the original duality calculation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic functorial derived-limit model for coherent towers, necessary to specify maps rather than unrelated choices of Roos cones."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic identification of degree-zero global derived internal Hom with categorical Hom, including shifted targets."
+   },
+   {
+    "node": "prop-asd-internal-adjunction",
+    "why": "Generic ordinary-etale enriched exceptional adjunction at finite coefficients, with no ambient pro-etale admissibility assumption; the unit has no correctly scoped enriched comparison statement of its own."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Finite constructible inputs have etale representatives, as required for the bounded-below comparison."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherianity of finite-type schemes over the field, verifying the ordinary-etale theorem hypotheses."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Finite compact-support etale/pro-etale comparison, used to identify the actual left input of the enriched adjunction."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Fully faithful bounded-below comparison gives quasi-isomorphisms on derived mapping complexes by testing every shifted Hom."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Cone closure for the precise Roos-complete constructible category."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Exactness of derived reduction identifies the cone reductions of the unit."
+   },
+   {
+    "node": "lem-kun-distinguished-cone-zero",
+    "why": "Triangulated criterion detects invertibility after the complete cone vanishes."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Canonical natural derived-composition comparison supplies global-sections/total-limit commutation."
+   },
+   {
+    "node": "def-weil-derived-complete-integral-detailed",
+    "why": "The category definition converts effectivity and uniform reductions to integral membership."
+   },
+   {
+    "node": "def-weil-derived-complete",
+    "why": "The precise Roos definition makes a complete object with zero reductions vanish."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finiteness of the Krull dimension of a finite-type scheme over a field supplies the nonnegative dimension bound required by the integral compact-support theorem."
+   },
+   {
+    "node": "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "why": "Generic coefficient adjunction identifies each projection of the enriched reduction/limit comparison; it extends only the first input and restricts the second, without Hom/tensor base change. No geometric unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pur-rhom-global-sections",
+  "prop-asd-internal-adjunction",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sf-class-compact-support-comparison",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "lem-kun-distinguished-cone-zero",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q14-f4012b7d6",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-f4012b7d6 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, sources and unit/chapter route. Checked all seven steps, coherent maps, variance, finite projections, Tor bounds and small cases. No duplicate or parent-restating node found. Archived target morphisms and coefficient categories remain distinct and unchanged. Detailed checks and accepted tool uses are in review.md; no fixes required."
+ }
 }
