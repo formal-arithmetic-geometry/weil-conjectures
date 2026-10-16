@@ -43,7 +43,7 @@ private lemma conj_square {W A B X : Scheme.{u}} {p : W ⟶ A} {s : W ⟶ B}
         (upperStarLowerStarAdjunction Ab.{u + 1} p))
       (upperStarCompIso Ab.{u + 1} h).hom =
         (squareLowerStarIso Ab.{u + 1} (CommSq.mk h)).hom := by
-  simp only [upperStarCompIso_eq_composite, Iso.trans_hom, Iso.symm_hom]
+  simp only [upperStarCompIso, Iso.trans_hom, Iso.symm_hom]
   rw [← Category.assoc,
     ← conjugateEquiv_comp _ (upperStarLowerStarAdjunction Ab.{u + 1} (s ≫ j)),
     ← conjugateEquiv_comp _ (upperStarLowerStarAdjunction Ab.{u + 1} (p ≫ i)),

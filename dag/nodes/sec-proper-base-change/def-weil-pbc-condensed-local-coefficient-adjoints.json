@@ -1,150 +1,129 @@
 {
- "id": "def-weil-pbc-condensed-local-coefficient-adjoints",
- "kind": "definition",
- "title": "Canonical local finite coefficient adjoints",
- "statement": "Use finite fields [def-weil-finite-subextension-directed-set] and internal coefficient modules [def-weil-pbc-condensed-e-module-category]. For f:X→T, a finite E, an f*Omega-module M and a local model P over g*f*E with any map a:Omega tensor_E P→g*M, construct for every F≥E the specified F tensor_E P, its tensor-transitivity map to g*M, and its scalar adjoint q into g*Res_FOmega M. The tensor adjunct of q is the tensor-transitivity map; if a is an isomorphism then this map is invertible and q is monic. All data are explicit constructions.",
- "source": {
-  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-  "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps"
- },
- "stmt_deps": [
-  "def-weil-finite-subextension-directed-set",
-  "def-weil-pbc-condensed-e-module-category"
- ],
- "proof": [
-  {
-   "text": "Use the already proved coefficient-linear projection Omega→F. Apply the three strong monoidal inverse images from the profinite point to T, X and the local scheme. Mapping preserves its linearity and retraction equations. The balanced tensor construction gives a natural retraction of the scalar-extension unit. A morphism with a retraction is monic.",
-   "uses": [
+  "id": "def-weil-pbc-condensed-local-coefficient-adjoints",
+  "kind": "definition",
+  "title": "Canonical local finite coefficient adjoints",
+  "statement": "Use finite fields [def-weil-finite-subextension-directed-set] and internal coefficient modules [def-weil-pbc-condensed-e-module-category]. For f:X→T, a finite E, an f*Omega-module M and a local model P over g*f*E with any map a:Omega tensor_E P→g*M, construct for every F≥E the specified F tensor_E P, its tensor-transitivity map to g*M, and its scalar adjoint q into g*Res_FOmega M. The tensor adjunct of q is the tensor-transitivity map; if a is an isomorphism then this map is invertible and q is monic. All data are explicit constructions.",
+  "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps"
+  },
+  "stmt_deps": [
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-pbc-condensed-e-module-category"
+  ],
+  "proof": [
+    {
+      "text": "Use the already proved coefficient-linear projection Omega→F. Apply the three strong monoidal inverse images from the profinite point to T, X and the local scheme. Mapping preserves its linearity and retraction equations. The balanced tensor construction gives a natural retraction of the scalar-extension unit. A morphism with a retraction is monic.",
+      "uses": [
+        "lem-weil-pbc-condensed-coefficient-derived-faithful"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Construct the extended model by scalar extension, the tensor map by extendScalarsComp and extendScalarsIsoOfEq, and q by homEquiv followed by mapModComapIso inverse. Tensor transitivity preserves the supplied isomorphism. The unit formula expresses q as a monic unit followed by isomorphisms. Applying the inverse homEquiv recovers the tensor map.",
+      "uses": [],
+      "elementary": true
+    }
+  ],
+  "proof_deps": [
     "lem-weil-pbc-condensed-coefficient-derived-faithful"
-   ],
-   "elementary": false
+  ],
+  "proof_origin": {
+    "by": "worker",
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps",
+    "note": "C1 explicit Lean proof/API construction; the only remaining hole is reported by declaration name."
   },
-  {
-   "text": "Construct the extended model and tensor-transitivity map as before. Define the local adjunct underlying map explicitly as the mixed-scalar comparison followed by the original map. The scalar-unit identities and uniqueness of scalar adjunction prove equality to the previous canonical adjunct, hence linearity. Package the module map from that named linearity theorem. Rewrite the existing monomorphism and scalar-adjunction arguments using the equality to the canonical adjunct. The scalar_unit and mixedScalarMap_unit identities are stated once here and imported by the overlap transpose proof.",
-   "uses": [
-    "def-weil-pbc-condensed-coefficient-complex-diagram"
-   ],
-   "elementary": false
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Descend isomorphism between finitely presented modules along filtered colimit of rings",
+      "results": "8 hits: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, CommRingCat.preservesFilteredColimits_coyoneda, ModuleCat.FilteredColimits.colimitCoconeIsColimit, preservesFilteredColimits_coyoneda, ModuleCat.FilteredColimits.M.mk_eq, ModuleCat.FilteredColimits.M.mk_surjective, ModuleCat.FilteredColimits.M.mk_map, ModuleCat.FilteredColimits.M.mk",
+      "date": "2026-10-16",
+      "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Adjunction, Mono",
+      "results": "0 hits: ; loogle: unknown identifier 'Mono'",
+      "date": "2026-10-16",
+      "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
+    },
+    {
+      "tool": "grep",
+      "query": "unit.*[Mm]ono|[Mm]ono.*unit",
+      "results": "25 hits: Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean, Mathlib/Control/Monad/Writer.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean",
+      "date": "2026-10-16",
+      "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
+    },
+    {
+      "tool": "leansearch",
+      "query": "Homomorphisms from finitely presented internal modules over coefficient ring sheaves on quasi compact quasi separated proetale schemes descend through filtered colimits to a finite coefficient field.",
+      "results": "8 hits: preservesFilteredColimits_coyoneda, ModuleCat.FilteredColimits.colimit, ModuleCat.FilteredColimits.M.mk, ModuleCat.FilteredColimits.M, CommRingCat.preservesFilteredColimits_coyoneda, AlgebraicGeometry.Scheme.Modules.Hom, SheafOfModules.Presentation.isColimit, FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂",
+      "date": "2026-10-16",
+      "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.Paper.CondensedFiniteLocalSubmodules",
+    "date": "2026-10-16",
+    "group": "C1"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-weil-pbc-condensed-finite-local-submodules",
+      "place": "Finite local models: scalar adjoints, qcqs Hom factorization and one-way overlap comparisons.",
+      "via": [
+        "lem-weil-pbc-condensed-local-model-gluing",
+        "lem-weil-pbc-condensed-finite-presentation-descent",
+        "prop-weil-pbc-qbar-condensed-two-colimit",
+        "nt-target-proetale-qbar"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.Paper.CondensedLocalCoefficientAdjoints",
+    "file": "lean/Sheaf/Paper/CondensedLocalCoefficientAdjoints.lean",
+    "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientLocalModel",
+    "statement": "def finiteCoefficientLocalModel\n    (F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (hEF : E ≤ F)",
+    "branch": "sheaf-dag",
+    "by": "C1",
+    "date": "2026-10-16",
+    "declarations": [
+      "AlgebraicGeometry.ProEtale.finiteCoefficientLocalModel",
+      "AlgebraicGeometry.ProEtale.finiteCoefficientLocalTensorMap",
+      "AlgebraicGeometry.ProEtale.finiteCoefficientLocalAdjoint",
+      "AlgebraicGeometry.ProEtale.isIso_finiteCoefficientLocalTensorMap",
+      "AlgebraicGeometry.ProEtale.mono_finiteCoefficientLocalAdjoint",
+      "AlgebraicGeometry.ProEtale.finiteCoefficientLocalAdjoint_scalarAdjoint"
+    ]
+  },
+  "reviewed": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "C1",
+    "result": "pass",
+    "landing": "20261016T143640-L-3698335",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "C1",
+    "result": "pass",
+    "landing": "20261016T143640-L-3698335",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "def-weil-pbc-condensed-coefficient-complex-diagram",
-  "lem-weil-pbc-condensed-coefficient-derived-faithful"
- ],
- "proof_origin": {
-  "by": "worker",
-  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-  "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps",
-  "note": "C1 explicit underlying-map representation, with proved equality to the original canonical scalar adjunct; no holes."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Descend isomorphism between finitely presented modules along filtered colimit of rings",
-   "results": "8 hits: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, CommRingCat.preservesFilteredColimits_coyoneda, ModuleCat.FilteredColimits.colimitCoconeIsColimit, preservesFilteredColimits_coyoneda, ModuleCat.FilteredColimits.M.mk_eq, ModuleCat.FilteredColimits.M.mk_surjective, ModuleCat.FilteredColimits.M.mk_map, ModuleCat.FilteredColimits.M.mk",
-   "date": "2026-10-16",
-   "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction, Mono",
-   "results": "0 hits: ; loogle: unknown identifier 'Mono'",
-   "date": "2026-10-16",
-   "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
-  },
-  {
-   "tool": "grep",
-   "query": "unit.*[Mm]ono|[Mm]ono.*unit",
-   "results": "25 hits: Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean, Mathlib/Control/Monad/Writer.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean",
-   "date": "2026-10-16",
-   "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Homomorphisms from finitely presented internal modules over coefficient ring sheaves on quasi compact quasi separated proetale schemes descend through filtered colimits to a finite coefficient field.",
-   "results": "8 hits: preservesFilteredColimits_coyoneda, ModuleCat.FilteredColimits.colimit, ModuleCat.FilteredColimits.M.mk, ModuleCat.FilteredColimits.M, CommRingCat.preservesFilteredColimits_coyoneda, AlgebraicGeometry.Scheme.Modules.Hom, SheafOfModules.Presentation.isColimit, FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂",
-   "date": "2026-10-16",
-   "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.Paper.CondensedFiniteLocalSubmodules",
-  "date": "2026-10-16",
-  "group": "C1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-weil-pbc-condensed-finite-local-submodules",
-   "place": "Finite local models: scalar adjoints, qcqs Hom factorization and one-way overlap comparisons.",
-   "via": [
-    "lem-weil-pbc-condensed-local-model-gluing",
-    "lem-weil-pbc-condensed-finite-presentation-descent",
-    "prop-weil-pbc-qbar-condensed-two-colimit",
-    "nt-target-proetale-qbar"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Paper.CondensedLocalCoefficientAdjoints",
-  "file": "lean/Sheaf/Paper/CondensedLocalCoefficientAdjoints.lean",
-  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientLocalModel",
-  "statement": "def finiteCoefficientLocalModel\n    (F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (hEF : E ≤ F)",
-  "branch": "sheaf-dag",
-  "by": "C1",
-  "date": "2026-10-16",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalModel",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalTensorMap",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalAdjoint",
-   "AlgebraicGeometry.ProEtale.isIso_finiteCoefficientLocalTensorMap",
-   "AlgebraicGeometry.ProEtale.mono_finiteCoefficientLocalAdjoint",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalAdjoint_scalarAdjoint",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalScalarTriangle",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalAdjointHom",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalAdjointHom_linear",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalAdjoint_eq_canonical",
-   "AlgebraicGeometry.ProEtale.scalar_unit",
-   "AlgebraicGeometry.ProEtale.mixedScalarMap_unit"
-  ]
- },
- "reviewed": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C1",
-  "result": "pass",
-  "landing": "20261016T143640-L-3698335",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C1",
-  "result": "pass",
-  "landing": "20261016T221557-L-1611538",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- }
 }

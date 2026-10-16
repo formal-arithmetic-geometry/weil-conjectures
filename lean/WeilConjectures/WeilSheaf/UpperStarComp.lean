@@ -50,8 +50,7 @@ lemma upperStarCompIso_symm {Y Z₁ Z₂ T : Scheme.{u}} {a : Y ⟶ Z₁} {b : Z
     upperStarCompIso A h.symm = (upperStarCompIso A h).symm := by
   have e : upperStarCongr A h.symm = (upperStarCongr A h).symm :=
     Iso.ext (by simp [upperStarCongr])
-  rw [upperStarCompIso_eq_composite, upperStarCompIso_eq_composite, e,
-    Iso.trans_symm, Iso.trans_symm, Iso.symm_symm_eq,
+  rw [upperStarCompIso, upperStarCompIso, e, Iso.trans_symm, Iso.trans_symm, Iso.symm_symm_eq,
     Iso.trans_assoc]
 
 /-- The pasting law for the composition isomorphisms of commutative squares `a₁ ≫ j₁ = j₁ ≫ a₂`
@@ -115,8 +114,7 @@ lemma adicUpperStarCompIso_paste (j₁ : T₁ ⟶ T₂) (j₂ : T₂ ⟶ T₃) (
     adicUpperStarCompIso_hom_app_hom, adicUpperStarComp_inv_app_hom,
     adicUpperStarComp_inv_app_hom]
   have p := upperStarCompIso_paste j₁ j₂ a₁ a₂ a₃ c₁ c₂ c₁₂ M.X
-  rw [upperStarCompIso_eq_composite, upperStarCompIso_eq_composite,
-    upperStarCompIso_eq_composite] at p
+  rw [upperStarCompIso, upperStarCompIso, upperStarCompIso] at p
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     upperStarCongr_hom_app_eq_eqToHom] at p
   exact p
