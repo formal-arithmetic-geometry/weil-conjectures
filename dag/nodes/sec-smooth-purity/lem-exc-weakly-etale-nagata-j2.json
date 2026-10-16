@@ -26,9 +26,165 @@
   "def-weil-pbc-nagata-ring",
   "def-exc-excellent-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First establish the field-fibre calculation, for reuse below. Let $k\\to F$ be any weakly etale algebra over a field. By [lem-weil-pbc-weak-etale-field], $F$ is reduced, every finitely generated $k$-subalgebra is finite etale, and its residue fields are separable algebraic over $k$. Apply [lem-weil-pbc-finite-algebra-is-integral] to the finite subalgebra $k[x]$, for each $x\\in F$: every element of $F$ is integral over $k$. For any prime $P$ of $F$, the domain $F/P$ is therefore algebraic over $k$. For $0\\ne z\\in F/P$, choose a monic relation of least degree. Its constant term is nonzero, since otherwise cancellation of $z$ gives a lower-degree relation. Solving this relation for $z^{-1}$ shows that $F/P$ is a field. Thus every prime of $F$ is maximal, and no two distinct primes are comparable; every prime is also minimal. Now [lem-weil-pbc-minimal-prime-reduced-localization-field] says that $F_P$ is a field for each $P$. In particular these local rings are normal domains by [def-weil-pbc-normal-ring], and regular local rings by [lem-weil-pbc-field-regular-ring]. If $F$ is Noetherian, it is consequently both normal and regular, with every prime maximal.",
+   "uses": [
+    "lem-weil-pbc-weak-etale-field",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-field-regular-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092Q (lemma-absolutely-flat-over-field), with algebra.tex Tags 00GK (lemma-finite-is-integral) and 00EU (lemma-minimal-prime-reduced-ring); elementary inverse-polynomial calculation is written out"
+   }
+  },
+  {
+   "text": "For any weakly etale map $U\\to V$ of Noetherian rings and any $U$-algebra $U'$, the affine instance of [lem-weil-pbc-weakly-etale-composition-base-change], identified by [lem-weil-pbc-affine-chart-base-change-iso], makes $U'\\to V\\otimes_U U'$ weakly etale. In particular its fibre at $p\\subset U$ is $F_p=V\\otimes_U\\kappa(p)=(U\\setminus p)^{-1}(V/pV)$. This ring is Noetherian: $V/pV$ is a cyclic finite $V$-algebra, so [lem-weil-pbc-finite-algebra-noetherian] applies, and then [lem-weil-pbc-localization-noetherian] applies. Step 1 shows that every $F_p$ is normal, regular, and has all primes maximal. Its residue fields are separable algebraic over $\\kappa(p)$. For $q\\subset V$ over $p$, the fibre prime is the extension of $q/pV$; its residue field is $\\operatorname{Frac}(V/q)=\\kappa(q)$: localizing $V/q$ first at $U\\setminus p$ and then at all its nonzero elements gives exactly the same fractions as localizing at all nonzero elements at once. Thus $\\kappa(q)/\\kappa(p)$ is algebraic, including when it is infinite.",
+   "uses": [
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-weil-pbc-affine-chart-base-change-iso",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 094U (lemma-base-change-weakly-etale); schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes); algebra.tex Tag 00FN (lemma-Noetherian-permanence). Fibre fractions are displayed explicitly"
+   }
+  },
+  {
+   "text": "Fix a prime $q\\subset B$, put $p=f^{-1}(q)$, $k=\\kappa(p)=\\operatorname{Frac}(A/p)$ and $E=\\kappa(q)=\\operatorname{Frac}(B/q)$, and fix an arbitrary finite field extension $L/E$. Step 2 gives that $E/k$ is algebraic. There is a finite subextension $L_0/k$ inside $L$ with $L=EL_0$: choose a finite $E$-basis $x_1,\\ldots,x_r$ of $L$. Each $x_i$ satisfies a monic polynomial over $E$; the finitely many coefficients of these polynomials lie in a finite extension $k_1/k$ inside $E$, because adjoining finitely many algebraic elements is spanned successively by bounded powers. The ring $k_1[x_1,\\ldots,x_r]$ is finite dimensional over $k_1$ by the same bounded-power spanning argument and is a domain, hence a field: multiplication by a nonzero element is an injective endomorphism of a finite-dimensional vector space and is surjective. It is therefore a finite extension of $k$, and so is its subfield $L_0=k(x_1,\\ldots,x_r)$. Finally $EL_0=L$ since $EL_0$ contains the chosen $E$-basis. No finite degree for $E/k$ is asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent finite-generator field calculation for the finite models used in the J-2 criterion, Tag 07PC (lemma-J-2); does not assume a finite residue extension"
+   }
+  },
+  {
+   "text": "Let $R\\subset L_0$ be the integral closure of $A/p$ in $L_0$. Since $A$ is Nagata, [def-weil-pbc-nagata-ring] gives that $A/p$ is Japanese; [def-weil-pbc-japanese-domain] gives that $R$ is finite over $A/p$, hence over $A$. The precise normalization lemma [lem-weil-pbc-integral-closure-finite-extension-normal] gives that $R$ is a normal domain with fraction field $L_0$. By [lem-weil-pbc-finite-algebra-noetherian], $R$ is Noetherian. By [lem-weil-pbc-localization-normal-domain], each prime localization of $R$ is a normal domain, so $R$ is a normal ring as required by the normality ascent lemma.",
+   "uses": [
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032R (definition-nagata), 032F (definition-N), 034L (lemma-integral-closure-in-normal), 00FN (lemma-Noetherian-permanence), 00GY (lemma-localize-normal-domain); fraction-field clause from the cited existing normalization node"
+   }
+  },
+  {
+   "text": "Set $C=B\\otimes_A R$. Step 2 gives that $R\\to C$ is weakly etale. If $r_1,\\ldots,r_s$ generate $R$ as an $A$-module, the elements $1\\otimes r_j$ generate $C$ as a $B$-module, by expanding each pure tensor and then each sum of pure tensors. Thus $C$ is finite over the Noetherian ring $B$, and [lem-weil-pbc-finite-algebra-noetherian] makes $C$ Noetherian. Its fibre rings over $R$ are normal by step 2; the map $R\\to C$ is flat by [def-weil-pbc-ind-etale-algebra]. All five hypotheses of [lem-weil-pbc-flat-normal-fibres-noetherian-normal] are now present: $R,C$ Noetherian, flatness, normal fibres, and $R$ normal. Consequently $C$ is normal.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C22 (lemma-normal-goes-up-noetherian); the finite base-change spanning calculation is written out"
+   }
+  },
+  {
+   "text": "The maps $B\\to B/q\\subset E\\subset L$ and $R\\subset L_0\\subset L$ agree on $A$ and give $h:C\\to L$, $b\\otimes r\\mapsto\\bar b r$. Write $Q=\\ker h$ and $D=h(C)=C/Q\\subset L$. Then $Q\\cap R=0$ and $Q\\cap B=q$. The prime $Q$ is minimal: if $Q_0\\subseteq Q$ is another prime of $C$, both avoid every nonzero element of $R$. Their extensions in $C\\otimes_R L_0$ are primes, since the quotients embed in localizations of the domains $C/Q_i$. These extensions contract back to $Q_i$: if $sc\\in Q_i$ with $0\\ne s\\in R$, primality gives $c\\in Q_i$. But the generic fibre $C\\otimes_R L_0$ has every prime maximal by step 2. The two extended primes, one contained in the other, must be equal, hence $Q_0=Q$. This proves minimality without claiming that $h$ is surjective onto $L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent prime-ideal calculation from the zero-dimensional generic fibre established in step 2; compare Tag 092Q"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-noetherian-finitely-many-minimal-primes], $C$ has finitely many minimal primes. It is reduced, since every prime localization of the normal ring $C$ is a domain and the maps to those localizations are jointly injective by [lem-weil-pbc-prime-localizations-jointly-injective]. Apply [lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions] to obtain $C\\cong\\prod_{i=1}^t C_i$ with each $C_i$ a normal domain. A prime in a finite product chooses one factor: of the orthogonal idempotents $e_i$ summing to $1$, exactly one is outside a prime; all other factors vanish in the quotient. Since $Q$ is minimal, its prime in the selected domain factor is $(0)$. Thus $D=C/Q$ is that normal domain factor. It is finite over $B/q$, generated by the images of $1\\otimes r_j$. Its fraction field inside $L$ contains $E$ because it contains $B/q$, and contains $L_0$ because it contains $R$. It therefore equals $EL_0=L$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-prime-localizations-jointly-injective",
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FR (lemma-Noetherian-irreducible-components) and 030C (lemma-characterize-reduced-ring-normal), together with the source of lem-weil-pbc-prime-localizations-jointly-injective; product-prime and fraction-field identifications are written out"
+   }
+  },
+  {
+   "text": "The finite algebra $D$ is integral over $B/q$ by [lem-weil-pbc-finite-algebra-is-integral]. Conversely any $x\\in L$ integral over $B/q$ satisfies the same monic polynomial over the larger subring $D$, so lies in $D$, since $D$ is normal with fraction field $L$. Therefore $D$ is exactly the integral closure of $B/q$ in $L$, and it is finite over $B/q$. The prime $q$ and finite extension $L/E$ were arbitrary. By [def-weil-pbc-japanese-domain] every $B/q$ is Japanese. With the assumed Noetherianity of $B$, [def-weil-pbc-nagata-ring] gives that $B$ is Nagata. This part of the argument has not needed J-2.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-weil-pbc-japanese-domain",
+    "def-weil-pbc-nagata-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GK (lemma-finite-is-integral), 032F (definition-N), 032R (definition-nagata); equality with the integral closure is proved in the step"
+   }
+  },
+  {
+   "text": "Retain the construction for the arbitrary $q$ and $L/E$. The finite $A$-algebra $R$ is of finite type: its finite module generators also generate it as an algebra. Since $A$ is J-2, [def-exc-excellent-ring] makes $\\operatorname{Reg}(R)$ open. It contains the zero prime, because $R_{(0)}=L_0$ is a regular field by [lem-weil-pbc-field-regular-ring]. By [lem-weil-pbc-spec-localization-away-basic-open], choose $0\\ne a\\in R$ with $D_R(a)\\subseteq\\operatorname{Reg}(R)$. For a prime $P$ of $R_a$ with contraction $p$, the mutually inverse maps $r/s\\mapsto(r/1)/(s/1)$ and $(r/a^n)/(s/a^m)\\mapsto ra^m/(sa^n)$ identify $(R_a)_P$ with $R_p$; their denominators are invertible since $a\\notin p$ and $s\\notin p$. Thus $R_a$ is regular. Its Noetherianity and that of $C_a$ follow from [lem-weil-pbc-localization-noetherian]. The map $R_a\\to C_a$ is the base change of $R\\to C$, hence weakly etale by step 2, flat by its definition, and has regular fibres by step 2. Apply [lem-weil-pbc-regular-map-ascent] to get that $C_a$ is regular. Under the product decomposition in step 7, write $C_a\\cong D_a\\times H$. For a prime $\\mathfrak t$ of $D_a$, the corresponding prime of $C_a$ is $\\mathfrak t\\times H$. The idempotent $(1,0)$ is outside this prime and becomes $1$ in its localization, while $(0,1)$ becomes $0$. Projection therefore identifies $(C_a)_{\\mathfrak t\\times H}$ with $(D_a)_{\\mathfrak t}$; its inverse sends $d/s$ to $(d,0)/(s,0)$, whose denominator is outside $\\mathfrak t\\times H$. Thus every prime local ring of $D_a$ is regular. Its Noetherianity follows from that of $C_a$, since it is a cyclic quotient algebra, by [lem-weil-pbc-finite-algebra-noetherian]. The image of $a$ in $D\\subset L$ is nonzero. For each prime $\\mathfrak d$ of $D$ avoiding $a$, the fraction maps $d/s\\mapsto(d/1)/(s/1)$ and $(d/a^n)/(s/a^m)\\mapsto da^m/(sa^n)$ identify $D_{\\mathfrak d}$ with $(D_a)_{\\mathfrak dD_a}$. Consequently $D_D(a)$ is a nonempty open subset of $\\operatorname{Spec}D$ consisting of regular local rings; it contains $(0)$.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-field-regular-ring",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-regular-map-ascent",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P7 (definition-J); algebra.tex Tags 00E0 (lemma-Zariski-topology), 00E4 (lemma-standard-open), 00FN (lemma-Noetherian-permanence), 031E (lemma-flat-over-regular-with-regular-fibre); component localizations are computed by idempotents"
+   }
+  },
+  {
+   "text": "In particular, for every prime $q\\subset B$ and every finite purely inseparable extension $L/\\kappa(q)$, steps 3–7 and 9 produce the $B$-subalgebra $D\\subset L$, finite as a $B$-module, with fraction field exactly $L$ and a nonempty open subset of its spectrum consisting of regular local rings. (The construction works for all finite extensions, so it applies to these.) These are exactly the hypotheses, with $R=B$, of [lem-exc-j2-residue-field-criterion]. Since $B$ is Noetherian by assumption, that lemma proves that $B$ is J-2. Combining with step 8 gives both requested clauses. If $B$ is the zero ring there are no primes; the Japanese conditions and the criterion are vacuous, and every unital $B$-algebra is zero, so the same conclusion holds.",
+   "uses": [
+    "lem-exc-j2-residue-field-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PC (lemma-J-2), implication (4) implies (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-field-regular-ring",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-localizations-jointly-injective",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-regular-map-ascent",
+  "lem-exc-j2-residue-field-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent proof of Greco Theorem 5.3(ii) using Stacks 092Q, 0C22, 030C and 07PC: finite normalization models and a regular principal open. The shared literature tree has no document copies; authoritative online sources were read and are listed as WANTED in report.md. This is not claimed to reproduce Greco 1971, which was not available."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,15 +234,184 @@
    "results": "{\"t\": \"2026-10-16T02:00:33Z\", \"tool\": \"grep\", \"query\": \"\\\\bG.?ring\\\\b|geometrically.?regular|universally.?Japanese|\\\\bNagata\\\\b|\\\\bJTwo\\\\b|\\\\bJ2Ring\\\\b|catenar\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/NoetherNormalization.lean\"], \"digest\": \"2836c866e340fdf5\"}",
    "date": "2026-10-16",
    "verdict": "no match: the sole hit, Mathlib/RingTheory/NoetherNormalization.lean:14, credits Nagata for Noether normalization; it states none of the searched ring properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian weakly etale algebra over a field is a finite product of separable algebraic field extensions",
+   "results": "{\"t\": \"2026-10-16T02:37:28Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian weakly etale algebra over a field is a finite product of separable algebraic field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.FormallyEtale.iff_isSeparable\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.Unramified.finiteType\"], \"digest\": \"064f3121f5c2cb76\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern etale/flat morphisms or field-algebra decompositions; none gives Nagata and J-2 ascent for arbitrary Noetherian weakly etale algebras. The RingTheory grep hit is only the bibliographic credit for Noether normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nagata and J2 properties ascend along weakly etale maps of Noetherian rings",
+   "results": "{\"t\": \"2026-10-16T02:38:47Z\", \"tool\": \"leanfinder\", \"query\": \"Nagata and J2 properties ascend along weakly etale maps of Noetherian rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsEtaleAt.comp\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.exists_subalgebra_fg\", \"RingHom.Etale.toAlgebra\", \"Algebra.Etale.comp\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.etale_algebraMap\"], \"digest\": \"d615290e1eb968a2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern etale/flat morphisms or field-algebra decompositions; none gives Nagata and J-2 ascent for arbitrary Noetherian weakly etale algebras. The RingTheory grep hit is only the bibliographic credit for Noether normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "Nagata|Japanese|JTwo|J2Ring",
+   "results": "{\"t\": \"2026-10-16T02:41:02Z\", \"tool\": \"grep\", \"query\": \"Nagata|Japanese|JTwo|J2Ring\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/NoetherNormalization.lean\"], \"digest\": \"2836c866e340fdf5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern etale/flat morphisms or field-algebra decompositions; none gives Nagata and J-2 ascent for arbitrary Noetherian weakly etale algebras. The RingTheory grep hit is only the bibliographic credit for Noether normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nagata and J2 ascend along weakly etale ring maps",
+   "results": "{\"t\": \"2026-10-16T02:41:02Z\", \"tool\": \"leansearch\", \"query\": \"Nagata and J2 ascend along weakly etale ring maps\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally Japanese rings with open regular loci in finite type algebras preserve these properties under absolutely flat homomorphisms",
+   "results": "{\"t\": \"2026-10-16T02:41:03Z\", \"tool\": \"leanfinder\", \"query\": \"Universally Japanese rings with open regular loci in finite type algebras preserve these properties under absolutely flat homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"RingHom.Flat.ofLocalizationPrime\", \"Algebra.Smooth.flat\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.localRingHom\", \"RingHom.Flat.holdsForLocalizationAway\"], \"digest\": \"adb27f7e11e9752b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern etale/flat morphisms or field-algebra decompositions; none gives Nagata and J-2 ascent for arbitrary Noetherian weakly etale algebras. The RingTheory grep hit is only the bibliographic credit for Noether normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Nagata\"",
+   "results": "{\"t\": \"2026-10-16T02:41:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"Nagata\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern etale/flat morphisms or field-algebra decompositions; none gives Nagata and J-2 ascent for arbitrary Noetherian weakly etale algebras. The RingTheory grep hit is only the bibliographic credit for Noether normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat homomorphism with flat diagonal between Noetherian rings preserves universally Japanese rings and openness of regular loci",
+   "results": "{\"t\": \"2026-10-16T02:50:03Z\", \"tool\": \"leanfinder\", \"query\": \"A flat homomorphism with flat diagonal between Noetherian rings preserves universally Japanese rings and openness of regular loci\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.Flat.propertyIsLocal\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"RingHom.Flat.localRingHom\"], \"digest\": \"fb0033164f9006f8\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: hits concern flatness and smoothness, with no Nagata or J-2 ascent."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNagata|UniversallyJapanese|IsJapanese|J.?2|WeaklyEtale",
+   "results": "{\"t\": \"2026-10-16T02:50:03Z\", \"tool\": \"grep\", \"query\": \"IsNagata|UniversallyJapanese|IsJapanese|J.?2|WeaklyEtale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/AlgebraTower.lean\", \"Mathlib/RingTheory/AlgebraTower.lean\", \"Mathlib/RingTheory/AlgebraTower.lean\", \"Mathlib/RingTheory/AlgebraTower.lean\", \"Mathlib/RingTheory/MatrixAlgebra.lean\", \"Mathlib/RingTheory/Extension/Generators.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Basic.lean\"], \"digest\": \"dabab762a15c8259\"}",
+   "date": "2026-10-16",
+   "verdict": "Broad expression J.?2 matched unrelated variable names; the meaningful hits define weakly etale algebras, not either requested conclusion. Refined by the following exact-name grep."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNagata|UniversallyJapanese|IsJapanese|JTwo|J2Ring|J2 ring|Nagata ring",
+   "results": "{\"t\": \"2026-10-16T02:50:33Z\", \"tool\": \"grep\", \"query\": \"IsNagata|UniversallyJapanese|IsJapanese|JTwo|J2Ring|J2 ring|Nagata ring\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No matches for the ring-property names in RingTheory."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeaklyEtale\"",
+   "results": "{\"t\": \"2026-10-16T02:50:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeaklyEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.WeaklyEtale.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.WeaklyEtale.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.WeaklyEtale.instIsMultiplicativeScheme\", \"AlgebraicGeometry.WeaklyEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.WeaklyEtale.instRespectsIsoScheme\", \"AlgebraicGeometry.WeaklyEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.WeaklyEtale\", \"AlgebraicGeometry.WeaklyEtale.flat\"], \"digest\": \"bae20b3780437e20\"}",
+   "date": "2026-10-16",
+   "verdict": "Hits define weakly etale morphisms and their basic permanence, not the Nagata and J-2 ascent statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-weakly-etale-excellent",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-weakly-etale-nagata-j2",
+  "worker": "stage1",
+  "summary": "Kept the statement exactly. Ten proof steps use existing field-fibre, normality, finite-normalization, product-decomposition and J-2 criterion nodes. Constructed finite normal models for every finite residue-field extension and exhibited their regular principal opens; no clause is moved to a new node. No new nodes or Mathlib leaves.",
+  "blueprint": "The second-paragraph permanence sentence of thm-exc-curve-open-dimension-general, through lem-exc-field-algebra-strict-henselization-excellent and lem-exc-weakly-etale-excellent. This item implements Greco 5.3(ii) below that sentence; the generic algebra proof is below the unit route and changes no chapter or unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-weak-etale-field",
+    "why": "Generic algebra tool in steps 1. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "Generic algebra tool in steps 1, 8. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "why": "Generic algebra tool in steps 1. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-field-regular-ring",
+    "why": "Generic algebra tool in steps 1, 9. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Generic algebra tool in steps 2. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-affine-chart-base-change-iso",
+    "why": "Generic algebra tool in steps 2. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-noetherian",
+    "why": "Generic algebra tool in steps 2, 4, 5, 9. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic algebra tool in steps 2, 9. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "why": "Generic algebra tool in steps 4. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "Generic algebra tool in steps 4. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "why": "Generic algebra tool in steps 5. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "why": "Generic algebra tool in steps 7. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-prime-localizations-jointly-injective",
+    "why": "Generic algebra tool in steps 7. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "why": "Generic algebra tool in steps 7. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Generic algebra tool in steps 9. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-regular-map-ascent",
+    "why": "Generic algebra tool in steps 9. Its precise statement supplies the field, finiteness, normality, localization or regularity fact used there; no node of the affine-line/Kummer unit provides this general algebra fact. This does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-field-regular-ring",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-localizations-jointly-injective",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-regular-map-ascent"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q02-9e67375e9",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-9e67375e9 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages, and unit/chapter route. All ten steps pass: finite normal models have the exact fraction fields and nonempty regular opens required by Stacks 07PC. Greco 5.3(ii) and Remark 5.2 match all hypotheses. No new nodes, circular dependencies, restated splits, or repairs. Accepted all 16 declared generic tool uses; concrete checks are in review.md."
+ }
 }
