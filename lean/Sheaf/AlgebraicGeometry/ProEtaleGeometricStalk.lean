@@ -11,7 +11,6 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
-import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Geometric stalks on the small pro-etale site
@@ -68,7 +67,7 @@ Thus the pointed projection `p` equalizes the arrows.
 All these finite constructions remain in the chosen bound (`def-weil-size-convention`). -/
 theorem proEtaleGeometricNeighbourhood_isCofiltered [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) :
     IsCofiltered (ProEtaleGeometricNeighbourhood y) := by
-  sorry
+  infer_instance
 
 attribute [instance] proEtaleGeometricNeighbourhood_isCofiltered
 
