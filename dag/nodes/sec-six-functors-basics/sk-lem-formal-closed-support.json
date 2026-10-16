@@ -3,64 +3,105 @@
  "blueprint": {
   "is": "sk-lem-formal-closed-support",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Sections with support in a closed subscheme",
- "statement": "[sk-lem-coefficient-heart] (3) gives a constructible sheaf with coefficients $E$ or $\\Qlb$ a\nfinite filtration whose subquotients are of the form $a_!L$, with $a\\colon S\\hookrightarrow X$\nlocally closed and $L$ lisse on $S$. To reduce statements about $R\\operatorname{Hom}(a_!L,-)$\nto cohomology on $S$ we use the functor $R\\underline\\Gamma_Z$ of sections with support in a\nclosed subscheme $Z$.\n\nLet $\\Lambda$ be admissible, and let $i\\colon Z\\hookrightarrow X$ be a closed immersion with\nopen complement $j\\colon V\\hookrightarrow X$. For a sheaf $M$ of $\\Lambda_X$-modules on\n$X_{\\mathrm{proét}}$ let $\\underline\\Gamma_Z(M)=i^*\\ker(M\\to j_*j^*M)$, the sheaf on $Z$ of\nsections of $M$ with support in $Z$, and let\n$R\\underline\\Gamma_Z\\colon D(X_{\\mathrm{proét}},\\Lambda)\\to D(Z_{\\mathrm{proét}},\\Lambda)$ be its\nright derived functor.\n\n1. $R\\underline\\Gamma_Z$ is right adjoint to the direct image $i_*$ from\n   $D(Z_{\\mathrm{proét}},\\Lambda)$ to $D(X_{\\mathrm{proét}},\\Lambda)$, also in the form\n   $R\\operatorname{Hom}_X(i_*A,K)=R\\operatorname{Hom}_Z(A,R\\underline\\Gamma_ZK)$, and\n   $$\n   R\\underline\\Gamma_ZK=i^*\\fib\\bigl(K\\longrightarrow Rj_*j^*K\\bigr)\\quad\\text{in }D(Z_{\\mathrm{proét}},\\Lambda).\n   $$\n2. Let $a=i\\circ u\\colon S\\hookrightarrow X$ with $u\\colon S\\hookrightarrow Z$ an open immersion,\n   and let $L$ be a finite locally projective $\\Lambda_S$-module with dual $L^\\vee$. Then\n   naturally in $K\\in D(X_{\\mathrm{proét}},\\Lambda)$\n   $$\n   R\\operatorname{Hom}_X(a_!L,K)=R\\Gamma\\bigl(S,L^\\vee\\otimes u^*R\\underline\\Gamma_ZK\\bigr).\n   $$",
+ "statement": "[sk-lem-coefficient-heart] (3) gives a constructible sheaf with coefficients $E$ or $\\Qlb$ a\nfinite filtration whose subquotients are of the form $a_!L$, with $a\\colon S\\hookrightarrow X$\nlocally closed and $L$ lisse on $S$. To reduce statements about $R\\operatorname{Hom}(a_!L,-)$\nto cohomology on $S$ we use the functor $R\\underline\\Gamma_Z$ of sections with support in a\nclosed subscheme $Z$.\n\nLet $X$ be a standing scheme and let $\\Lambda$ be admissible. Let $i\\colon Z\\hookrightarrow X$ be a closed immersion with\nopen complement $j\\colon V\\hookrightarrow X$. For a sheaf $M$ of $\\Lambda_X$-modules on\n$X_{\\mathrm{proét}}$ let $\\underline\\Gamma_Z(M)=i^*\\ker(M\\to j_*j^*M)$, the sheaf on $Z$ of\nsections of $M$ with support in $Z$, and let\n$R\\underline\\Gamma_Z\\colon D(X_{\\mathrm{proét}},\\Lambda)\\to D(Z_{\\mathrm{proét}},\\Lambda)$ be its\nright derived functor.\n\n1. $R\\underline\\Gamma_Z$ is right adjoint to the direct image $i_*$ from\n   $D(Z_{\\mathrm{proét}},\\Lambda)$ to $D(X_{\\mathrm{proét}},\\Lambda)$, also in the form\n   $R\\operatorname{Hom}_X(i_*A,K)=R\\operatorname{Hom}_Z(A,R\\underline\\Gamma_ZK)$, and\n   $$\n   R\\underline\\Gamma_ZK=i^*\\fib\\bigl(K\\longrightarrow Rj_*j^*K\\bigr)\\quad\\text{in }D(Z_{\\mathrm{proét}},\\Lambda).\n   $$\n2. Let $a=i\\circ u\\colon S\\hookrightarrow X$ with $u\\colon S\\hookrightarrow Z$ an open immersion,\n   and let $L$ be a finite locally projective $\\Lambda_S$-module with dual $L^\\vee$. Then\n   naturally in $K\\in D(X_{\\mathrm{proét}},\\Lambda)$\n   $$\n   R\\operatorname{Hom}_X(a_!L,K)=R\\Gamma\\bigl(S,L^\\vee\\otimes u^*R\\underline\\Gamma_ZK\\bigr).\n   $$",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/_section.md",
   "place": "node sk-lem-formal-closed-support, order 1514"
  },
  "stmt_deps": [
-  "sk-lem-coefficient-heart"
+  "sk-lem-coefficient-heart",
+  "sk-def-sfb-dc-setting"
  ],
  "proof": [
   {
-   "text": "We use three facts about the closed immersion $i$: $i^*$ is exact, preserves limits and\nsatisfies $i^*i_*=\\mathrm{id}$ (\\stacks{09AA}); $i_*$ is exact (\\stacks{09BM}); and every sheaf\n$M$ sits in the localization sequence $0\\to j_!j^*M\\to M\\to i_*i^*M\\to0$ (\\stacks{09AH}). By\nthe last fact, a sheaf whose restriction to $V$ vanishes is of the form $i_*$ of a sheaf on\n$Z$; this applies to $\\ker(M\\to j_*j^*M)$. The sheaf-level functor is\n[def-exc-proetale-sections-with-support].",
+   "text": "The standing scheme has quasi-compact open complement, and the admissible coefficient ring is covered by the situation of [det-lem-formal-closed-support-derived]. Its first assertion gives the derived right adjunction and the displayed derived-Hom identification; its distinguished triangle and consequence give $R\\underline\\Gamma_ZK=i^*\\fib(K\\to Rj_*j^*K)$. These are exactly all clauses of part (1), with the same $X,Z,i,j,\\Lambda$.",
    "uses": [
-    "def-exc-proetale-sections-with-support"
+    "det-lem-formal-closed-support-derived"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/sk-lem-formal-closed-support.proof.md",
+    "place": "*Adjunction.* and *Fiber formula.*"
+   }
   },
   {
-   "text": "*Adjunction.* A map $i_*A\\to M$ composes to zero with $M\\to j_*j^*M$, because $j^*i_*A=0$. So\nit factors through $\\ker(M\\to j_*j^*M)=i_*\\underline\\Gamma_Z(M)$, and by full faithfulness of\n$i_*$ it corresponds to a map $A\\to\\underline\\Gamma_Z(M)$. Thus $\\underline\\Gamma_Z$ is right\nadjoint to $i_*\\colon\\Mod(Z_{\\mathrm{proét}},\\Lambda)\\to\\Mod(X_{\\mathrm{proét}},\\Lambda)$. Since\n$i_*$ is exact, $\\underline\\Gamma_Z$ preserves K-injective complexes, and K-injective\nresolutions exist (\\stacks{079P}). Hence $R\\underline\\Gamma_Z$ is computed on K-injective\ncomplexes, and the adjunction passes to $R\\operatorname{Hom}$. For finite coefficients this\nis [lem-exc-proetale-closed-support]; the argument for all admissible $\\Lambda$ is\n[det-lem-formal-closed-support-adjunction].",
+   "text": "For $a=i\\circ u$ and finite locally projective $L$, the existing [det-lem-formal-closed-support-stratum] applies with the same $X,Z,S,\\Lambda,L$ and $K$. Its displayed chain identifies $R\\operatorname{Hom}_X(a_!L,K)$ with $R\\Gamma(S,L^\\vee\\otimes u^*R\\underline\\Gamma_ZK)$, naturally in $K$, which is exactly part (2).",
    "uses": [
-    "lem-exc-proetale-closed-support",
-    "det-lem-formal-closed-support-adjunction"
+    "det-lem-formal-closed-support-stratum"
    ],
-   "elementary": false
-  },
-  {
-   "text": "*Fiber formula.* For an injective sheaf $I$ the unit $I\\to j_*j^*I$ of the adjunction\n$j^*\\dashv j_*$ on $\\Mod(X_{\\mathrm{proét}},\\Lambda)$ is surjective. Indeed, by injectivity the\ninclusion $j_!j^*I\\to I$ extends along $j_!j^*I\\hookrightarrow j_*j^*I$ to a map\n$s\\colon j_*j^*I\\to I$. The composite of $s$ with the unit is the identity after applying\n$j^*$, hence is the identity, because $j_*$ is fully faithful. Now represent $K$ by a\nK-injective complex $I^\\bullet$ with injective terms (\\stacks{079P}). Then $j^*I^\\bullet$ is\nK-injective, since the left adjoint $j_!$ of $j^*$ is exact, so $j_*j^*I^\\bullet$ represents\n$Rj_*j^*K$. The termwise exact sequences\n$$\n0\\to i_*\\underline\\Gamma_Z(I^n)\\to I^n\\to j_*j^*I^n\\to0\n$$\ngive a distinguished triangle\n$i_*R\\underline\\Gamma_ZK\\to K\\to Rj_*j^*K\\to i_*R\\underline\\Gamma_ZK[1]$ in\n$D(X_{\\mathrm{proét}},\\Lambda)$. Applying $i^*$ and $i^*i_*=\\mathrm{id}$ gives the fiber formula.\nFor finite coefficients this triangle is [lem-exc-proetale-support-triangle].",
-   "uses": [
-    "lem-exc-proetale-support-triangle"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*The stratum formula.* Since $a_!=i_*u_!$, part (1), the adjunction $u_!\\dashv u^*$ and the\nidentity $\\cHom(L,-)=L^\\vee\\otimes-$ for the finite locally projective sheaf $L$ give\n$R\\operatorname{Hom}_X(i_*u_!L,K)=R\\operatorname{Hom}_Z(u_!L,R\\underline\\Gamma_ZK)=R\\Gamma(S,L^\\vee\\otimes u^*R\\underline\\Gamma_ZK)$.\nDetails: [det-lem-formal-closed-support-stratum-hom].",
-   "uses": [
-    "det-lem-formal-closed-support-stratum-hom"
-   ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/sk-lem-formal-closed-support.proof.md",
+    "place": "*The stratum formula.*"
+   }
   }
  ],
  "proof_deps": [
-  "def-exc-proetale-sections-with-support",
-  "lem-exc-proetale-closed-support",
-  "det-lem-formal-closed-support-adjunction",
-  "lem-exc-proetale-support-triangle",
-  "det-lem-formal-closed-support-stratum-hom"
+  "det-lem-formal-closed-support-derived",
+  "det-lem-formal-closed-support-stratum"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support/_section.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right adjunction and fiber formula for sections with support in a closed subscheme on pro-etale sheaves, plus Hom from extension by zero",
+   "results": "AlgebraicGeometry.Scheme.kerAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; generic scheme adjunctions only; no pro-etale closed-support theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory, RHom, kernel, fiber",
+   "results": "0 hits; loogle reported unknown identifier RHom",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|closedUpperShriek|formal.*closed.*support",
+   "results": "0 hits in Mathlib/WeilConjectures search",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived sections with closed support right adjoint and stratum Hom pro-etale",
+   "results": "CompHausLike.LocallyConstant.adjunction; generic Gamma and skyscraper adjunctions; no pro-etale closed-support theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint of closed immersion direct image on derived categories of pro-etale module sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforward; generic pushforward adjunctions only",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "CategoryTheory.Adjunction.derived; derived_counit; derived_unit in Mathlib.CategoryTheory.Functor.Derived.Adjunction, generic derived adjunction only",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|Derived.*Adjunction|sectionsWithSupport",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -76,5 +117,23 @@
   "sketch"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-formal-closed-support",
+  "worker": "stage1",
+  "summary": "Corrected the missing standalone standing-scheme scope, then composed the target from the two existing detail nodes; no new nodes were necessary. The derived detail node supplies the all-coefficient right adjunction, derived-Hom identification, and fiber formula under the standing-scheme and admissible-coefficient hypotheses; the stratum detail node supplies the natural extension-by-zero Hom chain.",
+  "blueprint": [
+   "*Adjunction.* and *Fiber formula.*: apply det-lem-formal-closed-support-derived to obtain part (1).",
+   "*The stratum formula.*: apply det-lem-formal-closed-support-stratum to obtain part (2)."
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-81021c105",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-81021c105 (reviewer sub-agent of L); spot-checked: Read the full packet, item, blueprint source/proof, and both cited nodes. The two steps exactly compose the derived adjunction/fiber formula and stratum Hom formula under matching hypotheses. The explicit standing-scheme binding repairs the previously unbound X and supplies the cited nodes' scope. No new nodes, duplicate claims, route violations, circularity, or mathematical gaps found; edge cases and recorded searches checked. Review written to review.md."
+ }
 }
