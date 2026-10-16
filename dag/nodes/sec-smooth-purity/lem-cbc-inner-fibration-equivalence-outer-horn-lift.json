@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-cbc-finite-level-proetale",
-   "place": "Opening sentence, Choose a compactification c=(j,p): inherited coherent cone-comparison foundation; the right-fibration lift-space comparison requires relative outer-horn lifting over a fixed base simplex, not merely absolute horn filling.",
+   "place": "Proof, opening sentence: \"Choose a compactification $c=(j,p)$ of $f$ with base change $c′$ as in [def-cbc-compact-support-square].\" Supplies the relative lift-space foundations used by the intervening etale-local compact-support-extension and coherent-cone splits.",
    "via": [
     "lem-cbc-right-fibration-space-fiber",
     "lem-cbc-right-fibration-morphism-space",
@@ -25,76 +25,125 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prove the final-horn assertion first. Put $K=\\Delta^{\\{0,\\ldots,n-2\\}}$ and $K_0=\\partial K$, where $\\partial\\Delta^0=\\varnothing$. Use the ordered join defined in [lem-cbc-relative-coslice-left-fibration] to identify $\\Delta^n=K\\star\\Delta^{\\{n-1,n\\}}$. The final horn is the union\n$$\\Lambda_n^n=(K\\star\\{n\\})\\cup_{K_0\\star\\{n\\}}(K_0\\star\\Delta^{\\{n-1,n\\}}).$$\nIndeed, its face omitting vertex $n-1$ is the first piece; the faces omitting $j<n-1$ are supplied by $K_0$ in the second piece. These are exactly all faces other than the face omitting $n$. The horn definition in [def-cbc-enhanced-diagrams-cones] identifies all their simplices and hence the union degreewise. For $n=2$ this is the union of edges $02$ and $12$; the empty join factor in the second piece leaves $\\Delta^{\\{1,2\\}}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-relative-coslice-left-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01H0",
+    "place": "Proposition 4.4.2.13, first displayed horn union; the face calculation is written explicitly."
+   }
+  },
+  {
+   "text": "Write $f=a|_K$ and $f_0=a|_{K_0}$ and form\n$$\\mathcal E=E_{f_0/}\\times_{B_{pf_0/}}B_{pf/}.$$\nApply [lem-cbc-relative-coslice-left-fibration] with $q=p$, $\\mathcal C=E$, $\\mathcal D=B$ and the boundary monomorphism $K_0\\hookrightarrow K$. The given $p$ is an inner fibration between small quasicategories, so its hypotheses hold. It says that $E_{f/}$ and $\\mathcal E$ are quasicategories and that both the restriction $\\rho:E_{f/}\\to\\mathcal E$ and the projection $\\theta:\\mathcal E\\to E$ are left fibrations. This invocation uses Corollary 4.3.6.12 (018K) for absolute restrictions; the 4.3.6.14 reference in the online proof is a numbering error, not an anodyne hypothesis on $K_0\\hookrightarrow K$.",
+   "uses": [
+    "lem-cbc-relative-coslice-left-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01H0",
+    "place": "Proposition 4.4.2.13, definition of the fiber product and left fibrations rho and theta; use 01BZ/018K for restrictions."
+   }
+  },
+  {
+   "text": "The first restriction $a|_{K\\star\\{n\\}}$ defines a vertex $Y$ of $E_{f/}$. The pair consisting of $a|_{K_0\\star\\Delta^{\\{n-1,n\\}}}$ and the prescribed base simplex $\\beta:K\\star\\Delta^{\\{n-1,n\\}}\\to B$ defines an edge $\\bar v:\\bar X\\to\\rho(Y)$ in $\\mathcal E$: their images agree on $K_0\\star\\Delta^1$ because $pa=\\beta|_{\\Lambda_n^n}$. At the final endpoint, the two coordinates agree with $\\rho(Y)$ because they are restrictions to $K\\star\\{n\\}$ and $K_0\\star\\{n\\}$. By the explicit formula for $\\theta$, the projected edge $\\theta(\\bar v)$ is exactly $a|_{[n-1,n]}$, which is an equivalence by hypothesis.",
+   "uses": [
+    "lem-cbc-relative-coslice-left-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01H0",
+    "place": "Proposition 4.4.2.13, construction of Y and the edge bar-v; expand the degreewise pullback and endpoint conditions."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-left-fibration-equivalence-lift] to $\\theta$ between the quasicategories $\\mathcal E$ and $E$. Since $\\theta(\\bar v)$ is an equivalence, conservativity makes $\\bar v$ an equivalence in $\\mathcal E$. Apply the prescribed-target clause of the same node to the left fibration $\\rho:E_{f/}\\to\\mathcal E$, the equivalence $\\bar v:\\bar X\\to\\rho(Y)$ and the vertex $Y$. It gives an edge $v:X\\to Y$ in $E_{f/}$ satisfying $\\rho(v)=\\bar v$ exactly, including the prescribed target $Y$.",
+   "uses": [
+    "lem-cbc-left-fibration-equivalence-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01H0",
+    "place": "Proposition 4.4.2.13, final conservativity and prescribed-target lift; Proposition 4.4.2.11 (019K), Example 4.4.1.11 (01EW)."
+   }
+  },
+  {
+   "text": "By the explicit join-coslice definition in [lem-cbc-relative-coslice-left-fibration], the edge $v$ is a map $h:K\\star\\Delta^1\\to E$ fixed as $f$ on $K$. Its target $Y$ says $h|_{K\\star\\{n\\}}=a|_{K\\star\\{n\\}}$. The first coordinate of $\\rho(v)=\\bar v$ says $h|_{K_0\\star\\Delta^1}=a|_{K_0\\star\\Delta^1}$; its second coordinate says $ph=\\beta$ on the entire join. The union in step 1 therefore gives $h|_{\\Lambda_n^n}=a$. Under $K\\star\\Delta^1=\\Delta^n$, take $\\widetilde\\beta=h$. These are exactly the two required equalities, with the original base simplex rather than a homotopic replacement.",
+   "uses": [
+    "lem-cbc-relative-coslice-left-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01H0",
+    "place": "Proposition 4.4.2.13, unwinding rho(v)=bar-v and the displayed pushout."
+   }
+  },
+  {
+   "text": "For the initial horn use the simplex-order involution $\\alpha:[r]\\to[s]\\mapsto\\alpha^{\\mathrm{rev}}:[r]\\to[s]$, where $\\alpha^{\\mathrm{rev}}(j)=s-\\alpha(r-j)$. Precomposition defines opposite simplicial sets, with the same degreewise sets and reversed faces. It takes face $i$ in dimension $n$ to face $n-i$, hence interchanges the initial and final horns and preserves all inner indices. Thus $E^{\\mathrm{op}}$ and $B^{\\mathrm{op}}$ are quasicategories and $p^{\\mathrm{op}}$ is an inner fibration, by transporting each lifting square through this involution. The inverse edge and two inverse triangles in [def-cbc-enhanced-diagrams-cones] reverse to inverse witnesses, so the hypothesis on $a|_{[0,1]}$ becomes the final-edge hypothesis in $E^{\\mathrm{op}}$. Apply steps 1--5 there and reverse the filler again. Restriction and composition are preserved by precomposition, so both equalities return to $\\widetilde\\beta|_{\\Lambda_0^n}=a$ and $p\\widetilde\\beta=\\beta$ exactly.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01H0",
+    "place": "Initial-horn dual of Proposition 4.4.2.13; explicit order-reversal argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-left-fibration-equivalence-lift",
+  "lem-cbc-relative-coslice-left-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01H0",
+  "place": "Proposition 4.4.2.13, expanded coslice-pullback proof and explicit initial-horn dual. Online source read; archived source WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For an inner fibration between quasicategories, an outer horn with equivalence extremal edge has a filler over the prescribed base simplex",
-   "results": "{\"t\": \"2026-10-16T19:38:36Z\", \"tool\": \"leanfinder\", \"query\": \"For an inner fibration between quasicategories, an outer horn with equivalence extremal edge has a filler over the prescribed base simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₂.exists_desc\", \"SSet.modelCategoryQuillen.J\", \"SSet.horn₃₁.ι₂_desc\"], \"digest\": \"7e892c2511d5f6d7\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-103 and Basic.lean:35-58. InnerFibration is only the inner-horn lifting condition; quasicategory_of_innerFibration transfers inner-horn filling from the base. The returned hornFilling declarations fill absolute inner horns, and the Quillen declarations assume lifting of all horns. Ordinary-category cocartesian and bicategorical Kan declarations have different objects. None gives relative outer-horn lifting along an equivalence edge. The second semantic phrasing returns strict-Segal/quasicategory and truncated-homotopy definitions, not this lifting assertion."
+   "query": "Relative outer horn lifting over a prescribed base simplex for an inner fibration when the extremal edge is an equivalence",
+   "results": "{\"t\": \"2026-10-16T21:24:36Z\", \"tool\": \"leanfinder\", \"query\": \"Relative outer horn lifting over a prescribed base simplex for an inner fibration when the extremal edge is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.hornFilling\", \"SSet.KanComplex.hornFilling\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₂.exists_desc\", \"SSet.quasicategory_of_filler\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\"], \"digest\": \"4d7344603c3e8de5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-100, Basic.lean:34-58 and SimplicialSet/CategoryWithFibrations.lean:43-102. The inner-fibration declarations state only inner-horn lifting and transfer quasicategory structure. hornFilling fills absolute inner horns; the Quillen lifting instance assumes an all-horn fibration. The second phrasing returns these same primitives, strict-Segal and two-truncated composition fillers. None supplies relative outer-horn lifting along an equivalence."
   },
   {
    "tool": "loogle",
-   "query": "\"InnerFibration\", \"horn\"",
-   "results": "{\"t\": \"2026-10-16T19:38:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"horn\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-103 and Basic.lean:35-58. InnerFibration is only the inner-horn lifting condition; quasicategory_of_innerFibration transfers inner-horn filling from the base. The returned hornFilling declarations fill absolute inner horns, and the Quillen declarations assume lifting of all horns. Ordinary-category cocartesian and bicategorical Kan declarations have different objects. None gives relative outer-horn lifting along an equivalence edge. The second semantic phrasing returns strict-Segal/quasicategory and truncated-homotopy definitions, not this lifting assertion."
+   "query": "\"InnerFibration\", \"outer horn\", \"Equiv\"",
+   "results": "{\"t\": \"2026-10-16T21:24:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"outer horn\\\", \\\"Equiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-100, Basic.lean:34-58 and SimplicialSet/CategoryWithFibrations.lean:43-102. The inner-fibration declarations state only inner-horn lifting and transfer quasicategory structure. hornFilling fills absolute inner horns; the Quillen lifting instance assumes an all-horn fibration. The second phrasing returns these same primitives, strict-Segal and two-truncated composition fillers. None supplies relative outer-horn lifting along an equivalence."
   },
   {
    "tool": "grep",
    "query": "outer.?horn|equivalence.*horn|horn.*equivalence|InnerFibration",
-   "results": "{\"t\": \"2026-10-16T19:38:37Z\", \"tool\": \"grep\", \"query\": \"outer.?horn|equivalence.*horn|horn.*equivalence|InnerFibration\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"12ede9b02dab9486\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-103 and Basic.lean:35-58. InnerFibration is only the inner-horn lifting condition; quasicategory_of_innerFibration transfers inner-horn filling from the base. The returned hornFilling declarations fill absolute inner horns, and the Quillen declarations assume lifting of all horns. Ordinary-category cocartesian and bicategorical Kan declarations have different objects. None gives relative outer-horn lifting along an equivalence edge. The second semantic phrasing returns strict-Segal/quasicategory and truncated-homotopy definitions, not this lifting assertion."
+   "results": "{\"t\": \"2026-10-16T21:24:34Z\", \"tool\": \"grep\", \"query\": \"outer.?horn|equivalence.*horn|horn.*equivalence|InnerFibration\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"12ede9b02dab9486\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-100, Basic.lean:34-58 and SimplicialSet/CategoryWithFibrations.lean:43-102. The inner-fibration declarations state only inner-horn lifting and transfer quasicategory structure. hornFilling fills absolute inner horns; the Quillen lifting instance assumes an all-horn fibration. The second phrasing returns these same primitives, strict-Segal and two-truncated composition fillers. None supplies relative outer-horn lifting along an equivalence.",
+   "subdirectory": "AlgebraicTopology/Quasicategory"
   },
   {
    "tool": "leansearch",
-   "query": "Relative outer horn lifting along an invertible edge of an infinity category for an inner fibration",
-   "results": "{\"t\": \"2026-10-16T19:38:38Z\", \"tool\": \"leansearch\", \"query\": \"Relative outer horn lifting along an invertible edge of an infinity category for an inner fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"CategoryTheory.HasLiftingPropertyFixedBot\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Bicategory.LeftLift.IsAbsKan.ofIsoAbsKan\"], \"digest\": \"a7bbcca09d166a6e\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-103 and Basic.lean:35-58. InnerFibration is only the inner-horn lifting condition; quasicategory_of_innerFibration transfers inner-horn filling from the base. The returned hornFilling declarations fill absolute inner horns, and the Quillen declarations assume lifting of all horns. Ordinary-category cocartesian and bicategorical Kan declarations have different objects. None gives relative outer-horn lifting along an equivalence edge. The second semantic phrasing returns strict-Segal/quasicategory and truncated-homotopy definitions, not this lifting assertion."
+   "query": "Relative outer horn lifting along an equivalence edge for an inner fibration between quasicategories",
+   "results": "{\"t\": \"2026-10-16T21:24:35Z\", \"tool\": \"leansearch\", \"query\": \"Relative outer horn lifting along an equivalence edge for an inner fibration between quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"CategoryTheory.Bicategory.LeftLift.IsAbsKan.ofIsoAbsKan\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.Functor.relativelyRepresentable.lift.congr_simp\"], \"digest\": \"3015d8bcdfeafcf8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-100, Basic.lean:34-58 and SimplicialSet/CategoryWithFibrations.lean:43-102. The inner-fibration declarations state only inner-horn lifting and transfer quasicategory structure. hornFilling fills absolute inner horns; the Quillen lifting instance assumes an all-horn fibration. The second phrasing returns these same primitives, strict-Segal and two-truncated composition fillers. None supplies relative outer-horn lifting along an equivalence."
   },
   {
    "tool": "leanfinder",
-   "query": "Every equivalence edge of a quasicategory is both cartesian and cocartesian for any inner fibration",
-   "results": "{\"t\": \"2026-10-16T19:38:46Z\", \"tool\": \"leanfinder\", \"query\": \"Every equivalence edge of a quasicategory is both cartesian and cocartesian for any inner fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.quasicategory\", \"SSet.StrictSegal.quasicategory'\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Quasicategory\", \"SSet.Truncated.Quasicategory₂\", \"SSet.Truncated.instSetoidEdge\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopicR.homotopicL\"], \"digest\": \"57f77cf136caac7c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-103 and Basic.lean:35-58. InnerFibration is only the inner-horn lifting condition; quasicategory_of_innerFibration transfers inner-horn filling from the base. The returned hornFilling declarations fill absolute inner horns, and the Quillen declarations assume lifting of all horns. Ordinary-category cocartesian and bicategorical Kan declarations have different objects. None gives relative outer-horn lifting along an equivalence edge. The second semantic phrasing returns strict-Segal/quasicategory and truncated-homotopy definitions, not this lifting assertion."
-  },
-  {
-   "tool": "grep",
-   "query": "outer|[Ee]quivalence|[Ii]so",
-   "results": "{\"t\": \"2026-10-16T19:38:46Z\", \"tool\": \"grep\", \"query\": \"outer|[Ee]quivalence|[Ii]so\", \"sub\": \"AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"65\", \"88\", \"89\"], \"digest\": \"22a9bdaa17883a16\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-103 and Basic.lean:35-58. InnerFibration is only the inner-horn lifting condition; quasicategory_of_innerFibration transfers inner-horn filling from the base. The returned hornFilling declarations fill absolute inner horns, and the Quillen declarations assume lifting of all horns. Ordinary-category cocartesian and bicategorical Kan declarations have different objects. None gives relative outer-horn lifting along an equivalence edge. The second semantic phrasing returns strict-Segal/quasicategory and truncated-homotopy definitions, not this lifting assertion."
-  },
-  {
-   "tool": "grep",
-   "query": "InnerFibration|cartesian.*[Ee]dge|[Ee]dge.*cartesian",
-   "results": "{\"t\": \"2026-10-16T20:00:57Z\", \"tool\": \"grep\", \"query\": \"InnerFibration|cartesian.*[Ee]dge|[Ee]dge.*cartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"68f9223828c07882\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. Read Quasicategory/InnerFibration.lean:29-100 and Basic.lean:34-60: these only define and fill inner horns. Read SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-78: innerFibration_pullbackObjObjπ proves another inner fibration, not an outer filler along an equivalence. The Quillen hits require an all-horn fibration; no returned declaration states the relative outer-horn assertion."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"InnerFibration\", \"Equiv\"",
-   "results": "{\"t\": \"2026-10-16T20:00:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"Equiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. Read Quasicategory/InnerFibration.lean:29-100 and Basic.lean:34-60: these only define and fill inner horns. Read SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-78: innerFibration_pullbackObjObjπ proves another inner fibration, not an outer filler along an equivalence. The Quillen hits require an all-horn fibration; no returned declaration states the relative outer-horn assertion."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Isomorphisms in a quasi-category are cartesian morphisms for an inner fibration, so terminal horns lift relative to the base",
-   "results": "{\"t\": \"2026-10-16T20:01:07Z\", \"tool\": \"leanfinder\", \"query\": \"Isomorphisms in a quasi-category are cartesian morphisms for an inner fibration, so terminal horns lift relative to the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₂.exists_desc\", \"SSet.quasicategory_of_filler\", \"SSet.Truncated.Quasicategory₂\", \"SSet.Truncated.liftOfStrictSegal.hσ'₁\"], \"digest\": \"24e034859625b961\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. Read Quasicategory/InnerFibration.lean:29-100 and Basic.lean:34-60: these only define and fill inner horns. Read SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-78: innerFibration_pullbackObjObjπ proves another inner fibration, not an outer filler along an equivalence. The Quillen hits require an all-horn fibration; no returned declaration states the relative outer-horn assertion."
+   "query": "Every invertible edge in the total quasicategory is cartesian and cocartesian for any inner fibration",
+   "results": "{\"t\": \"2026-10-16T21:25:03Z\", \"tool\": \"leanfinder\", \"query\": \"Every invertible edge in the total quasicategory is cartesian and cocartesian for any inner fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.quasicategory_of_filler\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Truncated.Quasicategory₂.fill21\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.StrictSegal.quasicategory\", \"SSet.Truncated.Quasicategory₂.fill31\"], \"digest\": \"572566a18a37e65e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:29-100, Basic.lean:34-58 and SimplicialSet/CategoryWithFibrations.lean:43-102. The inner-fibration declarations state only inner-horn lifting and transfer quasicategory structure. hornFilling fills absolute inner horns; the Quillen lifting instance assumes an all-horn fibration. The second phrasing returns these same primitives, strict-Segal and two-truncated composition fillers. None supplies relative outer-horn lifting along an equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-right-fibration-space-fiber",
@@ -102,5 +151,20 @@
   "group": "ND"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "worker": "stage1",
+  "summary": "Rechecked and repaired the earlier sandbox attempt. Kept the exact relative statement, supplied six complete steps using two strictly smaller coslice/left-fibration inputs, defined the ordered join and all restriction maps explicitly, corrected the source corollary reference, reran and recorded the actual Mathlib searches with a second semantic phrasing for every node, and regenerated exact citation quotes.",
+  "blueprint": "Realizes the opening sentence \"Choose a compactification c=(j,p)\" of thm-cbc-finite-level-proetale (current main-20261015 proof in sec-six-functors-basics/sk-prop-sf-cbc), through its inherited etale-local compact-support-extension, coherent-cone and right-fibration lift-space ancestry. The unit/chapter route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-cf1f24471",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-cf1f24471 (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing; review.md has the step-by-step checks. The cited Kerodon pages (01H0, 01BZ, 018F, 018K, 019K, 01EW) are not archived in the literature tree, so I checked every claim mathematically rather than against the page text. The item is recorded as WANTED with proof_origin.by=agent, as the brief requires. ITEM: statement unchanged, true (equivalences in the total quasicategory are p-(co)cartesian), and matches its use in lem-cbc-right-fibration-space-fiber, which needs a filler over the prescribed simplex beta. It is not a target node, so the base-change and coefficient checks do not apply. STEPS: S1 checked face by face: Lambda^n_n = (K*{n}) union (dK*Delta^1) with K=Delta^{0..n-2}; the face omitting n-1 is the first piece, faces omitting j<n-1 lie in dK*Delta^1, and n=2 gives edges 02 and 12. S2 applies the coslice node with q=p and the monomorphism dK->K, both hypotheses met. S3: bar-v=(a|dK*Delta^1, beta) is an edge of the fiber product because pa=beta on the horn and beta|K=pf; its target is rho(Y) and theta(bar-v)=a|[n-1,n]. S4 applies conservativity to theta first, then the prescribed-target clause to rho. S5 unwinds rho(v)=bar-v plus the target Y, so by S1 the filler restricts to a and lies over the original beta. S6: order reversal sends face i to face n-i, swaps the two outer horns, keeps inner horns, and swaps the two inverse witnesses. NEW NODES: lem-cbc-relative-coslice-left-fibration is true. Coslices and the fiber product E are quasicategories; rho is the relative restriction theorem; theta factors as a pullback of an absolute restriction followed by a coslice projection, both left fibrations. Tested on K empty, K0=K, D a point and q the identity. lem-cbc-left-fibration-equivalence-lift is true: conservativity has a standard proof that does not use the item, so there is no cycle. Prescribed-target clause checked directly: lift an inverse e' from y by the 1-horn, then the witness simplex (e',e,id) by the 2-horn with edges t and id_y; edge 12 lies over exactly e. Both nodes are statement-only and self-contained, with notions cited from def-cbc-enhanced-diagrams-cones and def-coef-infinity-fibrations. Neither restates an item clause. DUPLICATES: scanned all DAG statements for left fibration, coslice, conservativity, isofibration, cocartesian, join and the Kerodon tags, and read the nearest candidates, including slice-right-fibration (absolute only), core-kan-fibration, isofibration-exponentiation, relative-kan-existence and the absolute outer-horn filling node. None states these results. ROUTE AND FIELDS: no unit or chapter change and no tool_uses. Blueprint ancestor, via lists and the quoted proof sentence (line 5 of the ancestor proof) are correct. All three Mathlib search kinds are recorded for each node with no match. No SGA used."
+ }
 }

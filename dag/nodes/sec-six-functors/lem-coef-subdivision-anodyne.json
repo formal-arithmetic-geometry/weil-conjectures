@@ -1,0 +1,114 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-subdivision-ex-homotopy-adjunction",
+  "date": "2026-10-17",
+  "group": "Q91"
+ },
+ "status": "unsplit",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "id": "lem-coef-subdivision-anodyne",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and the following naturality and triangle-identity sentences; foundational enhancement of finite coefficient adjunction diagrams: iterated Ex gives a Kan replacement, using the one-step Ex comparison. Input for the Kan-target reduction: the subdivision–Ex adjunction respects homotopy. Smaller input: subdivision preserves anodyne maps, used to compare restrictions along the subdivided endpoint inclusion in Kerodon 00Z6.",
+   "via": [
+    "lem-coef-subdivision-ex-homotopy-adjunction",
+    "lem-coef-ex-comparison-weak-equivalence",
+    "lem-coef-ex-infinity-finite-products",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Subdivision preserves anodyne extensions",
+ "statement": "Use small simplicial sets of [def-weil-pbc-simplicial-set] and the subdivision functor $\\operatorname{Sd}$ of [lem-coef-subdivision-face-poset-calculus]. As in [lem-coef-sset-anodyne-pushout-product], a Kan fibration is a map having the right lifting property against every horn inclusion $\\Lambda_k^n\\hookrightarrow\\Delta^n$, $n\\geq1$, $0\\leq k\\leq n$, and a map is anodyne if it has the left lifting property against every Kan fibration. For every anodyne map $f:X\\to Y$ of small simplicial sets, $\\operatorname{Sd}(f):\\operatorname{Sd}X\\to\\operatorname{Sd}Y$ is anodyne.",
+ "source": {
+  "document": "https://kerodon.net/tag/00Z3",
+  "place": "Proposition 3.3.5.3 (00Z3), including the horn-filtration proof; Kerodon tag, not a Stacks tag. Read online 2026-10-17; archive WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-subdivision-face-poset-calculus",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Subdivision of an anodyne extension of simplicial sets is an anodyne extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Subcomplex.Pairing\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing\", \"type\": \"{X : SSet} → X.Subcomplex → Type u\", \"doc\": \"For a simplicial set $X$ and a subcomplex $S$ of $X$, this defines a type associated to the pairing of $X$ and $S$. The construction takes a simplicial set $X$ and one of its subcomplexes $S$ as input\"}\n  {\"name\": \"SSet.Subcomplex.Pairing.II\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing\", \"type\": \"{X : SSet} → {A : X.Subcomplex} → A.Pairing → Set A.N\", \"doc\": \"For a simplicial set $X$ and a subcomplex $S$ of $X$, this defines a type associated to the pairing of $X$ and $S$. The construction takes a simplicial set $X$ and one of its subcomplexes $S$ as input\"}\n  {\"name\": \"SSet.Subcomplex.Pairing.IsProper\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing\", \"type\": \"{X : SSet} → {A : X.Subcomplex} → A.Pairing → Prop\", \"doc\": \"For a simplicial set $X$ and a subcomplex $A$ of $X$, a predicate that determines whether a given pairing associated to $X$ and $A$ satisfies the properness condition required in the context of anodyn\"}\n  {\"name\": \"SSet.Subcomplex.PairingCore\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore\", \"type\": \"{X : SSet} → X.Subcomplex → Type (max u (v + 1))\", \"doc\": \"For a simplicial set $X$ and a subcomplex $A$ of $X$, this inductive type constructs a type associated with $A$, serving as a foundational component in the pairing mechanism for anodyne extensions.\"}\n  {\"name\": \"SSet.Subcomplex.PairingCore.surjective'\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore\", \"type\": \"∀ {X : SSet} {A : X.Subcomplex} (self : A.PairingCore) (x : A.N),\\n  ∃ s,\\n    x.toS = { dim := self.dim s + 1, simplex := self.simplex s } ∨\\n      x.toS = { dim := self.dim s, simplex := CategoryTheory.SimplicialObject.δ X (self.index s) (self.simplex s) }\", \"doc\": \"For any non-degenerate simplex $x$ in a subcomplex $A$ of a simplicial set $X$, there exists an element $s$ in the pairing core $A.\\\\text{PairingCore}$ such that $x$ is either (1) the $(\\\\dim(s)+1)$-dim\"}\n  {\"name\": \"SSet.Subcomplex.Pairing.I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing\", \"type\": \"{X : SSet} → {A : X.Subcomplex} → A.Pairing → Set A.N\", \"doc\": \"Given a simplicial set $X$ and a subcomplex $S$, the function $I$ maps the pairing structure associated to $(X,S)$ to the set of non-degenerate simplices in $S$. This constructs a subset of $N(S)$ (th\"}\n  {\"name\": \"SSet.Subcomplex.PairingCore.type₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore\", \"type\": \"{X : SSet} → {A : X.Subcomplex} → (h : A.PairingCore) → h.ι → A.N\", \"doc\": \"For a simplicial set $X$, subcomplex $A$, and element $s$ in the image of the pairing core inclusion map $\\\\iota$, this function constructs a non-degenerate simplex in $A$ by applying the face map $\\\\de\"}\n  {\"name\": \"SSet.Subcomplex.Pairing.IsRegular\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing\", \"type\": \"{X : SSet} → {A : X.Subcomplex} → A.Pairing → Prop\", \"doc\": \"For a simplicial set $X$ and a subcomplex $A$ of $X$, this defines a property (proposition) associated to the pairing structure of $X$ and $A$, serving as a regularity condition in the context of anod\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Read all returned types. Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:46 lists stability under subdivision as TODO; the horn and pairing declarations do not assert subdivision preservation. No exact or one-line specialization found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Barycentric subdivision preserves anodyne morphisms of simplicial sets",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.nonDegenerate_iff_of_mono\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Degenerate\", \"type\": \"{Y : SSet.{u}} (f : X ⟶ Y) [Mono f] (x : X _⦋n⦌) : f.app _ x ∈ Y.nonDegenerate n ↔ x ∈ X.nonDegenerate n\", \"doc\": \"For any monomorphism $ f : X \\to Y $ between simplicial sets and any $ n $-simplex $ x $ in $ X $, the image $ f(x) $ is a non-degenerate $ n $-simplex in $ Y $ if and only if $ x $ is a non-degenerate\"}\n  {\"name\": \"SSet.instBalanced\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Subcomplex\", \"type\": \": Balanced SSet.{u}\", \"doc\": \"The category of simplicial sets is balanced, meaning every monomorphism is an epimorphism and every epimorphism is a monomorphism.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.J\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": MorphismProperty SSet.{u}\", \"doc\": \"The morphism property in the category of simplicial sets generated by all horn inclusions, defined as the supremum over all dimensions $n$ of the inclusions of the $i$-th horn $\\\\Lambda[n+1, i]$ into t\"}\n  {\"name\": \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": J.{u} ≤ monomorphisms _\", \"doc\": \"In the category of simplicial sets, the morphism property generated by all horn inclusions (corresponding to the generating acyclic cofibrations in the Quillen model structure) is contained within the\"}\n  {\"name\": \"SimplexCategoryGenRel.instHasFactorizationP_σP_δ\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.GeneratorsRelations.EpiMono\", \"type\": \": MorphismProperty.HasFactorization P_σ P_δ\", \"doc\": \"In the simplex category presented by generators and relations, every morphism factors as a composition of a degeneracy morphism followed by a face map, for some intermediate object.\"}\n  {\"name\": \"SSet.instIsStableUnderCoproductsMonomorphismsOfHasCoproductsType\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Monomorphisms\", \"type\": \"[HasCoproducts.{v'} (Type u)] : IsStableUnderCoproducts.{v'} (monomorphisms SSet.{u})\", \"doc\": \"If the category of types has coproducts, then monomorphisms in the category of simplicial sets are stable under coproducts.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.I\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": MorphismProperty SSet.{u}\", \"doc\": \"The morphism property defined by the family of inclusions of the boundary of the standard $n$-simplex $\\\\partial\\\\Delta[n]$ into the standard $n$-simplex $\\\\Delta[n]$ for each natural number $n$. This co\"}\n  {\"name\": \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": I.{u} ≤ monomorphisms _\", \"doc\": \"For each natural number $n$, the canonical inclusion morphism $\\\\iota: \\\\partial\\\\Delta[n] \\\\to \\\\Delta[n]$ from the boundary of the standard $n$-simplex to the $n$-simplex is a monomorphism in the categor\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Read all returned types. Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:46 lists stability under subdivision as TODO; the horn and pairing declarations do not assert subdivision preservation. No exact or one-line specialization found."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.sd, SSet.anodyneExtensions",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Read all returned types. Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:46 lists stability under subdivision as TODO; the horn and pairing declarations do not assert subdivision preservation. No exact or one-line specialization found."
+  },
+  {
+   "tool": "grep",
+   "query": "(sd|subdivision).*anodyne|anodyne.*(sd|subdivision)",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"46\", \"text\": \"* show that anodyne extensions are stable under the subdivision functor (@joelriou)\"}\nSearch directory under Mathlib/: AlgebraicTopology",
+   "date": "2026-10-17",
+   "verdict": "no match: Read all returned types. Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:46 lists stability under subdivision as TODO; the horn and pairing declarations do not assert subdivision preservation. No exact or one-line specialization found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The subdivision of a horn inclusion is an anodyne extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.KanComplex.hornFilling\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex\", \"type\": \"∀ {S : SSet} [S.KanComplex] {n : ℕ} {i : Fin (n + 2)} (σ₀ : (SSet.horn (n + 1) i).toSSet ⟶ S),\\n  ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 1) i).ι σ\", \"doc\": \"For any Kan complex $ S $, every horn inclusion $ \\\\Lambda^{i}_{n+1} \\\\to S $ admits a filler: there exists a simplex $ \\\\sigma: \\\\Delta^{n+1} \\\\to S $ such that $ \\\\sigma_0 = \\\\Lambda^{i}_{n+1} \\\\xhookrighta\"}\n  {\"name\": \"SSet.face_le_horn\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Horn\", \"type\": \"∀ {n : ℕ} (i j : Fin (n + 1)), i ≠ j → SSet.stdSimplex.face {i}ᶜ ≤ SSet.horn n j\", \"doc\": \"For distinct indices $i$ and $j$, the face subcomplex of the standard $n$-simplex corresponding to the complement of $\\\\{i\\\\}$ is contained within the $n$-dimensional horn missing the $j$-th face. Forma\"}\n  {\"name\": \"SSet.horn.faceι\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Horn\", \"type\": \"{n : ℕ} → (i j : Fin (n + 1)) → j ≠ i → ((SSet.stdSimplex.face {j}ᶜ).toSSet ⟶ (SSet.horn n i).toSSet)\", \"doc\": \"A morphism in the category of simplicial sets constructed by including the standard simplex face (excluding vertex $ j $) into the $ i $-th horn $ \\\\Lambda[n, i] $ of the $ n $-simplex, valid when $ j \"}\n  {\"name\": \"SSet.horn_eq_iSup\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Horn\", \"type\": \"∀ (n : ℕ) (i : Fin (n + 1)), SSet.horn n i = ⨆ j, SSet.stdSimplex.face {↑j}ᶜ\", \"doc\": \"The i-th horn Λ^n_i of the standard n-simplex Δ^n is equal to the union (supremum) of all faces of Δ^n corresponding to indices j ≠ i, expressed as the indexed supremum over the complement of {i} in F\"}\n  {\"name\": \"SSet.horn\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Horn\", \"type\": \"(n : ℕ) → Fin (n + 1) → (SSet.stdSimplex.obj (SimplexCategory.mk n)).Subcomplex\", \"doc\": \"The simplicial subcomplex of the standard n-simplex $\\\\Delta[n]$ obtained by removing the i-th face, defined as the set of simplices whose image under the standard simplex morphism does not cover the e\"}\n  {\"name\": \"SSet.horn.ι\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Horn\", \"type\": \"{n : ℕ} → (i j : Fin (n + 2)) → j ≠ i → (SSet.stdSimplex.obj (SimplexCategory.mk n) ⟶ (SSet.horn (n + 1) i).toSSet)\", \"doc\": \"A morphism from the standard $n$-simplex $\\\\Delta[n]$ to the $(n+1)$-dimensional horn $\\\\Lambda[n+1, i]$ missing the $i$-th face, constructed via the Yoneda equivalence by lifting the standard simplex's\"}\n  {\"name\": \"SSet.horn.face\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Horn\", \"type\": \"{n : ℕ} → (i j : Fin (n + 2)) → j ≠ i → (SSet.horn (n + 1) i).toSSet.obj (Opposite.op (SimplexCategory.mk n))\", \"doc\": \"The $j$-th face map of the $(n+1)$-dimensional horn $\\\\Lambda[n+1, i]$ missing the $i$-th face, constructed via the Yoneda equivalence by lifting the standard simplex's face map $\\\\delta^j$, ensuring it\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling'\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ {S : SSet} [self : S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S),\\n  0 < i → i < Fin.last (n + 2) → ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 2) i).ι σ\", \"doc\": \"In a quasi-category $ S $, for any inner horn $ \\\\Lambda^i[n+2] \\\\to S $ with $ 0 < i < n+2 $, there exists a filler $ \\\\Delta[n+2] \\\\to S $ such that the composition of the canonical inclusion $ \\\\Lambda^\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Read all returned types. Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:46 lists stability under subdivision as TODO; the horn and pairing declarations do not assert subdivision preservation. No exact or one-line specialization found."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bsd\\b|\\bex\\b",
+   "results": "[grep] OK 0 hit(s)\nSearch directory under Mathlib/: AlgebraicTopology/SimplicialSet/AnodyneExtensions",
+   "date": "2026-10-17",
+   "verdict": "no match: Read all returned types. Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:46 lists stability under subdivision as TODO; the horn and pairing declarations do not assert subdivision preservation. No exact or one-line specialization found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Barycentric subdivision sends every acyclic cofibration of simplicial sets to an acyclic cofibration",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithCofibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property defined by the family of inclusions of the boundary of the standard $n$-simplex $\\\\partial\\\\Delta[n]$ into the standard $n$-simplex $\\\\Delta[n]$ for each natural number $n$. This co\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [CategoryTheory.Mono f], HomotopicalAlgebra.Cofibration f\", \"doc\": \"In the category of simplicial sets equipped with the Quillen model structure, every monomorphism $ f $ is a cofibration. This establishes that the class of cofibrations coincides with the class of mon\"}\n  {\"name\": \"SSet.modelCategoryQuillen.J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property in the category of simplicial sets generated by all horn inclusions, defined as the supremum over all dimensions $n$ of the inclusions of the $i$-th horn $\\\\Lambda[n+1, i]$ into t\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.cofibrations SSet = CategoryTheory.MorphismProperty.monomorphisms SSet\", \"doc\": \"In the category of simplicial sets equipped with the Quillen model structure, the class of cofibrations coincides with the class of monomorphisms.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y), HomotopicalAlgebra.Cofibration f ↔ CategoryTheory.Mono f\", \"doc\": \"In the category of simplicial sets, a morphism $ f $ is a cofibration if and only if it is a monomorphism.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ (n : ℕ), SSet.modelCategoryQuillen.I (SSet.boundary n).ι\", \"doc\": \"For each natural number $n$, the canonical inclusion morphism $\\\\iota: \\\\partial\\\\Delta[n] \\\\to \\\\Delta[n]$ from the boundary of the standard $n$-simplex to the standard $n$-simplex is an element of the ge\"}\n  {\"name\": \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ (n : ℕ) (i : Fin (n + 2)), SSet.modelCategoryQuillen.J (SSet.horn (n + 1) i).ι\", \"doc\": \"For any natural number $ n $ and index $ 0 \\\\leq i \\\\leq n+1 $, the inclusion morphism $ \\\\Lambda^{i}[n+1] \\\\to \\\\Delta[n+1] $ of the $ i $-th horn into the standard $ (n+1) $-simplex is a generating acycl\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader checked all returned types; none asserts stability of anodyne extensions under subdivision. Mathlib AnodyneExtensions/Basic.lean:46 still lists that result as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.sd, \"anodyne\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader checked all returned types; none asserts stability of anodyne extensions under subdivision. Mathlib AnodyneExtensions/Basic.lean:46 still lists that result as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "subdivision|sdExAdjunction|\\bex\\b",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"46\", \"text\": \"* show that anodyne extensions are stable under the subdivision functor (@joelriou)\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader checked all returned types; none asserts stability of anodyne extensions under subdivision. Mathlib AnodyneExtensions/Basic.lean:46 still lists that result as TODO."
+  }
+ ]
+}

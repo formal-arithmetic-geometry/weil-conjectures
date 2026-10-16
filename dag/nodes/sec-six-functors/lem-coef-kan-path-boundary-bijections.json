@@ -28,9 +28,111 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first extract the precise lifting consequence of [lem-coef-infinity-right-anodyne-product]. Every Kan fibration lifts against every right anodyne map: it lifts against the generating horns; this property persists under a pushout by transporting the square to its attaching map, under transfinite composition by choosing successive compatible fillers and taking their colimit at limits, and under an arrow retract by composing with its section and retraction squares. Consequently, for a horn $a:\\Lambda_i^n\\hookrightarrow\\Delta^n$, $n\\geq1$, and any monomorphism $b:C\\hookrightarrow D$, every Kan fibration lifts against\n$$a\\mathbin\\square b:(\\Lambda_i^n\\times D)\\cup(\\Delta^n\\times C)\\hookrightarrow\\Delta^n\\times D.$$\nFor $i>0$, the cited product theorem makes this map right anodyne. For $i=0$, use the elementary order-reversal involution $R$ on simplicial sets: for $\\alpha:[r]\\to[s]$, put $\\alpha^R(k)=s-\\alpha(r-k)$, and give $(RX)_r=X_r$ the operators $X(\\alpha^R)$. The identities $(\\alpha\\beta)^R=\\alpha^R\\beta^R$ and $R^2=1$ follow by substitution. Reversing the vertex order identifies $R\\Delta^n$ with $\\Delta^n$ and $R\\Lambda_i^n$ with $\\Lambda_{n-i}^n$; $R$ preserves degreewise unions, products and injections. Thus $R(a\\square b)$ has its horn index $n>0$, and $Rp$ is still a Kan fibration because its horn problems are exactly reversed horn problems for $p$. Apply the positive-index case to $Rp$ and reverse its filler back. This proves the displayed lifting consequence for all horns, without a model structure or a realization theorem.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-right-anodyne-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorems 3.3.1–3.3.2, pp. 81–83; Kan-specialization derived here from the existing right-anodyne product theorem, with order reversal for index zero."
+   }
+  },
+  {
+   "text": "Put $I=\\Delta^1$, $E=P_xK$, $e=c_x$ and $F=\\Omega_xK$. Under the internal-functor definition in [def-cbc-enhanced-diagrams-cones], a horn lifting problem for\n$$(\\operatorname{ev}_0,\\operatorname{ev}_1):\\operatorname{Fun}(I,K)\\to K\\times K$$\nis a map into $K$ on $(I\\times\\Lambda_i^n)\\cup(\\partial I\\times\\Delta^n)$. The inclusion of this union is the pushout-product of the horn with the monomorphism $\\partial I\\hookrightarrow I$, after exchanging factors. Step 1, using [lem-coef-infinity-right-anodyne-product], fills it against the Kan fibration $K\\to\\Delta^0$. Hence the endpoint-pair map is a Kan fibration. Its pullback along $K\\to K\\times K$, $y\\mapsto(x,y)$, is exactly $q:E\\to K$. Projecting a horn square for this pullback gives a horn square for the endpoint map; its filler paired with the prescribed base simplex gives a filler for $q$. Since $K$ is Kan, a horn in $E$ is filled by first filling its image in $K$ and then lifting that simplex along $q$. A horn in $F=q^{-1}(x)$ is filled by lifting the constant base simplex $x$ along $q$. Thus both $E$ and $F$ are Kan, with the specified basepoint $e$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-right-anodyne-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.3.1, p. 81, and the path-space pullback in the proof of Proposition 3.6.3, p. 97."
+   }
+  },
+  {
+   "text": "A map $\\partial\\Delta^m\\to E$ is a map $\\partial\\Delta^m\\times I\\to K$ whose value on $\\partial\\Delta^m\\times\\{0\\}$ is $x$. Glue it to the constant map $x$ on $\\Delta^m\\times\\{0\\}$. The domain of this glued map is\n$$(\\partial\\Delta^m\\times I)\\cup(\\Delta^m\\times\\{0\\})\\subseteq\\Delta^m\\times I.$$\nIts inclusion is the pushout-product of $\\partial\\Delta^m\\hookrightarrow\\Delta^m$ with $\\{0\\}=\\Lambda_0^1\\hookrightarrow I$. The lifting consequence of step 1, from [lem-coef-infinity-right-anodyne-product], extends it into $K$, still constantly $x$ at the initial endpoint. Transposition therefore gives an extension $\\Delta^m\\to E$. This holds also for $m=0$, when the original boundary is empty and the constant path $e$ is one such extension. We have proved precisely the asserted boundary lifting property for $E\\to\\Delta^0$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-right-anodyne-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proof of Proposition 3.6.3, p. 97, right lifting property of the path space against all boundaries."
+   }
+  },
+  {
+   "text": "Fix $n=j+1\\geq1$ and write $H=\\Lambda_n^n$. Form three simplicial sets of families using the internal-functor definition in [def-cbc-enhanced-diagrams-cones]. Let $B_n$ have $m$-simplices the maps $\\alpha:\\Delta^n\\times\\Delta^m\\to K$ equal to $x$ on $\\partial\\Delta^n\\times\\Delta^m$. Let $C_{n-1}$ have $m$-simplices the maps $\\beta:\\Delta^{n-1}\\times\\Delta^m\\to F$ equal to $e$ on $\\partial\\Delta^{n-1}\\times\\Delta^m$. Finally, let $V_n$ have $m$-simplices the maps $\\gamma:\\Delta^n\\times\\Delta^m\\to E$ equal to $e$ on $H\\times\\Delta^m$, and satisfying $q\\gamma=x$ on $\\partial\\Delta^n\\times\\Delta^m$. Operators restrict the parameter factor. Define simplicial maps\n$$s:V_n\\to B_n,\\quad\\gamma\\mapsto q\\gamma,\\qquad r:V_n\\to C_{n-1},\\quad\\gamma\\mapsto\\gamma(d_n\\times1).$$\nThe second map lands in $F$ because $q\\gamma$ is $x$ on the last face. Its boundary is $e$ because $d_n(\\partial\\Delta^{n-1})\\subseteq H$. These facts hold also when $n=1$, where that boundary is empty and $C_0=F$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 3.4.4, p. 85, and the last-face lifting square preceding Lemma 3.4.8, pp. 87–88; the simultaneous simplicial set of lifts is introduced here."
+   }
+  },
+  {
+   "text": "The map $s:V_n\\to B_n$ lifts against every $\\partial\\Delta^m\\hookrightarrow\\Delta^m$. Indeed, its square prescribes $\\gamma$ on $\\Delta^n\\times\\partial\\Delta^m$ and $\\alpha$ on $\\Delta^n\\times\\Delta^m$. Add the constant value $e$ on $H\\times\\Delta^m$. These prescriptions agree on their intersection, and their image under $q$ agrees with $\\alpha$, since $\\alpha$ is $x$ on $\\partial\\Delta^n\\times\\Delta^m$. We obtain a lifting square for $q$ with left map\n$$ (H\\times\\Delta^m)\\cup(\\Delta^n\\times\\partial\\Delta^m)\\hookrightarrow\\Delta^n\\times\\Delta^m.$$\nThis is the pushout-product of the last horn $H\\hookrightarrow\\Delta^n$ with a boundary monomorphism, so [lem-coef-infinity-right-anodyne-product] and step 1 give a filler $\\Gamma$. It satisfies $\\Gamma=e$ on $H\\times\\Delta^m$ and $q\\Gamma=\\alpha$, hence lies in $V_n$ and solves the original square for $s$. When $m=0$, this says explicitly that every map $\\alpha:\\Delta^n\\to K$ equal to $x$ on $\\partial\\Delta^n$ has a lift $\\gamma:\\Delta^n\\to E$ with $q\\gamma=\\alpha$ and with $\\gamma$ equal to $e$ on the whole last horn $H=\\Lambda_n^n$, which is the representative used to define the boundary map.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-right-anodyne-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.3.2, p. 82, and Lemma 3.4.8, pp. 87–88: the relative horn-prism lift, here with arbitrary simplex parameters."
+   }
+  },
+  {
+   "text": "The map $r:V_n\\to C_{n-1}$ also lifts against every boundary inclusion. A lifting square gives $\\gamma:\\Delta^n\\times\\partial\\Delta^m\\to E$ in $V_n$ and a family $\\beta:\\Delta^{n-1}\\times\\Delta^m\\to F$ extending its last-face restriction. On\n$$L=(\\Delta^n\\times\\partial\\Delta^m)\\cup(\\partial\\Delta^n\\times\\Delta^m)$$\nuse $\\gamma$ on the first summand; on the second summand use $e$ on $H\\times\\Delta^m$ and the composite $\\beta:\\Delta^{n-1}\\times\\Delta^m\\to F\\hookrightarrow E$ on the last face. The two face prescriptions agree because $\\beta$ has boundary $e$, and they agree with $\\gamma$ where the parameter is on its boundary by the lifting square and the definition of $V_n$. Thus they glue degreewise to a simplicial map $L\\to E$. Step 3, with [def-weil-pbc-trivial-kan-fibration], makes $E\\to\\Delta^0$ a trivial Kan fibration: dimension zero gives its vertex-surjectivity and the other dimensions give its boundary lifts. Since $L\\hookrightarrow\\Delta^n\\times\\Delta^m$ is degreewise injective, [lem-weil-pbc-trivial-kan-lifts-monomorphisms] extends the glued map to $\\Gamma:\\Delta^n\\times\\Delta^m\\to E$. On $\\partial\\Delta^n\\times\\Delta^m$ its image under $q$ is $x$ because the last-face data lie in $F$ and the other faces are $e$. It follows that $\\Gamma\\in(V_n)_m$ and $r\\Gamma=\\beta$, as required. No subdivision or identification of a topological disk is involved.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proof of Proposition 3.6.3, p. 97, and direct relative-boundary gluing; Stacks Tag 08NM, lemma-trivial-kan, for extension across the indicated monomorphism."
+   }
+  },
+  {
+   "text": "For any simplicial set $A$, denote its vertices modulo the equivalence relation generated by edges by $c(A)$. A simplicial map $u:A\\to B$ lifting against all boundaries induces a bijection $c(A)\\to c(B)$: dimension zero lifts every vertex, proving surjectivity; if two chosen vertices of $A$ have images joined by an edge chain, choose lifts of the intermediate vertices and lift each edge using its two prescribed endpoints, an instance of the $\\partial\\Delta^1$ lifting property. This joins the chosen vertices by an edge chain in $A$, proving injectivity, including chains whose edges are traversed backwards. Apply this argument to $s$ and $r$ from steps 5 and 6. Vertices of $B_n$ are the boundary-constant $n$-simplices of $K$, and its edges are exactly their relative simplicial homotopies; hence $c(B_n)=\\pi_n^s(K,x)$: its vertices are maps $\\Delta^n\\to K$ constant at $x$ on the boundary and its edges are maps $\\Delta^n\\times\\Delta^1\\to K$ constant at $x$ on $\\partial\\Delta^n\\times\\Delta^1$, exactly the generators of the equivalence relation defining $\\pi_n^s(K,x)$. Likewise $c(C_{n-1})=\\pi_{n-1}^s(F,e)$ for $n>1$, by the same explicit vertex and edge description with $F,e$, and $c(C_0)=\\pi_0^s(F)$ for $n=1$. Therefore\n$$\\delta_{n-1}^s=c(r)\\,c(s)^{-1}$$\nis a bijection. If $\\gamma$ is any lift in the question, it is a vertex of $V_n$ above $\\alpha$, and this bijection sends $[\\alpha]$ to $[\\gamma d_n]$. The two bijections on $c(-)$ prove independence of both the representative and the lift, rather than merely proving that the basepoint has a unique preimage. Taking all families constant at $e$ proves pointedness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 3.4.4 and Lemma 3.4.8, pp. 85, 87–88; direct edge-chain comparison replaces the exact-sequence shortcut in Proposition 3.6.3."
+   }
+  },
+  {
+   "text": "For a pointed map $f:(K,x)\\to(K',x')$, postcomposition on $I$-families gives maps $E\\to E'$ and $F\\to F'$ that preserve $e$ and commute with $q$. Postcomposition therefore gives a map of the two spans $B_n\\xleftarrow{s}V_n\\xrightarrow{r}C_{n-1}$ and their primed analogues: it commutes strictly with $q$ and with restriction along $d_n\\times1$. Applying $c(-)$ and the inverse bijections $c(s)^{-1}$ proves $f_*\\delta_{n-1}^s=\\delta_{n-1}^{s\\prime}f_*$. For $n=1$, the fixed horn is $\\Lambda_1^1=\\{1\\}$, so $\\gamma$ is $e$ at its terminal vertex and $d_1\\gamma$ is its initial vertex. Thus the construction has exactly the last-face convention of the statement in degree zero as well as in higher degrees. All arguments use only simplicial families and lifting properties.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Naturality following Lemma 3.4.8, p. 88, and Proposition 3.6.3, p. 97; explicit span comparison and degree-zero endpoint check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-right-anodyne-product",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Read online: Theorems 3.3.1–3.3.2; Definition 3.4.4; Lemma 3.4.8; Proposition 3.6.3 before realization, pp. 81–88 and 97. Original parameterized-lift argument: the two boundary-lifting projections from V_n prove a bijection on edge-generated components, without relying on exactness of pointed sets alone."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +168,59 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.PtSimplex.MulStruct.map\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex/MulStruct\", \"type\": \"{X : SSet} →\\n  {n : ℕ} →\\n    {x : X.obj (Opposite.op (SimplexCategory.mk 0))} →\\n      {f g fg : X.PtSimplex n x} →\\n        {i : Fin n} → f.MulStruct g fg i → (SSet.stdSimplex.obj (SimplexCategory.mk (n + 1)) ⟶ X)\", \"doc\": \"Given a simplicial set $X$, a natural number $n$, a basepoint $x$ in the 0-simplices of $X$, and three pointed $n$-simplices $f$, $g$, and $fg$ along with an index $i$ from the set $\\\\{0,1,\\\\dots,n-1\\\\}$\"}\n  {\"name\": \"SSet.Path\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Path\", \"type\": \"SSet → ℕ → Type u\", \"doc\": \"For a simplicial set $ X $ and natural number $ n $, this is defined by truncating $ X $ to level 1 (discarding simplicial data above dimension 1) and then taking the associated $\\\\text{Path}_1$ type a\"}\n  {\"name\": \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ (n : ℕ), SSet.modelCategoryQuillen.I (SSet.boundary n).ι\", \"doc\": \"For each natural number $n$, the canonical inclusion morphism $\\\\iota: \\\\partial\\\\Delta[n] \\\\to \\\\Delta[n]$ from the boundary of the standard $n$-simplex to the standard $n$-simplex is an element of the ge\"}\n  {\"name\": \"SSet.spine\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Path\", \"type\": \"(X : SSet) → (n : ℕ) → X.obj (Opposite.op (SimplexCategory.mk n)) → X.Path n\", \"doc\": \"For a simplicial set $ X $ and natural number $ n $, this is defined by truncating $ X $ to level 1 (discarding simplicial data above dimension 1) and then taking the associated $\\\\text{Path}_1$ type a\"}\n  {\"name\": \"HomotopyGroup\", \"module\": \"Mathlib/Topology/Homotopy/HomotopyGroup\", \"type\": \"Type u_3 → (X : Type u_4) → [TopologicalSpace X] → X → Type (max u_3 u_4)\", \"doc\": \"The $N$-th homotopy group of a topological space $X$ at a basepoint $x$ is defined as the quotient of the set of continuous maps $p : [0,1]^N \\to X$ (called generalized loops) that fix the boundary of \"}\n  {\"name\": \"SSet.StrictSegal.spineEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} → X.StrictSegal → (n : ℕ) → X.obj (Opposite.op (SimplexCategory.mk n)) ≃ X.Path n\", \"doc\": \"For each natural number $ n $, this defines a bijection between the $ n $-simplices of a strict Segal space $ X $ evaluated at the opposite simplex $[n]^\\text{op}$ and the space of paths $ \\\\text{Path}(\"}\n  {\"name\": \"SSet.Truncated.Path.arrow\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Path\", \"type\": \"{n : ℕ} →\\n  {X : SSet.Truncated (n + 1)} →\\n    {m : ℕ} → X.Path m → Fin m → X.obj (Opposite.op { obj := SimplexCategory.mk 1, property := ⋯ })\", \"doc\": \"For a natural number $ n $, an $(n+1)$-truncated simplicial set $ X $, and a natural number $ m $, this is defined by truncating $ X $ to level 1 (discarding simplicial data above degree 1) and then t\"}\n  {\"name\": \"SSet.Truncated.Path\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Path\", \"type\": \"{n : ℕ} → SSet.Truncated (n + 1) → ℕ → Type u\", \"doc\": \"For a natural number $ n $, an $(n+1)$-truncated simplicial set $ X $, and a natural number $ m $, this is defined by truncating $ X $ to level 1 (discarding simplicial data above degree 1) and then t\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: Path.lean:11–20 concerns finite directed edge paths, not the internal Hom path object. KanComplex/MulStruct.lean:29–33,91–105,149–165 defines pointed simplices and candidate relation/multiplication witnesses, not the path-fibration boundary bijections. General PathObject declarations require a model-category structure and do not identify the specified simplicial path object or its simplex-defined boundary. Topological HomotopyGroup declarations concern continuous loops only. Both semantic phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simplicial path fibration Kan complex contractible path space boundary bijection homotopy groups",
+   "results": "SSet.Path; SSet.StrictSegal.spineEquiv; topological HomotopyGroup and loop-space declarations.",
+   "date": "2026-10-17",
+   "verdict": "no match: Path.lean:11–20 is the finite edge-path construction. KanComplex/MulStruct.lean:29–34,91–105,149–165 defines pointed simplices and witnesses for relations/products, not the specified based path-fibration boundary bijection. General model-category path-object declarations do not identify this simplicial object or last-face map; topological HomotopyGroup declarations concern continuous loops."
+  },
+  {
+   "tool": "loogle",
+   "query": "KanComplex, HomotopyGroup, Path",
+   "results": "0 hits; service reports unknown identifier 'KanComplex'. This malformed name query is not evidence of absence; replaced by the qualified query below.",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query identifier unresolved"
+  },
+  {
+   "tool": "grep",
+   "query": "path|loop|KanComplex|HomotopyGroup",
+   "results": "0 hits with incorrectly prefixed subdirectory Mathlib/AlgebraicTopology/SimplicialSet; not used as evidence of absence. Corrected subdirectory below.",
+   "date": "2026-10-17",
+   "verdict": "no match in the supplied scope; scope invalid for this purpose"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Kan complex based path fibration has a natural simplicial boundary bijection from pi_{j+1} to the loop fibre pi_j",
+   "results": "SSet.modelCategoryQuillen horn lifting and fibration declarations; HomotopicalAlgebra.PathObject.IsGood.fibration_p and instIsFibrantP.",
+   "date": "2026-10-17",
+   "verdict": "no match: Path.lean:11–20 is the finite edge-path construction. KanComplex/MulStruct.lean:29–34,91–105,149–165 defines pointed simplices and witnesses for relations/products, not the specified based path-fibration boundary bijection. General model-category path-object declarations do not identify this simplicial object or last-face map; topological HomotopyGroup declarations concern continuous loops."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Kan complex the simplicial based path space has boundary lifting and the last-face boundary induces a bijection between pointed simplex homotopy classes in adjacent dimensions",
+   "results": "SSet.Path; SSet.StrictSegal.spineEquiv; SSet.Path.arrow; SSet.Truncated.Path.arrow/interval; StrictSegal.spineToSimplex.",
+   "date": "2026-10-17",
+   "verdict": "no match: Path.lean:11–20 is the finite edge-path construction. KanComplex/MulStruct.lean:29–34,91–105,149–165 defines pointed simplices and witnesses for relations/products, not the specified based path-fibration boundary bijection. General model-category path-object declarations do not identify this simplicial object or last-face map; topological HomotopyGroup declarations concern continuous loops."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.PtSimplex, SSet.KanComplex",
+   "results": "10 hits: SSet.PtSimplex.MulStruct.assoc/assoc', nonempty, exists_left_inverse and identity/relation laws in Mathlib/AlgebraicTopology/SimplicialSet/KanComplex/MulStruct.lean.",
+   "date": "2026-10-17",
+   "verdict": "no match: Path.lean:11–20 is the finite edge-path construction. KanComplex/MulStruct.lean:29–34,91–105,149–165 defines pointed simplices and witnesses for relations/products, not the specified based path-fibration boundary bijection. General model-category path-object declarations do not identify this simplicial object or last-face map; topological HomotopyGroup declarations concern continuous loops."
+  },
+  {
+   "tool": "grep",
+   "query": "path|loop|homotopyGroup|HomotopyGroup|boundary",
+   "results": "Subdirectory AlgebraicTopology/SimplicialSet/KanComplex: five hits, all MulStruct.lean lines 8,31,33,45,57, for boundary-based pointed simplices; inspected source lines 1–180.",
+   "date": "2026-10-17",
+   "verdict": "no match: Path.lean:11–20 is the finite edge-path construction. KanComplex/MulStruct.lean:29–34,91–105,149–165 defines pointed simplices and witnesses for relations/products, not the specified based path-fibration boundary bijection. General model-category path-object declarations do not identify this simplicial object or last-face map; topological HomotopyGroup declarations concern continuous loops."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-kan-realization-serre",
@@ -77,5 +228,29 @@
   "group": "Q57"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-path-boundary-bijections",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Eight steps prove the endpoint fibration and path-space boundary lifting from the reviewed right-anodyne product theorem, with explicit order reversal for the missing initial horn case. For each n, the simplicial set V_n of prescribed-horn lifts maps by two boundary-lifting projections to the boundary-constant n-simplex space of K and the (n-1)-simplex space of the loop fibre. Their bijections on edge-generated components give precisely the required last-face boundary bijection, lift/representative independence, degree zero and naturality. No new nodes. Replaced a cyclic citation of the general anodyne product leaf by the existing right-anodyne theorem and replaced an insufficient injectivity sketch by the two-projection argument.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 and its displayed derived inverse-limit adjunction calculation, via the inherited cosimplicial-frame/Kan-realization chain. The item supplies the simplicial path-fibration and boundary-bijection portion of Hovey Proposition 3.6.3 before realization. The unit/chapter route and inherited blueprint ancestry are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "why": "Step 6 uses this generic extension property for a trivial Kan fibration; no node in the sec-six-functors unit supplies the same monomorphism-lifting statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-a9916b6a7",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-a9916b6a7 (reviewer sub-agent of L); spot-checked: Read in full: the item statement, all 8 steps, the statements of the 4 cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-right-anodyne-product, def-weil-pbc-trivial-kan-fibration, lem-weil-pbc-trivial-kan-lifts-monomorphisms), the citer lem-coef-kan-realization-serre and the unit record. Hovey isn't archived (WANTED), so proof_origin=agent is correct; I checked the proof as self-contained. Step 1: checked the saturation argument and the order reversal alpha^R(k)=s-alpha(r-k) (monotone, functorial, R Lambda_i^n = Lambda_{n-i}^n). Steps 2-3: the endpoint and boundary unions are the cited pushout-products; {0}=Lambda_0^1 needs the reversal; m=0 is covered. Step 4: d^n(boundary of Delta^{n-1}) lies in Lambda_n^n, and C_0=F. Step 5: overlaps agree and the last horn is a positive index, so the cited theorem applies directly. Step 6: H meets the last face in d^n(boundary of Delta^{n-1}) (empty for n=1); E->pt is a trivial Kan fibration by step 3, so the Mathlib leaf extends across L. Step 7: boundary lifting gives a bijection on edge components, and B_n/C_{n-1} vertices and edges are exactly the pi^s generators. Step 8: span naturality. Small cases: discrete K, n=1, m=0, empty K, nerve of a group (h=g^{+-1}, a pointed bijection). No new nodes and no duplicates (path-fibration-replacement and contractible-fiber nodes state different things). No cycle: the dependency closure of each cited node avoids the item. Route is in-unit; the tool_use of the Mathlib leaf is accepted. No SGA; not a target node, so no base-change comparison. Minor observation, not changed: the imported statement uses 'Kan fibration' without an inline definition (it's the evident relative version of def-cbc's Kan complex). No fixes."
+ }
 }
