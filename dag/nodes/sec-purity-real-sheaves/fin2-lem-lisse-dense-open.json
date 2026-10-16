@@ -3,40 +3,151 @@
  "blueprint": {
   "is": "fin2-lem-lisse-dense-open",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A lisse locus for a constructible sheaf",
- "statement": "Let $X$ be of finite type over $k$ and let $F$ be a\nconstructible\n$\\Lambda$-sheaf on $X_{{\\mathrm{et}}}$. Then there is an open\nsubscheme $U\\hookrightarrow X$ with\n$\\dim(X\\setminus U)<\\dim X$ on which the restriction $F|_U$ is\nlisse.",
+ "statement": "Let $k$ be a field, let $X$ be a scheme of finite type over $k$ [def-weil-field, def-pc-scheme, def-weil-finite-type-morphism], and let $\\Lambda$ be a finite commutative ring. Let $F$ be a constructible sheaf of $\\Lambda$-modules on $X_{\\mathrm{et}}$, with constructible and lisse as in [def-weil-pbc-constructible-complexes]. There is an open subscheme $U\\hookrightarrow X$ [def-weil-open-immersion] such that $F|_U$ is lisse and, if $X\\ne\\varnothing$, then $\\dim(X\\setminus U)<\\dim X$ [def-kun-topological-krull-dimension]. If $X=\\varnothing$, take $U=X$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-purity/fin2-lem-lisse-dense-open.md",
   "place": "node fin2-lem-lisse-dense-open, order 2666"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-open-immersion",
+  "def-kun-topological-krull-dimension"
  ],
  "proof": [
   {
-   "text": "If $X$ is empty, take $U=X$.\nOtherwise let $C_1,\\ldots,C_t$ be all its irreducible components,\nusing [lem-weil-pbc-noetherian-finite-components].\nFor each component of maximal dimension, first remove all other\ncomponents. This gives an irreducible open $O_i$ of $X$\ncontaining its generic point $\\eta_i$. By the finite partition\nin [def-weil-pbc-constructible-complexes], the stratum containing\n$\\eta_i$ contains a nonempty open $V_i\\subset O_i$.\nThe restriction to $V_i$ is finite locally constant.\nThe $V_i$ are disjoint opens of $X$, so their finite union $U$\nis open and $F|_U$ is finite locally constant.\nThe closed complement meets every maximal-dimensional component in\na proper closed subset. For finite-type schemes over a field such\na subset has strictly smaller dimension, by the dimension formula\nfor finitely generated algebras. The other components already have\nsmaller dimension. Hence $\\dim(X\\setminus U)<\\dim X$.",
+   "text": "If $X=\\varnothing$, take $U=X$. The empty family is an etale covering of the empty scheme, so local constancy is vacuous, and there are no geometric stalks to check for finiteness. Thus the restriction is lisse by [def-weil-pbc-constructible-complexes]. No strict dimension comparison is asserted in this case. Henceforth assume $X\\ne\\varnothing$.",
    "uses": [
-    "lem-weil-pbc-noetherian-finite-components",
     "def-weil-pbc-constructible-complexes"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0055",
+    "place": "Empty-space dimension convention; the lisse condition is vacuous on the empty scheme"
+   }
+  },
+  {
+   "text": "The scheme $\\operatorname{Spec}k$ is Noetherian: it is a one-point affine scheme and $k$ has only the ideals $0$ and $k$. Apply [lem-weil-pbc-finite-type-over-noetherian] to the finite-type structure morphism $X\\to\\operatorname{Spec}k$ to conclude that $X$ is Noetherian, in particular locally Noetherian. By [lem-kun-dimension-finite-type], $\\kundim X<\\infty$. The definition [def-kun-dimension] identifies $\\kundim X$ with the supremum of lengths of strict chains of nonempty irreducible closed subsets of $|X|$, which is exactly $\\dim X$ in [def-kun-topological-krull-dimension]. Thus $\\dim X<\\infty$. Since $X$ is nonempty, the closure of any point provides a length-zero irreducible closed chain. The chain definition [def-kun-topological-krull-dimension] therefore shows that $\\dim X=d$ for an integer $d\\ge0$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "def-kun-topological-krull-dimension",
+    "def-kun-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01T6",
+    "place": "Finite type over a Noetherian base; finite dimension is the cited lem-kun-dimension-finite-type"
+   }
+  },
+  {
+   "text": "Choose the finite partition by locally closed constructible subschemes witnessing constructibility in [def-weil-pbc-constructible-complexes]. On each stratum the restriction is lisse, hence locally constant with finite stalks as a sheaf of $\\Lambda$-modules. These same strata and immersions give a stratification [def-constructible-stratification]: they are finitely many pairwise disjoint locally closed subsets covering $X$, with their given immersions. No condition on closures of strata is required. This is the stratification used by [def-constructible-constructible]. The finite-values formulation and the finite-stalk formulation on each stratum agree by [lem-weil-pbc-finite-locally-constant-module-values], applied with the same finite ring $\\Lambda$. Thus $F$, with coefficient category the category of $\\Lambda$-modules throughout, satisfies the constructibility hypothesis of [def-constructible-constructible].",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "def-constructible-constructible",
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "def-constructible-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/095E",
+    "place": "Finite partition characterization, with module coefficients as in Tag 03RW(3); no change of coefficient category"
+   }
+  },
+  {
+   "text": "Apply [prop-constructible-generic-constancy] to this constructible sheaf in the coefficient category of $\\Lambda$-modules. It gives a dense open subscheme $U\\subseteq X$ on which $F|_U$ is finite locally constant. By [def-weil-pbc-constructible-complexes] this is precisely the required lisse condition. Only generic constancy is taken from the cited proposition: it is not being used for any dimension assertion.",
+   "uses": [
+    "prop-constructible-generic-constancy",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-constructible-generic-constancy.md",
+    "place": "Statement; also read in WeilConjectures/ConstructibleSheaf/GenericConstancy.lean:138-164"
+   }
+  },
+  {
+   "text": "Put $Z=X\\setminus U$ with its subspace topology. It is closed since $U$ is open. It is nowhere dense: its closure is itself, and a nonempty open subset contained in $Z$ would be disjoint from the dense set $U$, a contradiction. We have checked $X$ nonempty, locally Noetherian, and of finite dimension $d$. Apply [lem-sc-hilbert-nowhere-dense-dimension-drop] to this $Z$ to obtain $\\dim Z<d=\\dim X$, with dimension understood as in [def-kun-topological-krull-dimension]. This includes $Z=\\varnothing$, whose dimension is $-\\infty$. Together with the preceding step this gives both required clauses for the same $U$.",
+   "uses": [
+    "lem-sc-hilbert-nowhere-dense-dimension-drop",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0055",
+    "place": "Chain dimension convention; strict-drop theorem is the cited existing DAG node, not an assertion of Tag 02P2"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-finite-components",
-  "def-weil-pbc-constructible-complexes"
+  "def-constructible-constructible",
+  "def-constructible-stratification",
+  "def-kun-dimension",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-constructible-complexes",
+  "lem-kun-dimension-finite-type",
+  "lem-sc-hilbert-nowhere-dense-dimension-drop",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "prop-constructible-generic-constancy"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-purity/fin2-lem-lisse-dense-open.md",
-  "place": "## Proof"
+  "place": "Imported proof, repaired at the empty case and factored through existing generic-constancy and nowhere-dense dimension-drop statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constructible etale sheaf on a scheme of finite type over a field is finite locally constant on a dense open subset with complement of strictly smaller dimension",
+   "results": "8 hits: Algebra.isOpen_etaleLocus, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.Scheme.Hom.isConstructible_image, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.LocallyOfFiniteType, Algebra.etaleLocus_eq_univ_iff_etale",
+   "date": "2026-10-16",
+   "verdict": "no match: no constructible etale sheaf generic-lisse-locus theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\", \"Sheaf\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no constructible etale sheaf generic-lisse-locus theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleSheaf|IsFiniteLocallyConstantSheaf|exists_dense_open",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no constructible etale sheaf generic-lisse-locus theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constructible sheaf is locally constant on a dense open subscheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaf of modules has a nonempty open locus where it is locally constant",
+   "results": "8 hits: ModuleCat.Tilde.exists_const, Topology.IsConstructible.isLocallyConstructible, AlgebraicGeometry.StructureSheaf.locally_const_basicOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, Topology.IsLocallyConstructible.isConstructible, Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, PrimeSpectrum.isConstructible_basicOpen",
+   "date": "2026-10-16",
+   "verdict": "no match: no constructible etale sheaf generic-lisse-locus theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|locally.constant.*sheaf|sheaf.*locally.constant",
+   "results": "0 hits; searched Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match: no constructible etale sheaf generic-lisse-locus theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +174,49 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-purity"
+ "unit": "sk-p-real-purity",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "fin2-lem-lisse-dense-open",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported unconditional strict inequality fails for the empty scheme. Explicitly separated that case and made the finite-coefficient convention used in the imported proof explicit. Reused the existing generic-constancy, finite-type Noetherianity, finite-dimension and nowhere-dense strict-drop nodes, checking the module-coefficient bridge and every hypothesis. No new nodes.",
+  "blueprint": "Realizes the imported proof's empty case, finite partition and lisse open, and final strict dimension drop. The componentwise construction is subsumed by the existing generic-constancy proposition; the omitted dimension argument is supplied by an existing generic strict-drop lemma. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "prop-constructible-generic-constancy",
+    "why": "Generic tool giving a finite locally constant restriction on a dense open, applied to the same module category; the purity unit has no replacement for this general constructibility fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherianity tool; no purity-unit step replaces it."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-dimensionality tool for a finite-type scheme over a field, needed to apply the strict-drop lemma; no purity-unit step replaces it."
+   },
+   {
+    "node": "lem-sc-hilbert-nowhere-dense-dimension-drop",
+    "why": "Generic dimension tool for a closed nowhere-dense subset of a nonempty locally Noetherian finite-dimensional scheme; the purity unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-constant-module-values",
+    "why": "Generic equivalence of finite-stalk and finite-value local constancy over the same finite ring; makes the coefficient bridge explicit, with no substitute in the purity unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-constructible-generic-constancy",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-sc-hilbert-nowhere-dense-dimension-drop",
+  "lem-weil-pbc-finite-locally-constant-module-values"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q26-d2682f70b",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-d2682f70b (reviewer sub-agent of L); spot-checked: Reuse the full PASS review of this exact head in local/nt-reviews/Q26__fin2-lem-lisse-dense-open__d2682f70beb6/review.md. Maintenance retry after route-policy fix 14575e5836; all cited natural-language statements are unchanged. No mathematical rewrite by maintenance."
+ }
 }
