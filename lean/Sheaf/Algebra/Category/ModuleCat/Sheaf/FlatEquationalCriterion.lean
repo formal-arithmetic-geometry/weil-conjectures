@@ -11,14 +11,13 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.Paper.SiteSheafificationSectionsLocal
-import Mathlib.Algebra.Homology.ExactSequence
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import Mathlib.LinearAlgebra.TensorProduct.RightExactness
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Mathlib.LinearAlgebra.TensorProduct.Vanishing
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Local equational criterion for flat module sheaves
@@ -29,37 +28,489 @@ Source: Stacks Project, Modules on Sites, Tag 08FC, equivalence (1) and (2)
 
 @[expose] public section
 
-universe u
+universe u v w x
 
-open CategoryTheory Opposite
+open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite TensorProduct
+
+set_option backward.isDefEq.respectTransparency false
 
 namespace SheafOfModules
+
+section Algebra
+
+variable {R : Type u} [CommRing R] {G : Type v} [AddCommGroup G] [Module R G]
+  {H : Type w} [AddCommGroup H] [Module R H]
+  {T : Type x} [AddCommGroup T] [Module R T]
+/-- A zero tensor image is witnessed by finitely many relations in the right factor. -/
+private theorem finite_tensor_relation (j : G →ₗ[R] H) (z : G ⊗[R] T)
+    (hz : TensorProduct.map j LinearMap.id z = 0) :
+    ∃ (n m : ℕ) (g : Fin n → G) (s : Fin n → T) (d : Fin n → Fin m → R)
+      (h : Fin m → H), z = ∑ p, g p ⊗ₜ[R] s p ∧
+        (∀ k, ∑ p, d p k • s p = 0) ∧ (∀ p, j (g p) = ∑ k, d p k • h k) := by
+  classical
+  obtain ⟨v, hv⟩ := TensorProduct.exists_finsupp_right z
+  let ε : (T →₀ R) →ₗ[R] T := Finsupp.linearCombination R id
+  have hε : Function.Surjective ε := by
+    intro t
+    exact ⟨Finsupp.single t 1, by simp [ε]⟩
+  let w : G ⊗[R] (T →₀ R) := v.sum fun t g ↦ g ⊗ₜ[R] Finsupp.single t 1
+  have hw : LinearMap.lTensor H ε (TensorProduct.map j LinearMap.id w) = 0 := by
+    simp only [w, Finsupp.sum, map_sum, TensorProduct.map_tmul, LinearMap.id_apply,
+      LinearMap.lTensor_tmul]
+    rw [hv] at hz
+    simpa [ε, Finsupp.sum] using hz
+  have he := lTensor_exact H ε.exact_subtype_ker_map hε
+  have hmem : TensorProduct.map j LinearMap.id w ∈
+      LinearMap.range (LinearMap.lTensor H (LinearMap.ker ε).subtype) := by
+    rw [← he.linearMap_ker_eq]
+    exact hw
+  obtain ⟨y, hy⟩ := hmem
+  obtain ⟨K, hK⟩ := TensorProduct.exists_finset y
+  let E : Finset T := v.support ∪ K.biUnion (fun q ↦ q.2.val.support)
+  let e : Fin (Fintype.card E) ≃ E := (Fintype.equivFin E).symm
+  let k : Fin (Fintype.card K) ≃ K := (Fintype.equivFin K).symm
+  refine ⟨Fintype.card E, Fintype.card K, fun p ↦ v (e p).val, fun p ↦ (e p).val,
+    fun p q ↦ (k q).val.2.val (e p).val, fun q ↦ (k q).val.1, ?_, ?_, ?_⟩
+  · rw [hv, Finsupp.sum]
+    dsimp only
+    trans ∑ t ∈ E, v t ⊗ₜ[R] t
+    · exact Finset.sum_subset Finset.subset_union_left (fun t ht htv ↦ by
+        simp [Finsupp.notMem_support_iff.mp htv])
+    · rw [← Finset.sum_attach E (fun t ↦ v t ⊗ₜ[R] t)]
+      exact (e.sum_comp (fun t : E ↦ v t.val ⊗ₜ[R] t.val)).symm
+  · intro q
+    dsimp only
+    rw [e.sum_comp (fun t : E ↦ (k q).val.2.val t.val • t.val)]
+    rw [Finset.univ_eq_attach, Finset.sum_attach E
+      (fun t ↦ (k q).val.2.val t • t)]
+    have hk : (k q).val.2.val.support ⊆ E := by
+      intro t ht
+      exact Finset.mem_union_right _ (Finset.mem_biUnion.mpr ⟨(k q).val, (k q).property, ht⟩)
+    have heq : (∑ t ∈ E, (k q).val.2.val t • t) = ε (k q).val.2.val := by
+      simp only [ε, Finsupp.linearCombination_apply, Finsupp.sum, id_eq]
+      exact (Finset.sum_subset (f := fun t ↦ (k q).val.2.val t • t) hk (fun t ht htk ↦ by
+        simp [Finsupp.notMem_support_iff.mp htk])).symm
+    rw [heq]
+    exact (k q).val.2.property
+  · intro p
+    have hc := congrArg (fun x ↦ TensorProduct.finsuppScalarRight R R H T x (e p).val) hy
+    rw [hK] at hc
+    simp only [map_sum, Finsupp.finsetSum_apply, LinearMap.lTensor_tmul,
+      TensorProduct.finsuppScalarRight_apply_tmul_apply] at hc
+    have hleft : TensorProduct.finsuppScalarRight R R H T
+        (TensorProduct.map j LinearMap.id w) (e p).val = j (v (e p).val) := by
+      simp only [w, Finsupp.sum, map_sum, TensorProduct.map_tmul, LinearMap.id_apply,
+        Finsupp.finsetSum_apply, TensorProduct.finsuppScalarRight_apply_tmul_apply,
+        Finsupp.single_apply]
+      simp only [ite_smul, one_smul, zero_smul, Finset.sum_ite_eq',
+        Finsupp.mem_support_iff, ne_eq, ite_not, ite_eq_right_iff]
+      intro he
+      rw [he, map_zero]
+    rw [hleft] at hc
+    dsimp only
+    rw [k.sum_comp (fun t : K ↦ t.val.2.val (e p).val • t.val.1)]
+    rw [Finset.univ_eq_attach, Finset.sum_attach K
+      (fun t ↦ t.2.val (e p).val • t.1)]
+    exact hc.symm
+
+end Algebra
+
+section Forward
+
+variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+  (A : Sheaf J CommRingCat.{u})
+  (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
+private noncomputable local instance : MonoidalCategory
+    (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) :=
+  monoidalCategory A
+private noncomputable local instance : SymmetricCategory
+    (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) :=
+  symmetricCategory A
+private noncomputable local instance : MonoidalClosed
+    (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) :=
+  monoidalClosed (R := A)
+/-- Flatness also preserves a presheaf monomorphism after tensoring and sheafification. -/
+private theorem tensor_presheaf_mono (hM : IsFlat M)
+    {P Q : PresheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj}
+    (i : P ⟶ Q) [Mono i] :
+    Mono ((PresheafOfModules.sheafification (𝟙 _)).map (i ▷ M.val)) := by
+  let S := PresheafOfModules.sheafification.{u}
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj)
+  have : S.Monoidal := sheafificationMonoidal A
+  have : PreservesFiniteLimits (tensorRight M) := hM.1
+  let e : S.obj M.val ≅ M :=
+    asIso ((PresheafOfModules.sheafificationAdjunction (𝟙 _)).counit.app M)
+  let e' : S ⋙ tensorRight M ≅ tensorRight M.val ⋙ S :=
+    Functor.isoWhiskerLeft S ((tensoringRight _).mapIso e).symm ≪≫
+      Functor.Monoidal.commTensorRight S M.val
+  have : (tensorRight M.val ⋙ S).PreservesMonomorphisms :=
+    Functor.PreservesMonomorphisms.of_iso e'
+  exact (tensorRight M.val ⋙ S).map_mono i
+
+/-- The presheaf ideal generated by a natural finite family of coefficients. -/
+private noncomputable def coefficientIdeal {n : ℕ}
+    (a : ∀ X : Cᵒᵖ, Fin n → A.obj.obj X)
+    (ha : ∀ {X Y : Cᵒᵖ} (f : X ⟶ Y) (p : Fin n), A.obj.map f (a X p) = a Y p) :
+    (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)).val.Submodule where
+  obj X := Submodule.span (A.obj.obj X) (Set.range (a X))
+  map {X Y} f := by
+    apply Submodule.span_le.mpr
+    rintro _ ⟨p, rfl⟩
+    change A.obj.map f (a X p) ∈ Submodule.span (A.obj.obj Y) (Set.range (a Y))
+    rw [ha]
+    exact Submodule.subset_span ⟨p, rfl⟩
+
+/-- The ideal argument for coefficients defined naturally on the entire site. -/
+private theorem flat_global_coefficients {n : ℕ}
+    (a : ∀ X : Cᵒᵖ, Fin n → A.obj.obj X)
+    (ha : ∀ {X Y : Cᵒᵖ} (f : X ⟶ Y) (p : Fin n), A.obj.map f (a X p) = a Y p)
+    (hM : IsFlat M) (U : C) (s : Fin n → M.val.obj (op U))
+    (hs : ∑ p, a (op U) p • s p = 0) :
+    ∃ S : Sieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f →
+      ∃ (l : ℕ) (b : Fin n → Fin l → A.obj.obj (op V))
+        (t : Fin l → M.val.obj (op V)),
+        (∀ p, M.val.map f.op (s p) = ∑ q, b p q • t q) ∧
+        (∀ q, (∑ p, A.obj.map f.op (a (op U) p) * b p q) = 0) := by
+  classical
+  let I := coefficientIdeal A a ha
+  let P := I.toPresheafOfModules
+  let Q := (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)).val
+  let φ : P ⊗ M.val ⟶ Q ⊗ M.val := I.ι ▷ M.val
+  let z : (P ⊗ M.val).obj (op U) :=
+    ∑ p, (⟨a (op U) p, Submodule.subset_span ⟨p, rfl⟩⟩ : I.obj (op U)) ⊗ₜ[A.obj.obj (op U)] s p
+  have hz : φ.app (op U) z = 0 := by
+    change (TensorProduct.map (I.obj (op U)).subtype (LinearMap.id)) z = 0
+    apply (TensorProduct.lid (A.obj.obj (op U)) (M.val.obj (op U))).injective
+    simp only [z, map_sum, map_zero]
+    convert hs using 1
+    apply Finset.sum_congr rfl
+    intro p hp
+    change (TensorProduct.lid (A.obj.obj (op U)) (M.val.obj (op U)))
+      (a (op U) p ⊗ₜ[A.obj.obj (op U)] s p) = a (op U) p • s p
+    exact TensorProduct.lid_tmul _ _
+  let S := PresheafOfModules.sheafification.{u}
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).obj)
+  have : Mono (S.map φ) := tensor_presheaf_mono A M hM I.ι
+  have hmono : Mono ((S.map φ).val.app (op U)) :=
+    inferInstanceAs (Mono ((evaluation _ (op U)).map (S.map φ)))
+  have hz' : (toSheafify J (P ⊗ M.val).presheaf).app (op U) z = 0 := by
+    apply (ModuleCat.mono_iff_injective _).mp hmono
+    rw [map_zero]
+    change ((sheafifyMap J ((PresheafOfModules.toPresheaf _).map φ)).app (op U))
+      ((toSheafify J (P ⊗ M.val).presheaf).app (op U) z) = 0
+    have hn := congrArg (fun η ↦ η.app (op U) z)
+      (toSheafify_naturality J ((PresheafOfModules.toPresheaf _).map φ))
+    change (toSheafify J (Q ⊗ M.val).presheaf).app (op U) (φ.app (op U) z) =
+      ((sheafifyMap J ((PresheafOfModules.toPresheaf _).map φ)).app (op U))
+        ((toSheafify J (P ⊗ M.val).presheaf).app (op U) z) at hn
+    rw [hz, map_zero] at hn
+    exact hn.symm
+  let E := Presheaf.equalizerSieve (F := (P ⊗ M.val).presheaf) z 0
+  have hE : E ∈ J U := Presheaf.equalizerSieve_mem J
+    (toSheafify J (P ⊗ M.val).presheaf) z 0 (by simpa using hz')
+  refine ⟨E, hE, ?_⟩
+  intro V f hf
+  have hzV : (∑ p, (⟨a (op V) p, Submodule.subset_span ⟨p, rfl⟩⟩ : I.obj (op V))
+      ⊗ₜ[A.obj.obj (op V)] M.val.map f.op (s p)) = 0 := by
+    change (P ⊗ M.val).map f.op z = (P ⊗ M.val).map f.op 0 at hf
+    have hres (p : Fin n) : (P ⊗ M.val).map f.op
+        ((⟨a (op U) p, Submodule.subset_span ⟨p, rfl⟩⟩ : I.obj (op U))
+          ⊗ₜ[A.obj.obj (op U)] s p) =
+        (⟨a (op V) p, Submodule.subset_span ⟨p, rfl⟩⟩ : I.obj (op V))
+          ⊗ₜ[A.obj.obj (op V)] M.val.map f.op (s p) := by
+      change (P.map f.op _) ⊗ₜ[A.obj.obj (op V)] M.val.map f.op (s p) = _
+      congr 1
+      apply Subtype.ext
+      exact ha _ p
+    simpa only [z, map_sum, map_zero, hres] using hf
+  have hspan : Submodule.span (A.obj.obj (op V))
+      (Set.range (fun p ↦ (⟨a (op V) p, Submodule.subset_span ⟨p, rfl⟩⟩ : I.obj (op V)))) = ⊤ := by
+    apply (Submodule.span_range_subtype_eq_top_iff (I.obj (op V)) _).mpr
+    rfl
+  obtain ⟨l, b, t, hbt, hba⟩ :=
+    TensorProduct.vanishesTrivially_of_sum_tmul_eq_zero (A.obj.obj (op V)) hspan hzV
+  refine ⟨l, b, t, hbt, ?_⟩
+  intro q
+  have he := congrArg (fun x : I.obj (op V) ↦ x.val) (hba q)
+  simpa [ha, mul_comm] using he
+
+/-- Pass to the slice so that the given coefficients become global. -/
+private theorem flat_equational_forward
+    (K : Precoverage C) [K.HasIsos] [K.IsStableUnderComposition]
+    [K.IsStableUnderBaseChange] [K.HasPullbacks]
+    (B : Sheaf K.toGrothendieck CommRingCat.{u})
+    (N : ringedSiteModules.{u}
+      ((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj B))
+    (hN : IsFlat N) (U : C) (n : ℕ) (a : Fin n → B.obj.obj (op U))
+    (s : Fin n → N.val.obj (op U)) (hs : (∑ p, a p • s p) = 0) :
+    ∃ S : Presieve U, S ∈ K U ∧ ∀ (V : C) (f : V ⟶ U), S f →
+      ∃ (l : ℕ) (b : Fin n → Fin l → B.obj.obj (op V))
+        (t : Fin l → N.val.obj (op V)),
+        (∀ p, N.val.map f.op (s p) = ∑ q, b p q • t q) ∧
+        (∀ q, (∑ p, B.obj.map f.op (a p) * b p q) = 0) := by
+  let a' (X : (Over U)ᵒᵖ) (p : Fin n) : (B.over U).obj.obj X :=
+    B.obj.map X.unop.hom.op (a p)
+  have ha' {X Y : (Over U)ᵒᵖ} (f : X ⟶ Y) (p : Fin n) :
+      (B.over U).obj.map f (a' X p) = a' Y p := by
+    change B.obj.map f.unop.left.op (B.obj.map X.unop.hom.op (a p)) = _
+    rw [← Functor.map_comp_apply, ← op_comp, Over.w]
+  have hs' : ∑ p, a' (op (Over.mk (𝟙 U))) p • s p = 0 := by
+    simpa [a'] using hs
+  obtain ⟨S, hS, hfact⟩ := flat_global_coefficients (B.over U) (N.over U)
+    a' ha' (isFlat_over N U hN) (Over.mk (𝟙 U)) s hs'
+  have hS' : Sieve.overEquiv (Over.mk (𝟙 U)) S ∈ K.toGrothendieck U := hS
+  obtain ⟨T, hT, hTS⟩ := K.mem_toGrothendieck_iff_of_isStableUnderComposition.mp hS'
+  refine ⟨T, hT, ?_⟩
+  intro V f hf
+  have hsf := (Sieve.overEquiv_iff S f).mp (hTS V f hf)
+  obtain ⟨l, b, t, hbt, hab⟩ :=
+    hfact (Over.mk (f ≫ 𝟙 U)) (Over.homMk f) hsf
+  change Fin n → Fin l → B.obj.obj (op V) at b
+  change Fin l → N.val.obj (op V) at t
+  refine ⟨l, b, t, hbt, ?_⟩
+  intro q
+  have habq := hab q
+  change (∑ p, B.obj.map f.op (a' (op (Over.mk (𝟙 U))) p) * b p q) = 0 at habq
+  change (∑ p, B.obj.map f.op (B.obj.map (𝟙 (op U)) (a p)) * b p q) = 0 at habq
+  rw [B.obj.map_id] at habq
+  exact habq
+end Forward
+
+section Converse
+
+variable {C : Type u} [SmallCategory C]
+  (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
+  [J.IsStableUnderBaseChange] [J.HasPullbacks]
+  (A : Sheaf J.toGrothendieck CommRingCat.{u})
+  (M : ringedSiteModules.{u}
+    ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj A))
+
+omit [J.IsStableUnderBaseChange] [J.HasPullbacks] in
+private theorem local_matrix
+    (h : ∀ (U : C) (n : ℕ) (a : Fin n → A.obj.obj (op U))
+      (s : Fin n → M.val.obj (op U)), (∑ p, a p • s p) = 0 →
+      ∃ S : Presieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f →
+        ∃ (l : ℕ) (b : Fin n → Fin l → A.obj.obj (op V))
+          (t : Fin l → M.val.obj (op V)),
+          (∀ p, M.val.map f.op (s p) = ∑ q, b p q • t q) ∧
+          (∀ q, (∑ p, A.obj.map f.op (a p) * b p q) = 0)) :
+    ∀ (m : ℕ) (U : C) (n : ℕ) (a : Fin n → Fin m → A.obj.obj (op U))
+      (s : Fin n → M.val.obj (op U)), (∀ k, (∑ p, a p k • s p) = 0) →
+      ∃ S : Presieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f →
+        ∃ (l : ℕ) (b : Fin n → Fin l → A.obj.obj (op V))
+          (t : Fin l → M.val.obj (op V)),
+          (∀ p, M.val.map f.op (s p) = ∑ q, b p q • t q) ∧
+          (∀ k q, (∑ p, A.obj.map f.op (a p k) * b p q) = 0) := by
+  classical
+  intro m
+  induction m with
+  | zero =>
+    intro U n a s hs
+    refine ⟨Presieve.singleton (𝟙 U), J.mem_coverings_of_isIso _, ?_⟩
+    intro V f hf
+    cases hf
+    refine ⟨n, fun p q ↦ if p = q then 1 else 0, s, ?_, ?_⟩
+    · intro p
+      simp
+    · intro k
+      exact Fin.elim0 k
+  | succ m ih =>
+    intro U n a s hs
+    obtain ⟨S, hS, hfact⟩ := h U n (fun p ↦ a p (Fin.last m)) s (hs _)
+    have hnext (V : C) (f : V ⟶ U) (hf : S f) :
+        ∃ T : Presieve V, T ∈ J V ∧ ∀ (W : C) (g : W ⟶ V), T g →
+          ∃ (l : ℕ) (b : Fin n → Fin l → A.obj.obj (op W))
+            (t : Fin l → M.val.obj (op W)),
+            (∀ p, M.val.map (g ≫ f).op (s p) = ∑ q, b p q • t q) ∧
+            (∀ k q, (∑ p, A.obj.map (g ≫ f).op (a p k) * b p q) = 0) := by
+      obtain ⟨l, b, t, hbt, hab⟩ := hfact V f hf
+      let d : Fin l → Fin m → A.obj.obj (op V) :=
+        fun q k ↦ ∑ p, A.obj.map f.op (a p k.castSucc) * b p q
+      have hd (k : Fin m) : ∑ q, d q k • t q = 0 := by
+        simp only [d, Finset.sum_smul, mul_smul]
+        rw [Finset.sum_comm]
+        simp_rw [← Finset.smul_sum, ← hbt]
+        calc
+          _ = M.val.map f.op (∑ p, a p k.castSucc • s p) := by
+            rw [map_sum]
+            apply Finset.sum_congr rfl
+            intro p hp
+            exact (M.val.map_smul f.op _ _).symm
+          _ = 0 := by rw [hs, map_zero]
+      obtain ⟨T, hT, hTfact⟩ := ih V l d t hd
+      refine ⟨T, hT, ?_⟩
+      intro W g hg
+      obtain ⟨r, c, v, hcv, hdc⟩ := hTfact W g hg
+      refine ⟨r, fun p q ↦ ∑ j, A.obj.map g.op (b p j) * c j q, v, ?_, ?_⟩
+      · intro p
+        rw [op_comp, PresheafOfModules.map_comp_apply, hbt, map_sum]
+        have hmap (j : Fin l) :
+            M.val.map g.op (b p j • t j) = A.obj.map g.op (b p j) • M.val.map g.op (t j) :=
+          M.val.map_smul g.op _ _
+        simp_rw [hmap, hcv, Finset.smul_sum, Finset.sum_smul, mul_smul]
+        rw [Finset.sum_comm]
+      · intro k q
+        rw [op_comp, Functor.map_comp]
+        change (∑ p, A.obj.map g.op (A.obj.map f.op (a p k)) *
+          ∑ j, A.obj.map g.op (b p j) * c j q) = 0
+        simp_rw [Finset.mul_sum, ← mul_assoc]
+        rw [Finset.sum_comm]
+        simp_rw [← Finset.sum_mul, ← map_mul, ← map_sum]
+        refine Fin.lastCases ?_ (fun k ↦ ?_) k
+        · simp only [hab, map_zero, zero_mul, Finset.sum_const_zero]
+        · exact hdc k q
+    choose T hT hTf using hnext
+    let X (i : S.uncurry) : C := i.1.1
+    let f (i : S.uncurry) : X i ⟶ U := i.1.2
+    let Y (i : S.uncurry) (j : (T _ (f i) i.2).uncurry) : C := j.1.1
+    let g (i : S.uncurry) (j : (T _ (f i) i.2).uncurry) : Y i j ⟶ X i := j.1.2
+    refine ⟨Presieve.ofArrows (fun p : Σ i, (T _ (f i) i.2).uncurry ↦ Y p.1 p.2)
+      (fun p ↦ g p.1 p.2 ≫ f p.1), ?_, ?_⟩
+    · apply J.comp_mem_coverings
+      · convert hS using 1
+        apply funext₂
+        intro V f
+        apply propext
+        constructor
+        · rintro ⟨i⟩
+          exact i.2
+        · intro hf
+          exact Presieve.ofArrows.mk (⟨⟨V, f⟩, hf⟩ : S.uncurry)
+      · intro i
+        convert hT _ (f i) i.2 using 1
+        apply funext₂
+        intro W g
+        apply propext
+        constructor
+        · rintro ⟨j⟩
+          exact j.2
+        · intro hg
+          exact Presieve.ofArrows.mk (⟨⟨W, g⟩, hg⟩ : (T _ (f i) i.2).uncurry)
+    · intro W e he
+      cases he with
+      | mk p => exact hTf _ (f p.1) p.1.2 _ (g p.1 p.2) p.2.2
+
+
+omit [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] in
+private theorem local_tensor_kernel
+    (hmat : ∀ (m : ℕ) (U : C) (n : ℕ) (a : Fin n → Fin m → A.obj.obj (op U))
+      (s : Fin n → M.val.obj (op U)), (∀ k, (∑ p, a p k • s p) = 0) →
+      ∃ S : Presieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f →
+        ∃ (l : ℕ) (b : Fin n → Fin l → A.obj.obj (op V))
+          (t : Fin l → M.val.obj (op V)),
+          (∀ p, M.val.map f.op (s p) = ∑ q, b p q • t q) ∧
+          (∀ k q, (∑ p, A.obj.map f.op (a p k) * b p q) = 0))
+    {P Q : PresheafOfModules.{u}
+      ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj A).obj}
+    (i : P ⟶ Q) [Mono i] (U : C) (z : (P ⊗ M.val).obj (op U))
+    (hz : (i ▷ M.val).app (op U) z = 0) :
+    ∃ S : Presieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f →
+      (P ⊗ M.val).map f.op z = (0 : (P ⊗ M.val).obj (op V)) := by
+  classical
+  change TensorProduct.map (R := A.obj.obj (op U))
+    (i.app (op U)).hom LinearMap.id z = 0 at hz
+  obtain ⟨n, m, g, s, d, w, hgs, hds, hgd⟩ := finite_tensor_relation (R := A.obj.obj (op U))
+    (i.app (op U)).hom z hz
+  obtain ⟨S, hS, hfact⟩ := hmat m U n d s hds
+  refine ⟨S, hS, ?_⟩
+  intro V f hf
+  obtain ⟨l, b, t, hbt, hdb⟩ := hfact V f hf
+  have hzero (q : Fin l) : ∑ p, b p q • P.map f.op (g p) = 0 := by
+    apply (PresheafOfModules.injective_of_mono i (op V))
+    simp only [map_sum, map_smul, map_zero, PresheafOfModules.naturality_apply]
+    simp_rw [hgd]
+    have hmap (p : Fin n) :
+        Q.map f.op (∑ k, d p k • w k) =
+          ∑ k, A.obj.map f.op (d p k) • Q.map f.op (w k) := by
+      rw [map_sum]
+      apply Finset.sum_congr rfl
+      intro k hk
+      exact Q.map_smul f.op _ _
+    simp_rw [hmap, Finset.smul_sum, smul_smul]
+    rw [Finset.sum_comm]
+    simp_rw [mul_comm (b _ _), ← Finset.sum_smul, hdb, zero_smul]
+    exact Finset.sum_const_zero
+  have hvan : TensorProduct.VanishesTrivially (A.obj.obj (op V))
+      (fun p ↦ P.map f.op (g p)) (fun p ↦ M.val.map f.op (s p)) :=
+    ⟨l, b, t, hbt, hzero⟩
+  have heq : (P ⊗ M.val).map f.op z =
+      ∑ p, P.map f.op (g p) ⊗ₜ[A.obj.obj (op V)] M.val.map f.op (s p) := by
+    rw [hgs, map_sum]
+    apply Finset.sum_congr rfl
+    intro p hp
+    rfl
+  rw [heq]
+  exact TensorProduct.sum_tmul_eq_zero_of_vanishesTrivially _ hvan
+
+
+omit [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] in
+private theorem tensor_mono_of_local_matrix
+    (hmat : ∀ (m : ℕ) (U : C) (n : ℕ) (a : Fin n → Fin m → A.obj.obj (op U))
+      (s : Fin n → M.val.obj (op U)), (∀ k, (∑ p, a p k • s p) = 0) →
+      ∃ S : Presieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f →
+        ∃ (l : ℕ) (b : Fin n → Fin l → A.obj.obj (op V))
+          (t : Fin l → M.val.obj (op V)),
+          (∀ p, M.val.map f.op (s p) = ∑ q, b p q • t q) ∧
+          (∀ k q, (∑ p, A.obj.map f.op (a p k) * b p q) = 0)) :
+    let := monoidalCategory A
+    (tensorRight M).PreservesMonomorphisms := by
+  let := monoidalCategory A
+  let R := (sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj A
+  let S := PresheafOfModules.sheafification.{u} (𝟙 R.obj)
+  constructor
+  intro P Q i hi
+  have : Mono i.val := (SheafOfModules.forget R).map_mono i
+  let φ : P.val ⊗ M.val ⟶ Q.val ⊗ M.val := i.val ▷ M.val
+  have hLI : Presheaf.IsLocallyInjective J.toGrothendieck
+      ((PresheafOfModules.toPresheaf R.obj).map φ) := by
+    constructor
+    intro U x y hxy
+    have hz : φ.app U (x - y) = 0 := by
+      rw [map_sub]
+      exact sub_eq_zero.mpr hxy
+    obtain ⟨T, hT, hzero⟩ := local_tensor_kernel J A M hmat i.val U.unop (x - y) hz
+    apply J.toGrothendieck.superset_covering _ (J.generate_mem_toGrothendieck hT)
+    apply (Sieve.generate_le_iff _ _).mpr
+    intro V f hf
+    change (P.val ⊗ M.val).map f.op x = (P.val ⊗ M.val).map f.op y
+    exact sub_eq_zero.mp (by simpa only [map_sub] using hzero V f hf)
+  have hLI' : Sheaf.IsLocallyInjective
+      ((presheafToSheaf J.toGrothendieck AddCommGrpCat).map
+        ((PresheafOfModules.toPresheaf R.obj).map φ)) :=
+    (Presheaf.isLocallyInjective_presheafToSheaf_map_iff _ _).mpr hLI
+  have hmono₀ : Mono ((presheafToSheaf J.toGrothendieck AddCommGrpCat).map
+      ((PresheafOfModules.toPresheaf R.obj).map φ)) :=
+    Sheaf.mono_of_isLocallyInjective _
+  have hmono : Mono ((SheafOfModules.toSheaf R).map (S.map φ)) := hmono₀
+  have : Mono (S.map φ) := (SheafOfModules.toSheaf R).mono_of_mono_map hmono
+  have he := whiskerRight_tensorObjIsoSheafification_hom i M
+  have : Mono ((i ▷ M) ≫ (tensorObjIsoSheafification Q M).hom) := by
+    rw [he]
+    infer_instance
+  exact mono_of_mono (i ▷ M) (tensorObjIsoSheafification Q M).hom
+
+end Converse
 
 /-- A module sheaf is flat exactly when each finite relation between its sections locally
 factors through a finite free module with zero coefficient relation.
 Source: Stacks Project, Modules on Sites, Tag 08FC, (1) iff (2)
 (blueprint: lem-weil-pbc-site-flat-equational-criterion).
 
-Proof: First use the sectionwise cokernel followed by sheafification to identify local
-lifting in exact sequences. Sheafification also makes every tensor section locally a finite
-sum of pure tensors, and detects a zero presheaf tensor locally.
-For the forward implication restrict the flat sheaf to C/U and tensor the exact complex
-K → A^n → A, where K is the kernel of the row of coefficients. Locally lift the vector of
-sections to K tensor M and express that lift as a finite sum k_q tensor t_q. The coordinates
-b_pq of k_q give both displayed equations. For n = 0 use the identity cover and l = 0.
-For the converse first induct on the number of columns to obtain the finite-matrix version:
-factor the last column, then factor the remaining columns over a refinement and compose.
-Given a monomorphism N → N', represent a tensor in its kernel locally by a finite sum and
-make its image zero already in the presheaf tensor. Present M(U) as a quotient of the free
-module on its elements. Right exactness of tensor gives finitely many kernel vectors
-witnessing this zero; choose a finite set containing their supports and the given elements.
-This yields a finite presentation P and a lift of the tensor to N(U) tensor P that dies in
-N'(U) tensor P. Apply the finite-matrix criterion to that presentation: locally P → M
-factors through a finite free module. Tensoring N → N' with that free module is injective,
-so the original tensor vanishes locally and therefore globally. Finally tensor sheaves are
-right exact: balanced pairings killing N tensor M descend uniquely through the sheaf
-cokernel by local lifting and gluing. Preservation of monomorphisms together with this
-cokernel property proves exactness of tensorRight M, hence flatness. -/
+Proof: For the forward implication restrict the flat sheaf to C/U. Form the presheaf ideal
+I generated by the restricted coefficients. The given tensor in I tensor M maps to zero in
+A tensor M. Flatness and monoidal sheafification make its image in the associated sheaf zero;
+local injectivity of sheafification makes it zero on a covering. The ordinary finite-generator
+tensor criterion then supplies the desired coefficients and sections on that covering.
+
+For the converse, induction on the number of columns gives simultaneous factorization of
+finitely many relations: factor the last column, apply induction to the remaining columns
+after substitution, compose the coefficient matrices, and compose the coverings. For a tensor
+killed by a presheaf monomorphism, use the free module on the elements of M(U) and right
+exactness of tensor to obtain finitely many relations witnessing the zero image. The matrix
+factorization makes the original tensor zero locally. Hence the presheaf tensor map is locally
+injective, its associated sheaf map is monic, and tensorRight M preserves monomorphisms.
+The closed symmetric monoidal structure already gives preservation of colimits; additivity
+and preservation of monomorphisms and cokernels give exactness, hence flatness. -/
 theorem isFlat_iff_local_equationalCriterion
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
@@ -77,6 +528,16 @@ theorem isFlat_iff_local_equationalCriterion
               (t : Fin l → M.val.obj (op V)),
               (∀ p : Fin n, M.val.map f.op (s p) = ∑ q : Fin l, b p q • t q) ∧
               (∀ q : Fin l, (∑ p : Fin n, A.obj.map f.op (a p) * b p q) = 0) := by
-  sorry
+  let := monoidalCategory A
+  let := symmetricCategory A
+  let := monoidalClosed (R := A)
+  constructor
+  · intro hM
+    exact flat_equational_forward J A M hM
+  · intro h
+    have := tensor_mono_of_local_matrix J A M (local_matrix J A M h)
+    have := (tensorRight M).preservesHomology_of_preservesMonos_and_cokernels
+    change PreservesFiniteLimits _ ∧ PreservesFiniteColimits _
+    exact ⟨(tensorRight M).preservesFiniteLimits_of_preservesHomology, inferInstance⟩
 
 end SheafOfModules
