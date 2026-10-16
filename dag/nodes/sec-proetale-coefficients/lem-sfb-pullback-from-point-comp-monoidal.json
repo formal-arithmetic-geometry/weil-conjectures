@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-pullback-from-point-comp-monoidal",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$f^*\\circ p_Y^*\\cong p_X^*$ is monoidal",
@@ -18,25 +18,141 @@
  ],
  "proof": [
   {
-   "text": "By construction, the isomorphism is $p^*$ whiskered with the inverse of the\ncomposition isomorphism $(\\pi_Y\\circ f)^*\\cong f^*\\circ\\pi_Y^*$, followed by\nan equality. It therefore suffices that this composition isomorphism is\nmonoidal.",
-   "uses": [],
-   "elementary": null
+   "text": "Work with abelian sheaves and their tensor product over $\\mathbf Z$, not their cartesian product. Put $a=\\pi_Y$, $h=a\\circ f=\\pi_X$, $A=a^*$, $B=f^*$, $U=a_*$, $V=f_*$, $H=h^*$ and $K=h_*$. By [def-sfb-finite-upper-star-monoidal] the three pullbacks are strong monoidal for the tensor product of [sk-def-sfb-sheaf-tensor]. By [lem-sfb-finite-monoidal-adjunction] the units and counits of $A\\dashv U$, $B\\dashv V$ and $H\\dashv K$ are monoidal natural transformations. These statements apply to arbitrary scheme morphisms, so apply to $f,a,h$ without properness or finiteness assumptions.",
+   "uses": [
+    "def-sfb-finite-upper-star-monoidal",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-finite-monoidal-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/lem-sfb-pullback-from-point-comp-monoidal.proof.md",
+    "place": "second paragraph: the adjunctions are monoidal; fix all three adjunctions and the tensor convention"
+   }
   },
   {
-   "text": "That isomorphism is the mate, under the adjunctions $g^*\\dashv g_*$, of the\ncomposition isomorphism $\\pi_{Y*}\\circ f_*\\cong(\\pi_Y\\circ f)_*$ of\npushforwards. The latter is monoidal for the lax monoidal structures of the\npushforwards, because on sections both sides are restriction along canonical\nisomorphisms of iterated fibre products, and these commute with the\nobjectwise tensor product. The adjunctions are monoidal\n([sk-def-sfb-finite-pushforward-pullback]). The mate of a monoidal natural\ntransformation between lax monoidal right adjoints is monoidal for the\ninduced oplax structures on the left adjoints, and these are the strong\nmonoidal structures.",
+   "text": "Here are the elementary monoidal diagram calculations used below. Write $\\mu^F_{M,N}:FM\\otimes FN\\to F(M\\otimes N)$ and $e^F:\\mathbf1\\to F\\mathbf1$. For monoidal $s:F\\to G$ and $t:G\\to J$,\n$$ (t s)_{M\\otimes N}\\mu^F=t_{M\\otimes N}\\mu^G(s_M\\otimes s_N)=\\mu^J(t_M\\otimes t_N)(s_M\\otimes s_N)=\\mu^J((t s)_M\\otimes(t s)_N),\\qquad (t s)_{\\mathbf1}e^F=e^J. $$\nThus their composite is monoidal. Postcomposition by a lax monoidal functor $T$ preserves these equations by naturality of $\\mu^T,e^T$ and $\\mu^{TF}=T(\\mu^F)\\mu^T$, $e^{TF}=T(e^F)e^T$. Precomposition by a lax monoidal $S$ preserves them by naturality of $s$ at $\\mu^S,e^S$ and $\\mu^{FS}=F(\\mu^S)\\mu^F$, $e^{FS}=F(e^S)e^F$. If $s$ is invertible, multiplying its tensor equation by $s^{-1}_{M\\otimes N}$ and by $s_M^{-1}\\otimes s_N^{-1}$ gives the equation for $s^{-1}$; multiplying its unit equation gives its unit equation. These are direct computations with the definitions, not additional geometric lemmas.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/lem-sfb-pullback-from-point-comp-monoidal.proof.md",
+    "place": "second paragraph, last sentence: write out the monoidal transformation calculus instead of invoking an uncited mate theorem"
+   }
+  },
+  {
+   "text": "Set $L=BA$ and $R=UV$. The composite adjunction $L\\dashv R$ is obtained by the two successive Hom bijections. If $u^A,v^A$ and $u^B,v^B$ denote the units and counits, its unit at $F$ is $u_F=U(u^B_{AF})\\circ u^A_F$ and its counit at $G$ is $v_G=v^B_G\\circ B(v^A_{VG})$. Its strong/lax structures are the composite ones. Each displayed transformation is a composite of whiskered monoidal units or counits from step 1, so the calculations of step 2 prove that $u$ and $v$ are monoidal. In particular this is a monoidal adjunction with exactly the composite structures, not merely with some isomorphic structures. The Hom bijections and the displayed unit/counit also follow directly from the adjunction of [def-sfb-finite-upper-lower-star-adjunction].",
+   "uses": [
+    "lem-sfb-finite-monoidal-adjunction",
+    "def-sfb-finite-upper-lower-star-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/lem-sfb-pullback-from-point-comp-monoidal.proof.md",
+    "place": "second paragraph: the adjunction for the composite pullback; its unit and counit written explicitly"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-pushforward-comp-monoidal] with $g=a$ and coefficient category $\\Ab$: the canonical isomorphism $c:R=UV\\xrightarrow{\\sim}K$, induced by $(W\\times_{\\Spec\\mathbf Z}Y)\\times_YX\\cong W\\times_{\\Spec\\mathbf Z}X$, is monoidal. Hence $c^{-1}:K\\to R$ is monoidal by step 2. Write $u^H$ for the unit of $H\\dashv K$. The adjoint comparison $b:L\\to H$ inverse to the canonical composition isomorphism $H\\to L$ has the explicit formula\n$$ b_F=v_{HF}\\circ L(c^{-1}_{HF})\\circ L(u^H_F). $$\nIndeed the first map inserts $F\\to KHF$, the second replaces $K$ by $R$, and the last evaluates $LRHF\\to HF$; this is the defining two-adjunction transpose of $c^{-1}$. Its inverse is the transpose of $c$ in the other direction: cancellation follows from $cc^{-1}=1$, naturality, and the two triangle identities. In particular the formula is for $L\\to H$, the direction used in [def-sfb-pullback-from-point-comp-iso]. Each of the three factors is monoidal: respectively the unit of $H\\dashv K$ whiskered by $L$, $c^{-1}$ whiskered by $L,H$, and the composite-adjunction counit whiskered by $H$. Step 2 therefore proves both monoidal equations for $b$. This supplies the mate argument in the blueprint rather than assuming it as a new lemma.",
+   "uses": [
+    "lem-sfb-pushforward-comp-monoidal",
+    "lem-sfb-finite-monoidal-adjunction",
+    "def-sfb-pullback-from-point-comp-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/lem-sfb-pullback-from-point-comp-monoidal.proof.md",
+    "place": "second paragraph: monoidal pushforward composition and its conjugate; use the inverse right-adjoint map for the comparison L to H"
+   }
+  },
+  {
+   "text": "The functor $p^*$ is strong monoidal by [lem-sfb-point-upper-star-braided]. Precompose $b$ with $p^*$; step 2 gives a monoidal comparison $BAp^*\\to Hp^*$. The functors in [def-sfb-upper-star-from-point] are $p_Y^*=Ap^*$ and $p_X^*=\\pi_X^*p^*$. By [def-sfb-pullback-from-point-comp-iso] the comparison in the statement is precisely this whiskered map, with the reassociation of composites and $h=\\pi_X$. The reassociation has identity components and is monoidal: expanding either parenthesization gives the same tensor comparison $BA(\\mu^{p^*})\\circ B(\\mu^A)\\circ\\mu^B$ and the same unit comparison $BA(e^{p^*})\\circ B(e^A)\\circ e^B$. The equality $h=\\pi_X$ identifies the functor and its specified monoidal structure simultaneously, so its equality isomorphism is monoidal by substitution. Composing these maps gives the unit and tensor compatibility of $f^*p_Y^*\\cong p_X^*$, as required.",
+   "uses": [
+    "lem-sfb-point-upper-star-braided",
+    "def-sfb-upper-star-from-point",
+    "def-sfb-pullback-from-point-comp-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/lem-sfb-pullback-from-point-comp-monoidal.proof.md",
+    "place": "first paragraph: whisker the inverse composition isomorphism by p-star and identify the structure morphism"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-pullback-from-point-comp-iso",
+  "def-sfb-upper-star-from-point",
+  "lem-sfb-finite-monoidal-adjunction",
+  "lem-sfb-point-upper-star-braided",
+  "lem-sfb-pushforward-comp-monoidal",
+  "sk-def-sfb-sheaf-tensor"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/lem-sfb-pullback-from-point-comp-monoidal.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/lem-sfb-pullback-from-point-comp-monoidal.proof.md",
+  "place": "Both blueprint proof paragraphs; explicit unit/counit and monoidal diagram calculations fill in the mate argument."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical natural isomorphism between composite inverse image functors on sheaves and the inverse image of the composite is monoidal",
+   "results": "8 hits: CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp', TopCat.Presheaf.Pushforward.comp_inv_app",
+   "date": "2026-10-16",
+   "verdict": "no complete match for this pro-étale comparison; general monoidal calculus and sheaf/module composition candidates only"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv|IsMonoidal.*comp|IsMonoidal.*whisker",
+   "results": "19 hits: Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean (directory Mathlib/CategoryTheory/Monoidal)",
+   "date": "2026-10-16",
+   "verdict": "no complete match for this pro-étale comparison; general monoidal calculus and sheaf/module composition candidates only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A mate of a monoidal natural transformation of lax monoidal right adjoints is monoidal for strong monoidal left adjoints",
+   "results": "8 hits: CategoryTheory.NatTrans.IsMonoidal.comp, CategoryTheory.NatTrans.IsMonoidal, CategoryTheory.leftAdjointMate, CategoryTheory.LaxMonoidalFunctor.Hom.isMonoidal, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.rightAdjointMate, CategoryTheory.NatTrans.IsMonoidal.whiskerRight, CategoryTheory.Adjunction.rightAdjointLaxMonoidal",
+   "date": "2026-10-16",
+   "verdict": "no complete match for this pro-étale comparison; general monoidal calculus and sheaf/module composition candidates only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "12 hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-16",
+   "verdict": "no complete match for this pro-étale comparison; general monoidal calculus and sheaf/module composition candidates only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal natural transformation of lax monoidal right adjoints has a monoidal conjugate between their strong monoidal left adjoints",
+   "results": "8 hits: CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.mapMon, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.Adjunction.mapMon_counit, CategoryTheory.Adjunction.mapMon_unit, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit",
+   "date": "2026-10-16",
+   "verdict": "no complete match for this pro-étale comparison; general monoidal calculus and sheaf/module composition candidates only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"Monoidal\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no complete match for this pro-étale comparison; general monoidal calculus and sheaf/module composition candidates only"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Mm]onoidal|[Mm]onoidal.*sheafPullback|upperStarFromPointComp",
+   "results": "0 hits:  (directory Mathlib/CategoryTheory/Sites)",
+   "date": "2026-10-16",
+   "verdict": "no complete match for this pro-étale comparison; general monoidal calculus and sheaf/module composition candidates only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural comparison from pulling back a condensed abelian group first to Y and then along a scheme morphism X to Y, to pulling it back to X, commutes with tensor products and tensor units",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_id_comp",
+   "date": "2026-10-16",
+   "verdict": "no complete match for this pro-étale comparison; general monoidal calculus and sheaf/module composition candidates only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -55,5 +171,29 @@
   "AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-pullback-from-point-comp-monoidal",
+  "worker": "stage1",
+  "summary": "Checked the current blueprint and both read-only Lean source checkouts, ruled out attachment and an exact Mathlib leaf, reused monoidality of pushforward composition and the monoidal adjunction statements, and expanded the mate into unit/whiskering/counit factors. No new nodes. Kept the item statement unchanged. Reported the inverse-direction typo in the separate imported pullback-composition definition.",
+  "blueprint": "Steps 1,3,4 realize the second blueprint proof paragraph; step 2 proves the elementary monoidal calculus used there, and step 5 realizes the first paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-pushforward-comp-monoidal",
+    "why": "Generic monoidality of the pushforward composition isomorphism, specialized to g=pi_Y and A=Ab, exactly as the item proof requires. No local clause of this item asserts it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-pushforward-comp-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q42-7d01937fb",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-7d01937fb (reviewer sub-agent of L); spot-checked: Read the complete delivery, cited statements and current blueprint sources; checked the exact master comparison and Ab coefficients. All five steps are valid, with no new nodes, missing dependencies or cycles. Accepted the declared pushforward-composition tool use. Recorded inherited metadata omissions and the separate inverse-direction typo in review.md; neither invalidates this proof."
+ }
 }
