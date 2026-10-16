@@ -132,12 +132,12 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-16bd2f64d (reviewer sub-agent of L); spot-checked: Mathematics and citations pass full review, including finite coefficients, pullback, affine vanishing, injective resolutions, and edge cases. Fixed missing split_report.tool_uses declaration for off-unit node lem-weil-pbc-affine-etale-site-topos; corrected DAG JSON is under fixes/dag/nodes/sec-proper-base-change/. Review written to review.md.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-ac14a8fa9",
-  "group": "NL",
-  "result": "pass",
-  "note": "Wrote review.md. Checked immutable statements, dependency constructions, sources, universes, edge cases, docstrings, report sections, and verbatim signature. Per-file scompile.py reproduced cleanly. No findings; project clones and branch head unchanged."
+  "reviewer": "NT-stage2-Codex-4deda7e4b",
+  "group": "Q05",
+  "result": "fix",
+  "note": "Wrote review.md and complete fixes for H9 proof-import omissions and the stale report claim. Statements, dependencies, universes, edge cases and signatures checked. Original and corrected four-file packets compile cleanly through scompile.py. Branch unchanged."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel",
@@ -145,9 +145,10 @@
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSiteComparisonFiniteLevel.lean",
   "statement": "theorem siteComparison_finiteLevel (T : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] : PreservesFiniteLimits (comparisonUpperStar (ModuleCat.{u + 1} Λ) T) ∧ PreservesFiniteColimits (comparisonUpperStar (ModuleCat.{u + 1} Λ) T) ∧ (∀ F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsIso ((T.proEtaleSiteComparisonModules Λ).unit.app F)) ∧ (∀ (I : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (_ : Injective I) (q : ℕ), 0 < q → IsZero (((comparisonLowerStar (ModuleCat.{u + 1} Λ) T).rightDerived q).obj ((comparisonUpperStar (ModuleCat.{u + 1} Λ) T).obj I)))",
   "branch": "newtargets-dag",
-  "by": "NL",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "Q05",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "§1(B): the published compiled interface imports retired WeilConjectures.SixFunctors.ProEtale.UpperLowerStar declarations, which collide with the finite-coefficient framework required by the recorded completed coefficients. Recompile the current source of this same module against its modern finite-coefficient imports; all declaration signatures and definitions are unchanged. This restores the full recorded node, with no mathematical restriction."
  },
  "reviewed_proof": {
   "date": "2026-10-15",
