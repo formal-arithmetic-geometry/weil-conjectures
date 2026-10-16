@@ -7,7 +7,6 @@ public import Sheaf.Paper.HypercoverResolutionModel
 import Sheaf.Paper.HypercoverRefinementSectionLifts
 import WeilConjectures.Algebra.Homology.TotalComplexRowResolution
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.Algebra.Homology.TotalComplexSymmetry
 
 /-! # Refinement descent for the bottom row of an injective-resolution bicomplex
 

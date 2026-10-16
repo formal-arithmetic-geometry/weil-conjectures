@@ -8,8 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
 

@@ -6,22 +6,16 @@ Authors: SHEAF group NC
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomology
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 public import Mathlib.Algebra.Homology.CochainComplexPlus
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import Mathlib.Algebra.Homology.SingleHomology
 import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 import Mathlib.Algebra.Homology.ConcreteCategory
 import Mathlib.CategoryTheory.Adjunction.Additive
 import all Sheaf.AlgebraicGeometry.DualTensorHomComparison
 import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Free
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Derived Hom from a locally finite free module on a ringed site
 

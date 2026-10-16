@@ -6,11 +6,8 @@ module
 
 public import Sheaf.CategoryTheory.SimplicialOrdinalPath
 public import Sheaf.AlgebraicGeometry.EtaleSimplicialMatching
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicTopology.OrdinalBoundaryFamily
 import Sheaf.AlgebraicGeometry.EtaleFiniteSimplexLifting
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.Tactic
 
 /-!
 # The ordered endpoint pullback of étale hypercovers is a hypercover

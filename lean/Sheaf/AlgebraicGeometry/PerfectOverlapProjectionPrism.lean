@@ -6,7 +6,6 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapTransportPrism
-public import Sheaf.AlgebraicGeometry.PerfectOverlapProjectionSchemeSquare
 
 /-! # The fixed pullback-composition prism over an overlap -/
 

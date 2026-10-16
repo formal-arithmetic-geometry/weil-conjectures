@@ -6,7 +6,6 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapRestrictedComposition
-public import Sheaf.AlgebraicGeometry.SingleComplexOpenCounitCompatibility
 
 /-! # Component equations for the pinned open square -/
 

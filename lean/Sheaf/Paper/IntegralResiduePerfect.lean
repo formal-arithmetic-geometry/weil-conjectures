@@ -6,7 +6,6 @@ Authors: SHEAF group C2
 module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortExact
 
 /-! # Dualizability of the residue coefficient as an integral complex

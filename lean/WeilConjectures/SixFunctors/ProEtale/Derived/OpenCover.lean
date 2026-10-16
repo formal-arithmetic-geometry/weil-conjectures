@@ -6,13 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ComparisonMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekComparison
-public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.FlatModuleCat
 
 /-!
 # Pro-étale complexes on an open cover

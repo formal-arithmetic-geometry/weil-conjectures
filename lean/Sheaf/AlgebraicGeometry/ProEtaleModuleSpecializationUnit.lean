@@ -6,10 +6,8 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 import Sheaf.AlgebraicGeometry.ProEtaleSpecializationRestrictionSections
-import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.CategoryTheory.ModuleInverseImageUnitComparison
 import Sheaf.AlgebraicGeometry.ProEtaleModelRingPresentation
 

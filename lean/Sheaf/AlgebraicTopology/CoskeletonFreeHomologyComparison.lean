@@ -5,14 +5,12 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.CategoryTheory.Sites.Abelian
-public import Mathlib.CategoryTheory.Sites.LeftExact
 import Sheaf.AlgebraicTopology.ImageCoskeletonFactorization
 import Mathlib.CategoryTheory.Sites.Adjunction
 import Sheaf.Paper.TrivialKanHomotopyEquivalence

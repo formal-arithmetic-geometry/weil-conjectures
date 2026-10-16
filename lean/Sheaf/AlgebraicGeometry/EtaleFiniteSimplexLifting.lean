@@ -6,7 +6,6 @@ module
 
 public import Sheaf.Paper.EtaleHypercover
 public import Mathlib.AlgebraicTopology.SimplicialSet.StdSimplex
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.EtaleSimplicialMatching
 import Sheaf.AlgebraicGeometry.SimplicialHomStandardSimplex
 import Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting

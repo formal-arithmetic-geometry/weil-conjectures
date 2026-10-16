@@ -6,7 +6,6 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
-public import Mathlib.AlgebraicGeometry.Restrict
 
 /-! # The overlap stage cartesian scheme isomorphism -/
 
