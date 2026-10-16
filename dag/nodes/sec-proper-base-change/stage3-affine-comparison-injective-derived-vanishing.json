@@ -1,0 +1,168 @@
+{
+ "id": "stage3-affine-comparison-injective-derived-vanishing",
+ "kind": "statement",
+ "title": "Affine comparison derived global-section vanishing for Grothendieck abelian coefficients",
+ "statement": "Let X be an affine scheme in universe u and A a Grothendieck abelian category with morphisms in universe u+1 [def-sp-grothendieck-abelian]. For an injective A-valued sheaf I on X_et [def-sp-injective-resolutions], form the comparison pullback nu_X^* I [def-weil-pbc-site-comparison-morphism]. For every natural number q, its (q+1)-st right derived global sections on X_proet are zero. Global sections mean evaluation at the identity object X/X; no direct-image sheaf is mentioned.",
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/099U",
+  "place": "Lemma 61.19.4, finite Cech proof; categorical extension using finite products and exact filtered colimits"
+ },
+ "proof": [
+  {
+   "text": "Use the affine ind-etale basis and finite covering refinements, closed under fibre products. Present each member of a finite basis cover as a cofiltered limit of affine etale schemes over its target. The finite product of index sets is directed; each stage family covers since the original cover does.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the categorical comparison-section continuity construction isColimit_comparisonUpperStar_mapCocone_of_isAffine and its naturality. Fibre products commute with these limits. Exact filtered colimits in the Grothendieck abelian coefficient category commute with finite products and homology, so the finite Cech complex is the filtered colimit of its stage complexes. This is the categorical argument underlying the module specialization in lem-weil-pbc-comparison-sections; no underlying abelian injectivity is assumed.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-sp-grothendieck-abelian",
+    "lem-weil-pbc-comparison-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Present the covered basis object U as an inverse limit of affine etale X-schemes. Descend each arrow of the finite etale cover to a common stage by finite presentation, then take a cofinal tail on which the family covers. Descend only this finite diagram; all higher intersections are formed by base change. Apply the same continuity and finite-product argument to identify the Cech complex with a filtered colimit of complexes for I on the original etale site of X.",
+   "uses": [
+    "lem-weil-pbc-etale-finite-data-descent",
+    "lem-weil-pbc-limit-affine-stage",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The augmented finite Cech complex of I for each stage cover is exact in positive degrees by injectivity on X_et. The usual injective Cech argument and dimension-shifting criterion are categorical with finite products: sheafification is exact, the augmented covering resolution is exact locally, and finite products of short exact section sequences are exact. Consequently the criterion applies to A-valued sheaves as well. No exact infinite product is used. This is the same finite Cech argument of Stacks 099U, expressed in a Grothendieck abelian category, rather than an application of the abelian-group-only Lean theorem.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exactness of filtered colimits kills all positive Cech homology in the two limits. The Cech criterion therefore gives zero derived evaluation on every basis object. The affine terminal object is a basis object, giving the statement. The empty covering has zero positive complex; q+1 always lies in positive degree.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-ind-etale-stability",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sp-grothendieck-abelian",
+  "lem-weil-pbc-comparison-sections",
+  "lem-weil-pbc-etale-finite-data-descent",
+  "lem-weil-pbc-limit-affine-stage",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/099U",
+  "place": "Categorical form of the two-limit finite Cech proof, with Grothendieck abelian coefficients; not a claim that Stacks states this coefficient generality verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck abelian coefficients affine etale proetale injective vanishing derived sections",
+   "results": "Algebra.Etale.formallyEtale, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Extension.cotangentComplex_injective_iff, Algebra.formallyEtale_iff, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, AlgebraicGeometry.IsEtale.of_comp, StandardEtalePair.instFormallyEtaleRing",
+   "date": "2026-10-16",
+   "verdict": "No affine comparison derived-vanishing theorem; generic injective vanishing applies only to injectives in the source category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+   "results": "CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+   "date": "2026-10-16",
+   "verdict": "No affine comparison derived-vanishing theorem; generic injective vanishing applies only to injectives in the source category."
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStar|proetale.*injective|injective.*proetale",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "No affine comparison derived-vanishing theorem; generic injective vanishing applies only to injectives in the source category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of an injective etale sheaf under proetale comparison has vanishing derived global sections on an affine scheme for Grothendieck abelian coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic",
+  "date": "2026-10-16",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-site-comparison-finite-level",
+   "place": "proof paragraph 3: affine cohomology vanishing, before paragraph 4 direct-image sheafification",
+   "via": [
+    "lem-weil-pbc-comparison-grothendieck-injective-acyclicity",
+    "lem-weil-pbc-comparison-injective-acyclicity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineComparisonInjectiveDerivedVanishing.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.isZero_rightDerived_globalSections_comparisonUpperStar_of_isAffine",
+  "statement": "theorem isZero_rightDerived_globalSections_comparisonUpperStar_of_isAffine\n    (X : Scheme.{u}) [IsAffine X]\n    (I : Sheaf X.smallEtaleTopology A) [Injective I] (q : ℕ) :\n    IsZero (((sheafToPresheaf (Scheme.ProEt.topology X) A ⋙\n      (evaluation X.ProEtᵒᵖ A).obj (op (MorphismProperty.Over.mk ⊤ (𝟙 X)\n        (MorphismProperty.id_mem _ X)))).rightDerived (q + 1)).obj\n      ((comparisonUpperStar A X).obj I))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-df2b8",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261016T054838-L-158175",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-df2b8",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261016T054838-L-158175",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched their DAG statements; compilation and all seven direct importer checks passed."
+ }
+}

@@ -60,40 +60,49 @@
   "branch": "sheaf-dag",
   "by": "T4",
   "date": "2026-10-16",
-  "note": "Existing generic Grothendieck abelian coefficient theorem. Specialize A to ModuleCat.{u + 1} Λ; all coefficient-category instances are inferred. No new Lean statement or proof hole is introduced."
+  "note": "Existing signature unchanged. The theorem is reduced to affine derived global-section vanishing by an explicit injective-resolution, localization and sheafification argument. This is a decomposition, with one new affine theorem still sorry."
  },
  "proof": [
   {
-   "text": "Take a module injective resolution of the pro-etale comparison pullback of I using Grothendieckness and enough injectives. Apply comparison direct image to the resolution. Its underlying presheaf complex evaluates at W as the complex of sections of the resolution over W. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels, so exactness of sheafification identifies its cohomology sheaf with the sheafification of its presheaf cohomology. Its degree-(n+1) higher direct image is the sheafification of derived evaluation over etale objects. On an affine etale object W over X, etale restriction preserves injectives by its exact left adjoint. Comparison pullback commutes with restriction. Localization identifies derived evaluation over W with derived global sections on W. The affine comparison injective-vanishing theorem makes this zero for the restricted injective etale sheaf on W. Every etale object has an affine open cover. Each section of the cohomology presheaf thus restricts to zero on a covering, so its sheafification is zero. This proves the assertion for arbitrary X. The attached generic theorem already exists with a sorry in its source module; this node records the module specialization needed here. The pre-existing lem-cbc-abelian-comparison-injective-acyclicity records only the abelian-group specialization of this same Lean declaration.",
+   "text": "Choose an injective resolution R of the comparison pullback of I. The resolution isomorphism computes each positive derived comparison direct image as the homology of comparisonLowerStar applied to R. Restrict its short complex to the affine etale basis, a faithful exact restriction functor. To prove exactness it suffices to prove exactness of the underlying section presheaf and then apply exact sheafification.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-comparison-injective-acyclicity",
-    "lem-weil-pbc-etale-restriction-injectives",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "def-sp-left-exact-additive",
-    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sheafification",
     "lem-sp-grothendieck-enough-injectives"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each affine etale object V, etale pullback sends I to an injective on V_et. Apply the affine derived-global-section vanishing theorem to V and that injective. Transport via the canonical comparisonUpperStarCompUpperStarIso. Localization of the pro-etale site preserves injectives; the already proved isZero_rightDerived_sectionsFunctor_of_upperStar transports global-section vanishing to derived evaluation at V.",
+   "uses": [
+    "stage3-affine-comparison-injective-derived-vanishing",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-proetale-restriction-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use R.isoRightDerivedObj for the section functor to conclude that every affine section short complex is exact. This is definitionally the evaluation of the presheaf short complex in step 1. Evaluation detects presheaf exactness, exact sheafification returns the restricted sheaf complex, and faithful exact restriction reflects exactness on X_et. Thus every positive homology sheaf is zero. This uses sheafification of section homology; it does not identify sections of a higher direct-image sheaf with derived sections.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-comparison-injective-acyclicity",
+  "def-weil-pbc-sheafification",
+  "lem-sp-grothendieck-enough-injectives",
+  "stage3-affine-comparison-injective-derived-vanishing",
   "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "def-sp-left-exact-additive",
-  "def-weil-sheaf-of-modules-category",
-  "lem-sp-grothendieck-enough-injectives"
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-proetale-restriction-injectives"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "lean/WeilConjectures/SixFunctors/ProEtale/Comparison/LowerStarAcyclic.lean",
-  "place": "Proof paragraphs 3-4 of prop-weil-pbc-site-comparison-finite-level; existing source theorem rightAcyclic_comparisonUpperStar_obj_of_injective, lines 107-121"
+  "place": "V2 second reading, affine-basis exactness of an injective resolution; affine cohomology remains a separate obligation."
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -106,13 +115,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T4",
+  "reviewer": "X-df2b8",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261015T212944-L-2073357",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261016T054838-L-158175",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched their DAG statements; compilation and all seven direct importer checks passed."
  }
 }
