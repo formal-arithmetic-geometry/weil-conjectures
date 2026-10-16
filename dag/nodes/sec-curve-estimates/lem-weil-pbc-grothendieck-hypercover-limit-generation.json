@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-grothendieck-hypercover-limit-generation",
+ "kind": "statement",
+ "title": "Stage hypercover cohomology objects jointly generate the limit object",
+ "statement": "Let S be a scheme, A a Grothendieck abelian category, F an A-valued small-etale sheaf on S, and D:I→Over(S) a small nonempty cofiltered diagram with qcqs stage schemes and affine transitions. Let c be a cone whose underlying scheme cone is a limit, and assume its vertex is qcqs. Fix q≥0 and use the actual hypercover cohomology object from [lem-weil-pbc-grothendieck-hypercover-model]. Set H_i=H_hyp^q((D_i→S)^*F) and H=H_hyp^q((c.pt→S)^*F). If B is an object of A and f,g:H→B satisfy a≫f=a≫g for every i and every a:H_i→H, then f=g. This is solely a statement about alternating cochain cohomology and finite-stage descent, with no injective resolutions or derived sections.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 2: finite skeleton descent and section representatives, categorical version of surjectivity",
+  "external": [
+   {
+    "document": "Stacks Project, Hypercoverings",
+    "place": "Tag 01H0"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-finite-split-hypercover",
+  "lem-weil-pbc-grothendieck-hypercover-model",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Pullback of a finite split hypercover along a cone projection preserves its finite splitting and matching covers. The inverse-image unit gives maps of alternating section complexes, hence stage-to-limit cohomology maps compatible with refinement.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a fixed q only the finite truncation through q+1 affects cohomology. Descend this truncation to a stage using finite hypercover object descent; matching covers allow it to be extended to a full finite split hypercover at that stage. The argument is applied to finite truncations, never a claim that an entire infinite simplicial object descends at once.",
+   "uses": [
+    "lemma-weil-pbc-finite-hypercover-descent-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a descended qcqs etale constituent, sections of the inverse-image sheaf are the filtered colimit of the stage section objects. Prove this coherent-site coefficient formula categorically: sheaf conditions use finite equalizers after finite-cover refinement, and AB5 commutes finite limits with filtered colimits. The existing abelian-group section-continuity proof supplies the geometric finite-cover argument, but its elementwise conclusion is not assumed for arbitrary A.",
+   "uses": [
+    "lem-weil-pbc-etale-section-continuity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exactness of filtered colimits in A to the finitely many terms and differentials through q+1, obtaining joint epimorphy of the canonical stage maps on each cohomology summand. Colimit injections are jointly epic, so the canonical stage family generates the actual hypercover colimit. The hypothesis includes every canonical stage map, proving f=g. Degree zero is the same finite equalizer argument, and an empty limit scheme has zero section objects.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-hypercover-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-finite-hypercover-descent-objects",
+  "lem-weil-pbc-etale-section-continuity",
+  "lem-weil-pbc-grothendieck-hypercover-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 2: finite skeleton descent and section representatives, categorical version of surjectivity; generalization from abelian groups to Grothendieck abelian coefficients using the categorical constructions described in the proof. The cited Stacks result itself is for abelian sheaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Filtered inverse limits of schemes give filtered colimits of section objects for sheaves valued in a Grothendieck abelian category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered inverse limits of quasi compact quasi separated schemes: sections of inverse image sheaves with values in a Grothendieck abelian category are filtered colimits",
+   "results": "Returned: AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit These supply at most ingredients; no declaration states this result for arbitrary Grothendieck abelian coefficients.",
+   "date": "2026-10-16",
+   "verdict": "partial ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStar.*colimit|colimit.*upperStar|sections.*continuity",
+   "results": "No matches. These supply at most ingredients; no declaration states this result for arbitrary Grothendieck abelian coefficients.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of sections of sheaves with values in an arbitrary Grothendieck abelian category commute with inverse limits of qcqs schemes",
+   "results": "Independent second reading: AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, CategoryTheory.Sheaf.ab5ofSize, LightCondensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheaf. No result covers arbitrary Grothendieck coefficients in the stated setting.",
+   "date": "2026-10-16",
+   "verdict": "partial ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 2: finite skeleton descent and section representatives, categorical version of surjectivity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckHypercoverLimitGeneration.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.hypercoverCohomology_limit_hom_ext",
+  "statement": "theorem hypercoverCohomology_limit_hom_ext\n    {S : Scheme.{u}} (F : Sheaf S.smallEtaleTopology A)\n    {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S)\n    [∀ i, CompactSpace (D.obj i).left]\n    [∀ i, QuasiSeparatedSpace (D.obj i).left]\n    [∀ {i j} (g : i ⟶ j), IsAffineHom (D.map g).left]\n    (c : Cone D) [CompactSpace c.pt.left] [QuasiSeparatedSpace c.pt.left]\n    (hc : IsLimit ((Over.forget S).mapCone c)) (q : ℕ)\n    (B : A)\n    (f g : hypercoverCohomology A ((Etale.upperStar A c.pt.hom).obj F) q ⟶ B)\n    (h : ∀ (i : I)\n      (a : hypercoverCohomology A ((Etale.upperStar A (D.obj i).hom).obj F) q ⟶\n        hypercoverCohomology A ((Etale.upperStar A c.pt.hom).obj F) q),\n      a ≫ f = a ≫ g) : f = g",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T032812-L-1930622",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T032812-L-1930622",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

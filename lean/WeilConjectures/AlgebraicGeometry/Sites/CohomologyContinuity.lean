@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.GrothendieckHypercoverComparison
+import Sheaf.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration
 import Mathlib.CategoryTheory.Filtered.Final
 import WeilConjectures.SixFunctors.Etale.Gabber
 import Sheaf.AlgebraicGeometry.FixedBaseCohomologyClassDescent
@@ -22,7 +24,8 @@ affine transition maps and limit `X`, and let `F` be an étale sheaf on `S`. The
 `H^q(X, F|_X) = colimᵢ H^q(Xᵢ, F|_{Xᵢ})` ([Stacks, Tag 09YQ]). This is blueprint
 `lemma-weil-pbc-etale-cohomology-continuity`, which belongs to the subsection `sk-prop-h2`; its
 elementwise version below follows from class descent and finite-stage vanishing.
-The vanishing criterion for a general Grothendieck abelian coefficient category remains open.
+The general-coefficient vanishing criterion reduces to the explicit hypercover comparison
+and finite-stage generation of the hypercover colimit.
 
 ## Main definitions
 
@@ -60,8 +63,32 @@ theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit {S : Scheme.{u}
     (h : ∀ i, IsZero (((sectionsFunctor A (D.obj i).left).rightDerived q).obj
       ((Etale.upperStar A (D.obj i).hom).obj F))) :
     IsZero (((sectionsFunctor A c.pt.left).rightDerived q).obj
-      ((Etale.upperStar A c.pt.hom).obj F)) :=
-  sorry
+      ((Etale.upperStar A c.pt.hom).obj F)) := by
+  let E := D ⋙ Over.forget S
+  let d := (Over.forget S).mapCone c
+  have : ∀ i, CompactSpace (E.obj i) := fun i ↦ inferInstanceAs
+    (CompactSpace (D.obj i).left)
+  have : ∀ i, QuasiSeparatedSpace (E.obj i) := fun i ↦ inferInstanceAs
+    (QuasiSeparatedSpace (D.obj i).left)
+  have : ∀ {i j} (g : i ⟶ j), IsAffineHom (E.map g) :=
+    fun g ↦ inferInstanceAs (IsAffineHom (D.map g).left)
+  have : CompactSpace c.pt.left := Scheme.compactSpace_of_isLimit E d hc
+  obtain ⟨i⟩ := IsCofiltered.nonempty (C := I)
+  have : IsAffineHom (d.π.app i) := isAffineHom_π_app E d hc i
+  have : QuasiSeparatedSpace c.pt.left :=
+    quasiSeparatedSpace_of_quasiSeparated (d.π.app i)
+  let e (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
+      (G : Sheaf X.smallEtaleTopology A) :=
+    FiniteSplitEtaleHypercover.nonempty_hypercoverCohomology_iso A q
+      ((sectionsFunctor A X).rightDerived q)
+      (FiniteSplitEtaleHypercover.isCohomologyColimit_rightDerived_sections A X q) G
+  obtain ⟨eLimit⟩ := e c.pt.left ((Etale.upperStar A c.pt.hom).obj F)
+  apply IsZero.of_iso _ eLimit.symm
+  apply (IsZero.iff_id_eq_zero _).2
+  apply FiniteSplitEtaleHypercover.hypercoverCohomology_limit_hom_ext A F D c hc q
+  intro j a
+  obtain ⟨eStage⟩ := e (D.obj j).left ((Etale.upperStar A (D.obj j).hom).obj F)
+  exact (IsZero.of_iso (h j) eStage).eq_of_src _ _
 
 attribute [local irreducible] upperStar cohomologyMap Sheaf.H.map
   CategoryTheory.Abelian.Ext.instAddCommGroup

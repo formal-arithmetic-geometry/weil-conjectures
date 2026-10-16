@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-grothendieck-hypercover-model",
+ "kind": "statement",
+ "title": "Concrete finite-hypercover cohomology with Grothendieck coefficients",
+ "statement": "Let X be a qcqs scheme, A a Grothendieck abelian category with hom-universe one level above X, F an A-valued small-etale sheaf, and q a natural number. Finite split etale hypercovers form a category whose opposite, after quotienting refinements by simplicial homotopy, is filtered. Alternating section cohomology descends to this quotient. Define H_hyp^q(F) as its actual colimit. For every functor H from A-valued sheaves to A satisfying IsCohomologyColimit A q H (homotopy invariance and the refinement-compatible cocone universal property), there exists an isomorphism H_hyp^q(F) ≅ H(F). The definitions of finite split hypercover and Grothendieck coefficients are [def-weil-pbc-finite-split-hypercover] and [def-sp-grothendieck-abelian].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 1: construction of the hypercover cohomology colimit and homotopy refinement index",
+  "external": [
+   {
+    "document": "Stacks Project, Hypercoverings",
+    "place": "Tag 01H0"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-finite-split-hypercover"
+ ],
+ "proof": [
+  {
+   "text": "A simplicial homotopy gives a chain homotopy after applying the presheaf contravariantly: use the opposite alternating-face complex and the degreewise identity identification with the alternating-coface complex. Homotopy-equivalent refinements therefore induce equal cohomology maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the raw induced category of actual hypercovers and refinements, then its opposite homotopy quotient. Apply common refinements and equalization up to simplicial homotopy to prove that the quotient is filtered.",
+   "uses": [
+    "lem-weil-pbc-hypercover-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the cohomology functor with Quotient.lift. Take its colimit using the Grothendieck colimits instance. Given IsCohomologyColimit, construct its cocone on the quotient and prove it is colimiting directly from the stated unique mediator. Uniqueness of colimits gives the isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-hypercover-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 1: construction of the hypercover cohomology colimit and homotopy refinement index; generalization from abelian groups to Grothendieck abelian coefficients using the categorical constructions described in the proof. The cited Stacks result itself is for abelian sheaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite hypercovers compute right derived sections of sheaves with values in any Grothendieck abelian category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite hypercovers compute right derived sections of sheaves with values in any Grothendieck abelian category",
+   "results": "Returned: CategoryTheory.GrothendieckTopology.OneHypercoverFamily.isSheaf_iff, CategoryTheory.Presheaf.isSheaf_iff_of_isGeneratedByOneHypercovers, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac', CategoryTheory.GrothendieckTopology.OneHypercover.isSheafFor_presieve₀, CategoryTheory.Functor.op_comp_isSheaf_of_preservesOneHypercovers, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.isLimit These supply at most ingredients; no declaration states this result for arbitrary Grothendieck abelian coefficients.",
+   "date": "2026-10-16",
+   "verdict": "partial ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover.*cohomology|cohomology.*hypercover|cohomology.*continuity",
+   "results": "No matches. These supply at most ingredients; no declaration states this result for arbitrary Grothendieck abelian coefficients.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 1: construction of the hypercover cohomology colimit and homotopy refinement index",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckHypercoverCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckHypercoverCohomology.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.nonempty_hypercoverCohomology_iso",
+  "statement": "theorem nonempty_hypercoverCohomology_iso\n    (q : ℕ) (H : Sheaf X.smallEtaleTopology A ⥤ A)\n    (hH : IsCohomologyColimit A q H) (F : Sheaf X.smallEtaleTopology A) :\n    Nonempty (hypercoverCohomology A F q ≅ H.obj F)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.Index",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.cohomologyRefinement_homotopy_invariant",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.sectionDiagram",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.cohomologyDiagram",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.refinementRelation",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.HomotopyIndex",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.homotopyCohomologyDiagram",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.hypercoverCohomology",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.nonempty_hypercoverCohomology_iso"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T032812-L-1930622",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T032812-L-1930622",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

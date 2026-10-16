@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-grothendieck-injective-hypercover-row",
+ "kind": "statement",
+ "title": "Injective hypercover section rows for arbitrary Grothendieck coefficients",
+ "statement": "Let X be qcqs, A a Grothendieck abelian category [def-sp-grothendieck-abelian], U a finite split etale hypercover [def-weil-pbc-finite-split-hypercover], and F an injective A-valued small-etale sheaf. The canonical augmentation from terminal sections of F concentrated in degree zero to the alternating section cochain complex of U with coefficients F is a quasi-isomorphism. This uses the actual sectionAugmentation constructed in [lem-weil-pbc-grothendieck-hypercover-resolution].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 1: hypercover acyclicity on injective coefficients; Stacks Tag 01GW proof generalized by Gabriel–Popescu",
+  "external": [
+   {
+    "document": "Stacks Project, Hypercoverings",
+    "place": "Tag 01GW"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-finite-split-hypercover",
+  "lem-weil-pbc-grothendieck-hypercover-resolution"
+ ],
+ "proof": [
+  {
+   "text": "Choose the Grothendieck separator G. Gabriel–Popescu gives a faithful additive right adjoint R=Hom(G,-) to the exact tensor functor L into A, with values in modules over the opposite endomorphism ring. The induced sheaf adjunction preserves monomorphisms on the left, hence sheaf composition with R preserves injectives.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the already proved arbitrary-ring module injective-row theorem to the composed injective sheaf.",
+   "uses": [
+    "lem-sc-hypercover-injective-module-row"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The additive functor R carries both alternating section differentials and the degree-zero augmentation to the corresponding module maps. In degree zero reflect the exact augmented short complex and its monomorphism through R; in positive degrees reflect exactness of the three-term complexes. A faithful additive functor between abelian categories reflects exactness. The resulting augmented cochain map is a quasi-isomorphism in every degree.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hypercover-injective-module-row"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 1: hypercover acyclicity on injective coefficients; Stacks Tag 01GW proof generalized by Gabriel–Popescu; generalization from abelian groups to Grothendieck abelian coefficients using the categorical constructions described in the proof. The cited Stacks result itself is for abelian sheaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An injective sheaf valued in a Grothendieck abelian category has an acyclic augmented hypercover section complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective sheaf valued in a Grothendieck abelian category has an acyclic augmented hypercover section complex",
+   "results": "Returned: CochainComplex.cm5b.instInjectiveXIntI, CochainComplex.isKInjective_of_injective, CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex, CochainComplex.cm5b.instInjectiveXIntMappingConeIdI, CochainComplex.IsKInjective, CochainComplex.cm5b.I_X These supply at most ingredients; no declaration states this result for arbitrary Grothendieck abelian coefficients.",
+   "date": "2026-10-16",
+   "verdict": "partial ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "GabrielPopescu|reflects_exact_of_faithful",
+   "results": "Returned: Mathlib/CategoryTheory/Abelian/ShortExact.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/Exact.lean These supply at most ingredients; no declaration states this result for arbitrary Grothendieck abelian coefficients.",
+   "date": "2026-10-16",
+   "verdict": "partial ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity",
+  "date": "2026-10-16",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 1: hypercover acyclicity on injective coefficients; Stacks Tag 01GW proof generalized by Gabriel–Popescu",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckInjectiveHypercoverRow",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckInjectiveHypercoverRow.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.Grothendieck.injective_row_quasiIso",
+  "statement": "theorem injective_row_quasiIso (U : FiniteSplitEtaleHypercover X)\n    (F : Sheaf X.smallEtaleTopology A) [Injective F] :\n    QuasiIso (sectionAugmentation A U F)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T032812-L-1930622",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261016T032812-L-1930622",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
