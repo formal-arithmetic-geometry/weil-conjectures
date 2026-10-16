@@ -27,9 +27,95 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify the finite constant sheaf $A_{n,X}$ with $V\\mapsto C(|V|,A/\\varpi^n)$: the finite-set clause of [det-prop-sfb-qlbar-colimit-x-integral-limit] represents it by the disjoint union of copies of X, and a map to that disjoint union is exactly its clopen fibre partition. Completeness in [lem-pod-adic-limit-finite-modules](2), applied to the finite A-module A, gives $A=\\varprojlim A/\\varpi^n$. The DVR and absolute-value conventions of [def-weil-l-adic-coefficient-extension] show that its congruence cosets form an open neighbourhood basis: for $r=|\\varpi|<1$, $\\varpi^n A=\\{a:|a|\\leq r^n\\}$, these balls are open by the ultrametric inequality, and $r^n\\to0$. Thus compatible continuous residue functions give a unique continuous A-valued function, pointwise, and conversely. Limits of module sheaves are sectionwise by [lem-weil-pbc-module-sheaves-colimits-forgetful](2). This proves the ring limit identification, including its projections and restrictions.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-pod-adic-limit-finite-modules",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58–59"
+   }
+  },
+  {
+   "text": "Reduction of continuous functions modulo $\\varpi^n$ is surjective even on sections: choose a lift in A for each of the finitely many residue values and compose the residue function with this finite discrete section. Its kernel consists exactly of $\\varpi^n$ times continuous A-valued functions, since division by $\\varpi^n$ is continuous on $\\varpi^n A$. Hence $A_X/\\varpi^n A_X\\cong A_{n,X}$. For localization, each continuous $f:|V|\\to E$ has the Zariski open covering $f^{-1}(\\ell^{-m}A)$, $m\\geq0$. These sets cover since $|\\ell|=\\ell^{-1}<1$; each is open since A is open. On the m-th member, $f=\\ell^{-m}(\\ell^mf)$ with $\\ell^mf$ A-valued. The resulting fraction map from the sheaf colimit of multiplication by $\\ell$ to $E_X$ is epic; it is monic because A embeds in E and multiplication by $\\ell$ is injective on A-valued functions. The sheafification-of-sectionwise-colimit description in [lem-weil-pbc-module-sheaves-colimits-forgetful](2) justifies checking this locally on fractions. Ring operations and the inclusion and reduction maps are the stated pointwise ones.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1),(2), p. 59"
+   }
+  },
+  {
+   "text": "For a lisse $A_X$-module M restrict to a pro-etale covering on which $M=A_X^r$, with r finite on each member. Slice restriction is evaluation on the same objects, with the same coverings [def-pur-localized-ringed-site]; sectionwise limits and sheafified sectionwise quotients therefore commute with restriction. Step 2 gives $M/\\varpi^nM=A_{n,X}^r$ there, so its reductions are in the stated category and the normalization map is an isomorphism. Step 1 gives $M\\to\\varprojlim_n M/\\varpi^nM$ an isomorphism on that covering, hence globally: its inverse maps on the cover agree on overlaps since they invert the same map. These calculations include r=0 and require no bound on the ranks over different covering members.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1): full faithfulness and the unit (the source leaves the proof to the reader)"
+   }
+  },
+  {
+   "text": "Now start with a normalized tower $(F_n,t_n)$. Each $t_n$ is an epimorphism: by the sheafification definition [def-pur-sheaf-tensor-product], locally a section of the sheaf tensor quotient is a finite sum of elementary tensors, and lifting its coefficients through the surjection $A_{n+1,X}\\to A_{n,X}$ shows that quotient map $F_{n+1}\\to A_{n,X}\\otimes F_{n+1}$ is epic. Choose a cover trivializing $F_1$ with rank r, then refine it by [det-pe-wcb-cover] to objects $U=\\operatorname{Spec}D$ with D w-contractible. Exactness of sections of abelian sheaves on such U, [det-pe-wc-sections-exact], makes each $F_{n+1}(U)\\to F_n(U)$ surjective (module epimorphisms are underlying abelian epimorphisms by [lem-weil-pbc-module-sheaves-colimits-forgetful](1)). Choose the r basis sections of $F_1|_U$ and lift them recursively to r sections at every level, compatibly with $t_n$. The lifts define compatible maps $b_n:A_{n,X}^r|_U\\to F_n|_U$. We claim by induction that every $b_n$ is invertible. The base n=1 is the chosen basis. For the induction step, trivialize $F_{n+1}$ on a further cover. Its reduction is $F_n$, so the reduction of $b_{n+1}$ is invertible. On a nonempty trivializing object V, write the matrix of $b_{n+1}$ as B, with s rows and r columns. Its reduction modulo $\\varpi^n$ has an inverse matrix of sections. Reducing both matrix identities further modulo $\\varpi$ and evaluating their continuous-function entries at any $x\\in |V|$ gives inverse linear maps between $k^r$ and $k^s$, where $k=A/\\varpi A$; hence s=r. If V is empty the map is already an isomorphism. Lift each entry of the inverse matrix from $A_{n,X}(V)$ to $A_{n+1,X}(V)$ by composing with a choice of representatives of the finite quotient, as in step 2; call the lifted matrix C. Both $BC-1=N$ and $CB-1=P$ have entries in $I=\\varpi^n A_{n+1,X}(V)$, whose square is zero since $2n\\geq n+1$. Thus $B\\,C(1-N)=1$ and $(1-P)C\\,B=1$. A left and a right inverse agree, since $L=L(BR)=(LB)R=R$, so B is invertible. This proves the claim, locally and then by gluing inverses. No simultaneous trivialization of the countable tower has been assumed; the recursively lifted bases construct one.",
+   "uses": [
+    "det-pe-wcb-cover",
+    "det-pe-wc-sections-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1): omitted compatible-basis argument, using the weakly contractible basis of §4.2"
+   }
+  },
+  {
+   "text": "Regard every $F_n$ as an $A_X$-module through $A_X\\to A_{n,X}$; the $t_n$ are then $A_X$-linear. Define $F=\\varprojlim_n F_n$ sectionwise, with the componentwise action of $A_X=\\varprojlim A_{n,X}$, as permitted by [lem-weil-pbc-module-sheaves-colimits-forgetful](2). On each U from step 4 the compatible bases give $F|_U=\\varprojlim A_{n,X}^r|_U=A_X^r|_U$, since r is finite and a compatible tuple is precisely r compatible coordinate sequences. The defining projections become the usual coordinate reductions there. Consequently they induce $F/\\varpi^nF\\xrightarrow{\\sim}F_n$, respecting the transition maps. Slice restriction [def-pur-localized-ringed-site] preserves these limits and quotients by the sectionwise description. Thus F is lisse globally and the displayed isomorphisms are canonical: they are induced by the global projections, so their locally computed inverses agree on overlaps.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1): effectivity of the compatible tower"
+   }
+  },
+  {
+   "text": "For a compatible family of tower morphisms $(f_n)$ define the map on limits by $(x_n)\\mapsto(f_nx_n)$. This is $A_X$-linear and functorial. The unit $M\\to\\varprojlim M/\\varpi^nM$ of step 3 commutes with a module map because both composites have n-th coordinate its reduction. The counit $(\\varprojlim F_n)/\\varpi^n\\to F_n$ of step 5 commutes with a tower map by the same coordinate formula. Both are isomorphisms, so these two functors are quasi-inverse, proving the asserted equivalence and all naturality clauses. In particular a module map is recovered uniquely from its reductions, by the unit isomorphism and the fact that projections determine a limit map. For an empty base the zero sheaf and empty covering give the same formulas.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1): functoriality and natural unit/counit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-pod-adic-limit-finite-modules",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-pur-localized-ringed-site",
+  "det-pe-wcb-cover",
+  "det-pe-wc-sections-exact",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Proposition 6.8.4(1), pp. 58–59. The proposition says its proof is left to the reader; steps 3–6 supply it using the weakly contractible basis."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -79,10 +165,80 @@
    "results": "12 hits: PresheafOfModules.Finite.hasFiniteColimits, PresheafOfModules.hasColimitsOfSize, PresheafOfModules.hasColimitsOfShape, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits, PresheafOfModules.toPresheaf_preservesColimitsOfSize, PresheafOfModules.toPresheaf_preservesColimitsOfShape, PresheafOfModules.Finite.evaluation_preservesFiniteColimits, PresheafOfModules.evaluation_preservesColimitsOfSize",
    "date": "2026-10-17",
    "verdict": "No match: the hits give finite-presentation predicates and ordinary presheaf colimits; none gives effectivity or local freeness of an adic reduction tower."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence between integral lisse sheaves over a complete DVR coefficient sheaf and normalized compatible finite locally constant reduction towers",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage",
+   "date": "2026-10-17",
+   "verdict": "no match: no effectivity theorem for locally free module sheaves with these changing finite coefficient rings; ordinary module completion and presheaf colimits alone do not state this equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, limit, LocallyConstant",
+   "results": "0 hits: ; loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected this query with the unknown-identifier error recorded in results; this is not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|reduction|varprojlim",
+   "results": "0 hits in Mathlib/AlgebraicGeometry/Sites: ",
+   "date": "2026-10-17",
+   "verdict": "no match: no effectivity theorem for locally free module sheaves with these changing finite coefficient rings; ordinary module completion and presheaf colimits alone do not state this equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible finite locally free modules modulo powers of a uniformizer form a locally free module over the complete DVR",
+   "results": "8 hits: BDeRhamPlus, BDeRham, IsPrecomplete.prec', isPrecomplete_iff, IsPrecomplete.prec, Module.FinitePresentation.exists_free_localizedModule_powers, AdicCompletion.module, IsDedekindDomain.HeightOneSpectrum.adicCompletion",
+   "date": "2026-10-17",
+   "verdict": "no match: no effectivity theorem for locally free module sheaves with these changing finite coefficient rings; ordinary module completion and presheaf colimits alone do not state this equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.limit",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Presheaf.limit'",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected this query with the unknown-identifier error recorded in results; this is not evidence of absence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "compatible finite locally constant reduction sheaves over powers of a uniformizer equivalent to integral lisse sheaf",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_iff_mem_essImage, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, Condensed.lanSheafProfinite, CompHausLike.LocallyConstant.functorToPresheavesIso, CondensedSet.LocallyConstant.functorFullyFaithful, CompHausLike.LocallyConstant.functor_obj_val, CondensedMod.isDiscrete_tfae, CompHausLike.LocallyConstantModule.functor_obj_val",
+   "date": "2026-10-17",
+   "verdict": "no match: no effectivity theorem for locally free module sheaves with these changing finite coefficient rings; ordinary module completion and presheaf colimits alone do not state this equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant|adic|uniformizer",
+   "results": "5 hits in Mathlib/AlgebraicGeometry/Sites: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; inspected ElladicCohomology.lean, lines 19–32 and 62–96: coefficient sheaf and cohomology definitions, no equivalence of lisse modules and reduction towers.",
+   "date": "2026-10-17",
+   "verdict": "no match: no effectivity theorem for locally free module sheaves with these changing finite coefficient rings; ordinary module completion and presheaf colimits alone do not state this equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free module sheaves reconstructed from an inverse system of reductions over an adically complete ring",
+   "results": "8 hits: AdicCompletion, AdicCompletion.of_apply, Hausdorffification, AdicCompletion.module, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, localCohomology, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, lines 43–160, and RingTheory/AdicCompletion/Basic.lean, definitions of IsAdicComplete and AdicCompletion. These define local freeness or ordinary module completion, not effectivity of a tower of locally free sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"IsLocallyFree\"",
+   "results": "11 hits: SheafOfModules.IsLocallyFree, SheafOfModules.LocalGeneratorsData.IsLocallyFreeData, SheafOfModules.LocalGeneratorsData.isLocallyFree, SheafOfModules.IsLocallyFree.exists_isLocallyFreeData, SheafOfModules.IsLocallyFree.mk, SheafOfModules.LocalGeneratorsData.IsLocallyFreeData.shrink, SheafOfModules.instIsQuasicoherentOfIsLocallyFree, SheafOfModules.instIsLocallyFreeFree",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, lines 43–160, and RingTheory/AdicCompletion/Basic.lean, definitions of IsAdicComplete and AdicCompletion. These define local freeness or ordinary module completion, not effectivity of a tower of locally free sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyFree|LocallyFree|adicCompletion",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; directory Algebra/Category/ModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, lines 43–160, and RingTheory/AdicCompletion/Basic.lean, definitions of IsAdicComplete and AdicCompletion. These define local freeness or ordinary module completion, not effectivity of a tower of locally free sheaves."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-etale-local-monodromy-realization",
@@ -90,5 +246,49 @@
   "group": "Q17"
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-coefficient-heart"
+ "unit": "sk-lem-coefficient-heart",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-integral-lisse-reduction-equivalence",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the omitted proof of Bhatt–Scholze Proposition 6.8.4(1) by compatible basis lifting on weakly contractible covers, using only existing nodes. Verified coefficient limits, quotient maps, localization, unit and counit, all naturality, and arbitrary schemes/ranks. No new nodes.",
+  "blueprint": "Ancestor det-lem-coefficient-heart-closure proof paragraph (2), integral-monodromy comparison: provides the integral local-system/reduction-tower equivalence used before forming monodromy representations.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Finite constant sheaf representability gives the finite residue-function interpretation; the heart unit contains no coefficient construction."
+   },
+   {
+    "node": "lem-pod-adic-limit-finite-modules",
+    "why": "Completeness of the finite A-module A supplies the scalar inverse limit; the heart unit does not prove DVR module completeness."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "General sectionwise limits, sheafified colimits and exact forgetful functor used for the tower; generic sheaf tool absent from the heart unit."
+   },
+   {
+    "node": "det-pe-wcb-cover",
+    "why": "Supplies weakly contractible refinements for the omitted basis-lifting proof, a topology tool not provided by the heart unit."
+   },
+   {
+    "node": "det-pe-wc-sections-exact",
+    "why": "Lifts finitely many basis sections successively without changing U, the projectivity tool absent from the heart unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "det-pe-wcb-cover",
+  "det-pe-wc-sections-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-29b8202cf",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-29b8202cf (reviewer sub-agent of L); spot-checked: I read the item, all 8 cited proof nodes and all 7 statement-dependency definitions in full. I also read Bhatt–Scholze Lemma 4.2.12 (p.30), Def. 6.8.1, Lemma 6.8.2 (pp.58–59), Def. 6.8.3 and Prop. 6.8.4(1) (p.59, proof 'left to the reader'), and the main-20261015 blueprint closure proof paragraph (2). STATEMENT: it matches Prop. 6.8.4(1) with the coefficient identities of Lemma 6.8.2, for any scheme X and finite E. The towers are normalized as the 2-limit requires, and nothing is weakened. STEPS: (1) the constant sheaf of A/ϖ^n is identified with continuous functions through finite-set representability; A ≅ lim A/ϖ^n holds as topological rings by the ultrametric balls; limits are sectionwise. (2) The kernel of reduction is ϖ^n times continuous functions, and localization at ℓ is checked locally on the Zariski cover f^{-1}(ℓ^{-m}A); this is elementary as marked. (3) Restriction to a slice commutes with limits, quotients and tensors, so the unit is an isomorphism locally and hence globally. (4) Each t_n is epic. Basis sections lift level by level on w-contractible U (det-pe-wcb-cover, det-pe-wc-sections-exact). In the induction, N=BC−1 and P=CB−1 lie in an ideal of square zero because 2n≥n+1, so B has a left and a right inverse; this works for rectangular matrices too. (5) The limit is computed in the compatible bases, giving A_X^r locally and the counit isomorphism. (6) Naturality is checked coordinatewise. EDGE CASES: empty X, non-quasi-compact X, r=0, varying ranks, n=1, A=Z_ℓ, residue characteristic equal to ℓ. One implicit step: the spectral-norm topology equals the |·|_E topology by the uniqueness clause of lem-weil-l-adic-extension-absolute-value; this is one line and accepted. There are no new nodes. Duplicate search found no node stating this equivalence; sk-lem-integral-models is a derived Noetherian statement, not this one. There is no cycle and no restatement. tool_uses for the five off-unit nodes are accepted, each used for exactly the clause it states. Mathlib searches were done with all three kinds, and the rejected Loogle queries are recorded honestly as unavailable. Cosmetic only: source.place says p.59, but Lemma 6.8.2(1) starts on p.58. No fixes were written."
+ }
 }
