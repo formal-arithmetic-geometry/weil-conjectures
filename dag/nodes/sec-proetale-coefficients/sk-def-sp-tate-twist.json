@@ -3,25 +3,135 @@
  "blueprint": {
   "is": "sk-def-sp-tate-twist",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Tate twists",
- "statement": "Let $X$ be a scheme on which $\\ell$ is invertible. Let $\\mu_{\\ell^n,X}$ be the sheaf of\n$\\ell^n$th roots of unity on $X_{\\mathrm{proét}}$; since $\\ell$ is invertible on $X$, it is\nlocally isomorphic to $(\\mathbf Z/\\ell^n\\mathbf Z)_X$. For a finite ring $A$ with $\\ell^rA=0$\nput\n$$\nA_X(1)=\\mu_{\\ell^r,X}\\otimes_{\\mathbf Z/\\ell^r\\mathbf Z}A_X,\n$$\nwhich by the Kummer maps does not depend on $r$. Put\n$$\n\\cO_{E,X}(1)=\\varprojlim_n(\\cO_E/\\ell^n)_X(1),\n$$\nand obtain $E_X(1)$ and $\\QbarX(1)$ by inverting $\\ell$ and passing to the colimit over $E$\n(compare [sk-prop-sfb-qlbar-colimit-x]). Each $\\Lambda_X(1)$ is locally free of rank one.\nFor $d\\ge0$, $\\Lambda_X(d)$ is the $d$-fold tensor power, $\\Lambda_X(-d)$ its dual, and\n$$\nK(d)=K\\otimes^{\\mathbf L}_{\\Lambda_X}\\Lambda_X(d)\n$$\nfor $K\\in D(X_{\\mathrm{proét}},\\Lambda)$.",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$, and a scheme $X$ on which $\\ell$ is invertible. Use the universe convention [def-weil-size-convention] and the small pro-etale site [def-weil-pbc-proetale-site]. Coefficient rings are commutative. For each finite intermediate extension $\\mathbf Q_\\ell\\subseteq E\\subseteq\\overline{\\mathbf Q}_\\ell$, use its ring of integers $\\mathcal O_E$ and a uniformizer $\\pi_E$ [def-weil-l-adic-coefficient-extension]. The coefficient sheaves $\\mathcal O_{E,X}$ and $E_X$ are the pullbacks of their continuous-function condensed rings [sk-def-sfb-condensed-ring], [sk-def-sfb-pulled-back-coefficients]. Likewise $\\overline{\\mathbf Q}_{\\ell,X}=p_X^*\\underline{\\overline{\\mathbf Q}}_\\ell$, using the finite-subextension-valued condensed ring of [sk-def-sfb-qlbar-condensed]; it is not the full continuous-function sheaf. For a finite discrete ring $B$, $B_X$ denotes the constant sheaf [def-weil-pbc-constant-sheaf].\n\nFor $n\\geq1$, take the sheaf $\\mu_{\\ell^n,X}$ and its $(\\mathbf Z/\\ell^n\\mathbf Z)_X$-module structure from [def-pur-roots-of-unity-sheaf]:\n$$\n\\mu_{\\ell^n,X}(U)=\\{u\\in\\Gamma(U,\\mathcal O_U)^\\times:u^{\\ell^n}=1\\},\n\\qquad \\mu_{\\ell^{n+1},X}\\longrightarrow\\mu_{\\ell^n,X},\\quad u\\longmapsto u^\\ell.\n$$\nUse the tensor product of sheaves and extension of scalars [def-pur-sheaf-tensor-product]. For a finite commutative ring $A$ and an integer $r\\geq1$ such that $\\ell^r A=0$, put\n$$\n A_X(1)=\\mu_{\\ell^r,X}\\otimes_{(\\mathbf Z/\\ell^r\\mathbf Z)_X}A_X.\n$$\nRegard these expressions for different annihilating exponents as canonically identified by the Kummer maps $u\\mapsto u^{\\ell^{r'-r}}$ for $r'\\geq r$, by clause 2 of [det-def-sp-tate-twist-locally-free]. These identifications have identity at $r'=r$ and compose because the corresponding power maps compose.\n\nSet $B_{E,n}=\\mathcal O_E/\\ell^n\\mathcal O_E$ and form the inverse limit of sheaves [def-pur-sheaf-inverse-limit]\n$$\n \\mathcal O_{E,X}(1)=\\varprojlim_{n\\geq1}(B_{E,n})_X(1),\n \\qquad (B_{E,n})_X(1)=\\mu_{\\ell^n,X}\\otimes_{(\\mathbf Z/\\ell^n\\mathbf Z)_X}(B_{E,n})_X.\n$$\nThe transition sends $u\\otimes a$ to $u^\\ell\\otimes\\bar a$. The action of $\\mathcal O_{E,X}$ on the limit is coordinatewise through the quotient maps to $(B_{E,n})_X$. Here use the integral coefficient comparison [det-prop-sfb-qlbar-colimit-x-integral-limit], with the cofinal $\\ell$-power ideals in place of the $\\pi_E$-power ideals: writing $\\ell=v\\pi_E^e$ with $v$ a unit and $e\\geq1$, we have $\\ell^n\\mathcal O_E=\\pi_E^{en}\\mathcal O_E$. A compatible sequence at indices $en$ extends uniquely to index $k$ by reducing any coordinate with $en\\geq k$. Define\n$$\n E_X(1)=\\mathcal O_{E,X}(1)\\otimes_{\\mathcal O_{E,X}}E_X,\n \\qquad \\overline{\\mathbf Q}_{\\ell,X}(1)=\\varinjlim_E E_X(1).\n$$\nThe first expression inverts $\\ell$ by [det-prop-sfb-qlbar-colimit-x-invert-ell]. For $E\\subseteq F$, the map on integral twists is induced at level $n$ by $u\\otimes a\\mapsto u\\otimes a$ along $\\mathcal O_E/\\ell^n\\to\\mathcal O_F/\\ell^n$; the map $E_X(1)\\to F_X(1)$ is its localization. Thus the final colimit is a specified diagram indexed by the directed, universe-small poset of finite intermediate extensions. Colimits of abelian sheaves mean sheafifications of sectionwise colimits [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact]. Its scalar action is defined first on the sectionwise colimit presheaves: for $a\\in E_X(U)$ and $t\\in F_X(1)(U)$, choose a finite intermediate field $H$ containing $E$ and $F$, and set $[a][t]=[i_{E,H}(a)j_{F,H}(t)]$, where $i$ and $j$ are the coefficient and twist transition maps. These transitions are semilinear: $j_{F,H}(bt)=i_{F,H}(b)j_{F,H}(t)$. Any two choices of $H$ agree after mapping to their compositum, so the action is independent of representatives and satisfies the module axioms there. Sheafify this action to obtain an action of the coefficient colimit sheaf on the twist colimit sheaf. Sections of the sheafified colimits need only have such representatives locally. The coefficient identification $\\varinjlim_E E_X=\\overline{\\mathbf Q}_{\\ell,X}$ used here is obtained from the sectionwise union defining [sk-def-sfb-qlbar-condensed] by the left adjoint $p_X^*$ of [sk-def-sfb-pullback-from-point], which preserves colimits [lem-weil-pbc-left-adjoint-preserves-colimits].\n\nFor $\\Lambda\\in\\{A,\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$ let $\\Lambda_X(1)$ denote the corresponding sheaf just constructed. Each $\\Lambda_X(1)$ is pro-etale locally free of rank one. Explicitly, use clause 1 of [det-def-sp-tate-twist-locally-free] to choose a pro-etale cover $\\widetilde X\\to X$ with compatible generators $\\zeta_n$, $\\zeta_{n+1}^{\\ell}=\\zeta_n$. On its slice site the maps $a\\mapsto\\zeta_r\\otimes a$ identify $A_{\\widetilde X}$ with $A_X(1)|_{\\widetilde X}$. The maps $a\\mapsto\\zeta_n\\otimes a$ likewise identify $(B_{E,n})_{\\widetilde X}$ with $(B_{E,n})_X(1)|_{\\widetilde X}$; compatibility follows from $\\zeta_{n+1}\\otimes a\\mapsto\\zeta_n\\otimes\\bar a$. Their inverse limit identifies $\\mathcal O_{E,\\widetilde X}$ with $\\mathcal O_{E,X}(1)|_{\\widetilde X}$ by the integral coefficient comparison above. Extending scalars identifies $E_{\\widetilde X}$ with $E_X(1)|_{\\widetilde X}$. These maps commute with every finite-field-extension transition, since the chosen $\\zeta_n$ do not depend on $E$; their sheafified colimit identifies $\\overline{\\mathbf Q}_{\\ell,\\widetilde X}$ with $\\overline{\\mathbf Q}_{\\ell,X}(1)|_{\\widetilde X}$ by the coefficient-colimit identification above. These calculations take place on the slice site: restriction keeps the same sections at its objects and the same covering families, so sectionwise limits and sheafified colimits have the displayed restrictions. Only clauses 1 and 2 of the cited theorem are used, not its clause 3 for other coefficient categories. Define\n$$\n \\Lambda_X(0)=\\Lambda_X,\\qquad\n \\Lambda_X(d)=\\Lambda_X(1)^{\\otimes_{\\Lambda_X}d}\\ (d\\geq1),\\qquad\n \\Lambda_X(-d)=\\mathcal Hom_{\\Lambda_X}(\\Lambda_X(d),\\Lambda_X)\\ (d\\geq1),\n$$\nwhere $\\mathcal Hom$ is sheaf Hom [def-pur-sheaf-hom]. Let $D(X_{\\mathrm{proet}},\\Lambda)$ mean the unbounded derived category [def-weil-abstract-derived-category] of sheaves of $\\Lambda_X$-modules [def-weil-sheaf-of-modules-category]. For any $K$ in this category and $d\\in\\mathbf Z$, put\n$$\n K(d)=K\\otimes^{\\mathbf L}_{\\Lambda_X}\\Lambda_X(d),\n$$\nplacing $\\Lambda_X(d)$ in degree zero and using the derived tensor bifunctor on an arbitrary ringed site of [lem-weil-pbc-site-derived-tensor-descent]. In particular the non-finite coefficients here are pulled-back condensed coefficient sheaves, not discrete constant rings or common-stage rationalized integral categories.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
   "place": "node sk-def-sp-tate-twist, order 742"
  },
  "stmt_deps": [
-  "sk-prop-sfb-qlbar-colimit-x",
-  "sk-def-sfb-pulled-back-coefficients"
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-qlbar-condensed",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "det-def-sp-tate-twist-locally-free",
+  "def-pur-sheaf-inverse-limit",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "sk-def-sfb-pullback-from-point",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-pur-sheaf-hom",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-constant-sheaf"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tateTwist|tate.twist|rootsOfUnity",
+   "results": "No hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate twist sheaf roots of unity on the pro etale site",
+   "results": "8 hits: modularCyclotomicCharacter.toFun and variants/spec, Scheme.smallEtaleTopology, Scheme.smallEtalePretopology, Condensed.lanSheafProfinite. None constructs the pro-etale Tate twists.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tate\"",
+   "results": "12 substring hits in State/EState/Lean.Macro.State, all unrelated; no Tate-twist declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate twist of pro etale sheaves defined by roots of unity tensor coefficients inverse limit and derived tensor product",
+   "results": "8 hits: light condensed monoidal structures, LightCondMod.ofSheafLightProfinite, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, and presheaf differentials. None constructs roots-of-unity Tate twists.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tateTwist|tate.twist|ellAdicSheaf",
+   "results": "5 hits in Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean: ellAdicSheaf at line 63 and its cohomology. Read lines 17-80: this is the untwisted continuous Z_ell coefficient sheaf, not a roots-of-unity twist.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\"",
+   "results": "12 hits in Mathlib.RingTheory.RootsOfUnity.Basic, including rootsOfUnity and elementary subgroup properties. This is roots of unity of one commutative monoid, not a sheaf or Tate twist.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ell adic rank one local system is the inverse limit of sheaves of ell power roots of unity and defines Tate twisting by tensor powers",
+   "results": "8 hits: BDeRham, BDeRhamPlus, light condensed monoidal structures, Condensed.profiniteFree, Condensed.profiniteSolid, LightCondMod.LocallyConstant.functorToPresheaves, LightCondAb. None states the twist construction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of compatible roots of unity defines an invertible module by scalar extension and inverse limit",
+   "results": "{\"t\": \"2026-10-16T11:37:03Z\", \"tool\": \"leanfinder\", \"query\": \"A sheaf of compatible roots of unity defines an invertible module by scalar extension and inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.unit\", \"LightCondMod.ofSheafLightProfinite\", \"CondensedMod.ofSheafProfinite\", \"ModuleCat.tilde\", \"CategoryTheory.Sheaf.H\", \"SheafOfModules.unit_val\", \"CondensedMod.ofSheafCompHaus\", \"SheafOfModules.free\"], \"digest\": \"ac8ada288155ace3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: generic module sheaves and condensed constructors, not the roots-of-unity twist construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pro etale Tate twist rank one module sheaf from an inverse system of roots of unity",
+   "results": "{\"t\": \"2026-10-16T12:23:19Z\", \"tool\": \"leansearch\", \"query\": \"Pro etale Tate twist rank one module sheaf from an inverse system of roots of unity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.tildeInModuleCat\", \"modularCyclotomicCharacter.toFun\", \"SheafOfModules.unit\", \"modularCyclotomicCharacter.toFun_spec''\", \"RingHom.Etale\", \"Algebra.Etale.formallyEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"modularCyclotomicCharacter.spec\"], \"digest\": \"4dbcc79b9e571861\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned declarations; generic sheaf constructions and cyclotomic characters do not construct the pro-etale roots-of-unity Tate twists for the displayed coefficient stages."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate twist of a sheaf constructed from roots of unity by tensoring finite coefficients and taking inverse limits",
+   "results": "{\"t\": \"2026-10-16T12:23:22Z\", \"tool\": \"leanfinder\", \"query\": \"Tate twist of a sheaf constructed from roots of unity by tensoring finite coefficients and taking inverse limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"LightCondAb.ofSheafLightProfinite\", \"LightCondMod.ofSheafLightProfinite\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.ofSheafProfinite\"], \"digest\": \"75460999bf900dd6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned declarations; generic sheaf constructions and cyclotomic characters do not construct the pro-etale roots-of-unity Tate twists for the displayed coefficient stages."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cyclotomic local system over a scheme with integral coefficients given by compatible prime power roots of unity and its signed tensor powers",
+   "results": "{\"t\": \"2026-10-16T12:24:40Z\", \"tool\": \"leanfinder\", \"query\": \"Cyclotomic local system over a scheme with integral coefficients given by compatible prime power roots of unity and its signed tensor powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"cyclotomicCharacter.spec\", \"cyclotomicCharacter.toFun_apply\", \"cyclotomicCharacter\", \"cyclotomicCharacter.toZModPow_toFun\", \"cyclotomicCharacter.toZModPow\", \"cyclotomicCharacter.toFun_spec\", \"modularCyclotomicCharacter'\", \"cyclotomicCharacter.toFun\"], \"digest\": \"96d5faa8e5db18ba\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned declarations; generic sheaf constructions and cyclotomic characters do not construct the pro-etale roots-of-unity Tate twists for the displayed coefficient stages."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cyclotomic rank one sheaf on a scheme from the inverse limit of roots of unity with coefficient extension",
+   "results": "{\"t\": \"2026-10-16T14:29:08Z\", \"tool\": \"leanfinder\", \"query\": \"Cyclotomic rank one sheaf on a scheme from the inverse limit of roots of unity with coefficient extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"cyclotomicCharacter.toFun_apply\", \"cyclotomicCharacter.spec\", \"modularCyclotomicCharacter.spec\", \"modularCyclotomicCharacter'\", \"cyclotomicCharacter.toZModPow_toFun\", \"modularCyclotomicCharacter\", \"cyclotomicCharacter\", \"modularCyclotomicCharacter'.spec'\"], \"digest\": \"12c5f021701bbb56\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned cyclotomic-character declarations concern automorphisms of one domain; ellAdicSheaf (ElladicCohomology.lean:63) is the untwisted coefficient sheaf. Neither constructs the displayed Tate twists on arbitrary schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "cyclotomicCharacter|ellAdicSheaf|TateTwist",
+   "results": "{\"t\": \"2026-10-16T14:29:46Z\", \"tool\": \"grep\", \"query\": \"cyclotomicCharacter|ellAdicSheaf|TateTwist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"703be9fc07e773aa\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned cyclotomic-character declarations concern automorphisms of one domain; ellAdicSheaf (ElladicCohomology.lean:63) is the untwisted coefficient sheaf. Neither constructs the displayed Tate twists on arbitrary schemes."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "in_cycle"
@@ -40,5 +150,21 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sp-tate-twist"
+ "unit": "sk-def-sp-tate-twist",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sp-tate-twist",
+  "worker": "stage1",
+  "summary": "Definition split using only existing nodes. Made the commutative-coefficient convention and prime/finite-extension parameters explicit; specified exponent identifications, finite-level transitions, field-extension transition maps, scalar actions, degree zero and sheaf dual. Retained every defining formula and the source assertion that each twist is pro-etale locally free of rank one, using only clauses 1 and 2 of det-def-sp-tate-twist-locally-free; wrote the compatible-generator argument for the constructed coefficient sheaves instead of using that node's clause 3 about different common-stage coefficients. Replaced the cyclic aggregate coefficient comparison by its independent integral and localization clauses and the elementary filtered-union/left-adjoint construction. Used the general ringed-site tensor-descent node rather than a constant-ring tensor definition or cyclic bounded-constructible framework. No Lean attachment covers all coefficient stages on arbitrary X. All Mathlib searches were actually run via msearch.py; no exact match. Second reading repaired the mismatched use of clause 3 by explicitly giving the compatible finite-level trivializations and their inverse-limit, localization, and field-colimit maps. Resumption checked the current DAG and found that the chapter/unit binding and unit record are now present. Filled the permitted unit realization fields; made the cofinal-index and local-trivialization calculations explicit in the node, matching the report.",
+  "blueprint": "main-20261015 sk-def-sp-tate-twist/_section.md: paragraph 1 roots of unity and finite coefficient twist, paragraph 2 integral inverse limit and rational/algebraic-closure colimit, final paragraph signed tensor powers, duals and K(d). This is a definition and has no proof steps. Existing detailed twist nodes use different coefficient categories and are not silently identified.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N6-1eee40655",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-1eee40655 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, unit/chapter route, all 20 dependencies and their cited sources, edge cases, Mathlib searches, duplicate candidates, and DAG reachability. The definition is mathematically coherent, has no new child nodes, no actual dependency cycle, and requires no repair."
+ }
 }

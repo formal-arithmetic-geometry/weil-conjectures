@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-dc-upper-star-comp",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Composition isomorphism for $Lf^*$ on $D_{\\mathrm{cons}}$",
@@ -13,28 +13,224 @@
   "place": "node def-sfb-dc-upper-star-comp, order 1780"
  },
  "stmt_deps": [
-  "def-sfb-dc-upper-star"
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "def-sfb-dc-upper-star",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-module-upper-star-comp"
  ],
  "proof": [
   {
-   "text": "The restricted functors commute with the inclusions ([def-sfb-dc-upper-star]). So the ambient\ncomposition isomorphism $L(g\\circ f)^*\\cong Lf^*\\circ Lg^*$\n([sk-prop-sfb-module-derived-factorization]), restricted to bounded constructible complexes,\nbecomes an isomorphism between $\\iota\\circ L(g\\circ f)^*$ and $\\iota\\circ Lf^*\\circ Lg^*$. Since the\ninclusion $\\iota$ is fully faithful, this isomorphism has a unique preimage.",
+   "text": "Construct the ambient comparison on the same module-object categories as the item. Write $L_h$ for the ambient $Lh^*$. Abelian sheaves are sheaves of modules over the constant integer sheaf: on constant integer sections the action is repeated addition, and sections of the sheafified constant integer presheaf act by gluing these local actions. The sheaf gluing axiom gives existence and uniqueness of this action, so it adds no data to an abelian sheaf or its morphisms. By [def-weil-sheaf-of-modules-category] these sheaf categories are abelian; in particular equalizers and coequalizers are kernels and cokernels of differences. For $h=f,g,g\\circ f$, [sk-def-sfb-module-pushforward-pullback] gives $h^*=\\operatorname{Ext}_{\\alpha_h}\\operatorname{mapMod}(h^*_{\\Ab})$ with $\\alpha_h$ invertible. Apply [lem-sfb-finite-upper-star-exact] with coefficient category $\\Ab$ to obtain exactness of $h^*_{\\Ab}$. The sheaf tensor of [sk-def-sfb-sheaf-tensor] is closed symmetric monoidal and right exact in each variable. Each tensor functor preserves finite coproducts; between abelian categories this implies additivity, since addition of maps is expressed using diagonal and codiagonal maps of biproducts. Hence the tensor hypotheses of [det-prop-sfb-module-pullback-exact-lifted] hold for the coefficient rings $\\Lambda_S$, $h^*\\Lambda_S$ and $\\Lambda_T$, where $h:T\\to S$. By [sk-def-sfb-transport] (1), $\\operatorname{mapMod}(h^*_{\\Ab})$ commutes with forgetful functors, so the lifting lemma with $F=h^*_{\\Ab}$ makes it exact. By [sk-def-sfb-change-of-scalars] (4)--(5), $\\operatorname{Ext}_{\\alpha_h}\\cong\\operatorname{Res}_{\\alpha_h^{-1}}$ and this restriction is exact. Its hypotheses hold because the abelian sheaf categories have equalizers and coequalizers and their closed symmetric tensor preserves colimits. Thus $h^*$, a composite of exact functors, is exact. Thus [sk-def-sfb-derived-categories], Exact functors, identifies $L_h$ with $D(h^*)$, the functor induced termwise; these termwise functors therefore invert quasi-isomorphisms. Let $a:(g\\circ f)^*\\xrightarrow{\\sim}f^*g^*$ be [def-sfb-module-upper-star-comp]. On a complex $K^\\bullet$ use $a_{K^n}$ in degree $n$: naturality of $a$ with respect to $d^n$ makes this a chain isomorphism, and naturality with respect to each degree of a complex map makes it a natural isomorphism of complex functors. Localize it in the target. Apply [lem-weil-pbc-localization-universal-property] (2) with source the complexes of $\\Mod_{\\Lambda_Z}$, $W$ the quasi-isomorphisms, localization $Q_Z$, and target $D(\\Mod_{\\Lambda_X})$. Take the two descended functors to be $L_{g\\circ f}$ and $L_fL_g$, using their exact-functor termwise comparisons. For $h:T\\to S$ write $\\psi_h:L_hQ_S\\xrightarrow{\\sim}Q_T\\operatorname{CoCh}(h^*)$ for its canonical exact-functor comparison. Set $\\phi_1=\\psi_{g\\circ f}$ and $\\phi_{2,K}=\\psi_{f,\\operatorname{CoCh}(g^*)K}\\circ L_f(\\psi_{g,K})$, so $\\phi_2:L_fL_gQ_Z\\xrightarrow{\\sim}Q_X\\operatorname{CoCh}(f^*g^*)$. Then descent gives the unique $c:L_{g\\circ f}\\xrightarrow{\\sim}L_fL_g$ satisfying $c_{Q_ZK}=\\phi_{2,K}^{-1}\\circ Q_X(a_{K^\\bullet})\\circ\\phi_{1,K}$. Its inverse is the descent of $a^{-1}$, since descent preserves compositions and identities. This is precisely the ambient composition comparison, normalized by the ordinary module pullback comparison on complexes.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-finite-upper-star-exact",
+    "sk-def-sfb-sheaf-tensor",
+    "det-prop-sfb-module-pullback-exact-lifted",
+    "sk-def-sfb-transport",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-derived-categories",
+    "def-sfb-module-upper-star-comp",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/_section.md",
+    "place": "Clause 4 using clause 3; exactness expanded by det-prop-sfb-module-pullback-exact-main.proof.md, Setting, Transport, Extension of scalars and Conclusion; descent of transformations by the cited localization node (Stacks 04VG, lemma-properties-left-localization, for functor descent)."
+   }
+  },
+  {
+   "text": "Write $L_h^c$ for the restricted functors and $\\iota_T:D_{\\mathrm{cons}}(T,\\Lambda)\\hookrightarrow D(\\Mod_{\\Lambda_T})$ for the inclusions. By [def-sfb-dc-upper-star], for $h:T\\to S$ the restriction comes with its inclusion comparison $e_h:\\iota_TL_h^c\\xrightarrow{\\sim}L_h\\iota_S$ (an equality in the strict restriction model). Paste these comparisons with $c$ from step 1 to obtain\n$$A:\\iota_XL_{g\\circ f}^c\\xrightarrow{e_{g\\circ f}}L_{g\\circ f}\\iota_Z\\xrightarrow{c\\iota_Z}L_fL_g\\iota_Z\\xrightarrow{L_fe_g^{-1}}L_f\\iota_YL_g^c\\xrightarrow{e_f^{-1}L_g^c}\\iota_XL_f^cL_g^c.$$\nEach arrow is a natural isomorphism, so their componentwise composite is one. All objects lie in the indicated domains because the restricted pullbacks of the cited definition are defined for every morphism of the setting and every commutative condensed $\\Lambda$.",
    "uses": [
     "def-sfb-dc-upper-star"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-upper-star-comp.proof.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "By [sk-def-sfb-bounded-constructible], morphisms between bounded constructible objects are exactly their ambient derived morphisms, with the same identities and composition. For each $K\\in D_{\\mathrm{cons}}(Z,\\Lambda)$ define $c^c_K:L_{g\\circ f}^cK\\to L_f^cL_g^cK$ to be the very morphism $A_K$, now read in this full subcategory; define its inverse to be $A_K^{-1}$ in the same way. The two inverse equations hold because their images are the ambient inverse equations and the Hom sets are unchanged. For every $u:K\\to K'$, the naturality equation for these components is exactly the naturality equation for $A$ on $u$ in $D_{\\mathrm{cons}}(Z,\\Lambda)$, again in the same Hom set. Hence $c^c$ is a natural isomorphism and its image under $\\iota_X$ is $A$.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-upper-star-comp.proof.md",
+    "place": "Proof"
+   }
+  },
+  {
+   "text": "If $b$ is another natural isomorphism with the specified ambient image, then for every $K$ its component $b_K$ and $c^c_K$ have the same image $A_K$. The inclusion is the identity on the Hom sets by [sk-def-sfb-bounded-constructible], so $b_K=c^c_K$ for every $K$; componentwise equality gives $b=c^c$. Define the composition isomorphism to be $c^c$. Under the inclusion comparisons $e_h$ of step 2 its ambient image is $c$ of step 1, exactly as required.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-upper-star-comp.proof.md",
+    "place": "Proof"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-dc-upper-star"
+  "def-sfb-dc-upper-star",
+  "def-sfb-module-upper-star-comp",
+  "def-weil-sheaf-of-modules-category",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-sfb-finite-upper-star-exact",
+  "lem-weil-pbc-localization-universal-property",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-upper-star-comp.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-upper-star-comp.proof.md",
+  "place": "Entire proof: ordinary module composition, explicitly cited exactness and localization with its normalized component formula; componentwise full-subcategory lift and uniqueness."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "preimageIso|fullyFaithful.*[Ww]hisker|fullyFaithful.*[Pp]ostcomp|isoOfFullyFaithful",
+   "results": "25 hits, including ObjectProperty/Equivalence.lean:70,72, ObjectProperty/FullSubcategory lifting examples, and Yoneda preimageIso uses. Generic fully faithful lifting, not the whole item.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: abstract lifting tool, not the entire geometric construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between functors lifts uniquely along a fully faithful functor",
+   "results": "Functor.fullyFaithfulCancelRight, FullyFaithful.preimageIso, Functor.preimageIso and related lemmas; read CategoryTheory/Functor/FullyFaithful.lean:372-387. They provide the abstract lifting step, without the ambient condensed-derived comparison.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: abstract lifting tool, not the entire geometric construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful, CategoryTheory.NatIso",
+   "results": "Loogle returned zero hits and the diagnostic unknown identifier CategoryTheory.NatIso; this invalid pattern is not evidence of absence. Repeated with the valid quoted name.",
+   "date": "2026-10-16",
+   "verdict": "invalid query; repeated with valid identifier"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a natural isomorphism between functors through a fully faithful inclusion of a full subcategory",
+   "results": "ObjectProperty.liftCompιIso, fullyFaithfulι and equivalence/full-subcategory tools; these cover the abstract restriction mechanism, not the condensed derived ambient comparison.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: abstract lifting tool, not the entire geometric construction"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructibleUpperStarComp|boundedConstructibleUpperStar|D_cons|Dcons",
+   "results": "25 unrelated hits, e.g. foldConsts, prod_const and wordProd_cons; grep is case-insensitive, so broad Dcons matched unrelated identifiers. Repeated with a word boundary and narrower directory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fullyFaithfulCancelRight\"",
+   "results": "Functor.fullyFaithfulCancelRight and its hom_app/inv_app lemmas, Mathlib/CategoryTheory/Functor/FullyFaithful.lean:372,378,384, read through 387. Abstract cancellation only.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: abstract lifting tool, not the entire geometric construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of derived pullbacks on bounded constructible sheaves with condensed coefficients",
+   "results": "Over.pullbackComp, ChosenPullbacksAlong.pullbackComp, SheafOfModules.pullbackComp, Scheme.Modules.pullbackComp and site pullback constructions. No bounded constructible condensed derived restriction; the sheaf-module candidate was read at PullbackContinuous.lean:150-182.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition isomorphism of derived pullbacks restricted to the bounded constructible derived category of module objects over a condensed ring",
+   "results": "SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv (PullbackContinuous), PresheafOfModules.pullbackComp, and free-module pullback comparisons. Read PullbackContinuous.lean:150-182; these are underived sheaves of modules, not the bounded constructible derived module-object construction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulCancelRight|def preimageIso|def isoEquiv",
+   "results": "Grep on the single file returned lines 113,205,217,372,378 (its output parser prints line numbers in the file field for a single file). Read Mathlib/CategoryTheory/Functor/FullyFaithful.lean:365-387; fullyFaithfulCancelRight is generic, not the whole item.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: abstract lifting tool, not the entire geometric construction"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructibleUpperStarComp|boundedConstructibleUpperStar|D_cons|\\\\bDcons\\\\b",
+   "results": "",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructibleUpperStarComp|boundedConstructibleUpperStar",
+   "results": "Zero hits in all of Mathlib; this exact-name query removes the unrelated matches of the earlier case-insensitive Dcons/D_cons patterns.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms of functors to a full subcategory are determined by whiskering with the inclusion functor",
+   "results": "8 hits: Functor.fullyFaithfulCancelRight and its component lemmas; congrFullSubcategory comparisons; essImage lift comparisons; ObjectProperty.fullyFaithfulι. Read FullyFaithful.lean:365-387 and FullSubcategory.lean:105-175. These implement the elementary full-subcategory lift, not the complete condensed-derived geometric comparison.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: abstract lifting tool, not the entire geometric construction"
+  },
+  {
+   "tool": "grep",
+   "query": "liftCompιIso|FullyFaithful.*whiskeringRight|fullyFaithfulCancelRight",
+   "results": "25 hits, including ObjectProperty/FullSubcategory.lean:165 (liftCompιIso), ObjectProperty/Equivalence.lean:70,72 and categorical lifting examples. Read the inclusion and lift at FullSubcategory.lean:105-175 and cancellation at Functor/FullyFaithful.lean:365-387.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: abstract lifting tool, not the entire geometric construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between two functors lifts uniquely through a full faithful functor, and is invertible if its image is invertible",
+   "results": "8 hits including fullyFaithfulCancelRight, its component formulas and FullyFaithful.preimage; read FullyFaithful.lean:365-387.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: generic categorical tools, not the full condensed-derived restricted comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulWhiskeringLeft|fullyFaithfulCancelRight_hom_app",
+   "results": "6 hits including Localization.fullyFaithfulWhiskeringLeft at Predicate.lean:278 and fullyFaithfulCancelRight_hom_app at FullyFaithful.lean:378; read Predicate.lean:255-290 and FullyFaithful.lean:365-387.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: generic categorical tools, not the full condensed-derived restricted comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict an isomorphism of derived functors to a full subcategory using the identical morphism sets and prove uniqueness",
+   "results": "8 hits: mapDerivedCategorySingleFunctor, leftDerivedNatIso_hom, rightDerivedNatIso_hom, LocalizerMorphism.Derives.isRightDerivedFunctor_of_isIso, isLeftDerivedFunctor_iff_of_iso, rightDerivedNatIso, leftDerivedNatIso, LocalizerMorphism.Derives.isIso. These are generic derived-functor tools, not the specified condensed-coefficient bounded constructible comparison.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: generic tools, not the entire item"
+  },
+  {
+   "tool": "grep",
+   "query": "preimageIso|liftCompιIso|leftDerivedFunctorCompIso",
+   "results": "25 displayed hits, including ObjectProperty/FullSubcategory.lean:165 (liftCompιIso) and ObjectProperty/Equivalence.lean:70,72 (lifting natural isomorphisms). Read FullSubcategory.lean:105-175 and Functor/FullyFaithful.lean:365-387. Generic full-subcategory constructions; no declaration of the entire geometric comparison.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: generic tools, not the entire item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition by a fully faithful functor induces a bijection on natural isomorphisms between functors",
+   "results": "8 hits: fullyFaithfulCancelRight and its hom_app/inv_app formulas, FullyFaithful.isoEquiv_apply, FullyFaithful.homNatIso' and its component formula, FullyFaithful.isoEquiv, and CostructuredArrow.isEquivalence_post. Read Mathlib/CategoryTheory/Functor/FullyFaithful.lean:365-387: generic lifting, not the normalized condensed-module derived construction.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: generic categorical tools, not the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Cc]omp|leftDerived.*[Cc]omp|fullyFaithfulCancelRight",
+   "results": "22 hits, including FullyFaithful.lean:372,378,384; DerivedCategory/ExactFunctor.lean:47,66,68,101,131; Abelian/LeftDerived.lean:208,229 and Functor/Derived/LeftDerived.lean:122. Read FullyFaithful.lean:365-387 and DerivedCategory/ExactFunctor.lean:1-90. These are generic cancellation, induced exact functors and natural-transformation composition tools; none states the entire geometric restricted comparison.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: generic tools, not the whole item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -48,5 +244,39 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-dc-restricted-functors"
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-dc-upper-star-comp",
+  "worker": "stage1",
+  "summary": "Kept the definition verbatim. Named its setting, coefficient ring, full subcategory and ambient ordinary-composition notions. Replaced the imported uncited/missing ambient-factorization dependency by a construction from existing exactness, ordinary module composition and localization statements, then pasted the restriction comparisons and proved existence and uniqueness directly on the unchanged Hom sets. No new nodes and no assertion that the upstream master construction is finished. Second reading supplies the omitted exactness citations and checks their tensor and scalar-change hypotheses; the localized component formula fixes the ambient normalization explicitly. Fresh second reading also cites the abelian-sheaf category structure and corrects the domain of the step-3 naturality check. Current independent reading spells out the constant-integer sheaf action by gluing and tensor additivity from finite coproduct preservation, and rechecks all thirteen citation pairs.",
+  "blueprint": "Realizes the entire proof of def-sfb-dc-upper-star-comp: ambient comparison and inclusion pasting, then unique preimage through the full subcategory. The unit sk-def-sfb-dc-restricted-functors last bullet names this structure.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic descent of a natural isomorphism to the derived localization, used to expand the ambient composition comparison explicitly; it does not replace the unit route of restricting the ambient map."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-lifted",
+    "why": "Generic criterion that a functor of module objects lying over an exact functor is exact; supplies the elementary transport-exactness input along the blueprint ambient-factorization route. Requested as a tool for maintainer review; no maintainer-owned tool_uses field is set."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic abelianness of sheaves of modules, specialized to the constant integer sheaf to check the ambient abelian-sheaf categories in the exactness-lifting and change-of-scalars criteria; does not change the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-universal-property",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q60-7b29edc0a",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q60-7b29edc0a (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources and route in full. Verified exactness hypotheses, condensed module-object coefficients, derived normalization, inclusion-map directions and uniqueness; tested edge cases. No new nodes or repairs. Accepted the three declared generic tool uses. Detailed checks are in review.md."
+ }
 }
