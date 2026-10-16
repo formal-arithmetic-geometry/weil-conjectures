@@ -1,6 +1,6 @@
 # Work queue
 
-63 items; claim with `tools/claim.py next <group> [--stage N]`.
+64 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (63)
+## Stage 3: modules to prove (64)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -57,6 +57,7 @@
 | `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareEtalePathNormalization` | 15 | 1 | proof |
 | `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareProEtalePathNormalization` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentOfFormalQuotientsAndTorsionKernel` | 16 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientAdic` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientSupported` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperEtaleDerivedLowerStarCoproducts` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalCompletionAffineSections` | 17 | 1 | proof |
