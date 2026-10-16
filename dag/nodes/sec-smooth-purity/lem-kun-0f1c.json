@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-0f1c",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Direct image commutes with base change along field extensions",
@@ -18,41 +18,236 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-kun-torsion-invertible"
+ ],
  "proof": [
   {
-   "text": "*Step 1 (reduction to perfect fields).* Let $K'\\supseteq K$ and\n$L'\\supseteq L$ be the perfect closures. The extensions $K'/K$ and\n$L'/L$ are purely inseparable, so $\\Spec(K')\\to\\Spec(K)$ and\n$\\Spec(L')\\to\\Spec(L)$ are universal homeomorphisms in the sense of\n[def-weil-pbc-scheme-conventions]; by the invariance of the small etale\ntopos under universal homeomorphisms\n([thm-weil-pbc-universal-homeomorphism-invariance]) the inverse and\ndirect images of the two squares are identified under these base changes, so\nthe assertion for $L/K$ is equivalent to the assertion for $L'/K'$. As\n$K'$ is perfect, the extension $L'/K'$ is separable\n([def-kun-separably-closed]).",
+   "text": "Write $a:S_L\\to S$ and $b:T_L\\to T$ for the projections. We prove that the canonical exchange $\\beta_{L/K}(E):a^{-1}Rg_*E\\to Rg_{L,*}b^{-1}E$ of [def-weil-pbc-derived-exchange] is invertible. First suppose $L/K$ is separable in the general field-extension sense of [def-weil-pbc-separable-field-extension], which allows transcendental extensions. By [lem-kun-separable-smooth-colimit], there is a nonempty small directed set of finitely generated smooth $K$-subalgebras $A_i\\subset L$, with inclusions as transitions, such that $\\operatorname{Spec}L=\\varprojlim_i\\operatorname{Spec}A_i$. The index is small because its objects are a subset of the set of subalgebras of the fixed field $L$. Nonemptiness and a common upper bound for any two indices are part of the filtered subalgebra presentation in that statement; inclusions make its index category a directed poset.",
    "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "thm-weil-pbc-universal-homeomorphism-invariance",
-    "def-kun-separably-closed"
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-separable-field-extension",
+    "lem-kun-separable-smooth-colimit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1C, lemma-base-change-field-extension, first two sentences of proof; Algebra Tag 07BV, lemma-colimit-syntomic"
+   }
   },
   {
-   "text": "*Step 2 (separable extensions).* By\n[lem-kun-separable-smooth-colimit] the field $L'$ is a filtered\ncolimit of finitely generated smooth $K'$-subalgebras with the inclusions as\ntransition maps, so $\\Spec(L')$ is the inverse limit of the affine smooth\n$K'$-schemes $\\Spec(A_i)$ with affine transition morphisms; these are\nquasi-compact and quasi-separated. Apply the limit form of smooth base change\n[lem-kun-0f09] with $S=\\Spec(K')$, $S'=\\Spec(L')$, the quasi-compact\nquasi-separated morphism $g_{K'}:T_{K'}\\to S_{K'}$ and the coefficient\ncomplex $E_{K'}\\in\\Dplus$ whose cohomology sheaves have torsion stalks of\norders invertible in $K'$: it gives\n\n$$\ng_{L'}^{-1}Rg_{K',*}E_{K'}\\xrightarrow{\\ \\sim\\ }Rg_{L',*}(g')^{-1}E_{K'},\n$$\n\nwhich is the assertion for the separable extension $L'/K'$, and hence, by\nStep 1, the assertion for $L/K$.",
+   "text": "Put $S_i=S\\times_{\\operatorname{Spec}K}\\operatorname{Spec}A_i$. Each $S_i\\to S$ is smooth by clause (2) of [lem-pc-proper-base-change]. Each $\\operatorname{Spec}A_i\\to\\operatorname{Spec}K$ is affine: the only opens of the field spectrum are the empty scheme and the whole target, whose preimages are affine. The transition maps $\\operatorname{Spec}A_j\\to\\operatorname{Spec}A_i$ are affine by the inverse-limit clause of [lem-kun-separable-smooth-colimit] already invoked in Step 1; their targets need not be field spectra. Hence $S_i\\to S$ and every transition $S_j\\to S_i$ are affine by [lem-weil-pbc-affine-morphism-permanence], and $S_i\\to S$ is quasi-compact and quasi-separated. The scheme $S_L$ is their inverse limit: for any test scheme $Z$, in a compatible family $Z\\to S_i$, the composites to $S$ are all equal, since any two indices have a common upper bound. Hence such a family is precisely a single map $Z\\to S$ and compatible maps $Z\\to\\operatorname{Spec}A_i$, with equal composites to $\\operatorname{Spec}K$. The latter maps are exactly a map $Z\\to\\operatorname{Spec}L$ by Step 1, so the pair is exactly a map $Z\\to S_L$. This establishes existence of the required limit directly; no quasi-compactness or quasi-separatedness of the scheme $S$ itself is assumed.",
    "uses": [
-    "lem-kun-separable-smooth-colimit",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-kun-separable-smooth-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1C, lemma-base-change-field-extension, separable case; Morphisms Tags 01VB (lemma-base-change-smooth), 01SD (lemma-base-change-affine), 01S7 (lemma-affine-separated)"
+   }
+  },
+  {
+   "text": "Fix any integer $q$, geometric point $\\bar t$ of $T$, and element $v\\in\\mathcal H^q(E)_{\\bar t}$. Unpacking the stalkwise invertible-order clause of the current [def-kun-torsion-invertible], the hypothesis gives $n\\in I_K=\\{m\\geq1:m\\cdot1_K\\ne0\\}$ with $nv=0$; equivalently $n\\cdot1_K$ is a unit in the field $K$. This is an elementwise condition: $n$ may depend on $q$, $\\bar t$ and $v$. We use this clause directly and do not require one integer to kill a whole sheaf, a stalk, or all cohomology sheaves. The structure morphism $S\\to\\operatorname{Spec}K$ induces a unital ring map $K\\to\\Gamma(S,\\mathcal O_S)$. The image of $(n\\cdot1_K)^{-1}$ is a global inverse of $n\\cdot1$, since a unital ring map preserves the equality $(n\\cdot1_K)(n\\cdot1_K)^{-1}=1$. This verifies exactly the elementwise global-unit condition in the current statement of [lem-kun-0f09], with no common annihilator required. Apply that node with base scheme $S$, direct-image morphism $f=g:T\\to S$, and the nonempty small directed inverse system $(S_i\\to S)$ of Steps 1 and 2. Its limit is $S'=S_L$ and the pulled-back source is $T\\times_SS_L=T_L$. Every remaining hypothesis holds: $g$ is quasi-compact and quasi-separated by assumption, all stage maps are smooth and quasi-compact and quasi-separated, all transition maps are affine, and $E$ is bounded below. Its canonical exchange is exactly $\\beta_{L/K}(E)$, so this proves the theorem for every separable $L/K$.",
+   "uses": [
+    "def-kun-torsion-invertible",
     "lem-kun-0f09"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1C, lemma-base-change-field-extension, separable case; Tag 0F09, lemma-smooth-base-change-general"
+   }
+  },
+  {
+   "text": "For arbitrary $L/K$, use [lem-weil-pbc-perfect-purely-inseparable-overfield] for $K$ and $L$ to choose perfect purely inseparable overfields $K'/K$ and $L'/L$. They can be made compatible with the given embedding $K\\hookrightarrow L$. In characteristic zero both overfields equal their base fields, and use the original embedding. In characteristic $p>0$, for $x\\in K'$ choose $n$ with $x^{p^n}\\in K$ and send $x$ to the unique $p^n$th root in $L'$ of the image of $x^{p^n}$. Such roots exist by perfectness of $L'$ and are unique because $u^{p^n}=v^{p^n}$ implies $(u-v)^{p^n}=0$ in a field. Increasing to a common exponent proves independence of $n$ and preservation of sums and products, using $(u+v)^{p^n}=u^{p^n}+v^{p^n}$ in characteristic $p$; the map preserves $1$, is therefore injective, and extends $K\\hookrightarrow L$. We thus have a commuting diagram $K\\to K'\\to L'$ and $K\\to L\\to L'$.",
+   "uses": [
+    "lem-weil-pbc-perfect-purely-inseparable-overfield"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1C, lemma-base-change-field-extension, perfect-closure reduction; Algebra Tags 046W (lemma-perfection), 046X (definition-perfection); explicit compatibility argument supplied by Q36"
+   }
+  },
+  {
+   "text": "For every finitely generated intermediate field $K'\\subset F\\subset L'$, apply [lem-weil-pbc-perfect-field-separating-basis]: $K'$ has characteristic zero or surjective Frobenius, and $F/K'$ is finitely generated as a field, so it has a finite transcendence basis over which it is separable algebraic. Consequently $L'/K'$ is separable by clause (2) of [def-weil-pbc-separable-field-extension]. This uses general separability, not the assertion that $L'/K'$ is algebraic and not the definition of a separably closed field.",
+   "uses": [
+    "lem-weil-pbc-perfect-field-separating-basis",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1C, lemma-base-change-field-extension, last sentence; Algebra Tags 030Y (definition-perfect), 030Z (lemma-perfect), 030O (definition-separable-field-extension)"
+   }
+  },
+  {
+   "text": "Let $q_T:T_{K'}\\to T$, $q_S:S_{K'}\\to S$, $v_T:T_{L'}\\to T_L$ and $v_S:S_{L'}\\to S_L$ be the projections. Each is a universal homeomorphism: by [lem-pc-homeo-pure-insep] every test base change $Z\\to T$, $S$, $T_L$ or $S_L$ is again the homeomorphism $Z_{K'}\\to Z$ or $Z_{L'}\\to Z$ for the same purely inseparable field extension, which is the definition [def-weil-universal-homeomorphism]. By [thm-weil-pbc-universal-homeomorphism-invariance], their inverse images are equivalences compatible with direct images, cohomology and composition. These identifications extend to bounded below derived categories: exact equivalences have exact inverses and preserve injectives, since $\\operatorname{Hom}(-,FI)=\\operatorname{Hom}(F^{-1}(-),I)$ is exact for injective $I$. Choose a bounded below injective representative $I$ of $E$ as in [def-weil-pbc-direct-image]. Clause (2) of [lem-weil-pbc-dplus-injective-representative] makes every bounded below complex of injectives K-injective. The termwise complex $q_T^{-1}I$ is bounded below injective, so it is K-injective and can itself be the target resolution, with comparison map the identity. For an object $C$ of $\\Dplus((T_L)_{\\Et})$, choose a bounded below injective representative $J$; exactness and preservation of injectives by $v_T^{-1}$ make $v_T^{-1}J$ bounded below injective and hence K-injective by that clause, again with identity target-resolution comparison. For abelian sheaves $F$ on $T_{\\Et}$ and $G$ on $(T_L)_{\\Et}$, let $\\gamma_K(F):q_S^{-1}g_*F\\to g_{K',*}q_T^{-1}F$ and $\\gamma_L(G):v_S^{-1}g_{L,*}G\\to g_{L',*}v_T^{-1}G$ be the canonical maps of [def-weil-pbc-underived-exchange], and write $\\eta_u$ for the unit of $u^{-1}\\dashv u_*$. Under the direct-image composition identifications obtained by associating the fibre products in the section formula of [def-weil-pbc-direct-image], the section formula in [def-weil-pbc-underived-exchange] gives\n$$q_{S,*}(\\gamma_K(F))\\circ\\eta_{q_S,g_*F}=g_*(\\eta_{q_T,F}),\\qquad v_{S,*}(\\gamma_L(G))\\circ\\eta_{v_S,g_{L,*}G}=g_{L,*}(\\eta_{v_T,G}).$$\nIndeed, for an etale $W\\to S$ both sides of the first equation send $s\\in F(W\\times_ST)$ to its inverse-image section on $(W\\times_ST)\\times_TT_{K'}$; the representative in the exchange formula is $W$ with the identity map $W\\times_SS_{K'}\\to W\\times_SS_{K'}$. For an etale $V\\to S_L$ both sides of the second equation send $t\\in G(V\\times_{S_L}T_L)$ to its inverse-image section on $(V\\times_{S_L}T_L)\\times_{T_L}T_{L'}$; here the representative is $V$ with the identity map $V\\times_{S_L}S_{L'}\\to V\\times_{S_L}S_{L'}$. All four units are invertible because these horizontal inverse/direct-image adjunctions are equivalences by topological invariance. The two displayed equations therefore make $q_{S,*}(\\gamma_K(F))$ and $v_{S,*}(\\gamma_L(G))$ invertible. Their direct-image functors are equivalences and reflect isomorphisms, so $\\gamma_K(F)$ and $\\gamma_L(G)$ are invertible. By [lem-weil-pbc-derived-exchange-termwise], the maps $\\gamma_K(I^r)$ and $\\gamma_L(J^r)$ applied termwise to the injective representatives, with $j=\\mathrm{id}$, compute the derived canonical exchanges and make them invertible: $\\delta_K:q_S^{-1}Rg_*\\to Rg_{K',*}q_T^{-1}$ and $\\delta_L:v_S^{-1}Rg_{L,*}\\to Rg_{L',*}v_T^{-1}$; they are the exchanges of [def-weil-pbc-derived-exchange], because the equivalences carry the adjunction units and counits in its mate formula to the corresponding units and counits. Put $E_{K'}=q_T^{-1}E$. By [prop-weil-pbc-inverse-image-exact] and [def-weil-pbc-derived-inverse-image], its cohomology is $q_T^{-1}\\mathcal H^r(E)$ and it is bounded below. The stalk formula [lem-weil-pbc-inverse-image-stalk-germ] identifies these stalks with stalks of $\\mathcal H^r(E)$; for each element the annihilator $n\\in I_K$ from [def-kun-torsion-invertible] still annihilates its identified stalk element, and the ring map $K\\to K'$ sends the inverse of $n\\cdot1_K$ to the inverse of $n\\cdot1_{K'}$. Thus the same $n$ belongs to $I_{K'}$, verifying the required stalkwise invertible-order condition after pullback, again without a common annihilator. Finally $g_{K'}$ remains quasi-compact and quasi-separated by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence].",
+   "uses": [
+    "lem-pc-homeo-pure-insep",
+    "def-weil-universal-homeomorphism",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-weil-pbc-derived-exchange",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-derived-exchange-termwise",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-kun-torsion-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1C, lemma-base-change-field-extension, perfect-closure reduction; Algebra Tag 0BRA (lemma-p-ring-map); Etale Cohomology Tags 03SI (proposition-topological-invariance), 03Q1 (lemma-stalk-pullback); Derived Categories Tag 070J (lemma-bounded-below-injectives-K-injective)"
+   }
+  },
+  {
+   "text": "Write $a':S_{L'}\\to S_{K'}$ and $b':T_{L'}\\to T_{K'}$. Apply the separable case of Step 3 to $L'/K'$, $g_{K'}$ and $E_{K'}$, whose hypotheses were checked in Steps 5 and 6, obtaining an isomorphism $\\beta':(a')^{-1}Rg_{K',*}E_{K'}\\to Rg_{L',*}(b')^{-1}E_{K'}$. The two paths from $S_{L'}$ to $S$ agree: $a\\circ v_S=q_S\\circ a'$, and similarly $b\\circ v_T=q_T\\circ b'$. The horizontal pasting formula, clause (2) of [lem-weil-pbc-exchange-identity-pasting], applied to these two factorizations gives, after the inverse-image composition identifications,\n$$\\delta_L(E_L)\\circ v_S^{-1}\\bigl(\\beta_{L/K}(E)\\bigr)=\\beta'\\circ(a')^{-1}\\bigl(\\delta_K(E)\\bigr).$$\nHere $E_L=b^{-1}E$, and the targets are identified using $v_T^{-1}E_L=(b')^{-1}E_{K'}$. The right side is invertible and $\\delta_L(E_L)$ is invertible, so $v_S^{-1}(\\beta_{L/K}(E))$ is invertible. The functor $v_S^{-1}$ is an equivalence by [thm-weil-pbc-universal-homeomorphism-invariance], hence reflects isomorphisms. Therefore $\\beta_{L/K}(E)$ itself is invertible, as required.",
+   "uses": [
+    "lem-weil-pbc-exchange-identity-pasting",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1C, lemma-base-change-field-extension, final reduction; Sites Cohomology Tag 0735, section-base-change-map, mate formula and pasting"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "thm-weil-pbc-universal-homeomorphism-invariance",
-  "def-kun-separably-closed",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-separable-field-extension",
   "lem-kun-separable-smooth-colimit",
-  "lem-kun-0f09"
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-kun-torsion-invertible",
+  "lem-kun-0f09",
+  "lem-weil-pbc-perfect-purely-inseparable-overfield",
+  "lem-weil-pbc-perfect-field-separating-basis",
+  "lem-pc-homeo-pure-insep",
+  "def-weil-universal-homeomorphism",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "prop-weil-pbc-inverse-image-exact",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-exchange-identity-pasting"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1c.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1C, label lemma-base-change-field-extension, proof",
+  "by": "document"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChange|base_change",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: hits concern ring-theoretic etaleness, geometric stability, or ordinary scheme-module adjunctions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale higher direct image base change along a field extension",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale derived direct image commutes with base change by an arbitrary extension of fields for bounded below prime to characteristic torsion complexes",
+   "results": "8 hits; KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.IsEtaleAt.comp, Algebra.Etale.comp, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp, RingHom.Etale.isStableUnderBaseChange, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: hits concern ring-theoretic etaleness, geometric stability, or ordinary scheme-module adjunctions"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, \"baseChange\"",
+   "results": "1 hits; AlgebraicGeometry.Etale.etale_isStableUnderBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: hits concern ring-theoretic etaleness, geometric stability, or ordinary scheme-module adjunctions"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(cohomology|directImage)|((field|Field).*(baseChange|base_change))",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: hits concern ring-theoretic etaleness, geometric stability, or ordinary scheme-module adjunctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme morphism over a field, pullback by a field extension commutes with derived pushforward on etale sheaves",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Modules.pullback",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: hits concern ring-theoretic etaleness, geometric stability, or ordinary scheme-module adjunctions"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isTranscendenceBasis_and_isSeparable_of_perfectField",
+   "results": "1 hits; Mathlib/FieldTheory/SeparablyGenerated.lean",
+   "date": "2026-10-16",
+   "verdict": "match for existing support node lem-weil-pbc-perfect-field-separating-basis; reused, not a match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finitely generated field extension of a perfect field has a transcendence basis over which it is separable algebraic",
+   "results": "8 hits; exists_isTranscendenceBasis_and_isSeparable_of_perfectField, IntermediateField.FG.exists_finset_maximalFor_isTranscendenceBasis_separableClosure, IntermediateField.exists_finset_maximalFor_isTranscendenceBasis_separableClosure, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow', Field.finSepDegree_eq_zero_of_transcendental",
+   "date": "2026-10-16",
+   "verdict": "match for existing support node lem-weil-pbc-perfect-field-separating-basis; reused, not a match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "PerfectField, IsTranscendenceBasis",
+   "results": "1 hits; exists_isTranscendenceBasis_and_isSeparable_of_perfectField",
+   "date": "2026-10-16",
+   "verdict": "match for existing support node lem-weil-pbc-perfect-field-separating-basis; reused, not a match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated extension of a perfect field is separably generated",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image and right derived pushforward of abelian etale sheaves commute with scalar extension of the ground field",
+   "results": "8 hits; SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatIso_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardCongr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned ordinary sheaf-module pushforward coherence statements have no etale derived field-extension hypothesis or conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"isIso\"",
+   "results": "6 hits; CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.instIsIsoFunctorRanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.isIso_lanBaseChange_app, CategoryTheory.TwoSquare.isIso_ranBaseChange_app, CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff, CategoryTheory.TwoSquare.isIso_ranBaseChange_app_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned Guitart-exact Kan-extension base-change statements concern ordinary functor categories, not etale derived direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(field|Field)|((field|Field).*derived)",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match in AlgebraicGeometry for this derived field-extension phrasing"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -78,5 +273,54 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-0f1c",
+  "worker": "stage1",
+  "summary": "Statement retained verbatim. Expanded the separable case over the actual scheme S; constructed compatible perfect overfields by unique roots; replaced the erroneous separably-closed citation with the existing perfect-field separating-basis leaf and general separability definition; checked coefficient pullbacks and qcqs permanence; wrote the exchange-pasting identity explicitly. Reused all support nodes, creating none. Second reading added the existing termwise-exchange theorem to justify the injective-resolution computation of the canonical map. Return repair: re-read every support statement against the current shared DAG; expanded the sheaf-level mate/unit calculation and cited the existing underived-exchange definition before using the termwise derived comparison. No new nodes or statement changes. Rechecked against the current DAG after the merge-lock return: Step 3 now verifies the revised 0F09 elementwise global-unit condition via K to global sections, and Steps 1-2 explicitly check nonemptiness and common-upper-bound compatibility of the directed index. Current second reading: cited clause (2) of the existing bounded-below-injective representative theorem for the pulled-back complexes, and replaced the repeated-calculation shortcut with both canonical unit equations checked on etale sections. Repair of the current statement-change return: reread the merged def-kun-torsion-invertible and compared every direct dependency statement with the earlier snapshot. Steps 3 and 6 now cite its current elementwise I_K clause explicitly, distinguish local sheaf torsion from uniform annihilation, and verify preservation of each allowable annihilator under K to K-prime. Two current verbatim citation entries were added. The item statement and all source-route steps remain intact. Fresh second reading distinguishes affine stage maps to the field spectrum from affine transitions supplied by the existing smooth-colimit statement.",
+  "blueprint": "Steps 1-3 realize blueprint Step 2 (separable extensions), correctly over S. Steps 4-6 realize blueprint Step 1 (compatible perfect closures, general separability, topological invariance). Step 7 spells out the equivalence of assertions left implicit at the end of blueprint Step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Clause (2), stability of smoothness under arbitrary base change, is a generic scheme-morphism tool used to construct the smooth stages over S; no lemma in this unit supplies that permanence statement."
+   },
+   {
+    "node": "lem-pc-homeo-pure-insep",
+    "why": "Purely inseparable scalar extension gives a homeomorphism for every test scheme, supplying the universal-homeomorphism hypothesis for the existing topological-invariance route."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Topological invariance is the generic etale-topos tool explicitly required by the blueprint perfect-closure reduction."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Exact inverse image supplies preservation of cohomology and of the bounded-below coefficient condition, independently of the geometric base-change theorem."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Its stalk isomorphism ensures that pulling the coefficient to K-prime preserves the given torsion orders; no stalk computation is being replaced by a definition."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-identity-pasting",
+    "why": "The horizontal pasting identity compares the original canonical exchange with the perfect-closure exchange along the two equal composites; the unit has no such pasting identity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-pc-homeo-pure-insep",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-exchange-identity-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q36-012727714",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-012727714 (reviewer sub-agent of L); spot-checked: Full mathematical review completed; item statement and all seven proof steps match Stacks 0F1C and cited DAG/source statements, including coefficient category, base-change morphisms, perfect-closure compatibility, and edge cases. No new nodes or repairs are needed. Review written to review.md."
+ }
 }
