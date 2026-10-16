@@ -13,22 +13,35 @@
  ],
  "proof": [
   {
-   "text": "the underived direct-image comparison is the inverse mate of the restriction\ncomparison. The pullback comparison is the adjoint conjugate of the same restriction\ncomparison. The mate counit identity therefore holds on sheaves. Apply it to complexes;\nthe defining unit factorization of rightDerivedFunctorPlusBaseChange and uniqueness of\nright derived transformations give the identity on D+. The Plus-to-unbounded compatibility\nisomorphisms transport the two counits to the indicated unbounded counit. This identifies\nthese fixed maps, without choosing a new direct-image isomorphism.",
+   "text": "Use iterated_mateEquiv_conjugateEquiv_symm to identify the adjoint conjugate of lowerStarCompComparisonLowerStarIso with comparisonUpperStarCompUpperStarIso. The mateEquiv_counit_symm identity gives the underived counit equation. Injectivity of the adjunction hom-equivalence identifies lowerStarComparisonUpperStarBaseChange with the mate of the pullback comparison. These calculations are the private helpers underived_comparison_counit and underived_comparison_mate.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a square of exact horizontal functors and adjunctions, form the induced comparison on D+ using mapDerivedCategoryPlusCompIso and mapDerivedCategoryPlusNatIso. Their factorization equations on the homotopy category verify the hypothesis of derivedPlus_mateEquiv_app_fac. Compare this equation with rightDerivedFunctorPlusBaseChange_fac; uniqueness via rightDerived_ext proves that derivation of the underived mate is the mate of the derived comparison. Apply mateEquiv_counit to obtain comparison_counit_plus. All these private helpers are proved, with no new obligation.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Transport the inverse comparison through the fully faithful inclusion of D+ using the hom compatibility equations for mapDerivedCategoryPlusCompIso and mapDerivedCategoryPlusNatIso, and apply congrArg Iso.inv for the inverse equations. This proves the private comparison_iso_restrict helper.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand the fixed comparisons [def-weil-pbc-fixed-derived-comparisons]. Map comparison_counit_plus through the D+-inclusion. Rewrite derivedPlus as the restricted unbounded derived adjunction using derivedAdjunctionPlus_eq_derivedPlus and map_restrictFullyFaithful_counit_app. Apply comparison_iso_restrict and naturality of leftDerivedFunctorIsoMapDerivedCategory.inv. The resulting equation is precisely the stated fixed-map identity.",
    "uses": [
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-comparison-pullback"
+    "def-weil-pbc-fixed-derived-comparisons"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-comparison-pullback"
+  "def-weil-pbc-fixed-derived-comparisons"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/categories.tex",
-  "place": "Tag 0B65; specialization and exact-derived transport as in parent proof step 2"
+  "place": "Tag 0B65; proved categorical mate calculation, right-derived uniqueness, and Plus-to-unbounded transport by D4, 2026-10-16"
  },
  "mathlib_searches": [
   {
@@ -138,11 +151,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-bf717",
-  "group": "G1",
+  "reviewer": "X-996bd",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261016T135931-L-3400934",
+  "landing": "20261016T145217-L-3935343",
   "kind": "interface",
-  "note": "independent Codex review: Delivered packet, Lean files, DAG nodes, change record, report, and compilation matched the stage-3 review requirements; all delivered modules compiled successfully and mechanical findings were empty."
+  "note": "independent Codex review: Unchanged Lean signature matched the node and published version; proof matched updated DAG steps. Delivered module and sole direct importer compiled cleanly; all six proved declarations use only the three permitted axioms. Mechanical findings empty."
  }
 }
