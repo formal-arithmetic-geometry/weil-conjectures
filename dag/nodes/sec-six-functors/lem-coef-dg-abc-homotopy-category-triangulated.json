@@ -28,55 +28,160 @@
   "lem-coef-dgcat-model-structure",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The Leibniz identity makes boundaries an ideal among closed degree-zero maps: if $\\partial a=\\partial b=0$ and $h$ has degree $-1$, then $b\\partial h=\\partial(bh)$ and $(\\partial h)a=\\partial(ha)$. Thus composition descends to the abelian-group quotients $H^0\\mathcal A(x,y)$. The closed inclusions and projections in (A) retain their biproduct equations in this quotient, so it is additive with zero object. The dg functors in (B) act additively on these quotients and have strict inverses $[-n]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Section-review, axioms (A),(B), and Tag 09QW: additive structure before TR1."
+   }
+  },
+  {
+   "text": "For an admissible sequence $(a,b,\\pi,s)$, differentiating $bs=1$, $\\pi a=1$, and $a\\pi+sb=1$ gives $b\\partial s=0$, $(\\partial\\pi)a=0$, and $a\\partial\\pi+(\\partial s)b=0$. Multiplying by $a\\pi+sb$ gives $\\partial s=a\\pi\\partial s$ and $\\partial\\pi=(\\partial\\pi)sb$. Differentiating $\\pi s=0$ gives $\\delta=\\pi\\partial s=-(\\partial\\pi)s$. Hence $a\\delta=\\partial s$, $\\delta b=-\\partial\\pi$; also $a\\partial\\delta=\\partial(a\\delta)=0$, whence $\\partial\\delta=\\pi a\\partial\\delta=0$. These are precisely the closed boundary and the null composite classes required for the associated triangle, with the shift identifications of (B).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09P6, lemma-get-triangle, identities (1)-(8)."
+   }
+  },
+  {
+   "text": "The class of the boundary does not depend on the graded splitting. For another splitting $(\\pi\\prime,s\\prime)$ of the same closed sequence, $s\\prime-s=a\\pi s\\prime$ and $\\pi\\prime a=1$. Since $\\partial s=a\\delta$, we have $\\pi\\prime\\partial s=\\delta$. Consequently $\\delta\\prime=\\pi\\prime\\partial(s+a\\pi s\\prime)=\\delta+\\pi\\prime a\\partial(\\pi s\\prime)=\\delta+\\partial(\\pi s\\prime)$. Under (B), the last term is a boundary in the complex defining the arrow $z\\to x[1]$, so both splittings define the same arrow in $H^0\\mathcal A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QQ, lemma-analogue-triangle-independent-splittings."
+   }
+  },
+  {
+   "text": "For an admissible sequence $x\\xrightarrow{a}y\\xrightarrow{b}z$, part (i) of the cone-comparison lemma gives an isomorphism, with identities on $x,y$, from $(x,y,c(a),a,i_a,-p_a)$ to its associated triangle. Conversely, for a closed $f:x\\to y$, apply admissible replacement with $N=2$ to obtain $x\\xrightarrow{j}\\widetilde y$ admissible and a homotopy equivalence $r:\\widetilde y\\to y$ with $rj=f$. Choose its admissible quotient $q$. Part (i) compares $c(j)$ with $q$; part (ii), on the strictly commuting square $(1_x,r)$, compares $c(j)$ with $c(f)$ by a homotopy equivalence. Composing these diagram isomorphisms exhibits the cone triangle of $f$ as isomorphic to the triangle of the admissible sequence $x\\to\\widetilde y\\to q$. Thus the two classes of distinguished triangles coincide. Since every $H^0$-morphism has a closed representative, this also proves the cone-existence clause of TR1. More precisely, every distinguished triangle $T=(x,y,z,f,i,d)$ admits this cone normal form with identities on $x,y$: choose an isomorphism from $T$ to an admissible-sequence triangle and then use (i) to reach a cone triangle of $f':x'\\to y'$. Represent its first two isomorphisms by closed homotopy equivalences $a:x\\to x'$, $b:y\\to y'$. Their square commutes in $H^0$, so (ii) gives an isomorphism from the cone triangle of a closed representative of $f$ to that cone triangle of $f'$, with first two components $[a],[b]$. Composing with the inverse of the chosen isomorphism to $T$ gives identity components on $x,y$. This uses no triangulated-category axiom.",
+   "uses": [
+    "lem-coef-dg-abc-cone-homotopy",
+    "lem-coef-dg-abc-admissible-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09QU (1), 09QT, and 09QN (N=2); the proof of 09QU (2) and TR1 of 09QW."
+   }
+  },
+  {
+   "text": "Isomorphism invariance is built into the definition of distinguished triangles. The sequence $x\\xrightarrow{1}x\\to0$ is admissible with $\\pi=1$, $s=0$, so its boundary is zero. This supplies the identity triangle and finishes TR1. For forward rotation, reduce to a cone triangle using step 4. Its rotation $(y,c(f),x[1],i_f,-p_f,-f[1])$ is isomorphic, by $(1,1,-1)$, to the admissible-sequence triangle $(y,c(f),x[1],i_f,p_f,f[1])$ supplied by (C). Thus forward rotation preserves distinguishedness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QW, TR1 and forward TR2; Tag 09QR (axiom (C) itself)."
+   }
+  },
+  {
+   "text": "For inverse rotation, take an admissible sequence $x\\xrightarrow{a}y\\xrightarrow{b}z$ with splitting $(\\pi,s)$ and boundary $\\delta$. Put $D=\\delta[-1]:z[-1]\\to x$ and choose the cone sequence $x\\xrightarrow{i}c(D)\\xrightarrow{p}z$, with graded splitting $(\\rho,t)$. Write $\\widehat D=\\pi\\partial s\\in\\mathcal A(z,x)^1$ for the degree-one version of $D$ under (B). The boundary identities give $\\partial\\pi=-\\widehat D b$, $\\partial s=a\\widehat D$, $\\partial t=i\\widehat D$, and $\\partial\\rho=-\\widehat D p$. Define degree-zero maps $E=i\\pi+tb:y\\to c(D)$ and $F=a\\rho+sp:c(D)\\to y$. Their differentials vanish because $\\partial E=-i\\widehat D b+i\\widehat D b=0$ and $\\partial F=-a\\widehat D p+a\\widehat D p=0$. The splitting identities give $FE=a\\pi+sb=1_y$ and $EF=i\\rho+tp=1_{c(D)}$, with the cross terms zero by $\\rho t=0$, $pi=0$, $\\pi s=0$, and $ba=0$; they also give $Ea=i$ and $pE=b$. Thus $(-1_{z[-1]},1_x,E)$ identifies the inverse rotation $(z[-1],x,y,-D,a,b)$ with the cone triangle $(z[-1],x,c(D),D,i,-p)$: the first square is $1_x(-D)=D(-1)$, the second is $Ea=i$, and the last is $(-1_z)b=(-p)E$. This cone triangle is distinguished by step 4. Rotation and inverse rotation are inverse on triangle diagrams, so both directions of TR2 follow using isomorphism invariance.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QS, lemma-cone-rotate-isom (explicit inverse matrices); Tag 09QW, backward TR2. The signed inverse rotation uses -delta[-1]."
+   }
+  },
+  {
+   "text": "For TR3, use the identity-on-first-two-objects comparison of step 4 to put both distinguished triangles in cone form, without changing the specified first square in $H^0$. Choose closed representatives $a:x_1\\to x_2$, $b:y_1\\to y_2$ and degree-$-1$ $h$ with $\\partial h=bf_1-f_2a$. Write the two cone splittings $(\\pi_i,s_i)$ and closed inclusions/projections $(i_i,p_i)$. In shifted Hom notation define $c=i_2b\\pi_1+s_2a[1]p_1+i_2hp_1$. The Leibniz rule and the boundary identities give $\\partial c=-i_2bf_1p_1+i_2f_2ap_1+i_2(bf_1-f_2a)p_1=0$, while $ci_1=i_2b$ and $p_2c=a[1]p_1$. Thus $(a,b,c)$ is a morphism of the cone triangles (including their negative projections); undoing the two isomorphisms gives the required morphism of the original triangles. Steps 1 and 4-7 give every pre-triangulated axiom in [def-weil-triangulated-category].",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09P7, lemma-cone, with the correctly typed last summand i_2 h p_1; Tag 09QW, TR3."
+   }
+  },
+  {
+   "text": "For TR4, start with any composable pair in $H^0\\mathcal A$ and choose closed representatives $f:x\\to y$ and $g:y\\to z$. Apply the finite admissible replacement lemma with $N=3$ to $(x,y,z;f,g)$. Its strict commuting equalities $r_2j_1=fr_1$ and $r_3j_2=gr_2$ make this pair isomorphic in $H^0$ to the pair of admissible monomorphisms $j_1:y_1\\to y_2$, $j_2:y_2\\to y_3$. Each $[r_i]$ is invertible by the lemma's homotopy-equivalence assertion.",
+   "uses": [
+    "lem-coef-dg-abc-admissible-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QN, lemma-analogue-sequence-maps-split, N=3; Tag 09QY."
+   }
+  },
+  {
+   "text": "Apply the admissible flag quotient lemma to $\\alpha=j_1$, $\\beta=j_2$. Its three admissible quotient sequences give distinguished triangles of $\\alpha$, $\\beta\\alpha$, and $\\beta$, by the definition already justified in steps 2-3. The closed maps $u:q_1\\to q_2$, $v:q_2\\to q_3$ satisfy the four equations $up_1=p_2\\beta$, $\\delta_2u=\\delta_1$, $vp_2=p_3$, $\\delta_3v=\\alpha[1]\\delta_2$ in $H^0$. These are the four octahedral squares. Its fourth admissible sequence $q_1\\xrightarrow{u}q_2\\xrightarrow{v}q_3$ gives a distinguished triangle with last arrow $p_1[1]\\delta_3$, exactly the composite required by TR4. Hence some choice of triangles over this isomorphic replacement pair admits an octahedron.",
+   "uses": [
+    "lem-coef-dg-abc-admissible-flag-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QX, lemma-dgc-analogue-tr4: three quotients and fourth admissible sequence; Tag 09QY."
+   }
+  },
+  {
+   "text": "Apply the isomorphic-octahedron criterion to the pre-triangulated category established in step 7, using the replacement isomorphisms from step 8 and the three triangles and fourth distinguished triangle from step 9. All its hypotheses hold for every composable pair; no triangulatedness was assumed in the dg constructions. The criterion yields TR4 for every prescribed triple of distinguished triangles, not just the quotient choices. Therefore $H^0\\mathcal A$ is triangulated with precisely the distinguished cone triangles identified in step 4.",
+   "uses": [
+    "lem-coef-triangulated-octahedron-iso-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09QY, proposition-ABC-homotopy-category-triangulated; Derived Categories Tag 014C, lemma-easier-axiom-four."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dg-abc-cone-homotopy",
+  "lem-coef-dg-abc-admissible-replacement",
+  "def-weil-triangulated-category",
+  "lem-coef-dg-abc-admissible-flag-quotients",
+  "lem-coef-triangulated-octahedron-iso-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09P6, 09P7, 09QQ, 09QU, 09QS, 09QW, 09QN, 09QX and 09QY; Derived Categories Tag 014C."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "general differential graded category satisfying zero sums shifts and closed cones has triangulated homotopy category",
-   "results": "{\"t\": \"2026-10-16T19:58:37Z\", \"tool\": \"leanfinder\", \"query\": \"general differential graded category satisfying zero sums shifts and closed cones has triangulated homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.instIsTriangulatedIntUp\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"HomotopyCategory.instPretriangulatedIntUp\", \"DerivedCategory.instIsTriangulated\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CochainComplex.mappingCone.triangleh\", \"HomotopyCategory.hasShift\"], \"digest\": \"c39e1cda0a79c0ad\"}",
+   "query": "abstract dg category satisfying Situation ABC has triangulated homotopy category",
+   "results": "{\"t\": \"2026-10-16T21:27:03Z\", \"tool\": \"leanfinder\", \"query\": \"abstract dg category satisfying Situation ABC has triangulated homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.instIsTriangulatedIntUp\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"HomotopyCategory.instPretriangulatedIntUp\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"DerivedCategory.instPretriangulated\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"DerivedCategory.instIsTriangulated\", \"HomotopyCategory.Pretriangulated.distinguishedTriangles\"], \"digest\": \"30da41579697092a\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:191-211 and Pretriangulated.lean:574-586. HomotopyCategory.instIsTriangulatedIntUp and instPretriangulatedIntUp treat ordinary complexes in a fixed preadditive category; DerivedCategory instances require an abelian category and localization. They do not state the ABC theorem for arbitrary dg categories, nor construct the homotopy category of right modules over a dg category with a nonzero differential. No one-line specialization; the focused dg-category grep returned zero hits."
+   "verdict": "no match: HomotopyCategory.instIsTriangulatedIntUp (HomotopyCategory/Triangulated.lean:206) and instPretriangulatedIntUp (Pretriangulated.lean:578) are for ordinary cochain complexes in a fixed preadditive category. Arbitrary dg Hom complexes with their internal differential are not a one-line specialization. IsTriangulated.mk′ is only a generic axiom criterion and is separately used as a Mathlib leaf."
   },
   {
    "tool": "loogle",
-   "query": "\"IsTriangulated\", \"Pretriangulated\", \"mappingCone\"",
-   "results": "{\"t\": \"2026-10-16T19:58:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsTriangulated\\\", \\\"Pretriangulated\\\", \\\"mappingCone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "CategoryTheory.IsTriangulated, CategoryTheory.Pretriangulated",
+   "results": "{\"t\": \"2026-10-16T21:27:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsTriangulated, CategoryTheory.Pretriangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsTriangulated\", \"CategoryTheory.Triangulated.someOctahedron\", \"CategoryTheory.Triangulated.someOctahedron'\", \"CategoryTheory.IsTriangulated.mk\", \"CategoryTheory.IsTriangulated.octahedron_axiom\", \"CategoryTheory.IsTriangulated.mk'\", \"CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor\", \"CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two\"], \"digest\": \"58c53bf27c67db1b\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:191-211 and Pretriangulated.lean:574-586. HomotopyCategory.instIsTriangulatedIntUp and instPretriangulatedIntUp treat ordinary complexes in a fixed preadditive category; DerivedCategory instances require an abelian category and localization. They do not state the ABC theorem for arbitrary dg categories, nor construct the homotopy category of right modules over a dg category with a nonzero differential. No one-line specialization; the focused dg-category grep returned zero hits."
+   "verdict": "no match: HomotopyCategory.instIsTriangulatedIntUp (HomotopyCategory/Triangulated.lean:206) and instPretriangulatedIntUp (Pretriangulated.lean:578) are for ordinary cochain complexes in a fixed preadditive category. Arbitrary dg Hom complexes with their internal differential are not a one-line specialization. IsTriangulated.mk′ is only a generic axiom criterion and is separately used as a Mathlib leaf."
   },
   {
    "tool": "grep",
-   "query": "differential.?graded|DGModule|mapping.?cone",
-   "results": "{\"t\": \"2026-10-16T19:58:49Z\", \"tool\": \"grep\", \"query\": \"differential.?graded|DGModule|mapping.?cone\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "Situation.?ABC|dg.?category|homotopy.?category",
+   "results": "{\"t\": \"2026-10-16T21:27:05Z\", \"tool\": \"grep\", \"query\": \"Situation.?ABC|dg.?category|homotopy.?category\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Localization/Resolution.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\", \"Mathlib/CategoryTheory/Category/Cat/Colimit.lean\", \"Mathlib/CategoryTheory/Shift/InducedShiftSequence.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\"], \"digest\": \"d7ddd38191a0c11b\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:191-211 and Pretriangulated.lean:574-586. HomotopyCategory.instIsTriangulatedIntUp and instPretriangulatedIntUp treat ordinary complexes in a fixed preadditive category; DerivedCategory instances require an abelian category and localization. They do not state the ABC theorem for arbitrary dg categories, nor construct the homotopy category of right modules over a dg category with a nonzero differential. No one-line specialization; the focused dg-category grep returned zero hits."
+   "verdict": "no match: HomotopyCategory.instIsTriangulatedIntUp (HomotopyCategory/Triangulated.lean:206) and instPretriangulatedIntUp (Pretriangulated.lean:578) are for ordinary cochain complexes in a fixed preadditive category. Arbitrary dg Hom complexes with their internal differential are not a one-line specialization. IsTriangulated.mk′ is only a generic axiom criterion and is separately used as a Mathlib leaf."
   },
   {
    "tool": "leansearch",
-   "query": "Situation ABC differential graded category homotopy category triangulated",
-   "results": "{\"t\": \"2026-10-16T19:58:56Z\", \"tool\": \"leansearch\", \"query\": \"Situation ABC differential graded category homotopy category triangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.instIsTriangulatedIntUp\", \"HomotopyCategory\", \"instCategoryHomotopyCategory\", \"DerivedCategory.instIsTriangulated\", \"CategoryTheory.IsTriangulated.mk\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"HomotopyCategory.instPreadditive\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\"], \"digest\": \"1c638309b6afd60e\"}",
+   "query": "differential graded category admissible sequence cone triangulated",
+   "results": "{\"t\": \"2026-10-16T20:44:45Z\", \"tool\": \"leansearch\", \"query\": \"differential graded category admissible sequence cone triangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsTriangulated\", \"DerivedCategory.instIsTriangulated\", \"CategoryTheory.IsTriangulated.mk\", \"CategoryTheory.Triangulated.TStructure\", \"HomotopyCategory.instIsTriangulatedIntUp\", \"CategoryTheory.Triangulated.TStructure.mk\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"DerivedCategory.mem_distTriang_iff\"], \"digest\": \"6af1fb3f6ae00ed2\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:191-211 and Pretriangulated.lean:574-586. HomotopyCategory.instIsTriangulatedIntUp and instPretriangulatedIntUp treat ordinary complexes in a fixed preadditive category; DerivedCategory instances require an abelian category and localization. They do not state the ABC theorem for arbitrary dg categories, nor construct the homotopy category of right modules over a dg category with a nonzero differential. No one-line specialization; the focused dg-category grep returned zero hits."
+   "verdict": "no match: HomotopyCategory.instIsTriangulatedIntUp (HomotopyCategory/Triangulated.lean:206) and instPretriangulatedIntUp (Pretriangulated.lean:578) are for ordinary cochain complexes in a fixed preadditive category. Arbitrary dg Hom complexes with their internal differential are not a one-line specialization. IsTriangulated.mk′ is only a generic axiom criterion and is separately used as a Mathlib leaf."
   },
   {
    "tool": "leanfinder",
-   "query": "Verdier axioms for degree zero cohomology of a dg category with split graded exact sequences and shifts",
-   "results": "{\"t\": \"2026-10-16T19:59:00Z\", \"tool\": \"leanfinder\", \"query\": \"Verdier axioms for degree zero cohomology of a dg category with split graded exact sequences and shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"CategoryTheory.hasExt_iff\", \"DerivedCategory.instHasShiftInt\", \"DerivedCategory.instIsLEObjSingleFunctor\"], \"digest\": \"5ee1e4c00f728e07\"}",
+   "query": "differential graded category admissible short exact sequence boundary triangle",
+   "results": "{\"t\": \"2026-10-16T20:44:44Z\", \"tool\": \"leanfinder\", \"query\": \"differential graded category admissible short exact sequence boundary triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.triangleOfSESδ\", \"CategoryTheory.ShortComplex.ShortExact.singleδ\", \"DerivedCategory.triangleOfSES_mor₃\", \"DerivedCategory.triangleOfSES\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle_mor₃\", \"DerivedCategory.triangleOfSES_distinguished\", \"DerivedCategory.triangleOfSES_obj₁\"], \"digest\": \"49dc024b0d1344aa\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:191-211 and Pretriangulated.lean:574-586. HomotopyCategory.instIsTriangulatedIntUp and instPretriangulatedIntUp treat ordinary complexes in a fixed preadditive category; DerivedCategory instances require an abelian category and localization. They do not state the ABC theorem for arbitrary dg categories, nor construct the homotopy category of right modules over a dg category with a nonzero differential. No one-line specialization; the focused dg-category grep returned zero hits."
-  },
-  {
-   "tool": "grep",
-   "query": "dg[Cc]at|DGCategory|DGModule|situation.?ABC",
-   "results": "{\"t\": \"2026-10-16T19:59:01Z\", \"tool\": \"grep\", \"query\": \"dg[Cc]at|DGCategory|DGModule|situation.?ABC\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:191-211 and Pretriangulated.lean:574-586. HomotopyCategory.instIsTriangulatedIntUp and instPretriangulatedIntUp treat ordinary complexes in a fixed preadditive category; DerivedCategory instances require an abelian category and localization. They do not state the ABC theorem for arbitrary dg categories, nor construct the homotopy category of right modules over a dg category with a nonzero differential. No one-line specialization; the focused dg-category grep returned zero hits."
+   "verdict": "no match: HomotopyCategory.instIsTriangulatedIntUp (HomotopyCategory/Triangulated.lean:206) and instPretriangulatedIntUp (Pretriangulated.lean:578) are for ordinary cochain complexes in a fixed preadditive category. Arbitrary dg Hom complexes with their internal differential are not a one-line specialization. IsTriangulated.mk′ is only a generic axiom criterion and is separately used as a Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-module-cone-triangulation",
@@ -96,5 +201,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-abc-homotopy-category-triangulated",
+  "worker": "stage1",
+  "summary": "Replaced the earlier attempt’s elementary boundary node and conclusion-shaped pretriangulated/octahedral nodes by explicit axiom checks. New statement-only inputs are concrete cone comparisons, admissible finite-diagram replacement, and three-object-flag quotients, plus the exact Mathlib isomorphic-octahedron criterion. Corrected source-proof typos rather than repeating them. The resumed audit also spells out identity-on-endpoints cone normal form, and records the Mathlib leaf declaration line as a structured field.",
+  "blueprint": "Inherited generic dg-cone infrastructure for prop-coef-integral-exceptional-adjoint proof paragraph 2 (three derived mapping objects), via the recorded module-cone and finite-twisted-extension ancestry; no change to the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NL-ed45575b4",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-ed45575b4 (reviewer sub-agent of L); spot-checked: I read the item, its four new nodes, the cited nodes def-weil-triangulated-category and lem-coef-dgcat-model-structure, the parent module-cone node, the unit record, Stacks dga.tex section-review through 09QY, and Mathlib Triangulated.lean lines 71-87 (Octahedron) and 376-398 (IsTriangulated.mk'). The item statement is byte-identical to the base and agrees with 09QJ/09QY, with the cone-triangle clause from 09QU(1)+(2) using -p. I recomputed all ten steps. Steps 2-3 reproduce 09P6/09QQ. Step 4 gives both inclusions of the triangle classes and the identity-on-x,y normal form. Step 5 checks the (1,1,-1) squares. Step 6 checks dE=dF=0, FE=1, EF=1, Ea=i, pE=b and the three squares of (-1,1,E), with rho·dt=pi·ds exactly by (C). Step 7 gives dc=0 for the cone map, using the correctly typed p_1 in place of the source's typo. In steps 8-10 the four flag equations and the boundary p_1[1]delta_3 match Octahedron comm1-4 and mem exactly. New nodes: cone-homotopy matches the 09QU(1) proof, and I checked d e=0, d t=0, et=1 and [delta e]=[-p_a] myself. For replacement, 09QM prints a wrong quotient; I constructed the true quotient c(g) with all five splitting identities, so 09QN holds. For flag-quotients, the source assumes a quotient q_2 exists; I proved it exists with pi_2=pi_1 pi_3 and checked all five identities of (u,v,r,t), the boundary, and the four H^0 identities (the last holds up to d(pi_3 s_2)). The Mathlib leaf IsTriangulated.mk' is exact. No duplicates turned up in a DAG-wide grep for the tags, the vocabulary and the declaration; citing the parent/grandparent would be cyclic. Every new node records the three kinds of Mathlib search. The unit route is unchanged, no tool_uses are needed, and no SGA is cited. Minor: the new nodes lack lean_audit, which 44 recent DAG nodes also lack; left unrepaired. No fixes written."
  }
 }
