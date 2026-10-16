@@ -12,10 +12,29 @@
  ],
  "proof": [
   {
-   "text": "Restriction along an open immersion is exact and commutes with ideal-module\nproducts and ideal powers. It therefore identifies each restricted quotient of F\nwith the quotient of Fi through ei, compatibly with the quotient projections.\nCombining this normalized comparison with βi.inv gives an isomorphism from the\nrestricted quotient of F to N at each level. The normalization equation for pi\nsays that the projection followed by this isomorphism is pi. Quotient projections\nare epimorphisms. Thus hcompat, checked at every open in a pairwise intersection,\nidentifies these isomorphisms there. Their inverses also agree there. The canonical\nquotient transitions and the naturality of βi identify the component maps as an\nisomorphism of inverse systems. Its inverse is ε. Precompose the required\nfactorization with the quotient projection; hδ gives equality, and cancellation\nof this epimorphism proves the equation. For J=0 projections are isomorphisms;\nfor J=1 all quotients and N on the covering opens are zero; empty covers have\nno comparison obligations.",
+   "text": "Use coherence of F on the Noetherian scheme to obtain quasi-coherence. Compose the inverse of restrictionCompletionIso with formalCompletionFunctor.mapIso(ei) and the inverse of beta_i. This constructs the completion-to-N isomorphism on the open subscheme, with naturality in the inverse-system index already built in.",
    "uses": [
     "lem-weil-pbc-torsion-controlled-formal-restriction",
     "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the equivalence between over-site modules and modules on the open subscheme, conjugating by overFunctorEquiv and associators. Full faithfulness gives the preimage isomorphism b_i on the over-site. Map its components through that equivalence; restrictionQuotientIso_pi and quotientMap_pi, combined with hpi, prove q_F restricted to U_i followed by b_i equals pi_i.",
+   "uses": [
+    "lem-weil-pbc-torsion-controlled-formal-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Quotient projections are cokernel epimorphisms, and restriction to an open preserves epimorphisms. On each common open W, transport b_i and b_j to the over-site of W and cancel the restricted quotient projection. The hypothesis hcompat gives equality on every object of that site; sheaf-module extensionality gives equality of the transported arrows. Evaluation at W and equality of inverses of isomorphisms prove overlap compatibility for epsilon_i = b_i inverse.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the factorization of delta, first cancel the isomorphism b_i and then the restricted quotient epimorphism. Its composite with b_i is pi_i, so hdelta reduces the claim to quotientMap_pi for a. This proves the required equality. Empty index families have no obligations; for J=0 all positive-power quotient projections are isomorphisms, and for J=1 the local quotients and the corresponding restricted components of N are zero.",
+   "uses": [
+    "lem-weil-pbc-torsion-controlled-formal-restriction"
    ],
    "elementary": false
   }
@@ -27,7 +46,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 0889(1), first sentence of the proof (Zariski locality via uniqueness); Sheaves Tags 00AL and 00AM; explicit interfaces and Lean assembly by E1"
+  "place": "Tag 0889(1), Zariski locality by uniqueness; Sheaves Tags 00AL and 00AM. K3 stage-3 construction using the existing canonical restriction comparisons, full faithfulness, and cancellation of quotient epimorphisms; second reading checked the Lean argument."
  },
  "mathlib_searches": [
   {
@@ -101,13 +120,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T072345-L-1117565",
-  "kind": "interface",
+  "landing": "20261016T221616-L-1616846",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
