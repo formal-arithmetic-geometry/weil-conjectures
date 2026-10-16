@@ -189,5 +189,34 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-ef9fecdb6 (reviewer sub-agent of L); spot-checked: I read all seven steps and the five cited statements in full; the review is in review.md and I wrote no fixes. Source: the statement matches Kerodon 01NA (Construction 11.9.11.2, the last vertex map N(Δ_S)→S, with vertex i sent to the image of the last vertex of [n_i]) and 02QS (Corollary 11.9.11.5: it is a weak homotopy equivalence for every simplicial set S). Kerodon was read online because there is no local copy. No hypothesis is added or dropped. Steps: steps 1–2 are elementary and correct; I checked the restriction identity K(v')x=K(θ)K(v)x, and the resolution puts its ordinal simplex at the initial object with a forward pushout. Step 3 uses the nerve lemma with the terminal object of [n]. In step 4, ([q],z,id) is initial in C_{q,z}, because the only arrow to ([n],x,t) is a=t and its existence is exactly K(t)x=z. Step 5 uses the rowwise form of the diagonal lemma for P and the exchanged form for Q. In step 6 the max homotopies are monotone and simplicial; I checked cu'=uθ, cv'=vθ and cw'=wθ, and realization preserves finite products by the cited node. Step 7 is two-out-of-three in the Kan–Quillen structure. Edge cases: empty K, Δ^0, Δ^1, discrete K and degree 0. Structure: there are no new nodes, and a whole-DAG grep found no duplicate. The item's 80 transitive dependencies do not include it, so there is no cycle. Every citation is in the same unit sk-prop-sf-biduality-general apart from a mathlib definition, so no tool uses are needed. No SGA is cited, and this is not a target node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8067e6fc9",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Statement matches node and Kerodon 01NA/02QS clause by clause: E(K)=K.Elementsᵒᵖ (arrow direction a:[m]->[n] with K(a)y=x, verified by compiled probe), nerve via Mathlib, explicit last-vertex formula v(i) on F.map(i->last) applied to Fin.last n_i, value K(v)x_p, separate operator-naturality theorem and naturality in f:K->L via nerveMap f.mapElements.op, conclusion Enhanced.IsWeakHomotopyEquivalence = the weakEquivalenceStructure of lem-coef-kan-quillen-right-proper. No extra hypotheses; universe u arbitrary (nerve lands in SSet.{u}, probe-checked); empty K, p=0 (probe: Fin.last), degenerate simplices covered. No hollow defs; 4 postponed sorry theorems with source/blueprint docstrings; 7-step proof docstring checked by hand. No duplicate (only sd/Ex last-vertex maps exist). lean.statement verbatim, all 9 declarations present. nt_compile.py --json on snapshot: clean, 1.4 s. Only a cosmetic garbled phrase in the superseded earlier-reading section."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CategoryOfSimplicesLastVertex",
+  "declaration": "SSet.simplex_category_last_vertex",
+  "declarations": [
+   "SSet.simplexCategory",
+   "SSet.simplexCategoryLastVertexOrderFun",
+   "SSet.simplexCategoryLastVertexOrderFun_monotone",
+   "SSet.simplexCategoryLastVertexOrder",
+   "SSet.simplexCategoryLastVertexApp",
+   "SSet.simplexCategoryLastVertexApp_naturality",
+   "SSet.simplexCategoryLastVertex",
+   "SSet.simplexCategoryLastVertex_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/CategoryOfSimplicesLastVertex.lean",
+  "statement": "theorem simplex_category_last_vertex (K : SSet.{u}) : Enhanced.IsWeakHomotopyEquivalence (simplexCategoryLastVertex K)",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The category of simplices is Mathlib’s canonical K.Elementsᵒᵖ. The module supplies the explicit last-vertex formula, compatibility with every simplicial operator, naturality in arbitrary maps K ⟶ L via Mathlib’s f.mapElements.op, and the weak homotopy equivalence."
  }
 }

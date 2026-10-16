@@ -180,5 +180,31 @@
   "group": "Q99",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-b3db364c3 (reviewer sub-agent of L); spot-checked: I read the item, all three of its steps and the new node lem-coef-infinity-cartesian-mapping-fiber in full. I also read every cited statement (def-coef-infinity-fibrations, def-cbc-enhanced-diagrams-cones, lem-coef-spaces-homotopy-fiber-detection, lem-coef-infinity-relative-initial-boundary) and the parent's step 5, which uses the item. The Kerodon sources 02WU (7.1.5.19(2)), 02WS (7.1.5.17 (1)=>(3)) and 01U8 (Prop. 5.1.3.11, the dual of HTT 2.4.4.3) are not archived, so I checked them against the standard statements; proof_origin=agent is right for that reason. Item: its hypotheses match the source and both exact equalities are there. n>=1 is correctly required. Cases checked: S=pt, R=id, n=1, and empty Map_S(s,t). Step 1: the cartesian lift with fixed target comes from the definition; R(e) is cartesian, and Rx lies in D_s. Step 2: the naturality clause applies with T=R and gives a fiber map equal to R_s. Homotopy-fiber detection applies with v=id and a constant homotopy, since qR=p. Step 3: the existing relative-initial boundary node applies with p=R, and step 2 is exactly its definition of R-initial. Every cited node is in the item's unit, so there is no off-route use and no tool_uses. No SGA source is used. New node: the statement is true (cartesian square criterion, Kan fibration Map_E->Map_B, strict fiber over the degenerate id_s, naturality through T of the composition fillers). I tested it on p=id, B=pt, nerves of ordinary Grothendieck fibrations and empty mapping spaces. It is statement-only, has the right blueprint from/via, and its searches are recorded. It does not restate an item clause. Not a duplicate of cocartesian-mapping-criterion, pointwise-cocartesian-transport (K=pt), inner-mapping-fiber, right-fibration-morphism-space or grothendieck-limits-colimits. FIX (B3): the statement says 'coherent postcomposition with e', but no cited node defines postcomposition. I added a citation of [lem-coef-infinity-mapping-composition] (same unit, split, no cycle) to the statement and stmt_deps in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-cartesian-mapping-fiber.json. The removed undercategory node is absent and cited nowhere, so no drop_nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc24f8b32",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Statement matches node and Kerodon 7.1.5.19(2)/7.1.5.17: all hypotheses (cartesian p,q; inner R; R≫q=p; cartesian-edge preservation; n≥1; hab; hinit over every fiber vertex y with realization weak equivalence of right-pinched mapping spaces) and both exact conclusions; edge cases n=0 excluded, n=1, empty fibers/mapping spaces, arbitrary universe u checked; helpers have real data; only sorry is the main proof, docstring has proof steps; statement verbatim; report sections present. H4: delivered SSet.Enhanced.fiberMap duplicates the landed SSet.Enhanced.rightFibrationFiberMap (RightFibrationFibers.lean, identical pullback.map, no right-fibration hypothesis). Fix: complete module without fiberMap, public import RightFibrationFibers, hinit uses rightFibrationFiberMap p q R hcomm s; lean-record.json drops fiberMap from declarations; report gets a reviewer-fix section. nt_compile.py per-file: delivered and fixed files rc=0 clean; deliberately broken variant errors, so the harness is genuine."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianInitialBoundaryLift",
+  "declaration": "SSet.Enhanced.cartesian_initial_boundary_lift",
+  "declarations": [
+   "SSet.Enhanced.fiberPoint",
+   "SSet.Enhanced.boundaryFirstVertex",
+   "SSet.Enhanced.boundarySource",
+   "SSet.Enhanced.cartesian_initial_boundary_lift"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianInitialBoundaryLift.lean",
+  "statement": "theorem cartesian_initial_boundary_lift {A D S : SSet.{u}} [Quasicategory A] [Quasicategory D] [Quasicategory S] (p : A ⟶ S) (q : D ⟶ S) (R : A ⟶ D) (hp : cartesianFibration p) (hq : cartesianFibration q) (hR : InnerFibration R) (hcomm : R ≫ q = p) (hcart : preservesCartesianEdges p q R hcomm) (n : ℕ) (hn : 1 ≤ n) (a : (∂Δ[n] : SSet.{u}) ⟶ A) (b : Δ[n] ⟶ D) (hab : a ≫ R = ∂Δ[n].ι ≫ b) (hinit : ∀ (y : (fiber p (p.app _ (boundarySource n hn a))) _⦋0⦌), IsWeakHomotopyEquivalence (mappingSpaceMap (rightFibrationFiberMap p q R hcomm (p.app _ (boundarySource n hn a))) (fiberPoint p (boundarySource n hn a)) y)) : ∃ (tildeA : Δ[n] ⟶ A), ∂Δ[n].ι ≫ tildeA = a ∧ tildeA ≫ R = b",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Canonical strict-fiber point and boundary-vertex helpers have explicit data. The strict-fiber functor R_s is the existing SSet.Enhanced.rightFibrationFiberMap (Sheaf.CategoryTheory.RightFibrationFibers, the identical pullback.map, no right-fibration hypothesis), not a second definition. The single theorem states the exact prescribed boundary filler with fiberwise outgoing mapping-space equivalences.",
+  "fixed_by": "NT-stage2-cc-dc24f8b32"
  }
 }
