@@ -29,99 +29,179 @@
   "def-weil-pbc-module-length",
   "def-weil-endomorphism-determinant"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The $R$-module $M$ is torsion-free: if $0\\ne a\\in R$ and $ax=0$ in $M\\subseteq V$, multiplication by $a^{-1}\\in K$ gives $x=0$. Apply [lem-sc-dvr-fg-torsionfree-free], using the assumed finite generation, to choose a finite $R$-basis $b_1,\\ldots,b_n$ of $M$. This is a $K$-basis of $V$: it spans because $K M=V$, and a $K$-linear relation can be multiplied by a common nonzero denominator to give an $R$-linear relation. Consequently $g(b_1),\\ldots,g(b_n)$ is both an $R$-basis of $g(M)$ and a $K$-basis of $V$. If $n=0$, then $V=M=g(M)=H=0$, the two lengths are zero by [def-weil-pbc-module-length], and the empty determinant is $1$ by [def-weil-pbc-matrix-determinant], so the result is $0=v_R(1)$. Henceforth assume $n>0$.",
+   "uses": [
+    "lem-sc-dvr-fg-torsionfree-free",
+    "def-weil-pbc-module-length",
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-endomorphism-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02ME (definition-lattice), remark after the definition; freeness from More on Algebra Tag 0AUW (lemma-dedekind-torsion-free-flat), part (3). The rank-zero case uses Tag 02LY (definition-length)."
+   }
+  },
+  {
+   "text": "Fix a uniformizer $t$. By [def-sc-discrete-valuation-ring], $R$ is a local principal ideal domain with nonzero maximal ideal $tR$, so $t\\ne0$ and $t$ is not a unit. The Noetherianity conclusion of [lem-weil-pbc-pid-noetherian-normal] allows [lem-weil-pbc-dvr-unit-times-uniformizer-power] to be applied to $R$ and $t$. Write a nonzero fraction $a/b$ as $(u_a/u_b)t^{i-j}$ using the resulting forms $a=u_at^i$, $b=u_bt^j$. The exponent is unique: two different exponents would, after cancellation in $K$, make a positive power of the nonunit $t$ a unit in $R$. Thus the normalized exponent convention of the statement defines $v_R$ on all $K^\\times$. Multiplying these expressions shows $v_R(xy)=v_R(x)+v_R(y)$, $v_R(x^{-1})=-v_R(x)$, and $v_R(u)=0$ for $u\\in R^\\times$. Also $t^q x\\in R$ whenever $q\\ge0$ and $q+v_R(x)\\ge0$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), final assertion and valuation calculation in the proof; Tag 02MD (definition-ord), fraction convention."
+   }
+  },
+  {
+   "text": "For every integer $s\\ge0$, one has $\\ell_R(R/t^sR)=s$. Indeed each ideal containing $t^sR$ is nonzero and principal by [def-sc-discrete-valuation-ring]. A generator has the form $ut^j$ by [lem-weil-pbc-dvr-unit-times-uniformizer-power], so the ideal is $t^jR$. Containment $t^sR\\subseteq t^jR$ holds precisely for $j\\le s$: if $j>s$, cancellation would give $1\\in tR$. The ideals above $t^sR$ are therefore exactly $R,tR,\\ldots,t^sR$, all distinct. The inverse image under $R\\to R/t^sR$ identifies submodules of this quotient with these ideals and preserves strict inclusions, so the length definition [def-weil-pbc-module-length] gives $s$, including $s=0$. Since a unit does not change its principal ideal, $\\ell_R(R/aR)=s$ whenever $a=ut^s\\ne0$. More generally any $R$-linear isomorphism preserves length: image and inverse image give inverse bijections on submodule chains.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02MD (definition-ord) specialized to a DVR, with Tag 00PD (lemma-characterize-dvr) and Tag 02LY (definition-length); ideal-chain calculation written explicitly."
+   }
+  },
+  {
+   "text": "Express each $b_j$ in the $K$-basis $(g(b_i))$: $b_j=\\sum_i c_{ij}g(b_i)$ with $c_{ij}\\in K$. Choose an integer $q\\ge0$ at least $-v_R(c_{ij})$ for every nonzero coefficient in this finite array. Step 2 gives $t^qc_{ij}\\in R$ for every coefficient, including zero. Hence every $t^qb_j$ belongs to $g(M)$. Set $N=t^qM$; then $N\\subseteq M\\cap g(M)=H$. It has $R$-basis $(t^qb_j)$ and $K$-span $V$, since $t^q\\ne0$. We will compute $M/N$ and $g(M)/N$ using this common finite free submodule, before making any assertion that $H$ is finitely generated.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02MF (lemma-compare-lattices), proof of parts (1) and (3): clearing finitely many denominators to obtain a common sublattice, here using powers of a uniformizer."
+   }
+  },
+  {
+   "text": "For either $E=M$ or $E=g(M)$, apply [lem-sc-dvr-saturation-line-smith-normal-form] to the finite free module $E$ and its submodule $N$. Obtain bases $e'_1,\\ldots,e'_n$ of $E$ and $f'_1,\\ldots,f'_r$ of $N$, with $r\\le n$ and $f'_i=a_i e'_i$ after indexing the distinct selected coordinates first. Each $a_i\\ne0$ because $f'_i\\ne0$. Both bases are $K$-linearly independent by clearing denominators as in Step 1. Since $N$ spans $V$, the selected $e'_i$ span $V$; no unselected basis vector can remain, and $r=n$. By Step 2 write $a_i=u_it^{s_i}$ with $u_i\\in R^\\times$ and $s_i\\ge0$.",
+   "uses": [
+    "lem-sc-dvr-saturation-line-smith-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "DVR specialization of Tag 02MI (lemma-order-vanishing-determinant), using the existing Smith normal form leaf; its Mathlib source is LinearAlgebra/FreeModule/PID.lean, Submodule.exists_smith_normal_form_of_le:492."
+   }
+  },
+  {
+   "text": "In the coordinates of the basis $(e'_i)$, send $\\sum_i x_i e'_i$ to $(x_i\\bmod a_iR)_i$. This surjective $R$-linear map has kernel precisely $N=\\bigoplus_i a_iRe'_i$: a zero tuple means each $x_i=a_iy_i$ and the vector equals $\\sum_i y_if'_i$. Thus it induces an $R$-linear isomorphism $E/N\\cong\\bigoplus_{i=1}^n R/a_iR$. Step 3 gives length $s_i$ to each cyclic summand. Starting with the zero sum of length zero, apply [lem-weil-pbc-length-additive-short-exact] successively to the split exact sequences $0\\to\\bigoplus_{i=1}^{j-1}R/a_iR\\to\\bigoplus_{i=1}^j R/a_iR\\to R/a_jR\\to0$, whose maps are insertion of a zero final coordinate and projection to that coordinate. Induction gives finite length $\\ell_R(E/N)=\\sum_i s_i$. Length is unchanged by the displayed coordinate isomorphism by Step 3.",
+   "uses": [
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IV (lemma-length-additive) applied to the diagonal coordinate quotients of Step 5, and Tag 02MD (definition-ord) for their scalar lengths."
+   }
+  },
+  {
+   "text": "We also compute this same sum from an inclusion matrix in arbitrary bases. For any finite free $E$ and $N$ as in Step 5, let $e=(e_i)$ be a chosen $R$-basis of $E$, $f=(f_i)$ one of $N$, and $A$ the matrix defined by $f_j=\\sum_i A_{ij}e_i$. Write $e'=eP$ and $f'=fQ$ for the Smith bases, where $P,Q$ and their inverses have entries in $R$. With $D=\\operatorname{diag}(a_i)$, the equality $e'D=f'$ gives $PD=AQ$. Specialize [lem-weil-pbc-cauchy-binet] to square matrices ($m=n$): there is just one full-size subset, so $\\det(XY)=\\det X\\det Y$. The Leibniz formula [def-weil-pbc-matrix-determinant] gives $\\det D=\\prod_i a_i$ and $\\det I=1$ (only the identity permutation contributes); it also shows that evaluating an $R$-matrix over $K$ carries its determinant to the same element in $K$. Apply the product formula to $PP^{-1}=QQ^{-1}=I$ to see that $\\det P,\\det Q$ are units of $R$. Applying it to $PD=AQ$ now gives $\\det A\\det Q=\\det P\\prod_i a_i\\ne0$. Taking the exponent valuation calculated in Step 2, and using Step 6, yields $v_R(\\det A)=\\sum_i s_i=\\ell_R(E/N)$. This calculation proves the formula in the chosen bases; it does not assume it is invariant under their change.",
+   "uses": [
+    "lem-weil-pbc-cauchy-binet",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0F0K (item-cauchy-binet), square case; the agent-written Smith-basis calculation of the DVR case of Tag 02MI (lemma-order-vanishing-determinant)."
+   }
+  },
+  {
+   "text": "Let $G$ be the matrix of $g$ in the $K$-basis $b$ of Step 1. Use the same basis $f=t^qb$ of $N$ for both inclusions. Its matrix in the basis $b$ of $M$ is $A_M=t^qI$. Its matrix in the basis $g(b)$ of $g(M)$ is a matrix $A_g$ over $R$, since $N\\subseteq g(M)$; comparing coordinates in $b$ gives $GA_g=t^qI$. The determinant product and diagonal formulas established in Step 7 imply $\\det A_M=t^{qn}$ and $\\det G\\det A_g=t^{qn}$. By [def-weil-endomorphism-determinant], $\\det G=\\det_K(g)\\ne0$. Hence Steps 2 and 7 give $\\ell_R(M/N)=qn$ and $\\ell_R(g(M)/N)=qn-v_R(\\det_K(g))$, both finite, and therefore $\\ell_R(M/N)-\\ell_R(g(M)/N)=v_R(\\det_K(g))$.",
+   "uses": [
+    "def-weil-endomorphism-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02MI (lemma-order-vanishing-determinant), DVR case; the common-lattice matrix relation supplies the full signed formula, including negative determinant valuations."
+   }
+  },
+  {
+   "text": "As $N\\subseteq H\\subseteq M$ and $N\\subseteq H\\subseteq g(M)$, the maps induced by inclusions and quotient maps give exact sequences $0\\to H/N\\to M/N\\to M/H\\to0$ and $0\\to H/N\\to g(M)/N\\to g(M)/H\\to0$. For example the kernel of $M/N\\to M/H$ consists of precisely the cosets represented by elements of $H$; the second sequence has the same description. By [lem-weil-pbc-length-additive-short-exact] and the finiteness in Step 8, all three modules $H/N,M/H,g(M)/H$ have finite length, and $\\ell_R(M/N)=\\ell_R(H/N)+\\ell_R(M/H)$, $\\ell_R(g(M)/N)=\\ell_R(H/N)+\\ell_R(g(M)/H)$. Subtract these equalities in $\\mathbf Z$ and use Step 8. The common term cancels, giving $\\ell_R(M/H)-\\ell_R(g(M)/H)=v_R(\\det_K(g))$, as required.",
+   "uses": [
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02MF (lemma-compare-lattices), parts (4) and (5), by Tag 00IV (lemma-length-additive); Tag 02MG (definition-distance) identifies the resulting signed difference."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-dvr-fg-torsionfree-free",
+  "def-weil-pbc-module-length",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-endomorphism-determinant",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-sc-dvr-saturation-line-smith-normal-form",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-weil-pbc-cauchy-binet"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02MI (lemma-order-vanishing-determinant), DVR case; a Smith normal form proof in place of the general one-dimensional-domain generator proof. The common-sublattice cancellation follows Tag 02MF (lemma-compare-lattices), parts (4)-(5).",
+  "note": "The item is below the unit level; its statement and the blueprint ancestor ramification/length route are unchanged. All non-elementary inputs are existing DAG nodes."
+ },
  "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "length of quotient by an endomorphism equals valuation of determinant over a DVR",
-   "results": "{\"t\": \"2026-10-16T20:43:16Z\", \"tool\": \"leansearch\", \"query\": \"length of quotient by an endomorphism equals valuation of determinant over a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.natAbs_det_equiv\", \"LinearMap.det_eq_det_mul_det\", \"LinearMap.det\", \"Submodule.natAbs_det_basis_change\", \"ModP.preVal_mk\", \"LinearMap.associated_det_comp_equiv\", \"Valuation.onQuotVal\", \"IsDedekindDomain.HeightOneSpectrum.valuation_of_mk'\"], \"digest\": \"e3c7689834d53002\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "length quotient by endomorphism determinant valuation DVR",
-   "results": "{\"t\": \"2026-10-16T20:43:19Z\", \"tool\": \"leanfinder\", \"query\": \"length quotient by endomorphism determinant valuation DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModP.preVal\", \"ClassGroup.cardM\", \"IsDedekindDomain.HeightOneSpectrum.valuationOfNeZeroToFun\", \"Ring.ordFrac\", \"Module.length_quotient\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"Ring.ord\", \"Submodule.natAbs_det_basis_change\"], \"digest\": \"7d64d47b9f100774\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For a DVR lattice M in a finite dimensional fraction field vector space and an automorphism g, length M modulo intersection gM minus length gM modulo intersection M equals valuation of determinant g",
-   "results": "{\"t\": \"2026-10-16T20:45:59Z\", \"tool\": \"leanfinder\", \"query\": \"For a DVR lattice M in a finite dimensional fraction field vector space and an automorphism g, length M modulo intersection gM minus length gM modulo intersection M equals valuation of determinant g\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.natAbs_det_equiv\", \"Submodule.natAbs_det_basis_change\", \"AddSubgroup.relIndex_eq_natAbs_det\", \"AddSubgroup.relindex_eq_natAbs_det\", \"AddSubgroup.relIndex_eq_abs_det\", \"AddSubgroup.relindex_eq_abs_det\", \"Ideal.natAbs_det_equiv\", \"AddSubgroup.index_eq_natAbs_det\"], \"digest\": \"5b7773baf36c042d\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization."
-  },
-  {
-   "tool": "leansearch",
-   "query": "A lattice and its image under a fraction field linear automorphism have relative length equal to the discrete valuation of its determinant",
-   "results": "{\"t\": \"2026-10-16T20:46:19Z\", \"tool\": \"leansearch\", \"query\": \"A lattice and its image under a fraction field linear automorphism have relative length equal to the discrete valuation of its determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddSubgroup.relIndex_eq_abs_det\", \"FractionalIdeal.abs_det_basis_change\", \"LinearEquiv.det\", \"AddSubgroup.relindex_eq_natAbs_det\", \"ZLattice.covolume_eq_det_inv\", \"ZLattice.covolume_eq_det\", \"ZLattice.covolume_eq_det_mul_measureReal\", \"ZLattice.comap_equiv\"], \"digest\": \"6df13fac57e9278d\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization."
-  },
-  {
-   "tool": "loogle",
-   "query": "LinearMap.det, Module.length",
-   "results": "{\"t\": \"2026-10-16T20:43:14Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.det, Module.length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization."
-  },
-  {
-   "tool": "loogle",
-   "query": "LinearMap.det, Ring.ordFrac",
-   "results": "{\"t\": \"2026-10-16T20:45:49Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.det, Ring.ordFrac\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization."
-  },
-  {
-   "tool": "grep",
-   "query": "determinant.*length|length.*determinant|ord.*det",
-   "results": "{\"t\": \"2026-10-16T20:43:16Z\", \"tool\": \"grep\", \"query\": \"determinant.*length|length.*determinant|ord.*det\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Determinant.lean\", \"Mathlib/LinearAlgebra/Determinant.lean\", \"Mathlib/LinearAlgebra/Determinant.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Basis.lean\", \"Mathlib/LinearAlgebra/AffineSpace/Matrix.lean\"], \"digest\": \"4f54d3c8f946764e\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization.",
-   "subdirectory": "LinearAlgebra"
-  },
   {
    "tool": "grep",
    "query": "length.*det|det.*length|distance.*lattice",
-   "results": "{\"t\": \"2026-10-16T20:45:48Z\", \"tool\": \"grep\", \"query\": \"length.*det|det.*length|distance.*lattice\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-16T21:39:45Z\", \"tool\": \"grep\", \"query\": \"length.*det|det.*length|distance.*lattice\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read the hits. The determinant-index results in LinearAlgebra/FreeModule/Finite/CardQuotient.lean concern Z-lattices and finite cardinal indices, not lengths over arbitrary DVRs. Ring.ord and Ring.ordFrac define order but do not compare it with determinants. LinearEquiv.det is only the determinant construction. No hit gives the stated relative-length identity, even after one-line specialization.",
+   "verdict": "no match: No combined DVR signed-length/determinant result. The matches, if any, are the Z-cardinality and auxiliary-scalar finrank formulas read above.",
    "subdirectory": "RingTheory"
   },
   {
    "tool": "leanfinder",
-   "query": "Over a discrete valuation ring the length of the cokernel of an injective map of finite free modules is the additive valuation of its determinant",
-   "results": "{\"t\": \"2026-10-16T21:24:11Z\", \"tool\": \"leanfinder\", \"query\": \"Over a discrete valuation ring the length of the cokernel of an injective map of finite free modules is the additive valuation of its determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.length_of_free_of_finite\", \"Module.length_le_of_injective\", \"Ideal.finrank_quotient_eq_sum\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"Module.length_of_free\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"Submodule.finrank_quotient_eq_sum\"], \"digest\": \"6fd3218c6eb5742b\"}",
+   "query": "For lattices over a discrete valuation ring the signed quotient lengths equal the valuation of the determinant of an automorphism",
+   "results": "{\"t\": \"2026-10-16T21:39:46Z\", \"tool\": \"leanfinder\", \"query\": \"For lattices over a discrete valuation ring the signed quotient lengths equal the valuation of the determinant of an automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.natAbs_det_equiv\", \"Submodule.natAbs_det_basis_change\", \"AddSubgroup.relIndex_eq_natAbs_det\", \"AddSubgroup.relindex_eq_natAbs_det\", \"AddSubgroup.relIndex_eq_abs_det\", \"AddSubgroup.relindex_eq_abs_det\", \"AddSubgroup.index_eq_natAbs_det\", \"Module.Basis.SmithNormalForm.toAddSubgroup_index_eq_pow_mul_prod\"], \"digest\": \"01979a5b5e76ce0d\"}",
    "date": "2026-10-17",
-   "verdict": "no match: second reader read LocalRing/Length.lean:25-73, FreeModule/Finite/CardQuotient.lean:29-92, FreeModule/Finite/Quotient.lean:30-41 and FreeModule/IdealQuotient.lean:69-74. These provide lengths of free modules, integer-lattice indices, Smith decompositions, or quotient dimensions, not the signed DVR lattice-length/determinant identity. The additive valuation hits give valuation properties and the determinant hits give invertibility, without the length comparison."
+   "verdict": "no match: Read FreeModule/Finite/CardQuotient.lean:35-92: natAbs_det_equiv and the relIndex results concern Z-lattices and cardinality. They do not state arbitrary DVR relative module lengths."
   },
   {
    "tool": "loogle",
-   "query": "LinearMap.det, \"ord\"",
-   "results": "{\"t\": \"2026-10-16T21:24:25Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.det, \\\"ord\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "LinearMap.det, Module.length",
+   "results": "{\"t\": \"2026-10-16T21:39:46Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.det, Module.length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: second reader read LocalRing/Length.lean:25-73, FreeModule/Finite/CardQuotient.lean:29-92, FreeModule/Finite/Quotient.lean:30-41 and FreeModule/IdealQuotient.lean:69-74. These provide lengths of free modules, integer-lattice indices, Smith decompositions, or quotient dimensions, not the signed DVR lattice-length/determinant identity. The additive valuation hits give valuation properties and the determinant hits give invertibility, without the length comparison."
+   "verdict": "no match: No hits for the determinant/module-length combination."
   },
   {
    "tool": "leansearch",
-   "query": "The additive valuation of the determinant of an invertible matrix over the fraction field of a discrete valuation ring equals the signed length of two lattices modulo their intersection",
-   "results": "{\"t\": \"2026-10-16T21:25:18Z\", \"tool\": \"leansearch\", \"query\": \"The additive valuation of the determinant of an invertible matrix over the fraction field of a discrete valuation ring equals the signed length of two lattices modulo their intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.isUnits_det_units\", \"Matrix.isAddUnit_detp_mul_detp\", \"IsDiscreteValuationRing.addVal_mul\", \"Matrix.detInvertibleOfInvertible\", \"Matrix.GeneralLinearGroup.val_det_apply\", \"IsDiscreteValuationRing.addVal.congr_simp\", \"IsDiscreteValuationRing.addVal\", \"Matrix.invertibleEquivDetInvertible\"], \"digest\": \"6a9f6d5e5bf5ace8\"}",
+   "query": "Over a DVR the length of the cokernel of an injective endomorphism of a finite free module equals the valuation of its determinant",
+   "results": "{\"t\": \"2026-10-16T21:40:02Z\", \"tool\": \"leansearch\", \"query\": \"Over a DVR the length of the cokernel of an injective endomorphism of a finite free module equals the valuation of its determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.det\", \"LinearMap.coe_det\", \"LinearMap.det_eq_one_of_not_module_finite\", \"LinearMap.det_eq_zero_iff_ker_ne_bot\", \"LinearMap.isUnit_iff_isUnit_det\", \"LinearMap.associated_det_comp_equiv\", \"LinearMap.bot_lt_ker_of_det_eq_zero\", \"LinearMap.det_eq_det_mul_det\"], \"digest\": \"7859e46f1a7cb144\"}",
    "date": "2026-10-17",
-   "verdict": "no match: second reader read LocalRing/Length.lean:25-73, FreeModule/Finite/CardQuotient.lean:29-92, FreeModule/Finite/Quotient.lean:30-41 and FreeModule/IdealQuotient.lean:69-74. These provide lengths of free modules, integer-lattice indices, Smith decompositions, or quotient dimensions, not the signed DVR lattice-length/determinant identity. The additive valuation hits give valuation properties and the determinant hits give invertibility, without the length comparison."
+   "verdict": "no match: Read LinearAlgebra/Determinant.lean: det is multiplicative and detects invertibility; the hits do not relate a DVR quotient length to its valuation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "length of quotient free module Smith normal form determinant order discrete valuation ring",
+   "results": "{\"t\": \"2026-10-16T21:40:03Z\", \"tool\": \"leanfinder\", \"query\": \"length of quotient free module Smith normal form determinant order discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.finrank_quotient_eq_sum\", \"Ideal.finrank_quotient_eq_sum\", \"Module.Basis.SmithNormalForm.toAddSubgroup_index_eq_ite\", \"Module.Basis.SmithNormalForm.toAddSubgroup_index_eq_pow_mul_prod\", \"Module.Basis.SmithNormalForm.toAddSubgroup_index_ne_zero_iff\", \"Module.length_of_free_of_finite\", \"Submodule.smithNormalFormCoeffs_ne_zero\", \"Submodule.natAbs_det_equiv\"], \"digest\": \"1141d0e0fca025e5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read FreeModule/Finite/Quotient.lean:115-135: finrank_quotient_eq_sum concerns dimensions over an auxiliary scalar ring with freeness/finite hypotheses, not arbitrary DVR module length. Smith normal form is a component, already a DAG leaf. CardQuotient.lean:35-92 is over Z and computes cardinal indices."
   },
   {
    "tool": "grep",
-   "query": "length.*(localiz|restrictScalars)|length.*det|det.*length|ord.*det",
-   "results": "{\"t\": \"2026-10-16T21:24:24Z\", \"tool\": \"grep\", \"query\": \"length.*(localiz|restrictScalars)|length.*det|det.*length|ord.*det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/PolarCoord.lean\", \"Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Note.lean\", \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean\", \"Mathlib/LinearAlgebra/AffineSpace/Matrix.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Basis.lean\", \"Mathlib/LinearAlgebra/Determinant.lean\"], \"digest\": \"b95842049980ddc9\"}",
+   "query": "natAbs_det_equiv|finrank_quotient_eq_sum|length_of_free_of_finite",
+   "results": "{\"t\": \"2026-10-16T21:40:34Z\", \"tool\": \"grep\", \"query\": \"natAbs_det_equiv|finrank_quotient_eq_sum|length_of_free_of_finite\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/FreeModule/Norm.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean\", \"Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean\"], \"digest\": \"87a8cb223799fe9b\"}",
    "date": "2026-10-17",
-   "verdict": "no match: second reader read LocalRing/Length.lean:25-73, FreeModule/Finite/CardQuotient.lean:29-92, FreeModule/Finite/Quotient.lean:30-41 and FreeModule/IdealQuotient.lean:69-74. These provide lengths of free modules, integer-lattice indices, Smith decompositions, or quotient dimensions, not the signed DVR lattice-length/determinant identity. The additive valuation hits give valuation properties and the determinant hits give invertibility, without the length comparison."
+   "verdict": "no match: No combined DVR signed-length/determinant result. The matches, if any, are the Z-cardinality and auxiliary-scalar finrank formulas read above.",
+   "subdirectory": "LinearAlgebra"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-exc-dvr-norm-valuation-sum",
@@ -129,5 +209,31 @@
   "group": "ND"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-dvr-lattice-distance-determinant",
+  "worker": "stage1",
+  "summary": "No matching project proof or Mathlib theorem found. Kept the complete signed statement and all hypotheses; wrote a nine-step DVR proof using existing freeness, unit-power, Smith normal form, length additivity and Cauchy-Binet nodes. Constructed a common sublattice explicitly, calculated cyclic quotient lengths and basis-change determinants, then cancelled H/N. No new nodes. Checked rank zero, units and mixed positive/negative diagonal exponents.",
+  "blueprint": [
+   "Proof, first paragraph of lem-exc-dvr-galois.proof.md: 'The equality between degree and ramification index used here follows from the length of the finite free integral closure modulo a uniformizer'; the determinant/length comparison underpinning its norm/order calculation."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cauchy-binet",
+    "why": "Only the square-matrix specialization det(XY)=det(X)det(Y) is used in the change-of-basis calculation. This is a generic linear algebra tool; the Kummer unit supplies no determinant product theorem. It does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cauchy-binet"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-952c7fff4",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-952c7fff4 (reviewer sub-agent of L); spot-checked: I read the whole item: statement, all 9 steps, the statements of all 12 cited nodes, the unit sk-prop-a1-kummer, the consumer step lem-exc-dvr-norm-valuation-sum step 2 and the blueprint ancestor lem-exc-dvr-galois.proof.md (main-20261015). In Stacks algebra.tex I read 02MD, 02ME, 02MF, 02MG and 02MI. Statement: it is the faithful DVR case of 02MI, with the sign of d(M,gM) as in 02MG, the finite-length clause from 02MF, and ord equal to the normalized exponent via Step 3. It is not weakened. Small cases I checked: rank 0; g=t and g=t^{-1}; a unit; diag(t^2,t^{-3}) giving -1; and a non-diagonal unipotent g with H=Re1+tRe2, giving lengths 1 and 1. Steps: the orientations AQ=PD and GA_g=t^qI are correct, which I rederived. The Smith node's r<=n is upgraded to r=n by a proof from the K-span, not assumed. Noetherianity is established before the unit-times-power leaf is applied. Finiteness is obtained before subtracting in Z. Steps 3 and 4 are rightly elementary. Nine dependencies are Mathlib leaves. I accept the declared tool use lem-weil-pbc-cauchy-binet (square determinant product only, replaces no unit step). The rg search for 02MI/02MF/02MJ/Smith found no duplicate. There are no new nodes, no SGA citation, and no fixes."
+ }
 }

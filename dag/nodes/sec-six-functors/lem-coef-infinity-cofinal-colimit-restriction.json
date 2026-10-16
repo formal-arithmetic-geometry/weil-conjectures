@@ -30,9 +30,80 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a universe $\\mathcal V$ containing the simplicial sets $I,J,I_0,J_0$, all the displayed functors and their quasi-inverse data; enlarge further for categories of diagrams. They are now $\\mathcal V$-small, although they need not be $\\mathcal U$-small. Apply [lem-coef-infinity-cofinality-space-test] with its fixed universe taken to be $\\mathcal V$. Its comma in condition (3) is exactly the degreewise pullback displayed in this statement, not the core of that pullback. The hypothesis and implication (3)$\\Rightarrow$(1) therefore make $u$ final: for every $D:J\\to\\mathcal E$ and every given colimiting cocone on $D$, restriction to $I$ is colimiting. The auxiliary category of spaces in that criterion is formed using $\\mathcal V$, not the original smaller universe.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02NZ",
+    "place": "Remark 7.2.3.2(2′), Theorem 7.2.3.1(2), and Proposition 7.4.3.11(1)-(2); agent-explicit universe enlargement"
+   }
+  },
+  {
+   "text": "For any functor equivalence $a:A\\to B$ between $\\mathcal V$-small quasicategories, choose its stipulated quasi-inverse $b:B\\to A$ and coherent natural equivalences $ba\\simeq1_A$, $ab\\simeq1_B$. For every quasicategory $\\mathcal E$ in a containing universe, restriction gives simplicial functors $a^*:\\operatorname{Fun}(B,\\mathcal E)\\to\\operatorname{Fun}(A,\\mathcal E)$ and $b^*$ in the opposite direction. Their composites send $H:A\\to\\mathcal E$ to $Hba$ and $D:B\\to\\mathcal E$ to $Dab$. The evaluation map sends $ba\\simeq1_A$ to $Hba\\simeq H$ and $ab\\simeq1_B$ to $Dab\\simeq D$, naturally in all simplices of $H,D$: explicitly evaluate a diagram on the map $A\\times\\Delta^1\\to A$ or $B\\times\\Delta^1\\to B$ representing the given transformation, and curry. Evaluate their inverse transformations and two inverse-triangle simplices in the same way. These give coherent inverse-triangle witnesses in the functor categories, so $a^*$ and $b^*$ are functor equivalences by definition. The functor-category and mapping-space assertions of [lem-cbc-enhanced-functor-cone-calculus] apply; in particular, $a^*$ induces equivalences on mapping spaces. This construction uses the actual coherent quasi-inverse data, not an equivalence merely of homotopy categories.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, basic facts (1), (3), (6)-(7), printed pp.14-15; agent-written currying of the given inverse data"
+   }
+  },
+  {
+   "text": "Let $D:B\\to\\mathcal E$ and let $\\lambda:D\\to\\Delta_B L$ be a given colimiting cocone. The dual mapping-space criterion in [lem-cbc-enhanced-functor-cone-calculus] says that, for each $T\\in\\mathcal E$, postcomposition with $\\lambda$ gives an equivalence $\\operatorname{Map}_{\\mathcal E}(L,T)\\to\\operatorname{Map}_{\\operatorname{Fun}(B,\\mathcal E)}(D,\\Delta_B T)$. By step 2, restriction along $a$ gives an equivalence from this latter mapping space to $\\operatorname{Map}_{\\operatorname{Fun}(A,\\mathcal E)}(Da,\\Delta_A T)$. Their composite is the map associated to the restricted cocone: a morphism $h:L\\to T$ is sent first to $(\\Delta_B h)\\lambda$ and then to $(\\Delta_A h)(\\lambda a)$, since restriction is precomposition and $a^*\\Delta_B=\\Delta_A$. The same equality is evaluation on simplices, so it includes the compatibility homotopies. The dual criterion now shows that $\\lambda a$ is colimiting, with its original vertex $L$. Thus every functor equivalence $a$ is final under definition (1) of [lem-coef-infinity-cofinality-space-test]. No existence of other colimits in $\\mathcal E$ was used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/04K3",
+    "place": "Proposition 7.4.3.11, universal existing-colimit condition; agent proof from the cited cocone mapping-space criterion"
+   }
+  },
+  {
+   "text": "Apply step 3 to $w:J\\to J_0$ and $e:I_0\\to I$. To check finality of $wue$, take any $D:J_0\\to\\mathcal E$ with a given colimiting cocone $\\lambda$. Restrict it first along $w$, next along $u$ using step 1, and last along $e$. The three resulting cocones $\\lambda w$, $(\\lambda w)u$, and $((\\lambda w)u)e$ are colimiting by the definition of finality; the last is exactly $\\lambda(wue)$ with the same vertex, because precomposition is associative on simplicial maps. This proves condition (1) for $wue$. Implication (1)$\\Rightarrow$(3) of [lem-coef-infinity-cofinality-space-test], in universe $\\mathcal V$, gives weak contractibility of the specified $(j_0\\downarrow wue)$ for each $j_0\\in J_0$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02NZ",
+    "place": "Remark 7.2.3.2(2′) and Proposition 7.4.3.11; composition written directly from the universal-colimit condition"
+   }
+  },
+  {
+   "text": "For the last assertion, identity restriction leaves every diagram and its cocone unchanged, so $1_J$ is final by condition (1) of [lem-coef-infinity-cofinality-space-test]. Condition (3) then makes each $(j\\downarrow1_J)$ weakly contractible. Apply the result of step 4 with $u=1_J$, $w=1_J$, and the given equivalence $e:I_0\\to J$. Its conclusion is precisely weak contractibility of $(j\\downarrow e)$ for every $j\\in J$. This also covers the empty $J$ case, where there are no such vertices.",
+   "uses": [
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02NZ",
+    "place": "Remark 7.2.3.2(2′), specialized to identity restriction and then to the given equivalence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-cofinality-space-test",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02NZ",
+  "place": "Agent-written proof using the existing universal-colimit/comma criterion (Kerodon 02NY, 02NZ, 04K3) and coherent quasi-inverse data. Sources read online; archival copies WANTED. No Stacks tag states the quasicategorical assertion."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +125,59 @@
    "results": "{\"t\": \"2026-10-16T20:36:37Z\", \"tool\": \"leanfinder\", \"query\": \"Quasicategory Theorem A contractible comma implies final and preservation of existing colimit cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Final.colimitCoconeOfComp_cocone\", \"CategoryTheory.Functor.Final.colimitCoconeOfComp\", \"CategoryTheory.Functor.Final.extendCocone\", \"CategoryTheory.Functor.Final.isColimitExtendCoconeEquiv\", \"CategoryTheory.Functor.Final.colimitCoconeComp_isColimit\", \"CategoryTheory.Functor.Final.colimitCoconeComp_cocone\", \"CategoryTheory.Functor.Final.colimitCoconeOfComp_isColimit\", \"CategoryTheory.Functor.Final.colimitCoconeComp\"], \"digest\": \"5270518aaa23dd40\"}",
    "date": "2026-10-17",
    "verdict": "No match: hits are ordinary CategoryTheory final functors with Hom sets or nerve infrastructure; none provides the coherent comma criterion or cocone equivalence for arbitrary quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|comma|equivalence|final",
+   "results": "{\"t\": \"2026-10-16T21:24:34Z\", \"tool\": \"grep\", \"query\": \"cofinal|comma|equivalence|final\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"809bb2fc10ad2aaa\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Limits/Final.lean:88-100 defines Final using connected ordinary StructuredArrow categories; lines 814-828 prove ordinary equivalence/composition results. IsColimit.whiskerEquivalence and Comma.isEquivalenceMap likewise concern ordinary categories, not arbitrary quasicategories and weak contractibility of coherent comma realizations. Inspected AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-33,45-78: bicategory infrastructure, no such cofinality theorem. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For infinity categories a functor with contractible comma categories stays final after composition with equivalences",
+   "results": "{\"t\": \"2026-10-16T21:24:34Z\", \"tool\": \"leansearch\", \"query\": \"For infinity categories a functor with contractible comma categories stays final after composition with equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.final_of_equivalence_comp\", \"CategoryTheory.Functor.final_equivalence_comp\", \"CategoryTheory.Functor.final_comp_equivalence\", \"CategoryTheory.Functor.final_iff_comp_equivalence\", \"CategoryTheory.Functor.final_iff_equivalence_comp\", \"CategoryTheory.Comma.map_final\", \"CategoryTheory.Comma.isEquivalenceMap\", \"CategoryTheory.Functor.final_iff_final_comp\"], \"digest\": \"f2d13b61594bf854\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Limits/Final.lean:88-100 defines Final using connected ordinary StructuredArrow categories; lines 814-828 prove ordinary equivalence/composition results. IsColimit.whiskerEquivalence and Comma.isEquivalenceMap likewise concern ordinary categories, not arbitrary quasicategories and weak contractibility of coherent comma realizations. Inspected AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-33,45-78: bicategory infrastructure, no such cofinality theorem. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Final, CategoryTheory.Equivalence",
+   "results": "{\"t\": \"2026-10-16T21:24:34Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Final, CategoryTheory.Equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Final.coconesEquiv\"], \"digest\": \"98059c77a5c95c92\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Limits/Final.lean:88-100 defines Final using connected ordinary StructuredArrow categories; lines 814-828 prove ordinary equivalence/composition results. IsColimit.whiskerEquivalence and Comma.isEquivalenceMap likewise concern ordinary categories, not arbitrary quasicategories and weak contractibility of coherent comma realizations. Inspected AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-33,45-78: bicategory infrastructure, no such cofinality theorem. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalences of quasicategories preserve contractibility of comma infinity categories and are cofinal",
+   "results": "{\"t\": \"2026-10-16T21:24:35Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalences of quasicategories preserve contractibility of comma infinity categories and are cofinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.SimplicialObject.isCoskeletal_iff\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.Truncated.HomotopyCategory.isoTerminal\"], \"digest\": \"fe0bb35dfa2e2a54\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Limits/Final.lean:88-100 defines Final using connected ordinary StructuredArrow categories; lines 814-828 prove ordinary equivalence/composition results. IsColimit.whiskerEquivalence and Comma.isEquivalenceMap likewise concern ordinary categories, not arbitrary quasicategories and weak contractibility of coherent comma realizations. Inspected AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-33,45-78: bicategory infrastructure, no such cofinality theorem. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "final_equivalence_comp|final_comp_equivalence|class Final|def Final",
+   "results": "{\"t\": \"2026-10-16T21:24:54Z\", \"tool\": \"grep\", \"query\": \"final_equivalence_comp|final_comp_equivalence|class Final|def Final\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FinallySmall.lean\", \"Mathlib/CategoryTheory/Limits/FinallySmall.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\"], \"digest\": \"5fe4b6609c5c8431\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Limits/Final.lean:88-100 defines Final using connected ordinary StructuredArrow categories; lines 814-828 prove ordinary equivalence/composition results. IsColimit.whiskerEquivalence and Comma.isEquivalenceMap likewise concern ordinary categories, not arbitrary quasicategories and weak contractibility of coherent comma realizations. Inspected AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-33,45-78: bicategory infrastructure, no such cofinality theorem. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"final_comp_equivalence\"",
+   "results": "{\"t\": \"2026-10-16T21:24:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"final_comp_equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.final_comp_equivalence\"], \"digest\": \"c1bbfda1ce9201f7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Limits/Final.lean:88-100 defines Final using connected ordinary StructuredArrow categories; lines 814-828 prove ordinary equivalence/composition results. IsColimit.whiskerEquivalence and Comma.isEquivalenceMap likewise concern ordinary categories, not arbitrary quasicategories and weak contractibility of coherent comma realizations. Inspected AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-33,45-78: bicategory infrastructure, no such cofinality theorem. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition by an equivalence of infinity categories induces equivalences on coherent cocone spaces and preserves colimit cocones",
+   "results": "{\"t\": \"2026-10-16T21:24:55Z\", \"tool\": \"leanfinder\", \"query\": \"Precomposition by an equivalence of infinity categories induces equivalences on coherent cocone spaces and preserves colimit cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.whiskerEquivalence\", \"CategoryTheory.Limits.IsColimit.whiskerEquivalenceEquiv\", \"CategoryTheory.Limits.IsColimit.ofWhiskerEquivalence\", \"CategoryTheory.IsUniversalColimit.whiskerEquivalence\", \"CategoryTheory.IsUniversalColimit.whiskerEquivalence_iff\", \"CategoryTheory.Functor.CoconeTypes.isColimit_precompose_iff\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\", \"CategoryTheory.Limits.IsColimit.precomposeHomEquiv\"], \"digest\": \"dee2d45d690037cc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Limits/Final.lean:88-100 defines Final using connected ordinary StructuredArrow categories; lines 814-828 prove ordinary equivalence/composition results. IsColimit.whiskerEquivalence and Comma.isEquivalenceMap likewise concern ordinary categories, not arbitrary quasicategories and weak contractibility of coherent comma realizations. Inspected AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-33,45-78: bicategory infrastructure, no such cofinality theorem. No exact match or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-diagram-presentations",
@@ -65,5 +185,29 @@
   "group": "NV"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cofinal-colimit-restriction",
+  "worker": "stage1",
+  "summary": "Statement retained exactly. Proved equivalence invariance through the existing comma/finality criterion, explicitly enlarging the universe, constructing restriction equivalences by currying the stipulated quasi-inverses, checking preservation of the actual cocone, and composing restrictions. No new nodes and no Mathlib leaf: the searched ordinary-category Final declarations have connected comma categories, not the coherent weak-contractibility statement. All citations were opened and quoted; off-unit coherent cone calculus is a generic tool.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2, the displayed derived Hom / derived limit adjunction calculation. This foundational descendant supplies invariance under small-representative equivalences in the accessible-diagram infrastructure, while retaining the original universe-general statement. The corresponding main-20261015 proof is under sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md; historical ancestry is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "General coherent functor-category closure, equivalence-induced mapping-space equivalences and the dual cone mapping-space criterion. These are generic foundations in sk-prop-sf-cbc; the present unit has no separate node stating these tools, and no geometric unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N5-403ac7cee",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-403ac7cee (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full, every cited statement (def-coef-presentable-infinity-category, def-cbc-enhanced-diagrams-cones, lem-coef-infinity-cofinality-space-test, lem-cbc-enhanced-functor-cone-calculus, plus the universe nodes behind them), the one citer (lem-coef-accessible-diagram-presentations, which uses it with w=id), the unit and chapter records, and main-20261015 prop-coef-integral-exceptional-adjoint proof paragraph 2. There are no new nodes. The statement is unchanged and true: equivalences are cofinal and cofinal maps compose (HTT 4.1.1.3, with Theorem A from HTT 4.1.3.1 / Kerodon 7.2.3.1; Remark 7.2.3.2 allows the degreewise comma model). Small cases hold: the point, a final-vertex inclusion, a contractible groupoid, the identity on BG and empty J0. Step 1 applies the space test (3)=>(1) in an enlarged universe V; this is a universe-generic use of its free 'fixed universe' and is needed because I0 and J0 are not assumed U'-small. Step 2 builds the restriction equivalence by currying the coherent inverse data, which I checked simplicially. Step 3 applies the dual cocone criterion, with a*Delta_B=Delta_A holding strictly. Step 4 composes restrictions by definition (1) and needs no two-out-of-three. Step 5 is the identity case. All uses entries equal proof_deps. None of the cited nodes' dependency closures contains the item, so there is no cycle. A whole-DAG duplicate search found no node stating this (slice-equivalence-final, final-index-colimit and cofinal-common-image say different things). I accept the tool use of lem-cbc-enhanced-functor-cone-calculus, which supplies generic Fun(K,C) and cocone calculus and replaces no step of the unit's route. The proof is marked agent-written and its Kerodon sources are listed as WANTED. No SGA is cited. No fixes were made."
+ }
 }
