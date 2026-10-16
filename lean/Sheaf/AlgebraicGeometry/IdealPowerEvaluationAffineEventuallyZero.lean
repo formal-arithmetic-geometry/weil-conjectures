@@ -243,7 +243,47 @@ theorem ideal_power_evaluation_affine_eventually_zero
     ∀ (V : X.affineOpens) (n : ℕ) (φ : (idealSheafPower ι n).1 ⟶ F),
       φ.app U (one n) = 0 →
       ∃ (m : ℕ) (h : n ≤ m), (r n m h ≫ φ).over V.1 = 0 := by
-  sorry
+  intro V n φ hφ
+  let J : Ideal Γ(X, V.1) := LinearMap.range (ι.val.app (op V.1)).hom
+  let ψ := (φ.val.app (op V.1)).hom
+  obtain ⟨hfg, hrad⟩ :=
+    ideal_power_evaluation_affine_radical ι F U n (one n) hU (hone n) V φ hφ
+  obtain ⟨k, hk⟩ := Ideal.exists_pow_le_of_le_radical_of_fg hrad hfg
+  have hnm : n ≤ n + k := Nat.le_add_right n k
+  have hrange : LinearMap.range ((r n (n + k) hnm).val.app (op V.1)).hom ≤
+      J ^ k • (⊤ : Submodule Γ(X, V.1) Γ((idealSheafPower ι n).1, V.1)) := by
+    intro t ht
+    obtain ⟨s, rfl⟩ := ht
+    let j := ((idealSheafPower ι n).2.val.app (op V.1)).hom
+    have hinj := formalPolynomial_power_injective ι n V.1
+    have hmap : Submodule.map j
+        (J ^ k • (⊤ : Submodule Γ(X, V.1) Γ((idealSheafPower ι n).1, V.1))) =
+        J ^ (n + k) := by
+      rw [Submodule.map_smul'', Submodule.map_top, powers_range ι V n,
+        Ideal.smul_eq_mul, ← pow_add, Nat.add_comm k n]
+    have hmem : j (((r n (n + k) hnm).val.app (op V.1)).hom s) ∈ J ^ (n + k) := by
+      have he := congrArg (fun f ↦ f.app V.1 s) (hr n (n + k) hnm)
+      change (r n (n + k) hnm ≫ (idealSheafPower ι n).2).app V.1 s ∈ _
+      rw [he]
+      exact powers_range ι V (n + k) ▸ LinearMap.mem_range_self _ s
+    rw [← hmap] at hmem
+    obtain ⟨t, ht, he⟩ := hmem
+    exact hinj he ▸ ht
+  have hzero : ∀ s : Γ((idealSheafPower ι (n + k)).1, V.1),
+      (r n (n + k) hnm ≫ φ).app V.1 s = 0 := by
+    intro s
+    have hmem := hrange (LinearMap.mem_range_self
+      ((r n (n + k) hnm).val.app (op V.1)).hom s)
+    have hker : J ^ k • (⊤ : Submodule Γ(X, V.1)
+        Γ((idealSheafPower ι n).1, V.1)) ≤ LinearMap.ker ψ := by
+      apply Submodule.smul_le.mpr
+      intro a ha t _
+      change ψ (a • t) = 0
+      rw [map_smul]
+      exact Submodule.mem_annihilator.mp (hk ha) _ (LinearMap.mem_range_self ψ t)
+    exact hker hmem
+  have := Modules.powers_qc ι (n + k)
+  exact ⟨n + k, hnm, affine_hom_zero V _ hzero⟩
 -/
 
 end AlgebraicGeometry.Scheme

@@ -95,7 +95,23 @@ private theorem torsion_completion_bijective
     (hG : IsZero (Scheme.idealModuleProduct
       (Scheme.idealSheafPower K.toModulesι (b + 1)).2 G.obj)) :
     Function.Bijective (formalCompletionMap I : (F.obj ⟶ G.obj) → _) := by
-  sorry
+  let q := max (a + 1) (b + 1)
+  have hq : 0 < q := lt_of_lt_of_le (Nat.succ_pos a) (le_max_left _ _)
+  have hFs := annihilated_higher_power K F.obj (le_max_left (a + 1) (b + 1)) hF
+  have hGs := annihilated_higher_power K G.obj (le_max_right (a + 1) (b + 1)) hG
+  have hsupp (L : CoherentModules X)
+      (hz : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι q).2
+        L.obj)) : CoherentModuleSupportedOn L (K ^ q).subschemeι := by
+    change IsZero (Scheme.idealModuleProduct (K ^ q).subschemeι.ker.toModulesι L.obj)
+    rw [Scheme.IdealSheafData.ker_subschemeι]
+    have := Scheme.Modules.power_mono K q
+    let p := Subobject.isoOfMkEqMk _ _ (Scheme.Modules.power_subobject K q)
+    have hp : p.hom ≫ (K ^ q).toModulesι = (Scheme.idealSheafPower K.toModulesι q).2 := by
+      simp [p]
+    obtain ⟨d⟩ := Scheme.Modules.product_iso _ _ p hp L.obj
+    exact d.isZero_iff.mp hz
+  exact supported_completion_bijective (K ^ q).subschemeι I (hthick q hq _)
+    F G (hsupp F hFs) (hsupp G hGs)
 
 /-- Construct a comparison map for an already algebraized second-ideal system.
 Source: Stacks Project, Tag 088A (lemma-existence-tricky), construction of
@@ -133,6 +149,42 @@ theorem grothendieckDevissage_secondAdicSystem_lift_compatibility
           formalModuleQuotientMap K (α.hom.app (op n)) (Nat.le_refl (e + 1)) =
         formalModuleQuotientMap I (δ.hom.app (op e)) (Nat.le_refl (n + 1)) ≫
           (θ.hom.app (op e)).app (op n) := by
-  sorry
+  classical
+  let Q := (completion X K).obj H
+  let τ : N.obj ⋙ formalCompletionFunctor I ⟶ Q.obj ⋙ formalCompletionFunctor I :=
+    σ.hom ≫ (flipFunctor ℕᵒᵖ ℕᵒᵖ X.Modules).map
+      (Functor.whiskerRight α.hom (formalCompletionFunctor K)) ≫ θ.inv
+  have hbij (e f : ℕ) : Function.Bijective
+      (formalCompletionMap I : (N.obj.obj (op e) ⟶ Q.obj.obj (op f)) → _) :=
+    torsion_completion_bijective I K hthick
+      ⟨N.obj.obj (op e), N.property.1 e⟩ ⟨Q.obj.obj (op f), Q.property.1 f⟩
+      e f (N.property.2.1 e) (Q.property.2.1 f)
+  have hlift (e : ℕ) : ∃ d : N.obj.obj (op e) ⟶ Q.obj.obj (op e),
+      formalCompletionMap I d = τ.app (op e) :=
+    (hbij e e).surjective (τ.app (op e))
+  choose d hd using hlift
+  have hn (e : ℕ) : N.obj.map (homOfLE (Nat.le_succ e)).op ≫ d e =
+      d (e + 1) ≫ Q.obj.map (homOfLE (Nat.le_succ e)).op := by
+    apply (hbij (e + 1) e).injective
+    change (formalCompletionFunctor I).map (_ ≫ _) =
+      (formalCompletionFunctor I).map (_ ≫ _)
+    rw [Functor.map_comp, Functor.map_comp]
+    change formalCompletionMap I (N.obj.map (homOfLE (Nat.le_succ e)).op) ≫
+        formalCompletionMap I (d e) = formalCompletionMap I (d (e + 1)) ≫
+        formalCompletionMap I (Q.obj.map (homOfLE (Nat.le_succ e)).op)
+    rw [hd, hd]
+    exact τ.naturality (homOfLE (Nat.le_succ e)).op
+  let δ : N ⟶ Q := ObjectProperty.homMk (NatTrans.ofOpSequence d hn)
+  refine ⟨δ, ?_⟩
+  intro e n
+  have he := congrArg (fun f ↦ f.app (op n)) (hd e)
+  change formalModuleQuotientMap I (d e) (Nat.le_refl (n + 1)) =
+    (σ.hom.app (op e)).app (op n) ≫
+      formalModuleQuotientMap K (α.hom.app (op n)) (Nat.le_refl (e + 1)) ≫
+        (θ.inv.app (op e)).app (op n) at he
+  change _ = formalModuleQuotientMap I (d e) (Nat.le_refl (n + 1)) ≫ _
+  rw [he]
+  simp only [Category.assoc, Iso.inv_hom_id_app_app]
+  exact congrArg ((σ.hom.app (op e)).app (op n) ≫ ·) (Category.comp_id _).symm
 
 end AlgebraicGeometry

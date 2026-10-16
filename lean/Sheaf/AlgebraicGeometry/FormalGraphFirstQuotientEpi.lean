@@ -177,10 +177,8 @@ private theorem formal_zero_of_level {X : Scheme.{u}} [IsNoetherian X]
     apply (cancel_epi (T.obj.map (homOfLE hmn).op)).mp
     simpa only [hf, comp_zero, zero_comp] using f.hom.naturality (homOfLE hmn).op
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
-/ -- The first projection of the finite comparison graph is surjective modulo J.
+/-- The first projection of the finite comparison graph is surjective modulo J.
 No torsion condition on the comparison arrow is required for this closed-fibre assertion.
 
 Source: Stacks Project, Tag 0889(1), affine comparison argument, using the affine
@@ -197,7 +195,7 @@ its completion modulo I is canonically the original module modulo I, compatibly 
 maps. Hence E -> F/IF is surjective on affine sections. These affine opens cover X,
 so the displayed sheaf morphism is epi. For J=0 the graph is the usual graph; for J=1
 the target quotient is zero. Zero modules and an empty scheme also satisfy the assertion.
-(blueprint: lem-weil-pbc-formal-graph-first-quotient-epi). - /
+(blueprint: lem-weil-pbc-formal-graph-first-quotient-epi). -/
 theorem formalGraph_first_quotient_epi
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)
@@ -206,8 +204,10 @@ theorem formalGraph_first_quotient_epi
     (n : ℕ) :
     let t : formalModuleQuotient J (n + 1) F.obj ⟶
         formalModuleQuotient J (n + 1) F'.obj := θ.hom.app (op n)
-    let d : pullback a.hom a'.hom ⟶ formalModuleQuotient J (n + 1) F'.obj := by
+    let d : pullback a.hom a'.hom ⟶ formalModuleQuotient J (n + 1) F'.obj :=
+      pullback.snd a.hom a'.hom ≫ formalModuleQuotientπ J (n + 1) F'.obj -
+        pullback.fst a.hom a'.hom ≫ formalModuleQuotientπ J (n + 1) F.obj ≫ t
+    Epi (kernel.ι d ≫ pullback.fst a.hom a'.hom ≫ formalModuleQuotientπ J 1 F.obj) := by
   sorry
--/
 
 end AlgebraicGeometry

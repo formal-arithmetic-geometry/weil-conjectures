@@ -137,6 +137,56 @@ theorem finiteCocone_weakMaps
       (∀ P : ℤ, P ≤ a → IsIso ((A n).ι P)) ∧
       (∀ P : ℤ, b ≤ P → IsZero (X.D P (n - P))))
     (L : X.LimitSubobjects) (hreg : X.IsRegular) : X.WeaklyConvergesTo L A := by
-  sorry
+  have hzero : ∀ n : ℤ, ∃ b : ℤ, ∀ P : ℤ, b ≤ P → IsZero (X.D P (n - P)) := by
+    intro n
+    obtain ⟨a, b, _, hb⟩ := hA n
+    exact ⟨b, hb⟩
+  have hleft : ∀ n : ℤ, ∃ a : ℤ, ∀ P : ℤ, P ≤ a → IsIso ((A n).ι P) := by
+    intro n
+    obtain ⟨a, b, ha, _⟩ := hA n
+    exact ⟨a, ha⟩
+  intro p q
+  let g := X.initialG p q
+  let t := eqToHom (show X.D p q = X.D p (p + q - p) by congr 1; omega)
+  let j := t ≫ (A (p + q)).ι p
+  have hZ : L.Z p q = imageSubobject g := finiteCocone_limitCycles X L hreg hzero p q
+  have hB : L.B p q = (Subobject.«exists» g).obj (kernelSubobject j) :=
+    finiteCocone_limitBoundaries X A hleft L p q
+  have hpage : Epi (X.toPageInfinity L p q) := by
+    have : Epi ((L.Z p q).factorThru g (g_factors_limitCycles X L p q)) := by
+      apply epi_of_imageSubobject_comp_arrow_eq
+      simpa only [Subobject.factorThru_arrow] using hZ.symm
+    dsimp [toPageInfinity]
+    infer_instance
+  have hgraded : Epi (X.toGradedPiece A p q) := by
+    dsimp [toGradedPiece]
+    infer_instance
+  have hpageker : kernelSubobject (X.toPageInfinity L p q) =
+      kernelSubobject g ⊔ kernelSubobject j := by
+    dsimp only [toPageInfinity]
+    rw [quotient_kernel, Subobject.factorThru_arrow, hB, pullback_image]
+  have hgker : kernelSubobject g =
+      (Subobject.pullback t).obj (imageSubobject (X.alphaDiagonal (p + q) p)) := by
+    rw [← initialG_kernel, pullback_kernel]
+    have hn := eqToHom_naturality (fun b : ℤ ↦ X.initialG p b)
+      (show q = p + q - p by omega)
+    change g ≫ eqToHom _ = t ≫ X.initialG p (p + q - p) at hn
+    simp only [← hn, kernelSubobject_comp_mono]
+  have hnext : (Subobject.«exists» j).obj (kernelSubobject g) =
+      imageSubobject ((A (p + q)).ι (p + 1)) := by
+    rw [hgker]
+    dsimp only [j]
+    rw [← Subobject.exists_obj_comp, Subobject.exists_obj_pullback_obj,
+      Subobject.exists_obj_eq_imageSubobject,
+      ← imageSubobject_comp_of_epi (factorThruImageSubobject
+        (X.alphaDiagonal (p + q) p)), imageSubobject_arrow_comp_assoc, (A (p + q)).comm]
+  have hgradedker : kernelSubobject (X.toGradedPiece A p q) =
+      kernelSubobject j ⊔ kernelSubobject g := by
+    simp only [toGradedPiece, imageFiltration, DecreasingFiltration.gradedPiece,
+      ← Category.assoc, quotient_kernel]
+    simp only [Category.assoc, imageSubobject_arrow_comp]
+    change (Subobject.pullback j).obj (imageSubobject ((A (p + q)).ι (p + 1))) = _
+    rw [← hnext, pullback_image]
+  exact ⟨hpage, hgraded, hpageker.trans ((sup_comm _ _).trans hgradedker.symm)⟩
 
 end CategoryTheory.BigradedExactCouple

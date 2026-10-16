@@ -61,7 +61,26 @@ private theorem property_of_shifted_filtration {C : Type*} [Category* C] [Abelia
     {M : C} (F : DecreasingFiltration M) (b : ℤ) (N : ℕ)
     (hfull : F.step b = ⊤) (hzero : F.step (b + N) = ⊥)
     (hgraded : ∀ p : ℤ, b ≤ p → p < b + N → P (F.gradedPiece p)) : P M := by
-  sorry
+  have hstep : ∀ k : ℕ, k ≤ N → P (F.step (b + (N : ℤ) - k) : C) := by
+    intro k
+    induction k with
+    | zero =>
+      intro _
+      simp only [Nat.cast_zero, sub_zero, hzero]
+      exact P.prop_of_isZero ((Limits.isZero_zero _).of_iso Subobject.botCoeIsoZero)
+    | succ k ih =>
+      intro hk
+      let i : ℤ := b + (N : ℤ) - (k + 1)
+      have hi : i + 1 = b + (N : ℤ) - k := by dsimp [i]; omega
+      have hnext : P (F.step (i + 1) : C) := by rw [hi]; exact ih (by omega)
+      let φ := Subobject.ofLE (F.step (i + 1)) (F.step i)
+        (F.antitone_step (by omega))
+      exact hext (ShortComplex.mk φ (Limits.cokernel.π φ) (Limits.cokernel.condition φ))
+        ⟨ShortComplex.exact_cokernel φ⟩ hnext (hgraded i (by dsimp [i]; omega)
+          (by dsimp [i]; omega))
+  have htop := hstep N (by rfl)
+  simp only [add_sub_cancel_right, hfull] at htop
+  exact P.prop_of_iso (asIso (⊤ : Subobject M).arrow) htop
 -/
 
 /-- Each higher image of a canonical lower truncation is quasi-coherent.

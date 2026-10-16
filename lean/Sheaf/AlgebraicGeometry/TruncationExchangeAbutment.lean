@@ -256,8 +256,6 @@ private theorem imageGradedIso_π.{u₁, v₁}
         (Subobject.ofLE _ _ ((F.image i.hom).antitone_step (by omega : p ≤ p + 1))) := by
   simp only [imageGradedIso, cokernel.mapIso_hom, cokernel.map, cokernel.π_desc]
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 private theorem imageFiltration_factor.{u₁, v₁}
     {B : Type u₁} [Category.{v₁} B] [Abelian B]
@@ -275,7 +273,6 @@ private theorem imageFiltration_factor.{u₁, v₁}
     Subobject.arrow_congr _ _ h.symm]
   change factorThruImageSubobject (A.ι p) ≫ (imageSubobject (A.ι p)).arrow ≫ i.hom = _
   rw [← Category.assoc, imageSubobject_arrow_comp, imageSubobject_arrow_comp]
--/
 
 private theorem infinity_diagonal.{u₁, v₁}
     {B : Type u₁} [Category.{v₁} B] [Abelian B]
@@ -309,9 +306,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
 -- Elaborating the dependent abutment and graded-piece witnesses requires additional heartbeats.
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- The two truncation couples converge with finite image filtrations, their canonical
+/-- The two truncation couples converge with finite image filtrations, their canonical
 abutments identify with the cohomology of the whole complexes, and their induced map is
 cohomology of exchange, including on associated graded objects.
 The parameters P and Q, with the ten data identifications, specify the two exact couples
@@ -342,7 +337,7 @@ by the abutment isomorphisms. Their compatibility follows after cancellation of 
 epimorphism toPageInfinity, using its square and the cokernel equations.
 Source: blueprint lemma-weil-pbc-exact-couple-abutment, Detailed form, Proof;
 Stacks Tags 0DDE, 05TC and 011Q
-(blueprint: lemma-weil-pbc-exact-couple-abutment). - /
+(blueprint: lemma-weil-pbc-exact-couple-abutment). -/
 theorem truncation_exchange_exact_couple_abutment
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g)
@@ -743,6 +738,5 @@ theorem truncation_exchange_exact_couple_abutment
       ((L.Z p (n - p)).arrow ≫
         eqToHom (congrFun (congrFun hPE p) (n - p)) ≫ tE τ K p (n - p))
       (congrFun (congrFun hQE p) (n - p)).symm
--/
 
 end AlgebraicGeometry.Etale

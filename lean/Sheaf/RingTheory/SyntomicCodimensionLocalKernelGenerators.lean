@@ -66,7 +66,91 @@ private theorem exists_counted_polynomial_fibre_comparison
             (e.toRingHom.comp (Ideal.Quotient.mk m)) =
           Ibar.map (algebraMap _
             (Localization.AtPrime (t.asIdeal.comap (Ideal.Quotient.mk Ibar)))) := by
-  sorry
+  classical
+  dsimp only
+  let p := q.asIdeal.comap (algebraMap R S)
+  let k := p.ResidueField
+  let P := MvPolynomial (Fin n) R
+  let Pk := MvPolynomial (Fin n) k
+  let I := RingHom.ker φ.toRingHom
+  let Q := q.asIdeal.comap φ.toRingHom
+  let A := Localization.AtPrime Q
+  let m := p.map (algebraMap R A)
+  let ρ : P →+* Pk := MvPolynomial.map (algebraMap R k)
+  let Ibar := I.map ρ
+  let F := p.Fiber P
+  let j : P →+* F := Algebra.TensorProduct.includeRight.toRingHom
+  let E : F ≃ₐ[k] Pk := MvPolynomial.algebraTensorAlgEquiv R k
+  let EF := PrimeSpectrum.preimageEquivFiber R S (q.comap (algebraMap R S))
+  let qb := EF ⟨q, rfl⟩
+  let eF : p.Fiber S ≃ₐ[k] (Pk ⧸ Ibar) := polynomial_fiber_equiv_quotient n φ hφ p
+  let t : PrimeSpectrum (Pk ⧸ Ibar) := qb.comap eF.symm.toRingHom
+  let Qk := t.asIdeal.comap (Ideal.Quotient.mk Ibar)
+  let U := Qk.comap E.toRingHom
+  have hq : qb.asIdeal.comap Algebra.TensorProduct.includeRight.toRingHom = q.asIdeal := by
+    exact congrArg (fun z ↦ z.val.asIdeal) (EF.symm_apply_apply ⟨q, rfl⟩)
+  have heF (a : P) : eF (1 ⊗ₜ[R] φ a) = Ideal.Quotient.mk Ibar (ρ a) := by
+    simpa only [eF, Ibar, ρ, I, Pk, k, MvPolynomial.C_1, one_mul] using
+      polynomial_fiber_equiv_quotient_tmul n φ hφ p 1 a
+  have hgj (a : P) : E (j a) = ρ a := by
+    change MvPolynomial.algebraTensorAlgEquiv R k (1 ⊗ₜ[R] a) = ρ a
+    rw [MvPolynomial.algebraTensorAlgEquiv_tmul, one_smul]
+  have hcontract : U.comap j = Q := by
+    ext a
+    change E (j a) ∈ Qk ↔ φ a ∈ q.asIdeal
+    rw [hgj]
+    change eF.symm (Ideal.Quotient.mk Ibar (ρ a)) ∈ qb.asIdeal ↔ φ a ∈ q.asIdeal
+    rw [← heF, eF.symm_apply_apply]
+    exact (show (1 ⊗ₜ[R] φ a) ∈ qb.asIdeal ↔ φ a ∈ q.asIdeal by
+      change φ a ∈ qb.asIdeal.comap Algebra.TensorProduct.includeRight.toRingHom ↔ _
+      rw [hq])
+  have hcit : ∃ h : Pk ⧸ Ibar,
+      h ∉ t.asIdeal ∧ IsGlobalCompleteIntersection k (Localization.Away h) := by
+    obtain ⟨h, hh, hci⟩ := hci
+    refine ⟨eF h, ?_, ?_⟩
+    · change eF.symm (eF h) ∉ qb.asIdeal
+      rwa [eF.symm_apply_apply]
+    · let EL : Localization.Away (eF h) ≃ₐ[k] Localization.Away h :=
+        IsLocalization.algEquivOfAlgEquiv
+          (M := Submonoid.powers (eF h)) (T := Submonoid.powers h)
+          (Localization.Away (eF h)) (Localization.Away h) eF.symm (by
+          rw [Submonoid.map_powers]
+          exact congrArg Submonoid.powers (eF.symm_apply_apply h))
+      exact completeIntersection_of_algEquiv EL hci
+  have model : ∀ (Q' : Ideal P) [Q'.IsPrime], Q' = U.comap j →
+      ∃ e : (Localization.AtPrime Q' ⧸
+          (p.map (algebraMap R P)).map (algebraMap P (Localization.AtPrime Q'))) ≃+*
+          Localization.AtPrime U,
+        ∀ a : P, e (Ideal.Quotient.mk _ (algebraMap P (Localization.AtPrime Q') a)) =
+          algebraMap F (Localization.AtPrime U) (j a) := by
+    intro Q' hQ' hQU
+    subst Q'
+    obtain ⟨_, _, _, e, he⟩ := Ideal.Fiber.localRingHom_surjective_ker_quotientEquiv p U
+    refine ⟨e, fun a ↦ ?_⟩
+    rw [he]
+    exact Localization.localRingHom_to_map _ _ _ rfl a
+  obtain ⟨e₀, he₀⟩ := model Q hcontract.symm
+  have hm : m = (p.map (algebraMap R P)).map (algebraMap P A) := by
+    rw [Ideal.map_map, ← IsScalarTower.algebraMap_eq]
+  let e₁ := Localization.localRingEquiv U Qk E.toRingEquiv rfl
+  let e₂ := Ideal.quotientEquivAlgOfEq A hm
+  let e := e₂.toRingEquiv.trans (e₀.trans e₁)
+  have he (a : P) : e (Ideal.Quotient.mk m (algebraMap P A a)) =
+      algebraMap Pk (Localization.AtPrime Qk) (ρ a) := by
+    change e₁ (e₀ (e₂ (Ideal.Quotient.mk m (algebraMap P A a)))) = _
+    rw [Ideal.quotientEquivAlgOfEq_mk, he₀]
+    change Localization.localRingHom U Qk E.toRingHom rfl
+      (algebraMap F (Localization.AtPrime U) (j a)) = _
+    rw [Localization.localRingHom_to_map]
+    exact congrArg (algebraMap Pk (Localization.AtPrime Qk)) (hgj a)
+  have hdim : topologicalKrullDimAt t = topologicalKrullDimAt qb := by
+    let H := PrimeSpectrum.homeomorphOfRingEquiv eF.toRingEquiv
+    exact (dimAt_openEmbedding H.isOpenEmbedding qb).symm
+  refine ⟨t, hdim, hcit, e, ?_⟩
+  change (I.map (algebraMap P A)).map (e.toRingHom.comp (Ideal.Quotient.mk m)) =
+    (I.map ρ).map (algebraMap Pk (Localization.AtPrime Qk))
+  rw [Ideal.map_map, Ideal.map_map]
+  exact congrArg (fun f ↦ I.map f) (RingHom.ext he)
 
 
 /-- Choose local presentation-kernel generators whose number is the fibre codimension.

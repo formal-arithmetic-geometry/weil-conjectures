@@ -30,8 +30,6 @@ universe u v
 open CategoryTheory.Limits
 namespace CategoryTheory
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private theorem filtered_incoming_alpha
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (s : ℕ) (p q : ℤ) :
@@ -44,7 +42,6 @@ private theorem filtered_incoming_alpha
   apply (filtered_alphaIter K F s _ _).trans
   exact inclusion_homology_heq K F _ _ _ _ _ _ (by omega) (by omega)
     (by omega) (by omega) (by omega)
--/
 
 private theorem quotient_homology_transport
     {C : Type u} [Category.{v} C] [Abelian C]
@@ -149,8 +146,6 @@ private theorem graded_cycle_lifts
     fun s p q ↦ ?_⟩
   exact HomologicalComplex.liftCycles_i _ _ _ _ _
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private theorem tower_cycle_lifts
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K)
@@ -231,12 +226,9 @@ private theorem tower_cycle_lifts
   refine ⟨fun s p q ↦ Subobject.factorThru _ _ (hc s p q), fun s p q ↦ ?_⟩
   rw [← Category.assoc, Subobject.factorThru_arrow]
   simp [c]
--/
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option linter.unusedVariables false in
-/ -- Graded filtered cycles cover the canonical tower cycles, and their composites
+/-- Graded filtered cycles cover the canonical tower cycles, and their composites
 with the tower projections have exactly the boundary kernels. This is only the
 object and quotient comparison, without a differential assertion.
 Source: Stacks Project, Tag 012K, cycle/boundary formulas in Lemma 12.24.2;
@@ -275,7 +267,7 @@ with t at stage s+1 followed by the tower projection: cancel the preceding
 kernel inclusion and use the monic normalization of t to identify the lifts.
 This proves both assertions at s+1. All representative lifts are made after
 pullback along epimorphisms, so no projectivity or infinite sums are required.
-The monic normalization fixes j and t uniquely; no arbitrary data is chosen. - /
+The monic normalization fixes j and t uniquely; no arbitrary data is chosen. -/
 theorem filteredHomology_tower_quotients
     (C : Type u) [Category.{v} C] [Abelian C]
     (hBZ : ∀ (U : ObjectProperty.FullSubcategory
@@ -527,6 +519,5 @@ theorem filteredHomology_tower_quotients
             (Subobject.ofLE _ _ (hBZ U p q (s + 1 + 1) (by omega))))).symm)
       exact ⟨fun p q ↦ (hsucc p q).1, fun p q ↦ (hsucc p q).2⟩
   exact ⟨j, t, hj, ht, fun s ↦ (h s).1, fun s ↦ (h s).2⟩
--/
 
 end CategoryTheory

@@ -25,15 +25,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- The compatibility needed to map the base-changed strict henselization to V ×_Y X, for a
+/-- The compatibility needed to map the base-changed strict henselization to V ×_Y X, for a
 representative affine pointed neighbourhood `j` with leg `c_V` (the limit leg followed by
 `Spec Γ(V, ⊤) ≅ V`).
 Source: Stacks Project, Tag 03Q9, fibre products commuting with limits
 (blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization).
 Proof: by `exists_strictHenselizationStructuralMap`, `c_V` followed by `V ⟶ Y` is
-`strictHenselizationStructuralMap y`; then use `pullback.condition`. - /
+`strictHenselizationStructuralMap y`; then use `pullback.condition`. -/
 theorem strictHenselizationBaseChange_condition
     {X Y : Scheme.{v}} (f : X ⟶ Y)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
@@ -49,14 +47,11 @@ theorem strictHenselizationBaseChange_condition
   rw [Category.assoc, Category.assoc]
   rw [strictHenselizationStructuralMap_eq y j]
   exact pullback.condition
--/
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- The map X^sh → V ×_Y X with components c_V ∘ f^sh and p, for a representative affine
+/-- The map X^sh → V ×_Y X with components c_V ∘ f^sh and p, for a representative affine
 pointed neighbourhood `j`.
 Source: Stacks Project, Tag 03Q9, fibre products commuting with limits
-(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization). - /
+(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization). -/
 noncomputable def strictHenselizationBaseChangeMap
     {X Y : Scheme.{v}} (f : X ⟶ Y)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
@@ -72,13 +67,10 @@ noncomputable def strictHenselizationBaseChangeMap
             j).1.left.unop).inv)
     (pullback.snd (strictHenselizationStructuralMap y) f)
     (strictHenselizationBaseChange_condition f y j)
--/
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- The site morphism σ_V from the final object to the iterated fibre product.
+/-- The site morphism σ_V from the final object to the iterated fibre product.
 Source: Stacks Project, Tag 03Q9, canonical section restriction
-(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization). - /
+(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization). -/
 noncomputable def strictHenselizationSectionMap
     {X Y : Scheme.{v}} (f : X ⟶ Y)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
@@ -92,7 +84,6 @@ noncomputable def strictHenselizationSectionMap
   MorphismProperty.Over.homMk
     (pullback.lift (strictHenselizationBaseChangeMap f y j) (𝟙 _)
       (pullback.lift_snd _ _ _)) (pullback.lift_snd _ _ _)
--/
 
 end AlgebraicGeometry.Scheme
 
@@ -100,10 +91,8 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
-/ -- Every direct-image germ has an affine representative, and the canonical comparison
+/-- Every direct-image germ has an affine representative, and the canonical comparison
 with sections on the strict henselization pullback is the unique map with the unit and
 restriction formula, and is bijective.
 Source: Stacks Project, Tag 03Q9, degree zero for sets, with Tags 09YQ and 09YU
@@ -130,7 +119,7 @@ Proof:
 4. By `def-weil-pbc-geometric-stalks` and
    `lemma-weil-pbc-affine-neighbourhood-cofinal`, the affine section colimit is the
    geometric stalk. Every element therefore has an affine representative. The
-   colimit component formula uniquely determines Θ; continuity makes it bijective. - /
+   colimit component formula uniquely determines Θ; continuity makes it bijective. -/
 theorem sets_pushforward_stalk_strictHenselization
     {X Y : Scheme.{v}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     (H : Sheaf X.smallEtaleTopology (Type (v + 1)))
@@ -302,6 +291,5 @@ theorem sets_pushforward_stalk_strictHenselization
     funext t
     obtain ⟨j, s, rfl⟩ := Types.jointly_surjective_of_isColimit hcStalk' t
     exact (hΘ' j.unop s).trans (hFormula j.unop s).symm
--/
 
 end AlgebraicGeometry

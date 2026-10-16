@@ -137,11 +137,11 @@ private theorem local_affine_zero {X : Scheme.{u}} {M N : X.Modules}
     rw [← local_app_res φ (hWA.trans hAT), map_zero]
     exact hb i.1 _
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
 -- Allow elaboration of repeated restrictions to the over-site.
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private theorem local_affine_eventually_zero
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
@@ -254,9 +254,7 @@ private theorem local_affine_eventually_zero
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
 -- Allow elaboration of repeated restrictions to the over-site.
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- Two local maps with equal evaluation agree on a sufficiently high ideal power
+/-- Two local maps with equal evaluation agree on a sufficiently high ideal power
 on their quasi-compact overlap. No lifting or quotient construction is asserted.
 
 Source: Stacks Project, Properties, Lemma 01PM (injectivity) and Lemma 01PQ
@@ -278,7 +276,7 @@ inclusions identify all r with the genuine inclusions and give their
 composition law; restriction to the maximum preserves vanishing. Sheaf
 separation now makes the two restricted maps equal on the whole overlap,
 hence on every W contained in it. An empty overlap needs no affine opens
-and the same separation argument works at degree n. - /
+and the same separation argument works at degree n. -/
 theorem ideal_power_local_maps_eventually_agree
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
@@ -305,8 +303,80 @@ theorem ideal_power_local_maps_eventually_agree
       ∀ (W : X.Opens) (hWV : W ≤ V) (hWV' : W ≤ V'),
         (r n m h).val.app (op W) ≫ α.val.app (op (Over.mk (homOfLE hWV))) =
           (r n m h).val.app (op W) ≫ β.val.app (op (Over.mk (homOfLE hWV'))) := by
-  sorry
--/
+  classical
+  let T := V ⊓ V'
+  let a : ((idealSheafPower ι n).1).over T ⟶ F.over T :=
+    (SheafOfModules.overMap X.ringCatSheaf
+      (homOfLE inf_le_left : T ⟶ V)).map α
+  let b : ((idealSheafPower ι n).1).over T ⟶ F.over T :=
+    (SheafOfModules.overMap X.ringCatSheaf
+      (homOfLE inf_le_right : T ⟶ V')).map β
+  let φ := a - b
+  have hφ (W : X.Opens) (hWU : W ≤ U) (hWT : W ≤ T) :
+      φ.val.app (op (Over.mk (homOfLE hWT)))
+        (((idealSheafPower ι n).1).presheaf.map (homOfLE hWU).op (one n)) = 0 := by
+    change (show Γ(F, W) from
+      α.val.app (op (Over.mk (homOfLE (hWT.trans inf_le_left)))) _) -
+      (show Γ(F, W) from
+      β.val.app (op (Over.mk (homOfLE (hWT.trans inf_le_right)))) _) = 0
+    exact sub_eq_zero.mpr (heval W hWU _ _)
+  obtain ⟨S, hfin, hcover⟩ :=
+    isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens.mp
+      ⟨hcompact, T.isOpen⟩
+  have hAT (A : S) : A.1.1 ≤ T := by
+    intro x hx
+    change x ∈ (V : Set X) ∩ (V' : Set X)
+    rw [hcover]
+    exact Set.mem_iUnion.mpr ⟨A.1, Set.mem_iUnion.mpr ⟨A.2, hx⟩⟩
+  have hcover' : (⨆ A : S, A.1.1) = T := by
+    ext x
+    simpa [T] using (Set.ext_iff.mp hcover x).symm
+  have hlocal (A : S) :=
+    local_affine_eventually_zero ι F U one r hU hone hr T A.1 (hAT A) n φ hφ
+  choose k hk hzero using hlocal
+  have := hfin.to_subtype
+  let := Fintype.ofFinite S
+  let m := max n (Finset.univ.sup k)
+  have hnm : n ≤ m := le_max_left _ _
+  have hzlocal (A : S) (W : X.Opens) (hWA : W ≤ A.1.1) :
+      (r n m hnm).val.app (op W) ≫
+        φ.val.app (op (Over.mk (homOfLE (hWA.trans (hAT A))))) = 0 := by
+    have hkm : k A ≤ m := (Finset.le_sup (Finset.mem_univ A)).trans (le_max_right _ _)
+    have : Mono (idealSheafPower ι n).2 := formalPolynomial_power_mono ι n
+    have hcomp : r (k A) m hkm ≫ r n (k A) (hk A) = r n m hnm := by
+      apply (cancel_mono (idealSheafPower ι n).2).mp
+      rw [Category.assoc, hr, hr, hr]
+    rw [← hcomp]
+    change ((r (k A) m hkm).val.app (op W) ≫
+      (r n (k A) (hk A)).val.app (op W)) ≫ _ = 0
+    rw [Category.assoc, hzero A W hWA, comp_zero]
+  have hz (W : X.Opens) (hWT : W ≤ T) :
+      (r n m hnm).val.app (op W) ≫
+        φ.val.app (op (Over.mk (homOfLE hWT))) = 0 := by
+    let χ := (r n m hnm).over T ≫ φ
+    change χ.val.app (op (Over.mk (homOfLE hWT))) = 0
+    ext s
+    refine TopCat.Sheaf.eq_of_locally_eq' ⟨F.presheaf, F.isSheaf⟩
+      (fun A : S ↦ W ⊓ A.1.1) W (fun _ ↦ homOfLE inf_le_left) ?_ _ _ ?_
+    · rw [← inf_iSup_eq, hcover', inf_eq_left.mpr hWT]
+    · intro A
+      change F.presheaf.map (homOfLE inf_le_left).op
+        (χ.val.app (op (Over.mk (homOfLE hWT))) s) =
+        F.presheaf.map (homOfLE inf_le_left).op (0 : Γ(F, W))
+      erw [← local_app_res χ hWT (inf_le_left : W ⊓ A.1.1 ≤ W), map_zero]
+      have hh := ConcreteCategory.congr_hom (hzlocal A (W ⊓ A.1.1) inf_le_right)
+        ((idealSheafPower ι m).1.presheaf.map (homOfLE inf_le_left).op s)
+      exact hh
+  refine ⟨m, hnm, ?_⟩
+  intro W hWV hWV'
+  have hh := hz W (le_inf hWV hWV')
+  let αW : ModuleCat.of Γ(X, W) Γ((idealSheafPower ι n).1, W) ⟶
+      ModuleCat.of Γ(X, W) Γ(F, W) := α.val.app (op (Over.mk (homOfLE hWV)))
+  let βW : ModuleCat.of Γ(X, W) Γ((idealSheafPower ι n).1, W) ⟶
+      ModuleCat.of Γ(X, W) Γ(F, W) := β.val.app (op (Over.mk (homOfLE hWV')))
+  change (r n m hnm).val.app (op W) ≫ (αW - βW) = 0 at hh
+  rw [Preadditive.comp_sub] at hh
+  exact sub_eq_zero.mp hh
 
 
 end AlgebraicGeometry.Scheme

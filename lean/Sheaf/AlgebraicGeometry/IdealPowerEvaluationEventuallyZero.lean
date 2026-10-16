@@ -25,9 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- A homomorphism from an ideal power that evaluates to zero on the complement
+/-- A homomorphism from an ideal power that evaluates to zero on the complement
 vanishes after restriction to a sufficiently high power.
 
 Proof: Choose a finite affine cover of the quasi-compact scheme. On one affine member
@@ -44,7 +42,7 @@ The resulting restricted homomorphism vanishes on the cover, hence vanishes glob
 by sheaf uniqueness. The case n = 0 uses the same calculation with f_i^0 = 1.
 
 Source: Stacks Project, Properties, Lemma 01PQ and its reduction to Lemma 01PM.
-(blueprint: lem-weil-pbc-ideal-power-evaluation-eventually-zero). - /
+(blueprint: lem-weil-pbc-ideal-power-evaluation-eventually-zero). -/
 theorem ideal_power_evaluation_eventually_zero
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
@@ -93,6 +91,5 @@ theorem ideal_power_evaluation_eventually_zero
       (r n (k V) (hk V) ≫ φ).over V.1.1 = 0
     rw [hzero V, comp_zero]
   simpa using hz
--/
 
 end AlgebraicGeometry.Scheme

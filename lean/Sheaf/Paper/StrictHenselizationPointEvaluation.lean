@@ -45,16 +45,13 @@ noncomputable def strictHenselizationPointCocone
       simp
       rfl }
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- Evaluation on the coordinate-ring colimit, constructed by its universal property.
+/-- Evaluation on the coordinate-ring colimit, constructed by its universal property.
 Source: Stacks Project, Tag 04HX.
-(blueprint: def-weil-pbc-strict-henselization-point-evaluation). - /
+(blueprint: def-weil-pbc-strict-henselization-point-evaluation). -/
 noncomputable def strictHenselizationPointEvaluation
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y) : strictHenselizationRing barY →+* Ω :=
   ((isColimitSmallStrictHenselizationCocone barY).desc
     (strictHenselizationPointCocone barY)).hom
--/
 
 end AlgebraicGeometry.Scheme

@@ -155,8 +155,6 @@ private lemma kanComparison_unit (X : Scheme.{u}) (E : Type)
   rw [← Functor.lanAdjunction_unit]
   exact h
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private lemma kanComparison_isIso (X : Scheme.{u}) (E : Type)
     [TopologicalSpace E] [Ring E] [IsTopologicalRing E]
     [TotallyDisconnectedSpace E] (U : X.ProEt) [IsAffine U.left]
@@ -213,7 +211,6 @@ private lemma kanComparison_isIso (X : Scheme.{u}) (E : Type)
     rw [h]
     exact (ConcreteCategory.isIso_iff_bijective _).mpr hbij
   exact IsIso.of_isIso_comp_left a _
--/
 
 private lemma comparison_basis_isIso (X : Scheme.{u}) (E : Type)
     [TopologicalSpace E] [Ring E] [IsTopologicalRing E]

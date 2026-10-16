@@ -27,7 +27,20 @@ set_option backward.isDefEq.respectTransparency false in
 private theorem power_iso {X : Scheme.{v}} (J : X.IdealSheafData) (n : ℕ) :
     ∃ e : (Scheme.idealSheafPower J.toModulesι n).1 ≅ (J ^ n).toModules,
       e.hom ≫ (J ^ n).toModulesι = (Scheme.idealSheafPower J.toModulesι n).2 := by
-  sorry
+  cases n with
+  | succ n => exact power_inclusion_iso J (n + 1) (Nat.zero_lt_succ n)
+  | zero =>
+    have : Mono (Scheme.idealSheafPower J.toModulesι 0).2 := power_inclusion_mono J 0
+    have hr (U : X.affineOpens) :
+        Set.range ((Scheme.idealSheafPower J.toModulesι 0).2.app U.1) =
+          Set.range ((J ^ 0).toModulesι.app U.1) := by
+      rw [(J ^ 0).range_toModulesι_app]
+      simp [Scheme.idealSheafPower]
+    have he : Subobject.mk (Scheme.idealSheafPower J.toModulesι 0).2 =
+        Subobject.mk (J ^ 0).toModulesι := le_antisymm
+      (Scheme.subobject_le_of_affine_range _ _ (fun U ↦ (hr U).subset))
+      (Scheme.subobject_le_of_affine_range _ _ (fun U ↦ (hr U).symm.subset))
+    exact ⟨Subobject.isoOfMkEqMk _ _ he, by simp⟩
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The quotient by an ideal power is the pushforward of restriction, with its

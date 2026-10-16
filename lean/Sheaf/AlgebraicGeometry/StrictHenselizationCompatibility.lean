@@ -36,7 +36,10 @@ theorem affinePointedNeighbourhoods_initial_and_final_op
     Functor.Final
       (ObjectProperty.ι
         (fun n : (pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)).op := by
-  sorry
+  have : (ObjectProperty.ι
+      (fun n : (pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)).Initial :=
+    AffinePointedEtaleNeighborhood.initial_ι s
+  exact ⟨this, inferInstance⟩
 
 end Scheme
 
@@ -46,6 +49,6 @@ theorem strictHenselizationLocalStructure
     (barY : Spec (.of Ω) ⟶ Y) :
     ∃ (_ : IsLocalRing (Scheme.strictHenselizationRing barY)),
       IsStrictlyHenselianLocalRing (Scheme.strictHenselizationRing barY) := by
-  sorry
+  exact ⟨inferInstance, ⟨inferInstance⟩⟩
 
 end AlgebraicGeometry

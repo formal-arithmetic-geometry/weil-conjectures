@@ -6,6 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.CategoryTheory.ColimitSites
+public import Mathlib.CategoryTheory.Category.Preorder
 import Sheaf.CategoryTheory.SiteSystemStrictificationData
 import WeilConjectures.CategoryTheory.FilteredColimitFunctorDescent
 

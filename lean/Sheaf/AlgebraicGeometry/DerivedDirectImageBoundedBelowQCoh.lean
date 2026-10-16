@@ -74,7 +74,23 @@ private theorem property_of_filtration {C : Type*} [Category* C] [Abelian C]
     {M : C} (F : DecreasingFiltration M) (N : ℕ)
     (hfull : F.step 0 = ⊤) (hzero : F.step N = ⊥)
     (hgraded : ∀ p : ℤ, P (F.gradedPiece p)) : P M := by
-  sorry
+  have hstep : ∀ k : ℕ, P (F.step ((N : ℤ) - k) : C) := by
+    intro k
+    induction k with
+    | zero =>
+      simp only [Nat.cast_zero, sub_zero, hzero]
+      exact P.prop_of_isZero ((Limits.isZero_zero _).of_iso Subobject.botCoeIsoZero)
+    | succ k ih =>
+      let i : ℤ := (N : ℤ) - (k + 1)
+      have hi : i + 1 = (N : ℤ) - k := by dsimp [i]; omega
+      have hnext : P (F.step (i + 1) : C) := by rw [hi]; exact ih
+      let φ := Subobject.ofLE (F.step (i + 1)) (F.step i)
+        (F.antitone_step (by omega))
+      exact hext (ShortComplex.mk φ (Limits.cokernel.π φ) (Limits.cokernel.condition φ))
+        ⟨ShortComplex.exact_cokernel φ⟩ hnext (hgraded i)
+  have htop := hstep N
+  simp only [sub_self, hfull] at htop
+  exact P.prop_of_iso (asIso (⊤ : Subobject M).arrow) htop
 -/
 
 /-- Derived direct image of a bounded-below object with quasi-coherent cohomology

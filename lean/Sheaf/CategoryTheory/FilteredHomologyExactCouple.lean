@@ -22,11 +22,9 @@ Source: Stacks Project, Tags 012K and 011Q.
 universe u v
 namespace CategoryTheory
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- Assemble the explicit homology terms and maps with their exactness proofs.
+/-- Assemble the explicit homology terms and maps with their exactness proofs.
 Source: Stacks Project, Tags 012K and 011Q.
-(blueprint: def-sp-filtered-homology-exact-couple). - /
+(blueprint: def-sp-filtered-homology-exact-couple). -/
 noncomputable abbrev filteredHomologyExactCouple {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) : BigradedExactCouple C 0 :=
   BigradedExactCouple.ofShifted (filteredHomologyD K F) (filteredHomologyE K F)
@@ -37,13 +35,10 @@ noncomputable abbrev filteredHomologyExactCouple {C : Type u} [Category.{v} C] [
     (filteredHomologyCouple_exact C K F).2.2.2.1
     (filteredHomologyCouple_exact C K F).2.2.2.2.1
     (filteredHomologyCouple_exact C K F).2.2.2.2.2
--/
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- The reindexed initial E term is graded-piece homology.
+/-- The reindexed initial E term is graded-piece homology.
 Source: Stacks Project, Tag 012K.
-(blueprint: def-sp-filtered-homology-exact-couple). - /
+(blueprint: def-sp-filtered-homology-exact-couple). -/
 noncomputable def filteredHomologyEIso {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (p q : ℤ) :
     ((filteredHomologyExactCouple K F).pageCouple 0).E (2 * p + q) (-p) ≅
@@ -52,6 +47,5 @@ noncomputable def filteredHomologyEIso {C : Type u} [Category.{v} C] [Abelian C]
     change (F.gradedPiece (-(-p))).homology (2 * p + q + -p) =
       (F.gradedPiece p).homology (p + q)
     rw [neg_neg, show 2 * p + q + -p = p + q by omega])
--/
 
 end CategoryTheory

@@ -53,14 +53,12 @@ noncomputable def strictLocalNeighbourhoodProjection {X S : Scheme.{v}} (f : X �
     dsimp [strictLocalNeighbourhoodDiagram, strictLocalNeighbourhoods]
     simp
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- Geometric data for the canonical pullback limit, without any cohomology or mate.
+/-- Geometric data for the canonical pullback limit, without any cohomology or mate.
 The first-component equation fixes each leg by the strict-henselization limit leg;
 the second fixes its projection to X. Thus the data admit no arbitrary reindexing
 or automorphism of the limit cone.
 Source: Stacks, Tag 03Q9, first proof paragraph
-(blueprint: def-weil-pbc-strict-local-neighbourhood-geometry). - /
+(blueprint: def-weil-pbc-strict-local-neighbourhood-geometry). -/
 structure StrictLocalNeighbourhoodGeometry {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) where
   legs : (Functor.const (SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s))).obj
@@ -78,6 +76,5 @@ structure StrictLocalNeighbourhoodGeometry {X S : Scheme.{v}} (f : X ⟶ S)
             i).1.left.unop).inv
   over : ∀ i, legs.app i ≫ (strictLocalNeighbourhoodProjection f s).app i =
     pullback.fst f (Scheme.strictHenselizationStructuralMap s)
--/
 
 end AlgebraicGeometry.Etale

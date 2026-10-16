@@ -18,11 +18,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/ -- The ring map inducing the canonical strict henselization structural map is flat.
+/-- The ring map inducing the canonical strict henselization structural map is flat.
 Source: Stacks Project, Tags 04HX and 07QM; Tag 0EYG, first reduction paragraph.
 (blueprint: lem-sbc-affine-strict-henselization-structural-flat)
 
@@ -33,7 +31,7 @@ colimit ring is the filtered colimit of flat R-modules (etale algebras are flat)
 Filtered colimits of flat modules are flat. Spec is faithful on ring maps,
 so the displayed structural-map equality identifies b with this canonical
 colimit algebra map. This works at any geometric point, whether or not it lies
-on a specified divisor; no regularity or Noetherian hypothesis is needed. - /
+on a specified divisor; no regularity or Noetherian hypothesis is needed. -/
 theorem strictHenselization_structural_ringHom_flat
     (R : CommRingCat.{u})
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)
@@ -84,6 +82,5 @@ theorem strictHenselization_structural_ringHom_flat
       Spec.map (ΓSpecIso (F.obj i.unop).1.left.unop).inv ≫ ψ i.unop =
         strictHenselizationStructuralMap barY at h
     exact h
--/
 
 end AlgebraicGeometry.Scheme

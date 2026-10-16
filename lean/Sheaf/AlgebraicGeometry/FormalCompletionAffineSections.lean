@@ -111,6 +111,64 @@ theorem formalCompletion_affine_sections {Y : Scheme.{u}}
       ∃ e : ModuleCat.of R (AdicCompletion I M) ≅ E.obj (limit S),
         ∀ n : ℕ, e.hom ≫ E.map (limit.π S (op n)) =
           ModuleCat.ofHom (AdicCompletion.eval I M (n + 1)) ≫ (q n).hom := by
-  sorry
+  classical
+  let R := Γ(Y, U)
+  let I := J.ideal ⟨U, hU⟩
+  let E := SheafOfModules.evaluation Y.ringCatSheaf (op U)
+  let M := E.obj H
+  let S := formalCompletionSystem J H
+  let D := S ⋙ E
+  choose q hq using quotient_sections_iso J H U hU
+  let ρ : ∀ n : ℕ, M →ₗ[R] D.obj (op n) :=
+    fun n ↦ (E.map (formalModuleQuotientπ J (n + 1) H)).hom
+  let θ : ∀ n : ℕ, (M ⧸ (I ^ (n + 1) • (⊤ : Submodule R M))) →ₗ[R]
+      D.obj (op n) := fun n ↦ (q n).hom.hom
+  have hθ (n : ℕ) : (θ n).comp (Submodule.mkQ (I ^ (n + 1) • ⊤)) = ρ n :=
+    congrArg ModuleCat.Hom.hom (hq n)
+  have hρ (n m : ℕ) (h : n ≤ m) :
+      (D.map (homOfLE h).op).hom.comp (ρ m) = ρ n := by
+    change (E.map (formalModuleQuotientπ J (m + 1) H) ≫
+      E.map (formalModuleQuotientMap J (𝟙 H) (Nat.succ_le_succ h))).hom = _
+    rw [← E.map_comp]
+    simp [formalModuleQuotientMap, formalModuleQuotientπ, ρ]
+  have ht (n m : ℕ) (h : n ≤ m) :
+      (D.map (homOfLE h).op).hom.comp (θ m) =
+        (θ n).comp (AdicCompletion.transitionMap I M (Nat.succ_le_succ h)) := by
+    apply LinearMap.ext
+    intro x
+    obtain ⟨y, rfl⟩ := (I ^ (m + 1) • (⊤ : Submodule R M)).mkQ_surjective x
+    have hleft := LinearMap.congr_fun (hθ m) y
+    have hright := LinearMap.congr_fun (hθ n) y
+    have hrho := LinearMap.congr_fun (hρ n m h) y
+    simpa [LinearMap.comp_apply, AdicCompletion.transitionMap, Submodule.factorPow,
+      Submodule.factor, Submodule.mapQ_apply] using
+        (congrArg (D.map (homOfLE h).op).hom hleft).trans (hrho.trans hright.symm)
+  have hk (n : ℕ) : LinearMap.ker (ρ (n + 0)) ≤ I ^ (n + 1) • (⊤ : Submodule R M) := by
+    intro x hx
+    have hz : θ n ((I ^ (n + 1) • (⊤ : Submodule R M)).mkQ x) = 0 := by
+      rw [← LinearMap.comp_apply, hθ]
+      exact hx
+    have hxq : (I ^ (n + 1) • (⊤ : Submodule R M)).mkQ x = 0 :=
+      (q n).toLinearEquiv.injective (hz.trans (map_zero _).symm)
+    exact (Submodule.Quotient.mk_eq_zero _).mp hxq
+  have hi (n : ℕ) : Set.range (D.map (homOfLE (Nat.le_add_right n 0)).op).hom =
+      Set.range (ρ n) := by
+    have hs : Function.Surjective (ρ n) := by
+      rw [← hθ n]
+      exact (q n).toLinearEquiv.surjective.comp
+        (I ^ (n + 1) • (⊤ : Submodule R M)).mkQ_surjective
+    rw [Set.range_eq_univ.mpr hs]
+    have hid : (homOfLE (Nat.le_add_right n 0)).op = 𝟙 (op n) := Subsingleton.elim _ _
+    rw [hid]
+    have hd : D.map (𝟙 (op n)) = 𝟙 (D.obj (op n)) := D.map_id (op n)
+    rw [hd]
+    exact Set.range_eq_univ.mpr Function.surjective_id
+  obtain ⟨e, he⟩ := adicCompletion_iso_of_stable_ranges I M D ρ θ hθ ht 0 hk hi
+  let a := preservesLimitIso E S
+  refine ⟨q, hq, e ≪≫ a.symm, ?_⟩
+  intro n
+  change (e.hom ≫ a.inv) ≫ E.map (limit.π S (op n)) = _
+  rw [Category.assoc, preservesLimitIso_inv_π, he]
+  rfl
 
 end AlgebraicGeometry

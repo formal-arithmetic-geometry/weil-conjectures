@@ -101,6 +101,54 @@ theorem popescu_lift_chart_flat (R : Type a) (Cbar : Type c)
     let qD := PrimeSpectrum.comap (Ideal.Quotient.mk _) q
     (Localization.localRingHom (PrimeSpectrum.comap (algebraMap R d.liftingAlgebra) qD).asIdeal
       qD.asIdeal (algebraMap R d.liftingAlgebra) rfl).Flat := by
-  sorry
+  classical
+  let qD := PrimeSpectrum.comap (Ideal.Quotient.mk _) q
+  let T := d.chartLocal k qD
+  have hπ : algebraMap R d.liftingAlgebra π ∈ qD.asIdeal := by
+    change Ideal.Quotient.mk _ (algebraMap R d.liftingAlgebra π) ∈ q.asIdeal
+    rw [Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (Set.mem_singleton _))]
+    exact q.asIdeal.zero_mem
+  have hkD : ULift.up (Ideal.Quotient.mk d.definingIdeal (d.includeX (d.a k))) ∉
+      qD.asIdeal := by
+    change Ideal.Quotient.mk _ _ ∉ q.asIdeal
+    rwa [← polynomial_value π d c hc (d.a k)]
+  have hflat : Module.Flat R T := d.partial_chart_flat hd k qD hπ hkD
+  have hφ : (algebraMap R T).Flat := RingHom.flat_algebraMap_iff.mpr hflat
+  have hAnn : Module.annihilator T (Ideal.span ({algebraMap R T π} : Set T)) =
+      Module.annihilator T (Ideal.span ({(algebraMap R T π) ^ 2} : Set T)) := by
+    rw [RingHom.annihilator_element_flat_base_change (algebraMap R T) hφ π,
+      ← map_pow, RingHom.annihilator_element_flat_base_change (algebraMap R T) hφ (π ^ 2),
+      hAnnR]
+  let f := Localization.localRingHom (d.chartPrime k qD).asIdeal qD.asIdeal
+    (d.chartMap k).toRingHom rfl
+  have hf : Function.Bijective f := d.chart_comparison_bijective π hd k qD hkD hAnn
+  let fA : T →ₐ[R] Localization.AtPrime qD.asIdeal :=
+    { f with
+      commutes' := fun r ↦ by
+        change f (algebraMap R T r) = _
+        dsimp only [f]
+        rw [IsScalarTower.algebraMap_apply R (d.chartAlgebra k) T,
+          Localization.localRingHom_to_map]
+        change algebraMap d.liftingAlgebra (Localization.AtPrime qD.asIdeal)
+          ((d.chartMap k) (algebraMap R (d.chartAlgebra k) r)) = _
+        rw [(d.chartMap k).commutes,
+          ← IsScalarTower.algebraMap_apply R d.liftingAlgebra
+            (Localization.AtPrime qD.asIdeal)] }
+  have : Module.Flat R (Localization.AtPrime qD.asIdeal) :=
+    Module.Flat.of_linearEquiv (AlgEquiv.ofBijective fA hf).symm.toLinearEquiv
+  let p := PrimeSpectrum.comap (algebraMap R d.liftingAlgebra) qD
+  let φ := Localization.localRingHom p.asIdeal qD.asIdeal
+    (algebraMap R d.liftingAlgebra) rfl
+  let : Algebra (Localization.AtPrime p.asIdeal) (Localization.AtPrime qD.asIdeal) :=
+    φ.toAlgebra
+  have : IsScalarTower R (Localization.AtPrime p.asIdeal)
+      (Localization.AtPrime qD.asIdeal) :=
+    IsScalarTower.of_algebraMap_eq fun r ↦ by
+      rw [IsScalarTower.algebraMap_apply R d.liftingAlgebra
+        (Localization.AtPrime qD.asIdeal)]
+      exact (Localization.localRingHom_to_map p.asIdeal qD.asIdeal
+        (algebraMap R d.liftingAlgebra) rfl r).symm
+  exact (Module.flat_iff_of_isLocalization (Localization.AtPrime p.asIdeal)
+    p.asIdeal.primeCompl (Localization.AtPrime qD.asIdeal)).mpr inferInstance
 
 end Algebra

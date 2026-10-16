@@ -54,9 +54,7 @@ private theorem positiveTensorFamily_invertible {X : Scheme.{u}} (n : ℕ)
     change (positiveTensorFamily n (fun i ↦ L i.castSucc) ⊗ L (Fin.last (n + 1))).IsInvertible
     infer_instance
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- A quasi-compact scheme with an affine nonvanishing neighbourhood of each point supplied
+/-- A quasi-compact scheme with an affine nonvanishing neighbourhood of each point supplied
 by a section of a globally generated invertible module has an ample invertible module.
 Source: Stacks Project, Varieties, Lemma 09NC
 (blueprint: lem-sc-enough-globally-generated-ample).
@@ -74,7 +72,7 @@ contains the point. These degree-one sections witness `def-weil-pbc-ample-invert
 Transport the sections to tensor power one with the inverse right unitor, which preserves
 nonvanishing loci. For the empty scheme use the structure sheaf (the empty tensor product).
 For nonempty `X`, append one input factor to the finite subcover to use the positive-family API.
-- /
+-/
 theorem exists_isAmple_of_enough_globallyGenerated (X : Scheme.{u}) [CompactSpace X]
     (h : ∀ x : X, ∃ L : X.Modules, L.IsInvertible ∧
       Nonempty (SheafOfModules.GeneratingSections L) ∧
@@ -150,6 +148,5 @@ theorem exists_isAmple_of_enough_globallyGenerated (X : Scheme.{u}) [CompactSpac
   change y ∈ V ↔ y ∈ nonvanishingLocus (N.tensorPow 1) (b.hom.app ⊤ q)
   rw [nonvanishingLocus_iso b q, ← hVN]
   rfl
--/
 
 end AlgebraicGeometry.Scheme.Modules

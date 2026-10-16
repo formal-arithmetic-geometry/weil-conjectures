@@ -23,8 +23,6 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private theorem fullStrictHenselizationCone
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
@@ -84,7 +82,6 @@ private theorem fullStrictHenselizationCone
     (Functor.Initial.homToLift Q j).1.left ≫ j.1.hom = _
   rw [MorphismProperty.Over.w]
   exact hq _
--/
 
 private noncomputable def pointedPullback
     {S T : Scheme.{u}} {g : T ⟶ S}
@@ -109,9 +106,7 @@ private noncomputable def pointedPullback
         apply pullback.hom_ext <;> simp [Category.assoc] }
   exact α.mapElements ⋙ Functor.Elements.precomp F (pointSmallEtale t).fiber
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- Compatible geometric points admit a morphism of their strict henselization schemes
+/-- Compatible geometric points admit a morphism of their strict henselization schemes
 commuting with the structural maps. No assertion of locality is made here.
 Source: Stacks Project, Tag 04GU; Tag 03Q9, inverse-limit description.
 (blueprint: lem-weil-pbc-strict-henselization-scheme-functoriality)
@@ -124,7 +119,7 @@ neighbourhood of s. Pullback functoriality and cone naturality make these projec
 a cone on the affine pointed-neighbourhood diagram at s. The limit property of the
 canonical cone at s gives f. Each cone leg is a morphism over g: the pullback condition
 and the structural-map characterization give the displayed equality after composition
-with any leg at s. There is at least one such leg, since the index is cofiltered. - /
+with any leg at s. There is at least one such leg, since the index is cofiltered. -/
 theorem exists_strictHenselizationSchemeMap
     {S T : Scheme.{u}} {g : T ⟶ S}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
@@ -163,6 +158,5 @@ theorem exists_strictHenselizationSchemeMap
   change (πt.app (PB.obj j) ≫ pullback.fst j.1.hom g) ≫ j.1.hom = _
   rw [Category.assoc, pullback.condition, ← Category.assoc]
   exact congrArg (fun k ↦ k ≫ g) (hqt (PB.obj j))
--/
 
 end AlgebraicGeometry.Scheme

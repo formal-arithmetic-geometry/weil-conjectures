@@ -42,7 +42,28 @@ private theorem cut_columns {K I : CochainComplex (CochainComplex B ℕ) ℤ}
     (e : K ⟶ I) (he : ∀ p, QuasiIso (e.f p))
     (hc : ∀ p, QuasiIso (HomologicalComplex.cyclesMap e p)) (q p : ℤ) :
     QuasiIso ((CochainComplex.truncLEMap e q).f p) := by
-  sorry
+  rcases lt_trichotomy p q with hp | hp | hp
+  · have : IsIso ((K.ιTruncLE q).f p) := CochainComplex.isIso_ιTruncLE_f K q p hp
+    have : IsIso ((I.ιTruncLE q).f p) := CochainComplex.isIso_ιTruncLE_f I q p hp
+    have : QuasiIso (e.f p) := he p
+    have hn := congrArg (fun f ↦ f.f p) (CochainComplex.ιTruncLE_naturality e q)
+    simp only [HomologicalComplex.comp_f] at hn
+    have : QuasiIso ((CochainComplex.truncLEMap e q).f p ≫ (I.ιTruncLE q).f p) := by
+      rw [hn]
+      infer_instance
+    exact quasiIso_of_comp_right _ ((I.ιTruncLE q).f p)
+  · subst p
+    have hn := CochainComplex.truncLEXIsoCycles_naturality e q
+    have : QuasiIso (HomologicalComplex.cyclesMap e q) := hc q
+    have : QuasiIso ((CochainComplex.truncLEMap e q).f q ≫
+        (I.truncLEXIsoCycles q).hom) := by
+      rw [hn]
+      infer_instance
+    exact quasiIso_of_comp_right _ (I.truncLEXIsoCycles q).hom
+  · have : IsIso ((CochainComplex.truncLEMap e q).f p) := IsZero.isIso
+      (CochainComplex.isZero_of_isStrictlyLE _ q p hp)
+      (CochainComplex.isZero_of_isStrictlyLE _ q p hp) _
+    infer_instance
 
 private theorem augmentation_exists
     {A : Type uB} [Category.{vB} A] [Abelian A] [IsGrothendieckAbelian.{vB} A]

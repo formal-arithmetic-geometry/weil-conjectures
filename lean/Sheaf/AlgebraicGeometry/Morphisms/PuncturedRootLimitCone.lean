@@ -18,9 +18,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- The pointed etale neighbourhoods give a ring-colimit presentation over the base.
+/-- The pointed etale neighbourhoods give a ring-colimit presentation over the base.
 
 Source: Stacks Project, Tag 0BSK; canonical structural map, Tag 03Q9.
 (blueprint: lem-sbc-pointed-etale-ring-colimit)
@@ -34,7 +32,7 @@ follows from the over-category equations. The colimit legs composed with these m
 apply Spec, use exists_strictHenselizationStructuralMap and hb, and use faithfulness of Spec.
 Each neighbourhood is etale by its AffineEtale structure. Its lift of barY supplies a point
 above y: choose the zero prime of the field Omega, map it by the lift, and apply hy to the
-over-category equality. Transfer these points through the affine-spectrum isomorphisms. - /
+over-category equality. Transfer these points through the affine-spectrum isomorphisms. -/
 theorem pointed_etale_ring_colimit
     (R : CommRingCat.{u})
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)
@@ -106,6 +104,5 @@ theorem pointed_etale_ring_colimit
       simpa using hw
     change (k j.unop) ((lift.left ≫ e.hom) x) = y
     exact (congrArg (fun m ↦ m x) hh).trans (hy x)
--/
 
 end AlgebraicGeometry.Scheme

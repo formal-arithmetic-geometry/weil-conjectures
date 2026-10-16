@@ -28,7 +28,46 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 private lemma cutoff_projection_iso_above (K : CochainComplex C ℤ) (a t n : ℤ)
     (han : a < n) :
     IsIso ((CochainComplex.truncLEMap (K.πTruncGE a) t).f n) := by
-  sorry
+  by_cases hn : t < n
+  · have hsrc := (K.truncLE t).isZero_of_isStrictlyLE t n hn
+    have htgt := ((K.truncGE a).truncLE t).isZero_of_isStrictlyLE t n hn
+    exact IsZero.isIso hsrc htgt _
+  · by_cases hn' : n < t
+    · have : IsIso ((K.ιTruncLE t).f n) := inclusion_f_isIso K t n hn'
+      have : IsIso (((K.truncGE a).ιTruncLE t).f n) :=
+        inclusion_f_isIso (K.truncGE a) t n hn'
+      have : IsIso ((K.πTruncGE a).f n) := by
+        rw [CochainComplex.pi_f_above K a n han]
+        infer_instance
+      have h := congrArg (fun f ↦ f.f n)
+        (CochainComplex.ιTruncLE_naturality (K.πTruncGE a) t)
+      simp only [HomologicalComplex.comp_f] at h
+      have : IsIso ((CochainComplex.truncLEMap (K.πTruncGE a) t).f n ≫
+          ((K.truncGE a).ιTruncLE t).f n) := by
+        rw [h]
+        infer_instance
+      exact IsIso.of_isIso_comp_right _ (((K.truncGE a).ιTruncLE t).f n)
+    · have hnt : n = t := by omega
+      subst n
+      have hnext : (ComplexShape.up ℤ).next t = t + 1 :=
+        ComplexShape.next_eq' _ (by simp)
+      let φ := (HomologicalComplex.shortComplexFunctor C (ComplexShape.up ℤ) t).map
+        (K.πTruncGE a)
+      have : IsIso φ.τ₂ := by
+        change IsIso ((K.πTruncGE a).f t)
+        rw [CochainComplex.pi_f_above K a t han]
+        infer_instance
+      have : Mono φ.τ₃ := by
+        change Mono ((K.πTruncGE a).f ((ComplexShape.up ℤ).next t))
+        rw [hnext, CochainComplex.pi_f_above K a (t + 1) (by omega)]
+        infer_instance
+      have : IsIso (HomologicalComplex.cyclesMap (K.πTruncGE a) t) :=
+        inferInstanceAs (IsIso (ShortComplex.cyclesMap φ))
+      have : IsIso ((CochainComplex.truncLEMap (K.πTruncGE a) t).f t ≫
+          ((K.truncGE a).truncLEXIsoCycles t).hom) := by
+        rw [CochainComplex.truncLEXIsoCycles_naturality]
+        infer_instance
+      exact IsIso.of_isIso_comp_right _ ((K.truncGE a).truncLEXIsoCycles t).hom
 
 set_option backward.isDefEq.respectTransparency false in
 private lemma kernel_d_isIso_of_endpoint_forks

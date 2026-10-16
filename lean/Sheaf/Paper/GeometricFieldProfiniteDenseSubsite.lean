@@ -66,18 +66,13 @@ private lemma localization_eq (φ : LocallyConstant S A →ₐ[A] B)
     · simp [χ, LocallyConstant.charFn_apply_of_notMem, hx]
   have h := congrArg (fun v ↦ algebraMap B (Localization.AtPrime p.asIdeal) (φ v)) hmul
   simpa only [map_mul, φ.commutes, hχloc, one_mul] using h
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private noncomputable def fromIntegers (φ : LocallyConstant S ℤ →+* B) :
     LocallyConstant S A →ₐ[A] B :=
   { LocallyConstant.liftPrimeSpectrum (algebraMap A B) (profiniteSpectrumProjection φ) with
     commutes' := LocallyConstant.liftPrimeSpectrum_algebraMap _ _ }
--/
 private noncomputable def toIntegers (φ : LocallyConstant S A →ₐ[A] B) :
     LocallyConstant S ℤ →+* B :=
   φ.toRingHom.comp (LocallyConstant.mapRingHom (Int.castRingHom A))
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private lemma projection_toIntegers (φ : LocallyConstant S A →ₐ[A] B) (p : PrimeSpectrum B) :
     profiniteSpectrumProjection (toIntegers S φ) p = projection S φ.toRingHom p := by
   obtain ⟨⟨s, q⟩, hq⟩ := LocallyConstant.toPrimeSpectrum_surjective
@@ -95,9 +90,6 @@ private lemma projection_toIntegers (φ : LocallyConstant S A →ₐ[A] B) (p : 
     ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := A)).symm
     ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := A)) (s, _))).1
   simp only [Homeomorph.symm_apply_apply]
--/
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private lemma from_to (φ : LocallyConstant S A →ₐ[A] B) :
     fromIntegers S (toIntegers S φ) = φ := by
   ext g
@@ -107,9 +99,6 @@ private lemma from_to (φ : LocallyConstant S A →ₐ[A] B) :
     (LocallyConstant.liftPrimeSpectrum _ _ g) = _
   rw [LocallyConstant.algebraMap_localization_liftPrimeSpectrum,
     projection_toIntegers, localization_eq]
--/
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private lemma to_from (φ : LocallyConstant S ℤ →+* B) :
     toIntegers S (fromIntegers (A := A) S φ) = φ := by
   ext g
@@ -123,11 +112,8 @@ private lemma to_from (φ : LocallyConstant S ℤ →+* B) :
   change algebraMap B (Localization.AtPrime p.asIdeal)
     (algebraMap A B (g (profiniteSpectrumProjection φ p) : A)) = _
   simp only [map_intCast]
--/
 
 open CategoryTheory.Limits
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 private theorem pushout (A : Type u) [CommRing A] (S : Profinite.{u}) :
     IsPushout
@@ -154,7 +140,6 @@ private theorem pushout (A : Type u) [CommRing A] (S : Profinite.{u}) :
     have heq : ψ = d := by
       rw [← from_to S ψ, ht]
     exact CommRingCat.hom_ext (congrArg AlgHom.toRingHom heq)
--/
 
 open AlgebraicGeometry
 private theorem pullback (A : Type u) [CommRing A] (S : Profinite.{u}) :
@@ -292,15 +277,12 @@ private noncomputable def testComponentsHomeo (K : Type u) [Field K] (S : Profin
 private instance testAffine (K : Type u) [CommRing K] (S : Profinite.{u}) :
     IsAffine ((profiniteToProEtOf (Spec (.of K))).obj S).left :=
   IsAffine.of_isIso (TestLC.lcIso K S).inv
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private noncomputable def testHomEquiv (K : Type u) [Field K] (S T : Profinite.{u}) :
     ((profiniteToProEtOf (Spec (.of K))).obj S ⟶
       (profiniteToProEtOf (Spec (.of K))).obj T) ≃ (S ⟶ T) :=
   (pointComponentsEquiv _ _ T).trans
     (((testComponentsHomeo K S).symm.continuousMapCongr (Homeomorph.refl T)).trans
       (profiniteHomContinuousEquiv S T).symm)
--/
 private noncomputable def testProjection (K : Type u) [Field K] (S : Profinite.{u})
     (x : ((profiniteToProEtOf (Spec (.of K))).obj S).left) : S :=
   ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm
@@ -324,8 +306,6 @@ private theorem testProjection_homeo (K : Type u) [Field K] (S : Profinite.{u}) 
   rw [he]
   exact congrArg Prod.fst (Homeomorph.symm_apply_apply
     (LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)) _)
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private theorem testProjection_natural (K : Type u) [Field K]
     {S T : Profinite.{u}} (f : S ⟶ T)
     (x : ((profiniteToProEtOf (Spec (.of K))).obj S).left) :
@@ -338,22 +318,60 @@ private theorem testProjection_natural (K : Type u) [Field K]
     (relativeMapEquiv _ _ T ((profiniteToProEtOf (Spec (.of K))).map f) x)).1 = _
   rw [hn, Scheme.Hom.comp_apply, profiniteProjection_natural]
   rfl
--/
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private theorem testHomEquiv_map (K : Type u) [Field K] {S T : Profinite.{u}} (f : S ⟶ T) :
     testHomEquiv K S T ((profiniteToProEtOf (Spec (.of K))).map f) = f := by
-  sorry
--/
+  ext s
+  change pointComponentsEquiv _ _ T ((profiniteToProEtOf (Spec (.of K))).map f)
+    (ConnectedComponents.mk (testSpaceHomeo K S s)) = f s
+  rw [pointComponentsEquiv_apply]
+  change testProjection K T (((profiniteToProEtOf (Spec (.of K))).map f).left
+    (testSpaceHomeo K S s)) = _
+  rw [testProjection_natural, testProjection_homeo]
 private theorem testFullyFaithful (K : Type u) [Field K] :
     (profiniteToProEtOf (Spec (.of K))).Full ∧
       (profiniteToProEtOf (Spec (.of K))).Faithful := by
-  sorry
+  have h (S T : Profinite.{u}) : Function.Bijective
+      ((profiniteToProEtOf (Spec (.of K))).map : (S ⟶ T) → _) := by
+    constructor
+    · intro f g hfg
+      have hh := congrArg (testHomEquiv K S T) hfg
+      simpa only [testHomEquiv_map] using hh
+    · intro f
+      refine ⟨testHomEquiv K S T f, ?_⟩
+      apply (testHomEquiv K S T).injective
+      rw [testHomEquiv_map]
+  exact ⟨⟨fun f ↦ ⟨(h _ _).surjective f |>.choose,
+    (h _ _).surjective f |>.choose_spec⟩⟩, ⟨fun e ↦ (h _ _).injective e⟩⟩
 
 private theorem affineClassification (K : Type u) [Field K] [IsAlgClosed K]
     (U : (Spec (.of K)).ProEt) [IsAffine U.left] :
     ∃ S : Profinite.{u}, Nonempty (U ≅ (profiniteToProEtOf (Spec (.of K))).obj S) := by
-  sorry
+  let f : Spec Γ(U.left, ⊤) ⟶ Spec (.of K) := U.left.isoSpec.inv ≫ U.hom
+  obtain ⟨φ, hφ⟩ := Spec.homEquiv.symm.surjective f
+  change Spec.map φ = f at hφ
+  let : Algebra K Γ(U.left, ⊤) := φ.hom.toAlgebra
+  have hf : WeaklyEtale f := by dsimp [f]; infer_instance
+  have hφw : WeaklyEtale (Spec.map φ) := hφ.symm ▸ hf
+  have : Algebra.WeaklyEtale K Γ(U.left, ⊤) :=
+    weaklyEtale_SpecMap_algebraMap_iff.mp hφw
+  have : Ring.AbsolutelyFlat Γ(U.left, ⊤) :=
+    .of_flat_lmul' K _ (Algebra.WeaklyEtale.flat_lmul' K Γ(U.left, ⊤))
+  have : TotallySeparatedSpace (PrimeSpectrum Γ(U.left, ⊤)) := separated _
+  let S : Profinite.{u} := Profinite.of (PrimeSpectrum Γ(U.left, ⊤))
+  let e := classification K Γ(U.left, ⊤)
+  let eC := e.toRingEquiv.toCommRingCatIso
+  let eS : U.left ≅ ((profiniteToProEtOf (Spec (.of K))).obj S).left :=
+    U.left.isoSpec ≪≫ Scheme.Spec.mapIso eC.op ≪≫ TestLC.lcIso K S
+  have he : eS.hom ≫ ((profiniteToProEtOf (Spec (.of K))).obj S).hom = U.hom := by
+    change U.left.isoSpec.hom ≫ Spec.map eC.hom ≫
+      (TestLC.lcIso K S).hom ≫ pullback.snd _ _ = _
+    erw [(TestLC.pullback K S).isoPullback_hom_snd]
+    have hcomp : CommRingCat.ofHom (algebraMap K (LocallyConstant S K)) ≫ eC.hom = φ := by
+      ext k
+      exact e.commutes k
+    rw [← Spec.map_comp, hcomp, hφ]
+    simp only [f, Iso.hom_inv_id_assoc]
+  exact ⟨S, ⟨MorphismProperty.Over.isoMk eS he⟩⟩
 
 private theorem testProAffine (K : Type u) [Field K] (S : Profinite.{u}) :
     proAffineEtale ((profiniteToProEtOf (Spec (.of K))).obj S).hom := by
@@ -377,8 +395,6 @@ private theorem testCoverDense (K : Type u) [Field K] [IsAlgClosed K] :
     ((Scheme.AffineProEt.toProEt (Spec (.of K))).obj A)
   exact ⟨⟨S, g ≫ e.hom, e.inv ≫ h, by simp [Category.assoc, w]⟩⟩
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private theorem testTopologyReflect (K : Type u) [Field K]
     {T : Profinite.{u}} {R : Sieve T}
     (hR : R.functorPushforward (profiniteToProEtOf (Spec (.of K))) ∈
@@ -423,7 +439,6 @@ private theorem testTopologyReflect (K : Type u) [Field K]
     rw [← hfac i]
     exact hy
   rw [he, testProjection_homeo]
--/
 private theorem testCoverPreserving (K : Type u) [Field K] :
     CoverPreserving (coherentTopology Profinite.{u})
       (Scheme.ProEt.topology (Spec (.of K))) (profiniteToProEtOf (Spec (.of K))) := by
