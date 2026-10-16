@@ -100,13 +100,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.SymmetricConormalPresentationTransport",
-  "file": "lean/Sheaf/RingTheory/SymmetricConormalPresentationTransport.lean",
+  "module": "WeilConjectures.RingTheory.SymmetricConormalPresentationTransport",
+  "file": "lean/WeilConjectures/RingTheory/SymmetricConormalPresentationTransport.lean",
   "declaration": "Algebra.Presentation.symmetric_conormal_presentation_transport",
   "statement": "theorem symmetric_conormal_presentation_transport\n    {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]\n    {n m : ℕ} (P : Algebra.Presentation R A (Fin n) (Fin m))\n    (M : Type w) [AddCommGroup M] [Module A M]\n    (e : P.toExtension.Cotangent ≃ₗ[A] M)\n    [Algebra R (SymmetricAlgebra A M)] [IsScalarTower R A (SymmetricAlgebra A M)] :\n    let I : Ideal (MvPolynomial (Fin n) R) := P.ker\n    let C := SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent\n    let φ : MvPolynomial (Fin m) (MvPolynomial (Fin n) R) →+* C :=\n      MvPolynomial.eval₂Hom ((algebraMap (MvPolynomial (Fin n) R ⧸ I) C).comp\n        (Ideal.Quotient.mk I))\n        (fun j ↦ SymmetricAlgebra.ι (MvPolynomial (Fin n) R ⧸ I) I.Cotangent\n          (I.toCotangent ⟨P.relation j, P.relation_mem_ker j⟩))\n    let f : MvPolynomial (Fin (n + m)) R →ₐ[R] SymmetricAlgebra A M :=\n      MvPolynomial.aeval (fun i ↦ Sum.elim\n        (fun j ↦ algebraMap A (SymmetricAlgebra A M) (P.val j))\n        (fun j ↦ SymmetricAlgebra.ι A M\n          (e (Extension.Cotangent.mk ⟨P.relation j, P.relation_mem_ker j⟩)))\n        (finSumFinEquiv.symm i))\n    ∀ hφ : Function.Surjective φ,\n      ∃ ρ : (MvPolynomial (Fin (n + m)) R ⧸ RingHom.ker f.toRingHom) ≃+* C,\n        Nonempty ((RingHom.ker f.toRingHom).Cotangent\n          ≃ₛₗ[(↑ρ : (MvPolynomial (Fin (n + m)) R ⧸ RingHom.ker f.toRingHom) →+* C)]\n          (Extension.ofSurjective φ.toIntAlgHom hφ).Cotangent)",
   "branch": "sheaf-dag",
   "by": "V3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.RingTheory.SymmetricConormalPresentationTransport retired, the source module WeilConjectures.RingTheory.SymmetricConormalPresentationTransport declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

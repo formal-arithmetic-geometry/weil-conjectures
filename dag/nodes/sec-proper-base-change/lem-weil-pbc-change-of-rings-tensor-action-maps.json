@@ -87,13 +87,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ChangeOfRingsTensorActionMaps",
-  "file": "lean/Sheaf/AlgebraicGeometry/ChangeOfRingsTensorActionMaps.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ChangeOfRingsTensorActionMaps",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ChangeOfRingsTensorActionMaps.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_changeOfRings_tensor_action_maps",
   "statement": "theorem exists_changeOfRings_tensor_action_maps (Y : Scheme.{u})\n    (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)\n    (P : SheafOfModules.{u} (𝓡 B.right)) :\n    let P₀ := (SheafOfModules.restrictScalars (𝓻 B.hom)).obj P\n    let S := tensorObj C.toModule P₀\n    let T := (SheafOfModules.restrictScalars (𝓻 C.hom)).obj\n      (SheafOfModules.changeOfRings.{u, u, u} φ.right P)\n    ∃ (a d : tensorObj B.toModule S ⟶ S) (g : S ⟶ T),\n      (∀ (W : Y.Opens) (b : B.right.obj.obj (op W))\n          (c : C.right.obj.obj (op W)) (p : P.val.obj (op W)),\n        a.app W (tmulSection (M := B.toModule) b\n          (tmulSection (M := C.toModule) (N := P₀) c p)) =\n          tmulSection (M := C.toModule) (N := P₀) c (b • p)) ∧\n      (∀ (W : Y.Opens) (b : B.right.obj.obj (op W))\n          (c : C.right.obj.obj (op W)) (p : P.val.obj (op W)),\n        d.app W (tmulSection (M := B.toModule) b\n          (tmulSection (M := C.toModule) (N := P₀) c p)) =\n          tmulSection (M := C.toModule) (N := P₀) (φ.right.hom.app (op W) b * c) p) ∧\n      (∀ (W : Y.Opens) (c : C.right.obj.obj (op W)) (p : P.val.obj (op W)),\n        g.app W (tmulSection (M := C.toModule) (N := P₀) c p) =\n          (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 C.right).obj)).unit.app\n            (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ.right P)).app (op W))\n              (c ⊗ₜ[B.right.obj.obj (op W), (φ.right.hom.app (op W)).hom] p)) ∧\n      a ≫ g = d ≫ g",
   "branch": "sheaf-dag",
   "by": "X2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.ChangeOfRingsTensorActionMaps retired, the source module WeilConjectures.AlgebraicGeometry.ChangeOfRingsTensorActionMaps declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

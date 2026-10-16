@@ -147,17 +147,18 @@
   "summary": "Read Stacks homology.tex Section 12.21 (Lemma 011R, proof omitted; Definitions 011Q, 011S; Lemma 011T; Remark 0AMJ with its footnote) and Section 12.5 (Lemmas 08N5, 05PK, 010C). Statement generalized from the type-0 couple of def-sp-exact-couple to an exact couple of type s (g of bidegree (s,-s)), which the iteration needs: the derived couple of a type-0 couple has g' of bidegree (1,-1), so the induction for C_r runs over types r-2; for s=0 the statement is the old one. Claims stated as before (ker d, im d, well-definedness of alpha', f', g', exactness of the derived couple, D_r = im alpha^{r-2}, bidegrees). Proof written in 12 steps: element calculus with elements T -> X up to epimorphic refinement (Stacks 011T/08N5; Mathlib Refinements.lean, new Mathlib-leaf node lem-sp-abelian-refinements), d o d = 0, the two subobject identities, the three constructions by universal properties (epi = cokernel of its kernel, def-sp-abelian), the three exactness chases, assembly, and the induction on r. No Freyd-Mitchell; differences of elements are differences in Hom(T,X). Proof is agent-written (Stacks omits it). Searches: the item's earlier five plus leansearch, leanfinder and grep; Mathlib has no exact couples."
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.DerivedCoupleKernelIdentities",
+  "module": "WeilConjectures.CategoryTheory.DerivedCoupleKernelIdentities",
   "declaration": "CategoryTheory.BigradedExactCouple.derived_couple_kernel_identities",
   "declarations": [
    "CategoryTheory.BigradedExactCouple.derived_couple_kernel_identities"
   ],
-  "file": "lean/Sheaf/CategoryTheory/DerivedCoupleKernelIdentities.lean",
+  "file": "lean/WeilConjectures/CategoryTheory/DerivedCoupleKernelIdentities.lean",
   "statement": "theorem derived_couple_kernel_identities {C : Type u} [Category.{v} C] [Abelian C]\n    {s : ℕ} (X : BigradedExactCouple C s) :\n    ∀ p q : ℤ,\n      let a : X.D (p + 3) (q - 2) ⟶ X.D (p + 2) (q - 1) :=\n        X.alpha (p + 3) (q - 2) ≫ eqToHom (by congr 1 <;> omega)\n      kernelSubobject (X.d p q) =\n          (Subobject.pullback (X.f p q)).obj (kernelSubobject (X.g (p + 2) (q - 1))) ∧\n      kernelSubobject (X.d p q) =\n          (Subobject.pullback (X.f p q)).obj (imageSubobject a) ∧\n      kernelSubobject (X.g (p + 2) (q - 1)) = imageSubobject a ∧\n      imageSubobject (X.d p q) =\n          imageSubobject ((imageSubobject (X.f p q)).arrow ≫ X.g (p + 2) (q - 1)) ∧\n      imageSubobject (X.d p q) =\n          imageSubobject ((kernelSubobject (X.alpha (p + 2) (q - 1))).arrow ≫\n            X.g (p + 2) (q - 1)) ∧\n      imageSubobject (X.f p q) = kernelSubobject (X.alpha (p + 2) (q - 1)) ∧\n      imageSubobject (kernel.ι (X.d p q) ≫ X.f p q) ≤ imageSubobject a",
   "branch": "sheaf-dag",
   "by": "Y2",
   "date": "2026-10-13",
-  "existing": false
+  "existing": false,
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.CategoryTheory.DerivedCoupleKernelIdentities retired, the source module WeilConjectures.CategoryTheory.DerivedCoupleKernelIdentities declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

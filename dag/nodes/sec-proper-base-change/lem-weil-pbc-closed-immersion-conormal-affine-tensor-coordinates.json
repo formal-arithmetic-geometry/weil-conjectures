@@ -130,13 +130,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionConormalAffineTensorCoordinates",
-  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionConormalAffineTensorCoordinates.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ClosedImmersionConormalAffineTensorCoordinates",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ClosedImmersionConormalAffineTensorCoordinates.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_conormal_affine_tensor_coordinates",
   "statement": "theorem closedImmersion_conormal_affine_tensor_coordinates\n    {X Z X' Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X')\n    [IsClosedImmersion i] [IsClosedImmersion i']\n    (g : X ⟶ X') (f : Z ⟶ Z') (h : i ≫ g = f ≫ i')\n    (hc : IsLimit (PullbackCone.mk i f h))\n    (U : X.affineOpens) (U' : X'.affineOpens) (H : U.1 ≤ g ⁻¹ᵁ U'.1) :\n    letI : Algebra Γ(X', U'.1) Γ(X, U.1) := (g.appLE U'.1 U.1 H).hom.toAlgebra\n    let V' : Z'.affineOpens := ⟨i' ⁻¹ᵁ U'.1, U'.2.preimage i'⟩\n    let V : Z.affineOpens := ⟨i ⁻¹ᵁ U.1, U.2.preimage i⟩\n    let K : V.1 ≤ f ⁻¹ᵁ V'.1 := by\n      change i ⁻¹ᵁ U.1 ≤ f ⁻¹ᵁ i' ⁻¹ᵁ U'.1\n      rw [← Scheme.Hom.comp_preimage, ← h, Scheme.Hom.comp_preimage]\n      exact i.preimage_mono H\n    letI : Algebra Γ(Z', V'.1) Γ(Z, V.1) := (f.appLE V'.1 V.1 K).hom.toAlgebra\n    ∃ e : (Γ(X, U.1) ⊗[Γ(X', U'.1)] (i'.ker.ideal U').Cotangent) ≃+\n        (Γ((tensorPullback i').obj i'.ker.toModules, V'.1) ⊗[Γ(Z', V'.1)] Γ(Z, V.1)),\n      ∀ (b : Γ(X, U.1)) (a : i'.ker.ideal U') (s' : Γ(i'.ker.toModules, U'.1)),\n        i'.ker.toModulesι.app U'.1 s' = (a : Γ(X', U'.1)) →\n        e (b ⊗ₜ[Γ(X', U'.1)] (i'.ker.ideal U').toCotangent a) =\n          (show Γ((tensorPullback i').obj i'.ker.toModules, V'.1) from\n            ((Classical.choose (exists_tensorPullbackAdjunction i')).unit.app\n              i'.ker.toModules).app U'.1 s') ⊗ₜ[Γ(Z', V'.1)] i.app U.1 b",
   "branch": "sheaf-dag",
   "by": "E4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.ClosedImmersionConormalAffineTensorCoordinates retired, the source module WeilConjectures.AlgebraicGeometry.ClosedImmersionConormalAffineTensorCoordinates declares the same names"
  },
  "proof_deps": [
   "lem-weil-pbc-closed-immersion-affine-cover-criterion",

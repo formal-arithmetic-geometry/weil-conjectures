@@ -94,8 +94,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.OpenCoverMateComplexShortExact",
-  "file": "lean/Sheaf/Algebra/Homology/OpenCoverMateComplexShortExact.lean",
+  "module": "WeilConjectures.Algebra.Homology.OpenCoverMateComplexShortExact",
+  "file": "lean/WeilConjectures/Algebra/Homology/OpenCoverMateComplexShortExact.lean",
   "declaration": "SheafOfModules.open_cover_mate_complex_shortExact",
   "declarations": [
    "SheafOfModules.open_cover_mate_complex_shortExact"
@@ -103,7 +103,8 @@
   "statement": "theorem open_cover_mate_complex_shortExact (X : AlgebraicGeometry.RingedSpace.{u})\n    (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})\n    (hR : R = (sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)\n    (U V : Opens X) (hcover : U ⊔ V = ⊤)\n    [(overFunctor.{u} R U).Additive] [(overFunctor.{u} R V).Additive]\n    [(overFunctor.{u} R (U ⊓ V)).Additive]\n    (SU : SheafOfModules.{u} (R.over U) ⥤ SheafOfModules.{u} R)\n    (SV : SheafOfModules.{u} (R.over V) ⥤ SheafOfModules.{u} R)\n    (SW : SheafOfModules.{u} (R.over (U ⊓ V)) ⥤ SheafOfModules.{u} R)\n    [SU.Additive] [SV.Additive] [SW.Additive]\n    (aU : SU ⊣ overFunctor.{u} R U) (aV : SV ⊣ overFunctor.{u} R V)\n    (aW : SW ⊣ overFunctor.{u} R (U ⊓ V))\n    (K : CochainComplex (SheafOfModules.{u} R) ℤ) :\n    let KU := (SU.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      (((overFunctor.{u} R U).mapHomologicalComplex (ComplexShape.up ℤ)).obj K)\n    let KV := (SV.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      (((overFunctor.{u} R V).mapHomologicalComplex (ComplexShape.up ℤ)).obj K)\n    let KW := (SW.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      (((overFunctor.{u} R (U ⊓ V)).mapHomologicalComplex (ComplexShape.up ℤ)).obj K)\n    let εU := (aU.mapHomologicalComplex (ComplexShape.up ℤ)).counit.app K\n    let εV := (aV.mapHomologicalComplex (ComplexShape.up ℤ)).counit.app K\n    let cU := overFunctorMap.{u} R (homOfLE inf_le_left : U ⊓ V ⟶ U)\n    let cV := overFunctorMap.{u} R (homOfLE inf_le_right : U ⊓ V ⟶ V)\n    ∃ (f : KW ⟶ KU ⊞ KV),\n      (∀ n, (f ≫ biprod.fst).f n = (aW.homEquiv _ _).symm\n        (cU.inv.app (K.X n) ≫\n          (overMap.{u} R (homOfLE inf_le_left : U ⊓ V ⟶ U)).map\n            (aU.unit.app ((overFunctor.{u} R U).obj (K.X n))) ≫\n          cU.hom.app (SU.obj ((overFunctor.{u} R U).obj (K.X n))))) ∧\n      (∀ n, (-(f ≫ biprod.snd)).f n = (aW.homEquiv _ _).symm\n        (cV.inv.app (K.X n) ≫\n          (overMap.{u} R (homOfLE inf_le_right : U ⊓ V ⟶ V)).map\n            (aV.unit.app ((overFunctor.{u} R V).obj (K.X n))) ≫\n          cV.hom.app (SV.obj ((overFunctor.{u} R V).obj (K.X n))))) ∧\n      ∃ hz : f ≫ biprod.desc εU εV = 0,\n        (ShortComplex.mk f (biprod.desc εU εV) hz).ShortExact",
   "branch": "sheaf-dag",
   "by": "S3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.Algebra.Homology.OpenCoverMateComplexShortExact retired, the source module WeilConjectures.Algebra.Homology.OpenCoverMateComplexShortExact declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

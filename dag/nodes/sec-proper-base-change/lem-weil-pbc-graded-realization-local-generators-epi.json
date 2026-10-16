@@ -118,13 +118,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.GradedRealizationLocalGeneratorsEpi",
-  "file": "lean/Sheaf/Paper/GradedRealizationLocalGeneratorsEpi.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.GradedRealizationLocalGeneratorsEpi",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GradedRealizationLocalGeneratorsEpi.lean",
   "declaration": "AlgebraicGeometry.gradedRealization_local_generators_epi",
   "statement": "theorem gradedRealization_local_generators_epi\n    {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]\n    (graded : ℕ → Submodule A B)\n    {X Y : Scheme.{u}} (pi : Y ⟶ X) (fB : Y ⟶ Spec (.of B))\n    (G : ℕ → SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (mu : ∀ (m k : ℕ), graded k → (G m ⟶ G (m + k)))\n    (U : X.Opens) (r : ℕ) (d : Fin r → ℕ)\n    (s : ∀ i : Fin r, (G (d i)).val.obj (op U))\n    (hgen : ∀ (m : ℕ) (V : X.Opens) (hVU : V ≤ U) (t : (G m).val.obj (op V))\n      (y : X), y ∈ V → ∃ (W : X.Opens) (hWV : W ≤ V), y ∈ W ∧\n        (G m).val.map (homOfLE hWV).op t ∈\n          Submodule.span ((moduleRings X.toRingedSpace).obj.obj (op W))\n            {z | ∃ (i : Fin r), d i ≤ m ∧\n              ∃ b : graded (m - d i),\n                HEq z ((mu (d i) (m - d i) b).val.app (op W)\n                  ((G (d i)).val.map (homOfLE (hWV.trans hVU)).op (s i)))})\n    (F : Y.Modules)\n    (iota : ∀ m : ℕ, G m ⟶ (Scheme.Modules.pushforward pi).obj F)\n    (hcoprod : Nonempty (IsColimit\n      (Cofan.mk ((Scheme.Modules.pushforward pi).obj F) iota)))\n    (hcompat : ∀ (k m : ℕ) (b : graded k),\n      mu m k b ≫ iota (m + k) = iota m ≫\n        (Scheme.Modules.pushforward pi).map\n          (F.smulHom (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b.val))) :\n    let AR := (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj\n      ((TopCat.Sheaf.pushforward CommRingCat.{u} pi.base).obj Y.sheaf)\n    let M := (SheafOfModules.pushforward.{u} (F := TopologicalSpace.Opens.map pi.base)\n      (S := AR) (R := Y.ringCatSheaf) (𝟙 AR)).obj F\n    let a : ULift.{u} (Fin r) → (M.over U).sections := fun i ↦\n      PresheafOfModules.sectionsMk\n        (fun V ↦ M.val.presheaf.map V.unop.hom.op ((iota (d i.down)).val.app (op U) (s i.down)))\n        (fun V W v ↦ by\n          change M.val.presheaf.map v.unop.left.op _ = _\n          rw [← Functor.map_comp_apply]\n          rfl)\n    Epi ((M.over U).freeHomEquiv.symm a)",
   "branch": "sheaf-dag",
   "by": "H1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.Paper.GradedRealizationLocalGeneratorsEpi retired, the source module WeilConjectures.AlgebraicGeometry.GradedRealizationLocalGeneratorsEpi declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

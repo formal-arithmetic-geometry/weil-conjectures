@@ -118,13 +118,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FormalPolynomialPowerLifts",
-  "file": "lean/Sheaf/AlgebraicGeometry/FormalPolynomialPowerLifts.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FormalPolynomialPowerLifts",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalPolynomialPowerLifts.lean",
   "declaration": "AlgebraicGeometry.formalPolynomial_power_lifts",
   "statement": "theorem formalPolynomial_power_lifts\n    {A : Type u} [CommRing A] (I : Ideal A)\n    {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A))\n    {r : ℕ} (generators : Fin r → A)\n    (hgenerators : Ideal.span (Set.range generators) = I)\n :\n    ∃ l : ∀ (k : ℕ) (U : X.Opens),\n      MvPolynomial.homogeneousSubmodule (Fin r) A k →\n        (Scheme.idealSheafPower ((Scheme.IdealSheafData.ofIdealTop\n        (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f).toModulesι k).1.val.obj\n          (op U),\n      (∀ k U b, (Scheme.idealSheafPower _ k).2.val.app (op U) (l k U b) =\n        MvPolynomial.eval₂Hom\n          (((X.presheaf.map (homOfLE (le_top (a := U))).op).hom).comp\n            (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom))\n          (fun i => (X.presheaf.map (homOfLE (le_top (a := U))).op).hom\n            (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom (generators i))) b.val)",
   "branch": "sheaf-dag",
   "by": "G2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.FormalPolynomialPowerLifts retired, the source module WeilConjectures.AlgebraicGeometry.FormalPolynomialPowerLifts declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

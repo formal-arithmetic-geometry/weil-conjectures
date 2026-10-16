@@ -135,13 +135,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.IdealPowersReesZeroGenerators",
-  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowersReesZeroGenerators.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.IdealPowersReesZeroGenerators",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/IdealPowersReesZeroGenerators.lean",
   "declaration": "AlgebraicGeometry.idealPowersReesZeroGenerators",
   "statement": "theorem idealPowersReesZeroGenerators {A : Type v} [CommRing A]\n    {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))\n    (I : Ideal A) (J : X.IdealSheafData)\n    (hJ : J = (Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)\n    (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] :\n    let G := fun m ↦ Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F\n    let graded := reesGrading I\n    ∀ (mu : ∀ (m k : ℕ), graded k → (G m ⟶ G (m + k))),\n      (∀ (m k : ℕ) (b : graded k) (U : X.Opens) (s : (G m).val.obj (op U)),\n        ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι (m + k)).2 F).app\n          U).hom ((mu m k b).app U s) =\n        (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U le_top).hom\n          (b.val.val.coeff k)) •\n        ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι m).2 F).app\n          U).hom s) →\n      (∀ x : X, ∃ (U : X.Opens), x ∈ U ∧\n      ∃ (r : ℕ) (s : Fin r → (G 0).val.obj (op U)),\n        ∀ (m : ℕ) (V : X.Opens) (hVU : V ≤ U) (t : (G m).val.obj (op V))\n          (y : X), y ∈ V → ∃ (W : X.Opens) (hWV : W ≤ V), y ∈ W ∧\n            (G m).val.map (homOfLE hWV).op t ∈\n              Submodule.span ((moduleRings X.toRingedSpace).obj.obj (op W))\n                {z | ∃ (i : Fin r), 0 ≤ m ∧\n                  ∃ b : graded (m - 0),\n                    HEq z ((mu (0) (m - 0) b).val.app (op W)\n                      ((G (0)).val.map (homOfLE (hWV.trans hVU)).op (s i)))})",
   "branch": "sheaf-dag",
   "by": "X3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.IdealPowersReesZeroGenerators retired, the source module WeilConjectures.AlgebraicGeometry.IdealPowersReesZeroGenerators declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

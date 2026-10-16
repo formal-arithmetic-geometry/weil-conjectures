@@ -124,13 +124,14 @@
  "unit": "sk-thm-iff",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.GabberH0EtaleCoverSection",
-  "file": "lean/Sheaf/AlgebraicGeometry/GabberH0EtaleCoverSection.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.GabberH0EtaleCoverSection",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GabberH0EtaleCoverSection.lean",
   "declaration": "AlgebraicGeometry.gabber_h0_etale_cover_section",
   "statement": "theorem gabber_h0_etale_cover_section\n    {X Z : Scheme.{u}} [CompactSpace X]\n    (i : Z ⟶ X) [IsClosedImmersion i]\n    (hZar :\n      letI : ∀ P : X.Opensᵒᵖ ⥤ Type (u + 1),\n          (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)).op.HasPointwiseLeftKanExtension P :=\n            fun P U ↦\n              @Types.hasColimit.{u, u + 1, u}\n                (CostructuredArrow.{u, u, u, u} (Opens.map i.base).op U)\n                inferInstance (small_succ.{u} _) (CostructuredArrow.proj _ U ⋙ P)\n      ∀ G : TopCat.Sheaf (Type (u + 1)) X.toTopCat,\n      Function.Injective\n        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n          (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)) (Type (u + 1))\n          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).unit.app G).hom.app\n            (op (⊤ : X.Opens))))\n    (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (t : ((Scheme.etaleSetPullback i).obj F).obj.obj\n      (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj (Scheme.Etale.mk (𝟙 X))))) :\n    ∃ (U : Scheme.{u}) (q : U ⟶ X) (_ : Etale q) (_ : Surjective q)\n      (s : F.obj.obj (op (Scheme.Etale.mk q))),\n      etaleSetDescentUnit i F (Scheme.Etale.mk q) s =\n        ((Scheme.etaleSetPullback i).obj F).obj.map\n          ((MorphismProperty.Over.pullback @Etale ⊤ i).map\n            (MorphismProperty.Over.homMk q (Category.comp_id q) :\n              Scheme.Etale.mk q ⟶ Scheme.Etale.mk (𝟙 X))).op t",
   "branch": "sheaf-dag",
   "by": "B2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.GabberH0EtaleCoverSection retired, the source module WeilConjectures.AlgebraicGeometry.GabberH0EtaleCoverSection declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

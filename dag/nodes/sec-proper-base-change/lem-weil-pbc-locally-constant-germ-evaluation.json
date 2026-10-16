@@ -128,15 +128,16 @@
   "note": "mechanical checks by hand (merge_delivery.py conflicted on lean_audit); mathematics reviewed by the lead of E1; spot-checked by L: L read the three steps (007B): evaluation induced on the colimit, surjective via constant maps, injective via a common constancy neighbourhood and the elementwise criterion."
  },
  "lean": {
-  "module": "Sheaf.Topology.LocallyConstantGermEvaluation",
+  "module": "WeilConjectures.Topology.LocallyConstantGermEvaluation",
   "declaration": "TopCat.existsUnique_locallyConstant_germ_evaluation",
-  "file": "lean/Sheaf/Topology/LocallyConstantGermEvaluation.lean",
+  "file": "lean/WeilConjectures/Topology/LocallyConstantGermEvaluation.lean",
   "statement": "theorem existsUnique_locallyConstant_germ_evaluation (X : TopCat.{u}) (x : X) (R : Type u) : let L : X.Presheaf (Type u) := { obj := fun V ↦ LocallyConstant {y : X // y ∈ unop V} R map := fun {U V} i ↦ TypeCat.ofHom (LocallyConstant.comap ⟨fun y : {y : X // y ∈ unop V} ↦ ⟨y.1, i.unop.le y.2⟩, continuous_subtype_val.subtype_mk _⟩) map_id := by intros; rfl map_comp := by intros; rfl } ∃ ev : L.stalk x → R, (∀ (V : Opens X) (hx : x ∈ V) (g : LocallyConstant V R), ev (L.germ V x hx g) = g ⟨x, hx⟩) ∧ Function.Bijective ev ∧ ∀ ev' : L.stalk x → R, (∀ (V : Opens X) (hx : x ∈ V) (g : LocallyConstant V R), ev' (L.germ V x hx g) = g ⟨x, hx⟩) → ev' = ev",
   "branch": "sheaf-dag",
   "by": "H1",
   "date": "2026-10-11",
   "existing": false,
-  "fixed_by": "R-lcg1116b"
+  "fixed_by": "R-lcg1116b",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.Topology.LocallyConstantGermEvaluation retired, the source module WeilConjectures.Topology.LocallyConstantGermEvaluation declares the same names"
  },
  "reviewed_lean": {
   "date": "2026-10-11",

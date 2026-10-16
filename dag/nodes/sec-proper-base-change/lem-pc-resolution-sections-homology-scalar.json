@@ -132,13 +132,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ResolutionSectionsHomologyScalar",
-  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionSectionsHomologyScalar.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ResolutionSectionsHomologyScalar",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ResolutionSectionsHomologyScalar.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.resolutionSectionsHomology_scalar",
   "statement": "theorem resolutionSectionsHomology_scalar\n    {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules) (I : InjectiveResolution F)\n    (p : ℕ) (V : S.Opens) (R : RestrictedResolutionSections I (f ⁻¹ᵁ V)) :\n    let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ\n    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let T := (((RingedSpace.globalSectionsComplex R.resolution).sc p).mapHomologyIso\n      (forget₂ _ AddCommGrpCat.{u})).inv ≫\n      (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map\n        R.sections.hom ≫\n      (((((SheafOfModules.forget S.ringCatSheaf).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj K).sc p).mapHomologyIso\n          (PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙\n            (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V))).hom\n    ∀ (a : Γ(S, V)) (y : (RingedSpace.globalSectionsComplex R.resolution).homology p),\n      T ((((Scheme.ΓSpecIso Γ(S, V)).inv ≫ h.appTop).hom a) • y) = a •\n        (show (sectionCohomologyPresheaf K p).obj (op V) from T y)",
   "branch": "sheaf-dag",
   "by": "Q3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.ResolutionSectionsHomologyScalar retired, the source module WeilConjectures.AlgebraicGeometry.ResolutionSectionsHomologyScalar declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

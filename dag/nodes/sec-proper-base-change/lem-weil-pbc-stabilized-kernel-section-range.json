@@ -125,13 +125,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleStabilizedKernelSectionRange",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleStabilizedKernelSectionRange.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CoherentFormalModuleStabilizedKernelSectionRange",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CoherentFormalModuleStabilizedKernelSectionRange.lean",
   "declaration": "AlgebraicGeometry.coherentFormalModule_stabilized_kernel_section_range",
   "statement": "theorem coherentFormalModule_stabilized_kernel_section_range\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (c : ℕ)\n    (hc : ∀ (l m : ℕ) (h : m + c ≤ l),\n      Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) =\n        Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n            F.obj.map (homOfLE (Nat.le_add_right m c)).op)))\n    (U : X.affineOpens)\n    (M N : ModuleCat.{u} (AdicCompletion (I.ideal U) Γ(X, U.1)))\n    (f : M ⟶ N) (hN : Module.Finite (AdicCompletion (I.ideal U) Γ(X, U.1)) N)\n    (p : ∀ n : ℕ,\n      ((ModuleCat.restrictScalars\n        (algebraMap Γ(X, U.1) (AdicCompletion (I.ideal U) Γ(X, U.1)))).obj M)\n          →ₗ[Γ(X, U.1)] Γ(F.obj.obj (op n), U.1))\n    (q : ∀ n : ℕ, N →+ Γ(H.obj.obj (op n), U.1))\n    (hp : ∀ n : ℕ, Function.Surjective (p n))\n    (hpk : ∀ (n : ℕ) (x : M), p n x = 0 ↔\n      x ∈ ((I.ideal U).map\n        (algebraMap Γ(X, U.1) (AdicCompletion (I.ideal U) Γ(X, U.1)))) ^ (n + 1) •\n          (⊤ : Submodule (AdicCompletion (I.ideal U) Γ(X, U.1)) M))\n    (hqk : ∀ (n : ℕ) (y : N), q n y = 0 ↔\n      y ∈ ((I.ideal U).map\n        (algebraMap Γ(X, U.1) (AdicCompletion (I.ideal U) Γ(X, U.1)))) ^ (n + 1) •\n          (⊤ : Submodule (AdicCompletion (I.ideal U) Γ(X, U.1)) N))\n    (hf : ∀ (n : ℕ) (x : M), q n (f x) = (α.hom.app (op n)).app U.1 (p n x))\n    (ht : ∀ (l m : ℕ) (h : m ≤ l) (x : M),\n      p m x = (F.obj.map (homOfLE h).op).app U.1 (p l x)) :\n    ∀ m : ℕ, Set.range (fun z : f.hom.ker ↦ p m (f.hom.ker.subtype z)) =\n      Set.range ((Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op)).app U.1)",
   "branch": "sheaf-dag",
   "by": "P2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.CoherentFormalModuleStabilizedKernelSectionRange retired, the source module WeilConjectures.AlgebraicGeometry.CoherentFormalModuleStabilizedKernelSectionRange declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

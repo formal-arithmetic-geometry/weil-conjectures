@@ -116,13 +116,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FormalCompletionAffineQuotients",
-  "file": "lean/Sheaf/AlgebraicGeometry/FormalCompletionAffineQuotients.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FormalCompletionAffineQuotients",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalCompletionAffineQuotients.lean",
   "declaration": "AlgebraicGeometry.formalCompletion_affine_quotients",
   "statement": "theorem formalCompletion_affine_quotients\n    (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)\n    (U : X.Opens) [IsNoetherian U.toScheme] (hU : IsAffineOpen U)\n    (ρ : CoherentFormalModule X I ⥤ CoherentFormalModule U.toScheme (I.comap U.ι))\n    (hρ : ρ ⋙ (IsCoherentFormalModule (I.comap U.ι)).ι =\n      (IsCoherentFormalModule I).ι ⋙\n        (Functor.whiskeringRight ℕᵒᵖ X.Modules U.toScheme.Modules).obj\n          (Scheme.Modules.restrictFunctor U.ι)) :\n    let T := formalAffineSectionTower X U (I.comap U.ι)\n    let J := I.ideal ⟨U, hU⟩\n    ∃ θ : ∀ (G : CoherentModules X) (n : ℕ),\n      (Γ(G.obj, U) ⧸ (J ^ (n + 1) • ⊤ : Submodule Γ(X, U) Γ(G.obj, U))) ≃ₗ[Γ(X, U)]\n        (T.obj (ρ.obj ((completion X I).obj G))).obj (op n),\n      (∀ (G : CoherentModules X) (n m : ℕ) (h : n ≤ m),\n        ((T.obj (ρ.obj ((completion X I).obj G))).map (homOfLE h).op).hom.comp\n            (θ G m).toLinearMap =\n          (θ G n).toLinearMap.comp\n            (AdicCompletion.transitionMap J Γ(G.obj, U) (Nat.succ_le_succ h))) ∧\n      (∀ (G H : CoherentModules X) (f : G ⟶ H) (n : ℕ),\n        ((T.map (ρ.map ((completion X I).map f))).app (op n)).hom.comp\n            (θ G n).toLinearMap =\n          (θ H n).toLinearMap.comp\n            (((f.hom.val.app (op U)).hom.reduceModIdeal (J ^ (n + 1))).restrictScalars\n              Γ(X, U)))",
   "branch": "sheaf-dag",
   "by": "A2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.FormalCompletionAffineQuotients retired, the source module WeilConjectures.AlgebraicGeometry.FormalCompletionAffineQuotients declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

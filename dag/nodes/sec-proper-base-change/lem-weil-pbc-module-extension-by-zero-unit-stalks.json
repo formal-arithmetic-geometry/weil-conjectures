@@ -82,14 +82,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroUnitStalks",
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExtensionByZeroUnitStalks",
   "declaration": "AlgebraicGeometry.Scheme.Modules.module_extensionByZero_unit_stalks",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExtensionByZeroUnitStalks.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExtensionByZeroUnitStalks.lean",
   "statement": "theorem module_extensionByZero_unit_stalks (X : Scheme.{u}) (U : X.Opens) :\n    let R := X.ringCatSheaf\n    let P := SheafOfModules.extensionByZeroPresheaf.{u} R U\n    let L := P ⋙ PresheafOfModules.sheafification (𝟙 R.obj)\n    ∀ adj : L ⊣ SheafOfModules.overFunctor R U,\n        (∀ (F : SheafOfModules.{u} (R.over U)) (x : X), x ∉ U →\n          IsZero (TopCat.Presheaf.stalk (L.obj F).val.presheaf x)) ∧\n        let t : ∀ (F : SheafOfModules.{u} (R.over U)) (x : U),\n            (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).obj\n                ((toPresheaf U.toScheme).obj ((overEquiv U).functor.obj F)) ⟶\n              (toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u}\n                (U.ι x)).obj (L.obj F) := fun F x =>\n          (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map\n              ((toPresheaf U.toScheme).map ((overEquiv U).functor.map (adj.unit.app F) ≫\n                (overFunctorEquiv U).hom.app (L.obj F))) ≫\n            (restrictStalkNatIso U.ι x).hom.app (L.obj F)\n        (∀ (F : SheafOfModules.{u} (R.over U)) (x : U),\n          letI : Module (U.toScheme.presheaf.stalk x)\n              (((overEquiv U).functor.obj F).presheaf.stalk x) :=\n            inferInstanceAs (Module (U.toScheme.presheaf.stalk x)\n            ↑(TopCat.Presheaf.stalk ((overEquiv U).functor.obj F).val.presheaf x))\n          letI : Module (X.presheaf.stalk (U.ι x))\n              ((toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u}\n                (U.ι x)).obj (L.obj F)) :=\n            inferInstanceAs (Module (X.presheaf.stalk (U.ι x))\n            ↑(TopCat.Presheaf.stalk (L.obj F).val.presheaf (U.ι x)))\n          IsIso (t F x) ∧\n            ∀ (r : X.presheaf.stalk (U.ι x))\n              (s : ((overEquiv U).functor.obj F).presheaf.stalk x),\n              t F x ((U.ι.stalkMap x) r • s) = r • t F x s) ∧\n        (∀ (F F' : SheafOfModules.{u} (R.over U)) (α : F ⟶ F') (x : U),\n          t F x ≫ (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (U.ι x)).map\n              ((toPresheaf X).map (L.map α)) =\n            (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map\n              ((toPresheaf U.toScheme).map ((overEquiv U).functor.map α)) ≫ t F' x)   ",
   "branch": "sheaf-dag",
   "by": "T3",
   "date": "2026-10-12",
-  "existing": false
+  "existing": false,
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroUnitStalks retired, the source module WeilConjectures.AlgebraicGeometry.Modules.ExtensionByZeroUnitStalks declares the same names"
  },
  "mathlib_match": null,
  "merged_into": null,

@@ -81,13 +81,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineEtalePullbackArrowComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtalePullbackArrowComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineEtalePullbackArrowComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineEtalePullbackArrowComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.affineEtale_pullback_arrow_comparison",
   "statement": "theorem affineEtale_pullback_arrow_comparison\n    {S T L : Scheme.{u}} (f : T ⟶ S) [IsAffineHom f]\n    (p : L ⟶ T) (r : L ⟶ S) (hr : p ≫ f = r)\n    (vS : S.FullAffineEtale ⥤ L.FullAffineEtale)\n    (vT : T.FullAffineEtale ⥤ L.FullAffineEtale)\n    (qS : vS ⋙ fullAffineEtaleInclusion L ⋙ Etale.forget L ⋙ Over.forget L ⟶\n      fullAffineEtaleInclusion S ⋙ Etale.forget S ⋙ Over.forget S)\n    (qT : vT ⋙ fullAffineEtaleInclusion L ⋙ Etale.forget L ⋙ Over.forget L ⟶\n      fullAffineEtaleInclusion T ⋙ Etale.forget T ⋙ Over.forget T)\n    (hS : ∀ A : S.FullAffineEtale,\n      IsPullback (qS.app A) (vS.obj A).obj.hom A.obj.hom r)\n    (hT : ∀ A : T.FullAffineEtale,\n      IsPullback (qT.app A) (vT.obj A).obj.hom A.obj.hom p)\n    (n : ℕ) (A : S.FullAffineEtale) (B : Fin n → S.FullAffineEtale)\n    (g : ∀ a, vS.obj (B a) ⟶ vS.obj A)\n    (ψj : ∀ a, pullback (B a).obj.hom f ⟶ A.obj.left)\n    (hψj : ∀ a, ψj a ≫ A.obj.hom = pullback.fst (B a).obj.hom f ≫ (B a).obj.hom)\n    (hdesc : ∀ a,\n      pullback.map (B a).obj.hom r (B a).obj.hom f\n        (𝟙 _) p (𝟙 _) (by simp) (by simpa using hr.symm) ≫ ψj a =\n        (hS (B a)).isoPullback.inv ≫ (g a).hom.left ≫ qS.app A) :\n    ∃ (fi : ∀ a, (affineEtaleBaseChange f).obj (B a) ⟶\n        (affineEtaleBaseChange f).obj A)\n      (t : vT.obj ((affineEtaleBaseChange f).obj A) ≅ vS.obj A)\n      (s : ∀ a, vT.obj ((affineEtaleBaseChange f).obj (B a)) ≅ vS.obj (B a)),\n      ∀ a, vT.map (fi a) ≫ t.hom = (s a).hom ≫ g a",
   "branch": "sheaf-dag",
   "by": "S2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.AffineEtalePullbackArrowComparison retired, the source module WeilConjectures.AlgebraicGeometry.AffineEtalePullbackArrowComparison declares the same names"
  },
  "mathlib_match": null,
  "reviewed": {

@@ -143,13 +143,14 @@
  "unit": "sk-thm-reduction",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.InverseImageStalkScalarTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/InverseImageStalkScalarTransport.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.InverseImageStalkScalarTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/InverseImageStalkScalarTransport.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_inverseImage_stalk_scalar_transport",
   "statement": "theorem exists_inverseImage_stalk_scalar_transport {X Y : Scheme.{u}}\n    (f : X ⟶ Y) (x : X) :\n    ∃ β : ∀ G : Y.Modules,\n      (ModuleCat.extendScalars (f.stalkMap x).hom).obj\n          ((RingedSpace.moduleStalkFunctor Y.toRingedSpace (f x)).obj G) ≅\n        (ModuleCat.extendScalars\n          ((TopCat.Presheaf.stalkFunctor CommRingCat x).map\n            (tensorPullbackRingMap f).hom).hom).obj\n          (ModuleCat.of (TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X.toTopCat)\n            (TopCat.Sheaf.inverseImageRing f.base Y.sheaf).obj x)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.toTopCat)\n              (TopCat.Sheaf.inverseImageModule f.base Y.sheaf G).val.presheaf x)),\n      ∀ (G : Y.Modules) (V : Y.Opens) (hx : f x ∈ V) (s : G.val.obj (op V)),\n        (β G).hom ((1 : X.presheaf.stalk x) ⊗ₜ[_, (f.stalkMap x).hom]\n          (TopCat.Presheaf.germ G.val.presheaf V (f x) hx s)) =\n        (1 : (TopCat.Presheaf.stalkFunctor CommRingCat x).obj X.sheaf.obj) ⊗ₜ[\n          TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X.toTopCat)\n          (TopCat.Sheaf.inverseImageRing f.base Y.sheaf).obj x,\n          ((TopCat.Presheaf.stalkFunctor CommRingCat x).map\n            (tensorPullbackRingMap f).hom).hom]\n          (TopCat.Presheaf.germ\n            (TopCat.Sheaf.inverseImageModule f.base Y.sheaf G).val.presheaf\n            (f ⁻¹ᵁ V) x hx\n            (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n              (Opens.map f.base) AddCommGrpCat.{u}\n              (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)).unit.app\n                ((SheafOfModules.toSheaf _).obj G)).hom.app (op V) s))",
   "branch": "sheaf-dag",
   "by": "V2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.Modules.InverseImageStalkScalarTransport retired, the source module WeilConjectures.AlgebraicGeometry.Modules.InverseImageStalkScalarTransport declares the same names"
  },
  "lean_audit": {
   "master": {

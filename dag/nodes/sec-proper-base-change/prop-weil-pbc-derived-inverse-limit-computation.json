@@ -166,14 +166,15 @@
     "note": "Wrote review.md. Checked all statement dependencies, source passages, exact declarations, hypotheses, conclusions, universes, edge cases, and maintainer gates. Signature matches verbatim; scompile reproduction passed without warnings. No substantive errors or fixes required."
   },
   "lean": {
-    "module": "Sheaf.CategoryTheory.Triangulated.DerivedLimitTower",
+    "module": "WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTower",
     "declaration": "CategoryTheory.derivedCategory_towerLimit_core",
     "statement": "theorem derivedCategory_towerLimit_core\n    (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]\n    [HasCountableProducts A] [CountableAB4Star A]\n    (hP : HasCountableProducts (DerivedCategory A)) :\n    letI : HasCountableProducts (DerivedCategory A) := hP\n    ∀ (_ : EnoughInjectives A)\n      (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective]\n      (K : ℕ → DerivedCategory A) (f : ∀ n : ℕ, K (n + 1) ⟶ K n)\n      (_e : I.asFunctor ⋙ DerivedCategory.Q ≅ Functor.ofOpSequence f),\n      ∃ c : Cone I.asFunctor, Nonempty (IsLimit c) ∧\n        IsDerivedLimit f (DerivedCategory.Q.obj c.pt)",
     "branch": "newtargets-dag",
     "by": "Q17",
     "date": "2026-10-15",
     "existing": true,
-    "note": "The existing general K-injective tower computation, specialized to B = Mod(A_T), K n = ev_(n+1) M, and the inherited transitions. A K-injective tower resolution supplies I.IsKInjective and the natural representation isomorphism e, including transition compatibility. EnoughInjectives B follows from the cited Grothendieck theorem; exact countable products and derived products follow from the existing dependencies. The actual limit cone c supplies the termwise inverse-limit complex and IsDerivedLimit is exactly the sequential Roos property. This reuses the published theorem already reached by clause (3) of lem-weil-derived-limit-existence; no alternate coefficient category or new construction is introduced."
+    "note": "The existing general K-injective tower computation, specialized to B = Mod(A_T), K n = ev_(n+1) M, and the inherited transitions. A K-injective tower resolution supplies I.IsKInjective and the natural representation isomorphism e, including transition compatibility. EnoughInjectives B follows from the cited Grothendieck theorem; exact countable products and derived products follow from the existing dependencies. The actual limit cone c supplies the termwise inverse-limit complex and IsDerivedLimit is exactly the sequential Roos property. This reuses the published theorem already reached by clause (3) of lem-weil-derived-limit-existence; no alternate coefficient category or new construction is introduced.",
+    "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.CategoryTheory.Triangulated.DerivedLimitTower retired, the source module WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTower declares the same names"
   },
   "blueprint_update": {
     "snapshot": "main-20261015",

@@ -110,13 +110,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineFormalMapPresentation",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineFormalMapPresentation.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineFormalMapPresentation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineFormalMapPresentation.lean",
   "declaration": "AlgebraicGeometry.affine_formal_map_presentation",
   "statement": "theorem affine_formal_map_presentation\n    {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData)\n    (H : CoherentModules X) (N : CoherentFormalModule X J)\n    (δ : N ⟶ (completion X J).obj H)\n    (htorsion : ∃ t : ℕ, 1 ≤ t ∧ ∀ e : ℕ,\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι t).2\n        (kernel (δ.hom.app (op e)))) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι t).2\n        (cokernel (δ.hom.app (op e))))) :\n    let A := Γ(X, ⊤)\n    let I := J.ideal ⟨⊤, isAffineOpen_top X⟩\n    let S := AdicCompletion I A\n    let L := tilde.functor A ⋙ Scheme.Modules.pullback X.isoSpec.hom\n    let C := L ⋙ formalCompletionFunctor J\n    ∃ (P : ModuleCat.{u} A) (Q : ModuleCat.{u} S),\n      letI := Module.restrictScalars A S Q\n      letI := IsScalarTower.restrictScalars A S Q\n      ∃ (φ : Q →ₗ[S] S ⊗[A] P) (ε : L.obj P ≅ H.obj)\n        (ρ : N.obj ≅ C.obj (ModuleCat.of A Q))\n        (η : C.obj P ≅ C.obj (ModuleCat.of A (S ⊗[A] P))),\n        η.hom = C.map (ModuleCat.ofHom (TensorProduct.mk A S P (1 : S))) ∧\n        δ.hom = ρ.hom ≫ C.map (ModuleCat.ofHom (φ.restrictScalars A)) ≫\n          η.inv ≫ (formalCompletionFunctor J).map ε.hom ∧\n        ∃ t : ℕ, 1 ≤ t ∧\n          I ^ t ≤ Module.annihilator A (φ.restrictScalars A).ker ∧\n          I ^ t ≤ Module.annihilator A ((S ⊗[A] P) ⧸ (φ.restrictScalars A).range)",
   "branch": "sheaf-dag",
   "by": "R3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.AffineFormalMapPresentation retired, the source module WeilConjectures.AlgebraicGeometry.AffineFormalMapPresentation declares the same names"
  },
  "lean_audit": {
   "master": {

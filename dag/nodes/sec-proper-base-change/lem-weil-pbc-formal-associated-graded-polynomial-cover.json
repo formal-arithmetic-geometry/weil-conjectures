@@ -121,13 +121,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FormalAssociatedGradedPolynomialCover",
-  "file": "lean/Sheaf/AlgebraicGeometry/FormalAssociatedGradedPolynomialCover.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FormalAssociatedGradedPolynomialCover",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalAssociatedGradedPolynomialCover.lean",
   "declaration": "AlgebraicGeometry.formalAssociatedGraded_polynomial_cover",
   "statement": "theorem formalAssociatedGraded_polynomial_cover\n    {A : Type u} [CommRing A] (I : Ideal A)\n    {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A))\n    {r : ℕ} (generators : Fin r → A) (hgenerators : Ideal.span (Set.range generators) = I)\n    (G : GradedSheafAlgebra (formalAssociatedGradedPiece\n      ((Scheme.IdealSheafData.ofIdealTop\n        (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)))\n    (hunit : G.unit = formalAssociatedGradedπ _ 0)\n    (hmul : ∀ (m n : ℕ) (U : X.Opens)\n      (a : (Scheme.idealSheafPower\n        ((Scheme.IdealSheafData.ofIdealTop\n          (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f).toModulesι m).1.val.obj\n          (op U))\n      (b : (Scheme.idealSheafPower\n        ((Scheme.IdealSheafData.ofIdealTop\n          (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f).toModulesι n).1.val.obj\n          (op U)),\n      ∃ c : (Scheme.idealSheafPower\n        ((Scheme.IdealSheafData.ofIdealTop\n          (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f).toModulesι\n          (m + n)).1.val.obj (op U),\n        (Scheme.idealSheafPower _ (m + n)).2.val.app (op U) c =\n          (@id Γ(X, U) ((Scheme.idealSheafPower _ m).2.val.app (op U) a)) *\n            (@id Γ(X, U) ((Scheme.idealSheafPower _ n).2.val.app (op U) b)) ∧\n        G.mul m n U ((formalAssociatedGradedπ _ m).val.app (op U) a)\n          ((formalAssociatedGradedπ _ n).val.app (op U) b) =\n            (formalAssociatedGradedπ _ (m + n)).val.app (op U) c) :\n    ∃ e : ∀ (k : ℕ) (U : X.Opens),\n      MvPolynomial.homogeneousSubmodule (Fin r) A k →\n        (formalAssociatedGradedPiece\n          ((Scheme.IdealSheafData.ofIdealTop\n            (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f) k).val.obj (op U),\n      (∀ k U V (h : V ≤ U) b,\n        (formalAssociatedGradedPiece _ k).val.map (homOfLE h).op (e k U b) = e k V b) ∧\n      (∀ k U b b', e k U (b + b') = e k U b + e k U b') ∧\n      (∀ k l U b b', G.mul k l U (e k U b) (e l U b') =\n        e (k + l) U ⟨b.val * b'.val, b.property.mul b'.property⟩) ∧\n      (∀ U a, e 0 U ⟨MvPolynomial.C a, MvPolynomial.isHomogeneous_C (Fin r) a⟩ =\n        G.unit.val.app (op U)\n          ((X.presheaf.map (homOfLE (le_top (a := U))).op).hom\n            (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a))) ∧\n      (∀ (k : ℕ) (U : X.Opens) (s : ℕ)\n        (a : Fin s → (formalAssociatedGradedPiece _ k).val.obj (op U))\n        (y : X), y ∈ U → ∃ (W : X.Opens) (hWU : W ≤ U), y ∈ W ∧\n          ∀ i, (formalAssociatedGradedPiece _ k).val.map (homOfLE hWU).op (a i) ∈\n            Submodule.span Γ(X, W) (Set.range (e k W)))",
   "branch": "sheaf-dag",
   "by": "V1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.FormalAssociatedGradedPolynomialCover retired, the source module WeilConjectures.AlgebraicGeometry.FormalAssociatedGradedPolynomialCover declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

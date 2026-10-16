@@ -122,13 +122,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FormalPolynomialQuotientSpan",
-  "file": "lean/Sheaf/AlgebraicGeometry/FormalPolynomialQuotientSpan.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FormalPolynomialQuotientSpan",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalPolynomialQuotientSpan.lean",
   "declaration": "AlgebraicGeometry.formalPolynomial_quotient_span",
   "statement": "theorem formalPolynomial_quotient_span\n    {A : Type u} [CommRing A] (I : Ideal A)\n    {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A))\n    {r : ℕ} (generators : Fin r → A)\n    (hgenerators : Ideal.span (Set.range generators) = I)\n    (l : ∀ (k : ℕ) (U : X.Opens),\n      MvPolynomial.homogeneousSubmodule (Fin r) A k →\n        (Scheme.idealSheafPower ((Scheme.IdealSheafData.ofIdealTop\n        (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f).toModulesι k).1.val.obj\n          (op U))\n    (hl : ∀ k U b, (Scheme.idealSheafPower _ k).2.val.app (op U) (l k U b) =\n        MvPolynomial.eval₂Hom\n          (((X.presheaf.map (homOfLE (le_top (a := U))).op).hom).comp\n            (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom))\n          (fun i => (X.presheaf.map (homOfLE (le_top (a := U))).op).hom\n            (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom (generators i))) b.val) :\n    ∀ (k : ℕ) (U : X.Opens) (s : ℕ)\n      (a : Fin s → (formalAssociatedGradedPiece ((Scheme.IdealSheafData.ofIdealTop\n        (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f) k).val.obj (op U))\n      (y : X), y ∈ U → ∃ (W : X.Opens) (hWU : W ≤ U), y ∈ W ∧\n        ∀ i, (formalAssociatedGradedPiece _ k).val.map (homOfLE hWU).op (a i) ∈\n          Submodule.span Γ(X, W)\n            (Set.range (fun b => (formalAssociatedGradedπ _ k).val.app (op W) (l k W b)))",
   "branch": "sheaf-dag",
   "by": "G2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.FormalPolynomialQuotientSpan retired, the source module WeilConjectures.AlgebraicGeometry.FormalPolynomialQuotientSpan declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

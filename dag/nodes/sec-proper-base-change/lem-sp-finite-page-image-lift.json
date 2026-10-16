@@ -96,13 +96,14 @@
  "unit": "sk-thm-properbasechange",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.FinitePageImageLift",
-  "file": "lean/Sheaf/CategoryTheory/FinitePageImageLift.lean",
+  "module": "WeilConjectures.CategoryTheory.FinitePageImageLift",
+  "file": "lean/WeilConjectures/CategoryTheory/FinitePageImageLift.lean",
   "declaration": "CategoryTheory.finitePage_image_lift",
   "statement": "theorem finitePage_image_lift\n    {B : Type u₂} [Category.{v₂} B] [Abelian B]\n    (X : BigradedExactCouple B 0) (a : ℤ)\n    (inc : ∀ (r : ℕ) (p q : ℤ), (X.pageCouple r).D p q ⟶ X.D p q)\n    (hinc0 : ∀ p q : ℤ, inc 0 p q = 𝟙 _)\n    (hinc : ∀ (r : ℕ) (p q : ℤ), inc (r + 1) p q =\n      (X.pageCouple r).derivedDInclusion p q ≫ inc r p q)\n    (p q : ℤ) (hp : 0 ≤ p)\n    (F : DecreasingFiltration (X.D 0 (p + q)))\n    (hF : ∀ i : ℤ, 0 ≤ i → F.step i =\n      imageSubobject (X.incomingAlphaIter i.toNat 0 (p + q)))\n    (lambda : X.D 0 (p + q) ⟶\n      X.D (p - max (p + 3) (q - a + 2) + 2) (q + max (p + 3) (q - a + 2) - 2))\n    (hlambda : lambda = X.alphaIter\n      (-(p - max (p + 3) (q - a + 2) + 2)).toNat 0 (p + q) ≫\n        eqToHom (by congr 1 <;> omega))\n    [IsIso lambda] :\n    ∃ (lift : (F.step p : B) ⟶\n        (X.pageCouple ((max (p + 3) (q - a + 2)).toNat - 2)).D\n          (p - max (p + 3) (q - a + 2) + 2)\n          (q + max (p + 3) (q - a + 2) - 2)),\n      IsIso lift ∧\n      lift ≫ inc ((max (p + 3) (q - a + 2)).toNat - 2)\n          (p - max (p + 3) (q - a + 2) + 2)\n          (q + max (p + 3) (q - a + 2) - 2) = (F.step p).arrow ≫ lambda",
   "branch": "sheaf-dag",
   "by": "D3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.CategoryTheory.FinitePageImageLift retired, the source module WeilConjectures.CategoryTheory.FinitePageImageLift declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

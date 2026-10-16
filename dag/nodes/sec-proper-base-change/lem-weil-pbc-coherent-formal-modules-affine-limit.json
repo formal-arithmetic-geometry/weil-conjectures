@@ -111,13 +111,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineLimit",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModulesAffineLimit.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffineLimit",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CoherentFormalModulesAffineLimit.lean",
   "declaration": "AlgebraicGeometry.coherentFormalModules_affine_limit",
   "statement": "theorem coherentFormalModules_affine_limit (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)\n    (hJ : J = Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)) :\n    ∃ L : CoherentFormalModule (Spec (CommRingCat.of A)) J ⥤\n      ObjectProperty.FullSubcategory\n      (fun N : ModuleCat.{u} (AdicCompletion I A) ↦ Module.Finite (AdicCompletion I A) N),\n    ∃ p : ∀ F : CoherentFormalModule (Spec (CommRingCat.of A)) J,\n      (Functor.const ℕᵒᵖ).obj\n        ((ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A))).obj\n          (L.obj F).obj) ⟶ F.obj ⋙ moduleSpecΓFunctor (R := CommRingCat.of A),\n    (∀ F, Nonempty (IsLimit (Cone.mk _ (p F)))) ∧\n    (∀ (F G : CoherentFormalModule (Spec (CommRingCat.of A)) J) (f : F ⟶ G)\n      (n : ℕ),\n      (ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A))).map\n        (L.map f).hom ≫ (p G).app (op n) =\n      (p F).app (op n) ≫ (moduleSpecΓFunctor (R := CommRingCat.of A)).map (f.hom.app (op n))) ∧\n    (∀ (F : CoherentFormalModule (Spec (CommRingCat.of A)) J) (n : ℕ),\n      Function.Surjective ((p F).app (op n)) ∧\n      LinearMap.ker ((p F).app (op n)).hom =\n        I ^ (n + 1) • (⊤ : Submodule A\n          ((ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A))).obj\n            (L.obj F).obj))) ∧\n    (∀ (F : CoherentFormalModule (Spec (CommRingCat.of A)) J) (n : ℕ)\n      (r : AdicCompletion I A) (a : A) (x : (L.obj F).obj),\n      AdicCompletion.evalₐ I (n + 1) r = Ideal.Quotient.mk (I ^ (n + 1)) a →\n      (p F).app (op n) (r • x) = a • (p F).app (op n) x)",
   "branch": "sheaf-dag",
   "by": "D2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineLimit retired, the source module WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffineLimit declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

@@ -115,13 +115,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.GradedModuleQuasicoherentRealization",
-  "file": "lean/Sheaf/Paper/GradedModuleQuasicoherentRealization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.GradedModuleQuasicoherentRealization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GradedModuleQuasicoherentRealization.lean",
   "declaration": "AlgebraicGeometry.gradedModule_quasicoherent_realization",
   "statement": "theorem gradedModule_quasicoherent_realization\n    {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]\n    (graded : ℕ → Submodule A B)\n    (hgrading : DirectSum.IsInternal graded)\n    (hunit : (1 : B) ∈ graded 0)\n    (hmul : ∀ (k l : ℕ) {x y : B}, x ∈ graded k → y ∈ graded l → x * y ∈ graded (k + l))\n    (hscalar : ∀ (a : A), algebraMap A B a ∈ graded 0)\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of A))\n    (G : ℕ → SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (hG : ∀ m : ℕ, (G m).IsQuasicoherent)\n    (mu : ∀ (m k : ℕ), graded k → (G m ⟶ G (m + k)))\n    (hmu_add : ∀ (m k : ℕ) (b b' : graded k),\n      mu m k (b + b') = mu m k b + mu m k b')\n    (hmu_mul : ∀ (m k l : ℕ) (b : graded k) (b' : graded l),\n      HEq (mu m l b' ≫ mu (m + l) k b)\n        (mu m (k + l) ⟨b.val * b'.val, hmul k l b.property b'.property⟩))\n    (hmu_scalar : ∀ (m : ℕ) (a : A) (U : X.Opens)\n      (t : (G m).val.obj (op U)),\n      HEq ((mu m 0 ⟨algebraMap A B a, hscalar a⟩).val.app (op U) t)\n        ((X.presheaf.map (homOfLE (le_top (a := U))).op).hom\n          (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a) • t))\n    :\n    let g := Spec.map (CommRingCat.ofHom (algebraMap A B))\n    let Y := pullback f g\n    let pi : Y ⟶ X := pullback.fst f g\n    let fB : Y ⟶ Spec (.of B) := pullback.snd f g\n    ∃ (F : Y.Modules), F.IsQuasicoherent ∧\n      ∃ (iota : ∀ m : ℕ, G m ⟶ (Scheme.Modules.pushforward pi).obj F),\n        Nonempty (IsColimit (Cofan.mk ((Scheme.Modules.pushforward pi).obj F) iota)) ∧\n          ∀ (k m : ℕ) (b : graded k),\n            mu m k b ≫ iota (m + k) = iota m ≫\n              (Scheme.Modules.pushforward pi).map\n                (F.smulHom (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b.val))",
   "branch": "sheaf-dag",
   "by": "W2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.Paper.GradedModuleQuasicoherentRealization retired, the source module WeilConjectures.AlgebraicGeometry.GradedModuleQuasicoherentRealization declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

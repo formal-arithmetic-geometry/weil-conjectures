@@ -122,13 +122,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineStalkFiltration",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelAffineStalkFiltration.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelAffineStalkFiltration",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CoherentFormalModuleKernelAffineStalkFiltration.lean",
   "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_affine_stalk_filtration",
   "statement": "theorem coherentFormalModule_kernel_affine_stalk_filtration\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)\n    (hc : ∀ (l m : ℕ) (h : m + c ≤ l),\n      Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) =\n        Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n            F.obj.map (homOfLE (Nat.le_add_right m c)).op)))\n    (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅\n      Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op),\n      e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m))\n    (U : X.affineOpens) :\n    let A := Γ(X, U.1)\n    let R := AdicCompletion (I.ideal U) A\n    let K := (I.ideal U).map (algebraMap A R)\n    ∃ N : ModuleCat.{u} R, Module.Finite R N ∧\n      ∃ L : Submodule R N, ∀ (x : X), x ∈ U.1 →\n        ∀ e : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj\n            (SheafOfModules.unit X.ringCatSheaf) ≅\n            ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x),\n        (∀ (V : X.Opens) (hx : x ∈ V) (r : Γ(X, V)),\n          e.hom (TopCat.Presheaf.germ (SheafOfModules.unit X.ringCatSheaf).val.presheaf\n            V x hx r) = X.presheaf.germ V x hx r) →\n        let T := RingedSpace.moduleStalkFunctor X.toRingedSpace x\n        let J : Ideal (X.presheaf.stalk x) := LinearMap.range (T.map I.toModulesι ≫ e.hom).hom\n        ∃ M : ModuleCat.{u} (X.presheaf.stalk x),\n          ∃ p : ∀ m : ℕ, M →ₗ[X.presheaf.stalk x] T.obj (S.obj (op m)),\n            (∀ m : ℕ, Function.Surjective (p m)) ∧\n            (∀ (a b : ℕ) (h : a ≤ b) (z : M),\n              (T.map (S.map (homOfLE h).op)).hom (p b z) = p a z) ∧\n            ∃ φ : Submodule R L →o Submodule (X.presheaf.stalk x) M,\n              (∀ r : ℕ, φ (K ^ r • (⊤ : Submodule R L)) =\n                J ^ r • (⊤ : Submodule (X.presheaf.stalk x) M)) ∧\n              (∀ m : ℕ, LinearMap.ker (p m) =\n                φ ((K ^ (m + 1) • (⊤ : Submodule R N)).comap L.subtype))",
   "branch": "sheaf-dag",
   "by": "Y2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineStalkFiltration retired, the source module WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelAffineStalkFiltration declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

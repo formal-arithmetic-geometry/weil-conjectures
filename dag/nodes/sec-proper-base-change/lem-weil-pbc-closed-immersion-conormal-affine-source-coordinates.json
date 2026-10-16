@@ -122,13 +122,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionConormalAffineSourceCoordinates",
-  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionConormalAffineSourceCoordinates.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ClosedImmersionConormalAffineSourceCoordinates",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ClosedImmersionConormalAffineSourceCoordinates.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_conormal_affine_source_coordinates",
   "statement": "theorem closedImmersion_conormal_affine_source_coordinates\n    {X Z X' Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X')\n    [IsClosedImmersion i] [IsClosedImmersion i']\n    (g : X ⟶ X') (f : Z ⟶ Z') (h : i ≫ g = f ≫ i')\n    (hc : IsLimit (PullbackCone.mk i f h))\n    (U : X.affineOpens) (U' : X'.affineOpens) (H : U.1 ≤ g ⁻¹ᵁ U'.1) :\n    letI : Algebra Γ(X', U'.1) Γ(X, U.1) := (g.appLE U'.1 U.1 H).hom.toAlgebra\n    let S := (tensorPullback f).obj ((tensorPullback i').obj i'.ker.toModules)\n    ∃ eS : Γ(S, i ⁻¹ᵁ U.1) ≃+ Γ(X, U.1) ⊗[Γ(X', U'.1)]\n        (i'.ker.ideal U').Cotangent,\n      (∀ (b : Γ(X, U.1)) (a : i'.ker.ideal U') (s' : Γ(i'.ker.toModules, U'.1)),\n        i'.ker.toModulesι.app U'.1 s' = (a : Γ(X', U'.1)) →\n        eS.symm (b ⊗ₜ[Γ(X', U'.1)] (i'.ker.ideal U').toCotangent a) =\n          i.app U.1 b • S.val.map (homOfLE (i.preimage_mono H)).op\n            ((((Classical.choose (exists_tensorPullbackAdjunction i')).unit.app\n                i'.ker.toModules) ≫\n              (pushforward i').map\n                (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app\n                  ((tensorPullback i').obj i'.ker.toModules))) ≫\n              (pushforwardComp f i').hom.app S ≫\n              (pushforwardCongr h.symm).hom.app S).app U'.1 s'))",
   "branch": "sheaf-dag",
   "by": "V4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.ClosedImmersionConormalAffineSourceCoordinates retired, the source module WeilConjectures.AlgebraicGeometry.ClosedImmersionConormalAffineSourceCoordinates declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

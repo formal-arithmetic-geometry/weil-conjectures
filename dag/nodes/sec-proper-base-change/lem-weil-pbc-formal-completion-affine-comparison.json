@@ -102,13 +102,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FormalCompletionAffineComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/FormalCompletionAffineComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FormalCompletionAffineComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalCompletionAffineComparison.lean",
   "declaration": "AlgebraicGeometry.formalCompletion_affine_comparison",
   "statement": "theorem formalCompletion_affine_comparison (X : Scheme.{u}) [IsNoetherian X]\n    (I : X.IdealSheafData) (h : (completion X I).Additive)\n    (U : X.Opens) [IsNoetherian U.toScheme] (hU : IsAffineOpen U)\n    (ρ : CoherentFormalModule X I ⥤ CoherentFormalModule U.toScheme (I.comap U.ι))\n    (hz : ρ.PreservesZeroMorphisms)\n    (hρ : ρ ⋙ (IsCoherentFormalModule (I.comap U.ι)).ι =\n      (IsCoherentFormalModule I).ι ⋙\n        (Functor.whiskeringRight ℕᵒᵖ X.Modules U.toScheme.Modules).obj\n          (Scheme.Modules.restrictFunctor U.ι))\n    (S : ShortComplex (CoherentModules X)) (hS : S.ShortExact) :\n    let T := @ShortComplex.map _ _ _ _ _ _ S (completion X I)\n      (@Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ (completion X I) h)\n    let V := @ShortComplex.map _ _ _ _ _ _ T ρ hz\n    ∃ (A : Type u) (_ : CommRing A) (_ : IsNoetherianRing A) (J : Ideal A)\n      (M : ShortComplex (ModuleCat.{u} A)),\n      Module.Finite A M.X₂ ∧ M.ShortExact ∧\n      ∃ F : CoherentFormalModule U.toScheme (I.comap U.ι) ⥤ ModuleCat.{u} A,\n        F.PreservesZeroMorphisms ∧ ReflectsLimitsOfShape WalkingParallelPair F ∧\n        ∃ (e₁ : F.obj V.X₁ ≃ₗ[A] AdicCompletion J M.X₁)\n          (e₂ : F.obj V.X₂ ≃ₗ[A] AdicCompletion J M.X₂)\n          (e₃ : F.obj V.X₃ ≃ₗ[A] AdicCompletion J M.X₃),\n          (∀ x, e₂ ((F.map V.f) x) = AdicCompletion.map J M.f.hom (e₁ x)) ∧\n          (∀ x, e₃ ((F.map V.g) x) = AdicCompletion.map J M.g.hom (e₂ x))",
   "branch": "sheaf-dag",
   "by": "K2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.FormalCompletionAffineComparison retired, the source module WeilConjectures.AlgebraicGeometry.FormalCompletionAffineComparison declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -129,13 +129,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.SymmetricConormalFreePresentation",
-  "file": "lean/Sheaf/RingTheory/SymmetricConormalFreePresentation.lean",
+  "module": "WeilConjectures.RingTheory.SymmetricConormalFreePresentation",
+  "file": "lean/WeilConjectures/RingTheory/SymmetricConormalFreePresentation.lean",
   "declaration": "Algebra.Presentation.symmetric_conormal_free_presentation",
   "statement": "theorem symmetric_conormal_free_presentation\n    {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]\n    {n m : ℕ} (P : Algebra.Presentation R A (Fin n) (Fin m))\n    (M : Type w) [AddCommGroup M] [Module A M] [Module.Projective A M]\n    (e : P.toExtension.Cotangent ≃ₗ[A] M)\n    [Algebra R (SymmetricAlgebra A M)] [IsScalarTower R A (SymmetricAlgebra A M)] :\n    let x : Fin m → M := fun j ↦ e (Extension.Cotangent.mk\n      ⟨P.relation j, P.relation_mem_ker j⟩)\n    let f : MvPolynomial (Fin (n + m)) R →ₐ[R] SymmetricAlgebra A M :=\n      MvPolynomial.aeval (fun i ↦ Sum.elim\n        (fun j ↦ algebraMap A (SymmetricAlgebra A M) (P.val j))\n        (fun j ↦ SymmetricAlgebra.ι A M (x j)) (finSumFinEquiv.symm i))\n    Module.Free (MvPolynomial (Fin (n + m)) R ⧸ RingHom.ker f.toRingHom)\n      (RingHom.ker f.toRingHom).Cotangent",
   "branch": "sheaf-dag",
   "by": "G2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.RingTheory.SymmetricConormalFreePresentation retired, the source module WeilConjectures.RingTheory.SymmetricConormalFreePresentation declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

@@ -120,13 +120,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineIntersectionQuotientsStalk",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineIntersectionQuotientsStalk.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineIntersectionQuotientsStalk",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineIntersectionQuotientsStalk.lean",
   "declaration": "AlgebraicGeometry.affine_intersection_quotients_stalk",
   "statement": "theorem affine_intersection_quotients_stalk\n    {X : Scheme.{u}} (I : X.IdealSheafData) (S : ℕᵒᵖ ⥤ X.Modules)\n    (U : X.affineOpens)\n    (R : Type u) [CommRing R] [Algebra Γ(X, U.1) R]\n    (L : ModuleCat.{u} R) (D : ℕ → Submodule R L)\n    (q : ∀ m : ℕ,\n      ((ModuleCat.restrictScalars (algebraMap Γ(X, U.1) R)).obj L)\n        →ₗ[Γ(X, U.1)] Γ(S.obj (op m), U.1))\n    (hqc : ∀ m : ℕ, (S.obj (op m)).IsQuasicoherent)\n    (hq : ∀ m : ℕ, Function.Surjective (q m))\n    (ht : ∀ (a b : ℕ) (h : a ≤ b) (z : L),\n      (S.map (homOfLE h).op).app U.1 (q b z) = q a z)\n    (hk : ∀ (m : ℕ) (z : L), q m z = 0 ↔ z ∈ D m)\n    (x : X) (hx : x ∈ U.1)\n    (e : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj\n        (SheafOfModules.unit X.ringCatSheaf) ≅\n        ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x))\n    (he : ∀ (V : X.Opens) (hx : x ∈ V) (r : Γ(X, V)),\n      e.hom (TopCat.Presheaf.germ (SheafOfModules.unit X.ringCatSheaf).val.presheaf\n        V x hx r) = X.presheaf.germ V x hx r) :\n    let K := (I.ideal U).map (algebraMap Γ(X, U.1) R)\n    let T := RingedSpace.moduleStalkFunctor X.toRingedSpace x\n    let J : Ideal (X.presheaf.stalk x) := LinearMap.range (T.map I.toModulesι ≫ e.hom).hom\n    ∃ M : ModuleCat.{u} (X.presheaf.stalk x),\n      ∃ p : ∀ m : ℕ, M →ₗ[X.presheaf.stalk x] T.obj (S.obj (op m)),\n        (∀ m : ℕ, Function.Surjective (p m)) ∧\n        (∀ (a b : ℕ) (h : a ≤ b) (z : M),\n          (T.map (S.map (homOfLE h).op)).hom (p b z) = p a z) ∧\n        ∃ φ : Submodule R L →o Submodule (X.presheaf.stalk x) M,\n          (∀ r : ℕ, φ (K ^ r • (⊤ : Submodule R L)) =\n            J ^ r • (⊤ : Submodule (X.presheaf.stalk x) M)) ∧\n          (∀ m : ℕ, LinearMap.ker (p m) =\n            φ (D m))",
   "branch": "sheaf-dag",
   "by": "J4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.AffineIntersectionQuotientsStalk retired, the source module WeilConjectures.AlgebraicGeometry.AffineIntersectionQuotientsStalk declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

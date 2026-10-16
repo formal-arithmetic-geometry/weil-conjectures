@@ -111,13 +111,14 @@
  "unit": "sk-thm-iff",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleSetStagePresheafLocallyInjective",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetStagePresheafLocallyInjective.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleSetStagePresheafLocallyInjective",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleSetStagePresheafLocallyInjective.lean",
   "declaration": "AlgebraicGeometry.etaleSetStagePresheaf_locallyInjective",
   "statement": "theorem etaleSetStagePresheaf_locallyInjective\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1))) :\n    let ρ := (Scheme.fullAffineEtaleInclusion (D.obj (op i₀))).sheafPushforwardContinuous\n      (Type (u + 1)) (Scheme.fullAffineEtaleTopology (D.obj (op i₀)))\n      (D.obj (op i₀)).smallEtaleTopology\n    let A := fun j : Over (op i₀) ↦ ρ.obj\n      (((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).sheafPushforwardContinuous\n        (Type (u + 1)) ((D.obj (op i₀)).smallGrothendieckTopology (P := @Etale) (Q := @Etale))\n        ((D.obj j.left).smallGrothendieckTopology (P := @Etale) (Q := @Etale))).obj\n          ((Scheme.etaleSetPullback (D.map j.hom)).obj G))\n    let L := ρ.obj\n      ((@Functor.sheafPushforwardContinuous _ _ _ _\n        (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀)))\n        (Type (u + 1)) _ ((D.obj (op i₀)).smallGrothendieckTopology (P := @Etale) (Q := @Etale))\n        (c.pt.smallGrothendieckTopology (P := @Etale) (Q := @Etale))\n        (Etale.isContinuous_overPullback (c.π.app (op i₀)))).obj\n          ((Scheme.etaleSetPullback (c.π.app (op i₀))).obj G))\n    ∀ (E : (Over (op i₀))ᵒᵖ ⥤\n        Sheaf (Scheme.fullAffineEtaleTopology (D.obj (op i₀))) (Type (u + 1)))\n      (K : Cocone E),\n      (∀ j : Over (op i₀), E.obj (op j) = A j) → K.pt = L →\n      (∀ (j k : Over (op i₀)) (a : k ⟶ j)\n        (W : (D.obj (op i₀)).FullAffineEtale),\n        Arrow.mk ((E.map a.op).hom.app (op W)) =\n          Arrow.mk (etaleSetSectionComparison (D.map a.left) (D.map j.hom) (D.map k.hom)\n            ((D.map_comp a.left j.hom).symm.trans\n              (congrArg (fun t : k.left ⟶ op i₀ ↦ D.map t) a.w)) G W.obj)) →\n      (∀ (j : Over (op i₀)) (W : (D.obj (op i₀)).FullAffineEtale),\n        Arrow.mk ((K.ι.app (op j)).hom.app (op W)) =\n          Arrow.mk (etaleSetSectionComparison (c.π.app j.left) (D.map j.hom)\n            (c.π.app (op i₀)) (c.w j.hom) G W.obj)) →\n      Presheaf.IsLocallyInjective\n      (Scheme.fullAffineEtaleTopology (D.obj (op i₀)))\n      (colimit.desc\n        (E ⋙ sheafToPresheaf (Scheme.fullAffineEtaleTopology (D.obj (op i₀)))\n          (Type (u + 1)))\n        ((sheafToPresheaf (Scheme.fullAffineEtaleTopology (D.obj (op i₀)))\n          (Type (u + 1))).mapCocone K))",
   "branch": "sheaf-dag",
   "by": "Q3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.EtaleSetStagePresheafLocallyInjective retired, the source module WeilConjectures.AlgebraicGeometry.EtaleSetStagePresheafLocallyInjective declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

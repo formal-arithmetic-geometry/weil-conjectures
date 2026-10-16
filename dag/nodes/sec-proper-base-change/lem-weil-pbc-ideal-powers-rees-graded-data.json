@@ -142,13 +142,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.IdealPowersReesGradedData",
-  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowersReesGradedData.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.IdealPowersReesGradedData",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/IdealPowersReesGradedData.lean",
   "declaration": "AlgebraicGeometry.idealPowersReesGradedData",
   "statement": "theorem idealPowersReesGradedData {A : Type v} [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (I : Ideal A) (J : X.IdealSheafData) (hJ : J = (Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f) (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) : let G := fun m ↦ Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F let graded := reesGrading I ∃ mu : ∀ (m k : ℕ), graded k → (G m ⟶ G (m + k)), (∀ (m k : ℕ) (b : graded k) (U : X.Opens) (s : (G m).val.obj (op U)), ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι (m + k)).2 F).app U).hom ((mu m k b).app U s) = (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U le_top).hom (b.val.val.coeff k)) • ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι m).2 F).app U).hom s) ∧ (∀ m : ℕ, (G m).IsQuasicoherent) ∧ (∀ (m k : ℕ) (b b' : graded k), mu m k (b + b') = mu m k b + mu m k b') ∧ (∀ (m k l : ℕ) (b : graded k) (b' : graded l), HEq (mu m l b' ≫ mu (m + l) k b) (mu m (k + l) ⟨b.val * b'.val, SetLike.mul_mem_graded b.property b'.property⟩)) ∧ (∀ (m : ℕ) (a : A) (U : X.Opens) (t : (G m).val.obj (op U)), HEq ((mu m 0 ⟨algebraMap A (reesAlgebra I) a, algebraMap_mem_reesGrading_zero I a⟩).val.app (op U) t) ((X.presheaf.map (homOfLE (le_top (a := U))).op).hom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a) • t)) ∧ (∀ x : X, ∃ (U : X.Opens), x ∈ U ∧ ∃ (r : ℕ) (d : Fin r → ℕ) (s : ∀ i : Fin r, (G (d i)).val.obj (op U)), ∀ (m : ℕ) (V : X.Opens) (hVU : V ≤ U) (t : (G m).val.obj (op V)) (y : X), y ∈ V → ∃ (W : X.Opens) (hWV : W ≤ V), y ∈ W ∧ (G m).val.map (homOfLE hWV).op t ∈ Submodule.span ((moduleRings X.toRingedSpace).obj.obj (op W)) {z | ∃ (i : Fin r), d i ≤ m ∧ ∃ b : graded (m - d i), HEq z ((mu (d i) (m - d i) b).val.app (op W) ((G (d i)).val.map (homOfLE (hWV.trans hVU)).op (s i)))})",
   "branch": "sheaf-dag",
   "by": "J3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.IdealPowersReesGradedData retired, the source module WeilConjectures.AlgebraicGeometry.IdealPowersReesGradedData declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

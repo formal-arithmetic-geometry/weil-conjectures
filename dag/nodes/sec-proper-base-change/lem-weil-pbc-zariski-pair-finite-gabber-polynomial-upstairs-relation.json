@@ -83,13 +83,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.FiniteGabberPolynomialRelation",
-  "file": "lean/Sheaf/RingTheory/FiniteGabberPolynomialRelation.lean",
+  "module": "WeilConjectures.RingTheory.FiniteGabberPolynomialRelation",
+  "file": "lean/WeilConjectures/RingTheory/FiniteGabberPolynomialRelation.lean",
   "declaration": "Algebra.exists_gabber_relation_after_base_change",
   "statement": "theorem exists_gabber_relation_after_base_change\n    {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]\n    [Module.Finite A B] (I : Ideal A) (hI : I ≤ Ideal.jacobson ⊥)\n    (B₁ : Type w) (B₂ : Type z) [CommRing B₁] [CommRing B₂]\n    [Algebra (A ⧸ I) B₁] [Algebra (A ⧸ I) B₂]\n    (e : (B ⧸ I.map (algebraMap A B)) ≃+* (B₁ × B₂))\n    (he : ∀ a : A, e (Ideal.Quotient.mk (I.map (algebraMap A B)) (algebraMap A B a)) =\n      (algebraMap (A ⧸ I) B₁ (Ideal.Quotient.mk I a),\n        algebraMap (A ⧸ I) B₂ (Ideal.Quotient.mk I a)))\n    (h₁ : Function.Surjective (algebraMap (A ⧸ I) B₁))\n    (b : B) (hb : e (Ideal.Quotient.mk (I.map (algebraMap A B)) b) = (1, 0)) :\n    ∃ (C : CommRingCat.{u}) (f : A →+* C),\n      letI : Algebra A C := f.toAlgebra;\n      Module.FaithfullyFlat A C ∧ ∃ d : ℕ, 1 ≤ d ∧\n        let L : (Fin (d + 1) → I) →ₗ[A] B :=\n          ∑ j : Fin (d + 1), (I.subtype.comp (LinearMap.proj j)).smulRight (b ^ (j : ℕ));\n        TensorProduct.mk A C (B ⧸ LinearMap.range L) 1\n          ((LinearMap.range L).mkQ ((b - 1) * b ^ d)) = 0",
   "branch": "sheaf-dag",
   "by": "B2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.RingTheory.FiniteGabberPolynomialRelation retired, the source module WeilConjectures.RingTheory.FiniteGabberPolynomialRelation declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

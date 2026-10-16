@@ -107,13 +107,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelShiftedStalkModel",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelShiftedStalkModel.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelShiftedStalkModel",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CoherentFormalModuleKernelShiftedStalkModel.lean",
   "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_shifted_stalk_model",
   "statement": "theorem coherentFormalModule_kernel_shifted_stalk_model\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)\n    (hc : ∀ (l m : ℕ) (h : m + c ≤ l),\n      Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) =\n        Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n            F.obj.map (homOfLE (Nat.le_add_right m c)).op)))\n    (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅\n      Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op),\n      e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) :\n    ∃ b : ℕ, ∀ d : ℕ, max c b ≤ d → ∀ x : X,\n      ∀ e : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj\n          (SheafOfModules.unit X.ringCatSheaf) ≅\n          ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x),\n      (∀ (U : X.Opens) (hx : x ∈ U) (r : Γ(X, U)),\n        e.hom (TopCat.Presheaf.germ (SheafOfModules.unit X.ringCatSheaf).val.presheaf\n          U x hx r) = X.presheaf.germ U x hx r) →\n      let T := RingedSpace.moduleStalkFunctor X.toRingedSpace x\n      let J : Ideal (X.presheaf.stalk x) := LinearMap.range (T.map I.toModulesι ≫ e.hom).hom\n      ∃ M : ModuleCat.{u} (X.presheaf.stalk x),\n        ∃ E : ∀ n : ℕ, T.obj ((formalShiftedQuotient I S d).obj (op n)) ≃ₗ[\n            X.presheaf.stalk x] (M ⧸ J ^ (n + 1) • (⊤ : Submodule _ M)),\n          ∀ (n : ℕ) (z : T.obj ((formalShiftedQuotient I S d).obj (op (n + 1)))),\n            E n ((T.map ((formalShiftedQuotient I S d).map\n              (homOfLE (Nat.le_succ n)).op)).hom z) =\n              Submodule.factorPow J M (Nat.le_succ (n + 1)) (E (n + 1) z)",
   "branch": "sheaf-dag",
   "by": "Y2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelShiftedStalkModel retired, the source module WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelShiftedStalkModel declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

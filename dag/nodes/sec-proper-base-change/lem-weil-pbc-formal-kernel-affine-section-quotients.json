@@ -108,13 +108,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineSectionQuotients",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelAffineSectionQuotients.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelAffineSectionQuotients",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CoherentFormalModuleKernelAffineSectionQuotients.lean",
   "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_affine_section_quotients",
   "statement": "theorem coherentFormalModule_kernel_affine_section_quotients\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)\n    (hc : ∀ (l m : ℕ) (h : m + c ≤ l),\n      Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) =\n        Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n            F.obj.map (homOfLE (Nat.le_add_right m c)).op)))\n    (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅\n      Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op),\n      e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m))\n    (U : X.affineOpens) :\n    let A := Γ(X, U.1)\n    let R := AdicCompletion (I.ideal U) A\n    let K := (I.ideal U).map (algebraMap A R)\n    ∃ N : ModuleCat.{u} R, Module.Finite R N ∧\n      ∃ L : Submodule R N,\n        ∃ q : ∀ m : ℕ,\n          ((ModuleCat.restrictScalars (algebraMap A R)).obj (ModuleCat.of R L))\n            →ₗ[A] Γ(S.obj (op m), U.1),\n          (∀ m : ℕ, Function.Surjective (q m)) ∧\n          (∀ (a b : ℕ) (h : a ≤ b) (z : L),\n            (S.map (homOfLE h).op).app U.1 (q b z) = q a z) ∧\n          (∀ (m : ℕ) (z : L), q m z = 0 ↔\n            L.subtype z ∈ K ^ (m + 1) • (⊤ : Submodule R N))",
   "branch": "sheaf-dag",
   "by": "J4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineSectionQuotients retired, the source module WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelAffineSectionQuotients declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -88,13 +88,14 @@
  "unit": "sk-thm-properbasechange",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.TruncationAbutmentCoconeAux",
-  "file": "lean/Sheaf/CategoryTheory/TruncationAbutmentCoconeAux.lean",
+  "module": "WeilConjectures.CategoryTheory.TruncationAbutmentCoconeAux",
+  "file": "lean/WeilConjectures/CategoryTheory/TruncationAbutmentCoconeAux.lean",
   "declaration": "CategoryTheory.truncation_abutment_cocone_aux",
   "statement": "theorem truncation_abutment_cocone_aux\n    {A : Type u₁} [Category.{v₁} A] [Abelian A]\n    [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A]\n    {B : Type u₂} [Category.{v₂} B] [Abelian B]\n    [IsGrothendieckAbelian.{v₂} B] [HasDerivedCategory.{w₂} B]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]\n    (K : CochainComplex.Plus A) (X : BigradedExactCouple B 0)\n    (hD : X.D = TruncationCouple.D F K)\n    (halpha : ∀ p q : ℤ, X.alpha p q =\n      eqToHom (by rw [hD]) ≫ TruncationCouple.alpha F K p q ≫\n        eqToHom (by rw [hD]))\n    (H : ℤ → B) (hH : H = fun n : ℤ ↦ (DerivedCategory.homologyFunctor B n).obj\n      (F.rightDerivedFunctor.obj (DerivedCategory.Q.obj K.obj)))\n    (j : ∀ n q : ℤ, X.D (n - q) q ⟶ H n)\n    (c : ∀ n : ℤ, X.D 0 n ⟶ H n)\n    (hj : ∀ n q, j n q = eqToHom (by rw [hD]; unfold TruncationCouple.D; congr 1; omega) ≫\n      (TruncationCouple.bridgeIso F (TruncationCouple.truncation K q) n).inv ≫\n      (DerivedCategory.homologyFunctor B n).map\n        (F.rightDerivedFunctor.map (DerivedCategory.Q.map (K.obj.ιTruncLE q))) ≫\n      eqToHom (by rw [hH]))\n    (hc : ∀ n, c n = eqToHom (by congr 1; omega) ≫ j n n) :\n    (∀ n, IsIso (c n)) ∧\n    (∀ n p, X.alphaDiagonal n p ≫ eqToHom (by congr 1; omega) ≫ j n (n-p) =\n      eqToHom (by congr 1; omega) ≫ j n (n-(p+1))) ∧\n    (∀ (n p : ℤ) (_ : 0 ≤ p), eqToHom (by congr 1 <;> omega) ≫ j n (n-p) =\n      X.incomingAlphaIter p.toNat 0 n ≫ c n)",
   "branch": "sheaf-dag",
   "by": "G2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.CategoryTheory.TruncationAbutmentCoconeAux retired, the source module WeilConjectures.CategoryTheory.TruncationAbutmentCoconeAux declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

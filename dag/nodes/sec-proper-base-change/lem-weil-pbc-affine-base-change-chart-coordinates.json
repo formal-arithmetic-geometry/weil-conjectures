@@ -88,13 +88,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineBaseChangeChartCoordinates",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineBaseChangeChartCoordinates.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineBaseChangeChartCoordinates",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineBaseChangeChartCoordinates.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affineBaseChange_chart_coordinates",
   "statement": "theorem exists_affineBaseChange_chart_coordinates {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) [IsAffineHom f]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : S.Opens) (hU : IsAffineOpen U)\n    (W : S'.Opens) (hW : IsAffineOpen W) (hWU : W ≤ g ⁻¹ᵁ U) :\n    let R := Γ(S, U)\n    let B := Γ(X, f ⁻¹ᵁ U)\n    let R' := Γ(S', W)\n    let M := Γ(F, f ⁻¹ᵁ U)\n    letI : Algebra R B := (f.app U).hom.toAlgebra\n    letI : Algebra R R' := (g.appLE U W hWU).hom.toAlgebra\n    letI : Module R M := Module.compHom M (f.app U).hom\n    letI : Algebra B (R' ⊗[R] B) := Algebra.TensorProduct.rightAlgebra\n    ∃ (a : Γ((tensorPullback g).obj ((pushforward f).obj F), W) ≃ₗ[R'] R' ⊗[R] M)\n      (b : Γ((pushforward f').obj ((tensorPullback g').obj F), W) ≃ₗ[R']\n        (R' ⊗[R] B) ⊗[B] M),\n      ∀ (r : R') (m : M),\n        b ((moduleBaseChangeMap f f' g g' sq.w F).app W (a.symm (r ⊗ₜ[R] m))) =\n          (r ⊗ₜ[R] (1 : B)) ⊗ₜ[B] m",
   "branch": "sheaf-dag",
   "by": "Q1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.AffineBaseChangeChartCoordinates retired, the source module WeilConjectures.AlgebraicGeometry.AffineBaseChangeChartCoordinates declares the same names"
  },
  "stmt_deps": [
   "lem-weil-pbc-module-base-change-map-open-restriction"

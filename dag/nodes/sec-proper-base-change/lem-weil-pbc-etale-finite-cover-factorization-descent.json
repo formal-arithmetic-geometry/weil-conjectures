@@ -123,13 +123,14 @@
  "unit": "sk-thm-iff",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFiniteCoverFactorizationDescent.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleFiniteCoverFactorizationDescent.lean",
   "declaration": "AlgebraicGeometry.etale_finiteCoverFactorizationDescent",
   "statement": "theorem etale_finiteCoverFactorizationDescent\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    (W : (D.obj (op i₀)).FullAffineEtale)\n    (n : ℕ) (V : Fin n → c.pt.Etale)\n    (a : ∀ q, V q ⟶\n      (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj W.obj)\n    (U : Fin n → (D.obj (op i₀)).Etale)\n    (b : ∀ q, V q ⟶\n      (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj (U q))\n    (ha : Sieve.ofArrows V a ∈ c.pt.smallEtaleTopology\n      ((MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj W.obj))\n    (hV : ∀ q, IsAffine (V q).left) :\n    let B := fun j : Over (op i₀) ↦ MorphismProperty.Over.pullback @Etale ⊤ (c.π.app j.left)\n    let F := fun j : Over (op i₀) ↦ MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)\n    let e := fun (j : Over (op i₀)) (Z : (D.obj (op i₀)).Etale) ↦\n      (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤)\n        (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom).symm).app Z\n    ∃ (j : Over (op i₀)) (Vj : Fin n → (D.obj j.left).Etale)\n      (aj : ∀ q, Vj q ⟶ (F j).obj W.obj)\n      (bj : ∀ q, Vj q ⟶ (F j).obj (U q))\n      (d : ∀ q, (B j).obj (Vj q) ≅ V q),\n      Sieve.ofArrows Vj aj ∈ (D.obj j.left).smallEtaleTopology ((F j).obj W.obj) ∧\n      (∀ q, IsAffine (Vj q).left) ∧\n      (∀ q, (B j).map (aj q) ≫ (e j W.obj).inv = (d q).hom ≫ a q) ∧\n      (∀ q, (B j).map (bj q) ≫ (e j (U q)).inv = (d q).hom ≫ b q)",
   "branch": "sheaf-dag",
   "by": "V1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent retired, the source module WeilConjectures.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

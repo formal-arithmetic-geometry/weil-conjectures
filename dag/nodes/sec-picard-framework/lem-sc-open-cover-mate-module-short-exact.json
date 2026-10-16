@@ -108,8 +108,8 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.OpenCoverMateModuleShortExact",
-  "file": "lean/Sheaf/Algebra/Homology/OpenCoverMateModuleShortExact.lean",
+  "module": "WeilConjectures.Algebra.Homology.OpenCoverMateModuleShortExact",
+  "file": "lean/WeilConjectures/Algebra/Homology/OpenCoverMateModuleShortExact.lean",
   "declaration": "SheafOfModules.open_cover_mate_module_shortExact",
   "declarations": [
    "SheafOfModules.open_cover_mate_module_shortExact"
@@ -117,7 +117,8 @@
   "statement": "theorem open_cover_mate_module_shortExact (X : AlgebraicGeometry.RingedSpace.{u})\n    (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})\n    (hR : R = (sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)\n    (U V : Opens X) (hcover : U ⊔ V = ⊤)\n    [(overFunctor.{u} R U).Additive] [(overFunctor.{u} R V).Additive]\n    [(overFunctor.{u} R (U ⊓ V)).Additive]\n    (SU : SheafOfModules.{u} (R.over U) ⥤ SheafOfModules.{u} R)\n    (SV : SheafOfModules.{u} (R.over V) ⥤ SheafOfModules.{u} R)\n    (SW : SheafOfModules.{u} (R.over (U ⊓ V)) ⥤ SheafOfModules.{u} R)\n    [SU.Additive] [SV.Additive] [SW.Additive]\n    (aU : SU ⊣ overFunctor.{u} R U) (aV : SV ⊣ overFunctor.{u} R V)\n    (aW : SW ⊣ overFunctor.{u} R (U ⊓ V))\n    (F : SheafOfModules.{u} R) :\n    let cU := overFunctorMap.{u} R (homOfLE inf_le_left : U ⊓ V ⟶ U)\n    let cV := overFunctorMap.{u} R (homOfLE inf_le_right : U ⊓ V ⟶ V)\n    let iU := (aW.homEquiv _ _).symm\n      (cU.inv.app F ≫\n        (overMap.{u} R (homOfLE inf_le_left : U ⊓ V ⟶ U)).map\n          (aU.unit.app ((overFunctor.{u} R U).obj F)) ≫\n        cU.hom.app (SU.obj ((overFunctor.{u} R U).obj F)))\n    let iV := (aW.homEquiv _ _).symm\n      (cV.inv.app F ≫\n        (overMap.{u} R (homOfLE inf_le_right : U ⊓ V ⟶ V)).map\n          (aV.unit.app ((overFunctor.{u} R V).obj F)) ≫\n        cV.hom.app (SV.obj ((overFunctor.{u} R V).obj F)))\n    ∀ hz : biprod.lift iU (-iV) ≫\n        biprod.desc (aU.counit.app F) (aV.counit.app F) = 0,\n      (ShortComplex.mk (biprod.lift iU (-iV))\n        (biprod.desc (aU.counit.app F) (aV.counit.app F)) hz).ShortExact",
   "branch": "sheaf-dag",
   "by": "F3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.Algebra.Homology.OpenCoverMateModuleShortExact retired, the source module WeilConjectures.Algebra.Homology.OpenCoverMateModuleShortExact declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

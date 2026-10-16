@@ -125,13 +125,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.GradedModuleRealizationFiniteType",
-  "file": "lean/Sheaf/Paper/GradedModuleRealizationFiniteType.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.GradedModuleRealizationFiniteType",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GradedModuleRealizationFiniteType.lean",
   "declaration": "AlgebraicGeometry.gradedModule_realization_isFiniteType",
   "statement": "theorem gradedModule_realization_isFiniteType\n    {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]\n    (graded : ℕ → Submodule A B)\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of A))\n    (G : ℕ → SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (mu : ∀ (m k : ℕ), graded k → (G m ⟶ G (m + k)))\n    (hfinite : ∀ x : X, ∃ (U : X.Opens), x ∈ U ∧\n      ∃ (r : ℕ) (d : Fin r → ℕ) (s : ∀ i : Fin r, (G (d i)).val.obj (op U)),\n        ∀ (m : ℕ) (V : X.Opens) (hVU : V ≤ U) (t : (G m).val.obj (op V))\n          (y : X), y ∈ V → ∃ (W : X.Opens) (hWV : W ≤ V), y ∈ W ∧\n            (G m).val.map (homOfLE hWV).op t ∈\n              Submodule.span ((moduleRings X.toRingedSpace).obj.obj (op W))\n                {z | ∃ (i : Fin r), d i ≤ m ∧\n                  ∃ b : graded (m - d i),\n                    HEq z ((mu (d i) (m - d i) b).val.app (op W)\n                      ((G (d i)).val.map (homOfLE (hWV.trans hVU)).op (s i)))})\n    :\n    let g := Spec.map (CommRingCat.ofHom (algebraMap A B))\n    let Y := pullback f g\n    let pi : Y ⟶ X := pullback.fst f g\n    let fB : Y ⟶ Spec (.of B) := pullback.snd f g\n    ∀ (F : Y.Modules), F.IsQuasicoherent →\n      ∀ (iota : ∀ m : ℕ, G m ⟶ (Scheme.Modules.pushforward pi).obj F),\n        Nonempty (IsColimit (Cofan.mk ((Scheme.Modules.pushforward pi).obj F) iota)) →\n          (∀ (k m : ℕ) (b : graded k),\n            mu m k b ≫ iota (m + k) = iota m ≫\n              (Scheme.Modules.pushforward pi).map\n                (F.smulHom (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b.val))) →\n          F.IsFiniteType",
   "branch": "sheaf-dag",
   "by": "W2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.Paper.GradedModuleRealizationFiniteType retired, the source module WeilConjectures.AlgebraicGeometry.GradedModuleRealizationFiniteType declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

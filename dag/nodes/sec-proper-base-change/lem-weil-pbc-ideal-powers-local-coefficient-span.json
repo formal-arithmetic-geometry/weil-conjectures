@@ -104,13 +104,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.IdealPowersLocalCoefficientSpan",
-  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowersLocalCoefficientSpan.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.IdealPowersLocalCoefficientSpan",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/IdealPowersLocalCoefficientSpan.lean",
   "declaration": "AlgebraicGeometry.idealPowersLocalCoefficientSpan",
   "statement": "theorem idealPowersLocalCoefficientSpan {A : Type v} [CommRing A]\n    {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))\n    (I : Ideal A) (J : X.IdealSheafData)\n    (hJ : J = (Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : X.Opens) (hU : IsAffineOpen U) (r : ℕ) (u : Fin r → Γ(F, U))\n    (hu : Submodule.span Γ(X, U) (Set.range u) = ⊤)\n    (m : ℕ) (V : X.Opens) (hVU : V ≤ U)\n    (t : (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F).val.obj\n      (op V)) (y : X) (hyV : y ∈ V) :\n    ∃ (W : X.Opens) (hWV : W ≤ V), y ∈ W ∧\n      ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι m).2 F).app\n        W).hom\n        ((Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F).val.map\n          (homOfLE hWV).op t) ∈\n      Submodule.span Γ(X, W)\n        {z | ∃ (i : Fin r) (a : A), a ∈ I ^ m ∧\n          z = (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫\n            f.appLE ⊤ W le_top).hom a) •\n              F.val.map (homOfLE (hWV.trans hVU)).op (u i)}",
   "branch": "sheaf-dag",
   "by": "N2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.IdealPowersLocalCoefficientSpan retired, the source module WeilConjectures.AlgebraicGeometry.IdealPowersLocalCoefficientSpan declares the same names"
  },
  "proof_deps": [
   "lem-weil-pbc-ideal-powers-local-coefficient-span-affine-core"

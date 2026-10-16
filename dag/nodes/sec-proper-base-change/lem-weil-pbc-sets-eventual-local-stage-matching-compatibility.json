@@ -110,13 +110,14 @@
  "unit": "sk-thm-iff",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleSetEventualLocalStageCompatibility",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetEventualLocalStageCompatibility.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleSetEventualLocalStageCompatibility",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleSetEventualLocalStageCompatibility.lean",
   "declaration": "AlgebraicGeometry.etaleSet_eventualLocalStageCompatibility",
   "statement": "theorem etaleSet_eventualLocalStageCompatibility\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1)))\n    (W : (D.obj (op i₀)).FullAffineEtale)\n    (t : ((Scheme.etaleSetPullback (c.π.app (op i₀))).obj G).obj.obj\n      (op ((MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj W.obj))) :\n    let H := fun j : Over (op i₀) ↦ (Scheme.etaleSetPullback (D.map j.hom)).obj G\n    let L := (Scheme.etaleSetPullback (c.π.app (op i₀))).obj G\n    let B := fun j : Over (op i₀) ↦ MorphismProperty.Over.pullback @Etale ⊤ (c.π.app j.left)\n    let Y := fun j : Over (op i₀) ↦\n      (MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj W.obj\n    let e := fun j : Over (op i₀) ↦\n      (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤)\n        (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom).symm).app W.obj\n    let β := fun j : Over (op i₀) ↦\n      etaleSetSheafComparison (c.π.app j.left) (D.map j.hom)\n        (c.π.app (op i₀)) (c.w j.hom) G\n    ∀ (j : Over (op i₀)) (n : ℕ) (V : Fin n → (D.obj j.left).Etale)\n      (a : ∀ q, V q ⟶ Y j) (s : ∀ q, (H j).obj.obj (op (V q))),\n      (∀ q, IsAffine (V q).left) →\n      (∀ q, (β j).hom.app (op (V q)) (s q) =\n        L.obj.map ((B j).map (a q) ≫ (e j).inv).op t) →\n    ∃ (j' : Over (op i₀)) (r : j' ⟶ j),\n      let b := MorphismProperty.Over.pullback @Etale ⊤ (D.map r.left)\n      let hr := (D.map_comp r.left j.hom).symm.trans\n        (congrArg (fun z : j'.left ⟶ op i₀ ↦ D.map z) r.w)\n      let d := (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤)\n        (D.map r.left) (D.map j.hom) (D.map j'.hom) hr.symm).app W.obj\n      let V' := fun q ↦ b.obj (V q)\n      let a' := fun q ↦ b.map (a q) ≫ d.inv\n      let s' := fun q ↦ (etaleSetSheafComparison (D.map r.left) (D.map j.hom)\n        (D.map j'.hom) hr G).hom.app (op (V q)) (s q)\n      Presieve.Arrows.Compatible (H j').obj a' s'",
   "branch": "sheaf-dag",
   "by": "V3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.EtaleSetEventualLocalStageCompatibility retired, the source module WeilConjectures.AlgebraicGeometry.EtaleSetEventualLocalStageCompatibility declares the same names"
  },
  "reviewed": {
   "date": "2026-10-12",

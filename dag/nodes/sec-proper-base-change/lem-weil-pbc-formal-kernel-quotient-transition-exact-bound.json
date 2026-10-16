@@ -85,13 +85,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotientTransitionExactBound",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelQuotientTransitionExactBound.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FormalKernelTransitionBound",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalKernelTransitionBound.lean",
   "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_quotient_transition_exact_bound",
   "statement": "theorem coherentFormalModule_kernel_quotient_transition_exact_bound\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)\n    (hc : ∀ (l m : ℕ) (h : m + c ≤ l),\n      Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) =\n        Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n            F.obj.map (homOfLE (Nat.le_add_right m c)).op)))\n    (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅\n      Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op),\n      e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) :\n    ∃ b : ℕ, ∀ d : ℕ, max c b ≤ d → ∀ n : ℕ,\n      ∃ hz : Scheme.idealModuleProductι\n          (Scheme.idealSheafPower I.toModulesι (n + 1)).2\n          ((formalShiftedQuotient I S d).obj (op (n + 1))) ≫\n          (formalShiftedQuotient I S d).map (homOfLE (Nat.le_succ n)).op = 0,\n        (ShortComplex.mk\n          (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι (n + 1)).2\n            ((formalShiftedQuotient I S d).obj (op (n + 1))))\n          ((formalShiftedQuotient I S d).map (homOfLE (Nat.le_succ n)).op) hz).Exact",
   "branch": "sheaf-dag",
   "by": "Y3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotientTransitionExactBound retired, the source module WeilConjectures.AlgebraicGeometry.FormalKernelTransitionBound declares the same names"
  },
  "proof": [
   {

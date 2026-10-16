@@ -128,13 +128,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineFormalMapLimitDictionary",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineFormalMapLimitDictionary.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineFormalMapLimitDictionary",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineFormalMapLimitDictionary.lean",
   "declaration": "AlgebraicGeometry.affine_formal_map_limit_dictionary",
   "statement": "theorem affine_formal_map_limit_dictionary\n    {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData)\n    (H : CoherentModules X) (N : CoherentFormalModule X J)\n    (δ : N ⟶ (completion X J).obj H) :\n    let A := Γ(X, ⊤)\n    let I := J.ideal ⟨⊤, isAffineOpen_top X⟩\n    let S := AdicCompletion I A\n    let L := tilde.functor A ⋙ Scheme.Modules.pullback X.isoSpec.hom\n    let C := L ⋙ formalCompletionFunctor J\n    ∀ (P : ModuleCat.{u} A) (ε : L.obj P ≅ H.obj)\n      (η : C.obj P ≅ C.obj (ModuleCat.of A (S ⊗[A] P))),\n    ∃ Q : ModuleCat.{u} S,\n      letI := Module.restrictScalars A S Q\n      letI := IsScalarTower.restrictScalars A S Q\n      ∃ (φ : Q →ₗ[S] S ⊗[A] P)\n        (ρ : N.obj ≅ C.obj (ModuleCat.of A Q))\n        (a : Q ≃ₗ[A] ↥(limit (N.obj ⋙\n          SheafOfModules.evaluation X.ringCatSheaf (op ⊤)) : ModuleCat A))\n        (b : (S ⊗[A] P) ≃ₗ[A] ↥(limit (((completion X J).obj H).obj ⋙\n          SheafOfModules.evaluation X.ringCatSheaf (op ⊤)) : ModuleCat A)),\n        δ.hom = ρ.hom ≫ C.map (ModuleCat.ofHom (φ.restrictScalars A)) ≫\n          η.inv ≫ (formalCompletionFunctor J).map ε.hom ∧\n        ∀ x : Q, b (φ x) =\n          (lim.map (Functor.whiskerRight δ.hom\n            (SheafOfModules.evaluation X.ringCatSheaf (op ⊤)))).hom (a x)",
   "branch": "sheaf-dag",
   "by": "G2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.AffineFormalMapLimitDictionary retired, the source module WeilConjectures.AlgebraicGeometry.AffineFormalMapLimitDictionary declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

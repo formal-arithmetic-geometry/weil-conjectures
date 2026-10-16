@@ -108,13 +108,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStalkPresentation",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelStalkPresentation.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelStalkPresentation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CoherentFormalModuleKernelStalkPresentation.lean",
   "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_stalk_presentation",
   "statement": "theorem coherentFormalModule_kernel_stalk_presentation\n    {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)\n    (hc : ∀ (l m : ℕ) (h : m + c ≤ l),\n      Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) =\n        Subobject.mk\n          (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n            F.obj.map (homOfLE (Nat.le_add_right m c)).op)))\n    (hS : ∀ m : ℕ, ∃ e : S.obj (op m) ≅\n      Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op),\n      e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) :\n    ∃ b : ℕ, ∀ x : X,\n      ∀ e : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj\n          (SheafOfModules.unit X.ringCatSheaf) ≅\n          ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x),\n      (∀ (U : X.Opens) (hx : x ∈ U) (r : Γ(X, U)),\n        e.hom (TopCat.Presheaf.germ (SheafOfModules.unit X.ringCatSheaf).val.presheaf\n          U x hx r) = X.presheaf.germ U x hx r) →\n      let T := RingedSpace.moduleStalkFunctor X.toRingedSpace x\n      let J : Ideal (X.presheaf.stalk x) := LinearMap.range (T.map I.toModulesι ≫ e.hom).hom\n      ∃ M : ModuleCat.{u} (X.presheaf.stalk x),\n        ∃ p : ∀ m : ℕ, M →ₗ[X.presheaf.stalk x] T.obj (S.obj (op m)),\n          (∀ m : ℕ, Function.Surjective (p m)) ∧\n          (∀ (a b : ℕ) (h : a ≤ b) (z : M),\n            (T.map (S.map (homOfLE h).op)).hom (p b z) = p a z) ∧\n          (∀ (d : ℕ), max c b ≤ d → ∀ n : ℕ,\n            LinearMap.ker (p (n + d)) ≤\n              J ^ (n + 1) • (⊤ : Submodule (X.presheaf.stalk x) M))",
   "branch": "sheaf-dag",
   "by": "Y2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStalkPresentation retired, the source module WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelStalkPresentation declares the same names"
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -154,15 +154,16 @@
   "note": "lead item: Stacks 070M via split envelopes; worker W-roos0207; mathematics reviewed in full by R-roos0216 (reviewer sub-agent of L); reviewed field set by L at 04:19 UTC (the lead splits were committed without it, so the queue still counted them as open)"
  },
  "lean": {
-  "module": "Sheaf.Algebra.Homology.RoosComplex",
+  "module": "WeilConjectures.Algebra.Homology.RoosComplex",
   "declaration": "CategoryTheory.roosComplex_quasiIso",
-  "file": "lean/Sheaf/Algebra/Homology/RoosComplex.lean",
+  "file": "lean/WeilConjectures/Algebra/Homology/RoosComplex.lean",
   "branch": "sheaf-dag",
   "by": "N1",
   "date": "2026-10-11",
   "existing": false,
   "statement": "theorem roosComplex_quasiIso (A : Type u) [Category.{v} A] [Abelian A] [HasLimitsOfShape (Discrete ℕ) A] [HasExactLimitsOfShape (Discrete ℕ) A] [EnoughInjectives A] [HasDerivedCategory.{w} A] (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective] (P L C : CochainComplex A ℤ) (eP : ∀ p : ℤ, P.X p ≅ ∏ᶜ (fun n : ℕ ↦ (I.X p).obj (Opposite.op n))) (hP : ∀ p q : ℤ, P.d p q ≫ (eP q).hom = (eP p).hom ≫ Limits.Pi.map (fun n ↦ (I.d p q).app (Opposite.op n))) (oneSubS : P ⟶ P) (hS : ∀ p : ℤ, oneSubS.f p = (eP p).hom ≫ towerTransitionEndomorphism (fun n ↦ (I.X p).map (homOfLE (Nat.le_succ n)).op) ≫ (eP p).inv) (iota : L ⟶ P) (hKernel : ∀ p : ℤ, iota.f p ≫ oneSubS.f p = 0) (hL : ∀ p : ℤ, IsLimit (KernelFork.ofι (iota.f p) (hKernel p))) (eC : ∀ p : ℤ, C.X (p + 1) ≅ P.X p ⊞ P.X (p + 1)) (hC : ∀ p : ℤ, C.d (p + 1) (p + 1 + 1) ≫ (eC (p + 1)).hom = (eC p).hom ≫ biprod.lift (-(biprod.fst ≫ P.d p (p + 1)) - biprod.snd ≫ oneSubS.f (p + 1)) (biprod.snd ≫ P.d (p + 1) (p + 1 + 1))) : ∃ eta : L ⟶ C, (∀ p : ℤ, eta.f (p + 1) ≫ (eC p).hom = biprod.lift 0 (iota.f (p + 1))) ∧ QuasiIso eta ∧ IsIso ((DerivedCategory.Q).map eta)",
-  "note": "Independent second reading replaced hollow hypotheses, restored exact products and K-injectivity, and specified the product, transition, kernel and signed cone; conclusion constructs the canonical map and records its derived image as an isomorphism."
+  "note": "Independent second reading replaced hollow hypotheses, restored exact products and K-injectivity, and specified the product, transition, kernel and signed cone; conclusion constructs the canonical map and records its derived image as an isomorphism.",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.Algebra.Homology.RoosComplex retired, the source module WeilConjectures.Algebra.Homology.RoosComplex declares the same names"
  },
  "reviewed_lean": {
   "date": "2026-10-11",
