@@ -7,7 +7,7 @@
    "place": "step 2 of its split (source: proof of Theorem 27.6, p. 156, third and fourth lines ('move the inner sum outside', '(27.5)'); also literature/deligne-weil-I_PMIHES-1974-43.pdf, (1.5), p. 276, the line before (1.5.4))",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The formal exponential turns sums into products",
@@ -20,9 +20,52 @@
   "def-weil-formal-power-series",
   "def-weil-power-series-exponential"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $N\\geq0$ and write $[T^N]A$ for the degree-$N$ coefficient of a series $A$ [def-weil-formal-power-series]. Since $U,W\\in TR[[T]]$, the Cauchy product formula shows that $U^kW^l$ has no terms below degree $k+l$. The definition [def-weil-power-series-exponential] therefore permits truncating each exponential at power $N$ when computing any coefficient of degree at most $N$. Expand $(U+W)^r=\\sum_{k=0}^r\\binom rk U^kW^{r-k}$ by distributivity (induction on $r$, with Pascal's recurrence); commutativity of $R$ is used here. Since $R$ is a $\\mathbf Q$-algebra, $\\binom rk/r!=1/(k!(r-k)!)$. Thus the following are equal finite sums:\n$$\n\\begin{aligned}\n[T^N]\\exp(U+W)\n&=\\sum_{r=0}^N\\sum_{k=0}^r\\frac{[T^N](U^kW^{r-k})}{k!(r-k)!}\\\\\n&=\\sum_{k=0}^N\\sum_{l=0}^N\\frac{[T^N](U^kW^l)}{k!l!}\\\\\n&=[T^N]\\bigl(\\exp(U)\\exp(W)\\bigr).\n\\end{aligned}\n$$\nFor the middle equality set $l=r-k$ and add the zero terms with $k+l>N$; for the last equality multiply the two truncated sums and use the Cauchy product formula. This also covers $N=0$, when only $k=l=0$ contributes $1$. Equality of all coefficients proves the addition identity.",
+   "uses": [
+    "def-weil-power-series-exponential",
+    "def-weil-formal-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "§26, p. 151 (definition of the formal exponential); proof of Theorem 27.6, p. 156 (implicit addition identity); the finite truncation and binomial calculation are supplied by the second reader"
+   }
+  },
+  {
+   "text": "Putting $U=0$ in the defining series gives $\\exp(0)=1$. Applying the addition identity to $U$ and $-U$ gives $1=\\exp(0)=\\exp(U)\\exp(-U)$, and commutativity gives the corresponding left inverse; hence $\\exp(U)$ is a unit and $\\exp(-U)=\\exp(U)^{-1}$.",
+   "uses": [
+    "def-weil-power-series-exponential",
+    "def-weil-formal-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "§26, p. 151, formal exponential at zero and the inverse obtained by replacing U by -U"
+   }
+  },
+  {
+   "text": "For nonnegative integers $n$, the identity $\\exp(nU)=\\exp(U)^n$ follows by induction: at $n=0$ both sides are $1$ by step 2, and at $n+1$ step 1 gives $\\exp((n+1)U)=\\exp(nU)\\exp(U)$. If $\\varepsilon=-n$ with $n>0$, step 2 applied to $nU$ gives $\\exp(\\varepsilon U)=\\exp(nU)^{-1}=(\\exp(U)^n)^{-1}=\\exp(U)^{-n}$, with integer powers taken in the group of units established in step 2. Every integer multiple of $U$ still has constant coefficient $0$ [def-weil-power-series-exponential]. Now induct on a finite index set $I$: the empty family gives $\\exp(0)=1$, the empty product; adjoining $j\\notin I$ gives $\\exp(\\sum_{i\\in I}\\varepsilon_iU_i+\\varepsilon_jU_j)=\\exp(\\sum_{i\\in I}\\varepsilon_iU_i)\\exp(\\varepsilon_jU_j)$ by step 1. Substitute the induction hypothesis and the just-proved integer-power identity to obtain the required product over $I\\cup\\{j\\}$.",
+   "uses": [
+    "def-weil-power-series-exponential"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "proof of Theorem 27.6, p. 156, finite alternating sum and product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-power-series-exponential",
+  "def-weil-formal-power-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Milne §26, p. 151 and proof of Theorem 27.6, p. 156 use the identity implicitly; the complete finite-coefficient calculation and induction are supplied by Q31"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -44,10 +87,52 @@
    "results": "log, logOf, HasSubst.log, HasSubst.exp_sub_one, constantCoeff_logOf, logOf_one_add_X; no logOf_mul or exp/log inverse statements",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal power series exponential evaluated by substitution satisfies exp of sum equals product",
+   "results": "PowerSeries.exp_mul_exp_eq_exp_add (Mathlib/RingTheory/PowerSeries/Exp): rescale a (exp A) * rescale b (exp A) = rescale (a+b) (exp A), plus PowerSeries.map_exp and exp_mul_exp_neg_eq_one; these concern constant rescalings or coefficient maps, not arbitrary substituted U,W.",
+   "date": "2026-10-17",
+   "verdict": "no match: only the constant-rescaling identity is returned"
+  },
+  {
+   "tool": "leansearch",
+   "query": "formal exponential of substituted power series is additive",
+   "results": "DividedPowers.exp_add and DividedPowers.exp_add' (divided-power exponentials), MvPowerSeries.subst_pow, PowerSeries.exp_mul_exp_eq_exp_add (constant rescaling), PowerSeries.map_exp; none states the arbitrary-substitution claim.",
+   "date": "2026-10-17",
+   "verdict": "no match: related divided-power and rescaling results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a commutative rational algebra, composition of the exponential power series with f plus g equals the product of its compositions with f and g, when both constant coefficients vanish",
+   "results": "8 hits: PowerSeries.exp_mul_exp_eq_exp_add, exp_mul_exp_neg_eq_one, exp_pow_sum, map_exp, NormedSpace.exp_add, exp_sum, exp_add_of_mem_ball, PowerSeries.exp_pow_eq_rescale_exp. Read PowerSeries/Exp.lean:123–169: rescaling constants, powers and coefficient maps only; NormedSpace results assume a normed complete algebra.",
+   "date": "2026-10-17",
+   "verdict": "no match for arbitrary substitution over an arbitrary commutative Q-algebra"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries.exp, PowerSeries.subst",
+   "results": "2 hits: PowerSeries.subst_exp_log and PowerSeries.subst_log_exp_sub_one (formal exp/log inverse identities).",
+   "date": "2026-10-17",
+   "verdict": "no match: neither statement gives exponential additivity"
+  },
+  {
+   "tool": "grep",
+   "query": "exp_add|exp_mul_exp|exp_pow_sum|subst_exp",
+   "results": "Searched RingTheory/PowerSeries. 5 hits: Exp.lean:34,35,37 (module documentation), :123 exp_mul_exp_eq_exp_add, :150 exp_mul_exp_neg_eq_one. Read declarations :123–169 separately, including exp_pow_sum.",
+   "date": "2026-10-17",
+   "verdict": "no match: the multiplication identity rescales by constants, not arbitrary substituted series"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exponential under formal power series substitution with zero constant coefficient preserves addition in a commutative rational algebra",
+   "results": "8 hits: PowerSeries.subst_add, HasSubst.of_constantCoeff_zero, HasSubst.of_constantCoeff_zero', MvPowerSeries.subst_add, PowerSeries.HasSubst.add, PowerSeries.substAlgHom, MvPowerSeries.subst_pow, MvPowerSeries.HasSubst.add. These concern the substitution homomorphism in its outer argument, not exponential additivity in the substituted argument.",
+   "date": "2026-10-17",
+   "verdict": "no match for the exponential-addition identity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +152,21 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-tracetodeterminant"
+ "unit": "sk-thm-tracetodeterminant",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-power-series-exp-hom",
+  "worker": "stage1",
+  "summary": "Audited the unchanged statement against Milne §26 and the implicit exponential-product step of Theorem 27.6. The three elementary steps give a finite truncation/binomial coefficient calculation for addition, construct the inverse, and explicitly induct on integer powers and finite families. No finished declaration or exact Mathlib match was found. Second reading corrected the current-run grep evidence and distinguished the source use from the supplied proof.",
+  "blueprint": "Realizes prop-trace-determinant step 2: the coefficient rearrangement and exponential homomorphism used to pass from the alternating sum of trace series to the alternating product of characteristic factors.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-db4b87d94",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-db4b87d94 (reviewer sub-agent of L); spot-checked: I read the item in full, the two cited definition nodes (def-weil-formal-power-series and def-weil-power-series-exponential, both Mathlib leaves), the parent prop-trace-determinant step 2, and the unit sk-thm-tracetodeterminant. I checked Milne LEC Thm 27.6 proof p.156: the line '(move the inner sum outside)' is exactly the finite-family clause with exponents (-1)^r, used without proof. I also checked Milne section 26 p.151 and Deligne Weil I (1.5) p.276. The statement holds over any commutative Q-algebra, and the parent needs only a char-0 field. Nothing is added or weakened. Step 1 is a correct finite calculation: truncate each series at degree N, which the exponential node allows because U^r is divisible by T^r; expand with binomial coefficients; reindex l=r-k and add the zero terms with k+l>N; then take the Cauchy product of the truncations. Step 2 gives exp(0)=1 and a two-sided inverse by commutativity. Step 3 does the induction on n>=0, the case of negative exponents, and the induction over finite index sets, with all base cases written out. I tested by exact rational computation up to degree 6 on random U and W: exp(U+W)=exp(U)exp(W), exp(U)exp(-U)=1 and exp(3U)=exp(U)^3 all hold. The zero, empty-family, singleton and exponent 0/±1 cases also hold. There are no new nodes, so B and D are vacuous. Duplicate searches of dag/nodes and of both blueprint trees found none, so same_as=[] is correct. No off-unit citation, so no tool_uses. No SGA citation. I read Mathlib RingTheory/PowerSeries/Exp.lean lines 55-165: exp_mul_exp_eq_exp_add covers constant rescalings only, so the 'no match' verdict is correct. One harmless remark: the report mentions citations.json and searches.jsonl, which are not in the commit. No fixes."
+ }
 }

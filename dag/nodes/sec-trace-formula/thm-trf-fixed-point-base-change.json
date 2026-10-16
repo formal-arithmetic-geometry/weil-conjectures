@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-trf-fixed-point-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change in the fixed-point square",
@@ -18,43 +18,193 @@
   "def-trf-coefficient-conventions",
   "def-trf-correspondence",
   "def-trf-fixed-scheme",
-  "def-weil-finite-field-fiber"
+  "def-weil-finite-field-fiber",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-weil-integral-rational-qbar-compact-support"
  ],
  "proof": [
   {
-   "text": "The first identification is the functoriality of the derived pullback\nalong the equality $c_2i_F=d$ of\n[prop-trf-fixed-square-cartesian]:\n\n$$\nLi_F^*Lc_2^*K=L(c_2i_F)^*K=Ld^*K.\n$$",
+   "text": "Check the geometric hypotheses of the operation package. By [def-trf-correspondence], $X$ and $C$ are separated finite-type $k$-schemes. Put $Y=X\\times_sX$. The projection $Y\\to X$ is the base change of $X\\to s$, hence separated finite type by [lem-pod-separated-finite-type-base-change]. Composition of separated and locally finite-type morphisms is [lem-weil-pbc-proper-fp-permanence](e); quasi-compactness of $Y$ follows from [lem-weil-pbc-qcqs-morphism-permanence](2). Thus $Y$ is separated finite type over $k$. For any $k$-map $v:T\\to U$ between separated finite-type $k$-schemes, apply [lem-weil-pbc-proper-fp-permanence](f) to $T\\to U\\to s$ to obtain local finite type; apply [lem-weil-pbc-separated-cancellation](b) to obtain separatedness. Separatedness of $U$ implies quasi-separatedness by [lem-pc-separated-quasi-separated], so [lem-weil-pbc-qcqs-morphism-permanence](1) makes $v$ quasi-compact; hence it is finite type. Apply this to $c:C\\to Y$, $\\Delta_X:X\\to Y$, and $c_2:C\\to X$. The square in [prop-trf-fixed-square-cartesian] now makes $d$ a base change of $c$ and $i_F$ a base change of $\\Delta_X$. By [lem-pod-separated-finite-type-base-change], $d:F\\to X$ and $i_F:F\\to C$ are separated finite type. In particular $d$ is locally of finite type and quasi-compact; compose $d$ with $X\\to s$. Clause (e) of [lem-weil-pbc-proper-fp-permanence] gives separatedness and local finite type of $F\\to s$, and clause (2) of [lem-weil-pbc-qcqs-morphism-permanence] makes $F$ quasi-compact since $X$ is quasi-compact. Thus $F$ is separated finite type over $k$, so the four corners and all four arrows satisfy the package hypotheses.",
    "uses": [
+    "def-trf-correspondence",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-pc-separated-quasi-separated",
     "prop-trf-fixed-square-cartesian"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-fixed-point-base-change.proof.md",
+    "place": "Proof, hypotheses for the second paragraph; Stacks 01KU, 01KV, 03GI, 01T3, 01T4, 01T8"
+   }
   },
   {
-   "text": "The second is the compact-support exchange\n$Lg^*Rf_!\\xrightarrow{\\sim}Rf'_!Lg'^*$ of\n[def-exchange-projection] (and of the six-operations package\n[prop-functor-package], item (4)) applied to the Cartesian fixed\nsquare of [prop-trf-fixed-square-cartesian] with $f=c$,\n$g=\\Delta_X$, $f'=d$, $g'=i_F$. The right-adjoint form is\nobtained by taking right adjoints of the two sides and using the\ncompatibility of the exchange with the units and counits of the\nadjunctions of [def-trf-admissibility]: the right adjoint of\n$L\\Delta_X^*Rc_!$ is $Rc^!R\\Delta_{X*}$, and that of $Rd_!Li_F^*$\nis $Ri_{F*}Rd^!$. (The derived pullbacks of\n[def-weil-derived-pullback-tensor-hom] used in the first\nidentification are the ones defined by exact inverse image followed by\nthe flat extension along the constant coefficient sheaf; no analogue of\nthese statements for the single exceptional leg $c_1$ is asserted\n(the naive version $Li_F^*Rc_1^!K\\cong Rd^!K$ is false).",
+   "text": "At $A=A_{E,n}$, use the constant-coefficient derived pullbacks of [def-weil-derived-pullback-tensor-hom]. The maps of constant ring sheaves in [prop-weil-pbc-proetale-constant-ring-map] send each constant section $a$ to $a$. The direct and successive identifications therefore agree on constants and on sections glued from their clopen fibres; uniqueness in the sheafification construction makes the coefficient identification for the composite the composite of the identifications. Thus the ring identifications meet the composition theorem’s hypothesis. Apply [lem-weil-pbc-proetale-derived-pullback-composition] with $h=i_F$ and $k=c_2$, and invert its composition comparison. Since $c_2i_F=d$ by [prop-trf-fixed-square-cartesian], its value at $K$ is the natural isomorphism $Li_F^*Lc_2^*K\\simeq L(c_2i_F)^*K=Ld^*K$. This proves the ordinary-leg assertion, with the specified derived pullback rather than an exceptional inverse image.",
    "uses": [
-    "def-exchange-projection",
-    "prop-functor-package",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
     "prop-trf-fixed-square-cartesian",
-    "def-trf-admissibility",
-    "def-weil-derived-pullback-tensor-hom"
+    "prop-weil-pbc-proetale-constant-ring-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-fixed-point-base-change.proof.md",
+    "place": "Proof, first paragraph and displayed pullback-composition equation; Stacks 0D6D, lemma-derived-pullback-composition"
+   }
+  },
+  {
+   "text": "In the Cartesian square of [prop-trf-fixed-square-cartesian], substitute $(f,g,f',g')=(c,\\Delta_X,d,i_F)$ into clause (4) of [prop-functor-package]. Step 1 checks the scheme hypotheses; $A_{E,n}$ with $\\ell\\ne\\operatorname{char}(k)$ is its finite coefficient stage, and $M\\in D^b_{ctf}(C,A)$ is in its stated bounded finite-Tor domain. Its compact-support comparison, the exchange transformation defined in [def-exchange-projection], gives a natural isomorphism $\\alpha:L\\Delta_X^*Rc_!\\xrightarrow{\\sim}Rd_!Li_F^*$. Evaluating at $M$ proves the compact-support assertion. Invertibility is taken from the theorem [prop-functor-package], not from the definition of the transformation.",
+   "uses": [
+    "prop-trf-fixed-square-cartesian",
+    "prop-functor-package",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-fixed-point-base-change.proof.md",
+    "place": "Proof, second paragraph: compact-support exchange with f=c, g=diagonal, f′=d, g′=i_F"
+   }
+  },
+  {
+   "text": "Set $P_1=L\\Delta_X^*Rc_!$ and $P_2=Rd_!Li_F^*$. The finite-stage exceptional adjunctions and their constructible domains are supplied by [prop-functor-package], in the notation of [def-trf-admissibility]. Clause (1) of [fix-prop-adjunctions] supplies the ordinary adjunctions $L\\Delta_X^*\\dashv R\\Delta_{X*}$ and $Li_F^*\\dashv Ri_{F*}$. The pullbacks and direct images preserve $D^b_{ctf}$ by the finite-stage domain assertions of [prop-functor-package]. Because $D^b_{ctf}$ is a full subcategory of $D^b_c$, the ordinary adjunction Hom bijections for objects in $D^b_{ctf}$ have the same Hom sets, so they restrict to adjunctions on $D^b_{ctf}$ with the same units and counits. Compose the adjunctions using [def-weil-pbc-composite-adjunction]. Explicitly, for $M\\in D^b_{ctf}(C,A)$ and $N\\in D^b_{ctf}(X,A)$ the two composites of Hom bijections are $\\operatorname{Hom}(P_1M,N)\\cong\\operatorname{Hom}(Rc_!M,R\\Delta_{X*}N)\\cong\\operatorname{Hom}(M,Rc^!R\\Delta_{X*}N)$ and $\\operatorname{Hom}(P_2M,N)\\cong\\operatorname{Hom}(Li_F^*M,Rd^!N)\\cong\\operatorname{Hom}(M,Ri_{F*}Rd^!N)$. Thus $P_1\\dashv Q_1=Rc^!R\\Delta_{X*}$ and $P_2\\dashv Q_2=Ri_{F*}Rd^!$ with their pasted units and counits. These are constructible adjunctions, so no unrestricted ambient pro-etale exceptional adjoint is needed.",
+   "uses": [
+    "prop-functor-package",
+    "def-trf-admissibility",
+    "fix-prop-adjunctions",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-fixed-point-base-change.proof.md",
+    "place": "Proof, second paragraph: identification of the two right adjoints; Stacks 0DV0, lemma-compose-counits"
+   }
+  },
+  {
+   "text": "Write $\\eta_j,\\varepsilon_j$ for the composite adjunction data of step 4. Apply [lem-trf-adjoint-mate] to the natural isomorphism $\\alpha:P_1\\xrightarrow{\\sim}P_2$ from step 3. It gives the natural isomorphism $\\beta:Q_1\\to Q_2$ with $\\beta=(Q_2\\varepsilon_1)\\circ(Q_2\\alpha^{-1}Q_1)\\circ(\\eta_2Q_1)$ and inverse $(Q_1\\varepsilon_2)\\circ(Q_1\\alpha Q_2)\\circ(\\eta_1Q_2)$. The lemma also states both unit and counit compatibility and uniqueness. Consequently this is the specified right-adjoint comparison; the inverse of $\\alpha$ in the formula accounts for its direction. Evaluation at $N$ gives $Rc^!R\\Delta_{X*}N\\xrightarrow{\\sim}Ri_{F*}Rd^!N$, the final assertion.",
+   "uses": [
+    "lem-trf-adjoint-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-fixed-point-base-change.proof.md",
+    "place": "Proof, second paragraph: taking right adjoints and compatibility with units and counits"
+   }
   }
  ],
  "proof_deps": [
+  "def-trf-correspondence",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-pc-separated-quasi-separated",
   "prop-trf-fixed-square-cartesian",
-  "def-exchange-projection",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-weil-pbc-proetale-constant-ring-map",
   "prop-functor-package",
+  "def-exchange-projection",
   "def-trf-admissibility",
-  "def-weil-derived-pullback-tensor-hom"
+  "fix-prop-adjunctions",
+  "def-weil-pbc-composite-adjunction",
+  "lem-trf-adjoint-mate"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-fixed-point-base-change.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-fixed-point-base-change.proof.md",
+  "place": "Proof, both paragraphs, with geometric hypotheses and the composite-adjunction/mate formulas made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compact support base change in the Cartesian fixed point square of a cohomological correspondence and its right adjoint exceptional inverse image exchange",
+   "results": "CompHausLike.LocallyConstant.adjunction_left_triangle, LightCondensed.ihomPoints_symm_comp, CompHausLike.LocallyConstant.adjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.conjugateEquiv_pullbackComp_inv, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: general adjunction, scheme, and module results do not state finite-coefficient compact-support exchange in the fixed square"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|upperShriek|lowerShriek",
+   "results": "Directory Mathlib/AlgebraicGeometry; Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: general adjunction, scheme, and module results do not state finite-coefficient compact-support exchange in the fixed square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": "loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.NatIso'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support direct image commutes with pullback in a Cartesian square of schemes",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1, AlgebraicGeometry.Scheme.image_preimage_eq_of_isPullback, AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ, AlgebraicGeometry.Scheme.Pullback.affine_hasPullback, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.isPullback_natTrans_ι_toBase, AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.IsOpenImmersion.isPullback",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: general adjunction, scheme, and module results do not state finite-coefficient compact-support exchange in the fixed square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "CategoryTheory.Adjunction.comp, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_unit_app_assoc, CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: general adjunction, scheme, and module results do not state finite-coefficient compact-support exchange in the fixed square"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|compact.support|proper.base.change",
+   "results": "Directory Mathlib/CategoryTheory/Sites; none",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: general adjunction, scheme, and module results do not state finite-coefficient compact-support exchange in the fixed square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image base change for cohomological correspondences on finite type schemes",
+   "results": "LinearEquiv.baseChange_inv, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.inv_image, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.Scheme.stalkMap_inv_hom_apply, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: general adjunction, scheme, and module results do not state finite-coefficient compact-support exchange in the fixed square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite coefficient etale sheaves the compactly supported derived direct image commutes with arbitrary base change and conjugation identifies right adjoints",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: general adjunction, scheme, and module results do not state finite-coefficient compact-support exchange in the fixed square"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteType.of_comp|finiteType_of_comp|finiteType_of_comp|of_comp.*FiniteType",
+   "results": "Directory Mathlib/AlgebraicGeometry/Morphisms; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: general adjunction, scheme, and module results do not state finite-coefficient compact-support exchange in the fixed square"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactly.supported|fixed.point",
+   "results": "{\"t\": \"2026-10-16T23:23:00Z\", \"tool\": \"grep\", \"query\": \"shriek|compactly.supported|fixed.point\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no matching declaration in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "{\"t\": \"2026-10-16T23:23:01Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.conjugateIsoEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateIsoEquiv\", \"CategoryTheory.conjugateIsoEquiv_apply_hom\", \"CategoryTheory.conjugateIsoEquiv_apply_inv\", \"CategoryTheory.conjugateIsoEquiv_symm_apply_hom\", \"CategoryTheory.conjugateIsoEquiv_symm_apply_inv\"], \"digest\": \"b1322b7778770b2b\"}",
+   "date": "2026-10-16",
+   "verdict": "generic categorical conjugation tools only; the finite-coefficient geometric compact-support exchange is absent from this result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoints of naturally isomorphic functors are canonically naturally isomorphic by conjugation of adjunctions",
+   "results": "{\"t\": \"2026-10-16T23:23:03Z\", \"tool\": \"leanfinder\", \"query\": \"Right adjoints of naturally isomorphic functors are canonically naturally isomorphic by conjugation of adjunctions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso\", \"CategoryTheory.Adjunction.ofNatIsoRight\", \"CategoryTheory.Adjunction.rightAdjointUniq\", \"CategoryTheory.Adjunction.ofNatIsoLeft\", \"CategoryTheory.Functor.isRightAdjoint_of_iso\", \"CategoryTheory.Adjunction.rightAdjointUniq_inv_app\", \"CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso\", \"CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc\"], \"digest\": \"88d02fbb441b574b\"}",
+   "date": "2026-10-16",
+   "verdict": "generic categorical conjugation tools only; the finite-coefficient geometric compact-support exchange is absent from this result"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -90,5 +240,49 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-trace-class"
+ "unit": "sk-d-trace-class",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-trf-fixed-point-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement; checked the current main blueprint and the Lean attachment search, expanded geometric and constructible-domain hypotheses, cited the existing pullback-composition theorem, used the package theorem (not the exchange definition) for invertibility, and wrote the right-adjoint isomorphism with its inverse-exchange orientation. No new nodes. Second reading makes the fixed-scheme finite-type check and full-subcategory restriction of ordinary adjunctions explicit.",
+  "blueprint": "Main 20261015 proof paragraph 1 is step 2; paragraph 2 is steps 3–5; step 1 verifies the scheme hypotheses of that paragraph.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "The source explicitly applies clause (4) for compact-support base change, and its finite-stage constructible adjunction/domain assertions; these generic six-operation tools are not proved inside the diagonal trace-class unit."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Only clause (1), the ordinary pullback/direct-image adjunction, is used to form the two composite adjunctions; its stronger ambient exceptional hypothesis in clause (2) is not invoked."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic ringed pro-etale derived-pullback composition for the ordinary leg, explicitly required by the source; this unit supplies the equality of maps, not that general functoriality theorem."
+   },
+   {
+    "node": "lem-trf-adjoint-mate",
+    "why": "Generic uniqueness, invertibility, and unit/counit compatibility for right adjoints of isomorphic left adjoints; it formalizes the source’s final mate argument without replacing any geometric trace-class route."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Its canonical constant-section-preserving ring-sheaf identifications give the coefficient maps for applying general ringed pro-etale pullback composition; it is a generic coefficient tool, not another trace-class argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "fix-prop-adjunctions",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-adjoint-mate",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NV-52da04f1b",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-52da04f1b (reviewer sub-agent of L); spot-checked: I read the whole item with all 5 steps and all 16 cited node statements, including the main-20261015 blueprint_update versions. The statement is verbatim the main-20261015 statement (order 2658) and the master statement (order 2314): finite A_{E,n}, D^b_ctf on the pro-étale site, base change from package clause (4) with (f,g,f',g')=(c,Delta_X,d,i_F) in the Cartesian square of prop-trf-fixed-square-cartesian. Nothing is weakened. Step 1: the separated, finite-type and qcqs facts come from 01KU, 01KV, 03GI, 01T3, 01T4 and 01T8, all checked in stacks-project. Two inferences are compressed but elementary: T is quasi-compact, and U is quasi-separated via clause (2). Step 2: 0D6D (sites-cohomology l.3658); the composite ring identification agrees with c^{kh}_A because both preserve constant sections, and the direction is correct. Step 3: invertibility comes from prop-functor-package (4) on D^b_ctf, not from def-exchange-projection, which explicitly asserts none. Step 4: ordinary adjunctions come from fix-prop-adjunctions (1) only, restricted to the full subcategory D^b_ctf; the direct images are along closed immersions. The composite adjunctions follow 0DV0 (categories l.3576) and Mathlib Adjunction.comp (Basic.lean:567) and give Q1=Rc^!RDelta_* and Q2=Ri_F*Rd^! with the correct factor order. Step 5: lem-trf-adjoint-mate gives beta:Q1->Q2 via alpha^{-1}. This is the inverse of the def-trf-admissibility conjugate, and all three citers use this same orientation. Small cases checked: Spec k, c=Delta_X (F=X, closed-immersion identities), empty F, n=1. There is no cycle (transitive closure computed), proof_deps equals the union of step uses, and there are no new nodes. The DAG grep found no duplicate, slopmaster2 has no Lean declaration for the item, and no SGA source is used. I accept the five declared tool_uses (prop-functor-package, fix-prop-adjunctions, lem-weil-pbc-proetale-derived-pullback-composition, prop-weil-pbc-proetale-constant-ring-map, lem-trf-adjoint-mate) as generic tools. No fixes."
+ }
 }
