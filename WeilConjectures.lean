@@ -626,6 +626,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Curve.IntegralOpenExtensionComparison
 public import WeilConjectures.AlgebraicGeometry.Curve.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+public import WeilConjectures.AlgebraicGeometry.Curve.KummerTransition
 public import WeilConjectures.AlgebraicGeometry.Curve.LocalCommensurable
 public import WeilConjectures.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit
 public import WeilConjectures.AlgebraicGeometry.Curve.NormalizationComparisonOnIsoLocus
@@ -2661,6 +2662,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeights
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.EulerRadius
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.FundamentalGroup
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.JacobianKummer
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalPolynomial
