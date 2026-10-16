@@ -14,54 +14,47 @@
  ],
  "proof": [
   {
-   "text": "On every pairwise and triple overlap of the finite affine pro-etale cover, quasi-separatedness makes the overlap qcqs. Use the existing CategoryTheory.InternalAbelianSheafModule.sectionModuleEquivalence to identify internal modules in abelian sheaves with module sheaves over the reconstructed sectionwise ring; its forward functor keeps the underlying abelian sheaf and restriction maps. This equivalence respects regular modules, finite coproducts and cokernels and therefore finite presentations. Restrictions commute sectionwise; scalar extension commutes by uniqueness of left adjoints to the identified restriction-of-scalars functors. Transport the supplied data across this equivalence and the weakly-etale localization equivalence, using only the coefficient-independent site clause of localization.",
+   "text": "Descend the supplied local models to compatible monomorphisms into the restriction of M at one common finite coefficient field F. This retains the fact that their scalar adjoints are isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-condensed-finite-local-submodules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Glue these compatible local submodules using the underlying abelian kernel construction and the proved lifting of its module action. Retain the local module isomorphisms and the commutation equations with the global inclusion.",
+   "uses": [
+    "lem-weil-pbc-proetale-compatible-local-submodules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the global inclusion by extension/restriction adjunction. Prove the local adjunction comparison using the existing pullbackExtendScalarsIso, adjoint uniqueness, and unit naturality; thus each restriction is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Weakly etale inverse image agrees with restriction. Covering-sieve isomorphism detection proves the global scalar-extension map invertible; module forgetfulness reflects isomorphisms. This argument includes the empty cover.",
    "uses": [
     "def-weil-pbc-proetale-covering",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The chosen extended local isomorphisms to M give transition isomorphisms on pairwise overlaps. Use the Hom clause of the qcqs calculus and tensor adjunction to lift their maps and inverses to finite coefficient stages. Since there are finitely many pairs and triples, filteredness puts them at one common stage F containing E. Eventual equality in the same Hom colimit enforces all inverse, diagonal and cocycle equations at one further common stage.",
-   "uses": [
-    "def-weil-pbc-condensed-e-module-category",
-    "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
-    "def-weil-finite-subextension-directed-set"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply ringed-site module-sheaf gluing to these transition isomorphisms and their cocycle. Transport the resulting sheaf back to an internal module P over f⁻¹F_T, retaining the specified local comparisons with the scalar extensions of N_i. No finite-presentation conclusion for P is included or needed here.",
-   "uses": [
-    "lem-weil-pbc-site-module-sheaf-gluing"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The pullback-tensor comparison identifies the restrictions of the extension of P with the extended local models. Their maps to M agree on overlaps by the prescribed gluing equations. Glue these maps and their inverses by sheaf-Hom gluing. Its uniqueness shows that the two composites are identities. For an empty cover the base is empty and the unique zero module gives the same conclusion.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-pur-sheaf-hom-cover-gluing"
+    "lem-weil-proetale-weakly-etale-localization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-finite-subextension-directed-set",
-  "def-weil-pbc-condensed-e-module-category",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
   "def-weil-pbc-proetale-covering",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-site-module-sheaf-gluing",
+  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+  "lem-weil-pbc-condensed-finite-local-submodules",
+  "lem-weil-pbc-proetale-compatible-local-submodules",
   "lem-weil-proetale-weakly-etale-localization"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-  "place": "(Obj) descent paragraph, overlap comparisons, finite-stage cocycle equations, and effective gluing; auxiliary to the common-stage descent formula in the first proof paragraph of thm-weil-pbc-qbar."
+  "place": "(Obj) common finite enlargement and gluing, implemented via compatible local subobjects",
+  "note": "A3: actual kernel construction, local factorization, lifted action, and adjunction plus cover-detection proof. Only finite coefficient comparisons remain unproved; all compatible-subobject gluing and local quotient vanishing are proved."
  },
  "mathlib_searches": [
   {
@@ -147,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-af7be",
-  "group": "A4",
+  "reviewer": "X-a08d9",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261016T073458-L-1079815",
+  "landing": "20261016T103837-L-2369142",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures, proofs and sole gluing hole matched all three DAG nodes; delivery modules, original shared module and direct importers compiled; axioms checked."
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all modules and the direct importer compiled, with only the documented arithmetic sorry remaining."
  }
 }

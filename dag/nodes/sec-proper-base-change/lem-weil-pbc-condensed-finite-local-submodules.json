@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-condensed-finite-local-submodules",
+ "kind": "statement",
+ "title": "Common finite coefficients for compatible local embeddings",
+ "statement": "Use the finite coefficient fields [def-weil-finite-subextension-directed-set], internal-module convention [def-weil-pbc-condensed-e-module-category], and pro-etale covers [def-weil-pbc-proetale-covering]. Let f:X→T with X quasi-separated, ℓ prime, M an internal f⁻¹Ω_T-module, and E a finite coefficient subfield. Let U_i→X be a finite affine pro-etale cover and N_i finitely presented modules over the restrictions of f⁻¹E_T, with Ω-extension isomorphic to M|Ui. Then some finite F≥E has monomorphisms q_i from F⊗E N_i into (Res_FΩ M)|Ui. Their scalar adjoints to M|Ui are isomorphisms. On each Ui×XUj their underlying abelian-sheaf domains are isomorphic by c_ij, commuting with the q_i and the specified upperStarCompIso into the pullback of Res_FΩ M. This is only local embedding/overlap data: no global finite-coefficient module is asserted.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps"
+ },
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-proetale-covering"
+ ],
+ "proof": [
+  {
+   "text": "The scalar-adjoint local isomorphisms are monic because E→Ω is faithfully flat. Finite coefficient extensions are nonzero finite free and Ω is their filtered union. These facts survive inverse image to the covering schemes.",
+   "uses": [
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pairwise overlaps of a finite affine cover of a quasi-separated scheme are qcqs. Identify internal modules with sectionwise modules and use tensor adjunction plus the Hom colimit clause to descend overlap comparisons and their inverses. Choose a common finite field and use eventual equality to enforce both inverse identities.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the comparison equalities after extension to Ω to obtain commutation with the local embeddings into Res_FΩ M. The local adjoints remain the original isomorphisms under extension-composition comparisons. If the cover is empty choose F=E.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-proetale-covering",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps",
+  "note": "The Lean construction/proof is in the attached module; only explicitly reported named theorems remain unproved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient extension descends isomorphisms between finitely presented module sheaves on quasi compact quasi separated schemes",
+   "results": "8 hits: instFinitePresentationTensorProduct, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation.recOn, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.Presentation.IsFinite",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient extension descends isomorphisms between finitely presented module sheaves on quasi compact quasi separated schemes",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.Presentation.map_generators_I, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.Presentation.IsFinite.finite_relations, SheafOfModules.Presentation.map_π_eq, SheafOfModules.isFinitePresentation",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Cc]oefficient.*[Mm]ono|[Ii]so.*finite.*[Ss]tage",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLocalModelGluing",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "(Obj) descent paragraph, overlap comparisons, finite-stage cocycle equations, and effective gluing; auxiliary to the common-stage descent formula in the first proof paragraph of thm-weil-pbc-qbar.",
+   "via": [
+    "lem-weil-pbc-condensed-local-model-gluing",
+    "lem-weil-pbc-condensed-lfp-coefficient-model",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedFiniteLocalSubmodules",
+  "file": "lean/Sheaf/Paper/CondensedFiniteLocalSubmodules.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_finiteCoefficient_compatible_local_monomorphisms",
+  "statement": "theorem exists_finiteCoefficient_compatible_local_monomorphisms\n    (T X : Scheme.{u}) [QuasiSeparatedSpace X]\n    (f : X ⟶ T) (ℓ : ℕ) [Fact ℓ.Prime]\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      ((upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ)))\n    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n    (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X)\n    (hfinite : Finite U.I₀) (haffine : ∀ i, IsAffine (U.X i))\n    (N : ∀ i, Mod (Sheaf (Scheme.ProEt.topology (U.X i)) Ab.{u + 1})\n      ((upperStar Ab.{u + 1} (U.f i)).obj\n        ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E))))\n    (hN : ∀ i, Mod.IsFinitelyPresented\n      ((upperStar Ab.{u + 1} (U.f i)).obj\n        ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ E))) (N i))\n    (e : ∀ i, Nonempty ((Mod.extendScalars\n      ((upperStar Ab.{u + 1} (U.f i)).map\n        ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl T ℓ E)))).obj\n          (N i) ≅\n      ((upperStar Ab.{u + 1} (U.f i)).mapMod\n        ((upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ))).obj M)) :\n    ∃ (F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (hEF : E ≤ F),\n      let R := (upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj T ℓ F)\n      let S := (upperStar Ab.{u + 1} f).obj (padicAlgClRingObj T ℓ)\n      let a := (upperStar Ab.{u + 1} f).map (padicSubfieldRingObjToPadicAlgCl T ℓ F)\n      let L := fun i ↦ (Mod.extendScalars ((upperStar Ab.{u + 1} (U.f i)).map\n        ((upperStar Ab.{u + 1} f).map (padicSubfieldRingObjMap T ℓ hEF)))).obj (N i)\n      ∃ q : ∀ i, L i ⟶ ((upperStar Ab.{u + 1} (U.f i)).mapMod R).obj\n        ((Mod.comap a).obj M),\n        (∀ i, Mono (q i)) ∧\n        (∀ i, IsIso (((Mod.extendRestrictAdjunction\n          ((upperStar Ab.{u + 1} (U.f i)).map a)).homEquiv (L i)\n            (((upperStar Ab.{u + 1} (U.f i)).mapMod S).obj M)).symm\n              (q i ≫ ((upperStar Ab.{u + 1} (U.f i)).mapModComapIso a).hom.app M))) ∧\n        (∀ i j, ∃ c :\n          (upperStar Ab.{u + 1} (pullback.fst (U.f i) (U.f j))).obj (L i).X ≅\n            (upperStar Ab.{u + 1} (pullback.snd (U.f i) (U.f j))).obj (L j).X,\n          c.hom ≫ (upperStar Ab.{u + 1} (pullback.snd (U.f i) (U.f j))).map (q j).hom =\n            (upperStar Ab.{u + 1} (pullback.fst (U.f i) (U.f j))).map (q i).hom ≫\n              (upperStarCompIso Ab.{u + 1}\n                (pullback.condition (f := U.f i) (g := U.f j))).hom.app\n                  ((Mod.comap a).obj M).X)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all modules and the direct importer compiled, with only the documented arithmetic sorry remaining."
+ }
+}

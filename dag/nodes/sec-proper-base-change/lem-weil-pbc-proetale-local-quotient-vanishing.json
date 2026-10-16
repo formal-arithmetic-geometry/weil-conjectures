@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-proetale-local-quotient-vanishing",
+ "kind": "statement",
+ "title": "Overlap compatibility annihilates the simultaneous local quotient map",
+ "statement": "With localSubobjectQuotientMap α [def-weil-pbc-proetale-local-subobject-kernel] formed from maps q_i:L_i→Q|Ui over a pro-etale cover U [def-weil-pbc-proetale-covering], suppose that on every Ui×XUj the underlying local sheaves are isomorphic by c_ij commuting with q_i, q_j and upperStarCompIso. Then q_i≫(U_i→X)^*α=0 for every i, without a monicity hypothesis. This asserts only vanishing of the obstruction map on an already specified local subobject.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, effective gluing of sheaves, expressed for subobjects"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-local-subobject-kernel",
+  "def-weil-pbc-proetale-covering"
+ ],
+ "proof": [
+  {
+   "text": "Identify weakly etale inverse image with localization restriction. It preserves products, so it is enough to check each local quotient component.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On Ui×XUj, compatibility identifies the pullback of q_i with the pullback of q_j; compose with the pullback of cokernel.π(q_j) to get zero. Weakly etale base change and adjunction identify this with q_i followed by the restriction of the j-th component of α, including the stipulated upperStarCompIso. Prove the compatibility of the two mates of the square using iterated_mateEquiv_conjugateEquiv and conjugateEquiv_comp. The unit_mateEquiv equation and naturality transpose the overlap zero equation. Thus each component, and hence the product map, vanishes. Apply the existing source-library weakly-etale base-change theorem directly, using its squareLowerStarIso; the canonical coefficient implementation is shared by the compatibility imports.",
+   "uses": [
+    "lem-weil-pbc-coefficient-site-weakly-etale-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coefficient-site-weakly-etale-base-change",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, effective gluing of sheaves, expressed for subobjects",
+  "note": "Repair: direct source-library base-change import replaces the copied kernelOverlap API. The actual vanishing proof and statement are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The kernel of a map from an abelian sheaf to the product of pushforwards of local cokernels restricts to the prescribed compatible local subobjects",
+   "results": "8 hits: CategoryTheory.kernelCokernelCompSequence.isLimit, CategoryTheory.Limits.kernelSubobject, CategoryTheory.kernelCokernelCompSequence.ι, imageToKernel'_kernelSubobjectIso, CategoryTheory.Limits.kernel_map_comp_kernelSubobjectIso_inv, AlgebraicGeometry.Scheme.IdealSheafData.map_ker, AlgebraicGeometry.Scheme.Hom.ker, CategoryTheory.Limits.kernelSubobjectMap",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of a map from an abelian sheaf to the product of pushforwards of local cokernels restricts to the prescribed compatible local subobjects",
+   "results": "8 hits: SheafOfModules.generatorsOfIsCokernelFree_π, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.kernel_ι_d_comp_d, AlgebraicGeometry.Scheme.kerFunctor_map, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.f, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.hf, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.F_obj",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*local.*subobject|local.*subobject.*kernel",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLocalModelGluing",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "(Obj) descent paragraph, overlap comparisons, finite-stage cocycle equations, and effective gluing; auxiliary to the common-stage descent formula in the first proof paragraph of thm-weil-pbc-qbar.",
+   "via": [
+    "lem-weil-pbc-condensed-local-model-gluing",
+    "lem-weil-pbc-condensed-lfp-coefficient-model",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleLocalQuotientVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleLocalQuotientVanishing.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.localSubobjectQuotientMap_zero_of_compatible",
+  "statement": "theorem localSubobjectQuotientMap_zero_of_compatible\n    (X : Scheme.{u}) (Q : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n    (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X)\n    (L : ∀ i, Sheaf (Scheme.ProEt.topology (U.X i)) Ab.{u + 1})\n    (q : ∀ i, L i ⟶ (upperStar Ab.{u + 1} (U.f i)).obj Q)\n    (hcompatible : ∀ i j, ∃ c :\n      (upperStar Ab.{u + 1} (pullback.fst (U.f i) (U.f j))).obj (L i) ≅\n        (upperStar Ab.{u + 1} (pullback.snd (U.f i) (U.f j))).obj (L j),\n      c.hom ≫ (upperStar Ab.{u + 1} (pullback.snd (U.f i) (U.f j))).map (q j) =\n        (upperStar Ab.{u + 1} (pullback.fst (U.f i) (U.f j))).map (q i) ≫\n          (upperStarCompIso Ab.{u + 1}\n            (pullback.condition (f := U.f i) (g := U.f j))).hom.app Q) :\n    ∀ i, q i ≫ (upperStar Ab.{u + 1} (U.f i)).map\n      (localSubobjectQuotientMap X Q U L q) = 0",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all modules and the direct importer compiled, with only the documented arithmetic sorry remaining."
+ }
+}

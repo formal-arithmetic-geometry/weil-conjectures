@@ -1,0 +1,124 @@
+{
+ "id": "def-weil-pbc-proetale-local-subobject-kernel",
+ "kind": "definition",
+ "title": "Kernel construction and factorization API for local subobjects",
+ "statement": "For a scheme X, an abelian pro-etale sheaf Q, a cover U [def-weil-pbc-proetale-covering], local sheaves L_i and maps q_i:L_i→Q|Ui, let α:Q→∏i(U_i→X)_*coker(q_i) have components adjoint to the cokernel projections. Define P=ker α and j its kernel inclusion. This actual construction is called localSubobjectKernel. If q_i are monic, construct the canonical local comparison P|Ui→L_i using the kernel-of-cokernel property. It is monic and commutes with the inclusions. Any map into Q locally factoring through each q_i factors through j. If q_i vanishes after the restricted α, the canonical comparison on Ui is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, effective gluing of sheaves, expressed for subobjects"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-covering"
+ ],
+ "proof": [
+  {
+   "text": "Use categorical cokernels, adjunction, products and kernels to construct α, P and j. No data are chosen from an unproved existence theorem.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose kernel.condition with each product projection and transpose along inverse-image/pushforward adjunction. The restricted j vanishes in each local cokernel, hence Abelian.monoLift produces the local comparison. Its composite with q_i is the restricted j, so it is monic.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If a map locally factors through all q_i, naturality of adjunction and cokernel.condition give zero composite with each component of α. Product extensionality and kernel.lift give the global factorization.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Weakly etale inverse image is localization restriction and preserves kernels. If q_i annihilates restricted α, kernel.lift produces the opposite local comparison. Cancel the two monomorphisms to prove the comparisons inverse.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, effective gluing of sheaves, expressed for subobjects",
+  "note": "The Lean construction/proof is in the attached module; only explicitly reported named theorems remain unproved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The kernel of a map from an abelian sheaf to the product of pushforwards of local cokernels restricts to the prescribed compatible local subobjects",
+   "results": "8 hits: CategoryTheory.kernelCokernelCompSequence.isLimit, CategoryTheory.Limits.kernelSubobject, CategoryTheory.kernelCokernelCompSequence.ι, imageToKernel'_kernelSubobjectIso, CategoryTheory.Limits.kernel_map_comp_kernelSubobjectIso_inv, AlgebraicGeometry.Scheme.IdealSheafData.map_ker, AlgebraicGeometry.Scheme.Hom.ker, CategoryTheory.Limits.kernelSubobjectMap",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of a map from an abelian sheaf to the product of pushforwards of local cokernels restricts to the prescribed compatible local subobjects",
+   "results": "8 hits: SheafOfModules.generatorsOfIsCokernelFree_π, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.kernel_ι_d_comp_d, AlgebraicGeometry.Scheme.kerFunctor_map, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.f, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.hf, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.F_obj",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*local.*subobject|local.*subobject.*kernel",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLocalModelGluing",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "(Obj) descent paragraph, overlap comparisons, finite-stage cocycle equations, and effective gluing; auxiliary to the common-stage descent formula in the first proof paragraph of thm-weil-pbc-qbar.",
+   "via": [
+    "lem-weil-pbc-condensed-local-model-gluing",
+    "lem-weil-pbc-condensed-lfp-coefficient-model",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleLocalSubobjectKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleLocalSubobjectKernel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.localSubobjectKernel",
+  "statement": "def localSubobjectKernel : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all modules and the direct importer compiled, with only the documented arithmetic sorry remaining."
+ }
+}

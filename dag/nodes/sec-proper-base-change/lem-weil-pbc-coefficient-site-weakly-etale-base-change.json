@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-coefficient-site-weakly-etale-base-change",
+ "kind": "statement",
+ "title": "Weakly etale base change for the coefficient-facing site functors",
+ "statement": "For schemes Uprime, U, Zprime, Z, arrows gprime:Uprime→U, jprime:Uprime→Zprime, j:U→Z and g:Zprime→Z forming a cartesian square, with j and jprime weakly etale, the coefficient-facing pro-etale sheaf functors have an invertible base-change transformation j^* g_* → gprime_* jprime^*. It is the mate of the squareLowerStarIso built from the specified composition and congruence isomorphisms. The sheaf coefficient category A is abelian and Grothendieck abelian in the project universe convention. This is the existing source-library weakly-etale base-change theorem, transported to the coefficient-facing functor imports.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/BaseChange/WeaklyEtale.lean",
+  "place": "lean/WeilConjectures/SixFunctors/ProEtale/BaseChange/WeaklyEtale.lean, complete proof with coefficient-family imports"
+ },
+ "stmt_deps": [
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing theorem AlgebraicGeometry.ProEtale.isIso_baseChangeMap_of_isPullback in WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale. The current legacy imports re-export the canonical coefficient implementation, so this theorem applies directly to the coefficient-facing functors; no transport or copied proof is needed.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The explicit site comparison has mate squareLowerStarIso, as follows objectwise from the unit/counit and pullback composition formulas. Transport localization restriction to upperStar using adjoint uniqueness; mate invariance identifies the transported comparison with the displayed base-change map. Its components are therefore invertible.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/BaseChange/WeaklyEtale.lean",
+  "place": "lean/WeilConjectures/SixFunctors/ProEtale/BaseChange/WeaklyEtale.lean, complete proof with coefficient-family imports",
+  "note": "Repair of return at a5958f2ef: reuse the existing source-library theorem directly. Canonical functor re-exports now make the formerly copied coefficient-family proof unnecessary. The duplicate module is omitted from this delivery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Weakly etale base change for pushforwards of abelian sheaves on the small proetale sites of schemes",
+   "results": "8 hits: CategoryTheory.Functor.sheafPushforwardContinuous, SheafOfModules.pushforwardSections, SheafOfModules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward, Algebra.Etale.baseChange, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforward_obj_val",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weakly etale base change for pushforwards of abelian sheaves on the small proetale sites of schemes",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, SheafOfModules.pushforward",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyEtale.*baseChange|baseChange.*weaklyEtale|proetale.*baseChange",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLocalModelGluing",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "(Obj) descent paragraph, overlap comparisons, finite-stage cocycle equations, and effective gluing; auxiliary to the common-stage descent formula in the first proof paragraph of thm-weil-pbc-qbar.",
+   "via": [
+    "lem-weil-pbc-condensed-local-model-gluing",
+    "lem-weil-pbc-condensed-lfp-coefficient-model",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_baseChangeMap_of_isPullback",
+  "statement": "lemma ProEtale.isIso_baseChangeMap_of_isPullback (hsq : IsPullback g' j' j g'') :\n    IsIso (ProEtale.baseChangeMap A hsq.toCommSq)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all modules and the direct importer compiled, with only the documented arithmetic sorry remaining."
+ }
+}

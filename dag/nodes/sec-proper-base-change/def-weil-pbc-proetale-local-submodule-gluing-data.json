@@ -1,0 +1,106 @@
+{
+ "id": "def-weil-pbc-proetale-local-submodule-gluing-data",
+ "kind": "definition",
+ "title": "A module with compatible local identifications",
+ "statement": "For a scheme X, a ring object R in abelian pro-etale sheaves, an internal R-module Q (the internal-module convention of [def-weil-pbc-condensed-e-module-category]), a cover U [def-weil-pbc-proetale-covering], local modules L_i over R|Ui and maps q_i:L_i→Q|Ui, LocalSubmoduleGluingData consists of an actual global R-module P, a map P→Q, local module isomorphisms P|Ui≅L_i, and equations saying the restricted map is the local isomorphism followed by q_i. This is a structure of data and equations, with no existence assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Gluing sheaves, Tag 04TR, local identifications"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-proetale-covering"
+ ],
+ "proof": [
+  {
+   "text": "Package the global module, map, local comparisons, and equations as the fields of an ordinary Lean structure; no data or law is postponed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Gluing sheaves, Tag 04TR, local identifications",
+  "note": "The Lean construction/proof is in the attached module; only explicitly reported named theorems remain unproved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf module together with a morphism to an ambient module and local isomorphisms commuting with that morphism",
+   "results": "8 hits: ModuleCat.tildeInModuleCat, SheafOfModules, SheafOfModules.mk, SheafOfModules.noConfusionType, AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.Modules.Hom, SheafOfModules.Hom, SheafOfModules.isQuasicoherent",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf module together with a morphism to an ambient module and local isomorphisms commuting with that morphism",
+   "results": "8 hits: SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.X, SheafOfModules.Presentation, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "LocalSubmoduleGluingData|local.*isomorphisms.*ambient",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLocalModelGluing",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "(Obj) descent paragraph, overlap comparisons, finite-stage cocycle equations, and effective gluing; auxiliary to the common-stage descent formula in the first proof paragraph of thm-weil-pbc-qbar.",
+   "via": [
+    "lem-weil-pbc-condensed-local-model-gluing",
+    "lem-weil-pbc-condensed-lfp-coefficient-model",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleLocalSubmoduleGluingData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleLocalSubmoduleGluingData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.LocalSubmoduleGluingData",
+  "statement": "structure LocalSubmoduleGluingData\n    (X : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]\n    (Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)\n    (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X)\n    (L : ∀ i, Mod (Sheaf (Scheme.ProEt.topology (U.X i)) Ab.{u + 1})\n      ((upperStar Ab.{u + 1} (U.f i)).obj R))\n    (q : ∀ i, L i ⟶ ((upperStar Ab.{u + 1} (U.f i)).mapMod R).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all modules and the direct importer compiled, with only the documented arithmetic sorry remaining."
+ }
+}

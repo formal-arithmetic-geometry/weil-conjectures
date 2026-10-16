@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-proetale-compatible-local-subsheaves",
+ "kind": "statement",
+ "title": "Gluing compatible local subobjects of an abelian sheaf",
+ "statement": "Let Q be an abelian sheaf on X_proet, U a pro-etale cover [def-weil-pbc-proetale-covering], and q_i:L_i→Q|Ui local monomorphisms. Suppose on each pairwise overlap their pullbacks are isomorphic by c_ij commuting with their inclusions and upperStarCompIso. Then there are a global abelian sheaf P, a monomorphism j:P→Q, and isomorphisms e_i:P|Ui≅L_i commuting with j and q_i. Moreover any m:Z→Q locally factoring through each q_i factors through j. No ring, coefficient field, finite presentation, or scalar-extension claim occurs here.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, effective gluing of sheaves, expressed for subobjects"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-covering"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual kernel of the simultaneous local quotient map for P and its monic inclusion for j.",
+   "uses": [
+    "def-weil-pbc-proetale-local-subobject-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical local comparisons are isomorphisms by effectivity; use asIso and their proved commutation equations.",
+   "uses": [
+    "lem-weil-pbc-proetale-local-subobject-kernel-effective",
+    "def-weil-pbc-proetale-local-subobject-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The kernel factorization API gives the final local-to-global factorization property.",
+   "uses": [
+    "def-weil-pbc-proetale-local-subobject-kernel"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-local-subobject-kernel",
+  "lem-weil-pbc-proetale-local-subobject-kernel-effective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, effective gluing of sheaves, expressed for subobjects",
+  "note": "The Lean construction/proof is in the attached module; only explicitly reported named theorems remain unproved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible local subobjects of an abelian sheaf descend along a covering and morphisms factor through that subobject locally",
+   "results": "8 hits: CategoryTheory.imageFactorization, CategoryTheory.Sheaf.instHasFunctorialFactorizationLocallySurjectiveLocallyInjective, CategoryTheory.sheafIsAbelian, CategoryTheory.Sheaf.locallySurjective, CategoryTheory.Subpresheaf.sheafify, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.GrothendieckTopology.W, PresheafOfModules.IsLocallySurjective",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible local subobjects of an abelian sheaf descend along a covering and morphisms factor through that subobject locally",
+   "results": "8 hits: CategoryTheory.Sheaf.IsLocallyInjective, CategoryTheory.Functor.IsCoverDense.sheaf_eq_amalgamation, CategoryTheory.Presheaf.IsLocallyInjective, CategoryTheory.Sheaf.instIsLocallyInjectiveAppArrowPLocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective, CategoryTheory.GrothendieckTopology.Plus.meqOfSep, CategoryTheory.GrothendieckTopology.Plus.sep, CategoryTheory.GrothendieckTopology.Plus.exists_of_sep",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "subsheaf.*glue|glue.*subsheaf|local.*subobject|subobject.*local",
+   "results": "3 hits: Mathlib/CategoryTheory/Subobject/WellPowered.lean, Mathlib/CategoryTheory/Subobject/WellPowered.lean, Mathlib/CategoryTheory/Subterminal.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLocalModelGluing",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "(Obj) descent paragraph, overlap comparisons, finite-stage cocycle equations, and effective gluing; auxiliary to the common-stage descent formula in the first proof paragraph of thm-weil-pbc-qbar.",
+   "via": [
+    "lem-weil-pbc-condensed-local-model-gluing",
+    "lem-weil-pbc-condensed-lfp-coefficient-model",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleLocalSubsheafGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleLocalSubsheafGluing.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_subsheaf_of_compatible_local_monomorphisms",
+  "statement": "theorem exists_subsheaf_of_compatible_local_monomorphisms\n    (X : Scheme.{u}) (Q : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n    (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X)\n    (L : ∀ i, Sheaf (Scheme.ProEt.topology (U.X i)) Ab.{u + 1})\n    (q : ∀ i, L i ⟶ (upperStar Ab.{u + 1} (U.f i)).obj Q)\n    (hq : ∀ i, Mono (q i))\n    (hcompatible : ∀ i j, ∃ c :\n      (upperStar Ab.{u + 1} (pullback.fst (U.f i) (U.f j))).obj (L i) ≅\n        (upperStar Ab.{u + 1} (pullback.snd (U.f i) (U.f j))).obj (L j),\n      c.hom ≫ (upperStar Ab.{u + 1} (pullback.snd (U.f i) (U.f j))).map (q j) =\n        (upperStar Ab.{u + 1} (pullback.fst (U.f i) (U.f j))).map (q i) ≫\n          (upperStarCompIso Ab.{u + 1}\n            (pullback.condition (f := U.f i) (g := U.f j))).hom.app Q) :\n    ∃ (P : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (j : P ⟶ Q),\n      Mono j ∧ ∃ e : ∀ i, (upperStar Ab.{u + 1} (U.f i)).obj P ≅ L i,\n      (∀ i, (upperStar Ab.{u + 1} (U.f i)).map j = (e i).hom ≫ q i) ∧\n      (∀ (Z : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (m : Z ⟶ Q),\n        (∀ i, ∃ t : (upperStar Ab.{u + 1} (U.f i)).obj Z ⟶ L i,\n          t ≫ q i = (upperStar Ab.{u + 1} (U.f i)).map m) →\n        ∃ t : Z ⟶ P, t ≫ j = m)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all modules and the direct importer compiled, with only the documented arithmetic sorry remaining."
+ }
+}

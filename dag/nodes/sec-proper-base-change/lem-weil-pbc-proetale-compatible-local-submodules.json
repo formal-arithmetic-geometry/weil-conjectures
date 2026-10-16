@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-proetale-compatible-local-submodules",
+ "kind": "statement",
+ "title": "Gluing compatible local submodules of an internal module",
+ "statement": "Let X be a scheme, R any ring object in abelian pro-etale sheaves, Q an internal R-module [def-weil-pbc-condensed-e-module-category], and U a pro-etale cover [def-weil-pbc-proetale-covering]. Let L_i be modules over R|Ui and q_i:L_i→Q|Ui monic. Assume the underlying pulled-back abelian sheaves L_i and L_j on every pairwise overlap are isomorphic by a map commuting with their injections into restricted Q, using upperStarCompIso. Then LocalSubmoduleGluingData [def-weil-pbc-proetale-local-submodule-gluing-data] is inhabited. Neither finiteness of the cover nor commutativity of R is required.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, effective gluing of sheaves, expressed for subobjects"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-pbc-proetale-local-submodule-gluing-data"
+ ],
+ "proof": [
+  {
+   "text": "Forget the local module monomorphisms to abelian sheaves and apply compatible local subsheaf gluing, retaining the inclusion, local isomorphisms, and local factorization property.",
+   "uses": [
+    "lem-weil-pbc-proetale-compatible-local-subsheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor the ambient action R⊗P→Q through P using the local actions transported along the local isomorphisms and the inverse-image tensor comparison. Cancel the monomorphism P→Q to prove the unit and associativity laws. The same cancellation proves local comparison maps linear.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Package the resulting module, inclusion and local module isomorphisms into LocalSubmoduleGluingData.",
+   "uses": [
+    "def-weil-pbc-proetale-local-submodule-gluing-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-local-submodule-gluing-data",
+  "lem-weil-pbc-proetale-compatible-local-subsheaves"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, effective gluing of sheaves, expressed for subobjects",
+  "note": "The Lean construction/proof is in the attached module; only explicitly reported named theorems remain unproved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible local submodules of a sheaf of modules glue uniquely over a covering of a site",
+   "results": "8 hits: TopCat.Sheaf.existsUnique_gluing, TopCat.Presheaf.IsSheafUniqueGluing, TopCat.Sheaf.existsUnique_gluing', TopCat.Presheaf.IsSheaf.isSheafUniqueGluing, TopCat.Presheaf.IsGluing, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types, TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing_types, TopCat.Sheaf.interUnionPullbackConeLift",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible local submodules of a sheaf of modules glue uniquely over a covering of a site",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.mk.inj, SheafOfModules.QuasicoherentData.mk.inj, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.GeneratingSections.I, SheafOfModules.LocalGeneratorsData, SheafOfModules.LocalGeneratorsData.generators, SheafOfModules.Presentation",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "compatible.*submodule|submodule.*glue|glue.*submodule",
+   "results": "5 hits: Mathlib/Topology/Algebra/Nonarchimedean/Bases.lean, Mathlib/Topology/Algebra/Nonarchimedean/Bases.lean, Mathlib/Algebra/Module/Submodule/Map.lean, Mathlib/Algebra/Lie/Quotient.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact match for the displayed interface; reuse the general categorical API in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLocalModelGluing",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "(Obj) descent paragraph, overlap comparisons, finite-stage cocycle equations, and effective gluing; auxiliary to the common-stage descent formula in the first proof paragraph of thm-weil-pbc-qbar.",
+   "via": [
+    "lem-weil-pbc-condensed-local-model-gluing",
+    "lem-weil-pbc-condensed-lfp-coefficient-model",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleLocalSubmoduleGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleLocalSubmoduleGluing.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_module_of_compatible_local_monomorphisms",
+  "statement": "theorem exists_module_of_compatible_local_monomorphisms\n    (X : Scheme.{u})\n    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n    [MonObj R]\n    (Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)\n    (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X)\n    (L : ∀ i, Mod (Sheaf (Scheme.ProEt.topology (U.X i)) Ab.{u + 1})\n      ((upperStar Ab.{u + 1} (U.f i)).obj R))\n    (q : ∀ i, L i ⟶ ((upperStar Ab.{u + 1} (U.f i)).mapMod R).obj Q)\n    (hq : ∀ i, Mono (q i))\n    (hcompatible : ∀ i j, ∃ c :\n      (upperStar Ab.{u + 1} (pullback.fst (U.f i) (U.f j))).obj (L i).X ≅\n        (upperStar Ab.{u + 1} (pullback.snd (U.f i) (U.f j))).obj (L j).X,\n      c.hom ≫ (upperStar Ab.{u + 1} (pullback.snd (U.f i) (U.f j))).map (q j).hom =\n        (upperStar Ab.{u + 1} (pullback.fst (U.f i) (U.f j))).map (q i).hom ≫\n          (upperStarCompIso Ab.{u + 1} (pullback.condition (f := U.f i) (g := U.f j))).hom.app\n            Q.X) :\n    Nonempty (LocalSubmoduleGluingData X R Q U L q)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-a08d9",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T103837-L-2369142",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all modules and the direct importer compiled, with only the documented arithmetic sorry remaining."
+ }
+}
