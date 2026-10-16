@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, derived coefficient adjunction and the displayed derived inverse-limit calculation, through the inherited cosimplicial-frame ancestry: Lemma 2.4.17, printed pp. 56-57; Proposition 2.4.22(1) for kification. The lemma is stated for compact-open mapping spaces in Top; kification leaves all compact-Hausdorff sphere/cube tests unchanged. No Stacks tag is claimed.",
+   "place": "Proof paragraph 2, derived coefficient adjunction and the displayed derived inverse-limit calculation, through the recorded cosimplicial-frame ancestry; foundational sphere-mapping input of the Serre-model construction. Realized here by Hovey Lemma 2.4.17 induction with explicit disk-restriction lifting and the existing natural homotopy sequence.",
    "via": [
     "lem-coef-topological-serre-model",
     "lem-coef-kan-quillen-right-proper",
@@ -29,9 +29,114 @@
   "lem-coef-realization-finite-limits",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Z^K=k\\operatorname{Cont}(K,Z)$ for the compact disks and spheres used below. First reduce arbitrary $X,Y$ to k-spaces without adding a hypothesis. By the final-topology definition in [lem-coef-realization-finite-limits], for any compact Hausdorff $A$ a map $A\\to Z$ is continuous exactly when the same map $A\\to kZ$ is: for every k-open $U$, continuity of the first map gives that its inverse image is open, and the reverse follows from continuity of $kZ\\to Z$. Thus kification preserves the paths, based cubes and cube homotopies defining all homotopy groups in [def-cbc-enhanced-diagrams-cones], and $kf$ has the same component and group maps as $f$. For compact Hausdorff $A,K$, their product is compact Hausdorff. Applying [lem-coef-compact-open-currying] to $A\\times K$ shows that $\\operatorname{Cont}(K,kZ)$ and $\\operatorname{Cont}(K,Z)$ have the same continuous maps from every such $A$. Their underlying sets agree by taking $A$ to be a point; hence their final k-topologies agree. Consequently $(kZ)^K=Z^K$ canonically. We may therefore prove the assertion with $X,Y$ k-spaces, using kified limits as specified by the realization node.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-compact-open-currying",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey, Model Categories, Lemmas 2.4.13–2.4.17, printed pp. 55–57; Definition 2.4.21 and Proposition 2.4.22(1), printed pp. 57–58. Explicit cubical, retraction and low-degree expansions by the worker."
+   }
+  },
+  {
+   "text": "The compact-open formulas used below are continuous by [lem-coef-compact-open-currying]; the sphere and disk sources are locally compact Hausdorff. Fixed precomposition and postcomposition are also continuous directly: the inverse image of a subbasic $[L,U]$ is respectively $[g(L),U]$ or $[L,h^{-1}(U)]$. After kification these formulas remain continuous, since their composites with compact Hausdorff test maps are continuous. For each $m\\geq0$, restriction $q_Z:Z^{D^m}\\to Z^{S^{m-1}}$ is a Serre fibration, with no model-category theorem used. Indeed, a disk-parameter lifting problem, by currying, prescribes a continuous map on $D^a\\times((D^m\\times\\{0\\})\\cup(S^{m-1}\\times I))$. This union is a retract of $D^m\\times I$: for $v\\in D^m$ and $t\\in I$ put $s=1/\\max(1-t/2,\\|v\\|)$ and $R(v,t)=(sv,2+s(t-2))$. The denominator is at least $1/2$. The formula is continuous, lands either on the bottom or on the side, and fixes both (on either subset $s=1$). Compose the prescribed map with $1_{D^a}\\times R$ and curry back to obtain the lift. The initial glued map is continuous by pasting over the two closed subsets. For $m=0$, $S^{-1}$ is empty and the same formula retracts the point-cylinder onto its bottom. This establishes the defining lifting property for every $a\\geq0$.",
+   "uses": [
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey, Model Categories, Lemmas 2.4.13–2.4.17, printed pp. 55–57; Definition 2.4.21 and Proposition 2.4.22(1), printed pp. 57–58. Explicit cubical, retraction and low-degree expansions by the worker."
+   }
+  },
+  {
+   "text": "For all $m\\geq0$, first work with the compact-open space $\\operatorname{Cont}(D^m,Z)$ before kification. Let $e_Z:\\operatorname{Cont}(D^m,Z)\\to Z$ be evaluation at $0$ and $c_Z:Z\\to\\operatorname{Cont}(D^m,Z)$ the constant-map section, so $e_Zc_Z=1_Z$. By the evaluation clause of [lem-coef-compact-open-currying] (with $A=\\operatorname{Cont}(D^m,Z)$, $K=D^m$ locally compact and $g$ the identity), $\\operatorname{ev}:\\operatorname{Cont}(D^m,Z)\\times D^m\\to Z$ is continuous; hence $e_Z$ is continuous, and $c_Z$ is continuous as the transpose of the projection $Z\\times D^m\\to Z$. Define $H:\\operatorname{Cont}(D^m,Z)\\times[0,1]\\to\\operatorname{Cont}(D^m,Z)$ by $H(h,t)(v)=h(tv)$. It is the transpose, by the first clause of [lem-coef-compact-open-currying] with $A=\\operatorname{Cont}(D^m,Z)\\times[0,1]$ in the product topology, of the continuous map $((h,t),v)\\mapsto\\operatorname{ev}(h,tv)$; so $H$ is continuous, with $H(h,0)=c_Ze_Z(h)$ and $H(h,1)=h$. With the constant homotopy $K(z,t)=z$ on $Z$, [lem-coef-homotopy-equivalence-weak] applies to $f=e_Z$, $g=c_Z$ (its homotopies need not fix basepoints): $e_Z$ induces a bijection on path components and group isomorphisms $\\pi_n(\\operatorname{Cont}(D^m,Z),h)\\to\\pi_n(Z,h(0))$ for every $h$ and $n\\geq1$, with the cubical conventions of [def-cbc-enhanced-diagrams-cones]. By step 1, passing to the kification $Z^{D^m}=k\\operatorname{Cont}(D^m,Z)$ changes none of the paths, based cubes or cube homotopies (all have compact Hausdorff sources), so the same holds for $e_Z:Z^{D^m}\\to Z$. Since $e_Yf^{D^m}=fe_X$, the maps $f^{D^m}$ are bijective on components and induce all based-group isomorphisms, composing these isomorphisms with the given maps of $f$.",
+   "uses": [
+    "lem-coef-compact-open-currying",
+    "lem-coef-homotopy-equivalence-weak",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey, Model Categories, Lemmas 2.4.13–2.4.17, printed pp. 55–57; Definition 2.4.21 and Proposition 2.4.22(1), printed pp. 57–58. Explicit cubical, retraction and low-degree expansions by the worker."
+   }
+  },
+  {
+   "text": "Induct on $r\\geq-1$. At $r=-1$ both mapping spaces are singletons. For $r\\geq0$, assume the assertion for $r-1$. The sphere is the pushout $D^r\\amalg_{S^{r-1}}\\{*\\}$. When $r=0$ this is the two-point space. When $r\\geq1$, collapse the disk boundary to the marked point of $S^r$; in polar coordinates $v=tu$, the quotient map is $(\\sin(\\pi t)u,\\cos(\\pi t))$, with the boundary sent to the south pole. This is continuous also at $t=0$, is bijective away from the collapsed boundary, and identifies the compact quotient homeomorphically with the Hausdorff sphere. By currying, a continuous parameter family of sphere maps is exactly a compatible disk family and point family. More explicitly, for a compact Hausdorff parameter $A$ the map $A\\times(D^r\\amalg\\{*\\})\\to A\\times S^r$ is a continuous surjection from a compact space to a Hausdorff space, hence closed and quotient: images of closed subsets are compact and therefore closed. The compatible disk and point adjoints descend through this quotient and are continuous. This description includes $r=0$, where both points are needed for surjectivity. The final k-topology and the limit description in [lem-coef-realization-finite-limits] therefore give $Z^{S^r}=Z^{D^r}\\times_{Z^{S^{r-1}}}Z$, where $Z\\to Z^{S^{r-1}}$ is the constant map. Projection $p_Z:Z^{S^r}\\to Z$ is evaluation at the marked point. It is a Serre fibration: a lifting problem projects to the disk-restriction problem of step 2, and its lift together with the prescribed point family is a lift in this pullback.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey, Model Categories, Lemmas 2.4.13–2.4.17, printed pp. 55–57; Definition 2.4.21 and Proposition 2.4.22(1), printed pp. 57–58. Explicit cubical, retraction and low-degree expansions by the worker."
+   }
+  },
+  {
+   "text": "Fix $x\\in X$ and put $y=f(x)$. Let $F_X(x)=p_X^{-1}(x)$ and $F_Y(y)=p_Y^{-1}(y)$, with the kified fibre topologies. These are also the fibres of $q_X:X^{D^r}\\to X^{S^{r-1}}$ and $q_Y$ over the constant boundary maps at $x,y$. For $r\\geq1$, paths in these fibres correspond, by [lem-coef-compact-open-currying], exactly to homotopies of disk maps fixed on their boundary. Thus $\\pi_0F_X(x)=\\pi_r(X,x)$ and $\\pi_0F_Y(y)=\\pi_r(Y,y)$ naturally, as sets. This agrees with the cube convention of [def-cbc-enhanced-diagrams-cones]: the radial homeomorphism from $[-1,1]^r$ to $D^r$ sends $v\\ne0$ to $(\\|v\\|_\\infty/\\|v\\|_2)v$, has inverse $w\\mapsto(\\|w\\|_2/\\|w\\|_\\infty)w$, and extends at zero; both carry boundary to boundary. If $r=0$, a based map from the two-point $S^0$ is determined by its value at the other point, so $F_X(x)=X$ and $F_Y(y)=Y$. In every case $F_X(x)\\to F_Y(y)$ is a bijection on path components, using respectively the given $\\pi_r(f,x)$ or $\\pi_0(f)$.",
+   "uses": [
+    "lem-coef-compact-open-currying",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey, Model Categories, Lemmas 2.4.13–2.4.17, printed pp. 55–57; Definition 2.4.21 and Proposition 2.4.22(1), printed pp. 57–58. Explicit cubical, retraction and low-degree expansions by the worker."
+   }
+  },
+  {
+   "text": "We now prove that this fibre map induces all positive homotopy-group isomorphisms, at every $\\alpha\\in F_X(x)$. Apply the natural long exact sequences of [lem-coef-serre-homotopy-exact-sequence] to the restriction fibrations $q_X,q_Y$, with basepoints the disk map representing $\\alpha$ and its image. The maps of total spaces $X^{D^r}\\to Y^{D^r}$ are isomorphisms on positive groups by step 3, and those of bases $X^{S^{r-1}}\\to Y^{S^{r-1}}$ by induction. For completeness the group chase on $\\pi_{j+1}E\\to\\pi_{j+1}B\\xrightarrow{\\partial}\\pi_jF\\to\\pi_jE\\to\\pi_jB$, $j\\geq1$, is as follows. To lift $u'\\in\\pi_jF'$, lift its image in $E'$ to $E$. Its image in $B$ vanishes by injectivity on $B$, so choose $u\\in\\pi_jF$ over it. The difference between $u'$ and the image of $u$ is a boundary from $B'$; lift that class from $B$ and multiply $u$ by its boundary. For injectivity, a class $u$ killed in $F'$ maps to zero in $E$, so is a boundary of $b\\in\\pi_{j+1}B$. The image of $b$ in $B'$ comes from $\\pi_{j+1}E'$; lift this element from $E$ and divide $b$ by its image. The resulting class is zero by injectivity on $B$, hence $u=0$. Products rather than subtraction give the identical chase when $j=1$. This proves the required fibre isomorphisms; together with step 5 the fibre maps are weak homotopy equivalences.",
+   "uses": [
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey, Model Categories, Lemmas 2.4.13–2.4.17, printed pp. 55–57; Definition 2.4.21 and Proposition 2.4.22(1), printed pp. 57–58. Explicit cubical, retraction and low-degree expansions by the worker."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-serre-homotopy-exact-sequence] a second time, now to evaluation $p_X,p_Y$ and a basepoint $\\alpha\\in X^{S^r}$ with $x=\\alpha(*)$. The maps on bases are the original isomorphisms of $f$, and those on fibres are step 6's isomorphisms and step 5's component bijection. Here is the total-space group chase, including $j=1$. To lift $a'\\in\\pi_j(Y^{S^r},f\\alpha)$, lift its base image to $b\\in\\pi_j(X,x)$. Its boundary is trivial because its image is trivial in $\\pi_{j-1}F_Y$ and the fibre comparison is injective (a pointed-set injection when $j=1$). Exactness supplies $a\\in\\pi_j(X^{S^r},\\alpha)$ over $b$. The difference between $a'$ and the image of $a$ lies in the image of $\\pi_jF_Y$; lift it from $\\pi_jF_X$ and correct $a$. For injectivity, a killed $a$ has trivial base image by injectivity on the base, hence comes from $u\\in\\pi_jF_X$. Its image in $F_Y$ is a boundary from $\\pi_{j+1}Y$. Lift that base class from $\\pi_{j+1}X$ and divide $u$ by its boundary. Injectivity on $\\pi_jF$ makes the remainder trivial, and the boundary maps trivially in the total group. Thus $a=0$. This proves the based-group isomorphisms for all $j\\geq1$ and all $\\alpha$.",
+   "uses": [
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey, Model Categories, Lemmas 2.4.13–2.4.17, printed pp. 55–57; Definition 2.4.21 and Proposition 2.4.22(1), printed pp. 57–58. Explicit cubical, retraction and low-degree expansions by the worker."
+   }
+  },
+  {
+   "text": "It remains to prove the component bijection, without assuming connected spaces or silently applying a group five lemma to pointed sets. For each $x\\in X$, using the constant sphere maps as the compatible total-space basepoints, [lem-coef-serre-homotopy-exact-sequence] identifies the components of $X^{S^r}$ mapping into the component of $x$ with the orbit set of the action of $\\pi_1(X,x)$ on $\\pi_0F_X(x)$. The corresponding description holds for $Y$ at $f(x)$, and the comparison is equivariant. The acting-group map is an isomorphism by the hypothesis on $f$, and the fibre-set map is bijective by step 5. Therefore the orbit-set map is bijective: lift any representative for surjectivity; if two lifted representatives become equivalent, lift the group element witnessing that equivalence and use injectivity of the set map. Finally $\\pi_0X\\to\\pi_0Y$ is bijective, so these bijections over base components assemble to a bijection on all components of the sphere mapping spaces. Every evaluation fibre is nonempty because it contains the constant map; if $X$ is empty, $Y$ is empty by the component hypothesis, and all nonempty-sphere mapping spaces are empty. This completes the induction and, by step 1, proves the original assertion for arbitrary spaces and every $r\\geq-1$.",
+   "uses": [
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey, Model Categories, Lemmas 2.4.13–2.4.17, printed pp. 55–57; Definition 2.4.21 and Proposition 2.4.22(1), printed pp. 57–58. Explicit cubical, retraction and low-degree expansions by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-realization-finite-limits",
+  "lem-coef-compact-open-currying",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-homotopy-equivalence-weak",
+  "lem-coef-serre-homotopy-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Inherited foundational ancestry, paragraph 2 derived adjunction; Hovey Lemma 2.4.17 checked online, with explicit restriction retraction, disk contraction, group chases and component-orbit argument supplied here. Hovey is not archived locally; see report WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +158,38 @@
    "results": "{\"t\": \"2026-10-16T17:17:05Z\", \"tool\": \"grep\", \"query\": \"WeakHomotopyEquiv|weakHomotopyEquiv\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: the semantic results require an already established model category or a homotopy equivalence; neither supplies the topological sphere-mapping theorem for weak homotopy equivalences. Loogle and the Topology grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition by a weak homotopy equivalence on compact open mapping spaces from spheres",
+   "results": "{\"t\": \"2026-10-16T18:42:55Z\", \"tool\": \"leanfinder\", \"query\": \"Postcomposition by a weak homotopy equivalence on compact open mapping spaces from spheres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"ContinuousMap.HomotopyEquiv.NonemptyDiffeomorphSphere\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_fibration_of_weakEquivalence\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"GenLoop.homotopicFrom\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_mk\", \"HomotopicalAlgebra.LeftHomotopyRel.postcomp\"], \"digest\": \"02b225b5171972a1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are abstract model-category maps on homotopy classes, homotopy-group definitions or homotopy equivalences, not the weak-equivalence assertion for topological sphere mapping spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Postcomposition by weak homotopy equivalence induces weak equivalence on mapping spaces from spheres",
+   "results": "{\"t\": \"2026-10-16T18:42:56Z\", \"tool\": \"leansearch\", \"query\": \"Postcomposition by weak homotopy equivalence induces weak equivalence on mapping spaces from spheres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.weakEquivalence_postcomp_iff\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.weakEquivalence_of_postcomp\", \"HomotopicalAlgebra.weakEquivalence_precomp_iff\", \"HomotopicalAlgebra.weakEquivalence_of_postcomp_of_fac\", \"HomotopicalAlgebra.LeftHomotopyRel.postcomp\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_fibration_of_weakEquivalence\"], \"digest\": \"a2ebb6cbd3db6a22\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are abstract model-category maps on homotopy classes, homotopy-group definitions or homotopy equivalences, not the weak-equivalence assertion for topological sphere mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak equivalences of spaces induce isomorphisms of all homotopy groups of unbased sphere mapping spaces with compact open topology",
+   "results": "{\"t\": \"2026-10-16T18:47:06Z\", \"tool\": \"leanfinder\", \"query\": \"Weak equivalences of spaces induce isomorphisms of all homotopy groups of unbased sphere mapping spaces with compact open topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instInhabitedHomotopyGroup\", \"HomotopyGroup.pi0EquivZerothHomotopy\", \"HomotopyGroup\", \"homotopyGroupEquivFundamentalGroup\", \"GenLoop.Homotopic.setoid\", \"ContinuousMap.HomotopyEquiv.NonemptyDiffeomorphSphere\", \"HomotopyGroup.Pi\", \"HomotopyGroup.auxGroup\"], \"digest\": \"fa35416d7da470c8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are abstract model-category maps on homotopy classes, homotopy-group definitions or homotopy equivalences, not the weak-equivalence assertion for topological sphere mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "WeakHomotopyEquiv|weakHomotopyEquiv|weakHomotopyEquivalence",
+   "results": "{\"t\": \"2026-10-16T18:47:06Z\", \"tool\": \"grep\", \"query\": \"WeakHomotopyEquiv|weakHomotopyEquiv|weakHomotopyEquivalence\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are abstract model-category maps on homotopy classes, homotopy-group definitions or homotopy equivalences, not the weak-equivalence assertion for topological sphere mapping spaces."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-topological-serre-model",
@@ -64,5 +197,20 @@
   "date": "2026-10-17"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-sphere-mapping-weak-equivalence",
+  "worker": "stage1",
+  "summary": "Replaced the earlier attempted general-cofibrant-source restatement with the full sphere induction. Proved disk restriction lifting by an explicit retraction, disk invariance by the disk contraction and the existing homotopy-equivalence node (maintainer-reader repair), fibre and total-group comparison by exact-sequence chases, and component comparison by the existing loop-action orbit formula. Removed the unlanded child prototype. Statement unchanged; zero new nodes.",
+  "blueprint": "Preserves the recorded prop-coef-integral-exceptional-adjoint paragraph-2 ancestry through the Serre-model/cosimplicial-frame foundational route. The item supplies the sphere-mapping theorem used by the Serre-model proof; it does not cite that dependent model theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-e7ee9b158",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-e7ee9b158 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, with the statements of every cited node. Statement unchanged and not weakened. Tested on r=-1 (both mapping spaces are points), r=0 (X×X, fibre X), X empty (forces Y empty, all r>=0 mapping spaces empty) and nonconnected X. Hovey Model Categories §2.4 is not in the project literature: it is WANTED, and proof_origin by=agent is kept. I judged the proof on its own mathematics. Step 1: kification changes neither the compact-Hausdorff test maps nor the k-topology of Cont(K,Z), so arbitrary X,Y reduce to k-spaces. Step 2: the retraction R(v,t)=(sv,2+s(t-2)), s=1/max(1-t/2,|v|), lands on the bottom or the side and fixes both; its denominator is at least 1/2; m=0 is covered. Step 3: the shell homotopy is correct, but it re-proves inline the existing same-unit node lem-coef-homotopy-equivalence-weak (no proof deps, so no cycle). Step 4: (sin πt u, cos πt) is a quotient map (closed surjection from compact to Hausdorff), the k-pullback description holds, and p is a pullback of q. Step 5: fibre identification, radial cube/disk map, and F=X for r=0. Steps 6 and 7: five-lemma chases checked in both directions, including nonabelian j=1 and the pointed-set π0 injection, against the exact segment the exact-sequence node states. Step 8: an orbit-set bijection from a group isomorphism plus an equivariant bijection, assembled over π0. Every cited statement is in unit sk-prop-sf-biduality-general and def-cbc is only a notion, so no tool_uses are needed. No cycle before or after the repair. No new nodes, no duplicate statement in the DAG. FIX: step 3 now cites lem-coef-compact-open-currying for the continuity of e, c and H on Cont(D^m,Z) and lem-coef-homotopy-equivalence-weak (f=e_Z, g=c_Z, homotopies H and the constant one), then transfers to the kification by step 1. proof_deps now adds that node; the split_report summary is updated. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-sphere-mapping-weak-equivalence.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

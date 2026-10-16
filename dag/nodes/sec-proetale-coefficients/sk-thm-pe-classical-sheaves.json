@@ -3,42 +3,121 @@
  "blueprint": {
   "is": "sk-thm-pe-classical-sheaves",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Recognizing the classical part",
- "statement": "The functor $\\nu_X^*$ is fully faithful. Its essential image is exactly the\nclassical sheaves of [sk-def-pe-classical-definition]. For modules it is an\nexact equivalence between $\\Mod(X_{\\Et},\\Lambda)$ and the full subcategory of\nclassical $\\Lambda_X$-module sheaves on $X_{\\Proet}$.",
+ "statement": "Let $X$ be a scheme and let $\\nu_X^*\\dashv\\nu_{X,*}$ be the comparison adjunction from the small étale site to the small pro-étale site [def-weil-pbc-site-comparison-morphism]. The functor\n$\\nu_X^*\\colon\\Sh(X_{\\Et})\\to\\Sh(X_{\\Proet})$ on sheaves of sets is fully faithful. Its essential image is exactly the classical sheaves of [sk-def-pe-classical-definition].\n\nLet $\\Lambda$ be a discrete commutative ring, let $\\Lambda_{X,\\Et}$ be its constant sheaf of rings [def-weil-pbc-constant-sheaf], and write $\\Lambda_X=\\nu_X^*\\Lambda_{X,\\Et}$. For module sheaves [def-weil-sheaf-of-modules-category], the same inverse image is an exact equivalence between $\\Mod(X_{\\Et},\\Lambda)$ and the full subcategory of classical $\\Lambda_X$-module sheaves on $X_{\\Proet}$, where classicality is as in [sk-def-pe-classical-definition].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/_section.md",
   "place": "node sk-thm-pe-classical-sheaves, order 725"
  },
  "stmt_deps": [
-  "sk-def-pe-classical-definition"
+  "def-weil-pbc-site-comparison-morphism",
+  "sk-def-pe-classical-definition",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof": [
   {
-   "text": "Evaluation on étale objects gives $F\\xrightarrow{\\sim}\\nu_{X,*}\\nu_X^*F$ in\n$\\Sh(X_{\\Et})$, hence full faithfulness ([det-pe-classical-sheaves-unit]), and\nevery $\\nu_X^*F$ is classical by the affine evaluation formula of\n[sk-prop-pe-comparison-morphism]. Conversely, let $G$ be classical. On a\npro-étale affine the counit $\\nu_X^*\\nu_{X,*}G\\to G$ of sheaves on $X_{\\Proet}$\nis\n\n$$\n(\\nu_X^*\\nu_{X,*}G)(U)=\\varinjlim_iG(U_i)\\longrightarrow G(U),\n$$\n\nwhich is an isomorphism because $G$ is classical. Since pro-étale affines form a\ncovering basis, the counit is an isomorphism of sheaves\n([det-pe-classical-sheaves-image]). The module statement follows because\n$\\nu_X^*$ is exact and both adjoint functors preserve module structures\n([det-pe-classical-sheaves-modules]).",
+   "text": "Apply [det-pe-classical-sheaves-unit] to the arbitrary scheme $X$. Its statement gives both the invertible unit $F\\to\\nu_{X,*}\\nu_X^*F$ for every étale sheaf of sets and the bijection $\\operatorname{Hom}(F,F')\\to\\operatorname{Hom}(\\nu_X^*F,\\nu_X^*F')$ induced by $\\nu_X^*$. The latter is exactly full faithfulness of the set-valued inverse image in the first clause.",
    "uses": [
-    "det-pe-classical-sheaves-unit",
-    "det-pe-classical-sheaves-image",
-    "det-pe-classical-sheaves-modules"
+    "det-pe-classical-sheaves-unit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves.proof.md",
+    "place": "First sentence, unit and full faithfulness; detailed sk-thm-pe-classical-sheaves-unit.proof.md, both paragraphs; Stacks Tag 099T, proetale.tex lemma-fully-faithful."
+   }
+  },
+  {
+   "text": "For any sheaf of sets $G$ on $X_{\\Proet}$, [det-pe-classical-sheaves-image] identifies membership in the essential image, namely existence of $F$ and an isomorphism $G\\cong\\nu_X^*F$, with bijectivity of every specified continuity map, and with invertibility of the actual counit $\\nu_X^*\\nu_{X,*}G\\to G$. The definition [sk-def-pe-classical-definition] uses precisely these continuity maps, via [det-pe-classical-definition-continuity-map]: for each pro-étale affine presentation $U\\cong\\varprojlim_{i\\in I}U_i$ with its small cofiltered index and affine étale stages, the map $c_{G,(U_i)}$ is induced by restriction, not an arbitrary bijection $\\varinjlim_{i\\in I^{\\mathrm{op}}}G(U_i)\\cong G(U)$. Thus (1) and (2) of the cited equivalence give exactly the asserted essential image. In the classical case its condition (3) supplies the canonical representative $F=\\nu_{X,*}G$ with counit isomorphism.",
+   "uses": [
+    "det-pe-classical-sheaves-image",
+    "sk-def-pe-classical-definition",
+    "det-pe-classical-definition-continuity-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves.proof.md",
+    "place": "First sentence after full faithfulness and the converse/counit paragraph; detailed sk-thm-pe-classical-sheaves-image.proof.md, implications (1) to (2), (2) to (3), (3) to (1); Bhatt–Scholze Lemmas 5.1.1–5.1.2 and Definition 5.1.3, p. 34."
+   }
+  },
+  {
+   "text": "Apply [det-pe-classical-sheaves-modules] to the given discrete commutative ring $\\Lambda$, its constant étale sheaf $\\Lambda_{X,\\Et}$ and its pullback $\\Lambda_X$. These are exactly the coefficients in that statement; no finiteness, torsion, invertibility or noetherian assumption is needed. It supplies the module adjunction and the equivalence onto the full subcategory of classical module sheaves, with quasi-inverse $\\nu_{X,*}$. For exactness, if $\\Lambda$ is finite, apply the exactness clause of [prop-weil-pbc-site-comparison-finite-level] to $T=X$ and this $\\Lambda$; its comparison inverse image is the same functor on these module sheaves. If $\\Lambda$ is infinite, use the exactness clause of [det-pe-classical-sheaves-modules], whose statement allows every discrete commutative ring. This proves exactness in both cases without extending a finite-ring theorem to infinite rings. The module notion of classicality in [sk-def-pe-classical-definition] is the one used there: the same restriction-induced continuity maps are isomorphisms in $\\Lambda$-modules. Consequently the asserted equivalence is exact.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "sk-def-pe-classical-definition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves.proof.md",
+    "place": "Last sentence; detailed sk-thm-pe-classical-sheaves-modules.proof.md, all four paragraphs (module structures, exactness, full faithfulness, essential image). The finite-coefficient exactness specialization also realizes the comparison proposition proof, final paragraph, explicitly citing prop-weil-pbc-site-comparison-finite-level."
+   }
   }
  ],
  "proof_deps": [
   "det-pe-classical-sheaves-unit",
   "det-pe-classical-sheaves-image",
-  "det-pe-classical-sheaves-modules"
+  "sk-def-pe-classical-definition",
+  "det-pe-classical-definition-continuity-map",
+  "det-pe-classical-sheaves-modules",
+  "prop-weil-pbc-site-comparison-finite-level"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves.proof.md",
+  "place": "The complete unit proof, separated into its three assertions and citing the existing detailed nodes; checked against Bhatt–Scholze Lemmas 5.1.1–5.1.2, Definition 5.1.3, and Stacks Tag 099T."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "classicalSheaf|IsClassical|proetale|pro.etale",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: these declarations do not identify the essential image of the scheme etale/proetale inverse image and prove its module form",
+   "directory": "Mathlib/AlgebraicGeometry/Sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Functor.FullyFaithful",
+   "results": "4 hits: CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: the generic isomorphism-unit criterion assumes the geometric unit is invertible and does not identify classical sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image from etale sheaves to proetale sheaves is fully faithful with essential image the classical sheaves and gives an exact equivalence for discrete ring module sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, CondensedMod.LocallyConstant.instFullModuleCatCondensedDiscrete, CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondMod.LocallyConstant.fullyFaithfulFunctor, LightCondMod.isDiscrete_tfae, LightCondMod.LocallyConstant.instFullModuleCatLightCondensedDiscrete, CondensedSet.LocallyConstant.functorFullyFaithful",
+   "date": "2026-10-16",
+   "verdict": "no match: these declarations do not identify the essential image of the scheme etale/proetale inverse image and prove its module form"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale proetale inverse image fully faithful essential image classical sheaves",
+   "results": "8 hits: CategoryTheory.Equivalence.fullyFaithfulToEssImage, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, CategoryTheory.Equivalence.fullyFaithfulFunctor, CategoryTheory.Equivalence.fullyFaithfulInverse, CategoryTheory.fullyFaithfulSheafToPresheaf, CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val, CategoryTheory.instFaithfulSheafFunctorOppositeSheafToPresheaf, AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace",
+   "date": "2026-10-16",
+   "verdict": "no match: these declarations do not identify the essential image of the scheme etale/proetale inverse image and prove its module form"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulFunctor|isDiscrete_tfae|functorFullyFaithful",
+   "results": "15 hits: Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Discrete/Characterization.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: these declarations do not identify the essential image of the scheme etale/proetale inverse image and prove its module form",
+   "directory": "Mathlib/Condensed/Discrete"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on the small proetale site is in the essential image of etale inverse image exactly when sections commute with cofiltered limits of affine etale schemes",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, instEssSurjLightDiagram'LightDiagramToLightFunctor, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-16",
+   "verdict": "no match: these declarations do not identify the essential image of the scheme etale/proetale inverse image and prove its module form"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -56,5 +135,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-thm-pe-classical-sheaves"
+ "unit": "sk-thm-pe-classical-sheaves",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-thm-pe-classical-sheaves",
+  "worker": "stage1",
+  "summary": "Reused the three existing detailed nodes, already split and reviewed. Replaced the single imported paragraph by three explicitly sourced steps and verified each cited statement. Made the arbitrary scheme, set-valued sheaves, discrete commutative coefficient ring and pullback constant coefficients explicit without changing the assertions. No new nodes or Mathlib leaves; no full-project attachment exists.",
+  "blueprint": "The sole unit-proof paragraph: step 1 realizes its unit/full-faithfulness opening; step 2 realizes the classical image and the converse via the counit; step 3 realizes the last sentence on exact module equivalence, including the finite-coefficient exactness theorem cited by the comparison proposition proof. The imported blueprint.from is null because this is the blueprint node itself. The three detailed nodes belong to this same unit. The existing finite-coefficient comparison proposition is used only for its exactness clause, as a generic comparison tool in the explicitly cited comparison-unit route; see the second-reading report.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Step 3, finite-Λ branch only: takes the exactness clause of its statement at T=X for the module inverse image. It lives in sk-thm-properbasechange, outside this unit's route closure, but it is the carrier of step 3 of the cited comparison unit sk-prop-pe-comparison-morphism, whose blueprint proof names it for exactness; no node of this unit's route states finite-coefficient exactness. Used as a black box; the infinite-Λ branch uses det-pe-classical-sheaves-modules."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NF-eecff9d9c",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-eecff9d9c (reviewer sub-agent of L); spot-checked: I read the item in full, all ten cited statements, the blueprint main-20261015 unit with its three detailed statement/proof files and the comparison-unit sources, Stacks proetale.tex 0GLZ/099T/099S (tags checked) and Bhatt–Scholze pp. 34–35 (5.1.1–5.1.3). The statement agrees with the blueprint and with Bhatt–Scholze 5.1.2: X is arbitrary and Λ is discrete commutative. Nothing is weakened, no hypothesis is added, and the coefficients are the pulled-back constant Λ_X throughout. Step 1 takes full faithfulness from the Hom bijection stated by det-pe-classical-sheaves-unit. Step 2 takes the essential image from conditions (1)–(3) of det-pe-classical-sheaves-image; both classicality definitions use the same restriction-induced map c over I^op. Step 3 takes the adjunction and the equivalence for arbitrary Λ from det-pe-classical-sheaves-modules. Its finite/infinite exactness case split is redundant but correct, and it reproduces the comparison-unit proof's citation of prop-weil-pbc-site-comparison-finite-level. That citation is the only way the item reaches every carrier of the cited unit sk-prop-pe-comparison-morphism. There are no new nodes and no cycles, proof_deps equals the union of uses, and no SGA source is cited. Edge cases checked: empty X, Λ=0, Λ=Z, one-object presentations. One repairable fault: prop-weil-pbc-site-comparison-finite-level belongs to unit sk-thm-properbasechange, which is outside the item's route, and the delivery did not declare it in split_report.tool_uses. Without that entry the merge does not copy it into tool_uses and check_dag flags it once the item is reviewed. Fix: fixes/dag/nodes/sec-proetale-coefficients/sk-thm-pe-classical-sheaves.json adds only that split_report.tool_uses entry. Accepted tool use: prop-weil-pbc-site-comparison-finite-level, exactness clause, finite-Λ branch of step 3.; 1 file(s) fixed by the reviewer"
+ }
 }
