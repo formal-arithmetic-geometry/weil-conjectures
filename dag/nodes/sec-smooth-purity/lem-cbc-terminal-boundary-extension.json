@@ -208,5 +208,23 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-0252647d2 (reviewer sub-agent of L); spot-checked: I read the contract files, delivery-errors A–F, the packet, the full report, the item's six steps, and the full statements of all five cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-right-fibration-fibers, def-weil-pbc-trivial-kan-fibration, lem-coef-right-fibration-contractible-fibers, lem-cbc-kan-fibration-fiber-criterion), plus the unit sk-prop-sf-cbc and the only citer, lem-cbc-enhanced-functor-cone-calculus. The statement is unchanged and agrees with Kerodon 06R1 (Prop 4.7.3.11, read online; its proof is the n=-2 case of 05ET), with finality taken as contractible right-pinched Map. Step 1 builds the Joyal slice Q_{/t} degreewise. Step 2 uses the identity (Λ^k_i⋆Δ^0)∪Δ^k=Λ^{k+1}_i, which is an inner horn for 0<i≤k, so q is a right fibration and E is a quasicategory. Step 3: E_x is literally Map_Q(x,t) of def-cbc, and the Kan-fiber clause of the fibers lemma applies with F=E. Step 4: lifting squares against ∂Δ^k correspond to boundary maps ∂Δ^{k+1}→Q ending at t, and k=0 gives the p_0-surjectivity of 08NL. Step 5 applies the contractible-fibers lemma (01NU). Step 6 base-changes to E_x→Δ^0, which lifts against every boundary, and the trivial-Kan ⇒ weak-equivalence clause (00ZP) makes E_x weakly contractible. Edge cases checked: Δ^0, N(0→1) at t=1 and t=0, two discrete points, BG with G nontrivial, and Q empty. No new nodes: the earlier truncated-criterion restatement was already dropped and is cited nowhere. The cited nodes' dependency closure contains no cycle. The two declared tool uses (lem-coef-infinity-right-fibration-fibers, lem-coef-right-fibration-contractible-fibers) are generic right-fibration black boxes and replace no unit step: accepted. proof_deps equals the union of the step uses; proof_origin is agent because Kerodon is not archived. No SGA source is used. No fixes written. Details are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ff440806",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Statement matches node and Kerodon 06R1 clause by clause: Quasicategory Q, vertex t, forall x IsContractible (mappingSpace Q x t) iff for all n, every sigma from boundary of Delta[n+1] to Q with last vertex t (boundary.iota 0 then Fin.last n, checked against Mathlib delta 0 / succAbove) extends to Delta[n+1]. No extra hypotheses, m>=1 written as n+1, one explicit universe u. mappingSpace and IsContractible reused from def-cbc-enhanced-diagrams-cones, no private copies, no hollow definitions, only sorry. Docstrings carry source place, blueprint tag and all six proof steps. lean.statement verbatim in file. Proof-only imports RightFibrationFibers and RightFibrationContractibleFibers exist with the cited declarations. Edge cases m=1, empty Q, point, two discrete points, nerve of 0->1, BG all correct. Report has real Worker report and Second reading by Q28 sections. nt_compile.py --json against the local side overlay: rc 0, no errors or warnings. Cosmetic only: the Lean could cite the existing IsTerminal (same meaning); garbled 'the project server' phrase in the second reading."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TerminalBoundaryExtension",
+  "declaration": "SSet.Enhanced.terminal_iff_boundary_extension",
+  "file": "lean/Sheaf/CategoryTheory/TerminalBoundaryExtension.lean",
+  "statement": "theorem terminal_iff_boundary_extension {Q : SSet.{u}} [Quasicategory Q] (t : Q _⦋0⦌) : (∀ x : Q _⦋0⦌, IsContractible (mappingSpace Q x t)) ↔ ∀ (n : ℕ) (σ : (∂Δ[n + 1] : SSet.{u}) ⟶ Q), (boundary.ι (0 : Fin (n + 2)) ≫ σ).app _ (stdSimplex.obj₀Equiv.symm (Fin.last n)) = t → ∃ σbar : (Δ[n + 1] : SSet.{u}) ⟶ Q, (boundary (n + 1)).ι ≫ σbar = σ",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
