@@ -20,9 +20,140 @@
   "def-exc-excellent-ring",
   "def-weil-pbc-nagata-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary finite type $R$-algebra $S$ which is an integral domain. By [def-exc-excellent-ring], $R$ is Noetherian and a G-ring. Apply [lem-weil-pbc-finite-type-over-g-ring] to this finite type map: $S$ is a G-ring, and hence is Noetherian by [def-weil-pbc-g-ring]. We shall prove that this arbitrary $S$ is N-1.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QV, lemma-quasi-excellent-nagata, reduction to finite type domains; Tag 07PV, proposition-finite-type-over-G-ring"
+   }
+  },
+  {
+   "text": "By the J-2 clause of [def-exc-excellent-ring], the regular locus $U=\\{\\mathfrak p:S_{\\mathfrak p}\\text{ is regular local}\\}$ is open in $\\operatorname{Spec}S$. Since $S$ is a domain, $S_{(0)}$ consists of all fractions with nonzero denominator and is its fraction field, by [def-weil-pbc-localization-at-prime]. A field is regular local by [lem-weil-pbc-field-regular-ring], so $(0)\\in U$. By the explicit closed-set description in [lem-weil-pbc-spec-irreducible-closed-subsets-primes], write the closed complement as $V(I)=\\{\\mathfrak p:I\\subseteq\\mathfrak p\\}$. Since $(0)\\notin V(I)$, choose $f\\in I$ with $f\\ne0$. If $f\\notin\\mathfrak p$ then $I\\nsubseteq\\mathfrak p$, so $D(f)\\subseteq U$. This gives a nonzero principal open consisting of regular points; it does not assume that $S$ is regular everywhere.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-field-regular-ring",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QV, lemma-quasi-excellent-nagata, application of J-2 before the local reduction"
+   }
+  },
+  {
+   "text": "Put $B=S_f$ using [def-weil-ring-localization-away]. It is Noetherian by [lem-weil-pbc-localization-noetherian]. For a prime $Q$ of $B$, [lem-weil-pbc-localization-spectrum-embedding] gives its contracted prime $\\mathfrak p\\subset S$ with $f\\notin\\mathfrak p$. The local rings $B_Q$ and $S_{\\mathfrak p}$ are isomorphic directly on fractions: $a/u\\mapsto(a/1)/(u/1)$ has inverse $(a/f^n)/(b/f^m)\\mapsto af^m/(bf^n)$. Here $b/f^m\\notin Q$ implies $b\\notin\\mathfrak p$, so the latter denominator is outside $\\mathfrak p$; the fraction equality criteria in [def-weil-pbc-localization-at-prime] and [def-weil-ring-localization-away] verify that both maps are well-defined and inverse. Consequently each $B_Q$ is regular local by step 2. The definition [def-weil-regular-scheme] makes $B$ a regular ring, and [lem-weil-pbc-regular-ring-normal] makes it normal. Thus the nonzero $f$ of step 2 has normal localization $S_f$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0333, lemma-characterize-N-1, normal-principal-open hypothesis; elementary fraction identification of the local rings"
+   }
+  },
+  {
+   "text": "For an arbitrary maximal ideal $\\mathfrak m$ of $S$, put $A=S_{\\mathfrak m}$ and $\\mathfrak n=\\mathfrak mA$. This is local with maximal ideal $\\mathfrak n$ by [def-weil-pbc-localization-at-prime], and is Noetherian by [lem-weil-pbc-localization-noetherian]. It is a domain: a zero product $(a/u)(b/v)=0$ gives $wab=0$ for some $w\\notin\\mathfrak m$, hence $a=0$ or $b=0$ since $S$ is a domain and $w\\ne0$; also $1/1\\ne0$. Thus $A$ is reduced. Since $S$ is a G-ring, [def-weil-pbc-g-ring] gives that the canonical $\\mathfrak n$-adic completion map $A\\to\\widehat A$ is regular. The target $\\widehat A$ is Noetherian by [lem-weil-pbc-adic-completion-noetherian], with ideal $\\mathfrak n$. Apply [lem-exc-regular-map-reduced-target] to this specific regular map: $\\widehat A$ is reduced.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-exc-regular-map-reduced-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QV, lemma-quasi-excellent-nagata, reduced local completion; Tag 07QK, lemma-reduced-goes-up"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-analytically-unramified-n1] to $A=S_{\\mathfrak m}$: step 4 supplied a Noetherian local integral domain and reduced completion at its own maximal ideal. The conclusion is that $S_{\\mathfrak m}$ is N-1. This holds for every maximal ideal $\\mathfrak m$ of $S$.",
+   "uses": [
+    "lem-weil-pbc-analytically-unramified-n1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032Y, lemma-analytically-unramified-easy, part (5), as used in Tag 07QV"
+   }
+  },
+  {
+   "text": "Now use [lem-weil-pbc-n1-local-characterization] with the Noetherian domain $S$ from step 1, the nonzero $f$ with normal $S_f$ from steps 2–3, and the N-1 property of every maximal localization from step 5. Its conclusion says that the integral closure of $S$ in its fraction field is finite over $S$, that is, $S$ is N-1. Since the finite type domain algebra $S$ in step 1 was arbitrary, every finite type domain algebra over $R$ is N-1.",
+   "uses": [
+    "lem-weil-pbc-n1-local-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0333, lemma-characterize-N-1, implication (2) to (1), in the reduction of Tag 07QV"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-universally-japanese-n1-criterion] to $R$ using the universal conclusion of step 6. It follows that $R$ is universally Japanese, i.e. every finite type domain algebra over $R$ is N-2.",
+   "uses": [
+    "lem-exc-universally-japanese-n1-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0351, lemma-check-universally-japanese, as invoked in Tag 07QV"
+   }
+  },
+  {
+   "text": "For every prime ideal $\\mathfrak p$ of $R$, the quotient $R/\\mathfrak p$ is a domain and the quotient map is of finite type: every element is a coefficient from $R$, so no algebra generators are needed in [def-weil-pbc-finite-type-algebra]. Apply the universally Japanese property of step 7, interpreted by [def-weil-pbc-nagata-ring], to conclude that every $R/\\mathfrak p$ is N-2. Together with the Noetherianity of $R$ in [def-exc-excellent-ring], these are exactly the two clauses defining a Nagata ring in [def-weil-pbc-nagata-ring].",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-nagata-ring",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition Tag 032R, definition-nagata; unpacking the definitions after the argument of Tag 07QV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-field-regular-ring",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-exc-regular-map-reduced-target",
+  "lem-weil-pbc-analytically-unramified-n1",
+  "lem-weil-pbc-n1-local-characterization",
+  "lem-exc-universally-japanese-n1-criterion",
+  "def-weil-pbc-nagata-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07QV, lemma-quasi-excellent-nagata; local literature absent, proof reconstructed using the cited DAG statements and checked against the online Stacks text"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,15 +196,110 @@
    "results": "{\"t\": \"2026-10-15T20:19:26Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure of a quasi excellent domain in any finite extension of its fraction field is a finite module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.finite\", \"Ring.instFiniteNormalClosure_1\", \"Ring.instFiniteNormalClosure\", \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"IsIntegralClosure.isNoetherianRing\", \"Algebra.QuasiFinite.instOfIsFractionRing\", \"IsIntegralClosure.isNoetherian\", \"integralClosure.isNoetherianRing\"], \"digest\": \"4daaf67292241019\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search; candidates do not state the excellent-ring notion or the reduced-ring parameter existence assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi excellent ring is Nagata",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"Polynomial.not_quasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : Ideal (Polynomial R)) [inst_1 : P.IsPrime], ¬Algebra.QuasiFiniteAt R P\", \"doc\": \"For any prime ideal $ P $ in the polynomial ring $ R[X] $, the localization of $ R[X] $ at the complement of $ P $ is not a quasi-finite algebra over the base commutative ring $ R $. This means the lo\"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"RingHom.QuasiFinite.of_isIntegral_of_finiteType\", \"module\": \"Mathlib/RingTheory/RingHom/QuasiFinite\", \"type\": \"∀ {R : Type u_6} {S : Type u_7} {T : Type u_8} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  {f : R →+* S},\\n  f.IsIntegral → ∀ {g : S →+* T}, g.IsStandardOpenImmersion → (g.comp f).FiniteType → (g.comp f).QuasiFinite\", \"doc\": \"If $ f : R \\\\to S $ is an integral ring homomorphism, $ g : S \\\\to T $ is a standard open immersion, and the composition $ g \\\\circ f $ is of finite type, then $ g \\\\circ f $ is quasi-finite. This means t\"}\n  {\"name\": \"IsNoetherianRing.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_2 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_3 : (P : Ideal R) → [inst_3 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_4 : P.IsMaxima\", \"doc\": \"If $ R $ is a commutative semiring such that for every maximal ideal $ P $, the localization $ R_P $ at $ P $ is a Noetherian ring, then $ R $ itself is a Noetherian ring. This criterion establishes t\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherianRing_of_away\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Finset R),\\n  Ideal.span ↑S = ⊤ → (∀ (s : ↥S), IsNoetherianRing (Localization.Away ↑s)) → IsNoetherianRing R\", \"doc\": \"If the localization of a commutative ring $ R $ away from an element $ x $ forms a Noetherian ring, then $ R $ itself is a Noetherian ring. This follows from the property that every ideal in $ R $ is \"}\n  {\"name\": \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T] [Algebra.IsIntegral R S]\\n  [Algebra.FiniteType R T] (s : S) [IsLocalization.Away s T], Algebra.Q\", \"doc\": \"If $ S $ is an integral $ R $-algebra, $ T $ is a finitely generated $ R $-algebra, and $ T $ is the localization of $ S $ at the powers of some element $ s \\\\in S $, then $ T $ is a quasi-finite $ R $\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically regular formal fibres and open regular loci imply finite normalization in field extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T] [Algebra.IsIntegral R S]\\n  [Algebra.FiniteType R T] (s : S) [IsLocalization.Away s T], Algebra.Q\", \"doc\": \"If $ S $ is an integral $ R $-algebra, $ T $ is a finitely generated $ R $-algebra, and $ T $ is the localization of $ S $ at the powers of some element $ s \\\\in S $, then $ T $ is a quasi-finite $ R $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"RingHom.QuasiFinite.of_isIntegral_of_finiteType\", \"module\": \"Mathlib/RingTheory/RingHom/QuasiFinite\", \"type\": \"∀ {R : Type u_6} {S : Type u_7} {T : Type u_8} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  {f : R →+* S},\\n  f.IsIntegral → ∀ {g : S →+* T}, g.IsStandardOpenImmersion → (g.comp f).FiniteType → (g.comp f).QuasiFinite\", \"doc\": \"If $ f : R \\\\to S $ is an integral ring homomorphism, $ g : S \\\\to T $ is a standard open immersion, and the composition $ g \\\\circ f $ is of finite type, then $ g \\\\circ f $ is quasi-finite. This means t\"}\n  {\"name\": \"IsIntegralClosure.finite\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] (C : Type u_4) [inst_5 : CommRing C] [inst_6 : Algebra K L] [inst_7 : Algebra A L]\\n  [IsScalarTower A K L] [inst_9 : Algebra C L] [IsIntegralClosure \", \"doc\": \"If $ A $ is an integrally closed Noetherian ring, then its integral closure $ C $ in an extension ring is a finitely generated $ A $-module.\"}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Excellent\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "excellent|quasiExcellent|Nagata|Japanese",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/NoetherNormalization.lean\", \"line\": \"14\", \"text\": \"This file contains a proof by Nagata of the Noether normalization lemma.\"}",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi excellent ring Nagata universally Japanese",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-punctured-curve-branches",
   "by": "worker",
   "date": "2026-10-15"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-quasi-excellent-nagata",
+  "worker": "ND",
+  "summary": "Statement unchanged. Eight steps prove finite normalization for every finite type domain using the open regular locus, reduced local completions, and the existing local N-1 criterion, then deduce universal Japanese and Nagata. Two general supporting facts are new unsplit nodes; no new Mathlib leaves. No Lean attachment found.",
+  "blueprint": {
+   "ancestor": "lem-exc-punctured-curve-branches",
+   "place": "Proof paragraph 1, first sentence: \"Excellence implies the Nagata property\".",
+   "steps": "All eight steps expand the excellence-implies-Nagata sentence used for finite normalization of the branch algebras; no change to the Kummer unit route.",
+   "same_as_searches": [
+    "07QK",
+    "0351",
+    "regular reduced",
+    "universally Japanese N-1",
+    "quasi-excellent"
+   ]
+  },
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-g-ring",
+    "why": "G-ring stability under finite type algebras is a general commutative-algebra input; the Kummer unit does not supply it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Noetherianity of principal and prime localizations is a general ring-theoretic tool, not a cohomological step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Regular Noetherian rings are normal; this is the generic normality input to the local N-1 criterion."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Noetherianity of the local completion is needed before reducedness can ascend along its regular map."
+   },
+   {
+    "node": "lem-weil-pbc-analytically-unramified-n1",
+    "why": "Finite normalization of a Noetherian local domain with reduced completion is the generic local finiteness tool used in the Stacks proof."
+   },
+   {
+    "node": "lem-weil-pbc-n1-local-characterization",
+    "why": "The normal-principal-open plus maximal-local N-1 criterion is the exact generic globalization tool; it supplies no Kummer calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-analytically-unramified-n1",
+  "lem-weil-pbc-n1-local-characterization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-4c1c96fa0",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-4c1c96fa0 (reviewer sub-agent of L); spot-checked: Full mathematical and source review completed; all eight steps, both new nodes, citations, hypotheses, edge cases, route, and delivery checks A–F pass. Review written to review.md."
+ }
 }
