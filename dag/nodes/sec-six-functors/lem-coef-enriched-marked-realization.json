@@ -30,9 +30,114 @@
   "lem-coef-coherent-nerve-comparison",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $n$, define $T_nA$ to have the objects of $A$ and mapping simplicial sets $t_n(A(x,y))$ of [lem-coef-join-translation-resolution]. Its composition and identities are those of $A$ in degree $n+m+1$; restriction along ordinal sums commutes with these operations. Thus there are strict simplicial-functor diagrams\n$$A_\\bullet\\xleftarrow{p_\\bullet}T_\\bullet A\\xrightarrow{e_\\bullet}\\operatorname{const}(A),$$\nwhere an ordinary $A_n$ is discretely enriched. The first-block restrictions give $p_n$, the last-block restrictions give $e_n$. The translation lemma makes every mapping-set map of $p_n$ a weak homotopy equivalence. It is the identity on objects, hence induces an equivalence on $\\pi_0$ and is a Dwyer--Kan equivalence by [lem-coef-coherent-nerve-comparison]. Consequently $\\mathbf RN_{\\mathrm{hc}}(p_\\bullet)$ is an equivalence of coherent diagrams: each component is an equivalence and the criterion of [lem-cbc-enhanced-functor-cone-calculus] applies. This construction works for arbitrary, possibly non-Kan, mapping sets.",
+   "uses": [
+    "lem-coef-join-translation-resolution",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 1.3.4.11, Lemma 1.3.4.12 and first paragraph of the proof of Proposition 1.3.4.14, printed pp.112-113"
+   }
+  },
+  {
+   "text": "By [lem-coef-space-geometric-descent], geometric realization of simplicial spaces commutes with finite products; thus $N(\\Delta^{\\mathrm{op}})$ is sifted in the definition of [lem-coef-sifted-fixed-object-hocolimit]. The augmentation $e_\\bullet$ is identity on the fixed object set, and [lem-coef-join-translation-resolution] says for every pair $(x,y)$ that its mapping-space cocone is colimiting. Apply the fixed-object criterion to $T_\\bullet A\\to A$. It gives a colimiting cocone to $D=\\mathbf RN_{\\mathrm{hc}}(A)$. Inverting the diagram equivalence $p_\\bullet$ of Step 1 gives a coherent colimiting cocone $i_n:N(A_n)\\to D$. Perform this inversion in the functor category of diagrams depending on $A$, in an enlarged universe: $p_\\bullet$ is itself natural in $A$, and the componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] says it is an equivalence in that functor category. A functor equivalence has an inverse there, so this supplies a coherently natural cocone. To identify its zero-degree map, let $c_0:A_0\\to T_0A$ send a vertex arrow to its completely degenerate simplices. Then $p_0c_0=1$, while $e_0c_0$ is exactly the inclusion of the vertex category in $A$. Hence $i_0$ is the actual vertex-category map followed by the chosen locally Kan replacement and its coherent nerve. This fixes the zero-degree leg of the cocone, up to its canonical coherent identification.",
+   "uses": [
+    "lem-coef-space-geometric-descent",
+    "lem-coef-sifted-fixed-object-hocolimit",
+    "lem-coef-join-translation-resolution",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 1.3.4.14, printed p.113; the two hypotheses in Lemma 1.3.4.10 are checked on the actual translation cocone"
+   }
+  },
+  {
+   "text": "We first supply existence of all edge localizations with their entire functor-category universal property. For a quasicategory $Q$ and edges $S$, mark $S$ and the degenerate edges, obtaining $X=(Q,S)$. The functorial marked-anodyne replacement of [lem-coef-marked-anodyne-lifting-calculus] gives $j:X\\to L^\\natural$. It is a weak equivalence in the model structure of [lem-coef-marked-point-cartesian-model]: restriction on $\\operatorname{Map}^{\\sharp}(-,E^\\natural)$ is a trivial Kan fibration for every $E$, as the lifting lemma states. Put $F=\\operatorname{Map}^{\\flat}(X,E^\\natural)$. Directly from the marking definition, $F$ is the full subcategory $\\operatorname{Fun}_S(Q,E)$: an $m$-simplex is a map $Q\\times\\Delta^m\\to E$ inverting each marked arrow at each of its $m+1$ vertices. For any small quasicategory $T$, the cartesian product assertion of the marked-model node makes $T^\\natural\\times j$ a weak equivalence. The defining weak-equivalence test therefore gives\n$$\\operatorname{Fun}(T,\\operatorname{Fun}(L,E))^\\simeq\\ \\simeq\\ \\operatorname{Fun}(T,F)^\\simeq.$$\nIndeed both sides are the corresponding $\\operatorname{Map}^{\\sharp}$ into $E^\\natural$: an equivalence of $T$ is carried to a componentwise equivalence, which is an equivalence of functor categories by [lem-cbc-enhanced-functor-cone-calculus]. Taking all $T$ proves the equivalence of the two functor categories: for the restriction functor $u:U\\to F$, the test $T=F$ lifts $1_F$ to a right inverse $v$, and full faithfulness on the test mapping space with $T=U$ identifies $vu$ with $1_U$ because $uvu$ is identified with $u$. This proves $\\operatorname{Fun}(L,E)\\simeq F$, through restriction along $j$. This constructs the required localization functorially, including every coherent transformation. The marking on $Q$ need not be saturated or satisfy two-out-of-three. Apply it to $(N(A_n),B_n)$ and to $(D,V_B)$.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-functor-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 1.3.4.2, printed p.108; HTT Section 3.1, via the cited marked-model and marked-anodyne statements; full-functor verification written out here"
+   }
+  },
+  {
+   "text": "Check exactly which arrows the unmarked cocone of Step 2 inverts. For a fixed $n$, there is a simplicial functor $c_n:A_n\\to T_nA$, induced in mapping degree $m$ by the monotone map $[n+m+1]\\to[n]$ that fixes $0,\\ldots,n$ and sends all of the last block to $n$. It preserves composition and has $p_nc_n=1$. Consequently the $n$th cocone map $i_n$ is coherently equivalent to $\\mathbf RN_{\\mathrm{hc}}(e_nc_n)$, and $e_nc_n$ sends an arrow $b\\in A(x,y)_n$ to its final vertex $b|_{\\{n\\}}$. No naturality of $c_n$ in $n$ is asserted or needed: the coherent cocone comes from the natural span in Step 1. If $b\\in B_n$, its final vertex lies in $B(x,y)_0$, so this arrow of $D$ belongs to $V_B$. Thus any $F:D\\to E$ inverting $V_B$ has every $Fi_n$ inverting $B_n$. Conversely, if every $Fi_n$ inverts $B_n$, the case $n=0$ and the identified zero-degree leg imply that $F$ inverts $V_B$. These conditions are invariant under coherent equivalence of functors by the componentwise criterion in [lem-cbc-enhanced-functor-cone-calculus]. The union-of-components hypothesis ensures the marking is also unchanged by replacing a vertex with any homotopic representative: both the first-block vertices and the last-block vertex of any simplex lie in one component, and local Kan replacement preserves these components by [lem-coef-coherent-nerve-comparison].",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 1.3.4.7, printed pp.113-114: the markings W_n and their preimages on T_n; the comparison uses only the stated union-of-components property"
+   }
+  },
+  {
+   "text": "For completeness the passage from colimits to entire functor categories follows from the cartesian closedness and small colimits in [lem-coef-infinity-functor-pushout]. If $C=\\operatorname{colim}_n C_n$, test the canonical map $\\operatorname{Fun}(C,E)\\to\\lim_n\\operatorname{Fun}(C_n,E)$ by mapping out of any $T$. Cartesian closedness makes $T\\times-$ a left adjoint, so it preserves colimits. The mapping-space criterion for colimiting cocones of [lem-cbc-enhanced-functor-cone-calculus], applied to $T\\times C=\\operatorname{colim}_n(T\\times C_n)$ gives the equivalence on these test mapping spaces, hence the claimed equivalence of infinity categories. Now put $L_n=N(A_n)[B_n^{-1}]_\\infty$ using the functorial construction of Step 3, and let $P=\\operatorname{colim}_n L_n$, which exists by the same node. The functorial localization universal property and Step 4 give a coherent cocone $L_\\bullet\\to D[V_B^{-1}]_\\infty$, induced by the unmarked cocone, and thus its comparison $h:P\\to D[V_B^{-1}]_\\infty$. Its degree-zero leg is the localization of the actual map identified in Step 2.",
+   "uses": [
+    "lem-coef-infinity-functor-pushout",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 1.3.4.7, printed pp.113-114, marked homotopy-colimit comparison; internal-Hom form of the colimit universal property written out"
+   }
+  },
+  {
+   "text": "Apply Steps 3 and 5, retaining the restriction maps, to obtain\n$$\\operatorname{Fun}(P,E)\\simeq\\lim_n\\operatorname{Fun}(L_n,E)\\simeq\\lim_n\\operatorname{Fun}_{B_n}(N(A_n),E).$$\nThe unmarked cocone of Step 2 gives $\\operatorname{Fun}(D,E)\\simeq\\lim_n\\operatorname{Fun}(N(A_n),E)$. Under this equivalence the last displayed limit is precisely the full subcategory on compatible objects whose $n$th component inverts $B_n$: fullness can be checked by testing a coherent diagram of any shape $T$, since a map $T\\to\\operatorname{Fun}_{B_n}(N(A_n),E)$ is exactly a map to the full ambient functor category with all vertex objects in that subcategory. Thus the compatible transformations and all their higher simplices are retained, not just the cores. By Step 4 this is the full subcategory $\\operatorname{Fun}_{V_B}(D,E)$, and by Step 3 it is $\\operatorname{Fun}(D[V_B^{-1}]_\\infty,E)$. All these maps are restriction along the chosen cocones, so their composite is $h^*$. It follows that $h$ is an equivalence: using $E=P$ gives a left inverse, and using $E=D[V_B^{-1}]_\\infty$ and full faithfulness of restriction gives the other inverse identity. This proves the displayed comparison with its specified cocone.",
+   "uses": [
+    "lem-coef-infinity-functor-pushout",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 1.3.4.7, printed pp.113-114: expand the marked-colimit step as a universal-property argument on full functor categories"
+   }
+  },
+  {
+   "text": "Every ordinal-sum restriction in Step 1 commutes with a simplicial functor $A\\to A'$; if it preserves $B$, the conditions on marked vertices in Step 4 commute as well. The functorial marked replacements of Step 3 and the colimit construction therefore supply the asserted natural comparisons. For a change of object-preserving locally Kan replacement compatible with the replacement maps from $A$, the triangle with those maps and two-out-of-three show that the comparison is a weak equivalence on each mapping set, hence a Dwyer--Kan equivalence and an equivalence under the derived coherent nerve by [lem-coef-coherent-nerve-comparison]. It carries the vertex maps to the same vertices and induces an equivalence of the full functor subcategories inverting them; the localization property from Step 3 gives the induced equivalence on localized targets, commuting with their cocones. For two functorial replacements with units $\\eta:1\\to R$ and $\\eta′:1\\to R′$, use $RR′A$ as a common refinement. Naturality gives $R(\\eta′_A)\\eta_A=\\eta_{R′A}\\eta′_A$. All three unit maps here are weak equivalences on mapping sets, so two-out-of-three makes $R(\\eta′_A):RA\\to RR′A$ a local weak equivalence. The other leg is $\\eta_{R′A}:R′A\\to RR′A$, already a local weak equivalence. The displayed equality also proves that this refinement commutes with the original maps from $A$, so it respects the marked vertex maps and the zero-degree cocone leg. For arbitrary choices, the two replacement maps from $A$ already identify both with the same derived object in the homotopy theory of simplicial categories. Hence the comparison is independent of the replacement in the coherent sense asserted, with the degree-zero leg still induced by the actual vertex-category map.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Naturality of Notation 1.3.4.11, Proposition 1.3.4.14 and the marked comparison in Proposition 1.3.4.7; replacement independence from the derived coherent-nerve comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-join-translation-resolution",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-space-geometric-descent",
+  "lem-coef-sifted-fixed-object-hocolimit",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-infinity-functor-pushout",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Detailed auxiliary enriched-localization argument for proof paragraph 2. Follows the join-translation proof of HA 1.3.4.14 and the marked step of HA 1.3.4.7, read online; the source is not archived locally, so the proof remains marked agent-written."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +173,38 @@
    "results": "{\"t\": \"2026-10-16T18:38:08Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial object of relative categories presents an enriched localization by taking the colimit of the infinity localizations of each degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"CategoryTheory.SimplicialObject.Augmented\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialObject.instCategoryAugmented\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"dbc377b6bbccc36f\"}",
    "date": "2026-10-17",
    "verdict": "no match: the hits define the coherent nerve, enrichment of simplicial objects, ordinary localization and colimits. None identifies a colimit of degreewise infinity localizations with enriched localization. Read SimplicialNerve.lean:14-38,193-197 and the returned types. The general enriched realization theorem has no Mathlib instance to specialize."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric realization of a simplicial diagram of categories presents the infinity localization of the enriched category",
+   "results": "{\"t\": \"2026-10-16T19:57:06Z\", \"tool\": \"leansearch\", \"query\": \"Geometric realization of a simplicial diagram of categories presents the infinity localization of the enriched category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"SSet.toTop\", \"sSetTopAdj\", \"CategoryTheory.SimplicialCategory\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.MorphismProperty.Localization'\", \"SSet.toTopSimplex\"], \"digest\": \"be0965ac2bde1fc3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialNerve.lean:14-38,193-205 and SimplicialCategory/Basic.lean:13-31,54-65. These define the coherent nerve and enrichment, not this marked infinity-categorical realization. Search hits concerning ordinary localization or ordinary realization do not specialize to the theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\"",
+   "results": "{\"t\": \"2026-10-16T19:57:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\"], \"digest\": \"36e7d315fa3504e3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialNerve.lean:14-38,193-205 and SimplicialCategory/Basic.lean:13-31,54-65. These define the coherent nerve and enrichment, not this marked infinity-categorical realization. Search hits concerning ordinary localization or ordinary realization do not specialize to the theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category presented by a simplicial category is a colimit of its ordinary categories of simplices with marked arrows inverted",
+   "results": "{\"t\": \"2026-10-16T19:57:07Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity category presented by a simplicial category is a colimit of its ordinary categories of simplices with marked arrows inverted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"CategoryTheory.SimplicialNerve\", \"SSet.hoFunctor\", \"CategoryTheory.Nerve.quasicategory\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.nerveFunctor_obj\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.nerveFunctor\"], \"digest\": \"e7395d7a9bf77339\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialNerve.lean:14-38,193-205 and SimplicialCategory/Basic.lean:13-31,54-65. These define the coherent nerve and enrichment, not this marked infinity-categorical realization. Search hits concerning ordinary localization or ordinary realization do not specialize to the theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|CompleteSegal|Rezk|marked.*localization",
+   "results": "{\"t\": \"2026-10-16T19:57:11Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|CompleteSegal|Rezk|marked.*localization\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"d4b2106a92c08ddb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialNerve.lean:14-38,193-205 and SimplicialCategory/Basic.lean:13-31,54-65. These define the coherent nerve and enrichment, not this marked infinity-categorical realization. Search hits concerning ordinary localization or ordinary realization do not specialize to the theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-interval-localization",
@@ -79,5 +212,29 @@
   "group": "Q37"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-marked-realization",
+  "worker": "stage1",
+  "summary": "Kept the statement and its two statement dependencies. Wrote seven steps following the HA join-translation argument, checking the actual vertex-category leg and the full functor-category localization property. Created only the generic fixed-object sifted homotopy-colimit criterion and the join-translation homotopy-resolution theorem. Avoided the cyclic bisimplicial-space-colimit shortcut. Checked all source hypotheses and all cited statements; no matching project declaration or Mathlib theorem was found. Second reading added the componentwise-equivalence citation in Step 2 and the mapping-space cocone criterion in Step 5, and expanded the replacement comparison in Step 7 with its unit naturality equation.",
+  "blueprint": "Realizes the derived coefficient-adjunction foundations in prop-coef-integral-exceptional-adjoint proof paragraph 2, via the existing enriched-localization/interval chain in blueprint.from.via. Below that node level, Steps 1-2 give the unmarked realization in HA 1.3.4.14 and Steps 3-7 give the marked comparison used in HA 1.3.4.7. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic componentwise equivalence criterion and full functor-category calculus; the unit has no substitute for this foundation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-3f1dc42ee",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-3f1dc42ee (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, both new nodes and every cited statement (coherent-nerve-comparison, enhanced-diagrams-cones, enhanced-functor-cone-calculus, space-geometric-descent, marked-anodyne-lifting-calculus, marked-point-cartesian-model, infinity-functor-pushout, kan-quillen-right-proper). I also read the citer lem-coef-simplicial-interval-localization, which uses the item exactly as stated. HA §1.3.4 is not in literature/: it is listed as WANTED, the proof is marked agent-written, and I checked the mathematics independently. Step checks: T_nA is a simplicial category and p_n, e_n are natural simplicial functors. p_n is a DK equivalence. N(Δ^op) is sifted in the node's sense by the geometric-descent clause. For the zero leg I verified p_0c_0=1 and that e_0c_0 is the vertex inclusion. In Step 3, Map^♭((Q,S),E^♮)=Fun_S(Q,E), and Map^♯(T^♮×L^♮,E^♮) is Fun(T,Fun(L,E))^≃ because marked (e1,e2,e3) reduces to (id,id,e3); the inverse argument is correct. In Step 4, c_n is simplicial in m, and e_nc_n takes a simplex to its final vertex in B_0. Steps 5–6 are universal-property and full-subcategory checks; Step 7 rests on the naturality equation R(η'_A)η_A=η_{R'A}η'_A and two-out-of-three. New node join-translation-resolution: true with no Kan condition, because the extra degeneracy s_n contracts the fibres of p_n and the e-cocone is an equivalence on simplices, then everywhere. Edge cases ∅, discrete, Δ^0 and Δ^1 hold. New node sifted-fixed-object-hocolimit: true by the Segal-space argument (sifted colimits commute with the finite products in the Segal levels, and completion is a left adjoint). Edge cases empty O, terminal J and empty J hold. Neither new node is a duplicate: bisimplicial-diagonal-space-colimit reaches the item (I confirmed the path, so citing it would be a cycle), and diagonal-coherent-nerve, segal-dk-diagonal, the sifted-calculus nodes and algebroid-ff-realization state other things. The dependency closure (171 nodes) is acyclic, proof_deps equals the union of uses, and Mathlib searches are recorded with all three kinds. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, a generic componentwise and mapping-space cone criterion from another unit. Minor remark: the union-of-components hypothesis is not needed by the argument, but it is harmless and is what the citer supplies. No base-change morphism or coefficient category is involved, no SGA is cited, and no changes or fixes were made."
+ }
 }

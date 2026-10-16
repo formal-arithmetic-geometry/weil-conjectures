@@ -3,50 +3,265 @@
  "blueprint": {
   "is": "det-uniform-constructible-ext-rational",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The stratum bound with rational coefficients",
- "statement": "Let $a\\colon S\\hookrightarrow X$, $j$ be as in [det-uniform-constructible-ext-torsion] and put\n$c_a=\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2$. For $\\Lambda=E$ or $\\Qlb$, every lisse\n$\\Lambda_S$-module $L$, every locally closed $b\\colon T\\hookrightarrow X$ and every lisse\n$\\Lambda_T$-module $M$, after refining $S$ and $T$ by finite stratifications as in\n[sk-lem-stratified-lattice],\n\n$$\n\\Ext^q_\\Lambda(a_!L,b_!M)=0\\qquad(q>c_a).\n$$",
+ "statement": "Work in the standing scheme and coefficient setting of [det-uniform-constructible-ext-torsion]. Let $a:S\\hookrightarrow X$ be locally closed, $\\Lambda=E$ or $\\Qlb$, and $L$ a lisse $\\Lambda_S$-module. Lower shriek is closed direct image after open extension by zero. Ext means Hom to a shift in $D(X_{\\mathrm{proét}},\\Lambda)$ [def-pc-ext].\n\nFor $\\Lambda=E$, put $E_0=E$ and $L^{(0)}=L$. For $\\Lambda=\\Qlb$, fix a finite $E_0/\\mathbf Q_\\ell$ and a lisse $E_{0,S}$-module $L^{(0)}$ with $(L^{(0)})_{\\Qlb}\\simeq L$, as supplied by [sk-thm-sfb-qlbar-two-colimit](1). Choose once and for all a finite stratification of $X$, adapted to the constructible sheaf $a_!L^{(0)}$ [sk-def-sfb-constructible], refining $S$ and its complement, ordered with successive unions open as in [det-lem-coefficient-heart-common-stratification](1). Its strata inside $S$, denoted $S_k$, have lisse $\\mathcal O_{E_0}$-lattices in $L^{(0)}|_{S_k}$, as in [sk-lem-stratified-lattice]. Such an ordered refinement exists. Write $a_k:S_k\\hookrightarrow X$ as $S_k\\hookrightarrow Z_k\\hookrightarrow X$, open followed by closed, with $Z_k=\\overline{S_k}$, and let $j_k:X\\setminus Z_k\\hookrightarrow X$. Put\n$$\nc_{a_k}=\\operatorname{cd}_\\ell(j_k)+\\operatorname{cd}_\\ell(S_k)+2,\\qquad\n d_{a,L}=\\max\\bigl(\\{0\\}\\cup\\{c_{a_k}\\}_k\\bigr).\n$$\nThen, for every locally closed $b:T\\hookrightarrow X$ and every lisse $\\Lambda_T$-module $M$,\n$$\n\\Ext^q_\\Lambda(a_!L,b_!M)=0\\qquad(q>d_{a,L}).\n$$\nThe chosen finite coefficient model and source stratification, and hence $d_{a,L}$, are independent of $b,M$. Cohomological dimensions have the extended nonnegative-integer convention of [det-uniform-constructible-ext-torsion]; an infinite cutoff gives a vacuous bound. For an empty source take $d_{a,L}=0$.\n\nIf $\\Lambda=E$ and $L$ already has a lisse $\\mathcal O_E$-lattice on all of $S$, the same conclusion holds with $d_{a,L}=c_a=\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2$ for the original factorization $a=i\\circ u:S\\hookrightarrow Z\\hookrightarrow X$ and $j:X\\setminus Z\\hookrightarrow X$. The analogous assertion holds for $\\Qlb$ if the chosen finite model has a lattice on all of $S$. In general the bound proved after refining the source is the maximum of its refined-stratum cutoffs, with no assertion that it equals $c_a$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.md",
   "place": "node det-uniform-constructible-ext-rational, order None"
  },
  "stmt_deps": [
   "det-uniform-constructible-ext-torsion",
+  "def-pc-ext",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "sk-def-sfb-constructible",
+  "det-lem-coefficient-heart-common-stratification",
   "sk-lem-stratified-lattice"
  ],
  "proof": [
   {
-   "text": "*Coefficients $E$.* By [sk-lem-stratified-lattice], after refining the strata (which replaces\n$a_!L$, $b_!M$ by finite extensions of sheaves of the same form, harmless by\n[det-uniform-constructible-ext-devissage]) and after a finite extension $E'/E$, $L$ and $M$ contain\nlisse lattices $L_0$, $M_0$ with $L_0[1/\\pi_E]=L$, $M_0[1/\\pi_E]=M$. Enlarging $E$ is harmless: $E'_X$\nis finite free over $E_X$, so the restriction of scalars of the extended sheaves is a finite direct\nsum of copies of the original ones, and $\\Ext^q_{E'}((a_!L)_{E'},(b_!M)_{E'})=\\Ext^q_E(a_!L,(b_!M)^{\\oplus[E':E]})$,\na finite direct sum of the $\\Ext^q_E(a_!L,b_!M)$. So a bound over $E'$ yields the same bound over $E$.\n\nNow $a_!L=(a_!L_0)\\otimes_{\\mathcal O_E}E$ and\n\n$$\nb_!M=(b_!M_0)[1/\\pi_E]=\\varinjlim\\bigl(b_!M_0\\xrightarrow{\\pi_E}b_!M_0\\xrightarrow{\\pi_E}\\cdots\\bigr).\n$$\n\nExtension of scalars $\\mathcal O_E\\to E$ is left adjoint to restriction of scalars, so\n\n$$\nR\\operatorname{Hom}_E(a_!L,b_!M)=R\\operatorname{Hom}_{\\mathcal O_E}\\bigl(a_!L_0,(b_!M_0)[1/\\pi_E]\\bigr).\n$$\n\nThe target is a filtered colimit of sheaves in degree $0$, and $a_!L_0$ satisfies the hypothesis of\npart (2) of [sk-lem-constructible-ext-continuity], so\n\n$$\n\\Ext^q_E(a_!L,b_!M)=\\varinjlim\\bigl(\\Ext^q_{\\mathcal O_E}(a_!L_0,b_!M_0)\\xrightarrow{\\pi_E}\\cdots\\bigr),\n$$\n\nwhich vanishes for $q>c_a$ by [det-uniform-constructible-ext-integral].",
+   "text": "We first check the constructibility required below, for either rational coefficient ring. The standing schemes $X,S,T$ are Noetherian: apply [lem-weil-pbc-finite-type-over-noetherian] over $\\operatorname{Spec}k$, whose field has no ideals other than $0$ and $k$. For any locally closed $h:W\\hookrightarrow X$ and lisse $P$ on $W$, factor $h=i\\circ u$ through its closure. All open immersions in this Noetherian situation are quasi-compact. Parts (1),(2),(4) of [det-sf-open-closed-sequence-ring-sheaf] show that $h_!P=i_*u_!P$ restricts to $P$ on $W$ and to zero on the two complementary pieces $\\overline W\\setminus W$ and $X\\setminus\\overline W$: for the first piece, the base-changed open immersion is empty; for the second, the base-changed closed immersion is empty. Both functors are exact. On $W$ a lisse sheaf has the finite constant local model given by its finite free local bases, and the zero sheaf has the zero model. Thus these three locally closed pieces form an adapted stratification under [sk-def-sfb-constructible]. In degree zero, $h_!P$ is bounded and has only this constructible cohomology sheaf; hence $h_!P\\in\\Dbc(X,\\Lambda)$ by that same definition. This applies to all finite-field models $a_!L_E,b_!M_E$ later used in the Hom-colimit theorem.",
    "uses": [
-    "sk-lem-stratified-lattice",
-    "sk-lem-constructible-ext-continuity"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "sk-def-sfb-constructible"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.proof.md",
+    "place": "Preparation for both coefficient paragraphs: Noetherian hypotheses and bounded constructible lower-shriek models"
+   }
   },
   {
-   "text": "*Coefficients $\\Qlb$.* By [sk-thm-sfb-qlbar-two-colimit], there is a finite $E$ and constructible\n$E$-sheaves $C_E$, $N_E$ (of the same form $a_!L_E$, $b_!M_E$) with $a_!L=(C_E)_{\\Qlb}$ and\n$b_!M=(N_E)_{\\Qlb}$. Since $\\overline{\\mathbf Q}_{\\ell,X}=\\varinjlim_{E'}E'_X$ (filtered over finite\n$E'\\supset E$) is flat over $E_X$, adjunction gives\n\n$$\nR\\operatorname{Hom}_{\\Qlb}((C_E)_{\\Qlb},(N_E)_{\\Qlb})=R\\operatorname{Hom}_E\\bigl(C_E,\\varinjlim_{E'}(N_E)_{E'}\\bigr),\n$$\n\nand [sk-lem-constructible-ext-continuity] identifies its $H^q$ with\n$\\varinjlim_{E'}\\Ext^q_E(C_E,(N_E)_{E'})=\\varinjlim_{E'}\\Ext^q_{E'}((C_E)_{E'},(N_E)_{E'})$. Each term\nvanishes for $q>c_a$ by the case of $E'$, so the colimit vanishes.",
+   "text": "Take $\\Lambda=E$. Apply [sk-lem-stratified-lattice] to $L$ on $S$ and choose its finite lattice stratification before any target is chosen; no extension $E'/E$ is required. Extend the partition to $X$ by the two complementary pieces in Step 1, then apply [det-lem-coefficient-heart-common-stratification](1) to obtain a finite ordered refinement. A lattice stays lisse on a further stratum: base change its free local cover, where its restriction is $\\mathcal O_E^{\\oplus r}$ and still localizes to the restricted $L$. Denote the resulting source strata by $S_k$ and their embeddings in $X$ by $a_k$, and define $c_{a_k}$ and $d_{a,L}$ only now, using these strata and their own closures and complements. By [det-lem-coefficient-heart-filtration], applied directly on $X$ to $C=a_!L$, this ordered adapted stratification gives a finite filtration of $C$ whose nonzero graded pieces are $C_k=a_{k,!}(L|_{S_k})$; the complementary pieces contribute zero. For any target $b_!M$, independently apply the lattice theorem on $T$ and ordered-refinement theorem on $X$ to its partition and complement, and apply the filtration theorem to $N=b_!M$. Its nonzero graded pieces are $N_t=b_{t,!}(M|_{T_t})$, each with a lisse lattice. The source partition is unchanged by this target preparation. If $L$ has a global lattice, omit the source filtration entirely and keep $C=a_!L$ with its original factorization and cutoff $c_a$.",
+   "uses": [
+    "sk-lem-stratified-lattice",
+    "det-lem-coefficient-heart-common-stratification",
+    "det-lem-coefficient-heart-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.proof.md",
+    "place": "Coefficients E, opening lattice and refinement paragraph; corrected source cutoff"
+   }
+  },
+  {
+   "text": "Fix one source piece $C_k=a_{k,!}L_k$ and target piece $N_t=b_{t,!}M_t$, and choose their finite locally free lattices $L_{k,0},M_{t,0}$ over $\\mathcal O_E$. In the global-source-lattice case use $a,L_0$ instead. By [det-prop-sfb-qlbar-colimit-x-invert-ell], $E_X=\\mathcal O_{E,X}[1/\\ell]$ is flat over $\\mathcal O_{E,X}$, on $X$ and on the two strata. Thus these scalar extensions are exact and agree with their derived functors. Clause (2) of [det-prop-scalar-six-pullback] identifies the derived localizations of the lattice extensions by zero with $C_k,N_t$. The derived scalar adjunction in [sk-def-sfb-coefficient-change] gives\n$$\n\\Ext^q_E(C_k,N_t)=\\operatorname{Hom}_{D(X_{\\mathrm{proét}},\\mathcal O_E)}\\bigl(a_{k,!}L_{k,0},(b_{t,!}M_{t,0})[1/\\ell][q]\\bigr).\n$$\nApply [lem-pc-module-filtered-colimits-tensor] in degree zero to the coefficient localization diagram of [det-prop-sfb-qlbar-colimit-x-invert-ell] and the fixed module $B=b_{t,!}M_{t,0}$. It identifies $E_X\\otimes_{\\mathcal O_{E,X}}B$ with the sheaf-module colimit $\\varinjlim(B\\xrightarrow{\\ell}B\\xrightarrow{\\ell}\\cdots)$. The cocone leg at index $n$ sends a local section $m$ to $\\ell^{-n}m$ in the localized sheaf; its compatibility is $\\ell^{-(n+1)}(\\ell m)=\\ell^{-n}m$. This uses a colimit of sheaves, without asserting that colimits are evaluated objectwise. The index is the small filtered category $\\mathbf N$, and every complex in this system is concentrated in degree zero, so the common lower bound is $0$. The $\\mathcal O_E$ clause of [sk-lem-constructible-ext-continuity] applies: the source is a single $a_{k,!}L_{k,0}$ with a finite locally free lattice, not an arbitrary integral constructible complex. Consequently the displayed group is\n$$\n\\varinjlim_n\\Ext^q_{\\mathcal O_E}(a_{k,!}L_{k,0},b_{t,!}M_{t,0}).\n$$\nThe transition maps in this Ext colimit are induced by multiplication by $\\ell$ on the target. Each term is zero for $q>c_{a_k}$ by [det-uniform-constructible-ext-integral]. Its hypotheses are exactly the torsion node's setting on $X$, the closed/open factorization of this $a_k$, and the two lisse lattices; $b_t$ is locally closed. Thus $\\Ext^q_E(C_k,N_t)=0$ for $q>c_{a_k}$, independently of $t$. For the unsplit global lattice source this argument gives $q>c_a$.",
+   "uses": [
+    "det-prop-scalar-six-pullback",
+    "sk-def-sfb-coefficient-change",
+    "sk-lem-constructible-ext-continuity",
+    "det-uniform-constructible-ext-integral",
+    "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "lem-pc-module-filtered-colimits-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.proof.md",
+    "place": "Coefficients E, localization, scalar adjunction, continuity and integral bound paragraphs"
+   }
+  },
+  {
+   "text": "Fix $k$. In the target filtration of Step 2, [lem-sc-abelian-ext-covariant-exact] gives the exact segment $\\Ext^q(C_k,N_{t-1})\\to\\Ext^q(C_k,N_t^{\\mathrm{fil}})\\to\\Ext^q(C_k,N_t^{\\mathrm{fil}}/N_{t-1})$. Induct on $t$ for each $q>c_{a_k}$: at $t=0$ Ext into zero is zero by additivity [def-pc-ext], and at the next stage the two end groups vanish by induction and Step 3. Hence $\\Ext^q(C_k,b_!M)=0$ for $q>c_{a_k}$. Next fix $q>d_{a,L}$ and induct along the source filtration $C_s^{\\mathrm{fil}}$. The exact segment from [lem-coef-ext-contravariant-six-term] is $\\Ext^q(C_s^{\\mathrm{fil}}/C_{s-1}^{\\mathrm{fil}},b_!M)\\to\\Ext^q(C_s^{\\mathrm{fil}},b_!M)\\to\\Ext^q(C_{s-1}^{\\mathrm{fil}},b_!M)$. Again its end groups vanish, by the preceding target induction and the source induction hypothesis. The zero-source base case follows from additivity. This proves the $E$ conclusion with the maximum of the $c_{a_k}$, not the cutoff of the original unrefined $a$. If the source has a global lattice, only the target induction is needed and it retains the original $c_a$. An infinite cutoff leaves no $q$ to check; the empty source is zero.",
+   "uses": [
+    "lem-sc-abelian-ext-covariant-exact",
+    "lem-coef-ext-contravariant-six-term",
+    "def-pc-ext"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.proof.md",
+    "place": "Opening refinement paragraph: the two finite-filtration inductions, with corrected maximum"
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\Qlb$, clause (1) of [sk-thm-sfb-qlbar-two-colimit] gives a finite $E_0$ and lisse model $L^{(0)}$ for the source. Fix $C_0=a_!L^{(0)}$ and its source lattice stratification from Step 2 now, before choosing $b,M$, and let $d_{a,L}$ be its maximum. Steps 3 and 4 prove the $E_0$ bound for this fixed source against every lower-shriek lisse $E_0$-target. For a given $M$, clause (1) on $T$ gives a finite-field model; take a common finite extension $E\\supset E_0$ containing its field of definition and write $C_E=(C_0)_E=a_!L_E$, $N_E=b_!M_E$. Scalar compatibility and transitivity in [det-prop-scalar-six-pullback](2),(3) identify their $\\Qlb$ extensions with $a_!L,b_!M$. The lisse finite models have finite free local bases. Step 1, using [det-sf-open-closed-sequence-ring-sheaf] and [sk-def-sfb-constructible], therefore places both $C_E$ and $N_E$ in $\\Dbc(X,E)$, as required by clause (2) of the two-colimit theorem. That clause identifies the desired Ext group with\n$$\n\\varinjlim_{F\\supset E}\\operatorname{Hom}_{D(X_{\\mathrm{proét}},F)}((C_E)_F,(N_E)_F[q]).\n$$\nFor each finite $F$, scalar adjunction [sk-def-sfb-coefficient-change] identifies its term with $\\Ext^q_{E_0}(C_0,\\operatorname{Res}_{F/E_0}(b_!M_F))$. Restriction is the identity on underlying sheaves [sk-def-sfb-change-of-scalars](1). The underlying functors forming $b_!$ are $i_*^{\\Ab}$ and $u_!^{\\Ab}$ by [def-sfb-module-lower-star] and [def-sfb-module-open-lower-shriek]. Their module actions are obtained by composing the coefficient action with the coefficient morphisms. Composing that action first with $E_{0,X}\\to F_X$ or first with the immersion coefficient morphism gives the same action, by the two compatibility squares in [sk-def-sfb-coefficient-change]. Therefore restriction of scalars commutes with this closed direct image and open extension by zero, including their module structures. The restricted $M_F$ is lisse over $E_0$: on a cover where it is $F_T^{\\oplus r}$, [det-prop-sfb-cartesian-coefficients-finite-free], applied with $E_0\\subset F$ on each member of that cover, identifies its restriction of scalars with $E_{0,T}^{\\oplus r[F:E_0]}$. Its inverse-image compatibility makes these precisely the required local free models. Flatness for the field extensions is [lem-sfb-subfield-flat], so these degree-zero scalar extensions are the derived ones used in the adjunction. Each colimit term thus vanishes by the already proved $E_0$ bound for the fixed source, for $q>d_{a,L}$. Hence its colimit is zero. This restriction-of-scalars argument keeps the same source partition for every $F$ and every target; it requires no new lattice refinement or larger cutoff at any coefficient stage. If the chosen source model has a global lattice, Steps 3 and 4 give its $E_0$ bound with the original $c_a$; scalar adjunction then makes every displayed finite-$F$ term zero for $q>c_a$, so the Hom colimit is zero in that range as well.",
    "uses": [
     "sk-thm-sfb-qlbar-two-colimit",
-    "sk-lem-constructible-ext-continuity"
+    "det-prop-scalar-six-pullback",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-coefficient-change",
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-subfield-flat",
+    "def-sfb-module-lower-star",
+    "def-sfb-module-open-lower-shriek",
+    "det-prop-sfb-cartesian-coefficients-finite-free"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.proof.md",
+    "place": "Coefficients Qbar paragraph: finite models, bounded constructibility, Hom colimit; fixed-source restriction-of-scalars argument"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-stratified-lattice",
+  "def-pc-ext",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-open-lower-shriek",
+  "det-lem-coefficient-heart-common-stratification",
+  "det-lem-coefficient-heart-filtration",
+  "det-prop-scalar-six-pullback",
+  "det-prop-sfb-cartesian-coefficients-finite-free",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "det-uniform-constructible-ext-integral",
+  "lem-coef-ext-contravariant-six-term",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-sc-abelian-ext-covariant-exact",
+  "lem-sfb-subfield-flat",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-constructible",
   "sk-lem-constructible-ext-continuity",
+  "sk-lem-stratified-lattice",
   "sk-thm-sfb-qlbar-two-colimit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.proof.md",
+  "place": "Coefficients E and Qbar; repaired refinement cutoffs and fixed-source finite-field reduction"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ext vanishing bound for rational coefficient lisse sheaves via finite extension and filtered colimit",
+   "results": "8 hits: CategoryTheory.Sheaf.H; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; instAbelianCondensedMod; CategoryTheory.Abelian.Ext.mapExactFunctor_zero; isZero_Ext_succ_of_projective; CategoryTheory.HasInjectiveDimensionLT.mk'; CategoryTheory.HasInjectiveDimensionLT.subsingleton'",
+   "date": "2026-10-16",
+   "verdict": "no match: no geometric constructible rational Ext bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Filtered, Ext, DerivedCategory",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Filtered'",
+   "date": "2026-10-16",
+   "verdict": "no usable result: invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext|RHom|filtered.*colimit",
+   "results": "25 hits: Mathlib/CategoryTheory/Conj.lean; Mathlib/CategoryTheory/CodiscreteCategory.lean; Mathlib/CategoryTheory/MarkovCategory/Positive.lean; Mathlib/CategoryTheory/MarkovCategory/Positive.lean; Mathlib/CategoryTheory/MarkovCategory/Basic.lean; Mathlib/CategoryTheory/MarkovCategory/Basic.lean; Mathlib/CategoryTheory/Widesubcategory.lean; Mathlib/CategoryTheory/Widesubcategory.lean; subdirectory of Mathlib/: CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: no geometric constructible rational Ext bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "uniform Ext vanishing for lisse E or Qbar coefficient sheaves",
+   "results": "8 hits: CategoryTheory.Sheaf.H; instAbelianCondensedMod; CategoryTheory.HasInjectiveDimensionLT.subsingleton'; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CategoryTheory.HasInjectiveDimensionLT.mk; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; DerivedCategory.isLE_iff; isZero_Ext_succ_of_projective",
+   "date": "2026-10-16",
+   "verdict": "no match: no geometric constructible rational Ext bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext, CategoryTheory.Limits.IsFiltered",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Limits.IsFiltered'",
+   "date": "2026-10-16",
+   "verdict": "no usable result: invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|Ext|filtered.*colimit",
+   "results": "25 hits: Mathlib/NumberTheory/Modular.lean; Mathlib/NumberTheory/Modular.lean; Mathlib/NumberTheory/Modular.lean; Mathlib/NumberTheory/Modular.lean; Mathlib/NumberTheory/Modular.lean; Mathlib/NumberTheory/Chebyshev.lean; Mathlib/NumberTheory/Chebyshev.lean; Mathlib/NumberTheory/Chebyshev.lean; subdirectory of Mathlib/: .",
+   "date": "2026-10-16",
+   "verdict": "no match: no geometric constructible rational Ext bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext vanishing bound rational coefficient lisse sheaves",
+   "results": "8 hits: CategoryTheory.HasProjectiveDimensionLT.mk; CategoryTheory.HasProjectiveDimensionLT.subsingleton'; CochainComplex.isZero_of_isStrictlyGE; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; CochainComplex.isZero_of_isGE; AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_bot; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; ZLattice.exists_forall_abs_repr_le_norm",
+   "date": "2026-10-16",
+   "verdict": "no match: no geometric constructible rational Ext bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived Hom filtered colimit constructible sheaf",
+   "results": "8 hits: HomologicalComplex.instHasFilteredColimitsOfSize; CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup; CategoryTheory.Sheaf.hasFilteredColimitsOfSize; AddMonCat.FilteredColimits.colimitCoconeIsColimit; ModuleCat.FilteredColimits.colimitCoconeIsColimit; AddCommMonCat.FilteredColimits.colimitCoconeIsColimit; CategoryTheory.Limits.colimitLimitIso; AddGrpCat.FilteredColimits.colimitCoconeIsColimit",
+   "date": "2026-10-16",
+   "verdict": "no match: no geometric constructible rational Ext bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext vanishing for constructible rational pro etale sheaves after stratifying a local system to admit integral lattices",
+   "results": "8 hits: CategoryTheory.Sheaf.H; Condensed.lanSheafProfinite; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; isZero_Ext_succ_of_projective; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; CategoryTheory.HasInjectiveDimensionLT.subsingleton'",
+   "date": "2026-10-16",
+   "verdict": "no match: no geometric constructible rational Ext bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasProjectiveDimensionLT",
+   "results": "12 hits: CategoryTheory.HasProjectiveDimensionLT; CategoryTheory.instHasProjectiveDimensionLTOfNatNatOfProjective; CategoryTheory.instHasProjectiveDimensionLTSucc; CategoryTheory.instProjectiveOfHasProjectiveDimensionLTOfNatNat; CategoryTheory.isZero_of_hasProjectiveDimensionLT_zero; CategoryTheory.Limits.IsZero.hasProjectiveDimensionLT_zero; CategoryTheory.hasProjectiveDimensionLT_zero_iff_isZero; CategoryTheory.projective_iff_hasProjectiveDimensionLT_one",
+   "date": "2026-10-16",
+   "verdict": "no match: no geometric constructible rational Ext bound"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*Ext|Ext.*constructible|lisse|pro.etale",
+   "results": "0 hits: ; subdirectory of Mathlib/: CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: no geometric constructible rational Ext bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform upper bound on higher Ext from a constructible l adic sheaf to every constructible target",
+   "results": "8 hits: CategoryTheory.Sheaf.H; CategoryTheory.HasProjectiveDimensionLT.subsingleton'; CategoryTheory.HasInjectiveDimensionLT.mk'; SheafOfModules.hasLimit; SheafOfModules.hasLimitsOfSize; AlgebraicGeometry.Scheme.Modules.instHasLimits; TopCat.instHasLimitsOfShapeSheaf; CategoryTheory.Abelian.Ext.chgUniv",
+   "date": "2026-10-16",
+   "verdict": "no match: no geometric constructible rational Ext bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing integral lisse sheaves yields rational coefficient Ext vanishing and finite filtration uses maximum stratum cutoffs",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; DerivedCategory.exists_iso_Q_obj_of_isGE; AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; SheafOfModules.isFinitePresentation; SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+   "date": "2026-10-16",
+   "verdict": "no match: no geometric constructible rational Ext bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext",
+   "results": "12 hits: CategoryTheory.Abelian.Ext; CategoryTheory.Abelian.Ext.instAddCommGroup; CategoryTheory.hasExt_iff_small_ext; CategoryTheory.Abelian.Ext.mk₀; CategoryTheory.Abelian.Ext.chgUniv; CategoryTheory.Abelian.Ext.homEquiv₀; CategoryTheory.Abelian.extFunctorObj_obj_coe; CategoryTheory.Abelian.Ext.mk₀_bijective",
+   "date": "2026-10-16",
+   "verdict": "no match: no geometric constructible rational Ext bound"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|lisse|pro.etale",
+   "results": "0 hits: ; subdirectory of Mathlib/: CategoryTheory/Abelian",
+   "date": "2026-10-16",
+   "verdict": "no match: no geometric constructible rational Ext bound"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*(bound|vanish)|(bound|vanish).*Ext",
+   "results": "25 hits: Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean; Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean; Mathlib/NumberTheory/ModularForms/Bounds.lean; Mathlib/NumberTheory/ModularForms/Bounds.lean; Mathlib/Topology/Bornology/Basic.lean; Mathlib/Topology/Bornology/Basic.lean; Mathlib/Topology/Bornology/Basic.lean; Mathlib/NumberTheory/SelbergSieve.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: generic dimension/Ext declarations and lexical hits do not state the geometric rational coefficient bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasInjectiveDimensionLT",
+   "results": "12 hits: CategoryTheory.HasInjectiveDimensionLT; CategoryTheory.instHasInjectiveDimensionLTOfNatNatOfInjective; CategoryTheory.instHasInjectiveDimensionLTSucc; CategoryTheory.instInjectiveOfHasInjectiveDimensionLTOfNatNat; CategoryTheory.isZero_of_hasInjectiveDimensionLT_zero; CategoryTheory.Limits.IsZero.hasInjectiveDimensionLT_zero; CategoryTheory.hasInjectiveDimensionLT_zero_iff_isZero; CategoryTheory.injective_iff_hasInjectiveDimensionLT_one",
+   "date": "2026-10-16",
+   "verdict": "no match: generic dimension/Ext declarations and lexical hits do not state the geometric rational coefficient bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher extension groups vanish uniformly for constructible l-adic local systems on a noetherian scheme",
+   "results": "8 hits: CategoryTheory.HasInjectiveDimensionLT.mk'; CategoryTheory.HasProjectiveDimensionLT.mk'; isZero_Ext_succ_of_projective; DerivedCategory.isZero_of_isGE; DerivedCategory.isZero_of_isLE; CategoryTheory.HasInjectiveDimensionLT.subsingleton'; DerivedCategory.isLE_iff; DerivedCategory.isGE_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: generic dimension/Ext declarations and lexical hits do not state the geometric rational coefficient bound"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|lisse|[Pp]ro[Ee]tale",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: no constructible or lisse sheaf declaration in the searched Mathlib source"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -67,5 +282,95 @@
   "det-uniform-constructible-ext-integral"
  ],
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-uniform-constructible-ext"
+ "unit": "sk-lem-uniform-constructible-ext",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-uniform-constructible-ext-rational",
+  "worker": "stage1",
+  "summary": "Repair of return ae71e26610: STATEMENT-DISPUTED source refinement does not retain the original c_a. Corrected the statement to the maximum of the cutoffs of fixed source lattice strata, with the original c_a retained only when the finite source model has a global lattice. Cited existing ordered-refinement/open-closed-filtration and Ext-exact-sequence nodes, proved bounded constructibility of lower-shriek finite models before the Qbar Hom colimit, removed the unnecessary coefficient extension in the E preparation, and used restriction of scalars to keep the Qbar source partition independent of targets. No new nodes. The report supplies explicit parent/unit corrections for HUMAN. Second reading added explicit existing coefficient-localization/flatness, tensor-colimit, and finite-free coefficient citations; the source cutoff correction is unchanged.",
+  "blueprint": "Steps 1 and 2 supply hypotheses and the opening lattice/refinement paragraph. Step 3 realizes localization, scalar adjunction, continuity and the integral bound. Step 4 realizes source devissage (maximum) and target devissage (same cutoff) explicitly without the cyclic devissage node. Step 5 realizes finite-field descent and the Hom colimit while keeping the source partition fixed. The source/unit error and parent correction are documented in report.md under Source error.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-stratified-lattice",
+    "why": "Finite lattice stratifications are a black-box preparation in the unit route."
+   },
+   {
+    "node": "sk-lem-constructible-ext-continuity",
+    "why": "The scalar localization uses its explicit integral finite-locally-free-source continuity clause."
+   },
+   {
+    "node": "sk-thm-sfb-qlbar-two-colimit",
+    "why": "Finite lisse descent and bounded-constructible Hom colimits are the Qbar coefficient tools."
+   },
+   {
+    "node": "det-prop-scalar-six-pullback",
+    "why": "Its scalar/lower-shriek compatibility and transitivity identify the finite models and localizations."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian permanence checks the hypotheses of the stratification and filtration tools."
+   },
+   {
+    "node": "det-sf-open-closed-sequence-ring-sheaf",
+    "why": "Exact open/closed extension and base-change give restrictions of h_!P to its support and complement."
+   },
+   {
+    "node": "det-lem-coefficient-heart-common-stratification",
+    "why": "Generic finite ordered-refinement tool needed to obtain the actual open/closed filtration on the chosen lattice strata."
+   },
+   {
+    "node": "det-lem-coefficient-heart-filtration",
+    "why": "Its specified-stratification filtration identifies the graded pieces; the weaker coefficient-heart existence clause would not specify lattice strata."
+   },
+   {
+    "node": "lem-sc-abelian-ext-covariant-exact",
+    "why": "Generic exact segment for target filtration induction; no alternate coefficient route."
+   },
+   {
+    "node": "lem-coef-ext-contravariant-six-term",
+    "why": "Generic exact segment for source filtration induction with the maximum cutoff."
+   },
+   {
+    "node": "lem-sfb-subfield-flat",
+    "why": "Finite-field scalar flatness identifies degree-zero finite models with the derived scalar extensions."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "why": "The coefficient localization and flatness justify the degree-zero lattice localizations in Step 3."
+   },
+   {
+    "node": "lem-pc-module-filtered-colimits-tensor",
+    "why": "Generic sheaf-module tensor continuity identifies localization of the target with its multiplication-by-ell colimit, entirely in degree zero."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-finite-free",
+    "why": "Finite freeness of pulled-back coefficient fields supplies the actual local free E_0 models after restriction of scalars in Step 5."
+   }
+  ],
+  "source_error": "The blueprint rational opening refinement paragraph and the unit single-stratum formula incorrectly keep c_a after refining S. Refinement produces a_k with different j_k, S_k; only max_k c_{a_k} follows. The pinched affine-plane test in report.md refutes the missing cutoff inequality. Parent sk-lem-uniform-constructible-ext and unit statement/Steps 1,2 require the corrections requested for coord/HUMAN.md in that report."
+ },
+ "tool_uses": [
+  "sk-lem-stratified-lattice",
+  "sk-lem-constructible-ext-continuity",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "det-prop-scalar-six-pullback",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "det-lem-coefficient-heart-common-stratification",
+  "det-lem-coefficient-heart-filtration",
+  "lem-sc-abelian-ext-covariant-exact",
+  "lem-coef-ext-contravariant-six-term",
+  "lem-sfb-subfield-flat",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "lem-pc-module-filtered-colimits-tensor",
+  "det-prop-sfb-cartesian-coefficients-finite-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-75b544649",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-75b544649 (reviewer sub-agent of L); spot-checked: Read in full: the item, the main-20261015 rational statement and proof, the unit _section and proof, the torsion, integral and devissage nodes, every cited node statement (21 proof_deps), and the reviewed parent. There are no new nodes and the files written are only the item and the report. proof_deps equals the union of step uses, and a DFS over 6429 dependency nodes found no cycle (the devissage node is correctly not cited). On the statement change: the source says 'after refining S and T, Ext=0 for q>c_a', but source refinement replaces a by strata a_k, each with its own closure and complement j_k. The integral node then gives only c_{a_k}, and nothing proves c_{a_k}<=c_a. I checked the pinched-plane test: c_a<=4 with a=id, cd(j_P)>=3 by purity (H^4_m=Λ(-2) on each branch), so the point stratum's cutoff is >=5, and the Z-chain torsor sheaf has no global lattice. The corrected statement (a fixed lattice stratification, d_{a,L}=max(0,c_{a_k}), c_a kept for a global lattice) is the precise content the source proof gives. It is named under Source error (E7) and is not a target weakening; the c_a bound for a source without a global lattice is unproved, not disproved. All citers of sk-lem-uniform-constructible-ext use only the existential d_C. Step checks: (1) Noetherian setting, open/closed parts (1)(2)(4) give restrictions P/0/0, so h_!P is in Dbc. (2) stratified-lattice needs no E'/E, ordered common refinement, filtration with pieces a_{k!}L_k, source fixed before the target. (3) ℓ-localization (qlbar-colimit-x-invert-ell), scalar-six(2), derived adjunction, tensor-colimit, O_E continuity clause, integral cutoff for a_k. (4) covariant and contravariant Ext segments, zero bases by additivity. (5) two-colimit (1),(2), scalar transitivity, Res commutes with b_! (underlying sheaves and the compatibility squares), Res M_F is a lisse E_0 module via cartesian-coefficients-finite-free, so the fixed E_0 source bound kills every term. I accept all 14 declared tool_uses. No SGA. No fixes. MAINTAINER ACTION REQUIRED at merge: the reviewed parent sk-lem-uniform-constructible-ext still says in Step 2 that the item displays the cutoff q>c_a and that c_a is independent of b,M. Its Steps 3-4, its statement's numeric second paragraph and the unit statement must be changed to d_{a,L}, as in the report's HUMAN request; the parent's existential conclusion is unaffected."
+ }
 }

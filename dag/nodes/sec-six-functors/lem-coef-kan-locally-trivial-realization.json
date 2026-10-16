@@ -29,9 +29,134 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-realization-finite-limits"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First replace the disk parameter by a cube, without changing the lifting problem. For $m>0$, the map from $[-1,1]^m$ to $D^m$ sending $x\\ne0$ to $x\\|x\\|_\\infty/\\|x\\|_2$ and $0$ to $0$ is a homeomorphism: its inverse sends $y\\ne0$ to $y\\|y\\|_2/\\|y\\|_\\infty$. The two formulas are inverse by homogeneity of the norms; continuity at zero follows from $\\|x\\|_\\infty\\le\\|x\\|_2\\le\\sqrt m\\|x\\|_\\infty$. Rescaling gives $\\theta:[0,1]^m\\cong D^m$; for $m=0$ use the identity of a point. Write $P=[0,1]^{m+1}$, with last coordinate time, $g(x,t)=h(\\theta(x),t)$ and initial map $a\\theta$. This cube is compact Hausdorff. Indeed, the simplex whose coordinates $w_v$ are indexed by its $2^{m+1}$ vertices is compact by [lem-coef-standard-simplex-compact], and $w\\mapsto\\sum_vw_vv$ is a continuous surjection onto $P$: at $x\\in P$ take $w_v=\\prod_{v_j=1}x_j\\prod_{v_j=0}(1-x_j)$. These weights sum to one and have barycenter $x$. An open cover of the image pulls back to one of the compact simplex, proving compactness. Distinct points are separated by a differing real coordinate.",
+   "uses": [
+    "lem-coef-standard-simplex-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.6.1, first paragraph; explicit cubical parameter and compactness calculation replacing the disk parameter."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-realization-compact-finite-support] to the compact Hausdorff cube $P$ and $g$. Obtain a finite simplicial subset $A\\subseteq B$ and a continuous $g_A:P\\to|A|$ factoring $g$. Put $E_A=A\\times_BE$. The pullback comparison of [lem-coef-realization-finite-limits] identifies $|E_A|$ with $|A|\\times_{|B|}^{\\mathcal K}|E|$. Consequently $(g_A(x,0),a\\theta(x))$ is a continuous initial lift into $|E_A|$. Every simplex $b:\\Delta^n\\to A$ has $\\Delta^n\\times_AE_A=\\Delta^n\\times_BE$, so the given product isomorphisms remain available. Horn lifting is inherited too: compose a lifting square with $A\\to B$, lift in $E$, and pair with the specified map to $A$. It suffices to solve the problem over $A$, then compose the lift with $|E_A|\\to|E|$.",
+   "uses": [
+    "lem-cbc-realization-compact-finite-support",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.6.1, printed pp.95–96: finite-base reduction and the realized pullback square."
+   }
+  },
+  {
+   "text": "We prove by induction on the number of nondegenerate simplices of a finite simplicial set $A$ that every map $E_A\\to A$ trivial over each simplex has local product charts after realization, with products in $\\mathcal K$. A local product chart means an open subset $U\\subseteq|A|$, a k-space $T$, and an isomorphism $U\\times^{\\mathcal K}T\\cong U\\times_{|A|}^{\\mathcal K}|E_A|$ over $U$; restrictions are k-ified subspaces. For the empty base this is vacuous. Choose a nondegenerate simplex $b$ of maximal dimension $n$ and remove it and its degeneracies, leaving $Z\\subset A$. The unique nondegenerate decomposition in [lem-cbc-realization-cw-subcomplex] shows that $Z$ is a simplicial subset, every proper face of $b$ belongs to $Z$, and $A=Z\\amalg_{\\partial\\Delta^n}\\Delta^n$. Degree by degree, the pushout adjoins precisely the degeneracies of the one missing nondegenerate simplex. Pulling this pushout back along $E_A\\to A$ gives $E_A=E_Z\\amalg_{\\partial\\Delta^n\\times_AE_A}(\\Delta^n\\times_AE_A)$: its degreewise elements over $Z$ are already in $E_Z$, and all other elements occur in the adjoined summand, with exactly the boundary identifications. Realization preserves these pushouts, and identifies all their pullbacks and products, by [lem-coef-realization-finite-limits]. Thus with $S=|\\Delta^n|$, $\\partial S=|\\partial\\Delta^n|$, and $f:\\partial S\\to|Z|$, the base is the topological attachment $|A|=|Z|\\amalg_fS$, and the total space is the corresponding attachment of $|E_Z|$ and $S\\times^{\\mathcal K}|F_b|$. The subspace and characteristic-map assertions in [lem-cbc-realization-cw-subcomplex] identify the boundary and the open simplex interior in these descriptions.",
+   "uses": [
+    "lem-cbc-realization-cw-subcomplex",
+    "lem-coef-realization-finite-limits",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.6.1, printed p.96: induction on nondegenerate simplices and its displayed boundary-attachment square; degreewise justification supplied."
+   }
+  },
+  {
+   "text": "If $n=0$, the attachment is a disjoint new vertex, with total space its product with $|F_b|$, so it supplies a chart and preserves the old ones. Suppose $n>0$. The simplex product isomorphism gives a chart $\\psi:S\\times^{\\mathcal K}F\\cong S\\times_{|A|}^{\\mathcal K}|E_A|$, where $F=|F_b|$. It supplies charts over all points of the new simplex interior, an open subset of $|A|$. For a point of $|Z|$, the induction hypothesis supplies an open neighborhood $U\\subseteq|Z|$ and a chart $\\phi:U\\times^{\\mathcal K}T\\cong U\\times_{|A|}^{\\mathcal K}|E_A|$. Put $U'=f^{-1}(U)\\subseteq\\partial S$, and let $\\phi'$ be its pullback chart. If $U'=\\varnothing$, $U$ is already open in the attachment and its chart is enough. It remains to extend this chart when $U'\\ne\\varnothing$.",
+   "uses": [
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.6.1, printed p.96: simplex chart, old-base chart and the case of empty boundary preimage."
+   }
+  },
+  {
+   "text": "Here is the required collar, including the correction of the source's introductory retraction sentence. In barycentric coordinates $t_0,\\ldots,t_n$ on $S$, put $\\mu(t)=\\min_jt_j$. Away from the barycenter set $r_j(t)=(t_j-\\mu(t))/(1-(n+1)\\mu(t))$. These continuous nonnegative coordinates sum to one and one is zero, so $r:S\\setminus\\{\\text{barycenter}\\}\\to\\partial S$ is continuous and is the identity on $\\partial S$. Choose $0<\\epsilon<1/(n+1)$ and take $V=\\{t:\\mu(t)<\\epsilon,\\ r(t)\\in U'\\}$. It is open in $S$, $V\\cap\\partial S=U'$, and $r:V\\to U'$ is a retraction. The subset $W=U\\amalg_{U'}V$ of the attachment is open: its inverse images in the two quotient summands are precisely $U$ and $V$. It contains the chosen old-base point. The boundary is not asserted to retract from the whole simplex; only this open collar is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.6.1, printed p.96: open thickening of the boundary preimage; explicit barycentric collar formula repairs the preceding informal sentence."
+   }
+  },
+  {
+   "text": "On $U'$ compare the two charts without making a choice of a homeomorphism between their fibres. Write $\\psi^{-1}\\phi'(u,t)=(u,\\alpha(u,t))$ and $(\\phi')^{-1}\\psi(u,s)=(u,\\beta(u,s))$, with $t\\in T$, $s\\in F$. The second coordinates are continuous and satisfy $\\beta(u,\\alpha(u,t))=t$ and $\\alpha(u,\\beta(u,s))=s$. The maps $C(v,t)=(v,\\alpha(r(v),t))$ from $V\\times^{\\mathcal K}T$ to $V\\times^{\\mathcal K}F$ and $C^{-1}(v,s)=(v,\\beta(r(v),s))$ are continuous inverse maps over $V$. Define $\\rho=\\psi C$. Since $r|_{U'}$ is the identity, $\\rho|_{U'}=\\phi'$. These equations remain valid if the fibres are empty; no point of either fibre is selected.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.6.1, printed pp.96–97: the transition maps and extension along the collar retraction; the two possibly different fibre spaces are kept explicit."
+   }
+  },
+  {
+   "text": "Glue $\\phi$ and $\\rho$ to obtain a product chart over $W$. We justify continuity of both the glued map and its inverse, rather than treating compatible pointwise charts as enough. The exponential law in [lem-coef-kspace-exponential-law] makes $(-)\\times^{\\mathcal K}T$ a left adjoint: maps out of $L\\times^{\\mathcal K}T$ correspond to maps from $L$ into the specified mapping k-space. The colimit universal property then shows that this product preserves the pushout $W=U\\amalg_{U'}V$. By step 3, the total space over $W$ is the pushout of the restrictions over $U$ and $V$ along their common boundary restriction; restricting a topological quotient to the inverse image of an open subset is a quotient, since that inverse image is saturated and open. These statements also hold with the k-ifications specifying the restrictions. Explicitly, a continuous map from a k-space $L$ to a space $H$ is continuous into $kH$: for every k-open subset $O$ of $H$ and every compact test $c:C\\to L$, the set $(fc)^{-1}O$ is open, so $f^{-1}O$ is open by the defining test condition on $L$. The converse follows from the continuous identity $kH\\to H$. This verifies the required mapping universal properties after k-ification. The maps $\\phi$ and $\\rho$ agree on the boundary restriction by step 6, as do their inverse maps. Therefore the two pushout universal properties glue them to continuous inverse maps $W\\times^{\\mathcal K}T\\cong W\\times_{|A|}^{\\mathcal K}|E_A|$. This covers every old-base point. Together with step 4 it proves the induction claim for $A$, hence local product charts for every finite base, without assuming the base or total simplicial set is Kan.",
+   "uses": [
+    "lem-coef-kspace-exponential-law",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.6.1, printed p.97: gluing the modified chart; continuity expanded using the k-space exponential law instead of an uncited product/quotient assertion."
+   }
+  },
+  {
+   "text": "Apply these charts to $g_A:P\\to|A|$ and pull their open domains back to an open cover of the ordinary metric cube $P$. The following compactness argument produces a grid fine enough for that cover. For each $x\\in P$ choose $r_x>0$ so that the relative ball of radius $2r_x$ about $x$ lies in one chosen cover member. Finitely many relative balls of radii $r_x$ cover $P$ by the compactness proved in step 1. Let $\\delta>0$ be the minimum of their radii. For any subset $Q\\subseteq P$ of diameter $<\\delta$, choose $y\\in Q$ and a selected ball containing it; the triangle inequality puts all of $Q$ in the corresponding ball of radius $2r_x$, and hence in one chart domain. Choose an integer $N$ with $\\sqrt{m+1}/N<\\delta$; the closed boxes of the regular $N$-by-$\\cdots$-by-$N$ cubical grid therefore each map under $g_A$ into one chart. No general theorem about Hurewicz fibrations or fibre bundles is used here.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent expansion of the local-product-to-disk-lifting reduction in Proposition 3.6.1, printed p.96; direct finite-subcover argument in place of the cited Spanier theorem."
+   }
+  },
+  {
+   "text": "Order the grid boxes first by increasing time interval and then lexicographically by their $m$ spatial interval indices. Start with the prescribed lift on $P_0=[0,1]^m\\times\\{0\\}$. Suppose a lift has been constructed on $P_0$ and all earlier boxes and let $Q$ be the next box. Its intersection $A_Q$ with that old domain is its bottom time face together with its lower spatial face in each direction whose interval index is positive. Indeed each such adjacent lower box is earlier. Any earlier box meeting $Q$ either is in an earlier time layer and meets its bottom, or has a first differing smaller spatial index and meets a lower spatial face there. This also accounts for all intersections of higher codimension. In normalized coordinates $u_1,\\ldots,u_{m+1}\\in[0,1]$ on $Q$, let $J$ consist of the time coordinate and precisely these positive-index spatial directions. Then $A_Q=\\{u:\\min_{j\\in J}u_j=0\\}$. The explicit retraction $R_Q:Q\\to A_Q$ subtracts $\\lambda=\\min_{j\\in J}u_j$ from coordinates in $J$ and leaves all other coordinates unchanged. It is continuous, remains in the cube, reaches $A_Q$, and fixes $A_Q$. The set $J$ is always nonempty, including $m=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent cubical proof of the local-product lifting step in Proposition 3.6.1; explicit attaching order and retraction."
+   }
+  },
+  {
+   "text": "Choose the chart containing $g_A(Q)$. Express the old lift on $A_Q$ in this chart as $(g_A(u),s(u))$, where $s:A_Q\\to T$ is its continuous fibre coordinate. Extend over $Q$ by the formula $u\\mapsto\\phi(g_A(u),s(R_Q(u)))$. It lies over $g_A(u)$ and restricts to the old lift because $R_Q$ fixes $A_Q$. The chart and its inverse are maps in $\\mathcal K$; the maps from $Q$ and $A_Q$ into their k-ified restrictions are continuous as well: these domains are compact Hausdorff (finite unions of closed faces of a compact cube), so they are themselves among the compact tests defining k-ification. Thus the displayed formula defines an ordinary continuous map on $Q$. Glue it to the old lift. This is continuous: for a closed subset of the target, the inverse images on the finitely many closed boxes and the bottom face are closed there, hence closed in their finite union. Induction through the finite list constructs a continuous lift on $P$ with exactly the prescribed bottom value. If a chart fibre is empty, the already prescribed lift on the nonempty bottom face of the box would supply a point of it; thus such a box cannot arise in a lifting problem that has the prescribed initial map. No global nonemptiness hypothesis has been inserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent cubical proof of the local-product lifting step in Proposition 3.6.1; extension formula, finite closed pasting and empty-fibre check."
+   }
+  },
+  {
+   "text": "Compose this lift into $|E_A|$ with $|E_A|\\to|E|$ as in step 2 and precompose its spatial parameter with $\\theta^{-1}$. The resulting map $\\widetilde h:D^m\\times[0,1]\\to|E|$ is continuous. At time zero its value is $a(z)$ because the construction never changed the prescribed initial map; its projection is $h(z,t)$ because each box formula projects to $g_A$ and $|A|\\to|B|$ carries $g_A$ to $g$. This proves both required equalities for every $m\\geq0$. Neither the finite reduction, the collar induction nor the cubical lift required any nonempty fibre or any Kan condition on $E$ or $B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.6.1, conclusion; return from the finite-base pullback and cubical parameter."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-standard-simplex-compact",
+  "lem-cbc-realization-compact-finite-support",
+  "lem-coef-realization-finite-limits",
+  "lem-cbc-realization-cw-subcomplex",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kspace-exponential-law"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Hovey, Model Categories, Proposition 3.6.1, printed pp.95–97, read online 2026-10-17. Finite-base and collar route followed; product/quotient and disk lifting expanded, the latter by an explicit finite cubical construction instead of invoking Spanier 2.7.13. Archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +192,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.fibrations SSet = SSet.modelCategoryQuillen.J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithCofibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [hf : HomotopicalAlgebra.Fibration f] {n : ℕ} (i : Fin (n + 2)),\\n  CategoryTheory.HasLiftingProperty (SSet.horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y), HomotopicalAlgebra.Fibration f ↔ SSet.modelCategoryQuillen.J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"HomotopicalAlgebra.Cylinder.IsVeryGood.fibration_π\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {A : C}\\n  {inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C} {P : HomotopicalAlgebra.Cylinder A}\\n  {inst_2 : CategoryTheory.Limits.HasBinaryCoproduct A A} {inst_3 : HomotopicalAlgebra.CategoryWithCofibrations C}\\n  {inst_4 : Homotopic\", \"doc\": \"In a homotopical category $\\\\mathcal{C}$ with weak equivalences, cofibrations, and fibrations, if a cylinder object $I(A)$ for an object $A \\\\in \\\\mathcal{C}$ satisfies the 'very good' condition (requiri\"}\n  {\"name\": \"FiberBundleCore.fiberBundle\", \"module\": \"Mathlib/Topology/FiberBundle/Basic\", \"type\": \"{ι : Type u_1} →\\n  {B : Type u_2} →\\n    {F : Type u_3} →\\n      [inst : TopologicalSpace B] → [inst_1 : TopologicalSpace F] → (Z : FiberBundleCore ι B F) → FiberBundle F Z.Fiber\", \"doc\": \"A FiberBundleCore structure naturally gives rise to a fiber bundle, where the total space is equipped with a topology generated by local trivializations, each fiber has the induced topology, and the b\"}\n  {\"name\": \"FiberBundleCore.localTriv\", \"module\": \"Mathlib/Topology/FiberBundle/Basic\", \"type\": \"{ι : Type u_1} →\\n  {B : Type u_2} →\\n    {F : Type u_3} →\\n      [inst : TopologicalSpace B] →\\n        [inst_1 : TopologicalSpace F] → (Z : FiberBundleCore ι B F) → ι → Trivialization F Z.proj\", \"doc\": \"For each index $i$, this constructs a trivialization of the fiber bundle, which is a homeomorphism between the preimage of the base set $Z.\\text{baseSet}(i)$ under the projection map and the product sp\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: SingularSet.lean:66–86 gives realization and its adjunction, and TopAdj.lean:38–43,163–172 identifies realized simplices; none asserts the disk homotopy lifting property for simplexwise trivial fibrations. IsCoveringMap.liftHomotopyRel assumes a covering map, which requires discrete fibres; the present fibres need not be discrete. FiberBundleCore constructs local trivializations but does not realize a simplicial local trivialization. Both semantic phrasings and all printed grep hits were read."
+  },
+  {
+   "tool": "grep",
+   "query": "Serre|locally.trivial|fibration",
+   "results": "{\"t\": \"2026-10-16T19:53:28Z\", \"tool\": \"grep\", \"query\": \"Serre|locally.trivial|fibration\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\"], \"digest\": \"afcda245c1cf7c49\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: horn-lifting declarations, SSet.toTop, local trivialization maps and covering-space lifting only. Read CategoryWithFibrations.lean:13–75, SingularSet.lean:66–86, TopAdj.lean:38–43,163–172, and the indicated covering/trivialization declarations; none proves realization of simplexwise trivial maps has disk lifting. Covering maps impose discrete fibres and chart clift does not construct a global lift."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.toTop\", \"Fibration\"",
+   "results": "{\"t\": \"2026-10-16T19:53:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.toTop\\\", \\\"Fibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: horn-lifting declarations, SSet.toTop, local trivialization maps and covering-space lifting only. Read CategoryWithFibrations.lean:13–75, SingularSet.lean:66–86, TopAdj.lean:38–43,163–172, and the indicated covering/trivialization declarations; none proves realization of simplexwise trivial maps has disk lifting. Covering maps impose discrete fibres and chart clift does not construct a global lift."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The geometric realization of a locally trivial simplicial map has the disk homotopy lifting property",
+   "results": "{\"t\": \"2026-10-16T19:53:28Z\", \"tool\": \"leansearch\", \"query\": \"The geometric realization of a locally trivial simplicial map has the disk homotopy lifting property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCoveringMap.liftHomotopyRel\", \"IsCoveringMap.liftHomotopy_lifts\", \"Trivialization.lift_self\", \"SSet.toTop\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"Trivialization.clift_self\", \"IsCoveringMap.liftHomotopy\", \"sSetTopAdj\"], \"digest\": \"cd5b49b6beb6ef20\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: horn-lifting declarations, SSet.toTop, local trivialization maps and covering-space lifting only. Read CategoryWithFibrations.lean:13–75, SingularSet.lean:66–86, TopAdj.lean:38–43,163–172, and the indicated covering/trivialization declarations; none proves realization of simplexwise trivial maps has disk lifting. Covering maps impose discrete fibres and chart clift does not construct a global lift."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplexwise trivial Kan fibration of simplicial sets realizes to a Serre fibration",
+   "results": "{\"t\": \"2026-10-16T19:53:34Z\", \"tool\": \"leanfinder\", \"query\": \"A simplexwise trivial Kan fibration of simplicial sets realizes to a Serre fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.KanComplex\"], \"digest\": \"41180627144d027a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: horn-lifting declarations, SSet.toTop, local trivialization maps and covering-space lifting only. Read CategoryWithFibrations.lean:13–75, SingularSet.lean:66–86, TopAdj.lean:38–43,163–172, and the indicated covering/trivialization declarations; none proves realization of simplexwise trivial maps has disk lifting. Covering maps impose discrete fibres and chart clift does not construct a global lift."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realization of a simplicial fiber bundle admits continuous homotopy lifting for disks",
+   "results": "{\"t\": \"2026-10-16T19:53:40Z\", \"tool\": \"leanfinder\", \"query\": \"Realization of a simplicial fiber bundle admits continuous homotopy lifting for disks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Trivialization.clift\", \"IsCoveringMap.liftHomotopy\", \"IsLocalHomeomorph.continuous_lift\", \"IsLocalHomeomorph.existsUnique_continuousMap_lifts\", \"IsLocalHomeomorph.monodromy_theorem\", \"IsCoveringMap.liftHomotopy_lifts\", \"Trivialization.liftCM\", \"IsCoveringMap.liftHomotopyRel\"], \"digest\": \"78cd4564d4840884\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: horn-lifting declarations, SSet.toTop, local trivialization maps and covering-space lifting only. Read CategoryWithFibrations.lean:13–75, SingularSet.lean:66–86, TopAdj.lean:38–43,163–172, and the indicated covering/trivialization declarations; none proves realization of simplexwise trivial maps has disk lifting. Covering maps impose discrete fibres and chart clift does not construct a global lift."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-kan-realization-serre",
@@ -78,5 +238,34 @@
   "group": "Q57"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-locally-trivial-realization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded finite-base reduction, the one-simplex attachment induction, the boundary collar and transition maps, k-space chart gluing, and a finite cubical disk-lifting argument. Reused six existing nodes; created no nodes. Corrected the source's informal whole-simplex retraction sentence by an explicit collar retraction, and avoided its uncited bundle-to-Hurewicz theorem by constructing the lift. No Lean attachment covers the item.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 and displayed derived Hom/inverse-limit computation, via the recorded coefficient-system/cosimplicial-frame/Kan-realization chain. This technical input realizes Hovey Proposition 3.6.1 inside that ancestry and changes no chapter or unit route. The ancestor has no blueprint_update on this item; its archived master text was read.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-compact-finite-support",
+    "why": "Generic compact finite-support theorem for realization, applied to the parameter cube; no same-unit statement gives compact finite support, and the parent realization theorem cannot be cited without a cycle."
+   },
+   {
+    "node": "lem-cbc-realization-cw-subcomplex",
+    "why": "Generic nondegenerate normal forms and realization subspace topology used for the finite-cell attachment; no same-unit node supplies these statements."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-compact-finite-support",
+  "lem-cbc-realization-cw-subcomplex"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-bc8e46a45",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-bc8e46a45 (reviewer sub-agent of L); spot-checked: I read the item, its 11 steps and the full statements of all six cited nodes; my own check of the mathematics found it complete and correct. I could NOT read the cited source, Hovey Prop 3.6.1 pp.95-97: it is not in literature/ and this reviewer has no network. The node already says so (proof_origin.by=agent, WANTED filed), so I checked the proof on its own terms. Checks: (1) the cube-disk map x||x||inf/||x||2 and its inverse compose to the identity; product weights sum to 1 with barycenter x; compactness from the standard-simplex-compact leaf; m=0 uses the identity of a point. (2) compact-finite-support applies because P is compact Hausdorff; the finite-limits pullback clause identifies |E_A|; Delta^n x_A E_A = Delta^n x_B E. (3) the induction claim is stated with empty base; Z is a simplicial subset by unique nondegenerate parts; injectivity of alpha -> b.alpha is not stated in the cw-subcomplex node but follows in two lines from its unique interior representative clause; the degreewise pullback of the pushout was checked elementwise; realization preserves colimits. (4) the open interior gives the simplex chart; the case U'=empty holds. (5) the collar r_j=(t_j-mu)/(1-(n+1)mu) has positive denominator off the barycenter, coordinates summing to 1, and is the identity on the boundary; preimages of W are exactly U and V; tested on an interval and a triangle. (6) the transitions alpha, beta and C, C^-1 are exact and choose no fibre point. (7) the k-product is a left adjoint by the exponential law; open subspaces of k-spaces are k-spaces (checked via compact neighbourhoods in test spaces). (8) the Lebesgue bound d < delta + r_i <= 2r_i holds. (9) the box intersections are the bottom face plus the lower faces in positive-index directions, checked against the lex order and diagonal neighbours; the retraction is valid; m=0 and a 2x2 grid checked. (10) extension, finite closed pasting and the empty-fibre remark hold. (11) projection and initial-value equations hold. The statement is unchanged and true; tested on B=pt, E=empty and a product over Delta^1. No new nodes, and no duplicate in the DAG (checked topological-serre-model, minimal-factorization, disk-lift-boundary, fibre criteria). No cycle: the 16-node dependency closure reaches neither the item nor its parent. No unit binding changed and no SGA. Accepted tool_uses: lem-cbc-realization-compact-finite-support and lem-cbc-realization-cw-subcomplex, generic realization topology with no same-unit substitute. One harmless report inaccuracy: the report says created was changed to Q120, but the file keeps the correct parent-split value (Q57, lem-coef-kan-realization-serre). No fixes written."
+ }
 }
