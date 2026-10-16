@@ -18,126 +18,22 @@
  ],
  "proof": [
   {
-   "text": "The one-point profinite space is terminal: there is exactly one continuous map to it. Evaluation at its point identifies $LC(*,\\mathbf Z)$ with $\\mathbf Z$, respecting the constant structure map. Thus [def-sfb-profinite-to-proetale] sends it to the identity object over $\\operatorname{Spec}\\mathbf Z$, which is terminal in the small pro-etale site [def-weil-pbc-small-proetale-site]: the unique arrow from any object is its structure morphism.",
+   "text": "Use the canonical equivalence [def-weil-pbc-profinite-locally-constant-hom-equiv] between maps from the profinite space of connected components of Spec R to S and ring maps LC(S,Z) to R. Naturality in S follows after localization at every prime: both composites evaluate the same locally constant function at the same image point, and equality is detected in all prime localizations. Adjunction.adjunctionOfEquivLeft constructs a left adjoint to the functor S to LC(S,Z) in the opposite category of commutative rings. The latter therefore preserves all limits. Compose with Scheme.Spec, which also preserves limits. The forgetful functor from schemes over the terminal scheme specZ is an equivalence, and the forgetful functor from the weakly-etale over category reflects finite limits. Reflect the obtained preservation through these two functors to prove finite-limit preservation of the concrete profiniteToProEt of [def-sfb-profinite-to-proetale]. No tensor-product or equalizer presentation is needed.",
    "uses": [
-    "def-sfb-profinite-to-proetale",
-    "def-weil-pbc-small-proetale-site"
+    "def-weil-pbc-profinite-locally-constant-hom-equiv",
+    "def-sfb-profinite-to-proetale"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-finite-limits.proof.md",
-    "place": "Terminal object paragraph"
-   }
-  },
-  {
-   "text": "Fix a span $S_1\\to S\\leftarrow S_2$, and use the partitions and finite sets $I,A_{1,i},C_i,A_{2,i},B_i,P$ of [lem-sfb-finite-quotient-fiber-product]. The trivial partitions (empty on an empty space) give an index. Intersecting blocks of two partitions and discarding empty intersections gives a common refinement in each coordinate, still compatible with both maps. Thus $I$ is a nonempty directed set, small in the chosen universe because its partitions are finite families of subsets of the three given spaces. The asserted homeomorphism identifies $(P,(p_i))$ with the inverse limit of $B_i$: a compatible family of continuous maps into the $B_i$ gives a continuous map into their product and hence into the displayed subspace, uniquely. The same $P$, with its two projections, is the profinite pullback of the original span: any pair of continuous maps with equal composites gives the unique continuous map into this subspace of $S_1\\times S_2$.",
-   "uses": [
-    "lem-sfb-finite-quotient-fiber-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-finite-limits.proof.md",
-    "place": "Fibre products paragraph, compatible finite quotient systems"
-   }
-  },
-  {
-   "text": "For every $i$ there is a refinement $j\\ge i$ with $\\operatorname{im}(B_j\\to B_i)=p_i(P)$. Indeed, fix $b\\in B_i\\setminus p_i(P)$. If every finite fibre $T_j=\\{x\\in B_j:b_{ji}(x)=b\\}$ for $j\\ge i$ were nonempty, these finite discrete (therefore compact Hausdorff) spaces and their refinement maps would satisfy [lem-weil-pbc-directed-limit-compact-hausdorff-nonempty]. A compatible family on this directed tail extends uniquely to all indices: at index $k$, choose $l\\ge k,i$ and take the image of its chosen point; a common refinement shows independence of $l$. The inverse-limit identification from step 2 would then give a point of $P$ mapping to $b$, a contradiction. Thus some refinement eliminates $b$. There are finitely many such $b$; a common refinement of their eliminating indices gives the asserted equality. This uses no surjectivity assumption on $P\\to B_i$.",
-   "uses": [
-    "lem-sfb-finite-quotient-fiber-product",
-    "lem-weil-pbc-directed-limit-compact-hausdorff-nonempty"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0A2R (lemma-nonempty-limit), applied to finite fibres over a directed tail; the eventual-image argument expands the blueprint Fibre products paragraph."
-   }
-  },
-  {
-   "text": "Put $R_r=LC(S_r,\\mathbf Z)$, $R=LC(S,\\mathbf Z)$, and $D=LC(P,\\mathbf Z)$. The rings $\\mathbf Z^{A_{r,i}}$ and $\\mathbf Z^{C_i}$ have colimits $R_r$ and $R$, with transition maps and cocone maps given by precomposition. To verify the colimit universal property [def-weil-pbc-category-colimit], every locally constant function on one of these compact spaces has finite image: finitely many neighbourhoods of constancy cover the space. Its nonempty fibres are therefore a finite clopen partition. Any partition of $S_r$ appears in a compatible triple by taking the trivial partition on $S$ and on the other source; any partition of $S$ appears by partitioning both sources by its nonempty inverse images. Hence every function is represented at an index. Equality of representatives is detected at a common refinement, since every map from a space to the set of its nonempty partition blocks is surjective. Given compatible ring maps out of the finite rings, define the map on a function using any representative; that equality criterion makes it well-defined, and using common refinements for two representatives proves addition, multiplication and the unit are respected. Uniqueness follows from representability. This proves the colimit assertion in commutative rings, including empty spaces and their zero function rings.",
-   "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-finite-limits.proof.md",
-    "place": "Fibre products paragraph, finite quotient expressions for the three coordinate rings"
-   }
-  },
-  {
-   "text": "$D$ is the colimit of the rings $D_i=\\mathbf Z^{B_i}$. Apply [lem-weil-pbc-profinite-limit-function-factorization] to the small cofiltered category $I^{\\mathrm{op}}$, the diagram of finite discrete $B_i$, and the limiting cone in step 2. With target set $\\mathbf Z$, it says that every element of $D$ is the pullback of a function on some $B_i$. If two functions at one index have equal pullbacks to $P$, they agree on $p_i(P)$; step 3 supplies a refinement whose whole image is $p_i(P)$, so their representatives become equal there. Representatives at different indices are first moved to a common refinement. Given compatible ring maps $v_i:D_i\\to H$, define $v(h)=v_i(h_i)$ for any representative $h=h_i\\circ p_i$. The equality criterion just proved makes this independent of the representative. Move representatives of $h,h^{\\prime}$ to one common index; the identities for $v_i$ there give $v(h+h^{\\prime})=v(h)+v(h^{\\prime})$, $v(hh^{\\prime})=v(h)v(h^{\\prime})$, and $v(1)=1$. Every $h$ has a representative, so this map is unique. This proves the universal property of [def-weil-pbc-category-colimit].",
-   "uses": [
-    "lem-weil-pbc-profinite-limit-function-factorization",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-finite-limits.proof.md",
-    "place": "Fibre products paragraph, locally constant functions on the fibre product"
-   }
-  },
-  {
-   "text": "For finite sets $A_1\\xrightarrow{g_1}C\\xleftarrow{g_2}A_2$, let $T=\\mathbf Z^{A_1}\\otimes_{\\mathbf Z^C}\\mathbf Z^{A_2}$. By [lem-weil-pbc-algebra-tensor-pushout-universal-property], the two pullbacks of functions to $B=A_1\\times_C A_2$ give the ring homomorphism $\\theta:T\\to\\mathbf Z^B$, with $\\theta(a\\otimes b)(a_1,a_2)=a(a_1)b(a_2)$. Write $e_a$ for characteristic functions of singletons. For $c=g_1(a_1)\\ne g_2(a_2)$, balancing gives $e_{a_1}\\otimes e_{a_2}=(e_{a_1}g_1^*e_c)\\otimes e_{a_2}=e_{a_1}\\otimes(g_2^*e_c)e_{a_2}=0$. The remaining elements $E_{(a_1,a_2)}=e_{a_1}\\otimes e_{a_2}$ are pairwise orthogonal idempotents whose sum is $1$. Consequently $h\\mapsto\\sum_{b\\in B}h(b)E_b$ is a unital ring map $\\mathbf Z^B\\to T$. The inverse map respects the $\\mathbf Z^C$-structure: it takes the characteristic function pulled back from $c\\in C$ to $\\sum_{g_1(a_1)=g_2(a_2)=c}E_{(a_1,a_2)}=g_1^*e_c\\otimes1=1\\otimes g_2^*e_c$. Its composite with $\\theta$ is the identity on characteristic functions (and hence on every integer-valued function by the finite characteristic-function expansion). In the other order it is the identity on pure tensors by expanding both functions in characteristic functions, hence on $T$ by the uniqueness clause of the cited tensor universal property (it agrees on both algebra inclusions). This proves the required finite-stage isomorphism, with the two inclusions given by pullback along the projections. If $B$ is empty the same sum gives $1=0$ in $T$, so this case is included.",
-   "uses": [
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-finite-limits.proof.md",
-    "place": "Fibre products paragraph, finite function-ring tensor identity"
-   }
-  },
-  {
-   "text": "The colimit computation works with the varying base rings without invoking a fixed-base tensor-colimit theorem. Let $H$ be a commutative ring and let $v_r:R_r\\to H$ be ring maps agreeing on $R$. Equip $H$ with the $R$-algebra structure given by this common composite, and with the $\\mathbf Z^{C_i}$-algebra structure obtained by restriction for every $i$. For each $i$ their restrictions to $\\mathbf Z^{A_{1,i}}$ and $\\mathbf Z^{A_{2,i}}$ agree on $\\mathbf Z^{C_i}$. Step 6 and [lem-weil-pbc-algebra-tensor-pushout-universal-property] give a unique map $w_i:D_i\\to H$ extending both restrictions. For a refinement $i\\le j$, the two maps from $D_i$ to $H$ given by $w_i$ and by transition followed by $w_j$ agree on both coordinate function rings, so the same uniqueness clause makes them equal. Step 5 and [def-weil-pbc-category-colimit] give a unique $w:D\\to H$. Its restrictions to $R_1,R_2$ are $v_1,v_2$ by step 4. Conversely any such $w$ restricts on $D_i$ to $w_i$, hence is unique. Thus $D$ is the pushout of $R_1\\leftarrow R\\to R_2$. Applying the tensor universal property again identifies $D$ canonically with $R_1\\otimes_RR_2$, carrying the coordinate pullbacks to $a\\mapsto a\\otimes1$ and $b\\mapsto1\\otimes b$.",
-   "uses": [
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-finite-limits.proof.md",
-    "place": "Fibre products paragraph, passage to the filtered colimit"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-fibre-product-affine-spectra], the canonical ring isomorphism in step 7 gives $\\operatorname{Spec}D\\cong\\operatorname{Spec}R_1\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R_2$, with projections exactly those obtained by applying $u$ of [def-sfb-profinite-to-proetale] to $P\\to S_1,S_2$. This is also a pullback in the small pro-etale site: [def-weil-pbc-small-proetale-site] says its morphisms are all scheme morphisms over the base. Its vertex is already the object $u(P)$, so the scheme universal property restricts to this full subcategory. In detail, the unique scheme map from any pro-etale object with two compatible arrows is over $\\operatorname{Spec}\\mathbf Z$ since its composite with either projection is the given arrow over that base. No closure assertion about arbitrary scheme pullbacks is needed here.",
-   "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-sfb-profinite-to-proetale",
-    "def-weil-pbc-small-proetale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-finite-limits.proof.md",
-    "place": "Fibre products paragraph, applying Spec and comparison with the site"
-   }
-  },
-  {
-   "text": "Step 2 gives pullbacks in the source category by the explicit continuous-pair universal property, and the one-point space gives its terminal object. Step 1 proves preservation of that terminal object. Every other terminal object is uniquely isomorphic to it; applying $u$ gives an isomorphism to the terminal object from step 1. Thus $u$ preserves every terminal object, and step 8 proves preservation of every pullback square (any other choice of pullback is uniquely isomorphic to the displayed one). Therefore [lem-weil-pbc-finite-limits-from-terminal-pullbacks], clause (2), applies to $u$ and proves that it preserves finite limits.",
-   "uses": [
-    "lem-weil-pbc-finite-limits-from-terminal-pullbacks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-finite-limits.proof.md",
-    "place": "Opening sentence: terminal object and fibre products suffice"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sfb-profinite-to-proetale",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-small-proetale-site",
-  "lem-sfb-finite-quotient-fiber-product",
-  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "lem-weil-pbc-directed-limit-compact-hausdorff-nonempty",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
-  "lem-weil-pbc-profinite-limit-function-factorization"
+  "def-weil-pbc-profinite-locally-constant-hom-equiv",
+  "def-sfb-profinite-to-proetale"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-profinite-to-proetale-finite-limits.proof.md",
-  "place": "Terminal object and Fibre products paragraphs; finite tensor, eventual equality and varying-base colimit details expanded by Q59"
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Basic.lean",
+  "place": "preservesFiniteLimits_profiniteToProEt and its private Hom-equivalence helpers; reuses the complete F2 proofs observed in the initial shared source snapshot."
  },
  "mathlib_searches": [
   {
@@ -205,5 +101,24 @@
   "group": "Q59",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q59-5c783e702 (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited sources. All nine steps and the new compatible-partition lemma check out, including empty spaces, non-surjective projections, varying-base tensor pushouts, and site projections. No duplicate, circularity, route violation, or target weakening found. Concrete checks recorded in review.md; no repairs required."
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt",
+  "statement": "instance preservesFiniteLimits_profiniteToProEt : PreservesFiniteLimits profiniteToProEt.{u}",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-17"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T221604-L-1612926",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

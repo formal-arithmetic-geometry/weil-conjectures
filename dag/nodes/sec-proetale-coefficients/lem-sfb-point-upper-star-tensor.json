@@ -20,106 +20,28 @@
  ],
  "proof": [
   {
-   "text": "Use the small-site and larger-value-universe convention of [def-weil-size-convention]. Put $\\mathcal C=*_{\\mathrm{proét}}$, the profinite site of [sk-def-sfb-condensed-ring], and $\\mathcal D=(\\operatorname{Spec}\\mathbf Z)_{\\mathrm{proét}}$. Take $u:\\mathcal C\\to\\mathcal D$ to be [def-sfb-profinite-to-proetale]. The category of profinite sets has finite limits: its terminal object is a point, finite products are the topological products, and equalizers are the closed subspaces where the two maps agree, with their induced profinite topologies. The functor $u$ preserves these limits by [lem-sfb-profinite-to-proetale-finite-limits], and it sends coverings to coverings by [lem-sfb-profinite-to-proetale-cover-preserving], including the empty cover of the empty object. These are precisely the size, finite-limit and covering hypotheses of the general inverse-image theorem used in step 2.",
+   "text": "Unfold pointUpperStar to the concrete sheaf pullback of [def-sfb-point-upper-star]. Finite-limit preservation [lem-sfb-profinite-to-proetale-finite-limits] makes the site functor representably flat; its opposite comma categories are filtered and hence sifted. Tensoring abelian groups preserves their colimits. Continuity is [lem-sfb-profinite-to-proetale-continuous], and the existing Kan-extension and sheafification instances apply. The tensor clause of [lem-sfb-general-sheaf-pullback-monoidal-comparisons] therefore gives invertibility of the actual oplax tensor map in [lem-sfb-point-upper-star-unit], for all F,G.",
    "uses": [
-    "def-weil-size-convention",
-    "sk-def-sfb-condensed-ring",
-    "def-sfb-profinite-to-proetale",
-    "lem-sfb-profinite-to-proetale-finite-limits",
-    "lem-sfb-profinite-to-proetale-cover-preserving"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00X6, proposition-get-morphism (hypotheses); the specialized functor and hypotheses are in main-20261015 sk-def-sfb-pullback-from-point, clause 1."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-left-exact-site-inverse-image-tensor] to the sites and $u$ of step 1, taking only its geometric-morphism and abelian inverse-image clauses. The inverse image is left Kan extension along $u^{op}$ followed by sheafification, hence the specified $p^*$ of [def-sfb-point-upper-star], and the direct image is restriction, hence $p_*$ of [def-sfb-point-lower-star]. Thus they form a morphism of sites with finite-limit-preserving set inverse image. The convention in [def-weil-pbc-sites-and-cohomology], clause (3), identifies the abelian inverse image on underlying sets and its unit with the set inverse image and unit. We use exactly the Kan-extension/sheafification adjunction of [def-sfb-point-adjunction], not an independently chosen adjunction on the same functors. Consequently the bilinear-adjunction statement cited in step 3 applies to these particular functors and unit. No tensor comparison from the generic theorem is selected or assigned a normalization.",
-   "uses": [
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
     "def-sfb-point-upper-star",
-    "def-sfb-point-lower-star",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-sfb-point-adjunction"
+    "lem-sfb-profinite-to-proetale-finite-limits",
+    "lem-sfb-profinite-to-proetale-continuous",
+    "lem-sfb-general-sheaf-pullback-monoidal-comparisons",
+    "lem-sfb-point-upper-star-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00X6, proposition-get-morphism; Section 00YR and Proposition 00YV(2) for the induced abelian inverse image and its underlying unit."
-   }
-  },
-  {
-   "text": "Use the set inverse image $L=p^*$ and direct image $R=p_*$ from step 2. The statement [def-weil-pbc-sites-and-cohomology] identifies the induced abelian functors and their units with these underlying set functors and units. Apply [lem-sfb-site-inverse-image-bilinear-adjunction] to these particular functors: for abelian sheaves $F,G$ on the profinite site and $H$ on the pro-étale site it gives the bijection\n$$\\operatorname{Bilin}(p^*F\\times p^*G,H)\\xrightarrow{\\sim}\\operatorname{Bilin}(F\\times G,p_*H),\\qquad\\beta\\longmapsto p_*\\beta\\circ(\\eta_F\\times\\eta_G).$$\nThe finite-limit hypothesis is supplied by step 2. Here $\\eta$ is the unit of the specified Kan-extension/sheafification adjunction. The cited lemma asserts both separate additivity and the displayed two-unit formula; we take precisely these clauses of its statement.",
-   "uses": [
-    "lem-sfb-site-inverse-image-bilinear-adjunction",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, third equality in the Hom/bilinear chain, specialized to integer-module sheaves; the exact two-unit formula is supplied by the cited bilinear-adjunction node."
-   }
-  },
-  {
-   "text": "Fix $F,G$ and put $A=p^*(F\\otimes G)$ and $B=p^*F\\otimes p^*G$. For any abelian sheaf $H$ on $(\\Spec\\mathbf Z)_{\\mathrm{proét}}$, combine the bilinear bijection supplied in step 3 with the tensor universal property to obtain bijections\n$$\\operatorname{Hom}(B,H)\\cong\\operatorname{Bilin}(p^*F\\times p^*G,H)\\cong\\operatorname{Bilin}(F\\times G,p_*H)\\cong\\operatorname{Hom}(F\\otimes G,p_*H)\\cong\\operatorname{Hom}(A,H).$$\nHere the tensor universal property follows directly from [sk-def-sfb-sheaf-tensor] and [def-weil-pbc-sheafification]: sectionwise integer-bilinear maps uniquely factor through the objectwise $\\mathbf Z$-tensor, and the resulting natural map to a sheaf factors uniquely through its sheafification. Conversely precomposition with the pure-tensor maps recovers the bilinear family, so these operations are inverse. This uses the ordinary abelian-group tensor universal property, not any claim that all sections of a tensor sheaf are globally pure tensors. The last bijection is [def-sfb-point-adjunction]. Denote the composite by $\\Psi_H$. By the formula in step 3 and the restriction formula of [def-sfb-point-lower-star], $\\Psi_H(h)$ is the adjoint of the unique map $r_h:F\\otimes G\\to p_*H$ satisfying\n$$ (r_h)_S(x\\otimes y)=h_{u(S)}\\bigl(\\eta_F(x)\\otimes\\eta_G(y)\\bigr) $$\nfor all profinite $S$ and $x\\in F(S),y\\in G(S)$, where tensors in sections mean their images in the tensor sheaf. In particular $\\Psi_H$ is bijective with this precise formula.",
-   "uses": [
-    "sk-def-sfb-sheaf-tensor",
-    "def-weil-pbc-sheafification",
-    "def-sfb-point-adjunction",
-    "def-sfb-point-lower-star"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, Hom/bilinear-adjunction chain; section-tensor-product (Tag 03EK), universal property preceding the lemma."
-   }
-  },
-  {
-   "text": "Let $\\delta:A\\to B$ be the oplax tensor comparison specified in [lem-sfb-point-upper-star-unit]. Write $\\mu_{K,L}:p_*K\\otimes p_*L\\to p_*(K\\otimes L)$ for the canonical lax comparison of restriction. From [def-sfb-point-lower-star] and the sheafified sectionwise tensor of [sk-def-sfb-sheaf-tensor], $\\mu$ sends $x\\otimes y$ at $S$ to the image of $x\\otimes y$ at $u(S)$: this sectionwise bilinear family uniquely extends through the tensor and its sheafification [def-weil-pbc-sheafification]. The defining formula for the left-adjoint oplax structure says that the adjoint of $\\delta$ under [def-sfb-point-adjunction] is\n$$d=\\mu_{p^*F,p^*G}\\circ(\\eta_F\\otimes\\eta_G):F\\otimes G\\longrightarrow p_*B.$$\nTherefore $d_S(x\\otimes y)=\\eta_F(x)\\otimes\\eta_G(y)$. For $h:B\\to H$, the adjoint of $h\\circ\\delta$ is $p_*h\\circ d$, which has exactly the formula for $r_h$ in step 4. The equality holds on the objectwise tensor presheaf by bilinearity, then on its sheafification by uniqueness. Injectivity of the adjunction bijection now gives $\\Psi_H(h)=h\\circ\\delta$. Hence precomposition with the particular map $\\delta$ is bijective for every $H$. This establishes the specified oplax map directly, without identifying it with an unnamed canonical isomorphism.",
-   "uses": [
-    "lem-sfb-point-upper-star-unit",
-    "def-sfb-point-lower-star",
-    "sk-def-sfb-sheaf-tensor",
-    "def-weil-pbc-sheafification",
-    "def-sfb-point-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, bilinear and adjunction formulas. The defining oplax-mate formula is Mathlib/CategoryTheory/Monoidal/Functor.lean:1064-1066, leftAdjointOplaxMonoidal; exact master Basic.lean:251-265 specifies this structure."
-   }
-  },
-  {
-   "text": "Apply the surjectivity from step 5 with $H=A$: there is $e:B\\to A$ with $e\\circ\\delta=\\operatorname{id}_A$. Apply injectivity with $H=B$. Since $(\\delta\\circ e)\\circ\\delta=\\delta\\circ(e\\circ\\delta)=\\delta=\\operatorname{id}_B\\circ\\delta$, it gives $\\delta\\circ e=\\operatorname{id}_B$. Thus $e$ is a two-sided inverse to $\\delta$, proving the item.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, conclusion from the representing Hom bijections; the two-sided inverse argument is written out here."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sfb-point-adjunction",
-  "def-sfb-point-lower-star",
   "def-sfb-point-upper-star",
-  "def-sfb-profinite-to-proetale",
-  "def-weil-pbc-sheafification",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-size-convention",
-  "lem-sfb-point-upper-star-unit",
-  "lem-sfb-profinite-to-proetale-cover-preserving",
   "lem-sfb-profinite-to-proetale-finite-limits",
-  "lem-sfb-site-inverse-image-bilinear-adjunction",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "sk-def-sfb-condensed-ring",
-  "sk-def-sfb-sheaf-tensor"
+  "lem-sfb-profinite-to-proetale-continuous",
+  "lem-sfb-general-sheaf-pullback-monoidal-comparisons",
+  "lem-sfb-point-upper-star-unit"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EL, lemma-tensor-product-pullback, Hom/bilinear-adjunction proof specialized to integer sheaves; Tag 00X6 supplies the site morphism."
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Basic.lean",
+  "place": "isIso_δ_pointUpperStar; reuses the complete F2 proofs observed in the initial shared source snapshot."
  },
  "mathlib_searches": [
   {
@@ -254,9 +176,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -278,9 +198,18 @@
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
   "declaration": "AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar",
   "statement": "instance isIso_δ_pointUpperStar (F G : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :\n    IsIso (δ pointUpperStar F G)",
-  "branch": "slopmaster2",
-  "by": "Q49",
-  "date": "2026-10-17",
-  "note": "Exact upstream instance, confirmed from WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic using scompile.py --source. It quantifies arbitrary sheaves of abelian groups on the coherent profinite site and asserts IsIso of the oplax tensor component δ pointUpperStar, exactly rendering the node statement; no module is added."
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-17"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T221604-L-1612926",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

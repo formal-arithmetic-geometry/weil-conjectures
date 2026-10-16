@@ -18,76 +18,22 @@
  ],
  "proof": [
   {
-   "text": "Put $B=LC(S,\\Z)$. Let $\\mathcal P$ be the set of finite partitions of $S$ into nonempty clopen subsets, ordered by refinement, with an arrow from a coarser to a finer partition. For $S=\\varnothing$ include its empty partition. This is a small nonempty directed poset: $\\{S\\}$ is a partition when $S\\ne\\varnothing$, and the nonempty intersections of blocks of two partitions form a common refinement. Set $B_P=\\Z^P$ and send $a\\in B_P$ to the function $j_P(a)$ whose value on the block $U\\in P$ is $a(U)$. These are injective unital ring maps, since every block is nonempty, including the unique map between zero rings when $S$ is empty. Refinement $Q\\ge P$ induces $B_P\\to B_Q$ by repeating a value on all subblocks; these maps commute with the $j_P$. For $f\\in B$, its nonempty fibres form a disjoint open cover of $S$. Compactness gives a finite subcover, hence there are finitely many nonempty fibres, each also closed because its complement is a union of other open fibres. Thus $f$ is in the image of some $j_P$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-lc-weakly-etale.proof.md",
-    "place": "First paragraph: finite values and factorization through finite quotients, made explicit by clopen partitions"
-   }
-  },
-  {
-   "text": "The cocone $(B,j_P)$ is the filtered colimit of the $B_P$ in commutative $\\Z$-algebras, using the universal property in [def-weil-pbc-category-colimit]. Indeed, for any compatible family $h_P:B_P\\to C$, define $h(f)=h_P(a)$ when $f=j_P(a)$. If $f=j_Q(b)$ too, then on a common refinement $R$ the two tuples agree, by injectivity of $j_R$, so compatibility makes the value independent of the representation. Represent two functions at a common refinement to check preservation of addition and multiplication; the constants check the unit and the $\\Z$-algebra structure. Every function has a representative by step 1, so this is the unique algebra map satisfying $h\\circ j_P=h_P$. Hence $B\\cong\\varinjlim_{P\\in\\mathcal P}B_P$, with a small filtered index category even when $S$ is empty.",
+   "text": "Apply [lem-sfb-locally-constant-ring-weakly-etale] to R = ULift Z and the profinite space S. The affine ring/scheme criterion in [def-weil-pbc-ind-etale-algebra], implemented by weaklyEtale_SpecMap_algebraMap, gives a weakly etale morphism Spec LC(S, ULift Z) to Spec(ULift Z). The ring equivalence induced by ULift.ringEquiv identifies LC(S, ULift Z) with LC(S,Z). Compose the corresponding spectrum isomorphism with this weakly etale map. Its target is specZ and its source is profiniteToScheme.obj S; by terminality of specZ the composite is exactly toSpecZ. Weak etaleness is preserved by the isomorphism, so the stated structure morphism is weakly etale. The empty S is permitted by the ring lemma.",
    "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-lc-weakly-etale.proof.md",
-    "place": "First displayed formula: explicit colimit universal property"
-   }
-  },
-  {
-   "text": "The identity of $\\Spec\\Z$ is étale in [def-weil-etale-morphism]: it has the affine presentation with no generators or relations, its local-ring maps are identities (tensoring along one is the identity exact functor), and its diagonal is the identity open immersion. Apply [lem-weil-pbc-etale-algebra-finite-product] to the finite family with every factor equal to $\\Z$. It gives that $\\Spec B_P\\to\\Spec\\Z$ is étale, including the empty product, which is the zero ring. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], each $B_P$ is an étale $\\Z$-algebra of finite presentation. The maps here are induced by the constant-function algebra maps, exactly the maps used in step 1.",
-   "uses": [
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-etale-algebra-finite-product",
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00U2, lemma-etale (11); affine criterion Tag 02GJ, morphisms.tex lemma-etale-characterize (1) iff (2)"
-   }
-  },
-  {
-   "text": "Steps 2 and 3 give a presentation of $B$ as a small filtered colimit of finitely presented étale $\\Z$-algebras. Therefore $\\Z\\to B$ is ind-étale by [def-weil-pbc-ind-etale-algebra]. This uses precisely the constant-function $\\Z$-algebra structure on $LC(S,\\Z)$, and does not assert that $B$ itself is finitely presented.",
-   "uses": [
+    "lem-sfb-locally-constant-ring-weakly-etale",
     "def-weil-pbc-ind-etale-algebra"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097I, definition-ind-etale"
-   }
-  },
-  {
-   "text": "Apply the assertion “An ind-etale map is weakly etale” of [lem-weil-pbc-ind-etale-stability] to $\\Z\\to B$. By the affine scheme/ring equivalence explicitly contained in [def-weil-pbc-ind-etale-algebra], this says that the induced morphism $\\Spec B\\to\\Spec\\Z$ is weakly étale, with the scheme meaning fixed by [def-weil-weakly-etale-morphism]. In particular both the structure map and its diagonal are flat; the conclusion is not merely flatness of $B$ over $\\Z$. Since the algebra map sends an integer to its constant function, its spectrum is the structure morphism in the statement. This also covers $S=\\varnothing$, when $B=0$ and the source scheme is empty.",
-   "uses": [
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-pbc-ind-etale-algebra",
-    "def-weil-weakly-etale-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097N, lemma-ind-etale-implies; weakly étale definitions Tags 092B (more-algebra.tex) and 094P (more-morphisms.tex)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-etale-morphism",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-ind-etale-algebra",
-  "def-weil-weakly-etale-morphism",
-  "lem-weil-pbc-etale-algebra-finite-product",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-  "lem-weil-pbc-ind-etale-stability"
+  "lem-sfb-locally-constant-ring-weakly-etale",
+  "def-weil-pbc-ind-etale-algebra"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-lc-weakly-etale.proof.md",
-  "place": "First-paragraph finite-quotient presentation; second-paragraph flatness conclusion obtained through the existing ind-etale stability theorem (Stacks 097N and 092N)"
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Basic.lean",
+  "place": "weaklyEtale_toSpecZ_profiniteToScheme; reuses the complete F2 proofs observed in the initial shared source snapshot."
  },
  "mathlib_searches": [
   {
@@ -186,9 +132,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-ind-etale-stability"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -216,5 +160,15 @@
   "note": "Exact existing instance in the published pro-etale module-object framework, read through scompile.py --source as well as the side source. profiniteToScheme.obj S is Spec (CommRingCat.of (LocallyConstant S ℤ)); toSpecZ is the unique structure map to Spec (ULift ℤ), the universe-lifted integer spectrum. WeaklyEtale requires flatness of both this map and its diagonal. No new module or definition."
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-pullback-from-point"
+ "unit": "sk-def-sfb-pullback-from-point",
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T221604-L-1612926",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
