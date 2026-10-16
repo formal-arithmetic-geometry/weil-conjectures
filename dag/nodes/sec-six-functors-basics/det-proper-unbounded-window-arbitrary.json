@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-proper-unbounded-window-arbitrary",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper direct image of unbounded ind-constructible complexes",
@@ -19,45 +19,210 @@
   ]
  },
  "stmt_deps": [
-  "det-proper-unbounded-window-bounded-below"
+  "det-proper-unbounded-window-bounded-below",
+  "det-ambient-ind-derived-sums",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-kun-truncations"
  ],
  "proof": [
   {
-   "text": "*Limit presentation.* By [sk-prop-pe-left-complete], $K\\simeq R\\varprojlim_n\\tau_{\\geq-n}K$. $Rp_*$ is right\nadjoint to $p^*$, so it preserves products, and it is exact, so it preserves fibers; hence it preserves\nderived limits of sequences: $Rp_*K\\simeq R\\varprojlim_nRp_*\\tau_{\\geq-n}K$.",
-   "uses": [],
-   "elementary": null
+   "text": "Work throughout with the pulled-back condensed coefficient ring sheaves $\\Lambda_X,\\Lambda_Y$ and their module categories, as in [sk-def-sfb-module-derived-pushpull]; no discrete-coefficient replacement is made. By [sk-def-sfb-module-objects] and the sheafified sectionwise tensor formula in [sk-def-sfb-sheaf-tensor], these module objects are exactly sheaves of modules over the ring sheaves: an action gives compatible bilinear maps on sections, and conversely compatible sectionwise actions factor uniquely through the sheafified tensor product. The unit and associativity identities agree in both descriptions. We may work on small site models in the fixed universe of these coefficient sheaves. By [lem-weil-pbc-ring-sheaves-grothendieck] their module categories are Grothendieck abelian, and [lem-sfb-grothendieck-k-injective] gives K-injective resolutions in both categories. Put $A_n=\\tau_{\\geq-n}K$ and $L_n=Rp_*A_n$ for $n\\in\\mathbf N$. By [det-pe-products-derived], products in these ambient derived categories exist and are represented by termwise products. The adjunction [def-sfb-module-derived-pushpull-adjunction] shows that $Rp_*$ preserves these products, including their projections: for every $B$ on $Y$ and every family $(C_i)$ on $X$, the natural bijections\n$$\\operatorname{Hom}(B,Rp_*\\prod_i C_i)\\cong\\operatorname{Hom}(Lp^*B,\\prod_i C_i)\\cong\\prod_i\\operatorname{Hom}(Lp^*B,C_i)\\cong\\prod_i\\operatorname{Hom}(B,Rp_*C_i)$$\nare the product universal property. Moreover [lem-pc-right-derived-functor-triangulated] applies to the K-injective right derived functor of the module direct image, which is additive by [sk-def-sfb-module-pushforward-pullback], and gives its compatibility with shifts and distinguished triangles.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective",
+    "det-pe-products-derived",
+    "def-sfb-module-derived-pushpull-adjunction",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+    "place": "Limit presentation: products and exactness of the derived direct image"
+   }
   },
   {
-   "text": "*Eventual constancy.* The fibre of $\\tau_{\\geq-n-1}K\\to\\tau_{\\geq-n}K$ is $\\mathcal H^{-n-1}(K)[n+1]$, a sheaf\nin degree $-n-1$. By [det-proper-unbounded-window-bounded-below], $Rp_*(\\mathcal H^{-n-1}(K)[n+1])$ has\ncohomology only in degrees $-n-1,\\dots,2d-n$. From the long exact sequence, the transition map\n$\\mathcal H^q(Rp_*\\tau_{\\geq-n-1}K)\\to\\mathcal H^q(Rp_*\\tau_{\\geq-n}K)$ is an isomorphism as soon as $q$ and\n$q+1$ lie outside $[-n-1,2d-n]$, i.e. for $n>2d-q+1$ (so that $q>2d-n$ and $q+1>2d-n$). The same holds for\n$q-1$ for $n$ large.",
+   "text": "By [det-pe-left-complete-iso], the canonical truncation cone identifies $K$ with $R\\varprojlim_n A_n$. Apply [lem-pc-homotopy-limit-map] to this cone and the triangulated, product-preserving functor $Rp_*$ of Step 1. It gives a homotopy-limit cone $Rp_*K\\to L_n$, so\n$$Rp_*K\\simeq R\\varprojlim_n L_n.$$\nThe maps to $L_n$ in this presentation are precisely $Rp_*(K\\to A_n)$, because the cited lemma maps the whole cone, including its projection maps. In particular, writing $P=\\prod_nL_n$, the image cone is the distinguished triangle $Rp_*K\\xrightarrow{u}P\\xrightarrow{1-T}P\\to(Rp_*K)[1]$ of [def-weil-derived-limit], with $\\operatorname{pr}_n u=Rp_*(K\\to A_n)$.",
    "uses": [
+    "det-pe-left-complete-iso",
+    "lem-pc-homotopy-limit-map",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+    "place": "Limit presentation: the truncation cone and its direct image"
+   }
+  },
+  {
+   "text": "The definition of $\\Dic$ and its truncation closure in [det-ambient-ind-derived-sums] ensure that $A_n$ and the sheaf $\\mathcal H^{-n-1}(K)$ placed in degree $-n-1$ belong to $\\Dic$. The latter assertion also follows directly from its having only this one nonzero, ind-constructible cohomology sheaf. Apply [lem-pc-derived-lower-truncation-step-triangle] with integer $n+1$: its canonical triangle is\n$$F_n:=\\mathcal H^{-n-1}(K)[n+1]\\longrightarrow A_{n+1}\\longrightarrow A_n\\longrightarrow F_n[1].$$\nThe bounded-below theorem [det-proper-unbounded-window-bounded-below], applied to $F_n$, puts $Rp_*F_n$ in degrees $[-n-1,2d-n]$. Apply $Rp_*$, which is triangulated by Step 1. By [lem-sf-derived-homology-long-exact], the kernel and cokernel of $\\mathcal H^r(L_{n+1})\\to\\mathcal H^r(L_n)$ vanish if $\\mathcal H^r(Rp_*F_n)=\\mathcal H^{r+1}(Rp_*F_n)=0$. Fix $q\\in\\mathbf Z$ and take $N_0=\\max\\{0,2d-q+2\\}$. For $n\\geq N_0$ one has $2d-n<q-1$; hence the required vanishings hold for both $r=q$ and $r=q-1$. Both cohomology towers therefore have isomorphisms as transitions from $N_0$ onwards.",
+   "uses": [
+    "det-ambient-ind-derived-sums",
+    "lem-pc-derived-lower-truncation-step-triangle",
+    "det-proper-unbounded-window-bounded-below",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+    "place": "Eventual constancy: truncation triangle, shifted bound, and long exact sequence"
+   }
+  },
+  {
+   "text": "Here is the elementary calculation needed for either eventual tower. Let $t_i:M_{i+1}\\to M_i$ be isomorphisms for $i\\geq N_0$. For any tuple $y=(y_i)$ of sections, set $x_{N_0}=0$, recursively set $x_i=y_i+t_i x_{i+1}$ for $i<N_0$ going downwards, and set $x_{i+1}=t_i^{-1}(x_i-y_i)$ for $i\\geq N_0$ going upwards. Each coordinate is a finite linear expression in the $y_i$, natural under restriction, so this defines a morphism of product sheaves with $(1-T)x=y$. Thus $1-T$ is split surjective and its cokernel is zero. By the sectionwise inverse-limit description [def-pur-sheaf-inverse-limit], projection $\\varprojlim_i M_i\\to M_n$ is an isomorphism for every $n\\geq N_0$: a section in $M_n$ extends uniquely downwards by the $t_i$ and upwards by their inverses. These extensions commute with restrictions. This uses actual inverses only on the tail; no surjectivity is assumed for the finitely many earlier transitions.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+    "place": "Milnor: explicit solution of 1-T and the inverse-limit projections"
+   }
+  },
+  {
+   "text": "Use the image Roos triangle of Step 2 directly in the derived category, so no choice of a strict complex-level representative of the tower is needed. By [det-pe-products-derived], $H^r(P)=\\prod_n H^r(L_n)$ naturally in the projections, and $H^r(1-T)$ is $1-T$ on these products. By [lem-sf-derived-homology-long-exact], its cohomology sequence contains\n$$\\prod_nH^{q-1}(L_n)\\xrightarrow{1-T}\\prod_nH^{q-1}(L_n)\\to H^q(Rp_*K)\\xrightarrow{H^q(u)}\\prod_nH^q(L_n)\\xrightarrow{1-T}\\prod_nH^q(L_n).$$\nExactness therefore identifies the kernel of $H^q(u)$ with the cokernel of the first $1-T$ and its image with the kernel of the last $1-T$. That last kernel is $\\varprojlim_n H^q(L_n)$ by the compatible-tuples description [def-pur-sheaf-inverse-limit]. We have obtained precisely the Milnor short exact sequence\n$$0\\to\\operatorname{coker}\\!\\left(\\prod_nH^{q-1}(L_n)\\xrightarrow{1-T}\\prod_nH^{q-1}(L_n)\\right)\\to H^q(Rp_*K)\\to\\varprojlim_nH^q(L_n)\\to0.$$\nSteps 3 and 4 kill the left term and identify every projection of the right term to $H^q(L_n)$ for $n\\geq N_0$ as an isomorphism. The composite with that projection is $H^q(\\operatorname{pr}_n u)=H^q(Rp_*(K\\to A_n))$ by Step 2. Thus the asserted canonical map is an isomorphism with $N=N_0$.",
+   "uses": [
+    "det-pe-products-derived",
+    "lem-sf-derived-homology-long-exact",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+    "place": "Milnor: its short exact sequence derived from the image Roos triangle, with the canonical projections retained"
+   }
+  },
+  {
+   "text": "For each fixed $q$, choose $n\\geq N_0$ as in Step 5. The bounded-below object $A_n$ is in $\\Dic$ by [det-ambient-ind-derived-sums], and [det-proper-unbounded-window-bounded-below] gives $\\mathcal H^q(L_n)\\in\\IndCons(Y,\\Lambda)$. Step 5 identifies this with $\\mathcal H^q(Rp_*K)$, proving $Rp_*K\\in\\Dic(Y,\\Lambda)$ by the definition of $\\Dic$ in [det-ambient-ind-derived-sums]. If $K$ has no cohomology above $b$, neither does $A_n$, since canonical truncation retains only the original cohomology in its retained degrees. The same bounded-below theorem then gives $\\mathcal H^q(L_n)=0$ for $q>b+2d+1$, and Step 5 gives this vanishing for $Rp_*K$. Finally, if $K$ has no cohomology below $a$, it is already bounded below, so the lower amplitude bound is directly the last application of [det-proper-unbounded-window-bounded-below].",
+   "uses": [
+    "det-ambient-ind-derived-sums",
     "det-proper-unbounded-window-bounded-below"
    ],
-   "elementary": false
-  },
-  {
-   "text": "*Milnor.* By [sk-prop-pe-milnor], there is an exact sequence of sheaves\n\n$$\n0\\to R^1\\varprojlim_n\\mathcal H^{q-1}(Rp_*\\tau_{\\geq-n}K)\\to\\mathcal H^q(Rp_*K)\\to\\varprojlim_n\\mathcal H^q(Rp_*\\tau_{\\geq-n}K)\\to0.\n$$\n\nThe tower in degree $q-1$ is eventually constant, so its $R^1\\varprojlim$ vanishes (description as\n$\\coker(1-T)$ on the product, solved successively); the tower in degree $q$ is eventually constant, so its\nlimit is its eventual value. This gives the isomorphism.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Consequences.* $\\tau_{\\geq-n}K$ is bounded below and lies in $\\Dic(X,\\Lambda)$, so\n[det-proper-unbounded-window-bounded-below] gives $\\mathcal H^q(Rp_*K)\\in\\IndCons(Y,\\Lambda)$. If\n$K\\in\\Dic^{\\leq b}$ then so is $\\tau_{\\geq-n}K$, whence $\\mathcal H^q(Rp_*K)=0$ for $q>b+2d+1$. An object of\n$\\Dic^{\\geq a}$ is bounded below, so the lower bound is the bounded-below case.",
-   "uses": [
-    "det-proper-unbounded-window-bounded-below"
-   ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+    "place": "Consequences: ind-constructibility and the upper and lower bounds"
+   }
   }
  ],
  "proof_deps": [
-  "det-proper-unbounded-window-bounded-below"
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "det-pe-products-derived",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "lem-pc-right-derived-functor-triangulated",
+  "det-pe-left-complete-iso",
+  "lem-pc-homotopy-limit-map",
+  "def-weil-derived-limit",
+  "det-ambient-ind-derived-sums",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "det-proper-unbounded-window-bounded-below",
+  "lem-sf-derived-homology-long-exact",
+  "def-pur-sheaf-inverse-limit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-arbitrary.proof.md",
+  "place": "Limit presentation; Eventual constancy; Milnor; Consequences (expanded categorical and tail calculations)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper pushforward of an unbounded complex with ind constructible cohomology is computed in a finite truncation window",
+   "results": "8 hits: DerivedCategory.isGE_Q_obj_iff, isGE_iff, isLE_iff, single-functor and other t-structure bounds; none states proper direct-image truncation stabilization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightAdjoint, CategoryTheory.Limits.PreservesLimits",
+   "results": "1 hit: TopCat.Sheaf.instIsRightAdjointPushforward, an underived topological-sheaf adjunction, not the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "indConstructible|ind_constructible|proper.*trunc|trunc.*proper",
+   "results": "16 hits, mostly unrelated simplex/simplicial truncation properties; none states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper morphism maps arbitrary complexes of ind constructible pro etale sheaves to ind constructible complexes using lower truncation limits",
+   "results": "8 hits: AlgebraicGeometry.IsProper and its constructor, recursors, finite-morphism and base-change instances; no derived direct-image result.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite cohomological dimension right derived functor commutes with sufficiently low truncations on each cohomology group",
+   "results": "8 hits: Functor.mapDerivedCategoryFactors, mapDerivedCategoryFactorsh and their lifting instance; DerivedCategory.exists_iso_Q_obj_of_isGE/of_isLE, isGE_Q_obj_iff; Functor.rightDerived and InjectiveResolution.isoRightDerivedObj. Exact-functor localization and bounded representatives do not state truncation stabilization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ind.?constructible|pro.?etale|unbounded.*proper|proper.*cohomolog",
+   "results": "10 hits in AlgebraicGeometry: proetalePrecoverage and ellAdicSheaf definitions and references in Sites/Proetale.lean and Sites/ElladicCohomology.lean. Read the latter coefficient-sheaf construction; no match for the item.",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper direct image of arbitrary ind constructible complexes stabilizes on lower truncations in each cohomology degree",
+   "results": "8 hits: HomologicalComplex truncLE/truncGE support and quasi-isomorphism facts, CochainComplex truncLE facts, DerivedCategory.IsGE. These concern truncations alone, not proper direct image.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightAdjoint, CategoryTheory.Limits.PreservesLimits",
+   "results": "1 hit: TopCat.Sheaf.instIsRightAdjointPushforward in Mathlib/Topology/Sheaves/Functors.lean:108, read lines 85-112; an underived topological sheaf adjunction, not the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ind.?constructible|unbounded.*proper|proper.*trunc",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite cohomological dimension derived direct image of unbounded complexes commutes with sufficiently low truncation on cohomology",
+   "results": "8 hits: ComplexShape.Embedding.truncLEFunctor; CochainComplex truncLE naturality, truncate and quasiIso_truncGEMap_iff/quasiIso_truncLEMap_iff; HomologicalComplex restrictionToTruncGE commutation. None gives the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite cohomological dimension right derived functor commutes with sufficiently low truncations on each cohomology group",
+   "results": "8 hits: Functor.mapDerivedCategoryFactorsh, mapDerivedCategoryFactors, their localization lifting instances, Functor.rightDerived, mapDerivedCategory, mapDerivedCategoryFactorsh_hom_app, and isHomological_of_localization. Read ExactFunctor.lean:1-110: exact-functor descent to the derived category, not the finite-dimensional truncation result.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|cohomological.dimension|rightDerived.*trunc|trunc.*rightDerived",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "Algebra/Homology"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -73,5 +238,59 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-proper-unbounded-window"
+ "unit": "sk-lem-proper-unbounded-window",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-proper-unbounded-window-arbitrary",
+  "worker": "stage1",
+  "summary": "Retained the statement and condensed coefficient layer. Checked the previous sandbox split against all cited statements, explicitly identified module objects with ring-sheaf modules, cited underived additivity, retained the image cone and its projections, and derived Milnor directly from its Roos triangle to avoid a hidden passage from a derived tower to a strict tower of complexes. Wrote the common tail threshold and explicit tail recursion; no new nodes.",
+  "blueprint": "Steps 1-2 realize Limit presentation, Step 3 Eventual constancy, Steps 4-5 Milnor, and Step 6 Consequences in the current blueprint detail proof; together these realize unit sk-lem-proper-unbounded-window, proof paragraph 2 (Arbitrary K).",
+  "tool_uses": [
+   {
+    "node": "det-pe-products-derived",
+    "why": "General pro-etale derived-product theorem supplies actual products of module-sheaf complexes; no node of this proper-image unit proves existence of those products."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic K-injective right-derived functor exactness supplies preservation of triangles and shifts on unbounded categories; it is a tool used in the blueprint limit and fibre arguments."
+   },
+   {
+    "node": "det-pe-left-complete-iso",
+    "why": "Generic left-completeness for arbitrary ring sheaves supplies the canonical truncation cone explicitly invoked by the unit; it does not replace the proper-image argument."
+   },
+   {
+    "node": "lem-pc-homotopy-limit-map",
+    "why": "Generic triangulated product-preserving functor theorem sends the truncation cone, with its projections, to the image cone; it justifies the unit limit-presentation sentence."
+   },
+   {
+    "node": "lem-pc-derived-lower-truncation-step-triangle",
+    "why": "Generic derived truncation triangle supplies the actual canonical transition fibre used by the unit; it is independent of proper geometry."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "General small ringed-site theorem verifies the Grothendieck abelian hypotheses for the actual coefficient module categories, without changing coefficient layers."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic Grothendieck K-injective-resolution existence verifies both ambient categories meet the triangulated right-derived tool hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-products-derived",
+  "lem-pc-right-derived-functor-triangulated",
+  "det-pe-left-complete-iso",
+  "lem-pc-homotopy-limit-map",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read the whole item, its unit and chapter, the current blueprint statement and proof, and the statement of every cited node. Statement: verbatim the main-20261015 blueprint; nothing is weakened. Coefficients are the condensed rings Lambda_X and Lambda_Y with modules over them throughout; the module-object identification is correct. Shape: no new nodes; proof_deps equals the union of the step uses; every cited id exists and is unmerged; no cycle (the item is not reachable from its own dependencies). Step 1: Grothendieck categories and K-injective resolutions on X and Y; det-pe-products-derived; product preservation through the Lp*-|Rp_* Hom chain with the original projections; lem-pc-right-derived-functor-triangulated applies to the additive p_*. Step 2: det-pe-left-complete-iso cone plus lem-pc-homotopy-limit-map, whose hypotheses all hold, give u with pr_n u = Rp_*(K->A_n), as in Stacks 08TC. Step 3: the truncation triangle at n+1 has the correct orientation; Rp_*F_n lies in degrees [-n-1,2d-n]; the long exact sequence needs H^{q-1}, H^q, H^{q+1} to vanish, and N_0=max(0,2d-q+2) gives this. Step 4: I checked the 1-T recursion; it is genuinely elementary and uses no early surjectivity. Step 5: the Milnor sequence is derived directly from the image Roos triangle; this is justified because det-pe-milnor-sequence is stated for strict towers of complexes; the canonical map clause is checked. Step 6: ind-constructibility and the b+2d+1 and a bounds follow from det-ambient-ind-derived-sums and the bounded-below node. Edge cases checked: K=0, a single sheaf, d=0, X empty, a finite prefix then identities. I accept the 7 declared tool_uses: det-pe-products-derived, lem-pc-right-derived-functor-triangulated, det-pe-left-complete-iso, lem-pc-homotopy-limit-map, lem-pc-derived-lower-truncation-step-triangle, lem-weil-pbc-ring-sheaves-grothendieck, lem-sfb-grothendieck-k-injective. No SGA is used. No fixes."
+ }
 }
