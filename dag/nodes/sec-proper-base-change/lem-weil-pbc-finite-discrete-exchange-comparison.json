@@ -13,37 +13,34 @@
  ],
  "proof": [
   {
-   "text": "Since B is discrete, its continuous functions on profinite sets are locally constant. The corresponding condensed ring is the constant ring, and exact inverse image sends it to the sheafified constant B ring on each scheme. Use the supplied internal constant-ring module sheaf equivalence. Its forgetful comparison identifies underlying abelian sheaves, so its equivalence functors are additive and exact. The construction preserves finite local presentations on strata, hence the intrinsic constructible property transports to the ordinary finite-coefficient sheaf encoding.",
+   "text": "Use exact derived realization with single-sheaf origin and the three exchange-step comparisons.",
    "uses": [
-    "lem-weil-pbc-constant-internal-module-sheaf-equivalence"
+    "lem-weil-pbc-finite-discrete-exchange-step-realization"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the bounded constructible complex through this exact equivalence. Finite-ring constructible derived origin gives a bounded constructible etale complex L with realization isomorphic to N. Regard L as bounded below. Define F as exact etale-to-pro-etale inverse image on bounded-below derived categories, followed by the exact internal-module realization on Y′.",
-   "uses": [
-    "lem-weil-pbc-finite-ring-constructible-derived-origin"
-   ],
-   "elementary": false
+   "text": "The full triangulated realization has triangulated, isomorphism-closed essential image. Apply existing DerivedCategory.prop_of_bounded with the constructible cohomology sheaves of N. This supplies L and an isomorphism F0(L) to N without invoking a separate constructible derived-origin theorem.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The comparison of inverse images is functorial for every morphism, and the bounded-below direct-image comparison applies because the finite-type morphisms are qcqs. These are the adjunction comparisons of the same site morphisms, hence respect units, counits and the commutative-square pullback comparison. Apply these equations to the unit-square-counit formula for both specified exchange transformations. Transport along the origin isomorphism of N. The two endpoint isomorphisms and the resulting commuting equation give the Arrow isomorphism. No invertibility of exchange itself is used.",
+   "text": "Transport bounded constructibility to F0(L). Compose the three commuting comparison squares using the generic three-step comparison structure. The defining three-factor formulas for the specified exchange maps give their arrow isomorphism at F0(L). Naturality of the internal exchange transports it along F0(L) isomorphic to N.",
    "uses": [
-    "prop-weil-pbc-site-comparison-finite-level"
+    "lem-weil-pbc-three-step-arrow-comparison"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-constant-internal-module-sheaf-equivalence",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "prop-weil-pbc-site-comparison-finite-level"
+  "lem-weil-pbc-finite-discrete-exchange-step-realization",
+  "lem-weil-pbc-three-step-arrow-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin",
-  "note": "C2 specialization to the actual internal module objects; the complete argument and the remaining interface work are recorded in the module docstring and report."
+  "note": "B3: sheaf-level origin plus existing triangulated bounded devissage; generic three-step arrow assembly and naturality are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -111,13 +108,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C2",
+  "reviewer": "X-c3ae8",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261015T224107-L-2885036",
+  "landing": "20261016T011143-L-264282",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered modules compile cleanly; direct importer IntegralFiniteExchangeComparison also compiles against them; target and existing signatures are unchanged."
  }
 }

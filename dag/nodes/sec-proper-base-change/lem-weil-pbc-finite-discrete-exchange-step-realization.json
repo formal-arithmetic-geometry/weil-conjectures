@@ -1,0 +1,140 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-discrete-exchange-step-realization",
+ "kind": "statement",
+ "title": "Derived realization from sheaf origin and exchange-step coherence",
+ "statement": "Under exactly the finite discrete coefficient, field, square and constant-ring encoding assumptions in [lem-weil-pbc-finite-discrete-exchange-comparison], there are realization functors F0 on X and F1 on Y-prime such that F0 commutes with shifts, is full and triangulated, its essential image contains degree-zero single complexes of all constructible internal modules, and F0,F1 satisfy the three exchange-step comparison squares. Coefficients and exchange are those of [def-weil-pbc-proetale-modules] and [def-weil-pbc-derived-exchange].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; formal derived realization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the monoidal constant-ring comparison by the finite clopen fibre cover.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull the point comparison to every scheme, including the multiplication, and supply this family to coefficient realization.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use compatible coefficient equivalences with sheaf origin and step comparisons.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-coefficient-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact derived realization and its single-complex API; all fullness, shift and triangulated instances come from the concrete functor.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-single-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-coefficient-realization",
+  "lem-weil-pbc-finite-discrete-single-realization",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; formal derived realization",
+  "note": "B3: concrete coefficient realization and existing library APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful triangulated exact realization functor has bounded complexes in its essential image when their cohomology sheaves have sheaf-level origin",
+   "date": "2026-10-16",
+   "results": "8 hits, including DerivedCategory.TStructure.t and single-complex support lemmas.",
+   "verdict": "No complete coefficient-specific comparison; use the existing derived-category APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.Full\", \"essImage\"",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.Functor.Full.toEssImage.",
+   "verdict": "Generic essential-image infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*[Tt]riangulated|[Tt]riangulated.*essImage",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean: F.essImage.IsTriangulated.",
+   "verdict": "Use this API for bounded devissage; coefficient realization still uses source-library comparison."
+  },
+  {
+   "tool": "LeanSearch",
+   "query": "A fully faithful triangulated exact realization functor contains bounded complexes when it contains the single complexes of their cohomology",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": ""
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteExchangeComparison",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin; finite discrete coefficient step: Derived realization from sheaf origin and exchange-step coherence",
+   "via": [
+    "lem-weil-pbc-finite-discrete-exchange-comparison",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteExchangeRealization",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteExchangeRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteExchange_stepRealization",
+  "statement": "theorem finiteDiscreteExchange_stepRealization [DiscreteTopology B] [Finite B]\n    (hB : (ℓ : B) = 0) (sq : CommSq g' f' f g)\n    (hEncoding : ∀ T : Scheme.{u},\n      ∃ G : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n          (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n            ((Functor.const T.ProEtᵒᵖ).obj\n              (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))) ⥤\n            Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} B)),\n        G.IsEquivalence ∧ Nonempty (G ⋙\n          sheafCompose (Scheme.ProEt.topology T)\n            (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1}) ≅\n          Mod.forget (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n            (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n              ((Functor.const T.ProEtᵒᵖ).obj\n              (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))))) :\n    ∃ F0 : FiniteDiscreteEtalePlus B X ⥤\n        DerivedCategory (FiniteDiscreteInternalModules B X),\n    ∃ cs : F0.CommShift ℤ,\n      letI := cs\n      F0.Full ∧ F0.IsTriangulated ∧\n      (∀ M : FiniteDiscreteInternalModules B X,\n        ProEtale.IsConstructibleModuleObject\n          (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X) M →\n        F0.essImage ((DerivedCategory.singleFunctor _ 0).obj M)) ∧\n      ∃ F1 : FiniteDiscreteEtalePlus B Y' ⥤\n          DerivedCategory (FiniteDiscreteInternalModules B Y'),\n      finiteDiscreteExchangeSteps B ℓ k sq F0 F1",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-c3ae8",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T011143-L-264282",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-c3ae8",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T011143-L-264282",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compile cleanly; direct importer IntegralFiniteExchangeComparison also compiles against them; target and existing signatures are unchanged."
+ }
+}

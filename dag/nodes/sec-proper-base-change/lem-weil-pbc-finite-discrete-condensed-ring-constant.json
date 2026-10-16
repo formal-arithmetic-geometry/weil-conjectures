@@ -1,0 +1,122 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+ "kind": "statement",
+ "title": "Finite discrete condensed rings are constant",
+ "statement": "For every finite discrete commutative topological ring B, the sheafification of the constant presheaf with value ULift B on profinite sets with the coherent topology is isomorphic as a ring object of abelian sheaves to the condensed continuous-function ring of B. Coefficient ring objects are as in [def-weil-pbc-proetale-modules]. This includes the zero ring and empty profinite sets.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 (discrete coefficients); locally constant functions and coherent sheafification"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Send a constant b to the constant continuous function b. This is a natural ring homomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a continuous section on a profinite S use the finite covering family of its clopen fibres indexed by B. Each restriction is constant, proving local surjectivity. Equal constant functions have equal values unless S is empty; on the empty S the empty family covers, proving local injectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply GrothendieckTopology.W_of_isLocallyBijective and W_iff, then the counit isomorphism from sheafification of the continuous-function ring sheaf. Each map is a ring-object morphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 (discrete coefficients); locally constant functions and coherent sheafification",
+  "note": "B3: concrete coefficient realization and existing library APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of the constant finite discrete ring presheaf is the condensed ring of continuous functions",
+   "date": "2026-10-16",
+   "results": "8 hits, including Condensed.discrete_obj and LightCondensed.discrete.",
+   "verdict": "No exact Profinite ULift ring-object comparison; prove it using locally bijective sheafification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallySurjective\", \"IsLocallyInjective\"",
+   "date": "2026-10-16",
+   "results": "4 hits, compositional local-bijectivity lemmas.",
+   "verdict": "Use the local-bijectivity API after constructing the clopen fibre cover."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Cc]ontinuous|[Cc]ontinuous.*constant",
+   "date": "2026-10-16",
+   "results": "25 hits, mostly continuity of constant maps in analysis.",
+   "verdict": "No exact ring-object sheafification statement."
+  },
+  {
+   "tool": "LeanSearch",
+   "query": "Sheafification of the constant finite discrete ring presheaf is the condensed ring of continuous functions",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": ""
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteExchangeComparison",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin; finite discrete coefficient step: Finite discrete condensed rings are constant",
+   "via": [
+    "lem-weil-pbc-finite-discrete-exchange-comparison",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteCondensedRing",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteCondensedRing.lean",
+  "declaration": "Profinite.finiteDiscreteCondensedRing_constant",
+  "statement": "theorem finiteDiscreteCondensedRing_constant :\n    ∃ e : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})\n        ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅\n      continuousMapRingObj.{u} B, IsMonHom e.hom",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-c3ae8",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T011143-L-264282",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-c3ae8",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T011143-L-264282",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compile cleanly; direct importer IntegralFiniteExchangeComparison also compiles against them; target and existing signatures are unchanged."
+ }
+}
