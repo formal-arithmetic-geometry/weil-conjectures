@@ -264,5 +264,24 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-19f2c2a39 (reviewer sub-agent of L); spot-checked: I read all 7 steps in full against Kerodon subsection 3.3.5 (00Z1), read online. Kerodon is not archived under literature/: it is listed as WANTED and proof_origin is 'agent'. Item: its statement matches 00Z2 with Construction 3.3.4.3. It holds for every small X with no Kan hypothesis; checked on X empty, Delta^0 and discrete X. Step 1: Ex is functorial, j is natural because alpha(max S)=max alpha(S), and the explicit homotopy formula is simplicial with the right endpoints. Step 2 (= 00Z7): lambda_T is a weak equivalence, then the test criterion (i)=>(ii), then the new homotopy adjunction; the transpose of f lambda_T is Ex(f)j_T=j_Y f, using the face-poset node's 'lambda transposes to j' clause. Step 3 (homotopy inverse r) is elementary. Step 4 (= 00Z8): a(C) is a nonempty chain contained in b(C)=C_r and both are monotone; endpoint 0 is Sd(lambda_{NQ}), the nerve of max applied to chains of chains, and endpoint 1 is lambda_{Sd NQ}; naturality also holds for non-injective monotone maps. Step 5: simplicial by naturality of h; endpoint 0 is sigma Sd(lambda), the transpose of j_{Ex X} sigma-hat; endpoint 1 is sigma lambda_{Sd}, the double transpose of Ex(j_X) sigma-hat; orientation verified. Steps 6 and 7: the surjectivity and injectivity chase, then (ii)=>(i) of lem-cbc-realization-weak-equivalence for v=j_X. There is no circularity: Kerodon proves 00Z5 from 00Z3 and 00Z4, and 00Z6 from 00Z5, 3.1.2.9 and 00Z3, none of which uses 00Z2. New node lem-coef-subdivision-last-vertex-equivalence (00YZ): true, self-contained, statement only; different from lem-coef-simplex-category-last-vertex, whose source is NE(K). New node lem-coef-subdivision-ex-homotopy-adjunction (00Z6+00Z5): true and strictly smaller than the item; the face-poset node gives only the strict Hom bijection. Duplicate search: rg over dag/nodes for subdivision, last vertex, 00YZ, 00Z*, 03X7, \\operatorname{Ex}, \\operatorname{Sd} and Ex^; I read the plausible candidates; the main-20261015 blueprint has no such node, so same_as=[] is correct. I accept the declared tool use of lem-cbc-realization-weak-equivalence as a generic black-box test. This is not a target node, so the base-change and coefficient-category check does not apply. No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ExComparisonWeakEquivalence",
+  "declaration": "SSet.exLastVertexUnit_isWeakHomotopyEquivalence",
+  "file": "lean/Sheaf/AlgebraicTopology/ExComparisonWeakEquivalence.lean",
+  "statement": "theorem exLastVertexUnit_isWeakHomotopyEquivalence (X : SSet.{u}) : Enhanced.IsWeakHomotopyEquivalence (exLastVertexUnit.app X)",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the already published SSet.exLastVertexUnit and Mathlib SSet.ex, without copying their definitions. The conclusion is the dependency's realization-based weak homotopy equivalence predicate; no fibrancy, nonemptiness, or finiteness hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be26dbc40",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and Kerodon 00Z2: Mathlib SSet/SSet.ex, the existing sdLastVertex/exLastVertexUnit (sigma o lambda_n, owned by the landed Ex-infinity node), and the recorded Enhanced.IsWeakHomotopyEquivalence (components plus all r>=1 homotopy groups at every realization basepoint). Single binder X : SSet.{u}, no extra hypotheses; edge cases (empty X, n=0, non-injective monotone maps, disconnected X, non-vertex basepoints) covered. No new definitions, proof is sorry, docstrings carry source, blueprint tag and all 7 proof steps, lean.statement verbatim, only the lean field changed, both report sections present. nt_compile --json with side overlay rc=0, no errors. Non-blocking: the reverse import into ExInfinityFiniteProducts is omitted and listed per stages/2 section 3.7; stage 3 will need the helper definitions moved to a shared module."
  }
 }
