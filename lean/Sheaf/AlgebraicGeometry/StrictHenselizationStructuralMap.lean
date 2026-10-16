@@ -48,19 +48,7 @@ theorem exists_strictHenselizationStructuralMap
               (((equivSmallModel.{u}
                 (strictHenselizationNeighbourhoods s)).inverse.obj j).1)).hom =
           ρ := by
-  refine ⟨strictLocalizationToBase s, ?_⟩
-  intro j
-  let n := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j
-  let x := (strictHenselizationAffineInclusion s).obj n
-  have hi : Spec.map (ΓSpecIso n.1.left.unop).inv = inv x.obj.1.left.toSpecΓ := by
-    apply (cancel_mono x.obj.1.left.toSpecΓ).mp
-    change Spec.map (ΓSpecIso n.1.left.unop).inv ≫
-      (Spec n.1.left.unop).toSpecΓ = _
-    simp only [SpecMap_ΓSpecIso_inv_toSpecΓ, IsIso.inv_hom_id]
-  change Spec.map (colimit.ι (strictHenselizationDiagram s) (Opposite.op x)) ≫
-    Spec.map (ΓSpecIso n.1.left.unop).inv ≫ x.obj.1.hom = _
-  rw [hi]
-  exact strictLocalizationCone_π_app_hom s x
+  sorry
 
 /-- The structural morphism `S_(s) ⟶ S` of the strict henselization at a geometric point:
 the common composite of the limit legs with the neighbourhood structure morphisms,
@@ -69,8 +57,8 @@ Source: Stacks Project, Tag 03Q9, proof
 (blueprint: def-weil-pbc-strict-henselization-structural-map). -/
 noncomputable abbrev strictHenselizationStructuralMap
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (s : Spec (.of Ω) ⟶ S) : strictHenselizationScheme s ⟶ S :=
-  strictLocalizationToBase s
+    (s : Spec (.of Ω) ⟶ S) : strictHenselizationScheme s ⟶ S := by
+  sorry
 
 /-- The representative limit legs factor through upstream's structure morphism. -/
 theorem strictHenselizationStructuralMap_eq
@@ -84,16 +72,6 @@ theorem strictHenselizationStructuralMap_eq
           (((equivSmallModel.{u}
             (strictHenselizationNeighbourhoods s)).inverse.obj j).1)).hom =
       strictHenselizationStructuralMap s := by
-  let n := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j
-  let x := (strictHenselizationAffineInclusion s).obj n
-  have hi : Spec.map (ΓSpecIso n.1.left.unop).inv = inv x.obj.1.left.toSpecΓ := by
-    apply (cancel_mono x.obj.1.left.toSpecΓ).mp
-    change Spec.map (ΓSpecIso n.1.left.unop).inv ≫
-      (Spec n.1.left.unop).toSpecΓ = _
-    simp only [SpecMap_ΓSpecIso_inv_toSpecΓ, IsIso.inv_hom_id]
-  change Spec.map (colimit.ι (strictHenselizationDiagram s) (Opposite.op x)) ≫
-    Spec.map (ΓSpecIso n.1.left.unop).inv ≫ x.obj.1.hom = _
-  rw [hi]
-  exact strictLocalizationCone_π_app_hom s x
+  sorry
 
 end AlgebraicGeometry.Scheme

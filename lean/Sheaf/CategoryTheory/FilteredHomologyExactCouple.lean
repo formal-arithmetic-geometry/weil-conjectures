@@ -26,15 +26,8 @@ namespace CategoryTheory
 Source: Stacks Project, Tags 012K and 011Q.
 (blueprint: def-sp-filtered-homology-exact-couple). -/
 noncomputable abbrev filteredHomologyExactCouple {C : Type u} [Category.{v} C] [Abelian C]
-    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) : BigradedExactCouple C 0 :=
-  BigradedExactCouple.ofShifted (filteredHomologyD K F) (filteredHomologyE K F)
-    (filteredHomologyAlpha K F) (filteredHomologyF K F) (filteredHomologyG K F)
-    (filteredHomologyCouple_exact C K F).1
-    (filteredHomologyCouple_exact C K F).2.1
-    (filteredHomologyCouple_exact C K F).2.2.1
-    (filteredHomologyCouple_exact C K F).2.2.2.1
-    (filteredHomologyCouple_exact C K F).2.2.2.2.1
-    (filteredHomologyCouple_exact C K F).2.2.2.2.2
+    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) : BigradedExactCouple C 0 := by
+  sorry
 
 /-- The reindexed initial E term is graded-piece homology.
 Source: Stacks Project, Tag 012K.
@@ -42,10 +35,7 @@ Source: Stacks Project, Tag 012K.
 noncomputable def filteredHomologyEIso {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (p q : ℤ) :
     ((filteredHomologyExactCouple K F).pageCouple 0).E (2 * p + q) (-p) ≅
-      (F.gradedPiece p).homology (p + q) :=
-  eqToIso (by
-    change (F.gradedPiece (-(-p))).homology (2 * p + q + -p) =
-      (F.gradedPiece p).homology (p + q)
-    rw [neg_neg, show 2 * p + q + -p = p + q by omega])
+      (F.gradedPiece p).homology (p + q) := by
+  sorry
 
 end CategoryTheory

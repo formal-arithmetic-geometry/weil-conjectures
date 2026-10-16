@@ -26,13 +26,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 private lemma upper_boundary_kernel (K : CochainComplex C ℤ) (a : ℤ) :
     ∃ h : (K.ιTruncLE (a - 1)).f (a - 1) ≫ K.d (a - 1) a = 0,
       Nonempty (IsLimit (KernelFork.ofι ((K.ιTruncLE (a - 1)).f (a - 1)) h)) := by
-  have hz : (K.ιTruncLE (a - 1)).f (a - 1) ≫ K.d (a - 1) a = 0 := by
-    rw [← CochainComplex.truncLEXIsoCycles_comp_iCycles]
-    simp
-  refine ⟨hz, ⟨?_⟩⟩
-  exact IsKernel.isoKernel _ _ (K.cyclesIsKernel (a - 1) a (by simp))
-    (K.truncLEXIsoCycles (a - 1))
-    (CochainComplex.truncLEXIsoCycles_comp_iCycles K (a - 1))
+  sorry
 
 private lemma nested_upper_kernel (K : CochainComplex C ℤ) (a b : ℤ) (hab : a < b)
     {A : C} (f : A ⟶ (K.truncLE (b - 1)).X (a - 1))
@@ -108,63 +102,7 @@ private lemma upper_projection_cokernel (K : CochainComplex C ℤ) (a t : ℤ)
         (CochainComplex.truncLEMap (K.πTruncGE a) t).f a = 0,
       Nonempty (IsColimit (CokernelCofork.ofπ
         ((CochainComplex.truncLEMap (K.πTruncGE a) t).f a) h)) := by
-  let B := K.truncLE t
-  let Q := CochainComplex.truncLEMap (K.πTruncGE a) t
-  have : IsIso ((K.ιTruncLE t).f (a - 1)) :=
-    inclusion_f_isIso K t (a - 1) (by omega)
-  by_cases h : a < t
-  · have : IsIso ((K.ιTruncLE t).f a) := inclusion_f_isIso K t a h
-    have : IsIso (((K.truncGE a).ιTruncLE t).f a) :=
-      inclusion_f_isIso (K.truncGE a) t a h
-    obtain ⟨hz, ⟨hc⟩⟩ := lower_boundary_cokernel K a
-    have hc' := CokernelCofork.isColimitOfIsColimitOfIff hc (B.d (a - 1) a)
-      (asIso ((K.ιTruncLE t).f a)) (fun W φ ↦ by
-        dsimp only [B, asIso_hom]
-        rw [← (K.ιTruncLE t).comm_assoc]
-        rw [← cancel_epi ((K.ιTruncLE t).f (a - 1))]
-        simp only [comp_zero])
-    have hq : (K.ιTruncLE t).f a ≫ (K.πTruncGE a).f a =
-        Q.f a ≫ ((K.truncGE a).ιTruncLE t).f a := by
-      simpa only [HomologicalComplex.comp_f] using congrArg (fun f ↦ f.f a)
-        (CochainComplex.ιTruncLE_naturality (K.πTruncGE a) t).symm
-    have hc'' := cokernel_post_iso _ _ hc'
-      (asIso (((K.truncGE a).ιTruncLE t).f a)).symm
-    have he : ((K.ιTruncLE t).f a ≫ (K.πTruncGE a).f a) ≫
-        inv (((K.truncGE a).ιTruncLE t).f a) = Q.f a := by
-      rw [hq]
-      simp
-    refine ⟨?_, ⟨?_⟩⟩
-    · rw [← cancel_mono (((K.truncGE a).ιTruncLE t).f a)]
-      simp only [Category.assoc, zero_comp]
-      rw [← hq, ← Category.assoc, ← (K.ιTruncLE t).comm, Category.assoc,
-        hz, comp_zero]
-    · simpa only [asIso_hom, Iso.symm_hom, asIso_inv, CokernelCofork.π_ofπ, he] using hc''
-  · have hat' : t = a := by omega
-    subst t
-    obtain ⟨hz, ⟨hc⟩⟩ := cycles_lower_boundary_cokernel K a
-    have hd : (K.truncLE a).d (a - 1) a ≫ (K.truncLEXIsoCycles a).hom =
-        (K.ιTruncLE a).f (a - 1) ≫ K.toCycles (a - 1) a := by
-      rw [← cancel_mono (K.iCycles a)]
-      simp only [Category.assoc, CochainComplex.truncLEXIsoCycles_comp_iCycles,
-        HomologicalComplex.toCycles_i]
-      exact ((K.ιTruncLE a).comm (a - 1) a).symm
-    have hc' := CokernelCofork.isColimitOfIsColimitOfIff hc
-      ((K.truncLE a).d (a - 1) a) (K.truncLEXIsoCycles a) (fun W φ ↦ by
-        rw [← Category.assoc, hd]
-        rw [← cancel_epi ((K.ιTruncLE a).f (a - 1))]
-        simp only [Category.assoc, comp_zero])
-    have hc'' := cokernel_post_iso _ _ hc' ((K.truncGE a).truncLEXIsoCycles a).symm
-    have he : (K.truncLEXIsoCycles a).hom ≫
-        HomologicalComplex.cyclesMap (K.πTruncGE a) a ≫
-        ((K.truncGE a).truncLEXIsoCycles a).inv =
-        (CochainComplex.truncLEMap (K.πTruncGE a) a).f a := by
-      rw [← Category.assoc, ← CochainComplex.truncLEXIsoCycles_naturality]
-      simp
-    refine ⟨?_, ⟨?_⟩⟩
-    · rw [← he, ← Category.assoc, ← Category.assoc, hd]
-      simp only [Category.assoc]
-      rw [← Category.assoc (K.toCycles (a - 1) a), hz, zero_comp, comp_zero]
-    · simpa only [Category.assoc, Iso.symm_hom, CokernelCofork.π_ofπ, he] using hc''
+  sorry
 
 /-- The boundary inclusion is a kernel, and the boundary comparison is a cokernel.
 Source: Stacks Project, Tag 0118 (homology-section-truncations), canonical

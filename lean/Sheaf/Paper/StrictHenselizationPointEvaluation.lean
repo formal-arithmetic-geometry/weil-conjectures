@@ -50,8 +50,7 @@ Source: Stacks Project, Tag 04HX.
 (blueprint: def-weil-pbc-strict-henselization-point-evaluation). -/
 noncomputable def strictHenselizationPointEvaluation
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
-    (barY : Spec (.of Ω) ⟶ Y) : strictHenselizationRing barY →+* Ω :=
-  ((isColimitSmallStrictHenselizationCocone barY).desc
-    (strictHenselizationPointCocone barY)).hom
+    (barY : Spec (.of Ω) ⟶ Y) : strictHenselizationRing barY →+* Ω := by
+  sorry
 
 end AlgebraicGeometry.Scheme

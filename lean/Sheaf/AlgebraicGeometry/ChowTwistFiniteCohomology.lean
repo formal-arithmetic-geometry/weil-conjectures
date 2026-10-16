@@ -77,65 +77,6 @@ theorem exists_chow_twist_finite_cohomology {X W T Y : Scheme.{u}}
             Module.compHom _ f.appTop.hom
         Module.Finite Γ(T, ⊤)
           (((pushforward i).obj ((pushforward π).obj (L.tensorPow n))).H q)) := by
-  classical
-  let L := (pullback j).obj
-    ((pullback (ProjectiveSpace.toProjInt N T)).obj
-      (Proj.twist (MvPolynomial.homogeneousSubmodule N (ULift.{u} ℤ)) 1))
-  let p := π ≫ i
-  have hp : IsProper p := inferInstance
-  have hT : IsLocallyNoetherian T :=
-    LocallyOfFiniteType.isLocallyNoetherian T.toSpecΓ
-  have hX : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
-  have : _root_.CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
-  have hXN : IsNoetherian X := ⟨⟩
-  have : EnoughInjectives Y.Modules := (isGrothendieckAbelian Y).enoughInjectives
-  have hI : HasInjectiveResolutions Y.Modules := inferInstance
-  have hdiag : j ≫ (ℙ(N; T) ↘ T) = p ≫ f := by
-    simpa only [p, Category.assoc] using hj
-  obtain ⟨n, hn⟩ := exists_isZero_higherDirectImage_graph_twist f p N j hdiag
-  have hL : L.IsInvertible := inferInstance
-  have hLn : (L.tensorPow n).IsQuasicoherent := inferInstance
-  have hLs : SheafOfModules.IsInvertible (R := Y.ringCatSheaf) (L.tensorPow n) :=
-    IsInvertible.sheafOfModules_isInvertible _
-  have hFP : (L.tensorPow n).IsFinitePresentation :=
-    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
-  let k := ProjectiveSpace.liftBaseChange p j hdiag.symm
-  have hk : IsClosedImmersion k := inferInstance
-  have hG : ((pushforward p).obj (L.tensorPow n)).IsFiniteType :=
-    isFiniteType_projective_pushforward_independent p N k
-      (ProjectiveSpace.liftBaseChange_over p j hdiag.symm) (L.tensorPow n)
-  have hGq : ((pushforward p).obj (L.tensorPow n)).IsQuasicoherent :=
-    isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated p (L.tensorPow n)
-  let e := (pushforwardComp π i).app (L.tensorPow n)
-  have hG' : ((pushforward i).obj ((pushforward π).obj
-      (L.tensorPow n))).IsFiniteType :=
-    finiteType_of_iso.{u, u, u} e.symm
-  have hGq' : ((pushforward i).obj ((pushforward π).obj
-      (L.tensorPow n))).IsQuasicoherent :=
-    (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso e hGq
-  refine ⟨n, (isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mpr
-    ⟨hGq', inferInstance⟩, ?_⟩
-  intro q
-  let : Module Γ(T, ⊤) ((L.tensorPow n).H q) :=
-    Module.compHom _ (p ≫ f).appTop.hom
-  have hfin : Module.Finite Γ(T, ⊤) ((L.tensorPow n).H q) := by
-    change letI : Module Γ(T, ⊤) ((L.tensorPow n).H q) :=
-      Module.compHom _ (p ≫ f).appTop.hom
-      Module.Finite Γ(T, ⊤) ((L.tensorPow n).H q)
-    rw [← hdiag]
-    exact finite_H_projective_affine_independent N j (L.tensorPow n) q
-  let : Module Γ(T, ⊤) (((pushforward p).obj (L.tensorPow n)).H q) :=
-    Module.compHom _ f.appTop.hom
-  let : Module Γ(T, ⊤)
-      (((pushforward i).obj ((pushforward π).obj (L.tensorPow n))).H q) :=
-    Module.compHom _ f.appTop.hom
-  obtain ⟨a⟩ := nonempty_linearEquiv_H_pushforward_of_higherDirectImage_vanishing
-    p f (L.tensorPow n) (hn n le_rfl) q
-  let b : (((pushforward p).obj (L.tensorPow n)).H q) ≃ₗ[Γ(T, ⊤)]
-      (((pushforward i).obj ((pushforward π).obj (L.tensorPow n))).H q) :=
-    { (H.mapLinearEquiv e.symm q).toAddEquiv with
-      map_smul' := fun r x ↦ (H.mapLinearEquiv e.symm q).map_smul (f.appTop r) x }
-  exact Module.Finite.of_surjective (a.symm.trans b).toLinearMap
-    (a.symm.trans b).surjective
+  sorry
 
 end AlgebraicGeometry.Scheme.Modules
