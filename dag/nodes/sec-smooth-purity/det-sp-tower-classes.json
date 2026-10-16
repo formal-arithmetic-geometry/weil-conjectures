@@ -3,53 +3,411 @@
  "blueprint": {
   "is": "det-sp-tower-classes",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Kummer and diagonal classes of towers",
- "statement": "Let $S$ be a scheme.\n\n1. *Kummer tower.* In the abelian category of towers of abelian sheaves on\n   $S_{\\mathrm{proét}}$ the sequence\n   $$\n   0\\longrightarrow(\\mu_{\\ell^n})_n\\longrightarrow(\\mathbb G_m,(\\cdot)^\\ell)\n   \\xrightarrow{\\ ((\\cdot)^{\\ell^n})_n\\ }(\\mathbb G_m,\\mathrm{id})\\longrightarrow0\n   $$\n   is exact, where the middle tower has $\\mathbb G_m$ at every level with\n   transitions the $\\ell$-th power map, the right tower has identity\n   transitions, and $(\\mu_{\\ell^n})_n$ has the $\\ell$-power map as transitions.\n2. *First Chern class.* For a line bundle $L$ on $S$, its class in\n   $H^1(S,(\\mathbb G_m,\\mathrm{id}))$ has a boundary in\n   $H^2(S,(\\mu_{\\ell^n})_n)$, i.e. a morphism\n   $(\\mathbf Z/\\ell^n)_n\\to(\\mu_{\\ell^n})_n[2]$ of $(\\mathbf Z/\\ell^n)_n$-modules;\n   extending coefficients gives\n   $c_1(L):\\mathcal O_{E,S}/\\ell^\\bullet\\to(\\mathcal O_{E,S}/\\ell^\\bullet)(1)[2]$ in\n   $D(\\operatorname{Tow}(S,\\mathcal O_E))$, whose level $n$ is the finite Kummer class\n   $c_1(L)$ with coefficients $\\mathcal O_E/\\ell^n$.\n3. *Diagonal class.* The version with supports, applied to the diagonal\n   Cartier divisor $\\Delta\\subset\\mathbf P^1_S\\times_S\\mathbf P^1_S$ with its\n   canonical section, gives\n   $\\delta_\\bullet:\\Delta_*\\mathcal O_{E,\\mathbf P^1_S}/\\ell^\\bullet\\to\n   (\\mathcal O_{E,\\mathbf P^1_S\\times_S\\mathbf P^1_S}/\\ell^\\bullet)(1)[2]$, whose level\n   $n$ is the finite diagonal class.\n4. *Splitting.* The unit and $c_1(\\mathcal O(1))$ define an isomorphism in\n   $D(\\operatorname{Tow}(S,\\mathcal O_E))$, for $q:\\mathbf P^1_S\\to S$,\n   $$\n   \\mathcal O_{E,S}/\\ell^\\bullet\\oplus(\\mathcal O_{E,S}/\\ell^\\bullet)(-1)[-2]\n   \\xrightarrow{\\ \\sim\\ }Rq_{*,\\bullet}\\mathcal O_{E,\\mathbf P^1_S}/\\ell^\\bullet,\n   $$\n   and $\\operatorname{Tr}_{q,\\bullet}$ denotes the projection onto the twisted\n   summand.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, and a scheme $S$ on which $\\ell$ is invertible. Use the small pro-etale sites [def-weil-pbc-proetale-site]. Put $R_{\\bullet,T}=((\\mathbf Z/\\ell^n)_T)_{n\\geq1}$ and $A_{\\bullet,T}=((\\mathcal O_E/\\ell^n)_T)_{n\\geq1}$, with quotient transitions, for every scheme $T$ over $S$. Use the topos of inverse systems and its module category $\\operatorname{Tow}(T,\\mathcal O_E)$ of [det-sp-coefficient-towers-abelian], and its ordinary derived category [def-weil-abstract-derived-category]. Write $A_{\\bullet,T}(1)=(\\mu_{\\ell^n,T}\\otimes_{(\\mathbf Z/\\ell^n)_T}(\\mathcal O_E/\\ell^n)_T)_n$, with the power and quotient transitions; its inverse line tower is denoted $A_{\\bullet,T}(-1)$, consistently with [sk-def-sp-tate-twist]. The roots of unity and their power transitions are those of [def-pur-roots-of-unity-sheaf].\n\n1. In towers of abelian sheaves on $S_{\\mathrm{proet}}$ there is a short exact sequence\n$$0\\longrightarrow(\\mu_{\\ell^n,S})_n\\longrightarrow(\\mathbf G_{m,S},(\\cdot)^\\ell)\\xrightarrow{((\\cdot)^{\\ell^n})_n}(\\mathbf G_{m,S},\\mathrm{id})\\longrightarrow0.$$\nHere $\\mathbf G_m(U)=\\Gamma(U,\\mathcal O_U)^\\times$; the middle tower has power-$\\ell$ transitions, and the last tower has identity transitions.\n2. A line bundle $L$ (an invertible module [def-sc-invertible-module]) has its line-bundle class in $\\operatorname{Ext}^1(\\mathbf Z_S,\\mathbf G_{m,S})$. Its constant-tower image has a boundary in $\\operatorname{Ext}^2(\\mathbf Z_{\\bullet,S},(\\mu_{\\ell^n,S})_n)$ for the sequence in (1), where $\\mathbf Z_{\\bullet,S}$ is the constant tower. This boundary has a canonical coefficient-linear realization\n$$R_{\\bullet,S}\\longrightarrow(\\mu_{\\ell^n,S})_n[2]$$\nin the derived category of $R_{\\bullet,S}$-modules in the inverse-system topos: apply derived extension $R_{\\bullet,S}\\otimes^L_{\\mathbf Z_{\\bullet,S}}-$ to the constant-tower line-bundle morphism $\\mathbf Z_{\\bullet,S}\\to\\mathbf G_{m,S}[1]$. After forgetting scalars and precomposing with the canonical quotient $\\mathbf Z_{\\bullet,S}\\to R_{\\bullet,S}$, this morphism is the preceding abelian boundary. Extension along $R_{\\bullet,S}\\to A_{\\bullet,S}$ defines\n$$c_1(L):A_{\\bullet,S}\\longrightarrow A_{\\bullet,S}(1)[2]$$\nin $D(\\operatorname{Tow}(S,\\mathcal O_E))$, whose evaluation at $n$ is the finite Kummer first Chern class with coefficients $\\mathcal O_E/\\ell^n$.\n3. Put $P=\\mathbf P(\\{0,1\\};S)=\\mathbf P^1_S$ [def-nagata-projective-space-base-change], $W=P\\times_SP$, and let $\\Delta:P\\hookrightarrow W$ be the diagonal Cartier divisor, with $\\mathcal O_W(\\Delta)$ defined by [def-pc-divisor-line-bundle]. Put $B=\\nu_W^{-1}\\mathbf G_{m,W,\\mathrm{et}}$ and let $a:B\\to\\mathbf G_{m,W}$ be the canonical units comparison, induced by restriction to etale charts [def-weil-pbc-site-comparison-morphism]. Use the pulled-back Cartier extension $0\\to B\\to\\mathcal M_\\Delta\\to\\Delta_*\\mathbf Z_P\\to0$ with quotient $t^{-1}\\mapsto+1$ for a local equation $t$ [det-prop-diagonal-tower-system]. For $C_\\Delta=[B\\to\\mathcal M_\\Delta]$ in degrees $-1,0$, write $v:C_\\Delta\\xrightarrow{\\sim}\\Delta_*\\mathbf Z_P$ for the quotient quasi-isomorphism and $p:C_\\Delta\\to B[1]$ for the positive projection. Take the image of its connecting morphism $\\beta_\\Delta=a[1](-p v^{-1}):\\Delta_*\\mathbf Z_P\\to\\mathbf G_{m,W}[1]$, using the same cone convention as in (2), and apply the same derived coefficient extension and target identification as in (2) to $\\beta_\\Delta$. This defines\n$$\\delta_\\bullet:\\Delta_*A_{\\bullet,P}\\longrightarrow A_{\\bullet,W}(1)[2]$$\nin $D(\\operatorname{Tow}(W,\\mathcal O_E))$, whose evaluation at $n$ is the finite diagonal class. Its composite with $A_{\\bullet,W}\\to\\Delta_*A_{\\bullet,P}$ is $c_1(\\mathcal O_W(\\Delta))$.\n4. For $q:P\\to S$, let $Rq_{*,\\bullet}$ be the proper tower direct image of [det-sp-tower-shriek-levels]. The unit and $c_1(\\mathcal O_P(1))$, where $\\mathcal O_P(1)$ is the hyperplane line bundle obtained on affine base opens from [def-pc-projective-space-twist], give an isomorphism\n$$b_q:A_{\\bullet,S}\\oplus A_{\\bullet,S}(-1)[-2]\\xrightarrow{\\sim}Rq_{*,\\bullet}A_{\\bullet,P}.$$\nDefine the trace $\\operatorname{Tr}_{q,\\bullet}:Rq_{*,\\bullet}A_{\\bullet,P}(1)[2]\\to A_{\\bullet,S}$ by twisting and shifting $b_q^{-1}$ and projecting onto its second summand. Its evaluation at $n$ is the finite projective-line trace.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
   "place": "node det-sp-tower-classes, order None"
  },
  "stmt_deps": [
-  "det-sp-coefficient-towers-abelian"
+  "def-weil-pbc-proetale-site",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-tate-twist",
+  "def-pur-roots-of-unity-sheaf",
+  "def-sc-invertible-module",
+  "def-nagata-projective-space-base-change",
+  "det-prop-diagonal-tower-system",
+  "det-sp-tower-shriek-levels",
+  "def-pc-divisor-line-bundle",
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-site-comparison-morphism"
  ],
  "proof": [
   {
-   "text": "(1) Exactness in towers is levelwise. At level $n$ the sequence is the Kummer\nsequence $0\\to\\mu_{\\ell^n}\\to\\mathbb G_m\\xrightarrow{\\ell^n}\\mathbb G_m\\to0$, exact\non $S_{\\mathrm{proét}}$ since $\\ell$ is invertible. The maps commute with the\ntransitions: on $\\mathbb G_m$, $(x^\\ell)^{\\ell^n}=x^{\\ell^{n+1}}$, so raising to the\n$\\ell^{n+1}$-th power at level $n+1$ followed by the identity transition equals\nthe $\\ell$-power transition followed by raising to the $\\ell^n$-th power; and\nthe inclusion of $\\mu_{\\ell^{n+1}}$ intertwines the $\\ell$-power transitions.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "(2) A short exact sequence in an abelian category gives a boundary map on Ext\ngroups, here $\\operatorname{Ext}^1(\\mathbf Z,(\\mathbb G_m,\\mathrm{id}))\\to\n\\operatorname{Ext}^2(\\mathbf Z,(\\mu_{\\ell^n})_n)$ in towers of abelian sheaves; the\nclass of $L$ in $H^1(S,\\mathbb G_m)$ gives an element of the source (the constant\ntower with identity transitions). Since $(\\mu_{\\ell^n})_n$ is a\n$(\\mathbf Z/\\ell^n)_n$-module, the boundary class is a morphism\n$(\\mathbf Z/\\ell^n)_n\\to(\\mu_{\\ell^n})_n[2]$ in the derived category of\n$(\\mathbf Z/\\ell^n)_n$-modules. Extension of scalars along\n$(\\mathbf Z/\\ell^n)_n\\to\\mathcal O_{E,S}/\\ell^\\bullet$ (exact on these flat rank-one\nobjects) and $(\\mu_{\\ell^n})_n\\otimes\\mathcal O_{E,S}/\\ell^\\bullet=(\\mathcal O_{E,S}/\\ell^\\bullet)(1)$\ngive $c_1(L)$. Evaluation at $n$ is exact and carries the boundary map of the\ntower sequence to the boundary map of the level-$n$ sequence, so level $n$ of\n$c_1(L)$ is the finite class.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "(3) Same argument with the Kummer sequence with supports: the canonical\nsection of $\\mathcal O(\\Delta)$ gives a class in $H^1_\\Delta$ of\n$(\\mathbb G_m,\\mathrm{id})$, whose boundary is the class\n$\\Delta_*(\\mathbf Z/\\ell^n)_n\\to(\\mu_{\\ell^n})_n[2]$; levelwise it is the finite\ndiagonal class.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "(4) By [det-sp-tower-shriek-levels] (the tower direct image is computed\nlevelwise), the displayed map evaluates at level $n$ to the finite splitting\nof $Rq_*$ of the constant sheaf on $\\mathbf P^1$, which is an isomorphism; a\nmap of towers which is an isomorphism at every level is an isomorphism.",
+   "text": "Kummer exactness on the pro-etale site is a local consequence of [lem-amb-kummer-any-base]. For a pro-etale object $U\\to S$ and $u\\in\\Gamma(U,\\mathcal O_U)^\\times$, apply that lemma on the scheme $U$ with exponent $\\ell^n$. It supplies an etale cover of $U$ on which $u$ is an $\\ell^n$th power. Such a cover is also a cover in the pro-etale site [def-weil-pbc-proetale-site], so the power map on the specified pro-etale units sheaf is an epimorphism. Its kernel is $\\mu_{\\ell^n}$ by [def-pur-roots-of-unity-sheaf]. Kernels and cokernels of inverse systems are levelwise, as for the system topos in [det-sp-coefficient-towers-abelian]. The maps form a sequence of towers because $(u^\\ell)^{\\ell^n}=u^{\\ell^{n+1}}$, and a root of unity maps to its $\\ell$th power. This proves (1); no change-of-site identification of the entire units sheaf is being assumed.",
    "uses": [
+    "lem-amb-kummer-any-base",
+    "def-weil-pbc-proetale-site",
+    "def-pur-roots-of-unity-sheaf",
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+    "place": "(1); Stacks Tag 03PL, lemma-kummer-sequence, applied on every pro-etale object U"
+   }
+  },
+  {
+   "text": "Construct the integral class of $L$ before introducing finite coefficients. On a Zariski trivializing cover choose frames $e_a$ of $L$ and let its transition units be defined by $e_b=g_{ab}e_a$, so $g_{ab}g_{bc}=g_{ac}$. The section $(u,m)_a$ below is to be read as the frame $ue_a^{m}$ of $L^{\\otimes m}$; then $ue_b^m=g_{ab}^mue_a^m$ gives the gluing rule, and this direction of the transitions is the one for which the construction is the class of $L$ rather than of $L^{-1}$. Glue the sheaves $\\mathbf G_m\\times\\mathbf Z$ with abelian group law $(u,m)(v,k)=(uv,m+k)$ by $(u,m)_b\\mapsto(g_{ab}^{m}u,m)_a$. The cocycle identity gives the gluing identity; the kernel at $m=0$ is $\\mathbf G_m$, and the projection to $m$ is locally split. Thus this explicitly constructs an extension $0\\to\\mathbf G_m\\to E_L\\to\\mathbf Z\\to0$ on the pro-etale site. Its connecting morphism $\\lambda_L:\\mathbf Z\\to\\mathbf G_m[1]$ exists and is the extension class by [lem-weil-pbc-ext-one-extension-classification]. Changing frames gives an isomorphic extension fixing endpoints. On the etale site the identical construction is precisely the line-bundle torsor class, by the named construction in [lem-sc-torsor-h1] and the line-bundle/torsor correspondence [lem-sc-line-bundle-torsor]; both statements allow arbitrary schemes. Hence the pro-etale extension just written fixes the same Kummer sign and convention, without assuming a pro-etale Picard comparison theorem. Taking constant towers is exact (all kernels and cokernels are levelwise), so the constant extension and its connecting morphism define the line-bundle class in the tower category.",
+   "uses": [
+    "lem-weil-pbc-ext-one-extension-classification",
+    "lem-sc-torsor-h1",
+    "lem-sc-line-bundle-torsor",
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+    "place": "(2), integral line-bundle class; Stacks Tags 03AJ and 06XV"
+   }
+  },
+  {
+   "text": "Make coefficient linearity part of the construction. Let $\\mathscr X$ be the topos of inverse systems of sheaves on $S_{\\mathrm{proet}}$ supplied by [det-sp-coefficient-towers-abelian]. Apply [lem-pur-derived-change-of-rings] on a site presenting this topos to the ring map $\\mathbf Z_\\bullet\\to R_\\bullet$. It gives the exact functor $T_R(K)=R_\\bullet\\otimes^L_{\\mathbf Z_\\bullet}\\operatorname{const}(K)$ with values in $D(\\operatorname{Mod}_{R_\\bullet}(\\mathscr X))$, not merely in abelian systems. To check its evaluations, choose a K-flat resolution with flat terms on $S_{\\mathrm{proet}}$. The constant-system functor is inverse image of a geometric morphism: it preserves finite limits and is left adjoint to inverse limit. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] it preserves these K-flat resolutions. Constant flat terms remain flat since tensor and exactness of systems are componentwise. Thus a single model $P\\otimes R_\\bullet$ computes $T_R(K)$ and all evaluations $P\\otimes\\mathbf Z/\\ell^n$. The evaluation isomorphisms commute with transitions because the latter maps are the actual quotient maps in this model.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+    "place": "(2), derived scalar extension; Stacks Tags 06YY and 0G7E"
+   }
+  },
+  {
+   "text": "Compute the target of $T_R(\\lambda_L)$. After forgetting the new scalar action, resolve $R_\\bullet$ by the two-term system $Q_n=[\\mathbf Z\\xrightarrow{\\ell^n}\\mathbf Z]$ in degrees $-1,0$, with transition $(\\ell,1):Q_{n+1}\\to Q_n$. Each term is a flat system (tensor and exactness are levelwise). This bounded complex is K-flat directly: tensoring with any acyclic system is the cone of a map between two acyclic systems, hence acyclic. Therefore the K-flat tensor construction of [lem-pur-derived-change-of-rings] computes the underlying $T_R(\\mathbf G_m)$ by $[\\mathbf G_m\\xrightarrow{\\ell^n}\\mathbf G_m]_n$. By step 1 its only cohomology is $(\\mu_{\\ell^n})_n$ in degree $-1$, with transition $\\zeta\\mapsto\\zeta^\\ell$. Use the positive kernel inclusion $(\\mu_{\\ell^n})_n[1]\\to[\\mathbf G_m\\xrightarrow{\\ell^n}\\mathbf G_m]_n$ for this cohomology identification. Define the identification $T_R(\\mathbf G_m[1])\\simeq(\\mu_{\\ell^n})_n[2]$ by shifting this identification through the exact functor's shift isomorphism; this fixes its sign. These are identifications inside the module derived category: canonical truncation identifies an object with its unique nonzero cohomology, and [lem-pur-torsion-sheaf-constant-module] identifies that cohomology's level-$n$ action with its unique $\\mathbf Z/\\ell^n$ action. Also $T_R(\\mathbf Z)=R_\\bullet$. Apply $T_R$ to $\\lambda_L$ to obtain the stated $R_\\bullet$-linear Chern morphism.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-torsion-sheaf-constant-module",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+    "place": "(2), explicit two-term computation and power transitions"
+   }
+  },
+  {
+   "text": "Check the abelian boundary, rather than identifying arbitrary abelian Ext with module Ext. The ordinary tensor units of [sk-def-sfb-change-of-scalars] on K-flat resolutions define a natural map from a complex to the scalar-forgotten derived extension: for a K-flat resolution $P\\xrightarrow{\\sim}K$ use the roof $K\\xleftarrow{\\sim}P\\to P\\otimes R_\\bullet$; naturality and independence follow from the resolution comparisons in [lem-pur-derived-change-of-rings]. Check its sign first before shifting. Write $0\\to U\\xrightarrow{i}M\\xrightarrow{f}N\\to0$ for the Kummer tower sequence of step 1, so $U=(\\mu_{\\ell^n})_n$, $M$ has power transitions, and $N$ has identity transitions. Set $C=[U\\xrightarrow{i}M]$ and $D=[M\\xrightarrow{f}N]$ in degrees $-1,0$. The augmentation $v:C\\to N$ is $f$ in degree zero, and the cone projection is $p:C\\to U[1]$. With the convention of [def-weil-abstract-derived-category] and [lem-sf-derived-ses-triangle], the boundary is $\\delta=-p v^{-1}$. Let $a:N\\to D$ be the degree-zero inclusion and $j:U[1]\\to D$ the positive kernel inclusion. The map $av+jp:C\\to D$ is null-homotopic: take the sole nonzero homotopy $h^0=1_M:C^0\\to D^{-1}$; then $d_Dh+hd_C$ has components $i$ in degree $-1$ and $f$ in degree zero. Hence $j^{-1}a=-pv^{-1}=\\delta$ in the derived category of abelian systems. In the model $N\\otimes Q$ of step 4, the tensor unit is precisely $a$. Shift this equality using the target normalization fixed in step 4 to obtain $\\delta[1]$ for $\\mathbf G_m[1]$. The homotopy is a map of entire systems, since its middle term has the power transitions on both sides. Naturality of the tensor unit gives $\\operatorname{Res}(T_R(\\lambda_L))\\circ(\\mathbf Z_\\bullet\\to R_\\bullet)=\\delta[1]\\circ\\operatorname{const}(\\lambda_L)$. Thus precomposition with the integral generator realizes the Chern morphism as the boundary in (2). Evaluation gives the identical formula for the finite Kummer boundary, with the same transition $(\\ell,1)$ on its two-term models. The scalar-extension adjunction is used in the abelian sheaf setting of steps 2-3, where finite colimits exist; the revised finite-colimit proviso for right exactness imposes no additional hypothesis here.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-ses-triangle",
+    "lem-pur-derived-change-of-rings",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+    "place": "(2), replacement for the invalid bare abelian-Ext/module-Ext inference"
+   }
+  },
+  {
+   "text": "Extend $T_R(\\lambda_L)$ along $R_\\bullet\\to A_\\bullet$ using [lem-pur-derived-change-of-rings], on the same inverse-system topos. This constructs an $A_\\bullet$-linear morphism, and evaluation computes finite scalar extension by the K-flat model argument of step 3; the source becomes $A_\\bullet$. Apply [det-def-sp-tate-twist-locally-free](1) with $X=S$ and the fixed prime $\\ell$ and extension $E$, choosing an auxiliary algebraic closure containing $E$ as in that node's preamble. Its clause (1) supplies one pro-etale cover $\\widetilde S\\to S$ and generators $\\zeta_n$ with $\\zeta_{n+1}^\\ell=\\zeta_n$. The maps $a\\mapsto\\zeta_n^a$ identify the entire root tower with $R_\\bullet$ on that cover: the transition sends $\\zeta_{n+1}^a$ to $\\zeta_n^{\\bar a}$, where $\\bar a$ is reduction modulo $\\ell^n$. Thus the root tower is locally free of rank one over $R_\\bullet$, and tensoring with it is exact because exactness and tensor are computed levelwise. Its derived extension is therefore the degree-zero tower $A_\\bullet(1)$, and its dual is the inverse line tower. At each level the finite ring $A_n=\\mathcal O_E/\\ell^n$ is commutative and killed by $\\ell^n$; taking $A=A_n$ and $r=n$ is precisely the finite-coefficient convention of [sk-def-sp-tate-twist], where finite discrete coefficient rings have constant coefficient sheaves. Its displayed $B_{E,n}$ is this $A_n$, and its transition $u\\otimes a\\mapsto u^\\ell\\otimes\\bar a$ is exactly the transition of our $A_\\bullet(1)$. The isomorphism of clause (2) of [det-def-sp-tate-twist-locally-free] also identifies any larger annihilating level with this one. No assertion about the integral, rational or algebraically closed bounded constructible categories in that node's revised clause (3) is used. Step 5 evaluated at $n$ is now the finite scalar-extended Kummer class, proving all of (2), with the power transitions on roots and quotient transitions on coefficients.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "det-def-sp-tate-twist-locally-free",
+    "sk-def-sp-tate-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+    "place": "(2), extension to O_E/l^bullet and normalization of the twists"
+   }
+  },
+  {
+   "text": "Fix $W=P\\times_SP$ and $F=\\Delta_*\\mathbf Z_P$. In the current statement of [det-prop-diagonal-tower-system], the units in the exact pole extension are $B=\\nu_W^{-1}\\mathbf G_{m,W,\\mathrm{et}}$, rather than the sheaf $G=\\mathbf G_{m,W}$ of all pro-etale units. Let $a:B\\to G$ be the map adjoint to the identity on units on etale objects, using [def-weil-pbc-site-comparison-morphism]. Clause (1) supplies $0\\to B\\to\\mathcal M_\\Delta\\to F\\to0$, with $t^{-1}\\mapsto+1$. Put $C_\\Delta=[B\\to\\mathcal M_\\Delta]$ in degrees $-1,0$, with quotient quasi-isomorphism $v:C_\\Delta\\to F$ and positive projection $p:C_\\Delta\\to B[1]$. By the cone convention in [def-weil-abstract-derived-category] and [lem-sf-derived-ses-triangle] its connecting morphism is $\\beta_B=-pv^{-1}$. Define $\\beta_\\Delta=a[1]\\beta_B$. Clause (3) of the diagonal-system statement supplies only the source reduction $T(F)\\simeq\\Delta_*R_\\bullet$ used below. We do not use its target-system identification or clause (4). The target identification for our construction is fixed independently in step 4; the comparison with the finite Cartier class is proved directly in step 8.\n\nCheck the normalization directly. Let $\\rho:\\mathbf Z_W\\to F$ send $1$ to $1$ on the diagonal. On etale charts with equations $t_b=g_{ab}^{-1}t_a$, the lifts $s_a=t_a^{-1}$ have ratios $s_b/s_a=g_{ab}$, the transitions of $\\mathcal O_W(\\Delta)$. The pullback of the pole extension along $\\rho$ is locally $B\\times\\mathbf Z$, with $(b,m)_b\\mapsto(g_{ab}^m b,m)_a$; the map to the pole sheaf sends $(b,m)$ to $b t_a^{-m}$. This is an isomorphism onto the pullback: a section over a fixed exponent differs from its chosen lift by a unique section of the kernel $B$. The maps $(b,m)\\mapsto(a(b),m)$ define a morphism from this extension to the explicitly constructed full-units extension $E_{\\mathcal O_W(\\Delta)}$ in step 2. They commute with the transitions because $a(g_{ab})=g_{ab}$, and have endpoint maps $a$ and the identity of $\\mathbf Z$. Naturality of connecting morphisms, or the commuting maps of the two cones with their negative projections, gives $a[1]\\beta_B\\rho=\\lambda_{\\mathcal O_W(\\Delta)}$. The endpoint convention is the one in [lem-weil-pbc-ext-one-extension-classification]. No isomorphism $B\\simeq G$ is assumed.\n\nApply the module-valued exact functor $T_R$ of step 3 to this corrected integral morphism, using [lem-pur-derived-change-of-rings]. The underlying source reduction is the cited $T(F)$, and it has only degree-zero cohomology $\\Delta_*R_\\bullet$. Truncation inside the module derived category and the unique levelwise quotient actions of [lem-pur-torsion-sheaf-constant-module] identify the source there. Identify the target with $(\\mu_{\\ell^n})_n[2]$ using exactly the positive-kernel identification and shift normalization of step 4; do not alter that identification for the supported class. This produces the $R_\\bullet$-linear supported morphism $T_R(\\beta_\\Delta)=-T_R(a[1])T_R(\\partial)$, where $\\partial=pv^{-1}$ is the cited positive roof with target $B[1]$. Applying the additive functor to the preceding integral equality shows that its composite with $R_{\\bullet,W}\\to\\Delta_*R_{\\bullet,P}$ is the Chern morphism of $\\mathcal O_W(\\Delta)$. All maps are constructed on entire systems before evaluation.",
+   "uses": [
+    "det-prop-diagonal-tower-system",
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-ses-triangle",
+    "lem-weil-pbc-ext-one-extension-classification",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-torsion-sheaf-constant-module",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor, delta=-p q^{-1}; main-20261015 classes proof (3), with the positive roof in diagonal-tower-system.proof.md (1) corrected; Cartier proof (G1) and its local lifts"
+   }
+  },
+  {
+   "text": "Extend the corrected map $T_R(\\beta_\\Delta)$ from $R_\\bullet$ to $A_\\bullet$ using [lem-pur-derived-change-of-rings]. By [lem-pur-twist-sheaf-locally-free](3), $\\mathcal O_E$ is finite free over $\\mathbf Z_\\ell$; a fixed basis reduces to compatible bases of $A_n$ over $R_n$. Thus $A_\\bullet$ is finite free over $R_\\bullet$, and its tensor functor is exact levelwise. In such a basis the canonical map $A_\\bullet\\otimes_{R_\\bullet}\\Delta_*R_\\bullet\\to\\Delta_*A_\\bullet$ is the identity on the corresponding finite direct sum of copies of $\\Delta_*R_\\bullet$. Step 6 identifies the target as $A_\\bullet(1)[2]$. Define $\\delta_\\bullet$ by this extension, retaining the source and target identifications of step 7.\n\nAt level $n$ this construction is the connecting boundary of the pole extension followed by finite Kummer reduction and coefficient extension. Indeed step 5's natural tensor-unit calculation applies to the integral morphism $\\beta_\\Delta:F\\to G[1]$: its scalar-forgotten reduction, precomposed with $F\\to F\\otimes^L R_n$, is $\\delta_{\\mathrm{Kum},n}[1]\\beta_\\Delta$. The source is the ordinary quotient $F\\otimes R_n=\\Delta_*R_n$, by step 7's source calculation. This is precisely the boundary construction of the finite Cartier class in the source sk-lem-geo-cartier.proof.md, (G1), with the same connecting-map convention; here $\\beta_\\Delta$ is the image under $a[1]$ of the actual pulled-back connecting boundary. The naturality and target comparison are verified below. Step 7's explicit pullback equality, after these two additive coefficient extensions, gives $\\delta_\\bullet\\circ(A_{\\bullet,W}\\to\\Delta_*A_{\\bullet,P})=c_1(\\mathcal O_W(\\Delta))$. Apply the current statement of [sk-lem-geo-cartier] with $r=n$, $R=R_n$, $\\Lambda=A_n$, $Z=W$ and $D=\\Delta$. Its coefficient hypothesis holds: $A_n$ is a finite commutative $R_n$-algebra killed by $\\ell^n$, including when $E$ is ramified. Use the compatible standard charts of [def-nagata-relative-projective-space] with $r=1$; [def-nagata-projective-space-base-change] identifies its underlying scheme with our $P$. Over $\\operatorname{Spec}(C)\\subset S$, the degree-zero localizations are $C[T_1/T_0]$ and $C[T_0/T_1]$. The diagonal is effective Cartier over arbitrary $S$: on the same affine chart its equation is $x-y$, and on opposite charts it is $xy-1$. Multiplication by $x-y$ is injective by division by the monic polynomial in $x$; if $(xy-1)f=0$, comparing constant terms and then successively coefficients gives $f=0$. These charts cover $W$.\n\nThe current Cartier statement defines its finite twist and Chern class by etale construction followed by comparison inverse image. Write $\\nu:W_{\\mathrm{proet}}\\to W_{\\mathrm{et}}$ for [def-weil-pbc-site-comparison-morphism]. The extension used in step 7 is already the exact inverse image of the etale pole extension, as specified by the current diagonal-system statement. Apply the exact-inverse-image naturality in [lem-sfb-divisible-extension-derived-reduction] with modulus $\\ell^n$ to that extension. On the etale site units are $\\ell^n$-divisible by the arbitrary-base Kummer lemma used in step 1; this remains true of $B$ under exact inverse image. Multiplication by $\\ell^n$ on $F$ is injective, also following from step 7's source-reduction calculation. Thus derived reduction of $\\beta_B$ is the comparison pullback of the etale supported boundary, with the positive-kernel/negative-connecting normalization of steps 4-5. It is the whole supported morphism that naturality compares. For the integral supported quotient the canonical map $\\nu_W^{-1}\\Delta_{\\mathrm{et},*}\\mathbf Z_P\\to\\Delta_{\\mathrm{proet},*}\\mathbf Z_P$ is the mate of the inverse-image square and the closed counit in [sk-thm-pe-direct-image-comparison], with discrete coefficient ring $\\mathbf Z$. Its local formula is $m\\mapsto m$, and it is the identification in the pulled-back extension. This uses exact inverse image on abelian sheaves, not the finite-ring module assertion of [lem-sf-comparison-pullback-exact] with integral coefficients.\n\nTo pass from $\\beta_B$ to $\\beta_\\Delta=a[1]\\beta_B$, note that $a$ commutes with every power map. The Kummer diagrams therefore give a map from the pulled etale root sheaf to the full pro-etale root sheaf. Tensor on the same two-term resolutions of step 4 shows that this is the cohomology map of $T_R(a)$; it respects the positive kernel inclusions and all power transitions. Consequently the normalized target map is exactly that roots comparison, rather than an arbitrary change of sign.\n\nOn the reduced target the comparison $\\nu^{-1}\\mu_{\\ell^n,\\mathrm{et}}\\to\\mu_{\\ell^n,\\mathrm{proet}}$ is an isomorphism. Indeed the etale rank-one trivialization in [lem-asd-finite-etale-twist-line], applied to $N=\\ell^n$ and $A=R_n$, gives local generators, and the map sends each generator to itself. The same finite etale covering is a pro-etale covering, where both sheaves identify with the constant $R_n$ and the map is the identity. Constant rings and exact comparison inverse image are supplied by [lem-sf-comparison-pullback-exact]. For the source use [sk-thm-pe-direct-image-comparison] with $g=\\Delta$ and the degree-zero etale sheaf $R_{n,P}$; $\\Delta$ is a closed immersion, hence finite, quasi-compact and quasi-separated. The etale direct image is exact by [lemma-weil-pbc-finite-direct-image-exact], so the comparison gives $\\nu^*\\Delta_{\\mathrm{et},*}R_{n,P}\\simeq R\\Delta_{\\mathrm{proet},*}R_{n,P}$. Taking degree zero identifies the right side with ordinary $\\Delta_*R_{n,P}$: for a nonnegative injective resolution $I$ it is $\\ker(\\Delta_*I^0\\to\\Delta_*I^1)=\\Delta_*\\ker(I^0\\to I^1)$ by left exactness. This degree-zero comparison is the adjunction map just specified, reduced modulo $\\ell^n$: both are the mate of the same inverse-image square and closed counit. The cited theorem preserves the adjunction unit, so this is the supported-constant comparison used in the current Cartier statement. Monoidality of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] commutes these comparisons with extension to $A_n$. Consequently evaluation of our constructed map is the finite Cartier morphism constructed from (G1) and transported by $\\nu^*$, with exactly the twist, supported source and positive Chern normalization in the current statement. Its coefficient and Cartier-preserving base-change assertions therefore apply. This establishes clause (3) by the actual supported boundary construction; it does not infer equality of supported maps merely from their composites with the coefficient unit. This argument uses [det-prop-diagonal-tower-system] only for its pulled extension and source reduction, not for its target identification or clause (4). In particular at $S=\\operatorname{Spec}\\overline{\\mathbf F}_2$, $\\ell=3$, $E=\\mathbf Q_3$, $n=1$, restriction to $P\\times\\{y\\}$ gives $+c_1(\\mathcal O_P(1))$, with fibre trace $1$ by [det-sp-p1-trace](2); the uncorrected positive roof would give trace $-1=2$ in $\\mathbf Z/3$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-twist-sheaf-locally-free",
+    "sk-lem-geo-cartier",
+    "det-sp-p1-trace",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-sfb-divisible-extension-derived-reduction",
+    "lem-asd-finite-etale-twist-line",
+    "lem-sf-comparison-pullback-exact",
+    "sk-thm-pe-direct-image-comparison",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-nagata-relative-projective-space",
+    "def-nagata-projective-space-base-change",
+    "det-prop-diagonal-tower-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "(G1), derived coefficient extension and the local lifts t_a^{-1}; main-20261015 tower classes (3), with the connecting sign fixed by Stacks Tag 0152; explicit r=n, Lambda=O_E/ell^n and comparison with the current Cartier statement; Stacks 099R/0GLZ comparison, 03PK roots and 06YY scalar extension"
+   }
+  },
+  {
+   "text": "By [lemma-nagata-projective-space-base-change-proper] with the two-element index set $\\{0,1\\}$, $q:P\\to S$ is proper. Use its compactification $q=q\\circ\\mathrm{id}_P$ when applying [det-sp-tower-shriek-levels]. The coefficient sheaf and its twists and shifts are bounded below, as required by that node's $D^+$ hypothesis. Use the canonical ringed-topos derived adjunction of [lem-weil-pbc-ringed-projection-mate-exact] for the levelwise morphism of inverse-system topoi induced by q. The hyperplane line on each affine base open is [def-pc-projective-space-twist] with $d=1$: its frames satisfy $e_i=(T_i/T_j)e_j$. These transition functions commute with restriction on the base, so they glue to the specified $\\mathcal O_P(1)$. Form $b_q$ by the tower adjunction unit and the adjoint of the Chern morphism of $\\mathcal O_P(1)$, untwisted and shifted on its source. Clause (1) of [det-sp-tower-shriek-levels] supplies the bounded-below direct-image comparison. To check evaluation of the actual adjunction maps, apply [lem-coef-semilinear-derived-sections] with the strict coefficient system $B_n=(A_n)_S$ and the pro-etale inverse image of $q$. The pulled-back coefficient system is $(A_n)_P$, since inverse image preserves constant sheaves. This lemma explicitly preserves evaluation, units, counits, tensor products and adjunction transposes, so the constructed tower unit/Chern map evaluates to the same map over $A_n$. The canonical identification of the pulled-back twist with the twist on $P$ follows from the single compatible-generator cover of step 6: its pullback sends each generator to the same root and the local coefficient-line identification to the identity. No unrestricted projection-formula isomorphism from clause (2)(a) is used. For completeness this finite map is invertible without imposing Noetherianity on $S$. Apply [det-sp-p1-trace](1) over $R_n=\\mathbf Z/\\ell^n$. On restricting $A_n$-modules to $R_n$, $A_n$ is a finite direct sum of $R_n$ using the basis in step 8. Canonical composition of ringed-topos derived direct images [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] applied to the two factorizations of the coefficient-change square identifies restriction of $Rq_{*,A_n}$ with $Rq_{*,R_n}$ of restriction; exact restriction is its termwise derived functor, as in [sk-def-sfb-change-of-scalars](4). Thus the restriction of $(b_q)_n$ is the direct sum of these $R_n$ projective-line isomorphisms: on the $j$th basis vector its Chern component is $e_j\\otimes c_1(\\mathcal O(1))$ by step 6, and its unit component is $e_j$ times the unit. Finite direct sums commute with an additive derived direct image. Since restriction does not change cohomology sheaves it reflects isomorphisms. Hence $(b_q)_n$ is invertible over $A_n$. Finally [det-sp-tower-shriek-levels](3) implies $b_q$ is invertible in the tower module derived category. For this use of clause (4), the underlying sheaf category is abelian and its tensor is additive; the finite-colimit existence condition in the revised clause (2) is therefore satisfied.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "det-sp-tower-shriek-levels",
+    "det-sp-p1-trace",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "sk-def-sfb-change-of-scalars",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-coef-semilinear-derived-sections",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+    "place": "(4), finite splitting, scalar coefficients, and conservativity of evaluation"
+   }
+  },
+  {
+   "text": "Put $V=A_{\\bullet,S}(1)[2]$, an invertible object with inverse $V^{-1}=A_{\\bullet,S}(-1)[-2]$ by step 6. Write $L=q^{-1}$ and $R=Rq_{*,\\bullet}$ for the derived adjunction of [lem-weil-pbc-ringed-projection-mate-exact]; its pullback tensor comparison gives $L(V^{-1})=(LV)^{-1}$. For any $M$ and $C$, tensoring by these inverse lines and applying that adjunction gives natural bijections\n$$\n\\operatorname{Hom}(M,RC\\otimes V)\\cong\\operatorname{Hom}(M\\otimes V^{-1},RC)\\cong\\operatorname{Hom}(LM\\otimes LV^{-1},C)\\cong\\operatorname{Hom}(LM,C\\otimes LV)\\cong\\operatorname{Hom}(M,R(C\\otimes LV)).\n$$\nThe forward map is the counit-tensor transpose specified in the cited node: transpose, cancel the inverse line and transpose back. Running these bijections backwards gives its inverse; their composites are identities by the evaluation/coevaluation cancellations for the line and the adjunction triangle identities. Thus the projection map is invertible for this $V$ over the arbitrary scheme $S$, without applying the restricted general projection theorem of [det-sp-tower-shriek-levels](2)(a). Take $C=A_{\\bullet,P}$ and use $LV=A_{\\bullet,P}(1)[2]$ from the generator calculation in step 9. Tensor $b_q$ with $V$ and compose with this projection isomorphism to obtain $A_{\\bullet,S}(1)[2]\\oplus A_{\\bullet,S}\\simeq Rq_{*,\\bullet}(A_{\\bullet,P}(1)[2])$. Define $\\operatorname{Tr}_{q,\\bullet}$ to be the second projection after its inverse. By [lem-coef-semilinear-derived-sections], evaluation preserves the tensor, counit-tensor transpose, adjunctions and compositions in this construction, and it preserves inverses by functoriality. The evaluated splitting is therefore precisely the twist of the finite unit/Chern splitting, so [det-sp-p1-trace](2) identifies its second projection with the finite trace, extended to $A_n$. This proves (4) with the stated trace type.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-coef-semilinear-derived-sections",
+    "det-sp-p1-trace",
     "det-sp-tower-shriek-levels"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+    "place": "(4), trace projection after twisting by (1)[2]"
+   }
   }
  ],
  "proof_deps": [
-  "det-sp-tower-shriek-levels"
+  "lem-amb-kummer-any-base",
+  "def-weil-pbc-proetale-site",
+  "def-pur-roots-of-unity-sheaf",
+  "det-sp-coefficient-towers-abelian",
+  "lem-weil-pbc-ext-one-extension-classification",
+  "lem-sc-torsor-h1",
+  "lem-sc-line-bundle-torsor",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-torsion-sheaf-constant-module",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-ses-triangle",
+  "sk-def-sfb-change-of-scalars",
+  "det-def-sp-tate-twist-locally-free",
+  "sk-def-sp-tate-twist",
+  "det-prop-diagonal-tower-system",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pur-twist-sheaf-locally-free",
+  "sk-lem-geo-cartier",
+  "det-sp-p1-trace",
+  "lem-sfb-divisible-extension-derived-reduction",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sf-comparison-pullback-exact",
+  "sk-thm-pe-direct-image-comparison",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-nagata-relative-projective-space",
+  "def-nagata-projective-space-base-change",
+  "lemma-nagata-projective-space-base-change-proper",
+  "det-sp-tower-shriek-levels",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-coef-semilinear-derived-sections",
+  "def-pc-projective-space-twist"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
-  "place": "## Proof"
+  "place": "Classes proof (1)-(4), Stacks Tags 06YY/0G7E for coefficient extension and 0152 for the connecting sign; the source positive-roof inconsistency is corrected explicitly in step 7."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer first Chern and diagonal classes in the derived category of towers of sheaves with finite coefficient rings",
+   "results": "8 hits; top results: CategoryTheory.Sheaf.H, Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_map, SheafOfModules.Presentation.map_π_eq, Algebra.Generators.H1Cotangent.δ_comp_equiv, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Generators.H1Cotangent.δ_eq, Algebra.H1Cotangent.exact_δ_mapBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match: none states simultaneous Kummer/Chern/diagonal tower classes and the projective-line splitting; the sheaf cohomology exact-sequence and mapping-cone hits are only general ingredients, and Kummer number-theory/Hilbert-90/cotangent/projectivization hits are different statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.ShortComplex.ShortExact",
+   "results": "12 hits; top results: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.Sheaf.H.longSequence, CategoryTheory.Sheaf.H.longSequence_exact, CategoryTheory.Sheaf.H.longSequenceHom_id, CategoryTheory.Sheaf.H.longSequenceHom, CategoryTheory.Sheaf.H.δ, CategoryTheory.Sheaf.H.longSequenceHom_comp, CategoryTheory.Sheaf.H.longSequence_exact₁'",
+   "date": "2026-10-16",
+   "verdict": "no match: none states simultaneous Kummer/Chern/diagonal tower classes and the projective-line splitting; the sheaf cohomology exact-sequence and mapping-cone hits are only general ingredients, and Kummer number-theory/Hilbert-90/cotangent/projectivization hits are different statements."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|Chern|diagonalClass|tower.*class",
+   "results": "25 hits; top results: Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean, Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean, Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: none states simultaneous Kummer/Chern/diagonal tower classes and the projective-line splitting; the sheaf cohomology exact-sequence and mapping-cone hits are only general ingredients, and Kummer number-theory/Hilbert-90/cotangent/projectivization hits are different statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projective bundle formula for etale cohomology of the projective line using the Kummer Chern class with compatible inverse system coefficients",
+   "results": "8 hits; top results: WeierstrassCurve.Projective.PointClass, Rep.standardComplex.x_projective, groupCohomology.Hilbert90.aux, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, Algebra.H1Cotangent, Projectivization.nonZeroEquivProjectivizationProdUnits, IsDedekindDomain.selmerGroup.fromUnitLift",
+   "date": "2026-10-16",
+   "verdict": "no match: none states simultaneous Kummer/Chern/diagonal tower classes and the projective-line splitting; the sheaf cohomology exact-sequence and mapping-cone hits are only general ingredients, and Kummer number-theory/Hilbert-90/cotangent/projectivization hits are different statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chern\"",
+   "results": "2 hits; top results: Lean.Meta.MatcherApp.matcherName, Lean.Meta.Match.MkMatcherInput.matcherName",
+   "date": "2026-10-16",
+   "verdict": "no match: none states simultaneous Kummer/Chern/diagonal tower classes and the projective-line splitting; the sheaf cohomology exact-sequence and mapping-cone hits are only general ingredients, and Kummer number-theory/Hilbert-90/cotangent/projectivization hits are different statements."
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|chern|TateTwist",
+   "results": "0 hits; top results: . Directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: none states simultaneous Kummer/Chern/diagonal tower classes and the projective-line splitting; the sheaf cohomology exact-sequence and mapping-cone hits are only general ingredients, and Kummer number-theory/Hilbert-90/cotangent/projectivization hits are different statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer first Chern class of line bundle as a morphism of towers of sheaves",
+   "results": "8 hits; top results: KaehlerDifferential.cotangentComplexBaseChange, CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom, groupCohomology.H1π, CommRingCat.KaehlerDifferential.map, groupCohomology.coe_mapCocycles₁, Algebra.Extension.H1Cotangent, CochainComplex.mappingCone.triangle_mor₁, ContMDiffSection.coeAddHom",
+   "date": "2026-10-16",
+   "verdict": "no match: none states simultaneous Kummer/Chern/diagonal tower classes and the projective-line splitting; the sheaf cohomology exact-sequence and mapping-cone hits are only general ingredients, and Kummer number-theory/Hilbert-90/cotangent/projectivization hits are different statements."
+  },
+  {
+   "tool": "grep",
+   "query": "firstChern|chernClass|kummerSequence|projectiveBundleFormula|projective.*decomposition",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: the independent second-reader searches returned Selmer, field-theoretic Kummer, group cohomology and cotangent declarations; none states sheaf Kummer Chern classes, coefficient towers or their projective-line splitting. The focused source grep had zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kummer\"",
+   "results": "8 hits; KummerExtension.«termK[_√_]», KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk, KummerDedekind.quotMapEquivQuotQuotMap, KummerDedekind.emultiplicity_factors_map_eq_emultiplicity, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span, KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map, KummerDedekind.quotMapEquivQuotQuotMap_symm_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: the independent second-reader searches returned Selmer, field-theoretic Kummer, group cohomology and cotangent declarations; none states sheaf Kummer Chern classes, coefficient towers or their projective-line splitting. The focused source grep had zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle determines a degree two etale cohomology class through the roots of unity exact sequence, compatible with inverse limits of coefficient rings",
+   "results": "8 hits; IsDedekindDomain.selmerGroup.fromUnitLift, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, IsDedekindDomain.selmerGroup.fromUnit, Algebra.H1Cotangent, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, Algebra.Extension.H1Cotangent.map, CategoryTheory.PresheafOfGroups.H1, groupCohomology.H1ofAutOnUnitsUnique",
+   "date": "2026-10-16",
+   "verdict": "no match: the independent second-reader searches returned Selmer, field-theoretic Kummer, group cohomology and cotangent declarations; none states sheaf Kummer Chern classes, coefficient towers or their projective-line splitting. The focused source grep had zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible family of roots of unity gives a Chern morphism from an inverse system of finite coefficient rings in the derived category of module sheaves",
+   "results": "8 hits; top results: CondensedMod.ofSheafProfinite, Condensed.profiniteFree, LightCondMod.ofSheafLightProfinite, localCohomology.diagram, LightCondMod.LocallyConstant.functorToPresheaves, CategoryTheory.Sheaf.H, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondAb.ofSheafLightProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: independent fresh reading found only condensed-module constructors, the general sheaf cohomology definition, presheaf extensionality/Kan-extension declarations, and scalar-tower formulas. None states Kummer or diagonal classes of coefficient towers or the projective-line splitting."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Ext\"",
+   "results": "12 hits; top results: CategoryTheory.OverPresheafAux.OverArrows.ext, CategoryTheory.OverPresheafAux.OverArrows.ext_iff, CategoryTheory.OverPresheafAux.YonedaCollection.ext, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap, CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension, CategoryTheory.Presheaf.isExtensionAlongULiftYoneda, CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension",
+   "date": "2026-10-16",
+   "verdict": "no match: independent fresh reading found only condensed-module constructors, the general sheaf cohomology definition, presheaf extensionality/Kan-extension declarations, and scalar-tower formulas. None states Kummer or diagonal classes of coefficient towers or the projective-line splitting."
+  },
+  {
+   "tool": "grep",
+   "query": "mu.*tower|chern|kummer|projectiveBundle",
+   "results": "3 hits; top results: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean. Directory: AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: independent fresh reading found only condensed-module constructors, the general sheaf cohomology definition, presheaf extensionality/Kan-extension declarations, and scalar-tower formulas. None states Kummer or diagonal classes of coefficient towers or the projective-line splitting."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"Sheaf\"",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic results are general sheaf cohomology and presheaf cocycle interfaces, not the simultaneous Kummer/Chern/diagonal construction in varying-ring module towers; the Loogle and source searches returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "first.?chern|kummer.?class|projective.?bundle.?formula|tate.?twist",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic results are general sheaf cohomology and presheaf cocycle interfaces, not the simultaneous Kummer/Chern/diagonal construction in varying-ring module towers; the Loogle and source searches returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First Chern class of an invertible sheaf defined by the connecting homomorphism for power maps on the multiplicative group in an inverse system of sheaves",
+   "results": "8 hits; top results: CategoryTheory.PresheafOfGroups.H1, CategoryTheory.Sheaf.H, CategoryTheory.PresheafOfGroups.OneCocycle.class, CategoryTheory.PresheafOfGroups.instOneH1, CategoryTheory.PresheafOfGroups.OneCochain, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic results are general sheaf cohomology and presheaf cocycle interfaces, not the simultaneous Kummer/Chern/diagonal construction in varying-ring module towers; the Loogle and source searches returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|[Cc]hern|diagonalClass|projectiveBundleFormula",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: returned types concern general Hom-complex or group (co)homology, cotangent modules, Selmer/Picard groups, quasicoherent presentations or projective-spectrum localization; none states the coefficient-tower Kummer/Cartier constructions and finite projective-line splitting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First Chern class from a Kummer connecting homomorphism and cycle class of a Cartier divisor compatible with coefficient towers",
+   "results": "8 hits; CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom, groupCohomology.isoCocycles₁_hom_comp_i, CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom_apply, groupHomology.cyclesMap_comp_isoCycles₁_hom, Algebra.Extension.H1Cotangent, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁, groupHomology.isoCycles₁_inv_comp_iCycles_apply, groupHomology.coe_mapCycles₁",
+   "date": "2026-10-16",
+   "verdict": "no match: returned types concern general Hom-complex or group (co)homology, cotangent modules, Selmer/Picard groups, quasicoherent presentations or projective-spectrum localization; none states the coefficient-tower Kummer/Cartier constructions and finite projective-line splitting."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"Chern\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: returned types concern general Hom-complex or group (co)homology, cotangent modules, Selmer/Picard groups, quasicoherent presentations or projective-spectrum localization; none states the coefficient-tower Kummer/Cartier constructions and finite projective-line splitting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer Chern classes and supported diagonal classes in inverse systems of module sheaves with projective line trace",
+   "results": "8 hits; SheafOfModules.Presentation.map_π_eq, Profinite.NobelingProof.succ_exact, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, Algebra.Generators.H1Cotangent.δ, IsDedekindDomain.selmerGroup, Algebra.Generators.H1Cotangent.δ_map, IsDedekindDomain.selmerGroup.fromUnitLift, CommRing.relPic",
+   "date": "2026-10-16",
+   "verdict": "no match: returned types concern general Hom-complex or group (co)homology, cotangent modules, Selmer/Picard groups, quasicoherent presentations or projective-spectrum localization; none states the coefficient-tower Kummer/Cartier constructions and finite projective-line splitting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse system of finite coefficient rings admits compatible first Chern and Cartier divisor classes and the projective bundle decomposition of P1",
+   "results": "8 hits; AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: returned types concern general Hom-complex or group (co)homology, cotangent modules, Selmer/Picard groups, quasicoherent presentations or projective-spectrum localization; none states the coefficient-tower Kummer/Cartier constructions and finite projective-line splitting."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chern\", \"cohomology\"",
+   "results": "0 hits; no declarations returned",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading; returned types concern cotangent cohomology, representation resolutions or splitting a complex onto a projective object, not the projective-line etale-cohomology decomposition or Kummer and Cartier classes of coefficient towers."
+  },
+  {
+   "tool": "grep",
+   "query": "kummerSequence|firstChern|chernClass|TateTwist|projectiveBundleFormula",
+   "results": "0 hits; no declarations returned",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading; returned types concern cotangent cohomology, representation resolutions or splitting a complex onto a projective object, not the projective-line etale-cohomology decomposition or Kummer and Cartier classes of coefficient towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology projective line splits as the constant ring and a shifted Tate twist by the first Chern class of O(1)",
+   "results": "8 hits; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Rep.standardComplex.x_projective, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.FormallySmooth.projective_kaehlerDifferential, Rep.standardComplex.instQuasiIsoNatεToSingle₀, Algebra.formallyEtale_iff, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading; returned types concern cotangent cohomology, representation resolutions or splitting a complex onto a projective object, not the projective-line etale-cohomology decomposition or Kummer and Cartier classes of coefficient towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chern\", \"Sheaf\"",
+   "results": "0 hits; no declarations returned",
+   "date": "2026-10-17",
+   "verdict": "no match: fresh independent second-reader query returned no declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of a divisible abelian sheaf produces its torsion shifted by one, and a Cartier divisor extension gives its cycle class",
+   "results": "8 hits; CategoryTheory.Sheaf.H, Ext, AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.cohomologyPresheafFunctor, SheafOfModules.instAbelian",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned types define general sheaf cohomology, Ext and abelian module categories, or exact-functor scalar compatibility; none constructs Kummer and supported Cartier classes or the projective-line splitting in varying-coefficient towers."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -66,5 +424,129 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sp-tower-geometric"
+ "unit": "sk-prop-sp-tower-geometric",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-sp-tower-classes",
+  "worker": "stage1",
+  "summary": "Constructed the four blueprint clauses in ten steps: levelwise Kummer exactness; a coefficient-linear Chern morphism via derived scalar extension; a supported diagonal morphism from the pulled-etale pole extension followed by the canonical units map; and the unit/Chern projective-line splitting and its twisted trace. The explicit cone homotopy fixes the connecting roof as -p v^{-1} with the positive kernel target identification. Steps 7-8 compare the full supported morphism with the finite Cartier construction by naturality of derived reduction, including the supported-source adjunction mate; equality is not inferred only after precomposition with the coefficient unit. Invertibility of ell, coefficient categories, arbitrary-base projective charts and finite-freeness hypotheses are explicit. The source disputes and prior repairs remain documented in the report; the currently reviewed diagonal-system clause (4) is consistent and is not used. Independent second reading rechecked all ten steps and all 54 exact quotations, clarified the proof to avoid unused claims about another node's proof normalization, corrected the stale report description, and recorded a fresh broader Mathlib search. No new nodes or Mathlib leaves.",
+  "blueprint": "main-20261015 classes proof (1): step 1; (2): steps 2-6; (3): steps 7-8, correcting the conflicting positive Cartier roof while retaining the supported-Kummer route; (4): steps 9-10. These realize the classes-and-integration paragraph of sk-prop-sp-tower-geometric; the unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Generic The Kummer sequence on an arbitrary base input; used only for the statement explicitly quoted in citations.json, while the tower-geometric classes/integration route is retained."
+   },
+   {
+    "node": "def-weil-pbc-proetale-site",
+    "why": "Generic Small pro-etale site input; used only for the statement explicitly quoted in citations.json, while the tower-geometric classes/integration route is retained."
+   },
+   {
+    "node": "def-pur-roots-of-unity-sheaf",
+    "why": "Generic The pro-etale sheaf of roots of unity input; used only for the statement explicitly quoted in citations.json, while the tower-geometric classes/integration route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ext-one-extension-classification",
+    "why": "Generic Degree-one derived classes classify short exact extensions input; used only for the statement explicitly quoted in citations.json, while the tower-geometric classes/integration route is retained."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "Generic First cohomology classifies torsors input; used only for the statement explicitly quoted in citations.json, while the tower-geometric classes/integration route is retained."
+   },
+   {
+    "node": "lem-sc-line-bundle-torsor",
+    "why": "Generic Line bundles and $\\mathbf G_m$-torsors input; used only for the statement explicitly quoted in citations.json, while the tower-geometric classes/integration route is retained."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions input; used only for the statement explicitly quoted in citations.json, while the tower-geometric classes/integration route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi input; used only for the statement explicitly quoted in citations.json, while the tower-geometric classes/integration route is retained."
+   },
+   {
+    "node": "lem-pur-torsion-sheaf-constant-module",
+    "why": "Generic An abelian sheaf killed by N is a module over the constant sheaf Z/N input; used only for the statement explicitly quoted in citations.json, while the tower-geometric classes/integration route is retained."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic Derived category of an abelian category input; used only for the statement explicitly quoted in citations.json, while the tower-geometric classes/integration route is retained."
+   },
+   {
+    "node": "lem-sf-derived-ses-triangle",
+    "why": "Generic A short exact sequence gives a distinguished triangle in the derived category input; used only for the statement explicitly quoted in citations.json, while the tower-geometric classes/integration route is retained."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic The twisting sheaves are locally free of rank one and derived complete input; used only for the statement explicitly quoted in citations.json, while the tower-geometric classes/integration route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images input; used only for the statement explicitly quoted in citations.json, while the tower-geometric classes/integration route is retained."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic varying-ring section calculus supplies evaluation of actual tower adjunction units, counits, tensor and transposes; the tower-geometric unit needs this coherence but does not state it. No projection invertibility is taken from this lemma."
+   },
+   {
+    "node": "det-prop-diagonal-tower-system",
+    "why": "Step 7 uses its exact pulled-etale Cartier extension and clause (3) source reduction. Its pulled units B are mapped canonically to full pro-etale units before our reduction; its signed target identification and clause (4) are not used. These are generic tools for the same supported-Kummer route."
+   },
+   {
+    "node": "def-weil-pbc-site-comparison-morphism",
+    "why": "The comparison inverse-image construction defines the map from etale local units/poles to their pro-etale counterparts; a notion, not a replacement proof route."
+   },
+   {
+    "node": "lem-sfb-divisible-extension-derived-reduction",
+    "why": "Generic naturality of module-derived reduction compares the two pole extensions with the fixed connecting sign; the tower-geometric unit does not state this homological algebra fact."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic finite etale root-line trivialization identifies the current Cartier finite twist with the pro-etale root twist after comparison pullback."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic exact comparison inverse image and constant-ring identification are needed to match the expanded Cartier statement, not to replace the supported Kummer argument."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Generic qcqs direct-image comparison for the finite diagonal and the degree-zero finite coefficient sheaf supplies the supported source comparison and unit normalization."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic exactness for a finite etale-site direct image identifies the supported source before pro-etale comparison; the diagonal is finite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-kummer-any-base",
+  "def-weil-pbc-proetale-site",
+  "def-pur-roots-of-unity-sheaf",
+  "lem-weil-pbc-ext-one-extension-classification",
+  "lem-sc-torsor-h1",
+  "lem-sc-line-bundle-torsor",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-torsion-sheaf-constant-module",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-ses-triangle",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-coef-semilinear-derived-sections",
+  "det-prop-diagonal-tower-system",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-sfb-divisible-extension-derived-reduction",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sf-comparison-pullback-exact",
+  "sk-thm-pe-direct-image-comparison",
+  "lemma-weil-pbc-finite-direct-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-cd9950a1e",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-cd9950a1e (reviewer sub-agent of L); spot-checked: Read the whole item: the statement, all 10 steps and the statements of all 35 cited nodes. Sources read: blueprint main-20261015 classes text, proof and unit; sk-lem-geo-cartier proof (G1) with lifts t_a^{-1}; Stacks 0152 (delta=-p q^{-1}) and 03AJ (E_T). The statement follows the source. The added hypothesis that ell is invertible is the source's own implicit assumption, both citers already assume it, and no target is changed. Sign checked by hand: in step 5, h^0=1_M gives av+jp=dh+hd, so j^{-1}a=-pv^{-1}=delta. In step 7, s=t^{-1} has s_b=g_ab s_a, and the pullback gluing equals the step-2 extension, so a[1]beta_B rho=lambda_{O(Delta)}. The normalization agrees with the divisible-extension reduction (unit equals kappa_B) and with (G1). The ell=3 fibre over F_2-bar gives trace +1. The citation of the construction in the Cartier proof is acceptable: c_D is not determined by its unit composite, since H^1(Z-D, Lambda(1)) can be nonzero. Also checked: the hypotheses in steps 8-10 (r=n, Lambda=O_E/ell^n, regular charts over any base, D-plus, qcqs, conservativity, arbitrary-S P1 splitting); no new nodes, no cycle, proof_deps equal to the union of step uses. Accepted tool_use: det-prop-diagonal-tower-system, clauses (1) and (3) only. One repair in fixes/: step 2 now fixes frames with e_b=g_ab e_a and reads (u,m)_a as the frame u e_a^m. This direction is needed for the class of L rather than L^{-1}, to match 03AJ and step 7. No other field changed.; 1 file(s) fixed by the reviewer"
+ }
 }

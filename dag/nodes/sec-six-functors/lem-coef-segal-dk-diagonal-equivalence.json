@@ -30,9 +30,88 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose functorial Reedy fibrant replacements $r_X:X\\to RX$ and $r_Y:Y\\to RY$ using [lem-coef-reedy-model-structure] in the Kan model category of [lem-coef-kan-quillen-right-proper]. Because $X_0,Y_0$ are already Kan, keep the degree-zero factorizations equal to the identity followed by the terminal fibration, as the prescribed-degree-zero clause permits. Thus $(RX)_0=X_0$, $(RY)_0=Y_0$, and $RF$ is a map with the same object function as $F$. Each $r_{X,n},r_{Y,n}$ is a weak equivalence. Naturality of the consecutive-edge maps and repeated application of [lem-coef-kan-homotopy-pullback-invariance] show that the homotopy Segal comparisons for $RX,RY$ are weak equivalences. At degree one Reedy fibrancy says that $(RX)_1\\to X_0^2$ and $(RY)_1\\to Y_0^2$ are Kan fibrations. Their strict mapping fibers therefore represent the homotopy fibers, by [lem-coef-kan-quillen-right-proper]; their strict iterated edge products likewise compute the homotopy products. Hence $RX,RY$ are Segal spaces in Rezk's Reedy-fibrant convention. Homotopy-pullback invariance, applied to the endpoint maps and the fixed points $(x,y)$, identifies $M_X(x,y)\\to M_{RX}(x,y)$ and the corresponding maps for $Y$ as weak equivalences. These maps preserve identities and composition: both compositions are obtained from the same natural diagram of the degree-two Segal comparison and $d_1$, and taking its inverse on homotopy classes commutes with these weak equivalences. Thus the two homotopy categories have unchanged objects and bijective Hom sets, and $RF$ has the mapping-space and essential-surjectivity hypotheses of $F$. Finally [lem-coef-bisimplicial-diagonal-equivalence] makes $\\operatorname{diag}r_X,\\operatorname{diag}r_Y$ weak equivalences. It suffices, by the commuting square and two-out-of-three, to handle the Reedy-fibrant map $G=RF:U=RX\\to V=RY$.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 2.4 and 4.1; agent extension to levelwise Kan homotopy Segal spaces by Reedy replacement fixing degree zero."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-rezk-explicit-completion] to $U,V$ to obtain the natural square $i_VG=\\widehat G i_U$. Each vertical map induces weak equivalences on mapping spaces and is essentially surjective. For objects $x,y$ of $U$, the square of mapping spaces and two-out-of-three imply that $\\widehat G$ induces a weak equivalence from $M_{\\widehat U}(i_Ux,i_Uy)$ to $M_{\\widehat V}(i_VGx,i_VGy)$. To extend to arbitrary objects $a,b$ of $\\widehat U$, choose isomorphisms $i_Ux\\cong a$ and $i_Uy\\cong b$ in its homotopy category, represented by arrows with inverse representatives. Write these arrows as $\\alpha:i_Ux\\to a$ and $\\beta:i_Uy\\to b$, with inverse representatives $\\alpha^{-1},\\beta^{-1}$. The comparison from $M_{\\widehat U}(i_Ux,i_Uy)$ to $M_{\\widehat U}(a,b)$ is $k\\mapsto\\beta\\circ k\\circ\\alpha^{-1}$ in the homotopy category of Kan complexes; its inverse is $\\ell\\mapsto\\beta^{-1}\\circ\\ell\\circ\\alpha$. The two composites are homotopic to the identity by associativity, the inverse equations and the unit homotopies. Apply $\\widehat G$ to these same chosen arrows for the target comparison. To spell out associativity here, take homotopy fibers of the degree-three Segal comparison over a fixed list of four objects. By [lem-coef-kan-homotopy-pullback-invariance], that fiber comparison is again a weak equivalence, which can be inverted in the homotopy category of Kan complexes. The two triple composites are restrictions of $d_1d_1$ and $d_1d_2$ on that fiber of $W_3$; these are equal by the simplicial identities, so the composites are homotopic. Likewise the degeneracies inserting an identity, with $d_1s_0=d_1s_1=1$ in the appropriate degrees, give the two unit homotopies. A representative inverse equation is a path in the Kan mapping space; composing that path gives the homotopies for inverse-composition. Thus the conjugation maps really are homotopy equivalences, not just bijections on components. Conjugation commutes with $\\widehat G$ up to those same composition homotopies. Two-out-of-three therefore gives the mapping-space equivalence at $(a,b)$. Given an object $c$ of $\\widehat V$, choose $v\\in V_0$ with $c\\cong i_Vv$; choose $u\\in U_0$ with $v\\cong Gu$. Then $c\\cong\\widehat G(i_Uu)$. Thus $\\widehat G$ is fully faithful on mapping spaces and essentially surjective. The spaces $\\widehat U,\\widehat V$ are complete, so [lem-coef-complete-segal-dk-levelwise] makes every $\\widehat G_n$ a weak equivalence. By [lem-coef-bisimplicial-diagonal-equivalence], $\\operatorname{diag}\\widehat G$ is a weak equivalence.",
+   "uses": [
+    "lem-coef-rezk-explicit-completion",
+    "lem-coef-complete-segal-dk-levelwise",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 14, completion assertions (1),(3), Section 5 (composition), and Proposition 7.6."
+   }
+  },
+  {
+   "text": "We next verify the diagonal of each completion unit directly; this is not a consequence of the definition of complete-Segal weak equivalence. Fix a Segal space $W$ and an integer $m\\geq0$. Let $c_m:W\\to W^{E(m)}$ be induced by $E(m)\\to F(0)$ and let $e_m:W^{E(m)}\\to W$ be evaluation at object $0$. Then $e_mc_m=1_W$. Define a functor $I[m]\\times[1]\\to I[m]$ on objects by $(a,0)\\mapsto0$ and $(a,1)\\mapsto a$; on arrows there is exactly one possible value, so it is a functor. Its nerve, regarded as discrete in the inner direction, is a map $E(m)\\times F(1)\\to E(m)$. Precomposition and evaluation in the cartesian internal hom give a map $W^{E(m)}\\times F(1)\\to W^{E(m)}$ with endpoints $c_me_m$ and $1$. Taking diagonals gives an actual simplicial homotopy with parameter $\\operatorname{diag}F(1)=\\Delta^1$. By [lem-coef-simplicial-realization-cylinder] it realizes to a continuous homotopy; [lem-coef-homotopy-groups-basepoint-change] then says that $\\operatorname{diag}c_m$ is a weak homotopy equivalence, with inverse up to homotopy $\\operatorname{diag}e_m$. The choice of object $0$ is only used to prove this for each $m$; it is not claimed natural in $m$. The maps $c_m$ themselves are natural in $m$ because collapse to the one-object groupoid is natural.",
+   "uses": [
+    "lem-coef-rezk-explicit-completion",
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-homotopy-groups-basepoint-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 14, displayed equivalence-groupoid resolution; explicit contraction argument refining the categorical-equivalence observation in Section 13.5."
+   }
+  },
+  {
+   "text": "Put $D_{m,n}=(W^{E(m)})_{n,n}$. This is a bisimplicial set: the second direction is the diagonal of the outer and inner directions of $W^{E(m)}$. The natural collapses of step 3 give a map from the constant diagram $m\\mapsto\\operatorname{diag}W$ to $D$. Each row map is $\\operatorname{diag}c_m$, a weak equivalence by step 3. Thus [lem-coef-bisimplicial-diagonal-equivalence] gives a weak equivalence from $\\operatorname{diag}W$ to $\\operatorname{diag}D$. In degree $n$, $D_{n,n}=(W^{E(n)})_{n,n}=\\widetilde W_{n,n}$, with the same three simultaneous operators, so $\\operatorname{diag}D=\\operatorname{diag}\\widetilde W$ and this map is the diagonal of the specified raw completion unit. The map $\\widetilde W\\to\\widehat W$ in [lem-coef-rezk-explicit-completion] is levelwise a weak equivalence, so the bisimplicial diagonal theorem applies to it as well. Composition shows that $\\operatorname{diag}i_W$ is a weak equivalence.",
+   "uses": [
+    "lem-coef-rezk-explicit-completion",
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 14, definition of the raw completion and Reedy replacement, with the bisimplicial diagonal theorem applied to the three indices."
+   }
+  },
+  {
+   "text": "Apply step 4 to $W=U,V$. In the commuting square of step 2, both vertical diagonals $\\operatorname{diag}i_U,\\operatorname{diag}i_V$ and the bottom diagonal $\\operatorname{diag}\\widehat G$ are weak equivalences. Two-out-of-three from [lem-coef-kan-quillen-right-proper] makes $\\operatorname{diag}G$ a weak equivalence. Apply the same argument to the Reedy replacement square of step 1 to obtain the required weak equivalence $\\operatorname{diag}F$.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 14 and 2.4; final naturality squares and two-out-of-three."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-reedy-model-structure",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-rezk-explicit-completion",
+  "lem-coef-complete-segal-dk-levelwise",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-homotopy-groups-basepoint-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Additional mapping-space foundation under proof paragraph 2: Rezk Sections 2,4-7,14 read online; explicit diagonal contraction and Reedy-replacement argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,20 +124,6 @@
    "tool": "leanfinder",
    "query": "Geometric realization of a fully faithful essentially surjective map of Segal spaces is a weak equivalence",
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.nerveFunctor.fullyfaithful\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.nerveFunctor.FullyFaithful\", \"doc\": \"The nerve functor from the category of small categories $\\\\mathsf{Cat}$ to the category of simplicial sets $\\\\mathsf{SSet}$ is fully faithful, meaning it induces a bijection between hom-sets $\\\\mathsf{Ca\"}\n  {\"name\": \"CategoryTheory.nerveFunctor.full\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.nerveFunctor.Full\", \"doc\": \"The nerve functor from the category of small categories to the category of simplicial sets is full. This means that for any two small categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, every simplicial map b\"}\n  {\"name\": \"SSet.Truncated.IsStrictSegal.segal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {n : ℕ} (X : SSet.Truncated (n + 1)) [self : X.IsStrictSegal] (m : ℕ)\\n  (h : autoParam (m ≤ n + 1) SSet.Truncated.IsStrictSegal._auto_1), Function.Bijective (X.spine m h)\", \"doc\": \"For any natural number $n$ and any $(n+1)$-truncated simplicial set $X$ satisfying the strict Segal condition, the spine map $X.\\\\text{spine}(m)$ is bijective for all $m \\\\leq n+1$. This ensures compati\"}\n  {\"name\": \"SSet.Truncated.cosk.fullyFaithful\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"(n : ℕ) → (SSet.Truncated.cosk n).FullyFaithful\", \"doc\": \"The coskeleton functor extending $ n $-truncated simplicial sets to full simplicial sets is fully faithful. This follows from the adjunction between the truncation functor and the coskeleton functor, \"}\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n  {\"name\": \"SSet.IsStrictSegal.segal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} [self : X.IsStrictSegal] (n : ℕ), Function.Bijective (X.spine n)\", \"doc\": \"For any simplicial set $ X $ satisfying the strict Segal condition, the spine function $ X.\\text{spine}(n) $ is bijective for every natural number $ n $.\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.ofIsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{n : ℕ} → (X : SSet.Truncated (n + 1)) → [X.IsStrictSegal] → X.StrictSegal\", \"doc\": \"For an $(n+1)$-truncated simplicial set $X$ satisfying the strict Segal condition, this constructs the strict Segal structure by defining a mapping from paths to simplices using the inverse of bijecti\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n",
-   "date": "2026-10-17",
-   "verdict": "No match: the returned StrictSegal declarations concern bijective spine maps of a single simplicial set (StrictSegal.lean:35-100), not simplicial spaces, homotopy Segal conditions or Dwyer--Kan equivalences. Ordinary nerve full faithfulness and Kan-extension hits do not assert diagonal homotopy invariance."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Segal\", \"WeakEquivalence\"",
-   "results": "[loogle] OK 0 hit(s)\n",
-   "date": "2026-10-17",
-   "verdict": "No match: the returned StrictSegal declarations concern bijective spine maps of a single simplicial set (StrictSegal.lean:35-100), not simplicial spaces, homotopy Segal conditions or Dwyer--Kan equivalences. Ordinary nerve full faithfulness and Kan-extension hits do not assert diagonal homotopy invariance."
-  },
-  {
-   "tool": "grep",
-   "query": "SegalSpace|completeSegal|DwyerKan|[Ss]egal.*diagonal",
-   "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-17",
    "verdict": "No match: the returned StrictSegal declarations concern bijective spine maps of a single simplicial set (StrictSegal.lean:35-100), not simplicial spaces, homotopy Segal conditions or Dwyer--Kan equivalences. Ordinary nerve full faithfulness and Kan-extension hits do not assert diagonal homotopy invariance."
   },
@@ -89,10 +154,45 @@
    "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ADEInequality.lean\", \"line\": \"27\", \"text\": \"in the classification of Dynkin diagrams, root systems, and semisimple Lie algebras.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomologicalBicomplex.lean\", \"line\": \"201\", \"text\": \"/-- Flipping a complex of complexes over the diagonal, as an equivalence of categories. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\", \"line\": \"22\", \"text\": \"* [Charles Rezk, *Introduction to Quasi-categories*, Proposition 21.5][Rezk2022]\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Spectrum.lean\", \"line\": \"30\", \"text\": \"* The definition `LinearMap.IsSymmetric.diagonalization` provides a linear isometry equivalence `E`\"}\n",
    "date": "2026-10-17",
    "verdict": "No match: read the returned declarations and source excerpts. StrictSegal/StrictSegalCore require a bijective spine for a single simplicial set; ordinary nerve adjunctions and the Kan-to-quasicategory instance do not state this bisimplicial homotopy theorem. Other grep hits concern monoidal functor cores, horn pairing cores or unrelated classification problems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dwyer Kan equivalence of homotopy Segal spaces induces a weak equivalence on diagonals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Truncated.StrictSegal.spineEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{n : ℕ} →\\n  {X : SSet.Truncated (n + 1)} →\\n    X.StrictSegal →\\n      (m : ℕ) →\\n        (h : autoParam (m ≤ n + 1) _auto_36✝) →\\n          X.obj (Opposite.op { obj := SimplexCategory.mk m, property := h }) ≃ X.Path m\", \"doc\": \"For each natural number $ m \\\\leq n+1 $ and $(n+1)$-truncated simplicial set $ X $, this defines an equivalence between the $ m $-dimensional spine inclusion $ X.\\\\text{spine}_m $ and the path space $ \\\\\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"SSet.StrictSegal.ofIsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"(X : SSet) → [X.IsStrictSegal] → X.StrictSegal\", \"doc\": \"Given a simplicial set $ X $ satisfying the strict Segal condition (i.e., the spine function $ X.\\\\text{spine}(n) $ is bijective for all $ n $), this constructs a strict Segal space structure on $ X $ \"}\n  {\"name\": \"SSet.Truncated.StrictSegal.ofIsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{n : ℕ} → (X : SSet.Truncated (n + 1)) → [X.IsStrictSegal] → X.StrictSegal\", \"doc\": \"For an $(n+1)$-truncated simplicial set $X$ satisfying the strict Segal condition, this constructs the strict Segal structure by defining a mapping from paths to simplices using the inverse of bijecti\"}\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n  {\"name\": \"SSet.StrictSegal.isCoskeletal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), CategoryTheory.SimplicialObject.IsCoskeletal X 2\", \"doc\": \"Any strict Segal space $X$ is a 2-coskeletal simplicial set, meaning all simplices of dimension greater than 2 are uniquely determined by their boundary maps.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: no homotopy Segal-space diagonal criterion. The hits give ordinary strict Segal simplicial sets, nerve adjunctions or the existence of geometric realization as a Kan extension, without the stated homotopy-invariance theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful essentially surjective simplicial space map preserves geometric realization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.toTop\", \"module\": \"Mathlib/AlgebraicTopology/SingularSet\", \"type\": \"CategoryTheory.Functor SSet TopCat\", \"doc\": \"The functor from the category of simplicial sets to the category of topological spaces, defined as the left Kan extension of the standard simplex functor (which maps finite ordinals to standard topolo\"}\n  {\"name\": \"SSet.Truncated.sk.fullyFaithful\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"(n : ℕ) → (SSet.Truncated.sk n).FullyFaithful\", \"doc\": \"The skeleton functor from the category of n-truncated simplicial sets to the category of full simplicial sets is fully faithful, as established by the isomorphism of the unit in the skeleton-truncatio\"}\n  {\"name\": \"DeltaGenerated.fullyFaithfulDeltaGeneratedToTop\", \"module\": \"Mathlib/Topology/Category/DeltaGenerated\", \"type\": \"DeltaGenerated.deltaGeneratedToTop.FullyFaithful\", \"doc\": \"The forgetful functor from the category of delta-generated topological spaces to the category of topological spaces is fully faithful, meaning it induces a bijection between hom-sets of delta-generate\"}\n  {\"name\": \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SingularSet\", \"type\": \"SSet.toTop.IsLeftKanExtension SSet.toTopSimplex.inv\", \"doc\": \"The geometric realization functor from simplicial sets to topological spaces satisfies the left Kan extension property along the standard simplex cosimplicial object, verified via the inverse of the n\"}\n  {\"name\": \"SSet.N.mk_surjective\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplices\", \"type\": \"∀ {X : SSet} (x : X.N), ∃ n y, x = SSet.N.mk ↑y ⋯\", \"doc\": \"For any simplicial set $X$, every element of the type $X.N$ of non-degenerate simplices is the image of some non-degenerate $n$-simplex $y$ under the canonical constructor $\\\\mathrm{N.mk}$. Specificall\"}\n  {\"name\": \"SSet.Truncated.cosk.fullyFaithful\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"(n : ℕ) → (SSet.Truncated.cosk n).FullyFaithful\", \"doc\": \"The coskeleton functor extending $ n $-truncated simplicial sets to full simplicial sets is fully faithful. This follows from the adjunction between the truncation functor and the coskeleton functor, \"}\n  {\"name\": \"TopCat.toSSet\", \"module\": \"Mathlib/AlgebraicTopology/SingularSet\", \"type\": \"CategoryTheory.Functor TopCat SSet\", \"doc\": \"The functor from the category of topological spaces to the category of simplicial sets, constructed by applying the restricted universe-lifted Yoneda embedding to the standard simplex functor. For eac\"}\n  {\"name\": \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Nerve.nerveFunctor₂.FullyFaithful\", \"doc\": \"The nerve functor from the category of small categories to 2-truncated simplicial sets is fully faithful, meaning it induces a bijection between functors $\\\\mathcal{C} \\\\to \\\\mathcal{D}$ and natural tran\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: no homotopy Segal-space diagonal criterion. The hits give ordinary strict Segal simplicial sets, nerve adjunctions or the existence of geometric realization as a Kan extension, without the stated homotopy-invariance theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\", \"WeakEquivalence\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: no homotopy Segal-space diagonal criterion. The hits give ordinary strict Segal simplicial sets, nerve adjunctions or the existence of geometric realization as a Kan extension, without the stated homotopy-invariance theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "SegalSpace|completeSegal|DwyerKan|[Ss]egal.*diagonal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: no homotopy Segal-space diagonal criterion. The hits give ordinary strict Segal simplicial sets, nerve adjunctions or the existence of geometric realization as a Kan extension, without the stated homotopy-invariance theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dwyer Kan equivalence of simplicial spaces preserves classifying spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.hasPointwiseLeftKanExtensionAt_iff_of_equivalence\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Pointwise\", \"type\": \"(E : D ≌ D') (eL : L ⋙ E.functor ≅ L') (Y : D) (Y' : D') (e : E.functor.obj Y ≅ Y') :\\n  HasPointwiseLeftKanExtensionAt L F Y ↔ HasPointwiseLeftKanExtensionAt L' F Y'\", \"doc\": \"Given categories $\\\\mathcal{D}$ and $\\\\mathcal{D}'$ connected by an equivalence $E : \\\\mathcal{D} \\\\simeq \\\\mathcal{D}'$, functors $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $L' : \\\\mathcal{C} \\\\to \\\\mathcal{D}'$,\"}\n  {\"name\": \"SSet.toTop\", \"module\": \"Mathlib.AlgebraicTopology.SingularSet\", \"type\": \": SSet.{u} ⥤ TopCat.{u}\", \"doc\": \"The functor from the category of simplicial sets to the category of topological spaces, defined as the left Kan extension of the standard simplex functor (which maps finite ordinals to standard topolo\"}\n  {\"name\": \"CategoryTheory.IsSifted.isSifted_of_equiv\", \"module\": \"Mathlib.CategoryTheory.Limits.Sifted\", \"type\": \"[IsSifted C] {D : Type u₁} [Category.{v₁} D] (e : D ≌ C) : IsSifted D\", \"doc\": \"If categories $C$ and $D$ are equivalent and $C$ is sifted (i.e., filtered colimits commute with finite limits in the category of sets), then $D$ is also sifted.\"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.ε\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.EquivalencePseudoabelian\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.IsIdempotentComplete C] →\\n        [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C] →\\n          CategoryTheory.Functor.id (CategoryTheory.SimplicialObj\", \"doc\": \"A natural isomorphism between the identity functor on the category of simplicial objects in a preadditive, idempotent-complete category $\\\\mathcal{C}$ with finite coproducts and the composition of the \"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.N_map\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.EquivalencePseudoabelian\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.IsIdempotentComplete C] [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C]\\n  {X Y : CategoryTheory.SimplicialObject C} (f : X ⟶ Y),\\n  CategoryTheory.Idempotents.DoldK\", \"doc\": \"The functor $ N $ maps a simplicial object $ X $ in a preadditive, idempotent complete category $ \\\\mathcal{C} $ with finite coproducts to the normalized chain complex over $ \\\\mathcal{C} $ indexed by $\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.HomotopyEquivalence\", \"type\": \"∀ {A : Type u_2} [inst : CategoryTheory.Category.{v_2, u_2} A] [inst_1 : CategoryTheory.Abelian A]\\n  {Y : CategoryTheory.SimplicialObject A},\\n  AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex.hom =\\n    AlgebraicTopology.inclusionOfMooreComplexMap Y\", \"doc\": \"For any simplicial object $ Y $ in an abelian category $ \\\\mathcal{A} $, the hom component of the homotopy equivalence between the normalized Moore complex $ N[Y] $ and the alternating face map complex\"}\n  {\"name\": \"CategoryTheory.cosimplicialSimplicialEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \": (CosimplicialObject C)ᵒᵖ ≌ SimplicialObject Cᵒᵖ\", \"doc\": \"There is a natural equivalence between the opposite category of cosimplicial objects in a category $\\\\mathcal{C}$ and the category of simplicial objects in the opposite category $\\\\mathcal{C}^\\\\text{op}$\"}\n  {\"name\": \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SingularSet\", \"type\": \": SSet.toTop.{u}.IsLeftKanExtension SSet.toTopSimplex.inv\", \"doc\": \"The geometric realization functor from simplicial sets to topological spaces satisfies the left Kan extension property along the standard simplex cosimplicial object, verified via the inverse of the n\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: no homotopy Segal-space diagonal criterion. The hits give ordinary strict Segal simplicial sets, nerve adjunctions or the existence of geometric realization as a Kan extension, without the stated homotopy-invariance theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-diagonal-coherent-nerve-comparison",
@@ -100,5 +200,21 @@
   "group": "N8"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-segal-dk-diagonal-equivalence",
+  "worker": "stage1",
+  "summary": "Preserved the levelwise Kan homotopy-Segal statement, proved reduction by Reedy replacement fixing degree zero, and proved diagonal invariance of the explicit Rezk completion by contracting each equivalence-groupoid exponent and applying the existing bisimplicial diagonal theorem. Added only the genuine Rezk completion theorem and the complete-Segal levelwise criterion as statement-only nodes; audited every citation and both sources. No Lean declaration matching the item or the new results was found.",
+  "blueprint": "Proof paragraph 2, displayed derived coefficient adjunction: mapping-space foundation via the cosimplicial-frame and cofibrant-inversion chain; diagonal/coherent comparison. Additional Rezk Segal-space infrastructure for the diagonal criterion, not a literal claim of the ancestor paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-c7116f724",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-c7116f724 (reviewer sub-agent of L); spot-checked: The mathematics is correct and was read in full; the only change is a citation repair to the item's source.place. Rezk is not in literature/, so I fetched the recorded PDF read-only to /tmp and ran pdftotext on it. Sources: Rezk §14 (pp.32-34) defines W~_n=diag([m]->(W^{E(m)})_n) with E(m)=discnerve I[m], and W^ as its functorial Reedy fibrant replacement; this matches W~_{n,q}=(W^{E(q)})_{n,q} in lem-coef-rezk-explicit-completion. Rezk's assertion (1) (W^ is a complete Segal space) and assertion (3) (mapping-space equivalences, pi0 surjective) match that node's clauses. Rezk Prop 7.6 with 7.4 matches lem-coef-complete-segal-dk-levelwise: given fully faithful mapping spaces, essential surjectivity is equivalent to Ho f being an equivalence, and completeness and Reedy fibrancy are both kept. Steps: (1) the Reedy node's prescribed degree-zero clause keeps (RX)_0=X_0; Reedy fibrancy makes the degree-1 endpoint map a fibration; the Kan and pullback-invariance nodes give the Segal and mapping comparisons; the bisimplicial node gives diag r_X. (2) The conjugation extension to all completed objects is written out, then 7.6 gives a levelwise equivalence and the bisimplicial node a diagonal one. (3) I checked the homotopy independently: the functor I[m]x[1]->I[m] exists because I[m] is indiscrete, its two ends are c_m e_m and 1, diag F(1)=Delta^1, and the cylinder and basepoint-change nodes say exactly what is used. (4) diag D=diag W~ with the same simultaneous operators, and the rows are diag c_m. (5) Two-out-of-three, elementary. Small cases: empty U_0, point->discnerve I[1] (shows why 7.6 needs completeness), m=0, and a one-object groupoid (Remark 14.1). No duplicate across the whole DAG: I read complete-segal-quasicategory-comparison, segal-presheaf-localization and the algebroid nodes. There is no blueprint same_as hit in main-20261015 or master. No cycle: none of the 8 proof_deps or 2 stmt_deps reaches the item. All cited statements are in unit sk-prop-sf-biduality-general, tool_uses is empty, and no SGA source is cited. B1-B9 hold for both new nodes. FIX: source.place of the item now names Rezk Sections 4-6, Prop 7.6, Thm 7.7 and Section 14 instead of the unused Section 12 localization route. No other field changed and no node is dropped.; 1 file(s) fixed by the reviewer"
+ }
 }
