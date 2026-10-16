@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, derived coefficient adjunction and the displayed derived inverse-limit calculation: foundational input through cosimplicial frames; The Serre fibre homotopy sequence including components.",
+   "place": "Proof paragraph 2, derived coefficient adjunction and the displayed derived inverse-limit calculation: the Serre fibre homotopy sequence, including its higher exactness and component action.",
    "via": [
     "lem-coef-kan-quillen-right-proper",
     "lem-coef-cosimplicial-frame-mapping",
@@ -19,7 +19,7 @@
  },
  "kind": "statement",
  "title": "The Serre fibre homotopy sequence including components",
- "statement": "Let $p:E\\to B$ be a continuous map of k-spaces [lem-coef-realization-finite-limits] with the right lifting property against $D^m\\times\\{0\\}\\hookrightarrow D^m\\times[0,1]$ for every $m\\geq0$ (a Serre fibration). For any $e\\in E$, put $b=p(e)$ and $F=p^{-1}(b)$, with the k-space fibre topology. There are natural connecting maps and an exact sequence $\\cdots\\to\\pi_{n+1}(B,b)\\to\\pi_n(F,e)\\to\\pi_n(E,e)\\to\\pi_n(B,b)\\to\\cdots\\to\\pi_1(B,b)\\to\\pi_0(F)\\to\\pi_0(E)\\to\\pi_0(B)$, with group exactness where groups occur and pointed-set exactness at the remaining terms. Homotopy groups and components have the continuous cubical definition of [def-cbc-enhanced-diagrams-cones]. Paths in $B$ lift after specifying their initial point in $E$, inducing bijections of fibre-component sets along paths. The loop action of $\\pi_1(B,b)$ on $\\pi_0(F)$ has orbit set canonically equal to the set of components of $E$ whose image is the component of $b$; the stabilizer of the component containing $e$ is the image of $\\pi_1(E,e)\\to\\pi_1(B,b)$. A commutative map of Serre fibrations induces compatible maps of these sequences, actions and path-transport bijections. No connectedness of $B$ or nonemptiness of fibres outside the image components is assumed.",
+ "statement": "Let $p:E\\to B$ be a continuous map of k-spaces [lem-coef-realization-finite-limits] with the right lifting property against $D^m\\times\\{0\\}\\hookrightarrow D^m\\times[0,1]$ for every $m\\geq0$, where $D^m=\\{x\\in\\mathbb R^m:\\|x\\|_2\\leq1\\}$ (and $D^0$ is a point); such a map is called a Serre fibration. For any $e\\in E$, put $b=p(e)$ and $F=p^{-1}(b)$, with the k-space fibre topology. There are natural connecting maps and an exact sequence $\\cdots\\to\\pi_{n+1}(B,b)\\to\\pi_n(F,e)\\to\\pi_n(E,e)\\to\\pi_n(B,b)\\to\\cdots\\to\\pi_1(B,b)\\to\\pi_0(F)\\to\\pi_0(E)\\to\\pi_0(B)$, with group exactness where groups occur and pointed-set exactness at the remaining terms. Homotopy groups and components have the continuous cubical definition of [def-cbc-enhanced-diagrams-cones]. Paths in $B$ lift after specifying their initial point in $E$, inducing bijections of fibre-component sets along paths. The loop action of $\\pi_1(B,b)$ on $\\pi_0(F)$ has orbit set canonically equal to the set of components of $E$ whose image is the component of $b$; the stabilizer of the component containing $e$ is the image of $\\pi_1(E,e)\\to\\pi_1(B,b)$. A commutative map of Serre fibrations induces compatible maps of these sequences, actions and path-transport bijections. No connectedness of $B$ or nonemptiness of fibres outside the image components is assumed.",
  "source": {
   "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
   "place": "Lemma 2.4.16 (statement of the natural long exact sequence; proof referred to Spanier Theorem 7.2.10); Proposition 2.4.18 and its proof for the path-lifting and component argument. The explicit monodromy orbit/stabilizer formulation is the agent-stated low-degree expansion of that sequence. No Stacks tag for this Serre homotopy sequence."
@@ -28,60 +28,213 @@
   "lem-coef-realization-finite-limits",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $I=[0,1]$ and use $J_r\\subset I^r\\times I$ from [lem-coef-cubical-open-box-pair]. The disk-cylinder lifting hypothesis also gives lifting against $I^r\\times\\{0\\}\\subset I^r\\times I$: the change from the centered cube $[-1,1]^r$ to $D^r$ is the radial homeomorphism $x\\mapsto(\\|x\\|_\\infty/\\|x\\|_2)x$ for $x\\ne0$, with $0\\mapsto0$, inverse $y\\mapsto(\\|y\\|_2/\\|y\\|_\\infty)y$, followed by the affine change of cube coordinates; for $r=0$ both domains are a point. The cited pair homeomorphism then gives lifting against $J_r\\subset I^r\\times I$ by precomposing the square with it, taking a disk-cylinder lift, and composing back. This prescribes the entire bottom and all side faces, not a chosen natural lifting operation.",
+   "uses": [
+    "lem-coef-cubical-open-box-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey, Lemma 2.4.13, proof, printed p. 55, the box-flattening pair homeomorphism; the radial disk/cube conversion is written explicitly here."
+   }
+  },
+  {
+   "text": "We will use the following finite relative lifting consequence of Step 1. Let $A$ be a union of closed faces of $X=I^r$, including their subfaces, and suppose $H:X\\times I\\to B$ has a lift prescribed on $(X\\times\\{0\\})\\cup(A\\times I)$. Starting with $A$, adjoin the remaining faces in increasing dimension, ending with the interior $r$-cell; on a $k$-face its already prescribed part is exactly $J_k$, so Step 1 extends the lift over that face times $I$. The extensions agree on overlaps and the finite closed-cover pasting lemma gives a continuous lift on $X\\times I$. Empty $A$, $A=X$ and $r=0$ are included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "By [lem-coef-realization-finite-limits], limits in $\\mathcal K$ are obtained by applying the k-space topology to topological limits. Thus $F$ is the k-ification of the ordinary topological fibre $F_{\\mathrm{top}}=E\\times_B\\{b\\}$, whose underlying set is $p^{-1}(b)$. All parameters used below are finite cubes or closed faces and their finite products. Such a parameter is a cube (or the empty set). A finite cube is Hausdorff by separating two differing coordinates. To see compactness directly, an open cover without a finite subcover would, by repeated coordinate bisection, give nested closed subcubes without finite subcovers and with side lengths tending to zero. Their coordinate intervals have a common limit point, and an open member of the cover containing that point contains a sufficiently small subcube, a contradiction. The zero-dimensional cube is a point. Thus every parameter is compact Hausdorff. If $C$ is such a parameter and $a:C\\to F_{\\mathrm{top}}$ is continuous, the compact-test definition of k-topology in that same cited statement says that $a^{-1}(U)$ is open for every k-open $U$; therefore $a:C\\to F$ is continuous. Conversely the identity $F\\to F_{\\mathrm{top}}$ is continuous, since every originally open subset passes the compact tests. Hence the endpoint maps and homotopies below are continuous into the precise k-space fibre of the statement. We use the boundary-fixed cubical maps, homotopies relative to the boundary and first-coordinate concatenation of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "For $n\\geq1$ write a based $n$-cube in $B$ as $\\alpha(u,t)$ with $u\\in I^{n-1}$ and $t\\in I$, and with $\\alpha=b$ on its whole boundary. Step 2, with time $t$ and $A=\\partial I^{n-1}$, gives a lift $a$ with $a(u,0)=e$ and $a(u,t)=e$ on $\\partial I^{n-1}\\times I$. Its terminal face $f(u)=a(u,1)$ lies in $F$ and has boundary $e$. Define $\\delta_n[\\alpha]=[f]$ for $n\\geq2$, and define $\\delta_1[\\alpha]$ to be the path component of $a(1)$ in $F$; when $n=1$ there is no $u$ coordinate.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "Two lifts $a_0,a_1$ of the same $\\alpha$ used in Step 4 have homotopic terminal faces in $F$: apply Step 2 with parameter cube $(u,s)\\in I^{n-1}\\times I$, time $t$, base map $\\alpha(u,t)$ independent of $s$, and prescribed lifts $a_0,a_1$ on $s=0,1$, constant $e$ on the $u$-boundary and on $t=0$. These prescriptions agree on intersections. The resulting terminal face at $t=1$ is a homotopy relative to the $u$-boundary between $a_0(u,1)$ and $a_1(u,1)$; for $n=1$ it is a path in $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "If $\\alpha_0$ and $\\alpha_1$ are homotopic relative to their entire boundary, write the homotopy as $H(u,t,s)$. Apply Step 2 in time $t$ with parameter cube $(u,s)$, prescribing a chosen lift $a_0$ at $s=0$, the constant $e$ on the $u$-boundary, and $e$ at $t=0$. Since $H(u,1,s)=b$, the lifted terminal face is a based homotopy in $F$ from $a_0(u,1)$ to the terminal face of a lift of $\\alpha_1$. Step 5 compares the latter with any other lift. This proves that every $\\delta_n$ is well-defined, and that the constant cube maps to the base element.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "For $n\\geq2$, concatenate representatives $\\alpha$ and $\\beta$ in the first $u$ coordinate, as in the definition of their product. Their lifts $a$ and $c$ concatenate continuously along the same coordinate because both equal $e$ at that seam; the concatenation has the prescribed bottom and sides and lifts the product cube. Its terminal face is the first-coordinate concatenation of the two terminal faces. Hence $\\delta_n([\\alpha][\\beta])=\\delta_n[\\alpha]\\,\\delta_n[\\beta]$, with the same multiplication convention in $\\pi_{n-1}(F,e)$. The maps $i_*$ and $p_*$ are homomorphisms because postcomposition commutes with this concatenation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "Exactness at $\\pi_n(E,e)$, $n\\geq1$: $p_*i_*$ is zero because $p$ is constant on $F$. Conversely, if a based cube $h:I^n\\to E$ has $p h$ based-nullhomotopic, choose a homotopy $H(v,s)$ from $p h$ to $b$, constant on $\\partial I^n$. Lift it by Step 2 with initial lift $h$ and prescribed constant lift $e$ on $\\partial I^n\\times I$. Its terminal map lies in $F$ and its lift is a based homotopy in $E$ from $h$ to that terminal map. Thus $\\ker p_*=\\operatorname{im} i_*$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "Exactness at $\\pi_n(B,b)$, $n\\geq1$: a representative $p h$ of an image class has lift $h$ with terminal face constant $e$, so $\\delta_n p_*[h]$ is the base element. Conversely, suppose $\\delta_n[\\alpha]$ is the base element, and use its lift $a$ from Step 4. For $n\\geq2$ take a based homotopy $k(u,s)$ in $F$ from $a(u,1)$ to $e$; for $n=1$ take a path in $F$ from the endpoint of $a$ to $e$. Concatenating $a$ and $k$ in the $t$ coordinate gives a based $n$-cube $h$ in $E$ whose projection is $\\alpha$ followed by a constant segment; the formula $\\alpha(u,(1-s)\\min(2t,1)+st)$, $0\\leq s\\leq1$, is a boundary-fixed homotopy from this projection to $\\alpha$. Therefore $p_*[h]=[\\alpha]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "Exactness at $\\pi_n(F,e)$, $n\\geq1$: the lift $a(u,t)$ defining $\\delta_{n+1}[\\alpha]$ is itself a based homotopy in $E$ from the constant $n$-cube to its terminal face, so $i_*\\delta_{n+1}=0$. Conversely, if $f:I^n\\to F$ is based-nullhomotopic in $E$, choose a based homotopy $a(u,t)$ in $E$ from $e$ to $f$. Then $\\alpha=p a$ is a based $(n+1)$-cube in $B$ and $a$ is an allowed lift, so $\\delta_{n+1}[\\alpha]=[f]$. In particular this proves the term $\\pi_2(B,b)\\to\\pi_1(F,e)\\to\\pi_1(E,e)$ that is not covered by exactness solely at $\\pi_n(E)$ and $\\pi_n(B)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "Path lifting is the original hypothesis with $m=0$. For a path $\\beta:b_0\\leadsto b_1$, two lifts with the same initial point have endpoints in the same fibre component: Step 2 with parameter $s\\in I$, time $t$, base $\\beta(t)$, prescribed two lifts at $s=0,1$ and the fixed initial point at $t=0$ gives a terminal path in the fibre over $b_1$. If the initial points are joined by a path $\\lambda(s)$ in the fibre over $b_0$, lift the base homotopy $\\beta(t)$ with initial lift $\\lambda(s)$; its terminal path, together with the preceding independence of lifts, shows that the endpoint component depends only on the initial component. Denote the resulting map by $T_\\beta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "For a homotopy $H(t,s)$ between paths $\\beta_0,\\beta_1$ relative to their endpoints, Step 2 in time $t$ with parameter $s$, constant initial lift $x$, and prescribed chosen lift of $\\beta_0$ at $s=0$, gives a terminal path in the fibre. Hence $T_{\\beta_0}=T_{\\beta_1}$. Concatenating actual lifts gives $T_{\\beta*\\gamma}=T_\\gamma\\circ T_\\beta$; constant lifts give $T_{\\mathrm{const}}=1$, and the retracing homotopy $R(t,s)=\\beta((1-s)\\min(2t,2-2t))$ contracts $\\beta*\\bar\\beta$ relative to its endpoints. The formula $\\bar R(t,s)=\\beta(1-(1-s)\\min(2t,2-2t))$ contracts $\\bar\\beta*\\beta$ relative to its endpoints. These two contractions prove both inverse equations, so $T_{\\bar\\beta}=T_\\beta^{-1}$. Thus transport is a bijection and loops define a right action $[x]\\cdot[\\beta]=T_\\beta[x]$ of $\\pi_1(B,b)$ on $\\pi_0(F)$, with $\\delta_1[\\beta]=T_\\beta[e]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "Exactness at $\\pi_0(F)$: a component in the image of $\\delta_1$ is joined to $e$ in $E$ by the chosen loop lift. Conversely, if $x\\in F$ is in the component of $e$ in $E$, a path $a:e\\leadsto x$ projects to a loop $\\beta$ at $b$, and $a$ itself is a lift proving $\\delta_1[\\beta]=[x]$. Exactness at $\\pi_0(E)$: a point of $F$ projects to $b$; if $p(x)$ is in the component of $b$, lift a path from $p(x)$ to $b$ starting at $x$ to join $x$ to a point of $F$. These are the required pointed-set kernel/image equalities; the sequence has no terminal surjectivity assertion at $\\pi_0(B)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "The map $\\pi_0(F)\\to\\pi_0(E)$ is constant on loop-action orbits because any loop lift is a total-space path joining its initial and terminal points. If $x,y\\in F$ lie in the same component of $E$, choose a path $a:x\\leadsto y$; its projection is a loop $\\beta$ and its terminal point proves $T_\\beta[x]=[y]$, so the two components of $F$ lie in the same orbit. Step 13 shows that every component of $E$ mapping to the component of $b$ meets $F$. This proves exactly the claimed canonical bijection from the orbit set onto those components.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "For the stabilizer, a loop in $E$ based at $e$ is a lift of its projected loop ending at $e$, so its image fixes $[e]$. Conversely, if $T_\\beta[e]=[e]$, choose a lift $a:e\\leadsto e_1$ of $\\beta$ and a fibre path $c:e_1\\leadsto e$; then $a*c$ is a based loop in $E$, and its projection is $\\beta$ followed by a constant path, representing $[\\beta]$. This proves $\\operatorname{Stab}([e])=\\operatorname{im}(\\pi_1(E,e)\\to\\pi_1(B,b))$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  },
+  {
+   "text": "Let a commutative map of fibrations be given by $f:E\\to E\\prime$ and $g:B\\to B\\prime$ with $p\\prime f=g p$, and use basepoint $f(e)$. Postcomposing any chosen cube lift $a$ with $f$ yields an allowed lift of $g\\alpha$; Step 5 therefore gives $f_*\\delta_n=\\delta_n\\prime g_*$ for every $n$, including the component-valued $n=1$ map. Postcomposing a path lift yields $f_*T_\\beta=T_{g\\beta}f_*$, which proves transport and action compatibility; postcomposition already commutes with the inclusion and projection maps. Steps 7–10 and 13 assemble the displayed sequence with group exactness at all group terms, and Steps 11–15 give its component clauses. Every argument was based at an actual $e$ or an explicitly specified path, so disconnected bases and empty fibres in unrelated components cause no restriction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent reconstruction of Hovey Lemma 2.4.16 from cubical definitions and Lemma 2.4.13; Hovey refers the sequence proof to Spanier Theorem 7.2.10."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cubical-open-box-pair",
+  "lem-coef-realization-finite-limits",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Explicit cubical reconstruction of Lemma 2.4.16 and its low-degree expansion, using the open-box pair in the proof of Lemma 2.4.13 (printed p. 55). Hovey leaves the sequence proof as an exercise and cites Spanier 7.2.10; no claim is made to have read Spanier. Proposition 2.4.18 (printed p. 57) is used only as a source check for the path-lifting observation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Serre fibration has a natural long exact sequence of homotopy groups including fundamental group action on components of the fiber",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsCoveringMap.monodromy\", \"module\": \"Mathlib/Topology/Homotopy/Lifting\", \"type\": \"{E : Type u_1} →\\n  {X : Type u_2} →\\n    [inst : TopologicalSpace E] →\\n      [inst_1 : TopologicalSpace X] →\\n        {p : E → X} → IsCoveringMap p → {x y : X} → Path.Homotopic.Quotient x y → ↑(p ⁻¹' {x}) → ↑(p ⁻¹' {y})\", \"doc\": \"Given a covering map $ p : E \\to X $ and a homotopy class $[\\\\gamma]$ of paths from $ x $ to $ y $ in $ X $, this function maps each point $ e $ in the fiber $ p^{-1}(\\\\{x\\\\}) $ to the endpoint of the uni\"}\n  {\"name\": \"IsCoveringMap.monodromyFunctor_obj\", \"module\": \"Mathlib/Topology/Homotopy/Lifting\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X] {p : E → X}\\n  (cov : IsCoveringMap p) (x : FundamentalGroupoid X), cov.monodromyFunctor.obj x = ↑(p ⁻¹' {x.as})\", \"doc\": \"For a covering map $ p : E \\\\to X $, the monodromy functor maps each point $ x \\\\in X $ (as an object in the fundamental groupoid of $ X $) to the fiber $ p^{-1}(\\\\{x\\\\}) $, which is the set of all points\"}\n  {\"name\": \"HomotopyGroup.Pi\", \"module\": \"Mathlib/Topology/Homotopy/HomotopyGroup\", \"type\": \"ℕ → (X : Type u_3) → [TopologicalSpace X] → X → Type u_3\", \"doc\": \"The $n$-th homotopy group of a topological space $X$ at a basepoint $x$, defined as the quotient of continuous maps from the $n$-dimensional cube $[0,1]^n$ to $X$ fixing the boundary at $x$, modulo ho\"}\n  {\"name\": \"IsCoveringMap.monodromyFunctor\", \"module\": \"Mathlib/Topology/Homotopy/Lifting\", \"type\": \"{E : Type u_1} →\\n  {X : Type u_2} →\\n    [inst : TopologicalSpace E] →\\n      [inst_1 : TopologicalSpace X] →\\n        {p : E → X} → IsCoveringMap p → CategoryTheory.Functor (FundamentalGroupoid X) (Type u_1)\", \"doc\": \"The functor from the fundamental groupoid of $X$ to the category of types, defined by mapping each point $x$ to the fiber $p^{-1}(\\\\{x\\\\})$ and each homotopy class of paths $[\\\\gamma]$ from $x$ to $y$ to\"}\n  {\"name\": \"HomotopicalAlgebra.Cylinder.IsVeryGood.fibration_π\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {A : C}\\n  {inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C} {P : HomotopicalAlgebra.Cylinder A}\\n  {inst_2 : CategoryTheory.Limits.HasBinaryCoproduct A A} {inst_3 : HomotopicalAlgebra.CategoryWithCofibrations C}\\n  {inst_4 : Homotopic\", \"doc\": \"In a homotopical category $\\\\mathcal{C}$ with weak equivalences, cofibrations, and fibrations, if a cylinder object $I(A)$ for an object $A \\\\in \\\\mathcal{C}$ satisfies the 'very good' condition (requiri\"}\n  {\"name\": \"IsCoveringMap.monodromyFunctor_map\", \"module\": \"Mathlib/Topology/Homotopy/Lifting\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X] {p : E → X}\\n  (cov : IsCoveringMap p) {X_1 Y : FundamentalGroupoid X} (γ : Path.Homotopic.Quotient X_1.as Y.as)\\n  (a : ↑(p ⁻¹' {X_1.as})), cov.monodromyFunctor.map γ a = cov.monodromy γ a\", \"doc\": \"For any covering map $ p : E \\to X $, the monodromy functor associated to $ p $ maps each homotopy class $[\\\\gamma]$ of paths from $ x $ to $ y $ in $ X $ to the function that sends each point $ e $ in \"}\n  {\"name\": \"HomotopyGroup.auxGroup\", \"module\": \"Mathlib/Topology/Homotopy/HomotopyGroup\", \"type\": \"{N : Type u_1} →\\n  {X : Type u_2} → [inst : TopologicalSpace X] → {x : X} → [DecidableEq N] → N → Group (HomotopyGroup N X x)\", \"doc\": \"The $N$-th homotopy group $\\\\pi_N(X, x)$ is the group formed by equivalence classes of continuous maps $p : [0,1]^N \\\\to X$ that fix the boundary of the $N$-dimensional cube at the basepoint $x$, modulo\"}\n  {\"name\": \"IsCoveringMap.monodromy_bijective\", \"module\": \"Mathlib/Topology/Homotopy/Lifting\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X] {p : E → X}\\n  (cov : IsCoveringMap p) {x y : X} (γ : Path.Homotopic.Quotient x y), Function.Bijective (cov.monodromy γ)\", \"doc\": \"For a covering map $ p : E \\to X $ and any homotopy class $[\\\\gamma]$ of paths from $ x $ to $ y $ in $ X $, the monodromy action $ p^{-1}(\\\\{x\\\\}) \\to p^{-1}(\\\\{y\\\\}) $ defined by lifting $[\\\\gamma]$ is a bi\"}\n",
-   "date": "2026-10-16",
-   "verdict": "no match: homotopy-group definitions, path functors and monodromy for covering maps do not give the Serre exact sequence or its general fibre-component action."
+   "query": "Natural long exact homotopy sequence of a Serre fibration with fibre components and monodromy",
+   "results": "HomotopicalAlgebra.Cylinder.IsVeryGood.fibration_π; HomologicalComplex.cylinder.πCompι₀Homotopy.inrX_nullHomotopy_f; HomologicalComplex.cylinder.πCompι₀Homotopy; instQFactorsThroughHomotopyIntUp; AlgebraicTopology.DoldKan.homotopyPInftyToId_hom; AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant; HomologicalComplex.cylinder.homotopy₀₁; HomologicalComplex.cylinder.πCompι₀Homotopy.nullHomotopicMap (none states a topological Serre sequence).",
+   "date": "2026-10-17",
+   "verdict": "no match: generic homotopy/model-category and chain-complex declarations only"
   },
   {
    "tool": "loogle",
-   "query": "\"Serre\", \"homotopyGroup\"",
-   "results": "[loogle] OK 0 hit(s)\n",
-   "date": "2026-10-16",
-   "verdict": "no match: homotopy-group definitions, path functors and monodromy for covering maps do not give the Serre exact sequence or its general fibre-component action."
+   "query": "HomotopyGroup, IsCoveringMap.monodromy",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "[Ll]ong[Ee]xact|[Ll]ong [Ee]xact|Serre|[Ff]ibration",
-   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/Topology/Homotopy/HSpaces.lean\", \"line\": \"15\", \"text\": \"This file defines H-spaces mainly following the approach proposed by Serre in his paper\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/HSpaces.lean\", \"line\": \"48\", \"text\": \"* [J.-P. Serre, *Homologie singulière des espaces fibrés. Applications*,\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/HSpaces.lean\", \"line\": \"49\", \"text\": \"  Ann. of Math (2) 1951, 54, 425–505][serre1951]\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/HSpaces.lean\", \"line\": \"149\", \"text\": \"/-- `qRight` is analogous to the function `Q` defined on p. 475 of [serre1951] that helps proving\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/HSpaces.lean\", \"line\": \"192\", \"text\": \"/-- This is the function analogous to the one on p. 475 of [serre1951], defining a homotopy from\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/Lifting.lean\", \"line\": \"297\", \"text\": \"  In other words, a covering map is a Hurewicz fibration.\"}\n",
-   "date": "2026-10-16",
-   "verdict": "no match: homotopy-group definitions, path functors and monodromy for covering maps do not give the Serre exact sequence or its general fibre-component action."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Natural homotopy exact sequence of a topological Serre fibration including components of its fiber",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopologicalSpace.Fiber.sigmaIncl\", \"module\": \"Mathlib.Topology.FiberPartition\", \"type\": \"(a : Fiber f) : C(a.val, S)\", \"doc\": \"For a fiber $ a $ of a function $ f : S \\to Y $, this is the continuous inclusion map from the fiber $ a $ (equipped with the subspace topology) into the topological space $ S $, defined by sending eac\"}\n  {\"name\": \"HomotopyGroup\", \"module\": \"Mathlib.Topology.Homotopy.HomotopyGroup\", \"type\": \"(N X : Type*) [TopologicalSpace X] (x : X) : Type _\", \"doc\": \"The $N$-th homotopy group of a topological space $X$ at a basepoint $x$ is defined as the quotient of the set of continuous maps $p : [0,1]^N \\to X$ (called generalized loops) that fix the boundary of \"}\n  {\"name\": \"HomotopyGroup.auxGroup\", \"module\": \"Mathlib.Topology.Homotopy.HomotopyGroup\", \"type\": \"(i : N) : Group (HomotopyGroup N X x)\", \"doc\": \"The $N$-th homotopy group $\\\\pi_N(X, x)$ is the group formed by equivalence classes of continuous maps $p : [0,1]^N \\\\to X$ that fix the boundary of the $N$-dimensional cube at the basepoint $x$, modulo\"}\n  {\"name\": \"HomotopyGroup.group\", \"module\": \"Mathlib.Topology.Homotopy.HomotopyGroup\", \"type\": \"(N) [DecidableEq N] [Nonempty N] : Group (HomotopyGroup N X x)\", \"doc\": \"For any topological space $X$ with basepoint $x$ and finite set $N$, the $N$-th homotopy group $\\\\pi_N(X, x)$ forms a group under the operation of concatenation (or its higher-dimensional analog), inhe\"}\n  {\"name\": \"HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": Fibration h.p\", \"doc\": \"The morphism $ h.p $ is a fibration in the category equipped with cofibrations and trivial fibrations.\"}\n  {\"name\": \"HomotopyGroup.Pi\", \"module\": \"Mathlib.Topology.Homotopy.HomotopyGroup\", \"type\": \"(n) (X : Type*) [TopologicalSpace X] (x : X)\", \"doc\": \"The $n$-th homotopy group of a topological space $X$ at a basepoint $x$, defined as the quotient of continuous maps from the $n$-dimensional cube $[0,1]^n$ to $X$ fixing the boundary at $x$, modulo ho\"}\n  {\"name\": \"TopologicalSpace.Fiber.sigmaIsoHom_surj\", \"module\": \"Mathlib.Topology.FiberPartition\", \"type\": \": Function.Surjective (sigmaIsoHom f)\", \"doc\": \"The projection map from the total space of the fiber bundle (disjoint union of fibers of a continuous function $ f : S → Y $) to the base space $ S $ is surjective, meaning every element of $ S $ has \"}\n  {\"name\": \"HomotopicalAlgebra.fibration_iff\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : C} (f : X ⟶ Y)\\n  [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C],\\n  HomotopicalAlgebra.Fibration f ↔ HomotopicalAlgebra.fibrations C f\", \"doc\": \"In a category with cofibrations, a morphism $ f $ is a fibration if and only if it satisfies the fibration predicate of the category.\"}\n",
-   "date": "2026-10-16",
-   "verdict": "no match: homotopy-group definitions, path functors and monodromy for covering maps do not give the Serre exact sequence or its general fibre-component action."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The fiber of a weak homotopy equivalence which is a Serre fibration is nonempty weakly contractible",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {A : C}\\n  [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C] (P : HomotopicalAlgebra.PathObject A)\\n  [inst_2 : CategoryTheory.Limits.HasBinaryProduct A A] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryThe\", \"doc\": \"In a category equipped with weak equivalences and fibrations, the first projection morphism $ P(X) \\to X $ from a path object $ P(X) $ to its underlying object $ X $ satisfies the fibration condition. \"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {A : C}\\n  {inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C} {P : HomotopicalAlgebra.PathObject A}\\n  {inst_2 : CategoryTheory.Limits.HasBinaryProduct A A} {inst_3 : HomotopicalAlgebra.CategoryWithFibrations C}\\n  [self : P.IsGood], Ho\", \"doc\": \"In a category equipped with weak equivalences and fibrations, if $ P $ is a good path object for an object $ A $ (meaning the evaluation maps from $ P $ to $ A $ are weak equivalences and $ P $ is a f\"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {A : C}\\n  [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C] (P : HomotopicalAlgebra.PathObject A)\\n  [inst_2 : CategoryTheory.Limits.HasBinaryProduct A A] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryThe\", \"doc\": \"In a category equipped with fibrations and weak equivalences, the first projection morphism from a path object $P(A)$ to the object $A$ is a fibration. This asserts that the canonical map $P(A) \\to A$ \"}\n  {\"name\": \"HomotopicalAlgebra.fibrantObjects\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [HomotopicalAlgebra.CategoryWithFibrations C] →\\n      [CategoryTheory.Limits.HasTerminal C] → CategoryTheory.ObjectProperty C\", \"doc\": \"The property of an object $X$ in a category with cofibrations where the unique morphism from $X$ to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {X Y : C}\\n  [HomotopicalAlgebra.IsCofibrant X] [HomotopicalAlgebra.IsCofibrant Y] [HomotopicalAlgebra.IsFibrant X]\\n  [HomotopicalAlgebra.IsFibrant Y] (f : X ⟶ Y) [HomotopicalAlgebra.WeakEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a model category, and let $X,Y \\\\in \\\\mathcal{C}$ be objects that are both cofibrant and fibrant. If $f : X \\\\to Y$ is a weak equivalence, then there exists a morphism $g : Y \\\\to X$ \"}\n  {\"name\": \"HomotopicalAlgebra.IsFibrant\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [HomotopicalAlgebra.CategoryWithFibrations C] → [CategoryTheory.Limits.HasTerminal C] → C → Prop\", \"doc\": \"An object $X$ in a category with cofibrations is fibrant if the unique morphism from $X$ to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.mem_fibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : C} (f : X ⟶ Y)\\n  [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C] [HomotopicalAlgebra.Fibration f],\\n  HomotopicalAlgebra.fibrations C f\", \"doc\": \"If a morphism $ f $ in a category with cofibrations is equipped with a fibration structure, then $ f $ is a fibration of the category.\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalenceR\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {X Y : C}\\n  (f : X ⟶ Y) (h : HomotopicalAlgebra.FibrantBrownFactorization f), HomotopicalAlgebra.WeakEquivalence h.r\", \"doc\": \"In a model category, for a morphism equipped with a fibrant Brown factorization, the retraction morphism from the intermediate fibrant object back to the domain is a weak equivalence. This asserts tha\"}\n",
-   "date": "2026-10-16",
-   "verdict": "no match: homotopy-group definitions, path functors and monodromy for covering maps do not give the Serre exact sequence or its general fibre-component action."
-  },
-  {
-   "tool": "grep",
-   "query": "[Mm]onodromy|[Ff]ibration.*[Ee]xact|[Hh]omotopy.*[Ee]xact",
-   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact\"}\n  {\"file\": \"Mathlib/Algebra/Torsor/Defs.lean\", \"line\": \"28\", \"text\": \"bases of that space, and the monodromy action of the fundamental group of a space on a fibre of its\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/Lifting.lean\", \"line\": \"138\", \"text\": \"/-- The abstract monodromy theorem: if `γ₀` and `γ₁` are two paths in a topological space `X`,\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/Lifting.lean\", \"line\": \"154\", \"text\": \"theorem monodromy_theorem {γ₀ γ₁ : C(I, X)} (γ : γ₀.HomotopyRel γ₁ {0,1}) (Γ : I → C(I, E))\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/Lifting.lean\", \"line\": \"317\", \"text\": \"    simp_rw [liftHomotopy_apply]; exact (cov.liftPath _ _ <| H_0 a).2\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/Lifting.lean\", \"line\": \"376\", \"text\": \"/-- The monodromy of a covering map `p : E → X`, which sends a lift of the starting point of a\"}\n  {\"file\": \"Mathlib/Topology/Homotopy/Lifting.lean\", \"line\": \"379\", \"text\": \"def monodromy {x y : X} (γ : Path.Homotopic.Quotient x y) :\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Topology/Homotopy/Lifting.lean, including the monodromy theorem at 154 and covering-map monodromy at 379. These concern path homotopies and coverings, and do not state the Serre-fibration homotopy exact sequence or its full component-action clauses."
+   "query": "HomotopyGroup|monodromy|long exact|Serre",
+   "results": "HSpaces.lean:15,48-49,149,192; HomotopyGroup.lean:29,440,443,452-453; Lifting.lean:138,154,376,379,387; no general Serre-fibration long exact sequence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-kan-quillen-right-proper",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-serre-homotopy-exact-sequence",
+  "worker": "stage1",
+  "summary": "Sixteen explicit cubical steps prove all group and component clauses from one geometric open-box input. Repair of return at ead7ea293e: reread the current realization-finite-limits statement, made its k-ified-limit rule and compact-test continuity argument explicit in step 3, and regenerated verbatim citations from the current DAG. Retained the self-contained disk definition and all exactness, action, stabilizer and naturality clauses. Second reading: expanded the compactness argument for the cubical parameters and independently reran Mathlib and duplicate searches. Maintainer reader fix: restored the definition of the term 'Serre fibration' (dropped with the explicit disk definition, yet still used in the naturality clause); no mathematical change.",
+  "blueprint": "Realizes the Serre fibre-sequence input along the inherited cosimplicial-frame chain serving paragraph 2 of prop-coef-integral-exceptional-adjoint's derived coefficient adjunction calculation; no new coefficient or purity route is used.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-1c1df9fd2",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-1c1df9fd2 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the source. Hovey §2.4, from the PDF at the URL in the node: the proof of Lemma 2.4.13 on p.55 does the flattening of the box (bottom plus sides onto the bottom), which is exactly the new node; Lemma 2.4.16 on pp.55-56 states the natural long exact sequence and leaves its proof as an exercise citing Spanier, so proof_origin=agent is correct; Prop 2.4.18 is used only as a check on path lifting. I checked all 16 steps against the statements they cite. Step 1: the cube-to-disk radial map and its inverse, with the case r=0. Step 2: the induction over faces always meets exactly J_k, and finite closed pasting works. Step 3: the k-fibre is the k-ification of the ordinary fibre and compact Hausdorff test maps stay continuous into it (from lem-coef-realization-finite-limits). Steps 4-10: the connecting maps are well defined, homomorphisms for n>=2 (first-coordinate convention of def-cbc-enhanced-diagrams-cones), and exact at E, B and F; I checked the reparametrization formula, and the pi_2(B)->pi_1(F) term is included. Steps 11-15: transport and right action (both retracing homotopies checked), pi_0 exactness, orbit and stabilizer. Step 16: naturality by postcomposing lifts. I checked all seven citer nodes; they use only clauses the statement contains. Small cases: the covering R->S^1, a product fibration, a point over a two-point discrete base, and empty E. New node lem-coef-cubical-open-box-pair: statement only and self-contained (subspace topology cited); true for n=0, n=1 and in general; strictly smaller than the item and not a restatement. It is not a duplicate: lem-coef-topological-serre-model writes the map only inside its step 6 proof, and the realization/simplex-horn pairs and the disk-lift node state other things. Its searches cover all three kinds. No route departure, tool_uses [] (I accepted none), no SGA, no cycle. FIX (B2): the delivery made D^m explicit but dropped the base's '(a Serre fibration)', while the naturality clause still says 'Serre fibrations'. I restored the definition ('; such a map is called a Serre fibration') in fixes/dag/nodes/sec-six-functors/lem-coef-serre-homotopy-exact-sequence.json and recorded the fix in split_report.summary. Minor, not repaired: the item's own searches include no LeanSearch, but Mathlib has no Serre-fibration notion, so this has no effect on the merge.; 1 file(s) fixed by the reviewer"
+ }
 }

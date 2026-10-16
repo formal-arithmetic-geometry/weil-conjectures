@@ -3,54 +3,221 @@
  "blueprint": {
   "is": "det-proper-heart-bound-rational",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The bound for constructible sheaves with rational coefficients",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$ and $p\\colon X\\to Y$ proper with geometric fibres of dimension $\\leq d$. Then\n$R^qp_*M=0$ for all $q>2d+1$ and all $M\\in\\Cons(X,\\Lambda)$.",
+ "statement": "Fix a prime $\\ell$, a field $k$ of positive characteristic different from $\\ell$, and a finite subextension $E\\subseteq\\Qlb$ of $\\mathbf Q_\\ell$. Let $X,Y$ be separated schemes of finite type over $k$, with all morphisms taken over $k$, as in [sk-def-sfb-dc-setting]. Let $\\Lambda=E$ or $\\Qlb$, interpreted as the condensed coefficient rings with pulled-back ring sheaves $\\Lambda_X$ and $\\Lambda_Y$ [def-sfb-subfield-coefficient-ring, sk-def-sfb-qlbar-condensed, sk-def-sfb-pulled-back-coefficients]. Let $p\\colon X\\to Y$ be proper and let $d\\in\\mathbf Z$ bound the dimensions of its geometric fibres. Then $R^qp_*M=0$ for all $q>2d+1$ and all $M\\in\\Cons(X,\\Lambda)$, where $Rp_*$ is the module-object derived pushforward [sk-def-sfb-module-derived-pushpull] and constructibility is [sk-def-sfb-constructible].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-rational.md",
   "place": "node det-proper-heart-bound-rational, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-subfield-coefficient-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "def-weil-proper-morphism",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
  "proof": [
   {
-   "text": "By [det-proper-heart-bound-reduction] it suffices to prove the vanishing for $a_!L_0$ and to show that it\npasses to $(a_!L_0)[1/\\ell]$ and, for $\\Qlb$, to the scalar extension. All three are checked on sections\nover affine weakly contractible $V\\to Y$, using $(R^qp_*N)(V)=H^q(X_V,N|_{X_V})$ from the proof of\n[sk-cor-pe-bounded-continuity], and the fact that such $V$ form a basis.",
+   "text": "Work throughout over the field $k$ and with the separated finite-type schemes in the statement. First handle $d<0$. By [def-kun-topological-krull-dimension], every geometric fibre must then be empty. For each $y\\in Y$, the map $\\operatorname{Spec}\\overline{\\kappa(y)}\\to\\operatorname{Spec}\\kappa(y)$ is surjective by [lem-pc-field-extension-surjective], so its base change $X_{\\bar y}\\to X_y$ is surjective by [lem-weil-pbc-surjective-base-change]. Hence $X_y$ is empty. A point $x\\in X$ would induce a point in $X_{p(x)}$ through $\\operatorname{Spec}\\kappa(x)$, contradicting this; thus $X$ is empty. Every abelian or module sheaf on the empty scheme is zero, since the empty family covers its only object and the sheaf condition makes its section group zero. Its pushforward and higher direct images are zero, proving the assertion in this case. We may now assume $d\\geq0$. Put $c=2d+1$. In the $\\Lambda=\\Qlb$ case take the auxiliary base field $E=\\mathbf Q_\\ell$; the coefficient extensions below then run through all finite subextensions of $\\Qlb$. By [det-proper-heart-bound-reduction], it suffices to establish the bound for $P=a_!L_0$, for every locally closed $a\\colon S\\hookrightarrow X$ and lisse finite free $\\mathcal O_{E',S}$-lattice $L_0$, where $E'$ runs over the finite coefficient extensions, and then for $P[1/\\ell]$ and its scalar extension to $\\Qlb$. In the following computations write $K=E'$; all assertions used hold for every such finite extension, so this renaming does not fix or restrict the lattice's coefficient field.",
    "uses": [
-    "det-proper-heart-bound-reduction"
+    "det-proper-heart-bound-reduction",
+    "def-kun-topological-krull-dimension",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-rational.md",
+    "place": "Proof, opening reduction paragraph"
+   }
   },
   {
-   "text": "*Lattice.* $H^q(X_V,a_!L_0)=0$ for $q>2d+1$ by [det-proper-heart-bound-lattice].",
+   "text": "Here is the section formula needed for the lattice estimate, with module coefficients retained. For any commutative condensed coefficient ring $R$ used below, the module objects $\\Mod_{R_X}$ [sk-def-sfb-module-objects], in which [sk-def-sfb-module-derived-pushpull] derives the pushforward, are identified by [def-weil-pbc-internal-abelian-sheaf-module-equivalence] with sectionwise sheaves of modules over the corresponding ring sheaf on the small pro-étale site, without changing underlying abelian sheaves, sections or restriction maps; under this equivalence injective objects, resolutions, colimits and direct sums correspond, so the results below stated for sheaves of modules over a ring sheaf apply to module objects. The categories of $R_X$-modules, $R_Y$-modules, and underlying abelian sheaves are Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian], applied on small pro-étale sites (and with the integer ring sheaf for abelian sheaves). They have enough injectives by [lem-sp-grothendieck-enough-injectives]. For any sheaf $N$ of $R_X$-modules, embed $N$ into an injective, then embed each successive cokernel into an injective, obtaining an injective resolution $N\\to I^\\bullet$ concentrated in nonnegative degrees. Its bounded-below injective complex is K-injective by clause (2) of [lem-sp-kinjective-computes]. By [sk-def-sfb-module-derived-pushpull], $Rp_*N$ is represented by $p_*I^\\bullet$; its underlying section complex at $V$ is $I^\\bullet(X_V)$ by [sk-def-sfb-module-pushforward-pullback] and [def-sfb-finite-lower-star]. For affine weakly contractible $V\\to Y$, exactness of evaluation [det-pe-wc-sections-exact] and exact module forgetting [lem-weil-pbc-module-sheaves-colimits-forgetful] therefore give $(R^qp_*N)(V)=H^q(I^\\bullet(X_V))$. Each underlying abelian $I^j$ is acyclic for sections at $X_V$ by [lem-sc-injective-module-abelian-acyclic-zariski]; the acyclic-resolution criterion [lemma-weil-pbc-leray-acyclicity] identifies the last group with cohomology over the object $X_V$ of $X_{\\mathrm{proét}}$. By [lem-weil-pbc-cohomology-over-object-localization] and clause (1) of [lem-weil-proetale-weakly-etale-localization], this is $H^q((X_V)_{\\mathrm{proét}},N|_{X_V})$. Only clause (1), the equivalence of sites, is used from the latter node: no constant-coefficient hypothesis is imposed on $N$. Thus $(R^qp_*N)(V)\\cong H^q(X_V,N|_{X_V})$, naturally in $N$, with the right side computed on underlying abelian sheaves. In particular, restricting scalars between the integral, finite rational, and $\\Qlb$ coefficient rings leaves these groups unchanged; exact module forgetting leaves the underlying sheaf unchanged. Detection by [det-pe-sections-conservative] then compares vanishing of the higher direct images in each coefficient category.",
    "uses": [
-    "det-proper-heart-bound-lattice"
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-finite-lower-star",
+    "det-pe-wc-sections-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sp-kinjective-computes",
+    "det-pe-sections-conservative",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "sk-def-sfb-module-objects",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemmas 072W (lemma-higher-direct-images), 03F3 (lemma-cohomology-of-open), 03FD (lemma-cohomology-modules-abelian-agree), 0946 (lemma-w-contractible); the section formula in the item opening paragraph"
+   }
   },
   {
-   "text": "*Inverting $\\ell$.* $(a_!L_0)[1/\\ell]=\\varinjlim(a_!L_0\\xrightarrow{\\ell}a_!L_0\\xrightarrow{\\ell}\\cdots)$ is a\nfiltered colimit, and $H^q(X_V,-)$ commutes with filtered colimits ([sk-cor-pe-bounded-continuity]), so\n$H^q(X_V,(a_!L_0)[1/\\ell])=\\varinjlim H^q(X_V,a_!L_0)=0$ for $q>2d+1$.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply the current statement of [det-proper-heart-bound-lattice] directly, with its coefficient field $E$ renamed $K$. Its explicit hypotheses hold: the fixed prime $\\ell$ is invertible in the positive-characteristic field $k$; the original schemes $X,Y$ and the locally closed stratum $S$ are in the standing separated finite-type $k$-scheme setting [sk-def-sfb-dc-setting]; $p$ is a proper $k$-morphism; $K/\\mathbf Q_\\ell$ is finite, with valuation ring $\\mathcal O_K$ and a uniformizer; and $d\\in\\mathbf Z$ is the given geometric-fibre dimension bound (step 1 has already treated $d<0$). The remaining data are the affine weakly contractible object $V\\to Y$, $X_V=X\\times_YV$, the locally closed $a:S\\hookrightarrow X$, and the lisse finite free module $L_0$ over the pulled-back integral ring sheaf $\\mathcal O_{K,S}$. Here $P=a_!L_0$ uses the locally closed extension by zero of that statement, and its $H^q(X_V,a_!L_0)$ is explicitly cohomology of $P|_{X_V}$, exactly as in step 2. No finite-type or Noetherian condition on $V$ or $X_V$ is needed or asserted. The lattice statement gives $H^q(X_V,P|_{X_V})=0$ for $q>c$. Step 2 therefore gives $(R^qp_*P)(V)=0$ for every such $V$. Clause (3) of [det-pe-sections-conservative], applied to $0\\to R^qp_*P$ over the target coefficient ring, gives $R^qp_*P=0$.",
+   "uses": [
+    "det-proper-heart-bound-lattice",
+    "sk-def-sfb-dc-setting",
+    "det-pe-sections-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-rational.md",
+    "place": "Proof, lattice paragraph and opening paragraph basis detection; current lattice statement spells out the standing setting and restriction convention"
+   }
   },
   {
-   "text": "*Scalar extension to $\\Qlb$.* $\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}N=\\varinjlim_{F}F_X\\otimes_{E_X}N$ over\nfinite $F\\supset E$, and as a sheaf of abelian groups $F_X\\otimes_{E_X}N\\cong N^{\\oplus[F:E]}$ since $F$ is\nfinite free over $E$. By continuity again, $H^q(X_V,\\overline{\\mathbf Q}_{\\ell,X}\\otimes N)=\\varinjlim_FH^q(X_V,N)^{\\oplus[F:E]}=0$\nfor $q>2d+1$, where $N=(a_!L_0)[1/\\ell]$.",
-   "uses": [],
-   "elementary": null
+   "text": "The proper map $p$ is quasi-compact and quasi-separated. Indeed, by [def-weil-proper-morphism] it is finite type and its diagonal is a closed immersion. Finite type includes quasi-compactness by [def-weil-finite-type-morphism]. A closed immersion over an affine open is the spectrum of a quotient, hence its source is quasi-compact; thus the diagonal is quasi-compact, which is exactly quasi-separatedness [def-weil-quasi-separated-morphism, def-weil-closed-immersion]. Consequently, through the identification of module objects with sheaves of modules of step 2 [def-weil-pbc-internal-abelian-sheaf-module-equivalence], [det-proper-heart-continuity-direct-image] applies to $p$ for each pulled-back coefficient ring sheaf used below, and $R^qp_*$ commutes with filtered colimits and direct sums. More precisely, the continuity statement first gives higher images as modules over $p_*R_X$. For the module-object pushforward they are restricted along $\\eta_p:R_Y\\to p_*R_X$ [sk-def-sfb-module-pushforward-pullback]. This restriction is exact and preserves colimits [sk-def-sfb-change-of-scalars], and the composite is derived on the same source injective resolution [sk-def-sfb-module-derived-pushpull]. Hence the two derived-image complexes have the same underlying sheaves, restriction commutes with their cohomology, and restricting the continuity isomorphisms gives exactly the filtered-colimit and direct-sum comparisons used below for $R^qp_*$ with $R_Y$-coefficients.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-quasi-separated-morphism",
+    "def-weil-closed-immersion",
+    "det-proper-heart-continuity-direct-image",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-module-derived-pushpull",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-rational.md",
+    "place": "Proof, both continuity passages; qcqs hypothesis of the cited continuity theorem"
+   }
+  },
+  {
+   "text": "By [sk-prop-sfb-qlbar-colimit-x], $K_X=\\mathcal O_{K,X}[1/\\ell]$, with the latter localization the colimit of multiplication by $\\ell$. The tensor/coequalizer definition of scalar extension [sk-def-sfb-change-of-scalars] consequently gives $P[1/\\ell]=K_X\\otimes_{\\mathcal O_{K,X}}P\\cong\\varinjlim(P\\xrightarrow{\\ell}P\\xrightarrow{\\ell}\\cdots)$: indeed, in the balanced-bilinear universal property a map out of the tensor with the coefficient-ring colimit is exactly a compatible family of balanced maps out of the coefficient-ring terms; the unit identifications $\\mathcal O_{K,X}\\otimes_{\\mathcal O_{K,X}}P=P$ turn their transition maps into multiplication by $\\ell$. Apply [det-proper-heart-continuity-direct-image] in the category of $\\mathcal O_{K,X}$-modules. For $q>c$ this gives $R^qp_*(P[1/\\ell])\\cong\\varinjlim R^qp_*P=0$. The section formula of step 2 shows that this vanishing is independent of whether $P[1/\\ell]$ is regarded as an integral or rational module: both compute the cohomology of its same underlying abelian sheaf on $X_V$, and step 3's detection argument applies in either category.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "sk-def-sfb-change-of-scalars",
+    "det-proper-heart-continuity-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-rational.md",
+    "place": "Proof, inverting ell paragraph"
+   }
+  },
+  {
+   "text": "Put $N=P[1/\\ell]$. For every finite $F\\supset K$ in $\\Qlb$, [det-prop-sfb-cartesian-coefficients-finite-free] supplies $F_X\\cong K_X^{\\oplus[F:K]}$ as $K_X$-modules. Tensoring this isomorphism with $N$ gives $F_X\\otimes_{K_X}N\\cong N^{\\oplus[F:K]}$, as $K_X$-modules; explicitly, writing an element of $F_X$ as $\\sum_i x_i b_i$ in the cited basis, $(\\sum_i x_i b_i)\\otimes n$ maps to $(x_i n)_i$, with inverse $(n_i)\\mapsto\\sum_i b_i\\otimes n_i$. The finite-direct-sum case of [det-proper-heart-continuity-direct-image] therefore gives $R^qp_*(F_X\\otimes_{K_X}N)\\cong(R^qp_*N)^{\\oplus[F:K]}=0$ for $q>c$. These are underlying $K$-module statements; step 2 also identifies them with vanishing in the $F$-module category.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-finite-free",
+    "det-proper-heart-continuity-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-rational.md",
+    "place": "Proof, scalar-extension paragraph, finite extensions"
+   }
+  },
+  {
+   "text": "The finite subextensions containing $K$ are cofinal among all finite subextensions of $\\Qlb/\\mathbf Q_\\ell$: a given finite subextension $G$ maps into the finite compositum $GK$. Hence [sk-prop-sfb-qlbar-colimit-x] gives $\\overline{\\mathbf Q}_{\\ell,X}\\cong\\varinjlim_{F\\supset K}F_X$. This filtered ring-sheaf colimit is also the colimit of the underlying $K_X$-modules: locally a finite list of sections and relations is represented at a common finite stage; addition, multiplication and the $K_X$-action are defined there and are independent of that stage. Sheafifying this sectionwise colimit gives its universal cocone, by [lem-weil-pbc-module-sheaves-colimits-forgetful]. The tensor/coequalizer universal property [sk-def-sfb-change-of-scalars] gives $\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{K_X}N\\cong\\varinjlim_{F\\supset K}(F_X\\otimes_{K_X}N)$ as underlying $K_X$-modules: a compatible family of $K_X$-balanced bilinear maps on $F_X\\times N$ uniquely extends to their colimit. By [det-proper-heart-continuity-direct-image] and step 6, $R^qp_*$ of this scalar extension is zero for $q>c$. Step 2 and detection on the target identify this with the required vanishing in the $\\Qlb$-module category. All conditions of [det-proper-heart-bound-reduction] at $c=2d+1$ are now proved, so $R^qp_*M=0$ for every $M\\in\\Cons(X,\\Lambda)$ and $q>2d+1$.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "sk-def-sfb-change-of-scalars",
+    "det-proper-heart-continuity-direct-image",
+    "det-proper-heart-bound-reduction",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-rational.md",
+    "place": "Proof, scalar-extension paragraph, filtered colimit and final reduction"
+   }
   }
  ],
  "proof_deps": [
   "det-proper-heart-bound-reduction",
-  "det-proper-heart-bound-lattice"
+  "def-kun-topological-krull-dimension",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-finite-lower-star",
+  "det-pe-wc-sections-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sp-kinjective-computes",
+  "det-pe-sections-conservative",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-proper-heart-bound-lattice",
+  "sk-def-sfb-dc-setting",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-closed-immersion",
+  "det-proper-heart-continuity-direct-image",
+  "sk-def-sfb-change-of-scalars",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "det-prop-sfb-cartesian-coefficients-finite-free"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound-rational.md",
-  "place": "## Proof"
+  "place": "Proof, four paragraphs; expanded section formula using Stacks 072W, 03F3, 03FD and 0946; continuity at the sheaf level is the same natural sectionwise computation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper direct image constructible sheaf vanishes above twice the geometric fibre dimension plus one for E or Qbar coefficients",
+   "results": "8 hits: PrimeSpectrum.ConstructibleSetData.degBound, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, DerivedCategory.isZero_of_isGE, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-16",
+   "verdict": "no match: generic scheme constructibility, limits, derived-category vanishing criteria or cohomology-presheaf definitions do not bound proper rational constructible direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a proper pushforward of a constructible ell adic sheaf vanishes in degrees greater than twice the fibre dimension plus one",
+   "results": "8 hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, DerivedCategory.isZero_of_isGE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isZero_of_isLE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: generic scheme constructibility, limits, derived-category vanishing criteria or cohomology-presheaf definitions do not bound proper rational constructible direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.cohomologyPresheaf",
+   "results": "3 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.fromBiprod_biprodIsoProd_inv_apply, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toBiprod_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: generic scheme constructibility, limits, derived-category vanishing criteria or cohomology-presheaf definitions do not bound proper rational constructible direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|cohomologyPresheaf",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: generic scheme constructibility, limits, derived-category vanishing criteria or cohomology-presheaf definitions do not bound proper rational constructible direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct image of rational constructible pro etale sheaves under proper morphism has finite cohomological dimension",
+   "results": "8 hits: AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsProper, Condensed.lanSheafProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: generic scheme constructibility, limits, derived-category vanishing criteria or cohomology-presheaf definitions do not bound proper rational constructible direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of locally constant finite rank l-adic sheaves for proper schemes are zero beyond a uniform fiber dimension bound",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Profinite.NobelingProof.CC_exact, CompHausLike.LocallyConstantModule.functor, Profinite.exists_locallyConstant_finite_aux, LightCondMod.isDiscrete_tfae, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: scheme-limit, profinite locally constant, and discrete condensed-module declarations contain no proper direct-image dimension bound"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -65,5 +232,94 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-proper-heart-bound"
+ "unit": "sk-lem-proper-heart-bound",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-proper-heart-bound-rational",
+  "worker": "stage1",
+  "summary": "Reworked the earlier sandbox attempt using existing nodes only. Derived the missing section formula from injective resolutions and exact evaluation, rather than creating an elementary auxiliary lemma. Supplied basis detection, coefficient localization/colimit and finite-free coefficient sheaf citations. Applied the existing direct-image continuity theorem to the same two colimit computations. Kept imported metadata and the lattice/rationalization/scalar-extension route; the later second reading made the standing hypotheses explicit as documented in the report. Replaced malformed/mismatched search records with actual logged searches. Second reader: made the standing positive-characteristic finite-type setting explicit, preserving all integer dimension bounds by handling the negative-bound empty-source case; restricted the section computation to the coefficient rings actually covered by the cited definition, supplied the bounded-below K-injective bridge and detection, and expanded the underlying-module filtered-colimit comparison. Repair of the lattice-statement return: applied the expanded current lattice statement directly, explicitly matching its standing scheme, coefficient and restriction hypotheses; removed the redundant torsion-setting proof citation. Made the restriction-of-scalars comparison explicit for the current continuity statement with target p_*R_X modules. Continued retry: re-read the current expanded lattice statement and every current cited statement; confirmed all 38 quotation pairs are exact, the lattice application uses the restriction convention and standing hypotheses, and no stale torsion proof dependency remains. Maintainer reader: cited the existing module-object/sheaf-of-modules equivalence (def-weil-pbc-internal-abelian-sheaf-module-equivalence, with sk-def-sfb-module-objects) in steps 2 and 4, where results stated for sheaves of modules over a ring sheaf are applied to the module-object categories of the derived pushforward.",
+  "blueprint": "Step 1 realizes the opening reduction; steps 2-3 expand its section formula and lattice paragraph; step 4 checks continuity hypotheses; step 5 realizes inversion of ell; steps 6-7 realize finite scalar extensions and their filtered colimit. These are the four paragraphs of sk-lem-proper-heart-bound-rational.proof.md and step 5 of the unit proof.",
+  "tool_uses": [
+   {
+    "node": "det-pe-wc-sections-exact",
+    "why": "Exact evaluation at weakly contractible target objects commutes with cohomology in the resolution calculation; no proper-heart-bound node states this generic evaluation fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Exact forgetting of variable-ring module sheaves justifies underlying cohomology and resolutions; this is a generic ringed-site tool."
+   },
+   {
+    "node": "lem-sc-injective-module-abelian-acyclic-zariski",
+    "why": "Its statement covers every ringed site and every object, despite its historical id; it makes underlying module injectives section-acyclic."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "The general acyclic-resolution criterion, clause (2), computes cohomology from the underlying injective-module resolution."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "The generic localization theorem identifies object cohomology with cohomology on the slice site."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Only clause (1), the geometric equivalence of the slice site with the small pro-etale site of the object, is used, independently of its later constant-ring clauses."
+   },
+   {
+    "node": "det-pe-sections-conservative",
+    "why": "The general basis evaluation criterion detects the lattice higher-image sheaf being zero; this does not replace the lattice estimate."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Its ring-sheaf localization and colimit isomorphisms identify the actual condensed scalar extensions; the unit continuity route does not supply coefficient-ring identifications."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-finite-free",
+    "why": "Its explicit finite-free coefficient-sheaf isomorphism justifies the finite-direct-sum calculation for finite extensions, without substituting discrete coefficients."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Clause (2) supplies exactly the bounded-below injective-to-K-injective bridge needed to apply the module-object derived-pushforward definition to a sheaf resolution."
+   },
+   {
+    "node": "lem-pc-field-extension-surjective",
+    "why": "The field-spectrum surjection and its base change show that a negative geometric-fibre dimension bound forces the source to be empty; this retains the source unit integer-valued bound."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "The generic surjectivity base-change tool compares a geometric fibre with the residue-field fibre in the negative-bound empty-source case."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "This generic ringed-site theorem supplies the Grothendieck abelian hypotheses for the actual variable-ring module and abelian sheaf categories in the section formula."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "This generic theorem supplies injective embeddings; resolving successive cokernels constructs the nonnegative injective resolution used in step 2."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-wc-sections-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-proetale-weakly-etale-localization",
+  "det-pe-sections-conservative",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "det-prop-sfb-cartesian-coefficients-finite-free",
+  "lem-sp-kinjective-computes",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N2-74f3fbcb4",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-74f3fbcb4 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited statement (29 after the fix), the blueprint rational/reduction/lattice/torsion/indcons statements and proofs and the unit proof, and Stacks 072W/03F3/03FD/0946 in sites-cohomology.tex. Statement: the delivery makes the standing setting of sk-def-sfb-dc-setting explicit. The reviewed siblings (reduction, lattice, torsion) and the only citer (indcons) use the same setting, so this is not a weakening. It keeps d in Z, the strict bound q>2d+1 and the condensed module-object coefficients (no discrete constants). Steps: (1) d<0 forces X empty; reduction applied at c=2d+1 for every finite F. (2) The section formula is proved from statements (injective resolution, exact evaluation at weakly contractible V, injective acyclicity, slice localization), not borrowed from a proof. (3) Every hypothesis of the lattice node is matched; vanishing is detected by clause (3) of sections-conservative. (4) Proper implies qcqs; restriction along eta_p carries continuity to R_Y-modules. (5)-(7) Inverting ell, the finite-free F_X, and cofinality of composita are all correct. No new nodes and no duplicates. Off-route tool_uses are generic, used only for the clauses named, and accepted. Fault fixed (C1): steps 2 and 4 applied results about sheaves of modules over a ring sheaf to the module-object categories in which Rp_* is defined, without citation. Fix cites the existing node def-weil-pbc-internal-abelian-sheaf-module-equivalence plus sk-def-sfb-module-objects in steps 2 and 4 and regenerates proof_deps; the DAG stays acyclic. Corrected item is in fixes/; details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

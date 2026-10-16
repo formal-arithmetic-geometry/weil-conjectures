@@ -28,9 +28,58 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-realization-finite-limits], the quotient realizations in the statement are k-spaces, and the canonical comparison induced by the two projections is a natural homeomorphism $|K\\times\\Delta^1|\\cong |K|\\times^{\\mathcal K}|\\Delta^1|$. The same node says that this k-product is the k-ification of the ordinary product. On representatives the comparison sends $[((x,\\theta),t)]$ to $([x,t],[\\theta,t])$.",
+   "uses": [
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Lemma 3.1.8 and its proof, printed pp. 77–78 (PDF pages 87–88, counting from 1); k-space limits in Proposition 2.4.22(3), printed p. 58. Only the finite-product and k-space clauses of the cited node are used."
+   }
+  },
+  {
+   "text": "Identify $|\\Delta^1|$ with $I=[0,1]$ by $e([\\theta,t])=\\sum_{\\theta(i)=1}t_i$. For every monotone $\\alpha$, the identity $(\\theta\\alpha)_*t=\\theta_*(\\alpha_*t)$ makes this formula invariant under the quotient relations, so it is continuous by continuity on every simplex. Applying the quotient relation to $\\theta:[n]\\to[1]$ and $\\operatorname{id}_{[1]}$ gives $[\\theta,t]=[\\operatorname{id}_{[1]},\\theta_*t]=[\\operatorname{id}_{[1]},(1-e([\\theta,t]),e([\\theta,t]))]$, including constant $\\theta$. Thus $s\\mapsto[\\operatorname{id}_{[1]},(1-s,s)]$ is a continuous two-sided inverse. In particular this identification has the stated coordinate orientation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Elementary quotient calculation using the standard topological simplex immediately preceding Lemma 3.1.8, printed p. 77; the coordinate orientation is checked explicitly here."
+   }
+  },
+  {
+   "text": "Write $X=|K|$ and $Z=k(X\\times I)$ using the k-space topology of [lem-coef-realization-finite-limits]. We prove that the set-theoretic inverse of the continuous identity $Z\\to X\\times I$ is continuous. Define $G(x)(s)=(x,s)$ as a map $X\\to\\operatorname{Cont}(I,Z)$, where the mapping space has the compact-open topology of [lem-coef-compact-open-currying]. Each section $I\\to Z$ is continuous: it is a continuous map from compact Hausdorff $I$ to the ordinary product, hence to its k-ification by the defining compact-test condition: the inverse image of any k-open set under this compact test is open. For every continuous $a:A\\to X$ with $A$ compact Hausdorff, $A\\times I$ is compact Hausdorff and $(a,\\operatorname{id}_I):A\\times I\\to X\\times I$ is continuous, so it too is continuous into $Z$ by that same inverse-image criterion. To check compactness of $A\\times I$ directly, refine an open cover at each $(a,s)$ by product rectangles; compactness of $I$ gives finitely many rectangles covering $\\{a\\}\\times I$, whose first-coordinate neighborhoods have a common intersection $U_a$. These finitely many cover members then cover $U_a\\times I$, and compactness of $A$ selects finitely many such $U_a$. Distinct pairs are separated by neighborhoods in a differing coordinate, proving Hausdorffness. The currying clause of [lem-coef-compact-open-currying] makes its transpose $G\\circ a$ continuous. Since $X$ has the final compact-test topology, this proves $G$ continuous. The uncurrying clause of the same node, with locally compact source $I$, now makes $(x,s)\\mapsto G(x)(s)$ continuous for the ordinary product topology. This is the inverse identity $X\\times I\\to Z$, as required. Here the interval is compact Hausdorff and locally compact because intersections with sufficiently short closed real intervals form compact neighbourhoods at each point, including its endpoints.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Agent-written compact-test argument expanding the ordinary-product passage implicit in the discussion after Lemma 3.1.8, printed p. 79, using the locally compact exponential law recalled in Section 2.4, printed p. 49."
+   }
+  },
+  {
+   "text": "The interval homeomorphism $e$ of Step 2 induces $1_X\\times^{\\mathcal K}e$ between the k-products: the product universal property in Step 1 makes it continuous, and $1_X\\times^{\\mathcal K}e^{-1}$ is its continuous inverse, since their coordinate projections are identities. Compose the homeomorphism in Step 1 with this map and the ordinary-product identification in Step 3. Its formula is exactly $\\rho_K([((x,\\theta),t)])=([x,t],\\sum_{\\theta(i)=1}t_i)$. If $f:K\\to L$ is simplicial, both orders around the naturality square send this representative to $([f(x),t],\\sum_{\\theta(i)=1}t_i)$, proving naturality. Under the constant-0 endpoint inclusion the second coordinate is $0$; under the constant-1 inclusion it is $\\sum_i t_i=1$. The first coordinate is unchanged, so the endpoint maps are exactly $u\\mapsto(u,0)$ and $u\\mapsto(u,1)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+    "place": "Agent-written representative calculation completing the specialization of Lemma 3.1.8 to the standard interval."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-realization-finite-limits",
+  "lem-coef-compact-open-currying"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://ericmalm.net/ac/projects/symmetric-spectra/hovey--model-cats.pdf",
+  "place": "Lemma 3.1.8, printed pp. 77–78, read online; explicit standard-interval quotient and compact-test/compact-open-currying arguments supplied here. The PDF is not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -108,10 +157,80 @@
    "results": "{\"t\": \"2026-10-16T16:28:28Z\", \"tool\": \"grep\", \"query\": \"prodComparison|preserves.*[Pp]roduct|[Hh]omotop\", \"sub\": \"AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: hoFunctor preserves categorical homotopy categories, not topological realization; the standard-simplex product bijections do not supply the cylinder homeomorphism. Read TopAdj.lean, including its standard-one-simplex homeomorphism, and Op.lean TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric realization of a simplicial cylinder is homeomorphic to the product with the unit interval",
+   "results": "{\"t\": \"2026-10-16T20:02:50Z\", \"tool\": \"leanfinder\", \"query\": \"geometric realization of a simplicial cylinder is homeomorphic to the product with the unit interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.toTopObjOneHomeo\", \"HomotopicalAlgebra.Cylinder.weakEquivalence_π\", \"HomotopicalAlgebra.Precylinder.I\", \"HomotopicalAlgebra.Cylinder.instWeakEquivalenceI₁\", \"HomotopicalAlgebra.Cylinder.exists_very_good\", \"HomologicalComplex.cylinder.homotopyEquiv\", \"HomotopicalAlgebra.Cylinder.instNonempty\", \"HomotopicalAlgebra.Precylinder.symm_I\"], \"digest\": \"c81d2d5cfc583d54\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern standard-simplex realization, abstract model-category cylinders, or the categorical homotopy functor; none supplies realization of an arbitrary simplicial cylinder with its ordinary product topology. Read TopAdj.lean and the existing compact-open-currying leaf. The first Loogle query reports unknown identifier prodComparison; the fully qualified second query ran with zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.toTop, prodComparison, TopCat.I",
+   "results": "{\"t\": \"2026-10-16T20:02:40Z\", \"tool\": \"loogle\", \"query\": \"SSet.toTop, prodComparison, TopCat.I\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'prodComparison'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern standard-simplex realization, abstract model-category cylinders, or the categorical homotopy functor; none supplies realization of an arbitrary simplicial cylinder with its ordinary product topology. Read TopAdj.lean and the existing compact-open-currying leaf. The first Loogle query reports unknown identifier prodComparison; the fully qualified second query ran with zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "toTop|realization|prodComparison",
+   "results": "{\"t\": \"2026-10-16T20:02:40Z\", \"tool\": \"grep\", \"query\": \"toTop|realization|prodComparison\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/TopologicalSimplex.lean\", \"Mathlib/AlgebraicTopology/TopologicalSimplex.lean\", \"Mathlib/AlgebraicTopology/TopologicalSimplex.lean\", \"Mathlib/AlgebraicTopology/TopologicalSimplex.lean\", \"Mathlib/AlgebraicTopology/TopologicalSimplex.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Basic.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\"], \"digest\": \"7ada5db8b485decf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern standard-simplex realization, abstract model-category cylinders, or the categorical homotopy functor; none supplies realization of an arbitrary simplicial cylinder with its ordinary product topology. Read TopAdj.lean and the existing compact-open-currying leaf. The first Loogle query reports unknown identifier prodComparison; the fully qualified second query ran with zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometric realization preserves products with the standard one simplex",
+   "results": "{\"t\": \"2026-10-16T20:02:41Z\", \"tool\": \"leansearch\", \"query\": \"geometric realization preserves products with the standard one simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"SSet.prodStdSimplex.objEquiv_map_apply\", \"SSet.prodStdSimplex.objEquiv\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.prodStdSimplex.nonDegenerate_iff_injective_objEquiv\", \"SimplexCategory.toTop₀_obj\"], \"digest\": \"16d571d692d5e679\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern standard-simplex realization, abstract model-category cylinders, or the categorical homotopy functor; none supplies realization of an arbitrary simplicial cylinder with its ordinary product topology. Read TopAdj.lean and the existing compact-open-currying leaf. The first Loogle query reports unknown identifier prodComparison; the fully qualified second query ran with zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.toTop\", \"CategoryTheory.Limits.prodComparison\"",
+   "results": "{\"t\": \"2026-10-16T20:05:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.toTop\\\", \\\"CategoryTheory.Limits.prodComparison\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern standard-simplex realization, abstract model-category cylinders, or the categorical homotopy functor; none supplies realization of an arbitrary simplicial cylinder with its ordinary product topology. Read TopAdj.lean and the existing compact-open-currying leaf. The first Loogle query reports unknown identifier prodComparison; the fully qualified second query ran with zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "toTop|prodComparison|[Pp]roduct|[Hh]omotop",
+   "results": "{\"t\": \"2026-10-16T20:05:00Z\", \"tool\": \"grep\", \"query\": \"toTop|prodComparison|[Pp]roduct|[Hh]omotop\", \"sub\": \"AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"17\", \"20\", \"22\", \"30\", \"40\"], \"digest\": \"f7d676f3589a3a86\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern standard-simplex realization, abstract model-category cylinders, or the categorical homotopy functor; none supplies realization of an arbitrary simplicial cylinder with its ordinary product topology. Read TopAdj.lean and the existing compact-open-currying leaf. The first Loogle query reports unknown identifier prodComparison; the fully qualified second query ran with zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric realization functor preserves a binary product when one simplicial set is the representable standard interval",
+   "results": "{\"t\": \"2026-10-16T20:06:01Z\", \"tool\": \"leanfinder\", \"query\": \"The geometric realization functor preserves a binary product when one simplicial set is the representable standard interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"SSet.instCartesianMonoidalCategory\", \"SSet.prodStdSimplex.objEquiv_map_apply\"], \"digest\": \"57211d194d089b84\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern standard-simplex realization, abstract model-category cylinders, or the categorical homotopy functor; none supplies realization of an arbitrary simplicial cylinder with its ordinary product topology. Read TopAdj.lean and the existing compact-open-currying leaf. The first Loogle query reports unknown identifier prodComparison; the fully qualified second query ran with zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "toTop.*prod|prod.*toTop|toTop.*[Ii]so|[Pp]reserves.*[Pp]roduct",
+   "results": "{\"t\": \"2026-10-16T20:18:08Z\", \"tool\": \"grep\", \"query\": \"toTop.*prod|prod.*toTop|toTop.*[Ii]so|[Pp]reserves.*[Pp]roduct\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/FundamentalGroupoid/Product.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Product.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Product.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Product.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Product.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\"], \"digest\": \"b5888f04e016c850\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits and TopAdj.lean:164-171; standard-simplex realization identifies only the second factor. NerveAdjunction.lean:471-484 concerns hoFunctor to Cat, and FundamentalGroupoid/Product.lean concerns the fundamental groupoid, neither the topological realization product comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.toTop\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-16T20:18:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.toTop\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits and TopAdj.lean:164-171; standard-simplex realization identifies only the second factor. NerveAdjunction.lean:471-484 concerns hoFunctor to Cat, and FundamentalGroupoid/Product.lean concerns the fundamental groupoid, neither the topological realization product comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from the topological realization of a product X times Delta[1] to the product of the realization of X with the closed unit interval is an isomorphism",
+   "results": "{\"t\": \"2026-10-16T20:18:15Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical map from the topological realization of a product X times Delta[1] to the product of the realization of X with the closed unit interval is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"Homeomorph.finTwoArrow_apply\", \"stdSimplexHomeomorphUnitInterval_one\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"FundamentalGroupoidFunctor.piIso_hom\", \"TopCat.toSSetObjEquiv\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"stdSimplexHomeomorphUnitInterval_zero\"], \"digest\": \"287b2a49acf92a75\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits and TopAdj.lean:164-171; standard-simplex realization identifies only the second factor. NerveAdjunction.lean:471-484 concerns hoFunctor to Cat, and FundamentalGroupoid/Product.lean concerns the fundamental groupoid, neither the topological realization product comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-thomason-grothendieck-comparison",
@@ -119,5 +238,21 @@
   "group": "NK"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-realization-cylinder",
+  "worker": "stage1",
+  "summary": "Used the existing same-unit realization finite-limit theorem for the k-product comparison, identified the standard interval by quotient coordinates, and proved the ordinary-product transition from compact tests and the existing Mathlib compact-open-currying leaf. Removed the previous attempt's unnecessary statement-only compact-factor node. Naturality and both endpoint formulas are checked on representatives; the item statement is unchanged.",
+  "blueprint": "Realizes the parent blueprint proof paragraph's geometric-realization input: the comparison is the product realization used in the derived adjunction calculation, with the prism/cylinder coordinate and endpoint naturality made explicit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-99e926d7d",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-99e926d7d (reviewer sub-agent of L); spot-checked: I read the item, all 4 steps and the full statements of the cited nodes lem-coef-realization-finite-limits, lem-coef-compact-open-currying and def-weil-pbc-simplicial-set. The delivery adds no new nodes and changes neither the statement nor stmt_deps; proof_deps equals the union of the steps' uses. The statement's quotient-realization convention is exactly the one in def-cbc-enhanced-diagrams-cones that the finite-limits node uses. Step 1: that node's k-space and finite-limit clauses give the canonical natural homeomorphism |KxΔ^1| ≅ |K| x^K |Δ^1|. Step 2 is elementary and checks out: e respects (θα)_*=θ_*α_*, [θ,t]=[id,(1-e,e)] holds for constant θ and zero weights, and the orientation is right. Step 3 is the standard proof that k(XxI)=XxI for a k-space X: compact tests, curry (no local compactness needed) and uncurry with locally compact I. I re-read Mathlib/Topology/CompactOpen.lean:430-467 and it matches the leaf's hypotheses. Step 4: the representative formula, naturality and endpoints 0 and 1 are verified. Small cases: empty K, Δ^0, discrete K and infinite K. Four citers (Thomason comparison step 5, free-resolution steps 2 and 5, Segal-DK step 3, coslice step 6) use only the ordinary-product homeomorphism with the stated endpoint orientation, which matches. No duplicate in the DAG: finite-limits gives only the k-product, and lem-cbc-simplicial-homotopy-equivalence-weak has a different conclusion. Both proof deps are in the item's unit sk-prop-sf-biduality-general, so there are no tool_uses. Hovey is not archived under literature/, so I could not check it at the source; the report records WANTED and proof_origin=agent, which is correct. No SGA source and no target is touched. I made no fixes."
+ }
 }

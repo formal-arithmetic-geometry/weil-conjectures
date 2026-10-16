@@ -29,9 +29,164 @@
   "def-weil-proetale-constructible-sheaf",
   "def-weil-proetale-tor-amplitude"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the actual strict semilinear section model of [lem-coef-semilinear-derived-sections] with ring system $A_{n,T}$: its ordinary homotopy category is $D(\\operatorname{Tow}(T,\\mathcal O_E))$, and it supplies inverse image, separately derived direct image, open extension, their units/counits, and the comparisons built from them. It does not identify a derived morphism with an arbitrary family of its evaluations. Every level of an object of $\\mathcal C_T$ has bounded constructible etale origin by [lem-weil-pbc-finite-ring-constructible-derived-origin]. These representatives have the same Tor intervals by [det-pe-finite-tor-comparison-noetherian]: the schemes are qcqs and $A_n$ is finite, hence discrete Noetherian. Consequently the finite comparisons in [lem-sp-et-proet-coefficient-compatibility] apply over the arbitrary field $k$ in the statement; no global finite-field datum is needed. We will use [det-sp-tower-shriek-levels] to identify evaluations and detect invertibility only after constructing maps in the section model.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "det-pe-finite-tor-comparison-noetherian",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition: prerequisites for the tower version; finite constructible comparison is proetale.tex Tag 09AL (lemma-compare-constructible-derived). The enhanced section assertion is the cited node, not a claim of these tags."
+   }
+  },
+  {
+   "text": "Construct proper/open comparisons before evaluation. For a commutative square $pk=ir$ with $p,r$ proper and $i,k$ open, put $W'=W\\times_T S$, with projections $b:W'\\to W$, $q:W'\\to S$, and $s=(k,r):V\\to W'$. The geometric clause of [lem-cbc-strict-tower-proper-open-calculus] makes $s$ clopen. For varying coefficient sheaves let $\\beta:p^*i_!\\simeq b_!q^*$ be the open base-change identification: in the sheafified presheaf of [def-weil-extension-by-zero-presheaf], a lift to $S$ is exactly a lift to $W'$. By [lem-pur-site-restriction-module-adjunction-exact] these open operations are exact. Project $q^*M$ onto its component on $s(V)$, apply $b_!$, and identify $b_!s_!=k_!$; this defines $a_Q:p^*i_!\\to k_!r^*$. Define the actual derived tower map\n$$\\gamma_Q=(Rp_*k_!\\varepsilon_r)\\circ(Rp_*a_QRr_*)\\circ(\\eta_pi_!Rr_*):i_!Rr_*\\longrightarrow Rp_*k_!.$$\nHere the units, counits and the mate have the simultaneous section model of [lem-coef-semilinear-derived-sections]. Evaluation is the finite proper/open mate, identified through the specified site comparisons with [lem-cbc-proper-open-interchange-coherence]; step 1 supplies its etale-origin hypotheses, so it is invertible by [det-sp-tower-shriek-levels]. The coherence calculation also takes place before evaluation. On sheaf sections the maps $a_Q$ retain a summand exactly when its lift factors through the selected clopen component, and kill it otherwise. Two successive projections retain precisely the lifts retained by the pasted square; restriction and extension do not change their values. This verifies the pasted-$a$ identity for horizontal and vertical pasting, including refinement squares and identities, with the geometric clopen identifications in [lem-cbc-strict-tower-proper-open-calculus]. This check uses only zero, identity, restriction and ring-linear projections, so applies unchanged to the ring system, not merely to constant-ring towers. [lem-weil-pbc-mate-pasting] now gives the two proper/open pasting equations as equalities of actual derived tower transformations.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-coef-semilinear-derived-sections",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "det-sp-tower-shriek-levels",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); ring-system mate construction and coefficient-independent clopen projection calculation are agent supplied."
+   }
+  },
+  {
+   "text": "For $T\\xrightarrow h B\\xrightarrow g C$, choose a compatible tower of compactifications using [lem-cbc-compactifiable-compatible-tower]. Write $i:B\\hookrightarrow\\overline B$, $q:\\overline B\\to C$, $a:T\\hookrightarrow\\overline T$, $p:\\overline T\\to\\overline B$, and $U=\\overline T\\times_{\\overline B}B$. Factor $a=bj$ with $j:T\\hookrightarrow U$, $b:U\\hookrightarrow\\overline T$, and write $r:U\\to B$ for the proper projection. Then the transformation\n$$F_gF_h=Rq_*i_!Rr_*j_!\\xrightarrow{Rq_*\\gamma_Qj_!}Rq_*Rp_*b_!j_!\\xrightarrow{\\sim}R(qp)_*(bj)_!=F_{gh}$$\nis defined in the tower derived category. The last arrow is the inverse of the canonical direct-image compositor [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and the open compositor; the latter just composes the unique lifts in the extension presheaf. Refinement comparisons are the special cases of $\\gamma$ with the left proper map an identity. By [lem-cbc-compactifiable-cofiltered] any two refinements have a common refinement and parallel arrows can be equalized; step 2's vertical and horizontal equations give the same comparison through that refinement. Any two compatible towers have a common refining tower by [lem-cbc-compactifiable-compatible-tower]; apply the horizontal equation to its open strips and the vertical equation to its proper strips to obtain the commuting square between the two displayed composition maps. Thus it defines $\\alpha_{g,h}$ for the chosen compactifications. For three maps, iterating this construction yields a staircase with two adjacent proper/open interchanges. The two parenthesizations are the two pastings of that staircase, hence are equal by those same two equations and [lem-weil-pbc-mate-pasting]; the direct-image compositors are the unit-preserving conjugates of pullback composition, so their associativity follows from the identity and pasting clauses of that node. Identity squares give identity maps. Evaluation gives exactly the finite construction of [lem-amb-etale-compact-comparisons], with the pro-etale normalization of [lem-sp-et-proet-coefficient-compatibility], so $\\alpha$ is invertible. For an open $u$ take $(ju,p)$ as the compactification of $hu$ if $(j,p)$ compactifies $h$; $(ju)_!=j_!u_!$ on the extension presheaves gives $F_{hu}=F_hu_!$. The units include the unique lift and the counits evaluate that lift, so this identification respects the open counits. All restrictions land in the categories specified in the statement by its preservation assumption.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-cbc-compactifiable-cofiltered",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-weil-pbc-mate-pasting",
+    "lem-amb-etale-compact-comparisons",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), compatible diagram and its displayed four equalities, followed by comparison through a common refining tower; the pasting equations are implemented at tower level in step 2."
+   }
+  },
+  {
+   "text": "For etale $e:U\\to T$, [lem-weil-proetale-weakly-etale-localization] identifies $U_{\\mathrm{proet}}$ with $T_{\\mathrm{proet}}/U$. At each $n$ define $e_!M_n$ by sheafifying\n$$V\\longmapsto\\bigoplus_{t:V\\to U\\,/T}M_n(V,t),$$\nwith transition maps induced on each summand by those of $M$. The scalar action factors through $A_n$, so this is an actual functor on varying-coefficient towers. [lem-pur-site-restriction-module-adjunction-exact] makes $e_!$ and $e^*$ exact; exactness on towers follows from [det-sp-coefficient-towers-abelian]. The unit places a section in the summand of its structural lift; the counit sums the evaluations of all lifts. Both commute with the quotient transitions summand by summand. The adjunction bijection is a bijection on compatible families because these unit/counit formulas are natural in the level maps. Apply [lem-weil-pbc-termwise-adjunction-homotopy] on complexes and then [lem-weil-pbc-localization-universal-property]: exactness lets both functors descend, and the two triangle identities descend with them. This proves $e_{!,\\bullet}\\dashv e_\\bullet^*$ on the ordinary unbounded derived categories themselves, not by levelwise conservativity. For an open immersion there is at most one lift, giving extension by zero.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "det-sp-coefficient-towers-abelian",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact); explicit tower unit and counit are induced on the summands."
+   }
+  },
+  {
+   "text": "Identify this exact functor with the compactification candidate by constructing a comparison. For $e=pj$ and a pro-etale test scheme $V\\to T$, a lift $t:V\\to U$ determines a graph $V\\to\\overline U\\times_TV$. It is closed since $p$ is separated, and open since it lies in $U\\times_TV$ and is the pullback of the open diagonal of $e$ [def-weil-etale-morphism, def-weil-unramified-morphism, def-weil-proper-morphism]. Extend a section in the $t$-summand by zero off this clopen graph. Summing the resulting sections and sheafifying defines $e_!M\\to p_*j_!M$ naturally in $M$ and in its coefficient ring. On complexes compose this map with $p_*j_!M\\to p_*I$, for a K-injective resolution $j_!M\\to I$. The simultaneous construction of [lem-coef-semilinear-derived-sections] makes this an actual natural tower transformation $\\theta:e_{!,\\bullet}\\to F_e$. Its evaluation has exactly the inverse normalization of [lem-asd-etale-compact-support-normalization]: a section supported on a graph goes to that sheet. To compare sites, the exact functors $\\nu_T^*e_!^{\\mathrm{et}}$ and $e_!^{\\mathrm{proet}}\\nu_U^*$ have isomorphic right adjoints $e_{\\mathrm{et}}^*\\nu_{T,*}\\cong\\nu_{U,*}e_{\\mathrm{proet}}^*$ by [lem-weil-pbc-localize-ringed-site-morphism]. Their adjunction-preserving comparison is therefore an isomorphism on sheaves and, termwise, on complexes; its units include the structural summand and its counits sum the summands. Together with the specified compact-support site comparison [lem-sp-et-proet-coefficient-compatibility], this identifies $\\theta_n$ with the inverse finite normalization for the etale-origin levels of step 1. Hence $\\theta$ is invertible by [det-sp-tower-shriek-levels]. Use its inverse to identify $F_e$ with $e_{!,\\bullet}$ and the adjunction just constructed. [lem-amb-etale-sum-stalks] identifies its finite counit with the geometric fibre sum. The graph map and summand maps commute with coefficient quotient maps, and the last sum-extension identity of [lem-sp-et-proet-coefficient-compatibility] identifies that commutation with the named coefficient comparison. The open case uses the same unique-lift inclusion and evaluation.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "def-weil-proper-morphism",
+    "lem-coef-semilinear-derived-sections",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "det-sp-tower-shriek-levels",
+    "lem-amb-etale-sum-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), etale bottom and identity left specialization; etale-cohomology.tex Tag 03S5 (proposition-describe-jshriek); proetale.tex Tag 09AF (lemma-jshriek-comparison). The clopen-graph map supplies the strict tower comparison."
+   }
+  },
+  {
+   "text": "Exactness of $e_!$ and $e^*$ gives $H^q(e_!M_n)=e_!H^q(M_n)$ and $H^q(e^*N_n)=e^*H^q(N_n)$, so each cohomological interval is preserved without shifting, uniformly in $n$. For every degree-zero module sheaf $N$ on $T$, [lem-weil-pbc-ringed-slice-extension-tensor] gives $e_!P\\otimes N\\cong e_!(P\\otimes e^*N)$. It also shows that $e_!$ preserves flat sheaves: tensor an injection with a flat sheaf on $U$, then apply exact $e_!$. Thus applying this identity to K-flat resolutions gives\n$$(e_!M_n)\\otimes^LN\\simeq e_!(M_n\\otimes^Le^*N).$$\nThis preserves every Tor interval. For an arbitrary module sheaf $Q$ on $U$ the structural summand makes $Q$ a direct summand of $e^*e_!Q$: the complementary lifts are the complement of the clopen diagonal of separated $e$. For $L_n$ on $T$ with Tor interval $[a,b]$, $e^*L_n\\otimes^LQ$ is a direct summand of\n$$e^*(L_n\\otimes^Le_!Q),$$\nusing derived tensor/pullback [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The latter has the required interval by the Tor bound on $L_n$ and exactness of $e^*$, which proves it for $Q$. Constructibility for $e^*$ follows by pulling back the finite partition and the local constant finite presentations. Constructibility for $e_!$ on $\\mathcal C_U$ follows from step 5 and the assumed preservation by $F_e$. The ambient adjunction therefore restricts to $\\mathcal C_U,\\mathcal C_T$ with precisely the same units and counits.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "def-weil-proper-morphism",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor); the derived formula is obtained with flat resolutions. The diagonal summand gives the inverse-image Tor bound without a coefficient flatness assumption."
+   }
+  },
+  {
+   "text": "Let $t^C_{n,m}:C_n\\to\\operatorname{Res}_{n,m}C_m$ be the transition in restriction-of-scalars form; its scalar-adjunction transpose is $r^C_{n,m}$ [det-sp-coefficient-towers-abelian]. In the actual section model [lem-coef-semilinear-derived-sections], the transition of the separately derived compact-support composite is\n$$F_{h,n}C_n\\xrightarrow{F_{h,n}(t^C_{n,m})}F_{h,n}\\operatorname{Res}_{n,m}C_m\\xrightarrow{d_h}\\operatorname{Res}_{n,m}F_{h,m}C_m,$$\nwhere $d_h$ is the canonical comparison of [lem-sf-compact-support-restriction-of-scalars]. This concerns arbitrary strict transitions and does not require a normalized object. Take its transpose under scalar extension $-\\otimes^L_{A_n}A_m\\dashv\\operatorname{Res}_{n,m}$. The compatibility of the proper adjunction with restriction in [lem-weil-pbc-ring-sheaf-change-adjunction], and the coefficient projection clause of [lem-coef-semilinear-derived-sections], identify the transpose with\n$$F_{h,m}(r^C_{n,m})\\circ b_h(C_n).$$\nIn detail the proper factor is obtained by applying scalar extension to the $A_n$-counit and then taking its $A_m$-linear transpose; for the open factor tensor distributes over the defining extension presheaf, giving the extension-by-zero tensor comparison. These are exactly the specified factors of [det-sp-reduction-direct-image], whose hypotheses apply to $C_n\\in\\Dctf$; in particular $b_h$ is invertible without $A_m$ being flat over $A_n$. This proves the displayed reduction identity for the actual transition, not for a newly chosen tower. For $n\\geq m\\geq r$, substitute this identity twice. Naturality of $b_{m,r}$ moves $F_{h,m}(r^C_{n,m})$ through it, and the coefficient-composition equation of [det-sp-reduction-direct-image] replaces $b_{m,r}\\circ(b_{n,m}\\otimes^L A_r)$ by $b_{n,r}$ with the tensor associators. What remains inside $F_{h,r}$ is $r^C_{m,r}\\circ(r^C_{n,m}\\otimes^L A_r)$, equal to $r^C_{n,r}$ by [det-sp-coefficient-towers-abelian]. Naturality in $C$ follows by applying the same natural transformations to a tower morphism; for $m=n$ both the coefficient map and the scalar adjunction are identities.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "det-sp-reduction-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Levels paragraph of det-sp-tower-gluing; the reduction normalization is det-sp-reduction-direct-image. The calculation uses actual semilinear transitions and scalar adjunction transposes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proper-morphism",
+  "def-weil-unramified-morphism",
+  "det-pe-finite-tor-comparison-noetherian",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-reduction-direct-image",
+  "det-sp-tower-shriek-levels",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-etale-sum-stalks",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Levels paragraphs, expanded by actual ring-system adjunction mates, compactification pasting, exact sum-extension and scalar-adjunction calculation; no inference of morphism equality or existence from evaluation."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -137,13 +292,163 @@
    "results": "0 hit(s): none",
    "date": "2026-10-16",
    "verdict": "no match: read Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:231-265 (free additive sheaves associated to a site square) and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139-143 (ordinary module-sheaf pushforward composition). Neither states derived ringed-topos object gluing or varying-coefficient compact-support calculus."
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|[Ss]emilinear.*[Ss]heaf|[Ss]heaf.*[Ss]emilinear",
+   "results": "1 hit(s): Mathlib/Algebra/Category/ModuleCat/Presheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: ordinary underived module pushforwards and semilinear presheaf restrictions do not state derived compact support on varying-ring towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_hcomp\"",
+   "results": "2 hit(s): CategoryTheory.mateEquiv_hcomp, CategoryTheory.Bicategory.mateEquiv_hcomp",
+   "date": "2026-10-16",
+   "verdict": "Found the generic horizontal mate-pasting theorem, already carried by the cited Mathlib leaf lem-weil-pbc-mate-pasting; it does not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image with proper support for semilinear inverse sequences of module sheaves, normalized by adjunction mates and extension by zero",
+   "results": "8 hit(s): SheafOfModules.pushforward, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.Presentation.map, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardSections, SheafOfModules.pushforwardNatIso, localCohomology.diagram",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: ordinary underived module pushforwards and semilinear presheaf restrictions do not state derived compact support on varying-ring towers."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-tower-gluing",
   "date": "2026-10-16"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sp-coefficient-tower-shriek-calculus",
+  "worker": "stage1",
+  "summary": "Second reading repaired the three-step split into seven explicit steps. Statement unchanged; no new nodes or leaves. Construct all tower maps before evaluation, prove coherence by mates, use arbitrary-finite-ring etale origin with Tor comparison, construct sum-extension and its graph comparison, and calculate actual semilinear reduction maps.",
+  "blueprint": "Steps 1-3 realize Local pairs compactification composition and open normalization; steps 4-6 realize the exact etale adjunction and its uniform intervals; step 7 realizes Levels reduction compatibility.",
+  "tool_uses": [
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic discrete Noetherian Tor comparison supplies the finite-level etale witnesses with the same Tor intervals over arbitrary k."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Finite etale normalization of the constructed tower composition."
+   },
+   {
+    "node": "lem-amb-etale-sum-stalks",
+    "why": "Generic finite-level geometric stalk formula determines the counit fibre sum."
+   },
+   {
+    "node": "lem-asd-etale-compact-support-normalization",
+    "why": "Identifies the finite evaluation of the graph comparison with exact sum-extension."
+   },
+   {
+    "node": "lem-cbc-compactifiable-cofiltered",
+    "why": "Generic compactification common-refinement and equalization supplies independence from choices."
+   },
+   {
+    "node": "lem-cbc-compactifiable-compatible-tower",
+    "why": "Generic geometric compatible compactification tower and common-refinement lemma realizes the Stacks composition diagram."
+   },
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "Finite normalization of the actual proper/open mate."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Use its geometric clopen description and coefficient-independent projection calculation, explicitly reconstructed for varying rings; no application of its constant-ring derived conclusion to a varying-ring tower."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic simultaneous derived operation/adjunction model supplies actual varying-ring maps and transition calculations; evaluation alone cannot lift maps."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic localized ringed-site exact adjunction applies to the sum-extension construction at each level."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Generic restriction-of-scalars comparison specifies the strict transition after compact support."
+   },
+   {
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Specified finite site and coefficient normalizations for maps constructed here."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic constructible comparison over arbitrary schemes replaces the inapplicable global finite-field origin lemma."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic descent of exact functors and natural transformations passes the adjunction to ordinary derived categories."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic localized site comparison identifies right adjoints and hence the exact etale/pro-etale sum-extension comparison."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic categorical pasting theorem proves equality before evaluation."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic counit compatibility under restriction fixes the adjoint-transpose normalization."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic sum-extension tensor identity proves preservation of each Tor interval."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ringed-topos compositor is applied on the varying-ring system topos."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic tensor/pullback comparison proves the inverse-image Tor bound against arbitrary module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic adjunction on complexes supplies actual units, counits and triangle identities."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the localized pro-etale site used for etale sum-extension."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-etale-sum-stalks",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NU-d8d39f78e",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-d8d39f78e (reviewer sub-agent of L); spot-checked: I read the item, its unit sk-prop-sp-tower-geometric, the blueprint det-sp-tower-gluing statement and proof (main-20261015), the DAG citer det-sp-tower-gluing, and the full statements of all 9 stmt_deps and 30 proof_deps. Stacks more-etale 0F7J (lemma-shriek-composition, line 3159ff) has the same compactification diagram as step 3. Tags 0F7B, 0F7C, 0F7D and 03S5 match their labels in tags/tags. Shape: one commit, the item and the report, no new nodes. The statement, stmt_deps, unit and blueprint fields are identical to the base node; I read the newtargets and live copies without changing them, and both are still unsplit. proof_deps equals the union of the step uses, every cited id exists and none is merged, the dependency closure (13237 nodes) does not contain the item, and there is no SGA source. Coefficient category: ordinary module derived categories over the constant finite rings A_n, with intrinsic constructibility and Tor amplitude. This is the same category as in det-sp-reduction-direct-image and lem-sp-et-proet-coefficient-compatibility. The b_h in clause (3) is exactly that node's adjoint-transpose comparison. Step 1: the section model with B_n=R_n is exactly Tow. Etale origin over any finite ring comes from lem-weil-pbc-finite-ring-constructible-derived-origin, and Tor intervals carry over by det-pe-finite-tor-comparison-noetherian (qcqs schemes, finite Noetherian A_n). The finite-field-only clause (2)(a) of det-sp-tower-shriek-levels is avoided. Step 2: the clopen map s comes from the geometric clause. beta and pi_s are termwise and ring-linear, so they make sense for the varying ring system. Invertibility follows from the finite evaluation clause of lem-cbc-strict-tower-proper-open-calculus with B=A_n, plus conservativity. The pasting equations hold before evaluation by mate-pasting (1),(2). Step 3: this is the 0F7J/0F7B construction, with the inverse of the compositor kappa (direction checked). Choices are independent by the cofiltered and common-refining-tower lemmas, and the finite normalization is lem-amb-etale-compact-comparisons. The open case uses (ju,p). Step 4: sum extension on the localized pro-etale site. The adjunction holds on Tow and passes to the derived categories through the homotopy-category adjunction and the localization universal property, so it is not inferred from the levels. Step 5: the graph is closed (p separated) and open (diagonal of an unramified map). The evaluation is the inverse of c_{u,(j,r)}, the site comparison comes from an isomorphism of right adjoints, and the counit is the fibre sum by lem-amb-etale-sum-stalks. Step 6: cohomological intervals by exactness. Tor for e_! by the slice tensor identity, since e_! preserves K-flatness. Tor for e^* because Q is a direct summand of e^*e_!Q (the diagonal of a separated etale map is clopen). Constructibility of e_! uses the statement's own preservation assumption. Step 7: the restriction-form transition is d_h. Its transpose is F_{h,m}(r) composed with b_h, by the adjunction-compatibility clause of lem-weil-pbc-ring-sheaf-change-adjunction. The n>=m>=r case follows from the composition law of b, and no flatness is needed. Edge cases checked: empty schemes, identities, open immersions, a two-sheet etale cover, relative dimension 0, m=n, non-normalized towers and ramified E. Duplicate check: rg over the tower lower-shriek nodes (sk-lem-sp-tower-bound, det-sp-tower-shriek-levels, det-sp-integral-direct-image-tower, det-sp-tower-gamma) found no duplicate, and the item does not restate a clause of its parent. Route: every dependency is in the transitive route of the unit, so the 22 declared tool_uses are redundant but accurate; I accept them. No changes made."
  }
 }

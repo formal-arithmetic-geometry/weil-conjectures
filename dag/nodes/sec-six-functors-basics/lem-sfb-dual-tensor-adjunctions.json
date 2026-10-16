@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-dual-tensor-adjunctions",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-ext-formula",
+   "place": "Proof (2), final two sentences: 'Being dualizable' and 'has adjoints on both sides'; the generic dual-pair adjunctions and preservation of products used there.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor adjunctions and preservation of limits from an exact pairing",
+ "statement": "Let $(\\mathcal C,\\otimes,\\mathbf1)$ be a monoidal category [def-sfb-monoidal-category]. Let $P,D\\in\\mathcal C$ have morphisms $e:D\\otimes P\\to\\mathbf1$ and $c:\\mathbf1\\to P\\otimes D$ satisfying $(1_P\\otimes e)(c\\otimes1_P)=1_P$ and $(e\\otimes1_D)(1_D\\otimes c)=1_D$, with associators and unitors understood. Such data are called an exact pairing. Put $T_A(B)=A\\otimes B$ and $U_A(B)=B\\otimes A$. Then there are adjunctions\n$$T_D\\dashv T_P,\\qquad U_P\\dashv U_D.$$\nAn adjunction $F\\dashv G$ means a bijection $\\operatorname{Hom}(F(A),B)\\cong\\operatorname{Hom}(A,G(B))$ natural in both variables. Each of the two right adjoints $T_P,U_D$ preserves every existing small limit, and each of the two left adjoints $T_D,U_P$ preserves every existing small colimit [def-weil-pbc-category-colimit]. Here a limit is an object with a compatible cone of maps to the diagram, universal among such cones; preservation means the image cone is again universal. In particular the right adjoints preserve products [def-weil-category-product]. Smallness is relative to [def-weil-size-convention].",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+  "place": "tensorLeftAdjunction, line 459, and tensorRightAdjunction, line 468; preservation clauses: Mathlib/CategoryTheory/Adjunction/Limits.lean, leftAdjoint_preservesColimits line 92 and rightAdjoint_preservesLimits line 207."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-weil-pbc-category-colimit",
+  "def-weil-category-product",
+  "def-weil-size-convention"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.tensorLeftAdjunction",
+   "results": "CategoryTheory.tensorLeftAdjunction",
+   "date": "2026-10-16",
+   "verdict": "match: generic categorical tool only; not the integral stratum formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product with a dualizable object has left and right adjoints given by tensor product with the dual",
+   "results": "TensorProduct.adjoint_map; CategoryTheory.Types.tensorProductAdjunction; CategoryTheory.tensorRightAdjunction; CategoryTheory.instIsLeftAdjointTensorLeft; CategoryTheory.tensorLeftAdjunction; CategoryTheory.ihom.adjunction; CategoryTheory.exp.adjunction; CategoryTheory.Closed.adj",
+   "date": "2026-10-16",
+   "verdict": "match: generic categorical tool only; not the integral stratum formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal category tensoring with an object with a dual has a left and a right adjoint, given by tensoring with its dual, and preserves all limits and colimits",
+   "results": "CategoryTheory.tensorLeftAdjunction; CategoryTheory.tensorRightAdjunction; CategoryTheory.LeftRigidCategory; CategoryTheory.Exponentiable; CategoryTheory.RightRigidCategory; CategoryTheory.exp.adjunction; CategoryTheory.tensorLeftHomEquiv; CategoryTheory.HasLeftDual",
+   "date": "2026-10-16",
+   "verdict": "match: generic categorical tool only; not the integral stratum formula"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma rightAdjoint_preservesLimits|lemma leftAdjoint_preservesColimits",
+   "results": "Mathlib/CategoryTheory/Adjunction/Limits.lean:92 CategoryTheory.Adjunction.leftAdjoint_preservesColimits; :207 CategoryTheory.Adjunction.rightAdjoint_preservesLimits; both statements read.",
+   "date": "2026-10-16",
+   "verdict": "match: generic categorical tool only; not the integral stratum formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjoint_preservesLimits",
+   "results": "CategoryTheory.Adjunction.rightAdjoint_preservesLimits",
+   "date": "2026-10-16",
+   "verdict": "match: generic categorical tool only; not the integral stratum formula"
+  },
+  {
+   "tool": "grep",
+   "query": "def tensorLeftAdjunction|def tensorRightAdjunction",
+   "results": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:459 CategoryTheory.tensorLeftAdjunction; :468 CategoryTheory.tensorRightAdjunction; both statements read.",
+   "date": "2026-10-16",
+   "verdict": "match: generic categorical tool only; not the integral stratum formula"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorLeftHomEquiv|tensorRightHomEquiv|class ExactPairing",
+   "results": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "match: independently confirms the generic exact-pairing adjunction leaf; declaration source and preservation clauses read"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.tensorRightAdjunction",
+   "results": "CategoryTheory.tensorRightAdjunction",
+   "date": "2026-10-16",
+   "verdict": "match: independently confirms the generic exact-pairing adjunction leaf; declaration source and preservation clauses read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact pairing in a monoidal category, tensor functors are adjoint and the right tensor functor preserves products",
+   "results": "CategoryTheory.tensorRightAdjunction; CategoryTheory.tensorLeftAdjunction; CategoryTheory.tensorRightHomEquiv; CategoryTheory.tensorLeftHomEquiv; CategoryTheory.exactPairingOfFaithful; CategoryTheory.tensorRightHomEquiv_tensor; CategoryTheory.tensorLeftHomEquiv_tensor; CategoryTheory.ExactPairing.evaluation",
+   "date": "2026-10-16",
+   "verdict": "match: independently confirms the generic exact-pairing adjunction leaf; declaration source and preservation clauses read"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExactPairing\"",
+   "results": "12 hit(s); CategoryTheory.ExactPairing.termε_; CategoryTheory.ExactPairing.termη_; CategoryTheory.ExactPairing; CategoryTheory.exactPairingUnit; CategoryTheory.exactPairingCongrLeft; CategoryTheory.exactPairingCongrRight; CategoryTheory.exactPairingCongr; CategoryTheory.ExactPairing.coevaluation",
+   "date": "2026-10-16",
+   "verdict": "match: confirms the exact-pairing definition underlying tensorLeftAdjunction and tensorRightAdjunction; the four declaration clauses and line numbers were independently read"
+  },
+  {
+   "tool": "grep",
+   "query": "ExactPairing|tensorLeftHomEquiv|tensorRightHomEquiv",
+   "results": "16 hit(s); Mathlib/Algebra/Category/FGModuleCat/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean; Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean; Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean; Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean; Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "match: confirms the exact-pairing definition underlying tensorLeftAdjunction and tensorRightAdjunction; the four declaration clauses and line numbers were independently read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation and coevaluation satisfying the snake identities induce adjunctions between left and right tensor functors and preservation of limits by their right adjoints",
+   "results": "8 hit(s); CategoryTheory.tensorRightAdjunction; CategoryTheory.tensorLeftAdjunction; CategoryTheory.instIsLeftAdjointTensorLeft; CategoryTheory.exp.adjunction; CategoryTheory.ihom.instIsLeftAdjointTensorLeft; CategoryTheory.Closed.adj; CategoryTheory.ihom.adjunction; CategoryTheory.expComparison",
+   "date": "2026-10-16",
+   "verdict": "match: tensorRightAdjunction and tensorLeftAdjunction directly supply the two adjunctions; their source and the preservation declarations were independently read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.tensorLeftAdjunction; CategoryTheory.tensorRightAdjunction; CategoryTheory.Adjunction.leftAdjoint_preservesColimits; CategoryTheory.Adjunction.rightAdjoint_preservesLimits",
+  "file": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+  "line": 459,
+  "how": "One direct declaration per clause. The exact-pairing hypothesis is CategoryTheory.ExactPairing P D with coevaluation c and evaluation e. tensorLeftAdjunction P D (Basic.lean:459) gives T_D ⊣ T_P, and tensorRightAdjunction P D (Basic.lean:468) gives U_P ⊣ U_D. For either displayed adjunction adj, adj.leftAdjoint_preservesColimits (Mathlib/CategoryTheory/Adjunction/Limits.lean:92) and adj.rightAdjoint_preservesLimits (same file:207) give its preservation clauses at any chosen small indexing universes; products are limits of discrete diagrams. No existence of a limit or colimit is asserted."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "det-lem-int-ext-formula",
+  "date": "2026-10-16",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-ext"
+}
