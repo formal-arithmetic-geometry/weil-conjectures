@@ -18,28 +18,16 @@
  ],
  "proof": [
   {
-   "text": "The given sigmaT defines a local ring map psiT into Omega. Its supplied pointed factorizations and any one neighbourhood imply that Spec(psiT) composed with the structural map is barT. Its image is the closed point. Apply strictHenselizationLocalStructure to make the T colimit strictly henselian.",
+   "text": "Transport the canonical small affine limit cone across the affine spectrum isomorphisms and extend it along the initial inclusion into all pointed etale neighbourhoods. Each extended leg is a chosen affine leg followed by a pointed refinement. Its composite with the structural map is the canonical structural morphism, and composing it with the supplied Omega-point gives the neighbourhood's marked point. This is the fully proved private fullPointedStrictHenselizationCone helper; no henselianity is used.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-local-structure",
-    "def-weil-geometric-point",
-    "def-weil-residue-field",
-    "def-weil-pbc-relative-separable-closure",
+    "def-weil-pbc-strict-henselization-limit",
     "def-weil-pbc-strict-henselization-structural-map",
-    "def-weil-pbc-henselian-terminology"
+    "def-weil-affine-spectrum"
    ],
    "elementary": false
   },
   {
-   "text": "Pull each affine pointed etale S-neighbourhood back to Spec C_T. Choose an affine chart B through its marked point q. Localize at q. The map C_T -> B_q is local and weakly etale, hence an isomorphism by Olivier. Its inverse defines a section; extension of the field map to B_q proves that the section preserves the chosen Omega-point. This is a pointed refinement of the section argument in Stacks 03QO, with Olivier (092Z) replacing the etale decomposition theorem.",
-   "uses": [
-    "thm-weil-pbc-weak-etale-strict-local",
-    "def-weil-affine-spectrum",
-    "def-weil-open-immersion"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compatibility follows from the open diagonal of an etale morphism: two maps over S that agree on the geometric closed point agree everywhere, since every point of a local spectrum generalizes the closed point. This argument is written in the Lean proof using Mathlib FormallyUnramified.isOpenImmersion_diagonal, IsLocalRing.specializes_closedPoint and IsOpenImmersion.lift. Transport the compatible maps through isoSpec to form a cone and use strictHenselization_properties and IsLimit.lift.",
+   "text": "Pullback along g sends a pointed S-neighbourhood (V,v) to the etale T-neighbourhood V x_S T, marked by pullback.lift v barT using hbar. The pullback map of a neighbourhood morphism preserves this point, by pullback extensionality. The legs of the full T-cone at these pullbacks followed by their first projections form a cone on the full S-neighbourhood diagram: its naturality is the pullback first-projection equation and T-cone naturality. Use the S-limit lift to obtain f.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit",
     "def-weil-pbc-category-colimit"
@@ -47,32 +35,34 @@
    "elementary": false
   },
   {
-   "text": "Spec.preimage converts the limit morphism into a ring map. Its cone-leg equations give the structural equality. IsLimit.hom_ext and the supplied sigmaS factorizations give the equality of maps into Omega. Mathlib isLocalHom_of_comp then proves locality from the local residue composite.",
+   "text": "Compose a cone leg with its neighbourhood structure map. The pullback condition and the full T-cone structural equation prove f followed by the S structural map equals the T structural map followed by g. To prove the pointed equality pT followed by f equals pS, apply limit hom_ext. After the limit fac equation, the T-cone pointed equation reduces each component to pullback.lift_fst, and the S-cone pointed equation gives the other side.",
    "uses": [
+    "def-weil-pbc-strict-henselization-structural-map",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Spec.preimage on f. Spec.map_preimage gives its scheme map and hence its structural equality. Faithfulness of Spec translates the pointed equality to psiS = psiT composed with h. The map psiS, a residue quotient followed by maps between fields, is local. Thus psiT composed with h is local, and Mathlib isLocalHom_of_comp proves h local. Return h and these three properties, with the original signature unchanged.",
+   "uses": [
+    "def-weil-affine-spectrum",
     "def-weil-locally-ringed-space-morphism"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-affine-spectrum",
-  "def-weil-geometric-point",
   "def-weil-locally-ringed-space-morphism",
-  "def-weil-open-immersion",
   "def-weil-pbc-category-colimit",
-  "def-weil-pbc-henselian-terminology",
-  "def-weil-pbc-relative-separable-closure",
   "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-strict-henselization-structural-map",
-  "def-weil-residue-field",
-  "lem-weil-pbc-strict-henselization-local-structure",
-  "thm-weil-pbc-weak-etale-strict-local"
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 03QO (pointed etale sections), 092Z (Olivier), 02GE (open diagonal); strict-henselization colimit universal property",
-  "note": "Second reading N1: removed a false arbitrary-local-map compatibility assertion and both proposed split nodes. Completed the original statement through pointed sections and a limit cone. The localization calculation adapts the existing private proof in StrictlyHenselianOpenSectionsStalk; no duplicate public declaration is introduced. Sources 03QO and 092Z read online on 2026-10-12."
+  "place": "etale-cohomology.tex, paragraph after Definition 03PS and inverse-limit argument in proof of Theorem 03Q9; algebra.tex lemma-strictly-henselian-functorial (04GU)",
+  "note": "C1 replaces the section/localization/Olivier route with direct pointed pullback cones. The affine-to-full cone transport and pointed pullback functor adapt the proved private construction in Sheaf.AlgebraicGeometry.StrictHenselizationSchemeFunctoriality; all marked-point equations are proved here. No theorem is split off and no new sorry or public interface is added."
  },
  "mathlib_searches": [
   {
@@ -139,13 +129,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T060746-L-2911636",
-  "kind": "proof",
+  "landing": "20261016T221558-L-1611643",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
