@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-lem-proper-unbounded-window",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper direct image of unbounded complexes",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$, and let $p\\colon X\\to Y$ and $d$ be as in [sk-lem-proper-heart-bound]. Write\n$\\Dic^{\\leq b}(X,\\Lambda)$ and $\\Dic^{\\geq a}(X,\\Lambda)$ for the objects of $\\Dic(X,\\Lambda)$\n([sk-cor-ambient-ind-derived]) with cohomology in degrees $\\leq b$, respectively $\\geq a$. Then\n$Rp_*\\colon\\D(X_{\\mathrm{proét}},\\Lambda)\\to\\D(Y_{\\mathrm{proét}},\\Lambda)$ maps $\\Dic(X,\\Lambda)$ into $\\Dic(Y,\\Lambda)$, and\n\n$$\nRp_*\\bigl(\\Dic^{\\leq b}(X,\\Lambda)\\bigr)\\subset\\Dic^{\\leq b+2d+1}(Y,\\Lambda),\n\\qquad\nRp_*\\bigl(\\Dic^{\\geq a}(X,\\Lambda)\\bigr)\\subset\\Dic^{\\geq a}(Y,\\Lambda).\n$$\n\nMoreover, for $K\\in\\Dic(X,\\Lambda)$ and every integer $q$, the canonical truncation maps\n$K\\leftarrow\\tau_{\\leq q}K\\to\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K$ induce an isomorphism in\n$\\IndCons(Y,\\Lambda)$\n\n$$\n\\mathcal H^q(Rp_*K)\\simeq\\mathcal H^q\\bigl(Rp_*\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K\\bigr).\n$$",
+ "statement": "Let $X,Y$ be schemes, $\\ell$ a prime, $\\Qlb$ an algebraic closure of $\\mathbf Q_\\ell$, and $E\\subseteq\\Qlb$ a finite extension of $\\mathbf Q_\\ell$. Let $\\Lambda=E$ or $\\Qlb$, understood as the condensed coefficient ring of [sk-def-sfb-condensed-ring] or [sk-def-sfb-qlbar-condensed], respectively. For $T=X,Y$, put $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], and let $D(T_{\\mathrm{proét}},\\Lambda)=D(\\Mod_{\\Lambda_T})$ be the unbounded derived category of sheaves of $\\Lambda_T$-modules, with cohomology sheaves $\\mathcal H^n$ [def-weil-derived-cohomology-sheaves]. Write $\\IndCons(T,\\Lambda)$ for the full subcategory of sheaves isomorphic to filtered colimits, in $\\Mod_{\\Lambda_T}$, of constructible sheaves [sk-def-sfb-constructible], and define\n$$\n\\Dic(T,\\Lambda)=\\{K\\in D(T_{\\mathrm{proét}},\\Lambda):\\mathcal H^n(K)\\in\\IndCons(T,\\Lambda)\\text{ for every }n\\in\\mathbf Z\\}.\n$$\nLet $p:X\\to Y$ be proper and let $d\\in\\mathbf Z$ bound the dimensions of all geometric fibres of $p$, as in [sk-lem-proper-heart-bound]. Let $Rp_*$ denote the total right derived functor [def-sfb-right-derived-functor] of the module pushforward [sk-def-sfb-module-pushforward-pullback]. For integers $a,b$, write $\\Dic^{\\leq b}(T,\\Lambda)$ and $\\Dic^{\\geq a}(T,\\Lambda)$ for the objects of $\\Dic(T,\\Lambda)$ whose cohomology vanishes in degrees $>b$, respectively $<a$. Use the canonical truncations of [def-kun-truncations]. Then $Rp_*$ maps $\\Dic(X,\\Lambda)$ into $\\Dic(Y,\\Lambda)$, and\n$$\nRp_*\\bigl(\\Dic^{\\leq b}(X,\\Lambda)\\bigr)\\subset\\Dic^{\\leq b+2d+1}(Y,\\Lambda),\\qquad\nRp_*\\bigl(\\Dic^{\\geq a}(X,\\Lambda)\\bigr)\\subset\\Dic^{\\geq a}(Y,\\Lambda).\n$$\nMoreover, for $K\\in\\Dic(X,\\Lambda)$ and every $q\\in\\mathbf Z$, the canonical truncation maps\n$K\\leftarrow\\tau_{\\leq q}K\\to\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K$ induce an isomorphism in $\\IndCons(Y,\\Lambda)$\n$$\n\\mathcal H^q(Rp_*K)\\simeq\\mathcal H^q\\bigl(Rp_*\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K\\bigr).\n$$",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/_section.md",
   "place": "node sk-lem-proper-unbounded-window, order 1529",
@@ -19,46 +19,126 @@
   ]
  },
  "stmt_deps": [
-  "sk-lem-proper-heart-bound"
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-derived-cohomology-sheaves",
+  "sk-def-sfb-constructible",
+  "sk-lem-proper-heart-bound",
+  "def-sfb-right-derived-functor",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-kun-truncations"
  ],
  "proof": [
   {
-   "text": "*Bounded below $K$.* The hypercohomology spectral sequence\n\n$$\nE_2^{u,v}=R^up_*\\mathcal H^v(K)\\Longrightarrow\\mathcal H^{u+v}(Rp_*K)\n$$\n\nconverges. By [sk-lem-proper-heart-bound] its only nonzero columns are $0\\leq u\\leq2d+1$, and their terms\nlie in $\\IndCons(Y,\\Lambda)$. So each $\\mathcal H^n(Rp_*K)$ has a finite filtration whose graded pieces are\nsubquotients of objects of $\\IndCons(Y,\\Lambda)$; since this category is closed under kernels, cokernels\nand extensions ([sk-prop-ind-heart]), $\\mathcal H^n(Rp_*K)\\in\\IndCons(Y,\\Lambda)$. The two amplitude bounds\ncan be read off from the columns ([det-proper-unbounded-window-bounded-below]).",
+   "text": "Clause (2) of [det-ambient-ind-derived-sums] states that both $\\tau_{\\leq r}K$ and $\\tau_{\\geq r}K$ remain in $\\Dic$ whenever $K\\in\\Dic$. Its coefficients are exactly $E$ or $\\Qlb$, so it applies to the present category. The good-truncation formulas in [def-kun-truncations] give $\\mathcal H^j(\\tau_{\\geq r}K)=\\mathcal H^j(K)$ for $j\\geq r$ and zero otherwise, and the analogous formula for $\\tau_{\\leq s}K$. Thus $K_n=\\tau_{\\geq-n}K$ is bounded below, remains in $\\Dic$, and has cohomology in degrees $\\leq b$ whenever $K$ does. The same stability clause applies successively to both truncations used in the final window.",
    "uses": [
-    "sk-lem-proper-heart-bound",
+    "det-ambient-ind-derived-sums",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
+    "place": "Bounded-below and arbitrary paragraphs: justify the truncations used in the reduction"
+   }
+  },
+  {
+   "text": "For bounded-below $L\\in\\Dic(X,\\Lambda)$ apply [det-proper-unbounded-window-bounded-below]. Its hypotheses are precisely our coefficients, proper $p$, and fibre-dimension bound $d$, together with boundedness below of $L$. It gives ind-constructible cohomology of $Rp_*L$ in every degree, the lower bound $a$ if $L\\in\\Dic^{\\geq a}$, and the upper bound $b+2d+1$ if also $L\\in\\Dic^{\\leq b}$. This invokes the existing bounded-below spectral-sequence node rather than using an uncited spectral sequence or an uncited closure theorem.",
+   "uses": [
     "det-proper-unbounded-window-bounded-below"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
+    "place": "First paragraph, bounded-below case"
+   }
   },
   {
-   "text": "*Arbitrary $K$.* By [sk-prop-pe-left-complete], $K\\simeq R\\varprojlim_n\\tau_{\\geq-n}K$. Being a right\nadjoint, $Rp_*$ preserves products and hence derived inverse limits, so\n$Rp_*K\\simeq R\\varprojlim_nRp_*\\tau_{\\geq-n}K$. The fibre of $\\tau_{\\geq-n-1}K\\to\\tau_{\\geq-n}K$ is\n$\\mathcal H^{-n-1}(K)[n+1]$, whose direct image has cohomology only in degrees $[-n-1,2d-n]$. Hence, for\nfixed $q$, the towers $\\mathcal H^q(Rp_*\\tau_{\\geq-n}K)$ and $\\mathcal H^{q-1}(Rp_*\\tau_{\\geq-n}K)$ have\nisomorphisms as transition maps for $n$ large. An eventually constant tower has vanishing\n$\\varprojlim^1$, so the Milnor sequence of [sk-prop-pe-milnor] gives\n\n$$\n\\mathcal H^q(Rp_*K)\\simeq\\mathcal H^q(Rp_*\\tau_{\\geq-n}K)\\quad\\text{for all sufficiently large }n.\n$$\n\nThe right side is covered by the bounded-below case. This proves $\\mathcal H^q(Rp_*K)\\in\\IndCons(Y,\\Lambda)$,\nand if $K\\in\\Dic^{\\leq b}(X,\\Lambda)$ it gives the bound $b+2d+1$. The lower bound needs no argument for\nunbounded $K$, since an object of $\\Dic^{\\geq a}$ is bounded below ([det-proper-unbounded-window-arbitrary]).",
+   "text": "Fix arbitrary $K\\in\\Dic(X,\\Lambda)$ and an integer $q$. The stabilization assertion of [det-proper-unbounded-window-arbitrary] supplies $N$ such that, for $n\\geq N$, the canonical map $\\mathcal H^q(Rp_*K)\\to\\mathcal H^q(Rp_*K_n)$ is an isomorphism. Choose also $n\\geq0$. By step 1, $K_n$ is bounded below in $\\Dic$, so [det-proper-unbounded-window-bounded-below] makes the right-hand sheaf ind-constructible. Since $\\IndCons$ was defined up to sheaf isomorphism, the left-hand sheaf is ind-constructible as well. Doing this separately for every $q$ proves $Rp_*K\\in\\Dic(Y,\\Lambda)$. If $K\\in\\Dic^{\\leq b}$, step 1 gives the same upper bound on $K_n$; the bounded-below node then makes the right-hand side zero for $q>b+2d+1$, and the canonical isomorphism makes the left-hand side zero. This proves the upper amplitude bound without imposing boundedness below on $K$.",
    "uses": [
-    "det-proper-unbounded-window-arbitrary"
+    "det-proper-unbounded-window-arbitrary",
+    "det-proper-unbounded-window-bounded-below"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
+    "place": "Second paragraph, eventual-value isomorphism and its ind-constructibility and upper-bound consequences"
+   }
   },
   {
-   "text": "*The window isomorphism.* Apply the bounds to the truncation triangles\n\n$$\n\\tau_{\\leq q}K\\to K\\to\\tau_{\\geq q+1}K,\\qquad\n\\tau_{\\leq q-2d-2}K\\to\\tau_{\\leq q}K\\to\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K.\n$$\n\nThe direct image of $\\tau_{\\geq q+1}K$ lives in degrees $\\geq q+1$, and that of $\\tau_{\\leq q-2d-2}K$ in\ndegrees $\\leq q-1$. The long exact cohomology sequences of the two triangles therefore give isomorphisms\n$\\mathcal H^q(Rp_*\\tau_{\\leq q}K)\\simeq\\mathcal H^q(Rp_*K)$ and\n$\\mathcal H^q(Rp_*\\tau_{\\leq q}K)\\simeq\\mathcal H^q(Rp_*\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K)$\n([det-proper-unbounded-window-iso]).",
+   "text": "If $K\\in\\Dic^{\\geq a}(X,\\Lambda)$, then $K$ is already bounded below. The lower-bound assertion of [det-proper-unbounded-window-bounded-below] applies directly and gives $\\mathcal H^q(Rp_*K)=0$ for $q<a$, together with ind-constructible cohomology. Hence $Rp_*K\\in\\Dic^{\\geq a}(Y,\\Lambda)$.",
+   "uses": [
+    "det-proper-unbounded-window-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
+    "place": "End of second paragraph, lower amplitude bound"
+   }
+  },
+  {
+   "text": "Put $A=\\tau_{\\leq q}K$ and $B=\\tau_{\\geq q-2d-1}A$. Step 1 gives $A,B\\in\\Dic(X,\\Lambda)$, and step 3 puts $\\mathcal H^q(Rp_*K)$, $\\mathcal H^q(Rp_*A)$ and $\\mathcal H^q(Rp_*B)$ in $\\IndCons(Y,\\Lambda)$. Apply [det-proper-unbounded-window-iso], with the same $\\Lambda,p,d,K,q$: its statement says that the two canonical maps give isomorphisms $\\alpha:\\mathcal H^q(Rp_*A)\\to\\mathcal H^q(Rp_*K)$ and $\\beta:\\mathcal H^q(Rp_*A)\\to\\mathcal H^q(Rp_*B)$. The required isomorphism is $\\beta\\circ\\alpha^{-1}$, whose inverse is $\\alpha\\circ\\beta^{-1}$; their composites are identities by cancellation. Since $\\IndCons$ is a full subcategory of module sheaves, these maps and their inverses are morphisms in $\\IndCons$. Thus this is exactly the isomorphism induced by the specified truncation zig-zag, rather than an unspecified isomorphism of its endpoints.",
    "uses": [
     "det-proper-unbounded-window-iso"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
+    "place": "Third paragraph, the two canonical window maps and their composite"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-proper-heart-bound",
+  "det-ambient-ind-derived-sums",
+  "def-kun-truncations",
   "det-proper-unbounded-window-bounded-below",
   "det-proper-unbounded-window-arbitrary",
   "det-proper-unbounded-window-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
+  "place": "All three paragraphs; reuse the existing detail nodes for the spectral sequence, unbounded stabilization, and the two window arrows"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.NatTrans.rightDerived",
+   "date": "2026-10-16",
+   "verdict": "no match: general truncation, derived-functor or sheaf-pushforward declarations do not give proper pushforward on unbounded ind-constructible condensed l-adic complexes or its finite window"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image on unbounded pro-etale complexes with ind-constructible E or algebraic closure of Q_l cohomology has finite cohomological amplitude and a finite truncation window",
+   "results": "DerivedCategory.IsGE, HomologicalComplex.instIsStrictlySupportedTruncGE_1, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_iff, HomologicalComplex.instIsStrictlySupportedStupidTrunc_1, DerivedCategory.isLE_iff, DerivedCategory.isGE_Q_obj_iff, HomologicalComplex.instIsStrictlySupportedTruncGE",
+   "date": "2026-10-16",
+   "verdict": "no match: general truncation, derived-functor or sheaf-pushforward declarations do not give proper pushforward on unbounded ind-constructible condensed l-adic complexes or its finite window"
+  },
+  {
+   "tool": "grep",
+   "query": "indConstructible|IndConstructible|pro.etale.*(amplitude|truncation)|proper.*cohomological",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: general truncation, derived-functor or sheaf-pushforward declarations do not give proper pushforward on unbounded ind-constructible condensed l-adic complexes or its finite window"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward preserves unbounded complexes of ind constructible l-adic sheaves and computes cohomology from a finite truncation window",
+   "results": "TopCat.Sheaf.pushforward, TopCat.Sheaf.pushforward_sheaf_of_sheaf, CategoryTheory.Functor.sheafPushforwardContinuous, SheafOfModules.pushforward_map_val, SheafOfModules.pushforward, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, SheafOfModules.pushforward_obj_val",
+   "date": "2026-10-16",
+   "verdict": "no match: general truncation, derived-functor or sheaf-pushforward declarations do not give proper pushforward on unbounded ind-constructible condensed l-adic complexes or its finite window"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right derived functor of finite cohomological dimension on a Serre subcategory preserves unbounded complexes with cohomology in that subcategory and is computed in a finite cohomological window",
+   "results": "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, HasDerivedCategory.standard, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.IsGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.IsLE",
+   "date": "2026-10-16",
+   "verdict": "no match: general truncation, derived-functor or sheaf-pushforward declarations do not give proper pushforward on unbounded ind-constructible condensed l-adic complexes or its finite window"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -77,5 +157,20 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-proper-unbounded-window"
+ "unit": "sk-lem-proper-unbounded-window",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-proper-unbounded-window",
+  "worker": "stage1",
+  "summary": "Reused all three existing proper-window detail nodes; no new nodes. Added the elementary truncation-membership argument, derived the unbounded amplitude assertions from the actual stabilization statement, and identified the canonical window isomorphism as beta composed with alpha inverse. Expanded missing imported category references inline, preserving the coefficient category and every hypothesis and conclusion. Recorded actual searches and verbatim citations. First dry run required coverage of the ambient-derived unit: step 1 now cites its existing sums/truncations detail node for clause (2), retaining the original unit route.",
+  "blueprint": "Step 1 supplies the truncation bookkeeping implicit in paragraphs 1-3; step 2 realizes paragraph 1 via det-proper-unbounded-window-bounded-below; step 3 realizes paragraph 2 via the stabilization clause of det-proper-unbounded-window-arbitrary; step 4 realizes the final lower-bound sentence of paragraph 2; step 5 realizes paragraph 3 via the two-arrow statement of det-proper-unbounded-window-iso. Step 1 reaches the unit sk-cor-ambient-ind-derived through its existing detail node det-ambient-ind-derived-sums."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-89554aad4",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-89554aad4 (reviewer sub-agent of L); spot-checked: I read the whole item and its proof steps, the unit record, the blueprint main-20261015 files for sk-lem-proper-unbounded-window (_section.md and proof.md), and the sk-prop-ind-heart and sk-cor-ambient-ind-derived sections. I also read every cited node's statement: det-proper-unbounded-window-bounded-below (statement and proof), det-proper-unbounded-window-arbitrary, det-proper-unbounded-window-iso, det-ambient-ind-derived-sums clause (2), def-kun-truncations, sk-lem-proper-heart-bound, def-sfb-right-derived-functor, sk-def-sfb-module-pushforward-pullback/derived-pushpull and the condensed coefficient and constructible definitions. The statement matches the source clause by clause: same Lambda=E or Qlb as condensed rings, proper p, integer fibre bound d, both amplitude bounds and the q-2d-1 window isomorphism in IndCons. IndCons and Dic are written out inline exactly as in the missing sk-prop-ind-heart and sk-cor-ambient-ind-derived. No hypothesis is added and the target is not weakened. Step 1: clause (2) of det-ambient-ind-derived-sums plus the good-truncation formulas give that the truncations stay in Dic and keep the bounds. Step 2: the bounded-below node, used exactly as stated. Step 3: the per-q stabilization clause of det-arbitrary, with the map direction checked, no uniform N claimed, and IndCons closed under isomorphism. Step 4: an object of Dic^{>=a} is bounded below, so step 2 gives the lower bound. Step 5: det-iso gives alpha and beta, and beta∘alpha^{-1} is a map in the full subcategory. The steps follow the blueprint's three paragraphs. There are no new nodes. The only DAG nodes stating similar windows are the ii/direct-sum nodes downstream of this item and versions with O_E or finite coefficients, so there is no duplicate. The three det nodes and det-ambient-ind-derived-sums do not depend on the item, so there is no cycle. No SGA source is used. Edge cases checked: K=0, X empty, d=0, a single-degree sheaf and truncations that remove all cohomology. No fixes and no tool_uses are needed; det-ambient-ind-derived-sums is on the unit route through sk-cor-ambient-ind-derived."
+ }
 }
