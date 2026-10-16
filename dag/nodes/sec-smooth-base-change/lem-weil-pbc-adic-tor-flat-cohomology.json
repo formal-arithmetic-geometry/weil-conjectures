@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-adic-tor-flat-cohomology",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-integral-truncations",
+   "place": "Statement, hypothesis paragraph: “Tor-compatibility ... above every level, equivalently that the cohomology sheaves of the local models are flat over A_T”.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "All-level adic cohomology Tor compatibility and flatness",
+ "statement": "Let $E/\\mathbf Q_\\ell$, $A=\\mathcal O_E$, $\\varpi$, and $P_n=A/(\\varpi^n)$ ($n\\ge1$) be as in [def-weil-l-adic-coefficient-extension]. Let $T$ be a scheme [def-pc-scheme] admitting a finite affine cover by spectra of noetherian rings, with a finite bound on lengths of strict chains of irreducible closed subsets, and with $\\ell\\cdot1$ a unit in every local ring, and use $A_T=\\varprojlim_n(P_n)_T$, $R_n=(P_n)_T$ and the derived scalar extensions of [def-weil-pbc-adic-coefficient-datum]. Let $K\\in\\Dbc(T_{\\mathrm{proet}},A)$ in the sense of [def-weil-pbc-bounded-constructible-complete], with canonical normalized reductions $K_n=K\\otimes^L_{A_T}R_n$ and any supplied common local models $L_{\\alpha j}$ for this tower [def-weil-pbc-bounded-constructible-tower]. Flatness of a module sheaf means exactness of its tensor functor [def-pc-flat-sheaf-modules]. The following are equivalent:\n\n(a) For all $n\\ge1$, $q\\in\\mathbf Z$, and $p\\ge1$,\n$$\\operatorname{Tor}^{R_{n+1}}_p(\\mathcal H^q(K_{n+1}),R_n)=0.$$\nHere this Tor sheaf is $\\mathcal H^{-p}(\\mathcal H^q(K_{n+1})[0]\\otimes^L_{R_{n+1}}R_n)$; this is the all-cutoff higher-Tor formulation of [prop-weil-pbc-levelwise-truncations], not merely a condition on the terms of a representative complex.\n\n(b) Every cohomology sheaf $\\mathcal H^q(K)$ is flat over the completed sheaf $A_T$.\n\n(c) For every supplied local model, every $\\mathcal H^q(L_{\\alpha j})$ is flat over the restricted completed sheaf $A_T|_{U_{\\alpha j}}$.\n\nUnder these conditions the canonical reduction identifications are $\\mathcal H^q(K_n)\\simeq\\mathcal H^q(K)\\otimes_{A_T}R_n$, and these sheaves are flat over $R_n$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
+  "place": "Statement, hypothesis paragraph: “Tor-compatibility ... above every level, equivalently that the cohomology sheaves of the local models are flat over A_T”.",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 051K, algebra.tex, lemma-artinian-variant-local-criterion-flatness; local Artinian module ingredient only, not the full sheaf-derived equivalence"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0539, more-algebra.tex, lemma-valuation-ring-torsion-free-flat; valuation-ring module ingredient only, not the full equivalence"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pc-flat-sheaf-modules",
+  "prop-weil-pbc-levelwise-truncations",
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded finite complex over a complete discrete valuation ring higher Tor vanishing between consecutive reductions is equivalent to torsion free cohomology",
+   "results": "8 hits; Rep.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, DerivedCategory.isZero_of_isLE, CategoryTheory.hasInjectiveDimensionLT_iff, DerivedCategory.isZero_of_isGE, CochainComplex.isZero_of_isLE, CochainComplex.isZero_of_isGE",
+   "date": "2026-10-16",
+   "verdict": "no match: projective Tor vanishing or cohomological bounds alone"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsDiscreteValuationRing",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*flat|flat.*Tor|torsionFree.*flat|flat.*torsionFree",
+   "results": "24 hits; Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean; source subdirectory RingTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module ingredients in RingTheory, not the derived complete sheaf equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of derived complete constructible complex is flat if all consecutive derived reductions of cohomology have no higher Tor",
+   "results": "8 hits; AdicCompletion.flat_of_isNoetherian, ContinuousCohomology.MultiInd.complex, Module.Flat.tfae_equational_criterion, RingHom.Flat, Module.Flat.iff_lift_lsmul_comp_subtype_injective, Module.Flat.of_projective, Algebra.Smooth.flat, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module flatness and completion results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded complete complexes over a DVR have flat cohomology if and only if the cohomology of every quotient reduction is Tor acyclic for consecutive quotient rings",
+   "results": "8 hits; AdicCompletion.flat_of_isNoetherian, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.of_forall_exists_factorization, Module.Flat.iff_lTensor_exact', Module.Flat.tfae_equational_criterion, Module.FaithfullyFlat.iff_exact_iff_lTensor_exact",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary tensor exactness criteria, not this equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_iff_torsion_eq_bot|IsTorsionFree",
+   "results": "5 hits; Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean, Mathlib/RingTheory/Flat/TorsionFree.lean; source subdirectory RingTheory/Flat",
+   "date": "2026-10-16",
+   "verdict": "ingredient only: Mathlib/RingTheory/Flat/TorsionFree.lean:66,93 states flat/torsion-free module results; existing lem-weil-pbc-pid-torsion-free-module-flat already records this ingredient, not the asserted equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_iff|IsTorsionFree|Tor",
+   "results": "5 hits; 8, 15, 17, 25, 26; ; subdirectory RingTheory/Flat/TorsionFree.lean",
+   "date": "2026-10-16",
+   "verdict": "ingredient only: source RingTheory/Flat/TorsionFree.lean inspected; ordinary torsion-free module flatness, not the all-level derived sheaf criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat cohomology of a bounded complex over a complete valuation ring characterized by Tor vanishing of successive quotient cohomology modules",
+   "results": "8 hits; AdicCompletion.flat_of_isNoetherian, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.of_forall_exists_factorization, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', Module.Flat.tfae_equational_criterion, Module.FaithfullyFlat.iff_exact_iff_lTensor_exact",
+   "date": "2026-10-16",
+   "verdict": "No exact match: ordinary module flatness criteria and completion flatness; these do not state the derived completed sheaf criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, \"Tor\"",
+   "results": "12 hits; Module.Flat.isTorsionFree, Module.Flat.instOfIsDedekindDomainOfIsTorsionFree, Module.Flat.torsion_eq_bot, IsDedekindDomain.flat_iff_torsion_eq_bot, Module.Flat.flat_iff_torsion_eq_bot_of_isBezout, Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal, Module.Flat.exists_factorization_of_finitePresentation, Module.Flat.exists_factorization_of_isFinitelyPresented",
+   "date": "2026-10-16",
+   "verdict": "Ingredient only: torsion-free/flat module declarations, including Module.Flat.isTorsionFree and IsDedekindDomain.flat_iff_torsion_eq_bot. The completed sheaf-derived criterion is not one declaration or a specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Tor|flat_iff|IsTorsionFree",
+   "results": "25 hits; Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "Ingredient only: RingTheory/Flat includes a TODO to relate flatness with Tor and ordinary module flatness results; no all-level derived sheaf statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "thm-weil-pbc-integral-truncations",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest"
+}
