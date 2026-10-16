@@ -63,11 +63,14 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_upperStar_δ",
+  "statement": "instance ProEtale.isIso_upperStar_δ (F G : Sheaf (Scheme.ProEt.topology Y) A) :\n    IsIso (δ (g)^*[A] F G)",
   "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.isIso_upperStar_δ"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 11:55 UTC for group Q61, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: This proves the stated tensor comparison, defined as the adjunction mate of the cited pushforward lax structure, is an isomorphism; all Lean hypotheses follow from the node’s clos"
+  "by": "Q115",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact existing source instance in the canonical finite-coefficient pro-etale monoidal module. It states that the oplax comparison δ : g^*(F ⊗ G) ⟶ g^*F ⊗ g^*G is invertible. The oplax structure on g^* is the adjunction mate of the lax monoidal lowerStar structure, so δ is precisely the map specified by this node. The source section assumes braided monoidal Grothendieck-abelian coefficients, monoidal sheaf localizations, and preservation of filtered colimits by tensorLeft; the node's closed symmetric monoidal Grothendieck-abelian hypotheses provide these standard instances. Declaration and full signature were read with scompile.py --source; no new module is needed. Independent second reading compiled a consumer with only the node's closed symmetric Grothendieck-abelian coefficient hypotheses and arbitrary g,F,G: both localization and filtered-colimit conditions are inferred; the recorded sfbSheafTensorStructure tensor equals Sheaf.monoidalCategory by rfl at the mixed-universe pro-etale site. The existing instance has only propext, Classical.choice and Quot.sound as axioms."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -89,5 +92,13 @@
   }
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-finite-pushforward-pullback"
+ "unit": "sk-def-sfb-finite-pushforward-pullback",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e21d8cef",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Existing-declaration delivery: AlgebraicGeometry.ProEtale.isIso_upperStar_δ (FiniteCoefficient/UpperLowerStar/Monoidal.lean:106, identical in side and live trees); node changes only lean; statement field verbatim with the blueprint and lean.statement verbatim with the source. Hypotheses: Braided (weaker than symmetric); W.IsMonoidal and PreservesFilteredColimitsOfSize.{u,u+1}(tensorLeft M) inferred from SymmetricCategory+MonoidalClosed; arbitrary g (no weakly-etale), F, G; u' free, Hom u+1 as in all dependencies. δ = adj.homEquiv.symm((unit⊗unit)≫μ lowerStar) by rfl (mate of recorded laxMonoidal_lowerStar under recorded upperStarLowerStarAdjunction); sfbSheafTensorStructure.monoidal = Sheaf.monoidalCategory by rfl. nt_compile --json check file with exactly the node's hypotheses and autoImplicit false: exit 0, no warnings; axioms propext/Classical.choice/Quot.sound. Report has real Worker report and Second reading by Q115 sections. No new definitions, no proof, no live write. Findings: none of substance (blueprint lean name isIso_δ_upperStar is the old name; node records the correct actual name)."
+ }
 }
