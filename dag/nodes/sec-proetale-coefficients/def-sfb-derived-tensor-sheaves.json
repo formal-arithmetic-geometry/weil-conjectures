@@ -59,11 +59,14 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.Tensor",
+  "declaration": "AlgebraicGeometry.ProEtale.derivedTensor",
+  "statement": "noncomputable def derivedTensor :\n    DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n        DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)",
   "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.derivedTensor"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 11:06 UTC for group Q08, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_2104a988.jsonl.gz: Under the stated hypotheses, this defines the bifunctor on the unbounded derived category of pro-étale A-valued sheaves as the tensor of the K-flat derived monoidal structure built from"
+  "by": "Q09",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact upstream definition in WeilConjectures.SixFunctors.ProEtale.Derived.Tensor, read from the current source with scompile.py --source. In the enclosing section, A is a closed symmetric monoidal Grothendieck abelian category with additive tensor and functorial flat resolutions, and X is a scheme. The definition is `curriedTensor _` on the derived category of A-valued sheaves on the small pro-etale site, i.e. the tensor of the derived monoidal structure supplied by lem-sfb-derived-monoidal and the pro-etale sheaf tensor of sk-def-sfb-sheaf-tensor."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -85,5 +88,13 @@
   }
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-derived-tensor-hom"
+ "unit": "sk-def-sfb-derived-tensor-hom",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e81820979",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Existing upstream AlgebraicGeometry.ProEtale.derivedTensor (WeilConjectures.SixFunctors.ProEtale.Derived.Tensor:80-92), which the blueprint also names. Node diff changes only lean; statement verbatim. Hypotheses match the node exactly (Grothendieck abelian, MonoidalPreadditive, Symmetric, MonoidalClosed, HasFunctorialFlatResolution, X : Scheme); u+1 Hom universe is the project size convention. nt_compile scratch check: axioms propext/choice/Quot.sound only; upstream sheaf monoidal instance = sfbSheafTensorStructure.monoidal by rfl (sk-def-sfb-sheaf-tensor); derivedTensor = curriedTensor by rfl; derived monoidal instance synthesizes as DerivedCategory.hasDerivedMonoidalCategory (lem-sfb-derived-monoidal). No duplicate found; report has Worker report and Second reading by Q09 sections. Only a cosmetic Loogle-wording inconsistency in the report."
+ }
 }
