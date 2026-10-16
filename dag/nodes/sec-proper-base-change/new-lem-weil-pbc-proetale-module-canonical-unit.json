@@ -9,25 +9,40 @@
  },
  "proof": [
   {
-   "text": "Transport the module pullback adjunction along the strict AsSmall equivalences. The model ring-unit presentation and the restricted abelian adjunction identify the underlying unit mate with the model module comparison, which is invertible by the underlying module comparison theorem. Transporting this isomorphism back gives the required adjunction and componentwise IsIso result.",
+   "text": "Construct the module Hom equivalence by precomposing target morphisms with AsSmall.down, applying the actual model-site pullbackPushforwardAdjunction, and precomposing its transpose with AsSmall.up. The strict inverse identities give inverse Hom maps. The model adjunction naturality proves naturality on both sides, giving a canonical adjunction to the specified ring-unit pushforward. Its unit evaluated on an original-site section is the model module unit evaluated at the up-transported section.",
    "uses": [
-    "lem-weil-pbc-proetale-module-inverse-image-underlying",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Model base change preserves finite limits. Apply the model ring-unit presentation and the unit-normalized underlying module comparison. This gives an isomorphism from the underlying model module pullback to model abelian inverse image, whose pushforward composed with the module unit is the model abelian unit.",
+   "uses": [
     "lem-weil-pbc-proetale-model-ring-presentation",
     "lem-weil-pbc-module-inverse-image-action-adjunction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Restrict the original abelian adjunction along the fully faithful strict AsSmall sheaf equivalences. Compare the model abelian pullback adjunction with this restricted adjunction by Adjunction.leftAdjointUniq. Apply the original-site sheaf equivalence to Adjunction.unit_leftAdjointUniq_hom_app, and rewrite the restricted unit directly using Mathlib Adjunction.map_restrictFullyFaithful_unit_app. The commuting isomorphisms are identities. This gives the original abelian unit without declaring or reproving a separate specialized model-unit theorem.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport the composite of the normalized module comparison and the abelian uniqueness isomorphism back by AsSmall.up. On sections, compose the normalized model unit equation and the mapped adjunction uniqueness equation with the explicit module unit formula. This proves that the forgotten canonical module unit followed by pushforward of this isomorphism equals the original abelian unit. The abelian Hom equivalence therefore identifies the mate of the forgotten module unit with the inverse of the isomorphism. Hence the mate is invertible at every module, and the constructed adjunction is the required witness. The final cancellation uses Adjunction.homEquiv_unit, functoriality and the isomorphism inverse identities.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proetale-module-inverse-image-underlying",
+  "def-weil-proetale-inverse-image",
   "lem-weil-pbc-proetale-model-ring-presentation",
   "lem-weil-pbc-module-inverse-image-action-adjunction"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/03D3",
-  "place": "Unit-compatible strict AsSmall transport of the module pullback adjunction.",
-  "group": "C4"
+  "place": "Tags 03D2 and 03D3. G3 explicitly transports the module Hom equivalence and proves its unit formula; the normalized model comparison and uniqueness of abelian left adjoints then identify the mate with an inverse isomorphism. Repair: remove the duplicate private modelAbelianAdjunction_unit declaration and directly reuse the general Mathlib restriction-unit theorem in the mapped uniqueness equation."
  },
  "mathlib_searches": [
   {
@@ -104,13 +119,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C4",
+  "reviewer": "X-da896",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261015T234124-L-3408411",
+  "landing": "20261016T023443-L-1242036",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged public theorem matched its node signature; proof and dependencies match the DAG. Delivery and sole direct importer compile cleanly; all declarations use only propext, Classical.choice and Quot.sound."
  }
 }
