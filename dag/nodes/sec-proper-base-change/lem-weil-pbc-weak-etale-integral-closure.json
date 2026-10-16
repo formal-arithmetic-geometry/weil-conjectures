@@ -104,10 +104,22 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "lean": {
+  "module": "WeilConjectures.RingTheory.ProEtale.WeakDimension",
+  "declaration": "Algebra.WeaklyEtale.isIntegrallyClosedIn_tensorProduct",
+  "statement": "theorem Algebra.WeaklyEtale.isIntegrallyClosedIn_tensorProduct\n    (A B L : Type*) [CommRing A] [IsDomain A] [CommRing B] [Algebra A B]\n    [Algebra.WeaklyEtale A B] [Field L] [Algebra A L] [FaithfulSMul A L]\n    [Algebra.IsAlgebraic A L] [IsIntegrallyClosedIn A L] :\n    IsIntegrallyClosedIn B (B ⊗[A] L)",
   "branch": "slopmaster2",
-  "declarations": [
-   "Algebra.WeaklyEtale.isIntegrallyClosedIn_tensorProduct"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-14 18:52 UTC for group NQ, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_7d675a26.jsonl.gz: The declaration gives the full conclusion that the weakly etale A-algebra B is integrally closed in B ⊗[A] K."
+  "by": "Q05",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact statement up to equivalent hypotheses: for a domain A and field L, IsAlgebraic A L together with IsIntegrallyClosedIn A L implies IsFractionRing A L by IsIntegralClosure.isFractionRing_of_algebraic A A, and then IsIntegrallyClosed A. Conversely, the node's IsFractionRing A L and IsIntegrallyClosed A give algebraicity, faithful scalar action and IsIntegrallyClosedIn A L. Both directions were compiled independently by the second reader; the upstream theorem has only the three permitted axioms. No duplicate specialization is needed.",
+  "fixed_by": "NT-stage2-cc-3f7077946"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f7077946",
+  "group": "Q05",
+  "result": "fix",
+  "note": "Existing-record delivery: Algebra.WeaklyEtale.isIntegrallyClosedIn_tensorProduct (WeakDimension.lean:563, @[stacks 092W], sorry-free; axioms propext/Classical.choice/Quot.sound). Read against node and Stacks 092W clause by clause. FaithfulSMul+IsAlgebraic+IsIntegrallyClosedIn A L is equivalent to IsFractionRing A L + IsIntegrallyClosed A; both directions compiled myself via nt_compile.py with independent universes u,v,w, no errors. WeaklyEtale is Mathlib's class (flat + flat lmul'), as the dependency node records. Conclusion exact. Edge cases A=K, B=0, any characteristic covered. Branch slopmaster2 is correct. No hollow defs, no local proofs, no duplicates. Finding: lean.statement had a trailing ' :=', so check_existing reported it non-verbatim (519 of 528 landed existing records omit it). fixes/lem-weil-pbc-weak-etale-integral-closure.lean-record.json sets the exact signature; check_existing now returns ([], [])."
  }
 }
