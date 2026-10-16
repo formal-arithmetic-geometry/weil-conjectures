@@ -38,7 +38,7 @@
    "elementary": false
   },
   {
-   "text": "STATEMENT-DISPUTED: removing the finiteness qualification in the last covering-reflection iff is not justified by the labelled-pair route. For a constant identity system indexed by natural numbers, distinct labels (n,A) give an infinite presieve into (0,A) whose W-image is the singleton identity covering. Every image of a stage cover is finite. Moreover finite cover reflection by a fully faithful W forces every object fiber of W to be finite, as verified by finite_fibers_of_finite_cover_reflection in the item module. Conversely finite object fibers suffice for finite presieves to be detected by their image under a faithful functor; finite_cover_reflection_iff_finite_fibers proves the exact criterion for the finite inverse-image precoverage. Thus the prescribed raw-labelled construction cannot satisfy the final clause. The full existential statement is not refuted: a different presentation would require additional justification. Its original Lean statement and sorry remain unchanged.",
+   "text": "The labelled-pair construction does not justify deleting finiteness from the final covering criterion: infinitely many source labels can have singleton identity image. No proof of the stronger existential is claimed. Its redundant Lean attachment is withdrawn because its only caller, lem-weil-pbc-affine-etale-site-colimit, now uses the proved finite construction directly and explicitly retains finite source presieves. The disputed mathematical statement remains here for history; no new obligation is created.",
    "uses": [],
    "elementary": true
   }
@@ -49,7 +49,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "W4: proved the complete finite-family construction; identified and formalized the arbitrary-presieve gap in the prescribed labelled presentation. No target statement is changed."
+  "place": "H1: withdraw the redundant arbitrary-presieve interface after repairing its sole caller to use the proved finite-family construction (Situation 0A34 and Lemma 09YL). No proof of the stronger original existential is claimed."
  },
  "mathlib_searches": [
   {
@@ -98,12 +98,12 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-d8656",
-  "group": "W4",
+  "reviewer": "X-b361b",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261016T054839-L-158286",
+  "landing": "20261016T064223-L-582473",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with DAG statements, proof records, change record and cited sources; verified compilation, direct importers and permitted axioms."
+  "note": "independent Codex review: Matched delivered Lean interfaces and proofs with DAG records, change record, cited Stacks sources and consumers; verified compilation, original adaptation failure and permitted axioms."
  },
  "statement_change": {
   "date": "2026-10-14",
@@ -178,15 +178,5 @@
   "group": "NQ",
   "result": "pass",
   "note": "Wrote review.md. Checked all clauses, dependencies, sources, edge cases, docstrings, report sections and verbatim signature. Snapshot module reproduced server compile cleanly in 1.9 seconds. No delivery errors; branch head unchanged."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite",
-  "declaration": "AlgebraicGeometry.Scheme.exists_affineEtale_colimit_presentation_finite",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleColimitPresentationFinite.lean",
-  "statement": "theorem exists_affineEtale_colimit_presentation_finite {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ (i : Iᵒᵖ), CompactSpace (D.obj i)] [∀ (i : Iᵒᵖ), QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (U : ∀ (i j : I), i ≤ j → (D.obj (op i)).FullAffineEtale ⥤ (D.obj (op j)).FullAffineEtale) (v : ∀ i : I, (D.obj (op i)).FullAffineEtale ⥤ c.pt.FullAffineEtale) (gamma : ∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k), U i j h ⋙ U j k h' ≅ U i k (h.trans h')) (delta : ∀ (i j : I) (h : i ≤ j), U i j h ⋙ v j ≅ v i) (h0 : (∀ i : I, U i i le_rfl = 𝟭 _)) (h3 : (∀ (i k : I) (h : i ≤ k), HEq (gamma i i k le_rfl h) (Iso.refl (U i k h)))) (h4 : (∀ (i k : I) (h : i ≤ k), HEq (gamma i k k h le_rfl) (Iso.refl (U i k h)))) (h5 : (∀ i : I, HEq (delta i i le_rfl) (Iso.refl (v i)))) (h8 : (∀ (i j k l : I) (h : i ≤ j) (h' : j ≤ k) (h'' : k ≤ l) (A : (D.obj (op i)).FullAffineEtale), (gamma j k l h' h'').hom.app ((U i j h).obj A) ≫ (gamma i j l h (h'.trans h'')).hom.app A = (U k l h'').map ((gamma i j k h h').hom.app A) ≫ (gamma i k l (h.trans h') h'').hom.app A)) (h9 : (∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k) (A : (D.obj (op i)).FullAffineEtale), (v k).map ((gamma i j k h h').hom.app A) ≫ (delta i k (h.trans h')).hom.app A = (delta j k h').hom.app ((U i j h).obj A) ≫ (delta i j h).hom.app A)) (h10 : (∀ (i j : I) (h : i ≤ j) (A : (D.obj (op i)).FullAffineEtale) (R : Presieve A), R ∈ fullAffineEtalePrecoverage (D.obj (op i)) A → R.map (U i j h) ∈ fullAffineEtalePrecoverage (D.obj (op j)) ((U i j h).obj A))) (h11 : (∀ (i j : I) (h : i ≤ j) (A B C : (D.obj (op i)).FullAffineEtale) (f : B ⟶ A) (g : C ⟶ A), PreservesLimit (cospan f g) (U i j h))) (h12 : (∀ (i : I) (A : (D.obj (op i)).FullAffineEtale) (R : Presieve A), R ∈ fullAffineEtalePrecoverage (D.obj (op i)) A → R.map (v i) ∈ fullAffineEtalePrecoverage c.pt ((v i).obj A))) (h13 : (∀ (i : I) (A B C : (D.obj (op i)).FullAffineEtale) (f : B ⟶ A) (g : C ⟶ A), PreservesLimit (cospan f g) (v i))) (h14 : (∃ (_ : ∀ (i j : I) (h : i ≤ j), (U i j h).IsContinuous (fullAffineEtaleTopology (D.obj (op i))) (fullAffineEtaleTopology (D.obj (op j)))) (_ : ∀ i : I, (v i).IsContinuous (fullAffineEtaleTopology (D.obj (op i))) (fullAffineEtaleTopology c.pt)), (∀ (i j : I) (h : i ≤ j), ∃ L : Sheaf (fullAffineEtaleTopology (D.obj (op i))) (Type u) ⥤ Sheaf (fullAffineEtaleTopology (D.obj (op j))) (Type u), Nonempty (L ⊣ (U i j h).sheafPushforwardContinuous (Type u) (fullAffineEtaleTopology (D.obj (op i))) (fullAffineEtaleTopology (D.obj (op j)))) ∧ PreservesFiniteLimits L) ∧ (∀ i : I, ∃ L : Sheaf (fullAffineEtaleTopology (D.obj (op i))) (Type u) ⥤ Sheaf (fullAffineEtaleTopology c.pt) (Type u), Nonempty (L ⊣ (v i).sheafPushforwardContinuous (Type u) (fullAffineEtaleTopology (D.obj (op i))) (fullAffineEtaleTopology c.pt)) ∧ PreservesFiniteLimits L))) (h15 : (∀ A : c.pt.FullAffineEtale, ∃ (i : I) (Ai : (D.obj (op i)).FullAffineEtale), Nonempty ((v i).obj Ai ≅ A))) (h16 : (∀ (i : I) (A B : (D.obj (op i)).FullAffineEtale) (f : (v i).obj A ⟶ (v i).obj B), ∃ (j : I) (h : i ≤ j) (g : (U i j h).obj A ⟶ (U i j h).obj B), f = (delta i j h).inv.app A ≫ (v j).map g ≫ (delta i j h).hom.app B)) (h17 : (∀ (i : I) (A B : (D.obj (op i)).FullAffineEtale) (f g : A ⟶ B), (v i).map f = (v i).map g → ∃ (j : I) (h : i ≤ j), (U i j h).map f = (U i j h).map g)) (h18 : (∀ (n : ℕ) (A : c.pt.FullAffineEtale) (B : Fin n → c.pt.FullAffineEtale) (f : ∀ a : Fin n, B a ⟶ A), Presieve.ofArrows B f ∈ fullAffineEtalePrecoverage c.pt A ↔ ∃ (i : I) (Ai : (D.obj (op i)).FullAffineEtale) (Bi : Fin n → (D.obj (op i)).FullAffineEtale) (fi : ∀ a : Fin n, Bi a ⟶ Ai) (t : (v i).obj Ai ≅ A) (s : ∀ a : Fin n, (v i).obj (Bi a) ≅ B a), Presieve.ofArrows Bi fi ∈ fullAffineEtalePrecoverage (D.obj (op i)) Ai ∧ ∀ a : Fin n, (v i).map (fi a) ≫ t.hom = (s a).hom ≫ f a)) : ∃ (F : I ⥤ Cat.{u, u + 1}) (Q : ∀ i : I, Precoverage (F.obj i)) (e : ∀ i : I, (D.obj (op i)).FullAffineEtale ⥤ F.obj i) (v' : ∀ i : I, F.obj i ⥤ c.pt.FullAffineEtale) (theta : ∀ (i j : I) (h : i ≤ j), e i ⋙ (F.map (homOfLE h)).toFunctor ≅ U i j h ⋙ e j) (eta : ∀ i : I, e i ⋙ v' i ≅ v i), (∀ i : I, (e i).IsEquivalence) ∧ (∃ (_ : ∀ i : I, (Q i).HasIsos) (_ : ∀ i : I, (Q i).IsStableUnderFiniteComposition) (_ : ∀ i : I, (Q i).IsStableUnderFiniteBaseChange) (_ : ∀ i : I, (Q i).HasPullbacks), (∀ (i : I) (A : F.obj i) (R : Presieve A), R ∈ Q i A → Finite R.uncurry) ∧ (∀ (i : I) (A : (D.obj (op i)).FullAffineEtale) (R : Presieve A), R ∈ fullAffineEtalePrecoverage (D.obj (op i)) A ↔ R.map (e i) ∈ Q i ((e i).obj A)) ∧ (∀ (i j : I) (h : i ≤ j) (A : F.obj i) (R : Presieve A), R ∈ Q i A → R.map (F.map (homOfLE h)).toFunctor ∈ Q j ((F.map (homOfLE h)).toFunctor.obj A)) ∧ (∀ (i j : I) (h : i ≤ j) (A B C : F.obj i) (f : B ⟶ A) (g : C ⟶ A), PreservesLimit (cospan f g) (F.map (homOfLE h)).toFunctor) ∧ (∀ (i j : I) (h : i ≤ j), (F.map (homOfLE h)).toFunctor ⋙ v' j = v' i) ∧ (∀ (i j : I) (h : i ≤ j) (A : (D.obj (op i)).FullAffineEtale), Arrow.mk ((v' j).map ((theta i j h).hom.app A) ≫ (eta j).hom.app ((U i j h).obj A) ≫ (delta i j h).hom.app A) = Arrow.mk ((eta i).hom.app A)) ∧ (∃ (_ : ∀ (i j : I) (h : i ≤ j), (F.map (homOfLE h)).toFunctor.IsContinuous (Q i).toGrothendieck (Q j).toGrothendieck) (_ : ∀ i : I, (v' i).IsContinuous (Q i).toGrothendieck (fullAffineEtaleTopology c.pt)), (∀ (i j : I) (h : i ≤ j), ∃ L : Sheaf (Q i).toGrothendieck (Type u) ⥤ Sheaf (Q j).toGrothendieck (Type u), Nonempty (L ⊣ (F.map (homOfLE h)).toFunctor.sheafPushforwardContinuous (Type u) (Q i).toGrothendieck (Q j).toGrothendieck) ∧ PreservesFiniteLimits L) ∧ (∀ i : I, ∃ L : Sheaf (Q i).toGrothendieck (Type u) ⥤ Sheaf (fullAffineEtaleTopology c.pt) (Type u), Nonempty (L ⊣ (v' i).sheafPushforwardContinuous (Type u) (Q i).toGrothendieck (fullAffineEtaleTopology c.pt)) ∧ PreservesFiniteLimits L)) ∧ ∃ (K : Cocone F) (W : K.pt ⥤ c.pt.FullAffineEtale) (P : Precoverage K.pt), Nonempty (IsColimit (Cat.objects.mapCocone K)) ∧ Nonempty (IsColimit (Cat.arrows.mapCocone K)) ∧ (∀ i : I, (K.ι.app i).toFunctor ⋙ W = v' i) ∧ (∀ (A : K.pt) (R : Presieve A), R ∈ P A ↔ ∃ (i : I) (Ai : F.obj i) (Ri : Presieve Ai) (h : (K.ι.app i).toFunctor.obj Ai = A), Ri ∈ Q i Ai ∧ h ▸ Ri.map (K.ι.app i).toFunctor = R) ∧ (∃ (_ : P.HasIsos) (_ : P.IsStableUnderFiniteComposition) (_ : P.IsStableUnderFiniteBaseChange) (_ : P.HasPullbacks), W.IsEquivalence ∧ ∀ (A : K.pt) (R : Presieve A), R ∈ P A ↔ R.map W ∈ fullAffineEtalePrecoverage c.pt (W.obj A)))",
-  "branch": "newtargets-dag",
-  "by": "NQ",
-  "date": "2026-10-15",
-  "existing": false
  }
 }

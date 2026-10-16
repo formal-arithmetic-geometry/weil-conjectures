@@ -11,7 +11,7 @@ public import Sheaf.CategoryTheory.ArrowsFunctor
 import Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeSystem
 import Sheaf.AlgebraicGeometry.AffineEtaleDescentData
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite
+import Sheaf.AlgebraicGeometry.AffineEtaleFiniteColimitConstruction
 
 /-! # Statements of the new targets (batch 2) about `AffineEtaleSiteColimit`
 
@@ -56,9 +56,11 @@ Proof (the node's four steps):
    étaleness gives local finite presentation, and
    lem-weil-pbc-qcqs-morphism-permanence supplies quasi-compactness and quasi-separatedness.
 4. Strictify the coherent system and form its colimit as in
-   lem-weil-pbc-affine-etale-colimit-presentation, using finite indexed covering axioms
+   lem-weil-pbc-affine-etale-finite-colimit-construction, using finite covering families
    (def-weil-pbc-finite-precoverage). Object and map descent and eventual equality make
-   W an equivalence, while covering descent identifies the precoverages. Reassemble
+   W an equivalence, while covering descent identifies the finite precoverages.
+   The final criterion retains finiteness of the source presieve: an equivalence
+   can map an infinite presieve to a finite one by identifying source objects. Reassemble
    these witnesses with the preceding nineteen conjuncts. -/
 theorem exists_affineEtaleSite_colimit
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
@@ -203,7 +205,8 @@ theorem exists_affineEtaleSite_colimit
             (∃ (_ : P.HasIsos) (_ : P.IsStableUnderFiniteComposition)
               (_ : P.IsStableUnderFiniteBaseChange) (_ : P.HasPullbacks),
               W.IsEquivalence ∧ ∀ (A : K.pt) (R : Presieve A),
-                R ∈ P A ↔ R.map W ∈ fullAffineEtalePrecoverage c.pt (W.obj A))) := by
+                R ∈ P A ↔ Finite R.uncurry ∧
+                  R.map W ∈ fullAffineEtalePrecoverage c.pt (W.obj A))) := by
   obtain ⟨U, v, p, q, gamma, delta, h0, h1, h2, h3, h4, h5, h6, h7, h8, h9,
     h10, h11, h12, h13, h14⟩ := exists_affineEtale_baseChange_system D c hc
   obtain ⟨h15, h18⟩ := affineEtale_descent_data D c hc U v p q gamma delta
@@ -340,8 +343,17 @@ theorem exists_affineEtaleSite_colimit
         (MorphismProperty.Over.w ((U i j.unop hij).map g).hom).symm
   refine ⟨U, v, p, q, gamma, delta, h0, h1, h2, h3, h4, h5, h6, h7, h8, h9,
     h10, h11, h12, h13, h14, h15, h16, h17, h18, ?_⟩
-  exact exists_affineEtale_colimit_presentation_finite D c hc U v gamma delta
-    h0 h3 h4 h5 h8 h9 h10 h11 h12 h13 h14 h15 h16 h17 h18
+  obtain ⟨F, Q, e, v', theta, eta, he, hcolimit, hstage⟩ :=
+    exists_affineEtale_finite_colimit_construction D c U v gamma delta
+      h0 h3 h4 h5 h8 h9 h10 h11 h12 h14 h15 h16 h17 h18
+  obtain ⟨hQiso, hQcomp, hQbase, hQpull, hQfinite, hecover, hcover, hpull,
+    hcompat, htheta, hexact⟩ := hstage
+  refine ⟨F, Q, e, v', theta, eta, he, hQiso, hQcomp, hQbase, hQpull,
+    hQfinite, hecover, hcover, hpull, hcompat, htheta, hexact, ?_⟩
+  obtain ⟨K, W, P, hW, hobjects, harrows, hlegs, himages, hPiso, hPcomp,
+    hPbase, hPpull, hreflect⟩ := hcolimit
+  exact ⟨K, W, P, hobjects, harrows, hlegs, himages, hPiso, hPcomp,
+    hPbase, hPpull, hW, hreflect⟩
 
 end AlgebraicGeometry.Scheme
 
