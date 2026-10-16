@@ -26,7 +26,10 @@
   "place": "Proposition 7.1.6.13, colimit dual with target base a point: the cone is initial relative to restriction. The join-to-coherent-cocone convention is the opposite dual of the fixed-boundary comparison in lem-coef-infinity-join-cone-calculus (Kerodon 4.6.6.8). Read online; not archived. Kerodon tag, not a Stacks tag."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-coef-infinity-slice-right-fibration"
  ],
  "proof": [
   {
@@ -203,5 +206,28 @@
   "group": "Q101",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-66ffc9e30 (reviewer sub-agent of L); spot-checked: I read in full the item, its 4 steps, the full statements of all 5 cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-join-cone-calculus, lem-coef-infinity-pinch-comparison, lem-cbc-enhanced-functor-cone-calculus, lem-coef-kan-quillen-right-proper), both citers (fiber-cocone-simplex-extension at r=0, parameter-cone-extension step 1) and the unit record. Kerodon 02XB is not archived (listed as WANTED), so proof_origin=agent is correct. I checked the statement against the standard fact that a colimit cone is the left Kan extension of its base, giving Map(c,t)≃Map(c|K,t|K) for an arbitrary target base. It is true and not weakened, and the consumers need exactly this form. It is not a target node, so no base-change or coefficient comparison applies. Small cases: K=∅ gives initiality of the apex; K=Δ⁰ gives an equivalence edge; empty E is vacuous. Step 1: I checked the opposite dualization myself: (K⋆Δ⁰)^op=Δ⁰⋆K^op, Fun(K,E)^op≅Fun(K^op,E^op), ev0 and ev1 swap, and the mapping formula becomes Map_D(F,G)×^h_{Map_D(F,ΔKy)}Map_E(x,y) with maps μb and Δ(a)λ. Mapping spaces in C^op and C are compared as homotopy types via pinch-comparison and |S^op|≅|S|, and boundary-restriction naturality is a clause of join-cone-calculus. Step 2: the cocone dual of functor-cone-calculus gives exactly the hofiber description and the criterion that q_y is an equivalence for all y. Step 3: factor q_y as a trivial Kan fibration; its pullback is a trivial fibration by the RLP characterization in kan-quillen-right-proper, whose homotopy-pullback clause applies. Step 4: the Kan conditions come from functor-cone-calculus; the degreewise precomposition check is elementary. There are no new nodes. Duplicate check by rg (kan-mapping-restriction needs a quasicategory domain, anodyne-cocones covers only constant targets, relative-cone-initial-corner and the others are different): none found, and no cycle. All three kinds of search are recorded. I accept the off-unit tool use of lem-cbc-enhanced-functor-cone-calculus, the same use already accepted for its sibling nodes in this unit. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6a885a98",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Item node changed only in lean and stmt_deps; the three added stmt_deps are landed nodes with Lean records and no dependency cycle (permitted by brief-stage2 §5). Each clause matches the node: K : SSet.{u} with no assumptions, E : SSet.{max u v} a quasicategory, rightJoinCone/rightJoinConeInclusion, c arbitrary. The induced cocone mu is fixed uniquely by hμ_apex and hμ over coconeHomotopy in every degree; rightJoinPrismSimplex (joinGenerator(s,pt) restricted by simplexFinalPrism) is the interval-splitting formula, and its all-0/all-1 ends match the coconeCategory endpoints, so the hypotheses are satisfiable. hc is coherent IsColimiting. t is arbitrary. Two KanComplex clauses plus IsWeakHomotopyEquivalence of mappingSpaceMap of the actual restriction. Edge cases checked: empty K (apex fixed by hμ_apex), a point, n=0, empty mapping spaces, empty E. No hollow definition; one sorry, no axiom; source and blueprint docstrings present, with the 4 proof steps; lean.statement verbatim; Worker report and Second reading sections present. nt_compile.py --json on the snapshot file: rc=0, 1.5 s, clean. Only a cosmetic nu/mu naming difference in the docstring."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoconeRestrictionInitial",
+  "declaration": "SSet.Enhanced.cocone_restriction_initial",
+  "declarations": [
+   "SSet.Enhanced.rightJoinPrismSimplex",
+   "SSet.Enhanced.cocone_restriction_initial"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoconeRestrictionInitial.lean",
+  "statement": "theorem cocone_restriction_initial (K : SSet.{u}) (E : SSet.{max u v}) [Quasicategory E] (c : rightJoinCone (SSet.uliftFunctor.{v}.obj K) ⟶ E) (μ : (coconeCategory (rightJoinConeInclusion (SSet.uliftFunctor.{v}.obj K) ≫ c)) _⦋0⦌) (hμ_apex : μ.1.1 = c.app _ ((orderedJoinInr (SSet.uliftFunctor.{v}.obj K) Δ[0]).app _ (stdSimplex.obj₀Equiv.symm 0))) (hμ : ∀ (n : ℕ) (s : (SSet.uliftFunctor.{v}.obj K) _⦋n⦌) (a : (Δ[1] : SSet.{max u v}) _⦋n⦌), (coconeHomotopy (rightJoinConeInclusion (SSet.uliftFunctor.{v}.obj K) ≫ c) μ).app (op ⦋n⦌) (s, a) = c.app _ (rightJoinPrismSimplex _ n s a)) (hc : IsColimiting (rightJoinConeInclusion (SSet.uliftFunctor.{v}.obj K) ≫ c) μ) : ∀ t : rightJoinCone (SSet.uliftFunctor.{v}.obj K) ⟶ E, KanComplex (mappingSpace ((ihom (rightJoinCone (SSet.uliftFunctor.{v}.obj K))).obj E) (diagramVertex c) (diagramVertex t)) ∧ KanComplex (mappingSpace ((ihom (SSet.uliftFunctor.{v}.obj K)).obj E) (diagramVertex (rightJoinConeInclusion (SSet.uliftFunctor.{v}.obj K) ≫ c)) (diagramVertex (rightJoinConeInclusion (SSet.uliftFunctor.{v}.obj K) ≫ t))) ∧ IsWeakHomotopyEquivalence (mappingSpaceMap ((MonoidalClosed.pre (rightJoinConeInclusion (SSet.uliftFunctor.{v}.obj K))).app E) (diagramVertex c) (diagramVertex t))",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The induced coherent cocone is supplied with its exact apex and canonical interval-splitting formula in every degree, retaining all higher simplices, rather than chosen from an unproved existence theorem. Added statement dependencies are landed nodes supplying the ordered right join and inclusions, its convolution generator, and the existing coconeHomotopy/simplexFinalPrism constructions. No mathematical statement change."
  }
 }

@@ -154,5 +154,28 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-47928923e (reviewer sub-agent of L); spot-checked: Read in full: the item, unit sk-thm-dnc, the blueprint main-20261015 text of pur9-def-normal-cone, and the full statements of all six cited nodes. Stacks checked at divisors.tex definition-conormal-sheaf (0630), 0631, 0633 and definition-normal-cone (0636), and morphisms.tex lemma-affine-equivalence-algebras (01SA). The statement keeps the blueprint text verbatim and only adds how the quotients are read as O_Z-modules G_r; no hypothesis is added or dropped. Step 1 uses only the closed-immersion clauses of lem-pur-conormal-graded-algebra (its Noetherian coherence clause is not used). Step 2: clause (2) of lem-weil-pbc-affine-morphism-relative-spec gives p^{-1}W ≅ Spec gr_J(R). Step 3 is truly elementary: ε is an algebra map because (ab)_0 = a_0 b_0, and clause (3) applied to O_Z = (id_Z)_*O_Z gives the Z-morphism z, so p∘z = id. Edge cases tested: I=0, I=O_X, (t) in k[t] (cone A^1), (e) in k[e]/e^2 (non-reduced cone, no vector-bundle claim), and infinitely generated I. Duplicates: def-pur-normal-bundle overlaps but adds the purity conventions and regular-immersion clauses, so same_as [] is right; there are no new nodes and no cycle. Mathlib grep finds nothing. Accepted tool_uses: lem-pur-conormal-graded-algebra (unit sk-def-purity-conv, on route) and lem-weil-pbc-affine-morphism-relative-spec (generic relative-Spec tool). No SGA source. No fixes. Maintainer note: the item's 'unreachable' import flag is stale because sk-def-purity-conv now cites it."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-081e779cf",
+  "group": "NV",
+  "result": "pass",
+  "note": "Existing-declaration delivery. Node unchanged apart from lean (existing: true): Sheaf.Paper.PurityNormalBundle.normalCone/projection/zeroSection. Checked each clause: only [IsClosedImmersion i] on Scheme.{u}; cone = relative Spec (antiEquivalence = affine_morphism_relative_spec choose, recorded for lem-weil-pbc-affine-morphism-relative-spec) of ConormalGradedAlgebra.presentation (recorded for lem-pur-conormal-graded-algebra, tied to i via pieces i^*(I^n), pushforwardPiece, product, affine chart gr_J R); projection = structure map; zeroSection = fully faithful preimage of the degree-0 augmentation, direction verified. Not hollow; universe u preserved; edge cases I=0, I=O_X/empty Z, nonregular dual numbers, infinitely generated I covered. The extended-Rees i.ker.normalCone (def-pur-normal-bundle) is a different presentation with the stated purityNormalCone_comparison; recording the literal relative-Spec cone here is correct. Docstrings have Stacks 0630/0636/01LX and a blueprint tag. Report has Worker report and Second reading by NV. nt_compile.py --json on PurityNormalBundle.lean: rc=0, no errors or warnings. check_existing resolves all names; the statement includes the body := (over i).obj.left, which only gives an informational note."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityNormalBundle",
+  "declaration": "AlgebraicGeometry.PurityNormalBundle.normalCone",
+  "declarations": [
+   "AlgebraicGeometry.PurityNormalBundle.normalCone",
+   "AlgebraicGeometry.PurityNormalBundle.projection",
+   "AlgebraicGeometry.PurityNormalBundle.zeroSection"
+  ],
+  "statement": "def normalCone : Scheme.{u} := (over i).obj.left",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Existing exact project construction: `normalCone` is the relative spectrum over Z of the conormal graded algebra for an arbitrary closed immersion; `projection` and `zeroSection` are the associated structure morphism and degree-zero augmentation section. The declarations are in the module recorded for the already landed purity normal-bundle construction."
  }
 }
