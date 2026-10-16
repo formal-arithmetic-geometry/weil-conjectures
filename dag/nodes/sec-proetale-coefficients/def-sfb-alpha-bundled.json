@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-alpha-bundled",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "$\\alpha_f$ as an isomorphism of ring objects",
@@ -14,28 +14,100 @@
  },
  "stmt_deps": [
   "def-sfb-pullback-from-point-comp-iso",
-  "sk-def-sfb-pulled-back-coefficients"
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-sfb-pullback-from-point-comp-monoidal",
+  "def-sfb-finite-upper-star-monoidal",
+  "det-def-sfb-ring-object-monoid"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
   {
-   "text": "Applying monoid objects is compatible with composites of monoidal functors.\nA monoidal natural isomorphism of monoidal functors induces a natural\nisomorphism of the induced functors on monoid objects. The natural\nisomorphism is monoidal by [lem-sfb-pullback-from-point-comp-monoidal].",
-   "uses": [
-    "lem-sfb-pullback-from-point-comp-monoidal"
-   ],
-   "elementary": false
+   "tool": "grep",
+   "query": "mapMon.*[Cc]omp|mapMonNatIso|mapMonIso|coefficientPullbackIso",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean",
+   "date": "2026-10-16",
+   "verdict": "match: the two generic constructions, mapMonCompIso (line 898) and mapMonNatIso (line 917), specialize one per clause of this definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "Mon.mapIso",
+   "results": "none; loogle: unknown identifier 'Mon.mapIso'",
+   "date": "2026-10-16",
+   "verdict": "query rejected: unknown identifier Mon.mapIso; no conclusion from this query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monoidal natural isomorphism induces an isomorphism of monoid objects",
+   "results": "CategoryTheory.Mon.mkIso'; CategoryTheory.Mon.mkIso; CategoryTheory.Mon.mkIso.congr_simp; CategoryTheory.Skeletal.mulEquiv; CategoryTheory.LaxMonoidalFunctor.isoOfComponents; CategoryTheory.Skeleton.mulEquiv; CategoryTheory.isMonHom_ofIso; CategoryTheory.LaxMonoidalFunctor.isoMk",
+   "date": "2026-10-16",
+   "verdict": "related: Mon.mkIso and Mon.mkIso' bundle an underlying isomorphism preserving the monoid structure; the exact functorial construction is identified by the subsequent Loogle and grep searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal natural isomorphism from composite pullback functors induces an isomorphism on ring objects",
+   "results": "CategoryTheory.Over.μ_pullback_left_fst_snd'; CategoryTheory.Over.μ_pullback_left_fst_fst'; PresheafOfModules.pullbackComp; CategoryTheory.Over.μ_pullback_left_fst_snd; CategoryTheory.Over.μ_pullback_left_fst_fst; CategoryTheory.Over.μ_pullback_left_snd; CategoryTheory.Over.μ_pullback_left_snd'; PresheafOfModules.pullback_id_comp",
+   "date": "2026-10-16",
+   "verdict": "no match among these hits: Over pullback coherence and PresheafOfModules.pullbackComp concern different objects"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientPullbackIso|upperStarFromPoint|mapMonCompIso|mapMonNatIso",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean",
+   "date": "2026-10-16",
+   "verdict": "match: mapMonCompIso and mapMonNatIso give precisely the two components; no project-specific coefficientPullbackIso or upperStarFromPoint in Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMonNatIso",
+   "results": "CategoryTheory.Functor.mapMonNatIso; CategoryTheory.Functor.mapMonNatIso_hom_app_hom; CategoryTheory.Functor.mapMonNatIso_inv_app_hom; CategoryTheory.Equivalence.mapMon_unitIso; CategoryTheory.Equivalence.mapMon_counitIso",
+   "date": "2026-10-16",
+   "verdict": "match: the second component is mapMonNatIso applied to the specified monoidal comparison, evaluated at the ring object Lambda"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal functors act on monoid objects, compatibly with composition and monoidal natural isomorphisms",
+   "results": "CategoryTheory.Functor.instMonoidalActionMapAction; CategoryTheory.Functor.mapMon_obj_mon_mul; CategoryTheory.Functor.map.instIsMonHom; CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.functorObjObj; CategoryTheory.Functor.obj.μ_def; CategoryTheory.Functor.mapMon; Action.FunctorCategoryEquivalence.functorMonoidal; CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.functorObj",
+   "date": "2026-10-16",
+   "verdict": "related: Functor.mapMon, Functor.obj.μ_def and Functor.map.instIsMonHom provide the underlying transport machinery; exact comparison isomorphisms found separately by Loogle and grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMonCompIso",
+   "results": "CategoryTheory.Functor.mapMonCompIso; CategoryTheory.Functor.mapMonCompIso_hom_app_hom; CategoryTheory.Functor.mapMonCompIso_inv_app_hom; CategoryTheory.Equivalence.mapMon_unitIso; CategoryTheory.Adjunction.mapMon_counit; CategoryTheory.Adjunction.mapMon_unit; CategoryTheory.Equivalence.mapMon_counitIso",
+   "date": "2026-10-16",
+   "verdict": "match: the first component is the inverse of mapMonCompIso for p_Y^* followed by f^*, evaluated at Lambda"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMon(NatIso|CompIso)|Mon\\.mkIso",
+   "results": "Mathlib/CategoryTheory/Monoidal/Bimon_.lean; Mathlib/CategoryTheory/Monoidal/Bimon_.lean; Mathlib/CategoryTheory/Monoidal/Bimon_.lean; Mathlib/CategoryTheory/Monoidal/Bimon_.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean",
+   "date": "2026-10-16",
+   "verdict": "match: pinned Mathlib/CategoryTheory/Monoidal/Mon.lean lines 898-899 and 917-918 construct exactly the two required components; other hits concern other monoid categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMon\", \"Iso\"",
+   "results": "CategoryTheory.Functor.mapMonIdIso; CategoryTheory.Functor.mapMonNatIso; CategoryTheory.Functor.mapMonCompIso; CategoryTheory.Functor.mapMonIdIso_hom_app_hom; CategoryTheory.Functor.mapMonIdIso_inv_app_hom; CategoryTheory.Functor.mapMonNatIso_hom_app_hom; CategoryTheory.Functor.mapMonNatIso_inv_app_hom; CategoryTheory.Functor.mapMonCompIso_hom_app_hom",
+   "date": "2026-10-16",
+   "verdict": "match: independent broad Loogle search finds both mapMonCompIso and mapMonNatIso; the pinned source confirms their exact orientations and monoidality hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of lax monoidal functors on internal monoids is naturally isomorphic to composing their lifted functors",
+   "results": "CategoryTheory.Functor.mapMonCompIso_hom_app_hom; CategoryTheory.Functor.comp_mapMon_mul; CategoryTheory.Functor.mapMonCompIso_inv_app_hom; CategoryTheory.Functor.LaxMonoidal.comp_μ; CategoryTheory.Functor.mapMonCompIso; CategoryTheory.Functor.LaxMonoidal.comp; CategoryTheory.Functor.comp_mapMon_one; CategoryTheory.Discrete.monoidalFunctorComp",
+   "date": "2026-10-16",
+   "verdict": "match: independently found mapMonCompIso and its underlying-component lemmas; read the pinned source at Mon.lean:898-899 rather than relying on the search service module path Mon_"
   }
  ],
- "proof_deps": [
-  "lem-sfb-pullback-from-point-comp-monoidal"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/def-sfb-alpha-bundled.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.mapMonCompIso, CategoryTheory.Functor.mapMonNatIso",
+  "file": "Mathlib/CategoryTheory/Monoidal/Mon.lean",
+  "line": 898,
+  "how": "specializes in one line, one construction per clause: put P = p_Y^*, Q = f^*, H = p_X^* and theta : P ⋙ Q ≅ H equal to the comparison of def-sfb-pullback-from-point-comp-iso. The required ring-object isomorphism is (CategoryTheory.Functor.mapMonCompIso (F := P) (G := Q)).symm.app Lambda followed by (CategoryTheory.Functor.mapMonNatIso theta).app Lambda. mapMonCompIso is defined at lines 898-899 and mapMonNatIso at lines 917-918 of the pinned file. The former component has underlying identity, and the latter has underlying theta.app Lambda. P.mapMon.obj Lambda and H.mapMon.obj Lambda are precisely Lambda_Y and Lambda_X of sk-def-sfb-pulled-back-coefficients. Monoidality of theta is NOT asserted by Mathlib: it is retained explicitly as statement dependency lem-sfb-pullback-from-point-comp-monoidal. The chosen monoidal structure on Q is def-sfb-finite-upper-star-monoidal. No additional hypothesis or identification theorem is required."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -54,5 +126,20 @@
   "AlgebraicGeometry.ProEtale.coefficientPullbackIso"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-alpha-bundled",
+  "worker": "stage1",
+  "summary": "Read the current blueprint node and its coefficient-morphisms unit. No attachment exists in the finished slopmaster2 project. The archived master definition at Basic.lean:358 is exactly a composite of the two Mathlib constructions, but uses a sorried monoidality instance and is not attachment evidence. Checked the pinned Mathlib source at Mon.lean:898 and :917 and classified this definition as a Mathlib leaf, one generic construction per component. Kept the statement verbatim and made the monoidality theorem, chosen inverse-image monoidal structure and ring-object notion explicit statement dependencies. No new nodes; no proof obligations are hidden in a new wrapper.",
+  "blueprint": "Realizes the entire two-isomorphism construction of main-20261015/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/def-sfb-alpha-bundled.md: the first identification is mapMonCompIso.symm.app Lambda, and the second component is mapMonNatIso theta at Lambda. The imported explanatory proof paragraph is discharged by these Mathlib constructions, conditional on the existing comparison monoidality theorem retained in stmt_deps."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q17-476813333",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-476813333 (reviewer sub-agent of L); spot-checked: Read the complete item, report, dependencies, current blueprint route and cited Mathlib sources. Both constructors have the correct orientation and preserve the exact master coefficient category and comparison α_f. Monoidality remains explicitly required. No new nodes, duplicates, cycles or repairs. Full checks recorded in review.md."
+ }
 }
