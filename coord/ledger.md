@@ -15420,3 +15420,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:08 L: returned deliver/A4/Sheaf.Paper.CondensedLfpCoefficientModel (reviewer RETURN: (reviewer X-6ac00, head 6ac00d95e) H4 / brief point 5: CondensedFinitePresentationMatrices.lean lines 208–217 duplicate )
 - 06:10 L: returned deliver/E2/Sheaf.AlgebraicGeometry.ProEtaleModuleLfpClosedReflection (reviewer RETURN: (the landing tools, head 895adce78) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 06:10 L: merged deliver/A4/Sheaf.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration (stage 3; reviewer PASS; after a return; landing 20261016T061026-L-327514 (interface); batch 20261016T061025; modules 17; new nodes 16)
+- 06:10 L: merged deliver/E1/WeilConjectures.ConstructibleSheaf.Noetherian (stage 3; reviewer PASS; first push; landing 20261016T061027-L-327657 (proof); batch 20261016T061025; modules 1; new nodes 0)
