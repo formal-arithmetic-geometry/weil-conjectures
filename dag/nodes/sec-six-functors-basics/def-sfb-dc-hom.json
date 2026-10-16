@@ -3,25 +3,115 @@
  "blueprint": {
   "is": "def-sfb-dc-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "$\\RHom$ on $D_{\\mathrm{cons}}$",
- "statement": "Let $X$ be a scheme of the setting, and let $\\Lambda$ be a commutative condensed ring such that\nthe derived internal hom $\\RHom_{\\Lambda_X}(-,-)$ of [sk-def-sfb-derived-tensor-hom] carries pairs\nof bounded constructible complexes to bounded constructible complexes. By\n[lem-sfb-dc-hom-preserves] this holds for $\\Lambda=\\underline{\\cO}_E,\\underline E,\\underline{\\Qlb}$.\nThe derived internal hom\n\n$$\n\\RHom(-,-)\\colon D_{\\mathrm{cons}}(X,\\Lambda)^{\\mathrm{op}}\\times D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda)\n$$\n\nis its restriction in both variables. For fixed $K$, the functor $\\RHom(K,-)$ commutes with the\ninclusions.",
+ "statement": "Fix distinct primes $\\ell,p$, a field $k$ of characteristic $p$, and a separated scheme $X$ of finite type over $k$ [sk-def-sfb-dc-setting]. Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and write $\\Lambda_X=p_X^*\\Lambda$ for its pulled-back ring object as in [sk-def-sfb-derived-tensor-hom]. Put $D=D(\\Mod_{\\Lambda_X})$, let $C=D_{\\mathrm{cons}}(X,\\Lambda)$ be its full subcategory of bounded constructible complexes [sk-def-sfb-bounded-constructible], and write $\\iota:C\\to D$ for the inclusion. Assume that the ambient derived internal hom $H=\\RHom_{\\Lambda_X}(-,-)$ of [sk-def-sfb-derived-tensor-hom] carries pairs of objects of $C$ to objects of $C$. By [lem-sfb-dc-hom-preserves] this hypothesis holds for $\\Lambda=\\underline{\\cO}_E,\\underline E$ with $E/\\mathbf Q_\\ell$ finite, and for $\\Lambda=\\underline{\\Qlb}$, with the latter coefficient ring as in [sk-def-sfb-qlbar-condensed].\n\nDefine the restricted derived internal hom\n$$\nH_C=\\RHom(-,-):C^{\\mathrm{op}}\\times C\\longrightarrow C\n$$\nby $H_C(K,L)=H(\\iota K,\\iota L)$, equipped with the assumed bounded constructibility. For morphisms $u:K'\\to K$ and $v:L\\to L'$ in $C$, its map $H_C(K,L)\\to H_C(K',L')$ is the ambient map $H(\\iota u,\\iota v)$, regarded as a morphism in the full subcategory. Thus this is the restriction in both variables of the ambient bifunctor. For every fixed $K\\in C$ the compatibility with inclusions is\n$$\n\\iota\\circ H_C(K,-)=H(\\iota K,-)\\circ\\iota;\n$$\nits canonical comparison natural isomorphism has identity components.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-hom.md",
   "place": "node def-sfb-dc-hom, order 1790"
  },
  "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-bounded-constructible",
   "sk-def-sfb-derived-tensor-hom",
-  "lem-sfb-dc-hom-preserves"
+  "lem-sfb-dc-hom-preserves",
+  "sk-def-sfb-qlbar-condensed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "For $K,L\\in C$, the preservation hypothesis supplies bounded constructibility of $H(\\iota K,\\iota L)$, so the stated object assignment takes values in $C$. In the three displayed $\\ell$-adic cases the statement of [lem-sfb-dc-hom-preserves] supplies exactly this hypothesis, for the same setting and the same ambient derived internal hom. No assertion of preservation for an arbitrary condensed ring is needed.",
+   "uses": [
+    "lem-sfb-dc-hom-preserves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-hom.md",
+    "place": "first paragraph: preservation hypothesis and its three coefficient instances"
+   }
+  },
+  {
+   "text": "By [sk-def-sfb-derived-tensor-hom], $H$ is a bifunctor $D^{\\mathrm{op}}\\times D\\to D$. By [sk-def-sfb-bounded-constructible], the morphisms in $C$ are computed in $D$. Hence the ambient map for $u:K^{\\prime}\\to K$ and $v:L\\to L^{\\prime}$ is a morphism between the stated objects of $C$. The identity law is $H(1_K,1_L)=1_{H(K,L)}$. For $u^{\\prime}:K^{\\prime\\prime}\\to K^{\\prime}$ and $v^{\\prime}:L^{\\prime}\\to L^{\\prime\\prime}$, the composition law is $H(u^{\\prime},v^{\\prime})\\circ H(u,v)=H(u\\circ u^{\\prime},v^{\\prime}\\circ v)$, directly the ambient bifunctor law. These equalities hold in $C$ because its Hom-sets are the ambient ones. This constructs the restriction in both variables.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-hom.md",
+    "place": "restriction in both variables; unit _section.md, paragraph defining restriction"
+   }
+  },
+  {
+   "text": "Fix $K\\in C$. Both composites in the displayed compatibility send $L$ to the same ambient object $H(\\iota K,\\iota L)$ and $v:L\\to L^{\\prime}$ to $H(1_{\\iota K},\\iota v)$. Since inclusion leaves morphisms unchanged by [sk-def-sfb-bounded-constructible], the comparison has component $1_{H(\\iota K,\\iota L)}$. Its naturality equation is $H(1_{\\iota K},\\iota v)\\circ1=1\\circ H(1_{\\iota K},\\iota v)$, the identity law. The inverse comparison also has identity components.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-hom.md",
+    "place": "last sentence: for fixed K the functor commutes with the inclusions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dc-hom-preserves",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-hom.md",
+  "place": "explicit full-subcategory construction expanding the definition and the restriction paragraph of sk-def-sfb-dc-restricted-functors/_section.md"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructibleHom|boundedConstructible.*derivedHom|derivedHom.*boundedConstructible",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: no bounded-constructible derived Hom restriction found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of derived internal Hom to bounded constructible complexes with condensed coefficients",
+   "results": "LightCondensed.ihomPoints, Condensed, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, HomologicalComplex.restrictionMap, LightCondensed.ihomPoints_symm_comp, instMonoidalClosedCondensedSet, instHasLimitsOfShapeCondensed",
+   "date": "2026-10-16",
+   "verdict": "no exact match: returned condensed internal Hom and general derived-category APIs do not define the restriction to bounded constructible module objects on a scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.lift",
+   "results": "CategoryTheory.ObjectProperty.lift, CategoryTheory.ObjectProperty.instFaithfulFullSubcategoryLift, CategoryTheory.ObjectProperty.instFullFullSubcategoryLift, CategoryTheory.ObjectProperty.lift_obj_obj, CategoryTheory.ObjectProperty.liftCompιIso, CategoryTheory.ObjectProperty.ι_obj_lift_obj, CategoryTheory.ObjectProperty.liftCompιOfLEIso, CategoryTheory.ObjectProperty.lift_map",
+   "date": "2026-10-16",
+   "verdict": "general construction found: ObjectProperty.lift and liftCompιIso, read at Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:159 and :165. This supplies the elementary lifting operation, not the condensed-module derived Hom and constructibility notions of the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict derived internal Hom to the full subcategory of bounded constructible complexes of modules over a condensed coefficient ring on a scheme",
+   "results": "LightCondensed.ihomPoints, LightCondensed.ihomPoints_apply, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.ihom_map_val_app, LightCondMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functorToPresheaves",
+   "date": "2026-10-16",
+   "verdict": "no exact match: returned condensed internal Hom and general derived-category APIs do not define the restriction to bounded constructible module objects on a scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|liftCompιIso|def restrict",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean, Mathlib/CategoryTheory/ObjectProperty/Shift.lean, Mathlib/CategoryTheory/ObjectProperty/Shift.lean, Mathlib/CategoryTheory/ObjectProperty/Shift.lean; directory Mathlib/CategoryTheory/ObjectProperty",
+   "date": "2026-10-16",
+   "verdict": "general construction found: ObjectProperty.lift and liftCompιIso, read at Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:159 and :165. This supplies the elementary lifting operation, not the condensed-module derived Hom and constructibility notions of the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bifunctor preserving an object property restricts to its full subcategory and the restricted functor commutes with inclusion",
+   "results": "CategoryTheory.ObjectProperty.lift, CategoryTheory.ObjectProperty.liftCompιOfLEIso, CategoryTheory.ObjectProperty.ιOfLE, CategoryTheory.ObjectProperty.liftCompιIso, CategoryTheory.wideSubcategoryInclusion, CategoryTheory.ObjectProperty.ιOfLE_map, CategoryTheory.ObjectProperty.ιOfLECompιIso, CategoryTheory.wideInducedFunctor",
+   "date": "2026-10-16",
+   "verdict": "general construction found: ObjectProperty.lift and liftCompιIso, read at Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:159 and :165. This supplies the elementary lifting operation, not the condensed-module derived Hom and constructibility notions of the item."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -32,5 +122,20 @@
   "lem-sfb-dc-hom-preserves",
   "sk-def-sfb-derived-tensor-hom"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-dc-hom",
+  "worker": "stage1",
+  "summary": "Definition split with no new nodes. Added the missing setting, coefficient-ring and bounded-constructible definition dependencies. Expanded the restriction into explicit object and morphism assignments, checked its functor laws and identity inclusion comparison, and retained the preservation hypothesis and its existing three coefficient instances. The source declaration exists only in upstream master and depends on a sorried preservation lemma, so is not an attachment. Mathlib gives the generic lift API, not the coefficient-specific input notions. The dry-run B2 check was repaired by writing the distinct primes, characteristic-p field, and separated finite-type scheme hypotheses explicitly instead of using a setting reference.",
+  "blueprint": "The first paragraph of def-sfb-dc-hom supplies the preservation hypothesis and coefficient instances (step 1); its restriction-in-both-variables sentence is expanded in step 2; its final fixed-K compatibility sentence is verified in step 3. This realizes the internal-Hom restriction clause of sk-def-sfb-dc-restricted-functors, without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q50-51eebe224",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q50-51eebe224 (reviewer sub-agent of L); spot-checked: Read the item, blueprint route, all six cited nodes, source locations, searches, and delivery report in full. The statement preserves every hypothesis and conclusion; all three proof steps correctly construct the full-subcategory bifunctor and identity inclusion comparison. Edge cases and duplicate/cycle checks pass. No repair is needed; the pre-existing SGA 4½ route in lem-sfb-dc-hom-preserves remains a separate audit obligation."
+ }
 }
