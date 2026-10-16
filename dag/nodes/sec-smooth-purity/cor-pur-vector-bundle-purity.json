@@ -3,63 +3,272 @@
  "blueprint": {
   "is": "cor-pur-vector-bundle-purity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Vector-bundle purity",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $\\pi:E\\to B$ be a vector bundle of constant rank $r$ with zero\nsection $z$. For every $K\\in D^b_{ctf}(B,\\Lambda)$ there is a\ncanonical isomorphism\n\n$$\nR\\pi^!K\\;\\xrightarrow{\\ \\sim\\ }\\;L\\pi^*K(r)[2r],\n$$\n\ncompatible with base change, with direct sums of vector bundles, and\nwith the adjunctions; in particular\n\n$$\n\\omega_\\pi=R\\pi^!\\Lambda_B\\;\\cong\\;\\Lambda_E(r)[2r],\n$$\n\nand the identification is compatible with the finite reduction of the\ncoefficients.",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $\\pi:E\\to B$ be a vector bundle of constant rank $r$ with zero\nsection $z$ [def-asd-vector-bundle-zero-section]. For every $K\\in D^b_{ctf}(B,\\Lambda)$ there is a\ncanonical isomorphism\n\n$$\nR\\pi^!K\\;\\xrightarrow{\\ \\sim\\ }\\;L\\pi^*K(r)[2r],\n$$\n\ncompatible with base change, with direct sums of vector bundles, and\nwith the adjunctions; in particular\n\n$$\n\\omega_\\pi=R\\pi^!\\Lambda_B\\;\\cong\\;\\Lambda_E(r)[2r],\n$$\n\nand the identification is compatible with the finite reduction of the\ncoefficients.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.md",
   "place": "node cor-pur-vector-bundle-purity, order 1990"
  },
  "stmt_deps": [
   "def-pur-conventions",
-  "def-weil-derived-tensor",
-  "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-asd-vector-bundle-zero-section"
  ],
  "proof": [
   {
-   "text": "At finite coefficient level on the ordinary etale site,\n[thm-amb-vector-bundle-purity] constructs exactly the adjoint\nof integration against the globally defined trace of\n[def-amb-vector-integration]. It is an isomorphism for every\ncomplex, hence in particular for the coefficients here.\nThe comparison of actual right adjoints in\n[thm-sf-ambient-adjoint-class], together with\n[thm-weil-pbc-site-comparison], transports this isomorphism and\nits counit to the stated etale-origin category.",
+   "text": "First work with $A=A_{E,n}$; all geometric schemes are in the finite-type $k$ setting of [def-pur-conventions]. The vector bundle and its zero section have the relative-spectrum meaning of [def-asd-vector-bundle-zero-section]. The geometric and compactifiability assertions in [def-amb-vector-integration] ensure that $\\pi$ is separated of finite type between Noetherian schemes. In particular its compactification can be used in all the comparisons below; $\\ell$ is invertible because $\\ell\\ne\\operatorname{char}(k)$. By [lem-sf-proetale-constructible-origin] choose an ordinary-etale bounded constructible witness $K_0$ and $\\nu_B^*K_0\\cong K$. The unit isomorphism of [thm-weil-pbc-site-comparison] gives $R\\nu_{B,*}K\\cong K_0$. On the ordinary etale category let $t_\\pi$ be the actual glued integration of [def-amb-vector-integration]. The theorem [thm-amb-vector-bundle-purity] states both the canonical descent of the specified finite pro-etale Tate sheaf and the isomorphy, for every $K_0$, of the mate\n$$\\gamma^\\times_{\\pi,K_0}:\\pi^*K_0(r)[2r]\\longrightarrow\\pi^\\times K_0$$\nof $c_{\\pi,K_0}=(1\\otimes t_\\pi)\\circ\\mathrm{PF}^{-1}:R\\pi_!\\pi^*K_0(r)[2r]\\to K_0$. Thus no assertion of purity for an arbitrary smooth map is used here.",
    "uses": [
-    "thm-amb-vector-bundle-purity",
+    "def-pur-conventions",
+    "def-asd-vector-bundle-zero-section",
     "def-amb-vector-integration",
-    "thm-sf-ambient-adjoint-class",
-    "thm-weil-pbc-site-comparison"
+    "lem-sf-proetale-constructible-origin",
+    "thm-weil-pbc-site-comparison",
+    "thm-amb-vector-bundle-purity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration on affine space and Proposition: finite ordinary-etale model and the specified trace"
+   }
   },
   {
-   "text": "The compatibility claims concern these specified maps. On a\ntrivializing open the integration is the ordered affine-space counit\nof [cor-amb-affine-space-adjunction]. The explicit projective-line\ntrace [def-amb-p1-trace] and its diagonal Kummer class commute\nwith coefficient reduction and base change, and composition of their\nadjunctions gives the corresponding compatibilities for affine space.\nFor a direct sum of bundles choose simultaneous trivializations; the\ntwo integrations are the same iterated counit, with the additive\ntwists of [def-coefficient-twists-detailed]. These equalities descend as\nequalities between degree-zero sheaves on the base, because\n[lem-amb-affine-space-top-trace] identifies every local source\nwith $\\Lambda$, and [lem-amb-linear-trace-invariance] gives\nagreement on overlaps. Transposing these equalities proves all the\nclaimed compatibilities. The proof precedes general smooth purity.",
+   "text": "Apply $\\nu_E^*$ to the map in Step 1. The comparison [lem-weil-pbc-comparison-pullback], the monoidal comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and the descended Tate sheaf in [thm-amb-vector-bundle-purity] identify its source with $L\\pi^*K(r)[2r]$. The finite formula in [def-weil-exceptional-inverse-image] identifies its target with $R\\pi^!K$. Call the resulting isomorphism $\\gamma_{\\pi,K}$. It is natural and independent of the witness: [thm-weil-pbc-site-comparison] is fully faithful and its unit is natural, so a change of witness identifies both the ordinary map and its pullback. The compact-support comparison [lem-sf-class-compact-support-comparison] and the Hom bijection of [thm-sf-ambient-adjoint-class] transport the actual adjunction, including its counit; the latter theorem applies at any chosen compactification of this finite-type morphism, with a finite dimension bound supplied by [lem-kun-dimension-finite-type] for the finite-type compactification (use the bound $0$ if it is empty). Hence $\\gamma_{\\pi,K}$ is the mate of $c_{\\pi,K}$ in the pro-etale realization. The projection inverse exists on this domain by [lem-weil-finite-compact-projection-formula]: the coefficient sheaf with twist is bounded constructible and the ordinary witness has finite Tor amplitude by [lem-sf-comparison-tor-amplitude]. Define the isomorphism asked for in the statement to be $\\alpha_{\\pi,K}=\\gamma_{\\pi,K}^{-1}$. This fixes its direction and its normalization, rather than choosing an unrelated isomorphism.",
    "uses": [
-    "cor-amb-affine-space-adjunction",
-    "def-amb-p1-trace",
-    "def-coefficient-twists-detailed",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "thm-amb-vector-bundle-purity",
+    "def-weil-exceptional-inverse-image",
+    "thm-weil-pbc-site-comparison",
+    "lem-sf-class-compact-support-comparison",
+    "thm-sf-ambient-adjoint-class",
+    "lem-weil-finite-compact-projection-formula",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Proposition: transport integration and its adjoint to the specified pro-etale category"
+   }
+  },
+  {
+   "text": "We next check base change at the trace, before taking any mates. For $g:B'\\to B$ in the standing setting, let $E'=E\\times_BB'$, with projections $\\pi'$ and $g'$. The exchange $C:g^*R\\pi_!\\xrightarrow{\\sim}R\\pi'_!g'^*$ exists on the bounded coefficient input by [thm-cbc-finite-torsion]. On a trivializing open $U\\subset B$ and its pullback to $B'$, the defining local maps of [def-amb-vector-integration] are the specified affine-space counits. The exact equation in [lem-amb-affine-space-top-trace], applied to $U\\times_BB'\\to U$, is\n$$t_{\\pi'}\\circ C_{A_E(r)[2r]}=g^*t_\\pi$$\non that open. Both sides are maps from a degree-zero-cohomology object to $A_{B'}[0]$: the source is locally isomorphic to $A[0]$ by that same affine-space trace. The truncation identification in [def-amb-vector-integration] and full faithfulness of the single-complex embedding [lem-weil-pbc-derived-single-fully-faithful] make them actual maps of sheaves. Their restrictions agree on an open cover, so their values on every section agree by the sheaf axiom. This proves the displayed global equality. Changes of frame preserve each local trace by [lem-amb-linear-trace-invariance], so the calculation is independent of all trivializations. This uses equality detection only for degree-zero sheaves, never for arbitrary derived morphisms.",
+   "uses": [
+    "thm-cbc-finite-torsion",
+    "def-amb-vector-integration",
     "lem-amb-affine-space-top-trace",
+    "lem-weil-pbc-derived-single-fully-faithful",
     "lem-amb-linear-trace-invariance"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration map on a vector bundle: independence of frame; base-change equation for the prescribed trace"
+   }
+  },
+  {
+   "text": "To pass Step 3 to arbitrary $K$, use the projection square [lem-kun-proj-formula-natural] for the proper part of a compactification. For the open part use exact ordinary-etale extension by zero [lem-amb-etale-adjoint-locality]. Its sheaf tensor comparison sends a local tensor of a supported section $s$ and a section $t$ to the same supported tensor $s\\otimes t$. Open base change restricts $s$ and $t$, so either order sends it to $g^{-1}s\\otimes g^{-1}t$. These tensors generate the sheaf tensor product; hence the square is equal already on sheaves. Apply this equality to K-flat representatives in every degree of the total tensor complexes. Open extension preserves K-flatness, since its sheaf tensor formula reduces a tensor with an acyclic complex to extension of the tensor with its exact restriction. Thus the square is equal before derived localization, which proves the derived square without trying to detect equality of derived maps by restrictions. Pasting the two squares gives compatibility of the compact-support projection with base change. Consequently the adjoint of the pullback of $\\gamma_{\\pi,K}$ is\n$$R\\pi'_!L\\pi'^*Lg^*K(r)[2r]\\xrightarrow{\\mathrm{PF}^{-1}}Lg^*K\\otimes^LR\\pi'_!A_{E'}(r)[2r]\\xrightarrow{1\\otimes t_{\\pi'}}Lg^*K,$$\nby Step 3. This is exactly the adjoint defining $\\gamma_{\\pi',Lg^*K}$. More explicitly, define the exceptional exchange $e:g'^*R\\pi^!K\\to R\\pi'^!g^*K$ as the mate of $C^{-1}$: its transpose is $R\\pi'_!g'^*R\\pi^!K\\xrightarrow{C^{-1}}g^*R\\pi_!R\\pi^!K\\xrightarrow{g^*\\epsilon}g^*K$, using [def-weil-pbc-adjunction-mate]. Equality of the displayed transposes gives\n$$e\\circ g'^*\\gamma_{\\pi,K}=\\gamma_{\\pi',g^*K}\\circ a,$$\nwhere $a:g'^*L\\pi^*K(r)[2r]\\cong L\\pi'^*g^*K(r)[2r]$ is the pullback/twist associativity map. Both gamma maps are invertible, so this also proves that $e$ is invertible and proves the required square for their inverses $\\alpha$. The site comparisons from Step 2 preserve these composites. No general smooth base-change theorem or general smooth-purity coherence is invoked.",
+   "uses": [
+    "lem-kun-proj-formula-natural",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration and Proposition: base change of the integration mate, with the mate formula written out"
+   }
+  },
+  {
+   "text": "For vector bundles $E_1,E_2$ of ranks $r,s$ over $B$, put $E_{12}=E_1\\times_BE_2$ and factor its projection as $E_{12}\\xrightarrow{q}E_2\\xrightarrow{p}B$. Use the coherent compact-support composition [lem-amb-etale-compact-comparisons]. The composite-adjunction counit is $\\epsilon_p\\circ Rp_!(\\epsilon_q)$ by [def-weil-pbc-composite-adjunction]. On any simultaneous trivialization this is the ordered affine-coordinate trace on $r+s$ coordinates: the coordinate-tower definition in [lem-amb-affine-space-top-trace] is precisely this iterated counit. Thus the trace $t_{12}$ and this composite agree locally. The common source $R(pq)_!A_{E_{12}}(r+s)[2(r+s)]$ has only degree-zero cohomology, as the local affine-space trace shows. Compose both maps with the inverse of its canonical truncation roof from [def-amb-vector-integration]. Full faithfulness [lem-weil-pbc-derived-single-fully-faithful] identifies them with maps from its degree-zero cohomology sheaf to $A_B$; these maps agree on the cover and therefore on every section by the sheaf axiom. Hence the derived traces are equal globally. Reordering the two blocks gives the same trace: the block permutation is an invertible linear change of coordinates, to which [lem-amb-linear-trace-invariance] applies. Tensor reassociation identifies the twist by $r+s$ with the two successive twists [def-coefficient-twists-detailed]; the shifts are $2r,2s$, so the symmetry sign is $(-1)^{(2r)(2s)}=1$. Let $c_{p,q}:R(pq)^!\\xrightarrow{\\sim}Rq^!Rp^!$ be the unique right-adjoint comparison whose Hom bijection is the composite bijection of [def-weil-pbc-composite-adjunction] under $Rp_!Rq_!\\cong R(pq)_!$. On ordinary-etale bounded-below objects this exists by that composite adjunction, and Step 2 gives its specified pro-etale realization. Its defining counit equation is $\\epsilon_{pq}=\\epsilon_p\\circ Rp_!(\\epsilon_q)\\circ Rp_!Rq_!(c_{p,q})$, with the compact-support identification inserted. Transposing the equality of traces, after tensoring by $K$ and inserting the projection maps, gives\n$$\\gamma_{pq,K}=c_{p,q}^{-1}\\circ\\gamma_{q,Rp^!K}\\circ Lq^*(\\gamma_{p,K})(r)[2r],$$\nwhere $q$ has rank $r$, $p$ has rank $s$, and the source identification is $Lq^*Lp^*K(r+s)[2(r+s)]\\cong Lq^*(Lp^*K(s)[2s])(r)[2r]$. The intermediate input $Rp^!K$ is bounded constructible of finite Tor amplitude because Step 2 identifies it with $Lp^*K(s)[2s]$. This proves direct-sum compatibility; inversion gives it for $\\alpha$. Adjoint compatibility is equally explicit: if $G_0K=L\\pi^*K(r)[2r]$, its integration counit is $\\epsilon_0=\\epsilon\\circ R\\pi_!(\\gamma)$ and its unit is $\\eta_0=\\gamma^{-1}_{R\\pi_!(-)}\\circ\\eta$. The triangle identities for these are obtained by substituting these formulas and cancelling $\\gamma^{-1}\\gamma$, using naturality. Thus the claimed identification is an identification of adjunctions with their specified units and counits.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons",
+    "def-weil-pbc-composite-adjunction",
+    "lem-amb-affine-space-top-trace",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-amb-linear-trace-invariance",
+    "def-coefficient-twists-detailed",
+    "def-amb-vector-integration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration on affine space: coordinate-tower counit; frame independence; compatibility with direct sums and adjunctions"
+   }
+  },
+  {
+   "text": "Fix $n\\ge m\\ge1$ and put $Q_T=(-)\\otimes^L_{A_{E,n}}A_{E,m}$. First construct the comparison on ordinary-etale witnesses. Write $Q_T^{\\mathrm{et}}=(-)\\otimes^L_{A_{E,n}}A_{E,m}$ on that site. The derived tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies $\\nu_T^*Q_T^{\\mathrm{et}}$ with $Q_T\\nu_T^*$. Together with [lem-sf-class-compact-support-comparison], the canonical ordinary-etale compact-support scalar comparison $q^{\\mathrm{et}}:Q_B^{\\mathrm{et}}R\\pi_{!,n}^{\\mathrm{et}}\\to R\\pi_{!,m}^{\\mathrm{et}}Q_E^{\\mathrm{et}}$ realizes the comparison of [lem-fix-operation-reduction]. That comparison is invertible on the finite-Tor domain, and full faithfulness [thm-weil-pbc-site-comparison] reflects invertibility, so $q^{\\mathrm{et}}$ is invertible there too. Its mate $b^{\\mathrm{et}}:Q_E^{\\mathrm{et}}\\pi_n^\\times\\to\\pi_m^\\times Q_B^{\\mathrm{et}}$ has transpose $Q_B^{\\mathrm{et}}(\\epsilon_n)\\circ(q^{\\mathrm{et}})^{-1}$ [def-weil-pbc-adjunction-mate]. All the objects in this calculation are bounded below: Steps 1--2 identify the exceptional images of finite-Tor witnesses with pullback, twist and a fixed finite shift. The actual adjunction comparisons of Step 2 identify $\\nu_E^*b^{\\mathrm{et}}$ with the pro-etale coefficient mate, rather than identifying only its source and target. The operation comparisons preserve the projection and exchange constructions by [lem-fix-operation-reduction]. On each affine open $u:U\\hookrightarrow B$, the restricted vector bundle $E_U$ is affine over $U$, hence separated of finite type over $k$. Apply [lem-coef-finite-exceptional] to $E_U\\to U$ to get invertibility and the unit/counit equations there. The target-open restriction of the right adjoint follows from [lem-amb-etale-adjoint-locality] and [lem-amb-etale-compact-comparisons]: for $v:E_U\\hookrightarrow E$, the natural Hom bijections are $\\operatorname{Hom}(H,v^*\\pi^\\times L)=\\operatorname{Hom}(v_!H,\\pi^\\times L)=\\operatorname{Hom}(R\\pi_!v_!H,L)=\\operatorname{Hom}(u_!R\\pi_{U!}H,L)=\\operatorname{Hom}(H,\\pi_U^\\times u^*L)$. These identify the restriction of $b^{\\mathrm{et}}$ with the ordinary-etale local mate; its pro-etale realization is the invertible local mate from [lem-coef-finite-exceptional]. Full faithfulness [thm-weil-pbc-site-comparison] therefore makes the restricted ordinary-etale mate invertible. Exact ordinary-etale open restriction commutes with cohomology, so [lem-weil-pbc-etale-cover-detects-iso] applied to each cohomology map and [lem-weil-pbc-unbounded-derived-iso-cohomology] make $b^{\\mathrm{et}}$ invertible globally. Pulling it back by $\\nu_E^*$ gives the required global pro-etale isomorphism. This avoids imposing separatedness on $B$. Write $q:Q_BR\\pi_{!,n}\\xrightarrow{\\sim}R\\pi_{!,m}Q_E$ for the pro-etale realization of $q^{\\mathrm{et}}$ under the compact-support comparisons, and $b=\\nu_E^*b^{\\mathrm{et}}$ under the witness identifications. The global counit equation is the defining transpose formula. For the unit equation substitute this formula into the transpose of $G_m(q)\\circ b_{F_n(-)}\\circ Q_E(\\eta_n)$: naturality moves the counit past $q$, and $\\epsilon_nF_n\\circ F_n\\eta_n=1$ leaves the identity of $F_mQ_E$. The transpose of $\\eta_mQ_E$ is that same identity, so injectivity of the Hom bijection gives the unit equation. Here $F_n=R\\pi_{!,n}$ and $G_m=R\\pi_m^!$. The Tate lines reduce to the stated Tate lines by [lem-pur-twist-sheaf-locally-free], so $Q_T(M(r)[2r])\\cong(Q_TM)(r)[2r]$. For the projective-line trace, use its explicit definition [def-amb-p1-trace] and the decomposition [lem-asd-ordinary-finite-p1-adjunction]: $b=(\\mathrm{unit},h)$ and $t_q=\\operatorname{pr}_2b^{-1}$. The Kummer class $h$ is compatible with every quotient, by [lem-amb-cartier-kummer-map] applied to a hyperplane point of $\\mathbf P^1$ and its formula $c_Du_D=c_1(\\mathcal O(D))$. That formula can be read on the ordinary-etale witness, or after fully faithful comparison. One may choose a common exponent $\\ell^a$ killing both coefficient rings, so both $h$'s are derived scalar extensions of the same class. The unit and the tensor constraints are preserved by the operation comparisons, and hence $Q(b)=b_m$ and $Q(t_q)=\\operatorname{pr}_2b_m^{-1}=t_{q,m}$. Applying $Q$ to the open-extension counit and iterating the composite counit gives $Q(t_{p_r,n})=t_{p_r,m}$ on affine space. On a vector bundle the two traces agree on every trivializing open. Their sources have only degree-zero cohomology, also after applying $Q$, since $Q(A_{n,B})=A_{m,B}$. Compose with the inverse canonical truncation roof [def-amb-vector-integration], and use [lem-weil-pbc-derived-single-fully-faithful] to obtain sheaf maps. Their restrictions agree; the sheaf axiom makes them equal on every section. Thus $Q(t_{\\pi,n})=t_{\\pi,m}$ globally. Finally the adjunction formula $\\gamma=R\\pi^!(c)\\circ\\eta$ and preservation of the counit/mate comparisons give\n$$b_{n,m,K}\\circ Q_E(\\gamma_{\\pi,K})=\\gamma_{\\pi,Q_BK}$$\nafter the canonical source identification; here $b_{n,m,K}:Q_ER\\pi_n^!K\\cong R\\pi_m^!Q_BK$. This proves finite reduction for $\\gamma$, its inverse, and its value at $A_B$. No flatness of the quotient map, nor divisibility of $m$ or $n$ by a ramification index, has been assumed.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "lem-coef-finite-exceptional",
+    "lem-pur-twist-sheaf-locally-free",
+    "def-amb-p1-trace",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-amb-cartier-kummer-map",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-amb-etale-adjoint-locality",
+    "lem-amb-etale-compact-comparisons",
+    "lem-weil-pbc-etale-cover-detects-iso",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-class-compact-support-comparison",
+    "thm-weil-pbc-site-comparison",
+    "def-weil-pbc-adjunction-mate",
+    "def-amb-vector-integration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Specified affine-space counit and integration: coefficient reduction of Kummer-normalized projective-line trace, then iterated traces"
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\mathcal O_E$ make the construction on actual derived coefficient systems before taking a limit. The simultaneous models in [lem-coef-semilinear-derived-sections] supply compact supports, tensor, projection/exchange and their mate maps on systems. On the ordinary-etale systems their compact-support right adjoint, with evaluated units and counits, is [lem-pur-etale-coefficient-system-adjoint]; the comparison of systems and its units/counits are [lem-pur-coefficient-system-derived-comparison]. Consider the system $C_\\pi$ with level $R\\pi_!A_{E,n,E}(r)[2r]$. Every evaluation has cohomology only in degree zero by the local affine-space traces. Cohomology of strict systems is levelwise, so $C_\\pi$ itself has cohomology only in degree zero and has the canonical truncation roof to $\\mathcal H^0(C_\\pi)[0]$. The local trace maps on $\\mathcal H^0(C_\\pi)$ commute with the strict transition maps by Step 6. They are therefore maps of sheaf systems, and glue levelwise to one strict-system map; the compatibility with transitions follows by restricting to the same trivializing cover. Its inverse glues in the same way. This constructs a trace isomorphism in the derived category of systems, rather than postulating a lift of ordinary derived-category maps. The fully faithful single-complex assertion [lem-weil-pbc-derived-single-fully-faithful] applies to this abelian category too. Taking its tensor-projection mate gives an actual natural system map $\\gamma_{\\pi,K_\\bullet}$, with evaluations exactly the finite maps of Steps 1--2. Evaluation detects equivalences by [lem-coef-semilinear-derived-sections], so it is invertible. Apply the total derived inverse-limit functor. The definitions [def-weil-exceptional-inverse-image, def-weil-derived-pullback-tensor-hom] identify its target and source respectively with $R\\pi^!_{\\mathcal O_E}K$ and $L\\pi^*K(r)[2r]$, the integral tensor and pullback being completed operations. The finite reductions have a common bound because the rank $r$ is fixed; twisting by a rank-one line changes neither constructibility nor Tor bounds and the shift is always $2r$. Thus these are in the stated integral domain. For trace base change, sums and reduction, both sides are strict-system sheaf maps after the degree-zero truncation, so the componentwise equalities of Steps 3, 5 and 6 prove equality in the abelian category of systems. The simultaneous models in [lem-coef-semilinear-derived-sections] preserve tensor, composition, projection and adjunction transposes. Apply those constructions to these equal strict-system maps: the mate squares are then equal in the derived category of systems, with the unit/counit formulas of Steps 4--5. Applying the single derived-limit functor preserves these equalities. This proves the integral assertions, without inferring equality of integral morphisms merely from equality of their reductions.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-etale-coefficient-system-adjoint",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-exceptional-inverse-image",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Purity conventions: derived-complete integral coefficient transport of the vector-bundle integration construction"
+   }
+  },
+  {
+   "text": "Every object of $D^b_c(B,E)$ has an integral representative by [def-weil-rationalization-karoubi], and [lem-coef-integral-residue-tor] puts every such representative in $D^b_{ctf}(B,\\mathcal O_E)$: its residue reduction is bounded, so the lemma supplies one uniform finite Tor interval at all levels. Thus Step 7 applies to every rational input, not only to a subcategory of chosen finite-Tor representatives. Rationalize the integral map to obtain the $E$-coefficient isomorphism [def-weil-rationalization-karoubi]. The operations are those of [def-weil-exceptional-inverse-image, def-weil-derived-pullback-tensor-hom], so this is the claimed map on objects and on morphisms; all diagrams remain equal after this functor. For a finite extension $E\\subset E'$, put $B_n=\\mathcal O_{E'}/\\varpi_E^n\\mathcal O_{E'}$ and $T_n=(-)\\otimes_{A_{E,n}}B_n$. This scalar map is finite free. Choose one $\\ell$-power exponent killing both finite rings. The definition [def-amb-p1-trace] makes the two Kummer classes scalar extensions of the single $\\mathbf Z/\\ell^a$-Kummer boundary for $\\mathcal O(1)$, hence $T_n(h_{A_n})=h_{B_n}$. Unit compatibility in [lem-fix-operation-reduction] gives $T_n(b_{A_n})=(\\mathrm{unit}_{B_n},h_{B_n})=b_{B_n}$; functoriality sends its inverse to $b_{B_n}^{-1}$ and the direct-sum projection to the direct-sum projection. Therefore $T_n(t_{q,A_n})=\\operatorname{pr}_2b_{B_n}^{-1}=t_{q,B_n}$. The open-extension counit and the ordered composite counits are preserved by the simultaneous models [lem-coef-semilinear-derived-sections], so $T_n(t_{p_r,A_n})=t_{p_r,B_n}$. For a bundle these identities hold on its trivializing cover; degree-zero truncation and full faithfulness [lem-weil-pbc-derived-single-fully-faithful] reduce their global equality to equality of sheaf maps, which follows on sections from the sheaf axiom. Tensoring the resulting trace equality by the input and taking its specified adjunction transpose proves scalar compatibility of $\\gamma$ and then of its inverse. The scalar comparison of [lem-pur-etale-coefficient-system-adjoint] is a comparison of actual system functors, coherent with quotients and composition and with the cofinal uniformizer subsequence. Together with [lem-fix-operation-reduction] it identifies the entire integral construction and then its rationalization under scalar extension. The common-stage definition [def-weil-algebraically-closed-coefficients] therefore gives a well-defined isomorphism for $\\overline{\\mathbf Q}_\\ell$ and the same compatibility diagrams. For every coefficient ring set $K=\\Lambda_B$. Pullback preserves the coefficient unit by the specified pullback construction, so $L\\pi^*\\Lambda_B(r)[2r]=\\Lambda_E(r)[2r]$; hence $\\alpha_{\\pi,\\Lambda_B}$ is exactly $\\omega_\\pi\\cong\\Lambda_E(r)[2r]$. The finite-reduction assertion is already Step 6. When $r=0$ the local trace and the composite adjunction are identities, so under the canonical rank-zero identification $E\\cong B$ all constructions are identity maps. For an empty base every object is zero and the same constructions give the unique maps; no nonempty-cover or positive-rank assumption has entered.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-exceptional-inverse-image",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-etale-coefficient-system-adjoint",
+    "lem-fix-operation-reduction",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-coef-integral-residue-tor",
+    "def-amb-p1-trace",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Purity conventions: rational and common-stage transport; the coefficient-unit specialization"
+   }
   }
  ],
  "proof_deps": [
-  "thm-amb-vector-bundle-purity",
+  "def-pur-conventions",
+  "def-asd-vector-bundle-zero-section",
   "def-amb-vector-integration",
-  "thm-sf-ambient-adjoint-class",
+  "lem-sf-proetale-constructible-origin",
   "thm-weil-pbc-site-comparison",
-  "cor-amb-affine-space-adjunction",
-  "def-amb-p1-trace",
-  "def-coefficient-twists-detailed",
+  "thm-amb-vector-bundle-purity",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-exceptional-inverse-image",
+  "lem-sf-class-compact-support-comparison",
+  "thm-sf-ambient-adjoint-class",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-kun-dimension-finite-type",
+  "thm-cbc-finite-torsion",
   "lem-amb-affine-space-top-trace",
-  "lem-amb-linear-trace-invariance"
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-amb-linear-trace-invariance",
+  "lem-kun-proj-formula-natural",
+  "def-weil-pbc-adjunction-mate",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "def-weil-pbc-composite-adjunction",
+  "def-coefficient-twists-detailed",
+  "lem-fix-operation-reduction",
+  "lem-coef-finite-exceptional",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-amb-p1-trace",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-amb-cartier-kummer-map",
+  "lem-weil-pbc-etale-cover-detects-iso",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "lem-pur-coefficient-system-derived-comparison",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-coef-integral-residue-tor"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Integration on affine space and vector-bundle Proposition; expanded compatibility proof of cor-pur-vector-bundle-purity in the master snapshot, with explicit coefficient-system passage"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "vector.?bundle.*purity|purity.*vector.?bundle|exceptional.*inverse",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary structure-sheaf or topological bundle pullbacks and generic adjunctions, not constant-coefficient etale vector-bundle purity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a vector bundle of rank r exceptional pullback equals ordinary pullback Tate twisted by r and shifted by 2r",
+   "results": "Bundle.Pullback; VectorBundle.pullback; VectorField.mpullbackWithin_univ; VectorField.mpullbackWithin_eq_pullbackWithin; ContMDiffVectorBundle.pullback; VectorField.mpullback; FiberBundle.pullback_trivializationAt'; VectorField.mpullback_neg",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary structure-sheaf or topological bundle pullbacks and generic adjunctions, not constant-coefficient etale vector-bundle purity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "CategoryTheory.Adjunction.id; CategoryTheory.Adjunction.instInhabitedId; CategoryTheory.Adjunction; CategoryTheory.Equivalence.toAdjunction; CategoryTheory.Equivalence.toAdjunction'; CategoryTheory.Adjunction.isLeftAdjoint; CategoryTheory.Adjunction.isRightAdjoint; CategoryTheory.Adjunction.mk'",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary structure-sheaf or topological bundle pullbacks and generic adjunctions, not constant-coefficient etale vector-bundle purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology vector bundle purity exceptional inverse image is pullback with Tate twist and shift twice rank",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_inv_τl; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary structure-sheaf or topological bundle pullbacks and generic adjunctions, not constant-coefficient etale vector-bundle purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support trace of affine space defines right adjoint pullback shifted twice dimension",
+   "results": "TopCat.Sheaf.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.instIsLeftAdjointPullback; TopCat.Sheaf.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary structure-sheaf or topological bundle pullbacks and generic adjunctions, not constant-coefficient etale vector-bundle purity"
+  },
+  {
+   "tool": "grep",
+   "query": "def pullback|pseudofunctor_mapComp_inv_τl|instIsLeftAdjointPullback",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits give ordinary structure-sheaf or topological bundle pullbacks and generic adjunctions, not constant-coefficient etale vector-bundle purity"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek.*affine|affine.*upperShriek|Tate.*twist|Verdier",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Presentable/Directed.lean; Mathlib/Algebra/Homology/SpectralObject/Page.lean; Mathlib/Algebra/Homology/SpectralObject/Basic.lean; Mathlib/Algebra/Homology/SpectralObject/Cycles.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: grep found historical references and generic triangulated localization; semantic search found scheme sections and discrete-sheaf adjunctions, not constant-coefficient etale exceptional purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality compactly supported cohomology of algebraic affine space trace and inverse image with orientation sheaf",
+   "results": "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstant.counit_app_val",
+   "date": "2026-10-16",
+   "verdict": "no match: grep found historical references and generic triangulated localization; semantic search found scheme sections and discrete-sheaf adjunctions, not constant-coefficient etale exceptional purity"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -101,5 +310,149 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-an"
+ "unit": "sk-prop-an",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "cor-pur-vector-bundle-purity",
+  "worker": "stage1",
+  "summary": "Expanded the finite ordinary-etale integration proof, transported the actual right adjoint and its counit, proved base-change and direct-sum equalities first at degree-zero traces, and checked finite reduction by the explicit projective-line decomposition. Added integral, rational and common-stage passage using actual coefficient systems. Reused existing nodes throughout; no new lemmas, weaker statements or general smooth-purity inputs. Second reading makes ordinary-etale coefficient witnesses, the composite comparison, open tensor squares, and finite-free trace transport explicit.",
+  "blueprint": "Current main-20261015 sk-prop-an: integration on affine space, independence of frame and its vector-bundle Proposition. The unchanged corollary statement is realized using the expanded two-paragraph proof of the master snapshot; Steps 1--2 realize paragraph 1, Steps 3--6 realize paragraph 2, Steps 7--8 make the coefficient transports of def-pur-conventions explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic Constructible pro-étale coefficients are of étale origin used in step(s) 1. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic Bounded-below site comparison used in step(s) 1,2. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic Comparison inverse image commutes with scheme pullback used in step(s) 2,4. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used in step(s) 2. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic On the coefficient class the compact-support functor is computed on the étale site used in step(s) 2. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Generic The exceptional adjoint on the bounded comparison class used in step(s) 2. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Generic Finite-coefficient compact-support projection formula used in step(s) 2. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Generic Finite Tor amplitude under the site comparison used in step(s) 2. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic Finiteness of the dimension of a finite type scheme used in step(s) 2. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "Generic Compact-support base change at finite coefficients used in step(s) 3. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic The single-complex embedding of an abelian category is fully faithful used in step(s) 3,5,6,7. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-kun-proj-formula-natural",
+    "why": "Generic Naturality of the projection formula used in step(s) 4. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic The etale compact-support comparisons used in step(s) 5,6. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic Basic operations and coefficient reduction used in step(s) 6,8. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-coef-finite-exceptional",
+    "why": "Generic Finite exceptional adjoints and coefficient change used in step(s) 6. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic The twisting sheaves are locally free of rank one and derived complete used in step(s) 6,7. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Generic Ordinary etale projective-line adjunction with arbitrary finite invertible-exponent coefficients used in step(s) 6. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-amb-cartier-kummer-map",
+    "why": "Generic A Cartier divisor gives a supported Kummer map used in step(s) 6. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic Etale localization of the ambient adjoint used in step(s) 6. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cover-detects-iso",
+    "why": "Generic A morphism of etale sheaves is an isomorphism iff it is one on an etale covering used in step(s) 6. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic Isomorphisms in the unbounded derived category detected by cohomology used in step(s) 6. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic Derived semilinear sections and coefficient-linear geometric operations used in step(s) 7. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-pur-etale-coefficient-system-adjoint",
+    "why": "Generic Ordinary etale adjoint on strict coefficient systems used in step(s) 7,8. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Generic Derived direct image and evaluation of coefficient systems used in step(s) 7. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Generic The residue reduction controls integral Tor amplitude used in step(s) 8. The vector-bundle unit supplies integration but no replacement for this site/operation/coefficient comparison; its integration-and-mate route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-proetale-constructible-origin",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-class-compact-support-comparison",
+  "thm-sf-ambient-adjoint-class",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-kun-dimension-finite-type",
+  "thm-cbc-finite-torsion",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-kun-proj-formula-natural",
+  "lem-amb-etale-compact-comparisons",
+  "lem-fix-operation-reduction",
+  "lem-coef-finite-exceptional",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-amb-cartier-kummer-map",
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-etale-cover-detects-iso",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-coef-integral-residue-tor"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q26-2d600662b",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-2d600662b (reviewer sub-agent of L); spot-checked: Read all eight steps, all 39 cited statements, sources and unit/chapter route. Verified mate direction, coefficient categories, finite reduction, coherent system passage, edge cases and acyclicity. No new nodes or repairs. Detailed checks and accepted tool uses are recorded in review.md."
+ }
 }

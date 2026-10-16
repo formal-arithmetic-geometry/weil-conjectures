@@ -3,22 +3,123 @@
  "blueprint": {
   "is": "pur713-def-continuous-rings",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Condensed coefficient rings of continuous functions",
- "statement": "For $T\\in\\{\\mathcal O_E,E\\}$, with the topology induced from $\\overline{\\mathbf Q}_\\ell$, let $\\underline T$ be the presheaf of commutative rings on $*_{\\Proet}$ with\n\n$$\n\\underline T(S)=C(S,T),\\qquad S\\in *_{\\Proet},\n$$\n\nthe ring of continuous maps $S\\to T$ with pointwise operations, restriction being composition. No completeness or limit presentation of $T$ enters this definition: $\\underline E$ is not defined as $\\underline{\\mathcal O}_E[1/\\varpi]$, nor $\\underline{\\mathcal O}_E$ as $\\lim_n\\underline{\\mathcal O_E/\\varpi^n}$.",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ with its absolute value extending the $\\ell$-adic absolute value, and a finite subextension $E/\\mathbf Q_\\ell$ inside it. Give $E$ the induced topology as in [def-sfb-padic-subfield-condensed-ring]. Write $\\mathcal O_E=\\{x\\in E:|x|\\leq1\\}$ for its valuation subring with the subspace topology as in [def-sfb-padic-integers-condensed-ring], and let $\\varpi$ be a uniformizer as in [def-weil-l-adic-coefficient-extension].\n\nFor $T\\in\\{\\mathcal O_E,E\\}$, with the topology induced from $\\overline{\\mathbf Q}_\\ell$, let $\\underline T$ be the presheaf of commutative rings on the point site $*_{\\Proet}$ of [pur713-def-point-site] with\n\n$$\n\\underline T(S)=C(S,T),\\qquad S\\in *_{\\Proet},\n$$\n\nthe ring of continuous maps $S\\to T$ with pointwise operations, restriction being composition. No completeness or limit presentation of $T$ enters this definition: $\\underline E$ is not defined as $\\underline{\\mathcal O}_E[1/\\varpi]$, nor $\\underline{\\mathcal O}_E$ as $\\lim_n\\underline{\\mathcal O_E/\\varpi^n}$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-continuous-rings.md",
   "place": "node pur713-def-continuous-rings, order 2474"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "pur713-def-point-site",
+  "def-sfb-padic-subfield-condensed-ring",
+  "def-sfb-padic-integers-condensed-ring",
+  "def-weil-l-adic-coefficient-extension"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Presheaf of commutative rings sending a profinite set S to continuous functions from S to a topological commutative ring T, restriction by precomposition",
+   "results": "8 hits: TopCat.presheafToTopCommRing, TopCat.commRingYoneda, Condensed.locallyConstantPresheaf, TopCat.continuousFunctions, Condensed.profiniteFree, LightCondensed.locallyConstantPresheaf, AlgebraicGeometry.LocallyRingedSpace.Γ, CompHausLike.LocallyConstant.functorToPresheaves",
+   "date": "2026-10-16",
+   "verdict": "match: TopCat.commRingYoneda restricts along Profinite.toTopCat to the required presheaf; source read at CommRingCat.lean:208–252."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMap.*(Presheaf|Functor|[Rr]ing)|ContinuousMap.*[Rr]ing|topCatToCondensed",
+   "results": "25 hits: Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/NumberTheory/Padics/MahlerBasis.lean",
+   "date": "2026-10-16",
+   "verdict": "partial: topCatToCondensedSet concerns sets, not commutative rings; ContinuousMap algebra supports pointwise ring operations. The later commRingYoneda search supplies the match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Presheaf of rings of continuous functions on profinite sets with restriction by precomposition",
+   "results": "8 hits: TopCat.presheafToTopCommRing, PresheafOfModules, ContinuousMap.precomp, TopCat.continuousFunctions, TopCat.Presheaf.restrictOpenCommRingCat_apply, CommRingCat.HomTopology.continuous_precomp, ContinuousMap.instRing, LocallyConstant.comapRingHom",
+   "date": "2026-10-16",
+   "verdict": "partial: TopCat.continuousFunctions gives section rings; presheafToTopCommRing is on the open subsets of a fixed space, not the point site. The broader commRingYoneda construction found subsequently is the match."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap, CommRing",
+   "results": "12 hits: ContinuousMap.instCommRingOfIsTopologicalRing, TopCommRingCat.forgetToTopCatCommRing, TopCat.instCommRingHomObjTopCommRingCatForget₂SubtypeRingHomαContinuousCoeContinuousMapCarrier, AlgebraicGeometry.isIso_stalkMap_coprodSpec, AlgebraicGeometry.coprodSpec_coprodMk, AlgebraicGeometry.coprodSpec_apply, AlgebraicGeometry.HasRingHomProperty.of_stalkMap, AlgebraicGeometry.HasRingHomProperty.stalkMap",
+   "date": "2026-10-16",
+   "verdict": "partial: ContinuousMap.instCommRingOfIsTopologicalRing supplies section rings; subsequent commRingYoneda search supplies the full presheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousFunctions|continuousMapPresheaf|continuousMap.*Functor",
+   "results": "5 hits: Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean; searched Mathlib/Topology/Sheaves",
+   "date": "2026-10-16",
+   "verdict": "partial: continuousFunctions at CommRingCat.lean:208 gives section rings; read the adjoining commRingYoneda definition at line 237."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contravariant functor on topological spaces of continuous maps into a fixed topological commutative ring",
+   "results": "8 hits: TopCat.commRingYoneda, TopCat.presheafToTopCommRing, TopCat.continuousFunctions, TopCat.continuousFunctions.map, ContinuousMap.yonedaPresheaf', TopCat.continuousFunctions.pullback, ContinuousMap.yonedaPresheaf, ContinuousMap.yonedaPresheaf'_obj",
+   "date": "2026-10-16",
+   "verdict": "match: TopCat.commRingYoneda, restricted to profinite spaces, is the required presheaf; read CommRingCat.lean:208–252."
+  },
+  {
+   "tool": "grep",
+   "query": "def commRingYoneda|def continuousFunctions|def pullback",
+   "results": "3 hits: 208, 214, 237; searched Mathlib/Topology/Sheaves/CommRingCat.lean; single-file grep output parsed file/line fields incorrectly (returned 208, 214, 237 as file fields); the directory grep was rerun and returned the full file path and those lines.",
+   "date": "2026-10-16",
+   "verdict": "match: source read at Mathlib/Topology/Sheaves/CommRingCat.lean:208, 214 and 237; commRingYoneda is the required general presheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.commRingYoneda",
+   "results": "1 hits: TopCat.commRingYoneda",
+   "date": "2026-10-16",
+   "verdict": "match: TopCat.commRingYoneda has target TopCatᵒᵖ ⥤ CommRingCat and restricts in one line to Profinite."
+  },
+  {
+   "tool": "grep",
+   "query": "def commRingYoneda|def continuousFunctions|def pullback",
+   "results": "11 hits: Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean; searched Mathlib/Topology/Sheaves",
+   "date": "2026-10-16",
+   "verdict": "match: source read at Mathlib/Topology/Sheaves/CommRingCat.lean:208, 214 and 237; commRingYoneda is the required general presheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "forget₂ Profinite TopCat|def.*toTopCat|class.*IsTopologicalRing",
+   "results": "0 hits: ; searched Mathlib/Topology/Category/Profinite",
+   "date": "2026-10-16",
+   "verdict": "no match for these expected names/forms; source inspection found the abbreviation Profinite.toTopCat, confirmed by the later targeted grep."
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev Profinite.toTopCat|abbrev Profinite :=",
+   "results": "2 hits: Mathlib/Topology/Category/Profinite/Basic.lean, Mathlib/Topology/Category/Profinite/Basic.lean; searched Mathlib/Topology/Category/Profinite",
+   "date": "2026-10-16",
+   "verdict": "match for the restriction functor: Profinite.toTopCat at Basic.lean:84, with Profinite at line 50."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ring valued Yoneda functor represented by a topological commutative ring",
+   "results": "8 hits: TopCat.commRingYoneda; TopCat.presheafToTopCommRing; CommRingCat.coyoneda; CommRingCat.coyoneda_obj_obj_carrier; TopCat.instCommRingHomObjTopCommRingCatForget₂; TopCommRingCat.α; CommRingCat.instIsRightAdjointOppositeObjFunctorTypeYoneda; AlgebraicGeometry.LocallyRingedSpace.Γ.",
+   "date": "2026-10-17",
+   "verdict": "match: independent second-reader query returns TopCat.commRingYoneda first; read its definition and pointwise continuousFunctions/pullback at CommRingCat.lean:168–252."
+  },
+  {
+   "tool": "grep",
+   "query": "commRingYoneda|continuousFunctions",
+   "results": "5 hits in Topology/Sheaves: Mathlib/Topology/Sheaves/CommRingCat.lean:19,161,208,211,215 (per-file output cap). Read lines 155–255 directly, including commRingYoneda at 237.",
+   "date": "2026-10-17",
+   "verdict": "match: section rings, restrictions, and full contravariant functor are defined in the inspected source; Profinite.toTopCat at Basic.lean:84 supplies the restriction."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.commRingYoneda",
+  "file": "Mathlib/Topology/Sheaves/CommRingCat.lean",
+  "how": "specializes in one line: Profinite.toTopCat.op ⋙ TopCat.commRingYoneda.obj (TopCommRingCat.of T). Read commRingYoneda at lines 237–252, continuousFunctions at lines 208–209, and continuousFunctions.pullback at lines 214–221 of Mathlib/Topology/Sheaves/CommRingCat.lean. The pointwise operations are at lines 168–203. The inclusion Profinite.toTopCat is at Mathlib/Topology/Category/Profinite/Basic.lean:84–85. The statement dependencies supply the given commutative topological rings T = E or O_E and the point site; neither completeness nor a localization/limit comparison is used. This matches the presheaf definition, which does not assert the sheaf condition."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -28,5 +129,39 @@
  "blueprint_uses": [],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sp-coefficient-towers"
+ "unit": "sk-def-sp-coefficient-towers",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "pur713-def-continuous-rings",
+  "worker": "stage1",
+  "summary": "Found an exact one-line Mathlib specialization for the imported presheaf definition: restrict TopCat.commRingYoneda to Profinite. Restored the coefficient context already fixed by the source unit, named the point-site and coefficient-data dependencies, preserved the formula and the explicit non-use of completeness/limit/localization presentations, and created no nodes. No sheaf-descent theorem is included in this item.",
+  "blueprint": "Realizes the full definition in pur713-def-continuous-rings.md (order 2474), namely C(S,T), pointwise operations and precomposition. This auxiliary definition is not the statement/key node of sk-def-sp-coefficient-towers; no realized fields are changed.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-padic-subfield-condensed-ring",
+    "why": "Provides E with exactly the restricted absolute-value topology and topological field structure; this is coefficient data, not a replacement of a unit proof step."
+   },
+   {
+    "node": "def-sfb-padic-integers-condensed-ring",
+    "why": "Provides the valuation subring O_E with its subspace topology; its stronger sheaf/inclusion assertions are not used."
+   },
+   {
+    "node": "def-weil-l-adic-coefficient-extension",
+    "why": "Provides the finite-extension coefficient notation and uniformizer mentioned only in the explanatory non-localization clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-padic-subfield-condensed-ring",
+  "def-sfb-padic-integers-condensed-ring",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-b6cc25d12",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-b6cc25d12 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, blueprint sources and Mathlib construction. The presheaf is exactly commRingYoneda restricted to Profinite; coefficient topologies, restrictions and edge cases agree. No new nodes, cycles, route substitutions or repairs. Detailed checks and accepted coefficient-definition uses are recorded in review.md."
+ }
 }

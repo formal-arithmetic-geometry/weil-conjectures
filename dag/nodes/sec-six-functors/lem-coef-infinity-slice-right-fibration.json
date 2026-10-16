@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: derived coefficient adjunction, via stable enhancement and final-index colimits; the normalized identity-cone criterion used in proving the final-vertex right-anodyne characterization. Auxiliary Join slices of a quasicategory project by right fibrations.",
+   "place": "Proof paragraph 2: derived coefficient adjunction, via stable enhancement and final-index colimits; auxiliary join slices of a quasicategory project by right fibrations.",
    "via": [
     "lem-coef-infinity-normalized-final-cone",
     "lem-coef-infinity-terminal-anodyne",
@@ -28,9 +28,76 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a monotone map $\\alpha:[m]\\to[n]$, precomposition with $\\Delta(\\alpha)\\star\\operatorname{id}_K$ preserves the restriction $p$ on $K$. Identity and composition of these operators follow by precomposition, so the displayed construction is a simplicial set. Restricting the resulting map to $\\Delta^m$ is the same as restricting first to $\\Delta^n$ and then precomposing with $\\Delta(\\alpha)$, so $q$ is simplicial. For $K=\\Delta^0$, splitting an ordinal map into its initial segment in $[n]$ and final segment at the extra vertex gives $\\Delta^n\\star\\Delta^0\\cong\\Delta^{n+1}$; this agrees with all simplicial operators by restriction of the two segments.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018F",
+    "place": "Join-slice definition and ordinal concatenation; Construction 4.6.5.1 (01KX)."
+   }
+  },
+  {
+   "text": "Fix a lifting square for $q$ with horn $A=\\Lambda_i^n\\hookrightarrow B=\\Delta^n$, $n\\geq1$, $0<i\\leq n$. Its map $A\\to\\mathcal C_{/p}$ gives, for each face $\\Delta^{n-1}\\to A$, a map $\\Delta^{n-1}\\star K\\to\\mathcal C$ with restriction $p$ on $K$. These maps agree on their joined intersections, because the slice horn is simplicial. The join formula identifies their union degree by degree with $A\\star K$: their pure $K$ summands all coincide, their pure $A$ summands form $A$, and each mixed summand is the corresponding union of face coordinates times $K_v$. (For $n=1$, the horn has one vertex, so this assertion is immediate.) They therefore glue to $a:A\\star K\\to\\mathcal C$. The bottom simplex $b:B\\to\\mathcal C$ agrees with $a$ on $A$, by commutativity of the lifting square. Thus they glue to $h:M=(A\\star K)\\amalg_A B\\to\\mathcal C$. Apply only the pushout-join clause of [lem-coef-infinity-anodyne-cocones] to the generating right horn $A\\hookrightarrow B$ and the monomorphism $\\varnothing\\hookrightarrow K$. Since $X\\star\\varnothing=X$, it says precisely that $M\\hookrightarrow B\\star K$ is inner anodyne.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, applied to a generating right horn and the empty inclusion into K; explicit horn-face gluing."
+   }
+  },
+  {
+   "text": "Every map from an inner-anodyne domain into $\\mathcal C$ extends over its codomain. Here is the closure argument, using the weakly saturated definition in [lem-coef-infinity-anodyne-cocones]. The extension class contains each generating inner horn by the quasicategory axiom of [def-cbc-enhanced-diagrams-cones], and each isomorphism by composing with its inverse. For a pushout, extend on the attached summand and glue. For a continuous transfinite composite, choose successive extensions; at every limit their compatible maps induce the map from the colimit. For a retract of arrows, precompose with the retraction on domains, extend over the larger arrow, and precompose with the section on codomains. Hence this class contains every inner-anodyne map. Extend $h$ of Step 2 to $\\widetilde h:B\\star K\\to\\mathcal C$. Since the original domain includes $K$ and $B$, the extension still restricts to $p$ on $K$ and to $b$ on $B$. Thus it is an $n$-simplex of the slice over $b$, extending the prescribed horn, proving the right-fibration assertion. If $K=\\varnothing$, the domain inclusion here is an isomorphism, so this also covers the empty shape.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/018F",
+    "place": "Proposition 4.3.6.1: weak-saturation extension and the right-horn lifting square."
+   }
+  },
+  {
+   "text": "Given an inner horn $\\Lambda_j^m\\to\\mathcal C_{/p}$, $0<j<m$, project it to $\\mathcal C$ and fill it there using [def-cbc-enhanced-diagrams-cones]. The filler and the original slice horn give a lifting square for $q$. Since $0<j\\leq m$, the right-fibration property proved in Step 3 fills that square. This fills the original inner horn in $\\mathcal C_{/p}$ and proves that the slice is a quasicategory.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018F",
+    "place": "Proposition 4.3.6.1, final quasicategory assertion; direct inner-horn proof."
+   }
+  },
+  {
+   "text": "Now set $K=\\Delta^0$ and $p=t$. The identification $\\Delta^n\\star\\Delta^0\\cong\\Delta^{n+1}$ of Step 1 identifies the degree-$n$ fiber of $q$ over the constant simplex at $x$ with maps $\\Delta^{n+1}\\to\\mathcal C$ whose entire initial face is constant at $x$ and whose last vertex is $t$. For $\\alpha:[m]\\to[n]$, the join operator becomes the extension $\\alpha^+:[m+1]\\to[n+1]$ sending the new last vertex to the new last vertex. Thus this fiber is exactly the right-pinched $\\operatorname{Map}_{\\mathcal C}(x,t)$ of [def-cbc-enhanced-diagrams-cones], as a simplicial set and not merely on vertices. Apply the Kan-fiber clause of [lem-coef-infinity-right-fibration-fibers] with $B=\\mathcal C$, $E=F=\\mathcal C_{/t}$ and both projections equal to $q$. The base and total objects are quasicategories by hypothesis and Step 4, and the projections are right fibrations by Step 3. Therefore the identified fiber is Kan; no nonemptiness or equivalence-on-fibers hypothesis is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-right-fibration-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L0",
+    "place": "Construction 4.6.5.1 (01KX) and Proposition 4.6.5.5 (01L0); Kan fibers via Corollary 4.4.2.3 (019E)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-coef-infinity-right-fibration-fibers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/018F",
+  "place": "Proposition 4.3.6.1, with the pushout-join calculation of 018J and the Kan-fiber argument of 01L0; Kerodon is online and not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,10 +147,108 @@
    "results": "{\"t\": \"2026-10-16T14:13:27Z\", \"tool\": \"grep\", \"query\": \"RightFibration|right_fibration|rightFibration|over.*quasicategory|quasicategory.*over\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: the pinned Mathlib AlgebraicTopology source returned zero hits for right-fibration identifiers or over/quasicategory combinations."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?fibration|slice|pinched",
+   "results": "{\"t\": \"2026-10-16T15:07:39Z\", \"tool\": \"grep\", \"query\": \"right.?fibration|slice|pinched\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\"], \"digest\": \"c7bd7df57d7562eb\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read Quasicategory/Basic.lean:34-50 (inner-horn axiom), SimplicialSet/CategoryWithFibrations.lean:35-100 (ALL-horn Kan fibrations), and SimplicialSet/Coskeletal.lean:42-51 (ordinary right extension of a truncated simplicial set). None constructs a join slice or its right-fibration projection. Ordinary CategoryTheory.Join results concern ordinary categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "join slice of a quasicategory over a simplicial diagram is a right fibration with Kan mapping-space fibers",
+   "results": "{\"t\": \"2026-10-16T15:07:39Z\", \"tool\": \"leanfinder\", \"query\": \"join slice of a quasicategory over a simplicial diagram is a right fibration with Kan mapping-space fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.Truncated.rightExtensionInclusion\"], \"digest\": \"50d87f503be48e38\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read Quasicategory/Basic.lean:34-50 (inner-horn axiom), SimplicialSet/CategoryWithFibrations.lean:35-100 (ALL-horn Kan fibrations), and SimplicialSet/Coskeletal.lean:42-51 (ordinary right extension of a truncated simplicial set). None constructs a join slice or its right-fibration projection. Ordinary CategoryTheory.Join results concern ordinary categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, right fibration, join, slice",
+   "results": "{\"t\": \"2026-10-16T15:07:39Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, right fibration, join, slice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `right`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Invalid query: loogle: Unknown identifier `right`; not evidence of absence. A quoted SSet/slice query was subsequently run."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a quasicategory C and a simplicial set K, the join slice C over p projects by a right fibration",
+   "results": "{\"t\": \"2026-10-16T15:07:39Z\", \"tool\": \"leansearch\", \"query\": \"For a quasicategory C and a simplicial set K, the join slice C over p projects by a right fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.inclRight\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.Join.mkNatTrans_app_right\", \"CategoryTheory.Join.mapPair_obj_right\", \"CategoryTheory.Join.rec\", \"CategoryTheory.Join.inclRightFull\", \"CategoryTheory.Join.inclRightFullyFaithful\", \"CategoryTheory.Join.inclRight_obj\"], \"digest\": \"3dfdd68cd85312bd\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read Quasicategory/Basic.lean:34-50 (inner-horn axiom), SimplicialSet/CategoryWithFibrations.lean:35-100 (ALL-horn Kan fibrations), and SimplicialSet/Coskeletal.lean:42-51 (ordinary right extension of a truncated simplicial set). None constructs a join slice or its right-fibration projection. Ordinary CategoryTheory.Join results concern ordinary categories."
+  },
+  {
+   "tool": "grep",
+   "query": "inner.?anodyne|quasicategory|horn",
+   "results": "{\"t\": \"2026-10-16T15:09:12Z\", \"tool\": \"grep\", \"query\": \"inner.?anodyne|quasicategory|horn\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"22647c785e7dae43\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read Quasicategory/Basic.lean:34-50 (inner-horn axiom), SimplicialSet/CategoryWithFibrations.lean:35-100 (ALL-horn Kan fibrations), and SimplicialSet/Coskeletal.lean:42-51 (ordinary right extension of a truncated simplicial set). None constructs a join slice or its right-fibration projection. Ordinary CategoryTheory.Join results concern ordinary categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inner horn join with an arbitrary simplicial set is inner anodyne and maps into a quasicategory extend",
+   "results": "{\"t\": \"2026-10-16T15:09:13Z\", \"tool\": \"leanfinder\", \"query\": \"inner horn join with an arbitrary simplicial set is inner anodyne and maps into a quasicategory extend\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\", \"SSet.KanComplex.hornFilling\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₂.exists_desc\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn₃₁.desc\"], \"digest\": \"e9ac3e6f51b6957b\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read Quasicategory/Basic.lean:34-50 (inner-horn axiom), SimplicialSet/CategoryWithFibrations.lean:35-100 (ALL-horn Kan fibrations), and SimplicialSet/Coskeletal.lean:42-51 (ordinary right extension of a truncated simplicial set). None constructs a join slice or its right-fibration projection. Ordinary CategoryTheory.Join results concern ordinary categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibers of a right fibration over a quasicategory are Kan complexes",
+   "results": "{\"t\": \"2026-10-16T15:09:13Z\", \"tool\": \"leansearch\", \"query\": \"Fibers of a right fibration over a quasicategory are Kan complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryOfKanComplex\", \"SSet.KanComplex\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"CategoryTheory.Functor.Fiber.mk\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.fibrations\"], \"digest\": \"ae2cc8d166ab071d\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read Quasicategory/Basic.lean:34-50 (inner-horn axiom), SimplicialSet/CategoryWithFibrations.lean:35-100 (ALL-horn Kan fibrations), and SimplicialSet/Coskeletal.lean:42-51 (ordinary right extension of a truncated simplicial set). None constructs a join slice or its right-fibration projection. Ordinary CategoryTheory.Join results concern ordinary categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, inner anodyne, horn",
+   "results": "{\"t\": \"2026-10-16T15:09:13Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, inner anodyne, horn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `anodyne`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Invalid query: loogle: Unknown identifier `anodyne`; not evidence of absence. A quoted SSet/slice query was subsequently run."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"slice\"",
+   "results": "{\"t\": \"2026-10-16T15:26:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"slice\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: read Quasicategory/Basic.lean:34-50 (inner-horn axiom), SimplicialSet/CategoryWithFibrations.lean:35-100 (ALL-horn Kan fibrations), and SimplicialSet/Coskeletal.lean:42-51 (ordinary right extension of a truncated simplicial set). None constructs a join slice or its right-fibration projection. Ordinary CategoryTheory.Join results concern ordinary categories."
+  },
+  {
+   "tool": "grep",
+   "query": "slice|coslice|right.?fibration|pinched",
+   "results": "{\"t\": \"2026-10-16T15:54:50Z\", \"tool\": \"grep\", \"query\": \"slice|coslice|right.?fibration|pinched\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\"], \"digest\": \"c7bd7df57d7562eb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-50 (inner-horn fillers only), SimplicialSet/CategoryWithFibrations.lean:36-100 (ALL-horn Kan fibrations, assumed rather than constructed), SimplicialSet/Coskeletal.lean:39-69 (truncated right Kan extensions), and ModelCategory/Over.lean:66-79 (ordinary over category). None gives join-slice right-horn lifting or right-pinched mapping fibers. Grep hits are slice_lhs/slice_rhs tactics."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The join slice of a quasicategory over a diagram has a right fibration projection and right pinched mapping space fibers",
+   "results": "{\"t\": \"2026-10-16T15:54:51Z\", \"tool\": \"leanfinder\", \"query\": \"The join slice of a quasicategory over a diagram has a right fibration projection and right pinched mapping space fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\"], \"digest\": \"e4ee3ac863161cca\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-50 (inner-horn fillers only), SimplicialSet/CategoryWithFibrations.lean:36-100 (ALL-horn Kan fibrations, assumed rather than constructed), SimplicialSet/Coskeletal.lean:39-69 (truncated right Kan extensions), and ModelCategory/Over.lean:66-79 (ordinary over category). None gives join-slice right-horn lifting or right-pinched mapping fibers. Grep hits are slice_lhs/slice_rhs tactics."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"fibration\"",
+   "results": "{\"t\": \"2026-10-16T15:54:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"fibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instIsMultiplicativeCofibrations\", \"SSet.modelCategoryQuillen.instIsMultiplicativeFibrations\", \"SSet.modelCategoryQuillen.instIsStableUnderRetractsCofibrations\", \"SSet.modelCategoryQuillen.instIsStableUnderRetractsFibrations\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"2ff5b9da174778cd\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-50 (inner-horn fillers only), SimplicialSet/CategoryWithFibrations.lean:36-100 (ALL-horn Kan fibrations, assumed rather than constructed), SimplicialSet/Coskeletal.lean:39-69 (truncated right Kan extensions), and ModelCategory/Over.lean:66-79 (ordinary over category). None gives join-slice right-horn lifting or right-pinched mapping fibers. Grep hits are slice_lhs/slice_rhs tactics."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from a simplicial join slice lifts right horns and its fibers over objects are Kan complexes",
+   "results": "{\"t\": \"2026-10-16T15:54:51Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction from a simplicial join slice lifts right horns and its fibers over objects are Kan complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.KanComplex.hornFilling\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Quasicategory.hornFilling\", \"SSet.quasicategory_of_filler\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory.hornFilling'\"], \"digest\": \"94b96dded3cd4f13\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-50 (inner-horn fillers only), SimplicialSet/CategoryWithFibrations.lean:36-100 (ALL-horn Kan fibrations, assumed rather than constructed), SimplicialSet/Coskeletal.lean:39-69 (truncated right Kan extensions), and ModelCategory/Over.lean:66-79 (ordinary over category). None gives join-slice right-horn lifting or right-pinched mapping fibers. Grep hits are slice_lhs/slice_rhs tactics."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an infinity category the overcategory of a simplicial diagram projects by a right fibration",
+   "results": "{\"t\": \"2026-10-16T15:54:51Z\", \"tool\": \"leansearch\", \"query\": \"For an infinity category the overcategory of a simplicial diagram projects by a right fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.fibrations_over_def\", \"CategoryTheory.Over.over_right\", \"HomotopicalAlgebra.fibrations_over_iff\", \"HomotopicalAlgebra.instFibrationLeftDiscretePUnitOfOver\", \"CategoryTheory.OverClass.Simps.over\", \"HomotopicalAlgebra.instCategoryWithFibrationsOver\", \"HomotopicalAlgebra.instIsStableUnderRetractsOverFibrations\", \"CategoryTheory.OverClass.fromOver_over\"], \"digest\": \"140e669377040330\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-50 (inner-horn fillers only), SimplicialSet/CategoryWithFibrations.lean:36-100 (ALL-horn Kan fibrations, assumed rather than constructed), SimplicialSet/Coskeletal.lean:39-69 (truncated right Kan extensions), and ModelCategory/Over.lean:66-79 (ordinary over category). None gives join-slice right-horn lifting or right-pinched mapping fibers. Grep hits are slice_lhs/slice_rhs tactics."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-normalized-final-cone",
   "by": "worker",
@@ -99,5 +264,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-slice-right-fibration",
+  "worker": "stage1",
+  "summary": "Expanded the join-slice theorem into the degreewise construction, a right-horn lift using the existing right-anodyne pushout-join node, the inner-horn argument proving the slice is a quasicategory, and the singleton-fiber identification with right-pinched mapping spaces. Reused the existing Kan-fiber theorem; no new nodes were needed.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2, derived coefficient Hom/derived-limit calculation. Steps 1–5 realize the inherited auxiliary join-slice branch through the recorded via chain; this is infrastructure under that branch, not a literal claim in the current blueprint paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-968186fbb",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-968186fbb (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, all five proof steps, cited node statements, Kerodon 018F/018J/01KX/01L0/019E, edge cases, and Mathlib searches. The join pushout, right-fibration extension, quasicategory, and right-pinched Kan-fiber arguments are correct; no missing hypotheses, cycles, duplicates, restated nodes, or coefficient/base-change issue apply. Review written to review.md."
  }
 }
