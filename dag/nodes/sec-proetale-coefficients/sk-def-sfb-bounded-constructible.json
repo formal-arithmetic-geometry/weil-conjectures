@@ -3,36 +3,210 @@
  "blueprint": {
   "is": "sk-def-sfb-bounded-constructible",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-sfb-bounded-constructible-complexes"
+  ]
  },
  "kind": "definition",
  "title": "Bounded constructible derived category",
- "statement": "Let $\\mathcal A$ be a closed symmetric monoidal Grothendieck abelian category whose tensor\nproduct is additive, let $X$ be a scheme, and let $\\mathcal R$ be a commutative ring\nobject of $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$. The *bounded constructible derived\ncategory*\n$$\nD_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\mathcal R)\\subseteq D(\\Mod_{\\mathcal R})\n$$\nis the full subcategory of the derived category [sk-def-sfb-derived-categories] of the\ncomplexes $K$ that are bounded, i.e. $H^i(K)=0$ for $i$ outside a finite interval, and\nall of whose cohomology sheaves $H^i(K)$ are constructible [sk-def-sfb-constructible].\nMorphisms are computed in $D(\\Mod_{\\mathcal R})$. No derived completeness condition is\nimposed. On a topologically Noetherian $X$, $D_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\mathcal R)$\nis a triangulated subcategory.",
+ "statement": "Let $\\mathcal A$ be a closed symmetric monoidal Grothendieck abelian category whose tensor product is additive, let $X$ be a scheme, and let $\\mathcal R$ be a commutative ring object [sk-def-sfb-ring-object] of $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ with the sheaf tensor product [sk-def-sfb-sheaf-tensor]. Write $\\Mod_{\\mathcal R}$ for its category of module objects [sk-def-sfb-module-objects]. A cohomology module is called constructible here in the general ring-object sense of [def-sfb-constructible-module]: there is a finite stratification with immersions $g_a\\colon X_a\\to X$ such that $\\operatorname{mapMod}(g_a^*)(M)$ is locally finitely presented over the pulled-back ring object $g_a^*\\mathcal R$ on every stratum, where $M$ denotes the cohomology module.\n\nThe bounded constructible derived category\n$$\nD_{\\mathrm{cons}}(X_{\\mathrm{proét}},\\mathcal R)\\subseteq D(\\Mod_{\\mathcal R})\n$$\nis the full subcategory of the ordinary unbounded derived category [def-weil-abstract-derived-category] on those $K$ for which there exist integers $a\\le b$ with $H^i(K)=0$ whenever $i<a$ or $i>b$, and every $H^i(K)$ is constructible. Thus its objects are precisely the bounded objects [def-weil-pbc-bounded-derived-subcategories] with constructible cohomology. For two such objects $K,L$ its morphisms, identities and composition are those of $D(\\Mod_{\\mathcal R})$. No derived completeness condition is imposed.\n\nIf the constructible module objects contain zero, are invariant under isomorphism, are closed under kernels and cokernels of morphisms between them, and are closed under extensions, then this full subcategory is triangulated [def-weil-triangulated-subcategory], with the inherited shifts and distinguished triangles.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-bounded-constructible/_section.md",
   "place": "node sk-def-sfb-bounded-constructible, order 866"
  },
  "stmt_deps": [
-  "sk-def-sfb-derived-categories",
-  "sk-def-sfb-constructible",
-  "def-weil-abstract-derived-category"
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-ring-object",
+  "def-sfb-constructible-module",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-triangulated-subcategory"
  ],
  "proof": [
   {
-   "text": "The subcategory is [def-sfb-bounded-constructible-complexes]. Its description through\ncohomology is [lem-sfb-bounded-constructible-iff], and it is triangulated on a\ntopologically Noetherian $X$ by [prop-sfb-bounded-constructible-triangulated].",
+   "text": "First apply [lem-weil-pbc-sheaf-tensor-closed] to the small pro-étale site with the universe and small-skeleton convention of [def-weil-pbc-proetale-site]: $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ is abelian, its sheaf tensor product is additive in each variable, and $\\mathcal R\\otimes-$ preserves all colimits, hence finite colimits. Thus [lem-sfb-modobj-abelian] applies to the module objects of [sk-def-sfb-module-objects] and makes $\\Mod_{\\mathcal R}$ abelian. Its ordinary derived category and cohomology functors are therefore defined by [def-weil-abstract-derived-category]. Define the object predicate by the conjunction of boundedness [def-weil-pbc-bounded-derived-subcategories] and the requirement that every cohomology object $M=H^i(K)$ satisfy [def-sfb-constructible-module]. Apply that definition with the same $\\mathcal A$, $X$ and $\\mathcal R$: the small site and sheaf tensor are those already fixed, a commutative ring object is in particular a ring object, and each $M$ is a left module object in $\\Mod_{\\mathcal R}$. For each such $M$, require a finite stratification by immersions $g_a\\colon X_a\\to X$ for which $\\operatorname{mapMod}(g_a^*)(M)$ is locally finitely presented as a module over $g_a^*\\mathcal R$. These are precisely the restriction and module transport of that definition; no identification with constant local models or étale-origin modules is used. Boundedness is the vanishing of cohomology outside a finite interval. If initial lower and upper bounds are $a,b$ without $a\\le b$, replace them by $\\min(a,b),\\max(a,b)$; this enlarges the allowed interval and preserves the vanishing assertion. Conversely, vanishing outside $[a,b]$ gives lower bound $a$ and upper bound $b$, hence boundedness. This gives exactly the displayed object predicate.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-modobj-abelian",
+    "sk-def-sfb-module-objects",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "def-sfb-constructible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-bounded-constructible/_section.md",
+    "place": "ambient abelian module category: lem-sfb-modobj-abelian.md in sk-prop-sfb-module-category; sheaf structure: the existing lem-weil-pbc-sheaf-tensor-closed; object predicate: this definition and Stacks Tag 05RU, label definition-unbounded-derived-category"
+   }
+  },
+  {
+   "text": "Take the full subcategory on that predicate: its objects are pairs $(K,h_K)$ where $h_K$ is a proof of the predicate, and $\\operatorname{Hom}((K,h_K),(L,h_L)):=\\operatorname{Hom}_{D(\\Mod_{\\mathcal R})}(K,L)$. Identities and composition are inherited, so the category laws follow from the ambient category laws and the inclusion is fully faithful. Membership asks only for the cohomology conditions in step 1; it asks for no derived completeness datum or property.",
    "uses": [],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-bounded-constructible/_section.md",
+    "place": "full subcategory; morphisms computed in the ambient derived category; no completeness condition"
+   }
+  },
+  {
+   "text": "For the corrected triangulatedness assertion, let $\\mathcal C=\\Mod_{\\mathcal R}$ and let $\\mathcal B$ be its full subcategory of constructible module objects. The explicit hypotheses give zero, invariance under isomorphism, kernels, cokernels and extensions, exactly the hypotheses of [lem-sbc-cohomology-in-weak-serre-subcategory]. That theorem says that the intersection of $D_{\\mathcal B}(\\mathcal C)$ with $D^b(\\mathcal C)$ is a full triangulated subcategory with inherited shifts and distinguished triangles. An object belongs to this intersection exactly when it satisfies the conjunction in step 1, so it is precisely the full subcategory constructed in step 2. This is an application to the ambient abelian category of module objects, not to étale-origin complexes or to a completed category.",
+   "uses": [
+    "lem-sbc-cohomology-in-weak-serre-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, lemma-cohomology-in-serre-subcategory, bounded versions; closure hypotheses expanded by Tag 0754, homology-lemma-characterize-weak-serre-subcategory"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-abelian",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sfb-constructible-module",
+  "lem-sbc-cohomology-in-weak-serre-subcategory"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-bounded-constructible/_section.md",
-  "place": "## Proof"
+  "place": "full-subcategory construction, with the false noetherian-only triangulatedness claim corrected using Stacks Tag 06UQ and the existing weak Serre theorem"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|BoundedConstructible|IsConstructibleModuleObject",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient category or topological set notions do not define bounded constructibility for general internal coefficient modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded complexes with constructible cohomology sheaves on the pro-etale site",
+   "results": "LightCondensed, Condensed, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, étale topologies and unrelated condensed locally constant presheaf declarations.",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient category or topological set notions do not define bounded constructibility for general internal coefficient modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "Topology.IsConstructible and IsLocallyConstructible (sets of topological spaces), their elementary closure lemmas; no constructible module or complex declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient category or topological set notions do not define bounded constructibility for general internal coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible derived category of sheaves of modules over a ring object on the pro-etale site",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod, CondensedMod, their abelian and sheafification instances; no pro-étale constructible module derived category.",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient category or topological set notions do not define bounded constructibility for general internal coefficient modules"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyProperty|t\\.bounded|def FullSubcategory",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:218, Bounded.ι : Bounded C ⥤ DerivedCategory C := t.bounded.ι.",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient category or topological set notions do not define bounded constructibility for general internal coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "full subcategory of the derived category on cohomologically bounded objects satisfying a predicate on every cohomology object",
+   "results": "DerivedCategory.IsGE, IsLE, TStructure.t, isGE_Q_obj_iff, isLE_Q_obj_iff and boundedness instances; these give only the ambient bounded derived category.",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient category or topological set notions do not define bounded constructibility for general internal coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived category full subcategory defined by an object property on homology; bounded objects and triangulated closure for a Serre class",
+   "results": "Eight hits: DerivedCategory.TStructure.t, ObjectProperty.IsSerreClass, DerivedCategory.IsGE, IsLE, isGE_iff, isLE_iff, TStructure.ge and le. The SerreClass criterion assumes subobject/quotient closure; none defines the intrinsic stratified constructible module predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match for this entire definition; generic boundedness and Serre-class tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyProperty|isTriangulated.*[Ss]erre|[Ss]erre.*isTriangulated",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match in the pinned Mathlib source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomologically bounded derived objects with constructible module sheaves as homology form a full subcategory",
+   "results": "[leanfinder] OK 8 hit(s): DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, IsGE, HasDerivedCategory.standard, IsLE, TStructure.t, exists_iso_Q_obj_of_isLE, exists_iso_Q_obj_of_isGE, exists_iso_singleFunctor_obj_of_isGE_of_isLE. Ambient cohomological bounds and representatives only.",
+   "date": "2026-10-16",
+   "verdict": "no match for stratified constructible coefficient-module predicate"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|IsConstructibleModuleObject|homology.*IsSerreClass",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible complexes of internal module objects with bounded cohomology and locally finitely presented cohomology after finite stratification",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.IsKInjective, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.IsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.cm5b",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ambient derived categories or topological constructible subsets, not stratified constructible internal module cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|IsConstructibleModuleObject|IsConstructible.*homology",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ambient derived categories or topological constructible subsets, not stratified constructible internal module cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded derived category of sheaves whose cohomology modules are constructible after a finite stratification",
+   "results": "8 hits: HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ambient derived categories or topological constructible subsets, not stratified constructible internal module cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full subcategory of a derived category consisting of cohomologically bounded objects whose homology satisfies a given constructibility property",
+   "results": "8 hits: DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.TStructure.t, DerivedCategory, HasDerivedCategory, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ambient derived categories or topological constructible subsets, not stratified constructible internal module cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible derived category of internal modules over a sheaf of rings with finitely presented cohomology on a finite stratification",
+   "results": "SheafOfModules.isFinitePresentation, IsFinitePresentation, quasicoherentDataOfIsFinitePresentation, IsFinitePresentation.exists_quasicoherentData, instIsFiniteTypeOfIsFinitePresentation, Presentation.IsFinite, IsFiniteType and LocalGeneratorsData.IsFiniteType, in ModuleCat/Sheaf/Quasicoherent and Generators.",
+   "date": "2026-10-17",
+   "verdict": "no match: these concern finite presentations of ordinary sheaves of modules, not bounded derived objects with finite-stratification constructibility for arbitrary internal coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "12 hits in Mathlib.Topology.Constructible, beginning Topology.IsConstructible and Topology.IsLocallyConstructible, with their set-theoretic closure lemmas.",
+   "date": "2026-10-17",
+   "verdict": "no match: constructible subsets of topological spaces, not internal module objects or derived complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|BoundedConstructible|IsConstructibleModuleObject",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Full subcategory of a derived category of sheaves of internal modules with bounded constructible cohomology",
+   "results": "ObjectProperty.FullSubcategory.mk, ctorIdx, mk.noConfusion, noConfusion, noConfusionType, category and faithful_ι, and CategoryTheory.locallySmall_fullSubcategory.",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire item: generic full-subcategory machinery does not supply the intrinsic stratified constructible cohomology predicate"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -71,5 +245,40 @@
   "lem-sfb-bounded-constructible-iff"
  ],
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-bounded-constructible"
+ "unit": "sk-def-sfb-bounded-constructible",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-sfb-bounded-constructible",
+  "worker": "stage1",
+  "summary": "Constructed the full subcategory on bounded objects with general ring-object constructible cohomology, justified the ambient abelian module category, and retained the explicit weak Serre correction to the false noetherian-only triangulatedness claim. Landing-refusal repair: excluded the unit realization file from this delivery, compared all eleven direct dependency statements with the retained citation baseline and current shared DAG, and refreshed all eight verbatim citations. No direct dependency statement changed since the retained repair. Only the item node and report are submitted; unit realization is left for the maintainer. Fresh recorded Mathlib searches find no whole-item match; no new nodes or leaves.",
+  "blueprint": "Realizes the object predicate, full subcategory, ambient morphisms and no-completeness sentences of _section.md. The proof file cites prop-sfb-bounded-constructible-triangulated, present in blueprint sources but absent from the imported DAG; its triangulatedness sentence is replaced by the existing Stacks 06UQ weak Serre criterion after an explicit noncoherent-ring counterexample.",
+  "statement_dispute": {
+   "reason": "STATEMENT-DISPUTED: Topological Noetherianity alone does not imply closure of finitely presented coefficient modules under kernels.",
+   "counterexample": "Let k be a field, B=k[x,y_1,y_2,\\ldots]/(xy_i:i\\ge1), X=Spec(\\bar k), A=Ab and R the constant sheaf B. Multiplication by x on R has kernel the constant sheaf on (y_i:i\\ge1), not finitely generated, hence not locally finitely presented. Its cone has that kernel as H^{-1}, although both source and target are free rank one in degree zero. X is topologically Noetherian.",
+   "correction": "Keep the bounded constructible object predicate and full subcategory unchanged in the generic module-object sense. Replace the false unconditional triangulatedness claim by the explicit weak Serre closure criterion of lem-sbc-cohomology-in-weak-serre-subcategory (Stacks 06UQ, 0754), as already corroborated by prop-weil-pbc-module-bounded-constructible-triangulated."
+  },
+  "second_reading": "This worker rechecked all cited statements and sources for the repair; the next independent reader must review and deliver it.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic A-valued sheaf abelianness and closed additive sheaf tensor are needed to apply the module-abelianness lemma; no statement in this unit supplies the ambient abelian structure."
+   },
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Generic bounded weak-Serre derived-subcategory theorem applies to the explicit corrected closure hypotheses; the original noetherian-only claim is false for noncoherent coefficient rings."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sbc-cohomology-in-weak-serre-subcategory"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N1-e23946858",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-e23946858 (reviewer sub-agent of L); spot-checked: I read the item, the unit, the main-20261015 blueprint unit directory (the section, the definition, the iff lemma and the triangulated proposition with its proof), all cited statements, Stacks 06UQ (derived.tex:5936) and 0754 (homology.tex:2149), and the master Lean ConstructibleSheaf/ProEtaleModule/DerivedCategory.lean:66-167. The item's predicate matches master boundedConstructible: same Mod_R of A-valued pro-étale sheaves, H^n taken in Mod_R, IsConstructibleModuleObject = def-sfb-constructible-module, the convention already fixed by sk-def-sfb-derived-categories. The disputed Noetherian clause is genuinely false. I checked the counterexample: ann(x)=(y_i) in k[x,y_i]/(x y_i) is not finitely generated, and restricting to a k̄-point of a cover member gives a finite presentation of it, which is impossible. The blueprint proof's 'Kernels' paragraph admits the gap, and master records the same dispute; its corrected instance isTriangulated_boundedConstructible_of_serre has exactly the item's corrected hypotheses. The extra 'contains zero' and 'invariant under isomorphism' hypotheses are automatically true. This is not a target, so no target is weakened. Step 1 meets the hypotheses of lem-weil-pbc-sheaf-tensor-closed and lem-sfb-modobj-abelian; the latter is on-route via sk-prop-sfb-module-category. Step 2 is elementary. Step 3 applies the statement of lem-sbc-cohomology-in-weak-serre-subcategory with exactly its hypotheses. proof_deps equals the union of uses. I accept the two declared tool uses: lem-weil-pbc-sheaf-tensor-closed and lem-sbc-cohomology-in-weak-serre-subcategory. There are no new nodes. The duplicates def-sfb-bounded-constructible-complexes (in same_as) and prop-weil-pbc-module-bounded-constructible-triangulated (corroborating) were checked, and there is no cycle. Maintainer action: record in HUMAN.md that these citers use the removed clause 'triangulated on Noetherian X [sk-def-sfb-bounded-constructible]' and now need the closure property for their coefficients: det-lem-int-tensor-product, det-lem-integral-models-operations, lem-sfb-constructible-cocone-obj, lem-sfb-dc-tensor-preserves, possibly det-sp-rational-localized-hom. The unit realized fields are still empty and left to the maintainer. I made no fixes."
+ }
 }

@@ -1,0 +1,86 @@
+{
+ "id": "lem-coef-module-operadic-colimit-detection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: Infinity-categorical monadicity and the augmented counit bar resolution. Supporting foundation: Free coherent monad modules and their augmented free resolution. Supporting lemma: Underlying equivalences and operadic colimits of coherent modules.",
+   "via": [
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Underlying equivalences and operadic colimits of coherent modules",
+ "statement": "Use quasicategories, coherent functors, mapping spaces and universes of [def-cbc-enhanced-diagrams-cones], and monoidal infinity-categories of [def-coef-monoidal-infinity-category]. Let $\\mathcal V$ be a monoidal infinity-category and $\\mathcal M$ an infinity-category with a coherent left action $\\otimes:\\mathcal V\\times\\mathcal M\\to\\mathcal M$: the equivalences $(v\\otimes w)\\otimes m\\simeq v\\otimes(w\\otimes m)$ and $\\mathbf1\\otimes m\\simeq m$ include all associative and unital higher compatibilities. An associative algebra $B$ in $\\mathcal V$ has a multiplication $B\\otimes B\\to B$, a unit $\\mathbf1\\to B$ and their coherent compatibilities. A left $B$-module in $\\mathcal M$ has an action $B\\otimes m\\to m$ with all coherent associativity and unit data; $\\operatorname{LMod}_B(\\mathcal M)$ retains the coherent action-preserving maps and their higher simplices. All categories and mapping spaces are taken in sufficiently large universes. Fix $B$ and let $U:\\operatorname{LMod}_B(\\mathcal M)\\to\\mathcal M$ forget the action. A morphism of left $B$-modules is an equivalence if and only if its image under $U$ is an equivalence.\n\nLet $K$ be a small simplicial set, let $p:K\\to\\operatorname{LMod}_B(\\mathcal M)$ be a coherent diagram, and suppose there is a colimiting cocone $c:Up\\to\\Delta_K m$ in $\\mathcal M$ such that $v\\otimes c$ is colimiting for every $v\\in\\mathcal V$. Then $p$ admits a colimiting cocone whose underlying cocone is equivalent to $c$. Under these hypotheses an arbitrary cocone $\\widetilde c:p\\to\\Delta_K N$ in $\\operatorname{LMod}_B(\\mathcal M)$ is colimiting if and only if $U\\widetilde c$ is colimiting in $\\mathcal M$. The preservation hypothesis concerns only the specified cocone $c$, not every diagram of shape $K$.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra, Corollaries 4.2.3.2 and 4.2.3.5, printed pp. 527-528; the conservativity is the fixed-algebra consequence of 4.2.3.2, also explicitly recalled after Proposition 4.2.4.9. Online 2017 source read; WANTED: archived Higher Algebra in literature/. No Stacks tag covers coherent infinity-categorical modules."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-monoidal-infinity-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Forgetful functor from coherent modules detects equivalences and colimits preserved by tensoring",
+   "results": "{\"t\": \"2026-10-16T19:44:34Z\", \"tool\": \"leanfinder\", \"query\": \"Forgetful functor from coherent modules detects equivalences and colimits preserved by tensoring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.instPreservesFiniteColimitsModuleCatForget₂\", \"FGModuleCat.forget₂CreatesColimit\", \"FGModuleCat.instCreatesColimitsOfShapeModuleCatForget₂\", \"ModuleCat.FilteredColimits.forget_reflectsFilteredColimits\", \"instHasColimitsCondensedMod\", \"ModuleCat.FilteredColimits.forget_preservesFilteredColimits\", \"ModuleCat.HasColimit.reflectsColimit\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\"], \"digest\": \"ad7dc177b9fa8420\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monad/Limits.lean:127-250, including liftedCoconeIsColimit:215 and forgetCreatesColimit:238, and Monad/Algebra.lean:172-177. They concern an ordinary monad and strict Hom-set universal properties; there is no statement for coherent modules and infinity-categorical cocones. Other hits are ordinary ModuleCat/FGModuleCat colimits. The second phrasing did not supply a coherent theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Monad.forget, CategoryTheory.Limits.IsColimit",
+   "results": "{\"t\": \"2026-10-16T19:44:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Monad.forget, CategoryTheory.Limits.IsColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Monad.ForgetCreatesColimits.coconePoint\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCocone\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCoconeIsColimit\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCocone_pt\", \"CategoryTheory.Monad.ForgetCreatesColimits.coconePoint_A\", \"CategoryTheory.Monad.ForgetCreatesColimits.lambda\", \"CategoryTheory.Monad.ForgetCreatesColimits.coconePoint_a\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCoconeIsColimit_desc_f\"], \"digest\": \"dd119cbfda2dd74a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monad/Limits.lean:127-250, including liftedCoconeIsColimit:215 and forgetCreatesColimit:238, and Monad/Algebra.lean:172-177. They concern an ordinary monad and strict Hom-set universal properties; there is no statement for coherent modules and infinity-categorical cocones. Other hits are ordinary ModuleCat/FGModuleCat colimits. The second phrasing did not supply a coherent theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimit of modules over an algebra in infinity category computed on underlying objects when preserved by every tensor action",
+   "results": "{\"t\": \"2026-10-16T19:44:24Z\", \"tool\": \"leansearch\", \"query\": \"Colimit of modules over an algebra in infinity category computed on underlying objects when preserved by every tensor action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.HasColimit.colimitCocone_pt_carrier\", \"CommRingCat.pushoutCoconeIsColimit\", \"ModuleCat.HasColimit.colimitCocone_pt_isModule\", \"ModuleCat.HasColimit.colimitCocone\", \"instHasColimitsCondensedMod\", \"ModuleCat.hasColimitsOfSize\", \"ModuleCat.HasColimit.instPreservesColimitAddCommGrpCatForget₂\", \"PresheafOfModules.colimitPresheafOfModules\"], \"digest\": \"8cde8104b28defd2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monad/Limits.lean:127-250, including liftedCoconeIsColimit:215 and forgetCreatesColimit:238, and Monad/Algebra.lean:172-177. They concern an ordinary monad and strict Hom-set universal properties; there is no statement for coherent modules and infinity-categorical cocones. Other hits are ordinary ModuleCat/FGModuleCat colimits. The second phrasing did not supply a coherent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "forgetCreatesColimit|liftedCoconeIsColimit",
+   "results": "{\"t\": \"2026-10-16T19:45:20Z\", \"tool\": \"grep\", \"query\": \"forgetCreatesColimit|liftedCoconeIsColimit\", \"sub\": \"CategoryTheory/Monad\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\"], \"digest\": \"b7368543e33a0c28\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monad/Limits.lean:127-250, including liftedCoconeIsColimit:215 and forgetCreatesColimit:238, and Monad/Algebra.lean:172-177. They concern an ordinary monad and strict Hom-set universal properties; there is no statement for coherent modules and infinity-categorical cocones. Other hits are ordinary ModuleCat/FGModuleCat colimits. The second phrasing did not supply a coherent theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Operadic module colimit detection without presentability or global colimits",
+   "results": "{\"t\": \"2026-10-16T19:44:24Z\", \"tool\": \"leansearch\", \"query\": \"Operadic module colimit detection without presentability or global colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.HasColimit.colimitCocone_pt_isModule\", \"CategoryTheory.Limits.isColimitOfConeOfCoconeRightOp\", \"ModuleCat.HasColimit.isColimitColimitCocone\", \"ModuleCat.HasColimit.colimitCocone\", \"ModuleCat.hasColimitsOfShape\", \"CategoryTheory.Limits.isColimitOfConeUnopOfCocone\", \"CategoryTheory.Limits.isColimitOfConeRightOpOfCocone\", \"ModuleCat.HasColimit.colimitCocone_pt_carrier\"], \"digest\": \"e3436b9a1096880e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monad/Limits.lean:127-250, including liftedCoconeIsColimit:215 and forgetCreatesColimit:238, and Monad/Algebra.lean:172-177. They concern an ordinary monad and strict Hom-set universal properties; there is no statement for coherent modules and infinity-categorical cocones. Other hits are ordinary ModuleCat/FGModuleCat colimits. The second phrasing did not supply a coherent theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetful functor from algebras creates colimits if the monad preserves the colimit",
+   "results": "{\"t\": \"2026-10-16T20:13:35Z\", \"tool\": \"leanfinder\", \"query\": \"Forgetful functor from algebras creates colimits if the monad preserves the colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monad.forgetCreatesColimit\", \"CategoryTheory.Monad.forgetCreatesColimitsOfShape\", \"CategoryTheory.Monad.forget_creates_colimits_of_monad_preserves\", \"CategoryTheory.Monad.forgetCreatesColimits\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCocone\", \"CategoryTheory.Monad.ForgetCreatesColimits.lambda\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCoconeIsColimit\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCocone_pt\"], \"digest\": \"c3a03215a3b59e21\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search. Read Mathlib/CategoryTheory/Monad/Limits.lean:137-250, especially forgetCreatesColimit at 238. This is an ordinary Eilenberg-Moore category, with strict algebra laws and ordinary cocones, not the coherent module assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-free-module-bar",
+  "date": "2026-10-17",
+  "group": "Q98"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

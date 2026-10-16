@@ -20,11 +20,88 @@
  "kind": "statement",
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $p:\\mathcal V^\\otimes\\to\\Delta^{\\mathrm{op}}$ be the monoidal cocartesian fibration of [def-coef-monoidal-infinity-category]. Here $\\Delta^{\\mathrm{op}}$ denotes the nerve $N(\\Delta^{\\mathrm{op}})$, exactly as in that current definition; its Segal equivalences are induced by the inert transports $\\rho_i$. The algebra definition in [lem-coef-operadic-algebra-presentability] makes $\\operatorname{Alg}_{\\mathcal M}(\\mathcal V)$ the full subcategory of $\\mathcal F=\\operatorname{Fun}_{\\Delta^{\\mathrm{op}}}(\\mathcal M,\\mathcal V^\\otimes)$ on inert-preserving functors. Apply [lem-coef-cocartesian-section-colimits] with $K=\\Delta^0$: every fiber has one-object colimits and every transport preserves them. A one-object cocone is colimiting precisely when its sole edge is an equivalence (the colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits] says precomposition is an equivalence on all mapping spaces). Thus a transformation in $\\mathcal F$ is invertible exactly when each of its components is invertible in its fiber. For $x\\in\\mathcal M_{[n]}$, choose its inert projections $e_i:x\\to c_i$ over $\\rho_i$. For an algebra map $f:A\\to A\\prime$, naturality gives the coherent squares $f_{c_i}A(e_i)\\simeq A\\prime(e_i)f_x$. Both horizontal edges are cocartesian, because $A$ and $A\\prime$ are algebras. Their identifications $\\rho_{i,!}A(x)\\simeq A(c_i)$ and $\\rho_{i,!}A\\prime(x)\\simeq A\\prime(c_i)$ therefore identify $\\rho_{i,!}(f_x)$ with $f_{c_i}$ up to these equivalences. Consequently the target Segal equivalence sends $f_x$ to the tuple of the $f_{c_i}$ under these identifications. A tuple is invertible exactly when each entry is: its inverses and inverse witnesses are taken coordinatewise. At $n=0$ the target fiber is terminal and every component is invertible. Hence equivalence on all colors implies equivalence at all $x$, hence in $\\mathcal F$ and in its full algebra subcategory. The converse follows by applying evaluation to an inverse. This proves conservativity of $U_{\\mathcal M}$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-cocartesian-section-colimits",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma A.5.5, with the singleton case of Theorem A.5.3 and the target Segal equivalences."
+   }
+  },
+  {
+   "text": "Fix a small sifted $K$. By [lem-coef-infinity-sifted-colimit-calculus], it is weakly contractible. The definition in [def-coef-complete-algebroid] gives all small colimits in $\\mathcal V$ and their separate preservation by tensor. By [lem-coef-infinity-yoneda-presheaf-limits], the fibers $\\mathcal V^\\otimes_{[n]}\\simeq\\mathcal V^n$ have $K$-colimits coordinatewise. Apply the bifunctor clause of the sifted-calculus lemma to tensor: it preserves simultaneous $K$-colimits. Inducting on $r\\geq1$, the $r$-fold tensor does too: the case $r=1$ is the identity. For $r+1$, first apply $(X_1,\\ldots,X_{r+1})\\mapsto(X_1\\otimes\\cdots\\otimes X_r,X_{r+1})$. The induction hypothesis and the pointwise product-colimit criterion show that this functor preserves the given colimit cocone in $\\mathcal V^2$. Binary tensor then preserves it by the bifunctor clause. The associativity identifications of the monoidal structure identify this composite with the $(r+1)$-fold tensor. For $r=0$ the operation is constant at $\\mathbf1$; the weak-contractibility clause of [lem-coef-infinity-coslice-colimit-formula] says the identity constant cocone is colimiting. For $\\phi:[n]\\to[m]$ opposite to $\\theta:[m]\\to[n]$, the $j$th coordinate of $\\phi_!$ tensors the block $X_{\\theta(j-1)+1},\\ldots,X_{\\theta(j)}$; an empty block gives $\\mathbf1$, and coordinates outside these blocks are discarded. To verify the block formula, factor $\\rho_j\\phi$ as the inert map $[n]\\to[r]$ opposite to $a\\mapsto\\theta(j-1)+a$, followed by the active map $[r]\\to[1]$, where $r=\\theta(j)-\\theta(j-1)$. The first transport selects the block and the second tensors it, by [def-coef-monoidal-infinity-category]; composition of transports is supplied by [lem-coef-infinity-pointwise-cocartesian-transport] with diagram shape $\\Delta^0$. Every block therefore preserves $K$-colimits, including its nullary case, so every transport $\\phi_!$ preserves $K$-colimits.",
+   "uses": [
+    "lem-coef-infinity-sifted-colimit-calculus",
+    "def-coef-complete-algebroid",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-coslice-colimit-formula",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma A.5.1; HTT Proposition 5.5.8.6 for tensor and Corollary 4.4.4.9 for empty blocks."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cocartesian-section-colimits] to $p$, $g:\\mathcal M\\to\\Delta^{\\mathrm{op}}$, this $K$, and the specified set of inert edges of $\\mathcal M$. Step 2 verifies exactly its fiber-existence and transport-preservation hypotheses. It gives a colimit $L$ of $B$ in $\\mathcal F$, computed in each fiber. Its closure clause implies that $L$ sends every inert edge to a cocartesian edge, so $L$ is an algebra by [lem-coef-operadic-algebra-presentability]. The ambient colimit cocone is also colimiting in the full algebra subcategory: for any algebra $C$, fullness identifies both its mapping space from $L$ and its mapping spaces from $B_k$ with the ambient ones, so the same colimit mapping-space equivalence applies. At a color $c$, the section theorem evaluates this actual cocone to a colimit in $\\mathcal V$. Thus $L(c)\\simeq\\operatorname{colim}_k B_k(c)$ with its canonical cocone. The pointwise functor-category clause of [lem-coef-infinity-yoneda-presheaf-limits] now identifies $U_{\\mathcal M}L$ with the colimit of $U_{\\mathcal M}B$.",
+   "uses": [
+    "lem-coef-cocartesian-section-colimits",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Corollary A.5.4 (i)-(iii), obtained from Theorem A.5.3, and the algebra part of (iv)."
+   }
+  },
+  {
+   "text": "For any algebra cocone $B\\Rightarrow A$, the colimit cocone $B\\Rightarrow L$ of step 3 gives a comparison $q:L\\to A$ compatible with the cocones. If the cocone to $A$ is colimiting at every color, then $q(c)$ is an equivalence because both its source and target cocones are colimits of the same color diagram. Step 1 makes $q$ an equivalence of algebras; hence the cocone to $A$ is colimiting. Conversely, if it is colimiting, $q$ is an equivalence of algebras and step 3 makes every color cocone colimiting. This proves detection, and step 3 already proves preservation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Corollary A.5.4 (iv)-(v), restricted to algebra cocones; comparison with the constructed colimit."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-sifted-colimit-calculus], $N(\\Delta^{\\mathrm{op}})$ is sifted in the required infinity-categorical sense. Substitute it for $K$ in steps 2-4. Thus every geometric realization exists, its color at $c$ is $\\operatorname{colim}_{[n]\\in\\Delta^{\\mathrm{op}}}B_n(c)$, and its colimit cocones are detected at every color.",
+   "uses": [
+    "lem-coef-infinity-sifted-colimit-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Corollary A.5.4, with HTT Lemma 5.5.8.4 for the indexing category."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-cocartesian-section-colimits",
+  "lem-coef-infinity-coslice-colimit-formula",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-sifted-colimit-calculus",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-operadic-algebra-presentability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/1312.3178",
+  "place": "Agent reconstruction with the online v4 text open: Lemma A.5.5 and Corollary A.5.4, proved through the general Theorem A.5.3 and explicit verification of Lemma A.5.1; HTT 5.5.8 supplies sifted calculus. Papers are not archived in literature/."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-categorical-algebra-free-monad",
@@ -77,5 +154,21 @@
    "date": "2026-10-17",
    "verdict": "no match: leanfinder and loogle return ordinary Monad colimit theorems; read Mathlib/CategoryTheory/Monad/Limits.lean:254-255 and 320-326. These assume an ordinary category and an already defined ordinary monad, and do not state colorwise operadic equivalences or infinity-categorical colimits. Leansearch returns ordinary IsSifted and functor-category coproducts. No infinity-operadic match; the second semantic phrasing gives no such match either."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-colorwise-sifted-colimits",
+  "worker": "stage1",
+  "summary": "Second reading repaired the unsupported colorwise and mapping-space claims. Five steps prove conservativity using the singleton section theorem, verify every monoidal transport including nullary blocks, construct colimits in the inert-preserving full subcategory, detect arbitrary sifted cocones by their comparison with the constructed colimit, and specialize to geometric realizations. Added two general, non-operadic prerequisite nodes; no item clause is moved to a child. Landing-return repair: revalidated the current monoidal definition, made its nerve-base and inert-induced Segal conventions explicit in step 1, and refreshed the verbatim step citations. The stronger relative mapping-space clause and the lax/strong functor clauses are not needed by this argument. Independent final second reading made the inert naturality squares and the product-valued tensor-induction step explicit; added new independent searches and the required second-reading audit.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, main-20261015 .proof.md, finite-level coherent mapping-complex adjunction before R lim, through the existing fixed-object rectification and graph-adjunction ancestry. The section-colimit theorem and sifted calculus realize the colorwise part of that graph adjunction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-ffc1f376c",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-ffc1f376c (reviewer sub-agent of L); spot-checked: Read the item, its 5 steps, both new nodes and every cited statement in full, and read the source itself: Gepner–Haugseng arXiv:1312.3178v4 PDF, App. A.5, pp. 92–94 (A.5.1–A.5.5 with proofs). The item statement and stmt_deps are identical to the live unsplit node, so nothing was weakened. Presentably monoidal implies GH's 'compatible with K-colimits'; no Kan condition on M_[0] is needed (GH use it only from A.5.6 on). Step 1 is A.5.5's proof (A.5.3 at K=Δ⁰) and fills GH's gap from 'every X ∈ M' to the colors via inert lifts and ρ_i-induced Segal maps; n=0 is terminal. Step 2 writes out A.5.1. I checked the block factorization: ρ_jφ is opposite to the active [1]→[r] followed by a↦θ(j−1)+a. The empty block gives the unit, by the coslice node's weakly-contractible clause, and the induction through V² is set up correctly. Step 3 is A.5.4(i)–(iii) via A.5.3 with T=M and E = the inert edges; fullness passes the universal property to algebras. Step 4 compares with the constructed colimit and uses conservativity; it is elementary and restricted to algebra cocones. Step 5 is N(Δ^op) sifted (HTT 5.5.8.4). The delivery's source-error note is correct: the counterexample to A.5.4(iv) as printed for arbitrary over-functors holds (trivial operad, F([n])=(A,…,A), K=Δ⁰), and the item uses only the algebra version. New node lem-coef-cocartesian-section-colimits matches A.5.3(i)–(iii) hypothesis for hypothesis. Small cases checked: K=Δ⁰, T empty, H empty; empty K is rightly excluded. It is general and non-operadic, not a restatement of an item clause, and no duplicate exists (checked the grothendieck-limits-colimits, fiber-colimit-collage, fiber-cocone-simplex-extension, relative-exponential-restriction and operadic-free-cocone nodes). New node lem-coef-infinity-sifted-colimit-calculus states HTT 5.5.8.4/6/7 with the space-valued definition including the empty product; true, and empty K is correctly excluded. It overlaps the existing unsplit lem-coef-sifted-nerve-index-calculus (same unit, same day) on 'weakly contractible' and 'N(Δ^op) sifted', which the delivery did not mention. That node's ∞-categorical bifunctor clause covers only K=N(I), while the item needs any sifted ∞-category, so the new node is a legitimate generalization, not a duplicate. Maintenance could later point the older node at it. Route: every proof dependency is in sk-prop-sf-biduality-general or is a definition/Mathlib leaf; tool_uses [] (none accepted); blueprint from/via correct; no cycle (277-node closure); no SGA. No fixes written."
+ }
 }

@@ -23,12 +23,91 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-split-augmentation-colimit",
-  "def-coef-monoidal-infinity-category"
+  "lem-coef-infinity-split-augmentation-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take $\\mathcal V=\\operatorname{Fun}(\\mathcal C,\\mathcal C)$, with composition as tensor, acting on $\\mathcal C$ by evaluation $H\\otimes c=H(c)$. Tensor associativity here is composition of functors and the unit is the identity functor, so evaluation has its canonical coherent left-action structure. The given monad is the algebra $T$ in this monoidal category, and its coherent modules are exactly $\\mathcal A$ in the statement. Apply [lem-coef-module-operadic-colimit-detection] to this action and $B=T$. Its equivalence clause says precisely that $V$ reflects equivalences; it requires neither colimits nor presentability.",
+   "uses": [
+    "lem-coef-module-operadic-colimit-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Corollary 4.2.3.2, with the evaluation action of End(C)."
+   }
+  },
+  {
+   "text": "For $c\\in\\mathcal C$, construct $L_c$ as the object $Tc$ with action $\\mu_c$; the algebra associativity and unit coherences of $T$, evaluated at $c$, give its full module structure. Put $\\lambda_c=\\eta_c$. The map in the hypothesis of [lem-coef-module-universal-arrow-criterion] is $\\mu_c T(\\eta_c):Tc\\to Tc$, coherently homotopic to the identity by the right unit law. Hence composition with $\\eta_c$ gives the required natural equivalence $\\operatorname{Map}_{\\mathcal A}(L_c,M)\\simeq\\operatorname{Map}_{\\mathcal C}(c,VM)$. Apply the dual pointwise criterion of [lem-coef-infinity-pointwise-adjoint-criterion] to $V$: these representing objects assemble to $F\\dashv V$ and to equivalences of mapping-space bifunctors, with unit $\\eta$. The actual construction $c\\mapsto(Tc,\\mu_c)$ and $g\\mapsto T(g)$ is already coherent, since it evaluates the coherent multiplication of $T$; thus the representing functor may be identified with it and $VF=T$ with its specified coherence.",
+   "uses": [
+    "lem-coef-module-universal-arrow-criterion",
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 4.2.4.1 and Corollaries 4.2.4.6-4.2.4.8; assemble the universal arrows."
+   }
+  },
+  {
+   "text": "For $g:c\\to VM$, the map $a_M T(g):Tc\\to VM$ is a coherent module map: its compatibility with the action is the chain $a_M T(g)\\mu_c\\simeq a_M\\mu_{VM}T^2(g)\\simeq a_M T(a_M)T^2(g)$; the two homotopies are naturality of $\\mu$ and the coherent module associativity. More explicitly, write $\\mu_c^{[k]}:T^{k+1}c\\to Tc$ for the iterated free action and $a_M^{[k]}:T^kVM\\to VM$ for the iterated module action, with the identity at $k=0$. For each $k$, the compatibility of $a_MT(g)$ with these actions compares $a_MT(g)\\mu_c^{[k]}$ with $a_M^{[k]}T^k(a_MT(g))$. Naturality first moves $g$ to the last input; both composites then evaluate the $(k+1)$-fold action on $T^{k+1}(g)$. The higher comparisons are obtained by inserting this last-input map into the given coherent module operations. Restricting any parameter simplex restricts that input and those operations, so this construction specifies the coherent module-map data and a map of full mapping spaces. Under the equivalence from step 2 its image is $a_M T(g)\\eta_c\\simeq a_M\\eta_{VM}g\\simeq g$. Conversely, for a coherent module map $f:F(c)\\to M$, the module-map homotopy gives $a_M T(V(f)\\eta_c)\\simeq V(f)\\mu_c T\\eta_c\\simeq V(f)$. These are the unit and module-map coherences on whole mapping spaces, not merely equality of components. In particular this describes the homotopy inverse of the natural equivalence of step 2 and identifies the counit at $M$ with $a_M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Corollary 4.2.4.6; explicit inverse calculated from its defining universal-arrow map."
+   }
+  },
+  {
+   "text": "Regard $T$ as a $(T,T)$-bimodule in End$(\\mathcal C)$ using multiplication for both actions; their commuting coherences are the algebra associativity coherences. Apply [lem-coef-two-sided-coherent-bar-construction] with $P=T$ and $Q=M$. Its degree $r$ has underlying object $T^{r+1}A$, with left action $\\mu_{T^r A}$, so it is $F(T^r A)$. The right action on $P$ gives $d_0=\\mu_{T^{r-1}A}$, the interior contractions give $d_i=T^i(\\mu_{T^{r-i-1}A})$, and the endpoint action gives $d_r=T^r(a)$. Unit insertion gives $s_i=T^{i+1}(\\eta_{T^{r-i}A})$. The action pairing $T(A)\\to A$ is $T$-linear and coherently balanced: both compatibilities are $a\\mu_A\\simeq aT(a)$ and its higher module coherences. The augmentation clause of that node therefore supplies a coherent cocone to $M$, with degree-zero map $a$. All of this takes place in $\\mathcal A$, so the resulting faces and degeneracies are module maps and retain their higher coherences.",
+   "uses": [
+    "lem-coef-two-sided-coherent-bar-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.4.2.7; regular bimodule and action pairing, as in the bar in the proof of Lemma 4.7.3.13."
+   }
+  },
+  {
+   "text": "Construct the splitting after forgetting the action by allowing a unit before the first $T$ factor. Explicitly this adjoins $h_{-1}=\\eta_A$ and $h_r=\\eta_{T^{r+1}A}$. Here is the ordered-word extension, including higher simplices. An object $\\{-\\infty\\}\\cup[n]$ is sent to the word consisting of $n+1$ copies of $T$ followed by $A$ (for $n=-1$ the word is just $A$). More precisely, identify the added least element with $-1$ for this formula. A map $f:\\{-1,0,\\ldots,m\\}\\to\\{-1,0,\\ldots,n\\}$ with $f(-1)=-1$, read contravariantly, sends $T^{n+1}A$ to $T^{m+1}A$ as follows. The $j$th output $T$ factor, for $0\\leq j\\leq m$, uses the input factors with indices $f(j-1)+1,\\ldots,f(j)$; contract a nonempty such block by iterated multiplication and use the unit for an empty block. The remaining factors $f(m)+1,\\ldots,n$ act on $A$ by the iterated module action (for $m=-1$ all input factors act). This includes the case $f(j)=-1$, so initial output blocks can be empty. The map with $f(0)=-1$ and $f(j)=j-1$ for $j>0$ inserts exactly the new leading unit, giving the displayed $h_r$. This is the ordered-word evaluation of [lem-coef-two-sided-coherent-bar-construction] with the regular first factor also allowed to be the unit. The compatibility with unit blocks in that node makes this evaluation a coherent functor on $N(\\Delta_{-\\infty})^{\\mathrm{op}}$; its restriction is the forgotten augmented bar of step 4. In low degrees $ah_{-1}\\simeq1_A$ and $d_0h_r\\simeq1$ are the module-unit and monad-unit coherences; $d_{i+1}h_r\\simeq h_{r-1}d_i$ follows from naturality of $\\eta$, and $s_{i+1}h_r\\simeq h_{r+1}s_i$ follows from the same naturality, including $s_0h_r\\simeq h_{r+1}h_r$. All higher compatibilities come from evaluating the same unit-block substitutions, rather than being inferred just from those pairwise identities. The extension is in $\\mathcal C$; no assertion that the $h_r$ are module maps is used.",
+   "uses": [
+    "lem-coef-two-sided-coherent-bar-construction",
+    "lem-coef-infinity-split-augmentation-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Example 4.7.2.7, the functor {−∞}*[n]*[0] and evaluation of the regular bar; Definitions 4.7.2.1-4.7.2.2."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-split-augmentation-colimit] the augmented diagram of step 5 is colimiting in $\\mathcal C$. For every object $H$ of End$(\\mathcal C)$, the same node says that applying $H$ to this particular cocone again gives a colimiting cocone. These are exactly the preservation hypotheses of [lem-coef-module-operadic-colimit-detection] for the evaluation action and the small index $N(\\Delta)^{\\mathrm{op}}$. Apply its arbitrary-cocone criterion to the actual module augmentation of step 4: its underlying cocone is colimiting, so the augmentation is colimiting in $\\mathcal A$. This establishes the claimed realization even if no other realizations exist in $\\mathcal C$ and even if $T$ preserves no arbitrary ones. Finally every operation used was evaluation of the monad, its unit/multiplication, or the action as a coherent functor of $M$; the bar node's naturality and the pointwise adjoint criterion retain all parameter simplices. Thus the augmentation, splitting and free-adjunction mapping equivalences are natural in the asserted coherent sense.",
+   "uses": [
+    "lem-coef-infinity-split-augmentation-colimit",
+    "lem-coef-module-operadic-colimit-detection",
+    "lem-coef-infinity-pointwise-adjoint-criterion",
+    "lem-coef-two-sided-coherent-bar-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Example 4.7.2.5 and Corollary 4.2.3.5; Remark 4.7.2.4, and the regular module bar in Lemma 4.7.3.13."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-module-operadic-colimit-detection",
+  "lem-coef-module-universal-arrow-criterion",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-two-sided-coherent-bar-construction",
+  "lem-coef-infinity-split-augmentation-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Source-guided expansion of HA 4.2.3, 4.2.4, 4.4.2.7 and 4.7.2.5-7; online source read but not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -71,10 +150,45 @@
    "results": "{\"t\": \"2026-10-16T18:32:21Z\", \"tool\": \"grep\", \"query\": \"quasicategor.*(monad|bar|split)|(monad|bar|split).*quasicategor\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: Monad/Algebra.lean:42-175 defines ordinary algebras, free/forget and a Hom-set adjunction; Monad/Coequalizer.lean:43-97 constructs a reflexive coequalizer in an ordinary algebra category. These are not arbitrary coherent monads, coherent simplicial module bars, or colimits tested by mapping spaces. Rep.barResolution and ModuleCat.projectiveResolution concern ordinary modules and chain complexes. The refined AlgebraicTopology grep had zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent monad free module adjunction infinity category",
+   "results": "{\"t\": \"2026-10-16T19:41:31Z\", \"tool\": \"leanfinder\", \"query\": \"coherent monad free module adjunction infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monad.adj\", \"ModuleCat.free_η_freeMk\", \"Condensed.freeForgetAdjunction\", \"AddCommMonCat.instIsLeftAdjointFree\", \"LightCondensed.freeForgetAdjunction\", \"ModuleCat.adj\", \"AddCommMonCat.adj\", \"PresheafOfModules.freeAdjunction\"], \"digest\": \"5485a7cd50d0734c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib Monad/Algebra.lean:137-177 gives strict ordinary free/forgetful adjunction and reflection of isomorphisms, not a coherent monad on an arbitrary infinity-category or its coherent module bar; the other hits give ordinary group bar resolutions. Read the declarations and the ordinary Hom-set proofs. Alternative phrasing searched through the universal-arrow, colimit and two-sided-bar queries recorded on the new nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Monad.Algebra, CategoryTheory.Monad.free",
+   "results": "{\"t\": \"2026-10-16T19:41:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Monad.Algebra, CategoryTheory.Monad.free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Monad.free\", \"CategoryTheory.Monad.adj\", \"CategoryTheory.Monad.free_obj_A\", \"CategoryTheory.Monad.free_obj_a\", \"CategoryTheory.Monad.free_map_f\", \"CategoryTheory.Monad.adj_unit\", \"CategoryTheory.Monad.adj_counit\", \"CategoryTheory.Under.costar_obj_hom\"], \"digest\": \"b794ed0ac98504da\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib Monad/Algebra.lean:137-177 gives strict ordinary free/forgetful adjunction and reflection of isomorphisms, not a coherent monad on an arbitrary infinity-category or its coherent module bar; the other hits give ordinary group bar resolutions. Read the declarations and the ordinary Hom-set proofs. Alternative phrasing searched through the universal-arrow, colimit and two-sided-bar queries recorded on the new nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "bar.*monad|monad.*bar|free.*module",
+   "results": "{\"t\": \"2026-10-16T19:41:32Z\", \"tool\": \"grep\", \"query\": \"bar.*monad|monad.*bar|free.*module\", \"sub\": \"CategoryTheory/Monad\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib Monad/Algebra.lean:137-177 gives strict ordinary free/forgetful adjunction and reflection of isomorphisms, not a coherent monad on an arbitrary infinity-category or its coherent module bar; the other hits give ordinary group bar resolutions. Read the declarations and the ordinary Hom-set proofs. Alternative phrasing searched through the universal-arrow, colimit and two-sided-bar queries recorded on the new nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent monad free module bar resolution",
+   "results": "{\"t\": \"2026-10-16T19:41:32Z\", \"tool\": \"leansearch\", \"query\": \"coherent monad free module bar resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barResolution\", \"Rep.barResolution_complex\", \"CategoryTheory.Monad.free\", \"ModuleCat.free_μ_freeMk_tmul_freeMk\", \"ModuleCat.projectiveResolution\", \"ModuleCat.free_δ_freeMk\", \"CategoryTheory.Monad.adj\", \"Rep.barComplex\"], \"digest\": \"0051a2def4b15e2d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib Monad/Algebra.lean:137-177 gives strict ordinary free/forgetful adjunction and reflection of isomorphisms, not a coherent monad on an arbitrary infinity-category or its coherent module bar; the other hits give ordinary group bar resolutions. Read the declarations and the ordinary Hom-set proofs. Alternative phrasing searched through the universal-arrow, colimit and two-sided-bar queries recorded on the new nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "def free|def adj|forget_reflects_iso",
+   "results": "{\"t\": \"2026-10-16T19:45:20Z\", \"tool\": \"grep\", \"query\": \"def free|def adj|forget_reflects_iso\", \"sub\": \"CategoryTheory/Monad\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monad/Kleisli.lean\", \"Mathlib/CategoryTheory/Monad/Kleisli.lean\", \"Mathlib/CategoryTheory/Monad/Adjunction.lean\", \"Mathlib/CategoryTheory/Monad/Adjunction.lean\", \"Mathlib/CategoryTheory/Monad/Algebra.lean\", \"Mathlib/CategoryTheory/Monad/Algebra.lean\", \"Mathlib/CategoryTheory/Monad/Algebra.lean\", \"Mathlib/CategoryTheory/Monad/Algebra.lean\"], \"digest\": \"195203b70b2a4284\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib Monad/Algebra.lean:137-177 gives strict ordinary free/forgetful adjunction and reflection of isomorphisms, not a coherent monad on an arbitrary infinity-category or its coherent module bar; the other hits give ordinary group bar resolutions. Read the declarations and the ordinary Hom-set proofs. Alternative phrasing searched through the universal-arrow, colimit and two-sided-bar queries recorded on the new nodes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-monadic-bar",
@@ -82,5 +196,20 @@
   "group": "NI"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-free-module-bar",
+  "worker": "stage1",
+  "summary": "Expanded free modules using a conditional tensor-action universal-arrow criterion; constructed the coherent bar from a general two-sided bar; wrote its unit-block splitting; and verified the diagram-specific operadic colimit hypothesis using absoluteness of split diagrams. Three statement-only foundational nodes, no statement correction or Lean attachment. All sources, candidate statements and actual Mathlib hits were read. Second reading defined the bar forgetful functors explicitly and expanded the iterated-action construction of the inverse mapping-space map.",
+  "blueprint": "Paragraph 2 of main-20261015 prop-coef-integral-exceptional-adjoint.proof.md: the middle derived mapping-complex comparison before the inverse limit, through the existing section-rectification and monadic-bar ancestry. These are generic module foundations only; no geometric route or coefficient identification is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-6900f3d4c",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-6900f3d4c (reviewer sub-agent of L); spot-checked: Read the item, all six steps, the three new nodes and the cited statements (split-augmentation-colimit, pointwise-adjoint-criterion, def-cbc-enhanced-diagrams-cones, def-coef-monoidal-infinity-category), and checked them against Higher Algebra 2017: Cor 4.2.3.2 and 4.2.3.5 (pp. 527-529), Def 4.2.4.1 and Cor 4.2.4.6-8 (pp. 530-531), Constr 4.4.2.7 and Ex 4.4.2.12 (pp. 576-578), Rem 4.7.2.3-4 and Ex 4.7.2.5/4.7.2.7 (pp. 677-679). The item statement is unchanged and is not a target, so no base-change morphism or coefficient category is involved. Face, degeneracy and extra-degeneracy indices check out, including r=0, r=1, T=id and h_r = eta_{T^{r+1}A} from f(0)=-1. Step 2: the hypothesis composite mu_c T(eta_c) is the identity by the right unit law, so HA 4.2.4.6 applies. Step 3 is correctly elementary: the inverse formula is a_M T(g), two lines from the module-map property. Steps 5-6 are exactly HA Ex 4.7.2.7 and Ex 4.7.2.5; the splitting is absolute, so applying any H in End(C) to it gives a colimit and Cor 4.2.3.5(2) applies. Each new node is a true general HA statement, strictly more general than the item, not a restatement of one of its clauses, and not a duplicate (I searched the DAG with rg and read the near hits). There is no cycle, proof_deps equal the union of the uses, all route citations are in unit sk-prop-sf-biduality-general, no tool_uses are needed and no SGA is used. Minor, non-blocking: the bar node's ordered-word/unit-block clause is phrased informally, and the item text describes monoidal Fun(C,C) inline without citing def-coef-monoidal-infinity-category. No fixes made."
+ }
 }
