@@ -1,0 +1,254 @@
+{
+ "id": "lem-coef-complex-ext-disk-sphere",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; Elementary building-block extension calculations used in orthogonal detection; WANTED: Gillespie, The flat model structure on Ch(R) (2004), Lemma 3.1 and the degreewise split extension discussion preceding Proposition 3.6. No Stacks tag states all these disk/sphere calculations.",
+   "via": [
+    "lem-coef-hereditary-cotorsion-complex-lift",
+    "lem-coef-flat-complex-cotorsion-pairs",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Disk, sphere and degreewise split extension calculations",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], and use Yoneda $\\operatorname{Ext}^1$, the group of short exact sequences with fixed endpoints modulo isomorphism, with Baer addition. Let $X,Y$ be integer cochain complexes in $\\mathcal A$, $A,B\\in\\mathcal A$, and $n\\in\\mathbf Z$. Put $Z^nX=\\ker d_X^n$, and call $X$ acyclic if $\\operatorname{im}d_X^{n-1}=Z^nX$ for every $n$. Let $S^nA$ have $A$ only in degree $n$, and let $D^nA$ have $A$ in degrees $n,n+1$, with differential $1_A$. Then there are natural isomorphisms\n$$\\operatorname{Ext}^1_{\\operatorname{Ch}(\\mathcal A)}(D^nA,Y)\\cong\\operatorname{Ext}^1_{\\mathcal A}(A,Y^n),\\qquad \\operatorname{Ext}^1_{\\operatorname{Ch}(\\mathcal A)}(X,D^nB)\\cong\\operatorname{Ext}^1_{\\mathcal A}(X^{n+1},B).$$\nIf $Y$ is acyclic, then $\\operatorname{Ext}^1_{\\operatorname{Ch}(\\mathcal A)}(S^nA,Y)\\cong\\operatorname{Ext}^1_{\\mathcal A}(A,Z^nY)$. If $X$ is acyclic, then $\\operatorname{Ext}^1_{\\operatorname{Ch}(\\mathcal A)}(X,S^nB)\\cong\\operatorname{Ext}^1_{\\mathcal A}(Z^{n+1}X,B)$.\nDefine $\\operatorname{Hom}^r(X,Y)=\\prod_k\\operatorname{Hom}_{\\mathcal A}(X^k,Y^{k+r})$ with differential $\\delta h=d_Yh-(-1)^rhd_X$. If $\\operatorname{Ext}^1_{\\mathcal A}(X^k,Y^k)=0$ for every $k$, then $\\operatorname{Ext}^1_{\\operatorname{Ch}(\\mathcal A)}(X,Y)\\cong H^1\\operatorname{Hom}^{\\bullet}(X,Y)$; under degreewise splittings, the extension corresponds to the off-diagonal differential of its middle complex. For every injective $I$ [def-sp-injective-resolutions], with no acyclicity assumption on $X$, one has $\\operatorname{Ext}^1_{\\operatorname{Ch}(\\mathcal A)}(X,S^nI)\\cong\\operatorname{Hom}_{\\mathcal A}(H^{n-1}(X),I)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Agent-formulated tool for proof paragraph 2: Elementary building-block extension calculations used in orthogonal detection; WANTED: Gillespie, The flat model structure on Ch(R) (2004), Lemma 3.1 and the degreewise split extension discussion preceding Proposition 3.6. No Stacks tag states all these disk/sphere calculations."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Work throughout with short exact extensions, not derived Ext or resolutions. The category of complexes is abelian and its short exact sequences are exactly the degreewise short exact sequences, by [lem-weil-pbc-cochain-complexes-degreewise-exact]. Kernels, cokernels, finite biproducts, and pushouts of complexes can be constructed degreewise: the universal maps of the component constructions give the differentials, and uniqueness proves their square-zero and universal properties. Pushout of an extension is again an extension by [lem-weil-pbc-pushout-short-exact-sequence]. Pullback of an extension is again an extension by applying that same statement to the opposite abelian category and reversing the arrows. The opposite is abelian directly from [def-sp-abelian], since its kernels and cokernels interchange. We will also use the following comparison test: a morphism of short exact sequences with identity endpoint maps has an isomorphism as its middle map. Indeed, [lem-weil-pbc-snake-lemma-abelian] makes its kernel and cokernel zero; the abelian kernel/cokernel axioms then make it both monic and epic and hence an isomorphism. We also need interchange of endpoint operations. Given $a:Y\\to Y'$ and $b:X'\\to X$, put $P=E\\times_X X'$ and $Q=Y'\\amalg_Y E$. There is a canonical map $Y'\\amalg_Y P\\to Q\\times_X X'$: on $P$ use its map to $E\\to Q$ and its projection to $X'$, and on $Y'$ use the inclusion into $Q$ and the zero map to $X'$. The two maps agree on $Y$, since its projection to $X'$ is zero. Both sides are extensions of $X'$ by $Y'$ by pushout and pullback stability, and this map is the identity on $Y'$ and $X'$. The comparison test therefore makes it an isomorphism. This also permits either order in the Baer construction. All element lifts below mean epimorphic refinements in the precise sense of [lem-sp-abelian-refinements], so no concrete category or projective object is assumed.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-snake-lemma-abelian",
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent argument using Tags 010J (definition-extension), 08N3 (lemma-cartesian-kernel), 08N4 (lemma-cartesian-cocartesian); pushout and dual pullback of extensions in section-extensions"
+   }
+  },
+  {
+   "text": "For the first disk formula, evaluate an extension $0\\to Y\\to E\\to D^nA\\to0$ in degree $n$. Conversely, start with $0\\to Y^n\\xrightarrow{u}M\\xrightarrow{v}A\\to0$. Form the pushout $P=M\\amalg_{Y^n}Y^{n+1}$ along $u$ and $d_Y^n$, with maps $j:M\\to P$ and $l:Y^{n+1}\\to P$. The cited pushout statement gives $0\\to Y^{n+1}\\xrightarrow{l}P\\to A\\to0$. Set $E^n=M$, $E^{n+1}=P$, and $E^k=Y^k$ elsewhere. Its differential in degree $n-1$ is $u d_Y^{n-1}$, in degree $n$ is $j$, and in degree $n+1$ is induced by $0:M\\to Y^{n+2}$ and $d_Y^{n+1}:Y^{n+1}\\to Y^{n+2}$. These last maps agree on $Y^n$ because $d_Y^{n+1}d_Y^n=0$. The only new square-zero identities are $j u d_Y^{n-1}=l d_Y^n d_Y^{n-1}=0$, $d_E^{n+1}j=0$, and $d_Y^{n+2}d_E^{n+1}=0$, the last checked on both pushout legs. The inclusions of $Y$ and the projections to $A$ in degrees $n,n+1$ give an extension of $D^nA$ by $Y$; its quotient differential is $1_A$ since the two projections satisfy $p_P j=v$. Degreewise exactness gives exactness as complexes.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent construction from the pushout of an extension, section-extensions, after Definition 010K; no disk formula is asserted in this Stacks section"
+   }
+  },
+  {
+   "text": "The two operations in step 2 are inverse on extension classes. Evaluation of the constructed extension gives the original $M$ with its fixed endpoint maps. For an arbitrary disk extension $E$, identify its terms outside degrees $n,n+1$ with $Y$ through the inclusion. The maps $d_E^n:E^n\\to E^{n+1}$ and $Y^{n+1}\\to E^{n+1}$ agree on $Y^n$. They induce $E^n\\amalg_{Y^n}Y^{n+1}\\to E^{n+1}$, a morphism of extensions with identity endpoints $Y^{n+1}$ and $A$. The comparison test of step 1 makes this an isomorphism; it commutes with the neighboring differentials by their defining pushout equations. Thus it is an isomorphism of complex extensions. This proves the first disk bijection without any acyclicity hypothesis.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "lem-weil-pbc-snake-lemma-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent inverse check using section-extensions and the short-exact-sequence comparison test"
+   }
+  },
+  {
+   "text": "To obtain the second disk formula, use the contravariant degree-reversing operation $T\\mapsto T^\\vee$ with values in $\\mathcal A^{\\mathrm{op}}$, where $(T^\\vee)^k=(T^{-k})^{\\mathrm{op}}$ and $d_{T^\\vee}^k=(d_T^{-k-1})^{\\mathrm{op}}$. It reverses short exact extensions, is involutive, and sends $D^nB$ to $D^{-n-1}(B^{\\mathrm{op}})$. Step 3, applied in $\\mathcal A^{\\mathrm{op}}$ at $-n-1$, therefore identifies extensions of $X$ by $D^nB$ with extensions in $\\mathcal A^{\\mathrm{op}}$ of $B^{\\mathrm{op}}$ by $(X^{n+1})^{\\mathrm{op}}$. Reversing that short exact sequence gives precisely extensions of $X^{n+1}$ by $B$ in $\\mathcal A$. This proves the second formula, with the asserted index $n+1$.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent duality argument from Definition 010J and the explicit disk construction of steps 2–3"
+   }
+  },
+  {
+   "text": "Assume now that $Y$ is acyclic, and take an extension $0\\to Y\\xrightarrow{u}E\\xrightarrow{v}S^nA\\to0$. Outside degree $n$, identify $E$ with $Y$. Write $M=E^n$ and $t=d_E^n:M\\to Y^{n+1}$. It factors through $Z^{n+1}Y$, since $d_Y^{n+1}t=0$, and its restriction to $Y^n$ is $d_Y^n$. Acyclicity says $Y^n\\to Z^{n+1}Y$ is epic. Put $L=\\ker t=Z^nE$. The kernel of $L\\to A$ is $Z^nY$, by the kernel universal properties. The map $L\\to A$ is epic as follows: lift any arrow $a:T\\to A$ to $m:T'\\to M$ after an epimorphic refinement; after another refinement lift $t m$ through $Y^n\\twoheadrightarrow Z^{n+1}Y$ to $y$. Then $m-u y$ factors through $L$ and still maps to the refined $a$. Parts (a) and (b) of [lem-sp-abelian-refinements] prove that $0\\to Z^nY\\to L\\to A\\to0$ is short exact. This is the map from the left side to the right side of the first sphere formula.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent kernel/refinement argument using section-extensions and lemma-check-exactness-fibre-product (Tag 08N5)"
+   }
+  },
+  {
+   "text": "Conversely, from $0\\to Z^nY\\xrightarrow{b}L\\to A\\to0$, form $M=Y^n\\amalg_{Z^nY}L$, with legs $u:Y^n\\to M$ and $j:L\\to M$. By [lem-weil-pbc-pushout-short-exact-sequence], $0\\to Y^n\\to M\\to A\\to0$ is exact. Set $E^n=M$ and $E^k=Y^k$ for $k\\ne n$. Define $d_E^{n-1}=u d_Y^{n-1}$ and $d_E^n$ by its values $d_Y^n$ on $Y^n$ and zero on $L$. It is well-defined since $d_Y^n$ kills $Z^nY$, and $d_E^n d_E^{n-1}=0$; the next square-zero identity holds on both pushout legs. Thus $E$ is an extension of $S^nA$ by $Y$. Step 5 shows $0\\to Z^nY\\to Z^nE\\to A\\to0$ is exact. The induced $L\\to Z^nE$ has identity endpoints and hence is an isomorphism by step 1. In the other direction, for any original sphere extension, its maps $Y^n\\to E^n$ and $Z^nE\\to E^n$ induce $Y^n\\amalg_{Z^nY}Z^nE\\to E^n$ with identity endpoints $Y^n,A$, hence an isomorphism; it is a cochain map by the displayed differential formulas. This proves the first sphere bijection with no splitting or injectivity assumption on $A$.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "lem-sp-abelian-refinements",
+    "lem-weil-pbc-snake-lemma-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent pushout construction from section-extensions, inverse to step 5"
+   }
+  },
+  {
+   "text": "For the second sphere formula assume $X$ acyclic and apply steps 5–6 to the opposite category and $X^\\vee$ of step 4. It is acyclic: reversing an exact triple interchanges kernel and cokernel, as follows from the abelian axioms. Also $(S^nB)^\\vee=S^{-n}(B^{\\mathrm{op}})$. Its cycle object in degree $-n$ is $(\\operatorname{coker}d_X^{n-1})^{\\mathrm{op}}$. Acyclicity identifies this with $(Z^{n+1}X)^{\\mathrm{op}}$: the factor $X^n\\twoheadrightarrow Z^{n+1}X$ of $d_X^n$ has kernel $Z^nX=\\operatorname{im}d_X^{n-1}$, so [lem-weil-pbc-abelian-exact-epi-cokernel](a) says it is a cokernel of $d_X^{n-1}$. Reversing the resulting extension gives $\\operatorname{Ext}^1_{\\mathcal A}(Z^{n+1}X,B)$, as required.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent duality and cokernel calculation using Definition 010J and the exact-epi-cokernel property"
+   }
+  },
+  {
+   "text": "The zero Yoneda class is the split extension. To verify this directly for the Baer convention in the statement, add $0\\to Y\\to Y\\oplus X\\to X\\to0$ to an extension $0\\to Y\\xrightarrow{u}E\\xrightarrow{v}X\\to0$. The pullback along the diagonal is identified with $E\\oplus Y$ by $(e,y)\\mapsto(e,(y,v(e)))$; its subobject map is $(a,b)\\mapsto(u(a),b)$. The map $(e,y)\\mapsto e+u(y)$ then induces, after pushout along addition on $Y$, a morphism to $E$ with identity endpoints, so is an isomorphism by step 1. Hence the split class is the additive identity, and any extension whose class is zero is isomorphic with fixed endpoints to a split one. Under the hypothesis $\\operatorname{Ext}^1_{\\mathcal A}(X^k,Y^k)=0$, apply this in every degree of $0\\to Y\\to E\\to X\\to0$ and choose splittings $E^k\\cong Y^k\\oplus X^k$. These countably many choices of morphisms require only ordinary choice in the chosen universe, not enough injectives or projectives.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-snake-lemma-abelian",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent verification of the split identity for the Baer operation, Tag 010L (lemma-baer-sum), section-extensions"
+   }
+  },
+  {
+   "text": "In those splittings write $d_E^k=\\begin{pmatrix}d_Y^k&t^k\\\\0&d_X^k\\end{pmatrix}$. Squaring gives $d_Y^{k+1}t^k+t^{k+1}d_X^k=0$, exactly $\\delta t=0$ for a degree-one Hom cocycle. If the chosen section is replaced by $s^k+u^k h^k$, then its off-diagonal term is $t'^k=t^k+d_Y^k h^k-h^{k+1}d_X^k=t^k+(\\delta h)^k$. Thus the class of $t$ is independent of splittings. Conversely, every degree-one cocycle $t$ gives this square-zero matrix differential on $Y^k\\oplus X^k$, hence an extension by degreewise exactness. If $t'=t+\\delta h$, the matrices $\\begin{pmatrix}1&-h^k\\\\0&1\\end{pmatrix}$ define an isomorphism $E_t\\to E_{t'}$ with identity endpoints: the upper-right cochain-map equation is $t'-d_Yh=t-hd_X$. Every fixed-endpoint morphism between such split presentations has the form $\\begin{pmatrix}1&a^k\\\\0&1\\end{pmatrix}$, and its cochain-map equation gives $t'-t=-\\delta a$. These constructions are therefore inverse on classes and prove the asserted bijection with $H^1\\operatorname{Hom}^\\bullet(X,Y)$. Here $\\delta^2=0$ follows by expanding $d_Y(d_Yh-(-1)^rhd_X)-(-1)^{r+1}(d_Yh-(-1)^rhd_X)d_X$: the middle terms cancel and the outer terms contain $d_Y^2$ or $d_X^2$.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent matrix calculation extending the extension formalism of section-extensions; Mathlib cocycleOfDegreewiseSplit is only a candidate, not a cited classification theorem"
+   }
+  },
+  {
+   "text": "All the preceding bijections preserve addition and are natural. For disks, evaluation commutes with the degreewise direct sums, pullbacks, and pushouts defining the Baer sum; it also commutes with pullback of the quotient endpoint and pushout of the subobject endpoint. For the first sphere map, cycles commute with direct sums and pullbacks by their kernel universal property. For the remaining pushout along $Y\\oplus Y\\to Y$, apply step 5 to its source extension (whose kernel $Y\\oplus Y$ is acyclic) and target extension (whose kernel $Y$ is acyclic). The induced map from the pushout of the source cycle extension along $Z^nY\\oplus Z^nY\\to Z^nY$ to the target cycle extension has identity endpoints, and is an isomorphism by step 1. For naturality under $b:Y\\to Y'$ between acyclic complexes, push a sphere extension $E$ out to $E'$ along $b$. On cycles the maps $Z^nE\\to Z^nE'$ and $Z^nY'\\to Z^nE'$ agree on $Z^nY$, so they induce $Z^nY'\\amalg_{Z^nY}Z^nE\\to Z^nE'$. Step 5 makes both rows extensions of $A$ by $Z^nY'$; the induced map is the identity on these endpoints, so step 1 makes it an isomorphism. Pullback in $A$ commutes with cycles directly: the kernel equation for a pair $(e,a')$ in $E\\times_{S^nA}S^nA'$ is exactly the kernel equation for $e$, giving $Z^n(E\\times_{S^nA}S^nA')=Z^nE\\times_A A'$. The opposite-category constructions interchange direct sums with themselves and diagonal with addition, and interchange pushout and pullback; the interchange isomorphism constructed in step 1 then identifies the reversed pullback-then-pushout operation with the pushout-then-pullback Baer operation, with identity endpoint maps. Reversing the maps on both endpoints also gives the required naturality squares. For the matrix bijection of step 9, the direct sum of two split extensions has off-diagonal blocks $t,t'$; pulling back along $X\\to X\\oplus X$ and pushing out along $Y\\oplus Y\\to Y$ gives the block $t+t'$. Pullback along $a:X'\\to X$ replaces $t$ by $ta$; pushout along $b:Y\\to Y'$ replaces it by $bt$. These are the Hom-complex maps on cohomology. This proves all asserted natural group isomorphisms, rather than just bijections of extension classes.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "lem-weil-pbc-snake-lemma-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent Baer-sum and naturality verification, section-extensions, after Definition 010K and Tag 010L"
+   }
+  },
+  {
+   "text": "Finally let $I$ be injective. Each sequence $0\\to I\\to M\\to U\\to0$ splits: extend $1_I$ across the monomorphism to get a retraction, and the kernel of that retraction maps isomorphically to $U$ by the abelian axioms. Extensions with zero kernel split as well. Step 8 therefore gives $\\operatorname{Ext}^1_{\\mathcal A}(X^k,(S^nI)^k)=0$ for every $k$, and step 9 applies without acyclicity of $X$. A degree-one cocycle in $\\operatorname{Hom}^\\bullet(X,S^nI)$ is just $f:X^{n-1}\\to I$ with $f d_X^{n-2}=0$, and its boundaries are the maps $-g d_X^{n-1}$ for $g:X^n\\to I$. Restriction of $f$ to $Z^{n-1}X$ descends to $H^{n-1}(X)=Z^{n-1}X/\\operatorname{im}d_X^{n-2}$ and kills those boundaries. For surjectivity, the map $H^{n-1}(X)\\to X^{n-1}/\\operatorname{im}d_X^{n-2}$ is monic: its kernel is zero since the kernel of the quotient restricted to $Z^{n-1}X$ is exactly $\\operatorname{im}d_X^{n-2}$, by [lem-sp-abelian-refinements](c). Extend any $H^{n-1}(X)\\to I$ across that monomorphism and compose with the quotient to obtain $f$. For injectivity, if the induced map on $H^{n-1}$ is zero then $f$ vanishes on $Z^{n-1}X$, hence descends through $X^{n-1}\\twoheadrightarrow\\operatorname{im}d_X^{n-1}$ by [lem-weil-pbc-abelian-exact-epi-cokernel](a). Extend the descended map across $\\operatorname{im}d_X^{n-1}\\hookrightarrow X^n$ to $g:X^n\\to I$ by injectivity. Then $f=g d_X^{n-1}=\\delta(-g)$ is a boundary. Restriction is additive and commutes with precomposition in $X$ and postcomposition between injective objects $I$, so this is the claimed natural isomorphism.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sp-abelian",
+    "lem-sp-abelian-refinements",
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent injectivity argument from the definition of an injective object and section-extensions; no acyclicity of X used"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-weil-pbc-snake-lemma-abelian",
+  "lem-sp-abelian-refinements",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Explicit disk/sphere pushout constructions and matrix classification, using section-extensions (Tags 010J, 010K, 010L) as the general extension formalism; the requested Gillespie reference is unavailable locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda Ext one of disk and sphere cochain complexes computed by components and cycles in an arbitrary abelian category",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extMk, CategoryTheory.ProjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.Abelian.Ext.mk₀. ",
+   "date": "2026-10-16",
+   "verdict": "no match: Read DegreewiseSplit.lean:39–64; cocycleOfDegreewiseSplit constructs a cocycle but does not classify Yoneda extensions. Read Injective/Ext.lean:38–85; extEquivCohomologyClass and extAddEquivCohomologyClass require a resolution of the second object and have a single complex in the first argument, not arbitrary complex extensions. The Loogle hits are extensionality, not Ext groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degreewise split extensions of complexes are classified by first cohomology of the Hom complex",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CochainComplex.cocycleOfDegreewiseSplit, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CochainComplex.homOfDegreewiseSplit_f, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass, CochainComplex.homOfDegreewiseSplit. ",
+   "date": "2026-10-16",
+   "verdict": "no match: Read DegreewiseSplit.lean:39–64; cocycleOfDegreewiseSplit constructs a cocycle but does not classify Yoneda extensions. Read Injective/Ext.lean:38–85; extEquivCohomologyClass and extAddEquivCohomologyClass require a resolution of the second object and have a single complex in the first argument, not arbitrary complex extensions. The Loogle hits are extensionality, not Ext groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"CochainComplex\"",
+   "results": "12 hits: CochainComplex.next, Homotopy.dNext_cochainComplex, CochainComplex.HomComplex.Cochain.ext, CochainComplex.HomComplex.Cochain.ext_iff, CochainComplex.HomComplex.Cochain.ext₀, CochainComplex.HomComplex.Cochain.ext₀_iff, CochainComplex.HomComplex.Cocycle.ext, CochainComplex.HomComplex.Cocycle.ext_iff. ",
+   "date": "2026-10-16",
+   "verdict": "no match: Read DegreewiseSplit.lean:39–64; cocycleOfDegreewiseSplit constructs a cocycle but does not classify Yoneda extensions. Read Injective/Ext.lean:38–85; extEquivCohomologyClass and extAddEquivCohomologyClass require a resolution of the second object and have a single complex in the first argument, not arbitrary complex extensions. The Loogle hits are extensionality, not Ext groups."
+  },
+  {
+   "tool": "grep",
+   "query": "degreewise.*split|cocycleOfDegreewiseSplit|ext.*(disk|sphere)|Ext.*HomComplex",
+   "results": "10 hits: Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/ModelCategory/Lifting.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean. Subdirectory: Algebra/Homology. ",
+   "date": "2026-10-16",
+   "verdict": "no match: Read DegreewiseSplit.lean:39–64; cocycleOfDegreewiseSplit constructs a cocycle but does not classify Yoneda extensions. Read Injective/Ext.lean:38–85; extEquivCohomologyClass and extAddEquivCohomologyClass require a resolution of the second object and have a single complex in the first argument, not arbitrary complex extensions. The Loogle hits are extensionality, not Ext groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext one from a complex to a single injective object is Hom from its cohomology",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.self, CategoryTheory.InjectiveResolution.self_cocomplex, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extMk, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk. ",
+   "date": "2026-10-16",
+   "verdict": "no match: Read DegreewiseSplit.lean:39–64; cocycleOfDegreewiseSplit constructs a cocycle but does not classify Yoneda extensions. Read Injective/Ext.lean:38–85; extEquivCohomologyClass and extAddEquivCohomologyClass require a resolution of the second object and have a single complex in the first argument, not arbitrary complex extensions. The Loogle hits are extensionality, not Ext groups."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-coef-hereditary-cotorsion-complex-lift",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-complex-ext-disk-sphere",
+  "worker": "stage1",
+  "summary": "No exact project attachment or Mathlib classification found. Proved all clauses by explicit pushout extensions, opposite-category degree reversal, the matrix cocycle classification, and the injective restriction calculation. Reused existing generic abelian-category tools; created no nodes. Statement unchanged. Second reading supplied the canonical pullback/pushout interchange and explicit sphere naturality comparison; the off-unit tool request is in the report.",
+  "blueprint": "Realizes the generic orthogonal-detection building-block calculation below the coefficient-adjunction step in paragraph 2 of prop-coef-integral-exceptional-adjoint; the current main-20261015 proof has the same derived coefficient adjunction paragraph. The auxiliary calculation is agent supplied, not claimed to occur verbatim in the blueprint."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-dab358d32",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-dab358d32 (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, cited nodes, Stacks sources at tags 010J, 010K, 010L, 08N3–08N5 and 010H, blueprint materials, and delivery report. All eleven proof steps are mathematically coherent with correct hypotheses, indices, Baer/naturality arguments, and edge cases. No new nodes or duplicates exist; recorded searches and agent provenance are adequate. Accepted tool use: lem-weil-pbc-pushout-short-exact-sequence. Review written to review.md."
+ }
+}
