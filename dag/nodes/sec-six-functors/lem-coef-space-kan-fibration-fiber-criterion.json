@@ -3,7 +3,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: replace a map of Kan complexes by the path-space Kan fibration used to compute its homotopy fibers.",
+   "place": "Proof paragraph 2: \"derived coefficient adjunction to compute\" and the displayed derived inverse-limit mapping-complex comparisons; through the recorded via chain, the strict-fiber criterion used by the parent path-space replacement argument.",
    "via": [
     "lem-coef-space-contractible-fiber-equivalence",
     "lem-coef-presentable-infinity-adjoints",
@@ -24,11 +24,91 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F_q=\\{q\\}\\times_QE$. A horn in $F_q$ is a horn in $E$ over the constant simplex at $q$; a lift for $p$ therefore lies in $F_q$. Thus $F_q$ is Kan. By [lem-coef-kan-realization-serre], $P=|p|:|E|\\to|Q|$ is a Serre fibration. By [lem-coef-realization-finite-limits], its k-space fiber at the realized vertex $q$ is canonically $|F_q|$. These theorems use exactly the all-horn lifting condition in the statement and the realization of [def-cbc-enhanced-diagrams-cones]. If $Q$ has no vertices, it has no simplices, since every simplex has a vertex; the map $p$ then forces $E$ empty as well. In this case $p$ is the identity of the empty simplicial set, and both assertions hold. Below allow disconnected spaces but assume $Q$ nonempty.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-realization-serre",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 3.6.2 and Lemma 3.2.4; direct pullback horn-lifting argument. Online source read; archival copy WANTED. The displayed details are agent-written."
+   }
+  },
+  {
+   "text": "We record explicitly why checking homotopy groups at vertices suffices. Every point of a realization is represented in a simplex and is joined to any vertex of that simplex by its straight-line barycentric path. For a path $\\gamma$ from $x$ to $y$ and a based cube map $h:([-1,1]^r,\\partial[-1,1]^r)\\to(T,x)$, write $\\rho=\\max_j|t_j|$ and replace $h$ by $h(2t)$ for $\\rho\\leq\\tfrac12$ and by $\\gamma(2\\rho-1)$ for $\\rho\\geq\\tfrac12$. The formulas agree on the common boundary and give a cube based at $y$. Applying the same formula to homotopies makes this a map on based homotopy classes. Reversing $\\gamma$ gives its inverse: the two collars trace $\\gamma$ followed by its reverse, which contracts by shortening the distance traveled along $\\gamma$, and rescaling the inner cube removes the remaining constant collar. This construction commutes with postcomposition. Thus the maps on based homotopy groups at two endpoints of a path are related by bijections commuting with every continuous map. In particular bijectivity of the homomorphisms induced by $P$ at vertex basepoints gives isomorphisms at all basepoints; the same observation applies to each $|F_q|$. All these constructions use the cubical homotopy and realization definitions in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Discussion preceding Definition 2.4.3 and proof of Lemma 2.4.17; explicit cubical collar construction. Online source read; archival copy WANTED. The displayed details are agent-written."
+   }
+  },
+  {
+   "text": "Suppose $p$ is a weak homotopy equivalence. Fix a vertex $q$ of $Q$. Surjectivity on components gives a point $e_0\\in|E|$ and a path from $P(e_0)$ to $q$. Path lifting in [lem-coef-serre-homotopy-exact-sequence] supplies an endpoint in $|F_q|$, so the fiber is nonempty and hence has a vertex $e$ (a representative of any realization point has simplex vertices). The orbit set of the $\\pi_1(|Q|,q)$-action on $\\pi_0(|F_q|)$ is the set of total-space components over the component of $q$, by that same cited statement. It is a singleton since $\\pi_0(P)$ is bijective. The stabilizer of the component of $e$ is the image of $\\pi_1(|E|,e)\\to\\pi_1(|Q|,q)$, which is the whole group since $p$ is a weak equivalence. The orbit of this component is therefore a singleton; since it is the only orbit, $\\pi_0(|F_q|)$ itself is a singleton. This checks connectedness of the entire fiber, not just the distinguished component.",
+   "uses": [
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 2.4.16 and the path-lifting component argument in Proposition 2.4.18; orbit/stabilizer expansion as stated in the cited DAG node. Online source read; archival copy WANTED. The displayed details are agent-written."
+   }
+  },
+  {
+   "text": "Still assuming $p$ a weak equivalence, choose any vertex $e$ of $F_q$ and any $r\\geq1$. The sequence of [lem-coef-serre-homotopy-exact-sequence] contains $\\pi_{r+1}(|E|,e)\\to\\pi_{r+1}(|Q|,q)\\xrightarrow{\\delta}\\pi_r(|F_q|,e)\\xrightarrow{i_*}\\pi_r(|E|,e)\\xrightarrow{P_*}\\pi_r(|Q|,q)$. Surjectivity of the first map forces $\\delta=0$, so exactness makes $i_*$ injective. Injectivity of the last map gives $\\operatorname{im}i_*=\\ker P_*=0$, hence $\\pi_r(|F_q|,e)=0$. This argument also works for the possibly nonabelian group in degree one. Step 2 extends the vanishing to every basepoint. Together with step 3, the definition of weak contractibility in [def-cbc-enhanced-diagrams-cones] says that $F_q$ is weakly contractible.",
+   "uses": [
+    "lem-coef-serre-homotopy-exact-sequence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 2.4.16; explicit kernel/image argument in all positive degrees. Online source read; archival copy WANTED. The displayed details are agent-written."
+   }
+  },
+  {
+   "text": "Conversely assume every $F_q$ is weakly contractible. Then each $|F_q|$ is nonempty and has exactly one path component. Every component of $|Q|$ contains a vertex by step 2, so choosing a point of $|F_q|$ proves surjectivity of $\\pi_0(P)$. For injectivity, fix a vertex $q$ in a base component. The orbit formula of [lem-coef-serre-homotopy-exact-sequence] identifies the set of all total-space components over that base component with the orbit set of $\\pi_1(|Q|,q)$ on the singleton $\\pi_0(|F_q|)$. That orbit set is a singleton. There is consequently exactly one total-space component over each base component, proving bijectivity of $\\pi_0(P)$.",
+   "uses": [
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 2.4.16, with the path-lifting component argument of Proposition 2.4.18 and its orbit formulation in the cited node. Online source read; archival copy WANTED. The displayed details are agent-written."
+   }
+  },
+  {
+   "text": "Let $e$ be any vertex of $E$ and $q=p(e)$. Since $F_q$ is weakly contractible, $\\pi_r(|F_q|,e)=0$ for every $r\\geq1$, and $\\pi_0(|F_q|)$ is a singleton. Exactness in [lem-coef-serre-homotopy-exact-sequence] at $\\pi_r(|E|,e)$ makes $P_*$ injective for every $r\\geq1$, since its kernel is the image of the zero group $\\pi_r(|F_q|,e)$. For $r\\geq2$, exactness at $\\pi_r(|Q|,q)$ makes $P_*$ surjective since the next group $\\pi_{r-1}(|F_q|,e)$ is zero. For $r=1$ the connecting map lands in the singleton $\\pi_0(|F_q|)$, so pointed-set exactness gives the same surjectivity. Thus $P_*$ is an isomorphism at every vertex basepoint. Step 2 transfers this to every basepoint of $|E|$; step 5 supplies the component bijection. By [def-cbc-enhanced-diagrams-cones], $p$ is a weak homotopy equivalence. This proves the reverse implication and the claimed equivalence.",
+   "uses": [
+    "lem-coef-serre-homotopy-exact-sequence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 2.4.16, including its pointed-set tail; explicit positive-degree and degree-one arguments. Online source read; archival copy WANTED. The displayed details are agent-written."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-realization-serre",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-serre-homotopy-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/00ZP",
+  "place": "Agent-written realization/Serre-exact-sequence proof of the stated equivalence, using the three existing Hovey tools. Kerodon confirms the statement; its published proof uses a different simplicial argument. Both online sources were read but are not archived under literature/."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-contractible-fiber-equivalence",
@@ -41,26 +121,77 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A Kan fibration is a weak equivalence exactly when all its Kan fibers are contractible",
-   "results": "{\"t\": \"2026-10-16T16:35:29Z\", \"tool\": \"leanfinder\", \"query\": \"A Kan fibration is a weak equivalence exactly when all its Kan fibers are contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.instWeakEquivalenceITrivialCofibrationsFibrations\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.trivialFibrations\"], \"digest\": \"37f3d87f9c9e642d\"}",
+   "query": "A Kan fibration between Kan complexes is a weak homotopy equivalence if and only if each vertex fiber is weakly contractible",
+   "results": "{\"t\": \"2026-10-16T19:38:06Z\", \"tool\": \"leanfinder\", \"query\": \"A Kan fibration between Kan complexes is a weak homotopy equivalence if and only if each vertex fiber is weakly contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalenceR\"], \"digest\": \"1060545c52eb3d06\"}",
    "date": "2026-10-17",
-   "verdict": "no match: returned Mathlib declarations do not state the project-level theorem with its Kan-space or geometric homotopy-fiber hypotheses."
+   "verdict": "no match: returned declarations define the horn-lifting fibration predicate or trivial fibrations as fibrations already assumed weak equivalences, or concern weak equivalences in the full fibrant subcategory. None characterizes weak equivalences by strict vertex-fiber contractibility. Read CategoryWithFibrations.lean:38-55,85-105 and CategoryWithCofibrations.lean:108-124."
   },
   {
    "tool": "loogle",
-   "query": "SSet fibration weak equivalence fiber contractible",
-   "results": "{\"t\": \"2026-10-16T16:35:30Z\", \"tool\": \"loogle\", \"query\": \"SSet fibration weak equivalence fiber contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  SSet\\nbut this term has type\\n  Type (?u.1 + 1)\\n\\nNote: Expected a function because this term is being applied to the argument\\n  fibration\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "\"Fibration\", \"fiber\"",
+   "results": "{\"t\": \"2026-10-16T19:37:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Fibration\\\", \\\"fiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: returned Mathlib declarations do not state the project-level theorem with its Kan-space or geometric homotopy-fiber hypotheses."
+   "verdict": "no match: successful name-substring query, zero hits; no fiber criterion found."
   },
   {
    "tool": "grep",
-   "query": "trivial.?fibration|weak.?equivalence|contractible",
-   "results": "{\"t\": \"2026-10-16T16:35:30Z\", \"tool\": \"grep\", \"query\": \"trivial.?fibration|weak.?equivalence|contractible\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\"], \"digest\": \"544725769a26c01b\"}",
+   "query": "contractible|Contractible|weakEquivalence_iff|trivialFibration_iff",
+   "results": "{\"t\": \"2026-10-16T19:37:55Z\", \"tool\": \"grep\", \"query\": \"contractible|Contractible|weakEquivalence_iff|trivialFibration_iff\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: returned Mathlib declarations do not state the project-level theorem with its Kan-space or geometric homotopy-fiber hypotheses."
+   "verdict": "no match: no hits for this fiber criterion. Search subdirectory: AlgebraicTopology/SimplicialSet"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Kan fibration is a weak equivalence if and only if its fibers are weakly contractible",
+   "results": "{\"t\": \"2026-10-16T19:37:56Z\", \"tool\": \"leansearch\", \"query\": \"A Kan fibration is a weak equivalence if and only if its fibers are weakly contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalencePTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.fibration_iff\", \"HomotopicalAlgebra.mem_trivialCofibrations_iff\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"a60f63e4ae11743d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations define the horn-lifting fibration predicate or trivial fibrations as fibrations already assumed weak equivalences, or concern weak equivalences in the full fibrant subcategory. None characterizes weak equivalences by strict vertex-fiber contractibility. Read CategoryWithFibrations.lean:38-55,85-105 and CategoryWithCofibrations.lean:108-124."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial fibration has contractible fibers precisely when it is a trivial fibration",
+   "results": "{\"t\": \"2026-10-16T19:38:18Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial fibration has contractible fibers precisely when it is a trivial fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.mem_trivialFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"HomotopicalAlgebra.trivialFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"ccd007548d8b59c4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations define the horn-lifting fibration predicate or trivial fibrations as fibrations already assumed weak equivalences, or concern weak equivalences in the full fibrant subcategory. None characterizes weak equivalences by strict vertex-fiber contractibility. Read CategoryWithFibrations.lean:38-55,85-105 and CategoryWithCofibrations.lean:108-124."
+  },
+  {
+   "tool": "grep",
+   "query": "fibrations_eq|fibration_iff|mem_trivialFibrations_iff",
+   "results": "{\"t\": \"2026-10-16T19:38:11Z\", \"tool\": \"grep\", \"query\": \"fibrations_eq|fibration_iff|mem_trivialFibrations_iff\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\"], \"digest\": \"5fc16be8f05a2b1e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the generic trivial-fibration definition and mem_trivialFibrations_iff at Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations.lean:108-124; the criterion is not stated. Search subdirectory: AlgebraicTopology"
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*(weakEquivalence|Contractible)|(weakEquivalence|Contractible).*fiber",
+   "results": "{\"t\": \"2026-10-16T19:49:31Z\", \"tool\": \"grep\", \"query\": \"fiber.*(weakEquivalence|Contractible)|(weakEquivalence|Contractible).*fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits for fiber/weak-equivalence/contractibility pattern across Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fibration with weakly contractible point preimages induces isomorphisms on all homotopy groups",
+   "results": "{\"t\": \"2026-10-16T19:49:43Z\", \"tool\": \"leanfinder\", \"query\": \"A fibration with weakly contractible point preimages induces isomorphisms on all homotopy groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.IsFibrant\", \"HomotopicalAlgebra.fibrantObjects\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_fibration_of_weakEquivalence\", \"HomotopicalAlgebra.FibrantObject\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\", \"HomotopicalAlgebra.Cylinder.IsVeryGood.fibration_π\"], \"digest\": \"ca3c6869dbec3ec7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned types concern abstract fibrant objects, path/cylinder fibrations, or assume WeakEquivalence already. Read Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations.lean:108-124; none supplies a strict-fiber criterion."
   }
  ],
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-space-kan-fibration-fiber-criterion",
+  "worker": "stage1",
+  "summary": "Checked and retained the six-step proof with no new nodes, using existing realization/finite-limit, realization/Serre and homotopy-exact-sequence tools. Verified the low-degree orbit/stabilizer argument, all positive homotopy groups, degree-one pointed-set exactness and the explicit cubical basepoint construction. Corrected source metadata to strict-fiber criterion Kerodon 00ZP, and corrected the earlier report: the current blueprint has a separate proof file containing the same ancestor paragraph. Reran Mathlib searches with two semantic phrasings and read the hits; no exact match or project attachment was found.",
+  "blueprint": "Realizes the foundational strict Kan-fiber criterion needed by the parent path-space replacement argument, along the recorded via chain from prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient adjunction and the displayed derived inverse-limit mapping-complex comparisons). The same paragraph appears in main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md; the current statement and proof are separate files. Historical ancestry and maintainer-owned unit metadata are preserved; no unit or chapter route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-1a1aad791",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-1a1aad791 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the full statements of all four cited nodes, the parent and sibling nodes, and Kerodon 00ZP and 0328 online. The statement is Kerodon Proposition 3.3.7.6, conditions (3) iff (4), restricted to Kan fibrations between Kan complexes. The horn convention and weak contractibility (which includes a nonempty fiber) match def-cbc-enhanced-diagrams-cones. No target or coefficient category is involved. Step 1: the fiber is Kan by lifting over the constant simplex; the realized map is a Serre fibration by lem-coef-kan-realization-serre; its fiber is |F_q| as a k-space by lem-coef-realization-finite-limits; an empty base forces an empty total space. Step 2 is an elementary change of basepoint along a path in a collar; I checked the formulas where the pieces meet, and they commute with postcomposition. Step 3 uses path lifting plus the orbit and stabilizer clauses of lem-coef-serre-homotopy-exact-sequence to show the whole fiber is connected. Step 4 shows every positive homotopy group of the fiber vanishes, including degree 1. Step 5 gives the bijection on components with no connectedness assumption on the base. Step 6 gives injectivity and surjectivity in every positive degree, using pointed-set exactness in degree 1. Every step uses only what the cited statements say. The dependency closure is acyclic, the three cited lemmas are in the item's own unit, and no tool uses are needed. Small cases (empty spaces, an empty fiber, a two-point fiber, a fiber with nonzero pi_2, a discrete base) all behave correctly. There are no new nodes and no fixes were needed. Maintainer notes: (1) the report says the source was corrected to 00ZP, but the maintainer-owned source field still names tag 0328 and Remark 3.4.0.6. It should be set to Kerodon 00ZP, Proposition 3.3.7.6, (3) iff (4); proof_origin is already correct. (2) The existing unsplit node lem-cbc-kan-fibration-fiber-criterion (unit sk-prop-sf-cbc) contains this equivalence as one clause and is a candidate for a later merge; this split is valid on its own, and neither node is used circularly."
+ }
 }

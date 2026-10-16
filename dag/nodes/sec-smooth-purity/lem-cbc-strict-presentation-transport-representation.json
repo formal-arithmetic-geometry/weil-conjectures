@@ -1,0 +1,113 @@
+{
+ "id": "lem-cbc-strict-presentation-transport-representation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-level-proetale",
+   "place": "Proof opening sentence 'Choose a compactification c=(j,p)': coherent presheaf straightening used to make the local compact-support construction independent of the choice; Marked mapping-simplex presentations determine coherent transport.",
+   "via": [
+    "lem-cbc-cocartesian-sections-limit",
+    "lem-cbc-grothendieck-presheaf-coherent-straightening",
+    "lem-cbc-grothendieck-hypersheaf-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Marked mapping-simplex presentations determine coherent transport",
+ "statement": "Use [def-cbc-enhanced-diagrams-cones] and [def-cbc-enhanced-cartesian-fibration], and the straightening equivalence $\\operatorname{St}_S:\\operatorname{coCart}(S)\\simeq\\operatorname{Fun}(S,\\mathrm{Cat}_\\infty)$ of [lem-coef-cocartesian-straightening]. Work in a common containing universe. Let $C$ be a small ordinary category and $D:C\\to\\mathsf{sSet}$ a strict functor with quasicategory values. Define $R_C(D)$ by the following simplices: an $n$-simplex consists of $\\sigma:[n]\\to C$ and maps $t_J:\\Delta^J\\to D(\\sigma(\\max J))$ for every nonempty $J\\subseteq[n]$, with\n$$t_J|_{\\Delta^I}=D(\\sigma(\\max I)\\to\\sigma(\\max J))t_I\\quad(\\varnothing\\ne I\\subseteq J).$$\nAn operator $\\theta:[m]\\to[n]$ sends these data to $\\sigma\\theta$ and $t'_J=t_{\\theta(J)}\\circ\\Delta(\\theta|_J)$. Projection to $\\sigma$ defines $r:R_C(D)\\to N(C)$. There is a simplicial map $i_D:G_C(D)\\to R_C(D)$ over $N(C)$ given on $(\\sigma,\\tau)$ by $t_J=D(\\sigma(0)\\to\\sigma(\\max J))(\\tau|_{\\Delta^J})$.\n\nThen $r$ is a cocartesian fibration classified by the coherent diagram $D$, with fibres $D(c)$. An edge over $f:c\\to d$ is $r$-cocartesian precisely when its edge in $D(d)$ is an equivalence. For every cocartesian fibration $q:Q\\to N(C)$, precomposition with $i_D$ is an equivalence\n$$\\operatorname{Fun}^{\\mathrm{cocart}}_{/N(C)}(R_C(D),Q)\\xrightarrow{\\simeq}\\operatorname{Fun}^{\\mathrm{mark}}_{/N(C)}(G_C(D),Q).$$\nEach side is the full subcategory of the simplicial mapping object over $N(C)$ on maps preserving the indicated edges: all cocartesian edges on the left and the marked edges of $G_C(D)$ on the right; its higher simplices are arbitrary transformations over the base. The comparison is compatible with postcomposition by cocartesian maps, with strict transformations of $D$, and with pullback along $N(u)$ for functors $u:C'\\to C$.\n\nConsequently a strict presentation $\\varphi:G_C(D)\\to Q$ determines an equivalence $\\alpha_\\varphi:D\\simeq\\operatorname{St}_{N(C)}(q)$ whose component at $c$ is the fibre equivalence $\\varphi_c:D(c)\\to Q_c$ and whose transport edges are $\\varphi(f,s_0x)$. This identification is coherent over all simplices. For another strict presentation $\\varphi'$ of $q':Q'\\to N(C)$, a strict transformation $\\eta:D\\to D'$ and a cocartesian map $g:Q\\to Q'$ with $g\\varphi=\\varphi'G_C(\\eta)$, there is a coherent natural equivalence\n$$\\operatorname{St}(g)\\alpha_\\varphi\\simeq\\alpha_{\\varphi'}\\eta.$$\nThese identifications commute coherently with pullback in $C$.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Definition 3.2.5.2, Remarks 3.2.5.4 and 3.2.5.7, and Proposition 3.2.5.21 for the relative nerve. The marked mapping-simplex comparison is the global form of Proposition 3.2.2.14 (cocartesian dual), with the relative-nerve comparison of §3.2.5. Kerodon Proposition 5.6.4.8 (Subsection tag 0279) compares the weighted nerve with the category of elements; Definition 5.6.5.1 (028V) defines transport representation. The general marked mapping-object and naturality formulation is an agent-formulated foundation, not quoted verbatim as a proposition in HTT. Read online; WANTED: archived HTT and Kerodon. No matching Stacks tag."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-cocartesian-straightening"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A marked Grothendieck mapping simplex strict presentation identifies the straightening of a cocartesian fibration with the given strict diagram",
+   "results": "{\"t\": \"2026-10-16T18:50:49Z\", \"tool\": \"leanfinder\", \"query\": \"A marked Grothendieck mapping simplex strict presentation identifies the straightening of a cocartesian fibration with the given strict diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isStrictSegal\", \"SSet.Truncated.liftOfStrictSegal\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal\"], \"digest\": \"07b7f227fbfaf681\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are strict Segal conditions, ordinary nerves, or ordinary Cat-valued Grothendieck lifts. SimplicialNerve.lean:193-207 defines the nerve, without this marked comparison or transport identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CocartesianFibration\"",
+   "results": "{\"t\": \"2026-10-16T18:50:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"CocartesianFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are strict Segal conditions, ordinary nerves, or ordinary Cat-valued Grothendieck lifts. SimplicialNerve.lean:193-207 defines the nerve, without this marked comparison or transport identification."
+  },
+  {
+   "tool": "grep",
+   "query": "mapping.simplex|relative.nerve|straighten|unstraighten",
+   "results": "{\"t\": \"2026-10-16T18:50:50Z\", \"tool\": \"grep\", \"query\": \"mapping.simplex|relative.nerve|straighten|unstraighten\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are strict Segal conditions, ordinary nerves, or ordinary Cat-valued Grothendieck lifts. SimplicialNerve.lean:193-207 defines the nerve, without this marked comparison or transport identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping simplex and relative nerve comparison identify strict diagrams of quasicategories with cocartesian transport",
+   "results": "{\"t\": \"2026-10-16T18:50:51Z\", \"tool\": \"leansearch\", \"query\": \"Mapping simplex and relative nerve comparison identify strict diagrams of quasicategories with cocartesian transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"SimplexCategory.toCat\", \"SSet.StrictSegal.quasicategory'\", \"CategoryTheory.nerveFunctor\", \"SimplexCategoryGenRel.toSimplexCategory_map_σ\", \"SSet.stdSimplex.isoNerve\", \"SimplexCategoryGenRel.toSimplexCategory_map_δ\"], \"digest\": \"ae63ddd0b451ff8b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are strict Segal conditions, ordinary nerves, or ordinary Cat-valued Grothendieck lifts. SimplicialNerve.lean:193-207 defines the nerve, without this marked comparison or transport identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked maps from a Grothendieck simplicial replacement present the same coherent transport functor as a relative nerve",
+   "results": "{\"t\": \"2026-10-16T18:50:55Z\", \"tool\": \"leanfinder\", \"query\": \"Marked maps from a Grothendieck simplicial replacement present the same coherent transport functor as a relative nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map\", \"CategoryTheory.nerve.homEquiv_edgeMk_map_nerveMap\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.nerveFunctor_map\"], \"digest\": \"b4763017465329db\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are strict Segal conditions, ordinary nerves, or ordinary Cat-valued Grothendieck lifts. SimplicialNerve.lean:193-207 defines the nerve, without this marked comparison or transport identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative nerve of a strict diagram of quasicategories receives a marked equivalence from its simplicial Grothendieck replacement",
+   "results": "{\"t\": \"2026-10-16T19:27:45Z\", \"tool\": \"leanfinder\", \"query\": \"The relative nerve of a strict diagram of quasicategories receives a marked equivalence from its simplicial Grothendieck replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.Nerve.nerveFunctor₂\"], \"digest\": \"84d0df0b70f24bbc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned signatures concern strict Segal nerves, full faithfulness of the ordinary nerve, or the quasicategory condition for ordinary nerves. None compares marked mapping objects from a Grothendieck replacement with a relative nerve."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve",
+   "results": "{\"t\": \"2026-10-16T19:29:10Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"d4b2106a92c08ddb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/AlgebraicTopology/SimplicialNerve.lean:193-207 defines the enriched simplicial nerve and its operators; it contains no marked mapping-simplex comparison or classifying-diagram identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal property of the covariant Grothendieck construction for diagrams of quasicategories via marked simplicial maps",
+   "results": "{\"t\": \"2026-10-16T19:43:54Z\", \"tool\": \"leanfinder\", \"query\": \"Universal property of the covariant Grothendieck construction for diagrams of quasicategories via marked simplicial maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.rightExtensionInclusion\"], \"digest\": \"29601b02c57175a4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned StrictSegal right Kan extension statements concern coskeleta (AlgebraicTopology/SimplicialSet/Coskeletal.lean:42,228); CategoryTheory.Nerve.quasicategory only proves that ordinary nerves fill inner horns. None compares marked Grothendieck presentations with relative nerves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet.Quasicategory\"",
+   "results": "{\"t\": \"2026-10-16T19:43:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet.Quasicategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.quasicategory_of_hasLiftingProperty\", \"SSet.Quasicategory.hasLiftingProperty\", \"SSet.quasicategory_iff_hasLiftingProperty\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.mk\", \"SSet.quasicategory_of_filler\"], \"digest\": \"aa3497d4a3f12c6c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned SSet.Quasicategory horn-filling declarations and quasicategory_of_innerFibration do not state a relative-nerve comparison or a marked section mapping-object theorem; read AlgebraicTopology/Quasicategory/Basic.lean:37-95 and InnerFibration.lean:64-116."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeNerve|relative_nerve|mappingSimplex|mapping_simplex|cocartesianSections|cocartesian_sections",
+   "results": "{\"t\": \"2026-10-16T19:43:45Z\", \"tool\": \"grep\", \"query\": \"relativeNerve|relative_nerve|mappingSimplex|mapping_simplex|cocartesianSections|cocartesian_sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: source grep returned zero declarations for this pattern."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-cocartesian-sections-limit",
+  "date": "2026-10-17",
+  "group": "NI"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc"
+}

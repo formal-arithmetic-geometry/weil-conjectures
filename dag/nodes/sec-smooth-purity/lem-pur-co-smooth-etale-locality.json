@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pur-co-smooth-etale-locality",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Source-etale locality, without derived descent",
@@ -13,64 +13,271 @@
   "place": "node lem-pur-co-smooth-etale-locality, order 1994"
  },
  "stmt_deps": [
-  "def-pur-conventions"
+  "def-pur-conventions",
+  "def-pur-co-smoothness",
+  "def-weil-etale-morphism",
+  "def-weil-scheme-morphism-properties"
  ],
  "proof": [
   {
-   "text": "Use the source cover and geometric points of [def-weil-scheme-morphism-properties]. The evaluation and inverse tensor object below are the ones supplied by [def-weil-derived-pullback-tensor-hom], [def-weil-derived-tensor].\nStep 1: etale maps. For an etale $u$, the etale normalization\n$Ru^!\\simeq Lu^*$ of [def-weil-exceptional-inverse-image] is\nnatural and preserved by arbitrary base change, so all three conditions\nof [def-pur-co-smoothness] are immediate\n($\\omega_u\\simeq\\Lambda$, $\\theta_{u,K}$ is the identity, and\nthe base-change map is the canonical one).",
+   "text": "Work at the finite coefficient stage $A=\\Lambda=A_{E,n}$ specified by [def-pur-conventions] and [def-pur-co-smoothness]; the other coefficient stages are separate transports, not additional claims of this lemma. The fixed setting means that $f:X\\to Y$ is separated of finite type between finite-type $k$-schemes; the source-cover assertion assumes $X,U$ separated, but neither $Y$ nor the schemes introduced by arbitrary base change are assumed separated over $k$. Their Noetherian property follows from [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. Nagata [thm-nagata-compactification] supplies compactifications. The functors used are the constructible transported adjoints, not unrestricted pro-etale right adjoints: [def-weil-exceptional-inverse-image] defines $Rf^!=\\nu_X^*f^\\times R\\nu_{Y,*}$. Every bounded constructible object has an etale origin by [lem-sf-proetale-constructible-origin], and [thm-weil-pbc-site-comparison] identifies $R\\nu_*\\nu^*$ with the identity. Compact supports on these origins are identified by [lem-sf-class-compact-support-comparison]. Choose a finite nonnegative dimension bound for each compactification by [lem-kun-dimension-finite-type]: its proper ambient scheme is finite type over the finite-type field-base target. Then [thm-sf-ambient-adjoint-class](2),(3) supplies the actual transported adjunction, with its units, counits and compactification comparisons. For an etale source restriction $u:U\\to X$, comparison pullback commutes with restriction by the following indexing calculation in [def-weil-pbc-site-comparison-morphism]. Fix a pro-etale test object $W\\to U$. Replace any pair $(E\\to X,W\\to E)$ in the inverse-image indexing category over X by $(E\\times_X U\\to U,W\\to E\\times_X U)$, using the given map $W\\to U$. The product projection gives its comparison with the original pair. Conversely an etale object over U is etale over X, and its graph over U gives the comparison with its own product replacement. The projection and graph identities show that these operations induce inverse maps on the two colimits; the constructions commute with arrows of W and of E. Covering families and matching conditions in the slice are the same as those over U, so their sheafifications agree as well. Thus $u^*\\nu_X^*\\cong\\nu_U^*u_{\\mathrm{et}}^*$ naturally, including on morphisms, and exactness gives this comparison termwise on derived categories. Hence the ordinary etale calculations apply to the specified constructible functors and maps, rather than just to isomorphic objects. Finite-level pullback is exact and termwise by [def-weil-derived-pullback-tensor-hom]. On an etale source map it is restriction to the slice, with the same constant coefficient ring, by [lem-weil-proetale-weakly-etale-localization]. Tensor commutes with these pullbacks, including the comparison pullback $\\nu^*$, by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Finally [cor-pur-general-admissibility-datum] puts $Rf^!K$ and $\\omega_f$ in $D^b_{ctf}$ for $K$ in that category; these objects exist before any locality argument. The remaining typing is supplied by [lem-sf-pullback-tor-amplitude] (exact pullback preserves bounded constructibility and finite Tor amplitude) and [lem-sf-tensor-ctf](ii) (tensor of two such inputs stays in this category). Both apply to all the separated finite-type maps and finite coefficient rings used here. The inverse projection arrows below exist by [lem-weil-finite-compact-projection-formula]: its source object is bounded constructible and the target coefficient object K has finite Tor amplitude, and the preceding argument supplies the etale-origin witnesses. Their etale representatives are bounded constructible by [lem-sf-proetale-constructible-origin](ii); [lem-sf-comparison-tor-amplitude](ii) gives the required finite Tor amplitude of the representative of K. Thus the representative hypotheses of the projection theorem are verified, not inferred from full faithfulness alone. Likewise [thm-cbc-finite-level-proetale] makes the specified compact-support exchange invertible on these witnessed bounded objects for arbitrary base change, so the inverses in the definition of beta exist. These are theorems about the actual transformations, not consequences of their definitions. For an arbitrary change-of-base morphism $a:T_1\\to T_2$ between finite-type $k$-schemes, constructible pullback does not require separatedness of $a$: pull back a finite stratification using [lemma-constructible-pullback-stratification], and pull back its local constant descriptions using [lemma-constructible-pullback-constant]. The etale trivializing covers pull back to covers by [lem-weil-pbc-etale-covering-base-change], so the pulled-back strata still have locally constant finite stalks. Exact pullback preserves the cohomological interval. For finite Tor amplitude, choose a bounded flat model in its Tor interval by [lem-sf-flat-model]; [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] makes its termwise pullback flat, with the same degrees, and [lem-sf-flat-model] gives the same Tor interval. Thus all arbitrary pullbacks used below have the required bounded constructible finite-Tor typing, including when their maps are not separated.",
    "uses": [
-    "def-weil-scheme-morphism-properties",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-derived-tensor",
+    "def-pur-conventions",
+    "def-pur-co-smoothness",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification",
     "def-weil-exceptional-inverse-image",
-    "def-pur-co-smoothness"
+    "lem-sf-proetale-constructible-origin",
+    "thm-weil-pbc-site-comparison",
+    "lem-sf-class-compact-support-comparison",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "cor-pur-general-admissibility-datum",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-weil-finite-compact-projection-formula",
+    "thm-cbc-finite-level-proetale",
+    "lem-kun-dimension-finite-type",
+    "thm-sf-ambient-adjoint-class",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-sf-comparison-tor-amplitude",
+    "lemma-constructible-pullback-stratification",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-sf-flat-model"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Opening conventions; Step 1 and Step 2: domains of the existing objects"
+   }
   },
   {
-   "text": "Step 2: the dualizing object. Compose exceptional inverse images\n(the [def-weil-exceptional-inverse-image] composition rule) to\nobtain an isomorphism of already existing global objects\n\n$$\nLu^*\\omega_f=Ru^!Rf^!\\Lambda_Y\n\\simeq R(fu)^!\\Lambda_Y=\\omega_{fu}.\n$$",
+   "text": "For a separated finite-type etale $e:V\\to T$ in the fixed setting of Step 1, use the canonical proper-support comparison $c_e:Re_!\\xrightarrow{\\sim}S_e=D(e_{\\Sigma!})$ from [lem-sfb-quasifinite-compact-support-exact]. This theorem applies over the finite ring A to these Noetherian schemes; it explicitly includes every separated finite-type etale map. It supplies exactness and identification for arbitrary compactifications. In particular, for a sheaf M, $H^q(Rr_*j_!M)=0$ for $q>0$, since its comparison target is the sheaf $e_{\\Sigma!}M$ in degree zero. Exactness of $r_*$ on arbitrary sheaves is not asserted. The graph and derived-functor normalization, and the equalities for the two actual transformations, are [lem-pur-etale-support-map-compatibility](1),(2). Thus the compact-support exchange C_e is carried to the degreewise inverse b_e of the specified Stacks 03S6 comparison [def-weil-pbc-etale-shriek-base-change-map], and the compact-support projection is carried to the sum-extension map $p^\\Sigma_e$. These are cited equalities of derived maps; they are not inferred from an abstract adjoint isomorphism or from equality on stalks.\n\nBy [lem-amb-etale-adjoint-locality], $S_e\\dashv e^*$ is the exact sum/evaluation adjunction. Transfer that adjunction along c_e. Its right adjoint is e*, so the existing compact-support right adjoint $e^\\times$ is identified with e* by the unique comparison preserving this transferred adjunction. Explicitly, the natural Hom bijections are $\\operatorname{Hom}(Re_!P,K)\\cong\\operatorname{Hom}(S_eP,K)\\cong\\operatorname{Hom}(P,e^*K)$, where the first sends a to $a c_e(P)^{-1}$. Their counit is consequently $\\varepsilon^\\Sigma_K c_e(e^*K)$, with $\\varepsilon^\\Sigma$ the sum of evaluations. This fixes the normalization without taking the unspecified isomorphism of [lem-amb-etale-adjoint-locality] at $f=1$. In the transported coordinates of Step 1 it gives $Re^!\\cong e^*$ and $\\omega_e\\cong A_V$.\n\nFor the specified tensor map of [def-pur-co-smoothness], substitute (2) of [lem-pur-etale-support-map-compatibility] and this counit formula into its defining transpose. At a lift s the inverse projection takes $(s,m\\otimes e^*k)$ to $(s,m)\\otimes k$, and the counit evaluates that summand. At $m\\in A$ the result is multiplication by m on the corresponding restriction of K. It is the transpose under $S_e\\dashv e^*$ of the unit isomorphism $e^*K\\otimes A_V\\cong e^*K$. Hence $\\theta_{e,K}$ is this isomorphism.\n\nFor base change write $h:V'\\to V$, $e':V'\\to T'$ and $g:T'\\to T$. Under (1) of the new compatibility lemma the actual exchange is b_e. Its inverse satisfies the following equality, with the pullback-composition isomorphism $\\chi:h^*e^*\\cong e'^*g^*$ inserted:\n$$g^*\\varepsilon^\\Sigma_K\\circ b_e(e^*K)^{-1}=\\varepsilon^{\\Sigma,e'}_{g^*K}\\circ S_{e'}(\\chi_K).\\tag{E}$$\nIndeed the definition [def-weil-pbc-etale-shriek-base-change-map] makes the inverse-direction comparison the conjugate of restriction/direct-image exchange; composing its Hom bijections at an arrow $S_eP\\to K$ says exactly that evaluation after base change is evaluation at the pulled-back lift. Both sides of (E) are that counit, degreewise for the exact sum adjunction and hence on the derived categories. The defining transpose of beta is the left side at $K=A_T$, so beta is the unit identification $h^*A_V\\cong A_{V'}$. The unit is tensor-invertible with itself as inverse. These calculations prove all three etale conditions of [def-pur-co-smoothness] for every allowed base change. For the pro-etale tensor map, the realization clause of [lem-weil-finite-compact-projection-formula] identifies the ordinary etale transformation with the finite constant-coefficient composite of [def-exchange-projection]: its ordinary transformation is explicitly the counit-defined proper projection followed by the canonical open tensor map, exactly $P^c_e$ in the new lemma. This uses the bounded constructible representatives and finite-Tor target verified in Step 1. For beta, [thm-cbc-finite-level-proetale] identifies the specified transported exchange on the same etale-origin witnesses. Finally [thm-sf-ambient-adjoint-class](2),(3) transports the Hom bijections with their counits and compactification comparisons. Applying those bijections to the two displayed transposes therefore gives the specified pro-etale theta and beta, including the identities just proved.",
    "uses": [
-    "def-weil-exceptional-inverse-image"
+    "lem-sfb-quasifinite-compact-support-exact",
+    "lem-pur-etale-support-map-compatibility",
+    "lem-amb-etale-adjoint-locality",
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "def-pur-co-smoothness",
+    "lem-weil-finite-compact-projection-formula",
+    "def-exchange-projection",
+    "thm-cbc-finite-level-proetale",
+    "thm-sf-ambient-adjoint-class"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F4Y, 0GKM (exact proper-support/sum normalization), 0GKF, 0GL5 (projection), 0F7L and etale-cohomology.tex 03S6 (exchange); main-20261015 locality proof Step 1, with adjunction transposes written here"
+   }
   },
   {
-   "text": "Tensor-invertibility is etale local: pull the evaluation map\n\n$$\n\\omega_f\\otimes^L\\Lambda_X\\operatorname{RHom}(\\omega_f,\\Lambda_X)\\to\\Lambda_X\n$$\n\nback to $U$; it becomes an isomorphism because $\\omega_{fu}$ is\ninvertible, its cone is bounded constructible with zero geometric\nstalks, hence zero ([def-weil-derived-cohomology-sheaves]).",
+   "text": "For an etale $u:U\\to X$, not yet assumed surjective, construct the source-restriction comparison using exactly $c_u:Ru_!\\cong S_u$ and its sum/evaluation adjunction fixed in Step 2. Take $K\\in D^b_{ctf}(Y,A)$ at its ordinary etale representative and arbitrary $P\\in D^+(U_{\\mathrm{et}},A)$ in the following natural chain, using the exact etale adjunction and [lem-amb-etale-compact-comparisons]:\n$$\\operatorname{Hom}(P,u^*f^\\times K)\\cong\\operatorname{Hom}(u_!P,f^\\times K)\\cong\\operatorname{Hom}(Rf_!u_!P,K)\\cong\\operatorname{Hom}(R(fu)_!P,K)\\cong\\operatorname{Hom}(P,(fu)^\\times K).$$\nExact sum extension preserves the lower bound of P, so every use of [lem-amb-etale-compact-comparisons] is on its stated bounded-below domain. The two representing objects are bounded below by Step 1; thus testing all such P suffices, including P equal to either representing object. The representing isomorphism is canonical: for a natural bijection $\\Phi_P:\\operatorname{Hom}(P,M)\\to\\operatorname{Hom}(P,N)$, the arrow $\\Phi_M(1_M)$ and the arrow from the inverse bijection are inverse by naturality. Under compact-support composition its counit is therefore exactly the composite $\\varepsilon_f\\circ Rf_!(\\varepsilon_u)$; it is not inferred by comparing stalks. Transfer as in Step 1 and denote this comparison by $\\rho_K:Lu^*Rf^!K\\xrightarrow{\\sim}R(fu)^!K$. At the unit obtain\n$$\\rho_A:Lu^*\\omega_f\\xrightarrow{\\sim}\\omega_{fu}.$$\nThe same construction applies after every base change. In the pro-etale coordinates the compact-support composition comparison is [thm-sf-comp-composition], so the counit formula is in the coordinates of the specified functors.",
    "uses": [
-    "def-weil-derived-cohomology-sheaves"
+    "lem-amb-etale-adjoint-locality",
+    "lem-amb-etale-compact-comparisons",
+    "thm-sf-comp-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 2: canonical source restriction and dualizing comparison"
+   }
   },
   {
-   "text": "Step 3: the canonical map. Pulling $\\theta_{f,K}$ back to $U$\nand using the isomorphism of Step 2 gives $\\theta_{fu,K}$ (both are\nwritten from the adjunction counit, and the counits for the ordinary\ncomposite $fu$ are transitive); its cone is therefore zero after\npullback to the surjective etale cover, hence zero by the same stalk\nargument (equivalently, by [lem-pur-etale-iso-descent]).",
+   "text": "Compare the actual tensor maps, rather than merely their source and target objects. Use the transpose definitions of $\\theta$ in [def-pur-co-smoothness] and the counit-defined projection transformation [def-exchange-projection]. Expand the composite counit of Step 3. After the pullback/tensor identifications the equality is\n$$\\rho_K\\circ Lu^*(\\theta_{f,K})=\\theta_{fu,K}\\circ(1\\otimes\\rho_A).\\tag{T}$$\nHere is the mate calculation: the transpose on either side is the composite\n$$Rf_!u_!\\bigl(u^*Lf^*K\\otimes u^*\\omega_f\\bigr)\n \\cong Rf_!\\bigl(Lf^*K\\otimes u_!u^*\\omega_f\\bigr)\n \\longrightarrow Rf_!\\bigl(Lf^*K\\otimes\\omega_f\\bigr)\n \\xrightarrow{\\operatorname{PF}^{-1}}K\\otimes Rf_!\\omega_f\n \\xrightarrow{1\\otimes\\varepsilon_{f,A}}K.$$\nThe middle arrow is $1\\otimes\\varepsilon_u$. For the left side use the two successive adjunction bijections; for the right side use their composite and $\\varepsilon_{fu}=\\varepsilon_f Rf_!\\varepsilon_u$. The needed normalization of $\\operatorname{PF}_u$ is exactly (2) of [lem-pur-etale-support-map-compatibility], applied to the same c_u used in Step 3. For $Q\\in D^b_{ctf}(X,A)$ and $H\\in D^b_{ctf}(X,A)$ the resulting sum-adjunction identity, with tensor symmetries inserted, is\n$$(1_H\\otimes\\varepsilon^\\Sigma_Q)\\circ(p^\\Sigma_{u,u^*Q,H})^{-1}=\\varepsilon^\\Sigma_{H\\otimes Q},$$\nwhere $p^\\Sigma$ is written with the tensor symmetry $u_!u^*Q\\otimes H\\cong H\\otimes u_!u^*Q$ inserted, and its domain is $u_!(u^*H\\otimes u^*Q)$. On the lift s both sides send $h_s\\otimes q_s$ to their evaluation on s; this is a degreewise identity for the exact sum adjunction on tensor representatives. The new lemma identifies this p^Sigma with the specified compactification projection in the derived category. Thus this calculation applies to the actual PF_u and counit, including the composite counit of Step 3. In the displayed common transpose use $H=Lf^*K$, $Q=\\omega_f$. The missing composition compatibility for the specified projection maps is supplied by [fix-prop-projection-formula], not by their definition alone. Explicitly, under the compact-support composition comparison, for a bounded constructible input Q on U and K of finite Tor amplitude on Y it states\n$$\\operatorname{PF}_{fu,Q,K}=Rf_!(\\operatorname{PF}_{u,Q,Lf^*K})\\circ\\operatorname{PF}_{f,u_!Q,K}.$$\nApply this at $Q=u^*\\omega_f$, which belongs to $D^b_{ctf}$ by Step 1. The intermediate input $u_!Q$ is bounded constructible by [thm-sf-ctf-stability](iv), applied to u with $Ru_!\\cong u_!$ from Step 2; thus the composition assertion is used within its stated constructible domain. Naturality of $\\operatorname{PF}_{f,-,K}$ for the counit $u_!u^*\\omega_f\\to\\omega_f$ identifies the two orders of the middle arrow and the inverse projection arrows. Substituting the displayed composition formula, their inverses, and the composite counit therefore gives exactly the displayed common transpose. [lem-weil-pbc-mate-pasting](2) identifies the iterated transpose with the composite-adjunction transpose, and (3) permits the canonical functor comparisons. This proves (T) as equality of natural transformations. Now suppose $u$ surjective and $fu$ cohomologically smooth. Its tensor map is an isomorphism, so (T) makes $Lu^*\\theta_{f,K}$ an isomorphism. Its source and target are bounded constructible by Step 1, in particular the pullback and tensor preservation theorems cited there. Apply [lem-pur-etale-iso-descent] to conclude that $\\theta_{f,K}$ is an isomorphism for every $K\\in D^b_{ctf}(Y,A)$.",
    "uses": [
+    "def-pur-co-smoothness",
+    "def-exchange-projection",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-etale-iso-descent",
+    "fix-prop-projection-formula",
+    "thm-sf-ctf-stability",
+    "lem-pur-etale-support-map-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 3: the canonical tensor map; explicit transposes"
+   }
+  },
+  {
+   "text": "Construct the inverse as a global object already defined on $X$:\n$$M=\\omega_f,\\qquad M^\\vee=R\\mathcal Hom_A(M,A_X),\\qquad \\mathrm{ev}:M\\otimes_A^L M^\\vee\\to A_X.$$\nHere the tensor-Hom adjunction is obtained by applying the global Hom formula [lem-pur-rhom-global-sections] to the currying isomorphism in [lem-weil-pbc-ringed-internal-hom-exact-restriction]:\n$$\\operatorname{Hom}(T,R\\mathcal Hom(M,A_X))\\cong\\operatorname{Hom}(T\\otimes^LM,A_X).$$\nThis defines evaluation as the transpose of the identity. Choose a finite dimension bound for $X$ by [lem-kun-dimension-finite-type]. Since $M,A_X\\in D^b_{ctf}$, [cor-weil-finite-constructible-hom] puts $M^\\vee$ in $D^b_{ctf}$, and the tensor preservation theorem in Step 1 puts its source in that category too, so the evaluation is a morphism of bounded constructible complexes. For restriction to $U$, apply the slice-site identification [lem-weil-proetale-weakly-etale-localization] and the RHom restriction isomorphism [lem-weil-pbc-ringed-internal-hom-exact-restriction] (Stacks 08JB). The tensor-pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] makes $Lu^*\\mathrm{ev}$ the evaluation for $Lu^*M$: this follows directly by restricting the tensor-Hom adjunction identity defining evaluation. By Step 3, $Lu^*M\\cong\\omega_{fu}$, which is tensor-invertible by the hypothesis and [def-pur-co-smoothness](1). For an invertible object $L$ with inverse $N$, the functors $-\\otimes L$ and $-\\otimes N$ are inverse equivalences by associativity and the two given inverse isomorphisms. The tensor-Hom adjunction identifies $R\\mathcal Hom(L,-)$ with this inverse functor: the bijection is obtained by tensoring an arrow with $N$ and inserting $N\\otimes L\\cong A$. Its counit, in particular evaluation at $A$, is therefore an isomorphism. Thus $Lu^*\\mathrm{ev}$ is an isomorphism. By [lem-pur-etale-iso-descent], so is $\\mathrm{ev}$. Composing with tensor symmetry gives $M^\\vee\\otimes M\\cong A_X$ as well. This proves tensor-invertibility of $\\omega_f$, with an inverse in the required category, without descending an object.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-kun-dimension-finite-type",
+    "cor-weil-finite-constructible-hom",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pur-co-smoothness",
     "lem-pur-etale-iso-descent"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 2: evaluation and its bounded constructible inverse; Stacks 08J9, 08JA, 08JB"
+   }
   },
   {
-   "text": "Step 4: base change. Fix an arbitrary base change $Y'\\to Y$ and\npull the base-change comparison for $\\omega_f$ back to\n$U'=U\\times_XX'$. Exceptional composition identifies it with the\nbase-change comparison for $\\omega_{fu}$, an isomorphism by\nhypothesis; its cone has zero geometric stalks. This proves all three\nconditions without descending an object or a morphism in a derived\ncategory.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $Y'$ be any finite-type $k$-scheme and let $g:Y'\\to Y$ be any $k$-morphism, with $k,A,f:X\\to Y,u:U\\to X$ as introduced in Step 1 and the lemma statement, and write $X'=X\\times_Y Y'$, $h:X'\\to X$, $f':X'\\to Y'$, $U'=U\\times_X X'$, $u':U'\\to X'$, and $h_U:U'\\to U$. The map $u'$ is surjective etale by [lem-weil-pbc-etale-covering-base-change] applied to the singleton cover; the vertical maps remain separated finite type by [lem-pod-separated-finite-type-base-change], and all corners are finite type over $k$ by composition with the structure maps. No separatedness of $Y$ or $Y'$ over $k$ is imposed. Let $\\rho'_A:Lu'^*\\omega_{f'}\\cong\\omega_{f'u'}$ be Step 3 on this square. With pullback composition inserted, the canonical mate identity is\n$$\\rho'_A\\circ Lu'^*\\beta_{f,g}\n =\\beta_{fu,g}\\circ Lh_U^*\\rho_A.\\tag{B}$$\nTo check it, use exactly the transpose defining $\\beta$ in [def-pur-co-smoothness]. Write $C_f=\\operatorname{Ex}_{!,f}$ and $C_u=\\operatorname{Ex}_{!,u}$. The compact-support comparison for the pasted square of $fu$ is\n$$C_{fu}=(Rf'_!C_u)\\circ(C_f\\,Ru_!)$$\nunder composition isomorphisms; this is the compatibility of the specified ordinary-etale compact-support exchange with composition in [lem-amb-unbounded-compact-support-comparisons]. That theorem allows arbitrary changes of base between Noetherian schemes, with no separatedness assumption on $g$; all corners are Noetherian by Step 1. Its exchange is explicitly the proper-exchange/open-extension map, so it is the map transported in Step 1, not an independently chosen isomorphism. Its inverse therefore applies $Rf'_!C_u^{-1}$ first and $C_f^{-1}$ second. Substitute this order and the counit formula $\\varepsilon_{fu}=\\varepsilon_f Rf_!\\varepsilon_u$ from Step 3 into the transpose of $\\beta_{fu,g}$. By [lem-pur-etale-support-map-compatibility](1), C_u is the specified sum-extension comparison b_u under c_u and c_u'. Equation (E) of Step 2 therefore gives, for $Q=\\omega_f$, the typed equality\n$$Lh^*\\varepsilon^u_Q\\circ C_u(u^*Q)^{-1}=\\varepsilon^{u'}_{Lh^*Q}\\circ u'_!(\\chi_Q),$$\nwhere $\\chi_Q:Lh_U^*Lu^*Q\\cong Lu'^*Lh^*Q$ is pullback composition and the two sides have domain $u'_!Lh_U^*Lu^*Q$ and codomain $Lh^*Q$. Here $\\varepsilon^u:u_!u^*\\to1$ is the sum counit carried to Ru_! by c_u, and similarly for u'. Whisker this equality by Rf'_!, and move the u counit through C_f^{-1} by naturality of C_f. This replaces the u part of the expanded transpose by the u' counit and precisely the comparison chi_Q. What remains is the transpose $Lg^*\\varepsilon_{f,A}\\circ C_f^{-1}$ of $\\beta_{f,g}$, restricted to $U'$, followed by the adjunction comparison $\\rho'_A$. Formally these substitutions are [lem-weil-pbc-mate-pasting](2),(3); its composite-counit formula fixes the order of the two counits. This proves (B) in the derived category, without testing equality of derived arrows on stalks. Since $fu$ is cohomologically smooth, $\\beta_{fu,g}$ is an isomorphism. Thus (B) makes $Lu'^*\\beta_{f,g}$ an isomorphism. Both sides of $\\beta_{f,g}$ are bounded constructible by Step 1 applied to $f'$ and by exact constructible pullback. The singleton $u'$ is a pro-etale cover, so clause (1) of [lem-cbc-proetale-stalk-conservative] implies that $\\beta_{f,g}$ is an isomorphism. This criterion applies without separatedness of $X'$ or $U'$.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-etale-support-map-compatibility",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-cbc-proetale-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 4: arbitrary base change; inverse exchange order and composite counit"
+   }
+  },
+  {
+   "text": "Steps 5, 4 and 6 give, respectively, conditions (1), (2) and (3) of [def-pur-co-smoothness] for $f$. Step 2 gives the same three conditions for every etale morphism in the setting and identifies its dualizing object with $\\Lambda$. This proves both clauses. If $X$ is empty, then $U$ is empty and the module category on $X$ is the zero category, whose zero object is also its tensor unit, so the inverse/evaluation argument still applies. If $U$ is empty and surjective then $X$ is empty. No nonempty geometric point, connectedness, common shift of the invertible object, smoothness of $f$, or orientation has been imposed.",
+   "uses": [
+    "def-pur-co-smoothness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Conclusion: the three defining conditions and the empty case"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-scheme-morphism-properties",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-derived-tensor",
-  "def-weil-exceptional-inverse-image",
+  "def-pur-conventions",
   "def-pur-co-smoothness",
-  "def-weil-derived-cohomology-sheaves",
-  "lem-pur-etale-iso-descent"
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "def-weil-exceptional-inverse-image",
+  "lem-sf-proetale-constructible-origin",
+  "thm-weil-pbc-site-comparison",
+  "lem-sf-class-compact-support-comparison",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "cor-pur-general-admissibility-datum",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-weil-finite-compact-projection-formula",
+  "thm-cbc-finite-level-proetale",
+  "lem-kun-dimension-finite-type",
+  "thm-sf-ambient-adjoint-class",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-sf-comparison-tor-amplitude",
+  "lemma-constructible-pullback-stratification",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-sf-flat-model",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-amb-etale-adjoint-locality",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-exchange-projection",
+  "lem-amb-etale-compact-comparisons",
+  "thm-sf-comp-composition",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-etale-iso-descent",
+  "fix-prop-projection-formula",
+  "thm-sf-ctf-stability",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "cor-weil-finite-constructible-hom",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-cbc-proetale-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+  "place": "Steps 1–4, expanded with the canonical adjunction-mate calculations and Stacks ringed-site restriction results"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomologically smooth morphism is local for surjective etale covers and etale morphisms have trivial dualizing complex",
+   "results": "AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.isSmooth_iff; AlgebraicGeometry.isSmoothOfRelativeDimension_iff; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.of_comp; RingHom.etale_iff_formallyUnramified_and_smooth; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-16",
+   "verdict": "no match: geometric smoothness, etale algebra and differential identities do not state exceptional inverse-image locality"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso _ → cohomologically smooth, etale dualizingComplex",
+   "results": "No hits; loogle: Unknown identifier `IsIso`",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier IsIso; replaced by the later quoted-name search"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologically smooth|dualizingComplex.*etale|rightDerivedUpperShriek.*upperStar",
+   "results": "No hits; subdirectory Mathlib",
+   "date": "2026-10-16",
+   "verdict": "no match: geometric smoothness, etale algebra and differential identities do not state exceptional inverse-image locality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomological smoothness is etale local,",
+   "results": "RingHom.Smooth.propertyIsLocal; RingHom.Etale.propertyIsLocal; RingHom.Smooth.holdsForLocalizationAway; RingHom.FormallySmooth.holdsForLocalizationAway; RingHom.smooth_iff_locally_isStandardSmooth; RingHom.Etale.ofLocalizationSpan; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-16",
+   "verdict": "no match: geometric smoothness, etale algebra and differential identities do not state exceptional inverse-image locality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dualizing object tensor formula exceptional inverse image descends along an etale surjective morphism",
+   "results": "Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd",
+   "date": "2026-10-16",
+   "verdict": "no match: geometric smoothness, etale algebra and differential identities do not state exceptional inverse-image locality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: geometric smoothness, etale algebra and differential identities do not state exceptional inverse-image locality"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologically.?smooth|dualizingComplex|rightDerivedUpperShriek",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: geometric smoothness, etale algebra and differential identities do not state exceptional inverse-image locality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exceptional inverse image and trivial relative dualizing object for etale morphisms",
+   "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.instIsSmooth; Algebra.FormallyEtale.subsingleton_kaehlerDifferential; RingHom.Etale; AlgebraicGeometry.Scheme.Hom.inv_image; Algebra.FormallyEtale.iff_unramified_and_smooth; Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero",
+   "date": "2026-10-16",
+   "verdict": "no match: geometric smoothness, etale algebra and differential identities do not state exceptional inverse-image locality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exceptional pullback cohomological smoothness tensor invertible dualizing sheaf etale descent",
+   "results": "AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern geometric smoothness, with no exceptional pullback or specified canonical locality maps"
+  },
+  {
+   "tool": "grep",
+   "query": "CohomologicallySmooth|cohomologicalSmooth|exceptionalPullback|dualizingObject",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration returned"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"etale\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration returned"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -99,5 +306,184 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-cohsm"
+ "unit": "sk-prop-cohsm",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-co-smooth-etale-locality",
+  "worker": "stage1",
+  "summary": "Repaired the returned split: replaced abstract etale normalization by the reviewed Stacks proper-support/exact comparison and one statement-only frontier identifying its actual derived exchange and counit-defined projection maps with sum-extension maps. Wrote the evaluation/projection identity and the base-change counit identity used in Steps 4 and 6. All other accepted steps and the statement are retained; no SGA normalization or smooth-purity theorem is invoked. Independent second reading also derives the separated finite-type hypotheses of arbitrary base-change arrows before applying exchange pasting. The independent second reading removes an unstated separatedness assumption on targets and arbitrary changes of base, using existing general preservation, exchange-composition and covering-conservativity statements; no statement is weakened. The final repair reading states the higher-direct-image vanishing as a consequence of the exact comparison and explicitly identifies the ordinary and pro-etale projection, exchange and counit maps by the corresponding theorem clauses. The graph formula is specified on presheaf summands before sheafification. The second reader writes the product/graph indexing calculation for comparison pullback and etale restriction, replacing the incorrect assertion that the indexing categories are literally identical.",
+  "blueprint": "Current main-20261015 lemma proof: Step 1 is realized by proof steps 1–2, Step 2 by steps 3 and 5, Step 3 by step 4, Step 4 by step 6; step 7 assembles the conclusion. Unit sk-prop-cohsm source-etale-locality steps are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Invertibility of the actual finite-coefficient compact-support projection transformation whose inverse defines theta. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Invertibility of the actual witnessed pro-etale exchange whose inverse defines beta. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Bounded constructible finite-Tor typing of all pullbacks; the definition of pullback alone does not imply preservation. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Bounded constructible finite-Tor typing of the tensor-map source and evaluation source. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherian typing of the finite-type field-base schemes for the ordinary etale adjoints. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Existence of compactifications needed by source restriction; this is generic geometry, not a purity route. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Provides ordinary etale representatives of the given finite constructible objects. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Full faithfulness lets the ordinary etale adjunction identifications realize the specified transported functors. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Identifies compact support at the same compactification in the two sites. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies etale-source inverse image with ringed-site slice restriction. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Monoidality of the derived pullback used on the evaluation and the canonical tensor map. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Exact etale adjunction and its canonical ordinary exceptional-source restriction comparison. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Compact-support composition needed to write the natural Hom chain and the composite counit. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Composition in the pro-etale coordinates of the specified finite functors. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "General adjunction algebra for the two canonical-map equalities, not a replacement of source locality. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Global Hom formula, used with internal currying to recover the tensor-Hom adjunction. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Stacks 08J9/08JB: currying and slice restriction of derived internal Hom. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Supplies the finite dimension bound required by the existing RHom preservation theorem. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "cor-weil-finite-constructible-hom",
+    "why": "Finite-Tor bounded constructibility of the candidate global inverse RHom(M,A). The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Preserves the surjective etale singleton cover after the arbitrary base change. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Typing of fibre-product corners and arrows within the fixed setting. The unit has no statement giving this general tool."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "The actual bounded-below adjunction, its counits and canonical compactification comparisons for the specified pro-etale functors. The unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Finite Tor amplitude of the etale representative is a separate theorem needed by the finite projection theorem. The unit has no replacement for this general tool."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Composition compatibility of the specified projection transformation, used with naturality to compare the two tensor-map transposes. The unit has no replacement for this general tool."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Clause (iv) supplies bounded constructibility of u_!Q needed in the projection-composition formula for the tensor-map comparison. This is a preservation tool; no purity conclusion is taken from it."
+   },
+   {
+    "node": "lem-sfb-quasifinite-compact-support-exact",
+    "why": "Stacks 0F4Y/0GKM canonical identification and exactness of etale compact supports on every chosen compactification; the locality unit does not construct this generic normalization."
+   },
+   {
+    "node": "cor-pur-general-admissibility-datum",
+    "why": "Constructible exceptional preservation for general finite-type schemes, without separatedness of the target; the narrower summary cannot be used for an arbitrary target."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Pullback of finite constructible stratifications for arbitrary morphisms, used to avoid an unstated separatedness hypothesis on changes of base."
+   },
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Pullback of locally constant finite coefficient descriptions on strata for arbitrary morphisms."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Bounded flat models let arbitrary exact constant-coefficient inverse image preserve a Tor interval."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Pasting of the actual ordinary-etale compactification exchanges under arbitrary base change, including nonseparated changes of base; its statement fixes the proper/open normalization."
+   },
+   {
+    "node": "lem-cbc-proetale-stalk-conservative",
+    "why": "Covering-family detection of isomorphisms without separatedness of the base-changed source; applied to the singleton surjective etale cover."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-finite-compact-projection-formula",
+  "thm-cbc-finite-level-proetale",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "lem-sf-proetale-constructible-origin",
+  "thm-weil-pbc-site-comparison",
+  "lem-sf-class-compact-support-comparison",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "thm-sf-comp-composition",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-kun-dimension-finite-type",
+  "cor-weil-finite-constructible-hom",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "thm-sf-ambient-adjoint-class",
+  "lem-sf-comparison-tor-amplitude",
+  "fix-prop-projection-formula",
+  "thm-sf-ctf-stability",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "cor-pur-general-admissibility-datum",
+  "lemma-constructible-pullback-stratification",
+  "lemma-constructible-pullback-constant",
+  "lem-sf-flat-model",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-cbc-proetale-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N9-a7da96105",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-a7da96105 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the one new node and every cited statement in full. The item statement matches main-20261015 lem-pur-co-smooth-etale-locality word for word, at finite A_{E,n} pro-etale D^b_ctf, with no hypothesis added (Y and Y' only finite type). Route: blueprint Steps 1-4 are carried by delivery Steps 2, 3+5, 4 and 6. Descent is by lem-pur-etale-iso-descent where X is separated and by lem-cbc-proetale-stalk-conservative(1) on the singleton cover for a non-separated X'. No SGA source is used. Checks: c_e from lem-sfb (Stacks 0GKM/0F4Y, read at more-etale.tex l.3622 and l.200) holds for every compactification. Equation (E) has the right types and direction: b_e is the inverse of the 03S6 map e'_Σ! h^{-1} -> g^{-1} e_Σ!. P^c is the same composite as PF^c in def-exchange-projection and as the realization clause of lem-weil-finite-compact-projection-formula. The PF composition is taken from fix-prop-projection-formula, and u_!Q is in D^b_ctf by thm-sf-ctf-stability(iv) since U and X are separated. The exchange pasting is stated in lem-amb-unbounded-compact-support-comparisons (sk-prop-an, a unit sk-prop-cohsm cites) for arbitrary base change. M^dual is in D^b_ctf by cor-weil-finite-constructible-hom. The new node lem-pur-etale-support-map-compatibility is true, non-elementary and statement-only, and the node says it is an agent formulation of Stacks 0F7L/0GKF/0GL5/03S6/0F4L. Its graph section is clopen in \\bar V x_T W. I tested it on e=id, an open immersion with compactification (e,id), finite etale with (id,e), and V empty. It is strictly below the item. Its clause (1) overlaps the SGA-sourced lem-asd-etale-compact-support-normalization, but clause (2), the projection, is in no existing node, and the Stacks c fits the no-SGA lock, so it is not a duplicate. The 32 declared tool_uses are generic black boxes and I accept them all. No fixes."
+ }
 }

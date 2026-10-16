@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-cbc-finite-level-proetale",
-   "place": "Opening compactification choice; interpret cocartesian sections of the presheaf relative exponential as the coherent compatible fibre systems.",
+   "place": "Proof opening 'Choose a compactification c=(j,p)': cocartesian-section/limit foundation of the coherent presheaf straightening used for the local compact-support construction.",
    "via": [
     "lem-cbc-grothendieck-presheaf-coherent-straightening",
     "lem-cbc-grothendieck-hypersheaf-sections"
@@ -23,9 +23,104 @@
   "def-cbc-enhanced-cartesian-fibration",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=N(C)$. Apply [lem-cbc-strict-presentation-transport-representation] to $D,q,\\varphi$. It supplies the coherent equivalence $\\alpha:D\\simeq\\operatorname{St}_S(q)$, with components $\\varphi_c$ and represented lifts $\\varphi(f,s_0x)$. Write $\\beta$ for its inverse. The marked comparison applies to $G_C(D)$ without an inner-fibration hypothesis: it extends the given marked presentation along the map to the relative nerve and identifies the resulting coherent transport with $D$.",
+   "uses": [
+    "lem-cbc-strict-presentation-transport-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; strict presentation to coherent transport (HTT §§3.2.2 and 3.2.5; Kerodon 0279 and 028V)."
+   }
+  },
+  {
+   "text": "Choose a universe $\\mathcal U$ in which $S,Q$ and every $D(c)$ are small, and form $\\mathrm{Cat}_{\\infty,\\mathcal U}$ and $\\operatorname{coCart}_{\\mathcal U}(S)$ in a further containing universe. By [lem-cbc-cocartesian-section-currying], $L=\\Gamma_{\\mathrm{cocart}}(S,Q)$ is a $\\mathcal U$-small quasicategory (its simplices are families of maps between $\\mathcal U$-small simplicial sets) and its evaluation $e:S\\times L\\to Q$ is a cocartesian map. Straightening [lem-coef-cocartesian-straightening] takes $e$ to a coherent transformation $\\Delta_S L\\to\\operatorname{St}_S(q)$, because the source product is classified by $\\Delta_S L$. Compose with $\\beta$ to obtain a cone $\\lambda:\\Delta_S L\\to D$. Its component at $c$ evaluates a section at $c$ and uses the inverse of $\\varphi_c$. Thus the candidate limiting cone is the one in the statement, rather than an unspecified equivalence of its apex.",
+   "uses": [
+    "lem-cbc-cocartesian-section-currying",
+    "lem-coef-cocartesian-straightening",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; section evaluation, straightening, and the coherent cone definition."
+   }
+  },
+  {
+   "text": "For every $\\mathcal U$-small testing quasicategory $A$, the coherent-nerve mapping-space comparison [lem-coef-coherent-nerve-comparison], the section currying theorem [lem-cbc-cocartesian-section-currying], and the fully faithful straightening equivalence [lem-coef-cocartesian-straightening] give\n$$\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(A,L)\\simeq\\operatorname{Fun}(A,L)^\\simeq\\simeq\\operatorname{Map}_{\\operatorname{coCart}(S)}(S\\times A,Q)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(S,\\mathrm{Cat}_\\infty)}(\\Delta_S A,\\operatorname{St}_S(q))\\simeq\\operatorname{Map}_{\\operatorname{Fun}(S,\\mathrm{Cat}_\\infty)}(\\Delta_S A,D).$$\nThe last map postcomposes with $\\beta$. An $a:A\\to L$ is sent to the currying of $e\\circ(\\mathrm{id}_S\\times a)$, hence to $\\lambda\\circ\\Delta_S(a)$ on the entire mapping space, by the evaluation and naturality clauses of the two theorems. This is precisely the cone-induced map, and every displayed comparison is an equivalence of spaces. The limiting-cone criterion in [lem-cbc-enhanced-functor-cone-calculus], applied in $\\mathrm{Cat}_\\infty$, therefore proves that $\\lambda$ is a limiting cone. The straightening theorem is applied with the fixed $\\mathcal U$ just chosen: $S,Q,S\\times A$ are $\\mathcal U$-small, and $L$ is $\\mathcal U$-small by the section formula. All mapping spaces are formed in a larger universe. Enlarging $\\mathcal U$ first accommodates any given $Q$ in the containing universe, so no requirement that $Q$ be small in the original fibre universe is added. No completeness, presentability, or Kan-fibre hypothesis is used.",
+   "uses": [
+    "lem-cbc-cocartesian-section-currying",
+    "lem-coef-cocartesian-straightening",
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; mapping-space proof of the section-limit theorem, compare Kerodon 05RX/02TK, using existing straightening and cone calculus."
+   }
+  },
+  {
+   "text": "The coherent cone $\\lambda$ retains the required compatible systems. Its components are fibre evaluations through $\\beta_c$, and its edge over $f:c\\to d$ is an equivalence $D(f)(x_c)\\simeq x_d$: naturality in $\\mathrm{Cat}_\\infty$ means a natural equivalence between the two evaluation functors. By the transport clause of [lem-cbc-strict-presentation-transport-representation], this is the comparison between $s(f)$ and $\\varphi(f,s_0x_c)$, with the chosen fibre equivalences inserted. Its simplices over every string of arrows supply all higher compatibilities. In [def-cbc-enhanced-diagrams-cones], the functor category and coherent cone keep exactly these transformations and higher simplices. By [lem-cbc-cocartesian-section-currying] the category $L$ contains arbitrary transformations between its section objects, not just equivalences. Thus the limit is the stated enhanced category of systems with arbitrary coherent morphisms. The functor-equivalence clause of [lem-cbc-enhanced-functor-cone-calculus] gives equivalences on every mapping space.",
+   "uses": [
+    "lem-cbc-strict-presentation-transport-representation",
+    "lem-cbc-cocartesian-section-currying",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; identify the specific fibre evaluations, transport comparisons, morphisms and higher data."
+   }
+  },
+  {
+   "text": "For $u:C'\\to C$, the simplex formula [def-cbc-enhanced-cartesian-fibration] gives a canonical identification $G_{C'}(Du)=N(u)^*G_C(D)$: in degree $n$ both sides are a string $\\sigma:[n]\\to C'$ and $\\tau\\in D(u\\sigma(0))_n$, and their operators and markings coincide. Hence the pulled-back map $\\varphi_u$ preserves marked edges and has fibre map $\\varphi_{u(c')}$; it is a strict presentation. The pullback clause of [lem-coef-cocartesian-straightening] and that of [lem-cbc-strict-presentation-transport-representation] identify its transport comparison with the restriction of $\\alpha$. For a family of sections $h:S\\times A\\times\\Delta^n\\to Q$, restriction is $h\\circ(N(u)\\times\\mathrm{id}_A\\times\\mathrm{id}_{\\Delta^n})$, paired with the projection into $N(u)^*Q$. The restriction clause of [lem-cbc-cocartesian-section-currying] therefore identifies its cone with $\\lambda$ restricted along $N(u)$, in every parameter degree. In the mapping-space calculation of step 3, the square with left side section restriction and right side restriction $\\operatorname{Map}(\\Delta_S A,D)\\to\\operatorname{Map}(\\Delta_{N(C')} A,Du)$ commutes. The cone criterion [lem-cbc-enhanced-functor-cone-calculus] characterizes the map of limits by this very square; this proves the pullback naturality clause.",
+   "uses": [
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-coef-cocartesian-straightening",
+    "lem-cbc-strict-presentation-transport-representation",
+    "lem-cbc-cocartesian-section-currying",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; pullback formula and its explicit square on parameterized section maps."
+   }
+  },
+  {
+   "text": "For $(g,\\eta)$ as in the statement, let $\\alpha',\\beta'$ be the corresponding transport comparisons for $q'$. The compatibility clause of [lem-cbc-strict-presentation-transport-representation] turns $g\\varphi=\\varphi'G_C(\\eta)$ into $\\operatorname{St}(g)\\alpha\\simeq\\alpha'\\eta$, hence $\\beta'\\operatorname{St}(g)\\simeq\\eta\\beta$. Postcomposition sends a family $h:S\\times A\\times\\Delta^n\\to Q$ to $g\\circ h$. The postcomposition clause of [lem-cbc-cocartesian-section-currying] says this is the map $g_*:L\\to L'$ and commutes with evaluation. Straightening is a functor [lem-coef-cocartesian-straightening], so the resulting transformation of the rightmost term of step 3 is exactly $t\\mapsto\\eta\\circ t$, using the displayed comparison between $\\beta'\\operatorname{St}(g)$ and $\\eta\\beta$. Thus the cone of $g_*$ is coherently $\\eta\\lambda$, which by the cone criterion [lem-cbc-enhanced-functor-cone-calculus] is the map of limits induced by $\\eta$. For every $\\theta:[m]\\to[n]$, $g\\circ(h\\circ(\\mathrm{id}_{S\\times A}\\times\\Delta\\theta))=(g\\circ h)\\circ(\\mathrm{id}_{S\\times A}\\times\\Delta\\theta)$; this degreewise identity, together with the coherent comparison for $\\alpha$, verifies the claimed naturality on higher simplices, rather than only on objects.",
+   "uses": [
+    "lem-cbc-strict-presentation-transport-representation",
+    "lem-cbc-cocartesian-section-currying",
+    "lem-coef-cocartesian-straightening",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; explicit represented-map naturality square, including every transformation parameter."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-cartesian-fibration",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-cocartesian-section-currying",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-strict-presentation-transport-representation",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-coherent-nerve-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Opening compactification choice, categorical foundation. Agent reconstruction using existing coherent straightening and cone calculus; HTT and Kerodon read online, not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -89,10 +184,38 @@
    "results": "{\"t\": \"2026-10-16T16:34:44Z\", \"tool\": \"leanfinder\", \"query\": \"A dependent simplicial internal hom over a base has covariant functor-category transport by precomposition with contravariant lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialObject.whiskering\", \"AlgebraicTopology.DoldKan.MorphComponents.preComp\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.eHomFunctor\", \"CategoryTheory.Functor.ihom_map\", \"CategoryTheory.Functor.homObjFunctor\"], \"digest\": \"098abacdcb67eeb4\"}",
    "date": "2026-10-16",
    "verdict": "no full match: SSet.InnerFibration at AlgebraicTopology/Quasicategory/InnerFibration.lean:64-70 is only the inner-horn clause, not cocartesian sections or relative exponentials. SimplicialCategory.sHom and sHomFunctor at AlgebraicTopology/SimplicialCategory/Basic.lean:58,70 give ordinary enriched Hom objects, not the parametrized fibration theorem. Types.limitEquivSections at CategoryTheory/Limits/Types/Limits.lean:197 is a bijection of sets for ordinary Type-valued diagrams, not the limit of a quasicategory-valued coherent diagram."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocartesian sections compute the limit of a homotopy coherent quasicategory valued diagram",
+   "results": "{\"t\": \"2026-10-16T18:53:13Z\", \"tool\": \"leanfinder\", \"query\": \"Cocartesian sections compute the limit of a homotopy coherent quasicategory valued diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasLimits\", \"SSet.Quasicategory.hornFilling\", \"CategoryTheory.Functor.IsCocartesian.map\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.CostructuredArrow.CreatesConnected.isLimitRaiseCone\"], \"digest\": \"1fc452aba74d5ec9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Type-valued limits, ordinary Cat limits, ordinary cocartesian maps and simplicial-set limits do not state this quasicategory theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Limits.Types.limitEquivSections\"",
+   "results": "{\"t\": \"2026-10-16T18:53:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryTheory.Limits.Types.limitEquivSections\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.limitEquivSections\", \"CategoryTheory.Limits.Types.limitEquivSections_apply\", \"CategoryTheory.Limits.Types.limitEquivSections_symm_apply\"], \"digest\": \"8e3bc2eb8b5e9502\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Type-valued limits, ordinary Cat limits, ordinary cocartesian maps and simplicial-set limits do not state this quasicategory theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "limitEquivSections|cocartesian.*section|section.*quasicategory",
+   "results": "{\"t\": \"2026-10-16T18:53:14Z\", \"tool\": \"grep\", \"query\": \"limitEquivSections|cocartesian.*section|section.*quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/MonCat/Limits.lean\", \"Mathlib/Algebra/Category/MonCat/Limits.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\"], \"digest\": \"3081426ead46c046\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Type-valued limits, ordinary Cat limits, ordinary cocartesian maps and simplicial-set limits do not state this quasicategory theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinity category limit of a diagram of categories as cocartesian sections with naturality",
+   "results": "{\"t\": \"2026-10-16T18:53:15Z\", \"tool\": \"leansearch\", \"query\": \"Infinity category limit of a diagram of categories as cocartesian sections with naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Cat.HasLimits.limitCone\", \"CategoryTheory.Cat.HasLimits.limitConeIsLimit\", \"CategoryTheory.Limits.Types.limitCone\", \"CategoryTheory.Limits.Types.limitEquivSections_apply\", \"CategoryTheory.Limits.Types.limNatIsoSectionsFunctor\", \"CategoryTheory.Limits.Types.limitEquivSections\", \"CategoryTheory.Limits.compCoyonedaSectionsEquiv\", \"MonCat.HasLimits.limitCone\"], \"digest\": \"0acac100700d969c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Type-valued limits, ordinary Cat limits, ordinary cocartesian maps and simplicial-set limits do not state this quasicategory theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-grothendieck-presheaf-coherent-straightening",
@@ -100,5 +223,34 @@
   "group": "NW"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-cocartesian-sections-limit",
+  "worker": "stage1",
+  "summary": "Repaired the false identification of the marked mapping-simplex construction with the weighted nerve. Two smaller unsplit foundations state the marked relative-nerve comparison and the section mapping-space/currying theorem. The item itself constructs the evaluation cone, proves its limiting universal property by existing general straightening and cone calculus, identifies the structural equivalences, and computes both naturality squares in every simplicial parameter. Statement and all hypotheses retained.",
+  "blueprint": "Realizes the opening compactification choice in thm-cbc-finite-level-proetale, through the coherent presheaf straightening and local-support extension ancestry; this is a categorical tool below that unit, not a change to its compact-support route.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-cocartesian-straightening",
+    "why": "Generic fully faithful classification of cocartesian fibrations, including pullback and mapping spaces; this unit has section and relative-exponential nodes but no general classification theorem."
+   },
+   {
+    "node": "lem-coef-coherent-nerve-comparison",
+    "why": "Generic enriched mapping-space comparison identifies maps in the coherent-nerve model of Cat_infinity with cores of internal functor quasicategories, preserving composition; no theorem of this unit supplies that model comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-coherent-nerve-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NI-a4c5a5eb1",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-a4c5a5eb1 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, all seven cited statements, the citer's steps 7-9 and the unit, chapter and ancestor records. HTT and Kerodon are not in the local literature, so the cited places (HTT 3.1.3, 3.2.2.7, 3.2.5.2/18/21, 3.3.3.1; Kerodon 05RX/02TK) were checked from my own knowledge of those texts; the report's WANTED lines stand. New node lem-cbc-strict-presentation-transport-representation: R_C(D) is HTT's relative nerve, and I hand-checked the operator formula, the well-definedness and simpliciality of i_D, and that marked edges go to cocartesian edges. The global marked equivalence follows from 3.2.2.7 applied over each simplex plus a colimit over simplices. Tested with C=[0] (i_D=id) and C=[1], D(0)=pt, D(1)=Delta^1 (Lambda^2_1 into Delta^2 is inner anodyne). It generalizes the Kan-valued lem-coef-kan-relative-nerve-left-fibration and is not a duplicate. New node lem-cbc-cocartesian-section-currying: L_q is a quasicategory as a full subcategory of the fibre of an inner fibration. The currying is in fact an isomorphism, and the two cocartesian conditions agree via h(e,g)=h(e,id)h(id,g). The core equals the coCart(S) mapping space by HTT 3.1.3. Tested with A empty, S empty and S a point. Neither node restates a clause of the item (no sections or limits in A, no limit in B), and both pass B1-B7 and C5. Item steps: step 3's chain of mapping-space equivalences sends a to lambda composed with Delta_S(a) (via straightening's pullback naturality), so the cone criterion of lem-cbc-enhanced-functor-cone-calculus applies verbatim. Step 5's identity G_{C'}(Du)=N(u)^*G_C(D) checks degreewise. In step 6, beta'St(g) ~ eta beta gives lambda'Delta(g_*) ~ eta lambda. The universe enlargement adds no hypothesis. The empty, [0] and [1] cases of the statement check out, and morphisms stay non-invertible. There is no cycle, proof_deps equals the union of uses, and there is no SGA. I accept both declared tool uses: lem-coef-cocartesian-straightening and lem-coef-coherent-nerve-comparison, both generic black boxes from sk-prop-sf-biduality-general; the unit has no steps, so this is infrastructure below the ancestor's opening and not a route change. No fixes."
+ }
 }

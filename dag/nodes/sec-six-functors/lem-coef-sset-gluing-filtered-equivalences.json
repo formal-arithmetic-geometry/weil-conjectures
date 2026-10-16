@@ -27,11 +27,113 @@
   "place": "Lemma 5.2.6 (cube lemma), printed pp. 126-127, specialized to simplicial sets; filtered-colimit assertion: HTT Section A.2.7, Kan-model discussion following Example A.2.7.3 and Proposition A.2.6.15, condition (1), with Definition A.2.6.12(3); also used explicitly in HTT Proposition 2.2.2.7. No Stacks tag states these simplicial homotopy assertions."
  },
  "stmt_deps": [
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $J$ have three objects $c,a,b$ and only the two nonidentity arrows $a\\to c$ and $a\\to b$. Give them degrees $0,1,2$, respectively; let $J^-$ contain $a\\to c$ and $J^+$ contain $a\\to b$, together with all identities. Every arrow has the required unique inverse-then-direct factorization, so the Reedy-model theorem applies. The latching objects of a span $D=(C\\leftarrow A\\to B)$ are $L_cD=L_aD=\\varnothing$ and $L_bD=A$; the matching objects are $M_cD=M_bD=*$ and $M_aD=C$. In Kan–Quillen simplicial sets every object is cofibrant: its initial map from $\\varnothing$ is degreewise injective. Thus the Reedy cofibrancy conditions on $D$ are exactly the monomorphism condition on $A\\to B$. Both given spans $D_0,D_1$ are Reedy cofibrant, and $f=(c,a,b):D_0\\to D_1$ is a Reedy weak equivalence because Reedy weak equivalences are objectwise.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 5.2.6, printed pp. 126–127: the mixed Reedy structure on the span"
+   }
+  },
+  {
+   "text": "Let $P:\\mathrm{sSet}^J\\to\\mathrm{sSet}$ send a diagram to its ordinary colimit. It is left adjoint to the constant diagram functor: a map from $PD$ to $T$ is exactly a family of maps $D_j\\to T$ commuting with both span arrows, by the colimit universal property. For any Kan–Quillen fibration $q:E\\to T$, the relative matching maps of the constant transformation $\\operatorname{const}(q)$ are $q$ at $c,b$ and the isomorphism $E\\to T\\times_T E$ at $a$. The latter is a fibration: every lifting square against a trivial cofibration fills using the inverse isomorphism. Hence $\\operatorname{const}(q)$ is a Reedy fibration. If $j:D\\to D'$ is a Reedy trivial cofibration, a lifting square from $Pj$ to $q$ is, by the displayed adjunction, exactly a square from $j$ to $\\operatorname{const}(q)$. The Reedy lifting axiom fills it, and adjunction returns a lift of the original square. Thus $Pj$ has the left lifting property against every Kan–Quillen fibration, so the Kan–Quillen weak factorization system identifies $Pj$ as a trivial cofibration. This proves the needed preservation assertion directly, without invoking a derived-adjunction or localization theorem.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proof of Lemma 5.2.6, printed p. 127: constant diagrams preserve fibrations, and the colimit adjunction transfers lifts"
+   }
+  },
+  {
+   "text": "Apply the cofibrant half of the split-factorization statement to the Reedy weak equivalence $f:D_0\\to D_1$. Its model hypotheses hold for the Reedy model structure: weak equivalences are retract closed, and the cofibrations and fibrations are retract closed as lifting classes by the cited lifting-class-closure statement. We obtain $Z$, a cofibration $i:D_0\\to Z$, a trivial fibration $p:Z\\to D_1$, and a cofibration $s:D_1\\to Z$, with $pi=f$ and $ps=1$. Reedy two-out-of-three shows that both $i$ and $s$ are weak equivalences, since $p,f$ and $1$ are; hence they are Reedy trivial cofibrations. Step 2 gives weak equivalences $Pi$ and $Ps$. The identity $(Pp)(Ps)=1$ and Kan–Quillen two-out-of-three imply $Pp$ is a weak equivalence; composition gives $Pf=(Pp)(Pi)$ a weak equivalence. The universal property identifies $PD_i$ with $C_i\\amalg_{A_i}B_i$. Swapping the pushout legs gives the canonical symmetry isomorphism with $B_i\\amalg_{A_i}C_i$; its comparison squares commute since both composites restrict to the prescribed maps $b,c$ on the legs. Thus $Pf$ is exactly the induced map in the first clause, up to these isomorphisms, and proves that clause.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proof of Ken Brown’s Lemma 1.1.12, printed pp. 6–7, applied to the colimit functor from the mixed Reedy span model; Lemma 5.2.6, printed pp. 126–127"
+   }
+  },
+  {
+   "text": "For the second clause, the assumed nonempty poset $I$ is filtered: an upper bound of $\\{i,j\\}$ gives the required common target, and parallel arrows are equal and thus equalized by an identity. We will use the following finite-data calculation, also for the sequential poset $\\mathbf N$. A degreewise colimit has elements represented by $(i,x)$, and $(i,x)$ and $(j,y)$ represent the same element precisely when their images agree at some common upper bound. The latter relation is an equivalence relation (transitivity uses a common upper bound of two witnesses), and this quotient has the cocone universal property. Any finite collection of representatives and equalities therefore occurs at one common stage. A map $\\Delta^r\\to Z$ is specified by the image of its identity $r$-simplex, all other images being its simplicial operators. A map from a boundary or horn is specified by its finitely many face simplices, with the equalities on their pairwise face intersections; intersections are themselves faces, and degeneracies introduce no additional choices. Consequently maps from $\\Delta^r$, $\\partial\\Delta^r$, or $\\Lambda_t^r$ into a directed degreewise colimit descend to one stage, and equality of two such maps holds at some later common stage. The empty boundary $\\partial\\Delta^0$ has the unique map and requires no data. This argument also descends a commuting square involving these shapes: descend its two maps, then pass to a later stage where its finitely many commutativity equations hold.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00UV",
+    "place": "Proposition 3.1.8.1 (00UV), finite horn data; explicit representative/equality calculation supplied here. Filteredness: Stacks Tag 002V, categories.tex, definition-directed."
+   }
+  },
+  {
+   "text": "Construct a factorization for each arbitrary simplicial map $g:U\\to V$ as follows. Set $U^{(0)}=U$, with $g^{(0)}=g$. Given $g^{(m)}:U^{(m)}\\to V$, for each $r\\geq1$ and $0\\leq t\\leq r$ let $S_{r,t}^{(m)}$ be the set of pairs $(\\alpha,\\beta)$ with $\\alpha:\\Lambda_t^r\\to U^{(m)}$, $\\beta:\\Delta^r\\to V$, and $g^{(m)}\\alpha=\\beta|_{\\Lambda_t^r}$. Form $U^{(m+1)}$ by the pushout of $\\coprod_{r,t}\\coprod_{S_{r,t}^{(m)}}\\Lambda_t^r\\to U^{(m)}$ along $\\coprod_{r,t}\\coprod_{S_{r,t}^{(m)}}\\Lambda_t^r\\hookrightarrow\\coprod_{r,t}\\coprod_{S_{r,t}^{(m)}}\\Delta^r$. The top map evaluates $\\alpha$ on each summand, and the maps $\\beta$ extend $g^{(m)}$ to $g^{(m+1)}$. Put $Q(g)=\\operatorname{colim}_{m\\in\\mathbf N}U^{(m)}$. The resulting $j_g:U\\to Q(g)$ is a countable composite of pushouts of coproducts of horn inclusions, hence a trivial cofibration by the horn-cell characterization in the Kan–Quillen statement (a cell map is its own retract). Let $p_g:Q(g)\\to V$ be induced by the $g^{(m)}$. A horn square against $p_g$ descends by Step 4 to some $U^{(m)}$ with its commutativity equation valid there; the corresponding simplex attached at $m+1$ fills it. Thus $p_g$ is a Kan fibration and $g=p_gj_g$. A commuting square from $g$ to $g'$ sends $(\\alpha,\\beta)$ to its pair of composites. It therefore induces the maps of the displayed pushouts at each stage and then of their sequential colimits. Identities and compositions agree on the old object and every attached simplex, so agree by the pushout and colimit universal properties. This makes $Q,j,p$ functorial, not just a collection of unrelated factorizations. All displayed coproducts have small indexing sets because all objects and hom-sets are small.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UV",
+    "place": "Proposition 3.1.8.1 (00UV), recursive simultaneous horn-attachment construction and the finite-stage filler proof."
+   }
+  },
+  {
+   "text": "For the diagram $f_i:X_i\\to Y_i$, write $U_i^{(m)}$, $S_{r,t,i}^{(m)}$ for this construction. We check that its canonical comparison with the construction on $\\bar f=\\operatorname{colim}_I f_i$ is an isomorphism at every $m$. At $m=0$ this is the definition. Assuming it at $m$, Step 4 says that each pair $(\\alpha,\\beta)$ defining a horn square for $\\operatorname{colim}_I U_i^{(m)}\\to\\operatorname{colim}_I Y_i$ descends with its equation to some $i$, and two such pairs agree precisely after a common later stage. Hence $\\operatorname{colim}_I S_{r,t,i}^{(m)}\\cong S_{r,t}^{(m)}$ for the construction on $\\bar f$. For a fixed simplicial shape $K$, the canonical map $\\operatorname{colim}_I\\coprod_{s\\in S_i}K\\to\\coprod_{s\\in\\operatorname{colim}_I S_i}K$ is degreewise bijective: an element is a pair $(s,k)$, its $K$-coordinate never changes, and equality of its $s$-coordinate is eventual equality. The further coproduct over fixed labels $(r,t)$ also commutes with the colimit, since transitions preserve these labels. Finally colimits commute with these pushouts: a map from either iterated construction to $T$ is the same compatible family of maps on the old objects and attached simplices agreeing on each attaching horn. This proves the induction step by the pushout universal property. Maps from $\\operatorname{colim}_I\\operatorname{colim}_m U_i^{(m)}$ and from $\\operatorname{colim}_m\\operatorname{colim}_I U_i^{(m)}$ to $T$ are likewise the same family compatible in both indices. Thus the canonical map $\\theta:\\operatorname{colim}_I Q(f_i)\\xrightarrow{\\sim}Q(\\bar f)$ is an isomorphism. Every comparison above agrees on each original simplex and every attached simplex, so $\\theta\\,(\\operatorname{colim}_I j_{f_i})=j_{\\bar f}$ and $p_{\\bar f}\\theta=\\operatorname{colim}_I p_{f_i}$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00UV",
+    "place": "Proposition 3.1.8.1 (00UV), filtered-colimit preservation: its omitted verification expanded as the induction on attachment stages and the two explicit cocone calculations."
+   }
+  },
+  {
+   "text": "Each $j_{f_i}$ is a weak equivalence by Step 5. Since $f_i=p_{f_i}j_{f_i}$ is a weak equivalence by hypothesis, two-out-of-three in the Kan–Quillen model makes $p_{f_i}$ a weak equivalence. It is already a fibration, so is a trivial fibration. Let $\\bar p=\\operatorname{colim}_I p_{f_i}$. A square from $\\partial\\Delta^r\\hookrightarrow\\Delta^r$ to $\\bar p$ descends by Step 4 to a square against some $p_{f_i}$; the filler there composes to a filler for the original square. This includes $r=0$, where the upper map is empty and only the lower vertex needs a representative. The boundary-lifting characterization in the Kan–Quillen statement implies that $\\bar p$ is a trivial fibration, hence a weak equivalence. Step 6 identifies $\\bar j=\\operatorname{colim}_I j_{f_i}$, via $\\theta$, with the horn-cell map $j_{\\bar f}$ of Step 5, so $\\bar j$ is a weak equivalence as well. Isomorphisms are weak equivalences because realization carries an inverse to an inverse, giving inverse maps on components and all based homotopy groups. Finally $\\bar f=\\bar p\\bar j$: both composites agree after every $X_i\\to\\operatorname{colim}_I X_i$ by $p_{f_i}j_{f_i}=f_i$, so the colimit universal property gives equality. Two-out-of-three now makes $\\bar f$ a weak equivalence, proving precisely the canonical map of the second clause, without any injectivity assumption on the transitions.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00XE",
+    "place": "Proposition 3.2.8.3 (00XE), reduction to trivial Kan fibrations; boundary lifting and two-out-of-three supplied by the cited Kan–Quillen model."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-reedy-model-structure",
+  "lem-coef-kan-quillen-right-proper",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-lifting-class-closure",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, foundational simplicial homotopy input to the coherent coefficient adjunction. Expanded mixed-Reedy-span cube argument (Hovey Lemma 5.2.6 and proof of Lemma 1.1.12); direct horn-attachment and finite boundary-lifting argument for directed colimits (Kerodon 00UV and 00XE, not archived locally; WANTED in report)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +176,108 @@
    "results": "{\"t\": \"2026-10-16T17:29:11Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy equivalences of simplicial sets are stable under gluing along cofibrations and filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.RelativeMorphism.Homotopy.rel\", \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"SSet.RelativeMorphism.Homotopy.rel_assoc\", \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension\"], \"digest\": \"103d9135802f97d0\"}",
    "date": "2026-10-17",
    "verdict": "No exact match: returned model-category instances handle pushing out a trivial cofibration, not a three-component weak equivalence of spans or arbitrary filtered-poset colimits. Further grep in AlgebraicTopology returned no such theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of spans of simplicial sets with monomorphic legs and objectwise weak homotopy equivalences induces a weak equivalence on pushouts; filtered poset colimits preserve weak homotopy equivalences",
+   "results": "{\"t\": \"2026-10-16T18:14:15Z\", \"tool\": \"leanfinder\", \"query\": \"A map of spans of simplicial sets with monomorphic legs and objectwise weak homotopy equivalences induces a weak equivalence on pushouts; filtered poset colimits preserve weak homotopy equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.AttachCells.pushouts_coproducts\", \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\", \"HomotopicalAlgebra.PathObject.weakEquivalence_ι\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\"], \"digest\": \"957aa9a862a2b0b9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/Instances.lean:198-218, SSet/Monomorphisms.lean:37-41 and SSet/CategoryWithFibrations.lean:65-99. The hits concern model axioms, pushouts of trivial cofibrations, or stability of monomorphisms; none states the three-component weak-equivalence comparison or filtered-colimit stability of realization weak equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "WeakEquivalence, pushout, SSet, filtered colimit",
+   "results": "{\"t\": \"2026-10-16T18:14:15Z\", \"tool\": \"loogle\", \"query\": \"WeakEquivalence, pushout, SSet, filtered colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'WeakEquivalence'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid pattern: loogle: unknown identifier 'WeakEquivalence'; corrected to the separately logged quoted-substring query."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ww]eak[Ee]quivalence.*(pushout|filtered)|([Ff]iltered|pushout).*weakEquivalence",
+   "results": "{\"t\": \"2026-10-16T18:14:15Z\", \"tool\": \"grep\", \"query\": \"[Ww]eak[Ee]quivalence.*(pushout|filtered)|([Ff]iltered|pushout).*weakEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"66a91f6075e8dcc8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/Instances.lean:198-218, SSet/Monomorphisms.lean:37-41 and SSet/CategoryWithFibrations.lean:65-99. The hits concern model axioms, pushouts of trivial cofibrations, or stability of monomorphisms; none states the three-component weak-equivalence comparison or filtered-colimit stability of realization weak equivalences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing weak homotopy equivalences of simplicial sets along monomorphisms and preservation under filtered poset colimits",
+   "results": "{\"t\": \"2026-10-16T18:14:16Z\", \"tool\": \"leansearch\", \"query\": \"Gluing weak homotopy equivalences of simplicial sets along monomorphisms and preservation under filtered poset colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasColimits\", \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.mk\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.cofibration_iff\", \"SSet.modelCategoryQuillen.cofibration_of_mono\"], \"digest\": \"e9a66f85761d3d84\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/Instances.lean:198-218, SSet/Monomorphisms.lean:37-41 and SSet/CategoryWithFibrations.lean:65-99. The hits concern model axioms, pushouts of trivial cofibrations, or stability of monomorphisms; none states the three-component weak-equivalence comparison or filtered-colimit stability of realization weak equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cube lemma in a model category and closure of simplicial weak equivalences under directed colimits",
+   "results": "{\"t\": \"2026-10-16T18:24:09Z\", \"tool\": \"leanfinder\", \"query\": \"The cube lemma in a model category and closure of simplicial weak equivalences under directed colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.ModelCategory.cm4b\", \"HomotopicalAlgebra.ModelCategory.cm4a\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.ModelCategory\", \"HomotopicalAlgebra.ModelCategory.cm2\"], \"digest\": \"1f3b25d9b8f6a9ca\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/Instances.lean:198-218, SSet/Monomorphisms.lean:37-41 and SSet/CategoryWithFibrations.lean:65-99. The hits concern model axioms, pushouts of trivial cofibrations, or stability of monomorphisms; none states the three-component weak-equivalence comparison or filtered-colimit stability of realization weak equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeakEquivalence\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-16T18:24:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeakEquivalence\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/Instances.lean:198-218, SSet/Monomorphisms.lean:37-41 and SSet/CategoryWithFibrations.lean:65-99. The hits concern model axioms, pushouts of trivial cofibrations, or stability of monomorphisms; none states the three-component weak-equivalence comparison or filtered-colimit stability of realization weak equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "IsStableUnderFilteredColimits|[Cc]ube|[Gg]luing",
+   "results": "{\"t\": \"2026-10-16T18:24:09Z\", \"tool\": \"grep\", \"query\": \"IsStableUnderFilteredColimits|[Cc]ube|[Gg]luing\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Monomorphisms.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\"], \"digest\": \"aaed3729c12d8bb5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/Instances.lean:198-218, SSet/Monomorphisms.lean:37-41 and SSet/CategoryWithFibrations.lean:65-99. The hits concern model axioms, pushouts of trivial cofibrations, or stability of monomorphisms; none states the three-component weak-equivalence comparison or filtered-colimit stability of realization weak equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered|Filtered|FinitelyPresentable",
+   "results": "{\"t\": \"2026-10-16T19:33:18Z\", \"tool\": \"grep\", \"query\": \"filtered|Filtered|FinitelyPresentable\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Monomorphisms.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Monomorphisms.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\"], \"digest\": \"0f2388509758e7c8\"}",
+   "date": "2026-10-17",
+   "verdict": "partial input only: read Presentable.lean:30-61, AnodyneExtensions/Basic.lean:82-120, and CategoryWithFibrations.lean:65-99. Finite presentability, horn smallness and monomorphism stability are available; these do not state weak-equivalence preservation under gluing or directed colimits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak equivalences of simplicial sets preserved by filtered colimits using finite horn small object argument",
+   "results": "{\"t\": \"2026-10-16T19:33:18Z\", \"tool\": \"leansearch\", \"query\": \"Weak equivalences of simplicial sets preserved by filtered colimits using finite horn small object argument\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\", \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.mk\", \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.isStableUnderColimitsOfShape\"], \"digest\": \"fe8f5c15c9332120\"}",
+   "date": "2026-10-17",
+   "verdict": "partial input only: finite presentability and general limit-colimit comparisons, not the simplicial weak-equivalence assertion. Read Presentable.lean:30-61 and the horn smallness instance in AnodyneExtensions/Basic.lean:100-106. The item is not a one-line specialization of the hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"IsFinitelyPresentable\"",
+   "results": "{\"t\": \"2026-10-16T19:33:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"IsFinitelyPresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.Finite.instIsFinitelyPresentable\", \"SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex\"], \"digest\": \"96d00ffc80de3035\"}",
+   "date": "2026-10-17",
+   "verdict": "partial input only: SSet.Finite.instIsFinitelyPresentable in Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean:51 and the representable instance at 32-34 give finite presentability. Read 30-61. This does not state either clause of the item; the special finite-face calculation is elementary and expanded in Step 4, so no new node is created."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial horn attachment factorization of maps of simplicial sets commutes with filtered colimits and filtered colimits preserve trivial Kan fibrations",
+   "results": "{\"t\": \"2026-10-16T19:33:20Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial horn attachment factorization of maps of simplicial sets commutes with filtered colimits and filtered colimits preserve trivial Kan fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₃₁.ι₃_desc_assoc\", \"SSet.modelCategoryQuillen.J\", \"SSet.horn₃₁.ι₂_desc_assoc\", \"SSet.horn₃₂.ι₁_desc\", \"SSet.horn₃₁.ι₂_desc\", \"SSet.horn₃₂.ι₁_desc_assoc\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.horn₃₁.ι₃_desc\"], \"digest\": \"7a683343ba36efc1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: results give horn colimit identities and the definition of Kan fibrations. The attachment construction and its preservation calculation are written out, not cited from these results."
+  },
+  {
+   "tool": "grep",
+   "query": "weakEquivalences.*IsStableUnderFilteredColimits|IsStableUnderFilteredColimits.*weakEquivalences|[Cc]ube[Ll]emma|[Gg]luing[Ll]emma",
+   "results": "{\"t\": \"2026-10-16T19:50:29Z\", \"tool\": \"grep\", \"query\": \"weakEquivalences.*IsStableUnderFilteredColimits|IsStableUnderFilteredColimits.*weakEquivalences|[Cc]ube[Ll]emma|[Gg]luing[Ll]emma\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/EpiMono.lean\", \"Mathlib/CategoryTheory/EpiMono.lean\"], \"digest\": \"6513add551335b0f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read EpiMono.lean:242-279. Its cube lemmas prove commutativity of a sixth cube face from an epi or mono edge; they concern neither pushout weak equivalences nor filtered colimits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"weakEquivalences\", \"IsStableUnderFilteredColimits\"",
+   "results": "{\"t\": \"2026-10-16T19:50:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"weakEquivalences\\\", \\\"IsStableUnderFilteredColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the service succeeded with zero hits for weakEquivalences and IsStableUnderFilteredColimits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left Quillen colimit functor on a Reedy span sends objectwise weak equivalences between cofibrant diagrams to weak equivalences; directed colimits of weak equivalences in the Quillen model structure on SSet",
+   "results": "{\"t\": \"2026-10-16T19:50:31Z\", \"tool\": \"leanfinder\", \"query\": \"A left Quillen colimit functor on a Reedy span sends objectwise weak equivalences between cofibrant diagrams to weak equivalences; directed colimits of weak equivalences in the Quillen model structure on SSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_trivialCofibrations\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\"], \"digest\": \"218b8ed41990f365\"}",
+   "date": "2026-10-17",
+   "verdict": "Partial inputs only: read SimplicialSet/CategoryWithFibrations.lean:66-100 and ModelCategory/Instances.lean:198-218. The hits supply cofibration and fibration classes, trivial-cofibration cobase change and coproduct instances, not the complete pushout comparison or directed weak-equivalence stability."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pinched-rigidification-resolution",
@@ -85,5 +285,20 @@
   "group": "N7"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-sset-gluing-filtered-equivalences",
+  "worker": "stage1",
+  "summary": "Repair of returned two-node cycle: removed lem-coef-filtered-colimit-weak-equivalences, whose current split uses this item, and replaced the filtered clause by explicit functorial horn attachments, finite support, attachment-stage colimit comparisons, and descent of boundary fillers. The mixed Reedy gluing argument is retained, with its step reference updated. Seven steps, no new nodes, no statement change. All current cited statements re-read and quotations regenerated.",
+  "blueprint": "Realizes the same foundational gluing and filtered-colimit input under paragraph 2 of prop-coef-integral-exceptional-adjoint. The mixed Reedy construction is Hovey’s cube-lemma proof, with the Brown split argument expanded; no unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-1f34dde16",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-1f34dde16 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the 6 cited statements in full. There are no new nodes and the statement is unchanged. Clause 1 is Hovey 5.2.6 for sSet. In Step 1 I recomputed the Reedy span J: degrees c=0, a=1, b=2; latching objects ∅, ∅, A; matching objects *, C, *. Reedy cofibrancy is then exactly u being a monomorphism. Step 2: the relative matching maps of const(q) are q, an isomorphism and q, so the colimit preserves trivial cofibrations. Step 3: Ken Brown's argument applies two-out-of-three to pi=f and ps=1, then to Pp·Ps=1 and Pf=Pp·Pi. Clause 2 is proved directly. Step 4 is the finite-support descent for Δ^r, ∂Δ^r and horns, including the empty ∂Δ^0 and noninjective transitions. Step 5 is an explicit ω-step horn attachment, giving a trivial cofibration by the Kan–Quillen horn-cell clause and a Kan fibration by descending each horn. Step 6 builds the comparison θ as colimits commuting with colimits. Step 7 shows colim p_{f_i} lifts against every ∂Δ^r, including r=0, so it is a trivial fibration, and finishes with two-out-of-three. proof_deps equals the union of the step uses. A transitive check shows no cited node reaches the item, so the returned cycle is fixed. Citing lem-coef-filtered-colimit-weak-equivalences or lem-coef-model-cofibrant-colimit-comparison(b) would reintroduce a cycle; I traced the path for the latter through pinched-rigidification-resolution. So re-proving both clauses here is required and is not duplication. All citations are in the unit or are Mathlib-leaf definitions, so no tool_uses are needed. No SGA is cited and no target or base-change morphism is touched. No fixes were made."
+ }
 }
