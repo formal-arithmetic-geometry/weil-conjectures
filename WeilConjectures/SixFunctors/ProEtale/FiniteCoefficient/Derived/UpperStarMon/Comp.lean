@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarCompCoherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Oplax
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.MonoidalComp
 
@@ -22,9 +23,10 @@ compatible with the tensor comparisons `Lg^*(K ⊗ᴸ M) ⟶ Lg^*K ⊗ᴸ Lg^*M`
 
 ## Main results
 
-- `AlgebraicGeometry.ProEtale.leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit`: on the image
-  of a complex, the composition isomorphism is the composition isomorphism of the underived
-  pullbacks, read through the counits of the derived pullbacks.
+- `AlgebraicGeometry.ProEtale.leftDerivedUpperStarComp_inv_app_Qh_obj_comp_counit`: on the image
+  of a complex, the inverse of the composition isomorphism is that of the underived pullbacks,
+  read through the counits of the derived pullbacks (the direct form is
+  `AlgebraicGeometry.ProEtale.leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit`).
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison_comp`: the composition
   isomorphism commutes with the tensor comparisons.
 -/
@@ -51,57 +53,6 @@ open DerivedCategory
 
 variable {T S R : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ R)
 
-/-- On the image `Qh X` of a complex, the composition isomorphism
-`L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*` is the composition isomorphism `(g₁ ≫ g₂)^* ≅ g₂^* ⋙ g₁^*` of the
-underived pullbacks, through the counits of the derived pullbacks:
-```
-  L(g₁ ≫ g₂)^*(Qh X) ──────────────▶ Lg₁^* Lg₂^* (Qh X)
-          │ counit                        │ Lg₁^* counit ≫ counit
-          ▼                               ▼
-  Qh((g₁ ≫ g₂)^* X) ───────────────▶ Qh(g₁^* g₂^* X)
-```
--/
-@[reassoc]
-lemma leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit
-    (X : HomotopyCategory (Sheaf (Scheme.ProEt.topology R) A) (.up ℤ)) :
-    (leftDerivedUpperStarComp A g₁ g₂).hom.app (Qh.obj X) ≫
-        L((g₁)^*[A]).map ((g₂)^*[A].leftDerivedFunctorCounit.app X) ≫
-        (g₁)^*[A].leftDerivedFunctorCounit.app (((g₂)^*[A].mapHomotopyCategory (.up ℤ)).obj X) =
-      (g₁ ≫ g₂)^*[A].leftDerivedFunctorCounit.app X ≫
-        Qh.map (Functor.mapHomotopyCategoryCompHom (g₂)^*[A] (g₁)^*[A] (g₁ ≫ g₂)^*[A]
-          (ProEtale.upperStarComp A g₁ g₂) X) := by
-  have hfac (F : Sheaf (Scheme.ProEt.topology R) A ⥤ Sheaf (Scheme.ProEt.topology T) A) [F.Additive]
-      [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-      (Y : HomotopyCategory (Sheaf (Scheme.ProEt.topology R) A) (.up ℤ)) :
-      F.leftDerivedFunctorIsoMapDerivedCategory.hom.app (Qh.obj Y) ≫
-        F.mapDerivedCategoryFactorsh.hom.app Y = F.leftDerivedFunctorCounit.app Y :=
-    NatTrans.congr_app F.leftDerivedFunctorIsoMapDerivedCategory_hom_fac Y
-  have hfac₂ (Y : HomotopyCategory (Sheaf (Scheme.ProEt.topology R) A) (.up ℤ)) :
-      (g₂)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom.app (Qh.obj Y) ≫
-        (g₂)^*[A].mapDerivedCategoryFactorsh.hom.app Y =
-          (g₂)^*[A].leftDerivedFunctorCounit.app Y :=
-    NatTrans.congr_app (g₂)^*[A].leftDerivedFunctorIsoMapDerivedCategory_hom_fac Y
-  have hfac₁ (Y : HomotopyCategory (Sheaf (Scheme.ProEt.topology S) A) (.up ℤ)) :
-      (g₁)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom.app (Qh.obj Y) ≫
-        (g₁)^*[A].mapDerivedCategoryFactorsh.hom.app Y =
-          (g₁)^*[A].leftDerivedFunctorCounit.app Y :=
-    NatTrans.congr_app (g₁)^*[A].leftDerivedFunctorIsoMapDerivedCategory_hom_fac Y
-  have hnat := (g₁)^*[A].leftDerivedFunctorIsoMapDerivedCategory.inv.naturality
-    ((g₂)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom.app (Qh.obj X) ≫
-      (g₂)^*[A].mapDerivedCategoryFactorsh.hom.app X)
-  have hcomp := Functor.mapDerivedCategoryCompIso_fach (g₂)^*[A] (g₁)^*[A] X
-  have hnatiso := Functor.mapDerivedCategoryNatIso_fach (ProEtale.upperStarComp A g₁ g₂) X
-  simp only [leftDerivedUpperStarComp, Functor.leftDerivedFunctorNatIso,
-    Functor.leftDerivedFunctorCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app,
-    Functor.whiskerLeft_app, Category.assoc, Iso.inv_hom_id_app_assoc]
-  rw [← hfac₂, ← hfac₁, ← hfac, ← reassoc_of% hnat, Iso.inv_hom_id_app_assoc,
-    ← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
-  simp only [Functor.mapHomotopyCategoryCompHom, Functor.map_comp, Category.assoc]
-  rw [← reassoc_of% hnatiso, ← hcomp]
-  simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
-
 /-- The inverse form of `leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit`. -/
 @[reassoc]
 lemma leftDerivedUpperStarComp_inv_app_Qh_obj_comp_counit
@@ -115,15 +66,6 @@ lemma leftDerivedUpperStarComp_inv_app_Qh_obj_comp_counit
   rw [← leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit, Iso.inv_hom_id_app_assoc]
 
 open Functor.LaxMonoidal Functor.OplaxMonoidal
-
-/-- The naturality of the counit of `Lg^*`, with the composite functors unfolded. -/
-@[reassoc]
-lemma counit_naturality {Z Y : Scheme.{u}} (g : Z ⟶ Y)
-    {P Q : HomotopyCategory (Sheaf (Scheme.ProEt.topology Y) A) (.up ℤ)} (f : P ⟶ Q) :
-    L((g)^*[A]).map (Qh.map f) ≫ (g)^*[A].leftDerivedFunctorCounit.app Q =
-      (g)^*[A].leftDerivedFunctorCounit.app P ≫
-        Qh.map (((g)^*[A].mapHomotopyCategory (.up ℤ)).map f) :=
-  (g)^*[A].leftDerivedFunctorCounit.naturality f
 
 variable [ProEtale.UpperStarPreservesFlat A]
 

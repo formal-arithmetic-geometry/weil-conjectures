@@ -38,6 +38,7 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A]
   [MonoidalClosed A]
 
+omit [MonoidalPreadditive A] in
 /--
 The sheafification of the free presheaf on a representable with flat
 coefficient object is flat, expressed as preservation of finite limits by
@@ -48,31 +49,24 @@ the coefficient-category generalization is described in the module docstring of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution`
 (blueprint: lem-weil-pbc-free-sheaf-flat).
 
-Proof:
-1. Put `Q = Presheaf.freeYoneda X P`, and write `a` for sheafification and
-   `iota` for the sheaf inclusion. Strong monoidality of `a`
-   [lem-weil-pbc-sheaf-tensor-closed] (2), together with the counit isomorphism
-   [lem-weil-pbc-presheaf-finite-limits-objectwise] (3), gives a natural
-   isomorphism from tensoring with `a Q` to `iota` followed by tensoring with
-   `Q` and then `a`. It suffices to show that this composite is left exact.
-2. For each `V`, `Q(V)` is the coproduct of copies of `P` indexed by `V ⟶ X`.
-   Each copy is flat by `hP`, and the coproduct is flat by
-   [lem-weil-pbc-flat-coproduct]: closedness makes tensor preserve coproducts,
-   and AB4, implied by the Grothendieck AB5 condition, makes coproducts exact.
-   This includes the empty coproduct, which is zero.
-3. Evaluation preserves finite limits, and finite limits of presheaves are
-   computed objectwise [lem-weil-pbc-presheaf-finite-limits-objectwise] (1).
-   Evaluation of tensoring with `Q` is evaluation followed by tensoring with
-   the flat object `Q(V)` from step 2, so tensoring with `Q` is left exact.
-4. The inclusion `iota` preserves finite limits
-   [lem-weil-pbc-presheaf-finite-limits-objectwise] (2), and `a` is exact
-   [lem-weil-pbc-sheaf-tensor-closed] (1). The composite in step 1 therefore
-   preserves finite limits; transport along its natural isomorphism proves
-   the conclusion.
+Proof: each value `Q(V) = ∐_{V ⟶ X} P` of the free presheaf `Q = Presheaf.freeYoneda X P`
+is a coproduct of copies of the flat object `P`, hence flat
+(`CategoryTheory.ObjectProperty.flat_coproduct`, blueprint `lem-weil-pbc-flat-coproduct`), and
+the sheafification of a presheaf with flat values is flat
+(`CategoryTheory.GrothendieckTopology.flat_presheafToSheaf_obj`, which rests on the exactness
+and strong monoidality of sheafification, blueprint `lem-weil-pbc-sheaf-tensor-closed`).
 -/
+@[stacks 03EV]
 lemma free_sheaf_flat (P : A) (hP : PreservesFiniteLimits (tensorLeft P))
     (X : C) :
     PreservesFiniteLimits (tensorLeft (Sheaf.freeYoneda J X P)) := by
-  sorry
+  have hP' : ObjectProperty.flat P := (ObjectProperty.flat_iff_preservesFiniteLimits P).2 hP
+  refine (flat_presheafToSheaf_obj A J _ fun V ↦ ?_).1.1
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{_, _, u + 1} A
+    (ULift.{u + 1} (V.unop ⟶ X))
+  exact ObjectProperty.prop_of_iso _
+    (Sigma.whiskerEquiv (f := fun _ : ULift.{u + 1} (V.unop ⟶ X) ↦ P) Equiv.ulift
+      fun _ ↦ Iso.refl P)
+    (ObjectProperty.flat_coproduct _ fun _ ↦ hP')
 
 end CategoryTheory.GrothendieckTopology

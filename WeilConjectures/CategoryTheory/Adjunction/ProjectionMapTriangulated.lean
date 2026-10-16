@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapUnit
-public import WeilConjectures.CategoryTheory.Triangulated.IsoLocus
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 
 /-!
 # The objects at which a projection map is an isomorphism
@@ -152,7 +152,7 @@ triangulated subcategory, for a fixed `M`. It is also closed under isomorphisms 
 retracts, hence a thick triangulated subcategory. -/
 instance isTriangulated_isoLocus_projectionMap (M : C) :
     (NatTrans.isoLocus (adj.rightAdjointProjectionMapApp φ M)).IsTriangulated :=
-  NatTrans.isTriangulated_isoLocus _
+  inferInstance
 
 variable [F.OplaxMonoidal] [IsIso (Functor.OplaxMonoidal.η F)]
   (hφ : ∀ X Y, (φ.app X).app Y = Functor.OplaxMonoidal.δ F X Y)

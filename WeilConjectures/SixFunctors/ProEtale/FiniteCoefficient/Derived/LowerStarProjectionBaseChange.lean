@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjection
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comp
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Id
 
 /-!
 # The pro-étale projection map of the derived pushforward commutes with base change
@@ -47,19 +47,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A] [ProEtale.UpperStarPreservesFlat A]
 
 namespace ProEtale
-
-/-- The transport isomorphism `La^* ≅ Lb^*` along an equality `a = b` commutes with the tensor
-comparisons of the derived pullbacks. -/
-@[reassoc]
-lemma leftDerivedUpperStarCongr_hom_tensor {Z Y : Scheme.{u}} {a b : Z ⟶ Y} (h : a = b)
-    (x y : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
-    ((leftDerivedUpperStarTensorComparison A a).app x).app y ≫
-        ((leftDerivedUpperStarCongr A h).hom.app x ⊗ₘ (leftDerivedUpperStarCongr A h).hom.app y) =
-      (leftDerivedUpperStarCongr A h).hom.app (x ⊗ y) ≫
-        ((leftDerivedUpperStarTensorComparison A b).app x).app y := by
-  subst h
-  simp only [leftDerivedUpperStarCongr_rfl, Iso.refl_hom, NatTrans.id_app, id_tensorHom_id]
-  erw [Category.comp_id, Category.id_comp]
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 

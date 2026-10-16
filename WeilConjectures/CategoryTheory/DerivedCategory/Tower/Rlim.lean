@@ -22,7 +22,7 @@ Let `A` be a Grothendieck abelian category. The category `ℕᵒᵖ ⥤ A` of *t
 (`CategoryTheory.Presheaf.isGrothendieckAbelian`), with kernels, cokernels and exactness computed
 levelwise. This file defines
 
-* `DerivedCategory.towerFunctor A : D(ℕᵒᵖ ⥤ A) ⥤ (ℕᵒᵖ ⥤ D(A))`, sending an object `M` of the
+* `DerivedCategory.towerDiagram A : D(ℕᵒᵖ ⥤ A) ⥤ (ℕᵒᵖ ⥤ D(A))`, sending an object `M` of the
   derived category of towers to the inverse system `(evₙ M)ₙ` of its evaluations in the single
   triangulated category `D(A)`, the transition maps being induced by those of the towers;
 * `DerivedCategory.rlim A : D(ℕᵒᵖ ⥤ A) ⥤ D(A)`, the total right derived functor of
@@ -49,15 +49,9 @@ namespace CategoryTheory.Limits
 
 variable (A : Type u) [Category.{v} A] {J : Type*} [Category J] [HasLimitsOfShape J A]
 
-/-- The projections `lim F ⟶ F j`, as a natural transformation from `lim : (J ⥤ A) ⥤ A` to the
-evaluation at `j`. -/
-@[simps]
-noncomputable def limπ (j : J) : (lim : (J ⥤ A) ⥤ A) ⟶ (evaluation J A).obj j where
-  app F := limit.π F j
-
 @[reassoc (attr := simp)]
-lemma limπ_comp_evaluation_map {j j' : J} (f : j ⟶ j') :
-    limπ A j ≫ (evaluation J A).map f = limπ A j' := by
+lemma lim_π_comp_evaluation_map {j j' : J} (f : j ⟶ j') :
+    lim.π (C := A) j ≫ (evaluation J A).map f = lim.π (C := A) j' := by
   ext F
   simp
 
@@ -87,47 +81,47 @@ noncomputable def towerEval : ℕᵒᵖ ⥤ DerivedCategory (ℕᵒᵖ ⥤ A) �
 
 /-- An object `M` of the derived category of towers gives an inverse system `(evₙ M)ₙ` in the
 derived category `D(A)`. -/
-noncomputable def towerFunctor : DerivedCategory (ℕᵒᵖ ⥤ A) ⥤ ℕᵒᵖ ⥤ DerivedCategory A :=
+noncomputable def towerDiagram : DerivedCategory (ℕᵒᵖ ⥤ A) ⥤ ℕᵒᵖ ⥤ DerivedCategory A :=
   (towerEval A).flip
 
 @[simp]
-lemma towerFunctor_obj_obj (M : DerivedCategory (ℕᵒᵖ ⥤ A)) (n : ℕᵒᵖ) :
-    ((towerFunctor A).obj M).obj n = ((towerEval A).obj n).obj M := rfl
+lemma towerDiagram_obj_obj (M : DerivedCategory (ℕᵒᵖ ⥤ A)) (n : ℕᵒᵖ) :
+    ((towerDiagram A).obj M).obj n = ((towerEval A).obj n).obj M := rfl
 
 @[simp]
-lemma towerFunctor_obj_map (M : DerivedCategory (ℕᵒᵖ ⥤ A)) {n n' : ℕᵒᵖ} (f : n ⟶ n') :
-    ((towerFunctor A).obj M).map f = ((towerEval A).map f).app M := rfl
+lemma towerDiagram_obj_map (M : DerivedCategory (ℕᵒᵖ ⥤ A)) {n n' : ℕᵒᵖ} (f : n ⟶ n') :
+    ((towerDiagram A).obj M).map f = ((towerEval A).map f).app M := rfl
 
 @[simp]
-lemma towerFunctor_map_app {M M' : DerivedCategory (ℕᵒᵖ ⥤ A)} (g : M ⟶ M') (n : ℕᵒᵖ) :
-    ((towerFunctor A).map g).app n = ((towerEval A).obj n).map g := rfl
+lemma towerDiagram_map_app {M M' : DerivedCategory (ℕᵒᵖ ⥤ A)} (g : M ⟶ M') (n : ℕᵒᵖ) :
+    ((towerDiagram A).map g).app n = ((towerEval A).obj n).map g := rfl
 
 /-- **Blueprint `def-weil-pbc-derived-inverse-limit`.** The sequential derived inverse limit
 `R lim : D(ℕᵒᵖ ⥤ A) ⥤ D(A)`, the total right derived functor of `lim : (ℕᵒᵖ ⥤ A) ⥤ A`. By
 `DerivedCategory.isHomotopyLimit_rlimCone`, `R lim M` is a derived limit, in the sense of the
-Roos triangle, of the inverse system `(evₙ M)ₙ` of `D(A)` (`DerivedCategory.towerFunctor`). -/
+Roos triangle, of the inverse system `(evₙ M)ₙ` of `D(A)` (`DerivedCategory.towerDiagram`). -/
 noncomputable def rlim : DerivedCategory (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory A :=
   (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor
 
 /-- The natural maps `R lim M ⟶ evₙ M` induced by the projections `lim ⟶ evₙ`. -/
 noncomputable def rlimπ (n : ℕᵒᵖ) : rlim A ⟶ (towerEval A).obj n :=
-  Functor.rightDerivedFunctorNatTrans (limπ A n)
+  Functor.rightDerivedFunctorNatTrans (lim.π (C := A) n)
 
 @[reassoc (attr := simp)]
 lemma rlimπ_comp_towerEval_map {n n' : ℕᵒᵖ} (f : n ⟶ n') :
     rlimπ A n ≫ (towerEval A).map f = rlimπ A n' := by
   simp only [rlimπ, towerEval, ← Functor.rightDerivedFunctorNatTrans_comp,
-    limπ_comp_evaluation_map]
+    lim_π_comp_evaluation_map]
 
 /-- The cone of the maps `R lim M ⟶ evₙ M` over the inverse system `(evₙ M)ₙ`. -/
 @[simps]
-noncomputable def rlimCone (M : DerivedCategory (ℕᵒᵖ ⥤ A)) : Cone ((towerFunctor A).obj M) where
+noncomputable def rlimCone (M : DerivedCategory (ℕᵒᵖ ⥤ A)) : Cone ((towerDiagram A).obj M) where
   pt := (rlim A).obj M
   π :=
     { app n := (rlimπ A n).app M
       naturality _ _ f := by
-        simp only [Functor.const_obj_obj, towerFunctor_obj_obj, Functor.const_obj_map,
-          Category.id_comp, towerFunctor_obj_map, ← NatTrans.comp_app,
+        simp only [Functor.const_obj_obj, towerDiagram_obj_obj, Functor.const_obj_map,
+          Category.id_comp, towerDiagram_obj_map, ← NatTrans.comp_app,
           rlimπ_comp_towerEval_map] }
 
 noncomputable instance : (rlim A).CommShift ℤ :=
@@ -145,11 +139,11 @@ instance isKInjective_asFunctor_obj (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [
 
 /-- For a K-injective complex of towers `I`, the inverse system `(evₙ (Q I))ₙ` is computed by
 applying `Q` to the levels of `I`. -/
-noncomputable def towerFunctorObjQIso (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective] :
-    (towerFunctor A).obj (Q.obj I) ≅ I.asFunctor ⋙ Q :=
+noncomputable def towerDiagramObjQIso (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective] :
+    (towerDiagram A).obj (Q.obj I) ≅ I.asFunctor ⋙ Q :=
   NatIso.ofComponents (fun n ↦ ((evaluation ℕᵒᵖ A).obj n).rightDerivedFunctorObjQIso I)
     fun {n n'} f ↦ by
-      simp only [towerFunctor_obj_obj, towerFunctor_obj_map, towerEval, Functor.comp_map,
+      simp only [towerDiagram_obj_obj, towerDiagram_obj_map, towerEval, Functor.comp_map,
         Functor.rightDerivedFunctorNatTrans_app_Q_obj, Category.assoc, Iso.inv_hom_id,
         Category.comp_id]
       rfl
@@ -167,7 +161,7 @@ inverse system of complexes `I.asFunctor`. -/
 noncomputable def limConeAsFunctor (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) : Cone I.asFunctor where
   pt := ((lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex _).obj I
   π :=
-    { app n := (NatTrans.mapHomologicalComplex (limπ A n) _).app I
+    { app n := (NatTrans.mapHomologicalComplex (lim.π (C := A) n) _).app I
       naturality _ _ f := by
         ext p
         exact (Category.id_comp _).trans (limit.w (I.X p) f).symm }
@@ -179,9 +173,9 @@ noncomputable def isLimitLimConeAsFunctor (I : CochainComplex (ℕᵒᵖ ⥤ A) 
   HomologicalComplex.isLimitOfEval _ _ fun p ↦ limit.isLimit (I.X p)
 
 lemma rlimCone_π_app_Q_obj (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective] (n : ℕᵒᵖ) :
-    (rlimCone A (Q.obj I)).π.app n ≫ (towerFunctorObjQIso I).hom.app n =
+    (rlimCone A (Q.obj I)).π.app n ≫ (towerDiagramObjQIso I).hom.app n =
       (rlimObjQIso I).hom ≫ Q.map ((limConeAsFunctor I).π.app n) := by
-  simp only [rlimCone_π_app, rlimπ, towerFunctorObjQIso, NatIso.ofComponents_hom_app,
+  simp only [rlimCone_π_app, rlimπ, towerDiagramObjQIso, NatIso.ofComponents_hom_app,
     Functor.rightDerivedFunctorNatTrans_app_Q_obj, Category.assoc, Iso.inv_hom_id,
     Category.comp_id, rlimObjQIso, limConeAsFunctor_π_app]
 
@@ -191,7 +185,7 @@ theorem isHomotopyLimit_rlimCone_Q_obj (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ
     [∀ p, Injective (I.X p)] : IsHomotopyLimit (rlimCone A (Q.obj I)) := by
   have h := isHomotopyLimit_mapCone_Q (G := I.asFunctor)
     (fun n p ↦ isSplitEpi_map_of_injective (I.X p) n) (isLimitLimConeAsFunctor I)
-  refine h.of_iso (towerFunctorObjQIso I).symm _ (rlimObjQIso I).symm fun n ↦ ?_
+  refine h.of_iso (towerDiagramObjQIso I).symm _ (rlimObjQIso I).symm fun n ↦ ?_
   rw [Iso.symm_hom, Iso.symm_hom, Iso.eq_inv_comp, Functor.mapCone_π_app, ← Category.assoc,
     ← rlimCone_π_app_Q_obj, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
 
@@ -207,9 +201,9 @@ theorem isHomotopyLimit_rlimCone (M : DerivedCategory (ℕᵒᵖ ⥤ A)) :
     (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{v} _ K).2
   let e : Q.obj I ≅ M := (asIso (Q.map ((CochainComplex.toKInjectiveResolution.{v} _).app K))).symm
     ≪≫ Q.objObjPreimageIso M
-  refine (isHomotopyLimit_rlimCone_Q_obj I).of_iso ((towerFunctor A).mapIso e) _
+  refine (isHomotopyLimit_rlimCone_Q_obj I).of_iso ((towerDiagram A).mapIso e) _
     ((rlim A).mapIso e) fun n ↦ ?_
-  simp only [rlimCone_π_app, Functor.mapIso_hom, towerFunctor_map_app]
+  simp only [rlimCone_π_app, Functor.mapIso_hom, towerDiagram_map_app]
   exact ((rlimπ A (op n)).naturality e.hom).symm
 
 end DerivedCategory

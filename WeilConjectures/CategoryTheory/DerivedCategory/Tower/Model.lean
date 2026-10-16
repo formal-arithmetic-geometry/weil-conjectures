@@ -15,7 +15,7 @@ Let `A` be a Grothendieck abelian category and `I` a K-injective complex of towe
 * `DerivedCategory.isHomotopyLimit_mapCone_limConeAsFunctor`: the termwise limit `lim I`, with
   its projections, is a derived limit of the inverse system of complexes `(Iₙ)ₙ` viewed in
   `D(A)`; in particular `Q (lim I)` represents `R lim (Q I)`.
-* `DerivedCategory.isLimitFanTowerFunctor`: the termwise product `∏ₙ Iₙ` represents the
+* `DerivedCategory.isLimitFanTowerDiagram`: the termwise product `∏ₙ Iₙ` represents the
   product `∏ₙ evₙ (Q I)` in `D(A)`.
 * `DerivedCategory.rlimModelIso`: for any functorial K-injective resolution `η : 𝟭 ⟶ ι` of
   complexes of towers, `K ↦ Q (lim (ι K))` is isomorphic to `K ↦ R lim (Q K)`; so any two
@@ -39,7 +39,7 @@ its projections to the levels `Iₙ`, is a derived limit of the inverse system `
 `Q (lim I)` represents `R lim (Q I)` (see also `DerivedCategory.rlimObjQIso`). -/
 theorem isHomotopyLimit_mapCone_limConeAsFunctor (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ)
     [I.IsKInjective] : IsHomotopyLimit (Q.mapCone (limConeAsFunctor I)) :=
-  (isHomotopyLimit_rlimCone (Q.obj I)).of_iso (towerFunctorObjQIso I) _ (rlimObjQIso I)
+  (isHomotopyLimit_rlimCone (Q.obj I)).of_iso (towerDiagramObjQIso I) _ (rlimObjQIso I)
     fun n ↦ by
       rw [Functor.mapCone_π_app]
       exact rlimCone_π_app_Q_obj I (op n)
@@ -47,14 +47,14 @@ theorem isHomotopyLimit_mapCone_limConeAsFunctor (I : CochainComplex (ℕᵒᵖ 
 /-- **Blueprint `prop-weil-pbc-derived-product-representation`**. For a K-injective complex of
 towers `I`, the termwise product `∏ₙ Iₙ` of its levels represents the derived product
 `R∏ₙ evₙ (Q I)`, the product in `D(A)` of the evaluations of `Q I`. -/
-noncomputable def isLimitFanTowerFunctor (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective] :
+noncomputable def isLimitFanTowerDiagram (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective] :
     IsLimit (Fan.mk (Q.obj (∏ᶜ fun n : ℕ ↦ I.asFunctor.obj (op n))) fun n ↦
       Q.map (Pi.π (fun n : ℕ ↦ I.asFunctor.obj (op n)) n) ≫
-        (towerFunctorObjQIso I).inv.app (op n) :
-      Fan fun n : ℕ ↦ ((towerFunctor A).obj (Q.obj I)).obj (op n)) := by
-  have h := isLimitFanQOfIsKInjective (productIsProduct fun n : ℕ ↦ I.asFunctor.obj (op n))
+        (towerDiagramObjQIso I).inv.app (op n) :
+      Fan fun n : ℕ ↦ ((towerDiagram A).obj (Q.obj I)).obj (op n)) := by
+  have h := isLimitFanMkQObjOfIsKInjective (productIsProduct fun n : ℕ ↦ I.asFunctor.obj (op n))
   refine IsLimit.ofIsoLimit ((IsLimit.postcomposeHomEquiv
-    (Discrete.natIso fun n ↦ ((towerFunctorObjQIso I).app (op n.as)).symm) _).symm h)
+    (Discrete.natIso fun n ↦ ((towerDiagramObjQIso I).app (op n.as)).symm) _).symm h)
     (Fan.ext (Iso.refl _) fun n ↦ ?_)
   simp only [Iso.refl_hom, Category.id_comp]
   rfl

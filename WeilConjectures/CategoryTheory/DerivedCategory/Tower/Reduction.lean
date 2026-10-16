@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Tower.TowerFunctorQ
+public import WeilConjectures.CategoryTheory.DerivedCategory.Tower.TowerDiagramQ
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.GrothendieckAxioms.Colim
@@ -106,11 +106,11 @@ noncomputable def reductionSystem (P : ℕᵒᵖ ⥤ CochainComplex A ℤ) :
 /-- The comparison of the levels `Q (X ⊗ Pₙ)` of the reduction tower of a K-flat complex `X` with
 the derived tensor products `Q X ⊗ᴸ Q Pₙ`, as an isomorphism of functors of `X`. -/
 noncomputable def reductionTowerIsoAux (P : ℕᵒᵖ ⥤ CochainComplex A ℤ) :
-    TensorCommShift₂.LKFlat A ⋙ reductionTower P ⋙ towerFunctor A ≅
+    TensorCommShift₂.LKFlat A ⋙ reductionTower P ⋙ towerDiagram A ≅
       TensorCommShift₂.LKFlat A ⋙ reductionSystem P :=
   Functor.isoWhiskerRight (Localization.Lifting.iso (TensorCommShift₂.LKFlat A) (kFlatQuasiIso A)
-      (tensorTowerFunctorKFlat P) (reductionTower P)) (towerFunctor A) ≪≫
-    Functor.isoWhiskerLeft (CochainComplex.ιKFlat A ⋙ tensorTowerFunctor P) (towerFunctorQIso A) ≪≫
+      (tensorTowerFunctorKFlat P) (reductionTower P)) (towerDiagram A) ≪≫
+    Functor.isoWhiskerLeft (CochainComplex.ιKFlat A ⋙ tensorTowerFunctor P) (towerDiagramQIso A) ≪≫
     Functor.isoWhiskerLeft (CochainComplex.ιKFlat A ⋙ curriedTensor (CochainComplex A ℤ) ⋙
         (Functor.whiskeringLeft _ _ _).obj P)
       ((Functor.whiskeringRight _ _ _).mapIso (quotientCompQhIso A).symm) ≪≫
@@ -122,7 +122,7 @@ noncomputable def reductionTowerIsoAux (P : ℕᵒᵖ ⥤ CochainComplex A ℤ) 
 /-- The underlying inverse system `(evₙ K_•)ₙ` of the reduction tower `K_•` of `K` is the
 system of derived tensor products `K ⊗ᴸ Pₙ`, naturally in `K`. -/
 noncomputable def reductionTowerIso (P : ℕᵒᵖ ⥤ CochainComplex A ℤ) :
-    reductionTower P ⋙ towerFunctor A ≅ reductionSystem P :=
+    reductionTower P ⋙ towerDiagram A ≅ reductionSystem P :=
   Localization.liftNatIso (TensorCommShift₂.LKFlat A) (kFlatQuasiIso A) _ _ _ _
     (reductionTowerIsoAux P)
 

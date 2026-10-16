@@ -23,20 +23,6 @@ namespace CategoryTheory
 
 open Functor
 
-variable {C₀ C₁ C₂ C₃ : Type*} [Category* C₀] [Category* C₁] [Category* C₂] [Category* C₃]
-
-/-- The conjugate of the inverse associator is the inverse associator. -/
-lemma conjugateEquiv_associator_inv
-    {L₀₁ : C₀ ⥤ C₁} {R₁₀ : C₁ ⥤ C₀} {L₁₂ : C₁ ⥤ C₂} {R₂₁ : C₂ ⥤ C₁}
-    {L₂₃ : C₂ ⥤ C₃} {R₃₂ : C₃ ⥤ C₂} (adj₀₁ : L₀₁ ⊣ R₁₀) (adj₁₂ : L₁₂ ⊣ R₂₁)
-    (adj₂₃ : L₂₃ ⊣ R₃₂) :
-    conjugateEquiv ((adj₀₁.comp adj₁₂).comp adj₂₃) (adj₀₁.comp (adj₁₂.comp adj₂₃))
-      (associator _ _ _).inv = (associator _ _ _).inv := by
-  have h := conjugateEquiv_comp (adj₀₁.comp (adj₁₂.comp adj₂₃)) ((adj₀₁.comp adj₁₂).comp adj₂₃)
-    (adj₀₁.comp (adj₁₂.comp adj₂₃)) (associator L₀₁ L₁₂ L₂₃).hom (associator L₀₁ L₁₂ L₂₃).inv
-  rw [conjugateEquiv_associator_hom, Iso.inv_hom_id, conjugateEquiv_id] at h
-  exact (Iso.hom_comp_eq_id (associator _ _ _)).1 h
-
 variable {CR CS CT PR PS PT : Type*} [Category* CR] [Category* CS] [Category* CT]
   [Category* PR] [Category* PS] [Category* PT]
   {e₁ : CS ⥤ CT} {r₁ : CT ⥤ CS} {e₂ : CR ⥤ CS} {r₂ : CS ⥤ CR} {e₁₂ : CR ⥤ CT} {r₁₂ : CT ⥤ CR}
@@ -60,6 +46,20 @@ lemma conjugateEquiv_paste_eq (Ecomp' : e₂ ⋙ e₁ ⟶ e₁₂)
     σ₁₂ = whiskerLeft νR Pcomp ≫ (associator _ _ _).inv ≫ whiskerRight σ₂ p₁ ≫
       (associator _ _ _).hom ≫ whiskerLeft e₂ σ₁ ≫ (associator _ _ _).inv ≫
       whiskerRight Ecomp' νT := by
+  have hinv₁ : conjugateEquiv ((aR.comp aP₂).comp aP₁) (aR.comp (aP₂.comp aP₁))
+      (associator _ _ _).inv = (associator _ _ _).inv := by
+    ext X
+    simp only [comp_obj, conjugateEquiv_apply_app, Adjunction.comp_unit_app, comp_map,
+      Category.assoc, ← Functor.map_comp, associator_inv_app, Adjunction.comp_counit_app,
+      Category.id_comp]
+    simp
+  have hinv₂ : conjugateEquiv ((aE₂.comp aE₁).comp aT) (aE₂.comp (aE₁.comp aT))
+      (associator _ _ _).inv = (associator _ _ _).inv := by
+    ext X
+    simp only [comp_obj, conjugateEquiv_apply_app, Adjunction.comp_unit_app, comp_map,
+      Category.assoc, ← Functor.map_comp, associator_inv_app, Adjunction.comp_counit_app,
+      Category.id_comp]
+    simp
   apply (conjugateEquiv (aE₁₂.comp aT) (aR.comp aP₁₂)).injective
   rw [h, ← conjugateEquiv_comp _ (aR.comp (aP₂.comp aP₁)) _,
     ← conjugateEquiv_comp _ ((aR.comp aP₂).comp aP₁) _,
@@ -67,8 +67,8 @@ lemma conjugateEquiv_paste_eq (Ecomp' : e₂ ⋙ e₁ ⟶ e₁₂)
     ← conjugateEquiv_comp _ (aE₂.comp (aS.comp aP₁)) _,
     ← conjugateEquiv_comp _ (aE₂.comp (aE₁.comp aT)) _,
     ← conjugateEquiv_comp _ ((aE₂.comp aE₁).comp aT) _,
-    conjugateEquiv_whiskerLeft, conjugateEquiv_associator_inv, conjugateEquiv_whiskerRight,
-    conjugateEquiv_associator_hom, conjugateEquiv_whiskerLeft, conjugateEquiv_associator_inv,
+    conjugateEquiv_whiskerLeft, hinv₂, conjugateEquiv_whiskerRight,
+    conjugateEquiv_associator_hom, conjugateEquiv_whiskerLeft, hinv₁,
     conjugateEquiv_whiskerRight]
   simp only [Category.assoc]
 

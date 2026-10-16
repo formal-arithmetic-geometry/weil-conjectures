@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionShift
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 
 /-!
@@ -17,9 +16,12 @@ sheaves, the derived direct image `R u_*⁺` is a triangulated functor, with the
 obtained by comparing injective resolutions
 (`AlgebraicGeometry.Etale.isTriangulated_rightDerivedFunctorPlus_lowerStar`, blueprint
 `lem-weil-pbc-derived-direct-image-triangulated`), and the derived adjunction
-`u^* ⊣ R u_*⁺` is compatible with the shifts
-(`AlgebraicGeometry.Etale.commShift_upperStarLowerStarAdjunction_derivedPlus`, blueprint
-`lem-weil-pbc-derived-adjunction-commshift`).
+`u^* ⊣ R u_*⁺` is compatible with the shifts (blueprint
+`lem-weil-pbc-derived-adjunction-commshift`, proved for abelian sheaves as
+`AlgebraicGeometry.Etale.derivedPlus_upperStarLowerStar_commShift`; the uniqueness of the
+compatible shift structure on a right adjoint, blueprint
+`lem-weil-pbc-adjunction-shift-compatibility-unique`, is Mathlib's
+`CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit`).
 
 For a commutative square of schemes `g' ≫ f = f' ≫ g`, the derived exchange transformation
 `Ex : Φ = R f_*⁺ ⋙ D g^*⁺ ⟶ Ψ = D g'^*⁺ ⋙ R f'_*⁺`
@@ -58,16 +60,6 @@ omit [HasSmallSiteSheafify A] in
 `CategoryTheory.Functor.rightDerivedFunctorPlus` of an additive functor). -/
 lemma Etale.isTriangulated_rightDerivedFunctorPlus_lowerStar :
     ((u)_*[A]).rightDerivedFunctorPlus.IsTriangulated :=
-  inferInstance
-
-omit [HasSmallSiteSheafify A] in
-/-- This is blueprint `lem-weil-pbc-derived-adjunction-commshift` for étale sheaves: the derived
-adjunction `u^* ⊣ R u_*⁺` on the bounded below derived categories is compatible with the
-shifts, i.e. its unit and counit commute with the shift isomorphisms
-(`CategoryTheory.Adjunction.derivedPlus_unit_app_shift`,
-`CategoryTheory.Adjunction.derivedPlus_counit_app_shift`). -/
-lemma Etale.commShift_upperStarLowerStarAdjunction_derivedPlus :
-    (Etale.upperStarLowerStarAdjunction A u).derivedPlus.CommShift ℤ :=
   inferInstance
 
 end DirectImage

@@ -197,7 +197,7 @@ theorem Stratification.inter_spec :
     (∀ (k : Fin S.n) (l : Fin T.n),
       Set.range ((S.inter T).immersion (finProdFinEquiv (k, l))) =
         S.stratum k ∩ T.stratum l) ∧
-    (∀ (k : Fin S.n) (l : Fin T.n), IsConstructible (S.stratum k ∩ T.stratum l)) ∧
+    (∀ (k : Fin S.n) (l : Fin T.n), Topology.IsConstructible (S.stratum k ∩ T.stratum l)) ∧
     (S.inter T).Refines S ∧ (S.inter T).Refines T :=
   ⟨fun k l ↦ by rw [(S.inter T).range_immersion, inter_stratum_finProdFinEquiv],
     fun k l ↦ (S.isConstructible_stratum k).inter (T.isConstructible_stratum l),

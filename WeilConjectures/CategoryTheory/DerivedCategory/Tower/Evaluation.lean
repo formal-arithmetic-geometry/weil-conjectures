@@ -42,7 +42,8 @@ instance preservesFiniteLimits_evaluationLeftAdjoint (c : ℕᵒᵖ) :
     let α : 𝟭 A ⟶ evaluationLeftAdjoint A c ⋙ (evaluation ℕᵒᵖ A).obj m :=
       { app X := Sigma.ι (fun _ : c ⟶ m ↦ X) g₀
         naturality X Y f := by
-          change f ≫ _ = Sigma.ι (fun _ : c ⟶ m ↦ X) g₀ ≫ (Sigma.desc fun h ↦ f ≫ Sigma.ι (fun _ : c ⟶ m ↦ Y) h)
+          change f ≫ _ = Sigma.ι (fun _ : c ⟶ m ↦ X) g₀ ≫
+            (Sigma.desc fun h ↦ f ≫ Sigma.ι (fun _ : c ⟶ m ↦ Y) h)
           erw [Sigma.ι_desc] }
     have (X : A) : IsIso (α.app X) := by
       change IsIso (Sigma.ι (fun _ : c ⟶ m ↦ X) g₀)

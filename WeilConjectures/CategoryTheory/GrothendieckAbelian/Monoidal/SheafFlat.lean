@@ -16,16 +16,15 @@ proper base change, the structure of the category `Sheaf J A` of `A`-valued shea
 
 - `CategoryTheory.GrothendieckTopology.sheaf_tensor_closed`: `Sheaf J A` is Grothendieck
   abelian, sheafification is exact and strong symmetric monoidal for the sheafified objectwise
-  tensor product, and this monoidal structure is symmetric and closed;
-- `CategoryTheory.GrothendieckTopology.flat_freeYoneda`: the sheafified free presheaf
-  `P_X^# = Sheaf.freeYoneda J X P` on an object `X` of `C`, with flat coefficients `P`, is
-  flat. On the small étale site with `A` the category of `Λ`-modules, `Sheaf.freeYoneda J X Λ`
-  is the extension by zero `j_{X!} Λ_X` of the constant sheaf.
+  tensor product, and this monoidal structure is symmetric and closed.
 
 The neighbouring blueprint nodes are existing declarations: blueprint `lem-weil-pbc-flat-coproduct`
-is `CategoryTheory.ObjectProperty.flat_coproduct`, and blueprint
+is `CategoryTheory.ObjectProperty.flat_coproduct`, blueprint
 `lem-weil-pbc-sheaf-flat-separator` is
-`CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall`.
+`CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall`, and
+blueprint `lem-weil-pbc-free-sheaf-flat` is `CategoryTheory.GrothendieckTopology.free_sheaf_flat`
+(the sheafified free presheaf `Sheaf.freeYoneda J X P` with flat coefficients is flat; on the
+small étale site with `A` the category of `Λ`-modules it is the extension by zero `j_{X!} Λ_X`).
 -/
 
 @[expose] public section
@@ -69,24 +68,5 @@ theorem sheaf_tensor_closed :
       Nonempty (MonoidalClosed (Sheaf J A)) :=
   ⟨inferInstance, inferInstance, inferInstance, inferInstance, ⟨inferInstance⟩,
     ⟨Sheaf.symmetricCategory J A⟩, ⟨inferInstance⟩⟩
-
-omit [MonoidalPreadditive A] in
-/-- **The sheafified free presheaf on an object with flat coefficients is flat.** For an object
-`X` of `C` and a flat object `P` of `A`, the sheaf `P_X^# = Sheaf.freeYoneda J X P` associated
-to the presheaf `V ↦ ∐_{V ⟶ X} P` is flat: each value of the presheaf is a coproduct of copies
-of `P`, hence flat (`CategoryTheory.ObjectProperty.flat_coproduct`), and the sheafification of a
-presheaf with flat values is flat
-(`CategoryTheory.GrothendieckTopology.flat_presheafToSheaf_obj`).
-This is blueprint `lem-weil-pbc-free-sheaf-flat`. -/
-@[stacks 03EV]
-theorem flat_freeYoneda (X : C) {P : A} (hP : ObjectProperty.flat P) :
-    ObjectProperty.flat (Sheaf.freeYoneda J X P) := by
-  refine flat_presheafToSheaf_obj A J _ fun V ↦ ?_
-  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{_, _, u + 1} A
-    (ULift.{u + 1} (V.unop ⟶ X))
-  exact ObjectProperty.prop_of_iso _
-    (Sigma.whiskerEquiv (f := fun _ : ULift.{u + 1} (V.unop ⟶ X) ↦ P) Equiv.ulift
-      fun _ ↦ Iso.refl P)
-    (ObjectProperty.flat_coproduct _ fun _ ↦ hP)
 
 end CategoryTheory.GrothendieckTopology

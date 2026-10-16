@@ -34,11 +34,11 @@ The shift structures are the ones of the étale model: `Rg_*` is the right adjoi
 (`AlgebraicGeometry.ProEtale.commShiftRightDerivedLowerStar'`), while `Lg^*` is isomorphic to
 `D(g^*)` and receives its commutation with the shifts from this isomorphism
 (`AlgebraicGeometry.ProEtale.commShiftLeftDerivedUpperStar'`). They are *not* instances: the
-global instances of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shift` use instead the
-commutation of the right derived functor `Rg_*` with the shifts computed with K-injective
-resolutions, and the commutation of `Lg^*` with the shifts transported along the adjunction.
-These definitions are meant to be activated locally, in proofs of statements (such as the
-triangulatedness of a subcategory) which do not depend on the chosen shift structures.
+global instances of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shift` use
+instead the commutation of the right derived functor `Rg_*` with the shifts computed with
+K-injective resolutions, and the commutation of `Lg^*` with the shifts transported along the
+adjunction. These definitions are meant to be activated locally, in proofs of statements (such
+as the triangulatedness of a subcategory) which do not depend on the chosen shift structures.
 -/
 
 @[expose] public section
@@ -60,29 +60,27 @@ section LowerStar
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
-/-- The derived adjunction `D(g^*) ⊣ Rg_*` on the unbounded derived categories of pro-étale
-sheaves, where the exact pullback `g^*` is applied levelwise. -/
-noncomputable def mapDerivedUpperStarLowerStarAdjunction : D((g)^*[A]) ⊣ R((g)_*[A]) :=
-  (ProEtale.upperStarLowerStarAdjunction A g).mapDerivedCategoryRightDerivedAdjunction
-
 /-- The commutation of `Rg_*` with the shifts inherited from its left adjoint `D(g^*)`. It is not
 an instance, see the implementation notes. -/
 @[implicit_reducible]
 noncomputable def commShiftRightDerivedLowerStar' : (R((g)_*[A])).CommShift ℤ :=
-  (mapDerivedUpperStarLowerStarAdjunction A g).rightAdjointCommShift ℤ
+  Adjunction.rightAdjointCommShift
+    (upperStarLowerStarAdjunction A g).mapDerivedCategoryRightDerivedAdjunction ℤ
 
 attribute [local instance high] commShiftRightDerivedLowerStar'
 
 /-- The adjunction `D(g^*) ⊣ Rg_*` commutes with the shifts, for
 `AlgebraicGeometry.ProEtale.commShiftRightDerivedLowerStar'`. -/
-lemma commShift_mapDerivedUpperStarLowerStarAdjunction :
-    (mapDerivedUpperStarLowerStarAdjunction A g).CommShift ℤ :=
-  (mapDerivedUpperStarLowerStarAdjunction A g).commShift_of_leftAdjoint ℤ
+lemma commShift_mapDerivedCategoryRightDerivedAdjunction_upperStarLowerStar :
+    (upperStarLowerStarAdjunction A g).mapDerivedCategoryRightDerivedAdjunction.CommShift ℤ :=
+  Adjunction.commShift_of_leftAdjoint
+    (upperStarLowerStarAdjunction A g).mapDerivedCategoryRightDerivedAdjunction ℤ
 
 /-- `Rg_*` is triangulated, for `AlgebraicGeometry.ProEtale.commShiftRightDerivedLowerStar'`. -/
 lemma isTriangulated_rightDerivedLowerStar' : (R((g)_*[A])).IsTriangulated :=
-  have := commShift_mapDerivedUpperStarLowerStarAdjunction A g
-  (mapDerivedUpperStarLowerStarAdjunction A g).isTriangulated_rightAdjoint
+  have := commShift_mapDerivedCategoryRightDerivedAdjunction_upperStarLowerStar A g
+  Adjunction.isTriangulated_rightAdjoint
+    (upperStarLowerStarAdjunction A g).mapDerivedCategoryRightDerivedAdjunction
 
 end LowerStar
 
@@ -111,7 +109,7 @@ lemma isTriangulated_leftDerivedUpperStar' : (L((g)^*[A])).IsTriangulated :=
 `Lg^* ≅ D(g^*)`. -/
 lemma derivedUpperStarLowerStarAdjunction_eq :
     derivedUpperStarLowerStarAdjunction A g =
-      (mapDerivedUpperStarLowerStarAdjunction A g).ofNatIsoLeft
+      (upperStarLowerStarAdjunction A g).mapDerivedCategoryRightDerivedAdjunction.ofNatIsoLeft
         (leftDerivedUpperStarIsoMapDerivedCategory A g).symm :=
   Adjunction.derived_eq_ofNatIsoLeft _ _ _ _ _ _
     (leftDerivedUpperStarIsoMapDerivedCategory A g)
@@ -123,7 +121,7 @@ lemma derivedUpperStarLowerStarAdjunction_eq :
 lemma commShift_derivedUpperStarLowerStarAdjunction' :
     (derivedUpperStarLowerStarAdjunction A g).CommShift ℤ := by
   rw [derivedUpperStarLowerStarAdjunction_eq]
-  have := commShift_mapDerivedUpperStarLowerStarAdjunction A g
+  have := commShift_mapDerivedCategoryRightDerivedAdjunction_upperStarLowerStar A g
   have : NatTrans.CommShift (leftDerivedUpperStarIsoMapDerivedCategory A g).symm.hom ℤ :=
     Functor.CommShift.ofIso_compatibility (leftDerivedUpperStarIsoMapDerivedCategory A g).symm ℤ
   exact Adjunction.commShift_ofNatIsoLeft _ _

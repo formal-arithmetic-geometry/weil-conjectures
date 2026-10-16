@@ -13,9 +13,9 @@ public import WeilConjectures.FromJoel.Algebra.Homology.HomologicalComplexFuncto
 # The underlying inverse system of a complex of towers
 
 Let `A` be a Grothendieck abelian category. For any cochain complex `Y` of towers in `A`, the
-inverse system `(evₙ (Q Y))ₙ` of `D(A)` attached to `Q Y` (`DerivedCategory.towerFunctor`) is
+inverse system `(evₙ (Q Y))ₙ` of `D(A)` attached to `Q Y` (`DerivedCategory.towerDiagram`) is
 computed by applying `Q` to the levels `Yₙ` of `Y`: the evaluation functors are exact, so their
-derived functors need no resolution (`DerivedCategory.towerFunctorQIso`).
+derived functors need no resolution (`DerivedCategory.towerDiagramQIso`).
 -/
 
 @[expose] public section
@@ -44,8 +44,8 @@ lemma towerEvalQhIso_inv_naturality {n n' : ℕᵒᵖ} (f : n ⟶ n')
 
 /-- For a complex of towers `Y`, the inverse system `(evₙ (Q Y))ₙ` of `D(A)` is the image
 under `Q` of the inverse system of complexes `(Yₙ)ₙ`, naturally in `Y`. -/
-noncomputable def towerFunctorQIso :
-    Q ⋙ towerFunctor A ≅
+noncomputable def towerDiagramQIso :
+    Q ⋙ towerDiagram A ≅
       (HomologicalComplex.functorEquivalence A (ComplexShape.up ℤ) ℕᵒᵖ).functor ⋙
         (Functor.whiskeringRight _ _ _).obj Q :=
   NatIso.ofComponents (fun Y ↦ NatIso.ofComponents (fun n ↦

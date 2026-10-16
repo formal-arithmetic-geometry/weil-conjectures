@@ -147,7 +147,8 @@ theorem nonempty_iso_map_derivedCompletionDiagram_obj
       (derivedCompletionDiagram J' I (Φ.obj K)).obj (op n)) := by
   let T₁ := Φ.mapTriangle.obj (tensorQuotPowTriangle hϖ hI K n)
   let T₂ := tensorQuotPowTriangle (J := J') hϖ hI (Φ.obj K) n
-  have h₁ : T₁ ∈ distTriang _ := Φ.map_distinguished _ (tensorQuotPowTriangle_distinguished hϖ hI K n)
+  have h₁ : T₁ ∈ distTriang _ :=
+    Φ.map_distinguished _ (tensorQuotPowTriangle_distinguished hϖ hI K n)
   have h₂ : T₂ ∈ distTriang _ := tensorQuotPowTriangle_distinguished hϖ hI _ n
   have hT₁ : T₁.mor₁ = ϖ ^ n • 𝟙 T₁.obj₁ := by
     change Φ.map (tensorQuotPowTriangle hϖ hI K n).mor₁ = _
@@ -157,8 +158,8 @@ theorem nonempty_iso_map_derivedCompletionDiagram_obj
   obtain ⟨e, -, -⟩ := Pretriangulated.exists_iso_of_arrow_iso _ _ h₁ h₂
     (Arrow.isoMk v v (by
       change v.hom ≫ T₂.mor₁ = T₁.mor₁ ≫ v.hom
-      rw [hT₁, tensorQuotPowTriangle_mor₁, Linear.comp_smul, Linear.smul_comp, comp_id, id_comp]
-      rfl))
+      rw [hT₁, tensorQuotPowTriangle_mor₁, Linear.comp_smul, Linear.smul_comp, comp_id,
+        id_comp]))
   exact ⟨Triangle.π₃.mapIso e⟩
 
 include hϖ hI in

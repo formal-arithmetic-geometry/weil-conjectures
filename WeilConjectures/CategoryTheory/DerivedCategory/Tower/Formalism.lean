@@ -69,7 +69,7 @@ theorem isIso_rlim_map_of_forall_isIso {M N : DerivedCategory (ℕᵒᵖ ⥤ A)}
 variable (A) in
 /-- The natural transformation `R lim M ⟶ (evₙ M)ₙ` of the cones `DerivedCategory.rlimCone`. -/
 @[simps]
-noncomputable def rlimConeπ : rlim A ⋙ Functor.const ℕᵒᵖ ⟶ towerFunctor A where
+noncomputable def rlimConeπ : rlim A ⋙ Functor.const ℕᵒᵖ ⟶ towerDiagram A where
   app M := (rlimCone A M).π
   naturality _ _ f := by
     ext n
@@ -78,19 +78,19 @@ noncomputable def rlimConeπ : rlim A ⋙ Functor.const ℕᵒᵖ ⟶ towerFunct
 variable (A) in
 /-- **Blueprint `def-weil-pbc-derived-inverse-limit`** (as a formalism). The derived category of
 towers `D(ℕᵒᵖ ⥤ A)` over `D(A)`, with the derived evaluations `evₙ`
-(`DerivedCategory.towerFunctor`), the derived limit `R lim` and its projections, is a sequential
+(`DerivedCategory.towerDiagram`), the derived limit `R lim` and its projections, is a sequential
 derived limit formalism: the projections exhibit `R lim M` as the derived limit of `(evₙ M)ₙ`
 (Roos triangle, `DerivedCategory.isHomotopyLimit_rlimCone`) and the evaluations are jointly
 conservative (`DerivedCategory.isIso_of_forall_isIso_towerEval`). -/
 noncomputable def towerLimitFormalism :
     TowerLimitFormalism (DerivedCategory (ℕᵒᵖ ⥤ A)) (DerivedCategory A) where
-  tower := towerFunctor A
+  tower := towerDiagram A
   rlim := rlim A
   π := rlimConeπ A
   isHomotopyLimit M := isHomotopyLimit_rlimCone M
   isIso_of_forall_isIso f hf := isIso_of_forall_isIso_towerEval f hf
 
-@[simp] lemma towerLimitFormalism_tower : (towerLimitFormalism A).tower = towerFunctor A := rfl
+@[simp] lemma towerLimitFormalism_tower : (towerLimitFormalism A).tower = towerDiagram A := rfl
 
 @[simp] lemma towerLimitFormalism_rlim : (towerLimitFormalism A).rlim = rlim A := rfl
 

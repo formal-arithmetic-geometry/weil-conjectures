@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Tower.Products
+public import WeilConjectures.CategoryTheory.DerivedCategory.Products
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
@@ -18,7 +19,9 @@ Let `F : ℕᵒᵖ ⥤ C` be a tower in a preadditive category, with a limit con
 `∏ₙ Fₙ`, and let `t = towerShift` be the endomorphism of `∏ₙ Fₙ` with components
 `∏ Fₙ ⟶ Fₙ₊₁ ⟶ Fₙ`. Then
 
-* `lim F ⟶ ∏ₙ Fₙ` is a kernel of `1 - t` (`CategoryTheory.Limits.isLimitKernelForkTowerShift`);
+* `lim F ⟶ ∏ₙ Fₙ` is a kernel of `1 - t`
+  (`CategoryTheory.Limits.Fan.IsLimit.isLimitKernelForkOneSub`, from
+  `WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit`);
 * if every transition map `Fₙ₊₁ ⟶ Fₙ` is a split epimorphism, so is `1 - t`
   (`CategoryTheory.Limits.isSplitEpi_sub_towerShift`).
 
@@ -45,30 +48,6 @@ namespace CategoryTheory.Limits
 variable {C : Type*} [Category C] [Preadditive C] {F : ℕᵒᵖ ⥤ C}
   {P : Fan fun n : ℕ ↦ F.obj (op n)} (hP : IsLimit P)
 
-@[reassoc (attr := simp)]
-lemma lift_comp_sub_towerShift (c : Cone F) :
-    Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) ≫ (𝟙 _ - towerShift hP) = 0 := by
-  simp [Preadditive.comp_sub]
-
-/-- The maps `lim F ⟶ Fₙ` exhibit `lim F ⟶ ∏ₙ Fₙ` as a kernel of `1 - t`. -/
-noncomputable def isLimitKernelForkTowerShift {c : Cone F} (hc : IsLimit c) :
-    IsLimit (KernelFork.ofι _ (lift_comp_sub_towerShift hP c)) :=
-  KernelFork.IsLimit.ofι _ _
-    (fun {W} g hg ↦ hc.lift
-      { pt := W
-        π := NatTrans.ofOpSequence (fun n ↦ g ≫ P.proj n) fun n ↦ by
-          have := hg =≫ P.proj n
-          simp only [Preadditive.comp_sub, Category.comp_id, Preadditive.sub_comp,
-            Category.assoc, towerShift_proj, zero_comp, sub_eq_zero] at this
-          simpa using this })
-    (fun {W} g hg ↦ Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
-      simp only [Category.assoc, Fan.IsLimit.fac, IsLimit.fac]
-      simp)
-    (fun {W} g hg m hm ↦ hc.hom_ext fun n ↦ by
-      obtain ⟨n⟩ := n
-      rw [IsLimit.fac]
-      simpa using hm =≫ P.proj n)
-
 /-- The recursively defined components `yₙ : ∏ Fₙ ⟶ Fₙ` of a section of `1 - t`, given
 sections `σₙ` of the transition maps: `y₀ = 0` and `yₙ₊₁ = (yₙ - prₙ) ≫ σₙ`. -/
 noncomputable def towerShiftSectionAux (σ : ∀ n : ℕ, F.obj (op n) ⟶ F.obj (op (n + 1))) :
@@ -93,11 +72,12 @@ category whose transition maps are split epimorphisms is short exact. -/
 lemma shortExact_towerShift {A : Type*} [Category A] [Abelian A] {F : ℕᵒᵖ ⥤ A}
     {P : Fan fun n : ℕ ↦ F.obj (op n)} (hP : IsLimit P) {c : Cone F} (hc : IsLimit c)
     (h : Epi (𝟙 _ - towerShift hP)) :
-    (ShortComplex.mk _ _ (lift_comp_sub_towerShift hP c)).ShortExact where
-  exact := ShortComplex.exact_of_f_is_kernel _ (isLimitKernelForkTowerShift hP hc)
-  mono_f := by
-    have := mono_of_isLimit_fork (isLimitKernelForkTowerShift hP hc)
-    simpa using this
+    (ShortComplex.mk _ _ (Fan.IsLimit.lift_π_comp_one_sub_eq_zero hP _
+      (towerShift_proj hP) c)).ShortExact where
+  exact := ShortComplex.exact_of_f_is_kernel _
+    (Fan.IsLimit.isLimitKernelForkOneSub hP _ (towerShift_proj hP) hc)
+  mono_f := mono_of_isLimit_fork
+    (Fan.IsLimit.isLimitKernelForkOneSub hP _ (towerShift_proj hP) hc)
   epi_g := h
 
 end CategoryTheory.Limits
@@ -140,7 +120,7 @@ theorem isHomotopyLimit_mapCone_Q {G : ℕᵒᵖ ⥤ CochainComplex A ℤ}
     rw [HomologicalComplex.sub_f_apply, HomologicalComplex.id_f, towerShift_f]
     exact @IsSplitEpi.epi _ _ _ _ _ this
   have hS := shortExact_towerShift hP hc hepi
-  have hPD := isLimitFanQOfIsKInjective hP
+  have hPD := isLimitFanMkQObjOfIsKInjective hP
   refine ⟨_, hPD, triangleOfSESδ hS, ?_⟩
   have h₁ : Fan.IsLimit.lift hPD (fun n ↦ (Q.mapCone c).π.app (op n)) =
       Q.map (Fan.IsLimit.lift hP fun n ↦ c.π.app (op n)) :=
