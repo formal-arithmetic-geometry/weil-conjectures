@@ -6,7 +6,6 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.AlgebraicGeometry.CondensedDerivedTensorComparison
-public import Mathlib.CategoryTheory.Limits.Final
 import Sheaf.AlgebraicGeometry.CondensedCoefficientComplexColimit
 import Sheaf.AlgebraicGeometry.CondensedCoefficientComplexCompatibility
 
