@@ -3,58 +3,298 @@
  "blueprint": {
   "is": "lem-coef-finite-dualizing",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite coefficient change for the dualizing object",
- "statement": "Let $a_X:X\\to\\operatorname{Spec}k$ and\n$\\omega_{X,A}=Ra_{X,A}^{\\times}A$. There is a canonical\nisomorphism\n\n$$\nu_{X,A,B}:\\omega_{X,A}\\otimes_A^LB\n\\xrightarrow{\\sim}\\omega_{X,B}.\n$$\n\nIt is the adjoint, for $Ra_{X,B!}\\dashv Ra_{X,B}^{\\times}$, of\n\n$$\nRa_{X,B!}(\\omega_{X,A}\\otimes_A^LB)\n\\cong(Ra_{X,A!}\\omega_{X,A})\\otimes_A^LB\n\\longrightarrow A\\otimes_A^LB=B.\n$$\n\nThese maps satisfy the quotient cocycle and carry the reduction\nof the dualizing counit to the dualizing counit.",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber], so $k=\\overline{\\mathbf F}_q$ has characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and integers $1\\le m\\le n$. Put $A=A_{E,n}=\\mathcal O_E/(\\varpi_E^n)$ and $B=A_{E,m}$, with their quotient map $A\\to B$. Let $a_X:X\\to s=\\operatorname{Spec}k$ be separated and of finite type [def-weil-proper-morphism, def-weil-finite-type-morphism]. Work first on the ordinary small etale derived categories [def-weil-pbc-derived-categories], with derived coefficient extension $T_{A,B}(K)=K\\otimes_A^L B$ [def-kun-derived-tensor]. Let $F_{X,A}=Ra_{X,A!}$ be ordinary etale compact support [def-amb-etale-compact-support], let $a_{X,A}^{\\times}$ be its right adjoint [thm-amb-etale-exceptional-adjoint], and set $\\omega_{X,A}=a_{X,A}^{\\times}A_s$; use the analogous notation at $B$. Denote the counit at $A_s$ by $\\varepsilon_{X,A}:F_{X,A}\\omega_{X,A}\\to A_s$.\n\nThere is a canonical isomorphism\n$$\nu_{X,A,B}:T_{A,B}\\omega_{X,A}\\xrightarrow{\\sim}\\omega_{X,B}.\n$$\nSpecifically, let $c_{X,A,B,K}:T_{A,B}F_{X,A}K\\xrightarrow{\\sim}F_{X,B}T_{A,B}K$ be the compact-support coefficient comparison of [lem-fix-compact-support-coefficient-change]. Then $u_{X,A,B}$ is the adjoint under $F_{X,B}\\dashv a_{X,B}^{\\times}$ of\n$$\nF_{X,B}T_{A,B}\\omega_{X,A}\\xrightarrow{c_{X,A,B,\\omega_{X,A}}^{-1}}T_{A,B}F_{X,A}\\omega_{X,A}\\xrightarrow{T_{A,B}\\varepsilon_{X,A}}T_{A,B}A_s\\cong B_s.\n$$\nIn particular its counit identity is\n$$\n\\varepsilon_{X,B}\\circ F_{X,B}(u_{X,A,B})=(T_{A,B}\\varepsilon_{X,A})\\circ c_{X,A,B,\\omega_{X,A}}^{-1}.\n$$\nFor $1\\le h\\le m\\le n$ and $C=A_{E,h}$ these isomorphisms satisfy\n$$\nu_{X,A,C}=u_{X,B,C}\\circ T_{B,C}(u_{X,A,B}),\\qquad u_{X,A,A}=1,\n$$\nusing the canonical reassociation $T_{B,C}T_{A,B}\\cong T_{A,C}$. Their finite pro-etale realization is the same isomorphism after the etale/pro-etale comparison: the dualizing objects are identified by [lem-weil-finite-duality-site-comparison], and the exceptional functor on that constructible realization is the transported functor of [def-weil-exceptional-inverse-image].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
   "place": "node lem-coef-finite-dualizing, order 2140"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-weil-finite-duality-site-comparison",
+  "def-weil-exceptional-inverse-image"
+ ],
  "proof": [
   {
-   "text": "The object $\\omega_{X,A}$ is finite-Tor constructible by\n[lem-weil-verdier-preservation-strata], applied to $A_X$.\nThus compact-support coefficient comparison\n[lem-fix-compact-support-coefficient-change] constructs the\ndisplayed adjoint map without any coefficient compatibility\nassumption on an exceptional right adjoint.",
+   "text": "The existence hypotheses are in force. A field is Noetherian since its only ideals are $0$ and itself; hence $s$ is Noetherian. By [lem-weil-pbc-finite-type-over-noetherian], $X$ and all its finite-type affine charts are Noetherian. By [thm-nagata-compactification], the separated finite-type $a_X$ is compactifiable (the one-point affine base is quasi-compact and quasi-separated). Thus [thm-amb-etale-exceptional-adjoint] supplies the ordinary etale adjoints at each of $A,B,C$. No adjoint on arbitrary pro-etale sheaves is used.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+    "place": "Proof, first paragraph: scope of the ambient etale adjoint"
+   }
+  },
+  {
+   "text": "The constant coefficient sheaf $A_X$ is bounded constructible and has Tor amplitude $[0,0]$: tensor with $A_X$ is the identity. Apply [lem-weil-verdier-preservation-strata] to $K=A_X$. Its dual is $R\\mathcal Hom_A(A_X,\\omega_{X,A})=\\omega_{X,A}$ by evaluation at $1$, so $\\omega_{X,A}$ is bounded constructible of finite Tor amplitude. The same holds for $B$ and $C$. Consequently [lem-fix-compact-support-coefficient-change] applies to $K=\\omega_{X,A}$. Write $F_R=F_{X,R}$, $T=T_{A,B}$, and $c=c_{X,A,B}$. The adjunction bijection defines one global map $u_{X,A,B}$ with\n$$\\varepsilon_{X,B}F_B(u_{X,A,B})=(T\\varepsilon_{X,A})c_{\\omega_{X,A}}^{-1}.$$\nThis is exactly the displayed definition and counit assertion; existence of a coefficient comparison for an exceptional adjoint has not been assumed.",
    "uses": [
     "lem-weil-verdier-preservation-strata",
     "lem-fix-compact-support-coefficient-change"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+    "place": "Proof, first paragraph: finite-Tor domain and construction of the map"
+   }
   },
   {
-   "text": "By [lem-amb-etale-adjoint-locality], the assertion is local\non $X$. Choose an affine open and a closed embedding\n$i:X\\hookrightarrow\\mathbf A^r_k$. Composition of ambient\nright adjoints and [cor-amb-affine-space-adjunction] give\n\n$$\n\\omega_{X,A}=Ri_A^!A(r)[2r],\\qquad\n\\omega_{X,B}=Ri_B^!B(r)[2r].\n$$",
+   "text": "We spell out the formal normalization used below. For composable compact-support functors $F_pF_i\\cong F_{pi}$ use [lem-amb-etale-compact-comparisons]. The composite-adjunction rule [def-weil-pbc-composite-adjunction] says its counit is\n$$\\varepsilon_{pi}=\\varepsilon_p\\circ F_p(\\varepsilon_i).$$\nWhen the left-functor comparison is available on the whole categories, the comparison with any chosen right adjoint is the counit-compatible unique mate of [lem-trf-adjoint-mate]. For the bounded-below composition comparison, we need only its objectwise version: if $Q_1,Q_2\\in D^+$ both represent $L\\mapsto\\operatorname{Hom}(F(L),N)$ for $L\\in D^+$, the natural Hom bijections give mutually inverse maps $Q_1\\to Q_2$ and $Q_2\\to Q_1$ by evaluating on their identities. Naturality says their composites are identities and their transposes are the specified counits. We use this argument only after verifying that both representing objects are bounded below; it requires no composition comparison on unbounded inputs. The coefficient tensor comparisons paste in the same order:\n$$c_{pi,K}=F_{p,B}(c_{i,K})\\circ c_{p,F_{i,A}K}.$$\nThis last identity is an identity of the canonical tensor comparison maps, before any inverses: each arrow is formed by moving the coefficient tensor through the indicated functor, and the pasted arrow moves it through the two functors successively. Equivalently, write a tensor comparison as the mate of the coefficient-restriction square; the two Hom bijections defining its mate compose; the precise pasting identity is clause (1) of [lem-weil-pbc-mate-pasting], applied to the tensor/derived-coefficient-restriction adjunctions on the source, intermediate scheme and target. It gives the displayed order of the two coefficient comparisons. This also shows the formula commutes with the compact-support composition identifications. We use the coefficient comparison only in the finite-Tor situations certified in step 2 or in the closed-support assertion below; no claim that $B$ has finite Tor dimension over $A$ is required.",
    "uses": [
-    "lem-amb-etale-adjoint-locality",
-    "cor-amb-affine-space-adjunction"
+    "lem-amb-etale-compact-comparisons",
+    "def-weil-pbc-composite-adjunction",
+    "lem-trf-adjoint-mate",
+    "lem-fix-compact-support-coefficient-change",
+    "lem-weil-pbc-mate-pasting"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+    "place": "Proof, second and third paragraphs: normalization of composite adjoints and coefficient maps"
+   }
   },
   {
-   "text": "The Tate rank-one object at $A$ reduces to the one at $B$,\nand shifts commute with coefficient tensor. Applying\n[lem-coef-finite-closed-shriek] therefore proves the displayed\nmap is an isomorphism. The local map is the global map defined\nabove: transposing it under the composite adjunction yields the\nclosed-immersion counit followed by the affine-space counit,\nwhich is the structure-morphism counit. In particular these\nmaps agree on overlaps. The same adjoint calculation proves\nthe quotient cocycle and compatibility with the counit.\nThe dualizing-object comparison of\n[lem-weil-finite-duality-site-comparison] transports this\ncanonical map to the finite pro-etale realization.",
+   "text": "For $P=\\mathbf A^r_k$ and $p:P\\to s$, use the ordinary etale Tate sheaves of [lem-asd-etale-finite-twist-pullback]. Choose one power $N$ of $\\ell$ annihilating $A$ (and hence $B,C$). Its definition $A_P(1)=\\mu_{N,P}\\otimes_{\\mathbf Z/N}A$ gives\n$$A_P(r)\\otimes_A^L B\\cong B_P(r).$$\nIndeed the Tate sheaf is locally free of rank one by that node, so ordinary tensor computes this derived tensor; on trivializations the comparison is $A\\otimes_A B=B$, and the transition units reduce to the transition units for $B$. Tensor powers give the assertion for every $r\\ge0$; shifts commute with this tensor by [lem-kun-derived-tensor-triangulated]. The shifted Tate line $A_P(r)[2r]$ is bounded constructible of finite Tor amplitude, directly from a finite locally free rank-one sheaf and the definition of Tor amplitude [def-kun-tor-amplitude, def-weil-pbc-constructible-complexes]. Thus all coefficient comparisons used for it are in the stated domain.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-kun-derived-tensor-triangulated",
+    "def-kun-tor-amplitude",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+    "place": "Proof, third paragraph, first sentence: finite Tate lines and shifts"
+   }
+  },
+  {
+   "text": "Here is why the specified map is an isomorphism on $P$, without assuming coefficient compatibility of a chosen purity adjunction. By [cor-amb-affine-space-adjunction], identify $\\omega_{P,R}$ with $R_P(r)[2r]$ for $R=A,B$, using the counit-compatible comparison of step 3. For the explicit coordinate-tower adjunction in the top-trace node, use that comparison on $D^+$: its representing object $R_P(r)[2r]$ is bounded, and the chosen $\\omega_{P,R}$ is bounded by step 2, so the objectwise argument applies. By [lem-amb-affine-space-top-trace], the counit $\\varepsilon_{P,R}$ is an isomorphism; that statement concerns the explicit adjunction, and step 3 carries its counit to the chosen one. Step 2 therefore gives\n$$F_{P,B}(u_{P,A,B})=\\varepsilon_{P,B}^{-1}(T_{A,B}\\varepsilon_{P,A})c_{P,\\omega_{P,A}}^{-1},$$\nan isomorphism. By step 4, source and target of $u_{P,A,B}$ are shifted copies of the same Tate line. By [lem-weil-pbc-derived-single-fully-faithful], after cancelling the shift their morphisms are sheaf morphisms. Since $k$ is algebraically closed and $N$ is prime to $p$, [lem-sc-primitive-root] supplies a primitive $N$th root. The factorization $t^N-1=\\prod_{a=0}^{N-1}(t-\\zeta^a)$ has pairwise invertible root differences; thus a root on a scheme over $k$ is locally one of these roots (the Lagrange idempotents split the scheme into its root loci). This identifies $\\mu_{N,P}$ with the constant cyclic sheaf. Hence this Tate line is a constant free rank-one $B$-sheaf. Its endomorphisms are multiplication by a global section of the constant sheaf $B_P$ [def-weil-pbc-constant-sheaf]. By [lem-weil-pbc-constant-sheaf-sections-locally-constant], this section is a Zariski-locally constant function, hence constant on a connected scheme: distinct values would give a partition into nonempty disjoint open-and-closed loci. The scheme $P$ is connected: its coordinate polynomial ring is a domain (leading terms of a product of nonzero polynomials have nonzero product), so its zero prime is a generic point. Hence $u_{P,A,B}$ is multiplication by one $b\\in B$. The $B$-linear functor $F_{P,B}$ sends this to multiplication by the same $b$ on $F_{P,B}\\omega_{P,B}\\cong B_s$, using the top-trace isomorphism. Invertibility of this multiplication implies $b$ is a unit (apply its inverse to $1$). Thus $u_{P,A,B}$ is an isomorphism. For $r=0$ the same argument is the identity adjunction.",
+   "uses": [
+    "cor-amb-affine-space-adjunction",
+    "lem-amb-affine-space-top-trace",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "lem-sc-primitive-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+    "place": "Proof, second paragraph and third paragraph: verify the canonical affine-space comparison"
+   }
+  },
+  {
+   "text": "Choose an affine open chart $U=\\operatorname{Spec}R$ from the finite-type affine cover of $X$. By [def-weil-finite-type-morphism], choose finitely many $k$-algebra generators $x_1,\\ldots,x_r$ of $R$. The surjection $k[t_1,\\ldots,t_r]\\to R$, $t_j\\mapsto x_j$, induces a closed immersion $i:U\\hookrightarrow P=\\mathbf A^r_k$ by the affine characterization in [def-weil-closed-immersion]; its composite with $p$ is $a_U$. This is a choice on one affine chart, not a claim that $X$ embeds globally into affine space. The closed immersion is finite, separated and universally closed by [lem-weil-pbc-closed-immersion-integral-separated-uc], and its affine quotient-ring description makes it of finite type. Thus it is proper, and its compact-support candidate can be taken to have identity open part, so $Ri_!=Ri_*$. Since $i$ is finite, [lemma-weil-pbc-finite-direct-image-exact] makes its sheaf direct image exact; this also holds for coefficient modules, whose kernels and cokernels have the underlying abelian-sheaf kernels and cokernels. This exactness also identifies the unbounded derived direct image with termwise $i_*$, not just its bounded-below restriction: exactness gives $H^q(i_*L^\\bullet)=i_*H^q(L^\\bullet)$ for every complex $L^\\bullet$, since kernels, images and their quotients are preserved degree by degree. Thus $i_*$ takes every acyclic complex to an acyclic complex and every quasi-isomorphism to a quasi-isomorphism. In the K-injective model of [def-amb-etale-compact-support], the map $i_*L^\\bullet\\to i_*I^\\bullet$ induced by any K-injective resolution $L^\\bullet\\to I^\\bullet$ is therefore a quasi-isomorphism. Hence $Ri_*L=i_*L$ for arbitrary derived inputs, and this exact termwise functor preserves every standard cohomological upper bound. This is the assertion needed for the possibly unbounded-below test object $L$ in the following argument; the bounded-below consequence in the finite-direct-image node alone would not suffice. The ordinary etale closed adjoint is [lem-exc-closed-ambient]. The representing object $Ri_R^!\\omega_{P,R}$ is bounded below. In fact, if $\\omega_{P,R}\\in D^{\\ge a}$, then for every $L\\in D^{\\le a-1}$ one has $\\operatorname{Hom}(L,Ri_R^!\\omega_{P,R})=\\operatorname{Hom}(i_*L,\\omega_{P,R})=0$, since exact termwise $i_*$ preserves $D^{\\le a-1}$. In the standard t-structure [def-sbc-standard-tstructure-derived-category], take $L=\\tau_{\\le a-1}Ri_R^!\\omega_{P,R}$: the truncation map is zero, while inducing identities on cohomology below $a$, so those cohomology sheaves vanish. The other representing object $\\omega_{U,R}$ is bounded by step 2. Hence the objectwise $D^+$ argument of step 3, applied to the composite Hom bijections, gives counit-compatible identifications\n$$\\omega_{U,R}\\cong Ri_R^!\\omega_{P,R},\\qquad\\varepsilon_{U,R}=\\varepsilon_{P,R}\\circ F_{P,R}(\\varepsilon_{i,R}),\\quad R=A,B.$$\nAll the inputs are bounded below; hence the bounded-below compact-support composition statement of [lem-amb-etale-compact-comparisons] suffices.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-exc-closed-ambient",
+    "def-amb-etale-compact-support",
+    "lem-amb-etale-compact-comparisons",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+    "place": "Proof, second paragraph: affine chart, embedding and composition"
+   }
+  },
+  {
+   "text": "Set $M=\\omega_{P,A}\\cong A_P(r)[2r]$. Step 4 verifies the finite-Tor constructibility hypothesis of [lem-coef-finite-closed-shriek]. That node gives an isomorphism $b_{i,M}:T_{A,B}Ri_A^!M\\to Ri_B^!T_{A,B}M$ with the specified closed counit identity. Form\n$$v=Ri_B^!(u_{P,A,B})\\circ b_{i,M}:T_{A,B}\\omega_{U,A}\\longrightarrow\\omega_{U,B}.$$\nIt is an isomorphism by step 5. It remains to identify it with the specified global construction at $U$. Under the composite adjunction, first transpose through $i_*\\dashv Ri_B^!$. Naturality of its counit and the counit identity for $b_{i,M}$ give\n$$\\varepsilon_{i,B}\\circ i_*v=u_{P,A,B}\\circ(T_{A,B}\\varepsilon_{i,A})\\circ c_{i,\\omega_{U,A}}^{-1}.$$\nApply $F_{P,B}$ and compose with $\\varepsilon_{P,B}$. Substitute the step-2 identity for $u_{P,A,B}$ and move $T_{A,B}\\varepsilon_{i,A}$ across the natural coefficient comparison for $p$. The pasting formula of step 3 identifies the result with\n$$(T_{A,B}(\\varepsilon_{P,A}\\circ F_{P,A}\\varepsilon_{i,A}))\\circ c_{a_U,\\omega_{U,A}}^{-1}=(T_{A,B}\\varepsilon_{U,A})\\circ c_{a_U,\\omega_{U,A}}^{-1}.$$\nOne may check this equality after precomposing with $c_{a_U,\\omega_{U,A}}$, so it requires no inverse coefficient map at an input not covered by the cited statements. This is precisely the defining adjunct of $u_{U,A,B}$. Injectivity of the adjunction bijection proves $v=u_{U,A,B}$; consequently the canonical map is an isomorphism on every affine chart.",
    "uses": [
     "lem-coef-finite-closed-shriek",
-    "lem-weil-finite-duality-site-comparison"
+    "def-weil-pbc-composite-adjunction",
+    "lem-fix-compact-support-coefficient-change"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+    "place": "Proof, third paragraph: closed coefficient comparison and explicit composite-counit calculation"
+   }
+  },
+  {
+   "text": "For the affine open inclusion $j:U\\hookrightarrow X$, [lem-amb-etale-adjoint-locality] identifies $j^*\\omega_{X,R}$ with $\\omega_{U,R}$ for $R=A,B$. Its hypotheses hold: $j$ is etale by [lem-weil-pbc-open-immersion-etale]; it is separated because its diagonal is an isomorphism. The intersections of its affine source with target affine opens are quasi-compact by [lem-weil-pbc-locally-noetherian-quasi-separated], so $j$ is quasi-compact, hence of finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. The maps $a_X,a_U$ are compactifiable between Noetherian schemes by step 1. Under precisely these hypotheses, [lem-asd-etale-compact-support-normalization] identifies $Rj_!$ with exact termwise extension by zero $j_!$, and identifies its adjunction with $j_!\\dashv j^*$ including the evaluation counit. Combining this with the $D^+$ composition comparison of step 3 gives $F_U\\cong F_Xj_!$ on the inputs below; thus the subsequent Hom calculation uses the specified open counit. Ordinary inverse image commutes with coefficient tensor by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. These identifications send $j^*u_{X,A,B}$ to $u_{U,A,B}$, as follows from the same counit calculation rather than from any coefficient compatibility of an exceptional functor: the locality isomorphism is the mate of $F_U\\cong F_Xj_!$ and $j_!\\dashv j^*$. Its counit is $\\varepsilon_{U,R}=\\varepsilon_{X,R}\\circ F_{X,R}(\\varepsilon_{j,R})$: the Hom bijections are $\\operatorname{Hom}_U(L,j^*a_X^\\times N)\\cong\\operatorname{Hom}_X(j_!L,a_X^\\times N)\\cong\\operatorname{Hom}_s(F_Xj_!L,N)\\cong\\operatorname{Hom}_s(F_UL,N)$, so the counit formula follows by composing them as in step 3. Tensoring commutes with $j_!$: for sheaves the canonical projection map $(j_!P)\\otimes M\\to j_!(P\\otimes j^*M)$ is the identity on stalks in $U$ and $0\\to0$ off $U$, by [lem-weil-pbc-extension-by-zero-stalks]. Tensor commutes with stalks because a stalk is a filtered colimit and tensor preserves colimits. Thus the map is an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative]. If $P$ is a K-flat complex and $M$ is acyclic, exactness of $j^*$ and $j_!$ from the locality node makes $j_!(P\\otimes j^*M)$ acyclic. Hence $j_!P$ is K-flat too; the same projection identity computes derived tensor using [def-kun-derived-tensor]. Here is the resulting equality of adjuncts explicitly. Put $W=\\omega_{X,A}$, $L=j^*W=\\omega_{U,A}$, $G_R=j_{!,R}$, and write $e_R:G_Rj^*\\to1$ for the evaluation counit. Let $d_L:T_XG_AL\\xrightarrow{\\sim}G_BT_UL$ be the tensor comparison just constructed, where $T_X,T_U$ denote coefficient extension on the two schemes. On stalks in $U$ both composites evaluate the same section, and off $U$ both have zero source; therefore\n$$e_{B,T_XW}\\circ d_L=T_X(e_{A,W}).$$\nThis identity holds termwise on the K-flat models above and hence in the derived category. All inverses of compact-support coefficient maps below are in their finite-Tor constructible domain. Indeed $L$ is bounded finite-Tor constructible by step 2 and open restriction. Extension by zero keeps its cohomology constructible: extend its finite locally closed stratification from $U$ to $X$, adding the closed complement with the zero sheaf. Its Tor bound is unchanged because the derived projection identity computes tensor with any degree-zero module as $j_!$ of the corresponding tensor on $U$, and $j_!$ is exact [def-kun-tor-amplitude, def-weil-pbc-constructible-complexes]. In particular $G_AL$ and $T_XG_AL\\cong G_BT_UL$ are bounded below, so the composition comparison is applicable. By step 3 the coefficient comparison for $a_U$ is\n$$c_{U,L}=F_{X,B}(d_L)\\circ c_{X,G_AL}.$$\nLet $q=j^*u_{X,A,B}$, under the pullback/tensor identification. Its adjunct under $F_{U,B}\\dashv a_{U,B}^{\\times}$ is, with the composition identifications understood,\n$$\\begin{aligned}\n\\varepsilon_{U,B}F_{U,B}(q)\n&=\\varepsilon_{X,B}F_{X,B}(e_{B,\\omega_{X,B}}\\circ G_Bq)\\\\\n&=\\varepsilon_{X,B}F_{X,B}(u_X)F_{X,B}(e_{B,T_XW})\\\\\n&=(T_s\\varepsilon_{X,A})c_{X,W}^{-1}F_{X,B}(T_Xe_{A,W})F_{X,B}(d_L)^{-1}\\\\\n&=T_s(\\varepsilon_{X,A}\\circ F_{X,A}e_{A,W})c_{X,G_AL}^{-1}F_{X,B}(d_L)^{-1}\\\\\n&=(T_s\\varepsilon_{U,A})c_{U,L}^{-1}.\n\\end{aligned}$$\nHere the second line is naturality of $e_B$, the third is the defining identity of step 2 and the stalk evaluation identity, and the fourth is naturality of the compact-support coefficient comparison [lem-fix-compact-support-coefficient-change]. The last line uses the displayed composition and counit formulas. This is the defining adjunct of $u_U$, so injectivity of the adjunction bijection gives $q=u_U$. This proves that the restriction of the globally defined map is the canonical affine map proved invertible in step 7.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-fix-compact-support-coefficient-change",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-kun-derived-tensor",
+    "lem-asd-etale-compact-support-normalization",
+    "def-kun-tor-amplitude",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+    "place": "Proof, second paragraph: locality for the actual canonical map"
+   }
+  },
+  {
+   "text": "Now $u_{X,A,B}$ is an isomorphism. Indeed its restriction to each affine chart is an isomorphism by steps 7 and 8. Restriction to an open is exact, so the kernel and cokernel of every cohomology-sheaf map vanish on the covering. A sheaf vanishing on a covering is zero by the sheaf axiom. Thus these cohomology maps are all isomorphisms, so $u_{X,A,B}$ is a quasi-isomorphism, hence an isomorphism in the derived category. This uses only the definition of cohomology sheaves [def-weil-derived-cohomology-sheaves] and exactness of inverse image [prop-weil-pbc-inverse-image-modules-exact]. No morphisms in a derived category are glued, and no equality of global morphisms is inferred merely from local equality.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+    "place": "Proof, third paragraph: local isomorphisms imply the global map is invertible"
+   }
+  },
+  {
+   "text": "For the quotient cocycle write $T=T_{A,B}$, $S=T_{B,C}$, $F_R=F_{X,R}$, $c^{AB}=c_{X,A,B}$ and $c^{BC}=c_{X,B,C}$. The input $T\\omega_A$ of $c^{BC}$ is in $D^b_{ctf}(X,B)$: step 9 identifies it with $\\omega_B$, whose finite-Tor constructibility was proved in step 2. Thus the displayed inverse comparisons all have the domain required by the cited coefficient theorem. To compare $u_{X,A,C}$ and $w=u_{X,B,C}\\circ S(u_{X,A,B})$, transpose under $F_C\\dashv a_{X,C}^{\\times}$. By the defining counit identity at $B,C$, naturality of $c^{BC}$, and the defining identity at $A,B$, respectively, the adjunct of $w$ is\n$$\\begin{aligned}\n\\varepsilon_C F_C(w)\n&=(S\\varepsilon_B)(c^{BC}_{\\omega_B})^{-1}F_CS(u_{A,B})\\\\\n&=S(\\varepsilon_B F_B(u_{A,B}))(c^{BC}_{T\\omega_A})^{-1}\\\\\n&=(ST\\varepsilon_A)\\,S((c^{AB}_{\\omega_A})^{-1})(c^{BC}_{T\\omega_A})^{-1}\\\\\n&=(T_{A,C}\\varepsilon_A)(c^{AC}_{\\omega_A})^{-1}.\n\\end{aligned}$$\nThe last equality is precisely the successive-reduction compatibility in [lem-fix-compact-support-coefficient-change], with the tensor reassociation. The final expression is the defining adjunct of $u_{X,A,C}$, so the maps coincide. With $B=A$, the comparison is the tensor-unit identification and the adjunct is $\\varepsilon_A$, whose adjoint is the identity. This proves the quotient cocycle and identity globally, not just chartwise. The counit assertion has already been proved at the moment of construction in step 2.",
+   "uses": [
+    "lem-fix-compact-support-coefficient-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+    "place": "Proof, third paragraph: quotient cocycle and counit compatibility"
+   }
+  },
+  {
+   "text": "Finally apply the current finite-stage statement [lem-weil-finite-duality-site-comparison] separately with $R=A_{E,n}$ and $R=B=A_{E,m}$. Its hypotheses are exactly the global finite-field datum, $\\ell\\ne p$, these finite DVR quotient rings and the separated finite-type $k$-scheme $X$. It supplies $\\nu_X^*\\omega_{X,R}\\cong\\omega_{X,R,\\mathrm{proet}}$, with the latter explicitly defined using the comparison-class transport of the ordinary etale compact-support right adjoint. Thus this application does not require a site-comparison theorem for arbitrary finite rings or an ambient pro-etale adjoint. Applying the derived tensor pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $\\nu_X$ and the constant ring map $A\\to B$ identifies $\\nu_X^*T_{A,B}\\omega_{X,A}$ with $T_{A,B}\\nu_X^*\\omega_{X,A}$. Thus the pullback of $u_{X,A,B}$ gives the asserted isomorphism for the finite pro-etale realization. This is an identification on the constructible, etale-origin objects only: [def-weil-exceptional-inverse-image] defines the exceptional functor there by transporting the etale adjoint, and [lem-sf-class-compact-support-comparison] identifies its compact-support left functor with the pro-etale one. Consequently the transported Hom bijection sends the transported adjunct to exactly the transported map, and its counit is the image of the etale counit. Pulling back the actual identities in steps 2 and 10 proves the same counit and quotient identities in this realization. No unbounded pro-etale exceptional adjoint or change to a condensed coefficient category has been introduced.",
+   "uses": [
+    "lem-weil-finite-duality-site-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-exceptional-inverse-image",
+    "lem-sf-class-compact-support-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+    "place": "Proof, third paragraph, last sentence: finite pro-etale realization"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "thm-amb-etale-exceptional-adjoint",
   "lem-weil-verdier-preservation-strata",
   "lem-fix-compact-support-coefficient-change",
-  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "def-weil-pbc-composite-adjunction",
+  "lem-trf-adjoint-mate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-kun-derived-tensor-triangulated",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-constructible-complexes",
   "cor-amb-affine-space-adjunction",
+  "lem-amb-affine-space-top-trace",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-sc-primitive-root",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-exc-closed-ambient",
+  "def-amb-etale-compact-support",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-sbc-standard-tstructure-derived-category",
   "lem-coef-finite-closed-shriek",
-  "lem-weil-finite-duality-site-comparison"
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-kun-derived-tensor",
+  "lem-asd-etale-compact-support-normalization",
+  "def-weil-derived-cohomology-sheaves",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-finite-duality-site-comparison",
+  "def-weil-exceptional-inverse-image",
+  "lem-sf-class-compact-support-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
-  "place": "## Proof"
+  "place": "Proof, all three paragraphs; expanded adjunction calculations and affine top-trace test"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualizing|exceptionalInverseImage|upperShriek",
+   "results": "; Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Tactic/Translate/ToDual.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/Analysis/InnerProductSpace/Dual.lean; source root Mathlib/",
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not state finite-coefficient change of an etale dualizing object"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of finite coefficients commutes with the dualizing complex on the etale site of a scheme.",
+   "results": "service unavailable: Internal Server Error; no hits",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated scheme of finite type over an algebraically closed finite field, derived reduction of coefficients from a finite DVR quotient to a smaller quotient commutes with the dualizing complex defined as the exceptional inverse image of the coefficient ring.",
+   "results": "; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, AlgebraicGeometry.Scheme.SpecToEquivOfField, BDeRham, Ideal.quotientRangePowQuotSuccInclusionEquiv, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, BDeRhamPlus, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not state finite-coefficient change of an etale dualizing object"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "; CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint",
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not state finite-coefficient change of an etale dualizing object"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical base change map from the derived tensor product of an etale dualizing complex with a quotient coefficient ring to the dualizing complex for that quotient ring is an isomorphism and respects the counit.",
+   "results": "; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, Algebra.Extension.tensorCotangentSpace, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.tensorH1CotangentOfIsLocalization, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex",
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not state finite-coefficient change of an etale dualizing object"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|six.functor|extraordinary|exceptional",
+   "results": "; no hits; source root Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not state finite-coefficient change of an etale dualizing object"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars preserves the relative dualizing complex for a finite coefficient ring quotient",
+   "results": "Ext; CategoryTheory.ProjectiveResolution.isoExt; instHasExtModuleCatOfSmall; CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Abelian.Ext.instModule; Rep.isZero_Tor_succ_of_projective; CategoryTheory.Abelian.Ext.homLinearEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match: Ext functors, scalar linearity and group-homology Tor vanishing do not state geometric dualizing coefficient change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars for a right adjoint of compactly supported etale cohomology and compatibility of its trace map",
+   "results": "ModuleCat.homEquiv_extendScalarsComp; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.ExtendRestrictScalarsAdj.counit; KaehlerDifferential.isBaseChange_of_formallyEtale; ModuleCat.ExtendRestrictScalarsAdj.counit_app; ModuleCat.ExtendRestrictScalarsAdj.Counit.map; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; ModuleCat.extendRestrictScalarsAdj",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module extension/restriction adjunctions and Kaehler differential base change do not state etale dualizing reduction or its trace identity"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -81,5 +321,164 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-finite-dualizing",
+  "worker": "stage1",
+  "summary": "Restored the finite-field, separated finite-type, quotient-ring and ordinary-etale hypotheses omitted from the isolated imported statement. Retained the three-paragraph affine closed-support route, verified the finite-Tor input, added the existing affine top-trace and degree-zero fully-faithful tools to prove invertibility of the specified affine map, and expanded restriction, composite-counit and quotient-cocycle computations. Reused all six original dependencies and only existing DAG nodes; no new nodes. Second reading makes the D+ representing-object argument and its bounds explicit, cites mate pasting, and cites the counit-normalized open compact-support identification. Merge-lock return repair: re-read all 41 proof-cited statements on the current shared DAG, verified all 49 citation pairs, and expanded the exact closed-pushforward argument on unbounded test complexes before using t-structure orthogonality. The delivery tool reconstructs the delivery on the current origin/newtargets-dag; no new nodes or statement changes in this repair. During rebasing, lem-weil-finite-duality-site-comparison acquired a reviewed finite-DVR-quotient statement; step 11 now checks that precise coefficient scope and transported-adjoint convention, and its quotation was refreshed after reading the changed node and source. Current second reading expands the open-restriction counit calculation into five equalities, checks the finite-Tor constructibility of its extension-by-zero input, and names the already-proved domain of the successive-reduction comparison.",
+  "blueprint": "Steps 1-2 realize paragraph 1; steps 3-8 expand paragraph 2 and the first four sentences of paragraph 3; step 9 is the local-isomorphism conclusion; step 10 writes the quotient/counit adjoint calculation; step 11 realizes the final pro-etale comparison sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite-type Noetherian permanence verifies the hypotheses of the ambient etale tools; the unit has no separate scheme-theoretic replacement."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Compactifiability of the separated finite-type structure maps supplies the existence hypothesis of the etale ambient adjoint; it is the chapter compactification tool."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Existence of the ordinary etale compact-support right adjoint, not a claim of a pro-etale unbounded adjoint; this is the adjoint used by the unit."
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "Existing coefficient comparison for compact supports constructs the map and supplies successive-quotient compatibility; it is the first ingredient of the blueprint proof."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Canonical composition of ordinary etale compact supports identifies the affine closed-immersion factorization; no node of this unit supplies that functor comparison."
+   },
+   {
+    "node": "lem-trf-adjoint-mate",
+    "why": "Generic unique counit-compatible comparison of adjoints normalizes the composite adjunction; it only supplies formal category theory."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Ordinary etale finite Tate sheaves, their rank-one property and explicit tensor definition verify the smooth ambient input; avoids confusing them with completed pro-etale twists."
+   },
+   {
+    "node": "lem-kun-derived-tensor-triangulated",
+    "why": "Commutation of derived tensor with shifts verifies the affine Tate-shift reduction; generic derived-category tool."
+   },
+   {
+    "node": "cor-amb-affine-space-adjunction",
+    "why": "The affine ambient adjunction is the explicit second-paragraph tool of the blueprint; it is not replaced by a different purity route."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "The actual affine-space counit is an isomorphism; this verifies invertibility of the canonical affine coefficient map without assuming it from the adjoint object identification."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic fully faithful degree-zero embedding turns the affine Tate-line endomorphism into a sheaf endomorphism; no geometric duality is imported."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "why": "Closed immersions are separated, finite and universally closed, verifying properness for the identity-open compactification."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Ordinary etale closed-support adjunction supplies the closed factor in the explicit affine factorization."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "The original blueprint locality tool identifies the canonical comparison on affine opens."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic tensor compatibility of derived pullback gives open restriction and site-realization coefficient identifications."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness of ordinary open inverse image permits checking the cohomology isomorphisms on an affine cover."
+   },
+   {
+    "node": "lem-weil-finite-duality-site-comparison",
+    "why": "The original blueprint final tool identifies the two finite dualizing objects on the etale and pro-etale sites."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "The compact-support comparison on etale-origin objects identifies the left functor when transporting the finite etale adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "why": "Generic description of constant etale sheaf sections makes the affine Tate-line endomorphism scalar; this is not any further duality statement."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Verifies that an affine open inclusion is etale, as required by the locality tool."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Quasi-compact intersections of affine opens verify quasi-compactness of the chart inclusion."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Verifies the finite-type hypothesis of the original etale-adjoint locality tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Explicit extension-by-zero stalks give the coefficient tensor identification for the open-locality counit calculation."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic sheaf stalk conservativity verifies the underived open tensor projection map used to compare coefficients in the locality counit calculation."
+   },
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Existence of a primitive root in the algebraically closed field trivializes the ordinary finite Tate line in the affine scalar test; no coefficient duality theorem is imported."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic mate-pasting identity fixes the order of the coefficient comparison under composition."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Exact finite etale direct image verifies the closed direct-image model and bounded-below closed-adjoint representing object."
+   },
+   {
+    "node": "lem-asd-etale-compact-support-normalization",
+    "why": "Identifies open compact support with termwise extension by zero and its actual evaluation counit; the locality statement alone does not state this normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-amb-etale-compact-comparisons",
+  "lem-trf-adjoint-mate",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-kun-derived-tensor-triangulated",
+  "cor-amb-affine-space-adjunction",
+  "lem-amb-affine-space-top-trace",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-exc-closed-ambient",
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-sf-class-compact-support-comparison",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-sc-primitive-root",
+  "lem-weil-pbc-mate-pasting",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-asd-etale-compact-support-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q21-c3a742b79",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-c3a742b79 (reviewer sub-agent of L); spot-checked: Read the full item, report, all 44 cited statements, chapter/unit route, and cited source passages. Verified all 11 steps, specified coefficient map, boundedness domains, counit/locality/cocycle calculations, edge cases, and finite pro-étale scope. No new nodes, duplicate replacement, dependency cycle, or target weakening found. Accepted 28 declared tool uses. Detailed checks written to review.md; no repairs needed."
+ }
 }
