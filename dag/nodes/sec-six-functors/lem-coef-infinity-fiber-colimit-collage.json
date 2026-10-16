@@ -26,9 +26,71 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a colimiting coherent cocone for each $Q_i$. We first realize each as an actual diagram on $N(U(i)^{\\triangleright})$ extending exactly $Q_i$. Apply [lem-coef-infinity-join-cone-calculus] to $N(U(i))^{\\mathrm{op}}$ and $\\mathcal E^{\\mathrm{op}}$, then take opposites. Reversing the simplex order interchanges left and right join cones and constant-to-diagram with diagram-to-constant transformations; inner horns remain inner horns, so the opposite is a quasicategory. The comparison in that node is an equivalence even after fixing the boundary diagram and apex. Thus it supplies a right-join cone whose coherent cocone is equivalent, with boundary and apex fixed, to the chosen one. The dual cocone category is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]. The comparison preserves its initial objects: if two cocones are equivalent, composition with an equivalence and its inverse gives mutually inverse maps of their outgoing mapping spaces, with the inverse homotopies furnished by the two equivalence identities. Thus contractibility of every outgoing mapping space, and hence the colimiting property, is preserved. Denote the resulting actual diagram by $c_i:N(U(i)^{\\triangleright})\\to\\mathcal E$. This also applies to an empty fiber: its cone is a single vertex representing the assumed initial object.",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZU",
+    "place": "Lemma 7.3.4.6, choose the fiber cones; agent expansion matching the project coherent-comma convention"
+   }
+  },
+  {
+   "text": "Extend $p$ to $\\pi:P\\to I$ by the identity on the second copy of $I$. The mixed composition rule makes this a functor. Its strict fiber at $i$ consists of $U(i)$ and the second-copy vertex $i$, with one arrow from every $x\\in U(i)$ to that vertex; thus it is exactly $U(i)^{\\triangleright}$. Put $A=N(K)$ and $S_m=A\\cup(N\\pi)^{-1}(\\operatorname{sk}_m N(I))$, where the skeleton consists of simplices generated from nondegenerate simplices of dimension at most $m$. The subsets over different vertices have disjoint new parts and intersect $A$ in precisely their bases $N(U(i))$. Consequently $Q$ and all $c_i$ glue degree by degree to a simplicial map $F_0:S_0\\to\\mathcal E$. Their values agree on each intersection because each $c_i$ extends exactly $Q_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZU",
+    "place": "Lemma 7.3.4.6, amalgamation of the given diagram and the chosen fiber cocones"
+   }
+  },
+  {
+   "text": "Use [lem-coef-infinity-monomorphism-boundary-cells] for $\\varnothing\\hookrightarrow N(I)$: the next skeleton is obtained by adjoining one $\\Delta^n$ for every nondegenerate $n$-simplex $\\sigma$ along its boundary, for $n\\geq1$. Pull this pushout back along $N\\pi$ and adjoin $A$. This preserves the degreewise pushout: in a given degree each new element has a base element outside the previous skeleton, hence a unique summand; pairs with the same base element are identified precisely when their base representatives are identified. Write $X_\\sigma=N(P)\\times_{N(I)}\\Delta^n$ and $A_\\sigma=A\\times_{N(I)}\\Delta^n$. The attaching subset is $B_\\sigma=A_\\sigma\\cup(X_\\sigma\\times_{\\Delta^n}\\partial\\Delta^n)$. We obtain the pushout adjoining all $X_\\sigma$ to $S_{n-1}$ along all $B_\\sigma$. The maps $X_\\sigma\\to N(P)$ need not be injective; the pushout argument uses the degreewise attaching description, so it includes repeated base vertices and nontrivial endomorphisms in $I$.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Lemma 7.3.4.5, proof opening reduction to a simplex and its boundary; explicit degreewise skeletal assembly"
+   }
+  },
+  {
+   "text": "Assume a map $F_{n-1}:S_{n-1}\\to\\mathcal E$ extending $F_0$ has been constructed. A base simplex $\\sigma$ is a functor $[n]\\to I$. Nerves commute with strict pullbacks directly from their definition by functors $[q]\\to(-)$, so $X_\\sigma$ is the nerve of the strict pullback $[n]\\times_I P$. This category identifies with $P_{U\\sigma}$ of [lem-coef-infinity-fiber-cocone-simplex-extension]: an object over $r$ is either $(r,x)$, $x\\in U(\\sigma(r))$, or the second-copy vertex $r$; arrows over $r\\leq s$ have exactly the fiber component and mixed rule in that node. Its $K$ part is $A_\\sigma$ and its boundary subset is exactly $B_\\sigma$. All vertices of $\\Delta^n$ lie in its boundary since $n\\geq1$, and the corresponding restricted cocones are the already fixed $c_{\\sigma(r)}$, which are colimiting by Step 1. Apply that node to the map on $B_\\sigma$ induced by $F_{n-1}$. It gives a lift on $X_\\sigma$ agreeing exactly on $B_\\sigma$. Choose such a lift for each of the small set of nondegenerate $n$-simplices. The pushout in Step 3 glues these maps to $F_n:S_n\\to\\mathcal E$, and its restriction is exactly $F_{n-1}$.",
+   "uses": [
+    "lem-coef-infinity-fiber-cocone-simplex-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Lemma 7.3.4.5, local extension, used at each skeletal attachment"
+   }
+  },
+  {
+   "text": "Continue this induction for every positive integer $n$. Every simplex of $N(I)$ lies in some skeleton by the exhaustive cell presentation in Step 3; therefore every simplex of $N(P)$ lies in some $S_n$. For a simplex $s$ of $N(P)$ set $\\overline Q(s)=F_n(s)$ for any $n$ with $s\\in S_n$. This is independent of $n$ because consecutive maps agree on the entire preceding subset. Every face and degeneracy of $s$ lies in the same simplicial subset, where $F_n$ respects that operator. Hence this rule is a simplicial map on $N(P)$, restricting exactly to $Q$ on $A$. It retains every $c_i$, since no extension changes $S_0$. Thus the specified arrows $(i,x)\\to i$ induce the same colimiting coherent cocones as in Step 1. No colimits in $\\mathcal E$ other than the assumed fiber colimits have been taken. If $I$ is empty, both $K$ and $P$ are empty and the original empty map is the required extension.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZU",
+    "place": "Lemma 7.3.4.6, conclusion; compatible union and verification of every prescribed fiber cocone"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-fiber-cocone-simplex-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, coherent tower enhancement foundation; skeletal expansion of the local-to-global assembly in Kerodon 7.3.4.5--7.3.4.7. Online sources read; WANTED archived versions."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,10 +147,101 @@
    "results": "{\"t\": \"2026-10-16T14:54:30Z\", \"tool\": \"grep\", \"query\": \"colimit|adjunction|representab|KanExtension\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: the actual directory-wide read-only search returned zero hits. StrictBicategory.lean was separately read; its bicategory structures do not state any of the three claimed results."
+  },
+  {
+   "tool": "grep",
+   "query": "collage|relativeJoin|cocartesian|colimit",
+   "results": "{\"t\": \"2026-10-16T16:05:58Z\", \"tool\": \"grep\", \"query\": \"collage|relativeJoin|cocartesian|colimit\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-59 and CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63: these use ordinary target Category instances. Read AlgebraicTopology/SimplicialSet/HornColimits.lean:250-315: horn desc constructs a map OUT OF a horn and is not a filler extending a boundary diagram into a quasicategory. KanComplex.hornFilling requires all-horn fibrancy and does not fill the relative collage. The Quasicategory-directory grep and Loogle returned zero hits. No returned declaration states prescribed-boundary fiber-cocone extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Cocone\"",
+   "results": "{\"t\": \"2026-10-16T16:06:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Cocone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-59 and CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63: these use ordinary target Category instances. Read AlgebraicTopology/SimplicialSet/HornColimits.lean:250-315: horn desc constructs a map OUT OF a horn and is not a filler extending a boundary diagram into a quasicategory. KanComplex.hornFilling requires all-horn fibrancy and does not fill the relative collage. The Quasicategory-directory grep and Loogle returned zero hits. No returned declaration states prescribed-boundary fiber-cocone extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative join extension of fiber colimit cocones from the boundary of a standard simplex",
+   "results": "{\"t\": \"2026-10-16T16:06:04Z\", \"tool\": \"leansearch\", \"query\": \"Relative join extension of fiber colimit cocones from the boundary of a standard simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Limits.colimit.desc_extend\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.colimit.cocone\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"AlgebraicGeometry.PresheafedSpace.colimitCocone\", \"CategoryTheory.Limits.Cocone.extend\", \"CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone\"], \"digest\": \"d68614142b99b3ca\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-59 and CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63: these use ordinary target Category instances. Read AlgebraicTopology/SimplicialSet/HornColimits.lean:250-315: horn desc constructs a map OUT OF a horn and is not a filler extending a boundary diagram into a quasicategory. KanComplex.hornFilling requires all-horn fibrancy and does not fill the relative collage. The Quasicategory-directory grep and Loogle returned zero hits. No returned declaration states prescribed-boundary fiber-cocone extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fill a relative join diagram over a standard simplex from its boundary and the whole original category, preserving chosen fiber colimit cones",
+   "results": "{\"t\": \"2026-10-16T16:06:05Z\", \"tool\": \"leanfinder\", \"query\": \"Fill a relative join diagram over a standard simplex from its boundary and the whole original category, preserving chosen fiber colimit cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.PtSimplex.RelStruct.map\", \"SSet.KanComplex.hornFilling\", \"SSet.horn₃₁.desc\", \"SSet.horn₃₁.ι₃_desc\", \"SSet.horn₃₂.desc\", \"SSet.horn₃₁.ι₀_desc\", \"SSet.horn₃₂.ι₁_desc\", \"SSet.horn₃₂.ι₀_desc\"], \"digest\": \"7e644a9c2feb3bcf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-59 and CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63: these use ordinary target Category instances. Read AlgebraicTopology/SimplicialSet/HornColimits.lean:250-315: horn desc constructs a map OUT OF a horn and is not a filler extending a boundary diagram into a quasicategory. KanComplex.hornFilling requires all-horn fibrancy and does not fill the relative collage. The Quasicategory-directory grep and Loogle returned zero hits. No returned declaration states prescribed-boundary fiber-cocone extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent diagram on a Grothendieck collage over the boundary of a simplex extends over the simplex when its prescribed vertex cocones are colimits",
+   "results": "{\"t\": \"2026-10-16T16:06:07Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent diagram on a Grothendieck collage over the boundary of a simplex extends over the simplex when its prescribed vertex cocones are colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₃₁.desc\", \"SSet.horn₃₂.desc\", \"SSet.horn.multicoequalizerDiagram\", \"SSet.horn₃₁.desc.multicofork\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.horn₃₂.desc.multicofork\", \"SimplicialObject.Splitting.isColimit\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\"], \"digest\": \"3d2f21d4844a18e5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-59 and CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63: these use ordinary target Category instances. Read AlgebraicTopology/SimplicialSet/HornColimits.lean:250-315: horn desc constructs a map OUT OF a horn and is not a filler extending a boundary diagram into a quasicategory. KanComplex.hornFilling requires all-horn fibrancy and does not fill the relative collage. The Quasicategory-directory grep and Loogle returned zero hits. No returned declaration states prescribed-boundary fiber-cocone extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicategory diagram on a Grothendieck collage extends across one simplex relative to its prescribed boundary when the vertex cocones are colimits",
+   "results": "{\"t\": \"2026-10-16T16:32:14Z\", \"tool\": \"leanfinder\", \"query\": \"A quasicategory diagram on a Grothendieck collage extends across one simplex relative to its prescribed boundary when the vertex cocones are colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn₃₁.desc\", \"SSet.horn₃₁.ι₀_desc\", \"SSet.horn₃₂.desc\"], \"digest\": \"1a98eac24605d1c4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read AlgebraicTopology/Quasicategory/Basic.lean:38-50 and SimplicialSet/HornColimits.lean:250-315. Inner-horn filling is the defining axiom, and horn desc glues a map out of a horn. Neither states extension from the prescribed collage boundary with fiber-colimit hypotheses, nor specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative join extension of colimiting coherent cocones over a simplex with its boundary fixed",
+   "results": "{\"t\": \"2026-10-16T16:32:41Z\", \"tool\": \"leansearch\", \"query\": \"Relative join extension of colimiting coherent cocones over a simplex with its boundary fixed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimit.desc_extend\", \"CategoryTheory.Limits.colimit.toOver\", \"CategoryTheory.Limits.Cocone.extend\", \"CategoryTheory.Limits.colimit.cocone\", \"CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom_fac\", \"CategoryTheory.Limits.IsColimit.fac\", \"CategoryTheory.extendCofanIsColimit\", \"CategoryTheory.extendCofan\"], \"digest\": \"70bcfe1ac8eb4c10\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryTheory/Limits/Shapes/Grothendieck.lean:35-59,94-114. fiberwiseColim and fiberwiseColimit require ordinary Category instances and ordinary functors. Other cocone and cylinder hits likewise do not state coherent extension for an arbitrary quasicategory with a fixed boundary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent fiberwise colimits for an opfibration assemble to a functor on its mapping cylinder",
+   "results": "{\"t\": \"2026-10-16T16:32:46Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent fiberwise colimits for an opfibration assemble to a functor on its mapping cylinder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.fiberwiseColim\", \"CategoryTheory.Limits.fiberwiseColimit\", \"CategoryTheory.Limits.fiberwiseColimit_map\", \"CategoryTheory.Limits.fiberwiseColimit_obj\", \"CategoryTheory.Limits.fiberwiseColim_obj\", \"CategoryTheory.Limits.natTransIntoForgetCompFiberwiseColimit\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData\", \"HomotopicalAlgebra.Cylinder.IsVeryGood.fibration_π\"], \"digest\": \"88c5ec64d964214c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryTheory/Limits/Shapes/Grothendieck.lean:35-59,94-114. fiberwiseColim and fiberwiseColimit require ordinary Category instances and ordinary functors. Other cocone and cylinder hits likewise do not state coherent extension for an arbitrary quasicategory with a fixed boundary."
+  },
+  {
+   "tool": "grep",
+   "query": "collage|relativeJoin|cocartesian|colimit",
+   "results": "{\"t\": \"2026-10-16T16:32:41Z\", \"tool\": \"grep\", \"query\": \"collage|relativeJoin|cocartesian|colimit\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-59 and CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63: these use ordinary target Category instances. Read AlgebraicTopology/SimplicialSet/HornColimits.lean:250-315: horn desc constructs a map OUT OF a horn and is not a filler extending a boundary diagram into a quasicategory. KanComplex.hornFilling requires all-horn fibrancy and does not fill the relative collage. The Quasicategory-directory grep and Loogle returned zero hits. No returned declaration states prescribed-boundary fiber-cocone extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Cocone\"",
+   "results": "{\"t\": \"2026-10-16T16:32:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Cocone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-59 and CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63: these use ordinary target Category instances. Read AlgebraicTopology/SimplicialSet/HornColimits.lean:250-315: horn desc constructs a map OUT OF a horn and is not a filler extending a boundary diagram into a quasicategory. KanComplex.hornFilling requires all-horn fibrancy and does not fill the relative collage. The Quasicategory-directory grep and Loogle returned zero hits. No returned declaration states prescribed-boundary fiber-cocone extension."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?join|mapping.?cylinder|IsPointwiseLeftKanExtension|cocartesianFibration",
+   "results": "{\"t\": \"2026-10-16T16:48:54Z\", \"tool\": \"grep\", \"query\": \"relative.?join|mapping.?cylinder|IsPointwiseLeftKanExtension|cocartesianFibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: case-insensitive source search throughout Mathlib/AlgebraicTopology returned zero hits for relative join, mapping cylinder, pointwise left Kan extension or cocartesian fibration terminology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"IsPointwiseLeftKanExtension\"",
+   "results": "{\"t\": \"2026-10-16T16:48:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"IsPointwiseLeftKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle returned zero hits for this simplicial-set/pointwise-Kan-extension pattern."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diagram valued in an infinity category admits extension along a mapping cylinder of a Grothendieck opfibration, relative to the boundary of an ordinal, when each fiber cone is universal",
+   "results": "{\"t\": \"2026-10-16T16:49:05Z\", \"tool\": \"leanfinder\", \"query\": \"A diagram valued in an infinity category admits extension along a mapping cylinder of a Grothendieck opfibration, relative to the boundary of an ordinal, when each fiber cone is universal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\"], \"digest\": \"65ad976a8c797b09\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:53-69,182-187,222-240 and Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean. These hits construct ordinary right Kan extensions of simplicial objects and prove 2-coskeletality under StrictSegal; arbitrary quasicategories need not be strict Segal. They do not extend a quasicategory-valued diagram on the prescribed collage boundary."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-finite-poset-kan-extension",
@@ -96,5 +249,29 @@
   "group": "Q33"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-fiber-colimit-collage",
+  "worker": "stage1",
+  "summary": "Retain the item statement. Replace the draft direct source-theorem appeal by a skeletal construction. Use the existing relative join-cone comparison to choose actual fiber cones, attach one base simplex at a time using a new prescribed-boundary local extension lemma, and glue the compatible union. Cite the existing boundary-cell presentation and cone calculus for exactly their assertions. The single new node is statement-only, searched, and does not assert global fiberwise assembly.",
+  "blueprint": "Proof paragraph 2, derived coefficient adjunction and coherent tower realization, through the pointed-model stability foundation and the finite pushout grid in lem-coef-suspension-square-comparison: the underlying fiber-cone assembly used to construct a finite-poset extension, before proving its unit or its Kan universal property. Steps 1--5 supply the underlying coherent assembly before the parent finite-poset extension proves its unit or adjunction.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "The generic equivalence-invariance of initial cocones is needed when converting to join cones; the unit has no replacement for this basic coherent category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-infinity-fiber-cocone-simplex-extension, all four cited statements, the parent finite-poset-kan-extension Steps 0-1 that use the item, the unit record, and Kerodon 02ZR online. Item statement: verified true independently. p is a split opfibration and U(i) -> K_{/i} has a left adjoint, so it is final; the left Kan extension along K in P gives the extension, with the 1_i fibre cocones colimiting. The strict-fibre wording handles I with nontrivial endomorphisms; empty base and empty fibres also checked. Step 1: by opposites, the join-cone-calculus base change with R=Delta^0 at (x,Q_i) gives c_i with c_i restricted to N(U(i)) equal to Q_i exactly; initiality transfers through the cbc cocone quasicategory. Step 2 is elementary gluing of fibres. Step 3: checked degreewise via Eilenberg-Zilber that X_sigma minus B_sigma injects onto S_n minus S_{n-1} and that B_sigma is the full preimage, so the pushout holds even when sigma repeats vertices. Step 4: [n] x_I P equals P_{U sigma} on objects, fibre arrows, mixed arrows and the second copy; B_sigma equals B_V; since n>=1 every vertex fibre lies in the boundary and carries c_{sigma(r)}. Step 5 is the exhaustive union. New node: exactly 02ZR with C=Delta^n, C_0 = boundary of Delta^n (n>=1), U: E -> Delta^0; the relative join equals the collage nerve and condition (*) follows from the vertex hypothesis. n=1 checked by hand via finality of B in K_V plus initiality of c_0. It is a real local lemma, not a restatement (D1/D2 fine), and B1-B7 hold. Duplicates: lem-coef-infinity-relative-kan-existence (7.3.5.5) was not listed in the report, but it is a global theorem with hypotheses on K_c and no prescribed boundary, so it is not a duplicate. parameter-cone-extension (constant family), grothendieck-limits-colimits (needs colimit-preserving transports) and the parent (circular) are also not duplicates. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc) as a generic cone-calculus black box. No cycle, no fixes."
+ }
 }
