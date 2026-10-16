@@ -8,7 +8,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 088A, lemma-existence-tricky: supported completion equivalence and the maps G_e to H/K^e H; U3 repair of X-96860 review point 4; U3 repair of X-3f050 landing return: reuse the existing endpoint-transport helper instead of duplicating it"
+  "place": "Tag 088A, lemma-existence-tricky, lines 6961-6989; S2 complete Lean proof, 2026-10-17. Affine support bridge uses the proved ideal-times and tensor-section formulas instead of moved private ideal-power helpers; endpoint transport is elementary Iso.homCongr, without proper-completion imports."
  },
  "mathlib_searches": [
   {
@@ -63,7 +63,7 @@
  ],
  "proof": [
   {
-   "text": "For coherent modules supported on a closed subscheme j, transport them through the coherent closed-pushforward equivalence. Closed pushforward is fully faithful, and the natural completion comparison identifies ambient I-completion with pushforward of completion on the subscheme. The assumed equivalence there gives a bijection on ambient completed Hom sets. Transport the bijection along the endpoint isomorphisms. This is supported_completion_bijective. Endpoint transport reuses the proved private map_bijective_of_isos in GrothendieckExistenceSupportedHom via import all; no proper-completion result or additional geometric hypothesis is used.",
+   "text": "For coherent modules supported on a closed subscheme j, transport them through the coherent closed-pushforward equivalence. Closed pushforward is fully faithful, and the natural completion comparison identifies ambient I-completion with pushforward of completion on the subscheme. The assumed equivalence there gives a bijection on completed Hom sets. Transport this bijection along the endpoint isomorphisms using Iso.homCongr and the functor composition law, inside supported_completion_bijective. No proper-completion theorem is used or imported.",
    "uses": [
     "lem-weil-pbc-closed-immersion-coherent-equivalence",
     "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
@@ -71,22 +71,24 @@
    "elementary": false
   },
   {
-   "text": "For modules killed by possibly different positive K-powers, raise the two annihilating powers to their maximum using formalModuleQuotient_factor. Use the proved power_subobject and product_iso helpers of IdealPowerProductRestrictionZero to identify the recursively defined ideal powers with (K^q).toModules, hence with the kernel ideal of V(K^q). Apply the supported Hom bijection on that common thickening. This is torsion_completion_bijective.",
+   "text": "For modules killed by possibly different positive K-powers, raise both annihilating powers to q = max(a+1,b+1) using formalModuleQuotient_factor. A coherent module is quasi-coherent. On every affine open the recursive K-power inclusion has image K(U)^q, which is also the image of (K^q).toModulesι. The hypothesis that the recursive product is zero makes its multiplication map zero. Evaluate it on pure tensor sections to deduce that every section of (K^q).toModules kills every module section on each affine open. The ideal module is quasi-coherent (use the first-power case of the ideal-times theorem), so tensor sections on affine opens come from ordinary tensor products. Tensor-product induction makes multiplication by (K^q).toModules zero on each affine open. Sheaf separatedness on the affine basis makes it globally zero, hence its image is zero. Since (K^q).subschemeι.ker = K^q, this proves support on the common thickening. Apply supported_completion_bijective and the assumed completion equivalence there. This is torsion_completion_bijective.",
    "uses": [
     "lem-weil-pbc-formal-module-ideal-power-factor",
-    "lem-weil-pbc-ideal-power-product-restriction-zero"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Set Q = completion_K(H). Form the morphism of double systems tau = sigma.hom followed by the flipped K-completion of alpha followed by theta.inv. Each term N_e and Q_e is coherent and annihilated by K^(e+1), by the defining coherent-adic conditions. Surjectivity of the supported Hom bijection lifts tau_e to d_e with completion_I(d_e) = tau_e. Injectivity specifies the lift uniquely.",
+   "text": "Set Q = completion_K(H) and form the morphism of double systems tau = sigma.hom followed by the flipped K-completion of alpha followed by theta.inv. Each term N_e and Q_e is coherent and killed by K^(e+1), by its coherent-adic-system property. Surjectivity of torsion_completion_bijective lifts tau_e to a map d_e whose I-completion is tau_e. Injectivity determines this lift uniquely, so the component choices are choices of uniquely determined lifts.",
    "uses": [
     "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": true
   },
   {
-   "text": "For an adjacent K-transition, complete the two composites involving the d_e. The functor composition law and the lifting equations reduce their equality to naturality of tau. The supported Hom bijection for N_(e+1) and Q_e is injective, hence the original composites agree. NatTrans.ofOpSequence assembles d into delta. Evaluate its lifting equation at n and compose with theta.hom; theta.inv_hom_id gives the comparison square.",
+   "text": "For each adjacent K-transition, apply injectivity of torsion_completion_bijective for N_(e+1) and Q_e to the two composites of the lifted components. Completion preserves composition, and the component lifting equations reduce the equality to naturality of tau. NatTrans.ofOpSequence assembles d into a natural transformation, hence a morphism delta in the full subcategory of coherent K-adic systems. Evaluate the lifting equation at n, compose with theta.hom, and use theta.inv_hom_id to obtain exactly the displayed square.",
    "uses": [
     "def-weil-pbc-coherent-formal-module"
    ],
@@ -97,7 +99,9 @@
   "lem-weil-pbc-closed-immersion-coherent-equivalence",
   "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
   "lem-weil-pbc-formal-module-ideal-power-factor",
-  "lem-weil-pbc-ideal-power-product-restriction-zero",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
   "def-weil-pbc-coherent-formal-module"
  ],
  "lean": {
@@ -121,14 +125,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-b434a",
-  "group": "U3",
+  "reviewer": "COMPILER",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T072408-L-1125987",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures and proofs matched corrected nodes, declared interface repair, source construction, and minimal forced adaptation; compilation and axiom checks passed."
+  "landing": "20261016T221624-L-1618633",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-13",
