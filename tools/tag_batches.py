@@ -19,7 +19,7 @@ def reach(n):
         for i in imports.get(x, ()):
             if i in imports and i not in seen: seen.add(i); dq.append(i)
     return seen
-rs = [(f"batch{n}", reach(n)) for n in (1, 2, 3)]
+rs = [(f"batch{n}", reach(n)) for n in (1, 2, 3, 4)]   # 2026-10-17: batch 4 (Poincare duality)
 rows = []
 for l in (R / "coord/queue.tsv").read_text().splitlines():
     r = l.split("\t")
