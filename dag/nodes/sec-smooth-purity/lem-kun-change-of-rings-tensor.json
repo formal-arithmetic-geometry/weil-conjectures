@@ -17,7 +17,8 @@
   "def-weil-abstract-derived-category",
   "def-pc-module-kflat-complex",
   "lem-pc-derived-tensor-second-factor-functor",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-mixed-total-tensor"
  ],
  "proof": [
   {
@@ -223,5 +224,32 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-8abfe6c85 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, master blueprint, unit/chapter route, and relevant Stacks sources in full. All four proof steps and edge cases check out; accepted both declared K-flat tool uses. No new nodes or dependency cycle. Corrected Step 1’s source reference to the actual blueprint paragraph; full corrected JSON and review.md are written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ChangeOfRingsTensor",
+  "file": "lean/Sheaf/Algebra/Homology/ChangeOfRingsTensor.lean",
+  "declaration": "DerivedCategory.changeOfRingsTensor",
+  "statement": "theorem changeOfRingsTensor (n m : ℤ) (l : ℕ) (hl : Nat.Prime l) (hnm : n = (l : ℤ) * m) [HasDerivedCategory.{wR} (ModuleCat.{u} (ULift.{u} (ZMod n.natAbs)))] [HasDerivedCategory.{wk} (ModuleCat.{u} (ULift.{u} (ZMod l)))] (M : ModuleCat.{u} (ULift.{u} (ZMod n.natAbs))) (hM : Module.Flat (ULift.{u} (ZMod n.natAbs)) M) (N : CochainComplex (ModuleCat.{u} (ULift.{u} (ZMod n.natAbs))) ℤ) (hN : ∀ q : ℤ, ∀ x : N.X q, l • x = 0) : ∃! e : (ModuleCat.restrictScalars (quotientToPrime n m l hnm)).mapDerivedCategory.obj (((changeOfRingsFixedTensor (quotientToPrime n m l hnm)).obj (torsionByNatComplex l N hN)).obj (Q.obj ((CochainComplex.singleFunctor (ModuleCat.{u} (ULift.{u} (ZMod n.natAbs))) (0 : ℤ)).obj M))) ≅ (ModuleCat.restrictScalars (quotientToPrime n m l hnm)).mapDerivedCategory.obj (((changeOfRingsFixedTensor (RingHom.id (ULift.{u} (ZMod l)))).obj (torsionByNatComplex l N hN)).obj (Q.obj ((CochainComplex.singleFunctor (ModuleCat.{u} (ULift.{u} (ZMod l))) (0 : ℤ)).obj (quotientByNat (ULift.{u} (ZMod n.natAbs)) l M)))), ∃ t : (CochainComplex.mapBifunctor ((CochainComplex.singleFunctor (ModuleCat.{u} (ULift.{u} (ZMod n.natAbs))) (0 : ℤ)).obj M) (torsionByNatComplex l N hN) (ModuleCat.mixedTensor (quotientToPrime n m l hnm)).flip) ≅ (CochainComplex.mapBifunctor ((CochainComplex.singleFunctor (ModuleCat.{u} (ULift.{u} (ZMod l))) (0 : ℤ)).obj (quotientByNat (ULift.{u} (ZMod n.natAbs)) l M)) (torsionByNatComplex l N hN) (ModuleCat.mixedTensor (RingHom.id (ULift.{u} (ZMod l)))).flip), (∀ (q : ℤ) (x : M) (y : (torsionByNatComplex l N hN).X q) (a : ULift.{u} (ZMod l)), (t.hom.f q).hom ((CochainComplex.ιMapBifunctor ((CochainComplex.singleFunctor (ModuleCat.{u} (ULift.{u} (ZMod n.natAbs))) (0 : ℤ)).obj M) (torsionByNatComplex l N hN) (ModuleCat.mixedTensor (quotientToPrime n m l hnm)).flip 0 q q (zero_add q)).hom (y ⊗ₜ[ULift.{u} (ZMod l)] (a ⊗ₜ[ULift.{u} (ZMod n.natAbs)] (HomologicalComplex.singleObjXSelf (.up ℤ) 0 M).inv.hom x))) = (CochainComplex.ιMapBifunctor ((CochainComplex.singleFunctor (ModuleCat.{u} (ULift.{u} (ZMod l))) (0 : ℤ)).obj (quotientByNat (ULift.{u} (ZMod n.natAbs)) l M)) (torsionByNatComplex l N hN) (ModuleCat.mixedTensor (RingHom.id (ULift.{u} (ZMod l)))).flip 0 q q (zero_add q)).hom (y ⊗ₜ[ULift.{u} (ZMod l)] (a ⊗ₜ[ULift.{u} (ZMod l)] (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (quotientByNat (ULift.{u} (ZMod n.natAbs)) l M)).inv.hom (QuotientAddGroup.mk x)))) ∧ e.hom ≫ (ModuleCat.restrictScalars (quotientToPrime n m l hnm)).mapDerivedCategory.map ((changeOfRingsFixedTensorComparison (RingHom.id (ULift.{u} (ZMod l))) (torsionByNatComplex l N hN)).app ((CochainComplex.singleFunctor (ModuleCat.{u} (ULift.{u} (ZMod l))) (0 : ℤ)).obj (quotientByNat (ULift.{u} (ZMod n.natAbs)) l M))) = (ModuleCat.restrictScalars (quotientToPrime n m l hnm)).mapDerivedCategory.map ((changeOfRingsFixedTensorComparison (quotientToPrime n m l hnm) (torsionByNatComplex l N hN)).app ((CochainComplex.singleFunctor (ModuleCat.{u} (ULift.{u} (ZMod n.natAbs))) (0 : ℤ)).obj M)) ≫ (ModuleCat.restrictScalars (quotientToPrime n m l hnm)).mapDerivedCategory.map (Q.map t.hom)",
+  "by": "ND",
+  "date": "2026-10-16",
+  "declarations": [
+   "DerivedCategory.quotientByNat",
+   "DerivedCategory.torsionByNatComplex",
+   "DerivedCategory.quotientToPrime",
+   "DerivedCategory.changeOfRingsFixedTensor",
+   "DerivedCategory.changeOfRingsFixedTensorComparison",
+   "DerivedCategory.changeOfRingsTensor"
+  ],
+  "note": "Original integer-modulus statement retained using ZMod n.natAbs and ULift; Int.quotientSpanEquivZMod identifies the coefficient ring. N is the original R-complex, with its canonical k-action constructed from degreewise annihilation. The canonical comparison is specified on all tensor generators and by its equation with the published K-flat computation maps. Helpers contain actual quotient/module/chain data, or select the published universal left-derived pair, which is determined up to its unique comparison isomorphism.",
+  "branch": "newtargets-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f4de7a674",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all dependencies, canonical constructions, source passages, universes, edge cases, docstrings, report sections, and verbatim signature. Per-file scompile.py reproduction passed without errors or warnings. No delivery errors found; branch unchanged."
  }
 }

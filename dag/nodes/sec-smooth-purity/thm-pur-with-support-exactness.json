@@ -24,7 +24,8 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension"
  ],
  "proof": [
   {
@@ -433,5 +434,40 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-5cafd42bc (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources, and unit/chapter route. All eight steps pass, including pair-map direction, boundary naturality, bounded-below resolutions, and the direct pro-etale argument. No new nodes or repairs. Accepted all ten declared tool uses; concrete checks and edge cases are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportLongExact",
+  "declaration": "AlgebraicGeometry.exists_support_longExact",
+  "declarations": [
+   "CategoryTheory.Sheaf.supportedSectionsInclusion",
+   "CategoryTheory.Sheaf.sectionHypercohomologyFunctor",
+   "CategoryTheory.Sheaf.supportHypercohomologyFunctor",
+   "CategoryTheory.Sheaf.supportHypercohomologyInclusion",
+   "CategoryTheory.Sheaf.sectionHypercohomologyRestriction",
+   "CategoryTheory.Sheaf.supportSequenceModelIso",
+   "CategoryTheory.Sheaf.SupportSequenceBoundary",
+   "CategoryTheory.Sheaf.SupportSequenceExact",
+   "CategoryTheory.Sheaf.supportSequenceModelBoundary",
+   "CategoryTheory.Sheaf.supportSequencePushforward_additive",
+   "CategoryTheory.Sheaf.supportPairComplexSectionMap",
+   "CategoryTheory.Sheaf.SupportSequencePairNatural",
+   "AlgebraicGeometry.Etale.supportSequenceCoefficients",
+   "AlgebraicGeometry.exists_support_longExact"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportLongExact.lean",
+  "statement": "theorem exists_support_longExact : (∃ δ : ∀ {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i], Sheaf.SupportSequenceBoundary X.smallEtaleTopology AddCommGrpCat.{u + 1} (Etale.supportRestrictionArrow i) (Etale.supportSequenceCoefficients X), (∀ {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i], Sheaf.SupportSequenceExact X.smallEtaleTopology AddCommGrpCat.{u + 1} (Etale.supportRestrictionArrow i) (Etale.supportSequenceCoefficients X) (δ i)) ∧ (∀ {Z X Z' X' : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (i' : Z' ⟶ X') [IsClosedImmersion i'] (f : X' ⟶ X) (t : Scheme.Etale.mk (𝟙 X') ⟶ (MorphismProperty.Over.pullback @Etale ⊤ f).obj (Scheme.Etale.mk (𝟙 X))) (s : Scheme.Etale.mk i'.openComplement.ι ⟶ (MorphismProperty.Over.pullback @Etale ⊤ f).obj (Scheme.Etale.mk i.openComplement.ι)), s ≫ (MorphismProperty.Over.pullback @Etale ⊤ f).map (Etale.supportRestrictionArrow i) = Etale.supportRestrictionArrow i' ≫ t → Sheaf.SupportSequencePairNatural X.smallEtaleTopology X'.smallEtaleTopology AddCommGrpCat.{u + 1} (MorphismProperty.Over.pullback @Etale ⊤ f) (hB := Etale.isContinuous_overPullback f) (Etale.supportRestrictionArrow i) (Etale.supportRestrictionArrow i') (Etale.supportSequenceCoefficients X) (Etale.supportSequenceCoefficients X') (δ i) (δ i') t s)) ∧ (∀ (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n), ∃ δ : ∀ {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i], Sheaf.SupportSequenceBoundary (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (ProEtale.supportRestrictionArrow i) ⊤, (∀ {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i], Sheaf.SupportSequenceExact (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (ProEtale.supportRestrictionArrow i) ⊤ (δ i)) ∧ (∀ {Z X Z' X' : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (i' : Z' ⟶ X') [IsClosedImmersion i'] (f : X' ⟶ X) (t : Scheme.ProEt.mk (𝟙 X') ⟶ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj (Scheme.ProEt.mk (𝟙 X))) (s : Scheme.ProEt.mk i'.openComplement.ι ⟶ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj (Scheme.ProEt.mk i.openComplement.ι)), s ≫ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).map (ProEtale.supportRestrictionArrow i) = ProEtale.supportRestrictionArrow i' ≫ t → Sheaf.SupportSequencePairNatural (Scheme.ProEt.topology X) (Scheme.ProEt.topology X') (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) (hB := Scheme.ProEt.isContinuous_overPullback f) (ProEtale.supportRestrictionArrow i) (ProEtale.supportRestrictionArrow i') ⊤ ⊤ (δ i) (δ i') t s))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Canonical derived inclusion and restriction; natural connecting maps on bounded-below torsion etale coefficients and finite-level pro-etale coefficients. Pair functoriality is expressed on every injective representative, using the actual adjoint chain map and base-change restriction, and the unique induced map on the support kernels. Degree-zero single objects recover the ordinary sheaf sequence via the existing canonical comparison of bounded-below and classical right derived functors."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c451dfbfe",
+  "group": "NL",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source alignment, all statement dependencies, canonical maps, pair naturality, pro-etale coefficients, universes, edge cases, docstrings, and verbatim signature. Immutable module compiles cleanly through scompile.py in sandbox and library modes. No fixes needed; branch unchanged."
  }
 }

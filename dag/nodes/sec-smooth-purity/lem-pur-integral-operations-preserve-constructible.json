@@ -22,7 +22,8 @@
   "def-weil-finite-torsion-constructibility",
   "def-weil-derived-tensor",
   "def-weil-proetale-inverse-image",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
  ],
  "proof": [
   {
@@ -266,5 +267,31 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-d472161a1 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited DAG statements, exact master source, unit/chapter route, Stacks Tags 099M/099N/09BQ/054I, and Bhatt–Scholze §6.5. The eight steps correctly establish normalized towers, canonical base-change reductions, arbitrary-scheme constructibility via the Mathlib preimage theorem, exact cohomology bounds, and tensor boundedness. New nodes are self-contained, non-duplicate, correctly searched, and introduce no weakened hypotheses or circular dependencies. Edge cases and coefficient-category distinctions were checked; no repairs are needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralOperationsPreserveConstructible",
+  "declaration": "WeilConjectures.integralOperations_preserve_constructible",
+  "declarations": [
+   "WeilConjectures.integralOperationRoosProjection",
+   "WeilConjectures.integralPullbackFiniteComplex",
+   "WeilConjectures.integralTensorFiniteComplex",
+   "WeilConjectures.integralPullbackFiniteComparison",
+   "WeilConjectures.integralTensorFiniteComparison",
+   "WeilConjectures.integralOperations_preserve_constructible"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralOperationsPreserveConstructible.lean",
+  "statement": "theorem integralOperations_preserve_constructible {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y) [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] : (∀ K : DerivedCategory (integralTowerModules l E Y), sfIntegralConstructible l E Y K → sfIntegralConstructible l E X ((integralDerivedPullback l E f).obj K) ∧ ∀ (P : (integralOperationsGoodComplex l E Y).FullSubcategory) (e : DerivedCategory.Q.obj P.obj ≅ K) (n : ℕ), IsIso (integralPullbackFiniteComparison l E f K P e n)) ∧ (∀ (W : AlgebraicGeometry.Scheme.{u}), W = X ∨ W = Y → ∀ M N : DerivedCategory (integralTowerModules l E W), sfIntegralConstructible l E W M → sfIntegralConstructible l E W N → sfIntegralConstructible l E W ((integralCompletedTensor l E W).obj (M, N)) ∧ ∀ (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) (e : DerivedCategory.Q.obj P.obj ≅ M) (d : DerivedCategory.Q.obj Q.obj ≅ N) (n : ℕ), IsIso (integralTensorFiniteComparison l E W M N P Q e d n))",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d5bcadf8e",
+  "group": "N3",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical maps, docstrings, edge cases, report sections, and recorded scompile evidence checked; no substantive or mechanical delivery error found."
  }
 }

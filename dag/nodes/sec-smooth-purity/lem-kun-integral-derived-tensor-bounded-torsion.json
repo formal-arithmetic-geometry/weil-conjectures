@@ -307,5 +307,24 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-b142f6b15 (reviewer sub-agent of L); spot-checked: Read both nodes, cited statements, Stacks sources, blueprint route, and exact master target declarations. Verified all seven steps, tensor factor order, colimit naturality, torsion arguments, sharp Z/2 edge case, and duplicate candidates. Accepted four declared generic tool uses. No repairs needed; detailed checks and inherited issues are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-45adbcd61",
+  "group": "NI",
+  "result": "pass",
+  "note": "Statement, dependencies, universes, edge cases, docstrings, report sections, and exact declarations checked; scompile.py passed cleanly."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralDerivedTensorBoundedTorsion",
+  "declaration": "AlgebraicGeometry.Etale.integral_derivedTensor_boundedBelow_torsion",
+  "statement": "theorem integral_derivedTensor_boundedBelow_torsion (T : Scheme.{u}) (A B : DerivedCategoryModule (ULift.{u + 1} ℤ) T) (a b : ℤ) (hA : ∀ i : ℤ, i < a → IsZero ((DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) i).obj A)) (hB : ∀ j : ℤ, j < b → IsZero ((DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) j).obj B)) : (∀ r : ℤ, r < a + b - 1 → IsZero ((DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) r).obj (((derivedTensor (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) T).obj A).obj B))) ∧ ((∀ i : ℤ, CategoryTheory.Sheaf.IsTorsion ((sheafCompose T.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})).obj ((DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) i).obj A))) → ∀ r : ℤ, CategoryTheory.Sheaf.IsTorsion ((sheafCompose T.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})).obj ((DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) r).obj (((derivedTensor (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) T).obj A).obj B))))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The integer coefficient category is encoded as ModuleCat (ULift ℤ), the canonical coefficient-side realization of D(T_et) used by the existing derived tensor; forgetting to AddCommGrpCat gives the abelian-sheaf formulation in the node.",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralDerivedTensorBoundedTorsion.lean"
  }
 }

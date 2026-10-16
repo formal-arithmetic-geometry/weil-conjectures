@@ -154,22 +154,25 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-d4569509c (reviewer sub-agent of L); spot-checked: The definition matches the blueprint and cited sources, with edge cases and target coefficient categories checked. Repair the ill-typed restriction by explicitly supplying the canonical identification iν^{-1}Λ_Y ≅ Λ_{Yν}; corrected whole JSON is in fixes/dag/nodes/sec-smooth-purity/def-weil-proetale-constructible-sheaf.json.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-7a108191d",
-  "group": "Q36",
+  "reviewer": "NT-stage2-Codex-05abf5292",
+  "group": "Q06",
   "result": "pass",
-  "note": "Item and dependencies match the node/source; edge cases, declarations, docstrings, reuse, and intrinsic comparison repair checked. All three files compiled successfully together via scompile.py with status 0; no fixes required."
+  "note": "Statement, dependencies, edge cases, docstrings, universes, and canonical operations checked; all four files compiled locally and with server confirmation."
  },
  "lean": {
-  "module": "Sheaf.Paper.ProEtaleConstructibleSheaf",
-  "declaration": "AlgebraicGeometry.Scheme.IsConstructibleProEtaleModuleSheaf",
-  "file": "lean/Sheaf/Paper/ProEtaleConstructibleSheaf.lean",
-  "statement": "def IsConstructibleProEtaleModuleSheaf (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) : Prop",
+  "module": "Sheaf.Paper.ProEtaleFixedModuleConstructible",
+  "declaration": "AlgebraicGeometry.Scheme.IsConstructibleProEtaleFixedModuleSheaf",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsConstructibleProEtaleFixedModuleSheaf"
+  ],
+  "file": "lean/Sheaf/Paper/ProEtaleFixedModuleConstructible.lean",
+  "statement": "def IsConstructibleProEtaleFixedModuleSheaf (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q36",
-  "date": "2026-10-15",
+  "by": "Q06",
+  "date": "2026-10-16",
   "existing": false,
-  "note": "This interface makes the unchanged node's constructible-stratum requirement explicit by adding Topology.IsConstructible (S.stratum i), while preserving the declaration and all remaining binders and data. LocallyClosedStratification has no additional constructibility field of its own; the currently available upstream Topology.Stratification already has isConstructible_stratum, so in that version the explicit conjunct is redundant and equivalent, rather than a change of the mathematical notion. The previous justification that constructibility was absent from the entire inherited structure is superseded by the maintainer source check."
+  "note": "Section 1(B): the recorded intrinsic predicate takes coefficients in Type u and ringed module sheaves over the ULift constant ring. Here the positive quotients of the lifted valuation ring lie in Type (u+1), in the fixed-module encoding required by the etale comparison. This module gives precisely the same intrinsic finite constructible stratification, local constancy, and finite geometric stalk definition in that existing fixed-module encoding, using the recorded local-constancy and geometric-stalk declarations. The original predicate is publicly imported and preserved."
  }
 }

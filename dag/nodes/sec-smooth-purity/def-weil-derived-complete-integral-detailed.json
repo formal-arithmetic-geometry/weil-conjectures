@@ -96,26 +96,25 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.DerivedCompleteIntegralDetailed",
-  "declaration": "WeilConjectures.boundedConstructibleDerivedCompleteIntegral",
+  "module": "Sheaf.Paper.SfIntegralConstructible",
+  "declaration": "WeilConjectures.sfIntegralConstructible",
   "declarations": [
-   "WeilConjectures.boundedConstructibleDerivedCompleteIntegral",
-   "WeilConjectures.boundedConstructibleDerivedCompleteIntegralCategory"
+   "WeilConjectures.sfIntegralConstructible",
+   "WeilConjectures.sfIntegralConstructibleCategory"
   ],
-  "file": "lean/Sheaf/Paper/DerivedCompleteIntegralDetailed.lean",
-  "statement": "def boundedConstructibleDerivedCompleteIntegral (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : AlgebraicGeometry.Scheme.{u}) : ObjectProperty (completedIntegralDerivedCategory l E Y D hl)",
+  "statement": "def sfIntegralConstructible (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : AlgebraicGeometry.Scheme.{u}) :\n    ObjectProperty (DerivedCategory (scalarReductionSource.{u, u} l E X))",
   "branch": "newtargets-dag",
-  "by": "NZ",
-  "date": "2026-10-15",
-  "existing": false,
-  "note": "§1(B), H10 repair: rebuild the canonical bounded constructible derived-completeness predicate after the paired reduction/tower universe repair. Derived completeness, every positive reduction, finite-torsion constructibility and the single uniform cohomological interval are retained."
+  "by": "N3",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "§1(B): the recorded boundedConstructibleDerivedCompleteIntegral unnecessarily requires a global finite-field datum D and l ≠ D.p, absent from this item. Reuse the already published SfIntegralConstructible module (confirmed with scompile.py --source): its intrinsic sfIntegralConstructible is exactly derived completeness plus every positive constructible reduction and one uniform finite cohomological interval, over the identical completed coefficient sheaf. No new definition or module is supplied."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-26a22ba19",
-  "group": "NZ",
+  "reviewer": "NT-stage2-Codex-d5bcadf8e",
+  "group": "N3",
   "result": "pass",
-  "note": "All hypotheses, conclusions, dependencies, docstrings, edge cases, universes, source correspondence, and ten-file compiler evidence checked; no findings."
+  "note": "Statement, dependencies, canonical maps, docstrings, edge cases, report sections, and recorded scompile evidence checked; no substantive or mechanical delivery error found."
  }
 }
