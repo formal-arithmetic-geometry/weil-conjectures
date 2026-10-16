@@ -280,7 +280,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Precomposition with the free-representable map is restriction of sections.
 This is naturality of the sheafification and free-abelian adjunctions, followed
 by naturality of the universe-lifted Yoneda equivalence. -/
-private lemma sectionsEquiv_precomp {X : Scheme.{u}} {A B : X.Etale}
+lemma sectionsEquiv_precomp {X : Scheme.{u}} {A B : X.Etale}
     (a : A ⟶ B) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (f : (etaleOpenFreeSheaf X).obj B ⟶ F) :
     EtaleOpenComparison.sectionsEquiv X.smallEtaleTopology A F

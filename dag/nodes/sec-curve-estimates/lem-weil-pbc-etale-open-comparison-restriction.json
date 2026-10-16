@@ -18,30 +18,62 @@
  ],
  "proof": [
   {
-   "text": "Proof: resolve G by injective sheaves on X. Exact restriction along j and k preserves\ninjectives because its left adjoint is exact extension by zero. The representing\nsections adjunction identifies Hom(A_j,I) with I(j) and Hom(A_{k≫j},I) with I(k≫j),\nand sends precomposition with the free sheaf map of k to I(k). The constant-sheaf\nadjunction identifies these same complexes with global sections of the restrictions\non U and V. Under these identifications, the inverse-image pullback on global sections\nis also I(k): the units and the composition isomorphism of inverse image give exactly\nrestriction of sections. Thus the square commutes degreewise, hence on cohomology.\nThe exact Ext adjunction used in etaleCohomologyOverOpenEquiv is this comparison:\nin degree zero it is the sections adjunction, and in higher degrees dimension shifting\nalong the same injective resolution gives the unique extension of that map. This proves\ncommutativity for the specified comparison, not for an arbitrarily chosen equivalence.\nIdentity inclusions, empty opens, zero coefficients, and degree zero need no exceptions.",
+   "text": "In degree zero, the inverse of the exact Ext adjunction sends mk₀(f) to the hom adjunction. Naturality of representingHomEquiv identifies precomposition with representingIso.hom with the representing sections equivalence. Consequently etaleCohomologyOverOpenEquiv on mk₀(f) is mk₀ of restrictedSectionsEquiv inverse applied to sectionsEquiv(f). Naturality in the representing object of the sheafification, free-abelian and lifted Yoneda adjunctions sends precomposition with the free sheaf map of k to G(k). Reuse the existing sectionsEquiv_precomp theorem from AbelianRepresentableGeneratorCoherence (made public without changing its statement or proof), rather than redeclaring that identity.",
    "uses": [
+    "def-weil-pbc-etale-open-comparison-data",
+    "lem-sc-ext-exact-adjunction",
+    "lem-sbc-abelian-representable-generator-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary open immersions j:U→X and k:V→U, evaluate the localization adjunction unit at the identity terminal objects. The localization comparison changes the unit followed by a site map to restriction along its site adjunct. Evaluate the inverse-image composition unit on the diagonal (id,id) and on (k,id); the pullback universal property identifies the two resulting maps. These equations show that the transported inverse-image unit between U and V is G(k), with the displayed localization and composition comparisons. The constant-section adjunct pullback identity then identifies the independently constructed degree-zero cohomology pullback with this same restriction. The corrections mk(id≫j)≅mk(j) commute with the map induced by k. This proves the claimed square in degree zero.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-constant-section-adjunct-pullback",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both comparison and restriction commute with connecting maps of every short exact coefficient sequence. For comparison, apply its inverse, express it as precomposition with representingIso.hom followed by mapExtCounit, and use naturality of the short exact extension class under the counit. Restriction is an exact inverse-image Ext map followed by the natural coefficient comparison; naturality of the same extension class gives its compatibility. Exact restriction is available from its adjunction with direct image, while extension by zero is exact.",
+   "uses": [
+    "def-weil-pbc-etale-open-comparison-data",
+    "lem-sc-ext-exact-adjunction",
     "lem-weil-pbc-extension-by-zero-exact",
     "lem-weil-pbc-extension-by-zero-adjunction",
     "lem-weil-pbc-etale-inverse-image-restriction",
-    "def-weil-pbc-cohomology-pullback",
-    "lem-sc-ext-exact-adjunction",
-    "def-weil-pbc-etale-open-comparison-data"
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on q, simultaneously for all coefficient sheaves G. Embed G into an injective I and form 0→G→I→Q→0. The Ext long exact sequence and vanishing of positive Ext into I express every degree q+1 class as the connecting image of a degree q class on Q. Associativity moves the free-sheaf precomposition across the connecting extension class. The preceding two connecting-map compatibilities and the induction hypothesis on Q prove the desired equality. The argument does not exclude empty opens, zero coefficients, or identity inclusions.",
+   "uses": [
+    "lem-sc-abelian-ext-covariant-exact",
+    "lem-weil-pbc-ext-injective-positive-vanishing"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-etale-open-comparison-data",
+  "lem-sc-ext-exact-adjunction",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-constant-section-adjunct-pullback",
+  "def-weil-pbc-cohomology-pullback",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "def-weil-pbc-cohomology-pullback",
-  "lem-sc-ext-exact-adjunction",
-  "def-weil-pbc-etale-open-comparison-data"
+  "lem-sc-abelian-ext-covariant-exact",
+  "lem-weil-pbc-ext-injective-positive-vanishing",
+  "lem-sbc-abelian-representable-generator-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Stacks 03F3 (lemma-cohomology-of-open), part (2) and its proof by identical restricted section complexes; Sites 00XZ (section-localize)."
+  "document": "https://stacks.math.columbia.edu/tag/03F3",
+  "place": "Stacks 03F3 and Sites 00XZ; complete Lean proof by G3, 2026-10-16. Degree-zero unit computation and dimension shifting implement the specified comparison. The unit computation follows the proved NestedOpenSectionUnit calculation with arbitrary presentations of the opens. Returned-delivery repair: import and use the existing sectionsEquiv_precomp, exposed in place in AbelianRepresentableGeneratorCoherence."
  },
  "mathlib_searches": [
   {
@@ -124,13 +156,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-d806e",
-  "group": "F2",
+  "reviewer": "X-6e19e",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T151907-L-2287849",
+  "landing": "20261016T054836-L-157543",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered Lean declarations and two named obligations with the unchanged node, dependency records, change record and sources; all four modules and direct importer Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison compile cleanly, and axiom checks pass."
+  "note": "independent Codex review: Delivered Lean/DAG files matched the recorded statements; both modules and the direct importer compiled, and forced adaptation was necessary and minimal."
  }
 }
