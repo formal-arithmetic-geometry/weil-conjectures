@@ -12,14 +12,29 @@
  },
  "proof": [
   {
-   "text": "A surjective closed immersion is a universal homeomorphism. Compute topological invariance as in Lemma 5.4.2 using the affine ind-etale basis of Theorem 2.3.4. Base change on that basis is an equivalence preserving faithfully flat and Zariski covering criteria. Refine the finite presentation covering of p* M to basis objects and lift this refined covering. The induced monoidal sheaf equivalence agrees with the closed inverse-image adjunction.",
+   "text": "Choose a pro-etale cover C of V presenting p* M. Apply exists_cover_refinement_surjective_closed to obtain a pro-etale cover B of U and, for each b, a cartesian square with q:W -> B_b over p and a refinement map r:W -> C_a. Closed immersions and surjective morphisms are stable under base change, so q is again surjective closed.",
+   "uses": [
+    "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply abelian_closed_support to any surjective closed immersion i and its empty open complement. Every abelian sheaf on that complement is zero, hence the actual inverse-image/direct-image unit and counit are invertible. Lift their components through the forgetful functors using mapModAdjunction_unit_app_hom and mapModAdjunction_counit_app_hom. Thus inverse image on modules over any monoid object R is an additive equivalence, without a commutativity assumption.",
    "uses": [
     "lem-weil-pbc-proetale-abelian-closed-support"
    ],
    "elementary": false
   },
   {
-   "text": "The monoidal sheaf equivalence identifies the coefficient rings and regular modules, and preserves finite sums and cokernels. Transport the finite matrices and their cokernel isomorphisms to the lifted covering of U. Compatibility with the adjunction unit identifies these cokernels with the original M. Empty U uses the empty cover and rank-zero presentations.",
+   "text": "Reuse fp_reflect from CondensedSurjectiveClosedLocalPresentation through proof-only import all. It reflects finite free cokernel presentations through additive equivalences identifying regular modules. Reuse the generic finitePresentation_of_iso and finitePresentation_mapMod, and the scalar-isomorphism lemmas finitePresentation_comap and finitePresentation_of_comap, from ProEtaleModuleConstructiblePullback. No duplicate transport lemmas or additional coefficient hypotheses are needed.",
+   "uses": [
+    "new-lem-weil-pbc-condensed-surjective-closed-local-presentation",
+    "lem-weil-pbc-module-constructible-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved monoidality instance for upperStarComp.inv from module-constructible-pullback to form mapModCompIso. The ring comparison is an isomorphism, so the imported comap transport identifies finite presentation of a composite pullback with that of an iterated pullback. Pull hC(a) along r and use r followed by C.f(a) = s and the cartesian square equation q followed by B.f(b) = s followed by p. This yields finite presentation after q of M restricted to B_b. Reflect through the module equivalence of step 2. The cover B then witnesses local finite presentation of the original M. Empty covers and rank-zero presentations require no separate nonempty assumption.",
    "uses": [
     "lem-weil-pbc-module-constructible-pullback"
    ],
@@ -27,14 +42,18 @@
   }
  ],
  "proof_deps": [
+  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
   "lem-weil-pbc-proetale-abelian-closed-support",
+  "new-lem-weil-pbc-condensed-surjective-closed-local-presentation",
   "lem-weil-pbc-module-constructible-pullback"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "E2",
+  "date": "2026-10-16",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 5.4.2, computed on the affine ind-etale basis of Theorem 2.3.4, and Definition 6.8.10; restriction to stratum interiors in finite-stratum induction",
-  "note": "B3 remaining presentation-reflection step of immersion transport. The geometric cartesian reduction and module composition comparisons are proved in its parent module; this theorem remains unproved."
+  "note": "Complete Lean proof using existing closed-cover refinement and empty-complement abelian closed support. Repair of the returned duplicate-helper refusal: proof-only import all reuses existing private presentation reflection from CondensedSurjectiveClosedLocalPresentation and generic presentation transport from ProEtaleModuleConstructiblePullback. The second reader removed the unnecessary CondensedConstructibleSerre import by using the latter module for isomorphism and inverse-image transport as well. The arbitrary monoid coefficient, original theorem signature and all other modules are unchanged. No new sorry, module, or public interface is introduced."
  },
  "mathlib_searches": [
   {
@@ -115,10 +134,10 @@
   "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261016T053830-L-51707",
-  "kind": "interface",
+  "landing": "20261016T062622-L-449134",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -7,8 +7,11 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+
+import Sheaf.Paper.ProEtaleSurjectiveClosedCoverRefinement
 import Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
-import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import all Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import all Sheaf.Paper.CondensedSurjectiveClosedLocalPresentation
 
 /-! # Reflection of local finite presentations across a surjective closed immersion -/
 
@@ -18,6 +21,61 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
+
+private lemma fp_pullback_comp_iff {X Y Z : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X)
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :
+    Mod.IsFinitelyPresented ((upperStar Ab.{u + 1} (f ≫ g)).obj R)
+      (((upperStar Ab.{u + 1} (f ≫ g)).mapMod R).obj M) ↔
+    Mod.IsFinitelyPresented ((upperStar Ab.{u + 1} f).obj
+      ((upperStar Ab.{u + 1} g).obj R))
+      (((upperStar Ab.{u + 1} f).mapMod _).obj
+        (((upperStar Ab.{u + 1} g).mapMod R).obj M)) := by
+  let F := upperStar Ab.{u + 1} g
+  let G := upperStar Ab.{u + 1} f
+  let e := upperStarComp Ab.{u + 1} f g
+  let φ := Functor.compAlgHom F G e.inv R
+  let i := (Functor.mapModCompIso F G e.inv R).app M
+  exact ⟨fun h ↦ finitePresentation_of_iso i.symm (finitePresentation_comap φ h),
+    fun h ↦ finitePresentation_of_comap φ (finitePresentation_of_iso i h)⟩
+
+private theorem closed_mapMod_isEquivalence {X Z : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] [Surjective i]
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] :
+    ((upperStar Ab.{u + 1} i).mapMod R).IsEquivalence := by
+  let j := (⊥ : X.Opens).ι
+  have hU : IsEmpty (⊥ : X.Opens).toScheme := ⟨fun x ↦ x.property⟩
+  let := hU
+  have hij : Set.range j = (Set.range i)ᶜ := by
+    rw [Set.range_eq_univ.mpr i.surjective, Set.compl_univ]
+    exact Set.range_eq_empty j
+  obtain ⟨hc, hu⟩ := abelian_closed_support i j hij
+  have hunitAb (F : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :
+      IsIso ((upperStarLowerStarAdjunction Ab.{u + 1} i).unit.app F) := by
+    apply hu F
+    refine Sheaf.isZero_of_isZero_obj _ ?_
+    rintro ⟨V⟩
+    have : IsEmpty V.left := ⟨fun v ↦ by
+      have x : (⊥ : X.Opens).toScheme := V.hom.base v
+      exact x.property⟩
+    exact (Scheme.ProEt.isTerminalSectionsOfIsEmpty
+      ((upperStar Ab.{u + 1} j).obj F) V).isZero
+  let adj := (upperStarLowerStarAdjunction Ab.{u + 1} i).mapModAdjunction R
+  have hunit (M) : IsIso (adj.unit.app M) := by
+    have hh : IsIso ((Mod.forget _).map (adj.unit.app M)) := by
+      change IsIso (adj.unit.app M).hom
+      dsimp only [adj]
+      rw [Adjunction.mapModAdjunction_unit_app_hom]
+      infer_instance
+    exact isIso_of_reflects_iso _ (Mod.forget _)
+  have hcounit (N) : IsIso (adj.counit.app N) := by
+    have hh : IsIso ((Mod.forget _).map (adj.counit.app N)) := by
+      change IsIso (adj.counit.app N).hom
+      dsimp only [adj]
+      rw [Adjunction.mapModAdjunction_counit_app_hom]
+      infer_instance
+    exact isIso_of_reflects_iso _ (Mod.forget _)
+  exact adj.toEquivalence.isEquivalence_functor
 
 /-- Surjective closed inverse image reflects pro-etale local finite presentation.
 Source: Bhatt--Scholze, Lemma 5.4.2, Theorem 2.3.4 and Definition 6.8.10.
@@ -42,6 +100,26 @@ theorem localFinitePresentation_of_surjective_closed_pullback
     (hM : IsLocallyFinitelyPresented ((upperStar Ab.{u + 1} p).obj R)
       (((upperStar Ab.{u + 1} p).mapMod R).obj M)) :
     IsLocallyFinitelyPresented R M := by
-  sorry
+  classical
+  let : Surjective p := ⟨hp⟩
+  obtain ⟨C, hC⟩ := hM
+  obtain ⟨B, hB⟩ := Scheme.exists_cover_refinement_surjective_closed p C
+  refine ⟨B, fun b ↦ ?_⟩
+  obtain ⟨a, W, q, s, r, hsq, hr⟩ := hB b
+  have : IsClosedImmersion q :=
+    MorphismProperty.IsStableUnderBaseChange.of_isPullback hsq.flip inferInstance
+  have : Surjective q :=
+    MorphismProperty.IsStableUnderBaseChange.of_isPullback hsq.flip inferInstance
+  have : ((upperStar Ab.{u + 1} q).mapMod
+      ((upperStar Ab.{u + 1} (B.f b)).obj R)).IsEquivalence :=
+    closed_mapMod_isEquivalence q _
+  apply fp_reflect ((upperStar Ab.{u + 1} q).mapMod _)
+    (Mod.isoMk (Iso.refl _) (by simp [Mod.act]))
+  apply (fp_pullback_comp_iff q (B.f b) M).mp
+  rw [hsq.w]
+  apply (fp_pullback_comp_iff s p M).mpr
+  rw [← hr]
+  apply (fp_pullback_comp_iff r (C.f a) _).mpr
+  exact finitePresentation_mapMod (upperStar Ab.{u + 1} r) (hC a)
 
 end AlgebraicGeometry.ProEtale
