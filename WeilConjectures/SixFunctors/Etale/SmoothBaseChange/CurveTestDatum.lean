@@ -9,6 +9,8 @@ public import Mathlib
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeQuotientDetection
 
 /-!
 # The universal curve-test datum attached to a failure of base change
@@ -122,7 +124,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (p : X ⟶ S)
 `K` over it: the spectrum `S''` of the integral closure of `Γ(S', ⊤)` in `K`. It is affine,
 integral and normal, its function field is algebraically closed
 (`IsFractionRing.isAlgClosed_integralClosure`), the morphism `S'' ⟶ S'` is integral, and the
-given point `Spec K ⟶ S'` lifts to a geometric generic point of `S''`. -/
+given point `Spec K ⟶ S'` lifts to a geometric generic point of `S''`. 
+(blueprint: lem-sbc-normalization-algclosed-field)
+-/
 theorem Etale.exists_normalization_of_isAlgClosed {S' : Scheme.{u}} [IsAffine S'] {K : Type u}
     [Field K] [IsAlgClosed K] (g : Spec (.of K) ⟶ S') :
     ∃ (S'' : Scheme.{u}) (_ : IsAffine S'') (_ : IsIntegral S'')
@@ -194,8 +198,13 @@ theorem Etale.exists_not_isZero_higherDirectImage_constantModSheaf {K : Type u} 
     [QuasiSeparated h] (n : ℕ) (hn : n ≠ 0) (hΛ : (n : Λ) = 0) (q : ℤ)
     (F : Sheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : ¬ IsZero ((Etale.baseChangeTargetFunctor Λ e h q).obj F)) :
-    ∃ d, d ∣ n ∧ ¬ IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d)) :=
-  sorry
+    ∃ d, d ∣ n ∧ ¬ IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d)) := by
+  obtain ⟨r, hr, hrn, hunit, hnonzero⟩ :=
+    Etale.exists_prime_cyclic_higherDirectImage Λ e h n hn hΛ q F hF
+  refine ⟨r, hrn, ?_⟩
+  intro hzero
+  exact hnonzero
+    (Etale.isZero_prime_cyclic_higherDirectImage_of_quotient Λ h q r hr hunit hzero)
 
 /-- Blueprint `sbc-lem-bc-universal-test`: Universal curve-test datum for a failure.
 

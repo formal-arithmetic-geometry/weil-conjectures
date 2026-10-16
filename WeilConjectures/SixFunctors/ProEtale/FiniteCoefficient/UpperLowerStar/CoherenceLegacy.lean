@@ -642,3 +642,217 @@ lemma upperStarComp_id_left (t : X ⟶ Y) :
 end UnitLaws
 
 end AlgebraicGeometry.ProEtale
+
+section
+
+/-!
+# Coherence of the pushforwards and pullbacks on the small pro-étale sites
+
+The composition isomorphisms `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*`
+(`AlgebraicGeometry.ProEtale.lowerStarComp`) and `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*`
+(`AlgebraicGeometry.ProEtale.upperStarComp`) satisfy the associativity law: the two ways of
+identifying the pushforward (resp. pullback) along `f ≫ g ≫ h` with the composite of the three
+pushforwards (resp. pullbacks) agree, up to the identification `(f ≫ g) ≫ h = f ≫ (g ≫ h)`.
+For the pushforwards this is the associativity of base change
+(`CategoryTheory.MorphismProperty.Over.pullbackComp_assoc`); it passes to the pullbacks by
+conjugation along the adjunctions `g^* ⊣ g_*`.
+
+This is the pro-étale counterpart of `CategoryTheory.GrothendieckTopology.upperStarComp_assoc`.
+
+## Main results
+
+- `AlgebraicGeometry.ProEtale.lowerStarComp_assoc_iso` and
+  `AlgebraicGeometry.ProEtale.upperStarComp_assoc`: the associativity laws.
+- `AlgebraicGeometry.ProEtale.upperStarComp_hom_app_assoc`: the associativity law for the
+  pullbacks, evaluated at a sheaf.
+-/
+
+@[expose] public section
+
+
+
+open CategoryTheory Category Limits Opposite
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+
+section Conjugate
+
+variable {R S T : Scheme.{u}}
+
+
+
+
+
+end Conjugate
+
+section Components
+
+
+
+end Components
+
+section Assoc
+
+variable {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ V)
+
+set_option backward.isDefEq.respectTransparency.types false in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The associativity law for the composition isomorphisms of the pushforwards. -/
+lemma lowerStarComp_assoc_iso :
+    (f)_*[A].associator (g)_*[A] (h)_*[A] ≪≫
+        Functor.isoWhiskerLeft (f)_*[A] (lowerStarComp A g h) ≪≫ lowerStarComp A f (g ≫ h) =
+      Functor.isoWhiskerRight (lowerStarComp A f g) (h)_*[A] ≪≫ lowerStarComp A (f ≫ g) h ≪≫
+        lowerStarCongr A (Category.assoc f g h) := by
+  ext M b
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Category.id_comp, ObjectProperty.FullSubcategory.comp_hom,
+    lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app, lowerStar_map_hom_app',
+    lowerStar_obj_obj_map', ← Functor.map_comp, ← op_comp]
+  congr 1
+  apply Quiver.Hom.unop_inj
+  apply MorphismProperty.Over.Hom.ext
+  simp only [Quiver.Hom.unop_op]
+  apply pullback.hom_ext
+  · apply pullback.hom_ext
+    · apply pullback.hom_ext <;> simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+        MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp]
+    · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+        MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp]
+  · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+      MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp]
+
+
+
+
+
+end Assoc
+
+
+section Paste
+
+variable {P P' P'' Y Y' Y'' Z : Scheme.{u}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+end Paste
+
+
+section Factor
+
+variable {X Y Z : Scheme.{u}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+end Factor
+
+
+section IsoTrans
+
+variable {P X Y Z W : Scheme.{u}}
+
+
+
+
+
+
+
+
+
+end IsoTrans
+
+
+section Misc
+
+variable {X Y Z : Scheme.{u}}
+
+
+
+
+
+
+
+variable {P : Scheme.{u}}
+
+
+
+end Misc
+
+
+section Congr
+
+variable {P Q R : Scheme.{u}}
+
+
+
+
+
+
+
+end Congr
+
+section UnitLaws
+
+variable {X Y : Scheme.{u}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The left unit law for the composition isomorphisms of the pushforwards. -/
+lemma lowerStarComp_id_left_iso (t : X ⟶ Y) :
+    lowerStarComp A (𝟙 X) t = Functor.isoWhiskerRight (lowerStarId A X) (t)_*[A] ≪≫
+      (t)_*[A].leftUnitor ≪≫ (lowerStarCongr A (Category.id_comp t)).symm := by
+  refine Iso.ext (NatTrans.ext (funext fun M ↦ ?_))
+  simp only [lowerStarComp_id_left_hom_app, Functor.comp_obj, lowerStarCongr_rfl, Iso.refl_symm,
+    Iso.trans_hom, Functor.isoWhiskerRight_hom, Iso.refl_hom, NatTrans.comp_app, Functor.id_obj,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app, NatTrans.id_app, Category.id_comp]
+  rfl
+
+
+
+end UnitLaws
+
+end AlgebraicGeometry.ProEtale
+
+end

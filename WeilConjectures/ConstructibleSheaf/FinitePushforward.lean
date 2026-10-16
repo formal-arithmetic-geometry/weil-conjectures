@@ -5,6 +5,10 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.StrictHenselization
+
+
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.CategoryTheory.Presentable.Finite
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
@@ -15,6 +19,25 @@ public import WeilConjectures.ConstructibleSheaf.FinitePushforward.GenericPoint
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.PointSplitting
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.FinitelyPresentable
+import WeilConjectures.AlgebraicGeometry.ConstructibleLimitDescentGeneral
+import WeilConjectures.AlgebraicGeometry.NormalConstantGenericUnit
+import WeilConjectures.AlgebraicGeometry.NormalConstantOpenUnit
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Mathlib.CategoryTheory.Presentable.Directed
+import WeilConjectures.AlgebraicGeometry.ConstructibleAffineFreePresentationGeneral
+import WeilConjectures.AlgebraicGeometry.EtaleSectionsFilteredColimit
+import Mathlib.CategoryTheory.Presentable.Limits
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleNoetherianStalkDetector
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteSelectionGeneral
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.NormalScheme
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationStalkFormula
+import WeilConjectures.RingTheory.EtaleColimitNormalLocalDomain
+import WeilConjectures.RingTheory.StrictHenselizationTriples
+import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Constructible sheaves embed into finite pushforwards of constant sheaves
@@ -173,7 +196,9 @@ holds for the inclusion of a nonempty open subscheme.
 The blueprint states this for a finite abelian group `E`; the proof (the strict henselisation
 of a normal local ring is a normal domain, so the generic fibre of `Spec 𝒪ˢʰ_{Y,ȳ}` is
 irreducible) applies to an arbitrary value `M`.
-(blueprint: `lem-weil-pbc-normal-constant-generic`) -/
+(blueprint: `lem-weil-pbc-normal-constant-generic`) 
+(blueprint: lem-weil-pbc-normal-constant-generic)
+-/
 @[stacks 09Z5]
 theorem Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed {Y : Scheme.{u}} [IsIntegral Y]
     (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y)) (M : ModuleCat.{u + 1} Λ) :
@@ -225,7 +250,9 @@ By Stacks 095N, `F` is a cokernel of a map between finite sums of extensions by 
 along étale maps from affine schemes; these are finitely presentable
 (`AlgebraicGeometry.Etale.isFinitelyPresentable_etaleLowerShriek_constantSheaf`, by Stacks 0738),
 and finitely presentable objects are closed under finite colimits.
-(blueprint: `lem-weil-pbc-constructible-finitely-presented`) -/
+(blueprint: `lem-weil-pbc-constructible-finitely-presented`) 
+(blueprint: lem-weil-pbc-constructible-finitely-presented)
+-/
 @[stacks 09Z4]
 theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ]
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
@@ -257,7 +284,9 @@ theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ
 `Λ`-modules `C` on a Noetherian scheme `U` admits a monomorphism
 `C ⟶ ⨁ᵢ (hᵢ)_* Mᵢ` into a finite direct sum of pushforwards of constant sheaves with finitely
 generated values `Mᵢ` along finite morphisms `hᵢ : Vᵢ ⟶ U`, for `Λ` noetherian.
-(blueprint: `lem-weil-pbc-constructible-finite-pushforward-noetherian`) -/
+(blueprint: `lem-weil-pbc-constructible-finite-pushforward-noetherian`) 
+(blueprint: lem-weil-pbc-constructible-finite-pushforward-noetherian)
+-/
 @[stacks 09Z6]
 theorem Etale.exists_mono_biproduct_lowerStar_of_isNoetherian [IsNoetherianRing Λ]
     {U : Scheme.{u}} [IsNoetherian U]
@@ -266,11 +295,23 @@ theorem Etale.exists_mono_biproduct_lowerStar_of_isNoetherian [IsNoetherianRing 
       (M : Fin r → ModuleCat.{u + 1} Λ) (_ : ∀ i, Module.Finite Λ (M i))
       (φ : C ⟶ ⨁ fun i ↦ ((h i)_*[ModuleCat.{u + 1} Λ]).obj
         ((constantSheaf (V i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))), Mono φ :=
-  -- Proved steps of the Stacks proof: Step 3
-  -- (`Scheme.exists_isConstant_upperStar_of_isConstructibleSheaf`, constancy over a finite
-  -- separable extension of a residue field), Step 5
-  -- (`Etale.homLowerStarConstantSheafEquiv`) and the 09Z5 input. Missing: 09YV, 0817, 09Z1.
-  sorry
+  by
+    classical
+    obtain ⟨Y, f, hf, M, hM, ψ, hψ⟩ := exists_noetherian_stalk_detector Λ C
+    let G (x : U) := (lowerStar (ModuleCat.{u + 1} Λ) (f x)).obj
+      ((constantSheaf (Y x).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M x))
+    have htests : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+        (s : Spec (.of Ω) ⟶ U),
+        ∃ x : U, Function.Injective
+          (((Scheme.pointSmallEtale s).sheafFiber
+            (A := ModuleCat.{u + 1} Λ)).map (ψ x)) := by
+      intro Ω _ _ s
+      exact ⟨((Scheme.SpecToEquivOfField Ω U) s).1, hψ _ Ω s rfl⟩
+    obtain ⟨r, l, hφ⟩ :=
+      Scheme.exists_mono_biproduct_of_constructible_module_stalk_injective_general
+        Λ U C U G ψ htests
+    exact ⟨r, fun i ↦ Y (l i), fun i ↦ f (l i), fun i ↦ hf (l i),
+      fun i ↦ M (l i), fun i ↦ hM (l i), biproduct.lift (fun i ↦ ψ (l i)), hφ⟩
 
 section Auxiliary
 
@@ -298,13 +339,35 @@ theorem Etale.exists_isNoetherian_upperStar_iso [IsNoetherianRing Λ] {U : Schem
     [IsConstructibleSheaf C] :
     ∃ (U' : Scheme.{u}) (ν : U ⟶ U') (C' : Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       IsNoetherian U' ∧ IsConstructibleSheaf C' ∧ Nonempty (((ν)^*[_]).obj C' ≅ C) :=
-  sorry
+  by
+    obtain ⟨N⟩ := U.nonempty_noetherianApproximation
+    obtain ⟨I, hI, hd, hn, G, hG⟩ := IsFiltered.exists_directed N.Iᵒᵖ
+    let := hI
+    let := hd
+    let := hn
+    let := hG
+    let D := G.leftOp ⋙ N.D
+    let c := (Cone.mk U N.π).whisker G.leftOp
+    have hc : IsLimit c := (Functor.Initial.isLimitWhiskerEquiv G.leftOp _).symm N.isLimit
+    let : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f) :=
+      fun {_ _} f ↦ N.isAffineHom_map (G.leftOp.map f)
+    let : ∀ i : Iᵒᵖ, CompactSpace (D.obj i) :=
+      fun i ↦ N.compactSpace_obj (G.leftOp.obj i)
+    let : ∀ i : Iᵒᵖ, IsNoetherian (D.obj i) :=
+      fun i ↦ N.isNoetherian_obj (G.leftOp.obj i)
+    let : ∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i) :=
+      fun i ↦ IsLocallyNoetherian.quasiSeparatedSpace
+    obtain ⟨i, C', hC', e⟩ := Scheme.exists_constructible_limit_descent_general D c hc Λ C
+    exact ⟨D.obj (Opposite.op i), c.π.app (Opposite.op i), C',
+      N.isNoetherian_obj _, hC', e⟩
 
 /-- **Pulling back a finite-pushforward embedding.** If `C'` on `U'` embeds into a finite sum
 of pushforwards of constant sheaves along finite, finitely presented morphisms, then so does
 its pullback along any `ν : U ⟶ U'`: pullback is exact, commutes with finite sums, and with
 pushforward along finite morphisms (`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite`),
-and it preserves constant sheaves. -/
+and it preserves constant sheaves. 
+(blueprint: lem-weil-pbc-finite-pushforward-embedding-pullback)
+-/
 theorem Etale.exists_mono_biproduct_lowerStar_upperStar {U U' : Scheme.{u}} (ν : U ⟶ U')
     (C' : Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {r : ℕ} (V : Fin r → Scheme.{u})
     (h : ∀ i, V i ⟶ U') [∀ i, IsFinite (h i)] [∀ i, LocallyOfFinitePresentation (h i)]
@@ -337,7 +400,9 @@ The blueprint takes `U'` to be a stage `U_λ` of an inverse system `U = lim U_λ
 schemes with affine transition maps; only the stage is used afterwards, so the inverse system
 is not recorded. That the pullback of the embedding is an embedding of `C` is
 `AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar`.
-(blueprint: `lem-weil-pbc-constructible-finite-pushforward-approximation`) -/
+(blueprint: `lem-weil-pbc-constructible-finite-pushforward-approximation`) 
+(blueprint: lem-weil-pbc-constructible-finite-pushforward-approximation)
+-/
 theorem Etale.exists_isNoetherian_mono_biproduct_lowerStar [IsNoetherianRing Λ] {U : Scheme.{u}}
     [CompactSpace U]
     [QuasiSeparatedSpace U] (C : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -359,7 +424,9 @@ theorem Etale.exists_isNoetherian_mono_biproduct_lowerStar [IsNoetherianRing Λ]
 generated values `Mᵢ` along finite and finitely presented morphisms `hᵢ : Vᵢ ⟶ U`, for `Λ`
 noetherian. The blueprint states this for torsion sheaves, over a finite ring `Λ`, where the
 `Mᵢ` are finite.
-(blueprint: `lemma-weil-pbc-constructible-finite-pushforward`) -/
+(blueprint: `lemma-weil-pbc-constructible-finite-pushforward`) 
+(blueprint: lemma-weil-pbc-constructible-finite-pushforward)
+-/
 @[stacks 09Z7]
 theorem Etale.exists_mono_biproduct_lowerStar [IsNoetherianRing Λ] {U : Scheme.{u}}
     [CompactSpace U]

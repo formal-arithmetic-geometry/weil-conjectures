@@ -15,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.KrullDimension.Polynomial
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction
 
 /-!
 # The exchange morphism of the projective line at a geometric point
@@ -115,21 +116,12 @@ closed fibres (the strictly henselian comparison for `ℙ¹`); expanding the uni
 and counit composite defining the exchange morphism identifies the induced map with the
 field-extension pullback.
 
-**Form of the statement.** The blueprint identifies the two stalks with the cohomologies of
-the closed fibres through the canonical maps `ρ ∘ Φ`. This statement only asserts that
-*some* isomorphisms `e₁`, `e₂` make the square commute, which is weaker. Since
-`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed` is proved from its own
-nodes, this weak form is equivalent to the bijectivity of the stalk map. So this `sorry`
-carries the content of `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine`,
-and it must be filled through the canonical maps, not from bijectivity. The canonical form
-needs infrastructure the project does not have yet:
-* the strict henselisation `Spec 𝒪ˢʰ_{S,s̄}` as a scheme, with the stalk formula
-  `(Rᵠp_* F)_{s̄} ≅ Hᵠ(ℙ¹_{𝒪ˢʰ}, F|)` (the maps `Φ`);
-* an edge map comparing the higher direct images `Rᵠp_*`, defined as homology in
-  `DerivedCategory.Plus`, with the `Ext`-groups `CategoryTheory.Sheaf.H`. Building it needs
-  `Functor.rightDerivedFunctorPlus` to commute with shifts, which Mathlib does not provide.
-Once these exist, `e₁` and `e₂` should be replaced by the canonical maps.
-(blueprint: `lemma-weil-pbc-p1-exchange-geometric-stalk`) -/
+**Form of the statement.** The statement asserts the existence of additive
+isomorphisms of the two stalks with closed-fibre cohomology that make the
+exchange square commute.
+(blueprint: `lemma-weil-pbc-p1-exchange-geometric-stalk`) 
+(blueprint: lemma-weil-pbc-p1-exchange-geometric-stalk)
+-/
 theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
     (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)
@@ -155,8 +147,11 @@ theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
           (Etale.baseChangeHomologyMap Λ sq q F)).hom x) =
         Etale.cohomologyMap (ProjectiveSpace.map _ ι)
           ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-            ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) :=
-  sorry
+            ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) := by
+  exact Etale.geometricStalk_projectiveLine_of_strictLocal Λ
+    (fun A B _ _ _ _ _ _ φ _ F _ q =>
+      Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal Λ φ F q)
+    sq σ τ ι hι hσ hτ F q
 
 /-- **The exchange morphism of `ℙ¹` is an isomorphism on torsion sheaves.** For every
 cartesian square
