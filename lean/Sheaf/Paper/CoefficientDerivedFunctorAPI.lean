@@ -46,14 +46,20 @@ noncomputable def coefficientDerivedLowerStar :
   R((h)_*⟦Λ⟧)
 
 /-- The derived coefficient adjunction, with the cached derived functor interfaces. -/
-@[irreducible] noncomputable def coefficientDerivedAdjunction :
+@[no_expose, irreducible] noncomputable def coefficientDerivedAdjunction :
     coefficientDerivedUpperStar Λ h ⊣ coefficientDerivedLowerStar Λ h :=
   derivedUpperStarLowerStarAdjunction Λ h
+
+/-- Equation for the cached coefficient adjunction. -/
+theorem coefficientDerivedAdjunction_eq : coefficientDerivedAdjunction Λ h =
+    derivedUpperStarLowerStarAdjunction Λ h := by
+  unfold coefficientDerivedAdjunction
+  rfl
 
 end DerivedFunctorAPI
 
 /-- The ambient derived pullback comparison, before restricting to constructible objects. -/
-@[irreducible] noncomputable def coefficientAmbientSquare
+@[no_expose, irreducible] noncomputable def coefficientAmbientSquare
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y}
@@ -65,6 +71,24 @@ end DerivedFunctorAPI
   (leftDerivedUpperStarComp Λ f' g).symm ≪≫
     eqToIso (by rw [← sq.w]) ≪≫
     leftDerivedUpperStarComp Λ g' f
+
+/-- Component equation for the cached square, without reducing its morphism projections. -/
+theorem coefficientAmbientSquare_app
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : CommSq g' f' f g)
+    (K : DerivedCategory
+      (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    (coefficientAmbientSquare Λ sq).app K =
+      ((leftDerivedUpperStarComp Λ f' g).app K).symm ≪≫
+        (eqToIso (by rw [← sq.w]) :
+          L(((f' ≫ g))^*⟦Λ⟧) ≅ L(((g' ≫ f))^*⟦Λ⟧)).app K ≪≫
+        (leftDerivedUpperStarComp Λ g' f).app K := by
+  unfold coefficientAmbientSquare
+  rw [NatIso.trans_app, NatIso.trans_app]
+  change ((leftDerivedUpperStarComp Λ f' g).app K).symm ≪≫ _ ≪≫ _ = _
+  rfl
 
 /-- The family of inverse-image comparisons, with generic coefficient interfaces cached. -/
 def CoefficientPullbackFamily (B : Type) [CommRing B]
