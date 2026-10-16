@@ -32,9 +32,181 @@
   "lem-sf-derived-ses-triangle",
   "sk-def-sfb-derived-extension-of-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Z=\\mathbf Z_{\\mathcal C}$ and let $E=-\\otimes_Z R$ on sheaves. Apply the module adjunction to the identity morphism of the topos with ring map $Z\\to R$: $E\\dashv\\operatorname{Res}$. Restriction keeps the underlying abelian sheaf; the sectionwise kernel and sheafified cokernel formulas therefore show that it is exact. The exact-functor results identify its everywhere-defined right derived functor with termwise restriction. Derived change of rings gives the everywhere-defined $LE=Lq$, so the derived-adjoint-functors theorem gives $Lq\\dashv\\operatorname{Res}$. Its unit $\\eta$ is the derived ordinary unit: on a K-flat complex $P$, under $Lq(P)\\simeq E(P)$, it is $P\\to\\operatorname{Res}E(P)$, $x\\mapsto x\\otimes1$. Indeed, in the pre-derived adjunction formula take the target complex to be $E(P)$, its restriction resolution to be the identity, and the map $P\\to\\operatorname{Res}E(P)$ to be the ordinary unit; its ordinary adjunct is $\\mathrm{id}_{E(P)}$. The formula then says that its derived adjunct is also the identity. The termwise unit commutes with shifts: the maps in each degree are unchanged and both shifted differentials acquire the same sign. For a resolution $P\\to A$, use $P[k]\\to A[k]$ to compute the shifted object; its scalar extension is $(P\\otimes_Z R)[k]$, and its unit is the shift of the unit on $P$. Under the canonical resolution isomorphisms this proves $\\eta_{A[k]}=\\eta_A[k]$, with the shift isomorphisms of $Lq$ and restriction understood.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-derived-adjoint-functors",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraphs 4–5, scalar extension and the adjunction used to interpret its boundary; Stacks Tags 03D7 (lemma-adjoint-pullback-pushforward-modules), 015F (lemma-right-derived-exact-functor), 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors) and 0FND (lemma-pre-derived-adjoint-functors-general) supply the general tools."
+   }
+  },
+  {
+   "text": "The sequence $0\\to Z\\xrightarrow{n}Z\\to R\\to0$ is exact as a sequence of sheaves: a section of a constant sheaf is locally an integer (respectively a residue class), integer multiplication by $n\\ge1$ is injective, and residue classes lift locally to integers. For any $Z$-module sheaf $A$, there is a natural isomorphism $A\\otimes_Z R\\simeq A/nA$. The mutually inverse local formulas are $a\\otimes\\bar k\\mapsto ka\\bmod nA$ and $a\\bmod nA\\mapsto a\\otimes\\bar1$. Changing a lift $k$ by $n\\ell$ changes the first expression by $n\\ell a$, and $na\\otimes\\bar1=a\\otimes\\bar n=0$ makes the second well defined; sheafification glues these local formulas. Here $A/nA$ is the sheaf cokernel, not necessarily the quotient of global sections.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 4, explicit ordinary reduction underlying the derived reduction; elementary calculation with constant sheaves and the tensor product."
+   }
+  },
+  {
+   "text": "For an abelian sheaf $A$, choose a K-flat resolution $p:P\\to A[0]$ whose terms are flat. Set $Q_A=P\\otimes_Z R=P/nP$, an actual complex of $R$-modules representing $Lq(A)$. Tensoring the exact coefficient sequence of step 2 with each flat term $P^j$ preserves exactness by the definition of flatness. Thus $0\\to P\\xrightarrow{n}P\\to\\operatorname{Res}Q_A\\to0$ is degreewise short exact. Let $j:P\\to\\operatorname{Res}Q_A$ be the quotient, $\\partial_P:\\operatorname{Res}Q_A\\to P[1]$ its short-exact-sequence boundary, and $c_A:Lq(A)\\xrightarrow{\\sim}Q_A$ the canonical resolution isomorphism. Apply $p,p,\\operatorname{Res}(c_A)^{-1}$ to the three vertices of the short-exact-sequence triangle. This gives the distinguished triangle\n$$A\\xrightarrow{n}A\\xrightarrow{\\eta_A}\\operatorname{Res}Lq(A)\\xrightarrow{\\delta_A}A[1].$$\nHere $\\delta_A=p[1]\\circ\\partial_P\\circ\\operatorname{Res}(c_A)$, and the middle arrow is $\\operatorname{Res}(c_A)^{-1}\\circ j\\circ p^{-1}=\\eta_A$ by naturality of the unit and its formula on $P$ in step 1. This uses a K-flat resolution of the input $A$, so $Q_A$ retains its $R$-module structure.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 4, derived reduction computed using flat-term K-flat input resolutions; Stacks Tags 06YS, 06YU and 0152."
+   }
+  },
+  {
+   "text": "Apply the cohomology long exact sequence to the triangle in step 3 and to its rotation $A\\xrightarrow{\\eta_A}\\operatorname{Res}Lq(A)\\xrightarrow{\\delta_A}A[1]\\xrightarrow{-n[1]}A[1]$ (TR2 of the triangulated-category definition); exactness of the long sequence of the rotated triangle at its third vertex shows that the map $H^{-1}(\\operatorname{Res}Q_A)\\to H^{-1}(A[1])=A$ in the sequence below is $H^{-1}(\\delta_A)$. Since $A[0]$ has cohomology only in degree zero, it gives\n$$H^j(Q_A)=0\\quad(j\\ne-1,0),\\qquad\n0\\to H^{-1}(\\operatorname{Res}Q_A)\\xrightarrow{H^{-1}(\\delta_A)}A\\xrightarrow{n}A\\xrightarrow{H^0(\\eta_A)}H^0(\\operatorname{Res}Q_A)\\to0.$$\nRestriction is exact, so these are the underlying abelian sheaves of the $R$-cohomology sheaves of $Q_A$. For $A=F$, injectivity of $n$ kills $H^{-1}$ and gives the canonical quotient isomorphism $H^0(Q_F)\\simeq\\bar F$. For $A=B$, epimorphy of $n$ kills $H^0$ and identifies $H^{-1}(Q_B)$ with $H$ as an abelian sheaf. Every map between abelian sheaves annihilated by $n$ is automatically $R$-linear: locally a scalar is an integer modulo $n$, and an additive map commutes with integer multiplication.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-abstract-derived-category",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 4, the quotient and torsion cohomology calculations. The precise sign of the target identification is fixed in step 6."
+   }
+  },
+  {
+   "text": "For any complex $Q$ of $R$-modules with cohomology only in degree $a$, the canonical zigzag\n$$Q\\ \\longleftarrow\\ \\tau_{\\le a}Q\\ \\longrightarrow\\ H^a(Q)[-a]$$\nconsists of quasi-isomorphisms in complexes of $R$-modules. Explicitly, the left arrow includes the complex with term $\\ker(d^a)$ in degree $a$ and zero above $a$; the right arrow is zero below $a$ and the quotient $\\ker(d^a)\\to\\ker(d^a)/\\operatorname{im}(d^{a-1})$ in degree $a$. Both arrows induce the identity on the sole nonzero cohomology. The definitions of truncation and localization therefore give a natural isomorphism in $D(R)$, not merely after restriction. With $a=0$ this gives $\\alpha_F:Lq(F)\\xrightarrow{\\sim}\\bar F[0]$ using step 4. With $a=-1$ it identifies $Lq(B)$ with $H^{-1}(Q_B)[1]$; step 6 chooses the isomorphism of that cohomology sheaf with $H$ required by the normalization.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 4, passage from the computed cohomology sheaves to actual identifications in the coefficient derived category."
+   }
+  },
+  {
+   "text": "Let $i:H\\hookrightarrow B$. The Kummer short exact sequence $0\\to H\\xrightarrow{i}B\\xrightarrow{n}B\\to0$ gives its canonical triangle with boundary $\\kappa_B$. Rotate it using the triangulated-category sign convention to obtain\n$$B\\xrightarrow{n}B\\xrightarrow{\\kappa_B}H[1]\\xrightarrow{-i[1]}B[1].$$\nCompare this triangle to step 3 for $A=B$, using identities on the first two copies of $B$. Axiom TR3 supplies $t:\\operatorname{Res}Lq(B)\\to H[1]$ satisfying\n$$t\\eta_B=\\kappa_B,\\qquad (-i[1])t=\\delta_B.$$\nTaking degree $-1$ shows that $H^{-1}(t)$ is an isomorphism: both $-i$ and $H^{-1}(\\delta_B)$ identify their sources with the kernel of $n:B\\to B$. Moreover $H^{-1}(t)$ is uniquely determined by $(-i)H^{-1}(t)=H^{-1}(\\delta_B)$ since $i$ is monic, and it is $R$-linear by step 4. Use this cohomology isomorphism in the $R$-linear zigzag of step 5 to define $\\alpha_B:Lq(B)\\xrightarrow{\\sim}H[1]$ in $D(R)$. The restriction of $\\alpha_B$ equals $t$: their maps on degree $-1$ cohomology agree, and after the single-cohomology identifications the shifted single-complex fully-faithfulness theorem says such maps are determined by that cohomology map. Consequently $(\\operatorname{Res}\\alpha_B)\\eta_B=\\kappa_B$, with the sign fixed by the displayed rotated triangle.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 4, normalization by the Kummer boundary; Stacks Tags 0152, 0145 (rotation and TR3), and 06XS (single-complex fully faithfulness)."
+   }
+  },
+  {
+   "text": "For naturality under a map $f:A\\to A'$, take a simultaneous flat-term K-flat replacement of its arrow diagram (the indexing category has two objects and one arrow, hence is small). The induced map of the degreewise short exact multiplication sequences of step 3 makes their triangles commute by the naturality clause of the complex short-exact-sequence theorem. Writing $\\widetilde f:P_A\\to P_{A'}$ for the strict resolved arrow and $c_A,c_{A'}$ for the resolution isomorphisms of step 3, functoriality of the derived change-of-rings comparison gives $c_{A'}\\circ Lq(f)\\circ c_A^{-1}=\\widetilde f\\otimes1$. Thus the map of multiplication triangles is the one induced by $f$, independently of the simultaneous replacement. The kernel, cokernel and truncation maps in steps 4–5 are functorial. For a map $b:B\\to B'$ commuting with multiplication by $n$, the equation defining $H^{-1}(t)$ in step 6 commutes with $b$ and with $H=\\ker n\\to H'=\\ker n$; monicity of $i':H'\\to B'$ forces the two resulting cohomology maps to agree. Shifted single-complex fully faithfulness then gives naturality of $\\alpha_B$. Thus both $\\alpha_F$ and the normalized $\\alpha_B$ are natural, rather than depending on the TR3 choice.",
+   "uses": [
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraphs 4–5, functoriality of the normalized reduction identifications; finite arrow diagrams meet the smallness hypotheses."
+   }
+  },
+  {
+   "text": "Apply the functorial complex short-exact-sequence triangle to $S$ concentrated in degree zero. Its boundary is $\\partial_S:F\\to B[1]$, natural for maps of such sequences. It is the boundary of the statement: if $\\delta'$ is any morphism making $B\\to M\\xrightarrow{g}F\\xrightarrow{\\delta'}B[1]$ distinguished as in the derived short-exact-sequence triangle, TR3 applied to the identities of $B$ and $M$ gives $c:F[0]\\to F[0]$ with $cg=g$ and $\\partial_S=\\delta'c$; by single-complex fully faithfulness $c$ is a sheaf endomorphism, and $g$ is an epimorphism, so $c=\\mathrm{id}$ and $\\delta'=\\partial_S$. The same argument shows that $\\kappa_B$ of step 6 is the unique boundary of the Kummer sequence. Derived scalar extension is exact and commutes with shifts, so define in $D(R)$\n$$d_{S,n}=\\alpha_B[1]\\circ Lq(\\partial_S)\\circ\\alpha_F^{-1}:\\bar F[0]\\to H[2].$$\nThe functoriality of the boundary together with step 7 proves naturality of $d_{S,n}$ for maps of extensions.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-derived-ses-triangle",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 4, apply derived reduction to the Cartier extension boundary."
+   }
+  },
+  {
+   "text": "The complex $Z[0]$ is K-flat because tensoring any complex with it is the identity; hence $Lq(Z)=R[0]$. The cohomology quotient calculation of steps 2–5 shows that $\\alpha_F Lq(s):R[0]\\to\\bar F[0]$ is $\\bar s$: in degree zero it sends the local residue class of an integer $k$ to the class of $s(k)$. Single-complex fully faithfulness identifies the derived morphism with this sheaf map. By the unit formula for an adjunction, naturality of $\\eta$ for $s$ and for the derived morphism $\\partial_S$, and the shift compatibility in step 1, the adjunct of $d_{S,n}\\bar s$ equals\n$$\\begin{aligned}\n\\operatorname{Res}(d_{S,n}\\bar s)\\eta_Z\n&=(\\operatorname{Res}\\alpha_B)[1]\\,\\operatorname{Res}Lq(\\partial_S)\\,\\operatorname{Res}Lq(s)\\,\\eta_Z\\\\\n&=(\\operatorname{Res}\\alpha_B)[1]\\,\\operatorname{Res}Lq(\\partial_S)\\,\\eta_F s\\\\\n&=\\bigl((\\operatorname{Res}\\alpha_B)\\eta_B\\bigr)[1]\\,\\partial_S s\n=\\kappa_B[1]\\,\\partial_S s.\n\\end{aligned}$$\nThe cancellations in the first line use $\\bar s=\\alpha_F Lq(s)$ and the definition of $d_{S,n}$. The last equality is exactly the normalization proved in step 6.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pc-derived-adjoint-functors",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 5, identify the composite with the Kummer connecting image; Stacks Tags 09T5 (lemma-derived-adjoint-functors), 0DVC (lemma-pre-derived-adjoint-functors) and 0FND (lemma-pre-derived-adjoint-functors-general) provide the natural adjunction."
+   }
+  },
+  {
+   "text": "Finally let $u^{-1}$ be an exact inverse-image functor as in the statement. Since it is a left adjoint preserving finite limits, it preserves the constant rings: a constant object is the coproduct of copies of the final object, and it preserves this coproduct and the final object. Exactness preserves $\\ker n$, $\\operatorname{coker}n$ and both short exact sequences, including the injectivity/epimorphy hypotheses. The ringed-topoi tensor-pullback theorem says that $u^{-1}P$ is again flat-term K-flat, so the exactness of $u^{-1}$ makes it a resolution of $u^{-1}A$. Its scalar-reduction complex is\n$$u^{-1}(P/nP)=(u^{-1}P)/n(u^{-1}P).$$\nIndeed exactness preserves the cokernel and the tensor-pullback comparison identifies the two scalar-extension models. The termwise units $P\\to P/nP$ are preserved by this equality. The exact-functor factorization gives the termwise triangulated action on derived categories. Explicitly, for a short exact sequence $0\\to X\\xrightarrow{a}Y\\xrightarrow{b}T\\to0$, let $q:C(a)\\to T$ be $b$ on the $Y$ summand and zero on $X[1]$, and let $p:C(a)\\to X[1]$ be the projection; its canonical boundary is $-p\\circ q^{-1}$ (Stacks Tag 0152, label lemma-derived-canonical-delta-functor). Additivity identifies $u^{-1}C(a)$ with $C(u^{-1}a)$, with exactly the same differential matrix, and sends $q,p$ to the corresponding maps $q',p'$. Exactness makes $u^{-1}q$ a quasi-isomorphism, so applying $u^{-1}$ to the boundary gives $-p'\\circ(q')^{-1}$, the boundary of the pulled-back sequence. It also commutes with the truncation zigzags because it preserves kernels and images. The equation $(-i)H^{-1}(t)=H^{-1}(\\delta_B)$ is consequently preserved, so uniqueness in step 6 preserves the normalized $\\alpha_B$ as well. Thus $\\alpha_F$, $\\alpha_B$, $d_{S,n}$ and the displayed adjunct formula all commute with $u^{-1}$ under the induced constant-ring identifications.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraphs 4–5, exact inverse-image naturality. Stacks Tags 0G7E and 07A4 give the general K-flat/tensor comparison; Tag 0152 gives the cone description of the boundary."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-triangulated-category",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-kflat-resolution",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-derived-ses-triangle",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraphs 4–5; agent homological-algebra expansion using Stacks K-flat resolutions, canonical short-exact triangles and derived adjunction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -126,10 +298,66 @@
    "results": "Mathlib/Data/Rat/Floor.lean; Mathlib/CategoryTheory/Bicategory/Free.lean",
    "date": "2026-10-16",
    "verdict": "no match: the two text hits concern rational-number arithmetic and free bicategories, not sheaf reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived reduction of an extension by a divisible sheaf modulo n gives a map from the cokernel to the kernel shifted by two",
+   "results": "{\"subdirectory\": \"\", \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.Abelian.Ext.contravariantSequence\", \"CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂'\", \"CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom\", \"CategoryTheory.Abelian.Ext.covariantSequence\", \"CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift\", \"CategoryTheory.Abelian.Ext.covariant_sequence_exact₃'\"]}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: the returned general Ext, tensor, sheaf or derived-functor declarations do not give the two normalized coefficient-category identifications and the adjunct formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext, DerivedCategory, tensor, quotient",
+   "results": "{\"subdirectory\": \"\", \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'tensor'\", \"top\": []}",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: Loogle rejected the identifier tensor; the second Loogle query uses valid names"
+  },
+  {
+   "tool": "grep",
+   "query": "Bockstein|derived.*quotient|multiplication by n|divisible",
+   "results": "{\"subdirectory\": \"Algebra/Homology\", \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\"]}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: the returned general Ext, tensor, sheaf or derived-functor declarations do not give the two normalized coefficient-category identifications and the adjunct formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived tensor with Z/n of a short exact extension with n-divisible kernel and n-injective quotient",
+   "results": "{\"subdirectory\": \"\", \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"lTensor_injective_of_exact_of_exact_of_rTensor_injective\", \"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Abelian.Ext.mk₀\", \"TensorProduct.tensorQuotientEquiv_apply_mk_tmul\", \"AddGroupExtension\"]}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: the returned general Ext, tensor, sheaf or derived-functor declarations do not give the two normalized coefficient-category identifications and the adjunct formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "after tensoring a short exact sequence by Z/n, an n-divisible sheaf gives its n-torsion shifted by one and an n-injective sheaf gives its quotient in degree zero",
+   "results": "{\"subdirectory\": \"\", \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.covariant_sequence_exact₂'\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"lTensor_injective_of_exact_of_exact_of_rTensor_injective\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.Abelian.Ext.covariantSequence\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂'\", \"CategoryTheory.Sheaf.instAddCommGroupH\"]}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: the returned general Ext, tensor, sheaf or derived-functor declarations do not give the two normalized coefficient-category identifications and the adjunct formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext, CategoryTheory.ShortComplex, DerivedCategory",
+   "results": "{\"subdirectory\": \"\", \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply\"]}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: the returned general Ext, tensor, sheaf or derived-functor declarations do not give the two normalized coefficient-category identifications and the adjunct formula"
+  },
+  {
+   "tool": "grep",
+   "query": "Bockstein|Kummer|multiplication by n|coker.*n|ker.*n",
+   "results": "{\"subdirectory\": \"Algebra\", \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/Spectrum/Basic.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Basic.lean\", \"Mathlib/Algebra/TrivSqZeroExt/Ideal.lean\", \"Mathlib/Algebra/TrivSqZeroExt/Ideal.lean\", \"Mathlib/Algebra/TrivSqZeroExt/Ideal.lean\", \"Mathlib/Algebra/TrivSqZeroExt/Ideal.lean\", \"Mathlib/Algebra/TrivSqZeroExt/Ideal.lean\", \"Mathlib/Algebra/Algebra/Operations.lean\"]}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: the returned general Ext, tensor, sheaf or derived-functor declarations do not give the two normalized coefficient-category identifications and the adjunct formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor the two term complex Z to Z by an n injective or n surjective sheaf",
+   "results": "{\"subdirectory\": \"\", \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CategoryTheory.InjectiveResolution.self\", \"lTensor_injective_of_exact_of_exact_of_rTensor_injective\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"CategoryTheory.sheafHomHasZSMul\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.instHasTensorTensorUnit\", \"CategoryTheory.Sheaf.functorialLocallySurjectiveInjectiveFactorization\"]}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: the returned general Ext, tensor, sheaf or derived-functor declarations do not give the two normalized coefficient-category identifications and the adjunct formula"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-lem-geo-cartier",
@@ -137,5 +365,84 @@
   "group": "N1"
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-geo-cartier"
+ "unit": "sk-lem-geo-cartier",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-divisible-extension-derived-reduction",
+  "worker": "stage1",
+  "summary": "Split into ten steps using flat-term K-flat resolutions of the input, the multiplication triangle, cohomology and R-linear truncation zigzags. Fix the target sign by comparison with the rotated Kummer triangle, then calculate the adjunct and prove both naturality clauses. No new nodes; statement unchanged. The initial draft was strengthened to avoid treating a restricted two-term complex as an R-complex. Second reading expands the resolution comparison arrows, unit shift compatibility and inverse-image boundary formula; the statement and dependency set remain unchanged.",
+  "blueprint": "Realizes sk-lem-geo-cartier proof paragraph 4 (derived reduction, quotient/torsion shifts, normalized boundary) and paragraph 5 (Kummer connecting composite); retains its route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Step 3 uses arbitrary-site flat-term K-flat resolutions; this is generic derived-category machinery, not a substitute for a Cartier unit step."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Steps 1, 3, 7–9 use the everywhere-defined exact K-flat scalar-extension functor; this is the scalar-extension machinery required by the Cartier route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Step 1 specializes the module pullback/pushforward adjunction to the identity topos and Z→R; the Cartier unit does not prove this general module adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Steps 1 and 10 use the termwise triangulated functor of an exact functor, including shift compatibility, for restriction and inverse image."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Step 1 identifies exact restriction with its everywhere-defined right derived functor, needed to apply the derived-adjunction theorem."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Steps 1 and 9 use the general derived-adjunction theorem for everywhere-defined derived functors to obtain Lq left adjoint to termwise restriction."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Steps 1 and 9 use the fraction formula and derived-variable naturality to identify the unit with the termwise quotient on K-flat inputs."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Steps 3, 6–8 and 10 use the canonical boundary of a degreewise short exact sequence and its naturality; this is general derived homological algebra."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Step 4 uses the cohomology exact sequence of a distinguished triangle; the Cartier unit requires this generic calculation."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Steps 6, 7 and 9 use fully faithfulness of single sheaves in the derived category to compare morphisms between single-cohomology objects."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Step 7 uses a simultaneous replacement of a finite arrow diagram to justify naturality of the multiplication triangles."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Step 10 uses preservation of flat-term K-flat resolutions and natural tensor comparison by a general ringed-topos inverse image."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-5eae60bbc",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-5eae60bbc (reviewer sub-agent of L); spot-checked: I read the whole delivery against these sources: the Cartier unit proof (main-20261015 paragraphs 4–5); all 22 cited node statements; Stacks 0152 (delta = -p q^{-1}), 0FND and 09T5; and the labels of every cited tag. The statement has not changed. I checked it on small cases: [A -n-> A] gives bar F[0] and H[1]; F=Z/2 and B=Z show each hypothesis is needed; n=1 and split S give zero. Each step holds. The unit formula from the fraction characterization is correct. TR3 has the right direction and the rotation sign -i[1] is correct. Res alpha_B = t follows from shifted single-object full faithfulness. Naturality of alpha_B follows because i' is monic. The adjunct chain gives kappa_B[1] partial_S s. Inverse-image compatibility follows from the cone formula. The delivery adds no new nodes. My rg search found no duplicate of the item. All 12 declared tool_uses are generic derived-category tools and I accept them. Two citation gaps (C4) are repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-divisible-extension-derived-reduction.json (proof and proof_deps only). (1) Step 4 used H^{-1}(delta_A) as the long-exact-sequence map, but the cited LES node gives only unspecified connecting maps. I added the LES of the rotated triangle (TR2) and def-weil-triangulated-category. (2) Step 8 identified the statement's partial_S, which comes from the existence-only lem-sf-derived-ses-triangle, with the canonical complex-SES boundary without justification. I added a uniqueness argument (TR3 with identities, single full faithfulness, g epi gives c = id), which also covers kappa_B. I added lem-sf-derived-ses-triangle (a Mathlib leaf), def-weil-triangulated-category and lem-weil-pbc-derived-single-fully-faithful to the step and to proof_deps. The full review is in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

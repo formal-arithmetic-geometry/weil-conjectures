@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-cor-int-compactness-ii-extension-zero",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension by zero preserves integral constructibility and localizing categories",
@@ -18,39 +18,177 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-constructible",
+  "det-def-localizing-closure-existence"
+ ],
  "proof": [
   {
-   "text": "(1) $j_!$ is left adjoint to $j^*$, hence preserves direct sums (colimits).\nIt is exact and preserves all limits (Stacks, Tag 09BP); in particular it\ncommutes with $R\\varprojlim$. Being exact and $\\mathcal O_E$-linear, it\ncommutes with the cone of multiplication by $\\pi_E^n$, i.e. with reduction\nmodulo $\\pi_E^n$.",
-   "uses": [],
-   "elementary": null
+   "text": "(1) Throughout, use the standing separated finite-type $k$-scheme setting of [sk-def-sfb-dc-setting]. By [lem-weil-pbc-qcqs-over-affine], $X$ and $U$ are quasi-compact and quasi-separated; in particular the explicit scheme hypothesis of [det-sf-open-closed-extension-zero-limits] holds. Work with the pulled-back condensed coefficient ring $A_X=\\mathcal O_{E,X}$ and its restrictions. Clause (1) of [sk-prop-sfb-cartesian-coefficients] identifies $j^{-1}A_X=A_U$. Give $X\\setminus U$ its reduced induced closed subscheme structure by [lem-weil-pbc-reduced-induced-closed-subscheme] (2). The quasi-compactness assumed for $j$ is exactly the hypothesis of [lem-weil-pbc-proetale-ringed-open-closed], which gives exactness and the module adjunction $j_!\\dashv j^{-1}$. The two module categories in play are identified explicitly, not silently. For the essentially small pro-étale sites, [lem-weil-pbc-sheaf-tensor-closed] gives exact sheafification and the tensor stability of its local equivalences, so [def-weil-pbc-internal-abelian-sheaf-module-equivalence] applies to the commutative ring objects $A_X$ and $A_U$. It identifies the module objects $\\Mod_{A_X}$ of [sk-def-sfb-module-objects] with sheaves of $A_X$-modules, and likewise on $U$. The forward functor leaves underlying abelian sheaves, sections and restriction maps unchanged. By the last paragraph of [sk-prop-sfb-cartesian-coefficients], the module pullback $j^*$ corresponds under these equivalences to the sheaf-of-modules inverse image $j^{-1}$. Hence the left adjoints correspond too: the module extension by zero $j_!\\dashv j^*$ of [sk-def-sfb-module-lower-shriek] with $\\Lambda=\\underline{\\mathcal O_E}$ is, up to unique isomorphism, the ringed-site functor $j_!\\dashv j^{-1}$ above. Both have underlying sheaf the abelian extension by zero, and exact equivalences induce equivalences of the derived categories. Every statement below about the ringed functor therefore holds for the item's $j_!$ on $D(\\Mod_{A_U})\\to D(\\Mod_{A_X})$. By [lem-weil-pbc-exact-functor-derived-factorization], it acts termwise on the unbounded derived categories and is triangulated. Its sheaf functor preserves small sums by [lem-weil-pbc-left-adjoint-preserves-colimits]; by [det-def-localizing-closure-existence] (1) both derived sums are termwise, so the derived functor preserves them too. For limits, [det-sf-open-closed-extension-zero-limits] (2), with $B=A_X$, gives preservation of products and sequential derived inverse limits. To obtain every existing small categorical limit, express it as the kernel $k:L\\to P$ of $d:P\\to Q$, where $P=\\prod_a K_a$, $Q=\\prod_{(\\alpha:a\\to b)}K_b$, and $d_\\alpha=K(\\alpha)\\operatorname{pr}_a-\\operatorname{pr}_b$. Complete $k$ to a triangle $L\\xrightarrow{k}P\\xrightarrow{q}C\\xrightarrow{h}L[1]$. Consecutive maps of a distinguished triangle compose to zero: for $X\\xrightarrow{u}Y\\xrightarrow{v}Z\\to X[1]$, (TR3) of [def-weil-triangulated-category] applied to $(1_X,u)$ from $X\\xrightarrow{1}X\\to0\\to X[1]$ gives $c:0\\to Z$ with $vu=c\\circ0=0$, and (TR2) gives the other composites. The Hom sequences of [lem-weil-pbc-hom-out-of-triangle-exact] are exact. Since $k$ is monic and $kh[-1]=0$, $h=0$. By [lem-pc-derived-zero-third-split], $P$ identifies with $L\\oplus C$, $k$ with the first inclusion and $q$ with the second projection. Thus $k$ has a retraction $r$ and $q$ a section $s$, with $rk=1$, $qs=1$, $qk=0$ and $1_P=kr+sq$. Put $v=ds:C\\to Q$. Because $dk=0$, $d=vq$. If $vt=0$, then $dst=0$, so the kernel property factors $st$ through $k$; applying $q$ gives $t=0$. Thus $v$ is monic. Complete $v$ to a triangle $C\\xrightarrow{v}Q\\to D\\xrightarrow{w}C[1]$. The equality $vw[-1]=0$ and monicity of $v$ give $w=0$. Applying [lem-pc-derived-zero-third-split] gives a left inverse $u:Q\\to C$ of $v$. For the additive functor $F=j_!$, the identities $F(u)F(v)=1$ and $F(q)F(s)=1$ persist. If $a:T\\to F(P)$ satisfies $F(d)a=0$, multiply $F(d)=F(v)F(q)$ by $F(u)$ to obtain $F(q)a=0$; then $a=F(k)F(r)a$ by $1=F(k)F(r)+F(s)F(q)$. The factor is unique because $F(r)F(k)=1$, proving that $F(k)$ is the kernel of $F(d)$. Product preservation therefore carries the displayed limit cone to a limit cone. Here 'preserves all limits' means all small categorical limits that exist; it does not assert that an arbitrary triangulated category is complete. The same clause holds for module sheaves, the level of Stacks Tag 09BP. Clause (3) of [det-sf-open-closed-extension-zero-limits] gives preservation of products of module sheaves. Exactness gives preservation of kernels. Every small limit is the kernel of the displayed difference map $d$ between two products, so $j_!$ preserves all small limits of module sheaves. For the optional exponent $n=0$, reduction is tensoring with the zero coefficient ring, so both reduced complexes are zero and commute with the additive functor. For $n\\geq1$, [det-pe-derived-nakayama-resolution] identifies reduction modulo $\\pi_E^n$ with the cone of scalar multiplication by $\\pi_E^n$. The module-linear exact termwise functor preserves this cone: its terms, finite direct sums, differentials and scalar multiplication agree with the cone on $j_!K$. The comparison is natural in $K$; on the rank-one resolutions the transition from $n+1$ to $n$ is multiplication by $\\pi_E$ in degree $-1$ and identity in degree $0$, which $j_!$ preserves, so the reductions and their transitions commute with $j_!$.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-def-sfb-module-lower-shriek",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "det-def-localizing-closure-existence",
+    "det-sf-open-closed-extension-zero-limits",
+    "det-pe-derived-nakayama-resolution",
+    "sk-def-sfb-dc-setting",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-pc-derived-zero-third-split",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "sk-def-sfb-module-objects",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-int-compactness-ii/sk-cor-int-compactness-ii-extension-zero.proof.md",
+    "place": "proof (1); Stacks Tag 09BP"
+   }
   },
   {
-   "text": "(2) Let $K\\in\\Dbc(U,\\mathcal O_E)$. By (1), $j_!K$ is derived complete\n(it is $j_!R\\varprojlim_nK_n=R\\varprojlim_nj_!K_n$) and its reduction is\n$j_!(K\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E)$, the extension by zero of a bounded\nconstructible torsion complex, which is bounded constructible. So\n$j_!K\\in\\Dbc(X,\\mathcal O_E)$; this is [sk-lem-int-tensor]\n(compare [lem-sfb-dc-open-lower-shriek-preserves]).",
+   "text": "(2) We read the item in the standing separated finite-type $k$-scheme setting fixed by [sk-def-sfb-dc-setting], as in the cited integral lemmas. The integral tensor lemma [sk-lem-int-tensor] states that extension by zero along a quasi-compact open immersion and direct image along a closed immersion preserve $\\Dbc(-,\\mathcal O_E)$. Hence $j_!K\\in\\Dbc(X,\\mathcal O_E)$ for every $K\\in\\Dbc(U,\\mathcal O_E)$.",
    "uses": [
     "sk-lem-int-tensor",
-    "lem-sfb-dc-open-lower-shriek-preserves"
+    "sk-def-sfb-dc-setting"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-int-compactness-ii/sk-cor-int-compactness-ii-extension-zero.proof.md",
+    "place": "proof (2)"
+   }
   },
   {
-   "text": "(3) The full subcategory of $K\\in\\Loc(\\Dbc(U,\\mathcal O_E))$ with\n$j_!K\\in\\Loc(\\Dbc(X,\\mathcal O_E))$ is closed under shifts and cones (as $j_!$\nis exact) and under direct sums (as $j_!$ preserves them), so it is localizing;\nby (2) it contains $\\Dbc(U,\\mathcal O_E)$, hence it is everything.",
-   "uses": [],
-   "elementary": null
+   "text": "(3) Use [det-def-localizing-closure-existence] (2) with the arbitrary generating class $\\Dbc(T,\\mathcal O_E)$ for $T=U,X$; it defines the smallest full replete triangulated subcategory closed under small sums for precisely this class. In the ambient category $D(U_{\\mathrm{proét}},\\mathcal O_E)$, let $\\mathcal S$ be the full subcategory of all $K$ for which $j_!K\\in\\Loc(\\Dbc(X,\\mathcal O_E))$. It is replete; exactness in (1) makes it closed under shifts and distinguished triangles, and preservation of sums in (1) makes it closed under arbitrary small sums. Hence it is localizing. By (2) it contains $\\Dbc(U,\\mathcal O_E)$, so minimality gives $\\Loc(\\Dbc(U,\\mathcal O_E))\\subseteq\\mathcal S$, proving the required inclusion. This applies the arbitrary-class localizing closure directly, without using a definition restricted to $\\Dctf$.",
+   "uses": [
+    "det-def-localizing-closure-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-int-compactness-ii/sk-cor-int-compactness-ii-extension-zero.proof.md",
+    "place": "proof (3)"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-triangulated-category",
+  "det-def-localizing-closure-existence",
+  "det-pe-derived-nakayama-resolution",
+  "det-sf-open-closed-extension-zero-limits",
+  "lem-pc-derived-zero-third-split",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-module-objects",
   "sk-lem-int-tensor",
-  "lem-sfb-dc-open-lower-shriek-preserves"
+  "sk-prop-sfb-cartesian-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-int-compactness-ii/sk-cor-int-compactness-ii-extension-zero.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero preserves integral constructibility and localizing categories",
+   "results": "8 hits: LightCondensed.lanLightCondSet; CategoryTheory.Localization.functor_linear_iff; several generic DerivedCategory/HomologicalComplex declarations; no extension-by-zero constructibility theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor preserves limits, PreservesLimitsOfShape, exactFunctor",
+   "results": "0 hits; loogle reported unknown identifier preserves.",
+   "date": "2026-10-17",
+   "verdict": "invalid query; no conclusion about absence is drawn from this search"
+  },
+  {
+   "tool": "grep",
+   "query": "extension by zero|openImmersionLowerShriek|preserves.*limits [Mathlib/]",
+   "results": "0 hits in Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Does extension by zero along a quasi-compact open immersion preserve all limits and bounded constructibility?",
+   "results": "8 hits: CategoryTheory.Functor.preservesLimitsOfShape_of_isZero; CategoryTheory.Functor.preservesLimitsOfSize_of_isZero; HasCompactSupport.extend_zero; generic finite-limit/object-property declarations; no target theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-compact open immersion extension by zero exact preserves limits direct sums derived constructible",
+   "results": "8 hits: generic affine-transition and condensed exact-limit/AB4 declarations; no extension-by-zero theorem for the target categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesLimitsOfShape",
+   "results": "0 hits; loogle reported unknown identifier PreservesLimitsOfShape.",
+   "date": "2026-10-17",
+   "verdict": "invalid query; no conclusion about absence is drawn from this search"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriek|extension by zero|PreservesLimits [Mathlib/]",
+   "results": "0 hits in Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesLimitsOfShape|PreservesLimitsOfSize Mathlib/CategoryTheory",
+   "results": "25 generic hits, including CategoryTheory/Adjunction/Limits.lean:207-208 and FunctorCategory/PreservesLimits.lean:14; none states this extension-by-zero result.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi-compact open immersion extension by zero functor on derived sheaves is exact, preserves coproducts and limits, commutes with adic reduction, and preserves bounded constructibility",
+   "results": "8 generic homological exactness/finite-limit hits, including ShortComplex.Exact.map_of_exact and Functor.preservesHomologyOfExact; no target theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero preserves all limits on derived module categories arbitrary ring sheaf",
+   "results": "{\"t\": \"2026-10-16T17:57:01Z\", \"tool\": \"leanfinder\", \"query\": \"extension by zero preserves all limits on derived module categories arbitrary ring sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.evaluationPreservesLimitsOfShape\", \"SheafOfModules.evaluationPreservesLimit\", \"SheafOfModules.evaluationPreservesLimitsOfSize\", \"SheafOfModules.createsLimit\", \"instHasLimitsCondensedMod\", \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\", \"instHasLimitsOfSizeCondensedMod\", \"instHasFiniteLimitsLightCondMod\"], \"digest\": \"8e89a8a290170c43\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: module evaluation/creation or generic limit results do not assert extension-by-zero preservation for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor preserves products kernel limits additive",
+   "results": "{\"t\": \"2026-10-16T17:57:02Z\", \"tool\": \"loogle\", \"query\": \"Functor preserves products kernel limits additive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `preserves`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query; no absence conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "extension by zero|PreservesLimits|kernel.*product",
+   "results": "{\"t\": \"2026-10-16T17:57:02Z\", \"tool\": \"grep\", \"query\": \"extension by zero|PreservesLimits|kernel.*product\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: module evaluation/creation or generic limit results do not assert extension-by-zero preservation for the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -65,5 +203,49 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-cor-int-compactness-ii"
+ "unit": "sk-cor-int-compactness-ii",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-cor-int-compactness-ii-extension-zero",
+  "worker": "stage1",
+  "summary": "Repaired all five return points. Dropped the redundant all-limits node and proved preservation of every existing small categorical limit in step (1) from the existing product theorem and explicit split-kernel argument. Added exact derived factorization, termwise-sum existence, arbitrary-ringed pro-etale localization, coefficient identification and rank-one reduction citations. Explicitly read the item in the source standing separated finite-type scheme setting for step (2). Deleted the unsupported completeness paragraph. Step (3) uses the arbitrary-class localizing-closure existence/minimality statement directly for Dbc. Second reading refreshed two upstream-stale citations, invoked the standing scheme setting already in step (1) and cited its qcqs consequence, and replaced the remaining same-argument/kernel-preservation shortcuts with explicit split-triangle equations and existing Mathlib-leaf citations.",
+  "blueprint": "The three steps realize paragraphs (1), (2), and (3) of sk-cor-int-compactness-ii-extension-zero.proof.md; the Tag 09BP all-limits input is folded into step (1) through the existing derived limits node.",
+  "tool_uses": [
+   {
+    "node": "det-sf-open-closed-extension-zero-limits",
+    "why": "Generic derived product and sequential-limit preservation with arbitrary ring sheaves; the unit supplies no separate derived product theorem. The elementary split-kernel argument gives preservation of every existing small categorical limit."
+   },
+   {
+    "node": "det-def-localizing-closure-existence",
+    "why": "Generic ambient termwise sums and localizing closure for an arbitrary generating class, used with Dbc; the unit contains no separate existence/minimality theorem."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic arbitrary-ringed pro-etale open-closed exactness and adjunction, specialized to the pulled-back condensed O_E coefficient sheaf."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic construction of the closed complement needed to apply ringed open-closed localization."
+   },
+   {
+    "node": "det-pe-derived-nakayama-resolution",
+    "why": "Generic rank-one free resolution and natural cone description of derived reduction modulo a uniformizer power, used for the reduction clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sf-open-closed-extension-zero-limits",
+  "det-def-localizing-closure-existence",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "det-pe-derived-nakayama-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-4eaa09a7e",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-4eaa09a7e (reviewer sub-agent of L); spot-checked: I read the whole item: the main-20261015 blueprint statement and proof, the unit sk-cor-int-compactness-ii, Stacks proetale.tex Tag 09BP lemma-j-shriek-limits with its proof, and the full statement of every cited node. The statement is the blueprint statement, unchanged and not weakened. It is read in the standing setting sk-def-sfb-dc-setting, where lem-weil-pbc-qcqs-over-affine gives qcqs X and U, so the hypotheses of det-sf-open-closed-extension-zero-limits hold. Step 1 is valid. The ringed open-closed node gives exactness and the adjunction. Exact derived factorization gives the triangulated termwise functor. Sums come from left-adjointness plus termwise derived sums (det-def-localizing-closure-existence (1)). Products and sequential Rlim come from clause (2) of the limits node. I checked the split-kernel argument for all existing limits equation by equation (h=0, 1=kr+sq, d=vq, v monic and split, F(k) is the kernel of F(d)), including the empty-diagram and zero-map cases. Reduction modulo pi^n uses the cone from det-pe-derived-nakayama-resolution, with n=0 handled separately. Step 2 is exactly the extension-by-zero clause of sk-lem-int-tensor, which is on the unit route and creates no cycle. Step 3 applies the arbitrary-class Loc minimality from det-def-localizing-closure-existence (2) to Dbc, and is valid. Small cases U empty, U=X, K=0 and n=0,1 give no counterexample. There are no new nodes, no restated clause and no SGA source. I accept the declared tool uses: det-sf-open-closed-extension-zero-limits and det-pe-derived-nakayama-resolution are generic black boxes off the route. FIX, all in step 1, written as a whole corrected item file under fixes/: (1) Step 1 identified the module objects over A_X, the category the item works in, with the sheaves of modules used by the ringed-site nodes, without citing anything. It now cites def-weil-pbc-internal-abelian-sheaf-module-equivalence, whose hypotheses come from lem-weil-pbc-sheaf-tensor-closed, and sk-def-sfb-module-objects. The two j_! functors are matched as left adjoints of corresponding pullbacks, via the last paragraph of sk-prop-sfb-cartesian-coefficients. (2) 'Consecutive triangle maps compose to zero' was attributed to the Hom-exactness node, which does not state it. It is now derived from TR3/TR2 of def-weil-triangulated-category. (3) I added the module-sheaf form of the all-limits clause, matching Tag 09BP, from clause (3) of the limits node plus exactness. proof_deps is regenerated. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
