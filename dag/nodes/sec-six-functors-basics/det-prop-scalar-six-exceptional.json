@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-prop-scalar-six-exceptional",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coefficient comparison for exceptional inverse image",
@@ -18,58 +18,261 @@
  ],
  "proof": [
   {
-   "text": "*Definition and formal properties.* By [sk-thm-existence] (4), $f^!K\\in\\Dctf(X,\\Lambda)$,\nso $\\gamma^!_{f,f^!K}$ is defined and invertible, and $(f^!K)_{\\Lambda'}\\in\\Dctf(X,\\Lambda')$\nby [det-prop-scalar-six-ctf]; hence $\\beta_{f,K}$ is a morphism in $\\Dctf(X,\\Lambda')$. The\ncounit of a composite adjunction $R(gf)_!=Rg_!Rf_!\\dashv f^!g^!$ is the composite of the\ncounits, and $\\gamma^!$ is compatible with composition\n([det-prop-scalar-six-compact-support]); transposing gives\n$\\beta_{gf,K}=f^!(\\beta_{g,K})\\circ\\beta_{f,g^!K}$. For an open immersion $u$, $Ru_!=u_!$ and\n$u^!=u^*$ with counit $u_!u^*\\to\\mathrm{id}$; the transpose of the extension of scalars of\nthis counit is the pullback identification of [det-prop-scalar-six-pullback]. In\nparticular $\\beta$ is compatible with open restriction ($u^*f^!=(fu)^!$).",
+   "text": "*Definition and formal properties.* By [sk-thm-existence] (4), $f^!K\\in\\Dctf(X,\\Lambda)$, so the comparison $\\gamma^!_{f,f^!K}$ is defined and invertible, and $(f^!K)_{\\Lambda'}\\in\\Dctf(X,\\Lambda')$ by [det-prop-scalar-six-ctf]. Thus the displayed transpose defines a morphism in $\\Dctf(X,\\Lambda')$. For composable $X\\xrightarrow fY\\xrightarrow gZ$, [def-weil-pbc-composite-adjunction] identifies the counit of the composite with the composite of counits; the composition compatibility of $\\gamma^!$ in [det-prop-scalar-six-compact-support] then gives, by the defining transpose, $\\beta_{gf,K}=f^!(\\beta_{g,K})\\circ\\beta_{f,g^!K}$. For an open immersion $u$, [det-sf-mate-open-restriction] gives $u^!=u^*$ and [det-prop-scalar-six-pullback] identifies scalar extension with pullback; hence the transpose of the scalar-extended open counit is the pullback identification, for an open $u:U\\hookrightarrow X$, the composition equation applied to $fu$, with this open identification for $u$, identifies $u^*\\beta_{f,K}$ with $\\beta_{fu,K}$. For a target open $v:V\\hookrightarrow Y$ and $u:X_V\\hookrightarrow X$, the open-restriction identification is obtained from $\\operatorname{Hom}(u_!C,f^!K)=\\operatorname{Hom}(Rf_!u_!C,K)=\\operatorname{Hom}(v_!Rf_{V,!}C,K)=\\operatorname{Hom}(Rf_{V,!}C,v^*K)$. Apply scalar extension to these bijections. The open-extension comparisons and the composition comparison for $\\gamma^!$ identify their counit composites, so transposition identifies $u^*\\beta_{f,K}$ with $\\beta_{f_V,v^*K}$ as well.",
    "uses": [
     "sk-thm-existence",
     "det-prop-scalar-six-ctf",
+    "def-weil-pbc-composite-adjunction",
     "det-prop-scalar-six-compact-support",
+    "det-sf-mate-open-restriction",
     "det-prop-scalar-six-pullback"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.proof.md",
+    "place": "Definition and formal properties"
+   }
   },
   {
-   "text": "*Closed immersions.* Let $i\\colon Z\\hookrightarrow Y$ be closed with open complement\n$j\\colon V\\hookrightarrow Y$; here $Ri_!=i_*$. By [sk-lem-formal-closed-support] there is a\ndistinguished triangle\n$i_*R\\underline\\Gamma_ZK\\to K\\to Rj_*j^*K\\to$ whose first map is the counit of\n$i_*\\dashv R\\underline\\Gamma_Z$. For $K\\in\\Dctf(Y,\\Lambda)$ the third term lies in $\\Dctf$\n([sk-thm-sf-ctf-stability]), hence so does $i_*R\\underline\\Gamma_ZK$, and\n$R\\underline\\Gamma_ZK=i^*i_*R\\underline\\Gamma_ZK\\in\\Dctf(Z,\\Lambda)$. For $C$ in\n$\\Loc(\\Dctf(Z,\\Lambda))$, $\\Hom(C,R\\underline\\Gamma_ZK)=\\Hom(i_*C,K)=\\Hom(C,i^!K)$, so by\nYoneda in $\\Loc(\\Dctf(Z,\\Lambda))$, $R\\underline\\Gamma_ZK\\simeq i^!K$ compatibly with the\ncounits. So we have a triangle in $\\Dctf(Y,\\Lambda)$\n$$\ni_*i^!K\\xrightarrow{\\epsilon_K}K\\longrightarrow Rj_*j^*K\\longrightarrow i_*i^!K[1],\n$$\nand the same over $\\Lambda'$ for $K_{\\Lambda'}$. Extension of scalars is triangulated, so\nit carries the first triangle to a triangle. Compare it with the second via the\nmaps\n$$\n(i_*i^!K)_{\\Lambda'}\\simeq i_*\\bigl((i^!K)_{\\Lambda'}\\bigr)\\xrightarrow{i_*\\beta_{i,K}}i_*i^!(K_{\\Lambda'}),\\qquad\\mathrm{id}_{K_{\\Lambda'}},\\qquad(Rj_*j^*K)_{\\Lambda'}\\xrightarrow{\\gamma_{j}}Rj_*\\bigl((j^*K)_{\\Lambda'}\\bigr)\\simeq Rj_*j^*(K_{\\Lambda'}).\n$$\nThe left square commutes by the definition of $\\beta_{i,K}$ as a transpose of\n$(\\epsilon_K)_{\\Lambda'}$; the right square commutes because $\\gamma_j$ is compatible with\nthe units of $j^*\\dashv Rj_*$ ([det-prop-scalar-six-direct-image] (2)). The right vertical\nmap is an isomorphism by [det-prop-scalar-six-direct-image] (1) and\n[det-prop-scalar-six-pullback] (1). In a morphism of distinguished triangles whose\nsecond and third components are isomorphisms, the first is an isomorphism. So\n$i_*\\beta_{i,K}$ is an isomorphism, and since $i_*$ is fully faithful\n($i^*i_*=\\mathrm{id}$), $\\beta_{i,K}$ is an isomorphism.",
+   "text": "*Closed supports and the chosen right adjoint.* Let $i:Z\\hookrightarrow Y$ be closed and $j:V\\hookrightarrow Y$ its open complement. The field $k$ is Noetherian (its only ideals are $0,k$), so $Y$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Its open subsets are quasi-compact: the finite unions of any open cover have a maximal member by the ascending-chain condition on opens. Also $Y$ is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Thus $Y$ is qcqs and $j$ is quasi-compact, as required below. The closed immersion is proper by [lem-weil-pbc-closed-immersion-proper] (a); its compactification with identity open part gives $Ri_!=i_*$. Because $K$ is bounded, apply the bounded-below condensed-ring recollement [lem-weil-pbc-condensed-open-closed-recollement] and put $H=Ri^!K$ for its ambient right adjoint. Its statement gives the distinguished triangle $i_*H\\to K\\to Rj_*j^*K\\to i_*H[1]$ with first arrow explicitly the counit. The bounded-below restriction of the derived sections-with-support adjunction in [det-lem-formal-closed-support-derived] (1) identifies $H$ with $R\\underline\\Gamma_ZK$; thus this is the closed-support construction, with the normalization of its first arrow supplied by the recollement statement. By [det-thm-sf-ctf-stability-direct-images] (1),(3), $j^*K$ and $Rj_*j^*K$ are constructible of finite Tor amplitude; the fibre $i_*H$ is too, since boundedness and constructibility and finite Tor amplitude are preserved in triangles. By [det-sf-open-closed-sequence-ring-sheaf] (2), $i_*$ is exact and $i^*i_*\\simeq\\mathrm{id}$ on module sheaves; these identities hold termwise on complexes, with $i^*$ exact because the coefficient sheaves are pulled back. Thus $H\\simeq i^*i_*H\\in\\Dctf(Z,\\Lambda)$ by the pullback assertion of [det-thm-sf-ctf-stability-direct-images]. For $C\\in\\Loc(\\Dctf(Z,\\Lambda))$ the two adjunctions give $\\operatorname{Hom}(C,H)\\simeq\\operatorname{Hom}(i_*C,K)\\simeq\\operatorname{Hom}(C,i^!K)$, with $i^!$ as in [sk-thm-existence]. These natural bijections identify $H$ with $i^!K$ and identify the first arrow of the triangle with its counit. All objects used are in the full localizing subcategories, so this identification uses the restricted adjunction, not an assertion that the ambient support right adjoint preserves the entire localizing category.",
    "uses": [
-    "sk-lem-formal-closed-support",
+    "det-lem-formal-closed-support-derived",
+    "det-thm-sf-ctf-stability-direct-images",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "sk-thm-existence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.proof.md",
+    "place": "Closed immersions, support identification and constructibility"
+   }
+  },
+  {
+   "text": "*Closed-immersion comparison, including the connecting square.* Derived tensor is exact in each variable by [lem-weil-pbc-ringed-projection-mate-exact], so scalar extension is exact. Apply this exact derived scalar functor to the triangle of step 2 and compare it with the triangle for $K_{\\Lambda'}$. On the middle terms take $b=\\mathrm{id}_{K_{\\Lambda'}}$; on the third terms take $c=\\gamma_{j,j^*K}$ followed by the pullback comparison. This $c$ is an isomorphism by [det-prop-scalar-six-direct-image] (1) and [det-prop-scalar-six-pullback] (1). Its square with the units $K\\to Rj_*j^*K$ commutes by [det-prop-scalar-six-direct-image] (2). Rotate the two distinguished triangles so this is their first square, apply TR3, and rotate back ([def-weil-triangulated-category]); obtain a map $a$ on their first terms making all three squares commute. Identify its source with $i_*((i^!K)_{\\Lambda'})$ by [det-prop-scalar-six-pullback] (2). Full faithfulness from [det-sf-open-closed-sequence-ring-sheaf] (2) gives $a=i_*\\alpha$ for a unique $\\alpha:(i^!K)_{\\Lambda'}\\to i^!(K_{\\Lambda'})$. Its first square says $\\epsilon_{K_{\\Lambda'}}\\circ i_*\\alpha=(\\epsilon_K)_{\\Lambda'}\\circ(\\gamma^!_{i,i^!K})^{-1}$: for a closed immersion the compactification has identity open part, so $\\gamma^!_i$ is the closed-pushforward scalar comparison ([det-prop-scalar-six-compact-support], [det-prop-scalar-six-pullback] (2)). The adjunction bijection therefore gives $\\alpha=\\beta_{i,K}$. Now [lem-sf-triangle-morphism-iso] applied to $(a,b,c)$ makes $a=i_*\\beta_{i,K}$ invertible; applying $i^*$ and $i^*i_*\\simeq\\mathrm{id}$ makes $\\beta_{i,K}$ invertible. This argument constructs the connecting square by TR3, rather than inferring it from two commuting squares.",
+   "uses": [
     "det-prop-scalar-six-direct-image",
+    "det-prop-scalar-six-pullback",
+    "def-weil-triangulated-category",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "det-prop-scalar-six-compact-support",
+    "lem-sf-triangle-morphism-iso",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.proof.md",
+    "place": "Closed immersions, comparison of localization triangles"
+   }
+  },
+  {
+   "text": "*Projective-line adjunctions at each coefficient stage.* Write $P=\\mathbf P^1_Y$, $q:P\\to Y$, $W=P\\times_YP$, with projections $p_1,p_2$ and diagonal $\\Delta$. For a finite admissible ring $A$, choose $N=\\ell^r$ killing $A$; $N$ is invertible on the standing schemes and $Y$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since it is finite type over the Noetherian field $k$. [lem-asd-ordinary-finite-p1-adjunction] gives $Rq_*\\dashv G_A=q^*(-)(1)[2]$ on the ordinary etale derived categories, with counit $\\epsilon_K=(1_K\\otimes t_A)\\circ\\pi^{-1}$, where $t_A$ is the projection of the Kummer decomposition. [det-ctf-finite-comparison-whole] and [det-ctf-finite-comparison-localizing] carry this adjunction to the pro-etale localizing categories, compatibly with $Rq_*$ and pullback. The tensor identification is the canonical pullback tensor isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], so the counit retains precisely this formula. For $\\Lambda=E,\\Qlb$, [det-prop-p1-adjunction-rational-unit-counit] and [det-prop-p1-adjunction-rational-triangle] give the diagonal unit, this same trace counit, and their triangle identities. For $\\Lambda=\\mathcal O_E$ (including $\\Zl$), use the class and trace of [det-prop-diagonal-tower-trace] and [det-prop-diagonal-tower-coefficients] and the proper base-change and projection isomorphisms of [sk-thm-sf-pf-adic]. Define $\\eta_M$ by $M=Rp_{2*}\\Delta_*M\\to Rp_{2*}(p_1^*M(1)[2])\\simeq q^*Rq_*M(1)[2]$, with arrow $Rp_{2*}(1_M\\otimes\\delta_\\Lambda)$, and define $\\epsilon_K=(1_K\\otimes t_\\Lambda)\\circ\\pi^{-1}$. Substitution of these formulas, followed by the projection and proper base-change identifications, gives\n$$\\epsilon_{Rq_*M}\\,Rq_*\\eta_M=Rq_*\\bigl(1_M\\otimes(t_{p_1}\\,Rp_{1*}\\delta_\\Lambda)\\bigr)=1_{Rq_*M},\\qquad G_\\Lambda\\epsilon_K\\,\\eta_{G_\\Lambda K}=1_{G_\\Lambda K}\\otimes(t_{p_2}\\,Rp_{2*}\\delta_\\Lambda)=1_{G_\\Lambda K}.$$\nHere both inner composites are identities by the two integration identities in the cited tower statements. Thus these formulas are an adjunction over $\\mathcal O_E$ as well. In each case $G_\\Lambda$ preserves $\\Dctf$: pullback does so by [det-thm-sf-ctf-stability-direct-images] (1), and twist by the locally free rank-one Kummer line and shift preserve boundedness, constructibility and finite Tor amplitude. Hence these adjunctions restrict to $\\Dctf$. The projection $q$ is proper by [lemma-nagata-projective-space-base-change-proper]. In each case $Rq_!=Rq_*$ by the proper compactification in [sk-thm-existence], and uniqueness of the restricted right adjoint identifies $q^!$ with $G_\\Lambda$ and its counit with $\\epsilon$. No rational-coefficient theorem is being applied with integral coefficients.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "det-ctf-finite-comparison-whole",
+    "det-ctf-finite-comparison-localizing",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "det-prop-p1-adjunction-rational-unit-counit",
+    "det-prop-p1-adjunction-rational-triangle",
+    "det-prop-diagonal-tower-trace",
+    "det-prop-diagonal-tower-coefficients",
+    "sk-thm-sf-pf-adic",
+    "sk-thm-existence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "det-thm-sf-ctf-stability-direct-images",
+    "lemma-nagata-projective-space-base-change-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.proof.md",
+    "place": "The projective line, adjunction and normalized trace counit"
+   }
+  },
+  {
+   "text": "*Coefficient comparison for the projective-line trace.* For finite $A\\to B$, choose one $\\ell^r$ killing both rings. The Cartier coefficient compatibility [sk-lem-geo-cartier] identifies the scalar extension of the Kummer class $h_A=c_1(\\mathcal O_P(1))$ with $h_B$. The unit compatibility of [det-prop-scalar-six-direct-image] (2) identifies the other component of the decomposition $b_A:A_Y(1)[2]\\oplus A_Y\\xrightarrow{\\sim}Rq_*A_P(1)[2]$ of [lem-asd-ordinary-finite-p1-adjunction]. Hence $\\gamma_q\\circ(b_A)_B=b_B$, under pullback and twist identifications. Since scalar extension preserves finite direct sums and inverse isomorphisms, $t_B\\circ\\gamma_q=(t_A)_B$ for $t_A=\\operatorname{pr}_2b_A^{-1}$; flatness of $A\\to B$ is unnecessary. Over $\\Zl$ and $\\mathcal O_E$, the trace reductions are the finite traces by [det-prop-diagonal-tower-trace] (1) and [det-prop-diagonal-tower-coefficients] (1); the corresponding diagonal reductions follow from [det-prop-diagonal-tower-limit] (3) and the coefficient statement. For $\\mathcal O_E\\to\\mathcal O_F$, both traces and classes are extensions of those over $\\Zl$, so transitivity of scalar extension ([det-prop-scalar-six-pullback] (3)) identifies their extensions. For $\\mathcal O_E\\to E$, $E\\to F$ and $E\\to\\Qlb$, they are the scalar extensions stated in [det-prop-diagonal-tower-coefficients] (2); transitivity gives the finite-extension compatibility too. Finally every listed $\\mathcal O_E\\to A$ factors as $\\mathcal O_E\\to\\mathcal O_E/\\pi_E^r\\to A$, since $A$ is killed by a power of $\\pi_E$. Use the recorded reduction compatibility for the first map and the just-proved arbitrary finite-ring compatibility for the second. This proves $t_{\\Lambda'}\\circ\\gamma_q=(t_\\Lambda)_{\\Lambda'}$ for every elementary listed map, and then for composites by transitivity. In particular no assertion that tensoring by an arbitrary finite ring commutes with an unqualified inverse limit is needed.",
+   "uses": [
+    "sk-lem-geo-cartier",
+    "det-prop-scalar-six-direct-image",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "det-prop-diagonal-tower-trace",
+    "det-prop-diagonal-tower-coefficients",
+    "det-prop-diagonal-tower-limit",
     "det-prop-scalar-six-pullback"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.proof.md",
+    "place": "The projective line, all listed coefficient maps including nonflat finite maps"
+   }
   },
   {
-   "text": "*The projective line.* Let $q\\colon\\mathbf P^1_Y\\to Y$. By [sk-prop-geo-p1-adjunction] and\n[sk-prop-diagonal-tower], $Rq_*\\dashv q^*(1)[2]$ on $\\Dctf$, with unit built from the\ndiagonal class $\\delta_\\Lambda$ and counit $\\epsilon_N=(1\\otimes\\operatorname{Tr}_q)\\circ(\\text{projection formula})$;\nsince $q$ is proper, $Rq_!=Rq_*$ and therefore $q^!\\simeq q^*(1)[2]$ with this counit.\nThe classes $\\delta_\\Lambda$ and $\\operatorname{Tr}_q$ commute with every listed coefficient map:\nfor finite rings they are constructed from the Kummer sequence and derived scalar\nextension, and are compatible with change of finite coefficients\n([sk-prop-geo-p1-adjunction]); the $\\mathcal O_E$-classes are the compatible limits of the\nfinite ones; the $E$- and $\\Qlb$-classes are their scalar extensions\n([sk-prop-diagonal-tower]). For $\\mathcal O_E\\to A$, the finite free resolution of $A_X$\nconstructed in [det-prop-scalar-six-direct-image] shows that $A_X\\otimes^{\\mathbf L}-$ commutes\nwith the inverse limits defining the integral classes, and the resulting classes\nare exactly the finite coefficient classes. Consequently the counit over $\\Lambda'$ at\n$N_{\\Lambda'}$ is the extension of scalars of the counit over $\\Lambda$ at $N$, modulo the\ncomparisons $\\gamma_q$ and the projection formula. With $K=N$ this says that\n$\\beta_{q,K}$ is the pullback-and-twist identification\n$(q^*K(1)[2])_{\\Lambda'}\\simeq q^*(K_{\\Lambda'})(1)[2]$, an isomorphism.",
+   "text": "*The canonical projective-line comparison.* Let $T$ denote scalar extension and $\\tau_K:T(G_\\Lambda K)\\xrightarrow{\\sim}G_{\\Lambda'}(TK)$ the pullback-and-twist identification; pullback compatibility is [det-prop-scalar-six-pullback] (1), and twist compatibility follows by extending the rank-one roots-of-unity line used in the preceding Kummer and tower constructions. For the counits of step 4 the trace identity of step 5 and the canonical projection maps give\n$$\\epsilon^{\\Lambda'}_{TK}\\circ Rq_*(\\tau_K)\\circ\\gamma_{q,G_\\Lambda K}=T(\\epsilon^\\Lambda_K).$$\nTo check the projection-map part of this equality, use its definition as the transpose of $q^*(K\\otimes Rq_*L)\\simeq q^*K\\otimes q^*Rq_*L\\xrightarrow{1\\otimes\\epsilon_L}q^*K\\otimes L$. Scalar extension carries this to the same expression over $\\Lambda'$: its tensor identification is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applied to coefficient change, and its counit comparison is [det-prop-scalar-six-direct-image] (2). Equality of these transposes gives the projection square; composing with $1\\otimes t$ gives the displayed equation. This equation says exactly that $\\tau_K$ is the transpose defining $\\beta_{q,K}$, since $\\gamma_q^!=\\gamma_q$ for proper $q$ ([det-prop-scalar-six-compact-support]). The adjunction bijection identifies $\\beta_{q,K}$ with $\\tau_K$, so it is an isomorphism.",
    "uses": [
-    "det-prop-scalar-six-direct-image"
+    "det-prop-scalar-six-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "det-prop-scalar-six-direct-image",
+    "det-prop-scalar-six-compact-support"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.proof.md",
+    "place": "The projective line, identification of beta with the trace transpose"
+   }
   },
   {
-   "text": "*Affine space.* The projection $\\mathbf A^1_Y\\to Y$ is $q\\circ u$ with\n$u\\colon\\mathbf A^1_Y\\hookrightarrow\\mathbf P^1_Y$ open; by compatibility with composition and\nthe open case, $\\beta$ is an isomorphism for it, and then for $\\mathbf A^n_Y\\to Y$ as a\ncomposite of $n$ such projections.",
+   "text": "*Affine space, including dimension zero.* The projection $\\mathbf A^1_Y\\to Y$ is $q\\circ u$ with $u:\\mathbf A^1_Y\\hookrightarrow\\mathbf P^1_Y$ open, so step 1 and step 6 give its invertible comparison. For $n=0$ the projection is the identity: its counit and compact-support comparison are identities, hence so is $\\beta$. Inductively write the projection of $\\mathbf A^n_Y=\\mathbf A^1_{\\mathbf A^{n-1}_Y}$ as its affine-line projection followed by the projection of $\\mathbf A^{n-1}_Y$. The composition identity of step 1 expresses its $\\beta$ as a composite of two isomorphisms (functors preserve inverses). This proves the assertion for every $n\\geq0$.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.proof.md",
+    "place": "Affine space"
+   }
   },
   {
-   "text": "*General $f$.* Since $\\beta$ is compatible with open restriction and isomorphisms in\n$\\D(X_{\\mathrm{proét}},\\Lambda')$ can be checked on an open cover, we may replace $X$ by the\nmembers of a finite affine open cover. For $X$ affine of finite type over $k$,\nchoose a closed immersion $\\iota\\colon X\\hookrightarrow\\mathbf A^n_k$; then\n$(\\iota,f)\\colon X\\to\\mathbf A^n_k\\times_kY=\\mathbf A^n_Y$ is a closed immersion (its composite\nwith the separated projection to $\\mathbf A^n_k$ is one), and $f$ is $(\\iota,f)$ followed by\nthe projection $\\mathbf A^n_Y\\to Y$. By the closed-immersion and affine-space cases and\ncompatibility with composition, $\\beta_{f,K}$ is an isomorphism.",
-   "uses": [],
-   "elementary": null
+   "text": "*General morphisms and the affine factorization.* Step 1 and [det-sf-mate-open-restriction] (3) reduce to a finite affine open cover of $X$. If $X=\\operatorname{Spec}B$ is affine of finite type over $k$, choose algebra generators $b_1,\\ldots,b_n$; the surjection $k[t_1,\\ldots,t_n]\\to B$, $t_a\\mapsto b_a$, defines a closed immersion $\\iota:X\\hookrightarrow\\mathbf A^n_k$ ([def-weil-finite-type-morphism], [def-weil-closed-immersion]). The graph $\\Gamma_f:X\\to X\\times_kY$ is the pullback of the closed diagonal $Y\\to Y\\times_kY$ along $(x,y)\\mapsto(f(x),y)$, since $Y$ is separated ([def-weil-proper-morphism]). The map $(\\iota,f)$ factors as $\\Gamma_f$ followed by $\\iota\\times1_Y:X\\times_kY\\to\\mathbf A^n_k\\times_kY$. Both are closed immersions: on affine charts pullback of a surjection $R\\to R/I$ is $R'\\to R'/IR'$, and compositions of surjections are surjective. Thus the affine description of [def-weil-closed-immersion] verifies the graph argument and its composition directly. Now $f$ is this closed immersion followed by $\\mathbf A^n_Y\\to Y$; steps 3 and 7 and the composition identity prove its comparison invertible. Local detection finishes the proof on $X$. If $X$ is empty there are no local checks and the derived category is zero, so the assertion remains valid.",
+   "uses": [
+    "det-sf-mate-open-restriction",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.proof.md",
+    "place": "General f"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-existence",
-  "det-prop-scalar-six-ctf",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-proper-morphism",
+  "def-weil-triangulated-category",
+  "det-ctf-finite-comparison-localizing",
+  "det-ctf-finite-comparison-whole",
+  "det-lem-formal-closed-support-derived",
+  "det-prop-diagonal-tower-coefficients",
+  "det-prop-diagonal-tower-limit",
+  "det-prop-diagonal-tower-trace",
+  "det-prop-p1-adjunction-rational-triangle",
+  "det-prop-p1-adjunction-rational-unit-counit",
   "det-prop-scalar-six-compact-support",
+  "det-prop-scalar-six-ctf",
+  "det-prop-scalar-six-direct-image",
   "det-prop-scalar-six-pullback",
-  "sk-lem-formal-closed-support",
-  "det-prop-scalar-six-direct-image"
+  "det-sf-mate-open-restriction",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "det-thm-sf-ctf-stability-direct-images",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lemma-nagata-projective-space-base-change-proper",
+  "sk-lem-geo-cartier",
+  "sk-thm-existence",
+  "sk-thm-sf-pf-adic"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.md",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-exceptional.proof.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coefficient comparison for exceptional inverse image beta f K extension of scalars f shriek",
+   "results": "ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars; related change-of-rings declarations (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings)",
+   "date": "2026-10-16",
+   "verdict": "no match: only generic module scalar adjunctions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso, derived category",
+   "results": "0 hits; query parser reported Unknown identifier `derived`",
+   "date": "2026-10-16",
+   "verdict": "invalid query: parser rejected the identifier derived; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction|IsIso|f.!|R.*! [Mathlib/CategoryTheory]",
+   "results": "0 hits in the requested path; the first worker supplied a path not containing the relevant Mathlib sources, so this search is inconclusive",
+   "date": "2026-10-16",
+   "verdict": "inconclusive; superseded by the second reader source search"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coefficient comparison for exceptional inverse image under scalar extension",
+   "results": "Module.Basis.restrictScalars_repr_apply; LinearEquiv.extendScalarsOfSurjective_symm; LinearMap.extendScalarsOfIsLocalizationEquiv (Mathlib/Algebra and Mathlib/RingTheory modules)",
+   "date": "2026-10-16",
+   "verdict": "no match: only generic scalar-extension lemmas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint exceptional inverse image commutes with change of coefficients",
+   "results": "LightCondensed.ihomPoints_symm_comp; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Adjunction.derivedε_fac_app; other generic adjunction declarations",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "CategoryTheory.Adjunction.comp; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.comp_counit_app (Mathlib/CategoryTheory/Adjunction/Basic)",
+   "date": "2026-10-16",
+   "verdict": "generalization: generic composite-adjunction lemmas, not this coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction [Mathlib/CategoryTheory]",
+   "results": "0 hits in the requested path; the first worker supplied a path not containing the relevant Mathlib sources, so this search is inconclusive",
+   "date": "2026-10-16",
+   "verdict": "inconclusive; superseded by the second reader source search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars commutes with the right adjoint to compactly supported direct image on constructible sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.pushforwardPushforwardAdj; generic sheaf-module pullback/pushforward adjunctions",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module adjunctions, not constructible exceptional inverse image"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "CategoryTheory.Adjunction.comp_counit_app in Mathlib.CategoryTheory.Adjunction.Basic",
+   "date": "2026-10-16",
+   "verdict": "ingredient already carried by def-weil-pbc-composite-adjunction; not a match for this item"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|lowerShriek|upperShriek|changeOfCoefficients",
+   "results": "0 hits under Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exceptional inverse image on constructible sheaves commutes with derived coefficient extension",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pushforwardComp_inv_app_val_app; generic sheaf pullback/pushforward coherence and LightCondensed.ihomPoints_symm_comp (8 hits).",
+   "date": "2026-10-16",
+   "verdict": "no match: these concern ordinary sheaf pullback/pushforward coherence, not exceptional inverse image or coefficient comparison on constructible derived categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exceptional inverse image on constructible sheaves commutes with derived coefficient extension",
+   "results": "CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app; CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app; SheafOfModules.sheafificationCompPullback; generic site equivalence and open-immersion naturality (8 hits).",
+   "date": "2026-10-16",
+   "verdict": "no match: these concern ordinary sheaf pullback/pushforward coherence, not exceptional inverse image or coefficient comparison on constructible derived categories"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -88,5 +291,21 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-scalar-six"
+ "unit": "sk-prop-scalar-six",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-prop-scalar-six-exceptional",
+  "worker": "stage1",
+  "summary": "Second reader repaired the closed-support adjoint identification and constructed a full morphism of localization triangles by TR3; cited the morphism-of-triangles isomorphism lemma instead of a transformation-on-one-triangle lemma. Expanded the projective-line argument by coefficient stage, proved trace compatibility for every listed map (including nonflat finite maps and integral-to-finite maps by factorization), and identified its canonical transpose. Made the affine induction, dimension-zero case and graph factorization explicit. Eight steps, no new nodes.",
+  "blueprint": "Step 1 realizes Definition and formal properties; steps 2-3 realize Closed immersions; steps 4-6 realize The projective line; step 7 realizes Affine space; step 8 realizes General f, all in the current main-20261015 companion proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q42-d2f1d8f59",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-d2f1d8f59 (reviewer sub-agent of L); spot-checked: Read the full item, all 32 cited dependency statements, cited source passages, and chapter/unit route. Checked all eight steps, canonical mate directions, coefficient categories, edge cases, duplicate candidates, and dependency cycles. No repairs needed; concrete checks are in review.md."
+ }
 }
