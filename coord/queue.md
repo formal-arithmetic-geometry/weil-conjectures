@@ -19,7 +19,6 @@
 | `Sheaf.Paper.CondensedLocalModelGluing` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarFunctionCoefficients` | 7 | 1 | proof |
 | `Sheaf.Paper.ContinuousEtaleLocalLattices` | 7 | 1 | proof |
-| `Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldRegularModuleScalars` | 8 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueProjectionNormalization` | 8 | 1 | proof |
 | `Sheaf.Paper.IntegralMatrixPointwiseRank` | 9 | 1 | proof |
@@ -27,6 +26,7 @@
 | `Sheaf.Paper.LatticeSheafLocallyConstant` | 10 | 1 | proof |
 | `Sheaf.Paper.RingedTopoiTensorComparisonConstruction` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing` | 11 | 1 | proof |
+| `Sheaf.Paper.ContinuousLatticeIntersectionSplitData` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckAffineGlobalSectionColimit` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent` | 40 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
