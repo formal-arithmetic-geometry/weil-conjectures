@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-thm-properbasechange",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper base change on classical pro-étale complexes",
@@ -21,46 +21,244 @@
  "stmt_deps": [
   "sk-def-exchange",
   "sk-def-conv",
-  "sk-def-pbc"
+  "sk-def-pbc",
+  "sk-def-pe-classical-definition",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-ambient-ringed-exchange"
  ],
  "proof": [
   {
-   "text": "By [sk-cor-pe-classical-derived], write $K=\\nu_X^*K_{\\mathrm{ét}}$ with\n$K_{\\mathrm{ét}}\\in D^+(X_{\\Et},\\Lambda)$. On the étale site,\n[sk-thm-reduction] proves proper base change for torsion abelian sheaves,\nwith the projective-line case [sk-thm-p1] as its input. Three passages lead\nfrom there to the theorem: to bounded below complexes, to $\\Lambda$-modules,\nand to the pro-étale site.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Bounded below complexes.* Write $K$ for the étale complex\n$K_{\\mathrm{ét}}$, and suppose first that it is a bounded below complex of\nabelian sheaves with torsion cohomology. Fix an integer $m$. Both functors\n$g^{-1}Rf_*,\\ Rf'_*g'^{-1}:D^+(X_{\\Et},\\mathbf Z)\\to D^+(Y'_{\\Et},\\mathbf Z)$\nsend $D^{\\geq m+1}$ to $D^{\\geq m+1}$, so their $m$th cohomology on $K$ is\nunchanged upon replacing $K$ by the bounded truncation $\\tau_{\\leq m}K$. Using\ntruncation triangles, its finite Postnikov filtration reduces the exchange\nisomorphism in degree $m$ to torsion sheaves and their shifts.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*$\\Lambda$-modules.* Next forget the $\\Lambda$-action. The forgetful functor\nto abelian sheaves is exact and conservative, and commutes with inverse image\nand direct image. It also commutes with bounded below derived direct image.\nIndeed, an injective sheaf of $\\Lambda$-modules is acyclic, as an abelian\nsheaf, for sections over every object of the site (Stacks Project, Tag 03FD;\nsee [sk-def-pbc-conventions]); the same assertion on the étale slices gives\nacyclicity for direct image, so a module-injective resolution computes the\nunderlying abelian derived direct image. These identifications preserve the\nunits and counits defining the exchange. The underlying abelian map is\ntherefore the exchange in $D^+(Y'_{\\Et},\\mathbf Z)$ already shown to be an\nisomorphism, and hence so is the exchange in $D^+(Y'_{\\Et},\\Lambda)$.",
+   "text": "Put $A_T=\\nu_T^*$ for each corner $T$. The bounded-below unit is an isomorphism for our discrete commutative ring by [sk-prop-sf-comparison], so the hypothesis of [det-pe-classical-derived-equivalence] holds. Set $L=R\\nu_{X,*}K\\in D^+(X_{\\Et},\\Lambda)$. Its counit gives a specified isomorphism $\\alpha:A_XL\\xrightarrow{\\sim}K$. The exactness of $A_X$ on module sheaves in [det-pe-classical-sheaves-modules] and the cohomology identity in [lem-weil-pbc-exact-functor-bounded-below] give $A_XH^q(L)\\simeq H^q(K)$ for every $q$. All coefficients here are discrete constant rings.",
    "uses": [
-    "sk-def-pbc-conventions"
+    "sk-prop-sf-comparison",
+    "det-pe-classical-derived-equivalence",
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+    "place": "Opening paragraph and Stacks Tag 099V (lemma-relative-comparison): descend via the existing arbitrary-ring classical equivalence"
+   }
   },
   {
-   "text": "*Pro-étale site.* Finally apply $\\nu_{Y'}^*$. Since $f$ and $f'$ are proper,\nhence qcqs, the direct-image comparison [sk-thm-pe-direct-image-comparison]\napplies. Together with the inverse-image comparison\n$g_{\\mathrm{proét}}^*\\nu_Y^*\\simeq\\nu_X^*g_{\\mathrm{ét}}^*$ it identifies\n$\\nu_{Y'}^*g^{-1}Rf_*K_{\\mathrm{ét}}$ and\n$\\nu_{Y'}^*Rf'_*g'^{-1}K_{\\mathrm{ét}}$ with $g^*Rf_*K$ and $Rf'_*g'^*K$ in\n$D^+(Y'_{\\mathrm{proét}},\\Lambda)$. These comparisons respect the units and\ncounits, so the resulting isomorphism is the canonical pro-étale exchange\nmap.",
+   "text": "The etale complex $L$ has torsion underlying abelian cohomology. Indeed fix $F=H^q(L)$ and let $c_F:\\operatorname{colim}_nF[n]\\to F$ be the canonical map, with positive integers ordered by divisibility, as in [def-weil-pbc-torsion-etale-sheaf]. The same local-torsion condition on the pro-etale site is the assertion that $\\operatorname{colim}_nG[n]\\to G$ is invertible for $G=H^q(K)$; this is a sheaf colimit, not a bound on all sections of an object. The exact, fully faithful left adjoint $A_X$ of [det-pe-classical-sheaves-modules] preserves $F[n]=\\ker(n:F\\to F)$ and, by [lem-weil-pbc-left-adjoint-preserves-colimits], its filtered colimit. Colimits and kernels of module sheaves have the corresponding underlying abelian colimits and kernels by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Hence $A_X(c_F)$ identifies with $c_{H^q(K)}$, an isomorphism by hypothesis. Full faithfulness reflects isomorphisms: lift the inverse of $A_X(c_F)$ and use faithfulness to check both inverse identities. Thus $c_F$ is invertible, which is exactly torsion for the underlying etale abelian sheaf. No integer annihilating all of $F$ has been chosen.",
    "uses": [
+    "def-weil-pbc-torsion-etale-sheaf",
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+    "place": "Opening paragraph: torsion reflection from exactness, full faithfulness and adjunction; elementary assembly of cited statements"
+   }
+  },
+  {
+   "text": "Work first with a torsion abelian sheaf $F$ on $X_{\\Et}$ placed in degree zero. The given proper $f$ and arbitrary $g$ satisfy exactly the hypotheses of [lemma-weil-pbc-torsion-assembly]; it asserts that the specified derived exchange $\\operatorname{Ex}_{\\square,F}$ is an isomorphism. This is the sheaf-level input supplied by the projective-line, proper-morphism reduction and torsion-assembly route of this unit. It includes all primes, including residue characteristics.",
+   "uses": [
+    "lemma-weil-pbc-torsion-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+    "place": "Opening paragraph; Stacks Tag 095T (theorem-proper-base-change): etale torsion-sheaf input"
+   }
+  },
+  {
+   "text": "Let $E\\in D^+(X_{\\Et})$ be an abelian complex with torsion cohomology and fix $a$ such that $H^q(E)=0$ for $q<a$. Put $E_b=\\tau_{\\leq b}E$. By [lem-weil-pbc-truncation-cohomology], $E_{a-1}$ has zero cohomology, so it is the zero object by [lem-weil-pbc-derived-plus-iso-on-cohomology], applied to $0\\to E_{a-1}$. The two triangulated functors preserve zero objects, so the exchange at zero is the unique morphism between zero objects and is invertible. Induct for $b\\geq a$ using the distinguished triangle $E_{b-1}\\to E_b\\to H^b(E)[-b]\\to E_{b-1}[1]$ of [lem-weil-pbc-truncation-triangle]. Both $\\Phi=g^{-1}Rf_*$ and $\\Psi=Rf'_*g'^{-1}$ are triangulated functors $D^+(X_{\\Et})\\to D^+(Y'_{\\Et})$, as composites of the triangulated inverse images of [def-weil-pbc-derived-inverse-image] and the triangulated derived direct images of [lem-weil-pbc-derived-direct-image-triangulated], with the composite shift isomorphisms $\\xi,\\zeta$; so they carry the truncation triangle to distinguished triangles, as [lem-sf-triangle-two-out-of-three] requires. The exchange is compatible with these shift isomorphisms, $\\zeta\\circ\\Ex_{\\square,M[1]}=\\Ex_{\\square,M}[1]\\circ\\xi$, by [lem-weil-pbc-derived-exchange-triangulated] (1), iterated for all shifts. Its component at $H^b(E)[-b]$ is therefore invertible by step 3, and its component at $E_{b-1}$ is invertible by induction. The two-out-of-three statement [lem-sf-triangle-two-out-of-three] makes its component at $E_b$ invertible. Thus the exchange is invertible at every bounded upper truncation, by finite induction.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-derived-exchange-triangulated",
+    "lem-sf-triangle-two-out-of-three",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+    "place": "Bounded-below paragraph; Stacks Tag 08J5 (remark-truncation-distinguished-triangle): finite Postnikov induction"
+   }
+  },
+  {
+   "text": "For the same $E$ and any integer $m$, let $c_m:E_m\\to E$ be the canonical truncation. The categories of abelian etale sheaves are Grothendieck by [lem-weil-pbc-abelian-etale-sheaves-grothendieck], and $f_*,f'_*$ are left exact additive functors by [lem-weil-pbc-direct-image-left-exact]; their bounded-below right derived functors are the K-injective ones of [def-weil-pbc-direct-image]. Thus [lem-weil-pbc-derived-functor-truncation-iso] applies. It gives an isomorphism on $H^m$ for $Rf_*(c_m)$, and exactness of $g^{-1}$ ([prop-weil-pbc-inverse-image-exact], [lem-weil-pbc-exact-functor-bounded-below]) gives one for $g^{-1}Rf_*(c_m)$. For the other side, $g'^{-1}(c_m)$ is an isomorphism on $H^i$ for $i\\leq m$ and a monomorphism on $H^{m+1}$: exact inverse image preserves cohomology, and $H^{m+1}(E_m)=0$ by [lem-weil-pbc-truncation-cohomology]. Apply the general morphism clause of the same truncation lemma with $v=f'_*$ to get an isomorphism on $H^m$ for $Rf'_*g'^{-1}(c_m)$. Naturality of the exchange ([sk-def-exchange]) makes the square with these vertical maps commute. Its top component at $E_m$ is invertible by step 4 (or $E_m=0$ if $m<a$); hence $H^m(\\operatorname{Ex}_{\\square,E})$ is invertible. Since $m$ is arbitrary, [lem-weil-pbc-derived-plus-iso-on-cohomology] makes $\\operatorname{Ex}_{\\square,E}$ invertible in $D^+(Y'_{\\Et})$. This argument never takes a limit of an unbounded Postnikov tower.",
+   "uses": [
+    "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "lem-weil-pbc-direct-image-left-exact",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-derived-functor-truncation-iso",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-truncation-cohomology",
+    "sk-def-exchange",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+    "place": "Bounded-below paragraph; Stacks Tag 05TC (lemma-negative-vanishing), part (2) and proof: degreewise truncation comparison"
+   }
+  },
+  {
+   "text": "Return to the etale $\\Lambda$-module complex $L$ of steps 1-2, and write $U$ for forgetting its module action. The exact forgetful functor has $H^q(UL)=UH^q(L)$, so $UL$ satisfies step 5. Apply [lem-weil-pbc-exchange-forget-coefficients]: its clauses (1) and (2) identify the inverse images and both derived direct images after forgetting, and clause (3) identifies $U(\\operatorname{Ex}^{\\Lambda}_{\\square,L})$ with the specified abelian exchange at $UL$. Its final assertion reflects invertibility. Hence the etale module exchange $E_L:l_gr_fL\\to r_{f'}l_{g'}L$ is invertible, where $l_u=u_{\\Et}^{-1}$ and $r_u=Ru_{\\Et,*}$. This uses acyclicity under forgetting, rather than asserting that forgetting preserves injectives.",
+   "uses": [
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+    "place": "Lambda-modules paragraph; Stacks Tags 03FD (lemma-cohomology-modules-abelian-agree), 0D6J(3) (lemma-modules-abelian-unbounded) and 07A7 (remark-base-change)"
+   }
+  },
+  {
+   "text": "The base change $f'$ is proper by [lem-weil-pbc-proper-base-change]. Properness includes finite type and separatedness by [def-weil-proper-morphism]; finite type includes quasi-compactness by [def-weil-finite-type-morphism], and a separated morphism is quasi-separated by [lem-pc-separated-quasi-separated]. Consequently $f$ and $f'$ are qcqs, with no quasi-compactness assumption on any base scheme or on $g$. Write $p_u=u_{\\Proet}^*$ and $s_u=Ru_{\\Proet,*}$ with discrete constant coefficients. By [sk-thm-pe-direct-image-comparison], choose the canonical inverse-image comparisons $a_u:A_{\\operatorname{source}(u)}l_u\\xrightarrow{\\sim}p_uA_{\\operatorname{target}(u)}$ for all four edges, using the inverse orientation of its displayed comparison, and its direct-image comparisons $b_u:A_{\\operatorname{target}(u)}r_u\\xrightarrow{\\sim}s_uA_{\\operatorname{source}(u)}$ for $u=f,f'$. They respect units, counits and composition. Define the endpoint isomorphisms\n$$S_L=p_g(b_{f,L})\\circ a_{g,r_fL}:A_{Y'}l_gr_fL\\xrightarrow{\\sim}p_gs_fA_XL,$$\n$$T_L=s_{f'}(a_{g',L})\\circ b_{f',l_{g'}L}:A_{Y'}r_{f'}l_{g'}L\\xrightarrow{\\sim}s_{f'}p_{g'}A_XL.$$\nIn particular the comparison for $g:Y'\\to Y$ uses $A_{Y'}$, not $A_X$.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
     "sk-thm-pe-direct-image-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+    "place": "Pro-etale paragraph: qcqs vertical edges and the canonical comparison maps; arbitrary-discrete-ring comparison as stated in sk-thm-pe-direct-image-comparison"
+   }
+  },
+  {
+   "text": "Check the arrow under these comparisons. Write the etale exchange as $E_L=e_3e_2e_1$, where $e_1$ inserts the unit of $l_{f'}\\dashv r_{f'}$, $e_2$ is $r_{f'}$ applied to the inverse-image square $l_{f'}l_g\\simeq l_{g'}l_f$, and $e_3=r_{f'}l_{g'}(\\varepsilon_f)$; this is exactly [sk-def-exchange]. Write the pro-etale exchange $E^p_{A_XL}=p_3p_2p_1$ by the same unit--square--counit formula in [def-weil-pbc-ambient-ringed-exchange]. Apply [lem-weil-pbc-three-step-adjunction-comparison] to the four $A_T$ and the $a_u,b_f,b_{f'}$ of step 7. Its unit/counit hypotheses are the unit/counit compatibility in [sk-thm-pe-direct-image-comparison]; its pullback cube is the compatibility with composition there, applied to the equality $fg'=gf'$. Here the intermediate etale vertices are $r_{f'}l_{f'}l_gr_fL$ and $r_{f'}l_{g'}l_fr_fL$, and the pro-etale vertices are $s_{f'}p_{f'}p_gs_fA_XL$ and $s_{f'}p_{g'}p_fs_fA_XL$. The cited three-step lemma states only that there exist four vertex isomorphisms, $V_0:A_{Y'}l_gr_fL\\xrightarrow{\\sim}p_gs_fA_XL$, $V_1:A_{Y'}r_{f'}l_{f'}l_gr_fL\\xrightarrow{\\sim}s_{f'}p_{f'}p_gs_fA_XL$, $V_2:A_{Y'}r_{f'}l_{g'}l_fr_fL\\xrightarrow{\\sim}s_{f'}p_{g'}p_fs_fA_XL$ and $V_3:A_{Y'}r_{f'}l_{g'}L\\xrightarrow{\\sim}s_{f'}p_{g'}A_XL$, with $V_1A_{Y'}(e_1)=p_1V_0$, $V_2A_{Y'}(e_2)=p_2V_1$ and $V_3A_{Y'}(e_3)=p_3V_2$ (compositions read right to left). Its proof builds them from the comparisons of step 7, but only their existence is used here. Composing the three squares gives\n$$V_3\\circ A_{Y'}(E_L)=E^p_{A_XL}\\circ V_0.$$\nThus the specified pro-etale exchange at $A_XL$ is $V_3\\circ A_{Y'}(E_L)\\circ V_0^{-1}$, an isomorphism because $E_L$ is invertible by step 6, $A_{Y'}$ is a functor, and $V_0,V_3$ are isomorphisms. No finiteness hypothesis on $\\Lambda$ was used; in particular the finite-ring statement of lem-weil-pbc-transport-identifies-exchange is not being applied here.",
+   "uses": [
+    "sk-def-exchange",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-three-step-adjunction-comparison",
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+    "place": "Pro-etale paragraph; Stacks Tag 07A7 (remark-base-change), with unit/counit normalization of Tag 0B65 (lemma-transformation-between-functors-and-adjoints): compose the three comparison squares"
+   }
+  },
+  {
+   "text": "Use naturality of the exchange transformation of [def-weil-pbc-ambient-ringed-exchange] along $\\alpha:A_XL\\xrightarrow{\\sim}K$ from step 1: its component at $K$ is obtained from its component at $A_XL$ by the isomorphisms $p_gs_f(\\alpha)$ and $s_{f'}p_{g'}(\\alpha)$. Hence it too is invertible. Finally both endpoints are bounded below and classical. Indeed $r_fL$, $l_gr_fL$, $l_{g'}L$ and $r_{f'}l_{g'}L$ lie in the indicated bounded-below etale module categories by [lem-weil-pbc-exchange-forget-coefficients] and the exact inverse images in [sk-thm-pe-direct-image-comparison]. The functors $A_T$ carry them into the bounded-below classical subcategories by [det-pe-classical-derived-equivalence] (whose unit hypothesis is supplied on each corner by [sk-prop-sf-comparison]). The maps $S_L,T_L$ and the isomorphism $\\alpha$ identify them with the two pro-etale endpoints. Since the classical subcategory is full, the inverse of the exchange is a morphism in it. This proves exactly the isomorphism asserted in the statement.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "sk-thm-pe-direct-image-comparison",
+    "det-pe-classical-derived-equivalence",
+    "sk-prop-sf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+    "place": "Conclusion of pro-etale paragraph: naturality and the classical essential image"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-pbc-conventions",
-  "sk-thm-pe-direct-image-comparison"
+  "sk-prop-sf-comparison",
+  "det-pe-classical-derived-equivalence",
+  "det-pe-classical-sheaves-modules",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lemma-weil-pbc-torsion-assembly",
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-derived-exchange-triangulated",
+  "lem-sf-triangle-two-out-of-three",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lem-weil-pbc-direct-image-left-exact",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "prop-weil-pbc-inverse-image-exact",
+  "sk-def-exchange",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "sk-thm-pe-direct-image-comparison",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-three-step-adjunction-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+  "place": "All four proof paragraphs; finite Postnikov induction, torsion reflection, and the unit-square-counit comparison made explicit with existing DAG tools"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change for torsion bounded below complexes of classical sheaves on the pro-etale site of a scheme",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod.ofSheafLightProfinite, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafProfinite, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; condensed-module structure or ordinary pushforward-composition isomorphisms, not proper base change",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*base.?change|base.?change.*proper|ProEtale",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; pro-etale-site definitions and stability-under-base-change APIs only",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper base change theorem for torsion sheaves on the etale site",
+   "results": "8 hits: KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.Etale.baseChange, IsBaseChange.finsuppPow, AlgebraicGeometry.IsProper.isStableUnderBaseChange, RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine; algebraic base change or stability of morphism properties, not etale/pro-etale derived exchange",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, \"baseChange\"",
+   "results": "1 hits: AlgebraicGeometry.IsProper.isStableUnderBaseChange; stability of properness under base change, not a derived exchange theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map inverse image derived pushforward to derived pushforward inverse image is an isomorphism for a proper morphism and a torsion sheaf",
+   "results": "8 hits: SheafOfModules.pushforwardNatIso_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardNatIso_hom; condensed-module structure or ordinary pushforward-composition isomorphisms, not proper base change",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.?base.?change|isIso_baseChange_of_isProper|derivedBaseChange",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived proper pushforward commutes with inverse image on bounded below torsion complexes of sheaves",
+   "date": "2026-10-17",
+   "results": "8 hits; SheafOfModules.pushforwardComp_inv_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app, SheafOfModules.pushforwardComp, SheafOfModules.pushforward_assoc, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardComp_hom_app_val_app. Independent second reading: ordinary pushforward composition or stability of morphism properties; no derived proper exchange statement.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(Proper|proper)|isIso.*baseChange|properBaseChange",
+   "date": "2026-10-17",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/Sites/Affine.lean, Mathlib/AlgebraicGeometry/Sites/Small.lean, Mathlib/AlgebraicGeometry/LimitsOver.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/RingTheory/RingHomProperties.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean. Independent second reading: ordinary pushforward composition or stability of morphism properties; no derived proper exchange statement.",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -95,5 +293,64 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-thm-properbasechange",
+  "worker": "stage1",
+  "summary": "Preserved the current classical pro-etale statement and gave its full reduction to etale torsion sheaves. Reused existing nodes; checked torsion descent via exact fully faithful pullback and sheaf colimits, wrote the finite Postnikov induction and degreewise truncation argument, used the canonical coefficient-forgetting comparison, and explicitly assembled the three-factor exchange comparison for arbitrary discrete commutative rings. No new nodes or attachment. Second reading made the two intermediate exchange-comparison maps explicit and spelled out the zero-object induction base.",
+  "blueprint": "Steps 1-3 realize the opening paragraph; steps 4-5 the bounded-below paragraph; step 6 the module paragraph (03FD/0D6J); steps 7-9 the pro-etale paragraph. The original projective-line/reduction/torsion route remains below lemma-weil-pbc-torsion-assembly; no alternative geometric route or coefficient category is introduced.",
+  "tool_uses": [
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "The current blueprint explicitly invokes the etale/pro-etale comparison; this bounded-below unit is the hypothesis of the classical equivalence, not a replacement for the proper-base-change route."
+   },
+   {
+    "node": "det-pe-classical-derived-equivalence",
+    "why": "Realizes the current blueprint opening use of sk-cor-pe-classical-derived (whose unit id is absent as a DAG node); its actual statement gives the required counit for arbitrary discrete commutative rings."
+   },
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "Exact, fully faithful comparison on arbitrary discrete module coefficients is needed to descend torsion; this is a coefficient-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic exact-functor cohomology identity used for comparison and inverse images; no proper-base-change content."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic module-to-abelian colimit and kernel comparison used to reflect torsion; no geometric reduction is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-derived-exchange-triangulated",
+    "why": "Shift and triangle compatibility of the specified etale exchange, needed for the blueprint Postnikov induction."
+   },
+   {
+    "node": "lem-sf-triangle-two-out-of-three",
+    "why": "Generic triangulated-functor isomorphism induction for the finite Postnikov filtration; no purity theorem is used."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "The current blueprint explicitly invokes this site-comparison theorem, for qcqs f and f-prime and arbitrary inverse-image edges. Its unit/counit/composition coherence identifies the canonical exchange."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-prop-sf-comparison",
+  "det-pe-classical-derived-equivalence",
+  "det-pe-classical-sheaves-modules",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-derived-exchange-triangulated",
+  "lem-sf-triangle-two-out-of-three",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-323658360",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-323658360 (reviewer sub-agent of L); spot-checked: I read the full delivery (item, unit record and report); it creates no new nodes. The statement is verbatim the main-20261015 _section.md and nothing is weakened. The exchange is the mate of θ for the pro-étale Lu*⊣Ru_* with constant coefficients (def-weil-pbc-ambient-ringed-exchange), and étale and pro-étale categories are compared only through ν*. Steps 1-9 were checked against every cited statement and against Stacks 095T, 0DDE, 03FD, 0D6J, 099V, 07A7, 05TC and 08J5 (labels confirmed). There is no SGA input and no cycle (9,711 ids reachable from the cited nodes, the item not among them). Cases tested: f or g the identity, X empty, the zero ring, Λ=Q (K=0), Q/Z with no uniform annihilator, negative degrees. I made two repairs in fixes/dag/nodes/sec-proper-base-change/sk-thm-properbasechange.json. (1) C1/C4, step 4: lem-sf-triangle-two-out-of-three needs g^-1Rf_* and Rf'_*g'^-1 to be triangulated, which no cited statement supplied; the step now cites def-weil-pbc-derived-inverse-image and lem-weil-pbc-derived-direct-image-triangulated, both on the route. (2) C3, step 8: lem-weil-pbc-three-step-adjunction-comparison only says some vertex isomorphisms exist, but the step claimed specific ones (C1, C2, S_L, T_L); it now uses existence only, which suffices: E^p = V3∘A(E_L)∘V0^-1. I matched the lemma's hunit/hcounit/hcube with the unit, counit and composition clauses of sk-thm-pe-direct-image-comparison. proof_deps was recomputed. I accept the declared tool uses: sk-prop-sf-comparison, det-pe-classical-derived-equivalence, det-pe-classical-sheaves-modules, lem-sf-triangle-two-out-of-three and sk-thm-pe-direct-image-comparison. Remarks: 'proper' in sk-def-conv (locally of finite type) agrees with def-weil-proper-morphism through the DAG conventions node and its Mathlib match. Steps 3-5 re-derive the existing reviewed thm-weil-pbc-bounded-below correctly; this is not a fault, but citing it would be shorter. The unit record is older than the main-20261015 uses; the report flags this for maintenance.; 1 file(s) fixed by the reviewer"
+ }
 }
