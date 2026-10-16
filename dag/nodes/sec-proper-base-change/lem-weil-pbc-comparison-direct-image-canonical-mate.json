@@ -210,26 +210,28 @@
   }
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ComparisonDirectImageCanonicalMate",
-  "declaration": "AlgebraicGeometry.ProEtale.comparisonDirectImageCanonicalMate",
+  "module": "Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate",
+  "declaration": "AlgebraicGeometry.ProEtale.fixedComparisonDirectImageMatePlus",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.comparisonDirectImageCanonicalMate",
-   "AlgebraicGeometry.ProEtale.isIso_comparisonDirectImageCanonicalMate",
-   "AlgebraicGeometry.ProEtale.comparisonDirectImageCanonicalMate_fac"
+   "AlgebraicGeometry.ProEtale.fixedComparisonPullbackPlus",
+   "AlgebraicGeometry.ProEtale.fixedComparisonDirectImageMatePlus",
+   "AlgebraicGeometry.ProEtale.isIso_fixedComparisonDirectImageMatePlus",
+   "AlgebraicGeometry.ProEtale.fixedComparisonDirectImageMatePlus_counit"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ComparisonDirectImageCanonicalMate.lean",
-  "statement": "def comparisonDirectImageCanonicalMate (Λ : Type (u + 1)) [CommRing Λ] {U V : Scheme.{u}} (u : U ⟶ V) : Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) u ⋙ D+((comparisonUpperStar (ModuleCat.{u + 1} Λ) V)) ⟶ D+((comparisonUpperStar (ModuleCat.{u + 1} Λ) U)) ⋙ R+((ProEtale.lowerStar (ModuleCat.{u + 1} Λ) u))",
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedComparisonDirectImageMate.lean",
+  "statement": "def fixedComparisonDirectImageMatePlus (Λ : Type (u + 1)) [CommRing Λ] {U V : Scheme.{u}} (f : U ⟶ V) : Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f ⋙ (comparisonUpperStar (ModuleCat.{u + 1} Λ) V).mapDerivedCategoryPlus ⟶ (comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategoryPlus ⋙ (lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlus",
   "branch": "newtargets-dag",
-  "by": "Q24",
+  "by": "Q18",
   "date": "2026-10-16",
-  "existing": false
+  "existing": false,
+  "note": "Section 1(B): the original recorded module publicly imports ComparisonPullbackCoherence, whose finite-coefficient UpperLowerStar.Defs duplicates the upstream lower-star parser when combined with the proper/open and canonical comparison modules. This repaired interface imports only the upstream fixed-ring operations and ComparisonDirectImage. It uses exactly the same rightDerivedFunctorPlusBaseChange construction, not an arbitrary isomorphism, and states both qcqs invertibility and the explicit counit-mate normalization with the canonical termwise pullback comparison. The old declaration module is not imported or redeclared."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-b5b5243ad",
-  "group": "Q24",
+  "reviewer": "NT-stage2-Codex-e85086206",
+  "group": "Q18",
   "result": "pass",
-  "note": "Statement, dependencies, canonical mate construction, docstrings, edge cases, and compiler evidence checked; no findings."
+  "note": "Wrote review.md. Checked immutable statements, all 13 dependencies, sources, canonical maps, universes, edge cases, docstrings, and verbatim signatures. All three modules compiled cleanly through scompile.py with the local side overlay. No findings; branch head unchanged."
  }
 }

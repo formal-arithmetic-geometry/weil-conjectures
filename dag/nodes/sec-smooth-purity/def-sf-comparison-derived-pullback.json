@@ -153,25 +153,25 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-54a903593 (reviewer sub-agent of L); spot-checked: Read all required governance files, the item, unit/chapter route, exact master witness, Stacks Tags 015F/099R/099V, and all six dependency statements. The definition is correctly typed étale-to-pro-étale for finite discrete commutative coefficients; exactness supplies termwise quasi-isomorphism preservation and the bounded-below restriction. Edge cases and duplicate searches checked. Full review written to review.md; no fixes needed."
  },
  "lean": {
-  "module": "Sheaf.Paper.ComparisonDerivedPullback",
-  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedComparisonPlus",
+  "module": "Sheaf.AlgebraicGeometry.ComparisonDerivedPullbackFixed",
+  "declaration": "AlgebraicGeometry.ProEtale.siteComparisonDerivedPullbackPlus",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedComparisonPlus"
+   "AlgebraicGeometry.ProEtale.siteComparisonDerivedPullbackPlus"
   ],
-  "file": "lean/Sheaf/Paper/ComparisonDerivedPullback.lean",
-  "statement": "abbrev finiteCoefficientDerivedComparisonPlus (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤ FiniteCoefficientDerivedCategoryPlus T Λ",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComparisonDerivedPullbackFixed.lean",
+  "statement": "abbrev siteComparisonDerivedPullbackPlus (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤ DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ))",
   "branch": "newtargets-dag",
-  "by": "Q19",
-  "date": "2026-10-15",
+  "by": "Q18",
+  "date": "2026-10-16",
   "existing": false,
-  "note": "The node had no Lean record. Its unbounded functor already exists as finiteCoefficientDerivedComparison in Sheaf.AlgebraicGeometry.ProEtaleFiniteModules. This dependency module supplies its canonical bounded-below restriction using the same finiteCoefficientComparison and the upstream exact-functor mapDerivedCategoryPlus, so the recorded witness alpha has exactly this source. Exactness and the canonical coefficient realization come from the landed finite-coefficient module; no extra assumption, resolution, arbitrary functor or category copy is introduced."
+  "note": "Section 1(B): the recorded finiteCoefficientDerivedComparisonPlus lands in modules over the continuous-function coefficient sheaf, whereas the canonical direct-image mate and the open-extension comparison use the equivalent fixed-ring module-sheaf presentation. Publicly retain the original interface and expose the exact same termwise comparison in that fixed-ring presentation, by the existing comparisonUpperStar.mapDerivedCategoryPlus. No site, coefficient map, or inverse image is chosen anew."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-dd011f3ef",
-  "group": "Q19",
+  "reviewer": "NT-stage2-Codex-e85086206",
+  "group": "Q18",
   "result": "pass",
-  "note": "Statement, dependencies, retained witnesses, induced category, edge cases, docstrings, report sections, and per-file compilation all checked successfully."
+  "note": "Wrote review.md. Checked immutable statements, all 13 dependencies, sources, canonical maps, universes, edge cases, docstrings, and verbatim signatures. All three modules compiled cleanly through scompile.py with the local side overlay. No findings; branch head unchanged."
  }
 }

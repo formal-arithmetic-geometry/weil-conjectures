@@ -308,5 +308,27 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-2eb121b59 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources, and unit/chapter route. The source specifies the transported pro-etale map and counit-mate comparison; all five steps type-check and satisfy their hypotheses. Edge cases, duplicate candidates, and dependency cycles checked. No new nodes or repairs; seven tool uses accepted. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e85086206",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all 13 dependencies, sources, canonical maps, universes, edge cases, docstrings, and verbatim signatures. All three modules compiled cleanly through scompile.py with the local side overlay. No findings; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenComparisonSiteNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.properOpenComparison_site_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.properOpenNormalizationCoefficientFinite",
+   "AlgebraicGeometry.ProEtale.properOpenComparison_site_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenComparisonSiteNormalization.lean",
+  "statement": "theorem properOpenComparison_site_normalization (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) {T₁ T₂ X : Scheme.{u}} [IsNoetherian X] [IsNoetherian T₁] [IsNoetherian T₂] (f : T₁ ⟶ T₂) [IsProper f] (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂] (h : j₁ ≫ f = j₂) (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))) : (properOpenSiteExtensionIso (Padic.coefficientExtensionRing l E (n + 1)) j₂).hom.app L ≫ (properOpenProEtaleIsoPlus (Padic.coefficientExtensionRing l E (n + 1)) f j₁ j₂ h L).hom = (siteComparisonDerivedPullbackPlus T₂ (Padic.coefficientExtensionRing l E (n + 1))).map (Etale.properOpenComparison (Padic.coefficientExtensionRing l E (n + 1)) f j₁ j₂ h L) ≫ (fixedComparisonDirectImageMatePlus (Padic.coefficientExtensionRing l E (n + 1)) f).app ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) j₁).mapDerivedCategoryPlus.obj L) ≫ (lowerStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) f).rightDerivedFunctorPlus.map ((properOpenSiteExtensionIso (Padic.coefficientExtensionRing l E (n + 1)) j₁).hom.app L)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
