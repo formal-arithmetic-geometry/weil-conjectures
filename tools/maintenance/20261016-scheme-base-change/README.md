@@ -6,7 +6,8 @@ These patches belong to the launcher, not to the Lean package.
   worker's note to repair retries. Apply from `weil-launcher-all` after checking
   the diff against the current source. It is already installed there.
 - `stage3-worker.patch`: identify zero-hole repairs correctly in the worker brief.
-  It is already installed in `weil-launcher-all/briefs/batch1/stage3-worker.md`.
+  Apply from `weil-launcher` to `worker-brief3.md`. It is already installed there;
+  `weil-launcher-all/briefs/batch1/stage3-worker.md` is a symlink to that file.
 - `test_repair_pipeline.py`: source-only sandbox and delivery-gate regressions.
   On the launcher run `python3 -m unittest -v test_repair_pipeline.py` from the
   directory containing this file. `REPAIR_TEST_DISPATCHER` and

@@ -1,26 +1,14 @@
 --- a/dispatch_all.py
 +++ b/dispatch_all.py
-@@ -391,7 +391,11 @@
- 
-     def sandbox_from_branch(s, item, stage):
-         sb = s.b.sandbox(stage) / s.g / item
+@@ -394 +394,5 @@
 -        if list(sb.glob("dag/nodes/*/*.json")) and stage == "1": return
 +        # A retry resumes local work. Reloading the rejected branch here erased
 +        # repaired Lean, nodes and reports on every stage-2/3 repair restart.
 +        if any(sb.glob("dag/nodes/*/*.json")) or any(sb.glob("lean/**/*.lean")):
 +            log(s.g, "preserving repair sandbox", item, "(resume and rebase existing work)")
 +            return
-         # 2026-10-16: fetched into a ref of its own in the shared clone (serialised), never FETCH_HEAD
-         ref = f"refs/launcher/{s.g}/{item}"
-         r = sharedrepo.fetch(s.b.c["clone_prefix"], f"+refs/heads/deliver/{s.g}/{item}:{ref}")
-@@ -502,6 +506,10 @@
-             key = f"{item}@{h[:9]}"
-             s.maint(item, key)
-             note = ("\n\n## This is a REPAIR of a returned delivery\n\nYour sandbox holds the delivered version (node files and report.md). The maintainer returned it with the entry below. Repair every numbered point exactly as it asks, in the sandbox, then compile, dry-run and answer as the brief says. A rebase or an unchanged re-push is not a repair. If a point cannot be repaired, answer ABANDON with the reason.\n\n" + text[:6000])
+@@ -504,0 +509,4 @@
 +            if item in s.st["notes"]:
 +                note += f"\n\nThe previous worker on this item ended with: {s.st['notes'][item]}\n"
 +            note += ("\n\nExisting sandbox work is retained across repair retries. Compare it with "
 +                     "the returned head and current main branch; continue and rebase that work.\n")
-             todo.append((s.stage(item), item, "repair", key, note))
-         for item in mine:                                                    # claimed, never delivered
-             if item in run or item in br or item in ret: continue
