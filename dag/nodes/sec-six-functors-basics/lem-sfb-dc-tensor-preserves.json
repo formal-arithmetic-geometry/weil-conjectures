@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-dc-tensor-preserves",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\otimes^{\\mathrm L}$ preserves bounded constructible complexes ($\\ell$-adic $\\Lambda$)",
@@ -31,33 +31,198 @@
  ],
  "proof": [
   {
-   "text": "Let first $\\Lambda=\\underline{\\cO}_E$, and use the characterisation of bounded constructible\ncomplexes recalled in the proof of [lem-sfb-dc-lower-star-preserves]. Since $\\cO_E$ is a\ndiscrete valuation ring, bounded complexes of $\\cO_E$-modules have finite Tor-amplitude, so\n$K\\otimes^{\\mathrm L}L$ is bounded. For $K$ and $L$ bounded constructible it is derived\n$\\varpi$-complete (Bhatt–Scholze, §6.8), and its reduction is\n\n$$\n(K\\otimes^{\\mathrm L}L)/\\varpi\\cong(K/\\varpi)\\otimes^{\\mathrm L}_{\\cO_E/\\varpi}(L/\\varpi).\n$$",
+   "text": "First record the geometric hypothesis needed for detecting cohomology on strata. The field $k$ is Noetherian (its only ideals are $0$ and $k$), so $\\operatorname{Spec}k$ is Noetherian. Since $X\\to\\operatorname{Spec}k$ is of finite type, [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. In particular it is quasi-compact, and the constructibility condition in [sk-def-sfb-constructible] is given by a finite stratification.",
    "uses": [
-    "lem-sfb-dc-lower-star-preserves"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "sk-def-sfb-constructible"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; finite-type hypothesis from the setting"
+   }
   },
   {
-   "text": "This is a derived tensor product of bounded constructible étale complexes over the field\n$\\cO_E/\\varpi$, hence bounded with constructible cohomology. The cases $\\underline E$ and\n$\\underline{\\Qlb}$ follow by inverting $\\ell$ and by descending to a finite extension $E$\n([sk-thm-sfb-qlbar-two-colimit]), as in\n[lem-sfb-dc-lower-star-preserves].",
+   "text": "We first treat constructible module sheaves $F,G$ in degree zero. Intersect their finite stratifications, using [lemma-constructible-pullback-stratification] to form the intersections as fibre products of the actual strata. On each resulting stratum $T$, if $\\{U_i\\to T\\}$ trivializes $F$ and $\\{W_j\\to T\\}$ trivializes $G$, use the cover $\\{U_i\\times_T W_j\\to T\\}_{i,j}$: base change of the second covering covers each $U_i$, and composition with the first covering covers $T$. The local models pull back along both projections, since inverse image preserves constant sheaves, tensor products and the pulled-back coefficient ring as below. Thus on every chosen covering object $V$ the sheaves become $R\\otimes_A P$ and $R\\otimes_A Q$, where $R=\\Lambda_V$, $A=\\Lambda(*)$ and $P,Q$ are finitely presented $A$-modules [sk-def-sfb-constructible]. By [sk-prop-sfb-cartesian-coefficients] the restrictions to strata and covering objects are exact inverse images with the inverse-image coefficient ring equal to $\\Lambda_V$. Consequently they commute with cohomology. Their derived tensor comparison is the isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; since the module inverse images are exact, their derived functors are their termwise functors [sk-def-sfb-derived-categories]. It therefore suffices to compute the tensor of these local models, and later to detect vanishing and constructibility on these strata. For comparison with the exact master target categories, local finite presentation there means a cokernel of an arbitrary map between finite free coefficient modules; it does not by definition require scalar matrix entries. On each Noetherian stratum, [lem-weil-pbc-condensed-lfp-local-triviality] for $\\underline E$, and [lem-weil-pbc-condensed-qbar-lfp-local-triviality] for $\\underline{\\Qlb}$, turn precisely those presentations into pro-étale locally finite free modules. Such a module has a finite constant local model with $P=A^r$. Conversely every finite constant local model over either scalar field is finite free, and therefore locally finitely presented in the master sense. Hence for these two target coefficient rings the stratified constructibility conditions, and their bounded full derived subcategories, agree. This comparison uses these separate field-specific statements, not a general identification of local finite presentation with scalar constant models. The integral case of the present item continues to use its stated finite constant local models; no integral comparison theorem is asserted here.",
    "uses": [
-    "sk-thm-sfb-qlbar-two-colimit",
-    "lem-sfb-dc-lower-star-preserves"
+    "lemma-constructible-pullback-stratification",
+    "sk-def-sfb-constructible",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "sk-def-sfb-derived-categories",
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; Bhatt–Scholze Definitions 6.8.6 and 6.8.10 for the local models; master field-category comparison via the two cited local-triviality nodes (agent comparison inputs), with Hemo–Richarz–Scholbach Example 3.1 for coefficient realization and Bhatt–Scholze Definition 6.8.3 for finite free lisse models"
+   }
+  },
+  {
+   "text": "For integral coefficients set $A=\\mathcal O_E$ and choose a uniformizer $\\varpi$. The ring $A$ is a DVR, hence a PID, and each nonzero scalar is a unit times a power of $\\varpi$ [lem-weil-l-adic-extension-integers-dvr]. For a finitely presented $A$-module $P$, choose a finite free surjection $A^n\\twoheadrightarrow P$ and put $N=\\ker(A^n\\to P)$. Apply [lem-sc-dvr-saturation-line-smith-normal-form] to the submodule $N\\subseteq A^n$. Every diagonal scalar is nonzero, since its basis vector has nonzero image under the inclusion; its exponent in the uniformizer factorization is nonnegative because the scalar belongs to $A$. Taking the cokernel of its diagonal inclusion expresses $P$ as a finite direct sum of $A$ and $A/\\varpi^a$, $a\\geq1$; a unit diagonal gives a zero summand, which is discarded. The same applies to $Q$. Right exactness of the ordinary tensor product then gives corresponding decompositions of the local sheaves into $R$ and $R/\\varpi^aR$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sc-dvr-saturation-line-smith-normal-form",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10 and proof of Proposition 6.8.11(3), finite projective resolutions; diagonal decomposition from the cited Smith normal form statement"
+   }
+  },
+  {
+   "text": "Multiplication by $\\varpi^a$ on the condensed sheaf $\\underline{\\mathcal O}_E$ is injective: on every profinite set it sends a continuous function $f$ to $\\varpi^af$, and $\\varpi^af=0$ implies $f=0$ pointwise [sk-def-sfb-condensed-ring]. The functor $p_V^*$ defining $R=\\mathcal O_{E,V}$ is an inverse image [sk-def-sfb-pullback-from-point, sk-def-sfb-pulled-back-coefficients]; inverse image of abelian sheaves is exact [lem-weil-pbc-site-pullback-abelian-exact]. Applying it to this monomorphism shows that multiplication by $\\varpi^a$ on $R$ is injective as well. This argument uses the given pulled-back condensed coefficient sheaf, rather than substituting the discrete constant sheaf $A$.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-pullback-from-point",
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC, lemma-flat-pullback-exact, exactness of abelian inverse image; pointwise calculation with the stated condensed coefficient definition"
+   }
+  },
+  {
+   "text": "For the local integral ring sheaf $R$, the complex $[R\\xrightarrow{\\varpi^a}R]$ in degrees $-1,0$ is a resolution of $R/\\varpi^aR$ by step 4. It is K-flat directly from [def-pc-kflat-complex]: tensoring it with an acyclic complex gives, up to the shift convention, the cone of multiplication by $\\varpi^a$ on that acyclic complex, which is acyclic. The unit complex $R[0]$ is also K-flat since tensoring with it is the identity. The K-flat computation of [sk-def-sfb-derived-tensor-hom] therefore computes every local cyclic or free tensor in step 3 using these explicit resolutions.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-weil-abstract-derived-category",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YN (definition-K-flat) and 06YU (definition-derived-tor); the two-term cone calculation is written out"
+   }
+  },
+  {
+   "text": "Tensoring a free summand $R$ with any of the listed summands leaves that summand in degree zero. For two torsion summands, the model of step 5 is\n$$\n(R/\\varpi^aR)\\otimes_R^{\\mathrm L}(R/\\varpi^bR)\n\\simeq [R/\\varpi^bR\\xrightarrow{\\varpi^a}R/\\varpi^bR].\n$$\nIf $a\\geq b$ its differential is zero, so both cohomology sheaves are $R/\\varpi^bR$. If $a<b$, its cokernel is $R/\\varpi^aR$ and its kernel is $\\varpi^{b-a}R/\\varpi^bR\\cong R/\\varpi^aR$: multiplication by $\\varpi^{b-a}$ gives this isomorphism, since the injectivity proved in step 4 permits cancellation of powers of $\\varpi$. For $a<b$, the quotient-sheaf calculation is justified locally as follows: a section of $R/\\varpi^bR$ lifts locally to $x\\in R$. If $\\varpi^a x=0$ modulo $\\varpi^b$, refine the cover to write $\\varpi^a x=\\varpi^b y$; injectivity gives $x=\\varpi^{b-a}y$. Conversely every such multiple is in the kernel, and $\\varpi^{b-a}y=0$ modulo $\\varpi^b$ holds locally exactly when $y=0$ modulo $\\varpi^a$. Thus in either case $H^{-1}$ and $H^0$ are $R/\\varpi^{\\min(a,b)}R$, with no other cohomology. Finite direct sums of these calculations compute the tensor of the local models in step 3. All resulting sheaves have finite constant local models, because $R/\\varpi^cR=R\\otimes_A(A/\\varpi^c)$ and finite sums of finitely presented scalar modules are finitely presented.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor, explicit two-term computation using steps 3–5"
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\underline E$ or $\\underline{\\Qlb}$, its scalar ring $A=\\Lambda(*)$ is respectively the field $E$ or $\\Qlb$, by the section formulas of [sk-def-sfb-condensed-ring, sk-def-sfb-qlbar-condensed]. Finitely presented modules over a field have finite bases; hence the local models of step 2 are $R^r$ and $R^s$ for finite $r,s$. The unit $R[0]$ is K-flat by step 5's identity argument, so their derived tensor is $R^{rs}[0]$. It has a finite constant local model and no cohomology outside degree zero. The calculation applies to the finite-subextension definition of $\\underline{\\Qlb}$ itself; it does not replace that sheaf by all continuous maps into $\\Qlb$.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-qlbar-condensed",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.6 and 6.8.8; finite-rank free local calculation with the project coefficient definitions"
+   }
+  },
+  {
+   "text": "Return to $F\\otimes_{\\Lambda_X}^{\\mathrm L}G$. Exactness and the tensor comparison in step 2 identify the restrictions of its cohomology with those calculated in steps 6–7. By [lem-weil-pbc-noetherian-stratum-detection], cohomology vanishes globally outside $[-1,0]$ in the integral case and outside $\\{0\\}$ in the rational cases. The hypotheses of this detection statement hold by step 1 and the finite stratification and covering construction of step 2. On each stratum the remaining cohomology sheaves have finite constant local models by the displayed computations, so they are constructible by [sk-def-sfb-constructible]. Thus the derived tensor of two constructible sheaves lies in the bounded constructible category [sk-def-sfb-bounded-constructible].",
+   "uses": [
+    "lem-weil-pbc-noetherian-stratum-detection",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, finite-stratum detection as stated in the cited node; Bhatt–Scholze Definition 6.8.8 and Proposition 6.8.11(3)"
+   }
+  },
+  {
+   "text": "Finally use finite truncation induction, without assuming that a complex itself is locally a constant perfect complex. The standard truncation triangles are supplied by [def-sbc-standard-tstructure-derived-category]. For bounded $K$ with top nonzero cohomology in degree $b$, the triangle is\n$$\n\\tau_{\\leq b-1}K\\longrightarrow K\\longrightarrow H^b(K)[-b]\\longrightarrow(\\tau_{\\leq b-1}K)[1].\n$$\nIts first term has one fewer possibly nonzero cohomology degree. Derived tensor is exact in each variable [lem-weil-pbc-ringed-projection-mate-exact], and the bounded constructible category is triangulated on our Noetherian $X$ [sk-def-sfb-bounded-constructible]. First fix a constructible sheaf $G$: the base case $F[0]\\otimes^{\\mathrm L}G[0]$ is step 8, shifts preserve the conclusion, the zero complex starts the induction, and the displayed triangle inductively proves $K\\otimes^{\\mathrm L}G$ bounded constructible. For the second induction fix a bounded constructible $K$ and choose an interval $[c,d]$ containing the cohomology of $L$. The zero object gives the empty-interval case, and a single-degree object $H^d(L)[-d]$ gives the case just proved, shifted by $-d$. For $c<d$, tensor the truncation triangle of $L$ with $K$ to obtain the distinguished triangle $$K\\otimes^{\\mathrm L}\\tau_{\\leq d-1}L\\longrightarrow K\\otimes^{\\mathrm L}L\\longrightarrow (K\\otimes^{\\mathrm L}H^d(L))[-d]\\longrightarrow (K\\otimes^{\\mathrm L}\\tau_{\\leq d-1}L)[1].$$ The first term belongs to the bounded constructible category by induction on $d-c$, and the third term belongs to it by the already proved sheaf case for this $K$. Closure under distinguished triangles gives the middle term. This proves that $K\\otimes_{\\Lambda_X}^{\\mathrm L}L$ is bounded constructible for all three stated coefficient choices.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proof of Proposition 6.8.11(3), cohomological dévissage; Stacks sites-cohomology.tex Tags 06YM (lemma-derived-tor-exact) and 06YU (definition-derived-tor)"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-dc-lower-star-preserves",
-  "sk-thm-sfb-qlbar-two-colimit"
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sk-def-sfb-constructible",
+  "lemma-constructible-pullback-stratification",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sc-dvr-saturation-line-smith-normal-form",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-qlbar-condensed",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "sk-def-sfb-bounded-constructible",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-ringed-projection-mate-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-tensor-preserves.md",
-  "place": "## Proof"
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.6, 6.8.8, 6.8.10, proof of Proposition 6.8.11(3); explicit cyclic Tor calculation and double truncation induction adapted to the project condensed coefficients"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived tensor product of two bounded constructible complexes of sheaves over an l-adic coefficient ring is bounded constructible",
+   "results": "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalCategoryLightCondMod; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.instMonoidalLightCondSetLightCondModFree; CategoryTheory.Sheaf.monoidalCategory",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state preservation of bounded constructible complexes over the specified pulled-back condensed coefficient rings"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Tt]ensor|[Tt]ensor.*constructible|[Hh]yper[Tt]or",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state preservation of bounded constructible complexes over the specified pulled-back condensed coefficient rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"tensor\"",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state preservation of bounded constructible complexes over the specified pulled-back condensed coefficient rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor products preserve bounded constructible sheaves over a field or a discrete valuation ring",
+   "results": "CategoryTheory.Sheaf.tensorProd_isSheaf; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier; CommRingCat.Under.instPreservesLimitUnderDiscreteFunctorTensorProdOfFinite; Algebra.Smooth.baseChange; Derivation.tensorProductTo_tmul; Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state preservation of bounded constructible complexes over the specified pulled-back condensed coefficient rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor product preserves bounded complexes with constructible cohomology sheaves on the pro etale site",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; LightCondensed.instMonoidalCategoryLightCondMod; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state preservation of bounded constructible complexes over the specified pulled-back condensed coefficient rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\"",
+   "results": "IsDiscreteValuationRing.HasUnitMulPowIrreducibleFactorization; IsDiscreteValuationRing.quotient; IsDiscreteValuationRing.remainder; IsDiscreteValuationRing; IsDiscreteValuationRing.toEuclideanDomain; IsDiscreteValuationRing.ofHasUnitMulPowIrreducibleFactorization; IsDiscreteValuationRing.toWithBotNat; of_isDiscreteValuationRing",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state preservation of bounded constructible complexes over the specified pulled-back condensed coefficient rings"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -74,5 +239,74 @@
   "sk-def-sfb-qlbar-condensed"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-dc-tensor-preserves",
+  "worker": "stage1",
+  "summary": "Kept the statement, replaced the unsupported completeness argument and proof-only citations by a direct local-model computation for sheaves and a double finite truncation induction. Reused every non-elementary input, created no nodes, checked coefficient sheaves and scalar rings separately, and excluded circular integral-model lemmas. No exact closed project declaration or Mathlib theorem states the item. Maintainer review added the two existing field-specific local-triviality citations and the explicit two-way comparison with the exact master target constructibility definitions; the integral statement and all target hypotheses remain unchanged.",
+  "blueprint": "Realizes the tensor-preservation assertion of sk-def-sfb-dc-restricted-functors and lem-sfb-dc-tensor-preserves. Below the unit, replaces the imported two paragraphs by local DVR/field calculations following Bhatt–Scholze 6.8.10 and 6.8.11(3). The unit has no proof steps requiring reduction modulo a uniformizer or coefficient descent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of a finite-type scheme over a field, needed for finite-stratum detection. These are generic tools; the unit supplies no alternate version."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Form the common refinement as actual scheme fibre products of strata. These are generic tools; the unit supplies no alternate version."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic monoidal derived pullback on ringed topoi; applies to exact coefficient restrictions. These are generic tools; the unit supplies no alternate version."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "DVR and uniformizer structure of the scalar ring of integers. These are generic tools; the unit supplies no alternate version."
+   },
+   {
+    "node": "lem-sc-dvr-saturation-line-smith-normal-form",
+    "why": "Generic diagonalization of a submodule of a finite free DVR module. These are generic tools; the unit supplies no alternate version."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Exact inverse image preserves the scalar multiplication monomorphism. These are generic tools; the unit supplies no alternate version."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "Detect cohomological vanishing from the chosen covering objects of the strata. These are generic tools; the unit supplies no alternate version."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Only its explicit assertion that derived tensor is exact in each variable is used for the two finite inductions. These are generic tools; the unit supplies no alternate version."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-lfp-local-triviality",
+    "why": "Compare the exact master stratified local-finite-presentation field category with the scalar-local-model category used in step 2, by the stated local-freeness theorem on each Noetherian stratum. The restricted-functors unit supplies no such comparison."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "why": "Compare the exact master stratified local-finite-presentation field category with the scalar-local-model category used in step 2, by the stated local-freeness theorem on each Noetherian stratum. The restricted-functors unit supplies no such comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-constructible-pullback-stratification",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sc-dvr-saturation-line-smith-normal-form",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q43-2296504aa",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q43-2296504aa (reviewer sub-agent of L); spot-checked: Read all nine steps, cited statements, sources and route. Repaired the missing master-category comparison using two existing field-specific local-triviality lemmas. Local tensor calculations, truncation inductions and dependency checks pass. Statement unchanged; corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+ }
 }
