@@ -6,12 +6,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
-import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-import Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension
-import Sheaf.CategoryTheory.FiniteCohomologicalDimensionAcyclicComplex
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 
 /-! # Copowers for proper geometric-point derived direct image
 
@@ -33,18 +28,12 @@ namespace AlgebraicGeometry.Etale
 Source: Stacks Project, Lemma 59.96.3 (Tag 0F11), used in Lemma 59.96.5 (Tag 0F12).
 (blueprint: lem-etale-proper-geometric-point-derived-copowers)
 
-Proof in words: choose a K-injective representative J of E with injective terms. The
-termwise sum of I copies of J represents this copower. Properness gives a finite-type
-scheme over k and hence a uniform finite torsion cohomological-dimension bound for finite
-coefficient sheaves. The module-cohomology forgetful comparison transfers this bound to
-modules. Module sheaves on Spec k are constant, identifying global cohomology with higher
-pushforward. Higher pushforward commutes with filtered colimits and finite sums, and thus
-with this copower. Consequently each term of the copower of J is pushforward-acyclic.
-The finite-dimension acyclic-complex theorem computes the unbounded derived pushforward
-by applying pushforward termwise. Its degree-zero copower comparison is invertible, so
-localizing this termwise comparison gives the required image colimit cocone. The positive
-additive characteristic of the finite ring supplies torsion, including the zero ring.
-For empty I the termwise complex and its direct image are zero. -/
+Proof in words: the additive group of a finite coefficient ring is torsion, including
+for the zero ring. Properness makes p finite type and qcqs. Apply the source-library
+finite cohomological-dimension theorem to p as a morphism of finite-type k-schemes,
+using the identity as the structure map on Spec k. The source-library coproduct theorem
+then shows that Rp_* preserves every I-indexed coproduct, hence the constant family at E.
+Both source theorems include empty schemes and empty indexing types. -/
 theorem proper_geometricPoint_preservesCopowers
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
@@ -53,6 +42,10 @@ theorem proper_geometricPoint_preservesCopowers
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     PreservesColimit (Discrete.functor (fun _ : I ↦ E))
       (R((p)_*[ModuleCat.{u + 1} Λ])) := by
-  sorry
+  have hΛ : IsAddTorsion Λ := isAddTorsion_of_finite
+  have hf := hasFiniteCohomologicalDimensionMorphism_of_isSepClosed_of_locallyOfFiniteType
+    Λ hΛ p (𝟙 _) p (Category.comp_id p)
+  have := preservesCoproducts_rightDerivedLowerStar Λ p hf I
+  infer_instance
 
 end AlgebraicGeometry.Etale
