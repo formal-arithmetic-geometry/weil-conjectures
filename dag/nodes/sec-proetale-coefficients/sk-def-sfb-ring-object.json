@@ -3,48 +3,138 @@
  "blueprint": {
   "is": "sk-def-sfb-ring-object",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Ring objects of abelian sheaves",
- "statement": "A *ring object* of a monoidal category $(\\mathcal C,\\otimes,\\mathbf 1)$ is a monoid\nobject. It consists of an object $R$, a *multiplication* $\\mu\\colon R\\otimes R\\to R$ and\na *unit* $\\eta\\colon\\mathbf 1\\to R$, such that $\\mu$ is associative,\n$\\mu\\circ(\\mu\\otimes\\mathrm{id})=\\mu\\circ(\\mathrm{id}\\otimes\\mu)\\circ\\alpha_{R,R,R}$, and\n$\\eta$ is a two-sided unit, $\\mu\\circ(\\eta\\otimes\\mathrm{id})=\\lambda_R$ and\n$\\mu\\circ(\\mathrm{id}\\otimes\\eta)=\\rho_R$. A *morphism of ring objects* is a morphism\ncompatible with the multiplications and the units. If $\\mathcal C$ is braided, the ring\nobject $R$ is *commutative* when $\\mu\\circ\\beta_{R,R}=\\mu$.\n\nThroughout, $\\Ab$ carries the tensor product $\\otimes_{\\mathbf Z}$ with unit $\\mathbf Z$.\nAbelian presheaves carry the objectwise tensor product. Abelian sheaves on a site $C$\ncarry its sheafification, the tensor product of [sk-def-sfb-sheaf-tensor] (with $C$ as\nthere, e.g. $X_{\\mathrm{proét}}$ or the site of profinite sets).\n\n1. Every ring $R$ is a ring object of $\\Ab$, with unit $\\mathbf Z\\to R$, $n\\mapsto n\\cdot1$,\n   and multiplication $R\\otimes_{\\mathbf Z}R\\to R$, $a\\otimes b\\mapsto ab$. A ring\n   homomorphism is a morphism of ring objects. If $R$ is commutative, so is the ring\n   object $R$.\n2. A presheaf of rings $P$ on $C$ is, objectwise as in 1, a ring object of abelian\n   presheaves, and a morphism of presheaves of rings is a morphism of ring objects. The\n   sheafification $aP$ of the underlying abelian presheaf is a ring object of\n   $\\Sh(C,\\Ab)$, commutative when all the rings $P(U)$ are.\n3. The abelian sheaf underlying a sheaf of rings $\\mathcal R$ on $C$ is a ring object of\n   $\\Sh(C,\\Ab)$, commutative when all the rings $\\mathcal R(U)$ are. A morphism of sheaves\n   of rings is a morphism of ring objects.",
+ "statement": "A *ring object* of a monoidal category $(\\mathcal C,\\otimes,\\mathbf 1)$ is a monoid\nobject. It consists of an object $R$, a *multiplication* $\\mu\\colon R\\otimes R\\to R$ and\na *unit* $\\eta\\colon\\mathbf 1\\to R$, such that $\\mu$ is associative,\n$\\mu\\circ(\\mu\\otimes\\mathrm{id})=\\mu\\circ(\\mathrm{id}\\otimes\\mu)\\circ\\alpha_{R,R,R}$, and\n$\\eta$ is a two-sided unit, $\\mu\\circ(\\eta\\otimes\\mathrm{id})=\\lambda_R$ and\n$\\mu\\circ(\\mathrm{id}\\otimes\\eta)=\\rho_R$. A *morphism of ring objects* is a morphism\ncompatible with the multiplications and the units. If $\\mathcal C$ is braided, the ring\nobject $R$ is *commutative* when $\\mu\\circ\\beta_{R,R}=\\mu$.\n\nThroughout, $\\Ab$ carries the tensor product $\\otimes_{\\mathbf Z}$ with unit $\\mathbf Z$.\nFor a site $C$ whose underlying category is essentially small, abelian presheaves carry\nthe objectwise tensor product, and abelian sheaves carry the sheafified objectwise tensor\nproduct: for abelian sheaves $\\mathcal F,\\mathcal G$,\n\n$$\n\\mathcal F\\otimes\\mathcal G:=a\\bigl(U\\longmapsto\\mathcal F(U)\\otimes_{\\mathbf Z}\\mathcal G(U)\\bigr),\n$$\n\nwith unit $a(\\underline{\\mathbf Z})$, where $a$ denotes sheafification. This applies,\nfor example, to $X_{\\mathrm{proét}}$ and to the site of profinite sets with the coherent\ntopology.\n\n1. Every ring $R$ is a ring object of $\\Ab$, with unit $\\mathbf Z\\to R$, $n\\mapsto n\\cdot1$,\n   and multiplication $R\\otimes_{\\mathbf Z}R\\to R$, $a\\otimes b\\mapsto ab$. A ring\n   homomorphism is a morphism of ring objects. If $R$ is commutative, so is the ring\n   object $R$.\n2. A presheaf of rings $P$ on $C$ is, objectwise as in 1, a ring object of abelian\n   presheaves, and a morphism of presheaves of rings is a morphism of ring objects. The\n   sheafification $aP$ of the underlying abelian presheaf is a ring object of\n   $\\Sh(C,\\Ab)$, commutative when all the rings $P(U)$ are.\n3. The abelian sheaf underlying a sheaf of rings $\\mathcal R$ on $C$ is a ring object of\n   $\\Sh(C,\\Ab)$, commutative when all the rings $\\mathcal R(U)$ are. A morphism of sheaves\n   of rings is a morphism of ring objects.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/_section.md",
   "place": "node sk-def-sfb-ring-object, order 850"
  },
  "stmt_deps": [
+  "det-def-sfb-ring-object-monoid",
   "sk-def-sfb-sheaf-tensor"
  ],
  "proof": [
   {
-   "text": "**1.** Multiplication $R\\times R\\to R$ is $\\mathbf Z$-bilinear, so it induces\n$\\mu\\colon R\\otimes_{\\mathbf Z}R\\to R$. Under $\\mathbf Z\\otimes_{\\mathbf Z}R\\cong R$, the\ncomposite $\\mu\\circ(\\eta\\otimes\\mathrm{id})$ sends $n\\otimes b$ to $nb$, so it is the\nleft unitor. The right unitor is treated in the same way. Associativity of $\\mu$ is\nchecked on pure tensors $a\\otimes b\\otimes c$, where it is associativity of the ring\nmultiplication. A ring homomorphism $f$ satisfies $f(ab)=f(a)f(b)$ and $f(1)=1$, which\nsays that $f$ commutes with $\\mu$ and with $\\eta$. If $R$ is commutative, then\n$\\mu(b\\otimes a)=ba=ab$, so $\\mu\\circ\\beta_{R,R}=\\mu$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "**2.** The monoidal structure on abelian presheaves is objectwise. So a ring object of\nabelian presheaves is the same as a functor from $C^{\\mathrm{op}}$ to ring objects of\n$\\Ab$, with multiplication and unit given objectwise. By 1, $P$ is such a functor, and\na natural transformation of presheaves of rings is objectwise a morphism of ring\nobjects. Sheafification $a$ is strong monoidal and braided by\n[sk-def-sfb-sheaf-tensor]. A strong monoidal functor carries a ring object\n$(M,\\mu,\\eta)$ to the ring object $aM$, with multiplication\n$aM\\otimes aM\\cong a(M\\otimes M)\\xrightarrow{a\\mu}aM$ and unit\n$\\mathbf 1\\cong a\\mathbf 1\\xrightarrow{a\\eta}aM$. A braided one preserves commutativity.\nApplying this to $P$ gives the ring object $aP$.",
+   "text": "Use the monoid-object definition of [det-def-sfb-ring-object-monoid] for the initial paragraph: its multiplication, unit, associativity and two unit equations are exactly the displayed equations here. Its morphisms preserve multiplication and unit, and its braided commutativity condition is exactly $\\mu\\circ\\beta_{R,R}=\\mu$. The tensor products and units in the second paragraph are those of [sk-def-sfb-sheaf-tensor], specialized to $\\mathcal A=\\Ab$; all sites below have the size convention stipulated there.",
    "uses": [
+    "det-def-sfb-ring-object-monoid",
     "sk-def-sfb-sheaf-tensor"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/_section.md",
+    "place": "Initial two paragraphs: monoid objects and the fixed tensor products"
+   }
   },
   {
-   "text": "**3.** Forgetting from rings to abelian groups preserves limits, so the abelian presheaf\nunderlying $\\mathcal R$ is a sheaf $\\mathcal R_{\\Ab}$. Since $\\mathcal R_{\\Ab}$ is a\nsheaf, the counit $a(\\mathcal R_{\\Ab})\\to\\mathcal R_{\\Ab}$ is an isomorphism. By 2,\n$a(\\mathcal R_{\\Ab})$ is a ring object. Transport its ring object structure, and\ncommutativity, along this isomorphism. For a morphism $f\\colon\\mathcal R\\to\\mathcal R'$\nof sheaves of rings, the underlying morphism of abelian sheaves is $a(f)$ conjugated by\nthe two counit isomorphisms, by naturality of the counit. Here $a(f)$ is a morphism of\nring objects by 2, and so are the two isomorphisms, by construction of the transported\nstructures. Hence $f$ is a morphism of ring objects.",
-   "uses": [],
-   "elementary": null
+   "text": "For clause 1, [det-def-sfb-ring-object-rings] supplies the object $(R,\\mu_R,\\eta_R)$ with precisely $\\mu_R(a\\otimes b)=ab$ and $\\eta_R(n)=n\\cdot1$, including its ring-object laws. Its second clause supplies preservation of the two structure maps by every ring homomorphism, and its third supplies commutativity when $R$ is commutative. Thus this is the construction of clause 1 with all its stated functoriality, for arbitrary unital rings, including the zero ring.",
+   "uses": [
+    "det-def-sfb-ring-object-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/_section.md",
+    "place": "Clause 1; detail det-def-sfb-ring-object-rings"
+   }
+  },
+  {
+   "text": "For the presheaf part of clause 2, at $U$ take the maps of step 2 for $P(U)$. For a restriction $r:P(U)\\to P(V)$, the identities $r(ab)=r(a)r(b)$ and $r(n\\cdot1)=n\\cdot1$ say exactly that these multiplication and unit maps are natural. The ring-object equations hold after evaluation at every $U$ by [det-def-sfb-ring-object-rings]. Since the presheaf tensor, associator, unitors and symmetry are objectwise, as stated in [det-def-sfb-sheaf-tensor-presheaf], these are the required equations of natural transformations. A presheaf ring map has components preserving multiplication and unit by step 2, hence does so as a natural transformation. If each $P(U)$ is commutative, the commutativity equation holds at every $U$ as well.",
+   "uses": [
+    "det-def-sfb-ring-object-rings",
+    "det-def-sfb-sheaf-tensor-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/_section.md",
+    "place": "Clause 2, first sentence: objectwise ring-object structure"
+   }
+  },
+  {
+   "text": "For the sheafification part of clause 2, [sk-def-sfb-sheaf-tensor] makes $a$ a strong symmetric monoidal functor. Apply [det-def-sfb-ring-object-transport] to the presheaf ring object just constructed. Its multiplication is $aP\\otimes aP\\xrightarrow{\\sim}a(P\\otimes_pP)\\xrightarrow{a\\mu_P}aP$, and its unit is $\\underline{\\mathbf Z}=a(\\underline{\\mathbf Z})\\xrightarrow{a\\eta_P}aP$, where the underlined integer object inside $a$ is the constant presheaf and the one outside is the constant sheaf. Clause 1 of the transport statement gives the ring-object laws and preservation of morphisms; clause 2 gives commutativity because a symmetric monoidal functor is braided. These are precisely the remaining assertions about $aP$.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "det-def-sfb-ring-object-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/_section.md",
+    "place": "Clause 2, second sentence: strong symmetric monoidal sheafification"
+   }
+  },
+  {
+   "text": "For clause 3 use [det-def-sfb-ring-object-sheaf], whose statement gives both that $S=\\mathcal R_{\\Ab}$ is a sheaf and that the counit $c:aS\\xrightarrow{\\sim}S$ identifies its ring structure with that on $aS$ constructed in step 4. Explicitly, if $(m,e)$ are the structure maps on $aS$, take $\\mu_S=c\\circ m\\circ(c^{-1}\\otimes c^{-1})$ and $\\eta_S=c\\circ e$. The cited statement identifies these maps with the unique extensions of the sectionwise product and of $n\\mapsto n\\cdot1$; thus the construction uses the actual underlying abelian sheaf. It also gives commutativity when the section rings are commutative. For completeness, preservation by a sheaf ring map $f:S\\to T$ can be read directly from that extension characterization: both $f\\mu_S$ and $\\mu_T(f\\otimes f)$ extend the presheaf map $(a,b)\\mapsto f(ab)=f(a)f(b)$, so uniqueness of extension makes them equal; similarly $f\\eta_S=\\eta_T$ because $f(n\\cdot1)=n\\cdot1$. This proves the morphism assertion without assuming that the inclusion of abelian sheaves into presheaves is strong monoidal.",
+   "uses": [
+    "det-def-sfb-ring-object-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/_section.md",
+    "place": "Clause 3: underlying abelian sheaf, counit transport and morphisms"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-sheaf-tensor"
+  "det-def-sfb-ring-object-monoid",
+  "sk-def-sfb-sheaf-tensor",
+  "det-def-sfb-ring-object-rings",
+  "det-def-sfb-sheaf-tensor-presheaf",
+  "det-def-sfb-ring-object-transport",
+  "det-def-sfb-ring-object-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/_section.md",
-  "place": "## Proof"
+  "place": "Initial definition and clauses 1–3; arguments made explicit using the existing detail nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "MonObj|IsMonHom",
+   "results": "{\"t\": \"2026-10-16T10:53:42Z\", \"tool\": \"grep\", \"query\": \"MonObj|IsMonHom\", \"sub\": \"Algebra/Category/Grp\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean\"], \"digest\": \"4c39acdaaf78240e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: the project-specific construction names are absent, and the second query only found a scoped MonObj notation in LeftExactFunctor.lean:73"
+  },
+  {
+   "tool": "grep",
+   "query": "ringMonObj|monObjCompForget|sheafifyRingPresheaf|monObj_sheafCompose|isMonHom_sheafCompose",
+   "results": "{\"t\": \"2026-10-16T10:53:42Z\", \"tool\": \"grep\", \"query\": \"ringMonObj|monObjCompForget|sheafifyRingPresheaf|monObj_sheafCompose|isMonHom_sheafCompose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: the project-specific construction names are absent, and the second query only found a scoped MonObj notation in LeftExactFunctor.lean:73"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The abelian sheaf underlying a sheaf of commutative rings is a commutative monoid object under tensor product",
+   "results": "{\"t\": \"2026-10-16T10:53:43Z\", \"tool\": \"leansearch\", \"query\": \"The abelian sheaf underlying a sheaf of commutative rings is a commutative monoid object under tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cartesianMonoidalCategory\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"CategoryTheory.Sheaf.monoidalCategory\", \"PresheafOfModules.Monoidal.tensorObj_obj\", \"SheafOfModules.toSheaf_obj_val\", \"CategoryTheory.CommGrp.toCommMon\", \"CategoryTheory.sheafIsAbelian\", \"SheafOfModules.instAbelian\"], \"digest\": \"ba67d889ad7100b5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: monoidalCategory and tensorProd_isSheaf are only partial machinery; the CartesianMonoidal hits use the cartesian tensor, not the tensor product over the integers"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonObj",
+   "results": "{\"t\": \"2026-10-16T10:53:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonObj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MonObj\", \"CategoryTheory.Mon.mk\", \"CategoryTheory.IsCommMonObj\", \"CategoryTheory.MonObj.instTensorUnit\", \"CategoryTheory.Mon.mon\", \"CategoryTheory.MonObj.ofIso\", \"CategoryTheory.instIsMonHomId\", \"CategoryTheory.MonObj.instIsMonHomId\"], \"digest\": \"249658bc4ba65062\"}",
+   "date": "2026-10-16",
+   "verdict": "partial match only: CategoryTheory.MonObj (Mon.lean:73), IsMonHom (Mon.lean:213), IsCommMonObj (Mon.lean:1222) define the initial paragraph; they do not state clauses 1–3"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of rings as monoid objects in the tensor category of sheaves of abelian groups",
+   "results": "{\"t\": \"2026-10-16T10:53:53Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of rings as monoid objects in the tensor category of sheaves of abelian groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafToPresheafMonoidal\", \"CategoryTheory.Sheaf.monoidalCategory\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.sheafToPresheaf_μ\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"SheafOfModules.unit\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\"], \"digest\": \"ac2f92dca64661a5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: hits give monoidal sheafification and sheaf-module constructions, not the ring/presheaf/sheaf assertions for tensor over the integers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf of rings gives a monoid object in abelian presheaves and sheafification gives a monoid object in abelian sheaves",
+   "results": "{\"t\": \"2026-10-16T10:53:54Z\", \"tool\": \"leanfinder\", \"query\": \"A presheaf of rings gives a monoid object in abelian presheaves and sheafification gives a monoid object in abelian sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.monoidalCategory\", \"SheafOfModules.unit\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.sheafToPresheafMonoidal\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf\"], \"digest\": \"eb37467c10aeee43\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: hits give monoidal sheafification and sheaf-module constructions, not the ring/presheaf/sheaf assertions for tensor over the integers"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps",
@@ -75,5 +165,20 @@
   "sketch"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-ring-object",
+  "worker": "stage1",
+  "summary": "Checked the current blueprint definition and all three construction clauses, searched the specified slopmaster2 Lean tree and Mathlib, and reused existing detail nodes. Added the monoid-object statement dependency and replaced implicit proof dependencies by five explicit steps, with no new nodes. The sheaf step uses the existing statement about the underlying sheaf and its counit/extension characterization, rather than assuming a monoidal inclusion of sheaves.",
+  "blueprint": "The initial definition and tensor convention are step 1; clause 1 is step 2; clause 2 is steps 3–4; clause 3 is step 5. Existing detail nodes det-def-sfb-ring-object-rings, det-def-sfb-ring-object-transport and det-def-sfb-ring-object-sheaf provide the non-elementary facts; the presheaf argument is pointwise."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N6-2b5f57a3b",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-2b5f57a3b (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, current blueprint sources, and target interfaces. All five steps are supported; tensor categories, transport maps, hypotheses, edge cases, and dependency acyclicity check out. No new nodes, repairs, or tool_uses. Full findings written to review.md."
+ }
 }
