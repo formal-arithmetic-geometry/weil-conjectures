@@ -29,9 +29,107 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The dimension-zero condition of [def-weil-pbc-trivial-kan-fibration] is surjectivity on vertices. For $s\\in S_0$, weak contractibility in [def-cbc-enhanced-diagrams-cones] makes the realization of $E_s$ nonempty, since its set of path components maps bijectively to that of a point. A nonempty realization has a representing simplex; restricting that simplex to a vertex gives a vertex of $E_s$. Thus $s$ has a lift. If $S$ is empty this condition is vacuous.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01A7",
+    "place": "Lemma 4.4.2.15, dimension-zero argument, with right/left interchanged."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ and a lifting square $a:\\partial\\Delta^n\\to E$, $\\sigma:\\Delta^n\\to S$. Put $X=\\Delta^n\\times_S E$ and $p:X\\to\\Delta^n$. For a right-horn square against $p$, compose its top map with $X\\to E$, lift against $q$, and pair this lift with the specified bottom map to $\\Delta^n$; the resulting pair lands in the pullback. Thus $p$ is a right fibration. The given boundary map is now $a':\\partial\\Delta^n\\to X$ over the boundary inclusion. Moreover $X$ is a quasicategory: an inner horn into $X$ projects to an inner horn in $\\Delta^n$; the latter fills because a simplex of $\\Delta^n$ is a weakly increasing list of vertices, and the vertices of an inner horn are weakly increasing (for a two-dimensional inner horn this follows from its two consecutive edges; in higher dimensions every edge is present). Fill the resulting square against $p$. The fiber $X_0$ over vertex $0$ is exactly $E_{\\sigma(0)}$ and is weakly contractible Kan by hypothesis. This argument uses only the degreewise pullback and horn definitions of [def-cbc-enhanced-diagrams-cones], and assumes nothing about $S$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01A7",
+    "place": "Lemma 4.4.2.15, pullback reduction to a standard simplex and the inner-horn check; right-handed dual."
+   }
+  },
+  {
+   "text": "Let $B=\\partial\\Delta^n$ and let $c:\\Delta^1\\times\\Delta^n\\to\\Delta^n$ be induced by the monotone map $c(0,j)=0$, $c(1,j)=j$. The inclusion $\\{1\\}\\hookrightarrow\\Delta^1$ is the right-horn inclusion $\\Lambda_1^1\\hookrightarrow\\Delta^1$. Apply [lem-coef-infinity-right-anodyne-product] to it and to the degreewise injective map $\\varnothing\\hookrightarrow B$: its pushout-product is $j:\\{1\\}\\times B\\hookrightarrow\\Delta^1\\times B$, so $j$ is right anodyne. Apply [lem-coef-infinity-right-fibration-exponentiation] to $p$ and $j$. By the internal-functor definition in [def-cbc-enhanced-diagrams-cones], the pair consisting of $c|_{\\Delta^1\\times B}$ and $a'$ is a vertex of the target of the resulting exponential restriction map. The dimension-zero surjectivity clause of [def-weil-pbc-trivial-kan-fibration] gives a source vertex. This is exactly a map $h':\\Delta^1\\times B\\to X$ with $ph'=c|_{\\Delta^1\\times B}$ and $h'|_{\\{1\\}\\times B}=a'$.",
+   "uses": [
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-right-anodyne-product",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01A7",
+    "place": "Lemma 4.4.2.15, boundary homotopy lift, right-handed dual; Kerodon Propositions 4.2.5.3 (0153) and 4.2.5.4 (0154)."
+   }
+  },
+  {
+   "text": "The restriction $h'|_{\\{0\\}\\times B}$ lands in $X_0$. The map $X_0\\to\\Delta^0$ is a Kan fibration: a lifting square against a horn is just a horn map into $X_0$, which extends since $X_0$ is Kan. This map is a weak homotopy equivalence by the weak-contractibility hypothesis. Apply the weak-equivalence-to-trivial-fibration implication of [lem-cbc-kan-fibration-fiber-criterion] to $X_0\\to\\Delta^0$. Its boundary-lifting conclusion extends the restriction to $v:\\Delta^n\\to X_0$. Glue $v$ and $h'$ along their identical restrictions on $\\{0\\}\\times B$, degree by degree. This gives a map $g_0:W_0=(\\Delta^1\\times B)\\cup(\\{0\\}\\times\\Delta^n)\\to X$ lying over $c$.",
+   "uses": [
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01A7",
+    "place": "Lemma 4.4.2.15 (01A7), contractible-fiber extension over the initial end of the prism, right-handed version; Proposition 3.3.7.6 (00ZP), (3) implies (1), applied only to the Kan fibration X_0 to a point."
+   }
+  },
+  {
+   "text": "Use [lem-coef-infinity-right-prism-boundary] in dimension $n$. Here is the explicit reindexing that puts its filtration at endpoint $0$. For a monotone $\\alpha:[r]\\to[s]$ define $\\alpha^{\\mathrm{rev}}(j)=s-\\alpha(r-j)$, and for a simplicial set $T$ define $T^{\\mathrm{rev}}_r=T_r$ with operator $T(\\alpha^{\\mathrm{rev}})$. This is an involutive reindexing functor: $(\\alpha\\beta)^{\\mathrm{rev}}=\\alpha^{\\mathrm{rev}}\\beta^{\\mathrm{rev}}$, so it preserves degreewise products, unions and pushouts. Identify $(\\Delta^a)^{\\mathrm{rev}}$ with $\\Delta^a$ by sending a degree-$r$ list $u$ to the list $j\\mapsto a-u(r-j)$. On the prism this sends the cited endpoint-$1$ filtration $X_k$ to a filtration $W_k$ beginning with the $W_0$ of step 4, ending at $W_{n+1}=\\Delta^1\\times\\Delta^n$, and satisfying $W_{k+1}=W_k\\cup\\operatorname{im}(\\theta_k)$. The reversed cell $\\sigma_k$ has ordered vertices $(0,0),\\ldots,(0,n-k),(1,n-k),\\ldots,(1,n)$. Reversing the $n+2$ domain vertices sends the omitted face $k+1$ to $n-k$. Thus each $W_k\\hookrightarrow W_{k+1}$ is the pushout of $\\Lambda_{n-k}^{n+1}\\hookrightarrow\\Delta^{n+1}$ along this cell; the map $\\theta_k$ is degreewise injective since its displayed vertices are distinct. This also proves $\\theta_k^{-1}(W_k)=\\Lambda_{n-k}^{n+1}$, since the pushout is computed degreewise and both attaching maps are injective. For $k=0,\\ldots,n-1$, inductively compose $g_k$ with the horn attaching map and use the bottom map $c\\theta_k$. Since $1\\leq n-k\\leq n$, the right-fibration property of $p$ supplies a filler. The pushout glues it with $g_k$ to $g_{k+1}$ over $c$. This constructs $g_n$. When $n=1$, the first cell has vertices $(0,0),(0,1),(1,1)$ and attaches along $\\Lambda_1^2$.",
+   "uses": [
+    "lem-coef-infinity-right-prism-boundary",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01A7",
+    "place": "Kerodon Lemma 4.4.2.15 (01A7), right-handed dual of the finite prism induction; Lemma 3.1.2.12 (00TH), dual filtration with forward stage k and horn n-k."
+   }
+  },
+  {
+   "text": "The final pushout obtained in step 5 from [lem-coef-infinity-right-prism-boundary] attaches $\\theta_n$ with vertices $(0,0),(1,0),(1,1),\\ldots,(1,n)$ along $\\Lambda_0^{n+1}$. Its initial edge lies in $\\Delta^1\\times\\partial\\Delta^n$, because $n\\geq1$ puts vertex $0$ in that boundary, and its projection under $c$ is constant at $0$. Consequently its image $e:x\\to y$ under $g_n$ is an edge of the Kan fiber $X_0$. We check explicitly that its image in $X$ is an equivalence in the sense of [def-cbc-enhanced-diagrams-cones]. Fill in $X_0$ the horn $\\Lambda_0^2$ whose edges $01$ and $02$ are $e$ and $\\mathrm{id}_x$. Write $\\tau$ for the filler and $g:y\\to x$ for its edge $12$, so $\\tau$ witnesses $ge=\\mathrm{id}_x$. Next fill $\\Lambda_0^3$ with faces $d_1=s_0e$, $d_2=s_1e$ and $d_3=\\tau$; their shared edges agree, with vertices $(x,y,x,y)$. Its face $d_0$ has edges $01=g$, $12=e$, $02=\\mathrm{id}_y$ and witnesses $eg=\\mathrm{id}_y$. Applying the inclusion $X_0\\to X$ preserves both triangles and identity edges. The quasicategory $X$ from step 2 therefore satisfies the initial-edge hypothesis of [lem-cbc-equivalence-outer-horn-filling] with $m=n+1\\geq2$. That node gives an absolute filler $w:\\Delta^{n+1}\\to X$ for the prescribed horn. Every vertex lies in this horn, so $pw$ and $c\\theta_n$ agree on vertices; maps from $\\Delta^{n+1}$ to $\\Delta^n$ are determined by their monotone vertex lists. Thus $pw=c\\theta_n$. The final pushout glues $w$ with $g_n$ to $h:\\Delta^1\\times\\Delta^n\\to X$ over $c$, retaining $h'$ on the boundary cylinder. For $n=1$, faces $1$ and $2$ of this last cell are the previously attached diagonal and the edge over vertex $0$; face $0$, the time-one edge, is absent. The attaching domain is $\\Lambda_0^2$.",
+   "uses": [
+    "lem-coef-infinity-right-prism-boundary",
+    "lem-cbc-equivalence-outer-horn-filling",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01A7",
+    "place": "Lemma 4.4.2.15, final exceptional horn, right-handed dual; Theorem 4.4.2.6 (019F), initial-edge version."
+   }
+  },
+  {
+   "text": "Restrict $h$ to $\\{1\\}\\times\\Delta^n$ and project $X\\to E$. Since $c(1,j)=j$, its composite with $q$ is exactly $\\sigma$. Since $h$ agrees with $h'$ on $\\Delta^1\\times\\partial\\Delta^n$, its boundary is exactly $a$. This solves the arbitrary positive-dimensional boundary square. Together with step 1 it is precisely the definition of trivial Kan fibration in [def-weil-pbc-trivial-kan-fibration].",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01NU",
+    "place": "Proposition 4.4.2.14 (01NU), (3) implies (1), after its cited Lemma 4.4.2.15."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "lem-coef-infinity-right-anodyne-product",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-infinity-right-prism-boundary",
+  "lem-cbc-equivalence-outer-horn-filling"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01A7",
+  "place": "Right-handed dual of Kerodon Lemma 4.4.2.15, as instructed by Proposition 4.4.2.14 (3) to (1). Expanded cylinder lift, fiber extension and final initial-horn argument. Online source read; archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,10 +186,38 @@
    "results": "{\"t\": \"2026-10-16T14:13:27Z\", \"tool\": \"grep\", \"query\": \"RightFibration|right_fibration|rightFibration|over.*quasicategory|quasicategory.*over\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: the pinned Mathlib AlgebraicTopology source returned zero hits for right-fibration identifiers or over/quasicategory combinations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right fibration of simplicial sets with weakly contractible Kan fibers is a trivial Kan fibration",
+   "results": "{\"t\": \"2026-10-16T15:07:45Z\", \"tool\": \"leanfinder\", \"query\": \"A right fibration of simplicial sets with weakly contractible Kan fibers is a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.isFibrant_iff\", \"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjFibrantObjects\", \"HomotopicalAlgebra.FibrantObject\"], \"digest\": \"d1cd7cd7ea9ca093\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryWithFibrations.lean:38-105 and ModelCategory/CategoryWithCofibrations.lean:108-124. The hits either assume all horns or assume a global weak equivalence; they do not derive boundary lifting from right horns and weakly contractible vertex fibers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"horn\", \"fibration\"",
+   "results": "{\"t\": \"2026-10-16T15:07:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"horn\\\", \\\"fibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\"], \"digest\": \"8c50919941ce7237\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryWithFibrations.lean:38-105 and ModelCategory/CategoryWithCofibrations.lean:108-124. The hits either assume all horns or assume a global weak equivalence; they do not derive boundary lifting from right horns and weakly contractible vertex fibers."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?fibration|contractib.*fiber|fiber.*contractib",
+   "results": "{\"t\": \"2026-10-16T15:07:44Z\", \"tool\": \"grep\", \"query\": \"right.?fibration|contractib.*fiber|fiber.*contractib\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryWithFibrations.lean:38-105 and ModelCategory/CategoryWithCofibrations.lean:108-124. The hits either assume all horns or assume a global weak equivalence; they do not derive boundary lifting from right horns and weakly contractible vertex fibers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right horn lifting simplicial map with contractible vertex fibers has the right lifting property against boundaries",
+   "results": "{\"t\": \"2026-10-16T15:07:45Z\", \"tool\": \"leansearch\", \"query\": \"A right horn lifting simplicial map with contractible vertex fibers has the right lifting property against boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasLiftingPropertyFixedBot\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.MorphismProperty.rlp\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.KanComplex\", \"CategoryTheory.HasLiftingProperty.mk\"], \"digest\": \"eff7ad2ff30dddb5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryWithFibrations.lean:38-105 and ModelCategory/CategoryWithCofibrations.lean:108-124. The hits either assume all horns or assume a global weak equivalence; they do not derive boundary lifting from right horns and weakly contractible vertex fibers."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-normalized-final-cone",
   "by": "worker",
@@ -107,5 +233,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-right-fibration-contractible-fibers",
+  "worker": "stage1",
+  "summary": "Second reader removed both new auxiliaries: the fresh delivery baseline supplies the existing right-prism filtration and equivalence outer-horn theorem. Step 5 derives the endpoint-zero filtration by explicit reversal of simplicial operators, cells and face indices; step 6 constructs inverse witnesses with Kan horns and applies the existing outer-horn theorem. Statements unchanged; citations regenerated. Step 4 uses the existing Kan-fibration fiber criterion rather than the now-circular Kan-model theorem.",
+  "blueprint": "Proof paragraph 2: derived coefficient adjunction, via stable enhancement and final-index colimits; normalized final-cone auxiliary. Steps 1-7 realize the right-handed contractible-fiber criterion with the explicitly indexed prism filtration; no change of unit route or item statement.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Uses the explicit simplicial-set, pullback, Kan, weak contractibility and quasicategory definitions as generic foundations; this unit has no separate definition of these notions."
+   },
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Generic outer-horn lifting theorem for quasicategories, used solely for the final prism cell whose initial edge has explicit inverse triangles in the Kan fiber. No statement of this unit supplies the outer-horn extension theorem."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Generic Kan-fibration weak-equivalence/boundary-lifting criterion, applied only to the map from the Kan complex X_0 to a point. Replaces the Kan-model theorem, whose newer split depends on this item, and avoids that dependency cycle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-kan-fibration-fiber-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-5a29d9c8b",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-5a29d9c8b (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources and unit/chapter route. Verified all seven steps, reversed prism overlaps, inverse-triangle compatibility, arbitrary-base hypotheses and dependency acyclicity. Independent checks passed for dimensions 0–7. No new nodes or repairs; accepted the three declared tool uses. Detailed findings are in review.md."
  }
 }

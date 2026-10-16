@@ -26,9 +26,63 @@
  "stmt_deps": [
   "lem-coef-dgcat-free-cell-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The free-cell conventions give an R-linear dg category with cochain Hom complexes, associative composition, and the signed Leibniz rule. For right dg modules, graded module maps form complexes with differential ∂q=d_Nq-(-1)^nq d_M; the module action identities imply ∂²=0, and composition obeys the dg Leibniz rule. Thus the stated objects and morphism complexes form the dg category dgMod(A).",
+   "uses": [
+    "lem-coef-dgcat-free-cell-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Chapter 1, §1.2, Definition 1.1, printed p. 25, and Example 1.2 / Definitions 1.3–1.4, printed p. 26; direct verification for graded right-module maps."
+   }
+  },
+  {
+   "text": "For a homogeneous module map q:h_x→M of degree n, set m=q_x(1_x). Right-linearity forces q_z(a)=m a for every homogeneous a∈A(z,x), and the module action constructs a unique map from every homogeneous m∈M(x). Evaluating the differential of q at 1_x gives the differential of m, so evaluation is a bijection commuting with differentials and hence an isomorphism of complexes. Evaluation also sends composition with representable maps to the module action.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Chapter 1, §1.2, Definitions 1.3–1.4, printed p. 26 (module maps and representable Yoneda functor); the evaluation-at-identity calculation is supplied explicitly here by the agent, rather than quoted as a calculation printed in the source."
+   }
+  },
+  {
+   "text": "For each closed degree-zero u:x→y, the shifted direct sum h_y⊕h_x[1] with the displayed action and differential D_u is a right dg module: the off-diagonal terms in D_u² cancel because du=0. Take labels h_x for all x and one label C_u for each such u; this is a small set because A is small and each Hom complex is small. The full dg subcategory on these modules is Cone(A). The Yoneda calculation identifies the Hom complex between h_x and h_y with A(x,y), so x↦h_x is a dg embedding preserving units and composition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Chapter 1, §1.3, proof of Proposition 1.7, printed p. 27 (cone module and differential), and §1.3.1, proof of Lemma 1.10, printed p. 29 (full representable/cone subcategory); labelled small-category version checked directly."
+   }
+  },
+  {
+   "text": "A homogeneous map between the two-term direct sums is determined by its four component maps. Accounting for the shift h_x[1]^j=h_x^{j+1} places a degree-n map C_u→C_v in the four Hom complexes A(y,y')^n, A(x,y')^{n-1}, A(y,x')^{n+1}, and A(x,x')^n. Matrix composition is ordinary graded composition of components, while the module-map differential is D_vM-(-1)^nMD_u. Specializing the source to h_z and the target to C_u gives the displayed cone of A(z,x)→A(z,y), with differential (a,b)↦(da+ub,-db). The four coordinate inclusions and projections have the stated degrees and graded biproduct identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Chapter 1, §1.3, proof of Proposition 1.7, printed p. 27 (degree-minus-one matrix and commutator differential); general-degree and two-cone formulas checked directly by the agent."
+   }
+  },
+  {
+   "text": "For a dg functor F:A→B, applying F to each representable action, closed arrow label, and matrix component preserves module-linearity, differentials, identities, and composition. It therefore sends h_x to h_{F(x)} and C_u to C_{F(u)}, defining a dg functor Cone(A)→Cone(B); the construction is compatible with composition of dg functors because every component is obtained by applying F entrywise.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Chapter 1, §1.3.1, proof of Lemma 1.10, printed p. 29 (extension to the representable/cone subcategory); simultaneous labelled cone functoriality checked directly entrywise."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dgcat-free-cell-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/0710.4303",
+  "place": "Chapter 1, §1.2, Example 1.2 and Definitions 1.3–1.4, printed p. 26; §1.3, proof of Proposition 1.7, printed p. 27; §1.3.1, proof of Lemma 1.10, printed p. 29. Evaluation Yoneda, arbitrary-degree matrices, labels and functoriality are explicit agent calculations."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -102,7 +156,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dgcat-equivalence-cell-calculus",
@@ -119,5 +173,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dgcat-formal-cone-enlargement",
+  "worker": "stage1",
+  "summary": "Split the strict dg Yoneda and formal cone construction into direct checks: dg-module complex structure, evaluation Yoneda isomorphism, existence and full embedding of the labelled cone category, shifted matrix Hom calculations, and entrywise functoriality. No new node was needed because each remaining argument is an elementary calculation from the definitions and the cited dg-category conventions.",
+  "blueprint": "The steps realize the strict representable-module and cone-matrix construction in the finite mapping-complex adjunction paragraph of the ancestor prop-coef-integral-exceptional-adjoint, via the imported dg-category equivalence-cell route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q34-59830d51f",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-59830d51f (reviewer sub-agent of L); spot-checked: Read the full item, five proof steps, cited statement, route and source passages. Module, shift, Yoneda and matrix calculations pass the edge-case checks; no new nodes or major gaps. Corrected inaccurate Tabuada proof citations in the review-local whole-node JSON. Statement and targets remain unchanged. Detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
