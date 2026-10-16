@@ -247,5 +247,24 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-4787977b1 (reviewer sub-agent of L); spot-checked: I read the item statement, all six steps and all eight cited statements in full. Source: HTT Prop 4.3.1.10 (printed p.265, proof p.266), read in the IAS PDF fetched to /tmp. It assumes a locally cocartesian fibration, an arbitrary K, a cocone in X_s and every e:s->s'; the item is its cocartesian special case and is not weakened. Kerodon 02X1 (7.1.6.19) gives the constant-test convention. Small cases agree: K empty or a point, p=id, a product fibration, and the Grothendieck construction over Delta^1 with a non-initial transport. Steps 2, 4, 5 and 6 are correct as written; step 4's naturality square is a restriction of one coherent cylinder. Two repairs. (1) Step 1 (E5/C4): it chose a separate lift c_f and claimed without citation that it represents f_!c. It now takes lambda=H(c x id) from f_!'s transport homotopy, so c_f=f_!c literally, and the componentwise criterion makes lambda and its restrictions cocartesian. (2) Step 3 (C1): homotopy-fiber-detection needs P_z to be a Kan complex. It now cites lem-coef-kan-pullback-path-comparison (same unit, no cycle), which is also added to proof_deps. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus in steps 5-6, a generic cocone criterion already accepted as a tool elsewhere. No SGA, no target node, unit realized fields unchanged. Existing unsplit node lem-coef-local-fiber-relative-colimit-test states the locally-cocartesian generalization; the report missed it, but both nodes predate the delivery and both are kept.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-645b149a9",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Item statement and Lean match clause by clause: quasicategories E,B; cocartesianFibration p; vertex b; arbitrary K:SSet.{u}; c : rightJoinCone K ⟶ fiber p b; inclusion c ≫ pullback.snd; IsRelativeColimitDiagram p; ↔; every edge with correct δ1/δ0 source/target; f_! given by universal (T,H) presentations (SSet.Homotopy from the inclusion to T≫inclusion, over f, cocartesian components), the DAG's own transport-functor wording, never vacuous by pointwise cocartesian transport and independent of the choice; the transported cone is c ≫ T. The colimit in E_b' is rendered as IsRelativeColimitDiagram over E_b'→Δ[0] (HTT Ex. 4.3.1.3; landed precedent parameter_cone_extension), provable from the recorded proof dep lem-coef-infinity-relative-cone-constant-test, so no new notion and no unstated bridge. Edge cases checked: identity edge, empty K, K=Δ0, disconnected K, empty B/E/fiber, p=id, product fibration; single universe u, nothing unbound. Gates: one theorem with whole-proof sorry, no definitions or axioms, HTT 4.3.1.10 source place and blueprint docstrings with the six proof steps, statement byte-identical, node diff only the lean record, both report sections present. Per-file compile via nt_compile.py --json: 30 imports then the module in 1.6 s, exit 0, no diagnostics; no lake build."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiberRelativeColimitCriterion",
+  "declaration": "SSet.Enhanced.fiber_relative_colimit_criterion",
+  "file": "lean/Sheaf/CategoryTheory/FiberRelativeColimitCriterion.lean",
+  "statement": "theorem fiber_relative_colimit_criterion {E B K : SSet.{u}} [Quasicategory E] [Quasicategory B] (p : E ⟶ B) (hp : cocartesianFibration p) (b : B _⦋0⦌) (c : rightJoinCone K ⟶ fiber p b) : IsRelativeColimitDiagram p (c ≫ pullback.snd _ _) ↔ ∀ (b' : B _⦋0⦌) (f : Δ[1] ⟶ B), stdSimplex.δ 1 ≫ f = SSet.const b → stdSimplex.δ 0 ≫ f = SSet.const b' → ∀ (T : fiber p b ⟶ fiber p b') (H : SSet.Homotopy (pullback.snd (SSet.const (X := Δ[0]) b) p) (T ≫ pullback.snd (SSet.const (X := Δ[0]) b') p)), H.h ≫ p = snd (fiber p b) Δ[1] ≫ f → (∀ y : (fiber p b) _⦋0⦌, IsCocartesianEdge p (lift (SSet.const y) (𝟙 Δ[1]) ≫ H.h)) → @IsRelativeColimitDiagram K (fiber p b') Δ[0] ((quasicategory_iff_of_isTerminal (pullback.fst (SSet.const (X := Δ[0]) b') p) stdSimplex.isTerminalObj₀).mpr ⟨innerFibrations.pullback_fst _ _ hp.1.mem⟩) ((quasicategory_iff_of_isTerminal (𝟙 Δ[0]) stdSimplex.isTerminalObj₀).mpr ⟨innerFibrations.id_mem _⟩) (stdSimplex.isTerminalObj₀.from (fiber p b')) (c ≫ T)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Cocartesian transport is quantified through its actual fiber functor and coherent cylinder over each specified edge, with all vertex components cocartesian. The transported cone is c ≫ T. Ordinary join colimits are the terminal-base case of the existing relative predicate (HTT Example 4.3.1.3); fiber and point quasicategory structures are obtained directly from Mathlib, without added assumptions or postponed helpers."
  }
 }

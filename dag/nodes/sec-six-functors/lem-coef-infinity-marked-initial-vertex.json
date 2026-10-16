@@ -26,7 +26,8 @@
   "place": "Agent combinatorial consequence of HTT Definition 3.1.1.1 (opposite marked horn and triangle generators), with the relative parameter clause given by Proposition 3.1.2.3 under opposite reversal. The explicit subset/horn filtration is recorded in the second-reading report; Corollary 2.3.2.5 is an exponentiation result and is not cited as a spine-filtration theorem. Read directly in the IAS PDF. No Stacks tag states this marked assertion."
  },
  "stmt_deps": [
-  "def-coef-infinity-marked-coanodyne"
+  "def-coef-infinity-marked-coanodyne",
+  "lem-cbc-spine-inner-anodyne"
  ],
  "proof": [
   {
@@ -279,5 +280,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79703bed3",
+  "group": "N2",
+  "result": "pass",
+  "note": "Clause-by-clause match: markedCoanodyne of sharpMap of face {0} and simplexSpine n (spine condition = consecutive-edge union, I^0=Δ^0); relative clause via markedCoanodyne.rlp q, U restricted to the two inclusions, [Mono i] flat, IsPushoutProduct (real pushout plus restriction equations) and HasLiftingProperty; no extra hypotheses, single bound universe u. Node changed only in lean and stmt_deps (+landed lem-cbc-spine-inner-anodyne, allowed); dependency nodes identical to side; lean.statement verbatim. No new definitions, one sorry, docstrings with source/blueprint/proof steps, no duplicate found. nt_compile --json rc=0, no errors or warnings. Edge cases n=0,1,2, empty T, boundaries, identity i covered. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedSimplexSpineExtension",
+  "declaration": "SSet.Marked.marked_simplex_spine_extension",
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedSimplexSpineExtension.lean",
+  "statement": "theorem marked_simplex_spine_extension (n : ℕ) : markedCoanodyne (sharpMap (stdSimplex.face.{u} {(0 : Fin (n + 1))}).ι) ∧ markedCoanodyne (sharpMap (simplexSpine.{u} n).ι) ∧ (∀ {X Y : Marked.{u}} (q : X ⟶ Y), markedCoanodyne.rlp q → ∀ (U : (Δ[n] : SSet.{u}).Subcomplex), (U = stdSimplex.face.{u} {(0 : Fin (n + 1))} ∨ U = simplexSpine n) → ∀ {T T' : SSet.{u}} (i : T ⟶ T') [Mono i] (P : Marked.{u}) (p : P ⟶ product (sharp (Δ[n] : SSet.{u})) (flat T')), IsPushoutProduct (sharpMap U.ι) (flatMap i) p → HasLiftingProperty p q)",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

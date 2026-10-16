@@ -293,5 +293,29 @@
   "group": "Q76",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-d0dcd2c13 (reviewer sub-agent of L); spot-checked: I read the item, all five steps and the full statement of its only dependency, lem-coef-hammock-graph-colimit-presentation (reviewed, same unit, so no tool_uses). The delivery creates no new nodes. Statement: this is Dwyer–Kan Proposition 3.1 for an arbitrary small C and wide W, with nothing added or dropped and no target weakened. I checked it on empty C, discrete C, W of identities only, C=(a→b) with W=C, and an identity w. Step 2: I re-derived the leftward square b_i v_i=v_{i-1}a_i ⇒ b_i^{-1}v_{i-1}=v_i a_i^{-1}, and the products telescope to identical row products because the endpoint verticals are identities. Step 3: I checked all four squares of the (+,−) and (−,+) cancellation rectangles. They need only the downward vertical w in W and give k(w)j(w)=1_a and j(w)k(w)=1_b. Step 1 (composition descends) and Step 4 (J respects all relations, FJ=1 on generators, JF=1 on reduced rows since prefixes of reduced rows are reduced) are correctly marked non-elementary and fully written. Both rely only on reduction being compatible with the colimit isomorphism and the simplicial operators, which the cited statement gives. Step 5's naturality holds without faithfulness. Duplicates: I scanned all 106 hammock nodes with rg. None states this result. The parent free-factor comparison is stronger and cites this item, so the item is not a restated clause and there is no cycle. proof_deps equals the union of the uses, the searches cover all three kinds, and no SGA source is cited. Caveat: the DK PDF has no local copy and network access is blocked here, so I could not open the source at its cited place. It remains WANTED with proof_origin=agent, and I judged the proof as a self-contained argument. I made no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e2c517e4",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Commit 4e2c517e4f63 adds only the report, the item's lean record and the new module; no new nodes, no statement_change. Every node clause matches the Lean. W is IsMultiplicative. H is the dependency's HammockLocalization. Target is Mathlib's W.Localization. hammockRowProduct is a real Paths.lift and inverts leftward arrows in the right direction (wInv). equiv is an Equiv on SSet.pi0, fixed by row_formula at n=0 plus pi0.mk surjectivity. Identity and composition laws hold on vertex representatives. Naturality pins h by apply-then-reduce, L by W.Q⋙L=T⋙V.Q, and B by its row_formula; HEq only transports endpoints. No extra hypotheses. Edge cases checked: empty C, empty mapping spaces, length-0, n=0, identity marked arrows, W trivial or all arrows, collapsing functors. Same-universe target for naturality is inherited from the dependency's hammockMapPath/NaturalFor and documented; not silent. No duplicate (FreeFactorHammockComparison has only an inline row evaluation). Docstrings carry source and blueprint; sorry only in the theorem; statement verbatim; no line over 100 chars; report has Worker report and Second reading by Q03. nt_compile.py --json against the local side overlay: exit 0, 1.5 s, no errors or warnings. Observation only: HammockLocalization lives in a downstream node's module, so the stage-3 proof of hammockLocalization_universal must avoid an import cycle."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HammockComponentsLocalization",
+  "declaration": "CategoryTheory.hammock_components_localization",
+  "declarations": [
+   "CategoryTheory.hammockRowProduct",
+   "CategoryTheory.HammockComponentComparison",
+   "CategoryTheory.HammockComponentNaturality",
+   "CategoryTheory.hammock_components_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/HammockComponentsLocalization.lean",
+  "statement": "theorem hammock_components_localization (W : MorphismProperty C) [W.IsMultiplicative] (H : HammockLocalization W) : ∃ A : HammockComponentComparison H, HammockComponentNaturality A",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
