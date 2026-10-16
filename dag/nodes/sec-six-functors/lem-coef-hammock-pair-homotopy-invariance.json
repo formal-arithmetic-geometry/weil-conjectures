@@ -26,7 +26,8 @@
   "place": "Dwyer–Kan, Calculating simplicial localizations, Lemma 2.4, printed p.20; proof in Section 5.6 via Lemma 5.7 and Sections 9–10 No Stacks tag states this simplicial-localization result."
  },
  "stmt_deps": [
-  "lem-coef-coherent-nerve-comparison"
+  "lem-coef-coherent-nerve-comparison",
+  "def-coef-simplicial-hammock-pair"
  ],
  "proof": [
   {
@@ -207,5 +208,23 @@
   "group": "Q50",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-78ecc48e6 (reviewer sub-agent of L); spot-checked: PASS with no fixes. Caveat: the Dwyer–Kan PDF is not in literature/ and network access is blocked here, so I checked Lemma 2.4, Def 2.1, Prop 4.5, Def 5.1, Props 5.4–5.5 and Lemma 5.7 from my own knowledge of the paper; page numbers are unconfirmed, and I verified every step mathematically on its own. The item statement is unchanged against the side DAG and is DK Lemma 2.4 with all hypotheses; this is not a target node, so there is no base-change or coefficient check. Step 1: functors preserve composites and identities, so the word operators commute with both simplicial directions (elementary). Step 2: D_C(h) is exactly D^w of lem-coef-fixed-hammock-graph-homotopy-invariance, and all its hypotheses are present. Step 3: properness of the diagonal follows from ordinary properness of G_{C_n,W_n} in degree (n,n), which matches the two clauses of lem-coef-proper-word-colimit-invariance. Step 4: that node applies directly. Step 5: colimits are degreewise, the presentation isomorphism and its naturality make the identification simplicial, and on representatives the colimit map is 'apply S, then reduce'. Fixed-word node (DK 5.7): self-contained statement only; I tested the empty word, (+) giving A(x,y), (−) giving U(y,x), and (+,+) as a bar construction; strictly smaller than the item. Presentation node (DK 5.4–5.5): properness checked (insertions are injective, the intersection of insertion images is an insertion image); reduction is well defined (terminating, critical pairs close, each move is an 𝓘-morphism), so the colimit is the set of reduced hammocks; discrete and composite-identity cases checked. No duplicates after reading every hammock/DK node in sec-six-functors; dropping the earlier proper-colimit duplicate was correct. The dependency graph is acyclic, all cited nodes are in the same unit, there are no tool_uses, no SGA, and both new nodes record LeanSearch, LeanFinder/Loogle and grep searches."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-340264dde",
+  "group": "Q100",
+  "result": "fix",
+  "note": "Lean statement and new definition are correct: every hypothesis and conclusion clause of DK Lemma 2.4 is matched (fixed objects via O-equivalences; wide subcomplex-closed subcategories; mapping and marked-mapping w.h.e., the marked map pinned to the restriction of S; diagonal = width-n reduced grids in the evaluated degree category A_n (rfl-checked); both operators applied together; identity = nil; concatenate then reduce; comparison pinned to applying S_n then reducing). Unique reduced forms make the structure determined and non-vacuous. Edge cases (empty O, x=y nil, n=0, identities-only U, one universe u) and gates (no hollow defs, only the theorem is sorry, docstrings, line lengths, imports, verbatim records) pass. No duplicate (Mathlib lacks the evaluation monoidal instance; DkDiagonalHammock is a special case). nt_compile of both files: exit 0, no diagnostics. Fault repaired (H12, stmt_deps): the new node def-coef-simplicial-hammock-pair cited lem-coef-hammock-infinity-localization, closing the DAG cycle item->def->hammock-infinity->(proof) dk-cofibrant->(proof) item, which check_dag refuses. fixes/def-coef-simplicial-hammock-pair.json drops that stmt_dep and states H(P,T) and reduction in place, matching the landed dk-cofibrant precedent; the SCC re-check finds no cycle touching the delivery. fixes/<item>.report.md appends a note on the fix. Lean files unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HammockPairHomotopyInvariance",
+  "declaration": "CategoryTheory.hammock_pair_homotopy_invariance",
+  "file": "lean/Sheaf/CategoryTheory/HammockPairHomotopyInvariance.lean",
+  "statement": "theorem hammock_pair_homotopy_invariance (C : SimplicialHammockComparison.{u}) : ∀ (x y : CoherentNerve.underlying C.A), SSet.Enhanced.IsWeakHomotopyEquivalence (C.comparison x y)",
+  "branch": "newtargets-dag",
+  "by": "Q100",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

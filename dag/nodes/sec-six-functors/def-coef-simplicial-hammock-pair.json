@@ -1,0 +1,170 @@
+{
+ "id": "def-coef-simplicial-hammock-pair",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "the reduced commutative rectangular hammock mapping object and its row/concatenation operations used in the statement",
+   "via": [
+    "lem-coef-hammock-pair-homotopy-invariance",
+    "lem-coef-dk-cofibrant-localization-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Reduced hammock mapping objects for simplicial pairs",
+ "status": "split",
+ "statement": "For a small simplicial category $A$ [lem-coef-coherent-nerve-comparison], its ordinary degree category $A_n$ has the same objects and mapping sets $A(x,y)_n$, with evaluated identities and composition. A wide simplicial subcategory $U$ is a family of mapping simplicial subsets containing identities and closed under composition in every degree; $U_n$ is the corresponding wide subcategory of $A_n$. For an ordinary category $P$ with a wide subcategory $T$, write $H(P,T)(x,y)_k$ for the set of reduced commutative rectangular zigzags with $k+1$ rows from $x$ to $y$: vertical arrows point down and lie in $T$, endpoint vertical arrows are identities, each horizontal column has uniform direction, leftward arrows lie in $T$, adjacent columns point in opposite directions, and no column is entirely identities; the length-zero diagram is included when $x=y$. Reduction deletes identity columns and composes adjacent columns with the same direction. Define the diagonal reduced hammock enriched category by $\\operatorname{diag}H(A,U)(x,y)_n=H(A_n,U_n)(x,y)_n$. Both simplicial operators act together: apply the operator of $A,U$ to every arrow and delete or repeat the corresponding rows, then reduce. The enriched identity is the empty path, and enriched composition concatenates and reduces. For a fixed-object simplicial functor $S:(A,U)\\to(B,V)$, its marked mapping map is its restriction (commuting with the mapping-subset inclusions), and the diagonal comparison applies $S_n$ to every grid arrow before reduction.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Dwyer--Kan, Sections 1.2, Definition 2.1, Lemma 2.4, Remark 2.5, and Definition 5.1, printed pp.18--20 and 24"
+ },
+ "stmt_deps": [
+  "lem-coef-coherent-nerve-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "reduced hammock mapping simplicial set for a simplicial category pair",
+   "results": "No result for reduced hammock pair; only ordinary localization and model-category declarations.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "reduced hammock mapping simplicial set for a simplicial category pair",
+   "results": "Top results are CategoryTheory.SimplicialCategory.sHom and CategoryTheory.SimplicialThickening.SimplicialCategory.Hom; neither defines Dwyer--Kan reduced hammocks.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hammock\"",
+   "results": "0 hits; no Mathlib hammock declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|Hammock|ReducedHammock (Mathlib)",
+   "results": "No hammock declaration in Mathlib; the only grep hits are generic Zigzag declarations.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|Hammock|ReducedHammock (WeilConjectures)",
+   "results": "No source-repository declaration of this simplicial-pair notion.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|Hammock|ReducedHammock (lean/Sheaf)",
+   "results": "The project has CategoryTheory.ReducedHammock in Sheaf.CategoryTheory.HammockInfinityLocalization; it is the canonical primitive reused here, not a duplicate pair notion.",
+   "date": "2026-10-16",
+   "verdict": "project helper reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at a simplex makes a simplicial enriched category an ordinary category with n-simplices as morphisms",
+   "results": "SimplicialCategory.homEquiv and generic enriched categories returned; no degree-category construction. The implementation uses existing TransportEnrichment and categoryOfEnrichedCategoryType.",
+   "date": "2026-10-16",
+   "verdict": "generic Mathlib constructions reused; no existing hammock-pair definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\", \"TransportEnrichment\"",
+   "results": "CategoryTheory.instEnrichedCategoryTransportEnrichment; CategoryTheory.TransportEnrichment.ofOrdinaryEnrichedCategoryEquiv. The first is used, while the latter concerns a preexisting ordinary category.",
+   "date": "2026-10-16",
+   "verdict": "reuse Mathlib transport; no hammock pair"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Wide simplicial subcategories defined by mapping subcomplexes closed under enriched identity and composition",
+   "results": "SSet.Subcomplex; CategoryTheory.SimplicialCategory; simplicial thickening; no wide enriched subcategory.",
+   "date": "2026-10-16",
+   "verdict": "mapping subcomplex reused; no existing closed family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dwyer Kan homotopy lemma diagonal hammock localization mapping spaces",
+   "results": "DerivedCategory.Q_map_eq_of_homotopy; ordinary localization equivalences and CofibrantObject.HoCat.toLocalization. None states diagonal hammock invariance.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialHammockDegree|WideSimplicialSubcategory|SimplicialHammockPair|mapping.*subcomplex.*compos",
+   "results": "No declarations in Mathlib enriched/simplicial-category files, upstream WeilConjectures/CategoryTheory, shared lean/Sheaf/CategoryTheory or DAG. Ordinary WideSubcategory and DkEnrichedPresentation are present; neither constructs degreewise evaluation of an arbitrary simplicial category nor a diagonal hammock pair. Existing hammockMapPath is used directly.",
+   "date": "2026-10-16",
+   "verdict": "no duplicate; generic and ordinary helpers reused"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-hammock-pair-homotopy-invariance",
+  "date": "2026-10-16",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialHammockPair",
+  "declaration": "CategoryTheory.WideSimplicialSubcategory",
+  "declarations": [
+   "CategoryTheory.hammockEvaluationMonoidal",
+   "CategoryTheory.SimplicialHammockDegree",
+   "CategoryTheory.simplicialHammockDegreeCategory",
+   "CategoryTheory.simplicialHammockDegreeFunctor",
+   "CategoryTheory.simplicialHammockDegreeOperator",
+   "CategoryTheory.WideSimplicialSubcategory",
+   "CategoryTheory.WideSimplicialSubcategory.degree",
+   "CategoryTheory.wideSimplicialSubcategoryMultiplicative",
+   "CategoryTheory.SimplicialHammockPair",
+   "CategoryTheory.SimplicialHammockComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialHammockPair.lean",
+  "statement": "structure WideSimplicialSubcategory (A : CoherentNerve.SCat.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q100",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-340264dde",
+  "group": "Q100",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-340264dde",
+  "group": "Q100",
+  "result": "fix",
+  "note": "Lean statement and new definition are correct: every hypothesis and conclusion clause of DK Lemma 2.4 is matched (fixed objects via O-equivalences; wide subcomplex-closed subcategories; mapping and marked-mapping w.h.e., the marked map pinned to the restriction of S; diagonal = width-n reduced grids in the evaluated degree category A_n (rfl-checked); both operators applied together; identity = nil; concatenate then reduce; comparison pinned to applying S_n then reducing). Unique reduced forms make the structure determined and non-vacuous. Edge cases (empty O, x=y nil, n=0, identities-only U, one universe u) and gates (no hollow defs, only the theorem is sorry, docstrings, line lengths, imports, verbatim records) pass. No duplicate (Mathlib lacks the evaluation monoidal instance; DkDiagonalHammock is a special case). nt_compile of both files: exit 0, no diagnostics. Fault repaired (H12, stmt_deps): the new node def-coef-simplicial-hammock-pair cited lem-coef-hammock-infinity-localization, closing the DAG cycle item->def->hammock-infinity->(proof) dk-cofibrant->(proof) item, which check_dag refuses. fixes/def-coef-simplicial-hammock-pair.json drops that stmt_dep and states H(P,T) and reduction in place, matching the landed dk-cofibrant precedent; the SCC re-check finds no cycle touching the delivery. fixes/<item>.report.md appends a note on the fix. Lean files unchanged."
+ }
+}
