@@ -318,63 +318,7 @@ theorem continuousLatticeIntersection_splitData
             T.map (latticeIntersectionUnit (integralScalarMap ℓ E) X P p) ≫ eD.hom ∧
           eB.hom ≫ adj.unit.app (Mod.finiteFree R n) =
             T.map (latticePushedEmbedding (integralScalarMap ℓ E) X P p M e) ≫ eD.hom := by
-  classical
-  have hB := (finiteEtale_locallyFree_models (integralCoeff ℓ E) p).1 M hM
-  have hQ := (finiteEtale_locallyFree_models (Profinite.continuousMapRingObj E) p).2 P hP
-  let a := integralScalarMap ℓ E
-  let Λ := Profinite.continuousMapRingObj E
-  let B := (lowerStar (integralCoeff ℓ E) p).obj M
-  let D := (lowerStar Λ p).obj ((upperStar Λ p).obj P)
-  let η := (upperStarLowerStarAdjunction Λ p).unit.app P
-  have : Mono η := weaklyEtaleUnit_mono Λ p P
-  obtain ⟨C, hC⟩ := commonCompactFreeCover P B (cokernel η) hP hB hQ
-  refine ⟨C, fun s ↦ ?_⟩
-  obtain ⟨hc, hPs, hBs, hQs⟩ := hC s
-  let f := C.f s
-  let Y := C.X s
-  let R := condensedRingObj (integralCoeff ℓ E) Y
-  let F := Mod.extendScalars (coefficientMap a Y)
-  let G := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-    (coefficientMap a Y)
-  let GX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (coefficientMap a X)
-  let T := (ProEtale.upperStar Ab.{u + 1} f).mapMod
-      (condensedRingObj (integralCoeff ℓ E) X) ⋙
-    Mod.comap (inv (condensedPullbackHom (integralCoeff ℓ E) f))
-  let H := upperStar Λ f
-  let k : GX ⋙ T ≅ H ⋙ G :=
-    Functor.isoWhiskerLeft GX (normalizedPullbackIso (integralCoeff ℓ E) f).symm ≪≫
-      (comapUpperStarIso a f).symm
-  obtain ⟨r, ⟨bP⟩⟩ := free_standardPullback Λ f P hPs
-  obtain ⟨n, ⟨bB⟩⟩ := free_comap (inv (condensedPullbackHom (integralCoeff ℓ E) f)) hBs
-  obtain ⟨m, ⟨bQ⟩⟩ := free_standardPullback Λ f (cokernel η) hQs
-  let eP := bP ≪≫ (integralFreeExtensionIso ℓ E Y r).symm
-  let eQ := (PreservesCokernel.iso H η).symm ≪≫ bQ ≪≫
-    (integralFreeExtensionIso ℓ E Y m).symm
-  let g := latticePushedEmbedding a X P p M e
-  have : IsIso ((pushHom a p).app M) := integralScalarUnderivedPushHom_isIso ℓ E p M
-  have : IsIso (((Mod.extendRestrictAdjunction (coefficientMap a X)).homEquiv B D).symm g) := by
-    change IsIso ((Mod.extendScalars (coefficientMap a X)).map g ≫
-      (Mod.extendRestrictAdjunction (coefficientMap a X)).counit.app D)
-    rw [latticePushedEmbedding_rationalization]
-    infer_instance
-  have : PreservesColimitsOfShape ℕ T :=
-    preservesColimitsOfShape_of_natIso (normalizedPullbackIso (integralCoeff ℓ E) f)
-  let adj := Mod.extendRestrictAdjunction (coefficientMap a Y)
-  let q := (adj.homEquiv (T.obj B) (H.obj D)).symm (T.map g ≫ k.hom.app D)
-  have : IsIso q := localizedAdjoint_isIso ℓ E X Y T B D (H.obj D) (k.app D) g
-  let d := (asIso q).symm ≪≫ F.mapIso bB
-  let i := eP.inv ≫ H.map η ≫ d.hom
-  have : Mono (H.map η) := inferInstance
-  have : Mono i := by dsimp [i]; infer_instance
-  let eA := k.app P ≪≫ G.mapIso eP
-  let eD := k.app D ≪≫ G.mapIso d
-  refine ⟨hc, r, n, m, i, inferInstance, ?_, eA, bB, eD, ?_, ?_⟩
-  · exact ⟨cokernelEpiComp eP.inv _ ≪≫ cokernelCompIsIso (H.map η) d.hom ≪≫ eQ⟩
-  · exact map_conjugate_naturality GX T H G k η eP d
-  · have hq : adj.unit.app (T.obj B) ≫ G.map q = T.map g ≫ k.hom.app D :=
-      (adj.homEquiv (T.obj B) (H.obj D)).apply_symm_apply _
-    exact adjoint_coordinate_equation F G adj q bB (T.map g) (k.hom.app D) hq
+  sorry
 
 
 
