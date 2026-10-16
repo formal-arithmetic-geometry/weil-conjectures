@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction: finite-shape control of coherent diagrams in the stable flat-model enhancement. Proposition 4.6.4.13, right-handed assertion; its oriented fiber product is precisely the displayed arrow pullback.",
+   "place": "Historical master proof, paragraph beginning “For $K\\in D^b_c(X,R)$”, sentence “use the reduction of integral compact supports ... and derived coefficient adjunction to compute”: inherited coherent-diagram foundation through the finite-adjunction realization, semilinear sections, flat model, pointed model, finite-shape generation, final-index colimit, and anodyne-cocones chain. The fixed-target arrow lifting argument is a supporting lemma from Kerodon, not a statement or proof explicitly present in that blueprint paragraph. The current main-20261015 copy at sec-six-functors/sk-thm-sf-package contains the statement only.",
    "via": [
     "lem-coef-infinity-anodyne-cocones",
     "lem-coef-infinity-final-index-colimit",
@@ -27,53 +27,119 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $m\\geq1$ and $0<j\\leq m$, and put $i:A=\\Lambda_j^m\\hookrightarrow B=\\Delta^m$. A lifting square is a map $a:A\\to E_T$ and $b:B\\to\\mathcal D$ with $q_Ta=bi$. The internal-functor definition gives a simplicial map $H:A\\times\\Delta^1\\to\\mathcal D$: in degree $n$, for $x\\in A_n$ and $s:[n]\\to[1]$, evaluate the map $a_n(x):\\Delta^1\\times\\Delta^n\\to\\mathcal D$ on $(s,\\mathrm{id}_{[n]})$. For $\\alpha:[r]\\to[n]$, naturality gives $a_r(A(\\alpha)x)=a_n(x)\\circ(\\mathrm{id}_{\\Delta^1}\\times\\Delta(\\alpha))$; evaluating this identity at $(s\\alpha,\\mathrm{id}_{[r]})$ proves the operator identity for $H$. Its endpoint restrictions are $H|_{A\\times\\{0\\}}=bi$ and $H|_{A\\times\\{1\\}}=T$. Using the blunt-join pushout formula of [lem-coef-infinity-blunt-join-comparison], glue $H$, $bi:A\\to\\mathcal D$, and $T:\\Delta^0\\to\\mathcal D$ to $\\widetilde a:A\\diamond\\Delta^0\\to\\mathcal D$. Its restriction to $A$ is $bi$, so it glues with $b$ to $\\sigma_0:B\\amalg_A(A\\diamond\\Delta^0)\\to\\mathcal D$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-blunt-join-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01KQ",
+    "place": "Proposition 4.6.4.13, unpacking the lifting problem via the blunt join of Notation 4.6.2.3 (01HR); the evaluation and gluing formulas are written explicitly here."
+   }
+  },
+  {
+   "text": "The inclusion $i$ is one of the generating horns in the inline definition of right anodyne in [lem-coef-infinity-blunt-join-comparison]. Apply that node to $i$, the quasicategory $\\mathcal D$, and $\\sigma_0$. Its extension clause, which combines the monomorphic categorical equivalence of Kerodon 01J0 with the extension lemma 01FS, gives $\\sigma:B\\diamond\\Delta^0\\to\\mathcal D$ with $\\sigma\\theta_i=\\sigma_0$. In particular its restriction to $B$ is $b$, and its restriction to the distinguished terminal point is $T$.",
+   "uses": [
+    "lem-coef-infinity-blunt-join-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KQ",
+    "place": "Proposition 4.6.4.13, final sentence: Corollary 4.6.2.14 (01J0) followed by Lemma 4.5.6.2 (01FS)."
+   }
+  },
+  {
+   "text": "Let $c_B:B\\times\\Delta^1\\to B\\diamond\\Delta^0$ be the cylinder map in the blunt-join pushout. Compose the entire cylinder with $\\sigma$ to get $H_B=\\sigma c_B$; its initial endpoint is $b$ and its terminal endpoint is constant at $T$. For each simplex $x:\\Delta^n\\to B$, set $\\bar a_n(x)=H_B\\circ(x\\times\\mathrm{id}_{\\Delta^1})\\circ\\mathrm{swap}:\\Delta^1\\times\\Delta^n\\to\\mathcal D$. Precomposing $x$ with any simplicial operator gives the corresponding operator on this map, so the formula defines $\\bar a:B\\to\\operatorname{Fun}(\\Delta^1,\\mathcal D)$. The terminal restriction is $T$, hence $\\bar a$ factors through $E_T$; the initial restriction gives $q_T\\bar a=b$. Since $\\sigma$ extends $\\sigma_0$, $H_B|_{A\\times\\Delta^1}=H$. For $x\\in A_n$, $t:[r]\\to[n]$ and $s:[r]\\to[1]$, evaluation of its restriction gives\n$$\\bar a_n(x)_r(s,t)=H_r(A(t)x,s)=a_r(A(t)x)_r(s,\\mathrm{id}_{[r]})=a_n(x)_r(s,t),$$\nwhere the last equality is naturality of $a$ for $t$. Thus the maps $\\Delta^1\\times\\Delta^n\\to\\mathcal D$ agree on every simplex, so $\\bar a i=a$. This fills the arbitrary horn lifting square and proves the right-fibration assertion.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-blunt-join-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01KQ",
+    "place": "Proposition 4.6.4.13, recovering a solution to the original lifting problem; the full cylinder precomposition and factor swap are explicit here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-blunt-join-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01KQ",
+  "place": "Expanded Proposition 4.6.4.13 with explicit evaluation and inverse currying, using 01HR, 01J0 and 01FS; read online, not archived under literature/, see report WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "In a quasicategory the source projection from the simplicial set of arrows with fixed target is a right fibration",
-   "results": "{\"t\": \"2026-10-16T11:51:27Z\", \"tool\": \"leanfinder\", \"query\": \"In a quasicategory the source projection from the simplicial set of arrows with fixed target is a right fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.quasicategory\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"afba3491e1b4b156\"}",
+   "results": "{\"t\": \"2026-10-16T13:34:54Z\", \"tool\": \"leanfinder\", \"query\": \"In a quasicategory the source projection from the simplicial set of arrows with fixed target is a right fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.quasicategory\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"afba3491e1b4b156\"}",
    "date": "2026-10-16",
-   "verdict": "no match: SSet.Quasicategory.hornFilling, Quasicategory/Basic.lean:43-50 (read), is the inner horn axiom. CategoryTheory.Functor.Fiber and Arrow.rightFunc concern ordinary categories. None asserts the nonzero-index outer horn lifting property for the simplicial arrow fiber; the targeted grep and Loogle have no hits."
+   "verdict": "no match: returned quasicategory inner-horn declarations and all-horn model generators, not the nonzero-index outer-horn lifting assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Outer horn lifting for the overcategory of a quasicategory at a fixed target",
+   "results": "{\"t\": \"2026-10-16T13:35:04Z\", \"tool\": \"leanfinder\", \"query\": \"Outer horn lifting for the overcategory of a quasicategory at a fixed target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.horn₃₁.desc\", \"SSet.horn₃₂.desc\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₂.exists_desc\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\"], \"digest\": \"a234cbe0bfce0174\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration states the fixed-target arrow projection right fibration."
   },
   {
    "tool": "loogle",
-   "query": "\"rightFibration\"",
-   "results": "{\"t\": \"2026-10-16T11:51:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "rightFibration",
+   "results": "{\"t\": \"2026-10-16T13:35:04Z\", \"tool\": \"loogle\", \"query\": \"rightFibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'rightFibration'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: SSet.Quasicategory.hornFilling, Quasicategory/Basic.lean:43-50 (read), is the inner horn axiom. CategoryTheory.Functor.Fiber and Arrow.rightFunc concern ordinary categories. None asserts the nonzero-index outer horn lifting property for the simplicial arrow fiber; the targeted grep and Loogle have no hits."
+   "verdict": "no match: no Mathlib declaration under this name."
   },
   {
    "tool": "grep",
    "query": "right.?[Ff]ibration|[Oo]riented.?[Ff]iber|[Tt]arget.?[Ff]iber",
-   "results": "{\"t\": \"2026-10-16T11:51:28Z\", \"tool\": \"grep\", \"query\": \"right.?[Ff]ibration|[Oo]riented.?[Ff]iber|[Tt]arget.?[Ff]iber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-16T13:35:04Z\", \"tool\": \"grep\", \"query\": \"right.?[Ff]ibration|[Oo]riented.?[Ff]iber|[Tt]arget.?[Ff]iber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: SSet.Quasicategory.hornFilling, Quasicategory/Basic.lean:43-50 (read), is the inner horn axiom. CategoryTheory.Functor.Fiber and Arrow.rightFunc concern ordinary categories. None asserts the nonzero-index outer horn lifting property for the simplicial arrow fiber; the targeted grep and Loogle have no hits."
+   "verdict": "no match."
   },
   {
    "tool": "leansearch",
    "query": "Evaluation at the source on the fiber of the arrow quasicategory over a fixed target is a right fibration",
-   "results": "{\"t\": \"2026-10-16T11:51:28Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation at the source on the fiber of the arrow quasicategory over a fixed target is a right fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Fiber\", \"CategoryTheory.Functor.Fiber.mk\", \"HasFibers.Fib\", \"CategoryTheory.evaluationIsRightAdjoint\", \"HomotopicalAlgebra.fibrations_over_iff\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"HasFibers.Fib.mk\", \"CategoryTheory.Arrow.rightFunc\"], \"digest\": \"d6af2c44dcdf388d\"}",
+   "results": "{\"t\": \"2026-10-16T13:35:05Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation at the source on the fiber of the arrow quasicategory over a fixed target is a right fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Fiber\", \"CategoryTheory.Functor.Fiber.mk\", \"HasFibers.Fib\", \"CategoryTheory.evaluationIsRightAdjoint\", \"HomotopicalAlgebra.fibrations_over_iff\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"HasFibers.Fib.mk\", \"CategoryTheory.Arrow.rightFunc\"], \"digest\": \"d6af2c44dcdf388d\"}",
    "date": "2026-10-16",
-   "verdict": "no match: SSet.Quasicategory.hornFilling, Quasicategory/Basic.lean:43-50 (read), is the inner horn axiom. CategoryTheory.Functor.Fiber and Arrow.rightFunc concern ordinary categories. None asserts the nonzero-index outer horn lifting property for the simplicial arrow fiber; the targeted grep and Loogle have no hits."
+   "verdict": "no match: returned ordinary categorical fibers/arrows and generic evaluation, not the quasicategorical outer-horn assertion."
   },
   {
-   "tool": "leanfinder",
-   "query": "The overcategory of arrows into one object using the unpinched cylinder model has right lifting property for horns with nonzero missing vertex",
-   "results": "{\"t\": \"2026-10-16T11:52:37Z\", \"tool\": \"leanfinder\", \"query\": \"The overcategory of arrows into one object using the unpinched cylinder model has right lifting property for horns with nonzero missing vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"HomotopicalAlgebra.Cylinder.instIsFibrantIOfFactorizationDataOfIsStableUnderCompositionFibrations\", \"HomotopicalAlgebra.Cylinder.instCofibrationI₀\", \"HomotopicalAlgebra.Cylinder.instCofibrationI₁\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.Cylinder.IsGood\", \"HomotopicalAlgebra.Cylinder.instIsVeryGoodOfFactorizationData\"], \"digest\": \"931929e0e6f13248\"}",
+   "tool": "leansearch",
+   "query": "The overcategory of a quasicategory over a fixed object has right lifting against all outer horns",
+   "results": "{\"t\": \"2026-10-16T13:35:05Z\", \"tool\": \"leansearch\", \"query\": \"The overcategory of a quasicategory over a fixed object has right lifting against all outer horns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasLiftingProperty.over\", \"CategoryTheory.CommSq.HasLift.over\", \"HomotopicalAlgebra.instHasFactorizationOverCofibrationsTrivialFibrations\", \"CategoryTheory.MorphismProperty.HasFactorization.over\", \"HomotopicalAlgebra.instHasFactorizationOverTrivialCofibrationsFibrations\", \"CategoryTheory.instHasLimitsOfShapeOverOfWithTerminal\", \"CategoryTheory.Over.lift\", \"HomotopicalAlgebra.instCategoryWithFibrationsOver\"], \"digest\": \"af4795fc019bc349\"}",
    "date": "2026-10-16",
-   "verdict": "no match: SSet.Quasicategory.hornFilling, Quasicategory/Basic.lean:43-50 (read), is the inner horn axiom. CategoryTheory.Functor.Fiber and Arrow.rightFunc concern ordinary categories. None asserts the nonzero-index outer horn lifting property for the simplicial arrow fiber; the targeted grep and Loogle have no hits."
+   "verdict": "no match: no declaration gives the required simplicial fixed-target arrow projection."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-anodyne-cocones",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-arrow-target-right-fibration",
+  "worker": "stage1",
+  "summary": "Repairs the returned ordinary-join error using the blunt cylinder pushout and its right-anodyne extension theorem. The endpoint constraints, the cylinder map and inverse currying are explicit. Removed the backward anodyne-cocones citation detected as a cycle by preflight. Restored existing creation metadata from the current base, and corrected blueprint provenance to distinguish historical ancestry from the actual Kerodon proof. Second reading supplied missing closure terminology, wrote the simplicial evaluation and inverse-currying identities, and independently repeated semantic, Loogle and whole-Mathlib source searches.",
+  "blueprint": "Historical master proof, paragraph beginning “For $K\\in D^b_c(X,R)$”, sentence “use the reduction of integral compact supports ... and derived coefficient adjunction to compute”: inherited coherent-diagram foundation through the finite-adjunction realization, semilinear sections, flat model, pointed model, finite-shape generation, final-index colimit, and anodyne-cocones chain. The fixed-target arrow lifting argument is a supporting lemma from Kerodon, not a statement or proof explicitly present in that blueprint paragraph. The current main-20261015 copy at sec-six-functors/sk-thm-sf-package contains the statement only.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q40-803303e1a",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-803303e1a (reviewer sub-agent of L); spot-checked: Read both nodes in full and checked every proof step against cited statements and Kerodon 01KQ, 01HR, 01J0 and 01FS. Strict cylinder encoding, extension and recovery are correct. Small cases, hypotheses, duplicate candidates, dependency acyclicity and blueprint route checked. No repairs or tool_uses required. Detailed findings written to review.md."
+ }
 }

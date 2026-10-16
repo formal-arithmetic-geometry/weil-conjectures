@@ -28,9 +28,100 @@
   "def-coef-zigzag-homotopy-calculus",
   "lem-coef-hammock-infinity-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $x,y$ in the small universe specified by [def-coef-zigzag-homotopy-calculus]. Use the signed-word category $\\mathcal I$ of [lem-coef-proper-word-colimit-invariance]. Put $H(w)=NZ_w(x,y)$. For $f:w\\to v$, compose the horizontal arrows in each fibre of $f$ and insert an identity in each empty fibre. All arrows in a nonempty fibre have the same direction, so composition is defined; leftward composites remain in $W$. On vertical arrows use the retained vertices. This defines a functor $H:\\mathcal I\\to\\mathrm{sSet}$. Reduction gives a cocone to $L=L^H(\\mathcal C,W)(x,y)$. Indeed both composing like-directed columns and inserting identity columns leave reduction unchanged. Every hammock has a word. Each elementary reduction shortens its word. Disjoint reductions commute; the only overlapping compositions reduce three equally directed columns and agree by associativity, while a deleted identity column commutes with composition by the unit laws. Induction on word length therefore shows that every order of elementary reductions has the same reduced result. Every word hammock is related to that unique reduced hammock by the diagram operations. Hence degreewise the colimit relations are exactly equality of reduced hammocks, giving $\\varinjlim H\\cong L$. On $H(-+-)$ the cocone is the simplicial map in the statement; its compatibility with faces and degeneracies follows by deleting or repeating rows before reduction.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus",
+    "lem-coef-proper-word-colimit-invariance",
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Sections 4.1,5.1,5.3 and Proposition 5.5; construction of the word diagram and its colimit"
+   }
+  },
+  {
+   "text": "Define $A(w)=+^{n(w)}$, where $n(w)$ counts the $+$ positions, and $B(w)=-w-$. On maps $A$ restricts to the $+$ positions and renumbers them; $B$ retains the two new endpoints and acts as the old map on the intervening positions. There are natural injections $A(w)\\to w$ and $w\\to B(w)$. Applying $H$ to the first after $B$ gives $e:HBA\\to HB$. Each of $H,HBA,HB$ is proper: an injection inserts prescribed columns of identities, hence is injective on simplices; two such images meet precisely in the hammocks whose columns outside the intersection of the retained positions are identities. For $HB$ retain its two fixed outer columns in this assertion, and for $HBA$ retain those columns and restrict the position condition to $+$ positions. This proves exactly the image-intersection condition, including an empty intersection, rather than assuming that arbitrary colimits preserve weak equivalences.",
+   "uses": [
+    "lem-coef-proper-word-colimit-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof 6.5(i)-(ii), with B adding both boundary inverse letters; Definition 4.4"
+   }
+  },
+  {
+   "text": "We first handle extra adjacent inverse columns. The composition functor $Z_{p--q}\\to Z_{p-q}$ has sections inserting an identity on either side of the retained inverse arrow. For one section, the original intermediate vertex maps to the repeated vertex by the first inverse arrow; for the other, the repeated vertex maps to the original one by the second inverse arrow. Together with identities on all other vertices these give, respectively, a natural transformation from the identity to section-composition, or in the opposite direction. All its components are in $W$. Thus each section is a nerve homotopy equivalence. Explicitly, the homotopy of nerves of a natural transformation $T\\Rightarrow T'$ sends a chain and a monotone map $[k]\\to[1]$ to the chain using $T$ before the cut, $T'$ after the cut and the transformation at the cut; naturality gives the commuting square there. This is a map $NZ\\times\\Delta^1\\to NZ'$, so its realization supplies the claimed homotopy. This argument works inside any fixed prefix and suffix, without changing their arrows.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Elementary inverse-column contraction used in the induction in proof 6.5(ii)"
+   }
+  },
+  {
+   "text": "We prove $e_w:NZ_{-+^{n(w)}-}(x,y)\\to NZ_{-w-}(x,y)$ is a weak homotopy equivalence for every word $w$. If $n(w)=0$, this inserts only inverse identity columns into $--$, so step 3 applies. Otherwise first remove repetitions within each inverse block and remove initial and terminal inverse blocks of $w$; these will be reinserted at the end using step 3. The remaining word is $+^{a_1}-+^{a_2}-\\cdots-+^{a_t}$ with every $a_i>0$ and sum $n(w)$. Induct on the number of cuts already inserted. The base is $-+^{n(w)}-$. For the first cut use the defining homotopy-calculus map with $r=a_1$, $s=a_2+\\cdots+a_t$; both are positive when a cut is required. At the next cut the right-hand subword is $-+^{a_2+\\cdots+a_t}-$; apply the same hypothesis with $r=a_2$, $s=a_3+\\cdots+a_t$, and extend over the unchanged prefix using [lem-coef-zigzag-concatenation-invariance]. Continue until the last forward block. The insertion functors begin and end in $-$ and are strictly natural in both endpoint $W$-actions, since composition with an endpoint map commutes with insertion of an identity. Thus the concatenation lemma has exactly its stated hypotheses. Reinsert the initial, terminal and repeated inverse columns by step 3. This composite inserts precisely the negative positions missing from $A(w)$, so it is $e_w$. Composition of isomorphisms on components and homotopy groups proves the assertion. The second, all-$W$ insertion hypothesis in the definition is available but is not needed for this first comparison.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus",
+    "lem-coef-zigzag-concatenation-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof 6.5(ii), two-sided version: finite induction expanded using Propositions 9.4 and 9.6"
+   }
+  },
+  {
+   "text": "Set $X=NZ_{-+-}(x,y)$ and $Y=\\varinjlim HB$. The properness proved in step 2 and the objectwise equivalences proved in step 4 allow [lem-coef-proper-word-colimit-invariance] to give a weak homotopy equivalence $j:\\varinjlim HBA\\to Y$. Identify $\\varinjlim HBA$ with $X$ as follows. Compose all middle forward arrows, leaving the two outer inverse arrows; when there are no forward arrows insert a forward identity between those outer arrows. These maps form a cocone and are inverse to the inclusion from the stage $w=+$. To check the colimit inverse, $A(w)\\to w$ induces the identity after $BA$, and the unique collapse $+^n\\to+$ for $n>0$, or the empty-word injection into $+$ for $n=0$, identifies that representative with the corresponding stage-$+$ representative. Hence $j:X\\to Y$ is a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-proper-word-colimit-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof 6.5(i)-(ii), with the two-sided boundary convention"
+   }
+  },
+  {
+   "text": "The injections $w\\to B(w)$ induce $k:L=\\varinjlim H\\to Y$. Reduction of the $B(w)$ hammocks induces $r:Y\\to L$; the colimit relations respect this reduction. Since the added outer arrows are identities, $rk=1_L$. Likewise $rj=\\rho$, where $\\rho:X\\to L$ is the comparison of the statement. We verify $k\\rho\\simeq j$, rather than assuming this compatibility. For $z=(x\\xleftarrow{p}u\\xrightarrow{f}v\\xleftarrow{q}y)$, compare at the stage $HB(-+-)=NZ_{--+--}(x,y)$. The image of $j$ under the stage map $+\\to-+-$ is\n$$J(z)=(x\\xleftarrow{p}u\\xleftarrow{1}u\\xrightarrow{f}v\\xleftarrow{1}v\\xleftarrow{q}y),$$\nwhereas $k\\rho$ is represented there by\n$$K(z)=(x\\xleftarrow{1}x\\xleftarrow{p}u\\xrightarrow{f}v\\xleftarrow{q}y\\xleftarrow{1}y).$$\nThe intermediate functor\n$$T(z)=(x\\xleftarrow{p}u\\xleftarrow{1}u\\xrightarrow{f}v\\xleftarrow{q}y\\xleftarrow{1}y)$$\nhas natural transformations $T\\Rightarrow J$ using $q:y\\to v$ at the fourth interior vertex, and $T\\Rightarrow K$ using $p:u\\to x$ at the first interior vertex, with identities elsewhere. They are commuting diagrams with all vertical arrows in $W$. The cut construction in step 3 gives a span of nerve homotopies, and composing with the stage cocone yields $j\\simeq k\\rho$.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus",
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof 6.5(iii)-(iv), both-end version; explicit span of natural transformations"
+   }
+  },
+  {
+   "text": "On path components, $k_*\\rho_*=j_*$ is a bijection, hence $\\rho_*$ is injective; $r_*k_*=1$ makes $r_*$ surjective, so $\\rho_*=r_*j_*$ is surjective too. Fix any vertex of $X$. The same equations hold on each homotopy group after the basepoint change along the homotopy of step 6. Thus $k_*\\rho_*$ is an isomorphism and $r_*$ is surjective (its section is $k_*$, conjugated by that basepoint path if necessary). Consequently $\\rho_*$ is injective from the first equation and surjective from $\\rho_*=r_*j_*$. Every point of $L$ lies in a component hit by $\\rho$, so these isomorphisms cover all components and all basepoints by change of basepoint along paths. This is precisely the definition of weak homotopy equivalence in [def-coef-zigzag-homotopy-calculus]. Only the wide-subcategory and homotopy-calculus assumptions have been used.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Conclusion of proof 6.5: retraction and homotopy, checked on components and homotopy groups"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-zigzag-homotopy-calculus",
+  "lem-coef-proper-word-colimit-invariance",
+  "lem-coef-hammock-infinity-localization",
+  "lem-coef-zigzag-concatenation-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Adaptation of proof 6.5 to the first half of Proposition 6.2(i), with the finite-word induction and comparison homotopy written out. The external source was read on the web but is not archived in literature/; see WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -94,15 +185,66 @@
    "results": "{\"t\": \"2026-10-16T13:46:45Z\", \"tool\": \"leanfinder\", \"query\": \"A localization mapping simplicial set is computed by the classifying space of the category of roofs with three arrows for a localizer with homotopical calculus of fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.localizedFunctor\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization.Q\", \"CategoryTheory.LocalizerMorphism.liftingLocalizedFunctor\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"CategoryTheory.MorphismProperty.Q'\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\"], \"digest\": \"97404d9490cbc5fd\"}",
    "date": "2026-10-16",
    "verdict": "Second reading: no match. Read CalculusOfFractions.lean:197-212, DerivabilityStructure/Basic.lean:75-79, and LocalizerMorphism.lean:95-96. These concern ordinary localized categories and their exactness; none states fixed-word diagram nerve insertion or the simplicial hammock comparison. Grep hits are Gabriel-Zisman bibliography entries; Loogle has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|homotop.*calculus|calculus.*homotop|zigzag.*nerve",
+   "results": "{\"t\": \"2026-10-16T14:22:44Z\", \"tool\": \"grep\", \"query\": \"hammock|homotop.*calculus|calculus.*homotop|zigzag.*nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/II.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/II.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean\"], \"digest\": \"ca79ab358e11c141\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits concern ordinary nerves and localization homotopy relations; Loogle has no hammock hits and grep gives bibliography references or ordinary derived-category fractions. None states a higher hammock mapping-space comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "three arrow zigzag categories compute simplicial localizations",
+   "results": "{\"t\": \"2026-10-16T14:22:44Z\", \"tool\": \"leansearch\", \"query\": \"three arrow zigzag categories compute simplicial localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Zigzag.of_hom_inv\", \"CategoryTheory.Zigzag.of_inv_hom\", \"CategoryTheory.Zigzag.of_inv_inv\", \"CategoryTheory.Zigzag.of_hom_hom\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.ComposableArrows.mk₃\", \"CategoryTheory.Zigzag.of_zag\"], \"digest\": \"2f118424f0b3a350\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits concern ordinary nerves and localization homotopy relations; Loogle has no hammock hits and grep gives bibliography references or ordinary derived-category fractions. None states a higher hammock mapping-space comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hammock\"",
+   "results": "{\"t\": \"2026-10-16T14:22:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"hammock\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits concern ordinary nerves and localization homotopy relations; Loogle has no hammock hits and grep gives bibliography references or ordinary derived-category fractions. None states a higher hammock mapping-space comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative category with two sided homotopy calculus of fractions has hammock mapping spaces weakly equivalent to nerves of three arrow zigzags",
+   "results": "{\"t\": \"2026-10-16T14:22:49Z\", \"tool\": \"leanfinder\", \"query\": \"A relative category with two sided homotopy calculus of fractions has hammock mapping spaces weakly equivalent to nerves of three arrow zigzags\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerve.homEquiv_apply\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\"], \"digest\": \"25d3778c50eb374e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits concern ordinary nerves and localization homotopy relations; Loogle has no hammock hits and grep gives bibliography references or ordinary derived-category fractions. None states a higher hammock mapping-space comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nerve of roofs with weak equivalences on both ends computes a hammock simplicial localization under homotopical calculus of fractions",
+   "results": "{\"t\": \"2026-10-16T14:24:45Z\", \"tool\": \"leanfinder\", \"query\": \"The nerve of roofs with weak equivalences on both ends computes a hammock simplicial localization under homotopical calculus of fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerveFunctor\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerveAdjunction\"], \"digest\": \"a91ffa8679b7030b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits concern ordinary nerves and localization homotopy relations; Loogle has no hammock hits and grep gives bibliography references or ordinary derived-category fractions. None states a higher hammock mapping-space comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-special-hammock-reduction",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-homotopy-fractions-hammock-comparison",
+  "worker": "stage1",
+  "summary": "Verified Dwyer-Kan Proposition 6.2(i) against the exact relative-category hypotheses. Expanded the two-sided version of proof 6.5 using a finite insertion induction, proper signed-word colimits, and explicit natural transformations for the retraction comparison. Created two statement-only general inputs; no Lean attachment or Mathlib match found. No statement change.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient adjunction), through the existing flat-model/cosimplicial-frame/special-hammock foundation chain. The present steps supply its homotopy-fractions-to-hammock input, specifically Dwyer-Kan proof 6.5(i)-(iv). The current main-20261015 ancestor has the same assertion and no proof section; historical ancestry and unit metadata are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q68-29c485fdf",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-29c485fdf (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, DAG route, source PDF, and required instructions. Verified hypotheses, seven proof steps, Dwyer–Kan source locations, endpoint variances, properness, colimit and homotopy arguments, small cases, searches, and duplicate candidates. No repairs or tool uses are required; review written to review.md."
+ }
 }

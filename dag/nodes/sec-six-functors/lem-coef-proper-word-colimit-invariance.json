@@ -1,0 +1,153 @@
+{
+ "id": "lem-coef-proper-word-colimit-invariance",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation; flat-model stable enhancement foundation. Cosimplicial frames supply localization mapping spaces for the finite-diagram induction. Technical input: Definitions 3.1-3.2, Lemma 3.4 and Proposition 3.5, pp. 11-13; Dwyer-Kan, Calculating simplicial localizations, Propositions 6.2(i) and 8.2 for the special-hammock reduction; Proposition 6.2(i), first reduction map, printed p. 26 (PDF p. 10); diagram categories in Section 5.1; Section 4.1, Definition 4.4 and Proposition 4.5, printed pp. 22-23 (PDF pp. 6-7); signed-word notation for the same indexing category",
+   "via": [
+    "lem-coef-homotopy-fractions-hammock-comparison",
+    "lem-coef-special-hammock-reduction",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Homotopy invariance of proper signed-word colimits",
+ "statement": "Let $\\mathcal I$ be the small category whose objects are finite words in $+,-$, including the empty word, and whose morphisms $f:w\\to v$ are weakly order-preserving maps between the sets of letter positions such that each position and its image have the same sign. Composition is composition of these maps. An injection means such a morphism injective on positions. For two injections $f:w\\to v$ and $g:w'\\to v$, let $h:w''\\to v$ be the injection whose image is $\\operatorname{im}f\\cap\\operatorname{im}g$, with signs inherited from $v$. A functor $E:\\mathcal I\\to\\mathrm{sSet}$ [def-weil-pbc-simplicial-set] is proper if $E(f)$ is degreewise injective for every injection $f$, and\n$$\\operatorname{im} E(h)=\\operatorname{im} E(f)\\cap\\operatorname{im} E(g)\\subseteq E(v)$$\nfor every such pair. Let $E,E'$ be proper functors and $\\eta:E\\to E'$ a natural transformation. If every $\\eta_w$ is a weak homotopy equivalence, then\n$$\\varinjlim_{\\mathcal I}E\\longrightarrow\\varinjlim_{\\mathcal I}E'$$\nis a weak homotopy equivalence. Here colimits have the universal property of [def-weil-pbc-category-colimit] and can be formed degreewise by the quotient of the disjoint union by the diagram relations. A weak homotopy equivalence means a map whose geometric realization is bijective on path components and induces isomorphisms on all homotopy groups at every basepoint.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Section 4.1, Definition 4.4 and Proposition 4.5, printed pp. 22-23 (PDF pp. 6-7); signed-word notation for the same indexing category. No Stacks tag states this simplicial homotopy-theoretic result."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For proper diagrams of simplicial sets over the Dwyer Kan category of signed words, objectwise weak homotopy equivalences induce weak homotopy equivalences on ordinary colimits",
+   "results": "{\"t\": \"2026-10-16T14:26:17Z\", \"tool\": \"leanfinder\", \"query\": \"For proper diagrams of simplicial sets over the Dwyer Kan category of signed words, objectwise weak homotopy equivalences induce weak homotopy equivalences on ordinary colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp_assoc\"], \"digest\": \"b2db6504215697ac\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle has no hits. Semantic hits give existence of colimits, the Dold-Kan correspondence, and model-category homotopy relations, without this signed-word index or its properness condition. Read Mathlib/AlgebraicTopology/ModelCategory/Basic.lean:124-140: the grep hit is a constructor for a model structure, not colimit invariance. SSet.hasColimits and SimplicialObject.instHasColimitsOfShape supply existence only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeakEquivalence\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T14:26:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeakEquivalence\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle has no hits. Semantic hits give existence of colimits, the Dold-Kan correspondence, and model-category homotopy relations, without this signed-word index or its properness condition. Read Mathlib/AlgebraicTopology/ModelCategory/Basic.lean:124-140: the grep hit is a constructor for a model structure, not colimit invariance. SSet.hasColimits and SimplicialObject.instHasColimitsOfShape supply existence only."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*(functor|diagram)|[Ww]eak[Ee]quivalence.*[Cc]olimit|[Cc]olimit.*[Ww]eak[Ee]quivalence",
+   "results": "{\"t\": \"2026-10-16T14:26:14Z\", \"tool\": \"grep\", \"query\": \"proper.*(functor|diagram)|[Ww]eak[Ee]quivalence.*[Cc]olimit|[Cc]olimit.*[Ww]eak[Ee]quivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Monomorphisms.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\"], \"digest\": \"14244ec7b0f64ea3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle has no hits. Semantic hits give existence of colimits, the Dold-Kan correspondence, and model-category homotopy relations, without this signed-word index or its properness condition. Read Mathlib/AlgebraicTopology/ModelCategory/Basic.lean:124-140: the grep hit is a constructor for a model structure, not colimit invariance. SSet.hasColimits and SimplicialObject.instHasColimitsOfShape supply existence only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy invariance of the colimit of proper simplicial set diagrams indexed by signed finite ordered sets",
+   "results": "{\"t\": \"2026-10-16T14:26:14Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy invariance of the colimit of proper simplicial set diagrams indexed by signed finite ordered sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasColimits\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"SSet.hoFunctor.preservesTerminal'\", \"SSet.Truncated.hasColimits\", \"SSet.hasLimits\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"SSet.horn.isColimit\"], \"digest\": \"7c788c25e0690bd9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle has no hits. Semantic hits give existence of colimits, the Dold-Kan correspondence, and model-category homotopy relations, without this signed-word index or its properness condition. Read Mathlib/AlgebraicTopology/ModelCategory/Basic.lean:124-140: the grep hit is a constructor for a model structure, not colimit invariance. SSet.hasColimits and SimplicialObject.instHasColimitsOfShape supply existence only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An objectwise weak homotopy equivalence between proper functors on finite ordered signed words induces a weak equivalence of direct limits, Dwyer Kan Proposition 4.5",
+   "results": "{\"t\": \"2026-10-16T14:26:33Z\", \"tool\": \"leanfinder\", \"query\": \"An objectwise weak homotopy equivalence between proper functors on finite ordered signed words induces a weak equivalence of direct limits, Dwyer Kan Proposition 4.5\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\", \"ComplexShape.Embedding.extendHomotopyFunctorFactors\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"ComplexShape.Embedding.extendHomotopyFunctor\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"AlgebraicTopology.DoldKan.homotopyPToId\"], \"digest\": \"9bf35d6a56fc7a46\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle has no hits. Semantic hits give existence of colimits, the Dold-Kan correspondence, and model-category homotopy relations, without this signed-word index or its properness condition. Read Mathlib/AlgebraicTopology/ModelCategory/Basic.lean:124-140: the grep hit is a constructor for a model structure, not colimit invariance. SSet.hasColimits and SimplicialObject.instHasColimitsOfShape supply existence only."
+  },
+  {
+   "tool": "grep",
+   "query": "Dwyer|hammock|[Pp]roper[Ff]unctor|[Pp]roper[Dd]iagram|[Ww]eakEquivalence.*colim|colim.*[Ww]eakEquivalence",
+   "results": "{\"t\": \"2026-10-16T14:26:32Z\", \"tool\": \"grep\", \"query\": \"Dwyer|hammock|[Pp]roper[Ff]unctor|[Pp]roper[Dd]iagram|[Ww]eakEquivalence.*colim|colim.*[Ww]eakEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"43ea0a3dee0de344\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle has no hits. Semantic hits give existence of colimits, the Dold-Kan correspondence, and model-category homotopy relations, without this signed-word index or its properness condition. Read Mathlib/AlgebraicTopology/ModelCategory/Basic.lean:124-140: the grep hit is a constructor for a model structure, not colimit invariance. SSet.hasColimits and SimplicialObject.instHasColimitsOfShape supply existence only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Colimits of cofibrant diagrams of simplicial sets preserve objectwise weak equivalences when latching maps are monomorphisms",
+   "results": "{\"t\": \"2026-10-16T15:05:00Z\", \"tool\": \"leanfinder\", \"query\": \"Colimits of cofibrant diagrams of simplicial sets preserve objectwise weak equivalences when latching maps are monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\"], \"digest\": \"ba6c8e02d699af4c\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no match. The semantic hits concern stability of monomorphisms and the Quillen cofibration definition. Monomorphisms.lean:28-41 states stability of monomorphisms under coproducts, pushouts and filtered colimits, not weak-equivalence invariance for proper signed-word diagrams. The remaining semantic hit concerns coproducts under a weak factorization system, not this ordinary colimit. Loogle returned no declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStableUnderColimitsOfShape\", \"weakEquivalences\"",
+   "results": "{\"t\": \"2026-10-16T15:07:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStableUnderColimitsOfShape\\\", \\\"weakEquivalences\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no match. The semantic hits concern stability of monomorphisms and the Quillen cofibration definition. Monomorphisms.lean:28-41 states stability of monomorphisms under coproducts, pushouts and filtered colimits, not weak-equivalence invariance for proper signed-word diagrams. The remaining semantic hit concerns coproducts under a weak factorization system, not this ordinary colimit. Loogle returned no declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "colim|[Ww]eak|[Pp]roper|latching",
+   "results": "{\"t\": \"2026-10-16T15:06:10Z\", \"tool\": \"grep\", \"query\": \"colim|[Ww]eak|[Pp]roper|latching\", \"sub\": \"AlgebraicTopology/SimplicialSet/Monomorphisms.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"9\", \"16\", \"24\", \"37\", \"38\"], \"digest\": \"b5a19c947a34ac22\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no match. The semantic hits concern stability of monomorphisms and the Quillen cofibration definition. Monomorphisms.lean:28-41 states stability of monomorphisms under coproducts, pushouts and filtered colimits, not weak-equivalence invariance for proper signed-word diagrams. The remaining semantic hit concerns coproducts under a weak factorization system, not this ordinary colimit. Loogle returned no declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper functors on finite signed word categories preserve objectwise weak homotopy equivalences under ordinary colimit",
+   "results": "{\"t\": \"2026-10-16T15:35:22Z\", \"tool\": \"leanfinder\", \"query\": \"Proper functors on finite signed word categories preserve objectwise weak homotopy equivalences under ordinary colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\"], \"digest\": \"f8b98dbb6a35a937\"}",
+   "date": "2026-10-16",
+   "verdict": "Continuation check: no match. Semantic hits concern weak factorization systems, Whitehead results, or products with simplices; Loogle returns no hits. The sole grep hit, Mathlib/AlgebraicTopology/ModelCategory/Basic.lean:128, is a ModelCategory constructor, not a theorem on ordinary colimits of proper signed-word diagrams."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeakEquivalence\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T15:36:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeakEquivalence\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Continuation check: no match. Semantic hits concern weak factorization systems, Whitehead results, or products with simplices; Loogle returns no hits. The sole grep hit, Mathlib/AlgebraicTopology/ModelCategory/Basic.lean:128, is a ModelCategory constructor, not a theorem on ordinary colimits of proper signed-word diagrams."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|[Pp]roper[Ff]unctor|[Pp]roper[Dd]iagram|[Ww]eakEquivalence.*colim|colim.*[Ww]eakEquivalence",
+   "results": "{\"t\": \"2026-10-16T15:36:39Z\", \"tool\": \"grep\", \"query\": \"hammock|[Pp]roper[Ff]unctor|[Pp]roper[Dd]iagram|[Ww]eakEquivalence.*colim|colim.*[Ww]eakEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"43ea0a3dee0de344\"}",
+   "date": "2026-10-16",
+   "verdict": "Continuation check: no match. Semantic hits concern weak factorization systems, Whitehead results, or products with simplices; Loogle returns no hits. The sole grep hit, Mathlib/AlgebraicTopology/ModelCategory/Basic.lean:128, is a ModelCategory constructor, not a theorem on ordinary colimits of proper signed-word diagrams."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary colimit of Reedy cofibrant simplicial set diagrams carries objectwise weak equivalences to weak equivalences",
+   "results": "{\"t\": \"2026-10-16T16:31:57Z\", \"tool\": \"leanfinder\", \"query\": \"An ordinary colimit of Reedy cofibrant simplicial set diagrams carries objectwise weak equivalences to weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_trivialCofibrations\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\"], \"digest\": \"1b7a597e9fae8ed5\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent final second reading: no match. Semantic hits concern existence of colimits, the simplicial-set cofibration/fibration instances, and stability of trivial cofibrations under coproducts. CategoryWithFibrations.lean:62-75 and ModelCategory/Instances.lean:118-145 were read. Reedy/Basic.lean:14-24 explicitly lists the Reedy model category structure as future work; the grep hits do not state preservation of weak equivalences by proper signed-word colimits. Loogle returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimMap\", \"WeakEquivalence\"",
+   "results": "{\"t\": \"2026-10-16T16:32:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"colimMap\\\", \\\"WeakEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent final second reading: no match. Semantic hits concern existence of colimits, the simplicial-set cofibration/fibration instances, and stability of trivial cofibrations under coproducts. CategoryWithFibrations.lean:62-75 and ModelCategory/Instances.lean:118-145 were read. Reedy/Basic.lean:14-24 explicitly lists the Reedy model category structure as future work; the grep hits do not state preservation of weak equivalences by proper signed-word colimits. Loogle returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy|colimMap.*weak|weakEquivalences.*colim",
+   "results": "{\"t\": \"2026-10-16T16:34:04Z\", \"tool\": \"grep\", \"query\": \"Reedy|colimMap.*weak|weakEquivalences.*colim\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\"], \"digest\": \"238511b06c985ceb\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent final second reading: no match. Semantic hits concern existence of colimits, the simplicial-set cofibration/fibration instances, and stability of trivial cofibrations under coproducts. CategoryWithFibrations.lean:62-75 and ModelCategory/Instances.lean:118-145 were read. Reedy/Basic.lean:14-24 explicitly lists the Reedy model category structure as future work; the grep hits do not state preservation of weak equivalences by proper signed-word colimits. Loogle returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-homotopy-fractions-hammock-comparison",
+  "date": "2026-10-16",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

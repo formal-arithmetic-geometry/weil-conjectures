@@ -28,9 +28,193 @@
   "def-weil-pbc-simplicial-set",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct $\\mathfrak C$ from the displayed subset posets and simplex colimits. For any $S,A$, maps $\\mathfrak C[S]\\to A$ are compatible families of maps $\\mathfrak C[\\Delta^n]\\to A$ indexed by simplices of $S$, hence exactly maps $S\\to N_{\\mathrm{hc}}A$. Restriction along monotone maps gives the faces and degeneracies, so this bijection is natural and gives the adjunction. Its unit and counit are the compatible evaluation maps; the triangle identities say that evaluating a represented simplex returns that simplex. This uses precisely the construction of $\\mathfrak C$ in the rigidification input, not an assumed adjunction equivalence.",
+   "uses": [
+    "lem-coef-rigidification-equivalence-detection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5, definition of the coherent nerve and coherent realization; simplex-colimit adjunction."
+   }
+  },
+  {
+   "text": "Write $W$ for the Dwyer--Kan equivalences, and $F=J\\text{-inj}$ for the class identified in the interval-lifting input. Its vertexwise equivalence-lifting condition agrees with the statement's $\\pi_0$ condition. Indeed a vertex representing a given invertible component exists by the definition of components. A lift in $\\pi_0$ gives a lifted vertex whose image is in the same component as the prescribed vertex. Join them by a finite zigzag of $1$-simplices; local Kan fibrations lift each edge with either endpoint prescribed, using the two $1$-horns. The resulting vertex is still invertible in $\\pi_0$ and maps to the prescribed vertex exactly. The reverse implication follows by taking components. No Kan condition on $A$ or $B$ is being assumed here.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Section 2, Propositions 2.3 and 2.5; comparison of (F2) with the component formulation."
+   }
+  },
+  {
+   "text": "A map is $I\\text{-inj}$ exactly when it is surjective on objects and a trivial Kan fibration on each mapping set: the nullary object generator tests surjectivity and the $U$-boundary generators test the mapping-set lifting problems, including $\\partial\\Delta^0=\\varnothing$. Such a map is in $W\\cap F$: it is locally a weak equivalence, its $\\pi_0$ is fully faithful and surjective on objects, and every target equivalence lifts by local surjectivity on vertices; full faithfulness makes that lift invertible. Conversely, $p\\in W\\cap F$ is locally a trivial Kan fibration by the Kan--Quillen structure. Essential surjectivity of $\\pi_0p$, followed by equivalence lifting in $F$, makes $p$ strictly surjective on objects. Therefore $I\\text{-inj}=W\\cap F$.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-simplicial-interval-cell-stability",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Proposition 3.2."
+   }
+  },
+  {
+   "text": "The interval inputs supply the two small-object weak factorization systems, $J\\text{-cof}\\subset I\\text{-cof}$, and $J\\text{-cof}\\subset W$ (relative $J$-cells are in $W$ and $W$ is retract closed). If $f\\in I\\text{-cof}\\cap W$, factor $f=pj$ with $j\\in J\\text{-cell}$ and $p\\in F$. Two-out-of-three gives $p\\in W$, so step 3 gives $p\\in I\\text{-inj}$. The lifting square with top $j$, left $f$, right $p$ and bottom the identity makes $f$ a retract of $j$ in the arrow category. Thus $J\\text{-cof}=I\\text{-cof}\\cap W$. Together with step 3, these are exactly the two model weak factorization systems. Completeness, cocompleteness and the retract/two-out-of-three axioms are in the cited inputs. This constructs the Bergner structure with the required classes; its underlying category is locally presentable and both systems are set generated, so it is combinatorial. Finally $A\\to *$ is in $F$ exactly when all its mapping sets are Kan: the remaining equivalence to lift in $*$ is the identity and is lifted by an identity of $A$.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-simplicial-interval-cell-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Section 3, model-structure proof from Propositions 3.1–3.3 and Lemma 3.4."
+   }
+  },
+  {
+   "text": "Apply $\\operatorname{Ex}^{\\infty}$ separately to all mapping sets, keeping the object set. Define composition by the inverse canonical product comparison followed by $\\operatorname{Ex}^{\\infty}$ of the old composition, and use its terminal comparison for identities. The product comparisons commute with projections, so their two iterated versions agree; applying the old associativity and identity equations proves the new ones. Naturality gives $A\\to RA$ as a simplicial functor and makes $R$ functorial. The Ex input gives locally Kan mapping sets and local weak equivalences. For a discrete set $D$, every map from $\\operatorname{Sd}\\Delta^n$ to $D$ is constant, because that subset poset is nonempty and connected (its full subset is terminal); hence $\\operatorname{Ex}D=D$ canonically, as is the iterated colimit, with unit the identity. Normalize using these canonical identifications. Thus $R$ fixes discrete categories and maps, including empty mapping sets and the empty category.",
+   "uses": [
+    "lem-coef-ex-infinity-finite-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZA",
+    "place": "Construction 3.3.6.1; Propositions 3.3.6.4, 3.3.6.7 and 3.3.6.9; productwise enriched construction."
+   }
+  },
+  {
+   "text": "The functor $\\mathfrak C$ sends monomorphisms to $I\\text{-cof}$ maps. It suffices to check simplex boundaries, since every simplicial monomorphism has the boundary-cell expression in the Kan--Quillen input and $\\mathfrak C$ preserves colimits. For $n=0$ the image adds one object. For $n>0$, the subset-poset formula shows that $\\mathfrak C[\\partial\\Delta^n]\\to\\mathfrak C[\\Delta^n]$ is the pushout of $U(\\partial(\\Delta^1)^{n-1})\\to U((\\Delta^1)^{n-1})$: all mapping sets except $(0,n)$ agree, and in that mapping set the boundary is the union of faces obtained either by omitting an interior vertex or by requiring it. The latter are the composites through that vertex. The boundary of the zero-dimensional cube for $n=1$ is empty. Cube-boundary inclusion is a simplicial monomorphism, hence a boundary-cell map, so its $U$ image is $I\\text{-cof}$. To see this last assertion without assuming $U$ preserves arbitrary enriched colimits, test lifts: lifting against $U(K)\\to U(L)$ with a fixed choice of the two objects is precisely lifting $K\\to L$ in that one mapping set. Therefore each map against which all $U$-boundaries lift also lifts this $U$-monomorphism. This proves the claimed cofibration preservation.",
+   "uses": [
+    "lem-coef-rigidification-equivalence-detection",
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Theorem 2.2.5.1, verification (C), cube boundary description."
+   }
+  },
+  {
+   "text": "By the rigidification detection criterion, $\\mathfrak C$ sends every categorical equivalence, in particular every Joyal trivial cofibration, to $W$. Step 6 sends its cofibration part to $I\\text{-cof}$, so the adjunction of step 1 is Quillen. A right adjoint in a Quillen pair takes fibrant objects to fibrant objects: adjoint a lifting square against any trivial cofibration, then lift against $A\\to *$. Using the fibrant characterizations in step 4 and in the Joyal input, a locally Kan $A$ therefore has $N_{\\mathrm{hc}}A$ a quasicategory. This establishes the hypothesis needed for the pinched comparison in the next step before applying that comparison.",
+   "uses": [
+    "lem-coef-rigidification-equivalence-detection",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1, the Quillen-adjunction part; Proposition 1.1.5.10."
+   }
+  },
+  {
+   "text": "For locally Kan $A$, write $S=N_{\\mathrm{hc}}A$. An $n$-simplex in $\\operatorname{Map}^{R}_{S}(x,y)$ is an enriched functor $\\mathfrak C[J^n]\\to A$ with endpoints fixed, by step 1. The collapsed-face construction says its only nonidentity mapping input is $Q^n$, so this is a map $Q^n\\to A(x,y)$. These identifications commute with all operators: $\\operatorname{Map}^{R}_{S}(x,y)=\\operatorname{Sing}_Q A(x,y)$. On each copy of $Q^n$, the composite of $\\theta_{S,x,y}$ with the enriched counit $\\varepsilon_A:\\mathfrak C[N_{\\mathrm{hc}}A]\\to A$ is evaluation of that functor. Thus it is the evaluation map $e_{A(x,y)}$. Both $\\theta$ and $e$ are weak equivalences by the pinched-resolution input, since $S$ is a quasicategory and $A(x,y)$ is Kan. Two-out-of-three proves that $\\varepsilon_A$ is a local weak equivalence. It is the identity on objects, hence a Dwyer--Kan equivalence.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Theorem 2.2.0.1 using Proposition 2.2.4.1 and Corollary 2.2.2.10."
+   }
+  },
+  {
+   "text": "Every simplicial set $T$ is Joyal cofibrant. For fibrant $A$ and a map $u:T\\to N_{\\mathrm{hc}}A$, its adjunct is $v=\\varepsilon_A\\mathfrak C[u]$. Step 8 makes $\\varepsilon_A$ a Dwyer--Kan equivalence, so two-out-of-three and detection give: $v$ is a Dwyer--Kan equivalence if and only if $\\mathfrak C[u]$ is, if and only if $u$ is a categorical equivalence. This is the cofibrant-source/fibrant-target criterion defining a Quillen equivalence. It proves the claimed Quillen equivalence from its adjunction, detection and counit, rather than assuming it as another node.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-rigidification-equivalence-detection",
+    "lem-coef-simplicial-interval-cell-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Theorem 2.2.5.1, final paragraph."
+   }
+  },
+  {
+   "text": "For clarity the equivalence retains the entire localized infinity categories. Coherent localization means the universal property on functor infinity categories in the model-colimit input. The functor $\\mathfrak C$ preserves weak equivalences by detection. If $f:A\\to B$ is in $W$, naturality of $A\\to RA$ and two-out-of-three give $Rf\\in W$. Apply naturality of the weakly equivalent counits from step 8 to $RA,RB$; this makes $\\mathfrak C[N_{\\mathrm{hc}}Rf]$ a Dwyer--Kan equivalence, and detection makes $N_{\\mathrm{hc}}Rf$ a categorical equivalence. Consequently $N_{\\mathrm{hc}}R$ also descends to coherent localization. For each $T$, let $\\eta'_T:T\\to N_{\\mathrm{hc}}R\\mathfrak C[T]$ be adjunct to $\\mathfrak C[T]\\to R\\mathfrak C[T]$. Its composite $\\varepsilon_{R\\mathfrak C[T]}\\mathfrak C[\\eta'_T]$ is that local weak equivalence. Detection and step 8 imply that $\\eta'_T$ is a categorical equivalence. On simplicial categories the natural zigzag $\\mathfrak C[N_{\\mathrm{hc}}RA]\\xrightarrow{\\varepsilon_{RA}}RA\\leftarrow A$ has both arrows in $W$. By the enhanced calculus, their pointwise equivalence components are equivalences in the functor quasicategories. The localization universal property identifies whole functor infinity categories with the full subcategories of weak-equivalence-inverting functors, so these unit and counit zigzags descend to natural equivalences; they exhibit inverse infinity functors. With $\\mathrm{Cat}_\\infty$ modeled by the homotopy coherent localization of the Joyal model category (whose objects can be represented by its fibrant quasicategories), the inverse comparison is exactly $A\\mapsto N_{\\mathrm{hc}}RA$.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-rigidification-equivalence-detection",
+    "lem-coef-simplicial-interval-cell-stability",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1, localized interpretation; explicit relative-functor unit and counit argument."
+   }
+  },
+  {
+   "text": "The model-colimit comparison applies to $\\mathrm{sCat}$ because step 4 proved combinatoriality, in the same fixed universes. Apply it to the small ordinary span shape and a projectively cofibrant replacement of any given span. Its colimit cocone becomes a pushout in the coherent localization of $\\mathrm{sCat}$. A homotopy pushout cocone differs from this by the stipulated weak equivalence of apices, so it too becomes a pushout. The equivalence in step 10 preserves this property: a cocone with apex $P$ is colimiting precisely when its mapping space into every $E$ is the corresponding limit of mapping spaces, and an equivalence identifies every mapping space and every $E$ up to equivalence. Hence $\\mathbf RN_{\\mathrm{hc}}$ carries the whole homotopy pushout cocone to a pushout cocone in $\\mathrm{Cat}_\\infty$, with its maps.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.9.8 and Remark 7.9.10, duals; span specialization and cocone universal property."
+   }
+  },
+  {
+   "text": "For locally Kan $A$, step 8 and the pinched-resolution input give the natural zigzag of weak equivalences\n$$A(x,y)\\xleftarrow{e_{A(x,y)}}|\\operatorname{Sing}_QA(x,y)|_Q=|\\operatorname{Map}^{R}_{N_{\\mathrm{hc}}A}(x,y)|_Q\\xrightarrow{p}\\operatorname{Map}^{R}_{N_{\\mathrm{hc}}A}(x,y).$$\nThe right mapping space is Kan by the enhanced calculus, and the left end is Kan by the local Kan hypothesis. Both ends are spaces, so this is the asserted equivalence of mapping spaces. As $Q^0=\\Delta^0$, its action on a vertex is its corresponding edge. Compatibility with composition uses the actual counit, not only the fact that these spaces have the same homotopy type: the evaluation composite in step 8 is the map of mapping sets of the enriched functor $\\varepsilon_A$, which preserves composition strictly. On a simplex $\\mathfrak C[\\Delta^n]\\to A$, its values on the subset cubes specify all composites, and the edges adding an intermediate vertex specify the homotopies from a long arrow to the corresponding composite. Restricting to faces gives the lower coherence relations, and composition in the cubes is union of subsets, so all higher compatibility relations are preserved by evaluation. The map $p$ and its degree-zero identity are natural in these restrictions. Thus the equivalence induced by the coherent-nerve adjunction respects enriched composition with these coherent homotopies. All formulas commute with enriched functors $A\\to B$.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 1.1.5, 2.2.2 and 2.2.4; comparison via the enriched evaluation counit."
+   }
+  },
+  {
+   "text": "For a discrete simplicial category, every map from a subset-poset nerve to a discrete mapping set is constant, since the poset has a least and a greatest element. Therefore a functor $\\mathfrak C[\\Delta^n]\\to A$ is uniquely a string of $n$ composable arrows in its ordinary category: the image on $(i,j)$ is forced to be the composite of the adjacent arrows by union composition. Faces compose adjacent arrows, degeneracies insert identities. Hence $N_{\\mathrm{hc}}A$ is its ordinary nerve, naturally also on functors. The empty category has the empty nerve by the same simplex definition.",
+   "uses": [
+    "lem-coef-rigidification-equivalence-detection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Example 1.1.5.8 and the subset-poset construction."
+   }
+  },
+  {
+   "text": "Let $f:x\\to y$ be a vertex of $A(x,y)$ with $A$ locally Kan and $\\pi_0A$ a groupoid. Choose a vertex $g:y\\to x$ representing its inverse component. Then $gf$ and $1_x$ lie in the same component of the Kan complex $A(x,x)$, as do $fg$ and $1_y$ in $A(y,y)$. In a Kan complex a finite edge zigzag can be reversed and concatenated into one edge: fill a $2$-horn with one edge and a degenerate edge to reverse an edge, and an inner $2$-horn to concatenate two. Hence there are edges $1_x\\to gf$ and $1_y\\to fg$. The first edge, together with $f,g$, defines an enriched functor $\\mathfrak C[\\Delta^2]\\to A$ with objects $x,y,x$: its sole nonconstant mapping cube is $\\Delta^1$, with initial vertex the long edge $1_x$ and final vertex the forced composite $gf$. This is a $2$-simplex of $N_{\\mathrm{hc}}A$ witnessing one inverse equation. The second edge gives the other inverse triangle on $y,x,y$. Every edge of the coherent nerve is a vertex in an enriched mapping set by the displayed formula for $\\mathfrak C[\\Delta^1]$, so all its edges are equivalences in the definition's inverse-triangle sense. Its core is therefore its whole simplicial set. Step 7 established that it is a quasicategory, and the enhanced calculus says that its core is Kan. Thus $N_{\\mathrm{hc}}A$ is Kan. The comparisons in the statement are natural because objectwise Ex, simplex restriction, the adjunction and evaluation all commute with simplicial functors; the inverse choices here certify a property and are not extra comparison data.",
+   "uses": [
+    "lem-coef-rigidification-equivalence-detection",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 1.2.5.1 and 1.2.5.3; groupoid criterion using the mapping comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-rigidification-equivalence-detection",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-simplicial-interval-cell-stability",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-ex-infinity-finite-products",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-model-colimit-localization-comparison",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, displayed derived coefficient adjunction; technical coherent-nerve foundation expanded using Bergner, HTT, Kerodon and Cisinski references in the individual steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,15 +250,81 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.Truncated.nerve₂Adj\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \": hoFunctor₂.{u} ⊣ nerveFunctor₂\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Nerve\", \"type\": \"{C : Type u} [Category.{v} C] : Quasicategory (nerve C)\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \": Reflective nerveFunctor\", \"doc\": \"The nerve functor from the category of small categories to the category of simplicial sets is reflective, with its left adjoint given by the homotopy category functor for 2-truncated simplicial sets. \"}\n  {\"name\": \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \": nerveFunctor₂.{u, u}.FullyFaithful\", \"doc\": \"The nerve functor from the category of small categories to 2-truncated simplicial sets is fully faithful, meaning it induces a bijection between functors $\\\\mathcal{C} \\\\to \\\\mathcal{D}$ and natural tran\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \": (X.HomotopyCategory ⥤ C) ≃ (X ⟶ (truncation 2).obj (nerve C))\", \"doc\": \"For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a natural equivalence between the category of functors from the homotopy category of $X$ to $\\\\mathcal{C}$ and the category o\"}\n  {\"name\": \"SSet.OneTruncation₂.nerveEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HomotopyCat\", \"type\": \": OneTruncation₂ ((SSet.truncation 2).obj (nerve C)) ≃ C\", \"doc\": \"The 2-truncated nerve of a category $\\\\mathcal{C}$, obtained by restricting the nerve simplicial set to dimensions $\\\\leq 2$, is canonically equivalent to $\\\\mathcal{C}$. This establishes that the data o\"}\n  {\"name\": \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \": nerveFunctor.{u, u} ⋙ hoFunctor ≅ 𝟭 Cat\", \"doc\": \"The composition of the nerve functor from small categories to 2-truncated simplicial sets and the homotopy category functor is naturally isomorphic to the identity functor on the category of small cat\"}\n  {\"name\": \"CategoryTheory.nerve.nerveFunctor₂_map_functorOfNerveMap\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \"(φ : nerveFunctor₂.obj (.of C) ⟶ nerveFunctor₂.obj (.of D)) : nerveFunctor₂.map (functorOfNerveMap φ).toCatHom = φ\", \"doc\": \"For any natural transformation $\\\\phi$ between the 2-truncated nerves of small categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, applying the 2-truncated nerve functor to the functor induced by $\\\\phi$ recove\"}",
    "date": "2026-10-16",
    "verdict": "no match for the theorem. CategoryTheory.SimplicialNerve is the construction only (Mathlib/AlgebraicTopology/SimplicialNerve.lean:193); the Projects list at lines 28-32 still asks for its locally Kan quasicategory theorem. Ordinary CategoryTheory.Nerve.quasicategory is not the enriched theorem or the Bergner-Joyal comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy coherent nerve and coherent realization give a Quillen equivalence between simplicial categories and quasicategories and identify mapping spaces",
+   "results": "{\"t\": \"2026-10-16T15:09:29Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy coherent nerve and coherent realization give a Quillen equivalence between simplicial categories and quasicategories and identify mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map\"], \"digest\": \"36b6aa75f60cd66a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary/truncated nerve results and CategoryTheory.SimplicialNerve only define constructions; the locally Kan, mapping-space and Quillen-equivalence theorems are absent (see SimplicialNerve.lean TODOs)."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialNerve|QuillenEquivalence|Bergner|homotopyCoherent",
+   "results": "{\"t\": \"2026-10-16T15:09:56Z\", \"tool\": \"loogle\", \"query\": \"SimplicialNerve|QuillenEquivalence|Bergner|homotopyCoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: <input>:1:15: expected end of input\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle reported loogle: <input>:1:15: expected end of input; replaced by the valid quoted SimplicialNerve query below."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|QuillenEquivalence|Bergner|homotopyCoherent",
+   "results": "{\"t\": \"2026-10-16T15:10:07Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|QuillenEquivalence|Bergner|homotopyCoherent\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid search directory: this supplied an extra Mathlib prefix; replaced by the AlgebraicTopology grep below, and not used as evidence of absence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally Kan simplicial category has a quasicategory as its coherent nerve with equivalent mapping spaces",
+   "results": "{\"t\": \"2026-10-16T15:10:28Z\", \"tool\": \"leansearch\", \"query\": \"A locally Kan simplicial category has a quasicategory as its coherent nerve with equivalent mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryOfKanComplex\", \"CategoryTheory.SimplicialNerve\", \"SSet.Quasicategory\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.StrictSegal.quasicategory'\", \"SSet.Quasicategory.mk\", \"SSet.KanComplex\", \"SSet.QCat\"], \"digest\": \"fdd26e3cbfabd402\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary/truncated nerve results and CategoryTheory.SimplicialNerve only define constructions; the locally Kan, mapping-space and Quillen-equivalence theorems are absent (see SimplicialNerve.lean TODOs)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\"",
+   "results": "{\"t\": \"2026-10-16T15:20:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\"], \"digest\": \"36e7d315fa3504e3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary/truncated nerve results and CategoryTheory.SimplicialNerve only define constructions; the locally Kan, mapping-space and Quillen-equivalence theorems are absent (see SimplicialNerve.lean TODOs)."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|Bergner|rigidification|homotopyCoherent",
+   "results": "{\"t\": \"2026-10-16T15:20:55Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|Bergner|rigidification|homotopyCoherent\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"d4b2106a92c08ddb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary/truncated nerve results and CategoryTheory.SimplicialNerve only define constructions; the locally Kan, mapping-space and Quillen-equivalence theorems are absent (see SimplicialNerve.lean TODOs)."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-hammock-infinity-localization",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-coherent-nerve-comparison",
+  "worker": "stage1",
+  "summary": "No matching closed project declaration. Constructed the Bergner model structure from interval lifting and interval-cell stability; constructed the object-preserving replacement using product-preserving Ex infinity. Derived the coherent-nerve Quillen equivalence from rigidification detection and the pinched counit argument, and gave the coherent localization, mapping, discrete and groupoid clauses. Added six statement-only technical inputs after actual Mathlib, DAG and whole-blueprint searches. Avoided cyclic use of the existing derived-adjunction and finite-Reedy-localization nodes. Statement unchanged.",
+  "blueprint": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and the following naturality and triangle-identity sentences; foundational enhancement of finite coefficient adjunction diagrams.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "The generic core-Kan, mapping-space-Kan and pointwise-equivalence theorems for quasicategories, used in steps 10, 12 and 14; no node of this unit supplies these elementary infinity-category tools independently of the present coherent-nerve foundation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q62-4ba36f4ac",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q62-4ba36f4ac (reviewer sub-agent of L); spot-checked: Read the item, six new nodes, cited statements, unit/chapter route, delivery rules A–F, and cited Bergner, HTT, Kerodon, and Cisinski source passages. Verified all 14 proof steps, hypotheses, edge cases, searches, blueprint route, no duplicates/cycles/restated clauses, and no SGA use. Wrote review.md with the concrete checks. No repairs required."
+ }
 }

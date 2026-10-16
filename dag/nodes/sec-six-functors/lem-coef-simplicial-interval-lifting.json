@@ -1,0 +1,75 @@
+{
+ "id": "lem-coef-simplicial-interval-lifting",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and the following naturality and triangle-identity sentences; foundational enhancement of finite coefficient adjunction diagrams. Technical input: Countable simplicial intervals detect equivalence lifting.",
+   "via": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Countable simplicial intervals detect equivalence lifting",
+ "statement": "Use simplicial sets, standard simplices, boundaries and horns [def-weil-pbc-simplicial-set], [lem-coef-kan-quillen-right-proper]. A small simplicial category has a set of objects, simplicial mapping sets, identity vertices and associative unital simplicial composition. Let $\\mathrm{sCat}$ be their category, with arbitrary object functions on enriched functors. It is complete, cocomplete and locally presentable: for some regular cardinal $\\kappa$ it is generated under $\\kappa$-filtered colimits by a small set of objects whose ordinary Hom functors preserve these colimits. For a fixed object set $O$, the category $\\mathrm{sCat}_O$ of simplicial categories and functors equal to the identity on $O$ has a cofibrantly generated model structure with objectwise weak homotopy equivalences and objectwise Kan fibrations; its cofibrations are retracts of free simplicial extensions (degreewise free enriched-category extensions with degeneracies preserving the chosen free generators).\n\nFor a simplicial set $K$, let $U(K)$ have objects $0,1$, mapping set $K$ from $0$ to $1$, identity mapping sets $\\Delta^0$, and empty mapping set from $1$ to $0$. Let $I$ consist of $\\varnothing\\to\\{0\\}$ and $U(\\partial\\Delta^n)\\to U(\\Delta^n)$ for $n\\geq0$. Let $J$ consist of $U(\\Lambda_i^n)\\to U(\\Delta^n)$ for $n\\geq1$, $0\\leq i\\leq n$, and $\\{0\\}\\to H$ for a set of representatives of two-object simplicial categories $H$ with all four mapping sets weakly contractible, countably many simplices in each mapping set, and $\\{0\\}\\amalg\\{1\\}\\to H$ a cofibration in $\\mathrm{sCat}_{\\{0,1\\}}$. Write $K\\text{-inj}$ for maps with the right lifting property against $K$, $K\\text{-cof}$ for maps with the left lifting property against $K\\text{-inj}$, and $K\\text{-cell}$ for transfinite composites of pushouts of coproducts of maps in $K$. Both $I$ and $J$ admit functorial small-object factorizations as a $K\\text{-cell}$ map followed by a $K\\text{-inj}$ map; every $K\\text{-cof}$ map is a retract of a $K\\text{-cell}$ map. Every map of $J$ belongs to $I\\text{-cof}$.\n\nFor a simplicial functor $p:A\\to B$, membership in $J\\text{-inj}$ is equivalent to the conjunction of: each $A(a,a')\\to B(pa,pa')$ is a Kan fibration; and for every object $a$ of $A$ and every vertex $e:pa\\to b$ invertible in $\\pi_0 B$, there are an object $a'$ with $pa'=b$ and a vertex $d:a\\to a'$ invertible in $\\pi_0 A$ with $p(d)=e$ as vertices. Here $\\pi_0$ takes components of each mapping set, and invertible means having a two-sided inverse in this ordinary category.",
+ "source": {
+  "document": "https://arxiv.org/pdf/math/0406507",
+  "place": "Section 1, generating sets (C1),(C2),(A1),(A2); Section 2, Propositions 2.3 and 2.5 and Lemma 2.4; Section 3, smallness and small-object factorizations. Local presentability: HTT Appendix A.3.2 (categories enriched in the locally presentable cartesian category of simplicial sets). No Stacks tag states this enriched interval result."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Generating horns and countable contractible cofibrant two object simplicial intervals detect local Kan fibrations lifting homotopy equivalences",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [hf : HomotopicalAlgebra.Fibration f] {n : ℕ} (i : Fin (n + 2)),\\n  CategoryTheory.HasLiftingProperty (SSet.horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.fibrations SSet = SSet.modelCategoryQuillen.J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y), HomotopicalAlgebra.Fibration f ↔ SSet.modelCategoryQuillen.J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {X Y : C}\\n  [HomotopicalAlgebra.IsCofibrant X] [HomotopicalAlgebra.IsCofibrant Y] [HomotopicalAlgebra.IsFibrant X]\\n  [HomotopicalAlgebra.IsFibrant Y] (f : X ⟶ Y) [HomotopicalAlgebra.WeakEquivalence\", \"doc\": \"In a model category, if $ X $ and $ Y $ are both cofibrant and fibrant objects, and $ f: X \\\\to Y $ is a weak equivalence, then there exists a morphism $ g: Y \\\\to X $ such that $ f \\\\circ g $ is right h\"}\n  {\"name\": \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {X Y : C}\\n  [HomotopicalAlgebra.IsCofibrant X] [HomotopicalAlgebra.IsCofibrant Y] [HomotopicalAlgebra.IsFibrant X]\\n  [HomotopicalAlgebra.IsFibrant Y] (f : X ⟶ Y) [HomotopicalAlgebra.WeakEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a model category, and let $X,Y \\\\in \\\\mathcal{C}$ be objects that are both cofibrant and fibrant. If $f : X \\\\to Y$ is a weak equivalence, then there exists a morphism $g : Y \\\\to X$ \"}\n  {\"name\": \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ (n : ℕ) (i : Fin (n + 2)), SSet.modelCategoryQuillen.J (SSet.horn (n + 1) i).ι\", \"doc\": \"For any natural number $ n $ and index $ 0 \\\\leq i \\\\leq n+1 $, the inclusion morphism $ \\\\Lambda^{i}[n+1] \\\\to \\\\Delta[n+1] $ of the $ i $-th horn into the standard $ (n+1) $-simplex is a generating acycl\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [(HomotopicalAlgebra.weakEquivalences C).HasTwoOutOfThreePro\", \"doc\": \"In a model category $\\\\mathcal{C}$ with (trivial cofibration, fibration) factorizations, pullbacks, and fibrations stable under composition and base change, if every cofibration $i$ and trivial fibrati\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern horn lifting for simplicial sets or Whitehead theorems in an assumed model category; none constructs or tests two-object enriched intervals."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial functor lifts all cofibrant contractible two object intervals if and only if it is locally a Kan fibration and lifts equivalences",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.Truncated.HomotopyCategory.lift_obj_mk\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HomotopyCat\", \"type\": \"(x : V _⦋0⦌₂) : (lift obj map map_id map_comp).obj (mk x) = obj x\", \"doc\": \"For a 2-truncated simplicial set $ V $, if $ F $ is a functor from its homotopy category to another category $ D $, then applying $ F $ to the equivalence class $[x]$ of a 0-simplex $ x $ in $ V $'s h\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.JoyalTrick\", \"type\": \"[HasFactorization (cofibrations C) (trivialFibrations C)] [HasPushouts C] [(cofibrations C).IsStableUnderComposition]\\n  [(cofibrations C).IsStableUnderCobaseChange]\\n  (h :\\n    ∀ {A B X Y : C} (i : A ⟶ B) (p : X ⟶ Y) [Cofibration i] [WeakEquivalence i] [Fibration p], HasLiftingProperty i p)\\n  {A B X \", \"doc\": \"In a model category $\\\\mathcal{C}$ equipped with a (cofibration, trivial fibration) factorization system, pushouts, and cofibrations stable under composition and cobase change, if every trivial cofibra\"}\n  {\"name\": \"SSet.Truncated.liftOfStrictSegal.f₂.congr_simp\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \"∀ {X Y : SSet.Truncated 2}\\n  (f₀ f₀_1 :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ }) →\\n      Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝¹ }))\\n  (e_f₀ : f₀ = f₀_1)\\n  (f₁ f₁_1 :\\n    X.obj (Opposite.op { obj := SimplexCategory.mk 1, proper\", \"doc\": \"If the 0-skeleton and 1-skeleton maps $f_0, f_1$ are equal and the Strict Segal conditions hold for the target simplicial set $Y$, then the lifting map $f_2$ preserves equality of 2-simplices: for any\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.lift\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HomotopyCat\", \"type\": \": V.HomotopyCategory ⥤ D\", \"doc\": \"Given a 2-truncated simplicial set $ V $ and a category $ D $, if a functor from the free reflexive quiver of $ V $'s 0-simplices to $ D $ preserves identities and compositions, this constructs a func\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \"[hf : Fibration f] {n : ℕ} (i : Fin (n + 2)) : HasLiftingProperty (horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": Fibration f ↔ J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.JoyalTrick\", \"type\": \"[HasFactorization (trivialCofibrations C) (fibrations C)] [HasPullbacks C] [(fibrations C).IsStableUnderComposition]\\n  [(fibrations C).IsStableUnderBaseChange]\\n  (h :\\n    ∀ {A B X Y : C} (i : A ⟶ B) (p : X ⟶ Y) [Cofibration i] [WeakEquivalence p] [Fibration p], HasLiftingProperty i p)\\n  {A B X Y : C\", \"doc\": \"In a model category $\\\\mathcal{C}$ with (trivial cofibration, fibration) factorizations, pullbacks, and fibrations stable under composition and base change, if every cofibration $i$ and trivial fibrati\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithFibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern horn lifting for simplicial sets or Whitehead theorems in an assumed model category; none constructs or tests two-object enriched intervals."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"HasLiftingProperty\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern horn lifting for simplicial sets or Whitehead theorems in an assumed model category; none constructs or tests two-object enriched intervals."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|simplicial.*interval|interval.*simplicial|SimplicialCategory.*[Ff]ibration",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"30\", \"text\": \"homotopy classes of homotopies between them, defined using the simplicial interval `Δ[1]`.\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern horn lifting for simplicial sets or Whitehead theorems in an assumed model category; none constructs or tests two-object enriched intervals."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-coherent-nerve-comparison",
+  "date": "2026-10-16",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

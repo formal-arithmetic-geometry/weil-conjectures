@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-lem-coefficient-heart",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constructible sheaves",
@@ -23,38 +23,216 @@
   ]
  },
  "stmt_deps": [
-  "sk-def-sfb-constructible"
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-constructible-stratification",
+  "def-sfb-module-open-lower-shriek",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-derived-categories"
  ],
  "proof": [
   {
-   "text": "(1) Given finitely many constructible sheaves, refine their stratifications to a common one;\nall three closure properties can then be checked on one stratum $S$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Extensions.* Let $0\\to F'\\to F\\to F''\\to0$ be exact with $F'$ and $F''$ lisse on $S$. After\npassing to a cover, $F''$ is free, and a basis of $F''$ lifts to sections of $F$. This splits\nthe sequence locally, so $F$ is locally free of finite rank.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Kernels and cokernels.* On the topologically Noetherian scheme $S$, the kernel and cokernel\nof a morphism of lisse $\\Lambda_S$-modules are lisse (Bhatt–Scholze, *The pro-étale topology\nfor schemes*, Corollary 6.8.5); in particular its rank is locally constant on $S$, and no\nfurther stratification is needed. This applies to $E$ and to $\\Qlb$, since our coefficient\nsheaves are those of loc. cit., by its Lemma 6.8.2 and [sk-prop-sfb-qlbar-colimit-x].\nRestriction to strata is exact, so the kernel and cokernel on $X$ are constructible.\nDetails: [det-lem-coefficient-heart-common-stratification] and\n[det-lem-coefficient-heart-closure].\n\n(2) Choose the sites in a fixed universe. A constructible sheaf is determined up to\nisomorphism by a finite stratification together with, on each stratum, finite-rank descent\ndata on a covering, and these form a set. Details: [det-lem-coefficient-heart-small].\n\n(3) Refine the stratification of $F$, by Noetherian induction, so that there is an open\nstratum $u\\colon S\\hookrightarrow X$ with closed complement $i\\colon Z\\hookrightarrow X$ that is\nagain a union of strata. The exact sequence $0\\to u_!u^*F\\to F\\to i_*i^*F\\to0$ splits off the\nstratum $S$, and $u^*F$ is lisse. Applying the same step to $i^*F$ on $Z$ and iterating gives\na finite filtration of $F$ whose subquotients are $a_!(F|_S)$ for the strata\n$a\\colon S\\hookrightarrow X$, and each $F|_S$ is lisse. Details:\n[det-lem-coefficient-heart-filtration].",
+   "text": "The standing finite-type-over-a-field setting is [sk-def-sfb-dc-setting]. Its schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to the structure morphism to the spectrum of a field (a field is Noetherian since its only ideals are zero and itself). Open subschemes are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Closed subschemes are locally Noetherian because their affine rings are quotients of Noetherian rings: an ascending chain of quotient ideals lifts to one in the original ring. They are quasi-compact as closed subsets of a quasi-compact space. Factoring a locally closed immersion as closed into an open therefore shows that its source is Noetherian. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], the underlying spaces are topologically Noetherian. Every open subset is quasi-compact: otherwise a cover without a finite subcover gives, by successively adding a member, a strictly increasing chain of opens, contradicting the descending condition on their closed complements. Applying this inside each open subset proves that open immersions are quasi-compact. We use coefficient module sheaves, not sheaves over the discrete constant field: [sk-prop-sfb-qlbar-colimit-x] identifies $E_X$ with $\\cO_{E,X}[1/\\ell]$ and $\\QbarX$ with $\\varinjlim_E E_X$.",
    "uses": [
-    "sk-prop-sfb-qlbar-colimit-x"
+    "sk-def-sfb-dc-setting",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+    "place": "Standing hypotheses and identification of coefficient sheaves; introductory paragraph"
+   }
+  },
+  {
+   "text": "The finite constant local models defining constructibility are those in [sk-def-sfb-constructible]. Over the scalar field $\\Lambda(*)$, a finitely presented module is a finite-dimensional vector space, hence isomorphic to $\\Lambda(*)^r$; extending scalars gives $\\Lambda_U^r$. Conversely $\\Lambda_U^r$ comes from the finite free scalar module. Therefore constructible means lisse on a finite stratification, as asserted also in [det-lem-coefficient-heart-closure]. The preliminary equality $\\Dctf(X,\\Lambda)=\\Dbc(X,\\Lambda)$ is the field case of [det-def-localizing-closure-ctf-equals-bc]: every bounded constructible complex has finite Tor amplitude. Standard truncations have the same cohomology sheaves in a smaller finite range and zero elsewhere, so remain bounded constructible.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "det-lem-coefficient-heart-closure",
+    "det-def-localizing-closure-ctf-equals-bc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+    "place": "Preliminary paragraph: local models, lisseness, and finite Tor amplitude"
+   }
+  },
+  {
+   "text": "For $a=i\\circ u$ through the closure, use the module extension by zero $u_!$ of [def-sfb-module-open-lower-shriek]. The coefficient identifications and exact inverse image are [sk-prop-sfb-cartesian-coefficients]. Apply [lem-weil-pbc-proetale-ringed-open-closed] with ring sheaf $\\Lambda_X$ to $i$ and its complementary open: $i_*$ is exact, since that open is quasi-compact by step 1. The same node gives exactness of $u_!$. Consequently $a_!=i_*u_!$ is exact. Applied to a complex $K$, exactness gives $H^n(a_!K)=a_!H^n(K)$, by preserving the kernel and image of each differential. It therefore preserves quasi-isomorphisms and descends to the localization $D(S,\\Lambda)\\to D(X,\\Lambda)$, without taking a resolution.",
+   "uses": [
+    "def-sfb-module-open-lower-shriek",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+    "place": "Preliminary paragraph: locally closed extension by zero; Stacks Tags 09BM and 03DJ"
+   }
+  },
+  {
+   "text": "For a morphism $F\\to G$ of constructible sheaves, choose a common adapted stratification by [det-lem-coefficient-heart-common-stratification](1),(2). Restriction to each stratum is exact by its part (3), so the restrictions of the ambient kernel and cokernel are the kernel and cokernel of the restricted morphism. On each Noetherian stratum the source and target are lisse. Part (2) of [det-lem-coefficient-heart-closure] makes these restricted kernels and cokernels lisse. They are therefore constructible on $X$ by the criterion in step 2. This uses the actual local kernel/cokernel assertion, not just the definition of lisse or a claim about ranks.",
+   "uses": [
+    "det-lem-coefficient-heart-common-stratification",
+    "det-lem-coefficient-heart-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+    "place": "Part (1), kernels and cokernels; Bhatt–Scholze Corollary 6.8.5"
+   }
+  },
+  {
+   "text": "For $0\\to F'\\to F\\to F''\\to0$ with $F',F''$ constructible, choose a common adapted stratification for the two end terms using [det-lem-coefficient-heart-common-stratification]. Its exact restriction gives an extension of lisse modules on every stratum. Part (1) of [det-lem-coefficient-heart-closure] makes the middle module lisse on that stratum; explicitly, locally trivialize the end terms and lift the finitely many basis sections of the quotient after refining the cover, giving a local splitting and a finite free middle term. Thus $F$ is constructible. The final assertion of [det-lem-coefficient-heart-closure] now gives that this full subcategory is abelian with exact inclusion. Its zero object is the rank-zero sheaf, and finite direct sums are constructible by the split extension $0\\to A\\to A\\oplus B\\to B\\to0$.",
+   "uses": [
+    "det-lem-coefficient-heart-common-stratification",
+    "det-lem-coefficient-heart-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+    "place": "Part (1), extensions and the abelian subcategory"
+   }
+  },
+  {
+   "text": "Fix the universe for the sites and coefficient modules. The hypotheses of [det-lem-coefficient-heart-small] hold: $X$ is Noetherian and $\\Lambda$ is one of the two specified fields. That statement supplies a set of isomorphism classes of constructible sheaves. Selecting one representative of each gives a small full subcategory equivalent to $\\Cons(X,\\Lambda)$, which is precisely essential smallness. This citation includes the required control of gluing between strata; separate descent data on the strata alone would not determine the global sheaf.",
+   "uses": [
+    "det-lem-coefficient-heart-small"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+    "place": "Part (2): essential smallness and its detailed lemma"
+   }
+  },
+  {
+   "text": "Choose an adapted stratification of $F$ and refine and order it by [det-lem-coefficient-heart-common-stratification](1),(2), so $V_k=S_1\\cup\\cdots\\cup S_k$ is open. The hypotheses of [det-lem-coefficient-heart-filtration] hold: $X$ is Noetherian by step 1, $\\Lambda=E$ or $\\Qlb$, and $F$ is constructible on this ordered adapted stratification. With $v_k:V_k\\hookrightarrow X$, its current statement gives subsheaves $F_k=v_{k!}v_k^*F$, endpoints $F_0=0$ and $F_m=F$, and $F_k/F_{k-1}\\cong a_{k!}(F|_{S_k})$, with each $F|_{S_k}$ lisse. Its definition of $a_{k!}$ is exactly $i_*u_!$ through the closure, as in this item and step 3, so these are the requested subquotients for the specified functor. The inclusions in a finite filtration need not be strict: the item’s $\\subset$ notation is read as subsheaf inclusion. For $F=0$ all terms can be zero, and for $X=\\varnothing$ the empty filtration has $m=0$. Thus the added non-strict-inclusion convention in the cited statement preserves the claimed filtration, including these edge cases.",
+   "uses": [
+    "det-lem-coefficient-heart-common-stratification",
+    "det-lem-coefficient-heart-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+    "place": "Part (3): ordered stratification and explicit filtration"
+   }
+  },
+  {
+   "text": "For the curve assertion, there are finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components]. Each component $C$ has a unique generic point $\\eta$ by [lem-sc-scheme-sober]. Let $S$ be its adapted stratum. Write $S=O\\cap D$ with $O$ open and $D$ closed. Since $\\eta\\in D$, one has $C\\subseteq D$. Removing the other components from $O$ gives an open neighborhood $W_\\eta$ of $\\eta$ in $X$ contained in $C\\cap O\\subseteq S$. Here containment in $S$ is initially set-theoretic. Put $T=W_\\eta\\times_X S$: $T\\to W_\\eta$ is a surjective closed immersion, and $F|_T$ is lisse by [det-lem-coefficient-heart-common-stratification](2). To infer lisseness on $W_\\eta$ without assuming reducedness, apply [new-lem-weil-pbc-proetale-surjective-closed-cover-refinement] to a pro-étale trivializing cover of $T$. It gives a pro-étale cover $\\{B_b\\to W_\\eta\\}$ whose closed base changes $T_b=B_b\\times_{W_\\eta}T$ map to members of that trivializing cover; hence $F|_{T_b}$ is finite free. Apply [lem-weil-pbc-proetale-ringed-open-closed] to $T_b\\to B_b$ with empty complementary open. Its short exact sequence gives $M\\simeq i_*i^*M$ for every module sheaf $M$, and its counit gives $i^*i_*\\simeq\\mathrm{id}$. Thus restriction is an equivalence of module categories. By [sk-prop-sfb-cartesian-coefficients], it sends $\\Lambda_{B_b}^r$ to $\\Lambda_{T_b}^r$. Full faithfulness therefore lifts the isomorphism $F|_{T_b}\\simeq\\Lambda_{T_b}^r$ and its inverse to an isomorphism $F|_{B_b}\\simeq\\Lambda_{B_b}^r$. This proves that $F$ is lisse on $W_\\eta$. Their union $U$ is dense and $L=F|_U$ is lisse, because lisseness is local for open covers. The closed complement $Z$ contains no generic point of a component. It has dimension at most zero: a strict chain of irreducible closed subsets in $Z$, extended to a component of $X$, would otherwise give a chain of length at least two in a curve. The underlying space of $X$ is Noetherian by step 1 and is $T_0$: if two points have the same closure, both are generic points of that irreducible closed subset, so [lem-sc-scheme-sober] makes them equal. Thus [lem-sc-zero-dim-noetherian-closed-finite] applies to the closed subset $Z$ and gives finitely many points, all closed in $X$. Finally [lem-weil-pbc-proetale-ringed-open-closed], with $u:U\\hookrightarrow X$, $i:Z\\hookrightarrow X$, and $G=i^*F$, gives $0\\to u_!L\\to F\\to i_*G\\to0$. Its identity $u^*i_*=0$ shows the last term is supported on $Z$. No algebraic closedness of the ground field, smoothness, or irreducibility is needed.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "det-lem-coefficient-heart-common-stratification",
+    "lem-sc-zero-dim-noetherian-closed-finite",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+    "place": "Final curve specialization, with the generic-open construction and localization sequence"
+   }
   }
  ],
  "proof_deps": [
-  "sk-prop-sfb-qlbar-colimit-x"
+  "sk-def-sfb-dc-setting",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "sk-def-sfb-constructible",
+  "det-lem-coefficient-heart-closure",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "def-sfb-module-open-lower-shriek",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "det-lem-coefficient-heart-common-stratification",
+  "det-lem-coefficient-heart-small",
+  "det-lem-coefficient-heart-filtration",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-zero-dim-noetherian-closed-finite",
+  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+  "lem-sc-scheme-sober"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+  "place": "Parts (1)–(3), detailed lemmas, preliminary conventions and final curve specialization"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The category of constructible sheaves of modules over a p-adic field on a Noetherian scheme is abelian and essentially small",
+   "results": "AlgebraicGeometry.Scheme.Modules.instAbelian; SheafOfModules.instAbelian; CategoryTheory.sheafIsAbelian; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; instAbelianCondensedMod; AlgebraicGeometry.Scheme.Modules.instCategory; PresheafOfModules.instAbelian; CategoryTheory.Sheaf.instIsGrothendieckAbelian",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient sheaf/module results or local finite presentation, not the stratified field-coefficient assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Abelian",
+   "results": "SheafOfModules.instAbelian; CategoryTheory.sheafIsAbelian; CategoryTheory.instAdditiveSheafConstantSheaf; CategoryTheory.presheafToSheaf_additive; CategoryTheory.Sheaf.instIsGrothendieckAbelian; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; AlgebraicGeometry.Scheme.instAbelianSheafAffineEtaleTopology; AlgebraicGeometry.Scheme.instAbelianSheafEtaleSmallEtaleTopology",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient sheaf/module results or local finite presentation, not the stratified field-coefficient assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|proetale|pro.etale",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient sheaf/module results or local finite presentation, not the stratified field-coefficient assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of p-adic field modules on the pro-etale site form an essentially small abelian category and admit finite filtrations by lisse sheaves extended by zero",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafProfinite; LightCondMod.ofSheafLightProfinite; CondensedMod.ofSheafCompHaus; CondensedMod.IsSolid; instAbelianLightCondMod; instAbelianCondensedMod",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient sheaf/module results or local finite presentation, not the stratified field-coefficient assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally free finite rank sheaves on strata are closed under kernels cokernels and extensions and constructible sheaves have a finite extension by zero filtration",
+   "results": "SheafOfModules.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.IsFinitePresentation; SheafOfModules.isFinitePresentation",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient sheaf/module results or local finite presentation, not the stratified field-coefficient assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "ConstructibleSheaf|IsConstructible|Lisse|ProEtale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient sheaf/module results or local finite presentation, not the stratified field-coefficient assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafIsAbelian",
+   "results": "Mathlib/CategoryTheory/Sites/Abelian.lean:16 documentation; Mathlib/CategoryTheory/Sites/Abelian.lean:40 instance sheafIsAbelian : Abelian (Sheaf J D). Read lines 1–67.",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient abelian sheaf category, not closure or smallness of the constructible subcategory or the lisse filtration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of sheaves locally constant of finite rank on a finite partition into locally closed subschemes is closed under extensions and has a filtration by extension by zero",
+   "results": "CompHausLike.LocallyConstantModule.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafStonean; CondensedMod.ofSheafProfinite; CompHausLike.LocallyConstantModule.functor_obj_val; CondensedMod.ofSheafCompHaus; LightCondMod.ofSheafLightProfinite; Condensed.finFree",
+   "date": "2026-10-16",
+   "verdict": "no match: constructions of condensed modules and locally constant discrete modules, not constructibility on scheme strata"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant|IsFinitePresentation",
+   "results": "20 hits in Mathlib/Condensed/Discrete: Colimit.lean, LocallyConstant.lean, Module.lean, Characterization.lean. Read Module.lean lines 14–62.",
+   "date": "2026-10-16",
+   "verdict": "no match: locally constant discrete condensed modules, not the stratified pro-etale field-coefficient category"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -79,5 +257,54 @@
   "det-lem-coefficient-heart-small"
  ],
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-coefficient-heart"
+ "unit": "sk-lem-coefficient-heart",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-lem-coefficient-heart",
+  "worker": "stage1",
+  "summary": "Reused all four existing coefficient-heart detail nodes. Made standing Noetherian and retrocompact hypotheses explicit, separated local closure arguments, retained coefficient normalization, supplied the exact locally closed extension construction and the curve specialization. No new nodes and no Lean attachment. Second reading supplied existing Noetherian topology/open-subscheme and scheme-sobriety citations and wrote their elementary consequences. Returned-delivery repair: rebased owned split fields onto the current shared node, reread every cited statement, and revalidated step 7 against the revised filtration statement (non-strict inclusions and closure-defined extension by zero). Updated its verbatim quote; no new node or statement change. Latest landing-return repair: supplied the current unit file with exactly the requested realization fields; compared all 25 direct dependencies against returned snapshot 8717402c4e with no changed inputs. Retry 2026-10-17: independently reread all 25 unchanged direct statement inputs and revalidated every citation; verified that the unit file changes only realized and realized_by. No mathematical statement change.",
+  "blueprint": "Steps 1–3 justify the introductory coefficient/local-model/extension conventions; steps 4–5 realize proof (1); step 6 realizes (2); step 7 realizes (3) using the existing detailed formula; step 8 verifies the final curve assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme finiteness tool to verify Noetherian hypotheses in the standing finite-type setting."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic module-sheaf localization and exact immersion functors, for the introductory construction and curve specialization."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Topological finiteness used to construct a dense open lisse locus on a curve."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-closed-finite",
+    "why": "Generic Noetherian topological tool proving that the zero-dimensional closed curve complement is finite."
+   },
+   {
+    "node": "det-def-localizing-closure-ctf-equals-bc",
+    "why": "Existing coefficient Tor-amplitude result for the preliminary equality, not a substitute for any closure or filtration step."
+   },
+   {
+    "node": "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+    "why": "Lifts trivializing covers across the surjective closed immersions arising when a generic neighborhood is contained only set-theoretically in its stratum; avoids assuming reduced schemes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-zero-dim-noetherian-closed-finite",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q68-7376906c0",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-7376906c0 (reviewer sub-agent of L); spot-checked: Read the complete mathematics, all 25 direct dependency statements, blueprint route, and cited source passages. Verified all eight steps, coefficient conventions, exact master base-change morphism, nonreduced curve argument, filtration edge cases, unit realization, and absence of dependency cycles. The master-category realization remains an explicit separate obligation. No repairs needed; concrete checks and accepted tool uses are recorded in review.md."
+ }
 }

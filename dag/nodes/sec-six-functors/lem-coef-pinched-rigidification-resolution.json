@@ -1,0 +1,75 @@
+{
+ "id": "lem-coef-pinched-rigidification-resolution",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and the following naturality and triangle-identity sentences; foundational enhancement of finite coefficient adjunction diagrams. Technical input: Pinched simplices give a weakly equivalent mapping resolution.",
+   "via": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pinched simplices give a weakly equivalent mapping resolution",
+ "statement": "Use simplicial categories [lem-coef-simplicial-interval-lifting], and quasicategories, weak homotopy equivalences and right mapping spaces [def-cbc-enhanced-diagrams-cones]. Define $\\mathfrak C[\\Delta^m]$ to have objects $0,\\ldots,m$ and, for $i\\leq j$, mapping set the ordinary nerve of the inclusion poset of subsets of $\\{i,\\ldots,j\\}$ containing $i,j$, with empty mapping set for $i>j$ and union as composition. Monotone maps act by images of subsets. Put $\\mathfrak C[S]=\\operatorname{colim}_{\\Delta^m\\to S}\\mathfrak C[\\Delta^m]$ in simplicial categories. Put $J^n=(\\Delta^n\\star\\{y\\})\\amalg_{\\Delta^n}\\{x\\}$, where the join is $\\Delta^{n+1}$ with last vertex $y$ and the whole initial face $\\Delta^n$ is collapsed to $x$. Set $Q^n=\\mathfrak C[J^n](x,y)$; monotone maps of initial faces make $Q$ a cosimplicial simplicial set. For $K$ a simplicial set define $|K|_Q=\\int^{[n]\\in\\Delta}K_n\\times Q^n$, the quotient of the coproduct of copies of $Q^n$ by the simplicial and cosimplicial identifications. Define $(\\operatorname{Sing}_QT)_n=\\operatorname{Hom}_{\\mathrm{sSet}}(Q^n,T)$. These functors are adjoint by evaluation. There is a natural cosimplicial map $p:Q\\to\\Delta^\\bullet$ inducing a weak homotopy equivalence $p_K:|K|_Q\\to K$ for every simplicial set $K$. For every Kan complex $T$, the evaluation counit $e_T:|\\operatorname{Sing}_QT|_Q\\to T$ is a weak homotopy equivalence.\n\nFor a quasicategory $S$ and vertices $x,y$, there is a natural weak homotopy equivalence\n$$\\theta_{S,x,y}:|\\operatorname{Map}^{R}_S(x,y)|_Q\\longrightarrow\\mathfrak C[S](x,y).$$\nHere an $n$-simplex of $\\operatorname{Map}^{R}_S(x,y)$ is a map $J^n\\to S$ sending the displayed vertices to $x,y$. On the corresponding copy of $Q^n$ the map $\\theta$ is the mapping-set map induced by $\\mathfrak C[J^n]\\to\\mathfrak C[S]$. All these maps commute with simplicial operators and maps of the displayed inputs; $Q^0=\\Delta^0$ and the maps in degree zero take the displayed vertex to itself.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 2.2.2: the cosimplicial object Q, Proposition 2.2.2.7 and Corollary 2.2.2.10; Section 2.2.4, Proposition 2.2.4.1. No Stacks tag states the pinched mapping resolution."
+ },
+ "stmt_deps": [
+  "lem-coef-simplicial-interval-lifting",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Twisted realization of the right pinched mapping space of a quasicategory is weakly equivalent to the mapping simplicial set of its coherent realization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C → (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For a 2-truncated simplicial set $X$ and a category $\\\\mathcal{C}$, this function constructs a morphism from $X$ to the 2-truncated nerve of $\\\\mathcal{C}$ by lifting a functor $F: X.\\\\text{HomotopyCateg\"}\n  {\"name\": \"SSet.unitHomEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal\", \"type\": \"(K : SSet) → (CategoryTheory.MonoidalCategoryStruct.tensorUnit SSet ⟶ K) ≃ K.obj (Opposite.op (SimplexCategory.mk 0))\", \"doc\": \"For any simplicial set $ K $, the set of natural transformations from the terminal simplicial set (the tensor unit in the Cartesian monoidal category of simplicial sets) to $ K $ is naturally isomorph\"}\n  {\"name\": \"SSet.hoFunctor.unitHomEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal\", \"type\": \"(X : SSet) →\\n  (CategoryTheory.MonoidalCategoryStruct.tensorUnit SSet ⟶ X) ≃\\n    CategoryTheory.Functor ↑CategoryTheory.Cat.chosenTerminal ↑(SSet.hoFunctor.obj X)\", \"doc\": \"For any simplicial set $X$, there is a canonical equivalence between the set of morphisms from the terminal simplicial set to $X$ in the category of simplicial sets and the set of functors from the te\"}\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"SSet.Truncated.StrictSegal.spineEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{n : ℕ} →\\n  {X : SSet.Truncated (n + 1)} →\\n    X.StrictSegal →\\n      (m : ℕ) →\\n        (h : autoParam (m ≤ n + 1) _auto_36✝) →\\n          X.obj (Opposite.op { obj := SimplexCategory.mk m, property := h }) ≃ X.Path m\", \"doc\": \"For each natural number $ m \\\\leq n+1 $ and $(n+1)$-truncated simplicial set $ X $, this defines an equivalence between the $ m $-dimensional spine inclusion $ X.\\\\text{spine}_m $ and the path space $ \\\\\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {X : SSet.Truncated 2} {C : Type u} [inst : CategoryTheory.SmallCategory C]\\n  (φ : X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\\n  (x : X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ })),\\n  (SSet.Truncated.HomotopyCategory.descOfTruncation φ).obj (SSet.Truncated.H\", \"doc\": \"Given a 2-truncated simplicial set $X$, a category $\\\\mathcal{C}$, and a natural transformation $\\\\phi: X \\\\to \\\\text{trunc}_2(\\\\text{Nerve}(\\\\mathcal{C}))$, the functor $\\\\text{descOfTruncation}(\\\\phi)$ maps\"}\n  {\"name\": \"SSet.StrictSegal.spineEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} → X.StrictSegal → (n : ℕ) → X.obj (Opposite.op (SimplexCategory.mk n)) ≃ X.Path n\", \"doc\": \"For each natural number $ n $, this defines a bijection between the $ n $-simplices of a strict Segal space $ X $ evaluated at the opposite simplex $[n]^\\text{op}$ and the space of paths $ \\\\text{Path}(\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary nerves, strict Segal spines and formal cosimplicial opposite equivalences do not give the pinched Q resolution or its weak-equivalence comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cosimplicial Q resolution compares pinched mapping spaces to rigidification and its realization singular counit is a weak homotopy equivalence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.cosimplicialSimplicialEquiv_counitIso_hom_app_app\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.Functor SimplexCategoryᵒᵖ Cᵒᵖ)\\n  (X_1 : SimplexCategoryᵒᵖ),\\n  ((CategoryTheory.cosimplicialSimplicialEquiv C).counitIso.hom.app X).app X_1 =\\n    CategoryTheory.CategoryStruct.id (X.obj X_1)\", \"doc\": \"For any category $\\\\mathcal{C}$, the counit isomorphism of the equivalence between the opposite category of cosimplicial objects in $\\\\mathcal{C}$ and the category of simplicial objects in $\\\\mathcal{C}^\"}\n  {\"name\": \"CategoryTheory.simplicialCosimplicialEquiv_counitIso_hom_app_app\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.Functor SimplexCategory Cᵒᵖ)\\n  (X_1 : SimplexCategory),\\n  ((CategoryTheory.simplicialCosimplicialEquiv C).counitIso.hom.app X).app X_1 =\\n    CategoryTheory.CategoryStruct.id (X.obj X_1)\", \"doc\": \"For any category $\\\\mathcal{C}$ and functor $X: \\\\Delta \\\\to \\\\mathcal{C}^{\\\\text{op}}$, the counit isomorphism of the simplicial-cosimplicial equivalence satisfies $(\\\\alpha_{\\\\text{counit}})_X(X_1) = \\\\text\"}\n  {\"name\": \"CategoryTheory.simplicialCosimplicialEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \": (SimplicialObject C)ᵒᵖ ≌ CosimplicialObject Cᵒᵖ\", \"doc\": \"The opposite category of simplicial objects in a category $\\\\mathcal{C}$ is naturally equivalent to the category of cosimplicial objects in the opposite category $\\\\mathcal{C}^\\\\text{op}$. This equivalen\"}\n  {\"name\": \"CategoryTheory.cosimplicialSimplicialEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \": (CosimplicialObject C)ᵒᵖ ≌ SimplicialObject Cᵒᵖ\", \"doc\": \"There is a natural equivalence between the opposite category of cosimplicial objects in a category $\\\\mathcal{C}$ and the category of simplicial objects in the opposite category $\\\\mathcal{C}^\\\\text{op}$\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"(X : CofibrantObject C) : WeakEquivalence (HoCat.ιCompResolutionNatTrans.app X)\", \"doc\": \"For any cofibrant object $X$ in a model category $\\\\mathcal{C}$, the component of the natural transformation between the inclusion of $X$ into the homotopy category of cofibrant objects and its resolut\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceWWeakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.DerivabilityStructureCofibrant\", \"type\": \"{X : C} (R : (localizerMorphism C).LeftResolution X) : WeakEquivalence R.w\", \"doc\": \"For any object $X$ in a model category $\\\\mathcal{C}$ and any left resolution $R$ of $X$, the morphism $R.w$ from the resolution is a weak equivalence in $\\\\mathcal{C}$. This follows from the fact that \"}\n  {\"name\": \"AlgebraicTopology.DoldKan.natTransQ_app\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.Projections\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C] (q : ℕ)\\n  (x : CategoryTheory.SimplicialObject C), (AlgebraicTopology.DoldKan.natTransQ q).app x = AlgebraicTopology.DoldKan.Q q\", \"doc\": \"For any preadditive category $\\\\mathcal{C}$, natural number $q$, and simplicial object $X$ in $\\\\mathcal{C}$, the component of the natural transformation $Q$ at degree $q$ applied to $X$ equals the chai\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"{X Y : C} (f : X ⟶ Y) : resolutionObj X ⟶ resolutionObj Y\", \"doc\": \"For objects $X$ and $Y$ in a model category $\\\\mathcal{C}$, this is a morphism $X' \\\\to Y'$ between their cofibrant replacements $X'$ and $Y'$ such that the diagram $X' \\\\to X \\\\xrightarrow{f} Y$ and $X' \"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary nerves, strict Segal spines and formal cosimplicial opposite equivalences do not give the pinched Q resolution or its weak-equivalence comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\", \"Hom\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary nerves, strict Segal spines and formal cosimplicial opposite equivalences do not give the pinched Q resolution or its weak-equivalence comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "pinched|rigidification|SingQ|coherent.*mapping|mapping.*coherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary nerves, strict Segal spines and formal cosimplicial opposite equivalences do not give the pinched Q resolution or its weak-equivalence comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-coherent-nerve-comparison",
+  "date": "2026-10-16",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

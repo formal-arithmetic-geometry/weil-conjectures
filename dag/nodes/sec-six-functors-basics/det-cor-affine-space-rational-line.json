@@ -3,49 +3,324 @@
  "blueprint": {
   "is": "det-cor-affine-space-rational-line",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The affine line",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$, let $p:\\mathbf A^1_V\\to V$ be the projection,\n$j:\\mathbf A^1_V\\hookrightarrow\\mathbf P^1_V$ the standard open immersion and\n$q:\\mathbf P^1_V\\to V$ the projection. On the categories\n$\\Loc(\\Dbc(-,\\Lambda))$:\n\n1. $j_!$ and $j^*$ preserve these categories and $j_!\\dashv j^*$;\n2. $Rp_!\\simeq Rq_*\\circ j_!$;\n3. $Rp_!$ is left adjoint to $p^*(1)[2]$, and $p^!\\simeq p^*(1)[2]$ as functors\n   $\\Loc(\\Dbc(V,\\Lambda))\\to\\Loc(\\Dbc(\\mathbf A^1_V,\\Lambda))$.",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ inside it. Let $V$ be a separated scheme of finite type over $k$ [sk-def-sfb-dc-setting], and let $\\Lambda=E$ or $\\Qlb$. For $E$ use its continuous-function condensed ring [sk-def-sfb-condensed-ring]; for $\\Qlb$ use the condensed ring of continuous functions with values in some finite subextension [sk-def-sfb-qlbar-condensed]. The coefficient ring on a scheme $X$ is its pullback $\\Lambda_X=p_X^*\\underline\\Lambda$ from the point [sk-def-sfb-pulled-back-coefficients]. Let $p:\\mathbf A^1_V\\to V$ be the affine-line projection [def-nagata-relative-affine-space], $j:\\mathbf A^1_V\\hookrightarrow\\mathbf P^1_V$ the standard open immersion, and $q:\\mathbf P^1_V\\to V$ the projective-line projection [def-nagata-relative-projective-space], so $p=q\\circ j$.\n\nUse the ambient module-object derived categories and derived pullbacks of [sk-def-sfb-module-derived-pushpull], bounded constructible complexes $\\Dbc$ of [sk-def-sfb-constructible], and localizing closure as in [sk-def-localizing-closure]. The functor $Rp_!$ is the compactification functor of [sk-def-sfb-module-derived-lower-shriek], and $p^!$ is its right adjoint on the localizing closures from [sk-prop-sf-existence]. Write $K(1)=K\\otimes^{\\mathbf L}_{\\Lambda_X}\\Lambda_X(1)$ for the Tate twist of [sk-def-sp-tate-twist], and $[2]$ for cohomological shift. Then:\n\n1. $j_!$ and $j^*$ preserve the respective categories $\\Loc(\\Dbc(-,\\Lambda))$, and their restrictions satisfy $j_!\\dashv j^*$;\n2. $Rp_!\\simeq Rq_*\\circ j_!$ on these categories;\n3. $Rp_!$ is left adjoint to $p^*(1)[2]$, and there is a natural isomorphism\n$$\np^!\\simeq p^*(1)[2]:\\Loc(\\Dbc(V,\\Lambda))\\longrightarrow\\Loc(\\Dbc(\\mathbf A^1_V,\\Lambda)),\n$$\nuniquely determined by compatibility with the two adjunction counits.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
   "place": "node det-cor-affine-space-rational-line, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "def-nagata-relative-affine-space",
+  "def-nagata-relative-projective-space",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "sk-prop-sf-existence",
+  "sk-def-sp-tate-twist",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
  "proof": [
   {
-   "text": "(1) $j^*$ and $j_!$ are exact and preserve direct sums on the ambient\npro-étale derived categories, and they preserve $\\Dbc$ (pullback and extension\nby zero of a lisse sheaf on a stratum are again of this form). So the full\nsubcategories of objects sent into $\\Loc(\\Dbc)$ are localizing and contain\n$\\Dbc$, hence $j_!$ and $j^*$ preserve the localizing categories. The\nadjunction $j_!\\dashv j^*$ on the ambient categories restricts to these full\nsubcategories.",
-   "uses": [],
-   "elementary": null
+   "text": "The standard-chart theorem [lemma-nagata-relative-affine-space-open-immersion] identifies $j$ with $D_+(T_0)\\subset\\mathbf P^1_V$, over $V$, so $qj=p$. Properness [lemma-nagata-projective-space-base-change-proper], using the two homogeneous coordinates $\\{0,1\\}$ in [def-nagata-projective-space-base-change], gives that $q$ is proper. The chart description also checks quasi-compactness of $j$: above an affine $W=\\operatorname{Spec}R\\subset V$, its intersection with the $T_0$ chart is the whole $\\operatorname{Spec}R[t]$, and with the $T_1$ chart is the principal open $D(s)\\subset\\operatorname{Spec}R[s]$, where $s=T_0/T_1$; both are affine, hence quasi-compact. On each chart the restricted inclusion is respectively the identity or the principal-open immersion $\\operatorname{Spec}R[s,s^{-1}]\\to\\operatorname{Spec}R[s]$, hence an affine morphism and quasi-compact (inverse images of affine opens for a localization are affine). These charts cover $\\mathbf P^1_V$, so [lem-pc-quasi-compact-local-on-target] proves that $j$ is quasi-compact. Thus $(j,q)$ is a compactification by [sk-def-nagata-sketch-data]. All three schemes are qcqs: $V$ is quasi-compact by finite type and quasi-separated by separatedness; a finite affine cover of $V$ gives a finite affine cover of $\\mathbf A^1_V$ and, with two charts over each member, of $\\mathbf P^1_V$. The affine-line diagonal is cut out over each $W$ by $t_1-t_2$, so the affine line is separated over $V$; the projective line is separated over $V$ because $q$ is proper. For either $X=\\mathbf A^1_V$ or $X=\\mathbf P^1_V$, its diagonal over $k$ factors through $X\\times_VX$: the second map is the inverse image of the closed diagonal of $V/k$, and the first is its closed diagonal over $V$. Locally the two closed subscheme equations combine by adding their ideals, so the composite is closed. Thus both schemes are separated over $k$. Their polynomial charts give finite type over $k$: adjoining the single chart variable to any finite set of generators of an affine base algebra still gives a finite generating set. Hence they remain in the standing setting.",
+   "uses": [
+    "lemma-nagata-relative-affine-space-open-immersion",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-nagata-projective-space-base-change",
+    "sk-def-nagata-sketch-data",
+    "def-weil-proper-morphism",
+    "lem-pc-quasi-compact-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
+    "place": "Proof (2): verify the standard compactification and the qcqs hypotheses used in (1)–(3)."
+   }
   },
   {
-   "text": "(2) $p=q\\circ j$ is a compactification of $p$ with $q$ proper, and $Rp_!$ on\nthe localizing categories is defined by compactifications\n([sk-prop-sf-existence]), so $Rp_!\\simeq Rq_*\\circ j_!$.",
+   "text": "For $X=V,\\mathbf A^1_V,\\mathbf P^1_V$, apply [det-def-localizing-closure-ctf-equals-bc] to the qcqs scheme $X$ and $\\Lambda\\in\\{E,\\Qlb\\}$, obtaining $\\Dctf(X,\\Lambda)=\\Dbc(X,\\Lambda)$ and equality of their localizing closures. Clause 1 of [det-sf-mate-open-restriction], with the quasi-compact open $j$ and qcqs target verified in step 1, gives functors $j_!$ and $j^*$ between the corresponding $\\Loc(\\Dctf)$ categories and $j_!\\dashv j^*$. Replacing these full subcategories by the equal $\\Loc(\\Dbc)$ subcategories proves (1). Only clause 1 of that node is used.",
    "uses": [
-    "sk-prop-sf-existence"
+    "det-def-localizing-closure-ctf-equals-bc",
+    "det-sf-mate-open-restriction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
+    "place": "Proof (1): preservation and restricted open adjunction, using the existing stronger open-immersion statement."
+   }
   },
   {
-   "text": "(3) By [sk-prop-p1-adjunction-rational], $Rq_*\\dashv q^*(1)[2]$ on the\nlocalizing categories. Composing adjunctions, $Rq_*j_!\\dashv j^*q^*(1)[2]$,\nand $j^*q^*=(qj)^*=p^*$; the Tate twist and shift commute with $j^*$. So\n$Rp_!\\dashv p^*(1)[2]$. Since $p^!$ is also right adjoint to $Rp_!$, the\nuniqueness of right adjoints gives a unique isomorphism\n$p^!\\simeq p^*(1)[2]$ compatible with the counits. (This is the\n$\\ell$-adic analogue of [cor-amb-affine-space-adjunction] for $d=1$.)",
+   "text": "For the compactification $c=(j,q)$ of step 1, the definition [sk-def-sfb-module-derived-lower-shriek] gives $Rp_!^c=Rq_*D(j_!)$. The functor of [sk-prop-sf-existence] is defined using a chosen compactification $c_p$. Apply [det-sf-comp-coherence-cocycle] to $p$, $c_p$ and $c$; $p$ is separated of finite type and its target $V$ is qcqs, as checked in step 1. It gives a natural isomorphism $Rp_!^{c_p}\\simeq Rp_!^c$ on $\\Loc(\\Dctf)$. The equalities of categories in step 2 give $Rp_!\\simeq Rq_*j_!$ on the claimed $\\Loc(\\Dbc)$ categories, proving (2). Here $j_!$ denotes its exact levelwise derived functor.",
    "uses": [
-    "cor-amb-affine-space-adjunction"
+    "sk-def-sfb-module-derived-lower-shriek",
+    "sk-prop-sf-existence",
+    "det-sf-comp-coherence-cocycle"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
+    "place": "Proof (2): definition for the standard compactification and comparison with the chosen one."
+   }
+  },
+  {
+   "text": "Identify the candidate right adjoint. The composition isomorphism of module pullbacks in [sk-def-sfb-module-pushforward-pullback] gives $j^*q^*\\simeq(qj)^*=p^*$ on sheaves. These pullbacks are exact by [sk-prop-sfb-cartesian-coefficients], so their derived versions in [sk-def-sfb-module-derived-pushpull] are computed levelwise. Applying the sheaf composition isomorphism in every degree therefore gives the same natural isomorphism on arbitrary unbounded complexes, and then on their localizing subcategories. An exact levelwise pullback commutes with cohomological shifts: both complexes in degree $n$ have term $j^*(L^{n+2})$ and differential $j^*(d^{n+2})$. Apply the final assertion of [det-prop-sfb-cartesian-coefficients-twists] with $f=j$ and $K=q^*N$; $\\ell$ is invertible since $p\\ne\\ell$. It gives $j^*((q^*N)(1))\\simeq(j^*q^*N)(1)$. Combining these natural identifications yields $j^*(q^*N(1)[2])\\simeq p^*N(1)[2]$ for every $N\\in\\Loc(\\Dbc(V,\\Lambda))$.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-derived-pushpull",
+    "det-prop-sfb-cartesian-coefficients-twists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
+    "place": "Proof (3): the identity $j^*q^*(1)[2]=p^*(1)[2]$, with coefficient category, twist and shift checked."
+   }
+  },
+  {
+   "text": "Use the adjunction $Rq_*\\dashv q^*(1)[2]$ explicitly asserted by [det-prop-p1-adjunction-rational-triangle], applied over $Y=V$ with the same rational coefficient $\\Lambda$. For $M\\in\\Loc(\\Dbc(\\mathbf A^1_V,\\Lambda))$ and $N\\in\\Loc(\\Dbc(V,\\Lambda))$, steps 2–4 give\n$$\n\\operatorname{Hom}(Rp_!M,N)\\simeq\\operatorname{Hom}(Rq_*j_!M,N)\\simeq\\operatorname{Hom}(j_!M,q^*N(1)[2])\\simeq\\operatorname{Hom}(M,j^*(q^*N(1)[2]))\\simeq\\operatorname{Hom}(M,p^*N(1)[2]).\n$$\nEvery bijection is natural in $M,N$: the first and last are induced by the natural isomorphisms of steps 3 and 4, and the middle two are the Hom bijections of the projective-line and open adjunctions. Their inverses in reverse order give the inverse composite. This exhibits $Rp_!\\dashv p^*(1)[2]$, including that the displayed right adjoint takes values in the required localizing category.",
+   "uses": [
+    "det-prop-p1-adjunction-rational-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
+    "place": "Proof (3): compose the two adjunctions through their natural Hom bijections."
+   }
+  },
+  {
+   "text": "By [sk-prop-sf-existence], $p^!$ is a right adjoint of this same $Rp_!$ on $\\Loc(\\Dctf)$, hence on the equal $\\Loc(\\Dbc)$ categories of step 2. Apply [det-sp-unique-right-adjoint] to $F=Rp_!$, $G=p^!$ and $J=p^*(1)[2]$, the latter adjunction being step 5. The $J$-transpose of the counit $Rp_!p^!N\\to N$ gives the component $p^!N\\to p^*N(1)[2]$; the cited statement makes these components natural, invertible and uniquely compatible with the counits. This proves the final assertion of (3).",
+   "uses": [
+    "sk-prop-sf-existence",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
+    "place": "Proof (3), final sentence: uniqueness of right adjoints and counit compatibility."
+   }
   }
  ],
  "proof_deps": [
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-nagata-projective-space-base-change",
+  "sk-def-nagata-sketch-data",
+  "def-weil-proper-morphism",
+  "lem-pc-quasi-compact-local-on-target",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-sf-mate-open-restriction",
+  "sk-def-sfb-module-derived-lower-shriek",
   "sk-prop-sf-existence",
-  "cor-amb-affine-space-adjunction"
+  "det-sf-comp-coherence-cocycle",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "det-prop-p1-adjunction-rational-triangle",
+  "det-sp-unique-right-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
-  "place": "## Proof"
+  "place": "Proof (1)–(3), expanded into six steps; standard compactification comparison, category equality and natural Hom bijections made explicit."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compact support pushforward for an affine line is left adjoint to the inverse image Tate twisted by one and shifted by two",
+   "results": {
+    "t": "2026-10-16T15:43:03Z",
+    "tool": "leansearch",
+    "query": "Compact support pushforward for an affine line is left adjoint to the inverse image Tate twisted by one and shifted by two",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Sheaf.instIsLeftAdjointPullback",
+     "TopCat.Presheaf.pushforwardPullbackAdjunction",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "TopCat.Sheaf.pullbackPushforwardAdjunction",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "TopCat.Sheaf.pullback",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction"
+    ],
+    "digest": "13d9432715e845ac"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern scheme charts, ordinary sheaf adjunctions or untwisted integral coefficients; none states rational affine-line exceptional adjunction on constructible localizing closures"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(purity|adjunction)|tateTwist|upperShriek",
+   "results": {
+    "t": "2026-10-16T15:43:05Z",
+    "tool": "grep",
+    "query": "affine.*(purity|adjunction)|tateTwist|upperShriek",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/AffineScheme.lean"
+    ],
+    "digest": "fa81f28fd003e5dd"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern scheme charts, ordinary sheaf adjunctions or untwisted integral coefficients; none states rational affine-line exceptional adjunction on constructible localizing closures"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Adjunction",
+   "results": {
+    "t": "2026-10-16T15:43:07Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.Scheme, CategoryTheory.Adjunction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.opensFunctorAdjunction",
+     "AlgebraicGeometry.ΓSpec.adjunction",
+     "AlgebraicGeometry.Scheme.kerAdjunction",
+     "AlgebraicGeometry.algΓAlgSpecAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction"
+    ],
+    "digest": "e42a865c5f8259c8"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern scheme charts, ordinary sheaf adjunctions or untwisted integral coefficients; none states rational affine-line exceptional adjunction on constructible localizing closures"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional inverse image for the affine line projection with rational ell adic coefficients is pullback with Tate twist one and shift two on the localizing category of bounded constructible pro etale complexes",
+   "results": {
+    "t": "2026-10-16T15:43:09Z",
+    "tool": "leanfinder",
+    "query": "The exceptional inverse image for the affine line projection with rational ell adic coefficients is pullback with Tate twist one and shift two on the localizing category of bounded constructible pro etale complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Proj.pullbackAwayιIso",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.g",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'"
+    ],
+    "digest": "0fe7ceb7ce49bdb5"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern scheme charts, ordinary sheaf adjunctions or untwisted integral coefficients; none states rational affine-line exceptional adjunction on constructible localizing closures"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate|shriek|ellAdic",
+   "results": {
+    "t": "2026-10-16T15:43:25Z",
+    "tool": "grep",
+    "query": "Tate|shriek|ellAdic",
+    "sub": "AlgebraicGeometry/Sites",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean"
+    ],
+    "digest": "a2316ee2f8e31b2c"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern scheme charts, ordinary sheaf adjunctions or untwisted integral coefficients; none states rational affine-line exceptional adjunction on constructible localizing closures"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality for rational l adic sheaves on affine one space identifies compact support direct image right adjoint with shifted twisted inverse image",
+   "results": {
+    "t": "2026-10-16T15:43:27Z",
+    "tool": "leanfinder",
+    "query": "Poincare duality for rational l adic sheaves on affine one space identifies compact support direct image right adjoint with shifted twisted inverse image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+     "SheafOfModules.instIsRightAdjointPushforward",
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "CondensedMod.LocallyConstant.adjunction",
+     "LightCondMod.LocallyConstant.adjunction",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction"
+    ],
+    "digest": "20159728bc4be50e"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern scheme charts, ordinary sheaf adjunctions or untwisted integral coefficients; none states rational affine-line exceptional adjunction on constructible localizing closures"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality smooth projection affine line right adjoint compactly supported cohomology",
+   "results": {
+    "t": "2026-10-16T16:28:29Z",
+    "tool": "leanfinder",
+    "query": "Verdier duality smooth projection affine line right adjoint compactly supported cohomology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+     "CondensedMod.LocallyConstant.adjunction",
+     "LightCondMod.LocallyConstant.adjunction",
+     "CondensedSet.LocallyConstant.adjunction",
+     "LightCondSet.LocallyConstant.adjunction",
+     "CompHausLike.LocallyConstant.adjunction_left_triangle",
+     "CompHausLike.LocallyConstant.adjunction_counit",
+     "Condensed.profiniteSolidCounit"
+    ],
+    "digest": "5ed956b07d0de18f"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary structure-sheaf module pushforward and locally constant condensed adjunctions do not state the exceptional rational affine-line adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|lowerShriek|exceptionalInverse|verdier",
+   "results": {
+    "t": "2026-10-16T16:31:30Z",
+    "tool": "grep",
+    "query": "compactSupport|lowerShriek|exceptionalInverse|verdier",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: zero source hits in Mathlib/AlgebraicGeometry"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -60,5 +335,69 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-cor-affine-space-rational"
+ "unit": "sk-cor-affine-space-rational",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-cor-affine-space-rational-line",
+  "worker": "stage1",
+  "summary": "Restored the standing base and coefficient hypotheses omitted in the standalone import (STATEMENT-DISPUTED in report), retained all three conclusions, and split the standard-compactification/projective-line-adjunction argument into six complete steps using existing nodes only. Checked every cited statement, chosen-compactification independence, rational Dctf/Dbc equality, twist and shift compatibility, and counit uniqueness. No Lean attachment found; no new nodes.",
+  "blueprint": "The item realizes the d=1 argument of unit sk-cor-affine-space-rational, step 1. Item proof (1) is step 2 after the geometry in step 1; proof (2) is step 3; proof (3) is steps 4–6. The general-d induction and constructible restriction remain with the neighboring node. The illustrative finite-coefficient pointer cor-amb-affine-space-adjunction is not a proof dependency.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "Standard affine chart geometry needed to verify the compactification, not a replacement for the unit’s projective-line adjunction route."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Properness of the projective-line projection; the unit assumes this geometry without a separate node."
+   },
+   {
+    "node": "det-def-localizing-closure-ctf-equals-bc",
+    "why": "Equality of the two coefficient-specific localizing categories needed to apply the existing open adjunction and Brown existence interfaces."
+   },
+   {
+    "node": "det-sf-mate-open-restriction",
+    "why": "Only clause 1, the open-immersion adjunction on localizing closures, supplies the first adjunction that the unit composes."
+   },
+   {
+    "node": "det-sf-comp-coherence-cocycle",
+    "why": "Generic independence of compactification compares the standard one with the chosen compactification defining lower shriek."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Exactness of the module pullbacks permits the sheaf composition comparison to pass levelwise to arbitrary derived complexes."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Generic pullback compatibility of Tate twists on ambient condensed module-object categories identifies the composite right adjoint."
+   },
+   {
+    "node": "sk-prop-sf-existence",
+    "why": "Supplies the already constructed exceptional right adjoint on the same localizing closures."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic categorical uniqueness of right adjoints, with precisely the counit-compatible isomorphism required at the end."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-sf-mate-open-restriction",
+  "det-sf-comp-coherence-cocycle",
+  "sk-prop-sfb-cartesian-coefficients",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "sk-prop-sf-existence",
+  "det-sp-unique-right-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q21-8ff9d78a7",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-8ff9d78a7 (reviewer sub-agent of L); spot-checked: Read the item, blueprint route, chapter/unit records, all 18 dependency statements and cited sources. Verified hypotheses, compactification, coefficient category, base-change maps, Tate twist, adjunction orientation, counit uniqueness, edge cases, route lock, and acyclicity. No new nodes or repairs are needed. Wrote review.md. The report mentions citations.json, absent from the snapshot; citations were independently checked directly."
+ }
 }

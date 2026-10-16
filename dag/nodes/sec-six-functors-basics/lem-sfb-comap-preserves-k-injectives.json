@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-comap-preserves-k-injectives",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Flat restriction of scalars preserves K-injectives",
@@ -18,24 +18,116 @@
  ],
  "proof": [
   {
-   "text": "Let $I$ be a K-injective complex of $\\Lambda'_X$-modules and $C$ an acyclic complex of\n$\\Lambda_X$-modules. By the adjunction $\\operatorname{Ext}_{a_X}\\dashv\\operatorname{Res}_{a_X}$\n([sk-def-sfb-change-of-scalars]), applied termwise and passed to the homotopy category,\n$\\Hom_K(C,\\operatorname{Res}_{a_X}I)\\cong\\Hom_K(\\operatorname{Ext}_{a_X}C,I)$. The functor\n$\\operatorname{Ext}_{a_X}$ is exact (right exact as a left adjoint, left exact by assumption),\nso $\\operatorname{Ext}_{a_X}C$ is acyclic and the right side vanishes since $I$ is K-injective.",
+   "text": "Fix a scheme $X$ and put $\\mathcal C=\\Sh(X_{\\mathrm{proét}},\\Ab)$, using a small representative in the chosen universe. The abelian-category clause of [lem-weil-pbc-site-sheaves-enough-injectives] makes $\\mathcal C$ abelian; its assertion about injectives is not needed. By [sk-def-sfb-sheaf-tensor], this category is closed symmetric monoidal and tensoring on either side preserves colimits. In particular tensoring preserves the zero object and binary coproducts, hence the biproduct addition formula $f+g=\\nabla\\circ(f\\oplus g)\\circ\\Delta$, so tensoring is additive. Equalizers and coequalizers exist in an abelian category (as kernels and cokernels of differences). The map $a_X:\\Lambda_X\\to\\Lambda'_X$ is a morphism of commutative ring objects by [sk-def-sfb-coefficient-change]. Thus all hypotheses of clauses 2, 3 and 4 of [sk-def-sfb-change-of-scalars] hold. These clauses give abelian categories $\\mathcal B=\\Mod_{\\Lambda_X}$ and $\\mathcal A=\\Mod_{\\Lambda'_X}$, an adjunction $E=\\operatorname{Ext}_{a_X}\\dashv R=\\operatorname{Res}_{a_X}$, and preservation of finite colimits by $E$.",
    "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-coefficient-change",
     "sk-def-sfb-change-of-scalars"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-comap-preserves-k-injectives.proof.md",
+    "place": "proof paragraph, Ext–Res adjunction and right exactness; ambient abelianness: Stacks tag 03CN, sites-modules.tex, lemma-abelian-abelian (1)"
+   }
+  },
+  {
+   "text": "Restriction $R$ is additive: it leaves underlying morphisms unchanged by clause 1 of [sk-def-sfb-change-of-scalars], and sums of module morphisms are their underlying sums. Extension $E$ is additive because it preserves finite coproducts and the zero object: finite coproducts in an abelian category are biproducts, their projections are characterized using identities and zero maps, and the biproduct formula $f+g=\\nabla\\circ(f\\oplus g)\\circ\\Delta$ is therefore preserved. The hypothesis on $a$ gives preservation of finite limits by $E$ at this particular $X$. Together with the finite-colimit preservation from step 1, this is exactly exactness as defined in [def-galois-exact-functor] (Stacks tag 0034, definition-exact).",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "def-galois-exact-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-comap-preserves-k-injectives.proof.md",
+    "place": "proof paragraph, exactness of extension; Stacks tag 0034, categories.tex, definition-exact"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with $u=R:\\mathcal A\\to\\mathcal B$ and $v=E:\\mathcal B\\to\\mathcal A$. Step 1 supplies the abelian categories and $v\\dashv u$, and step 2 supplies additivity and exactness of $v$. The cited theorem then says that applying $R$ termwise to every K-injective complex $I$ in $\\mathcal A$ produces a K-injective complex in $\\mathcal B$, which is the required assertion at $X$. Since $X$ was arbitrary, the assertion holds for every scheme. This is the source's argument packaged by the existing generic theorem; no boundedness of $I$ is required.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Stacks tag 08BJ, lemma-adjoint-preserve-K-injectives; the same Hom_K argument as the blueprint proof paragraph"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-change-of-scalars"
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-change-of-scalars",
+  "def-galois-exact-functor",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-comap-preserves-k-injectives.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-comap-preserves-k-injectives.proof.md",
+  "place": "proof paragraph, using the existing abstract form Stacks tag 08BJ (derived.tex, lemma-adjoint-preserve-K-injectives); setup hypotheses made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of scalars along a flat ring map preserves K-injective complexes",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat; other flatness and tensor-injectivity declarations; no K-injective preservation theorem for condensed module objects",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesKInjectiveComplexes, Adjunction.preservesKInjectiveComplexes",
+   "results": "0 hits; loogle reports unknown identifier 'PreservesKInjectiveComplexes'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesKInjectiveComplexes|preservesKInjectiveComplexes",
+   "results": "0 hits in Mathlib/Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of scalars along an exact or flat extension of scalars sends K-injective complexes to K-injective complexes",
+   "results": "RestrictScalars, ModuleCat.restrictScalars, PresheafOfModules.restrictScalars and related scalar-restriction declarations; no K-injective preservation theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint to an exact additive functor between abelian categories preserves K-injective cochain complexes",
+   "results": "CochainComplex.IsKInjective.rightOrthogonal and CochainComplex.isKInjective_iff_rightOrthogonal; Ext.mapExactFunctor; exact-functor derived-category constructions; InjectiveResolution.instIsKInjectiveCochainComplex. These are orthogonality, exact-functor maps or ordinary injective resolutions, not preservation of arbitrary unbounded K-injective complexes by right adjoints.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "CochainComplex.IsKInjective, isKInjective_of_injective, HomotopyEquiv.isKInjective, isKInjective_of_iso, isKInjective_shift_iff, IsKInjective.homotopyZero, and cocycle-boundary lemmas. Read Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:35-99: the invariant is defined but no scalar-restriction preservation theorem is supplied.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsKInjective|KInjective",
+   "results": "Search subdirectory Algebra/Homology: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:42,48,49,51,53; KProjective.lean; ModelCategory/Injective.lean; DerivedCategory/KInjective.lean. Read the KInjective declarations: definition, homotopy/shift invariance, bounded below complexes of injective objects; no exact-adjoint preservation for arbitrary unbounded complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right adjoint of an exact functor preserves homotopically injective complexes",
+   "results": "CategoryTheory.Injective.injective_of_adjoint, Adjunction.map_injective, Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms, and ShortComplex.Exact.map_of_preservesRightHomologyOf. The first three concern injective objects, not K-injective unbounded complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -57,5 +149,34 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-comap-preserves-k-injectives",
+  "worker": "stage1",
+  "summary": "Preserved the current blueprint statement and route. Repaired the earlier attempt’s C3/C4 error: module-category abelianness was quoted from the proof, not the statement, of the derived-category node. Now cited statements supply ambient abelianness, the closed monoidal tensor, the coefficient ring map and the scalar adjunction with its abelian module categories. Wrote additivity and exactness explicitly and applied the already-existing generic right-adjoint K-injective theorem. Repeated semantic/name/source Mathlib searches; no new nodes.",
+  "blueprint": "Steps 1–2 realize the adjunction and exactness clauses of the sole lem-sfb-comap-preserves-k-injectives proof paragraph; step 3 realizes its K-injective Hom_K vanishing via existing Stacks 08BJ. This carries the preservation assertion in unit sk-def-sfb-coefficient-comparisons, step 3, without changing that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Uses only the statement that abelian sheaves on a small site form an abelian category, to check the ambient hypothesis of scalar change; this generic setup theorem does not replace any coefficient-comparison argument."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Existing generic exact-left-adjoint/right-adjoint K-injective preservation theorem (Stacks 08BJ), applied after verifying the module-category and exactness hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q39-d57d319cb",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-d57d319cb (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, blueprint route, Stacks 03CN/0034/08BJ, and master coefficient/base-change sources. All three steps check correctly, including additivity, exactness, and unbounded K-injective preservation. No new nodes, cycles, target weakening, or repairs. Accepted both declared generic tool uses. Concrete checks recorded in review.md."
+ }
 }

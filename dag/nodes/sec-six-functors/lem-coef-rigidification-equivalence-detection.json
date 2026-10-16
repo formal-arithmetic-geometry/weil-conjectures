@@ -1,0 +1,77 @@
+{
+ "id": "lem-coef-rigidification-equivalence-detection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and the following naturality and triangle-identity sentences; foundational enhancement of finite coefficient adjunction diagrams. Technical input: Rigidification detects categorical equivalences.",
+   "via": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Rigidification detects categorical equivalences",
+ "statement": "Use simplicial sets [def-weil-pbc-simplicial-set], simplicial categories as defined in [lem-coef-simplicial-interval-lifting], and categorical equivalences in the testing convention of [lem-coef-joyal-model-structure]: $f:S\\to T$ is such an equivalence when $h\\operatorname{Fun}(T,Z)\\to h\\operatorname{Fun}(S,Z)$ is an equivalence for every quasicategory $Z$ in a sufficiently large universe. For $n\\geq0$, define $\\mathfrak C[\\Delta^n]$ with objects $0,\\ldots,n$ and mapping simplicial set from $i$ to $j$ for $i\\leq j$ the ordinary nerve of the poset of subsets of $\\{i,\\ldots,j\\}$ containing both endpoints, ordered by inclusion; the mapping set is empty for $i>j$. Composition is union of subsets. A monotone map induces the enriched functor given by image of subsets. For every simplicial set $S$, put $\\mathfrak C[S]=\\operatorname{colim}_{\\Delta^n\\to S}\\mathfrak C[\\Delta^n]$, with colimit in $\\mathrm{sCat}$. Then for every simplicial map $f:S\\to T$, $\\mathfrak C[f]$ is a Dwyer--Kan equivalence [lem-coef-simplicial-interval-cell-stability] if and only if $f$ is a categorical equivalence.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Theorem 2.2.5.1, condition (W), and Proposition 2.2.5.8 (the homotopy-category-of-functors test). No Stacks tag states this rigidification criterion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-simplicial-interval-cell-stability"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map of simplicial sets is a categorical equivalence exactly when its coherent realization is a Dwyer Kan equivalence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C ≃ (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a natural equivalence between the category of functors from the homotopy category of $X$ to $\\\\mathcal{C}$ and the category o\"}\n  {\"name\": \"SSet.OneTruncation₂.nerveEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve C)) ≃ C\", \"doc\": \"The 2-truncated nerve of a category $\\\\mathcal{C}$, obtained by restricting the nerve simplicial set to dimensions $\\\\leq 2$, is canonically equivalent to $\\\\mathcal{C}$. This establishes that the data o\"}\n  {\"name\": \"SSet.hoFunctor.unitHomEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal\", \"type\": \"(X : SSet) →\\n  (CategoryTheory.MonoidalCategoryStruct.tensorUnit SSet ⟶ X) ≃\\n    CategoryTheory.Functor ↑CategoryTheory.Cat.chosenTerminal ↑(SSet.hoFunctor.obj X)\", \"doc\": \"For any simplicial set $X$, there is a canonical equivalence between the set of morphisms from the terminal simplicial set to $X$ in the category of simplicial sets and the set of functors from the te\"}\n  {\"name\": \"SSet.Truncated.nerve₂Adj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.Truncated.hoFunctor₂ ⊣ CategoryTheory.Nerve.nerveFunctor₂\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.nerveAdjunction\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor ⊣ CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor.IsLeftAdjoint\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category, is a left adjoint functor. This functor is constructed by\"}\n  {\"name\": \"SSet.hoFunctor.terminalIso\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"SSet.hoFunctor.obj (⊤_ SSet) ≅ ⊤_ CategoryTheory.Cat\", \"doc\": \"The homotopy category functor applied to the terminal object in the category of simplicial sets (the standard 0-simplex $\\\\Delta^0$) is isomorphic to the terminal object in the category of small catego\"}\n  {\"name\": \"SimplexCategory.SkeletalFunctor.isEquivalence\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Basic\", \"type\": \"SimplexCategory.skeletalFunctor.IsEquivalence\", \"doc\": \"The skeletal functor from the simplex category $\\\\Delta$ to the category of nonempty finite linearly ordered types establishes an equivalence of categories. This means the simplex category is equivalen\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary/truncated nerve adjunctions and the definition of SimplicialNerve do not detect categorical equivalences by enriched rigidification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rigidification detects categorical equivalences of simplicial sets using homotopy categories of functors into every quasicategory",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.hoFunctor\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HomotopyCat\", \"type\": \": SSet.{u} ⥤ Cat.{u, u}\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, constructed as the composition of the 2-truncation functor and the homotopy category functor for 2-truncated simpl\"}\n  {\"name\": \"SSet.hoFunctor.unitHomEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HoFunctorMonoidal\", \"type\": \"(X : SSet.{u}) : (𝟙_ SSet ⟶ X) ≃ Cat.chosenTerminal ⥤ hoFunctor.obj X\", \"doc\": \"For any simplicial set $X$, there is a canonical equivalence between the set of morphisms from the terminal simplicial set to $X$ in the category of simplicial sets and the set of functors from the te\"}\n  {\"name\": \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \": hoFunctor.IsLeftAdjoint\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category, is a left adjoint functor. This functor is constructed by\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": fibrations SSet.{u} = J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"{X Y : CofibrantObject C} {f g : X ⟶ Y} (h : homRel C f g) : toHoCat.map f = toHoCat.map g\", \"doc\": \"If two morphisms between cofibrant objects in a model category are right homotopic, then their images under the canonical functor to the homotopy category of cofibrant objects are equal. This reflects\"}\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $X$ is a quasi-category if every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ extending it, for all $0 < k < n$.\"}\n  {\"name\": \"SSet.QCat.bicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictBicategory\", \"type\": \": Bicategory QCat\", \"doc\": \"The category of quasi-categories (QCat) is equipped with a bicategory structure, obtained by transporting the enrichment along the homotopy category functor for simplicial sets. This structure uses th\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \": (X.HomotopyCategory ⥤ C) ≃ (X ⟶ (truncation 2).obj (nerve C))\", \"doc\": \"For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a natural equivalence between the category of functors from the homotopy category of $X$ to $\\\\mathcal{C}$ and the category o\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary/truncated nerve adjunctions and the definition of SimplicialNerve do not detect categorical equivalences by enriched rigidification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\", \"Equivalence\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary/truncated nerve adjunctions and the definition of SimplicialNerve do not detect categorical equivalences by enriched rigidification."
+  },
+  {
+   "tool": "grep",
+   "query": "rigidification|categoricalEquivalence|homotopyCoherent|SimplicialNerve",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"24\", \"text\": \"`SimplicialNerve C _⦋n⦌ := EnrichedFunctor SSet (SimplicialThickening (Fin (n + 1))) C`.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"28\", \"text\": \"* Prove that the 0-simplices of `SimplicialNerve C` may be identified with the objects of `C`\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"29\", \"text\": \"* Prove that the 1-simplices of `SimplicialNerve C` may be identified with the morphisms of `C`\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"50\", \"text\": \"section SimplicialNerve\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"193\", \"text\": \"def SimplicialNerve (C : Type u) [Category.{v} C] [SimplicialCategory C] :\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary/truncated nerve adjunctions and the definition of SimplicialNerve do not detect categorical equivalences by enriched rigidification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-coherent-nerve-comparison",
+  "date": "2026-10-16",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

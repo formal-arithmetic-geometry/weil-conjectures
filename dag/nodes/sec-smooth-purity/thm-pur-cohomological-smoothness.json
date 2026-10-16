@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-pur-cohomological-smoothness",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomological smoothness of smooth morphisms",
@@ -21,48 +21,239 @@
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-derived-tensor",
   "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-pur-co-smoothness",
+  "def-weil-finite-tor-amplitude"
  ],
  "proof": [
   {
-   "text": "Work at a finite coefficient stage. The earlier orientation-free\ntheorem [thm-asd-smooth-tensor] proves the canonical tensor\nformula on the ordinary etale site and shows that\n$\\omega_f[-2d]$ is a locally constant free rank-one sheaf.\nIn particular it is tensor-invertible, and tensoring it with the\npullback of a bounded constructible finite-Tor complex stays in that\ncategory. The actual-adjoint comparison\n[thm-sf-ambient-adjoint-class] and\n[thm-weil-pbc-site-comparison] transport the tensor map and\nits isomorphy to the finite etale-origin objects used here.\nBecause the map is obtained by transposing the projection formula\nand counit on both sites, the transported map is the canonical\n$\\theta_{f,K}$ in [def-pur-co-smoothness].",
+   "text": "Work at the finite stage $A=\\Lambda=A_{E,n}$, as specified by [def-pur-conventions]; the other coefficient stages are subsequent transports, not an extra assertion here. The schemes and base changes in this assertion are finite-type $k$-schemes. They are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. In particular they are quasi-compact and quasi-separated. The assumed separated finite-type $f$ has a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$ by [thm-nagata-compactification]. Its proper part is finite type over $Y$, so $\\overline X$ is finite type over $k$ and has finite dimension by [lem-kun-dimension-finite-type]. Choose a nonnegative integer bounding that dimension (take zero for an empty compactification). The ring $A$ is finite by [def-weil-l-adic-coefficient-extension]. Also $|\\ell|_E=\\ell^{-1}<1$; writing $\\ell=u\\varpi_E^e$ by its uniformizer decomposition gives $e\\geq1$, hence $\\ell^n\\in(\\varpi_E^n)$ and $N=\\ell^n$ annihilates $A$. This $N$ is invertible over $k$ because $\\ell\\ne p$. Thus the Noetherian, compactifiable, coefficient and pure-dimension hypotheses of [thm-asd-smooth-tensor] and the compactification-dimension hypothesis of [thm-sf-ambient-adjoint-class] hold. The affine-space model also has the ordinary adjunction supplied by [cor-amb-affine-space-adjunction], and the historical affine-line supported Kummer normalization is uniquely characterized by [prop-pur-affine-line-orientation-uniqueness]; these record the historical model normalization while the argument below remains orientation-free. The same verification applies to $f'$ and to any other smooth map used below.",
    "uses": [
-    "thm-asd-smooth-tensor",
-    "thm-sf-ambient-adjoint-class",
-    "thm-weil-pbc-site-comparison",
-    "def-pur-co-smoothness"
+    "def-pur-conventions",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification",
+    "lem-kun-dimension-finite-type",
+    "def-weil-l-adic-coefficient-extension",
+    "cor-amb-affine-space-adjunction",
+    "prop-pur-affine-line-orientation-uniqueness"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "First paragraph: finite coefficient stage; hypotheses of the ordinary-etale input"
+   }
   },
   {
-   "text": "For the third condition of that definition,\n[lem-pur-smb-extraordinary] proves arbitrary base change of the\nactual right adjoint, and [prop-asd-smooth-base-change] also\nproves its compatibility with the tensor transformation before\ntransport. Thus these are all three conditions of cohomological\nsmoothness. For composition, [lem-pur-co-smooth-composition]\nidentifies $\\omega_{gf}$ with\n$\\omega_f\\otimes^LLf^*\\omega_g$. The two tensor transformations\nagree: transposing them gives the projection formula followed by\nthe same two counits, composed in their adjunction order. This\nproves the fourth assertion without using an orientation of $f$.",
+   "text": "Write $V_T=\\nu_T^*$. Given $K\\in D^b_{ctf}(Y,A)$, [lem-sf-proetale-constructible-origin](ii) supplies a bounded constructible etale antecedent $H$ and $K\\cong V_YH$. We need no Tor assertion about $H$ to apply the ordinary-etale tensor theorem, which allows every complex. By [thm-weil-pbc-site-comparison] the unit $H\\to R\\nu_{Y,*}V_YH$ is an isomorphism. Consequently the defining formula [def-weil-exceptional-inverse-image] gives\n$$Rf^!K\\cong V_Xf^\\times H,\\qquad \\omega_f\\cong V_XW_f,\\quad W_f=f^\\times A_Y.$$\nHere $f^\\times$ is the ordinary-etale compact-support right adjoint; it is not an unrestricted pro-etale adjoint. The adjunction on bounded-below etale-origin objects is exactly the natural Hom bijection of [thm-sf-ambient-adjoint-class]. Denote by $F_f$ the ordinary-etale compact-support functor, and by $P_f=Rf_!$ its pro-etale counterpart. The natural comparison of [lem-sf-class-compact-support-comparison] is $C_M:P_fV_XM\\xrightarrow{\\sim}V_YF_fM$. Transporting the etale counit along this Hom bijection characterizes the pro-etale counit on these objects by\n$$\\epsilon^{P}_{V_YH}=V_Y(\\epsilon^{F}_H)\\circ C_{f^\\times H}$$\nafter the displayed right-adjoint identification. Indeed both counits are the inverse transposes of the identity of the same right-adjoint value. This also proves independence of the chosen antecedent, since the Hom bijection and $C$ are natural in its witness.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "thm-weil-pbc-site-comparison",
+    "def-weil-exceptional-inverse-image",
+    "thm-sf-ambient-adjoint-class",
+    "lem-sf-class-compact-support-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "First paragraph: actual-adjoint and site comparisons, with the counit normalization made explicit"
+   }
+  },
+  {
+   "text": "Apply [thm-asd-smooth-tensor] to the same $f$ and $A$. It gives an etale locally constant free rank-one sheaf $L$ with $W_f\\cong L[2d]$ and an isomorphism\n$$\\phi_{f,H}:f^*H\\otimes_A^LW_f\\xrightarrow{\\sim}f^\\times H.$$\nIt specifies this very map as the transpose of the inverse projection formula followed by $1_H\\otimes\\epsilon^F_{A_Y}$ and the unit constraint. This statement supplies both the map and its isomorphy; an arbitrary isomorphism between these objects would not suffice. Its rank-one conclusion chooses no orientation $L\\cong A_X(d)$.",
+   "uses": [
+    "thm-asd-smooth-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "First paragraph: the orientation-free tensor theorem and rank-one conclusion"
+   }
+  },
+  {
+   "text": "The inverse of $L[2d]$ can be constructed without a new geometric theorem. Put $L^\\vee=\\mathcal Hom_A(L,A_X)$, using [def-pur-sheaf-hom]. On an etale cover trivializing $L$, evaluation $L\\otimes_A L^\\vee\\to A_X$ is $A\\otimes_A A\\to A$, with inverse $a\\mapsto1\\otimes a$. These maps are compatible with restriction; the evaluations are isomorphisms by [lemma-weil-pbc-geometric-stalk-conservative], applied to underlying abelian sheaves. Tensoring by either line preserves injections: on the same cover it is tensoring by $A$, hence the original injection, and kernels vanish if their restrictions vanish. Thus both lines are flat. They are constructible because they are locally constant with finite rank-one stalks over the finite ring $A$. The tensor of these one-term flat complexes computes derived tensor; shifting the factors by $2d$ and $-2d$ cancels the shifts. Hence\n$$W_f\\otimes_A^L L^\\vee[-2d]\\cong A_X\\cong L^\\vee[-2d]\\otimes_A^LW_f.$$\nApply the exact comparison $V_X$ and its monoidal isomorphism [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The two transported lines are still locally constant free rank one: pull back the same trivializing cover. They are flat by the same local injection argument. Consequently $M=V_XL^\\vee[-2d]$ is bounded constructible and of finite Tor amplitude, and the two evaluations identify $\\omega_f\\otimes_A^LM$ and $M\\otimes_A^L\\omega_f$ with $A_X$. This is invertibility in precisely the sense of [def-pur-co-smoothness], including the required finite-Tor inverse.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "First paragraph: “In particular it is tensor-invertible”; explicit dual line and evaluations"
+   }
+  },
+  {
+   "text": "We identify the transported tensor map with the specified canonical map. The pullback comparison [lem-weil-pbc-comparison-pullback] and tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identify\n$$Lf^*K\\otimes_A^L\\omega_f\\cong V_X(f^*H\\otimes_A^LW_f).$$\nUnder these identifications, the projection formula for $P_f$ is the image of the etale one. To verify the map, use the chosen compactification from Step 1 and the definition [def-exchange-projection]. Its proper factor is the counit-defined projection map for $p$; apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the commutative comparison square with vertical edges $p_{\\mathrm{proet}},p_{\\mathrm{et}}$ and horizontal edges $\\nu_{\\overline X},\\nu_Y$. This lemma needs commutation of ringed topoi, not a Cartesian square. Use [lem-weil-pbc-comparison-direct-image-canonical-mate] to identify the proper comparison with the very exchange mate occurring in this coherence lemma; properness supplies its quasi-compact and quasi-separated hypotheses. Thus the inverse of that mate, in the direction used by $C$, intertwines the two projection maps. For the open factor, [lem-cbc-proetale-extension-zero-comparison] identifies $V_{\\overline X}j^{\\mathrm{et}}_!$ with $j^{\\mathrm{proet}}_!V_X$, termwise. Its compatibility with the canonical tensor map [lem-cbc-extension-zero-projection-formula] is checked before deriving. Compare the inverse tensor maps, whose common source after comparison is $j_!V_X(M\\otimes j^{-1}Q)$: under the exact adjunction $j_!\\dashv j^{-1}$ of [lem-cbc-proetale-extension-zero], both maps are the identity on $V_X(M\\otimes j^{-1}Q)$, after the displayed pullback and tensor comparisons. They are equal by the adjunction bijection. Apply this equality to K-flat representatives and totalize to obtain equality of the derived maps. This is an equality proved by adjunction, not by testing derived morphisms on geometric stalks. Composing the proper and open identities gives the compact-support projection identity under $C$. With the counit identity of Step 2, the transpose of $V_X\\phi_{f,H}$ is therefore\n$$P_f(Lf^*K\\otimes_A^L\\omega_f)\\xrightarrow{\\mathrm{PF}^{-1}}K\\otimes_A^LP_f\\omega_f\\xrightarrow{1\\otimes\\epsilon^P_{A_Y}}K.$$\nProjection invertibility on these constructible finite-Tor inputs is [fix-prop-projection-formula]; using symmetry gives the order of factors displayed in [def-pur-co-smoothness]. That definition specifies $\\theta_{f,K}$ by precisely this transpose. Injectivity of the adjunction Hom bijection [thm-sf-ambient-adjoint-class] gives $V_X\\phi_{f,H}=\\theta_{f,K}$. Since a functor preserves an isomorphism, Step 3 proves clause 1 for the canonical map, naturally in $K$. The equality is equality of derived morphisms, obtained by adjunction, not a test of morphisms on stalks.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-exchange-projection",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-cbc-extension-zero-projection-formula",
+    "fix-prop-projection-formula",
+    "def-pur-co-smoothness",
+    "thm-sf-ambient-adjoint-class",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-proetale-extension-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "First paragraph: transporting the canonical tensor map, not merely its source and target; Stacks 07A4 and 0E48"
+   }
+  },
+  {
+   "text": "For the Cartesian square in the statement, [lem-pur-smb-extraordinary] gives the canonical isomorphism\n$$\\beta_K:Lu^*Rf^!K\\xrightarrow{\\sim}Rf'^!Lv^*K.$$\nApply it at the constant coefficient object $K=A_Y$ (a one-term free, hence finite-Tor constructible object). Exact constant-coefficient inverse image sends $A_Y$ to $A_{Y'}$, giving $b:Lu^*\\omega_f\\xrightarrow{\\sim}\\omega_{f'}$. To check tensor-map compatibility, apply [prop-asd-smooth-base-change] to the antecedent $H$. Its statement gives the equality\n$$\\beta^{\\mathrm{et}}_H\\circ u^*\\phi_{f,H}=\\phi_{f',v^*H}\\circ(1\\otimes b^{\\mathrm{et}}).$$\nRealize this equality by $V_{X'}$. The pullback and tensor identifications are those of Step 5. Compact-support exchange is the transported etale exchange on witnessed bounded-below objects by [thm-cbc-finite-level-proetale]. Step 2 identifies the counits and Hom bijections for $f$ and $f'$. Since exceptional exchange is their adjoint transpose, its realized map is exactly $\\beta_K$: transposing gives $Lv^*\\epsilon_f\\circ\\operatorname{Ex}_!^{-1}$ on both sides. Step 5 identifies both realized $\\phi$'s with $\\theta$'s, and the constant-object instance identifies the two $b$'s. The realized equality is therefore\n$$\\beta_K\\circ Lu^*\\theta_{f,K}=\\theta_{f',Lv^*K}\\circ(1\\otimes b).$$\nThis proves the whole base-change clause for arbitrary $v$ in the fixed setting. No smoothness, flatness or properness of $v$ was used: the ordinary theorem allows any morphism of Noetherian schemes, and every corner here is finite type over $k$.",
    "uses": [
     "lem-pur-smb-extraordinary",
     "prop-asd-smooth-base-change",
+    "thm-cbc-finite-level-proetale",
+    "thm-sf-ambient-adjoint-class",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "Second paragraph: arbitrary base change and compatibility with the tensor transformation"
+   }
+  },
+  {
+   "text": "Steps 4, 5 and 6 are exactly the three conditions of [def-pur-co-smoothness]. Thus for any composable smooth separated maps $X\\xrightarrow fY\\xrightarrow gZ$, both $f$ and $g$ are cohomologically smooth, by the preceding argument applied separately, and [lem-pur-co-smooth-composition] supplies cohomological smoothness of $gf$ and the dualizing-object isomorphism $\\omega_{gf}\\cong\\omega_f\\otimes_A^LLf^*\\omega_g$. We now check the additional assertion about the canonical tensor transformations rather than taking that assertion from the lemma, whose statement only gives cohomological smoothness and the object isomorphism.",
+   "uses": [
+    "def-pur-co-smoothness",
     "lem-pur-co-smooth-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "Second paragraph: all three conditions, then the dualizing-object formula for composition"
+   }
+  },
+  {
+   "text": "Write $P_h=Rh_!$, $G_h=Rh^!$ and $W_h=\\omega_h$ for $h=f,g,gf$. The canonical compact-support composition isomorphism of [thm-sf-comp-composition] and the natural Hom bijections of [thm-sf-ambient-adjoint-class] identify $G_{gf}$ with $G_fG_g$: paste $\\operatorname{Hom}(P_gP_fM,K)\\cong\\operatorname{Hom}(P_fM,G_gK)\\cong\\operatorname{Hom}(M,G_fG_gK)$. This is the adjunction-compatible composition comparison $c:G_{gf}\\xrightarrow{\\sim}G_fG_g$. By [lem-weil-pbc-mate-pasting](2) its counit is $\\epsilon_{g,K}\\circ P_g(\\epsilon_{f,G_gK})$. In particular put\n$$q:Lf^*W_g\\otimes_A^LW_f\\xrightarrow{\\theta_{f,W_g}}G_fW_g\\xrightarrow{c_{A_Z}^{-1}}W_{gf}.$$\nIt is an isomorphism by Step 5 applied to $W_g$, which is finite-Tor constructible by Step 4. For any $K\\in D^b_{ctf}(Z,A)$, the constructible typing and finite-Tor preservation explicitly stated in [def-weil-exceptional-inverse-image] give $G_gK\\in D^b_{ctf}(Y,A)$. Thus $\\theta_{f,G_gK}$ is on its stated domain; the same is true of $\\theta_{f,W_g}$ by Step 4. Compare $c_K\\circ\\theta_{gf,K}\\circ(1\\otimes q)$ with the composite\n$$L(gf)^*K\\otimes_A^LLf^*W_g\\otimes_A^LW_f\n\\cong Lf^*(Lg^*K\\otimes_A^LW_g)\\otimes_A^LW_f\n\\xrightarrow{Lf^*\\theta_{g,K}\\otimes1}Lf^*G_gK\\otimes_A^LW_f\n\\xrightarrow{\\theta_{f,G_gK}}G_fG_gK.$$\nAll tensor identifications are the canonical ones of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Transpose each map successively through $P_f\\dashv G_f$ and $P_g\\dashv G_g$. Substitute the defining transpose of $\\theta$ from [def-pur-co-smoothness]. Naturality of the projection map moves $\\epsilon_{f,W_g}$ from the tensor factor into $P_f$; compatibility of projection with composition is exactly the associativity assertion of [fix-prop-projection-formula]. On both sides the resulting map is\n$$P_gP_f\\bigl(L(gf)^*K\\otimes_A^LLf^*W_g\\otimes_A^LW_f\\bigr)\n\\xrightarrow{\\mathrm{PF}_f^{-1}}P_g\\bigl((Lg^*K\\otimes_A^LW_g)\\otimes_A^LP_fW_f\\bigr)\n\\xrightarrow{P_g(1\\otimes\\epsilon_{f,A_Y})}P_g(Lg^*K\\otimes_A^LW_g)\n\\xrightarrow{\\mathrm{PF}_g^{-1}}K\\otimes_A^LP_gW_g\n\\xrightarrow{1\\otimes\\epsilon_{g,A_Z}}K.$$\nThe counit equation for $c$ and the definition of $q$ give this same expression for the first map; the two individual tensor transposes give it for the second. Injectivity of the two Hom bijections proves the required equality. Symmetry replaces $Lf^*W_g\\otimes W_f$ by $W_f\\otimes Lf^*W_g$, giving the stated composition convention. This proves clause 4 without identifying any $W_h$ with a Tate twist.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "thm-sf-ambient-adjoint-class",
+    "lem-weil-pbc-mate-pasting",
+    "def-pur-co-smoothness",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "fix-prop-projection-formula",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "Second paragraph: equality of the two tensor transformations under composition, expanded by their counits"
+   }
   }
  ],
  "proof_deps": [
-  "thm-asd-smooth-tensor",
-  "thm-sf-ambient-adjoint-class",
+  "def-pur-conventions",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "lem-kun-dimension-finite-type",
+  "def-weil-l-adic-coefficient-extension",
+  "cor-amb-affine-space-adjunction",
+  "prop-pur-affine-line-orientation-uniqueness",
+  "lem-sf-proetale-constructible-origin",
   "thm-weil-pbc-site-comparison",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-ambient-adjoint-class",
+  "lem-sf-class-compact-support-comparison",
+  "thm-asd-smooth-tensor",
+  "def-pur-sheaf-hom",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-pur-co-smoothness",
+  "lem-weil-pbc-comparison-pullback",
+  "def-exchange-projection",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-cbc-extension-zero-projection-formula",
+  "fix-prop-projection-formula",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proetale-extension-zero",
   "lem-pur-smb-extraordinary",
   "prop-asd-smooth-base-change",
+  "thm-cbc-finite-level-proetale",
   "lem-pur-co-smooth-composition",
-  "lem-pur-co-smooth-etale-locality",
-  "sbc-thm-etale-local-normal-form"
+  "thm-sf-comp-composition",
+  "lem-weil-pbc-mate-pasting"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-cohsm/thm-pur-cohomological-smoothness.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+  "place": "Both paragraphs, expanded at the level of canonical adjoint transposes; comparison details use Stacks 07A4, 0E48 and 0F7L"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomological.?smooth|dualizingComplex|[Ss]mooth.*[Ss]hriek|[Ss]hriek.*[Ss]mooth",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, Sheaf",
+   "results": "loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid pattern, followed by the valid dualizing-name search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated morphism of schemes with finite torsion coefficients invertible on the base, exceptional inverse image is pullback tensor an invertible dualizing complex and commutes with arbitrary base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, RingHom.IsStableUnderBaseChange.pullback_fst_appTop",
+   "date": "2026-10-16",
+   "verdict": "no match: scheme pullback geometry, structure-module adjunctions or condensed locally constant adjunctions; none is finite etale exceptional duality or its canonical coherences"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional pullback along a smooth scheme morphism is tensor by an invertible relative dualizing object and satisfies base change",
+   "results": "8 hits: AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, CategoryTheory.MorphismProperty.instIsStableUnderBaseChangePullbacks, AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.Scheme.Pullback.carrierEquiv, AlgebraicGeometry.IsProper.instSndScheme",
+   "date": "2026-10-16",
+   "verdict": "no match: scheme pullback geometry, structure-module adjunctions or condensed locally constant adjunctions; none is finite etale exceptional duality or its canonical coherences"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological|exceptional.*pullback|upperShriek|UpperShriek",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth cohomological duality: the right adjoint to etale compact support is inverse image tensored with a shifted locally constant free rank one sheaf, compatibly with composition",
+   "results": "8 hits: CompHausLike.LocallyConstant.adjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, LightCondensed.ihomPoints, LightCondSet.LocallyConstant.adjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match: scheme pullback geometry, structure-module adjunctions or condensed locally constant adjunctions; none is finite etale exceptional duality or its canonical coherences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism of schemes is cohomologically smooth: its exceptional inverse image is tensor product with an invertible complex, naturally for base change and composition",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.isSmooth_comp, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary smooth-scheme declarations and occurrences of the word dualizing, not etale exceptional duality or its specified transformations"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|cohomologicallySmooth|exceptionalInverseImage|rightDerivedUpperShriek",
+   "results": "10 hits: Mathlib/Tactic/Translate/ToDual.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Analysis/InnerProductSpace/Dual.lean, Mathlib/Data/Set/Defs.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary smooth-scheme declarations and occurrences of the word dualizing, not etale exceptional duality or its specified transformations"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -122,5 +313,79 @@
   }
  ],
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-cohsm"
+ "unit": "sk-prop-cohsm",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-pur-cohomological-smoothness",
+  "worker": "stage1",
+  "summary": "Kept the finite-stage statement unchanged. Replaced two compressed paragraphs by eight steps verifying the ordinary-etale hypotheses, etale-origin adjunction, dual-line inverse, identification of the canonical tensor mate, arbitrary base-change equality, and the explicit composite-counit argument for composition. Reused existing nodes throughout; no new nodes or Mathlib leaves. Rejected sorried, noncanonical Lean existence declarations as attachments. Second reading specifies the proper comparison mate and open-extension adjunction for canonical-map transport, and explicitly cites finite-Tor preservation before the composition calculation.",
+  "blueprint": "Current main-20261015 node proof: first paragraph is Steps 1–5 (including the counit/projection transport); second paragraph is Steps 6–8. The historical sk-prop-cohsm unit steps on charts and affine models are realized through the existing thm-asd-smooth-tensor, whose proof is the local-chart/affine-line-adjunction argument, not a purity or diagonal shortcut. The old unit realization is filled separately. The historical model paragraph additionally records cor-amb-affine-space-adjunction for its affine-space adjoint and prop-pur-affine-line-orientation-uniqueness for its Kummer-normalized rank-one generator sentence; these are unit carriers, not extra proof assumptions of this orientation-free statement.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic dimension bound verifies the compactification hypothesis of the stated comparison-class adjunction."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic finite-stage comparison supplies the bounded constructible etale antecedent required for the unit route."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Generic comparison-class Hom bijection identifies the constructible adjoints and their counits; this is explicitly the route of the blueprint node."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic etale/pro-etale compact-support comparison enters the transported Hom bijection."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic full faithfulness identifies Rnu_*nu^*H with H on the bounded-below antecedent."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic comparison commutes with morphism pullback; required to type both sides of the transport."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic monoidal derived pullback compares tensor sources and transports the inverse-line evaluations."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic ringed-topos projection/exchange identity identifies the proper part of the two canonical projection maps."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Generic compact-support projection isomorphism and its composition coherence are used only to compare the specified tensor mates."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic composite-adjunction counit formula makes the composition check explicit."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic counit normalization identifies the proper site-comparison map with the exchange mate used by ringed-topos projection coherence; the historical unit has no replacement for this comparison tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-ambient-adjoint-class",
+  "lem-sf-class-compact-support-comparison",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "fix-prop-projection-formula",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N0-1f715b3f3",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-1f715b3f3 (reviewer sub-agent of L); spot-checked: Read the complete item, report, all 38 cited node statements and source passages, and unit/chapter routes. Verified all eight steps, finite coefficient scope, canonical tensor/base-change maps, composition counits, edge cases and tool uses. No new nodes or repairs needed. Detailed checks are in review.md; inherited downstream DAG defects are distinguished from delivery findings."
+ }
 }
