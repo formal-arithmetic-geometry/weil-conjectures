@@ -3,27 +3,115 @@
  "blueprint": {
   "is": "def-amb-vector-integration",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Integration along a vector bundle",
- "statement": "Let $\\pi:E\\to S$ be a vector bundle of constant\nrank $d$, in the sense of\n[def-asd-vector-bundle-zero-section]. Its integration\nmap\n\n$$\nt_\\pi:R\\pi_!A_E(d)[2d]\\longrightarrow A_S\n$$\n\nis the map which on a trivializing open set is the\naffine-space integration of\n[lem-amb-affine-space-top-trace]. These maps glue\nas morphisms of sheaves: the source has cohomology\nonly in degree zero on a trivializing cover, and\n[lem-amb-linear-trace-invariance] identifies the\nmaps on every overlap.\nThe notation refers to Tate twists.",
+ "statement": "Let $N\\geq1$ be an integer, $A$ a finite commutative ring with $NA=0$, and $S$ a Noetherian scheme on which $N$ is invertible. Let $\\pi:E\\to S$ be a vector bundle of constant rank $d\\geq0$ [def-asd-vector-bundle-zero-section]. Work in the ordinary derived category $D(T_{\\mathrm{et}},A)$ of constant-coefficient module sheaves [def-weil-pbc-derived-categories]. Use the ordinary etale Tate sheaves $A_T(1)=\\mu_{N,T}\\otimes_{\\mathbf Z/N}A_T$, their tensor powers $A_T(d)$ and their canonical pullback identifications [lem-asd-etale-finite-twist-pullback]. The relative-spectrum construction makes $\\pi$ affine [def-asd-vector-bundle-zero-section], hence quasi-compact and separated by [lem-weil-pbc-affine-morphism-permanence]. Around every point of $E$, choose an affine trivializing open $V=\\operatorname{Spec}R$ of $S$; its inverse image is $\\operatorname{Spec}R[x_1,\\ldots,x_d]$, a finitely generated $R$-algebra. Thus $\\pi$ is locally of finite type by [lem-weil-pbc-lft-pointwise-criterion], and quasi-compactness makes it finite type. Consequently $E$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The base $S$ is quasi-compact by its Noetherian hypothesis and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], so [thm-nagata-compactification] supplies a compactification of $\\pi$. Use $R\\pi_!$ of [def-amb-etale-compact-support], with its compactification-independent interpretation on bounded-below inputs [lem-amb-etale-compact-comparisons], and put\n$$C_\\pi=R\\pi_!\\bigl(A_E(d)[2d]\\bigr),\\qquad L_\\pi=\\mathcal H^0(C_\\pi).$$\nHere cohomology sheaves and shifts have the meaning of [def-weil-pbc-derived-categories].\n\nThe integration map\n$$t_\\pi:C_\\pi\\longrightarrow A_S[0]$$\nis defined by the following construction. Choose a Zariski open cover $u_i:U_i\\hookrightarrow S$ and linear trivializations $E\\times_SU_i\\cong\\mathbf A^d_{U_i}$ from [def-asd-vector-bundle-zero-section]. Restrict compact support using the exchange isomorphism of [thm-cbc-finite-torsion], and use the Tate pullback identifications. In the chosen coordinates compose with the specified affine-space trace of [lem-amb-affine-space-top-trace], obtaining\n$$a_i:u_i^*C_\\pi\\xrightarrow{\\sim}Rp_{d,U_i!}A_{\\mathbf A^d_{U_i}}(d)[2d]\\xrightarrow{t_{p_{d,U_i}}}A_{U_i}[0].$$\nWriting $\\phi_i:E|_{U_i}\\xrightarrow{\\sim}\\mathbf A^d_{U_i}$ for the chosen coordinates, this identification is the exchange map for the square over $1_{U_i}$ with top map $\\phi_i^{-1}:\\mathbf A^d_{U_i}\\to E|_{U_i}$, followed by the canonical coefficient identification. The square is Cartesian because $\\phi_i^{-1}$ is an isomorphism. Every $U_i$ and overlap $U_i\\cap U_j$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The compactification and its base changes are therefore between Noetherian schemes. The input sheaf shifted by $2d$ has cohomology vanishing outside degree $-2d$, so it is bounded below and both the compact-support comparison and the exchange theorem apply. The affine-space trace is an isomorphism. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact] identifies the restrictions of $\\mathcal H^q(C_\\pi)$ with $\\mathcal H^q(u_i^*C_\\pi)$. Thus $\\mathcal H^q(C_\\pi)=0$ for $q\\ne0$: each restricts to zero on the cover, and the underlying abelian sheaf is zero by [lem-weil-pbc-etale-cover-detects-iso], applied to its map to zero.\n\nTake $\\lambda_i=\\mathcal H^0(a_i):L_\\pi|_{U_i}\\to A_{U_i}$. On $W=U_i\\cap U_j$ the two coordinate systems differ by a matrix in $\\operatorname{GL}_d(\\mathcal O_S(W))$ [def-asd-vector-bundle-zero-section]. Write $B_i$ and $B_j$ for the coordinate identifications from $(C_\\pi)|_W$ to $Rp_{d,W!}A_{\\mathbf A^d_W}(d)[2d]$. Put $K_W=A_{\\mathbf A^d_W}(d)[2d]$. For $g\\in\\operatorname{GL}_d(\\Gamma(W,\\mathcal O_W))$, write $a_g(v)=gv$ and use precisely the pullback action of [lem-amb-linear-trace-invariance]:\n$$\\rho_g=Rp_{d,W!}(\\theta_g)\\circ\\operatorname{Ex}_{!,a_g}:Rp_{d,W!}K_W\\longrightarrow Rp_{d,W!}K_W,\\qquad\\theta_g:a_g^*K_W\\xrightarrow{\\sim}K_W.$$\nHere exchange is for the Cartesian square whose two vertical maps are $p_{d,W}$, whose bottom map is $1_W$ and whose top map is $a_g$; $\\theta_g$ is the canonical Tate pullback identification. Restrict $\\phi_i$ and $\\phi_j$ to $E|_W$ and define $g$ by $a_g=\\phi_i\\circ\\phi_j^{-1}$. This is an invertible linear substitution by [def-asd-vector-bundle-zero-section]; if the frames in that definition satisfy $e^{(j)}_k=\\sum_lG_{lk}e^{(i)}_l$, then $\\phi_j=a_{G^{\\mathsf T}}\\circ\\phi_i$ and $g=(G^{\\mathsf T})^{-1}$. In particular $\\phi_j^{-1}=\\phi_i^{-1}\\circ a_g$. Paste the two Cartesian squares over $1_W$ whose top maps are $\\phi_i^{-1}$ and $a_g$. Their composite is the square with top map $\\phi_j^{-1}$. Horizontal pasting in [thm-cbc-finite-torsion] identifies its exchange with the composite of these two exchanges; composition compatibility of the Tate identifications then gives $B_j=\\rho_g\\circ B_i$. The restriction formula in [lem-amb-affine-space-top-trace] and the same pasting give $a_i|_W=t_{p_{d,W}}\\circ B_i$ and $a_j|_W=t_{p_{d,W}}\\circ B_j$. The scheme $W$ is Noetherian, $N$ remains invertible on $W$, the coefficient ring is the same finite ring $A$ with $NA=0$, and $g$ is an invertible matrix of global functions on $W$. Thus all hypotheses of [lem-amb-linear-trace-invariance] hold over $W$, and its actual equality is $t_{p_{d,W}}\\circ\\rho_g=t_{p_{d,W}}$. Hence\n$$a_j|_W=t_{p_{d,W}}\\circ\\rho_g\\circ B_i=t_{p_{d,W}}\\circ B_i=a_i|_W.$$\nTaking $\\mathcal H^0$ gives $\\lambda_j|_W=\\lambda_i|_W$. Define $\\lambda:L_\\pi\\to A_S$ by the unique gluing of this family in [lem-pur-sheaf-hom-cover-gluing].\n\nFor clarity, the identification $\\alpha_\\pi:C_\\pi\\xrightarrow{\\sim}L_\\pi[0]$ used in the definition is the following truncation roof. For a representing complex $K$ of $C_\\pi$, let $b:\\tau_{\\leq0}K\\to K$ be the inclusion and $c:\\tau_{\\leq0}K\\to\\mathcal H^0(K)[0]$ the projection from cycles to cohomology in degree zero, zero in negative degrees. It is a chain map: in degree $-1$ the equation is $c^0d_K^{-1}=0$ because the quotient $\\ker d_K^0\\to\\ker d_K^0/\\operatorname{im}d_K^{-1}$ kills boundaries; in every other degree the chain-map equation has both sides zero. The truncation and its cohomology are as in [lem-weil-pbc-truncation-cohomology]; its descended projection is the $j_0$ of [lem-weil-pbc-truncation-descends]. Both $b$ and $c$ induce the identity on degree-zero cohomology, and all other cohomology objects of their sources and targets vanish. Hence both are quasi-isomorphisms, and set $\\alpha_\\pi=Q(c)\\circ Q(b)^{-1}$, where $Q$ is the localization functor [def-weil-abstract-derived-category]. Finally define\n$$t_\\pi=\\lambda[0]\\circ\\alpha_\\pi.$$\nExact restriction preserves the kernels and quotients defining $b$ and $c$, so it preserves this roof. The degree-zero calculation gives $\\mathcal H^0(\\alpha_\\pi)=1_{L_\\pi}$. For a chain map $f:K\\to K'$ between degree-zero-cohomology complexes, the inclusions and quotient projections satisfy $f\\circ b_K=b_{K'}\\circ\\tau_{\\leq0}f$ and $\\mathcal H^0(f)[0]\\circ c_K=c_{K'}\\circ\\tau_{\\leq0}f$. Inverting $Q(b_K)$ and $Q(b_{K'})$ therefore gives $\\alpha_{K'}\\circ Q(f)=\\mathcal H^0(f)[0]\\circ\\alpha_K$. The inclusion $b:\\tau_{\\leq0}\\to\\mathrm{id}$ is a natural transformation on all complexes, and $\\tau_{\\leq0}$ preserves quasi-isomorphisms by [lem-weil-pbc-truncation-descends]. The localization property of [def-weil-abstract-derived-category] therefore descends $b$ to a natural transformation on the derived category: its naturality equation holds for every image of a chain map, hence also for the inverse of the image of a quasi-isomorphism and for composites of these generators. The projection $c$ descends naturally by [lem-weil-pbc-truncation-descends]. Applying these two descended naturality equations to any derived morphism between degree-zero-cohomology objects and inverting $b$ at its source and target proves the displayed naturality of $\\alpha$ in the derived category. Taking an isomorphism between two representatives of $C_\\pi$ proves independence of the representative. On $U_i$, compose $a_i$ with $(\\alpha_\\pi|_{U_i})^{-1}$: this is a morphism $L_\\pi|_{U_i}[0]\\to A_{U_i}[0]$ whose $\\mathcal H^0$ is $\\lambda_i$. Full faithfulness of the degree-zero embedding [lem-weil-pbc-derived-single-fully-faithful] makes this morphism exactly $\\lambda_i[0]$. Thus $t_\\pi|_{U_i}=a_i$. For two choices of cover, use the intersections of their opens as a common refinement; the displayed overlap calculation applies to the two frames on each intersection, so the sheaf maps agree there and unique sheaf gluing makes their global maps equal. For any derived morphism with these local restrictions, composition with $\\alpha_\\pi^{-1}$ corresponds by the same full faithfulness to a sheaf map with restrictions $\\lambda_i$; unique sheaf gluing forces it to be $\\lambda$. Thus this construction specifies the unique derived morphism restricting to these prescribed affine-space traces. This definition uses ordinary etale twists and ordinary etale compact support; identification with pro-etale coefficient constructions is a separate comparison. At $d=0$ the prescribed local trace is the identity adjunction trace of [lem-amb-affine-space-top-trace].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.md",
   "place": "node def-amb-vector-integration, order 1972"
  },
  "stmt_deps": [
   "def-asd-vector-bundle-zero-section",
+  "def-weil-pbc-derived-categories",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-amb-etale-compact-support",
+  "lem-amb-etale-compact-comparisons",
+  "thm-cbc-finite-torsion",
   "lem-amb-affine-space-top-trace",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-cover-detects-iso",
   "lem-amb-linear-trace-invariance",
-  "def-coefficient-twists-detailed"
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-truncation-descends",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "vectorBundleIntegration|vector_bundle_integration|integration.*vector.*bundle|trace.*[ée]tale|etale.*trace",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integration along a vector bundle in etale cohomology obtained by gluing affine space compact support traces",
+   "results": "Eight hits, headed by AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val and sheafValGluedMk: gluing sections on Zariski scheme glue data, not etale compact-support integration.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The compact support trace of a vector bundle on an etale site is defined by gluing the traces of affine spaces",
+   "results": "Eight hits: Scheme.smallEtaleTopology, Scheme.etalePretopology and topological VectorBundleCore/VectorBundle/FiberBundle trivializations; none defines the specified etale compact-support map.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"VectorBundle\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|compact_support|upperShriek|TateTwist",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical compactly supported etale cohomology trace of an algebraic vector bundle with finite invertible torsion coefficients",
+   "results": "Eight hits headed by Algebra.etaleLocus_eq_compl_support, Algebra.trace_quotient_mk, trace_quotient_eq_trace_localization_quotient, Algebra.trace_localization: ring-theoretic traces and etale loci, not the stated integration map.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing a morphism from locally concentrated degree zero derived etale compactly supported cohomology to the constant sheaf using local trace maps",
+   "results": "Eight hits: Scheme.GlueData.sheafValGluedMk_val and sheafValGluedMk, scheme affine-transition-limit and quasi-separatedness lemmas, typesGlue identities, and ModuleCat.Tilde.exists_const. These glue sections or concern structure sheaves; none constructs the specified etale compact-support trace.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "traceMap|integration|upperShriek",
+   "results": "Zero hits in Mathlib/AlgebraicGeometry/Sites.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integration|trace|UpperShriek",
+   "results": "Zero hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A vector bundle has a canonical trace morphism from its compactly supported derived direct image with Tate twist to the constant etale sheaf",
+   "results": "Eight hits headed by SheafOfModules.unitToPushforwardObjUnit, its value formula and pushforwardSections_unitHomEquiv; these concern the unit sheaf and ordinary pullback/pushforward, not a derived compact-support trace. Read PullbackFree.lean lines 60-76. Remaining hits concern presheaf differentials and locally constant condensed modules.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -50,5 +138,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-an"
+ "unit": "sk-prop-an",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-amb-vector-integration",
+  "worker": "stage1",
+  "summary": "Made the finite coefficient, invertible-annihilator, Noetherian base and ordinary-etale site hypotheses explicit to match the specified affine-space trace. Replaced the ambiguous pro-etale twist dependency by the existing ordinary-etale finite-twist statement. Expanded the definition as sheaf gluing followed by an explicit truncation roof, using existing compact-support exchange, linear invariance, sheaf-Hom gluing, truncation and full-faithfulness nodes. No new nodes, no Lean attachment, no compiler or Lean changes. Second reading established separated finite type, Noetherian total space and compactifiability from existing geometry nodes, checked Noetherian opens explicitly, and expanded overlap and truncation/full-faithfulness equalities. Repair of the returned head 535a13b62d: re-read every current construction dependency, identified the changed linear-invariance statement with its explicit exchange-defined pullback action rho_g, and replaced H_g by that action in the overlap calculation with all hypotheses checked on W. The dry-run delivery tool rebases the retained split on current origin/newtargets-dag. Independent second reader: fixed the overlap matrix as (G transpose) inverse and derived the coordinate identification by pasting its explicit inverse-coordinate squares; wrote the quotient chain-map equation and the naturality equations for the truncation roof. Repeated independent Mathlib searches through msearch.py; no new node or leaf.",
+  "blueprint": "Imported def-amb-vector-integration (order 1972), its local affine-space integration, overlap invariance and degree-zero sheaf gluing clauses; realizes sk-prop-an Step 7, using Step 6 traces. The item is itself an imported blueprint node, so from remains null. Searches for integration and integration along found no second blueprint definition of this vector-bundle map; same_as is empty."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-878a0a038",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-878a0a038 (reviewer sub-agent of L); spot-checked: Read the full item, report, all 21 dependency statements, cited sources, and unit/chapter route. Verified exchange direction, inverse-transpose overlap calculation, coefficient scope, truncation roof, uniqueness, and edge cases. No missing citations, cycles, duplicate new nodes, or target weakening found. Pro-etale comparisons remain separate obligations. Detailed checks recorded in review.md; no fixes needed."
+ }
 }
