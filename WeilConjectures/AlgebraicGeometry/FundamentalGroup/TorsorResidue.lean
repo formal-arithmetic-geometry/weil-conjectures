@@ -183,6 +183,11 @@ noncomputable def kummerResidue (χ : Gal(Ω/C.functionField) → ZMod N) (z : C
       ∀ σ : Gal(Ω/C.functionField), σ x = ξ ^ (χ σ).val * x
   then (C.ord h.choose_spec.choose z : ZMod N) else 0
 
+omit [Nonempty U] [IsLocallyNoetherian C] in
+lemma ne_zero_of_algebraMap_eq_pow {x : Ω} (hx : x ≠ 0) {f : C.functionField}
+    (hf : algebraMap C.functionField Ω f = x ^ N) : f ≠ 0 := fun h ↦
+  hx (pow_eq_zero_iff (NeZero.ne N) |>.1 (by rw [← hf, h, map_zero]))
+
 omit [Nonempty U] in
 /-- The Kummer residue is computed by any Kummer element. -/
 theorem kummerResidue_eq {χ : Gal(Ω/C.functionField) → ZMod N} (z : C) {ξ x : Ω}
@@ -206,15 +211,47 @@ theorem kummerResidue_eq {χ : Gal(Ω/C.functionField) → ZMod N} (z : C) {ξ x
     rintro rfl
     rw [map_zero, eq_comm, div_eq_zero_iff] at hg
     exact hg.elim hx' hx
-  have hf0 : f ≠ 0 := by
-    rintro rfl
-    rw [map_zero, eq_comm] at hf
-    exact hx (pow_eq_zero_iff (NeZero.ne N) |>.1 hf)
+  have hf0 := ne_zero_of_algebraMap_eq_pow hx hf
   have hff : f' = f * g ^ N := (algebraMap C.functionField Ω).injective (by
     rw [hf', map_mul, map_pow, hf, hg, ← mul_pow, mul_div_cancel₀ _ hx])
   rw [hff, Scheme.ord_mul hf0 (pow_ne_zero N hg0), Scheme.ord_pow hg0]
   push_cast
   rw [ZMod.natCast_self, zero_mul, add_zero]
+
+omit [Nonempty U] in
+/-- The Kummer residue against a product is the sum of the Kummer residues. -/
+theorem kummerResidue_mul {χ : Gal(Ω/C.functionField) → ZMod N} (z : C) {ξ ξ' x x' : Ω}
+    {f f' : C.functionField} (hx : x ≠ 0) (hf : algebraMap C.functionField Ω f = x ^ N)
+    (hχ : ∀ σ : Gal(Ω/C.functionField), σ x = ξ ^ (χ σ).val * x) (hx' : x' ≠ 0)
+    (hf' : algebraMap C.functionField Ω f' = x' ^ N)
+    (hχ' : ∀ σ : Gal(Ω/C.functionField), σ x' = ξ' ^ (χ σ).val * x') :
+    kummerResidue C χ z (ξ * ξ') = kummerResidue C χ z ξ + kummerResidue C χ z ξ' := by
+  have hf0 := ne_zero_of_algebraMap_eq_pow hx hf
+  have hf0' := ne_zero_of_algebraMap_eq_pow hx' hf'
+  rw [kummerResidue_eq z hx hf hχ, kummerResidue_eq z hx' hf' hχ',
+    kummerResidue_eq z (mul_ne_zero hx hx') (f := f * f') (by rw [map_mul, hf, hf', mul_pow])
+      (fun σ ↦ by rw [map_mul, hχ, hχ', mul_pow]; ring),
+    Scheme.ord_mul hf0 hf0']
+  push_cast
+  rfl
+
+omit [Nonempty U] in
+/-- The Kummer residue of a sum of characters is the sum of the Kummer residues. -/
+theorem kummerResidue_add {χ χ' : Gal(Ω/C.functionField) → ZMod N} (z : C) {ξ x x' : Ω}
+    (hξ : ξ ^ N = 1) {f f' : C.functionField} (hx : x ≠ 0)
+    (hf : algebraMap C.functionField Ω f = x ^ N)
+    (hχ : ∀ σ : Gal(Ω/C.functionField), σ x = ξ ^ (χ σ).val * x) (hx' : x' ≠ 0)
+    (hf' : algebraMap C.functionField Ω f' = x' ^ N)
+    (hχ' : ∀ σ : Gal(Ω/C.functionField), σ x' = ξ ^ (χ' σ).val * x') :
+    kummerResidue C (χ + χ') z ξ = kummerResidue C χ z ξ + kummerResidue C χ' z ξ := by
+  have hf0 := ne_zero_of_algebraMap_eq_pow hx hf
+  have hf0' := ne_zero_of_algebraMap_eq_pow hx' hf'
+  rw [kummerResidue_eq z hx hf hχ, kummerResidue_eq z hx' hf' hχ',
+    kummerResidue_eq z (mul_ne_zero hx hx') (f := f * f') (by rw [map_mul, hf, hf', mul_pow])
+      (fun σ ↦ by rw [map_mul, hχ, hχ', Pi.add_apply, pow_zmod_val_add hξ]; ring),
+    Scheme.ord_mul hf0 hf0']
+  push_cast
+  rfl
 
 end KummerResidue
 
