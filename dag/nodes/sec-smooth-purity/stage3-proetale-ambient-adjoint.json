@@ -1,0 +1,129 @@
+{
+ "id": "stage3-proetale-ambient-adjoint",
+ "kind": "statement",
+ "title": "The source-library conditional ambient exceptional adjoint",
+ "statement": "Let A be a Grothendieck abelian coefficient category with Hom universe u+1, X,Y schemes in universe u, and f:X→Y a morphism with a chosen compactification X --j→ Z --p→ Y. Suppose the exact source-library predicate HasAmbientExceptionalRightAdjoint A f holds: there is c≥0 such that for every V in Y.ProEt and every pullback p prime:X prime→V of p, the degree-r homology of Rp prime_*(F[0]) vanishes for every A-valued pro-etale sheaf F on X prime and every integer r>c. Then the exact source-library functor Rf_! = D(j_!) ⋙ Rp_* is a left adjoint on the ordinary unbounded derived categories of A-valued pro-etale sheaves. This proves existence for the chosen compactification and does not assert the additional finite-coefficient refinement coherence of lem-sp-fullcd-ambient-adjoint.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+  "place": "Clause (b), conditional existence of the ambient right adjoint under FullCD, for the unchanged source-library statement. This node proves existence for the chosen compactification, not the additional compactification-independence assertion. No statement or route of the shared unit is changed."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-proetale-site",
+  "def-weil-compactifications-refinements",
+  "def-weil-full-cohomological-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Apply the uniform bound only to the identity object of Y.ProEt and the identity horizontal pullback. The source-library comparison isZero_rightDerived_of_isZero_homology converts it to the classical finite bound R^qp_*(F)=0 for q>c.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Properness of p implies quasi-compactness and quasi-separatedness. The Grothendieck-coefficient pro-etale coproduct/acyclicity theorem gives preservation by p_* and acyclicity of all sums of injectives. The finite-dimensional derived criterion now gives preservation of coproducts by Rp_*.",
+   "uses": [
+    "stage3-proetale-grothendieck-coproduct-acyclicity",
+    "stage3-finite-cd-injective-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Supply coproducts in both unbounded derived categories using derived_hasCoproducts. The derived direct image is triangulated and commutes with shifts. Apply Grothendieck-derived Brown representability to obtain that Rp_* is a left adjoint.",
+   "uses": [
+    "lem-grothendieck-derived-has-coproducts",
+    "lem-grothendieck-derived-brown-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open extension functor j_! has its existing derived adjunction to open restriction. Thus D(j_!) is a left adjoint. The definition of Rf_! is the composite D(j_!) ⋙ Rp_*, and the composite of left adjoints is a left adjoint.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-grothendieck-derived-brown-right-adjoint",
+  "lem-grothendieck-derived-has-coproducts",
+  "stage3-finite-cd-injective-coproducts",
+  "stage3-proetale-grothendieck-coproduct-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-16",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+  "place": "Clause (b), conditional existence of the ambient right adjoint under FullCD, for the unchanged source-library statement. This node proves existence for the chosen compactification, not the additional compactification-independence assertion. No statement or route of the shared unit is changed. The categorical Grothendieck-coefficient generalization is proved in the delivered Lean files."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Uniform finite cohomological dimension of the proper part of a compactification implies that pro etale compact support derived direct image has a right adjoint",
+   "results": "LeanSearch returned underived module pushforward adjoints and locally constant condensed adjunctions. Earlier LeanFinder searches also returned condensed and ordinary sheaf adjunction constructions. None asserts the generic-coefficient unbounded pro-etale conditional ambient adjoint. The existing DAG attachment lem-sp-fullcd-ambient-adjoint is a different finite-coefficient theorem with refinement coherence; it is preserved.",
+   "date": "2026-10-16",
+   "verdict": "No matching theorem; relevant ingredients are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesColimitsOfShape\", \"rightDerivedFunctor\"",
+   "results": "OK 0 hits. No unbounded finite-dimensional derived coproduct criterion.",
+   "verdict": "No matching theorem; the proved source-library finite-dimensional comparison is used.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteOneHypercover|rightAcyclic|rightDerivedFunctor",
+   "results": "Mathlib matches concern right-derived functor constructions and bounded-below derived functors; no finite-one-hypercover colimit theorem or unbounded injective-coproduct criterion. The additional grep finiteOneHypercover|injectiveCoproduct|cohomologicalDimension returned no hits.",
+   "verdict": "No matching theorem; source-library and Mathlib ingredients are used.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint",
+  "date": "2026-10-16",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-ambient-exceptional-adjoint",
+   "place": "The ordinary ambient right-adjoint clause, conditional on FullCD for the chosen compactification; this node supplies the source-library conditional ambient exceptional adjoint.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ExceptionalAdjoint.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint.isLeftAdjoint",
+  "statement": "theorem HasAmbientExceptionalRightAdjoint.isLeftAdjoint {f : X ⟶ Y} [HasCompactification f]\n    (_h : HasAmbientExceptionalRightAdjoint A f) : (R(f)_![A]).IsLeftAdjoint",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T134406-L-3314983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T134406-L-3314983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

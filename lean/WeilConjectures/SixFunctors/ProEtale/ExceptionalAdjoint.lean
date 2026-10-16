@@ -10,6 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
+import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
+import Sheaf.CategoryTheory.FiniteCohomologicalDimensionInjectiveCoproducts
+import Sheaf.AlgebraicGeometry.ProEtaleGrothendieckSectionCoproducts
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import Sheaf.CategoryTheory.GrothendieckDerivedBrownRightAdjoint
+import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 
 /-!
 # The ambient exceptional right adjoint datum and exceptional-adjoint admissibility
@@ -149,10 +155,39 @@ derived lower shriek `Rf_!` is a left adjoint on the unbounded derived categorie
 pro-étale sites.
 
 The bound `FullCD` makes `Rp_*` preserve coproducts, hence `Rf_! = Rp_* j_!` preserves
-coproducts, and Brown representability gives the right adjoint. -/
+coproducts, and Brown representability gives the right adjoint.
+(blueprint: stage3-proetale-ambient-adjoint). -/
 theorem HasAmbientExceptionalRightAdjoint.isLeftAdjoint {f : X ⟶ Y} [HasCompactification f]
-    (_h : HasAmbientExceptionalRightAdjoint A f) : (R(f)_![A]).IsLeftAdjoint :=
-  sorry
+    (_h : HasAmbientExceptionalRightAdjoint A f) : (R(f)_![A]).IsLeftAdjoint := by
+  let d := HasCompactification.compactification f
+  obtain ⟨c, hc⟩ := _h.exists_hasUniformCohomologicalDimensionLE
+  have hcd (F : Sheaf (Scheme.ProEt.topology d.Z) A) (q : ℕ) (hq : c < q) :
+      IsZero ((((d.g)_*[A]).rightDerived q).obj F) := by
+    apply Functor.isZero_rightDerived_of_isZero_homology
+    exact hc (Scheme.ProEt.mk (𝟙 _)) (𝟙 _) d.g (IsPullback.id_horiz d.g) F q
+      (by exact_mod_cast hq)
+  let : HasColimitsOfSize.{u + 1, u + 1}
+      (Sheaf (Scheme.ProEt.topology d.Z) A) := IsGrothendieckAbelian.hasColimits _
+  let : HasColimitsOfSize.{u + 1, u + 1}
+      (Sheaf (Scheme.ProEt.topology Y) A) := IsGrothendieckAbelian.hasColimits _
+  let : HasCoproducts.{u + 1}
+      (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology d.Z) A)) :=
+    derived_hasCoproducts
+  let : HasCoproducts.{u + 1}
+      (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :=
+    derived_hasCoproducts
+  let : (R((d.g)_*[A])).IsLeftAdjoint := by
+    apply grothendieckDerived_hasRightAdjoint
+    intro I
+    obtain ⟨hcop, hinj⟩ := Scheme.ProEt.lowerStar_coproducts_and_injectiveSum_acyclic
+      A d.g I
+    let := hcop
+    exact Functor.preservesColimitsOfShape_rightDerivedFunctor_of_injectiveCoproducts
+      _ I c hcd hinj
+  let := (Adjunction.mapDerivedCategoryRightDerivedAdjunction
+    (openImmersionLowerShriekAdjunction A d.i)).isLeftAdjoint
+  change (D((d.i)_!open[A]) ⋙ R((d.g)_*[A])).IsLeftAdjoint
+  infer_instance
 
 section Admissibility
 

@@ -1,0 +1,142 @@
+{
+ "id": "stage3-proetale-grothendieck-coproduct-acyclicity",
+ "kind": "statement",
+ "title": "Qcqs pro-etale direct image preserves sums and sums of injectives are acyclic",
+ "statement": "Let X,Y be schemes in universe u, p:X→Y a quasi-compact quasi-separated morphism, and A a Grothendieck abelian category with Hom universe u+1. Let I be a set in universe u+1. For ordinary A-valued sheaves on the small pro-etale sites [def-weil-pbc-proetale-site], p_* preserves I-indexed coproducts. For every family H_i of injective source sheaves, the coproduct ⨁H_i is p_*-acyclic: R^(q+1)p_*(⨁H_i)=0 for every q≥0. These claims need no coefficient ring and no finite cohomological dimension hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Proof of lemma-w-contractible-hypercovering, Tag 09A1, the qcqs full subsite; lemma-quasi-compact-quasi-separated-commutes-direct-sums, Tag 09A3, the direct-sum conclusion; sites-cohomology.tex lemma-cech-vanish-collection, Tag 03F9, for the categorical finite-Cech route used here."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-sp-grothendieck-abelian",
+  "def-sp-acyclic"
+ ],
+ "proof": [
+  {
+   "text": "Every covering sieve on a qcqs pro-etale object has a finite affine refinement: convert it to a pro-etale covering, use QuasiCompactCover.exists_hom, and pull the affine refinement back into the sieve. The full qcqs subcategory is cover dense because affine open covers factor through it. Its fibre products exist by qcqs_site_limits, so these finite affine refinements give finite one-hypercovers generating the restricted topology.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-site-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to this full subsite is a sheaf equivalence. Coproducts in A preserve finite limits by AB4. Apply the finite-hypercover colimit theorem on the subsite, then evaluate, to prove that sections on every qcqs object preserve coproducts, including the empty coproduct.",
+   "uses": [
+    "stage3-finite-hypercover-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite family over a qcqs object, every finite Cech nerve object is qcqs. In degree k its categorical Cech complex is a finite product of section functors. The coproduct of such complexes is computed degreewise: prove the finite-product/coproduct interchange by applying colim to a limiting fan. The coprojections are the actual images of the sheaf coprojections, as follows from Pi.map_π.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The underlying presheaf of an injective sheaf is injective, because sheafification is exact and left adjoint to inclusion. Its categorical Cech complex is positively exact. Homology preserves exact coproducts in A; hence the Cech complex of a coproduct of injectives is positively exact. Apply the finite-Cech criterion with B the qcqs objects and the finite affine refinements just constructed. It makes evaluation of this coproduct acyclic on every qcqs object.",
+   "uses": [
+    "stage3-categorical-injective-cech-exactness",
+    "stage3-categorical-finite-cech-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change of p over any qcqs target object remains qcqs. Thus the coproduct comparison for p_* becomes an isomorphism after evaluation at every qcqs target object, because both source and target evaluation preserve coproducts. Restriction to the dense subsite and the fully faithful sheaf inclusion reflect isomorphisms, proving preservation by p_*.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For higher direct image use the class P of sheaves acyclic for every qcqs evaluation. It contains injectives and is closed under cokernels of monomorphisms between its objects, by the long exact derived sequence. A short exact sequence with first term in P becomes right exact on qcqs source sections; therefore p_* sends its last map to an epimorphism, checked on the dense qcqs target subsite. The acyclicity criterion rightAcyclic_of_epi_map_g proves p_*-acyclicity for every object in P, in particular the coproduct of injectives.",
+   "uses": [
+    "lem-pc-right-acyclic-of-epi-map-g"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-right-acyclic-of-epi-map-g",
+  "lem-weil-pbc-proetale-qcqs-site-limits",
+  "stage3-categorical-finite-cech-criterion",
+  "stage3-categorical-injective-cech-exactness",
+  "stage3-finite-hypercover-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-16",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Proof of lemma-w-contractible-hypercovering, Tag 09A1, the qcqs full subsite; lemma-quasi-compact-quasi-separated-commutes-direct-sums, Tag 09A3, the direct-sum conclusion; sites-cohomology.tex lemma-cech-vanish-collection, Tag 03F9, for the categorical finite-Cech route used here. The categorical Grothendieck-coefficient generalization is proved in the delivered Lean files."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact quasi separated direct image of sheaves with Grothendieck abelian coefficients preserves coproducts and sums of injectives are acyclic",
+   "results": "LeanSearch returned IsGrothendieckAbelian.ab4OfSize, sheafIsAbelian, and Grothendieck sheaf-category instances, not the required geometric direct-image theorem. LeanFinder returned condensed AB4/AB5 and affine-transition-limit facts. The existing ProEtaleModuleCohomologyCoproducts theorem requires rational ring-module coefficients, so cannot be used for arbitrary A. Blueprint search coproduct injective found no match.",
+   "date": "2026-10-16",
+   "verdict": "No matching theorem; relevant ingredients are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesColimitsOfShape\", \"rightDerivedFunctor\"",
+   "results": "OK 0 hits. No unbounded finite-dimensional derived coproduct criterion.",
+   "verdict": "No matching theorem; the proved source-library finite-dimensional comparison is used.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteOneHypercover|rightAcyclic|rightDerivedFunctor",
+   "results": "Mathlib matches concern right-derived functor constructions and bounded-below derived functors; no finite-one-hypercover colimit theorem or unbounded injective-coproduct criterion. The additional grep finiteOneHypercover|injectiveCoproduct|cohomologicalDimension returned no hits.",
+   "verdict": "No matching theorem; source-library and Mathlib ingredients are used.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint",
+  "date": "2026-10-16",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-ambient-exceptional-adjoint",
+   "place": "The ordinary ambient right-adjoint clause, conditional on FullCD for the chosen compactification; this node supplies qcqs pro-etale direct image preserves sums and sums of injectives are acyclic.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleGrothendieckSectionCoproducts",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleGrothendieckSectionCoproducts.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.lowerStar_coproducts_and_injectiveSum_acyclic",
+  "statement": "theorem lowerStar_coproducts_and_injectiveSum_acyclic\n    (A : Type u') [Category.{u + 1} A] [Abelian A]\n    [IsGrothendieckAbelian.{u + 1} A] {Y : Scheme.{u}} (p : X ⟶ Y)\n    [QuasiCompact p] [QuasiSeparated p] (I : Type (u + 1)) :\n    letI : HasColimitsOfSize.{u + 1, u + 1} (Sheaf (topology X) A) :=\n      IsGrothendieckAbelian.hasColimits _\n    PreservesColimitsOfShape (Discrete I) (ProEtale.lowerStar A p) ∧\n      ∀ H : I → Sheaf (topology X) A, (∀ i, Injective (H i)) →\n        (ProEtale.lowerStar A p).rightAcyclic (∐ H)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T134406-L-3314983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T134406-L-3314983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

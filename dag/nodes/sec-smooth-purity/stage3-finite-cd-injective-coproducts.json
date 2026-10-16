@@ -1,0 +1,122 @@
+{
+ "id": "stage3-finite-cd-injective-coproducts",
+ "kind": "statement",
+ "title": "Finite-dimensional derived coproduct preservation from acyclic sums of injectives",
+ "statement": "Let C,D be abelian categories with derived categories and K-injective resolutions, with C Grothendieck abelian and having classical injective resolutions. Let F:C→D be additive and left exact. Fix a set J such that J-indexed coproducts exist in C,D and F preserves them. Suppose R^qF(X)=0 for every X and q>d, for a single natural number d. Suppose every J-indexed coproduct of injective objects of C is F-acyclic. Then the ordinary unbounded right derived functor RF preserves J-indexed coproducts. It is enough to assume acyclicity of injective sums; closure of all acyclic objects under sums is not required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma lemma-finite-cd-mod-n-direct-sums, Tag 0F11, proof of (1); its abstract K-injective/acyclic-complex argument, isolated from the geometric coefficient specialization."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-acyclic",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose for each derived object its functorial K-injective representative. These representatives have injective components. Their termwise coproduct represents the derived coproduct, because C is Grothendieck and coproducts are exact.",
+   "uses": [
+    "lem-pur-kinjective-degreewise-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each component of this coproduct is isomorphic to the coproduct of the corresponding injective components. The hypothesis makes it F-acyclic. Each representative separately also has F-acyclic components, since injectives are acyclic.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved source-library finite-dimension comparison isIso_rightDerivedFunctorUnit_app_of_rightAcyclic: for each of these complexes the canonical map Q(FK)→RF(QK) is invertible without a boundedness assumption. Define the comparison using quotientCompQhIso and rightDerivedFunctorUnit. Its naturality is the unit naturality together with the quotient-comparison naturality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "F preserves the degreewise coproduct, and passage to the derived category preserves this coproduct. Transfer its universal property along the comparison isomorphisms on all representatives and their coproduct. Naturality identifies the transported injections with the actual RF images of coprojections. This proves preservation of the derived coproduct, also for an empty family.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kinjective-degreewise-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-16",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma lemma-finite-cd-mod-n-direct-sums, Tag 0F11, proof of (1); its abstract K-injective/acyclic-complex argument, isolated from the geometric coefficient specialization. The categorical Grothendieck-coefficient generalization is proved in the delivered Lean files."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A left exact functor of finite cohomological dimension preserves coproducts on unbounded derived categories when sums of injective objects are acyclic",
+   "results": "LeanSearch returned exactFunctor, leftExactFunctor and additive finite-coproduct preservation, not this unbounded result. Loogle returned no hits. The source-library theorem preservesColimitsOfShape_rightDerivedFunctor has a stronger all-acyclic-sums hypothesis; the delivered proof adapts its K-injective argument to use only injective sums.",
+   "date": "2026-10-16",
+   "verdict": "No matching theorem; relevant ingredients are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesColimitsOfShape\", \"rightDerivedFunctor\"",
+   "results": "OK 0 hits. No unbounded finite-dimensional derived coproduct criterion.",
+   "verdict": "No matching theorem; the proved source-library finite-dimensional comparison is used.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteOneHypercover|rightAcyclic|rightDerivedFunctor",
+   "results": "Mathlib matches concern right-derived functor constructions and bounded-below derived functors; no finite-one-hypercover colimit theorem or unbounded injective-coproduct criterion. The additional grep finiteOneHypercover|injectiveCoproduct|cohomologicalDimension returned no hits.",
+   "verdict": "No matching theorem; source-library and Mathlib ingredients are used.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint",
+  "date": "2026-10-16",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-ambient-exceptional-adjoint",
+   "place": "The ordinary ambient right-adjoint clause, conditional on FullCD for the chosen compactification; this node supplies finite-dimensional derived coproduct preservation from acyclic sums of injectives.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FiniteCohomologicalDimensionInjectiveCoproducts",
+  "file": "lean/Sheaf/CategoryTheory/FiniteCohomologicalDimensionInjectiveCoproducts.lean",
+  "declaration": "CategoryTheory.Functor.preservesColimitsOfShape_rightDerivedFunctor_of_injectiveCoproducts",
+  "statement": "theorem preservesColimitsOfShape_rightDerivedFunctor_of_injectiveCoproducts\n    [IsGrothendieckAbelian.{w} C]\n    [HasInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D] (J : Type*)\n    [HasColimitsOfShape (Discrete J) C] [HasColimitsOfShape (Discrete J) D]\n    [PreservesColimitsOfShape (Discrete J) F] (d : ℕ)\n    (hF : ∀ (X : C) (q : ℕ), d < q → IsZero ((F.rightDerived q).obj X))\n    (hJ : ∀ X : J → C, (∀ j, Injective (X j)) → F.rightAcyclic (∐ X)) :\n    PreservesColimitsOfShape (Discrete J) F.rightDerivedFunctor",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T134406-L-3314983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T134406-L-3314983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
