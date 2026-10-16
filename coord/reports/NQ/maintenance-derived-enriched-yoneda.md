@@ -35,9 +35,10 @@ Next worker: use the current node and the prerequisite declarations/imports
 when the queue offers it again. Do not duplicate these foundations or replace
 enhanced mapping complexes/coherent transformations by ordinary homotopy
 categories. The retained NQ sandbox has searches and a diagnostic report but
-no faithful target Lean module. The first historical run incorrectly treated
-the stage-1 NE merge as completion of the stage-2 task; later workers correctly
-diagnosed the missing interfaces. A stage-1 delivery is not a Lean statement.
+no faithful target Lean module. The first historical run received a stale
+stage-1 brief after NE's split had landed, and correctly rejected an unchanged
+stage-1 delivery. Subsequent stage-2 workers correctly diagnosed the missing
+interfaces. A stage-1 delivery is not a Lean statement.
 
 Validation uses the production `dag_queue.Dag.stage2()` on old and corrected
 records and checks eventual eligibility with simulated prerequisite
@@ -51,3 +52,12 @@ The same normal sync archived N0's stage-1 quasi-functor delivery at
 in the side repository when it left active target reach. Its commit is retained;
 reuse that reviewed-work candidate through normal review/queue procedures if
 the route reopens. It has not supplied a Lean interface yet.
+
+A focused validation with the current production queue code and this consumer
+as an in-memory root also passes: the original record is prematurely eligible,
+the repaired record is ineligible, and simulating both prerequisite declarations
+makes it eligible again. This verifies resumption independently of concurrent
+changes above this item in the target route. Final dispatcher observation at
+09:08:49 UTC: no running worker for the item, no unified-queue entry, tries 8,
+blocked count 5, and no give-up entry. The last worker exited naturally at
+17:08:11 server time; maintenance sent no process signal.
