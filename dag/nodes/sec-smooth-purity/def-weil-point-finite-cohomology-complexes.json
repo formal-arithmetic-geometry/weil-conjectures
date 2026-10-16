@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-finite-coefficient-point",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement, first paragraph: “Let $D^b_{\\mathrm{fin}}(A_{E,n})$ be the full subcategory of $D(A_{E,n})$ consisting of bounded complexes with finite cohomology modules.”",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Bounded complexes with finite cohomology modules",
@@ -25,21 +25,84 @@
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "grep -n 'abbrev Bounded\\|def bounded' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean",
-   "results": "DerivedCategory.Bounded (TStructure.lean:207) and TStructure.bounded (Basic.lean:266): the bounded part only; no condition on the cohomology modules",
-   "date": "2026-10-09",
-   "verdict": "no match (Mathlib has the boundedness half: DerivedCategory.Bounded (ModuleCat A))"
+   "query": "finite.*homology|homology.*finite",
+   "results": "EulerCharacteristic.lean:44,167 concerns finite rank support; ShortComplex exact/preserves-homology files concern exact functors. No bounded finite-set cohomology subcategory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Finite",
+   "results": "OK, zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded derived category of modules with finite underlying cohomology sets",
+   "results": "HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory, HomologicalComplexUpToQuasiIso, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE and Ext/boundedness results. No finite-underlying-set cohomology condition.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of the derived category of modules consisting of complexes with finitely many nonzero cohomology modules and each cohomology module a finite set",
+   "results": "DerivedCategory.TStructure.t, DerivedCategory.IsGE, DerivedCategory.IsLE, and boundedness of localized/single complexes. No finite-underlying-set cohomology subcategory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "grep -rn 'Finite.*homology\\|homology.*Finite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
-   "results": "no full subcategory of the derived category cut out by finiteness of cohomology",
-   "date": "2026-10-09",
+   "query": "def homologyFunctor|abbrev Bounded|def FullSubcategory|def fullSubcategory|class Finite",
+   "results": "Read DerivedCategory.homologyFunctor (Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:34), homologyFunctorFactors (:39), and DerivedCategory.Bounded (Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:207). They provide cohomology and boundedness, not the combined predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; constituent notions available"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Full subcategory defined by a predicate on objects of a category",
+   "results": "CategoryTheory.ObjectProperty.FullSubcategory, its constructor and category instance. Read Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:38-46: objects satisfying P, induced morphisms.",
+   "date": "2026-10-16",
+   "verdict": "constituent match only: generic full-subcategory construction, not the finite-cohomology predicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": "DerivedCategory.homologyFunctor, homologyFunctorFactors, shift_homologyFunctor, isIso_iff and homology-sequence lemmas. Read Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:34,39.",
+   "date": "2026-10-16",
+   "verdict": "constituent match only: cohomology functor already covered by def-weil-abstract-derived-category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category objects with bounded cohomology and finite underlying homology groups",
+   "results": "DerivedCategory.IsGE, IsLE, DerivedCategory, isLE_Q_obj_iff, TStructure.t and exists_iso_Q_obj_of_isLE. No finite-underlying-set cohomology predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Object property on a derived category: finite support of homology, each homology object a finite module as a type",
+   "results": "OK, eight hits: DerivedCategory.IsGE, TStructure.t, IsLE, instIsGEObjCochainComplexIntQOfIsGE, instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory, isGE_Q_obj_iff, instIsGEObjSingleFunctor. These supply derived categories and degree bounds, but none imposes finite underlying cohomology sets.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointFinite|finiteCohomology|finite_cohomology|finiteHomology|finite_homology|IsBounded",
+   "results": "OK, zero hits in Mathlib/Algebra/Homology.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", Finite",
+   "results": "OK, zero hits.",
+   "date": "2026-10-16",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +144,20 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "The node has no recorded Lean declaration or exact Mathlib match. This delivery supplies its existing DAG notion rather than a new helper notion. Defines the full-subcategory predicate with finite support and finite underlying cohomology sets."
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-weil-point-finite-cohomology-complexes",
+  "worker": "stage1",
+  "summary": "Definition-only split: retained the statement and its sole statement dependency def-weil-abstract-derived-category, whose statement explicitly supplies the cohomology functors on the derived category. The defining object predicate is finite support of cohomology together with finite underlying sets in every degree; the full subcategory inherits all ambient morphisms. These require only standard set/module and full-subcategory constructions from Mathlib, so no helper nodes or proof steps are introduced. Searched the project, whole DAG/blueprint and Mathlib; no exact WeilConjectures or Mathlib declaration was found. The existing Sheaf declaration is outside the permitted attachment source and remains untouched.",
+  "blueprint": "Realizes the definition of D^b_fin(A_E,n) in the first paragraph of def-weil-finite-coefficient-point; it does not assert any of the later geometric-point equivalences."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q06-ccc5dda2d",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-ccc5dda2d (reviewer sub-agent of L); spot-checked: Read the complete item, cited dependency, exact blueprint and Stacks sources, report, and unit/chapter route. Finite-set cohomology agrees with the finite source coefficients; boundedness and nonperfect edge cases check out. No new nodes, missing citations, cycles, unsupported comparisons, or target weakening found. Detailed checks are in review.md."
  }
 }
