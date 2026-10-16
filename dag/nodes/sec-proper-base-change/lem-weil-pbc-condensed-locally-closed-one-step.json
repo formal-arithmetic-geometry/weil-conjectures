@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-condensed-locally-closed-one-step",
+ "kind": "statement",
+ "title": "One open/closed decomposition for arbitrary condensed coefficients",
+ "statement": "For a scheme T with noetherian underlying space, a commutative condensed ring Λ, and a constructible module M over the induced pro-etale coefficient ring, either M[0] is a condensed locally closed piece, or there is a nonsurjective closed immersion i:Z→T with exact closed pushforward, a constructible module MZ on Z, and a distinguished triangle A→M[0]→D(i_*)(MZ[0])→A[1], where A is a condensed locally closed piece. A piece is closed pushforward of quasi-compact open extension by zero of a locally finitely presented module, up to isomorphism.",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-condensed-locally-closed-piece"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and finite-stratum induction in the proof of Lemma 6.8.12"
+ },
+ "proof": [
+  {
+   "text": "Apply generic local finite presentation. If M is already locally finitely presented, identity open and closed immersions exhibit M[0] as a piece. Otherwise choose its nonempty locally finitely presented open U. The closed subscheme defined by the vanishing ideal of U complement gives a nonsurjective closed immersion i:Z→T.",
+   "uses": [
+    "lem-weil-pbc-condensed-constructible-generic-lfp",
+    "def-weil-pbc-condensed-locally-closed-piece"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Constructible pullback gives constructible MZ=i* M. Open/closed recollement supplies exact closed pushforward i_* and its bounded-below triangle. Map it to the ordinary derived category and use exact-functor single comparisons to identify its first object with j!j* M[0], its middle object with M[0], and its last with D(i*)(MZ[0]). Transport the triangle across these isomorphisms. Identity closed immersion exhibits the first object as a piece. The profinite-point identity comparisons identify identity closed pushforward and identity open restriction with the identity functor.",
+   "uses": [
+    "lem-weil-pbc-module-constructible-pullback",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "def-weil-pbc-condensed-locally-closed-piece",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-constructible-generic-lfp",
+  "def-weil-pbc-condensed-locally-closed-piece",
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and finite-stratum induction in the proof of Lemma 6.8.12",
+  "note": "B3: coefficient-generic categorical reduction; Lean proof follows these steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constructible module sheaf on a noetherian scheme is a finite distinguished extension of locally closed extension by zero pieces",
+   "date": "2026-10-16",
+   "results": "AlgebraicGeometry.Scheme.Modules; ModuleCat.tildeInModuleCat; SheafOfModules.noConfusionType; SheafOfModules.IsFiniteType; SheafOfModules; SheafOfModules.IsFiniteType.mk; AlgebraicGeometry.Scheme.PresheafOfModules; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "verdict": "No coefficient-generic constructible module-object open piece or extension-tower theorem was found. Existing finite-stratification and triangulated extension APIs support the displayed proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a constructible integral sheaf commutes with filtered colimits uniformly bounded below",
+   "date": "2026-10-16",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.Sheaf.instIsGrothendieckAbelian; CategoryTheory.Sheaf.H; SheafOfModules.instAbelian; CategoryTheory.Sheaf.cohomologyPresheafFunctor; instAbelianLightCondMod; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "verdict": "No coefficient-generic constructible module-object open piece or extension-tower theorem was found. Existing finite-stratification and triangulated extension APIs support the displayed proof."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*hom.*colimit|quasiIso.*colim",
+   "date": "2026-10-16",
+   "results": "No matches.",
+   "verdict": "No coefficient-generic constructible module-object open piece or extension-tower theorem was found. Existing finite-stratification and triangulated extension APIs support the displayed proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralConstructibleSheafHom",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-to-rational transport in the second proof paragraph: integral constructible sheaf Hom continuity, via finite local resolutions, finite stratification, and the common lower bound reduction.",
+   "via": [
+    "lem-weil-pbc-integral-constructible-sheaf-hom",
+    "lem-weil-pbc-continuous-constructible-integral-image",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedLocallyClosedOneStep",
+  "file": "lean/Sheaf/Paper/CondensedLocallyClosedOneStep.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_locallyClosed_one_step",
+  "statement": "theorem condensed_locallyClosed_one_step (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) (hM : IsConstructibleModuleObject (condensedRingObj Λ T) M) : condensedLocallyClosedPiece Λ T ((DerivedCategory.singleFunctor _ 0).obj M) ∨ ∃ (Z : Scheme.{u}) (i : Z ⟶ T), Exists fun [_hi : IsClosedImmersion i] ↦ Exists fun [_hex : PreservesFiniteColimits (CondensedRing.lowerStar Λ i)] ↦ ¬ Function.Surjective i ∧ ∃ (MZ : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)), IsConstructibleModuleObject (condensedRingObj Λ Z) MZ ∧ ∃ (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) (f : A ⟶ (DerivedCategory.singleFunctor _ 0).obj M) (g : (DerivedCategory.singleFunctor _ 0).obj M ⟶ (CondensedRing.lowerStar Λ i).mapDerivedCategory.obj ((DerivedCategory.singleFunctor _ 0).obj MZ)) (h : (CondensedRing.lowerStar Λ i).mapDerivedCategory.obj ((DerivedCategory.singleFunctor _ 0).obj MZ) ⟶ A⟦(1 : ℤ)⟧), Pretriangulated.Triangle.mk f g h ∈ distTriang _ ∧ condensedLocallyClosedPiece Λ T A",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T053830-L-51707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T053830-L-51707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

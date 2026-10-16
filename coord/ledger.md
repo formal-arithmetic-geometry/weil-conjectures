@@ -15396,3 +15396,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:35 L: returned deliver/J1/Sheaf.Paper.CondensedConstructibleOneStep (reviewer RETURN: (reviewer X-5280a, head 5280a8cff) H4/H10: Reuse the already-landed AlgebraicGeometry.ProEtale.condensedLocallyClosedPie)
 - 05:37 L: returned deliver/Q4/Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy (reviewer RETURN: (reviewer X-c477a, head c477aa071) D1: `lem-sp-cartan-eilenberg-double-complex-homotopy-components.json` restates the pa)
 - 05:38 L: returned deliver/C2/Sheaf.AlgebraicGeometry.GrothendieckHypercoverBottomColimit (reviewer RETURN: (the landing tools, head b9f73c5ba) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 05:38 L: merged deliver/B3/Sheaf.Paper.IntegralConstructibleSheafHom (stage 3; reviewer PASS; after a return; landing 20261016T053830-L-51707 (interface); batch 20261016T053828; modules 9; new nodes 8)

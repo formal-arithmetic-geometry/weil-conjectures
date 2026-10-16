@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-proetale-module-lfp-immersion-transport",
+ "kind": "statement",
+ "title": "Transport local presentations from an immersed stratum to maps into its image",
+ "statement": "Let i:Z→T be an immersion of schemes, g:U→T any morphism whose pointwise image is contained in the image of i, R a monoid object in abelian pro-etale sheaves on T, and M an R-module sheaf. If i* M is locally finitely presented over i* R in the library sense (a pro-etale covering with finite free cokernel presentations), then g* M is locally finitely presented over g* R. No scheme-theoretic factorization of g through i is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 5.4.2, computed on the affine ind-etale basis of Theorem 2.3.4, and Definition 6.8.10; restriction to stratum interiors in finite-stratum induction"
+ },
+ "proof": [
+  {
+   "text": "Form V=U×_T Z, with projections a:V→U and b:V→Z. Pointwise image containment and the scheme pullback preimage theorem prove a surjective. It is an immersion by base change; its range is all of U and hence closed, so it is a closed immersion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Pull the presentations on Z back along b. The monoidal composition comparisons identify the result with the module pulled back along b followed by i. The cartesian equation b i=a g and the inverse composition comparison then identify it with a* g* M over a* g* R. Apply surjective closed reflection to a, coefficient ring g* R and module g* M.",
+   "uses": [
+    "lem-weil-pbc-module-constructible-pullback",
+    "lem-weil-pbc-proetale-module-lfp-closed-reflection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-weil-pbc-proetale-module-lfp-closed-reflection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 5.4.2, computed on the affine ind-etale basis of Theorem 2.3.4, and Definition 6.8.10; restriction to stratum interiors in finite-stratum induction",
+  "note": "B3 complete Lean proof of the cartesian geometry and coefficient/module composition reduction to surjective closed presentation reflection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local finite presentation of a sheaf of modules on the pro etale site is preserved under restriction to a locally closed stratum and topological invariance",
+   "date": "2026-10-16",
+   "results": "AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict; SheafOfModules.isFinitePresentation; AlgebraicGeometry.instLocallyOfFinitePresentationResLE; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.IsFinitePresentation; SheafOfModules.IsFinitePresentation.recOn; SheafOfModules.IsFinitePresentation.mk; AlgebraicGeometry.Scheme.Modules.restrict_obj",
+   "verdict": "No theorem transporting local module presentations across an immersed image was found; scheme-morphism finite-presentation results concern a different notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite presentations of sheaves of modules are invariant under a surjective closed immersion of schemes on the pro etale site",
+   "date": "2026-10-16",
+   "results": "AlgebraicGeometry.LocallyOfFinitePresentation; AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; AlgebraicGeometry.locallyOfFinitePresentation_iff; AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation; AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation; AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE; AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE",
+   "verdict": "No theorem transporting local module presentations across an immersed image was found; scheme-morphism finite-presentation results concern a different notion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyFinitelyPresented|locally.*free.*resolution|surjective.*closed.*presentation",
+   "date": "2026-10-16",
+   "results": "No matches.",
+   "verdict": "No theorem transporting local module presentations across an immersed image was found; scheme-morphism finite-presentation results concern a different notion."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralConstructibleSheafHom",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-to-rational transport in the second proof paragraph: integral constructible sheaf Hom continuity, via finite local resolutions, finite stratification, and the common lower bound reduction.",
+   "via": [
+    "lem-weil-pbc-integral-constructible-sheaf-hom",
+    "lem-weil-pbc-continuous-constructible-integral-image",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModuleLfpImmersionTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModuleLfpImmersionTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.localFinitePresentation_upperStar_of_range_subset",
+  "statement": "theorem localFinitePresentation_upperStar_of_range_subset {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsImmersion i] (g : U ⟶ T) (hgi : Set.range g ⊆ Set.range i) (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) (hM : IsLocallyFinitelyPresented ((upperStar Ab.{u + 1} i).obj R) (((upperStar Ab.{u + 1} i).mapMod R).obj M)) : IsLocallyFinitelyPresented ((upperStar Ab.{u + 1} g).obj R) (((upperStar Ab.{u + 1} g).mapMod R).obj M)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T053830-L-51707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T053830-L-51707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

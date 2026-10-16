@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-condensed-locally-closed-extension-tower",
+ "kind": "statement",
+ "title": "Finite locally closed extension towers for arbitrary condensed coefficients",
+ "statement": "For a scheme T with noetherian underlying space, a commutative condensed ring Λ, and a constructible module M over its induced pro-etale coefficient ring, there exists a natural number r such that M[0] belongs to the r-th extensionProductIter of the object property condensedLocallyClosedPiece Λ T. The zeroth iterate is the piece property itself, following Mathlib conventions.",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-condensed-locally-closed-piece"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and finite-stratum induction in the proof of Lemma 6.8.12"
+ },
+ "proof": [
+  {
+   "text": "A closed pushforward of a piece is a piece: compose the closed immersions and use the lowerStar composition and exact-functor single isomorphisms. Induct on extensionProductIter, using preservation of distinguished triangles by exact derived pushforward, to push a finite tower forward. Exactness is the witness returned by the one-step theorem, not a separate direct application of recollement.",
+   "uses": [
+    "def-weil-pbc-condensed-locally-closed-piece"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use noetherian strong induction on closed supports C in T, simultaneously for all closed immersions with image C. The one-step decomposition either gives a piece immediately or a triangle whose last term is pushed from a proper closed subscheme. Its image is strictly smaller: the immersion is injective and the one-step complement is nonempty. Apply the induction hypothesis to this smaller image, push its tower forward, and prepend the one-step triangle.",
+   "uses": [
+    "lem-weil-pbc-condensed-locally-closed-one-step"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-locally-closed-piece",
+  "lem-weil-pbc-condensed-locally-closed-one-step"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and finite-stratum induction in the proof of Lemma 6.8.12",
+  "note": "B3: coefficient-generic categorical reduction; Lean proof follows these steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constructible module sheaf on a noetherian scheme is a finite distinguished extension of locally closed extension by zero pieces",
+   "date": "2026-10-16",
+   "results": "AlgebraicGeometry.Scheme.Modules; ModuleCat.tildeInModuleCat; SheafOfModules.noConfusionType; SheafOfModules.IsFiniteType; SheafOfModules; SheafOfModules.IsFiniteType.mk; AlgebraicGeometry.Scheme.PresheafOfModules; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "verdict": "No coefficient-generic constructible module-object open piece or extension-tower theorem was found. Existing finite-stratification and triangulated extension APIs support the displayed proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a constructible integral sheaf commutes with filtered colimits uniformly bounded below",
+   "date": "2026-10-16",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.Sheaf.instIsGrothendieckAbelian; CategoryTheory.Sheaf.H; SheafOfModules.instAbelian; CategoryTheory.Sheaf.cohomologyPresheafFunctor; instAbelianLightCondMod; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "verdict": "No coefficient-generic constructible module-object open piece or extension-tower theorem was found. Existing finite-stratification and triangulated extension APIs support the displayed proof."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*hom.*colimit|quasiIso.*colim",
+   "date": "2026-10-16",
+   "results": "No matches.",
+   "verdict": "No coefficient-generic constructible module-object open piece or extension-tower theorem was found. Existing finite-stratification and triangulated extension APIs support the displayed proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralConstructibleSheafHom",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-to-rational transport in the second proof paragraph: integral constructible sheaf Hom continuity, via finite local resolutions, finite stratification, and the common lower bound reduction.",
+   "via": [
+    "lem-weil-pbc-integral-constructible-sheaf-hom",
+    "lem-weil-pbc-continuous-constructible-integral-image",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedLocallyClosedExtensionTower",
+  "file": "lean/Sheaf/Paper/CondensedLocallyClosedExtensionTower.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_condensedLocallyClosed_extension_tower",
+  "statement": "theorem exists_condensedLocallyClosed_extension_tower (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) (hM : IsConstructibleModuleObject (condensedRingObj Λ T) M) : ∃ r : ℕ, (condensedLocallyClosedPiece Λ T).extensionProductIter r ((DerivedCategory.singleFunctor _ 0).obj M)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T053830-L-51707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T053830-L-51707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

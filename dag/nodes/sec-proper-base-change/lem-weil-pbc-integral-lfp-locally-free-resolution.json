@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-integral-lfp-locally-free-resolution",
+ "kind": "statement",
+ "title": "A two-term locally finite free resolution of an integral local system",
+ "statement": "Let ℓ be prime, E a finite normed extension of Q_ℓ, X a scheme with noetherian underlying space, and P a locally finitely presented module over the ordinary integral condensed coefficient ring on X. There exist modules F1 and F0, maps f:F1→F0 and g:F0→P with f g=0, such that 0→F1→F0→P→0 is short exact, and each Fi becomes a finite free module on a pro-etale covering of X. The covers of F1 and F0 may differ. Torsion in P is allowed. These are existential witnesses used in proofs, not data defining a library object.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3), local finite DVR resolution; globalization argument expanded from this step; Remark 7.3.2 and Lemma 7.3.9 for finite locally constant torsors"
+ },
+ "proof": [
+  {
+   "text": "Evaluate presentation matrices at geometric points. Descent makes the finite fiber module independent of the lift; flat going-down and equality of continuous functions on comparable points make its Smith invariants specialization invariant. The finitely many irreducible components and their intersections make the module type fixed on each of the finitely many connected components. Continuous pivot elimination then locally identifies P with that finite DVR module, including the zero matrix case.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Its torsion T has finite fibers and a uniform annihilator, and L=P/T is locally finite free. The sheaf of splittings of 0→T→P→L→0 is locally a torsor under the finite local system Hom(L,T). Finite local systems and their finite torsors are trivialized by finite etale covers. Choose a finite etale surjection on which T is constant and the extension splits; on that cover resolve T by finite free constant modules and add L in degree zero. Zero torsion uses the identity cover.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Push the resulting degree-zero locally finite free module down along the finite etale cover. Compose its surjection with the finite etale counit onto P, giving an epimorphism F0→P. Finite etale pushforward preserves local finite freeness, as seen on split fibers. The counit is the sum map on these fibers and is surjective without dividing by the covering degree; the argument remains integral when that degree is divisible by the residue characteristic. The kernel F1 is locally finite free by continuous Smith normal form for a surjection onto a fixed finite DVR module. Take the kernel inclusion and its canonical zero composite to obtain the short exact sequence. Empty schemes use zero modules and empty covers.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3), local finite DVR resolution; globalization argument expanded from this step; Remark 7.3.2 and Lemma 7.3.9 for finite locally constant torsors",
+  "note": "B3: the paper supplies local finite DVR resolutions; the finite-etale torsor and pushforward argument globalizes this step. This theorem remains unproved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally finitely presented integral l adic local system has a two term locally finite free resolution",
+   "date": "2026-10-16",
+   "results": "SheafOfModules.isFinitePresentation; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; Module.free_of_maximalIdeal_rTensor_injective; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; Module.free_of_flat_of_isLocalRing; AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; CategoryTheory.IsLocallyFinitelyPresentable",
+   "verdict": "No two-term locally finite free resolution theorem for ordinary integral condensed coefficient modules was found. Generic finite-presentation and local-ring APIs do not supply the globalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented sheaf of integral p adic modules has a short exact resolution by locally finite free sheaves on a noetherian scheme",
+   "date": "2026-10-16",
+   "results": "SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.IsFiniteType; SheafOfModules.Presentation.IsFinite; LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "verdict": "No two-term locally finite free resolution theorem for ordinary integral condensed coefficient modules was found. Generic finite-presentation and local-ring APIs do not supply the globalization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyFinitelyPresented|locally.*free.*resolution|surjective.*closed.*presentation",
+   "date": "2026-10-16",
+   "results": "No matches.",
+   "verdict": "No two-term locally finite free resolution theorem for ordinary integral condensed coefficient modules was found. Generic finite-presentation and local-ring APIs do not supply the globalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented l adic integral local system has a global short exact sequence of finite locally free sheaves resolving it",
+   "date": "2026-10-16",
+   "results": "SheafOfModules.IsFinitePresentation; AdicCompletion.map_exact; SheafOfModules.isFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; Profinite.NobelingProof.succ_exact; localCohomology.diagram",
+   "verdict": "Independent second reading: the returned generic etale algebra or sheaf presentation results do not prove this pro-etale integral module statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralConstructibleSheafHom",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-to-rational transport in the second proof paragraph: integral constructible sheaf Hom continuity, via finite local resolutions, finite stratification, and the common lower bound reduction.",
+   "via": [
+    "lem-weil-pbc-integral-constructible-sheaf-hom",
+    "lem-weil-pbc-continuous-constructible-integral-image",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLfpLocallyFreeResolution",
+  "file": "lean/Sheaf/Paper/IntegralLfpLocallyFreeResolution.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_lfp_locallyFree_resolution",
+  "statement": "theorem integral_lfp_locallyFree_resolution (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (CondensedRing.integralCoeff ℓ E) X)) (hP : IsLocallyFinitelyPresented (condensedRingObj (CondensedRing.integralCoeff ℓ E) X) P) : ∃ (F₁ F₀ : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (CondensedRing.integralCoeff ℓ E) X)) (f : F₁ ⟶ F₀) (g : F₀ ⟶ P) (w : f ≫ g = 0), (ShortComplex.mk f g w).ShortExact ∧ (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀, Mod.IsFree ((upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj (CondensedRing.integralCoeff ℓ E) X)) (((upperStar Ab.{u + 1} (C.f s)).mapMod _).obj F₁)) ∧ (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀, Mod.IsFree ((upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj (CondensedRing.integralCoeff ℓ E) X)) (((upperStar Ab.{u + 1} (C.f s)).mapMod _).obj F₀))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T053830-L-51707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T053830-L-51707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
