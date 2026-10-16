@@ -14,27 +14,57 @@
  },
  "proof": [
   {
-   "text": "Refine the finite stratification to a finite closed filtration and restrict the supplied integral models to the refined pieces. Extend the open pieces by zero and the closed pieces by direct image. These functors are exact; they preserve constructibility by using the supplied stratifications on the support and zero on its complement. Their coefficient-localization comparisons follow from exact filtered localization and the closed-direct-image filtered-colimit comparison. Thus the associated degree-zero rational pieces have integral bounded constructible models.",
+   "text": "Use Topology.Stratification.exists_chain_opens from WeilConjectures.ConstructibleSheaf.Devissage to obtain a finite increasing chain from the empty open to X, with each successive difference contained in a stratum. Its existing noetherian induction and dense-open-stratum argument also handle the empty space and the empty stratification.",
    "uses": [
-    "def-constructible-stratification",
-    "lem-weil-pbc-module-constructible-pullback",
+    "def-constructible-stratification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each open V take the image subobject of the counit V_! V^* F to F. Prove this counit monic using the fully faithful inclusion of the open pro-etale site: at objects in its image the Kan-extension unit is invertible, and at the other objects the relevant comma category is empty. The linear and condensed module counits inherit monicity. Use the existing Adjunction.exists_iso_counit_app for composed restrictions to make these subobjects increasing. The first is zero, the last is F. The existing Subobject.cokernelOfLEMkIso identifies each quotient with the outer open extension of the cokernel for the inclusion of two successive opens.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a difference W minus W0 contained in the stratum immersion i, take its reduced closed complement Z inside W. Its map to X factors through i: lift to the coborder open of i and use the proved reduced-source factorization for the resulting closed immersion. Transport the supplied integral lattice across the condensed coefficient isomorphism, then pull it back to Z. Pullback preserves constructibility and commutes with coefficient extension.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients",
+    "lem-weil-pbc-module-constructible-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the proved ordinary module support helpers openRestrictionPushforwardZero, openUnitIsIso, moduleCounitOfAbelian and moduleUnitOfAbelian from Sheaf.Paper.CondensedOpenClosedRecollement through a proof-only import all. Reuse constructible_of_restrictions and constructible_of_isZero from Sheaf.AlgebraicGeometry.ProEtaleModuleConstructibleExtensionByZero in the same way. Closed pushforward preserves constructibility by concatenating the closed stratification and the zero open stratification. An integral closed pushforward rationalizes to the desired supported rational module: coefficient extension commutes with open pullback, and its closed pullback is the supplied rational lattice by the closed counit. The supported unit identifies both modules with the closed pushforward of their equal closed restrictions. This avoids a filtered-colimit comparison for closed pushforward.",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "def-weil-pbc-continuous-integral-coefficients",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-module-constructible-extension-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cokernel of the inner open counit has zero open restriction. Its closed restriction is the restriction of F, since closed pullback kills open extension by zero and preserves cokernels. Apply the preceding supported-model construction, then extend that integral model along W into X. Open extension preserves constructibility and commutes with scalar extension by the ordinary coefficient comparison.",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-closed-support",
     "lem-weil-pbc-module-constructible-extension-zero",
-    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A constructible ordinary integral lattice in degree zero is bounded integral constructible, including zero cohomology in every other degree. Exactness of coefficient extension identifies its derived extension with the degree-zero rational graded piece. Every short exact subobject-cokernel sequence yields a distinguished triangle, so the triangulated integral image contains all stages of the finite filtration and hence F in degree zero.",
+   "uses": [
+    "lem-weil-pbc-continuous-constructible-integral-image",
     "lem-weil-pbc-continuous-integral-scalar-exact",
     "def-weil-pbc-continuous-integral-coefficients"
    ],
    "elementary": false
   },
   {
-   "text": "Each short exact open--closed localization sequence gives a distinguished triangle. The integral scalar-extension essential image is triangulated, so induction over the finite filtration gives an integral bounded constructible complex K whose rationalization is F[0]. This is the denominator-clearing argument encoded in the existing image-closure theorem; it does not assume essential surjectivity. If there are no pieces the scheme is empty and use zero.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-continuous-constructible-integral-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Take the degree-zero homology N of K. Bounded constructibility says N is constructible. Exactness of ordinary coefficient localization identifies the degree-zero homology of its derived extension with the ordinary extension of N. Taking degree-zero homology of the isomorphism with F[0] gives the required ordinary scalar-extension isomorphism. No particular preselected lattice on a stratum is required to glue unchanged.",
+   "text": "Choose the resulting bounded integral constructible complex K. Its degree-zero homology is constructible, and the homology comparison for exact derived coefficient extension identifies ordinary extension of H0(K) with H0(F[0]) and hence F. All choices occur within the proof of existence; no object is defined from an unproved mere-existence theorem.",
    "uses": [
     "def-weil-pbc-continuous-integral-coefficients",
     "lem-weil-pbc-continuous-integral-scalar-exact"
@@ -45,17 +75,18 @@
  "proof_deps": [
   "def-constructible-stratification",
   "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-condensed-open-closed-recollement",
   "lem-weil-pbc-continuous-constructible-integral-image",
   "lem-weil-pbc-continuous-integral-scalar-exact",
   "lem-weil-pbc-module-constructible-extension-zero",
   "lem-weil-pbc-module-constructible-pullback",
-  "lem-weil-pbc-proetale-ringed-open-closed"
+  "lem-weil-pbc-proetale-abelian-closed-support"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Final filtration/Ext1 paragraph of Lemma 6.8.13 and essential-surjectivity argument of Proposition 6.8.14(2); taking H0 uses Lemma 6.8.2",
-  "note": "B4 second reading: source argument specialized to the actual internal coefficient interface; the two independent obligations separate stratum lattice construction from assembly of given stratum models."
+  "note": "C1 repair: complete Lean proof by finite monic open-extension filtration, reduced closed-support lattice construction, triangulated essential-image induction, and H0 extraction. The eight duplicate lemmas identified by the return are removed: generic counit and topological filtration lemmas are reused from ConstructibleSheaf.Devissage; existing private module support and constructibility helpers are reused through proof-only import all. Also reuse the existing cokernel-of-subobject isomorphism and zero-constructibility theorem. A proved private canonical smallness instance and explicit applications of mono/epi-of-isomorphism lemmas prevent unrelated etale-devissage instances from causing inference timeouts. No new holes or public signatures."
  },
  "mathlib_searches": [
   {
@@ -122,11 +153,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B4",
+  "reviewer": "X-30ba2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261016T023443-L-1241905",
+  "landing": "20261016T052145-L-3987358",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean/DAG files matched against the packet and repository; full compile, both direct importer compiles, signature comparison, and axiom check passed."
  }
 }
