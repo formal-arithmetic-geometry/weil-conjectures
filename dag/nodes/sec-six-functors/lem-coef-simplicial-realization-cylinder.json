@@ -254,5 +254,28 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-99e926d7d (reviewer sub-agent of L); spot-checked: I read the item, all 4 steps and the full statements of the cited nodes lem-coef-realization-finite-limits, lem-coef-compact-open-currying and def-weil-pbc-simplicial-set. The delivery adds no new nodes and changes neither the statement nor stmt_deps; proof_deps equals the union of the steps' uses. The statement's quotient-realization convention is exactly the one in def-cbc-enhanced-diagrams-cones that the finite-limits node uses. Step 1: that node's k-space and finite-limit clauses give the canonical natural homeomorphism |KxΔ^1| ≅ |K| x^K |Δ^1|. Step 2 is elementary and checks out: e respects (θα)_*=θ_*α_*, [θ,t]=[id,(1-e,e)] holds for constant θ and zero weights, and the orientation is right. Step 3 is the standard proof that k(XxI)=XxI for a k-space X: compact tests, curry (no local compactness needed) and uncurry with locally compact I. I re-read Mathlib/Topology/CompactOpen.lean:430-467 and it matches the leaf's hypotheses. Step 4: the representative formula, naturality and endpoints 0 and 1 are verified. Small cases: empty K, Δ^0, discrete K and infinite K. Four citers (Thomason comparison step 5, free-resolution steps 2 and 5, Segal-DK step 3, coslice step 6) use only the ordinary-product homeomorphism with the stated endpoint orientation, which matches. No duplicate in the DAG: finite-limits gives only the k-product, and lem-cbc-simplicial-homotopy-equivalence-weak has a different conclusion. Both proof deps are in the item's unit sk-prop-sf-biduality-general, so there are no tool_uses. Hovey is not archived under literature/, so I could not check it at the source; the report records WANTED and proof_origin=agent, which is correct. No SGA source and no target is touched. I made no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e4483d0a8",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read node, stmt_dep def-weil-pbc-simplicial-set, both reports, the node JSON and the full module. All five conclusion clauses match the node: IsHomeomorph onto the ordinary product |K| × unitInterval, the representative fiber-sum formula, naturality via f ▷ Δ[1], and the endpoints ι₀ ↦ (z,0) and ι₁ ↦ (z,1). Verified in Mathlib that stdSimplexHomeomorphUnitInterval evaluates coordinate 1, that ι₀/ι₁ are const 0/1, and that toTopHomeo is natural. rfl probes confirm θ i is the vertex value and yonedaEquiv.symm θ = stdSimplex.map θ, so the sum is the node's fiber sum. The comparison is canonical real data, not hollow. No extra hypotheses; universe u explicit; edge cases (empty K, Δ[0], n=0, constant θ, zero coordinates, infinite K) covered. Only proof is sorry; docstrings carry the source place, blueprint tag and 4-step plan; lean.statement verbatim; both report sections present; no duplicate in Mathlib or the project. nt_compile.py --json compile clean in 1.6 s, no warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RealizationCylinder",
+  "declaration": "SSet.realization_cylinder",
+  "declarations": [
+   "SSet.realizationCylinderComparison",
+   "SSet.realization_cylinder"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/RealizationCylinder.lean",
+  "statement": "theorem realization_cylinder (K : SSet.{u}) : IsHomeomorph (realizationCylinderComparison K) ∧ (∀ (n : ℕ) (x : K _⦋n⦌) (θ : (Δ[1] : SSet.{u}) _⦋n⦌) (t : _root_.stdSimplex ℝ (Fin (n + 1))), Prod.map id (fun s : unitInterval ↦ (s : ℝ)) (realizationCylinderComparison K (toTop.map (yonedaEquiv.symm (⟨x, θ⟩ : (K ⊗ Δ[1]) _⦋n⦌)) ((SimplexCategory.toTopHomeo ⦋n⦌).symm t))) = (toTop.map (yonedaEquiv.symm x) ((SimplexCategory.toTopHomeo ⦋n⦌).symm t), ∑ i : Fin (n + 1), if θ i = 1 then t.val i else 0)) ∧ (∀ (L : SSet.{u}) (f : K ⟶ L) (z : |K ⊗ Δ[1]|), realizationCylinderComparison L (toTop.map (f ▷ (Δ[1] : SSet.{u})) z) = Prod.map (toTop.map f) id (realizationCylinderComparison K z)) ∧ (∀ z : |K|, realizationCylinderComparison K (toTop.map (ι₀ (X := K)) z) = (z, 0)) ∧ (∀ z : |K|, realizationCylinderComparison K (toTop.map (ι₁ (X := K)) z) = (z, 1))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The canonical comparison is real continuous-map data from the realized projections and the existing standard-one-simplex homeomorphism. The theorem states homeomorphy for the ordinary product topology, its explicit barycentric formula, naturality, and both endpoint identities. No arbitrary comparison map or chosen homeomorphism is assumed."
  }
 }

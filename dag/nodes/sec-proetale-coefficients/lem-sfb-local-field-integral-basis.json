@@ -333,5 +333,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-cc0fa032b (reviewer sub-agent of L); spot-checked: Read the item, its unit sk-prop-sfb-cartesian-coefficients (step 3), and the blueprint main-20261015 finite-free detail proof. The item states that proof's opening sentence ('O_F finite torsion-free hence free over the DVR O_E, of rank d'), with no hypothesis added and no conclusion weakened. Read all 9 cited statements in full. Step 1: the DVR lemma is applied to both E and F; PID implies Noetherian; E is complete; |ell| = ell^{-1} gives a nontrivial norm. Step 2: the hypotheses of the homeomorphism leaf hold (E complete and nontrivially normed, F and E^d Hausdorff TVS, F finite-dimensional over E), which gives an epsilon-ball. Step 3 (elementary) is correct: one N gives B inside a single finitely generated lattice L. Step 4: checked against Stacks 00IK (lemma-Noetherian-basic) and 0AUW(3) (more-algebra lemma-dedekind-torsion-free-flat); torsion-freeness holds because F is a field. Step 5 (spanning and independence by scaling) and step 6 (r = d by the dimension definition) are correct. Small cases E=F, ell=2, unramified and Q_ell(sqrt ell) all work, and no separability is needed. There are no new nodes. The rg duplicate search found only siblings: lem-sfb-padic-integers-integral-closure (integrality), det-...-finite-free (assumes a basis), and sheaf-level lemmas. The Mathlib integral-closure candidates need a bridge, so the item is correctly not a leaf. Accepted tool use: lem-weil-l-adic-extension-integers-dvr, a generic DVR fact from an off-route unit (sk-prop-nagata-sketch-comp-category is not in the unit's uses-closure). No SGA is cited and this is not a target node. No fixes were needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-480890d36",
+  "group": "NI",
+  "result": "pass",
+  "note": "Padic.exists_integral_basis matches lem-sfb-local-field-integral-basis clause by clause: prime l, finite extensions E/F of Q_l in independent universes, Algebra E F with IsScalarTower, hcompat as the node's stated (and in fact implied) compatibility, the dependency's own coefficientExtensionIntegers/AbsoluteValue (no private copy), Fin (finrank E F) index, b_i in O_F, and for each x in O_F a unique integral coefficient tuple with x = sum algebraMap(a_i)*b_i. No added or stronger hypotheses; edge cases E=F, x=0, l=2 and d>=1 fine. Only the item's lean field changed; dependency node identical; lean.statement verbatim; report has Worker report and Second reading by NI; docstrings carry source place, blueprint id and the six proof steps; only sorry; no lines over 100 chars. nt_compile.py --json on the snapshot file: clean, axioms only propext/sorryAx/choice/Quot.sound. Non-blocking: redundant private import of ExtensionIntegersDvr."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.NumberTheory.Padics.LocalFieldIntegralBasis",
+  "file": "lean/Sheaf/NumberTheory/Padics/LocalFieldIntegralBasis.lean",
+  "declaration": "Padic.exists_integral_basis",
+  "statement": "theorem exists_integral_basis (l : ℕ) [Fact l.Prime] (E : Type u) (F : Type v) [Field E] [Field F] [Algebra (Padic l) E] [Algebra (Padic l) F] [Algebra E F] [IsScalarTower (Padic l) E F] [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) F] [FiniteDimensional E F] (hcompat : ∀ x : E, coefficientExtensionAbsoluteValue l F (algebraMap E F x) = coefficientExtensionAbsoluteValue l E x) : ∃ b : Fin (Module.finrank E F) → F, (∀ i, b i ∈ coefficientExtensionIntegers l F) ∧ ∀ x : F, x ∈ coefficientExtensionIntegers l F → ∃! a : Fin (Module.finrank E F) → E, (∀ i, a i ∈ coefficientExtensionIntegers l E) ∧ x = ∑ i, algebraMap E F (a i) * b i",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-17"
  }
 }

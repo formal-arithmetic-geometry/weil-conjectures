@@ -299,5 +299,33 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-873edfe61 (reviewer sub-agent of L); spot-checked: I read the whole item (statement, 5 steps, deps, searches, split_report), the blueprint statement and proof, the closed-unit and open-closed-triangle units, the chapter record, and the full statement of every cited node. Statement: it writes out the qcqs setting of sk-prop-sf-open-closed-triangle exactly and keeps B an arbitrary ring sheaf; no hypothesis is added and no conclusion weakened. Step 1: the size convention, the noncommutative Grothendieck property, K-injective resolutions and def-sfb-right-derived-functor give Rj_*K=j_*J. Exactness comes from sequence-node clauses 1-2 and pullback-limits clause 2, whose qcqs and quasi-compact-complement hypotheses hold. Step 2: j^*j_*=id is checked on sections, matching Stacks 09BN (proetale lemma-open-immersion). The degreewise SES gives the triangle with natural delta by the complex-SES node. Functoriality on D comes from homotopy classes of maps between K-injectives (kinjective-hom-derived). Step 3: the kernel description plus product preservation by j_*, i_* (adjunction) and i^* (pullback-limits clause 2) is genuinely elementary. Step 4: det-pe-products-derived applies on U with j^*B and on X with B; the termwise chain isomorphism is the canonical comparison. Step 5: I verified the identity pr'_n phi F(s)=pr'_n s' phi; it gives a Roos triangle as in Stacks 08TC (derived definition-derived-limit). The removal of the adic-only exact-functor/Rlim citation was correct. The blueprint proves (2) through products of triangles and the five lemma; the delivery proves (3) first and gets (2) termwise from the same inputs. I accept this as a refinement on the same route. No SGA source is used. Edge cases checked: U empty, U=X, K=0, empty and singleton families, zero tower, identity tower, noncommutative B. proof_deps equals the union of step uses; there is no cycle and no duplicate (rg found only specializations or different statements: det-lem-int-tensor-shriek, det-formal-closed-support-ii-limits, lem-cbc-completed-extension-zero-comparison). There are no new nodes. I accept the 6 declared generic tool uses. No fixes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ee980e300",
+  "group": "NN",
+  "result": "fix",
+  "note": "Statement correct in substance. The Lean matches the node: qcqs X, quasi-compact open j, complementary closed i, arbitrary MonObj ring sheaf B; j_! and i_*i^* applied termwise via mapDerivedCategory; Rj_* is the recorded rightDerivedFunctorOfQuasiIsoResolutions with real K-injective resolutions; (1) natural a,b,c with every triangle distinguished; (2) products over Type (u+1) preserved and every Roos limit sent to a Roos limit; (3) module-sheaf products preserved. Edge cases, universes, docstrings, no hollow definitions, sorry-only proof, verbatim lean.statement and line width all checked. Mod encoding is consistent with the landed open-closed sequence dependency. Finding F1 (rule 7, proof-dependency imports): the import Sheaf.AlgebraicGeometry.ProEtale.ClosedInverseImageLimits of the stated proof dependency det-sf-open-closed-pullback-limits had been dropped because of a server duplicate-declaration failure that no longer occurs. Fixed in fixes/ProEtaleOpenExtensionProducts.lean (that one import line only) plus a report note. Delivered and fixed files both compile cleanly with nt_compile.py."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenExtensionProducts",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtale_openExtension_products_derivedLimits",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ringSheafDerivedCategory",
+   "AlgebraicGeometry.ProEtale.ringSheafDerivedCategory_shiftAdditive",
+   "AlgebraicGeometry.ProEtale.ringSheafDerivedOpenExtension",
+   "AlgebraicGeometry.ProEtale.ringSheafDerivedDirectImage",
+   "AlgebraicGeometry.ProEtale.ringSheafDerivedClosedLocalization",
+   "AlgebraicGeometry.ProEtale.proEtale_openExtension_products_derivedLimits"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenExtensionProducts.lean",
+  "statement": "theorem proEtale_openExtension_products_derivedLimits {X Z U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] (hU : Set.range j = (Set.range i)ᶜ) (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] : (∃ (a : ringSheafDerivedOpenExtension j B ⟶ ringSheafDerivedDirectImage j B) (b : ringSheafDerivedDirectImage j B ⟶ ringSheafDerivedDirectImage j B ⋙ ringSheafDerivedClosedLocalization i j hU B) (c : ringSheafDerivedDirectImage j B ⋙ ringSheafDerivedClosedLocalization i j hU B ⟶ ringSheafDerivedOpenExtension j B ⋙ shiftFunctor (ringSheafDerivedCategory X B) (1 : ℤ)), ∀ K, Triangle.mk (a.app K) (b.app K) (c.app K) ∈ distTriang (ringSheafDerivedCategory X B)) ∧ (∀ I : Type (u + 1), PreservesLimitsOfShape (Discrete I) (ringSheafDerivedOpenExtension j B)) ∧ (∀ (K : ℕ → ringSheafDerivedCategory U ((upperStar Ab.{u + 1} j).obj B)) (t : ∀ n : ℕ, K (n + 1) ⟶ K n) [HasProduct K] (L : ringSheafDerivedCategory U ((upperStar Ab.{u + 1} j).obj B)), IsDerivedLimit t L → Exists fun [hP : HasProduct (fun n : ℕ ↦ (ringSheafDerivedOpenExtension j B).obj (K n))] ↦ IsDerivedLimit (K := fun n : ℕ ↦ (ringSheafDerivedOpenExtension j B).obj (K n)) (fun n : ℕ ↦ (ringSheafDerivedOpenExtension j B).map (t n)) ((ringSheafDerivedOpenExtension j B).obj L)) ∧ (∀ I : Type (u + 1), PreservesLimitsOfShape (Discrete I) (ringSheafOpenExtension j B))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The recorded canonical arbitrary-ring module-object functors are used. Derived categories use HasDerivedCategory.standard. The closed term is termwise descent of the exact composite i_* i^*, avoiding an independent closed-stratum localization choice. All helper definitions have real data from the recorded exactness theorem, the Grothendieck K-injective construction and the recorded total right derived universal pair. Natural transformations express functoriality of the triangle; small products have index universe u+1. Sequential preservation quantifies over every Roos-limit object and produces the image-product existence instance.",
+  "fixed_by": "NT-stage2-cc-ee980e300"
  }
 }
