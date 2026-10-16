@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-split-proetale-module-product-map",
+ "kind": "statement",
+ "title": "Lift the split finite-cover product map to internal modules",
+ "statement": "Let Lambda be a commutative monoid object in condensed abelian groups, with its scheme coefficient rings and inverse-image comparison as in [lem-weil-pbc-profinite-point-pullback]. Use the internal module categories and adjunctions of [def-weil-proetale-inverse-image]. Let p:U\\to X, weakly-etale g:Y\\to X, n, t_j:Y\\to U and t_j p=g satisfy the coproduct hypothesis of [lem-weil-pbc-split-proetale-abelian-product-map]. For every internal Lambda_U-module N, the canonical linear map g^*p_*N\\to\\prod_j t_j^*N is an isomorphism, with j-th component the inverse-image composition comparison followed by inverse image of the p-adjunction counit.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proof of Lemma 095B, split finite-cover computation; agent pro-etale and internal-coefficient variant."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-profinite-point-pullback",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-split-proetale-abelian-product-map"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the private moduleUnit_forget_inv lemma of ProfinitePointPullback through proof-only import all. Apply the abelian hom equivalence and both right triangle equations to obtain the analogous counit equation, without reproving either unit compatibility lemma.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine that counit equation with composition coherence of the forgetful inverse-image isomorphism. Naturality shows each displayed linear sheet map forgets to its abelian counterpart. First eliminate the sheet equality t composed with p equals g, reducing the equality transports to identities before the diagram calculation.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The forgetful functor preserves products. The product comparison and the product of the sheet forgetful isomorphisms conjugate the underlying module product map to the abelian product map. Apply its invertibility and reflection of isomorphisms by module forgetful functors.",
+   "uses": [
+    "lem-weil-pbc-split-proetale-abelian-product-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-split-proetale-abelian-product-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proof of Lemma 095B, split finite-cover computation; agent pro-etale and internal-coefficient variant.",
+  "note": "Explicit Lean proof; no deferred subtheorem or chosen unproved data."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A forgetful functor from internal module objects preserves products and reflects isomorphisms",
+   "date": "2026-10-16",
+   "results": "ModuleCat forgetful reflection and preservation instances, and Mod_.forget; internal Mod APIs were found directly in the source.",
+   "verdict": "Use the listed structural APIs; there is no exact statement in this pro-etale internal-module setup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on the small pro-etale site sends a finite disjoint split cover to a product, after weakly etale inverse image",
+   "date": "2026-10-16",
+   "results": "Light condensed finite product constructions, extensive-site product criteria, and sheaf comparison lemmas; no canonical pro-etale sheet counit comparison.",
+   "verdict": "No exact result; construct the comparison from restriction and adjunction coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "splitCover|isIso_piLift_of_disjoint|localizationRestrictionBaseChangeMap",
+   "date": "2026-10-16",
+   "results": "Indexed grep: no hits. Direct repository rg found the etale ModuleCat split-cover proof and the old-tree abelian weakly-etale base-change proof; neither is imported. Their arguments are adapted privately for current pro-etale abelian functors.",
+   "verdict": "No direct indexed result; repository source APIs and the explicit proof are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousLatticeIntersectionSplitData",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; finite-sheet comparison used in the coordinate model of the two adjunction maps.",
+   "via": [
+    "lem-weil-pbc-continuous-lattice-intersection-split-data",
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SplitProEtaleModuleProductMap",
+  "file": "lean/Sheaf/Paper/SplitProEtaleModuleProductMap.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.splitProEtaleModuleProductMap_isIso",
+  "statement": "theorem splitProEtaleModuleProductMap_isIso\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X U Y : Scheme.{u}} (p : U ⟶ X)\n    (g : Y ⟶ X) [WeaklyEtale g]\n    (n : ℕ) (t : Fin n → (Y ⟶ U)) (w : ∀ j, t j ≫ p = g)\n    (hc : Nonempty (IsColimit (Cofan.mk (pullback p g)\n      (fun j ↦ pullback.lift (t j) (𝟙 Y) (by simpa using w j)))))\n    (N : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)) :\n    let a := fun j ↦ (eqToIso (congrArg (upperStar Λ) (w j))).symm ≪≫\n      upperStarComp Λ (t j) p\n    IsIso (Pi.lift (fun j ↦\n      (a j).hom.app ((lowerStar Λ p).obj N) ≫\n        (upperStar Λ (t j)).map ((upperStarLowerStarAdjunction Λ p).counit.app N)))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T133215-L-3233263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T133215-L-3233263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

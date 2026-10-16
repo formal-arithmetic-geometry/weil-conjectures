@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-finite-etale-locally-free-models",
+ "kind": "statement",
+ "title": "Finite etale pushforwards and unit quotients are locally finite free",
+ "statement": "For a commutative condensed coefficient object Lambda and the normalized internal module functors of [lem-weil-pbc-profinite-point-pullback], let p:U\\to X be finite etale surjective [lem-weil-pbc-finite-etale-etale-local-split]. Local finite freeness means the existence of a pro-etale cover on which the raw inverse-image modules are isomorphic to finite sums of the pulled coefficient ring. Then (1) p_*M is locally finite free whenever M is locally finite free on U; and (2) the cokernel of P\\to p_*p^*P is locally finite free whenever P is locally finite free on X. No noetherian hypothesis or dimension bound on coefficients is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proof of Lemma 095B, split finite-cover computation; agent pro-etale and internal-coefficient variant."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-finite-etale-etale-local-split"
+ ],
+ "proof": [
+  {
+   "text": "At every point choose an etale neighbourhood splitting p. Surjectivity makes its finite sheet set nonempty. Reindex by Fin n and form a pro-etale covering of X.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a splitting neighbourhood use the canonical module product comparison. Pull local free covers to the sheets and form their finite common refinement. Finite products of finite free modules are finite free by flattening biproduct indices.",
+   "uses": [
+    "lem-weil-pbc-split-proetale-module-product-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality and the left triangle equation identify the unit components with inverse-image composition isomorphisms. After their inverses the unit is diagonal. The automorphism subtracting one selected coordinate sends it to the selected biproduct injection. Use cokernelBiproductIotaIso to identify its cokernel with the sum on the other indices; this is locally finite free.",
+   "uses": [
+    "lem-weil-pbc-split-proetale-module-product-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact inverse image commutes with the cokernel. Bind the resulting covers to the etale splitting cover, and transport between raw pulled coefficients and normalized coefficients along condensedPullbackHom and its inverse. The free_map, free_comap and free_pullback helpers are imported from Sheaf.AlgebraicGeometry.CondensedConstructibleSerre; no copies of these proofs are declared.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-condensed-constructible-serre"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-split-proetale-module-product-map",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-condensed-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proof of Lemma 095B, split finite-cover computation; agent pro-etale and internal-coefficient variant.",
+  "note": "Explicit Lean proof; no deferred subtheorem or chosen unproved data. Returned-delivery repair: remove duplicate finite-freeness transport lemmas and reuse the existing private APIs through proof-only import all."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The cokernel of a diagonal map into a finite product is a finite direct sum over the remaining indices",
+   "date": "2026-10-16",
+   "results": "cokernelBiproductIotaIso and cokernelBiproductFromSubtypeIso; the former is used after the explicit coordinate-subtraction automorphism.",
+   "verdict": "Use the listed structural APIs; there is no exact statement in this pro-etale internal-module setup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale pushforward of a locally finite free internal module sheaf is locally finite free and the cokernel of its adjunction unit is locally finite free",
+   "date": "2026-10-16",
+   "results": "Ordinary SheafOfModules presentation and relation lemmas, but no condensed internal-module finite-etale pushforward result.",
+   "verdict": "No exact result; construct the comparison from restriction and adjunction coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Ll]ocallyFree|[Ll]ocallyFree.*push",
+   "date": "2026-10-16",
+   "results": "Indexed grep found no hits. Repository rg found finite-etale splitting and adic locally-free pushforwards in a different coefficient category.",
+   "verdict": "No direct indexed result; repository source APIs and the explicit proof are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousLatticeIntersectionSplitData",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; finite-sheet comparison used in the coordinate model of the two adjunction maps.",
+   "via": [
+    "lem-weil-pbc-continuous-lattice-intersection-split-data",
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteEtaleLocallyFreeModels",
+  "file": "lean/Sheaf/Paper/FiniteEtaleLocallyFreeModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteEtale_locallyFree_models",
+  "statement": "theorem finiteEtale_locallyFree_models\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)\n    [IsFinite p] [Etale p] [Surjective p] :\n    (∀ M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U),\n      (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : C.I₀,\n        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ U))\n          (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj M)) →\n      ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ X))\n          (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj ((lowerStar Λ p).obj M))) ∧\n    (∀ P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X),\n      (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ X))\n          (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) →\n      ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ X))\n          (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj\n            (cokernel ((upperStarLowerStarAdjunction Λ p).unit.app P))))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T133215-L-3233263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T133215-L-3233263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

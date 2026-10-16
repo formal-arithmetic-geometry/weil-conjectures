@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-split-proetale-abelian-product-map",
+ "kind": "statement",
+ "title": "The canonical abelian sheet product map over a split finite cover",
+ "statement": "Use the small pro-etale sites of [def-weil-pbc-small-proetale-site] and their inverse-image/direct-image adjunctions [def-weil-proetale-inverse-image]. Let p:U\\to X and g:Y\\to X be scheme morphisms, with g weakly etale. Let n be a natural number and t_j:Y\\to U, j in Fin n, satisfy t_j p=g. Suppose the pullback lifts (t_j,id_Y):Y\\to U\\times_X Y form a colimit cofan [def-pc-fibre-product]. For every abelian sheaf N on U, the canonical map g^*p_*N\\to\\prod_j t_j^*N is an isomorphism. Its j-th component is the inverse-image comparison g^*\\cong t_j^*p^*, followed by t_j^* of the counit p^*p_*N\\to N. The empty index set is allowed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proof of Lemma 095B, split finite-cover computation; agent pro-etale and internal-coefficient variant."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-small-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Identify the cofan with the chosen scheme coproduct. Its injections are open immersions with disjoint ranges and cover every point. Each t_j is their composite with the weakly-etale pullback of g, hence weakly etale. Base change these injections to a test object W over Y; verify the pullback squares by the universal property.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The base-changed injections cover W times_X U and have pairwise disjoint ranges. A family of sections is compatible: monicity handles equal indices, and distinct indices give empty source, whose sections are terminal. Existence and uniqueness of amalgamation gives the product universal property.",
+   "uses": [
+    "lem-weil-pbc-pretopology-sheaf-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute weakly-etale inverse image as restriction along the localization functor. Calculate the transpose of the restriction-to-sheet map on sections. The unit of the localization adjunction and the pullback composition isomorphism give that transpose. Uniqueness of adjoints, composition coherence, and the triangle identity identify the displayed canonical counit component with this restriction.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reflect the sectionwise limiting fan through evaluation and through sheafToPresheaf. Conjugate its product map by the inverse-image/restriction isomorphisms to obtain the claimed canonical isomorphism.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-pretopology-sheaf-condition",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proof of Lemma 095B, split finite-cover computation; agent pro-etale and internal-coefficient variant.",
+  "note": "Explicit Lean proof; no deferred subtheorem or chosen unproved data."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of abelian groups sends a finite disjoint covering to a product",
+   "date": "2026-10-16",
+   "results": "TopCat.Sheaf.isProductOfDisjoint, Presheaf.isSheaf_iff_preservesFiniteProducts, and Presieve.isSheafFor_of_preservesProduct.",
+   "verdict": "Use the listed structural APIs; there is no exact statement in this pro-etale internal-module setup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on the small pro-etale site sends a finite disjoint split cover to a product, after weakly etale inverse image",
+   "date": "2026-10-16",
+   "results": "Light condensed finite product constructions, extensive-site product criteria, and sheaf comparison lemmas; no canonical pro-etale sheet counit comparison.",
+   "verdict": "No exact result; construct the comparison from restriction and adjunction coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "splitCover|isIso_piLift_of_disjoint|localizationRestrictionBaseChangeMap",
+   "date": "2026-10-16",
+   "results": "Indexed grep: no hits. Direct repository rg found the etale ModuleCat split-cover proof and the old-tree abelian weakly-etale base-change proof; neither is imported. Their arguments are adapted privately for current pro-etale abelian functors.",
+   "verdict": "No direct indexed result; repository source APIs and the explicit proof are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousLatticeIntersectionSplitData",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice for K; finite-sheet comparison used in the coordinate model of the two adjunction maps.",
+   "via": [
+    "lem-weil-pbc-continuous-lattice-intersection-split-data",
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SplitProEtaleAbelianProductMap",
+  "file": "lean/Sheaf/Paper/SplitProEtaleAbelianProductMap.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.splitProEtaleAbelianProductMap_isIso",
+  "statement": "theorem splitProEtaleAbelianProductMap_isIso\n    {X U Y : Scheme.{u}} (p : U ⟶ X)\n    (g : Y ⟶ X) [WeaklyEtale g]\n    (n : ℕ) (t : Fin n → (Y ⟶ U)) (w : ∀ j, t j ≫ p = g)\n    (hc : Nonempty (IsColimit (Cofan.mk (pullback p g)\n      (fun j ↦ pullback.lift (t j) (𝟙 Y) (by simpa using w j)))))\n    (N : Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) :\n    let a := fun j ↦ (eqToIso (congrArg (upperStar Ab.{u + 1}) (w j))).symm ≪≫\n      upperStarComp Ab.{u + 1} (t j) p\n    IsIso (Pi.lift (fun j ↦\n      (a j).hom.app ((lowerStar Ab.{u + 1} p).obj N) ≫\n        (upperStar Ab.{u + 1} (t j)).map\n          ((upperStarLowerStarAdjunction Ab.{u + 1} p).counit.app N)))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T133215-L-3233263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T133215-L-3233263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
