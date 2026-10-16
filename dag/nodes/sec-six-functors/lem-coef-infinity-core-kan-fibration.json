@@ -28,9 +28,86 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a common universe containing the simplicial sets $C$ and $D$. First $p$ carries equivalence edges to equivalence edges: apply the simplicial map $p$ to an inverse edge and its two witnessing $2$-simplices in [def-cbc-enhanced-diagrams-cones]. Thus it sends every simplex whose edges are equivalences into the corresponding core simplex and defines the asserted simplicial map $p^\\simeq$. Fix a lifting problem $a:\\Lambda_i^n\\to C^\\simeq$, $b:\\Delta^n\\to D^\\simeq$ with $p^\\simeq a=b|_{\\Lambda_i^n}$. Compose with the core inclusions. Every edge already prescribed by $a$ is an equivalence in $C$, and every edge of $b$ is an equivalence in $D$. Two-out-of-three $(\\ast)$: in a quasicategory $Q$, an edge $f:x\\to y$ is an equivalence if and only if $[f]$ is an isomorphism of $hQ$ as in [lem-coef-homotopy-category-triangle-calculus]. If $g$ is an inverse, with $2$-simplices whose edges on $[0,1],[1,2],[0,2]$ are $(f,g,s_0x)$ and $(g,f,s_0y)$, that node gives $[g][f]=[s_0x]=1_x$ and $[f][g]=[s_0y]=1_y$. Conversely, if $[f]$ has an inverse, it is $[g]$ for an edge $g:y\\to x$, since every morphism of $hQ$ is represented by an edge; the equalities $[g][f]=[s_0x]$ and $[f][g]=[s_0y]$ then give, by the same node, $2$-simplices with edges $(f,g,s_0x)$ and $(g,f,s_0y)$, so $g$ is an inverse in the sense of [def-cbc-enhanced-diagrams-cones]. For a $2$-simplex with edges $f=01$, $g=12$, $h=02$ the node gives $[g][f]=[h]$; if two of $[f],[g],[h]$ are isomorphisms in the category $hQ$, so is the third. Hence if two of $f,g,h$ are equivalence edges, so is the third.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-homotopy-category-triangle-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01EZ",
+    "place": "Proposition 4.4.3.7, horn lifting setup and preservation of equivalence witnesses."
+   }
+  },
+  {
+   "text": "For $n=1,i=0$, the horn $\\Lambda_0^1$ is the vertex $\\{0\\}$ and the isofibration assumption lifts the equivalence $b$ from its prescribed source to an equivalence edge in $C$. For $n=1,i=1$, the horn $\\Lambda_1^1$ is the vertex $\\{1\\}$, prescribing $c\\in C$ and an equivalence $e:d\\to p(c)$. Choose an inverse $w:p(c)\\to d$ and the inverse triangle with edges $01=w$, $12=e$, $02=\\operatorname{id}_{p(c)}$, as in [def-cbc-enhanced-diagrams-cones]. The same two inverse triangles, with the roles of $e$ and $w$ exchanged, witness that $w$ is an equivalence. Lift $w$ from $c$ by the source-lifting assumption, obtaining an equivalence $v:c\\to c^{\\prime}$ with $p(v)=w$ and $p(c^{\\prime})=d$. On $\\Lambda_0^2$ prescribe $01=v$ and $02=\\operatorname{id}_c$, over that triangle. Its initial edge $v$ is an equivalence, so [lem-cbc-inner-fibration-equivalence-outer-horn-lift] supplies a triangle with these edges, lying exactly over the chosen base triangle. Its edge $u=12:c^{\\prime}\\to c$ maps to $e$. By the two-out-of-three fact $(\\ast)$ of Step 1, $u$ is an equivalence because $v$ and $\\operatorname{id}_c$ are. The identity edge has itself as inverse, with constant inverse triangles. Thus both one-dimensional horns lift into the core.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01EZ",
+    "place": "Proposition 4.4.3.7, dimension-one horns; prescribed-target lifting is expanded by an explicit inverse triangle and relative 2-horn lift."
+   }
+  },
+  {
+   "text": "Now assume $n\\geq2$. If $0<i<n$, the inner-fibration assumption on $p$ fills the prescribed horn over the given simplex $b$. If $i=0$, the ordered edge $[0,1]$ is in $\\Lambda_0^n$: for every $n\\geq2$ it lies in the face opposite vertex $2$, which is included because $2\\ne0$. Its image under $a$ is an equivalence in $C$. The initial-horn clause of [lem-cbc-inner-fibration-equivalence-outer-horn-lift] therefore fills this square over $b$. If $i=n$, the edge $[n-1,n]$ lies in the horn (the face opposite $0$ suffices), and is likewise an equivalence under $a$; use the final-horn clause of the same node. All these fillers extend the original horn exactly and have image exactly $b$; equivalence lifting for $p$ is not needed in these dimensions.",
+   "uses": [
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01EZ",
+    "place": "Proposition 4.4.3.7, inner horns and outer horns via Proposition 4.4.2.13 and its opposite dual."
+   }
+  },
+  {
+   "text": "Check that each filler from Step 3 lies in $C^\\simeq$. For $n\\geq3$, each ordered nondegenerate edge $[r,s]$ of $\\Delta^n$ lies in an included face: choose a vertex $j$ different from $r,s,i$, which is possible among the $n+1\\geq4$ vertices, and use the face opposite $j$. Its image is therefore already prescribed by $a$ and is an equivalence. Degenerate edges are identities, with their constant inverse triangles. When $n=2$, the horn has exactly two of the three edges, and both are equivalences; the two-out-of-three fact $(\\ast)$ of Step 1 applied to this particular filler makes the third an equivalence. The definition of the core in [def-cbc-enhanced-diagrams-cones] now puts the entire filler in $C^\\simeq$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01EZ",
+    "place": "Proposition 4.4.3.7, final paragraph: all edges are in the horn for n>2; two-out-of-three in n=2."
+   }
+  },
+  {
+   "text": "Steps 2-4 solve every square against $\\Lambda_i^n\\hookrightarrow\\Delta^n$ for $n\\geq1$ and $0\\leq i\\leq n$. This is precisely the Kan-fibration lifting property specified in the item. There is no lifting condition in dimension zero and no assertion that either core is nonempty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01EZ",
+    "place": "Definition of Kan fibration; conclusion of Proposition 4.4.3.7."
+   }
+  },
+  {
+   "text": "Finally let $K$ be a Kan complex. It is a quasicategory because its all-horn fillers include the inner horns of [def-cbc-enhanced-diagrams-cones]. Fix any edge $u$ of $K$. For every $n\\geq2$, any final horn whose final edge is $u$ has a filler by the Kan assumption. Thus $u$ satisfies the final-edge extension property in the converse clause of [lem-cbc-equivalence-outer-horn-filling], and is an equivalence. Every edge of every simplex of $K$ is therefore an equivalence; by the core definition every such simplex is in $K^\\simeq$. The reverse inclusion is the defining subset inclusion, so $K^\\simeq=K$ degree by degree, compatibly with all operators. The empty Kan complex is included, since the edge assertion is then vacuous.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/019D",
+    "place": "Proposition 4.4.2.1, Kan implies every edge invertible, derived using the converse of Theorem 4.4.2.6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-homotopy-category-triangle-calculus",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-cbc-equivalence-outer-horn-filling"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01EZ",
+  "place": "Proposition 4.4.3.7 and Proposition 4.4.2.1 (019D), read online; expanded with explicit prescribed-target dimension-one lifting, the separate relative outer-horn lemma 01H0, and two-out-of-three 004U, derived in Step 1 from the edge-and-triangle homotopy category. Archival copies are WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +143,66 @@
    "results": "{\"t\": \"2026-10-16T16:45:35Z\", \"tool\": \"grep\", \"query\": \"core|isofibration|isoFibration|maximal.*[Kk]an\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: read pinned SimplicialSet/CategoryWithFibrations.lean:38-53,73-103: Quillen fibrations are defined by all-horn lifting, not quasicategorical equivalence lifting. The Loogle hit instFibrationAppPreOfMonoOfKanComplex is restriction into an already Kan target, not an arbitrary isofibration on cores. Semantic hits CategoryTheory.Functor.core are ordinary-category cores. The focused grep of Quasicategory has no hits; the broad core hits are skeleton coreflectivity and pairing cores, different notions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isofibration of quasicategories induces a Kan fibration on cores and a Kan complex equals its core",
+   "results": "{\"t\": \"2026-10-16T19:54:45Z\", \"tool\": \"leanfinder\", \"query\": \"An isofibration of quasicategories induces a Kan fibration on cores and a Kan complex equals its core\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryOfKanComplex\", \"SSet.KanComplex\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.StrictSegalCore\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.QCat\", \"SSet.StrictSegal.ofCore\"], \"digest\": \"2732e6d7e1e55a2d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read pinned Quasicategory/Basic.lean:34-55, InnerFibration.lean:64-105 and SimplicialSet/CategoryWithFibrations.lean:44-49,71-103. Kan implies quasicategory is only a partial clause; the all-horn fibration definitions do not produce equivalence lifting or a map of cores. Ordinary CategoryTheory.Functor.core concerns ordinary categories, while PairingCore concerns anodyne pairings, not maximal Kan subcomplexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"KanComplex\", \"core\"",
+   "results": "{\"t\": \"2026-10-16T19:54:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"KanComplex\\\", \\\"core\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read pinned Quasicategory/Basic.lean:34-55, InnerFibration.lean:64-105 and SimplicialSet/CategoryWithFibrations.lean:44-49,71-103. Kan implies quasicategory is only a partial clause; the all-horn fibration definitions do not produce equivalence lifting or a map of cores. Ordinary CategoryTheory.Functor.core concerns ordinary categories, while PairingCore concerns anodyne pairings, not maximal Kan subcomplexes."
+  },
+  {
+   "tool": "grep",
+   "query": "isofibration|core|KanComplex",
+   "results": "{\"t\": \"2026-10-16T19:54:45Z\", \"tool\": \"grep\", \"query\": \"isofibration|core|KanComplex\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"024b631e07e05925\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read pinned Quasicategory/Basic.lean:34-55, InnerFibration.lean:64-105 and SimplicialSet/CategoryWithFibrations.lean:44-49,71-103. Kan implies quasicategory is only a partial clause; the all-horn fibration definitions do not produce equivalence lifting or a map of cores. Ordinary CategoryTheory.Functor.core concerns ordinary categories, while PairingCore concerns anodyne pairings, not maximal Kan subcomplexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The map on cores of an isofibration between quasicategories is a Kan fibration",
+   "results": "{\"t\": \"2026-10-16T19:54:46Z\", \"tool\": \"leansearch\", \"query\": \"The map on cores of an isofibration between quasicategories is a Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.coreFunctor\", \"CategoryTheory.Functor.core\", \"CategoryTheory.Core.inclusion_map\", \"CategoryTheory.Equivalence.core_functor_map_iso_hom\", \"CategoryTheory.coreFunctor_map_app_iso_hom\", \"CategoryTheory.Iso.core\", \"CategoryTheory.Functor.core_map_iso_hom\", \"CategoryTheory.Functor.coreComp\"], \"digest\": \"dbeac16e76b1d82c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read pinned Quasicategory/Basic.lean:34-55, InnerFibration.lean:64-105 and SimplicialSet/CategoryWithFibrations.lean:44-49,71-103. Kan implies quasicategory is only a partial clause; the all-horn fibration definitions do not produce equivalence lifting or a map of cores. Ordinary CategoryTheory.Functor.core concerns ordinary categories, while PairingCore concerns anodyne pairings, not maximal Kan subcomplexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal Kan subcomplex core of a quasicategory and isofibration restriction",
+   "results": "{\"t\": \"2026-10-16T19:56:59Z\", \"tool\": \"leanfinder\", \"query\": \"Maximal Kan subcomplex core of a quasicategory and isofibration restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.PairingCore\", \"SSet.Subcomplex.PairingCore.ι\", \"SSet.Subcomplex.PairingCore.II\", \"SSet.modelCategoryQuillen.J\", \"SSet.Subcomplex.PairingCore.I\", \"SSet.Subcomplex.topIso_hom\", \"SSet.S.subcomplex\", \"SSet.modelCategoryQuillen.I\"], \"digest\": \"7bc254b1ed1cf59e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read pinned Quasicategory/Basic.lean:34-55, InnerFibration.lean:64-105 and SimplicialSet/CategoryWithFibrations.lean:44-49,71-103. Kan implies quasicategory is only a partial clause; the all-horn fibration definitions do not produce equivalence lifting or a map of cores. Ordinary CategoryTheory.Functor.core concerns ordinary categories, while PairingCore concerns anodyne pairings, not maximal Kan subcomplexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KanComplex\", \"Quasicategory\"",
+   "results": "{\"t\": \"2026-10-16T19:57:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"KanComplex\\\", \\\"Quasicategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryOfKanComplex\"], \"digest\": \"0b562f163c10e67e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read pinned Quasicategory/Basic.lean:34-55, InnerFibration.lean:64-105 and SimplicialSet/CategoryWithFibrations.lean:44-49,71-103. Kan implies quasicategory is only a partial clause; the all-horn fibration definitions do not produce equivalence lifting or a map of cores. Ordinary CategoryTheory.Functor.core concerns ordinary categories, while PairingCore concerns anodyne pairings, not maximal Kan subcomplexes."
+  },
+  {
+   "tool": "grep",
+   "query": "core|equivalence|isofibration",
+   "results": "{\"t\": \"2026-10-16T19:57:00Z\", \"tool\": \"grep\", \"query\": \"core|equivalence|isofibration\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"809bb2fc10ad2aaa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read pinned Quasicategory/Basic.lean:34-55, InnerFibration.lean:64-105 and SimplicialSet/CategoryWithFibrations.lean:44-49,71-103. Kan implies quasicategory is only a partial clause; the all-horn fibration definitions do not produce equivalence lifting or a map of cores. Ordinary CategoryTheory.Functor.core concerns ordinary categories, while PairingCore concerns anodyne pairings, not maximal Kan subcomplexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A categorical isofibration restricts to a Kan fibration on maximal Kan subcomplexes",
+   "results": "{\"t\": \"2026-10-16T19:57:00Z\", \"tool\": \"leansearch\", \"query\": \"A categorical isofibration restricts to a Kan fibration on maximal Kan subcomplexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"HomotopicalAlgebra.BifibrantObject.instIsFibrantObjBifibrantObjects\", \"HomotopicalAlgebra.Fibration\", \"HomotopicalAlgebra.BifibrantObject\", \"HomotopicalAlgebra.Fibration.recOn\", \"CategoryTheory.Bicategory.LeftLift.IsKan.ofIsoKan\"], \"digest\": \"587aa001d31dc44a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read pinned Quasicategory/Basic.lean:34-55, InnerFibration.lean:64-105 and SimplicialSet/CategoryWithFibrations.lean:44-49,71-103. Kan implies quasicategory is only a partial clause; the all-horn fibration definitions do not produce equivalence lifting or a map of cores. Ordinary CategoryTheory.Functor.core concerns ordinary categories, while PairingCore concerns anodyne pairings, not maximal Kan subcomplexes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-isofibration-exponentiation",
@@ -77,5 +210,34 @@
   "group": "Q37"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-core-kan-fibration",
+  "worker": "stage1",
+  "summary": "Proved the unchanged item in six steps: preservation of equivalence witnesses, explicit source and target edge lifts, higher horn lifts relative to the prescribed base, the dimension-two core check, the all-horn conclusion, and the Kan-complex core identity. The second reading removed the proposed relative outer-horn node for the existing lem-cbc-inner-fibration-equivalence-outer-horn-lift, clarified inverse witnesses and included faces, and proposed one triangle two-out-of-three lemma; the maintainer review dropped it and derived two-out-of-three in Step 1 from the existing same-unit node lem-coef-homotopy-category-triangle-calculus. No new node remains. Independent searches found no full Mathlib match or Lean attachment.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2, displayed derived R Hom/R lim calculation. Along the inherited finite-Reedy/source-attachment join-cone ancestry, this item supplies the core-map Kan-fibration step used on unpinched morphism spaces; its steps follow the independent 01EZ horn proof. The unit binding is historical and unchanged; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Generic converse outer-horn characterization of an equivalence edge, used only to deduce every edge of a Kan complex is invertible in Step 6; the coefficient-adjunction unit has no such statement."
+   },
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Generic relative outer-horn lifting along an equivalence for any inner fibration between quasicategories, used over the prescribed base simplex in Steps 2 and 3. The coefficient-adjunction unit has no such statement; the duplicate proposed new node was removed after the server dry run found this existing tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-d598244ea",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-d598244ea (reviewer sub-agent of L); spot-checked: I read the item, the one new node, the statements of all cited nodes (def-cbc-enhanced-diagrams-cones, lem-cbc-inner-fibration-equivalence-outer-horn-lift, lem-cbc-equivalence-outer-horn-filling), and the parent step that cites this item. I checked them against Kerodon online: 01EZ (Prop 4.4.3.7) with its proof, 01ES (Def 4.4.1.4, which prescribes the target; it agrees with the item's source-prescribed definition by Cor 4.4.1.8, and Step 2 proves both directions), and 019D. The item statement is faithful to the source and is not weakened. Steps 1, 3, 4, 5 and 6 are correct. Every hypothesis is met: inner lifting for 0<i<n; the edge [0,1] lies in the face opposite vertex 2 and [n-1,n] in the face opposite 0; for n>=3 a fourth vertex j is free; Step 6 uses the converse clause of the outer-horn filling node. I tested p=id, p to a point, nerves of ordinary isofunctors, the empty case and Delta^0. Fault 1 (repaired): Step 2 swapped the horn labels. By the cited definition and by Kerodon, Lambda_0^1={0} and Lambda_1^1={1}; both cases are proved, so only the labels changed. Fault 2 (C1/C5, folded): the new node lem-coef-infinity-equivalence-two-out-of-three is true but follows in a few lines from the existing node lem-coef-homotopy-category-triangle-calculus. That node is in the same unit, has no path back to this item, and states that every hD morphism is [f] for an edge f and that [g][f]=[h] holds iff a 2-simplex has edges (f,g,h). From it, f is an equivalence iff [f] is an isomorphism, and two-out-of-three for isomorphisms finishes. I wrote this argument into Step 1 as (*), pointed Steps 2 and 4 at it, and recomputed proof_deps; proof_origin.place and split_report.summary were updated. I accept tool_uses lem-cbc-equivalence-outer-horn-filling and lem-cbc-inner-fibration-equivalence-outer-horn-lift: both are generic quasicategory facts with no counterpart in this unit. The corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ }
 }

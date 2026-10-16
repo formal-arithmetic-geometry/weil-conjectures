@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-def-pe-wlocal",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The local hierarchy",
- "statement": "A spectral space $T$ is *w-local* if its set $T^c$ of closed points is closed and every\npoint specializes to exactly one closed point. A ring $R$ is w-local if\n$\\operatorname{Spec}(R)$ is w-local. It is *w-strictly local* if it is w-local and\n$R_{\\mathfrak m}$ is strictly henselian for every maximal ideal $\\mathfrak m$. It is\n*w-contractible* if it is w-strictly local and the profinite space\n$\\pi_0(\\operatorname{Spec}(R))$ is extremally disconnected.\n\nRecall that spectral spaces are quasi-compact and sober, with a basis of quasi-compact\nopens closed under finite intersections. The space of connected components of a spectral\nspace is profinite. For a w-local space the natural map $T^c\\to\\pi_0(T)$ is a\nhomeomorphism: each component consists of the generalizations of its unique closed point,\nand $T^c$ is compact. For $T=\\operatorname{Spec}(R)$ this component is the image of\n$\\operatorname{Spec}(R_{\\mathfrak m})$. Thus w-strict locality gives strictly henselian\ngeometry component by component, and w-contractibility also controls how choices vary\nacross the profinite set of components. Closedness of $T^c$ is a separate condition: it\ndoes not follow from uniqueness of closed specializations. See Stacks, Tags 096A, 0968\nand 0969.",
+ "statement": "Let $T$ be a spectral topological space [def-weil-spectral-space], and write\n$T^c=\\{c\\in T:\\{c\\}\\text{ is closed in }T\\}$ for its closed points.\nFor $x,c\\in T$, saying that $x$ specializes to $c$ means\n$c\\in\\overline{\\{x\\}}$. The space $T$ is *w-local* if $T^c$ is closed in $T$\nand every $x\\in T$ specializes to exactly one point of $T^c$.\n\nLet $R$ be a commutative ring, and give $\\operatorname{Spec}(R)$ its Zariski\ntopology [def-weil-affine-spectrum]. This affine scheme is quasi-compact and\nquasi-separated [lem-weil-pbc-affine-scheme-qcqs], so its underlying space is spectral\n[lem-weil-pbc-qcqs-scheme-spectral]. The ring $R$ is *w-local* if\n$\\operatorname{Spec}(R)$ is w-local. It is *w-strictly local* if it is w-local\nand, for every maximal ideal $\\mathfrak m\\subset R$, the localization\n$R_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime] is strictly henselian\n[def-weil-pbc-henselian-terminology]. It is *w-contractible* if it is\nw-strictly local and the profinite space $\\pi_0(\\operatorname{Spec}(R))$\n[lem-pe-spectral-components-profinite] is extremally disconnected.\nHere $\\pi_0(X)$ denotes the quotient of $X$ by its connected components\n(maximal connected subsets), with the quotient topology; *extremally disconnected*\nmeans that the closure of every open subset is open.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-wlocal/_section.md",
   "place": "node sk-def-pe-wlocal, order 705",
@@ -18,13 +18,99 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-henselian-terminology",
+  "lem-pe-spectral-components-profinite"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "SpectralSpace, ConnectedComponents",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete local hierarchy; any spectral-space hits give only a constituent notion"
+  },
+  {
+   "tool": "grep",
+   "query": "WLocal|WStrictlyLocal|WContractible|w-local|w-contractible",
+   "results": "Actual returned hits: Mathlib/Lean/Meta/CongrTheorems.lean, Mathlib/Tactic/Subsingleton.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/DepRewrite.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete local hierarchy; any spectral-space hits give only a constituent notion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "w-local spectral spaces and w-strictly local w-contractible rings",
+   "results": "Actual returned hits: SpectralSpace.mk, SpectralSpace.toQuasiSeparatedSpace, SpectralSpace.toPrespectralSpace, AlgebraicGeometry.LocallyRingedSpace, StronglyLocallyContractibleSpace.contractible_basis, AlgebraicGeometry.Scheme.mk.noConfusion, PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing, AlgebraicGeometry.isLocallyNoetherian_Spec",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete local hierarchy; any spectral-space hits give only a constituent notion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A spectral space is w-local if closed points form a closed subset and each point has a unique closed specialization; a ring is w-strictly local when all maximal localizations are strictly henselian, and w-contractible when its connected component space is extremally disconnected.",
+   "results": "Actual returned hits: OfLocalizationMaximal, SpectralSpace, PrimeSpectrum.instSpectralSpace, PrimeSpectrum.instPrespectralSpace, PrespectralSpace, PrimeSpectrum.instQuasiSeparatedSpace, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, PrimeSpectrum.quasiSober",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete local hierarchy; any spectral-space hits give only a constituent notion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"wLocal\"",
+   "results": "Actual returned hits: Lean.Parser.Tactic.Grind.showLocalThms, Lean.Meta.withNewLocalInstance, Lean.Meta.withNewLocalInstances, Lean.Meta.Closure.State.newLocalDecls, Lean.Meta.Closure.State.newLocalDeclsForMVars, Lean.Elab.Term.Quotation.withNewLocal, Lean.Elab.Term.Quotation.withNewLocals, Mathlib.Tactic.DepRewrite.depRwLocalDecl",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete local hierarchy; any spectral-space hits give only a constituent notion"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(WLocalSpace|IsWLocalRing|IsWStrictlyLocalRing|IsWContractibleRing)\\b",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete local hierarchy; any spectral-space hits give only a constituent notion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A w-local topological space is spectral, its closed points are closed, and every point specializes to a unique closed point.",
+   "results": "Actual returned hits: SpectralSpace, JacobsonSpace, PrespectralSpace, PrimeSpectrum.instSpectralSpace, SpectralSpace.toPrespectralSpace, SpectralSpace.toQuasiSober, PrimeSpectrum.instPrespectralSpace, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete local hierarchy; any spectral-space hits give only a constituent notion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The prime spectrum of every commutative ring with the Zariski topology is a spectral space.",
+   "results": "Returned hits: PrimeSpectrum.instSpectralSpace, PrimeSpectrum.instPrespectralSpace, PrimeSpectrum.zariskiTopology, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, PrimeSpectrum.quasiSober, MaximalSpectrum.zariskiTopology, PrimeSpectrum.instQuasiSeparatedSpace, PrimeSpectrum.irreducibleSpace. ",
+   "date": "2026-10-16",
+   "verdict": "Constituent match only: PrimeSpectrum.instSpectralSpace proves spectrality for every commutative semiring, hence every commutative ring. The whole hierarchy is not a Mathlib leaf. Reuse existing lem-weil-pbc-qcqs-scheme-spectral for this affine specialization, with Mathlib affine instances, rather than create a duplicate spectrum-spectral node."
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, SpectralSpace",
+   "results": "Returned hits: PrimeSpectrum.instSpectralSpace. ",
+   "date": "2026-10-16",
+   "verdict": "Constituent match only: PrimeSpectrum.instSpectralSpace proves spectrality for every commutative semiring, hence every commutative ring. The whole hierarchy is not a Mathlib leaf. Reuse existing lem-weil-pbc-qcqs-scheme-spectral for this affine specialization, with Mathlib affine instances, rather than create a duplicate spectrum-spectral node."
+  },
+  {
+   "tool": "grep",
+   "query": "instSpectralSpace|SpectralSpace \\(PrimeSpectrum",
+   "results": "Returned hits: Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean. Read Mathlib/RingTheory/Spectrum/Prime/Topology.lean:844; instance : SpectralSpace (PrimeSpectrum R) where. Grep restricted to RingTheory/Spectrum.",
+   "date": "2026-10-16",
+   "verdict": "Constituent match only: PrimeSpectrum.instSpectralSpace proves spectrality for every commutative semiring, hence every commutative ring. The whole hierarchy is not a Mathlib leaf. Reuse existing lem-weil-pbc-qcqs-scheme-spectral for this affine specialization, with Mathlib affine instances, rather than create a duplicate spectrum-spectral node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Zariski prime spectrum of a commutative ring is spectral.",
+   "results": "Returned hits: PrimeSpectrum.instSpectralSpace, PrimeSpectrum.instPrespectralSpace, PrimeSpectrum.quasiSober, AlgebraicGeometry.isAffine_Spec, AlgebraicGeometry.instIsAffineObjOppositeCommRingCatSchemeSpec, AlgebraicGeometry.Spec_carrier, AlgebraicGeometry.Spec.topObj, AlgebraicGeometry.PrimeSpectrum.Top. ",
+   "date": "2026-10-16",
+   "verdict": "Constituent match only: PrimeSpectrum.instSpectralSpace proves spectrality for every commutative semiring, hence every commutative ring. The whole hierarchy is not a Mathlib leaf. Reuse existing lem-weil-pbc-qcqs-scheme-spectral for this affine specialization, with Mathlib affine instances, rather than create a duplicate spectrum-spectral node."
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -35,5 +121,64 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-pe-wlocal"
+ "unit": "sk-def-pe-wlocal",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-pe-wlocal",
+  "worker": "stage1",
+  "summary": "Audited the defining paragraph against the current main-20261015 blueprint and Stacks 096A. Made the commutative-ring convention, specialization, connected-component quotient topology and extremal-disconnectedness explicit, and supplied the existing spectral-space, spectrum, localization and strict-henselian definition dependencies. Separated the nondefining explanatory paragraph from the definition; its w-local component/homeomorphism/localization-image assertions already belong to det-pe-wlocal-components, which depends on this item and must not be cited back. The complete original explanatory paragraph and its source audit are retained in the report. Two statement-only nodes retain the general spectral-component profiniteness recall and the closedness-independence assertion; none of the four defining conditions changes. Repair of returned head 585b9e2d48: include the existing unit record with only realized/realized_by changed, mapping the defining paragraph and all extracted explanatory claims; no unit statement, route or binding changes. Repair of returned head 0951f9338e: rebuilt on current DAG and made spectrality of the affine spectrum explicit through the existing Mathlib leaf lem-weil-pbc-qcqs-scheme-spectral. Its affine specialization uses the already available Mathlib IsAffine, compactness and quasi-separatedness instances; no missing lem-pe-spectrum-spectral file or new duplicate is needed. Re-read all six current statement dependencies and the extracted component theorem against their statements and source hypotheses. Maintainer review 2026-10-17: the inline claim that the affine scheme Spec(R) is quasi-compact and quasi-separated now cites the existing Mathlib leaf lem-weil-pbc-affine-scheme-qcqs (added to stmt_deps).",
+  "blueprint": "The first paragraph of sk-def-pe-wlocal/_section.md (order 705), all four definitions. Its second paragraph is explanatory: the spectral convention is def-weil-spectral-space; the w-local component results are already det-pe-wlocal-components. General profiniteness is Stacks 0906; the independence warning is Stacks 0969, audited in the report. The node has no definition proof steps. The application of spectral w-locality to Spec(R) is now explicitly supported by the existing qcqs-scheme spectral Mathlib leaf (Stacks 094L), specialized to the affine spectrum (Stacks 090M). The w-contractible clause follows Stacks 0982 (lemma-w-local-strictly-henselian-extremally-disconnected), condition (3), which the blueprint takes as its definition; 096A supplies w-locality only.",
+  "tool_uses": [],
+  "extracted_claims": [
+   "det-pe-wlocal-components",
+   "lem-pe-spectral-components-profinite",
+   "lem-pe-closed-specializations-not-closed"
+  ]
+ },
+ "lean_candidates": [
+  {
+   "name": "WLocalSpace",
+   "module": "WeilConjectures.Topology.SpectralSpace.WLocal.Basic",
+   "lines": [
+    29,
+    34
+   ],
+   "note": "Defining clause checked against the repaired definition; source read, direct and transitive sorry-map checks clean. Together the four classes cover all defining conditions; explanatory claims are separate nodes."
+  },
+  {
+   "name": "IsWLocalRing",
+   "module": "WeilConjectures.RingTheory.ProEtale.WLocal",
+   "lines": [
+    30,
+    31
+   ],
+   "note": "Defining clause checked against the repaired definition; source read, direct and transitive sorry-map checks clean. Together the four classes cover all defining conditions; explanatory claims are separate nodes."
+  },
+  {
+   "name": "IsWStrictlyLocalRing",
+   "module": "WeilConjectures.RingTheory.ProEtale.WLocal",
+   "lines": [
+    151,
+    153
+   ],
+   "note": "Defining clause checked against the repaired definition; source read, direct and transitive sorry-map checks clean. Together the four classes cover all defining conditions; explanatory claims are separate nodes."
+  },
+  {
+   "name": "IsWContractibleRing",
+   "module": "WeilConjectures.RingTheory.ProEtale.WContractible",
+   "lines": [
+    40,
+    42
+   ],
+   "note": "Defining clause checked against the repaired definition; source read, direct and transitive sorry-map checks clean. Together the four classes cover all defining conditions; explanatory claims are separate nodes."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-c04ad1d6b",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-c04ad1d6b (reviewer sub-agent of L); spot-checked: FIX: one missing citation fixed in fixes/; the mathematics is correct. Item sk-def-pe-wlocal matches blueprint main-20261015 sk-def-pe-wlocal/_section.md, Stacks 096A (definition-w-local) and 0982(3) (lemma-w-local-strictly-henselian-extremally-disconnected) in every clause: T^c closed, exactly one closed specialization, R_m strictly henselian for all maximal m, pi0 with the quotient topology extremally disconnected. Edge cases check out: the zero ring satisfies everything vacuously, and a field is w-strictly local exactly when separably closed. The item is a definition with no proof steps, and every stmt_dep supplies what it is cited for. The explanatory paragraph is fully covered: det-pe-wlocal-components clauses 1, 2 and 4 (kept as a pointer to avoid a cycle) plus the two new nodes. New node lem-pe-spectral-components-profinite is Stacks topology 0906 (lemma-spectral-pi0) with spectrality as its only hypothesis, and it is true. It is not a Mathlib leaf: ConnectedComponents.t2 at Regular.lean:780 needs a Hausdorff source. A full-DAG search finds no duplicate; the near candidates assume T^c closed, a w-local spectrum, or only give the clopen-intersection formula. New node lem-pe-closed-specializations-not-closed is Stacks 0969 (example-not-w-local). Stacks does not say outright that its example is spectral, so I checked it myself with T a convergent sequence: a compact-open basis closed under finite intersection, T0, sober (each irreducible closed set lies in one Sierpinski fibre), each point with exactly one closed specialization, and (t,1) in the closure of T^c. The statement is true, and it is a permitted claim extracted from a definition, not a restatement of a clause. Unit record: only realized/realized_by changed, and they cover both paragraphs. No tool_uses, no SGA. FIX (C1/C4): the item asserted that Spec R is quasi-compact and quasi-separated without a citation. It now cites the existing Mathlib leaf lem-weil-pbc-affine-scheme-qcqs in the statement and stmt_deps; this adds no cycle. split_report.blueprint now names Stacks 0982(3). For the maintainer, in fields I cannot fix: add Tag 0982 to the item's source.external (the report claims it was added; it is absent); set import_flags ['unreachable'] on lem-pe-closed-specializations-not-closed (also claimed in the report and absent); and plan a later merge of the existing imported node det-pe-wlocal-strict-contractible, which duplicates the ring definitions.; 1 file(s) fixed by the reviewer"
+ }
 }

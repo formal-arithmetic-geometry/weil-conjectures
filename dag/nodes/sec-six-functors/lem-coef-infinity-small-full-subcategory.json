@@ -28,9 +28,87 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $J=\\varnothing$, the defining condition on objects of $\\mathcal D$ has no witnesses. Thus $\\mathcal D$ is the empty simplicial set: every simplex would have a vertex. The empty simplicial set is a small quasicategory, since no inner horn (whose dimension is at least two) maps to it. Take $\\mathcal D_0=\\mathcal D$ with the identity equivalence. For the rest suppose $J\\ne\\varnothing$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.1.7, empty-family case made explicit."
+   }
+  },
+  {
+   "text": "The full simplicial subset $\\mathcal D$ is a quasicategory. Indeed any inner horn in it has all the vertices of its ambient simplex; an ambient filler in $\\mathcal C$ therefore still has all its vertices in $\\mathcal D$ and belongs to that full subset. For $x,y\\in\\mathcal D$, every simplex of the right-pinched mapping space has only $x,y$ as vertices. Consequently $\\operatorname{Map}_{\\mathcal D}(x,y)=\\operatorname{Map}_{\\mathcal C}(x,y)$ degree by degree. Each is equivalent to a small space by the given local smallness of $\\mathcal C$. This verifies the precise mapping-space hypothesis used below, without assuming that the set of actual simplices is small.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.1.7, pass to the full subcategory; mapping-space equality checked from the right-pinched definition."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-minimal-retract] to the $\\mathcal U'$-small quasicategory $\\mathcal D$. Obtain a minimal quasicategory $M\\subseteq\\mathcal D$, inclusion $i$, retraction $r$ with $ri=1$, and a coherent natural equivalence $\\mathrm{id}_{\\mathcal D}\\simeq ir$. In particular $i$ is a functor equivalence. Neither $M$ nor its simplices have yet been asserted $\\mathcal U$-small.",
+   "uses": [
+    "lem-coef-infinity-minimal-retract"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.3.3.8 at S equal to a point; the minimal model used in Proposition 5.4.1.2."
+   }
+  },
+  {
+   "text": "The function $J\\to M_0$, $j\\mapsto r(X_j)$, is surjective. For any vertex $m\\in M$, the defining replete closure gives an equivalence $i(m)\\simeq X_j$ for some $j$. A simplicial functor preserves an equivalence: apply it to the inverse edge and its two inverse-triangle witnesses. Applying $r$ therefore gives an equivalence $m=ri(m)\\simeq r(X_j)$ in $M$. For $n=0$ this equivalence edge is exactly a relative-boundary homotopy (the boundary is empty), so minimality gives $m=r(X_j)$. As the image of the small set $J$, the vertex set $M_0$ is in bijection with a small set; repetitions among the $X_j$ do not matter.",
+   "uses": [
+    "lem-coef-infinity-minimal-retract"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.1.2, induction base n=0, combined with the chosen family in Proposition 5.4.1.7."
+   }
+  },
+  {
+   "text": "Induct on $n\\geq1$, assuming $M_{n-1}$ is in bijection with a small set. A boundary map $b:\\partial\\Delta^n\\to M$ is determined by its $n+1$ face simplices, subject to face compatibility; hence the set $B_n$ of such maps is a subset of a finite product of copies of $M_{n-1}$ and is also in bijection with a small set. Fix $b\\in B_n$. Apply [lem-coef-infinity-boundary-extension-small-classes] in $\\mathcal D$ to $i b$, using the endpoint mapping-space hypothesis from step 2. Its extension quotient is small. The map sending an extension $f:\\Delta^n\\to M$ of $b$ to the class of $if$ in that quotient is injective: equality of quotient classes gives a finite chain of relative-boundary homotopies in $\\mathcal D$, with directions possibly reversed. Postcompose each homotopy with $r$. Since $ri=1$, each resulting homotopy is constant on $b$ throughout the boundary. Because $n\\geq1$, every vertex lies in $\\partial\\Delta^n$; its track is therefore the degenerate edge at its fixed vertex, which is an equivalence (it is its own inverse, with degenerate inverse triangles). These are exactly the relative-boundary homotopies in the minimality statement, so minimality identifies the two endpoints of every link. The first and last simplices are therefore equal. Thus the set of extensions of $b$ in $M$ is in bijection with a small subset of a small set. Taking the disjoint union over the small set $B_n$ proves that $M_n$ is in bijection with a small set. This is the induction step; an unfillable boundary contributes the empty fibre.",
+   "uses": [
+    "lem-coef-infinity-boundary-extension-small-classes",
+    "lem-coef-infinity-minimal-retract"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.1.2, proof of (1) implies (2): induction on simplex dimension, fixed-boundary extension classes, and minimality."
+   }
+  },
+  {
+   "text": "For each $n\\geq0$ choose a small set $S_n$ and a bijection $e_n:S_n\\to M_n$. Transport every simplicial operator $M(\\alpha):M_n\\to M_m$ to $e_m^{-1}M(\\alpha)e_n$. The simplicial identities hold because adjacent $e_ke_k^{-1}$ cancel. These sets and operators define a $\\mathcal U$-small simplicial set $\\mathcal D_0$ (there are only countably many degrees and simplex operators), and the $e_n$ form a simplicial isomorphism $e:\\mathcal D_0\\to M$. For an inner horn $a:\\Lambda_k^n\\to\\mathcal D_0$, compose with $e$, choose a filler $t:\\Delta^n\\to M$ using the quasicategory property of $M$, and take $e^{-1}t$; its restriction is $e^{-1}ea=a$. Thus $\\mathcal D_0$ is a quasicategory. The composite $ie:\\mathcal D_0\\to\\mathcal D$ is the required functor equivalence, with inverse $e^{-1}r$; the strict identity $ri=1$ and the coherent natural equivalence from step 3 give its two inverse identities. Thus essential smallness is obtained with an actual small quasicategory, not merely with small equivalence classes of objects.",
+   "uses": [
+    "lem-coef-infinity-minimal-retract",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.1.2, (2) implies (3), and Definition 5.4.1.3; explicit degreewise transport to the smaller universe."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-minimal-retract",
+  "lem-coef-infinity-boundary-extension-small-classes",
+  "def-coef-presentable-infinity-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent-written degreewise counting proof following HTT Proposition 5.4.1.7 and the proof of Proposition 5.4.1.2, (1) implies (2) implies (3); consulted online, not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -87,10 +165,45 @@
    "results": "{\"t\": \"2026-10-16T19:58:07Z\", \"tool\": \"grep\", \"query\": \"QCat|Quasicategory|quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\"], \"digest\": \"ae218f6223c442a9\"}",
    "date": "2026-10-16",
    "verdict": "no match: SSet.QCat (AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-51) defines a category of quasicategories; it does not shrink a quasicategory with small mapping spaces. EssentiallySmall.lean:243-268 concerns ordinary Category Hom sets. No returned declaration states the required infinity-category size theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "essentiallySmall_of_small_of_locallySmall|essentiallySmall_fullSubcategory_mem|Quasicategory",
+   "results": "{\"t\": \"2026-10-16T20:26:44Z\", \"tool\": \"grep\", \"query\": \"essentiallySmall_of_small_of_locallySmall|essentiallySmall_fullSubcategory_mem|Quasicategory\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"3f982b9c93f66910\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.essentiallySmall_of_small_of_locallySmall and essentiallySmall_fullSubcategory_mem in Mathlib/CategoryTheory/EssentiallySmall.lean:243 and 263 concern ordinary categories with set-valued Hom, not the full higher mapping spaces of a quasicategory. SSet.QCat in AlgebraicTopology/Quasicategory/StrictBicategory.lean:51 is a definition of an ordinary category of quasicategories, not an equivalence shrinking a given quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A full subcategory of a locally small infinity category spanned by a small set of equivalence classes is essentially small",
+   "results": "{\"t\": \"2026-10-16T20:26:44Z\", \"tool\": \"leansearch\", \"query\": \"A full subcategory of a locally small infinity category spanned by a small set of equivalence classes is essentially small\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.essentiallySmall_fullSubcategory_mem\", \"CategoryTheory.ObjectProperty.instEssentiallySmallFullSubcategoryOfLocallySmallOfEssentiallySmall_1\", \"CategoryTheory.ObjectProperty.instEssentiallySmallFullSubcategoryOfLocallySmallOfEssentiallySmall\", \"CategoryTheory.locallySmall_self\", \"CategoryTheory.EssentiallySmall.mk\", \"CategoryTheory.LocallySmall\", \"CategoryTheory.ObjectProperty.instSmallFullSubcategoryOfSmall\", \"CategoryTheory.EssentiallySmall\"], \"digest\": \"92a0d830ddaab831\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.essentiallySmall_of_small_of_locallySmall and essentiallySmall_fullSubcategory_mem in Mathlib/CategoryTheory/EssentiallySmall.lean:243 and 263 concern ordinary categories with set-valued Hom, not the full higher mapping spaces of a quasicategory. SSet.QCat in AlgebraicTopology/Quasicategory/StrictBicategory.lean:51 is a definition of an ordinary category of quasicategories, not an equivalence shrinking a given quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EssentiallySmall\", \"LocallySmall\"",
+   "results": "{\"t\": \"2026-10-16T20:26:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"EssentiallySmall\\\", \\\"LocallySmall\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.locallySmall_of_essentiallySmall\", \"CategoryTheory.essentiallySmall_of_small_of_locallySmall\", \"CategoryTheory.ObjectProperty.instEssentiallySmallFullSubcategoryOfLocallySmallOfEssentiallySmall\", \"CategoryTheory.ObjectProperty.instEssentiallySmallFullSubcategoryOfLocallySmallOfEssentiallySmall_1\", \"CategoryTheory.ObjectProperty.instEssentiallySmallLimitsOfShapeOfSmallOfSmallOfLocallySmall\", \"CategoryTheory.ObjectProperty.instEssentiallySmallRetractClosureOfLocallySmall\", \"CategoryTheory.ObjectProperty.instEssentiallySmallLimitsClosureOfSmallOfLocallySmall\", \"CategoryTheory.ObjectProperty.instEssentiallySmallColimitsClosureOfSmallOfLocallySmall\"], \"digest\": \"b1fb3a673624639a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.essentiallySmall_of_small_of_locallySmall and essentiallySmall_fullSubcategory_mem in Mathlib/CategoryTheory/EssentiallySmall.lean:243 and 263 concern ordinary categories with set-valued Hom, not the full higher mapping spaces of a quasicategory. SSet.QCat in AlgebraicTopology/Quasicategory/StrictBicategory.lean:51 is a definition of an ordinary category of quasicategories, not an equivalence shrinking a given quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally small quasicategory with a small family of representatives is equivalent to a small quasicategory",
+   "results": "{\"t\": \"2026-10-16T20:26:45Z\", \"tool\": \"leanfinder\", \"query\": \"A locally small quasicategory with a small family of representatives is equivalent to a small quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instLocallySmallSmallModel\", \"CategoryTheory.exists_equivalence_iff_of_locallySmall\", \"SSet.QCat\", \"CategoryTheory.essentiallySmall_iff\", \"CategoryTheory.essentiallySmall_of_small_of_locallySmall\", \"CategoryTheory.locallySmall_max\", \"CategoryTheory.Shrink.instLocallySmallShrink\", \"CategoryTheory.locallySmall_of_essentiallySmall\"], \"digest\": \"1f6301f80dafe390\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.essentiallySmall_of_small_of_locallySmall and essentiallySmall_fullSubcategory_mem in Mathlib/CategoryTheory/EssentiallySmall.lean:243 and 263 concern ordinary categories with set-valued Hom, not the full higher mapping spaces of a quasicategory. SSet.QCat in AlgebraicTopology/Quasicategory/StrictBicategory.lean:51 is a definition of an ordinary category of quasicategories, not an equivalence shrinking a given quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small set of equivalence classes and small mapping Kan complexes imply essential smallness of an infinity category",
+   "results": "{\"t\": \"2026-10-16T20:28:18Z\", \"tool\": \"leanfinder\", \"query\": \"A small set of equivalence classes and small mapping Kan complexes imply essential smallness of an infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.essentiallySmall_of_small_of_locallySmall\", \"CategoryTheory.EssentiallySmall\", \"CategoryTheory.essentiallySmall_iff\", \"CategoryTheory.essentiallySmallSelf\", \"instEssentiallySmallLightDiagram\", \"CategoryTheory.Discrete.essentiallySmallOfSmall\", \"CategoryTheory.finallySmall_of_essentiallySmall\", \"CategoryTheory.ObjectProperty.instEssentiallySmallOfSmall\"], \"digest\": \"7b9f4e273a2e713c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryTheory.essentiallySmall_of_small_of_locallySmall and essentiallySmall_fullSubcategory_mem in Mathlib/CategoryTheory/EssentiallySmall.lean:243 and 263 concern ordinary categories with set-valued Hom, not the full higher mapping spaces of a quasicategory. SSet.QCat in AlgebraicTopology/Quasicategory/StrictBicategory.lean:51 is a definition of an ordinary category of quasicategories, not an equivalence shrinking a given quasicategory."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-reflector-accessibility",
@@ -98,5 +211,20 @@
   "group": "Q41"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-small-full-subcategory",
+  "worker": "stage1",
+  "summary": "No exact closed project declaration found. Retained the statement, including the empty family and the two universes. Split via a minimal deformation retract and a degreewise counting induction; isolated only minimal-retract existence and fixed-boundary homotopy-class smallness as two statement-only supporting nodes. Ordinary-category essentially-small results do not handle the higher mapping spaces. Repeated and recorded all Mathlib searches; checked definitions and each cited conclusion against its statement. Independent second reading made the positive-dimension vertex tracks explicit in step 5, wrote the horn-filler construction in step 6, and expanded the citation extracts to the clauses actually used.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint in the master snapshot: the finite-coefficient mapping-complex adjunction before taking the derived inverse limit; foundational smallness of the reflected generating family in lem-coef-infinity-reflector-accessibility. Steps 1-6 supply the small model for the replete full subcategory spanned by the small reflected generating family; they preserve the finite-coefficient mapping-complex adjunction route of the ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-e44b04644",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-e44b04644 (reviewer sub-agent of L); spot-checked: Verdict PASS, no fixes. I read the item, both new nodes, the statements of the two cited definitions, the citer lem-coef-infinity-reflector-accessibility and unit sk-prop-sf-biduality-general. Source check caveat: HTT is not in literature/ and this machine blocks network access, so I could not open it. I checked the cited places (Def 2.3.3.1, Prop 2.3.3.8 with base a point, Lemma 5.4.1.1, Prop 5.4.1.2 (1)=>(2)=>(3), Def 5.4.1.3, Prop 5.4.1.7) from memory, and checked each statement independently. Steps: step 1 (empty J gives the empty quasicategory) and step 2 (inner horns contain every vertex; right-pinched Map_D(x,y) = Map_C(x,y) degreewise) are correct and elementary. Step 3 cites the minimal-retract lemma correctly. In step 4, r preserves the inverse edge and both triangles, and minimality at n=0 makes J -> M_0 surjective. In step 5, a chain of relative homotopies in D, pushed through r, becomes homotopies in M. They are constant at b on the boundary and their vertex tracks are degenerate since n>=1, so minimality, which also covers reversed links, gives injectivity into the boundary lemma's small quotient. B_n embeds in (M_{n-1})^{n+1}. In step 6, transport to small sets gives ie with inverse e^{-1}r, which is exactly essential smallness. New nodes: minimal-retract is HTT 2.3.3.8 at S=pt; its vertex-track condition agrees with HTT's relative homotopy for n=0 and n>=1. I tested the empty case, groupoid nerves (automorphisms are kept) and discrete sets. Boundary-extension is true: E_b/~ is pi_0 of the Kan fibre, equal to relative extension classes of a map from the boundary of the (n-1)-cube into Map(x,y); these are empty or a pi_{n-1}-torsor (pi_0 when n=1), hence small. Excluding n=0 is necessary. Neither node restates the parent. I found no duplicate in a DAG search (lem-coef-kan-minimal-factorization is for Kan fibrations only). B1-B9, C, D and E pass; the node stays inside its unit, there are no tool_uses and no cycle."
+ }
 }

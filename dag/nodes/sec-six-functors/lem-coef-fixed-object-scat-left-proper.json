@@ -29,9 +29,114 @@
  "stmt_deps": [
   "lem-coef-simplicial-interval-lifting"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout with the fixed set $O$. Write $*$ for coproduct with identities on $O$ amalgamated. Coproducts and pushouts of simplicial categories with this fixed set are computed degreewise in ordinary categories on $O$: a functor out of the degreewise colimit is a cocone in each degree, and compatibility with every simplicial operator follows by the colimit universal property. In particular the pushout exists by the model structure in [lem-coef-simplicial-interval-lifting]. That node also says a cofibration is a retract of a free simplicial extension. To ensure the retract fixes the domain, start with an arrow retract of $j_0:A_0\\to C_0$: write its domain maps as $a:A\\to A_0$, $b:A_0\\to A$, and its codomain maps as $s_0:C\\to C_0$, $r_0:C_0\\to C$, with $ba=1_A$, $r_0s_0=1_C$, $j_0a=s_0i$, and $r_0j_0=ib$. Push $j_0$ out along $b$ and call the result $j:A\\to\\widetilde C$. In each degree $C_{0,q}=A_{0,q}*F_q$ gives $\\widetilde C_q=A_q*F_q$ by the coproduct universal property, with the same chosen new generators. The composite of $s_0$ with $C_0\\to\\widetilde C$ is a section under $A$, because $ba=1_A$. The maps $i:A\\to C$ and $r_0:C_0\\to C$ induce its retraction by the pushout universal property, and their composite on $C$ is $r_0s_0=1_C$. Thus choose $A\\xrightarrow{j}\\widetilde C$ and maps $s:C\\to\\widetilde C$, $r:\\widetilde C\\to C$ under $A$ with $rs=1_C$, where in every degree $q$ one has $\\widetilde C_q=A_q*F_q$ for an ordinary free category $F_q$. We first prove the conclusion for $j$, then take this retract. No fibrancy is used.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Sections 7.4–7.6; fixed-object pushouts and reduction to a strong free retract"
+   }
+  },
+  {
+   "text": "First establish the coproduct invariance needed below directly from lower-level inputs, to avoid a cyclic dependency through coherent-nerve comparison. Let $v:X\\to X'$ be a local weak equivalence and let $P$ be a constant free category on a graph $Q$ on $O$. For $x,y\\in O$, every arrow in $X*P$ has a unique expression as graph edges $e_1,\\ldots,e_t$ with one $X$-arrow before, between, and after them, allowing these $X$-arrows to be identities. To obtain it, split all free words into graph edges and compose each intervening block of $X$-arrows; relations in $X$ neither remove nor identify graph edges. Thus its mapping simplicial set is the disjoint union over such edge patterns of\n$$X(x,s(e_1))\\times X(t(e_1),s(e_2))\\times\\cdots\\times X(t(e_t),y),$$\nwith $X(x,y)$ for $t=0$. This description is compatible with simplicial operators. By [lem-coef-realization-finite-limits], realization preserves these disjoint unions and finite products in k-spaces. Path components and based homotopy groups of a finite product are the corresponding products, since maps and homotopies into a product are tuples of maps and homotopies. In a disjoint union each path and based sphere lies in its component. Consequently the product and disjoint-union maps induced by $v$ induce the bijections and group isomorphisms defining weak homotopy equivalence in [lem-coef-kan-quillen-right-proper]. Hence $X*P\\to X'*P$ is a local weak equivalence.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 2.7, proof (i), free-factor case; explicit word and realization argument"
+   }
+  },
+  {
+   "text": "If $P$ is instead a simplicial category free in every degree, form, for each $x,y$, the bisimplicial sets $D_{p,q}=(X_q*P_p)(x,y)$ and $D'_{p,q}=(X'_q*P_p)(x,y)$. The operators act on separate factors and commute by the coproduct universal property, even when faces of $P$ do not preserve its chosen generators. For fixed $p$, step 2 gives a weak equivalence in the $q$ direction. Apply [lem-coef-bisimplicial-diagonal-equivalence]. The diagonals are exactly $(X*P)(x,y)$ and $(X'*P)(x,y)$; their comparison is a weak equivalence.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 2.7, proof (ii), passage from a constant free factor to a degreewise free factor by diagonals"
+   }
+  },
+  {
+   "text": "For an arbitrary simplicial category $Z$ on $O$, use the explicit free-category comonad $F$ in [lem-coef-free-resolution-coproduct-augmentation]. Put\n$$E^X_{p,q}=(X_q*F^{p+1}Z_q)(x,y),\\qquad T^X_{p,q}=(X_q*Z_q)(x,y),$$\nwith $T^X$ constant in $p$, and define the same objects for $X'$. For fixed $q$, the cited augmentation theorem applies to the ordinary categories $X_q,Z_q$, with no freeness hypothesis on either; it gives $E^X_{\\bullet,q}\\to T^X_{\\bullet,q}$ a weak equivalence, and likewise for $X'$. By [lem-coef-bisimplicial-diagonal-equivalence] both diagonal augmentations are weak equivalences. For fixed $p$, $q\\mapsto F^{p+1}Z_q$ is degreewise free, so step 3 gives $E^X_{p,\\bullet}\\to E^{X'}_{p,\\bullet}$ a weak equivalence. Applying the diagonal theorem again and two-out-of-three from [lem-coef-kan-quillen-right-proper] to the commuting augmentation square proves $X*Z\\to X'*Z$ a local weak equivalence. Interchanging factors and composing proves that any finite coproduct of local weak equivalences in the fixed-object category is a local weak equivalence. This argument has not used left properness or the coherent-nerve comparison.",
+   "uses": [
+    "lem-coef-free-resolution-coproduct-augmentation",
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Propositions 2.6 and 2.7(iii), free resolutions and two diagonal comparisons"
+   }
+  },
+  {
+   "text": "Return to a free extension $j:A\\to\\widetilde C$ and any map $v:A\\to V$ on $O$. Define an augmented bisimplicial category by\n$$R^V_{n,q}=\\widetilde C_q*\\underbrace{A_q*\\cdots*A_q}_{n\\text{ factors}}*V_q\\quad(n\\geq0),\\qquad D^V=\\widetilde C\\amalg_A V.$$\nThe first face uses $j$ to send the first displayed $A$ factor into $\\widetilde C$, each internal face folds adjacent $A$ factors, and the last face uses $v$ to send the last $A$ into $V$. Degeneracy $s_i$ inserts an unused $A$ factor in the corresponding position, by the unit map $I_O\\to A$; here $I_O$ is the category with only identities, the coproduct unit. The augmentation sends each factor into the pushout. On any factor the simplicial identities say either that inserting and then deleting a position is the identity, or that two folds compose the same three inclusions. These are equal by associativity of composition and the coproduct universal property. The $q$ operators commute with these maps because $j,v$ are simplicial functors. This constructs the bisimplicial mapping sets and their augmentation to the diagram constant in $n$ on $D^V_q(x,y)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 8.2, coproduct bar for a pushout; operators and augmentation written explicitly"
+   }
+  },
+  {
+   "text": "Fix $q$. Reorder $\\widetilde C_q=A_q*F_q$ as $F_q*A_q$. The augmented bar row is then\n$$R^V_{n,q}=F_q*A_{q,0}*\\cdots*A_{q,n}*V_q\\longrightarrow F_q*V_q=D^V_q.$$\nHere all $A_{q,i}$ are labelled copies of $A_q$. For $n\\geq1$, $d_i$ folds copies $i,i+1$ when $i<n$, and $d_n$ sends copy $n$ to $V_q$ by $v$; $s_i$ inserts an unused copy immediately after copy $i$. Define $h_n$ to insert an unused copy before copy $0$, shifting every old label up by one and fixing $F_q,V_q$. Define $h_{-1}:F_q*V_q\\to F_q*A_{q,0}*V_q$ by the factor inclusions. The augmentation followed by $h_{-1}$ sends the $A_{q,0}$ factor into $V_q$. Thus $\\varepsilon h_{-1}=1$, $d_0h_n=1$, and $d_1h_0=h_{-1}\\varepsilon$: the last equality sends the old copy $0$ into $V_q$ on both sides. For the remaining face identity $d_{i+1}h_{n+1}=h_nd_i$ with $0\\leq i\\leq n$, each side sends an old copy with label $k\\leq i$ to label $k+1$, copy $i+1$ to label $i+1$, and a copy with $k>i+1$ to label $k$; the two adjacent copies are folded by the identity functor of $A_q$. For $i=n+1$, both sides send the old last copy into $V_q$ by $v$ and send every other old copy $k$ to label $k+1$. For $s_{i+1}h_n=h_{n+1}s_i$ ($0\\leq i\\leq n$), both sides send an old copy $k\\leq i$ to label $k+1$ and an old copy $k>i$ to label $k+2$. In all these equalities both sides fix $F_q,V_q$, so equality on coproduct factor inclusions proves equality of functors. Restrict these functors to $(x,y)$ mapping sets. The statement of [lem-coef-extra-degeneracy-contraction] now gives a section and simplicial homotopy inverse for the row augmentation. Realization preserves the product with $\\Delta^1$ by [lem-coef-realization-finite-limits], so this homotopy realizes to a continuous homotopy. The row augmentation is therefore a weak homotopy equivalence, with no Kan assumption, by the definition in [lem-coef-kan-quillen-right-proper]. Finally [lem-coef-bisimplicial-diagonal-equivalence], in the exchanged direction, shows\n$$\\varepsilon_V:\\operatorname{diag}R^V\\longrightarrow D^V$$\nis a local weak equivalence. The chosen free factors and the contractions need not be natural in $q$: only the bar augmentation is used as a map of bisimplicial sets, and it is natural by step 5.",
+   "uses": [
+    "lem-coef-extra-degeneracy-contraction",
+    "lem-coef-realization-finite-limits",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 8.2, explicit contraction of the split ordinary pushout row and diagonal argument"
+   }
+  },
+  {
+   "text": "Apply steps 5–6 first to $V=A$, $v=1_A$, and then to $V=B$, $v=u$. In the first case $D^A=\\widetilde C$, and in the second $D^B=\\widetilde C\\amalg_A B$. There is a map of augmented bars $R^A\\to R^B$ that is the identity on $\\widetilde C$ and every intermediate $A$ and is $u$ on the last factor. It commutes with the last face because that face uses $v$; it commutes with all other operators since they act on the unchanged factors. For fixed $n$, step 4 makes this finite-coproduct map a local weak equivalence of simplicial categories. The diagonal theorem [lem-coef-bisimplicial-diagonal-equivalence] therefore gives a local weak equivalence on diagonals. Both vertical augmentations in the resulting commuting square are local weak equivalences by step 6. Its bottom arrow is precisely the canonical $\\widetilde C\\to\\widetilde C\\amalg_A B$, since on each factor the augmentation uses the pushout structure map. Two-out-of-three in [lem-coef-kan-quillen-right-proper] proves that bottom arrow is a local weak equivalence.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Sections 8.1–8.2 and 7.3(ii), comparing the identity span with the given weak-equivalence span"
+   }
+  },
+  {
+   "text": "Push out the maps $s,r$ of step 1 along $A\\to B$. The pushout universal property gives maps $C\\amalg_A B\\to\\widetilde C\\amalg_A B\\to C\\amalg_A B$ whose composite is the identity, and the canonical arrows from $C,\\widetilde C$ form commuting squares with them. Thus $C\\to C\\amalg_A B$ is a retract, in the arrow category, of the local weak equivalence of step 7. On every mapping set it is a retract of a weak homotopy equivalence. Weak equivalences are retract-closed in the simplicial-set model structure of [lem-coef-kan-quillen-right-proper], proving the required conclusion for $i$. For $O=\\varnothing$ there are no mapping sets and the conclusion is vacuous. Empty mapping sets, loop generators, and identity-only categories are all allowed in the word and contraction constructions.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Sections 7.6 and 8.2, retract reduction and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-free-resolution-coproduct-augmentation",
+  "lem-coef-extra-degeneracy-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+  "place": "Sections 2.6–2.7, 7.3–7.6 and 8.2, pp.270–271,277–279; explicit split-bar contraction and direct comparison, using existing lower-level DAG statements. Source read online, not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -106,10 +211,52 @@
    "results": "{\"t\": \"2026-10-16T19:39:44Z\", \"tool\": \"leanfinder\", \"query\": \"WeakEquivalence is stable under cobase change in categories enriched over simplicial sets with fixed objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\"], \"digest\": \"8130fcbf377a43fe\"}",
    "date": "2026-10-16",
    "verdict": "No match for fixed-object enriched left properness: the model-category pushout declarations require the weak-equivalence leg itself to be a cofibration; the grep found no left-properness declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The model category of simplicial categories with a fixed object set is left proper",
+   "results": "{\"t\": \"2026-10-16T20:18:33Z\", \"tool\": \"leanfinder\", \"query\": \"The model category of simplicial categories with a fixed object set is left proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\"], \"digest\": \"047082b9c82bfa1d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give formal lifting or trivial-cofibration pushout results and the simplicial-set model structure; none gives fixed-object simplicial-category left properness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"WeakEquivalence\"",
+   "results": "{\"t\": \"2026-10-16T20:18:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialCategory\\\", \\\"WeakEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give formal lifting or trivial-cofibration pushout results and the simplicial-set model structure; none gives fixed-object simplicial-category left properness."
+  },
+  {
+   "tool": "grep",
+   "query": "LeftProper|leftProper|simplicial.*categor.*proper",
+   "results": "{\"t\": \"2026-10-16T20:18:33Z\", \"tool\": \"grep\", \"query\": \"LeftProper|leftProper|simplicial.*categor.*proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give formal lifting or trivial-cofibration pushout results and the simplicial-set model structure; none gives fixed-object simplicial-category left properness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout of a weak equivalence along a cofibration in simplicial categories with fixed objects",
+   "results": "{\"t\": \"2026-10-16T20:18:34Z\", \"tool\": \"leansearch\", \"query\": \"Pushout of a weak equivalence along a cofibration in simplicial categories with fixed objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceS\", \"HomotopicalAlgebra.instCofibrationInrOfIsStableUnderCobaseChangeCofibrations\", \"CategoryTheory.Limits.PushoutCocone.mk\", \"CategoryTheory.SmallObject.functorObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"CategoryTheory.Limits.Types.Pushout.Rel.inl_inr\"], \"digest\": \"837318279573d6a4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give formal lifting or trivial-cofibration pushout results and the simplicial-set model structure; none gives fixed-object simplicial-category left properness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cobase change preserves local weak equivalences in categories enriched over simplicial sets with prescribed objects",
+   "results": "{\"t\": \"2026-10-16T20:18:39Z\", \"tool\": \"leanfinder\", \"query\": \"Cobase change preserves local weak equivalences in categories enriched over simplicial sets with prescribed objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.llp_isStableUnderCobaseChange\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\", \"HomotopicalAlgebra.instHasTwoOutOfThreePropertyOverWeakEquivalences\", \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeCofibrations\", \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"f7404ad48a26e59c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give formal lifting or trivial-cofibration pushout results and the simplicial-set model structure; none gives fixed-object simplicial-category left properness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of simplicial monoids with a fixed object set has weak equivalences preserved by cobase change along free extensions",
+   "results": "{\"t\": \"2026-10-16T20:37:57Z\", \"tool\": \"leanfinder\", \"query\": \"The category of simplicial monoids with a fixed object set has weak equivalences preserved by cobase change along free extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeCofibrations\"], \"digest\": \"1fd28aa53bfe0047\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern simplicial-set cofibrations and formal stability of cofibrations or trivial cofibrations, not preservation of arbitrary local weak equivalences under free enriched-category extensions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-interval-cell-stability",
@@ -117,5 +264,20 @@
   "group": "Q04"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-fixed-object-scat-left-proper",
+  "worker": "stage1",
+  "summary": "Kept the statement and its fixed-object hypotheses unchanged. Gave a free-retract and coproduct-bar proof with explicit extra degeneracy and no Kan assumptions. Existing free-calculus cannot be cited because it depends on this item through coherent-nerve comparison, so the coproduct invariance argument is expanded from its lower-level existing inputs; no new node is created. Checked all cited statements, edge cases, Lean absence and Mathlib searches.",
+  "blueprint": "Realizes the fixed-object left-properness input to the two span comparisons in lem-coef-simplicial-interval-cell-stability, in the existing ancestry of prop-coef-integral-exceptional-adjoint, proof paragraph 2 (mapping-limit adjunction and coherent naturality foundation). This does not alter the unit route or its realized fields."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-d6fb729ff",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-d6fb729ff (reviewer sub-agent of L); spot-checked: I read the item, all six cited statements, the free-calculus node and the citer interval-cell-stability in full, and checked both sources (fetched read-only, not archived). Bergner math/0406507 Lemma 3.4, printed p.11, says 'SC_X is proper [4, 7.3]'. The item's statement is exactly Dwyer–Kan 7.3(ii), with the cofibrations of 7.1(iii) and the free-map retracts of 7.4–7.6; no hypothesis is added and nothing is weakened. Steps 2–4 match DK 2.7(i)–(iii): the word normal form, then the degreewise-free diagonal, then the F_• resolution through free-resolution-coproduct-augmentation, which applies to ordinary X_q,Z_q with no freeness hypothesis (I checked that delta is natural). Steps 5–7 are DK 8.2 and 8.1. The row extra-degeneracy identities hold on labels when checked against Mathlib ExtraDegeneracy.lean:72-83, including the composition order and the cases i=n+1 and d_1h_0. The non-natural row contractions are used only through the natural augmentation in the diagonal theorem. Step 1's domain-fixing retract (pushout along b; r is valid since r_0 j_0 = i b) and step 8's retract closure are correct. Edge cases: empty O, identity-only categories, empty F, empty mapping sets. A computed closure shows no cycle; free-calculus does reach the item, so not citing it is right. All cited nodes are in the same unit, so there are no tool_uses, and no SGA is cited. The DAG scan found no duplicate, and there are no new nodes. No fixes."
+ }
 }
