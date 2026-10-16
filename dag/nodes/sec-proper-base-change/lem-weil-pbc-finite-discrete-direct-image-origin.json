@@ -1,0 +1,112 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-discrete-direct-image-origin",
+ "kind": "statement",
+ "title": "Qcqs internal direct image preserves bounded-below etale origin",
+ "statement": "For a finite discrete commutative ring B, the realization F of [def-weil-pbc-common-finite-discrete-encoding], a qcqs scheme morphism h:S to T and K in the bounded-below etale derived category on S, the object R h_internal,* (F_S K) lies in the essential image of F_T. No pullback family, coherence equation or specified mate is mentioned.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 5.4.3; Stacks Project Tag 099R"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-common-finite-discrete-encoding",
+  "def-weil-pbc-coefficient-derived-functor-api"
+ ],
+ "proof": [
+  {
+   "text": "Sectionwise restriction commutes with the fixed G and the coefficient maps pulled back from eR. Thus direct image on internal modules is conjugate through E to direct image on module-valued sheaves. Exact equivalences preserve injectives, so the identity transports to right derived functors.",
+   "uses": [
+    "def-weil-pbc-common-finite-discrete-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the bounded-below finite-coefficient direct-image comparison. Its witness is R+ h_et,* K, with its comparison isomorphism after E_T and inclusion D+ into D.",
+   "uses": [
+    "prop-weil-pbc-comparison-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-common-finite-discrete-encoding",
+  "prop-weil-pbc-comparison-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 5.4.3; Stacks Project Tag 099R",
+  "note": "E1 second reading: actual independent parts of the argument, replacing an equivalent restatement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived direct image along a quasi compact quasi separated scheme morphism preserves the bounded below etale origin inside the pro etale derived category with a finite constant coefficient ring",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.quasiCompact_of_compactSpace, AlgebraicGeometry.QuasiSeparated.mk, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.QuasiCompactCover.instPullback₂Scheme",
+   "verdict": "No Mathlib theorem states this internal-module essential-image result. Reuse the upstream ordinary comparison direct-image theorem; compatibility with the concrete encoding is the remaining obligation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient etale proetale derived pullback coherent composition internal modules constant sheaf ring",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instHasPullbacksEtale, RingHom.Etale.stableUnderComposition, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, Algebra.FormallyEtale.instForallOfFinite, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.Etale.comp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "verdict": "No Mathlib theorem states this internal-module essential-image result. Reuse the upstream ordinary comparison direct-image theorem; compatibility with the concrete encoding is the remaining obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*(UpperStar|LowerStar)|sheafPullback.*[Cc]omp|mapMod.*[Cc]omp|rightDerived.*[Ee]quiv",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No Mathlib theorem states this internal-module essential-image result. Reuse the upstream ordinary comparison direct-image theorem; compatibility with the concrete encoding is the remaining obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteDerivedCoefficientData",
+  "date": "2026-10-16",
+  "group": "E1"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-discrete-derived-coefficient-data",
+   "place": "Qcqs internal direct image preserves bounded-below etale origin",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteCoefficientDirectImageOrigin",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteCoefficientDirectImageOrigin.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteCoefficient_directImage_origin",
+  "statement": "theorem finiteDiscreteCoefficient_directImage_origin [DiscreteTopology B] [Finite B]\n    {S T : Scheme.{u}} (h : S ⟶ T) [QuasiCompact h] [QuasiSeparated h]\n    (K : FiniteDiscreteEtalePlus B S) :\n    (finiteDiscreteRealization B T (finiteDiscreteCoefficientEquivalence B eR G hG T)).essImage\n      ((coefficientDerivedLowerStar (Profinite.continuousMapRingObj B) h).obj\n        ((finiteDiscreteRealization B S\n          (finiteDiscreteCoefficientEquivalence B eR G hG S)).obj K))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cfc7e",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T131233-L-3106244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cfc7e",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T131233-L-3106244",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matches the node statements; existing signatures and four relocated definition bodies are unchanged. All five modules and the sole direct importer, Sheaf.Paper.CoefficientExchangeFromComparisons, compile cleanly. Axiom probes match the recorded dependencies; only permitted DAG fields changed."
+ }
+}

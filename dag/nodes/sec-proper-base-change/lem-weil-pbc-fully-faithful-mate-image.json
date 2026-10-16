@@ -1,0 +1,102 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-fully-faithful-mate-image",
+ "kind": "statement",
+ "title": "Invertible mates when fully faithful embeddings preserve the right-adjoint image",
+ "statement": "Given adjunctions L1 ⊣ R1 and L2 ⊣ R2, fully faithful functors G and H, and an isomorphism G followed by L2 ≅ L1 followed by H, the canonical right mate R1 followed by G → H followed by R2 is invertible provided every R2(H(d)) lies in the essential image of G.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+  "place": "Hom-set proof of Adjunction.restrictFullyFaithful; agent-written Yoneda variant using only essential-image membership"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Write each target as G(t). Full faithfulness lifts the mate to f:R1(d)→t. The two adjunction Hom equivalences, full faithfulness of H and G, and the left isomorphism identify postcomposition by f with a composite of bijections. This equality is proved using the mate formula and naturality of the unit and left comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The Yoneda isomorphism criterion proves f invertible, hence its image and the mate component are invertible. Apply the componentwise natural-transformation criterion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+  "place": "Hom-set proof of Adjunction.restrictFullyFaithful; agent-written Yoneda variant using only essential-image membership",
+  "note": "E1 second reading: actual independent parts of the argument, replacing an equivalent restatement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A square of fully faithful functors and adjunctions has an invertible mate when the right adjoint preserves the essential image",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.mateEquiv_square, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.mateEquiv, CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.unit_mateEquiv, CategoryTheory.Adjunction.whiskerRight_counit_iso_of_L_fully_faithful, CategoryTheory.mateEquiv_apply",
+   "verdict": "Mathlib restrictFullyFaithful requires a supplied right comparison; Yoneda supplies the needed criterion here from objectwise essential-image membership. The upstream isIso_map_mateEquiv_app_of_isIso needs extra vertical right adjoints and proves only an image under one of them invertible. MateIsoAlongEquivalences assumes essential surjectivity of G. None has the hypotheses of this lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful functors right mate invertible if right adjoint preserves essential image",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.hasRightCalculusOfFractions', CategoryTheory.Adjunction.isIso_counit_app_iff_mem_essImage, CategoryTheory.Adjunction.isLocalization_rightAdjoint', CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc",
+   "verdict": "Mathlib restrictFullyFaithful requires a supplied right comparison; Yoneda supplies the needed criterion here from objectwise essential-image membership. The upstream isIso_map_mateEquiv_app_of_isIso needs extra vertical right adjoints and proves only an image under one of them invertible. MateIsoAlongEquivalences assumes essential surjectivity of G. None has the hypotheses of this lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(FullyFaithful|essImage)|isIso_of_yoneda_map_bijective|restrictFullyFaithful",
+   "date": "2026-10-16",
+   "results": "22 hits: Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+   "verdict": "Mathlib restrictFullyFaithful requires a supplied right comparison; Yoneda supplies the needed criterion here from objectwise essential-image membership. The upstream isIso_map_mateEquiv_app_of_isIso needs extra vertical right adjoints and proves only an image under one of them invertible. MateIsoAlongEquivalences assumes essential surjectivity of G. None has the hypotheses of this lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteDerivedCoefficientData",
+  "date": "2026-10-16",
+  "group": "E1"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-discrete-derived-coefficient-data",
+   "place": "Invertible mates when fully faithful embeddings preserve the right-adjoint image",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FullyFaithfulMate",
+  "file": "lean/Sheaf/CategoryTheory/FullyFaithfulMate.lean",
+  "declaration": "CategoryTheory.isIso_mateEquiv_of_fullyFaithful_of_essImage",
+  "statement": "theorem isIso_mateEquiv_of_fullyFaithful_of_essImage\n    {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄}\n    [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [Category.{v₄} F]\n    {G : C ⥤ E} {H : D ⥤ F} {L₁ : C ⥤ D} {R₁ : D ⥤ C}\n    {L₂ : E ⥤ F} {R₂ : F ⥤ E}\n    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)\n    (hG : G.FullyFaithful) (hH : H.FullyFaithful)\n    (α : G ⋙ L₂ ≅ L₁ ⋙ H)\n    (himage : ∀ d, G.essImage (R₂.obj (H.obj d))) :\n    IsIso (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.hom)).natTrans",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cfc7e",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T131233-L-3106244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cfc7e",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T131233-L-3106244",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matches the node statements; existing signatures and four relocated definition bodies are unchanged. All five modules and the sole direct importer, Sheaf.Paper.CoefficientExchangeFromComparisons, compile cleanly. Axiom probes match the recorded dependencies; only permitted DAG fields changed."
+ }
+}

@@ -4,10 +4,11 @@ Authors: SHEAF group H2 -/
 module
 
 public import Sheaf.Paper.FiniteDiscreteCoefficientEncoding
-import Sheaf.AlgebraicGeometry.ComparisonDirectImage
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
-import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Defs
+public import Sheaf.Paper.CoefficientDerivedFunctorAPI
+import Sheaf.Paper.FiniteDiscreteCoefficientCoherentPullbacks
+import Sheaf.Paper.FiniteDiscreteCoefficientDirectImageOrigin
+import Sheaf.CategoryTheory.FullyFaithfulMate
+import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
 
 /-! # Coherent inverse-image comparisons for the common coefficient encoding -/
 
@@ -18,49 +19,11 @@ universe u
 open CategoryTheory Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+attribute [local instance] coefficientProfiniteEssentiallySmall
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
-
-section DerivedFunctorAPI
-
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-  [MonObj Λ] [IsCommMonObj Λ] {S T : Scheme.{u}} (h : S ⟶ T)
-
-/-- The derived pullback with its derivability instances fixed at a generic coefficient ring. -/
-noncomputable def coefficientDerivedUpperStar :
-    DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) ⥤
-      DerivedCategory (Mod (Sheaf (ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)) :=
-  L((h)^*⟦Λ⟧)
-
-/-- The derived pushforward with its derivability instances fixed at a generic coefficient ring. -/
-noncomputable def coefficientDerivedLowerStar :
-    DerivedCategory (Mod (Sheaf (ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)) ⥤
-      DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :=
-  R((h)_*⟦Λ⟧)
-
-/-- The derived coefficient adjunction, with the cached derived functor interfaces. -/
-@[irreducible] noncomputable def coefficientDerivedAdjunction :
-    coefficientDerivedUpperStar Λ h ⊣ coefficientDerivedLowerStar Λ h :=
-  derivedUpperStarLowerStarAdjunction Λ h
-
-end DerivedFunctorAPI
-
-/-- The ambient derived pullback comparison, before restricting to constructible objects. -/
-@[irreducible] noncomputable def coefficientAmbientSquare
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ]
-    {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y}
-    {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : CommSq g' f' f g) :
-    coefficientDerivedUpperStar Λ g ⋙
-        coefficientDerivedUpperStar Λ f' ≅
-      coefficientDerivedUpperStar Λ f ⋙
-        coefficientDerivedUpperStar Λ g' :=
-  (leftDerivedUpperStarComp Λ f' g).symm ≪≫
-    eqToIso (by rw [← sq.w]) ≪≫
-    leftDerivedUpperStarComp Λ g' f
 
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 
@@ -199,6 +162,41 @@ abbrev FiniteDiscreteCoefficientComparisonData
   CoefficientPullbackData B (Profinite.continuousMapRingObj B)
     (fun T ↦ finiteDiscreteRealization B T (E T))
 
+private noncomputable def realizationFullyFaithful (T : Scheme.{u})
+    (E : FiniteDiscreteProEtaleSheaves B T ≌ FiniteDiscreteInternalModules B T) :
+    (finiteDiscreteRealization B T E).FullyFaithful := by
+  let V := DerivedCategory.Plus.ι ⋙
+    D(ν^*(T)[ModuleCat.{u + 1} (ULift.{u + 1} B)])
+  have : V.Faithful := ⟨fun {K L} {f g} h ↦
+    ObjectProperty.hom_ext _
+      ((bijective_comparisonUpperStar_mapDerivedCategory_map
+        K.obj L.obj L.property).1 h)⟩
+  have : (finiteDiscreteRealization B T E).Faithful := by
+    unfold finiteDiscreteRealization
+    exact inferInstanceAs (V ⋙ D(E.functor)).Faithful
+  exact Functor.FullyFaithful.ofFullyFaithful (finiteDiscreteRealization B T E)
+
+omit [TopologicalSpace B] [IsTopologicalRing B] in
+private theorem comparisonDataOfOrigin
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (F : ∀ T : Scheme.{u}, FiniteDiscreteEtalePlus B T ⥤
+      DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+        (condensedRingObj Λ T)))
+    (hF : ∀ T, (F T).FullyFaithful)
+    (P : CoefficientCoherentPullbackData B Λ F)
+    (himage : ∀ {S T : Scheme.{u}} (h : S ⟶ T) [QuasiCompact h] [QuasiSeparated h]
+      (K : FiniteDiscreteEtalePlus B S),
+      (F T).essImage ((coefficientDerivedLowerStar Λ h).obj ((F S).obj K))) :
+    Nonempty (CoefficientPullbackData B Λ F) := by
+  refine ⟨{ pullback := @P.pullback, square := @P.square, rightMate := ?_ }⟩
+  intro S T h _ _
+  exact isIso_mateEquiv_of_fullyFaithful_of_essImage
+    (Etale.derivedUpperStarLowerStarAdjunctionPlus
+      (ModuleCat.{u + 1} (ULift.{u + 1} B)) h)
+    (coefficientDerivedAdjunction Λ h)
+    (hF T) (hF S) (P.pullback h).symm (himage h)
+
 variable
   (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}
       (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj
@@ -234,6 +232,10 @@ schemes and the zero ring cause no exception: all identities come from adjunctio
 theorem finiteDiscreteCoefficient_derivedComparisonData [DiscreteTopology B] [Finite B] :
     Nonempty (FiniteDiscreteCoefficientComparisonData B
       (finiteDiscreteCoefficientEquivalence B eR G hG)) := by
-  sorry
+  obtain ⟨P⟩ := finiteDiscreteCoefficient_coherentPullbacks B eR G hG
+  exact comparisonDataOfOrigin B (Profinite.continuousMapRingObj B)
+    (fun T ↦ finiteDiscreteRealization B T (finiteDiscreteCoefficientEquivalence B eR G hG T))
+    (fun T ↦ realizationFullyFaithful B T (finiteDiscreteCoefficientEquivalence B eR G hG T))
+    P (fun h _ _ K ↦ finiteDiscreteCoefficient_directImage_origin B eR G hG h K)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -1,0 +1,112 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-discrete-coherent-pullbacks",
+ "kind": "statement",
+ "title": "Coherent inverse-image comparisons for the common coefficient encoding",
+ "statement": "For a finite discrete commutative ring B and the equivalences E_T of [def-weil-pbc-common-finite-discrete-encoding], the realization functors F_T admit natural inverse-image isomorphisms for every scheme morphism. The same family satisfies the composition-square equation for every CommSq, with the canonical derived composition and equality-transport isomorphisms. No direct-image or mate invertibility is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 5.4.1, with the sectionwise coefficient equivalence; Proposition 5.3.2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-common-finite-discrete-encoding",
+  "def-weil-pbc-coefficient-derived-functor-api"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the canonical restriction identity for the etale/pro-etale site inclusion. Transport through the common sectionwise G and the ring isomorphisms pulled back from the one fixed profinite point. Naturality of constant-sheaf pullback identifies scalar restrictions.",
+   "uses": [
+    "def-weil-pbc-common-finite-discrete-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the exact functors termwise and localize. Identify the exact internal inverse image with its left derived functor. The equality of restriction composites for sq.w is preserved by conjugation, exact derivation and inclusion of D+; this yields the displayed square identity.",
+   "uses": [
+    "def-weil-pbc-coefficient-derived-functor-api"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-common-finite-discrete-encoding",
+  "def-weil-pbc-coefficient-derived-functor-api"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 5.4.1, with the sectionwise coefficient equivalence; Proposition 5.3.2",
+  "note": "E1 second reading: actual independent parts of the argument, replacing an equivalent restatement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The natural isomorphism intertwining etale and pro etale inverse image is coherent for composition and commutative squares",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso, CategoryTheory.CatCommSq.iso_inv_naturality_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp, CategoryTheory.CatCommSq.iso_inv_naturality, CategoryTheory.CatCommSq.iso_hom_naturality_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjComp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e, CategoryTheory.sheafComposeNatIso",
+   "verdict": "The Mathlib hits give generic sheaf and category infrastructure, not this common internal-module coefficient transport. The ordinary site comparison already exists in the upstream library; the remaining part is compatibility with the concrete encoding."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient etale proetale derived pullback coherent composition internal modules constant sheaf ring",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instHasPullbacksEtale, RingHom.Etale.stableUnderComposition, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, Algebra.FormallyEtale.instForallOfFinite, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.Etale.comp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "verdict": "The Mathlib hits give generic sheaf and category infrastructure, not this common internal-module coefficient transport. The ordinary site comparison already exists in the upstream library; the remaining part is compatibility with the concrete encoding."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*(UpperStar|LowerStar)|sheafPullback.*[Cc]omp|mapMod.*[Cc]omp|rightDerived.*[Ee]quiv",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "The Mathlib hits give generic sheaf and category infrastructure, not this common internal-module coefficient transport. The ordinary site comparison already exists in the upstream library; the remaining part is compatibility with the concrete encoding."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteDerivedCoefficientData",
+  "date": "2026-10-16",
+  "group": "E1"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-discrete-derived-coefficient-data",
+   "place": "Coherent inverse-image comparisons for the common coefficient encoding",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteCoefficientCoherentPullbacks",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteCoefficientCoherentPullbacks.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteCoefficient_coherentPullbacks",
+  "statement": "theorem finiteDiscreteCoefficient_coherentPullbacks [DiscreteTopology B] [Finite B] :\n    Nonempty (FiniteDiscreteCoherentPullbacks B\n      (finiteDiscreteCoefficientEquivalence B eR G hG))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cfc7e",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T131233-L-3106244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cfc7e",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T131233-L-3106244",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matches the node statements; existing signatures and four relocated definition bodies are unchanged. All five modules and the sole direct importer, Sheaf.Paper.CoefficientExchangeFromComparisons, compile cleanly. Axiom probes match the recorded dependencies; only permitted DAG fields changed."
+ }
+}

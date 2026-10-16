@@ -14,34 +14,41 @@
  ],
  "proof": [
   {
-   "text": "Construct the underived pullback comparisons from the strictly sectionwise common encoding and the canonical restriction comparison. Their compatibility with composition follows from the common point ring and restriction identities.",
+   "text": "Obtain the coherent derived inverse-image family and its square equation, without any right-mate assertion.",
    "uses": [
-    "def-weil-pbc-common-finite-discrete-encoding"
+    "lem-weil-pbc-finite-discrete-coherent-pullbacks"
    ],
    "elementary": false
   },
   {
-   "text": "Apply exact derived functors and the canonical derived pullback composition isomorphisms to obtain the square equation.",
-   "uses": [],
-   "elementary": true
+   "text": "Realization is fully faithful: use the existing fullness instance and injectivity of bijective_comparisonUpperStar_mapDerivedCategory_map on D+, then compose with the derived coefficient equivalence. The source Hom-bijection uses the previously recorded comparison injective-acyclicity theorem.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-etale-realization-full",
+    "lem-weil-pbc-comparison-grothendieck-injective-acyclicity"
+   ],
+   "elementary": false
   },
   {
-   "text": "Identify the canonical right mate with the bounded-below qcqs direct-image comparison transported by the same encoding. Its invertibility is the finite coefficient direct-image theorem. The unit and counit identities for the comparison data are then proved separately by the explicit toComparisonData construction and Mathlib mate identities.",
+   "text": "For each qcqs morphism, internal right derived direct image preserves the etale realization image. Apply the proved fully faithful mate criterion to the inverse of the chosen pullback isomorphism. This proves rightMate, and together with the supplied square assembles the original record.",
    "uses": [
-    "prop-weil-pbc-comparison-direct-image"
+    "lem-weil-pbc-finite-discrete-direct-image-origin",
+    "lem-weil-pbc-fully-faithful-mate-image"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-common-finite-discrete-encoding",
-  "prop-weil-pbc-comparison-direct-image"
+  "lem-weil-pbc-finite-discrete-coherent-pullbacks",
+  "lem-weil-pbc-finite-discrete-etale-realization-full",
+  "lem-weil-pbc-comparison-grothendieck-injective-acyclicity",
+  "lem-weil-pbc-finite-discrete-direct-image-origin",
+  "lem-weil-pbc-fully-faithful-mate-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AK",
-  "note": "H2: constructive encoding and explicit categorical assembly; any remaining geometric theorem is separately identified."
+  "place": "Corollary 5.1.6 and Lemmas 5.4.1 and 5.4.3",
+  "note": "E1 second reading: genuine decomposition into coherent pullbacks and preservation of etale origin, with a proved Yoneda mate criterion. One upper hole closed, two independent geometric holes added; no net hole reduction claimed."
  },
  "mathlib_searches": [
   {
@@ -161,11 +168,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-6c3e9",
-  "group": "H2",
+  "reviewer": "X-cfc7e",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261016T093727-L-2050954",
+  "landing": "20261016T131233-L-3106244",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean against all six node records, existing signatures and change records; compiled 14 delivered modules and checked all 47 direct importers with published-baseline comparisons."
+  "note": "independent Codex review: Delivered Lean matches the node statements; existing signatures and four relocated definition bodies are unchanged. All five modules and the sole direct importer, Sheaf.Paper.CoefficientExchangeFromComparisons, compile cleanly. Axiom probes match the recorded dependencies; only permitted DAG fields changed."
  }
 }
