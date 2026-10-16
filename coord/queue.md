@@ -1,6 +1,6 @@
 # Work queue
 
-75 items; claim with `tools/claim.py next <group> [--stage N]`.
+79 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (75)
+## Stage 3: modules to prove (79)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -64,12 +64,16 @@
 | `Sheaf.RingTheory.SyntomicCodimensionLocalKernelGenerators` | 15 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentOfFormalQuotientsAndTorsionKernel` | 16 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FormalSecondIdealAlgebraizationTransitions` | 16 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientAdic` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientSupported` | 16 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.TorsionControlledFiniteGraphEpi` | 16 | 1 | proof |
 | `Sheaf.CategoryTheory.CoproductTruncationCouple` | 16 | 1 | proof |
 | `Sheaf.CategoryTheory.FilteredStationaryCycleComparison` | 16 | 1 | proof |
 | `Sheaf.RingTheory.LciConormalFreeRankCodimension` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentKernelIdealProductCompletionZero` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalCompletionAffineSections` | 17 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FormalFunctionsAffinePushforwardSections` | 17 | 1 | proof |
 | `Sheaf.CategoryTheory.DerivedCoupleFunctoriality` | 17 | 1 | proof |
 | `Sheaf.CategoryTheory.NaturalTruncationCouple` | 17 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.FormalComparisonAlgebraizationQuotientLift` | 18 | 1 | proof |
