@@ -7,18 +7,15 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.AlgebraicGeometry.CoherentSupportProperHigherDirectImage
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.ProperSupportHigherDirectImageBound
 import Mathlib.Data.Int.Interval
 import Sheaf.CategoryTheory.TruncationHypercohomology
-import all Sheaf.CategoryTheory.HalfPlaneWeakConvergence
-import all Sheaf.AlgebraicGeometry.DerivedDirectImageBoundedBelowQCoh
 
 /-! # Proper-support direct image preserves bounded coherent complexes
 
@@ -34,6 +31,43 @@ universe u wX wS
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
+
+/-- An isomorphism-invariant extension-closed property holds on an object with a finite
+exhaustive filtration when it holds on every graded piece.
+Source: Stacks Project, Homology, finite filtration induction.
+Proof: descend through the finite chain of filtration subobjects; each consecutive
+short exact sequence has the graded piece as quotient, so extension closure propagates
+from the final zero step to the full object. -/
+private theorem property_of_filtration {C : Type*} [Category* C] [Abelian C]
+    (P : ObjectProperty C) [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
+    (hext : ∀ (S : ShortComplex C), S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂)
+    {M : C} (F : ℤ → Subobject M) (hF : Antitone F) (N : ℕ)
+    (hfull : F 0 = ⊤) (hzero : F N = ⊥)
+    (hgraded : ∀ p : ℤ, P (cokernel (Subobject.ofLE (F (p + 1)) (F p)
+      (hF (by omega))))) : P M := by
+  have hsteps : ∀ k : ℕ, k ≤ N → P (F (N - k : ℕ) : C) := by
+    intro k
+    induction k with
+    | zero =>
+      intro _
+      simp only [Nat.sub_zero, hzero]
+      exact P.prop_of_isZero ((isZero_zero C).of_iso Subobject.botCoeIsoZero)
+    | succ k ih =>
+      intro hk
+      let n : ℤ := (N - (k + 1) : ℕ)
+      let i := Subobject.ofLE (F (n + 1)) (F n)
+        (hF (by omega))
+      let S := ShortComplex.mk i (cokernel.π i) (cokernel.condition i)
+      have hS : S.ShortExact := { exact := ShortComplex.exact_cokernel i }
+      apply hext S hS
+      · change P (F (n + 1) : C)
+        have hn : n + 1 = (N - k : ℕ) := by dsimp [n]; omega
+        rw [hn]
+        exact ih (by omega)
+      · exact hgraded n
+  have h := hsteps N le_rfl
+  simp only [Nat.sub_self, Nat.cast_zero, hfull] at h
+  exact P.prop_of_iso (asIso (⊤ : Subobject M).arrow) h
 
 /-- Coherence passes to the kernel modulo the incoming differential on every page. -/
 private theorem coherent_pages {S : Scheme.{u}}
@@ -105,6 +139,167 @@ theorem directImage_isBounded_coherent
         ((DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings S.toRingedSpace)) i).obj
           ((schemeDerivedDirectImage f).obj E))) := by
-  sorry
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  classical
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let B := SheafOfModules.{u} (moduleRings S.toRingedSpace)
+  let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
+  let P : ObjectProperty B := RingedSpace.IsCoherent S.toRingedSpace
+  let : Zero B := HasZeroObject.zero' B
+  have hclosure := RingedSpace.coherent_kernel_cokernel_sum S.toRingedSpace
+  have : P.ContainsZero := ⟨⟨(0 : SheafOfModules.{u} (moduleRings S.toRingedSpace)),
+    isZero_zero _, hclosure.2.2.2.1⟩⟩
+  have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ hclosure.2.2.2.2 _ _ e h⟩
+  obtain ⟨a, b, hab⟩ := hbounded
+  have : E.IsGE a := (DerivedCategory.isGE_iff E a).2
+    (fun i hi ↦ hab i (Or.inl hi))
+  have : Limits.PreservesFiniteLimits F := by
+    change Limits.PreservesFiniteLimits (Scheme.Modules.pushforward f)
+    infer_instance
+  have : IsGrothendieckAbelian.{u} X.Modules := Scheme.Modules.isGrothendieckAbelian X
+  obtain ⟨K, hK, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isGE E a
+  let Kplus : CochainComplex.Plus C := ⟨K, a, hK⟩
+  have ha : ∀ q : ℤ, q < a → Limits.IsZero (Kplus.obj.homology q) := by
+    intro q hq
+    exact (K.exactAt_of_isGE a q hq).isZero_homology
+  obtain ⟨Z, _, _, _, _, _, hsecond, hneg, _, _, _, _, _, _, _, _, _, hconv⟩ :=
+    exists_truncationHypercohomology F Kplus a ha
+  let eH (q : ℤ) := (DerivedCategory.homologyFunctor C q).mapIso e ≪≫
+    (DerivedCategory.homologyFunctorFactors C q).app K
+  have hKcoh (q : ℤ) : RingedSpace.IsCoherent X.toRingedSpace (Kplus.obj.homology q) :=
+    (RingedSpace.coherent_kernel_cokernel_sum X.toRingedSpace).2.2.2.2
+      _ _ (eH q) (hcoherent q)
+  have hKsupport (q : ℤ) : Modules.HasSupportProperOver f (Kplus.obj.homology q) := by
+    obtain ⟨Z, hZ, hp⟩ := hsupport q
+    refine ⟨Z, hZ.trans ?_, hp⟩
+    ext x
+    let e' := ((Scheme.Modules.toPresheaf X) ⋙
+      TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).mapIso (eH q)
+    exact not_congr (Equiv.subsingleton_congr (Equiv.ofBijective e'.hom
+      (ConcreteCategory.bijective_of_isIso e'.hom)))
+  have hsecondCoh : ∀ p q : ℤ, P (Z.E p q) := by
+    intro p q
+    by_cases hp : p < 0
+    · exact P.prop_of_isZero (hneg p q hp)
+    · obtain ⟨_, _, eK, _⟩ := hsecond p.toNat q
+      have hRq : P ((F.rightDerived p.toNat).obj (Kplus.obj.homology q)) := by
+        have h := isCoherent_schemeModuleHigherDirectImage_of_support_proper f
+          (Kplus.obj.homology q) (hKcoh q) (hKsupport q) (p.toNat : ℤ) (by omega)
+        exact P.prop_of_iso
+          (F.homologyRightDerivedFunctorObjSingleFunctorIso (Kplus.obj.homology q) p.toNat) h
+      have hEq : P (Z.E (p.toNat : ℤ) q) := P.prop_of_iso eK.symm hRq
+      simpa only [Int.toNat_of_nonneg (by omega : 0 ≤ p)] using hEq
+  have hpages : ∀ (r : ℕ) (p q : ℤ), P (Z.page r p q) :=
+    coherent_pages Z hsecondCoh
+  obtain ⟨_, _, H, hH, _, _, _, FH, _, _, _, _, _, _, _, _, _, _, hFHfull, hFHzero, _,
+    hnegative, hpositive, _⟩ := hconv
+  have hHCoh : ∀ n : ℤ, P (H n) := by
+    intro n
+    apply property_of_filtration P
+      (fun C hC h₁ h₃ ↦ (hclosure.2.1 C hC).2.1 h₁ h₃)
+      (FH n).step (FH n).antitone_step (max 0 (n - a + 1)).toNat (hFHfull n 0 (by omega))
+    · apply hFHzero
+      omega
+    · intro p
+      by_cases hp : p < 0
+      · have hz := (hnegative p (n - p) hp).1
+        have heq : p + (n - p) = n := by omega
+        rw [heq] at hz
+        exact P.prop_of_isZero hz
+      · obtain ⟨_, _, psi, grc, _, _, _, _, _⟩ :=
+          hpositive p (n - p) (by omega)
+        have hqc := hpages (max (p + 3) (n - p - a + 2)).toNat p (n - p)
+        have hqc' : P ((FH (p + (n - p))).gradedPiece p) :=
+          P.prop_of_iso (grc.symm ≪≫ psi).symm hqc
+        have heq : p + (n - p) = n := by omega
+        rw [heq] at hqc'
+        exact hqc'
+  have hcohOut : ∀ n : ℤ, P ((DerivedCategory.homologyFunctor B n).obj
+      ((schemeDerivedDirectImage f).obj E)) := by
+    intro n
+    have hQ : P ((DerivedCategory.homologyFunctor B n).obj
+        (F.rightDerivedFunctor.obj (DerivedCategory.Q.obj K))) := by
+      simpa only [hH] using hHCoh n
+    exact P.prop_of_iso
+      ((DerivedCategory.homologyFunctor B n).mapIso
+        ((schemeDerivedDirectImage f).mapIso e)).symm hQ
+  have hbelow : ∀ n : ℤ, n < a → IsZero ((DerivedCategory.homologyFunctor B n).obj
+      ((schemeDerivedDirectImage f).obj E)) := by
+    intro n hn
+    have heq : (FH n).step 0 = ⊤ := hFHfull n 0 (by omega)
+    have hbot := hFHzero n 0 (by omega : n - a + 1 ≤ 0)
+    have hz : IsZero (H n) := by
+      have hb : IsZero ((FH n).step 0 : B) := by
+        rw [hbot]
+        exact (isZero_zero _).of_iso Subobject.botCoeIsoZero
+      rw [heq] at hb
+      exact hb.of_iso (asIso (⊤ : Subobject (H n)).arrow).symm
+    have hzQ : IsZero ((DerivedCategory.homologyFunctor B n).obj
+        (F.rightDerivedFunctor.obj (DerivedCategory.Q.obj K))) := by
+      simpa only [hH] using hz
+    exact hzQ.of_iso ((DerivedCategory.homologyFunctor B n).mapIso
+      ((schemeDerivedDirectImage f).mapIso e))
+  choose N hN using fun q : ℤ ↦ moduleHigherDirectImage_eventually_isZero f
+    (Kplus.obj.homology q) (hKcoh q) (hKsupport q)
+  let c : ℕ := (Finset.Icc a b).sup (fun q ↦ N q + q.toNat)
+  have hEabove (p q : ℤ) (hn : (c : ℤ) < p + q) : IsZero (Z.E p q) := by
+    by_cases hp : p < 0
+    · exact hneg p q hp
+    · obtain ⟨_, _, eK, _⟩ := hsecond p.toNat q
+      have hRq : IsZero ((F.rightDerived p.toNat).obj (Kplus.obj.homology q)) := by
+        by_cases hq : q ∈ Finset.Icc a b
+        · have hc : N q + q.toNat ≤ c := Finset.le_sup (f := fun q ↦ N q + q.toNat) hq
+          exact hN q p.toNat (by
+            have hq' : q ≤ (q.toNat : ℤ) := by omega
+            omega)
+        · have hz := (hab q (by simpa only [Finset.mem_Icc, not_and_or, not_le] using hq))
+          have hzK : IsZero (Kplus.obj.homology q) := hz.of_iso (eH q).symm
+          exact (F.rightDerived p.toNat).map_isZero hzK
+      have hz : IsZero (Z.E (p.toNat : ℤ) q) := hRq.of_iso eK
+      simpa only [Int.toNat_of_nonneg (by omega : 0 ≤ p)] using hz
+  have habove : ∃ c : ℤ, ∀ n : ℤ, c < n →
+      IsZero ((DerivedCategory.homologyFunctor B n).obj
+        ((schemeDerivedDirectImage f).obj E)) := by
+    refine ⟨c, ?_⟩
+    intro n hn
+    have hz : IsZero (H n) := by
+      have : ObjectProperty.IsClosedUnderIsomorphisms (IsZero (C := B)) :=
+        ⟨fun e h ↦ h.of_iso e.symm⟩
+      apply property_of_filtration (IsZero (C := B))
+        (fun C hC h₁ h₃ ↦ hC.exact.isZero_of_both_isZero h₁ h₃)
+        (FH n).step (FH n).antitone_step (max 0 (n - a + 1)).toNat (hFHfull n 0 (by omega))
+      · apply hFHzero
+        omega
+      · intro p
+        by_cases hp : p < 0
+        · have hz := (hnegative p (n - p) hp).1
+          have heq : p + (n - p) = n := by omega
+          rw [heq] at hz
+          exact hz
+        · obtain ⟨_, _, psi, grc, _, _, _, _, _⟩ := hpositive p (n - p) (by omega)
+          have hzpages (r : ℕ) : IsZero ((Z.pageCouple r).E p (n - p)) := by
+            induction r with
+            | zero => exact hEabove p (n - p) (by omega)
+            | succ r ih =>
+              have : Epi ((Z.pageCouple r).derivedEProjection p (n - p)) := by
+                dsimp [BigradedExactCouple.derivedEProjection, BigradedExactCouple.derivedE]
+                infer_instance
+              exact IsZero.of_epi ((Z.pageCouple r).derivedEProjection p (n - p))
+                (IsZero.of_mono (kernel.ι ((Z.pageCouple r).d p (n - p))) ih)
+          have hz : IsZero (Z.page (max (p + 3) (n - p - a + 2)).toNat p (n - p)) :=
+            hzpages ((max (p + 3) (n - p - a + 2)).toNat - 2)
+          have hz' := hz.of_iso (grc.symm ≪≫ psi)
+          have heq : p + (n - p) = n := by omega
+          rw [heq] at hz'
+          exact hz'
+    have hzQ : IsZero ((DerivedCategory.homologyFunctor B n).obj
+        (F.rightDerivedFunctor.obj (DerivedCategory.Q.obj K))) := by
+      simpa only [hH] using hz
+    exact hzQ.of_iso ((DerivedCategory.homologyFunctor B n).mapIso
+      ((schemeDerivedDirectImage f).mapIso e))
+  obtain ⟨c, hc⟩ := habove
+  refine ⟨⟨a, c, ?_⟩, hcohOut⟩
+  intro n hn
+  exact hn.elim (hbelow n) (hc n)
 
 end AlgebraicGeometry.Scheme
