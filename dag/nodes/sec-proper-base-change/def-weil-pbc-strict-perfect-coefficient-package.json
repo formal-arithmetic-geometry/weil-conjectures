@@ -120,30 +120,25 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-c674583d0",
-  "group": "Q19",
+  "reviewer": "NT-stage2-Codex-683bf137e",
+  "group": "Q33",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable modules, all eight dependencies, sources, canonical maps, universes, edge cases, verbatim signatures, and report sections. All four sibling modules passed scompile.py with exit 0 and no diagnostics. No fixes needed; branch unchanged."
+  "note": "Independent review completed; all clauses and dependency interfaces match, universe repair is justified, and both modules passed per-file scompile checks without diagnostics. Branch unchanged."
  },
  "lean": {
-  "module": "Sheaf.Paper.StrictPerfectPackageOnSite",
-  "declaration": "AlgebraicGeometry.Scheme.IsProEtaleSitePerfect",
+  "module": "Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses",
+  "declaration": "SheafOfModules.StrictPerfectCoefficientRepresentationOfUniverses",
   "declarations": [
-   "SheafOfModules.StrictPerfectCoefficientPackageOnSite",
-   "AlgebraicGeometry.Scheme.strictPerfectSliceSheafify",
-   "AlgebraicGeometry.Scheme.strictPerfectSliceLocallyBijective",
-   "AlgebraicGeometry.Scheme.IsProEtaleLocallyStrictPerfect",
-   "AlgebraicGeometry.Scheme.IsProEtaleSitePerfect",
-   "SheafOfModules.IsLocallyStrictPerfectComplexOnSite",
-   "SheafOfModules.IsPerfectOnSmallRingedSite",
-   "SheafOfModules.SiteStrictPerfectCoefficientRepresentation"
+   "SheafOfModules.IsLocallyStrictPerfectComplexOfUniverses",
+   "SheafOfModules.IsPerfectOnRingedSiteOfUniverses",
+   "SheafOfModules.StrictPerfectCoefficientRepresentationOfUniverses"
   ],
-  "file": "lean/Sheaf/Paper/StrictPerfectPackageOnSite.lean",
-  "statement": "def IsProEtaleSitePerfect (X : Scheme.{u}) (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (Q : DerivedCategory (proEtaleRingModules X R)) : Prop",
+  "file": "lean/Sheaf/Paper/StrictPerfectCoefficientPackageOfUniverses.lean",
+  "statement": "structure StrictPerfectCoefficientRepresentationOfUniverses (R : Sheaf J CommRingCat.{max uC vC r}) (U : C) [HasDerivedCategory.{w} (SheafOfModules.{max uC vC r} (((sheafCompose J (forget₂ CommRingCat.{max uC vC r} RingCat.{max uC vC r})).obj R).over U))] (Q : DerivedCategory (SheafOfModules.{max uC vC r} (((sheafCompose J (forget₂ CommRingCat.{max uC vC r} RingCat.{max uC vC r})).obj R).over U)))",
   "branch": "newtargets-dag",
-  "by": "Q19",
+  "by": "Q33",
   "date": "2026-10-16",
   "existing": false,
-  "note": "The recorded package equates site object, morphism, and coefficient universes and cannot instantiate the original small pro-etale site. Reexport it, generalize exactly its splitting data to independent universes, and give its actual-site locally bounded covering-sieve and perfect derived-object predicates. Bounds and ranks vary with the cover member. Return repair L: retain the published IsLocallyStrictPerfectComplexOnSite, IsPerfectOnSmallRingedSite, and SiteStrictPerfectCoefficientRepresentation interfaces unchanged; the pro-etale predicates specialize these generic definitions. This preserves the imports used by PerfectProjectionFormula and ProjectionFormulaIdentityCompactification."
+  "note": "The recorded StrictPerfectCoefficientPackageOnSite is reused, not copied. The latest IsPerfectOnSmallRingedSite and SiteStrictPerfectCoefficientRepresentation interfaces fix coefficients at the site-object universe u+1. They cannot accept independent larger coefficient universe max r (t+1) on the small pro-etale site of object universe t+1 and morphism universe t. Generalize only the local-perfectness and representation wrappers to independent coefficient size. Original degreewise, ring-module and constant-sheaf constructions remain imported."
  }
 }

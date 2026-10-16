@@ -17,7 +17,9 @@
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-completed-integral-coefficients",
   "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients"
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-integral-derived-operations"
  ],
  "proof": [],
  "proof_deps": [],
@@ -177,5 +179,34 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-758c58e9a (reviewer sub-agent of L); spot-checked: Read the full item, source, unit/chapter route, five dependency statements, and required review materials. The repaired definition matches all four source clauses, preserves the raw rational localization and cover requirement, removes the unsupported triangle-tower equivalence, and has no proof steps or new nodes. Edge cases, coefficient categories, scalar-extension/base-change interfaces, duplicate searches, and Mathlib searches were checked. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-683bf137e",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Independent review completed; all clauses and dependency interfaces match, universe repair is justified, and both modules passed per-file scompile checks without diagnostics. Branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SitePerfectComplex",
+  "declaration": "WeilConjectures.IsFiniteCoefficientSitePerfect",
+  "declarations": [
+   "WeilConjectures.sitePerfectOverAbSheafify",
+   "WeilConjectures.sitePerfectOverAbLocallyBijective",
+   "WeilConjectures.IsFiniteCoefficientSitePerfect",
+   "WeilConjectures.IsIntegralCoefficientSitePerfect",
+   "WeilConjectures.sitePerfectRationalAmbient",
+   "WeilConjectures.IsRationalFiniteProjectiveTerm",
+   "WeilConjectures.IsRationalCoefficientSitePerfect",
+   "WeilConjectures.IsAlgebraicallyClosedCoefficientSitePerfect"
+  ],
+  "file": "lean/Sheaf/Paper/SitePerfectComplex.lean",
+  "statement": "def IsFiniteCoefficientSitePerfect (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t}) (n : ℕ) (K : @DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)) _ _ (HasDerivedCategory.standard _)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Four coefficient-stage predicates. Finite and integral models use actual covering sieves and bounded degreewise finite-free retracts; rational term splittings occur only after raw scalar localization. The common-stage predicate uses an actual finite coefficient field and an isomorphism in the pair category."
  }
 }
