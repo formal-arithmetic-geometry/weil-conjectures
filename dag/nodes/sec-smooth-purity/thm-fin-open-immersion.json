@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-fin-open-immersion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Open-immersion direct images",
@@ -15,32 +15,164 @@
  "stmt_deps": [
   "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-scheme-conventions",
-  "sbc-def-coefficient-conventions"
+  "sbc-def-coefficient-conventions",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image"
  ],
  "proof": [
   {
-   "text": "The bounded constructibility assertion is\n[cor-fin-deligne-open-finite-coefficients], applied to the sheaf\n$F$ in degree zero. To check the support assertion, choose an\ninjective resolution $F\\to I^\\bullet$ on $U_{\\rm et}$.\nThe section definition in [def-weil-pbc-direct-image] gives\n$j^*j_*I^\\bullet=I^\\bullet$. Exactness of the inverse image in\n[def-weil-pbc-inverse-image] gives\n$j^*\\mathcal H^q(Rj_*F)=\\mathcal H^q(F)=0$ for $q>0$.",
+   "text": "Place $F$ in degree zero. Its only nonzero cohomology sheaf is $F$, so $F[0]\\in D^b_c(U,\\Lambda)$ by [def-weil-pbc-constructible-complexes]. The coefficient convention supplies a positive integer $N$ annihilating the finite commutative ring $\\Lambda$, invertible in $k$, and $j$ is an open immersion of finite-type $k$-schemes. Thus [cor-fin-deligne-open-finite-coefficients] applies with $A=\\Lambda$ and $K=F[0]$. It gives $Rj_*F[0]\\in D^b_c(X,\\Lambda)$. Unpacking bounded constructibility gives constructibility of every $R^qj_*F$ and an integer $b$ such that $R^qj_*F=0$ for $q>b$.",
    "uses": [
-    "cor-fin-deligne-open-finite-coefficients",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image"
+    "def-weil-pbc-constructible-complexes",
+    "sbc-def-coefficient-conventions",
+    "cor-fin-deligne-open-finite-coefficients"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-finiteness/thm-fin-open-immersion.md",
+    "place": "Proof, first sentence (finite-coefficient corollary applied in degree zero)"
+   }
+  },
+  {
+   "text": "Use the module-sheaf version of [def-weil-pbc-direct-image]: for the constant coefficient ring $\\Lambda$, choose a bounded-below K-injective complex $I^\\bullet$ representing $F[0]$, with injective terms. The statement of that node supplies this representative and computes $Rj_*F[0]\\cong Q(j_*I^\\bullet)$. This is a resolution in $\\operatorname{Mod}(U_{\\mathrm{et}},\\Lambda)$; no change of coefficient category or passage to derived abelian direct images is made.",
+   "uses": [
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-finiteness/thm-fin-open-immersion.md",
+    "place": "Proof, sentence choosing an injective resolution; module version of the derived-direct-image definition"
+   }
+  },
+  {
+   "text": "The first assertion of [lem-kun-open-immersion-restriction] says that the abelian-sheaf counit $j^{-1}j_*G\\to G$ is a natural isomorphism. By [prop-weil-pbc-inverse-image-modules-exact], the module inverse image and direct image have these same underlying abelian functors and the same counit. Hence for every module sheaf $M$ its counit $j^*j_*M\\to M$ is an isomorphism of module sheaves: the inverse of an invertible $\\Lambda$-linear map is $\\Lambda$-linear, since applying the original map to the scalar-linearity equation proves it. Apply this to each $I^r$. Naturality with respect to $d_I^r$ makes these counits an isomorphism of complexes $j^*j_*I^\\bullet\\cong I^\\bullet$. Only the underived counit assertion of the cited node is used, not its derived-global-sections clause.",
+   "uses": [
+    "lem-kun-open-immersion-restriction",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-finiteness/thm-fin-open-immersion.md",
+    "place": "Proof, identification j^*j_*I = I; explicit counit argument"
+   }
+  },
+  {
+   "text": "The module inverse image $j^*$ is exact by [prop-weil-pbc-inverse-image-modules-exact]. In the formula $\\mathcal H^q(C)=\\ker(d_C^q)/\\operatorname{im}(d_C^{q-1})$ of [def-weil-derived-cohomology-sheaves], exactness preserves the kernel, the image (a kernel of a cokernel), and the quotient. Consequently $j^*\\mathcal H^q(j_*I^\\bullet)\\cong\\mathcal H^q(j^*j_*I^\\bullet)$. By Step 3 the latter is $\\mathcal H^q(I^\\bullet)=\\mathcal H^q(F[0])$, which is zero for $q>0$. Step 2 identifies the left side with the restriction $j^*R^qj_*F$. This proves the remaining assertion.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-finiteness/thm-fin-open-immersion.md",
+    "place": "Proof, final sentence; exactness is Stacks Tag 04JC (lemma-flat-pullback-exact, sites-modules.tex) and the kernel/image computation is written out"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-constructible-complexes",
+  "sbc-def-coefficient-conventions",
   "cor-fin-deligne-open-finite-coefficients",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image"
+  "lem-kun-open-immersion-restriction",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-derived-cohomology-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-finiteness/thm-fin-open-immersion.md",
-  "place": "## Proof"
+  "place": "Proof, expanded with the existing counit and module exactness nodes; read in the launcher literature cache"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "higher direct images under an open immersion of finite type schemes constructible and vanish in high degrees with restriction to the open vanishing",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Hom.opensRange_comp, AlgebraicGeometry.Scheme.Modules.restrictFunctor, Topology.IsConstructible.image_of_isOpenEmbedding, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.image_preimage_is_empty, AlgebraicGeometry.Scheme.Hom.comp_image",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not assert etale open-immersion direct-image finiteness"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.boundedConstructible, IsZero, rightDerivedLowerStar",
+   "results": "loogle: unknown identifier 'DerivedCategory.boundedConstructible'",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not assert etale open-immersion direct-image finiteness"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible.*rightDerivedLowerStar|isZero.*upperStar.*rightDerivedLowerStar",
+   "results": "No hits returned. The requested subdirectory SixFunctors/Etale does not exist in Mathlib; this is not evidence of absence. Superseded by the AlgebraicGeometry grep below.",
+   "date": "2026-10-16",
+   "verdict": "invalid search scope: requested directory absent; no absence conclusion",
+   "subdirectory": "SixFunctors/Etale"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct images of constructible sheaves under open immersions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology open immersion derived pushforward preserves bounded constructible complexes with finite invertible torsion coefficients",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, TopCat.Presheaf.isSheaf_of_isOpenEmbedding, AlgebraicGeometry.Scheme.Hom.instIsContinuousOpensOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.Modules.instFullPushforward, CategoryTheory.Functor.sheafPushforwardCocontinuous, Topology.IsOpenEmbedding.compatiblePreserving",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not assert etale open-immersion direct-image finiteness"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|[Ee]tale.*[Cc]ohomology|[Cc]onstructible[Ss]heaf",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not assert etale open-immersion direct-image finiteness",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\"",
+   "results": "Hits: CategoryTheory.Functor.HasRightDerivedFunctor, CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension', CategoryTheory.Functor.HasRightDerivedFunctor.mk, CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension, CategoryTheory.Functor.hasRightDerivedFunctor_iff, CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.IsRightDerivedFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not assert etale open-immersion direct-image finiteness"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible.*open|rightDerivedLowerStar.*open",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state etale open-immersion direct-image finiteness or its higher-image restriction assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image open immersion constructible finite torsion etale",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, Topology.IsConstructible.image_of_isOpenEmbedding, AlgebraicGeometry.Scheme.OpenCover.instIsOpenImmersionMapI₀FunctorOfLocallyDirected, Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding, AlgebraicGeometry.Scheme.Hom.opensRange_comp, AlgebraicGeometry.Scheme.IsLocallyDirected.V, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isOpenImmersion",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state etale open-immersion direct-image finiteness or its higher-image restriction assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "right derived direct image open immersion constructible",
+   "results": "loogle: <input>:1:27: expected end of input",
+   "date": "2026-10-16",
+   "verdict": "invalid query: parser rejected natural-language input; no absence conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\"",
+   "results": "Hits: CategoryTheory.Functor.HasRightDerivedFunctor, CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension', CategoryTheory.Functor.HasRightDerivedFunctor.mk, CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension, CategoryTheory.Functor.hasRightDerivedFunctor_iff, CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state etale open-immersion direct-image finiteness or its higher-image restriction assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of higher direct image sheaf along open embedding vanishes outside degree zero",
+   "results": "Hits: TopCat.Presheaf.isSheaf_of_isOpenEmbedding, AlgebraicGeometry.Scheme.restrict_presheaf_obj, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.restrict_presheaf_map, AlgebraicGeometry.Scheme.ofRestrict_app, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrict_obj",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state etale open-immersion direct-image finiteness or its higher-image restriction assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -72,5 +204,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-finiteness"
+ "unit": "sk-prop-sf-finiteness",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-fin-open-immersion",
+  "worker": "stage1",
+  "summary": "Retained the statement and the finite-coefficient open-image route. Expanded the proof into degree-zero specialization, module injective representative, module counit isomorphism and explicit kernel/image cohomology calculation. Replaced the incorrect citation of the inverse-image definition for exactness by the existing module exactness theorem. Existing DAG nodes suffice; no new nodes.",
+  "blueprint": "Realizes the entire sole proof paragraph: its first sentence is Step 1, injective-resolution sentence is Step 2, j^*j_*I identification is Step 3, and exactness/support conclusion is Step 4. No blueprint node has the same entire three-clause statement; the finite-coefficient corollary and counit lemma are respectively stronger in the input-complex and underived-counit directions, not duplicates of this item.",
+  "tool_uses": [
+   {
+    "node": "cor-fin-deligne-open-finite-coefficients",
+    "why": "The unit step 1 explicitly names this finite-coefficient open-image engine. Apply it in degree zero; the Deligne route is retained."
+   },
+   {
+    "node": "lem-kun-open-immersion-restriction",
+    "why": "Only the general underived open-immersion counit isomorphism is used; this is a generic tool needed for the restriction calculation, with no substitute in this unit."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness and the module/abelian compatibility of constant-coefficient inverse image are generic tools; the unit route has no theorem supplying them."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-fin-deligne-open-finite-coefficients",
+  "lem-kun-open-immersion-restriction",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-7a8467514",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-7a8467514 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, cited node statements, blueprint/unit/chapter route, and literature checks. The four proof steps correctly establish bounded constructibility, eventual vanishing, and positive-degree restriction vanishing under the exact finite-coefficient hypotheses. Existing dependencies are appropriate, citations are complete, no duplicates or cycles occur, edge cases pass, and the corrected exactness citation is valid. review.md records the checks."
+ }
 }
