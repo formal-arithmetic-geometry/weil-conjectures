@@ -31,7 +31,8 @@
   "def-weil-pbc-simplicial-set",
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-kan-quillen-right-proper",
-  "lem-coef-sorted-simplicial-algebra-model"
+  "lem-coef-sorted-simplicial-algebra-model",
+  "lem-coef-cofibrant-homotopy-groupoid-completion"
  ],
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
@@ -255,5 +256,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dafced0ba",
+  "group": "Q55",
+  "result": "fix",
+  "note": "All node clauses checked against the Lean: E0/e/IsEquivalenceVertex; the homotopy-equivalence subcategory via fullSubcomplex and the real inclusion j; f0 sends the arrow to e, f≫j=f0; replacement R with rF.hom=counit_F; degreewise completions CF/CE with strict universal property and r; Z,i,p with weak equivalence+cofibration and fibration; IsMappingwisePullback with the right orientation; hG with both projection equations recovering f0; all four G(a,b) weakly contractible. Dependency module cofibrant_homotopy_groupoid_completion matches its node and DegreewiseGroupoidCompletion has real data. Node records change only lean (plus a cycle-free stmt_dep). Both files compile cleanly via nt_compile.py. FINDING (H3, stronger assumption on a bound hypothesis): FixedCofibrantReplacement required the counit to be a mappingwise Kan fibration; the node and proof need only cofibrancy and weak equivalence, and the extra field excludes the Dwyer–Kan standard resolution (F_*F = F) that makes rF satisfiable, so the citer countable-equivalence-witness might have no admissible R. Fixed by fixes/TwoObjectLocalizationPullback.lean (field removed, docstring updated, signature unchanged, compiles cleanly) and fixes/lem-coef-two-object-localization-pullback.report.md (table row corrected, maintainer note). Non-blocking: definition-only import of the downstream SimplicialIntervalLifting, the same as the landed CountableEquivalenceWitness."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.TwoObjectLocalizationPullback",
+  "declaration": "SSet.Bergner.two_object_localization_pullback",
+  "declarations": [
+   "SSet.Bergner.IsHomotopyEquivalenceSubcategory",
+   "SSet.Bergner.IsMappingwisePullback",
+   "SSet.Bergner.FixedCofibrantReplacement",
+   "SSet.Bergner.replacedWalkingArrow",
+   "SSet.Bergner.two_object_localization_pullback"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/TwoObjectLocalizationPullback.lean",
+  "statement": "theorem two_object_localization_pullback (E₀ : Fixed Two.{u}) (e : (E₀.Hom (ULift.up false) (ULift.up true)) _⦋0⦌) (he : IsEquivalenceVertex E₀ e) : ∃ (f₀ : U (𝟙_ SSet.{u}) ⟶ E₀) (E : Fixed Two.{u}) (j : E ⟶ E₀) (f : U (𝟙_ SSet.{u}) ⟶ E), (f₀.map (ULift.up false) (ULift.up true)).app _ PUnit.unit = e ∧ IsHomotopyEquivalenceSubcategory E E₀ j ∧ f ≫ j = f₀ ∧ ∀ (R : FixedCofibrantReplacement Two.{u}) (rF : R.Q.obj (U (𝟙_ SSet.{u})) ≅ U (𝟙_ SSet.{u})), rF.hom = R.counit.app (U (𝟙_ SSet.{u})) → ∀ (CF : DegreewiseGroupoidCompletion (R.Q.obj (U (𝟙_ SSet.{u})))) (CE : DegreewiseGroupoidCompletion (R.Q.obj E)) (r : CF.target ⟶ CE.target), CF.unit ≫ r = R.Q.map f ≫ CE.unit → ∀ (Z : Fixed Two.{u}) (i : CF.target ⟶ Z) (p : Z ⟶ CE.target), i ≫ p = r → fixedWeakEquivalences Two.{u} i → fixedCofibrations Two.{u} i → fixedFibrations Two.{u} p → ∀ (G : Fixed Two.{u}) (gE : G ⟶ R.Q.obj E) (gZ : G ⟶ Z), IsMappingwisePullback CE.unit p gE gZ → ∃ hG : U (𝟙_ SSet.{u}) ⟶ G, hG ≫ gE = replacedWalkingArrow f R rF ∧ hG ≫ gZ = rF.inv ≫ CF.unit ≫ i ∧ hG ≫ gE ≫ R.counit.app E ≫ j = f₀ ∧ ∀ (a b : Two.{u}), Enhanced.IsContractible (G.Hom a b)",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

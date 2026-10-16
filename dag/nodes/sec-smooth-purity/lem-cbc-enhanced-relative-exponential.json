@@ -21,7 +21,8 @@
  },
  "stmt_deps": [
   "def-coef-infinity-fibrations",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-relative-exponential-restriction"
  ],
  "proof": [
   {
@@ -282,5 +283,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3afd0a3aa",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Read the node, its three statement dependencies (InfinityFibrations, EnhancedDiagramsCones IsEquivalenceEdge, RelativeExponentialRestriction in full), the module, the report (Worker report and Second reading by Q64) and check-brief2. The node diff against the base changes only lean and adds stmt_dep lem-coef-infinity-relative-exponential-restriction (owner of the reused construction; no cycle). Every clause matches HTT 3.2.2.13 with Y=S×A: cocartesianFibration of Q as a conclusion; Bijective canonical uncurry plus naturality in K; IsIso of the canonical curry fibre comparison to ihom(B_s)A; and an iff edge criterion over all cartesian edges of the pulled-back Δ¹. Universes: S,B in u and A in max u v with v independent, via uliftFunctor (ULift.up s checked by rfl). The four helpers are real constructions with no sorryAx per #print axioms; only the theorem is sorry. Docstrings carry the source, blueprint and all 7 proof steps; lean.statement is verbatim. Edge cases B=∅, S=Δ⁰, degenerate σ and degenerate b are correct. nt_compile.py --json rc 0 with no messages. Only a cosmetic 'Corollary the project server' text artifact in the report prose."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnhancedRelativeExponential",
+  "declaration": "SSet.Enhanced.enhancedRelativeExponential",
+  "declarations": [
+   "SSet.Enhanced.relativeExponentialEvaluation",
+   "SSet.Enhanced.relativeExponentialUncurry",
+   "SSet.Enhanced.relativeExponentialSimplexMap",
+   "SSet.Enhanced.relativeExponentialFiberComparison",
+   "SSet.Enhanced.enhancedRelativeExponential"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnhancedRelativeExponential.lean",
+  "statement": "theorem enhancedRelativeExponential (S B : SSet.{u}) (A : SSet.{max u v}) (p : B ⟶ S) [Quasicategory S] [Quasicategory B] [Quasicategory A] (hp : cartesianFibration p) : (∃ (hS : Quasicategory (SSet.uliftFunctor.{v, u}.obj S)) (hQ : Quasicategory (relativeExponential A (SSet.uliftFunctor.{v, u}.map p))), @cocartesianFibration (relativeExponential A (SSet.uliftFunctor.{v, u}.map p)) (SSet.uliftFunctor.{v, u}.obj S) (relativeExponentialProjection A (SSet.uliftFunctor.{v, u}.map p)) hQ hS) ∧ (∀ (K : SSet.{max u v}) (k : K ⟶ SSet.uliftFunctor.{v, u}.obj S), Function.Bijective (relativeExponentialUncurry A (SSet.uliftFunctor.{v, u}.map p) k)) ∧ (∀ (K L : SSet.{max u v}) (k : K ⟶ SSet.uliftFunctor.{v, u}.obj S) (a : L ⟶ K) (F : {F : K ⟶ relativeExponential A (SSet.uliftFunctor.{v, u}.map p) // F ≫ relativeExponentialProjection A (SSet.uliftFunctor.{v, u}.map p) = k}), relativeExponentialUncurry A (SSet.uliftFunctor.{v, u}.map p) (a ≫ k) ⟨a ≫ F.val, by simp [Category.assoc, F.property]⟩ = pullback.map (a ≫ k) (SSet.uliftFunctor.{v, u}.map p) k (SSet.uliftFunctor.{v, u}.map p) a (𝟙 (SSet.uliftFunctor.{v, u}.obj B)) (𝟙 (SSet.uliftFunctor.{v, u}.obj S)) (by simp) (by simp) ≫ relativeExponentialUncurry A (SSet.uliftFunctor.{v, u}.map p) k F) ∧ (∀ s : S.obj (op ⦋0⦌), IsIso (relativeExponentialFiberComparison A (SSet.uliftFunctor.{v, u}.map p) (ULift.up s))) ∧ (∀ (e : Δ[1] ⟶ relativeExponential A (SSet.uliftFunctor.{v, u}.map p)), IsCocartesianEdge (relativeExponentialProjection A (SSet.uliftFunctor.{v, u}.map p)) e ↔ ∀ (b : Δ[1] ⟶ pullback (SSet.yonedaEquiv.symm (SSet.yonedaEquiv e).sigma) (SSet.uliftFunctor.{v, u}.map p)), IsCartesianEdge (pullback.fst (SSet.yonedaEquiv.symm (SSet.yonedaEquiv e).sigma) (SSet.uliftFunctor.{v, u}.map p)) b → IsEquivalenceEdge A (SSet.yonedaEquiv (b ≫ relativeExponentialSimplexMap (SSet.uliftFunctor.{v, u}.map p) (SSet.yonedaEquiv e))))",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the existing relativeExponential construction and its projection. Canonical evaluation, uncurrying, simplex maps and fibre comparison are real constructions. The theorem retains arbitrary containing target universes through SSet.uliftFunctor, asserts bijectivity and naturality of the canonical uncurrying map, isomorphy of the canonical fibre map, and the full cartesian-edge iff criterion."
  }
 }

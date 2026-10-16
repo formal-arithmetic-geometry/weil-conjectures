@@ -255,5 +255,28 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-3060e50b2 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-cofibrant-completion-nerve-equivalence and the statement of every cited node in full. The item statement is unchanged and correct. It is DK 9.5 (if direction); its definition of cofibrancy is the LLP of I_O, the initial object of the sorted-algebra model. Edge cases checked: O empty, empty mapping sets, a simplicial group, and a resolution of the monoid N, where the hypothesis fails. It involves no base-change morphism or coefficient category and does not change the route. I checked all seven steps. Step 1: Ex^inf preserves finite limits, so D keeps strict inverses and pi0 C is a groupoid. Step 2: product and coproduct invariance through k-products, the diagonal lemma, then two-out-of-three for Nf. Step 3: the composition order is right (u*v* = (vu)*), and the homotopy is continuous because [0,1] is compact Hausdorff. Step 4: the bar faces are right (d_p gives h∘u_p), rows are Kan, and the projections are Kan fibrations, also with empty fibers. Step 5: the tail-composite fiber map is right; with fiber detection for the identity base, every square is a homotopy pullback, and all hypotheses of the equifibered-diagonal node hold. Step 6: the column is N(V_q/y), contracted through the terminal object 1_y and the natural-transformation node. Step 7: pullback invariance plus naturality give f_{x,y}, then j by two-out-of-three. proof_deps is the union of uses, all lemmas are in the same unit, and there are no tool_uses. The new node is DK 9.2 and is true: free category and free groupoid nerves are both weakly equivalent to the graph, then the diagonal lemma and a retract give the cofibrant case. It is strictly weaker than the item, not one of its clauses. It is statement-only and self-contained, with five real searches and a correct blueprint from/via. My DAG search found no duplicate. Computing the dependency closures confirms that the free-category-nerve, free-calculus and simplicial-inversion nodes all reach the item, so citing them would close a cycle; the item is acyclic. Limitation: Dwyer–Kan is not archived and the network is blocked, so I could not reopen the printed pages. Both nodes stay agent-written with the WANTED line. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dafced0ba",
+  "group": "Q55",
+  "result": "fix",
+  "note": "All node clauses checked against the Lean: E0/e/IsEquivalenceVertex; the homotopy-equivalence subcategory via fullSubcomplex and the real inclusion j; f0 sends the arrow to e, f≫j=f0; replacement R with rF.hom=counit_F; degreewise completions CF/CE with strict universal property and r; Z,i,p with weak equivalence+cofibration and fibration; IsMappingwisePullback with the right orientation; hG with both projection equations recovering f0; all four G(a,b) weakly contractible. Dependency module cofibrant_homotopy_groupoid_completion matches its node and DegreewiseGroupoidCompletion has real data. Node records change only lean (plus a cycle-free stmt_dep). Both files compile cleanly via nt_compile.py. FINDING (H3, stronger assumption on a bound hypothesis): FixedCofibrantReplacement required the counit to be a mappingwise Kan fibration; the node and proof need only cofibrancy and weak equivalence, and the extra field excludes the Dwyer–Kan standard resolution (F_*F = F) that makes rF satisfiable, so the citer countable-equivalence-witness might have no admissible R. Fixed by fixes/TwoObjectLocalizationPullback.lean (field removed, docstring updated, signature unchanged, compiles cleanly) and fixes/lem-coef-two-object-localization-pullback.report.md (table row corrected, maintainer note). Non-blocking: definition-only import of the downstream SimplicialIntervalLifting, the same as the landed CountableEquivalenceWitness."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CofibrantHomotopyGroupoidCompletion",
+  "declaration": "SSet.Bergner.cofibrant_homotopy_groupoid_completion",
+  "declarations": [
+   "SSet.Bergner.DegreewiseGroupoidCompletion",
+   "SSet.Bergner.cofibrant_homotopy_groupoid_completion"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/CofibrantHomotopyGroupoidCompletion.lean",
+  "statement": "theorem cofibrant_homotopy_groupoid_completion {O : Type u} (A : Fixed O) (hcof : fixedCofibrations O (discreteInclusion A)) (hgroupoid : ∀ (a b : O) (f : (A.Hom a b) _⦋0⦌), IsEquivalenceVertex A f) (C : DegreewiseGroupoidCompletion A) : ∀ (a b : O), Enhanced.IsWeakHomotopyEquivalence ((C.unit.map a b))",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The genuine proof prerequisite had no lean record or Mathlib match. Supplied its fixed-object cofibrant homotopy-groupoid comparison, using the existing Degree/degreeFunctor/IsDegreewiseLocalization interface to characterize completion uniquely. Only this node theorem is postponed; no completion data is chosen from a mere existence assertion."
  }
 }
