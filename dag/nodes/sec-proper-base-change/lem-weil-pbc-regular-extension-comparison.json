@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-regular-extension-comparison",
+ "kind": "statement",
+ "title": "Naturality of the scalar-extension regular-module comparison",
+ "statement": "Let C be a braided monoidal category with coequalizers preserved by tensoring on either side, let R be a commutative monoid object, let S be a monoid object, and let φ:R→S be a monoid homomorphism. Extension of scalars sends the regular R-module canonically to the regular S-module. If regular endomorphisms p of R and q of S satisfy p.hom≫φ=φ≫q.hom, the scalar-extended p is intertwined with q by this regular-module isomorphism.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1): integral coefficient framework and kernel-closure application; the displayed continuous-function pivot argument is an agent reduction, not a matrix argument written out in Lemma 6.8.7"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "View φ as an R-linear map from regular R to the restriction of regular S; linearity is precisely multiplicativity of φ. Its adjoint f is a map from the scalar extension of regular R to regular S.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct g in the reverse direction as the unique S-linear regular lift of the image of 1 under the adjunction unit. The identity g f=id follows by evaluation on 1 and preservation of the unit by φ. For f g=id, apply the extension-restriction Hom equivalence and then regular-module extensionality on 1. This produces the isomorphism using actual maps, without any existence choice.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For naturality, apply the same Hom equivalence. Naturality of the extension unit, computed from its tensor-coequalizer formula, moves the extended p past the unit. The extension Hom beta identity reduces the resulting equation exactly to p.hom≫φ=φ≫q.hom.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, continuous-function pivot reduction, Naturality of the scalar-extension regular-module comparison",
+  "note": "This is the explicitly stated subargument used by the delivered Lean proof. The paper supplies the integral framework, not this internal matrix API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of an internal regular module intertwines endomorphisms with commuting coefficient maps",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of the regular module is canonically isomorphic to the regular module and intertwines endomorphisms",
+   "date": "2026-10-16",
+   "results": "8 hits: IsBaseChange.endHom_one, IsAzumaya.tensorEquivEnd, LinearMap.ringLmapEquivSelf, ModuleCat.extendScalarsId_inv_app_apply, LinearMap.ringLmapEquivSelf_apply, ModuleCat.extendScalarsId, ModuleCat.homEquiv_extendScalarsId, ModuleCat.extendScalarsId_hom_app_one_tmul",
+   "verdict": "Supplies elementary ingredients but no internal module-object pivot statement; the needed comparisons and constructions are proved explicitly in Lean."
+  },
+  {
+   "tool": "grep",
+   "query": "regularLift|extendScalarsRegularIso",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Supplies elementary ingredients but no internal module-object pivot statement; the needed comparisons and constructions are proved explicitly in Lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralMatrixPivotCover",
+  "date": "2026-10-16",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof step 1: integral constructible input to the finite-extension exchange; kernel closure needed by integral coefficient reduction in the continuous-coefficient target specialization; Naturality of the scalar-extension regular-module comparison",
+   "via": [
+    "lem-weil-pbc-integral-matrix-pivot-cover",
+    "lem-weil-pbc-integral-constructible-kernels",
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RegularExtensionComparison",
+  "file": "lean/Sheaf/Paper/RegularExtensionComparison.lean",
+  "declaration": "CategoryTheory.Mod.regularExtensionIso_naturality",
+  "statement": "theorem regularExtensionIso_naturality\n    (p : regular R ⟶ regular R) (q : regular S ⟶ regular S)\n    (h : p.hom ≫ φ = φ ≫ q.hom) :\n    (extendScalars φ).map p ≫ (regularExtensionIso φ).hom =\n      (regularExtensionIso φ).hom ≫ q",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930597",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

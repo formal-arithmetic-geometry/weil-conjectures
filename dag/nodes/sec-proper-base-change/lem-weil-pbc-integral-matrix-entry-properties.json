@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-integral-matrix-entry-properties",
+ "kind": "statement",
+ "title": "Cancellation, rational invertibility, and row division for a dominating entry",
+ "statement": "Use the integral continuous coefficient objects of [def-weil-pbc-continuous-integral-coefficients]. Let a finite-free integral matrix on X be realized as continuous O_E-functions by compatible integral and field coefficient realizations. Suppose its (i,j)-entry p is nowhere zero and dominates the norm of every matrix entry at every point. Then the corresponding regular-module endomorphism p is monic, becomes invertible after extension to E, and integrally divides every entry in row i: there are regular-module endomorphisms q_k with q_k p equal to the (i,k)-entry.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1): integral coefficient framework and kernel-closure application; the displayed continuous-function pivot argument is an agent reduction, not a matrix argument written out in Lemma 6.8.7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-integral-matrix-analytic-cover"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate all row entries by the supplied integral realization. Section linearity identifies the conjugated endomorphisms with their continuous coefficient functions. Pointwise cancellation makes the pivot monic, and equivalence of module categories reflects this monomorphism.",
+   "uses": [
+    "lem-weil-pbc-continuous-regular-functions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The compatibility with the field realization and the nowhere-zero pivot coefficient imply rational invertibility by the regular multiplier theorem.",
+   "uses": [
+    "lem-weil-pbc-integral-regular-rational-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each row entry b, construct the actual continuous quotient b/p in E. The norm inequality and nonvanishing show its norm is at most one, so subtype it to O_E. Its multiplication endomorphism followed by the pivot agrees with b pointwise; coefficient injectivity proves equality. Lift the quotient maps back through the coefficient-realization equivalence and verify the equations by faithfulness.",
+   "uses": [
+    "lem-weil-pbc-continuous-regular-functions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-regular-functions",
+  "lem-weil-pbc-integral-regular-rational-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, continuous-function pivot reduction, Cancellation, rational invertibility, and row division for a dominating entry",
+  "note": "This is the explicitly stated subargument used by the delivered Lean proof. The paper supplies the integral framework, not this internal matrix API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A nowhere zero continuous multiplier on a regular sheaf of modules is invertible over a field",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous function with values in a valuation ring divides another continuous function if it is nowhere zero and dominates its norm",
+   "date": "2026-10-16",
+   "results": "8 hits: Valuation.Integers.dvd_of_le, Valuation.Integers.le_of_dvd, Valuation.Integers.dvd_iff_le, Valuation.Integers.dvdNotUnit_iff_lt, Valuation.Integers.le_iff_dvd, IsDiscreteValuationRing.dvd_of_toWithBotNat_le_toWithBotNat, IsDiscreteValuationRing.toWithBotNat_le_toWithBotNat_iff, IsDedekindDomain.HeightOneSpectrum.valuation_div_le_one_iff",
+   "verdict": "Supplies elementary ingredients but no internal module-object pivot statement; the needed comparisons and constructions are proved explicitly in Lean."
+  },
+  {
+   "tool": "grep",
+   "query": "continuous.*(div|inv)|regular.*(unit|hom)",
+   "date": "2026-10-16",
+   "results": "12 hits: Mathlib/Topology/ContinuousMap/Ideals.lean, Mathlib/Topology/ContinuousMap/Star.lean, Mathlib/Topology/ContinuousMap/Units.lean, Mathlib/Topology/ContinuousMap/Units.lean, Mathlib/Topology/ContinuousMap/ContinuousMapZero.lean, Mathlib/Topology/ContinuousMap/Basic.lean, Mathlib/Topology/ContinuousMap/Basic.lean, Mathlib/Topology/ContinuousMap/Algebra.lean",
+   "verdict": "Supplies elementary ingredients but no internal module-object pivot statement; the needed comparisons and constructions are proved explicitly in Lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralMatrixPivotCover",
+  "date": "2026-10-16",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof step 1: integral constructible input to the finite-extension exchange; kernel closure needed by integral coefficient reduction in the continuous-coefficient target specialization; Cancellation, rational invertibility, and row division for a dominating entry",
+   "via": [
+    "lem-weil-pbc-integral-matrix-pivot-cover",
+    "lem-weil-pbc-integral-constructible-kernels",
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralMatrixEntryProperties",
+  "file": "lean/Sheaf/Paper/IntegralMatrixEntryProperties.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrix_entry_properties",
+  "statement": "theorem integralMatrix_entry_properties (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u})\n    (e : condensedRingObj (integralCoeff ℓ E) X ⟶\n      (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj\n        (continuousMapRingSheaf X (continuousIntegers ℓ E))) [IsIso e] [IsMonHom e]\n    (eE : condensedRingObj (Profinite.continuousMapRingObj E) X ⟶\n      (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj\n        (continuousMapRingSheaf X E)) [IsIso eE] [IsMonHom eE]\n    (he : coefficientMap (integralScalarMap ℓ E) X ≫ eE =\n      e ≫ integralFunctionInclusion ℓ E X)\n    {n t : ℕ}\n    (f : Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) n ⟶\n      Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) t)\n    (i : Fin t) (j : Fin n)\n    (hzero : ∀ x, (integralMatrixFunctions ℓ E X e f i j x).val ≠ 0)\n    (hbound : ∀ r s x, ‖(integralMatrixFunctions ℓ E X e f r s x).val‖ ≤\n      ‖(integralMatrixFunctions ℓ E X e f i j x).val‖) :\n    let p := biproduct.ι _ j ≫ f ≫ biproduct.π _ i\n    Mono p ∧\n      IsIso ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).map p) ∧\n      ∃ q : Fin n →\n        (Mod.regular (condensedRingObj (integralCoeff ℓ E) X) ⟶\n          Mod.regular (condensedRingObj (integralCoeff ℓ E) X)),\n        ∀ k, q k ≫ p = biproduct.ι _ k ≫ f ≫ biproduct.π _ i",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930597",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

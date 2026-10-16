@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-finite-biproduct-pivot",
+ "kind": "statement",
+ "title": "A specified divided row gives a finite biproduct pivot block",
+ "statement": "Let C be a preadditive category with finite biproducts and binary biproducts. Let P be an object, f:P^n→P^t, and i∈Fin t, j∈Fin n. Write p=ι_j f π_i. Suppose q_k:P→P satisfies q_k p=ι_k f π_i for every k. Then there are m<n and s, isomorphisms P^n≅P⊕P^m and P^t≅P⊕P^s, and maps r:P^m→P, c:P→P^s, d:P^m→P^s, under which f is the block matrix ((p,r p),(c,d)).",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1): integral coefficient framework and kernel-closure application; the displayed continuous-function pivot argument is an agent reduction, not a matrix argument written out in Lemma 6.8.7"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The indices i and j exclude zero ranks. For positive rank use j.succAbove and i.succAbove to enumerate the complements of the selected indices. Define a split isomorphism by projecting to the selected summand and to all complementary summands. Its inverse is the corresponding biproduct desc; verify the two identities on inclusions and projections, using succAboveCases.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take m=n-1 and s=t-1. Define r as the biproduct desc of the q-values on complementary source indices. Define c and d by composing f with the selected source inclusion and the complementary source inclusion respectively, followed by the complementary target projection.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Check the four blocks. The selected-selected block is p by construction. The complementary-selected block is r followed by p by the equations q_k p=ι_k f π_i and finite-biproduct extensionality. The other two blocks are c and d by construction. Binary-biproduct extensionality gives the full matrix equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, continuous-function pivot reduction, A specified divided row gives a finite biproduct pivot block",
+  "note": "This is the explicitly stated subargument used by the delivered Lean proof. The paper supplies the integral framework, not this internal matrix API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite biproduct can be split into a chosen summand and the remaining summands, and a divided row gives a pivot block matrix",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Split a finite biproduct into a selected summand and the remaining summands",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.Limits.hasBiproduct_of_total, CategoryTheory.Limits.biprod.decomp_hom_to, CategoryTheory.Limits.biprod.decomp_hom_from, CategoryTheory.Limits.biproduct.toSubtype_fromSubtype, CategoryTheory.Limits.biproduct.ι_π, CategoryTheory.Limits.biproduct.toSubtype_eq_desc, CategoryTheory.Limits.biproduct.ι_π_assoc, CategoryTheory.Limits.biproduct.total",
+   "verdict": "Supplies elementary ingredients but no internal module-object pivot statement; the needed comparisons and constructions are proved explicitly in Lean."
+  },
+  {
+   "tool": "grep",
+   "query": "regularLift|extendScalarsRegularIso",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Supplies elementary ingredients but no internal module-object pivot statement; the needed comparisons and constructions are proved explicitly in Lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralMatrixPivotCover",
+  "date": "2026-10-16",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof step 1: integral constructible input to the finite-extension exchange; kernel closure needed by integral coefficient reduction in the continuous-coefficient target specialization; A specified divided row gives a finite biproduct pivot block",
+   "via": [
+    "lem-weil-pbc-integral-matrix-pivot-cover",
+    "lem-weil-pbc-integral-constructible-kernels",
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteBiproductPivot",
+  "file": "lean/Sheaf/Paper/FiniteBiproductPivot.lean",
+  "declaration": "CategoryTheory.Limits.finiteBiproduct_pivot",
+  "statement": "theorem finiteBiproduct_pivot {P : C} {n t : ℕ}\n    (f : (⨁ fun _ : Fin n ↦ P) ⟶ ⨁ fun _ : Fin t ↦ P)\n    (i : Fin t) (j : Fin n)\n    (q : Fin n → (P ⟶ P))\n    (hq : ∀ k, q k ≫ (biproduct.ι (fun _ : Fin n ↦ P) j ≫ f ≫\n      biproduct.π (fun _ : Fin t ↦ P) i) =\n      biproduct.ι (fun _ : Fin n ↦ P) k ≫ f ≫ biproduct.π (fun _ : Fin t ↦ P) i) :\n    ∃ (m s : ℕ), m < n ∧\n      ∃ (eA : (⨁ fun _ : Fin n ↦ P) ≅ P ⊞ (⨁ fun _ : Fin m ↦ P))\n        (eB : (⨁ fun _ : Fin t ↦ P) ≅ P ⊞ (⨁ fun _ : Fin s ↦ P))\n        (r : (⨁ fun _ : Fin m ↦ P) ⟶ P)\n        (c : P ⟶ ⨁ fun _ : Fin s ↦ P)\n        (d : (⨁ fun _ : Fin m ↦ P) ⟶ ⨁ fun _ : Fin s ↦ P),\n        eA.inv ≫ f ≫ eB.hom =\n          biprod.lift\n            (biprod.desc (biproduct.ι (fun _ : Fin n ↦ P) j ≫ f ≫\n      biproduct.π (fun _ : Fin t ↦ P) i)\n              (r ≫ (biproduct.ι (fun _ : Fin n ↦ P) j ≫ f ≫\n      biproduct.π (fun _ : Fin t ↦ P) i)))\n            (biprod.desc c d)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930597",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

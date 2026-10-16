@@ -26,45 +26,49 @@
  ],
  "proof": [
   {
-   "text": "Refine the given rational finite-free cokernel cover. Use the continuous-function coefficient comparison and its compatibility with pullback to express the chosen finite free matrix as continuous O_E-valued functions, naturally under restriction.",
+   "text": "When a is zero, choose the singleton identity covering. Functoriality of zero gives the left alternative on every member directly, without any analytic assumption.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose the supplied global basis of A and a global finite-free basis of B. Conjugate a to a morphism f₀ between standard finite free modules. The cokernel map isomorphism induced by the two bases, mapped by extension of scalars and then by pullback, transports the rational cokernel covering to f₀.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the analytic coefficient covering for f₀. If its pullback is zero, the identity a=eA₀.hom≫f₀≫eB₀.inv and functoriality give the zero branch for a. Otherwise the explicitly constructed standard pullback bases identify it with a continuous matrix having a specified nowhere-zero dominating entry under the canonical integral realization. Naturality of the proved canonical comparison supplies the compatible field realization.",
    "uses": [
-    "def-weil-pbc-continuous-integral-coefficients",
-    "lem-weil-pbc-integral-scalar-contractive"
+    "lem-weil-pbc-integral-matrix-analytic-cover",
+    "lem-weil-pbc-continuous-coefficient-realizations"
    ],
    "elementary": false
   },
   {
-   "text": "On a piece where the rational cokernel has rank q and the target rank t, exact evaluation at an algebraically closed residue field identifies its fibre with the cokernel of the evaluated continuous matrix. Hence the pointwise E-rank is t-q throughout the piece. If the matrix vanishes at one point, this rank is zero and every continuous entry is zero everywhere on the piece. This supplies the zero alternative, including zero source or target ranks.",
+   "text": "In the nonzero branch use the entry-properties theorem to obtain a monic, rationally invertible pivot and regular quotient maps for its row.",
    "uses": [
-    "lem-weil-pbc-geometric-field-proetale-evaluation"
+    "lem-weil-pbc-integral-matrix-entry-properties"
    ],
    "elementary": false
   },
   {
-   "text": "At every point of a nonzero rank piece choose an entry of maximal norm. On the finite intersection of the opens where the changes of all entries have norm strictly smaller than that pivot norm, the pivot is nowhere zero with constant norm and dominates all entries, by the ultrametric inequality. The first-row entries divided by the pivot are continuous E-valued functions with norm at most one, hence actual integral coefficient sections.",
+   "text": "Apply the finite biproduct pivot theorem to these quotient equations. It gives the smaller complementary source rank, finite-free target complement, and block equality. Compose its two splitting isomorphisms with the actual standard pullback bases and the pulled-back original global bases. Functoriality and reassociation identify the conjugated original map with the analytic matrix. These are exactly the witnesses in the unchanged pivot-cover statement.",
    "uses": [
-    "def-weil-pbc-continuous-integral-coefficients"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Permute the pivot column and row first and split off the corresponding regular summands. The remaining source rank is n-1<n. Assemble the first-row quotients into r and the remaining blocks into c and d; equality of continuous functions gives the displayed block identity. Pointwise cancellation on every site object proves that the pivot endomorphism is monic. After extension to E, multiplication by its continuous reciprocal is its inverse. Compose these open coverings with the supplied pro-etale covering. The empty scheme uses the empty cover.",
-   "uses": [
-    "lem-weil-pbc-integral-scalar-contractive"
+    "lem-weil-pbc-finite-biproduct-pivot"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-continuous-integral-coefficients",
-  "lem-weil-pbc-integral-scalar-contractive",
-  "lem-weil-pbc-geometric-field-proetale-evaluation"
+  "lem-weil-pbc-integral-matrix-analytic-cover",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-integral-matrix-entry-properties",
+  "lem-weil-pbc-finite-biproduct-pivot"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "One nonzero pivot in the continuous matrix argument",
-  "note": "H2: strictly one pivot, without any kernel or finite-presentation conclusion. The parent proves strong induction and all cokernel, scalar-extension and stratification glue. Remaining formal work is coefficient matrix realization, exact fibre evaluation and its rank consequence, and assembly of the scalar pivot into the finite free bases. Edge cases checked: empty X, either zero rank, zero matrix, nonzero rank, and failure without the rational cokernel hypothesis. Blueprint ancestry follows the explicit target pointer to thm-weil-pbc-finite-extension because the ancestor helper cannot follow the existing module-valued created.item."
+  "place": "Section 6.8, analytic chart followed by integral division and finite biproduct assembly",
+  "note": "C3 proves the finite-biproduct permutation/splitting, division by a dominating integral coefficient, sectionwise cancellation, the continuous field reciprocal, scalar-extension conjugation, canonical coefficient compatibility, and the reduction from arbitrary free modules to standard finite free matrices with their rational cokernel cover. Only the analytic covering/rank computation remains in integralMatrix_analytic_cover. The original theorem signature and unit route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -128,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-ee755",
-  "group": "H2",
+  "reviewer": "COMPILER",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261016T021741-L-1028349",
+  "landing": "20261016T043121-L-2930597",
   "kind": "interface",
-  "note": "independent Codex review: Matched both Lean declarations with their DAG statements and the kernel reduction with its recorded dependencies; delivered modules, axiom probes, and direct importer IntegralConstructibleSerre compile cleanly. Existing signatures are unchanged; the sole new sorry is the documented pivot theorem."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

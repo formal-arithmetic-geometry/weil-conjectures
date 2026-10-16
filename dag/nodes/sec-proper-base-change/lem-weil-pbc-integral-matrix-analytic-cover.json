@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-integral-matrix-analytic-cover",
+ "kind": "statement",
+ "title": "Analytic coefficient charts with a dominating nowhere-zero matrix entry",
+ "statement": "Let ℓ be prime, E a normed field over ℚ_ℓ, and R_X the actual integral continuous coefficient object of [def-weil-pbc-continuous-integral-coefficients]. Let a:R_X^n→R_X^t₀ be a morphism between standard finite free modules. Suppose the scalar extension of coker(a) is pro-etale locally finite free. There is a pro-etale covering V→X on which the normalized coefficient pullback of a is either zero or its continuous matrix in the explicitly constructed standard pullback bases and canonical coefficient realization of [lem-weil-pbc-continuous-coefficient-realizations] has a nowhere-zero entry dominating all entries pointwise in norm. The matrix functions are explicitly the conjugated regular endomorphisms evaluated on the unit section. This statement contains no row divisibility, monomorphism, rational IsIso, complementary rank, or block decomposition, and does not have to supply basis data, the coefficient realization, or its compatibility with scalar extension.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1): integral coefficient framework and kernel-closure application; the displayed continuous-function pivot argument is an agent reduction, not a matrix argument written out in Lemma 6.8.7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-continuous-coefficient-realizations"
+ ],
+ "proof": [
+  {
+   "text": "Refine the supplied rational cokernel covering. Choose the finite-free bases of the given rational cokernel on each member; Use the actual standard-basis pullback isomorphisms defined by preservation of finite biproducts, the regular-module pullback isomorphism, and the coefficient pullback comparison. The actual condensed coefficients identify with continuous O_E and E functions by the totally disconnected coefficient realization, compatible with the inclusion O_E→E and with restriction.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients",
+    "lem-weil-pbc-continuous-coefficient-realizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the rational cokernel presentation at an algebraically closed residue field over every point. Exact evaluation preserves the cokernel and finite free modules and identifies the entries with their point values. Thus the evaluated rank is target rank minus the fixed rational cokernel rank. If it vanishes at one point, it vanishes everywhere on that member and the continuous matrix is zero. This gives the zero branch, also for empty matrices or empty members.",
+   "uses": [
+    "lem-weil-pbc-geometric-field-proetale-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a member of positive rank every point has a nonzero entry. Choose a maximal norm entry at that point. Intersect the finitely many open neighborhoods where the change of each entry has norm smaller than that positive maximum. The ultrametric inequality keeps the selected pivot norm constant and bounds every other entry. Restrict the bases and compatible coefficient realizations to these opens, and compose these open coverings with the original pro-etale covering.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-geometric-field-proetale-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, continuous-function pivot reduction, Analytic coefficient charts with a dominating nowhere-zero matrix entry",
+  "note": "This is the explicitly stated subargument used by the delivered Lean proof. The paper supplies the integral framework, not this internal matrix API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A matrix of continuous nonarchimedean integral functions with locally free rational cokernel admits a cover with a dominating nowhere zero entry",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finitely many continuous functions into a nonarchimedean field, near a point with a nonzero maximum norm one function dominates and is nowhere zero",
+   "date": "2026-10-16",
+   "results": "8 hits: IsNonarchimedean.finset_image_add, IsNonarchimedean.finset_image_add_of_nonempty, HasCompactMulSupport.exists_pos_le_norm, IsUltrametricDist.exists_norm_finset_sum_le, IsUltrametricDist.exists_norm_finset_prod_le, exists_enorm_lt', IsUltrametricDist.exists_norm_finset_sum_le_of_nonempty, IsUltrametricDist.exists_norm_finset_prod_le_of_nonempty",
+   "verdict": "No matching analytic covering theorem was found. The delivered Lean proves the coefficient comparisons, standard pullback bases, and algebraic pivot API. The analytic covering and pointwise-rank argument remain in the named theorem integralMatrix_analytic_cover, whose proof is sorry."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(pivot|norm.*max)|norm.*sub.*norm.*eq",
+   "date": "2026-10-16",
+   "results": "25 hits: Mathlib/Topology/CWComplex/Classical/Basic.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/Geometry/Euclidean/Triangle.lean, Mathlib/Geometry/Euclidean/Projection.lean, Mathlib/Algebra/Lie/CartanSubalgebra.lean, Mathlib/Geometry/Euclidean/Angle/Unoriented/Affine.lean, Mathlib/Geometry/Euclidean/Angle/Unoriented/Affine.lean, Mathlib/Geometry/Euclidean/Angle/Unoriented/Affine.lean",
+   "verdict": "No matching analytic covering theorem was found. The delivered Lean proves the coefficient comparisons, standard pullback bases, and algebraic pivot API. The analytic covering and pointwise-rank argument remain in the named theorem integralMatrix_analytic_cover, whose proof is sorry."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralMatrixPivotCover",
+  "date": "2026-10-16",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof step 1: integral constructible input to the finite-extension exchange; kernel closure needed by integral coefficient reduction in the continuous-coefficient target specialization; Analytic coefficient charts with a dominating nowhere-zero matrix entry",
+   "via": [
+    "lem-weil-pbc-integral-matrix-pivot-cover",
+    "lem-weil-pbc-integral-constructible-kernels",
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralMatrixAnalyticCover",
+  "file": "lean/Sheaf/Paper/IntegralMatrixAnalyticCover.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralMatrix_analytic_cover",
+  "statement": "theorem integralMatrix_analytic_cover (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    (n t₀ : ℕ) (X : Scheme.{u})\n    (a : Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) n ⟶\n      Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) t₀)\n    (hC : ∃ V : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ k,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (V.f k)).obj\n          (condensedRingObj (Profinite.continuousMapRingObj E) X))\n        (((ProEtale.upperStar Ab.{u + 1} (V.f k)).mapMod _).obj\n          ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj\n            (cokernel a)))) :\n    ∃ V : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ k,\n      let R := condensedRingObj (integralCoeff ℓ E) (V.X k)\n      let T := (ProEtale.upperStar Ab.{u + 1} (V.f k)).mapMod\n          (condensedRingObj (integralCoeff ℓ E) X) ⋙\n        Mod.comap (inv (condensedPullbackHom (integralCoeff ℓ E) (V.f k)))\n      let f := (integralFiniteFreePullbackIso ℓ E (V.f k) n).inv ≫ T.map a ≫\n        (integralFiniteFreePullbackIso ℓ E (V.f k) t₀).hom\n      T.map a = 0 ∨ ∃ (i : Fin t₀) (j : Fin n),\n        (∀ x, (integralMatrixFunctions ℓ E (V.X k)\n          (chartComparison (V.X k) (continuousIntegers ℓ E)) f i j x).val ≠ 0) ∧\n        ∀ r s x,\n          ‖(integralMatrixFunctions ℓ E (V.X k)\n            (chartComparison (V.X k) (continuousIntegers ℓ E)) f r s x).val‖ ≤\n          ‖(integralMatrixFunctions ℓ E (V.X k)\n            (chartComparison (V.X k) (continuousIntegers ℓ E)) f i j x).val‖",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930597",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-continuous-coefficient-realizations",
+ "kind": "statement",
+ "title": "Canonical continuous coefficient realizations commute with ring maps",
+ "statement": "Let X be a scheme and E,F be topological rings in Type 0. The canonical morphism from the condensed continuous E coefficient object pulled to X to the sheaf U↦C(U,E) is an actual adjoint of composition with the profinite test projection. It is a monoid morphism and, for totally disconnected E, is an isomorphism. For a continuous ring map φ:E→F, this comparison intertwines the pulled condensed coefficient map with postcomposition of continuous functions by φ. In particular the integral-to-field comparison square commutes.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1): integral coefficient framework and kernel-closure application; the displayed continuous-function pivot argument is an agent reduction, not a matrix argument written out in Lemma 6.8.7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Construct the adjoint map explicitly on profinite test sections by composition with the canonical profinite test projection. Its naturality follows from the projection formula. The corresponding ring-valued map shows it is a monoid homomorphism. The monoidal adjunction transfers this property to the actual comparison.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For totally disconnected coefficients, the already proved Type-0 comparison in IntegralScalarContractive is definitionally this actual construction. Its isomorphism theorem supplies the instance; nonarchimedean field extensions and their integer subrings satisfy the required total disconnectedness.",
+   "uses": [
+    "lem-weil-pbc-integral-scalar-contractive"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the inverse-image/direct-image Hom equivalence to the two composites for φ. Its naturality on both sides reduces the assertion to equality on profinite test sections. Both composites apply φ pointwise after composition with the test projection, so they are equal.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-weil-pbc-integral-scalar-contractive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, continuous-function pivot reduction, Canonical continuous coefficient realizations commute with ring maps",
+  "note": "This is the explicitly stated subargument used by the delivered Lean proof. The paper supplies the integral framework, not this internal matrix API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the canonical isomorphism from condensed continuous coefficient rings to continuous function sheaves on the pro etale site",
+   "date": "2026-10-16",
+   "results": "8 hits: CompHausLike.LocallyConstant.functorToPresheavesIso, CompHausLike.LocallyConstant.functorIso, SheafOfModules.pushforwardNatIso, Condensed.lanPresheafNatIso, SheafOfModules.pushforwardCongr.congr_simp, CondensedSet.hom_naturality_apply, CondensedMod.LocallyConstant.functorIsoDiscrete, CategoryTheory.Functor.sheafPushforwardContinuousComp",
+   "verdict": "Supplies elementary ingredients but no internal module-object pivot statement; the needed comparisons and constructions are proved explicitly in Lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison from condensed continuous ring functions to continuous coefficient sheaves is natural in continuous ring homomorphisms",
+   "date": "2026-10-16",
+   "results": "8 hits: CondensedMod.hom_naturality_apply, CondensedSet.hom_naturality_apply, LightCondMod.hom_naturality_apply, TopCat.commRingYoneda, LightCondSet.toTopCatMap_hom_apply, TopCat.continuousFunctions.map, LightCondSet.toTopCatMap, LightCondSet.hom_naturality_apply",
+   "verdict": "Supplies elementary ingredients but no internal module-object pivot statement; the needed comparisons and constructions are proved explicitly in Lean."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_(left|right)",
+   "date": "2026-10-16",
+   "results": "25 hits: Mathlib/Condensed/Light/Epi.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/Algebra/Category/Grp/Adjunctions.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean",
+   "verdict": "Supplies elementary ingredients but no internal module-object pivot statement; the needed comparisons and constructions are proved explicitly in Lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralMatrixPivotCover",
+  "date": "2026-10-16",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof step 1: integral constructible input to the finite-extension exchange; kernel closure needed by integral coefficient reduction in the continuous-coefficient target specialization; Canonical continuous coefficient realizations commute with ring maps",
+   "via": [
+    "lem-weil-pbc-integral-matrix-pivot-cover",
+    "lem-weil-pbc-integral-constructible-kernels",
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousCoefficientRealizations",
+  "file": "lean/Sheaf/Paper/ContinuousCoefficientRealizations.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.chartComparison_naturality",
+  "statement": "lemma chartComparison_naturality (X : Scheme.{u})\n    (E F : Type) [TopologicalSpace E] [Ring E] [IsTopologicalRing E]\n    [TopologicalSpace F] [Ring F] [IsTopologicalRing F]\n    (φ : E →+* F) (hφ : Continuous φ) :\n    (upperStarFromPoint X).map\n        ((sheafCompose (coherentTopology Profinite.{u})\n          (forget₂ RingCat.{u + 1} Ab.{u + 1})).map\n            (Profinite.continuousMapRingSheafMap φ hφ)) ≫ chartComparison X F =\n      chartComparison X E ≫ (sheafCompose (Scheme.ProEt.topology X)\n        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map\n          (continuousMapRingSheafMap X φ hφ)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930597",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

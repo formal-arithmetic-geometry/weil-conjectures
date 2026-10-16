@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-continuous-regular-functions",
+ "kind": "statement",
+ "title": "Continuous coefficients and inverses of regular-module endomorphisms",
+ "statement": "For a scheme X and a topological commutative ring O in Type 0, let R be the abelian sheaf underlying U↦C(U,O). A global continuous function b defines a regular R-module endomorphism by multiplying each section by the pullback of b. An arbitrary regular endomorphism g acts on a section a over U by a times the pullback of its global coefficient, namely its value on 1 over X. Coefficients determine endomorphisms and turn composition into multiplication. A nowhere-zero coefficient makes g monic when O is a domain, and makes g an isomorphism when O is a topological field with continuous inversion away from zero.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, Definition 6.8.10 and Proposition 6.8.11(1): integral coefficient framework and kernel-closure application; the displayed continuous-function pivot argument is an agent reduction, not a matrix argument written out in Lemma 6.8.7"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Construct multiplication sectionwise, check addition and naturality directly, and check module linearity on pure tensors. The sheaf tensor comparison reduces the latter equality to associativity in O.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved section-linearity identity for regular endomorphisms. Naturality along the unique U→X identifies g_U(1) with the restriction of g_X(1); hence g_U(a)=a·g_X(1)|U. This proves coefficient injectivity, the coefficient of a multiplier, and the product formula for composition.",
+   "uses": [
+    "lem-weil-pbc-integral-scalar-contractive"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A nowhere-zero coefficient cancels pointwise, so each component is injective; reflect monomorphisms through the sheaf and module forgetful functors. For a field, construct the actual continuous reciprocal b(x)=g_X(1)(x)⁻¹ and its multiplier. The product formula and coefficient injectivity prove both inverse identities, also when X is empty.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-scalar-contractive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, continuous-function pivot reduction, Continuous coefficients and inverses of regular-module endomorphisms",
+  "note": "This is the explicitly stated subargument used by the delivered Lean proof. The paper supplies the integral framework, not this internal matrix API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A nowhere zero continuous multiplier on a regular sheaf of modules is invertible over a field",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous function with values in a valuation ring divides another continuous function if it is nowhere zero and dominates its norm",
+   "date": "2026-10-16",
+   "results": "8 hits: Valuation.Integers.dvd_of_le, Valuation.Integers.le_of_dvd, Valuation.Integers.dvd_iff_le, Valuation.Integers.dvdNotUnit_iff_lt, Valuation.Integers.le_iff_dvd, IsDiscreteValuationRing.dvd_of_toWithBotNat_le_toWithBotNat, IsDiscreteValuationRing.toWithBotNat_le_toWithBotNat_iff, IsDedekindDomain.HeightOneSpectrum.valuation_div_le_one_iff",
+   "verdict": "Supplies elementary ingredients but no internal module-object pivot statement; the needed comparisons and constructions are proved explicitly in Lean."
+  },
+  {
+   "tool": "grep",
+   "query": "continuous.*(div|inv)|regular.*(unit|hom)",
+   "date": "2026-10-16",
+   "results": "12 hits: Mathlib/Topology/ContinuousMap/Ideals.lean, Mathlib/Topology/ContinuousMap/Star.lean, Mathlib/Topology/ContinuousMap/Units.lean, Mathlib/Topology/ContinuousMap/Units.lean, Mathlib/Topology/ContinuousMap/ContinuousMapZero.lean, Mathlib/Topology/ContinuousMap/Basic.lean, Mathlib/Topology/ContinuousMap/Basic.lean, Mathlib/Topology/ContinuousMap/Algebra.lean",
+   "verdict": "Supplies elementary ingredients but no internal module-object pivot statement; the needed comparisons and constructions are proved explicitly in Lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralMatrixPivotCover",
+  "date": "2026-10-16",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof step 1: integral constructible input to the finite-extension exchange; kernel closure needed by integral coefficient reduction in the continuous-coefficient target specialization; Continuous coefficients and inverses of regular-module endomorphisms",
+   "via": [
+    "lem-weil-pbc-integral-matrix-pivot-cover",
+    "lem-weil-pbc-integral-constructible-kernels",
+    "lem-weil-pbc-integral-reduction-conservative",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousRegularFunctions",
+  "file": "lean/Sheaf/Paper/ContinuousRegularFunctions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousRegular_field_isIso",
+  "statement": "lemma continuousRegular_field_isIso (X : Scheme.{u})\n    (K : Type) [Field K] [TopologicalSpace K] [IsTopologicalRing K] [ContinuousInv₀ K]\n    (g : Mod.regular (continuousAbRing X K) ⟶ Mod.regular (continuousAbRing X K))\n    (hg : ∀ x, regularCoefficient X K g x ≠ 0) : IsIso g",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930597",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
