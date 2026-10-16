@@ -199,5 +199,23 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q47-a40dafe06 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, current blueprint route and cited source passages in full. All three steps preserve the exact hypotheses and correctly select a compactification over Y. Edge cases, whole-DAG reuse candidates and dependency cycles checked; no repair or additional tool_uses needed. Detailed findings are in review.md."
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-dc-setting"
+ "unit": "sk-def-sfb-dc-setting",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CompactificationOverField",
+  "declaration": "AlgebraicGeometry.compactificationOverField",
+  "file": "lean/Sheaf/SixFunctors/CompactificationOverField.lean",
+  "statement": "def compactificationOverField (k : Type u) [Field k] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] : Compactification.BoundaryCompactification f",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-997878fd8",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Lean def compactificationOverField = Classical.choice (compactification_over_base (S := Spec (.of k)) f) : BoundaryCompactification f matches the node and blueprint source (order 1776) clause by clause: k-schemes and IsOver f; X separated and finite type (LocallyOfFiniteType + QuasiCompact, recorded convention); Y separated and quasi-compact, no finite type added; comm f = i ≫ g, open immersion, QuasiCompactObjects property, IsProper; no uniqueness claimed. Base qcqs inferred from Spec affine, no extra assumptions; single forced universe u. Only the node's lean field changed; lean.statement matches the file signature exactly. Docstrings carry source and blueprint tag; not hollow; no local proof. Worker report and Second reading sections present. nt_compile --json of module plus test module clean, no warnings; #check and #print confirm signature and fields; sorryAx only from the dependency theorem. No findings."
+ }
 }
