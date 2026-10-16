@@ -1,6 +1,6 @@
 # Work queue
 
-60 items; claim with `tools/claim.py next <group> [--stage N]`.
+61 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,10 +8,11 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (60)
+## Stage 3: modules to prove (61)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
+| `WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory` | 3 | 1 | disputed |
 | `WeilConjectures.PoincareDuality.Poincare` | 0 | 1 | proof |
 | `WeilConjectures.SmoothPurity.Defs` | 0 | 1 | proof |
 | `WeilConjectures.PoincareDuality.Verdier` | 1 | 1 | proof |
