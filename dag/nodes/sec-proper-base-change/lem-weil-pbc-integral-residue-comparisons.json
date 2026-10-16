@@ -12,14 +12,20 @@
  ],
  "proof": [
   {
-   "text": "Derive the canonical scalar-pull isomorphism on K-flat resolutions. Associativity of relative tensor and the coefficient-pullback isomorphism identify its two functors. Check the composition equation on resolutions using the associativity pentagon and uniqueness of derived comparisons.",
+   "text": "Use the projection normalization theorem to obtain coherent pull comparisons c, a strong monoidal structure on each integral derived pullback, the source tensor identification s, and the input-side identification e. Construct the target isomorphism as the proved c.restrictPushIso at reduction of K followed by Rf_* applied to e. The stated identity then conjugates the restricted push component to the projection map.",
    "uses": [
+    "new-integral-residue-projection-normalization",
     "def-weil-pbc-residue-exchange-comparison-interface"
    ],
    "elementary": false
   },
   {
-   "text": "The assumed tensor description identifies the restricted direct-image mate with the perfect-coefficient projection comparison. Tensor by a dualizable coefficient has its dual as tensor adjoint, so both sides are right adjoints of the same tensor-pull functor and the projection comparison is invertible by its counit characterization. Exact faithful restriction detects derived isomorphisms through homology. Apply this to every morphism.",
+   "text": "Apply the proved Adjunction.isIso_rightAdjointProjectionMap_app_app_of_isDualizable to hPerfect Y and the actual pull-push adjunction. The derived integral module category admits a braiding. The normalized projection map is invertible, hence so is the restricted component of c.push f after cancelling the target isomorphism.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For every degree, the exact scalar-restriction homology comparison identifies homology of the restricted component with restriction of its homology. Forgetting the module action detects isomorphisms, so the original component is invertible. Apply NatIso.isIso_of_isIso_app.",
    "uses": [
     "def-weil-pbc-continuous-integral-coefficients"
    ],
@@ -27,6 +33,7 @@
   }
  ],
  "proof_deps": [
+  "new-integral-residue-projection-normalization",
   "def-weil-pbc-residue-exchange-comparison-interface",
   "def-weil-pbc-continuous-integral-coefficients"
  ],
@@ -34,7 +41,7 @@
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
-  "note": "C2 stage-3 reduction. Numbered steps are implemented in the attached Lean declaration, except the explicitly reported remaining coefficient-comparison theorem."
+  "note": "B4 stage-3 decomposition: the dualizable projection argument and homology reflection are fully proved in Lean. The remaining structural normalization has no dualizability assumption and no invertibility conclusion."
  },
  "mathlib_searches": [
   {
@@ -154,11 +161,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-eeaf7",
-  "group": "C2",
+  "reviewer": "X-61c2e",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261016T050636-L-3699071",
+  "landing": "20261016T070240-L-770386",
   "kind": "interface",
-  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched against DAG statements and dependencies; all eight modules, the sole direct importer, and 22 axiom probes compile cleanly."
+  "note": "independent Codex review: Matched unchanged theorem signature and extracted interface with the published library, and delivered proofs and normalization statement with their DAG nodes; all three modules, sole direct importer Sheaf.Paper.BoundedExchangeAmbient, and 13 axiom probes compile cleanly. Only the reported normalization hole contributes sorryAx."
  }
 }

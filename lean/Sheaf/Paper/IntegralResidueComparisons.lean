@@ -5,23 +5,18 @@ Authors: SHEAF group C2
 -/
 module
 
-public import Sheaf.Paper.ContinuousIntegralCoefficients
+public import Sheaf.Paper.IntegralResidueComparisonInterface
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
-public import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.Paper.IntegralResidueProjectionNormalization
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
 
-/-! # Coherent perfect coefficient comparisons for integral reduction
-
-Source: Bhatt--Scholze, Lemma 6.5.9(3), and associativity of derived coefficient change.
-(blueprint: lem-weil-pbc-integral-residue-comparisons)
--/
-
-set_option backward.defeqAttrib.useBackward true
+/-! # Perfect integral residue coefficient comparisons -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
@@ -29,118 +24,6 @@ local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
-
-/-- Ambient derived category used by the coefficient-comparison interface. -/
-abbrev residueExchangeDerived
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
-    (X : Scheme.{u}) :=
-  DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (condensedRingObj Λ X))
-
-/-- Derived pullback with its domain and codomain exposed explicitly. -/
-@[irreducible] noncomputable def residueExchangeUpperStar
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    residueExchangeDerived Λ Y ⥤ residueExchangeDerived Λ X :=
-  L((f)^*⟦Λ⟧)
-
-/-- Derived direct image with its domain and codomain exposed explicitly. -/
-@[irreducible] noncomputable def residueExchangeLowerStar
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    residueExchangeDerived Λ X ⥤ residueExchangeDerived Λ Y :=
-  R((f)_*⟦Λ⟧)
-
-/-- The actual derived adjunction, expressed through the typed functor interface. -/
-@[irreducible] noncomputable def residueExchangeAdjunction
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    residueExchangeUpperStar Λ f ⊣ residueExchangeLowerStar Λ f :=
-  by
-    unfold residueExchangeUpperStar residueExchangeLowerStar
-    exact derivedUpperStarLowerStarAdjunction Λ f
-
-/-- The actual derived coefficient reduction with its two categories exposed. -/
-@[irreducible] noncomputable def residueExchangeReduction (X : Scheme.{u}) :
-    residueExchangeDerived (integralCoeff ℓ E) X ⥤
-      residueExchangeDerived
-        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) X :=
-  integralReduction ℓ E X
-
-/-- The library's canonical composition comparison, with typed pull functors. -/
-@[irreducible] noncomputable def residueExchangeUpperStarComp
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
-    residueExchangeUpperStar Λ (f ≫ g) ≅
-      residueExchangeUpperStar Λ g ⋙ residueExchangeUpperStar Λ f :=
-  by
-    unfold residueExchangeUpperStar
-    exact leftDerivedUpperStarComp Λ f g
-
-/-- Pullback comparisons for actual derived reduction, compatible with composition.
-The data concern arbitrary schemes and morphisms, without constructibility or base change.
-Source: Bhatt--Scholze, Remark 6.8.15, and associativity of derived tensor.
-(blueprint: def-weil-pbc-residue-exchange-comparison-interface). -/
-structure IntegralResiduePullComparisons where
-  pull : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
-    residueExchangeUpperStar (integralCoeff ℓ E) f ⋙ residueExchangeReduction ℓ E X ≅
-      residueExchangeReduction ℓ E Y ⋙
-        residueExchangeUpperStar
-          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f
-  comp : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-      (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
-        (condensedRingObj (integralCoeff ℓ E) Z))),
-    (residueExchangeReduction ℓ E X).map
-        ((residueExchangeUpperStarComp (integralCoeff ℓ E) f g).hom.app K) ≫
-        (pull f).hom.app ((residueExchangeUpperStar (integralCoeff ℓ E) g).obj K) ≫
-        (residueExchangeUpperStar
-          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).map
-          ((pull g).hom.app K) =
-      (pull (f ≫ g)).hom.app K ≫
-        (residueExchangeUpperStarComp
-          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f g).hom.app
-            ((residueExchangeReduction ℓ E Z).obj K)
-
-namespace IntegralResiduePullComparisons
-
-variable {ℓ E} (c : IntegralResiduePullComparisons.{u} ℓ E)
-
-/-- The direct-image comparison is the adjunction mate of the inverse pull comparison.
-This is an actual construction; no direct-image isomorphism is chosen.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), projection comparison by adjunction.
-(blueprint: def-weil-pbc-residue-exchange-comparison-interface). -/
-noncomputable def push {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    residueExchangeLowerStar (integralCoeff ℓ E) f ⋙ residueExchangeReduction ℓ E Y ⟶
-      residueExchangeReduction ℓ E X ⋙
-        residueExchangeLowerStar
-          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f :=
-  (mateEquiv (residueExchangeAdjunction (integralCoeff ℓ E) f)
-      (residueExchangeAdjunction
-        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f)
-      (TwoSquare.mk _ _ _ _ (c.pull f).inv)).natTrans
-
-/-- The defining counit equation for the actual direct-image comparison.
-Source: Mathlib, mateEquiv_counit.
-(blueprint: lem-weil-pbc-integral-residue-push-counit)
-Proof. Apply the counit identity of the mates equivalence to the inverse pull comparison.
--/
-theorem push_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (K : residueExchangeDerived (integralCoeff ℓ E) X) :
-    (residueExchangeUpperStar
-        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).map
-        ((c.push f).app K) ≫
-      (residueExchangeAdjunction
-        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).counit.app
-        ((residueExchangeReduction ℓ E X).obj K) =
-    (c.pull f).inv.app ((residueExchangeLowerStar (integralCoeff ℓ E) f).obj K) ≫
-      (residueExchangeReduction ℓ E X).map
-        ((residueExchangeAdjunction (integralCoeff ℓ E) f).counit.app K) := by
-  exact mateEquiv_counit (residueExchangeAdjunction (integralCoeff ℓ E) f)
-    (residueExchangeAdjunction
-      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f)
-    (TwoSquare.mk _ _ _ _ (c.pull f).inv) K
-
-end IntegralResiduePullComparisons
 
 /-- Perfect residue change admits coherent pull comparisons whose direct-image mates
 are invertible on the unbounded ambient derived categories.
@@ -190,6 +73,62 @@ theorem integralResidue_comparisons
               (condensedRingObj (integralCoeff ℓ E) T)) (.up ℤ))) :
     ∃ c : IntegralResiduePullComparisons.{u} ℓ E,
       ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsIso (c.push f) := by
-  sorry
+  obtain ⟨c, hc⟩ := integralResidue_projection_normalization ℓ E hTensor
+  refine ⟨c, ?_⟩
+  intro X Y f
+  obtain ⟨m, hm⟩ := hc f
+  let := m
+  have component (K : residueExchangeDerived (integralCoeff ℓ E) X) :
+      IsIso ((c.push f).app K) := by
+    obtain ⟨s, e, h⟩ := hm K
+    let t := (c.restrictPushIso f).app ((residueExchangeReduction ℓ E X).obj K) ≪≫
+      (residueExchangeLowerStar (integralCoeff ℓ E) f).mapIso e
+    obtain ⟨b⟩ := DerivedCategory.nonempty_braidedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+        (condensedRingObj (integralCoeff ℓ E) Y))
+    let := b
+    have hp :=
+      Adjunction.isIso_rightAdjointProjectionMap_app_app_of_isDualizable
+        (residueExchangeAdjunction (integralCoeff ℓ E) f)
+        (Functor.OplaxMonoidal.δNatTrans
+          (residueExchangeUpperStar (integralCoeff ℓ E) f))
+        (fun _ _ ↦ rfl) K (hPerfect Y)
+    let R : residueExchangeDerived
+        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) Y ⥤
+        residueExchangeDerived (integralCoeff ℓ E) Y :=
+      (Mod.comap (C := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (coefficientMap (integralReductionMap ℓ E) Y)).mapDerivedCategory
+    have : IsIso (R.map ((c.push f).app K) ≫ t.hom) := by
+      change R.map ((c.push f).app K) ≫ _ ≫ _ = _ at h
+      simp only [t, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
+      rw [h]
+      infer_instance
+    have : IsIso (R.map ((c.push f).app K)) :=
+      IsIso.of_isIso_comp_right _ t.hom
+    rw [DerivedCategory.isIso_iff]
+    intro n
+    let G : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+        (condensedRingObj (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) Y) ⥤
+        Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+          (condensedRingObj (integralCoeff ℓ E) Y) :=
+      Mod.comap (C := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (coefficientMap (integralReductionMap ℓ E) Y)
+    have : IsIso (G.map ((DerivedCategory.homologyFunctor _ n).map
+        ((c.push f).app K))) :=
+      (NatIso.isIso_map_iff (G.mapDerivedCategoryHomologyFunctorIso n)
+        ((c.push f).app K)).2 (by
+          change IsIso ((DerivedCategory.homologyFunctor _ n).map
+            (R.map ((c.push f).app K)))
+          infer_instance)
+    have : IsIso ((Mod.forget (condensedRingObj (integralCoeff ℓ E) Y)).map
+        (G.map ((DerivedCategory.homologyFunctor _ n).map ((c.push f).app K)))) :=
+      inferInstance
+    change IsIso ((Mod.forget (condensedRingObj
+      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) Y)).map
+        ((DerivedCategory.homologyFunctor _ n).map ((c.push f).app K))) at this
+    exact isIso_of_reflects_iso _
+      (Mod.forget (condensedRingObj
+        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) Y))
+  exact NatIso.isIso_of_isIso_app (c.push f)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

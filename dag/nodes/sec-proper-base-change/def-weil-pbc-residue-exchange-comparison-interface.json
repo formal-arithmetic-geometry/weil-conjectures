@@ -22,6 +22,13 @@
    "text": "Take the displayed pull isomorphisms and their composition equation as fields; construct the push natural transformation using mateEquiv.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "Expose the actual derived extension/restriction adjunction through the typed reduction wrapper. The two functors in c.pull are composite left adjoints; transport the first composite adjunction along c.pull and apply rightAdjointUniq against the second. This constructs restrictPushIso without flatness or preservation of injectives by restriction.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -31,7 +38,7 @@
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
-  "note": "C2 stage-3 reduction. Numbered steps are implemented in the attached Lean declaration, except the explicitly reported remaining coefficient-comparison theorem."
+  "note": "Original C2 typed interface, extracted verbatim by B4. B4 additionally constructs the actual derived scalar adjunction and its conjugated composite right-adjoint comparison using proved library adjunction APIs."
  },
  "mathlib_searches": [
   {
@@ -81,12 +88,12 @@
  "unit": "sk-thm-properbasechange",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.IntegralResidueComparisons",
-  "file": "lean/Sheaf/Paper/IntegralResidueComparisons.lean",
+  "module": "Sheaf.Paper.IntegralResidueComparisonInterface",
+  "file": "lean/Sheaf/Paper/IntegralResidueComparisonInterface.lean",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralResiduePullComparisons",
   "statement": "structure IntegralResiduePullComparisons",
   "branch": "sheaf-dag",
-  "by": "C2",
+  "by": "B4",
   "date": "2026-10-16",
   "declarations": [
    "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeDerived",
@@ -96,7 +103,10 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeReduction",
    "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeUpperStarComp",
    "AlgebraicGeometry.ProEtale.CondensedRing.IntegralResiduePullComparisons",
-   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralResiduePullComparisons.push"
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralResiduePullComparisons.push",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeCoefficient",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeReductionAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralResiduePullComparisons.restrictPushIso"
   ]
  },
  "reviewed": {
@@ -112,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-eeaf7",
-  "group": "C2",
+  "reviewer": "X-61c2e",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261016T050636-L-3699071",
+  "landing": "20261016T070240-L-770386",
   "kind": "interface",
-  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched against DAG statements and dependencies; all eight modules, the sole direct importer, and 22 axiom probes compile cleanly."
+  "note": "independent Codex review: Matched unchanged theorem signature and extracted interface with the published library, and delivered proofs and normalization statement with their DAG nodes; all three modules, sole direct importer Sheaf.Paper.BoundedExchangeAmbient, and 13 axiom probes compile cleanly. Only the reported normalization hole contributes sorryAx."
  }
 }

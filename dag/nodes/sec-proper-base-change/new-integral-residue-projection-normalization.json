@@ -1,0 +1,145 @@
+{
+ "id": "new-integral-residue-projection-normalization",
+ "kind": "statement",
+ "title": "Residue push mate normalized to the right-adjoint projection map",
+ "statement": "Use [def-weil-pbc-residue-exchange-comparison-interface]. Assume, for every scheme T, the stated left-derived tensor universal property for integralReduction followed by exact scalar restriction. Put B_T equal to the restricted residue regular module in degree zero. There exists a coherent family c of pull comparisons. For each morphism f:X→Y there is a strong monoidal structure m on the actual integral derived pullback. For each integral complex K on X there are isomorphisms s from restricted reduction of Rf_*K to Rf_*K tensor B_Y and e from restricted reduction of K to K tensor f^*B_Y. The restriction of (c.push f).app K, followed by the proved c.restrictPushIso at reduction of K and Rf_* applied to e.hom, equals s.hom followed by the right-adjoint projection map at K and B_Y, formed from the actual integral derived adjunction and the oplax tensor structure of m. No perfectness, dualizability, boundedness, properness, or invertibility of this projection map is assumed or concluded.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface"
+ ],
+ "proof": [
+  {
+   "text": "Inverse image preserves balanced tensor coequalizers, so its strong monoidal comparison gives the relative module tensor comparison. Check unit and associativity after precomposing with the presentation epimorphisms. The coefficient-pullback isomorphism and preservation of flat modules and colimits give K-flat pullback resolutions, hence a strong monoidal derived pullback. On these resolutions, relative tensor associativity constructs the scalar-pull comparison. The associativity pentagon transported through the canonical left-derived composition comparison gives its composition equation, producing c.",
+   "uses": [
+    "def-weil-pbc-residue-exchange-comparison-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the supplied left-derived tensor universal property on K-flat resolutions, then tensor symmetry, to identify restricted reduction with right tensor by the restricted residue regular module in degree zero. At the integral direct image this gives s. On X the coefficient-pullback isomorphism identifies f^* B_Y with B_X, giving e. The target comparison after pushforward is then the already proved restrictPushIso from the interface followed by Rf_* applied to e. No injective-preservation claim for restriction is used.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the claimed equality under the integral derived pull-push adjunction. Use the counit equation for the defined mate, tensor associativity, and the scalar-pull isomorphism. Both transposes are the oplax tensor comparison followed by the counit tensored with the coefficient identity. This is the defining equation of rightAdjointProjectionMap. This argument identifies maps; it does not use dualizability or prove that the projection map is invertible.",
+   "uses": [
+    "lem-weil-pbc-integral-residue-push-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-integral-residue-push-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "Structural part of the parent comparison argument. The parent now proves the perfect-projection invertibility and conservative-restriction steps from this map identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of derived extension of scalars is tensor with the restricted coefficient ring, with projection formula for dualizable coefficients",
+   "date": "2026-10-16",
+   "results": "8 hits including RestrictScalars, ModuleCat.RestrictScalars.obj', PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalars, and RingCat.moduleCatRestrictScalarsPseudofunctor.",
+   "verdict": "No derived internal-module coefficient-pull comparison or projection normalization among these hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with inverse image without flatness for quotient coefficients, canonical projection formula for dualizable coefficients",
+   "date": "2026-10-16",
+   "results": "8 hits concerning cotangent complexes, without the internal-module comparison.",
+   "verdict": "No exact match. Local source search finds the proved ProjectionMapDualizable theorem for invertibility, used in the parent."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap_app_app_of_isDualizable|mapDerivedCategoryHomologyFunctorIso",
+   "date": "2026-10-16",
+   "results": "No Mathlib msearch hits; local source finds ProjectionMapDualizable and the exact derived homology comparison. Read ChangeOfCoefficients derivedPullIso and derivedComapUpperStarIso; the former requires exact extension of scalars.",
+   "verdict": "The existing flat-change derivedPullIso cannot apply to the residue quotient. The generic projection theorem proves the parent invertibility step but does not construct this normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "date": "2026-10-16",
+   "results": "12 hits in Mathlib.CategoryTheory.Adjunction.Unique, including rightAdjointUniq, rightAdjointUniq_hom_app_counit, and its coherence identities.",
+   "verdict": "Second reading: validates the concrete composite right-adjoint construction in the extracted interface; it does not supply the scalar-tensor normalization identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules commutes with derived extension of scalars and tensor products",
+   "date": "2026-10-16",
+   "results": "8 hits, including SheafOfModules.pushforwardNatIso, pushforwardComp_inv_app_val_app, conjugateEquiv_pullbackComp_inv, and pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc.",
+   "verdict": "Second reading: these are ordinary SheafOfModules pullback and pushforward identities, not the stated derived internal Mod normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackExtendScalarsIso|rightAdjointProjectionMap|mapDerivedCategoryHomologyFunctorIso",
+   "date": "2026-10-16",
+   "results": "msearch returned 0 Mathlib hits. Direct rg on lean/Sheaf and lean/WeilConjectures found ordinary pullbackExtendScalarsIso usage in IntegralConstructibleKernels, the generic ProjectionMapDualizable theorem, and many exact homology-comparison applications.",
+   "verdict": "Second reading: no duplicate normalization theorem. Reviewed ModuleObject.ChangeOfCoefficients: derivedPullIso requires exact scalar extension, which is unavailable for quotient reduction; reviewed RingedExchangeTensorCoherence and MonoidalProjectionConjugate, whose interfaces differ."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueComparisons",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Coherent coefficient comparisons: identify the restricted residue push mate with the perfect-coefficient projection map.",
+   "via": [
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueProjectionNormalization",
+  "file": "lean/Sheaf/Paper/IntegralResidueProjectionNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_projection_normalization",
+  "statement": "theorem integralResidue_projection_normalization\n    (hTensor : ∀ T : Scheme.{u},\n      ∃ ε : DerivedCategory.Qh ⋙ (integralReduction ℓ E T ⋙\n            (Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).mapDerivedCategory) ⟶\n          Functor.mapHomotopyCategory\n            (MonoidalCategory.tensorLeft\n            ((Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).obj\n              (Mod.regular (condensedRingObj\n                (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) T)))) (.up ℤ) ⋙\n            DerivedCategory.Qh,\n        Functor.IsLeftDerivedFunctor\n          (integralReduction ℓ E T ⋙\n            (Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).mapDerivedCategory)\n          ε (HomotopyCategory.quasiIso\n            (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n              (condensedRingObj (integralCoeff ℓ E) T)) (.up ℤ))) :\n    ∃ c : IntegralResiduePullComparisons.{u} ℓ E,\n      ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),\n        ∃ m : (residueExchangeUpperStar (integralCoeff ℓ E) f).Monoidal,\n          letI := m\n          ∀ K : residueExchangeDerived (integralCoeff ℓ E) X,\n            ∃ (s :\n                (Mod.comap (coefficientMap (integralReductionMap ℓ E) Y)).mapDerivedCategory.obj\n                    ((residueExchangeReduction ℓ E Y).obj\n                      ((residueExchangeLowerStar (integralCoeff ℓ E) f).obj K)) ≅\n                  (residueExchangeLowerStar (integralCoeff ℓ E) f).obj K ⊗\n                    residueExchangeCoefficient ℓ E Y)\n              (e :\n                (Mod.comap (coefficientMap (integralReductionMap ℓ E) X)).mapDerivedCategory.obj\n                    ((residueExchangeReduction ℓ E X).obj K) ≅\n                  K ⊗ (residueExchangeUpperStar (integralCoeff ℓ E) f).obj\n                    (residueExchangeCoefficient ℓ E Y)),\n              (Mod.comap (coefficientMap (integralReductionMap ℓ E) Y)).mapDerivedCategory.map\n                  ((c.push f).app K) ≫\n                (c.restrictPushIso f).hom.app ((residueExchangeReduction ℓ E X).obj K) ≫\n                (residueExchangeLowerStar (integralCoeff ℓ E) f).map e.hom =\n                s.hom ≫\n                  (((residueExchangeAdjunction (integralCoeff ℓ E) f).rightAdjointProjectionMap\n                    (Functor.OplaxMonoidal.δNatTrans\n                      (residueExchangeUpperStar (integralCoeff ℓ E) f))).app K).app\n                    (residueExchangeCoefficient ℓ E Y)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-61c2e",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T070240-L-770386",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-61c2e",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T070240-L-770386",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged theorem signature and extracted interface with the published library, and delivered proofs and normalization statement with their DAG nodes; all three modules, sole direct importer Sheaf.Paper.BoundedExchangeAmbient, and 13 axiom probes compile cleanly. Only the reported normalization hole contributes sorryAx."
+ }
+}
