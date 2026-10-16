@@ -1,0 +1,99 @@
+{
+ "id": "lem-exc-regular-locus-open-from-prime-quotients",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-exc-curve-open-dimension-general",
+   "place": "Proof, second paragraph: \"finite-type field algebras are excellent\"; the J-2 condition for the ground field in the field-excellence input.",
+   "via": [
+    "lem-exc-j2-residue-field-criterion",
+    "lem-exc-fields-excellent",
+    "lem-exc-field-algebra-strict-henselization-excellent"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Regular locus is open when every prime quotient has a regular open",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring]. Suppose that for every prime ideal $\\mathfrak p\\subset A$, the spectrum $\\operatorname{Spec}(A/\\mathfrak p)$ [def-weil-affine-spectrum] contains a nonempty open subset $U_{\\mathfrak p}$ such that $(A/\\mathfrak p)_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] is regular local [def-weil-regular-scheme] for every $\\mathfrak q\\in U_{\\mathfrak p}$. Then $\\{\\mathfrak q\\in\\operatorname{Spec}A:A_{\\mathfrak q}\\text{ is regular local}\\}$ is open in $\\operatorname{Spec}A$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07P9, lemma-intersection-regular-with-closed; J-0 and J-1 expanded using Tag 07P7, definition-J."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If every prime quotient of a Noetherian ring has a nonempty open regular locus then the regular locus of the ring is open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsOpen (Module.freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"PrimeSpectrum.isOpen_iff\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (U : Set (PrimeSpectrum R)), IsOpen U ↔ ∃ s, Uᶜ = PrimeSpectrum.zeroLocus s\", \"doc\": \"For any commutative semiring $R$ and subset $U$ of the prime spectrum $\\\\operatorname{Spec}(R)$, the set $U$ is open in the Zariski topology if and only if there exists a subset $s \\\\subseteq R$ such th\"}\n  {\"name\": \"PrimeSpectrum.isOpen_basicOpen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {a : R}, IsOpen ↑(PrimeSpectrum.basicOpen a)\", \"doc\": \"For any element $ a $ in a commutative semiring $ R $, the basic open set $ D(a) $ in the Zariski topology on $ \\\\operatorname{Spec}(R) $, defined as the set of prime ideals not containing $ a $, is an\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [inst_3 : p.IsPrime] [IsArtinianRing R] [Algebra.EssFiniteType R S] [Algebra.QuasiFiniteAt R p],\\n  ∃ f ∉ p, ↑(PrimeSpectrum.basicOpen f) = {{ asIdeal := p, isPrime := inst_3 }}\", \"doc\": \"Let $ R $ be an Artinian ring, $ S $ a commutative ring of essential finite type over $ R $, and $ \\\\mathfrak{p} $ a prime ideal of $ S $ such that $ S $ is quasi-finite at $ \\\\mathfrak{p} $. Then there\"}\n  {\"name\": \"PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Jacobson\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsJacobsonRing R] (x : PrimeSpectrum R),\\n  [IsOpen {x}, IsClopen {x}, IsClosed {x} ∧ StableUnderGeneralization {x}].TFAE\", \"doc\": \"In a Noetherian Jacobson ring $ R $, for any prime ideal $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, the following are equivalent: (1) the singleton set $ \\\\{x\\\\} $ is open in the Zariski to\"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] [IsLocalization.AtPrime S p] {rs : List R},\\n  RingTheory.Sequence.IsWeaklyRegular R rs →\\n    (∀ r ∈ rs, r ∈ p) → RingTheory.Sequence.IsRegular S (List.map (⇑(algebraM\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ its localization at the complement of a prime ideal $ p $, and $ rs $ a list of elements in $ R $. If $ rs $ forms a weakly regular sequence in $ R $ and every e\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned types; none states the nonempty regular-open assertion. Grep hits for projZeroRingHom concern the degree-zero projection of a graded ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian ring is J1 if each quotient by a prime ideal is J0",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsNoetherianRing.of_prime_ne_bot\", \"module\": \"Mathlib/RingTheory/Noetherian/OfPrime\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R], (∀ (I : Ideal R), I.IsPrime → I ≠ ⊥ → I.FG) → IsNoetherianRing R\", \"doc\": \"Let $ R $ be a commutative ring. If every non-zero prime ideal of $ R $ is finitely generated, then $ R $ is a Noetherian ring.\"}\n  {\"name\": \"IsNoetherianRing.of_prime\", \"module\": \"Mathlib/RingTheory/Noetherian/OfPrime\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R], (∀ (I : Ideal R), I.IsPrime → I.FG) → IsNoetherianRing R\", \"doc\": \"If every prime ideal in a commutative ring $ R $ is finitely generated, then $ R $ is a Noetherian ring.\"}\n  {\"name\": \"IsHausdorff.of_isDomain\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R] [IsDomain R], I ≠ ⊤ → IsHausdorff I R\", \"doc\": \"If $ R $ is a Noetherian ring and $ I $ is a proper ideal of $ R $, then the $ I $-adic topology on $ R $ is Hausdorff.\"}\n  {\"name\": \"Ideal.isLasker\", \"module\": \"Mathlib/RingTheory/Lasker\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [IsNoetherianRing R], IsLasker R\", \"doc\": \"Every Noetherian ring is a Lasker ring, meaning that every ideal can be expressed as the intersection of finitely many primary ideals.\"}\n  {\"name\": \"IsSemiprimaryRing.isNoetherianRing_iff_jacobson_fg\", \"module\": \"Mathlib/RingTheory/HopkinsLevitzki\", \"type\": \"∀ {R : Type u_2} [inst : Ring R] [IsSemiprimaryRing R], IsNoetherianRing R ↔ (Ring.jacobson R).FG\", \"doc\": \"A semiprimary ring $ R $ is Noetherian if and only if its Jacobson radical $ J(R) $ is finitely generated.\"}\n  {\"name\": \"IsSemiprimaryRing.isNoetherian_iff_finite_of_jacobson_fg\", \"module\": \"Mathlib/RingTheory/HopkinsLevitzki\", \"type\": \"∀ {R : Type u_2} {M : Type u} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsSemiprimaryRing R],\\n  (Ring.jacobson R).FG → (IsNoetherian R M ↔ Module.Finite R M)\", \"doc\": \"For a semiprimary ring $ R $, if the Jacobson radical $ J(R) $ is finitely generated, then an $ R $-module $ M $ is Noetherian if and only if it is finitely generated.\"}\n  {\"name\": \"IsSemiprimaryRing.finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/HopkinsLevitzki\", \"type\": \"∀ (R₀ : Type u_1) (R : Type u_2) (M : Type u) [inst : Ring R₀] [inst_1 : Ring R] [inst_2 : Module R₀ R]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R₀ M] [inst_5 : Module R M] [IsScalarTower R₀ R M] [IsSemiprimaryRing R]\\n  [inst_8 : IsScalarTower R₀ R R] [Module.Finite R₀ (R ⧸ Ring.jacobson R)] [Is\", \"doc\": \"If $ R $ is a semiprimary ring and $ M $ is a Noetherian $ R $-module, then $ M $ is finitely generated as an $ R $-module.\"}\n  {\"name\": \"IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime\", \"module\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness\", \"type\": \"∀ (A : Type u) [inst : CommRing A] [IsNoetherianRing A] ⦃M : Type v⦄ [inst_2 : AddCommGroup M] [inst_3 : Module A M]\\n  (x : Module.Finite A M)\\n  {motive : (N : Type v) → [inst_4 : AddCommGroup N] → [inst_5 : Module A N] → [Module.Finite A N] → Prop},\\n  (∀ (N : Type v) [inst_4 : AddCommGroup N] [inst\", \"doc\": \"For any commutative Noetherian ring $ A $ and finitely generated $ A $-module $ M $, a property $ P $ holds for $ M $ if: (1) $ P $ holds for trivial modules, (2) $ P $ holds for modules isomorphic to\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned types; none states the nonempty regular-open assertion. Grep hits for projZeroRingHom concern the degree-zero projection of a graded ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", IsOpen",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits; no declaration returned."
+  },
+  {
+   "tool": "grep",
+   "query": "JOne|J-1|JZero|J-0|regularLocus|regular_locus",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Noetherian.lean\", \"line\": \"31\", \"text\": \"    A (𝒜 0) (GradedRing.projZeroRingHom' 𝒜) (GradedRing.projZeroRingHom'_surjective 𝒜)\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"line\": \"259\", \"text\": \"def GradedRing.projZeroRingHom : A →+* A where\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"line\": \"289\", \"text\": \"def GradedRing.projZeroRingHom' : A →+* 𝒜 0 :=\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"line\": \"290\", \"text\": \"  ((GradedRing.projZeroRingHom 𝒜).codRestrict _ fun _x => SetLike.coe_mem _ :\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"line\": \"293\", \"text\": \"@[simp] lemma GradedRing.coe_projZeroRingHom'_apply (a : A) :\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"line\": \"294\", \"text\": \"    (GradedRing.projZeroRingHom' 𝒜 a : A) = GradedRing.projZeroRingHom 𝒜 a := rfl\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"line\": \"576\", \"text\": \"  ⟨RingHom.ker (GradedRing.projZeroRingHom 𝒜), fun i r (hr : (decompose 𝒜 r 0 : A) = 0) => by\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"line\": \"591\", \"text\": \"    𝒜₊.toIdeal = RingHom.ker (GradedRing.projZeroRingHom 𝒜) :=\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned types; none states the nonempty regular-open assertion. Grep hits for projZeroRingHom concern the degree-zero projection of a graded ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular locus openness from nonempty regular opens in every prime quotient",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian ring has open regular locus provided every quotient by a prime ideal has a dense open of regular localizations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsNoetherianRing.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_2 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_3 : (P : Ideal R) → [inst_3 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_4 : P.IsMaxima\", \"doc\": \"If $ R $ is a commutative semiring such that for every maximal ideal $ P $, the localization $ R_P $ at $ P $ is a Noetherian ring, then $ R $ itself is a Noetherian ring. This criterion establishes t\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherianRing_of_away\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Finset R),\\n  Ideal.span ↑S = ⊤ → (∀ (s : ↥S), IsNoetherianRing (Localization.Away ↑s)) → IsNoetherianRing R\", \"doc\": \"If the localization of a commutative ring $ R $ away from an element $ x $ forms a Noetherian ring, then $ R $ itself is a Noetherian ring. This follows from the property that every ideal in $ R $ is \"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat}, AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Noetherian if and only if the commutative ring $R$ is Noetherian (i.e., every ideal of $R$ is finitely generated).\"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsOpen (Module.freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"PrimeSpectrum.instNoetherianSpace\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Noetherian\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] [IsNoetherianRing R], TopologicalSpace.NoetherianSpace (PrimeSpectrum R)\", \"doc\": \"For any Noetherian ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of Zariski-clo\"}\n  {\"name\": \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X] {x : ↥X},\\n  IsNoetherianRing ↑(X.presheaf.stalk x)\", \"doc\": \"For any locally Noetherian scheme $ X $, the stalk of its structure sheaf at any point $ x $ is a Noetherian ring. This follows from the property that a scheme being locally Noetherian implies every p\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: returned types give Noetherianity, the free locus, smooth locus or local Noetherianity of spectra, not openness of the regular locus from regular opens of prime quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularRing",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"21\", \"text\": \"* `Polynomial.isRegularRing_of_isRegularRing` : the polynomial ring over a regular ring is\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"24\", \"text\": \"* `MvPolynomial.isRegularRing_of_isRegularRing` : the multivariate polynomial ring with finite\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"78\", \"text\": \"instance Polynomial.isRegularRing_of_isRegularRing [IsRegularRing R] : IsRegularRing R[X] := by\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"79\", \"text\": \"  apply isRegularRing_iff.mpr (fun p hp ↦ ?_)\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"94\", \"text\": \"  have := isRegularRing_iff.mp ‹_› q\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"35\", \"text\": \"* `IsRegularRing` : A noetherian ring is regular if its localization at any prime\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"92\", \"text\": \"class IsRegularRing (R : Type*) [CommRing R] : Prop extends IsNoetherianRing R where\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"96\", \"text\": \"attribute [instance low] IsRegularRing.isRegularLocalRing_localization\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"98\", \"text\": \"section IsRegularRing\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"101\", \"text\": \"lemma isRegularRing_iff [IsNoetherianRing R] : IsRegularRing R ↔\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned source locations define regular rings or prove polynomial-ring regularity. Read RegularLocalRing/Defs.lean:78-140 and Polynomial.lean:78-122; no regular-open transfer or prime-quotient criterion is stated."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, IsOpen",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-exc-j2-residue-field-criterion",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer"
+}
