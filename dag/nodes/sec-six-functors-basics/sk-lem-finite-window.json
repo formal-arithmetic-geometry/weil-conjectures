@@ -1,80 +1,197 @@
 {
-  "id": "sk-lem-finite-window",
-  "blueprint": {
-    "is": "sk-lem-finite-window",
-    "from": null,
-    "same_as": null
+ "id": "sk-lem-finite-window",
+ "blueprint": {
+  "is": "sk-lem-finite-window",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Reduction to finitely many degrees",
+ "statement": "Let $X$ be a scheme, $\\ell$ a prime, $\\Qlb$ an algebraic closure of $\\mathbf Q_\\ell$, and $E\\subseteq\\Qlb$ a finite extension of $\\mathbf Q_\\ell$. Let $\\Lambda=E$ or $\\Qlb$, understood as the condensed coefficient ring of [sk-def-sfb-condensed-ring] or [sk-def-sfb-qlbar-condensed], respectively, and put $\\Lambda_X=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. Let $C\\in\\Cons(X,\\Lambda)$ [sk-def-sfb-constructible], with $d_C\\geq0$ as in [sk-lem-uniform-constructible-ext], and let $m\\in\\mathbf Z$.\nHere $\\IndCons(X,\\Lambda)$ consists of the $\\Lambda_X$-module sheaves that are filtered colimits of constructible sheaves, and $\\Dic(X,\\Lambda)$ is the full subcategory of $D(X_{\\mathrm{proet}},\\Lambda_X)$ whose cohomology sheaves all belong to $\\IndCons(X,\\Lambda)$ [def-weil-derived-cohomology-sheaves]. Let $K\\in\\Dic(X,\\Lambda)$. Use canonical truncations and cohomological shifts, with $H^q(K[s])=H^{q+s}(K)$ [def-kun-truncations]. All Hom groups are taken in $D(X_{\\mathrm{proet}},\\Lambda_X)$, with $C$ placed in degree zero. The truncation maps induce a natural isomorphism\n$$\n\\Hom(C,K[m])\\cong\\Hom\\bigl(C,(\\tau_{\\geq m-d_C}\\tau_{\\leq m}K)[m]\\bigr).\n$$\nThus maps out of $C$ see only the cohomology degrees $m-d_C,\\ldots,m$ of $K$, even when $K$ is unbounded.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/_section.md",
+  "place": "node sk-lem-finite-window, order 1525"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-lem-uniform-constructible-ext",
+  "def-weil-derived-cohomology-sheaves",
+  "def-kun-truncations",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Work directly at the given degree $m$. Put $d=d_C$, $A=\\tau_{\\leq m}K$, $U=\\tau_{\\geq m+1}K$, $V=\\tau_{\\leq m-d-1}A$, and $B=\\tau_{\\geq m-d}A$. The canonical truncation triangles are\n$$A\\longrightarrow K\\longrightarrow U\\longrightarrow A[1],\\qquad V\\longrightarrow A\\longrightarrow B\\longrightarrow V[1].$$\nThese exist without any boundedness hypothesis by [lem-sf-derived-truncation-triangle] (Stacks Tag 08J5, remark-truncation-distinguished-triangle). By the good-truncation formulas of [def-kun-truncations], each cohomology sheaf of $A$ and $V$ is either a cohomology sheaf of $K$ or zero. The zero sheaf is constructible (take the zero finite local model on every stratum), hence ind-constructible via the constant filtered diagram. Thus $A,V\\in\\Dic(X,\\Lambda)$ by its defining condition. Also $V[m]$ and $V[m+1]$ are in $\\Dic(X,\\Lambda)$, since a shift merely reindexes the cohomology sheaves.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window.proof.md",
+    "place": "paragraph 1, upper and lower truncation triangles; retain the given m rather than shift the notation"
+   }
   },
-  "kind": "statement",
-  "title": "Reduction to finitely many degrees",
-  "statement": "Let $\\Lambda=E$ or $\\Qlb$. Let $C\\in\\Cons(X,\\Lambda)$, with $d_C$ as in\n[sk-lem-uniform-constructible-ext], $K\\in\\Dic(X,\\Lambda)$ ([sk-cor-ambient-ind-derived]) and\n$m\\in\\mathbf Z$. The truncation maps induce a natural isomorphism\n\n$$\n\\Hom(C,K[m])\\cong\\Hom\\bigl(C,(\\tau_{\\geq m-d_C}\\tau_{\\leq m}K)[m]\\bigr).\n$$\n\nBecause of the uniform bound $d_C$, maps out of a constructible sheaf $C$ into an unbounded complex see\nonly finitely many of its cohomology sheaves.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/_section.md",
-    "place": "node sk-lem-finite-window, order 1525"
+  {
+   "text": "The upper tail satisfies $U[m]\\in D^{\\geq1}$ and $U[m-1]\\in D^{\\geq2}\\subset D^{\\geq1}$, whereas the sheaf $C$ in degree zero lies in $D^{\\leq0}$. The standard t-structure and its orthogonality axiom give $\\Hom(C,U[m])=\\Hom(C,U[m-1])=0$ [def-sbc-standard-tstructure-derived-category], [def-weil-t-structure]. Shift the first triangle of step 1 by $m$ and apply $\\Hom(C,-)$. Exactness for a distinguished triangle and its rotations [lem-weil-pbc-hom-into-triangle-exact] (Stacks Tag 0149, lemma-representable-homological) gives\n$$0\\longrightarrow\\Hom(C,A[m])\\longrightarrow\\Hom(C,K[m])\\longrightarrow0.$$\nIn particular the map $a_K:\\Hom(C,A[m])\\to\\Hom(C,K[m])$ induced by upper truncation is an isomorphism.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-t-structure",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window.proof.md",
+    "place": "paragraph 1, vanishing of the upper tail and upper truncation isomorphism"
+   }
   },
-  "stmt_deps": [
-    "sk-lem-uniform-constructible-ext"
-  ],
-  "proof": [
-    {
-      "text": "Replacing $K$ by $K[m]$ we may assume $m=0$. The truncation $\\tau_{>0}K$ lies in $\\D^{\\geq1}$, so\n$\\Hom(C,\\tau_{>0}K[s])=0$ for $s=0,-1$, and the truncation triangle for $\\tau_{\\leq0}$ shows that\n$\\Hom(C,K)=\\Hom(C,\\tau_{\\leq0}K)$. It remains to remove the cohomology in degrees $\\leq-d_C-1$ from\n$K'=\\tau_{\\leq0}K$. By the triangle $\\tau_{\\leq-d_C-1}K'\\to K'\\to\\tau_{\\geq-d_C}K'\\to$, it suffices to\nshow the lower tail vanishing\n\n$$\n\\Hom(C,L)=0\\qquad\\text{for every }L\\in\\Dic(X,\\Lambda)\\text{ with }H^q(L)=0\\text{ for }q>-d_C-1,\n$$\n\napplied to $L=\\tau_{\\leq-d_C-1}K'$ and to $L=\\tau_{\\leq-d_C-1}K'[1]$ ([det-finite-window-reduction]).",
-      "uses": [],
-      "elementary": false
-    },
-    {
-      "text": "If $L$ is bounded, the lower tail vanishing follows from the finite filtration of $L$ by its cohomology\nsheaves: a layer $H^q(L)[-q]$ with $q\\leq-d_C-1$ contributes $\\Ext^{-q}(C,H^qL)$, which vanishes by\n[sk-cor-ind-heart-ii] since $-q>d_C$ ([det-finite-window-bounded]). For $L$ unbounded below we use that\nthe derived category is left complete.",
-      "uses": [
-        "det-finite-window-bounded"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The pro-étale site has a basis of weakly contractible objects ([sk-thm-pe-weakly-contractible-basis]),\nso [sk-prop-pe-products] shows that products of $\\Lambda_X$-modules are exact, products in\n$\\D(X_{\\mathrm{proét}},\\Lambda)$ are computed termwise, and\n\n$$\nL=R\\varprojlim_n\\tau_{\\geq-n}L\n$$\n\nfor every $L$ ([sk-prop-pe-left-complete]). Concretely, choose a complex $L^\\bullet$ representing $L$;\nthe limit is the derived inverse limit of the tower of good truncations $\\tau_{\\geq-n}L^\\bullet$ with\ntheir canonical transition maps. Since $\\Hom(C,-)$ takes products to products, the triangle defining\n$R\\varprojlim$ gives the Milnor exact sequence\n\n$$\n0\\longrightarrow\\varprojlim_n{}^1\\Hom(C,\\tau_{\\geq-n}L[-1])\\longrightarrow\\Hom(C,L)\n\\longrightarrow\\varprojlim_n\\Hom(C,\\tau_{\\geq-n}L)\\longrightarrow0.\n$$",
-      "uses": [
-        "sk-thm-pe-weakly-contractible-basis"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Each $\\tau_{\\geq-n}L$ is bounded with cohomology in degrees $\\leq-d_C-1$, so the right-hand term\nvanishes by the bounded case. For the left-hand term, the triangle\n\n$$\nH^{-n-1}(L)[n+1]\\longrightarrow\\tau_{\\geq-n-1}L\\longrightarrow\\tau_{\\geq-n}L\\longrightarrow H^{-n-1}(L)[n+2]\n$$\n\nshows that the transition map $\\Hom(C,\\tau_{\\geq-n-1}L[-1])\\to\\Hom(C,\\tau_{\\geq-n}L[-1])$ sits between\n$\\Ext^{n}(C,H^{-n-1}L)$ and $\\Ext^{n+1}(C,H^{-n-1}L)$. Both vanish for $n>d_C$ by [sk-cor-ind-heart-ii].\nSo the tower is eventually constant, and the $\\varprojlim^1$ of an eventually constant tower is zero: in\nthe description of $\\varprojlim^1$ as the cokernel of $1-\\mathrm{shift}$ on the product, one solves the\nequation successively along the constant tail and then along the finitely many earlier terms. This\nproves the lower tail vanishing, and hence the lemma ([det-finite-window-unbounded]).",
-      "uses": [
-        "det-finite-window-unbounded"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "det-finite-window-bounded",
-    "sk-thm-pe-weakly-contractible-basis",
-    "det-finite-window-unbounded"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/_section.md",
-    "place": "## Proof"
+  {
+   "text": "We have $H^q(V[m])=0$ for $q>-d-1$, and $H^q(V[m+1])=0$ for $q>-d-2$. Both satisfy the bound $q>-d_C-1$ in [det-finite-window-unbounded], and their membership in $\\Dic(X,\\Lambda)$ was checked in step 1. That existing node, which has no lower boundedness hypothesis, therefore gives $\\Hom(C,V[m])=\\Hom(C,V[m+1])=0$. Applying [lem-weil-pbc-hom-into-triangle-exact] to the second triangle of step 1 shifted by $m$, and to its rotations, yields\n$$0\\longrightarrow\\Hom(C,A[m])\\longrightarrow\\Hom(C,B[m])\\longrightarrow0.$$\nConsequently the map $b_K:\\Hom(C,A[m])\\to\\Hom(C,B[m])$ induced by lower truncation is an isomorphism. The lower-tail node carries precisely the bounded-devissage and left-completeness/Milnor arguments in paragraphs 2--4 of the source; no compactness assertion is used here.",
+   "uses": [
+    "det-finite-window-unbounded",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window.proof.md",
+    "place": "paragraph 1, lower truncation exact sequence, using the lower-tail conclusion of paragraphs 2--4"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "proof_cites_literature",
-    "in_cycle"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1525,
-  "blueprint_uses": [
-    "sk-cor-ind-heart-ii",
-    "sk-cor-ambient-ind-derived",
-    "sk-lem-uniform-constructible-ext"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015",
-  "blueprint_detail_nodes": [
-    "det-finite-window-reduction"
-  ]
+  {
+   "text": "The required map is $b_K\\circ a_K^{-1}$. Since $B=\\tau_{\\geq m-d_C}\\tau_{\\leq m}K$, its source and target are exactly the displayed Hom groups. For a morphism $f:K\\to\\widetilde K$, let $F$, $F_A$, and $F_B$ be its induced maps on $\\Hom(C,K[m])$, $\\Hom(C,A[m])$, and $\\Hom(C,B[m])$, respectively. Functoriality of the canonical truncations [def-kun-truncations] gives $F a_K=a_{\\widetilde K}F_A$ and $F_B b_K=b_{\\widetilde K}F_A$. Therefore $F_Aa_K^{-1}=a_{\\widetilde K}^{-1}F$ and $F_Bb_Ka_K^{-1}=b_{\\widetilde K}F_Aa_K^{-1}=b_{\\widetilde K}a_{\\widetilde K}^{-1}F$. This proves naturality in $K$ for fixed $C,d_C,m$. The argument includes $C=0$, $K=0$, $d_C=0$ and arbitrary positive or negative $m$.",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window.proof.md",
+    "place": "conclusion of paragraph 1 and the statement: the natural isomorphism induced by the truncation zigzag"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-truncation-triangle",
+  "def-kun-truncations",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-t-structure",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "det-finite-window-unbounded"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window.proof.md",
+  "place": "paragraph 1 and the lower-tail conclusion of paragraphs 2--4, with Stacks 08J5 and 0149 for the categorical tools"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.?window|uniform.*Ext|hom.*trunc",
+   "results": "Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean; Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean; Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the finite-window assertion for constructible sources and ind-constructible cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite cohomological dimension of an object implies Hom depends on finitely many degrees of a complex",
+   "results": "CochainComplex.HomComplex.Triplet.p; CochainComplex.HomComplex_X; CochainComplex.HomComplex.CohomologyClass; CochainComplex.HomComplex.CohomologyClass.mk; CochainComplex.HomComplex.instModuleCochain; CochainComplex.HomComplex.Cochain.mk; CochainComplex.HomComplex; CochainComplex.HomComplex.CohomologyClass.mk_eq_zero_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the finite-window assertion for constructible sources and ind-constructible cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure",
+   "results": "CategoryTheory.Triangulated.TStructure; CategoryTheory.Triangulated.TStructure.IsGE; CategoryTheory.Triangulated.TStructure.IsLE; CategoryTheory.Triangulated.TStructure.bounded; CategoryTheory.Triangulated.TStructure.minus; CategoryTheory.Triangulated.TStructure.plus; CategoryTheory.Triangulated.TStructure.ge; CategoryTheory.Triangulated.TStructure.le",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the finite-window assertion for constructible sources and ind-constructible cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from a sheaf with uniformly bounded Ext into an unbounded derived category object depend only on a finite cohomological truncation",
+   "results": "CategoryTheory.Abelian.Ext; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CategoryTheory.InjectiveResolution.extMk_hom; CategoryTheory.hasExt_iff; CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE; CategoryTheory.hasExt_of_hasDerivedCategory; DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the finite-window assertion for constructible sources and ind-constructible cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv|hom.*equiv|hom.*bijective|hom.*[Ii]so",
+   "results": "Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean; Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean; directory Mathlib/CategoryTheory/Triangulated/TStructure",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the finite-window assertion for constructible sources and ind-constructible cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trunc\", \"homEquiv\"",
+   "results": "SSet.OneTruncation₂.nerveHomEquiv; SSet.OneTruncation₂.nerveHomEquiv_id; SSet.OneTruncation₂.nerveHomEquiv_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the finite-window assertion for constructible sources and ind-constructible cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a derived category with left completeness, a finite Ext bound on a heart object gives a finite truncation window for morphisms",
+   "results": "DerivedCategory.IsGE; DerivedCategory.IsLE; CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE; CategoryTheory.hasExt_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.instIsLEObjSingleFunctor; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the finite-window assertion for constructible sources and ind-constructible cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "vanishing.*trunc|trunc.*vanishing|from_singleFunctor|homFrom.*trunc",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no declarations returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from an object of finite projective dimension vanish against sufficiently negative complexes and are unchanged by truncation",
+   "results": "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CategoryTheory.HasProjectiveDimensionLT.mk; CategoryTheory.HasProjectiveDimensionLT.subsingleton'; CategoryTheory.HasProjectiveDimensionLT.subsingleton; CategoryTheory.hasProjectiveDimensionLT_iff; CategoryTheory.HasProjectiveDimensionLT.mk'; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CochainComplex.IsKProjective.leftOrthogonal",
+   "date": "2026-10-16",
+   "verdict": "no match: projective-source vanishing and abstract projective dimension do not state this finite window with an Ext bound restricted to constructible targets"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasProjectiveDimensionLT\", \"trunc\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no declarations returned"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "proof_cites_literature",
+  "in_cycle"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1525,
+ "blueprint_uses": [
+  "sk-cor-ind-heart-ii",
+  "sk-cor-ambient-ind-derived",
+  "sk-lem-uniform-constructible-ext"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "blueprint_detail_nodes": [
+  "det-finite-window-reduction"
+ ],
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-finite-window",
+  "worker": "stage1",
+  "summary": "Replaced the cyclic reduction-node citation by the two truncation triangles and their exact Hom sequences, using the existing unbounded lower-tail lemma. Made the ambient category definition explicit because the imported reference sk-cor-ambient-ind-derived has no DAG file. No mathematical hypothesis or conclusion changed; no new node is needed. Second reading introduced X and the coefficient fields explicitly, cited their condensed and pulled-back definitions, specified the ambient Hom category, checked the zero cohomology case, and expanded the naturality equations.",
+  "blueprint": "Steps 1--2 realize paragraph 1 upper truncation; step 3 realizes paragraph 1 lower truncation using det-finite-window-unbounded for paragraphs 2--4; step 4 gives the induced natural isomorphism."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q50-5375244ef",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q50-5375244ef (reviewer sub-agent of L); spot-checked: Read the immutable instructions, packet/report, item, blueprint route and proof, every cited node statement, and cited Stacks locations. Verified coefficient category, truncation shifts, both Hom exactness arguments, lower-tail hypotheses, naturality, edge cases, Mathlib searches, dependency coverage, and absence of duplicates or forbidden SGA citations. Review written to review.md; no repairs needed."
+ }
 }
