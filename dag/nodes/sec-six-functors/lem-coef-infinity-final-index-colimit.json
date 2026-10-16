@@ -23,11 +23,81 @@
   "place": "Kerodon Example 7.2.1.4 (03LQ), together with the colimit dual of Corollary 7.2.2.11 (02XU), https://kerodon.net/tag/02XU, and Corollary 7.2.3.6 (02XY), https://kerodon.net/tag/02XY. Also used in HTT Corollary 4.4.2.4. Online text read; not archived in literature/. No Stacks tag gives coherent cofinality."
  },
  "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [
+  {
+   "text": "Let $i:\\{t\\}\\hookrightarrow J$ be the vertex inclusion. The hypothesis on $\\operatorname{Map}_J(j,t)$ is exactly the final-object hypothesis in [lem-coef-infinity-terminal-anodyne]. Its equivalence therefore makes $i$ right anodyne. This uses contractibility of the full mapping spaces, not just uniqueness of arrows in the homotopy category.",
+   "uses": [
+    "lem-coef-infinity-terminal-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02J5",
+    "place": "Corollary 4.7.3.22, (1) implies (3)."
+   }
+  },
+  {
+   "text": "Apply the pushout-join clause of [lem-coef-infinity-anodyne-cocones] to $i$ and $\\varnothing\\hookrightarrow\\Delta^0$. Since joining with the empty set leaves a simplicial set unchanged, it makes $J\\amalg_{\\{t\\}}\\{t\\}^{\\triangleright}\\hookrightarrow J^{\\triangleright}$ inner anodyne. Map this domain to $\\mathcal C$ by $p$ on $J$ and by the degenerate edge $\\operatorname{id}_{p(t)}$ on $\\{t\\}^{\\triangleright}=\\Delta^1$. These maps agree at $t$. The inner-horn filler property of $\\mathcal C$ gives extension across any inner anodyne map: lift successively across its horn attachments, take the compatible union at a limit ordinal, and pass to a retract. Thus there is $\\bar p:J^{\\triangleright}\\to\\mathcal C$ extending these data, with apex exactly $p(t)$ and component at $t$ exactly its identity. It yields a coherent transformation $\\alpha:p\\to\\Delta_Jp(t)$: precompose with the simplicial map $J\\times\\Delta^1\\to J^{\\triangleright}$ which on a simplex retains the initial $J$-vertices labelled $0$ and sends every vertex labelled $1$ to the new cone point. This ordered rule commutes with faces and degeneracies and retains the prescribed identity edge. Here the internal functor simplicial set and its edges have exactly the transformation meaning specified in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4 and Example 4.3.6.5; agent expansion of the lifting and explicit cone-to-transformation map."
+   }
+  },
+  {
+   "text": "For any $T\\in\\mathcal C$, put $\\operatorname{Coc}_J(p,T)=\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal C)}(p,\\Delta_JT)$, using [def-cbc-enhanced-diagrams-cones]. By the mapping-space clause of [lem-coef-infinity-anodyne-cocones], restriction $r_T:\\operatorname{Coc}_J(p,T)\\to\\operatorname{Coc}_{\\{t\\}}(p(t),T)=\\operatorname{Map}_{\\mathcal C}(p(t),T)$ is an equivalence. Postcomposition of $\\alpha$ gives $c_T:\\operatorname{Map}_{\\mathcal C}(p(t),T)\\to\\operatorname{Coc}_J(p,T)$. Compatibility of restriction with composition gives $r_Tc_T(u)=u\\circ\\alpha_t\\simeq u$ on the entire mapping space, since $\\alpha_t=\\operatorname{id}_{p(t)}$. Hence $r_Tc_T$ is homotopic to the identity and $r_T$ is an equivalence, so $c_T$ is an equivalence. This is precisely the stated coherent universal property of a colimit with vertex $p(t)$. This argument proves the same assertion for every cocone whose component at $t$ is the identity, not only for the extension chosen in Step 2.",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02NR",
+    "place": "Opposite-category dual of Proposition 7.2.2.1, conditions (1) and (6), via right cofinality of right anodyne monomorphisms. Agent-written mapping-space two-out-of-three argument."
+   }
+  },
+  {
+   "text": "For $J=\\Delta^n=N([n])$, compatible inner-horn data extend to an ordered chain: in dimension $2$ this is transitivity of the two consecutive inequalities, and in dimensions at least $3$ the horn fixes all edges, with all remaining inequalities following from their order. A simplex of the nerve is exactly its ordered chain, so this supplies the required inner fillers. Its right-pinched mapping space from $j$ to $n$ has exactly one simplex in every degree: it is the ordered chain with all initial vertices equal to $j$ and last vertex $n$. All its simplicial operators are therefore those of a point. Thus $n$ is final, including $n=0$. These are direct checks from the simplex description and the mapping-space definition in [def-cbc-enhanced-diagrams-cones], over the simplicial sets of [def-weil-pbc-simplicial-set].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02H6",
+    "place": "Definition 4.7.3.1 and Example 4.7.3.5; elementary ordered-chain calculation for the standard simplex."
+   }
+  },
+  {
+   "text": "Identify $(\\Delta^n)^{\\triangleright}$ with $\\Delta^{n+1}$. The order map $r:[n+1]\\to[n]$, $r(k)=k$ for $k\\leq n$ and $r(n+1)=n$, gives the cocone $p\\circ N(r)$ with apex $p(n)$. On the edge $\\{n,n+1\\}$ it is the degeneracy at $p(n)$, hence the identity. Step 4 verifies the final-object hypothesis, so Step 1 makes $\\{n\\}\\hookrightarrow\\Delta^n$ right anodyne, and the mapping-space calculation of Step 3 applies to this particular cocone as well. Consequently the displayed explicit cocone is colimiting; when $n=0$ it is just the identity edge, so the boundary case is included.",
+   "uses": [
+    "lem-coef-infinity-terminal-anodyne",
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02NR",
+    "place": "The mapping-space restriction criterion of Proposition 7.2.2.1, dualized, applied to the explicit standard-simplex cocone; compare Corollary 7.2.2.6 (02XW)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-terminal-anodyne",
+  "lem-coef-infinity-anodyne-cocones",
+  "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2: stable-enhancement foundation for derived coefficient adjunction, through the inherited ancestry. Agent-written proof checked against online Kerodon 02J5, 018J, 0235, 02N3, 02NR, 03LQ and 02XW; these texts are not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,10 +154,52 @@
    "results": "{\"t\": \"2026-10-16T08:28:10Z\", \"tool\": \"grep\", \"query\": \"colimit|cocone|cofinal|[Ff]inal|[Tt]erminal\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"3efce81aadfc41e5\"}",
    "date": "2026-10-16",
    "verdict": "no match: eight hits concern an ordinary terminal simplicial set as codomain of an inner fibration or lifting problem (Quasicategory/Basic.lean:70-84 and InnerFibration.lean:77-89, read); none concerns terminal objects inside a quasicategory or its coherent colimits."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit|cocone|cofinal|terminal",
+   "results": "{\"t\": \"2026-10-16T08:51:59Z\", \"tool\": \"grep\", \"query\": \"colimit|cocone|cofinal|terminal\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"5b96a086ca62d79f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: colimitOfDiagramTerminal (CategoryTheory/Limits/Shapes/IsTerminal.lean:395-399, read) and Final.coconesEquiv (CategoryTheory/Limits/Final.lean:283-287, read) concern ordinary categories. The simplicial-set colimit hits concern ordinary colimits of simplicial sets. None is the mapping-space universal property inside an arbitrary quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T08:51:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: colimitOfDiagramTerminal (CategoryTheory/Limits/Shapes/IsTerminal.lean:395-399, read) and Final.coconesEquiv (CategoryTheory/Limits/Final.lean:283-287, read) concern ordinary categories. The simplicial-set colimit hits concern ordinary colimits of simplicial sets. None is the mapping-space universal property inside an arbitrary quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor on an infinity category with a terminal object has colimit its terminal value",
+   "results": "{\"t\": \"2026-10-16T08:52:00Z\", \"tool\": \"leansearch\", \"query\": \"A functor on an infinity category with a terminal object has colimit its terminal value\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitOfTerminal\", \"CategoryTheory.Limits.colimitOfDiagramTerminal\", \"CategoryTheory.Functor.Final.colimitIso\", \"CategoryTheory.Limits.colimit\", \"CategoryTheory.Limits.hasColimit_of_domain_hasTerminal\", \"CategoryTheory.Limits.limitOfTerminal\", \"CategoryTheory.Limits.limitConstTerminal\", \"CategoryTheory.Functor.final_of_isTerminal_colimit_comp_yoneda\"], \"digest\": \"b311cc14c9a29602\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: colimitOfDiagramTerminal (CategoryTheory/Limits/Shapes/IsTerminal.lean:395-399, read) and Final.coconesEquiv (CategoryTheory/Limits/Final.lean:283-287, read) concern ordinary categories. The simplicial-set colimit hits concern ordinary colimits of simplicial sets. None is the mapping-space universal property inside an arbitrary quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent diagram on a quasicategory with a final object has a colimit given by its value at that object",
+   "results": "{\"t\": \"2026-10-16T08:52:01Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent diagram on a quasicategory with a final object has a colimit given by its value at that object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitOfDiagramTerminal\", \"SSet.hasColimits\", \"CategoryTheory.Limits.ColimitPresentation.self\", \"CategoryTheory.Limits.hasColimit_of_domain_hasTerminal\", \"CategoryTheory.Functor.Final.colimitCoconeComp_isColimit\", \"CategoryTheory.Limits.ColimitPresentation.reindex\", \"CategoryTheory.Functor.Final.isColimitExtendCoconeEquiv\", \"CategoryTheory.Functor.Final.colimitCoconeOfComp_cocone\"], \"digest\": \"a26d0ebe1bddb129\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: colimitOfDiagramTerminal (CategoryTheory/Limits/Shapes/IsTerminal.lean:395-399, read) and Final.coconesEquiv (CategoryTheory/Limits/Final.lean:283-287, read) concern ordinary categories. The simplicial-set colimit hits concern ordinary colimits of simplicial sets. None is the mapping-space universal property inside an arbitrary quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at the last vertex computes a simplex shaped homotopy coherent colimit",
+   "results": "{\"t\": \"2026-10-16T08:52:28Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation at the last vertex computes a simplex shaped homotopy coherent colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Splitting.isColimit'\", \"SimplicialObject.Splitting.isColimit\", \"SimplicialObject.Splitting.desc\", \"SSet.horn.isColimit\", \"SSet.Augmented.stdSimplex_obj_right\", \"SSet.PtSimplex\", \"SSet.ι₀\", \"SSet.Augmented.stdSimplex_map_right\"], \"digest\": \"b2a4af271988656d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: colimitOfDiagramTerminal (CategoryTheory/Limits/Shapes/IsTerminal.lean:395-399, read) and Final.coconesEquiv (CategoryTheory/Limits/Final.lean:283-287, read) concern ordinary categories. The simplicial-set colimit hits concern ordinary colimits of simplicial sets. None is the mapping-space universal property inside an arbitrary quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "def coconesEquiv|def colimitOfDiagramTerminal",
+   "results": "{\"t\": \"2026-10-16T08:53:32Z\", \"tool\": \"grep\", \"query\": \"def coconesEquiv|def colimitOfDiagramTerminal\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean\"], \"digest\": \"c311af3c171a8943\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: colimitOfDiagramTerminal (CategoryTheory/Limits/Shapes/IsTerminal.lean:395-399, read) and Final.coconesEquiv (CategoryTheory/Limits/Final.lean:283-287, read) concern ordinary categories. The simplicial-set colimit hits concern ordinary colimits of simplicial sets. None is the mapping-space universal property inside an arbitrary quasicategory."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-finite-shape-generation",
   "by": "worker",
@@ -106,5 +218,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-final-index-colimit",
+  "worker": "stage1",
+  "summary": "Retained the correct statement and all explicit normalization clauses. Split its proof through the final-vertex/right-anodyne characterization, an inner-anodyne pushout-join extension, and an equivalence on coherent cocone mapping spaces. The five steps construct the actual normalized cocone, prove its universal property, and check the specified standard-simplex cocone, including n=0. Two new statement-only foundational lemmas; no Mathlib leaf or closed project declaration matches.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, stable enhancement supporting derived coefficient adjunction, through the inherited ancestry. This supplies final-index evaluation used in Step 4 of lem-coef-infinity-finite-shape-generation. Steps 1-3 handle arbitrary final indices; Steps 4-5 handle its explicit simplex clause; no unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-9476dc0fb",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-9476dc0fb (reviewer sub-agent of L); spot-checked: Read all mathematics and cited sources; verified all five steps, both new lemmas, edge cases, duplicate candidates and acyclic dependencies. Completed missing creation/audit metadata in both new records. Statements unchanged; review.md and corrected JSON files written.; 2 file(s) fixed by the reviewer"
  }
 }
