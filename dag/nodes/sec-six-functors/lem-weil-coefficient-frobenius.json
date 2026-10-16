@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-weil-coefficient-frobenius",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coefficient biduality at finite and integral stages",
- "statement": "For the coefficient stages of\n[def-weil-finite-torsion-constructibility] and\n[def-weil-derived-complete-integral-detailed], the following distinctions hold.\n\n1. If $\\Lambda=A_{E,n},E$, or\n$\\overline{\\mathbf Q}_\\ell$, then $\\Lambda$ is self-injective and\nquasi-Frobenius. Ordinary duality $\\operatorname{Hom}_\\Lambda(-,\\Lambda)$\nis exact, preserves finite modules, and for every finite\n$\\Lambda$-module $M$ the evaluation map\n$$\nM\\longrightarrow\n\\operatorname{Hom}_\\Lambda\\bigl(\\operatorname{Hom}_\\Lambda(M,\\Lambda),\\Lambda\\bigr)\n$$\nis an isomorphism. Consequently derived coefficient duality is an\nanti-equivalence on bounded complexes with finite cohomology.\n1. The discrete valuation ring $R=\\mathcal O_E$ is not\nquasi-Frobenius. Ordinary evaluation is an isomorphism for finite\nprojective $R$-modules, but not for all finite $R$-modules.\nEvery $K\\in D^b(R)$ with finite cohomology is perfect, and the\n*derived* evaluation\n$$\nK\\longrightarrow\nR\\operatorname{Hom}_R\\bigl(R\\operatorname{Hom}_R(K,R),R\\bigr)\n$$\nis an isomorphism.\n1. More generally, derived evaluation into the coefficient double dual\nis an isomorphism for every perfect complex over any ring. In particular,\nthe finite-Tor point case does not require self-injectivity of the\ncoefficient ring.",
+ "statement": "For the coefficient stages of\n[def-weil-finite-torsion-constructibility] and\n[def-weil-derived-complete-integral-detailed], the following distinctions hold.\n\n1. If $\\Lambda=A_{E,n},E$, or\n$\\overline{\\mathbf Q}_\\ell$, then $\\Lambda$ is self-injective and\nquasi-Frobenius. Ordinary duality $\\operatorname{Hom}_\\Lambda(-,\\Lambda)$\nis exact, preserves finite modules, and for every finite\n$\\Lambda$-module $M$ the evaluation map\n$$\nM\\longrightarrow\n\\operatorname{Hom}_\\Lambda\\bigl(\\operatorname{Hom}_\\Lambda(M,\\Lambda),\\Lambda\\bigr)\n$$\nis an isomorphism. Consequently derived coefficient duality is an\nanti-equivalence on bounded complexes with finite cohomology.\n1. The discrete valuation ring $R=\\mathcal O_E$ is not\nquasi-Frobenius. Ordinary evaluation is an isomorphism for finite\nprojective $R$-modules, but not for all finite $R$-modules.\nEvery $K\\in D^b(R)$ with finite cohomology is perfect, and the\n*derived* evaluation\n$$\nK\\longrightarrow\nR\\operatorname{Hom}_R\\bigl(R\\operatorname{Hom}_R(K,R),R\\bigr)\n$$\nis an isomorphism.\n1. More generally, derived evaluation into the coefficient double dual\nis an isomorphism for every perfect complex over any ring. In particular,\nthe finite-Tor point case does not require self-injectivity of the\ncoefficient ring.\n\nConventions: rings and coefficient modules here are commutative-ring coefficients with ordinary algebraic module duals. A finite module means finitely generated [def-weil-finitely-generated-module]. A self-injective ring is injective as a module over itself (the extension condition in [lem-sf-baer-criterion]); a commutative quasi-Frobenius ring means an Artinian self-injective ring, where Artinian means that descending chains of ideals stabilize. Perfect has the meaning of [def-pc-perfect-ring-complex], and derived Hom is [def-pur-derived-internal-hom] on the one-object ringed site. The coefficient rings are those constructed in [def-weil-l-adic-coefficient-extension]. The finite-Tor point assertion uses bounded finite-cohomology point complexes, with finite Tor amplitude as in [def-weil-finite-tor-amplitude].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-coefficient-frobenius.md",
   "place": "node lem-weil-coefficient-frobenius, order 2120",
@@ -28,29 +28,210 @@
  },
  "stmt_deps": [
   "def-weil-finite-torsion-constructibility",
-  "def-weil-derived-complete-integral-detailed"
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finitely-generated-module",
+  "def-pc-perfect-ring-complex",
+  "def-pur-derived-internal-hom",
+  "lem-sf-baer-criterion",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-projective-module"
  ],
  "proof": [
   {
-   "text": "The field cases are finite-dimensional vector-space duality. For\n$A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$, every ideal is\n$\\varpi^iA$. A homomorphism $u:\\varpi^iA\\to A$ satisfies\n$\\varpi^{n-i}u(\\varpi^i)=0$, hence\n$u(\\varpi^i)\\in\\varpi^iA$. Write\n$u(\\varpi^i)=\\varpi^ib$; multiplication by $b$ extends $u$ to\n$A$. Baer's criterion, Stacks Project,\n[Tag 0AVF](https://stacks.math.columbia.edu/tag/0AVF), now gives\nself-injectivity. Since $A$ is Artinian, it is quasi-Frobenius.\nA finite $A$-module is a finite direct sum of cyclic modules\n$A/\\varpi^i$, so it suffices to check evaluation on these. A functional\n$A/\\varpi^i\\to A$ is determined by its value at $1$, which lies in\n$\\operatorname{Ann}_A(\\varpi^i)=\\varpi^{n-i}A/\\varpi^n$, so that\n\n$$\n\\operatorname{Hom}_A(A/\\varpi^i,A)\\cong\\varpi^{n-i}A/\\varpi^n\n\\cong A/\\varpi^i ;\n$$\n\nthe evaluation map at $1$ is a generator of the double dual, hence an\nisomorphism. Exactness of $\\operatorname{Hom}_A(-,A)$ and bounded\ntruncation give derived biduality for bounded finite cohomology.",
-   "uses": [],
-   "elementary": null
+   "text": "Write $R=\\mathcal O_E$ and $\\pi=\\varpi_E$. The coefficient construction and the DVR theorem identify $R$ as a principal ideal local domain, with nonzero maximal ideal $\\pi R$, and every nonzero element as a unit times a nonnegative power of $\\pi$. The exponent is nonnegative for an element of $R$: $|u|_E=1$ and $0<|\\pi|_E<1$, so a negative exponent would give absolute value greater than $1$. Thus $R$ is Noetherian: each ideal has one generator. For $n\\geq1$, $A=R/(\\pi^n)$ is a finite local ring by the finite-quotient statement. A finite ring is Artinian and Noetherian, since it has only finitely many ideals; each ideal is generated by its finite set of elements. Fields are Artinian and Noetherian because their only ideals are zero and the whole field.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Preparation for Tags 0AVF and 066Z; coefficient facts from the three cited nodes."
+   }
   },
   {
-   "text": "Over $R=\\mathcal O_E$, the finite module $T=R/\\varpi_E R$ is\nnonzero but $\\operatorname{Hom}_R(T,R)=0$. In particular ordinary\nduality is not exact: applying it to\n$0\\to R\\xrightarrow{\\varpi_E}R\\to T\\to0$ leaves the nonsurjective\nmap $R\\xrightarrow{\\varpi_E}R$. Thus $R$ is not self-injective.\nIt is a regular ring, so bounded complexes with finite cohomology are\nperfect by Stacks Project,\n[Tag 066Z](https://stacks.math.columbia.edu/tag/066Z).\nFor a perfect complex over any ring, a bounded finite projective model\ncomputes its derived dual, and termwise evaluation computes the derived\ndouble dual; this is Stacks Project,\n[Tag 07VI](https://stacks.math.columbia.edu/tag/07VI).\nIt proves both the integral assertion and the last clause.",
-   "uses": [],
-   "elementary": null
+   "text": "Every ideal $I\\subseteq A$ is $(\\pi^i)$ for some $0\\leq i\\leq n$: its preimage in $R$ is principal, contains $\\pi^n$, and its generator is a unit times $\\pi^i$ by the DVR description in Step 1. Also $\\operatorname{Ann}_A(\\pi^{n-i})=(\\pi^i)$: for a lift $x\\in R$, $\\pi^{n-i}x\\in\\pi^nR$ is equivalent, by cancellation in the domain $R$, to $x\\in\\pi^iR$. These assertions include $I=0$ ($i=n$), $I=A$ ($i=0$), and $n=1$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AVF, application to the quotient DVR; ideal and annihilator calculation in the blueprint proof, first paragraph."
+   }
+  },
+  {
+   "text": "Let $u:(\\pi^i)\\to A$ be $A$-linear. The equality $\\pi^{n-i}\\pi^i=0$ gives $\\pi^{n-i}u(\\pi^i)=0$, so Step 2 gives $u(\\pi^i)=\\pi^ib$ for some $b\\in A$. Multiplication by $b$ extends $u$ to $A$. The ideal-extension criterion [lem-sf-baer-criterion] proves that $A$ is self-injective. For a field, a map from the zero ideal extends by zero and a map from the whole field is already extended, so the same criterion proves self-injectivity. To check exactness of $D=\\operatorname{Hom}_\\Lambda(-,\\Lambda)$ explicitly, for $0\\to U\\to V\\to W\\to0$ restriction $DV\\to DU$ is onto by injectivity; its kernel consists exactly of maps factoring through $W$. Thus $0\\to DW\\to DV\\to DU\\to0$ is exact. Combined with Step 1, these rings are quasi-Frobenius in the stated commutative convention.",
+   "uses": [
+    "lem-sf-baer-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AVF, lemma-characterize-injective-bis, equivalence (1) and (3)."
+   }
+  },
+  {
+   "text": "For finite $A$-module $M$, $M$ has a finite underlying set, so $DM$ is a subset of the finite set of all functions $M\\to A$ and is finite as well. Since $A$ is Noetherian, [lem-sc-noetherian-finite-module-finite-presentation] supplies $A^r\\xrightarrow{f}A^s\\to M\\to0$. The twice-applied exact contravariant functor $D$ gives the right-exact sequence $DDA^r\\xrightarrow{DDf}DDA^s\\to DDM\\to0$. Naturality of evaluation is the identity $DDf(\\mathrm{ev}_x)(g)=g(f(x))=\\mathrm{ev}_{f(x)}(g)$. Evaluation on the two finite free modules is an isomorphism by [lem-sf-finite-projective-dual]. Their induced cokernel map is therefore an isomorphism (its inverse is induced by the two inverse evaluation maps), and this map is exactly $M\\to DDM$. This proves the finite-module assertion without a cyclic-module decomposition.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-sf-finite-projective-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AVF, injectivity consequence, and Tag 07VI proof, ordinary finite-projective evaluation; finite-presentation argument supplied by the worker."
+   }
+  },
+  {
+   "text": "For either field stage, start with a finite generating list for the module and successively discard each vector lying in the span of the preceding retained vectors. The retained list still spans and is linearly independent over the field, hence is a finite basis. Thus the module is finite free. Apply [lem-sf-finite-projective-dual] to obtain finite dual and evaluation isomorphism. In particular $E$ and $\\overline{\\mathbf Q}_\\ell$ need no finiteness as sets. Their exactness and self-injectivity were established in Step 3 using all ideals, so no finite-dimensional restriction was placed on the exactness assertion.",
+   "uses": [
+    "lem-sf-finite-projective-dual",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI proof, applied to complexes in degree zero; field case of the blueprint first paragraph."
+   }
+  },
+  {
+   "text": "For one of these self-injective coefficient rings $\\Lambda$, the degree-zero complex $\\Lambda[0]$ is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Hence the definition [def-pur-derived-internal-hom], specialized to the one-object ringed site, computes $R\\operatorname{Hom}_\\Lambda(K,\\Lambda)$ by $D(C)^j=\\operatorname{Hom}_\\Lambda(C^{-j},\\Lambda)$ on any complex representative $C$ of $K$. Its differential is $d_{DC}^j(f)=(-1)^{j+1}f\\,d_C^{-j-1}$. Apply [lem-sp-exact-functor-preserves-homology] to the exact functor $D:\\operatorname{Mod}(\\Lambda)^{op}\\to\\operatorname{Mod}(\\Lambda)$, reversing degrees, to get $H^j(DC)=D(H^{-j}C)$. Steps 4 and 5 therefore give bounded finite cohomology of the dual and an isomorphism on every cohomology group for the natural double-dual map. Explicitly its component is $x\\mapsto(f\\mapsto(-1)^j f(x))$ in degree $j$; substituting the displayed differential shows that this is a chain map. It is a quasi-isomorphism because on cohomology it is, up to this unit sign, the module evaluation isomorphism. Quasi-isomorphisms become isomorphisms in $D(\\Lambda)$ [def-weil-abstract-derived-category]. Applying the exact functor to complexes gives triangulated exactness by [lem-sf-exact-functor-derived-triangulated], with reversal of the shift in this contravariant notation. The same signed evaluation satisfies $D(\\delta_C)\\circ\\delta_{DC}=1_{DC}$ by substitution, so $D$ is its own contravariant quasi-inverse: this proves the asserted anti-equivalence.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-derived-internal-hom",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-abstract-derived-category",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AVF and derived-Hom definition; exact coefficient duality extension, replacing the blueprint phrase bounded truncation by the explicit homology calculation."
+   }
+  },
+  {
+   "text": "For the integral ring $R$, $T=R/\\pi R$ is nonzero since $\\pi$ generates the proper maximal ideal. Any $f:T\\to R$ satisfies $\\pi f(1)=0$, so $f=0$ because $R$ is a domain and $\\pi\\ne0$. Thus $DT=DDT=0$ and evaluation $T\\to DDT$ is not an isomorphism. Moreover, dualizing $0\\to R\\xrightarrow{\\pi}R\\to T\\to0$ leaves the nonsurjective multiplication-by-$\\pi$ map $R\\to R$. This contradicts the extension property of an injective module [lem-sf-baer-criterion], so $R$ is not self-injective and hence not quasi-Frobenius. For finite projective $R$-modules ordinary evaluation is nevertheless an isomorphism by [lem-sf-finite-projective-dual].",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sf-baer-criterion",
+    "lem-sf-finite-projective-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Blueprint proof, second paragraph; distinction between ordinary and derived duality. Tag 0AVF for the injectivity implication."
+   }
+  },
+  {
+   "text": "Let $M$ be any finite $R$-module. Since $R$ is Noetherian, [lem-sc-noetherian-finite-module-finite-presentation] gives a presentation $R^u\\to R^v\\to M\\to0$. Its kernel $N\\subseteq R^v$ is the image of $R^u$, so the images of its standard basis generate $N$. It is torsion-free as a submodule of a free module over the domain $R$. Thus [lem-sc-dvr-fg-torsionfree-free] makes $N$ finite free. The complex $[N\\to R^v]$ in degrees $-1,0$ is a bounded finite free resolution of $M$, so $M[0]$ is perfect. For $K\\in D^b(R)$ with finite cohomology, each $H^i(K)[0]$ is therefore perfect. Apply [lem-sf-perfect-cohomology-assembly] to conclude that $K$ is perfect. This spells out the DVR case of Tag 066Z rather than appealing without justification to regularity or finite global dimension.",
+   "uses": [
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-sc-dvr-fg-torsionfree-free",
+    "lem-sf-perfect-cohomology-assembly",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066Z, lemma-regular-perfect, DVR specialization; Tag 066U, lemma-cohomology-perfect, for the bounded-cohomology assembly."
+   }
+  },
+  {
+   "text": "Now let $B$ be any commutative ring and let $K\\in D(B)$ be perfect. Choose its bounded finite-projective model $P$ [def-pc-perfect-ring-complex]. It is K-projective by [lem-sc-bounded-above-projective-kprojective]. For a K-injective resolution $B[0]\\to I$, the cone is acyclic. By the Hom-complex differential formula, the cone of $\\operatorname{Hom}^{\\bullet}(P,B[0])\\to\\operatorname{Hom}^{\\bullet}(P,I)$ is $\\operatorname{Hom}^{\\bullet}(P,\\operatorname{Cone}(B[0]\\to I))$ (with the cone signs), hence acyclic by K-projectivity. Thus there is a quasi-isomorphism $\\operatorname{Hom}^\\bullet(P,B[0])\\to\\operatorname{Hom}^\\bullet(P,I)$, the latter representing $R\\operatorname{Hom}_B(K,B)$ by [def-pur-derived-internal-hom]. Write the former complex as $DP$. Its terms $(DP)^j=\\operatorname{Hom}_B(P^{-j},B)$ are finite projective by [lem-sf-finite-projective-dual], and it is bounded. It too is K-projective, so the same comparison computes the derived double dual by $DDP$. The signed evaluation $P^j\\to(DDP)^j$, $x\\mapsto(f\\mapsto(-1)^j f(x))$, commutes with differentials by the formula in Step 6 and is an isomorphism term by term by [lem-sf-finite-projective-dual]. It is consequently a chain isomorphism representing precisely the derived evaluation, and proves derived biduality for every perfect $K$. Applying this with $B=R$ to Step 8 proves the integral derived assertion.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-sc-bounded-above-projective-kprojective",
+    "def-pur-derived-internal-hom",
+    "lem-sf-finite-projective-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI, lemma-dual-perfect-complex, proof; Tag 0A66, lemma-RHom-out-of-projective, for the projective computation."
+   }
+  },
+  {
+   "text": "For the bounded finite-cohomology finite-Tor point case at $A_{E,n}$, [lem-trf-finite-tor-amplitude-perfect] gives a bounded finite free model, so Step 9 applies. At the field stages finite cohomology modules are finite free, and [lem-sf-perfect-cohomology-assembly] makes every bounded finite-cohomology complex perfect. At the DVR stage Step 8 already gives this perfectness. Thus in each finite-Tor point case derived evaluation is obtained from perfectness alone; Step 9 never assumes that the coefficient ring is self-injective.",
+   "uses": [
+    "lem-trf-finite-tor-amplitude-perfect",
+    "lem-sf-perfect-cohomology-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI, lemma-dual-perfect-complex, final application; finite-Tor characterization as stated in the cited existing node."
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-sf-baer-criterion",
+  "def-weil-finitely-generated-module",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sf-finite-projective-dual",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-derived-internal-hom",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-weil-abstract-derived-category",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sf-perfect-cohomology-assembly",
+  "def-pc-perfect-ring-complex",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-trf-finite-tor-amplitude-perfect"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-coefficient-frobenius.md",
-  "place": "## Proof"
+  "place": "Proof, both paragraphs, checked against Stacks 0AVF, 066Z, 066U, 07VI and 0A66; finite-presentation and signed-complex details supplied explicitly."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Self injective Artinian principal ideal quotient of a discrete valuation ring has exact duality and finite module biduality; perfect complexes have derived biduality",
+   "results": "FGModuleCat.exactPairing and DVR characterizations; these do not cover all finite, integral and derived clauses.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Injective, Module.Dual",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "self.?injective|quasi.?Frobenius|isIso.*[Bb]idual|[Bb]aer",
+   "results": "Module.Baer in Algebra/Module/Injective.lean; no result covering the entire item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite modules over Artinian self injective rings are reflexive and derived duality is an anti equivalence",
+   "results": "HTTP Internal Server Error.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Duality Hom into the ring for finitely generated modules over a truncated discrete valuation ring, and derived reflexivity for bounded finite cohomology over a DVR",
+   "results": "FGModuleCat.FGModuleCatDual and FGModuleCat.exactPairing for field coefficients only.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -75,5 +256,34 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-coefficient-frobenius",
+  "worker": "stage1",
+  "summary": "Kept all finite, integral and perfect-complex assertions; added explicit algebraic conventions. Replaced the unreferenced cyclic decomposition by a finite-presentation proof. Made the ideal/annihilator calculation, Baer extension, exactness, signed derived evaluation and DVR cohomology resolutions explicit. Three new nodes: two Mathlib leaves and one statement-only perfect-cohomology assembly lemma.",
+  "blueprint": "Steps 1-6 realize the first proof paragraph (finite and field stages, module evaluation, derived anti-equivalence). Steps 7-10 realize the second paragraph (integral obstruction, finite projective evaluation, perfectness, general derived evaluation and finite-Tor consequence).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient-ring structure theorem: R is a DVR with uniformizer factorization; no replacement of the unit duality route."
+   },
+   {
+    "node": "lem-trf-finite-tor-amplitude-perfect",
+    "why": "Only the final finite-Tor point consequence uses its algebraic finite-free-model criterion; no geometric or trace-formula argument is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-trf-finite-tor-amplitude-perfect"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-03ea69260",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-03ea69260 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, including all ten proof steps, three new nodes, edge cases, Stacks tags 0AVF/066U/066Z/07VI/0A66, and Mathlib matches. Each new node's created object omitted required by/date/group fields. Corrected whole JSON files are provided under fixes/dag/nodes/sec-six-functors/; review.md records the checks.; 3 file(s) fixed by the reviewer"
+ }
 }
