@@ -264,5 +264,28 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-bc30c85c5 (reviewer sub-agent of L); spot-checked: Read the item, sole new node, cited statements, sources and unit/chapter route in full. Verified the canonical étale projection mate, 07K7 upper bound, cone degrees and tensor estimates; checked small cases and duplicate candidates. No repairs needed. Accepted generic tools and detailed checks are recorded in review.md; 454 reachable nodes have no missing dependency or cycle."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula",
+  "declaration": "AlgebraicGeometry.Etale.isIso_finiteConstantProjectionMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finiteConstantProjectionMap",
+   "AlgebraicGeometry.Etale.isIso_finiteConstantProjectionMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteConstantProjectionFormula.lean",
+  "statement": "theorem isIso_finiteConstantProjectionMap (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) (N : ℕ) (hcd : ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℕ), N < q → IsZero ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj ((lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))) (K : DerivedCategoryModule A X) (hK : ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj K)) (M : ModuleCat.{u + 1} A) [Module.FinitePresentation A M] : IsIso ((finiteConstantProjectionMap A f K).app M)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The helper is the canonical projection natural transformation restricted to constant modules and transported by the canonical single-degree inverse-image and constant-sheaf isomorphisms. Its NatTrans type includes naturality in M. No replacement of the canonical map, ring, site or unbounded derived category."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f3f54c532",
+  "group": "NH",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable source, all seven statement dependencies, canonical map, hypotheses, universes, edge cases, docstrings, and verbatim signature. Snapshot compilation passed both per-file checks without warnings (22.2s, 31.3s). No delivery errors or fixes; branch unchanged."
  }
 }
