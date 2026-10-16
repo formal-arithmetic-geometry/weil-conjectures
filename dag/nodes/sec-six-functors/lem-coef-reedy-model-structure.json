@@ -24,7 +24,8 @@
   "place": "Remark 5.2.3 and Theorem 5.2.5, printed pp. 124-126; objectwise consequences from Proposition 5.1.4 and its dual No Stacks tag states this homotopical result."
  },
  "stmt_deps": [
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-direct-wfs-extension"
  ],
  "proof": [
   {
@@ -331,5 +332,70 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-7a95aa1d1 (reviewer sub-agent of L); spot-checked: Read the mathematics in full. Verified all eleven steps, the new direct-colimit lifting lemma, cited sources, infinite-index cases, opposites, duplicate candidates, and dependency acyclicity. No repairs needed. Concrete checks and target-scope limits are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-199ac8257",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Immutable delivery fully checked; scompile.py compilation succeeded; no findings or fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ReedyModelStructure",
+  "file": "lean/Sheaf/CategoryTheory/ReedyModelStructure.lean",
+  "declaration": "HomotopicalAlgebra.Reedy.model_structure",
+  "declarations": [
+   "HomotopicalAlgebra.Reedy.LatchingIndex",
+   "HomotopicalAlgebra.Reedy.MatchingIndex",
+   "HomotopicalAlgebra.Reedy.latchingProjection",
+   "HomotopicalAlgebra.Reedy.matchingProjection",
+   "HomotopicalAlgebra.Reedy.latchingCocone",
+   "HomotopicalAlgebra.Reedy.matchingCone",
+   "HomotopicalAlgebra.Reedy.latchingTo",
+   "HomotopicalAlgebra.Reedy.matchingFrom",
+   "HomotopicalAlgebra.Reedy.relativeLatching",
+   "HomotopicalAlgebra.Reedy.relativeMatching",
+   "HomotopicalAlgebra.Reedy.leftClass",
+   "HomotopicalAlgebra.Reedy.rightClass",
+   "HomotopicalAlgebra.Reedy.Below",
+   "HomotopicalAlgebra.Reedy.belowInclusion",
+   "HomotopicalAlgebra.Reedy.newObject",
+   "HomotopicalAlgebra.Reedy.Boundary",
+   "HomotopicalAlgebra.Reedy.RealizesBoundary",
+   "HomotopicalAlgebra.Reedy.CompatibleBoundaryMap",
+   "HomotopicalAlgebra.Reedy.CompatibleFactorization",
+   "HomotopicalAlgebra.Reedy.latching_nonidentity",
+   "HomotopicalAlgebra.Reedy.latchingBelowProjection",
+   "HomotopicalAlgebra.Reedy.matchingBelowProjection",
+   "HomotopicalAlgebra.Reedy.partialLatching",
+   "HomotopicalAlgebra.Reedy.partialMatching",
+   "HomotopicalAlgebra.Reedy.partial_boundary_existsUnique",
+   "HomotopicalAlgebra.Reedy.partialBoundary",
+   "HomotopicalAlgebra.Reedy.partialLatchingCocone",
+   "HomotopicalAlgebra.Reedy.partialMatchingCone",
+   "HomotopicalAlgebra.Reedy.partialLatchingTo",
+   "HomotopicalAlgebra.Reedy.partialMatchingFrom",
+   "HomotopicalAlgebra.Reedy.factorizationSource",
+   "HomotopicalAlgebra.Reedy.factorizationTarget",
+   "HomotopicalAlgebra.Reedy.IsFactorizationArrow",
+   "HomotopicalAlgebra.Reedy.factorization_arrow_existsUnique",
+   "HomotopicalAlgebra.Reedy.factorizationArrow",
+   "HomotopicalAlgebra.Reedy.compatibleFactorization_iff_relative",
+   "HomotopicalAlgebra.Reedy.degree_extension",
+   "HomotopicalAlgebra.Reedy.degree_extension_map",
+   "HomotopicalAlgebra.Reedy.factorization_degree_extension",
+   "HomotopicalAlgebra.Reedy.model_structure",
+   "HomotopicalAlgebra.Reedy.ZeroFactorization",
+   "HomotopicalAlgebra.Reedy.factorization_prescribed_zero",
+   "HomotopicalAlgebra.Reedy.functorial_factorization_prescribed_zero",
+   "HomotopicalAlgebra.Reedy.opposite_functorial_factorizations",
+   "HomotopicalAlgebra.Reedy.simplex_reedy_structure"
+  ],
+  "statement": "theorem model_structure (N P : MorphismProperty J) [N.IsMultiplicative] [P.IsMultiplicative] (r : ReedyStructure N P ℕ) : ∃ m : ModelCategory (J ⥤ M), m.categoryWithWeakEquivalences.weakEquivalences = (weakEquivalences M).functorCategory J ∧ m.categoryWithCofibrations.cofibrations = leftClass P (cofibrations M) ∧ m.categoryWithFibrations.fibrations = rightClass N (fibrations M) ∧ (leftClass P (cofibrations M) ⊓ (weakEquivalences M).functorCategory J = leftClass P (trivialCofibrations M)) ∧ (rightClass N (fibrations M) ⊓ (weakEquivalences M).functorCategory J = rightClass N (trivialFibrations M)) ∧ (leftClass P (cofibrations M) ≤ (cofibrations M).functorCategory J) ∧ (leftClass P (trivialCofibrations M) ≤ (trivialCofibrations M).functorCategory J) ∧ (rightClass N (fibrations M) ≤ (fibrations M).functorCategory J) ∧ (rightClass N (trivialFibrations M) ≤ (trivialFibrations M).functorCategory J) ∧ (leftClass P (cofibrations M)).HasFunctorialFactorization (rightClass N (trivialFibrations M)) ∧ (leftClass P (trivialCofibrations M)).HasFunctorialFactorization (rightClass N (fibrations M)) ∧ (∀ (X : J ⥤ M), leftClass P (cofibrations M) (initial.to X) → ∀ j : J, cofibrations M (initial.to (X.obj j))) ∧ (∀ (X : J ⥤ M), rightClass N (fibrations M) (terminal.from X) → ∀ j : J, fibrations M (terminal.from (X.obj j)))",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
