@@ -254,5 +254,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinitySequentialSpine",
+  "declaration": "SSet.Enhanced.infinity_sequential_spine",
+  "declarations": [
+   "SSet.Enhanced.sequentialNerve",
+   "SSet.Enhanced.sequentialSpine",
+   "SSet.Enhanced.sequentialRestriction",
+   "SSet.Enhanced.infinity_sequential_spine"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinitySequentialSpine.lean",
+  "statement": "theorem infinity_sequential_spine (E : SSet.{u}) [Quasicategory E] : IsFunctorEquivalence (sequentialRestriction E) ∧ (∀ (x : ((ihom sequentialNerve.{u}).obj E) _⦋0⦌) (t : E _⦋0⦌), IsWeakHomotopyEquivalence (mappingSpaceMap (sequentialRestriction E) x ((constantDiagrams sequentialNerve.{u} E).app _ t))) ∧ constantDiagrams sequentialNerve.{u} E ≫ sequentialRestriction E = constantDiagrams sequentialSpine.toSSet E ∧ (∀ (T : SSet.{u}) (H : T ⟶ (ihom sequentialNerve.{u}).obj E), MonoidalClosed.uncurry (H ≫ sequentialRestriction E) = (sequentialSpine.ι ▷ T) ≫ MonoidalClosed.uncurry H) ∧ (∀ (E' : SSet.{u}) [Quasicategory E'] (G : E ⟶ E'), sequentialRestriction E ≫ (ihom sequentialSpine.toSSet).map G = (ihom sequentialNerve.{u}).map G ≫ sequentialRestriction E') ∧ (∀ F : sequentialNerve.{u} ⟶ E, ∃ R : coconeCategory F ⟶ coconeCategory (sequentialSpine.ι ≫ F), (∀ (n : SimplexCategoryᵒᵖ) (c : (coconeCategory F).obj n), (R.app n c).1.1 = c.1.1 ∧ (R.app n c).1.2 = ((ihom Δ[1]).map (sequentialRestriction E)).app n c.1.2) ∧ ∀ c : (coconeCategory F) _⦋0⦌, IsColimiting F c ↔ IsColimiting (sequentialSpine.ι ≫ F) (R.app _ c))",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The three concrete helpers are the ordered-natural nerve, the consecutive-edge subset, and its actual restriction, all owned by this statement node. ULift places the small ordered-natural category in any target universe. Cocone restriction is uniquely pinned by its apex and full transformation in every simplicial degree; no arbitrary map or extra assumption is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30d7141c8",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Only the node's lean field changed and the statement is verbatim in the file. The module compiles cleanly against the local side overlay (nt_compile --json, exit 0). The helpers are real: nerve(ULift.{u} ℕ), the subset with entries in {k,k+1}, and the restriction (MonoidalClosed.pre ι).app E. The clauses match the node: IsFunctorEquivalence; mappingSpaceMap weak equivalence for all x and t; constants restrict exactly; uncurry naturality; strict postcomposition; a uniquely pinned cocone restriction R with IsColimiting iff. The only hypothesis is Quasicategory E, in an arbitrary universe u. There are no duplicates (finite-spine and anodyne-cocone nodes differ). Docstrings and the seven-step proof are present, the proof is only sorry, and both report sections are there. Cosmetic: 'Proposition the project server' in the report prose."
  }
 }
