@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group C2
+Authors: SHEAF groups C2 and E3
 -/
 module
 
@@ -9,126 +9,725 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+
+import Sheaf.Paper.CondensedQbarFunctionPresentations
 import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-import Sheaf.Paper.CondensedPointBasisEvaluation
-import Sheaf.Paper.GeometricFieldProEtaleEvaluation
-import Sheaf.Paper.ProfinitePointPullback
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
+import Mathlib.CategoryTheory.Monoidal.Limits.Colimits
+import WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
+import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
+import Mathlib.Algebra.Field.ULift
 
 /-!
 # Local matrix refinement for one finite presentation
 
-This is the matrix and rank argument from the parent local-triviality theorem,
-with one fixed presentation member isolated as a separately provable obligation.
+The function-presentation comparison supplies the matrix and geometric-fibre data.
+The proofs below establish rank local constancy, bounded Gaussian elimination,
+and the resulting cokernel isomorphisms.
 -/
 
 @[expose] public section
 
-universe u
+universe u v w z
 
-open CategoryTheory
-
+open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
+namespace CondensedQbarMatrixRefinement
+
+attribute [local instance] Abelian.hasFiniteBiproducts
+
+section CoefficientUniverse
+open Opposite CategoryTheory.MonObj CategoryTheory.MonoidalCategory
+
+variable (E : Type) [NormedField E]
+@[instance_reducible]
+private noncomputable def liftNormedField : NormedField (ULift.{u} E) :=
+  NormedField.induced _ E ULift.ringEquiv.toRingHom ULift.down_injective
+
+@[instance_reducible]
+private noncomputable def liftNormedAlgebra (K : Type) [NormedField K] [NormedAlgebra K E] :
+    letI := liftNormedField.{u} E
+    NormedAlgebra K (ULift.{u} E) := by
+  letI := liftNormedField.{u} E
+  exact { norm_smul_le := fun c x ↦ norm_smul_le c x.down }
+
+private lemma liftContinuousDown :
+    letI := liftNormedField.{u} E
+    Continuous (ULift.down : ULift.{u} E → E) := by
+  let := liftNormedField.{u} E
+  exact continuous_induced_dom
+
+private lemma liftContinuousUp :
+    letI := liftNormedField.{u} E
+    Continuous (ULift.up : E → ULift.{u} E) := by
+  let := liftNormedField.{u} E
+  exact continuous_induced_rng.mpr continuous_id
+
+private noncomputable def liftCondensedRingIso :
+    letI := liftNormedField.{u} E
+    Profinite.continuousMapRingSheaf.{u} E ≅
+      Profinite.continuousCoefficientRingSheaf (ULift.{u} E) := by
+  letI := liftNormedField.{u} E
+  let F (T : Type u) [TopologicalSpace T] :
+      C(T, E) ≃+* C(T, ULift.{u} E) :=
+    { toFun := fun f ↦ ⟨fun x ↦ ULift.up (f x), (liftContinuousUp E).comp f.continuous⟩
+      invFun := fun f ↦ ⟨fun x ↦ (f x).down, (liftContinuousDown E).comp f.continuous⟩
+      left_inv := fun _ ↦ rfl
+      right_inv := fun _ ↦ rfl
+      map_mul' := fun _ _ ↦ rfl
+      map_add' := fun _ _ ↦ rfl }
+  refine
+    { hom := ⟨{
+        app := fun S ↦ RingCat.ofHom
+          ((ULift.ringEquiv.symm.toRingHom.comp (F S.unop).toRingHom).comp
+            ULift.ringEquiv.toRingHom)
+        naturality := fun _ _ _ ↦ rfl }⟩
+      inv := ⟨{
+        app := fun S ↦ RingCat.ofHom
+          ((ULift.ringEquiv.symm.toRingHom.comp (F S.unop).symm.toRingHom).comp
+            ULift.ringEquiv.toRingHom)
+        naturality := fun _ _ _ ↦ rfl }⟩
+      hom_inv_id := ?_
+      inv_hom_id := ?_ }
+  · ext S f
+    rfl
+  · ext S f
+    rfl
+
+private noncomputable def liftSchemeRingIso (X : AlgebraicGeometry.Scheme.{u}) :
+    letI := liftNormedField.{u} E
+    AlgebraicGeometry.ProEtale.continuousMapRingSheaf X E ≅
+      AlgebraicGeometry.ProEtale.continuousCoefficientRingSheaf X (ULift.{u} E) := by
+  letI := liftNormedField.{u} E
+  let F (T : Type u) [TopologicalSpace T] :
+      C(T, E) ≃+* C(T, ULift.{u} E) :=
+    { toFun := fun f ↦ ⟨fun x ↦ ULift.up (f x), (liftContinuousUp E).comp f.continuous⟩
+      invFun := fun f ↦ ⟨fun x ↦ (f x).down, (liftContinuousDown E).comp f.continuous⟩
+      left_inv := fun _ ↦ rfl
+      right_inv := fun _ ↦ rfl
+      map_mul' := fun _ _ ↦ rfl
+      map_add' := fun _ _ ↦ rfl }
+  refine
+    { hom := ⟨{
+        app := fun S ↦ RingCat.ofHom
+          ((ULift.ringEquiv.symm.toRingHom.comp (F S.unop.left).toRingHom).comp
+            ULift.ringEquiv.toRingHom)
+        naturality := fun _ _ _ ↦ rfl }⟩
+      inv := ⟨{
+        app := fun S ↦ RingCat.ofHom
+          ((ULift.ringEquiv.symm.toRingHom.comp (F S.unop.left).symm.toRingHom).comp
+            ULift.ringEquiv.toRingHom)
+        naturality := fun _ _ _ ↦ rfl }⟩
+      hom_inv_id := ?_
+      inv_hom_id := ?_ }
+  · ext S f
+    rfl
+  · ext S f
+    rfl
+
+private lemma finiteFieldComparison (ℓ : ℕ) [Fact ℓ.Prime]
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] :
+    ∃ d : Mon.mk (condensedRingObj (Profinite.continuousMapRingObj E) X) ≅
+      Mon.mk ((sheafCompose (Scheme.ProEt.topology X)
+        (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj
+          (continuousMapRingSheaf X E)),
+      ∀ (S : Profinite.{u}) (f : C(S, E)),
+        (((pointUpperStarLowerStarAdjunction.comp
+          (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (toSpecZ X))).homEquiv
+            _ _ d.hom.hom).hom.app (op S)) (ULift.up f) =
+          ULift.up (f.comp (profiniteTestProjection X S)) := by
+  let := liftNormedField.{u} E
+  let := liftNormedAlgebra.{u} E ℚ_[ℓ]
+  let : FiniteDimensional ℚ_[ℓ] (ULift.{u} E) :=
+    Module.Finite.equiv (ULift.moduleEquiv (R := ℚ_[ℓ]) (M := E)).symm
+  obtain ⟨e, he, _⟩ := existsUnique_condensedFieldContinuousMapIso ℓ (ULift.{u} E) X
+  let L := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).mapIso (liftCondensedRingIso E)
+  let M := (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).mapIso (liftSchemeRingIso E X)
+  let L' := (upperStarFromPoint X).mapIso L
+  have : IsMonHom L.hom := by
+    exact Sheaf.isMonHom_sheafCompose_map _ (liftCondensedRingIso E).hom
+  have : IsMonHom L'.hom := by
+    change IsMonHom ((upperStarFromPoint X).map L.hom)
+    infer_instance
+  have : IsMonHom M.hom := by
+    exact Sheaf.isMonHom_sheafCompose_map _ (liftSchemeRingIso E X).hom
+  let d := Mon.mkIso' L' ≪≫ e ≪≫ (Mon.mkIso' M).symm
+  refine ⟨d, ?_⟩
+  intro S f
+  let adj := pointUpperStarLowerStarAdjunction.comp
+    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (toSpecZ X))
+  change ((adj.homEquiv _ _
+    (((pointUpperStar ⋙ upperStar AddCommGrpCat.{u + 1} (toSpecZ X)).map
+      L.hom ≫ e.hom.hom) ≫ M.inv)).hom.app (op S))
+      (ULift.up f) = _
+  erw [adj.homEquiv_naturality_right, adj.homEquiv_naturality_left]
+  let f' : C(S, ULift.{u} E) :=
+    ⟨fun s ↦ ULift.up (f s), (liftContinuousUp E).comp f.continuous⟩
+  have hf := he S f'
+  change _ = ULift.up (f'.comp (profiniteTestProjection X S)) at hf
+  change ULift.up (⟨fun x ↦
+    (((adj.homEquiv _ _ e.hom.hom).hom.app (op S)) (ULift.up f')).down x |>.down,
+    _⟩ : C(_, E)) = _
+  apply ULift.ext
+  apply ContinuousMap.ext
+  intro x
+  exact congrArg (fun z ↦ (z.down x).down) hf
+
+section Colimit
+variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
+  {J : Type w} [Category.{z} J] [IsSifted J]
+  {F : J ⥤ C} (c : Cocone F) (hc : IsColimit c)
+  [MonObj c.pt] [∀ j, MonObj (F.obj j)]
+  [PreservesColimit₂ F F (curriedTensor C)]
+include hc in
+private lemma isMonHom_of_colimit {R : C} [MonObj R] (g : c.pt ⟶ R)
+    (hι : ∀ j, IsMonHom (show F.obj j ⟶ c.pt from c.ι.app j)) (hg : ∀ j, IsMonHom (c.ι.app j ≫ g)) :
+    IsMonHom g := by
+  have : Nonempty J := IsSifted.nonempty
+  constructor
+  · obtain ⟨j⟩ := ‹Nonempty J›
+    have := hι j
+    have := hg j
+    rw [← IsMonHom.one_hom (c.ι.app j), Category.assoc]
+    exact IsMonHom.one_hom (c.ι.app j ≫ g)
+  · apply (IsColimit.tensor hc hc).hom_ext
+    intro j
+    have := hι j
+    have := hg j
+    change (c.ι.app j ⊗ₘ c.ι.app j) ≫ μ[c.pt] ≫ g =
+      (c.ι.app j ⊗ₘ c.ι.app j) ≫ (g ⊗ₘ g) ≫ μ[R]
+    rw [← IsMonHom.mul_hom_assoc, IsMonHom.mul_hom,
+      tensorHom_comp_tensorHom_assoc]
+
+end Colimit
+
+private lemma fieldDiagramIso (ℓ : ℕ) [Fact ℓ.Prime]
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] :
+    ∃ d : Profinite.padicSubfieldRingObjFunctor.{u} ℓ ⋙ upperStarFromPoint X ≅
+      padicSubfieldSheafFunctor X ℓ ⋙
+        sheafCompose (Scheme.ProEt.topology X)
+          (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1}),
+      ∀ E : PadicAlgCl.FiniteIntermediateField ℓ, IsMonHom (show
+        condensedRingObj (Profinite.continuousMapRingObj E) X ⟶
+          (sheafCompose (Scheme.ProEt.topology X)
+            (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj
+              (continuousMapRingSheaf X E) from d.hom.app E) := by
+  classical
+  have hi (E : PadicAlgCl.FiniteIntermediateField ℓ) :=
+    finiteFieldComparison E ℓ X
+  choose e he using hi
+  let d (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+      (Profinite.padicSubfieldRingObjFunctor.{u} ℓ ⋙ upperStarFromPoint X).obj E ≅
+        (padicSubfieldSheafFunctor X ℓ ⋙
+          sheafCompose (Scheme.ProEt.topology X)
+            (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj E :=
+    (Mon.forget _).mapIso (e E)
+  refine ⟨NatIso.ofComponents d ?_, ?_⟩
+  · intro E F a
+    let adj := pointUpperStarLowerStarAdjunction.comp
+      (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (toSpecZ X))
+    apply (adj.homEquiv _ _).injective
+    change adj.homEquiv _ _
+      ((pointUpperStar ⋙ upperStar AddCommGrpCat.{u + 1} (toSpecZ X)).map
+        (Profinite.padicSubfieldRingObjMap ℓ (leOfHom a)) ≫ (e F).hom.hom) =
+      adj.homEquiv _ _ ((e E).hom.hom ≫
+        (sheafCompose (Scheme.ProEt.topology X)
+          (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).map
+            (padicSubfieldSheafMapOfLE X ℓ (leOfHom a)))
+    rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right]
+    ext S f
+    cases f with
+    | up f =>
+      change (((adj.homEquiv _ _ (e F).hom.hom).hom.app S)
+        (ULift.up ⟨_, _⟩)) = _
+      rw [he F S.unop]
+      apply ULift.ext
+      apply ContinuousMap.ext
+      intro x
+      exact congrArg (fun z ↦ IntermediateField.inclusion (leOfHom a) (z.down x))
+        (he E S.unop f).symm
+  · intro E
+    change IsMonHom (e E).hom.hom
+    infer_instance
+
+noncomputable section
+private lemma globalCoefficientIso (ℓ : ℕ) [Fact ℓ.Prime]
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] :
+    Nonempty (Mon.mk (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) ≅
+      Mon.mk (padicAlgClSheaf X ℓ)) := by
+  obtain ⟨d, hd⟩ := fieldDiagramIso ℓ X
+  have : PreservesColimitsOfSize.{0, 0} (upperStarFromPoint X) :=
+    (pointUpperStarLowerStarAdjunction.comp
+      (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+        (toSpecZ X))).leftAdjoint_preservesColimits
+  let h₁ := isColimitOfPreserves (upperStarFromPoint X)
+    (Profinite.isColimitPadicAlgClRingObjCocone.{u} ℓ)
+  let h₂ := (IsColimit.precomposeHomEquiv d (padicAlgClSheafCocone X ℓ)).symm
+    (isColimitPadicAlgClSheafCocone X ℓ)
+  let e : condensedRingObj (Profinite.padicAlgClRingObj ℓ) X ≅ padicAlgClSheaf X ℓ :=
+    h₁.coconePointUniqueUpToIso h₂
+  have he (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+      (upperStarFromPoint X).map (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) ≫
+        e.hom = d.hom.app E ≫ (padicAlgClSheafCocone X ℓ).ι.app E :=
+    h₁.comp_coconePointUniqueUpToIso_hom h₂ E
+  have : IsSifted (PadicAlgCl.FiniteIntermediateField ℓ) := IsFiltered.isSifted
+  have : IsMonHom e.hom := by
+    refine @isMonHom_of_colimit _ _ _ _ _ _ _
+      ((upperStarFromPoint X).mapCocone (Profinite.padicAlgClRingObjCocone.{u} ℓ)) h₁
+      (inferInstanceAs (MonObj (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
+      (fun E ↦ inferInstanceAs
+        (MonObj (condensedRingObj (Profinite.continuousMapRingObj E) X)))
+      _ _ _ e.hom ?_ ?_
+    · intro E
+      change IsMonHom ((upperStarFromPoint X).map
+        (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E))
+      infer_instance
+    · intro E
+      change IsMonHom
+        ((upperStarFromPoint X).map (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) ≫ e.hom)
+      rw [he E]
+      change IsMonHom ((show condensedRingObj (Profinite.continuousMapRingObj E) X ⟶
+          (sheafCompose (Scheme.ProEt.topology X)
+            (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj
+              (continuousMapRingSheaf X E) from d.hom.app E) ≫
+        padicSubfieldSheafToPadicAlgClSheaf X ℓ E.1)
+      have := hd E
+      infer_instance
+  exact ⟨Mon.mkIso' e⟩
+
+end
+end CoefficientUniverse
+
+section Bounded
+variable {ℓ : ℕ} [Fact ℓ.Prime] {T : Type u} [TopologicalSpace T]
+private lemma bounded_isUnit (f : PadicAlgCl.finiteIntermediateFieldValued ℓ T)
+    (hf : ∀ t, f.1 t ≠ 0) : IsUnit f := by
+  let g : C(T, PadicAlgCl ℓ) := ⟨fun t ↦ (f.1 t)⁻¹, f.1.continuous.inv₀ hf⟩
+  have hg : g ∈ PadicAlgCl.finiteIntermediateFieldValued ℓ T := by
+    obtain ⟨E, hE, ha⟩ := f.property
+    exact ⟨E, hE, fun t ↦ E.inv_mem (ha t)⟩
+  have h1 : f * ⟨g, hg⟩ = 1 :=
+    Subtype.ext (ContinuousMap.ext fun t ↦ mul_inv_cancel₀ (hf t))
+  exact ⟨⟨f, ⟨g, hg⟩, h1, by rw [mul_comm]; exact h1⟩, rfl⟩
+
+private noncomputable def sumComplEquiv {κ : Type*} {r : ℕ}
+    (ρ : Fin r → κ) (hρ : Function.Injective ρ) :
+    κ ≃ Fin r ⊕ {i // i ∉ Set.range ρ} := by
+  classical
+  exact (Equiv.sumCompl (· ∈ Set.range ρ)).symm.trans
+    (Equiv.sumCongr (Equiv.ofInjective ρ hρ).symm (Equiv.refl _))
+
+@[simp] private lemma sumComplEquiv_symm_inl {κ : Type*} {r : ℕ}
+    (ρ : Fin r → κ) (hρ : Function.Injective ρ) (a : Fin r) :
+    (sumComplEquiv ρ hρ).symm (Sum.inl a) = ρ a := by
+  simp [sumComplEquiv]
+
+variable {κ ι : Type} [Fintype κ] [Fintype ι] [DecidableEq κ] [DecidableEq ι]
+
+private lemma bounded_exists_isOpen_eq_mul
+    (M : Matrix κ ι (PadicAlgCl.finiteIntermediateFieldValued ℓ T)) (r : ℕ)
+    (V : Set T) (hV : IsOpen V) (hr : ∀ t ∈ V, (M.map (condensedQbarFunctionEval t)).rank = r)
+    (t₀ : T) (ht₀ : t₀ ∈ V) :
+    ∃ (U : Set T) (ρ : Fin r → κ) (γ : Fin r → ι) (hρ : Function.Injective ρ)
+      (hγ : Function.Injective γ), IsOpen U ∧ t₀ ∈ U ∧
+      ∀ {T' : Type w} [TopologicalSpace T'] (g : C(T', T)), Set.range g ⊆ U →
+        ∃ (P : Matrix κ κ (PadicAlgCl.finiteIntermediateFieldValued ℓ T'))
+          (Q : Matrix ι ι (PadicAlgCl.finiteIntermediateFieldValued ℓ T')),
+          IsUnit P.det ∧ IsUnit Q.det ∧
+          M.map (condensedQbarFunctionComp g) = P * ((Matrix.fromBlocks 1 0 0 0 :
+            Matrix (Fin r ⊕ {i // i ∉ Set.range ρ})
+              (Fin r ⊕ {j // j ∉ Set.range γ}) _).reindex
+                (sumComplEquiv ρ hρ).symm (sumComplEquiv γ hγ).symm) * Q := by
+  obtain ⟨ρ, γ, h⟩ := (M.le_rank_map_iff (condensedQbarFunctionEval t₀) r).1 (hr t₀ ht₀).ge
+  have hρ : Function.Injective ρ := fun a b hab ↦ by
+    by_contra hne
+    exact h (by rw [Matrix.det_zero_of_row_eq hne (by ext; simp [hab]), map_zero])
+  have hγ : Function.Injective γ := fun a b hab ↦ by
+    by_contra hne
+    exact h (by rw [Matrix.det_zero_of_column_eq hne (by intro; simp [hab]), map_zero])
+  let δ := (M.submatrix ρ γ).det
+  refine ⟨V ∩ {t | δ.1 t ≠ 0}, ρ, γ, hρ, hγ,
+    hV.inter (isOpen_compl_singleton.preimage δ.1.continuous), ⟨ht₀, h⟩,
+    fun {T'} _ g hg ↦ ?_⟩
+  let M' := M.map (condensedQbarFunctionComp g)
+  let N := M'.reindex (sumComplEquiv ρ hρ) (sumComplEquiv γ hγ)
+  have hN : N = Matrix.fromBlocks N.toBlocks₁₁ N.toBlocks₁₂ N.toBlocks₂₁ N.toBlocks₂₂ :=
+    (Matrix.fromBlocks_toBlocks N).symm
+  have hB : N.toBlocks₁₁ = (M.submatrix ρ γ).map (condensedQbarFunctionComp g) := by
+    ext a b
+    simp [N, M', Matrix.toBlocks₁₁]
+  have hBu : IsUnit N.toBlocks₁₁.det := by
+    rw [hB]
+    erw [← RingHom.map_det (condensedQbarFunctionComp g)]
+    refine bounded_isUnit _ fun t' ↦ ?_
+    exact (hg ⟨t', rfl⟩).2
+  let := N.toBlocks₁₁.invertibleOfIsUnitDet hBu
+  have hS := Matrix.schur_eq_zero_of_rank_le (fun t' : T' ↦ condensedQbarFunctionEval t')
+    (fun x hx ↦ Subtype.ext (ContinuousMap.ext hx)) N.toBlocks₁₁ N.toBlocks₁₂ N.toBlocks₂₁
+    N.toBlocks₂₂ (fun t' ↦ ?_)
+  · rw [Matrix.invOf_eq_nonsing_inv] at hS
+    obtain ⟨P, Q, hP, hQ, hPQ⟩ :=
+      Matrix.exists_eq_mul_fromBlocks_one_zero _ _ _ _ hBu hS
+    refine ⟨P.reindex (sumComplEquiv ρ hρ).symm (sumComplEquiv ρ hρ).symm,
+      Q.reindex (sumComplEquiv γ hγ).symm (sumComplEquiv γ hγ).symm,
+      by simpa using hP, by simpa using hQ, ?_⟩
+    have hM' : M' = N.reindex (sumComplEquiv ρ hρ).symm (sumComplEquiv γ hγ).symm := by
+      simp [N]
+    change M' = _
+    rw [hM', hN, hPQ]
+    simp only [Matrix.reindex_apply, Matrix.submatrix_mul_equiv]
+  · rw [← hN]
+    have : N.map (condensedQbarFunctionEval t') =
+        (M.map (condensedQbarFunctionEval (g t'))).reindex (sumComplEquiv ρ hρ)
+          (sumComplEquiv γ hγ) := by
+      ext a b
+      rfl
+    rw [this, Matrix.rank_reindex, hr _ (hg ⟨t', rfl⟩).1, Fintype.card_fin]
+end Bounded
+
+section Categorical
+variable {C : Type u} [Category.{v} C] [Abelian C]
+variable {R : Type w} [CommRing R] (A : C) (φ : R →+* End A)
+variable {ι κ ν : Type} [Fintype ι] [Fintype κ] [Fintype ν]
+
+private noncomputable def matrixHom (M : Matrix κ ι R) :
+    (⨁ fun _ : ι ↦ A) ⟶ ⨁ fun _ : κ ↦ A :=
+  biproduct.matrix fun j i ↦ φ (M i j)
+
+private lemma matrixHom_mul (M : Matrix ν κ R) (N : Matrix κ ι R) :
+    matrixHom A φ (M * N) = matrixHom A φ N ≫ matrixHom A φ M := by
+  classical
+  apply biproduct.hom_ext'
+  intro j
+  apply biproduct.hom_ext
+  intro i
+  simp only [Category.assoc, matrixHom, biproduct.ι_matrix_assoc, biproduct.matrix_π,
+    biproduct.ι_desc, Matrix.mul_apply, map_sum]
+  rw [biproduct.lift_desc]
+  apply Finset.sum_congr rfl
+  intro k hk
+  exact φ.map_mul (M i k) (N k j)
+
+private lemma matrixHom_one [DecidableEq ι] :
+    matrixHom A φ (1 : Matrix ι ι R) = 𝟙 _ := by
+  apply biproduct.hom_ext'
+  intro j
+  apply biproduct.hom_ext
+  intro i
+  simp only [Category.assoc, matrixHom, biproduct.ι_matrix_assoc, biproduct.lift_π,
+    Category.id_comp, Matrix.one_apply]
+  by_cases h : i = j
+  · subst h
+    simp
+  · simp [h, Ne.symm h]
+
+private lemma matrixHom_isIso [DecidableEq ι] (M : Matrix ι ι R) (h : IsUnit M.det) :
+    IsIso (matrixHom A φ M) := by
+  refine ⟨matrixHom A φ M⁻¹, ?_, ?_⟩
+  · rw [← matrixHom_mul, Matrix.nonsing_inv_mul _ h, matrixHom_one]
+  · rw [← matrixHom_mul, Matrix.mul_nonsing_inv _ h, matrixHom_one]
+
+private noncomputable def freeFinIso (ι : Type) [Fintype ι] :
+    (⨁ fun _ : ι ↦ A) ≅ ⨁ fun _ : Fin (Fintype.card ι) ↦ A :=
+  biproduct.whiskerEquiv (g := fun _ : Fin (Fintype.card ι) ↦ A) (Fintype.equivFin ι)
+    fun _ ↦ Iso.refl A
+
+section Block
+variable {r : ℕ}
+variable (ρ : Fin r → κ) (γ : Fin r → ι)
+  (hρ : Function.Injective ρ) (hγ : Function.Injective γ)
+
+private noncomputable def blockMap : (⨁ fun _ : ι ↦ A) ⟶ ⨁ fun _ : κ ↦ A := by
+  classical
+  exact biproduct.toSubtype _ (· ∈ Set.range γ) ≫
+    (biproduct.whiskerEquiv ((Equiv.ofInjective γ hγ).symm.trans (Equiv.ofInjective ρ hρ))
+      (fun _ ↦ Iso.refl A)).hom ≫ biproduct.fromSubtype _ (· ∈ Set.range ρ)
+
+private lemma matrixHom_block :
+    matrixHom A φ ((Matrix.fromBlocks 1 0 0 0 :
+      Matrix (Fin r ⊕ {i // i ∉ Set.range ρ})
+        (Fin r ⊕ {j // j ∉ Set.range γ}) R).reindex
+          (sumComplEquiv ρ hρ).symm (sumComplEquiv γ hγ).symm) =
+        blockMap A ρ γ hρ hγ := by
+  classical
+  apply biproduct.hom_ext'
+  intro j
+  apply biproduct.hom_ext
+  intro i
+  simp only [Category.assoc, matrixHom, biproduct.ι_matrix_assoc, biproduct.lift_π]
+  obtain ⟨x, rfl⟩ := (sumComplEquiv ρ hρ).symm.surjective i
+  obtain ⟨y, rfl⟩ := (sumComplEquiv γ hγ).symm.surjective j
+  simp only [Matrix.reindex_apply, Matrix.submatrix_apply, Equiv.symm_symm,
+    Equiv.apply_symm_apply]
+  rcases y with b | ⟨j, hj⟩
+  · have h1 : biproduct.ι (fun _ : ι ↦ A) ((sumComplEquiv γ hγ).symm
+        (Sum.inl b)) ≫ blockMap A ρ γ hρ hγ = biproduct.ι (fun _ : κ ↦ A) (ρ b) := by
+      rw [sumComplEquiv_symm_inl, blockMap,
+        biproduct.ι_toSubtype_subtype_assoc (fun _ : ι ↦ A) (· ∈ Set.range γ) ⟨γ b, b, rfl⟩]
+      simp only [biproduct.whiskerEquiv_hom, Equiv.trans_apply, Iso.refl_inv,
+        biproduct.ι_desc_assoc, Category.assoc, biproduct.ι_fromSubtype,
+        Equiv.ofInjective_symm_apply, Equiv.ofInjective_apply]
+      exact Category.id_comp _
+    rw [← Category.assoc, h1]
+    rcases x with a | ⟨i, hi⟩
+    · rw [sumComplEquiv_symm_inl]
+      by_cases hab : b = a
+      · subst hab
+        rw [biproduct.ι_π_self]
+        simp
+      · rw [biproduct.ι_π_ne _ (hρ.ne hab)]
+        simp only [Matrix.fromBlocks_apply₁₁]
+        rw [Matrix.one_apply_ne (Ne.symm hab), map_zero]
+    · have : (sumComplEquiv ρ hρ).symm (Sum.inr ⟨i, hi⟩) = i := by
+        simp [sumComplEquiv]
+      rw [this, biproduct.ι_π_ne _ (fun h ↦ hi ⟨b, h⟩)]
+      exact map_zero φ
+  · have : (sumComplEquiv γ hγ).symm (Sum.inr ⟨j, hj⟩) = j := by
+      simp [sumComplEquiv]
+    rw [this, blockMap]
+    simp only [Category.assoc]
+    erw [biproduct.ι_toSubtype_assoc, dif_neg hj]
+    simp only [Limits.zero_comp]
+    rcases x with a | ⟨i, hi⟩ <;> exact map_zero φ
+
+private lemma cokernel_block_free : ∃ n : ℕ,
+    Nonempty (cokernel (blockMap A ρ γ hρ hγ) ≅ ⨁ fun _ : Fin n ↦ A) := by
+  classical
+  have : Epi (biproduct.toSubtype (fun _ : ι ↦ A) (· ∈ Set.range γ)) :=
+    epi_of_epi_fac (biproduct.fromSubtype_toSubtype _ _)
+  let e : (⨁ fun _ : {j // j ∈ Set.range γ} ↦ A) ≅
+      ⨁ fun _ : {i // i ∈ Set.range ρ} ↦ A := biproduct.whiskerEquiv
+    ((Equiv.ofInjective γ hγ).symm.trans (Equiv.ofInjective ρ hρ))
+      (fun _ ↦ Iso.refl A)
+  have : Epi (biproduct.toSubtype (fun _ : ι ↦ A) (· ∈ Set.range γ) ≫ e.hom) :=
+    inferInstance
+  refine ⟨Fintype.card {i : κ // i ∉ Set.range ρ}, ?_⟩
+  apply Nonempty.intro
+  exact cokernelIsoOfEq (Category.assoc _ _ _).symm ≪≫ cokernelEpiComp _ _ ≪≫
+    cokernelBiproductFromSubtypeIso _ _ ≪≫
+    freeFinIso A {i : κ // i ∉ Set.range ρ}
+end Block
+
+private lemma cokernel_matrix_free_of_factorization [DecidableEq ι] [DecidableEq κ]
+    {r : ℕ} (ρ : Fin r → κ) (γ : Fin r → ι)
+    (hρ : Function.Injective ρ) (hγ : Function.Injective γ)
+    (M : Matrix κ ι R) (P : Matrix κ κ R) (Q : Matrix ι ι R)
+    (hP : IsUnit P.det) (hQ : IsUnit Q.det)
+    (hM : M = P * ((Matrix.fromBlocks 1 0 0 0 :
+      Matrix (Fin r ⊕ {i // i ∉ Set.range ρ})
+        (Fin r ⊕ {j // j ∉ Set.range γ}) R).reindex
+          (sumComplEquiv ρ hρ).symm (sumComplEquiv γ hγ).symm) * Q) :
+    ∃ n : ℕ, Nonempty (cokernel (matrixHom A φ M) ≅ ⨁ fun _ : Fin n ↦ A) := by
+  classical
+  let := matrixHom_isIso A φ P hP
+  let := matrixHom_isIso A φ Q hQ
+  obtain ⟨n, ⟨e⟩⟩ := cokernel_block_free A ρ γ hρ hγ
+  refine ⟨n, ⟨?_⟩⟩
+  have h : matrixHom A φ M = matrixHom A φ Q ≫
+      blockMap A ρ γ hρ hγ ≫ matrixHom A φ P := by
+    rw [hM, matrixHom_mul, matrixHom_mul, matrixHom_block]
+  exact cokernelIsoOfEq h ≪≫ cokernelEpiComp _ _ ≪≫ cokernelCompIsIso _ _ ≪≫ e
+end Categorical
+
+section ChangeOfScalars
+variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
+  [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
+  {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R]
+  (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
+
+private noncomputable def extendFreeOfIso (n : ℕ) :
+    (Mod.extendScalars φ).obj (Mod.finiteFree R n) ≅ Mod.finiteFree S n :=
+  (Mod.extendScalars φ).mapBiproduct (fun _ : Fin n ↦ Mod.regular R) ≪≫
+    biproduct.mapIso (fun _ ↦
+      (Mod.extendScalarsIsoComapInv φ).app (Mod.regular R) ≪≫ Mod.regularIsoOfIsIso φ)
+
+private lemma finitelyPresented_extendIso (M : Mod C R) (hM : Mod.IsFinitelyPresented R M) :
+    Mod.IsFinitelyPresented S ((Mod.extendScalars φ).obj M) := by
+  classical
+  obtain ⟨n, m, ψ, ⟨e⟩⟩ := hM
+  let F := Mod.extendScalars φ
+  let en := extendFreeOfIso φ n
+  let em := extendFreeOfIso φ m
+  let ψ' := em.inv ≫ F.map ψ ≫ en.hom
+  refine ⟨n, m, ψ', ⟨?_⟩⟩
+  exact F.mapIso e ≪≫ PreservesCokernel.iso F ψ ≪≫
+    (cokernelEpiComp em.inv (F.map ψ ≫ en.hom) ≪≫ cokernelCompIsIso (F.map ψ) en.hom).symm
+end ChangeOfScalars
+
+section FibreDimensions
+variable {K : Type u} [Field K] {n m : ℕ}
+private lemma matrix_rank_eq_of_quotient_equiv (A B : Matrix (Fin n) (Fin m) K)
+    (e : ((Fin n → K) ⧸ LinearMap.range A.toLin') ≃ₗ[K]
+      ((Fin n → K) ⧸ LinearMap.range B.toLin')) : A.rank = B.rank := by
+  have hA := (LinearMap.range A.toLin').finrank_quotient_add_finrank
+  have hB := (LinearMap.range B.toLin').finrank_quotient_add_finrank
+  have he := e.finrank_eq
+  have ha : A.rank = Module.finrank K (LinearMap.range A.toLin') := by
+    simpa only [Matrix.toLin_eq_toLin'] using
+      A.rank_eq_finrank_range_toLin (Pi.basisFun K _) (Pi.basisFun K _)
+  have hb : B.rank = Module.finrank K (LinearMap.range B.toLin') := by
+    simpa only [Matrix.toLin_eq_toLin'] using
+      B.rank_eq_finrank_range_toLin (Pi.basisFun K _) (Pi.basisFun K _)
+  omega
+end FibreDimensions
+
+section Topological
+open Topology TopologicalSpace Set
+variable {X : Type u} [TopologicalSpace X] [NoetherianSpace X] [QuasiSober X]
+
+omit [NoetherianSpace X] in
+private lemma quasiSober_of_stableGeneralization (S : Set X)
+    (hS : StableUnderGeneralization S) : QuasiSober S where
+  sober hZ hZclosed := by
+    have hZ' := hZ.image Subtype.val continuous_subtype_val.continuousOn
+    obtain ⟨η, hη⟩ := QuasiSober.sober hZ'.closure isClosed_closure
+    obtain ⟨z, hz⟩ := hZ.nonempty
+    have hηz : η ⤳ (z : X) := hη.specializes (subset_closure ⟨z, hz, rfl⟩)
+    have hηS : η ∈ S := hS hηz z.property
+    refine ⟨⟨η, hηS⟩, ?_⟩
+    rw [isGenericPoint_def,
+      IsEmbedding.subtypeVal.closure_eq_preimage_closure_image, image_singleton, hη.def]
+    rw [← IsEmbedding.subtypeVal.closure_eq_preimage_closure_image, hZclosed.closure_eq]
+
+private lemma locallyConstant_of_specializes {α : Type v} {f : X → α}
+    (hf : ∀ ⦃x y : X⦄, x ⤳ y → f x = f y) : IsLocallyConstant f := by
+  have closed (S : Set X) (hS : ∀ ⦃x y : X⦄, x ⤳ y → (x ∈ S ↔ y ∈ S)) :
+      IsClosed S := by
+    have hfin := NoetherianSpace.finite_irreducibleComponents (α := X)
+    have heq : S = ⋃ C ∈ {C ∈ irreducibleComponents X | (C ∩ S).Nonempty}, C := by
+      ext y
+      simp only [mem_iUnion, mem_ofPred_eq, exists_prop]
+      constructor
+      · intro hy
+        exact ⟨irreducibleComponent y,
+          ⟨irreducibleComponent_mem_irreducibleComponents y, y, mem_irreducibleComponent, hy⟩,
+          mem_irreducibleComponent⟩
+      · rintro ⟨C, ⟨hC, x, hxC, hxS⟩, hyC⟩
+        obtain ⟨η, hη⟩ := QuasiSober.sober hC.1
+          (isClosed_of_mem_irreducibleComponents C hC)
+        exact (hS (hη.specializes hyC)).1 ((hS (hη.specializes hxC)).2 hxS)
+    rw [heq]
+    exact (hfin.subset fun C hC ↦ hC.1).isClosed_biUnion fun C hC ↦
+      isClosed_of_mem_irreducibleComponents C hC.1
+  apply IsLocallyConstant.iff_isOpen_fiber.mpr
+  intro a
+  apply isClosed_compl_iff.mp
+  apply closed
+  intro x y hxy
+  simp only [mem_compl_iff, mem_preimage, mem_singleton_iff, hf hxy]
+
+private lemma locallyConstant_family_of_fibres
+    {I : Type v} {T : I → Type w} [∀ i, TopologicalSpace (T i)]
+    (g : ∀ i, T i → X) (hc : ∀ i, Continuous (g i))
+    (hg : ∀ i, GeneralizingMap (g i))
+    {α : Type*} (q : ∀ i, T i → α)
+    (hq : ∀ i {x y : T i}, x ⤳ y → q i x = q i y)
+    (hd : ∀ i j (x : T i) (y : T j), g i x = g j y → q i x = q j y) :
+    ∀ i, IsLocallyConstant (q i) := by
+  classical
+  let S : Set X := {x | ∃ i, x ∈ range (g i)}
+  have hS : StableUnderGeneralization S := by
+    rintro x y hxy ⟨i, z, rfl⟩
+    obtain ⟨z', hz', he⟩ := hg i hxy
+    exact ⟨i, z', he⟩
+  let : QuasiSober S := quasiSober_of_stableGeneralization S hS
+  choose k t ht using fun x : S ↦ x.property
+  let r : S → α := fun x ↦ q (k x) (t x)
+  have hr (i : I) (x : T i) (hx : g i x ∈ S) : r ⟨g i x, hx⟩ = q i x :=
+    hd _ _ _ _ (ht _)
+  have hrsp {x y : S} (hxy : x ⤳ y) : r x = r y := by
+    have hxy' : (x : X) ⤳ (g (k y)) (t y) := by
+      rw [ht y]
+      exact hxy.map continuous_subtype_val
+    obtain ⟨z, hz, he⟩ := hg (k y) hxy'
+    have hqz := hq (k y) hz
+    have hh : r x = q (k y) z := hd _ _ _ _ ((ht x).trans he.symm)
+    exact hh.trans hqz
+  have hlc : IsLocallyConstant r := locallyConstant_of_specializes (fun _ _ h ↦ hrsp h)
+  intro i
+  let g' : T i → S := fun x ↦ ⟨g i x, i, x, rfl⟩
+  have he : q i = r ∘ g' := funext fun x ↦ (hr i x _).symm
+  rw [he]
+  exact hlc.comp_continuous ((hc i).subtype_mk _)
+
+end Topological
+
+/-- Keep cover refinement abstract in the property Q, so reducing a composite cover
+never unfolds the concrete extension-of-scalars construction of module pullback. -/
+private lemma cover_of_open_local_property {Y : Scheme.{u}}
+    (C : Scheme.Cover.{u} Scheme.proetalePrecoverage Y)
+    (Q : ∀ (Z : Scheme.{u}), (Z ⟶ Y) → Prop)
+    (hQ : ∀ (i : C.I₀) (t : C.X i),
+      ∃ V : (C.X i).Opens, t ∈ V ∧ Q V.toScheme (V.ι ≫ C.f i)) :
+    ∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage Y, ∀ i, Q (D.X i) (D.f i) := by
+  classical
+  obtain ⟨V, hV⟩ := Classical.axiomOfChoice
+    (fun i ↦ Classical.axiomOfChoice (hQ i))
+  let D (i : C.I₀) : Scheme.Cover.{u} Scheme.proetalePrecoverage (C.X i) :=
+    { I₀ := C.X i
+      X := fun t ↦ (V i t).toScheme
+      f := fun t ↦ (V i t).ι
+      mem₀ := Scheme.zariskiPrecoverage_le_proetalePrecoverage _
+        ((Scheme.ofArrows_mem_precoverage_iff (P := @IsOpenImmersion)).2
+          ⟨fun x ↦ ⟨x, by simpa using (hV i x).1⟩, fun _ ↦ inferInstance⟩) }
+  refine ⟨C.bind D, ?_⟩
+  rintro ⟨i, t⟩
+  exact (hV i t).2
+
+end CondensedQbarMatrixRefinement
+
+open CondensedQbarMatrixRefinement
+
+attribute [local instance] Abelian.hasFiniteBiproducts
+
 /-- A finite presentation on one pro-etale object admits a finite-free refinement.
 
 Source: RefactorInstruction.tex, Section 4, finite-matrix refinement;
-Bhatt--Scholze, Definition 6.8.3 (blueprint: lem-weil-pbc-condensed-qbar-lfp-matrix-refinement).
+Bhatt--Scholze, Definition 6.8.3
+(blueprint: lem-weil-pbc-condensed-qbar-lfp-matrix-refinement).
 Proof:
-1. Write A_T for the bounded-image coefficient ring on T. The coefficient comparison
-   (lem-weil-pbc-profinite-point-pullback) identifies f^* A_X with A_Y. Unpack hP as
-   a cokernel of a map A_Y^m -> A_Y^n. Since hf makes Y an object of X_proet, use
-   lem-weil-pbc-proetale-affine-wcontractible-covering-family to cover it by affine
-   objects U weakly contractible on X_proet. Restriction preserves the presentation:
-   inverse image preserves finite colimits by lem-weil-pbc-site-pullback-abelian-exact,
-   and forgetfulness preserves cokernels by lem-weil-pbc-module-sheaves-colimits-forgetful.
-   The monoidal comparisons identify the restricted free modules and their coefficients.
-   A map between finite free module sheaves is a finite matrix of sections, by applying
-   it to the global unit basis sections.
-2. On each U, lem-weil-pbc-condensed-point-basis-evaluation identifies these entries
-   with bounded-image continuous functions on the profinite quotient pi_0(U). Each
-   entry takes values in a finite extension of Q_l. Taking their finite compositum,
-   using def-weil-finite-subextension-directed-set, gives one finite field E for all
-   entries on U. For an empty matrix choose E = Q_l. Thus the matrix comes from E
-   coefficient sections. Apply only the coefficient-realization clause of
-   lem-weil-pbc-condensed-lfp-local-triviality with the original noetherian base X,
-   evaluated at the site object U. It identifies the E sections with continuous
-   functions |U| -> E. Naturality of basis evaluation in the inclusion E -> Qbar_l
-   identifies their images with the original entries. This comparison is natural
-   under restriction, so the E sections on any open W of U are C(|W|, E), still
-   using base X. Neither U nor W is assumed noetherian.
-3. Let S = f(|Y|), with its subspace topology. For x in S, pull P to a geometric
-   representative Spec K -> X above x and evaluate at Spec K. By
-   lem-weil-pbc-geometric-field-proetale-evaluation and the coefficient comparisons,
-   the coefficient ring is Qbar_l and this evaluation preserves cokernels and finite
-   free modules. Choose y above x and an algebraic closure of its residue field.
-   Pulling hP to that geometric point gives a finite-dimensional Qbar_l-vector space.
-   Its dimension r(x) is independent of the choice: an algebraic closure of kappa(x)
-   embeds over kappa(x) into every algebraically closed representative, and the
-   extension comparison of the geometric-evaluation node preserves evaluation.
-   For u in U above x, evaluation of the restricted presentation is therefore the
-   cokernel of B_U(u), and r(x) = n - rank_E(B_U(u)). Evaluation of a coefficient
-   function is its value at u by the naturality in steps 1 and 2. The rank is unchanged
-   on extending E to Qbar_l, since a minor is nonzero in one field exactly when it is
-   nonzero in the other. The original presentation need not exist outside S, and no
-   rank function on all of X is asserted.
-4. The maps U -> Y -> X are flat: hf supplies flatness of f and the refinement maps
-   are weakly etale. Given a specialization x_g -> x_s in X and u_s in U above x_s,
-   flat going-down (lem-sc-flat-going-down, def-weil-flat-morphism) gives a
-   generalization u_g of u_s above x_g. Explicitly, apply going-down to the flat local
-   map O_(X,x_s) -> O_(U,u_s), the prime corresponding to x_g and the maximal ideal
-   upstairs. Each continuous E-valued matrix entry has the same value at u_g and u_s:
-   continuous maps preserve specialization and E is Hausdorff. The lift puts x_g in S;
-   the rank formula then gives r(x_g) = r(x_s). Since the U cover Y, the same lifting
-   shows that S is stable under generalization.
-5. The subspace S is noetherian: an ascending chain of its opens is obtained by
-   intersecting S with an ascending chain of finite unions of opens of X, which
-   stabilizes. Its irreducible components have generic points in S. Indeed, for any
-   nonempty irreducible closed subset Z of S, its closure in X is irreducible and has
-   a generic point eta by lem-sc-scheme-sober.
-   Choose z in Z; eta generalizes z, so eta lies in S by step 4. Since Z is closed in S,
-   closure_X(Z) intersect S = Z, giving eta in Z and closure_S({eta}) = Z.
-   Apply lem-sc-noetherian-finite-irreducible-components to S. Step 4 makes r constant
-   on each component, since its generic point generalizes every point of it.
-   Intersecting components have equal ranks. Each rank level in S and its complement
-   are therefore finite unions of closed components, hence are clopen in S. Their
-   inverse images in U are clopen because U -> X factors continuously through S.
-   These inverse images give an open cover of U; no assertion that S is open in X
-   or that the rank levels extend to clopen subsets of X is needed.
-6. On a nonempty piece V of U over the rank level r = a, the matrix has constant
-   rank s = n - a, with s <= min(m,n). If s > 0, the nonvanishing loci of its s by s
-   minors are open, since E minus {0} is open, and cover V by the rank criterion.
-   Fix such a locus W and permute rows and columns so that B = [[D,C],[F,H]], with D
-   the chosen invertible s by s block. Its inverse
-   adj(D)/det(D) has continuous E-valued entries on W. By the coefficient realization
-   of step 2 these are actual E coefficient sections, hence A_W sections; all inverses
-   stay in the same finite field. Invertible block row and column operations give
-   [[D^(-1),0],[-F D^(-1),1]] B [[1,-D^(-1) C],[0,1]]
-     = [[1,0],[0,H - F D^(-1) C]].
-   Pointwise rank s forces the Schur complement to vanish: any nonzero entry would
-   give a nonzero (s+1) by (s+1) minor in this block diagonal matrix. Each entry is
-   thus the zero continuous function, hence the zero E coefficient section. Mapping
-   this equality to A_W and using the explicit invertible operations identifies the
-   cokernel with A_W^(n-s) = A_W^a. This is an isomorphism of module sheaves, rather
-   than an inference of isomorphism from the fibres.
-7. If s = 0, every entry is the zero E-valued function, hence the matrix is zero as
-   a matrix of coefficient sections. Its cokernel is A_V^n; use V itself as the minor
-   locus, with no inverse. This also handles m = 0 or n = 0, with the appropriate
-   empty blocks and free rank n. Omit empty rank pieces and minor loci. If Y is empty,
-   take its empty covering. Otherwise the weakly contractible cover, the open rank
-   pieces, and the open minor covers compose to a pro-etale cover of Y by
-   def-weil-pbc-proetale-site. Exact restriction preserves the cokernel on every
-   piece. The coefficient and inverse-image composition comparisons identify its
-   pullback with (CondensedRing.upperStar Qbar_l (C.f i >> f)).obj P, giving precisely
-   the displayed finite-free isomorphisms. All cokernels are ordinary; no derived
-   completeness assumption is used. -/
+1. Extension of scalars along the coefficient isomorphism identifies the given
+   presentation with a finite presentation over the coefficient object on Y. The
+   canonical finite-field comparison is transported through ULift, on both condensed
+   rings and scheme coefficient sheaves; adjunction naturality preserves its evaluation
+   equation. These comparisons form a natural isomorphism of finite-field diagrams.
+   Passing to their filtered colimits identifies the condensed Qbar coefficient ring
+   with the sheafification of bounded continuous functions. The induced map preserves
+   multiplication because tensors preserve these colimits and its composites with all
+   finite-field inclusions are ring maps. Supplying this ring isomorphism, the
+   function-presentation theorem gives a
+   cover C, fixed matrix sizes, bounded
+   continuous matrices B, and their cokernel presentations after every open restriction.
+   It also identifies the linear cokernels at points with the same image in X.
+2. Quotient dimension plus range dimension equals the common target dimension n;
+   consequently these fibrewise linear equivalences imply equality of matrix ranks.
+3. Each C_i to X is flat. Its image is stable under generalization by going-down.
+   For the union S of these images, rank descends by step 2 and is invariant under
+   specialization: lift a generalization in X to C_i and use that continuous functions
+   into a Hausdorff field agree at comparable points. The subspace S is noetherian.
+   It is quasi-sober, since a generic point in X of the closure of an irreducible closed
+   subset of S generalizes one of its points and hence belongs to S. Its closure in S
+   is the original subset. S has finitely many irreducible components. Any subset
+   invariant under both specialization and generalization is the union of the components
+   it meets. This is a finite union of closed sets; applying it to rank fibres and their
+   complements proves that these fibres are clopen. Their preimages in C_i are open.
+4. Near any point, intersect its constant-rank neighborhood with the nonvanishing locus
+   of a maximal minor. Invert the determinant in the bounded function ring: inversion
+   is continuous and the values stay in the same finite field. Schur elimination yields
+   B = L diag(1,0) R with invertible determinants. Pointwise rank forces the Schur
+   complement to vanish, and point evaluation is jointly injective on functions.
+5. Apply the ring homomorphism from functions to endomorphisms of the regular module.
+   Matrix multiplication becomes biproduct-map composition, and invertible matrices
+   give isomorphisms. The identity block projects onto selected columns and includes
+   selected rows. Its cokernel is the complementary-row biproduct, hence finite free.
+   Compose the resulting Zariski covers with C. The same argument covers rank zero,
+   empty matrices and the empty scheme. No covering scheme is assumed noetherian. -/
 theorem exists_condensedQbar_finiteFree_refinement
     (ℓ : ℕ) [Fact ℓ.Prime]
     (X Y : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
@@ -143,6 +742,56 @@ theorem exists_condensedQbar_finiteFree_refinement
       ∃ r : ℕ, Nonempty
         ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (C.f i ≫ f)).obj P ≅
           Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (C.X i)) r) := by
-  sorry
+  classical
+  let : WeaklyEtale f := hf
+  have hP' : Mod.IsFinitelyPresented
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y)
+      ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) f).obj P) :=
+    finitelyPresented_extendIso
+      (condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f) _ hP
+  obtain ⟨C, n, m, B, hBcoker, hBpres⟩ :=
+    exists_condensedQbar_compatible_function_presentations ℓ X Y f hf
+      (globalCoefficientIso ℓ X) P hP'
+  have hBfib (i j : C.I₀) (x : C.X i) (y : C.X j)
+      (hxy : (C.f i ≫ f) x = (C.f j ≫ f) y) :
+      ((B i).map (condensedQbarFunctionEval x)).rank =
+        ((B j).map (condensedQbarFunctionEval y)).rank := by
+    obtain ⟨e⟩ := hBcoker i j x y hxy
+    exact matrix_rank_eq_of_quotient_equiv _ _ e
+  have hlc : ∀ i, IsLocallyConstant
+      (fun t : C.X i ↦ ((B i).map (condensedQbarFunctionEval t)).rank) := by
+    apply locallyConstant_family_of_fibres
+      (fun i ↦ (C.f i ≫ f)) (fun i ↦ (C.f i ≫ f).continuous)
+    · intro i
+      let : WeaklyEtale (C.f i) := C.forgetQc.map_prop i
+      exact Flat.generalizingMap (C.f i ≫ f)
+    · intro i x y hxy
+      have he : (B i).map (condensedQbarFunctionEval x) =
+          (B i).map (condensedQbarFunctionEval y) := by
+        ext a b
+        exact (hxy.map (B i a b).1.continuous).eq
+      rw [he]
+    · exact hBfib
+  have localFree (i : C.I₀) (t : C.X i) :
+      ∃ V : (C.X i).Opens, t ∈ V ∧ ∃ r : ℕ, Nonempty
+        ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
+          ((V.ι ≫ C.f i) ≫ f)).obj P ≅
+          Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.toScheme) r) := by
+    let r := ((B i).map (condensedQbarFunctionEval t)).rank
+    let V : Set (C.X i) := {x | ((B i).map (condensedQbarFunctionEval x)).rank = r}
+    have hV : IsOpen V := (hlc i).isOpen_fiber r
+    obtain ⟨U, ρ, γ, hρ, hγ, hU, ht, hfac⟩ :=
+      bounded_exists_isOpen_eq_mul (B i) r V hV (fun x hx ↦ hx) t rfl
+    let W : (C.X i).Opens := ⟨U, hU⟩
+    obtain ⟨φ, ⟨e⟩⟩ := hBpres i W
+    obtain ⟨L, R, hL, hR, hLR⟩ := hfac W.ι.base.hom (by simp [W])
+    obtain ⟨k, ⟨ek⟩⟩ := cokernel_matrix_free_of_factorization
+      (Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj ℓ) W.toScheme)) φ
+      ρ γ hρ hγ _ L R hL hR hLR
+    exact ⟨W, ht, k, ⟨e ≪≫ ek⟩⟩
+  exact cover_of_open_local_property C
+    (fun Z g ↦ ∃ r : ℕ, Nonempty
+      ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (g ≫ f)).obj P ≅
+        Mod.finiteFree (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z) r)) localFree
 
 end AlgebraicGeometry.ProEtale

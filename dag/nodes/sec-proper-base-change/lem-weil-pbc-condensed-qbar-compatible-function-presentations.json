@@ -1,0 +1,178 @@
+{
+ "id": "lem-weil-pbc-condensed-qbar-compatible-function-presentations",
+ "kind": "statement",
+ "title": "Bounded function presentations and compatibility of evaluated cokernels",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, descent through the common-stage colimit: local finite presentation at algebraic-closure coefficients; coefficient matrices and their geometric-fibre rank comparison before the rank-constancy and minor arguments.",
+   "via": [
+    "lem-weil-pbc-condensed-qbar-lfp-matrix-refinement",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "lem-weil-pbc-condensed-constructible-serre",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "statement": "Let \\(\\ell\\) be prime, \\(X\\) a scheme with noetherian underlying space, and \\(f:Y\\to X\\) weakly etale [def-weil-weakly-etale-morphism]. For a topological space \\(T\\), let \\(F_\\ell(T)\\) be the ring of continuous functions \\(T\\to\\overline{\\mathbf Q}_\\ell\\) whose image is contained in a finite subextension of \\(\\mathbf Q_\\ell\\) [def-weil-finite-subextension-directed-set], with pointwise operations. Write \\(A_T=p_T^*\\underline{\\overline{\\mathbf Q}_\\ell}\\) for the condensed coefficient ring object on a scheme \\(T\\) [def-weil-pbc-condensed-e-module-category], and \\(B_X\\) for the sheafification of the presheaf \\(U\\mapsto F_\\ell(|U|)\\) on the pro-etale site of \\(X\\) [def-weil-pbc-proetale-site]. Assume supplied an isomorphism of ring objects \\(A_X\\simeq B_X\\). Let \\(P\\) be an \\(A_X\\)-module sheaf [def-weil-sheaf-of-modules-category], and suppose that \\(f^*P\\), over \\(A_Y\\), is the cokernel of a map \\(A_Y^m\\to A_Y^n\\) for finite ranks. Then there exist a pro-etale cover \\(C\\) of \\(Y\\), fixed integers \\(n,m\\ge0\\), and matrices \\(M_i\\in\\operatorname{Mat}_{n\\times m}(F_\\ell(|C_i|))\\), with these properties. First, the vector spaces \\(\\overline{\\mathbf Q}_\\ell^n/\\operatorname{range}(M_i(x))\\) and \\(\\overline{\\mathbf Q}_\\ell^n/\\operatorname{range}(M_j(y))\\) are linearly equivalent whenever \\((C_i\\to Y\\to X)(x)=(C_j\\to Y\\to X)(y)\\). Second, for every open subscheme \\(V\\subseteq C_i\\), there is a unital ring homomorphism \\(\\phi_{i,V}:F_\\ell(|V|)\\to\\operatorname{End}_{A_V}(A_V)\\) and an isomorphism of \\(A_V\\)-module sheaves from \\(P|_V\\) to the cokernel of the biproduct morphism with entries \\(\\phi_{i,V}(M_i(k,j)|_V)\\). Evaluation in the first clause is ordinary point evaluation followed by the associated linear map. No rank calculation, local constancy or finite freeness is asserted.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-finite-subextension-directed-set"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the assumed finite presentation over A_Y as a cokernel of a map A_Y^m to A_Y^n, with fixed m and n. Cover Y by affine objects U weakly contractible over X. Pullback preserves cokernels and finite free modules, using inverse-image exactness and the coefficient comparisons. A homomorphism between finite free modules is recovered from its matrix of regular-module endomorphisms by its inclusions and projections.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-weakly-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "Transport the coefficient object on the original noetherian base X through the supplied ring-object isomorphism to the sheafification of bounded continuous functions. On each weakly contractible affine U, basis evaluation identifies its sections with bounded continuous functions on the profinite component quotient, hence with functions on U. A finite compositum contains all entries of the finite matrix; choose the ground field for an empty matrix. This realizes M. On every open V of U, the bounded presheaf unit gives a ring map to coefficient sections. Localization along the weakly etale morphism V to X, followed by multiplication on the regular module, gives the asserted ring homomorphism. Naturality and exact restriction give the cokernel isomorphism on V. No noetherianity of U or V is asserted or needed.",
+   "uses": [
+    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "Evaluate P at a geometric representative over a point x of X. Exactness and the finite-free comparison identify its evaluation with the ordinary linear cokernel of the evaluated function matrix, or equivalently the quotient by its range. Choose an algebraic closure of the residue field of x and embed it into each algebraically closed geometric representative. The extension comparison identifies the evaluated modules in the two representatives. Coefficient realization is natural and sends a function to its value. Thus the two quotient vector spaces are linearly equivalent. This stops before any dimension or rank computation.",
+   "uses": [
+    "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-weakly-etale-morphism",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "def-weil-finite-subextension-directed-set",
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Section 4, finite-matrix refinement, steps 1--3 after the ring-object coefficient comparison. The parent proves that comparison, coefficient normalization, quotient-dimension arithmetic and all rank, Gaussian, categorical-cokernel and cover arguments in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism between finite free sheaves of condensed Qbar_l modules is a matrix of bounded continuous functions whose pointwise rank depends only on the base point",
+   "results": "Unavailable: the service returned Internal Server Error; no mathematical verdict.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation of a condensed Qbar_l module as a matrix of bounded continuous functions, with rank invariant on geometric fibres",
+   "results": "Eight hits, including Condensed.finFree, Condensed.profiniteFree, CondensedMod, and instFinitePresentationForall; none compares the specified scheme inverse image with bounded functions or identifies geometric-fibre ranks.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix, ContinuousMap",
+   "results": "Five Hermitian matrix functional-calculus hits; no coefficient-presentation or geometric-fibre theorem.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteIntermediateFieldValued|continuousCoefficient",
+   "results": "No hits in pinned Mathlib. The project supplies the bounded function ring and finite-field coefficient realization, but no combined matrix and geometric-fibre statement.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQbarLfpMatrixRefinement",
+  "date": "2026-10-16",
+  "group": "E3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "mathlib": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedQbarFunctionPresentations",
+  "file": "lean/Sheaf/Paper/CondensedQbarFunctionPresentations.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_condensedQbar_compatible_function_presentations",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.condensedQbarFunctionEval",
+   "AlgebraicGeometry.ProEtale.condensedQbarFunctionComp",
+   "AlgebraicGeometry.ProEtale.exists_condensedQbar_compatible_function_presentations"
+  ],
+  "statement": "theorem exists_condensedQbar_compatible_function_presentations\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (X Y : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (f : Y ⟶ X) (hf : WeaklyEtale f)\n    (hcoeff : Nonempty\n      (Mon.mk (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) ≅\n        Mon.mk (padicAlgClSheaf X ℓ)))\n    (P : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))\n    (hP : Mod.IsFinitelyPresented\n      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y)\n      ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) f).obj P)) :\n    ∃ (C : Scheme.Cover.{u} Scheme.proetalePrecoverage Y) (n m : ℕ)\n      (B : ∀ i : C.I₀,\n        Matrix (Fin n) (Fin m) (PadicAlgCl.finiteIntermediateFieldValued ℓ (C.X i))),\n      (∀ (i j : C.I₀) (x : C.X i) (y : C.X j),\n        (C.f i ≫ f) x = (C.f j ≫ f) y →\n        Nonempty\n          (((Fin n → PadicAlgCl ℓ) ⧸ LinearMap.range\n            (((B i).map (condensedQbarFunctionEval x)).toLin')) ≃ₗ[PadicAlgCl ℓ]\n            ((Fin n → PadicAlgCl ℓ) ⧸ LinearMap.range\n              (((B j).map (condensedQbarFunctionEval y)).toLin')))) ∧\n      ∀ (i : C.I₀) (V : (C.X i).Opens),\n        ∃ φ : PadicAlgCl.finiteIntermediateFieldValued ℓ V.toScheme →+*\n            End (Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj ℓ) V.toScheme)),\n          Nonempty\n            ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)\n              ((V.ι ≫ C.f i) ≫ f)).obj P ≅\n              cokernel (biproduct.matrix fun j k ↦\n                φ (condensedQbarFunctionComp V.ι.base.hom (B i k j))))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-3e724",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T054834-L-156276",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-3e724",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T054834-L-156276",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and DAG statements; both modules and the direct importer compiled cleanly."
+ }
+}
