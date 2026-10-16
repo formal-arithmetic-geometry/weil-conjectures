@@ -26610,3 +26610,19 @@ timeout after 60 s: the fault is usually a definition that is expensive to unfol
 2026-10-16T02:43:05Z E1 released Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCore: finished meanwhile: the module has no sorry on the main branch (dispatcher)
 2026-10-16T02:47:43Z L landed Sheaf.Paper.ContinuousConstructibleIntegralDenominators Sheaf.Paper.ContinuousConstructibleIntegralImage Sheaf.Paper.ContinuousIntegralCoefficientTelescope Sheaf.Paper.IntegralConstructibleSequentialHom Sheaf.Paper.IntegralConstructibleSheafHom (interface, landing 20261016T024743-L-1401577)
 2026-10-16T02:47:43Z A4 done Sheaf.Paper.ContinuousConstructibleIntegralImage (sorry left: 0) delivered by A4 on deliver/A4/Sheaf.Paper.ContinuousConstructibleIntegralImage, merged by L (reviewer X-8828e)
+2026-10-16T02:48:46Z XR6cb7e6eacb2063cd abandoned WeilConjectures.AlgebraicGeometry.Sites.SupportDimension: abandon: dedicated repair failed; ✖ [22385/22607] Building WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison (22s)
+error: WeilConjectures/SixFunctors/ProEtale/Derived/HomComparison.lean:260:19: failed to synthesize instance of type class
+  UpperStarPreservesFlat (ModuleCat Λ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+error: WeilConjectures/SixFunctors/ProEtale/Derived/HomComparison.lean:260:11: Tactic `rcases` failed: `x✝ : ?m.735` is not an inductive datatype
+error: Lean exited with code 1
+
+
+your change of WeilConjectures.AlgebraicGeometry.Sites.SupportDimension broke its importer WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison: adapt the importers in the same delivery or do not change what they use; tried: 
+READY: Added the missing flatness-instance import to HomComparison. SupportDimension and the repaired consumer compile with lcompile.py; statements, proofs, and docstrings preserved. Report updated.
+REJECT: Both Lean files compile and the stale sorry regression was removed, but dry-run and normal delivery rejected “nothing is proved” because the XR repair reservation was not recognized. Nothing pushed.
+REJECT: Both Lean files compile and the stale sorry regression was removed, but dry-run and normal delivery rejected “nothing is proved” because the XR repair reservation was not recognized. Nothing pushed.
+READY: Added the explicit flatness-instance import to HomComparison. SupportDimension and the repaired consumer pass individual lcompile.py checks. Statements, proofs, and docstrings preserved; report updated.
+REJECT: Both Lean files compile; no added axioms or sorry. Delivery rejected “nothing is proved” because repair authorization metadata was not recognized. Nothing pushed; .check and independent report written.
+REJECT: Both Lean files compile; no added axioms or sorry. Delivery rejected “nothing is proved” because repair authorization metadata was not recognized. Nothing pushed; .check and independent report written.
