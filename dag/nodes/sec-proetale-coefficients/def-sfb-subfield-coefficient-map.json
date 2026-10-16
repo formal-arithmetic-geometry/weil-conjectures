@@ -3,25 +3,48 @@
  "blueprint": {
   "is": "def-sfb-subfield-coefficient-map",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The coefficient change $E_X\\to F_X$",
- "statement": "Let $\\ell$ be a prime, $E\\le F$ finite extensions of $\\mathbf Q_\\ell$ inside $\\Qlb$, and $X$ a\nscheme. The inclusion $E_X\\to F_X$ is the coefficient change ([def-sfb-coefficient-map]) on $X$\nof the inclusion $\\underline E\\to\\underline F$ of condensed rings\n([sk-prop-sfb-qlbar-colimit-point]), a morphism between the pulled-back coefficient rings\n$E_X=p_X^*\\underline E$ and $F_X=p_X^*\\underline F$ ([sk-def-sfb-pulled-back-coefficients]).",
+ "statement": "Let $\\ell$ be a prime, $E\\le F$ finite extensions of $\\mathbf Q_\\ell$ inside $\\Qlb$, and $X$ a\nscheme. The inclusion $E_X\\to F_X$ is the coefficient change ([def-sfb-coefficient-map]) on $X$\nof the inclusion $\\underline E\\to\\underline F$ of condensed rings\n([def-sfb-qlbar-subextension-map]), a morphism between the pulled-back coefficient rings\n$E_X=p_X^*\\underline E$ and $F_X=p_X^*\\underline F$ ([sk-def-sfb-pulled-back-coefficients]).",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/def-sfb-subfield-coefficient-map.md",
   "place": "node def-sfb-subfield-coefficient-map, order 1749"
  },
  "stmt_deps": [
   "def-sfb-coefficient-map",
-  "sk-def-sfb-pulled-back-coefficients"
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-qlbar-subextension-map"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pull back the condensed ring inclusion between finite extensions of the p-adic numbers to the pro-etale site of a scheme",
+   "results": "8 hits: PadicInt.algebraMap_apply, PadicInt.Coe.ringHom, PadicInt.isOpenEmbedding_coe, PadicInt.instCoePadic, Condensed.profiniteSolid, Padic.instRing, PadicInt.Coe.ringHom_apply, Padic.coe_withValRingEquiv. These concern p-adic numbers or solid free condensed modules, not the coefficient map on a scheme. Read Mathlib/Condensed/Solid.lean:39-50 and Mathlib/NumberTheory/Padics/PadicIntegers.lean:559-566 to reject the nearest candidates.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"padicSubfieldRingObjMap\"",
+   "results": "Successful search, zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "padicSubfieldRingObjMap|coefficientMap|padic.*[Ss]ubfield",
+   "results": "Successful rg search through /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib, zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -39,5 +62,20 @@
  "blueprint_lean_not_found": [
   "AlgebraicGeometry.ProEtale.padicSubfieldRingObjMap"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-subfield-coefficient-map",
+  "worker": "stage1",
+  "summary": "Split this project-specific definition by making its coefficient-map and pulled-back-ring dependencies explicit. No auxiliary node is needed: the inclusion of condensed rings is already stated by def-sfb-qlbar-subextension-map, and the pulled-back coefficient rings are stated by sk-def-sfb-pulled-back-coefficients. Replaced the imported dangling citation to the absent sk-prop-sfb-qlbar-colimit-point DAG node with the existing precise inclusion definition; the mathematical content is unchanged. Maintainer reader supplied the missing three-kind Mathlib search record; no mathematical change.",
+  "blueprint": "Realizes the complete definition sentence: the coefficient change on X is induced by the inclusion of condensed rings and has source and target the pulled-back coefficient rings."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q14-2a495ca49",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-2a495ca49 (reviewer sub-agent of L); spot-checked: Read the full definition, dependencies, current blueprint chapter/unit route, and archived proper-base-change targets. Construction and coefficient categories agree; identity, tower, empty-scheme, and characteristic cases pass. Added missing three-kind Mathlib search records in the corrected whole JSON. No mathematical statement changed; no new nodes or tool_uses. Details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
