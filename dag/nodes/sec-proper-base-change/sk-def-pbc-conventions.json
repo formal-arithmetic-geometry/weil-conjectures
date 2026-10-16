@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-def-pbc-conventions",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Conventions for proper base change",
- "statement": "In this section, schemes are arbitrary unless an additional hypothesis is\nstated. The theorem concerns the classical part of\n$D^+(T_{\\mathrm{proét}},\\Lambda)$, for a discrete commutative ring $\\Lambda$.\nThe intermediate acyclicity, curve and Chow calculations are made on\n$T_{\\Et}$, with abelian sheaves or modules over its discrete constant ring. We\nwrite $D^+(T_{\\Et},\\Lambda)$ for the bounded below derived category. Inverse\nimage on these sheaves is denoted by $u^{-1}$; for $u:S\\to T$ it is a functor\n$\\Sh(T_{\\Et})\\to\\Sh(S_{\\Et})$, and likewise on module sheaves and\n$D^+(T_{\\Et},\\Lambda)\\to D^+(S_{\\Et},\\Lambda)$. It is exact and agrees with\n$u^*$ for the constant coefficient rings under consideration. The derived\ndirect image is $Ru_*$. Torsion always means torsion of the underlying abelian\nsheaves.\n\nThe proper base change theorem imposes no invertibility condition on the\ntorsion coefficients, so a prime $r$ appearing in this section may equal a\nresidue characteristic. The standing condition on $\\ell$ from the introduction\nreturns with the $\\ell$-adic constructible theory.\n\n*Module and abelian cohomology.* Cohomology of a sheaf of $\\Lambda$-modules is\ncanonically the cohomology of its underlying abelian sheaf (Stacks Project,\nTag 03FD), because an injective module sheaf is acyclic for the underlying\nsection functor on every object of the site. Applying this on the étale\nobjects over the target gives the same compatibility for $R^qu_*$ and, by\nbounded below resolutions, for $Ru_*$. Forgetting the module structure need\nnot preserve injectives; only acyclicity is used.",
+ "statement": "In this section, schemes [def-pc-scheme] are arbitrary unless an additional hypothesis is\nstated. The theorem concerns the classical part of\n$D^+(T_{\\mathrm{proét}},\\Lambda)$, for a discrete commutative ring $\\Lambda$. Here $T_{\\mathrm{proét}}$ is the small pro-étale site [sk-def-pe-site]; its coefficient ring is the constant sheaf $\\Lambda_T$ [def-weil-pbc-constant-sheaf], its module sheaves are [def-weil-sheaf-of-modules-category], and $D^+$ is the bounded below part [def-weil-pbc-bounded-derived-subcategories] of their derived category [def-weil-abstract-derived-category]. Classical means classical cohomology sheaves [sk-def-pe-classical-definition].\nThe intermediate acyclicity, curve and Chow calculations are made on\n$T_{\\Et}$, with abelian sheaves or modules over its discrete constant ring [def-weil-pbc-etale-sheaves]. We\nwrite $D^+(T_{\\Et},\\Lambda)$ for the bounded below derived category [def-weil-pbc-derived-categories]. Inverse\nimage on these sheaves is denoted by $u^{-1}$; for $u:S\\to T$ it is a functor\n$\\Sh(T_{\\Et})\\to\\Sh(S_{\\Et})$, and likewise on module sheaves and\n$D^+(T_{\\Et},\\Lambda)\\to D^+(S_{\\Et},\\Lambda)$. On sheaves of sets, this is the inverse image of [lem-weil-pbc-sets-etale-inverse-image-exact]; on abelian and module sheaves and their bounded below derived categories it is [def-weil-pbc-derived-inverse-image]. It is exact and agrees with\n$u^*$ for the constant coefficient rings under consideration [prop-weil-pbc-inverse-image-modules-exact]. The derived\ndirect image is $Ru_*$ [def-weil-pbc-direct-image]. Torsion always means torsion of the underlying abelian\nsheaves [def-weil-pbc-etale-sheaves].\n\nThe proper base change theorem (with proper meaning separated, locally of finite type and universally closed, as in the properness clause of [sk-def-conv]) imposes no invertibility condition on the\ntorsion coefficients, so a prime $r$ appearing in this section may equal a\nresidue characteristic. The standing condition on $\\ell$ from the introduction\nreturns with the $\\ell$-adic constructible theory.\n\n*Module and abelian cohomology.* Cohomology of a sheaf of $\\Lambda$-modules is\ncanonically the cohomology of its underlying abelian sheaf (Stacks Project,\nTag 03FD), because an injective module sheaf is acyclic for the underlying\nsection functor on every object of the site. Applying this on the étale\nobjects over the target gives the same compatibility for $R^qu_*$ and, by\nbounded below resolutions, for $Ru_*$. Forgetting the module structure need\nnot preserve injectives; only acyclicity is used. These cohomology and direct-image comparison assertions are the three clauses of [det-pbc-conventions-module-cohomology].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-def-pbc-conventions/_section.md",
   "place": "node sk-def-pbc-conventions, order 1043",
@@ -19,14 +19,233 @@
   ]
  },
  "stmt_deps": [
-  "sk-def-conv"
+  "def-pc-scheme",
+  "sk-def-pe-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-abstract-derived-category",
+  "sk-def-pe-classical-definition",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "def-weil-pbc-derived-inverse-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-direct-image",
+  "sk-def-conv",
+  "det-pbc-conventions-module-cohomology"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomology.*(module|forget)|((module|forget).*cohomology)",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "directory": "CategoryTheory"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state these conventions or the module/abelian cohomology comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Functor.Exact",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'Functor.Exact'",
+    "directory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle reported unknown identifier Functor.Exact; no absence conclusion drawn; retried with the pullback query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a sheaf of modules equals cohomology of its underlying abelian sheaf",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.presheaf",
+     "CategoryTheory.Sheaf.H",
+     "AlgebraicGeometry.Scheme.Modules.isSheaf",
+     "PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+     "AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf",
+     "AlgebraicGeometry.Scheme.Modules.toPresheaf",
+     "SheafOfModules.toSheaf_obj_val",
+     "AlgebraicGeometry.Scheme.Modules.toPresheaf_obj"
+    ],
+    "note": "",
+    "directory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: Sheaf.H defines abelian cohomology; the other hits define underlying sheaves and forgetful functors, not their derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of etale sheaves with constant ring coefficients and comparison of module and abelian sheaf cohomology",
+   "results": {
+    "hits": 8,
+    "top": [
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+     "Algebra.etaleLocus_eq_compl_support",
+     "Algebra.FormallyEtale.comp",
+     "RingHom.formallyEtale_algebraMap",
+     "KaehlerDifferential.isBaseChange_of_formallyEtale",
+     "Algebra.Etale.formallyEtale",
+     "Algebra.FormallyEtale.of_restrictScalars",
+     "AlgebraicGeometry.IsEtale.of_comp"
+    ],
+    "note": "",
+    "directory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state these conventions or the module/abelian cohomology comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteLimits.*sheafPullback|sheafPullback.*PreservesFiniteLimits|def H |def pullback",
+   "results": {
+    "hits": 18,
+    "top": [
+     "Mathlib/CategoryTheory/Sites/Pullback.lean",
+     "Mathlib/CategoryTheory/Sites/Pullback.lean",
+     "Mathlib/CategoryTheory/Sites/Pullback.lean",
+     "Mathlib/CategoryTheory/Sites/Pullback.lean",
+     "Mathlib/CategoryTheory/Sites/Pullback.lean",
+     "Mathlib/CategoryTheory/Sites/Grothendieck.lean",
+     "Mathlib/CategoryTheory/Sites/Grothendieck.lean",
+     "Mathlib/CategoryTheory/Sites/Grothendieck.lean"
+    ],
+    "note": "",
+    "directory": "CategoryTheory/Sites"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: generic exact pullback infrastructure in Sites/Pullback.lean, not the constant-coefficient and classical pro-etale conventions"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"pullback\"",
+   "results": {
+    "hits": 12,
+    "top": [
+     "SheafOfModules.overPullback",
+     "SheafOfModules.instIsLeftAdjointOverOverRingCatOverMapOfHasPullbacks",
+     "SheafOfModules.pullbackId",
+     "SheafOfModules.pullback",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.pullback_comp_id"
+    ],
+    "note": "",
+    "directory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the complete conventions: general module pullback and adjunction only; source read, no module/abelian cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of sites inverse image on abelian sheaves and modules over a constant sheaf of rings is exact",
+   "results": {
+    "hits": 8,
+    "top": [
+     "Condensed.instAB4CondensedMod",
+     "Condensed.instAB4StarCondensedMod",
+     "Condensed.instAB5CondensedMod",
+     "SheafOfModules.instAbelian",
+     "instAbelianLightCondMod",
+     "CategoryTheory.Sheaf.instIsGrothendieckAbelian",
+     "instAbelianCondensedMod",
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod"
+    ],
+    "note": "",
+    "directory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations do not state these conventions or the module/abelian cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived direct image for sheaves of modules commutes with the functor to abelian sheaves because injective modules are acyclic",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pushforwardNatIso",
+     "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility",
+     "PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom",
+     "PresheafOfModules.toPresheaf_map_toSheafify",
+     "SheafOfModules.sheafificationCompPullback",
+     "PresheafOfModules.sheafificationCompForgetCompToPresheaf"
+    ],
+    "note": "",
+    "directory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: the returned adjunctions and underived pushforward/sheafification isomorphisms do not state the derived module/abelian comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "toSheaf.*(derived|rightDerived|acyclic)|((derived|rightDerived|acyclic).*toSheaf)",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "directory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration matching this derived forgetful comparison pattern"
+  },
+  {
+   "tool": "grep",
+   "query": "forget.*[Rr]ight[Dd]erived|[Rr]ight[Dd]erived.*forget|toSheaf.*[Ii]njective|[Ii]njective.*toSheaf",
+   "results": {
+    "hits": 21,
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+     "Mathlib/Geometry/RingedSpace/OpenImmersion.lean",
+     "Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean",
+     "Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean",
+     "Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean",
+     "Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Representability.lean"
+    ],
+    "note": "",
+    "directory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: the 21 hits concern locally injective sheafification maps or faithful-functor map injectivity, not injective objects or a derived coefficient-forgetting comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact forgetful functor from sheaves of modules to abelian sheaves preserves cohomology of sections and right derived pushforward",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pushforward_obj_val",
+     "SheafOfModules.instIsRightAdjointPushforward",
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+     "SheafOfModules.pushforwardNatIso",
+     "SheafOfModules.pushforward",
+     "SheafOfModules.instAbelian",
+     "CategoryTheory.Sheaf.cohomologyPresheafFunctor"
+    ],
+    "note": "",
+    "directory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the full conventions: underived module pushforward and adjunctions, abelianness, and abelian cohomology infrastructure; source statements inspected, none gives the full item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -44,5 +263,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proper-base-change",
- "unit": "sk-def-pbc-conventions"
+ "unit": "sk-def-pbc-conventions",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-pbc-conventions",
+  "worker": "stage1",
+  "summary": "Kept the main-20261015 conventions and all hypotheses; made the small pro-etale constant-module derived category explicit, linked every notion to existing definitions, and linked exact inverse image and all module/abelian comparisons to their existing statement nodes. No new nodes and no proof of a theorem is hidden in this definition. Repair of the returned delivery: rebased the retained split onto the current DAG, re-read all fifteen direct statement dependencies, and made explicit that sk-def-conv is used only for its properness clause. Its current locally-finite-type convention and its cited universal-closedness/quasi-compactness equivalence agree with the blueprint; no coefficient, scheme or invertibility hypothesis changes.",
+  "blueprint": "Realizes all paragraphs of sk-def-pbc-conventions/_section.md: arbitrary schemes and discrete coefficients, classical bounded below pro-etale objects, etale intermediate calculations, exact constant-coefficient inverse image and derived direct image, unrestricted torsion primes, and the module/abelian comparison paragraph via existing det-pbc-conventions-module-cohomology."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-671a25167",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-671a25167 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It adds no new nodes: the item is a definition with no proof steps, and the unit changes only realized and realized_by. The item statement is the main-20261015 sk-def-pbc-conventions text word for word, with only citations and clarifying sentences added; no hypothesis is added or dropped. I read the statements of all 15 dependencies. Pro-étale paragraph: the site comes from sk-def-pe-site, which is the Mathlib leaf Scheme.ProEt, the same declaration as def-weil-pbc-small-proetale-site, which underlies the def-weil-pbc-proetale-site used by the key theorem sk-thm-properbasechange. The coefficients are the constant sheaf of an arbitrary discrete commutative ring, in module sheaves, with D^+ and classicality of every cohomology sheaf (sk-def-pe-classical-definition). So the item describes the key theorem's coefficient category with no finite-ring restriction; the worker rightly did not use def-weil-pbc-proetale-modules, which needs a finite ring. Étale paragraph: def-weil-pbc-etale-sheaves gives the categories and local torsion with no uniform exponent; def-weil-pbc-derived-categories gives D^+; lem-weil-pbc-sets-etale-inverse-image-exact gives the inverse image on sheaves of sets in the right direction; def-weil-pbc-derived-inverse-image gives the derived inverse image, including the module version; prop-weil-pbc-inverse-image-modules-exact (1)-(3) gives the isomorphism of constant rings, agreement with u^* and exactness; def-weil-pbc-direct-image gives Ru_* for abelian and module sheaves. Stacks 04JC (sites-modules lemma-flat-pullback-exact) needs only flatness of the coefficient map, which is an isomorphism here. Properness clause: it matches sk-def-conv and its blueprint source, separated, locally of finite type and universally closed. Module and abelian cohomology paragraph: it is exactly the three clauses of the existing same-unit node det-pbc-conventions-module-cohomology (arbitrary scheme and ring). I read Stacks 03FD (sites-cohomology lemma-cohomology-modules-abelian-agree, lines 1862-1910): its proof uses acyclicity only, not preservation of injectives. A traversal of the 332-node dependency closure finds no path back to the item, and no dependency is merged. No SGA is cited. Small cases checked: Λ=0; the empty scheme and identity maps; F_p over a separably closed field; F_p is injective over F_p but not as an abelian group; Q/Z on a countable disjoint union is torsion without a uniform exponent; a countable disjoint union of points is locally of finite type but not proper. Fix made: the report says the item's external source carries the Stacks label for 03FD, but the delivered file read only 'Tag 03FD'. The corrected item in fixes/dag/nodes/sec-proper-base-change/sk-def-pbc-conventions.json adds the label (sites-cohomology.tex, lemma-cohomology-modules-abelian-agree) and changes nothing else. There are no tool_uses.; 1 file(s) fixed by the reviewer"
+ }
 }
