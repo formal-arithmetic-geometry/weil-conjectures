@@ -3,34 +3,152 @@
  "blueprint": {
   "is": "def-sfb-right-derived-functor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Right derived functor on the unbounded derived category",
- "statement": "Let $\\mathcal C,\\mathcal D$ be abelian categories, where $\\mathcal C$ has K-injective\nresolutions, and let $F\\colon\\mathcal C\\to\\mathcal D$ be an additive functor. The *right\nderived functor* $RF\\colon D(\\mathcal C)\\to D(\\mathcal D)$ is the total right derived\nfunctor of\n$$\nK(\\mathcal C)\\xrightarrow{\\ F\\ }K(\\mathcal D)\\xrightarrow{\\ Q\\ }D(\\mathcal D)\n$$\nwith respect to the quasi-isomorphisms. It comes with a unit\n$Q\\circ F\\Rightarrow RF\\circ Q$, which is an isomorphism on K-injective complexes. So\n$RF(K)=F(I)$ for a K-injective resolution $K\\to I$.",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be abelian categories [def-sp-abelian], and let $F:\\mathcal C\\to\\mathcal D$ be additive [def-sp-left-exact-additive]. Write $K(\\mathcal C)$ for cochain complexes modulo chain homotopy and $Q_{\\mathcal C}:K(\\mathcal C)\\to D(\\mathcal C)$ for localization at quasi-isomorphisms [def-weil-abstract-derived-category], and similarly for $\\mathcal D$. A complex $I$ is K-injective if every chain map from an acyclic complex to $I$ is homotopic to zero; assume every complex of $\\mathcal C$ admits a quasi-isomorphism to a K-injective complex. Write $F_K:K(\\mathcal C)\\to K(\\mathcal D)$ for degreewise application of $F$.\n\nThe right derived functor is the total right derived functor $RF:D(\\mathcal C)\\to D(\\mathcal D)$ of $Q_{\\mathcal D}\\circ F_K$ with respect to quasi-isomorphisms, whose existence is supplied by [lem-weil-pbc-kinjective-total-derived]. It has a unit $\\eta:Q_{\\mathcal D}\\circ F_K\\Rightarrow RF\\circ Q_{\\mathcal C}$: for every $G:D(\\mathcal C)\\to D(\\mathcal D)$ the map $\\operatorname{Nat}(RF,G)\\to\\operatorname{Nat}(Q_{\\mathcal D}\\circ F_K,G\\circ Q_{\\mathcal C})$, $\\beta\\mapsto(\\beta Q_{\\mathcal C})\\circ\\eta$, is bijective. This specifies the pair $(RF,\\eta)$ up to unique isomorphism compatible with the unit. The component $\\eta_I$ is an isomorphism for every K-injective $I$. For any K-injective resolution $s:K\\to I$, there is the canonical isomorphism $RF(Q_{\\mathcal C}K)\\cong Q_{\\mathcal D}(F_K I)$. This is the meaning of the notation $RF(K)=F(I)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-right-derived-functor.md",
   "place": "node def-sfb-right-derived-functor, order 1609"
  },
  "stmt_deps": [
-  "def-weil-abstract-derived-category"
+  "def-sp-abelian",
+  "def-sp-left-exact-additive",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-total-derived"
  ],
  "proof": [
   {
-   "text": "A quasi-isomorphism $s\\colon I\\to J$ between K-injective complexes is a homotopy\nequivalence: its cone is acyclic and K-injective, hence its identity is null-homotopic.\nMoreover $\\Hom_{K(\\mathcal C)}(K,I)=\\Hom_{D(\\mathcal C)}(K,I)$ for $I$ K-injective. So\nthe K-injective complexes, with the homotopy equivalences, form a right derivability\nstructure for the quasi-isomorphisms: every complex has a K-injective resolution, and a\nmorphism of complexes lifts, uniquely up to homotopy, to a morphism of chosen\nresolutions. Therefore $K\\mapsto Q(F(I_K))$ is a well-defined functor on $D(\\mathcal C)$.\nComposing the resolution maps $K\\to I_K$ with $F$ gives a natural transformation\n$Q\\circ F\\Rightarrow RF\\circ Q$. It is universal among natural transformations from\n$Q\\circ F$ to functors factoring through $D(\\mathcal C)$, because every such functor\ninverts $K\\to I_K$. This is the universal property of the total right derived functor,\nand the unit is the identity on K-injective complexes.",
-   "uses": [],
-   "elementary": null
+   "text": "The homotopy categories $K(\\mathcal C)$ and $K(\\mathcal D)$ are triangulated with the stated cone triangles, and $Q_{\\mathcal D}$ is exact, by [lem-pur-homotopy-category-triangulated]. Degreewise application of $F$ defines $F_K$. The finite-biproduct condition in [def-sp-left-exact-additive] gives additivity on morphisms explicitly: $a+b=\\nabla\\circ(a\\oplus b)\\circ\\Delta$, and the canonical biproduct identifications identify $F(\\Delta)$ and $F(\\nabla)$ with the diagonal and codiagonal. Thus $F(a+b)=F(a)+F(b)$; preservation of the zero object gives $F(0)=0$, and hence $F(-a)=-F(a)$. Indeed, $F(d^{n+1})F(d^n)=F(0)=0$, and applying $F$ to a chain homotopy equation $a-b=dh+hd$ gives $F(a)-F(b)=F(d)F(h)+F(h)F(d)$, since $F$ is additive [def-sp-left-exact-additive]. Under the canonical biproduct identifications, applying $F$ to the cone differential $\\left(\\begin{smallmatrix}d_L&a\\\\0&-d_K\\end{smallmatrix}\\right)$ gives the cone differential for $F(a)$; it also respects the inclusion and minus-projection maps and the shifted differential $-d_K$. The degreewise identities $F(K[1])^n=F(K^{n+1})=(F_K K)[1]^n$ therefore give an isomorphism of complexes, natural because both sides send a map $a$ in degree $n$ to $F(a^{n+1})$. Thus $Q_{\\mathcal D}\\circ F_K$ sends each cone triangle to its image cone triangle. The cone description and localization in [def-weil-abstract-derived-category] and the definition of exact functor in [def-weil-triangulated-category] show that this is an exact functor from $K(\\mathcal C)$ to the triangulated category $D(\\mathcal D)$. No exactness of $F$ on the abelian categories is needed.",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-pur-homotopy-category-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070K, lemma-enough-K-injectives-implies; Tag 070Y, lemma-K-injective-defined; degreewise additive-functor specialization"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-kinjective-total-derived] with $\\mathcal A=\\mathcal C$, $\\mathcal T=D(\\mathcal D)$ and its input functor equal to $Q_{\\mathcal D}\\circ F_K$. The K-injective resolution hypothesis is exactly the assumed existence of a quasi-isomorphism from every complex to a K-injective one; step 1 verifies exactness and the target triangulated structure. The cited statement gives a functor $RF$, a unit $\\eta$, the bijection on natural transformations for every $G$, and invertibility of $\\eta_I$ for every K-injective $I$. Choose such a universal pair as the definition. For any other universal pair the two bijections give comparison transformations preserving units; their composites preserve the respective units, so injectivity of the bijections makes the composites identities. Hence the chosen definition is unique up to the stated unique isomorphism.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070K, lemma-enough-K-injectives-implies; Tag 070Y, lemma-K-injective-defined; degreewise additive-functor specialization"
+   }
+  },
+  {
+   "text": "For a K-injective resolution $s:K\\to I$, $Q_{\\mathcal C}(s)$ is invertible by the localization at quasi-isomorphisms [def-weil-abstract-derived-category]. Therefore so is $RF(Q_{\\mathcal C}(s))$. Compose it with $\\eta_I^{-1}$ to obtain $RF(Q_{\\mathcal C}K)\\xrightarrow{RF(Q_{\\mathcal C}s)}RF(Q_{\\mathcal C}I)\\xrightarrow{\\eta_I^{-1}}Q_{\\mathcal D}(F_K I)$. This is the asserted isomorphism for every chosen resolution. Its compatibility with the unit is exactly the naturality equation $RF(Q_{\\mathcal C}s)\\circ\\eta_K=\\eta_I\\circ Q_{\\mathcal D}(F_K s)$. It requires neither that $s$ be degreewise monic nor that $F$ preserve quasi-isomorphisms. Writing this composite as $c_s$, cancellation of $\\eta_I$ in that equation gives $c_s\\circ\\eta_K=Q_{\\mathcal D}(F_Ks)$, explicitly the required compatibility.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070K, lemma-enough-K-injectives-implies; Tag 070Y, lemma-K-injective-defined; degreewise additive-functor specialization"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sp-left-exact-additive",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-pur-homotopy-category-triangulated"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-right-derived-functor.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070K (lemma-enough-K-injectives-implies) and 070Y (lemma-K-injective-defined), specialized via the existing total-derived node; explicit degreewise cone calculation and naturality formula by N4"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctor",
+   "results": "Loogle reports unknown identifier; this name is absent from the service's Mathlib index.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor(Unit|Obj|Iso|.*IsRightDerived)",
+   "results": "One hit: Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean:52, for bounded-below categories.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor has a total right derived functor computed using K-injective resolutions.",
+   "results": "Eight hits include totalRightDerived, HasRightDerivedFunctor.mk and rightDerived. Read CategoryTheory/Functor/Derived/RightDerived.lean:156-213: totalRightDerived assumes HasRightDerivedFunctor; ordinary rightDerived is on objects.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total right derived functor of an additive functor between abelian categories with K-injective resolutions, with a unit isomorphism on K-injective complexes.",
+   "results": "Eight hits include rightDerivedToHomotopyCategory, rightDerived, mapDerivedCategory and isoRightDerivedObj. These use objectwise injective resolutions or exact abelian functors; they do not establish this unbounded existence and computation statement.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "def rightDerivedFunctor|rightDerivedFunctorUnit|instIsRightDerivedFunctorHomotopyCategoryIntUpDerivedCategoryRightDerivedFunctorRight",
+   "results": "Three hits: rightDerivedFunctorComparison at CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean:64 and rightDerivedFunctorPlus/Unit at Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean:36,45. The unbounded rightDerivedFunctor and its unit are not Mathlib declarations in this checkout.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"totalRightDerived\"",
+   "results": "Four hits: totalRightDerived, totalRightDerivedUnit, their IsRightDerivedFunctor instance and a shift instance. Read RightDerived.lean:156-213: the first three require the existence hypothesis HasRightDerivedFunctor and do not establish invertibility on K-injectives.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|hasRightDerivedFunctor|totalRightDerived",
+   "results": "Sixteen hits: DerivedCategory/KInjective.lean:41-50 gives the Hom bijection and quasi-isomorphism/homotopy-equivalence criterion. DerivabilityStructureInjectives.lean uses bounded-below injective objects; RightDerivedFunctorPlus.lean:36-54 is bounded below. None supplies the full unbounded item.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every complex has a K-injective resolution implies an additive functor admits an unbounded total right derived functor.",
+   "results": "Eight hits: rightDerived, toRightDerivedZero, exact-functor mapDerivedCategory comparisons, NatTrans.rightDerived and the totalRightDerived instance. Read the latter: it assumes HasRightDerivedFunctor. No full unbounded K-injective existence/computation match.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left Kan extension along the localization of the unbounded homotopy category is computed by fibrant replacement using homotopically injective complexes",
+   "results": "Eight hits: calculus of fractions and Qh, model-category cofibrant localization, and ordinary objectwise left/rightDerivedToHomotopyCategory. No declaration supplies the unbounded K-injective replacement hypothesis and unit-computation conclusion in one line.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\"",
+   "results": "Twelve displayed hits in CategoryTheory.Functor.Derived.RightDerived: HasRightDerivedFunctor, IsRightDerivedFunctor, constructors, Kan-extension equivalences and totalRightDerived instance. Read RightDerived.lean:150-213: existence is an input, not proved from K-injective resolutions.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjectives|IsRightDerivabilityStructure|hasRightDerivedFunctor",
+   "results": "Five hits in DerivedCategory/DerivabilityStructureInjectives.lean:166,167,251,340,344. Read lines 90-175 and 340-380: the resolutions and right-derivability instance concern Plus categories, not the unbounded item.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -50,5 +168,29 @@
   "def-weil-abstract-derived-category"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-right-derived-functor",
+  "worker": "stage1",
+  "summary": "Reused the existing general K-injective total-derived theorem, after the explicit additive degreewise cone calculation verifies its exactness hypothesis. Specified the universal pair and its unit, and wrote the canonical resolution isomorphism using naturality. Clarified the source equality notation as an isomorphism in the derived category. No new nodes; no attachment or compiler invocation.",
+  "blueprint": "Realizes the current node statement and the right-derived-functors bullet of sk-def-sfb-derived-categories: existence from K-injective resolutions, unit invertible on K-injectives, computation on every resolution. The imported proof is replaced by an application of the existing general theorem with its hypotheses explicitly verified.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic total-right-derived existence and K-injective comparison theorem for any exact functor out of a homotopy category. It implements the current unit right-derived-functors bullet without changing its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N4-a560c6897",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-a560c6897 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, blueprint route, and Stacks 070K/070Y; checked hypotheses, cone signs, universal property, resolution formula, and edge cases. Repaired one C1/C4 missing citation to the existing homotopy-category triangulation Mathlib leaf. Corrected JSON and review.md written. Accept tool use lem-weil-pbc-kinjective-total-derived; no new nodes or target weakening.; 1 file(s) fixed by the reviewer"
+ }
 }
