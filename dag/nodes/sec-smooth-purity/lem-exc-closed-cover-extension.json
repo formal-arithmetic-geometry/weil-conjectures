@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-exc-closed-cover-extension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Lifting a covering of a closed fibre",
@@ -13,31 +13,188 @@
   "place": "node lem-exc-closed-cover-extension, order 1854"
  },
  "stmt_deps": [
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-scheme-conventions"
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-pbc-ind-etale-basis",
+  "def-exc-closed-site-lift",
+  "def-pc-fibre-product"
  ],
  "proof": [
   {
-   "text": "Write $W=\\operatorname{Spec}B$, $Z_W=V(J)$. Quasi-compactness of the\ncomplement, in the sense of the scheme conventions, selects finitely many\n$f_b\\in J$ with $W\\setminus Z_W=\\bigcup_bD(f_b)$. Lift each $V_a$ by\n[def-exc-closed-site-lift] over $B$. By [lem-exc-closed-lift-reduction], its\nreduction is exactly $V_a$. Hence the images of these lifts cover $Z_W$,\nwhile the $D(f_b)$'s cover its complement. All members are affine and weakly\netale over $W$, and the family is finite and surjective. It is consequently\na covering for the pro-etale topology, with the stated reductions.",
+   "text": "Choose $W=\\operatorname{Spec}B$. By the affine description of a closed immersion, $Z_W=\\operatorname{Spec}(B/J)$ for an ideal $J\\subseteq B$, with underlying set $V(J)=\\{\\mathfrak p:J\\subseteq\\mathfrak p\\}$. Thus $W\\setminus Z_W=\\bigcup_{f\\in J}D(f)$: a prime outside $V(J)$ omits an element of $J$, and a prime in $D(f)$ with $f\\in J$ cannot contain $J$. These sets are open by the basic-open spectrum lemma. The assumed quasi-compactness, whose definition is the finite-subcover property, therefore selects finitely many $f_b\\in J$ with $W\\setminus Z_W=\\bigcup_bD(f_b)$. An empty complement permits an empty list.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-closed-cover-extension.md",
+    "place": "Proof, first two sentences; affine closed immersion: Stacks 01QO; basic opens: 00E0"
+   }
+  },
+  {
+   "text": "For each $V_a=\\operatorname{Spec}\\overline C_a$ in the given finite covering, form $L_a=v_W(V_a)=\\operatorname{Spec}H_B(\\overline C_a)$ by the closed-site lift. The construction takes values in $\\mathcal B_W$, whose objects are affine ind-etale objects of the small pro-etale site; hence each $L_a$ is affine and ind-etale over $W$. The cited ind-etale stability theorem explicitly says that an ind-etale map is weakly etale, so $L_a\\to W$ is weakly etale. By the affine fibre-product formula and the quotient tensor formula, its closed base change is $L_a\\times_W Z_W=\\operatorname{Spec}(H_B(\\overline C_a)/JH_B(\\overline C_a))$. The specified reduction map is an isomorphism by the closed-lift reduction lemma. Applying the contravariant spectrum functor of the affine-spectrum definition identifies this base change with $V_a$ over $Z_W$, and its map into $L_a$ is the quotient-induced closed immersion. The hypothesis of the reduction lemma holds because $\\overline C_a$ is ind-etale over $B/J$.",
    "uses": [
     "def-exc-closed-site-lift",
-    "lem-exc-closed-lift-reduction"
+    "def-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-exc-closed-lift-reduction",
+    "def-weil-affine-spectrum"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-closed-cover-extension.md",
+    "place": "Proof, lift and reduction sentences; Stacks 097P (lemma-lift-ind-etale) and 09BK (lemma-closed-immersion-affines); affine base change: 01I4/01JQ and 00DF"
+   }
+  },
+  {
+   "text": "For every selected $f_b$, let $O_b=\\operatorname{Spec}B_{f_b}$. The principal-localization open-immersion lemma identifies $O_b\\to W$ with the inclusion of the affine open $D(f_b)$. An open immersion is weakly etale directly from the definitions: its local-ring maps are isomorphisms, hence flat, and its diagonal identifies the open subscheme with its self fibre product, by the fibre-product universal property: the two projections coincide on the open subscheme, and the diagonal is inverse to either projection. Its diagonal local-ring maps are therefore also isomorphisms. An isomorphism of rings is flat since tensoring along it is the identity after identifying the rings. Thus both flatness clauses hold. The same affine base-change formulas as in Step 2 identify its reduction ring with $B_{f_b}/JB_{f_b}$. The image of $f_b$ is a unit by the localization definition and belongs to $JB_{f_b}$ because $f_b\\in J$. Consequently $1\\in JB_{f_b}$, the quotient ring is zero, and its spectrum is empty.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "def-weil-weakly-etale-morphism",
+    "def-weil-ring-localization-away",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tensor-quotient-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-closed-cover-extension.md",
+    "place": "Proof, complementary affine opens and empty reduction; Stacks 01I3 (lemma-standard-open-affine), with the flatness and quotient arguments written out"
+   }
+  },
+  {
+   "text": "The combined family $\\{L_a\\to W\\}_a\\cup\\{O_b\\to W\\}_b$ is finite and jointly surjective. Indeed, a point of $Z_W$ has a preimage in some $V_a$ by the covering hypothesis. Composing that point with $V_a\\cong L_a\\times_W Z_W\\to L_a$ from Step 2 gives a point of $L_a$ with the original image in $W$. A point outside $Z_W$ lies in some $D(f_b)$ by Step 1 and hence has a preimage in $O_b$ by Step 3. This proves joint surjectivity without any assertion that images of weakly etale maps are open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-closed-cover-extension.md",
+    "place": "Proof, images of the lifts cover the closed subset and the basic opens cover its complement"
+   }
+  },
+  {
+   "text": "Verify the full covering condition, not just surjectivity. Each member $T\\to W$ of the combined family has affine source and affine target, so the affine-morphism lemma makes the preimage $T_E=T\\times_W E$ of every affine open $E\\subseteq W$ an affine open of $T$. The finite family of these affine opens has images whose union is $E$, by Step 4. Together with the weak etaleness checked in Steps 2 and 3, this is exactly the definition of a pro-etale covering. Steps 2 and 3 give respectively its specified closed reductions $V_a$ and the empty scheme, so all the required clauses hold.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-closed-cover-extension.md",
+    "place": "Proof, final covering conclusion, with the fpqc condition checked on every affine open; Stacks 0989 (definition-fpqc-covering)"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-weil-pbc-quasi-compact-scheme",
   "def-exc-closed-site-lift",
-  "lem-exc-closed-lift-reduction"
+  "def-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-exc-closed-lift-reduction",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-ring-localization-away",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "def-weil-pbc-proetale-covering"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/lem-exc-closed-cover-extension.md",
-  "place": "## Proof"
+  "place": "Proof paragraph, expanded using Stacks 097P and 09BK for the existing lift and 0989 for the covering condition"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite pro-etale covering affine scheme closed fibre extension",
+   "results": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.finite_appTop_of_universallyClosed; Algebra.Etale.exists_subalgebra_fg; AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; hits checked and concern general etale algebra, spectrum topology, or the pro-etale precoverage, not extension of the given closed-fibre covering"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.proetalePrecoverage, Presieve.ofArrows",
+   "results": "loogle: unknown identifier 'Scheme.proetalePrecoverage'",
+   "date": "2026-10-16",
+   "verdict": "query error; not evidence of absence; corrected Loogle query below"
+  },
+  {
+   "tool": "grep",
+   "query": "proetalePrecoverage|exists_ofArrows_closedLiftCover",
+   "results": "none",
+   "date": "2026-10-16",
+   "subdirectory": "Mathlib/AlgebraicGeometry",
+   "verdict": "invalid duplicated Mathlib directory prefix; this empty result is not used as evidence of absence; corrected grep below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-compact complement of zero locus in affine spectrum has finite basic open cover by elements of ideal",
+   "results": "AlgebraicGeometry.isCompactOpen_iff_eq_basicOpen_union; AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen; PrimeSpectrum.isRetrocompact_zeroLocus_compl_of_fg; AlgebraicGeometry.isRetrocompact_basicOpen; PrimeSpectrum.isRetrocompact_basicOpen; AlgebraicGeometry.iSup_basicOpen_of_span_eq_top; AlgebraicGeometry.IsAffineOpen.basicOpen_union_eq_self_iff; PrimeSpectrum.isRetrocompact_zeroLocus_compl",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; hits checked and concern general etale algebra, spectrum topology, or the pro-etale precoverage, not extension of the given closed-fibre covering"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompact.elim_finite_subcover PrimeSpectrum.basicOpen zeroLocus",
+   "results": "loogle: Application type mismatch: The argument\n  PrimeSpectrum.basicOpen\nhas type\n  ?m.5 → TopologicalSpace.Opens (PrimeSpectrum ?m.5)\nof sort `Type ?u.3` but is expected to have type\n  IsCompact ?m.3\nof sor",
+   "date": "2026-10-16",
+   "verdict": "query error; not evidence of absence; corrected Loogle query below"
+  },
+  {
+   "tool": "grep",
+   "query": "zeroLocus|basicOpen|elim_finite_subcover",
+   "results": "none",
+   "date": "2026-10-16",
+   "subdirectory": "Mathlib/AlgebraicGeometry",
+   "verdict": "invalid duplicated Mathlib directory prefix; this empty result is not used as evidence of absence; corrected grep below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite affine ind-etale covering of a closed subscheme extends to a finite pro-etale covering of an affine scheme with basic opens on the complement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "proetalePrecoverage|closedLift|ClosedLift",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "subdirectory": "AlgebraicGeometry",
+   "verdict": "no match for the complete item; hits checked and concern general etale algebra, spectrum topology, or the pro-etale precoverage, not extension of the given closed-fibre covering"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proetale\"",
+   "results": "AlgebraicGeometry.Scheme.proetalePrecoverage; AlgebraicGeometry.Scheme.proetaleTopology; AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage; AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage; AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage; AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology; AlgebraicGeometry.Scheme.proetaleTopology_eq_propQCTopology; AlgebraicGeometry.Scheme.etaleTopology_le_proetaleTopology",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; hits checked and concern general etale algebra, spectrum topology, or the pro-etale precoverage, not extension of the given closed-fibre covering"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend a finite cover of a quotient ring by ind etale algebras to a pro etale cover of the original ring using etale neighborhoods and principal localizations",
+   "results": "StandardEtalePair.instFormallyEtaleRing; Algebra.exists_etale_of_isEtaleAt; StandardEtalePair.instEtaleRing; StandardEtalePresentation; Algebra.Etale.exists_subalgebra_fg; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; RingHom.IsStandardSmooth.exists_etale_mvPolynomial",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; hits checked and concern general etale algebra, spectrum topology, or the pro-etale precoverage, not extension of the given closed-fibre covering"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -66,5 +223,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-closed-unit"
+ "unit": "sk-prop-sf-closed-unit",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-closed-cover-extension",
+  "worker": "stage1",
+  "summary": "Expanded the imported argument into five steps with no new nodes: finite basic-open selection inside the ideal; existing closed lifts with their specified closed-base-change isomorphisms; complementary affine opens, elementary weak etaleness and zero reductions; joint surjectivity; and the full fpqc covering condition on every affine open via the existing affine-morphism lemma. Retained the statement exactly. Added the actual definitions used by the statement and explicit generic Mathlib inputs, and recorded all real searches and their errors/unavailability. The upstream theorem rests on the already represented filteredness and reduction sorrys, so no attachment is claimed. Repair after merge-lock timeout: re-read every dependency against the current shared DAG, confirmed all previous quotes remain exact, replaced the conventions collection by actual scheme and spectrum definitions, explicitly applied ind-etale implies weakly etale, and cited the two affine base-change formulas and fibre-product definition directly in Step 3. No statement change or new nodes.",
+  "blueprint": "The whole proof paragraph of blueprint lem-exc-closed-cover-extension, order 1854: its first two sentences are Step 1; its lift and reduction sentences are Step 2; its complementary-open and reduction clauses are Step 3; its joint-surjectivity sentence is Step 4; its final pro-etale-covering conclusion is Step 5. This is an auxiliary node, not the statement of its unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "The lifted objects are ind-etale by the basis definition; this existing generic stability theorem supplies the needed implication that ind-etale morphisms are weakly etale. The closed-cover unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-exc-closed-lift-reduction",
+    "why": "The generic closed-lift reduction isomorphism is the exact input already prescribed by this blueprint proof; the closed-unit unit has no replacement construction. This use preserves the given closed-lift route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-exc-closed-lift-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q22-c2147fe03",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-c2147fe03 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. All five steps establish the unchanged statement, including specified closed-fibre morphisms and the full fpqc covering condition. No new nodes, circular dependencies, duplicate extension lemma, or repairs found. Both declared generic tool uses accepted. Detailed checks written to review.md."
+ }
 }
