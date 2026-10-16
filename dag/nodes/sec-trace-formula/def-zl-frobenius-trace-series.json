@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-zl-frobenius-trace-series",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Frobenius trace series",
@@ -13,18 +13,175 @@
   "place": "node def-zl-frobenius-trace-series, order 2388"
  },
  "stmt_deps": [
+  "sk-def-frobmod",
   "def-weil-finite-field-fiber",
   "def-weil-frobenius-detailed",
   "def-weil-geometric-hypotheses",
   "def-weil-global-geometric-frobenius",
-  "def-weil-weil-sheaf-complex"
+  "def-weil-weil-sheaf-complex",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "def-weil-endomorphism-trace",
+  "def-weil-endomorphism-determinant",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-polynomial-ring",
+  "def-weil-formal-power-series",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-constant-weil-structure",
+  "def-weil-smooth-proper-cohomological-family"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Put $L=\\Qlb$. Its subfield $\\Ql$ has characteristic zero by [def-weil-l-adic-numbers], so each positive integer $n$ is nonzero and invertible in $L$. By [def-weil-endomorphism-trace] the numbers $a_n=\\Tr(F^n\\mid V)/n$ are defined for every $n\\geq1$. Define the sequence $a_0=0$, $a_n=\\Tr(F^n\\mid V)/n$ for $n>0$. This is an element of $L[[T]]$ by [def-weil-formal-power-series]. Its zero constant coefficient means it equals $T\\sum_{m\\geq0}a_{m+1}T^m$, so it lies in $TL[[T]]$. This constructs the trace series without any convergence condition.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "def-weil-endomorphism-trace",
+    "def-weil-formal-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-def-frobmod/def-zl-frobenius-trace-series.md",
+    "place": "first displayed formula, trace series"
+   }
+  },
+  {
+   "text": "Define $P_{(V,F)}$ as the reverse characteristic polynomial [def-weil-reverse-characteristic-polynomial], namely the determinant of $1-TF$ after extension to $L[T]$. Apply [lem-weil-reverse-charpoly-coefficients] over the field $L$ to the finite-dimensional space $V$ and its invertible endomorphism $F$. Its first and third clauses give constant coefficient $1$, degree $\\dim_LV$, and leading coefficient $(-1)^{\\dim_LV}\\det F$. This coefficient is nonzero: a polynomial of that degree has nonzero leading coefficient, including dimension zero, when $P=1$.",
+   "uses": [
+    "def-weil-reverse-characteristic-polynomial",
+    "lem-weil-reverse-charpoly-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-def-frobmod/def-zl-frobenius-trace-series.md",
+    "place": "first displayed formula, determinant, and following coefficient/degree sentence"
+   }
+  },
+  {
+   "text": "For a finite $I\\subset\\mathbf Z$, define $b_0=0$ and $b_n=n^{-1}\\sum_{i\\in I}(-1)^i\\Tr(F_i^n\\mid V_i)$ for $n>0$, with $(-1)^i=1$ for even integers and $-1$ for odd integers. These coefficients define a formal power series [def-weil-formal-power-series]. The coefficient of $T^n$ in the finite sum $\\sum_{i\\in I}(-1)^i\\operatorname{tr}_{F_i}(T)$ is zero for $n=0$, and for $n>0$ is $\\sum_{i\\in I}(-1)^i(\\Tr(F_i^n\\mid V_i)/n)=b_n$ by finite distributivity. Equality of coefficient sequences proves the two displayed descriptions agree. As in Step 1 the vanishing constant coefficient puts this series in $TL[[T]]$. This works for the empty family and for negative indices.",
+   "uses": [
+    "def-weil-formal-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-def-frobmod/def-zl-frobenius-trace-series.md",
+    "place": "alternating trace series displayed formula"
+   }
+  },
+  {
+   "text": "In the geometric situation, take $E=\\Ql$ and the constant Weil sheaf. The hypotheses of [prop-cohomological-finiteness] hold: $X_0$ is proper, hence separated and of finite type, $\\ell\\ne p$, and the constant Weil sheaf is the indicated coefficient object. It follows that every $V_{i,\\ell}=H^i(X,\\Ql)$ is finite-dimensional and its geometric Frobenius $F_{i,\\ell}$ is an automorphism. These are exactly the spaces and operators used to define the family in [def-weil-smooth-proper-cohomological-family]; this definition itself is not used as a finiteness theorem.",
+   "uses": [
+    "prop-cohomological-finiteness",
+    "def-weil-smooth-proper-cohomological-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-def-frobmod/def-zl-frobenius-trace-series.md",
+    "place": "geometric paragraph, Frobenius-module assertion"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-cohomology-scalar-extension-qlbar] with the same smooth, proper, geometrically connected $X_0$ of pure dimension $d$. It identifies $V_{i,\\ell}\\otimes_{\\Ql}L$ with $H^i(X,L)$ and intertwines $F_{i,\\ell}\\otimes1$ with the global geometric Frobenius on the latter. Extend a finite basis of $V_{i,\\ell}$ to $L$ and transport it by this identification. In this basis the Frobenius matrix is the coefficientwise image of its $\\Ql$-matrix $A_i$; its inverse is the image of $A_i^{-1}$, so it is an automorphism and the space remains finite-dimensional. For each $n\\geq1$, matrix multiplication gives the image of $A_i^n$ as its $n$th power. The trace is the sum of diagonal entries [def-weil-endomorphism-trace], so its trace is the image of $\\Tr(A_i^n)$, and division by the nonzero integer $n$ commutes with the field embedding. Thus each degree-$i$ trace series is precisely coefficientwise scalar extension of the one for the smooth-proper family. Finally $I=\\{0,\\ldots,2d\\}$ is finite, so substitution of these Frobenius modules into Step 3 gives the last displayed alternating series. No diagonalization or semisimplicity was used.",
+   "uses": [
+    "lem-weil-cohomology-scalar-extension-qlbar",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-def-frobmod/def-zl-frobenius-trace-series.md",
+    "place": "geometric paragraph, scalar extension clause, and final displayed formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-endomorphism-trace",
+  "def-weil-formal-power-series",
+  "def-weil-reverse-characteristic-polynomial",
+  "lem-weil-reverse-charpoly-coefficients",
+  "prop-cohomological-finiteness",
+  "def-weil-smooth-proper-cohomological-family",
+  "lem-weil-cohomology-scalar-extension-qlbar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-def-frobmod/def-zl-frobenius-trace-series.md",
+  "place": "Definition, including its coefficient/degree and geometric assertions; the source states the formulas without proof, and the elementary coefficient and basis calculations are written out here using the cited existing nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "traceSeries|alternatingTraceSeries|FrobeniusModule",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius trace formal power series of cohomology of a smooth proper variety over a finite field",
+   "results": [
+    "MvPowerSeries.map_iterateFrobenius_expand",
+    "MvPowerSeries.map_frobenius_expand",
+    "frobenius",
+    "MvPolynomial.frobenius_zmod",
+    "WittVector.frobeniusPolyAux",
+    "Perfection.coeff_frobeniusEquiv_symm",
+    "WittVector.frobeniusPolyAux_eq",
+    "WittVector.frobeniusPoly"
+   ],
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define these trace generating functions or their geometric specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius module finite dimensional vector space automorphism trace formal power series sum trace powers divided by n and alternating cohomology trace series",
+   "results": [
+    "FiniteField.algebraMap_trace_eq_sum_pow",
+    "LieModule.trace_comp_toEnd_genWeightSpace_eq",
+    "FiniteField.trace_pow_card",
+    "LinearMap.trace_comp_eq_mul_of_commute_of_isNilpotent",
+    "LieModule.trace_toEnd_genWeightSpace",
+    "ZMod.trace_pow_card",
+    "Algebra.trace",
+    "Algebra.traceForm_apply"
+   ],
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define these trace generating functions or their geometric specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries, LinearMap.trace",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*[Ss]eries|[Ss]eries.*trace|[Aa]lternating.*trace",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal generating function whose coefficient in positive degree n is the trace of the nth power of a linear automorphism divided by n",
+   "results": [
+    "LinearMap.trace",
+    "LinearMap.trace_comp_eq_mul_of_commute_of_isNilpotent",
+    "Matrix.trace_eq_neg_charpoly_coeff",
+    "Matrix.trace_eq_neg_charpoly_nextCoeff",
+    "LinearMap.pow_eq_aeval_mod_charpoly",
+    "LinearMap.trace_one",
+    "Algebra.trace",
+    "FiniteField.trace_pow_card"
+   ],
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define these trace generating functions or their geometric specialization"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -161,5 +318,39 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-def-frobmod"
+ "unit": "sk-def-frobmod",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-zl-frobenius-trace-series",
+  "worker": "stage1",
+  "summary": "Statement retained verbatim after comparison with master and main-20261015. Added the existing linear-algebra, power-series, coefficient, constant-Weil, ordinary-cohomology and smooth-proper-family notions. Supplied five argument steps for the assertions mixed into this definition. Reused the general reverse-charpoly coefficient lemma, cohomological finiteness and the Frobenius-equivariant scalar-extension lemma; no new nodes. The audit open declaration already belongs to lem-sf-adic-affine-direct-image-finiteness, and is not duplicated. Algebraic Lean declarations cover only part of the item, whose geometric scalar-extension clause prevents an exact attachment. The existing unit convention node sk-def-frobmod is cited as the definition of the Frobenius-module notion.",
+  "blueprint": "The unit sk-def-frobmod has no proof steps. Steps 1-3 realize its trace, determinant and alternating-series definitions and the item's coefficient assertion; steps 4-5 justify the item's geometric paragraph and scalar-extension clause. sk-def-frobmod itself is the separate unit-key node, so its unit record is not edited.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-reverse-charpoly-coefficients",
+    "why": "General linear algebra gives the coefficient/degree facts for any invertible endomorphism; this unit contains no separate polynomial coefficient theorem."
+   },
+   {
+    "node": "prop-cohomological-finiteness",
+    "why": "Provides finite dimensionality and Frobenius invertibility at the Q_l stage; the trace-series unit has no geometric finiteness theorem."
+   },
+   {
+    "node": "lem-weil-cohomology-scalar-extension-qlbar",
+    "why": "Provides exactly the Frobenius-equivariant Q_l-to-Qbar_l cohomology identification used in the geometric specialization; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-reverse-charpoly-coefficients",
+  "prop-cohomological-finiteness",
+  "lem-weil-cohomology-scalar-extension-qlbar"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-53c7e973a",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-53c7e973a (reviewer sub-agent of L); spot-checked: I read the item in full and it matches the master and main-20261015 blueprint text verbatim (only the order number differs); nothing is weakened. The delivery creates no new nodes. Every dependency exists, none is merged, and proof_deps equals the union of the step uses. There is no cycle: the item is not in the transitive closure of its own deps. Step 1: Q_l has characteristic 0 (def-weil-l-adic-numbers), so n is invertible; the trace node and the coefficient-sequence power-series node give the series, and membership in T·L[[T]] comes from the product formula; elementary is correct. Step 2: clauses 1 and 3 of lem-weil-reverse-charpoly-coefficients apply because F is invertible, giving constant coefficient 1, degree dim V and leading coefficient (-1)^n det F, which is nonzero; dim 0 gives P=1. Step 3: coefficientwise and elementary; it works for negative i and the empty I. Step 4: prop-cohomological-finiteness with Y_0=X_0 and E=Q_l (proper implies separated and finite type; the constant Weil sheaf is a Weil complex) gives finite dimension and a Frobenius automorphism, which matches def-weil-smooth-proper-cohomological-family, where finiteness is outside the definition. Step 5: lem-weil-cohomology-scalar-extension-qlbar, under the same hypotheses on X_0, gives the Frobenius-equivariant isomorphism H^i(X,Q_l)⊗Qbar_l ≅ H^i(X,Qbar_l); the basis and matrix argument for the inverse, the powers and the trace is written out, with no semisimplicity. The coefficient category is consistent: the ordinary-cohomology node and the scalar-extension lemma use the same stagewise D^b_fd(Qbar_l). The item is not a target, so there is no base-change morphism to check. Edge cases checked: V=0, a 1-dimensional F=c, a Jordan block, n=0, and d=0, where H^0=Qbar_l with F=id. Duplicates: only the unit sketch sk-def-frobmod defines this, and the item cites it as its convention; lem-weil-exp-trace-determinant states something different. I accept all three tool_uses (reverse-charpoly coefficients, cohomological finiteness, Qbar_l scalar extension); the unit has no steps or uses. The sec-zeta-weil citation is a chapter-label inversion only: the graph stays acyclic at node level and the item's own blueprint sentence forces it. The open Lean declaration finiteLowerStar_singleFunctor_of_isAffine already belongs to lem-sf-adic-affine-direct-image-finiteness. I made no fixes."
+ }
 }

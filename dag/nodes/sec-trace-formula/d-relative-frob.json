@@ -3,25 +3,181 @@
  "blueprint": {
   "is": "d-relative-frob",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The relative Frobenius factorization",
- "statement": "Fix the global finite-field datum $p,a,q,k_0,k$ and the coefficient\nconventions of [def-trf-coefficient-conventions]. Let\n$f_0:X_0\\to Y_0$ be a morphism of separated finite-type\n$k_0$-schemes, write $f:X\\to Y$ for its base change to $k$, and let\n$\\Phi_X,\\Phi_Y$ be the $q$-power scheme Frobenii of\n[def-trf-scheme-frobenius]. For $m\\geq1$ put\n\n$$\nX'_m=Y\\times_{\\Phi_Y^m,Y,f}X,\n\\quad p_m:X'_m\\to X,\\quad f'_m:X'_m\\to Y,\n\\quad r_m=(f,\\Phi_X^m):X\\to X'_m,\n$$\n\nwhere $f'_m$ and $p_m$ are the first and second projections, so\nthat $\\Phi_Y^mf'_m=fp_m$. The map $r_m$ is defined because\n$\\Phi_Y^mf=f\\Phi_X^m$: with $Q=q^m$, the maps $\\Phi^m$ are the base\nchanges $\\Phi_0^m\\times\\operatorname{id}_k$ of the absolute\n$Q$-power Frobenii of the $k_0$-schemes $X_0$, $Y_0$ (their affine\nincarnation is $a\\mapsto a^Q$), and absolute Frobenius commutes with\nevery morphism of $\\mathbf F_p$-schemes. By construction\n\n$$\np_mr_m=\\Phi_X^m,\\qquad f'_mr_m=f .\n$$\n\n*The relative Frobenius.* Write $F_{X_0},F_{Y_0}$ for the absolute\n$Q$-power Frobenii of $X_0,Y_0$ and put\n$X_0^{(Q)}=Y_0\\times_{F_{Y_0},Y_0,f_0}X_0$. The *relative\n$Q$-power Frobenius* of $X_0$ over $Y_0$ is\n$F_{X_0/Y_0}=(f_0,F_{X_0}):X_0\\to X_0^{(Q)}$. Since fibre products\ncommute with the base change $k_0\\to k$ and\n$\\Phi=\\Phi_0\\times\\operatorname{id}_k$,\n\n$$\nX'_m=X_0^{(Q)}\\times_{k_0}k,\\qquad\nr_m=F_{X_0/Y_0}\\times_{k_0}\\operatorname{id}_k .\n$$\n\nAffine-locally, for $\\operatorname{Spec}R\\subseteq Y_0$ and\n$\\operatorname{Spec}S\\subseteq f_0^{-1}(\\operatorname{Spec}R)$, the\nscheme $X_0^{(Q)}$ is $\\operatorname{Spec}(R\\otimes_{F,R}S)$, the\ntensor product along $F:R\\to R$, $r\\mapsto r^Q$, on the left factor,\nand $F_{X_0/Y_0}$ is given by\n\n$$\nR\\otimes_{F,R}S\\longrightarrow S,\\qquad r'\\otimes s\\longmapsto\nf_0^\\#(r')\\,s^Q ,\n$$\n\nwhich is well defined because $r'r^Q\\otimes s$ and $r'\\otimes f_0^\\#(r)s$\nhave the same image $f_0^\\#(r')f_0^\\#(r)^Qs^Q$.",
+ "statement": "Fix the global finite-field datum $p,a,q,k_0,k$ and the coefficient\nconventions of [def-trf-coefficient-conventions]. Let\n$f_0:X_0\\to Y_0$ be a morphism of separated finite-type\n$k_0$-schemes, write $f:X\\to Y$ for its base change to $k$ [def-pc-base-change], and let\n$\\Phi_X,\\Phi_Y$ be the $q$-power scheme Frobenii of\n[def-trf-scheme-frobenius]. For $m\\geq1$ put\n\n$$\nX'_m=Y\\times_{\\Phi_Y^m,Y,f}X,\n\\quad p_m:X'_m\\to X,\\quad f'_m:X'_m\\to Y,\n\\quad r_m=(f,\\Phi_X^m):X\\to X'_m,\n$$\n\nwhere the fibre product and its universal pair map are those of\n[def-pc-fibre-product], and $f'_m$ and $p_m$ are the first and second projections, so\nthat $\\Phi_Y^mf'_m=fp_m$. The map $r_m$ is defined because\n$\\Phi_Y^mf=f\\Phi_X^m$: with $Q=q^m$, the maps $\\Phi^m$ are the base\nchanges $\\Phi_0^m\\times\\operatorname{id}_k$ of the absolute\n$Q$-power Frobenii of the $k_0$-schemes $X_0$, $Y_0$ (their affine\nincarnation is $a\\mapsto a^Q$), and absolute Frobenius commutes with\nevery morphism of $\\mathbf F_p$-schemes. By construction\n\n$$\np_mr_m=\\Phi_X^m,\\qquad f'_mr_m=f .\n$$\n\n*The relative Frobenius.* Write $F_{X_0},F_{Y_0}$ for the absolute\n$Q$-power Frobenii of $X_0,Y_0$\n[def-weil-absolute-frobenius-scheme] and put\n$X_0^{(Q)}=Y_0\\times_{F_{Y_0},Y_0,f_0}X_0$. The *relative\n$Q$-power Frobenius* of $X_0$ over $Y_0$ is\n$F_{X_0/Y_0}=(f_0,F_{X_0}):X_0\\to X_0^{(Q)}$. Since fibre products\ncommute with the base change $k_0\\to k$ and\n$\\Phi=\\Phi_0\\times\\operatorname{id}_k$,\n\n$$\nX'_m=X_0^{(Q)}\\times_{k_0}k,\\qquad\nr_m=F_{X_0/Y_0}\\times_{k_0}\\operatorname{id}_k .\n$$\n\nAffine-locally, for $\\operatorname{Spec}R\\subseteq Y_0$ and\n$\\operatorname{Spec}S\\subseteq f_0^{-1}(\\operatorname{Spec}R)$, the\nscheme $X_0^{(Q)}$ has the corresponding affine open\n[lem-weil-pbc-open-fibre-product, lem-weil-pbc-fibre-product-affine-spectra]\nwhich is $\\operatorname{Spec}(R\\otimes_{F,R}S)$, the\ntensor product along $F:R\\to R$, $r\\mapsto r^Q$, on the left factor,\nand $F_{X_0/Y_0}$ is given by\n\n$$\nR\\otimes_{F,R}S\\longrightarrow S,\\qquad r'\\otimes s\\longmapsto\nf_0^\\#(r')\\,s^Q ,\n$$\n\nwhich is well defined because $r'r^Q\\otimes s$ and $r'\\otimes f_0^\\#(r)s$\nhave the same image $f_0^\\#(r')f_0^\\#(r)^Qs^Q$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-relative-frob/d-relative-frob.md",
   "place": "node d-relative-frob, order 2360"
  },
  "stmt_deps": [
   "def-trf-coefficient-conventions",
-  "def-trf-scheme-frobenius"
+  "def-trf-scheme-frobenius",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-weil-absolute-frobenius-scheme",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Put $Q=q^m=p^{am}$. On $X_0$ and $Y_0$, the $m$-fold iterates of their $q$-power Frobenii are the absolute $Q$-power Frobenii: on sections, successive powers give $(s^{q^j})^q=s^{q^{j+1}}$, and their underlying maps remain the identity. For every open $V\\subseteq Y_0$ the ring homomorphism $f_0^\\sharp_V$ satisfies $f_0^\\sharp_V(s^Q)=f_0^\\sharp_V(s)^Q$. The composition formula for morphisms of locally ringed spaces therefore gives $F_{Y_0}f_0=f_0F_{X_0}$, both on spaces and on every component of the structure-sheaf map. This proves naturality here directly, rather than assuming it from a definition of Frobenius.",
+   "uses": [
+    "def-trf-scheme-frobenius",
+    "def-weil-absolute-frobenius-scheme",
+    "def-weil-ring-frobenius",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CC7, label lemma-frobenius-endomorphism-identity, proof; Tag 0CCG, label remark-n-fold-relative-frobenius, first displayed formula, with n=am"
+   }
+  },
+  {
+   "text": "For morphisms over $k_0$, base change preserves identity and composition: the base change of a composite and the composite of the induced maps have the same projection to the original scheme and the same projection to $\\operatorname{Spec}k$, hence are equal by fibre-product uniqueness. Starting at the identity and applying this observation to the next composite proves by induction that $\\Phi_X^m=F_{X_0}\\times_{k_0}\\operatorname{id}_k$ and $\\Phi_Y^m=F_{Y_0}\\times_{k_0}\\operatorname{id}_k$. Base-changing the equality in step 1 now gives $\\Phi_Y^mf=f\\Phi_X^m$. The $q$-power model maps are $k_0$-morphisms by the scheme-Frobenius convention; so their iterates and all the base changes just used are morphisms over the stated bases.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-fibre-product",
+    "def-trf-scheme-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-relative-frob/d-relative-frob.md",
+    "place": "paragraph beginning The map r_m is defined because; base-change functoriality expanded using the universal property of Stacks Tag 01JP"
+   }
+  },
+  {
+   "text": "Choose $X'_m$ as the fibre product of $\\Phi_Y^m:Y\\to Y$ and $f:X\\to Y$, with first projection $f'_m$ and second projection $p_m$. Its defining equality is $\\Phi_Y^mf'_m=fp_m$. By step 2 the pair $(f,\\Phi_X^m)$ has equal composites to $Y$, so the fibre-product universal property gives the unique $r_m:X\\to X'_m$ with $f'_mr_m=f$ and $p_mr_m=\\Phi_X^m$. Applying the same construction over $k_0$, using step 1, defines $X_0^{(Q)}$ and $F_{X_0/Y_0}=(f_0,F_{X_0})$, with its two projection equalities. This is the n-fold relative Frobenius construction of Stacks with n=am, with the two factors written in the opposite order.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CC9, label definition-relative-frobenius; Tag 0CCG, label remark-n-fold-relative-frobenius, defining diagram"
+   }
+  },
+  {
+   "text": "Here is the base-change identification, including its effect on the arrow. For any scheme $T$, a pair $a:T\\to Y$, $b:T\\to X$ with $\\Phi_Y^ma=fb$ is equivalently a triple $(a_0:T\\to Y_0,b_0:T\\to X_0,t:T\\to\\operatorname{Spec}k)$ satisfying $F_{Y_0}a_0=f_0b_0$ and the common $k_0$-structure equalities. Indeed the equation on $Y$ forces the two projections to $\\operatorname{Spec}k$ to coincide, and its other projection is exactly the displayed model equation. The same triples specify maps to $X_0^{(Q)}\\times_{k_0}k$. Applying the universal pair maps in each direction and then projection uniqueness gives inverse scheme morphisms, the canonical isomorphism $X'_m\\cong X_0^{(Q)}\\times_{k_0}k$. Under it $r_m$ has model components $(f_0\\pi_X,F_{X_0}\\pi_X)$ and $k$-component the structure map of $X$, exactly the components of $F_{X_0/Y_0}\\times_{k_0}\\operatorname{id}_k$; hence these arrows agree. The equal signs in the statement denote these projection-compatible canonical identifications.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-relative-frob/d-relative-frob.md",
+    "place": "paragraph beginning Since fibre products commute with the base change; the universal-property argument supplies the details"
+   }
+  },
+  {
+   "text": "Take $U=\\operatorname{Spec}R\\subseteq Y_0$ and $V=\\operatorname{Spec}S\\subseteq f_0^{-1}(U)$, and let $g:R\\to S$ be the ring map of $f_0|_V$. The absolute Frobenii restrict to $U$ and $V$, are identity maps on their spaces, and on these affine opens are induced by the $Q$-power ring maps. The open-fibre-product statement identifies $U\\times_{F_{Y_0}|_U,U,f_0|_V}V$ with the corresponding open of $X_0^{(Q)}$. The affine-fibre-product statement identifies this open, compatibly with both projections, with $\\operatorname{Spec}(R\\otimes_{F,R}S)$, where the base ring $R$ acts on the left copy of $R$ by $r\\mapsto r^Q$ and on $S$ by $g$. The inverse image of that open under $F_{X_0/Y_0}$ is $f_0^{-1}(U)\\cap F_{X_0}^{-1}(V)=V$, since $F_{X_0}$ is identity on spaces and $V\\subseteq f_0^{-1}(U)$. Thus its affine incarnation is a ring map $R\\otimes_{F,R}S\\to S$, whose composites with $r'\\mapsto r'\\otimes1$ and $s\\mapsto1\\otimes s$ are respectively $g$ and $s\\mapsto s^Q$.",
+   "uses": [
+    "lem-weil-absolute-frobenius-well-defined",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JR, label lemma-open-fibre-product; Tag 01I4, label lemma-fibre-product-affine-schemes, formula and proof; the restriction of absolute Frobenius is as in varieties.tex Tag 03SM"
+   }
+  },
+  {
+   "text": "Apply the tensor-product universal property with the left algebra $R$ having structure map $r\\mapsto r^Q$, the right algebra $S$ having structure map $g$, and the target ring $S$ having $R$-algebra structure $r\\mapsto g(r)^Q$. The maps from the two factors are $g:R\\to S$ and $F_S:S\\to S$, $s\\mapsto s^Q$. They are ring homomorphisms by the iterated ring-Frobenius statement, and are maps of these $R$-algebras because $g(r^Q)=g(r)^Q=F_S(g(r))$. The cited universal property gives the ring homomorphism $h(r'\\otimes s)=g(r')s^Q$, uniquely determined by the two factor maps. By step 5 and functoriality and faithfulness of affine spectra, its spectrum is the restriction of $F_{X_0/Y_0}$. In particular $h(r'r^Q\\otimes s)=g(r')g(r)^Qs^Q=h(r'\\otimes g(r)s)$, the balancing relation in the statement. This checks the twisting explicitly and requires no flatness, reducedness or perfection of $R$ or $S$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-ring-frobenius",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, label lemma-fibre-product-affine-schemes, proof, the displayed Hom identity; relative Frobenius is varieties.tex Tag 0CCG, label remark-n-fold-relative-frobenius"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-trf-scheme-frobenius",
+  "def-weil-absolute-frobenius-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-ring-frobenius",
+  "lem-weil-absolute-frobenius-well-defined",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-relative-frob/d-relative-frob.md",
+  "place": "Full definition: naturality and iterates, fibre-product lift and projection identities, geometric base change, and the final affine formula; expanded using the cited Stacks statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "relativeFrobenius|relative_frobenius|frobenius.*pullback|pullback.*frobenius",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; component facts already have DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Frobenius of a scheme morphism and compatibility with base change and affine tensor product formula",
+   "results": "LinearMap.rTensor_baseChange; LinearMap.frobenius; LinearMap.liftBaseChange_tmul; LinearMap.baseChange_eq_ltensor; IsBaseChange; AlgebraicGeometry.isAffineHom_isStableUnderBaseChange; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; LinearMap.baseChange_baseChange",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; component facts already have DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, Frobenius",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-16",
+   "verdict": "invalid query; retried with frobenius"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes over a finite field the relative Frobenius is the map to the Frobenius fiber product, commutes with geometric base change, and on affine rings sends r tensor s to r times s to the qth power",
+   "results": "FiniteField.frobeniusAlgEquiv; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr; AlgebraicGeometry.Scheme.Pullback.ofPointTensor; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; component facts already have DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFrobenius|[Ff]robenius|isPullback_SpecMap",
+   "results": "Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/Morphisms/Integral.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; component facts already have DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "frobenius",
+   "results": "frobenius; iterateFrobenius_one; frobenius_def; LinearMap.frobenius; iterate_frobenius; coe_iterateFrobenius; RingHom.frobenius_comm; iterateFrobenius_eq_pow",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; component facts already have DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schemes in characteristic p have a natural absolute Frobenius endomorphism; relative Frobenius is constructed using the pullback universal property",
+   "results": "AlgebraicGeometry.Scheme.instIsOverFstOverInferInstanceOverClassId; AlgebraicGeometry.Scheme.isMonHom_fst_id_right; AlgebraicGeometry.Scheme.Hom.fiber; AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback; AlgebraicGeometry.Scheme.Pullback.affine_hasPullback; AlgebraicGeometry.Scheme.canonicallyOverPullback; AlgebraicGeometry.Scheme.Pullback.Triplet; AlgebraicGeometry.Scheme.Pullback.affine_affine_hasPullback",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; component facts already have DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusAlgEquiv|frobenius_comm|map_iterate_frobenius",
+   "results": "Mathlib/FieldTheory/Finite/GaloisField.lean; Mathlib/FieldTheory/Finite/GaloisField.lean; Mathlib/FieldTheory/Finite/Basic.lean; Mathlib/FieldTheory/Finite/Basic.lean; Mathlib/FieldTheory/Finite/Basic.lean; Mathlib/FieldTheory/Finite/Basic.lean; Mathlib/FieldTheory/Finite/Basic.lean; Mathlib/FieldTheory/Finite/Extension.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; component facts already have DAG nodes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -43,5 +199,20 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-relative-frob"
+ "unit": "sk-d-relative-frob",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "d-relative-frob",
+  "worker": "stage1",
+  "summary": "Expanded all construction and compatibility assertions in six steps, adding the existing fibre-product, base-change, absolute-Frobenius and affine-chart interfaces. No new nodes: naturality and pullback base change are written out from definitions; the affine and tensor facts reuse existing Mathlib leaves. The affine-local wording now explicitly names the corresponding open, without changing the intended local assertion. No attachment is claimed.",
+  "blueprint": "Current main-20261015 d-relative-frob: steps 1-2 realize the naturality/iterate paragraph; step 3 realizes the defining display and both projection identities, also the unit sk-d-relative-frob; step 4 realizes both geometric-base-change identities; steps 5-6 realize the entire affine-local paragraph and its balancing equality."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-45fff0a4d",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-45fff0a4d (reviewer sub-agent of L); spot-checked: Read the full item d-relative-frob (definition, 6 steps, no new nodes), the cited statements of all 13 nodes it uses, and the source. The main-20261015 blueprint text matches the master copy apart from its order number. The statement is the blueprint text with references added; the one rewording, 'has the corresponding affine open which is Spec(R⊗_{F,R}S)', clarifies 'affine-locally' and weakens nothing. Checked against Stacks varieties.tex 0CC7, 0CC9 and 0CCG (n-fold relative Frobenius with n=am and the factors in the opposite order) and schemes.tex 01I4, 01JP and 01JR; all tags match tags/tags. The base change is Φ=Φ_0×_{k_0}id_k, as in def-trf-scheme-frobenius, and the definition uses no coefficient category. Step 1: I recomputed the sheaf maps of F_{Y_0}∘f_0 and f_0∘F_{X_0} and they agree. Step 2: base-change functoriality follows from fibre-product uniqueness. Step 3: r_m comes from the universal pair map. Step 4: the triple argument (t=t', F_{Y_0}a_0=f_0b_0, matching k_0-structures) gives the isomorphism, and the arrow components agree. Step 5: the open-fibre-product hypotheses hold because F is the identity on spaces, and the preimage of the affine open is V. Step 6: the twisted R-algebra structures are correct, and the restricted ring map is itself an R-algebra map (r^Q⊗1↦g(r)^Q), so uniqueness applies. I tested f_0=id (r_m=id), Y_0=Spec k_0 (r_m=Φ_X^m), F_2[ε]/ε² (the twist is on the correct factor) and the zero ring. There are no duplicates: i-relative-frob, def-weil-relative-frobenius-geometric-fiber, lem-trf-frobenius-open-square and def-weil-frobenius-detailed all differ. sk-d-relative-frob is the unit's own statement node, so the unit record correctly stays unchanged. The item is a definition, so the route check does not apply, and no tool_uses are needed. No SGA is cited. No fixes were made."
+ }
 }

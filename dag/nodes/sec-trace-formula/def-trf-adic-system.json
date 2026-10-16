@@ -3,28 +3,109 @@
  "blueprint": {
   "is": "def-trf-adic-system",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Normalized adic Weil system",
- "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, with $A_n=A_{E,n}$. An\n*$A_\\bullet$-system* on $X$ is a family\n\n$$\nK_\\bullet=\\bigl(K_n,t_{n+1,n}\\bigr)_{n\\geq1},\\qquad\nK_n\\in D^b_{ctf}(X,A_n),\n$$\n\nwith transition morphisms compatible with the quotients\n$A_{n+1}\\twoheadrightarrow A_n$; it is *normalized* if\n$K_n\\otimes_{A_n}^LA_j\\xrightarrow{\\sim}K_j$ for $j\\leq n$. Using the\nadic coefficient datum of\nthe proper-base-change chapter and the\nderived inverse limit,\ndefine\n\n$$\nK_{\\mathcal O_E}:=R\\!\\varprojlim_n\\operatorname{Res}_{n,X}K_n,\n$$\n\nand let $\\mathcal D^b_{ctf,\\mathrm W,adic}(X,\\mathcal O_E)$ be the\ncategory of normalized systems with a strict Weil structure at every\nlevel, compatible with the transitions; the resulting realizations are\nthe derived-complete bounded\nconstructible $\\mathcal O_E$-complexes of the framework chapter with finite\nTor amplitude, by the reconstruction of the proper-base-change chapter (the levelwise\nstatements below).",
+ "statement": "Fix the global finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber], with $q=p^a$, a prime $\\ell\\neq p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and put $A_n=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$. Let $X_0$ be a separated finite-type $k_0$-scheme and $X=X_0\\times_{k_0}k$. Use $D^b_{ctf}(X,A_n)$ on the small pro-etale site as in [def-trf-coefficient-conventions]. The coefficient sheaves $(A_n)_X$ are the constant sheaves of rings on $X_{\\mathrm{proet}}$, with the morphisms $(A_{n+1})_X\\to(A_n)_X$ induced by the reductions, the completed coefficient sheaf $\\widehat{\\mathcal O}_{E,X}=\\varprojlim_n(A_n)_X$ and its limit projections $\\pi_n:\\widehat{\\mathcal O}_{E,X}\\to(A_n)_X$, all as in [def-weil-completed-integral-coefficients].\n\nFor $n\\geq j\\geq1$, write $r_{n,j}:D(X,A_j)\\to D(X,A_n)$ for restriction of scalars along $(A_n)_X\\to(A_j)_X$ [def-pc-sheaf-restrict-scalars], applied termwise to complexes [lem-sf-exact-functor-derived-triangulated]; restriction is exact since it leaves the underlying abelian sheaves and their kernels and cokernels unchanged. Write $\\operatorname{Res}_{n,X}:D(X,A_n)\\to D(X_{\\mathrm{proet}},\\mathcal O_E)$ for the derived restriction of scalars of [def-weil-integral-derived-restriction-of-scalars], whose target uses the completed coefficient sheaf $\\widehat{\\mathcal O}_{E,X}=\\varprojlim_n(A_n)_X$.\n\nAn *$A_\\bullet$-system* on $X$ is a family\n$$\nK_\\bullet=\\bigl(K_n,t_{n+1,n}\\bigr)_{n\\geq1},\\qquad\nK_n\\in D^b_{ctf}(X,A_n),\\qquad\nt_{n+1,n}:K_{n+1}\\longrightarrow r_{n+1,n}K_n\n$$\nwith the last arrow in $D(X,A_{n+1})$. For $n\\geq j$, let $t_{n,j}:K_n\\to r_{n,j}K_j$ be the composite of the adjacent transitions with the indicated restrictions of scalars, with $t_{n,n}=1$. It is *normalized* if the maps induced by these transitions under derived extension and restriction of scalars,\n$$\n\\nu_{n,j}:K_n\\otimes^L_{A_n}A_j\\longrightarrow K_j,\n$$\nare isomorphisms for every $n\\geq j\\geq1$. Here derived change of rings is [lem-pur-derived-change-of-rings], with the extension-restriction adjunction of [def-sfb-derived-extend-restrict-adjunction], applied in the category of sheaves of abelian groups on $X_{\\mathrm{proet}}$ to the ring objects $(A_n)_X\\to(A_j)_X$, whose module objects are the sheaves of $(A_n)_X$- and $(A_j)_X$-modules; that category is Grothendieck abelian with an additive closed symmetric monoidal sheafified tensor product [lem-weil-pbc-sheaf-tensor-closed] and has a functorial flat resolution [lem-sfb-sheaf-functorial-flat-resolution], applied to abelian groups with the free resolution $\\mathbf Z[M]\\to M$; the displayed maps are those adjoint to $t_{n,j}$, rather than unrelated choices of isomorphism. In particular $\\nu_{n,n}=1$, and for $n\\geq j\\geq i$ the normalization maps obey\n$$\n\\nu_{n,i}=\\nu_{j,i}\\circ(\\nu_{n,j}\\otimes^L_{A_j}A_i)\n$$\nunder the associativity identification of the derived tensor products.\n\nA morphism $f_\\bullet:K_\\bullet\\to L_\\bullet$ is a family $f_n:K_n\\to L_n$ in $D(X,A_n)$ satisfying\n$$\nr_{n+1,n}(f_n)\\circ t^K_{n+1,n}=t^L_{n+1,n}\\circ f_{n+1}\n\\qquad(n\\geq1).\n$$\nIdentities and composition are levelwise.\n\nThe restricted objects $M_n=\\operatorname{Res}_{n,X}K_n$ and restricted transitions form an inverse system in the single category $D(X_{\\mathrm{proet}},\\mathcal O_E)$, using $\\operatorname{Res}_{n+1,X}\\circ r_{n+1,n}=\\operatorname{Res}_{n,X}$ (the composite of $\\pi_{n+1}$ with $(A_{n+1})_X\\to(A_n)_X$ is $\\pi_n$). Countable products of sheaves of $\\widehat{\\mathcal O}_{E,X}$-modules exist and are exact [lem-weil-proetale-countable-products-exact], so the product $\\prod_{n\\geq1}M_n$ exists in $D(X_{\\mathrm{proet}},\\mathcal O_E)$ [lem-weil-derived-limit-products-core]. An *integral realization* of this system, denoted\n$$\nK_{\\mathcal O_E}=R\\!\\varprojlim_n\\operatorname{Res}_{n,X}K_n,\n$$\nis an object equipped with a Roos triangle as in [def-weil-derived-limit]:\n$$\nK_{\\mathcal O_E}\\longrightarrow\\prod_{n\\geq1}M_n\n\\xrightarrow{\\,1-s\\,}\\prod_{n\\geq1}M_n\n\\longrightarrow K_{\\mathcal O_E}[1],\n$$\nwhere $\\mathrm{pr}_n s=\\overline t_{n+1,n}\\mathrm{pr}_{n+1}$ and $\\overline t$ denotes the transition after restriction to the completed coefficient sheaf. This specifies the derived-limit property and its triangle, without a choice of a derived-limit functor on the category of systems.\n\nLet $\\mathcal D^b_{ctf,\\mathrm W,adic}(X,\\mathcal O_E)$ be the category whose objects are normalized $A_\\bullet$-systems equipped at each level with a strict Weil structure\n$$\n\\varphi_n:Lg_\\gamma^*K_n\\xrightarrow{\\sim}K_n\n$$\nin the sense of [def-trf-strict-weil-complex], where $g_\\gamma$ is the geometric-Frobenius automorphism specified there. Require\n$$\nt_{n+1,n}\\circ\\varphi_{n+1}\n=r_{n+1,n}(\\varphi_n)\\circ Lg_\\gamma^*(t_{n+1,n})\n$$\nunder the coefficient identification $Lg_\\gamma^*r_{n+1,n}=r_{n+1,n}Lg_\\gamma^*$. Morphisms are the morphisms of systems just defined which also satisfy\n$$\nf_n\\circ\\varphi_n^K=\\varphi_n^L\\circ Lg_\\gamma^*(f_n)\n\\qquad(n\\geq1).\n$$\nIdentities and composition are levelwise.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-prop-trace-adic/def-trf-adic-system.md",
   "place": "node def-trf-adic-system, order 2385"
  },
  "stmt_deps": [
   "def-trf-coefficient-conventions",
-  "def-weil-derived-complete-integral-detailed",
   "def-weil-finite-field-fiber",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-derived-inverse-limit"
+  "def-pc-sheaf-restrict-scalars",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-integral-derived-restriction-of-scalars",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-limit",
+  "def-trf-strict-weil-complex",
+  "def-sfb-derived-extend-restrict-adjunction",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsNormalizedTower|WeilComplex|AdicSystem|adicSystem|Frobenius.*[Tt]ower",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: no IsNormalizedTower, WeilComplex, AdicSystem, adicSystem or Frobenius-tower definition in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse system in derived categories of quotient rings with scalar extension isomorphisms and Frobenius descent data",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "localCohomology",
+     "localCohomology.diagram",
+     "localCohomology.ofSelfLERadical",
+     "localCohomology.ofDiagram",
+     "localCohomology.isoSelfLERadical",
+     "BDeRhamPlus",
+     "AdicCompletion.transitionMap_comp_eval_apply",
+     "AdicCompletion.transitionMap"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: hits are localCohomology and adic completion of modules, not normalized derived sheaf systems with Weil pairs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\"",
+   "results": {
+    "n_hits": 12,
+    "top": [
+     "HasDerivedCategory",
+     "HasDerivedCategory.standard",
+     "DerivedCategory",
+     "instCategoryDerivedCategory",
+     "DerivedCategory.instHasZeroObject",
+     "DerivedCategory.instPreadditive",
+     "DerivedCategory.instHasShiftInt",
+     "DerivedCategory.singleFunctor"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: the twelve hits define the ambient derived category and its general infrastructure, not this coefficient-tower category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A category of compatible Frobenius equivariant normalized systems of constructible complexes over quotient rings",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "FiniteField.frobeniusAlgEquiv",
+     "frobeniusEquiv.congr_simp",
+     "coe_frobenius_comp_coe_frobeniusEquiv_symm",
+     "frobenius_comp_frobeniusEquiv_symm",
+     "CategoryTheory.FreeMonoidalCategory.normalize",
+     "frobeniusEquiv",
+     "CategoryTheory.Idempotents.DoldKan.N",
+     "WittVector.frobeniusEquiv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: hits are finite-field Frobenius equivalences, free-monoidal normalization, Dold-Kan and Witt-vector Frobenius, not this definition"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -56,5 +137,21 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-prop-trace-adic"
+ "unit": "sk-prop-trace-adic",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-adic-system",
+  "worker": "stage1",
+  "summary": "Second reading repaired missing definition dependencies, typed all coefficient transitions, specified induced normalization and levelwise morphisms, and interpreted realization as a Roos-triangle property. The reconstruction sentence is a separate mathematical assertion, already addressed by existing reconstruction nodes under their own hypotheses; it is not part of this definition. No new nodes, proof steps, or Lean attachment.",
+  "blueprint": "Current main-20261015 node def-trf-adic-system, order 2729: the system and normalization paragraph, the inverse-limit display, and the compatible strict-Weil category paragraph; companion sk-prop-trace-adic, order 2728, specifies the compatibility and the additional hypotheses of the realization theorem. Strict Weil means def-trf-strict-weil-complex, order 2509. The final reconstruction assertion is separated from the definitional data; see the second-reading source/type check in report.md.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-e90a66d88",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-e90a66d88 (reviewer sub-agent of L); spot-checked: I read the whole item. Both blueprint snapshots (master order 2385, main-20261015 order 2729) have the same text, and I read that, the sk-prop-trace-adic unit and its section, Stacks derived.tex 08TC (lines 10436-10460), every cited node, the five citers, and the nearest candidate duplicate, def-coef-normalized-dvr-tower. That node requires a coherent D(Tow) lift and has no ctf condition, so it is a different notion. The repaired definition is correct. The transitions K_{n+1}->r K_n are properly typed. Normalization uses the maps adjoint to the transitions; arbitrary isomorphisms would let a zero-transition tower count as normalized. The cocycle follows by mates. Morphisms are levelwise. The realization is the object-only Roos derived limit, which is right because a family in varying D(X,A_n) gives no D(Tow) object; the sign matches 08TC. The strict-Weil compatibility is well typed. Removing the reconstruction sentence is justified: it is a claim, the unit's step (i) states it under an extra hypothesis, and no citer uses it from here. Uniform Tor amplitude follows from K_1, so no hypothesis was added. Small cases checked: empty X, a point with A_n^r (r=0 included), n=j, the zero-transition tower, and a moving skyscraper with no phi_n. No new nodes, no tool_uses. Three repairs are in fixes/dag/nodes/sec-trace-formula/def-trf-adic-system.json. (1) The coefficient sheaves came from def-weil-pbc-adic-coefficient-datum (Cont(pi_0) sheaves, with no identification with the constant sheaves), while D^b_ctf and Res_{n,X} use def-weil-completed-integral-coefficients. I switched to that node, dropped the adic-datum dependency, and made Res_{n+1}r_{n+1,n}=Res_n explicit. (2) 08TC needs the product prod M_n to exist; I added lem-weil-proetale-countable-products-exact and lem-weil-derived-limit-products-core. (3) The hypotheses of def-sfb-derived-extend-restrict-adjunction were not supplied; I added the ambient sheaves of abelian groups on X_proet, with lem-weil-pbc-sheaf-tensor-closed and lem-sfb-sheaf-functorial-flat-resolution. None of the added nodes leads back to the item, and the citations match stmt_deps.; 1 file(s) fixed by the reviewer"
+ }
 }
