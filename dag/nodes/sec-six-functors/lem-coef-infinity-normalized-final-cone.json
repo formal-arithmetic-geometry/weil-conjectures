@@ -191,5 +191,24 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-4aa5c9701 (reviewer sub-agent of L); spot-checked: Mathematics checked against Kerodon 02J4, 018F, 01NU, 02J2 and mapping-space references; all six steps and three new statements accepted. Repaired incomplete creation/audit metadata in three corrected JSON files under fixes/. No statements changed or nodes dropped. Full checks, edge cases, route assessment and accepted tool use are recorded in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NormalizedFinalCone",
+  "declaration": "SSet.Enhanced.normalized_final_cone",
+  "file": "lean/Sheaf/CategoryTheory/NormalizedFinalCone.lean",
+  "statement": "theorem normalized_final_cone {J : SSet.{u}} [Quasicategory J] (t : J _⦋0⦌) : (∀ j : J _⦋0⦌, IsContractible (mappingSpace J j t)) ↔ ∃ F : ∀ n : SimplexCategory, J.obj (op n) → J _⦋n.len + 1⦌, (∀ (n : SimplexCategory) (s : J.obj (op n)), J.map (SimplexCategory.δ (Fin.last (n.len + 1))).op (F n s) = s) ∧ (∀ (n : SimplexCategory) (s : J.obj (op n)), J.map (SimplexCategory.const ⦋0⦌ ⦋n.len + 1⦌ (Fin.last (n.len + 1))).op (F n s) = t) ∧ (∀ (m n : SimplexCategory) (a : m ⟶ n) (s : J.obj (op n)), F m (J.map a.op s) = J.map (appendLast a).op (F n s)) ∧ F ⦋0⦌ t = J.σ 0 t",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The right-cone map is written in its full compatible-simplex coordinates: base and apex restrictions, every appendLast operator, and the strict degenerate t-edge. The docstring gives the inverse mixed-simplex formula. No second join definition is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4c8255d7b",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all statement clauses, join-coordinate equivalence, exact dependencies, universes, edge cases, docstrings, sorry-only proof, and signature record. Immutable module compiled cleanly through scompile.py in sandbox and library passes. No landing defects; branch head unchanged."
  }
 }
