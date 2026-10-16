@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-def-sfb-sheaf-tensor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Tensor product of pro-étale sheaves",
@@ -13,39 +13,169 @@
   "place": "node sk-def-sfb-sheaf-tensor, order 849"
  },
  "stmt_deps": [
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-sheafification",
+  "det-def-sfb-sheaf-tensor-presheaf",
+  "det-def-sfb-sheaf-tensor-structure"
  ],
  "proof": [
   {
-   "text": "**$\\Ab$.** The tensor product of abelian groups is the tensor product of\n$\\mathbf Z$-modules: it is associative, unital with unit $\\mathbf Z$, and symmetric, and\nit is additive in each variable. The tensor–hom adjunction\n$\\Hom(M\\otimes_{\\mathbf Z}N,P)\\cong\\Hom(N,\\Hom(M,P))$ makes it closed. $\\Ab$ is\nGrothendieck abelian.",
-   "uses": [],
-   "elementary": null
+   "text": "The additivity hypothesis in the supporting presheaf node adds no assumption here. Closedness gives a right adjoint to $L=M\\otimes-$, and symmetry gives one to $-\\otimes M$. By [lem-weil-pbc-left-adjoint-preserves-colimits], each preserves the zero object and finite coproducts. In an abelian category these are biproducts. Under the canonical identification $L(X\\oplus Y)=LX\\oplus LY$, zero morphisms and injections are preserved, so the projections are preserved too, as their composites with the injections are the identity and zero maps. Consequently diagonals and codiagonals are preserved, and the biproduct formula $f+g=\\nabla\\circ(f\\oplus g)\\circ\\Delta$ shows that $L(f+g)=L(f)+L(g)$. Thus tensor is additive in each variable, and [det-def-sfb-sheaf-tensor-presheaf] applies with exactly the coefficient hypotheses of the item. It supplies the objectwise closed symmetric monoidal presheaf category and the natural adjunction $\\operatorname{Hom}(F\\otimes_pG,H)\\cong\\operatorname{Hom}(G,[F,H])$. The essentially small site is taken relative to the Hom universe of $\\mathcal A$, and the end in that supporting node is taken in this universe.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "det-def-sfb-sheaf-tensor-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/sk-def-sfb-sheaf-tensor.proof.md",
+    "place": "Presheaves paragraph; additivity implicit in the closed coefficient hypothesis"
+   }
   },
   {
-   "text": "**Presheaves.** The category of $\\mathcal A$-valued presheaves on $C$ is symmetric\nmonoidal for the objectwise tensor product. It is closed: the internal hom $[F,G]$ is\nthe end $[F,G](U)=\\int_{V\\to U}\\Hom_{\\mathcal A}(F(V),G(V))$, taken over the objects\n$V\\to U$ of $C/U$. This end is a limit indexed by a category of the size of $C$. It\nexists because $\\mathcal A$, being Grothendieck abelian, has all limits of that size,\nand here the smallness assumption on $C$ is used. If $G$ is a sheaf, then $[F,G]$ is a\nsheaf.",
-   "uses": [],
-   "elementary": null
+   "text": "Write $\\iota$ for the full inclusion of sheaves and $a\\dashv\\iota$ for the sheafification adjunction [def-weil-pbc-sheafification], with unit $\\eta_P:P\\to\\iota aP$. Let $W$ be the sheafification-isomorphisms, with the equivalent Hom characterization of [det-def-sfb-sheaf-tensor-local-iso]. For a presheaf $F$ and a sheaf $H$, [det-def-sfb-sheaf-tensor-hom-sheaf] says that $[F,\\iota H]$ is a sheaf. The natural adjunction of [det-def-sfb-sheaf-tensor-presheaf] identifies $\\operatorname{Hom}(F\\otimes_pg,\\iota H)$ with $\\operatorname{Hom}(g,[F,\\iota H])$, which is bijective when $g\\in W$. Thus $F\\otimes_pg\\in W$. For $g:X\\to Y$, naturality of the presheaf symmetry gives $g\\otimes_pF=\\beta_{F,Y}\\circ(F\\otimes_pg)\\circ\\beta_{X,F}$; applying $a$ shows that this map also lies in $W$. Precomposition with $\\eta_P$ is bijective on maps to every sheaf, by the sheafification universal property, so $\\eta_P\\in W$. The map $\\eta_F\\otimes_p\\eta_G$ factors as $(\\iota aF\\otimes_p\\eta_G)\\circ(\\eta_F\\otimes_pG)$. Both factors lie in $W$, and their composite does because $a$ is a functor. Hence $a(\\eta_F\\otimes_p\\eta_G):a(F\\otimes_pG)\\to a(\\iota aF\\otimes_p\\iota aG)$ is the natural isomorphism of clause 3 of [det-def-sfb-sheaf-tensor-local-iso].",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "det-def-sfb-sheaf-tensor-presheaf",
+    "det-def-sfb-sheaf-tensor-hom-sheaf",
+    "det-def-sfb-sheaf-tensor-local-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/sk-def-sfb-sheaf-tensor.proof.md",
+    "place": "Monoidal structure on sheaves paragraph: stability of W under tensor and units"
+   }
   },
   {
-   "text": "**Monoidal structure on sheaves.** Let $W$ be the class of morphisms of presheaves that\nsheafification inverts. Equivalently, $g\\in W$ when $\\Hom(g,H)$ is bijective for every\nsheaf $H$. The class $W$ is stable under $F\\otimes-$: for $g\\in W$ and a sheaf $H$,\n$\\Hom(F\\otimes g,H)\\cong\\Hom(g,[F,H])$, which is bijective because $[F,H]$ is a sheaf.\nThe braiding transports this to $-\\otimes F$. Hence the monoidal structure on presheaves\ndescends to the localization at $W$. Sheafification identifies this localization with\n$\\Sh(C,\\mathcal A)$. So $\\Sh(C,\\mathcal A)$ inherits a monoidal structure for which\nsheafification is strong monoidal. On sheaves it is given by\n$\\mathcal F\\otimes\\mathcal G=a(\\mathcal F\\otimes\\mathcal G)$, and its unit is\n$a(\\underline{\\mathbf 1})$. The braiding and the symmetry descend in the same way. This\nproves 1.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the tensor, unit and associator specified in [det-def-sfb-sheaf-tensor-structure]: the tensor is $a(\\iota\\mathcal F\\otimes_p\\iota\\mathcal G)$, its map on morphisms is $a(\\varphi\\otimes_p\\psi)$, and its unit is $a(\\underline{\\mathbf 1})$. Its associator is the displayed composite in that node, using the comparisons of [det-def-sfb-sheaf-tensor-local-iso] and the objectwise associator of [det-def-sfb-sheaf-tensor-presheaf]. Write $\\epsilon_{\\mathcal F}:a\\iota\\mathcal F\\to\\mathcal F$ for the map corresponding to $\\mathrm{id}_{\\iota\\mathcal F}$ under [def-weil-pbc-sheafification]. It satisfies $\\iota\\epsilon_{\\mathcal F}\\circ\\eta_{\\iota\\mathcal F}=\\mathrm{id}$. The two endomorphisms $\\eta_{\\iota\\mathcal F}\\circ\\iota\\epsilon_{\\mathcal F}$ and $\\mathrm{id}$ of the sheaf $\\iota a\\iota\\mathcal F$ agree after precomposition with $\\eta_{\\iota\\mathcal F}$, so the uniqueness in the universal property makes them equal. Thus $\\epsilon_{\\mathcal F}$ is invertible. The left unitor is the composite $a(\\iota a\\underline{\\mathbf 1}\\otimes_p\\iota\\mathcal F)\\xrightarrow{a(\\eta_{\\underline{\\mathbf 1}}\\otimes_p\\mathrm{id})^{-1}}a(\\underline{\\mathbf 1}\\otimes_p\\iota\\mathcal F)\\xrightarrow{a(\\lambda)}a\\iota\\mathcal F\\xrightarrow{\\epsilon_{\\mathcal F}}\\mathcal F$. The right unitor is $a(\\iota\\mathcal F\\otimes_p\\iota a\\underline{\\mathbf 1})\\xrightarrow{a(\\mathrm{id}\\otimes_p\\eta_{\\underline{\\mathbf 1}})^{-1}}a(\\iota\\mathcal F\\otimes_p\\underline{\\mathbf 1})\\xrightarrow{a(\\rho)}a\\iota\\mathcal F\\xrightarrow{\\epsilon_{\\mathcal F}}\\mathcal F$. Here $\\lambda,\\rho$ are the objectwise unitors, and the inverted maps are invertible by tensor stability of $W$. The symmetry is $a(\\beta_{\\iota\\mathcal F,\\iota\\mathcal G})$. These are the structure maps in [det-def-sfb-sheaf-tensor-structure], whose conclusion supplies their coherence identities and the strong symmetric monoidality of $a$. Its tensor comparison is the inverse of $a(\\eta_F\\otimes_p\\eta_G)$, namely $aF\\otimes aG=a(\\iota aF\\otimes_p\\iota aG)\\cong a(F\\otimes_pG)$, and its unit comparison is the identity on $a(\\underline{\\mathbf 1})$. This proves clause 1 for precisely the tensor and unit in the statement.",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-structure",
+    "det-def-sfb-sheaf-tensor-local-iso",
+    "det-def-sfb-sheaf-tensor-presheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/sk-def-sfb-sheaf-tensor.proof.md",
+    "place": "Monoidal structure on sheaves paragraph: descent, coherence, and strong symmetric monoidality"
+   }
   },
   {
-   "text": "**Closedness.** The sheafification adjunction $a\\dashv\\iota$ exhibits $\\Sh(C,\\mathcal A)$\nas a reflective subcategory of a symmetric monoidal closed category, and the reflector\n$a$ is strong monoidal. By Day's reflection theorem, $\\Sh(C,\\mathcal A)$ is then\nmonoidal closed, with $\\mathcal{H}om(\\mathcal F,\\mathcal G)=[\\mathcal F,\\mathcal G]$ for\nsheaves $\\mathcal F,\\mathcal G$. So $\\mathcal F\\otimes-$ is a left adjoint and preserves\ncolimits. By the symmetry, so does $-\\otimes\\mathcal F$. This proves 2.\n\nFor $\\mathcal A=\\Ab$, apply this to the closed symmetric monoidal structure\n$\\otimes_{\\mathbf Z}$ of the first paragraph.",
-   "uses": [],
-   "elementary": null
+   "text": "For sheaves $\\mathcal F,\\mathcal H$, take $\\mathcal{H}om(\\mathcal F,\\mathcal H)=[\\iota\\mathcal F,\\iota\\mathcal H]$, which is a sheaf by [det-def-sfb-sheaf-tensor-hom-sheaf]. The adjunction [def-weil-pbc-sheafification], the natural presheaf adjunction [det-def-sfb-sheaf-tensor-presheaf], and fullness of the sheaf category give, for every sheaf $\\mathcal G$, the natural chain $\\operatorname{Hom}_{\\mathrm{Sh}}(a(\\iota\\mathcal F\\otimes_p\\iota\\mathcal G),\\mathcal H)\\cong\\operatorname{Hom}_{\\mathrm{PSh}}(\\iota\\mathcal F\\otimes_p\\iota\\mathcal G,\\iota\\mathcal H)\\cong\\operatorname{Hom}_{\\mathrm{PSh}}(\\iota\\mathcal G,[\\iota\\mathcal F,\\iota\\mathcal H])=\\operatorname{Hom}_{\\mathrm{Sh}}(\\mathcal G,\\mathcal{H}om(\\mathcal F,\\mathcal H))$. This exhibits the right adjoint and is the adjunction of [det-def-sfb-sheaf-tensor-closed]. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to obtain preservation of colimits by $\\mathcal F\\otimes-$. For the other variable, the natural symmetry specified in [det-def-sfb-sheaf-tensor-structure] identifies the image of any colimit cocone under $-\\otimes\\mathcal F$ with its image under $\\mathcal F\\otimes-$: each component $D_j\\otimes\\mathcal F\\to\\mathcal F\\otimes D_j$ is $\\beta_{D_j,\\mathcal F}$, and naturality makes these commute with the cocone maps and with diagram arrows. Composing maps out of the vertices with these isomorphisms gives inverse bijections between cocones, so the colimit universal property holds in the other variable too. Finite coproduct preservation gives additivity by the biproduct calculation of step 1; cokernel preservation gives right exactness, as also explicitly asserted in [det-def-sfb-sheaf-tensor-closed]. This proves clause 2 by its explicit right adjoint.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "det-def-sfb-sheaf-tensor-presheaf",
+    "det-def-sfb-sheaf-tensor-hom-sheaf",
+    "det-def-sfb-sheaf-tensor-closed",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "det-def-sfb-sheaf-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/sk-def-sfb-sheaf-tensor.proof.md",
+    "place": "Closedness paragraph; explicit adjunction from det-def-sfb-sheaf-tensor-closed.proof.md"
+   }
+  },
+  {
+   "text": "Finally specialize to $\\mathcal A=\\mathrm{Ab}$ with its coefficient tensor $\\otimes_{\\mathbf Z}$. The specialization and its unit are stated in [det-def-sfb-sheaf-tensor-structure]: the displayed construction is the sheafified objectwise $\\otimes_{\\mathbf Z}$ and $a(\\underline{\\mathbf Z})$ is the constant sheaf $\\underline{\\mathbf Z}$. Thus the final assertion is the same construction at this coefficient category.",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/sk-def-sfb-sheaf-tensor.proof.md",
+    "place": "Ab paragraph and final specialization sentence"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "det-def-sfb-sheaf-tensor-presheaf",
+  "def-weil-pbc-sheafification",
+  "det-def-sfb-sheaf-tensor-hom-sheaf",
+  "det-def-sfb-sheaf-tensor-local-iso",
+  "det-def-sfb-sheaf-tensor-structure",
+  "det-def-sfb-sheaf-tensor-closed"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/sk-def-sfb-sheaf-tensor.proof.md",
+  "place": "Presheaves, Monoidal structure on sheaves, Closedness, and Ab specialization; adjunction expanded using det-def-sfb-sheaf-tensor-closed.proof.md"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "monoidalCategory|symmetricCategory|presheafToSheaf.*[Mm]onoidal",
+   "results": "; hits: 40, 42, 168, 169, 170; see sandbox searches.jsonl for the exact logged result digest",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: component declarations only; the general coefficient and site hypotheses require additional constructions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of the pointwise tensor product gives a closed symmetric monoidal category of sheaves",
+   "results": "; hits: instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.plusPlusSheaf, CategoryTheory.Sheaf.tensorProd_isSheaf, PresheafOfModules.Monoidal.tensorObj_obj, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.GrothendieckTopology.sheafify_isSheaf, CategoryTheory.Sheaf.symmetricCategory; see sandbox searches.jsonl for the exact logged result digest",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: component declarations only; the general coefficient and site hypotheses require additional constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.monoidalCategory",
+   "results": "; hits: CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.Sheaf.braidedCategory, CategoryTheory.Sheaf.symmetricCategory, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf, CategoryTheory.GrothendieckTopology.Point.instMonoidalSheafSheafFiber, CategoryTheory.GrothendieckTopology.Point.instIsMonoidalFunctorOppositeHomPresheafToSheafCompSheafFiberIso; see sandbox searches.jsonl for the exact logged result digest",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: component declarations only; the general coefficient and site hypotheses require additional constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves valued in a closed symmetric monoidal Grothendieck abelian category have the sheafified objectwise tensor product and a closed symmetric monoidal structure",
+   "results": "; hits: instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.Sheaf.symmetricCategory, instMonoidalClosedCondensedSet, CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.Sheaf.tensorProd_isSheaf, CategoryTheory.sheafToPresheafMonoidal; see sandbox searches.jsonl for the exact logged result digest",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: component declarations only; the general coefficient and site hypotheses require additional constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "isSheaf_functorEnrichedHom|instance monoidal|def symmetricCategory|def monoidalCategory|presheafToSheaf J A.*Monoidal",
+   "results": "; hits: Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean; see sandbox searches.jsonl for the exact logged result digest",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: component declarations only; the general coefficient and site hypotheses require additional constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidality of the sheafification localization and Day reflection theorem for a closed tensor category",
+   "results": "; hits: CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.Monoidal.Reflective.closed, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.GrothendieckTopology.W.monoidal, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.sheafToPresheafMonoidal, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; see sandbox searches.jsonl for the exact logged result digest",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: component declarations only; the general coefficient and site hypotheses require additional constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "functorEnrichedHom|Reflective.closed|isSheaf.*[Hh]om|preservesColimits.*[Tt]ensor",
+   "results": "; hits: Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; see sandbox searches.jsonl for the exact logged result digest",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: component declarations only; the general coefficient and site hypotheses require additional constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reflective subcategory of a monoidal closed category is closed when internal Homs into local objects are local",
+   "results": "; hits: CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.Monoidal.Reflective.monoidalClosed, CategoryTheory.ExponentialIdeal.mk_of_iso, CategoryTheory.exponentialIdealReflective, CategoryTheory.ExponentialIdeal.exp_closed, CategoryTheory.ObjectProperty.fullMonoidalClosedSubcategory, CategoryTheory.ObjectProperty.IsMonoidalClosed.prop_ihom, CategoryTheory.cartesianClosedOfReflective'; see sandbox searches.jsonl for the exact logged result digest",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: component declarations only; the general coefficient and site hypotheses require additional constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal localization at morphisms inverted by a sheafification functor with a symmetric tensor and internal hom",
+   "results": "8 hits: CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.GrothendieckTopology.W.monoidal, CategoryTheory.Localization.Monoidal.isInvertedBy₂, CategoryTheory.Sheaf.symmetricCategory, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.GrothendieckTopology.W.transport_isMonoidal, CategoryTheory.Sheaf.braidedCategory; actual search digest 4cecf0eb792d955c",
+   "date": "2026-10-16",
+   "verdict": "component APIs only: read Sites/Monoidal.lean lines 104, 132-156, 168-205; the generic full item still requires the coefficient limits and sheafification inputs and its closedness construction"
+  },
+  {
+   "tool": "grep",
+   "query": "W.monoidal|instMonoidalFunctorOppositePresheafToSheaf|isSheaf_functorEnrichedHom|symmetricCategory",
+   "results": "5 hits: Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean; actual search digest 758a9964a5633098",
+   "date": "2026-10-16",
+   "verdict": "component APIs only: read Sites/Monoidal.lean lines 104, 132-156, 168-205; the generic full item still requires the coefficient limits and sheafification inputs and its closedness construction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps",
@@ -78,5 +208,21 @@
   "sketch"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-sheaf-tensor",
+  "worker": "stage1",
+  "summary": "Reused the five imported detail nodes, with no new nodes or statement correction. Derived coefficient additivity and wrote the sheaf tensor-Hom adjunction. Second reading expanded symmetry conjugation, unit-map factorization, both unitors, counit inverse identities, and the colimit cocone comparison in the second variable.",
+  "blueprint": "Step 1 realizes Presheaves (with additivity derived from closedness); step 2 realizes the W-stability argument; step 3 realizes the sheaf monoidal structure; step 4 realizes Closedness by its explicit adjunction; step 5 realizes the Ab specialization. All five supporting detail nodes are already present in the current blueprint.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q67-2239cabd3",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-2239cabd3 (reviewer sub-agent of L); spot-checked: Reviewed the item, report, mandated documents, five cited nodes, blueprint proofs, and cited Stacks locations. All five steps are mathematically supported with complete dependencies; edge cases, coefficient category, tensor orientation, and no-SGA route checked. No new nodes or repairs required."
+ }
 }
