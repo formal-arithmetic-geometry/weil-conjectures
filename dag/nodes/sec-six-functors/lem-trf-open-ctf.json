@@ -19,7 +19,9 @@
   "def-weil-finite-type-morphism",
   "def-weil-extension-by-zero",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-finite-tor-amplitude",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof": [
   {
@@ -232,5 +234,27 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-97115e7b3 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, unit/chapter route, and relevant sources. All four steps preserve the independent bounds with the required pro-étale coefficients and hypotheses. No new nodes, exact duplicates, or cycle through the item; both declared tool uses accepted. Detailed checks are in review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenExtensionFiniteTor",
+  "declaration": "AlgebraicGeometry.Scheme.finiteStageDerivedExtensionByZero_constructibleFiniteTor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteStageDerivedExtensionByZero",
+   "AlgebraicGeometry.Scheme.finiteStageDerivedExtensionByZero_constructibleFiniteTor"
+  ],
+  "file": "lean/Sheaf/Paper/OpenExtensionFiniteTor.lean",
+  "statement": "theorem finiteStageDerivedExtensionByZero_constructibleFiniteTor (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {U Y : Scheme.{u}} [U.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (U ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] (j : U ⟶ Y) [IsOpenImmersion j] [j.IsOver (Spec (CommRingCat.of D.k))] (K : proEtaleDerivedCategory U (Padic.coefficientExtensionRing l E n)) (hK : intrinsicFiniteTorsionConstructible l E n hn U K) (hTor : HasFiniteProEtaleTorAmplitude U (Padic.coefficientExtensionRing l E n) K) : WeilConjectures.finiteTorConstructible l E n hn Y ((finiteStageDerivedExtensionByZero l E n hn j).obj K) ∧ (∀ c d : ℤ, (∀ r : ℤ, (r < c ∨ d < r) → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules U (proEtaleConstantRing U (Padic.coefficientExtensionRing l E n))) r).obj K)) → ∀ r : ℤ, (r < c ∨ d < r) → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules Y (proEtaleConstantRing Y (Padic.coefficientExtensionRing l E n))) r).obj ((finiteStageDerivedExtensionByZero l E n hn j).obj K))) ∧ (∀ a b : ℤ, HasProEtaleTorAmplitude U (Padic.coefficientExtensionRing l E n) K a b → HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E n) ((finiteStageDerivedExtensionByZero l E n hn j).obj K) a b)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e5e8665f4",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all nine dependencies, sources, constructions, docstrings, universes, edge cases and verbatim signature. Per-file scompile.py passed both views without diagnostics. No repairs required; branch unchanged."
  }
 }

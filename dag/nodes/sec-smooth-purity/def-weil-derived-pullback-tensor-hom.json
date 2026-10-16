@@ -91,26 +91,25 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.Hom",
-  "declaration": "AlgebraicGeometry.ProEtale.derivedHom",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOperations",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingDerivedPullback",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.derivedHom",
-   "AlgebraicGeometry.ProEtale.derivedTensor",
-   "AlgebraicGeometry.ProEtale.upperStar"
+   "AlgebraicGeometry.Scheme.proEtaleRingDerivedPullback",
+   "AlgebraicGeometry.Scheme.proEtaleRingDerivedPullbackFactors"
   ],
-  "statement": "def derivedHom :\n    (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))ᵒᵖ ⥤\n      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n        DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)",
-  "branch": "slopmaster2",
-  "by": "Q03",
+  "statement": "abbrev proEtaleRingDerivedPullback :\n    DerivedCategory (proEtaleRingModules Y R) ⥤ DerivedCategory (proEtaleRingModules X S)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
   "date": "2026-10-16",
   "existing": true,
-  "note": "Finite coefficient interface of the previously unstated operations node, used under def-pur-conventions. The actual published derived tensor and its internal right adjoint, together with the exact upperStar and its leftDerivedFunctor from Derived.UpperLowerStar, supply the finite stage on ModuleCat-valued pro-etale sheaves. Higher coefficient stages are the separately specified coefficient transports; no new operations are defined."
+  "note": "§1(B), finite-stage intrinsic presentation: the old Derived.Hom module imports legacy UpperLowerStar declarations that collide with the FiniteCoefficient declarations required by the recorded intrinsic extension-by-zero construction. Reuse the published intrinsic exact derived module pullback proEtaleRingDerivedPullback and its termwise factorization. For constant coefficients use the canonical constant-ring inverse-image identification. Tensor and internal Hom remain the existing constructions in Sheaf.Algebra.Homology.DerivedTensor and Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses, respectively; this consumer needs only the finite-level pullback clause, not integral, rational or common-stage operations. No new operation or arbitrary coefficient identification is supplied."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-819753ec9",
-  "group": "Q03",
+  "reviewer": "NT-stage2-Codex-e5e8665f4",
+  "group": "Q11",
   "result": "pass",
-  "note": "Reviewed immutable statements, dependencies, sources, canonical maps, universes, edge cases, and report. All four modules passed per-file scompile.py checks. No defects found; review.md written and branch unchanged."
+  "note": "Wrote review.md. Checked the immutable statement, all nine dependencies, sources, constructions, docstrings, universes, edge cases and verbatim signature. Per-file scompile.py passed both views without diagnostics. No repairs required; branch unchanged."
  }
 }
