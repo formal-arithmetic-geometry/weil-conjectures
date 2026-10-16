@@ -11,8 +11,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.CategoryTheory.Category.Cat
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Sites.Pullback
-import Sheaf.AlgebraicGeometry.AffineEtaleDescentData
-import WeilConjectures.CategoryTheory.FinitePrecoverage
+import Sheaf.AlgebraicGeometry.AffineEtaleFiniteColimitConstruction
+import Mathlib.CategoryTheory.InducedCategory
+import Mathlib.CategoryTheory.Sites.Finite
+import Mathlib.Data.Fintype.Pigeonhole
 
 /-!
 # Finite affine étale colimit presentation
@@ -23,11 +25,156 @@ Source: Stacks Project, Étale Cohomology 0EYL; Sites 09YL.
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
+
+/-- The raw labelled-pair construction does not reflect arbitrary finite coverings.
+There are infinitely many distinct source labels over one identity arrow. Their presieve
+is infinite, while its image is the singleton identity covering. -/
+private theorem labelled_presieve_obstruction {C : Type u} [Category.{v} C]
+    (A : C) (J : Precoverage C) [J.HasIsos] :
+    let K := InducedCategory C (fun X : (Σ _ : ℕ, C) ↦ X.2)
+    let W : K ⥤ C := inducedFunctor _
+    ∃ (X : K) (R : Presieve X), ¬ Finite R.uncurry ∧ R.map W ∈ J (W.obj X) := by
+  let K := InducedCategory C (fun X : (Σ _ : ℕ, C) ↦ X.2)
+  let W : K ⥤ C := inducedFunctor _
+  let X : K := ⟨0, A⟩
+  let Y : ℕ → K := fun n ↦ ⟨n, A⟩
+  let f : ∀ n, Y n ⟶ X := fun _ ↦ InducedCategory.homMk (𝟙 A)
+  let R := Presieve.ofArrows Y f
+  have hi : Function.Injective
+      (fun n : ℕ ↦ (⟨⟨Y n, f n⟩, Presieve.ofArrows.mk n⟩ : R.uncurry)) := by
+    intro n m h
+    exact congrArg (fun t : R.uncurry ↦ t.val.1.1) h
+  refine ⟨X, R, ?_, ?_⟩
+  · intro h
+    have : Finite ℕ := Finite.of_injective _ hi
+    exact not_finite ℕ
+  · have heq : R.map W = Presieve.singleton (𝟙 A) := by
+      rw [Presieve.map_ofArrows]
+      apply le_antisymm
+      · rintro B g ⟨n⟩
+        exact Presieve.singleton_self _
+      · intro B g h
+        cases h
+        exact Presieve.ofArrows.mk 0
+    rw [heq]
+    exact Precoverage.mem_coverings_of_isIso (𝟙 A)
+
+/-- No finite-cover precoverage on the raw labelled category can satisfy the
+unrestricted reflection equivalence. The infinite presieve supplied above would be
+a covering, contradicting the assumed finiteness of every covering presieve. -/
+private theorem labelled_precoverage_no_reflection {C : Type u} [Category.{v} C]
+    (A : C) (J : Precoverage C) [J.HasIsos] :
+    let K := InducedCategory C (fun X : (Σ _ : ℕ, C) ↦ X.2)
+    let W : K ⥤ C := inducedFunctor _
+    ∀ (P : Precoverage K),
+      (∀ (X : K) (R : Presieve X), R ∈ P X → Finite R.uncurry) →
+      ¬ (∀ (X : K) (R : Presieve X), R ∈ P X ↔ R.map W ∈ J (W.obj X)) := by
+  intro K W P hfinite hreflect
+  obtain ⟨X, R, hinfinite, hcover⟩ := labelled_presieve_obstruction A J
+  exact hinfinite (hfinite X R ((hreflect X R).mpr hcover))
+
+/-- Reflection of arbitrary covers through a fully faithful functor forces finite
+fibers on objects when every source covering presieve is finite. Apply reflection to
+the family of all lifts of the identity at a fixed target object. -/
+private theorem finite_fibers_of_finite_cover_reflection
+    {C D : Type u} [Category.{v} C] [Category.{v} D]
+    (W : C ⥤ D) [W.Full] [W.Faithful]
+    (P : Precoverage C) (Q : Precoverage D) [Q.HasIsos]
+    (hfinite : ∀ (A : C) (R : Presieve A), R ∈ P A → Finite R.uncurry)
+    (hreflect : ∀ (A : C) (R : Presieve A), R.map W ∈ Q (W.obj A) → R ∈ P A)
+    (A : C) : Finite {B : C // W.obj B = W.obj A} := by
+  classical
+  let E := {B : C // W.obj B = W.obj A}
+  let B : E → C := fun b ↦ b.val
+  let f : ∀ b, B b ⟶ A := fun b ↦ W.preimage (eqToHom b.property)
+  let R := Presieve.ofArrows B f
+  have hm : R.map W = Presieve.singleton (𝟙 (W.obj A)) := by
+    rw [Presieve.map_ofArrows]
+    apply le_antisymm
+    · rintro Z g ⟨b⟩
+      change Presieve.singleton (𝟙 (W.obj A)) (W.map (W.preimage (eqToHom b.property)))
+      rw [W.map_preimage]
+      have hid {X Y : D} (h : X = Y) :
+          Presieve.singleton (𝟙 Y) (eqToHom h) := by
+        subst Y
+        exact Presieve.singleton_self _
+      exact hid b.property
+    · intro Z g hg
+      cases hg
+      have h := Presieve.ofArrows.mk (f := fun b ↦ W.map (f b)) (⟨A, rfl⟩ : E)
+      simpa [f] using h
+  have hR : Finite R.uncurry := hfinite A R (hreflect A R (hm ▸
+    Precoverage.mem_coverings_of_isIso (J := Q) (𝟙 (W.obj A))))
+  exact Finite.of_injective
+    (fun b : E ↦ (⟨⟨B b, f b⟩, Presieve.ofArrows.mk b⟩ : R.uncurry)) (by
+      intro b b' h
+      apply Subtype.ext
+      exact congrArg (fun t : R.uncurry ↦ t.val.1) h)
+
+
+/-- A faithful functor with finite object fibers reflects finiteness of presieves.
+Map the arrows of the presieve to their images. Each fiber injects into an object fiber:
+faithfulness identifies arrows once their source objects agree. A map with finite fibers
+and finite target has finite domain. -/
+private theorem finite_presieve_of_finite_image
+    {C D : Type u} [Category.{v} C] [Category.{v} D]
+    (W : C ⥤ D) [W.Faithful]
+    (hfib : ∀ Y : D, Finite {X : C // W.obj X = Y})
+    (A : C) (R : Presieve A) (hR : Finite (R.map W).uncurry) : Finite R.uncurry := by
+  classical
+  let q : R.uncurry → (R.map W).uncurry := fun x ↦
+    ⟨⟨W.obj x.val.1, W.map x.val.2⟩, Presieve.map_map x.property⟩
+  by_contra hinf
+  have : Infinite R.uncurry := not_finite_iff_infinite.mp hinf
+  obtain ⟨y, hy⟩ := Finite.exists_infinite_fiber q
+  have : Finite (q ⁻¹' {y}) := by
+    apply Finite.of_injective (fun x : q ⁻¹' {y} ↦
+      (⟨x.val.val.1, congrArg (fun a : (R.map W).uncurry ↦ a.val.1) x.property⟩ :
+        {X : C // W.obj X = y.val.1}))
+    intro x x' h
+    apply Subtype.ext
+    apply Subtype.ext
+    have hs : x.val.val.1 = x'.val.val.1 := congrArg Subtype.val h
+    have hq : q x.val = q x'.val := x.property.trans x'.property.symm
+    rcases x with ⟨⟨⟨B, f⟩, hf⟩, hx⟩
+    rcases x' with ⟨⟨⟨B', f'⟩, hf'⟩, hx'⟩
+    change B = B' at hs
+    subst B'
+    have hm : W.map f = W.map f' :=
+      eq_of_heq (Sigma.mk.inj_iff.mp (congrArg Subtype.val hq)).2
+    exact congrArg (Sigma.mk B) (W.map_injective hm)
+  exact hy.false
+
+/-- The unrestricted reflection criterion for the finite inverse-image precoverage
+holds exactly when the fully faithful functor has finite object fibers. Necessity uses
+all lifts of an identity; sufficiency uses finiteness of the image covering presieve. -/
+private theorem finite_cover_reflection_iff_finite_fibers
+    {C D : Type u} [Category.{v} C] [Category.{v} D]
+    (W : C ⥤ D) [W.Full] [W.Faithful] (Q : Precoverage D) [Q.HasIsos]
+    (hQfinite : ∀ (A : D) (R : Presieve A), R ∈ Q A → Finite R.uncurry) :
+    (∀ (A : C) (R : Presieve A),
+      R ∈ (Precoverage.finite C ⊓ Q.comap W) A ↔ R.map W ∈ Q (W.obj A)) ↔
+      ∀ Y : D, Finite {X : C // W.obj X = Y} := by
+  constructor
+  · intro h Y
+    by_cases hex : ∃ X : C, W.obj X = Y
+    · obtain ⟨X, rfl⟩ := hex
+      exact finite_fibers_of_finite_cover_reflection W
+        (Precoverage.finite C ⊓ Q.comap W) Q
+        (fun _ _ hR ↦ hR.1.to_subtype) (fun A R hR ↦ (h A R).mpr hR) X
+    · have : IsEmpty {X : C // W.obj X = Y} := ⟨fun x ↦ hex ⟨x.val, x.property⟩⟩
+      infer_instance
+  · intro hfib A R
+    constructor
+    · exact fun hR ↦ hR.2
+    · intro hR
+      have := finite_presieve_of_finite_image W hfib A R (hQfinite _ _ hR)
+      exact ⟨Set.toFinite _, hR⟩
 
 /-- Source: Stacks Project, Categories 004A; Sites 0A34 and 09YL;
 Étale Cohomology 0EYL, qcqs case.
@@ -56,8 +203,17 @@ Proof (steps 4 and 8 of lem-weil-pbc-affine-etale-site-colimit):
    finite presieve at a stage. Descent of covers presents its W-image as a stage
    cover; map descent and eventual equality align these two finite presentations
    at a common later stage. Invariance under isomorphism then identifies the original
-   presieve with an image of a stage cover. This gives the asserted iff and site axioms.
+   presieve with an image of a stage cover. This proves the finite-presieve version and
+   its site axioms; reflection for arbitrary presieves remains unproved.
 (blueprint: lem-weil-pbc-affine-etale-colimit-presentation). -/
+/- STATEMENT-DISPUTED: the node's labelled-pair construction does not satisfy the
+last covering-reflection iff for arbitrary presieves. The proved finite construction
+is `exists_affineEtale_finite_colimit_construction`. An infinite presieve on distinct
+natural-number labels has singleton identity image; see `labelled_presieve_obstruction`.
+Reflection with finite covers forces finite object fibers; see
+`finite_fibers_of_finite_cover_reflection`; for finite target covers it is also sufficient,
+as `finite_cover_reflection_iff_finite_fibers` proves. The full
+existential is not refuted: a different presentation needs additional justification. -/
 theorem exists_affineEtale_colimit_presentation_finite
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

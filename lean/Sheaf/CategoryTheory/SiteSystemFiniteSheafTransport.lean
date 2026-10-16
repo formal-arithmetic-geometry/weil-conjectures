@@ -13,13 +13,13 @@ Source: Stacks Project, Sites, 00WW, 00WX, 03CB and finite-family Situation 0A34
 
 @[expose] public section
 
-universe u
+universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
 private theorem finite_pullback_cover
-    {C : Type u} [SmallCategory C] (P : Precoverage C)
+    {C : Type u} [Category.{v} C] (P : Precoverage C)
     [P.IsStableUnderFiniteBaseChange] [P.HasPullbacks]
     (hfinite : ∀ (X : C) (R : Presieve X), R ∈ P X → Finite R.uncurry)
     {X Y : C} (R : Presieve X) (hR : R ∈ P X) (g : Y ⟶ X) :
@@ -58,7 +58,7 @@ Source: Stacks Sites 00WV and 00WW. Proof: present a covering by its finite type
 arrows, base change that family, and use the pairwise-pullback sheaf criterion.
 (blueprint: lem-weil-pbc-site-system-finite-sheaf-transport) -/
 theorem continuous_of_finite_pullbacks
-    {C D : Type u} [SmallCategory C] [SmallCategory D]
+    {C D : Type u} [Category.{v} C] [Category.{v} D]
     (U : C ⥤ D) (P : Precoverage C) (Q : Precoverage D)
     [P.IsStableUnderFiniteBaseChange] [P.HasPullbacks]
     (hfinite : ∀ (X : C) (R : Presieve X), R ∈ P X → Finite R.uncurry)
@@ -154,7 +154,7 @@ sheaf equivalence result gives exactness.
 theorem finiteEquivalencePrecoverage_sheaf_equivalence
     {A B : Type u} [SmallCategory A] [SmallCategory B]
     (p : A ⥤ B) [p.IsEquivalence] (P : Precoverage B)
-    [P.HasIsos] [P.IsStableUnderComposition] [P.IsStableUnderBaseChange]
+    [P.HasIsos] [P.IsStableUnderFiniteComposition] [P.IsStableUnderFiniteBaseChange]
     [P.HasPullbacks] (e : B ⥤ A) [e.IsEquivalence] (hep : e ⋙ p = 𝟭 B)
     (hfinite : ∀ (X : B) (R : Presieve X), R ∈ P X → Finite R.uncurry) :
     ∃ (_ : p.IsContinuous (finiteEquivalencePrecoverage p P).toGrothendieck

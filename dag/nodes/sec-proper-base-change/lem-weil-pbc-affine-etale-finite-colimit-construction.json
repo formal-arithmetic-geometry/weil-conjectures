@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-affine-etale-finite-colimit-construction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-etale-colimit-presentation",
+   "place": "The validated finite-family construction in steps 1–5 of the assigned proof plan.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "AffineEtaleFiniteColimitConstruction",
+ "statement": "Let I be a nonempty directed preorder, D : I^op → Scheme.{u}, c a cone, and C_i and C the full affine étale sites of D_i and c.pt. Given normalized coherent U_ij, v_i, gamma and delta, assume that U preserves finite standard covers and all cospan pullbacks, v preserves finite standard covers, all U and v are continuous and their pushforwards on Type u sheaves have finite-limit-preserving left adjoints. Assume object descent up to isomorphism, morphism descent with the delta conjugation formula, eventual equality of stage morphisms with equal v-images, and descent and reflection of Fin n covers up to source and target isomorphisms. Then there exist a strict F : I → Cat.{u,u+1}, finite precoverages Q_i, equivalences e_i : C_i → F_i, strictly compatible coefficients v_i', and comparisons theta and eta with the required Arrow equality. Q_i have singleton isomorphism covers, finite indexed composition, finite indexed base change and covering pullbacks; all covers are finite, and e_i preserves and reflects coverings. Transitions preserve covers and all cospan pullbacks. Transitions and coefficients are continuous and have the supplied type of exact left adjoints on Type u sheaves. There are K : Cocone F, W : K.pt → C and a precoverage P whose object and arrow cocones are set colimits, whose W is an equivalence, and whose composites K_i W are v_i' strictly. The covers in P are exactly the transported images of stage Q_i covers. P has the same four finite site properties. For every presieve R, R covers in P if and only if R is finite and R.map W is a standard finite étale covering. No geometric hypotheses on D or limiting property of c are needed once these descent and functor hypotheses are supplied.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Categories 004A; Sites 0A34 and 09YL; Étale Cohomology 0EYL, finite-family construction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-full-affine-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finite-precoverage"
+ ],
+ "proof": [
+  {
+   "text": "Construct pair categories with label (j,A), j≤i, and induced homs at stage i. Evaluation is an equivalence with current-stage section. Gamma gives the strict transition diagram and delta the strictly compatible coefficient functors and comparison Arrow equality. The construction keeps object universe u+1 and hom universe u.",
+   "uses": [
+    "lem-weil-pbc-site-system-strictification-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport finite precoverages along evaluation. Map finite indexed composites and pullbacks to the original standard precoverage. Evaluation equivalences transfer covering and all-cospan pullback preservation. Use the finite pairwise-pullback criterion for continuity. Inverse pushforwards along the stage equivalences give left adjoints preserving finite limits; compose the given adjunctions and transport along natural isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-site-system-finite-coverings",
+    "lem-weil-pbc-site-system-finite-sheaf-transport",
+    "def-weil-pbc-full-affine-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take colimit objects to be all labels (i,A), and homs to be the homs of their images in C. The object colimit criterion follows from the label inclusions and their injectivity at each stage. For arrow surjectivity move endpoints to a common stage and use morphism descent, conjugating by gamma and delta. For injectivity use label equality to align endpoints, cancel delta, and apply eventual equality. Object descent gives essential surjectivity of the induced fully faithful W.",
+   "uses": [
+    "def-weil-pbc-arrows-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift finitely many morphisms at once by taking a common upper bound. To lift an isomorphism, lift it and its inverse, then move their two inverse equations to a common stage using eventual equality. Given a finite cover in C, descend it up to isomorphism, lift all comparison isomorphisms, then make every covering square commute at one later stage. Finite base change along the target comparison transports the descended cover to the original finite family. Present a finite presieve by its distinct arrows to conclude exact stage-image descent, also for the empty presieve.",
+   "uses": [
+    "def-weil-pbc-finite-precoverage"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define P as finite(K.pt) intersected with the inverse image under W of the standard finite étale precoverage. The finite equivalence transport lemma proves its four site axioms. The preceding finite-family descent proves that P consists exactly of stage covering images. By definition its covering reflection includes the finite-presieve qualification.",
+   "uses": [
+    "lem-weil-pbc-site-system-finite-coverings"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-system-strictification-category",
+  "lem-weil-pbc-site-system-finite-coverings",
+  "lem-weil-pbc-site-system-finite-sheaf-transport",
+  "def-weil-pbc-full-affine-etale-site",
+  "def-weil-pbc-arrows-functor",
+  "def-weil-pbc-finite-precoverage"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "W4: complete direct Lean proof of the finite-family route. The original arbitrary-presieve assertion is retained separately and disputed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized coherent directed system of categories with object morphism equality and finite covering descent has a strict finite colimit site equivalent to the target category",
+   "results": "Service unavailable: InternalServerError (the msearch.py attempt returned zero hits with the service-unavailable diagnostic).",
+   "date": "2026-10-15",
+   "verdict": "unavailable; no absence verdict from this service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strictify a coherent directed system of categories and identify its finite-covering colimit site from object morphism equality and finite covering descent",
+   "results": "Eight hits about locally directed functors and scheme open-cover colimits; none states this finite-site strictification and comparison.",
+   "date": "2026-10-15",
+   "verdict": "No exact match; the direct proof reuses the existing project pair-category construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence",
+   "results": "Equivalence API search; the direct proof uses full, faithful and essentially surjective functors and pushforward equivalences.",
+   "date": "2026-10-15",
+   "verdict": "Structural equivalence API only; no exact finite-site colimit assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteEquivalencePrecoverage|FilteredColimit.isColimitOf|strictification",
+   "results": "Thirteen Mathlib uses of Types.FilteredColimit.isColimitOf and isColimitOf'; this is exactly the elementwise set-colimit API used in the proof. Source rg also found the existing project pair-category and finite-site modules.",
+   "date": "2026-10-15",
+   "verdict": "Reuse Mathlib set-colimit criteria and generalize the existing project finite-site APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite",
+  "date": "2026-10-15",
+  "group": "W4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleFiniteColimitConstruction",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affineEtale_finite_colimit_construction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleFiniteColimitConstruction.lean",
+  "statement": "theorem exists_affineEtale_finite_colimit_construction\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    (c : Cone D)\n    (U : ∀ (i j : I), i ≤ j → (D.obj (op i)).FullAffineEtale ⥤\n          (D.obj (op j)).FullAffineEtale)\n      (v : ∀ i : I, (D.obj (op i)).FullAffineEtale ⥤ c.pt.FullAffineEtale)\n      (gamma : ∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k),\n        U i j h ⋙ U j k h' ≅ U i k (h.trans h'))\n      (delta : ∀ (i j : I) (h : i ≤ j), U i j h ⋙ v j ≅ v i)\n    (h0 : (∀ i : I, U i i le_rfl = 𝟭 _))\n    (h3 : (∀ (i k : I) (h : i ≤ k),\n        HEq (gamma i i k le_rfl h) (Iso.refl (U i k h))))\n    (h4 : (∀ (i k : I) (h : i ≤ k),\n        HEq (gamma i k k h le_rfl) (Iso.refl (U i k h))))\n    (h5 : (∀ i : I, HEq (delta i i le_rfl) (Iso.refl (v i))))\n    (h8 : (∀ (i j k l : I) (h : i ≤ j) (h' : j ≤ k) (h'' : k ≤ l)\n        (A : (D.obj (op i)).FullAffineEtale),\n        (gamma j k l h' h'').hom.app ((U i j h).obj A) ≫\n            (gamma i j l h (h'.trans h'')).hom.app A =\n          (U k l h'').map ((gamma i j k h h').hom.app A) ≫\n            (gamma i k l (h.trans h') h'').hom.app A))\n    (h9 : (∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k)\n        (A : (D.obj (op i)).FullAffineEtale),\n        (v k).map ((gamma i j k h h').hom.app A) ≫\n            (delta i k (h.trans h')).hom.app A =\n          (delta j k h').hom.app ((U i j h).obj A) ≫ (delta i j h).hom.app A))\n    (h10 : (∀ (i j : I) (h : i ≤ j) (A : (D.obj (op i)).FullAffineEtale) (R : Presieve A),\n        R ∈ fullAffineEtalePrecoverage (D.obj (op i)) A →\n          R.map (U i j h) ∈ fullAffineEtalePrecoverage (D.obj (op j)) ((U i j h).obj A)))\n    (h11 : (∀ (i j : I) (h : i ≤ j) (A B C : (D.obj (op i)).FullAffineEtale)\n        (f : B ⟶ A) (g : C ⟶ A), PreservesLimit (cospan f g) (U i j h)))\n    (h12 : (∀ (i : I) (A : (D.obj (op i)).FullAffineEtale) (R : Presieve A),\n        R ∈ fullAffineEtalePrecoverage (D.obj (op i)) A →\n          R.map (v i) ∈ fullAffineEtalePrecoverage c.pt ((v i).obj A)))\n    (h14 : (∃ (_ : ∀ (i j : I) (h : i ≤ j), (U i j h).IsContinuous\n          (fullAffineEtaleTopology (D.obj (op i))) (fullAffineEtaleTopology (D.obj (op j))))\n        (_ : ∀ i : I, (v i).IsContinuous\n          (fullAffineEtaleTopology (D.obj (op i))) (fullAffineEtaleTopology c.pt)),\n        (∀ (i j : I) (h : i ≤ j), ∃ L :\n            Sheaf (fullAffineEtaleTopology (D.obj (op i))) (Type u) ⥤\n              Sheaf (fullAffineEtaleTopology (D.obj (op j))) (Type u),\n          Nonempty (L ⊣ (U i j h).sheafPushforwardContinuous (Type u)\n            (fullAffineEtaleTopology (D.obj (op i)))\n            (fullAffineEtaleTopology (D.obj (op j)))) ∧ PreservesFiniteLimits L) ∧\n        (∀ i : I, ∃ L : Sheaf (fullAffineEtaleTopology (D.obj (op i))) (Type u) ⥤\n            Sheaf (fullAffineEtaleTopology c.pt) (Type u),\n          Nonempty (L ⊣ (v i).sheafPushforwardContinuous (Type u)\n            (fullAffineEtaleTopology (D.obj (op i))) (fullAffineEtaleTopology c.pt)) ∧\n          PreservesFiniteLimits L)))\n    (h15 : (∀ A : c.pt.FullAffineEtale,\n        ∃ (i : I) (Ai : (D.obj (op i)).FullAffineEtale), Nonempty ((v i).obj Ai ≅ A)))\n    (h16 : (∀ (i : I) (A B : (D.obj (op i)).FullAffineEtale)\n        (f : (v i).obj A ⟶ (v i).obj B),\n        ∃ (j : I) (h : i ≤ j) (g : (U i j h).obj A ⟶ (U i j h).obj B),\n          f = (delta i j h).inv.app A ≫ (v j).map g ≫ (delta i j h).hom.app B))\n    (h17 : (∀ (i : I) (A B : (D.obj (op i)).FullAffineEtale) (f g : A ⟶ B),\n        (v i).map f = (v i).map g →\n          ∃ (j : I) (h : i ≤ j), (U i j h).map f = (U i j h).map g))\n    (h18 : (∀ (n : ℕ) (A : c.pt.FullAffineEtale) (B : Fin n → c.pt.FullAffineEtale)\n        (f : ∀ a : Fin n, B a ⟶ A),\n        Presieve.ofArrows B f ∈ fullAffineEtalePrecoverage c.pt A ↔\n          ∃ (i : I) (Ai : (D.obj (op i)).FullAffineEtale)\n            (Bi : Fin n → (D.obj (op i)).FullAffineEtale) (fi : ∀ a : Fin n, Bi a ⟶ Ai)\n            (t : (v i).obj Ai ≅ A) (s : ∀ a : Fin n, (v i).obj (Bi a) ≅ B a),\n            Presieve.ofArrows Bi fi ∈ fullAffineEtalePrecoverage (D.obj (op i)) Ai ∧\n              ∀ a : Fin n, (v i).map (fi a) ≫ t.hom = (s a).hom ≫ f a))\n    :\n      ∃ (F : I ⥤ Cat.{u, u + 1}) (Q : ∀ i : I, Precoverage (F.obj i))\n        (e : ∀ i : I, (D.obj (op i)).FullAffineEtale ⥤ F.obj i)\n        (v' : ∀ i : I, F.obj i ⥤ c.pt.FullAffineEtale)\n        (theta : ∀ (i j : I) (h : i ≤ j),\n          e i ⋙ (F.map (homOfLE h)).toFunctor ≅ U i j h ⋙ e j)\n        (eta : ∀ i : I, e i ⋙ v' i ≅ v i),\n        (∀ i : I, (e i).IsEquivalence) ∧\n        (∃ (K : Cocone F) (W : K.pt ⥤ c.pt.FullAffineEtale) (P : Precoverage K.pt),\n          W.IsEquivalence ∧ Nonempty (IsColimit (Cat.objects.mapCocone K)) ∧\n            Nonempty (IsColimit (Cat.arrows.mapCocone K)) ∧\n            (∀ i, (K.ι.app i).toFunctor ⋙ W = v' i) ∧\n            (∀ (A : K.pt) (R : Presieve A), R ∈ P A ↔\n              ∃ (i : I) (Ai : F.obj i) (Ri : Presieve Ai)\n                (h : (K.ι.app i).toFunctor.obj Ai = A),\n                Ri ∈ Q i Ai ∧ h ▸ Ri.map (K.ι.app i).toFunctor = R) ∧\n            P.HasIsos ∧ P.IsStableUnderFiniteComposition ∧\n            P.IsStableUnderFiniteBaseChange ∧ P.HasPullbacks ∧\n            ∀ (A : K.pt) (R : Presieve A),\n              R ∈ P A ↔ Finite R.uncurry ∧\n                R.map W ∈ fullAffineEtalePrecoverage c.pt (W.obj A)) ∧\n        (∃ (_ : ∀ i : I, (Q i).HasIsos)\n          (_ : ∀ i : I, (Q i).IsStableUnderFiniteComposition)\n          (_ : ∀ i : I, (Q i).IsStableUnderFiniteBaseChange)\n          (_ : ∀ i : I, (Q i).HasPullbacks),\n          (∀ (i : I) (A : F.obj i) (R : Presieve A), R ∈ Q i A → Finite R.uncurry) ∧\n          (∀ (i : I) (A : (D.obj (op i)).FullAffineEtale) (R : Presieve A),\n            R ∈ fullAffineEtalePrecoverage (D.obj (op i)) A ↔\n              R.map (e i) ∈ Q i ((e i).obj A)) ∧\n          (∀ (i j : I) (h : i ≤ j) (A : F.obj i) (R : Presieve A), R ∈ Q i A →\n            R.map (F.map (homOfLE h)).toFunctor ∈\n              Q j ((F.map (homOfLE h)).toFunctor.obj A)) ∧\n          (∀ (i j : I) (h : i ≤ j) (A B C : F.obj i) (f : B ⟶ A) (g : C ⟶ A),\n            PreservesLimit (cospan f g) (F.map (homOfLE h)).toFunctor) ∧\n          (∀ (i j : I) (h : i ≤ j), (F.map (homOfLE h)).toFunctor ⋙ v' j = v' i) ∧\n          (∀ (i j : I) (h : i ≤ j) (A : (D.obj (op i)).FullAffineEtale),\n            Arrow.mk ((v' j).map ((theta i j h).hom.app A) ≫\n                (eta j).hom.app ((U i j h).obj A) ≫ (delta i j h).hom.app A) =\n              Arrow.mk ((eta i).hom.app A)) ∧\n          (∃ (_ : ∀ (i j : I) (h : i ≤ j), (F.map (homOfLE h)).toFunctor.IsContinuous\n              (Q i).toGrothendieck (Q j).toGrothendieck)\n            (_ : ∀ i : I, (v' i).IsContinuous (Q i).toGrothendieck\n              (fullAffineEtaleTopology c.pt)),\n            (∀ (i j : I) (h : i ≤ j), ∃ L : Sheaf (Q i).toGrothendieck (Type u) ⥤\n                Sheaf (Q j).toGrothendieck (Type u),\n              Nonempty (L ⊣ (F.map (homOfLE h)).toFunctor.sheafPushforwardContinuous\n                (Type u) (Q i).toGrothendieck (Q j).toGrothendieck) ∧\n                PreservesFiniteLimits L) ∧\n            (∀ i : I, ∃ L : Sheaf (Q i).toGrothendieck (Type u) ⥤\n                Sheaf (fullAffineEtaleTopology c.pt) (Type u),\n              Nonempty (L ⊣ (v' i).sheafPushforwardContinuous (Type u)\n                (Q i).toGrothendieck (fullAffineEtaleTopology c.pt)) ∧\n                PreservesFiniteLimits L)))",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d8656",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261016T054839-L-158286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d8656",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261016T054839-L-158286",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with DAG statements, proof records, change record and cited sources; verified compilation, direct importers and permitted axioms."
+ }
+}

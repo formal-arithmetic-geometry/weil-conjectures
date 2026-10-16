@@ -18,13 +18,13 @@ Source: Stacks Project, Categories, Tag 004A, applied fibrewise.
 
 @[expose] public section
 
-universe u v w
+universe u v w u₁ v₁ u₂ v₂ u₃ v₃
 
 open CategoryTheory
 
 namespace CategoryTheory.SiteSystemPairs
 
-variable {I : Type u} [Preorder I] (C : I → Cat.{u, u})
+variable {I : Type u} [Preorder I] (C : I → Cat.{v₁, u₁})
 
 /-- The stage-labelled objects used in the splitting construction of Stacks 004A. -/
 structure Obj (i : I) where
@@ -115,7 +115,8 @@ theorem inclusion_isEquivalence
   exact Functor.isEquivalence_of_comp_right (inclusion C U i) (eval C U i)
 
 private theorem normalized_map
-    {A B E : Type u} [SmallCategory A] [SmallCategory B] [SmallCategory E]
+    {A : Type u₁} {B : Type u₂} {E : Type u₃}
+    [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} E]
     (G : E ⥤ E) (hG : G = 𝟭 E) (K : A ⥤ E) (L : B ⥤ E)
     (a : K ⋙ G ≅ K) (b : L ⋙ G ≅ L)
     (ha : HEq a (Iso.refl K)) (hb : HEq b (Iso.refl L))
@@ -183,7 +184,7 @@ def diagram
       (gamma j k l h' h'').hom.app ((U i j h).obj X) ≫
           (gamma i j l h (h'.trans h'')).hom.app X =
         (U k l h'').map ((gamma i j k h h').hom.app X) ≫
-          (gamma i k l (h.trans h') h'').hom.app X) : I ⥤ Cat.{u, u} where
+          (gamma i k l (h.trans h') h'').hom.app X) : I ⥤ Cat.{v₁, max u u₁} where
   obj i := Cat.of (Fiber C U i)
   map f := (transition C U gamma _ _ (leOfHom f)).toCatHom
   map_id i := Cat.ext (transition_id C U gamma hUid hgammaRight i)
@@ -215,7 +216,7 @@ def coefficients (i : I) : Fiber C U i ⥤ D where
     simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
 
 private theorem normalized_natiso_map
-    {A : Type u} [SmallCategory A] {E : Type v} [Category.{w} E]
+    {A : Type u₁} [Category.{v₁} A] {E : Type v} [Category.{w} E]
     (G H : A ⥤ E) (hG : G = H) (a : G ≅ H) (ha : HEq a (Iso.refl H))
     {X Y : A} (f : X ⟶ Y) : a.inv.app X ≫ G.map f ≫ a.hom.app Y = H.map f := by
   subst hG
@@ -289,7 +290,7 @@ def theta
       exact (eqToIso (hUid j)).inv.naturality ((U i j h).map f))
 
 private theorem normalized_coefficient_identity
-    {A : Type u} [SmallCategory A] {E : Type v} [Category.{w} E]
+    {A : Type u₁} [Category.{v₁} A] {E : Type v} [Category.{w} E]
     (G : A ⥤ A) (hG : G = 𝟭 A) (H : A ⥤ E) (a : G ⋙ H ≅ H)
     (ha : HEq a (Iso.refl H)) (X : A) :
     H.map ((eqToIso hG).inv.app X) ≫ a.hom.app X = 𝟙 (H.obj X) := by

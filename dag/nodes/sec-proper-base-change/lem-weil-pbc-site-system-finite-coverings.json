@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-site-system-finite-coverings",
  "kind": "definition",
  "title": "Finite covering transport across evaluation equivalences",
- "statement": "For categories A,B in the same universe, a functor p:A→B and a precoverage P on B, define Q = finite(A) ∩ p^{-1}P. If P has singleton isomorphism covers, indexed composition, indexed base change and covering pullbacks, and p is an equivalence, Q has singleton isomorphism covers, finite indexed composition, finite indexed base change and covering pullbacks. All Q-covering presieves are finite. A section e of p preserves and reflects covers when every P-covering presieve is finite, and every indexed Q-cover lifts through e up to isomorphisms. Transitions compared with original transitions preserve coverings and their pullbacks.",
+ "statement": "For categories A,B with a shared object universe and an independent shared hom universe, a functor p:A→B and a precoverage P on B, define Q = finite(A) ∩ p^{-1}P. If P has singleton isomorphism covers, finite indexed composition, finite indexed base change and covering pullbacks, and p is an equivalence, Q has singleton isomorphism covers, finite indexed composition, finite indexed base change and covering pullbacks. All Q-covering presieves are finite. A section e of p preserves and reflects covers when every P-covering presieve is finite, and every indexed Q-cover lifts through e up to isomorphisms. Transitions compared with original transitions preserve coverings and their pullbacks.",
  "source": {
   "document": "literature/stacks-project/sites.tex",
   "place": "Situation 0A34, Lemmas 00WW, 00WX and 03CB; finite-family covering axioms of 00VH"
@@ -12,22 +12,20 @@
  ],
  "proof": [
   {
-   "text": "Intersect the finite precoverage with comap P. A finite sigma index proves finite composition; a finite index proves finite base change. Equivalences preserve and create pullbacks. The section equation gives covering reflection, and functor images of finite presieves are finite. Compare p with the inverse of e and use isomorphic covering families to lift indexed coverings. A transition/evaluation comparison transports coverings and pullback preservation, using reflection by the evaluation equivalence.",
+   "text": "Intersect finite(A) with comap P. Map each finite indexed composite and each finite indexed pullback family into P and apply the finite axioms there. An equivalence preserves and creates pullbacks. The section equation gives covering reflection, and images of finite presieves are finite. To compare naturally isomorphic functors, index a finite presieve by its distinct arrows and use finite base change along the isomorphism components. Apply this comparison to lift coverings and to transport transition covering preservation. Pullback preservation follows by equivalence reflection. The argument works when the object universe is larger than the hom universe.",
    "uses": [
-    "def-weil-pbc-finite-precoverage",
-    "lem-weil-pbc-site-covering-isomorphic-family"
+    "def-weil-pbc-finite-precoverage"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finite-precoverage",
-  "lem-weil-pbc-site-covering-isomorphic-family"
+  "def-weil-pbc-finite-precoverage"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Explicit pair construction and direct finite-family/sheaf verifications by M4."
+  "place": "W4: direct finite indexed argument, removing the unrestricted isomorphic-family lemma and independent of small-category universes."
  },
  "mathlib_searches": [
   {
@@ -108,7 +106,7 @@
   "module": "Sheaf.CategoryTheory.SiteSystemFiniteCoverings",
   "file": "lean/Sheaf/CategoryTheory/SiteSystemFiniteCoverings.lean",
   "declaration": "CategoryTheory.finiteEquivalencePrecoverage",
-  "statement": "def finiteEquivalencePrecoverage {A B : Type u} [SmallCategory A] [SmallCategory B] (p : A ⥤ B) (P : Precoverage B) : Precoverage A",
+  "statement": "def finiteEquivalencePrecoverage {A B : Type u} [Category.{v} A] [Category.{v} B] (p : A ⥤ B) (P : Precoverage B) : Precoverage A",
   "branch": "sheaf-dag",
   "by": "M4",
   "date": "2026-10-14"
@@ -124,14 +122,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-527fb",
-  "group": "M4",
+  "reviewer": "X-d8656",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261014T170739-L-2556489",
+  "landing": "20261016T054839-L-158286",
   "kind": "interface",
-  "note": "independent Codex review: Delivery files matched their DAG statements and change record; all delivered modules and forced adaptations compiled, with permitted axioms only."
+  "note": "independent Codex review: Matched delivered Lean with DAG statements, proof records, change record and cited sources; verified compilation, direct importers and permitted axioms."
  },
  "lean_audit": {
   "master": {
@@ -144,5 +142,41 @@
    "decls": [],
    "missing": []
   }
+ },
+ "statement_change": {
+  "date": "2026-10-15",
+  "by": "W4 stage 2",
+  "old_statement": "For categories A,B in the same universe, a functor p:A→B and a precoverage P on B, define Q = finite(A) ∩ p^{-1}P. If P has singleton isomorphism covers, indexed composition, indexed base change and covering pullbacks, and p is an equivalence, Q has singleton isomorphism covers, finite indexed composition, finite indexed base change and covering pullbacks. All Q-covering presieves are finite. A section e of p preserves and reflects covers when every P-covering presieve is finite, and every indexed Q-cover lifts through e up to isomorphisms. Transitions compared with original transitions preserve coverings and their pullbacks.",
+  "what": "Generalize the object and hom universes independently and require only the finite indexed axioms that the proof uses. The original stronger hypotheses remain a specialization.",
+  "source": {
+   "document": "literature/stacks-project/sites.tex",
+   "place": "Situation 0A34, Lemmas 00WW, 00WX and 03CB; finite-family covering axioms of 00VH"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-site-system-strictification-data",
+    "holds": true,
+    "note": "The unchanged consumer supplies the stronger unrestricted axioms, hence the required finite axioms. Its original source compiles against the changed modules."
+   },
+   {
+    "id": "lem-weil-pbc-site-system-finite-sheaf-transport",
+    "holds": true,
+    "note": "Continuity is generalized to independent universes and equivalence transport needs only finite axioms; all conclusions are preserved."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Intersect the finite precoverage with comap P. A finite sigma index proves finite composition; a finite index proves finite base change. Equivalences preserve and create pullbacks. The section equation gives covering reflection, and functor images of finite presieves are finite. Compare p with the inverse of e and use isomorphic covering families to lift indexed coverings. A transition/evaluation comparison transports coverings and pullback preservation, using reflection by the evaluation equivalence.",
+    "uses": [
+     "def-weil-pbc-finite-precoverage",
+     "lem-weil-pbc-site-covering-isomorphic-family"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-finite-precoverage",
+   "lem-weil-pbc-site-covering-isomorphic-family"
+  ]
  }
 }

@@ -7,7 +7,6 @@ module
 public import WeilConjectures.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Sites.Finite
 import Mathlib.Data.Finite.Sigma
-import Sheaf.Paper.SiteCoveringIsomorphicFamily
 
 /-! # Finite coverings on the pair categories
 
@@ -17,7 +16,7 @@ Source: Stacks Project, Categories 004A and Sites 00VH, 0A34.
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -26,10 +25,10 @@ namespace CategoryTheory
 /-- Finite presieves whose image under evaluation covers.
 Source: Stacks 00VH, the finite-family site transported across the evaluation equivalence.
 (blueprint: lem-weil-pbc-site-system-finite-coverings) -/
-def finiteEquivalencePrecoverage {A B : Type u} [SmallCategory A] [SmallCategory B]
+def finiteEquivalencePrecoverage {A B : Type u} [Category.{v} A] [Category.{v} B]
     (p : A ⥤ B) (P : Precoverage B) : Precoverage A := Precoverage.finite A ⊓ P.comap p
 
-variable {A B : Type u} [SmallCategory A] [SmallCategory B]
+variable {A B : Type u} [Category.{v} A] [Category.{v} B]
   (p : A ⥤ B) (P : Precoverage B)
 
 instance [P.HasIsos] : (finiteEquivalencePrecoverage p P).HasIsos where
@@ -37,17 +36,32 @@ instance [P.HasIsos] : (finiteEquivalencePrecoverage p P).HasIsos where
     ⟨Precoverage.mem_coverings_of_isIso (J := Precoverage.finite A) f,
       Precoverage.mem_coverings_of_isIso (J := P.comap p) f⟩
 
-instance [P.IsStableUnderComposition] :
+instance [P.IsStableUnderFiniteComposition] :
     (finiteEquivalencePrecoverage p P).IsStableUnderFiniteComposition where
-  comp_mem_coverings {ι} [Finite ι] {_S} {_X} f hf {σ} [∀ i, Finite (σ i)] {_Y} g hg :=
-    ⟨Precoverage.ofArrows_mem_finite _ _,
-      Precoverage.comp_mem_coverings (J := P.comap p) f hf.2 g (fun i ↦ (hg i).2)⟩
+  comp_mem_coverings {ι} [Finite ι] {_S} {_X} f hf {σ} [∀ i, Finite (σ i)] {_Y} g hg := by
+    refine ⟨Precoverage.ofArrows_mem_finite _ _, ?_⟩
+    change (Presieve.ofArrows _ _).map p ∈ P _
+    rw [Presieve.map_ofArrows]
+    simpa only [Functor.map_comp] using
+      Precoverage.IsStableUnderFiniteComposition.comp_mem_coverings
+        (J := P) (fun i ↦ p.map (f i))
+        (by simpa only [Presieve.map_ofArrows] using
+          (show (Presieve.ofArrows _ f).map p ∈ P _ from hf.2))
+        (fun i j ↦ p.map (g i j))
+        (fun i ↦ by simpa only [Presieve.map_ofArrows] using
+          (show (Presieve.ofArrows _ (g i)).map p ∈ P _ from (hg i).2))
 
-instance [p.IsEquivalence] [P.IsStableUnderBaseChange] :
+instance [p.IsEquivalence] [P.IsStableUnderFiniteBaseChange] :
     (finiteEquivalencePrecoverage p P).IsStableUnderFiniteBaseChange where
-  mem_coverings_of_isPullback {ι} [Finite ι] {_S} {_X} f hf {_Y} g {_Z} p₁ p₂ h :=
-    ⟨Precoverage.ofArrows_mem_finite _ _,
-      Precoverage.mem_coverings_of_isPullback (J := P.comap p) f hf.2 g p₁ p₂ h⟩
+  mem_coverings_of_isPullback {ι} [Finite ι] {_S} {_X} f hf {_Y} g {_Z} p₁ p₂ h := by
+    refine ⟨Precoverage.ofArrows_mem_finite _ _, ?_⟩
+    change (Presieve.ofArrows _ _).map p ∈ P _
+    rw [Presieve.map_ofArrows]
+    exact Precoverage.IsStableUnderFiniteBaseChange.mem_coverings_of_isPullback
+      (J := P) (fun i ↦ p.map (f i))
+      (by simpa only [Presieve.map_ofArrows] using
+          (show (Presieve.ofArrows _ f).map p ∈ P _ from hf.2)) (p.map g)
+      (fun i ↦ p.map (p₁ i)) (fun i ↦ p.map (p₂ i)) (fun i ↦ (h i).map p)
 
 instance [p.IsEquivalence] [P.HasPullbacks] :
     (finiteEquivalencePrecoverage p P).HasPullbacks where
@@ -72,20 +86,22 @@ private theorem finite_map (X : A) (R : Presieve X) (hf : R.uncurry.Finite) :
   exact Precoverage.ofArrows_mem_finite _ _
 
 private theorem covering_map_iso
-    [P.HasIsos] [P.IsStableUnderComposition] [P.IsStableUnderBaseChange] [P.HasPullbacks]
-    (q : A ⥤ B) (a : p ≅ q) (X : A) (R : Presieve X) :
+    [P.IsStableUnderFiniteBaseChange]
+    (q : A ⥤ B) (a : p ≅ q) (X : A) (R : Presieve X) (hfin : Finite R.uncurry) :
     R.map p ∈ P (p.obj X) ↔ R.map q ∈ P (q.obj X) := by
-  obtain ⟨ι, Y, f, rfl⟩ := R.exists_eq_ofArrows
-  rw [Presieve.map_ofArrows, Presieve.map_ofArrows]
+  let := hfin
+  have heq : R = Presieve.ofArrows (fun i : R.uncurry ↦ i.val.1)
+      (fun i ↦ i.val.2) := presieve_eq_ofArrows X R
+  rw [heq, Presieve.map_ofArrows, Presieve.map_ofArrows]
   constructor
   · intro hf
-    exact (site_covering_isomorphic_family P (fun i ↦ p.map (f i)) hf
-      (a.inv.app X) (fun i ↦ q.map (f i)) (fun i ↦ a.inv.app (Y i))
-      (fun i ↦ inferInstance) (fun i ↦ (a.inv.naturality (f i)).symm)).2
+    exact Precoverage.IsStableUnderFiniteBaseChange.mem_coverings_of_isPullback
+      (J := P) _ hf (a.inv.app X) _ (fun i ↦ a.inv.app i.val.1)
+      (fun i ↦ IsPullback.of_vert_isIso ⟨a.inv.naturality i.val.2⟩)
   · intro hf
-    exact (site_covering_isomorphic_family P (fun i ↦ q.map (f i)) hf
-      (a.hom.app X) (fun i ↦ p.map (f i)) (fun i ↦ a.hom.app (Y i))
-      (fun i ↦ inferInstance) (fun i ↦ (a.hom.naturality (f i)).symm)).2
+    exact Precoverage.IsStableUnderFiniteBaseChange.mem_coverings_of_isPullback
+      (J := P) _ hf (a.hom.app X) _ (fun i ↦ a.hom.app i.val.1)
+      (fun i ↦ IsPullback.of_vert_isIso ⟨a.hom.naturality i.val.2⟩)
 
 /-- The section of evaluation preserves and reflects finite covering presieves. -/
 theorem finiteEquivalencePrecoverage_inclusion
@@ -104,9 +120,10 @@ theorem finiteEquivalencePrecoverage_inclusion
 
 /-- Covering families lift through the section, with repetitions lifted consistently. -/
 theorem finiteEquivalencePrecoverage_lift
-    [P.HasIsos] [P.IsStableUnderComposition] [P.IsStableUnderBaseChange] [P.HasPullbacks]
+    [P.HasIsos] [P.IsStableUnderFiniteComposition] [P.IsStableUnderFiniteBaseChange]
+    [P.HasPullbacks]
     (e : B ⥤ A) [e.IsEquivalence] (hep : e ⋙ p = 𝟭 B)
-    (X : A) (K : Type u) (Y : K → A) (f : ∀ k, Y k ⟶ X)
+    (X : A) (K : Type (max u v)) (Y : K → A) (f : ∀ k, Y k ⟶ X)
     (hR : Presieve.ofArrows Y f ∈ finiteEquivalencePrecoverage p P X) :
     ∃ (Z : B) (T : K → B) (g : ∀ k, T k ⟶ Z)
       (t : e.obj Z ≅ X) (s : ∀ k, e.obj (T k) ≅ Y k),
@@ -115,7 +132,8 @@ theorem finiteEquivalencePrecoverage_lift
     p.leftUnitor.symm ≪≫ Functor.isoWhiskerRight e.asEquivalence.counitIso.symm p ≪≫
       Functor.associator e.inv e p ≪≫ Functor.isoWhiskerLeft e.inv (eqToIso hep) ≪≫
       e.inv.rightUnitor
-  have hc := (covering_map_iso p P e.inv a X (Presieve.ofArrows Y f)).mp hR.2
+  have hc := (covering_map_iso p P e.inv a X (Presieve.ofArrows Y f)
+    (finiteEquivalencePrecoverage_finite p P X _ hR)).mp hR.2
   rw [Presieve.map_ofArrows] at hc
   exact ⟨e.inv.obj X, fun k ↦ e.inv.obj (Y k), fun k ↦ e.inv.map (f k),
     e.asEquivalence.counitIso.app X, fun k ↦ e.asEquivalence.counitIso.app (Y k), hc,
@@ -123,9 +141,9 @@ theorem finiteEquivalencePrecoverage_lift
 
 /-- A transition compared with an original cover-preserving functor preserves covers. -/
 theorem finiteEquivalencePrecoverage_transition
-    {A' B' : Type u} [SmallCategory A'] [SmallCategory B']
+    {A' B' : Type u} [Category.{v} A'] [Category.{v} B']
     (p' : A' ⥤ B') (P' : Precoverage B')
-    [P'.HasIsos] [P'.IsStableUnderComposition] [P'.IsStableUnderBaseChange]
+    [P'.HasIsos] [P'.IsStableUnderFiniteComposition] [P'.IsStableUnderFiniteBaseChange]
     [P'.HasPullbacks]
     (U : B ⥤ B')
     (hcover : ∀ (X : B) (R : Presieve X), R ∈ P X → R.map U ∈ P' (U.obj X))
@@ -135,7 +153,8 @@ theorem finiteEquivalencePrecoverage_transition
   have hc : R ∈ P'.comap (p ⋙ U) X := by
     rw [Precoverage.comap_comp]
     exact hcover (p.obj X) (R.map p) hR.2
-  have ht := (covering_map_iso (T ⋙ p') P' (p ⋙ U) a X R).mpr hc
+  have ht := (covering_map_iso (T ⋙ p') P' (p ⋙ U) a X R
+    (finiteEquivalencePrecoverage_finite p P X R hR)).mpr hc
   refine ⟨finite_map T X R hR.1, ?_⟩
   change R ∈ (P'.comap p').comap T X
   rw [← Precoverage.comap_comp]
@@ -144,7 +163,7 @@ theorem finiteEquivalencePrecoverage_transition
 /-- Pullback preservation is transported through the evaluation equivalences. -/
 theorem finiteEquivalencePrecoverage_transition_pullback
     [p.IsEquivalence]
-    {A' B' : Type u} [SmallCategory A'] [SmallCategory B']
+    {A' B' : Type u} [Category.{v} A'] [Category.{v} B']
     (p' : A' ⥤ B') [p'.IsEquivalence] (U : B ⥤ B')
     (hpullback : ∀ (X Y Z : B) (R : Presieve X), R ∈ P X →
       ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) U)
