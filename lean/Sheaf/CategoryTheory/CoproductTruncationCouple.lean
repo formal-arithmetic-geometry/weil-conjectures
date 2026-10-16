@@ -149,6 +149,89 @@ theorem exists_coproduct_truncation_couple
               (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙
                 DerivedCategory.homologyFunctor B (p : ℤ)).map
                   ((DerivedCategory.homologyFunctor A r).map (u i))) ≫ t.inv := by
-  sorry
+  classical
+  obtain ⟨Z, eD, eE, hD, hE, hT⟩ :=
+    exists_natural_boundedBelow_truncation_couples F a
+  let Ki := fun i ↦ (⟨K i, hK i⟩ : {M : DerivedCategory A // ∀ r : ℤ, r < a →
+    IsZero ((DerivedCategory.homologyFunctor A r).obj M)})
+  let Si : {M : DerivedCategory A // ∀ r : ℤ, r < a →
+    IsZero ((DerivedCategory.homologyFunctor A r).obj M)} := ⟨S, hS⟩
+  choose Ti hTD hTE using fun i ↦ hT (Ki i) Si (u i)
+  let D : ℤ → ℤ → B := fun p r ↦ ∐ (fun i ↦ (Z (Ki i)).D p r)
+  let E : ℤ → ℤ → B := fun p r ↦ ∐ (fun i ↦ (Z (Ki i)).E p r)
+  let alpha : ∀ p r, D p r ⟶ D (p - 1) (r + 1) :=
+    fun p r ↦ Limits.Sigma.map (fun i ↦ (Z (Ki i)).alpha p r)
+  let f : ∀ p r, E p r ⟶ D (p + 2) (r - 1) :=
+    fun p r ↦ Limits.Sigma.map (fun i ↦ (Z (Ki i)).f p r)
+  let g : ∀ p r, D p r ⟶ E (p + (0 : ℕ)) (r - (0 : ℕ)) :=
+    fun p r ↦ Limits.Sigma.map (fun i ↦ (Z (Ki i)).g p r)
+  have ha := fun p r ↦ exact_sigma
+    (fun i ↦ (Z (Ki i)).f p r) (fun i ↦ (Z (Ki i)).alpha (p + 2) (r - 1))
+    (fun i ↦ (Z (Ki i)).alpha_f_zero p r)
+    (fun i ↦ (ShortComplex.exact_iff_image_eq_kernel _).mpr
+      ((Z (Ki i)).exact_alpha p r))
+  have hf := fun p r ↦ exact_sigma
+    (fun i ↦ (Z (Ki i)).g p r) (fun i ↦ (Z (Ki i)).f (p + 0) (r - 0))
+    (fun i ↦ (Z (Ki i)).f_g_zero p r)
+    (fun i ↦ (ShortComplex.exact_iff_image_eq_kernel _).mpr
+      ((Z (Ki i)).exact_f p r))
+  have hg := fun p r ↦ exact_sigma
+    (fun i ↦ (Z (Ki i)).alpha p r) (fun i ↦ (Z (Ki i)).g (p - 1) (r + 1))
+    (fun i ↦ (Z (Ki i)).g_alpha_zero p r)
+    (fun i ↦ (ShortComplex.exact_iff_image_eq_kernel _).mpr
+      ((Z (Ki i)).exact_g p r))
+  let X : BigradedExactCouple B 0 := BigradedExactCouple.ofShifted D E alpha f g
+    (fun p r ↦ (ha p r).choose) (fun p r ↦ (hf p r).choose)
+    (fun p r ↦ (hg p r).choose)
+    (fun p r ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp (ha p r).choose_spec)
+    (fun p r ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp (hf p r).choose_spec)
+    (fun p r ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp (hg p r).choose_spec)
+  let T : BigradedExactCouple.CoupleMorphism X (Z Si) :=
+    { tD := fun p r ↦ Sigma.desc (fun i ↦ (Ti i).tD p r)
+      tE := fun p r ↦ Sigma.desc (fun i ↦ (Ti i).tE p r)
+      alpha_comm := by
+        intro p r
+        dsimp only
+        simp only [X, BigradedExactCouple.ofShifted_alpha]
+        apply Sigma.hom_ext
+        intro i
+        simp only [alpha, Sigma.ι_desc_assoc, Sigma.ι_map_assoc, Sigma.ι_desc]
+        exact (Ti i).alpha_comm p r
+      f_comm := by
+        intro p r
+        dsimp only
+        simp only [X, BigradedExactCouple.ofShifted_f]
+        apply Sigma.hom_ext
+        intro i
+        simp only [f, Sigma.ι_desc_assoc, Sigma.ι_map_assoc, Sigma.ι_desc]
+        exact (Ti i).f_comm p r
+      g_comm := by
+        intro p r
+        dsimp only
+        simp only [X, BigradedExactCouple.ofShifted_g]
+        apply Sigma.hom_ext
+        intro i
+        simp only [g, Sigma.ι_desc_assoc, Sigma.ι_map_assoc, Sigma.ι_desc]
+        exact (Ti i).g_comm p r }
+  refine ⟨X, Z Si, T, ?_, hD Si, ?_, hE Si, ?_⟩
+  · intro p r hr
+    exact isZero_sigma _ (fun i ↦ hD (Ki i) p r hr)
+  · intro p r hp
+    exact isZero_sigma _ (fun i ↦ hE (Ki i) p r hp)
+  refine ⟨fun n ↦ Sigma.mapIso (fun i ↦ eD (Ki i) n), eD Si, ?_, ?_⟩
+  · intro n
+    apply Sigma.hom_ext
+    intro i
+    simp only [Sigma.ι_desc, Sigma.ι_mapIso_inv_assoc]
+    change _ = (eD (Ki i) n).inv ≫
+      Sigma.ι (fun i ↦ (Z (Ki i)).D 0 n) i ≫
+        Sigma.desc (fun i ↦ (Ti i).tD 0 n) ≫ (eD Si n).hom
+    rw [Sigma.ι_desc_assoc, hTD i n, Iso.inv_hom_id_assoc]
+  · intro p r
+    refine ⟨Sigma.mapIso (fun i ↦ eE (Ki i) p r), eE Si p r, ?_⟩
+    apply Sigma.hom_ext
+    intro i
+    simp only [T, Sigma.ι_desc, Sigma.ι_mapIso_hom_assoc, Sigma.ι_desc_assoc]
+    simpa only [Category.assoc] using (Iso.eq_comp_inv (eE Si p r)).mpr (hTE i p r)
 
 end CategoryTheory
