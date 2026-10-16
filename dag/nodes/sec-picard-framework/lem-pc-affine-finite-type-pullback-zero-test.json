@@ -16,41 +16,33 @@
  ],
  "proof": [
   {
-   "text": "Use the existing proved finite_sections_of_finiteType in QuasicoherentFiniteTypeAffine to see that the sections of F on V are a finite module. Take a finite spanning set.",
+   "text": "Use the finite sections theorem to obtain a finite spanning family of Γ(F,V).",
    "uses": [
     "lem-weil-pbc-quasi-coherent-finite-type-affine"
    ],
    "elementary": false
   },
   {
-   "text": "The composite of delta with the pullback unit induces a linear map on V-sections. The kernel contains the finite spanning set by assumption, and thus contains its span, the whole source module. Therefore every source section has zero image under this composite.",
+   "text": "The composite of δ with the pullback unit is additive and scalar-linear. Span induction from the finite family shows it kills every section of F on V.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "On any affine open A contained in the inverse image of V, use the bijective affine sections comparison. Its naturality and pure-tensor formula identify the pulled-back map on a pure tensor x tensor b with b times the restriction of the preceding zero image. Tensor induction proves that its component on A is zero.",
+   "text": "Apply the affine pullback vanishing lemma to the resulting all-sections unit vanishing hypothesis.",
    "uses": [
-    "lem-weil-pbc-module-pullback-affine-sections"
+    "lem-pc-affine-finite-type-pullback-zero-test-aux"
    ],
    "elementary": false
-  },
-  {
-   "text": "The sieve of opens factoring through an affine open contained in W covers W, since affine opens are a basis. Naturality of the morphism gives zero restriction on this sieve, and the target sheaf is separated, so its component on W is zero. This includes an empty W and an empty spanning family.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-pc-affine-finite-type-pullback-zero-test-aux"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker N1",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Tag 01PB, lemma-finite-type-module; combined with Schemes Tags 01I9, 01IA and Sheaves Tag 0097; the finite-set test is the finite-generator step of Limits Tag 01ZR (3)"
+  "place": "Tag 01PB; finite generator and affine pullback comparison"
  },
  "mathlib_searches": [
   {
@@ -139,13 +131,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261013T123213-L-3679446",
-  "kind": "interface",
+  "landing": "20261016T221619-L-1617625",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
