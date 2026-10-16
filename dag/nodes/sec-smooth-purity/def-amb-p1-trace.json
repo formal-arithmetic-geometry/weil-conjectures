@@ -118,5 +118,31 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-2977fefad (reviewer sub-agent of L); spot-checked: Read the definition, dependencies, master sources and unit/chapter route in full. Verified the finite étale coefficient setting, Kummer normalization and inverse projection-formula composite. Added existing citations establishing q proper and P Noetherian; corrected JSON and review.md written. No target weakened or pro-étale comparison assumed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-aec95236f",
+  "group": "NK",
+  "result": "pass",
+  "note": "Reviewed the immutable node, source, dependencies, declarations, edge cases, docstrings, and report; both Lean files passed separate scompile.py side-overlay compilation with no defects."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineTrace",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLineTrace",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineTrace.lean",
+  "statement": "def projectiveLineTrace (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) : (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ⟶ ordinaryFiniteUnit A S",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.projectiveLineTraceTransport",
+   "AlgebraicGeometry.Etale.projectiveLineTraceDatum",
+   "AlgebraicGeometry.Etale.projectiveLineTrace",
+   "AlgebraicGeometry.Etale.projectiveLineTrace_chern",
+   "AlgebraicGeometry.Etale.projectiveLineTraceEpsilon"
+  ],
+  "note": "No published Lean record was supplied. Reuses the exact ProjectiveLineTrace module already delivered by NM on deliver/NM/def-amb-p1-trace, read from the server. It defines the normalized decomposition witness, its second-projection trace and the inverse-projection/tensor-trace epsilon components; the stated trace_chern equation is the dependency node normalization. This delivery supplies that missing dependency without duplicating its notion."
  }
 }

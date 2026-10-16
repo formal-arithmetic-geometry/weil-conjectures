@@ -391,5 +391,28 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-e816f426b (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, source passages, and unit/chapter route. Verified all eight steps, fixed-field lifting, colimit orientations, naturality, coefficient distinctions, edge cases, duplicate candidates, and acyclicity. Accepted all seven declared generic tool uses. No repairs needed; concrete checks are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7a4eb891d",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Wrote review.md. Checked both coefficient cases, all statement dependencies, source alignment, canonical germ normalization, universes, edge cases, docstrings, reports, and verbatim signature. Immutable module compiled cleanly through scompile.py. No defects found; branch and snapshot unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImageStalk",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleInverseImage_setStalk",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleInverseImage_setStalk",
+   "AlgebraicGeometry.Scheme.proEtaleInverseImage_abelianStalk"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleInverseImageStalk.lean",
+  "statement": "theorem proEtaleInverseImage_setStalk {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) : ∃ c : ∀ F : Sheaf (ProEt.topology Y) (Type (u + 1)), proEtaleGeometricStalk x ((proEtaleSheafInverseImage f (Type (u + 1))).obj F) ≅ proEtaleGeometricStalk (x ≫ f) F, (∀ (F : Sheaf (ProEt.topology Y) (Type (u + 1))) (N : ProEtaleGeometricNeighbourhood (x ≫ f)) (a : Over.mk x ⟶ (ProEt.forget X).obj ((proEtaleBaseChange f).obj N.right)), a.left ≫ pullback.fst N.right.hom f = N.hom.left → ((proEtaleSheafAdjunction f (Type (u + 1))).unit.app F).hom.app (op N.right) ≫ colimit.ι (proEtaleGeometricStalkDiagram x ((proEtaleSheafInverseImage f (Type (u + 1))).obj F)) (op (StructuredArrow.mk a)) ≫ (c F).hom = colimit.ι (proEtaleGeometricStalkDiagram (x ≫ f) F) (op N)) ∧ (∀ (F G : Sheaf (ProEt.topology Y) (Type (u + 1))) (h : F ⟶ G), colim.map (Functor.whiskerLeft (proEtaleGeometricNeighbourhoodForget x).op ((proEtaleSheafInverseImage f (Type (u + 1))).map h).hom) ≫ (c G).hom = (c F).hom ≫ colim.map (Functor.whiskerLeft (proEtaleGeometricNeighbourhoodForget (x ≫ f)).op h.hom)) ∧ (∀ (F G : Sheaf (ProEt.topology Y) (Type (u + 1))) (h k : F ⟶ G), (proEtaleSheafInverseImage f (Type (u + 1))).map h = (proEtaleSheafInverseImage f (Type (u + 1))).map k → colim.map (Functor.whiskerLeft (proEtaleGeometricNeighbourhoodForget (x ≫ f)).op h.hom) = colim.map (Functor.whiskerLeft (proEtaleGeometricNeighbourhoodForget (x ≫ f)).op k.hom))",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Two coefficient cases. Each comparison is characterized by the adjunction-unit germ equation, is natural in the sheaf, and reflects equality of inverse-image maps at the image point; the abelian comparison is an AddCommGrpCat isomorphism."
  }
 }

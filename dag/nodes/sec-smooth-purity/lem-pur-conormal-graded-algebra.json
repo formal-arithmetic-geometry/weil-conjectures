@@ -359,5 +359,37 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-e3084875f (reviewer sub-agent of L); spot-checked: Read the full delivery, all 33 cited node statements, cited sources, and unit/chapter route. Verified all ten proof steps, hypotheses, affine/stalk formulas, symmetric-map normalization, edge cases, and sixteen tool uses. No new nodes or delivery faults found. Detailed review written to review.md; no repairs required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7a5d420eb",
+  "group": "Q04",
+  "result": "fix",
+  "note": "Review written to review.md; complete replacements supplied under fixes/. Mathematics and dependency interfaces agree with the sources. Removed an inline proof and corrected the report’s empty-scheme identity case. Original and fixed deliveries both passed per-file scompile.py checks without diagnostics. No project clone or branch was changed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConormalGradedAlgebra",
+  "declaration": "AlgebraicGeometry.ConormalGradedAlgebra.exists_conormalGradedAlgebra",
+  "declarations": [
+   "AlgebraicGeometry.ConormalGradedAlgebra.power",
+   "AlgebraicGeometry.ConormalGradedAlgebra.powerInclusion",
+   "AlgebraicGeometry.ConormalGradedAlgebra.piece",
+   "AlgebraicGeometry.ConormalGradedAlgebra.representative",
+   "AlgebraicGeometry.ConormalGradedAlgebra.homogeneousClass",
+   "AlgebraicGeometry.ConormalGradedAlgebra.quotientStalk",
+   "AlgebraicGeometry.ConormalGradedAlgebra.Presentation",
+   "AlgebraicGeometry.ConormalGradedAlgebra.exists_conormalGradedAlgebra",
+   "AlgebraicGeometry.ConormalGradedAlgebra.presentation",
+   "AlgebraicGeometry.ConormalGradedAlgebra.symmetricComparison",
+   "AlgebraicGeometry.ConormalGradedAlgebra.augmentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalGradedAlgebra.lean",
+  "statement": "theorem exists_conormalGradedAlgebra : ∃ A : Presentation i, ∀ B : Presentation i, ∃! e : A.algebra ≅ B.algebra, ∀ (n : ℕ) (U : Z.Opens) (a : (piece i n).val.obj (op U)), e.hom.right.hom.app (op U) ((A.inclusion n).val.app (op U) a) = (B.inclusion n).val.app (op U) a",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Previously unstated dependency. Supplies the full conormal-algebra interface on the fixed tensor-pullback ideal powers, specified by its sheaf coproduct universal property, representative multiplication, affine and stalk formulas, coherence, canonical symmetric comparison and unique degree-zero augmentation. The universal property determines the algebra up to the unique homogeneous-inclusion-preserving isomorphism used downstream; no unconstrained algebra is chosen."
  }
 }
