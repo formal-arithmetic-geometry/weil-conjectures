@@ -219,5 +219,29 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-12b6b8202 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, blueprint route and source passages. All five steps preserve the finite coefficient hypotheses and identify the canonical ambient exchange via normalized comparison maps and naturality. No new nodes or repairs. Accepted four declared tool uses; pre-existing dependency cycles are documented in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteProetaleSmoothBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_finite_proetale_smooth_base_change",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteSmoothModelCoordinates",
+   "AlgebraicGeometry.ProEtale.finiteSmoothTargetComparison",
+   "AlgebraicGeometry.ProEtale.isIso_finite_proetale_smooth_base_change"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteProetaleSmoothBaseChange.lean",
+  "statement": "theorem isIso_finite_proetale_smooth_base_change {S T Y X : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian S] [IsNoetherian T] [Smooth p] [QuasiCompact g] [QuasiSeparated g] (sq : ChosenCartesianSquare h e p g) (N : ℕ) (hcoeff : Etale.IsSmoothBaseChangeCoefficients N Λ S) (K : FiniteCoefficientDerivedCategory T Λ) (hK : isBoundedConstructibleFiniteCoefficient T Λ K) : IsIso ((finiteCoefficientRealization X Λ).mapDerivedCategory.map ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq.flip).app ((finiteCoefficientRealization T Λ).mapDerivedCategory.asEquivalence.inverse.obj K))) ∧ ∀ (L : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (_hL : Etale.DerivedCategory.isBoundedConstructible Λ T (DerivedCategory.Plus.ι.obj L)) (α : (finiteCoefficientDerivedComparison T Λ).obj (DerivedCategory.Plus.ι.obj L) ≅ K), (finiteCoefficientRealization X Λ).mapDerivedCategory.map ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq.flip).app ((finiteCoefficientRealization T Λ).mapDerivedCategory.asEquivalence.inverse.obj K)) = (finiteCoefficientRealization X Λ).mapDerivedCategory.map (((lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctor ⋙ (upperStar (ModuleCat.{u + 1} Λ) p).leftDerivedFunctor).map (finiteSmoothModelCoordinates Λ T K L α).inv ≫ (baseChangeSourceComparisonIso g p Λ).inv.app L ≫ (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.map (DerivedCategory.Plus.ι.map ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq.flip).app L)) ≫ (finiteSmoothTargetComparison Λ sq).hom.app L ≫ ((upperStar (ModuleCat.{u + 1} Λ) e).leftDerivedFunctor ⋙ (lowerStar (ModuleCat.{u + 1} Λ) h).rightDerivedFunctor).map (finiteSmoothModelCoordinates Λ T K L α).hom)",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The input and output retain the recorded continuous-function finite coefficient derived category. The existing derived realization equivalence computes the canonical ambient mate in fixed-scalar coordinates, as in the recorded transport-identifies-exchange interface. The second conjunct states the complete conjugation identity for every etale model and its specified ringed isomorphism. Second reading uses the recorded ChosenCartesianSquare (with flipped orientation for exchange), derives qcqs of h from its actual pullback identification, and removes the redundant derived-equivalence helper. The two remaining data helpers only give model coordinates and instantiate the existing target comparison; no new notion or DAG statement is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-01f5055d7",
+  "group": "N2",
+  "result": "pass",
+  "note": "Reviewed the immutable node, source, dependencies, Lean module, report, edge cases, canonical mate construction, and pro-etale framework. scompile.py passed sandbox and library compilation; no substantive or mechanical findings."
  }
 }
