@@ -32,11 +32,291 @@
   "def-weil-etale-morphism",
   "def-weil-geometric-fibre",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-noetherian-ring"
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-inverse-image",
+  "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a compactification $X\\xrightarrow{a}\\overline X\\xrightarrow{p}S$. Properness makes $p$ finite type [def-weil-proper-morphism], so $\\overline X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. It is therefore quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; since $X$ is quasi-compact, [lem-weil-pbc-qcqs-morphism-permanence](1) makes $a$ quasi-compact, as required by the base-change theorem in Step 2. Compute $Rf_!=Rp_*Da_!$ as in [def-amb-etale-compact-support], using [lem-amb-etale-compact-comparisons] to identify different choices. Exactness of $a_!$ is [lem-weil-pbc-extension-by-zero-exact], and [lem-sf-exact-functor-derived-triangulated] makes $Da_!$ triangulated. The module-sheaf categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives], and $p_*$ is additive left exact by [lem-weil-pbc-module-direct-image-left-exact]; [lem-weil-pbc-derived-direct-image-triangulated] therefore makes $Rp_*$ triangulated on $D^+$. Thus $Rf_!$ is additive, commutes with shifts, and preserves distinguished triangles. For a sheaf $G$, [lem-weil-pbc-dplus-injective-representative](1) applied to $a_!G[0]$ with $n=0$ gives a complex $I$ of injectives with $I^r=0$ for $r<0$ representing $a_!G[0]$. Its image $p_*I$ also has zero terms in negative degrees, so $Rf_!G$ has no negative cohomology. By part (2) of the same lemma $I$ is K-injective; hence the bounded-below and unbounded interpretations agree because both apply $p_*$ to $I$. All arguments below use only $D^+$.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "lem-amb-etale-compact-comparisons",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII 5.1.8(b), 5.1.14: triangulated compact-support functor"
+   }
+  },
+  {
+   "text": "Let $\\bar s:\\operatorname{Spec}\\Omega\\to S$ be a geometric point with $\\Omega$ algebraically closed. Put $U=X_{\\bar s}$, $T=\\overline X_{\\bar s}$ and $a_{\\bar s}:U\\hookrightarrow T$. Base change is open by [lem-weil-pbc-open-immersion-base-change] and proper by [lem-pc-proper-base-change]. Apply [thm-cbc-finite-torsion] to the sheaf $G[0]$ and this geometric base change: $\\bar s^*Rf_!G\\cong R(U/\\Omega)_!G_{\\bar s}$, computed on the pulled-back compactification. The inverse image on constant-$B$ modules is exact by [prop-weil-pbc-inverse-image-modules-exact], so it commutes with cohomology. By [lem-weil-pbc-geometric-point-pullback-stalk], sections on $\\operatorname{Spec}\\Omega$ are exact and identify sections of $\\bar s^*F$ with $F_{\\bar s}$ (the identification respects $B$ by naturality with respect to scalar multiplication). The definition of direct image [def-weil-pbc-direct-image] then gives, naturally,\n$$(R^qf_!G)_{\\bar s}\\cong H^q_B(T,a_{\\bar s!}G_{\\bar s})=:H_c^q(U,G_{\\bar s}).$$\nFor $q\\geq0$ its underlying abelian group is $H^q(T,(a_{\\bar s!}G_{\\bar s})_{\\rm ab})$ by [lem-weil-pbc-etale-module-cohomology-forget]; negative degrees vanish by Step 1. Independence from the chosen compactification follows from [lem-amb-etale-compact-comparisons], also applied over $\\operatorname{Spec}\\Omega$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-pc-proper-base-change",
+    "thm-cbc-finite-torsion",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII Proposition 5.2.8 (p. 358)"
+   }
+  },
+  {
+   "text": "For the dimension bound fix the geometric point of Step 2. $T$ is proper, hence finite type over $\\Omega$ by [def-weil-proper-morphism], and Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field has only the ideals zero and the unit ideal. Let $C\\hookrightarrow T$ be the reduced induced closed subscheme on $\\overline{|U|}$, using [lem-weil-pbc-reduced-induced-closed-subscheme]. It is proper over $\\Omega$ by [lem-weil-pbc-closed-immersion-proper], hence finite type and Noetherian. By [lem-sc-noetherian-closed-subset-finite-components] its underlying space has finitely many irreducible components $C_1,\\ldots,C_r$. Give each its reduced induced closed structure in $T$ using [lem-weil-pbc-reduced-induced-closed-subscheme]; each is integral by [def-pc-integral-scheme] and proper, hence finite type over $\\Omega$. This uses only the underlying closed support, and does not assert that the possibly nonreduced scheme $U$ factors through $C$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII Corollary 5.2.8.1, proof: proper closure of the geometric fibre"
+   }
+  },
+  {
+   "text": "Each component $C_i$ meets $U$: otherwise the union of the other finitely many components, a closed subset, would contain $U$, hence its closure $|C|$, contradicting maximality of $C_i$. The open subset $V_i=C_i\\cap U$ in the integral finite-type $\\Omega$-scheme $C_i$ is nonempty, so [lem-sc-integral-locally-algebraic-opens-dimension] gives $\\dim C_i=\\dim V_i$. Since $V_i$ is closed in $U$, each strict chain of irreducible closed subsets of $V_i$ is such a chain in $U$; hence $\\dim C_i\\leq\\dim U\\leq d$. Every finite chain of irreducible closed subsets of $C$ lies in one $C_i$: its largest member is irreducible and the finitely many closed $C_i$ cover it. Thus $\\dim C\\leq d$, directly from [def-kun-topological-krull-dimension]. This bounds the closure of the original fibre inside the compactified fibre, rather than bounding all of $T$.",
+   "uses": [
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII Corollary 5.2.8.1, proof: equality of the dimension of a dense open over a field"
+   }
+  },
+  {
+   "text": "Write $E=(a_{\\bar s!}G_{\\bar s})_{\\rm ab}$. By [lem-weil-pbc-extension-by-zero-stalks], $E$ is zero outside $U$, hence outside $C$. If $C$ is empty then $E=0$ by [lemma-weil-pbc-geometric-stalk-conservative], and its cohomology is zero using the zero resolution [def-weil-pbc-etale-cohomology]. Otherwise [lem-kun-04ca] gives $E\\cong i_*L$ for the closed immersion $i:C\\hookrightarrow T$, with $L=i^{-1}E$. If $N\\geq1$ is the additive exponent of the finite ring $B$, then $N\\cdot m=(N\\cdot1_B)m=0$ for every $B$-module element. Thus $NE=0$, and exact additive inverse image [prop-weil-pbc-inverse-image-exact] gives $NL=0$. In particular $L$ is a torsion abelian sheaf, with no finite-stalk or constructibility condition. The immersion $i$ is finite by [lem-weil-pbc-closed-immersion-finite], and [lem-weil-pbc-finite-pushforward-cohomology] gives $H^q(T,E)\\cong H^q(C,L)$ for every $q\\geq0$.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-etale-cohomology",
+    "lem-kun-04ca",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-pushforward-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII Corollary 5.2.8.1, proof: reduce to torsion cohomology on a proper support"
+   }
+  },
+  {
+   "text": "The algebraically closed field $\\Omega$ is separably closed, so [lem-sf-separably-closed-torsion-cd] gives $\\operatorname{cd}_{\\rm tor}(\\Omega)\\leq0$. By [thm-sc-finite-type-torsion-cd] the finite-type $\\Omega$-scheme $C$ has torsion cohomological dimension at most $2\\dim C\\leq2d$. The definition [def-sc-etale-torsion-cd] therefore gives $H^q(C,L)=0$ for $q>2d$. Steps 2 and 5 identify this with the underlying abelian group of $(R^qf_!G)_{\\bar s}$. This holds at every geometric point, so [lemma-weil-pbc-geometric-stalk-conservative], applied to $0\\to R^qf_!G$ after forgetting coefficients, proves $R^qf_!G=0$. The coefficient-forgetting functor is exact and faithful by [lem-weil-pbc-module-sheaves-colimits-forgetful], so zero underlying sheaf means zero module sheaf. No assumption of invertibility of $N$ is used.",
+   "uses": [
+    "lem-sf-separably-closed-torsion-cd",
+    "thm-sc-finite-type-torsion-cd",
+    "def-sc-etale-torsion-cd",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII Corollary 5.2.8.1, proof using SGA4 X 4.3"
+   }
+  },
+  {
+   "text": "Put $n=2d$. For a short exact sequence $0\\to G'\\to G\\to G''\\to0$ of $B$-module sheaves, the cone of $G'[0]\\to G[0]$ maps quasi-isomorphically to $G''[0]$: its only possible cohomology is the kernel in degree $-1$ (zero) and the cokernel in degree zero ($G''$). Thus [def-weil-abstract-derived-category] makes it a distinguished triangle. Step 1 and [lem-sf-derived-homology-long-exact] give\n$$R^nf_!G'\\longrightarrow R^nf_!G\\longrightarrow R^nf_!G''\\longrightarrow R^{n+1}f_!G'=0.$$\nThis proves preservation of epimorphisms. For any right exact sequence $A\\to B'\\to C'\\to0$, let $I$ be the image of $A\\to B'$. Apply the displayed assertion to $0\\to I\\to B'\\to C'\\to0$, and preservation of epimorphisms to $A\\to I$; the image of $R^nf_!A\\to R^nf_!B'$ is consequently the kernel of $R^nf_!B'\\to R^nf_!C'$. This is right exactness of $R^nf_!$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII Corollary 5.2.8.1, final sentence"
+   }
+  },
+  {
+   "text": "For the open immersion in the statement let $i:Z\\hookrightarrow X$ be the reduced induced closed complement, provided by [lem-weil-pbc-reduced-induced-closed-subscheme]. The closed complement is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since its closed immersion is finite type by [lem-weil-pbc-closed-immersion-proper](a). Noetherian schemes are quasi-compact and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], so [lem-weil-pbc-etale-compact-support-open-closed-triangle] applies and gives the exact segment\n$$R^{2d-1}(fi)_!i^*G\\longrightarrow R^{2d}(fj)_!j^*G\\longrightarrow R^{2d}f_!G\\longrightarrow R^{2d}(fi)_!i^*G.$$\nThe needed compactifications exist by [thm-nagata-compactification]; $fi$ is separated finite type by [lem-weil-pbc-closed-immersion-finite, lem-weil-pbc-finite-over-separated-finite-type]. The composite $fj$ is locally finite type and separated by [lem-weil-pbc-qc-open-immersion-finite-type, lem-weil-pbc-proper-fp-permanence] (an open immersion has closed diagonal because its self-fibre-product is itself). Its source is a quasi-compact open of a Noetherian scheme and hence quasi-compact; its target $S$ is quasi-separated, so it is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence], and therefore finite type. For $d\\geq1$ the geometric fibres of $fi$ have dimension at most $d-1$, so Step 6 applied with $d-1$ kills both outer terms. For $d=0$, a space of dimension strictly less than zero has no points (a point has a nonempty irreducible closure and hence a chain of length zero); every geometric fibre of $Z$ is empty, and Step 2 gives zero outer terms (degree $-1$ also vanishes by Step 1). Exactness gives the required isomorphism, induced by extension by zero. The reduction of the closed complement changes none of its topological dimensions.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+    "thm-nagata-compactification",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-over-separated-finite-type",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII Lemma 2.1 (p. 550)"
+   }
+  },
+  {
+   "text": "For the finite etale cover define sheaves on $X$\n$$C_0=\\bigoplus_i u_{i,\\Sigma!}u_i^*G,\\qquad C_1=\\bigoplus_{i,j}u_{ij,\\Sigma!}u_{ij}^*G.$$\nThe two maps are the sum-extension counits along the projections $X_{ij}\\to X_i,X_j$, and $C_0\\to G$ is the sum of the counits. These are the adjunctions of [lem-weil-pbc-etale-restriction-injectives], for the functors [def-weil-pbc-etale-sum-extension]. Fix a geometric point $\\bar x$ and let $J$ be the set of lifts of $\\bar x$ to the disjoint union of the $X_i$. Joint surjectivity makes $J$ nonempty: choose a point of some $X_i$ over the image $x$ of $\\bar x$. By [lem-weil-pbc-etale-fibre-discrete-separable-points] its residue field is a finite separable extension of $\\kappa(x)$, which embeds in the algebraically closed $\\Omega$ over the given embedding of $\\kappa(x)$; this produces a lift. The projections $X_{ij}\\to X_i$ and $X_{ij}\\to X_j$ are etale: they are base changes of $u_j$ and $u_i$, respectively, by part (1) of [lem-weil-pbc-etale-base-change-finite-limits]. Part (2), taking the fibre product over the final object $X/X$, says that the structural map $u_{ij}$ is etale as well. By [lem-amb-etale-sum-stalks], [lem-weil-pbc-inverse-image-stalk-germ], and [lem-kun-stalks-commute-colimits], the underlying stalk complex is\n$$\\bigoplus_{(a,b)\\in J^2}M\\xrightarrow{[a,b,m]\\mapsto[a,m]-[b,m]}\\bigoplus_{a\\in J}M\\xrightarrow{\\sum}M\\to0,\\qquad M=G_{\\bar x}.$$\nThe stalk identifications preserve the $B$-action since all germ maps do. The counit evaluates each lift summand, so the displayed maps have exactly these formulas. Choose $a_0\\in J$. The sum map is onto by $m\\mapsto[a_0,m]$, and a finite tuple $\\sum_a[a,m_a]$ with $\\sum m_a=0$ equals $\\sum_a([a,m_a]-[a_0,m_a])$, hence lies in the image of the first map. This proves stalk exactness, including when $M=0$. Exact stalks [prop-weil-pbc-geometric-stalks-exact] and conservativity [lemma-weil-pbc-geometric-stalk-conservative] imply $C_1\\to C_0\\to G\\to0$ is exact (apply them to its homology objects); exactness of forgetting module structure is [lem-weil-pbc-module-sheaves-colimits-forgetful]. The joint-surjectivity hypothesis is essential: the printed XVIII 2.2 omits it explicitly, but its proof cites XVII 6.2.9, which assumes it. For the identity of a geometric point, a family consisting only of the empty scheme would give a zero augmentation to a nonzero sheaf.",
+   "uses": [
+    "lem-weil-pbc-etale-restriction-injectives",
+    "def-weil-pbc-etale-sum-extension",
+    "lem-amb-etale-sum-stalks",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-kun-stalks-commute-colimits",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII Proposition 6.2.9(i) (pp. 428–429), degree-zero simplex contraction"
+   }
+  },
+  {
+   "text": "Apply the right exact additive functor $R^{2d}f_!$ of Step 7 to $C_1\\to C_0\\to G\\to0$. Finite direct sums are biproducts, so additivity identifies their images with the corresponding finite sums (the inclusion/projection identities are preserved). By [lem-asd-etale-compact-support-normalization], compactified $Ru_{i!}$ and $Ru_{ij!}$ are the exact degreewise sum-extension functors, including their specified counits. By [lem-amb-etale-compact-comparisons] their composition with $Rf_!$ is canonically $R(fu_i)_!$ and $R(fu_{ij})_!$. For precision, $X_{ij}\\to X_i$ is separated finite type by [lem-pod-separated-finite-type-base-change]. The maps $X_i\\to X$ are finite type by hypothesis, so $X_i$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; applying that lemma to $X_{ij}\\to X_i$ then shows that $X_{ij}$ is Noetherian. Separatedness and local finite type of $u_{ij}$ and of all composites with $f$ follow from [lem-weil-pbc-proper-fp-permanence](e). Their Noetherian sources are quasi-compact by the definition of Noetherianity, and their Noetherian targets are quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; [lem-weil-pbc-qcqs-morphism-permanence](1) supplies quasi-compactness, hence finite type. Their compactifications exist by [thm-nagata-compactification]. Thus every application of the compact-support normalization and composition has the required hypotheses. We obtain precisely the displayed pair of arrows and the augmentation in the item. In an additive category, the cokernel of the difference of two arrows is their coequalizer, since a map annihilates the difference exactly when it equalizes the arrows. This proves the asserted presentation.",
+   "uses": [
+    "lem-asd-etale-compact-support-normalization",
+    "lem-amb-etale-compact-comparisons",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII Lemma 2.2 (p. 550); XVII 6.2.7.2 and 6.2.9"
+   }
+  },
+  {
+   "text": "We make the top-corner argument without assuming that compact support is the right derived functor of its degree-zero part. For $K$ with cohomology in a finite interval $[a,b]$, prove $\\mathcal H^r(Rf_!K)=0$ for $r>2d+b$ by induction on $b-a+1$. If there is no cohomology, $K\\cong0$ because a complex with zero cohomology is quasi-isomorphic to zero [def-weil-abstract-derived-category]. For one degree, the canonical truncation is quasi-isomorphic to $\\mathcal H^a(K)[-a]$, by the explicit good truncations [def-kun-truncations]; Step 6 and the shift compatibility of Step 1 give the bound. For the induction step use the functorial triangle of [lem-weil-pbc-truncation-triangle]\n$$\\tau_{\\leq b-1}K\\to K\\to\\mathcal H^b(K)[-b]\\to(\\tau_{\\leq b-1}K)[1],$$\nwhere $K\\cong\\tau_{\\leq b}K$. The first term has cohomology in $[a,b-1]$ and its image under $Rf_!$ vanishes above $2d+b-1$ by induction; the last term's image vanishes above $2d+b$ by Step 6 and shifts. Applying Step 1 and the long exact sequence [lem-sf-derived-homology-long-exact] gives the bound for $K$. The induction uses only the existence and functoriality of the truncation triangles, not uniqueness of their connecting morphisms.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-kun-truncations",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII 5.1.8.1–5.1.8.3; XVIII 2.7, explicit finite truncation proof of the maximum-cycle argument"
+   }
+  },
+  {
+   "text": "Apply Steps 1 and 6 to $g$ with the arbitrary sheaf $H$: $K=Rg_!H$ has cohomology only in $[0,2e]$. All schemes here are Noetherian, including $W$ by [lem-weil-pbc-finite-type-over-noetherian]. Put $Q=\\tau_{\\leq2e-1}K$ and $N=2(d+e)$. Step 11 gives $\\mathcal H^r(Rf_!Q)=0$ for $r>2d+2e-1=N-1$; if $e=0$, then $Q=0$ and the same conclusion holds. Apply $Rf_!$ to the canonical top truncation triangle of [lem-weil-pbc-truncation-triangle], and take cohomology in degree $N$ using [lem-sf-derived-homology-long-exact]. The two adjacent terms $\\mathcal H^N(Rf_!Q)$ and $\\mathcal H^{N+1}(Rf_!Q)$ vanish, so the canonical map gives an isomorphism\n$$\\mathcal H^N(Rf_!Rg_!H)\\xrightarrow{\\sim}\\mathcal H^N(Rf_!\\mathcal H^{2e}(Rg_!H)[-2e])=R^{2d}f_!R^{2e}g_!H.$$\nInvert it and use the canonical composition isomorphism $Rf_!Rg_!\\cong R(fg)_!$ from [lem-amb-etale-compact-comparisons]. This is the asserted corner map $R^{2d}f_!R^{2e}g_!H\\cong R^{2(d+e)}(fg)_!H$: it is the maximum-degree edge obtained by the top truncation of the inner functor, exactly the corner in XVIII 2.7.2. It does not require a dimension formula for the fibres of $fg$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.7.1–2.7.2 (p. 552)"
+   }
+  },
+  {
+   "text": "All maps just used are functorial in the sheaves: compact-support base change and composition are natural by [thm-cbc-finite-torsion, lem-amb-etale-compact-comparisons]; the open-complement map is the triangle map of [lem-weil-pbc-etale-compact-support-open-closed-triangle]; the cover maps are the adjunction counits identified, including normalization, by [lem-asd-etale-compact-support-normalization]; and the top projection is the functorial good truncation of [lem-weil-pbc-truncation-triangle]. Taking cohomology preserves the commutative squares, as do inverses of the isomorphisms (multiply the same squares by their inverses). Thus the stalk identification, dense-open isomorphism, coequalizer presentation and corner isomorphism have precisely the naturality asserted. No coordinate choices or chosen geometric lift from Step 9 enter the resulting maps: that lift was used only to verify exactness of already specified maps.",
+   "uses": [
+    "thm-cbc-finite-torsion",
+    "lem-amb-etale-compact-comparisons",
+    "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+    "place": "XVII 5.2.8 and 6.2.7–6.2.9; XVIII 2.1–2.2 and 2.7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "lem-amb-etale-compact-comparisons",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-proper-base-change",
+  "thm-cbc-finite-torsion",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-etale-cohomology",
+  "lem-kun-04ca",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "lem-sf-separably-closed-torsion-cd",
+  "thm-sc-finite-type-torsion-cd",
+  "def-sc-etale-torsion-cd",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-finite-over-separated-finite-type",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-amb-etale-sum-stalks",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-kun-stalks-commute-colimits",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-pod-separated-finite-type-base-change",
+  "def-kun-truncations",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+  "place": "XVII Proposition 5.2.8 and Corollary 5.2.8.1 (p. 358), 6.2.9–6.2.10 (pp. 428–430); SGA4-expose-18_reedition.pdf XVIII Lemmas 2.1–2.2 (p. 550) and §2.7, equations (2.7.1)–(2.7.2) (p. 552). The closed-support dimension argument and finite truncation induction spell out the fibrewise vanishing proof and maximal-degree corner argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -93,15 +373,339 @@
    "date": "2026-10-16",
    "digest": "4f53cda18c2baa0c",
    "verdict": "no match: independent source grep returned zero declarations for Cohen-Macaulay geometry or etale Kummer cohomology/trace"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*cohom|cohom.*compactSupport|shriek.*dimension|higherDirectImage.*dimension",
+   "results": "{\"t\": \"2026-10-16T07:13:33Z\", \"tool\": \"grep\", \"query\": \"compactSupport.*cohom|cohom.*compactSupport|shriek.*dimension|higherDirectImage.*dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: read returned signatures; these concern ordinary structure-sheaf localization, generic cohomology definitions or t-structures, compactly supported continuous functions, or scheme gluing, and none states all or a one-line specialization of this etale compact-support interface"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Top compactly supported etale cohomology is right exact and unchanged after removing lower dimensional closed fibres",
+   "results": "{\"t\": \"2026-10-16T07:13:34Z\", \"tool\": \"leansearch\", \"query\": \"Top compactly supported etale cohomology is right exact and unchanged after removing lower dimensional closed fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"compactlySupported_eq_top_of_isCompact\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"RingHom.Etale.propertyIsLocal\", \"HasCompactSupport.comp_isClosedEmbedding\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.isOpen_etaleLocus\", \"hasCompactSupport_iff_eventuallyEq\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"d65c36125424c3cc\"}",
+   "date": "2026-10-16",
+   "digest": "d65c36125424c3cc",
+   "verdict": "no match: read returned signatures; these concern ordinary structure-sheaf localization, generic cohomology definitions or t-structures, compactly supported continuous functions, or scheme gluing, and none states all or a one-line specialization of this etale compact-support interface"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-16T07:13:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans\"], \"digest\": \"afdddf2b0b2de5fd\"}",
+   "date": "2026-10-16",
+   "digest": "afdddf2b0b2de5fd",
+   "verdict": "no match: read returned signatures; these concern ordinary structure-sheaf localization, generic cohomology definitions or t-structures, compactly supported continuous functions, or scheme gluing, and none states all or a one-line specialization of this etale compact-support interface"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported etale cohomology of torsion sheaves vanishes above twice the dimension of the geometric fibres",
+   "results": "{\"t\": \"2026-10-16T07:13:35Z\", \"tool\": \"leanfinder\", \"query\": \"Compactly supported etale cohomology of torsion sheaves vanishes above twice the dimension of the geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"DerivedCategory.isZero_of_isGE\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"DerivedCategory.isLE_iff\"], \"digest\": \"c3c481599bae20ce\"}",
+   "date": "2026-10-16",
+   "digest": "c3c481599bae20ce",
+   "verdict": "no match: read returned signatures; these concern ordinary structure-sheaf localization, generic cohomology definitions or t-structures, compactly supported continuous functions, or scheme gluing, and none states all or a one-line specialization of this etale compact-support interface"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale sum extension of a covering gives a coequalizer presentation and top compact support composition isomorphism",
+   "results": "{\"t\": \"2026-10-16T07:13:37Z\", \"tool\": \"leanfinder\", \"query\": \"Etale sum extension of a covering gives a coequalizer presentation and top compact support composition isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation\", \"AlgebraicGeometry.LocallyRingedSpace.coequalizerCofork\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram\", \"AlgebraicGeometry.Scheme.Cover.sigma_f\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover_f\", \"AlgebraicGeometry.LocallyRingedSpace.coequalizerCoforkIsColimit\"], \"digest\": \"abdc8ed1c12b55d4\"}",
+   "date": "2026-10-16",
+   "digest": "abdc8ed1c12b55d4",
+   "verdict": "no match: read returned signatures; these concern ordinary structure-sheaf localization, generic cohomology definitions or t-structures, compactly supported continuous functions, or scheme gluing, and none states all or a one-line specialization of this etale compact-support interface"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Ss]hriek|[Ss]hriek.*rightDerived|[Cc]ompact[Ss]upport.*[Cc]ohom|[Cc]ohom.*[Cc]ompact[Ss]upport",
+   "results": "{\"t\": \"2026-10-16T07:23:40Z\", \"tool\": \"grep\", \"query\": \"rightDerived.*[Ss]hriek|[Ss]hriek.*rightDerived|[Cc]ompact[Ss]upport.*[Cc]ohom|[Cc]ohom.*[Cc]ompact[Ss]upport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: source grep returned no declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The last nonzero higher direct image with proper support is a right exact functor on sheaves of torsion modules",
+   "results": "{\"t\": \"2026-10-16T07:23:51Z\", \"tool\": \"leanfinder\", \"query\": \"The last nonzero higher direct image with proper support is a right exact functor on sheaves of torsion modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.instAB5CondensedMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.hasExactColimitsOfShape\", \"CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf\", \"CategoryTheory.Sheaf.hasExactColimitsOfShape\", \"Condensed.instAB4StarCondensedMod\", \"Condensed.instAB4CondensedMod\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\"], \"digest\": \"151b07858b290d97\"}",
+   "date": "2026-10-16",
+   "digest": "151b07858b290d97",
+   "verdict": "no match: the returned names concern exact colimits of sheaves/condensed modules, or generic categorical exactness, and do not state this ordinary etale compact-support theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"rightDerived\"",
+   "results": "{\"t\": \"2026-10-16T07:24:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: Loogle returned zero declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images with proper support have cohomological amplitude bounded by twice relative dimension",
+   "results": "{\"t\": \"2026-10-16T07:24:37Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct images with proper support have cohomological amplitude bounded by twice relative dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isZero_of_isLE\"], \"digest\": \"8efe1af895ae28cf\"}",
+   "date": "2026-10-16",
+   "digest": "8efe1af895ae28cf",
+   "verdict": "no match: the returned names concern exact colimits of sheaves/condensed modules, or generic categorical exactness, and do not state this ordinary etale compact-support theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale covering, the direct sum of extension by zero of restrictions maps onto a sheaf, with kernel generated by pairwise overlap differences",
+   "results": "{\"t\": \"2026-10-16T08:10:17Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale covering, the direct sum of extension by zero of restrictions maps onto a sheaf, with kernel generated by pairwise overlap differences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.mapRelations\", \"SheafOfModules.Presentation.map_generators_I\", \"SheafOfModules.Presentation.mapGenerators\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.relationsOfIsCokernelFree\", \"SheafOfModules.Presentation.relations\", \"SheafOfModules.presentationOfIsCokernelFree\", \"SheafOfModules.relationsOfIsCokernelFree_I\"], \"digest\": \"1a1c1343c5fa4902\"}",
+   "date": "2026-10-16",
+   "digest": "1a1c1343c5fa4902",
+   "verdict": "no match: independent second reading; returned declarations construct presentations by free module sheaves and their images under functors, not the etale-cover sum-extension presentation or compact-support theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-torsion-top-trace",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-purity-transport"
+ "unit": "sk-thm-purity-transport",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-compact-top-localization",
+  "worker": "stage1",
+  "summary": "Kept every hypothesis and all conclusions, including arbitrary finite coefficients and nonconstructible sheaves. Expanded SGA fibre base change, the closed-support dimension argument, right exactness, dense-open localization, the cover simplex calculation and the top truncation corner. Reused existing DAG statements throughout; no new nodes or Mathlib leaves. Repair of the 2026-10-16 08:04 UTC preparation-cache return: compared actual returned head 23c48074a3 against current origin 9be44c0555; the retained node and all 68 dependency records are unchanged. Rechecked sources and all 80 current verbatim step citations, reorganized the report into the five required sections, and removed superseded validation claims. Cache recreation and baseline rebase are left to the required no-push delivery tool. Independent second reading: supplied the compactifying open’s quasi-compactness hypothesis, corrected the description of fj as a composite, and specified the two base changes proving the overlap projections etale. All 84 citation pairs were checked against current statements; no new nodes were needed.",
+  "blueprint": "Seed-target refinement below lem-pur-torsion-top-trace, serving sk-thm-purity-transport Step 1 (finite trace construction); the seeded ancestry has no imported blueprint ancestor. Steps 1–7 realize XVII 5.2.8–5.2.8.1; Step 8 realizes XVIII 2.1; Steps 9–10 realize XVIII 2.2 / XVII 6.2.9; Steps 11–12 realize XVIII 2.7; Step 13 records naturality. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic tool: The etale compact-support comparisons. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic tool: Extension by zero is exact (étale site). Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic tool: An exact functor of abelian categories induces a triangulated functor on derived categories. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic tool: Sheaves of modules on the small etale site have enough injectives. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic tool: Direct image of etale sheaves of modules over a constant ring: module structure, additive and left exact. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Generic tool: The derived direct image on bounded below derived categories is a triangulated functor. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic tool: Every object of D^+ is represented by a bounded below K-injective complex of injectives. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic tool: Base change of an open immersion is an open immersion (Stacks 01JY). Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic tool: Proper and smooth morphisms are stable under base change. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "Canonical compact-support base change to arbitrary geometric points; the finite-trace unit does not prove base change anew."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic tool: Inverse image of etale sheaves of modules over a constant ring is exact. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic tool: Inverse image to a geometric point is the stalk. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-cohomology-forget",
+    "why": "Generic tool: Natural comparison of etale module cohomology with underlying abelian cohomology. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic tool: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic tool: Reduced induced closed subscheme structure on a closed subset: existence and uniqueness. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic tool: Closed immersions are proper. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Generic tool: A closed subset of a Noetherian scheme has finitely many irreducible components. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "Equality of dimension with a nonempty open in an integral scheme locally of finite type over a field."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic tool: Geometric stalks of extension by zero along an open immersion. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic tool: Conservativity of geometric stalks. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Realizes a sheaf supported on a closed subscheme as its closed direct image."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Generic tool: Exactness of inverse image. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Generic tool: Closed immersions are finite. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-cohomology",
+    "why": "Cohomology comparison for finite direct image, not merely its exactness."
+   },
+   {
+    "node": "lem-sf-separably-closed-torsion-cd",
+    "why": "Generic tool: Torsion cohomological dimension of a separably closed field. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "thm-sc-finite-type-torsion-cd",
+    "why": "Absolute torsion cohomological dimension over a separably closed field, used on the actual closed support."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic tool: Colimits of sheaves of modules and the forgetful functor to abelian sheaves. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic tool: Long exact cohomology sequence of a distinguished triangle in the derived category. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic tool: A locally Noetherian scheme is quasi-separated (Stacks 01OY). Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+    "why": "The ordinary finite-coefficient localization exact sequence used to remove the lower-dimensional complement."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Existence of compactifications for the auxiliary separated finite-type maps over qcqs Noetherian bases."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Generic tool: Etale restriction preserves injectives. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-amb-etale-sum-stalks",
+    "why": "Generic tool: Geometric stalks of etale sum extension. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic tool: Stalk of an inverse image, compatible with germs of pulled-back sections. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-kun-stalks-commute-colimits",
+    "why": "Generic tool: Geometric stalks commute with colimits. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic tool: Exactness of geometric stalks. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-asd-etale-compact-support-normalization",
+    "why": "Generic tool: Normalization of compactified etale support and its exchange. Used only for the sheaf, scheme or derived-category calculation written in the proof; no step of the finite-reduction unit provides this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Functorial successive canonical truncations in the ordinary derived category."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-separated-finite-type",
+    "why": "Generic geometric tool: A scheme finite over a separated finite-type scheme. Used for the auxiliary open, closed or etale-cover morphisms, whose hypotheses are checked in the proof; the finite-reduction unit does not replace this scheme-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic geometric tool: A quasi-compact open immersion is of finite type. Used for the auxiliary open, closed or etale-cover morphisms, whose hypotheses are checked in the proof; the finite-reduction unit does not replace this scheme-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic geometric tool: Permanence of proper, separated, finite type, finitely presented morphisms and of immersions. Used for the auxiliary open, closed or etale-cover morphisms, whose hypotheses are checked in the proof; the finite-reduction unit does not replace this scheme-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic geometric tool: Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change. Used for the auxiliary open, closed or etale-cover morphisms, whose hypotheses are checked in the proof; the finite-reduction unit does not replace this scheme-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic geometric tool: The fibres of an etale morphism are disjoint unions of spectra of finite separable field extensions. Used for the auxiliary open, closed or etale-cover morphisms, whose hypotheses are checked in the proof; the finite-reduction unit does not replace this scheme-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic geometric tool: The base-change functor between small etale sites commutes with finite limits. Used for the auxiliary open, closed or etale-cover morphisms, whose hypotheses are checked in the proof; the finite-reduction unit does not replace this scheme-theoretic input."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic geometric tool: Separated finite-type morphisms are stable under base change. Used for the auxiliary open, closed or etale-cover morphisms, whose hypotheses are checked in the proof; the finite-reduction unit does not replace this scheme-theoretic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-etale-compact-comparisons",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-proper-base-change",
+  "thm-cbc-finite-torsion",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-kun-04ca",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "lem-sf-separably-closed-torsion-cd",
+  "thm-sc-finite-type-torsion-cd",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-amb-etale-sum-stalks",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-kun-stalks-commute-colimits",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-finite-over-separated-finite-type",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-pod-separated-finite-type-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-3fff6143d",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-3fff6143d (reviewer sub-agent of L); spot-checked: Read the full item, all 68 cited dependency statements, unit/chapter route, and cited SGA/Stacks sources. Checked all thirteen steps, coefficient scope, actual exchange/counit maps, edge cases, duplicates, and dependency backpaths. No repairs needed; all 45 declared tool uses accepted. Detailed findings are in review.md."
+ }
 }
