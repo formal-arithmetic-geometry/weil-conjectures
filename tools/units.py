@@ -4,6 +4,10 @@
 Usage:
   tools/units.py build     write dag/chapters/<sec>.json (16) and dag/units/<sk>.json (389) from the blueprint, keeping the
                            `realized` fields already recorded, and stamp every node in dag/nodes/ with `chapter` and `unit`
+  tools/units.py build --snapshot main-20261015 --unit <sk> [--unit <sk> ...]
+                          build only the selected units and their chapters from that snapshot; stamp only their nodes.
+                          Companion <sk>.proof.md files supply steps when _section.md has no inline proof.
+                          Changed files have timestamped .bak copies (empty for a newly created file).
   tools/units.py route     print the unit route of the targets: the units reached from the targets' units through `uses`,
                            in breadth-first order, with their chapters
   tools/units.py check     the checks (also run by check_dag.py): every node has a chapter and a unit that exist; a unit whose
@@ -26,7 +30,7 @@ Reachability also honors a unit's explicit `realized` binding when all its state
 are reached, even if those nodes' source paths place them in another unit. Empty or partial bindings do not count.
 """
 from __future__ import annotations
-import collections, json, pathlib, re, sys
+import argparse, collections, json, pathlib, re, sys, time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import dag_queue as dq  # noqa: E402
@@ -35,6 +39,7 @@ ROOT = dq.li.ROOT
 BP = ROOT / "literature/blueprint/master/blueprint"
 UNITS = ROOT / "dag/units"
 CHAPTERS = ROOT / "dag/chapters"
+BACKUP_SUFFIX = f".units-{time.time_ns()}.bak"
 
 
 def frontmatter(text: str) -> tuple[dict, str]:
@@ -67,14 +72,59 @@ def cut_steps(proof: str) -> list[dict]:
 
 
 def dump(path: pathlib.Path, d: dict):
+    text = json.dumps(d, ensure_ascii=False, indent=1) + "\n"
+    previous = path.read_bytes() if path.exists() else b""
+    if previous == text.encode():
+        return
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n")
+    path.with_name(path.name + BACKUP_SUFFIX).write_bytes(previous)
+    path.write_text(text)
 
 
-def build() -> None:
+def source_place(doc, units, chapters):
+    m = re.search(r"blueprint/[^/]+/blueprint/(sec-[^/]+)/(?:(sk-[^/]+)/)?[^/]+\.md$", doc)
+    if m and m.group(1) in chapters:
+        return m.group(1), (m.group(2) if m.group(2) in units else None)
+    return None
+
+
+def stamp_missing(d, units, chapters):
+    """Complete absent live-import bindings from source metadata; keep explicit live bindings."""
+    place = source_place(str((d.get("source") or {}).get("document") or ""), units, chapters)
+    if place:
+        for key, value in zip(("chapter", "unit"), place):
+            if not d.get(key) and value is not None:
+                d[key] = value
+    return d
+
+
+def node_place(i, nodes, files, units, chapters, seen=()):
+    d = nodes[i]
+    place = source_place(str((d.get("source") or {}).get("document") or ""), units, chapters)
+    if place:
+        return place
+    item = (d.get("created") or {}).get("item")
+    if item in nodes and item not in seen:
+        return node_place(item, nodes, files, units, chapters, seen + (i,))
+    return files[i].parent.name if files[i].parent.name in chapters else None, None
+
+
+def build(bp=None, selected=None) -> None:
+    bp = BP if bp is None else bp
+    if not bp.is_dir():
+        raise ValueError(f"blueprint snapshot is not available: {bp}")
+    sections = sorted(bp.glob("sec-*"))
+    if selected:
+        found = {sk.name for sec in sections for sk in sec.glob("sk-*") if (sk / "_section.md").is_file()}
+        if set(selected) - found:
+            raise ValueError(f"units absent from {bp}: {', '.join(sorted(set(selected) - found))}")
     old_units = {p.stem: json.loads(p.read_text()) for p in UNITS.glob("*.json")} if UNITS.is_dir() else {}
     nch = nun = 0
-    for sec in sorted(BP.glob("sec-*")):
+    for sec in sections:
+        sketches = [sk for sk in sorted(sec.glob("sk-*"))
+                    if (sk / "_section.md").is_file() and (not selected or sk.name in selected)]
+        if selected and not sketches:
+            continue
         fm, body = frontmatter((sec / "_section.md").read_text())
         key = re.search(r"key theorem:\s*(.*)", body)
         ref = re.search(r"reference:\s*(.*)", body)
@@ -83,12 +133,15 @@ def build() -> None:
             "key_theorem": key.group(1).strip() if key else None, "reference": ref.group(1).strip() if ref else None,
             "text": body.strip(), "source": str((sec / "_section.md").relative_to(ROOT))})
         nch += 1
-        for sk in sorted(sec.glob("sk-*")):
+        for sk in sketches:
             f = sk / "_section.md"
             if not f.is_file():
                 continue
             fm, body = frontmatter(f.read_text())
             stmt, _, proof = body.partition("\n## Proof")
+            companion = sk / f"{sk.name}.proof.md"
+            if not proof.strip() and companion.is_file():
+                _, proof = frontmatter(companion.read_text())
             rec = {"id": sk.name, "kind": "unit", "chapter": sec.name, "title": fm.get("title"), "lean": fm.get("lean", []),
                    "uses": fm.get("uses", []), "statement": stmt.strip(), "steps": cut_steps(proof) if proof.strip() else [],
                    "source": str(f.relative_to(ROOT))}
@@ -99,26 +152,20 @@ def build() -> None:
                 rec["realized"]["steps"] = (rec["realized"]["steps"] + [[] for _ in rec["steps"]])[:len(rec["steps"])]
             dump(UNITS / f"{sk.name}.json", rec); nun += 1
     # stamp the nodes
-    nodes = dq.load(); files = {p.stem: p for p in dq.nodes_dir().rglob("*.json")}
+    # build writes this repository. SHEAF_DAG is a read overlay and can point at
+    # the live project when this command runs in an isolated side project.
+    files = {p.stem: p for p in (ROOT / "dag/nodes").rglob("*.json")}
+    nodes = {i: json.loads(p.read_text()) for i, p in files.items()}
     units = {p.stem for p in UNITS.glob("*.json")}; chapters = {p.stem for p in CHAPTERS.glob("*.json")}
-
-    def place(i, seen=()):
-        d = nodes[i]
-        doc = str((d.get("source") or {}).get("document") or "")
-        m = re.search(r"blueprint/master/blueprint/(sec-[^/]+)/(?:(sk-[^/]+)/)?[^/]+\.md$", doc)
-        if m and m.group(1) in chapters:
-            return m.group(1), (m.group(2) if m.group(2) in units else None)
-        item = (d.get("created") or {}).get("item")
-        if item in nodes and item not in seen:
-            return place(item, seen + (i,))
-        return files[i].parent.name if files[i].parent.name in chapters else None, None
 
     n = 0
     for i, d in nodes.items():
-        ch, un = place(i)
+        ch, un = node_place(i, nodes, files, units, chapters)
+        if selected and un not in selected:
+            continue
         if d.get("chapter") != ch or d.get("unit") != un:
             d["chapter"], d["unit"] = ch, un
-            files[i].write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n"); n += 1
+            dump(files[i], d); n += 1
     print(f"{nch} chapters, {nun} units written; {n} nodes stamped")
 
 
@@ -237,7 +284,17 @@ def check(nodes=None, verbose=True) -> list[str]:
 def main() -> int:
     cmd = sys.argv[1] if len(sys.argv) > 1 else "check"
     if cmd == "build":
-        build(); return 0
+        parser = argparse.ArgumentParser(description="Build blueprint unit metadata")
+        parser.add_argument("--snapshot", default="master")
+        parser.add_argument("--unit", action="append", dest="selected")
+        args = parser.parse_args(sys.argv[2:])
+        if pathlib.Path(args.snapshot).name != args.snapshot or args.snapshot in (".", ".."):
+            parser.error("--snapshot must name a directory under literature/blueprint")
+        try:
+            build(ROOT / "literature/blueprint" / args.snapshot / "blueprint", set(args.selected) if args.selected else None)
+        except ValueError as e:
+            parser.error(str(e))
+        return 0
     if cmd == "route":
         for k, u, ch in route():
             print(f"{k}\t{u}\t{ch}")
