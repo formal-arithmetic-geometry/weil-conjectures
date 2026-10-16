@@ -1,6 +1,6 @@
 # Work queue
 
-20 items; claim with `tools/claim.py next <group> [--stage N]`.
+19 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (20)
+## Stage 3: modules to prove (19)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -27,7 +27,6 @@
 | `Sheaf.Paper.LatticeSheafLocallyConstant` | 10 | 1 | proof |
 | `Sheaf.Paper.RingedTopoiTensorComparisonConstruction` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing` | 11 | 1 | proof |
-| `Sheaf.Algebra.Homology.RingedToposAcyclicKFlatPullback` | 12 | 1 | proof |
 | `Sheaf.Algebra.Homology.RingedToposAdaptedFlatResolution` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckEtaleRelativeSectionColimit` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent` | 40 | 1 | proof |
