@@ -27,7 +27,9 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 open CategoryTheory CategoryTheory.Limits TopologicalSpace in
 set_option backward.isDefEq.respectTransparency false in
-private noncomputable def finiteFreeIso
+/-- A finite biproduct of copies of a sheaf of modules `A` isomorphic to the unit is
+isomorphic to the free sheaf of modules on a finite index type of the same cardinality. -/
+noncomputable def finiteFreeIso
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{u})
     [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]

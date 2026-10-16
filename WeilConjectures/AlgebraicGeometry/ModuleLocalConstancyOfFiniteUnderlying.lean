@@ -50,10 +50,11 @@ This argument applies to noncommutative rings with left scalar multiplication. -
 theorem module_localConstancy_of_finite_underlying
     {Y : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hF : IsFiniteLocallyConstantEtaleSheafOfSets
+    (hF : IsFiniteLocallyConstantSheafOfTypes
       ((sheafForget Y.smallEtaleTopology).obj F)) :
     IsLocallyConstantSheaf F := by
   rcases hF.1 with ⟨𝒰, h𝒰⟩
-  exact module_operationCompatibleCover F _ rfl hF.2 𝒰 h𝒰
+  exact module_operationCompatibleCover F _ rfl (fun Ω _ _ s ↦ hF.finite_sheafFiber Ω s)
+    𝒰 h𝒰
 
 end AlgebraicGeometry.Scheme
