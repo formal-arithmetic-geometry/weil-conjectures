@@ -377,5 +377,23 @@
   "group": "Q110",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-e4348465f (reviewer sub-agent of L); spot-checked: I read the whole delivery and the mathematics is correct. Repaired one citation: step 1's source said 'Tag 05QL (definition-exact-functor-triangulated-categories)', but 05QL is derived-equation-rotate; the correct tag is 014V. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-left-complete-heart-upper-bound.json. No other change and no new nodes. Checks: the statement matches the use in blueprint main-20261015 det-prop-int-compactness-direct-sums proof (2) and unit sk-prop-int-compactness step 4, and the parent applies it with T=F, S=IndCons, c=2d+1. Step 1: shift substitution with k=-i gives the bound i+c. Step 2: lower-truncation triangle with parameter -a matches Stacks 08J5 derived.tex:4076; the base case a=b+1 is acyclic, hence zero in D(A); the induction is finite. Step 3: the fibre is bounded above by c-n-1, so H^r(T u_n) is an isomorphism for n>=max(0,c-r). Step 4: lem-weil-derived-limit-products-core (07KC, l.10475) gives products in D(A) and D(B), and lem-pc-homotopy-limit-map carries the Roos triangle (08TC, l.10442) through T. Step 5: the long exact segment has the right degree of the connecting map, and H^j of the product is the product of the H^j, which is 0 by step 2. Step 6: the explicit recursion gives a section of 1-s, with N=max(0,c-j+1). Step 7: exactness gives H^j(TK)=0. Left completeness is correctly a hypothesis; 0H72 (l.10558) does not assert it. Small cases checked: T=id, T=[-c] for both signs of c, K=0, b<0, an unbounded negative tail. Not a duplicate of det-proper-unbounded-window-*, det-finite-window-unbounded or lem-kun-site-truncation-derived-limit. Accepted tool uses: lem-pc-derived-lower-truncation-step-triangle, lem-pc-homotopy-limit-map, lem-weil-derived-limit-products-core. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.LeftCompleteHeartUpperBound",
+  "declaration": "DerivedCategory.upperBound_of_heart_of_leftComplete",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/LeftCompleteHeartUpperBound.lean",
+  "statement": "theorem upperBound_of_heart_of_leftComplete (A : Type uA) [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A] (B : Type uB) [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] [HasCountableProducts A] [CountableAB4Star A] [HasCountableProducts B] [CountableAB4Star B] (hcomplete : ∀ (K : DerivedCategory A) [HasProduct (fun n : ℕ ↦ (TStructure.t.truncGE (-(n : ℤ))).obj K)], ∃ δ : (∏ᶜ (fun n : ℕ ↦ (TStructure.t.truncGE (-(n : ℤ))).obj K)) ⟶ K⟦(1 : ℤ)⟧, IsDerivedLimitTriangle (fun n : ℕ ↦ (TStructure.t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app K) K (Pi.lift (fun n : ℕ ↦ (TStructure.t.truncGEπ (-(n : ℤ))).app K)) δ) (T : DerivedCategory A ⥤ DerivedCategory B) [T.CommShift ℤ] [T.IsTriangulated] [∀ (I : Type) [Countable I], PreservesLimitsOfShape (Discrete I) T] (S : Set A) (c : ℤ) (hheart : ∀ M : A, M ∈ S → ∀ j : ℤ, c < j → IsZero ((homologyFunctor B j).obj (T.obj ((singleFunctor A 0).obj M)))) (b : ℤ) (K : DerivedCategory A) (hS : ∀ i : ℤ, (homologyFunctor A i).obj K ∈ S) (hbound : ∀ i : ℤ, b < i → IsZero ((homologyFunctor A i).obj K)) : ∀ j : ℤ, b + c < j → IsZero ((homologyFunctor B j).obj (T.obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd838da21",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Checked all ten parts of the statement against the node and the dependency declarations. IsDerivedLimitTriangle uses 1-s with pr_n∘s=f_n∘pr_{n+1}; the truncation transitions run from the -(n+1) to the -n truncation; the first Roos arrow is fixed to the canonical maps and only δ is existential. The universally quantified HasProduct is not vacuous because derivedCategory_hasCountableProducts holds in all universes. CountableAB4Star matches exact countable products. PreservesLimitsOfShape over countable Type indices means preserving products with their projections. S is an unrestricted Set A. The conclusion is exactly j>b+c. Edge cases checked: T=id, T=shift, T=0, K=0, S empty or not iso-closed, negative b and c, unbounded tail. Gates: no definition, one sorry, source and blueprint docstrings present, statement verbatim, both report sections present, no duplicate found. nt_compile.py on the snapshot exited 0 with no error or warning lines (it printed no sorry warning either). No findings."
  }
 }
