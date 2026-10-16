@@ -221,5 +221,24 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q49-de66f2f4f (reviewer sub-agent of L); spot-checked: Read the complete item and report, all cited statements, and source locations. All four steps check: cyclicity, inverse Frobenius exponents, rank-one Tate module, and compatible scalar actions. Accepted both declared generic tools; found no cycle, duplicate, target weakening, or coefficient-category identification. Small cases passed. Full review written to review.md; no corrections needed."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.FrobeniusRootsOfUnityPower",
+  "declaration": "WeilConjectures.FiniteFieldDatum.frobenius_rootsOfUnity_power",
+  "file": "lean/Sheaf/NumberTheory/FrobeniusRootsOfUnityPower.lean",
+  "statement": "theorem frobenius_rootsOfUnity_power (D : WeilConjectures.FiniteFieldDatum.{u}) (N : ℕ) (hN : 1 ≤ N) (hNp : N.Coprime D.p) : (IsCyclic (rootsOfUnity N D.k) ∧ Nat.card (rootsOfUnity N D.k) = N ∧ ∀ σ : D.k ≃+* D.k, Set.BijOn (Units.map σ.toRingHom.toMonoidHom) (rootsOfUnity N D.k) (rootsOfUnity N D.k)) ∧ ((∀ ζ : rootsOfUnity N D.k, (@FiniteField.frobeniusAlgEquivOfAlgebraic D.k₀ _ (Fintype.ofFinite D.k₀) D.k _ _ _) ((ζ : D.kˣ) : D.k) = ((ζ : D.kˣ) : D.k) ^ D.q) ∧ (∃ q' : ℤ, Int.ModEq (N : ℤ) ((D.q : ℤ) * q') 1) ∧ ∀ q' : ℤ, Int.ModEq (N : ℤ) ((D.q : ℤ) * q') 1 → ∀ ζ : rootsOfUnity N D.k, Units.map (@FiniteField.frobeniusAlgEquivOfAlgebraic D.k₀ _ (Fintype.ofFinite D.k₀) D.k _ _ _).symm.toRingHom.toMonoidHom (ζ : D.kˣ) = (ζ : D.kˣ) ^ q') ∧ (∀ (ℓ : ℕ) [Fact ℓ.Prime], ℓ ≠ D.p → Nonempty (AddCommGroup.tateModule ℓ (Additive D.kˣ) ≃ₗ[ℤ_[ℓ]] ℤ_[ℓ]) ∧ ∃ u : ℤ_[ℓ]ˣ, (u : ℤ_[ℓ]) = (D.q : ℤ_[ℓ]) ∧ ∀ t : AddCommGroup.tateModule ℓ (Additive D.kˣ), AddCommGroup.tateModule.map (Units.map (@FiniteField.frobeniusAlgEquivOfAlgebraic D.k₀ _ (Fintype.ofFinite D.k₀) D.k _ _ _).toRingHom.toMonoidHom).toAdditive t = (u : ℤ_[ℓ]) • t ∧ AddCommGroup.tateModule.map (Units.map (@FiniteField.frobeniusAlgEquivOfAlgebraic D.k₀ _ (Fintype.ofFinite D.k₀) D.k _ _ _).symm.toRingHom.toMonoidHom).toAdditive t = (↑(u⁻¹) : ℤ_[ℓ]) • t)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "All three clauses, with the published finite-field datum and Mathlib arithmetic Frobenius, its inverse, and rootsOfUnity. The cyclotomic Tate module is written using its upstream defining expression AddCommGroup.tateModule ℓ (Additive D.kˣ), exposing its existing canonical module structure. No new definitions or instances."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8d34c05ba",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, report sections, and per-file compiler evidence verified; no fixes needed."
  }
 }
