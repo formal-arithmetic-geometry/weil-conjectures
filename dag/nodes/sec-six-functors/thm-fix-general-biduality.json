@@ -203,5 +203,30 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-aeeec0140 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources; the canonical double-dual composite and finite-coefficient comparison hypotheses check out. Corrected two recording faults: missing statement-definition citations and incomplete unit realization across coefficient stages. Whole corrected JSON files are under fixes/; concrete checks and accepted tool uses are in review.md. No target or theorem statement was weakened.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-de1ce422b",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all dependencies, sources, canonical maps, universes, edge cases, and maintainer gates. All three modules reproduced cleanly through scompile.py in sandbox and library views. No fixes required; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteStageVerdierBiduality",
+  "declaration": "WeilConjectures.finite_stage_verdier_biduality",
+  "declarations": [
+   "CategoryTheory.IsExactAntiEquivalenceOn",
+   "AlgebraicGeometry.ProEtale.HasInvertibleBidualityOn",
+   "WeilConjectures.FiniteProEtaleVerdierBiduality",
+   "WeilConjectures.finite_stage_verdier_biduality"
+  ],
+  "statement": "theorem finite_stage_verdier_biduality (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of D.k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] : FiniteEtaleGeometricBiduality l E n hn Y aY ∧ FiniteProEtaleVerdierBiduality l E n hn Y aY",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-16",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/FiniteStageVerdierBiduality.lean",
+  "note": "Both small sites, actual finite quotient coefficients, exact anti-equivalence, and invertibility of the canonical evaluation transpose. Reuses the published FiniteEtaleGeometricBiduality conclusion and sfFiniteExceptionalFixed with the existing NagataCompactification; no duplicate etale conclusion or exceptional functor. The pro-etale domain is the canonical fixed-scalar presentation of intrinsic finiteTorConstructible. The current published canonical pairing and bidualityMap projections are retained with a definitionally identical pro-etale import adaptation for the finite-coefficient framework."
  }
 }

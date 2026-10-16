@@ -85,25 +85,25 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.FiniteTorAmplitudeSites",
-  "declaration": "WeilConjectures.finiteTorConstructibleEtale",
+  "module": "Sheaf.Paper.FiniteTorAmplitudeProEtaleModule",
+  "declaration": "WeilConjectures.finiteTorConstructibleProEtaleModule",
   "declarations": [
-   "WeilConjectures.finiteTorConstructibleEtale"
+   "WeilConjectures.finiteTorConstructibleProEtaleModule"
   ],
-  "statement": "def finiteTorConstructibleEtale (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) : ObjectProperty (Etale.DerivedCategoryModule (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) Y)",
+  "statement": "def finiteTorConstructibleProEtaleModule (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) : ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)))))",
   "branch": "newtargets-dag",
-  "by": "Q22",
+  "by": "Q11",
   "date": "2026-10-16",
   "existing": false,
-  "file": "lean/Sheaf/Paper/FiniteTorAmplitudeSites.lean",
-  "note": "§1(B): the recorded intrinsic pro-etale, integral and field-stage declarations in Sheaf.Paper.FiniteTorAmplitude do not give the ordinary-etale finite-level predicate required here. This module adds finiteTorConstructibleEtale using the recorded isBoundedConstructible and hasTorAmplitudeIn on ordinary-etale ModuleCat-valued sheaves. Those original higher-stage declarations remain unchanged in their owning module; importing that unused module here collides with the published pairing through the legacy and FiniteCoefficient pro-etale UpperLowerStar notation declarations. No alternative pro-etale definition is introduced. The coefficient finiteness module is publicly imported, and its positive-level Finite instance has an explicit type."
+  "file": "lean/Sheaf/Paper/FiniteTorAmplitudeProEtaleModule.lean",
+  "note": "§1(B): the recorded FiniteTorAmplitudeSites gives only the etale finite-stage domain, not its fixed-scalar pro-etale presentation. This new module publicly imports that published etale predicate and the unchanged intrinsic finite/integral/field predicates. It adds only the canonical fixed-scalar pro-etale presentation through finiteCoefficientIntrinsicRealization.mapDerivedCategory, preserving intrinsic constructibility and the all-module Tor test. The old etale module and its import closure remain unchanged, avoiding legacy/finite-coefficient import collisions in its existing consumers."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-37322fd57",
-  "group": "Q22",
+  "reviewer": "NT-stage2-Codex-de1ce422b",
+  "group": "Q11",
   "result": "pass",
-  "note": "Reviewed node/source, all seven dependencies, ordinary-etale declarations, universes, edge cases, docstrings, canonical pairing map, and report sections; compile and dry-run evidence are clean with no defects."
+  "note": "Wrote review.md. Checked immutable statements, all dependencies, sources, canonical maps, universes, edge cases, and maintainer gates. All three modules reproduced cleanly through scompile.py in sandbox and library views. No fixes required; branch unchanged."
  }
 }
