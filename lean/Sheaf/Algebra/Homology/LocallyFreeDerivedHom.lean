@@ -8,7 +8,6 @@ module
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomology
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
-public import Mathlib.Algebra.Homology.CochainComplexPlus
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 import Mathlib.Algebra.Homology.ConcreteCategory
