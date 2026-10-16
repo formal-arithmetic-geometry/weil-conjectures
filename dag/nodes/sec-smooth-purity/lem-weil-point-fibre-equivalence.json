@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-weil-finite-coefficient-point",
-   "place": "unspecified",
+   "place": "Statement of def-weil-finite-coefficient-point (order 1509): the first display asserting the torsion, integral and rational fibre equivalences and the final display asserting the common-stage Qlbar equivalence.",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The fibre functor at the geometric point is an equivalence",
@@ -28,9 +28,243 @@
   "def-weil-point-fd-complexes",
   "def-weil-point-fd-qlbar-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=\\mathcal O_E$, $\\pi=\\varpi_E$, $A_n=A/\\pi^n$ and $B=\\widehat{\\mathcal O}_{E,s}$. The coefficient DVR theorem makes $A$ a domain with every ideal principal, hence Noetherian, and with finite residue field. Choosing a finite set of residue representatives and successively writing $x=r_0+\\pi x_1$ shows that every element of $A_n$ is represented by $\\sum_{j=0}^{n-1}r_j\\pi^j$; thus $A_n$ is finite and Noetherian. The continuous-coefficient description, applied to the noetherian scheme $s$, identifies $\\Gamma(s,B)$ canonically with $C(\\{*\\},A)=A$, preserving constants and all quotient projections. The completed-constant reduction theorem gives flatness of $B$ over $\\underline A$ and $B\\otimes^L_{\\underline A}\\underline{A_n}\\simeq\\underline{A_n}$. Indeed the resolution $[A\\xrightarrow{\\pi^n}A]$ of $A_n$ becomes $[B\\xrightarrow{\\pi^n}B]$. Constant-sheaf exactness and this flatness make its negative cohomology zero. Exactness of sections therefore gives $\\Gamma(s,\\underline{A_n})=A_n$, with the canonical map from constant values as the identification. No identification of $B$ with the discrete constant sheaf $\\underline A$ is made.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J and 093M, lemma-constant-exact and lemma-completion-flat; continuous coefficient identification as in Bhatt-Scholze Lemma 6.8.2"
+   }
+  },
+  {
+   "text": "For either $(R,\\mathcal R)=(A_n,\\underline{A_n})$ or $(A,B)$ define $L_{\\mathcal R}(M)=\\mathcal R\\otimes_{\\underline R}\\underline M$ for an $R$-module $M$. Here constant sheaves and sheaf tensor products have exactly their existing definitions. There is an adjunction $L_{\\mathcal R}\\dashv\\Gamma(s,-)$: a sheaf map $u:L_{\\mathcal R}M\\to F$ gives $m\\mapsto u_s(1\\otimes m)$; conversely $t:M\\to F(s)$ gives, before sheafification, $b\\otimes m\\mapsto b\\,t(m)|_U$ on every object $U$, and then extends uniquely to the sheaf tensor product. These constructions are inverse and natural; the balancing relation is precisely $R$-linearity of $t$. Constant sheafification is exact by the arbitrary-site module-sheafification theorem. Thus $L_{\\underline{A_n}}$ is exact, and $L_B$ is exact by flatness in step 1. Both right adjoints are exact by the point-sections theorem. For any finitely presented $R$-module $M$, a presentation $R^a\\to R^b\\to M\\to0$ and exactness give $\\Gamma(s,L_{\\mathcal R}M)\\cong\\operatorname{coker}(R^a\\to R^b)=M$. On free generators this is $m\\mapsto1\\otimes m$, so the isomorphism is precisely the adjunction unit, not an arbitrary identification.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EI and 093M; the displayed adjunction and finite-presentation calculation are written out from the sheafification and tensor definitions"
+   }
+  },
+  {
+   "text": "Apply the exact-functor derived factorization to the two exact adjoints in step 2. They act termwise, commute with every shift and preserve distinguished triangles. Their termwise unit and counit are chain maps; naturality makes them commute with differentials, and the two triangle identities hold degree by degree. They descend through the localization, with the same identities, to an adjunction on the unbounded derived categories. Exact-functor preservation of homology identifies the cohomology of the unit $M\\to\\Gamma(s,L_{\\mathcal R}M)$ with the underived unit at $H^i(M)$. Consequently this derived unit is an isomorphism whenever all $H^i(M)$ are finitely presented, by the cohomological isomorphism criterion. In particular it is an isomorphism on $D^b_{\\mathrm{fin}}(A_n)$ and on $D^b_{\\mathrm{fg}}(A)$: finite modules over the finite Noetherian ring $A_n$, and finitely generated modules over the Noetherian ring $A$, are finitely presented. This argument uses the descended termwise unit and counit themselves, so their normalization is fixed.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "def-weil-point-finite-cohomology-complexes",
+    "def-weil-point-fg-complete-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; termwise adjunction identities; homology compatibility from homology.tex Tag 010N"
+   }
+  },
+  {
+   "text": "For a constructible $A_n$-module sheaf $F$ on $s_{\\mathrm{proet}}$, finite-ring constructible origin gives $F\\cong\\nu_s^*G$ with $G$ constructible on $s_{\\mathrm{et}}$. Every nonempty locally closed subscheme of $s$ is $s$, since a field has no nontrivial ideals and its spectrum has one point. Thus $G$ is finite locally constant. The algebraically closed etale-point theorem identifies $G$ naturally with the constant sheaf of $G(s)$; the same isomorphism respects addition and every scalar action, by its naturality in maps of underlying sheaves. Its identity stalk is $G(s)$, and the finite-locally-constant module-values theorem explicitly turns its finite constant-value trivializations into finite geometric stalks. Hence $G(s)$ is finite. Pullback $\\nu_s^*$ carries constant module sheaves to constant module sheaves: both composites are left adjoint to sections, since sections of $\\nu_{s,*}F$ are $F(s)$ by the comparison-morphism definition; equivalently their maps send each constant value to that same value. The finite comparison unit gives $G(s)\\cong(\\nu_s^*G)(s)=F(s)$. It follows that the canonical evaluation counit $\\underline{F(s)}\\to F$ is an isomorphism. Conversely a constant finite module sheaf is locally constant and has finite geometric stalks by the constant-stalk theorem, so is constructible. In particular sections detect zero sheaves within this constructible subcategory.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "def-weil-pbc-site-comparison-morphism",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-proetale-constant-sheaf-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AK and 099Y, constructible and finite locally constant comparison; etale-cohomology.tex Tag 03P5 for the geometric point"
+   }
+  },
+  {
+   "text": "For $M\\in D^b_{\\mathrm{fin}}(A_n)$, exactness of $L_{\\underline{A_n}}$ identifies its cohomology sheaves with the constant finite modules $\\underline{H^i(M)}$; these vanish outside a finite interval and are constructible by step 4. Thus $L_{\\underline{A_n}}M\\in D^b_c(s,A_n)$. Conversely sections have the asserted target by point-sections finiteness. For $K\\in D^b_c(s,A_n)$, the cohomology maps of the derived counit $L_{\\underline{A_n}}\\Gamma(s,K)\\to K$ are exactly the evaluation counits of its cohomology sheaves, by exact-functor homology compatibility. Step 4 makes them isomorphisms, and the derived isomorphism criterion makes this counit an isomorphism. Together with the unit in step 3 this proves the torsion equivalence. It also proves the detection statement used below: a bounded constructible torsion complex with zero section complex is zero. Its exactness and shift compatibility are already those of termwise sections in the point-sections theorem.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-point-sections-finiteness",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "first functor in the first equivalence display; explicit adjunction proof using steps 1-4"
+   }
+  },
+  {
+   "text": "Every bounded $A$-complex with finitely generated cohomology is perfect. To verify the needed hypotheses explicitly, take a finitely generated module $N$. The Noetherian finite-free-resolution theorem gives $A^{r_1}\\to A^{r_0}\\to N\\to0$. Its kernel $J\\subset A^{r_0}$ is finitely generated, being the image of the first finite free term, and is torsion free because $A$ is a domain and $A^{r_0}$ is torsion free. The finite torsion-free DVR theorem makes $J$ finite free. Thus $0\\to J\\to A^{r_0}\\to N\\to0$ is a bounded finite-free resolution. The perfect-cohomology assembly theorem now gives a bounded finite-projective representative $Q$ for every $M\\in D^b_{\\mathrm{fg}}(A)$. The argument includes $N=0$ and does not impose finite Tor dimension on modules over $A_n$; those rings may be singular.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-sc-dvr-fg-torsionfree-free",
+    "lem-sf-perfect-cohomology-assembly",
+    "def-weil-point-fg-complete-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0AUW, lemma-dedekind-torsion-free-flat (3), and 066U, lemma-cohomology-perfect"
+   }
+  },
+  {
+   "text": "For any bounded finite-projective $A$-complex $Q$, $L_BQ=B\\otimes_{\\underline A}\\underline Q$ is in $D^b_c(s,A)$ by the integral stratified-perfect characterization, using its explicit comparison with the category of derived-complete integral coefficients in the statement. Its hypotheses hold: $s$ is noetherian, of dimension zero, and $\\ell$ is invertible in $k$ because $\\ell\\ne p$; use the single stratum $s$ and the identity trivializing cover. This is its condition (ii), with the specified completed sheaf $B$. In particular this assertion includes completeness and the reductions required in the present definition, rather than silently identifying two integral categories. The reduction calculation of step 1 also gives $L_BQ\\otimes_B^L\\underline{A_n}\\cong\\underline{Q\\otimes_A A_n}$: for a finite projective term take a direct summand of a finite free term and use the same quotient map. These reductions have bounded finite cohomology in the fixed term interval of $Q$, independent of $n$. Thus step 6 shows $L_B$ carries every object of $D^b_{\\mathrm{fg}}(A)$ into the integral source. Point-sections finiteness carries the integral source into $D^b_{\\mathrm{fg}}(A)$. The adjunction of step 3 therefore restricts to these full subcategories, and its unit is an isomorphism there.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-point-sections-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1 and Propositions 6.6.11, 6.8.11(3), as specialized and compared in the cited characterization; sites-modules.tex Tag 093M for the explicit reductions"
+   }
+  },
+  {
+   "text": "Sections are conservative on the integral source as well. If $C\\in D^b_c(s,A)$ and $\\Gamma(s,C)=0$, compute its $n$-th reduction using the finite free resolution $[B\\xrightarrow{\\pi^n}B]\\to\\underline{A_n}$ from step 1. Tensoring this resolution with a K-flat representative of $C$ gives the cone of multiplication by $\\pi^n$; the K-flat property ensures that tensoring the resolution quasi-isomorphism remains a quasi-isomorphism. Hence, after restriction of scalars, $C\\xrightarrow{\\pi^n}C\\to C_n\\to C[1]$ is distinguished. Exact sections show $\\Gamma(s,C_n)=0$. Its actual $A_n$-coefficient reduction is bounded constructible by the integral definition, so step 5 makes it zero (forgetting its scalar structure does not change its cohomology). All reductions of $C$ therefore vanish. Its derived-completeness Roos triangle is $C\\to0\\to0\\to C[1]$, so $C=0$, for example by the long exact cohomology sequence and the cohomological isomorphism criterion. For arbitrary integral $K$, form the cone $C$ of the restricted counit $L_B\\Gamma(s,K)\\to K$. It is in the integral source by its triangulated-subcategory theorem. Applying sections makes this counit an isomorphism by the unit isomorphism and the adjunction triangle identity; thus $\\Gamma(s,C)=0$. The preceding argument gives $C=0$, hence the counit is an isomorphism. This proves the integral equivalence, with the exactness and shift comparisons of sections.",
+   "uses": [
+    "def-weil-integral-derived-reduction",
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-complete",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "second functor in the first display; reduction argument using sites-modules.tex Tag 093M and the prescribed completeness Roos triangle"
+   }
+  },
+  {
+   "text": "For the rational stage first check full faithfulness for the specified raw localization. Put $M=\\Gamma(s,K)$, $N=\\Gamma(s,K')$ for integral objects. The integral equivalence is $A$-linear: all its maps above are maps of $A$-modules and the section action is the canonical one. Thus it identifies $\\operatorname{Hom}(K,K')$ with $\\operatorname{Hom}_{D(A)}(M,N)$ as $A$-modules. Both $M,N$ are perfect by step 6. Apply perfect RHom base change to $A\\to E$ and the first argument $M$. Here $E=A[1/\\pi]$ by the uniformizer localization theorem and is flat by localization flatness. Consequently taking $H^0$ of that base-change isomorphism, using flat-tensor exactness, gives the canonical bijection $\\operatorname{Hom}_{D(A)}(M,N)\\otimes_AE\\cong\\operatorname{Hom}_{D(E)}(M\\otimes_AE,N\\otimes_AE)$. The identification $H^0(R\\operatorname{Hom}(M,N))=\\operatorname{Hom}_{D(A)}(M,N)$ is precisely the K-injective Hom-complex theorem applied on the one-object ringed site (and likewise for $E$). The base-change theorem specifies its map to be the scalar extension of the functor-induced Hom map; hence this bijection sends $f\\otimes a$ to $a(f\\otimes E)$, exactly the morphism map defining the rational fibre functor. The rationalization definition gives the left-hand Hom groups, so this proves full faithfulness without adjoining idempotents.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-l-adic-integers-localization-uniformizer",
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-base-change-rhom-perfect",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-into-kinjective-local",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A6A, lemma-base-change-RHom (1), with its preceding canonical-map construction; algebra.tex Tag 00HT"
+   }
+  },
+  {
+   "text": "For $V\\in D^b_{\\mathrm{fd}}(E)$ choose a representing complex. For each of its finitely many nonzero $H^i(V)$ choose a finite basis and lift each basis vector to a cycle in degree $i$. The basis theorem supplies these bases; the lifts exist by the definition of cohomology as cycles modulo boundaries. Sending the standard basis in degree $i$ to these cycles defines a chain map from the zero-differential bounded finite free complex $P_E=\\bigoplus_iE^{d_i}[-i]$ to the representative of $V$. It induces the chosen isomorphism on every cohomology module, so is a quasi-isomorphism. Let $P_A=\\bigoplus_iA^{d_i}[-i]$ with zero differential. Step 7 puts $L_BP_A$ in the integral source, and step 3 identifies its sections with $P_A$; after rationalization its image is $P_E\\cong V$. This proves essential surjectivity, including $V=0$ by the empty sum. The rational functor commutes with shifts and preserves distinguished triangles: sections does so, and flat tensoring with $E$ is an exact functor and hence has the exact derived factorization. Every distinguished triangle in the raw rationalization is isomorphic to an image of an integral distinguished triangle by its definition. Thus the specified rational fibre functor is an exact equivalence.",
+   "uses": [
+    "def-weil-point-fd-complexes",
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "third functor in the first equivalence display; explicit finite-basis cycle lift and integral lattice"
+   }
+  },
+  {
+   "text": "Finally use exactly the two common-stage categories in the statement, not a separately realized category of all $\\Qlb$-complexes. For source objects $(E,K),(E',K')$ a map is represented at a common coefficient field $L$. The section scalar-extension theorem identifies its image with conjugation by the canonical comparisons $\\varphi_{L/E},\\varphi_{L/E'}$. At each $L$ the rational equivalence just proved gives a bijection on these Hom groups. These bijections commute with transition maps, by the theorem's identity and three-field composition equations. They therefore give a bijection on the displayed Hom colimits: lift a representative at $L$ using the stage bijection for surjectivity; if two images agree, they agree at a common later stage, and stage injectivity makes the original representatives agree there. Any target object $(E,V)$ has a source preimage $(E,K)$ by rational essential surjectivity at that very field. For shifts use the formula in the section scalar-extension theorem: the comparison is the inverse of the composite of the canonical sections-tensor map with sections of the canonical finite-free completed-extension comparison. Write $R_F=\\widehat{\\mathcal O}_{F,s}$ for $F=E,L$. Choose a K-flat resolution $P\\to K$ with flat terms, as in step 8. The completed-extension comparison statement specifies $\\chi$ on this resolution: put $D=\\prod_j\\operatorname{Res}^L_j(P\\otimes_{R_E}(\\mathcal O_L/\\varpi_L^j)_s)$, write $f=1-s$ for its tower endomorphism, and let $c:P\\otimes_{R_E}R_L\\to D$ be the compatible quotient maps. In the reordered coordinates $\\operatorname{Cone}(f)[-1]^r=D^r\\oplus D^{r-1}$ the differential is $(x,y)\\mapsto(dx,-dy-fx)$, and $\\chi$ is $z\\mapsto(c(z),0)$. Shifting by $m$ replaces the tower differentials by $(-1)^m d$. The cone shift comparison from the completion of $P[m]$ to the completion of $P$ shifted by $m$ is $(x,y)\\mapsto(x,(-1)^m y)$: substitution in that differential gives the same result on both routes. It sends $(c(z),0)$ to $(c(z),0)$, so $\\chi$ commutes with the specified shifts. The sections-tensor comparison $\\theta$ is induced degreewise by $a\\otimes b\\mapsto a\\otimes b$; its two shifted differentials are both multiplied by $(-1)^m$, so it too commutes with shifts. Exact sections preserves these equalities of chain maps. Thus $\\Gamma(\\chi)\\circ\\theta$ and its inverse $\\varphi$ commute with shifts. Naturality and independence of the K-flat resolution carry the equation to the derived categories, and tensoring with $L$ preserves it at the rational stage. It thus respects the specified shift comparisons, and the tower identity makes this independent of the common-stage representative. Every distinguished source triangle is isomorphic to a stage triangle. Its image, after the same scalar comparisons at the vertices and the stated shift comparison at the last arrow, is the image of the distinguished stage triangle under the exact rational functor. It is distinguished by the target's definition. This proves the fourth exact equivalence. All four functors used here are the functors of the fixed fibre definition, including its scalar-extension conjugations.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-point-fd-qlbar-category",
+    "lem-weil-point-sections-scalar-extension",
+    "def-weil-finite-coefficient-point",
+    "lem-pc-kflat-resolution",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-integral-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "last paragraph and second equivalence display; explicit common-stage Hom, shift, and triangle argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "def-weil-point-finite-cohomology-complexes",
+  "def-weil-point-fg-complete-complexes",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "def-weil-pbc-site-comparison-morphism",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "def-weil-finite-torsion-constructibility",
+  "lem-weil-point-sections-finiteness",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sf-perfect-cohomology-assembly",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "def-weil-derived-complete",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "lem-weil-pbc-localization-flat",
+  "lem-pc-base-change-rhom-perfect",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-into-kinjective-local",
+  "def-weil-finite-coefficient-point",
+  "def-weil-point-fd-complexes",
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-point-fd-qlbar-category",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-integral-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "The four equivalence assertions; complete adjunction, reduction, perfect-base-change and common-stage argument, using the cited literature-backed DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -45,10 +279,52 @@
    "results": "equivalences between derived categories of abelian categories (e.g. FullyFaithful.lean), nothing on sheaves on a point",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at an algebraically closed geometric point gives an exact equivalence from bounded constructible pro-etale complexes to bounded complexes of finite modules, and likewise for derived complete adic and rational coefficients",
+   "results": "8 hits: Condensed.profiniteSolid, Condensed.profiniteSolidCounit, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, LightCondMod.isDiscrete_tfae, Profinite.NobelingProof.succ_exact, CondensedMod.IsSolid.isIso_solidification_map, Condensed.profiniteSolidification, AdicCompletion.map_exact; ",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: returned declarations do not give the four constructible pro-etale fibre equivalences"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEtale\", \"IsEquivalence\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: returned declarations do not give the four constructible pro-etale fibre equivalences"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*equiv|equiv.*proetale|derived.*complete",
+   "results": "0 hits: ;  (directory: Mathlib/AlgebraicGeometry/Sites)",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: returned declarations do not give the four constructible pro-etale fibre equivalences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The bounded constructible derived category of a geometric point with l-adic coefficients is equivalent to finite dimensional complexes of vector spaces",
+   "results": "8 hits: LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, LightCondMod.LocallyConstant.functorIsoDiscreteComponents, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, CondensedMod.LocallyConstant.functorIsoDiscrete, LightCondMod.LocallyConstant.functorIsoDiscrete, LightCondMod.isDiscrete_tfae, CondensedMod.isDiscrete_tfae, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂; ",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: returned declarations do not give the four constructible pro-etale fibre equivalences"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived constructible pro-etale sheaves on an algebraically closed point are equivalent to finite module complexes",
+   "results": "8 hits: AlgebraicGeometry.stalkClosedPointIso, SheafOfModules.Finite.hasFiniteLimits, Condensed.lanSheafProfinite, SheafOfModules.IsFiniteType.mk, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, SheafOfModules.IsFiniteType, LightCondensed.lanLightCondSet, SheafOfModules.IsFinitePresentation.mk; ",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: returned declarations do not give the four constructible pro-etale fibre equivalences"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|derived|IsEquivalence",
+   "results": "0 hits: ;  (directory: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean)",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: returned declarations do not give the four constructible pro-etale fibre equivalences"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +347,154 @@
   "unreachable"
  ],
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-point-fibre-equivalence",
+  "worker": "stage1",
+  "summary": "Wrote eleven proof steps for all four specified fibre functors, using only existing nodes. Constructed the exact constant/sections adjunction and its fixed unit and counit, proved the torsion equivalence on constructible hearts, reconstructed the integral counit via every finite reduction, used finite projective models over the DVR and canonical perfect RHom base change for raw rationalization, and verified the common-stage Hom, shift and triangle argument. No statement correction, new nodes or new Mathlib leaves. Read the parent blueprint and the actual Stacks and Bhatt-Scholze sources; no exact slopmaster2 project declaration covers the item. Revalidated after the merge-lock return against the 2026-10-16 shared DAG: all 47 cited statements and 66 verbatim citations are unchanged, cited ids remain unmerged, and the refreshed dependency closure has no return path to this item. Second reading: expanded step 11 using the actual strict product-cone completion map and its shift sign, with direct citations to the comparison and scalar-extension definitions.",
+  "blueprint": "The ancestor def-weil-finite-coefficient-point, order 1509, has no proof and asserts these equivalences in two displays. Steps 1-5 prove the first displayed torsion functor, steps 6-8 the integral functor, steps 9-10 the rational functor, and step 11 the final common-stage display. The unit sk-def-sf-admissible has no proof steps; no unit realization fields or chapter routes change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "General tool: The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "General tool: Continuous coefficient sheaves, localization and restriction to immersions. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "General tool: Completed constant coefficients and finite reduction. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-constant-module-section-properties",
+    "why": "General tool: Constant section properties. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "why": "General tool: Presheaves of R-modules on a site: sectionwise kernels and cokernels, and exact sheafification. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "General tool: The functor induced on derived categories by an exact functor, with its factorization through the localization functors. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "General tool: Exact functors preserve kernels, cokernels, images, inverse images and homology. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "General tool: Isomorphisms in the unbounded derived category detected by cohomology. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-module-finite-presentation",
+    "why": "General tool: Finite modules over Noetherian rings are finitely presented. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "why": "General tool: Constructible sheaves over a finite ring have etale origin. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-constant-module-values",
+    "why": "General tool: Finite locally constant sheaves of modules: finite values iff finite stalks. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "why": "General tool: Etale sheaves over an algebraically closed field are constant. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "General tool: Exactness and full faithfulness at finite level. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "General tool: A finite module over a Noetherian ring has a resolution by finite free modules (Stacks 00LP). Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-sc-dvr-fg-torsionfree-free",
+    "why": "General tool: Finite torsion-free modules over a DVR are free. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-sf-perfect-cohomology-assembly",
+    "why": "General tool: Bounded complexes with perfect cohomology. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "General tool: Stratified perfect description of the integral completed category. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General tool: Existence of K-flat resolutions on a ringed site. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "General tool: Bounded constructible derived-complete integral complexes form a triangulated subcategory. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "General tool: Long exact cohomology sequence of a distinguished triangle in the derived category. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-l-adic-integers-localization-uniformizer",
+    "why": "General tool: The l-adic field is the localization of its integers at a uniformizer. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "General tool: A localization is a flat algebra. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-pc-base-change-rhom-perfect",
+    "why": "General tool: RHom base change for a perfect complex. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "General tool: Tensoring with a flat module preserves exact sequences. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-pur-rhom-into-kinjective-local",
+    "why": "General tool: Hom into a K-injective complex computes localized derived morphisms. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-vector-space-basis-through-vector",
+    "why": "General tool: A nonzero vector lies in a basis. Its stated assertion is used in the indicated proof steps; this unit has no separate proof route or replacement statement supplying it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sf-perfect-cohomology-assembly",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-pc-kflat-resolution",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "lem-weil-pbc-localization-flat",
+  "lem-pc-base-change-rhom-perfect",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pur-rhom-into-kinjective-local",
+  "lem-weil-pbc-vector-space-basis-through-vector"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q10-9b9eef7af",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q10-9b9eef7af (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and source passages. Verified all eleven steps, coefficient categories, canonical RHom map, completion shift signs and edge cases. No new nodes or delivery-owned faults; accepted all 26 declared tool uses. Two inherited missing references are documented. Target condensed-category comparisons remain separate obligations. Full findings written to review.md."
+ }
 }
