@@ -1,6 +1,6 @@
 # Work queue
 
-53 items; claim with `tools/claim.py next <group> [--stage N]`.
+54 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (53)
+## Stage 3: modules to prove (54)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -56,6 +56,7 @@
 | `Sheaf.CategoryTheory.DerivedCoupleFunctoriality` | 17 | 1 | proof |
 | `Sheaf.CategoryTheory.NaturalTruncationCouple` | 17 | 3 | proof |
 | `Sheaf.AlgebraicGeometry.FormalComparisonAlgebraizationQuotientLift` | 18 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CoherentStalkMapExtends` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CompatibleQuotientFormalComparisons` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalCompletionPullbackNormalized` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SectionsOverQuasiCompactOpen` | 20 | 1 | proof |
