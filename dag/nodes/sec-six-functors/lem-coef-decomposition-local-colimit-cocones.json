@@ -1,0 +1,83 @@
+{
+ "id": "lem-coef-decomposition-local-colimit-cocones",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before derived inverse limit; through the inherited foundational chain, the directed-cover retraction in HTT Proposition 5.3.1.16: HTT Notation 4.2.3.1 and Proposition 4.2.3.4, printed pp. 248-250, last assertion (restriction of join cocone categories is a trivial fibration). The displayed coherent-transformation formulation uses the join/comma comparison of Kerodon Example 4.6.4.9 (05YH), equivalently the opposite of lem-coef-infinity-join-cone-calculus, with fixed apex and boundary; it is the mapping-space formulation of that last assertion.",
+   "via": [
+    "lem-coef-infinity-directed-cone-cover",
+    "lem-coef-infinity-cofinal-kappa-poset",
+    "lem-coef-spaces-kappa-limit-filtered-colimit",
+    "lem-coef-space-presheaf-presentability",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local colimit cones give a restriction equivalence on coherent cocone spaces",
+ "statement": "Use small simplicial sets, ordinary nerves, quasicategories, coherent functor categories, mapping spaces and colimiting cocones from [def-cbc-enhanced-diagrams-cones], in a fixed universe and containing universes for functor categories. Let $K$ be a small simplicial set, $I$ a small ordinary category, and $F:I\\to\\mathrm{sSet}_{/K}$ a functor, where an object of $\\mathrm{sSet}_{/K}$ is a simplicial map $\\pi_a:K_a\\to K$ and a morphism is a simplicial map commuting with the maps to $K$. Define a simplicial set $K_F$ as follows. An $n$-simplex consists of a cut $-1\\leq i\\leq n$, a simplex $\\sigma:\\Delta^{\\{0,\\ldots,i\\}}\\to K$ when $i\\geq0$, a chain $a_{i+1}\\to\\cdots\\to a_n$ in $I$ when $i<n$, and compatible lifts $\\sigma_j:\\Delta^{\\{0,\\ldots,i\\}}\\to K_{a_j}$ for $j>i$, with $\\pi_{a_j}\\sigma_j=\\sigma$ and $F(a_j\\to a_k)\\sigma_j=\\sigma_k$. When $i=-1$ the lower block and lifts are empty, so the simplex is just the chain in $N(I)$; when $i=n$ the upper block is empty, so it is just $\\sigma\\in K_n$. Operators restrict or repeat the two ordered blocks, restrict the lower simplices, and compose or repeat the upper arrows; when one block disappears, retain the pure simplex in the other block. Thus $K$ and $N(I)$ are disjoint simplicial subsets of $K_F$. The map $\\iota_a:K_a^{\\triangleright}\\to K_F$ uses $\\pi_a$ on its base and the constant upper chain at $a$, carrying its new cone vertex to the vertex $a$ of $N(I)$. Here $X^{\\triangleright}=X\\star\\Delta^0$ is the join whose simplices are simplices of $X$, constant simplices at a new last vertex, and ordered concatenations of those two kinds. Although $\\iota_a$ need not be injective, it is a specified simplicial map.\n\nLet $\\mathcal E$ be a quasicategory, $p:K\\to\\mathcal E$ a diagram, and $q:K_F\\to\\mathcal E$ an extension of $p$. Suppose that, for every $a\\in I$, the cocone $q\\iota_a:K_a^{\\triangleright}\\to\\mathcal E$ is colimiting for $p\\pi_a$. Then for every vertex $T\\in\\mathcal E$, restriction itself induces an equivalence of spaces\n$$ \\operatorname{Map}_{\\operatorname{Fun}(K_F,\\mathcal E)}(q,\\Delta_{K_F}T)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(p,\\Delta_KT). $$\nIt is natural in $T$ and compatible with coherent postcomposition of cocones. No existence of other colimits in $\\mathcal E$, no directedness of $I$, and no injectivity of the maps $K_a\\to K$ are assumed. A join cocone here is read as a coherent transformation by the map $K_a\\times\\Delta^1\\to K_a^{\\triangleright}$ which retains the initial vertices labelled $0$ and sends the final vertices labelled $1$ to the new cone vertex.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "HTT Notation 4.2.3.1 and Proposition 4.2.3.4, printed pp. 248-250, last assertion (restriction of join cocone categories is a trivial fibration). The displayed coherent-transformation formulation uses the join/comma comparison of Kerodon Example 4.6.4.9 (05YH), equivalently the opposite of lem-coef-infinity-join-cone-calculus, with fixed apex and boundary; it is the mapping-space formulation of that last assertion. Online text read 2026-10-17; archive WANTED. These are infinity-categorical facts; no Stacks tag states them."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A decomposition of a simplicial diagram into a family of local colimit cocones induces an equivalence on spaces of cocones",
+   "results": "{\"t\": \"2026-10-16T21:25:27Z\", \"tool\": \"leanfinder\", \"query\": \"A decomposition of a simplicial diagram into a family of local colimit cocones induces an equivalence on spaces of cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.ofCoconeEquiv_apply_desc\", \"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Limits.IsColimit.coconePointsIsoOfEquivalence\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence_functor\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv_symm_apply_desc\", \"CategoryTheory.Limits.Cocones.whiskeringEquivalence\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\"], \"digest\": \"1b3a00cfb172bece\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary CategoryTheory cocones/equivalences or colimits of simplicial sets in the ordinary category SSet. The six SSet.coconeN hits concern monogenous subcomplexes; none states restriction on coherent cocone spaces for the decomposition construction. The pinned Quasicategory grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"cocone\"",
+   "results": "{\"t\": \"2026-10-16T21:25:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"cocone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.coconeN\", \"SSet.isColimitCoconeN\", \"SSet.coconeN'\", \"SSet.isColimitCoconeN'\", \"SSet.coconeN'_pt\", \"SSet.coconeN'_ι_app\"], \"digest\": \"1e01c5b637bbe9e1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary CategoryTheory cocones/equivalences or colimits of simplicial sets in the ordinary category SSet. The six SSet.coconeN hits concern monogenous subcomplexes; none states restriction on coherent cocone spaces for the decomposition construction. The pinned Quasicategory grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "decomposition|colimit|cocone",
+   "results": "{\"t\": \"2026-10-16T21:25:27Z\", \"tool\": \"grep\", \"query\": \"decomposition|colimit|cocone\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary CategoryTheory cocones/equivalences or colimits of simplicial sets in the ordinary category SSet. The six SSet.coconeN hits concern monogenous subcomplexes; none states restriction on coherent cocone spaces for the decomposition construction. The pinned Quasicategory grep has zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of coherent cocones along a decomposition simplicial set is an equivalence if every local cone is colimiting",
+   "results": "{\"t\": \"2026-10-16T21:25:27Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of coherent cocones along a decomposition simplicial set is an equivalence if every local cone is colimiting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Final.isColimitExtendCoconeEquiv\", \"CategoryTheory.Limits.Cocone.isColimitOfIsIsoColimMapι\", \"SimplicialObject.Splitting.isColimit'\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\", \"SimplicialObject.Splitting.isColimit\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.equiv.congr_simp\", \"CategoryTheory.WithInitial.isColimitEquiv\", \"CategoryTheory.Limits.isColimitOfConeRightOpOfCocone\"], \"digest\": \"c430b2b633bcdbf3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary CategoryTheory cocones/equivalences or colimits of simplicial sets in the ordinary category SSet. The six SSet.coconeN hits concern monogenous subcomplexes; none states restriction on coherent cocone spaces for the decomposition construction. The pinned Quasicategory grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher category decomposition of diagrams: prescribed local colimits extend coherently and restriction of cocone categories is a trivial fibration",
+   "results": "{\"t\": \"2026-10-16T21:25:28Z\", \"tool\": \"leanfinder\", \"query\": \"Higher category decomposition of diagrams: prescribed local colimits extend coherently and restriction of cocone categories is a trivial fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_toSucc\", \"SSet.horn.isColimit\", \"CategoryTheory.TransfiniteCompositionOfShape.ici_isColimit\"], \"digest\": \"6bb4d3333e9eff48\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary CategoryTheory cocones/equivalences or colimits of simplicial sets in the ordinary category SSet. The six SSet.coconeN hits concern monogenous subcomplexes; none states restriction on coherent cocone spaces for the decomposition construction. The pinned Quasicategory grep has zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-directed-cone-cover",
+  "date": "2026-10-17",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

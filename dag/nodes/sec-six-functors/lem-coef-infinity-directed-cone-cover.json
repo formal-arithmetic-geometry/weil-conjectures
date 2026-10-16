@@ -29,9 +29,115 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $a$, use its given identification $K_a\\cong L_a\\star\\Delta^0$. Define the augmented operation $c_a:(K_a)_m\\to(K_a)_{m+1}$, also for $m=-1$ with the unique empty simplex, by appending one vertex $t_a$: in the join normal form retain the entire $L_a$-part and lengthen the final constant $t_a$-block by one. In particular $c_a(\\varnothing)=t_a$. Restriction of ordered blocks gives $d_{m+1}c_a\\sigma=\\sigma$, $d_ic_a\\sigma=c_ad_i\\sigma$ for $i\\leq m$, $s_ic_a\\sigma=c_as_i\\sigma$ for $i\\leq m$, and $c_ac_a\\sigma=s_{m+1}c_a\\sigma$. Thus appending a repeated last cone vertex is a degeneracy. These are direct identities of the join normal forms, including the pure cone simplices. They define a simplicial map $\\rho_a:K_a^{\\triangleright}\\to K_a$: fix the base and replace every new cone vertex by an appended $t_a$. The edge from the old $t_a$ to the new cone vertex maps to $\\operatorname{id}_{t_a}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Right-cone special case of the retraction in the proof of Proposition 5.3.1.16, pp. 383-384; explicit join normal forms."
+   }
+  },
+  {
+   "text": "Form $K_F$ with the degreewise disjoint-union and operator rules in [lem-coef-directed-decomposition-right-anodyne], using $I=A$. Equivalently it is the construction in [lem-coef-decomposition-local-colimit-cocones] for the ordinary functor $a\\mapsto(K_a\\hookrightarrow K)$: a compatible family of lifts of a lower simplex is uniquely its membership in the first subset, because all transition maps are inclusions. In particular it contains $K$ and $N(A)$, and there is a canonical map $\\iota_a:K_a^{\\triangleright}\\to K_F$ with constant upper chain at $a$. Its sets of simplices are small, being small unions of products of the given small sets. Only the definitions of the two displayed constructions are used here.",
+   "uses": [
+    "lem-coef-decomposition-local-colimit-cocones",
+    "lem-coef-directed-decomposition-right-anodyne",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Notation 4.2.3.1 and Remark 4.2.3.2, pp. 248-249."
+   }
+  },
+  {
+   "text": "Define $r:K_F\\to K$ as the identity on the pure $K$-simplices. For a mixed simplex with lower simplex $\\sigma\\in(K_{a_{i+1}})_i$ and chain $a_{i+1}\\leq\\cdots\\leq a_n$, set $r(\\sigma;a_{i+1},\\ldots,a_n)=c_{a_n}\\cdots c_{a_{i+1}}\\sigma$, viewing each intermediate simplex in the next subset by inclusion. For a pure nerve simplex use the same formula starting with the empty lower simplex: $r(a_0\\leq\\cdots\\leq a_n)=c_{a_n}\\cdots c_{a_0}(\\varnothing)$. Each intermediate value lies in the subset indexed by its last index. A face deleting a lower vertex commutes through all the $c_a$ by $d_ic_a=c_ad_i$. A face deleting an upper vertex commutes through the later operations until it reaches $d_{m+1}c_a=\\operatorname{id}$, removing that operation; this also handles the first upper index and a disappearing block. A lower degeneracy commutes through the $c_a$, and repeating an upper index is exactly $c_ac_a=s_{m+1}c_a$. Pure-block cases are the same identities with the empty block allowed. Hence all faces and degeneracies commute with $r$. No compatibility of the different cone identifications beyond the subset inclusions is used. We have $r|_K=\\operatorname{id}$ and $r\\iota_a=\\rho_a$. Set $j=r|_{N(A)}$; the empty-simplex formula gives $j(a)=t_a$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 5.3.1.16, pp. 383-384, construction of r and j; explicit formula for the given right-cone structures."
+   }
+  },
+  {
+   "text": "Fix a quasicategory $\\mathcal E$ and $H:K\\to\\mathcal E$. Every local cocone $H\\rho_a$ on $H|_{K_a}$ is colimiting, as follows. Apply [lem-coef-infinity-cone-mono-right-anodyne] to $\\varnothing\\hookrightarrow L_a$: its coned map is $\\{t_a\\}\\hookrightarrow K_a$, so it is right anodyne even though $K_a$ need not be a quasicategory. By [lem-coef-infinity-anodyne-cocones], for every $T\\in\\mathcal E$ restriction is an equivalence $e_T:\\operatorname{Coc}_{K_a}(H|_{K_a},T)\\to\\operatorname{Map}_{\\mathcal E}(H(t_a),T)$, where $\\operatorname{Coc}_B(p,T)=\\operatorname{Map}_{\\operatorname{Fun}(B,\\mathcal E)}(p,\\Delta_BT)$. Let $b_T$ send a map $H(t_a)\\to T$ to its postcomposition with $H\\rho_a$. The component of $H\\rho_a$ at $t_a$ is the identity by step 1, so $e_Tb_T$ is homotopic to the identity on the whole mapping space. Thus $b_T$ is an equivalence. The dual mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus] says exactly that $H\\rho_a$ is colimiting. The join cocone is interpreted as a transformation using the ordered map $K_a\\times\\Delta^1\\to K_a^{\\triangleright}$ specified in [lem-coef-decomposition-local-colimit-cocones].",
+   "uses": [
+    "lem-coef-infinity-cone-mono-right-anodyne",
+    "lem-coef-infinity-anodyne-cocones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-decomposition-local-colimit-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.2.3.4 local colimit hypothesis; normalized cone at the final vertex in the proof of Proposition 5.3.1.16. Cone/right-anodyne tools as stated in the cited nodes."
+   }
+  },
+  {
+   "text": "Put $q=Hr:K_F\\to\\mathcal E$. Its restriction to $K$ is $H$, and $q\\iota_a=H\\rho_a$ is colimiting by step 4. Apply [lem-coef-decomposition-local-colimit-cocones] to the small category $A$, its subset functor and this specific extension $q$. It gives equivalences $R_T:\\operatorname{Coc}_{K_F}(q,T)\\to\\operatorname{Coc}_K(H,T)$, given by actual restriction, natural in $T$ and compatible with postcomposition. Only the displayed local colimits are needed; no other colimits in $\\mathcal E$ are assumed.",
+   "uses": [
+    "lem-coef-decomposition-local-colimit-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.2.3.4, last assertion, pp. 249-250; applied to q=Hr."
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-coef-directed-decomposition-right-anodyne] hold: $A$ is small and nonempty, has upper bounds for finite subsets, and its increasing family covers $K$ in every simplicial degree. Consequently $N(A)\\hookrightarrow K_F$ is right anodyne. Apply [lem-coef-infinity-anodyne-cocones] with $B=K_F$, $A=N(A)$, and diagram $q=Hr$. This gives restriction equivalences $S_T:\\operatorname{Coc}_{K_F}(q,T)\\to\\operatorname{Coc}_{N(A)}(Hj,T)$, natural in $T$ and compatible with postcomposition. This application permits arbitrary simplicial sets as indexing shapes, so it does not assume $K_F$ is a quasicategory.",
+   "uses": [
+    "lem-coef-directed-decomposition-right-anodyne",
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.2.3.8, Remark 4.2.3.9 and Corollary 4.2.3.10, pp. 252-253."
+   }
+  },
+  {
+   "text": "Precomposition with $r$ gives $r^*_T:\\operatorname{Coc}_K(H,T)\\to\\operatorname{Coc}_{K_F}(Hr,T)$. Since $r|_K=\\operatorname{id}_K$, the composite $R_Tr^*_T$ is the identity. The equivalence $R_T$ from step 5 therefore makes $r^*_T$ an equivalence. The composite $S_Tr^*_T$ is precisely restriction $j^*_T$, because $r|_{N(A)}=j$. Hence $j^*_T:\\operatorname{Coc}_K(H,T)\\to\\operatorname{Coc}_{N(A)}(Hj,T)$ is an equivalence for every $T$. These maps are actual precomposition functors on the entire simplicial mapping spaces. They commute with restriction in $H$ and with postcomposition in $T$, so the equivalence is natural in $H$ as well.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "The retraction argument concluding Proposition 5.3.1.16, p. 384; composition of the two restriction comparisons."
+   }
+  },
+  {
+   "text": "Let $\\lambda$ be any cocone on $H$ with apex $x$. For each $T$, the two maps out of $\\operatorname{Map}_{\\mathcal E}(x,T)$ given by postcomposition with $\\lambda$ and with $j^*\\lambda$ form a commuting triangle whose third map is the equivalence $j^*_T$ of step 7. Thus one map out of $\\operatorname{Map}_{\\mathcal E}(x,T)$ is an equivalence if and only if the other is. By the dual mapping-space criterion in [lem-cbc-enhanced-functor-cone-calculus], $\\lambda$ is colimiting if and only if its restriction is. Restriction retains the apex $x$ and every specified leg along $j$; it is natural in $H$ as checked in step 7. This proves the assertion without assuming existence of any other colimits in either $K$ or $\\mathcal E$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proposition 4.1.1.8 and the conclusion of Proposition 5.3.1.16; universal property of the given cocone."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-decomposition-local-colimit-cocones",
+  "lem-coef-directed-decomposition-right-anodyne",
+  "lem-coef-infinity-cone-mono-right-anodyne",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "HTT Proposition 5.3.1.16, right-cone special case of the retraction argument; explicit augmented-cone formula and mapping-space proof. Source read online but not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +173,52 @@
    "results": "{\"t\": \"2026-10-16T20:30:23Z\", \"tool\": \"leanfinder\", \"query\": \"Decomposition of a coherent diagram over a directed union into colimits of its subdiagrams without assuming all colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cofan.isColimitTrans\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.iSup\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.sup\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'\", \"CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit\", \"AlgebraicGeometry.Scheme.OpenCover.isColimitCoconeOfLocallyDirected\"], \"digest\": \"fe1f197cc737fd94\"}",
    "date": "2026-10-17",
    "verdict": "no match: the semantic hits concern ordinary categories or schemes. The grep hits are only final vertices of 2-simplices (HomotopyCat.lean:168,178) and a comment in NerveAdjunction.lean:34. None assembles coherent vertices or proves infinity-categorical cofinality."
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|Cofinal|decomposition",
+   "results": "{\"t\": \"2026-10-16T21:24:16Z\", \"tool\": \"grep\", \"query\": \"cofinal|Cofinal|decomposition\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Split.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Split.lean\", \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\", \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\", \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\", \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\", \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean\"], \"digest\": \"972dfd48d07f4057\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary directed/cofinal functors, nerves, simplicial-set decompositions or scheme covers do not give the prescribed coherent cone-vertex functor or its universal colimit test. No project Lean attachment was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered union of simplicial cones cofinal functor from nerve of directed partially ordered set",
+   "results": "{\"t\": \"2026-10-16T21:24:16Z\", \"tool\": \"leansearch\", \"query\": \"Filtered union of simplicial cones cofinal functor from nerve of directed partially ordered set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFiltered.exists_directed\", \"PartOrdEmb.Limits.instHasColimit\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.V\", \"CategoryTheory.isFiltered_of_directed_le_nonempty\", \"SimplicialObject.Splitting.cofan'\", \"CategoryTheory.isFilteredOrEmpty_of_directed_le\", \"CategoryTheory.isCofiltered_of_directed_ge_nonempty\", \"CategoryTheory.Comma.isFiltered_of_final\"], \"digest\": \"db0235a1ffea3a35\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary directed/cofinal functors, nerves, simplicial-set decompositions or scheme covers do not give the prescribed coherent cone-vertex functor or its universal colimit test. No project Lean attachment was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"cofinal\"",
+   "results": "{\"t\": \"2026-10-16T21:24:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"cofinal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary directed/cofinal functors, nerves, simplicial-set decompositions or scheme covers do not give the prescribed coherent cone-vertex functor or its universal colimit test. No project Lean attachment was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed cover of a quasicategory by simplicial right cones has a cofinal coherent diagram of cone vertices",
+   "results": "{\"t\": \"2026-10-16T21:24:18Z\", \"tool\": \"leanfinder\", \"query\": \"A directed cover of a quasicategory by simplicial right cones has a cofinal coherent diagram of cone vertices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.coconeOfLocallyDirected\", \"AlgebraicGeometry.Scheme.Cover.coconeOfLocallyDirected_pt\", \"AlgebraicGeometry.Scheme.Cover.coconeOfLocallyDirected_ι\", \"CategoryTheory.IsCofiltered.cone\", \"CategoryTheory.IsCofiltered.cone_nonempty\", \"CategoryTheory.SmallObject.coconeOfLE\", \"Preorder.coconeOfUpperBound\", \"PrincipalSeg.cocone\"], \"digest\": \"111e8b8f6874b717\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary directed/cofinal functors, nerves, simplicial-set decompositions or scheme covers do not give the prescribed coherent cone-vertex functor or its universal colimit test. No project Lean attachment was found."
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|Cofinal|rightAnodyne|RightAnodyne",
+   "results": "{\"t\": \"2026-10-16T21:24:49Z\", \"tool\": \"grep\", \"query\": \"cofinal|Cofinal|rightAnodyne|RightAnodyne\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary directed/cofinal functors, nerves, simplicial-set decompositions or scheme covers do not give the prescribed coherent cone-vertex functor or its universal colimit test. No project Lean attachment was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofinality of a functor from a nerve to a quasicategory constructed by compatible extra degeneracies on a directed simplicial cover",
+   "results": "{\"t\": \"2026-10-16T21:24:50Z\", \"tool\": \"leanfinder\", \"query\": \"Cofinality of a functor from a nerve to a quasicategory constructed by compatible extra degeneracies on a directed simplicial cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.nerve\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat\", \"CategoryTheory.nerveFunctor\"], \"digest\": \"f3c47156c7168f56\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary directed/cofinal functors, nerves, simplicial-set decompositions or scheme covers do not give the prescribed coherent cone-vertex functor or its universal colimit test. No project Lean attachment was found."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-cofinal-kappa-poset",
@@ -78,5 +226,29 @@
   "group": "N5"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-directed-cone-cover",
+  "worker": "stage1",
+  "summary": "Constructed the retraction explicitly using the given right-cone extra degeneracies, checked all simplicial operators and prescribed vertices, proved local colimits using existing right-anodyne tools, and applied two general decomposition lemmas. The statement is unchanged; arbitrary target quasicategories and non-quasicategorical covering subsets are retained. Searched the full DAG, blueprint and project Lean source before creating two statement-only nodes; all Mathlib searches were run and logged.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the coherent finite-coefficient mapping-complex adjunction before R lim, through the inherited foundational ancestry. Steps 1-3 realize the directed-cover retraction in HTT 5.3.1.16; steps 4-8 realize its local-colimit and cofinality argument using 4.2.3.4 and 4.2.3.8. The current main-20261015 proof has the same derived-Hom computation; no unit route or statement is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 4 and 8 use the general mapping-space criterion for a coherent cocone to be colimiting. This foundational tool is in sk-prop-sf-cbc; the biduality unit provides no replacement for that universal criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NL-8ddd26e8e",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-8ddd26e8e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full: def-cbc-enhanced-diagrams-cones, def-coef-infinity-right-anodyne, lem-coef-infinity-cone-mono-right-anodyne, lem-coef-infinity-anodyne-cocones and lem-cbc-enhanced-functor-cone-calculus. I also read the parent's use of the item (lem-coef-infinity-cofinal-kappa-poset step 4), the unit and chapter records, and the main-20261015 ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2. Source access: HTT is not in literature/ (it is WANTED, and proof_origin is agent) and network access is blocked here. I therefore checked the cited places (4.2.3.1 K_F, the last assertion of 4.2.3.4 for any extension with local colimit cones, 4.2.3.8 and 4.2.3.9 for directed covers, 5.3.1.16) from my knowledge of HTT, and verified every step independently. Step 1: I checked the augmented-join identities d_{m+1}c=id, d_i c=c d_i, s_i c=c s_i and cc=s_{m+1}c on normal forms (tau,k), including pure L and pure cone cases. rho_a is the map L*Delta^1 -> L*Delta^0. Step 2: for inclusions the lifts are unique and exist exactly when sigma lies in K_{a_{i+1}}, so both K_F constructions agree. Step 3: I checked r on lower faces (including the augmented d_0 case), upper faces (first, middle and only upper index), lower degeneracies and repeated upper indices (including m=-1). Also r|_K=id, r iota_a=rho_a and j(a)=t_a. Step 4: the cone of the empty map into L_a gives a right anodyne inclusion {t_a} -> K_a for non-quasicategorical K_a. The anodyne-cocones node gives e_T. The identity component gives e_T b_T ~ id, and b_T is exactly the dual criterion map. Steps 5 and 6: the hypotheses of the new nodes match exactly, and K_F is used only as a simplicial set. Step 7: R_T r^* = id and S_T r^* = j^* hold strictly. Step 8: commuting triangle plus two-out-of-three gives the iff for each given cocone. Small cases for the new nodes: empty I or K, a singleton I, two incomparable cones, N(N) covered by simplices, and the boundary-cone of Delta^2 inside Delta^3; all hold. Neither new node restates the item. Duplicates: also compared with the existing unsplit lem-coef-infinity-directed-union-local-colimits, which the report omitted. It only asserts that some assembly exists, not that the specified Hj through a given extension works, so it is not a duplicate. The off-unit tool use of lem-cbc-enhanced-functor-cone-calculus for the dual mapping-space criterion is accepted. No SGA is used. No target, base-change morphism or coefficient category is involved. No changes made."
+ }
 }
