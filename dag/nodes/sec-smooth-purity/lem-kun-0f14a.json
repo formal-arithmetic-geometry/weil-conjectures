@@ -308,5 +308,24 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-e25ac1e50 (reviewer sub-agent of L); spot-checked: Read the full item, all seven steps, every cited statement, report, and unit/chapter route. Checked Stacks 0F14, 0F1E, 0DDE, 0F0F, 0F0E, and 0D6E; coefficients, exchange direction, canonical-map compatibility, and edge cases agree. No new nodes, cycles, or necessary repairs. Accepted tool uses and detailed checks are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-73e2bf391",
+  "group": "N9",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable module, all nine statement dependencies, Stacks sources, canonical-map identity, hypotheses, universes, edge cases, docstrings and verbatim signature. scompile.py reproduction passed without diagnostics. No delivery errors or fixes; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.EtaleCohomology.KunnethOneProper",
+  "declaration": "AlgebraicGeometry.Etale.isIso_kunneth_one_proper",
+  "statement": "theorem isIso_kunneth_one_proper (k : Type u) [Field k] [IsSepClosed k] (X Y : Scheme.{u}) (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [IsProper aX] [QuasiCompact aY] [QuasiSeparated aY] (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) (hE : DerivedCategory.torsionCohomology (ULift.{u + 1} ℤ) X (DerivedCategory.Plus.ι.obj E)) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) : IsIso (kunnethMap (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) (pullback.fst aX aY) (pullback.snd aX aY) aX aY ((pullback.fst aX aY) ≫ aX) rfl (pullback.condition (f := aX) (g := aY)).symm (DerivedCategory.Plus.ι.obj E) (DerivedCategory.Plus.ι.obj K))",
+  "by": "N9",
+  "date": "2026-10-16",
+  "file": "lean/Sheaf/EtaleCohomology/KunnethOneProper.lean",
+  "branch": "newtargets-dag",
+  "existing": false,
+  "note": "Repair of H3: IsIso of the fully specified canonical kunnethMap, with integer coefficients encoded by ModuleCat (ULift ℤ). The exact tensor-compatible point-topos equivalence and canonical Leray comparisons identify this map with the displayed global-sections Künneth map, and preserve and reflect IsIso. Uses the existing torsionCohomology definition; no hypothesis is added."
  }
 }
