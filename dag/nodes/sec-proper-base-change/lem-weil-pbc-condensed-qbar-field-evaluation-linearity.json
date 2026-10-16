@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-condensed-qbar-field-evaluation-linearity",
+ "kind": "statement",
+ "title": "The specified geometric field evaluation comparison preserves bounded coefficient scalars",
+ "statement": "Let ell be prime and i:K -> Kprime an arbitrary embedding of algebraically closed fields. For every actual module M over the condensed bounded coefficient ring on Spec(K) and every scalar r in Qbar_ell, the specified abelian evaluation comparison commutes with multiplication by r on M and on its inverse-image module computed by restriction along the inverse coefficient isomorphism. This is an equality for the already specified abelian comparison, not an existence statement for a module comparison.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-qbar-coefficient-construction",
+  "lem-weil-pbc-geometric-field-proetale-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "The canonical abelian evaluation comparison is the inverse-image adjunction unit followed by restriction along the terminal-object comparison. Monoidality of the adjunction unit and tensor naturality of restriction identify the source module action with the evaluated inverse-image action, transporting coefficients by the canonical evaluated coefficient map.",
+   "uses": [
+    "def-weil-pbc-condensed-qbar-coefficient-construction",
+    "lem-weil-pbc-geometric-field-proetale-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "Precompose the coefficient square with globalCoefficientIso and the invertible bounded-presheaf unit at the terminal object. Every bounded function on a field spectrum is constant. The normalized profinite-test formula globalCoefficientIso_test identifies its pullback with the same constant. Cancel fieldUnitIso and evaluate by boundedPointIso. Surjectivity proves the coefficient square.",
+   "uses": [
+    "def-weil-pbc-condensed-qbar-coefficient-construction",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "Restriction along the inverse of condensedPullbackHom cancels the coefficient transport. Apply the constructed ordinary module action and restriction through ULift to the tensor-action identity. This gives exactly the displayed equality for every scalar and every module.",
+   "uses": [
+    "def-weil-pbc-condensed-qbar-coefficient-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-qbar-coefficient-construction",
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct bounded finite extension valued condensed coefficient scalars and geometric evaluation functors using sheafification",
+   "digest": "9415db2cba299f1f",
+   "date": "2026-10-16",
+   "results": "8 hits: PresheafOfModules.sheafify, PresheafOfModules.sheafification, PresheafOfModules.sheafifyMap, PresheafOfModules.toSheafify, PresheafOfModules.Sheafify.SMulCandidate.mk, PresheafOfModules.Sheafify.instNonemptySMulCandidate, CategoryTheory.Sheaf.sheafifyCocone, LightProfinite.hasSheafify",
+   "verdict": "No exact match for the specified bounded condensed coefficient construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMod\", \"regular\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "results": "No hits in pinned Mathlib.",
+   "verdict": "No exact match for the specified bounded condensed coefficient construction."
+  },
+  {
+   "tool": "grep",
+   "query": "fieldFiber|scalar_pullback|regularIsoOfIsIso",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "results": "No hits in pinned Mathlib.",
+   "verdict": "No exact match for the specified bounded condensed coefficient construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQbarFunctionCoefficients",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Coefficient realization and geometric-fiber comparison in steps 1--3 of the finite-matrix refinement, before rank descent.",
+   "via": [
+    "lem-weil-pbc-condensed-qbar-function-coefficients",
+    "lem-weil-pbc-condensed-qbar-compatible-function-presentations",
+    "lem-weil-pbc-condensed-qbar-lfp-matrix-refinement",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "lem-weil-pbc-condensed-constructible-serre",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedQbarFieldEvaluationLinearity",
+  "file": "lean/Sheaf/Paper/CondensedQbarFieldEvaluationLinearity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedQbar_field_evaluation_linear",
+  "statement": "theorem condensedQbar_field_evaluation_linear (ℓ : ℕ) [Fact ℓ.Prime] (K K' : Type u) [Field K] [IsAlgClosed K] [Field K'] [IsAlgClosed K'] (i : K →+* K') (M : Mod (Sheaf (Scheme.ProEt.topology (Spec (.of K))) Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K)))) (r : PadicAlgCl ℓ) : let f := Spec.map (CommRingCat.ofHom i) let A := condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K)) let H := upperStar Ab.{u + 1} f let α := condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f let N := ((H.mapMod A ⋙ Mod.comap (inv α)) ⋙ CondensedQbarGeometricEvaluation.fieldFiber K' ℓ).obj M (geometricFieldEvaluationComparison f Ab).app M.X ≫ N.smul r = ((CondensedQbarGeometricEvaluation.fieldFiber K ℓ).obj M).smul r ≫ (geometricFieldEvaluationComparison f Ab).app M.X",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-e7cc2",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T103838-L-2369259",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-e7cc2",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T103838-L-2369259",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files and DAG nodes matched the packet statements and repository interfaces; all delivery modules and both direct importers compiled."
+ }
+}

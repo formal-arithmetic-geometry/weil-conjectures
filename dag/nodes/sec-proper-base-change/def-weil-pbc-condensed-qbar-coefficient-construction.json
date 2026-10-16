@@ -1,0 +1,127 @@
+{
+ "id": "def-weil-pbc-condensed-qbar-coefficient-construction",
+ "kind": "definition",
+ "title": "Explicit bounded condensed coefficient realization, scalar action and geometric evaluation",
+ "statement": "Let ell be prime. For every scheme Y, construct the canonical ring-object isomorphism from the inverse image of the condensed finite-subextension-valued algebraic closure coefficient ring to the abelian sheafification of the bounded continuous-function presheaf. Its profinite-test normalization is specified by globalCoefficientIso_test. Define the bounded scalar endomorphism by presheaf multiplication, monoidal sheafification and transport along this isomorphism. At an algebraically closed field, evaluate at the terminal object, identify the coefficient ring via the bounded-presheaf unit and constant-function evaluation, and turn the internal abelian module action into an ordinary module action, restricting scalars through ULift. At a point x of Y, compose this field evaluation with inverse image to the algebraic closure of the residue field, and obtain the regular-module linear coordinates from the canonical regular-module pullback isomorphism. These are actual constructions and their ring laws, additivity and finite-colimit properties are proved. For a functor F to modules, coordinates c and a regular endomorphism f, regularScalarValue(F,c,f) abbreviates c(F(f)(c^-1(1))); its computation rule is proved. No scalar surjectivity, scheme-pullback naturality or extension compatibility is assumed in these data.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-finite-subextension-directed-set",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Existing explicit constructions relocated unchanged to provide a common lower import for the independent naturality lemmas; regularScalarValue is the displayed evaluation formula with a proved computation rule."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct bounded finite extension valued condensed coefficient scalars and geometric evaluation functors using sheafification",
+   "digest": "9415db2cba299f1f",
+   "date": "2026-10-16",
+   "results": "8 hits: PresheafOfModules.sheafify, PresheafOfModules.sheafification, PresheafOfModules.sheafifyMap, PresheafOfModules.toSheafify, PresheafOfModules.Sheafify.SMulCandidate.mk, PresheafOfModules.Sheafify.instNonemptySMulCandidate, CategoryTheory.Sheaf.sheafifyCocone, LightProfinite.hasSheafify",
+   "verdict": "No exact match for the specified bounded condensed coefficient construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMod\", \"regular\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "results": "No hits in pinned Mathlib.",
+   "verdict": "No exact match for the specified bounded condensed coefficient construction."
+  },
+  {
+   "tool": "grep",
+   "query": "fieldFiber|scalar_pullback|regularIsoOfIsIso",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "results": "No hits in pinned Mathlib.",
+   "verdict": "No exact match for the specified bounded condensed coefficient construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQbarFunctionCoefficients",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Coefficient realization and geometric-fiber comparison in steps 1--3 of the finite-matrix refinement, before rank descent.",
+   "via": [
+    "lem-weil-pbc-condensed-qbar-function-coefficients",
+    "lem-weil-pbc-condensed-qbar-compatible-function-presentations",
+    "lem-weil-pbc-condensed-qbar-lfp-matrix-refinement",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "lem-weil-pbc-condensed-constructible-serre",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedQbarCoefficientConstruction",
+  "file": "lean/Sheaf/Paper/CondensedQbarCoefficientConstruction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedQbarCoefficientRealization.globalCoefficientIso",
+  "statement": "def globalCoefficientIso (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) : Mon.mk (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) ≅ Mon.mk (padicAlgClSheaf X ℓ)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedQbarCoefficientRealization.globalCoefficientIso",
+   "AlgebraicGeometry.ProEtale.CondensedQbarScalarConstruction.transportedScalar",
+   "AlgebraicGeometry.ProEtale.condensedQbarScalar",
+   "AlgebraicGeometry.ProEtale.condensedQbarRegularPullbackIso",
+   "AlgebraicGeometry.ProEtale.CondensedQbarGeometricEvaluation.fieldCoefficientIso",
+   "AlgebraicGeometry.ProEtale.CondensedQbarGeometricEvaluation.fieldFiber",
+   "AlgebraicGeometry.ProEtale.CondensedQbarGeometricEvaluation.fieldRegularCoordinates",
+   "AlgebraicGeometry.ProEtale.CondensedQbarGeometricEvaluation.fiber",
+   "AlgebraicGeometry.ProEtale.CondensedQbarGeometricEvaluation.fiberRegularCoordinates",
+   "AlgebraicGeometry.ProEtale.CondensedQbarCoefficientRealization.globalCoefficientIso_fac",
+   "AlgebraicGeometry.ProEtale.CondensedQbarCoefficientRealization.globalCoefficientIso_test",
+   "AlgebraicGeometry.ProEtale.CondensedQbarScalarConstruction.boundedComponentsIso",
+   "AlgebraicGeometry.ProEtale.CondensedQbarScalarConstruction.presheafScalar_surjective",
+   "AlgebraicGeometry.ProEtale.regularScalarValue",
+   "AlgebraicGeometry.ProEtale.regularScalarValue_def"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-e7cc2",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T103838-L-2369259",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-e7cc2",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T103838-L-2369259",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files and DAG nodes matched the packet statements and repository interfaces; all delivery modules and both direct importers compiled."
+ }
+}

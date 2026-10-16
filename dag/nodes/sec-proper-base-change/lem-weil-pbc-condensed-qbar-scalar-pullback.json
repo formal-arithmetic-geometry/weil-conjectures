@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-condensed-qbar-scalar-pullback",
+ "kind": "statement",
+ "title": "Bounded condensed scalar multiplication commutes with scheme inverse image",
+ "statement": "Let ell be prime and g: Z -> Y any morphism of schemes. For a bounded finite-subextension-valued continuous function a on Y, use the explicit scalar actions and the canonical regular-module comparison of [def-weil-pbc-condensed-qbar-coefficient-construction]. Conjugating the inverse image of scalar multiplication by a with this comparison gives scalar multiplication on Z by a composed with the underlying continuous map of g. No weakly etale or noetherian assumption is needed.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-qbar-coefficient-construction"
+ ],
+ "proof": [
+  {
+   "text": "Precomposition along the first projection U times_Y Z -> U gives a map from bounded presheaves on Y to the base-change direct image of bounded presheaves on Z. The finite-subextension bound is preserved. Compose with the target sheafification unit and extend by the sheafification adjunction; then take the scheme inverse-image adjoint. This gives a ring morphism from inverse image of the bounded coefficient sheaf on Y to that on Z.",
+   "uses": [
+    "def-weil-pbc-condensed-qbar-coefficient-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "The resulting morphism intertwines the canonical realizations with condensedPullbackHom. Apply the point adjunction and evaluate on each profinite S and each bounded test function. globalCoefficientIso_test makes both composites the sheafification unit applied to that test function pulled back through Z[S] to S. The specified base-change comparison identifies Y[S] times_Y Z with Z[S] and commutes with the projections. The point adjunction bijection and section extensionality prove the square.",
+   "uses": [
+    "def-weil-pbc-condensed-qbar-coefficient-construction",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-condensed-field-continuous-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "Pointwise multiplication by a followed by precomposition is precomposition followed by multiplication by a composed with g. Naturality and monoidality of the sheafification unit transport this equality to the coefficient sheaves.",
+   "uses": [
+    "def-weil-pbc-condensed-qbar-coefficient-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "Conjugate through the commuting realization square. The two components of extendScalarsIsoComapInv cancel by its naturality, and regularIsoOfIsIso has underlying morphism condensedPullbackHom. The resulting module endomorphism is exactly the scalar on Z. Empty Z gives the unique endomorphism of the zero coefficient object.",
+   "uses": [
+    "def-weil-pbc-condensed-qbar-coefficient-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-qbar-coefficient-construction",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-condensed-field-continuous-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct bounded finite extension valued condensed coefficient scalars and geometric evaluation functors using sheafification",
+   "digest": "9415db2cba299f1f",
+   "date": "2026-10-16",
+   "results": "8 hits: PresheafOfModules.sheafify, PresheafOfModules.sheafification, PresheafOfModules.sheafifyMap, PresheafOfModules.toSheafify, PresheafOfModules.Sheafify.SMulCandidate.mk, PresheafOfModules.Sheafify.instNonemptySMulCandidate, CategoryTheory.Sheaf.sheafifyCocone, LightProfinite.hasSheafify",
+   "verdict": "No exact match for the specified bounded condensed coefficient construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMod\", \"regular\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "results": "No hits in pinned Mathlib.",
+   "verdict": "No exact match for the specified bounded condensed coefficient construction."
+  },
+  {
+   "tool": "grep",
+   "query": "fieldFiber|scalar_pullback|regularIsoOfIsIso",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "results": "No hits in pinned Mathlib.",
+   "verdict": "No exact match for the specified bounded condensed coefficient construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQbarFunctionCoefficients",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Coefficient realization and geometric-fiber comparison in steps 1--3 of the finite-matrix refinement, before rank descent.",
+   "via": [
+    "lem-weil-pbc-condensed-qbar-function-coefficients",
+    "lem-weil-pbc-condensed-qbar-compatible-function-presentations",
+    "lem-weil-pbc-condensed-qbar-lfp-matrix-refinement",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "lem-weil-pbc-condensed-constructible-serre",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedQbarScalarPullback",
+  "file": "lean/Sheaf/Paper/CondensedQbarScalarPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedQbar_scalar_pullback",
+  "statement": "theorem condensedQbar_scalar_pullback (ℓ : ℕ) [Fact ℓ.Prime] {Y Z : Scheme.{u}} (g : Z ⟶ Y) (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y) : (condensedQbarRegularPullbackIso ℓ g).inv ≫ (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) g).map (condensedQbarScalar ℓ Y a) ≫ (condensedQbarRegularPullbackIso ℓ g).hom = condensedQbarScalar ℓ Z (CondensedQbarScalarConstruction.boundedComp ℓ g.base.hom a)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-e7cc2",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T103838-L-2369259",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-e7cc2",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T103838-L-2369259",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files and DAG nodes matched the packet statements and repository interfaces; all delivery modules and both direct importers compiled."
+ }
+}

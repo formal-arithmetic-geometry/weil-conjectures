@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-condensed-qbar-field-fiber-extension",
+ "kind": "statement",
+ "title": "Geometric module evaluation is invariant under algebraically closed extension",
+ "statement": "Let ell be prime, K and Kprime algebraically closed fields in the same universe, and i: K -> Kprime a unital ring homomorphism. For the explicit module evaluation functors fieldFiber of [def-weil-pbc-condensed-qbar-coefficient-construction], there is a natural isomorphism fieldFiber(K) ~= condensed inverse image along Spec(i) followed by fieldFiber(Kprime), as functors on all internal modules over the condensed algebraic-closure coefficient ring. The isomorphism is linear over the fixed coefficient field. Arbitrary, including transcendental, field embeddings are allowed.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-qbar-coefficient-construction",
+  "lem-weil-pbc-geometric-field-proetale-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "The canonical abelian evaluation comparison is invertible by geometric_field_proetale_evaluation_extension for arbitrary algebraically closed extensions.",
+   "uses": [
+    "lem-weil-pbc-geometric-field-proetale-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "Use the concrete scalar-linearity equality to lift each specified abelian comparison isomorphism by ModuleCat.isoMk. Naturality follows from the original sheaf naturality after applying the faithful forgetful functor.",
+   "uses": [
+    "lem-weil-pbc-condensed-qbar-field-evaluation-linearity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "Whisker extendScalarsIsoComapInv with the inverse-image mapMod functor and the constructed target field evaluation. Compose with the lifted natural isomorphism to obtain the actual module inverse image comparison.",
+   "uses": [
+    "def-weil-pbc-condensed-qbar-coefficient-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "lem-weil-pbc-condensed-qbar-field-evaluation-linearity",
+  "def-weil-pbc-condensed-qbar-coefficient-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "B3: completed natural-isomorphism assembly from invertibility of the canonical abelian comparison, concrete scalar linearity, faithful naturality, and extendScalarsIsoComapInv."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct bounded finite extension valued condensed coefficient scalars and geometric evaluation functors using sheafification",
+   "digest": "9415db2cba299f1f",
+   "date": "2026-10-16",
+   "results": "8 hits: PresheafOfModules.sheafify, PresheafOfModules.sheafification, PresheafOfModules.sheafifyMap, PresheafOfModules.toSheafify, PresheafOfModules.Sheafify.SMulCandidate.mk, PresheafOfModules.Sheafify.instNonemptySMulCandidate, CategoryTheory.Sheaf.sheafifyCocone, LightProfinite.hasSheafify",
+   "verdict": "No exact match for the specified bounded condensed coefficient construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMod\", \"regular\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "results": "No hits in pinned Mathlib.",
+   "verdict": "No exact match for the specified bounded condensed coefficient construction."
+  },
+  {
+   "tool": "grep",
+   "query": "fieldFiber|scalar_pullback|regularIsoOfIsIso",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "results": "No hits in pinned Mathlib.",
+   "verdict": "No exact match for the specified bounded condensed coefficient construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQbarFunctionCoefficients",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Coefficient realization and geometric-fiber comparison in steps 1--3 of the finite-matrix refinement, before rank descent.",
+   "via": [
+    "lem-weil-pbc-condensed-qbar-function-coefficients",
+    "lem-weil-pbc-condensed-qbar-compatible-function-presentations",
+    "lem-weil-pbc-condensed-qbar-lfp-matrix-refinement",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "lem-weil-pbc-condensed-constructible-serre",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedQbarFieldFiberExtension",
+  "file": "lean/Sheaf/Paper/CondensedQbarFieldFiberExtension.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedQbar_fieldFiber_extension",
+  "statement": "theorem condensedQbar_fieldFiber_extension (ℓ : ℕ) [Fact ℓ.Prime] (K K' : Type u) [Field K] [IsAlgClosed K] [Field K'] [IsAlgClosed K'] (i : K →+* K') : Nonempty (CondensedQbarGeometricEvaluation.fieldFiber K ℓ ≅ CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (Spec.map (CommRingCat.ofHom i)) ⋙ CondensedQbarGeometricEvaluation.fieldFiber K' ℓ)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-e7cc2",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T103838-L-2369259",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-e7cc2",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T103838-L-2369259",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files and DAG nodes matched the packet statements and repository interfaces; all delivery modules and both direct importers compiled."
+ }
+}
