@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Mathlib.CategoryTheory.Filtered.Final
+import WeilConjectures.SixFunctors.Etale.Gabber
+import Sheaf.AlgebraicGeometry.FixedBaseCohomologyClassDescent
 
 /-!
 # Continuity of étale cohomology at inverse limits
@@ -18,8 +21,8 @@ Let `(Xᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes ove
 affine transition maps and limit `X`, and let `F` be an étale sheaf on `S`. Then
 `H^q(X, F|_X) = colimᵢ H^q(Xᵢ, F|_{Xᵢ})` ([Stacks, Tag 09YQ]). This is blueprint
 `lemma-weil-pbc-etale-cohomology-continuity`, which belongs to the subsection `sk-prop-h2`; its
-proof is not formalised here. It is recorded in the form in which it is used: if all the
-`H^q(Xᵢ, F|_{Xᵢ})` vanish, so does `H^q(X, F|_X)`.
+elementwise version below follows from class descent and finite-stage vanishing.
+The vanishing criterion for a general Grothendieck abelian coefficient category remains open.
 
 ## Main definitions
 
@@ -60,6 +63,11 @@ theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit {S : Scheme.{u}
       ((Etale.upperStar A c.pt.hom).obj F)) :=
   sorry
 
+attribute [local irreducible] upperStar cohomologyMap Sheaf.H.map
+  CategoryTheory.Abelian.Ext.instAddCommGroup
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity, in the
 form of an elementwise colimit statement for the pullback maps.
 
@@ -82,6 +90,36 @@ theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
     ∀ (i : I) (y : Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} (D.obj i).hom).obj F) q),
       Etale.cohomologyMap (c.π.app i).left _ q y = 0 →
         ∃ (j : I) (g : j ⟶ i), Etale.cohomologyMap (D.map g).left _ q y = 0 :=
-  sorry
+  by
+  classical
+  constructor
+  · exact exists_cohomologyMap_preimage_of_isLimit F D c hc q
+  · intro i y hy
+    let E₀ := D ⋙ Over.forget S
+    let E : Over i ⥤ Scheme.{u} := Over.forget i ⋙ E₀
+    let : ∀ a : Over i, CompactSpace (E.obj a) :=
+      fun a ↦ inferInstanceAs (CompactSpace (D.obj a.left).left)
+    let : ∀ a : Over i, QuasiSeparatedSpace (E.obj a) :=
+      fun a ↦ inferInstanceAs (QuasiSeparatedSpace (D.obj a.left).left)
+    let : ∀ {a b : Over i} (g : a ⟶ b), IsAffineHom (E.map g) :=
+      fun g ↦ inferInstanceAs (IsAffineHom (D.map g.left).left)
+    let π : E ⟶ (Functor.const (Over i)).obj (D.obj i).left :=
+      { app := fun a ↦ (D.map a.hom).left
+        naturality := fun a b g ↦ by
+          change (D.map g.left).left ≫ (D.map b.hom).left = (D.map a.hom).left ≫ 𝟙 _
+          simpa only [Category.comp_id, ← Over.comp_left, ← D.map_comp] using
+            congrArg (fun f ↦ (D.map f).left) g.w }
+    let c₀ := (Over.forget S).mapCone c
+    let c' : Cone E := c₀.whisker (Over.forget i)
+    have hc' : IsLimit c' := (Functor.Initial.isLimitWhiskerEquiv _ c₀).symm hc
+    have hz' : cohomologyMap (c'.π.app (Over.mk (𝟙 i)) ≫
+        π.app (Over.mk (𝟙 i))) _ q y = 0 := by
+      change cohomologyMap ((c.π.app i).left ≫ (D.map (𝟙 i)).left) _ q y = 0
+      have hm : (c.π.app i).left ≫ (D.map (𝟙 i)).left = (c.π.app i).left := by
+        rw [D.map_id, Over.id_left, Category.comp_id]
+      exact (congrArg (fun m ↦ cohomologyMap m _ q y = 0) hm).mpr hy
+    obtain ⟨a, ha⟩ := exists_cohomologyMap_eq_zero_of_isLimit E π c' hc' _ y (Over.mk (𝟙 i)) hz'
+    exact ⟨a.left, a.hom, ha⟩
+
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-fixed-base-cohomology-class-descent",
+ "kind": "statement",
+ "title": "Descent of a fixed-base cohomology class at an inverse limit",
+ "statement": "Let S be a scheme, F an abelian etale sheaf on S, I a small cofiltered category, and D:I→Over(S) a diagram whose underlying schemes are quasi-compact and quasi-separated and whose transition morphisms are affine. Let c be a cone and suppose its underlying scheme cone is limiting. For every q≥0 and every x in H^q(c.pt.left,c.pt.hom inverse image F), there are i in I and y in H^q(D_i.left,D_i.hom inverse image F) such that pullback of y along c_i equals H^q of the forward inverse-image composition comparison applied to x. There is no assertion about a class vanishing eventually.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Theorem 59.51.3, Tag 09YQ; Tag 0032 for directed reindexing"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Replace I opposite by a final small nonempty directed preorder using directed reindexing. Initiality of its opposite preserves the underlying limit cone; the geometric hypotheses restrict to the reindexed diagram.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-exists-directed-final"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse upperStarComp comparisons for the sheaves pulled back from F, and the forward comparisons on the limit. CompatiblePullbackSheafSystem gives their identity, composition and cone equations. The limit sheaf diagram is constant and has its identity colimit cocone.",
+   "uses": [
+    "lem-weil-pbc-compatible-pullback-sheaf-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the canonical cohomology functor and comparison cocone with EtaleLimitCanonicalCohomologyDiagram. Apply continuity for the directed inverse limit with this constant sheaf colimit.",
+   "uses": [
+    "lem-weil-pbc-etale-limit-canonical-cohomology-diagram",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Filtered colimits of abelian groups are preserved by the forgetful functor. Represent the limit class at a stage using Concrete.isColimit_exists_rep. Evaluate the specified cocone comparison equation on the representative and cancel H of the inverse composition isomorphism against H of its forward isomorphism. This gives precisely the displayed pullback equation, with no assertion about eventual vanishing.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-compatible-pullback-sheaf-system",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-etale-limit-canonical-cohomology-diagram",
+  "lem-weil-pbc-filtered-category-exists-directed-final"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 09YQ via compatible pullbacks and canonical cohomology diagrams; W2 stage-3 proof. Explicit kernel-checked congruences transport the compatibility equations. The reindexed diagram has explicit objects and arrows, its cone has explicit projections, and the kernel checks the final definitional conversion after evaluating H."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomology.*(isLimit|colimit)|rightDerived.*(isLimit|colimit)",
+   "date": "2026-10-16",
+   "results": "No direct étale-cohomology continuity theorem found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of a cofiltered inverse limit of quasi compact quasi separated schemes with affine transition maps is the filtered colimit of the cohomology of the stages",
+   "date": "2026-10-16",
+   "results": "Eight hits concern sections of structure sheaves on affine-transition limits, not the stated arbitrary abelian étale sheaf cohomology descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsColimit.eq_iff",
+   "date": "2026-10-16",
+   "results": "The service rejected IsColimit.eq_iff as an unknown identifier. No absence verdict is inferred."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every cohomology class of an abelian etale sheaf pulled back to an inverse limit of qcqs schemes with affine transitions descends to a finite stage",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No absence verdict is inferred; the successful LeanFinder and Mathlib source searches are recorded separately."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of the natural map from stage cohomology to cohomology of an inverse limit of schemes",
+   "date": "2026-10-16",
+   "results": "Independent second reading: eight hits, including HomComplex.CohomologyClass.mk_surjective and inverse limits of types/profinite spaces; none gives etale cohomology descent. Library source search for preimages, representatives, surjectivity and class descent confirms the existing stage-sheaf descent theorem requires torsion, whereas this fixed-base statement does not."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity",
+  "date": "2026-10-16",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Class descent, the first conjunct of the source-library elementwise realization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FixedBaseCohomologyClassDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedBaseCohomologyClassDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_cohomologyMap_preimage_of_isLimit",
+  "statement": "theorem exists_cohomologyMap_preimage_of_isLimit {S : Scheme.{u}}\n    (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) {I : Type u} [SmallCategory I]\n    [IsCofiltered I] (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]\n    [∀ i, QuasiSeparatedSpace (D.obj i).left] [∀ {i j} (g : i ⟶ j), IsAffineHom (D.map g).left]\n    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c)) (q : ℕ) :\n    ∀ x : Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} c.pt.hom).obj F) q,\n      ∃ (i : I) (y : Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} (D.obj i).hom).obj F) q),\n        Etale.cohomologyMap (c.π.app i).left _ q y =\n          Sheaf.H.map ((Etale.upperStarComp AddCommGrpCat.{u + 1} (c.π.app i).left (D.obj i).hom\n            c.pt.hom (Over.w (c.π.app i)).symm).hom.app F) q x",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-f533e",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261016T000944-L-3678012",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-f533e",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261016T000944-L-3678012",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered proofs, unchanged existing signatures, new node signature and dependencies, local transparency scope, source, unit route and report; delivery and three direct importers compile; proved theorems have only permitted axioms."
+ }
+}
