@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient mapping-complex adjunction before the displayed derived inverse limit; presentable coherent adjunction infrastructure reached through lem-coef-presentable-infinity-adjoints. HTT Lemma 5.5.4.14, implication (3) to (1), printed pp. 480-481; colimit closure is part of strong saturation. Read online; not archived in literature/. No Stacks tag states this infinity-categorical theorem.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient mapping-complex adjunction before the displayed derived inverse limit; presentable coherent adjunction infrastructure reached through lem-coef-presentable-infinity-adjoints. HTT Lemma 5.5.4.14, implication (3) to (1), printed pp. 480-481; colimit closure is part of strong saturation.",
    "via": [
     "lem-coef-small-saturated-coslice-presentability",
     "lem-coef-presentable-infinity-adjoints",
@@ -28,9 +28,107 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose $\\lambda<\\kappa$ by [lem-coef-presentable-cardinal-enlargement]. In particular $\\kappa$ is uncountable, $\\lambda$ is sharply smaller in the explicitly stated cardinal sense, $\\mathcal C$ is accessible at both cardinals, and all generator endpoints are $\\kappa$-compact. Write $\\mathcal E=\\operatorname{Fun}(\\Delta^1,\\mathcal C)$ and let $\\mathcal D_0$ be the replete full subcategory of arrows of $W$ with $\\kappa$-compact endpoints. It is essentially small: [lem-coef-presentable-cardinal-enlargement] bounds the equivalence classes of endpoints, and local smallness bounds the components of each mapping space of arrows between chosen endpoints. Colimits in $\\mathcal E$ exist and are computed at the two endpoints by [lem-coef-infinity-yoneda-presheaf-limits]. For a $\\kappa$-small diagram in $\\mathcal D_0$, its colimit arrow is in $W$ by the definition of $W$, and its two endpoints are $\\kappa$-compact by [lem-coef-compact-small-colimits]. Thus $\\mathcal D_0$ is closed under $\\kappa$-small colimits.",
+   "uses": [
+    "lem-coef-presentable-cardinal-enlargement",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-compact-small-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14, p. 480, choice of cardinal and compact-endpoint subcategory; Proposition 5.4.2.2(2)."
+   }
+  },
+  {
+   "text": "By the compactness clause of [lem-coef-accessible-diagram-presentations] with $K=\\Delta^1$, all objects of $\\mathcal D_0$ are $\\kappa$-compact in $\\mathcal E$. Define $\\mathcal D_1$ as their replete full $\\kappa$-filtered-colimit hull in $\\mathcal E$. Applying [lem-coef-accessible-ind-colimit-extension] proves that $\\mathcal D_1$ is $\\kappa$-accessible and closed under all small ambient colimits, including the empty colimit. It also supplies a presentation of each object of $\\mathcal D_1$ by $\\mathcal D_0$ indexed by a small $\\kappa$-filtered poset. The ambient category $\\mathcal E$ is $\\kappa$-accessible by [lem-coef-accessible-diagram-presentations] with $K=\\Delta^1$ and has all small colimits by Step 1; it is therefore presentable by [def-coef-presentable-infinity-category], as the hull lemma requires. Let $W_1$ be the arrows represented by $\\mathcal D_1$.",
+   "uses": [
+    "lem-coef-accessible-diagram-presentations",
+    "lem-coef-accessible-ind-colimit-extension",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14, p. 480, filtered hull and its colimit closure."
+   }
+  },
+  {
+   "text": "Every arrow of $\\mathcal D_0$ belongs to $W$, and $W$ is closed under the filtered arrow colimits and equivalences used to form $\\mathcal D_1$; hence $W_1\\subseteq W$. The generator endpoints chosen in Step 1 are $\\kappa$-compact, so $S\\subseteq\\mathcal D_0\\subseteq W_1$. It remains to prove pushout stability and two-out-of-three for $W_1$. Its repleteness and closure under all small arrow colimits already follow from its definition and Step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14, p. 480, reduction to strong saturation."
+   }
+  },
+  {
+   "text": "We establish a refinement procedure for either finite shape $K=\\Lambda^2_0$ or $K=\\Delta^2$. Start with a presentation of $p:K\\to\\mathcal C$ as a $\\kappa$-filtered colimit of $q:N(A)\\to\\operatorname{Fun}(K,\\mathcal C)$ with pointwise $\\kappa$-compact values; such a presentation exists by [lem-coef-accessible-diagram-presentations]. The procedure below applies to any such presentation, so a repeated application starts with the presentation produced by the preceding application. Fix an edge $e$ of $K$ whose value $p(e)$ belongs to $W_1$. Present $p(e)$ by $r:N(J)\\to\\mathcal D_0$ as in Step 2. Evaluation at $e$ preserves colimits by [lem-coef-infinity-yoneda-presheaf-limits], so $q_e$ and $r$ have equivalent total colimits in $\\mathcal E$. Both take $\\kappa$-compact values there by the compactness clause of [lem-coef-accessible-diagram-presentations] with $K=\\Delta^1$: their two endpoints are $\\kappa$-compact. For any subset $T\\subseteq A$ of cardinality less than $\\kappa$, apply [lem-coef-filtered-presentation-common-refinement] in $\\mathcal E$ to $q_e,r$, with prescribed subsets $T$ and $\\varnothing$. Obtain $\\kappa$-small filtered subsets $A'\\subseteq A$, $J'\\subseteq J$ whose restricted edge colimits are equivalent. The colimit over $J'$ belongs to $W$; the colimit over $A'$ has $\\kappa$-compact endpoints by [lem-coef-compact-small-colimits]. Thus the edge of $p_{A'}=\\operatorname{colim}_{N(A')}q$ belongs to $\\mathcal D_0$. Here the nerves are $\\kappa$-small because $\\kappa$ is uncountable regular and each finite chain is a finite tuple of fewer than $\\kappa$ elements. Let $B$ be all $\\kappa$-small filtered subsets $A'\\subseteq A$ for which this edge of $p_{A'}$ lies in $\\mathcal D_0$. Every $\\kappa$-small subset $T$ is contained in some member of $B$. Consequently $B$ is $\\kappa$-filtered: for fewer than $\\kappa$ members, their union is $\\kappa$-small by regularity, and the property just proved gives an upper bound in $B$; the empty collection is included. Also $A=\\bigcup_{A'\\in B}A'$. Every finite chain in $A$ is contained in one member, so $N(A)=\\bigcup_{A'\\in B}N(A')$. By [lem-coef-directed-cover-colimit-assembly] the diagrams $p_{A'}$ assemble coherently and have colimit $p$. Each is pointwise $\\kappa$-compact by [lem-coef-compact-small-colimits]. If a second edge had already belonged to $\\mathcal D_0$ at every stage of $q$, it still does at every stage $p_{A'}$, because $\\mathcal D_0$ is closed under $\\kappa$-small colimits. Thus this procedure can be repeated for a second designated edge while retaining the first.",
+   "uses": [
+    "lem-coef-accessible-diagram-presentations",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-filtered-presentation-common-refinement",
+    "lem-coef-compact-small-colimits",
+    "lem-coef-directed-cover-colimit-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14, p. 481, construction of B from Lemma 5.5.4.13; directed assembly using Proposition 4.2.3.4 and Corollary 4.2.3.10."
+   }
+  },
+  {
+   "text": "For a span $X'\\leftarrow X\\xrightarrow{f}Y$ with $f\\in W_1$, apply Step 4 to its edge $f$. It becomes a $\\kappa$-filtered diagram of spans $X'_b\\leftarrow X_b\\xrightarrow{f_b}Y_b$ with $f_b\\in\\mathcal D_0$ and all three vertices $\\kappa$-compact. Pushout stability of $W$ puts $f'_b:X'_b\\to X'_b\\amalg_{X_b}Y_b$ in $W$. Its source is $\\kappa$-compact and its target is $\\kappa$-compact by [lem-coef-compact-small-colimits], so $f'_b\\in\\mathcal D_0$. The pushout arrow $f':X'\\to X'\\amalg_XY$ is the filtered colimit of these arrows. Indeed, write $\\Lambda^2_0=N(A)$ for the span poset $A=\\{a\\le b,\\ a\\le c\\}$ and $\\Delta^1\\times\\Delta^1=N(A\\cup\\{d\\})$ with $b,c\\le d$; since $\\mathcal C$ has finite colimits, [lem-coef-infinity-finite-poset-kan-extension] gives a functorial left adjoint $j_!$ of restriction, with $(j_!H)(d)\\simeq\\operatorname{colim}_A H$, so $j_!H$ is the pushout square of the span $H$ and its edge $b\\to d$ is the pushout arrow. Apply $j_!$ to the $\\kappa$-filtered diagram of spans: by the mapping-space adjunction and the colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits], $\\operatorname{Map}(j_!\\operatorname{colim}_b p_b,T)\\simeq\\lim_b\\operatorname{Map}(p_b,j^*T)\\simeq\\lim_b\\operatorname{Map}(j_!p_b,T)$ naturally in $T$, so $j_!$ preserves this colimit. Evaluation at the edge $b\\to d$ preserves colimits, computed objectwise by [lem-coef-infinity-yoneda-presheaf-limits]; hence $f'\\simeq\\operatorname{colim}_b f'_b$ in $\\operatorname{Fun}(\\Delta^1,\\mathcal C)$. Therefore $f'\\in W_1$. Finally Step 2 supplies the initial arrow $0\\to0$, and the pushout of $0\\to0$ along $0\\to X$ is $\\mathrm{id}_X$. Every equivalence $f:X\\to Y$ is equivalent to $\\mathrm{id}_X$ in the arrow category, via the square with vertical edges $\\mathrm{id}_X$ and $f$; repleteness then puts $f$ in $W_1$.",
+   "uses": [
+    "lem-coef-compact-small-colimits",
+    "lem-coef-infinity-finite-poset-kan-extension",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14, p. 481, pushout argument with the colimit functor of Lemma 5.5.2.3 (here the finite-poset left Kan extension); Remark 5.5.4.6 for equivalences."
+   }
+  },
+  {
+   "text": "Let $p:\\Delta^2\\to\\mathcal C$ have edges $f:X\\to Y$, $g:Y\\to Z$, and $h:X\\to Z$, with its specified coherent composition $gf\\simeq h$. If $f,g\\in W_1$, apply Step 4 first to $f$ and then to $g$. This yields pointwise $\\kappa$-compact triangles whose $f$- and $g$-edges are in $\\mathcal D_0$. Two-out-of-three for $W$ puts their $h$-edges in $W$; compactness of the vertices puts these edges in $\\mathcal D_0$. Their filtered colimit is $h$ by [lem-coef-infinity-yoneda-presheaf-limits], so $h\\in W_1$. If $f,h\\in W_1$, refine first the $f$-edge and then the $h$-edge; two-out-of-three in $W$ gives the $g$-edge at each compact stage, and evaluation gives $g\\in W_1$ on taking the filtered colimit. If $g,h\\in W_1$, refine first the $g$-edge and then the $h$-edge; two-out-of-three in $W$ gives the $f$-edge at each compact stage, and its filtered colimit gives $f\\in W_1$. In both repeated refinements the preservation of the first edge is the last sentence of Step 4.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14, pp. 481-482, all three two-out-of-three cases."
+   }
+  },
+  {
+   "text": "The replete class $W_1$ contains $S$ and every equivalence, is closed under all small arrow colimits and pushouts, and satisfies two-out-of-three by Steps 2-6. The defining minimality of $W$ gives $W\\subseteq W_1$; Step 3 gives the reverse inclusion. Thus $\\mathcal A_W=\\mathcal D_1$. Its accessibility and closure under all small ambient arrow colimits are Step 2. For each such colimit, fullness identifies the mapping-space universal property in the subcategory with the ambient one, so the inclusion preserves it and the colimits are computed as claimed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14 (3)⇒(1), conclusion; closure under colimits is Definition 5.5.4.5(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-coef-accessible-diagram-presentations",
+  "lem-coef-accessible-ind-colimit-extension",
+  "lem-coef-compact-small-colimits",
+  "lem-coef-directed-cover-colimit-assembly",
+  "lem-coef-filtered-presentation-common-refinement",
+  "lem-coef-infinity-finite-poset-kan-extension",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-presentable-cardinal-enlargement"
+ ],
+ "proof_origin": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma 5.5.4.14 (3)⇒(1), pp. 480-482; Step 4 expands the refinement and directed-assembly argument, and Step 6 writes all three cases.",
+  "by": "document"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,7 +188,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-saturated-coslice-presentability",
@@ -98,5 +196,20 @@
   "group": "N4"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-small-saturated-arrow-accessibility",
+  "worker": "Q23",
+  "summary": "Seven explicit HTT proof steps with five statement-only support nodes. Second reading removed the redundant compact-arrow node using diagram compactness, made repeated refinement preserve its input presentation, and spelled out equivalence closure. No Mathlib leaf or Lean attachment. Maintainer reading: Step 5 now cites lem-coef-infinity-finite-poset-kan-extension for the coherent pushout functor, which the colimit-commutation argument needs.",
+  "blueprint": "Realizes the ancestor proof paragraph on the finite-coefficient mapping-complex adjunction through HTT Lemma 5.5.4.14 (3)⇒(1), including the strong-saturation colimit closure."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-133eca1ef",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-133eca1ef (reviewer sub-agent of L); spot-checked: Read the item, all five new nodes, the cited statements (def-coef-presentable-infinity-category, lem-coef-compact-small-colimits, lem-coef-infinity-yoneda-presheaf-limits), the parent coslice node and the unit record. Also read HTT (2017 text) at Def 5.5.4.5, Rem 5.5.4.6-7, Lem 5.5.4.13-14 with full proofs (pp.476-482), Lem 5.3.4.9, Prop 5.3.4.13, Cor 5.3.4.15, Prop 5.4.4.3 with Lem 5.4.4.2, and Prop 4.2.3.4, Rem 4.2.3.9, Cor 4.2.3.10. The item statement equals HTT 5.5.4.14 (3)=>(1) plus Def 5.5.4.5(2). Equivalences and repleteness are already in the generated class by Rem 5.5.4.6, so nothing is weakened. Steps 1-4, 6 and 7 check against their sources. In Step 4: B is kappa-filtered via regularity; the nerves are kappa-small because kappa is uncountable; the directed-cover hypotheses hold; the first edge is retained because D_0 is closed under kappa-small colimits. All five new nodes are true, statement-only and self-contained. They are tested on small cases (Set with omega/omega_1, empty K, E_0={empty set}, N(N) as a union of finite pieces) and are not restatements of the item. lem-coef-directed-cover-colimit-assembly strictly generalizes the existing lem-coef-colimit-subdiagram-approximation, which covers only I_kappa(K); it is not a duplicate. The other rank and criterion nodes concern ordinary categories. FIX (C1/E5): Step 5 claimed the pushout arrow is the colimit of the stagewise pushout arrows without any coherent pushout functor; HTT uses a colimit functor here (Lemma 5.5.2.3). I added the existing same-unit node lem-coef-infinity-finite-poset-kan-extension (the span poset inside the square poset gives a functorial j_! whose value at the new corner is the pushout). Together with yoneda-presheaf-limits this shows j_! preserves the colimit, and evaluation at the edge gives f' = colim f'_b. Also updated Step 5's source place and regenerated proof_deps. No cycle (that node's closure has 106 nodes and does not reach the item). All dependencies are in unit sk-prop-sf-biduality-general, so no tool_uses. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ }
 }
