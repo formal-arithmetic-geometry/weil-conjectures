@@ -35,9 +35,196 @@
   "def-weil-pbc-category-colimit",
   "def-sfb-monoidal-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to each of the two tensor functors in the hypotheses. Tensoring on either side preserves every small colimit, including the initial object, coproducts, pushouts and sequential colimits. Thus $V\\odot0\\cong0\\cong0\\odot V$ for every $V$. We will use the colimit universal property of [def-weil-pbc-category-colimit] also in the following elementary form: maps from a colimit are determined by their composites with all cocone legs. Iterated colimits can be exchanged because, in either order, a map out is exactly a family of maps compatible in both indices.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/9801082",
+    "place": "Free tensor-word formula and colimit constructions, pp. 9–12; colimit preservation is Stacks Tag 0038, lemma-adjoint-exact. The exchange assertion is the written universal-property argument."
+   }
+  },
+  {
+   "text": "Use [lem-coef-monoidal-structural-coherence] for every reassociation or insertion of units below; tensor factors always retain their order. For any algebra $C$, define $\\mu_C^{(0)}=\\eta_C$, $\\mu_C^{(1)}=1_C$, and $\\mu_C^{(r+1)}=\\mu_C(\\mu_C^{(r)}\\odot1_C)$ for $r\\geq1$. The formula $\\mu_C^{(r+s)}=\\mu_C(\\mu_C^{(r)}\\odot\\mu_C^{(s)})$ holds with the canonical reassociations: for $s=0$ it is the right unit identity; for $s=1$ it is the definition (with $r=0$ given by the left unit identity); its step from $s$ to $s+1$ is exactly $\\mu_C(\\mu_C\\odot1_C)=\\mu_C(1_C\\odot\\mu_C)$. Consequently multiplying a consecutive block of factors first, and then multiplying the resulting blocks, gives the same ordered product. This proves the block-contraction identities used below, rather than assuming an additional algebraic coherence theorem.",
+   "uses": [
+    "lem-coef-monoidal-structural-coherence",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/9801082",
+    "place": "Algebraic checks behind the tensor-word formula and the contraction maps in the proof of Lemma 5.2, pp. 10–12; the induction fills the omitted checks."
+   }
+  },
+  {
+   "text": "Form $P(X)=\\coprod_{n\\geq0}X^{\\odot n}$; on a map $u$ use $\\coprod_n u^{\\odot n}$. Step 1 expands $P(P(X))$ into the coproduct indexed by a finite list $(n_1,\\ldots,n_k)$ of nonnegative lengths, whose summand is canonically $X^{\\odot(n_1+\\cdots+n_k)}$. Map this summand into the summand of that total length in $P(X)$. These maps define the monad multiplication; the length-one inclusion is its unit. On each summand of $P(P(P(X)))$ the two monad-associativity composites concatenate the same ordered list of letters; their structural maps agree by [lem-coef-monoidal-structural-coherence]. Each monad-unit composite concatenates singleton lists and hence is the identity, including on the empty list. These formulas also show naturality. Concatenation of a pair of words makes $T(X)$ with underlying object $P(X)$ an associative unital algebra, whose unit is the empty-word inclusion. For $u:X\\to U(C)$ define $T(X)\\to C$ on the length-$n$ summand as $\\mu_C^{(n)}u^{\\odot n}$. Step 2 proves that it preserves concatenation and the unit. Conversely every algebra map has this formula, since every word is the product of its length-one letters. Restriction to length one and this extension are inverse and natural in $X,C$, proving $T\\dashv U$.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-coef-monoidal-structural-coherence",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/9801082",
+    "place": "Free monoid construction before the filtration, printed p. 10; also Muro Section 8, free-algebra formula, and p. 1592, monad argument. Distribution and all monad laws are explicit here."
+   }
+  },
+  {
+   "text": "A monad action $a:P(A)\\to A$ restricts on lengths $0,1,2$ to maps $\\eta:\\mathbf1\\to A$, $1_A$, and $\\mu:A\\odot A\\to A$. The action law on an outer word of length two with inner lengths $(0,1)$ and $(1,0)$ is the two unit laws; with inner lengths $(2,1)$ and $(1,2)$ it identifies both associative products with the length-three part of $a$. With lengths $(r,1)$ it recursively forces $a_{r+1}=\\mu(a_r\\odot1_A)$, so the whole action is $\\coprod_r\\mu_A^{(r)}$. Conversely the block-contraction identity of step 2 verifies the action law on each list $(n_1,\\ldots,n_k)$ for this action. A map commutes with actions exactly when it preserves the length-zero and length-two maps, since the other lengths are their iterates. This identifies monad algebras and their morphisms with the strict associative unital algebras of the statement. The monad obtained from $T\\dashv U$ is the displayed one, since its multiplication evaluates a word of words by concatenation.",
+   "uses": [
+    "lem-coef-monoidal-structural-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Muro, Section 8 free-algebra formula and proof of Theorem 1.2, printed p. 1592; action-law verification written out, with the ordinary monad conventions of the item."
+   }
+  },
+  {
+   "text": "Here is the elementary filtered-diagonal argument needed for colimits. For a small filtered category $I$ and $H:I\\times I\\to\\mathcal C$, a cocone $t_i:H(i,i)\\to Z$ extends to a cocone on $H$ by setting $t_{i,j}=t_k H(a,b)$, where $a:i\\to k$ and $b:j\\to k$. To compare two choices, send their targets to a common object and then equalize the resulting two arrows from $i$ and the resulting two arrows from $j$; filteredness supplies these successive equalizations. The cocone identities on the diagonal then give equality. The same choice-of-common-target calculation gives compatibility with any pair of arrows in $I$. The extension is unique because $(a,b):(i,j)\\to(k,k)$ forces its value, and restriction recovers $t_i$. Thus the colimits over $I^2$ and over the diagonal have the same universal property. Applying this binary argument repeatedly gives the same assertion for the diagonal in every positive finite power $I^n$. For $n=0$, a cocone on a constant diagram with identity transition maps is a single map, since $I$ is nonempty and any two objects map to a common object.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Elementary argument from the filteredness definition (Stacks Tag 002V, definition-directed) and the colimit definition; it proves the diagonal reindexing here, rather than citing it as an unrecorded input."
+   }
+  },
+  {
+   "text": "Let $X_i$ be a small filtered diagram and $L=\\varinjlim_iX_i$. Repeated separate colimit preservation from [lem-weil-pbc-left-adjoint-preserves-colimits] identifies $L^{\\odot n}$ with the colimit over $(i_1,\\ldots,i_n)$ of $X_{i_1}\\odot\\cdots\\odot X_{i_n}$. Step 5 identifies it with $\\varinjlim_i X_i^{\\odot n}$; the case $n=0$ uses the last sentence of that step. Exchange the coproduct over $n$ and the colimit over $i$ by the compatible-family universal property of step 1. The resulting isomorphism $\\varinjlim_iP(X_i)\\cong P(L)$ has the canonical coprojections, so it is precisely the canonical comparison. This proves that $P$ preserves small filtered colimits.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Muro, proof of Theorem 1.2, printed p. 1592, the filtered-colimit assertion following the free-word formula; full diagonal and exchange arguments are steps 1 and 5."
+   }
+  },
+  {
+   "text": "For a small filtered diagram of algebras $A_i$, take an arbitrary underlying colimit cocone $\\iota_i:U(A_i)\\to L$. Steps 1 and 5 give the colimit cocones $U(A_i)^{\\odot r}\\to L^{\\odot r}$ for each positive finite $r$. The maps $\\iota_i\\mu_{A_i}$ therefore define a unique $\\mu_L:L\\odot L\\to L$. All $\\iota_i\\eta_{A_i}:\\mathbf1\\to L$ agree, by passing any two indices to a common target; choose their common value as $\\eta_L$. Associativity and the unit identities follow after precomposition with the colimit legs in powers three and one, where they are exactly those of $A_i$. These equations also show that every $\\iota_i$ is an algebra morphism and uniquely determine this algebra structure on $L$. Given an algebra cocone to $C$, its unique underlying map $L\\to U(C)$ preserves multiplication by checking on $U(A_i)\\odot U(A_i)$, and preserves the unit by checking at one index. It is thus the unique algebra cocone factorization. This works for every chosen underlying colimit, which proves creation, not merely preservation, by $U$.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Muro, proof of Theorem 1.2, printed p. 1592, the forgetful filtered-colimit assertion; creation and algebra laws checked here."
+   }
+  },
+  {
+   "text": "By absorption of $0$ from step 1, the free algebra $T(0)$ has underlying object $\\mathbf1$ because all its positive-length summands are initial. Its multiplication and unit are the canonical unit-algebra maps. The adjunction in step 3 gives exactly one algebra map $T(0)\\to C$ for every $C$, since there is exactly one map $0\\to U(C)$. It is therefore the initial algebra.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/9801082",
+    "place": "Free monoid formula, printed p. 10, including its length-zero term."
+   }
+  },
+  {
+   "text": "We now construct the free pushout; write $A$ also for $U(A)$ and put $h:X\\to A$ equal to the restriction of $g$ to length one. Put $W_n=A\\odot Y\\odot A\\odot\\cdots\\odot Y\\odot A$, with $n$ copies of $Y$ and $W_0=A$. Define the $n$-cube $W_n(S)$, for $S\\subseteq\\{1,\\ldots,n\\}$, by replacing the $i$th $Y$ by $X$ if $i\\notin S$; arrows replace $X$ by $Y$ using $f$. Let $D_n$ be the colimit of this cube with its terminal vertex removed. Its map $d_n:D_n\\to W_n$ is the alternating pushout product $q_n$ in the statement. To verify this identification, for arbitrary ordered arrows $a_1,\\ldots,a_k$ prove by induction that the boundary of their tensor $k$-cube is the domain of the left-associated pushout product: at the last coordinate the boundary is $(L_1\\odot\\cdots\\odot L_{k-1}\\odot K_k)\\amalg_{D_{k-1}'\\odot K_k}(D_{k-1}'\\odot L_k)$, where $D_{k-1}'$ is the earlier boundary. A cocone on this displayed pushout is exactly a cocone on the punctured $k$-cube, by separate colimit preservation. The case $k=1$ has boundary $K_1$. Apply this to $j,f,j,\\ldots,f,j$. Every vertex containing a source $0$ of $j$ is initial by step 1, so its map to any cocone vertex is unique and imposes no condition. Removing these initial vertices leaves exactly the punctured $n$-cube just defined. This proves $d_n\\cong q_n$ with the displayed order, without shuffling factors.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-monoidal-structural-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/9801082",
+    "place": "Proof of Lemma 5.2, pp. 10–11, punctured cubes; ordered nonsymmetric pushout-product identification as in Haugseng Theorem 3.10. The boundary induction is written here."
+   }
+  },
+  {
+   "text": "Construct $B_n$, maps $e_n:W_n\\to B_n$, and transition composites $b_{r,s}:B_r\\to B_s$ by induction. Set $B_0=A$ and $e_0=1_A$. For $S\\subsetneq\\{1,\\ldots,n\\}$ define $r_S:W_n(S)\\to W_{|S|}$ by applying $h$ to all $X$ factors and multiplying each resulting maximal consecutive block of $A$ factors. Step 2 makes these contractions independent of their order. Assuming stages below $n$ constructed, map $W_n(S)$ to $B_{n-1}$ by $b_{|S|,n-1}e_{|S|}r_S$. For an inclusion $S\\subset S\\cup\\{i\\}$ still proper, first contract all $X$ factors except the one at $i$. The two proposed maps then differ precisely by the single-$X$ face relation at the already constructed stage $|S|+1<n$; all other contractions agree by step 2. This proves compatibility on adjacent inclusions, hence on every cube arrow. It gives $a_n:D_n\\to B_{n-1}$. Take $B_n=B_{n-1}\\amalg_{D_n}W_n$, let $e_n$ be its second map and let $b_{n-1,n}$ be its first map. The pushout equation proves, for every proper $S$, $e_n\\circ W_n(S\\subseteq\\{1,\\ldots,n\\})=b_{|S|,n}e_{|S|}r_S$, establishing the inductive face invariant at stage $n$. This also supplies the base case $n=1$: its only face is $A\\odot X\\odot A\\xrightarrow{1\\odot h\\odot1}A^{\\odot3}\\xrightarrow{\\mu_A^{(3)}}A$. No future-stage identity is used in constructing an earlier stage.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-monoidal-structural-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/9801082",
+    "place": "Proof of Lemma 5.2, pp. 10–11, definition of the attaching map and its compatibility square; all induction invariants and the base case are explicit."
+   }
+  },
+  {
+   "text": "Let $B=\\varinjlim_n B_n$, let $\\kappa_n:B_n\\to B$ be the cocone legs and set $E_n=\\kappa_ne_n$. We record its presentation directly from the pushouts: a map $B\\to Z$ is equivalent to a family $w_n:W_n\\to Z$ such that $w_nu_i=w_{n-1}r_i$ for every $n\\geq1$ and every single-$X$ face. Here $u_i$ applies $f$ in position $i$ and $r_i$ applies $h$ there and contracts its two neighbouring $A$ factors, giving a map to $W_{n-1}$. Indeed, after stages below $n$ have been mapped to $Z$, repeated single-face relations make the composites of $w_n$ on every vertex $W_n(S)$ equal to $w_{|S|}r_S$. They therefore agree with the already defined map on $D_n$. The pushout gives a unique extension to $B_n$; induction and the sequential-colimit universal property give the asserted equivalence. In particular the $E_n$ jointly detect equality of maps out of $B$. Tensoring this entire sequence of pushouts and its final colimit on either side by an arbitrary fixed object preserves all these universal properties by [lem-weil-pbc-left-adjoint-preserves-colimits]. Thus maps from $B\\odot V$ or $V\\odot B$ have the same presentation with $V$ tensored into every displayed map. Repeating this observation gives the analogous equality test and construction for two or three tensor factors of $B$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/9801082",
+    "place": "Proof of Lemma 5.2, pp. 11–12, universal properties of the stages; explicit presentation replaces the omitted compatibility arguments for multiplication and the pushout."
+   }
+  },
+  {
+   "text": "For $p,q\\geq0$ define $c_{p,q}:W_p\\odot W_q\\to W_{p+q}$ by multiplying the final $A$ of the first word with the initial $A$ of the second, leaving the other factors in order. Put $v_{p,q}=E_{p+q}c_{p,q}$. These maps respect each presentation relation in either variable. For example, for an $X$ at position $i$ of the first word, apply the face relation for $E_{p+q}$ to obtain $v_{p,q}(u_i\\odot1)=E_{p+q-1}r_i'\\bar c_{p,q}$, where $\\bar c_{p,q}$ is the same join with that factor still $X$. The equality $r_i'\\bar c_{p,q}=c_{p-1,q}(r_i\\odot1)$ holds by tensor bifunctoriality if its contracted block is disjoint from the join. If the block meets the join, both sides multiply the identical ordered consecutive block $A,h(X),A,A$; the block identity of step 2 proves equality. This yields $v_{p,q}(u_i\\odot1)=v_{p-1,q}(r_i\\odot1)$. For an $X$ in the second word the same check is either disjoint, or multiplies the ordered block $A,A,h(X),A$, and gives $v_{p,q}(1\\odot u_i)=v_{p,q-1}(1\\odot r_i)$. These are all the relations, including $p=0$ or $q=0$ whenever the corresponding face exists. Applying the tensor presentations of step 11 first in $p$ and then in $q$ defines a unique $\\mu_B:B\\odot B\\to B$ with $\\mu_B(E_p\\odot E_q)=E_{p+q}c_{p,q}$.",
+   "uses": [
+    "lem-coef-monoidal-structural-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/9801082",
+    "place": "Proof of Lemma 5.2, pp. 11–12, multiplication; the disjoint and adjacent contractions explicitly fill its omitted well-definedness check."
+   }
+  },
+  {
+   "text": "Set $\\eta_B=E_0\\eta_A$. To check associativity of $\\mu_B$, use the three-factor equality test of step 11 and precompose with $E_p\\odot E_q\\odot E_r$. The two maps are the composites of $E_{p+q+r}$ with $c_{p+q,r}(c_{p,q}\\odot1)$ and $c_{p,q+r}(1\\odot c_{q,r})$. If $q>0$, the two joins multiply disjoint pairs of $A$ factors, so the maps agree by bifunctoriality; if $q=0$, they multiply the same three consecutive $A$ factors in the two bracketings, so they agree by associativity of $A$. Structural reassociations agree by [lem-coef-monoidal-structural-coherence]. The left and right unit identities, after precomposition with $E_n$, reduce respectively to the left and right unit identity of $A$ on the first and last $A$ factor of $W_n$. Hence $B$ is an algebra. For $p=q=0$, $c_{0,0}=\\mu_A$, so $a:=E_0:A\\to B$ preserves multiplication and, by the chosen $\\eta_B$, the unit. Define $y:Y\\to B$ by inserting $\\eta_A$ at both ends of $Y$ to map to $W_1$, then applying $E_1$. The stage-one face relation, precomposed with these units, is $yf=ah$. Step 3 extends $y$ to an algebra map $T(Y)\\to B$ agreeing with $a\\circ g$ on $T(X)$.",
+   "uses": [
+    "lem-coef-monoidal-structural-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/9801082",
+    "place": "Proof of Lemma 5.2, printed pp. 12–13, algebra structure and initial square; the associativity, both units and the generator square are checked explicitly."
+   }
+  },
+  {
+   "text": "Let $C$ be any algebra, $\\alpha:A\\to C$ an algebra morphism and $\\beta:Y\\to U(C)$ a morphism with $\\beta f=\\alpha h$. Define $w_n:W_n\\to U(C)$ by applying $\\alpha$ to every $A$ factor and $\\beta$ to every $Y$ factor and then applying the ordered product $\\mu_C^{(2n+1)}$. On the face with an $X$ at position $i$, substitute $\\beta f=\\alpha h$. Since $\\alpha$ preserves multiplication, the product on the consecutive block $\\alpha(A),\\alpha h(X),\\alpha(A)$ is $\\alpha$ of its contraction in $A$. Step 2 now gives exactly $w_nu_i=w_{n-1}r_i$. The presentation of step 11 therefore gives a unique underlying map $t:B\\to U(C)$ with $tE_n=w_n$. It preserves the unit since $w_0=\\alpha$. It preserves multiplication after checking on $E_p\\odot E_q$: one side is $w_{p+q}c_{p,q}$, the other is $\\mu_C(w_p\\odot w_q)$; the block identity of step 2 and multiplicativity of $\\alpha$ identify both with the ordered evaluation of the two words. The two-factor equality test of step 11 proves the equality on $B\\odot B$. Thus $t$ is an algebra morphism with $ta=\\alpha$ and $ty=\\beta$.",
+   "uses": [
+    "lem-coef-monoidal-structural-coherence",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/9801082",
+    "place": "Proof of Lemma 5.2, printed p. 13, existence of the universal algebra morphism; the face compatibility and multiplicativity omitted there are proved here."
+   }
+  },
+  {
+   "text": "For uniqueness as an algebra map, $E_n$ is the ordered product in $B$ of the $n+1$ maps $a$ on its $A$ factors and the $n$ maps $y$ on its $Y$ factors. This follows by induction on $n$ from the formula for $\\mu_B(E_p\\odot E_q)$: expanding each $y$ inserts two unit factors, and every subsequent join removes those factors by the two unit laws of $A$, leaving exactly $E_n$ on $W_n$. It includes $n=0$, where $E_0=a$. Any algebra map with the prescribed values on $a,y$ must therefore have composites $w_n$ with every $E_n$, and step 11 forces it to equal $t$. By the adjunction in step 3, giving an algebra map $T(Y)\\to C$ with agreement on $T(X)$ is exactly giving $\\beta$ with $\\beta f=\\alpha h$. Hence the constructed algebra $B$ is the required pushout. Its underlying object is the chosen sequential colimit, and its map from $A$ is the colimit of the transition maps. Steps 9–10 identify each transition as a pushout of the prescribed $q_n$. All indexing categories used are finite, countable or small filtered, hence lie in the fixed universe. The whole construction has kept the displayed tensor order and has used only the given colimits, the two tensor adjunctions and the algebra and monoidal identities.",
+   "uses": [
+    "lem-coef-monoidal-structural-coherence",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/9801082",
+    "place": "Proof of Lemma 5.2, printed p. 13, uniqueness of the universal morphism and conclusion; ordered form as in Haugseng Theorem 3.10."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-monoidal-structural-coherence",
+  "def-sfb-monoidal-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, middle finite-level mapping-complex adjunction: algebraic free-pushout input through the recorded associative-transfer ancestry. Ordered-word proof written out from the online Schwede–Shipley Lemma 5.2 construction, Haugseng Theorem 3.10 and Muro Section 8; these external documents are not archived here. The omitted compatibility checks are proved in steps 10–15."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -122,10 +309,94 @@
    "results": "{\"t\": \"2026-10-16T18:57:50Z\", \"tool\": \"grep\", \"query\": \"free|Free|pushout|Pushout|filtrat|Filtrat\", \"sub\": \"CategoryTheory/Monoidal/Mon.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: The focused grep in CategoryTheory/Monoidal/Mon.lean returned zero hits; it supplies no free-algebra pushout filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "free|Free|pushout|Pushout|filtrat|Filtrat",
+   "results": "{\"t\": \"2026-10-16T19:50:04Z\", \"tool\": \"grep\", \"query\": \"free|Free|pushout|Pushout|filtrat|Filtrat\", \"sub\": \"CategoryTheory/Monoidal/Mon.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned free monoids in Type, tensor algebras over a commutative semiring, free monoidal-category syntax, structural tensor pushouts, or generic category-theory tools; none states the ordinary algebraic filtration in every nonsymmetric biclosed monoidal category. Monoidal/Mon.lean focused grep has no hits. The Loogle query with Mon_ returned an unknown-identifier diagnostic and is not evidence of absence; the second Loogle query and two semantic phrasings were also run."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a cocomplete monoidal category free monoids are tensor words and free extensions have an iterated pushout product filtration",
+   "results": "{\"t\": \"2026-10-16T19:50:05Z\", \"tool\": \"leansearch\", \"query\": \"In a cocomplete monoidal category free monoids are tensor words and free extensions have an iterated pushout product filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.FreeMonoidalCategory.tensor_eq_tensor\", \"MonCat.free\", \"CategoryTheory.FreeMonoidalCategory.tensorFunc\", \"CategoryTheory.FreeMonoidalCategory\", \"CategoryTheory.FreeMonoidalCategory.tensor\", \"Mathlib.Tactic.Coherence.LiftObj_tensor\", \"CategoryTheory.FreeMonoidalCategory.inclusionObj\", \"CategoryTheory.FreeMonoidalCategory.recOn\"], \"digest\": \"17eb6d9927b01c3a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned free monoids in Type, tensor algebras over a commutative semiring, free monoidal-category syntax, structural tensor pushouts, or generic category-theory tools; none states the ordinary algebraic filtration in every nonsymmetric biclosed monoidal category. Monoidal/Mon.lean focused grep has no hits. The Loogle query with Mon_ returned an unknown-identifier diagnostic and is not evidence of absence; the second Loogle query and two semantic phrasings were also run."
+  },
+  {
+   "tool": "loogle",
+   "query": "Mon_, Monad, pushout",
+   "results": "{\"t\": \"2026-10-16T19:50:05Z\", \"tool\": \"loogle\", \"query\": \"Mon_, Monad, pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Mon_'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned free monoids in Type, tensor algebras over a commutative semiring, free monoidal-category syntax, structural tensor pushouts, or generic category-theory tools; none states the ordinary algebraic filtration in every nonsymmetric biclosed monoidal category. Monoidal/Mon.lean focused grep has no hits. The Loogle query with Mon_ returned an unknown-identifier diagnostic and is not evidence of absence; the second Loogle query and two semantic phrasings were also run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor word monad in a biclosed monoidal category and free associative algebra pushout filtration by alternating words",
+   "results": "{\"t\": \"2026-10-16T19:50:06Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor word monad in a biclosed monoidal category and free associative algebra pushout filtration by alternating words\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearAlgebra.FreeProduct.FreeTensorAlgebra\", \"TensorAlgebra.Rel\", \"TensorAlgebra\", \"LinearAlgebra.FreeProduct.rel'\", \"CategoryTheory.FreeMonoidalCategory.tensor\", \"LinearAlgebra.FreeProduct.rel\", \"LinearAlgebra.FreeProduct.rel.prod\", \"TensorAlgebra.induction\"], \"digest\": \"9ddfaf20ad955bc6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned free monoids in Type, tensor algebras over a commutative semiring, free monoidal-category syntax, structural tensor pushouts, or generic category-theory tools; none states the ordinary algebraic filtration in every nonsymmetric biclosed monoidal category. Monoidal/Mon.lean focused grep has no hits. The Loogle query with Mon_ returned an unknown-identifier diagnostic and is not evidence of absence; the second Loogle query and two semantic phrasings were also run."
+  },
+  {
+   "tool": "grep",
+   "query": "final_diag_of_isFiltered|isColimitWhiskerEquiv|colimitIso",
+   "results": "{\"t\": \"2026-10-16T19:50:21Z\", \"tool\": \"grep\", \"query\": \"final_diag_of_isFiltered|isColimitWhiskerEquiv|colimitIso\", \"sub\": \"CategoryTheory/Filtered/Final.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"325\", \"330\"], \"digest\": \"e8cac7f7a0be417d\"}",
+   "date": "2026-10-16",
+   "verdict": "partial auxiliary match: the filtered diagonal and reindexing declarations were read; step 5 gives their elementary cocone proof directly, so no node is created for this two/three-line consequence of filteredness and the colimit universal property."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.final_diag_of_isFiltered",
+   "results": "{\"t\": \"2026-10-16T19:50:22Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.final_diag_of_isFiltered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.final_diag_of_isFiltered\"], \"digest\": \"45f516ee32432de3\"}",
+   "date": "2026-10-16",
+   "verdict": "partial auxiliary match: the filtered diagonal and reindexing declarations were read; step 5 gives their elementary cocone proof directly, so no node is created for this two/three-line consequence of filteredness and the colimit universal property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a small filtered category I and a diagram on I times I the colimit of the diagonal diagram equals the colimit of the full diagram",
+   "results": "{\"t\": \"2026-10-16T19:50:22Z\", \"tool\": \"leansearch\", \"query\": \"For a small filtered category I and a diagram on I times I the colimit of the diagonal diagram equals the colimit of the full diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coconeOfCoconeUncurryIsColimit\", \"CategoryTheory.Functor.final_diag_of_isFiltered\", \"CategoryTheory.Limits.instHasColimitProd\", \"CategoryTheory.Limits.colimitLimitToLimitColimitCone_iso\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.MonoCoprod.isColimitBinaryCofanSum\", \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π_assoc\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\"], \"digest\": \"236c092c8d2679e6\"}",
+   "date": "2026-10-16",
+   "verdict": "partial auxiliary match: the filtered diagonal and reindexing declarations were read; step 5 gives their elementary cocone proof directly, so no node is created for this two/three-line consequence of filteredness and the colimit universal property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal functor of a filtered category is final and restriction along it preserves colimit cocones",
+   "results": "{\"t\": \"2026-10-16T19:50:25Z\", \"tool\": \"leanfinder\", \"query\": \"The diagonal functor of a filtered category is final and restriction along it preserves colimit cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFiltered.isSifted\", \"CategoryTheory.Functor.final_diag_of_isFiltered\", \"CategoryTheory.final_eval\", \"CategoryTheory.IsSifted.toFinal\", \"CategoryTheory.IsFiltered.final_fst\", \"CategoryTheory.IsCardinalAccessibleCategory.final_toCostructuredArrow\", \"CategoryTheory.Under.final_forget\", \"CategoryTheory.IsFiltered.final_snd\"], \"digest\": \"cd84292ba903fd6a\"}",
+   "date": "2026-10-16",
+   "verdict": "partial auxiliary match: the filtered diagonal and reindexing declarations were read; step 5 gives their elementary cocone proof directly, so no node is created for this two/three-line consequence of filteredness and the colimit universal property."
+  },
+  {
+   "tool": "grep",
+   "query": "def isColimitWhiskerEquiv|def colimitIso",
+   "results": "{\"t\": \"2026-10-16T19:51:05Z\", \"tool\": \"grep\", \"query\": \"def isColimitWhiskerEquiv|def colimitIso\", \"sub\": \"CategoryTheory/Limits/Final.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"294\", \"350\"], \"digest\": \"374f2fc9c609be4e\"}",
+   "date": "2026-10-16",
+   "verdict": "partial auxiliary match: the filtered diagonal and reindexing declarations were read; step 5 gives their elementary cocone proof directly, so no node is created for this two/three-line consequence of filteredness and the colimit universal property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mon\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-16T19:51:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Mon\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Std.Format.MonadPrettyFormat.pushOutput\", \"CategoryTheory.Limits.pushout.instIsSplitMonoInl\", \"CategoryTheory.Limits.pushout.instIsSplitMonoInr\", \"CategoryTheory.MorphismProperty.pushouts_monotone\", \"CategoryTheory.Abelian.mono_pushout_of_mono_f\", \"CategoryTheory.Abelian.mono_pushout_of_mono_g\", \"AddMonoidAlgebra.instIsPushout\", \"AddMonoidAlgebra.instIsPushout'\"], \"digest\": \"f5526b05a4c4745f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned free monoids in Type, tensor algebras over a commutative semiring, free monoidal-category syntax, structural tensor pushouts, or generic category-theory tools; none states the ordinary algebraic filtration in every nonsymmetric biclosed monoidal category. Monoidal/Mon.lean focused grep has no hits. The Loogle query with Mon_ returned an unknown-identifier diagnostic and is not evidence of absence; the second Loogle query and two semantic phrasings were also run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free monoid objects in arbitrary nonsymmetric monoidal categories have pushouts constructed by tensor words with relations",
+   "results": "{\"t\": \"2026-10-16T19:51:08Z\", \"tool\": \"leanfinder\", \"query\": \"Free monoid objects in arbitrary nonsymmetric monoidal categories have pushouts constructed by tensor words with relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.FreeMonoidalCategory.tensor\", \"CategoryTheory.FreeMonoidalCategory.categoryFreeMonoidalCategory\", \"Monoid.PushoutI\", \"CategoryTheory.FreeMonoidalCategory.tensor_eq_tensor\", \"Monoid.CoprodI.Rel\", \"MonCat.Colimits.hasColimits_monCat\", \"CategoryTheory.FreeMonoidalCategory.mk_tensor\", \"Monoid.coprodCon\"], \"digest\": \"3b307fa61ae452e1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned free monoids in Type, tensor algebras over a commutative semiring, free monoidal-category syntax, structural tensor pushouts, or generic category-theory tools; none states the ordinary algebraic filtration in every nonsymmetric biclosed monoidal category. Monoidal/Mon.lean focused grep has no hits. The Loogle query with Mon_ returned an unknown-identifier diagnostic and is not evidence of absence; the second Loogle query and two semantic phrasings were also run."
+  },
+  {
+   "tool": "grep",
+   "query": "T\\(X\\)|free|Free|pushout|filtrat",
+   "results": "{\"t\": \"2026-10-16T19:53:26Z\", \"tool\": \"grep\", \"query\": \"T\\\\(X\\\\)|free|Free|pushout|filtrat\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean\"], \"digest\": \"3e5c73162a41843a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned free monoids in Type, tensor algebras over a commutative semiring, free monoidal-category syntax, structural tensor pushouts, or generic category-theory tools; none states the ordinary algebraic filtration in every nonsymmetric biclosed monoidal category. Monoidal/Mon.lean focused grep has no hits. The Loogle query with Mon_ returned an unknown-identifier diagnostic and is not evidence of absence; the second Loogle query and two semantic phrasings were also run."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-associative-algebra-model-transfer",
@@ -133,5 +404,21 @@
   "group": "N6"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-associative-word-filtration",
+  "worker": "stage1",
+  "summary": "The formerly missing item is now present. Retained its full statement and unit binding. No exact project Lean declaration found. Constructed the tensor-word monad and adjunction; gave direct filtered-cocone and algebra-colimit proofs; built the alternating punctured-cube filtration with its induction invariant, then used an explicit presentation to descend multiplication and prove the pushout universal property. Added one Mathlib coherence leaf and reused the existing general left-adjoint colimit leaf. Checked empty words, zero generators, identity attachments and nonsymmetric order; no model or cofibrancy hypotheses used.",
+  "blueprint": "Realizes the free-pushout subargument below paragraph 2 of prop-coef-integral-exceptional-adjoint, the middle finite-level mapping-complex adjunction, through the unchanged via chain: associative transfer for the fixed-object dg-graph realization. No change to the chapter or unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-05d775ad9",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-05d775ad9 (reviewer sub-agent of L); spot-checked: I read all 15 steps and the new node in full and made no fixes; the review is in review.md. Shape and fields: compared with the live side copy, the item's statement, stmt_deps, blueprint, unit and created fields are unchanged, and all 12 earlier searches are kept. proof_deps equal the union of the step uses, and all four (left-adjoint colimit leaf, colimit definition, monoidal-category definition, new coherence leaf) are Mathlib leaves. So there is no cycle, no route problem and no tool_uses. Statement: true as stated. q_1 = A⊙f⊙A, matching Schwede–Shipley Lemma 5.2. The filtered-colimit and initial-algebra (T(0)=1) clauses hold, and no symmetry is needed. Steps: I checked each one. Step 2's block identity holds by induction on s, from the unit laws and associativity. Steps 3–4: the summand-wise monad laws are right, and the (0,1), (1,0), (2,1), (1,2) and (r,1) action laws recover exactly the algebra structure. Step 5's diagonal-finality argument (common target, then two equalizers) is right, and marking it elementary is acceptable. Steps 6–7 prove filtered-colimit preservation and creation. Step 9's last-coordinate induction for the punctured cube is right; removing initial vertices costs nothing because cube arrows only go source to target. Step 10's induction uses only stage |S|+1 <= n-1, so it is not circular (D4). Step 11's presentation by single-face relations is right and survives tensoring. Step 12: the overlapping-join blocks A,h(X),A,A' and A,A',h(X),A' agree by step 2. Step 13: associativity holds for q>0 (disjoint joins) and q=0 (associativity of A), and yf = ah. Steps 14–15 prove existence and uniqueness through E_n = ordered product of a's and y's. Edge cases tested: length 0, X=0, X=Y=0, f=id, n=1 and n=2, and a zero algebra. New node lem-coef-monoidal-structural-coherence: self-contained and stated for formal endpoints. It matches Mathlib FreeMonoidalCategory.subsingleton_hom (Free/Coherence.lean:313–319) through project/projectMapAux (Free/Basic.lean:294–306, 360–363), a one-line specialization. Its source, Stacks 0HAY (categories.tex:9185), is right. It is not a restated clause, and an rg search found no duplicate. Its blueprint fields, created fields and three kinds of search are all present. Sources: Schwede–Shipley, Haugseng and Muro are online only; the WANTED lines are in the report and proof_origin is agent. No SGA source is used."
+ }
 }

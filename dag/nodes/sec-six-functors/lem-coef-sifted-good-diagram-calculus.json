@@ -30,9 +30,177 @@
   "lem-coef-model-infinity-derived-adjunction",
   "lem-coef-model-colimit-localization-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=\\mathcal M[W^{-1}]_\\infty$ and write $q$ for localization. By [lem-coef-model-colimit-localization-comparison], the specified cocone from $qX$ to $q(hX)$ is colimiting. An actual map $u$ of $\\mathcal M$ is a weak equivalence whenever $q(u)$ is an equivalence: the ordinary localization $\\gamma$ at $W$ factors through $q$ by its universal property, so $\\gamma(u)$ is an isomorphism, and [lem-coef-model-localization-detects-weak-equivalences] applies. Thus the canonical $hX\\to cX$ is a weak equivalence if and only if the original cocone $qX\\to q(cX)$ is colimiting. Indeed, in the forward direction, precomposition with the equivalence $q(hX)\\to q(cX)$ identifies $\\operatorname{Map}_{\\mathcal C}(q(cX),T)$ with $\\operatorname{Map}_{\\mathcal C}(q(hX),T)$ for every $T$; composing with the colimit universal property of $q(hX)$ gives exactly the universal-property map of the original cocone. Conversely, if that original cocone is colimiting, both vertices represent the same functor $T\\mapsto\\lim_i\\operatorname{Map}_{\\mathcal C}(qX(i),T)$, and precomposition with the canonical comparison is an equivalence on all such mapping spaces. The fully faithful Yoneda criterion of [lem-coef-infinity-yoneda-presheaf-limits], applied to the opposite category, makes that comparison an equivalence. This criterion concerns the actual comparison map, not a choice of an abstract isomorphism between the vertices.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, definition of good objects, printed p. 499; universal-property criterion made explicit"
+   }
+  },
+  {
+   "text": "We will use elementary consequences of the lifting-class definition of cofibrations in [lem-coef-model-infinity-derived-adjunction]. A pushout of a cofibration lifts against every trivial fibration by restricting the square to the original map and extending the lift by the pushout property. A composite of cofibrations lifts by successively choosing its two lifts; a retract lifts by composing with its section and retraction. For a continuous transfinite composite of cofibrations the same lifting argument is a recursion: choose the extension at each successor and use the compatible preceding lifts at a limit. These arguments also show that all stage-to-colimit maps of such a chain are cofibrations. They apply to the initial map, so cofibrancy is preserved under these constructions starting with a cofibrant source. No assertion that arbitrary filtered colimits preserve weak equivalences is used.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, observations (1), (2), (4): lifting-class consequences written out"
+   }
+  },
+  {
+   "text": "For any small ordinary $J$, give $\\mathcal M^J$ the projective structure of [lem-coef-model-colimit-localization-comparison]. Its colimit functor is left Quillen: its right adjoint is the constant-diagram functor, which preserves fibrations and trivial fibrations because these are objectwise. Evaluation at $j$ also preserves cofibrations. To check this directly, its right adjoint sends $T$ to the diagram $k\\mapsto\\prod_{\\operatorname{Hom}_J(k,j)}T$; it preserves trivial fibrations since a lifting problem against a cofibration is solved in each product coordinate. Adjunction therefore converts a projective lifting problem into the required evaluation lifting problem. Consequently a projectively cofibrant diagram has cofibrant values and colimit, and a projective cofibration has cofibrant endpoint values when its endpoints are projectively cofibrant and induces a cofibration on colimits. Finally, if $D$ is projectively cofibrant, its replacement $QD\\to D$ is a weak equivalence between projectively cofibrant objects. The Brown preservation clause of [lem-coef-model-infinity-derived-adjunction] for colimit makes $hD\\to cD$ a weak equivalence. This proves both projective clauses of the item.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, observation (4), printed p. 500; evaluation and colimit lifting tests"
+   }
+  },
+  {
+   "text": "By the first, nonmonoidal assertion of [lem-coef-combinatorial-localization-presentability], $\\mathcal C$ is presentable and hence cocomplete. We use the pointwise colimit theorem and the natural mapping-space universal properties of [lem-coef-infinity-yoneda-presheaf-limits]. Together with the dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus], which identifies a colimit functor as left adjoint to the constant-diagram functor on mapping spaces, they give the following interchange with its specified cocones. For small shapes $J,K$, currying identifies $\\operatorname{Fun}(J,\\operatorname{Fun}(K,\\mathcal C))$ with $\\operatorname{Fun}(J\\times K,\\mathcal C)$. Each iterated colimit is left adjoint to the constant functor on $J\\times K$: apply the two colimit mapping-space universal properties in succession. Reversing $J,K$ gives a left adjoint to the same constant functor, with the same component cocone. Uniqueness of a universal cocone therefore identifies the two iterated colimits and the colimit on the product. In particular $\\operatorname{colim}_{N(I)}$ sends a pointwise pushout or ordinal colimit of coherent $I$-diagrams to the pushout or ordinal colimit of their colimits. This is a consequence of the stated universal properties, not an extra homotopy-colimit preservation assumption.",
+   "uses": [
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Observations (1), (2) of HA 4.1.8.13; formal interchange using HTT Corollary 5.1.2.3 and colimit universal properties"
+   }
+  },
+  {
+   "text": "By [lem-coef-sifted-nerve-index-calculus], $I$ is nonempty and connected and the constant coherent $N(I)$-diagram at any object of $\\mathcal C$ has that object as colimit (the zero-variable comparison). Thus a strict constant diagram at a cofibrant $A$ has ordinary colimit $A$ and its original cocone localizes to a colimit cocone. Step 1 makes it good. For retracts, choose the functorial projective replacement allowed by the model factorizations of [lem-coef-model-infinity-derived-adjunction]. Applying this functor and ordinary colimit to a retract diagram makes its canonical $h\\to c$ comparison a retract of the larger diagram's comparison. Weak equivalences are retract closed, as are cofibrations by Step 2. Objectwise and colimit cofibrancy, and the additional component and colimit cofibrations of a good morphism, consequently pass to retracts. Step 1 shows that the result also holds for any other specified cofibrant replacement.",
+   "uses": [
+    "lem-coef-sifted-nerve-index-calculus",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, observation (3) and the retract argument preceding the cell induction, printed pp. 500-501"
+   }
+  },
+  {
+   "text": "Here is the needed pushout calculation, without simplicial enrichment. Let $A\\to B$ be a cofibration between cofibrant objects, and let $A\\to C$ be any map with $C$ cofibrant. Factor the latter as $A\\hookrightarrow\\widetilde C\\xrightarrow{\\sim}C$, with the second arrow a trivial fibration, using [lem-coef-model-infinity-derived-adjunction]. The span $B\\leftarrow A\\to\\widetilde C$ is projectively cofibrant: lift first at $A$, and extend the lifts at $B$ and $\\widetilde C$ using the two cofibrations. Its map to the original span is an objectwise trivial fibration, hence is a projectively cofibrant replacement in the model structure of [lem-coef-model-colimit-localization-comparison]. The map $\\widetilde C\\to B\\amalg_A\\widetilde C$ is a cofibration by Step 2. Its pushout along the weak equivalence $\\widetilde C\\to C$ is the map $B\\amalg_A\\widetilde C\\to B\\amalg_A C$, a weak equivalence by left properness. Therefore the original pushout cocone becomes a coherent pushout cocone by the cited homotopy-colimit comparison. Functorial factorization makes this construction natural in maps of such spans, so the pointwise theorem of Step 4 also applies to a diagram of these pushout squares.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-model-colimit-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, observation (2), printed pp. 499-500; one-cofibration homotopy-pushout calculation expanded"
+   }
+  },
+  {
+   "text": "Let $P=X'\\amalg_XY$ as in the pushout assertion. For each $i$, Step 6 applies to $X(i)\\to Y(i)$ and $X(i)\\to X'(i)$: all three objects are cofibrant, and the first arrow is a cofibration. It also applies after ordinary colimit: $cX\\to cY$ is a cofibration between cofibrant objects, $cX'$ is cofibrant, and $cP=cX'\\amalg_{cX}cY$ by the ordinary colimit universal property. The component and colimit maps from $X'$ to $P$ are cofibrations, so their targets are cofibrant. In $\\operatorname{Fun}(N(I),\\mathcal C)$ the localized square is pointwise a pushout by Step 6, hence a pushout by [lem-coef-infinity-yoneda-presheaf-limits]. Step 4 commutes this pushout with $\\operatorname{colim}_{N(I)}$. Since $X,Y,X'$ are good, Step 1 identifies their colimits with $q(cX),q(cY),q(cX')$ by the original cocones. The resulting pushout vertex is $q(cP)$ by the colimit version of Step 6. Its cocone is the localization of $P\\to cP$, because all comparisons are induced from the same three ordinary cocones. Step 1 proves $P$ good and the two cofibration checks prove $X'\\to P$ good.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, observation (2), printed p. 500"
+   }
+  },
+  {
+   "text": "For the ordinal assertion fix a nonempty small ordinal diagram $Z:\\lambda\\to\\mathcal M$ starting at a cofibrant object, continuous at nonzero limits and having cofibrations at successors. It is projectively cofibrant. Indeed, to lift $Z$ against an objectwise trivial fibration, choose the lift at $0$ by cofibrancy; extend at $\\beta+1$ using $Z_\\beta\\hookrightarrow Z_{\\beta+1}$; and at a nonzero limit $\\delta$ use $Z_\\delta=\\operatorname{colim}_{\\beta<\\delta}Z_\\beta$ to assemble the preceding lifts. This solves precisely the projective lifting problem. Hence [lem-coef-model-colimit-localization-comparison] and Step 3 show that its ordinary colimit cocone localizes to a colimit. The same applies to every initial segment once its terms are cofibrant. All ordinals here are small in the chosen universe; enlarging universes handles any specified set-sized chain.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, observation (1), printed p. 499; ordinal projective-cofibrancy lifting recursion"
+   }
+  },
+  {
+   "text": "Now take a continuous chain of diagrams starting at a good $X_0$ and with good successor maps. Transfinite induction, using Step 2 at each $i$ and after $c$, shows that every value of every limit diagram and its ordinary $I$-colimit are cofibrant, and that all stage-to-stage and stage-to-colimit maps, both componentwise and after $c$, are cofibrations. Here $c$ commutes with the ordinal colimit by its ordinary colimit universal property, so the scalar chain $cX_\\beta$ is also continuous. At each limit, Step 8 says that $qX_\\lambda(i)$ and $q(cX_\\lambda)$ are respectively the coherent ordinal colimits of their preceding terms. The pointwise theorem of [lem-coef-infinity-yoneda-presheaf-limits] and Step 4 therefore identify\n$$\\operatorname{colim}_{N(I)}qX_\\lambda\\simeq\\operatorname{colim}_{\\beta<\\lambda}\\operatorname{colim}_{N(I)}qX_\\beta\\simeq\\operatorname{colim}_{\\beta<\\lambda}q(cX_\\beta)\\simeq q(cX_\\lambda).$$\nThe middle equivalence uses inductive goodness and the original cocones, so their composite is the original cocone of $X_\\lambda$. Step 1 proves goodness at the limit. Successor terms are already good because their incoming successor maps are good. This induction also applies to the final colimit; if the indexing ordinal has a last stage its colimit is that stage, and the one-stage case is the identity. The cofibrations already verified give good maps from every stage to the colimit.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, observation (1), printed p. 499; continuous-chain induction including all stage maps"
+   }
+  },
+  {
+   "text": "To treat tensor without a symmetry hypothesis, let $\\mathcal M^c$ be the full subcategory of cofibrant objects. Biclosedness makes tensor preserve initial objects in each variable. The pushout products $(0\\to A)\\square(0\\to B)$ and $(0\\to A)\\square f$ show respectively that tensors of cofibrant objects are cofibrant and that tensor by a cofibrant object on either specified side is left Quillen. By [lem-coef-model-infinity-derived-adjunction], those two partial functors preserve weak equivalences between cofibrant objects. A pair of such weak equivalences is a composite of the two coordinate maps, so tensor is a relative bifunctor on $\\mathcal M^c\\times\\mathcal M^c$. Functorial cofibrant replacement $Q$ preserves weak equivalences: naturality gives $\\epsilon_{A'}Qw=w\\epsilon_A$, and two-out-of-three applies since both replacement maps $\\epsilon$ and $w$ are weak equivalences. Thus the inclusion $j:\\mathcal M^c\\to\\mathcal M$ and $Q$ are relative functors. Their natural transformations $jQ\\to1$ and $Qj\\to1$ have weak-equivalence components. The full functor-category localization property of [lem-coef-system-localization-universal] descends these transformations to equivalences, so $j$ and $Q$ induce inverse equivalences on coherent localizations. The finite-product localization and full functor-category universal property of [lem-coef-system-localization-universal] consequently descend this bifunctor to $B:\\mathcal C\\times\\mathcal C\\to\\mathcal C$, with $B(qA,qB)=q(A\\odot B)$ for cofibrant $A,B$, naturally also on diagrams. For fixed cofibrant $A$, the partial functor is the derived left adjoint of $A\\odot-$, or of $-\\odot A$ in the other variable, by the replacement formula in [lem-coef-model-infinity-derived-adjunction]. Every object of $\\mathcal C$ is equivalent to $qA$ for a cofibrant $A$ via its replacement map. Functoriality of $B$ therefore identifies the partial functor at any fixed object with one of these derived left adjoints. Thus each partial functor has a right adjoint. Presentability of $\\mathcal C$ from [lem-coef-combinatorial-localization-presentability] and the adjoint criterion of [lem-coef-presentable-infinity-adjoints] show that $B$ preserves small colimits separately. Only the nonmonoidal presentability clause of the former node is used; its symmetric-monoidal clause is not invoked.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-system-localization-universal",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "HA Proposition 4.1.7.2 and Example 4.1.7.6, Lemma 4.1.8.8; ordered bifunctor descent and derived partial adjunctions"
+   }
+  },
+  {
+   "text": "For good $X,Y$, their pointwise tensor has cofibrant values by Step 10. Biclosedness and the ordinary finite-diagonal assertion of [lem-coef-sifted-nerve-index-calculus] identify its ordinary colimit, with its cocone, as $c(X\\odot Y)\\cong cX\\odot cY$, which is cofibrant. Apply the coherent finite-diagonal assertion of the same node to the separately colimit-preserving bifunctor $B$ constructed in Step 10:\n$$\\operatorname{colim}_{N(I)}q(X\\odot Y)\\simeq B(\\operatorname{colim}_{N(I)}qX,\\operatorname{colim}_{N(I)}qY)\\simeq B(q(cX),q(cY))\\simeq q(cX\\odot cY).$$\nThe first comparison is the finite-diagonal colimit comparison, the second is induced by the two good cocones, and the last is tensor on cofibrant representatives. Thus their composite is exactly the localized ordinary tensor-colimit cocone, as identified above. Step 1 proves that the canonical $h(X\\odot Y)\\to c(X\\odot Y)$ is a weak equivalence. This proves tensor-product goodness.",
+   "uses": [
+    "lem-coef-sifted-nerve-index-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, observation (5), printed p. 500"
+   }
+  },
+  {
+   "text": "If $f:X\\to X'$ is good and $Y$ is good, Step 11 gives good endpoints for both $f\\odot\\mathrm{id}_Y$ and $\\mathrm{id}_Y\\odot f$. Their components are cofibrations because each $Y(i)$ is cofibrant and tensor on that side is left Quillen, as shown in Step 10. Their colimit maps identify, by the natural ordinary comparison in [lem-coef-sifted-nerve-index-calculus], with $cf\\odot\\mathrm{id}_{cY}$ and $\\mathrm{id}_{cY}\\odot cf$. These are cofibrations by cofibrancy of $cY$ and the same pushout-product calculation. Both ordered tensor morphisms are therefore good.",
+   "uses": [
+    "lem-coef-sifted-nerve-index-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, observation (6), printed p. 500; both ordered variants"
+   }
+  },
+  {
+   "text": "Finally let $f:X\\to X'$ and $g:Y\\to Y'$ be good and put $P=(X'\\odot Y)\\amalg_{X\\odot Y}(X\\odot Y')$. Both maps out of $X\\odot Y$ are good by Step 12, so Step 7 makes $P$ good. Its target $X'\\odot Y'$ is good by Step 11. At every $i$ the displayed arrow $P(i)\\to X'(i)\\odot Y'(i)$ is $f(i)\\square g(i)$, a cofibration by the assumed pushout-product axiom. Ordinary colimit preserves the pushout, and the natural ordinary tensor comparisons of [lem-coef-sifted-nerve-index-calculus] identify its colimit arrow with $(cf)\\square(cg)$, again a cofibration. These are precisely the remaining two conditions for this arrow to be good. Throughout the proof the identifications are induced by the original cocones and the functorial replacement maps, which establishes the final canonical-map assertion of the item.",
+   "uses": [
+    "lem-coef-sifted-nerve-index-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.1.8.13, observation (7), printed p. 500"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-combinatorial-localization-presentability",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-sifted-nerve-index-calculus",
+  "lem-coef-system-localization-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Ancestor proof paragraph 2: finite-level mapping-complex adjunction. Expanded good-diagram argument from Higher Algebra, proof of Lemma 4.1.8.13, printed pp. 499-500, observations (1)-(7), and 4.1.7.2, 4.1.7.6, 4.1.8.8. Online external sources not archived; WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +236,59 @@
    "results": "{\"t\": \"2026-10-16T19:36:45Z\", \"tool\": \"leanfinder\", \"query\": \"A colimit of cofibrant diagrams is homotopy invariant and remains so under tensor products and cobase change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.instIsCofibrantI\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeCofibrations\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\", \"HomotopicalAlgebra.CofibrantObject.instCategoryWithWeakEquivalencesHoCat\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_cofibrations\"], \"digest\": \"ace63097d042691c\"}",
    "date": "2026-10-16",
    "verdict": "No match: Instances.lean supplies cobase-change and coproduct closure of cofibrations and trivial cofibrations, not the homotopy-colimit comparison for good diagrams; Cylinder concerns a single cofibrant cylinder object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sifted ordinary indexing category good diagrams whose colimits compute homotopy colimits are closed under pushouts transfinite cofibrations and tensor products",
+   "results": "{\"t\": \"2026-10-16T20:04:34Z\", \"tool\": \"leanfinder\", \"query\": \"For a sifted ordinary indexing category good diagrams whose colimits compute homotopy colimits are closed under pushouts transfinite cofibrations and tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.instIsGoodTrans\", \"HomotopicalAlgebra.PathObject.IsVeryGood\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_cofibrations\", \"HomotopicalAlgebra.Cylinder.IsVeryGood\", \"HomotopicalAlgebra.Cylinder.IsGood\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_trivialCofibrations\", \"HomotopicalAlgebra.PathObject.IsVeryGood.toIsGood\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\"], \"digest\": \"43ad4c33d69415e5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected model-category axioms, weak-factorization-system closure instances, and cylinder/path-object hits; none states good diagram homotopy-colimit closure. Grep of AlgebraicTopology/ModelCategory gave no homotopy-colimit or sifted result. Read Basic.lean:46-70, Instances.lean:25-150 and Cylinder.lean:135-136."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?colimit|hocolim|sifted",
+   "results": "{\"t\": \"2026-10-16T20:05:02Z\", \"tool\": \"grep\", \"query\": \"homotopy.?colimit|hocolim|sifted\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected model-category axioms, weak-factorization-system closure instances, and cylinder/path-object hits; none states good diagram homotopy-colimit closure. Grep of AlgebraicTopology/ModelCategory gave no homotopy-colimit or sifted result. Read Basic.lean:46-70, Instances.lean:25-150 and Cylinder.lean:135-136."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.CofibrantObject, CategoryTheory.Limits.colimit",
+   "results": "{\"t\": \"2026-10-16T20:05:02Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.CofibrantObject, CategoryTheory.Limits.colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected model-category axioms, weak-factorization-system closure instances, and cylinder/path-object hits; none states good diagram homotopy-colimit closure. Grep of AlgebraicTopology/ModelCategory gave no homotopy-colimit or sifted result. Read Basic.lean:46-70, Instances.lean:25-150 and Cylinder.lean:135-136."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Good model category diagrams ordinary colimits compute homotopy colimits closure under tensor and cobase change",
+   "results": "{\"t\": \"2026-10-16T20:05:03Z\", \"tool\": \"leansearch\", \"query\": \"Good model category diagrams ordinary colimits compute homotopy colimits closure under tensor and cobase change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.ModelCategory.mk\", \"HomotopicalAlgebra.ModelCategory.categoryWithCofibrations\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeCofibrations\", \"HomotopicalAlgebra.ModelCategory.casesOn\"], \"digest\": \"d87b477cd69ebe6e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected model-category axioms, weak-factorization-system closure instances, and cylinder/path-object hits; none states good diagram homotopy-colimit closure. Grep of AlgebraicTopology/ModelCategory gave no homotopy-colimit or sifted result. Read Basic.lean:46-70, Instances.lean:25-150 and Cylinder.lean:135-136."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cofibrant diagram is homotopy colimit invariant under tensor products and pushouts of objectwise cofibrations",
+   "results": "{\"t\": \"2026-10-16T20:05:09Z\", \"tool\": \"leanfinder\", \"query\": \"A cofibrant diagram is homotopy colimit invariant under tensor products and pushouts of objectwise cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.IsCofibrant\", \"HomotopicalAlgebra.Cylinder.instIsCofibrantI\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.CofibrantObject\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfFactorizationDataOfIsStableUnderCompositionCofibrations\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_cofibrations\", \"HomotopicalAlgebra.cofibrantObjects\"], \"digest\": \"a736df1958b1e81f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected model-category axioms, weak-factorization-system closure instances, and cylinder/path-object hits; none states good diagram homotopy-colimit closure. Grep of AlgebraicTopology/ModelCategory gave no homotopy-colimit or sifted result. Read Basic.lean:46-70, Instances.lean:25-150 and Cylinder.lean:135-136."
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveModel|homotopyColimit|IsSifted",
+   "results": "{\"t\": \"2026-10-16T20:32:10Z\", \"tool\": \"grep\", \"query\": \"projectiveModel|homotopyColimit|IsSifted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"Mathlib/CategoryTheory/Filtered/Final.lean\", \"Mathlib/CategoryTheory/Filtered/Final.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\"], \"digest\": \"1ab305122ea4bffe\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match. Read Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean:45-83: IsColimit.tensor concerns ordinary sifted colimits only. Read Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:127-196: HoCat.resolution is an ordinary homotopy-category resolution, not coherent diagram homotopy colimits or this closure calculus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective model structure colimit functor left Quillen homotopy colimit of diagrams",
+   "results": "{\"t\": \"2026-10-16T20:32:12Z\", \"tool\": \"leanfinder\", \"query\": \"Projective model structure colimit functor left Quillen homotopy colimit of diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj\", \"CategoryTheory.Projective.instSigmaObj\", \"CategoryTheory.Functor.leftDerivedToHomotopyCategory\", \"CategoryTheory.Functor.mapProjectiveResolution\", \"CategoryTheory.projectiveResolutions\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"CategoryTheory.Projective.instCoprod\", \"CategoryTheory.Functor.projective_obj\"], \"digest\": \"b2d093ddd34112a7\"}",
+   "date": "2026-10-16",
+   "verdict": "No full match. Read Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean:45-83: IsColimit.tensor concerns ordinary sifted colimits only. Read Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:127-196: HoCat.resolution is an ordinary homotopy-category resolution, not coherent diagram homotopy colimits or this closure calculus."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-associative-algebra-sifted-localization",
@@ -79,5 +296,29 @@
   "group": "N7"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-sifted-good-diagram-calculus",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded all good-diagram closure arguments using existing generic localization, pointwise colimit, saturation, sifted-index and derived-adjunction nodes. Proved the needed elementary lifting-class consequences, span and ordinal projective-cofibrancy tests inside the proof. Constructed the ordered derived tensor bifunctor through finite-product localization, avoiding a symmetric-only citation. No new nodes; no attachment. Verified actual comparison maps, smallness, left properness, continuity, cofibrancy and edge cases. Second reading expands the canonical-comparison mapping-space argument and the relative cofibrant-replacement descent.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, main-20261015 proof paragraph 2, finite-level mapping-complex adjunction inside R lim; via the associative-algebra sifted-localization cell filtration, realizes HA 4.1.8.13 observations (1)-(7). No change to chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Uses its dual cocone mapping-space criterion to identify colimit as the left adjoint of the constant-diagram functor, and thereby obtain the formal interchange of iterated colimits. This is a generic coherent-category tool; no node of this unit supplies that full functor-category adjunction criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NF-b12a22472",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-b12a22472 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement and all 13 steps, the report, every cited node's statement, the unit and chapter records, and the parent's uses (steps 2-4). HA was not archived, so I fetched it read-only to /tmp. HA Lemma 4.1.8.13 (pp. 498-501) defines good objects and morphisms (i)-(iii) and makes observations (1)-(7), and the item's clauses match them. Retract closure and the continuous form of (1) are extras that follow from the model axioms. HA's assumptions (A) and (B) are used only after the observations, so the nonsymmetric statement is not weakened. Each step checked out. Step 1 relates goodness to the actual cocone through the comparison node and detection via the ordinary localization factoring through q. Step 3 has the right adjoint of evaluation correct (prod over Hom(k,j)) and a correct Brown argument. Step 6 needs no assumption that the second leg is a cofibration, and the left-properness pushout is correct. Step 8 is a valid transfinite projective lift. Step 9 sets up its induction properly. Step 10 builds the ordered derived tensor from the pushout-product calculations, Q and the inclusion of cofibrant objects as relative functors, and finite-product descent, using only the nonsymmetric presentability clause. Steps 11-13 match HA (5)-(7). Edge cases checked: empty I (excluded by siftedness), singleton I, initial and identity pushout legs, one-stage, successor-length and limit chains, and the initial diagram. There are no new nodes. The duplicate search found none (candidates: sifted-fixed-object-hocolimit, infinity-sifted-colimit-calculus). The 329-node dependency closure has no cycle, proof_deps equals the union of uses, and no SGA is cited. I accept the tool use lem-cbc-enhanced-functor-cone-calculus: it is a generic cocone mapping-space criterion used in step 4 for colimit interchange and does not replace any route step. One minor remark, not a fault: the projective structure's functorial factorizations come from it being combinatorial. No fixes."
+ }
 }
