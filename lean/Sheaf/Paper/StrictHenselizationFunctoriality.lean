@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.AlgebraicGeometry.ResidueField
 import Mathlib.FieldTheory.IsSepClosed
-import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import Sheaf.Paper.StrictHenselizationPointedMap
 import WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity
 import Sheaf.Paper.StrictHenselizationMapExists
@@ -198,7 +198,72 @@ theorem strictHenselizationResidue
               σ.toRingHom).comp
             (IsLocalRing.residue (Scheme.strictHenselizationRing barY)))) ≫
           Scheme.strictHenselizationStructuralMap barY = barY := by
-  sorry
+  classical
+  obtain ⟨hlocal, hstrict⟩ := strictHenselizationLocalStructure barY
+  let := hlocal
+  obtain ⟨ψ, hsurj, hker, hpoint⟩ := strictHenselizationPointedMap barY hΩ
+  let σ : IsLocalRing.ResidueField (Scheme.strictHenselizationRing barY) ≃+*
+      separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω :=
+    (Ideal.quotEquivOfEq hker.symm).trans (RingHom.quotientKerEquivOfSurjective hsurj)
+  have hσ : σ.toRingHom.comp (IsLocalRing.residue _) = ψ := by
+    apply RingHom.ext
+    intro r
+    change (RingHom.quotientKerEquivOfSurjective hsurj)
+      (Ideal.quotEquivOfEq hker.symm (IsLocalRing.residue _ r)) = ψ r
+    simpa only [IsLocalRing.residue, Ideal.quotEquivOfEq_mk] using!
+      RingHom.quotientKerEquivOfSurjective_apply_mk hsurj r
+  let ι := (IntermediateField.val
+    (separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω)).toRingHom
+  let liftY := Spec.map (CommRingCat.ofHom ((ι.comp σ.toRingHom).comp
+    (IsLocalRing.residue (Scheme.strictHenselizationRing barY))))
+  have hliftYpoint : ∀ j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barY),
+      liftY ≫ (Scheme.strictHenselizationCone barY).π.app (Opposite.op (Opposite.op j)) ≫
+        (Spec (Opposite.unop ((equivSmallModel.{v}
+          (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).1.left)).isoSpec.inv =
+      ((equivSmallModel.{v}
+        (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).2.left := by
+    simpa only [liftY, RingHom.comp_assoc, hσ] using hpoint
+  have hliftYbase : liftY ≫ Scheme.strictHenselizationStructuralMap barY = barY := by
+    have hc := (Scheme.strictHenselization_properties barY).2.1
+    let := hc
+    obtain ⟨j⟩ := IsCofiltered.nonempty
+      (C := SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barY))
+    rw [← Scheme.strictHenselizationStructuralMap_eq barY j]
+    rw [← Scheme.isoSpec_Spec_inv]
+    simpa only [Category.assoc] using!
+      (congrArg (fun f ↦ f ≫ ((Scheme.AffineEtale.Spec Y).obj
+        ((equivSmallModel.{v}
+          (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).1).hom)
+        (hliftYpoint j)).trans (CategoryTheory.Over.w
+          ((equivSmallModel.{v}
+            (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).2)
+  have hliftYclosed : liftY (IsLocalRing.closedPoint Ω) =
+      IsLocalRing.closedPoint (Scheme.strictHenselizationRing barY) := by
+    change PrimeSpectrum.comap ((ι.comp σ.toRingHom).comp
+      (IsLocalRing.residue (Scheme.strictHenselizationRing barY))) _ = _
+    rw [PrimeSpectrum.comap_comp]
+    exact IsLocalRing.PrimeSpectrum.comap_residue _ _
+  refine ⟨hlocal, hstrict, ?_, IsSepClosure.sep_closed
+    (Y.residueField (barY (IsLocalRing.closedPoint Ω))), σ, ⟨hliftYpoint, hliftYbase⟩, ?_⟩
+  · have he := congrArg (fun f : Spec (.of Ω) ⟶ Y ↦
+      f (IsLocalRing.closedPoint Ω)) hliftYbase
+    simpa only [Scheme.Hom.comp_apply, hliftYclosed] using! he
+  · intro σ' hσ'
+    let liftY' := Spec.map (CommRingCat.ofHom ((ι.comp σ'.toRingHom).comp
+      (IsLocalRing.residue (Scheme.strictHenselizationRing barY))))
+    have he : liftY' = liftY := by
+      obtain ⟨hl⟩ := (Scheme.strictHenselization_properties barY).2.2
+      apply hl.hom_ext
+      intro j
+      apply (cancel_mono (Spec (Opposite.unop ((equivSmallModel.{v}
+        (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj
+          j.unop.unop).1.left)).isoSpec.inv).1
+      exact (hσ'.1 j.unop.unop).trans (hliftYpoint j.unop.unop).symm
+    have he' := Spec.map_injective he
+    ext z
+    obtain ⟨r, rfl⟩ := IsLocalRing.residue_surjective
+      (R := Scheme.strictHenselizationRing barY) z
+    exact ConcreteCategory.congr_hom he' r
 
 /-- Clauses (2)--(4), for the canonical maps and residue identifications of clause (1).
 Residue compatibility is expressed after the injective embeddings in Ω: the equality
