@@ -9,11 +9,16 @@ public import Sheaf.Paper.ContinuousIntegralCoefficients
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 
+import Sheaf.Paper.IntegralReductionConstructible
+import Sheaf.Paper.IntegralResidueExchangeAlgebra
+
 /-! # Reduction of integral exchange to residue-coefficient exchange
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3) and Proposition 6.8.11(3)
 (blueprint: lem-weil-pbc-integral-residue-exchange).
 -/
+
+set_option backward.defeqAttrib.useBackward true
 
 @[expose] public section
 
@@ -29,6 +34,9 @@ local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
+
+attribute [local semireducible] residueExchangeUpperStar residueExchangeLowerStar
+  residueExchangeReduction
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
   [FiniteDimensional ℚ_[ℓ] E]
@@ -101,6 +109,40 @@ theorem integralResidueExchange_comparison
           ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq).app M).hom) ≅
         Arrow.mk ((boundedConstructibleBaseChange
           (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) ℓ k sq).app N).hom) := by
-  sorry
+  obtain ⟨c, hc⟩ := integralResidue_comparisons ℓ E hPerfect hTensor
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := {}
+  let N : ProEtale.BoundedConstructible
+      (condensedRingObj (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) X) :=
+    ⟨(integralReduction ℓ E X).obj M.obj,
+      integralReduction_boundedConstructible ℓ E X M⟩
+  refine ⟨N, ⟨Iso.refl _⟩, ?_⟩
+  have : IsIso (c.push f) := hc f
+  have : IsIso (c.push f') := hc f'
+  let S := (c.pull g).app ((residueExchangeLowerStar (integralCoeff ℓ E) f).obj M.obj) ≪≫
+    (residueExchangeUpperStar
+      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) g).mapIso
+      (asIso ((c.push f).app M.obj))
+  let T := asIso ((c.push f').app
+      ((residueExchangeUpperStar (integralCoeff ℓ E) g').obj M.obj)) ≪≫
+    (residueExchangeLowerStar
+      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f').mapIso
+      ((c.pull g').app M.obj)
+  refine ⟨Arrow.isoMk S T ?_⟩
+  change S.hom ≫ ((boundedConstructibleBaseChange
+      (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) ℓ k sq).app N).hom =
+    (integralReduction ℓ E Y').map
+      ((boundedConstructibleBaseChange (integralCoeff ℓ E) ℓ k sq).app M).hom ≫ T.hom
+  rw [boundedConstructibleBaseChange_hom_eq_ambient _ ℓ k sq N,
+    boundedConstructibleBaseChange_hom_eq_ambient _ ℓ k sq M]
+  dsimp only [S, T, N, Iso.trans_hom, CategoryTheory.Functor.mapIso_hom,
+    asIso_hom, Iso.app_hom, boundedConstructibleUpperStar, boundedConstructibleLowerStar,
+    ObjectProperty.lift_obj_obj, Functor.comp_obj, ObjectProperty.ι_obj]
+  simpa only [Category.assoc, residueExchangeReduction] using
+    (integralResidue_exchange_square ℓ E c sq M.obj)
+
 
 end AlgebraicGeometry.ProEtale.CondensedRing

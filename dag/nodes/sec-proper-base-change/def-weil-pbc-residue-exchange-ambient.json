@@ -1,0 +1,112 @@
+{
+ "id": "def-weil-pbc-residue-exchange-ambient",
+ "kind": "definition",
+ "title": "Ambient exchange from the library composition constraints",
+ "statement": "Use the actual typed derived functors of [def-weil-pbc-residue-exchange-comparison-interface]. For any commutative square of schemes, define its ambient pull-square comparison by composing the inverse composition comparison for f′;g, objectwise transport along square commutativity, and the composition comparison for g′;f. Define ambient base change as its mate for the actual derived pull-push adjunctions.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface",
+  "def-weil-pbc-transported-composite-iso"
+ ],
+ "proof": [
+  {
+   "text": "Use componentwise transported composition of the actual library constraints, and form the adjunction mate of its hom natural transformation.",
+   "uses": [
+    "def-weil-pbc-transported-composite-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-transported-composite-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "C2 stage-3 reduction. Numbered steps are implemented in the attached Lean declaration, except the explicitly reported remaining coefficient-comparison theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient reduction commutes with pullback and proper exchange morphisms by adjunction mates",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "UNAVAILABLE: service failed; no absence verdict obtained."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Triangulated subcategories closed under the mapping cone of multiplication by a scalar; exact restriction reflects bounded constructibility",
+   "date": "2026-10-16",
+   "results": "DerivedCategory.TStructure.t; CategoryTheory.Functor.instIsTriangulatedHomologicalKernel; CategoryTheory.Triangulated.TStructure.IsGE; CategoryTheory.Triangulated.TStructure.ge; CategoryTheory.Triangulated.TStructure.le; CategoryTheory.Triangulated.TStructure.IsLE; CategoryTheory.Triangulated.TStructure.exists_triangle; CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished",
+   "verdict": "No exact theorem for integral coefficient reduction or reflection of constructibility. Triangulated closure and existing derived mapping-cone APIs are used in the attached proof."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*counit|squareTransport_hom_app",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "verdict": "Relevant generic mate and equality-transport tools found, but no exact statement of this specialized result. The delivery supplies the specialization and its proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueExchange",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Continuous integral coefficient step: derived residue reduction, preservation of constructibility, and compatibility of the specified adjunction exchange map. Ambient exchange from the library composition constraints",
+   "via": [
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BoundedExchangeAmbient",
+  "file": "lean/Sheaf/Paper/BoundedExchangeAmbient.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeSquare",
+  "statement": "def residueExchangeSquare (sq : CommSq g' f' f g) :\n    residueExchangeUpperStar Λ g ⋙ residueExchangeUpperStar Λ f' ≅\n      residueExchangeUpperStar Λ f ⋙ residueExchangeUpperStar Λ g'",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeSquare",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeBaseChange"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-eeaf7",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T050636-L-3699071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-eeaf7",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T050636-L-3699071",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched against DAG statements and dependencies; all eight modules, the sole direct importer, and 22 axiom probes compile cleanly."
+ }
+}

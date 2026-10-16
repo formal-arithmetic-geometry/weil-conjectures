@@ -1,0 +1,103 @@
+{
+ "id": "lem-weil-pbc-integral-residue-push-counit",
+ "kind": "statement",
+ "title": "Counit equation of the residue push mate",
+ "statement": "For any coherent pull comparison family [def-weil-pbc-residue-exchange-comparison-interface], every scheme morphism f and every integral derived complex K, applying residue pullback to its defined push mate followed by the residue counit equals the inverse pull comparison at the integral direct image followed by reduction of the integral counit.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib mateEquiv_counit to the inverse pull comparison. This is exactly the displayed component equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "C2 stage-3 reduction. Numbered steps are implemented in the attached Lean declaration, except the explicitly reported remaining coefficient-comparison theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient reduction commutes with pullback and proper exchange morphisms by adjunction mates",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "UNAVAILABLE: service failed; no absence verdict obtained."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction mate commutes with a change of coefficients when the natural pull comparisons satisfy a commutative cube",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_symm_apply; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.iterated_mateEquiv_conjugateEquiv; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp; CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm",
+   "verdict": "Relevant generic mate and equality-transport tools found, but no exact statement of this specialized result. The delivery supplies the specialization and its proof."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*counit|squareTransport_hom_app",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "verdict": "Relevant generic mate and equality-transport tools found, but no exact statement of this specialized result. The delivery supplies the specialization and its proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueExchange",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Continuous integral coefficient step: derived residue reduction, preservation of constructibility, and compatibility of the specified adjunction exchange map. Counit equation of the residue push mate",
+   "via": [
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueComparisons",
+  "file": "lean/Sheaf/Paper/IntegralResidueComparisons.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralResiduePullComparisons.push_counit",
+  "statement": "theorem push_counit {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (K : residueExchangeDerived (integralCoeff ℓ E) X) :\n    (residueExchangeUpperStar\n        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).map\n        ((c.push f).app K) ≫\n      (residueExchangeAdjunction\n        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).counit.app\n        ((residueExchangeReduction ℓ E X).obj K) =\n    (c.pull f).inv.app ((residueExchangeLowerStar (integralCoeff ℓ E) f).obj K) ≫\n      (residueExchangeReduction ℓ E X).map\n        ((residueExchangeAdjunction (integralCoeff ℓ E) f).counit.app K)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-eeaf7",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T050636-L-3699071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-eeaf7",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T050636-L-3699071",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched against DAG statements and dependencies; all eight modules, the sole direct importer, and 22 axiom probes compile cleanly."
+ }
+}

@@ -1,0 +1,164 @@
+{
+ "id": "lem-weil-pbc-integral-residue-comparisons",
+ "kind": "statement",
+ "title": "Perfect coefficient reduction admits coherent comparisons",
+ "statement": "Use [def-weil-pbc-residue-exchange-comparison-interface]. Assume at every scheme T that the restricted residue regular module in degree zero is dualizable and that integralReduction followed by restriction has the stated left-derived tensor counit and universal property. There exists a coherent family of pull isomorphisms such that the direct-image comparisons, defined as mates of their inverses, are isomorphisms for all morphisms. No boundedness, finite type, properness, base-change square, or constructibility conclusion occurs.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface"
+ ],
+ "proof": [
+  {
+   "text": "Derive the canonical scalar-pull isomorphism on K-flat resolutions. Associativity of relative tensor and the coefficient-pullback isomorphism identify its two functors. Check the composition equation on resolutions using the associativity pentagon and uniqueness of derived comparisons.",
+   "uses": [
+    "def-weil-pbc-residue-exchange-comparison-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The assumed tensor description identifies the restricted direct-image mate with the perfect-coefficient projection comparison. Tensor by a dualizable coefficient has its dual as tensor adjoint, so both sides are right adjoints of the same tensor-pull functor and the projection comparison is invertible by its counit characterization. Exact faithful restriction detects derived isomorphisms through homology. Apply this to every morphism.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface",
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "C2 stage-3 reduction. Numbered steps are implemented in the attached Lean declaration, except the explicitly reported remaining coefficient-comparison theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient reduction commutes with pullback and proper exchange morphisms by adjunction mates",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "UNAVAILABLE: service failed; no absence verdict obtained."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction mate commutes with a change of coefficients when the natural pull comparisons satisfy a commutative cube",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_symm_apply; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.iterated_mateEquiv_conjugateEquiv; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp; CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm",
+   "verdict": "Relevant generic mate and equality-transport tools found, but no exact statement of this specialized result. The delivery supplies the specialization and its proof."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*counit|squareTransport_hom_app",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "verdict": "Relevant generic mate and equality-transport tools found, but no exact statement of this specialized result. The delivery supplies the specialization and its proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with inverse image; adjunction mates commute with restriction to full subcategories",
+   "date": "2026-10-16",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.homEquiv_extendScalarsComp; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derivedη_fac_app_assoc; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derived_counit",
+   "verdict": "Second reading: restriction unit/counit and derived comparison APIs found, but no exact specialized theorem. The existing flat-change derivedPullIso needs exact extension of scalars, unavailable for this quotient. Local searches also checked the projection conjugate and ringed tensor-square interfaces, which do not construct the needed coherent comparisons for these internal module functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula with a dualizable coefficient for an arbitrary right adjoint of a monoidal pullback functor",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.ExponentiableMorphism.coev_def; CategoryTheory.ExponentiableMorphism.ev_coev_assoc; CategoryTheory.ExponentiableMorphism.ev_def; CategoryTheory.ExponentiableMorphism.coev; CategoryTheory.ExponentiableMorphism.ev; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; CategoryTheory.ExponentiableMorphism.coev_ev",
+   "verdict": "Second reading: restriction unit/counit and derived comparison APIs found, but no exact specialized theorem. The existing flat-change derivedPullIso needs exact extension of scalars, unavailable for this quotient. Local searches also checked the projection conjugate and ringed tensor-square interfaces, which do not construct the needed coherent comparisons for these internal module functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.FullyFaithful",
+   "date": "2026-10-16",
+   "results": "10 hits: CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit; CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit; CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc; CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "verdict": "Second reading: restriction unit/counit and derived comparison APIs found, but no exact specialized theorem. The existing flat-change derivedPullIso needs exact extension of scalars, unavailable for this quotient. Local searches also checked the projection conjugate and ringed tensor-square interfaces, which do not construct the needed coherent comparisons for these internal module functors."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|restrictFullyFaithful|PreservesLimit.*tensor",
+   "date": "2026-10-16",
+   "results": "25 hits: Mathlib/Condensed/Light/TopCatAdjunction.lean; Mathlib/Condensed/TopCatAdjunction.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Limits.lean",
+   "verdict": "Second reading: restriction unit/counit and derived comparison APIs found, but no exact specialized theorem. The existing flat-change derivedPullIso needs exact extension of scalars, unavailable for this quotient. Local searches also checked the projection conjugate and ringed tensor-square interfaces, which do not construct the needed coherent comparisons for these internal module functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars inverse image coherent composition quotient perfect projection formula",
+   "date": "2026-10-16",
+   "results": "8 hits, including CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp and generic Ext functor comparisons.",
+   "verdict": "Independent second reading: ordinary ModuleCat associativity is available, but no exact comparison with these internal pro-etale derived module functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "date": "2026-10-16",
+   "results": "6 hits: restrictFullyFaithful, map_restrictFullyFaithful_counit_app, map_restrictFullyFaithful_unit_app and their variants.",
+   "verdict": "Useful for the separately completed bounded-to-ambient identification. These identities do not construct the coherent quotient coefficient comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|map_restrictFullyFaithful_counit_app",
+   "date": "2026-10-16",
+   "results": "7 Mathlib hits in Adjunction/Restrict, Adjunction/Mates and site adjunctions. Local reads also checked ChangeOfCoefficients.derivedPullIso, derivedPushHom, MonoidalProjectionConjugate and RingedExchangeTensorCoherence.",
+   "verdict": "The flat coefficient APIs require exact extension, which quotient reduction lacks. RingedExchangeTensorCoherence uses a different SheafOfModules interface. The generic dualizable projection theorem supplies normalization, not the actual coherent reduction comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueExchange",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Continuous integral coefficient step: derived residue reduction, preservation of constructibility, and compatibility of the specified adjunction exchange map. Perfect coefficient reduction admits coherent comparisons",
+   "via": [
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueComparisons",
+  "file": "lean/Sheaf/Paper/IntegralResidueComparisons.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_comparisons",
+  "statement": "theorem integralResidue_comparisons\n    (hPerfect : ∀ T : Scheme.{u},\n      IsDualizable ((DerivedCategory.singleFunctor _ 0).obj\n        ((Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).obj\n          (Mod.regular (condensedRingObj\n            (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) T)))))\n    (hTensor : ∀ T : Scheme.{u},\n      ∃ ε : DerivedCategory.Qh ⋙ (integralReduction ℓ E T ⋙\n            (Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).mapDerivedCategory) ⟶\n          Functor.mapHomotopyCategory\n            (MonoidalCategory.tensorLeft\n            ((Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).obj\n              (Mod.regular (condensedRingObj\n                (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) T)))) (.up ℤ) ⋙\n            DerivedCategory.Qh,\n        Functor.IsLeftDerivedFunctor\n          (integralReduction ℓ E T ⋙\n            (Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).mapDerivedCategory)\n          ε (HomotopyCategory.quasiIso\n            (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n              (condensedRingObj (integralCoeff ℓ E) T)) (.up ℤ))) :\n    ∃ c : IntegralResiduePullComparisons.{u} ℓ E,\n      ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsIso (c.push f)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-eeaf7",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T050636-L-3699071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-eeaf7",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T050636-L-3699071",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched against DAG statements and dependencies; all eight modules, the sole direct importer, and 22 axiom probes compile cleanly."
+ }
+}

@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-bounded-exchange-ambient",
+ "kind": "statement",
+ "title": "The specified bounded exchange is the ambient mate",
+ "statement": "For the finite-type separated scheme square over a field and coefficient ring in the domain of boundedConstructibleBaseChange, the underlying ambient morphism of its component at every bounded constructible K equals the ambient exchange component of [def-weil-pbc-residue-exchange-ambient]. This is equality of specified morphisms and requires neither properness nor Cartesianity.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-ambient",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "The fully faithful restriction counit has the same underlying component as the original derived adjunction because the compatibility isomorphisms are identities. Apply map_restrictFullyFaithful_counit_app and simplify identities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The underlying bounded pull composition constraints are the original derived constraints. Objectwise transport of equality commutes with full-subcategory inclusion; replace functor transport by its equal componentwise construction.",
+   "uses": [
+    "lem-weil-pbc-transported-composite-iso-eq"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply injectivity of the ambient f-prime inverse hom equivalence. Use the existing boundedConstructibleBaseChange_adjunct API for the specified restricted exchange, obtained from the canonical squareExchange presentation. Map this equality through inclusion and substitute the counit and square component identities. Its right side is the adjunct of the ambient mate by residueExchangeBaseChange_counit.",
+   "uses": [
+    "def-weil-pbc-adjunction-square-exchange",
+    "lem-weil-pbc-residue-exchange-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-transported-composite-iso-eq",
+  "def-weil-pbc-adjunction-square-exchange",
+  "lem-weil-pbc-residue-exchange-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "C2 second reading: fully proved from the existing bounded exchange adjunct API and the counit/square component identities; no new equation API or source-module edit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient reduction commutes with pullback and proper exchange morphisms by adjunction mates",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "UNAVAILABLE: service failed; no absence verdict obtained."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Triangulated subcategories closed under the mapping cone of multiplication by a scalar; exact restriction reflects bounded constructibility",
+   "date": "2026-10-16",
+   "results": "DerivedCategory.TStructure.t; CategoryTheory.Functor.instIsTriangulatedHomologicalKernel; CategoryTheory.Triangulated.TStructure.IsGE; CategoryTheory.Triangulated.TStructure.ge; CategoryTheory.Triangulated.TStructure.le; CategoryTheory.Triangulated.TStructure.IsLE; CategoryTheory.Triangulated.TStructure.exists_triangle; CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished",
+   "verdict": "No exact theorem for integral coefficient reduction or reflection of constructibility. Triangulated closure and existing derived mapping-cone APIs are used in the attached proof."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*counit|squareTransport_hom_app",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "verdict": "Relevant generic mate and equality-transport tools found, but no exact statement of this specialized result. The delivery supplies the specialization and its proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with inverse image; adjunction mates commute with restriction to full subcategories",
+   "date": "2026-10-16",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.homEquiv_extendScalarsComp; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derivedη_fac_app_assoc; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derived_counit",
+   "verdict": "Second reading: restriction unit/counit and derived comparison APIs found, but no exact specialized theorem. The existing flat-change derivedPullIso needs exact extension of scalars, unavailable for this quotient. Local searches also checked the projection conjugate and ringed tensor-square interfaces, which do not construct the needed coherent comparisons for these internal module functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.FullyFaithful",
+   "date": "2026-10-16",
+   "results": "10 hits: CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit; CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit; CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc; CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "verdict": "Second reading: restriction unit/counit and derived comparison APIs found, but no exact specialized theorem. The existing flat-change derivedPullIso needs exact extension of scalars, unavailable for this quotient. Local searches also checked the projection conjugate and ringed tensor-square interfaces, which do not construct the needed coherent comparisons for these internal module functors."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|restrictFullyFaithful|PreservesLimit.*tensor",
+   "date": "2026-10-16",
+   "results": "25 hits: Mathlib/Condensed/Light/TopCatAdjunction.lean; Mathlib/Condensed/TopCatAdjunction.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Property.lean; Mathlib/Algebra/Category/Ring/Under/Limits.lean",
+   "verdict": "Second reading: restriction unit/counit and derived comparison APIs found, but no exact specialized theorem. The existing flat-change derivedPullIso needs exact extension of scalars, unavailable for this quotient. Local searches also checked the projection conjugate and ringed tensor-square interfaces, which do not construct the needed coherent comparisons for these internal module functors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueExchange",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Continuous integral coefficient step: derived residue reduction, preservation of constructibility, and compatibility of the specified adjunction exchange map. The specified bounded exchange is the ambient mate",
+   "via": [
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BoundedExchangeAmbient",
+  "file": "lean/Sheaf/Paper/BoundedExchangeAmbient.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChange_hom_eq_ambient",
+  "statement": "theorem boundedConstructibleBaseChange_hom_eq_ambient (sq : CommSq g' f' f g)\n    (K : ProEtale.BoundedConstructible (condensedRingObj Λ X)) :\n    ((boundedConstructibleBaseChange Λ ℓ k sq).app K).hom =\n      (residueExchangeBaseChange Λ sq).app K.obj",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-eeaf7",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T050636-L-3699071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-eeaf7",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T050636-L-3699071",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched against DAG statements and dependencies; all eight modules, the sole direct importer, and 22 axiom probes compile cleanly."
+ }
+}

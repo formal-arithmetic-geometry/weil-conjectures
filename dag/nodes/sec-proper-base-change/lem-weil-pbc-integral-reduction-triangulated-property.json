@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-integral-reduction-triangulated-property",
+ "kind": "statement",
+ "title": "Restricted reduction preserves triangulated properties",
+ "statement": "Use the actual integral coefficients of [def-weil-pbc-continuous-integral-coefficients]. For any scheme X, any isomorphism-invariant triangulated object property P of integral derived modules, any K satisfying P, and any supplied left-derived tensor description of restricted integralReduction, the restricted reduction of K satisfies P.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Pull the short exact integral coefficient sequence to X by exact monoidal inverse image and identify it with multiplication by ℓ on the regular integral module followed by the restricted residue regular module.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a K-flat representative of K. The left-derived tensor counit is invertible there. Tensor symmetry, termwise tensor comparison, and the two-term free coefficient resolution identify restricted reduction with the cone of multiplication by ℓ.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The mapping-cone triangle is distinguished and its first two objects are isomorphic to K. Triangulated closure and isomorphism invariance imply the claim.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "C2 stage-3 reduction. Numbered steps are implemented in the attached Lean declaration, except the explicitly reported remaining coefficient-comparison theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient reduction commutes with pullback and proper exchange morphisms by adjunction mates",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "UNAVAILABLE: service failed; no absence verdict obtained."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Triangulated subcategories closed under the mapping cone of multiplication by a scalar; exact restriction reflects bounded constructibility",
+   "date": "2026-10-16",
+   "results": "DerivedCategory.TStructure.t; CategoryTheory.Functor.instIsTriangulatedHomologicalKernel; CategoryTheory.Triangulated.TStructure.IsGE; CategoryTheory.Triangulated.TStructure.ge; CategoryTheory.Triangulated.TStructure.le; CategoryTheory.Triangulated.TStructure.IsLE; CategoryTheory.Triangulated.TStructure.exists_triangle; CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished",
+   "verdict": "No exact theorem for integral coefficient reduction or reflection of constructibility. Triangulated closure and existing derived mapping-cone APIs are used in the attached proof."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*counit|squareTransport_hom_app",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "verdict": "Relevant generic mate and equality-transport tools found, but no exact statement of this specialized result. The delivery supplies the specialization and its proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueExchange",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Continuous integral coefficient step: derived residue reduction, preservation of constructibility, and compatibility of the specified adjunction exchange map. Restricted reduction preserves triangulated properties",
+   "via": [
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralReductionTriangulatedProperty",
+  "file": "lean/Sheaf/Paper/IntegralReductionTriangulatedProperty.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralReduction_restricted_mem",
+  "statement": "theorem integralReduction_restricted_mem\n    (X : Scheme.{u})\n    (P : ObjectProperty (DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj (integralCoeff ℓ E) X)))) [P.IsTriangulated] [P.IsClosedUnderIsomorphisms]\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) X))) (hK : P K)\n    (ε : DerivedCategory.Qh ⋙ (integralReduction ℓ E X ⋙\n          (Mod.comap (coefficientMap (integralReductionMap ℓ E) X)).mapDerivedCategory) ⟶\n        Functor.mapHomotopyCategory\n          (tensorLeft ((Mod.comap (coefficientMap (integralReductionMap ℓ E) X)).obj\n            (Mod.regular (condensedRingObj\n              (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) X)))) (.up ℤ) ⋙\n          DerivedCategory.Qh)\n    (hε : Functor.IsLeftDerivedFunctor\n        (integralReduction ℓ E X ⋙\n          (Mod.comap (coefficientMap (integralReductionMap ℓ E) X)).mapDerivedCategory)\n        ε (HomotopyCategory.quasiIso\n          (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n            (condensedRingObj (integralCoeff ℓ E) X)) (.up ℤ))) :\n    P ((Mod.comap (coefficientMap (integralReductionMap ℓ E) X)).mapDerivedCategory.obj\n      ((integralReduction ℓ E X).obj K))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-eeaf7",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T050636-L-3699071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-eeaf7",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T050636-L-3699071",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched against DAG statements and dependencies; all eight modules, the sole direct importer, and 22 axiom probes compile cleanly."
+ }
+}

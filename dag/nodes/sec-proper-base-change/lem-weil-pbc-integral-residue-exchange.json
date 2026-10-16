@@ -12,31 +12,39 @@
  ],
  "proof": [
   {
-   "text": "The exact integral coefficient reduction sequence gives the two-term free resolution of A. Thus reduction has Tor amplitude in [-1,0]. On a common constructible stratification for the finitely many cohomology modules of M, reduce their local finite presentations. Over the valuation ring of a finite extension of ℚ_ℓ, finite presentations and their relevant kernels remain finite; modulo ℓ their coefficient sections are locally constant. The resulting homology modules are locally finitely presented over A. The finite Tor amplitude gives boundedness. Equip the actual reduced derived object with these properties to obtain N and its isomorphism.",
+   "text": "Use integralReduction_boundedConstructible to equip the actual reduced object with residue bounded constructibility; take its identification with itself to be the identity.",
    "uses": [
-    "def-weil-pbc-continuous-integral-coefficients"
+    "lem-weil-pbc-integral-reduction-constructible"
    ],
    "elementary": false
   },
   {
-   "text": "Use the supplied left-derived tensor description, exact restriction, and the canonical inverse-image coefficient comparisons to obtain the scalar pullback comparison. Tensor associativity gives its invertibility. For direct image, the supplied dualizability gives the perfect-coefficient projection formula (the finite triangle argument for the two-term free resolution). Exact restriction detects these comparisons, so the scalar direct-image comparison is invertible as an A-module map.",
-   "uses": [],
+   "text": "Choose coherent pull comparisons with invertible actual push mates using the perfectness and tensor assumptions. At the source and target of the exchange arrows, compose the pull comparison with the mapped push isomorphism to construct explicit endpoint isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-integral-residue-comparisons"
+   ],
    "elementary": false
   },
   {
-   "text": "The comparisons are mates of the underived scalar and inverse-image comparisons. Their unit and counit identities are the equations defining mates; compatibility with composition follows from the coefficientMap and pullback composition equations. Substitute them into the unit-square-counit formula defining boundedConstructibleBaseChange. The restricted adjunctions agree with the ambient adjunctions through their full-subcategory compatibility isomorphisms. The resulting equality is the commuting square between the two actual exchange components. Its endpoint comparisons are invertible and hence define the required Arrow isomorphism.",
-   "uses": [],
+   "text": "Replace the underlying specified bounded exchange components by their ambient mates. The proved coefficient-exchange square supplies the Arrow.isoMk compatibility equation after associativity. The inverse of each endpoint exists by the push-isomorphism input and the pull natural isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-bounded-exchange-ambient",
+    "lem-weil-pbc-integral-residue-exchange-algebra"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-continuous-integral-coefficients"
+  "lem-weil-pbc-integral-reduction-constructible",
+  "lem-weil-pbc-integral-residue-comparisons",
+  "lem-weil-pbc-bounded-exchange-ambient",
+  "lem-weil-pbc-integral-residue-exchange-algebra"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.5.9(3) and Proposition 6.8.11(3); coefficient change and compatibility of adjunction mates",
-  "note": "C2 specialization to the actual internal module objects; the complete argument and the remaining interface work are recorded in the module docstring and report."
+  "note": "C2 second reading: actual bounded constructibility, bounded-to-ambient identification, mate algebra and explicit Arrow isomorphism implemented; only the coherent perfect coefficient comparison remains as a strictly smaller named theorem."
  },
  "mathlib_searches": [
   {
@@ -104,13 +112,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "X-eeaf7",
   "group": "C2",
   "result": "pass",
-  "landing": "20261015T224107-L-2885036",
+  "landing": "20261016T050636-L-3699071",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched against DAG statements and dependencies; all eight modules, the sole direct importer, and 22 axiom probes compile cleanly."
  }
 }

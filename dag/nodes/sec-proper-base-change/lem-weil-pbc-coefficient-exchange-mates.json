@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-coefficient-exchange-mates",
+ "kind": "statement",
+ "title": "Coefficient transport of adjunction exchange",
+ "statement": "In eight categories with four specified adjunctions, two horizontal squares and two coefficient squares, let B and Be satisfy the exchange counit equations. Let the vertical pull coefficient comparisons be invertible and the horizontal comparisons be natural transformations. Let the two push comparisons satisfy their counit mate equations. If the pull-comparison cube commutes, the displayed square between the two exchange maps and the push comparisons commutes. No exchange map is assumed invertible.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply injectivity of the target second adjunction inverse Hom equivalence to the desired equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand each exchange adjunct using its counit equation. Naturality moves the push comparison through the target square, and its mate equation replaces it. Naturality of the target counit and the second push mate equation rewrite the other side.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use inverse pull naturality and the source exchange adjunct equation. After naturality of the remaining horizontal comparison, precompose and postcompose the pull-comparison cube by inverse pull comparisons and cancel the isomorphisms. This yields equality of the adjuncts.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "C2 stage-3 reduction. Numbered steps are implemented in the attached Lean declaration, except the explicitly reported remaining coefficient-comparison theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient reduction commutes with pullback and proper exchange morphisms by adjunction mates",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "UNAVAILABLE: service failed; no absence verdict obtained."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Triangulated subcategories closed under the mapping cone of multiplication by a scalar; exact restriction reflects bounded constructibility",
+   "date": "2026-10-16",
+   "results": "DerivedCategory.TStructure.t; CategoryTheory.Functor.instIsTriangulatedHomologicalKernel; CategoryTheory.Triangulated.TStructure.IsGE; CategoryTheory.Triangulated.TStructure.ge; CategoryTheory.Triangulated.TStructure.le; CategoryTheory.Triangulated.TStructure.IsLE; CategoryTheory.Triangulated.TStructure.exists_triangle; CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished",
+   "verdict": "No exact theorem for integral coefficient reduction or reflection of constructibility. Triangulated closure and existing derived mapping-cone APIs are used in the attached proof."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*counit|squareTransport_hom_app",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "verdict": "Relevant generic mate and equality-transport tools found, but no exact statement of this specialized result. The delivery supplies the specialization and its proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueExchange",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Continuous integral coefficient step: derived residue reduction, preservation of constructibility, and compatibility of the specified adjunction exchange map. Coefficient transport of adjunction exchange",
+   "via": [
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Adjunction.CoefficientExchange",
+  "file": "lean/Sheaf/CategoryTheory/Adjunction/CoefficientExchange.lean",
+  "declaration": "CategoryTheory.Adjunction.coefficient_exchange_of_counit",
+  "statement": "theorem coefficient_exchange_of_counit\n    (θ : G ⋙ V ⟶ U ⋙ H) (θe : Ge ⋙ Ve ⟶ Ue ⋙ He)\n    (B : R ⋙ G ⟶ H ⋙ S) (Be : Re ⋙ Ge ⟶ He ⋙ Se)\n    (hB : ∀ K, V.map (B.app K) ≫ b.counit.app (H.obj K) =\n      θ.app (R.obj K) ≫ H.map (a.counit.app K))\n    (hBe : ∀ K, Ve.map (Be.app K) ≫ be.counit.app (He.obj K) =\n      θe.app (Re.obj K) ≫ He.map (ae.counit.app K))\n    (αU : U ⋙ T₂ ≅ T₁ ⋙ Ue) (αV : V ⋙ T₄ ≅ T₃ ⋙ Ve)\n    (αG : G ⋙ T₃ ⟶ T₁ ⋙ Ge) (αH : H ⋙ T₄ ⟶ T₂ ⋙ He)\n    (δ : R ⋙ T₁ ⟶ T₂ ⋙ Re) (δ' : S ⋙ T₃ ⟶ T₄ ⋙ Se)\n    (hδ : ∀ K, Ue.map (δ.app K) ≫ ae.counit.app (T₂.obj K) =\n      αU.inv.app (R.obj K) ≫ T₂.map (a.counit.app K))\n    (hδ' : ∀ K, Ve.map (δ'.app K) ≫ be.counit.app (T₄.obj K) =\n      αV.inv.app (S.obj K) ≫ T₄.map (b.counit.app K))\n    (hcube : ∀ K, T₄.map (θ.app K) ≫ αH.app (U.obj K) ≫\n        He.map (αU.hom.app K) =\n      αV.hom.app (G.obj K) ≫ Ve.map (αG.app K) ≫ θe.app (T₁.obj K))\n    (K : C₂) :\n    αG.app (R.obj K) ≫ Ge.map (δ.app K) ≫ Be.app (T₂.obj K) =\n      T₃.map (B.app K) ≫ δ'.app (H.obj K) ≫ Se.map (αH.app K)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-eeaf7",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T050636-L-3699071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-eeaf7",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T050636-L-3699071",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched against DAG statements and dependencies; all eight modules, the sole direct importer, and 22 axiom probes compile cleanly."
+ }
+}
