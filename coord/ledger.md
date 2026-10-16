@@ -15348,3 +15348,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:17 L: returned deliver/A2/WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity (reviewer RETURN: (the landing tools, head c2eb37dbf) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 02:17 L: merged deliver/E1/Sheaf.Paper.CondensedFiniteFreeHomEvaluation (stage 3; reviewer PASS; first push; landing 20261016T021739-L-1027599 (interface); batch 20261016T021737; modules 4; new nodes 3)
 - 02:17 L: merged deliver/E3/WeilConjectures.AlgebraicGeometry.Sites.SupportDimension (stage 3; reviewer PASS; after a return; landing 20261016T021740-L-1027933 (proof); batch 20261016T021737; modules 1; new nodes 2)
+- 02:17 L: merged deliver/H1/Sheaf.AlgebraicGeometry.FiniteTypeResidueTrdeg (stage 3; reviewer PASS; first push; landing 20261016T021741-L-1028153 (proof); batch 20261016T021737; modules 1; new nodes 0)

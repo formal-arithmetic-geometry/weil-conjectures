@@ -14,8 +14,6 @@ public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import WeilConjectures.ZetaSeries
 import Mathlib.FieldTheory.FinTrdeg
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Residue fields of finite type schemes have finite transcendence degree
@@ -57,6 +55,17 @@ theorem finite_trdeg_residueField {K : Type u} [Field K] {X : Scheme.{u}}
     [QuasiCompact (X ↘ Spec (CommRingCat.of K))] (x : X) :
     @Algebra.trdeg K (X.residueField x) _ _
       (((X ↘ Spec (CommRingCat.of K)).residueFieldAlgebraMap x).toAlgebra) < Cardinal.aleph0 := by
-  sorry
+  let f := X ↘ Spec (CommRingCat.of K)
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  have h₁ : (algebraMap K (f x).asIdeal.ResidueField).EssFiniteType := by
+    rw [RingHom.essFiniteType_algebraMap]
+    infer_instance
+  have h₂ : (Scheme.Spec.residueFieldIso (.of K) (f x)).inv.hom.EssFiniteType :=
+    (RingHom.FiniteType.of_surjective _
+      (Scheme.Spec.residueFieldIso (.of K) (f x)).symm.commRingCatIsoToRingEquiv.surjective
+      ).essFiniteType
+  have h₃ := (LocallyOfFiniteType.stalkMap f x).residueFieldMap
+  have : Algebra.EssFiniteType K (X.residueField x) := (h₁.comp h₂).comp h₃
+  exact trdeg_lt_aleph0 K (X.residueField x)
 
 end AlgebraicGeometry
