@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-fix-weil-operations",
-   "place": "Proof paragraph 2, evaluation; passage from ordinary resolution-level tensor evaluation to the completed integral tensor used by the operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": the ordinary-to-completed integral tensor comparison for evaluation.",
    "via": []
   },
   "same_as": []
@@ -29,9 +29,169 @@
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any qcqs scheme $T$ in the argument, write $C_T(H)=R\\varprojlim_n\\operatorname{Res}_n(H\\otimes^L_{B_T}(A_n)_T)$ and $\\eta_H:H\\to C_T(H)$ for the functorial completion and its quotient-map unit. The constant/completed equivalence identifies this completion, including its unit, with Koszul completion; the ringed Koszul reflector says its values are locally complete and that $\\eta_H$ is invertible exactly on such objects. If $H$ is complete in the Roos-triangle sense of def-weil-derived-complete, it is isomorphic to $C_T(H)$: both are fibers of the same $1-s$ on the same derived product. Thus $H$ is locally complete and its particular canonical map $\\eta_H$ is invertible. Conversely an invertible $\\eta_H$ gives the required Roos triangle. This explicitly handles the definition's warning that an arbitrary triangulated lift of the quotient maps is not a specified completion unit.",
+   "uses": [
+    "def-weil-derived-complete",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M, lemma-naive-completion, with ringed Koszul reflector and functorial strict-tower model; Bhatt–Scholze Definition 3.4.10 and Lemma 3.4.12(4)"
+   }
+  },
+  {
+   "text": "Completion commutes with the restrictions used below. For a weakly etale object $V\\to T$, identify its site with the slice by the localization theorem. Slice restriction is exact and preserves products and constant sheaves by the formula $F|_V(U\\to V)=F(U)$: local lifts of sections are tested on the same covering families. For a constructible closed immersion $i:Z\\hookrightarrow T$ with quasi-compact open complement, the closed-pullback limits theorem says $i^*$ is exact and preserves all limits. Consequently $i^*B_T=B_Z$, and similarly on slices. Countable products of module sheaves are exact on each of these pro-etale sites, so termwise products represent derived products. In both cases apply the exact, product-preserving restriction termwise to the product mapping fiber defining $C_T$; exactness and product preservation identify it with $C_V$ or $C_Z$. Derived monoidality identifies the restricted finite reductions, and these identifications carry $h\\mapsto h\\otimes1$ and the quotient transitions to the corresponding maps on the restricted site. Thus restrictions commute with $\\eta$, not merely with its source and target. They preserve completeness by step 1.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "det-sf-open-closed-pullback-limits",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pur-integral-derived-operations",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL, lemma-closed-immersion-affines-apply (closed pullback preserves limits); Tag 0990 and localized sites; Bhatt–Scholze Lemma 6.5.8(1),(2)"
+   }
+  },
+  {
+   "text": "The residue reductions of $M$ and $N$ have finitely many nonzero constructible cohomology sheaves. Choose a finite partition witnessing constructibility for each of these finitely many sheaves. For every actual stratum immersion $a:S_a\\hookrightarrow W$ in these partitions, choose a factorization $S_a\\hookrightarrow O_a\\hookrightarrow W$ with the first map closed and $O_a$ open and quasi-compact. Such a choice is possible because the constructible image is quasi-compact (write it as a finite union of a closed subset of a retrocompact open); finitely many affine opens inside an open of closedness cover it. Its complement in $O_a$ is a quasi-compact open: it is open constructible in the qcqs scheme $O_a$. Starting from $W$, split each current piece by its actual pullback of $O_a$ and the closed complement, then split the inside child by the actual closed pullback of $S_a$ and its open complement. Do this for all the finitely many strata, omitting empty branches. These are actual open–closed fiber products: on affine pieces a closed pullback is $\\operatorname{Spec}(C/JC)=\\operatorname{Spec}(C\\otimes_A A/J)$, while an open pullback is the inverse-image open. All the chosen open inclusions and their pullbacks are quasi-compact (locally write a quasi-compact open of an affine as a finite union of distinguished opens, then pull back those same functions). A quasi-compact open or closed subscheme of a qcqs scheme is qcqs; quasi-separatedness follows because intersections of affine opens are quasi-compact, or equivalently by restricting the quasi-compact diagonal. Thus the hypotheses of step 2 hold at every split. Every final nonempty piece $T$ maps scheme-theoretically to a stratum of each original partition: if it avoided all the closed children for that partition, its image would avoid their union $W$. Thus both residue complexes on $T$ have bounded locally constant finite-dimensional residue-field cohomology. Step 2 identifies them with $(M|_T)\\otimes^L_{B_T}k_T$ and $(N|_T)\\otimes^L_{B_T}k_T$, and makes $M|_T,N|_T$ canonically complete. This construction uses actual fiber products, not a factorization inferred only from set-theoretic containment.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-constructible-subset",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-closed-immersion",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, input; constructible subset Boolean decomposition (topology.tex, Tag 005H, lemma-constructible); Bhatt–Scholze Definition 6.5.1"
+   }
+  },
+  {
+   "text": "For every final piece $T$ of Step 3, apply the qc-affine weakly contractible covering lemma to obtain an affine weakly contractible pro-etale object $V\\to T$. Weak contractibility also holds in $V_{\\mathrm{proet}}$: a covering of its terminal object is a covering of $V$ in $T_{\\mathrm{proet}}$, hence admits a section by weak contractibility there; locally lifting a section of an epimorphism and using this split cover gives a lift over $V$. The restrictions of $M$ and $N$ to $V$ remain derived complete, and their residue complexes retain bounded locally constant finite-dimensional cohomology by exact pullback. Each such cohomology sheaf is flat: on a trivializing cover it is $k^r$, whose tensor functor is a finite sum of identity functors, and exactness can be checked on a cover. For either residue complex, denote it by $K_1$ and choose $[a,b]$ containing its cohomological support; put $F_q=\\tau_{\\leq q}K_1$ on the current chart. The truncation-triangle theorem gives $F_{q-1}\\to F_q\\to\\mathcal H^q(K_1)[-q]\\to F_{q-1}[1]$. Here $F_{a-1}=0$ and $F_b\\simeq K_1$, since the respective maps are cohomology isomorphisms. Thus the finitely many steps $q=a,\\ldots,b$ have those flat sheaves, shifted into degree $q$, as successive quotients. Tensoring these triangles with any degree-zero module sheaf preserves triangles (on K-flat models tensor commutes with cones); the long exact cohomology sequences show by induction on $q$ that $F_q$ tensored with the module sheaf has no cohomology outside $[a,q]$. Exact pullback gives this argument on every slice, proving the required Tor bound $[a,b]$. Thus all the lissity, boundedness and local finite-Tor hypotheses of 09C3 hold. Apply lem-fix-residue-lisse-projective-models separately to these two restrictions. It gives finite disjoint open covers of $V$ on which each object is represented by a bounded complex of finite-projective $B$-module sheaves. Refine the two finite covers by their finite intersections. Pullback preserves the direct-summand diagrams and bounded complexes, so on this common cover both objects have such models. No Noetherian hypothesis on $W$ or $T$ is introduced, and the lifted differentials need not be constant matrices over $R$.",
+   "uses": [
+    "lem-weil-pbc-proetale-qc-affine-contractible-cover",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09C3, lemma-local-structure-constructible-complex, and 0990, lemma-proetale-enough-w-contractible, after the qc-affine weakly contractible covering lemma; finite intersection refinement"
+   }
+  },
+  {
+   "text": "On each chart the coefficient unit $B$ is canonically complete. Indeed its reduction is $(A_n)$ in degree zero, with the usual surjective transitions on sections by the constant-module section theorem. The map $1-s$ on their product is surjective on every section set: given $(y_n)$ choose $x_1$ and recursively lift $x_n-y_n$ to $x_{n+1}$. Its kernel is $\\varprojlim_n(A_n)=B$. Exact countable products and the Roos model therefore identify $\\eta_B:B\\to C(B)$ with an isomorphism. For exactness of the entire completion functor, consider on complexes the strict tower $F(P)_n=P\\otimes_B(A_n)$ with its quotient transitions. This additive construction commutes with shifts and mapping cones (all cone sums are finite), and composing its image in the strict-tower derived category with $R\\lim$ is exact by the strict-tower theorem. Every complex has a K-flat replacement; a quasi-isomorphism between K-flat complexes induces a quasi-isomorphism at each reduction by derived change of rings, hence in the strict-tower category because its kernels and cohomology are levelwise. The resolving-class theorem therefore gives an exact functor $C$ on $D(B)$, computed by these same K-flat towers. It is additive, so $\\eta$ is invertible on every direct summand of a finite sum of $B$ (restrict its inverse along the summand inclusions and projections). It is then invertible on a bounded complex of such terms: start with a single term, and use successive finite brutal-truncation cone triangles and the long exact cohomology sequences to pass from two invertible components of a morphism of triangles to the third.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-derived-homology-long-exact",
+    "lem-pc-kflat-resolution",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M, lemma-naive-completion; Tag 0941, lemma-derived-limit-is-ok, and the sectionwise Roos calculation; finite-complex dévissage"
+   }
+  },
+  {
+   "text": "Tensor the two bounded projective sheaf models on a common chart. Their total tensor is bounded; a tensor of two summands of $B^r$ and $B^s$ is a summand of $B^{rs}$ by tensoring the inclusion and retraction maps. Its terms are finite sums of such summands. These terms are flat since the free-unit tensor functor is a finite sum of identity functors and exactness passes to direct summands. A bounded complex of flat sheaves is K-flat: tensor an acyclic complex with each flat term, then build the bounded tensor total by the finite stupid filtration, whose successive quotients are those acyclic termwise tensors. Thus this total computes the ordinary derived tensor of the restricted $M,N$. Step 5 makes its canonical completion map invertible.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3 finite-projective models; Bhatt–Scholze Lemma 6.5.5, finite-projective dévissage; explicit bounded-flat argument"
+   }
+  },
+  {
+   "text": "Put $H=M\\otimes^L_BN$. Steps 2 and 6 show that the restriction of the actual map $\\eta_H$ to each chart over every piece $T$ is invertible. Hence its cone restricts to zero on $T$: a complex of sheaves whose cohomology vanishes on a covering is acyclic, since a section of a sheaf is zero when its restrictions to a covering vanish. Now reverse the finite open–closed splitting tree of step 3. At any split, if a complex has zero restrictions to the open and closed children, apply the exact sequence $0\\to j_!j^*F\\to F\\to i_*i^*F\\to0$ to each cohomology sheaf $F$; exactness of the two inverse images makes both end terms zero, hence $F=0$. Inducting up the tree shows that the cone of $\\eta_H$ is zero on $W$, so $\\eta_H$ is an isomorphism. By step 1, $H$ is derived complete in the Roos-triangle sense of def-weil-derived-complete.",
+   "uses": [
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-derived-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BM, lemma-closed-immersion-complement-retrocompact-exact, and the open–closed exact sequence; Bhatt–Scholze Lemmas 6.5.5 and 6.5.8"
+   }
+  },
+  {
+   "text": "Finally identify $C_W(H)$ with the tensor operation in the statement. Choose flat-term K-flat representatives $P\\to M$, $Q\\to N$; these exist by the resolution theorem. Derived monoidality for the identity of the topos equipped with $B\\to(A_n)_W$ gives\n$$H\\otimes^L_B(A_n)_W\\simeq (M\\otimes^L_B(A_n)_W)\\otimes^L_{(A_n)_W}(N\\otimes^L_B(A_n)_W).$$\nOn the chosen representatives this is the balancing isomorphism\n$$((p\\otimes q)\\otimes a)\\longmapsto (p\\otimes a)\\otimes(q\\otimes1).$$\nIts inverse multiplies the two scalar factors. These maps preserve degree and commute with the tensor differentials, as all scalars have degree zero. They commute with quotient transitions by the identity $\\rho_n(ab)=\\rho_n(a)\\rho_n(b)$, and send the quotient map to the map displayed in the item. The changed-ring representatives are K-flat, so they compute all finite-level derived tensors. Applying the functorial product mapping fiber identifies $C_W(H)$ with $M\\widehat\\otimes_R^LN$ and $\\eta_H$ with exactly $\\chi_{M,N}$, which is therefore invertible by step 7. All balancing and quotient maps commute with maps in $P,Q$; the tensor descent theorem extends this equality uniquely to the derived categories. Together with functoriality of the strict-tower derived limit, this proves naturality in both variables.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pur-integral-derived-operations",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Bhatt–Scholze Definition 3.4.10 and Lemma 6.5.5; sites-cohomology.tex Tags 06YS (lemma-K-flat-resolution) and 0G7E (lemma-pullback-K-flat)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-integral-derived-operations",
+  "def-weil-closed-immersion",
+  "def-weil-constructible-subset",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-quasi-separated-morphism",
+  "det-sf-open-closed-pullback-limits",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-fix-residue-lisse-projective-models",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-proetale-qc-affine-contractible-cover",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Explicit qcqs proof of Bhatt–Scholze Lemma 6.5.5 using residue-constructible pieces, Stacks Tags 09C3/0990 (projective sheaf models), 09BL (limit-preserving closed restriction), 09BM (open–closed exactness), 099M (completion); canonical tensor-tower calculation supplied in step 8."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +220,38 @@
    "results": "No hits in Mathlib/CategoryTheory",
    "date": "2026-10-16",
    "verdict": "no match: ordinary module adic-completion results and unrelated names do not state completeness of derived tensor of constructible pro-etale complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The usual derived tensor product of two constructible adic sheaf complexes is already derived complete and the canonical reduction tower completion map is invertible",
+   "results": "8 hits: AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.tensor_map_id_left_eq_map",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary algebraic module completion and unrelated homological declarations do not state the constructible pro-etale derived tensor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, TensorProduct",
+   "results": "12 hits: AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary algebraic module completion and unrelated homological declarations do not state the constructible pro-etale derived tensor theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor of constructible complete adic sheaves is derived complete and equals completed tensor",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.module, AdicCompletion.ofTensorProduct_surjective_of_finite",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary algebraic module completion and unrelated homological declarations do not state the constructible pro-etale derived tensor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "ofTensorProductEquivOfFiniteNoetherian|isKProjective_of_projective|pro.?etale|PerfectComplex",
+   "results": "18 hits: Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; read Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:319-331 (ordinary modules) and Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:113-115 (bounded-above projectives), neither is this result.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary algebraic module completion and unrelated homological declarations do not state the constructible pro-etale derived tensor theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "maintainer-reader",
@@ -80,5 +268,114 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-rem-sf-pf-done"
+ "unit": "sk-rem-sf-pf-done",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-fix-constructible-tensor-completion",
+  "worker": "stage1",
+  "summary": "Replaced the earlier unsupported simultaneous supported-constant-model claim with one statement-only local projective sheaf-model lemma from Stacks 09C3/0990. Proved canonical completeness by restriction to a finite residue-constructible partition, bounded-projective tensor and completion calculations, then open–closed conservativity. Distinguished the canonical completion unit from the weak triangulated definition; supplied the balancing map, strict-transition compatibility, and derived naturality. Kept the imported item statement unchanged and the full qcqs hypothesis.",
+  "blueprint": "Makes precise the evaluation sentence in lem-fix-weil-operations, proof paragraph beginning \"For an admissible exceptional adjoint\": \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\". Specifically supplies its integral ordinary-to-completed tensor passage. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Identifies constant/completed coefficients and the canonical quotient-tower unit with the Koszul reflector, which the unit has no lemma for."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Supplies the canonical-unit criterion rather than inferring it from a nonunique triangulated lift."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Supplies exact functorial completion of strict towers and its Roos triangle."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies weakly etale restriction with exact slice restriction."
+   },
+   {
+    "node": "det-sf-open-closed-pullback-limits",
+    "why": "Supplies the essential preservation of products and exactness of constructible closed restriction for general qcqs schemes."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Supplies uncompleted ringed-site tensor base change, including coefficient change at each finite level."
+   },
+   {
+    "node": "lem-weil-pbc-constant-module-section-properties",
+    "why": "Supplies sectionwise surjectivity of the constant finite quotient transitions for the coefficient-unit completion."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Justifies the product mapping fiber on the pro-etale site."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Supplies exactness of finite derived reductions."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Supplies the cohomology test for morphisms of cone triangles and acyclicity."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Supplies the ambient ringed-site derived tensor and descent of naturality from resolutions."
+   },
+   {
+    "node": "det-sf-open-closed-sequence-ring-sheaf",
+    "why": "Supplies the general ring-sheaf open–closed exact sequence used to detect the zero cone across constructible pieces."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Supplies flat-term K-flat representatives."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Supplies K-flat finite reduction representatives."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Gives exactness of the completion functor after verifying the resolving-class hypotheses for the strict quotient towers."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Identifies quasi-isomorphisms of strict towers levelwise, used to descend completion as an exact functor."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-qc-affine-contractible-cover",
+    "why": "Supplies one affine weakly contractible covering object for each qcqs constructible piece, so the local-model theorem has its actual affine weak-contractibility hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Gives the successive cohomology triangles used to deduce the finite Tor bound of a bounded residue complex with lisse finite-dimensional cohomology; the assembly unit has no truncation-construction lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-proetale-weakly-etale-localization",
+  "det-sf-open-closed-pullback-limits",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-proetale-qc-affine-contractible-cover",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q54-d634c25c0",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-d634c25c0 (reviewer sub-agent of L); spot-checked: Read all mathematics and wrote review.md. Verified all eight steps, the new lemma against Stacks 09C3/099I, canonical coefficient and tensor maps, edge cases, duplicate candidates, and unit route. Accepted 18 generic tool uses; no missing dependencies or cycles. No repairs required."
+ }
 }

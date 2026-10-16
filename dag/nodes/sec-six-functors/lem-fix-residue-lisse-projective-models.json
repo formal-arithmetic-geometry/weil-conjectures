@@ -1,0 +1,148 @@
+{
+ "id": "lem-fix-residue-lisse-projective-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor.",
+   "via": [
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Projective sheaf models from lisse residue cohomology on a weakly contractible affine",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$, uniformizer $\\varpi$, and residue field $k=R/(\\varpi)$ [def-weil-l-adic-coefficient-extension]. Let $S$ be an affine weakly contractible scheme for its small pro-etale site [def-pc-scheme, def-weil-pbc-proetale-site], meaning that evaluation on $S$ sends every epimorphism of sheaves of sets to a surjection. For each open subscheme $U\\subseteq S$, put $B_U=\\varprojlim_{n\\geq1}(R/\\varpi^n)_U$ [def-weil-completed-integral-coefficients]. Let $K\\in D(\\operatorname{Mod}(B_S))$ [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category]. Assume that $K$ is derived complete for its quotient tower [def-weil-derived-complete] and that its derived residue reduction $K_1=K\\otimes^L_{B_S}k_S$ [def-weil-integral-derived-reduction] has locally constant [def-weil-proetale-locally-constant-sheaf] constructible cohomology sheaves with only finitely many nonzero degrees [def-weil-finite-torsion-constructibility, def-weil-derived-cohomology-sheaves], and has finite Tor amplitude locally: there are integers $a\\leq b$ such that for every pro-etale $U\\to S$ and every $k_U$-module sheaf $L$, the cohomology sheaves of $(K_1|_U)\\otimes^L_{k_U}L$ vanish outside $[a,b]$ [def-weil-derived-tensor, def-weil-derived-cohomology-sheaves]. Then there is a finite disjoint open covering $S=\\coprod_i U_i$ [def-weil-open-immersion] such that, for each $i$, $K|_{U_i}$ is represented by a bounded complex of $B_{U_i}$-module sheaves whose terms are direct summands of finite sums $B_{U_i}^{\\oplus r}$ (each summand has inclusion and retraction maps whose composite is its identity). The differentials are arbitrary $B_{U_i}$-linear sheaf maps; no constancy of their matrix entries over $R$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3 (lemma-local-structure-constructible-complex): weakly contractible affine, Noetherian coefficient ring, derived completeness, constructible locally constant residue cohomology and locally finite Tor dimension; finite disjoint open cover and completed finite projective module terms. Specialize Λ=R and I=(varpi); restriction of scalars between complete constant and completed coefficients is the equivalence of Tag 099I in algebraization.tex (lemma-restriction-derived-complete-equivalence). Tag 0990 (lemma-proetale-enough-w-contractible) supplies the covering context."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-derived-complete",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-open-immersion",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-integral-derived-reduction",
+  "def-weil-derived-tensor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a derived complete complex on the pro-etale site, locally constant finite dimensional residue cohomology implies a local bounded complex of finite projective completed coefficient sheaves",
+   "results": "8 hits: BDeRham, BDeRhamPlus, CondensedMod.LocallyConstant.functor, LightCondMod.LocallyConstant.functorToPresheaves, LightCondMod.LocallyConstant.functor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, Condensed.profiniteSolid",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state local finite-projective models of derived-complete pro-etale complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, \"complex\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state local finite-projective models of derived-complete pro-etale complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?complet|completed.?tensor|constructible.*complex|perfect.*complex",
+   "results": "0 hits:  (Mathlib/CategoryTheory)",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state local finite-projective models of derived-complete pro-etale complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete complex with perfect locally constant reduction is locally a bounded complex of finite projective sheaves on a pro-etale site",
+   "results": "8 hits: HomologicalComplex.locallySmall, Profinite.instEnoughProjectives, CondensedSet.LocallyConstant.functorFullyFaithful, Condensed.lanSheafProfinite, CompHausLike.LocallyConstantModule.functor_obj_val, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, Condensed.lanCondensedSet, LightCondSet.LocallyConstant.iso",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state local finite-projective models of derived-complete pro-etale complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adically complete constructible complexes with lisse residue cohomology admit local finite projective resolutions over the completed ring sheaf with arbitrary sheaf matrix differentials",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.Presentation.IsFinite, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.ProjectiveResolution.instHasProjectiveResolution, ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex; read SheafOfModules.IsFinitePresentation at Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:267-269 (one module sheaf, not bounded projective complexes).",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state local finite-projective models of derived-complete pro-etale complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*structure.*constructible|constructible.*complex|derived.?complete|completed.*coefficient",
+   "results": "0 hits:  (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state local finite-projective models of derived-complete pro-etale complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?complet|completed.?tensor|constructible.*complex|perfect.*complex",
+   "results": "0 hits:  (Mathlib/CategoryTheory)",
+   "date": "2026-10-16",
+   "verdict": "no match: finite presentations of individual sheaves, affine scheme limit factorization, condensed sheafification and ordinary adic module lifts do not state the local projective model theorem for derived-complete pro-etale complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete complexes with lisse finite residue cohomology and finite Tor amplitude have local bounded projective sheaf models",
+   "results": "8 hits: SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+   "date": "2026-10-16",
+   "verdict": "no match: finite presentations of individual sheaves, affine scheme limit factorization, condensed sheafification and ordinary adic module lifts do not state the local projective model theorem for derived-complete pro-etale complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, \"complex\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: finite presentations of individual sheaves, affine scheme limit factorization, condensed sheafification and ordinary adic module lifts do not state the local projective model theorem for derived-complete pro-etale complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a locally constant perfect reduction modulo a uniformizer to a bounded complex of finite projective sheaves over complete adic coefficients",
+   "results": "8 hits: BDeRham, BDeRhamPlus, IsAdicComplete.StrictMono.lift, PreTilt.exists_smodEq_untiltAux, IsAdicComplete.lift, IsAdicComplete.mk_lift, IsAdicComplete.mkQ_comp_lift, AdicCompletion.eval_lift_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: finite presentations of individual sheaves, affine scheme limit factorization, condensed sheafification and ordinary adic module lifts do not state the local projective model theorem for derived-complete pro-etale complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete complex on a weakly contractible affine scheme with bounded locally constant finite residue field cohomology admits bounded finite projective completed coefficient sheaf models on a finite disjoint open cover",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_map_preimage_le_map_preimage, Condensed.finFree, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-16",
+   "verdict": "no match: finite presentations of individual sheaves, affine scheme limit factorization, condensed sheafification and ordinary adic module lifts do not state the local projective model theorem for derived-complete pro-etale complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived adically complete complex with locally constant perfect reduction is locally represented by a bounded complex of finite projective sheaves",
+   "results": "8 hits: BDeRham, BDeRhamPlus, CondensedMod.LocallyConstant.functor, LightCondMod.LocallyConstant.functor, CondensedMod, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.profiniteSolid",
+   "date": "2026-10-16",
+   "verdict": "no match: returned perfect pairings, period rings and condensed locally constant functors do not state a derived-complete pro-etale local-model theorem; the ModuleCat source grep returned no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|PerfectComplex|perfect.*complex|complex.*perfect",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: returned perfect pairings, period rings and condensed locally constant functors do not state a derived-complete pro-etale local-model theorem; the ModuleCat source grep returned no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\"",
+   "results": "12 hits: LinearMap.IsPerfectCompl, LinearMap.IsPerfectCompl.left_top_iff, LinearMap.IsPerfectCompl.right_top_iff, LinearMap.IsPerfectCompl.flip, LinearMap.IsPerfectCompl.flip_iff, LinearMap.IsPerfectCompl.isCompl_left, LinearMap.IsPerfectCompl.isCompl_right, LinearMap.IsPerfectCompl.mk",
+   "date": "2026-10-16",
+   "verdict": "no match: returned perfect pairings, period rings and condensed locally constant functors do not state a derived-complete pro-etale local-model theorem; the ModuleCat source grep returned no hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-fix-constructible-tensor-completion",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done"
+}
