@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-def-sfb-ring-object-monoid",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Ring objects of a monoidal category",
@@ -12,23 +12,159 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-monoid.md",
   "place": "node det-def-sfb-ring-object-monoid, order None"
  },
- "stmt_deps": [],
- "proof": [
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
   {
-   "text": "Identities are morphisms of ring objects. If $f\\colon R\\to R'$ and $g\\colon R'\\to R''$ are\nmorphisms of ring objects, then\n$gf\\mu=g\\mu'(f\\otimes f)=\\mu''(g\\otimes g)(f\\otimes f)=\\mu''(gf\\otimes gf)$ by functoriality of\n$\\otimes$, and $gf\\eta=g\\eta'=\\eta''$. So composites are morphisms, composition is associative and\nunital because it is so in $\\mathcal C$, and the forgetful functor is faithful because a\nmorphism of ring objects is a morphism of $\\mathcal C$ satisfying conditions.",
-   "uses": [],
-   "elementary": null
+   "tool": "grep",
+   "query": "class MonObj|structure Mon_|class IsMonHom|class IsCommMonObj|def forget|instance.*Faithful",
+   "results": "Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/Center.lean; Mathlib/CategoryTheory/Monoidal/CommMon_.lean; Mathlib/CategoryTheory/Monoidal/CommMon_.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the capped broad grep returned other monoidal files; the focused searches below locate the exact declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monoid objects in monoidal categories and their category of multiplication and unit preserving morphisms",
+   "results": "CategoryTheory.Mon.mk, CategoryTheory.MonObj.mk, CategoryTheory.MonObj.mul (service modules Mathlib.CategoryTheory.Monoidal.Mon_); checked in pinned Mathlib/CategoryTheory/Monoidal/Mon.lean, where the module is named Mon. Other hits about a monoidal structure on Mon require extra hypotheses and are not used.",
+   "date": "2026-10-16",
+   "verdict": "match: object and monoid-structure definitions; combined with the source declarations in mathlib_match covers the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonObj, CategoryTheory.IsMonHom, CategoryTheory.IsCommMonObj",
+   "results": "CategoryTheory.MonObj.instIsMonHomMulOfIsCommMonObj; CategoryTheory.CommMon.mkIso' and projections; CategoryTheory.instIsMonHomInvHomOfIsCommMonObj. These concern more specialized constructions, not the defining clauses.",
+   "date": "2026-10-16",
+   "verdict": "no match: these hits do not themselves state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoid objects in a monoidal category, their morphisms and faithful forgetful functor, and commutative monoid objects in a braided category",
+   "results": "CategoryTheory.CommMon.instFaithfulMonForget₂Mon; CategoryTheory.CommMon_; CategoryTheory.CommMon.instFaithfulForget; CategoryTheory.CommMon; CategoryTheory.CommMon.forget₂Mon; CategoryTheory.CommMon.fullyFaithfulForget₂Mon_; CategoryTheory.CommMon.forget; CategoryTheory.CommMon.forget₂Mon_",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: these hits concern commutative monoid objects and impose a braiding; generic Mon declarations are established by the focused searches and source reading"
+  },
+  {
+   "tool": "grep",
+   "query": "structure Mon |structure Hom|instance.*Category.*Mon|class.*IsCommMonObj|mul_comm|namespace Mon",
+   "results": "97; 256; 263; 278; 297",
+   "date": "2026-10-16",
+   "verdict": "no match: single-file grep output omitted the filename and stopped at five namespace/object hits; repeated over the directory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative monoid object has multiplication unchanged by the braiding, and monoid homomorphisms preserve multiplication and unit",
+   "results": "CategoryTheory.IsCommMonObj.mul_comm_assoc; CategoryTheory.MonObj.instIsMonHomMulOfIsCommMonObj; CategoryTheory.Mon.hom_mul; CategoryTheory.IsCommMonObj; CategoryTheory.IsCommMonObj.mul_comm'_assoc; CategoryTheory.IsCommMon; CategoryTheory.CommMon_; CategoryTheory.IsCommMonObj.mul_comm'",
+   "date": "2026-10-16",
+   "verdict": "match for clause 3 only: IsCommMonObj; Mon.hom_mul also concerns multiplication preservation, but these hits alone do not give the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "structure Mon where|structure Hom|Category \\(Mon C\\)|IsCommMonObj|mul_comm|def comp",
+   "results": "Mathlib/CategoryTheory/Monoidal/Bimod.lean; Mathlib/CategoryTheory/Monoidal/Bimod.lean; Mathlib/CategoryTheory/Monoidal/Bimod.lean; Mathlib/CategoryTheory/Monoidal/Internal/Types/Basic.lean; Mathlib/CategoryTheory/Monoidal/Internal/Types/Basic.lean; Mathlib/CategoryTheory/Monoidal/Internal/Types/Basic.lean; Mathlib/CategoryTheory/Monoidal/Internal/Types/Basic.lean; Mathlib/CategoryTheory/Monoidal/Internal/Types/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the capped broad grep returned other monoidal files; the focused searches below locate the exact declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "class.*IsCommMonObj|mul_comm \\(X\\)|instance : Category \\(Mon C\\)",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Comon_.lean; Mathlib/CategoryTheory/Monoidal/Ring.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/CommGrp_.lean",
+   "date": "2026-10-16",
+   "verdict": "match: pinned-source definitions and category structure; exact clauses detailed in mathlib_match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mon.instCategory",
+   "results": "CategoryTheory.Mon.instCategory; CategoryTheory.Mon.instHasInitial; CategoryTheory.Mon.forget; CategoryTheory.Mon.monMonoidal; CategoryTheory.Mon.monMonoidalStruct; CategoryTheory.Mon.forget_faithful; CategoryTheory.Mon.instReflectsIsomorphismsForget; CategoryTheory.Mon.instSymmetricCategory",
+   "date": "2026-10-16",
+   "verdict": "match: category instance"
+  },
+  {
+   "tool": "grep",
+   "query": "^class MonObj|^class IsMonHom|^class IsCommMonObj|^structure Mon where",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean:73 CategoryTheory.MonObj; :213 CategoryTheory.IsMonHom; :256 CategoryTheory.Mon; :1222 CategoryTheory.IsCommMonObj. Read lines 73-85, 213-229, 256-259, 521-558, 595-602 and 1213-1223 for the exact clause correspondence.",
+   "date": "2026-10-16",
+   "verdict": "match: all object, morphism and commutativity definitions; category and forgetful functor confirmed in the same source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoid objects of a monoidal category form a category with a faithful forgetful functor; multiplication is commutative when invariant under the braiding",
+   "results": "CategoryTheory.CommMon.instFaithfulMonForget₂Mon; CategoryTheory.CommMon.instFaithfulForget; CategoryTheory.CommMon.forget; CategoryTheory.CommMon.forget₂Mon_obj_mul; CategoryTheory.MonObj.instIsMonHomMulOfIsCommMonObj; CategoryTheory.CommMon_; CategoryTheory.CommMon.instCategory; CommMonCat.hasForgetToMonCat",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: the relevant returned functors concern commutative objects and require a braiding; use the generic Mon declarations located by Loogle and grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monoid objects with unit and associative multiplication and morphisms preserving multiplication and unit in a monoidal category",
+   "results": "CategoryTheory.Mon.mk; CategoryTheory.MonObj.mk; CategoryTheory.Mon.monMonoidal; CategoryTheory.MonObj.instTensorUnit; MonTypeEquivalenceMon.monMonoid; CategoryTheory.MonObj.termμ; CategoryTheory.MonObj.instIsMonHomHomLeftUnitor; CategoryTheory.Mon.tensorUnit_mul",
+   "date": "2026-10-16",
+   "verdict": "match for clause 1: Mon.mk and MonObj.mk; source checked in the pinned Mon.lean, not the service module spelling Mon_"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mon.forget_faithful",
+   "results": "CategoryTheory.Mon.forget_faithful, Mathlib.CategoryTheory.Monoidal.Mon: {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] : (CategoryTheory.Mon.forget C).Faithful",
+   "date": "2026-10-16",
+   "verdict": "match for the faithful forgetful functor in clause 2, under precisely Category and MonoidalCategory"
+  },
+  {
+   "tool": "grep",
+   "query": "^class MonObj|^class IsMonHom|^structure Mon where|^structure Hom \\(M N : Mon C\\)|^instance : Category \\(Mon C\\)|^def forget : Mon C|^instance forget_faithful|^class IsCommMonObj",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean:73 MonObj; :213 IsMonHom; :256 Mon; :521 Mon.Hom; :555 Category (Mon C). Also Mathlib/CategoryTheory/Monoidal/Comon_.lean:201 forget_faithful. The five-match per-file cap means later Mon declarations require the next search.",
+   "date": "2026-10-16",
+   "verdict": "match for the object, morphism and category clauses; later declarations located separately",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "^def id \\(M : Mon C\\)|^def comp \\{M N O : Mon C\\}|^def forget : Mon C|^instance forget_faithful|^class IsCommMonObj",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean:542 Mon.id; :551 Mon.comp; :595 Mon.forget; :602 Mon.forget_faithful; :1222 IsCommMonObj. Also Mathlib/CategoryTheory/Monoidal/Comon_.lean:201 forget_faithful.",
+   "date": "2026-10-16",
+   "verdict": "match for inherited identities/composition, the forgetful functor and its faithfulness in clause 2 and braided commutativity in clause 3",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsMonHom.one_hom",
+   "results": "{\"t\": \"2026-10-16T15:02:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsMonHom.one_hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.IsMonHom.one_hom\"], \"digest\": \"9b7c8f517a5cefed\"}",
+   "date": "2026-10-16",
+   "verdict": "match for preservation of the unit only; the service truncates the signature, so the complete equation and hypotheses were checked at Mon.lean:213–215"
+  },
+  {
+   "tool": "grep",
+   "query": "^class MonObj|^  one_mul|^  mul_one|^  mul_assoc|^class IsMonHom|^  one_hom|^  mul_hom|^class IsCommMonObj|^  mul_comm",
+   "results": "{\"t\": \"2026-10-16T15:02:17Z\", \"tool\": \"grep\", \"query\": \"^class MonObj|^  one_mul|^  mul_one|^  mul_assoc|^class IsMonHom|^  one_hom|^  mul_hom|^class IsCommMonObj|^  mul_comm\", \"sub\": \"CategoryTheory/Monoidal/Mon.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"73\", \"78\", \"79\", \"84\", \"115\"], \"digest\": \"ce8175d4bab8d9f9\"}",
+   "date": "2026-10-16",
+   "verdict": "partial source hit only: the single-file wrapper misparses line numbers as filenames and caps the output at five hits; read Mon.lean:73–85 directly and repeated the directory search below",
+   "subdirectory": "CategoryTheory/Monoidal/Mon.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal monoids: a tensor unit arrow and a multiplication obeying associator and unitor axioms, with structure-preserving arrows",
+   "results": "{\"t\": \"2026-10-16T15:02:36Z\", \"tool\": \"leanfinder\", \"query\": \"Internal monoids: a tensor unit arrow and a multiplication obeying associator and unitor axioms, with structure-preserving arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonObj\", \"CategoryTheory.Mon_Class\", \"CategoryTheory.Mon_\", \"CategoryTheory.Mon\", \"CategoryTheory.Mon.X\", \"CategoryTheory.Hom.monoid\", \"CategoryTheory.MonObj.one\", \"CategoryTheory.IsMon_Hom\"], \"digest\": \"f5f9f75e1498bb84\"}",
+   "date": "2026-10-16",
+   "verdict": "match for MonObj and bundled Mon in clause 1; the service uses older Mon_ module spelling and misleading generated descriptions, so the pinned source, not those descriptions, determines the match"
+  },
+  {
+   "tool": "grep",
+   "query": "^class MonObj|^class IsMonHom|^class IsCommMonObj",
+   "results": "{\"t\": \"2026-10-16T15:03:13Z\", \"tool\": \"grep\", \"query\": \"^class MonObj|^class IsMonHom|^class IsCommMonObj\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\"], \"digest\": \"3e62dde892d02db9\"}",
+   "date": "2026-10-16",
+   "verdict": "match: Mathlib/CategoryTheory/Monoidal/Mon.lean:73 MonObj, :213 IsMonHom, :1222 IsCommMonObj; full definitions independently read in the pinned source",
+   "subdirectory": "CategoryTheory/Monoidal"
   }
  ],
- "proof_deps": [],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-monoid.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "CategoryTheory.MonObj, CategoryTheory.Mon, CategoryTheory.IsMonHom, CategoryTheory.Mon.Hom, CategoryTheory.Mon.id, CategoryTheory.Mon.comp, CategoryTheory.Mon.instCategory, CategoryTheory.Mon.forget, CategoryTheory.Mon.forget_faithful, CategoryTheory.IsCommMonObj",
+  "file": "Mathlib/CategoryTheory/Monoidal/Mon.lean",
+  "line": 73,
+  "how": "exact, clause by clause in the pinned Mathlib/CategoryTheory/Monoidal/Mon.lean: clause 1 is CategoryTheory.MonObj (lines 73–85), bundled as CategoryTheory.Mon (256–259); clause 2 is CategoryTheory.IsMonHom (213–215), CategoryTheory.Mon.Hom (521–524), CategoryTheory.Mon.id (542), CategoryTheory.Mon.comp (551–552), the Category (Mon C) instance (555–558), CategoryTheory.Mon.forget (595–597), and CategoryTheory.Mon.forget_faithful (602); clause 3 is CategoryTheory.IsCommMonObj (1222–1223), under BraidedCategory only (1213). Lean f ≫ g means g ∘ f; μ ▷ R is μ ⊗ id_R and R ◁ μ is id_R ⊗ μ, so the three MonObj axioms and both IsMonHom equations are exactly the displayed equations, with no extra hypothesis. The category and faithful forgetful functor are already constructed in Mathlib."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "unsplit",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -39,5 +175,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-ring-object"
+ "unit": "sk-def-sfb-ring-object",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-def-sfb-ring-object-monoid",
+  "worker": "stage1",
+  "summary": "Repair of returned head be24f69f06: the landing rejected its empty statement dependencies although the item is a definition. Retained the unchanged main-20261015 statement and verified the whole-item Mathlib match clause by clause. The repaired stmt_deps cites the existing reviewed Mathlib leaf def-nagata-category for the underlying category, identities, composition and laws; it does not cite the unrelated commutative symmetric ring-object definition. Rechecked the current DAG dependency and reran the search services, correcting broad-search verdicts that did not actually match. No new nodes or proof steps are needed. Second reading adds the existing Mathlib leaf def-sfb-monoidal-category for the tensor bifunctor, specified unit, associator, unitors and coherence; its only dependency is def-nagata-category. Independently checked each clause against pinned source and added fresh logged searches.",
+  "blueprint": "The node statement clauses 1, 2 and 3 are realized respectively by MonObj/Mon, IsMonHom/Mon.Hom/category/forget/forget_faithful, and IsCommMonObj. This supplies the generic monoid-object terminology at the beginning of sk-def-sfb-ring-object without replacing any of that unit’s ring, presheaf or sheaf constructions."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q43-7eb8b313b",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q43-7eb8b313b (reviewer sub-agent of L); spot-checked: Reviewed the complete packet, report, DAG item, dependencies, blueprint route, and pinned Mathlib sources. The repaired item is an exact Mathlib leaf with correct category and monoidal dependencies, hypotheses, composition orientation, faithful forgetful functor, and braided commutativity; searches, edge cases, duplicate checks, and prior return repair all pass. Review written to review.md."
+ }
 }
