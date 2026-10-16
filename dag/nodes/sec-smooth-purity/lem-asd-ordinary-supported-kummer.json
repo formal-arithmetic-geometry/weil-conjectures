@@ -27,7 +27,10 @@
   "lem-amb-kummer-any-base",
   "def-kun-derived-tensor",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-asd-ordinary-supported-kummer-scalar",
+  "def-asd-ordinary-supported-kummer-system"
  ],
  "proof": [
   {
@@ -378,5 +381,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer",
+  "declaration": "AlgebraicGeometry.Etale.ordinary_supported_kummer",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinary_supported_kummer"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinarySupportedCartierKummer.lean",
+  "statement": "theorem ordinary_supported_kummer (T : Scheme.{u}) (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible) : ∃ (κ : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D)) (Scheme.finiteEtaleTateLine T N A hA) 2) (c : (ordinaryFinitePushforward A i).obj (ordinaryFiniteUnit A D) ⟶ (ordinaryFiniteLine A N hA T)⟦(2 : ℤ)⟧) (c₁ : Ext (ordinaryFiniteConstant A T) (Scheme.finiteEtaleTateLine T N A hA) 2) (t : OrdinaryFiniteTwistTransport A N hA), c = supportedExactDerivedMap (lowerStar (ModuleCat.{u + 1} A) i) (ordinaryFiniteConstant A D) (Scheme.finiteEtaleTateLine T N A hA) κ ∧ SupportedKummerBoundary A N hA i hI hT κ ∧ (∀ κ' : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D)) (Scheme.finiteEtaleTateLine T N A hA) 2, SupportedKummerBoundary A N hA i hI hT κ' → κ' = κ) ∧ (Ext.mk₀ (ordinaryFiniteIntegralGenerator A T)).comp (c₁.mapExactFunctor (RawModuleScalarComparison.forget A T)) (zero_add 2) = supportedKummerChern A N hA i hI hT ∧ supportedDerivedUnit A i ≫ c = c₁.hom ∧ (∀ {D' T' : Scheme.{u}} (i' : D' ⟶ T') [IsClosedImmersion i'] (v : T' ⟶ T) (w : D' ⟶ D) (sq : IsPullback w i' i v) (hI' : i'.ker.IsInvertible), ∃ κ' : Ext ((lowerStar (ModuleCat.{u + 1} A) i').obj (ordinaryFiniteConstant A D')) (Scheme.finiteEtaleTateLine T' N A hA) 2, SupportedKummerBoundary A N hA i' hI' (by simpa using hT.map v.appTop.hom) κ' ∧ IsIso (supportedConstantExchange A i i' v w sq.toCommSq) ∧ (Ext.mk₀ (supportedConstantExchange A i i' v w sq.toCommSq)).comp κ' (zero_add 2) = (κ.mapExactFunctor (upperStar (ModuleCat.{u + 1} A) v)).comp (Ext.mk₀ (t.line v hT).hom) (add_zero 2)) ∧ (∀ [NeZero N], ∃ κ₀ : Ext ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod N))) i).obj (ordinaryFiniteConstant (ULift.{u + 1} (ZMod N)) D)) (Scheme.finiteEtaleTateLine T N (ULift.{u + 1} (ZMod N)) (congrArg (ULift.up : ZMod N → ULift.{u + 1} (ZMod N)) (ZMod.natCast_self N))) 2, SupportedKummerBoundary (ULift.{u + 1} (ZMod N)) N (congrArg (ULift.up : ZMod N → ULift.{u + 1} (ZMod N)) (ZMod.natCast_self N)) i hI hT κ₀ ∧ SupportedKummerScalar ((Scheme.finiteEtaleTwistScalar N A hA).comp ULift.ringEquiv.toRingHom) N (congrArg (ULift.up : ZMod N → ULift.{u + 1} (ZMod N)) (ZMod.natCast_self N)) hA i κ₀ κ)",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a7425a3eb",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, definitions, universes, edge cases, docstrings, and verbatim signatures. All four modules reproduced clean per-file scompile.py checks. No fixes required; repository and branch head unchanged."
  }
 }
