@@ -208,5 +208,23 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-571fc9810 (reviewer sub-agent of L); spot-checked: Read the full item, unit, chapter, report, all cited DAG statements, exact blueprint sources, and related direct-image variants. The two proof steps correctly establish UDV(f,A;2d) and then specialize the general small-etale finite-Tor theorem to obtain bounded constructibility and interval [a,b+2d]. Coefficient category, base-change morphism, hypotheses, nonproper scope, route, duplicates, searches, and edge cases all check. No repair is needed; the empty unit realization is a pre-existing maintenance metadata issue documented under coord/dag-sync.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-567ab92d5",
+  "group": "NC",
+  "result": "pass",
+  "note": "Reviewed the immutable node, all dependencies, source proof, Lean declaration, report sections, edge cases, and one-definition searches. scompile.py sandbox and library checks passed with only the permitted theorem sorry; no substantive or mechanical errors found. Review recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfDirectImageCTFNonproper",
+  "declaration": "AlgebraicGeometry.Etale.directImageCTFNonproper",
+  "file": "lean/Sheaf/Paper/SfDirectImageCTFNonproper.lean",
+  "statement": "theorem directImageCTFNonproper (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ) {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))))} (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) X K) (hTor : DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) X a b K) : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) Y ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) f).rightDerivedFunctor.obj K) ∧ DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) Y a (b + 2 * (d : ℤ)) ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) f).rightDerivedFunctor.obj K)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
