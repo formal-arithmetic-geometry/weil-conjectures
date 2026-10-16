@@ -154,3 +154,75 @@ lemma ι_filtrationLEFunctorCompColimIso_hom_app (n : ℤ) [HasColimitsOfShape �
   simp [filtrationLEFunctorCompColimIso]
 
 end CochainComplex
+
+section
+
+/-!
+# Filtration of a cochain complex
+
+Migrated from `Mathlib/Algebra/Homology/Embedding/CochainComplexTrunc.lean`
+on the branch `jriou_localization` of Joël Riou's mathlib fork
+(leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
+
+-/
+
+@[expose] public section
+
+open CategoryTheory Category Limits Functor
+
+namespace CochainComplex
+
+variable {C : Type*} [Category C] [Abelian C]
+  (K L : CochainComplex C ℤ)
+
+instance CochainComplexTrunc_mono (n : ℤ) : Mono (K.ιTruncLE n) := by
+  dsimp only [ιTruncLE]
+  infer_instance
+
+namespace truncLELEIsoOfLE
+
+
+
+end truncLELEIsoOfLE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+variable (C)
+
+
+
+
+
+
+
+
+
+end CochainComplex
+
+end

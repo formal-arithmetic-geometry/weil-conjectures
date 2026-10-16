@@ -433,8 +433,50 @@ bounded complex `P` of finitely generated projective modules, `C^∨` is represe
 termwise dual complex `Hom_R(P^{-i}, R)`, again bounded with finitely generated projective
 terms. -/
 theorem IsPerfect.ihom_unit {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
-    ((ihom C).obj (𝟙_ _)).IsPerfect :=
-  sorry
+    ((ihom C).obj (𝟙_ _)).IsPerfect := by
+  obtain ⟨P, a, b, _, _, hP, ⟨e⟩⟩ := hC
+  have hd (n : ℤ) : IsDualizable (P.X n) := by
+    have := (hP n).1
+    have := (hP n).2
+    exact ModuleCat.isDualizable_of_projective (P.X n)
+  let _ : ∀ n, HasRightDual (P.X n) := fun n ↦ (hd n).some
+  have hD (n : ℤ) : Module.Projective R (P.rightDual.X n) ∧
+      Module.Finite R (P.rightDual.X n) := by
+    have := (hP (-n)).1
+    have := (hP (-n)).2
+    let f : P.rightDual.X n ≅ ModuleCat.of R (Module.Dual R (P.X (-n))) :=
+      (ihomUnitIsoRightDual (P.X (-n))).symm ≪≫
+        (ModuleCat.homLinearEquiv (S := R)).toModuleIso
+    exact ⟨Module.Projective.of_equiv f.toLinearEquiv.symm,
+      Module.Finite.equiv f.toLinearEquiv.symm⟩
+  let _ := CochainComplex.exactPairingRightDual P a b
+  let H := HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)
+  have hd' (n : ℤ) : IsDualizable (P.rightDual.X n) :=
+    ⟨{ rightDual := P.X (-n)
+       exact := (BraidedCategory.exactPairing_swap (P.X (-n)) (P.X (-n))ᘁ :) }⟩
+  let X : (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat.FullSubcategory :=
+    ⟨H.obj P, (HomotopyCategory.kFlat_quotient_obj_iff _).2
+      (CochainComplex.kFlat_of_bounded_of_flat P a b (fun n ↦ (hd n).flat))⟩
+  let Y : (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat.FullSubcategory :=
+    ⟨H.obj P.rightDual, (HomotopyCategory.kFlat_quotient_obj_iff _).2
+      (CochainComplex.kFlat_of_bounded_of_flat P.rightDual (-b) (-a)
+        (fun n ↦ (hd' n).flat))⟩
+  let _ : ExactPairing ((ObjectProperty.ι _).obj X) ((ObjectProperty.ι _).obj Y) :=
+    ExactPairing.map H P P.rightDual
+  let _ : ExactPairing X Y := ExactPairing.ofFullyFaithful (ObjectProperty.ι _) X Y
+  let _ := Functor.Monoidal.ofLaxMonoidal (kFlatQh (ModuleCat.{u} R))
+  let _ : ExactPairing ((kFlatQh (ModuleCat.{u} R)).obj X)
+      ((kFlatQh (ModuleCat.{u} R)).obj Y) :=
+    ExactPairing.map (kFlatQh (ModuleCat.{u} R)) X Y
+  let _ : HasRightDual ((kFlatQh (ModuleCat.{u} R)).obj X) :=
+    ⟨(kFlatQh (ModuleCat.{u} R)).obj Y⟩
+  obtain ⟨_⟩ := nonempty_braidedCategory (ModuleCat.{u} R)
+  let f : (ihom C).obj (𝟙_ _) ≅ Q.obj P.rightDual :=
+    (MonoidalClosed.internalHom.mapIso
+      ((quotientCompQhIso _).app P ≪≫ e.symm).op).app _ ≪≫
+      ihomUnitIsoRightDual ((kFlatQh (ModuleCat.{u} R)).obj X) ≪≫
+      (quotientCompQhIso _).app P.rightDual
+  exact (isPerfect_Q_obj P.rightDual (-b) (-a) hD).of_iso f.symm
 
 omit [HasDerivedCategory.{u} (ModuleCat.{u} R)] in
 /-- A complex of modules over a semisimple ring (for example a field) is quasi-isomorphic to the

@@ -3,11 +3,13 @@ Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
-
 module
 
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationBaseChangeCone
+
+
 public import WeilConjectures.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationBaseChangeCone
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationCanonicalBaseChangeCone
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Existence of the canonical strict-local neighbourhood geometry
@@ -32,7 +34,7 @@ This supplies only geometry, with no derived sheaves, cocones or mates.
 Source: Stacks, Tag 03Q9, first proof paragraph
 (blueprint: lem-weil-pbc-strict-local-neighbourhood-geometry).
 
-Proof: `strictHenselizationBaseChangeCone_exists` supplies the limiting cone over
+Proof: `strictHenselizationAffineBaseChangeCone_exists` supplies the limiting cone over
 exactly the same small affine neighbourhood diagram, with vertex S_(s) ×_S X and
 both specified projection equations. Precompose its legs with pullback symmetry
 from X ×_S S_(s), and transport the limit by the induced cone isomorphism.
@@ -49,7 +51,7 @@ theorem nonempty_strictLocalNeighbourhoodGeometry {X S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :
     Nonempty (StrictLocalNeighbourhoodGeometry f s) := by
   classical
-  obtain ⟨π, hπ, hp, hf⟩ := Scheme.strictHenselizationBaseChangeCone_exists f s
+  obtain ⟨π, hπ, hp, hf⟩ := Scheme.strictHenselizationAffineBaseChangeCone_exists f s
   let A := strictLocalNeighbourhoods s
   let D := strictLocalNeighbourhoodDiagram f s
   have hAff (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
@@ -76,7 +78,7 @@ theorem nonempty_strictLocalNeighbourhoodGeometry {X S : Scheme.{v}}
       (isAffineHom_of_isAffine
         (X := (A.obj i).left) (Y := (A.obj j).left) _)
   let c : Cone D := Cone.mk _ π
-  let e := pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)
+  let e := pullbackSymmetry f (Scheme.strictLocalizationToBase s)
   let c' := c.extend e.hom
   refine ⟨{
     legs := c'.π
