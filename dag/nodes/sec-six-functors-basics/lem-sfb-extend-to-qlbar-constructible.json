@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-extend-to-qlbar-constructible",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$T_{E,\\Qlb}$ preserves bounded constructible complexes",
@@ -18,26 +18,161 @@
  ],
  "proof": [
   {
-   "text": "As for [lem-sfb-extend-subfield-constructible], with [lem-sfb-qlbar-flat] in place of\nflatness of $F_X$: $T_{E,\\Qlb}$ is computed termwise, so it preserves boundedness and\n$H^n(T_{E,\\Qlb}K)=\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}H^n(K)$, and tensoring local finite presentations on\nthe strata of a finite stratification ([sk-def-sfb-constructible]) gives local finite\npresentations.",
+   "text": "By [def-sfb-derived-extend-to-qlbar], $T_{E,\\Qlb}$ is the derived extension of scalars along $E_X\\to\\overline{\\mathbf Q}_{\\ell,X}$. The flatness statement [lem-sfb-qlbar-flat] gives preservation of finite limits by the underived extension, while [sk-def-sfb-change-of-scalars] says extension is left adjoint to restriction and preserves finite colimits. Thus the extension is exact; [def-sfb-left-derived-exact] identifies its left derived functor with its termwise functor. The required general derived extension exists in precisely these module categories by [def-sfb-derived-extend-to-qlbar]. Flatness here holds for every scheme, as required by the general homology lemma. Applying [lem-sfb-extend-scalars-preserves-homology] to this coefficient map gives $H^n(T_{E,\\Qlb}K)\\cong\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}H^n(K)$ for every $n$. Since $K$ is bounded, this cohomology vanishes outside a finite interval, so $T_{E,\\Qlb}K$ is bounded.",
    "uses": [
+    "def-sfb-derived-extend-to-qlbar",
     "lem-sfb-qlbar-flat",
-    "sk-def-sfb-constructible"
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-extend-scalars-preserves-homology",
+    "sk-def-sfb-bounded-constructible",
+    "def-sfb-left-derived-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+    "place": "Proof paragraph, first clause: exactness, termwise computation and boundedness"
+   }
+  },
+  {
+   "text": "Write $R=E_X$, $B=\\overline{\\mathbf Q}_{\\ell,X}$, and $A(M)=B\\otimes_R M$. For any scheme morphism $g:Z\\to X$, restriction commutes with this extension. Indeed the inverse image on abelian sheaves is strong monoidal by [def-sfb-finite-upper-star-monoidal] and is a left adjoint by [def-sfb-finite-upper-lower-star-adjunction], hence takes the defining coequalizer of [sk-def-sfb-change-of-scalars] to the coequalizer for $g^{-1}B\\otimes_{g^{-1}R}g^{-1}M$. For clarity, preservation of this coequalizer follows directly from the adjunction: maps from its inverse image to $N$ correspond to maps from the original coequalizer to $g_*N$, hence to maps from the original tensor target to $g_*N$ equalizing the two arrows; adjunction identifies these with maps from the pulled-back tensor target to $N$ equalizing the pulled-back arrows. This is precisely the coequalizer universal property. Identify $g^{-1}R\\cong E_Z$ and $g^{-1}B\\cong\\overline{\\mathbf Q}_{\\ell,Z}$ by the restriction convention of [sk-def-sfb-constructible]. The coefficient square of [sk-def-sfb-coefficient-change] identifies the pulled-back map with $E_Z\\to\\overline{\\mathbf Q}_{\\ell,Z}$. Under the module pullback formula of [sk-def-sfb-module-pushforward-pullback] we have therefore obtained $g^*A(M)\\cong\\overline{\\mathbf Q}_{\\ell,Z}\\otimes_{E_Z}g^*M$. This applies both to strata and to objects of their pro-étale covers, and to affine opens of an arbitrary $X$.",
+   "uses": [
+    "def-sfb-finite-upper-star-monoidal",
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-coefficient-change",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+    "place": "Local presentations on strata: explicit inverse-image and coequalizer calculation"
+   }
+  },
+  {
+   "text": "Fix $n$ and put $M=H^n(K)$. By [sk-def-sfb-bounded-constructible] and [sk-def-sfb-constructible], on each affine open choose a finite stratification by constructible locally closed subschemes, and on every stratum a pro-étale cover on which $M$ is the cokernel of a finite matrix $C$ with entries in $E$. (If $X$ is qcqs one may use its global finite stratification.) Write a covering object as $V$. Step 2 identifies the restriction of $A(M)$ with $B_V\\otimes_{E_V}M|_V$, where $B_V=\\overline{\\mathbf Q}_{\\ell,V}$. By [sk-def-sfb-change-of-scalars] this functor preserves finite colimits, hence cokernels and finite sums. It takes $E_V$ to $B_V$: the maps $b\\otimes r\\mapsto b\\,a_V(r)$ and $b\\mapsto b\\otimes1$ are inverse, since the balancing relation gives $b\\otimes r=b\\,a_V(r)\\otimes1$. Thus it takes the matrix presentation $E_V^m\\xrightarrow{C}E_V^r\\to M|_V\\to0$ to $B_V^m\\xrightarrow{a(C)}B_V^r\\to A(M)|_V\\to0$. Its matrix entries are the images of the same scalar entries under $E\\hookrightarrow\\Qlb$, so this is a finite constant local model, not merely an arbitrary finite presentation. The same strata are constructible and the same covers suffice. Hence $A(H^n(K))$ is constructible on every required affine open, and globally in the qcqs case. Step 1 identifies this with $H^n(T_{E,\\Qlb}K)$ and gives the same finite cohomology interval as $K$. The defining criterion of [sk-def-sfb-bounded-constructible] now proves the claimed bounded constructibility.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+    "place": "Final clause: finite scalar matrices survive extension, on the same strata and covers"
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-derived-extend-to-qlbar",
   "lem-sfb-qlbar-flat",
-  "sk-def-sfb-constructible"
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-extend-scalars-preserves-homology",
+  "sk-def-sfb-bounded-constructible",
+  "def-sfb-left-derived-exact",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-module-pushforward-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+  "place": "Complete proof paragraph, expanded using the generic exact-derived and restriction/coequalizer statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj|derivedExtendScalarsToPadicAlgCl|boundedConstructible.*extend",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for this bounded constructible pro-étale coefficient-extension statement; generic ingredients only",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, boundedConstructible, extendScalars, IsConstructible",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: loogle: unknown identifier 'boundedConstructible'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars to Qbar ell preserves bounded constructible complex",
+   "results": "8 hits: Bornology.IsVonNBounded.extend_scalars, Bornology.IsVonNBounded.restrict_scalars, Subfield.coe_extendScalars, IntermediateField.extendScalars_top, IntermediateField.coe_extendScalars, IntermediateField.extendScalars, PadicComplex.instIsScalarTowerPadicPadicAlgCl, IntermediateField.extendScalars_self",
+   "date": "2026-10-16",
+   "verdict": "no match for this bounded constructible pro-étale coefficient-extension statement; generic ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars from a finite p-adic field to algebraic closure preserves bounded constructible complexes",
+   "results": "8 hits: PadicComplex.instIsScalarTowerPadicPadicAlgCl, PadicAlgCl, BDeRham, PadicComplex.instAlgebraPadic, PadicComplex.norm_extends, BDeRhamPlus, PadicComplex.coe_eq, PadicComplex",
+   "date": "2026-10-16",
+   "verdict": "no match for this bounded constructible pro-étale coefficient-extension statement; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|derivedExtendScalars|constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: Mathlib has no SixFunctors directory; followed by whole-Mathlib grep",
+   "subdirectory": "SixFunctors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensoring a finite presentation of a module along a ring map gives a finite presentation",
+   "results": "8 hits: instFinitePresentationTensorProduct, FinitePresentation.of_isBaseChange, Algebra.FinitePresentation.baseChange, Module.Presentation.tensor, Module.Finite.base_change, Module.Finite.tensorProduct, Module.Relations.tensor, Algebra.Presentation.baseChange",
+   "date": "2026-10-16",
+   "verdict": "no match for this bounded constructible pro-étale coefficient-extension statement; generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars, Module.Flat, PreservesFiniteLimits",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: loogle: unknown identifier 'PreservesFiniteLimits'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat extension of sheaf modules preserves boundedness and finite constant local presentations",
+   "results": "8 hits: SheafOfModules.Presentation.map, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+   "date": "2026-10-16",
+   "verdict": "no match for this bounded constructible pro-étale coefficient-extension statement; generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\"",
+   "results": "12 hits: LinearMap.extendScalarsOfSurjective, LinearEquiv.extendScalarsOfSurjective, LinearMap.extendScalarsOfSurjective_apply, LinearEquiv.extendScalarsOfSurjective_symm, LinearMap.extendScalarsOfSurjectiveEquiv, LinearEquiv.extendScalarsOfSurjective_apply, AlgEquiv.extendScalarsOfSurjective, AlgHom.extendScalarsOfSurjective",
+   "date": "2026-10-16",
+   "verdict": "no match for this bounded constructible pro-étale coefficient-extension statement; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructible|boundedConstructible|derivedExtendScalars",
+   "results": "23 hits: Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for this bounded constructible pro-étale coefficient-extension statement; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "def map|def IsFinitePresentation|class IsFinitePresentation|def isFinitePresentation|IsFinite",
+   "results": "5 hits: 51, 52, 53, 55, 56",
+   "date": "2026-10-16",
+   "verdict": "no match for this bounded constructible pro-étale coefficient-extension statement; generic ingredients only",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "instFinitePresentationTensorProduct|of_isBaseChange",
+   "results": "2 hits: 353, 363",
+   "date": "2026-10-16",
+   "verdict": "no match for this bounded constructible pro-étale coefficient-extension statement; generic ingredients only",
+   "subdirectory": "Algebra/Module/FinitePresentation.lean"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -62,5 +197,74 @@
   "lem-sfb-extend-subfield-constructible"
  ],
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sfb-qlbar-two-colimit"
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-extend-to-qlbar-constructible",
+  "worker": "stage1",
+  "summary": "Expanded the current blueprint proof into exact derived extension and boundedness, an explicit inverse-image/coequalizer comparison on strata and cover objects, and preservation of scalar finite matrix local models. Reused existing generic nodes throughout; no new node or Mathlib leaf. Kept the statement unchanged and covered arbitrary schemes by the definition on affine opens.",
+  "blueprint": "All clauses of lem-sfb-extend-to-qlbar-constructible.proof.md and the cocone paragraph (step 9) of the unit sk-thm-sfb-qlbar-two-colimit: step 1 supplies termwise computation, cohomology and boundedness; step 2 justifies restriction to strata and cover objects; step 3 realizes preservation of the finite constant local models.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-qlbar-flat",
+    "why": "Flatness is exactly the finite-limit preservation input named by this blueprint proof."
+   },
+   {
+    "node": "sk-def-sfb-change-of-scalars",
+    "why": "The adjunction, relative tensor coequalizer and finite-colimit preservation are generic tools needed by the prescribed tensor-presentation argument."
+   },
+   {
+    "node": "lem-sfb-extend-scalars-preserves-homology",
+    "why": "Generic homology preservation supplies the displayed cohomology formula; the cocone unit has no separate general exact-functor result."
+   },
+   {
+    "node": "def-sfb-left-derived-exact",
+    "why": "Generic identification of the derived functor of an exact functor with its termwise functor."
+   },
+   {
+    "node": "def-sfb-finite-upper-star-monoidal",
+    "why": "Strong monoidality of inverse image lets it carry the relative tensor coequalizer to the pulled-back relative tensor."
+   },
+   {
+    "node": "def-sfb-finite-upper-lower-star-adjunction",
+    "why": "The inverse-image adjunction supplies preservation of the tensor coequalizer; it is a generic site tool."
+   },
+   {
+    "node": "sk-def-sfb-constructible",
+    "why": "The precise scalar local-model and restriction conventions used by the presentation argument."
+   },
+   {
+    "node": "sk-def-sfb-coefficient-change",
+    "why": "Compatibility of the coefficient map with inverse image ensures the relative tensor uses the specified inclusion on each stratum."
+   },
+   {
+    "node": "sk-def-sfb-module-pushforward-pullback",
+    "why": "The module inverse-image formula identifies the relative tensors after transporting coefficient rings."
+   },
+   {
+    "node": "sk-def-sfb-bounded-constructible",
+    "why": "The bounded-cohomology and constructible-cohomology criterion defining the conclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-qlbar-flat",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-extend-scalars-preserves-homology",
+  "def-sfb-left-derived-exact",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N4-750b40f54",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-750b40f54 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources; all three steps are sound. Checked scalar models, pullback coefficient compatibility, edge cases, duplicates, dependency cycles, and exact master category/exchange distinctions. No repairs needed. Concrete checks and accepted tool_uses are recorded in review.md."
+ }
 }
