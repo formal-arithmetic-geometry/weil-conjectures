@@ -55,6 +55,30 @@ theorem finiteDiscreteCoefficient_coefficientUnit_pushforward
         ((Functor.const U.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B))) ≫
       (finiteDiscreteSchemeRingIso B U eR).hom.hom).app
         ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).op.obj V) := by
-  sorry
+  let WT : T.ProEt :=
+    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)).obj
+      (proEtTerminal specZ)
+  let f : V.unop ⟶ WT := (proEtIsTerminal WT).from V.unop
+  let fop : Opposite.op WT ⟶ V := f.op
+  let pb := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).op
+  let pfp : pb.obj (Opposite.op WT) ⟶ pb.obj V := pb.map fop
+  have hT := ((sheafificationAdjunction (ProEt.topology T) Ab.{u + 1}).unit.app
+      ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B))) ≫
+    (finiteDiscreteSchemeRingIso B T eR).hom.hom).naturality fop
+  have hU := ((sheafificationAdjunction (ProEt.topology U) Ab.{u + 1}).unit.app
+      ((Functor.const U.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B))) ≫
+    (finiteDiscreteSchemeRingIso B U eR).hom.hom).naturality pfp
+  have hp := (condensedPushforwardHom (Profinite.continuousMapRingObj.{u} B) j).hom.naturality fop
+  have ht := finiteDiscreteCoefficient_coefficientUnit_pushforward_terminal B eR T U j
+  have hT' := hT
+  have hU' := hU
+  change 𝟙 _ ≫ _ = _ at hT'
+  change 𝟙 _ ≫ _ = _ at hU'
+  simp only [Category.id_comp] at hT' hU'
+  rw [hT']
+  rw [Category.assoc, hp]
+  rw [← Category.assoc, ht]
+  rw [hU']
+  rfl
 
 end AlgebraicGeometry.ProEtale.CondensedRing
