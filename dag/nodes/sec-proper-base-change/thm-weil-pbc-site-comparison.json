@@ -236,5 +236,32 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-271377941 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, and source passages. All six steps support the finite-ring bounded-below comparison and identify its canonical derived unit. No new nodes or repairs; four generic tool uses accepted. Condensed target coefficients remain distinct. review.md records checks and inherited DAG defects."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3fbd212ea",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, and canonical constructions checked; scompile sandbox and library checks passed with no errors."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived",
+  "declaration": "AlgebraicGeometry.ProEtale.siteComparison_boundedBelow",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDirectImage",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientComparisonAdjunction",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientModulesEnoughInjectives",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDirectImageAdditive",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDerivedComparisonAdjunction",
+   "AlgebraicGeometry.ProEtale.siteComparison_boundedBelow"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSiteComparisonDerived.lean",
+  "statement": "theorem siteComparison_boundedBelow (T : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] : Nonempty (finiteCoefficientComparison T Λ).mapDerivedCategoryPlus.FullyFaithful ∧ IsIso (finiteCoefficientDerivedComparisonAdjunction T Λ).unit",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The theorem uses the recorded exact finiteCoefficientComparison, restricted by mapDerivedCategoryPlus, with the canonical direct image formed by inverse coefficient realization followed by the recorded comparisonLowerStar. The derived unit is the unit of Adjunction.derivedPlus. Includes arbitrary noncommutative finite rings and all bounded below objects, with no constructibility assumption."
  }
 }

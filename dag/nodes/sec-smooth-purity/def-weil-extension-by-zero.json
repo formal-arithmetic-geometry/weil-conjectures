@@ -94,27 +94,26 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-f2309a039",
-  "group": "NX",
+  "reviewer": "NT-stage2-Codex-88433d401",
+  "group": "NL",
   "result": "pass",
-  "note": "Wrote review.md. Checked source, all statement dependencies, exact declarations, canonical arrows, universes, edge cases, docstrings, report sections, and verbatim signature. Immutable module compiled cleanly through scompile.py with the local side overlay. No fixes needed; branch unchanged."
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, non-hollow constructions, and all four per-file compilations verified successfully."
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs",
-  "declaration": "AlgebraicGeometry.ProEtale.openImmersionLowerShriek",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero",
+  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicExtensionByZero",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.openImmersionLowerShriek",
-   "AlgebraicGeometry.ProEtale.openImmersionLowerShriekAdjunction",
-   "AlgebraicGeometry.ProEtale.localizationLowerShriek_eq",
-   "AlgebraicGeometry.ProEtale.openImmersionLowerShriekUpperStarAdjunction"
+   "AlgebraicGeometry.Scheme.sfIntrinsicModuleEquivalence",
+   "AlgebraicGeometry.Scheme.sfIntrinsicExtensionByZero"
   ],
-  "statement": "def openImmersionLowerShriek :\n    Sheaf (Scheme.ProEt.topology U) A ⥤ Sheaf (Scheme.ProEt.topology X) A",
-  "branch": "slopmaster2",
-  "by": "NX",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleIntrinsicExtensionByZero.lean",
+  "statement": "def sfIntrinsicExtensionByZero {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] : proEtaleRingModules U (proEtaleConstantRing U A) ⥤ proEtaleRingModules X (proEtaleConstantRing X A)",
+  "branch": "newtargets-dag",
+  "by": "NL",
   "date": "2026-10-15",
-  "existing": true,
-  "note": "The old LowerShriek.OpenImmersion.Defs module imports the legacy UpperLowerStar.Defs and collides with the relocated FiniteCoefficient.UpperLowerStar.Defs already imported by the recorded inverse-image dependency (compiler: environment already contains AlgebraicGeometry.ProEtale.«term(_)_*[_]»). The published FiniteCoefficient.LowerShriek.Open.Defs gives the same declarations and full signatures, with imports relocated to the compatible framework. Specializing to ModuleCat.{u+1} Λ gives exactly the extension-by-zero presheaf followed by sheafification; localizationLowerShriek_eq records that construction. The additional recorded adjunction is the canonical transport to the same upperStar used by proEtaleSheafInverseImage. No notion, hypothesis or construction changes."
+  "existing": false,
+  "note": "§1(B): The recorded upstream extension by zero acts on fixed-scalar ModuleCat-valued sheaves, whereas this item needs the recorded intrinsic constant-ring module category. This module composes that same upstream construction with the canonical published realization equivalences; no alternative extension-by-zero notion or arbitrary coefficient identification is introduced."
  }
 }
