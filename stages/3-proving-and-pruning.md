@@ -4,7 +4,7 @@
 
 ## 1. Who does what
 
-An item of this stage is a module that a target reaches, that contains `sorry`, and whose node's proof dependencies all have a Lean declaration or are in Mathlib. A module whose proof would use a node that is not stated yet waits, listed as waiting in the queue, until stage 2 has stated that node. This stage goes from the targets downward.
+An item of this stage is a module that a target reaches, that contains `sorry` or has an assigned repair, and whose node's proof dependencies all have a Lean declaration or are in Mathlib. A returned or listed definition repair can have zero holes; repairing its assigned defect is the delivery. A module whose proof would use a node that is not stated yet waits, listed as waiting in the queue, until stage 2 has stated that node. This stage goes from the targets downward.
 
 - The **maintainer** keeps the queue. It is computed from the imports in the Lean code, not from the DAG: the modules that `lean/TargetsCheck.lean` reaches and that contain `sorry`, in this order: the repairs in `coord/repairs.txt`, the statements marked `STATEMENT-DISPUTED`, then the rest, nearest to a target first. Proving from the top shows which nodes below are needed.
 - A **lead** claims modules and gives each to a worker.
@@ -24,7 +24,7 @@ Progress is the ledger’s net (holes closed minus holes added in the targets’
 
 Any worker may change a definition or an intermediate statement that turns out to be wrong or hard to use.
 
-1. The lead claims the module and the modules that must be adapted. A module that another group has claimed stays with that group: change in it only what the adaptation requires, and name it and its group in the record of step 3.
+1. The group holds the item module. A module no group holds may be changed like its own, including necessary interface repairs, with the records and user checks below. A module held by another group stays with that group: only a forced adaptation is allowed (original fails against the changed dependencies, adaptation compiles), with existing signatures and visibility identical. Name the module and holder in the change record; the independent reader verifies necessity (coord/brief-stage3.md §4).
 2. List the modules that depend on it, and check for each that what it states does not become weaker, stronger or different.
 3. Write `coord/changes/<name>.md`: the reason, the old and the new version, the effect on each user, and the status.
 4. Land the change with all adapted modules as one set. Close the record when the global build has verified the set.

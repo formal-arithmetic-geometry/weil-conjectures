@@ -4,7 +4,7 @@ In force from the line `STAGE 3 READY` (written by S3-C, 2026-10-12; adjusted to
 
 ## 0. What you read
 
-- Your item is a MODULE of the library, `Sheaf.<…>` (file `lean/Sheaf/<…>.lean`) or `WeilConjectures.<…>` (file `lean/WeilConjectures/<…>.lean`, a module adopted from the source repository): a module that `lean/TargetsCheck.lean` reaches and that still contains `sorry` (`coord/queue.md`, stage 3). Read it whole. The library is one Lake package: a module of either root may import a module of the other, as long as no import cycle arises (`python3 tools/import_direction.py may <importing module> <imported module>`).
+- Your item is a MODULE of the library, `Sheaf.<…>` (file `lean/Sheaf/<…>.lean`) or `WeilConjectures.<…>` (file `lean/WeilConjectures/<…>.lean`, a module adopted from the source repository): a module that `lean/TargetsCheck.lean` reaches and that still contains `sorry` or has an assigned repair (`coord/queue.md`, stage 3; `coord/returns/<G>.md`). Read it whole. A returned or listed definition repair can have zero holes: complete the assigned repair and report that count honestly; a no-op or rebase alone is not a repair. The library is one Lake package: a module of either root may import a module of the other, as long as no import cycle arises (`python3 tools/import_direction.py may <importing module> <imported module>`).
 - The first principle of stage 3: prove from the targets downward and prune. Progress is counted in targets closed, modules proved, modules pruned, and sorries left in the targets' closure (`python3 tools/queue.py summary`).
 - The imports of your module are the plan for its proof: it imports the modules of the stated proof dependencies of its node(s) (`stages/2-statements.md` §3, rule 7; the maintainer adds the missing ones after each build). The lemmas stated there are to be used first: before you state a new lemma, read what the imported modules state, and write a new one only for what none of them and nothing else in the library says (`roles/worker.md` §1.3).
 - The node(s) whose `lean.module` is your module (`grep -rl '"module": "<your module>"' dag/nodes`): `statement`, `proof` (the steps and the nodes they use), `proof_deps`, `source`, `unit`, `chapter`. The proof in the DAG is a plan (stage 3 §2).
@@ -17,7 +17,7 @@ In force from the line `STAGE 3 READY` (written by S3-C, 2026-10-12; adjusted to
 
 Prove every `sorry` of the module by the shortest route (stage 3 §2): a special case, a Mathlib lemma, a simpler argument, below the unit level. A route that would bypass a unit that the chapter's route passes through is not taken: a node that realizes a unit's statement or a step (`dag/units/<unit>.json` `realized`) is still used where the unit's proof uses it, and its module stays imported.
 
-Claim with `tools/claim.py next <G> --stage 3` (repairs first, then statements marked `STATEMENT-DISPUTED`, then nearest to a target). For adaptations of modules you do not hold, use the forced-adaptation exception (§4).
+Claim with `tools/claim.py next <G> --stage 3` (repairs first, then statements marked `STATEMENT-DISPUTED`, then nearest to a target). Unclaimed modules may be repaired as in §4; modules held by another group follow its forced-adaptation exception.
 
 ## 2. The proof
 
@@ -40,12 +40,12 @@ A lemma the proof needs that the DAG lacks, and every theorem you leave with `so
 
 When a definition or an intermediate statement turns out wrong or hard to use you may change it:
 
-1. Hold the module whose interface you change; adapted modules follow the exception below.
+1. Hold the item module. A module no group holds may be changed like your own, including a necessary statement or definition repair, with the same change records and user checks. A module held by another group follows the exception below.
 2. List the modules that depend on it (`tools/downstream.py <module> --uses <name>`), and check for each that what it states does not become weaker, stronger or different.
 3. Write `coord/changes/<name>.md` (§6).
 4. Deliver the change with all adapted modules in the same delivery: they land together, as one set.
 
-A delivery may adapt a module it does not hold only when its own statement, definition or interface
+A delivery may adapt a module held by another group only when its own statement, definition or interface
 change forces it: the original module fails to compile against the changed dependencies, and the
 adapted module compiles. Every existing signature and visibility must stay identical; proofs,
 imports and private local helpers may change. Name each adapted module and its current holder
