@@ -31,9 +31,109 @@
   "lem-coef-simplicial-interval-lifting",
   "def-coef-infinity-right-anodyne"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-unmarked-straightening-quillen] with $D=\\mathfrak C[S]^{\\mathrm{op}}$ and $\\phi$ the identity. Its $M_{a,\\phi}$ is exactly the pushout $M_a$ in the item, so its left adjoint is the specified $\\operatorname{St}_S$. This proves functoriality and preservation of all small colimits, including the empty one, by the adjunction: maps from $\\operatorname{St}_S(\\operatorname{colim}X_i)$ to $F$ correspond to maps from the colimit to $U_SF$, hence compatible families of maps from $\\operatorname{St}_S(X_i)$ to $F$. For a single vertex $t$, the attached category is the interval $t\\to v$. In the pushout no arrow leaves $v$ except its identity. Thus every arrow from $s$ to $v$ is uniquely a mapping simplex in $\\mathfrak C[S](s,t)$ followed by $t\\to v$; composition relations identify consecutive old arrows by their old composition. This gives the displayed isomorphism, in each simplicial degree and compatibly with operators.",
+   "uses": [
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.1, definition and the adjunction; representable case by the pushout universal property."
+   }
+  },
+  {
+   "text": "In the contravariant model structure supplied by [lem-coef-contravariant-slice-model], the given right anodyne $j$ is a trivial cofibration over $S$. The left Quillen assertion of [lem-coef-unmarked-straightening-quillen], at the identity $\\phi$, makes $\\operatorname{St}_S(j)$ a projective trivial cofibration. The weak equivalences of that projective model structure are defined objectwise, so each $\\operatorname{St}_S(j)(s)$ is a weak homotopy equivalence. This argument uses no assumption on $S$.",
+   "uses": [
+    "lem-coef-contravariant-slice-model",
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.4.9(1), dualized; Theorem 2.2.1.2, Quillen adjunction assertion."
+   }
+  },
+  {
+   "text": "Write $V(K)=\\operatorname{St}_{\\Delta^0}(K)(*)$. By Step 1 it preserves colimits. To identify its value on a simplex, first check that $\\mathfrak C$ preserves pushouts directly from its defining colimit in [lem-coef-pinched-cube-latching]. For any small simplicial category $A$, set $R(A)_m=\\operatorname{Hom}_{\\mathrm{sCat}}(\\mathfrak C[\\Delta^m],A)$, with operators given by precomposition. A functor $\\mathfrak C[K]\\to A$ is exactly a compatible family of functors from the $\\mathfrak C[\\Delta^m]$ indexed by simplices of $K$, hence exactly a simplicial map $K\\to R(A)$. This natural bijection makes $\\mathfrak C$ a left adjoint, so it preserves the pushout defining $J^n$. Consequently $V(\\Delta^n)=\\mathfrak C[J^n](x,y)=Q^n$: the whole initial face is sent to the unique base object. These identifications commute with every simplex operator. Hence $V(K)=|K|_Q$, the quotient of $\\coprod_nK_n\\times Q^n$ by the simplex-operator relations. Maps out of this quotient are compatible maps from its copies of $Q^n$, giving the adjunction $V\\dashv\\operatorname{Sing}_Q$. The same node supplies the natural map $Q^n\\to\\Delta^n$, degreewise injective latching maps, $Q^0=\\Delta^0$, and weak contractibility of all $Q^n$. As $\\partial\\Delta^n$ is the colimit of its proper faces, $V(\\partial\\Delta^n)\\to V(\\Delta^n)$ is precisely that latching monomorphism. Every $V(\\Delta^n)\\to V(\\Delta^0)$ is a weak equivalence since both terms are nonempty weakly contractible. The Kan model structure of [lem-coef-kan-quillen-right-proper] and the boundary-collapse test [lem-coef-simplicial-boundary-collapse-test] now show that $V$ is left Quillen and preserves all weak homotopy equivalences.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, construction of Q; Proposition 2.2.2.9, Quillen adjunction part, with the existing boundary-collapse criterion."
+   }
+  },
+  {
+   "text": "The natural maps $Q^n\\to\\Delta^n$ induce $p_K:V(K)\\to K$. We prove they are weak equivalences by skeleta. The empty case is the identity. In dimension zero, $\\partial\\Delta^0=\\varnothing$ and $Q^0=\\Delta^0$, so the comparison on every zero-skeleton is the identity on its coproduct of points. At a skeletal successor, [lem-coef-infinity-monomorphism-boundary-cells] expresses the attachment as a pushout of a coproduct of $\\partial\\Delta^n\\hookrightarrow\\Delta^n$. Step 3 takes it to a pushout with a monomorphic attaching map. Induct on dimension: $p_{\\partial\\Delta^n}$ is covered by the earlier dimensions; $p_{\\Delta^n}$ is a weak equivalence because its two sides are nonempty weakly contractible: for $Q^n$ this is [lem-coef-pinched-cube-latching], while the realization of $\\Delta^n$ contracts to its last vertex by the straight-line homotopy in the standard topological simplex. Coproducts of these maps are weak equivalences since realizations are disjoint unions, with components and based homotopy groups computed within one summand. The pushout assertion of [lem-coef-sset-gluing-filtered-equivalences] proves the successor comparison. Its filtered-colimit assertion proves the comparison at the colimit of skeleta, since $V$ preserves colimits and naturality identifies the colimit of the skeletal comparisons with $p_K$. This proves $p_K$ for arbitrary small $K$, without requiring finiteness or a Kan condition.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-sset-gluing-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.2.7, skeletal induction, with arbitrary coproducts and the filtered skeletal colimit made explicit."
+   }
+  },
+  {
+   "text": "In the Kan model structure every object is cofibrant, by [lem-coef-kan-quillen-right-proper]. By Step 4, the left derived functor of $V$ is naturally isomorphic to the identity, so it is an equivalence. Apply [lem-coef-quillen-derived-counit-criterion] to $V\\dashv\\operatorname{Sing}_Q$ of Step 3. If $T$ is Kan, the actual evaluation counit $\\epsilon_T:V\\operatorname{Sing}_Q(T)\\to T$ is a weak equivalence: the target is fibrant and the right-adjoint value is cofibrant. Explicitly on a generator indexed by $u:Q^n\\to T$ it is $q\\mapsto u(q)$. These are the actual maps used below, not an unspecified isomorphism in the homotopy category.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-quillen-derived-counit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 2.2.2.7-2.2.2.9 and Corollary 2.2.2.10; counit criterion."
+   }
+  },
+  {
+   "text": "Let $X\\to S$ be the given right fibration. Choose a projective fibrant replacement $r:\\operatorname{St}_SX\\to F$, using the model structure and functorial factorization in [lem-coef-unmarked-straightening-quillen]. In particular $r(s)$ is a weak equivalence and $F(s)$ is Kan. Every $X\\to S$ is cofibrant by the monomorphism description of [lem-coef-contravariant-slice-model]. At identity $\\phi$ the Quillen equivalence criterion in [lem-coef-unmarked-straightening-quillen] therefore says the adjoint $h:X\\to U_SF$ of $r$ is a contravariant weak equivalence. Both objects are right fibrations, the first by hypothesis and the second by the right-adjoint assertion. Fiberwise detection in [lem-coef-contravariant-slice-model] gives a weak equivalence $h_s:X_s\\to(U_SF)_s\\cong\\operatorname{Sing}_QF(s)$. Step 3 gives that $V(h_s)$ is a weak equivalence; Step 5 gives that $\\epsilon_{F(s)}$ is a weak equivalence. By the fiber/adjunction compatibility stated in [lem-coef-unmarked-straightening-quillen], their composite is exactly $r(s)\\phi_s$, where $\\phi_s:V(X_s)\\to\\operatorname{St}_SX(s)$ is the comparison in the item. Concretely a generator $(z,q)$ with $z\\in(X_s)_n$ and $q\\in Q^n$ is sent first to $(h_s(z),q)$ and then to $h_s(z)(q)$; the definition of the adjoint identifies this with applying $r(s)$ to the cone arrow determined by $(z,q)$. Thus the equality holds on generators and descends through all operator relations. Two-out-of-three now makes this specified $\\phi_s$ a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-unmarked-straightening-quillen",
+    "lem-coef-contravariant-slice-model",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.3.15, proof; Corollary 2.2.3.13 for fiberwise detection and Remark 2.2.2.11 for the exact fiber identity."
+   }
+  },
+  {
+   "text": "The comparison itself needs no fibrant replacement choices: it is the map on cone pushouts induced by $X_s\\to X$ and $\\{s\\}\\to S$. For a commutative square of right fibrations $X\\to Y$ over $f:S\\to T$, with $f(s)=t$, there is a strict map $X_s\\to Y_t$. On a generator $(z,q)$ of $V(X_s)$ both composites around the naturality square take the mapping simplex $q$ through the same functor $\\mathfrak C[J^n]\\to M_Y$ associated to the image of $z$. The equality is compatible with faces and degeneracies, and with composition by old arrows; it therefore descends to the pushouts and coends. This proves naturality for pointed base maps and in particular for maps over a fixed base. The model and Quillen inputs were stated for arbitrary simplicial bases; neither Step 6 nor this construction assumes that $S$ is a quasicategory or that $X$ is Kan. Empty fibers cause no exception in the argument, since $V(\\varnothing)=\\varnothing$ and all the model-category criteria allow empty simplicial sets.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-unmarked-straightening-quillen"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Functorial cone construction in Section 2.2.1 and the canonical comparison of Proposition 2.2.3.15."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-contravariant-slice-model",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-quillen-derived-counit-criterion",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-sset-gluing-filtered-equivalences",
+  "lem-coef-unmarked-straightening-quillen"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2 coherent derived-adjunction input, using the online-checked HTT 2.2.1.2 and 2.2.3.15 route; the PDF is not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +176,38 @@
    "results": "{\"t\": \"2026-10-16T17:29:13Z\", \"tool\": \"leanfinder\", \"query\": \"A contravariant right fibration is sent by cone straightening to a diagram whose value is equivalent to its fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.WithTerminal.coneEquiv_functor_obj_pt\", \"CategoryTheory.WithTerminal.coneEquiv_functor_obj_π_app_of\", \"CategoryTheory.Functor.RightExtension.coneAtWhiskerRightIso\", \"CategoryTheory.WithTerminal.coneEquiv_inverse_obj_pt_right_as\", \"CategoryTheory.WithTerminal.coneEquiv\", \"CategoryTheory.Limits.Cone.toStructuredArrow\", \"CategoryTheory.Functor.RightExtension.coneAtFunctor\", \"CategoryTheory.WithTerminal.coneEquiv_functor_obj_π_app_star\"], \"digest\": \"c24c1b7f7a72f576\"}",
    "date": "2026-10-17",
    "verdict": "No exact match: returned WithTerminal cone equivalences and ordinary Kan-extension statements concern ordinary categories; none constructs unmarked straightening or the right-fibration fiber comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The value of cone straightening at a vertex of a right fibration is computed by the point straightening of its strict fiber",
+   "results": "[leanfinder] OK 8 hit(s): SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift; SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃; SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁; SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂ (Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal); CategoryTheory.Limits.Cone.toStructuredArrowCone_π_app; CategoryTheory.Limits.Cone.toStructuredArrowCone; CategoryTheory.Limits.Cone.toStructuredArrow_map (Mathlib/CategoryTheory/Limits/ConeCategory); CategoryTheory.Functor.RightExtension.coneAt_π_app (Mathlib/CategoryTheory/Functor/KanExtension/Pointwise).",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary cone/Kan extensions, all-horn Kan fibrations, and unrelated order-theoretic ContravariantClass; none states unmarked straightening or its right-fibration fiber comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, \"straightening\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary cone/Kan extensions, all-horn Kan fibrations, and unrelated order-theoretic ContravariantClass; none states unmarked straightening or its right-fibration fiber comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]traightening|[Uu]nstraightening|contravariant.*model",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Order/Monoid/Unbundled/Defs.lean\", \"line\": \"26\", \"text\": \"* `ContravariantClass` models the implication `a * b < a * c → b < c`.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary cone/Kan extensions, all-horn Kan fibrations, and unrelated order-theoretic ContravariantClass; none states unmarked straightening or its right-fibration fiber comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unmarked simplicial straightening recovers right fibration fibers and takes right anodyne maps to objectwise weak homotopy equivalences",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithFibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \"[hf : Fibration f] {n : ℕ} (i : Fin (n + 2)) : HasLiftingProperty (horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": fibrations SSet.{u} = J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"CategoryTheory.CosimplicialObject.augment_right\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.CosimplicialObject C) (X₀ : C)\\n  (f : X₀ ⟶ X.obj (SimplexCategory.mk 0))\\n  (w :\\n    ∀ (i : SimplexCategory) (g₁ g₂ : SimplexCategory.mk 0 ⟶ i),\\n      CategoryTheory.CategoryStruct.comp f (X.map g₁) = CategoryTheory.Category\", \"doc\": \"For any cosimplicial object $X$ in a category $\\\\mathcal{C}$, an object $X_0 \\\\in \\\\mathcal{C}$, and a morphism $f : X_0 \\\\to X([0])$ compatible with all morphisms from $[0]$ to other simplices, the right\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Coskeletal\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {X : CategoryTheory.SimplicialObject C} {n : ℕ}\\n  [self : X.IsCoskeletal n],\\n  CategoryTheory.Functor.IsRightKanExtension X\\n    (CategoryTheory.CategoryStruct.id ((SimplexCategory.Truncated.inclusion n).op.comp X))\", \"doc\": \"If a simplicial object $ X $ in a category $ \\\\mathcal{C} $ is coskeletal at level $ n $, then $ X $ is the right Kan extension of its restriction to the truncated simplex category $ \\\\Delta_{\\\\leq n} $ \"}\n  {\"name\": \"CategoryTheory.SimplicialObject.isCoskeletal_iff\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Coskeletal\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.SimplicialObject C) (n : ℕ),\\n  X.IsCoskeletal n ↔\\n    CategoryTheory.Functor.IsRightKanExtension X\\n      (CategoryTheory.CategoryStruct.id ((SimplexCategory.Truncated.inclusion n).op.comp X))\", \"doc\": \"A simplicial object $X$ in a category $\\\\mathcal{C}$ is coskeletal at level $n$ if and only if $X$ is the right Kan extension of its restriction to the truncated simplex category $\\\\Delta_{\\\\leq n}$ alon\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": Fibration f ↔ J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"SSet.StrictSegal.isRightKanExtension\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Coskeletal\", \"type\": \"(sx : StrictSegal X) : X.IsRightKanExtension (𝟙 ((inclusion 2).op ⋙ X))\", \"doc\": \"For a strict Segal space $ X $, the simplicial set $ X $ is the right Kan extension of the composition of the opposite of the inclusion functor $ \\\\Delta_{\\\\leq 2} \\\\to \\\\Delta $ with $ X $. This characte\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary cone/Kan extensions, all-horn Kan fibrations, and unrelated order-theoretic ContravariantClass; none states unmarked straightening or its right-fibration fiber comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pinched-rigidification-resolution",
@@ -87,5 +215,21 @@
   "group": "N7"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-right-straightening-fiber-comparison",
+  "worker": "stage1",
+  "summary": "Seven-step split following the HTT adjunction proof. Two statement-only infrastructure inputs give the contravariant model structure and general unmarked straightening Quillen equivalence. The item itself proves the over-point Q realization comparison by skeletal induction and proves the actual fiber comparison using adjunction compatibility and two-out-of-three. A circular draft citation of the parent pinched-resolution theorem was removed entirely, along with unjustified cone transport and Kan claims. No statement changed.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, paragraph 2: the displayed derived coefficient-adjunction/inverse-limit computation and naturality/triangle identities. This technical descendant supplies the cone-straightening input for the pinched mapping resolution used to enhance that calculation. The current main-20261015 ancestor proof has the same paragraph-2 calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-e8ada57b2",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-e8ada57b2 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the parent's steps 6 and 8, and HTT (pdftotext of the 2017 PDF already in /tmp, read only) at 2.1.4.7–2.1.4.12, the §2.2.1 St_φ definition, 2.2.1.1–2.2.1.2, 2.2.2.1, 2.2.2.7–2.2.2.11 and 2.2.3.1–2.2.3.15. The item statement (unchanged) matches HTT: St_S is HTT's St_φ with C=C[S]^op and φ=id; M_a=C[X^▷]⊔C[S]; the variance is C[S]^op→sSet; the representable is C[S](s,t); the right-anodyne clause is 2.2.1.2 with 2.1.4.9 dualized; the fiber clause is exactly Prop 2.2.3.15, with no quasicategory hypothesis on S. Step 1: L_φ=St_S at φ=id, and the representable comes from a free one-arrow pushout. Step 2 is the two-line Quillen argument. Step 3: C is a left adjoint, so V(Δ^n)=C[J^n](x,y)=Q^n and V(∂Δ^n)=L_nQ, which is monic; Q^n is contractible, so every hypothesis of the boundary-collapse test holds. Step 4 is the 2.2.2.7 skeletal induction; the gluing lemma's mono and filtered hypotheses hold and the induction is set up properly. Step 5: LV≅id, Sing_Q T is cofibrant and T is fibrant, so the counit criterion applies. Step 6 is the 2.2.3.15 proof; I checked r(s)φ_s=ε∘V(h_s) myself, and fiberwise detection applies to two right fibrations. Step 7 is strict naturality. New nodes, both true and not restatements of the item. Contravariant-slice-model: cone orientation, Dwyer–Kan categorical equivalence and fiberwise criterion checked; tested on S=∅, Δ^0 and Δ^1 with an empty fiber. Unmarked-straightening-quillen: φ:C[S]→D^op variance, the Yoneda right adjoint and the fiber isomorphism (Remark 2.2.2.11) checked; no local-Kan hypothesis is needed; tested on S=∅ and on S=Δ^0, D=*. Its projective-model clause is a special case of lem-coef-simplicial-projective-model-calculus, but citing that node would create a cycle (projective-model-calculus→coherent-nerve-comparison→pinched-rigidification-resolution→item), so restating the clause is justified. It does not duplicate the marked, space-valued or relative-nerve straightening nodes. Route: all citations are in sk-prop-sf-biduality-general, tool_uses=[] is correct, my reachability check found the DAG acyclic, blueprint fields are filled, no SGA is used, and my Mathlib grep found nothing. Advisory for the later split: HTT proves 2.2.3.12–2.2.3.13 (bundled in slice-model) from 2.2.3.11, and unmarked-quillen has slice-model as a statement dependency. So whoever splits slice-model must prove those clauses without straightening, or move them to a node above unmarked-quillen. No changes made."
+ }
 }

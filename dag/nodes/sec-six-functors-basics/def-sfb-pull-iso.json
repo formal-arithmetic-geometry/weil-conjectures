@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-pull-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Underived (Pull)",
@@ -22,9 +22,157 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullIso|pullIsoOfComapIso|comapLowerStarIso|CondensedRing",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no named match; generic conjugateIsoEquiv found in the second search"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: CategoryTheory.NatIso is not an identifier; reran with CategoryTheory.conjugateIsoEquiv"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with inverse image of sheaves of modules for a scheme morphism and a map of commutative condensed coefficient rings",
+   "results": "8 hits: PresheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, PresheafOfModules.pullbackPushforwardAdjunction, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.extendRestrictScalarsAdj, PresheafOfModules.restrictScalarsObj",
+   "date": "2026-10-16",
+   "verdict": "related candidates, not an identification of coefficient categories: SheafOfModules and ModuleCat use other presentations; the generic categorical construction found separately applies directly to the given module-object adjunctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of commutative condensed rings extension of scalars commutes with pullback of module sheaves on the pro-etale site of schemes by conjugating restriction of scalars and pushforward",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-16",
+   "verdict": "related candidates, not an identification of coefficient categories: SheafOfModules and ModuleCat use other presentations; the generic categorical construction found separately applies directly to the given module-object adjunctions"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso|leftAdjointUniq|conjugateIso|extendScalars.*(pullback|sheaf)|pullback.*extendScalars",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-16",
+   "verdict": "generic conjugation and composition candidates; read Mates.lean:425 and Basic.lean:567 to verify the one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphism of composite left adjoints obtained from an isomorphism of their composite right adjoints, applied to scalar extension and inverse image",
+   "results": "8 hits: CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id",
+   "date": "2026-10-16",
+   "verdict": "related candidates, not an identification of coefficient categories: SheafOfModules and ModuleCat use other presentations; the generic categorical construction found separately applies directly to the given module-object adjunctions"
+  },
+  {
+   "tool": "grep",
+   "query": "^def conjugateIsoEquiv|^def comp :",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean:425 conjugateIsoEquiv; Mathlib/CategoryTheory/Adjunction/Basic.lean:567 Adjunction.comp. Read Mates.lean:259-280, 400-435 and Basic.lean:560-575.",
+   "date": "2026-10-16",
+   "verdict": "match: composing the supplied adjunctions and applying conjugateIsoEquiv in reverse is the definition, as specified in mathlib_match.how"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "5 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "date": "2026-10-16",
+   "verdict": "match: the general conjugate-isomorphism equivalence specializes in one line to the supplied composite adjunctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugation gives a bijection between isomorphisms of left adjoint functors and isomorphisms of their right adjoints",
+   "results": "8 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso, CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.ofNatIsoLeft",
+   "date": "2026-10-16",
+   "verdict": "independent second reading: confirms the general conjugate-isomorphism construction and adjunction composition; declarations read in the pinned Mathlib source at Mates.lean:425 and Basic.lean:567"
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence between natural isomorphisms|Composition of adjunctions",
+   "results": "2 hits: Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-16",
+   "verdict": "independent second reading: confirms the general conjugate-isomorphism construction and adjunction composition; declarations read in the pinned Mathlib source at Mates.lean:425 and Basic.lean:567"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": "10 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv, CategoryTheory.Bicategory.conjugateIsoEquiv, CategoryTheory.Bicategory.conjugateIsoEquiv_apply_hom, CategoryTheory.Bicategory.conjugateIsoEquiv_apply_inv",
+   "date": "2026-10-16",
+   "verdict": "independent second reading: confirms the general conjugate-isomorphism construction and adjunction composition; declarations read in the pinned Mathlib source at Mates.lean:425 and Basic.lean:567"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of right adjoints determines the conjugate natural isomorphism of left adjoints of composed adjunctions",
+   "results": "8 hits: CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.conjugateEquiv_symm_comp, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.conjugateEquiv_symm_iso",
+   "date": "2026-10-16",
+   "verdict": "current independent second reading: read the returned conjugation construction and pinned Mates.lean:425-435 and Basic.lean:567; confirms the recorded one-line specialization and its orientation"
+  },
+  {
+   "tool": "grep",
+   "query": "def conjugateIsoEquiv|def comp : F",
+   "results": "2 hits: Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-16",
+   "verdict": "current independent second reading: read the returned conjugation construction and pinned Mates.lean:425-435 and Basic.lean:567; confirms the recorded one-line specialization and its orientation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv, _ ≃ _",
+   "results": "5 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "date": "2026-10-16",
+   "verdict": "current independent second reading: read the returned conjugation construction and pinned Mates.lean:425-435 and Basic.lean:567; confirms the recorded one-line specialization and its orientation"
+  },
+  {
+   "tool": "grep",
+   "query": "^def conjugateIsoEquiv|^def comp :",
+   "results": "2 hits: Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-16",
+   "verdict": "repair revalidation: match confirmed by reading Mates.lean:425-435 and Basic.lean:567-574; conjugateIsoEquiv applied in reverse to the two composed adjunctions constructs exactly the stated comparison",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "5 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "date": "2026-10-16",
+   "verdict": "repair revalidation: match confirmed by reading Mates.lean:425-435 and Basic.lean:567-574; conjugateIsoEquiv applied in reverse to the two composed adjunctions constructs exactly the stated comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between right adjoints corresponds to a natural isomorphism between their left adjoints under conjugation",
+   "results": "8 hits: CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso, CategoryTheory.conjugateIsoEquiv, CategoryTheory.Bicategory.conjugateIsoEquiv, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.Adjunction.rightAdjointUniq_inv_app",
+   "date": "2026-10-16",
+   "verdict": "repair revalidation: match confirmed by reading Mates.lean:425-435 and Basic.lean:567-574; conjugateIsoEquiv applied in reverse to the two composed adjunctions constructs exactly the stated comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate correspondence for two adjunctions restricts to an equivalence of natural isomorphisms, reversing their direction",
+   "results": "8 hits: CategoryTheory.mateEquiv_symm_apply, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.Bicategory.toNatTrans_mateEquiv, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm, CategoryTheory.Bicategory.mateEquiv_apply, CategoryTheory.Bicategory.iterated_mateEquiv_conjugateEquiv",
+   "date": "2026-10-16",
+   "verdict": "Broader independent semantic search returned mateEquiv and iterated-mate declarations, not the exact isomorphism equivalence; exact Loogle and pinned-source reading below establish the match. General mates alone need not preserve isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\", CategoryTheory.Adjunction",
+   "results": "5 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "date": "2026-10-16",
+   "verdict": "Independent second reader: exact match. Read Mates.lean:259-280 and 397-435; conjugateIsoEquiv has type (L₂ ≅ L₁) ≃ (R₁ ≅ R₂), with inverse defined from conjugateEquiv.symm. The recorded composite adjunctions give precisely the item."
+  },
+  {
+   "tool": "grep",
+   "query": "invFun β|def conjugateIsoEquiv|def comp : F ⋙ H",
+   "results": "4 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "Independent second reader: confirmed conjugateIsoEquiv at Mates.lean:425, inverse construction at 430, and Adjunction.comp at Basic.lean:567. Read the surrounding declarations; both functor directions in mathlib_match.how agree.",
+   "subdirectory": "CategoryTheory/Adjunction"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.conjugateIsoEquiv",
+  "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "line": 425,
+  "how": "specializes in one line: (CategoryTheory.conjugateIsoEquiv (A_Y.comp B_prime) (B.comp A_X)).symm e. Here A_X and A_Y are Ext_{a_X} ⊣ Res_{a_X} and Ext_{a_Y} ⊣ Res_{a_Y} from sk-def-sfb-change-of-scalars, B is f^*_Λ ⊣ f_{*,Λ} and B_prime is f^*_{Λ'} ⊣ f_{*,Λ'} from sk-def-sfb-module-pushforward-pullback, and e is def-sfb-comap-lower-star-iso. Composition of adjunctions is CategoryTheory.Adjunction.comp at Mathlib/CategoryTheory/Adjunction/Basic.lean:567. With Lean's diagrammatic functor composition, A_Y.comp B_prime has left adjoint Ext_{a_Y} ⋙ f^*_{Λ'} and right adjoint f_{*,Λ'} ⋙ Res_{a_Y}; B.comp A_X has left adjoint f^*_Λ ⋙ Ext_{a_X} and right adjoint Res_{a_X} ⋙ f_{*,Λ}. Thus e has exactly type R₁ ≅ R₂ and the inverse equivalence at Mates.lean:425-435 produces L₂ ≅ L₁, namely Ext_{a_X} ∘ f^*_Λ ≅ f^*_{Λ'} ∘ Ext_{a_Y}. This is the conjugate required by def-sfb-conjugate-pull-iso, without identifying module objects with ordinary ModuleCat-valued sheaves. The general construction has no flatness, properness, finiteness or exactness hypothesis. All project-specific data remain the five statement dependencies; this match supplies the comparison from those data. Revalidated on the current DAG after the return: the module-functor dependency specifies f_* = Res_{eta_f} ∘ mapMod(f_*^Ab), f^* = Ext_{alpha_f} ∘ mapMod(f^*_Ab), and explicitly their lifted adjunction using the mate relation eta_f/alpha_f. These are the functors of B and B_prime above, for Lambda and Lambda_prime respectively; no replacement by restriction along an inverse of alpha_f, no use of composition comparisons, and no additional geometric hypothesis is involved."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -47,5 +195,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sfb-pull-iso",
+  "worker": "stage1",
+  "summary": "Repair of the refused landing: re-read all five statement dependencies on the current DAG, in particular the changed sk-def-sfb-module-pushforward-pullback statement. Its explicit abelian-sheaf transport and scalar-extension pullback and its lifted adjunction still supply B and B_prime for arbitrary commutative condensed coefficients and arbitrary scheme morphisms. Revalidated the direction of the right-adjoint comparison and the one-line Mathlib conjugateIsoEquiv specialization; refreshed genuine searches and the report with exact current dependency statements and their hashes. The construction is unchanged; no statement, dependency, proof step, new node, unit or Lean changes are needed. The no-push delivery tool rebuilds this repaired review on current origin/newtargets-dag.",
+  "blueprint": "Realizes the underived (Pull) construction in step 2 (Pushforward and pullback) of sk-def-sfb-coefficient-comparisons, using the formal conjugation construction of step 1. The item has no proof subsection: it defines the isomorphism as the conjugate of def-sfb-comap-lower-star-iso. Searches of the whole imported blueprint for 'underived', 'conjugate', 'Underived (Pull)', 'commutes with pullback', and 'comapLowerStarIso', together with DAG keyword/declaration searches, found no other node giving this entire definition; the unit states several comparisons, the derived variant has different functors and flatness hypotheses, and def-sfb-conjugate-pull-iso supplies the generic construction. No unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-03c272120",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-03c272120 (reviewer sub-agent of L); spot-checked: Read the item, the report and all five dependency statements in full; the dependency SHA-256 hashes match the report's table. The statement is verbatim identical to main-20261015 def-sfb-pull-iso.md (order 1734), and stmt_deps equals the source's uses list. Unit sk-def-sfb-coefficient-comparisons steps 1–2 give this item as the conjugate of def-sfb-comap-lower-star-iso, and the unit's last paragraph says the underived (Pull) holds without flatness, which matches the item. Typing check of the def-sfb-conjugate-pull-iso specialization: A'=Mod_{Λ_Y}, A=Mod_{Λ_X}, B=Mod_{Λ'_X}, B'=Mod_{Λ'_Y}, E_1=Ext_{a_X}, E_2=Ext_{a_Y}, U_i=f^*, L_i=f_*. With these, e : Res_{a_Y}∘f_{*Λ'} ≅ f_{*Λ}∘Res_{a_X} has exactly the type and direction of the comap-lower-star iso, and the output is Ext_{a_X}∘f^* ≅ f^*∘Ext_{a_Y}. Read pinned Mathlib Mates.lean:275, 425–433 (conjugateIsoEquiv : (L₂≅L₁)≃(R₁≅R₂)) and Basic.lean:567 (comp : F⋙H ⊣ I⋙G): (conjugateIsoEquiv (A_Y.comp B') (B.comp A_X)).symm e is correctly oriented, a one-line leaf (B6, B8). Master ChangeOfCoefficients.lean:150–164 pullIso has the same direction and coefficient category (internal module objects over IsCommMonObj condensed Λ in Sh(X_proét,Ab)); its flatness variable enters only at line 204, for the derived comparisons. Hypotheses of Ext⊣Res (change-of-scalars clause 2) hold for Sh(X_proét,Ab) with commutative Λ_X, and dependencies 1–2 already use them. rg over the DAG for pullIso / the formula / Underived (Pull): the only hits are derived or bounded pbc comparisons and the generic conjugation node, so no duplicate and same_as=[] is correct. Edge cases checked: a=id, Λ'=0, f=id, empty X, non-flat Z→F_p. No new nodes and no proof steps, so C/D are vacuous. No fixes, no tool_uses, no SGA."
+ }
 }
