@@ -120,23 +120,26 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-b43a96c08",
-  "group": "NG",
+  "reviewer": "NT-stage2-Codex-46a940cf0",
+  "group": "N2",
   "result": "pass",
-  "note": "Wrote review.md. Checked all three immutable modules, dependency declarations, sources, normalization, universes, edge cases, and pilot gates. All three files passed scompile.py with server confirmation after a stale local-overlay failure. No delivery faults found."
+  "note": "Wrote review.md. Checked all statement clauses, dependencies, canonical constructions, universes, edge cases, signatures, report sections, and pilot gates. All three immutable modules passed scompile.py without diagnostics. No fixes needed; branch unchanged."
  },
  "lean": {
   "module": "Sheaf.Paper.StrictPerfectPackageOnSite",
   "declaration": "SheafOfModules.StrictPerfectCoefficientPackageOnSite",
   "declarations": [
-   "SheafOfModules.StrictPerfectCoefficientPackageOnSite"
+   "SheafOfModules.StrictPerfectCoefficientPackageOnSite",
+   "SheafOfModules.IsLocallyStrictPerfectComplexOnSite",
+   "SheafOfModules.IsPerfectOnSmallRingedSite",
+   "SheafOfModules.SiteStrictPerfectCoefficientRepresentation"
   ],
   "file": "lean/Sheaf/Paper/StrictPerfectPackageOnSite.lean",
   "statement": "structure StrictPerfectCoefficientPackageOnSite {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{r}) (F : CochainComplex (SheafOfModules.{r} R) ℤ)",
   "branch": "newtargets-dag",
-  "by": "NG",
+  "by": "N2",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Section 1(B): StrictPerfectCoefficientPackage binds site object, morphism, and coefficient universes to the same u. The actual small pro-etale site has object universe u+1 and morphism universe u, so that interface cannot instantiate its finite-free splittings. This module reexports the recorded interface and supplies its identical degreewise splitting structure with independent site and coefficient universes; the finite tuple sheaf and splitting relation are unchanged."
+  "note": "§1(B), repair of immutable head 3431f587f57d: the published StrictPerfectCoefficientPackageOnSite already supplies the correct independent-universe degreewise splitting structure, so this delivery retains it verbatim and extends its owning module rather than introducing another package. The reexported IsPerfectOnRingedSite still fixes equal site object and morphism universes and cannot type the small pro-etale site. The additional predicates and localized representation use the published splitting structure at site objects u+1, morphisms u, and coefficients u+1, with cover-dependent bounds and ranks. Both consuming modules now import this exact recorded module directly."
  }
 }
