@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "thm-weil-pbc-finite-stage-karoubian",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite-stage rational categories are Karoubian",
- "statement": "For $E/\\Ql$ finite, the category $\\Dbc(T,E)$\n[def-weil-pbc-rational-category] is idempotent complete, and the canonical\nfunctor $\\Dbc(T,E)\\to\\Kar(\\Dbc(T,E))$ is an exact equivalence.",
+ "statement": "Let $\\ell$ be a prime, let $E/\\mathbf Q_\\ell$ be a finite extension [def-weil-l-adic-coefficient-extension], and let $T$ be a noetherian scheme of finite dimension on which $\\ell$ is invertible. The raw rational category $\\mathcal C_E=\\Dbc(T,E)$ of [def-weil-pbc-rational-category] is idempotent complete: every endomorphism $e:K\\to K$ with $e^2=e$ admits an object $L$ and maps $i:L\\to K$, $r:K\\to L$ with $ri=\\operatorname{id}_L$ and $ir=e$. Moreover, the canonical functor\n$$\n J:\\mathcal C_E\\longrightarrow\\Kar(\\mathcal C_E),\\qquad K\\longmapsto(K,\\operatorname{id}_K),\\qquad f\\longmapsto f,\n$$\nof [def-weil-karoubi-envelope] is an exact equivalence of triangulated categories.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-finite-stage-karoubian.md",
   "place": "node thm-weil-pbc-finite-stage-karoubian, order 1433",
@@ -34,32 +34,129 @@
   ]
  },
  "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
   "def-weil-pbc-rational-category",
-  "def-weil-t-structure"
+  "def-weil-karoubi-envelope"
  ],
  "proof": [
   {
-   "text": "By [prop-weil-localized-tstructure] the category $\\Dbc(T,E)$\n[def-weil-pbc-rational-category] carries a bounded t-structure, so the\nKaroubianity theorem for bounded t-structures applies.",
+   "text": "Put $A=\\mathcal O_E$ and choose a uniformizer $\\varpi$. By [def-weil-pbc-rational-category], the category in the statement is precisely $\\mathcal C_E=\\Dbc(T,\\mathcal O_E)[1/\\varpi]$, with the same objects as the integral category and with morphisms $\\operatorname{Hom}_{\\Dbc(T,\\mathcal O_E)}(K,L)\\otimes_A E$. In particular it is the raw scalar localization, rather than a category defined by first taking a Karoubi envelope. This identifies the category to which the next step applies.",
    "uses": [
-    "prop-weil-localized-tstructure",
     "def-weil-pbc-rational-category"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-finite-stage-karoubian.md",
+    "place": "Proof, identification of the category named in the first sentence; rational-category definition"
+   }
+  },
+  {
+   "text": "Apply [prop-weil-localized-tstructure] to this $T$, $E$, and $A$. Its hypotheses are exactly that $\\ell$ is prime, $E/\\mathbf Q_\\ell$ is finite, and $T$ is noetherian of finite dimension with $\\ell$ invertible, all assumed here. It equips the same raw localization $\\mathcal C_E$ with a triangulated structure and a bounded t-structure. Only this unconditional bounded-t-structure assertion is used: the proposition's additional Tor-compatibility hypothesis belongs to its levelwise truncation computation, which is not used here.",
+   "uses": [
+    "prop-weil-localized-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-finite-stage-karoubian.md",
+    "place": "Proof, first clause: the rational category carries a bounded t-structure"
+   }
+  },
+  {
+   "text": "Use [thm-weil-karoubian-bounded-t] with $\\mathcal T=\\mathcal C_E$ and the bounded t-structure from step 2. Its triangulated-category and boundedness hypotheses have both been supplied by that step. Its first conclusion gives a splitting for each idempotent $e:K\\to K$, which is exactly the asserted idempotent completeness. Its second conclusion states that the canonical fully faithful functor $\\mathcal T\\to\\Kar(\\mathcal T)$ is an exact equivalence. Under this substitution it is the displayed $J$, so it gives the entire second clause, including exactness; no separate inference from ordinary categorical equivalence to exactness is needed.",
+   "uses": [
+    "thm-weil-karoubian-bounded-t"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-finite-stage-karoubian.md",
+    "place": "Proof, final clause: apply the Karoubianity theorem for bounded t-structures, including its exact-equivalence conclusion"
+   }
   }
  ],
  "proof_deps": [
-  "prop-weil-localized-tstructure",
   "def-weil-pbc-rational-category",
+  "prop-weil-localized-tstructure",
   "thm-weil-karoubian-bounded-t"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-finite-stage-karoubian.md",
-  "place": "## Proof"
+  "place": "Proof, the single paragraph expanded into identification, bounded t-structure, and the two conclusions of the existing general theorem"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TStructure.*[Ii]dempotent|[Ii]dempotent.*TStructure|[Rr]ational.*[Kk]aroubi",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned general Karoubi, idempotent-completeness or triangulated-category facts do not establish idempotent completeness of this raw rational category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A triangulated category with a bounded t-structure is idempotent complete",
+   "results": "8 hits: CategoryTheory.IsIdempotentComplete.mk, CategoryTheory.IsIdempotentComplete, CategoryTheory.Triangulated.TStructure.mk, CategoryTheory.Idempotents.isIdempotentComplete_of_abelian, CategoryTheory.Triangulated.TStructure, CategoryTheory.Idempotents.instIsIdempotentCompleteHomologicalComplex, CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one, CategoryTheory.Idempotents.isIdempotentComplete_iff_idempotents_have_kernels; read Mathlib/CategoryTheory/Idempotents/Basic.lean:57-65,113-118: definition and abelian-category case; neither is the coefficient-category theorem",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned general Karoubi, idempotent-completeness or triangulated-category facts do not establish idempotent completeness of this raw rational category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure, CategoryTheory.Idempotents.IsIdempotentComplete",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Idempotents.IsIdempotentComplete'",
+   "date": "2026-10-16",
+   "verdict": "no match: query identifier rejected; corrected-name query also run"
+  },
+  {
+   "tool": "grep",
+   "query": "isIdempotentComplete|IsEquivalence|isEquivalence",
+   "results": "25 hits: Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean, Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean, Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned general Karoubi, idempotent-completeness or triangulated-category facts do not establish idempotent completeness of this raw rational category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIdempotentComplete, CategoryTheory.Idempotents.toKaroubi",
+   "results": "4 hits: CategoryTheory.Idempotents.instEssSurjKaroubiToKaroubiOfIsIdempotentComplete, CategoryTheory.Idempotents.toKaroubi_isEquivalence, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiObjWhiskeringLeftToKaroubi, CategoryTheory.Idempotents.whiskeringLeft_obj_preimage_app; read CategoryTheory.Idempotents.toKaroubi_isEquivalence, Mathlib/CategoryTheory/Idempotents/Karoubi.lean:233-237: assumes IsIdempotentComplete C",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned general Karoubi, idempotent-completeness or triangulated-category facts do not establish idempotent completeness of this raw rational category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The rational constructible derived category over a finite extension of the ell-adic numbers is idempotent complete and its canonical Karoubi inclusion is an exact equivalence",
+   "results": "8 hits: CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiFunctorExtension, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiFunctorExtension₂, CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiObjWhiskeringLeftToKaroubi, CategoryTheory.Idempotents.toKaroubi_isEquivalence, CategoryTheory.Idempotents.karoubiHomologicalComplexEquivalence_functor, CategoryTheory.Idempotents.karoubiHomologicalComplexEquivalence, CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.functor_obj, CategoryTheory.Idempotents.karoubiHomologicalComplexEquivalence_unitIso",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned general Karoubi, idempotent-completeness or triangulated-category facts do not establish idempotent completeness of this raw rational category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every idempotent splits in a triangulated category admitting a bounded t structure, and inclusion into the idempotent completion is an equivalence",
+   "results": "8 hits: CategoryTheory.Equivalence.IsTriangulated.refl, CategoryTheory.Pretriangulated.instSplitEpiCategory, CategoryTheory.Functor.contractible_mem_essImageDistTriang, CategoryTheory.Functor.essImageDistTriang, CategoryTheory.Equivalence.IsTriangulated.mk'', CategoryTheory.Equivalence.IsTriangulated.mk', CategoryTheory.Idempotents.toKaroubi_isEquivalence, CategoryTheory.Idempotents.karoubiCochainComplexEquivalence",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned general Karoubi, idempotent-completeness or triangulated-category facts do not establish idempotent completeness of this raw rational category"
+  },
+  {
+   "tool": "grep",
+   "query": "bounded.*[Ii]dempotent|[Ii]dempotent.*bounded|[Ss]calar.*[Ii]dempotent|[Ii]dempotent.*[Ss]calar",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No match: no returned declaration states bounded-t idempotent completeness or establishes this raw rational-category theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIdempotentComplete\", \"TStructure\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No match: no returned declaration states bounded-t idempotent completeness or establishes this raw rational-category theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded t structure on a triangulated category implies that every projector has an image",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.isZero, CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.IsLE, DerivedCategory.TStructure.t, CategoryTheory.Triangulated.TStructure.le, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.exists_triangle, CategoryTheory.Triangulated.TStructure",
+   "date": "2026-10-16",
+   "verdict": "No match: no returned declaration states bounded-t idempotent completeness or establishes this raw rational-category theorem."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -95,5 +192,21 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-weil-pbc-finite-stage-karoubian",
+  "worker": "stage1",
+  "summary": "Made the defining domain of T and ell explicit, identified the raw scalar-localization category, and used the unconditional bounded rational t-structure followed by the existing Lean-closed general Karoubian theorem, whose statement already includes exact equivalence. No new nodes; no levelwise truncation or extra Tor hypothesis is used. Added the missing Karoubi-envelope notion and removed the unused t-structure definition from statement dependencies.",
+  "blueprint": "The blueprint Proof first clause is realized by steps 1-2; its final application of the Karoubian bounded-t theorem is step 3, explicitly covering both conclusions. This follows the sk-rem-rest route unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-88303d128",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-88303d128 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, source places, report, and unit/chapter route. All three steps preserve the raw coefficient category and satisfy the cited hypotheses; Tor-dependent truncation formulas are unused. Exact equivalence is explicitly supplied by bounded-t Karoubianity. Checked small cases, duplicate candidates, and dependency cycles. No new nodes or repairs; details in review.md."
+ }
 }
