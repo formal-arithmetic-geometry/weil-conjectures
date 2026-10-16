@@ -90,10 +90,38 @@
    "results": "{\"t\": \"2026-10-16T16:34:44Z\", \"tool\": \"leanfinder\", \"query\": \"A dependent simplicial internal hom over a base has covariant functor-category transport by precomposition with contravariant lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialObject.whiskering\", \"AlgebraicTopology.DoldKan.MorphComponents.preComp\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.eHomFunctor\", \"CategoryTheory.Functor.ihom_map\", \"CategoryTheory.Functor.homObjFunctor\"], \"digest\": \"098abacdcb67eeb4\"}",
    "date": "2026-10-16",
    "verdict": "no full match: SSet.InnerFibration at AlgebraicTopology/Quasicategory/InnerFibration.lean:64-70 is only the inner-horn clause, not cocartesian sections or relative exponentials. SimplicialCategory.sHom and sHomFunctor at AlgebraicTopology/SimplicialCategory/Basic.lean:58,70 give ordinary enriched Hom objects, not the parametrized fibration theorem. Types.limitEquivSections at CategoryTheory/Limits/Types/Limits.lean:197 is a bijection of sets for ordinary Type-valued diagrams, not the limit of a quasicategory-valued coherent diagram."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simplicial sections and strict presentations of cocartesian fibrations over nerves of small categories",
+   "results": "8 hits: CategoryTheory.Nerve.strictSegal, CategoryTheory.Nerve.isStrictSegal, CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂, SSet.StrictSegal.isStrictSegal, SSet.StrictSegal.ofIsStrictSegal, SSet.StrictSegal.ofCore, SSet.Truncated.liftOfStrictSegal, SSet.QCat.strictBicategory; no declaration for sections or strict presentations.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict-Segal/nerve declarations do not define cocartesian sections, marked Grothendieck constructions, or strict presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CartesianFibration, CocartesianFibration, SimplicialCategory.sHom",
+   "results": "0 hits; loogle reports unknown identifier 'CartesianFibration'.",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib has no quasicategorical CartesianFibration/CocartesianFibration declaration matching this definition."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|cartesian.*section|Grothendieck.*construction|strict.*presentation [AlgebraicTopology]",
+   "results": "0 hits in Mathlib/AlgebraicTopology.",
+   "date": "2026-10-17",
+   "verdict": "no match: no section, marked Grothendieck, or strict-presentation definition in the searched Mathlib subdirectory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Definition of simplicial sections and strict presentations of cocartesian fibrations over a nerve",
+   "results": "8 hits: CategoryTheory.SimplicialNerve, CategoryTheory.nerve, CategoryTheory.nerveFunctor, CategoryTheory.Nerve.strictSegal, CategoryTheory.Nerve.isStrictSegal, CategoryTheory.Nerve.quasicategory, SSet.modelCategoryQuillen.instCategoryWithCofibrations, CategoryTheory.SimplicialCategory; no declaration for the requested construction.",
+   "date": "2026-10-17",
+   "verdict": "no match: hits provide ordinary nerves and simplicial enrichment only, not the requested higher-categorical section/presentation definition."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-grothendieck-presheaf-coherent-straightening",
@@ -101,5 +129,21 @@
   "group": "NW"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-cbc-enhanced-cartesian-fibration",
+  "worker": "stage1",
+  "summary": "Definition-only split with zero new nodes. I read the item statement, its cited definitions, the compact-support base-change unit route, and the existing coherent-straightening and cocartesian-sections nodes. Every construction in this item is introduced explicitly: sections and their simplicial operators, cocartesian/cartesian section sub-simplicial sets, the Cat_infinity nerve convention, the strict functor and marked Grothendieck construction, its marking and fibres, and strict presentations. No auxiliary theorem is asserted, so there are no proof steps or new nodes. Searches of the whole DAG, both blueprint snapshots, the project source trees, and Mathlib found no attachment, duplicate, or full Mathlib match.",
+  "blueprint": "The item realizes the opening compactification-choice clause of thm-cbc-finite-level-proetale: the coherent cocartesian sections and strict presentation used by the Grothendieck-presheaf comparison. The existing blueprint.from place is retained verbatim; no unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NH-734335356",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-734335356 (reviewer sub-agent of L); spot-checked: Definition-only split with zero new nodes, read in full; no fixes. Statement deps: def-cbc-enhanced-diagrams-cones supplies Fun, cores, full subcategories, functor equivalence and N(I). def-coef-infinity-fibrations supplies cocartesian edges, cocartesian fibrations and fibres. lem-coef-coherent-nerve-comparison defines N_hc and says it is the ordinary nerve on discrete categories, which justifies D:N(C)->Cat_inf. Source: six-functor notes Lecture II basic fact (7), p.15, has Cat_inf with mapping anima Fun(C,D)^≃, matching the item. G_C(D) is the cocartesian dual of the HTT 3.2.2 mapping simplex: the simplex lies in D(sigma(0)) and is pushed forward, and degenerate edges are marked. I checked the simplicial identities by hand using strict functoriality. The fibre over c is D(c). Marked edges run from x to D(f)(x). The caveat 'need not be an inner fibration' is true: C=[1], D(0)=Δ^0, D(1)=Δ^1 gives an unfillable Λ^2_1 over 0->1->1. The strict-presentation conditions (marked edges to cocartesian edges, fibrewise equivalences) are exactly what lem-cbc-cocartesian-sections-limit and step 4 of lem-cbc-grothendieck-presheaf-coherent-straightening use, with the same first-vertex variance. Edge cases checked: S empty gives Γ=Δ^0, and S a point gives Γ=X. No duplicate in the DAG; the HTT relative nerve in lem-coef-kan-relative-nerve-left-fibration is a different construction. No hits in either blueprint snapshot, so same_as [] is right. The Mathlib no-match verdicts are correct. No SGA source, no target, base-change morphism or coefficient category touched, and no tool_uses. Open point: the archived Kerodon/HTT copies are listed as WANTED, and I could not check the Kerodon tag numbers offline."
+ }
 }
