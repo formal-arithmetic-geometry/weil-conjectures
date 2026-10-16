@@ -597,5 +597,31 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-3e1fdf895 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited statements; checked Stacks constructions, coefficient categories, map normalizations, edge cases, route and dependency cycles. Repaired step 2’s missing full-faithfulness citation and constructibility-reflection argument using thm-weil-pbc-site-comparison. Statement and hypotheses unchanged. Corrected JSON is under fixes/; concrete checks and accepted tool_uses are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CompactCoefficientComposition",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficient_compactSupport_composition",
+  "statement": "theorem finiteCoefficient_compactSupport_composition (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (m n : ℕ+) (hmn : n ≤ m) {X Y Z : Scheme.{u}} [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [Z.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [IsSeparated (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] [IsSeparated (Y ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Z ↘ Spec (CommRingCat.of D.k))] [IsSeparated (Z ↘ Spec (CommRingCat.of D.k))] (f : X ⟶ Y) (g : Y ⟶ Z) [f.IsOver (Spec (CommRingCat.of D.k))] [g.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] : letI := (ProEtale.finiteCompositionCompactification D.k f).hasCompactification letI := (ProEtale.finiteCompositionCompactification D.k g).hasCompactification letI := (ProEtale.finiteCompositionCompactification D.k (f ≫ g)).hasCompactification ∀ (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E m))))) (K₀ : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E m))))) (hK₀ : WeilConjectures.finiteTorConstructibleEtale l E m m.property X K₀.obj) (e : (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E m))) X).mapDerivedCategory.obj K₀.obj ≅ K) (M : CoefficientTensorModel (finiteCompositionReduction l E m n hmn) X K) (N : CoefficientTensorModel (finiteCompositionReduction l E m n hmn) Y ((rightDerivedLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E m))) f).obj K)) (P : CoefficientTensorModel (finiteCompositionReduction l E m n hmn) Z ((rightDerivedLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E m))) g).obj ((rightDerivedLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E m))) f).obj K))) (S : CoefficientTensorModel (finiteCompositionReduction l E m n hmn) Z ((rightDerivedLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E m))) (f ≫ g)).obj K)), P.map S ((originCompositionAmbient (ULift.{u + 1} (Padic.coefficientExtensionRing l E m)) f g).hom.app ⟨K, ⟨K₀.obj, K₀.property, ⟨e⟩⟩⟩) ≫ compactSupportCoefficientComparison (HasCompactification.compactification (f ≫ g)) M S = compactSupportCoefficientComparison (HasCompactification.compactification g) N P ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) g).map (compactSupportCoefficientComparison (HasCompactification.compactification f) M N) ≫ (originCompositionAmbient (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) f g).hom.app ⟨M.obj, M.origin_of_etale_finiteTor l E m n n.property hmn K₀ hK₀ e⟩",
+  "file": "lean/Sheaf/SixFunctors/CompactCoefficientComposition.lean",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCompositionCoefficient",
+   "AlgebraicGeometry.ProEtale.finiteCompositionReduction",
+   "AlgebraicGeometry.ProEtale.finiteCompositionCompactification",
+   "AlgebraicGeometry.ProEtale.finiteCoefficient_compactSupport_composition",
+   "AlgebraicGeometry.Etale.finiteCoefficient_compactSupport_composition"
+  ],
+  "note": "Second reading repaired the false arbitrary-category statement. Both sites now use actual compact-support functors, canonical normalized compositors and universal coefficient maps, with the exact finite-field, positive quotient and geometric hypotheses. The pro-etale input retains any ordinary-etale finite-Tor constructible origin witness, using the recorded finite-value constructibility predicate. Universes of site objects and morphisms remain u+1 and u. No mathematical node statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e6d193a91",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements under fixes/. Mathematics and canonical maps checked on both sites; verbatim signatures verified. Replaced one inline tactic proof with direct equality transport. All four fixed modules passed scompile.py server confirmation. Branch unchanged."
  }
 }

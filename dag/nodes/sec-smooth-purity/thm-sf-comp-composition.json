@@ -246,13 +246,30 @@
   "thm-weil-pbc-finite-level-proetale"
  ],
  "lean": {
-  "module": "WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition",
-  "declaration": "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp",
-  "branch": "slopmaster2",
-  "line": 167,
-  "sorry_free": false,
-  "body_lines": 1,
-  "note": "Lean refresh 7d675a26 (L): moved from WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula:225"
+  "module": "Sheaf.Paper.CanonicalOriginCompactSupportComposition",
+  "declaration": "AlgebraicGeometry.ProEtale.originComposition",
+  "statement": "def originComposition : originCompactSupport A f ⋙ originCompactSupport A g ≅ originCompactSupport A (f ≫ g)",
+  "file": "lean/Sheaf/Paper/CanonicalOriginCompactSupportComposition.lean",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The old record only asserted existence of an unbounded ordinary-etale isomorphism. The source node requires the canonical compositor on the full bounded-below pro-etale origin class, with unit laws and associativity. This module constructs the unique preimage of the canonical ordinary-etale compositor using the normalized compactification site comparison. It supplies the full origin functor and canonical coherence statements; the existing ordinary-etale API is reused. The originWitnessFixed adapter explicitly transports the recorded witness-retaining coefficient-sheaf category through the existing exact coefficient-realization equivalence; originCompositionWitnessed supplies the same normalized ambient compositor on that category.",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.originCompactSupport",
+   "AlgebraicGeometry.ProEtale.originCompositionModel",
+   "AlgebraicGeometry.ProEtale.originCompositionAmbient",
+   "AlgebraicGeometry.ProEtale.originComposition",
+   "AlgebraicGeometry.ProEtale.originCompactSupportId",
+   "AlgebraicGeometry.ProEtale.originCompactSupportCongr",
+   "AlgebraicGeometry.ProEtale.originComposition_id_left",
+   "AlgebraicGeometry.ProEtale.originComposition_id_right",
+   "AlgebraicGeometry.ProEtale.originComposition_assoc",
+   "AlgebraicGeometry.ProEtale.originWitnessFixedAmbient",
+   "AlgebraicGeometry.ProEtale.originWitnessFixed_property",
+   "AlgebraicGeometry.ProEtale.originWitnessFixed",
+   "AlgebraicGeometry.ProEtale.originCompositionWitnessed"
+  ]
  },
  "blueprint_lean": [
   "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp"
@@ -421,5 +438,13 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-2309d8580 (reviewer sub-agent of L); spot-checked: Read the complete item and new lemma, all cited statements, master sources and Stacks comparisons. Checked coefficients, named-map normalization, refinement equations, units, associativity and edge cases. No repairs needed; four tool uses accepted. review.md records all checks and a separate inherited DAG cycle containing neither delivery node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e6d193a91",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements under fixes/. Mathematics and canonical maps checked on both sites; verbatim signatures verified. Replaced one inline tactic proof with direct equality transport. All four fixed modules passed scompile.py server confirmation. Branch unchanged."
  }
 }
