@@ -20,9 +20,9 @@
 | `Sheaf.Paper.FiniteDiscreteCoefficientDirectImageConjugation` | 10 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence` | 10 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientSections` | 11 | 1 | proof |
-| `Sheaf.Paper.IntegralResidueScalarRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientRestriction` | 12 | 1 | proof |
+| `Sheaf.Paper.IntegralResidueScalarGeometryBridge` | 12 | 1 | proof |
 | `Sheaf.Paper.InverseImageModuleFlat` | 12 | 1 | proof |
 | `Sheaf.Paper.IntegralResiduePullFlatModel` | 13 | 1 | proof |
 | `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquare` | 13 | 1 | proof |
