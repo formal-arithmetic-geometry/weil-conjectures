@@ -212,5 +212,28 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-a52749286 (reviewer sub-agent of L); spot-checked: Read the complete item, new Mathlib leaf, cited DAG nodes, sources, route, and delivery guidance. Verified all hypotheses, Reedy skeletal attachments, diagonal pushout-product argument, Brown factorization, exchanged direction, constant-row map, edge cases, searches, duplicate checks, and preflight. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7917b4c8a",
+  "group": "N4",
+  "result": "pass",
+  "note": "Delivery adds the module, the node lean field and the report with Worker report and Second reading by N4 sections. All three clauses checked against the node and Cisinski 3.1.16 / Hovey 5.3.1; probe rfl checks confirm sectR is rows, sectL is columns, the diagonal acts by D.map (g,g), curry maps are the horizontal operators D.map (a,1), and the zeroth-row component is D.map ((const [n]->[0]).op, 1). Weak equivalence is the recorded Enhanced.IsWeakHomotopyEquivalence, no extra hypotheses, universe u free, degree 0 and empty cases covered. Helper has real data and proved naturality; proof is sorry only; docstrings carry source place, blueprint id and all six proof steps. lean.statement is verbatim in the file. No duplicate in Mathlib, side or slopmaster2. nt_compile --json on the side overlay is clean (1.6 s, no warnings). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.BisimplicialDiagonalEquivalence",
+  "declaration": "SSet.bisimplicial_diagonal_equivalence",
+  "declarations": [
+   "SSet.bisimplicialZerothRowIndex",
+   "SSet.bisimplicial_diagonal_equivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/BisimplicialDiagonalEquivalence.lean",
+  "statement": "theorem bisimplicial_diagonal_equivalence : (∀ (D E : SimplexCategoryᵒᵖ × SimplexCategoryᵒᵖ ⥤ Type u) (f : D ⟶ E), (∀ m : ℕ, Enhanced.IsWeakHomotopyEquivalence (whiskerLeft (Prod.sectR (Opposite.op ⦋m⦌) SimplexCategoryᵒᵖ) f)) → Enhanced.IsWeakHomotopyEquivalence (whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) f)) ∧ (∀ (D E : SimplexCategoryᵒᵖ × SimplexCategoryᵒᵖ ⥤ Type u) (f : D ⟶ E), (∀ n : ℕ, Enhanced.IsWeakHomotopyEquivalence (whiskerLeft (Prod.sectL SimplexCategoryᵒᵖ (Opposite.op ⦋n⦌)) f)) → Enhanced.IsWeakHomotopyEquivalence (whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) f)) ∧ (∀ D : SimplexCategoryᵒᵖ × SimplexCategoryᵒᵖ ⥤ Type u, (∀ (m n : SimplexCategoryᵒᵖ) (a : m ⟶ n), Enhanced.IsWeakHomotopyEquivalence ((curry.obj D).map a)) → Enhanced.IsWeakHomotopyEquivalence (whiskerRight bisimplicialZerothRowIndex D))",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "All three clauses use the recorded realization-based weak homotopy equivalences. Rows, columns and diagonal are Mathlib precomposition functors. The explicit zeroth-row index transformation has components (unique [n] → [0])ᵒᵖ paired with the identity; its right whiskering with D is the specified canonical diagonal map."
  }
 }
