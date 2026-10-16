@@ -193,5 +193,23 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-1a1aad791 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the full statements of all four cited nodes, the parent and sibling nodes, and Kerodon 00ZP and 0328 online. The statement is Kerodon Proposition 3.3.7.6, conditions (3) iff (4), restricted to Kan fibrations between Kan complexes. The horn convention and weak contractibility (which includes a nonempty fiber) match def-cbc-enhanced-diagrams-cones. No target or coefficient category is involved. Step 1: the fiber is Kan by lifting over the constant simplex; the realized map is a Serre fibration by lem-coef-kan-realization-serre; its fiber is |F_q| as a k-space by lem-coef-realization-finite-limits; an empty base forces an empty total space. Step 2 is an elementary change of basepoint along a path in a collar; I checked the formulas where the pieces meet, and they commute with postcomposition. Step 3 uses path lifting plus the orbit and stabilizer clauses of lem-coef-serre-homotopy-exact-sequence to show the whole fiber is connected. Step 4 shows every positive homotopy group of the fiber vanishes, including degree 1. Step 5 gives the bijection on components with no connectedness assumption on the base. Step 6 gives injectivity and surjectivity in every positive degree, using pointed-set exactness in degree 1. Every step uses only what the cited statements say. The dependency closure is acyclic, the three cited lemmas are in the item's own unit, and no tool uses are needed. Small cases (empty spaces, an empty fiber, a two-point fiber, a fiber with nonzero pi_2, a discrete base) all behave correctly. There are no new nodes and no fixes were needed. Maintainer notes: (1) the report says the source was corrected to 00ZP, but the maintainer-owned source field still names tag 0328 and Remark 3.4.0.6. It should be set to Kerodon 00ZP, Proposition 3.3.7.6, (3) iff (4); proof_origin is already correct. (2) The existing unsplit node lem-cbc-kan-fibration-fiber-criterion (unit sk-prop-sf-cbc) contains this equivalence as one clause and is a candidate for a later merge; this split is valid on its own, and neither node is used circularly."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanFibrationFiberCriterion",
+  "declaration": "SSet.Enhanced.isWeakHomotopyEquivalence_iff_contractible_fiber",
+  "file": "lean/Sheaf/AlgebraicTopology/KanFibrationFiberCriterion.lean",
+  "statement": "theorem isWeakHomotopyEquivalence_iff_contractible_fiber {E Q : SSet.{u}} [KanComplex E] [KanComplex Q] (p : E ⟶ Q) [Fibration p] : IsWeakHomotopyEquivalence p ↔ ∀ q : Q _⦋0⦌, IsContractible (pullback (SSet.const (X := Δ[0]) q) p)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2afd8080",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Read node, dep def-cbc-enhanced-diagrams-cones (IsWeakHomotopyEquivalence/IsContractible defs), Mathlib SSet.const, modelCategoryQuillen.J and fibration_iff (all horns Λ[n+1,i], outer included), proof-dep nodes, sibling lem-cbc-kan-fibration-fiber-criterion. Each clause matches: SSet.{u} Kan E,Q, Fibration p, IsWeakHomotopyEquivalence p ↔ ∀ q : Q _⦋0⦌, IsContractible (pullback (const q) p). No extra assumptions or universe restriction; statement verbatim; node copy differs only in lean. Edge cases (empty base/total space, disconnected base, two-point or higher-π fibers) fine. Docstrings cite Kerodon 00ZP/0328 and the blueprint, with the six proof steps; sorry only; no existing duplicate. nt_compile --json clean, #check confirms type. Maintainer note only: node source.place still names tag 0328 rather than 00ZP Prop 3.3.7.6."
  }
 }

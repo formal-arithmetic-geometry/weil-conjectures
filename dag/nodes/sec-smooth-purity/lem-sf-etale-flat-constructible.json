@@ -206,12 +206,12 @@
   }
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-66a72c316",
-  "group": "NC",
+  "reviewer": "NT-stage2-cc-fc439098e",
+  "group": "Q66",
   "result": "pass",
-  "note": "Checked all statement dependencies, source and exact declarations, hypotheses, conclusions, universes, edge cases, docstrings, report sections and verbatim signature. scompile.py passed sandbox and library compilation without warnings. No fixes required."
+  "note": "Item finiteTorConstructible_etale_compact matches every node clause: standing FiniteFieldDatum k, prime ℓ≠p, X locally of finite type + quasi-compact over Spec D.k (no separatedness), finite commutative A : Type (u+1) with ∃ r, ℓ^r=0 (zero ring allowed), ordinary unbounded DerivedCategoryModule A X, recorded isBoundedConstructible and hasTorAmplitudeIn with a≤b, IsCompactObject (DirectSum.toAddMonoid comparison, bijective, all I : Type (u+1)) under ∃ HasCoproducts.{u+1}. It is the first clause of finiteRing_compactGenerators at k=D.k, T=X, C=A, with no extra clauses copied. Edge cases (empty scheme, zero ring, zero complex, empty family) covered. Four one-line import repairs verified necessary: without them ProEtaleFiniteModules fails on the duplicate AlgebraicGeometry.Scheme.IsConstructibleEtaleModuleSheaf; no declaration changed. The def-weil-pbc-etale-constructible-sheaf rebind to the published Sheaf declaration (LocallyClosedStratification + constructible parts + finite constant values) matches the node and is the predicate isBoundedConstructible uses. All six lean.statement records are verbatim substrings of their files. Docstrings carry source place, blueprint tag and the proof; only proof is sorry; no hollow definitions. Reviewer compiled all five files with nt_compile.py: rc 0, no errors or warnings (sorry warnings are off in the live lakefile). Minor, non-blocking: earlier lean.note/by texts of four dependency records were overwritten.; reverted the delivery's change of existing node(s) def-weil-pbc-proetale-modules (--revert-nodes; kept as on newtargets-dag)"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.EtaleFlatConstructibleModel",
@@ -219,9 +219,9 @@
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleFlatConstructibleModel.lean",
   "statement": "theorem hasTorAmplitudeIn_iff_exists_finiteValueConstructibleModel (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u}) [IsNoetherian X] (a b : ℤ) (hab : a ≤ b) (K : DerivedCategoryModule Λ X) (hK : DerivedCategory.isBoundedConstructible Λ X K) : DerivedCategory.hasTorAmplitudeIn Λ X a b K ↔ ∃ P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ, (∀ q : ℤ, ObjectProperty.flat (P.X q)) ∧ (∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf (P.X q)) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) ∧ Nonempty ((_root_.DerivedCategory.Q).obj P ≅ K)",
   "branch": "newtargets-dag",
-  "by": "NC",
-  "date": "2026-10-15",
+  "by": "Q66",
+  "date": "2026-10-16",
   "existing": false,
-  "note": "Uses the recorded finite-value constructibility predicate on cohomology and terms, rather than duplicating or silently substituting the source IsConstructibleSheaf predicate. Added the already landed def-weil-pbc-constructible-complexes to stmt_deps to use its exact bounded-constructible predicate."
+  "note": "Import-only repair of the published prerequisite. Its module imported both upstream and Sheaf IsConstructibleEtaleModuleSheaf, which declare the same name with different definitions and fail together. Remove only the redundant upstream import; retain the recorded locally closed constructibility interface supplied through the Sheaf bounded-constructible dependency. Every declaration, signature, definition body and proof is unchanged; no other DAG statement is introduced."
  }
 }

@@ -28,7 +28,8 @@
   "def-weil-pbc-etale-constructible-sheaf",
   "def-kun-tor-amplitude",
   "def-pc-compact-object",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-weil-pbc-constructible-complexes"
  ],
  "proof": [
   {
@@ -205,5 +206,23 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-6d2808b44 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the report, the 6 stmt_deps and 18 proof_deps statements, the blueprint main-20261015 Generators/Formula/Sums paragraphs and the unit record, and Stacks 0F11, 0D6J, 04CA, 09QH, 08JA and 07D9. The statement and its étale coefficient category (ordinary unbounded D(X_et,A), finite commutative ℓ-primary A, k = F̄_q) are correct, and nothing is weakened. The delivered six-step proof is also mathematically sound. Step 1 correctly uses the Noetherian complement of sk-lem-sf-flat-model, since its main clause is pro-étale only. Step 2 correctly replaces the pro-étale sk-lem-formal-closed-support with étale tool lemmas. Step 4 checks the qcqs and finite-cohomological-dimension hypotheses, and does not stretch 0F11 (stated for Z/n only) to general A. Step 5 treats 'fib' as a functor, which is loose but fixable with a five-lemma argument. Finding (C5, duplicate): the existing reviewed node lem-pur-etale-finite-ring-compact-generators (sec-smooth-purity, reviewed pass on 2026-10-16) already states this item as its first clause, for any algebraically closed field, with the same definitions of bounded constructible, finite Tor amplitude and compactness. The item is the case k = F̄_q, T = X, C = A. The sibling det-ctf-finite-comparison-whole already applies that node with T = X, C = A. Delivered steps 2–5 repeat the unsplit lem-pur-etale-lisse-stratum-compact. Its dependency closure (2904 nodes) does not contain the item, so citing it makes no cycle. Fix: fixes/dag/nodes/sec-six-functors-basics/det-ctf-finite-compact-etale.json replaces the proof with one step citing that node, checking each hypothesis and edge case. proof_deps is now that single node, split_report.tool_uses is that single node, and the summary and blueprint entries are updated. Statement and all other fields are unchanged. No new nodes. Details, and a note that steps 2–5 can be reused to prove lem-pur-etale-lisse-stratum-compact, are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTorConstructibleEtaleCompact",
+  "declaration": "AlgebraicGeometry.Etale.finiteTorConstructible_etale_compact",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTorConstructibleEtaleCompact.lean",
+  "statement": "theorem finiteTorConstructible_etale_compact (D : WeilConjectures.FiniteFieldDatum.{u}) (ℓ : ℕ) (hℓprime : Nat.Prime ℓ) (hℓne : ℓ ≠ D.p) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ∃ r : ℕ, (ℓ : A) ^ r = 0) : ∃ hcoprod : HasCoproducts.{u + 1} (DerivedCategoryModule A X), ∀ C : DerivedCategoryModule A X, DerivedCategory.isBoundedConstructible A X C → (∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn A X a b C) → @IsCompactObject (DerivedCategoryModule A X) _ _ hcoprod C",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc439098e",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Item finiteTorConstructible_etale_compact matches every node clause: standing FiniteFieldDatum k, prime ℓ≠p, X locally of finite type + quasi-compact over Spec D.k (no separatedness), finite commutative A : Type (u+1) with ∃ r, ℓ^r=0 (zero ring allowed), ordinary unbounded DerivedCategoryModule A X, recorded isBoundedConstructible and hasTorAmplitudeIn with a≤b, IsCompactObject (DirectSum.toAddMonoid comparison, bijective, all I : Type (u+1)) under ∃ HasCoproducts.{u+1}. It is the first clause of finiteRing_compactGenerators at k=D.k, T=X, C=A, with no extra clauses copied. Edge cases (empty scheme, zero ring, zero complex, empty family) covered. Four one-line import repairs verified necessary: without them ProEtaleFiniteModules fails on the duplicate AlgebraicGeometry.Scheme.IsConstructibleEtaleModuleSheaf; no declaration changed. The def-weil-pbc-etale-constructible-sheaf rebind to the published Sheaf declaration (LocallyClosedStratification + constructible parts + finite constant values) matches the node and is the predicate isBoundedConstructible uses. All six lean.statement records are verbatim substrings of their files. Docstrings carry source place, blueprint tag and the proof; only proof is sorry; no hollow definitions. Reviewer compiled all five files with nt_compile.py: rc 0, no errors or warnings (sorry warnings are off in the live lakefile). Minor, non-blocking: earlier lean.note/by texts of four dependency records were overwritten.; reverted the delivery's change of existing node(s) def-weil-pbc-proetale-modules (--revert-nodes; kept as on newtargets-dag)"
  }
 }

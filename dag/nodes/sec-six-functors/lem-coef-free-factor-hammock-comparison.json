@@ -26,7 +26,8 @@
   "place": "Dwyer–Kan, Calculating simplicial localizations, Comparison Lemma 2.3, printed p.20; proof in Section 5.8, printed pp.24–25 No Stacks tag states this simplicial-localization result."
  },
  "stmt_deps": [
-  "lem-coef-coherent-nerve-comparison"
+  "lem-coef-coherent-nerve-comparison",
+  "def-coef-simplicial-hammock-pair"
  ],
  "proof": [
   {
@@ -238,5 +239,34 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-1ccfe4080 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps, the 4 new nodes and all 7 cited statements in full. I also read Dwyer–Kan from the recorded PDF (scanned pages read as images, kept in /tmp only): CL 2.3 p.20, Prop 3.1–3.3 pp.20–21, 5.1–5.8 pp.24–25. The new nodes faithfully state DK 3.2 (pushout L^H C=D*L^H W, plus the true ordinary-localization pushout), 5.8(ii) (cover, made precise as a coproduct over the lifts of y), 3.1 (π0 is the ordinary localization, general) and 3.3 (u_*, u^* weak equivalences). The steps follow DK 5.8(i)-(iii). Step 2: the free-product weak-equivalence preservation comes from the last clause of the existing fixed-object free calculus, and the connected-component and empty-O cases are handled. Step 3: I checked the lifting of hammocks myself (endpoint identities force a common source and target lift; identity columns correspond). Step 4: Z_w is unreduced, so the singleton tree gives a point. In the leaf retraction, r fixes x, and eta is 1=>ir or ir=>1 with endpoint components identities. The infinite tree is a filtered union of full subcategories over finite subtrees containing x. Step 5: G(h)=NZ_h by definition, the constant point diagram is proper, and the empty word is initial. Step 6: transport along tree edges in either orientation, then π0 by DK 3.1. Small cases checked: empty O, generator-free D or W, W=C, one arrow, a loop (infinite-line cover). No duplicates in the DAG (checked against the DK 2.4 and 6.2 nodes, the infinity-localization node and the special-hammock nodes). No cycles; the only citer is lem-coef-dk-cofibrant-localization-comparison. All cited nodes are in the same unit, so no tool_uses. Statement unchanged, no SGA. New nodes are statement-only with all three search kinds and correct blueprint.from/via. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FreeFactorHammockComparison",
+  "declaration": "CategoryTheory.free_factor_hammock_comparison",
+  "declarations": [
+   "CategoryTheory.FreeFactorHammockGraph",
+   "CategoryTheory.freeFactorHammockGraphQuiver",
+   "CategoryTheory.freeFactorHammockWordFunctor",
+   "CategoryTheory.FreeFactorHammockInput",
+   "CategoryTheory.FreeFactorHammockComparison",
+   "CategoryTheory.FreeFactorHammockNaturality",
+   "CategoryTheory.FreeFactorHammockComparisonStatement",
+   "CategoryTheory.free_factor_hammock_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FreeFactorHammockComparison.lean",
+  "statement": "theorem free_factor_hammock_comparison : Nonempty FreeFactorHammockComparisonStatement.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the landed reduced-grid and diagonal definitions through def-coef-simplicial-hammock-pair, added to stmt_deps. The tagged generator graph and bijective word evaluation encode exactly the chosen free-product presentation, with the marked factor its multiplicative closure. Row formulas specify every row in every degree; naturality quantifies over all marked functors, with no generator-preservation condition. The only postponed theorem is this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1db1a4ebb",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Statement field verbatim unchanged; added stmt_dep def-coef-simplicial-hammock-pair is justified and acyclic. Clause check: unique-word bijectivity on tagged D+V generators is equivalent to P=D*_O V with free factors and nonidentity, disjoint generators; marked factor = V.multiplicativeClosure; reduced hammocks, row operators and concatenation reuse the landed HammockLocalization (no copy); target is the discrete Mathlib localization; row_formula holds for every row/degree with backward arrows sent to wInv in the correct direction; identities and composition hold; weak_equivalence holds on every pair; naturality covers all V-preserving functors with no generator condition (IsHammockMap with obj = T.obj, strict localization triangle, simplexwise square), comparisons given simultaneously. Single universe matches DK small categories, CoherentNerveComparison and the citer DkCofibrantLocalizationComparison (Cat.{u,u}). Edge cases covered: empty O, empty generator sets, n=0 and length-zero hammocks, loops, infinite generators, distinct components (empty->empty is a weak equivalence under the recorded definition). Gates met: no hollow definitions, one sorry, source/blueprint docstrings everywhere, 7-step proof docstring, imports match recorded deps (6 proof deps without Lean records named only), lean.statement verbatim, no duplicates, report has both sections. nt_compile.py --json on the snapshot module with the local side overlay: exit 0, no errors or warnings. No findings."
  }
 }

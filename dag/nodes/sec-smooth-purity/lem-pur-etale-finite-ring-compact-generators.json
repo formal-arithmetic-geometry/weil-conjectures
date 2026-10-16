@@ -297,10 +297,10 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-4cd3288af",
-  "group": "Q17",
+  "reviewer": "NT-stage2-cc-fc439098e",
+  "group": "Q66",
   "result": "pass",
-  "note": "Wrote review.md. Audited the immutable module, all eight statement dependencies, source, exact signature, universes, edge cases, docstrings, and report. scompile.py reproduced clean sandbox and library-path compilation. No repairs needed; repositories and branch head unchanged."
+  "note": "Item finiteTorConstructible_etale_compact matches every node clause: standing FiniteFieldDatum k, prime ℓ≠p, X locally of finite type + quasi-compact over Spec D.k (no separatedness), finite commutative A : Type (u+1) with ∃ r, ℓ^r=0 (zero ring allowed), ordinary unbounded DerivedCategoryModule A X, recorded isBoundedConstructible and hasTorAmplitudeIn with a≤b, IsCompactObject (DirectSum.toAddMonoid comparison, bijective, all I : Type (u+1)) under ∃ HasCoproducts.{u+1}. It is the first clause of finiteRing_compactGenerators at k=D.k, T=X, C=A, with no extra clauses copied. Edge cases (empty scheme, zero ring, zero complex, empty family) covered. Four one-line import repairs verified necessary: without them ProEtaleFiniteModules fails on the duplicate AlgebraicGeometry.Scheme.IsConstructibleEtaleModuleSheaf; no declaration changed. The def-weil-pbc-etale-constructible-sheaf rebind to the published Sheaf declaration (LocallyClosedStratification + constructible parts + finite constant values) matches the node and is the predicate isBoundedConstructible uses. All six lean.statement records are verbatim substrings of their files. Docstrings carry source place, blueprint tag and the proof; only proof is sorry; no hollow definitions. Reviewer compiled all five files with nt_compile.py: rc 0, no errors or warnings (sorry warnings are off in the live lakefile). Minor, non-blocking: earlier lean.note/by texts of four dependency records were overwritten.; reverted the delivery's change of existing node(s) def-weil-pbc-proetale-modules (--revert-nodes; kept as on newtargets-dag)"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FiniteRingEtaleCompactGenerators",
@@ -308,9 +308,9 @@
   "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingEtaleCompactGenerators.lean",
   "statement": "theorem finiteRing_compactGenerators {k : Type u} [Field k] [IsAlgClosed k] (ℓ : ℕ) (hℓprime : Nat.Prime ℓ) (hℓunit : IsUnit (ℓ : k)) {T : Scheme.{u}} (f : T ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f] [QuasiCompact f] {C : Type (u + 1)} [CommRing C] [Finite C] (hC : ∃ n : ℕ, (ℓ : C) ^ n = 0) : ∃ (hcoprod : HasCoproducts.{u + 1} (DerivedCategoryModule C T)), LocallySmall.{u + 1} (DerivedCategoryModule C T) ∧ (∀ E : DerivedCategoryModule C T, DerivedCategory.isBoundedConstructible C T E ∧ (∃ r s : ℤ, r ≤ s ∧ DerivedCategory.hasTorAmplitudeIn C T r s E) → @IsCompactObject (DerivedCategoryModule C T) _ _ hcoprod E) ∧ (∃ (S : Type (u + 1)) (E : S → DerivedCategoryModule C T), (∀ s : S, DerivedCategory.isBoundedConstructible C T (E s) ∧ ∃ r t : ℤ, r ≤ t ∧ DerivedCategory.hasTorAmplitudeIn C T r t (E s)) ∧ ∀ (A B : DerivedCategoryModule C T) (h : A ⟶ B), (∀ (s : S) (n : ℤ), Function.Bijective (fun (φ : (E s)⟦n⟧ ⟶ A) ↦ φ ≫ h)) → IsIso h)",
   "branch": "newtargets-dag",
-  "by": "Q17",
-  "date": "2026-10-17",
+  "by": "Q66",
+  "date": "2026-10-16",
   "existing": false,
-  "note": "Second reading: use the recorded isBoundedConstructible and hasTorAmplitudeIn predicates, with ordered Tor bounds. Coproducts, compactness and the generator set use the module-value indexing universe u+1, not the larger universe u+2 of derived-category objects."
+  "note": "Import-only repair of the published prerequisite. Its module imported both upstream and Sheaf IsConstructibleEtaleModuleSheaf, which declare the same name with different definitions and fail together. Remove only the redundant upstream import; retain the recorded locally closed constructibility interface supplied through the Sheaf bounded-constructible dependency. Every declaration, signature, definition body and proof is unchanged; no other DAG statement is introduced."
  }
 }

@@ -173,5 +173,33 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q49-faf61d31d (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements, and current blueprint sources in full. All four steps are valid; naturality, ring-object compatibility, and strict functoriality match the sources. Edge cases and whole-DAG reuse checks found no gap or duplicate. No new nodes or repairs; detailed checks are in review.md."
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-condensed-ring"
+ "unit": "sk-def-sfb-condensed-ring",
+ "lean": {
+  "module": "Sheaf.Topology.ContinuousMapCondensedRingMap",
+  "declaration": "Profinite.continuousMapRingSheafMapOfUniverse",
+  "declarations": [
+   "Profinite.continuousMapRingPresheafMapOfUniverse",
+   "Profinite.continuousMapRingSheafMapOfUniverse",
+   "Profinite.continuousMapRingSheafMapOfUniverse_app_apply",
+   "Profinite.continuousMapRingObjMapOfUniverse",
+   "Profinite.isMonHom_continuousMapRingObjMapOfUniverse",
+   "Profinite.continuousMapRingSheafMapOfUniverse_id",
+   "Profinite.continuousMapRingSheafMapOfUniverse_comp"
+  ],
+  "file": "lean/Sheaf/Topology/ContinuousMapCondensedRingMap.lean",
+  "statement": "def continuousMapRingSheafMapOfUniverse : continuousMapRingSheafOfUniverse.{u, v} T ⟶ continuousMapRingSheafOfUniverse T'",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Second reading repaired the Type-0-only upstream match. The recorded dependency is Profinite.continuousMapRingSheafOfUniverse, with arbitrary coefficient universe v independent of the profinite universe u; its actual objects are used here. Postcomposition is constructed with real sectionwise ring homomorphisms, and its component formula, canonical ring-object compatibility, identity and composition are stated with sorry proofs. The ring-object theorem uses exactly continuousMapRingObjOfUniverseMonObj and the dependency's sfbSheafTensorStructure tensor. No extra ring or topology assumptions, no mathematical statement change. At v=0 the construction specializes to the published upstream map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1515d94a0",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Read node, blueprint source order 1524, both stmt deps, the dependency module and upstream ContinuousMap.lean (T : Type, universe 0) and RingPresheaf isMonHom_sheafCompose_map. All clauses exact: sectionwise postcomposition is real data with rfl naturality; the sheaf morphism is between the recorded continuousMapRingSheafOfUniverse objects; the ring-object clause uses the dependency's MonObj and the sfbSheafTensorStructure tensor; id is strict; comp is map φ ≫ map ψ in the correct order. Universes u and v are independent and bound; T, T', T'' share v, as the dependency's RingCat.{max u v+1} interface requires; v=0 recovers upstream. Empty S, zero and noncommutative rings covered; no extra hypotheses. Node differs from the side clone only in lean; lean.statement verbatim in file. Docstrings carry source place and blueprint tag; theorems are sorry; report has Worker report and Second reading by Q116. nt_compile.py --json on the snapshot file: rc 0, no errors or warnings. No fixes needed."
+ }
 }

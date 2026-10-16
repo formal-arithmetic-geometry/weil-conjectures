@@ -212,5 +212,37 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-edfd408df (reviewer sub-agent of L); spot-checked: Read the item, its parent lem-coef-proper-word-colimit-invariance (Steps 4 and 7 use this item) and the three cited definitions (def-nagata-category, def-weil-pbc-simplicial-set, def-weil-pbc-category-colimit), all in full. Source: Dwyer-Kan is not in literature/, so I read the scanned PDF pp. 6-7 (printed pp. 22-23) as rendered images. §4.1 pairs (S,T) with sign-preserving weakly monotone maps are exactly the signed-word category, and (I_n^0, I_n^1) are the two alternating words. Prop. 4.3 is the boundary pushout, left unverified in the source. The item's properness clause matches Def. 4.4(i)+(ii); the item assumes it while Prop. 4.3 does not, it is what makes b_e well defined (Step 3), the statement was imported unchanged, and the parent uses it only for proper functors. All ten steps are correct and elementary. Steps 1-2: interval fibres, alternating source forces injectivity, surjections preserve maximal runs with q_m p = q_w; an exhaustive script over all 10,625 maps between words of length at most 5 found no failure. Step 3: representative independence from properness and injectivity. Steps 4-7: the cocone h_w is checked on every arrow, including non-identity endomorphisms such as the constant map on ++. Step 8: existence and uniqueness of the pushout factorization. Step 9: naturality with no injectivity of eta. Step 10: C_0 = E(eps). A union-find colimit computation for the proper functor of nonempty position subsets, n = 1..4, matched the pushout cardinality and injectivity. No new nodes, no duplicates (rg over dag/nodes), no cycle, no tool_uses, no SGA, no base-change or coefficient-category content. FIX: blueprint.from.via listed only the parent; it now carries the full created.item chain (the parent plus its 8 via nodes) in fixes/dag/nodes/sec-six-functors/lem-coef-signed-word-boundary-pushout.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SignedWordBoundaryPushout",
+  "declaration": "SSet.SignedWord.signed_word_boundary_pushout",
+  "declarations": [
+   "SSet.SignedWord.lengthLE",
+   "SSet.SignedWord.truncatedDiagram",
+   "SSet.SignedWord.truncatedColimit",
+   "SSet.SignedWord.truncatedColimitι",
+   "SSet.SignedWord.truncatedColimitStep",
+   "SSet.SignedWord.truncatedColimitMap",
+   "SSet.SignedWord.alternating",
+   "SSet.SignedWord.emptyWord",
+   "SSet.SignedWord.wordBoundary",
+   "SSet.SignedWord.alternatingColimitMap",
+   "SSet.SignedWord.signed_word_boundary_pushout"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SignedWordBoundaryPushout.lean",
+  "statement": "theorem signed_word_boundary_pushout : ∃ b : ∀ (E : SignedWord ⥤ SSet.{u}), IsProper E → ∀ (n : ℕ) (e : Bool), (wordBoundary E (n + 1) e).toSSet ⟶ truncatedColimit E n, (∀ (E : SignedWord ⥤ SSet.{u}) (hE : IsProper E) (n : ℕ) (e : Bool) (w : SignedWord) (hw : w.length < n + 1) (f : w ⟶ alternating (n + 1) e) (_hf : Function.Injective f.toFun) (d : SimplexCategoryᵒᵖ) (x : (E.obj w).obj d), ∃ hx : (E.map f).app d x ∈ (wordBoundary E (n + 1) e).obj d, (b E hE n e).app d ⟨(E.map f).app d x, hx⟩ = (truncatedColimitι E n w (Nat.le_of_lt_succ hw)).app d x) ∧ (∀ (E : SignedWord ⥤ SSet.{u}) (hE : IsProper E) (n : ℕ), IsPushout (coprod.desc (b E hE n true) (b E hE n false)) (coprod.map (wordBoundary E (n + 1) true).ι (wordBoundary E (n + 1) false).ι) (truncatedColimitStep E n) (alternatingColimitMap E (n + 1))) ∧ (∀ (E E' : SignedWord ⥤ SSet.{u}) (hE : IsProper E) (hE' : IsProper E') (η : E ⟶ E') (n : ℕ) (e : Bool) (d : SimplexCategoryᵒᵖ) (x : (wordBoundary E (n + 1) e).obj d), ∃ hx : (η.app (alternating (n + 1) e)).app d x.val ∈ (wordBoundary E' (n + 1) e).obj d, (b E' hE' n e).app d ⟨(η.app (alternating (n + 1) e)).app d x.val, hx⟩ = (truncatedColimitMap η n).app d ((b E hE n e).app d x)) ∧ (∀ (E : SignedWord ⥤ SSet.{u}), IsProper E → IsIso (truncatedColimitι E 0 emptyWord (Nat.le_refl 0)))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the published SignedWord category and IsProper helpers from ProperWordColimitInvariance; does not use its invariance theorem. Real helper constructions give truncations, boundary unions and canonical colimit arrows. The sole postponed theorem simultaneously specifies the boundary maps on every subword image, the attachment pushouts, naturality and the canonical degree-zero isomorphism. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75729a2e1",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read the node, its 3 stmt_deps, the published SignedWord/IsProper helpers, the delivered module and report (real Worker report and Second reading by NO). All 10 clauses match: full length-truncation colimits via Mathlib colimit; alternating words; boundary = union of injective shorter-subword images including the empty word; b uniquely pinned on subword representatives; IsPushout arrows in correct order for all lengths n+1>=1; naturality for every eta between proper diagrams; degree zero as IsIso of the canonical map. IsProper is not stronger than the node. Universe u unrestricted, autoImplicit false. Helpers are real data with source/blueprint docstrings, one sorry, only the lean record changed, statement verbatim, no name clashes, no DAG cycle; the reciprocal import is left out per §3(7). nt_compile.py --json on the snapshot file against the live build plus side overlay: clean, 1.3 s."
  }
 }

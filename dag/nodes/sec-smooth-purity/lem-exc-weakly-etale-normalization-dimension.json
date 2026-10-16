@@ -183,5 +183,23 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-760edd4d5 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited node statement in full. Source checked: Stacks algebra.tex Tag 02IJ (algebra-lemma-dimension-formula, lines 27520-27541; tags/tags line 3302). The new node matches 02IJ hypothesis by hypothesis: R⊂S, both domains, R Noetherian, S of finite type, and the equality when R is universally catenary, with the residue trdeg moved to the left. It is true under def-kun-transcendence-degree read for algebras, because for domains R⊂S that value equals the fraction-field trdeg. I tested it on R=S, k⊂k[t] at (0) and (t), Z⊂Z[t] at (2,t), k[x]⊂k[x,y] at (xy-1), and k[x]⊂k[x,1/x]; all hold. It is statement-only and self-contained, and its four definition nodes each define what they are cited for. The searches are recorded; the only near match, KrullsHeightTheorem.lean:462, needs going down. The rg over snapshot/dag/nodes for 02IJ, 'dimension formula' and 'universally catenary' found only field-base nodes (lem-kun-dimension-formula 02FX and the lem-sc-* dimension nodes), so it is not a duplicate. It is not a restatement of the item: it allows non-integral extensions, positive trdeg and arbitrary primes. The item statement is unchanged and not weakened, and it agrees with how the parent lem-exc-weakly-etale-local-component-dimension cites it. Step 1 is genuinely elementary from the three cited definitions: finite module gives finite type, the residue extension is algebraic, and every element satisfies bT-a, so both trdegs are 0. Step 2 checks every hypothesis of the new node with R=C, S=C', q=m. Step 3 cites Mathlib leaves, so the off-unit use is fine and no tool_uses are needed. Edge cases checked: a field, a DVR, and the nodal curve, where C' is semilocal. Universal catenarity is genuinely required (Nagata's examples). The blueprint place checked is the main-20261015 thm-exc-curve-open-dimension-general proof, paragraph 2. No SGA source is cited, and no coefficient category or base change is involved. FIX: Step 3 compared the localization node's height (chains whose last member lies inside m) with Step 2's height (chains ending at m) without writing the comparison for m. I added the append-m argument; only proof[2].text changed, and the uses are unchanged. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-exc-weakly-etale-normalization-dimension.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalizationLocalizationDimension",
+  "declaration": "IsUniversallyCatenary.ringKrullDim_localization_integralClosure_eq",
+  "file": "lean/Sheaf/RingTheory/NormalizationLocalizationDimension.lean",
+  "statement": "theorem ringKrullDim_localization_integralClosure_eq {C : Type u} [CommRing C] [IsNoetherianRing C] [IsLocalRing C] [IsDomain C] {K : Type v} [Field K] [Algebra C K] [IsFractionRing C K] [Module.Finite C (integralClosure C K)] (hC : IsUniversallyCatenary C) (m : Ideal (integralClosure C K)) [m.IsMaximal] (hm : m.comap (algebraMap C (integralClosure C K)) = IsLocalRing.maximalIdeal C) : ringKrullDim (Localization.AtPrime m) = ringKrullDim C",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-634cf0381",
+  "group": "NP",
+  "result": "pass",
+  "note": "Statement matches node lem-exc-weakly-etale-normalization-dimension clause by clause (CommRing/Noetherian/IsLocalRing/IsDomain C, IsUniversallyCatenary from def-exc-excellent-ring, IsFractionRing C K, integralClosure C K with Module.Finite, every maximal m with comap = maximalIdeal C, ringKrullDim (Localization.AtPrime m) = ringKrullDim C). True by Stacks 02IJ equality case (algebra.tex lemma-dimension-formula checked). Edge cases field/DVR/semilocal normalization/zero ring/universes u,v OK; Type u quantification in IsUniversallyCatenary is not a restriction. Gates: no definitions, single sorry theorem, source+blueprint docstrings with 3-step proof, no stronger assumptions, proof-only imports non-public, node diff only in lean with verbatim statement, report has Worker report and Second reading by NP. nt_compile.py --json on snapshot module: rc 0, no errors/warnings. No findings."
  }
 }

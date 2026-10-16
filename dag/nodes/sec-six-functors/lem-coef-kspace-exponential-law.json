@@ -227,5 +227,29 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-c13fd0b77 (reviewer sub-agent of L); spot-checked: I read all seven steps of lem-coef-kspace-exponential-law and the new leaf lem-coef-hausdorff-compact-neighborhood-basis in full. The item's statement is unchanged. It matches Hovey Def 2.4.21 / Prop 2.4.22(5) on all k-spaces, with no weak-Hausdorff condition; Hovey is not in literature/ and is recorded as WANTED, with proof_origin.by=agent. The parent lem-coef-realization-finite-limits step 7 uses exactly this bijection and k(kT)=kT. Step checks: (1) the k-test criterion, the lifting from k-spaces and k(kT)=kT are correct and elementary. (2) C×D is compact by Tychonoff over two indices and Hausdorff by the explicit argument; D is locally compact by the new leaf, using the whole space as a compact neighbourhood. (3) I checked (gb)^{-1}(S(a,U)∩M)=(H^♯)^{-1}[D,U]; the transpose is applied with K=D, which is locally compact. (4) Continuity into M, then lifting to kM, is correct. (5) R_q^{-1}[L,U]=S(q|_L,U)∩M, where L⊆D compact is compact Hausdorff. (6) Evaluation with A=K=D, restricted to the diagonal, gives h∘r, so h is continuous on k(X×Y). (7) The two formulas are pointwise inverse, the preimage of S(a',U') is S(va',w^{-1}U'), and naturality is written out. proof_deps equals the union of the uses, only cited statements are used, and there is no cycle. New leaf: it is Stacks 08ZR, lemma-locally-quasi-compact-Hausdorff (topology.tex 2021-2041, 'if' direction). The Mathlib match is WeaklyLocallyCompactSpace.locallyCompactSpace (Separation/Basic.lean:1170-1171, in the R1Space section at line 914 under WeaklyLocallyCompactSpace at line 1155), with T2Space.r1Space (Hausdorff.lean:120-121); the classes at Defs/Filter.lean:295-312 match the hypothesis and conclusion exactly, so it is a valid one-line leaf. B1-B9 hold. A DAG-wide scan found no duplicate, and the node does not restate a clause of the item. Edge cases checked: empty X, Y, Z and tests, a singleton, the Sierpinski space, and [0,1]. All cited nodes are Mathlib leaves or definitions, so there are no tool_uses. No SGA source. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.KSpaceExponentialLaw",
+  "declaration": "CompactlyGenerated.exists_compactTestCurry",
+  "declarations": [
+   "TopCat.compactTestFunctionTopology",
+   "TopCat.compactTestMapSpace",
+   "TopCat.kification",
+   "CompactlyGenerated.exists_compactTestCurry"
+  ],
+  "file": "lean/Sheaf/Topology/KSpaceExponentialLaw.lean",
+  "statement": "theorem exists_compactTestCurry : ∃ E : ∀ (X Y Z : CompactlyGenerated.{u, u}), C(TopCat.kification (TopCat.of (X × Y)), Z) ≃ C(X, TopCat.kification (TopCat.compactTestMapSpace Y.toTop Z.toTop)), (∀ (X Y Z : CompactlyGenerated.{u, u}) (h : C(TopCat.kification (TopCat.of (X × Y)), Z)) (x : X) (y : Y), (E X Y Z h x).val y = h (x, y)) ∧ (∀ (X Y Z X' Y' Z' : CompactlyGenerated.{u, u}) (a : C(X', X)) (b : C(Y', Y)) (c : C(Z, Z')) (h : C(TopCat.kification (TopCat.of (X × Y)), Z)), ∃ h' : C(TopCat.kification (TopCat.of (X' × Y')), Z'), (∀ p : X' × Y', h' p = c (h (a p.1, b p.2))) ∧ ∀ (x : X') (y : Y'), (E X' Y' Z' h' x).val y = c ((E X Y Z h (a x)).val (b y)))",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6db37977",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Checked against Hovey Def 2.4.21/Prop 2.4.22(5), printed p.58 (extracted from the PDF): all k-spaces, no weak-Hausdorff condition, subbasis S(f,U), Hom=kC(Y,Z). Lean matches clause by clause: Mathlib compactlyGenerated.{u} as kT, CompactlyGenerated.{u,u} for X,Y,Z with no added hypotheses, generateFrom test topology on Y→Z, subtype via the recorded instTopologicalSpaceSubtype, kified ordinary product, Equiv fixed by the currying clause, naturality in all three variables with uniquely determined h'. Edge cases (empty X/Y/Z, empty tests, non-Hausdorff spaces) covered. Helpers have real data and source/blueprint docstrings; only sorry; lean.statement verbatim; no duplicate notion in Mathlib/side/DAG; no statement change. nt_compile.py per-file compile: 1.3 s, rc 0, no diagnostics. Universe: tests in CompHaus.{u} is the Mathlib convention used by the consumer RealizationFiniteLimits and is polymorphic in u. No findings."
  }
 }

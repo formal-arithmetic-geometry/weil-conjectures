@@ -247,5 +247,33 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-5d1239e3f (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new node lem-coef-enriched-marked-realization and every cited statement in full (coherent-nerve-comparison, def-cbc-enhanced-diagrams-cones, hammock-infinity-localization, cbc-enhanced-functor-cone-calculus), plus the unit, the blueprint ancestor's proof paragraph 2 and the citer simplicial-model-nerve-localization. That citer applies the item to cofibrant objects, which do not have Kan mapping sets, so the non-Kan formulation through the replacement RC is the right one. HA is not archived locally and network access is blocked, so I checked HA 1.3.4.7, 1.3.4.11 and 1.3.4.14 from my own knowledge of the source and verified every step mathematically myself. Step 1: p a = p b = 1 gives a, b in W; two-out-of-three along each edge transpose H (Ha = f, Hb = g) shows W is a union of components, and B is a wide simplicial subcategory. Step 2: the new node's hypotheses hold, V_B = V, and its degree-zero leg is theta. Step 3: q is monotone; identity and composition follow by injectivity of the tensor isomorphism; U_n is only needed for each fixed n. Step 4: the endpoint naturality squares hold, the components lie in W_n, and U preserves W_n vertex by vertex. Step 5: the hammock universal property plus the componentwise criterion (applied after restricting, then reflected along the equivalence) give F_bar G_bar ~ U_bar ~ 1 and G_bar F_bar = 1. Step 6: the constant-to-L_bullet map exists, N(Delta^op) is contractible, and the composite is the theta-induced map. Step 7: unpacking the universal properties gives theta^*. The new node is true (hocolim presentation of A by the A_n), tested on B = A, discrete A, identity components and the empty category. It is strictly smaller than the item (no interval objects; degree zero sufficing is the item's own content), statement-only, self-contained, and its blueprint and created fields are correct. It is not a duplicate of diagonal-coherent-nerve-comparison, cofibrant-simplicial-inversion, dk-cofibrant/hammock-pair/free-factor or special-resolution. The declared tool_use of lem-cbc-enhanced-functor-cone-calculus is accepted: a generic componentwise criterion already used this way in the chapter. No SGA is used. No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialIntervalLocalization",
+  "declaration": "CategoryTheory.CoherentNerve.simplicial_interval_localization",
+  "declarations": [
+   "CategoryTheory.CoherentNerve.intervalTranspose",
+   "CategoryTheory.CoherentNerve.intervalProjection",
+   "CategoryTheory.CoherentNerve.IsIntervalNerveMap",
+   "CategoryTheory.CoherentNerve.intervalOrdinaryMarking",
+   "CategoryTheory.CoherentNerve.intervalCoherentMarking",
+   "CategoryTheory.CoherentNerve.intervalInvertingDiagrams",
+   "CategoryTheory.CoherentNerve.simplicial_interval_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialIntervalLocalization.lean",
+  "statement": "theorem simplicial_interval_localization (A : SCat.{u}) (W : MorphismProperty (underlying A)) (hiso : ∀ (x y : underlying A) (f : x ⟶ y), IsIso f → W f) (hcomp : ∀ (x y z : underlying A) (f : x ⟶ y) (g : y ⟶ z), (W f → W g → W (f ≫ g)) ∧ (W f → W (f ≫ g) → W g) ∧ (W g → W (f ≫ g) → W f)) (I : underlying A → underlying A) (h : ∀ x, Δ[1] ⟶ hom A x (I x)) [htensor : ∀ x y : underlying A, IsIso (intervalTranspose A I h x y)] (hp : ∀ x : underlying A, W (intervalProjection A I h x)) (B : SCat.{u}) (r : A ⟶ B) (hobjects : (B : Type u) = (A : Type u)) (hr : ∀ x : A, HEq (r.obj x) x) (hkan : IsLocallyKan B) (hweak : ∀ x y : A, SSet.Enhanced.IsWeakHomotopyEquivalence (r.map x y)) : ∃ θ : nerve (underlying A) ⟶ nerveFunctor.obj B, IsIntervalNerveMap r θ ∧ ∀ (E : SSet.{max u w}) [SSet.Quasicategory E], ∃ restriction : (intervalInvertingDiagrams (nerveFunctor.obj B) (intervalCoherentMarking W θ) E).toSSet ⟶ (intervalInvertingDiagrams (nerve (underlying A)) (intervalOrdinaryMarking A W) E).toSSet, restriction ≫ (intervalInvertingDiagrams (nerve (underlying A)) (intervalOrdinaryMarking A W) E).ι = (intervalInvertingDiagrams (nerveFunctor.obj B) (intervalCoherentMarking W θ) E).ι ≫ (MonoidalClosed.pre (SSet.uliftFunctor.{w}.map θ)).app E ∧ SSet.Enhanced.IsFunctorEquivalence restriction",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The canonical map is characterized on every nerve simplex and on its entire enriched mapping maps; no arbitrary comparison is substituted. Restriction factors the actual precomposition map through the full marked functor subcategories, with arbitrary larger target universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8922985a1",
+  "group": "ND",
+  "result": "pass",
+  "note": "Commit 8922985a touches only module, node (lean field only) and report; lean.statement verbatim; Worker report and Second reading by ND are real. Every clause of the node checked against the Lean: intervalTranspose is composition with h (eComp diagrammatic order), intervalProjection is the inverse transpose of the constant identity path, two-out-of-three is complete, the chosen object-preserving locally Kan replacement has no Kan assumption on A, theta is uniquely characterised (Mathlib thickening Hom = nerve(i⟶j)), V = theta-images of W, full inverting subcomplexes over all higher simplices, restriction = pre(ulift theta) with IsFunctorEquivalence for all quasicategories E in max u w. Edge cases checked (empty category, empty mapping sets, n=0, discrete, all/iso-only W). Helpers concrete and non-duplicative (IsHammockNerveMap and hammockInvertingDiagrams are hammock-/ordinary-nerve-specific). Docstrings with source, blueprint and 7 proof steps; imports follow the rule; no line over 100 chars. nt_compile.py --json on the side overlay: clean, 1.3 s, rc 0."
  }
 }
