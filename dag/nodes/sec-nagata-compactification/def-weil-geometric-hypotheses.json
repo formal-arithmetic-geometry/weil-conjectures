@@ -78,5 +78,24 @@
   "result": "pass"
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-comp-category"
+ "unit": "sk-prop-nagata-sketch-comp-category",
+ "lean": {
+  "module": "Sheaf.Paper.GeometricHypotheses",
+  "declaration": "WeilConjectures.FiniteFieldDatum.IsSmoothOfPureDimension",
+  "file": "lean/Sheaf/Paper/GeometricHypotheses.lean",
+  "statement": "def IsSmoothOfPureDimension (D : WeilConjectures.FiniteFieldDatum.{u}) (Y₀ : Over (Spec (CommRingCat.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (d : ℕ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The only new predicate is smoothness together with pure dimension of the recorded geometric fibre. Properness and geometric connectedness reuse AlgebraicGeometry.IsProper and AlgebraicGeometry.GeometricallyConnected on Y₀.hom; the algebraic-closure criterion reuses the recorded dependency theorem, as explained in the module docstring."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c185ace2",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Checked the node, all 11 stmt_deps and the master blueprint source (order 412). Lean matches clause by clause: D : FiniteFieldDatum.{u}; Y₀ : Over (Spec k₀) with LocallyOfFiniteType and QuasiCompact (finite type, as geometricFiber needs); d : ℕ; Smooth Y₀.hom ∧ (D.geometricFiber Y₀).left.IsPureDimension d, where geometricFiber is Over.pullback along k₀→k and IsPureDimension tests every irreducible component. Properness reuses IsProper and geometric connectedness reuses GeometricallyConnected (nonempty via ConnectedSpace); the algebraic-closure equivalence is the recorded dependency theorem; one definition per notion respected. No extra hypotheses; single bound universe u. Edge cases checked: empty scheme, d=0, infinite dimension. Docstrings carry source and blueprint tag, body is real, no sorry; lean.statement verbatim; report has real Worker report and Second reading by Q73 sections. nt_compile.py --json local side overlay: clean, 2.2 s, rc=0, no warnings. No findings."
+ }
 }
