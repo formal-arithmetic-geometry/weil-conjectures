@@ -41,15 +41,11 @@ functors on `Dᵇc(-)⟦Λ⟧` do not provide yet.
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekComp`: the composition isomorphism
-  `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`. For the chosen compactifications it is assembled from the
-  compactification independence `boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl`,
-  the proper base change theorem and the composition of `Rf_*` and of `j_!`.
 - `ProEtale.CondensedRing.unitEndRingEquiv`: `End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧) = H⁰(Spec k, ℚ̄_ℓ) ≅ ℚ̄_ℓ`
   for `k` separably closed.
 
-All these are data. They are stated as definitions with value `sorry`, to be replaced by the
-constructions; the trace formula and its Frobenius operators are built from them.
+It is data, stated as a definition with value `sorry`, to be replaced by the construction;
+the trace formula is built from it.
 
 ## Main definitions
 
@@ -120,28 +116,6 @@ abbrev RationalPoint (X : Over (Spec (.of k))) : Type u :=
   point k ⟶ X
 
 end Point
-
-/-! ### Missing comparison isomorphisms of the six functors -/
-
-section Inputs
-
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-
-variable {X Y Z : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
-  [IsSeparated Z.hom]
-
-/-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the derived lower shriek on
-bounded constructible complexes, for the chosen compactifications. -/
-@[no_expose]
-noncomputable def boundedConstructibleLowerShriekComp (f : X ⟶ Y) (g : Y ⟶ Z) :
-    boundedConstructibleLowerShriek Λ ℓ (f ≫ g) ≅
-      boundedConstructibleLowerShriek Λ ℓ f ⋙ boundedConstructibleLowerShriek Λ ℓ g :=
-  sorry
-
-end Inputs
 
 section Scalars
 

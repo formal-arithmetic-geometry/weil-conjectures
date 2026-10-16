@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.TraceFormula.Basic
@@ -72,9 +73,9 @@ the monoidal pullback `L(𝟙 s)^*`
 
 ## Main definitions
 
-- `ProEtale.CondensedRing.boundedConstructibleUpperShriekId`,
-  `ProEtale.CondensedRing.boundedConstructibleUpperShriekComp`: the identity and composition
-  isomorphisms of the exceptional inverse image.
+- `ProEtale.CondensedRing.boundedConstructibleUpperShriekId`: the identity isomorphism of the
+  exceptional inverse image; its composition isomorphism is
+  `ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl`.
 - `ProEtale.CondensedRing.dualizingComplex`, `ProEtale.CondensedRing.dualizingComplexComp`.
 - `ProEtale.CondensedRing.etalePurityIso`, `ProEtale.CondensedRing.dualizingComplexSmoothIso`:
   smooth purity for the dualizing complexes.
@@ -123,24 +124,6 @@ noncomputable def boundedConstructibleUpperShriekId (X : Over (Spec (.of k)))
     (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X))
     Adjunction.id (boundedConstructibleLowerShriekId ℓ X).symm
 
-variable {X Y Z : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
-  [IsSeparated Z.hom]
-
-/-- The composition isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` of the exceptional inverse image: the
-conjugate of the composition isomorphism `boundedConstructibleLowerShriekComp` of the lower
-shriek. -/
-noncomputable def boundedConstructibleUpperShriekComp (f : X ⟶ Y) (g : Y ⟶ Z) :
-    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g) ≅
-      boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ g ⋙
-        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
-  conjugateIsoEquiv
-    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (f ≫ g))
-    ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ f).comp
-      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ g))
-    (boundedConstructibleLowerShriekComp (Profinite.padicAlgClRingObj ℓ) ℓ f g).symm
-
 end Comparison
 
 /-! ### Dualizing complexes -/
@@ -165,7 +148,7 @@ variable {X Y : Over (Spec (.of k))}
 noncomputable def dualizingComplexComp (f : X ⟶ Y) :
     (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
         (dualizingComplex ℓ Y) ≅ dualizingComplex ℓ X :=
-  ((boundedConstructibleUpperShriekComp ℓ f (toPoint Y)).app (𝟙_ _)).symm ≪≫
+  ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f (toPoint Y)).app (𝟙_ _)).symm ≪≫
     eqToIso (by rw [comp_toPoint])
 
 /-- The Tate twist `ℚ̄_ℓ,X(0)`, placed in degree `0`, is the unit of `D(Mod_{ℚ̄_ℓ,X})`. -/
