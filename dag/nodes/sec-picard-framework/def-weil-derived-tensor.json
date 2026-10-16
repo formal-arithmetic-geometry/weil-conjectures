@@ -113,25 +113,24 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.Algebra.Homology.DerivedTensor",
-  "declaration": "AlgebraicGeometry.Scheme.derivedTensor",
-  "file": "lean/Sheaf/Algebra/Homology/DerivedTensor.lean",
-  "statement": "def derivedTensor (K₁ K₂ P : CochainComplex (SheafOfModules.{w + 1} 𝓢) ℤ) (_f : P ⟶ K₁) (_hf : QuasiIso _f) (_hP : CochainComplex.IsKFlat.{w + 1, w} (R := 𝓡) P) : proEtaleDerivedCategory Y A",
-  "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-11",
-  "existing": false,
+  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.Tensor",
+  "declaration": "AlgebraicGeometry.ProEtale.derivedTensor",
   "declarations": [
-   "AlgebraicGeometry.Scheme.derivedTensor",
-   "AlgebraicGeometry.Scheme.derivedTensorRing"
-  ]
+   "AlgebraicGeometry.ProEtale.derivedTensor"
+  ],
+  "statement": "def derivedTensor :\n    DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n        DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)",
+  "branch": "slopmaster2",
+  "by": "Q11",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Section 1(B), coefficient-presentation interface: the old record is a K-flat representative-level operation on constant-ring sheaf modules. The published derivedTensor is that operation descended to the bifunctor on fixed-scalar module sheaves, the presentation used by the exceptional and compact-support APIs. It is the K-flat-derived tensor, not an independently chosen monoidal product."
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "R-ddt1257",
-  "group": "H1",
-  "result": "fix",
-  "note": "Y_proet/A_Y (CommRingCat constant sheaf forgotten to RingCat), K1 K2 unbounded, chosen P->K1 QuasiIso with sheaf IsKFlat (06YN), value Q.obj Tot(P (x) K2) via mapBifunctor curriedTensor of SheafOfModules.monoidalCategory, B_Y restrictScalars along constant-sheaf map in degree 0; KFlat fixed with synthInstance.maxSize 256 (HasMapBifunctor failed at max u v); 13 KFlat importers + DerivedTensor recompiled clean against fixed KFlat"
+  "reviewer": "NT-stage2-Codex-ab48a135e",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all 18 dependencies, both Lean modules, canonical maps, hypotheses, edge cases, universes, and verbatim signatures. Local per-file compilation and server confirmation passed. No corrections required; branch unchanged."
  }
 }

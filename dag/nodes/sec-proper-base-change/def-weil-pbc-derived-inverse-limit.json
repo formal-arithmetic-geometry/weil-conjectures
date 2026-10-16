@@ -125,30 +125,30 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-18690d814 (reviewer sub-agent of L); spot-checked: Read the full item, six dependency statements, route, and cited mathematics. Roos indexing, exact products, unbounded evaluation, edge cases, and dependency acyclicity check out; no condensed-coefficient comparison is assumed. Repaired B5 source metadata to include 08TC and exact TeX labels for 08TC/07KC. Whole corrected JSON is under fixes/dag/nodes; concrete checks are in review.md. No targets changed.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-809a79c48",
-  "group": "Q22",
+  "reviewer": "NT-stage2-Codex-f90c1ef27",
+  "group": "Q04",
   "result": "pass",
-  "note": "All four modules compile cleanly via scompile.py; statements, dependencies, universes, constructions, edge cases, source/docstring requirements, and report sections check out. No substantive or mechanical errors found."
+  "note": "Wrote review.md. Checked the immutable modules, all statement dependencies, source passages, hypotheses, conclusions, universes, edge cases, docstrings, and dependency repair. Both files compile cleanly through scompile.py; no fixes required."
  },
  "lean": {
-  "module": "Sheaf.Paper.SequentialDerivedInverseLimitCompleted",
-  "declaration": "AlgebraicGeometry.Scheme.CompletedSequentialDerivedLimit",
+  "module": "Sheaf.Paper.SequentialDerivedInverseLimit",
+  "declaration": "AlgebraicGeometry.ProEtale.IsAdicSequentialDerivedLimit",
   "declarations": [
-   "AlgebraicGeometry.Scheme.adicDatumCountableAB4Star",
-   "AlgebraicGeometry.Scheme.adicDatumDerivedCountableProducts",
-   "AlgebraicGeometry.Scheme.adicDatumEvaluateComplex",
-   "AlgebraicGeometry.Scheme.adicDatumEvaluateComplex_inverts",
-   "AlgebraicGeometry.Scheme.adicDatumEvaluateDerived",
-   "AlgebraicGeometry.Scheme.CompletedSequentialDerivedLimit"
+   "AlgebraicGeometry.ProEtale.adicModuleLocallyBijective",
+   "AlgebraicGeometry.ProEtale.adicComplexTowerEvaluation",
+   "AlgebraicGeometry.ProEtale.adicComplexTowerEvaluation_inverts",
+   "AlgebraicGeometry.ProEtale.adicDerivedTowerEvaluation",
+   "AlgebraicGeometry.ProEtale.adicDerivedTowerEvaluationFactors",
+   "AlgebraicGeometry.ProEtale.IsAdicSequentialDerivedLimit"
   ],
-  "file": "lean/Sheaf/Paper/SequentialDerivedInverseLimitCompleted.lean",
-  "statement": "structure CompletedSequentialDerivedLimit (B : ℕᵒᵖ ⥤ adicDatumDerived T d)",
+  "statement": "def IsAdicSequentialDerivedLimit (M : DerivedCategory (Scheme.CompletedAdicTowers T d)) (L : DerivedCategory (Scheme.CompletedAdicModules T d)) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q22",
-  "date": "2026-10-15",
+  "by": "Q04",
+  "date": "2026-10-16",
   "existing": false,
-  "note": "§1(B), unstated dependency supplied in this delivery. No usable lean record or Mathlib match existed for this completed-coefficient notion. Existing constant-coefficient CompleteCoefficientDatum/IntrinsicKoszulCompletion/AdicDerivedInverseLimit use a different ambient ring sheaf. This module retains the actual inverse-limit coefficient sheaf A_T, the original small pro-etale site with object universe t+1 and morphism universe t, and the canonical maps specified in the node; it reuses the published completed-coefficient and localization constructions."
+  "note": "§1(B), existing sequential-limit interface with import repair. The recorded CompletedSequentialDerivedLimit imports the separate adicDatum* presentation through CompletedConstantFiniteComplexRealization, whose published overlay fails on unknown SheafOfModules.isMonoidal_W_independentCoefficients. Reuse the existing SequentialDerivedInverseLimit and all of its declarations over the actual completed finite-function coefficient sheaf and current AdicCoefficientDatum. Its independent existing-declaration probe additionally exposed overlapping KFlat imports. Replace only its first import by the recorded AdicCoefficientDatum module, which reexports CompletedAdicCoefficientDatum and gives the coherent import closure used successfully by the consumer. All mathematical declarations of this dependency module are unchanged: localization retains the complete evaluated inverse system, and IsAdicSequentialDerivedLimit is existence of its distinguished Roos triangle, without choosing a limit or a functor. The small-site universes are unchanged.",
+  "file": "lean/Sheaf/Paper/SequentialDerivedInverseLimit.lean"
  }
 }

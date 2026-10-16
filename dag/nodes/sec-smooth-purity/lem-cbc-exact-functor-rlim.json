@@ -251,5 +251,27 @@
   "group": "Q21",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-03d7036a5 (reviewer sub-agent of L); spot-checked: Read the full item, all five steps, every cited statement, and relevant master/Stacks sources. Product compatibility, shift signs, TR3 comparison, and invertibility are correct. Accepted the documented cone-canonicity source correction and Roos-triangle tool use. No new nodes or repairs. Downstream canonical-map and coefficient-category comparisons remain separate obligations. Detailed checks written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExactFunctorDerivedLimit",
+  "declaration": "AlgebraicGeometry.ProEtale.exactFunctor_isDerivedLimit",
+  "declarations": [
+   "CategoryTheory.roosProductComparisonIso",
+   "AlgebraicGeometry.ProEtale.exactFunctor_isDerivedLimit"
+  ],
+  "file": "lean/Sheaf/Paper/ExactFunctorDerivedLimit.lean",
+  "statement": "theorem exactFunctor_isDerivedLimit (T : Scheme.{t}) (S : Scheme.{s}) {A : Type t} [CommRing A] {B : Type s} [CommRing B] (dT : AdicCoefficientDatum A) (dS : AdicCoefficientDatum B) (F : DerivedCategory (CompletedAdicModules T dT) ⥤ DerivedCategory (CompletedAdicModules S dS)) [F.Additive] [F.CommShift ℤ] [F.IsTriangulated] (towerF : DerivedCategory (CompletedAdicTowers T dT) ⥤ DerivedCategory (CompletedAdicTowers S dS)) (towerCompat : towerF ⋙ adicDerivedTowerEvaluation S dS ≅ adicDerivedTowerEvaluation T dT ⋙ (Functor.whiskeringRight ℕᵒᵖ (DerivedCategory (CompletedAdicModules T dT)) (DerivedCategory (CompletedAdicModules S dS))).obj F) (hprod : ∀ K : ℕ → DerivedCategory (CompletedAdicModules T dT), IsIso (piComparison F K)) (M : DerivedCategory (CompletedAdicTowers T dT)) (L : DerivedCategory (CompletedAdicModules T dT)) (p : L ⟶ ∏ᶜ (fun n : ℕ ↦ ((adicDerivedTowerEvaluation T dT).obj M).obj (op n))) (δ : (∏ᶜ (fun n : ℕ ↦ ((adicDerivedTowerEvaluation T dT).obj M).obj (op n))) ⟶ L⟦(1 : ℤ)⟧) (hL : IsDerivedLimitTriangle (fun n : ℕ ↦ ((adicDerivedTowerEvaluation T dT).obj M).map (homOfLE (Nat.le_succ n)).op) L p δ) (L' : DerivedCategory (CompletedAdicModules S dS)) (p' : L' ⟶ ∏ᶜ (fun n : ℕ ↦ ((adicDerivedTowerEvaluation S dS).obj (towerF.obj M)).obj (op n))) (δ' : (∏ᶜ (fun n : ℕ ↦ ((adicDerivedTowerEvaluation S dS).obj (towerF.obj M)).obj (op n))) ⟶ L'⟦(1 : ℤ)⟧) (hL' : IsDerivedLimitTriangle (fun n : ℕ ↦ ((adicDerivedTowerEvaluation S dS).obj (towerF.obj M)).map (homOfLE (Nat.le_succ n)).op) L' p' δ') : IsDerivedLimitTriangle (fun n : ℕ ↦ ((adicDerivedTowerEvaluation S dS).obj (towerF.obj M)).map (homOfLE (Nat.le_succ n)).op) (F.obj L) (F.map p ≫ (roosProductComparisonIso F hprod ((adicDerivedTowerEvaluation T dT).obj M) ((adicDerivedTowerEvaluation S dS).obj (towerF.obj M)) (towerCompat.app M)).hom) ((roosProductComparisonIso F hprod ((adicDerivedTowerEvaluation T dT).obj M) ((adicDerivedTowerEvaluation S dS).obj (towerF.obj M)) (towerCompat.app M)).inv ≫ F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app L) ∧ IsAdicSequentialDerivedLimit S dS (towerF.obj M) (F.obj L) ∧ (∃ c : F.obj L ⟶ L', c ≫ p' = F.map p ≫ (roosProductComparisonIso F hprod ((adicDerivedTowerEvaluation T dT).obj M) ((adicDerivedTowerEvaluation S dS).obj (towerF.obj M)) (towerCompat.app M)).hom ∧ F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app L ≫ c⟦(1 : ℤ)⟧' = (roosProductComparisonIso F hprod ((adicDerivedTowerEvaluation T dT).obj M) ((adicDerivedTowerEvaluation S dS).obj (towerF.obj M)) (towerCompat.app M)).hom ≫ δ') ∧ (∀ c : F.obj L ⟶ L', c ≫ p' = F.map p ≫ (roosProductComparisonIso F hprod ((adicDerivedTowerEvaluation T dT).obj M) ((adicDerivedTowerEvaluation S dS).obj (towerF.obj M)) (towerCompat.app M)).hom → F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app L ≫ c⟦(1 : ℤ)⟧' = (roosProductComparisonIso F hprod ((adicDerivedTowerEvaluation T dT).obj M) ((adicDerivedTowerEvaluation S dS).obj (towerF.obj M)) (towerCompat.app M)).hom ≫ δ' → IsIso c)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f90c1ef27",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable modules, all statement dependencies, source passages, hypotheses, conclusions, universes, edge cases, docstrings, and dependency repair. Both files compile cleanly through scompile.py; no fixes required."
  }
 }

@@ -253,5 +253,23 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-f3583ed62 (reviewer sub-agent of L); spot-checked: Reviewed item lem-kun-0f09, all six steps, cited DAG statements, Stacks Tags 0F09/0EYU/0EZT/015J/01SD, unit/chapter route, and archived master coefficient category. Verified hypotheses, coefficient corner, canonical exchange, spectral-sequence comparison, edge cases, searches, tool uses, and acyclicity. Wrote review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothBaseChangeLimit",
+  "declaration": "AlgebraicGeometry.smoothBaseChange_of_inverseLimit",
+  "statement": "theorem smoothBaseChange_of_inverseLimit {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (S : Scheme.{u}) (D : Iᵒᵖ ⥤ Scheme.{u}) (η : D ⟶ (Functor.const Iᵒᵖ).obj S) (htrans : ∀ (i j : Iᵒᵖ) (a : i ⟶ j), IsAffineHom (D.map a)) (c : Cone D) (hc : IsLimit c) (g : c.pt ⟶ S) (hη : ∀ (i : Iᵒᵖ), c.π.app i ≫ η.app i = g) (hsm : ∀ (i : Iᵒᵖ), Smooth (η.app i)) (hqc : ∀ (i : Iᵒᵖ), QuasiCompact (η.app i)) (hqs : ∀ (i : Iᵒᵖ), QuasiSeparated (η.app i)) {X : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {X' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ c.pt} (sq : ChosenCartesianSquare g' f' f g) (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (hE : ∀ (q : ℤ) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X) (x : ((Scheme.pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj E)), ∃ n : ℕ, 0 < n ∧ n • x = 0 ∧ IsUnit (n : Γ(S, ⊤))) : IsIso ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app E)",
+  "by": "Q44",
+  "date": "2026-10-16",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothBaseChangeLimit.lean",
+  "branch": "newtargets-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c98b0791c",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Reviewed packet, node, all dependencies, source alignment, Lean signature, docstrings, edge cases, report sections, and searches. scompile.py passed sandbox and library compilation; no substantive or mechanical findings."
  }
 }
