@@ -29,9 +29,90 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-isofibration-exponentiation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The strict pullback $D=T\\times_B E$ is a quasicategory by a direct inner-horn lifting argument. Given $\\Lambda_i^n\\to D$, first project to $T$ and choose a filler $t:\\Delta^n\\to T$, using that $T$ is a quasicategory. The $E$ coordinate of the horn and $g\\circ t$ form a lifting problem against $p$. Since $p$ is an inner fibration, choose a lift $e:\\Delta^n\\to E$ with $p\\circ e=g\\circ t$. The pair $(t,e)$ is the required filler in $D$. No choices are needed when there is no horn map, so the argument allows $D=\\varnothing$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01H4",
+    "place": "Corollary 4.4.3.19, proof of (1); inner-horn argument written out."
+   }
+  },
+  {
+   "text": "Fix a small quasicategory $Q$. Put $F=\\operatorname{Fun}(Q,T)$, $G=\\operatorname{Fun}(Q,B)$, $H=\\operatorname{Fun}(Q,E)$ and $J=\\operatorname{Fun}(Q,D)$. Apply the exponential-corner statement with $A=\\varnothing$ and $B=Q$ to $p$, and also to the identity isofibrations of $T$ and $D$. The identity of a quasicategory is an isofibration: its inner-horn and equivalence-edge lifting problems are filled by the given bottom simplex or edge itself. Here $\\operatorname{Fun}(\\varnothing,-)=\\Delta^0$, so the exponential-corner statement gives that $F,G,H,J$ are quasicategories and $p_Q:H\\to G$ is an isofibration. In degree $n$, a map $Q\\times\\Delta^n\\to D$ is exactly a pair of maps to $T,E$ with equal composites to $B$. This identifies $J$ with $F\\times_G H$ as simplicial sets, compatibly with both projections and all operators.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F1",
+    "place": "Proposition 4.4.5.1 with empty subcomplex, and the degreewise internal-Hom definition."
+   }
+  },
+  {
+   "text": "First show that $C^\\simeq$ is Kan for each $C=F,G,H,J$. The unique map $C\\to\\Delta^0$ is an isofibration: fill inner horns using the quasicategory condition on $C$, and lift the only equivalence edge in the point by the degenerate identity edge at the specified source vertex. The existing core-fibration lemma therefore makes $C^\\simeq\\to(\\Delta^0)^\\simeq=\\Delta^0$ a Kan fibration. A horn in $C^\\simeq$ has a unique bottom simplex in the point, so its relative filler is exactly a Kan filler in $C^\\simeq$. Apply the same lemma to the isofibration $p_Q:H\\to G$ from step 2 to obtain a Kan fibration $p_Q^\\simeq:H^\\simeq\\to G^\\simeq$. All four quasicategories are small by step 2.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01EZ",
+    "place": "Proposition 4.4.3.7 and Corollary 4.4.3.11."
+   }
+  },
+  {
+   "text": "Write $X=F^\\simeq\\times_{G^\\simeq}H^\\simeq$ and regard it as a simplicial subset of $J=F\\times_G H$. This $X$ is Kan: for a horn in $X$, fill its $F^\\simeq$ coordinate first and then lift its $H^\\simeq$ coordinate against $p_Q^\\simeq$ over the image of that filler in $G^\\simeq$. The pair fills the horn in $X$. Both projections from $J$ carry inverse edges and their two triangle witnesses to inverse edges and witnesses. Hence every simplex of $J^\\simeq$ lies in $X$. Conversely, apply the final assertion of the existing core-fibration lemma to the Kan complex $X$: every edge of $X$ is an equivalence. The inclusion $X\\to J$ preserves the inverse witnesses, so every edge of $X$ becomes an equivalence in $J$. The definition of the core now gives $X\\subseteq J^\\simeq$. These two inclusions prove the strict identity $J^\\simeq=F^\\simeq\\times_{G^\\simeq}H^\\simeq$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01H4",
+    "place": "Corollary 4.4.3.19, proof of (2); the Kan-subcomplex argument, with the core inclusion justified explicitly."
+   }
+  },
+  {
+   "text": "Apply the existing Kan pullback/path-space comparison to $u:F^\\simeq\\to G^\\simeq$ and $v=p_Q^\\simeq:H^\\simeq\\to G^\\simeq$. All three objects are Kan by step 3 and $v$ is a Kan fibration, so it identifies the constant-path map from their strict pullback to $F^\\simeq\\times^h_{G^\\simeq}H^\\simeq$ as a weak homotopy equivalence. Through the strict identity of step 4 this is precisely the comparison in the item. The homotopy pullback is the path-space model in the statement, not a pullback of spaces of objects or a pullback of homotopy categories.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0329",
+    "place": "Proposition 3.4.0.7 and Construction 3.4.0.3; applied with the second leg a Kan fibration."
+   }
+  },
+  {
+   "text": "The maps just used commute with precomposition in $Q$: on $n$-simplices both projections restrict the two coordinates, while the third coordinate is the constant path at their common composite. Thus for every $Q$ the displayed map is the mapping-space comparison of the given projection square. By the specified mapping spaces $\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(Q,C)=\\operatorname{Fun}(Q,C)^\\simeq$, the defining universal property of a pullback is exactly that all these comparisons are equivalences of spaces. Step 5 proves this property. Together with step 1 it proves both assertions, without any fibration assumption on $g$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/032Y",
+    "place": "Proposition 4.5.3.15 and Remark 4.5.3.16, interpreted as the mapping-space universal property specified in the item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-kan-pullback-path-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2: coherent finite-coefficient adjunction infrastructure. Detailed auxiliary argument follows the online Kerodon proof of Corollary 4.4.3.19 (01H4), then exponentiation (01F1) and the path comparison (0329). Online sources are not archived in literature/, so this is marked agent."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,10 +155,101 @@
    "results": "{\"t\": \"2026-10-16T17:59:32Z\", \"tool\": \"grep\", \"query\": \"Isofibration|CategoricalPullback|CatInfinity|Cat_infty\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean\"], \"digest\": \"078f3f93019179ea\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned declarations concern ordinary categories, inner-fibration closure, or the Quillen model structure. Read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:61-70, StrictBicategory.lean:14-32, SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:65-73, and CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean:71-86. None gives coherent categorical pullbacks for quasicategorical isofibrations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pullback of quasicategories along an isofibration computes a pullback of infinity categories",
+   "results": "{\"t\": \"2026-10-16T18:46:14Z\", \"tool\": \"leanfinder\", \"query\": \"A pullback of quasicategories along an isofibration computes a pullback of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instFinitePullback\", \"SSet.finite_of_isPullback\", \"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.instHasPullbacksToPreOneHypercover\", \"SSet.QCat.bicategory\", \"SSet.QCat\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"a77ade07c8721edf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoricalPullback and Quillen Kan fibrations do not state the quasicategorical mapping-space assertion; the InnerFibration exponential corner lemma omits equivalence lifting and the core/path comparison. Candidate types and their source were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InnerFibration\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-16T18:46:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.innerFibration_pullbackObjObjπ\"], \"digest\": \"a84988be7f018462\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoricalPullback and Quillen Kan fibrations do not state the quasicategorical mapping-space assertion; the InnerFibration exponential corner lemma omits equivalence lifting and the core/path comparison. Candidate types and their source were read."
+  },
+  {
+   "tool": "grep",
+   "query": "Isofibration|CategoricalPullback|core.*[Pp]ullback|core.*[Ff]ibration",
+   "results": "{\"t\": \"2026-10-16T18:46:32Z\", \"tool\": \"grep\", \"query\": \"Isofibration|CategoricalPullback|core.*[Pp]ullback|core.*[Ff]ibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean\"], \"digest\": \"078f3f93019179ea\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoricalPullback and Quillen Kan fibrations do not state the quasicategorical mapping-space assertion; the InnerFibration exponential corner lemma omits equivalence lifting and the core/path comparison. Candidate types and their source were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict pullbacks of isofibrations of infinity categories are categorical pullbacks",
+   "results": "{\"t\": \"2026-10-16T18:46:49Z\", \"tool\": \"leansearch\", \"query\": \"Strict pullbacks of isofibrations of infinity categories are categorical pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.CategoricalPullback.mkIso\", \"CategoryTheory.Limits.CategoricalPullback.instIsIsoFst\", \"CategoryTheory.IsPullback.of_iso'\", \"CategoryTheory.Limits.CategoricalPullback.iso\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.asSquare_iso\", \"CategoryTheory.Limits.CategoricalPullback.isIso_iff\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.iso\", \"CategoryTheory.IsPullback.of_vert_isIso\"], \"digest\": \"bfe86818d234cded\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoricalPullback and Quillen Kan fibrations do not state the quasicategorical mapping-space assertion; the InnerFibration exponential corner lemma omits equivalence lifting and the core/path comparison. Candidate types and their source were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking the maximal Kan subcomplex of a quasicategory sends an isofibration to a Kan fibration",
+   "results": "{\"t\": \"2026-10-16T18:46:51Z\", \"tool\": \"leanfinder\", \"query\": \"Taking the maximal Kan subcomplex of a quasicategory sends an isofibration to a Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"6b2700da93838bd5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoricalPullback and Quillen Kan fibrations do not state the quasicategorical mapping-space assertion; the InnerFibration exponential corner lemma omits equivalence lifting and the core/path comparison. Candidate types and their source were read."
+  },
+  {
+   "tool": "grep",
+   "query": "def core|theorem.*core|Core|Isofibration",
+   "results": "{\"t\": \"2026-10-16T18:47:06Z\", \"tool\": \"grep\", \"query\": \"def core|theorem.*core|Core|Isofibration\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoricalPullback and Quillen Kan fibrations do not state the quasicategorical mapping-space assertion; the InnerFibration exponential corner lemma omits equivalence lifting and the core/path comparison. Candidate types and their source were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy pullback universal property for simplicial functor mapping spaces and cores of infinity categories",
+   "results": "{\"t\": \"2026-10-16T18:47:20Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy pullback universal property for simplicial functor mapping spaces and cores of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor\", \"SSet.Truncated.HomotopyCategory.lift_obj_mk\", \"SSet.Truncated.mapHomotopyCategory\", \"CategoryTheory.Arrow.cechNerve_map\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_map_homMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\"], \"digest\": \"fb5692587fbd3675\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoricalPullback and Quillen Kan fibrations do not state the quasicategorical mapping-space assertion; the InnerFibration exponential corner lemma omits equivalence lifting and the core/path comparison. Candidate types and their source were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The maximal infinity groupoid functor sends categorical fibrations to Kan fibrations",
+   "results": "{\"t\": \"2026-10-16T18:47:51Z\", \"tool\": \"leansearch\", \"query\": \"The maximal infinity groupoid functor sends categorical fibrations to Kan fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grpd\", \"HomotopicalAlgebra.fibrations\", \"HomotopicalAlgebra.CategoryWithFibrations.fibrations\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"HomotopicalAlgebra.fibrations_over_def\", \"HomotopicalAlgebra.Fibration.recOn\", \"CategoryTheory.FreeGroupoid.functorEquiv\", \"HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations\"], \"digest\": \"ac702e5a30fe161f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoricalPullback and Quillen Kan fibrations do not state the quasicategorical mapping-space assertion; the InnerFibration exponential corner lemma omits equivalence lifting and the core/path comparison. Candidate types and their source were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"KanComplex\"",
+   "results": "{\"t\": \"2026-10-16T18:47:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"KanComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryOfKanComplex\"], \"digest\": \"0b562f163c10e67e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoricalPullback and Quillen Kan fibrations do not state the quasicategorical mapping-space assertion; the InnerFibration exponential corner lemma omits equivalence lifting and the core/path comparison. Candidate types and their source were read."
+  },
+  {
+   "tool": "grep",
+   "query": "core|Core|[Ii]sofibration",
+   "results": "{\"t\": \"2026-10-16T18:47:51Z\", \"tool\": \"grep\", \"query\": \"core|Core|[Ii]sofibration\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoricalPullback and Quillen Kan fibrations do not state the quasicategorical mapping-space assertion; the InnerFibration exponential corner lemma omits equivalence lifting and the core/path comparison. Candidate types and their source were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isofibration between quasicategories induces a Kan fibration between their maximal Kan subcomplexes",
+   "results": "{\"t\": \"2026-10-16T18:47:58Z\", \"tool\": \"leanfinder\", \"query\": \"An isofibration between quasicategories induces a Kan fibration between their maximal Kan subcomplexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.KanComplex\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.QCat.bicategory\"], \"digest\": \"95e5cc47f21733c0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoricalPullback and Quillen Kan fibrations do not state the quasicategorical mapping-space assertion; the InnerFibration exponential corner lemma omits equivalence lifting and the core/path comparison. Candidate types and their source were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of an inner fibration that lifts equivalences to the cores is a Kan fibration",
+   "results": "{\"t\": \"2026-10-16T18:47:59Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of an inner fibration that lifts equivalences to the cores is a Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\"], \"digest\": \"f79ca1b0fe685c13\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoricalPullback and Quillen Kan fibrations do not state the quasicategorical mapping-space assertion; the InnerFibration exponential corner lemma omits equivalence lifting and the core/path comparison. Candidate types and their source were read."
+  },
+  {
+   "tool": "grep",
+   "query": "core|Core|Isofibration|isofibration",
+   "results": "{\"t\": \"2026-10-16T18:48:46Z\", \"tool\": \"grep\", \"query\": \"core|Core|Isofibration|isofibration\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean\"], \"digest\": \"935d6390749d1b01\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoricalPullback and Quillen Kan fibrations do not state the quasicategorical mapping-space assertion; the InnerFibration exponential corner lemma omits equivalence lifting and the core/path comparison. Candidate types and their source were read."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-arrow-source-fibers",
@@ -85,5 +257,21 @@
   "group": "Q17"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-isofibration-pullback-limit",
+  "worker": "stage1",
+  "group": "Q75",
+  "summary": "Preserved the statement and its dependencies. Wrote inner-horn lifting, exponentiation along the empty inclusion, the strict identity of cores and the path-space comparison. The second reader reused the newly landed lem-coef-infinity-core-kan-fibration, derived absolute core Kan filling via the map to a point, removed the duplicate new node, and removed the off-unit outer-horn tool. No new nodes, Mathlib leaves, attachments, definitions or route changes.",
+  "blueprint": "Realizes the coherent categorical fiber infrastructure below proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient mapping-complex adjunction before the displayed derived inverse limit, through the existing ancestry in blueprint.from. The item supplies the strict-fiber/pullback identification used by lem-coef-infinity-arrow-source-fibers; the existing core-fibration node supplies core lifting."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-d863a9427",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-d863a9427 (reviewer sub-agent of L); spot-checked: I read all six steps of the item and checked each one; every cited statement says what its step takes from it. Step 1: the strict pullback D is a quasicategory, by filling the horn in T and then lifting in E against the inner fibration p. Step 2: applying the exponentiation node with A empty and B=Q (Fun of the empty set is a point) makes Fun(Q,-) of each object a quasicategory and Fun(Q,E)->Fun(Q,B) an isofibration; identities are isofibrations; and Fun(Q,D) equals Fun(Q,T) x_{Fun(Q,B)} Fun(Q,E) degree by degree. Step 3: lem-coef-infinity-core-kan-fibration, applied to C->point (the lifted edge is the degenerate one, an equivalence), shows every core is Kan, and applied to p_Q it gives a Kan fibration of cores. Step 4: the core of Fun(Q,D) equals the pullback of cores; this needs only two-stage horn filling and the Kan-complex clause of the same node, so marking it elementary is right. Step 5: lem-coef-kan-pullback-path-comparison applies with the core of p_Q as the Kan-fibration leg; its path-space model has the same endpoint order and constant-path map as the item. Step 6: the item defines a pullback in Cat_inf by exactly these mapping-space comparisons, natural in Q, so step 5 proves it. The statement is unchanged; the other leg g stays arbitrary and no nonemptiness is assumed. Small cases checked: empty E or T, empty Q, p the identity. Without equivalence lifting the claim fails: the inclusion of one object into the contractible two-object groupoid is an inner fibration, yet the strict pullback over the other object is empty while the homotopy pullback is a point. There are no new nodes: the worker's proposed core node was correctly dropped for the existing lem-coef-infinity-core-kan-fibration. All proof citations are in the item's unit or are definitions, so no tool_uses are needed. There is no cycle (85 nodes reached, the item is not among them). No duplicate exists among the isofibration and pullback nodes I read (isofibration-base-change, simplicial-pullback-equivalence, kan-homotopy-pullback-invariance, brown-fibrant, joyal model structure and characterizations, outer-horn filling). The item is not a target node, so there is no base-change morphism or coefficient category to check. The Kerodon sources (033R, 01H4, 01F1, 01EZ, 0329, 032Y) are not in the literature folder: they are recorded as WANTED and proof_origin is agent, which is correct. Full checks are in review.md; no fixes were written."
+ }
 }

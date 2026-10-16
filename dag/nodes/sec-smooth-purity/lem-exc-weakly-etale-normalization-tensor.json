@@ -29,9 +29,145 @@
   "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=C\\setminus\\{0\\}$, $T=D\\otimes_C K$, and $H=C'\\otimes_C D$. Weak etaleness gives flatness of $D$ over $C$ by [def-weil-pbc-ind-etale-algebra]. For $s\\in S$, multiplication by $s$ on $C$ is injective, so its tensor with $D$ is injective by the explicit injectivity criterion in [def-weil-pbc-flat-ring-map]; this is multiplication by $f(s)$ on $D$. Thus $f(S)$ consists of nonzerodivisors. By [lem-weil-pbc-localization-base-change], $T=f(S)^{-1}D$. The fraction equality in [def-weil-pbc-module-localization] now shows $D\\to T$ injective: $d/1=0$ implies $f(s)d=0$, hence $d=0$. Applying the same flatness criterion to the inclusion $C'\\hookrightarrow K$ gives an injection $H\\hookrightarrow K\\otimes_C D\\cong T$, where the last swap sends $k\\otimes d$ to $d\\otimes k$ (and swaps back for its inverse).",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-localization-base-change",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HB (definition-flat), 00DK (lemma-tensor-localization), and 07JZ (definition-localization-module)"
+   }
+  },
+  {
+   "text": "Base change of $C\\to D$ along $C\\to K$ is weakly etale by [lem-exc-weakly-etale-ring-base-change-composition]; its target is $T$, up to the pure-tensor swap. Apply [lem-weil-pbc-weak-etale-field] with the field $K$: $T$ is reduced and every finitely generated $K$-subalgebra of $T$ is finite etale. Since $D\\hookrightarrow T$, any nilpotent of $D$ is zero in $T$ and hence zero in $D$. This proves the reducedness clause of the item.",
+   "uses": [
+    "lem-exc-weakly-etale-ring-base-change-composition",
+    "lem-weil-pbc-weak-etale-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 092H (lemma-base-change-weakly-etale), part (2), and 092Q (lemma-absolutely-flat-over-field)"
+   }
+  },
+  {
+   "text": "We identify the ambient ring $T$ with $Q(D)$ without assuming it is a field. If $a$ is a nonzerodivisor of $D$, its image $u=a/1$ is a nonzerodivisor of $T$: from $u(b/f(s))=0$ the localization equality gives $f(t)ab=0$ for some $t\\in S$, whence $f(t)b=0$ and $b/f(s)=0$. By Step 2, the subalgebra $K[u]\\subset T$ is finite etale. By [lem-sc-finite-etale-algebra-criterion] it is a finite product of fields. In that product every coordinate of $u$ is nonzero: a zero coordinate would give a nonzero coordinate idempotent $e\\in K[u]\\subset T$ with $ue=0$. Taking the coordinatewise inverses therefore gives an inverse to $u$ in $K[u]$, hence in $T$. Thus every nonzerodivisor of $D$ is a unit in $T$. The two fraction maps are $Q(D)\\to T$, $a/b\\mapsto(a/1)(b/1)^{-1}$, and $T=f(S)^{-1}D\\to Q(D)$, $d/f(s)\\mapsto d/f(s)$. They are well-defined by the fraction equality of [def-weil-pbc-module-localization], since $f(S)$ consists of nonzerodivisors; they are inverse on fractions and are $D$-algebra maps. Hence $T\\cong Q(D)$ canonically.",
+   "uses": [
+    "lem-sc-finite-etale-algebra-criterion",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3 (lemma-etale-over-field) and the localization fraction construction, Tag 07JZ"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-integral-closure-finite-extension-normal] to the identity finite extension $K/K$. It says precisely that $C'$ is an integrally closed domain and $K$ is its fraction field. Base change of $C\\to D$ along $C\\to C'$ gives a weakly etale map $C'\\to H$ by [lem-exc-weakly-etale-ring-base-change-composition]. Locality or a domain hypothesis on $H$ is not needed here.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-exc-weakly-etale-ring-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092H (lemma-base-change-weakly-etale); algebra.tex Tags 034L (lemma-integral-closure-in-normal) and 0308 (lemma-integral-closure-transitive)"
+   }
+  },
+  {
+   "text": "The ambient ring in the weak-etale integral-closedness theorem for $C'\\to H$ is $H\\otimes_{C'}K$. Its explicit isomorphism to $T$ sends $(c'\\otimes d)\\otimes k$ to $d\\otimes(c'k)$ and has inverse $d\\otimes k\\mapsto(1\\otimes d)\\otimes k$. Here $c'$ is viewed in $K$. These expressions respect the $C$- and $C'$-balancing relations and multiplication. Their two composites fix each pure tensor, using $(c'\\otimes d)\\otimes k=(1\\otimes d)\\otimes c'k$. The tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] therefore gives mutually inverse algebra maps, whose restriction on $H$ is exactly the injection of Step 1.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tensor universal property and balancing; compare Tag 00D2 (lemma-tensor-with-bimodule)"
+   }
+  },
+  {
+   "text": "Now [lem-weil-pbc-weak-etale-integral-closure], applied to the integrally closed domain $C'$ with fraction field $K$ and the weakly etale algebra $H$, says that $H$ is integrally closed in $H\\otimes_{C'}K$. Step 5 identifies this with the inclusion $H\\hookrightarrow T$, so $H$ is integrally closed in $T=Q(D)$.",
+   "uses": [
+    "lem-weil-pbc-weak-etale-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092W (lemma-normality-goes-up)"
+   }
+  },
+  {
+   "text": "Every element of $C'$ is integral over $C$ by [def-weil-pbc-integral-closure]. Consequently [lem-weil-pbc-integral-base-change], and the swap $d\\otimes c'\\leftrightarrow c'\\otimes d$, show that $H$ is integral over $D$. Thus the injection $H\\hookrightarrow Q(D)$ has image contained in $D'$. Conversely, if $x\\in D'$, a monic polynomial over $D$ annihilating $x$ is also a monic polynomial over $H$, since the inclusion of $D$ in $Q(D)$ factors through $H$ via $d\\mapsto1\\otimes d$. Integral closedness from Step 6 forces $x\\in H$. The two subrings are equal, proving the canonical $D$-algebra isomorphism $C'\\otimes_C D\\cong D'$. Its map on pure tensors is $c'\\otimes d\\mapsto c'd$ in $Q(D)$, with $c'$ mapped through $K\\to T$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JK (lemma-base-change-integral), part (1), and Tag 00GP (definition-integral-closure)"
+   }
+  },
+  {
+   "text": "As $D$ is reduced and Noetherian, [lem-weil-pbc-reduced-noetherian-total-ring-fractions] gives finitely many distinct minimal primes $P_1,\\ldots,P_t$ and a canonical $D$-algebra isomorphism $Q(D)\\cong\\prod_i D_{P_i}$, with $D_{P_i}$ a field and $P_iD_{P_i}=0$. Explicitly $D_{P_i}\\cong\\operatorname{Frac}(D/P_i)$: the map $D\\to D_{P_i}$ kills $P_i$; its kernel is exactly $P_i$, since $sd=0$ with $s\\notin P_i$ forces $d\\in P_i$. Every nonzero class $\\bar s\\in D/P_i$ has $s\\notin P_i$ and becomes invertible. The maps of fields send $d/s$ to $\\bar d/\\bar s$ and back. They are well-defined and inverse by the fraction relations of [def-weil-pbc-localization-at-prime]. Write $L_i=\\operatorname{Frac}(D/P_i)$ for these factors.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 02LX (lemma-total-ring-fractions-no-embedded-points) and 00EU (lemma-minimal-prime-reduced-ring); compare morphisms.tex Tag 035P, parts (1)-(2)"
+   }
+  },
+  {
+   "text": "Put $E_i=\\overline{D/P_i}^{\\,L_i}$. Under Step 8's isomorphism, a tuple integral over $D$ has integral coordinates over $D/P_i$, by projecting its monic equation. Conversely, for $x_i\\in E_i$ choose a monic annihilating polynomial over $D/P_i$ and lift each of its coefficients to $D$, preserving the leading coefficient $1$, to obtain $p_i\\in D[X]$. The monic polynomial $p=\\prod_i p_i$ annihilates the tuple $(x_i)$: in coordinate $i$ its $p_i$ factor is zero. This finite product proves that the integral closure of $D$ in $\\prod_iL_i$ is exactly $\\prod_iE_i$, with the same $D$-algebra structure. This uses only the monic-polynomial definition in [def-weil-pbc-integral-closure]; in particular it does not apply a theorem about products of base rings to the diagonal base ring $D$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization), part (3); explicit coordinatewise monic-polynomial argument"
+   }
+  },
+  {
+   "text": "For the given minimal prime $P$, choose its index $j$ in the finite list of Step 8 and set $F=\\prod_{i\\ne j}E_i$ with its induced $D$-algebra structure. The isomorphism of Step 9 followed by the coordinate permutation and grouping $\\prod_iE_i\\to E_j\\times\\prod_{i\\ne j}E_i$ is a $D$-algebra isomorphism $D'\\cong E\\times F$. Its first projection sends $d\\in D$ to its class modulo $P$ in $E$, since the coordinate maps in Step 8 are precisely the localization and quotient fraction maps. If there is only one minimal prime, the empty product defining $F$ is the zero ring and the same maps apply.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization), part (3), selecting a component"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "lem-exc-weakly-etale-ring-base-change-composition",
+  "lem-sc-finite-etale-algebra-criterion",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-integral-base-change",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-weak-etale-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent expansion of the normalization comparison using Tags 092H, 092Q and 092W, followed by the explicit affine product argument of morphisms.tex Tag 035P; the cited Greco paper is not present locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,15 +217,72 @@
    "results": "{\"t\": \"2026-10-16T17:00:30Z\", \"tool\": \"grep\", \"query\": \"toIntegralClosure.*(bijective|equiv)|[Cc]atenar|[Nn]ormalization.*[Ww]eak\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\"], \"digest\": \"0b71712871005144\"}",
    "date": "2026-10-16",
    "verdict": "no exact match: the normalization comparison map needs smoothness or localization for its bijectivity theorems; flatness gives only injectivity, and integrality of tensor products does not identify normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toIntegralClosure_bijective\"",
+   "results": "{\"t\": \"2026-10-16T19:17:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"toIntegralClosure_bijective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure_bijective_of_smooth\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_bijective_of_tower\"], \"digest\": \"3d944d372fa5a6f1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: smoothness, localization, or finite-presentation etaleness gives stronger hypotheses; the flat comparison gives only injectivity. None supplies both the weak-etale normalization equality and its specified minimal-prime factor."
+  },
+  {
+   "tool": "grep",
+   "query": "toIntegralClosure_bijective_of_(smooth|isLocalization)|toIntegralClosure_injective_of_flat",
+   "results": "{\"t\": \"2026-10-16T19:17:57Z\", \"tool\": \"grep\", \"query\": \"toIntegralClosure_bijective_of_(smooth|isLocalization)|toIntegralClosure_injective_of_flat\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\"], \"digest\": \"4aad7bc840673cd3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: smoothness, localization, or finite-presentation etaleness gives stronger hypotheses; the flat comparison gives only injectivity. None supplies both the weak-etale normalization equality and its specified minimal-prime factor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization tensor product with a weakly etale algebra is the integral closure in the total fraction ring",
+   "results": "{\"t\": \"2026-10-16T19:17:58Z\", \"tool\": \"leansearch\", \"query\": \"Normalization tensor product with a weakly etale algebra is the integral closure in the total fraction ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"isIntegrallyClosed_iff_isIntegralClosure\", \"IsIntegralClosure.of_isIntegrallyClosed\", \"integralClosure\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"completeIntegralClosure\", \"Ring.NormalClosure\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\"], \"digest\": \"06b5cb290eb8d67b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: smoothness, localization, or finite-presentation etaleness gives stronger hypotheses; the flat comparison gives only injectivity. None supplies both the weak-etale normalization equality and its specified minimal-prime factor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weakly etale base change carries the normalization of a domain to the normalization of the target and the latter splits over minimal primes",
+   "results": "{\"t\": \"2026-10-16T19:18:06Z\", \"tool\": \"leanfinder\", \"query\": \"A weakly etale base change carries the normalization of a domain to the normalization of the target and the latter splits over minimal primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"Algebra.Etale.baseChange\", \"RingHom.Etale.ofLocalizationSpanTarget\"], \"digest\": \"721b94dce9aa5bc8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: smoothness, localization, or finite-presentation etaleness gives stronger hypotheses; the flat comparison gives only injectivity. None supplies both the weak-etale normalization equality and its specified minimal-prime factor."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-weakly-etale-local-component-dimension",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-weakly-etale-normalization-tensor",
+  "worker": "stage1",
+  "summary": "Replaced the earlier clause-relabelling attempt by ten proof steps using existing DAG inputs only. The proof identifies the generic tensor algebra with total fractions via finite etale subalgebras; proves the normalization equality by weak-etale integral closedness and integrality; and constructs the minimal-prime normalization factors by lifting monic polynomials. Removed all three undelivered proposed children. The item statement and statement dependencies are unchanged.",
+  "blueprint": "Realizes the second paragraph of thm-exc-curve-open-dimension-general.proof.md in main-20261015, the sentence that localization and strict henselization preserve excellence: the existing ancestry refines this through Greco Theorem 5.3 and Lemma 5.5, whose normalization and component-factor inputs are proved here. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-weak-etale-field",
+    "why": "The generic fibre is weakly etale over K; its reducedness and finite etale finitely generated subalgebras identify its ambient total-fraction ring. This is a general algebra tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "The general canonical product description of Q(D) supplies its finite minimal-prime components after reducedness is proved; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NB-0377c9b2d",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-0377c9b2d (reviewer sub-agent of L); spot-checked: I read the item, all 10 steps and the statements of all 18 cited nodes. No new nodes were created and the statement and stmt_deps are unchanged and not weakened. The statement is true; I checked it on a field, a DVR, a non-normal domain with f=id, the reducible ring k[x,y]_(x,y)/(xy) and the one-minimal-prime case (F=0). Step 1: flatness of D over C makes f(S) nonzerodivisors and IsLocalization.tensor gives T=f(S)^{-1}D, so D and H inject into T. Step 2: base change and lem-weil-pbc-weak-etale-field (matches Stacks 092Q, more-algebra.tex l.30504) make T reduced, hence D reduced. Step 3: K[u] is finite etale, hence a product of fields; a zero coordinate would give an idempotent killed by u, so u is a unit and T=Q(D); I checked well-definedness and inverses of both fraction maps. Steps 4-6: C' is a normal domain with fraction field K, and 092W (l.30728, Lean-closed node) applies to C'->H, with the explicit isomorphism H(x)_{C'}K=T. Step 7: integral base change plus Step 6 gives H=D'. Steps 8-10: Q(D) is the product of D_{P_i}, each D_{P_i}=Frac(D/P_i), and the product of lifted monic polynomials gives prod E_i; the regrouping handles the empty product. The steps marked elementary really are. No duplicate found by rg over dag/nodes: the normalization-dimension, Nagata-ascent, total-fractions and minimal-product nodes all differ. Accepted tool_uses: lem-weil-pbc-weak-etale-field and lem-weil-pbc-reduced-noetherian-total-ring-fractions, both generic algebra not on the sk-prop-a1-kummer route. No SGA is cited. Greco 1976 is not in literature/, so I cannot verify the NB second reader's claim to have compared it; this is harmless because proof_origin is agent and the WANTED line stands. No fixes."
+ }
 }

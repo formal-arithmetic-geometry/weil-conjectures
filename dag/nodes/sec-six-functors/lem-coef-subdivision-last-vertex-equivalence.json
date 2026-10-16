@@ -33,9 +33,111 @@
   "lem-coef-subdivision-face-poset-calculus",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Subdivision preserves all small colimits, including the initial object, coproducts, pushouts and sequential colimits. Here is the required universal-property argument, rather than an assumption about subdivision. For a small diagram $D:J\\to\\mathrm{sSet}$ and any $Y$, the natural bijection of [lem-coef-subdivision-face-poset-calculus] identifies maps $\\operatorname{Sd}(\\operatorname{colim}_J D)\\to Y$ with maps $\\operatorname{colim}_J D\\to\\operatorname{Ex}Y$, hence with compatible families of maps $D(j)\\to\\operatorname{Ex}Y$ by [def-weil-pbc-category-colimit], hence with compatible families $\\operatorname{Sd}D(j)\\to Y$. Naturality of the adjunction makes these exactly the cocone equations, and both directions preserve restriction to each summand. This is the colimit universal property for $\\operatorname{Sd}D$. Also use the naturality of $\\lambda$ in the face-poset node: for $u:A\\to B$, $u\\lambda_A=\\lambda_B\\operatorname{Sd}(u)$. Therefore, under these canonical colimit identifications, the map induced by the components $\\lambda_{D(j)}$ is precisely $\\lambda_{\\operatorname{colim}D}$.",
+   "uses": [
+    "lem-coef-subdivision-face-poset-calculus",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00YZ",
+    "place": "Proposition 3.3.4.8, the colimit identifications used in the skeletal proof; the adjunction is Corollary 3.3.3.4 (00Y9); online source read 2026-10-17, local archive WANTED; explicit agent argument."
+   }
+  },
+  {
+   "text": "For every $n\\geq0$, [lem-coef-subdivision-face-poset-calculus] identifies $\\lambda_{\\Delta^n}$ with the nerve of $M:\\mathcal P_+([n])\\to[n]$, $M(F)=\\max F$. Define $C:[n]\\to\\mathcal P_+([n])$ to be constant with value $[n]$. There are natural transformations $\\mathrm{id}_{\\mathcal P_+([n])}\\Rightarrow CM$, given by $F\\subseteq[n]$, and $\\mathrm{id}_{[n]}\\Rightarrow MC$, given by $a\\leq n$. For a poset these are natural because there is at most one arrow with fixed endpoints. Apply [lem-coef-nerve-natural-homotopy-equivalence] with $P=M$, $Q=C$. It says that $NM$, the actual last-vertex map under the displayed identification, is a weak homotopy equivalence. This includes $n=0$.",
+   "uses": [
+    "lem-coef-subdivision-face-poset-calculus",
+    "lem-coef-nerve-natural-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00YZ",
+    "place": "Proposition 3.3.4.8, final standard-simplex case, made explicit using the largest elements; online source read 2026-10-17, local archive WANTED; explicit agent argument."
+   }
+  },
+  {
+   "text": "Small coproducts of weak homotopy equivalences are weak homotopy equivalences. To check this directly from [def-cbc-enhanced-diagrams-cones], the quotient defining $|\\coprod_{s\\in S}A_s|$ never identifies representatives with different labels $s$, and its quotient topology on each labelled part is the defining topology of $|A_s|$. Thus $|\\coprod_s A_s|\\cong\\coprod_s|A_s|$ as topological spaces, and the same holds for the target. Every path remains in one summand, so the set of path components is the disjoint union of the summands' component sets. At a basepoint in summand $s$, every based cube and every based homotopy remains in that summand, since the cube and its product with the interval are connected. Hence the based homotopy groups and their induced maps are exactly those for the $s$th map. This proves the assertion, also for the empty index set. Together with step 1, $\\lambda_{\\coprod_s A_s}$ is consequently a weak homotopy equivalence whenever every $\\lambda_{A_s}$ is.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00YZ",
+    "place": "Proposition 3.3.4.8, coproduct reduction in the last paragraph, expanded from the realization definition; online source read 2026-10-17, local archive WANTED; explicit agent argument."
+   }
+  },
+  {
+   "text": "Let $i_n:\\partial\\Delta^n\\hookrightarrow\\Delta^n$. In the face-poset description of [lem-coef-subdivision-face-poset-calculus], $\\operatorname{Sd}\\Delta^n$ is the nerve of the nonempty subsets of $[n]$, whereas $\\operatorname{Sd}\\partial\\Delta^n$ is the nerve of the nonempty proper subsets. The compatibility with subcomplex inclusions in that node identifies $\\operatorname{Sd}(i_n)$ with the nerve of this subposet inclusion. In degree $r$, it is inclusion of the flags of proper subsets among all flags, hence is injective. When $n=0$ the source is empty, so it is still injective. For a small set $S$, the map $\\coprod_S\\partial\\Delta^n\\to\\coprod_S\\Delta^n$ is degreewise injective, and so is its image under $\\operatorname{Sd}$: by step 1 it is a disjoint union of the just-checked injections. No assertion that an arbitrary left adjoint preserves monomorphisms is being used.",
+   "uses": [
+    "lem-coef-subdivision-face-poset-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00YL",
+    "place": "Proposition 3.3.3.17, finite ordered complexes and compatibility with subcomplex inclusions; online source read 2026-10-17, local archive WANTED; explicit agent argument."
+   }
+  },
+  {
+   "text": "For each small simplicial set $K$, apply [lem-coef-infinity-monomorphism-boundary-cells] to $\\varnothing\\hookrightarrow K$. Denote any resulting filtration by $Z_0(K)=\\varnothing\\subseteq Z_1(K)\\subseteq\\cdots$, with colimit $K$. Its stage $n$ is the pushout of $A_n(K)=\\coprod_{S_n(K)}\\partial\\Delta^n\\to B_n(K)=\\coprod_{S_n(K)}\\Delta^n$, where $S_n(K)$ is the set of nondegenerate $n$-simplices of $K$. These are small sets. For $K=\\partial\\Delta^n$ there are no nondegenerate $k$-simplices for $k\\geq n$: a simplex is a monotone $[k]\\to[n]$ with proper image, whose increasing enumeration has at most $n$ vertices; the map factors through the surjection onto that image, so it is degenerate if $k\\geq n$. Thus all stages $Z_k(\\partial\\Delta^n)\\to Z_{k+1}(\\partial\\Delta^n)$ for $k\\geq n$ are pushouts of empty coproducts and are isomorphisms. Their colimit property identifies $Z_n(\\partial\\Delta^n)$ with $\\partial\\Delta^n$. This argument also covers $n=0$, when the boundary is empty.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00YZ",
+    "place": "Proposition 3.3.4.8, skeletal attachment square; Proposition 1.5.5.14 (0077), proof (b), for the chosen filtration; online source read 2026-10-17, local archive WANTED; explicit agent argument."
+   }
+  },
+  {
+   "text": "Induct on $n$ with the simultaneous claim that $\\lambda_{Z_n(K)}$ is a weak homotopy equivalence for every small $K$ and every filtration supplied in step 5. For $n=0$ both $Z_0(K)$ and $\\operatorname{Sd}Z_0(K)$ are empty by step 1, so the map is an isomorphism and satisfies the defining component and homotopy-group conditions. Assume the claim for $n$. Applied to $K=\\partial\\Delta^n$, and using the stabilization identification in step 5 and naturality from step 1, it gives that $\\lambda_{\\partial\\Delta^n}$ is a weak homotopy equivalence. This invokes the inductive claim at stage $n$, not the desired stage $n+1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00YZ",
+    "place": "Proposition 3.3.4.8, induction on skeleta with explicit simultaneous induction and empty base; online source read 2026-10-17, local archive WANTED; explicit agent argument."
+   }
+  },
+  {
+   "text": "Fix $K$ in the induction step. By step 3 and the boundary conclusion of step 6, $\\lambda_{A_n(K)}$ is a weak homotopy equivalence. By steps 2 and 3, $\\lambda_{B_n(K)}$ is a weak homotopy equivalence. The inductive claim gives the same for $\\lambda_{Z_n(K)}$. Apply subdivision to the pushout span $A_n(K)\\to B_n(K)$, $A_n(K)\\to Z_n(K)$. Step 1 says its pushout is $\\operatorname{Sd}Z_{n+1}(K)$. Naturality of $\\lambda$ gives a commuting map from this subdivided span to the original span, with those three weak homotopy equivalences as its components. The boundary-to-simplex leg of both spans is degreewise injective by step 4. Thus all the hypotheses of the pushout clause of [lem-coef-sset-gluing-filtered-equivalences] hold. Its conclusion says that the induced map $\\operatorname{Sd}Z_{n+1}(K)\\to Z_{n+1}(K)$ is a weak homotopy equivalence; step 1 identifies that induced map with $\\lambda_{Z_{n+1}(K)}$. This completes the induction, even if the set of attaching simplices is empty or infinite. No injectivity is required of the attaching map $A_n(K)\\to Z_n(K)$.",
+   "uses": [
+    "lem-coef-sset-gluing-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00YZ",
+    "place": "Proposition 3.3.4.8, gluing along the skeletal attachment square; the existing pushout gluing lemma packages the source mapping-space fiber argument; online source read 2026-10-17, local archive WANTED; explicit agent argument."
+   }
+  },
+  {
+   "text": "For the given $T$, the sequence $(Z_n(T))_{n\\geq0}$ has degreewise colimit $T$ by step 5. Step 1 identifies the colimit of $(\\operatorname{Sd}Z_n(T))$ with $\\operatorname{Sd}T$ and the colimit of the natural transformation $(\\lambda_{Z_n(T)})$ with $\\lambda_T$. The category $\\mathbb N$ with its usual order is small and filtered: it is nonempty and the maximum bounds each finite collection. Every component is a weak homotopy equivalence by the induction. Apply [lem-coef-filtered-colimit-weak-equivalences] to these two diagrams and this natural transformation. The conclusion is exactly that $\\lambda_T$ induces a bijection on path components and isomorphisms on all based homotopy groups after realization. In particular $T$ need not be Kan, finite-dimensional, nonempty or nonsingular.",
+   "uses": [
+    "lem-coef-filtered-colimit-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00YZ",
+    "place": "Proposition 3.3.4.8, passage from finite skeleta to all of T, using Proposition 3.2.8.3 (00XE); online source read 2026-10-17, local archive WANTED; explicit agent argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-subdivision-face-poset-calculus",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-sset-gluing-filtered-equivalences",
+  "lem-coef-filtered-colimit-weak-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/00YZ",
+  "place": "Proposition 3.3.4.8, skeletal induction and filtered-colimit passage, with the source mapping-space fiber argument replaced by the existing general pushout gluing lemma; online source read 2026-10-17. No archival Kerodon copy exists locally; WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,10 +180,52 @@
    "results": "{\"t\": \"2026-10-16T18:36:26Z\", \"tool\": \"leanfinder\", \"query\": \"Barycentric subdivision of a simplicial set has the same weak homotopy type under its canonical map to the original simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.topIso\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.sk\", \"SSet.hoFunctor\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.KanComplex\"], \"digest\": \"92c3d42a40ceeea9\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader query; results are the exact command-generated audit record. Read the returned types: they concern the generic homotopy-category functor, skeletons, horns, fibrant objects, or subcomplex isomorphisms; none states this subdivision theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "lastVertex|last.vertex|sd.*weakEquivalence|weakEquivalence.*sd",
+   "results": "{\"t\": \"2026-10-16T19:31:39Z\", \"tool\": \"grep\", \"query\": \"lastVertex|last.vertex|sd.*weakEquivalence|weakEquivalence.*sd\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned types and pinned Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean lines 1-81. The file constructs Sd, Ex, their adjunction and the standard-simplex comparison but has no last-vertex transformation or weak-equivalence theorem; other hits concern cofibrations, subcomplex inclusions or realization itself."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The subdivision last vertex natural transformation induces isomorphisms on homotopy groups of geometric realizations",
+   "results": "{\"t\": \"2026-10-16T19:31:39Z\", \"tool\": \"leansearch\", \"query\": \"The subdivision last vertex natural transformation induces isomorphisms on homotopy groups of geometric realizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"sSetTopAdj\", \"SSet.Truncated.HomotopyCategory.mkNatTrans.congr_simp\", \"SSet.Truncated.HomotopyCategory.mkNatTrans_app_mk\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"HomotopyGroup\", \"FundamentalGroupoidFunctor.homotopicMapsNatIso\", \"SSet.Subcomplex.homOfLE_app_val\"], \"digest\": \"1458485e08c888ef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned types and pinned Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean lines 1-81. The file constructs Sd, Ex, their adjunction and the standard-simplex comparison but has no last-vertex transformation or weak-equivalence theorem; other hits concern cofibrations, subcomplex inclusions or realization itself."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.sd",
+   "results": "{\"t\": \"2026-10-16T19:31:39Z\", \"tool\": \"loogle\", \"query\": \"SSet.sd\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SSet.sd\", \"SSet.instIsLeftAdjointSd\", \"SSet.sdExAdjunction\", \"SSet.stdSimplex.sdIso\", \"SSet.instIsLeftKanExtensionSimplexCategorySdInvFunctorSdIso\"], \"digest\": \"55ffced8d7e7f24d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned types and pinned Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean lines 1-81. The file constructs Sd, Ex, their adjunction and the standard-simplex comparison but has no last-vertex transformation or weak-equivalence theorem; other hits concern cofibrations, subcomplex inclusions or realization itself."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The last vertex map from the barycentric subdivision of a simplicial set is a weak homotopy equivalence",
+   "results": "{\"t\": \"2026-10-16T19:31:45Z\", \"tool\": \"leanfinder\", \"query\": \"The last vertex map from the barycentric subdivision of a simplicial set is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Subcomplex.topIso\", \"SSet.Subcomplex.topIso_hom\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"SSet.KanComplex\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\"], \"digest\": \"4216ee041d048026\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned types and pinned Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean lines 1-81. The file constructs Sd, Ex, their adjunction and the standard-simplex comparison but has no last-vertex transformation or weak-equivalence theorem; other hits concern cofibrations, subcomplex inclusions or realization itself."
+  },
+  {
+   "tool": "grep",
+   "query": "subdivision|lastVertex|last_vertex",
+   "results": "{\"t\": \"2026-10-16T19:32:06Z\", \"tool\": \"grep\", \"query\": \"subdivision|lastVertex|last_vertex\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\"], \"digest\": \"0fbbf9e617592e8d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned types and pinned Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean lines 1-81. The file constructs Sd, Ex, their adjunction and the standard-simplex comparison but has no last-vertex transformation or weak-equivalence theorem; other hits concern cofibrations, subcomplex inclusions or realization itself."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Barycentric subdivision realization last vertex map is a homotopy equivalence for arbitrary simplicial sets",
+   "results": "{\"t\": \"2026-10-16T19:32:11Z\", \"tool\": \"leanfinder\", \"query\": \"Barycentric subdivision realization last vertex map is a homotopy equivalence for arbitrary simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.topIso\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.Subcomplex.topIso_hom\", \"SSet.ι₁\", \"SSet.horn.ι\", \"SSet.ι₀\", \"SSet.unitHomEquiv\"], \"digest\": \"70c820d621cd033a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned types and pinned Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean lines 1-81. The file constructs Sd, Ex, their adjunction and the standard-simplex comparison but has no last-vertex transformation or weak-equivalence theorem; other hits concern cofibrations, subcomplex inclusions or realization itself."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ex-comparison-weak-equivalence",
@@ -89,5 +233,21 @@
   "group": "NN"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-subdivision-last-vertex-equivalence",
+  "worker": "stage1",
+  "summary": "Checked Kerodon 00YZ and the exact existing dependency statements. Expanded the simultaneous skeletal induction, colimit preservation from the Sd–Ex adjunction, last-vertex equivalence on standard simplices by explicit inverse functors, coproduct closure from the realization quotient, and injectivity only for subdivided boundary inclusions. Reused all needed DAG nodes; no new nodes, no statement change and no Lean attachment.",
+  "blueprint": "Realizes the existing blueprint.from.place: foundational enhancement of the coefficient adjunction diagrams, iterated Ex Kan replacement and its one-step Ex comparison, specifically the subdivision last-vertex equivalence used in the Kan-target reduction. The unit has no proof steps; this is below the unit level.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-afe1d15f5",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-afe1d15f5 (reviewer sub-agent of L); spot-checked: I read the item, every cited node statement and Kerodon 00YZ in full. Kerodon 00YZ is not archived locally; I read it online and the report already records it as WANTED. The statement is the same as Kerodon Prop 3.3.4.8 for every small simplicial set T, with no Kan, finite-dimensional or nonempty hypothesis added, and the weak homotopy equivalence is the realization notion of def-cbc. Steps 1–8: (1) colimit preservation follows from the Sd–Ex adjunction in the face-poset node, and the induced map is lambda by its naturality. (2) On the standard simplex, lambda is the nerve of the max map M, and the transformations id=>CM and id=>MC meet the hypotheses of lem-coef-nerve-natural-homotopy-equivalence. (3) Coproduct closure follows directly from the realization quotient. (4) Sd of the boundary inclusion is the nerve of the inclusion of proper nonempty subsets, which is injective, also for n=0. (5) The filtration from the Mathlib leaf lem-coef-infinity-monomorphism-boundary-cells is indexed correctly, and the boundary stabilizes because every k-simplex of the boundary with k>=n is degenerate. (6) The induction is quantified over all K, starts from the empty set, and is not circular. (7) Every hypothesis of the pushout clause of lem-coef-sset-gluing-filtered-equivalences holds: both boundary legs are injective, the attaching map is correctly not assumed injective, and the three components are equivalences. (8) The filtered-colimit lemma applies over N. Small cases tested: empty T, a point, Delta^1, the boundary of Delta^2, and the non-regular Delta^1/boundary. The dependency closure (91 nodes) does not reach the item or its parent, and searches of the DAG found no duplicate. Every citation is in the item's unit or is a definition or Mathlib leaf, so no tool_uses are needed, and no SGA source is cited. One inaccuracy in the report: it says created.item was changed to this delivery, but the file correctly keeps lem-coef-ex-comparison-weak-equivalence/NN, so no fix is needed. No changes made."
+ }
 }
