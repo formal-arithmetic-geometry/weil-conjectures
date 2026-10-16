@@ -3,38 +3,140 @@
  "blueprint": {
   "is": "def-sfb-padic-int-condensed-ring",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The condensed ring $\\underline{\\mathbf Z}_\\ell$",
- "statement": "For a prime $\\ell$, the condensed ring $\\underline{\\mathbf Z}_\\ell$ is the condensed ring\n$\\underline T$ of [def-sfb-continuous-map-condensed-ring] for $T=\\mathbf Z_\\ell$ with the\n$\\ell$-adic topology:\n\n$$\n\\underline{\\mathbf Z}_\\ell(S)=C(S,\\mathbf Z_\\ell).\n$$\n\nIts underlying ring object of $\\Sh(*_{\\mathrm{proét}},\\Ab)$ is commutative.",
+ "statement": "For a prime $\\ell$, the condensed ring $\\underline{\\mathbf Z}_\\ell$ is the condensed ring\n$\\underline T$ of [def-sfb-continuous-map-condensed-ring] for $T=\\mathbf Z_\\ell$ ([def-weil-l-adic-numbers]) with the\n$\\ell$-adic topology:\n\n$$\n\\underline{\\mathbf Z}_\\ell(S)=C(S,\\mathbf Z_\\ell).\n$$\n\nIts underlying ring object of $\\Sh(*_{\\mathrm{proét}},\\Ab)$ is commutative.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-int-condensed-ring.md",
   "place": "node def-sfb-padic-int-condensed-ring, order 1525"
  },
  "stmt_deps": [
-  "def-sfb-continuous-map-condensed-ring"
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-l-adic-numbers"
  ],
  "proof": [
   {
-   "text": "$\\mathbf Z_\\ell$ is a commutative topological ring, so\n[def-sfb-continuous-map-condensed-ring] applies.",
+   "text": "By [def-weil-l-adic-numbers], $\\mathbf Z_\\ell=\\{x\\in\\mathbf Q_\\ell:|x|_\\ell\\le1\\}$ in the nonarchimedean valued field $\\mathbf Q_\\ell$. The inequalities $|x+y|_\\ell\\le\\max(|x|_\\ell,|y|_\\ell)$, $|xy|_\\ell=|x|_\\ell|y|_\\ell$, and $|-x|_\\ell=|x|_\\ell$ show that it is a subring, hence commutative. For $x,y,x\\prime,y\\prime\\in\\mathbf Z_\\ell$, they also give $|(x+y)-(x\\prime+y\\prime)|_\\ell\\le\\max(|x-x\\prime|_\\ell,|y-y\\prime|_\\ell)$ and $|xy-x\\prime y\\prime|_\\ell\\le\\max(|x-x\\prime|_\\ell,|y-y\\prime|_\\ell)$, using $xy-x\\prime y\\prime=x(y-y\\prime)+(x-x\\prime)y\\prime$ and the norm bounds by $1$. Negation is an isometry, so all ring operations are continuous for the restricted metric. For $a\\in\\mathbf Z_\\ell$ and $n\\ge0$, one has $|x-a|_\\ell\\le\\ell^{-n}$ if and only if $x=a+\\ell^n z$ with $z\\in\\mathbf Z_\\ell$: take $z=(x-a)/\\ell^n$ and use $|\\ell|_\\ell=\\ell^{-1}$. Hence these balls are precisely $a+\\ell^n\\mathbf Z_\\ell$. Each is open by the ultrametric inequality (a ball of strict radius $\\ell^{-n}$ about any of its points stays inside it), and their radii tend to zero because $\\ell\\ge2$. They therefore form a neighbourhood basis for the restricted metric as well as the adic topology. Thus this topology is exactly the $\\ell$-adic topology and $\\mathbf Z_\\ell$ is a commutative topological ring.",
+   "uses": [
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-int-condensed-ring.proof.md",
+    "place": "the sole proof sentence; expanded verification of the topological-ring hypothesis"
+   }
+  },
+  {
+   "text": "Apply [def-sfb-continuous-map-condensed-ring] to the commutative topological ring $T=\\mathbf Z_\\ell$ from step 1. It gives a sheaf of rings with sections $C(S,\\mathbf Z_\\ell)$, restriction along $u:S\\prime\\to S$ given by $a\\mapsto a\\circ u$, and pointwise operations; define $\\underline{\\mathbf Z}_\\ell$ to be this sheaf. The same cited statement says that its underlying ring object in $\\Sh(*_{\\mathrm{proét}},\\Ab)$ is commutative when $T$ is commutative, which step 1 verified.",
    "uses": [
     "def-sfb-continuous-map-condensed-ring"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-int-condensed-ring.proof.md",
+    "place": "the sole proof sentence: apply the continuous-map condensed-ring construction"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-l-adic-numbers",
   "def-sfb-continuous-map-condensed-ring"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-int-condensed-ring.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-int-condensed-ring.proof.md",
+  "place": "sole proof sentence, with the elementary norm estimates written out"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "padicIntCondensedRing|PadicInt|topCatToCondensed",
+   "results": "7 hits; Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean; searched Mathlib/Condensed",
+   "date": "2026-10-16",
+   "verdict": "no match for the full condensed ring with its underlying commutative ring object"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf of continuous maps from profinite sets to the topological ring of p-adic integers",
+   "results": "8 hits; TopCat.presheafToTopCommRing, LightCondensed, Condensed.isSheafProfinite, LightCondensed.lanLightCondSet, ProfiniteGrp.toLimit_fun_continuous, Condensed.lanSheafProfinite, ProfiniteAddGrp.instCoeFunHomForallCarrierToTopTotallyDisconnectedSpaceToProfinite, Condensed.ofSheafProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match for the full condensed ring with its underlying commutative ring object"
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicInt, Condensed",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match for the full condensed ring with its underlying commutative ring object"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The condensed commutative ring of continuous maps from profinite sets to p-adic integers",
+   "results": "8 hits; PadicAlgCl, PadicComplex, BDeRham, PadicInt, BDeRhamPlus, CondensedMod, Condensed.profiniteFree, instCommRingBDeRhamPlus",
+   "date": "2026-10-16",
+   "verdict": "no match for the full condensed ring with its underlying commutative ring object"
+  },
+  {
+   "tool": "grep",
+   "query": "def PadicInt|instance.*(CommRing|NormedCommRing|TopologicalRing)|instNormedCommRing|instCommRing",
+   "results": "3 hits; Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean; searched Mathlib/NumberTheory/Padics; PadicInt at PadicIntegers.lean:60, PadicInt.instCommRing at :92, NormedCommRing instance at :196; these supply the coefficient ring, already covered by def-weil-l-adic-numbers",
+   "date": "2026-10-16",
+   "verdict": "coefficient-ring match only; not a match for the condensed-ring item"
+  },
+  {
+   "tool": "grep",
+   "query": "topCatToCondensed|CommRingCat|RingCat|RingObj|ringSheaf",
+   "results": "7 hits; Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean; searched Mathlib/Condensed",
+   "date": "2026-10-16",
+   "verdict": "no match for the full condensed ring with its underlying commutative ring object"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Ring\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match for the full condensed ring with its underlying commutative ring object"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A topological commutative ring defines a condensed ring by continuous functions on profinite spaces",
+   "results": "8 hits; TopCommRingCat.isCommRing, CondensedMod, Condensed.profiniteFree, TopCat.instCommRingHomObjTopCommRingCatForget₂, Profinite.toCondensed, LightProfinite.toCondensed, TopCommRingCat.instConcreteCategorySubtypeRingHomαContinuousCoe, TopCat.commRingYoneda; capacity-retry reading: TopCat.commRingYoneda is a presheaf functor on topological spaces, not the full condensed-ring construction with its commutative underlying ring object",
+   "date": "2026-10-16",
+   "verdict": "no match for the full condensed ring with its underlying commutative ring object"
+  },
+  {
+   "tool": "grep",
+   "query": "CondensedRing|condensedRing|continuousMapRing|padicIntCondensed",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match for the full condensed ring construction; second-reader search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions valued in the p-adic integer ring form a sheaf of commutative rings on profinite spaces",
+   "results": "8 hits; Condensed.lanSheafProfinite, Condensed.profiniteSolid, Condensed.locallyConstantPresheaf, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.profiniteFree, LightCondensed.locallyConstantPresheaf, Condensed.isSheafProfinite, LightCondMod.LocallyConstant.functorToPresheaves",
+   "date": "2026-10-16",
+   "verdict": "no match for the full condensed ring construction; second-reader search"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMap.*(Ring|CommRing)|condensed.*(Ring|CommRing)|commRingYoneda",
+   "results": "25 hits; Mathlib/Condensed/Module.lean, Mathlib/Condensed/Epi.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Light/Module.lean, Mathlib/Condensed/Light/AB.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/Condensed/AB.lean; fresh second reading: inspected the continuous-function presheaf candidate TopCat.commRingYoneda at Mathlib/Topology/Sheaves/CommRingCat.lean:237-252 and the condensed-set construction TopCat.toCondensedSet at Mathlib/Condensed/TopComparison.lean:140-141",
+   "date": "2026-10-16",
+   "verdict": "no match for the full condensed-ring item; presheaf and condensed-set ingredients do not assert the coherent-site ring sheaf and commutative ring object together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of commutative rings obtained by continuous functions into a normed commutative ring on compact totally disconnected spaces",
+   "results": "8 hits; LightCondSet.LocallyConstant.functor, Condensed.locallyConstantPresheaf, LightCondensed.locallyConstantPresheaf, Condensed, CompHausLike.LocallyConstant.functorToPresheaves, CondensedMod.LocallyConstant.functorToPresheaves, CompHausLike.LocallyConstantModule.functor, LightCondensed; fresh second reading: inspected the continuous-function presheaf candidate TopCat.commRingYoneda at Mathlib/Topology/Sheaves/CommRingCat.lean:237-252 and the condensed-set construction TopCat.toCondensedSet at Mathlib/Condensed/TopComparison.lean:140-141",
+   "date": "2026-10-16",
+   "verdict": "no match for the full condensed-ring item; presheaf and condensed-set ingredients do not assert the coherent-site ring sheaf and commutative ring object together"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -53,5 +155,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-condensed-ring"
+ "unit": "sk-def-sfb-condensed-ring",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-padic-int-condensed-ring",
+  "worker": "stage1",
+  "summary": "Completed the earlier attempt: recorded actual Mathlib searches, filled blueprint.same_as, reused the existing Mathlib leaf def-weil-l-adic-numbers for the coefficient ring, and expanded the topological-ring verification by nonarchimedean norm estimates before applying the existing continuous-map condensed-ring definition. No mathematical statement change and no new nodes. Second reading expanded the equality and neighbourhood-basis argument for adic balls and recorded independent Mathlib searches; no new nodes.",
+  "blueprint": "Realizes the sole proof sentence of def-sfb-padic-int-condensed-ring.proof.md: step 1 verifies that Z_l is a commutative topological ring; step 2 applies def-sfb-continuous-map-condensed-ring.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-23241507c",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-23241507c (reviewer sub-agent of L); spot-checked: Reviewed the complete item, cited nodes, blueprint sources, chapter/unit route, and delivery requirements. The statement, dependencies, norm/topology verification, condensed-ring specialization, coefficient category, edge cases, searches, and no-SGA route all check out. No new nodes or repairs are needed; review.md records the detailed checks."
+ }
 }

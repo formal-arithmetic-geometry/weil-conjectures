@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-products-derived",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Products in the derived category are termwise",
@@ -18,32 +18,146 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-small-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product"
+ ],
  "proof": [
   {
-   "text": "*Cohomology.* $H^p(K)=\\ker(d^p)/\\operatorname{im}(d^{p-1})$ is built from kernels and\ncokernels. Products always commute with kernels, and they commute with cokernels and\nimages because they are exact ([det-pe-products-exact]). Hence\n$H^p(\\prod_iK_i)=\\prod_iH^p(K_i)$, naturally in the family. In particular a product of\nquasi-isomorphisms is a quasi-isomorphism, and a product of acyclic complexes is acyclic.",
+   "text": "Put $\\mathcal A=\\Mod(X_{\\mathrm{proét}},\\mathcal R)$. Its set-indexed products exist as in [det-pe-products-exact]. Form $P^n=\\prod_iK_i^n$ and define $d_P^n$ by $\\pi_i^{n+1}d_P^n=d_i^n\\pi_i^n$. The identities $d_P^{n+1}d_P^n=0$ follow after composing with each projection. Likewise the projections are chain maps, and any family of chain maps to the $K_i$ assembles uniquely degree by degree to a chain map to $P$. Thus $P$ is the termwise product complex, with its specified projections [def-weil-category-product, def-weil-abstract-derived-category].",
    "uses": [
-    "det-pe-products-exact"
+    "det-pe-products-exact",
+    "def-weil-category-product",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.proof.md",
+    "place": "Cohomology paragraph: the termwise product complex"
+   }
   },
   {
-   "text": "*Product in $D$.* The category of $\\mathcal R$-modules is Grothendieck, so each $K_i$ has a\nK-injective resolution $K_i\\to I_i$ (Stacks, Tag 079P). The termwise product\n$\\prod_iI_i$ is K-injective: for an acyclic complex $C$,\n$\\Hom_{K}(C,\\prod_iI_i)=\\prod_i\\Hom_K(C,I_i)=0$, as products in the homotopy category\nare termwise. For any complex $C$, using that maps into K-injective complexes in $D$ are\ncomputed in the homotopy category,\n\n$$\n\\Hom_D\\Bigl(C,\\prod_iI_i\\Bigr)=\\Hom_K\\Bigl(C,\\prod_iI_i\\Bigr)=\\prod_i\\Hom_K(C,I_i)\n=\\prod_i\\Hom_D(C,I_i)=\\prod_i\\Hom_D(C,K_i),\n$$\n\nso $\\prod_iI_i$ is a product of the $K_i$ in $D$. By the first paragraph\n$\\prod_iK_i\\to\\prod_iI_i$ is a quasi-isomorphism, so the termwise product\n$\\prod_iK_i$ is also a product of the $K_i$ in $D$, with the projections induced by the\ntermwise projections.",
-   "uses": [],
-   "elementary": null
+   "text": "Fix $p$ and write $Z_i^p=\\ker d_i^p$, $B_i^p=\\operatorname{im}d_i^{p-1}$ and $H_i^p=Z_i^p/B_i^p$ [def-weil-abstract-derived-category]. Applying [det-pe-products-exact] to $0\\to Z_i^p\\to K_i^p\\to B_i^{p+1}\\to0$ identifies $\\ker d_P^p$ with $\\prod_i Z_i^p$: the factorization of $d_P^p$ through $\\prod_i B_i^{p+1}\\hookrightarrow\\prod_iK_i^{p+1}$ has first map epimorphic and second map monomorphic. At degree $p-1$ the same factorization identifies $\\operatorname{im}d_P^{p-1}$ with $\\prod_iB_i^p$. Applying exactness again to $0\\to B_i^p\\to Z_i^p\\to H_i^p\\to0$ identifies the quotient with $\\prod_iH_i^p$. Hence the morphism induced by the projections is $H^p(P)\\xrightarrow{\\sim}\\prod_i H^p(K_i)$. All these identifications commute with morphisms of families: their maps are characterized by the same projections, kernel inclusions and quotient maps. This proves the cohomology clause naturally in $(K_i)$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "det-pe-products-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.proof.md",
+    "place": "Cohomology paragraph: kernels, images and cokernels"
+   }
+  },
+  {
+   "text": "For a family of quasi-isomorphisms $f_i:K_i\\to K'_i$, naturality in the preceding step identifies $H^p(\\prod_i f_i)$ with $\\prod_i H^p(f_i)$. The latter is an isomorphism: the product of the inverses of $H^p(f_i)$ is its inverse, as checked after each projection [def-weil-category-product]. Therefore $\\prod_i f_i$ is a quasi-isomorphism for every such family, by the definition in [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-category-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.proof.md",
+    "place": "Cohomology paragraph: product of quasi-isomorphisms"
+   }
+  },
+  {
+   "text": "Use the small representative of the site and universes of [def-weil-size-convention]. The theorem [lem-weil-pbc-ring-sheaves-grothendieck] applies to this site and the arbitrary sheaf of rings $\\mathcal R$, so $\\mathcal A$ is Grothendieck abelian; no commutativity or constant-coefficient assumption is required. By [lem-sfb-grothendieck-k-injective], choose quasi-isomorphisms $r_i:K_i\\to J_i$ with $J_i$ K-injective. The degreewise products of the $J_i$ exist by [det-pe-products-exact]. Apply [lem-pc-ringed-space-product-kinjective] in this abelian category to obtain that $J=\\prod_i J_i$, with the degreewise projections $q_i$, is K-injective and that its image is a product of the $QJ_i$ in $D(\\mathcal A)$. Here $Q$ is the localization of [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective",
+    "det-pe-products-exact",
+    "lem-pc-ringed-space-product-kinjective",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tags 079Q (remark-existence-D), 079P (theorem-K-injective-embedding-grothendieck), and 07D9 (lemma-derived-products); derived.tex Tag 0BK6 (lemma-product-K-injective)"
+   }
+  },
+  {
+   "text": "Let $r=\\prod_i r_i:P\\to J$ and let $\\pi_i:P\\to K_i$ be the projections. Step 3 says $r$ is a quasi-isomorphism, hence $Qr$ and all $Qr_i$ are isomorphisms [def-weil-abstract-derived-category]. The chain-map identities are $q_i r=r_i\\pi_i$. For any object $C$ of $D(\\mathcal A)$ and arrows $f_i:C\\to QK_i$, use the product obtained in Step 4 to get the unique $g:C\\to QJ$ with $Qq_i\\,g=Qr_i\\,f_i$. Put $h=(Qr)^{-1}g$. Then $Qr_i\\,Q\\pi_i\\,h=Qq_i\\,Qr\\,h=Qr_i\\,f_i$, so $Q\\pi_i\\,h=f_i$. If $h'$ has the same components, the product property of $QJ$ gives $Qr\\,h'=g$ and hence $h'=h$. Thus the images of the actual termwise projections make $QP$ a product of the $QK_i$ [def-weil-category-product], proving the remaining clause, including uniqueness for arbitrary derived-category morphisms.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.proof.md",
+    "place": "Product in D paragraph, final sentence: transfer along the product quasi-isomorphism"
+   }
   }
  ],
  "proof_deps": [
-  "det-pe-products-exact"
+  "det-pe-products-exact",
+  "def-weil-category-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-pc-ringed-space-product-kinjective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.proof.md",
+  "place": "Cohomology and Product in D paragraphs; with supporting Stacks Tags 079Q, 079P, 0BK6 (07D9)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Preserves.*[Pp]roduct.*(homology|Derived)|([Hh]omology|Derived).*[Pp]roduct",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; exact-functor homology and quasi-isomorphism lemmas supply general ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesHomology|preserves.*Homology|homologyFunctor.*[Ii]so",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; exact-functor homology and quasi-isomorphism lemmas supply general ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Termwise products of complexes represent products in the derived category when products of modules are exact",
+   "results": "8 hits: instAB4StarModuleCat, Module.Flat.lTensor_shortComplex_exact, HomologicalComplex.tensorObj, HasDerivedCategory, HomologicalComplex.tensorHom, HasDerivedCategory.standard, HomologicalComplexUpToQuasiIso, DerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; exact-functor homology and quasi-isomorphism lemmas supply general ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesLimitsOfShape\", \"homologyFunctor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; exact-functor homology and quasi-isomorphism lemmas supply general ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesHomology\"",
+   "results": "12 hits: CategoryTheory.Functor.PreservesHomology, CategoryTheory.Functor.preservesHomologyOfExact, CategoryTheory.Functor.PreservesHomology.preservesLeftHomologyOf, CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf, CategoryTheory.ShortComplex.LeftHomologyData.isPreservedBy_of_preservesHomology, CategoryTheory.ShortComplex.RightHomologyData.isPreservedBy_of_preservesHomology, CategoryTheory.Functor.PreservesHomology.preservesCokernel, CategoryTheory.Functor.PreservesHomology.preservesCokernels",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; exact-functor homology and quasi-isomorphism lemmas supply general ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category with exact products the derived category product is computed termwise and cohomology commutes with products",
+   "results": "8 hits: HasDerivedCategory.standard, DerivedCategory.instAdditiveCochainComplexIntQ, DerivedCategory.instIsHomologicalHomologyFunctor, DerivedCategory.Q, DerivedCategory.instLinear, DerivedCategory.instPreadditive, DerivedCategory.instAdditiveHomotopyCategoryIntUpQh, DerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; exact-functor homology and quasi-isomorphism lemmas supply general ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor preserves homology of complexes and products of quasi isomorphisms",
+   "results": "8 hits: CategoryTheory.Functor.preservesHomologyOfExact, HomologicalComplex.quasiIso_map_of_preservesHomology, HomologicalComplex.quasiIso_map_iff_of_preservesHomology, CategoryTheory.Functor.exact_tfae, HomologicalComplex.quasiIsoAt_map_of_preservesHomology, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, HomologicalComplex.quasiIsoAt_map_iff_of_preservesHomology, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; exact-functor homology and quasi-isomorphism lemmas supply general ingredients only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -57,5 +171,39 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-pe-products"
+ "unit": "sk-prop-pe-products",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-products-derived",
+  "worker": "stage1",
+  "summary": "Kept the full arbitrary-family, unbounded-complex, arbitrary ring-sheaf statement. Expanded the cycles/boundaries and naturality argument, cited existing general ringed-site Grothendieck, K-injective-resolution and K-injective-product nodes, and wrote the universal-property transfer with the original projections. No new nodes. All non-elementary inputs are existing nodes; three elementary constructions and the transfer remain explicit steps.",
+  "blueprint": "Steps 1-3 realize the Cohomology paragraph, including products of quasi-isomorphisms; Step 4 realizes the K-injective resolution/product argument in Product in D; Step 5 realizes its last sentence with projection identities. The sk-prop-pe-products unit proof uses precisely exact products followed by K-injective representatives.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic small ringed-site Grothendieck theorem for arbitrary, possibly noncommutative ring sheaves, needed before K-injective resolution existence; no theorem in this unit states it."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic Grothendieck K-injective resolution theorem (079P) used by the blueprint Product in D paragraph."
+   },
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Generic arbitrary-family K-injective product theorem (0BK6), despite its narrower title; its statement is for any abelian category. This supplies the blueprint K-injective/product Hom argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-pc-ringed-space-product-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-2626d198e",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-2626d198e (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, blueprint route, and source passages. All five steps hold for arbitrary set-indexed unbounded complexes and noncommutative ring sheaves. Accepted the three declared generic tool uses. No new nodes or repairs; 297 reachable nodes have no missing dependencies or cycles. Detailed checks are in review.md."
+ }
 }

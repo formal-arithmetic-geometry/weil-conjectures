@@ -28,9 +28,119 @@
   "def-weil-pbc-ringed-site-derived-restriction",
   "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$. The smallness hypothesis and [lem-pur-ringed-site-grothendieck-abelian] make $\\mathcal A$ Grothendieck abelian. By [lem-pc-sheaf-modules-tensor-closed] its tensor is additive, symmetric monoidal and closed, hence also braided. To check functorial flat resolutions rather than assume them, apply the functorial bounded-above replacements of [lem-pc-kflat-bounded-flat-replacement] with upper bound $0$ to the complexes $F[0]$, functorially in $F$. If $T(F)\\to F[0]$ is this replacement, then $L(F)=T(F)^0$ is flat and the degree-zero map $L(F)\\twoheadrightarrow F$ is an epimorphism, natural in $F$. Thus $L$ factors through the full subcategory of flat objects and supplies a functorial flat epimorphism onto every object; equivalently one obtains functorial flat resolutions by iterating this construction on the successive kernels. This verifies all categorical hypotheses of the bounded-flat-model theorem used next.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pc-kflat-bounded-flat-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G1 (lemma-tor-amplitude), bounded-flat-model input; Tag 06YS (lemma-K-flat-resolution), bounded-above flat replacements; structural sheaf-module hypotheses as in Modules on Sites Tags 03DA, 03DB, 03EW, 03EO"
+   }
+  },
+  {
+   "text": "Use the given derived category of $\\mathcal A$ with its K-flat tensor. The representative comparisons and uniqueness of descent in [lem-weil-pbc-site-derived-tensor-descent] identify this tensor with the site tensor in the statement: on every pair of K-flat flat-term representatives both give $Q\\operatorname{Tot}(P\\otimes Q)$, and these comparisons descend uniquely. Hence the assumed vanishing is exactly the Tor-amplitude hypothesis of [lem-sc-source-tor-amplitude-flat-model], applied to $\\mathcal A$ with the hypotheses checked in Step 1. It gives a cochain complex $P$ with flat terms, $P^q=0$ for $q<a$ or $b<q$, and an isomorphism $Q(P)\\cong E$. The flatness here is the exactness of the module-sheaf tensor functor, the same notion used in the slice-flatness theorem below.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sc-source-tor-amplitude-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G1 (lemma-tor-amplitude), implication (1) to (2), as supplied by the existing generic categorical flat-model theorem; Tag 06YU (definition-derived-tor)"
+   }
+  },
+  {
+   "text": "Fix any $U\\in\\mathcal C$ and put $B=P|_U$, restricting terms and differentials to $\\mathcal C/U$. Restriction is exact by [lem-pur-site-restriction-module-adjunction-exact]. In particular it preserves kernels and cokernels, so it preserves the quotient $\\ker(d^q)/\\operatorname{im}(d^{q-1})$ and every quasi-isomorphism. It therefore induces a functor on the localization at quasi-isomorphisms and sends the isomorphism $Q(P)\\cong E$ to $Q_U(B)\\cong E|_U$. This is the representative-independent derived restriction defined in [def-weil-pbc-ringed-site-derived-restriction]; a chain map from $P$ to a chosen representative of $E$ is not needed.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-ringed-site-derived-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08H5 (lemma-tor-amplitude-pullback), identifying localization pullback with exact restriction; Modules on Sites Tag 03DJ (lemma-extension-by-zero-exact)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-slice-restriction-flat] to every term $P^q$. It gives flatness of every $B^q$ over $\\mathcal O_U$. Restriction sends the zero module to zero, so $B^q=0$ outside $[a,b]$. In particular $B$ is bounded above by $b$, and [lem-pc-bounded-above-flat-kflat-site] makes $B$ K-flat on $(\\mathcal C/U,\\mathcal O_U)$. The slice is small in the same universe: its objects and arrows form subsets of the sets of objects and arrows with specified targets in the original small category.",
+   "uses": [
+    "lem-weil-pbc-slice-restriction-flat",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08H5 (lemma-tor-amplitude-pullback), flat pulled-back terms; Modules on Sites Tag 0E8J (lemma-restriction-flat); Tag 06YQ (lemma-bounded-flat-K-flat)"
+   }
+  },
+  {
+   "text": "Let $G$ be any $\\mathcal O_U$-module sheaf, with no assumption that it is the restriction of a global sheaf. By [lem-pc-kflat-resolution] choose a K-flat flat-term resolution $t:T\\to G[0]$ on the slice. Its cone $C(t)$ is acyclic by [lem-pur-quasi-iso-cone-acyclic]. By the definition [def-pc-kflat-complex], $\\operatorname{Tot}(C(t)\\otimes B)$ is acyclic. The symmetry of module-sheaf tensor in [lem-pc-sheaf-modules-tensor-closed] and the total differential in [def-pc-tensor-complex-sheaves] give the signed flip $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ on bidegree $(p,q)$. It is its own inverse, and commutes with the differentials because $(-1)^{(p+1)q+q}=(-1)^{pq}$ and $(-1)^{p(q+1)}=(-1)^{pq+p}$. Thus $\\operatorname{Tot}(B\\otimes C(t))$ is acyclic as well. The complex isomorphism [lem-pc-tensor-mapping-cone-iso] identifies it with the cone of $\\operatorname{Tot}(1_B\\otimes t)$. Applying the quasi-isomorphism/cone criterion again shows that $\\operatorname{Tot}(B\\otimes T)\\to\\operatorname{Tot}(B\\otimes G[0])$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YN (definition-K-flat), 06YM (lemma-derived-tor-exact), 06YU (definition-derived-tor); Derived Categories Tag 05RT (lemma-acyclic); explicit signed symmetry calculation"
+   }
+  },
+  {
+   "text": "Both $B$ and $T$ are K-flat with flat terms. The representative comparison in [lem-weil-pbc-site-derived-tensor-descent], together with $Q_U(B)\\cong E|_U$, $Q_U(T)\\cong G[0]$, and the quasi-isomorphism from Step 5, gives $E|_U\\otimes^{\\mathbf L}_{\\mathcal O_U}G\\cong Q_U\\operatorname{Tot}(B\\otimes_{\\mathcal O_U}G[0])$. Here only pairs satisfying the stated K-flat flat-term hypotheses are used in that descent theorem; the comparison with the arbitrary degree-zero $G$ was proved in Step 5.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), K-flat representative computation; Tag 08H5 (lemma-tor-amplitude-pullback), final application of the flat-model criterion"
+   }
+  },
+  {
+   "text": "By [def-pc-tensor-complex-sheaves], the ordinary tensor complex in Step 6 has degree-$r$ term $B^r\\otimes_{\\mathcal O_U}G$, since $G[0]$ has only degree zero. For $r\\notin[a,b]$ this term is zero: tensor with a fixed sheaf is additive, hence takes zero to zero, by [lem-pc-sheaf-modules-tensor-closed]. Its kernel and the image entering it are therefore zero, so its $r$-th cohomology sheaf $\\ker(d^r)/\\operatorname{im}(d^{r-1})$ is zero by [def-weil-derived-cohomology-sheaves]. Cohomology carries the isomorphism of Step 6 to an isomorphism, proving the requested vanishing for this arbitrary $G$ and $r$. Since $U$ was arbitrary, this proves the item.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G1 (lemma-tor-amplitude), implication (2) to (1); Tag 08H5 (lemma-tor-amplitude-pullback), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-kflat-resolution",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-source-tor-amplitude-flat-model",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-slice-restriction-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08H5 (lemma-tor-amplitude-pullback), specialized to slice restriction, using Tag 08G1 (lemma-tor-amplitude). Expanded the categorical hypotheses of the existing bounded-flat-model theorem and the one-K-flat-factor tensor calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -101,10 +211,108 @@
    "results": "{\"t\": \"2026-10-16T11:41:46Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|tor_amplitude|KFlat|K.flat\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Second reader inspected SheafOfModules.over in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:59-66 and IsFinitePresentation in Quasicoherent.lean:267. These construct restriction or define finite presentation, without a derived Tor bound. The broad case-insensitive Tor grep matched words such as generators and functor; the targeted Tor-amplitude/K-flat grep returned zero hits. None states the quantified localized tensor assertion.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|KFlat|bounded.*flat.*complex",
+   "results": "{\"t\": \"2026-10-16T13:40:02Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|tor_amplitude|KFlat|bounded.*flat.*complex\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Targeted grep found no Mathlib Tor-amplitude or K-flat declaration in the indicated homology/module-sheaf directory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived complex on a ringed site has Tor amplitude in an interval if and only if it has a bounded flat model in those degrees",
+   "results": "{\"t\": \"2026-10-16T13:40:02Z\", \"tool\": \"leansearch\", \"query\": \"A derived complex on a ringed site has Tor amplitude in an interval if and only if it has a bounded flat model in those degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_flat_tensorProduct\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\"], \"digest\": \"fd57293e5d5a7027\"} Read the returned signatures: cohomological bounded representatives have no flat-term condition; ordinary flat-module exactness and ordinary restrictions do not assert universal derived tensor vanishing for arbitrary sheaves on a localized ringed site.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"flat\"",
+   "results": "{\"t\": \"2026-10-16T13:40:02Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No hits for this combination of derived/flat or slice/tensor names.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of sheaves of modules on a ringed site with Tor amplitude in a fixed interval has a bounded flat representative in that interval",
+   "results": "{\"t\": \"2026-10-16T13:40:04Z\", \"tool\": \"leanfinder\", \"query\": \"A complex of sheaves of modules on a ringed site with Tor amplitude in a fixed interval has a bounded flat representative in that interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"Module.Flat.tfae_equational_criterion\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\"], \"digest\": \"81a2a38a616ad8e0\"} Read the returned signatures: cohomological bounded representatives have no flat-term condition; ordinary flat-module exactness and ordinary restrictions do not assert universal derived tensor vanishing for arbitrary sheaves on a localized ringed site.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|TorAmplitude|KFlat",
+   "results": "{\"t\": \"2026-10-16T13:41:20Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|tor_amplitude|TorAmplitude|KFlat\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Targeted grep found no Mathlib Tor-amplitude or K-flat declaration in the indicated homology/module-sheaf directory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction to an over site preserves finite Tor dimension with the same lower and upper bounds",
+   "results": "{\"t\": \"2026-10-16T13:41:20Z\", \"tool\": \"leansearch\", \"query\": \"Derived restriction to an over site preserves finite Tor dimension with the same lower and upper bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instMorphismRestrict\", \"HomologicalComplex.restrictionMap\", \"Matroid.restrict_rankFinite\", \"Submodule.restrictScalars_top\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"HomologicalComplex.restriction\", \"Derivation.restrictScalars.congr_simp\"], \"digest\": \"ea8ae7d590c187d8\"} Read the returned signatures: cohomological bounded representatives have no flat-term condition; ordinary flat-module exactness and ordinary restrictions do not assert universal derived tensor vanishing for arbitrary sheaves on a localized ringed site.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.over, \"tensor\"",
+   "results": "{\"t\": \"2026-10-16T13:41:20Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.over, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No hits for this combination of derived/flat or slice/tensor names.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a derived complex to the slice of an arbitrary ringed site preserves its Tor amplitude interval for every module sheaf on the slice",
+   "results": "{\"t\": \"2026-10-16T13:41:23Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of a derived complex to the slice of an arbitrary ringed site preserves its Tor amplitude interval for every module sheaf on the slice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CategoryTheory.Functor.isHomological_of_localization\", \"DerivedCategory.IsGE\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\"], \"digest\": \"001e9ea0fda6f76b\"} Read the returned signatures: cohomological bounded representatives have no flat-term condition; ordinary flat-module exactness and ordinary restrictions do not assert universal derived tensor vanishing for arbitrary sheaves on a localized ringed site.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact restriction functor on sheaves of modules preserves bounded flat models and therefore universal derived tensor cohomology bounds",
+   "results": "{\"t\": \"2026-10-16T13:41:24Z\", \"tool\": \"leanfinder\", \"query\": \"An exact restriction functor on sheaves of modules preserves bounded flat models and therefore universal derived tensor cohomology bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.lTensor_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"96e1c78b816cea6a\"} Read the returned signatures: cohomological bounded representatives have no flat-term condition; ordinary flat-module exactness and ordinary restrictions do not assert universal derived tensor vanishing for arbitrary sheaves on a localized ringed site.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "class HasFunctorialFlatResolution",
+   "results": "{\"t\": \"2026-10-16T13:45:30Z\", \"tool\": \"grep\", \"query\": \"class HasFunctorialFlatResolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No Mathlib declaration of this project-specific categorical resolution class; the proof uses the existing DAG flat-replacement tool instead.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.?amplitude|k.?flat|flat.?dimension",
+   "results": "{\"t\": \"2026-10-16T14:07:08Z\", \"tool\": \"grep\", \"query\": \"tor.?amplitude|k.?flat|flat.?dimension\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Independent second reading: Targeted case-insensitive search of Mathlib/Algebra/Category/ModuleCat/Sheaf returned zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-16T14:07:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"PresheafOfModulesOfCommRing.Monoidal.tensorObj\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj\", \"PresheafOfModulesOfCommRing.tensorObj_obj\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObjMap\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom_app\"], \"digest\": \"472095a607843e3b\"} Independent second reading: All ten hits concern PresheafOfModulesOfCommRing tensor constructions and colimit preservation. Read tensorObj and tensorHom in Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:63-101; these do not assert a derived Tor interval or slice restriction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded interval flat dimension of a derived sheaf is preserved by localization to an over site",
+   "results": "{\"t\": \"2026-10-16T14:07:10Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded interval flat dimension of a derived sheaf is preserved by localization to an over site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.compatiblePreservingOfFlat\", \"Module.flat_of_isLocalized_maximal\", \"RingHom.Flat.holdsForLocalizationAway\", \"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"Module.Flat.localizedModule\", \"CategoryTheory.lan_flat_of_flat\", \"instFlatAtPrime\"], \"digest\": \"e741d4fc17041033\"} Independent second reading: Inspected all eight returned signatures: representably-flat functors, flatness of ring/module localizations, and DerivedCategory.IsGE/IsLE. None gives the universally quantified Tor interval on a localized ringed site.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing a ringed site preserves the interval of flat dimension of a complex tested against all sheaves of modules",
+   "results": "{\"t\": \"2026-10-16T14:10:34Z\", \"tool\": \"leansearch\", \"query\": \"Localizing a ringed site preserves the interval of flat dimension of a complex tested against all sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_isLocalizedModule\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Module.Flat.localizedModule\", \"Module.flat_iff_of_isLocalization\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat.ofLocalizationPrime\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"Module.flat_of_isLocalized_span\"], \"digest\": \"78c35783bd262969\"} Independent second reading: Read all eight returned signatures: Module.Flat localization facts, RingHom.Flat localization facts, and AlgebraicGeometry.Flat.instMorphismRestrict concern ordinary ring modules or scheme morphisms. None states arbitrary-site derived restriction and universal Tor tests.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sf-site-perfect-tor-window",
   "by": "worker",
@@ -120,5 +328,79 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-site-tor-interval-restriction",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the slice Tor interval through the Stacks 08H5 bounded-flat-model route using only existing DAG statements. Explicitly verified the generic model theorem hypotheses, exact restriction of the representing isomorphism, flatness and K-flatness on the slice, and the cone calculation allowing an arbitrary slice test sheaf in the second tensor factor. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes thm-sf-hom-ctf, current main-20261015 proof sentence beginning \"For the sharper assertion, locally on the site choose a finite projective model P of K in [a,b]\", through lem-sf-site-perfect-tor-window: the fixed Tor interval survives passage to each local site before shortening the finite-projective model.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ringed-site module-category structure needed to check the hypothesis of the existing categorical flat-model theorem."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic ringed-site tensor structure supplies the closed braided additive category and the explicit signed tensor symmetry."
+   },
+   {
+    "node": "lem-pc-kflat-bounded-flat-replacement",
+    "why": "Generic functorial flat replacement supplies, by evaluation at degree zero of replacements of single complexes, the flat-resolution hypothesis; no unit-specific geometric step is replaced."
+   },
+   {
+    "node": "lem-sc-source-tor-amplitude-flat-model",
+    "why": "Generic categorical bounded-flat-model theorem implements Stacks 08G1 after its category and resolution hypotheses are checked; scheme/coefficient-specific flat-model nodes do not cover this arbitrary site."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic arbitrary-site K-flat tensor computation identifies the chosen derived tensor and its flat-term representatives."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact restriction theorem supplies preservation of quasi-isomorphisms for the chosen derived restriction."
+   },
+   {
+    "node": "lem-weil-pbc-slice-restriction-flat",
+    "why": "Generic slice-flatness theorem applies to each term of the bounded representative; no theorem of this unit states this sheaf-module fact."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic K-flatness criterion applies on the slice to its bounded flat complex."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic actual flat-term K-flat resolution of an arbitrary slice sheaf is needed; the tensor-descent statement alone does not provide a chain map to that sheaf."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic abelian-category cone criterion converts the tensor-cone calculation to a quasi-isomorphism."
+   },
+   {
+    "node": "lem-pc-tensor-mapping-cone-iso",
+    "why": "Generic tensor-cone isomorphism completes the one-K-flat-factor calculation for arbitrary test sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-sc-source-tor-amplitude-flat-model",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-slice-restriction-flat",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-resolution",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pc-tensor-mapping-cone-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q46-2763b4b45",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q46-2763b4b45 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages, and chapter/unit route. All seven steps preserve the exact Tor interval for arbitrary slice sheaves; categorical and K-flat comparison hypotheses hold. No new nodes, missing dependencies, cycles, or target weakening. Accepted eleven generic tool uses. Detailed checks recorded in review.md; no corrections required."
  }
 }

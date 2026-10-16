@@ -3,39 +3,295 @@
  "blueprint": {
   "is": "def-sfb-profinite-to-proetale",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Profinite sets as pro-étale $\\Spec\\Z$-schemes",
- "statement": "Let $*_{\\mathrm{proét}}$ be the category of profinite sets\n([sk-def-sfb-condensed-ring]). The functor\n$$\nu\\colon *_{\\mathrm{proét}}\\longrightarrow(\\Spec\\Z)_{\\mathrm{proét}},\\qquad\nS\\longmapsto\\bigl(\\Spec LC(S,\\Z)\\to\\Spec\\Z\\bigr),\n$$\ntakes values in the small pro-étale site of $\\Spec\\Z$\n([def-weil-pbc-proetale-site]). On morphisms, $u$ sends a continuous map\n$g\\colon S'\\to S$ to the morphism $\\Spec LC(S',\\Z)\\to\\Spec LC(S,\\Z)$ induced\nby the ring map $LC(S,\\Z)\\to LC(S',\\Z)$, $h\\mapsto h\\circ g$.",
+ "statement": "Work in the universes $\\mathcal U\\in\\mathcal V$ of [def-weil-size-convention], with profinite sets in $\\mathcal U$. Let $*_{\\mathrm{proét}}$ be the category of profinite sets ([sk-def-sfb-condensed-ring]). For a profinite set $S$, let $LC(S,\\Z)$ denote the commutative ring of locally constant functions $S\\to\\Z$, with pointwise operations. Using the spectrum construction [def-weil-affine-spectrum], define\n$$u\\colon *_{\\mathrm{proét}}\\longrightarrow(\\Spec\\Z)_{\\mathrm{proét}},\\qquad\nS\\longmapsto\\bigl(\\Spec LC(S,\\Z)\\to\\Spec\\Z\\bigr),\n$$\nwhere the structure map is induced by the ring homomorphism sending an integer to the corresponding constant function. This takes values in the small pro-étale site of $\\Spec\\Z$ ([def-weil-pbc-proetale-site]). On morphisms, $u$ sends a continuous map $g\\colon S'\\to S$ to the morphism $\\Spec LC(S',\\Z)\\to\\Spec LC(S,\\Z)$ induced by the ring map $LC(S,\\Z)\\to LC(S',\\Z)$, $h\\mapsto h\\circ g$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-profinite-to-proetale.md",
   "place": "node def-sfb-profinite-to-proetale, order 1535"
  },
  "stmt_deps": [
+  "def-weil-size-convention",
   "sk-def-sfb-condensed-ring",
+  "def-weil-affine-spectrum",
   "def-weil-pbc-proetale-site"
  ],
  "proof": [
   {
-   "text": "By [lem-sfb-lc-weakly-etale], $\\Spec LC(S,\\Z)\\to\\Spec\\Z$ is weakly étale, so\n$u(S)$ is an object of $(\\Spec\\Z)_{\\mathrm{proét}}$. The composite of a\nlocally constant function with a continuous map is again locally constant, so\n$h\\mapsto h\\circ g$ is a well-defined ring map. The induced morphism of\nspectra lies over $\\Spec\\Z$ because $\\Spec\\Z$ is terminal. Precomposition\nrespects identities and composites, and so does $\\Spec$. Hence $u$ is a\nfunctor.",
+   "text": "Use the universes fixed by [def-weil-size-convention] and the profinite-set source category of [sk-def-sfb-condensed-ring]. The functions $S\\to\\Z$ form a $\\mathcal U$-small set. The locally constant functions form a subring: around any point, intersect neighborhoods on which two given functions are constant to see that their sum and product are constant there; negation and the constant functions are locally constant as well. Thus $LC(S,\\Z)$ is a concrete commutative ring in $\\mathcal U$. Let $c_S:\\Z\\to LC(S,\\Z)$ send $n$ to the constant function with value $n$.",
    "uses": [
-    "lem-sfb-lc-weakly-etale"
+    "def-weil-size-convention",
+    "sk-def-sfb-condensed-ring"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-profinite-to-proetale.proof.md",
+    "place": "Construction implicit in the statement; ring of locally constant functions"
+   }
+  },
+  {
+   "text": "By [def-weil-affine-spectrum], $\\Spec LC(S,\\Z)$ is a scheme and $\\Spec(c_S)$ is its specified morphism to $\\Spec\\Z$. It is $\\mathcal U$-small: prime ideals and the Zariski opens are subsets of power sets of the $\\mathcal U$-small ring, and the usual localization rings and sheaf data remain in $\\mathcal U$. Apply [lem-sfb-lc-weakly-etale] to this profinite $S$ and exactly this ring of locally constant integer-valued functions. It says that this structure morphism is weakly étale. The object description in [def-weil-pbc-proetale-site] therefore makes $\\Spec(c_S)$ an object of $(\\Spec\\Z)_{\\mathrm{proét}}$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-sfb-lc-weakly-etale",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-profinite-to-proetale.proof.md",
+    "place": "First sentence: the weakly étale object condition"
+   }
+  },
+  {
+   "text": "For a continuous map $g:S'\\to S$, define $g^*(h)=h\\circ g$. If $h$ is constant on an open neighborhood $V$ of $g(s')$, then $h\\circ g$ is constant on the open neighborhood $g^{-1}(V)$ of $s'$. Thus precomposition preserves locally constant functions. The equations $(h+k)\\circ g=(h\\circ g)+(k\\circ g)$, $(hk)\\circ g=(h\\circ g)(k\\circ g)$, and $1\\circ g=1$ hold pointwise, so $g^*$ is a unital ring homomorphism. Also $g^*\\circ c_S=c_{S'}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-profinite-to-proetale.proof.md",
+    "place": "Second sentence: precomposition is a well-defined ring map"
+   }
+  },
+  {
+   "text": "Apply the contravariant functorial spectrum construction of [def-weil-affine-spectrum] and set $u(g)=\\Spec(g^*)$. The equality $g^*\\circ c_S=c_{S'}$ gives $\\Spec(c_S)\\circ u(g)=\\Spec(c_{S'})$, so this is a morphism over $\\Spec\\Z$, hence a morphism in the site by [def-weil-pbc-proetale-site]. For $g:S'\\to S$ and $k:S''\\to S'$, the pointwise equations $(\\mathrm{id}_S)^*=\\mathrm{id}_{LC(S,\\Z)}$ and $(g\\circ k)^*=k^*\\circ g^*$ imply $u(\\mathrm{id}_S)=\\mathrm{id}_{u(S)}$ and $u(g\\circ k)=u(g)\\circ u(k)$ by spectrum functoriality. This proves the functor laws, including their direction, for the concrete assignments in the statement.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-profinite-to-proetale.proof.md",
+    "place": "Third and fourth sentences: over-base morphisms and functor laws"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-lc-weakly-etale"
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-affine-spectrum",
+  "lem-sfb-lc-weakly-etale",
+  "def-weil-pbc-proetale-site"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-profinite-to-proetale.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-profinite-to-proetale.proof.md",
+  "place": "Complete proof paragraph, with the ring-map and functor-law calculations expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "profiniteToProEt|LocallyConstant.*Spec|Spec.*LocallyConstant",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The functor from profinite sets to pro-etale schemes sends S to Spec of locally constant integer-valued functions on S",
+   "results": "8 hits: LightCondSet.LocallyConstant.functor; Condensed.isoLocallyConstantOfIsColimit; LightCondMod.LocallyConstant.functorToPresheaves; CondensedSet.LocallyConstant.functor; LocallyConstant.freeOfProfinite; profiniteToCondensed; Condensed.lanSheafProfinite; Condensed.locallyConstantPresheaf",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; hits are ingredient declarations or different profinite/condensed functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functor from profinite sets to pro-etale schemes Spec locally constant functions",
+   "results": "8 hits: lightProfiniteToLightCondSet; profiniteToCondensed; Condensed.profiniteFree; Profinite.diagram'; LightProfinite.diagram'; Condensed.profiniteSolid; lightDiagramToLightProfinite; lightToProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; hits are ingredient declarations or different profinite/condensed functors"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant|profiniteTo|protected def Spec|def Spec.map",
+   "results": "8 hits: Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Scheme.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Group/Affine.lean; grep directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; hits are ingredient declarations or different profinite/condensed functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous map of profinite spaces induces the spectrum map of the pullback ring homomorphism on locally constant integer functions, giving a functor into weakly etale schemes over Spec Z",
+   "results": "8 hits: LocallyConstant.comapRingHom; LocallyConstant.comapₐ; LocallyConstant.comapₗ; TopCat.continuousFunctions.pullback; LocallyConstant.mapRingHom; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map; AlgebraicGeometry.Spec.topMap; TopCat.continuousFunctions.map",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; hits are ingredient declarations or different profinite/condensed functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"comap\"",
+   "results": "12 hits: LocallyConstant.comap; LocallyConstant.comap_id; LocallyConstant.comap_injective; LocallyConstant.comap_comap; LocallyConstant.coe_comap_apply; LocallyConstant.coe_comap; LocallyConstant.comap_comp; LocallyConstant.comap_const",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; hits are ingredient declarations or different profinite/condensed functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "contravariant precomposition functor locally constant integer-valued functions on profinite sets",
+   "results": "8 hits: LightCondensed.locallyConstantPresheaf; LightCondSet.LocallyConstant.functor; CondensedSet.LocallyConstant.functor; Condensed.locallyConstantPresheaf; CompHausLike.LocallyConstant.functorToPresheaves; LightCondMod.LocallyConstant.functorToPresheaves; LightCondensed.finYoneda; CompHausLike.LocallyConstant.functor",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; hits are ingredient declarations or different profinite/condensed functors"
+  },
+  {
+   "tool": "grep",
+   "query": "def comapRingHom|def comap|theorem comap_comp|theorem comap_id",
+   "results": "7 hits: Mathlib/Topology/LocallyConstant/Algebra.lean; Mathlib/Topology/LocallyConstant/Algebra.lean; Mathlib/Topology/LocallyConstant/Algebra.lean; Mathlib/Topology/LocallyConstant/Algebra.lean; Mathlib/Topology/LocallyConstant/Basic.lean; Mathlib/Topology/LocallyConstant/Basic.lean; Mathlib/Topology/LocallyConstant/Basic.lean; grep directory Mathlib/Topology/LocallyConstant",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; hits are ingredient declarations or different profinite/condensed functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor assigning to a compact totally disconnected space the affine scheme of its locally constant integer-valued functions with precomposition on continuous maps",
+   "results": "8 hits; recorded top results: CondensedSet.LocallyConstant.functor; LightCondSet.LocallyConstant.functor; CompHausLike.LocallyConstant.functor; CompHausLike.LocallyConstant.functorToPresheaves; Condensed.locallyConstantPresheaf; lightProfiniteToLightCondSet; LightCondensed.locallyConstantPresheaf; lightProfiniteToCompHaus",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor. Only condensed-set or presheaf constructions; none constructs the specified pro-etale scheme functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEt\"",
+   "results": "12 hits; recorded top results: AlgebraicGeometry.Scheme.ProEt; AlgebraicGeometry.Scheme.proetalePrecoverage; AlgebraicGeometry.Scheme.proetaleTopology; AlgebraicGeometry.Scheme.instCategoryProEt; AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage; AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage; AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage; AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor. Small pro-etale site and topology declarations only; no locally constant integer spectrum functor."
+  },
+  {
+   "tool": "grep",
+   "query": "ProEt|profiniteTo|LocallyConstant",
+   "results": "10 hits; recorded top results: Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; subdirectory AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor. Read the small pro-etale category and object constructor in Sites/Proetale.lean:99-127; no construction from profinite sets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Profinite spaces map functorially to the small pro-etale site of Spec Z by the spectrum of their locally constant integer functions",
+   "results": "8 hits: CondensedSet.LocallyConstant.functor; lightDiagramToProfinite_obj; ProfiniteGrp.toProfinite; Condensed.lanSheafProfinite; LightCondMod.LocallyConstant.functorToPresheaves; Condensed.locallyConstantPresheaf; Profinite.toCondensed; LightCondensed.locallyConstantPresheaf",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; hits describe precomposition, condensed objects, or forgetful functors, not the specified pro-etale scheme functor"
+  },
+  {
+   "tool": "grep",
+   "query": "profiniteToProEt|LocallyConstant.*Spec|Spec.*LocallyConstant",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; hits describe precomposition, condensed objects, or forgetful functors, not the specified pro-etale scheme functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Profinite spaces map functorially to the small pro-etale site of Spec Z by the spectrum of their locally constant integer functions",
+   "results": "8 hits: lightProfiniteToLightDiagram_obj; profiniteToCondensed; profiniteToCompHaus; LightProfinite.toTopCat; Profinite.diagram'; lightToProfinite; lightProfiniteToLightCondSet; lightDiagramToLightProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; hits describe precomposition, condensed objects, or forgetful functors, not the specified pro-etale scheme functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"comapRingHom\"",
+   "results": "2 hits: LocallyConstant.comapRingHom; LocallyConstant.comapRingHom_apply_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; hits describe precomposition, condensed objects, or forgetful functors, not the specified pro-etale scheme functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor from compact Hausdorff totally disconnected spaces to schemes over the integers via locally constant functions",
+   "results": "8 hits: CondensedSet.LocallyConstant.functor; LightCondSet.LocallyConstant.functor; Profinite.indexFunctor; Condensed.locallyConstantPresheaf; LightCondensed.locallyConstantPresheaf; CompHausLike.LocallyConstant.functor_obj_val; CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstant.functorToPresheaves",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; hits are condensed-set, locally constant presheaf, module, or finite-product diagram functors, not schemes over Spec Z"
+  },
+  {
+   "tool": "grep",
+   "query": "profiniteToProEt|profiniteToScheme|LocallyConstant.*Spec|Spec.*LocallyConstant",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; returned types give spectrum, precomposition, terminality, or condensed/presheaf constructions only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of locally constant integer functions gives a functor from profinite spaces to weakly etale schemes over Spec Z",
+   "results": "8 hits: lightToProfinite; AlgebraicGeometry.specULiftZIsTerminal; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.specZIsTerminal; AlgebraicGeometry.Spec.toTop; AlgebraicGeometry.Scheme.Spec; AlgebraicGeometry.Spec.toLocallyRingedSpace; AlgebraicGeometry.Spec.toSheafedSpace",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; returned types give spectrum, precomposition, terminality, or condensed/presheaf constructions only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor from profinite spaces to the small pro-etale site of the integers using spectra of locally constant functions",
+   "results": "8 hits: profiniteToCondensed; Condensed.locallyConstantPresheaf; Profinite.indexFunctor; Condensed.isoLocallyConstantOfIsColimit; Profinite.exists_locallyConstant; Condensed.lanSheafProfinite; LightCondMod.LocallyConstant.functorToPresheaves; Profinite.toCondensed",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; returned types give spectrum, precomposition, terminality, or condensed/presheaf constructions only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"comapRingHom\"",
+   "results": "2 hits: LocallyConstant.comapRingHom; LocallyConstant.comapRingHom_apply_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; returned types give spectrum, precomposition, terminality, or condensed/presheaf constructions only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "profinite sets to pro-etale schemes via spectrum locally constant integer functions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.instFullEtaleOverForget; StandardEtalePair.hasMap_X; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; inspected hits give étale categories, standard étale ring presentations, precomposition of locally constant functions, condensed/presheaf constructions, or module properties, rather than the specified pro-etale scheme functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant.comapRingHom",
+   "results": "2 hits: LocallyConstant.comapRingHom; LocallyConstant.comapRingHom_apply_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; inspected hits give étale categories, standard étale ring presentations, precomposition of locally constant functions, condensed/presheaf constructions, or module properties, rather than the specified pro-etale scheme functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor from profinite sets to schemes over the integers given by locally constant integer functions",
+   "results": "8 hits: CompHausLike.LocallyConstant.functor; Profinite.NobelingProof.Nobeling_aux; CondensedMod.LocallyConstant.functorToPresheaves; Condensed.locallyConstantPresheaf; Profinite.indexFunctor; Profinite.NobelingProof.instIsAddTorsionFreeLocallyConstantInt; Condensed.isoLocallyConstantOfIsColimit_inv; CondensedSet.LocallyConstant.iso",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; inspected hits give étale categories, standard étale ring presentations, precomposition of locally constant functions, condensed/presheaf constructions, or module properties, rather than the specified pro-etale scheme functor"
+  },
+  {
+   "tool": "grep",
+   "query": "profiniteToProEt|profiniteToScheme|LocallyConstant.*Spec|Spec.*LocallyConstant",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; read the returned types: spectrum constructions, affine-scheme categories, precomposition, profinite diagrams, and condensed/presheaf functors do not give the stated pro-etale-valued functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A profinite set defines a scheme over Spec Z by its ring of locally constant integer valued functions functorially",
+   "results": "8 hits: AlgebraicGeometry.Spec.full; AlgebraicGeometry.Scheme.Spec; AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat; AlgebraicGeometry.Spec; AlgebraicGeometry.AffineSpace; AlgebraicGeometry.AffineScheme.Spec_essSurj; AlgebraicGeometry.AffineScheme.forgetToScheme; AlgebraicGeometry.AffineScheme",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; read the returned types: spectrum constructions, affine-scheme categories, precomposition, profinite diagrams, and condensed/presheaf functors do not give the stated pro-etale-valued functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor from profinite sets to weakly etale schemes over the integers given by spectra of locally constant functions",
+   "results": "8 hits: profiniteToCondensed; Profinite.indexFunctor; CondensedSet.LocallyConstant.functorFullyFaithful; Condensed.locallyConstantPresheaf; Condensed.isoLocallyConstantOfIsColimit_inv; Condensed.isoLocallyConstantOfIsColimit; CondensedSet.LocallyConstant.functor; Condensed.lanSheafProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; read the returned types: spectrum constructions, affine-scheme categories, precomposition, profinite diagrams, and condensed/presheaf functors do not give the stated pro-etale-valued functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant.comapRingHom",
+   "results": "2 hits: LocallyConstant.comapRingHom; LocallyConstant.comapRingHom_apply_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole functor; read the returned types: spectrum constructions, affine-scheme categories, precomposition, profinite diagrams, and condensed/presheaf functors do not give the stated pro-etale-valued functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous maps compact totally disconnected spaces integer valued locally constant rings affine spectra functor over integers",
+   "results": "8 hits: AlgebraicGeometry.specZIsTerminal; Profinite.indexFunctor; AlgebraicGeometry.specULiftZIsTerminal; AlgebraicGeometry.AffineSpace.functor; AlgebraicGeometry.AffineScheme.Spec; AlgebraicGeometry.AffineScheme.Spec_full; AlgebraicGeometry.Spec.toTop; AlgebraicGeometry.AffineScheme.Γ",
+   "date": "2026-10-16",
+   "verdict": "No match for the whole functor. Read returned types: terminality, finite-product profinite diagrams, affine spectrum/global-sections functors, and locally constant precomposition identity provide ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"comap_id\"",
+   "results": "1 hits: LocallyConstant.comap_id",
+   "date": "2026-10-16",
+   "verdict": "No match for the whole functor. Read returned types: terminality, finite-product profinite diagrams, affine spectrum/global-sections functors, and locally constant precomposition identity provide ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "Profinite.*ProEt|ProEt.*Profinite|LocallyConstant.*Spec|Spec.*LocallyConstant",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "No match for the whole functor. Read returned types: terminality, finite-product profinite diagrams, affine spectrum/global-sections functors, and locally constant precomposition identity provide ingredients only."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -56,5 +312,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-pullback-from-point"
+ "unit": "sk-def-sfb-pullback-from-point",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-profinite-to-proetale",
+  "worker": "stage1",
+  "summary": "Rechecked the preserved four-step construction against the main-20261015 chapter, parent unit, item and proof, all five current cited statements, Stacks site/spectrum definitions and the upstream reference construction. Fresh command-logged LeanFinder, LeanSearch, Loogle and full-Mathlib grep found only ingredient constructions or different functors. Verified all seven citation quotes, dependency equality and the empty, one-point and two-point cases. No mathematical change, new node, Mathlib leaf or slopmaster2 attachment was required.",
+  "blueprint": "Steps 1–2 realize the locally constant ring and first sentence of def-sfb-profinite-to-proetale.proof.md; step 3 expands its second sentence; step 4 proves its last two sentences. This is the functor-construction portion of part 1 of sk-def-sfb-pullback-from-point.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N2-717b80f91",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-717b80f91 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, source places, and unit/chapter route. All four construction steps, the over-Spec Z triangle, functor variance, universe bounds, and empty/finite cases check out. No new nodes or repairs. Recorded detailed checks and historical report discrepancies in review.md."
+ }
 }
