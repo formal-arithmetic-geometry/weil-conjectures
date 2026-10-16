@@ -15324,3 +15324,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:58 L: returned deliver/G2/Sheaf.Paper.CondensedQcqsPushforwardLocalComparison (reviewer RETURN: (reviewer X-c920b, head c920b57ee) H4 / review point 5: reuse the existing homotopy-invariance theorem. In lean/Sheaf/Pa)
 - 01:11 L: returned deliver/B2/Sheaf.Paper.ContinuousIntegralPushComparison (reviewer RETURN: (the landing tools, head afcbbef3a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 01:11 L: returned deliver/C4/Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound (reviewer RETURN: (the landing tools, head 7f515dae9) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 01:11 L: returned deliver/D4/Sheaf.CategoryTheory.GoodTruncationTotalBoundaryImage (reviewer RETURN: (the landing tools, head 8488f376f) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
