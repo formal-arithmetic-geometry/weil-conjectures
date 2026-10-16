@@ -292,5 +292,35 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-80208a4c1 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, cited statements, primary source passages, route, and target coefficient/base-change definitions. Mathematics accepted; repaired shared provenance/default metadata omissions in four whole JSON files under fixes/. Concrete step-by-step checks, edge cases, duplicate searches, and accepted tool uses are recorded in review.md.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatComplexCotorsionPairs",
+  "declaration": "CategoryTheory.CoefficientFlatCotorsion.flat_complex_cotorsion_pairs",
+  "declarations": [
+   "CategoryTheory.CoefficientFlatCotorsion.IsHereditary",
+   "CategoryTheory.CoefficientFlatCotorsion.IsSmall",
+   "CategoryTheory.CoefficientFlatCotorsion.IsCompleteHereditarySmallPair",
+   "CategoryTheory.CoefficientFlatCotorsion.IsCotorsion",
+   "CategoryTheory.CoefficientFlatCotorsion.FlatKFlat",
+   "CategoryTheory.CoefficientFlatCotorsion.RightClass",
+   "CategoryTheory.CoefficientFlatCotorsion.TrivialRightClass",
+   "CategoryTheory.CoefficientFlatCotorsion.flat_complex_cotorsion_pairs"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FlatComplexCotorsionPairs.lean",
+  "statement": "theorem flat_complex_cotorsion_pairs : (∀ T : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ, TrivialRightClass (R := R) T ↔ RightClass (R := R) T ∧ T.Acyclic) ∧ IsCompleteHereditarySmallPair.{_, _, r} (FlatKFlat (R := R)) (TrivialRightClass (R := R)) ∧ IsCompleteHereditarySmallPair.{_, _, r} (fun P ↦ FlatKFlat (R := R) P ∧ P.Acyclic) (RightClass (R := R))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Maintainer H4 repair: reuse shared Cotorsion.ExtOneOrthogonal, IsCotorsionPair and IsComplete from SmallCotorsionModelRecognition. Retain a generating-index-universe generalization of smallness, since the existing IsSmall fixes the index to the ambient Hom universe. Mathematical statement and all independent site/coefficient universes unchanged.",
+  "fixed_by": "NT-stage2-Codex-fd2369203"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fd2369203",
+  "group": "NX",
+  "result": "fix",
+  "note": "Wrote review.md and three complete replacement files under fixes/. Repaired H4 duplicate cotorsion predicates using existing declarations, preserving the statement and universes. Original and replacement compile cleanly through scompile.py. Immutable delivery and branch unchanged."
  }
 }
