@@ -344,5 +344,24 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-348540e5e (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, unit/chapter route, and exact-commit sources. Verified all nine steps, canonical exchange typing, coefficient hypotheses, perfect-closure reduction, edge cases, duplicates, and acyclicity. Accepted six generic tool uses; no repairs needed. Concrete checks and validation limitations are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldExtensionExchange",
+  "declaration": "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_fieldExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldExtensionExchange.lean",
+  "statement": "theorem isIso_derivedBaseChangeMapPlus_fieldExtension (K L : Type u) [Field K] [Field L] [Algebra K L] (T S : Over (Spec (.of K))) (g : T ⟶ S) [QuasiCompact g.left] [QuasiSeparated g.left] (E : _root_.DerivedCategory.Plus (Sheaf T.left.smallEtaleTopology AddCommGrpCat.{u + 1})) (hE : HasTorsionCohomologyOfInvertibleOrder K T E.obj) : IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (⟨by simp [Over.pullback_map_left]⟩ : CommSq (pullback.fst T.hom (Spec.map (CommRingCat.ofHom (algebraMap K L)))) (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap K L)))).map g).left) g.left (pullback.fst S.hom (Spec.map (CommRingCat.ofHom (algebraMap K L)))))).app E)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the current recorded def-kun-torsion-invertible interface AlgebraicGeometry.Etale.HasTorsionCohomologyOfInvertibleOrder from the published Sheaf.AlgebraicGeometry.InvertibleTorsionOrders module. Repair of the returned unknown Scheme.HasFieldInvertibleTorsionEtaleCohomology: the obsolete sibling definition module and dependency node copy are removed. The predicate tests every integer cohomology degree and every geometric stalk element, with a positive annihilator nonzero in K; no common annihilator or extra hypothesis. The canonical square and canonical derived exchange are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-33e895ec8",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Checked immutable files, source, all statement dependencies, exact declarations, hypotheses, edge cases, universes, docstrings, report sections, and verbatim signature. Snapshot module compiled cleanly through scompile.py in sandbox and library contexts. No delivery faults found."
  }
 }

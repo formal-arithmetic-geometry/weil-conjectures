@@ -192,5 +192,30 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-742a8aa55 (reviewer sub-agent of L); spot-checked: Reviewed item, unit route, all cited nodes, Stacks sources 04HN/03DI/03DJ/03EM/015F, coefficient categories, compact-support scope, six proof steps, and edge cases. The repaired statement and proof are well typed; no new nodes remain and no fixes are required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleProEtaleAdjunction",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtale_proEtale_exact_derived_adjunction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteEtaleAdjunction_coefficientFinite",
+   "AlgebraicGeometry.Scheme.finiteEtaleAdjunction_inverseImage",
+   "AlgebraicGeometry.Scheme.finiteEtale_proEtale_exact_derived_adjunction",
+   "AlgebraicGeometry.Scheme.finiteEtale_proEtale_identityCompactification_adjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleProEtaleAdjunction.lean",
+  "statement": "theorem finiteEtale_proEtale_exact_derived_adjunction (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) {V X : Scheme.{u}} (e : V ⟶ X) [IsFinite e] [Etale e] (_hV : ∀ v : V, IsUnit (l : V.presheaf.stalk v)) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) : PreservesFiniteLimits (proEtaleConstantModuleDirectImage e (Padic.coefficientExtensionRing l E (n + 1))) ∧ PreservesFiniteColimits (proEtaleConstantModuleDirectImage e (Padic.coefficientExtensionRing l E (n + 1))) ∧ Nonempty (DerivedCategory.Q ⋙ proEtaleConstantDerivedDirectImage e (Padic.coefficientExtensionRing l E (n + 1)) ≅ (proEtaleConstantModuleDirectImage e (Padic.coefficientExtensionRing l E (n + 1))).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ∧ Nonempty (proEtaleConstantDerivedDirectImage e (Padic.coefficientExtensionRing l E (n + 1)) ⊣ finiteEtaleAdjunction_inverseImage e (Padic.coefficientExtensionRing l E (n + 1)))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The two theorem statements render the ordinary and specified-compactification clauses. The inverse-image helper is the canonical transport of the recorded ProEtale.upperStar through sfIntrinsicModuleEquivalence, descended termwise; no new coefficient identification is chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ecdefd4f0",
+  "group": "N5",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement dependencies, source places, exact declarations, hypotheses, conclusions, edge cases, universes, dependency repair, docstrings and report sections. Both immutable Lean modules compiled through scompile.py with exit 0 and no diagnostics. No corrections needed; branch unchanged."
  }
 }

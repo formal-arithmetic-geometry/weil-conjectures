@@ -94,21 +94,25 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek",
-  "declaration": "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification",
-  "statement": "noncomputable abbrev rightDerivedLowerShriekOfCompactification :\n    DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n      DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)",
-  "branch": "slopmaster2",
-  "by": "Q34",
+  "module": "Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport",
+  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicCompactSupport",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfIntrinsicCompactSupport"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfIntrinsicCompactSupport.lean",
+  "statement": "def sfIntrinsicCompactSupport {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (A : Type u) [CommRing A] [Finite A] : proEtaleDerivedCategory X A ⥤ proEtaleDerivedCategory Y A",
+  "branch": "newtargets-dag",
+  "by": "N5",
   "date": "2026-10-16",
-  "existing": true,
-  "note": "The pinned slopmaster2 source declaration is exactly the compactification-level functor in this node. Its body is D((c.i)_!open[A]) ⋙ R((c.g)_*[A]), i.e. extension by zero followed by total right-derived direct image on the small pro-etale sites. Specializing A to ModuleCat.{u + 1} (A_{E,n}) gives the finite-torsion candidate Rf_{!,n}^c. The K0 finite-type, separated finite-type, prime, invertibility, and etale-origin conditions are the node context on which the separately cited coherence and triangulated properties are asserted; they are not additional data of this definition. The source documentation explicitly states that this is the derived lower shriek attached to a compactification."
+  "existing": false,
+  "note": "§1(B): the recorded category-valued-sheaf candidate cannot be applied directly to the intrinsic constant-ring module categories fixed by the site and direct-image dependencies. This module gives the identical compactification formula R(c.g)_* after exact (c.i)_!, in that presentation, using the published canonical finiteCoefficientIntrinsicRealization equivalence. No arbitrary coefficient identification or extra hypothesis is introduced; the independence and coherence assertions remain the separately cited properties on the etale-origin subcategory."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-27dd66900",
-  "group": "Q34",
+  "reviewer": "NT-stage2-Codex-ecdefd4f0",
+  "group": "N5",
   "result": "pass",
-  "note": "Verified the immutable node, all statement dependencies, source declaration and docstrings, exact functor body/signature, edge cases, universes, one-definition rule, report sections, and searches. scompile.py source reproduction exited 0; no fixes needed."
+  "note": "Wrote review.md. Checked all statement dependencies, source places, exact declarations, hypotheses, conclusions, edge cases, universes, dependency repair, docstrings and report sections. Both immutable Lean modules compiled through scompile.py with exit 0 and no diagnostics. No corrections needed; branch unchanged."
  }
 }
