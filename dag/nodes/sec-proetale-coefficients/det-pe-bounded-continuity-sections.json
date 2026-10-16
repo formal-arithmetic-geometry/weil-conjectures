@@ -237,5 +237,29 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-c1cec8364 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, current blueprint route, and cited source locations. All six steps preserve arbitrary ring-sheaf coefficients and prove the canonical continuity map is an isomorphism. Checked bounds, signs, cycles and boundaries, edge cases, duplicate candidates, and dependency acyclicity. No new nodes or repairs; accepted the declared Grothendieck-category tool use. Details written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuitySections",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.isIso_ringHypercohomology_colimitPost",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.ringHypercohomology_transport_preservesZeroMorphisms",
+   "AlgebraicGeometry.Scheme.ProEt.ringHypercohomology",
+   "AlgebraicGeometry.Scheme.ProEt.isIso_ringHypercohomology_colimitPost"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleBoundedContinuitySections.lean",
+  "statement": "theorem isIso_ringHypercohomology_colimitPost (X : Scheme.{u}) (R : Sheaf (topology X) RingCat.{u + 1}) (U : X.ProEt) [CompactSpace U.left] [QuasiSeparatedSpace U.left] {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (K : I ⥤ CochainComplex (ringedSiteModules.{u + 1} R) ℤ) (a : ℤ) (hK : ∀ (i : I) (b : ℤ), b < a → IsZero ((K.obj i).X b)) (q : ℤ) : IsIso (colimit.post K (ringHypercohomology X R U q))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The hypercohomology helper is the actual composite of published sectionwise small-site transport, functorial K-injective resolution, abelian evaluation and integer-degree homology. Its named zero-map transport lemma is the structural proof needed to apply transport to complexes. Both are helpers of this node, not alternative coefficient categories or arbitrary comparison maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-32ac6f252",
+  "group": "NE",
+  "result": "pass",
+  "note": "All statement, dependency, universe, edge-case, documentation, report, and scompile checks passed."
  }
 }

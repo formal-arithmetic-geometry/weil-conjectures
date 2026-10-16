@@ -26,7 +26,9 @@
   "lem-weil-pbc-site-derived-tensor-descent",
   "def-weil-pbc-strict-perfect-coefficient-package",
   "def-pc-cochain-complex-modules",
-  "def-weil-derived-cohomology-sheaves"
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-wf-tensor-product"
  ],
  "proof": [
   {
@@ -306,5 +308,24 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-b13b62df4 (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full; verified all eight steps, Stacks sources, hypotheses, edge cases, duplicates, dependencies and unit route. Mathematics accepted. Restored missing creation, merge and Lean-audit metadata in two corrected JSON files under fixes/dag/nodes/sec-six-functors/. Statements and proofs unchanged. Detailed checks and accepted tool uses are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SitePerfectTorWindow",
+  "declaration": "SheafOfModules.exists_strictPerfect_model_in_tor_window",
+  "file": "lean/Sheaf/Algebra/Homology/SitePerfectTorWindow.lean",
+  "statement": "theorem exists_strictPerfect_model_in_tor_window {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max u v}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}] [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max u v}] [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v}] (R : Sheaf J CommRingCat.{max u v}) [HasDerivedCategory.{w} (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))] [∀ U : C, HasDerivedCategory.{w'} (SheafOfModules.{max u v} (((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U))] (E : DerivedCategory (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))) (_hperfect : IsPerfectOnRingedSiteOfUniverses.{u, v, 0} R E) (a b : ℤ) (_hab : a ≤ b) (_hTor : ∀ (F : SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) (r : ℤ), r < a ∨ b < r → IsZero ((DerivedCategory.homologyFunctor _ r).obj ((wfSiteDerivedTensor J R).obj (E, (DerivedCategory.singleFunctor _ 0).obj F)))) : ∀ U : C, ∃ S : Sieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → ∃ P : StrictPerfectCoefficientRepresentationOfUniverses.{u, v, 0} R V (ringedSiteDerivedRestrictionOfUniverses ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) V E), ∀ r : ℤ, r < a ∨ b < r → IsZero (P.F.X r)",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair of return L on immutable head c6913b751be8: use the already recorded SheafOfModules.wfSiteDerivedTensor instead of inlining its large nested Classical.choose expression. Its definition is exactly the former expression, so all mathematical hypotheses, conclusions and universe parameters are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-117751d10",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Wrote review.md. Checked statements, dependencies, source passages, canonical constructions, universes, edge cases, docstrings, and report sections. Immutable module compiled cleanly through scompile.py (9.8 s sandbox; 6.7 s library). No corrections needed; branch unchanged."
  }
 }
