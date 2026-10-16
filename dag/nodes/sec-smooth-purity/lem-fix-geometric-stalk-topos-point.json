@@ -368,5 +368,29 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-b7a7720f5 (reviewer sub-agent of L); spot-checked: Read the full mathematics, all seven steps and 23 cited statements; checked Stacks source passages, same-field lifting, adjunction direction, finite limits, edge cases, duplicates and unit route. No new nodes, circularity or coefficient-category substitution found. Accepted weakly-etale-field tool use. Detailed checks written to review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricStalkToposPoint",
+  "declaration": "AlgebraicGeometry.Scheme.geometricStalkToposPoint",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.geometricLiftFunctionPresheaf",
+   "AlgebraicGeometry.Scheme.proEtaleGeometricSetStalkFunctor",
+   "AlgebraicGeometry.Scheme.geometricStalkToposPoint"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricStalkToposPoint.lean",
+  "statement": "theorem geometricStalkToposPoint {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) : (∃ R : Type (u + 1) ⥤ Sheaf Y.smallEtaleTopology (Type (u + 1)), R ⋙ sheafToPresheaf Y.smallEtaleTopology (Type (u + 1)) = geometricLiftFunctionPresheaf (pointSmallEtale y).fiber ∧ Nonempty ((pointSmallEtale y).sheafFiber (A := Type (u + 1)) ⊣ R) ∧ PreservesFiniteLimits ((pointSmallEtale y).sheafFiber (A := Type (u + 1)))) ∧ (∃ R : Type (u + 1) ⥤ Sheaf (ProEt.topology Y) (Type (u + 1)), R ⋙ sheafToPresheaf (ProEt.topology Y) (Type (u + 1)) = geometricLiftFunctionPresheaf (ProEt.forget Y ⋙ coyoneda.obj (op (Over.mk y))) ∧ Nonempty (proEtaleGeometricSetStalkFunctor y ⊣ R) ∧ PreservesFiniteLimits (proEtaleGeometricSetStalkFunctor y))",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-16",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-5578c75ed"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5578c75ed",
+  "group": "Q04",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, edge cases and verbatim signature checked. Removed two explicit helper-law proof scripts for H6 compliance; standard Mathlib defaults suffice. Original and replacement compile cleanly through scompile.py. Branch unchanged."
  }
 }

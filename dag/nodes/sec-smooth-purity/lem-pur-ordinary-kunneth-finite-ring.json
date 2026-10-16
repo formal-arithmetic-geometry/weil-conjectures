@@ -304,5 +304,31 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-70e6fcd1f (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited statements; checked Stacks 0F1P, 0F12, 0F10, 0D6E, 07A4 and 0C2X. Canonical-map compatibility, unbounded coefficient reduction and filtration are valid. New tensor-summand lemma passes small-case and duplicate checks. No repairs needed; detailed findings and accepted tool uses are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryKunnethFiniteRing",
+  "declaration": "AlgebraicGeometry.Etale.isIso_ordinaryGlobalKunnethMap_finiteCoefficientRing",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryKunnethFiniteRing.lean",
+  "statement": "theorem isIso_ordinaryGlobalKunnethMap_finiteCoefficientRing (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ ringChar D.k) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) (X Y : Over (Spec (CommRingCat.of D.k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (K : DerivedCategoryModule (Padic.coefficientExtensionRing l E n) X.left) (M : DerivedCategoryModule (Padic.coefficientExtensionRing l E n) Y.left) : IsIso (ordinaryGlobalKunnethMap (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) (pullback.fst X.hom Y.hom) (pullback.snd X.hom Y.hom) K M)",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.derivedConstantPullbackIso",
+   "AlgebraicGeometry.Etale.ordinaryKunnethPulledCounit",
+   "AlgebraicGeometry.Etale.ordinaryKunnethTensorMate",
+   "AlgebraicGeometry.Etale.ordinaryGlobalKunnethMap",
+   "AlgebraicGeometry.Etale.isIso_ordinaryGlobalKunnethMap_finiteCoefficientRing"
+  ],
+  "fixed_by": "NT-stage2-Codex-a29d03a7d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a29d03a7d",
+  "group": "Q40",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacement fixes/OrdinaryKunnethFiniteRing.lean. Mathematics, canonical arrow, dependencies, universes, edge cases, and verbatim signature accepted. Fixed the missing declaration list and generic proof import. Original and replacement both passed scompile.py without warnings. No repository changes."
  }
 }

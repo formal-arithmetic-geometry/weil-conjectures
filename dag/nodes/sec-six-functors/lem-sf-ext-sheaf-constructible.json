@@ -342,5 +342,28 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-ccead2404 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, ten proof steps, unit/chapter route, every cited DAG statement, and Stacks sources 08J7, 08JB, 03EM/04TT, 0117, 03RX, 03RU, 03RV, 02GO, 01S1, and 0217. The repaired etale coefficient typing, finite-stratum Hom-complex filtration, exact base-change argument, and fixed-partition descent are mathematically sound; hypotheses and edge cases were checked. There are no new nodes, duplicates, circularities, or required fixes. Full review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleSitePerfectConstructibleHom",
+  "declaration": "AlgebraicGeometry.Etale.constructible_cohomology_derivedHom_of_etale_sitePerfect",
+  "declarations": [
+   "AlgebraicGeometry.Etale.constructible_cohomology_derivedHom_of_etale_sitePerfect",
+   "AlgebraicGeometry.Etale.extSheaf_vanish_and_hom_constructible_of_etale_finiteLocallyFree"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleSitePerfectConstructibleHom.lean",
+  "statement": "theorem constructible_cohomology_derivedHom_of_etale_sitePerfect (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X : Scheme.{u}) (K M : DerivedCategoryModule (Padic.coefficientExtensionRing l E n) X) (_hK : ∃ U : Scheme.Cover.{u} Scheme.etalePrecoverage X, ∀ α : U.I₀, ∃ P : CochainComplex (Sheaf (U.X α).smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) ℤ, Nonempty (_root_.DerivedCategory.Q.obj P ≅ (upperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) (U.f α)).mapDerivedCategory.obj K) ∧ (∃ a b : ℤ, a ≤ b ∧ ∀ p : ℤ, (p < a ∨ b < p) → IsZero (P.X p)) ∧ ∀ p : ℤ, ∃ r : ℕ, ∃ ι : P.X p ⟶ (constantSheaf (U.X α).smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))).obj (ModuleCat.of (Padic.coefficientExtensionRing l E n) (Fin r → Padic.coefficientExtensionRing l E n)), ∃ π : (constantSheaf (U.X α).smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))).obj (ModuleCat.of (Padic.coefficientExtensionRing l E n) (Fin r → Padic.coefficientExtensionRing l E n)) ⟶ P.X p, ι ≫ π = 𝟙 (P.X p)) (_hM : @DerivedCategory.isBoundedConstructible.{u} (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn) X M) : ∀ i : ℤ, @Scheme.IsConstructibleEtaleModuleSheaf.{u} X (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn) ((_root_.DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) i).obj (((derivedHom (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) X).obj (op K)).obj M))",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The two declarations render the general cohomology-wise assertion and its finite-locally-free sheaf corollary. The site-perfect and finite-locally-free hypotheses are written inline, exactly as the node specifies on the etale site; no pro-etale perfectness predicate is substituted. The finite coefficient quotient is in the coefficient universe of the recorded etale category."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e4b471b64",
+  "group": "NS",
+  "result": "pass",
+  "note": "Wrote review.md. Checked both statements, all eight statement dependencies, sources, universes, edge cases, docstrings, report sections, and verbatim signature. Immutable module compiled cleanly through scompile.py in sandbox and library paths. No fixes needed; branch unchanged."
  }
 }

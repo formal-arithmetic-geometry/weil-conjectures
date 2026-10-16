@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "The exact sequence of supported sections for injective objects",
- "statement": "For the closed–open pair of\nsupported sections and a termwise\ninjective complex $I^\\bullet$ of $\\Lambda$-module sheaves, there is\na short exact sequence of complexes\n\n$$\n0\\longrightarrow s_*s^!I^\\bullet\\longrightarrow I^\\bullet\n\\longrightarrow j_*j^*I^\\bullet\\longrightarrow0.\n$$",
+ "statement": "Let $s:Z\\hookrightarrow X$ be a closed immersion of schemes and $j:U\\hookrightarrow X$ its complementary open immersion, and assume that $j$ is quasi-compact. Fix a finite commutative coefficient ring $\\Lambda$ and the supported-section and underived constant-coefficient pro-etale functors of [def-pur-flasque-support, def-weil-proetale-inverse-image]. Let $I^\\bullet$ be an integer-indexed cochain complex [def-weil-abstract-derived-category] of $\\Lambda$-module sheaves whose terms are injective [def-sp-injective-resolutions]. Then the canonical sequence of complexes\n$$\n0\\longrightarrow s_*s^!I^\\bullet\\xrightarrow{\\iota}I^\\bullet\n\\xrightarrow{\\eta_j}j_*j^*I^\\bullet\\longrightarrow0\n$$\nis short exact [def-weil-pbc-exact-sequence]. Here $\\eta_j$ is the open inverse-image/direct-image adjunction unit. Writing $\\mathcal G_Z=\\ker\\eta_j$ and $q_M:\\mathcal G_ZM\\to s_*s^{-1}\\mathcal G_ZM=s_*s^!M$ for the closed adjunction unit, the first map is characterized in every degree by $\\iota^r q_{I^r}=(\\mathcal G_ZI^r\\hookrightarrow I^r)$; $q_{I^r}$ is an isomorphism under the quasi-compactness assumption. No boundedness or K-injectivity of $I^\\bullet$ is required.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-exact.md",
   "place": "node lem-pur-support-exact, order 1930"
@@ -72,11 +72,12 @@
    }
   },
   {
-   "text": "By [def-pur-flasque-support], in each degree\n$\\mathcal G_ZI^r=\\ker(\\eta^r)=s_*s^!I^r$, with the displayed equality supplying the canonical kernel identification; kernels of module sheaves are computed sectionwise by [def-weil-sheaf-of-modules-category]. Naturality of restriction gives $\\eta^{r+1}d_I^r=(j_*j^*d_I^r)\\eta^r$. Thus $d_I^r$ restricts to $\\delta^r:\\mathcal G_ZI^r\\to\\mathcal G_ZI^{r+1}$, equivalently to the differential on $s_*s^!I^\\bullet$, and $\\delta^{r+1}\\delta^r=0$ by cancellation of the kernel inclusion. The kernel inclusions and the units form morphisms of complexes, with zero composite. In each degree the inclusion is monic, its image is the kernel of $\\eta^r$, and $\\eta^r$ is epic by step 4. Therefore the sequence is short exact in each degree by [def-weil-pbc-exact-sequence].",
+   "text": "By [def-pur-flasque-support], in each degree\n$\\mathcal G_ZI^r=\\ker(\\eta^r)=s_*s^!I^r$, where the identification is the inverse of the canonical closed adjunction unit, an isomorphism for the quasi-compact open complement by [lem-exc-proetale-closed-essential-image]; kernels of module sheaves are computed sectionwise by [def-weil-sheaf-of-modules-category]. Naturality of restriction gives $\\eta^{r+1}d_I^r=(j_*j^*d_I^r)\\eta^r$. Thus $d_I^r$ restricts to $\\delta^r:\\mathcal G_ZI^r\\to\\mathcal G_ZI^{r+1}$, equivalently to the differential on $s_*s^!I^\\bullet$, and $\\delta^{r+1}\\delta^r=0$ by cancellation of the kernel inclusion. The kernel inclusions and the units form morphisms of complexes, with zero composite. In each degree the inclusion is monic, its image is the kernel of $\\eta^r$, and $\\eta^r$ is epic by step 4. Therefore the sequence is short exact in each degree by [def-weil-pbc-exact-sequence].",
    "uses": [
     "def-pur-flasque-support",
     "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-exact-sequence"
+    "def-weil-pbc-exact-sequence",
+    "lem-exc-proetale-closed-essential-image"
    ],
    "elementary": false,
    "source": {
@@ -108,7 +109,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-flasque-support",
   "def-weil-pbc-exact-sequence",
-  "lem-weil-pbc-cochain-complexes-degreewise-exact"
+  "lem-weil-pbc-cochain-complexes-degreewise-exact",
+  "lem-exc-proetale-closed-essential-image"
  ],
  "proof_origin": {
   "by": "agent",
@@ -239,5 +241,137 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-1e251c20f (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source locations, and unit/chapter route. All six steps check out, including pro-étale coefficient identification, free-sheaf monomorphism, injective lifting, and degreewise exactness. Edge cases pass; no new nodes, duplicates, circular dependencies, or repairs. Accepted the localization tool use. Full review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PurSupportExact",
+  "declaration": "AlgebraicGeometry.ProEtale.shortExact_sectionsWithSupport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.supportedSectionsComplex",
+   "AlgebraicGeometry.ProEtale.shortExact_sectionsWithSupport"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PurSupportExact.lean",
+  "statement": "theorem shortExact_sectionsWithSupport (R : Type (u + 1)) [CommRing R] [Finite R] {Z U X : Scheme.{u}} (s : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion s] [IsOpenImmersion j] [QuasiCompact j] (hcompl : IsCompl (Set.range s.base) (Set.range j.base)) (I : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) ℤ) [∀ n, Injective (I.X n)] : ∃ (f : supportedSectionsComplex R s j hcompl I ⟶ I) (g : I ⟶ (((j)^*[ModuleCat.{u + 1} R] ⋙ (j)_*[ModuleCat.{u + 1} R]).mapHomologicalComplex (ComplexShape.up ℤ)).obj I), (∀ n, (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) s).unit.app ((finiteSupportedSections R j).obj (I.X n)) ≫ f.f n = (finiteSupportedSectionsι R j).app (I.X n)) ∧ (∀ n, g.f n = (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) j).unit.app (I.X n)) ∧ ∃ (w : f ≫ g = 0), (ShortComplex.mk f g w).ShortExact",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair L (immutable head edc1171a97e9): use the current published finite-coefficient support interface from def-pur-flasque-support, including finiteSupportedSections, finiteSupportedSectionsι and finiteClosedUpperShriek. The arrows remain the open adjunction unit and supported-kernel inclusion transported through the closed unit. No dependency record is replaced."
+ },
+ "statement_change": {
+  "date": "2026-10-16",
+  "by": "NF stage 2",
+  "old_statement": "For the closed–open pair of\nsupported sections and a termwise\ninjective complex $I^\\bullet$ of $\\Lambda$-module sheaves, there is\na short exact sequence of complexes\n\n$$\n0\\longrightarrow s_*s^!I^\\bullet\\longrightarrow I^\\bullet\n\\longrightarrow j_*j^*I^\\bullet\\longrightarrow0.\n$$",
+  "what": "The first worker silently assumed a quasi-compact complementary open immersion. The source definition has already been corrected: the support-kernel comparison with s_*s^! need not be an isomorphism for arbitrary pairs. Stacks 09AH supplies the quasi-compact scope. Explicitly, the corrected dependency constructs a nonzero supported sheaf F with s^{-1}F=j^*F=0 on Spec(product_n k), Z=Spec((product_n k)/(direct_sum_n k)). Embed F into an injective I. Its map to G_Z I is monic; by naturality its composite with the closed unit q_I is zero, as q_F has zero target. Therefore no map iota can satisfy iota q_I=the kernel inclusion. The original canonical assertion fails already for a complex concentrated in degree zero with value I. The correction records the quasi-compact scope, all inherited objects, and the canonical arrows; it does not change the target unit statement.",
+  "source": {
+   "document": "literature/stacks-project/proetale.tex",
+   "place": "Tag 09AH, lemma-ses-associated-to-open; scope and support comparison as in the corrected def-pur-flasque-support, including its explicit non-quasi-compact counterexample"
+  },
+  "citers": [
+   {
+    "id": "lem-pur-support-localization-triangle",
+    "holds": false,
+    "note": "The canonical short exact sequence is available for quasi-compact open complements. This citer currently claims the localization triangle for arbitrary complementary pairs, so its unrestricted use does not hold; its statement must inherit or separately justify this scope. No change to the A1 Kummer target is needed for its finite-type pairs."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Work on compatible representatives of $\\mathcal C=X_{\\mathrm{proet}}$ in the size convention of [def-weil-proetale-inverse-image], with $\\mathcal O=\\Lambda_X$. By [lem-weil-proetale-weakly-etale-localization], $U_{\\mathrm{proet}}=\\mathcal C/U$, $\\Lambda_U=\\mathcal O|_U$, and $U\\to X$ is a monomorphism. The restriction of a sheaf $M$ to $U$ has value $M(W)$ on $(W\\to U)$, as in [def-pur-localized-ringed-site]. This is the inverse image of [def-weil-proetale-inverse-image]: for $W\\to U$, the category $\\mathcal I_W$ there has initial object $(W,W\\to U\\times_XW)$, with the diagonal arrow. A morphism from this object to $(V,\\phi)$ must be the second component $W\\to V$ of $\\phi$, and this component does define that unique morphism. Thus the opposite indexing category has a final object, its colimit is $M(W)$, and sheafification changes nothing because restriction is a sheaf. Apply this calculation also to rings and module actions. Under $j^{-1}\\Lambda_X=\\Lambda_X|_U$, the coefficient map $c^j_\\Lambda:j^{-1}\\Lambda_X\\to\\Lambda_U$ of [def-weil-proetale-inverse-image] sends each constant section $\\lambda$ to $\\lambda$: its adjoint $\\rho^j_\\Lambda$ was defined that way, and the initial-object calculation evaluates the adjunction on that same section. Consequently $c^j_\\Lambda$ is the inverse of the isomorphism $\\Lambda_U\\to\\Lambda_X|_U$ in clause (2) of [lem-weil-proetale-weakly-etale-localization], since the composite is the unique sheaf-of-rings map extending the identity on constants. The module pullback $j^*M=j^{-1}M\\otimes_{j^{-1}\\Lambda_X}\\Lambda_U$ is therefore restriction as an $\\Lambda_U$-module: after this coefficient identification, the sectionwise maps $x\\otimes a\\mapsto ax$ and $x\\mapsto x\\otimes1$ are inverse and commute with restrictions, so remain inverse after sheafification. The module unit is the abelian-sheaf unit followed by $x\\mapsto x\\otimes1$; under these identifications it is still restriction. For $V\\to X$ in $\\mathcal C$, put $V_U=V\\times_XU$. The same two cited statements ensure $V_U$ is an object of $\\mathcal C$. The direct-image formula now gives $(j_*j^*M)(V)=M(V_U)$, and the unit at $V$ is the restriction $M(V)\\to M(V_U)$.",
+    "uses": [
+     "def-weil-proetale-inverse-image",
+     "lem-weil-proetale-weakly-etale-localization",
+     "def-pur-localized-ringed-site"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-exact.md",
+     "place": "Proof, the restriction map on V and V times_X U; expanded using the localization and inverse-image definitions"
+    }
+   },
+   {
+    "text": "For any object $T$ of $\\mathcal C$, let $P_T=\\mathcal O[h_T]$ be the free module presheaf of [lem-weil-pbc-free-yoneda-presheaf-module], and let $L_T=P_T^\\#$ be its module sheafification [def-weil-presheaf-modules-sheafification]. For $a:V_U\\to V$, the induced map $P_{V_U}\\to P_V$ sends $e_b$ to $e_{ab}$ on each object $T$. This is a presheaf morphism: for $c:T'\\to T$, either order of applying restriction and this map sends $r e_b$ to $r|_c e_{abc}$; hence the component maps commute with all restrictions. The map $\\operatorname{Hom}(T,V_U)\\to\\operatorname{Hom}(T,V)$ is injective: two arrows with equal $V$-components also have equal $U$-components because $U\\to X$ is a monomorphism, and then agree by the pullback universal property. Consequently each component on free modules is injective: a left inverse on that component retains coefficients on basis elements in this image and discards all others. This componentwise injectivity implies that the presheaf morphism is a monomorphism, since equality after it can be cancelled at every object. By exactness of module sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact], its sheafification $L_{V_U}\\to L_V$ is a monomorphism. No naturality of the componentwise left inverses is asserted or needed.",
+    "uses": [
+     "lem-weil-pbc-free-yoneda-presheaf-module",
+     "def-weil-presheaf-modules-sheafification",
+     "lem-weil-proetale-weakly-etale-localization",
+     "lem-weil-pbc-ringed-site-module-sheafification-exact"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-modules.tex",
+     "place": "Remark Tag 03EJ (remark-localize-presheaves); Lemma Tag 03EI (lemma-sheafification-exact); free-basis injection written out"
+    }
+   },
+   {
+    "text": "The module sheafification adjunction of [def-weil-presheaf-modules-sheafification] and the explicit bijection of [lem-weil-pbc-free-yoneda-presheaf-module] identify $\\operatorname{Hom}_{\\mathcal O}(L_T,M)$ with $M(T)$: a section $x\\in M(T)$ corresponds before sheafification to $e_b\\mapsto x|_b$. Precomposition by $L_{V_U}\\to L_V$ therefore corresponds exactly to restriction along $a:V_U\\to V$: on the identity generator of $V_U$ the composite takes the value $x|_a$. This establishes the required compatibility in the represented object, rather than assuming it from naturality in the coefficient sheaf.",
+    "uses": [
+     "def-weil-presheaf-modules-sheafification",
+     "lem-weil-pbc-free-yoneda-presheaf-module"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/sites-modules.tex",
+     "place": "Remark Tag 03EJ (remark-localize-presheaves); equation-map-lower-shriek-OU-into-module after Lemma Tag 03DI; direct generator calculation"
+    }
+   },
+   {
+    "text": "Fix a degree $r$ and an arbitrary $V$ in $\\mathcal C$. For $y\\in I^r(V_U)$, step 3 gives a morphism $L_{V_U}\\to I^r$. Extend it across the monomorphism $L_{V_U}\\to L_V$ of step 2, using injectivity of $I^r$ in the precise sense of [def-sp-injective-resolutions]. The resulting morphism corresponds to $x\\in I^r(V)$ with $x|_{V_U}=y$ by step 3. Hence the unit $\\eta^r:I^r\\to j_*j^*I^r$ is surjective on sections over every $V$, by step 1. It is an epimorphism of sheaves: if two morphisms from $j_*j^*I^r$ have equal composites with $\\eta^r$, evaluate at any $V$ and lift any section by this surjectivity to see that their components agree on every section. The morphisms are therefore equal.",
+    "uses": [
+     "def-sp-injective-resolutions",
+     "def-weil-sheaf-of-modules-category"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-exact.md",
+     "place": "Proof, applying Hom(-,I) to the free-module monomorphism and proving the last surjectivity term by term"
+    }
+   },
+   {
+    "text": "By [def-pur-flasque-support], in each degree\n$\\mathcal G_ZI^r=\\ker(\\eta^r)=s_*s^!I^r$, with the displayed equality supplying the canonical kernel identification; kernels of module sheaves are computed sectionwise by [def-weil-sheaf-of-modules-category]. Naturality of restriction gives $\\eta^{r+1}d_I^r=(j_*j^*d_I^r)\\eta^r$. Thus $d_I^r$ restricts to $\\delta^r:\\mathcal G_ZI^r\\to\\mathcal G_ZI^{r+1}$, equivalently to the differential on $s_*s^!I^\\bullet$, and $\\delta^{r+1}\\delta^r=0$ by cancellation of the kernel inclusion. The kernel inclusions and the units form morphisms of complexes, with zero composite. In each degree the inclusion is monic, its image is the kernel of $\\eta^r$, and $\\eta^r$ is epic by step 4. Therefore the sequence is short exact in each degree by [def-weil-pbc-exact-sequence].",
+    "uses": [
+     "def-pur-flasque-support",
+     "def-weil-sheaf-of-modules-category",
+     "def-weil-pbc-exact-sequence"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-exact.md",
+     "place": "Proof, first sentence identifying the kernel, and its termwise extension to the given complex"
+    }
+   },
+   {
+    "text": "Apply [lem-weil-pbc-cochain-complexes-degreewise-exact] to the abelian category of $\\Lambda_X$-module sheaves [def-weil-sheaf-of-modules-category]. Step 5 supplies the complex maps and their zero composite, and steps 4--5 supply short exactness in every integer degree. Its degreewise criterion gives the asserted short exact sequence of complexes $0\\to s_*s^!I^\\bullet\\to I^\\bullet\\to j_*j^*I^\\bullet\\to0$. No boundedness of the complex and no K-injectivity are used.",
+    "uses": [
+     "lem-weil-pbc-cochain-complexes-degreewise-exact",
+     "def-weil-sheaf-of-modules-category"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/homology.tex",
+     "place": "Lemma Tag 0114 (lemma-cat-cochain-abelian), degreewise short exactness criterion"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-proetale-inverse-image",
+   "lem-weil-proetale-weakly-etale-localization",
+   "def-pur-localized-ringed-site",
+   "lem-weil-pbc-free-yoneda-presheaf-module",
+   "def-weil-presheaf-modules-sheafification",
+   "lem-weil-pbc-ringed-site-module-sheafification-exact",
+   "def-sp-injective-resolutions",
+   "def-weil-sheaf-of-modules-category",
+   "def-pur-flasque-support",
+   "def-weil-pbc-exact-sequence",
+   "lem-weil-pbc-cochain-complexes-degreewise-exact"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9f81d86c0",
+  "group": "NF",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, dependencies, canonical arrows, source-based correction and sole citer, universes, edge cases, reports, and verbatim signature. Reproduced clean scompile checks in 9.7 s and 7.1 s. No defects or repository changes.",
+  "statement_corrected": true
  }
 }
