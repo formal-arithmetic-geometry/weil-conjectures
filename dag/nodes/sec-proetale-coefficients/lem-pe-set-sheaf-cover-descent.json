@@ -21,88 +21,265 @@
   "def-weil-size-convention",
   "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $W\\to U$ put $W_a=W\\times_UU_a$ and $W_{ab}=W\\times_UU_a\\times_UU_b$, with the displayed projections. The assignments $H_a(W)=F_a(W_a\\to U_a)$ and $K_{ab}(W)=F_b(W_{ab}\\to U_b)$, with restriction maps induced by fibre products, are sheaves on $\\mathcal C/U$. Indeed, for any covering $\\{W_i\\to W\\}$, its base changes cover $W_a$ and $W_{ab}$ by the site axiom; the double intersections are $(W_i\\times_WW_j)_a$ and $(W_i\\times_WW_j)_{ab}$ by the pullback universal property. Thus their sheaf equalizer diagrams are exactly those of $F_a$ and $F_b$ for those base-changed coverings. Slice coverings and restrictions have the meaning in [def-pur-localized-ringed-site]; the site and sheaf axioms are [def-weil-pbc-sites-and-cohomology](1). All these categories and products lie in the stipulated universe [def-weil-size-convention].",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR (lemma-glue-sheaves), compatible-tuples formula; verification of the component sheaves written out"
+   }
+  },
+  {
+   "text": "Naturality of $\\phi_{ab}$ gives two maps $\\prod_aH_a\\rightrightarrows\\prod_{a,b}K_{ab}$: on a tuple $(x_a)$ their $(a,b)$ coordinates are $\\phi_{ab}(x_a|_{W_{ab}})$ and $x_b|_{W_{ab}}$. Apply [lem-weil-pbc-site-sheaf-sets-limits-sectionwise](1) on the small site $\\mathcal C/U$ to form their products and equalizer. This gives a sheaf $F$ with $F(W)=\\{(x_a)\\in\\prod_aF_a(W_a):\\phi_{ab}(x_a|_{W_{ab}})=x_b|_{W_{ab}}\\text{ for all }a,b\\}$. The index categories are small (discrete $A$, discrete $A\\times A$, and the finite parallel-pair category); the universe bound in the statement supplies their products. Restrictions are coordinatewise restrictions along $W'_a\\to W_a$; they preserve the equations by naturality of $\\phi_{ab}$, and preserve identities and composition because every $F_a$ is a functor.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR (lemma-glue-sheaves), displayed compatible-tuples formula and omitted sheaf verification, using sectionwise limits"
+   }
+  },
+  {
+   "text": "For every $a$, pull the cocycle identity for $(a,a,a)$ back along $U_a\\to U_a\\times_UU_a\\times_UU_a$, the triple diagonal. If $\\alpha_a=\\Delta_a^*\\phi_{aa}$, it says $\\alpha_a=\\alpha_a\\circ\\alpha_a$. This is an equality of automorphisms, so cancellation gives $\\alpha_a=\\mathrm{id}_{F_a}$. This asserts identity only after diagonal restriction; it does not assert that $\\phi_{aa}$ is identity on all of $U_a\\times_UU_a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR, gluing datum preceding lemma-glue-sheaves; diagonal normalization from its cocycle"
+   }
+  },
+  {
+   "text": "For $W\\to U_a$, let $d_a:W\\to W_a$ be the graph of that structural map. Define $e_{a,W}:F(W\\to U)\\to F_a(W\\to U_a)$ by $e_{a,W}(x)=d_a^*x_a$. To construct its inverse, start with $y\\in F_a(W)$ and, for each $b$, let $x_b=\\phi_{ab}(y|_{W_b})$, evaluated on the object $W_b\\to U_a\\times_UU_b$ whose first coordinate is $W_b\\to W\\to U_a$. On $W_{bc}$, the cocycle for $(a,b,c)$ yields $\\phi_{bc}(x_b|)=\\phi_{bc}\\phi_{ab}(y|)=\\phi_{ac}(y|)=x_c|$. Hence $(x_b)$ belongs to $F(W)$; write this map as $i_{a,W}$. These formulas use only the slice restrictions of [def-pur-localized-ringed-site].",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR (lemma-glue-sheaves), omitted construction of local isomorphisms, explicit graph inverse"
+   }
+  },
+  {
+   "text": "The maps just constructed are inverse: $e_{a,W}i_{a,W}(y)=y$ by Step 3 after restricting $\\phi_{aa}$ along the graph $d_a$. Conversely, for $x\\in F(W)$ pull its $(a,b)$ compatibility equation on $W_{ab}$ back along $W_b\\to W_{ab}$ whose $a$ coordinate is the given $W\\to U_a$ and whose $b$ coordinate is the existing projection. This gives $x_b=\\phi_{ab}((d_a^*x_a)|_{W_b})$, exactly the $b$ coordinate of $i_{a,W}e_{a,W}(x)$. Thus both composites are identities. For an arrow $h:W'\\to W$ over $U_a$, write $h_b:W'_b\\to W_b$ for its base change. The identity $h_a\\circ d'_a=d_a\\circ h$ gives $e_{a,W'}(h^*x)=(d'_a)^*h_a^*x_a=h^*d_a^*x_a=h^*e_{a,W}(x)$. For each $b$, naturality of $\\phi_{ab}$ and functoriality of restriction give $h_b^*\\phi_{ab,W_b}(y|_{W_b})=\\phi_{ab,W'_b}((h^*y)|_{W'_b})$, so the $b$ coordinates of $h^*i_{a,W}(y)$ and $i_{a,W'}(h^*y)$ agree. Thus both maps commute with restrictions. They are inverse sheaf morphisms, so $e_a:F|_{U_a}\\xrightarrow{\\sim}F_a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR (lemma-glue-sheaves), omitted verification that the local maps are natural isomorphisms"
+   }
+  },
+  {
+   "text": "For $W\\to U_a\\times_UU_b$, pull the $(a,b)$ compatibility equation of a tuple $x\\in F(W)$ back along the graph $W\\to W_{ab}$ of both structural maps. The result is $\\phi_{ab}(e_a(x))=e_b(x)$ in $F_b(W)$. Since this holds for every test object $W$, the natural transformations satisfy $e_b=\\phi_{ab}\\circ e_a$ on the double slice, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR (lemma-glue-sheaves), omitted commutativity of the gluing diagrams"
+   }
+  },
+  {
+   "text": "For the morphism clause, fix $W\\to U$ and $s\\in P(W)$. The family $\\{W_a\\to W\\}$ is a covering by [def-weil-pbc-sites-and-cohomology](1). Let $t_a=f_a(s|_{W_a})\\in Q(W_a)$. On $W_{ab}$, naturality of $f_a,f_b$ and their assumed equality on the double slice give $t_a|=f_a(s|)=f_b(s|)=t_b|$. The sheaf equalizer axiom for $Q$ therefore gives a unique $t\\in Q(W)$ restricting to these $t_a$. Define $f_W(s)=t$; this is a function on every section set.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ (lemma-glue-maps), equalizer diagram construction, applied to C/U"
+   }
+  },
+  {
+   "text": "For $h:W'\\to W$ over $U$, both $h^*f_W(s)$ and $f_{W'}(h^*s)$ restrict on each $W'_a$ to $f_a(s|_{W'_a})$, by naturality of $f_a$; separatedness of $Q$ for the base-changed covering gives equality. Hence $f$ is a natural transformation. If $W\\to U_a$, let $r_a:W_a\\to W$ be the projection and $d_a:W\\to W_a$ its graph section, so $r_a\\circ d_a=\\mathrm{id}_W$. The defining amalgamation equation and naturality of $f_a$ along $d_a$ give $f_W(s)=d_a^*r_a^*f_W(s)=d_a^*f_a(r_a^*s)=f_a(d_a^*r_a^*s)=f_a(s)$. Thus $f|_{U_a}=f_a$. Finally any other such map sends $s$ to a section with the same restrictions on every $W_a$; the uniqueness part of the sheaf axiom [def-weil-pbc-sites-and-cohomology](1) makes it equal to $f_W(s)$ for every $W,s$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ (lemma-glue-maps), omitted restriction compatibility and uniqueness written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR (lemma-glue-sheaves) and Tag 04TQ (lemma-glue-maps): compatible-tuples construction, with all omitted verifications expanded"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "glue|isStack",
-   "results": "Hits: Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean. ",
-   "date": "2026-10-16",
-   "verdict": "no match: generic stack predicates require an IsStack instance; the hits do not establish effective descent of set sheaves on slice sites. Module and scheme gluing have different objects."
+   "query": "glue|[Ii]sStack",
+   "results": {
+    "t": "2026-10-16T16:27:48Z",
+    "tool": "grep",
+    "query": "glue|[Ii]sStack",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/LocallyBijective.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/IsStack.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/IsStack.lean"
+    ],
+    "digest": "71fe12a1919e09b3"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the hits glue sections of an existing sheaf, construct a slice-sheaf pseudofunctor, or state descent conditional on an IsStack assumption; none supplies effective descent for that pseudofunctor. Read Sites/PseudofunctorSheafOver.lean:39, Sites/Descent/IsStack.lean:42–80 and Topology/Sheaves/SheafCondition/UniqueGluing.lean:180–192."
   },
   {
    "tool": "leansearch",
-   "query": "Effective descent for sheaves of sets on slice sites along a covering",
-   "results": "Hits: CategoryTheory.Pseudofunctor.IsStackFor, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Sheaf, CategoryTheory.Presieve.isSheafFor_singleton, TopCat.Sheaf, CategoryTheory.Presheaf.IsSheaf, CategoryTheory.Presieve.IsSheaf, CategoryTheory.Pseudofunctor.IsStack.of_isStackFor. ",
-   "date": "2026-10-16",
-   "verdict": "no match: generic stack predicates require an IsStack instance; the hits do not establish effective descent of set sheaves on slice sites. Module and scheme gluing have different objects."
+   "query": "Effective descent of sheaves of sets along covering families in a site",
+   "results": {
+    "t": "2026-10-16T16:27:49Z",
+    "tool": "leansearch",
+    "query": "Effective descent of sheaves of sets along covering families in a site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf",
+     "TopCat.Sheaf",
+     "CategoryTheory.Presieve.IsSheaf",
+     "CategoryTheory.Presheaf.IsSheaf",
+     "CategoryTheory.EffectiveEpiFamily.desc",
+     "CategoryTheory.EffectiveEpiFamilyStruct.desc",
+     "TopCat.Sheaf.forget",
+     "TopCat.Presheaf.IsSheaf"
+    ],
+    "digest": "14fdff0ff3d5e8e7"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the hits glue sections of an existing sheaf, construct a slice-sheaf pseudofunctor, or state descent conditional on an IsStack assumption; none supplies effective descent for that pseudofunctor. Read Sites/PseudofunctorSheafOver.lean:39, Sites/Descent/IsStack.lean:42–80 and Topology/Sheaves/SheafCondition/UniqueGluing.lean:180–192."
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.Sheaf, \"glue\"",
-   "results": "Hits: CategoryTheory.Functor.IsCoverDense.Types.appHom_valid_glue, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U, AlgebraicGeometry.Scheme.LocalRepresentability.toGlued, AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued. ",
-   "date": "2026-10-16",
-   "verdict": "no match: generic stack predicates require an IsStack instance; the hits do not establish effective descent of set sheaves on slice sites. Module and scheme gluing have different objects."
+   "results": {
+    "t": "2026-10-16T16:27:49Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Sheaf, \"glue\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.IsCoverDense.Types.appHom_valid_glue",
+     "AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk",
+     "AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.toGlued",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued"
+    ],
+    "digest": "e756853418abb281"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the hits glue sections of an existing sheaf, construct a slice-sheaf pseudofunctor, or state descent conditional on an IsStack assumption; none supplies effective descent for that pseudofunctor. Read Sites/PseudofunctorSheafOver.lean:39, Sites/Descent/IsStack.lean:42–80 and Topology/Sheaves/SheafCondition/UniqueGluing.lean:180–192."
   },
   {
    "tool": "leanfinder",
-   "query": "Sheaves of sets on a site satisfy effective descent for a covering family: local sheaves with isomorphisms on overlaps satisfying the cocycle condition glue to a sheaf",
-   "results": "Hits: CategoryTheory.isSheaf_coherent, CategoryTheory.Presieve.IsSheaf, CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify, CategoryTheory.Presheaf.IsSheaf.existsUnique_amalgamation_ofArrows, CategoryTheory.Sheaf.isSheafFor_bind, CategoryTheory.Sheaf, CategoryTheory.Presheaf.IsSheaf, CategoryTheory.Presieve.isSheafFor_arrows_iff. ",
-   "date": "2026-10-16",
-   "verdict": "no match: generic stack predicates require an IsStack instance; the hits do not establish effective descent of set sheaves on slice sites. Module and scheme gluing have different objects."
+   "query": "Sheaves of sets on slice sites glue from local sheaves with isomorphisms on overlaps satisfying the cocycle condition, and compatible local morphisms glue uniquely",
+   "results": {
+    "t": "2026-10-16T16:27:51Z",
+    "tool": "leanfinder",
+    "query": "Sheaves of sets on slice sites glue from local sheaves with isomorphisms on overlaps satisfying the cocycle condition, and compatible local morphisms glue uniquely",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Sheaf.existsUnique_gluing'",
+     "TopCat.Sheaf.existsUnique_gluing",
+     "AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk",
+     "CategoryTheory.typesGlue",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue",
+     "AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val",
+     "CategoryTheory.Presieve.IsSheafFor.valid_glue",
+     "TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types"
+    ],
+    "digest": "b363f699d40adb23"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the hits glue sections of an existing sheaf, construct a slice-sheaf pseudofunctor, or state descent conditional on an IsStack assumption; none supplies effective descent for that pseudofunctor. Read Sites/PseudofunctorSheafOver.lean:39, Sites/Descent/IsStack.lean:42–80 and Topology/Sheaves/SheafCondition/UniqueGluing.lean:180–192."
   },
   {
    "tool": "grep",
    "query": "Sheaf.*[Ii]sStack|[Ii]sStack.*[Ss]heaf|glueSheaf|[Dd]escent.*[Ss]heaf|[Ss]heaf.*[Dd]escent",
-   "results": "Hits: Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Subsheaf.lean. ",
-   "date": "2026-10-16",
-   "verdict": "no match: generic stack predicates require an IsStack instance; the hits do not establish effective descent of set sheaves on slice sites. Module and scheme gluing have different objects."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The category of set valued sheaves on the localized site C over U is equivalent to local sheaves on a covering with isomorphisms on double overlaps and the cocycle identity; compatible maps of sheaves glue uniquely",
-   "results": "Hits: CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, TopCat.Presheaf.generateEquivalenceOpensLe, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor, CategoryTheory.Functor.IsCoverDense.Types.sheafIso, CategoryTheory.GrothendieckTopology.W_eq_W_range_sheafToPresheaf_obj, CategoryTheory.Functor.IsCoverDense.sheafIso, CategoryTheory.GrothendieckTopology.W_eq_isLocal_range_sheafToPresheaf_obj. ",
-   "date": "2026-10-16",
-   "verdict": "no match: generic stack predicates require an IsStack instance; the hits do not establish effective descent of set sheaves on slice sites. Module and scheme gluing have different objects."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The pseudofunctor assigning to an object U the category of Type valued sheaves on the slice site over U is a stack; every descent datum for a covering is effective",
    "results": {
-    "t": "2026-10-16T15:34:42Z",
+    "t": "2026-10-16T16:31:19Z",
+    "tool": "grep",
+    "query": "Sheaf.*[Ii]sStack|[Ii]sStack.*[Ss]heaf|glueSheaf|[Dd]escent.*[Ss]heaf|[Ss]heaf.*[Dd]escent",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+     "Mathlib/CategoryTheory/Sites/Subsheaf.lean"
+    ],
+    "digest": "55dea9707c7d2345"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: the hits glue sections of an existing sheaf, construct a slice-sheaf pseudofunctor, or state descent conditional on an IsStack assumption; none supplies effective descent for that pseudofunctor. Read Sites/PseudofunctorSheafOver.lean:39, Sites/Descent/IsStack.lean:42–80 and Topology/Sheaves/SheafCondition/UniqueGluing.lean:180–192."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pseudofunctor U to sheaves of sets on the over category of U with induced topology is a stack: every descent datum along a covering is effective",
+   "results": {
+    "t": "2026-10-16T16:31:21Z",
     "tool": "leanfinder",
-    "query": "The pseudofunctor assigning to an object U the category of Type valued sheaves on the slice site over U is a stack; every descent datum for a covering is effective",
+    "query": "The pseudofunctor U to sheaves of sets on the over category of U with induced topology is a stack: every descent datum along a covering is effective",
     "sub": "",
     "ok": true,
     "n_hits": 8,
     "note": "",
     "top": [
      "CategoryTheory.Pseudofunctor.IsStack",
+     "CategoryTheory.Pseudofunctor.sheafHom",
      "CategoryTheory.Pseudofunctor.IsPrestack.isSheaf",
-     "CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor",
-     "CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor'",
+     "CategoryTheory.GrothendieckTopology.pseudofunctorOver",
+     "CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_obj_α",
      "CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor'",
      "CategoryTheory.Pseudofunctor.IsStack.of_isStackFor",
-     "CategoryTheory.Pseudofunctor.IsPrestack",
      "CategoryTheory.Pseudofunctor.isStackFor'"
     ],
-    "digest": "75959b7b0a682850"
+    "digest": "a5a8bb990d81b12f"
    },
-   "date": "2026-10-16",
-   "verdict": "No match: IsStack is the effective-descent assumption on a pseudofunctor; the other hits only derive morphism sheaf conditions or descent consequences under stack/prestack assumptions. None supplies the set-sheaf slice pseudofunctor with this assumption."
+   "date": "2026-10-17",
+   "verdict": "no match: the hits glue sections of an existing sheaf, construct a slice-sheaf pseudofunctor, or state descent conditional on an IsStack assumption; none supplies effective descent for that pseudofunctor. Read Sites/PseudofunctorSheafOver.lean:39, Sites/Descent/IsStack.lean:42–80 and Topology/Sheaves/SheafCondition/UniqueGluing.lean:180–192."
   },
   {
    "tool": "grep",
-   "query": "instance.*[Ii]sStack|theorem.*[Dd]escent|def.*[Dd]escent",
+   "query": "pseudofunctorSheaf|sheafOver|IsStack|IsPrestack",
    "results": {
-    "t": "2026-10-16T15:35:11Z",
+    "t": "2026-10-16T16:40:54Z",
     "tool": "grep",
-    "query": "instance.*[Ii]sStack|theorem.*[Dd]escent|def.*[Dd]escent",
+    "query": "pseudofunctorSheaf|sheafOver|IsStack|IsPrestack",
     "sub": "CategoryTheory/Sites",
     "ok": true,
-    "n_hits": 14,
+    "n_hits": 23,
     "note": "",
     "top": [
      "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
@@ -111,36 +288,69 @@
      "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
      "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
      "Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean",
-     "Mathlib/CategoryTheory/Sites/Descent/DescentDataPrime.lean",
-     "Mathlib/CategoryTheory/Sites/Descent/DescentDataPrime.lean"
+     "Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean",
+     "Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean"
     ],
-    "digest": "0c91c8350ba16ce4"
+    "digest": "37299efef7ebf2ab"
    },
    "date": "2026-10-16",
-   "verdict": "No match: these are definitions of generic descent data and functors from already given global objects, not effective descent of sheaves of sets on slice sites."
+   "verdict": "no match: the hits define stack/prestack predicates or concern the sheaf of morphisms of a fixed sheaf. None proves that the slice-sheaf pseudofunctor is a stack. Read Sites/Descent/IsStack.lean:42–80 and Sites/PseudofunctorSheafOver.lean:34–50."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of sheaves is a stack for the canonical topology; compatible sheaves on over categories descend along a covering",
+   "results": {
+    "t": "2026-10-16T16:40:58Z",
+    "tool": "leanfinder",
+    "query": "The category of sheaves is a stack for the canonical topology; compatible sheaves on over categories descend along a covering",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.instCategorySheaf",
+     "CategoryTheory.SheafOfTypes.adhesive",
+     "CategoryTheory.Pseudofunctor.IsStack",
+     "CategoryTheory.Pseudofunctor.IsStack.of_isStackFor",
+     "CategoryTheory.Sheaf",
+     "CategoryTheory.Pseudofunctor.isStackFor'",
+     "CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor",
+     "CategoryTheory.Pseudofunctor.IsStackFor"
+    ],
+    "digest": "49859db0eb83c435"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: IsStack and IsStackFor are predicates; of_isStackFor requires effectiveness as a hypothesis, and isStackFor' assumes an IsStack instance. The category and adhesive-category hits do not state this descent result. Read Sites/Descent/IsStack.lean:42–80."
   },
   {
    "tool": "loogle",
-   "query": "\"Descent\", \"Sheaf\"",
+   "query": "CategoryTheory.GrothendieckTopology.pseudofunctorOver",
    "results": {
-    "t": "2026-10-16T15:35:13Z",
+    "t": "2026-10-16T16:41:59Z",
     "tool": "loogle",
-    "query": "\"Descent\", \"Sheaf\"",
+    "query": "CategoryTheory.GrothendieckTopology.pseudofunctorOver",
     "sub": "",
     "ok": true,
-    "n_hits": 1,
+    "n_hits": 12,
     "note": "",
     "top": [
-     "CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv_toCompatible_presheafHomObjHomEquiv"
+     "CategoryTheory.GrothendieckTopology.pseudofunctorOver",
+     "CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_obj_α",
+     "CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_map_toFunctor_obj_obj_obj",
+     "CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_obj_str_id_hom_app",
+     "CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_map_toFunctor_obj_obj_map",
+     "CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_obj_str_comp_hom_app",
+     "CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_map₂",
+     "CategoryTheory.GrothendieckTopology.pseudofunctorOver_mapId_hom_toNatTrans_app_hom_app"
     ],
-    "digest": "99979f992c8454fc"
+    "digest": "f9cc5c48c5ab05eb"
    },
    "date": "2026-10-16",
-   "verdict": "No match: the returned subtypeCompatibleHomEquiv_toCompatible_presheafHomObjHomEquiv identifies the image of a given global morphism under two constructions; it asserts neither existence of a descended sheaf nor gluing of arbitrary compatible local maps."
+   "verdict": "no match: all twelve hits are the slice-sheaf pseudofunctor definition or its generated component equations, not a stack instance or effective descent theorem. Read Sites/PseudofunctorSheafOver.lean:34–50."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-pe-torsor-comparison-affine",
@@ -148,5 +358,20 @@
   "group": "NJ"
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-lem-pe-torsor-comparison"
+ "unit": "sk-lem-pe-torsor-comparison",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pe-set-sheaf-cover-descent",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 04TR compatible-tuples construction into component sheaves, an equalizer, diagonal normalization, explicit local graph inverses and their cocycle compatibility; expanded 04TQ into sectionwise morphism gluing, naturality and uniqueness. No statement change or new nodes. Read the live DAG mirror because the shared working snapshot omits this recent item. Second reading expands the graph naturality and local restriction identities; the sectionwise-limits dependency is already a Mathlib leaf and needs no route exception.",
+  "blueprint": "det-pe-torsor-comparison-affine proof Step 4 (gluing the trivial torsor and compatible morphisms) and Step 5 (gluing the comparison isomorphism)."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NN-097074eb5",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-097074eb5 (reviewer sub-agent of L); spot-checked: I read the whole item and all eight steps, re-derived each step by hand, and checked them against Stacks sites.tex. 04TQ is lemma-glue-maps (lines 5638-5671) and 04TR is lemma-glue-sheaves (5823-5896, including the gluing datum before it); the tag-to-label mapping is in tags/tags lines 6263-6264. The statement matches both results hypothesis by hypothesis: a=b is included, the cocycle and the direction e_b=phi_ab e_a are the same, and the morphism clause is 04TQ applied to C/U. Nothing is weakened and no hypothesis is added. Step 1: the component sheaves follow from 00VH(iii) base change in def-weil-pbc-sites-and-cohomology(1). Step 2: the sectionwise equalizer of products is a sheaf by lem-weil-pbc-site-sheaf-sets-limits-sectionwise(1). That node is a Mathlib leaf, so no tool_use is needed. Step 3: restricting the (a,a,a) cocycle to the diagonal gives alpha=alpha^2, so the diagonal pullback of phi_aa is the identity; nothing is claimed off the diagonal. Steps 4-5: I checked the graph maps d_a and (pr_W, W->U_a, pr_b), the cocycle on W_bc, both inverse identities and naturality. Step 6: pulling back along the graph into W_ab gives phi_ab e_a = e_b. Steps 7-8: I checked amalgamation on the base-changed cover, naturality by separatedness, the restriction identity f_W(s)=d_a^*f_a(r_a^*s)=f_a(s), and uniqueness. I tested an empty cover (everything is terminal and the result holds), an identity cover, a non-mono singleton cover with phi_aa not the identity off the diagonal, repeated members and empty section sets. Delivery shape is correct: 0 new nodes, proof_deps equals the union of the step uses, no SGA, no doubled backslashes, and no off-route statements. Mathlib has the IsStack class but no instance for the sheaf pseudofunctor, so the item is not a leaf. The parent det-pe-torsor-comparison-affine (Steps 4-5, main-20261015) uses exactly these two clauses. This is a generic set-sheaf lemma, not a target node, so the base-change and coefficient-category check does not apply. Maintainer note, not a fault of this delivery: the existing unsplit lem-pe-site-sheaf-gluing (N4, 2026-10-16) states exactly clause 1 of this item and should be merged into it. No fixes were needed."
+ }
 }
