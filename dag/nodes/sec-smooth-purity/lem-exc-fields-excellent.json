@@ -21,9 +21,86 @@
  "stmt_deps": [
   "def-exc-excellent-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary field $k$. By [lem-weil-pbc-field-regular-ring], $k$ is Noetherian and regular, its only prime ideal is $(0)$, and $k_{(0)}\\cong k$. Under this identification the maximal ideal is zero and the residue field is $k$. By [def-weil-pbc-adic-completion], its completion is also $k$: for $n\\ge1$ all quotients $k/(0)^n$ are $k$ and all transition maps are identities, so a compatible sequence is constant. The possible $n=0$ coordinate is uniquely determined. This identifies the canonical completion homomorphism with $\\operatorname{id}_k$.",
+   "uses": [
+    "lem-weil-pbc-field-regular-ring",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PX (proposition-ubiquity-G-ring), field case; elementary zero-adic completion calculation from the definition."
+   }
+  },
+  {
+   "text": "The identity map of $k$ is flat in [def-weil-pbc-flat-ring-map]: the mutually inverse maps $N\\otimes_k k\\to N$, $x\\otimes a\\mapsto ax$, and $N\\to N\\otimes_k k$, $x\\mapsto x\\otimes1$, identify tensoring any injective map with that same map. Its unique fibre is $k\\otimes_k k\\cong k$, by the analogous multiplication and unit maps. For every finite purely inseparable extension $k'/k$, the further tensor product $k'\\otimes_k k\\cong k'$ is a regular Noetherian ring by [lem-weil-pbc-field-regular-ring] applied to the field $k'$. Thus the fibre is geometrically regular by [def-weil-pbc-g-ring], without assuming that $k$ is perfect. The completion map in step 1 is therefore regular, and that definition, together with the Noetherianity in step 1 and the fact that $(0)$ is the only prime, proves that $k$ is a G-ring.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-field-regular-ring",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PX (proposition-ubiquity-G-ring), proof of (1), with the identity-map, fibre and geometric-regularity verifications expanded."
+   }
+  },
+  {
+   "text": "Apply [lem-exc-j2-residue-field-criterion] to $R=k$, which is Noetherian by step 1. The only prime is $(0)$ and its residue field is $k$. Given any finite purely inseparable extension $L/k$, take the $k$-subalgebra $B=L\\subseteq L$. It is finite as a $k$-module by the finite-dimensionality assumption in [def-weil-pbc-finite-purely-inseparable-extension]. Its fractions exhaust $L$, since every $x\\in L$ is $x/1$. By [lem-weil-pbc-field-regular-ring] every localization of the field $L$ is regular local. Its spectrum is nonempty (the prime $(0)$ exists), so $U=\\operatorname{Spec}L$ is the required nonempty open regular subset. Every hypothesis of the criterion is now satisfied; its conclusion is exactly the openness of the regular locus of every finite type $k$-algebra, the J-2 condition.",
+   "uses": [
+    "lem-exc-j2-residue-field-criterion",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-field-regular-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PJ (proposition-ubiquity-J-2), proof of (1), checking condition (4) of Tag 07PC (lemma-J-2)."
+   }
+  },
+  {
+   "text": "Let $A$ be any finite type $k$-algebra. By [def-weil-pbc-finite-type-algebra], choose a surjective $k$-algebra map $\\pi:P=k[x_1,\\ldots,x_n]\\to A$, with kernel $I$. Pullback of ideals gives an order-preserving bijection between prime ideals of $A$ and primes of $P$ containing $I$: its inverse sends $Q\\supseteq I$ to $\\pi(Q)$, which is an ideal by surjectivity; $A/\\pi(Q)\\cong P/Q$ via $\\pi$, so primality is equivalent, and $\\pi^{-1}(\\pi(Q))=Q$ because $I\\subseteq Q$. For primes $\\mathfrak p\\subseteq\\mathfrak q$ of $A$ write $\\mathfrak p',\\mathfrak q'$ for their pullbacks. Every finite chain between them pulls back to a strict chain below $\\mathfrak q'$, hence has length at most $\\operatorname{ht}(\\mathfrak q')\\le n$ by [lem-weil-pbc-polynomial-ring-maximal-chain-height-difference] and its definition of height. Saturation is preserved: any prime strictly between two pulled-back primes contains $\\mathfrak p'\\supseteq I$, so descends to an intermediate prime of $A$. That theorem now says that every saturated chain from $\\mathfrak p$ to $\\mathfrak q$ has the same length $\\operatorname{ht}(\\mathfrak q')-\\operatorname{ht}(\\mathfrak p')$. Thus every finite type $k$-algebra is catenary, including the finite-chain bound required in [def-exc-excellent-ring]; if $A=0$ there are no prime pairs and the assertion is vacuous. This proves universal catenarity of $k$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OR (lemma-dimension-height-polynomial-ring); the elementary passage along a surjective polynomial presentation is written out. This supplies the universal-catenarity input of Tag 07QW without a new Cohen-Macaulay lemma."
+   }
+  },
+  {
+   "text": "The arbitrary field $k$ is Noetherian by step 1, a G-ring by step 2, J-2 by step 3 and universally catenary by step 4. These are exactly the conditions defining excellence in [def-exc-excellent-ring]. Therefore every field is excellent.",
+   "uses": [
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QT (definition-excellent) and Tag 07QW (proposition-ubiquity-excellent), clause (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-field-regular-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-g-ring",
+  "lem-exc-j2-residue-field-criterion",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference",
+  "def-exc-excellent-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07QW (proposition-ubiquity-excellent), clause (1): its G-ring and J-2 route is expanded using 07PX, 07PJ and 07PC. For universal catenarity, agent assembly from the existing 00OR polynomial-chain statement and the explicit surjective-presentation prime correspondence, rather than introducing the more general 00NM Cohen-Macaulay theorem cited in 07QW."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -129,15 +206,81 @@
    "results": "No hits",
    "date": "2026-10-16",
    "verdict": "no match: no declarations returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every field is an excellent ring",
+   "results": "{\"t\": \"2026-10-16T01:34:13Z\", \"tool\": \"leanfinder\", \"query\": \"Every field is an excellent ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDiscreteValuationRing.TFAE\", \"Field.henselian\", \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\", \"Ring.KrullDimLE.isField_of_isReduced\", \"Algebra.IsGeometricallyReduced\", \"PreTilt.isDomain\"], \"digest\": \"e3de2f3250811ac5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types; none asserts excellence or its conjunction of defining conditions; the RingTheory excellence/catenarity grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsExcellent\"",
+   "results": "{\"t\": \"2026-10-16T01:34:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsExcellent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types; none asserts excellence or its conjunction of defining conditions; the RingTheory excellence/catenarity grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "excellent.*field|field.*excellent|IsExcellent",
+   "results": "{\"t\": \"2026-10-16T01:34:14Z\", \"tool\": \"grep\", \"query\": \"excellent.*field|field.*excellent|IsExcellent\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types; none asserts excellence or its conjunction of defining conditions; the RingTheory excellence/catenarity grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fields are excellent commutative rings",
+   "results": "{\"t\": \"2026-10-16T01:34:14Z\", \"tool\": \"leansearch\", \"query\": \"Fields are excellent commutative rings\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field is a Noetherian G ring with J2 condition and universally catenary",
+   "results": "{\"t\": \"2026-10-16T01:37:38Z\", \"tool\": \"leanfinder\", \"query\": \"A field is a Noetherian G ring with J2 condition and universally catenary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherianRing.of_isLocalization_maximal\", \"AlgebraicGeometry.isNoetherianRing_of_away\", \"IsNoetherianRing.of_prime\", \"IsNoetherianRing.of_prime_ne_bot\", \"Algebra.EssFiniteType.isNoetherianRing\", \"Algebra.FiniteType.isNoetherianRing\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\"], \"digest\": \"f9b070c4d2828cdf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types; none asserts excellence or its conjunction of defining conditions; the RingTheory excellence/catenarity grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "excellent|excellence|catenary",
+   "results": "{\"t\": \"2026-10-16T01:38:06Z\", \"tool\": \"grep\", \"query\": \"excellent|excellence|catenary\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types; none asserts excellence or its conjunction of defining conditions; the RingTheory excellence/catenarity grep has no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-field-algebra-strict-henselization-excellent",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-fields-excellent",
+  "worker": "stage1",
+  "summary": "Proved field excellence through its defining conditions. Expanded the zero-adic completion and geometric-regularity checks for the G-ring condition; checked the general 07PC J-2 residue-field criterion with the finite extension L itself; obtained universal catenarity by a surjective polynomial presentation and the existing 00OR prime-chain theorem, including a finite-chain bound. One new statement-only general J-2 criterion, no field-clause restatements and no new Mathlib leaves. Statement unchanged. Exact project attachment searches and actual Mathlib searches found no match.",
+  "blueprint": "Realizes thm-exc-curve-open-dimension-general, Proof second paragraph, \"finite-type field algebras are excellent\", through the existing permanence parent lem-exc-field-algebra-strict-henselization-excellent. This item establishes excellence of the ground field; the parent supplies finite-type and strict-henselization permanence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference",
+    "why": "Generic polynomial prime-chain/height formula supplies catenarity after a surjective polynomial presentation; no statement in sk-prop-a1-kummer supplies this dimension-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N9-671eef570",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-671eef570 (reviewer sub-agent of L); spot-checked: Read all five proof steps, the new criterion, cited statements, source passages, and unit/chapter route. Mathematics passes, including imperfect fields and zero-ring cases. Corrected missing creation, merge, and audit metadata in the new node’s whole-file JSON. Accept the polynomial-chain lemma as a generic tool use. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

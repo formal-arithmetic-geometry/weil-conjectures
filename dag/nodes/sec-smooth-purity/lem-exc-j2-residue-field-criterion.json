@@ -1,0 +1,118 @@
+{
+ "id": "lem-exc-j2-residue-field-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-exc-curve-open-dimension-general",
+   "place": "Proof, second paragraph: \"finite-type field algebras are excellent\"; the J-2 condition for the ground field in the field-excellence input.",
+   "via": [
+    "lem-exc-fields-excellent",
+    "lem-exc-field-algebra-strict-henselization-excellent"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Residue-field finite-model criterion for J-2",
+ "statement": "Let $R$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring]. Suppose that for every prime ideal $\\mathfrak p$ of $R$ and every finite purely inseparable field extension $L/\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime; def-weil-pbc-finite-purely-inseparable-extension], with $R\\to L$ the residue-field map followed by the given extension, there is an $R$-subalgebra $B\\subseteq L$ which is finite as an $R$-module [def-weil-finitely-generated-module], whose fractions $b/c$ ($b,c\\in B$, $c\\ne0$) exhaust $L$, and for which $\\operatorname{Spec}B$ [def-weil-affine-spectrum] contains a nonempty open subset $U$ such that $B_{\\mathfrak q}$ is regular local [def-weil-regular-scheme] for every $\\mathfrak q\\in U$. Then for every finite type $R$-algebra $A$ [def-weil-pbc-finite-type-algebra] the subset $\\{\\mathfrak q\\in\\operatorname{Spec}A:A_{\\mathfrak q}\\text{ is regular local}\\}$ is open. Equivalently, $R$ satisfies the J-2 condition of [def-exc-excellent-ring].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PC, lemma-J-2, implication (4) implies (1), with J-0 and J-2 expanded using definition-J (Tag 07P7). The domain model is embedded in its specified fraction field L."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-finitely-generated-module",
+  "def-weil-affine-spectrum",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-finite-type-algebra",
+  "def-exc-excellent-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian ring is J-2 if every purely inseparable finite extension of each residue field is the fraction field of a finite algebra domain with nonempty open regular locus",
+   "results": "{\"t\": \"2026-10-16T01:37:38Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian ring is J-2 if every purely inseparable finite extension of each residue field is the fraction field of a finite algebra domain with nonempty open regular locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherianRing.of_isLocalization_maximal\", \"finite_of_algHom_finiteType_of_isJacobsonRing\", \"Algebra.quasiFinite_iff\", \"AlgebraicGeometry.isNoetherianRing_of_away\", \"RingHom.finite_of_algHom_finiteType_of_isJacobsonRing\", \"Algebra.EssFiniteType.isNoetherianRing\", \"IsIntegralClosure.isNoetherianRing\", \"IsIntegralClosure.isNoetherian\"], \"digest\": \"ccc5e09f030d733b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types; none asserts the J-2 criterion or an open regular locus. Grep matches in j.2 and projZeroRingHom are unrelated identifiers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "J2 criterion finite purely inseparable residue field extensions admit finite domain models with a regular open subset",
+   "results": "{\"t\": \"2026-10-16T01:37:39Z\", \"tool\": \"leanfinder\", \"query\": \"J2 criterion finite purely inseparable residue field extensions admit finite domain models with a regular open subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"IsLocalRing.ResidueField.finite_of_finite\", \"RingHom.EssFiniteType.residueFieldMap\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"IsLocalRing.ResidueField.finite_of_module_finite\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Algebra.QuasiFinite.instFiniteResidueField\"], \"digest\": \"962408254e28619b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types; none asserts the J-2 criterion or an open regular locus. Grep matches in j.2 and projZeroRingHom are unrelated identifiers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", IsOpen",
+   "results": "{\"t\": \"2026-10-16T01:37:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularLocalRing\\\", IsOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types; none asserts the J-2 criterion or an open regular locus. Grep matches in j.2 and projZeroRingHom are unrelated identifiers."
+  },
+  {
+   "tool": "grep",
+   "query": "J.?2|J.?0|regular.?locus|isOpen.*[Rr]egular",
+   "results": "{\"t\": \"2026-10-16T01:37:39Z\", \"tool\": \"grep\", \"query\": \"J.?2|J.?0|regular.?locus|isOpen.*[Rr]egular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Basic.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/RingTheory/Binomial.lean\"], \"digest\": \"821f4db2dbc7eefb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types; none asserts the J-2 criterion or an open regular locus. Grep matches in j.2 and projZeroRingHom are unrelated identifiers."
+  },
+  {
+   "tool": "grep",
+   "query": "JTwo|JZero|IsJ2|J-2|J-0|regular.?locus|isOpen.*[Rr]egular",
+   "results": "{\"t\": \"2026-10-16T01:38:06Z\", \"tool\": \"grep\", \"query\": \"JTwo|JZero|IsJ2|J-2|J-0|regular.?locus|isOpen.*[Rr]egular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/Noetherian.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\", \"Mathlib/RingTheory/GradedAlgebra/Basic.lean\"], \"digest\": \"6452d2c490b18dfa\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned types; none asserts the J-2 criterion or an open regular locus. Grep matches in j.2 and projZeroRingHom are unrelated identifiers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Residue field criterion for a Noetherian ring to have open regular locus in every finite type algebra",
+   "results": "{\"t\": \"2026-10-16T01:37:40Z\", \"tool\": \"leansearch\", \"query\": \"Residue field criterion for a Noetherian ring to have open regular locus in every finite type algebra\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "IsJTwo|IsJZero|J.?two|regularLocus|regular_locus|j2Ring",
+   "results": "{\"t\": \"2026-10-16T01:46:07Z\", \"tool\": \"grep\", \"query\": \"IsJTwo|IsJZero|J.?two|regularLocus|regular_locus|j2Ring\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the Mathlib RingTheory source search returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian ring, regular loci of all finitely generated algebras are open if finite inseparable extensions of residue fields admit J0 finite integral models",
+   "results": "{\"t\": \"2026-10-16T01:46:08Z\", \"tool\": \"leanfinder\", \"query\": \"For a Noetherian ring, regular loci of all finitely generated algebras are open if finite inseparable extensions of residue fields admit J0 finite integral models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_unramifiedLocus\", \"Algebra.isOpen_smoothLocus\", \"Algebra.isOpen_etaleLocus\", \"Algebra.quasiFinite_iff\", \"Algebra.QuasiFiniteAt\", \"PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.ZariskisMainProperty\"], \"digest\": \"be03abd5ff2fbc36\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern smooth, etale or unramified loci, quasi-finiteness, going-down or geometric reducedness; none concludes openness of the regular locus or the J-2 residue-field criterion. Smoothness over an imperfect field cannot be substituted for regularity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularRing\", IsOpen",
+   "results": "{\"t\": \"2026-10-16T01:46:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularRing\\\", IsOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle returned zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-exc-fields-excellent",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
