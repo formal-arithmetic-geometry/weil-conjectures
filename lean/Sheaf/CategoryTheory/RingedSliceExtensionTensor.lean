@@ -6,7 +6,6 @@ Authors: SHEAF group NK
 module
 
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.CategoryTheory.RingedSliceExtensionTensorHomData
 
