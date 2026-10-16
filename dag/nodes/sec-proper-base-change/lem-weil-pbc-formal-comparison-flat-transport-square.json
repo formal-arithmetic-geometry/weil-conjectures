@@ -20,37 +20,38 @@
  },
  "proof": [
   {
-   "text": "Obtain adjR, beta zero, the ordinary isomorphism b, the natural system map t and their projection and adjunction-mate equations from the ordinary flat quotient-mate data. Substitute the equality of extended ideals.",
+   "text": "Apply the ordinary flat quotient-mate theorem with I replaced by J.comap g and the supplied equality eliminated. This gives adjR, beta zero, an ordinary base-change isomorphism b, a system map t, the quotient projection equation for b and t, and the adjunction-unit equation.",
    "uses": [
     "lem-weil-pbc-formal-flat-quotient-mate-data"
    ],
    "elementary": false
   },
   {
-   "text": "Set H=f_*F with its supplied coherence. Define delta as completion.mapIso b followed by completionPullbackIso(g,J) at H. The cokernel descent equation for completion.map b and powerQuotientIso_pi prove pi_D delta_n = b times g*pi_H at every positive quotient level.",
+   "text": "Apply the normalized completion-pullback theorem to g, J, the coherent pushforward f_*F, and the module (g^*f_*F), using the reflexive ideal and module equalities. Compose the completion map induced by b with the inverse of its normalized pullback isomorphism to obtain delta.",
    "uses": [
-    "lem-weil-pbc-formal-systems-pullback",
+    "lem-weil-pbc-formal-completion-pullback-normalized",
     "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false
   },
   {
-   "text": "Define kappa zero = delta.hom times whiskerRight kappa g* times t. Its transport square is reflexivity. At each level reassociate, use the projection equation of delta, combine the two pullback maps by functoriality, rewrite the given h_kappa, and apply the ordinary quotient equation from the first step. The adjunction square is the mate equation from the first step.",
+   "text": "Define kappa zero as delta followed by the pulled-back kappa and t. Its transport equation is definitional. At each level, the quotient projection of the completion map induced by b is b followed by the target projection; the normalized pullback equation identifies that target projection followed by the inverse normalized pullback isomorphism with pulled-back source projection. Reassociate, use functoriality of pullback, the supplied h_kappa equation, and the ordinary quotient equation from the mate theorem. The adjunction square is the mate equation from the first step.",
    "uses": [
-    "lem-weil-pbc-formal-flat-quotient-mate-data"
+    "lem-weil-pbc-formal-flat-quotient-mate-data",
+    "lem-weil-pbc-formal-completion-pullback-normalized"
    ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-formal-flat-quotient-mate-data",
-  "lem-weil-pbc-formal-systems-pullback",
+  "lem-weil-pbc-formal-completion-pullback-normalized",
   "def-weil-pbc-coherent-formal-module"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/088B",
-  "place": "X2: ordinary quotient-mate data separated from completed-pushforward transport; explicit cokernel projection normalization and functorial diagram chase"
+  "place": "Completed-base-change paragraph; Lean construction via ordinary quotient-mate data and normalized completion pullback"
  },
  "mathlib_searches": [
   {
@@ -113,13 +114,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261013T130753-L-3987248",
-  "kind": "interface",
+  "landing": "20261016T221622-L-1618176",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {

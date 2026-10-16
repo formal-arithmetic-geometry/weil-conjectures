@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
-import all Sheaf.AlgebraicGeometry.FormalSystemsPullback
 import Sheaf.AlgebraicGeometry.FormalFlatQuotientMateData
+import Sheaf.AlgebraicGeometry.FormalCompletionPullbackNormalized
 
 /-! # Flat transport squares for formal comparison maps
 
@@ -98,6 +98,81 @@ theorem formalComparison_flat_transport_square
               (Scheme.Modules.pushforward f).map (β.hom.app (op n))) ≫ t.app (op n) =
         adjR.unit.app (G₀.obj.obj (op n)) ≫
           (Scheme.Modules.pushforward p).map (β₀.hom.app (op n))) := by
-  sorry
+  classical
+  subst I
+  let p := pullback.snd f g
+  obtain ⟨adjR, β₀, b, t, hb, hunit⟩ :=
+    formal_flat_quotient_mate_data J f g (J.comap g) rfl adj G F β G₀ F₀ hG hF
+  obtain ⟨e, he⟩ := exists_formalCompletionPullback_normalized g J
+    ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩ (J.comap g) rfl
+    ((Scheme.Modules.tensorPullback g).obj ((Scheme.Modules.pushforward f).obj F.obj)) rfl
+  let δ : ((completion S (J.comap g)).obj
+      ⟨(Scheme.Modules.pushforward p).obj F₀.obj, hD⟩).obj ≅
+      ((completion Y J).obj
+        ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩).obj ⋙
+        Scheme.Modules.tensorPullback g := by
+    exact (formalCompletionFunctor (J.comap g)).mapIso b ≪≫ e.symm
+  let κ₀ := δ.hom ≫ Functor.whiskerRight κ (Scheme.Modules.tensorPullback g) ≫ t
+  refine ⟨adjR, β₀, κ₀, δ, t, ?_, ?_, hunit⟩
+  · intro n
+    have hmap : formalModuleQuotientπ (J.comap g) (n + 1)
+          ((Scheme.Modules.pushforward p).obj F₀.obj) ≫
+        ((formalCompletionFunctor (J.comap g)).map b.hom).app (op n) =
+      b.hom ≫ formalModuleQuotientπ (J.comap g) (n + 1)
+        ((Scheme.Modules.tensorPullback g).obj
+          ((Scheme.Modules.pushforward f).obj F.obj)) := by
+      change cokernel.π _ ≫ cokernel.desc _ _ _ = _
+      exact cokernel.π_desc _ _ _
+    have he' := congrArg (fun z => z ≫ e.inv.app (op n)) (he n)
+    simp only [Category.assoc, e.hom_inv_id_app] at he'
+    have he'' : formalModuleQuotientπ (J.comap g) (n + 1)
+          ((Scheme.Modules.tensorPullback g).obj ((Scheme.Modules.pushforward f).obj F.obj)) ≫
+        e.inv.app (op n) =
+      (Scheme.Modules.tensorPullback g).map
+        (formalModuleQuotientπ J (n + 1) ((Scheme.Modules.pushforward f).obj F.obj)) := by
+      have he'' := he'.symm
+      simp only [eqToHom_refl] at he''
+      calc
+        _ = 𝟙 _ ≫ _ := by simp
+        _ = _ ≫ 𝟙 _ := he''
+        _ = _ := by simp
+    dsimp [κ₀, δ]
+    simp only [← Category.assoc]
+    dsimp [p] at hmap
+    rw [hmap]
+    calc
+      _ = b.hom ≫
+          (formalModuleQuotientπ (J.comap g) (n + 1)
+            ((Scheme.Modules.tensorPullback g).obj
+              ((Scheme.Modules.pushforward f).obj F.obj)) ≫ e.inv.app (op n)) ≫
+          (Scheme.Modules.tensorPullback g).map (κ.app (op n)) ≫ t.app (op n) := by
+        simp only [Category.assoc]
+      _ = b.hom ≫
+          (Scheme.Modules.tensorPullback g).map
+            (formalModuleQuotientπ J (n + 1)
+              ((Scheme.Modules.pushforward f).obj F.obj)) ≫
+          (Scheme.Modules.tensorPullback g).map (κ.app (op n)) ≫ t.app (op n) := by
+        rw [he'']
+      _ = b.hom ≫
+          ((Scheme.Modules.tensorPullback g).map
+              (formalModuleQuotientπ J (n + 1)
+                ((Scheme.Modules.pushforward f).obj F.obj)) ≫
+            (Scheme.Modules.tensorPullback g).map (κ.app (op n))) ≫
+          t.app (op n) := by
+        simp only [Category.assoc]
+      _ = b.hom ≫
+          (Scheme.Modules.tensorPullback g).map
+            (formalModuleQuotientπ J (n + 1)
+              ((Scheme.Modules.pushforward f).obj F.obj) ≫ κ.app (op n)) ≫
+          t.app (op n) := by
+        rw [← (Scheme.Modules.tensorPullback g).map_comp]
+      _ = b.hom ≫
+          (Scheme.Modules.tensorPullback g).map
+            ((Scheme.Modules.pushforward f).map
+              (formalModuleQuotientπ (J.comap f) (n + 1) F.obj)) ≫
+          t.app (op n) := by
+        rw [hκ n]
+      _ = _ := hb n
+  · dsimp [κ₀]
 
 end AlgebraicGeometry
