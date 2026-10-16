@@ -1,0 +1,83 @@
+{
+ "id": "lem-coef-infinity-join-cocone-associativity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "HTT Proposition 1.2.9.2, Remark 1.2.9.5 and Corollary 2.1.2.2 (sharp slices and their join universal property); Proposition 2.1.2.1 with Proposition 1.2.4.3 (the vertex projection is a left fibration, and lifts of equivalences are equivalences), hence an isofibration; associativity of the sharp join in Section 1.2.8. The sharp/fat comparison (Proposition 4.2.1.5) is not part of this node: it is the existing node lem-coef-join-slice-cocone-comparison. Serves paragraph 2, the derived coefficient adjunction and coherent mapping-limit calculation of prop-coef-integral-exceptional-adjoint, through the recorded accessible-pullback ancestry.",
+   "via": [
+    "lem-coef-infinity-cofinal-coslice-calculus",
+    "lem-coef-accessible-infinity-pullback",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization",
+    "lem-coef-infinity-filtered-cofinal-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Sharp cocone simplicial sets: vertex isofibration and join associativity",
+ "statement": "Use the small simplicial sets, quasicategories, equivalence edges and functor simplicial sets of [def-cbc-enhanced-diagrams-cones], and isofibrations as defined in [lem-coef-infinity-isofibration-exponentiation], in any fixed sufficiently large universes. For simplicial sets $A,B$, define their sharp join by\n$$(A\\star B)_n=A_n\\amalg B_n\\amalg\\coprod_{a+b+1=n}A_a\\times B_b,$$\nwith simplicial operators restricting the ordered block of $A$-vertices followed by the block of $B$-vertices; an empty block is the corresponding pure simplex. In particular $A^{\\triangleright}=A\\star\\Delta^0$.\nLet $p:K\\to\\mathcal C$ be a map from a small simplicial set to a quasicategory. Define the sharp cocone simplicial set $S_p(\\mathcal C)$ by\n$$S_p(\\mathcal C)_n=\\{u:K\\star\\Delta^n\\to\\mathcal C\\mid u|_K=p\\},$$\nwith operators induced by $\\operatorname{id}_K\\star\\Delta(\\alpha)$, and its vertex projection $S_p(\\mathcal C)\\to\\mathcal C$ by restriction to $\\Delta^n$. Then $S_p(\\mathcal C)$ is a quasicategory and the vertex projection is an isofibration: it has the right lifting property against every inner horn inclusion $\\Lambda_i^n\\hookrightarrow\\Delta^n$, $0<i<n$, and for every vertex $u$ of $S_p(\\mathcal C)$ with vertex $x$, every equivalence edge $e:x\\to y$ of $\\mathcal C$ lifts to an equivalence edge of $S_p(\\mathcal C)$ with source $u$ and image $e$.\nFor every small simplicial set $L$, maps $r:L\\to S_p(\\mathcal C)$ correspond bijectively to maps $t:K\\star L\\to\\mathcal C$ with $t|_K=p$, naturally in $L$. Under this correspondence, associativity of the ordered joins, $(K\\star L)\\star\\Delta^n=K\\star(L\\star\\Delta^n)$, gives a simplicial isomorphism\n$$S_r(S_p(\\mathcal C))\\cong S_t(\\mathcal C).$$\nThe correspondence and this isomorphism preserve vertex projections and are natural in functors $\\mathcal C\\to\\mathcal C'$ of quasicategories and in restriction along maps of the indexing simplicial sets $K$ and $L$. No filteredness, nonemptiness or colimit-existence hypothesis is imposed on $K$, $L$ or $\\mathcal C$; the cases $K=\\varnothing$ (then $S_p(\\mathcal C)=\\mathcal C$) and $L=\\varnothing$ are included.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Proposition 1.2.9.2, Remark 1.2.9.5 and Corollary 2.1.2.2 (sharp slices and their join universal property); Proposition 2.1.2.1 with Proposition 1.2.4.3 (the vertex projection is a left fibration, and lifts of equivalences are equivalences), hence an isofibration; associativity of the sharp join in Section 1.2.8. The sharp/fat comparison (Proposition 4.2.1.5) is not part of this node: it is the existing node lem-coef-join-slice-cocone-comparison. Read online on 2026-10-17; no archived copy in literature/. No matching Stacks tag: these are quasicategorical results, not ordinary categorical statements."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-exponentiation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Diagrams in a quasicategorical cocone category correspond to diagrams on the join and iterated coslices are coslices of the combined join diagram",
+   "results": "{\"t\": \"2026-10-16T21:26:56Z\", \"tool\": \"leanfinder\", \"query\": \"Diagrams in a quasicategorical cocone category correspond to diagrams on the join and iterated coslices are coslices of the combined join diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.costructuredArrowMapCocone\", \"CategoryTheory.Limits.Cocone.fromCostructuredArrow\", \"CategoryTheory.Limits.Cocone.toCostructuredArrowCocone\", \"CategoryTheory.Comma.colimitAuxiliaryCocone\", \"CategoryTheory.Limits.Cocone.toOver\", \"CategoryTheory.Limits.Cocone.fromStructuredArrow\", \"CategoryTheory.Limits.Cocone.toCostructuredArrow\", \"CategoryTheory.Functor.LeftExtension.coconeAt\"], \"digest\": \"03cc565fbc50e42d\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 (inner-horn fillers only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-86 (generic Quillen horn/boundary lifting classes), and CategoryTheory/Presentable/IsCardinalFiltered.lean:40-55,202-216 (ordinary Category instances). Ordinary under categories and simplicial skeleton adjunctions do not state a coherent quasicategorical join/slice theorem; the focused source grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The simplicial join is left adjoint to quasicategory slice formation and iterated slices are identified by associativity of joins",
+   "results": "{\"t\": \"2026-10-16T21:27:30Z\", \"tool\": \"leanfinder\", \"query\": \"The simplicial join is left adjoint to quasicategory slice formation and iterated slices are identified by associativity of joins\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.skAdj\", \"SSet.coskAdj\", \"SSet.skAdj\", \"CategoryTheory.SimplicialObject.coskAdj\", \"CategoryTheory.nerveAdjunction\", \"SSet.ι₁_comp\", \"SSet.ι₀_comp\", \"SSet.ι₀_comp_assoc\"], \"digest\": \"cc182e95d5cbc345\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 (inner-horn fillers only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-86 (generic Quillen horn/boundary lifting classes), and CategoryTheory/Presentable/IsCardinalFiltered.lean:40-55,202-216 (ordinary Category instances). Ordinary under categories and simplicial skeleton adjunctions do not state a coherent quasicategorical join/slice theorem; the focused source grep has zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasicategory diagram in an under category is a functor on a join and taking under categories twice is associative",
+   "results": "{\"t\": \"2026-10-16T21:26:56Z\", \"tool\": \"leansearch\", \"query\": \"A quasicategory diagram in an under category is a functor on a join and taking under categories twice is associative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Under.homMk_comp\", \"CategoryTheory.Join.mapWhiskerRight_whiskerLeft_assoc\", \"CategoryTheory.Join.mapWhiskerRight_whiskerRight_assoc\", \"CategoryTheory.Join.mapWhiskerLeft_whiskerLeft_assoc\", \"CategoryTheory.Under.w_assoc\", \"CategoryTheory.MorphismProperty.Under.w_assoc\", \"CategoryTheory.Under.lift\", \"CategoryTheory.Under.post_comp\"], \"digest\": \"72e296b68c73de8e\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 (inner-horn fillers only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-86 (generic Quillen horn/boundary lifting classes), and CategoryTheory/Presentable/IsCardinalFiltered.lean:40-55,202-216 (ordinary Category instances). Ordinary under categories and simplicial skeleton adjunctions do not state a coherent quasicategorical join/slice theorem; the focused source grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"coslice\"",
+   "results": "{\"t\": \"2026-10-16T21:28:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"coslice\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 (inner-horn fillers only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-86 (generic Quillen horn/boundary lifting classes), and CategoryTheory/Presentable/IsCardinalFiltered.lean:40-55,202-216 (ordinary Category instances). Ordinary under categories and simplicial skeleton adjunctions do not state a coherent quasicategorical join/slice theorem; the focused source grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAnodyne|right_anodyne|weaklyContractible|weakly_contractible|coslice|\\bjoin\\b [AlgebraicTopology/Quasicategory]",
+   "results": "{\"t\": \"2026-10-16T21:28:02Z\", \"tool\": \"grep\", \"query\": \"rightAnodyne|right_anodyne|weaklyContractible|weakly_contractible|coslice|\\\\bjoin\\\\b\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 (inner-horn fillers only), AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-86 (generic Quillen horn/boundary lifting classes), and CategoryTheory/Presentable/IsCardinalFiltered.lean:40-55,202-216 (ordinary Category instances). Ordinary under categories and simplicial skeleton adjunctions do not state a coherent quasicategorical join/slice theorem; the focused source grep has zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-cofinal-coslice-calculus",
+  "date": "2026-10-17",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
