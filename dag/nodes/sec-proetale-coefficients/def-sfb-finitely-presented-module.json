@@ -3,24 +3,98 @@
  "blueprint": {
   "is": "def-sfb-finitely-presented-module",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Finitely presented module objects",
- "statement": "Let $\\mathcal C$ be an abelian monoidal category whose tensor product is additive, and let\n$R$ be a ring object of $\\mathcal C$ such that $R\\otimes-$ is right exact, so that\n$R$-modules [sk-def-sfb-module-objects] form an abelian category\n[sk-prop-sfb-module-category]. Write $R^n=R\\oplus\\dots\\oplus R$ for the free module of\nrank $n$. An $R$-module $M$ is *finitely presented* if $M\\cong\\operatorname{coker}(f)$ for\nsome morphism $f\\colon R^m\\to R^n$ of $R$-modules.",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian] with a monoidal structure whose tensor product is additive in each variable. Let $R$ be a ring object (a monoid object, [sk-def-sfb-ring-object]) of $\\mathcal C$ such that $R\\otimes-$ is right exact, meaning that it preserves finite colimits. Write $\\mathcal B=\\operatorname{Mod}_R(\\mathcal C)$ for the category of left module objects [sk-def-sfb-module-objects]; it is abelian by [lem-sfb-modobj-abelian]. The regular module is $R$ with its multiplication as action, as in [sk-def-sfb-module-objects].\n\nFor $n\\in\\mathbf N$, let $R^n=\\bigoplus_{i\\in\\{0,\\ldots,n-1\\}}R$ be the finite biproduct in $\\mathcal B$ of $n$ copies of this regular module, with $R^0=0$. Here a finite biproduct has injections $\\iota_i$ and projections $\\pi_i$ satisfying $\\pi_i\\iota_j=\\delta_{ij}\\operatorname{id}_R$ and $\\sum_i\\iota_i\\pi_i=\\operatorname{id}_{R^n}$.\n\nAn $R$-module object $M$ is *finitely presented* if there exist $m,n\\in\\mathbf N$, a morphism $f\\colon R^m\\to R^n$ in $\\mathcal B$, and an isomorphism $M\\cong\\operatorname{coker}_{\\mathcal B}(f)$. The cokernel is taken in the module category: it is an object $Q$ with $q\\colon R^n\\to Q$ such that $qf=0$ and every module morphism $g\\colon R^n\\to N$ with $gf=0$ factors uniquely as $g=hq$. Finite biproducts and cokernels exist because $\\mathcal B$ is abelian [def-sp-abelian].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/def-sfb-finitely-presented-module.md",
   "place": "node def-sfb-finitely-presented-module, order 1638"
  },
  "stmt_deps": [
-  "sk-def-sfb-module-objects"
+  "def-sp-abelian",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-modobj-abelian"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsFinitelyPresented|FinitelyPresented|FinitePresentation",
+   "results": "OK, 0 hits in the existing CategoryTheory/Monoidal directory. Search scope: Mathlib/CategoryTheory/Monoidal.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary type-valued modules or groups, or categorical filtered-colimit presentability, do not define the stated finite-presentation predicate on general internal module objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finitely presented module objects in an abelian monoidal category finite direct sums cokernel",
+   "results": "OK, 8 hits; first returned names: Module.FinitePresentation.mk, Module.Presentation.cokernel_R, Module.Presentation.finitePresentation, Module.FinitePresentation.out, Module.FinitePresentation, Module.finitePresentation_of_projective, Module.Presentation.cokernel, instFiniteOfFinitePresentation.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary type-valued modules or groups, or categorical filtered-colimit presentability, do not define the stated finite-presentation predicate on general internal module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinitelyPresented\"",
+   "results": "OK, 12 hits; first returned names: Module.Flat.exists_factorization_of_isFinitelyPresented, Group.IsFinitelyPresented.instIsFinitelyPresentedInt, AddGroup.IsFinitelyPresented, Group.IsFinitelyPresented, Group.IsFinitelyPresented.instMultiplicativeInt, AddGroup.IsFinitelyPresented.instFreeAddGroupOfFinite, AddGroup.IsFinitelyPresented.instOfFinite, Group.IsFinitelyPresented.instFreeGroupOfFinite.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary type-valued modules or groups, or categorical filtered-colimit presentability, do not define the stated finite-presentation predicate on general internal module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented internal modules over a monoid object in an abelian monoidal category are cokernels of morphisms between finite direct sums of the regular module",
+   "results": "OK, 8 hits; first returned names: Module.FinitePresentation, Module.Presentation.nonempty_cokernelData, Module.Presentation.cokernel_R, Module.Presentation.cokernel_relation, Module.Presentation.cokernel, FGModuleCat.instHasFiniteColimits, Module.Presentation.cokernelRelations, Module.Presentation.cokernel_G.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary type-valued modules or groups, or categorical filtered-colimit presentability, do not define the stated finite-presentation predicate on general internal module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "presentation|presentable|presented",
+   "results": "OK, 0 hits. The requested subdirectory does not exist (Mod is a .lean file); this query is not used as evidence of absence. Search scope: Mathlib/CategoryTheory/Monoidal/Mod.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: nonexistent requested directory; superseded by the searches of CategoryTheory/Monoidal and its actual Mod.lean file"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FinitelyPresentable\"",
+   "results": "OK, 12 hits; first returned names: CategoryTheory.IsFinitelyPresentable, CategoryTheory.MorphismProperty.isFinitelyPresentable, CategoryTheory.ObjectProperty.isFinitelyPresentable, CategoryTheory.ObjectProperty.isFinitelyPresentable_eq_isCardinalPresentable, CategoryTheory.instIsFinitelyPresentableObjFullSubcategoryIsFinitelyPresentableι, CategoryTheory.instPreservesFilteredColimitsOfSizeObjOppositeFunctorTypeCoyonedaOpOfIsFinitelyPresentable, CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits, CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimitsOfSize.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary type-valued modules or groups, or categorical filtered-colimit presentability, do not define the stated finite-presentation predicate on general internal module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An internal module over a ring object has a finite presentation if it is the categorical cokernel of a map between finite biproducts of the regular module",
+   "results": "OK, 8 hits; first returned names: Module.FinitePresentation, Module.Presentation.finitePresentation, instFinitePresentation, instFinitePresentationForall, Module.finitePresentation_iff_exists_presentation, ModuleCat.isFG, Module.Presentation.finite, instFinitePresentationFinsupp.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary type-valued modules or groups, or categorical filtered-colimit presentability, do not define the stated finite-presentation predicate on general internal module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinitelyPresented|FinitePresentation|IsFinitelyPresentable",
+   "results": "OK, 25 displayed hits in CategoryTheory, including IsFinitelyPresentable in Mathlib/CategoryTheory/Presentable/Finite.lean:51, and ObjectProperty/Ind.lean, MorphismProperty/Ind.lean, Presentable/Dense.lean, Presentable/ColimitPresentation.lean. Read Presentable/Finite.lean:49-74. Search scope: Mathlib/CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary type-valued modules or groups, or categorical filtered-colimit presentability, do not define the stated finite-presentation predicate on general internal module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "structure Mod|class ModObj|def regular|def free",
+   "results": "OK, 4 hits: Mathlib/CategoryTheory/Monoidal/Mod.lean:59 (ModObj), :227 (Mod), :336 (regular), and Bimod.lean:170 (regular). Read Mod.lean:215-240 and 330-350. Search scope: Mathlib/CategoryTheory/Monoidal.",
+   "date": "2026-10-16",
+   "verdict": "partial notions only: internal module objects and the regular module are present; this does not define finite presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinitelyPresented|FinitePresentation|presentable",
+   "results": "OK, 0 hits in Mathlib/CategoryTheory/Monoidal/Mod.lean. Search scope: Mathlib/CategoryTheory/Monoidal/Mod.lean.",
+   "date": "2026-10-16",
+   "verdict": "no match: the internal-module file has no finite-presentation predicate"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -37,5 +111,21 @@
  "blueprint_lean_not_found": [
   "CategoryTheory.Mod.IsFinitelyPresented"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-finitely-presented-module",
+  "worker": "stage1",
+  "summary": "Audited the current blueprint definition and the upstream reference definition. No finished slopmaster2 project declaration states it. Mathlib searches find ordinary-module finite presentation and categorical finite presentability, not this predicate for internal modules. Kept the defining existential cokernel condition, made natural-number ranks including zero and both categorical universal properties explicit, and named the existing regular-module, ring-object and abelian-category notions. Replaced the dangling sk-prop-sfb-module-category citation with lem-sfb-modobj-abelian, whose statement supplies abelianness under precisely these hypotheses. No new nodes and no theorem proof steps are required for this definition.",
+  "blueprint": "Realizes the complete definition body of def-sfb-finitely-presented-module.md (order 1638): the ambient hypotheses, regular-module finite sums, and the existential isomorphism to a module-category cokernel. The surrounding unit sk-def-sfb-constructible is unchanged. Blueprint searches found only pur713-def-finite-presentation as a specialized sheaf version, not a second general statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q67-3fd8612d3",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-3fd8612d3 (reviewer sub-agent of L); spot-checked: Read the complete definition, report, cited statements, current blueprint sources and unit/chapter route. Verified matching abelianness hypotheses, internal-module cokernels, zero-rank cases, noncommutative coefficients, and duplicate/Mathlib candidates. No repairs or tool_uses required. Full findings written to review.md."
+ }
 }
