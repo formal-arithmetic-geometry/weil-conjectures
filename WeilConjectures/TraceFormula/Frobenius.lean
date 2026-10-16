@@ -38,9 +38,10 @@ The pair `(K, φ_m)` is a Weil object for `Φ_m`
 ## The fixed points
 
 The rational points `x : s ⟶ X` of `X` fixed by `Φ_m` are the `𝔽_{q^m}`-points of `X₀`
-(`ProEtale.CondensedRing.IsModelFrobenius.fixedPointEquiv`, blueprint
-`thm-trf-frobenius-fixed-points`); there are finitely many of them, and a closed point of `X₀` of
-degree `d ∣ m` carries exactly `d` of them (`IsModelFrobenius.sum_fixedPoint`).
+(`ProEtale.CondensedRing.IsModelFrobenius.fixedPointEquiv` in
+`WeilConjectures.TraceFormula.FixedPoint`, blueprint `thm-trf-frobenius-fixed-points`); there are
+finitely many of them, and a closed point of `X₀` of degree `d ∣ m` carries exactly `d` of them
+(`IsModelFrobenius.sum_fixedPoint`).
 
 ## Main definitions
 
@@ -57,10 +58,10 @@ degree `d ∣ m` carries exactly `d` of them (`IsModelFrobenius.sum_fixedPoint`)
 - `ProEtale.CondensedRing.IsModelFrobenius.isUniversalHomeomorphism`,
   `ProEtale.CondensedRing.IsModelFrobenius.isFinite`: the iterates of the model Frobenius are
   finite universal homeomorphisms (blueprint `i-relative-frob`).
-- `ProEtale.CondensedRing.IsModelFrobenius.fixedPointEquiv`,
-  `ProEtale.CondensedRing.IsModelFrobenius.finite_fixedPoint`,
-  `ProEtale.CondensedRing.IsModelFrobenius.sum_fixedPoint`: the fixed points of `Φ_m` are the
-  `𝔽_{q^m}`-points of `X₀` (blueprint `thm-trf-frobenius-fixed-points`).
+- `ProEtale.CondensedRing.IsModelFrobenius.finite_fixedPoint`,
+  `ProEtale.CondensedRing.IsModelFrobenius.sum_fixedPoint`: there are finitely many fixed
+  points of `Φ_m`, counted by the closed points of `X₀`
+  (blueprint `thm-trf-frobenius-fixed-points`).
 
 -/
 
@@ -234,8 +235,24 @@ lemma iterateStr_add (K : WeilBoundedConstructible ℓ Φ) (m n : ℕ) :
           (frobeniusIterate Φ n) (frobeniusIterate Φ m)).hom.app K.carrier ≫
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
           (frobeniusIterate Φ n)).map (K.iterateStr m).hom ≫
-        (K.iterateStr n).hom :=
-  sorry
+        (K.iterateStr n).hom := by
+  induction n with
+  | zero =>
+    have h₀ : (K.iterateStr 0).hom =
+        eqToHom (show _ = (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (𝟙 X)).obj K.carrier by rw [frobeniusIterate_zero]) ≫
+          (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).hom.app
+            K.carrier :=
+      (Category.id_comp _).symm
+    rw [h₀]
+    exact (boundedConstructibleUpperStarComp_id_aux _ ℓ (frobeniusIterate_zero Φ)
+      (frobeniusIterate_add Φ m 0) (K.iterateStr m).hom).symm
+  | succ n ih =>
+    have h := boundedConstructibleUpperStarComp_cocycle_aux (Profinite.padicAlgClRingObj ℓ) ℓ
+      (frobeniusIterate_succ Φ (m + n)) (frobeniusIterate_add Φ m n)
+      (frobeniusIterate_add Φ m (n + 1)) (frobeniusIterate_succ Φ n) (K.iterateStr m).hom
+      (K.iterateStr n).hom K.str.hom (K.iterateStr (m + n)).hom ih
+    exact h
 
 end WeilBoundedConstructible
 
@@ -293,16 +310,6 @@ lemma IsModelFrobenius.isFinite [LocallyOfFiniteType f₀] (hΦ : IsModelFrobeni
   | succ m ih =>
     rw [frobeniusIterate_succ, Over.comp_left]
     infer_instance
-
-omit [Finite k₀] in
-/-- **The fixed points of the model Frobenius** (blueprint `thm-trf-frobenius-fixed-points`):
-the rational points of `X = X₀ ×_{k₀} k` fixed by `Φ_m` are, through `p : X ⟶ X₀`, the
-`k`-points of `X₀` over `k₀` fixed by the `m`-th power of the arithmetic Frobenius
-`a ↦ a ^ #k₀` of `k`, that is the points of `X₀` rational over `𝔽_{q^m}`. -/
-noncomputable def IsModelFrobenius.fixedPointEquiv [Fintype k₀] (hΦ : IsModelFrobenius Φ f₀ p)
-    (m : ℕ) : FixedPoint Φ m ≃
-      f₀.fixedFieldPoints ((FiniteField.frobeniusAlgHom k₀ k ^ m : k →ₐ[k₀] k) : k →+* k) :=
-  sorry
 
 /-- For `m ≥ 1` there are finitely many rational points of `X` fixed by `Φ_m`. -/
 theorem IsModelFrobenius.finite_fixedPoint [IsAlgClosed k] [QuasiCompact f₀]

@@ -155,7 +155,7 @@ noncomputable def weilLowerShriekFrobeniusComparison :
         (Profinite.padicAlgClRingObj ℓ) ℓ r).unit) _) ≪≫
     Functor.isoWhiskerLeft _ (Functor.associator _ _ _) ≪≫
     Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight
-      (boundedConstructibleLowerShriekIsoLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ r).symm _)) ≪≫
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).symm _)) ≪≫
     Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
       (boundedConstructibleLowerShriekComp (Profinite.padicAlgClRingObj ℓ) ℓ r f').symm) ≪≫
     (Functor.associator _ _ _).symm ≪≫

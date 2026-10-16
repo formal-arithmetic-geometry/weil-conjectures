@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.TraceFormula.Basic
 
@@ -60,13 +62,6 @@ integral over a finite disjoint union of open and closed pieces is the sum of th
 (`ProEtale.CondensedRing.BorelMooreSection.integral_eq_sum_localTerm`, blueprint
 `lem-trf-integration-component-sum`).
 
-## Sorried input
-
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekId`: the identity isomorphism
-  `R(𝟙 X)_! ≅ 𝟭`, from the trivial compactification and `(𝟙 X)_! ≅ 𝟭`.
-- `ProEtale.CondensedRing.tateTwistDerivedZeroIso`: `ℚ̄_ℓ,X(0)[0]` is the unit of
-  `D(Mod_{ℚ̄_ℓ,X})`.
-
 ## Main definitions
 
 - `ProEtale.CondensedRing.boundedConstructibleUpperShriekId`,
@@ -100,13 +95,14 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)]
 
 /-- The identity isomorphism `R(𝟙 X)_! ≅ 𝟭` of the derived lower shriek on bounded constructible
-`ℚ̄_ℓ`-sheaves. -/
-@[no_expose]
+`ℚ̄_ℓ`-sheaves: the identification `R(𝟙 X)_! ≅ R(𝟙 X)_*` of the lower shriek of a proper morphism
+with its pushforward, followed by `R(𝟙 X)_* ≅ 𝟭`. -/
 noncomputable def boundedConstructibleLowerShriekId (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
     boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X) ≅
       𝟭 (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  sorry
+  boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 X) ≪≫
+    boundedConstructibleLowerStarId _ ℓ X
 
 /-- The identity isomorphism `R(𝟙 X)^! ≅ 𝟭` of the exceptional inverse image: the conjugate of
 `boundedConstructibleLowerShriekId` for the adjunctions `R(𝟙 X)_! ⊣ R(𝟙 X)^!` and `𝟭 ⊣ 𝟭`. -/
@@ -164,10 +160,9 @@ noncomputable def dualizingComplexComp (f : X ⟶ Y) :
     eqToIso (by rw [comp_toPoint])
 
 /-- The Tate twist `ℚ̄_ℓ,X(0)`, placed in degree `0`, is the unit of `D(Mod_{ℚ̄_ℓ,X})`. -/
-@[no_expose]
 noncomputable def tateTwistDerivedZeroIso (T : Scheme.{u}) :
     tateTwistDerived T ℓ 0 ≅ 𝟙_ _ :=
-  sorry
+  DerivedCategory.singleFunctorObjUnitIso _
 
 /-- **Étale purity**, smooth purity in relative dimension zero: for a morphism `f` smooth of
 relative dimension `0`, that is étale, `Rf^! ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,X`. This is
@@ -250,7 +245,7 @@ noncomputable def integral [IsProper X.hom] (α : BorelMooreSection ℓ X) :
     (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
       (Functor.Monoidal.εIso
         (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))).inv ≫
-    (boundedConstructibleLowerShriekIsoLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
       (toPoint X)).inv.app (𝟙_ _) ≫
     ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
       (toPoint X)).homEquiv _ _).symm α
@@ -258,7 +253,9 @@ noncomputable def integral [IsProper X.hom] (α : BorelMooreSection ℓ X) :
 /-- The integral is additive (blueprint `lem-trf-integration-linear`). -/
 lemma integral_add [IsProper X.hom] (α β : BorelMooreSection ℓ X) :
     (α + β).integral = α.integral + β.integral :=
-  sorry
+  by
+  simp only [integral, Adjunction.homEquiv_counit, Functor.map_add, Preadditive.add_comp,
+    Preadditive.comp_add]
 
 variable [LocallyOfFiniteType X.hom] [IsSeparated X.hom] in
 /-- The *local term* `LT_B(α) = ∫_B j^* α` of a Borel–Moore section along an open and closed

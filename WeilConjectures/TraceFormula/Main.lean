@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Correspondence
+public import WeilConjectures.TraceFormula.FixedPoint
 
 /-!
 
@@ -249,7 +250,6 @@ of the stalk of `(K, φ_m)` at `x`, both Weil objects for the identity of the ba
 theorem trace_globalOperator_eq_sum_trace_stalkFrobenius [IsAlgClosed k] [IsSeparated f₀]
     [LocallyOfFiniteType f₀] [QuasiCompact f₀] (hΦ : IsModelFrobenius Φ f₀ p)
     (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) (hm : 1 ≤ m)
-    [IsFinite (frobeniusIterate Φ m).left] [IsUniversalHomeomorphism (frobeniusIterate Φ m).left]
     [Fintype (FixedPoint Φ m)]
     [HasRightDual
       ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
@@ -257,6 +257,8 @@ theorem trace_globalOperator_eq_sum_trace_stalkFrobenius [IsAlgClosed k] [IsSepa
     [∀ x : RationalPoint X,
       HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
         K.carrier)] :
+    haveI := hΦ.isFinite m
+    haveI := hΦ.isUniversalHomeomorphism m
     trace (K.globalOperator m) = ∑ x : FixedPoint Φ m, trace (K.stalkFrobenius m x.1 x.2) := by
   have h := modelTraceFormula (ℓ := ℓ) (k := k) f₀ X Φ p hΦ K m hm
   exact h
@@ -267,7 +269,6 @@ theorem trace_globalOperator_eq_sum_trace_stalkFrobenius [IsAlgClosed k] [IsSepa
 theorem trace_globalOperator_eq_sum_trace_stalkFrobenius_padicAlgCl [IsAlgClosed k]
     [IsSeparated f₀] [LocallyOfFiniteType f₀] [QuasiCompact f₀] (hΦ : IsModelFrobenius Φ f₀ p)
     (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) (hm : 1 ≤ m)
-    [IsFinite (frobeniusIterate Φ m).left] [IsUniversalHomeomorphism (frobeniusIterate Φ m).left]
     [Fintype (FixedPoint Φ m)]
     [HasRightDual
       ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
@@ -275,6 +276,8 @@ theorem trace_globalOperator_eq_sum_trace_stalkFrobenius_padicAlgCl [IsAlgClosed
     [∀ x : RationalPoint X,
       HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
         K.carrier)] :
+    haveI := hΦ.isFinite m
+    haveI := hΦ.isUniversalHomeomorphism m
     unitEndRingEquiv ℓ k (trace (K.globalOperator m)) =
       ∑ x : FixedPoint Φ m, unitEndRingEquiv ℓ k (trace (K.stalkFrobenius m x.1 x.2)) := by
   rw [trace_globalOperator_eq_sum_trace_stalkFrobenius hΦ K m hm, map_sum]
@@ -303,11 +306,12 @@ end WeilBoundedConstructible
 number of rational points of `X` fixed by `Φ_m`. -/
 theorem trace_globalOperator_unit_eq_card [IsAlgClosed k] [IsSeparated f₀]
     [LocallyOfFiniteType f₀] [QuasiCompact f₀] (hΦ : IsModelFrobenius Φ f₀ p) (m : ℕ)
-    (hm : 1 ≤ m) [IsFinite (frobeniusIterate Φ m).left]
-    [IsUniversalHomeomorphism (frobeniusIterate Φ m).left] [Fintype (FixedPoint Φ m)]
+    (hm : 1 ≤ m) [Fintype (FixedPoint Φ m)]
     [HasRightDual
       ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
         (WeilBoundedConstructible.unit ℓ Φ).carrier)] :
+    haveI := hΦ.isFinite m
+    haveI := hΦ.isUniversalHomeomorphism m
     trace ((WeilBoundedConstructible.unit ℓ Φ).globalOperator m) =
       (Fintype.card (FixedPoint Φ m) :
         End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧))) :=

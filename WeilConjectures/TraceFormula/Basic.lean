@@ -6,6 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 
@@ -38,21 +41,10 @@ functors on `Dᵇc(-)⟦Λ⟧` do not provide yet.
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.boundedConstructibleUpperStarId`: the identity isomorphism
-  `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on module objects, which master's six functors docstrings
-  record as not yet available.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekComp`: the composition isomorphism
   `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`. For the chosen compactifications it is assembled from the
   compactification independence `boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl`,
   the proper base change theorem and the composition of `Rf_*` and of `j_!`.
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekIsoLowerStar`: the identification
-  `Rf_! ≅ Rf_*` for a proper morphism `f`, from the trivial compactification of `f` and
-  `(𝟙 X)_! ≅ 𝟭`, through compactification independence.
-- `ProEtale.CondensedRing.boundedConstructibleBraiding`: the Koszul braiding of
-  `Dᵇc(X)⟦Λ⟧`, the restriction (`ObjectProperty.fullBraidedSubcategory`) of the braiding
-  `DerivedCategory.braidedCategory` of `D(Mod_{Λ_X})` induced from the symmetric structure of
-  `Mod_{Λ_X}`. It is a chosen braiding: the traces are only correct for the Koszul sign, the
-  braiding of `Λ_X[1]` with itself being `-1`.
 - `ProEtale.CondensedRing.unitEndRingEquiv`: `End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧) = H⁰(Spec k, ℚ̄_ℓ) ≅ ℚ̄_ℓ`
   for `k` separably closed.
 
@@ -136,14 +128,6 @@ section Inputs
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
-/-- The identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on bounded constructible
-complexes of module objects over `Λ`. -/
-@[no_expose]
-noncomputable def boundedConstructibleUpperStarId (X : Over (Spec (.of k)))
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
-    boundedConstructibleUpperStar Λ ℓ (𝟙 X) ≅ 𝟭 (Dᵇc(X.left)⟦Λ⟧) :=
-  sorry
-
 variable {X Y Z : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
@@ -157,37 +141,7 @@ noncomputable def boundedConstructibleLowerShriekComp (f : X ⟶ Y) (g : Y ⟶ Z
       boundedConstructibleLowerShriek Λ ℓ f ⋙ boundedConstructibleLowerShriek Λ ℓ g :=
   sorry
 
-/-- The identification `Rf_! ≅ Rf_*` of the derived lower shriek with the derived pushforward on
-bounded constructible complexes, for a proper morphism `f`. -/
-@[no_expose]
-noncomputable def boundedConstructibleLowerShriekIsoLowerStar (f : X ⟶ Y) [IsProper f.left] :
-    boundedConstructibleLowerShriek Λ ℓ f ≅ boundedConstructibleLowerStar Λ ℓ f :=
-  sorry
-
 end Inputs
-
-section Braiding
-
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  {k : Type u} [Field k] (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
-  [QuasiCompact X.hom] [IsSeparated X.hom]
-
-set_option synthInstance.maxHeartbeats 400000 in
--- the generic search goes through the instances on `Mod (Sheaf (ProEt.topology X) Ab) _`
-/-- The monoidal structure of `Dᵇc(X)⟦Λ⟧`, the full monoidal subcategory of `D(Mod_{Λ_X})`
-(`isMonoidal_boundedConstructible`). Finding it from the generic instances exceeds the default
-heartbeat limit, so it is recorded once here. -/
-noncomputable instance monoidalCategory_boundedConstructible :
-    MonoidalCategory (Dᵇc(X.left)⟦Λ⟧) :=
-  inferInstance
-
-/-- The Koszul braiding of the derived tensor product on `Dᵇc(X)⟦Λ⟧`. This is a chosen braiding,
-see the module docstring; it is used as a local instance. -/
-@[no_expose, instance_reducible]
-noncomputable def boundedConstructibleBraiding : BraidedCategory (Dᵇc(X.left)⟦Λ⟧) :=
-  sorry
-
-end Braiding
 
 section Scalars
 
@@ -235,8 +189,12 @@ lemma frobenius_hom (K : WeilBoundedConstructible ℓ (𝟙 X)) :
 /-- The Frobenius of Weil objects for the identity is natural: a morphism of Weil objects
 commutes with the Frobenius automorphisms. -/
 lemma frobenius_hom_naturality {K L : WeilBoundedConstructible ℓ (𝟙 X)} (g : K ⟶ L) :
-    K.frobenius.hom ≫ g.hom.f = g.hom.f ≫ L.frobenius.hom :=
-  sorry
+    K.frobenius.hom ≫ g.hom.f = g.hom.f ≫ L.frobenius.hom := by
+  rw [frobenius_hom, frobenius_hom, Category.assoc, IsoAlgebra.str_hom, IsoAlgebra.str_hom,
+    ← g.hom.h, ← Category.assoc,
+    ← (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).inv.naturality,
+    Category.assoc]
+  rfl
 
 end WeilBoundedConstructible
 

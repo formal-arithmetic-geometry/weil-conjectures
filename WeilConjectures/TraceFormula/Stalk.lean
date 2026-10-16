@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
 public import WeilConjectures.TraceFormula.Frobenius
 
 /-!
@@ -68,18 +69,6 @@ universe u
 open CategoryTheory Limits MonoidalCategory Endofunctor
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
-
-namespace CategoryTheory.Endofunctor.IsoAlgebra
-
-variable {C : Type*} [Category C] {F : C ⥤ C}
-
-/-- An isomorphism of algebras with invertible structure morphism, from an isomorphism of the
-underlying objects commuting with the structure isomorphisms. -/
-def isoMk {A B : IsoAlgebra F} (h : A.carrier ≅ B.carrier)
-    (w : F.map h.hom ≫ B.str.hom = A.str.hom ≫ h.hom) : A ≅ B :=
-  ObjectProperty.isoMk _ (Algebra.isoMk h (by simpa only [IsoAlgebra.str_hom] using w))
-
-end CategoryTheory.Endofunctor.IsoAlgebra
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -163,15 +152,18 @@ lemma stalkFrobenius_mul (K : WeilBoundedConstructible ℓ Φ) {d : ℕ} {x : Ra
 ```
 L(x ≫ Φ)^* K ≅ Lx^* LΦ^* K --Lx^* φ--> Lx^* K.
 ```
+It is stated on the carrier `(K.iterate m).carrier` of the iterate, equal to `K.carrier`; the
+casts are explicit (`eqToIso`), since checking this equality by unfolding is expensive.
 -/
 noncomputable def stalkTransportIso (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
     (x : RationalPoint X) (hx : x ≫ frobeniusIterate Φ m = x) :
     (K.iterateStalk m (x ≫ Φ) (comp_comp_frobeniusIterate hx)).carrier ≅
       (K.iterateStalk m x hx).carrier :=
-  show (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ Φ)).obj K.carrier ≅
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier from
-    (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x Φ).app K.carrier ≪≫
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).mapIso K.str
+  (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x Φ).app
+      (K.iterate m).carrier ≪≫
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).mapIso
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).mapIso
+        (eqToIso (K.iterate_carrier m)) ≪≫ K.str ≪≫ eqToIso (K.iterate_carrier m).symm)
 
 /-- The *Frobenius transport* between the stalks at `x ≫ Φ` and at `x` of the iterate
 `(K, φ_m)`, for `x` fixed by `Φ_m`: the isomorphism of Weil objects for the identity of `s` whose
@@ -183,7 +175,42 @@ It intertwines the local Frobenii since `φ_m` commutes with `φ`. -/
 noncomputable def stalkTransport (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) :
     K.iterateStalk m (x ≫ Φ) (comp_comp_frobeniusIterate hx) ≅ K.iterateStalk m x hx :=
-  sorry
+  IsoAlgebra.isoMk (K.stalkTransportIso m x hx) (by
+    rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom]
+    dsimp only [iterateStalk, weilStalk]
+    rw [weilUpperStar_obj_str, weilUpperStar_obj_str, iterate_str]
+    simp only [stalkTransportIso, weilUpperStarComparison,
+      boundedConstructiblePullbackSquareComparison, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
+      Iso.trans_inv, Iso.symm_inv, Functor.mapIso_hom, eqToIso.hom, eqToIso.inv, Functor.map_comp,
+      eqToHom_map, NatTrans.comp_app, eqToHom_app, Category.assoc]
+    have hcongr : ∀ {n n' : ℕ} (h : n = n'), (K.iterateStr n).hom =
+        eqToHom (show (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (frobeniusIterate Φ n)).obj K.carrier = _ by rw [h]) ≫ (K.iterateStr n').hom := by
+      intro n n' h
+      subst h
+      simp
+    have hψ := PullbackFamily.commute
+      (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)
+      (fun a b ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a b)
+      (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X)
+      (fun a K ↦ boundedConstructibleUpperStarComp_id_right_app _ ℓ a K)
+      (frobeniusIterate_zero Φ) (frobeniusIterate_succ Φ 0) (frobeniusIterate_succ Φ m)
+      (frobeniusIterate_add Φ 1 m) (by rw [Nat.add_comm]) (comp_frobeniusIterate_comm Φ m)
+      K.str.hom (K.iterateStr m).hom (K.iterateStr 0).hom (K.iterateStr 1).hom
+      (K.iterateStr (m + 1)).hom (K.iterateStr (1 + m)).hom (Category.id_comp _).symm rfl rfl
+      (iterateStr_add K 1 m) (hcongr (Nat.add_comm m 1))
+    exact PullbackFamily.transport_eqToHom
+      (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)
+      (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)
+      (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)
+      (fun a b ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a b)
+      (fun a b ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a b)
+      (fun a b ↦ boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ a b)
+      (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k))
+      (fun b K ↦ boundedConstructibleUpperStarComp_id_left_app _ ℓ b K)
+      (fun a b c K ↦ boundedConstructibleUpperStarComp_assoc_app _ ℓ a b c K) hx
+      (comp_frobeniusIterate_comm Φ m) (K.iterate_carrier m) K.str.hom (K.iterateStr m).hom hψ
+      _ _ _ _ _ _ _ _ _ _)
 
 attribute [local instance] boundedConstructibleBraiding in
 /-- **Conjugacy of the local Frobenii** (blueprint `lem-trf-local-frobenius-conjugacy`): the

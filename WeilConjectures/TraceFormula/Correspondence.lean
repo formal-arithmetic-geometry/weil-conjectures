@@ -139,7 +139,7 @@ noncomputable def globalOperator [IsProper c.c₂.left] :
       ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
         c.c₂).unit.app K) ≫
     (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
-      ((boundedConstructibleLowerShriekIsoLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
         c.c₂).inv.app _) ≫
     (boundedConstructibleLowerShriekComp (Profinite.padicAlgClRingObj ℓ) ℓ c.c₂
       (toPoint X)).inv.app _ ≫
