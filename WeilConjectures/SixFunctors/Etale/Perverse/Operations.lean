@@ -246,6 +246,7 @@ theorem isPerverseGE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimensio
     IsPerverseGE (f ≫ aY) (n + d) ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) := by
   -- `X` is noetherian and separated over `k`, so `f` is compactifiable by Nagata
   have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom aY
+  have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom (f ≫ aY)
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
   have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated aY
   let c := HasCompactification.compactification (f ≫ aY)
@@ -261,14 +262,14 @@ theorem isPerverseGE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimensio
   have hDK : IsPerverseLE (-n) DY :=
     SupportCondition.of_iso (verdierDualShiftIso _ aY K n) hK
   have h₁ := isPerverseLE_upperStar aY d f hDK
-  obtain ⟨L₀, _, hL₀, ⟨eω⟩, htens⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
+  obtain ⟨L₀, _, hL₀, ⟨eω⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
   obtain ⟨-, hL₀f⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L₀ hL₀
   have h₂ := SupportCondition.derivedTensor h₁ (torAmplitudeIn_singleFunctor_zero_of_flat _ L₀ hL₀f)
   -- the duality isomorphisms
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ f aY
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_derivedHom Λ f K
     (dualizingComplex (ModuleCat.{u + 1} Λ) aY)
-  obtain ⟨e₃⟩ := htens DY
+  obtain ⟨e₃⟩ := nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex Λ f d DY
   let M := (L((f)^*[ModuleCat.{u + 1} Λ])).obj DY
   let T := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology
     (ModuleCat.{u + 1} Λ)) 0).obj L₀
@@ -314,6 +315,7 @@ condition to complexes with `(Rf_* M)[m + d]` satisfying it, then `Rf_!` carries
 `𝔻_X K` is bounded constructible with `(𝔻_X K)[-n]` satisfying the support condition.
 (blueprint: `lem-per-artin-gabber-affine-curve`, Step 3) -/
 theorem isPerverseGE_lowerShriek_of_supportCondition_rightDerivedLowerStar (d : ℕ) (f : X ⟶ Y)
+    [PerfectField k]
     [LocallyOfFiniteType f] [IsSeparated f] [HasCompactification f] [QuasiCompact f]
     [HasCompactification (f ≫ aY)]
     (hf : ∀ (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
@@ -336,6 +338,7 @@ compactly supported pushforward carries `ᵖD^{≥n}(X) ∩ Dctf(X)` into `ᵖD^
 exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` and the support estimate for `Rf_*`.
 (blueprint: `lem-per-artin-gabber-affine-curve`) -/
 theorem isPerverseGE_lowerShriek (d : ℕ) (f : X ⟶ Y) [IsAffineHom f] [LocallyOfFiniteType f]
+    [PerfectField k]
     [HasCompactification f] [QuasiCompact f] [HasCompactification (f ≫ aY)]
     (hf : ∀ y : Y, topologicalKrullDim (f.fiber y) ≤ (d : ℕ∞)) {n : ℤ}
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

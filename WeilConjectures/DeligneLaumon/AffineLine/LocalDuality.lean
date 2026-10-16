@@ -392,14 +392,18 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
         (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).frobenius (Ψ.toLinearEquiv a) =
       _ • ((H.dual hH).stalk zf).frobenius (Ψ.toLinearEquiv a) from
       FrobeniusModule.frobeniusEnd_rescale_apply (by rw [hone]; exact one_ne_zero) _,
-    hone, one_smul, map_smul] at hΨ
+    map_smul] at hΨ
+  simp only [hone, one_smul] at hΨ
   have hΨ' : Ψ.toLinearEquiv ((((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).frobenius a) =
       (q ^ d) • ((H.dual hH).stalk zf).frobenius (Ψ.toLinearEquiv a) := by
-    rw [← hΨ, smul_smul, hcd, mul_inv_cancel₀ (pow_ne_zero _ hq), one_smul]
+    rw [← hΨ, smul_smul, show q ^ d * (c : PadicAlgCl l) ^ d = 1 by
+      rw [hcd, mul_inv_cancel₀ (pow_ne_zero _ hq)], one_smul]
   simp only [LinearEquiv.trans_apply, LinearEquiv.dualMap_apply]
-  rw [hΨ', map_smul, S₅.map_frobenius, FrobeniusModule.Equiv.symm_map_frobenius ψ b,
-    LinearMap.smul_apply, FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply,
-    LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply, smul_eq_mul]
+  erw [hΨ', map_smul, S₅.map_frobenius]
+  simp only [LinearEquiv.dualMap_apply, LinearMap.smul_apply]
+  erw [FrobeniusModule.Equiv.symm_map_frobenius ψ b]
+  rw [FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply, LinearEquiv.coe_coe,
+    LinearEquiv.symm_apply_apply, smul_eq_mul]
   simp [Scheme.Hom.residueCard, q, d]
 
 set_option maxHeartbeats 1600000 in

@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Curve.Boundary
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
+public import WeilConjectures.WeilSheaf.CohomologicalRange
 public import WeilConjectures.WeilSheaf.CurveTopCohomology
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.Finiteness

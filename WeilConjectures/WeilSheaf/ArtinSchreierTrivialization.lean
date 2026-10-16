@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Germ
 public import WeilConjectures.WeilSheaf.ArtinSchreierInertia
 
 /-!
@@ -115,7 +116,7 @@ lemma affineLine.artinSchreierTrivialization_hom_comp (ψ : AddChar k₀ (PadicA
 transformation `σ̄_c` of `ĀS` multiplies the section of the trivialisation `ℚ̄_ℓ ≅ ĀS^* ℒ_ψ` by
 `ψ(-c)`. -/
 theorem affineLine.germ_artinSchreierTrivialization (ψ : AddChar k₀ (PadicAlgCl l)) (c : k₀) :
-    (ProEtale.germ (WeilCoefficients.{u} l)
+    (ProEtale.factorGerm (WeilCoefficients.{u} l)
         (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)
         (affineLine.artinSchreierImage l ψ).X).hom
         (ProEtale.globalSectionOfModHom (affineLine.artinSchreierTrivialization l ψ).hom) =
@@ -145,7 +146,7 @@ theorem affineLine.germ_artinSchreierTrivialization (ψ : AddChar k₀ (PadicAlg
   apply hinj
   rw [map_smul, hθs, ← affineLine.germ_artinSchreierSplitSection, ← hθs]
   exact (congrArg (fun φ ↦ φ.hom (ProEtale.globalSectionOfModHom θ.hom))
-    (ProEtale.germ_naturality (WeilCoefficients.{u} l)
+    (ProEtale.factorGerm_naturality (WeilCoefficients.{u} l)
       (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c) ι.hom)).symm
 
 end AlgebraicGeometry

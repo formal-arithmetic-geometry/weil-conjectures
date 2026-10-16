@@ -80,21 +80,5 @@ theorem IsLisse.tensorObj {F G : WeilSheaf k₀ l X} (hF : F.IsLisse) (hG : G.Is
     (F.tensorObj G hF).IsLisse :=
   ProEtale.IsAdicLisseSheaf.ihom hF.dual hG
 
-/-- The tensor product of lisse `F` punctually `ι`-pure of weight `w₁` with `G` punctually `ι`-pure
-of weight `w₂` is punctually `ι`-pure of weight `w₁ + w₂`: the local eigenvalues of `F ⊗ G` are
-products of local eigenvalues of `F` and `G`. -/
-theorem IsPunctuallyPureOfWeight.tensorObj {ι : PadicAlgCl l →+* ℂ} {F G : WeilSheaf k₀ l X}
-    (hF : F.IsLisse) {w₁ w₂ : ℝ} (h₁ : F.IsPunctuallyPureOfWeight ι w₁)
-    (h₂ : G.IsPunctuallyPureOfWeight ι w₂) :
-    (F.tensorObj G hF).IsPunctuallyPureOfWeight ι (w₁ + w₂) := by
-  intro x
-  have hA : ((F.dual hF).stalk x).IsPureOfWeight ι
-      ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1) (-w₁) :=
-    (h₁ x).dual.of_equiv (stalkAtDualEquiv _ _ _ F hF)
-  have h := FrobeniusModule.IsPureOfWeight.of_linearEquiv_hom (pow_pos Nat.card_pos _)
-    (stalkAtTensorObjLinearEquiv _ _ _ hF G) (stalkAtTensorObjLinearEquiv_frobenius _ _ _ hF G)
-    hA (h₂ x)
-  rwa [sub_neg_eq_add, add_comm] at h
-
 end AlgebraicGeometry.WeilSheaf
 
