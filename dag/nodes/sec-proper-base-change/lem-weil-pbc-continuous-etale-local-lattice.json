@@ -13,51 +13,39 @@
  },
  "proof": [
   {
-   "text": "Use the proved sectionModuleEquivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] to encode an internal module as a sectionwise module sheaf over its reconstructed section-ring sheaf, with the same underlying sheaf. Identify this reconstructed ring with the continuous-function coefficient ring, transport finite free modules and their pro-etale trivializing covers, and compare ordinary scalar extension and inverse images by their adjunctions. The given norm equals the spectral norm by uniqueness of a norm on a finite extension; the integral coefficient ring is its closed unit ball. These coefficient, local-freeness, scalar-extension and pullback compatibilities are part of this remaining obligation; the generic sheaf-module equivalence itself is already proved and is to be reused.",
+   "text": "Apply the affine etale lattice-neighborhood theorem independently at each point x of X. Its proof uses the explicit coefficient encoding, the remaining encoding-compatibility interface and the existing sectionwise etale lattice existence theorem.",
    "uses": [
-    "def-weil-pbc-continuous-integral-coefficients",
-    "def-weil-pbc-condensed-e-module-category",
-    "def-weil-sheaf-of-modules-category",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-l-adic-extension-absolute-value",
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+    "lem-weil-pbc-continuous-affine-etale-lattice"
    ],
    "elementary": false
   },
   {
-   "text": "Apply Proposition 6.8.4(6), as in the existing etale-local lattice node, to get lattices on an etale covering family. This only supplies individual lattices, with no compatibility between them.",
-   "uses": [
-    "lem-weil-pbc-lisse-lattice-etale-local"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Refine each covering member by affine open neighborhoods. Their images form an open cover because etale maps are open. Noetherianity makes X compact, so finitely many suffice. The finite disjoint union of these affine neighborhoods is quasi-compact and quasi-separated and remains etale and surjective. Sheaves and their rationalization isomorphisms assemble on this disjoint union. Use the zero module in rank zero and the empty cover for an empty base.",
+   "text": "Etale maps are open by Mathlib Scheme.Hom.isOpenMap. The images of these point neighborhoods form an open cover; noetherianity implies compactness, so isCompact_univ.elim_finite_subcover gives a finite subfamily. Form its scheme coproduct. Etaleness is Zariski local at the source, and surjectivity follows from the finite cover. A finite coproduct of affine schemes is affine, so it is compact and quasi-separated. The empty base is included.",
    "uses": [
     "lem-weil-pbc-etale-morphism-open-map",
     "lem-weil-pbc-affine-morphism-permanence"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply continuousLattice_finite_coproduct to the selected integral lattices and their rationalization isomorphisms. It supplies the lattice and exact raw pro-etale local-freeness predicate on the coproduct. Return this coproduct, its etale surjection and the constructed lattice.",
+   "uses": [
+    "lem-weil-pbc-continuous-lattice-finite-coproduct"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-condensed-e-module-category",
-  "def-weil-pbc-continuous-integral-coefficients",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-l-adic-extension-absolute-value",
   "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-continuous-coefficient-realizations",
-  "lem-weil-pbc-etale-morphism-open-map",
-  "lem-weil-pbc-lisse-lattice-etale-local"
+  "lem-weil-pbc-continuous-affine-etale-lattice",
+  "lem-weil-pbc-continuous-lattice-finite-coproduct",
+  "lem-weil-pbc-etale-morphism-open-map"
  ],
  "proof_origin": {
+  "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Proposition 6.8.4(6); Lemma 6.8.13, first paragraph",
-  "by": "agent",
-  "note": "C4: internal continuous coefficient interface; source argument below the proper-base-change unit."
+  "note": "B2 stage-3: explicit encoding constructions and proof of the full finite-cover/assembly argument; only local-freeness and lattice compatibility of those encodings remains as a new named theorem. Existing theorem and all target signatures unchanged."
  },
  "mathlib_searches": [
   {
@@ -124,11 +112,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-21055",
-  "group": "C4",
+  "reviewer": "X-cc706",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261016T064222-L-582225",
+  "landing": "20261016T093725-L-2050642",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean statements, proofs, lattice obligations and DAG records against the packet, published sources and cited mathematics; verified compilation, axioms, eight direct importers and the declared reducibility repair."
+  "note": "independent Codex review: Delivered files matched their DAG records and published interfaces; all seven modules and the direct importer compiled cleanly, with the forced helper-sharing adaptation verified."
  }
 }

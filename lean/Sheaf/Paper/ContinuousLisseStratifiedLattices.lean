@@ -8,7 +8,7 @@ public import Sheaf.Paper.ContinuousIntegralCoefficients
 import Sheaf.Paper.ContinuousEtaleLocalLattices
 import Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent
 import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
-import all Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
+import Sheaf.Paper.ContinuousLocallyFreePullback
 
 /-! # Lattices on finitely many strata of a continuous local system
 
@@ -24,65 +24,6 @@ open CategoryTheory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
-
-private abbrev LocallyFree {X : Scheme.{u}}
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
-    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) : Prop :=
-  ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-    Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj R)
-      (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod R).obj P)
-
-private lemma locallyFree_of_iso {X : Scheme.{u}}
-    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
-    {P Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (e : P ≅ Q) (hP : LocallyFree R P) : LocallyFree R Q := by
-  obtain ⟨C, hC⟩ := hP
-  exact ⟨C, fun s ↦ ProEtale.free_of_iso (hC s)
-    (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod R).mapIso e)⟩
-
-private lemma locallyFree_comap {X : Scheme.{u}}
-    {R T : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [MonObj T]
-    (φ : R ⟶ T) [IsMonHom φ] [IsIso φ]
-    {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) T}
-    (hP : LocallyFree T P) : LocallyFree R ((Mod.comap φ).obj P) := by
-  obtain ⟨C, hC⟩ := hP
-  refine ⟨C, fun s ↦ ?_⟩
-  let G := ProEtale.upperStar Ab.{u + 1} (C.f s)
-  exact ProEtale.free_of_iso (ProEtale.free_comap (G.map φ) (hC s))
-    ((G.mapModComapIso φ).app P).symm
-
-private lemma free_map {X Y : Scheme.{u}} (g : Y ⟶ X)
-    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
-    {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (hP : Mod.IsFree R P) : Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} g).obj R)
-      (((ProEtale.upperStar Ab.{u + 1} g).mapMod R).obj P) := by
-  let G := ProEtale.upperStar Ab.{u + 1} g
-  obtain ⟨n, ⟨e⟩⟩ := hP
-  exact ⟨n, ⟨(G.mapMod R).mapIso e ≪≫ (G.mapMod R).mapBiproduct _ ≪≫
-    Limits.biproduct.mapIso (fun _ ↦ Mod.isoMk (Iso.refl _) (by simp [Mod.act]))⟩⟩
-
-private lemma locallyFree_map {X Y : Scheme.{u}} (g : Y ⟶ X)
-    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
-    {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (hP : LocallyFree R P) : LocallyFree ((ProEtale.upperStar Ab.{u + 1} g).obj R)
-      (((ProEtale.upperStar Ab.{u + 1} g).mapMod R).obj P) := by
-  obtain ⟨C, hC⟩ := hP
-  refine ⟨C.pullback₂ g, fun s ↦ ?_⟩
-  have h := (ProEtale.free_pullback_comp_iff (Limits.pullback.fst (C.f s) g) (C.f s) P).mpr
-    (free_map _ (hC s))
-  rw [Limits.pullback.condition] at h
-  exact (ProEtale.free_pullback_comp_iff (Limits.pullback.snd (C.f s) g) g P).mp h
-
-private lemma locallyFree_upperStar
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Y : Scheme.{u}} (g : Y ⟶ X)
-    {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
-    (hP : LocallyFree (condensedRingObj Λ X) P) :
-    LocallyFree (condensedRingObj Λ Y) ((CondensedRing.upperStar Λ g).obj P) := by
-  let φ := condensedPullbackHom Λ g
-  let Q := ((ProEtale.upperStar Ab.{u + 1} g).mapMod _).obj P
-  exact locallyFree_of_iso ((Mod.extendScalarsIsoComapInv φ).app Q).symm
-    (locallyFree_comap (inv φ) (locallyFree_map g hP))
 
 private lemma locallyFree_lfp {X : Scheme.{u}}
     {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]

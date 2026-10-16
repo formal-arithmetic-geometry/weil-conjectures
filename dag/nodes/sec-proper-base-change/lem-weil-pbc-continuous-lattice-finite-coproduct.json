@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-continuous-lattice-finite-coproduct",
+ "kind": "statement",
+ "title": "Integral lattices assemble on finite disjoint unions",
+ "statement": "Let ell be prime, E a normed field extension of Q_ell, X a scheme, P any internal continuous rational module, I a finite type, Y_i a family of schemes, and p_i:Y_i→X arbitrary maps. Suppose each Y_i is supplied with an internal integral module M_i, a pro-etale finite free trivializing cover, and an isomorphism E tensor M_i ≅ p_i*P, using the coefficient objects of [def-weil-pbc-continuous-integral-coefficients]. Then there exists an internal integral module N on the scheme coproduct of the Y_i, with a pro-etale finite free trivializing cover and an isomorphism E tensor N ≅ (Sigma.desc p)*P. The statement includes an empty family and zero ranks; it requires no compatibility of the M_i, no noetherianity, no etale condition and no local freeness of P.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13, finite affine cover step; explicit extension-by-zero proof of disjoint-union assembly (Stacks Project Tag 04TR)"
+ },
+ "proof": [
+  {
+   "text": "Construct N as the finite biproduct of extensions by zero j_i! M_i along the component inclusions. For different components j_i* j_t* Q is zero since its sections lie over empty pullbacks. Adjunction twice therefore proves j_t* j_i! M_i is zero. For equal components the open-extension unit is an isomorphism by full faithfulness. The pulled-back biproduct inclusion is consequently an isomorphism, with inverse the projection, giving j_t*N ≅ M_t. The existing proved openUnitIsIso is imported from CondensedOpenClosedRecollement, rather than copied.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the supplied free cover of each M_t to the raw pullback of N by restriction along the invertible condensedPullbackHom. Bind those covers with the component cover. The raw pullback composition isomorphism and the mapMod comparison prove finite freeness on the bound cover, with exactly the predicate required by the statement. Reuse the shared ContinuousLocallyFreePullback API instead of redeclaring its helpers. The raw composition helper is imported from CondensedFieldLfpLocalTriviality.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-continuous-locally-free-pullback",
+    "lem-weil-pbc-condensed-lfp-local-triviality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extension of scalars preserves the finite biproduct and commutes with open extension by zero by openImmersionShriekIso. Apply the supplied rationalization isomorphisms and the pullback composition comparison to obtain the biproduct of j_i! j_i* Q, where Q=(Sigma.desc p)*P. Its counit map to Q becomes an isomorphism on every component by the adjunction triangle identity. The underlying abelian restriction functors are conservative on an open cover; the module forgetful functor reflects isomorphisms, so this counit is an isomorphism globally. The empty family follows by the same conservativity argument.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "lem-weil-pbc-condensed-lfp-local-triviality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13, finite affine cover step; explicit extension-by-zero proof of disjoint-union assembly (Stacks Project Tag 04TR)",
+  "note": "Stage-3 explicit encoding and finite-cover reduction of the unchanged continuous etale lattice theorem; existing lattice existence theorem is reused. B2 return repair: duplicate helpers removed in favor of shared imports. The broader duplicate scan also found and removed the copied openUnitIsIso helper."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Module sheaves on a disjoint union of schemes glue from the components",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.coprodPresheafObjIso, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types, TopCat.Sheaf.existsUnique_gluing', TopCat.Sheaf.existsUnique_gluing, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing, AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.Scheme.LocalRepresentability.toGlued",
+   "verdict": "No exact statement. The matching elementary free-module, sheaf and category APIs are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SheafOfModules",
+   "date": "2026-10-16",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.SheafOfModules'",
+   "verdict": "No exact statement. The matching elementary free-module, sheaf and category APIs are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*[Ee]tale|[Ee]tale.*lattice|[Ss]heaf.*[Ss]igma|[Ss]igma.*[Ss]heaf",
+   "date": "2026-10-16",
+   "results": "16 hits: Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean",
+   "verdict": "No exact statement. The matching elementary free-module, sheaf and category APIs are used in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousEtaleLocalLattices",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous coefficient integral-model input: etale-local lattices in degree zero; Integral lattices assemble on finite disjoint unions",
+   "via": [
+    "lem-weil-pbc-continuous-etale-local-lattice",
+    "lem-weil-pbc-continuous-constructible-integral-stratum",
+    "lem-weil-pbc-continuous-constructible-integral-single",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousLatticeFiniteCoproduct",
+  "file": "lean/Sheaf/Paper/ContinuousLatticeFiniteCoproduct.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousLattice_finite_coproduct",
+  "statement": "theorem continuousLattice_finite_coproduct\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[ℓ] E]\n    (X : Scheme.{u})\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    {I : Type u} [Finite I] (Y : I → Scheme.{u}) (p : ∀ i, Y i ⟶ X)\n    (M : ∀ i, Mod (Sheaf (Scheme.ProEt.topology (Y i)) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) (Y i)))\n    (hM : ∀ i, ∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage (Y i), ∀ s : D.I₀,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj\n        (condensedRingObj (integralCoeff ℓ E) (Y i)))\n        (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj (M i)))\n    (e : ∀ i, Nonempty\n      ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) (Y i))).obj (M i) ≅\n        (CondensedRing.upperStar (Profinite.continuousMapRingObj E) (p i)).obj P)) :\n    ∃ M : Mod (Sheaf (Scheme.ProEt.topology (∐ Y)) Ab.{u + 1})\n        (condensedRingObj (integralCoeff ℓ E) (∐ Y)),\n      (∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage (∐ Y), ∀ s : D.I₀,\n        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj\n          (condensedRingObj (integralCoeff ℓ E) (∐ Y)))\n          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M)) ∧\n      Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) (∐ Y))).obj M ≅\n        (CondensedRing.upperStar (Profinite.continuousMapRingObj E) (Sigma.desc p)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cc706",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T093725-L-2050642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cc706",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T093725-L-2050642",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched their DAG records and published interfaces; all seven modules and the direct importer compiled cleanly, with the forced helper-sharing adaptation verified."
+ }
+}

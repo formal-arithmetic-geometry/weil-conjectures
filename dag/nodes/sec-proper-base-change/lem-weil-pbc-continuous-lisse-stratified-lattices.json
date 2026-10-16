@@ -28,13 +28,12 @@
    "elementary": false
   },
   {
-   "text": "Pull back P and the lattice to each cartesian square. Local freeness is preserved: pull back a trivializing cover and its finite biproduct isomorphisms, and transport coefficients across the monoidal composition isomorphism. Scalar-change compatibility and pullback composition give the rationalization isomorphism on the finite etale cover. The functor interfaces are packaged as explicitly constructed structures to avoid expanding their adjunction constructions. Reuse the already-proved private free_comap, free_of_iso and free_pullback_comp_iff helpers of the local-triviality module through a proof-only import all for coefficient restriction, free-module transport and pullback composition.",
+   "text": "Pull back P and the lattice to each cartesian square using the shared locallyFree_upperStar theorem. Its proof base changes the trivializing scheme cover and transports the raw free-module predicate. The unchanged scalar-change and pullback-composition isomorphisms give the rationalization isomorphism. The explicit PullbackSystem construction and the rest of the stratification proof are unchanged. The five formerly private transport lemmas and their predicate are moved to ContinuousLocallyFreePullback, which this module imports.",
    "uses": [
-    "def-weil-pbc-condensed-e-module-category",
-    "def-weil-pbc-continuous-integral-coefficients",
-    "lem-weil-pbc-condensed-lfp-local-triviality"
+    "lem-weil-pbc-continuous-locally-free-pullback",
+    "def-weil-pbc-continuous-integral-coefficients"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
    "text": "Apply finite etale lattice descent on each stratum. A locally finite free integral module is locally finitely presented, using the zero relation module and the zero-cokernel isomorphism. The one-part identity stratification then proves constructibility.",
@@ -45,18 +44,17 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-condensed-e-module-category",
-  "def-weil-pbc-continuous-integral-coefficients",
-  "lem-weil-pbc-condensed-lfp-local-triviality",
   "lem-weil-pbc-continuous-etale-local-lattice",
   "lem-weil-pbc-etale-stratified-finite",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "def-weil-pbc-continuous-integral-coefficients",
   "lem-weil-pbc-lisse-lattice-finite-etale-descent"
  ],
  "proof_origin": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Proposition 6.8.4(6); Lemma 6.8.13, first paragraph",
   "by": "agent",
-  "note": "C4: internal continuous coefficient interface; source argument below the proper-base-change unit."
+  "note": "C4: internal continuous coefficient interface; source argument below the proper-base-change unit. B2 return repair: local-freeness helper implementations moved to a common acyclic API without changing the public stratification theorem."
  },
  "mathlib_searches": [
   {
@@ -123,11 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-21055",
-  "group": "C4",
+  "reviewer": "X-cc706",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261016T064222-L-582225",
+  "landing": "20261016T093725-L-2050642",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean statements, proofs, lattice obligations and DAG records against the packet, published sources and cited mathematics; verified compilation, axioms, eight direct importers and the declared reducibility repair."
+  "note": "independent Codex review: Delivered files matched their DAG records and published interfaces; all seven modules and the direct importer compiled cleanly, with the forced helper-sharing adaptation verified."
  }
 }

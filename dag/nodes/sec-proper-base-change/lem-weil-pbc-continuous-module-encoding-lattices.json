@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-continuous-module-encoding-lattices",
+ "kind": "statement",
+ "title": "Local freeness and lattice compatibility of the explicit continuous encodings",
+ "statement": "Let ell be prime, E a finite-dimensional normed field extension of Q_ell, X any scheme, and P an internal module over its condensed continuous E coefficient ring. Suppose a pro-etale scheme cover trivializes P as finite biproducts of the pulled-back regular module. Its image under the specified rational encoding of [def-weil-pbc-continuous-coefficient-module-encoding] is finite locally free as a sectionwise module sheaf. Moreover, for every etale f:Y→X and every specified finite locally free integral sectionwise module M on Y with a specified rationalization isomorphism to the restriction of the encoded P, the actual object inverseEncoding(M) is pro-etale locally finite free as an internal integral module and its ordinary scalar extension is isomorphic to the canonical internal f*P. There is no assertion that M or f exists, no compactness condition, and no finite cover or disjoint-union assembly. The integral and rational coefficient objects and map are those of [def-weil-pbc-continuous-integral-coefficients].",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-lisse-lattice-coefficients"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DM (finite local freeness is intrinsic), 03DO (local pullback), 03D7 (module adjunction), 03EK and 03EL (tensor and pullback); Bhatt--Scholze Definition 6.8.3"
+ },
+ "proof": [
+  {
+   "text": "The proved continuousFieldFreeIso and continuousIntegerFreeIso identify finite free objects in the two encodings, including rank zero. The already proved finiteLocallyFree_restrict transports finite local freeness along the coefficient ring isomorphisms. On a covering slice use the localization equivalence of the small pro-etale site to identify the encoding of raw inverse image with restriction of the encoded module. Both forget to restriction of the same abelian sheaf, and their scalar actions are the tensor actions evaluated after the sheafification unit. The proved continuousChart_pullback identifies the canonical coefficient comparison on a covering slice with condensedPullbackHom, using the adjoint form of the existing scheme-naturality theorem. Thus finite free trivializations in either encoding transport to finite free trivializations in the other. A covering sieve contains a pro-etale precover, so the inverse integral encoding has an actual scheme cover of the form required in the statement.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-lisse-lattice-coefficient-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient square commutes by chartComparison_naturality; the spectral and integral coefficient equalities and lisseScalar_square are proved in the encoding module. The proved continuousRing_comap_compatibility compares restriction of scalars for the full continuous encodings; sectionModuleComapIso is its reconstructed-ring step. Extension of scalars is left adjoint to restriction in each encoding: the sectionwise Hom bijection is the tensor universal property followed by sheafification. Compose these natural Hom bijections with the encoding equivalences. Uniqueness of left adjoints identifies ordinary internal scalar extension with the sheafified sectionwise tensor product.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an etale f, inverse image is restriction to the localized site, with the continuous-function coefficient identification of lisseEtaleCoefficientIdentification. The preceding restriction comparison identifies the supplied sectionwise target with the encoding of canonical internal f*P. Transport the supplied rationalization through full faithfulness of the rational encoding and use the counit of the integral equivalence. This proves the assertion for any already given lattice, with no lattice-existence argument.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "def-weil-pbc-lisse-lattice-coefficients",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-lisse-lattice-coefficient-normalization",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DM (finite local freeness is intrinsic), 03DO (local pullback), 03D7 (module adjunction), 03EK and 03EL (tensor and pullback); Bhatt--Scholze Definition 6.8.3",
+  "note": "Stage-3 explicit encoding and finite-cover reduction of the unchanged continuous etale lattice theorem; existing lattice existence theorem is reused."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between internal module objects in abelian sheaves and sheaves of modules preserves local finite freeness and scalar extension",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.mapFree, SheafOfModules.instAbelian, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, LinearEquiv.extendScalarsOfIsLocalizationEquiv, PresheafOfModules.sheafifyHomEquiv', AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf, SheafOfModules.freeHomEquiv, SheafOfModules.free",
+   "verdict": "No exact statement. The matching elementary free-module, sheaf and category APIs are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFiniteLocallyFree\"",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No exact statement. The matching elementary free-module, sheaf and category APIs are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionModule|monObj|changeOfRings",
+   "date": "2026-10-16",
+   "results": "25 hits: Mathlib/Tactic/Attr/Register.lean, Mathlib/Tactic/Translate/ToAdditive.lean, Mathlib/Algebra/Category/CommBialgCat.lean, Mathlib/Algebra/Category/CommBialgCat.lean, Mathlib/Algebra/Category/CommBialgCat.lean, Mathlib/Algebra/Category/CommBialgCat.lean, Mathlib/Algebra/Category/CommBialgCat.lean, Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean",
+   "verdict": "No exact statement. The matching elementary free-module, sheaf and category APIs are used in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousEtaleLocalLattices",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous coefficient integral-model input: etale-local lattices in degree zero; Local freeness and lattice compatibility of the explicit continuous encodings",
+   "via": [
+    "lem-weil-pbc-continuous-etale-local-lattice",
+    "lem-weil-pbc-continuous-constructible-integral-stratum",
+    "lem-weil-pbc-continuous-constructible-integral-single",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousModuleEncodingLattices",
+  "file": "lean/Sheaf/Paper/ContinuousModuleEncodingLattices.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousModuleEncoding_lattice_compatibility",
+  "statement": "theorem continuousModuleEncoding_lattice_compatibility\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]\n    (X : Scheme.{u})\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj\n        (condensedRingObj (Profinite.continuousMapRingObj E) X))\n        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) :\n    ((continuousFieldModuleEquivalence ℓ E X).functor.obj P).IsFiniteLocallyFree ∧\n    ∀ (Y : Scheme.{u}) (f : Y ⟶ X) [Etale f]\n      (M : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology Y)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseIntegerSheaf ℓ E Y))),\n      M.IsFiniteLocallyFree →\n      Nonempty ((SheafOfModules.changeOfRings (lisseIntegerToField ℓ E Y) M).val ≅\n        (PresheafOfModules.pushforward (lisseEtaleCoefficientIdentification ℓ E f)).obj\n          ((continuousFieldModuleEquivalence ℓ E X).functor.obj P).val) →\n      (∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage Y, ∀ s : D.I₀,\n        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj\n          (condensedRingObj (integralCoeff ℓ E) Y))\n          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj\n            ((continuousIntegerModuleEquivalence ℓ E Y).inverse.obj M))) ∧\n      Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) Y)).obj\n          ((continuousIntegerModuleEquivalence ℓ E Y).inverse.obj M) ≅\n        (upperStar (Profinite.continuousMapRingObj E) f).obj P)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cc706",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T093725-L-2050642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cc706",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T093725-L-2050642",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched their DAG records and published interfaces; all seven modules and the direct importer compiled cleanly, with the forced helper-sharing adaptation verified."
+ }
+}

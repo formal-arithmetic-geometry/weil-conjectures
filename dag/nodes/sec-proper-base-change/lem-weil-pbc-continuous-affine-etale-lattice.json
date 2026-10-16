@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-continuous-affine-etale-lattice",
+ "kind": "statement",
+ "title": "An affine etale lattice neighborhood at each point",
+ "statement": "Let ell be prime, E a finite-dimensional normed field extension of Q_ell, X any scheme, and P an internal rational continuous module with a pro-etale finite free trivializing cover. For each point x of X there exist an affine scheme U, an etale map p:U→X whose image contains x, and an internal integral module M on U with a pro-etale finite free trivializing cover and an isomorphism from its ordinary scalar extension to canonical p*P. Coefficients are those of [def-weil-pbc-continuous-integral-coefficients]. The ranks may vary and may be zero. No finite simultaneous choice or assembly on a disjoint union is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), followed by affine refinement as in the first paragraph of Lemma 6.8.13"
+ },
+ "proof": [
+  {
+   "text": "Encode P by the actual rational equivalence. The compatibility theorem gives finite local freeness. Apply the existing exists_lisse_lattice_etale_local to get an etale covering with specified integral sectionwise lattices. At the terminal object of the etale site, the covering sieve contains an etale scheme cover; choose a point above x in that cover and factor its arrow through a member of the supplied family.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-continuous-module-encoding-lattices",
+    "lem-weil-pbc-lisse-lattice-etale-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the second clause of the compatibility theorem to that member and its given integral lattice. Its inverse integral encoding is a locally finite free internal module with the required rationalization. This is an explicit inverse-equivalence construction, not an arbitrary existence witness.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-continuous-module-encoding-lattices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an affine open neighborhood of the chosen point. Pull back the integral module and its trivializing scheme cover. A strong monoidal additive pullback preserves finite biproducts of the regular module; restriction along invertible coefficient maps preserves freeness. Bind the pulled-back covers and use the raw mapMod composition comparison to establish the exact locally-free predicate. The existing pullIso and upperStarComp identify its rationalization with the composite pullback of P. Reuse the shared ContinuousLocallyFreePullback API instead of redeclaring its helpers.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-continuous-locally-free-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-weil-pbc-continuous-module-encoding-lattices",
+  "lem-weil-pbc-lisse-lattice-etale-local",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-continuous-locally-free-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), followed by affine refinement as in the first paragraph of Lemma 6.8.13",
+  "note": "Stage-3 explicit encoding and finite-cover reduction of the unchanged continuous etale lattice theorem; existing lattice existence theorem is reused. B2 return repair: duplicate helpers removed in favor of shared imports."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Module sheaves on a disjoint union of schemes glue from the components",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.coprodPresheafObjIso, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types, TopCat.Sheaf.existsUnique_gluing', TopCat.Sheaf.existsUnique_gluing, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing, AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.Scheme.LocalRepresentability.toGlued",
+   "verdict": "No exact statement. The matching elementary free-module, sheaf and category APIs are used in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An internal locally finite free continuous p-adic sheaf admits integral lattices on an etale cover",
+   "date": "2026-10-16",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, BDeRham, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.isOpen_etaleLocus, BDeRhamPlus, Algebra.Etale.exists_subalgebra_fg, Algebra.etaleLocus, Algebra.mem_etaleLocus_iff",
+   "verdict": "No exact statement. The matching elementary free-module, sheaf and category APIs are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SheafOfModules",
+   "date": "2026-10-16",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.SheafOfModules'",
+   "verdict": "No exact statement. The matching elementary free-module, sheaf and category APIs are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*[Ee]tale|[Ee]tale.*lattice|[Ss]heaf.*[Ss]igma|[Ss]igma.*[Ss]heaf",
+   "date": "2026-10-16",
+   "results": "16 hits: Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean",
+   "verdict": "No exact statement. The matching elementary free-module, sheaf and category APIs are used in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousEtaleLocalLattices",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous coefficient integral-model input: etale-local lattices in degree zero; An affine etale lattice neighborhood at each point",
+   "via": [
+    "lem-weil-pbc-continuous-etale-local-lattice",
+    "lem-weil-pbc-continuous-constructible-integral-stratum",
+    "lem-weil-pbc-continuous-constructible-integral-single",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousAffineEtaleLattice",
+  "file": "lean/Sheaf/Paper/ContinuousAffineEtaleLattice.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousLisse_affine_etale_lattice",
+  "statement": "theorem continuousLisse_affine_etale_lattice\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]\n    (X : Scheme.{u})\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj\n        (condensedRingObj (Profinite.continuousMapRingObj E) X))\n        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) (x : X) :\n    ∃ (U : Scheme.{u}) (p : U ⟶ X), IsAffine U ∧ Etale p ∧ x ∈ Set.range p ∧\n    ∃ M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n        (condensedRingObj (integralCoeff ℓ E) U),\n      (∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : D.I₀,\n        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj\n          (condensedRingObj (integralCoeff ℓ E) U))\n          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M)) ∧\n      Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) U)).obj M ≅\n        (CondensedRing.upperStar (Profinite.continuousMapRingObj E) p).obj P)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cc706",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T093725-L-2050642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cc706",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T093725-L-2050642",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched their DAG records and published interfaces; all seven modules and the direct importer compiled cleanly, with the forced helper-sharing adaptation verified."
+ }
+}

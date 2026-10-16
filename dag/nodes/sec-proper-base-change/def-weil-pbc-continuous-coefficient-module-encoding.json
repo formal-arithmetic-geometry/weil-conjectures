@@ -1,0 +1,193 @@
+{
+ "id": "def-weil-pbc-continuous-coefficient-module-encoding",
+ "kind": "definition",
+ "title": "Explicit continuous coefficient module encodings",
+ "statement": "For a scheme X and a totally disconnected topological commutative ring T in Type 0, define an actual equivalence from internal modules over the condensed continuous T coefficient ring on X to sectionwise module sheaves over U↦C(U,T). It is the composite of restriction along the inverse canonical chartComparison of [lem-weil-pbc-continuous-coefficient-realizations], the sectionModuleEquivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence], and the identity-on-sections isomorphism from the reconstructed section ring to the original continuous function ring. For a finite normed extension E of Q_ell, identify the given and spectral metrics, the closed unit ball and coefficientExtensionIntegers, and their induced continuous coefficient sheaves. This gives specified rational and integral encodings to lisseFieldSheaf and lisseIntegerSheaf. The encoding sends the regular internal module to the unit module sheaf and finite biproducts of n regular modules to the free sheaf on ULift(Fin n). It also commutes with restriction of scalars at the reconstructed section-ring stage. These are real constructions; no arbitrary witness of an unproved existence statement is chosen.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-lisse-lattice-coefficients"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sheaves of modules and tensor products; Tag 00YV in sites.tex (functoriality of algebraic structures); Bhatt--Scholze Section 6.8"
+ },
+ "proof": [
+  {
+   "text": "The identity-on-sections map from the reconstructed ring preserves multiplication: the two multiplications are identified by Sheaf.μ_comp_map_mul and the tensor description of a sectionwise monoid. Build reconstructedRingIso and transport coefficients by the identity-site pushforward equivalence.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose restriction along the inverse chartComparison, sectionModuleEquivalence and reconstructedRingIso. The first map is an algebra isomorphism for totally disconnected coefficients. The regular-module comparison is the composite of regularIsoOfIsIso, the identity-on-sections regular comparison and ringModuleUnitIso. Equivalences preserve finite biproducts; identify the biproduct with the coproduct and reindex by Equiv.ulift to obtain the free-module comparisons.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply NormedAlgebra.norm_eq_spectralNorm to differences to identify the metrics and hence the topologies. Both integral subrings are the spectral closed unit ball, by the defining coefficient-extension DVR property. Equality of the subrings and the induced topologies identifies the two integral function sheaves. Compose with coefficient isomorphism transport to obtain the rational and integral encodings.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients",
+    "def-weil-pbc-lisse-lattice-coefficients",
+    "lem-weil-l-adic-extension-absolute-value"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The induced map on reconstructed section rings is evaluation of the commutative-monoid functor on the sheaf algebra map. Construct the restriction-of-scalars natural isomorphism by identity maps on sections. Its linearity is exactly mapModComapIso for sheafToPresheaf, evaluated on r tensor m; naturality is identity.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the proved continuousChart_scheme_naturality by the weakly etale inverse-image adjunction. Its localization comparison transposes to the localization unit, which is precomposition with the scheme pullback projection on sections. This proves continuousChart_pullback for the specified canonical coefficient map.",
+   "uses": [
+    "lem-weil-pbc-continuous-chart-scheme-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved continuousRing_comap_compatibility compares restriction of scalars for the complete continuous coefficient encodings: conjugate the condensed scalar map by chartComparison_naturality, apply comapComp and sectionModuleComapIso, and identify the final reconstructed-ring comparison by identity maps on sections.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved lisseScalar_square identifies the continuous integral-to-field scalar map with lisseIntegerToField through the actual coefficient equalities. Subring and metric equality identify the subtype inclusion maps, hence their postcomposition on continuous functions; transport yields the commuting square.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients",
+    "def-weil-pbc-lisse-lattice-coefficients",
+    "lem-weil-l-adic-extension-absolute-value"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-pbc-continuous-chart-scheme-naturality",
+  "lem-weil-pbc-continuous-coefficient-realizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sheaves of modules and tensor products; Tag 00YV in sites.tex (functoriality of algebraic structures); Bhatt--Scholze Section 6.8",
+  "note": "Stage-3 explicit encoding and finite-cover reduction of the unchanged continuous etale lattice theorem; existing lattice existence theorem is reused."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between internal module objects in abelian sheaves and sheaves of modules preserves local finite freeness and scalar extension",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.mapFree, SheafOfModules.instAbelian, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, LinearEquiv.extendScalarsOfIsLocalizationEquiv, PresheafOfModules.sheafifyHomEquiv', AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf, SheafOfModules.freeHomEquiv, SheafOfModules.free",
+   "verdict": "No exact statement. The matching elementary free-module, sheaf and category APIs are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFiniteLocallyFree\"",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No exact statement. The matching elementary free-module, sheaf and category APIs are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionModule|monObj|changeOfRings",
+   "date": "2026-10-16",
+   "results": "25 hits: Mathlib/Tactic/Attr/Register.lean, Mathlib/Tactic/Translate/ToAdditive.lean, Mathlib/Algebra/Category/CommBialgCat.lean, Mathlib/Algebra/Category/CommBialgCat.lean, Mathlib/Algebra/Category/CommBialgCat.lean, Mathlib/Algebra/Category/CommBialgCat.lean, Mathlib/Algebra/Category/CommBialgCat.lean, Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean",
+   "verdict": "No exact statement. The matching elementary free-module, sheaf and category APIs are used in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousEtaleLocalLattices",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous coefficient integral-model input: etale-local lattices in degree zero; Explicit continuous coefficient module encodings",
+   "via": [
+    "lem-weil-pbc-continuous-etale-local-lattice",
+    "lem-weil-pbc-continuous-constructible-integral-stratum",
+    "lem-weil-pbc-continuous-constructible-integral-single",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousCoefficientModuleEncoding",
+  "file": "lean/Sheaf/Paper/ContinuousCoefficientModuleEncoding.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousRingModuleEquivalence",
+  "statement": "def continuousRingModuleEquivalence (X : Scheme.{u}) (T : Type)\n    [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [TotallyDisconnectedSpace T] :\n    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj (Profinite.continuousMapRingObj T) X) ≌\n      SheafOfModules.{u + 1} (continuousMapRingSheaf X T)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.reconstructedRingIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.sectionRingMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.sectionModuleComapIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.sectionModuleRegularIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.spectralMetric_eq",
+   "AlgebraicGeometry.ProEtale.CondensedRing.lisseFieldSheaf_eq",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousIntegers_eq",
+   "AlgebraicGeometry.ProEtale.CondensedRing.lisseIntegerSheaf_eq",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ringModuleEquivalenceOfIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ringModuleUnitIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ringModuleFreeIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousRingModuleEquivalence",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousRingRegularIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousRingFreeIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousFieldModuleEquivalence",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousIntegerModuleEquivalence",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousFieldFreeIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousIntegerFreeIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousRing_free_isFiniteLocallyFree",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousInteger_inverse_free",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousRing_comap_compatibility",
+   "AlgebraicGeometry.ProEtale.CondensedRing.lisseScalar_square",
+   "AlgebraicGeometry.ProEtale.continuousChart_pullback"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cc706",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T093725-L-2050642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cc706",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T093725-L-2050642",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched their DAG records and published interfaces; all seven modules and the direct importer compiled cleanly, with the forced helper-sharing adaptation verified."
+ }
+}

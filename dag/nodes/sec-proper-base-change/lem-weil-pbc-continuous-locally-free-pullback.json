@@ -1,0 +1,135 @@
+{
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousEtaleLocalLattices",
+  "date": "2026-10-16",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous coefficient integral-model input: pullback preserves local finite freeness in the etale-local lattice and stratification arguments",
+   "via": [
+    "lem-weil-pbc-continuous-etale-local-lattice",
+    "lem-weil-pbc-continuous-constructible-integral-stratum",
+    "lem-weil-pbc-continuous-constructible-integral-single",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-continuous-locally-free-pullback",
+ "kind": "statement",
+ "title": "Pullback preserves locally finite free internal modules",
+ "statement": "Let X and Y be schemes, g:Y→X any scheme morphism, and Λ a commutative ring object in condensed abelian groups. An internal module P over condensedRingObj Λ X is locally finite free if a pro-etale scheme cover C of X makes every inverse image of P a finite biproduct of regular modules, allowing varying finite ranks and rank zero. Then the canonical coefficient pullback (CondensedRing.upperStar Λ g).obj P is locally finite free on Y. The coefficient objects and pullbacks are those of [def-weil-pbc-continuous-integral-coefficients]. No etaleness, noetherianity, nonemptiness or finite-dimensional field hypothesis is required. The accompanying reusable API also transports the same scheme-cover predicate along module isomorphisms and invertible coefficient maps.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, local finite freeness under inverse image; Stacks Project, Modules on Sites, Tag 03DO"
+ },
+ "proof": [
+  {
+   "text": "Reuse free_comap, free_of_iso, free_of_comap and free_pullback_comp_iff from CondensedFieldLfpLocalTriviality through import all. For coefficient restriction, keep the original cover and apply the free_comap theorem and the mapModComapIso comparison on each member. Module isomorphisms transport the same finite free presentations. These are the existing proved helpers, not additional lattice existence assumptions.",
+   "uses": [
+    "lem-weil-pbc-condensed-lfp-local-triviality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Map the finite biproduct presentation of a free module through the additive strong monoidal inverse-image functor. Its mapBiproduct comparison and the regular-module comparison give a free presentation on Y. Base change the trivializing scheme cover C. The pullback-square equality, together with free_pullback_comp_iff, identifies each pulled-back trivialization with the restriction of the pulled-back module.",
+   "uses": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical condensed coefficient pullback is extension of scalars along condensedPullbackHom after ordinary inverse image. That coefficient morphism is invertible. Apply locallyFree_comap to its inverse and then the extendScalarsIsoComapInv isomorphism, using locallyFree_of_iso. This proves the exact raw scheme-cover predicate, including empty schemes and rank zero.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8; Stacks Project Tag 03DO",
+  "note": "B2 repair: move the existing five proved private helpers from ContinuousLisseStratifiedLattices to one reusable API; reuse the four existing free-module helpers from the lower local-triviality module."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a locally finite free internal module on a scheme pro-etale site remains locally finite free",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instLocallyQuasiFiniteFstScheme, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme, AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme, AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme",
+   "verdict": "The shared library already proves the exact helpers in ContinuousLisseStratifiedLattices; move them to a common module to avoid the import cycle. The external search supplied no replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.IsFree",
+   "date": "2026-10-16",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Mod.IsFree'",
+   "verdict": "The shared library already proves the exact helpers in ContinuousLisseStratifiedLattices; move them to a common module to avoid the import cycle. The external search supplied no replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyFree_upperStar|free_pullback_comp_iff",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "The shared library already proves the exact helpers in ContinuousLisseStratifiedLattices; move them to a common module to avoid the import cycle. The external search supplied no replacement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback preserves finite locally free sheaves of modules",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback",
+   "verdict": "The sectionwise pullback APIs are related, but the exact internal scheme-cover predicate is already proved by the existing stratification helpers; move these proofs rather than duplicate them."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousLocallyFreePullback",
+  "file": "lean/Sheaf/Paper/ContinuousLocallyFreePullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.locallyFree_upperStar",
+  "statement": "lemma locallyFree_upperStar\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    {P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}\n    (hP : LocallyFree (condensedRingObj Λ X) P) :\n    LocallyFree (condensedRingObj Λ Y) ((CondensedRing.upperStar Λ g).obj P)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cc706",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T093725-L-2050642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-cc706",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T093725-L-2050642",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched their DAG records and published interfaces; all seven modules and the direct importer compiled cleanly, with the forced helper-sharing adaptation verified."
+ }
+}
