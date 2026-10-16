@@ -3,34 +3,133 @@
  "blueprint": {
   "is": "def-sfb-preserves-kflat-quasi-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "K-flat complexes; functors preserving K-flat quasi-isomorphisms",
- "statement": "Let $\\mathcal C$ be a monoidal abelian category whose tensor product is additive in each\nvariable. Complexes are tensored by totalizing the termwise tensor product. A complex $P$\nis *K-flat* if $P\\otimes-$ and $-\\otimes P$ send quasi-isomorphisms to\nquasi-isomorphisms. An additive functor $F\\colon\\mathcal C\\to\\mathcal D$ to an abelian\ncategory *preserves K-flat quasi-isomorphisms* if $F(s)$ is a quasi-isomorphism for every\nquasi-isomorphism $s\\colon P\\to P'$ between K-flat complexes. Every exact functor does.",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian] with a monoidal structure $(\\otimes,\\mathbf 1)$ whose tensor bifunctor is additive in each variable. Assume that $\\mathcal C$ has countable coproducts, meaning colimits of diagrams indexed by countable discrete categories [def-weil-pbc-category-colimit]. Use $\\mathbf Z$-indexed cochain complexes and quasi-isomorphisms as in [def-weil-abstract-derived-category]. For complexes $P,Q$ define their direct-sum total tensor complex by\n$$\n(P\\otimes Q)^n=\\bigoplus_{p+q=n}P^p\\otimes Q^q,\n$$\nwith differential on the $(p,q)$ summand equal to $d_P^p\\otimes\\mathrm{id}_{Q^q}$ into the $(p+1,q)$ summand plus $(-1)^p\\mathrm{id}_{P^p}\\otimes d_Q^q$ into the $(p,q+1)$ summand. For morphisms $a:P\\to P'$, $b:Q\\to Q'$, the morphism $a\\otimes b$ is induced on the $(p,q)$ summand by $a^p\\otimes b^q$ into the $(p,q)$ summand. A complex $P$ is *K-flat* if both functors $P\\otimes-$ and $-\\otimes P$ send every quasi-isomorphism of complexes to a quasi-isomorphism.\n\nLet $\\mathcal D$ be an abelian category [def-sp-abelian]. An additive functor $F:\\mathcal C\\to\\mathcal D$ (additive on each group of morphisms), applied termwise to complexes and their morphisms, *preserves K-flat quasi-isomorphisms* if $F(s)$ is a quasi-isomorphism for every quasi-isomorphism $s:P\\to P'$ with both $P$ and $P'$ K-flat. Every exact $F$ has this property; here exact means additive and preserving finite limits and finite colimits.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-preserves-kflat-quasi-iso.md",
   "place": "node def-sfb-preserves-kflat-quasi-iso, order 1611"
  },
  "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-category-colimit",
   "def-weil-abstract-derived-category"
  ],
  "proof": [
   {
-   "text": "An exact functor commutes with taking cohomology of complexes, so it sends every\nquasi-isomorphism to a quasi-isomorphism.",
-   "uses": [],
-   "elementary": null
+   "text": "The total tensor construction is well defined: for each $n$, the pairs $(p,q)$ with $p+q=n$ form a countable set, so the displayed coproduct exists by the assumed countable coproducts and [def-weil-pbc-category-colimit]. Define the differential by its two specified components on each summand. Its square has pure terms $d_P^{p+1}d_P^p\\otimes\\mathrm{id}$ and $\\mathrm{id}\\otimes d_Q^{q+1}d_Q^q$, both zero, and mixed terms with coefficients $(-1)^p$ and $(-1)^{p+1}$, which cancel. Thus it is a cochain complex as in [def-weil-abstract-derived-category]. The displayed maps $a\\otimes b$ commute with these differentials because $a,b$ commute with the respective differentials; their identities and compositions hold on every summand. Fixing either factor therefore gives the two functors used in the definition. No associativity or preservation of infinite coproducts by tensoring is needed for this binary construction.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-preserves-kflat-quasi-iso.md",
+    "place": "Statement, sentence 2: totalizing the termwise tensor product; explicit direct-sum construction and sign check supplied here"
+   }
+  },
+  {
+   "text": "Suppose $F$ is exact and let $s:K\\to L$ be any quasi-isomorphism, without assuming K-flatness. The termwise images are complexes since additivity gives $F(0)=0$. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to this exact functor between abelian categories. For every $n$ it supplies natural isomorphisms $c_K^n:H^n(FK)\\xrightarrow{\\sim}F(H^nK)$ and $c_L^n:H^n(FL)\\xrightarrow{\\sim}F(H^nL)$ satisfying $c_L^n\\circ H^n(Fs)=F(H^n s)\\circ c_K^n$. These are the precise cohomology comparisons needed; no assumption on coproduct preservation by $F$ is used.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor, degreewise kernel/cokernel comparison; as packaged by the cited existing cohomology lemma"
+   }
+  },
+  {
+   "text": "By [def-weil-abstract-derived-category], every $H^n(s)$ is invertible. A functor preserves an inverse: $F((H^n s)^{-1})$ is inverse to $F(H^n s)$ by the composition and identity axioms. The comparison equation of the preceding step then writes $H^n(Fs)=(c_L^n)^{-1}\\circ F(H^n s)\\circ c_K^n$, a composite of isomorphisms. Thus $F(s)$ is a quasi-isomorphism in every degree. Restricting $s$ to morphisms between two K-flat complexes gives exactly the required preservation property; it does not assert that $F(P)$ itself is K-flat, and no tensor structure on $\\mathcal D$ is required.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, proof that exact functors transform quasi-isomorphisms into quasi-isomorphisms, with its omitted degreewise argument expanded"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-preserves-kflat-quasi-iso.md",
-  "place": "## Proof"
+  "place": "Statement and one-paragraph proof, with the missing coproduct hypothesis restored from the parent unit sk-def-sfb-derived-categories and the proof expanded using Stacks Tags 010N and 015F"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K-flat complexes tensoring preserves quasi-isomorphisms",
+   "results": "LeanSearch returned flat-module exactness lemmas, HomologicalComplex.quasiIso_map_of_preservesHomology and ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat. Ordinary module flatness is not K-flatness of an unbounded complex.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; partial coverage as described"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.PreservesHomology",
+   "results": "Loogle returned Functor.PreservesHomology, preservesHomologyOfExact and ShortComplex.homologyFunctorIso. Read the local sources; none defines the requested K-flat preservation property.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; partial coverage as described"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesKFlatQuasiIso|def kFlat|quasiIso_map_of_preserves|quasiIso_map",
+   "results": "CategoryTheory grep returned only Functor/ReflectsIso/Exact.lean:24,26 documentation references to preservation of quasi-isomorphisms; no K-flat definition. Search directory: Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; partial coverage as described"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserves quasi-isomorphisms between K-flat cochain complexes in monoidal abelian categories",
+   "results": "LeanFinder returned HomologicalComplex.quasiIso_map_of_preservesHomology, quasiIsoAt_map_of_preservesHomology and localization functor declarations. These cover exact-functor preservation, not the two K-flat definitions.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; partial coverage as described"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat object in a monoidal category with a morphism property tensorLeft tensorRight inverse image quasi-isomorphisms",
+   "results": "Second LeanFinder phrasing returned Module.Flat tensor exactness and CategoryTheory.Tor/Tor_obj/Tor′, not K-flat objects or PreservesKFlatQuasiIso.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; partial coverage as described"
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat|KFlat|tensorObj|tensorObjX",
+   "results": "Algebra/Homology grep returned Monoidal.lean:48 tensorObj, :54 iotaTensorObj, :62 tensorHom. Read Monoidal.lean:33-64: HasTensor asserts existence of the required summand coproducts. This is the binary total tensor construction only. Search directory: Mathlib/Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; partial coverage as described"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.tensorObj",
+   "results": "Loogle returned tensorObj, tensorHom, iotaTensorObj, associator and unitors in Algebra.Homology.Monoidal. These provide total tensors, not the K-flatness or functor preservation predicates.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; partial coverage as described"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesKFlatQuasiIso|def kFlat|KFlat|K-flat",
+   "results": "Grep of all Mathlib returned zero hits. The related kFlat and PreservesKFlatQuasiIso definitions occur under WeilConjectures/FromJoel and WeilConjectures/CategoryTheory, respectively, outside Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; partial coverage as described"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_map_of_preservesHomology|preservesHomologyOfExact|homologyFunctorIso",
+   "results": "Algebra/Homology grep returned QuasiIso.lean:280 quasiIso_map_of_preservesHomology, ShortComplex/PreservesHomology.lean:60 preservesHomologyOfExact and :777 homologyFunctorIso, among others. Read their hypotheses and the quasi-isomorphism instance; the final exact-functor assertion is covered by the existing DAG Mathlib leaf, not the entire item. Search directory: Mathlib/Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; partial coverage as described"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -50,5 +149,20 @@
   "def-weil-abstract-derived-category"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-preserves-kflat-quasi-iso",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported statement does not assume the coproducts needed for unbounded total tensors. Restored countable coproducts, already present in its parent unit, and gave the signed direct-sum formula and tensor maps explicitly. Expanded the exact-functor consequence using the existing generic cohomology-comparison Mathlib leaf, with the naturality equation and inverse argument written out. No new nodes. Related slopmaster2 declarations have stronger ambient tensor hypotheses and do not give every clause at this generality; no attachment. All searches recorded from msearch.py.",
+  "blueprint": "The statement sentences on total tensor and K-flatness are made explicit by step 1; the final exact-functor sentence and the entire one-paragraph blueprint proof are realized by steps 2 and 3. The parent unit left-derived-functor bullet already supplies countable coproducts, so the correction restores its intended domain."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N0-cf9fb631e",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-cf9fb631e (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, current blueprint route, and source locations. Verified tensor signs, coproduct existence, natural cohomology comparisons, edge cases, reuse, and target coefficient/morphism boundaries. The delivered countable-coproduct correction is justified; no further repairs needed. Detailed checks are in review.md."
+ }
 }
