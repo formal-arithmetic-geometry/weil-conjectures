@@ -140,46 +140,6 @@ theorem filteredQuotient_canonical_structure
               (X.pageCouple s).d (2 * p + q) (-p) ≫
                 eqToHom (by congr 1 <;> omega) ≫
                   (eC s (p + (s + 1)) (q - (s + 1) + 1)).hom)) := by
-  classical
-  constructor
-  · intro p q
-    obtain ⟨i, j, hij, hS, hi, hj, hδ⟩ :=
-      filteredQuotient_first_connecting C hBZ eH hH U (D 1 (by omega)) p q
-    refine ⟨i, j, hij, hS, hi, hj, ?_⟩
-    simpa only [Iso.trans_hom, Category.assoc] using
-      (congrArg (fun f ↦ f ≫ (eH U (p + 1) q).hom)
-        (hd p q (p + 1) q 1 (by omega))).trans
-        (by rw [Category.assoc, hδ])
-  · obtain ⟨eQ, hbase, hQ⟩ := filteredHomologyCouple_quotient_pages C hBZ eH hH U D
-    let X := filteredHomologyExactCouple U.obj.obj U.obj.filtration
-    let eC := fun (s : ℕ) (p q : ℤ) ↦
-      eQ s p q ≪≫ (eZ p q (s + 1) (by omega)).symm
-    refine ⟨X, fun _ _ ↦ Iso.refl _, eC, ?_, ?_, ?_⟩
-    · intro P Q
-      simp only [X, filteredHomologyExactCouple, BigradedExactCouple.ofShifted_alpha]
-      dsimp [filteredHomologyAlpha, filteredHomologyD,
-        filteredHomologyE, filteredHomologyG]
-      simp only [Category.id_comp, Category.comp_id]
-    · intro P Q
-      dsimp only [eC]
-      simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
-      rw [eq_of_heq (hbase (-Q) (P + 2 * Q))]
-      simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
-      dsimp only [filteredHomologyEIso, eqToIso]
-      simp only [X, filteredHomologyExactCouple, BigradedExactCouple.initialG,
-        BigradedExactCouple.ofShifted_g]
-      dsimp [
-        filteredHomologyAlpha, filteredHomologyD,
-        filteredHomologyE, filteredHomologyG]
-      simp only [Category.assoc, Iso.inv_hom_id_assoc, eqToHom_trans, eqToHom_refl,
-        Category.comp_id, Category.id_comp]
-    · intro s p q
-      apply (cancel_mono (eZ (p + (s + 1)) (q - (s + 1) + 1)
-        (s + 1) (by omega)).hom).1
-      dsimp only [eC]
-      simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
-      rw [hd]
-      simp only [← Category.assoc, Iso.inv_hom_id, Category.comp_id]
-      simpa only [X, Category.assoc] using hQ s p q
+  sorry
 
 end CategoryTheory

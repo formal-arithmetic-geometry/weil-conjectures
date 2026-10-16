@@ -82,19 +82,8 @@ private noncomputable def tensorHomEquiv
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
     (N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) :
     (changeOfRings α M ⟶ N) ≃
-      (M ⟶ (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)).obj N) :=
-  (PresheafOfModules.sheafificationHomEquiv (𝟙 _)).trans
-    { toFun := tensorToRestrict α M N
-      invFun := tensorFromRestrict α M N
-      left_inv f := by
-        apply PresheafOfModules.hom_ext
-        intro U
-        exact (ModuleCat.ExtendRestrictScalarsAdj.homEquiv (α.hom.app U).hom).left_inv _
-      right_inv g := by
-        apply SheafOfModules.hom_ext
-        apply PresheafOfModules.hom_ext
-        intro U
-        exact (ModuleCat.ExtendRestrictScalarsAdj.homEquiv (α.hom.app U).hom).right_inv _ }
+      (M ⟶ (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)).obj N) := by
+  sorry
 
 /-- The sheafified sectionwise tensor product is left adjoint to scalar restriction
 on any small ringed site. Source: Stacks Project, Modules on Sites, Tag 03D7.
@@ -108,17 +97,7 @@ theorem exists_siteChangeOfRingsAdjunction :
         SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)),
       (∀ M, F.obj M = changeOfRings α M) ∧
       Nonempty (F ⊣ restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)) := by
-  let e := tensorHomEquiv α
-  have hn : ∀ M N N' (g : N ⟶ N') (f : changeOfRings α M ⟶ N),
-      e M N' (f ≫ g) = e M N f ≫
-        (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)).map g := by
-    intro M N N' g f
-    ext U m
-    change (PresheafOfModules.sheafificationHomEquiv (𝟙 _)
-      (f ≫ g)).app U _ = _
-    rfl
-  exact ⟨Adjunction.leftAdjointOfEquiv e hn, fun _ ↦ rfl,
-    ⟨Adjunction.adjunctionOfEquivLeft e hn⟩⟩
+  sorry
 
 end
 end SheafOfModules

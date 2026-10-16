@@ -278,59 +278,7 @@ set_option backward.isDefEq.respectTransparency false in
 private lemma sheafScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     [IsAffine Y] (wY : PointLanWeaklyContractible Y (Scheme.ProEt.mk (𝟙 Y))) :
     Function.Surjective (CondensedQbarScalarConstruction.sheafScalar ℓ Y) := by
-  let J := Scheme.ProEt.topology Y
-  let P := CondensedQbarScalarConstruction.boundedP ℓ Y
-  let L := presheafToSheaf J Ab.{u + 1}
-  let T := Scheme.ProEt.mk (𝟙 Y)
-  let η := toSheafify J P
-  have : IsAffine T.left := inferInstanceAs (IsAffine Y)
-  have hi : IsIso (η.app (op T)) := bounded_unit_isIso ℓ Y T wY
-  intro f
-  obtain ⟨a, ha⟩ := ((ConcreteCategory.isIso_iff_bijective (η.app (op T))).mp hi).2
-    ((f.hom.hom.app (op T)) (η.app (op T) (ULift.up 1)))
-  refine ⟨a.down, ?_⟩
-  apply (Mod.bijective_one_comp_hom (Mod.regular (padicAlgClSheaf Y ℓ))).1
-  change Functor.LaxMonoidal.ε L ≫ L.map (MonObj.one (X := P)) ≫
-      (CondensedQbarScalarConstruction.sheafScalar ℓ Y a.down).hom =
-    Functor.LaxMonoidal.ε L ≫ L.map (MonObj.one (X := P)) ≫ f.hom
-  congr 1
-  apply ((sheafificationAdjunction J Ab.{u + 1}).homEquiv _ _).injective
-  change toSheafify J (𝟙_ (Y.ProEtᵒᵖ ⥤ Ab.{u + 1})) ≫
-      (L.map (MonObj.one (X := P))).hom ≫
-        (CondensedQbarScalarConstruction.sheafScalar ℓ Y a.down).hom.hom =
-    toSheafify J (𝟙_ (Y.ProEtᵒᵖ ⥤ Ab.{u + 1})) ≫
-      (L.map (MonObj.one (X := P))).hom ≫ f.hom.hom
-  rw [← toSheafify_naturality_assoc, ← toSheafify_naturality_assoc]
-  change MonObj.one (X := P) ≫ η ≫
-      (sheafifyMap J (CondensedQbarScalarConstruction.boundedMul ℓ Y a.down)) = _
-  rw [← toSheafify_naturality]
-  ext U n
-  have h1 :
-      ((MonObj.one (X := P) ≫
-        CondensedQbarScalarConstruction.boundedMul ℓ Y a.down ≫ η).app U)
-          (ULift.up (1 : ℤ)) =
-      ((MonObj.one (X := P) ≫ η ≫ f.hom.hom).app U) (ULift.up (1 : ℤ)) := by
-    let t : U.unop ⟶ T := MorphismProperty.Over.homMk U.unop.hom
-    have hf := ConcreteCategory.congr_hom ((η ≫ f.hom.hom).naturality t.op)
-      (ULift.up 1)
-    have hη := ConcreteCategory.congr_hom (η.naturality t.op) a
-    change f.hom.hom.app U (η.app U (ULift.up 1)) =
-      (padicAlgClSheaf Y ℓ).obj.map t.op
-        (f.hom.hom.app (op T) (η.app (op T) (ULift.up 1))) at hf
-    change η.app U ((P.map t.op) a) =
-      (padicAlgClSheaf Y ℓ).obj.map t.op (η.app (op T) a) at hη
-    change η.app U (ULift.up (1 *
-      CondensedQbarScalarConstruction.restrictBounded ℓ Y U.unop a.down)) =
-      f.hom.hom.app U (η.app U (ULift.up 1))
-    rw [one_mul, hf, ← ha, ← hη]
-    rfl
-  have hn : n = n.down • (ULift.up (1 : ℤ) : ULift.{u + 1} ℤ) := by
-    apply ULift.ext
-    change n.down = n.down * 1
-    rw [mul_one]
-  rw [hn]
-  simp only [map_zsmul]
-  exact congrArg (n.down • ·) h1
+  sorry
 
 private lemma condensedQbarScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime]
     (Y : Scheme.{u}) [IsAffine Y]

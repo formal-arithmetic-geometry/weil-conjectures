@@ -43,7 +43,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- Half-plane convergence for Rf_*.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- Half-plane convergence for Rf_*.
 Source: blueprint order 1316; Stacks Tags 0DDE, 015J, 0132, 012W, 0BDV
 (blueprint: lemma-weil-pbc-hypercohomology-convergence).
 
@@ -67,7 +69,7 @@ abutment as inverse limit (def-sp-filtration, def-sp-convergence).
 lem-weil-pbc-derived-functor-truncation-iso. Functoriality identifies the diagonal cocone
 maps with hypercohomologyAbutmentMap, so the image filtration is exactly that of
 def-weil-pbc-hypercohomology-filtrations. For the middle couple apply exact inverse image
-to this identification (lem-weil-pbc-exact-functor-bounded-below). -/
+to this identification (lem-weil-pbc-exact-functor-bounded-below). - /
 theorem hypercohomology_convergence_first
     {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : IsPullback g' f' f g)
@@ -147,8 +149,11 @@ theorem hypercohomology_convergence_first
           Z p q ≅
         (hypercohomologyFiltration (hypercohomologyFirstFunctor f) K (p + q)).gradedPiece p)) := by
   sorry
+-/
 
-/-- Half-plane convergence for g⁻¹Rf_*.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- Half-plane convergence for g⁻¹Rf_*.
 Source: blueprint order 1316; Stacks Tags 0DDE, 015J, 0132, 012W, 0BDV
 (blueprint: lemma-weil-pbc-hypercohomology-convergence).
 
@@ -172,7 +177,7 @@ abutment as inverse limit (def-sp-filtration, def-sp-convergence).
 lem-weil-pbc-derived-functor-truncation-iso. Functoriality identifies the diagonal cocone
 maps with hypercohomologyAbutmentMap, so the image filtration is exactly that of
 def-weil-pbc-hypercohomology-filtrations. For the middle couple apply exact inverse image
-to this identification (lem-weil-pbc-exact-functor-bounded-below). -/
+to this identification (lem-weil-pbc-exact-functor-bounded-below). - /
 theorem hypercohomology_convergence_baseChange
     {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : IsPullback g' f' f g)
@@ -256,8 +261,11 @@ theorem hypercohomology_convergence_baseChange
         (hypercohomologyFiltration (hypercohomologyBaseChangeFunctor f g) K (p + q)).gradedPiece p))
           := by
   sorry
+-/
 
-/-- Half-plane convergence for Rf′_*(g′)⁻¹.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- Half-plane convergence for Rf′_*(g′)⁻¹.
 Source: blueprint order 1316; Stacks Tags 0DDE, 015J, 0132, 012W, 0BDV
 (blueprint: lemma-weil-pbc-hypercohomology-convergence).
 
@@ -281,7 +289,7 @@ abutment as inverse limit (def-sp-filtration, def-sp-convergence).
 lem-weil-pbc-derived-functor-truncation-iso. Functoriality identifies the diagonal cocone
 maps with hypercohomologyAbutmentMap, so the image filtration is exactly that of
 def-weil-pbc-hypercohomology-filtrations. For the middle couple apply exact inverse image
-to this identification (lem-weil-pbc-exact-functor-bounded-below). -/
+to this identification (lem-weil-pbc-exact-functor-bounded-below). - /
 theorem hypercohomology_convergence_second
     {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : IsPullback g' f' f g)
@@ -365,5 +373,6 @@ theorem hypercohomology_convergence_second
         (hypercohomologyFiltration (hypercohomologySecondFunctor f' g') K (p + q)).gradedPiece p))
           := by
   sorry
+-/
 
 end AlgebraicGeometry.Etale

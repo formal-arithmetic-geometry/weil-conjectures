@@ -61,7 +61,9 @@ private theorem direct_image_bound {V W : Scheme.{u}} (g : V ⟶ W)
         ((lowerStar AddCommGrpCat.{u + 1} g).rightDerivedFunctorPlusCompatibility.app
           Eplus)).symm
 
-/-- The initial E-term vanishes, and kernels and quotients preserve that vanishing. -/
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The initial E-term vanishes, and kernels and quotients preserve that vanishing. - /
 private theorem hypercohomology_page_negative
     {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B]
@@ -86,8 +88,11 @@ private theorem hypercohomology_page_negative
       apply IsZero.of_epi (cokernel.π _)
       exact IsZero.of_mono (kernel.ι _) ih
   exact hzero (r - 2)
+-/
 
-/-- Canonical truncation above n does not change the degree-n cohomology of the three
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- Canonical truncation above n does not change the degree-n cohomology of the three
 hypercohomology functors. In each truncation spectral sequence all terms above q = n
 on the degree-n diagonal vanish, on every page starting at E₂. The support assertion
 is expressed on every bounded-below representative of K, so involves no choice of resolution.
@@ -105,7 +110,7 @@ Proof:
    identify the second map with f⁻¹ applied to the first, hence it is invertible.
 4. Exactness of e⁻¹ identifies its termwise image of the canonical truncation and
    inclusion with those of e⁻¹K. Apply part 5 of thm-sp-truncation-e2 to h_* to get
-   invertibility of the third map. No torsion-preservation hypothesis is needed. -/
+   invertibility of the third map. No torsion-preservation hypothesis is needed. - /
 theorem boundedBelow_truncation_criterion
     {Y T X S : Scheme.{u}} (g : T ⟶ S) (f : X ⟶ S) (e : Y ⟶ T) (h : Y ⟶ X)
     (_sq : ChosenCartesianSquare e h g f) (P : Set ℕ)
@@ -149,5 +154,6 @@ theorem boundedBelow_truncation_criterion
   exact ⟨hypercohomology_page_negative _ hfirstGE L r (n - q) q (by omega),
     hypercohomology_page_negative _ hbaseGE L r (n - q) q (by omega),
     hypercohomology_page_negative _ hsecondGE L r (n - q) q (by omega)⟩
+-/
 
 end AlgebraicGeometry.Etale
