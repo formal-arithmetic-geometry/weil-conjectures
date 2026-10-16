@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-qbar-condensed-exchange-right-adjunct",
+ "kind": "statement",
+ "title": "Right adjunct normalization for coefficient exchange",
+ "statement": "Let ℓ be a prime, k a field of prime characteristic different from ℓ, E a finite coefficient subfield of Ω=PadicAlgCl(ℓ), and X,Y,X′,Y′ schemes separated of finite type over k. Let f:X→Y, g:Y′→Y, f′:X′→Y′, g′:X′→X be k-morphisms with sq:g′≫f=f′≫g. Write L_h^A,R_h^A and ε_h^A for the specified bounded constructible pullback, pushforward and counit for A=E or Ω (def-weil-pbc-condensed-e-module-category). Write β_sq^A for its specified base-change map. Let T_Z:C_E(Z)→C_Ω(Z), α_h(V):T_T(L_h^E V)≅L_h^Ω(T_U V), and δ_h(K):T_U(R_h^E K)→R_h^Ω(T_T K) be exactly the coefficient functor and pull/push comparisons of def-weil-pbc-qbar-condensed-comparisons, for h:T→U. No properness or Cartesianity is assumed. For every K∈C_E(X), define U_K=δ_f′(L_g′^E K) ≫ R_f′^Ω(α_g′(K).hom). Then L_f′^Ω(T_Y′(β_sq^E(K)) ≫ U_K) ≫ ε_f′^Ω(L_g′^Ω(T_X K)) = α_f′(L_g^E(R_f^E K)).inv ≫ T_X′(L_f′^E(β_sq^E(K)) ≫ ε_f′^E(L_g′^E K)) ≫ α_g′(K).hom.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "Final transport paragraph; ChangeOfCoefficients.lean comapLowerStarIso, derivedComapLowerStarIso and derivedPullIso; UpperLowerStar/Defs.lean lowerStarComp and upperStarComp; Derived/UpperLowerStar.lean leftDerivedUpperStarComp"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-qbar-condensed-comparisons",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Prove the push-comparison counit formula by iterated mate/conjugate cancellation and the fully faithful restriction counit formula. The right normalization follows from counit naturality, this formula and naturality of the inverse coefficient pullback comparison. The complete argument is proved in Lean with no sorry.",
+   "uses": [
+    "def-weil-pbc-qbar-condensed-comparisons",
+    "def-weil-pbc-condensed-e-module-category",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-qbar-condensed-push-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-qbar-condensed-comparisons",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-qbar-condensed-push-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "Right adjunct normalization: a complete proof from generic mate cancellation and naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of mates for two adjunction squares and commutativity of a cube implies compatibility with the Beck Chevalley base change transformation",
+   "results": "8 hits: CategoryTheory.mateEquiv_square, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_vcomp, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv. No exact condensed derived exchange theorem; generic mate identities and ordinary scheme-module maps only.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.CommSq",
+   "results": "8 hits: CategoryTheory.CommSq.left_adjoint, CategoryTheory.CommSq.right_adjoint, CategoryTheory.CommSq.instHasLiftLeftAdjoin, CategoryTheory.CommSq.instHasLiftRightAdjoin, CategoryTheory.CommSq.leftAdjointLiftStructEquiv, CategoryTheory.CommSq.left_adjoint_hasLift_iff, CategoryTheory.CommSq.rightAdjointLiftStructEquiv, CategoryTheory.CommSq.right_adjoint_hasLift_iff. No exact condensed derived exchange theorem; generic mate identities and ordinary scheme-module maps only.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mate|BeckChevalley|baseChange",
+   "results": "10 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean. No exact condensed derived exchange theorem; generic mate identities and ordinary scheme-module maps only.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with the base change natural transformation constructed from adjunction units square comparison and counits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQbarExchangeEquality",
+  "date": "2026-10-16",
+  "group": "XR0d56945a24047e2a"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-qbar-condensed-exchange-equality",
+   "place": "Parent exchange proof: normalize the right adjunct separately",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedQbarExchangeRightAdjunct",
+  "file": "lean/Sheaf/Paper/CondensedQbarExchangeRightAdjunct.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.constructibleToQbar_exchange_right_adjunct",
+  "statement": "theorem constructibleToQbar_exchange_right_adjunct\n    (sq : CommSq g' f' f g) (K : PadicSubfieldConstructible X ℓ E) :\n    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k f').map\n      ((constructibleToPadicAlgCl Y' ℓ E).map\n          ((boundedConstructibleBaseChange (Profinite.continuousMapRingObj E) ℓ k sq).app K) ≫\n        constructibleToQbarTargetHom ℓ k E f' g' K) ≫\n      (boundedConstructibleUpperStarLowerStarAdjunction\n        (Profinite.padicAlgClRingObj ℓ) ℓ k f').counit.app\n          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k g').obj\n            ((constructibleToPadicAlgCl X ℓ E).obj K)) =\n    (constructibleToQbarPullIso ℓ k E f'\n        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g).obj\n          ((boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ k f).obj K))).inv ≫\n      (constructibleToPadicAlgCl X' ℓ E).map\n        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k f').map\n            ((boundedConstructibleBaseChange\n              (Profinite.continuousMapRingObj E) ℓ k sq).app K) ≫\n          (boundedConstructibleUpperStarLowerStarAdjunction\n            (Profinite.continuousMapRingObj E) ℓ k f').counit.app\n              ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k g').obj K)) ≫\n      (constructibleToQbarPullIso ℓ k E g' K).hom",
+  "branch": "sheaf-dag",
+  "by": "XR0d56945a24047e2a",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "XREPAIR-0d56945a24047e2a",
+  "group": "XR0d56945a24047e2a",
+  "result": "pass",
+  "landing": "20261016T095751-L-2157226",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "XREPAIR-0d56945a24047e2a",
+  "group": "XR0d56945a24047e2a",
+  "result": "pass",
+  "landing": "20261016T095751-L-2157226",
+  "kind": "interface",
+  "note": "\nREADY: removed both invalid reducibility annotations; consumer compiles in 29.4s. Report records cached-import limitations and unavailable equality-check dependency. Statements and proofs unchanged.\nDELIVERED: checks and fix"
+ }
+}

@@ -377,7 +377,7 @@ end PullSquareCalculation
 section BaseChangeCalculation
 attribute [local irreducible] Adjunction.homEquiv
   boundedConstructibleUpperStar boundedConstructibleLowerStar
-  boundedConstructibleUpperStarLowerStarAdjunction boundedConstructiblePullbackSquareComparison
+  boundedConstructibleUpperStarLowerStarAdjunction
 private lemma boundedBaseChange_adjunct
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -401,7 +401,7 @@ end BaseChangeCalculation
 attribute [local irreducible] integralScalarConstructible integralConstructiblePullIso
 attribute [local irreducible] Adjunction.homEquiv
   boundedConstructibleUpperStar boundedConstructibleLowerStar
-  boundedConstructibleUpperStarLowerStarAdjunction boundedConstructiblePullbackSquareComparison
+  boundedConstructibleUpperStarLowerStarAdjunction
 
 private lemma integral_target_start
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
