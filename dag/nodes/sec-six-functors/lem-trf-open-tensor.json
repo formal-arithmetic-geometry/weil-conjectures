@@ -18,7 +18,10 @@
   "def-weil-pbc-proetale-site",
   "def-weil-extension-by-zero",
   "def-weil-derived-tensor",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-extension-by-zero-exact",
+  "def-weil-pbc-proetale-operations"
  ],
  "proof": [
   {
@@ -306,5 +309,32 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-2021a2739 (reviewer sub-agent of L); spot-checked: Read the full item, report, all 21 directly cited statements, blueprint route and cited source passages. Verified all six steps, coefficient/functor identifications, unbounded totalization, K-flat hypotheses, signs and derived naturality. No new nodes, duplicate or cycle through the item; no repairs needed. Accepted all ten declared tool uses. Concrete checks recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenTensor",
+  "declaration": "AlgebraicGeometry.Scheme.sfOpenTensor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfOpenTensorRestriction_additive",
+   "AlgebraicGeometry.Scheme.sfOpenTensorRestriction_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.sfOpenTensorRestriction_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.sfOpenTensorLeft",
+   "AlgebraicGeometry.Scheme.sfOpenTensorRight",
+   "AlgebraicGeometry.Scheme.sfOpenTensor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenTensor.lean",
+  "statement": "theorem sfOpenTensor {U Y : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] (A : Type u) [CommRing A] [Finite A] : Nonempty (sfOpenTensorLeft j A ≅ sfOpenTensorRight j A)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The natural isomorphism is stated on the recorded intrinsic constant-ring derived categories. Its two bifunctors use the recorded intrinsic extension and restriction, and the K-flat derived tensor through the published canonical scalar-realization equivalence. curriedTensor is expanded directly from the recorded ProEtale.derivedTensor alias to avoid importing the duplicate legacy pro-etale functor declarations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-90c4cf8dc",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signature. The sole module passed scompile.py in sandbox and library form with no diagnostics. No delivery defects found; branch unchanged."
  }
 }

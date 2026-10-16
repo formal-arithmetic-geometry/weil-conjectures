@@ -323,5 +323,35 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-39dcf3079 (reviewer sub-agent of L); spot-checked: Read the full item, new node, cited statements, unit/chapter route and source passages. All six mathematical steps and the 09BA specialization are valid; no duplicate, circularity or target weakening found. Repaired incomplete new-node creation/audit metadata in fixes/. Detailed source, coefficient-category, edge-case and accepted tool-use checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f7bbb307f",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Immutable delivery fully reviewed. Statement matches verbatim, canonical constructions and all finiteness clauses are correct, and sandbox-overlay and actual-path compiles passed without diagnostics."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointSectionsFiniteness",
+  "declaration": "WeilConjectures.point_sections_finiteness",
+  "declarations": [
+   "WeilConjectures.pointConstantSectionMap",
+   "WeilConjectures.pointFiniteSections",
+   "WeilConjectures.pointFiniteSectionsAdditive",
+   "WeilConjectures.pointIntegralSectionMap",
+   "WeilConjectures.pointIntegralSections",
+   "WeilConjectures.pointIntegralSectionsAdditive",
+   "WeilConjectures.pointIntegralToField",
+   "WeilConjectures.pointIntegralToFieldAdditive",
+   "WeilConjectures.point_sections_finiteness"
+  ],
+  "file": "lean/Sheaf/Paper/PointSectionsFiniteness.lean",
+  "statement": "theorem point_sections_finiteness (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (hn : 1 ≤ n) : (∀ C : CochainComplex (SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology (Spec (.of D.k))) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((constantSheaf (ProEt.topology (Spec (.of D.k))) CommRingCat.{u + 1}).obj (CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)))))) ℤ, intrinsicFiniteTorsionConstructible l E n hn (Spec (.of D.k)) (DerivedCategory.Q.obj C) → DerivedCategory.pointFiniteCohomology (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) (DerivedCategory.Q.obj (((pointFiniteSections D.k (Padic.coefficientExtensionRing l E n)).mapHomologicalComplex (.up ℤ)).obj C))) ∧ (∀ C : CochainComplex (scalarReductionSource.{u, u} l E (Spec (.of D.k))) ℤ, sfIntegralConstructible l E (Spec (.of D.k)) (DerivedCategory.Q.obj C) → DerivedCategory.pointFgComplete (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E)) (Ideal.span {ULift.up (Padic.coefficientExtensionUniformizer l E)}) (DerivedCategory.Q.obj (((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).obj C)) ∧ DerivedCategory.pointFiniteDimensional (ULift.{u + 1, u} E) (DerivedCategory.Q.obj (((ModuleCat.extendScalars (pointIntegralToField l E)).mapHomologicalComplex (.up ℤ)).obj (((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).obj C))))",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "All three clauses for every arbitrary complex representative, localized by DerivedCategory.Q. Exact sections identify this with the derived statement. Canonical finite and integral scalar maps are constructed from sheafification and integralConstantToCompletion; rationalization uses the original subring inclusion and termwise extendScalars. ULift puts coefficients in the same universe as the recorded small-site module categories; no coefficient ring or scalar action is changed."
  }
 }

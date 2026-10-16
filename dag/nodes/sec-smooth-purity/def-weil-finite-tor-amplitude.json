@@ -85,25 +85,28 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude",
-  "declaration": "AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor",
+  "module": "Sheaf.Paper.FiniteTorAmplitude",
+  "declaration": "WeilConjectures.finiteTorConstructible",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor",
-   "AlgebraicGeometry.ProEtale.DerivedCategory.finiteTorAmplitude"
+   "WeilConjectures.finiteTorConstructible",
+   "WeilConjectures.finiteTorConstructibleCategory",
+   "WeilConjectures.finiteTorConstructibleIntegral",
+   "WeilConjectures.finiteTorConstructibleIntegralCategory",
+   "WeilConjectures.finiteTorFieldCoefficientCategory"
   ],
-  "statement": "def DerivedCategory.constructibleFiniteTor :\n    ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))",
-  "branch": "slopmaster2",
-  "by": "Q03",
+  "statement": "def finiteTorConstructible (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : AlgebraicGeometry.Scheme.{u}) : ObjectProperty (proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E n))",
+  "branch": "newtargets-dag",
+  "by": "NW",
   "date": "2026-10-16",
   "existing": true,
-  "note": "Finite-stage interface repair under §1(B). The original Sheaf.Paper.FiniteTorAmplitude uses SheafOfModules of the constant coefficient ring; it imports the obsolete FiniteCoefficient framework through FiniteTorsionConstructibility and cannot coexist with the published exceptional functor. The exact published ModuleCat-valued predicate here is bounded constructibility intersected with finite Tor amplitude and gives the finite coefficient notion required by def-pur-conventions. The already-defined integral and field interfaces remain in Sheaf.Paper.FiniteTorAmplitude (WeilConjectures.finiteTorConstructibleIntegral, finiteTorConstructibleIntegralCategory and finiteTorFieldCoefficientCategory); they are not redefined or replaced by finite objects."
+  "note": "§1(B), record-only repair: the old generic fixed-scalar constructibleFiniteTor lives in DerivedCategory (Sheaf J A), rather than the intrinsic constant-ring module-derived category used here. The already published finiteTorConstructible is exactly intrinsic bounded finite-torsion constructibility intersected with HasFiniteProEtaleTorAmplitude. The same module also supplies the integral uniform-Tor condition and the field aliases; no new definition or module is introduced."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-819753ec9",
-  "group": "Q03",
+  "reviewer": "NT-stage2-Codex-f1f014da1",
+  "group": "NW",
   "result": "pass",
-  "note": "Reviewed immutable statements, dependencies, sources, canonical maps, universes, edge cases, and report. All four modules passed per-file scompile.py checks. No defects found; review.md written and branch unchanged."
+  "note": "Wrote review.md. Checked immutable statements, all 24 dependencies, sources, canonical mates, universes, edge cases, and the 25-citer audit. Both Lean modules compiled cleanly through scompile.py. No fixes required; branch unchanged."
  }
 }
