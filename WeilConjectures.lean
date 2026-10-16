@@ -4527,6 +4527,7 @@ public import WeilConjectures.WeilSheaf.TraceFunctionVanishing
 public import WeilConjectures.WeilSheaf.TraceIsomorphism
 public import WeilConjectures.WeilSheaf.TraceSeries
 public import WeilConjectures.WeilSheaf.Triangle
+public import WeilConjectures.WeilSheaf.UnramifiedBoundaryPurity
 public import WeilConjectures.WeilSheaf.UpperStarComp
 public import WeilConjectures.WeilSheaf.UpperStarExact
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
