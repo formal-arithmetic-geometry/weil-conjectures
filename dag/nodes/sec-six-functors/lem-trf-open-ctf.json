@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-trf-open-ctf",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension by zero preserves constructibility and Tor amplitude",
@@ -15,40 +15,162 @@
  "stmt_deps": [
   "def-trf-coefficient-conventions",
   "def-weil-derived-cohomology-sheaves",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-extension-by-zero",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude"
  ],
  "proof": [
   {
-   "text": "Exactness in [def-weil-extension-by-zero] gives\n$\\mathcal H^r(j_!K)=j_!\\mathcal H^r(K)$, so the range does not grow.\nTake a common finite locally closed stratification of $U$\nwitnessing constructibility of the finitely many nonzero\n$\\mathcal H^r(K)$ in [def-weil-finite-torsion-constructibility].\nEach stratum is locally closed in $Y$, and adding the closed\ncomplement $Y\\setminus U$ gives a finite stratification of $Y$.\nThe restrictions of the extended cohomology sheaves are the same\nfinite locally constant sheaves on these strata and the zero sheaf\non the complement. This proves constructibility.",
+   "text": "Use the finite coefficient stage $A=A_{E,n}$ on the small pro-etale sites of [def-trf-coefficient-conventions]. Here $n\\geq1$ and $\\ell\\neq p$; because all the schemes under consideration are over the field $k$ of characteristic $p$, the image of $\\ell$ has an inverse in $k$ and hence in their structure sheaves. Thus the invertibility hypothesis of the finite-level pullback and Tor definitions used below holds. Write $[c,d]$ for any cohomological interval of $K$ and $[a,b]$ for any Tor interval of $K$; these intervals need not coincide. By [lem-weil-extension-by-zero-exact], $j_!$ is exact. Apply it termwise to a representative $K^\\bullet$. Exactness preserves kernels, images and their quotients, so the cohomology description in [def-weil-derived-cohomology-sheaves] gives\n$$\\mathcal H^r(j_!K)=\\ker(j_!d^r)/\\operatorname{im}(j_!d^{r-1})\\cong j_!\\bigl(\\ker d^r/\\operatorname{im}d^{r-1}\\bigr)=j_!\\mathcal H^r(K).$$\nIn particular a quasi-isomorphism remains a quasi-isomorphism, so this termwise construction defines extension by zero in the derived category. Since $j_!0=0$, the displayed formula gives vanishing outside $[c,d]$.",
    "uses": [
-    "def-weil-extension-by-zero",
-    "def-weil-finite-torsion-constructibility"
+    "def-trf-coefficient-conventions",
+    "lem-weil-extension-by-zero-exact",
+    "def-weil-derived-cohomology-sheaves"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DJ, lemma-extension-by-zero-exact; elementary kernel/image/quotient calculation; blueprint proof paragraph 1, first sentence"
+   }
   },
   {
-   "text": "If the Tor amplitude in [def-weil-finite-tor-amplitude] is\n$[a,b]$, apply [lem-trf-open-tensor] with an arbitrary sheaf\n$M$ of $A$-modules on $Y$, in degree zero. Its restriction\n$j^*M$ is in degree zero, so $K\\otimes_A^Lj^*M$ has no\ncohomology outside $[a,b]$. Exact extension by zero preserves\nthat vanishing, giving the same Tor bound for $j_!K$.",
+   "text": "The Noetherian-space clause of [def-weil-constructible-subset] applies to the finite-type $k$-scheme $Y$: every subset is retrocompact and every locally closed subset is constructible. In particular, for an affine open $V\\subset Y$, $U\\cap V$ is quasi-compact. Thus $j$ is quasi-compact by [def-weil-finite-type-morphism]. For each nonzero $F_r=\\mathcal H^r(K)$, choose a finite partition $U=\\bigsqcup_\\nu S_{r,\\nu}$ witnessing [def-weil-finite-torsion-constructibility]. Each $S_{r,\\nu}$ is locally closed in $Y$: by [def-weil-locally-closed-subset], write its image as $O\\cap C$ with $O$ open in $U$ and $C$ closed in $U$; write $C=U\\cap C'$ for $C'$ closed in $Y$. Since $U$ is open in $Y$, $O$ is open in $Y$, and $S_{r,\\nu}=O\\cap C'$. Give it the same induced locally closed subscheme structure. Adjoining $Z=Y\\setminus U$ with its reduced closed subscheme structure yields a finite partition of $Y$ by locally closed constructible subschemes. A separate partition for each $r$ suffices for the definition of constructible cohomology, so no simultaneous refinement theorem is needed.",
    "uses": [
-    "def-weil-finite-tor-amplitude",
-    "lem-trf-open-tensor"
+    "def-weil-constructible-subset",
+    "def-weil-finite-type-morphism",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-locally-closed-subset"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-open-ctf/lem-trf-open-ctf.md",
+    "place": "Proof paragraph 1, stratification argument; Stacks topology.tex Tag 005L, lemma-constructible-Noetherian-space; the locally closed calculation is elementary"
+   }
+  },
+  {
+   "text": "Let $i:Z\\hookrightarrow Y$ be the closed immersion from step 2. Apply [lem-weil-pbc-proetale-ringed-open-closed] with $X=Y$ and $R_Y=A_Y$. Its hypotheses hold because $j$ is the complementary quasi-compact open immersion. The constant coefficient identifications and the exact termwise inverse-image interpretation are those of [def-weil-derived-pullback-tensor-hom]. The cited open-closed statement gives $j^*j_!F_r\\cong F_r$ and $i^*j_!F_r=0$ as module sheaves, not merely at ordinary geometric stalks. For the inclusion $s:S_{r,\\nu}\\to U$, apply [lem-weil-pbc-proetale-derived-pullback-composition] to $(s,j)$ with constant coefficients, and take degree-zero cohomology. Its compatibility hypothesis on the coefficient identifications holds: direct inverse image along $j\\circ s$ and successive inverse image along $j$ and $s$ both send each constant section $a\\in A$ to the section with the same value $a$. These sections generate the constant sheaf locally, so the two identifications agree. Exactness of the constant-coefficient inverse images identifies the result with\n$$(j\\circ s)^*j_!F_r\\cong s^*(j^*j_!F_r)\\cong s^*F_r.$$\nIt is the given finite locally constant sheaf on $S_{r,\\nu}$. On $Z$ the restriction is the zero sheaf, which is constant with value the finite zero $A$-module. Thus the partition of step 2 witnesses that $j_!F_r$ is constructible by [def-weil-finite-torsion-constructibility]. Together with step 1 this proves $j_!K\\in D^b_c(Y,A)$ with the original cohomological interval $[c,d]$.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN (lemma-open-immersion), 09AG (lemma-jshriek-zero), 09AH (lemma-ses-associated-to-open); composition is sites-cohomology.tex Tag 0D6D; blueprint proof paragraph 1, final sentences"
+   }
+  },
+  {
+   "text": "Let $M$ be an arbitrary sheaf of $A_Y$-modules in degree zero; it is not assumed constructible. By [def-weil-derived-pullback-tensor-hom], the constant-coefficient pullback is the exact inverse image applied termwise, so $j^*(M[0])=(j^*M)[0]$. The Tor interval hypothesis, in [def-weil-finite-tor-amplitude], therefore gives $\\mathcal H^r(K\\otimes_A^Lj^*M)=0$ for $r\\notin[a,b]$. Apply [lem-trf-open-tensor] with $M[0]$ to obtain\n$$(j_!K)\\otimes_A^LM\\cong j_!(K\\otimes_A^Lj^*M).$$\nBy [lem-weil-extension-by-zero-exact] and the kernel/image/quotient calculation of step 1, the right side has cohomology $j_!\\mathcal H^r(K\\otimes_A^Lj^*M)$, hence zero for every $r\\notin[a,b]$. This holds for every degree-zero module sheaf $M$, so $j_!K$ has Tor amplitude in the same interval $[a,b]$. With bounded constructibility from step 3, [def-weil-finite-tor-amplitude] gives $j_!K\\in D^b_{ctf}(Y,A)$.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-tor-amplitude",
+    "lem-trf-open-tensor",
+    "lem-weil-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-open-ctf/lem-trf-open-ctf.md",
+    "place": "Proof paragraph 2, restricting an arbitrary degree-zero module sheaf and applying the open projection formula; exactness: sites-modules.tex Tag 03DJ"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-extension-by-zero",
+  "def-trf-coefficient-conventions",
+  "lem-weil-extension-by-zero-exact",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-constructible-subset",
+  "def-weil-finite-type-morphism",
   "def-weil-finite-torsion-constructibility",
+  "def-weil-locally-closed-subset",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
   "def-weil-finite-tor-amplitude",
   "lem-trf-open-tensor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-open-ctf/lem-trf-open-ctf.md",
-  "place": "## Proof"
+  "place": "Proof paragraphs 1 and 2, with exactness and restriction identities supplied by the cited Stacks nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extension.by.zero|openImmersionLowerShriek|constructibleTorAmplitudeIn",
+   "results": "Mathlib/NumberTheory/MulChar/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: only multiplicative characters extended by zero, unrelated to sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, Functor.mapDerivedCategory",
+   "results": "loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle reports unknown identifier Sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves bounded constructible complexes and Tor amplitude",
+   "results": "DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-16",
+   "verdict": "no match: derived t-structure support and bounded representatives only; no constructible extension by zero or Tor preservation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of a bounded constructible complex has the same finite Tor amplitude",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|lowerShriek",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: Chevalley images of constructible subsets under finite-presentation morphisms only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on an open subscheme extended by zero is constructible and extension by zero is exact",
+   "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+   "date": "2026-10-16",
+   "verdict": "no match: functions on scheme opens and structure-sheaf sections only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "Topology.IsConstructible, Topology.IsLocallyConstructible, Topology.IsConstructible.univ, Topology.IsLocallyConstructible.univ, Topology.IsConstructible.empty, Topology.IsLocallyConstructible.empty, Topology.IsConstructible.isLocallyConstructible, IsRetrocompact.isConstructible",
+   "date": "2026-10-16",
+   "verdict": "no match: constructible subsets of topological spaces only, not constructible module sheaves or derived extension by zero"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|LowerShriek|lowerShriek",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no Mathlib declaration with these extension-by-zero spellings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor commutes with homology of complexes and preserves homology concentration in an interval",
+   "results": "CategoryTheory.Functor.preservesHomology_of_map_exact, CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf, CategoryTheory.ShortComplex.RightHomologyData.exact_map_iff, CategoryTheory.Functor.preservesHomologyOfExact, HomotopyCategory.instIsHomologicalIntUpHomologyFunctor, CategoryTheory.ShortComplex.LeftHomologyData.exact_map_iff, CategoryTheory.ShortComplex.Exact.map_of_preservesLeftHomologyOf, DerivedCategory.instIsHomologicalHomologyFunctor",
+   "date": "2026-10-16",
+   "verdict": "support only: exact functors preserve homology (Exact.lean:267 and PreservesHomology.lean:60); not the constructible pro-etale extension-by-zero statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsConstructible\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration containing both Sheaf and IsConstructible"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -81,5 +203,34 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-lem-sf-open-ctf"
+ "unit": "sk-lem-sf-open-ctf",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-trf-open-ctf",
+  "worker": "stage1",
+  "summary": "Preserved the pro-etale statement and independent cohomological/Tor intervals. Replaced the definition cited for exactness by its existing theorem, made the extension of strata explicit, and used full sheaf restriction identities rather than geometric-stalk conservativity. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Steps 1-3 realize proof paragraph 1: exactness, extended finite stratifications and constructibility. Step 4 realizes proof paragraph 2: restriction of an arbitrary module sheaf and the open tensor formula. The unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Step 3 uses the full module-sheaf identities j^*j_! = id and i^*j_! = 0 for a complementary quasi-compact open; no statement of this unit supplies the closed-complement restriction identity."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Step 3 uses transitivity of restriction to a locally closed stratum inside U, with constant coefficient identifications; this generic functoriality is not a separate statement of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-97115e7b3",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-97115e7b3 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, unit/chapter route, and relevant sources. All four steps preserve the independent bounds with the required pro-étale coefficients and hypotheses. No new nodes, exact duplicates, or cycle through the item; both declared tool uses accepted. Detailed checks are in review.md; no repairs needed."
+ }
 }
