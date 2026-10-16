@@ -236,5 +236,23 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-0297e2c3c (reviewer sub-agent of L); spot-checked: Read the whole item, the four cited nodes' statements, Stacks sites.tex:5826-5880 (the glueing-data paragraph and lemma-glue-sheaves, Tag 04TR) and Definition 00VH at :679. The statement matches 04TR one hypothesis at a time: a general site, a covering, sheaves of sets F_i on C/U_i, isomorphisms phi_ij for all pairs including equal indices, the triple cocycle, and the conclusion phi_ij e_i = e_j. Removing the first reader's 'all fibre products' hypothesis is correct: 00VH(iii) builds the double and triple overlaps from the covering, and the second reader's x->u<-y example confirms the extra hypothesis is strictly stronger. Steps 1-8 are correct on my own check. Step 2's component sheaves need only base change plus (i)+(ii) for the isomorphic families. Step 3 is the equalizer of products, using clause (1) of the Mathlib leaf lem-weil-pbc-site-sheaf-sets-limits-sectionwise on the site C/U with small index categories. Step 4's diagonal normalization pulls the (i,i,i) cocycle back along the triple diagonal and never claims phi_ii=id on all of U_ii. Steps 5-8 cover membership of the inverse via naturality and the pulled-back cocycle, both composites through W_j->W_ij, naturality, and overlap compatibility through the graph W->W_ij. Edge cases checked: empty cover, singleton identity cover, empty section sets, non-monomorphic U_i->U. Duplicates: lem-pe-set-sheaf-cover-descent assumes all fibre products, so its existence clause is a special case of this item and not a restatement; the maintainer may later make it cite this item. The module-gluing nodes do not specialize to sets. Mathlib has IsStack only as an assumed instance (Descent/IsStack.lean:57-80), so 'no match' holds, and all three search kinds are recorded. The blueprint place det-pe-torsor-comparison-glue proof paragraph 2 ('Étale sheaves glue along Zariski coverings', proof.md:18) is verified. The route is clean: only definitions and a Mathlib leaf, tool_uses empty, no SGA. There are no new nodes and no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03c1f97a5",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Shape: the commit touches the module, the item node (only the lean record changed; the statement matches the file word for word) and the report, which has both Worker report and Second reading by Q12 sections. Checked against Stacks sites.tex Tag 04TR. The site and covering use the recorded IsSiteForCoverings declaration, which needs only covering pullbacks. Mathlib DescentData for pseudofunctorOver on J.toGrothendieck.over is the same as the node's sheaves F_i, overlap isomorphisms phi_ij (equal indices included) and triple cocycle, because the site axiom gives the double and triple overlaps; its diagonal-identity field follows from the cocycle (node step 4). The isomorphism D ≅ toDescentData F is the same as compatible e_i; no uniqueness clause is added. Edge cases covered: empty I, single or repeated cover, equal indices, empty section sets, no extra instances or HasPullbacks. Index and coefficient universe max u v, as in the site declaration and the landed setSheafCoverDescent. Not a duplicate: setSheafCoverDescent is a separate special-case node and Mathlib has no IsStack instance. One theorem with a sorry proof and no definitions; docstrings carry the source, blueprint id and the 8 proof steps; no line over 100 characters; the Sites.Limits import serves the proof dependency's Mathlib leaf. nt_compile.py: clean in 2.4 s; a control with an unknown identifier shows the tool reports errors."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PeSiteSheafGluing",
+  "file": "lean/Sheaf/CategoryTheory/PeSiteSheafGluing.lean",
+  "declaration": "CategoryTheory.peSiteSheafGluing",
+  "statement": "theorem peSiteSheafGluing {C : Type u} [Category.{v} C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) {I : Type (max u v)} (U : C) (X : I → C) (f : ∀ i, X i ⟶ U) (_hcover : Presieve.ofArrows X f ∈ J U) : ∀ D : (J.toGrothendieck.pseudofunctorOver (Type (max u v))).DescentData f, ∃ F : Sheaf (J.toGrothendieck.over U) (Type (max u v)), Nonempty (D ≅ ((J.toGrothendieck.pseudofunctorOver (Type (max u v))).toDescentData f).obj F)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
