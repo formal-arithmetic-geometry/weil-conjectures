@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-derived-comap-lower-star-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived restriction of scalars commutes with $Rf_*$",
@@ -15,30 +15,150 @@
  "stmt_deps": [
   "sk-def-sfb-coefficient-change",
   "sk-def-sfb-module-derived-pushpull",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-change-of-scalars"
  ],
  "proof": [
   {
-   "text": "Restriction of scalars is exact, so its right derived functor is the levelwise\n$D(\\operatorname{Res})$, and post-composing a right derived functor with an exact functor gives\nthe right derived functor of the composite:\n$D(\\operatorname{Res}_{a_Y})\\circ R(f_*)\\cong R(\\operatorname{Res}_{a_Y}\\circ f_*)$. By\n[def-sfb-comap-lower-star-iso] the latter is $R(f_*\\circ\\operatorname{Res}_{a_X})$. Since\n$\\operatorname{Res}_{a_X}$ is exact and preserves K-injective complexes\n([lem-sfb-comap-preserves-k-injectives]), computing on K-injective resolutions gives\n$R(f_*\\circ\\operatorname{Res}_{a_X})\\cong R(f_*)\\circ R(\\operatorname{Res}_{a_X})\\cong\nR(f_*)\\circ D(\\operatorname{Res}_{a_X})$.",
+   "text": "Write $U_W=\\operatorname{Res}_{a_W}$ for $W=X,Y$, $F'=f_*^{\\Lambda'}$ and $F=f_*^{\\Lambda}$. These are functors between the abelian categories of module objects in abelian sheaves, with the closed symmetric monoidal tensor structure of [sk-def-sfb-sheaf-tensor]. Tensoring preserves finite coproducts by the cited closedness statement, hence finite biproducts; the formula $g+h=\\nabla\\circ(g\\oplus h)\\circ\\Delta$ shows that tensoring is additive. By clause 4 of [sk-def-sfb-change-of-scalars], $U_X$ and $U_Y$ are exact; this does not require flatness. Apply [lem-weil-pbc-exact-functor-derived-factorization] to each $U_W$. Thus $U_W$ preserves quasi-isomorphisms, and $D(U_W)(QK)\\cong Q(U_WK)$ naturally in the complex $K$; denote this isomorphism by $\\rho^W_K$, where $Q$ denotes localization in the relevant module category. In particular, exact restriction is applied to complexes termwise, without choosing a further resolution.",
    "uses": [
-    "def-sfb-comap-lower-star-iso",
-    "lem-sfb-comap-preserves-k-injectives"
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-change-of-scalars",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-lower-star-iso.proof.md",
+    "place": "First sentence: exact restriction and levelwise derivation; supporting Stacks Tag 015F (lemma-right-derived-exact-functor), (3)-(4)"
+   }
+  },
+  {
+   "text": "For a complex $K$ of $\\Lambda'_X$-module objects choose a K-injective resolution $s:K\\to I$, as used in the definition [sk-def-sfb-module-derived-pushpull] of $RF'$. The hypothesis that $\\operatorname{Ext}_{a_W}$ preserves finite limits for every scheme $W$ is exactly the hypothesis of [lem-sfb-comap-preserves-k-injectives], so $U_XI$ is K-injective in $\\Mod_{\\Lambda_X}$. Step 1 shows that $U_Xs$ is a quasi-isomorphism. Hence $I$ and $U_XI$ compute the respective pushforwards: [def-sfb-right-derived-functor] gives $RF'(QK)\\cong Q(F'I)$ and $RF(D(U_X)(QK))\\cong Q(FU_XI)$. Write $\\eta'$ and $\\eta$ for the natural units of these two right derived functors. Specify the canonical isomorphisms just used as\n$$\\alpha_s=(\\eta'_I)^{-1}\\circ RF'(Qs):RF'(QK)\\xrightarrow{\\sim}Q(F'I),$$\n$$\\beta_s=(\\eta_{U_XI})^{-1}\\circ RF(Q(U_Xs))\\circ RF(\\rho^X_K):RF D(U_X)(QK)\\xrightarrow{\\sim}Q(FU_XI).$$\nAll factors are invertible: the units are invertible on K-injectives, and $s,U_Xs$ are quasi-isomorphisms. No K-injectivity of $F'I$ is required.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-sfb-comap-preserves-k-injectives",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-lower-star-iso.proof.md",
+    "place": "Last two sentences: exact restriction preserves K-injectives and the same resolution computes the composite; supporting Stacks Tags 070Y (lemma-K-injective-defined) and 070K (lemma-enough-K-injectives-implies)"
+   }
+  },
+  {
+   "text": "Let $\\theta:U_YF'\\xrightarrow{\\sim}FU_X$ be the underived natural isomorphism of [def-sfb-comap-lower-star-iso]. Apply its component in each degree of $I$. Its naturality for $d_I^n:I^n\\to I^{n+1}$ says that these components commute with the differentials, giving an isomorphism of complexes $\\theta_I:U_YF'I\\xrightarrow{\\sim}FU_XI$. Define the desired component $c_{QK}$ to be the composite\n$$D(U_Y)RF'(QK)\\xrightarrow{\\sim}Q(U_YF'I)\\xrightarrow{Q(\\theta_I)}Q(FU_XI)\\xrightarrow{\\sim}RF D(U_X)(QK).$$\nThe first arrow is $\\rho^Y_{F'I}\\circ D(U_Y)(\\alpha_s)$ and the last is $\\beta_s^{-1}$, with the maps of steps 1 and 2. Every arrow is an isomorphism, so this defines an invertible component of the claimed type in $D(\\Mod_{\\Lambda_Y})$.",
+   "uses": [
+    "def-sfb-comap-lower-star-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-lower-star-iso.proof.md",
+    "place": "Middle sentence: derive the underived natural isomorphism; degreewise construction, with the resolution identifications in the surrounding sentences"
+   }
+  },
+  {
+   "text": "We verify naturality and independence of the chosen resolution. For complexes $K,L$ choose resolutions $s:K\\to I$ and $t:L\\to J$ as above. For any derived morphism $u:QK\\to QL$, the bijection in [lem-weil-pbc-kinjective-hom-derived] gives a unique homotopy class $h:I\\to J$ such that $Qh=Qt\\circ u\\circ(Qs)^{-1}$. The natural units in [def-sfb-right-derived-functor] satisfy $RF'(Qh)\\circ\\eta'_I=\\eta'_J\\circ Q(F'h)$ and $RF(Q(U_Xh))\\circ\\eta_{U_XI}=\\eta_{U_XJ}\\circ Q(FU_Xh)$. Substituting $Qh=Qt\\circ u\\circ(Qs)^{-1}$ and the definitions of $\\alpha,\\beta$ in step 2 gives\n$$\\alpha_t\\circ RF'(u)=Q(F'h)\\circ\\alpha_s,\\qquad \\beta_t\\circ RF D(U_X)(u)=Q(FU_Xh)\\circ\\beta_s.$$\nFor the second equation use the naturality of $\\rho^X$ from step 1 to identify $D(U_X)(Qh)$ with $Q(U_Xh)$, and $U_XJ$ is K-injective by step 2. Here $h$ denotes any chain-map representative of its homotopy class. The naturality of $\\theta$ gives the equality of chain maps\n$$FU_X(h)\\circ\\theta_I=\\theta_J\\circ U_YF'(h),$$\nApplying $Q$ to this equality, using the two displayed identities and the naturality of $\\rho^Y$ on $F'h$, gives $RF D(U_X)(u)\\circ c_{QK}=c_{QL}\\circ D(U_Y)RF'(u)$. This equality depends only on the homotopy class: an additive functor sends a homotopy $h-h'=dv+vd$ to $Fh-Fh'=F(d)F(v)+F(v)F(d)$, which is again a homotopy. For a second resolution $s':K\\to I'$, apply the same bijection to $Qs'\\circ(Qs)^{-1}$; it is represented by a homotopy equivalence $I\\to I'$ (the inverse is represented by the inverse derived morphism, and faithfulness gives the two identities up to homotopy). The displayed naturality equality for this comparison identifies the two formulas for $c_{QK}$. Thus the components descend independently of resolutions to all objects and morphisms of the unbounded derived category, and form the required natural isomorphism. This uses the underived naturality of [def-sfb-comap-lower-star-iso], not just equality of underlying objects.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor",
+    "def-sfb-comap-lower-star-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-lower-star-iso.proof.md",
+    "place": "Naturality and resolution independence of the three derived comparisons, expanded using Stacks Tag 070I (lemma-K-injective), (1) implies (3), and Tags 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies)"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-change-of-scalars",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-sfb-comap-preserves-k-injectives",
+  "def-sfb-right-derived-functor",
   "def-sfb-comap-lower-star-iso",
-  "lem-sfb-comap-preserves-k-injectives"
+  "lem-weil-pbc-kinjective-hom-derived"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-lower-star-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-comap-lower-star-iso.proof.md",
+  "place": "Full proof, elaborated into the exact-factorization, resolution, degreewise-isomorphism, and naturality steps; unit proof literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/sk-def-sfb-coefficient-comparisons.proof.md, paragraph 3 (Derived (Pull) and (Push))"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules over condensed coefficient rings, restriction of scalars along a flat change of coefficients commutes with the unbounded derived direct image of a scheme morphism",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp; SheafOfModules.pushforwardComp; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pushforwardCongr",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: the hits give underlying scalar restriction, exact termwise derived functors, K-injective morphisms, or bounded-below derived functors, not this condensed-coefficient unbounded comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompMapDerivedCategoryIso|rightDerivedFunctorNatIso|PreservesKInjectiveComplexes|comapLowerStarIso|derivedComapLowerStarIso",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: the hits give underlying scalar restriction, exact termwise derived functors, K-injective morphisms, or bounded-below derived functors, not this condensed-coefficient unbounded comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctor",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.Functor.rightDerivedFunctor'",
+   "date": "2026-10-16",
+   "verdict": "unavailable for this query: Loogle rejected the unknown identifier; no absence conclusion is drawn from it. The subsequent valid mapDerivedCategory query ran successfully."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with the unbounded right derived pushforward for a flat coefficient ring map",
+   "results": "8 hits; AlgHom.restrictScalars; RestrictScalars; PresheafOfModules.restrictScalarsObj; PresheafOfModules.restrictScalars; RingCat.moduleCatRestrictScalarsPseudofunctor; ModuleCat.RestrictScalars.obj'; ModuleCat.instIsRightAdjointRestrictScalars; ModuleCat.restrictScalars",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: the hits give underlying scalar restriction, exact termwise derived functors, K-injective morphisms, or bounded-below derived functors, not this condensed-coefficient unbounded comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|KInjective|comap",
+   "results": "4 hits; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: the hits give underlying scalar restriction, exact termwise derived functors, K-injective morphisms, or bounded-below derived functors, not this condensed-coefficient unbounded comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategoryIdIso; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: the hits give underlying scalar restriction, exact termwise derived functors, K-injective morphisms, or bounded-below derived functors, not this condensed-coefficient unbounded comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact restriction functor preserving K-injective complexes commutes with a right derived functor when the underived functors commute",
+   "results": "8 hits; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.NatTrans.rightDerived_comp_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: the hits give underlying scalar restriction, exact termwise derived functors, K-injective morphisms, or bounded-below derived functors, not this condensed-coefficient unbounded comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|mapDerivedCategory|KInjective",
+   "results": "25 hits; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: the hits give underlying scalar restriction, exact termwise derived functors, K-injective morphisms, or bounded-below derived functors, not this condensed-coefficient unbounded comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]omp|[Cc]omp.*rightDerived|mapDerivedCategoryNatIso",
+   "results": "2 hits; Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean; Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact match: generic localized-functor comparison requires a right derivability structure, whose construction from exact restriction and K-injectives is part of this argument; rightDerivedNatIso only derives a given isomorphism and does not state the commuting square. The homology grep finds only the bounded-below rightDerivedFunctorPlus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between total right derived functors induced by a commuting square of additive functors, where the vertical functors are exact and preserve K-injective resolutions",
+   "results": "8 hits; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.NatTrans.rightDerived_comp_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc; CategoryTheory.Functor.rightDerivedNatIso; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc; CategoryTheory.Functor.leftDerivedNatIso",
+   "date": "2026-10-16",
+   "verdict": "No exact match: generic localized-functor comparison requires a right derivability structure, whose construction from exact restriction and K-injectives is part of this argument; rightDerivedNatIso only derives a given isomorphism and does not state the commuting square. The homology grep finds only the bounded-below rightDerivedFunctorPlus."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -64,5 +184,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-derived-comap-lower-star-iso",
+  "worker": "stage1",
+  "summary": "Kept the exact statement and flatness hypothesis. Expanded the imported one-paragraph argument into an explicit construction on K-injective resolutions and checked naturality and independence. Reused existing exactness, derived factorization, K-injective preservation and morphism-bijection nodes; no new nodes. The comparison is in the layer-B module-object categories, with no passage to finite constant coefficients. No finished slopmaster2 attachment was found.",
+  "blueprint": "Realizes the full proof in def-sfb-derived-comap-lower-star-iso.proof.md: step 1 is the exact levelwise restriction in the first sentence; step 2 is the K-injective computation in the final two sentences; step 3 constructs the middle underived comparison degreewise; step 4 verifies naturality and resolution independence of these composites. This is the ingredient cited in paragraph 3 (Derived (Pull) and (Push)) of sk-def-sfb-coefficient-comparisons.proof.md. The .proof.md sidecars, rather than the statement-only .md and _section.md, contain the blueprint proofs.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-3050a2768",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-3050a2768 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one item, no new nodes, and no fixes or tool_uses needed. The statement matches the main-20261015 blueprint .md word for word, with the same flatness hypothesis on Ext_{a_X}, layer-B module objects, the unbounded D(Mod_{Lambda'_X})->D(Mod_{Lambda_Y}), and the same orientation; it is not weakened. The four steps follow the .proof.md route: exact levelwise Res, then the underived comap-lower-star iso, then K-injective preservation. Step 1: sheaf-tensor closedness gives an additive tensor, so change-of-scalars clause 4 gives exact Res, and the exact-factorization Mathlib leaf gives rho (Stacks 015F, derived.tex:5884). Step 2: the hypothesis matches lem-sfb-comap-preserves-k-injectives word for word, the unit eta of def-sfb-right-derived-functor is invertible on K-injectives, and the directions in alpha_s and beta_s are correct (Stacks 070Y, 070K). Step 3: theta has the right orientation, and naturality on the differentials gives a chain isomorphism. Step 4: I recomputed both naturality identities from the eta, rho and theta naturalities and the K-injective Hom bijection, which is a Mathlib leaf (Stacks 070I (1)=>(3), derived.tex:9632); resolution independence follows with u=id. Route: the only statements used are from the item's own unit or are Mathlib leaves, and the rest are definitions; there is no cycle and no SGA. Duplicates: the upper-star comparison and the underived node are different statements. Small cases checked: a=id, f=id, the zero complex, degree-0 complexes, empty X, and Z->Z/2, which falls outside the hypothesis. Minor and accepted: existence of K-injective resolutions in Mod_{Lambda'_X} is presupposed by the cited Rf_* definition rather than cited separately."
+ }
 }
