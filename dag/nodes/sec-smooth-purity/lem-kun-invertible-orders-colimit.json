@@ -16,7 +16,8 @@
   "def-kun-torsion-invertible",
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-etale-sheaves",
-  "def-pur-abelian-sheaf-kernel"
+  "def-pur-abelian-sheaf-kernel",
+  "def-weil-pbc-torsion-etale-sheaf"
  ],
  "proof": [
   {
@@ -194,5 +195,30 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q45-d0021bf2d (reviewer sub-agent of L); spot-checked: Mathematics and all five steps check out, including the canonical comparison, abelian-sheaf coefficient category, stalk kernel identification, filtered subgroup colimit, stalk-colimit preservation, conservativity, and edge cases. The delivery incorrectly reports the blueprint Markdown as unavailable and silently omits its explicit opening citation to the existing unrestricted torsion filtered-union lemma. I wrote the corrected whole DAG JSON at fixes/dag/nodes/sec-smooth-purity/lem-kun-invertible-orders-colimit.json, adding that citation and dependency and correcting the source provenance. Review: review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6ade0f6d8",
+  "group": "NK",
+  "result": "pass",
+  "note": "Wrote review.md. Audited immutable files, all statement dependencies, blueprint and Stacks sources, canonical constructions, universes, edge cases, docstrings, and verbatim signature. Reproduced clean scompile.py sandbox and library compilation. No corrections required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvertibleOrdersColimit",
+  "declaration": "AlgebraicGeometry.Scheme.isTorsionEtaleSheafOfFieldInvertibleOrder_iff_isIso_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.fieldInvertibleTorsionDiagram",
+   "AlgebraicGeometry.Scheme.fieldInvertibleTorsionCocone",
+   "AlgebraicGeometry.Scheme.fieldInvertibleTorsionComparison",
+   "AlgebraicGeometry.Scheme.isTorsionEtaleSheafOfFieldInvertibleOrder_iff_isIso_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/InvertibleOrdersColimit.lean",
+  "statement": "theorem isTorsionEtaleSheafOfFieldInvertibleOrder_iff_isIso_comparison (K : Type u) [Field K] {T : Scheme.{u}} [T.Over (Spec (.of K))] (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) : Etale.IsTorsionOfInvertibleOrder K (Over.mk (T ↘ Spec (.of K))) F ↔ IsIso (fieldInvertibleTorsionComparison K F)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the current recorded InvertibleTorsionOrders dependency. The full subcategory of PositiveNat selected by invertibleTorsionOrders has exactly the required positive invertible orders and inherited divisibility arrows. The three helpers construct the canonical kernel diagram, inclusion cocone, and colimit comparison."
  }
 }
