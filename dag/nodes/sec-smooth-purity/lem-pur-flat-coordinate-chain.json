@@ -15,7 +15,7 @@
  },
  "kind": "statement",
  "title": "Single-coordinate chains between flat quasi-finite affine-space charts",
- "statement": "Let $k$ be an algebraically closed field, $d\\geq0$, and $X$ a separated finite-type $k$-scheme pure of dimension $d$ [def-weil-pure-dimension] [def-pc-scheme], [def-weil-finite-type-morphism], [def-kun-topological-krull-dimension]. Suppose $X$ is Cohen–Macaulay, meaning that every local ring $\\mathcal O_{X,x}$ has depth equal to its Krull dimension [def-weil-pbc-depth], [def-weil-pbc-krull-dimension-ring]. Let $u,v:X\\to\\mathbf A^d_k$ be quasi-finite flat morphisms [def-sbc-affine-space], [pqf-def-quasifinite], [def-weil-flat-morphism]. For every closed point $x\\in X$ there are an open neighbourhood $U$ of $x$, an integer $r\\geq0$, and quasi-finite flat morphisms $w_0,\\ldots,w_r:U\\to\\mathbf A^d_k$ with $w_0=u|_U$, $w_r=v|_U$, such that each consecutive pair has all but at most one of its $d$ coordinate functions equal. For $d=0$ one may take $r=0$.",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], $d\\geq0$, and $X$ a separated [def-weil-proper-morphism] finite-type $k$-scheme pure of dimension $d$ [def-weil-pure-dimension] [def-pc-scheme], [def-weil-finite-type-morphism], [def-kun-topological-krull-dimension]. Suppose $X$ is Cohen–Macaulay, meaning that every local ring $\\mathcal O_{X,x}$ has depth equal to its Krull dimension [def-weil-pbc-depth], [def-weil-pbc-krull-dimension-ring]. Let $u,v:X\\to\\mathbf A^d_k$ be quasi-finite flat $k$-morphisms [def-sbc-affine-space], [pqf-def-quasifinite], [def-weil-flat-morphism]. For every closed point $x\\in X$ [def-weil-closed-points] there are an open neighbourhood $U$ of $x$, an integer $r\\geq0$, and quasi-finite flat $k$-morphisms $w_0,\\ldots,w_r:U\\to\\mathbf A^d_k$ with $w_0=u|_U$, $w_r=v|_U$, such that each consecutive pair has all but at most one of its $d$ coordinate functions equal. For $d=0$ one may take $r=0$.",
  "source": {
   "document": "literature/sga/SGA4-expose-18_reedition.pdf",
   "place": "XVIII Lemmas 2.5–2.6, pp. 551–552; 2.5 uses prime avoidance and regular systems of parameters in Cohen–Macaulay local rings. No Stacks tag located for this chain-of-charts assertion."
@@ -30,12 +30,125 @@
   "pqf-def-quasifinite",
   "def-weil-flat-morphism",
   "def-weil-pure-dimension",
-  "def-weil-proper-morphism",
-  "def-weil-algebraic-closure"
+  "def-weil-algebraic-closure",
+  "def-weil-closed-points",
+  "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $d=0$, $\\mathbf A^0_k=\\operatorname{Spec}k$ and both maps are the structure morphism; take $U=X$ and $r=0$. Henceforth let $d>0$ and fix the given closed point $x$. The closed-point residue-field lemma identifies $\\kappa(x)$ with $k$. Put $A=\\mathcal O_{X,x}$ and $\\mathfrak m=\\mathfrak m_x$, and center the two tuples: $\\alpha_i=(u_i)_x-u_i(x)$ and $\\beta_i=(v_i)_x-v_i(x)$. Apply the parameter-chart germ criterion to the actual coordinate sections of $u$ and $v$: since they are flat and quasi-finite, it gives that $A$ is Noetherian of dimension $d$ and that both centered tuples generate ideals with radical $\\mathfrak m$. The Cohen–Macaulay hypothesis on $A$ is exactly the hypothesis on the stalk of $X$ at $x$.",
+   "uses": [
+    "def-sbc-affine-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-pur-parameter-chart-germ-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.6, first proof paragraph and centering in the second paragraph, p. 552"
+   }
+  },
+  {
+   "text": "Prove the following local assertion by induction on $e$: in every nonzero Noetherian local ring $(B,\\mathfrak n)$ of finite dimension $e$ with $\\operatorname{depth}(B)\\ge e$ (the Cohen–Macaulay condition used in this induction), any two ordered systems of parameters can be connected by a finite chain of ordered systems of parameters, changing at most one entry at each step. Here a system of parameters means an $e$-tuple in $\\mathfrak n$ whose quotient has dimension zero, equivalently whose generated ideal has radical $\\mathfrak n$. For $e=0$ both tuples are empty; for $e=1$ use the two given tuples as one edge (or no edge if equal). Suppose $e\\ge2$ and assume the assertion for all such rings of dimension $e-1$. Denote the two tuples by $p=(p_1,\\ldots,p_e)$ and $q=(q_1,\\ldots,q_e)$.",
+   "uses": [
+    "def-weil-pbc-depth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.5, induction on dimension, p. 551–552"
+   }
+  },
+  {
+   "text": "Since $\\dim B/(p)=\\dim B/(q)=0$, the dimension-drop regular-sequence lemma with $c=e$ makes $p$ and $q$ regular sequences. Their first elements $p_1,q_1$ are therefore nonzerodivisors. The Cohen–Macaulay quotient lemma gives that $B/(p_1)$ and $B/(q_1)$ are nonzero Noetherian Cohen–Macaulay local rings of dimension $e-1$.",
+   "uses": [
+    "lem-weil-pbc-cm-local-dimension-drop-regular-sequence",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.5, use of the Cohen–Macaulay quotients by the first parameters; Stacks 02JN"
+   }
+  },
+  {
+   "text": "Choose a common element $z\\in\\mathfrak n$ which is a nonzerodivisor on all three rings $B$, $B/(p_1)$ and $B/(q_1)$. Here is the complete avoidance argument. Each of these rings has positive depth, so its maximal ideal cannot be an associated prime: a nonzero element killed by the whole maximal ideal would be killed by the first element of a positive-length regular sequence, contradicting injectivity. Each ring has finitely many associated primes. Pull the two quotient rings' associated primes back to $B$ and add the associated primes of $B$; all are prime ideals strictly smaller than $\\mathfrak n$. By prime avoidance, $\\mathfrak n$ has an element $z$ outside this finite union. The zero-divisor/associated-prime lemma in each of the three rings says precisely that these three multiplications by $z$ are injective. The sets can be handled as a finite family; if it is empty any element outside the empty union works. Including the associated primes of $B$ explicitly ensures that $B/(z)$ is a valid Cohen–Macaulay quotient for the middle induction below.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-noetherian-associated-primes-finite",
+    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.5, associated-prime avoidance argument; Stacks 00LC, 00LD, 00DS"
+   }
+  },
+  {
+   "text": "The pairs $(p_1,z)$ and $(q_1,z)$ are regular sequences by their injectivity just proved: both entries lie in $\\mathfrak n$, so their generated ideals are proper and the final quotients are nonzero. The same observation applies to every subsequent tuple of lifts in $\\mathfrak n$. Apply the Cohen–Macaulay quotient lemma twice to see that $B/(p_1,z)$ and $B/(q_1,z)$ are Cohen–Macaulay of dimension $e-2$. Their depth definition supplies regular sequences of length $e-2$ in their maximal ideals (for $e=2$ these are empty); choose lifts $a_3,\\ldots,a_e$ and $b_3,\\ldots,b_e$ in $\\mathfrak n$. Repeated applications of the same quotient lemma to these sequences make the final quotients zero-dimensional. Thus $a=(p_1,z,a_3,\\ldots,a_e)$ and $b=(q_1,z,b_3,\\ldots,b_e)$ are systems of parameters. Also $B/(z)$ is Cohen–Macaulay of dimension $e-1$, since $z$ was chosen regular on $B$. For $e-2>0$, a supremum of lengths at least $e-2$ supplies a sequence of length at least $e-2$; truncate it to length $e-2$. Otherwise every length would be at most $e-3$. This uses only the lower bound on depth supplied by the quotient lemma, not an uncited depth-versus-dimension theorem.",
+   "uses": [
+    "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.5, completing the pairs to the tuples a and b; Stacks 02JN"
+   }
+  },
+  {
+   "text": "By the Cohen–Macaulay quotient lemma, the three rings $B/(p_1)$, $B/(z)$ and $B/(q_1)$ satisfy the induction hypotheses in dimension $e-1$. Apply the induction hypothesis in $B/(p_1)$ to the tails of $p$ and $a$, in $B/(z)$ to the tuples obtained from $a$ and $b$ by deleting their second entry, and in $B/(q_1)$ to the tails of $b$ and $q$. These are systems of parameters in the respective $(e-1)$-dimensional rings because their final quotients are the zero-dimensional quotients by the full tuples. Lift each quotient chain with the omitted entry held fixed in its original coordinate position. More explicitly, start with the prescribed initial tuple upstairs; at each quotient edge change only the affected coordinate, choosing any lift of its new entry. At the final tuple each coordinate differs from its prescribed endpoint by a multiple of the fixed entry. Correct these coordinates one at a time. Each such correction leaves the ideal generated together with the fixed entry unchanged, so every tuple remains a system of parameters. This supplies exact endpoints upstairs, rather than endpoints only modulo the fixed entry. Concatenate the three lifted chains to obtain $p\\rightsquigarrow a\\rightsquigarrow b\\rightsquigarrow q$. This finishes the induction. Apply its result to $A,\\alpha,\\beta$ from Step 1.",
+   "uses": [
+    "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.5, three applications of the induction hypothesis; explicit lifting of quotient chains"
+   }
+  },
+  {
+   "text": "Realize the resulting finite chain of tuples in $\\mathfrak m$ as functions near $x$. For each distinct germ occurring in the chain choose a representative section once, and intersect their finitely many neighbourhoods. The stalk description allows a further finite shrink so that the first and last tuple representatives equal the actual sections $u_i-u_i(x)$ and $v_i-v_i(x)$. Choosing one representative for each germ makes all equal adjacent coordinates equal as sections. Add at the beginning the explicit tuples $u-(u_1(x),\\ldots,u_j(x),0,\\ldots,0)$ for $j=0,\\ldots,d$, and at the end the reverse analogous sequence for $v$. Consecutive tuples change at most one coordinate. Every centered germ tuple in a translation sequence equals $\\alpha$ or $\\beta$, and every tuple in the middle sequence is a system of parameters. The parameter-chart germ criterion, applied separately to these finitely many prescribed representative tuples, gives affine neighbourhoods on which each corresponding map is quasi-finite and flat. Choose an affine neighbourhood $U$ of $x$ inside their finite intersection. Flatness persists because the source stalks are unchanged on an open subscheme; fibre isolation persists on an open subset. Apply the affine-pairs characterization of local finite type to the structure map $X\\to\\operatorname{Spec}k$ and the affine open $U$: its section ring is a finitely generated $k$-algebra. On this affine $U$, each map to $\\mathbf A^d_k$ is of finite type: a finite set of $k$-algebra generators of $\\Gamma(U,\\mathcal O_U)$ also generates it over the coordinate-polynomial algebra. The single affine source and target give the finite affine cover in the finite-type definition. Hence the maps are quasi-finite in the stated, finite-type sense. Enumerate this finite concatenation as $w_0,\\ldots,w_r$. Its exact endpoints are $u|_U$ and $v|_U$, as required.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "lem-pur-parameter-chart-germ-criterion",
+    "def-weil-flat-morphism",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.6, realization of germs, common shrinking, and the explicit centering chains, p. 552; Stacks 01T2 for finite type on arbitrary affine pairs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-pur-parameter-chart-germ-criterion",
+  "def-weil-pbc-depth",
+  "lem-weil-pbc-cm-local-dimension-drop-regular-sequence",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+  "lem-weil-pbc-prime-avoidance",
+  "def-weil-pbc-module-stalk",
+  "def-weil-flat-morphism",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+  "place": "XVIII Lemmas 2.5–2.6, pp. 551–552; associated-prime avoidance, induction in three quotients, and coordinate translation chains"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,15 +205,94 @@
    "date": "2026-10-16",
    "digest": "4f53cda18c2baa0c",
    "verdict": "no match: independent source grep returned zero declarations for Cohen-Macaulay geometry or etale Kummer cohomology/trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two flat quasi finite affine space charts locally joined by changing one coordinate at a time",
+   "results": "{\"t\": \"2026-10-16T07:11:07Z\", \"tool\": \"leanfinder\", \"query\": \"Two flat quasi finite affine space charts locally joined by changing one coordinate at a time\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace.reindex\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AlgebraicGeometry.AffineSpace.reindex_appTop_coord\", \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\"], \"digest\": \"4903595515afd4ff\"}",
+   "date": "2026-10-16",
+   "digest": "4903595515afd4ff",
+   "verdict": "no match: coordinate changes and affine-space structure results, or permutation of one fixed regular sequence, do not connect arbitrary parameter systems or flat quasi-finite charts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineSpace\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-16T07:11:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"AffineSpace\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: coordinate changes and affine-space structure results, or permutation of one fixed regular sequence, do not connect arbitrary parameter systems or flat quasi-finite charts"
+  },
+  {
+   "tool": "grep",
+   "query": "coordinate.*chain|chain.*coordinate|parameters.*replace|replace.*parameters",
+   "results": "{\"t\": \"2026-10-16T07:11:24Z\", \"tool\": \"grep\", \"query\": \"coordinate.*chain|chain.*coordinate|parameters.*replace|replace.*parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: coordinate changes and affine-space structure results, or permutation of one fixed regular sequence, do not connect arbitrary parameter systems or flat quasi-finite charts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Systems of parameters of a Cohen Macaulay local ring connected by single coordinate changes",
+   "results": "{\"t\": \"2026-10-16T07:11:25Z\", \"tool\": \"leansearch\", \"query\": \"Systems of parameters of a Cohen Macaulay local ring connected by single coordinate changes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.VariableChange.map_s\", \"ContMDiff.coordChange\", \"WeierstrassCurve.instSMulVariableChange\", \"WeierstrassCurve.VariableChange.map_r\", \"WeierstrassCurve.VariableChange\", \"IsLocalRing.isRegular_of_perm\", \"WeierstrassCurve.VariableChange.casesOn\", \"WeierstrassCurve.VariableChange.map_t\"], \"digest\": \"b65597db08f0e940\"}",
+   "date": "2026-10-16",
+   "digest": "b65597db08f0e940",
+   "verdict": "no match: coordinate changes and affine-space structure results, or permutation of one fixed regular sequence, do not connect arbitrary parameter systems or flat quasi-finite charts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two flat quasi finite affine space charts locally joined by changing one coordinate at a time",
+   "results": "{\"t\": \"2026-10-16T07:11:07Z\", \"tool\": \"leanfinder\", \"query\": \"Two flat quasi finite affine space charts locally joined by changing one coordinate at a time\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace.reindex\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AlgebraicGeometry.AffineSpace.reindex_appTop_coord\", \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\"], \"digest\": \"4903595515afd4ff\"}",
+   "date": "2026-10-16",
+   "digest": "4903595515afd4ff",
+   "verdict": "no match: coordinate changes and affine-space structure results, or permutation of one fixed regular sequence, do not connect arbitrary parameter systems or flat quasi-finite charts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineSpace\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-16T07:11:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"AffineSpace\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: coordinate changes and affine-space structure results, or permutation of one fixed regular sequence, do not connect arbitrary parameter systems or flat quasi-finite charts"
+  },
+  {
+   "tool": "grep",
+   "query": "coordinate.*chain|chain.*coordinate|parameters.*replace|replace.*parameters",
+   "results": "{\"t\": \"2026-10-16T07:11:24Z\", \"tool\": \"grep\", \"query\": \"coordinate.*chain|chain.*coordinate|parameters.*replace|replace.*parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: coordinate changes and affine-space structure results, or permutation of one fixed regular sequence, do not connect arbitrary parameter systems or flat quasi-finite charts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Systems of parameters of a Cohen Macaulay local ring connected by single coordinate changes",
+   "results": "{\"t\": \"2026-10-16T07:11:25Z\", \"tool\": \"leansearch\", \"query\": \"Systems of parameters of a Cohen Macaulay local ring connected by single coordinate changes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.VariableChange.map_s\", \"ContMDiff.coordChange\", \"WeierstrassCurve.instSMulVariableChange\", \"WeierstrassCurve.VariableChange.map_r\", \"WeierstrassCurve.VariableChange\", \"IsLocalRing.isRegular_of_perm\", \"WeierstrassCurve.VariableChange.casesOn\", \"WeierstrassCurve.VariableChange.map_t\"], \"digest\": \"b65597db08f0e940\"}",
+   "date": "2026-10-16",
+   "digest": "b65597db08f0e940",
+   "verdict": "no match: coordinate changes and affine-space structure results, or permutation of one fixed regular sequence, do not connect arbitrary parameter systems or flat quasi-finite charts"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-torsion-top-trace",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-purity-transport"
+ "unit": "sk-thm-purity-transport",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-flat-coordinate-chain",
+  "worker": "stage1",
+  "summary": "Read SGA XVIII 2.5–2.6 and wrote the local-ring induction inside this item, reusing existing Cohen–Macaulay quotient, regular-sequence, associated-prime and prime-avoidance tools. Added only the separate germ criterion implicit in SGA 2.6. Made the pivot regular also on the original ring, explained parameter completions and exact lifting endpoints, and used a finite common shrinking for the actual coordinate representatives. Clarified that the given morphisms are over k, as intended by SGA; without this the d=0 clause is false for two distinct automorphisms of Spec k. The separatedness hypothesis cites the separatedness definition carried by def-weil-proper-morphism.",
+  "blueprint": "No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None). This seed-target branch refines finite normalized trace construction in sk-thm-purity-transport Step 1, via lem-pur-torsion-top-trace: SGA XVIII 2.9(b) uses XVIII 2.6, which is proved here by XVIII 2.5."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-2f224b185",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-2f224b185 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements, SGA XVIII 2.5–2.6 and Stacks sources in full. Verified all seven steps, edge cases, duplicate candidates and the acyclic 138-node closure. Accepted the CM algebra tool uses; no mathematical repairs needed. Detailed findings are in review.md."
+ }
 }
