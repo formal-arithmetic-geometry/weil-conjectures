@@ -28,9 +28,80 @@
   "def-coef-complete-algebroid",
   "lem-coef-operadic-algebra-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $f_{[1]}$ is an equivalence and $O_{[1]}$ is a space, $M_{[1]}$ is a space as well: transport inverse edges and their inverse triangles through a quasi-inverse of $f_{[1]}$. The generalized Segal equivalences in [lem-coef-operadic-algebra-presentability] identify $M_{[n]}$ with the iterated fiber product of $M_{[1]}$ over $M_{[0]}$; hence every edge in every $M_{[n]}$ is invertible, coordinate by coordinate. For $n=0$ use the given hypothesis on $M_{[0]}$. For $O$, the ordinary Segal equivalences identify $O_{[n]}$ with $O_{[1]}^n$. An edge of this product has an inverse in each coordinate because $O_{[1]}$ is a space, and the inverse triangles are coordinatewise as well. At $n=0$ the ordinary Segal condition gives $O_{[0]}\\simeq *$. Thus all fibers are spaces. A triangle between active maps to a fixed target whose source-change edge is over an identity has an invertible source-change edge. Consequently the spaces $\\operatorname{Op}$ in the statement coincide with the corrected triv,act operation spaces: in a triangle over $\\Delta^{\\mathrm{op}}$, a source-change edge lying over an inert base map between active maps must lie over an identity. Indeed its opposite is an interval inclusion; composing with the endpoint-preserving active order map forces the interval to contain both endpoints and hence to be the whole interval.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Erratum, opening correction of the triv,act slice; generalized Segal definition"
+   }
+  },
+  {
+   "text": "Extend the color hypothesis to an arbitrary output object $C\\in M_{[k]}$. Choose its inert projections $C\\to C_i$ and use their images under $f$ as the inert projections of $f(C)$. Apply [lem-coef-operadic-operation-segal-product] to $M$ and to $O$, whose zero and one fibers are spaces by step 1. Its compatibility with $f$ identifies $\\operatorname{Op}_M(C)\\to\\operatorname{Op}_O(fC)$ with the product of the maps $\\operatorname{Op}_M(C_i)\\to\\operatorname{Op}_O(fC_i)$. Each factor is an equivalence by the assumed color criterion, and the product of their inverses is an inverse of the product map. For $k=0$ both operation spaces are contractible by the same node, so the unique map between them is an equivalence. The statement of the product lemma retains zero-length input blocks, so operations with nullary components are included. We conclude that the operation-space comparison is an equivalence for every $C$, not merely for colors.",
+   "uses": [
+    "lem-coef-operadic-operation-segal-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proof of Erratum Corollary E.0.1, reduction from all objects to inert color projections"
+   }
+  },
+  {
+   "text": "Fix $C\\in M_{[k]}$ and an active arrow $\\alpha:X\\to f(C)$ in $O$ over $[n]\\to[k]$. Unpack the homotopy pullback $\\mathcal L_f(C,\\alpha)$ of [lem-coef-operadic-active-lift-criterion]. An object is $a:D\\to C$ with an equivalence $f(a)\\simeq\\alpha$ in the slice $O_{/f(C)}$. Projecting this equivalence to $\\Delta^{\\mathrm{op}}$ forces $D$ to have arity $n$ and $a$ to have the same active base map as $\\alpha$, since the simplex category has only identity isomorphisms. Likewise every source-change edge of a simplex in this pullback lies over the identity of $[n]$; it is invertible because $M_{[n]}$ is a space by step 1. The equivalence in the slice is therefore precisely a path from $f(a)$ to $\\alpha$ in $\\operatorname{Op}_O(fC)$, with exactly the same higher compatibility data. Hence this lifting category is the homotopy fiber at $\\alpha$ of $\\operatorname{Op}_M(C)\\to\\operatorname{Op}_O(fC)$. This is the path-model homotopy fiber of [def-cbc-enhanced-diagrams-cones]. The comparison is an equivalence by step 2; replacing it by its quasi-inverse identifies this fiber with the path space ending at $\\alpha$, which contracts to the constant path. Thus every $\\mathcal L_f(C,\\alpha)$ is weakly contractible.",
+   "uses": [
+    "lem-coef-operadic-active-lift-criterion",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proof of Erratum Corollary E.0.1, identification of the slice fiber with the corrected operation-space fiber"
+   }
+  },
+  {
+   "text": "The objects $C$ and active maps $\\alpha$ in step 3 were arbitrary. Apply the if direction of [lem-coef-operadic-active-lift-criterion]: its ordinary-target and inert-preservation hypotheses are exactly our hypotheses, and it requires no categorical-fibration assumption on $f$. It gives that $f$ is a weak approximation, with the meaning fixed in [def-coef-operadic-weak-approximation]. The color equivalence is already a hypothesis of the item. Therefore [lem-coef-operadic-weak-approximation-algebras] gives $f^*:\\operatorname{Alg}_O(P)\\simeq\\operatorname{Alg}_M(P)$ for every ordinary $P$, including all coherent algebra transformations. This is an application of the full categorical theorem, rather than an inference of categorical equivalence from equivalence of cores.",
+   "uses": [
+    "lem-coef-operadic-active-lift-criterion",
+    "def-coef-operadic-weak-approximation",
+    "lem-coef-operadic-weak-approximation-algebras"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Erratum Proposition E.0.2 and Theorem A.6.5"
+   }
+  },
+  {
+   "text": "Restriction is precomposition by $f$, so its composites with postcomposition by any inert-preserving map $P\\to P'$ agree with first postcomposing and then restricting, on functors, transformations, and all higher simplices. This proves the asserted naturality in $P$. Taking cores preserves the equivalence, because a quasi-inverse and both coherent inverse transformations restrict to cores. By the full-subcategory definition in [lem-coef-operadic-weak-approximation-algebras], the core of $\\operatorname{Alg}_Q(P)$ has inert-preserving functors $Q\\to P$ as points, coherent equivalences of these functors as paths, and all higher compatibilities. This is the space of operadic maps from $Q$ to $P$; for ordinary $Q$ it is the mapping space in the operad category of [lem-coef-operadic-algebra-presentability]. Thus precomposition by $f$ induces equivalences of these mapping spaces for every ordinary target as well. This is exactly the universal property of the ordinary operadic replacement of $M$, now obtained together with the stronger equivalence of the entire algebra categories.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-operadic-weak-approximation-algebras"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Theorem A.6.5 and Corollary A.6.6, mapping-space universal property and functoriality of restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-operadic-operation-segal-product",
+  "lem-coef-operadic-active-lift-criterion",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-operadic-weak-approximation",
+  "lem-coef-operadic-weak-approximation-algebras"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Erratum proof of Corollary E.0.1, Proposition E.0.2 and Theorem A.6.5, read online; archive requested in report.md"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,10 +151,45 @@
    "results": "{\"t\": \"2026-10-16T20:26:04Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalence of colors and fixed arity operation groupoids implies a generalized operad localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.groupoid\", \"CategoryTheory.Functor.IsLocalization.of_equivalences\", \"CategoryTheory.Localization.isEquivalence\", \"CategoryTheory.Functor.IsLocalization.of_equivalence_source\", \"CategoryTheory.Localization.instIsGroupoidLocalizationTopMorphismProperty\", \"CategoryTheory.MorphismProperty.Q\", \"CategoryTheory.Functor.q_isLocalization\", \"CategoryTheory.Functor.IsLocalization.of_equivalence_target\"], \"digest\": \"66abfa62f9a3f68c\"}",
    "date": "2026-10-17",
    "verdict": "no match: Ordinary-category localization results do not imply the fixed-arity generalized infinity-operad criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence on colors and fixed arity active operation spaces gives equivalence of algebra infinity categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SimplexCategoryGenRel.ext\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic\", \"type\": \"∀ {x y : SimplexCategoryGenRel}, x.len = y.len → x = y\", \"doc\": \"For any two morphisms $x$ and $y$ in the simplex category constructed via generators and relations, if their lengths $x.len$ and $y.len$ are equal as natural numbers, then $x = y$. This asserts that t\"}\n  {\"name\": \"SimplexCategoryGenRel.ext_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic\", \"type\": \"∀ {x y : SimplexCategoryGenRel}, x = y ↔ x.len = y.len\", \"doc\": \"Two morphisms $x$ and $y$ in the simplex category constructed via generators and relations are equal if and only if their lengths $x.len$ and $y.len$ are equal as natural numbers.\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.ext_iff\", \"module\": \"Mathlib/AlgebraicTopology/ExtraDegeneracy\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} {X : CategoryTheory.SimplicialObject.Augmented C}\\n  {x y : X.ExtraDegeneracy}, x = y ↔ x.s' = y.s' ∧ x.s = y.s\", \"doc\": \"Two extra degeneracy structures on an augmented simplicial object are equal if and only if their augmentation morphisms $ s' $ and their families of degeneracy maps $ s $ are equal.\"}\n  {\"name\": \"SimplexCategory.SkeletalFunctor.isEquivalence\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Basic\", \"type\": \"SimplexCategory.skeletalFunctor.IsEquivalence\", \"doc\": \"The skeletal functor from the simplex category $\\\\Delta$ to the category of nonempty finite linearly ordered types establishes an equivalence of categories. This means the simplex category is equivalen\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.ext\", \"module\": \"Mathlib/AlgebraicTopology/ExtraDegeneracy\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} {X : CategoryTheory.SimplicialObject.Augmented C}\\n  {x y : X.ExtraDegeneracy}, x.s' = y.s' → x.s = y.s → x = y\", \"doc\": \"For any category $\\\\mathcal{C}$ and augmented simplicial object $X$ in $\\\\mathcal{C}$, two extra degeneracy structures $x$ and $y$ on $X$ are equal if their associated morphisms $s' : Y \\\\to X_0$ (where \"}\n  {\"name\": \"CategoryTheory.SimplicialObject.IsCoskeletal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.SimplicialObject C → ℕ → Prop\", \"doc\": \"For a category $\\\\mathcal{C}$, a simplicial object $X$ in $\\\\mathcal{C}$, and a natural number $n$, the proposition that $X$ is coskeletal at level $n$ (i.e., all simplices of dimension greater than $n$\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.mk.inj\", \"module\": \"Mathlib/AlgebraicTopology/ExtraDegeneracy\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} {X : CategoryTheory.SimplicialObject.Augmented C}\\n  {s' :\\n    CategoryTheory.SimplicialObject.Augmented.point.obj X ⟶\\n      (CategoryTheory.SimplicialObject.Augmented.drop.obj X).obj (Opposite.op (SimplexCategory.mk 0))}\\n  {s :\\n    (n : \", \"doc\": \"Given an augmented simplicial object $X$ in a category $\\\\mathcal{C}$, if two extra degeneracy structures on $X$ have equal morphisms $s'$, $s_n$ and satisfy identical coherence conditions involving th\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.ofIso\", \"module\": \"Mathlib/AlgebraicTopology/ExtraDegeneracy\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X Y : CategoryTheory.SimplicialObject.Augmented C} → (X ≅ Y) → X.ExtraDegeneracy → Y.ExtraDegeneracy\", \"doc\": \"Given an isomorphism $e: X \\\\cong Y$ between two augmented simplicial objects in a category $\\\\mathcal{C}$, and an extra degeneracy structure on $X$, this definition constructs an extra degeneracy struc\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits give ordinary localization, simplicial-object identities, or the ordinary category QCat; none treats generalized infinity operads or their operation spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generalized nonsymmetric infinity operad localization criterion with groupoid spaces of operations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n  {\"name\": \"CategoryTheory.FreeGroupoid.instIsLocalizationOfTopMorphismProperty\", \"module\": \"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.FreeGroupoid.of C).IsLocalization ⊤\", \"doc\": \"The canonical functor from a category $\\\\mathcal{C}$ to its free groupoid is a localization with respect to the top morphism property, which includes all morphisms of $\\\\mathcal{C}$. This means every mo\"}\n  {\"name\": \"CategoryTheory.Localization.groupoid\", \"module\": \"Mathlib/CategoryTheory/Localization/Predicate\", \"type\": \"{C : Type u_1} → [inst : CategoryTheory.Category.{v_1, u_1} C] → CategoryTheory.Groupoid ⊤.Localization\", \"doc\": \"For any category $\\\\mathcal{C}$, the localization of $\\\\mathcal{C}$ at the top morphism property (which includes all morphisms) forms a groupoid. This means every morphism in the localized category is a\"}\n  {\"name\": \"CategoryTheory.Localization.isGroupoid\", \"module\": \"Mathlib/CategoryTheory/Localization/Predicate\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D) [L.IsLocalization ⊤],\\n  CategoryTheory.IsGroupoid D\", \"doc\": \"If a functor $ L : C \\\\to D $ is a localization with respect to the top morphism property, then the category $ D $ is a groupoid, i.e., every morphism in $ D $ is an isomorphism.\"}\n  {\"name\": \"CategoryTheory.Localization.instIsGroupoidLocalizationTopMorphismProperty\", \"module\": \"Mathlib/CategoryTheory/Localization/Predicate\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C], CategoryTheory.IsGroupoid ⊤.Localization\", \"doc\": \"For any category $\\\\mathcal{C}$, the localization of $\\\\mathcal{C}$ at the top morphism property (which includes all morphisms) forms a groupoid. This means every morphism in the localized category is a\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"SSet.QCat.bicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"CategoryTheory.Bicategory SSet.QCat\", \"doc\": \"The category of quasi-categories (QCat) is equipped with a bicategory structure, obtained by transporting the enrichment along the homotopy category functor for simplicial sets. This structure uses th\"}\n  {\"name\": \"CategoryTheory.FreeMonoidalCategory.instGroupoid\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Free/Coherence\", \"type\": \"{C : Type u} → CategoryTheory.Groupoid (CategoryTheory.FreeMonoidalCategory C)\", \"doc\": \"The free monoidal category generated by a collection of objects and morphisms is a groupoid, meaning every morphism in it has an inverse. The inverse operation is defined recursively on morphism const\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits give ordinary localization, simplicial-object identities, or the ordinary category QCat; none treats generalized infinity operads or their operation spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Operad\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits give ordinary localization, simplicial-object identities, or the ordinary category QCat; none treats generalized infinity operads or their operation spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|weak.approximation|triv.act",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"line\": \"617\", \"text\": \"*Weak approximation for infinite places*\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfiniteAdeleRing.lean\", \"line\": \"102\", \"text\": \"*Weak approximation for the infinite adele ring*\"}\n  {\"file\": \"Mathlib/Analysis/AbsoluteValue/Equivalence.lean\", \"line\": \"404\", \"text\": \"This is the abstract weak approximation theorem; see\"}\n  {\"file\": \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"line\": \"39\", \"text\": \"[F. Chapoton, M. Livernet, *Pre-Lie algebras and the rooted trees operad*][chapoton_livernet_2001]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"line\": \"55\", \"text\": \"  monoids in monoidal categories, in: Operads: Proceedings of Renaissance\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits give ordinary localization, simplicial-object identities, or the ordinary category QCat; none treats generalized infinity operads or their operation spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of generalized infinity operads is a localization if colors and fixed arity operation spaces are equivalent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsLocalization.mk\", \"module\": \"Mathlib.CategoryTheory.Localization.Predicate\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {L : CategoryTheory.Functor C D}\\n  {W : CategoryTheory.MorphismProperty C} (inverts : W.IsInvertedBy L),\\n  (CategoryTheory.Localization.Construction.lift L inverts).IsEquiv\", \"doc\": \"If the lifted functor from the localization of $\\\\mathcal{C}$ at $W$-morphisms to $\\\\mathcal{D}$, constructed by lifting $L$ which inverts $W$-morphisms, is an equivalence of categories, then $L$ is a l\"}\n  {\"name\": \"OreLocalization.localizationMap\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \": S.LocalizationMap R[S⁻¹]\", \"doc\": \"The canonical localization map from a commutative monoid $ R $ to its Ore localization $ R[S^{-1}] $, defined by sending each element $ x \\\\in R $ to the equivalence class $ [x, 1] $ in $ R[S^{-1}] $. \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instIsLocalizationLocalization'Q'\", \"module\": \"Mathlib.CategoryTheory.Localization.HasLocalization\", \"type\": \": W.Q'.IsLocalization W\", \"doc\": \"The functor $ Q' : \\\\mathcal{C} \\\\to \\\\mathcal{C}[W^{-1}] $, constructed via the localization data for morphism property $ W $, satisfies the predicate that it is a localization with respect to $ W $. Th\"}\n  {\"name\": \"AddSubmonoid.LocalizationMap.ofAddEquivOfDom\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \"{M : Type u_1} →\\n  [inst : AddCommMonoid M] →\\n    {S : AddSubmonoid M} →\\n      {N : Type u_2} →\\n        [inst_1 : AddCommMonoid N] →\\n          {P : Type u_3} →\\n            [inst_2 : AddCommMonoid P] →\\n              S.LocalizationMap N →\\n                {T : AddSubmonoid P} → {k : P ≃+ M} → AddSubmon\", \"doc\": \"Let $M$, $N$, and $P$ be additive commutative monoids, $S$ an additive submonoid of $M$, and $T$ an additive submonoid of $P$. Given a localization map $f : M \\\\to N$ with respect to $S$, and an additi\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.Localization'\", \"module\": \"Mathlib.CategoryTheory.Localization.HasLocalization\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → (W : CategoryTheory.MorphismProperty C) → [W.HasLocalization] → Type u\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a morphism property $W$ with localization data, this is the category obtained by localizing $\\\\mathcal{C}$ with respect to morphisms satisfying $W$.\"}\n  {\"name\": \"Localization.monoidOf\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \": Submonoid.LocalizationMap S (Localization S)\", \"doc\": \"For any commutative monoid $ M $ and submonoid $ S \\\\subseteq M $, the canonical localization map $ M \\\\to M[S^{-1}] $ sending each element $ x $ to the equivalence class $ [x, 1] $ in the Ore localizat\"}\n  {\"name\": \"AddSubmonoid.LocalizationMap.ofAddEquivOfLocalizations\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \"{M : Type u_1} →\\n  [inst : AddCommMonoid M] →\\n    {S : AddSubmonoid M} →\\n      {N : Type u_2} →\\n        [inst_1 : AddCommMonoid N] →\\n          {P : Type u_3} → [inst_2 : AddCommMonoid P] → S.LocalizationMap N → N ≃+ P → S.LocalizationMap P\", \"doc\": \"Given additive commutative monoids $M$, $N$, and $P$, a submonoid $S$ of $M$, a localization map inverting $S$ from $M$ to $N$, and an additive equivalence between $N$ and $P$, this function construct\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk\", \"module\": \"Mathlib.CategoryTheory.Localization.LocalizerMorphism\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} {Φ : CategoryTheory.LocalizerMorphism W₁ W₂},\\n  (Φ.localizedFunctor W₁.Q W₂.Q).IsEquival\", \"doc\": \"If the functor obtained by localizing Φ with respect to morphism properties $ W_1 $ and $ W_2 $ is an equivalence of categories, then Φ is a localized equivalence between the categories equipped with \"}\n",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits give ordinary localization, simplicial-object identities, or the ordinary category QCat; none treats generalized infinity operads or their operation spaces."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-many-object-operad-accessibility",
@@ -91,5 +197,20 @@
   "group": "Q46"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-localization-operation-criterion",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its fixed-arity operation spaces. Wrote the corrected erratum proof: groupoidal fibers, natural Segal product decomposition for arbitrary outputs including zero, explicit identification of each active lifting category with a contractible homotopy fiber, weak approximation, and the full algebra-category conclusion with mapping-space naturality. Four prerequisite nodes are stated only, with actual logged searches; none is a restatement of the operation-space criterion. No Lean attachment or Mathlib match was found.",
+  "blueprint": "Proof paragraph 2, the finite coefficient mapping-complex adjunction before derived inverse limit, realized through lem-coef-many-object-operad-accessibility and its corrected active-operation localization criterion. Steps 1–4 supply the corrected operadic localization invoked by step 8 of lem-coef-many-object-operad-accessibility; step 5 records its ordinary replacement universal property. The nearest imported ancestor and inherited via chain are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NF-646108c30",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-646108c30 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes in full, every cited statement (lem-coef-operadic-algebra-presentability, def-coef-complete-algebroid, def-coef-infinity-fibrations, def-cbc-enhanced-diagrams-cones), the user lem-coef-many-object-operad-accessibility steps 7-8, the unit sk-prop-sf-biduality-general and the chapter. Source limitation: Gepner-Haugseng arXiv:1312.3178 (A.6.1, A.6.5, E.0.1, E.0.2) is not archived and the service blocks network for reviewers, so I could not open it. The worker's WANTED line and agent proof attribution cover this. I checked every statement on its mathematics instead, using HA 2.3.3 as the analogue. Item statement preserved and matches its user's hypotheses and use. Step 1: Segal conditions make all fibers spaces; the interval argument (a^op = e^op a'^op with endpoints preserved forces e^op = id) is correct and elementary. Step 2: the product lemma's compatibility with f turns the comparison into a product of color equivalences; k=0 contractible. Step 3: equivalences in O_{/fC} lie over identities, so L_f(C,alpha) is the def-cbc homotopy fiber of Op_M(C) -> Op_O(fC), contractible. Step 4: the hypotheses of E.0.2 and A.6.5 match the item. Step 5: naturality, and cores give the mapping-space universal property; not circular. New nodes: (1) def weak approximation: all-arrow inert factorization category, extended through equivalence plus categorical fibration; identity case contractible. (2) active-lift criterion: I checked the iff myself. For active alpha the inert leg lies over an identity, so F is equivalent to L. For general alpha, the minimal-interval factorizations form a reflective subcategory via M's inert cocartesian lifts, equivalent to L at the active part. (3) Segal product: k=0 gives the slice of Q_[0], contractible; the incidence axiom gives the product over contractible vertex factors; arities add, zero blocks kept. (4) weak-approximation algebras: tested on the identity and Delta^op_X -> Assoc. None restates an item clause (D1). Duplicates: rg over the whole DAG and blueprint_refs search found none; the only related node, the user, depends on the item. Route stays in the unit; blueprint from/via/same_as and created fields correct; proof_deps equals the union of uses. A-F all pass. No fixes, no drops, no tool_uses needed."
+ }
 }
