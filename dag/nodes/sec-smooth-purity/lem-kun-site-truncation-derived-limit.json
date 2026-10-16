@@ -25,9 +25,149 @@
   "def-kun-truncations",
   "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $n$, choose a K-injective resolution $E_n\\to I_n$ using [prop-pur-kinjective-resolutions-exist]. The termwise product $\\prod_n I_n$ exists: [lem-weil-pbc-module-sheaves-colimits-forgetful](2) gives sectionwise small limits of module sheaves, and the countable index set is small. By [lem-pc-ringed-space-product-kinjective] this product complex represents a product $P=\\prod_n E_n$ in $D(\\mathcal A)$. Apply clause (1) of [lem-weil-derived-limit-existence] to obtain a distinguished triangle $L\\xrightarrow{p}P\\xrightarrow{1-s}P\\xrightarrow{\\delta}L[1]$. Only clause (1) is used; no exactness of products of module sheaves is assumed.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-ringed-space-product-kinjective",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6P and 0D6M, choice of the derived limit; Derived Categories Tags 0BK6 and 08TC"
+   }
+  },
+  {
+   "text": "The quotient maps defining good lower truncation [def-kun-truncations] satisfy $f_n c_{n+1}=c_n$. Let $a:E\\to P$ be the product lift of $(c_n)_n$. Every projection of $(1-s)a$ is $c_n-f_nc_{n+1}=0$, so $(1-s)a=0$ by uniqueness in the product universal property. Exactness of Hom into the triangle [lem-weil-pbc-hom-into-triangle-exact](ii), with $W=E$, supplies $c:E\\to L$ such that $pc=a$. Write $p_n=\\operatorname{pr}_np$; then $p_nc=c_n$ for every $n$. No uniqueness of $c$ is asserted.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6M, canonical comparison; Derived Categories Remark Tag 0H72 (compatible comparison, not a unique map)"
+   }
+  },
+  {
+   "text": "Compute the successive lower-truncation triangle rather than invoking the upper-truncation triangle. Choose a representative $F$ of $E$, put $a=-n-1$, and take the degreewise surjection $\\tau_{\\ge a}F\\to\\tau_{\\ge a+1}F$ of [def-kun-truncations]. Its kernel $J$ has only two possibly nonzero terms: $J^a=\\operatorname{coker}d_F^{a-1}$ and $J^{a+1}=\\operatorname{im}d_F^a$, with the induced surjective differential. Its kernel in degree $a$ is $\\mathcal H^a(E)$; hence the inclusion $\\mathcal H^a(E)[-a]\\to J$ is a quasi-isomorphism. Applying [lem-weil-pbc-complex-ses-triangle] to $0\\to J\\to\\tau_{\\ge a}F\\to\\tau_{\\ge a+1}F\\to0$ gives the distinguished triangle\n$$\\mathcal H^{-n-1}(E)[n+1]\\longrightarrow E_{n+1}\\xrightarrow{f_n}E_n\\longrightarrow\\mathcal H^{-n-1}(E)[n+2].$$\nThe middle arrow is the specified truncation transition, since it is the same quotient map on the representative.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6M, successive-truncation triangle (Derived Categories Remark 13.12.4); explicit kernel calculation using good truncations"
+   }
+  },
+  {
+   "text": "For every object $V$, evaluation followed by forgetting scalars is additive: kernels and addition are sectionwise in [def-weil-sheaf-of-modules-category]. The source has K-injective resolutions by [prop-pur-kinjective-resolutions-exist]; so does $\\operatorname{Ab}$, by applying that theorem to the one-object, identity-only site with the trivial topology and ring $\\mathbf Z$. Therefore [lem-pc-right-derived-functor-triangulated] applies to $\\Gamma(V,-)$: $R\\Gamma(V,-)$ preserves shifts and distinguished triangles. Apply it to step 3 and take the long exact cohomology sequence [lem-sf-derived-homology-long-exact]. Fix $m\\in\\mathbf Z$ and choose a natural number $N\\geq\\max(0,-m,d-m+1)$. For $n\\geq N$ and $V\\in\\mathcal B$, each of\n$$H^{m+n}(V,\\mathcal H^{-n-1}(E)),\\quad H^{m+n+1}(V,\\mathcal H^{-n-1}(E)),\\quad H^{m+n+2}(V,\\mathcal H^{-n-1}(E))$$\nis zero: the sheaf index is negative and all three section-cohomology indices exceed $d$. In the long exact sequence these are the two outside terms for each of $H^{m-1}(V,f_n)$ and $H^m(V,f_n)$. Both maps are consequently isomorphisms. The same $N$ works for every $V\\in\\mathcal B$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6M, last displayed three vanishing groups; uniform bound of Tag 0D6P"
+   }
+  },
+  {
+   "text": "By [lem-kun-site-rgamma-derived-limit], applying $R\\Gamma(V,-)$ to the triangle of step 1 gives a derived-limit triangle in $D(\\operatorname{Ab})$, with the actual projection maps $R\\Gamma(V,p_n)$. The Milnor short exact sequence [lem-pc-derived-limit-milnor-sequence] is therefore\n$$0\\to R^1\\varprojlim_nH^{m-1}(V,E_n)\\to H^m(V,L)\\to\\varprojlim_nH^m(V,E_n)\\to0.$$\nFor $V\\in\\mathcal B$, step 4 and [lem-pc-derived-limit-eventually-iso] make its left term zero. Projection of the limit on the right to $H^m(V,E_N)$ is an isomorphism: an element at $N$ determines the later entries uniquely by the inverse transition isomorphisms, and the earlier entries by the transition maps. The composite is thus an isomorphism\n$$H^m(V,p_N):H^m(V,L)\\xrightarrow{\\sim}H^m(V,E_N)\\qquad(V\\in\\mathcal B).$$\nThe identification of this composite with the indicated map uses the projections in the cited derived-section triangle and the natural projection map in the Milnor sequence.",
+   "uses": [
+    "lem-kun-site-rgamma-derived-limit",
+    "lem-pc-derived-limit-milnor-sequence",
+    "lem-pc-derived-limit-eventually-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6M and 0D6L, local control of the limit projection; Tags 0D6K and 0BKX, derived-section Milnor sequence"
+   }
+  },
+  {
+   "text": "For any $T\\in D(\\mathcal A)$ let $\\mathscr P_T^m$ be the abelian presheaf $V\\mapsto H^m(V,T)$. Its sheafification is naturally the underlying abelian sheaf of $\\mathcal H^m(T)$. Indeed, represent $T$ by a K-injective complex $I$. The presheaf is the cohomology presheaf of the underlying abelian presheaf complex $I$; exact abelian sheafification, namely [lem-weil-pbc-site-module-presheaf-sheafification-exact] with $R=\\mathbf Z$, commutes with kernels, images and cokernels and fixes the terms $I^r$, which are already sheaves. Its resulting cohomology sheaf is the underlying abelian sheaf of $\\mathcal H^m(I)$ because forgetting module scalars is exact [lem-weil-pbc-module-sheaves-colimits-forgetful](1). All maps used are induced on kernels and cokernels, hence this identification respects maps of complexes. For a derived morphism use a K-injective representative of the target and [lem-weil-pbc-kinjective-hom-derived] to represent it by a chain map; homotopic maps induce the same maps on cohomology. This proves the required naturality also for $p_N$.",
+   "uses": [
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6L, use of Tag 0BKV (cohomology sheaf as sheafification); explicit exact-sheafification argument on the underlying abelian complex"
+   }
+  },
+  {
+   "text": "The presheaf map $\\mathscr P_L^m\\to\\mathscr P_{E_N}^m$ induced by $p_N$ is locally injective and locally surjective. To check either assertion on an object $U$, choose a covering $\\{V_i\\to U\\}$ with $V_i\\in\\mathcal B$ as in the hypothesis. If two sections have the same image, their restrictions to each $V_i$ are equal by injectivity in step 5. Given a target section, restrict it to each $V_i$ and take its unique preimage using surjectivity in step 5. These are precisely the two local conditions of [lem-weil-pbc-site-sheafification-iso-locally-bijective]. That theorem says the sheafified map is an isomorphism. Step 6 identifies it with the underlying abelian map of $\\mathcal H^m(p_N)$, so $\\mathcal H^m(p_N)$ is an isomorphism of module sheaves: the inverse of a bijective linear section map is linear and these inverses commute with restrictions.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6M and 0D6L, detection of the cohomology-sheaf map locally; with a uniform bound, both local injectivity and surjectivity follow"
+   }
+  },
+  {
+   "text": "Since $N\\geq-m$, [def-kun-truncations] identifies $\\mathcal H^m(c_N)$ with the identity on $\\mathcal H^m(E)$. The equation $p_Nc=c_N$ and step 7 give\n$$\\mathcal H^m(c)=\\mathcal H^m(p_N)^{-1}\\mathcal H^m(c_N),$$\nso $\\mathcal H^m(c)$ is an isomorphism. This holds for every integer $m$, even though $N$ was chosen separately for each $m$. To conclude in $D(\\mathcal A)$, choose a complex representing $E$ and a K-injective representative of $L$ by [prop-pur-kinjective-resolutions-exist]. The bijection in [lem-weil-pbc-kinjective-hom-derived] represents $c$ by a chain map. That chain map is a quasi-isomorphism because all its cohomology maps are isomorphisms. It is inverted by the defining localization [def-weil-abstract-derived-category]; hence $c$ is an isomorphism.",
+   "uses": [
+    "def-kun-truncations",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6M, first paragraph and conclusion; Tag 0D6P"
+   }
+  },
+  {
+   "text": "Transport the distinguished triangle $L\\xrightarrow pP\\xrightarrow{1-s}P\\xrightarrow\\delta L[1]$ along the isomorphism $c:E\\xrightarrow{\\sim}L$ from step 8. Its arrows become $pc=a$, $1-s$, and $c[1]^{-1}\\delta$. It is distinguished by invariance under isomorphism of triangles in [def-weil-triangulated-category]. The first arrow has projections $p_nc=c_n$ by step 2. This is exactly the triangle required by [def-weil-derived-limit], with $E$ and its specified truncation maps, rather than merely an abstract isomorphism between the first objects. The derived-limit definition is indexed from 1, so reindexing by the bijection n ↦ n+1 identifies its tower with the present n ≥ 0 tower, preserving every term and transition.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6P, conclusion; derived-limit triangle and transport along the compatible comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-derived-limit-existence",
+  "def-kun-truncations",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-pc-derived-limit-eventually-iso",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-weil-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent-written expansion of the online proofs of Tags 0D6P, 0D6N, 0D6M and 0D6L; no local TeX copy is installed. Uses uniform d directly to obtain transition stabilization and local bijectivity."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -91,10 +231,73 @@
    "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.IsGE",
    "date": "2026-10-16",
    "verdict": "no match: independently checked; cohomological support, ordinary sheafification and Grothendieck category results do not assert reconstruction or preservation of derived products by unbounded sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived limit of truncation tower in derived category of sheaves on a site",
+   "results": "8 hits: CategoryTheory.Sheaf.isLimitMultiforkOfIsLimit, PresheafOfModules.isSheaf_of_isLimit, CategoryTheory.RanIsSheafOfIsCocontinuous.isLimitMultifork, HomologicalComplex.truncGE'.isLimitKernelFork, CategoryTheory.Sheaf.isSheaf_of_isLimit, CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux, CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj, TopCat.isSheaf_of_isLimit",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned ordinary sheaf limits, local injectivity or truncation support results do not state reconstruction of this derived lower-truncation tower."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, homotopyLimit, truncation",
+   "results": "0 hits: ; loogle: unknown identifier 'homotopyLimit'",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned ordinary sheaf limits, local injectivity or truncation support results do not state reconstruction of this derived lower-truncation tower."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived limit triangle product inverse system truncations derived category",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local injectivity on cohomology sheaf sections of the projection from a homotopy inverse limit when hypercohomology towers stabilize on cofinal covers",
+   "results": "8 hits: CategoryTheory.Sheaf.isLocallyInjective_iff_injective, CategoryTheory.Presheaf.isLocallyInjective_of_injective, CategoryTheory.Presheaf.isLocallyInjective_iff_injective_of_separated, CategoryTheory.GrothendieckTopology.W.isLocallyInjective, CategoryTheory.Sheaf.IsLocallyInjective, CategoryTheory.Presheaf.isLocallyInjective_toPlus, CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective, CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned ordinary sheaf limits, local injectivity or truncation support results do not state reconstruction of this derived lower-truncation tower."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, IsIso",
+   "results": "0 hits: ; loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned ordinary sheaf limits, local injectivity or truncation support results do not state reconstruction of this derived lower-truncation tower."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projection from a derived inverse limit of complexes of sheaves is injective on cohomology sheaf sections if degree m hypercohomology maps are injective locally and the degree m minus one tower has zero first derived limit",
+   "results": "8 hits: CochainComplex.isKInjective_of_injective_aux, CochainComplex.cm5b.instInjectiveXIntI, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, CochainComplex.cm5b.instInjectiveXIntMappingConeIdI, CochainComplex.isKInjective_of_injective, CochainComplex.cm5b.instMonoFIntI, CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex, CochainComplex.cm5b.instMonoIntI",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned ordinary sheaf limits, local injectivity or truncation support results do not state reconstruction of this derived lower-truncation tower."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"lim\"",
+   "results": "2 hits: CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit, CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned ordinary sheaf limits, local injectivity or truncation support results do not state reconstruction of this derived lower-truncation tower."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyLimit|derivedLimit|Milnor|leftComplete",
+   "results": "0 hits: ; source subdirectory CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned ordinary sheaf limits, local injectivity or truncation support results do not state reconstruction of this derived lower-truncation tower."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local injectivity of cohomology sheaf sections from a derived inverse limit under vanishing of first derived limit of hypercohomology",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-0bkz",
   "by": "worker",
@@ -111,5 +314,89 @@
    "state": "none"
   }
  },
- "import_flags": []
+ "import_flags": [],
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-site-truncation-derived-limit",
+  "worker": "stage1",
+  "summary": "Statement retained. Wrote the reconstruction proof by product existence, compatible Hom-exactness lift, an explicit successive lower-truncation kernel, uniform stabilization of two hypercohomology towers, Milnor, and exact sheafification/local bijectivity. Reused existing generic nodes throughout; no new nodes and no Mathlib leaf. No exactness of module-sheaf products or unbounded spectral sequence is assumed.",
+  "blueprint": "Expands the first sentence and the missing unbounded abutment justification in ancestor lem-kun-0bkz: establishes its cited Tag 0D6P reconstruction by the local stabilization route of Tags 0D6M/0D6L. The chapter and Kunneth unit route are retained.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site K-injective resolutions, also applied to the one-point Z site for Ab. No node of this unit supplies this general categorical/site tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic small limits and exact forgetting of module scalars, needed for products and cohomology sheafification. No node of this unit supplies this general categorical/site tool."
+   },
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Its statement is for any abelian category, and gives the derived product of K-injective representatives. No node of this unit supplies this general categorical/site tool."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Only generic triangulated clause (1) is used once the derived product exists. No node of this unit supplies this general categorical/site tool."
+   },
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Generic Hom exactness produces the comparison compatible with all truncation projections. No node of this unit supplies this general categorical/site tool."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic SES triangle gives the lower-truncation triangle from an explicitly computed kernel. No node of this unit supplies this general categorical/site tool."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic K-injective right-derived triangulatedness gives shifted section-cohomology exact sequences. No node of this unit supplies this general categorical/site tool."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic cohomology exact sequence applied after derived evaluation. No node of this unit supplies this general categorical/site tool."
+   },
+   {
+    "node": "lem-pc-derived-limit-milnor-sequence",
+    "why": "Group-valued Milnor sequence after the same-unit ringed-site section-limit theorem. No node of this unit supplies this general categorical/site tool."
+   },
+   {
+    "node": "lem-pc-derived-limit-eventually-iso",
+    "why": "Generic vanishing of R1 lim for stabilized towers of abelian groups. No node of this unit supplies this general categorical/site tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "why": "Generic exact sheafification with constant coefficient ring Z, applied to underlying abelian complexes. No node of this unit supplies this general categorical/site tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic chain-map realization of derived morphisms into K-injectives. No node of this unit supplies this general categorical/site tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "why": "Generic local criterion for an abelian-presheaf map to sheafify to an isomorphism. No node of this unit supplies this general categorical/site tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-pc-derived-limit-eventually-iso",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-3c5941a69",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-3c5941a69 (reviewer sub-agent of L); spot-checked: Full delivery, source, DAG dependency, route, edge-case, base-category, and citation checks completed. All nine proof steps are sound; no new nodes or repairs are needed. The report’s WANTED note is stale because the local Stacks sources are present, but this does not affect correctness."
+ }
 }
