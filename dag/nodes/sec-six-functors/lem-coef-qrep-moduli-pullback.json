@@ -25,12 +25,158 @@
  "stmt_deps": [
   "lem-coef-dgcat-model-structure",
   "lem-coef-dg-module-projective-resolution",
+  "lem-coef-dg-module-diagram-classification",
   "lem-coef-dg-module-base-change",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $u:\\mathcal B\\to\\mathcal B_1$, $v:\\mathcal B\\to\\mathcal B_2$, and $w=pu=qv$. All module categories below are taken in enlarged universes. By [lem-coef-dg-module-diagram-classification], applied to each tensor dg category, they have projective model structures with all objects fibrant. A strict $\\mathcal C$-diagram of right modules is the same as a module over $\\mathcal C\\otimes\\mathcal B_i^{\\mathrm{op}}$: the two actions commute with precisely the Koszul sign in the tensor definition. The coend formula and Quillen adjunction of [lem-coef-dg-module-base-change] apply also with the $\\mathcal C$ action retained. Extension in the second variable is computed value by value, since imposing the $\\mathcal B_i$ action relations in the coend leaves the $\\mathcal C$ action unchanged. It sends fiberwise cofibrant quasi-representable modules and their quasi-isomorphisms to modules of the same kind. In fact it preserves cofibrant values and weak equivalences between them and its derived functor sends $h_b$ to $h_{t(b)}$. The composite extension identifications and the square's specified homotopy are the coend associators of that same node.",
+   "uses": [
+    "lem-coef-dg-module-diagram-classification",
+    "lem-coef-dg-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 4, printed pp. 22-23: scalar-extension functoriality and rectification before Sublemma 4.6."
+   }
+  },
+  {
+   "text": "We may compute the nerve using whole-diagram projectively cofibrant modules. Let $\\mathcal V_i$ be the category of all right quasi-representable $\\mathcal C\\otimes\\mathcal B_i^{\\mathrm{op}}$-modules, with only objectwise quasi-isomorphisms as arrows. In the whole-diagram projective model structure take a functorial cofibrant replacement $RT\\to T$. The complexes $\\mathcal C(c,c')$ are projectively cofibrant by [lem-coef-dgcat-model-structure], so the evaluation assertion of [lem-coef-dg-module-base-change] makes every value of $RT$ projectively cofibrant. Replacement preserves quasi-representability because it is an objectwise quasi-isomorphism. Thus replacement lands in $\\mathcal W_i$. Both $\\mathcal W_i\\hookrightarrow\\mathcal V_i$ and the inclusion of whole-diagram cofibrant objects have nerve homotopy inverses induced by $R$: their composites have natural transformations to the respective identity functors supplied by $RT\\to T$. A natural transformation defines a functor from the product with $[1]$ and hence a homotopy of nerves. The class of all quasi-representable objects is closed under weak equivalences in both directions; [lem-coef-model-weak-equivalence-nerve] therefore identifies these nerves with its core in the module localization. In particular paths are derived equivalences of whole diagrams, with all higher homotopies. This argument applies also to $\\mathcal B$ and is natural for derived extension, because extension on whole-diagram cofibrant objects is its left derived functor.",
+   "uses": [
+    "lem-coef-dg-module-diagram-classification",
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-dg-module-base-change",
+    "lem-coef-model-weak-equivalence-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 4, printed pp. 27-28: cofibrant replacement remark before Corollary 4.8; model-moduli path-space comparison on printed p. 25."
+   }
+  },
+  {
+   "text": "Here are the homotopy-limit computations used below, including their evaluation maps. For any of these module model categories, [lem-coef-finite-reedy-localization] for the finite inverse category $1\\to3\\leftarrow2$ constructs homotopy pullbacks as limits of Reedy fibrant replacements and identifies their cones in the enhanced localization. Evaluation at an object, or restriction along a dg functor, preserves objectwise quasi-isomorphisms, projective fibrations and strict limits. Applying it to such a Reedy fibrant replacement therefore computes the corresponding homotopy pullback of evaluated or restricted modules. A strict pullback along a fibration between fibrant objects already computes a homotopy pullback: choose a cofibrant replacement of any test object and a frame on it; its simplicial Hom functor preserves strict limits, and [lem-coef-cosimplicial-frame-mapping] identifies the resulting pullback of Kan complexes along a Kan fibration with the homotopy pullback of mapping spaces. This is the limiting-cone universal property. Consequently a limiting cone gives, for every test module $X$,\n$$\\operatorname{Map}(X,A\\times_Z^h D)\\simeq\\operatorname{Map}(X,A)\\times_{\\operatorname{Map}(X,Z)}^h\\operatorname{Map}(X,D).$$\nThe comparison retains the homotopy between the two composites: a cone from $X$ consists of the two maps and that homotopy, and higher simplices are the same data parametrized by a simplex. This is also obtained from the infinity adjunction $\\operatorname{const}\\dashv\\mathbf R\\operatorname{lim}$ in the Reedy node. Homotopy pullbacks are invariant under equivalences of these coherent cospans, since that adjunction is a functor on the localized diagram category.",
+   "uses": [
+    "lem-coef-dg-module-diagram-classification",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Sublemma 4.7, printed pp. 25-27: module homotopy pullbacks; details supplied by the existing finite-Reedy and frame statements."
+   }
+  },
+  {
+   "text": "Representable right modules are cofibrant and satisfy the derived Yoneda calculation needed here, directly. Evaluation at the identity and $m\\mapsto(f\\mapsto mf)$ give inverse chain maps $\\underline{\\operatorname{Hom}}(h_x,M)=M(x)$. A map $h_x\\to M$ is thus a degree-zero cycle in $M(x)$. Across a degreewise surjective quasi-isomorphism $P\\to M$, lift this element to $y\\in P(x)^0$. Its differential is a degree-one cycle in the kernel. To check that this kernel is acyclic without a separate exact-sequence assertion, let $k$ be any closed kernel element. Injectivity on cohomology gives $k=dt$ in $P$. The element $p(t)$ is closed; surjectivity on cohomology gives a closed $t'$ in $P$ and an element $s$ in $M$ with $p(t)-p(t')=ds$. Lift $s$ degreewise to $\\widetilde s$ in $P$. Then $t-t'-d\\widetilde s$ is in the kernel and its differential is $k$. Apply this to $k=dy$ to find $z$ in degree zero of the kernel with $dz=dy$; $y-z$ is a closed lift. This proves the required lifting property. It also proves $h_x$ homotopically projective, because its Hom complex into any acyclic module is that module evaluated at $x$. By [lem-coef-dg-module-projective-resolution], derived maps from $h_x$ are computed by this actual Hom complex. In particular isomorphisms between $h_x$ and $h_y$ in the module localization correspond exactly to isomorphisms $x\\to y$ in $H^0(\\mathcal B_i)$. The formulas above show that this correspondence is compatible with composition; this assertion is stronger than mere full faithfulness on objects and does not use the downstream bimodule mapping-space theorem.",
+   "uses": [
+    "lem-coef-dg-module-diagram-classification",
+    "lem-coef-dg-module-projective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 3, printed pp. 15-16, discussion after Proposition 3.5; Sublemma 4.7, printed pp. 26-27, reduction to representables."
+   }
+  },
+  {
+   "text": "For any right quasi-representable whole diagram $G$ over $\\mathcal B$, form the natural unit cone and its comparison\n$$\\eta_G:G\\longrightarrow u^*\\mathbf L u_!G\\times^h_{w^*\\mathbf L w_!G}v^*\\mathbf L v_!G.$$\nThese are the derived units and their coherent composition identifications, supplied by the scalar-extension associators and [lem-coef-model-infinity-derived-adjunction]. The coend units take an element to its class with an identity morphism; applying this twice gives the same class as the composite unit under the associator. Hence these are the specified unit cone, not unrelated choices of units. Test $\\eta_G$ at $c\\in\\mathcal C$ and $z=(z_1,z_2)\\in\\mathcal B$. Step 3 permits this evaluation. Derived extension evaluated at $c$ agrees with derived extension of $G(c,-)$: use the whole-diagram replacement in step 2, whose evaluations are cofibrant, and the valuewise coend of step 1. Replace $G(c,-)$ in the localized right-module category by $h_x$, with $x=(x_1,x_2)\\in\\mathcal B$. This is allowed by its quasi-representability and naturality of the unit cone, and no compatible choices as $c$ varies are asserted. By extension of representables and the explicit units in step 4 the evaluated comparison is\n$$\\mathcal B(z,x)\\longrightarrow\\mathcal B_1(z_1,x_1)\\times^h_{\\mathcal B_3(pz_1,px_1)}\\mathcal B_2(z_2,x_2).$$\nThe left side is the strict pullback complex by the definition of the dg-category pullback. Its first leg to the common complex is degreewise surjective since $p$ is a fibration by [lem-coef-dgcat-model-structure]. In the projective model structure on complexes it is a fibration, and all complexes are fibrant. Step 3 proves this comparison a quasi-isomorphism. Thus $\\eta_G$ is an objectwise quasi-isomorphism. Naturality now shows that $\\mathbf L u_!$ and $\\mathbf L v_!$ jointly detect equivalences of quasi-representable diagrams: if both images of a map are equivalences, so is the induced map of their homotopy pullbacks, and the two maps $\\eta$ identify it with the original map.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-dg-module-base-change",
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-dg-module-diagram-classification",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Sublemma 4.7, printed p. 26: reconstruction of G by the unit cone and evaluation on representables."
+   }
+  },
+  {
+   "text": "Apply $\\operatorname{Map}(F,-)$ to $\\eta_G$, for any quasi-representable diagrams $F,G$ over $\\mathcal B$. The limiting-cone formula of step 3 and the derived adjunction of [lem-coef-model-infinity-derived-adjunction] identify the result with\n$$\\operatorname{Map}(F,G)\\simeq\\operatorname{Map}(\\mathbf L u_!F,\\mathbf L u_!G)\\times^h_{\\operatorname{Map}(\\mathbf L w_!F,\\mathbf L w_!G)}\\operatorname{Map}(\\mathbf L v_!F,\\mathbf L v_!G).$$\nThe maps on the right are exactly extension of maps. Indeed the adjunction sends $h$ to $u^*h\\,\\eta_F$, and its inverse is $g\\mapsto\\epsilon\\,\\mathbf L u_!(g)$; the unit/composition equality verified in step 5 identifies the two maps to the middle factor. Restrict this equivalence to those components where both outer maps are equivalences. Extension preserves equivalences, and joint detection from step 5 proves that their preimage consists precisely of the equivalence components of $\\operatorname{Map}(F,G)$. A path between maps never changes whether they are equivalences. By [lem-coef-model-weak-equivalence-nerve] these equivalence components are the path spaces of the four moduli nerves. In the stated path model for a homotopy pullback, a path between two compatible pairs consists of a path in each factor and a homotopy between their induced paths in the base; its higher simplices are the same description with parameters. Thus the displayed equivalence on equivalence components identifies the path space between $F,G$ with the path space between their images in the homotopy pullback. It proves injectivity on components, and isomorphisms on all positive homotopy groups at every image point.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-model-weak-equivalence-nerve",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Sublemma 4.7, printed pp. 25-26: comparison of path spaces; equivalence-component restriction justified using reconstruction."
+   }
+  },
+  {
+   "text": "It remains to hit each component of the target. A point there gives $F_i$ over $\\mathcal B_i$ for $i=1,2$ and a derived equivalence $\\mathbf Lp_!F_1\\simeq\\mathbf Lq_!F_2$ of whole $\\mathcal C$-diagrams over $\\mathcal B_3$, by the core/path interpretation of step 2. We can represent this by actual quasi-isomorphisms $a:p_!F_1\\to F_3\\leftarrow q_!F_2:b$: replace $F_1,F_2$ by whole-diagram cofibrant objects and choose a cofibrant $F_3$ representing the second image; $p_!F_1$ and $q_!F_2$ are cofibrant by scalar extension, all targets are fibrant, and a derived morphism from a cofibrant object to a fibrant one is represented by an actual map by [lem-coef-cosimplicial-frame-mapping]. Choose the map in the component of the given equivalence; it is a quasi-isomorphism: every evaluation cohomology functor inverts quasi-isomorphisms and hence factors through the localization, so an invertible localized class induces isomorphisms on every evaluation cohomology group. The represented path remains the original one, up to a path relative to endpoints, so this replacement does not lose the compatibility datum.\n\nAdjoint to $a,b$ are maps $u^*F_1\\to w^*F_3\\leftarrow v^*F_2$. Define the whole diagram\n$$F=u^*F_1\\times^h_{w^*F_3}v^*F_2$$\nusing the finite inverse Reedy construction, before making any choices at individual $c$. The cone and derived counits give maps $\\mathbf Lu_!F\\to F_1$, $\\mathbf Lv_!F\\to F_2$, and $\\mathbf Lw_!F\\to F_3$. The cone's homotopy makes the two maps to $F_3$ agree up to their specified homotopy. Thus this is a coherent morphism of descent data.",
+   "uses": [
+    "lem-coef-model-weak-equivalence-nerve",
+    "lem-coef-dg-module-base-change",
+    "lem-coef-dg-module-diagram-classification",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-finite-reedy-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Sublemma 4.7, printed pp. 26-27: the category of triples and its glued module; on printed p. 27 correct the second F1 to F2."
+   }
+  },
+  {
+   "text": "Check the assertions about $F$ and these particular maps by evaluating at any $c$. Choose derived identifications $F_i(c,-)\\simeq h_{x_i}$. Step 4 turns the compatibility into an isomorphism $\\theta:p(x_1)\\to q(x_2)$ in $H^0(\\mathcal B_3)$ (combine the two identifications with $F_3(c,-)$). The isomorphism-lifting clause in [lem-coef-dgcat-model-structure] gives an isomorphism $e:x_1\\to x'_1$ in $H^0(\\mathcal B_1)$ with $p(x'_1)=q(x_2)$ and $H^0p(e)=\\theta$. Replace $h_{x_1}$ by $h_{x'_1}$ via this isomorphism. In the derived cospan the compatibility then is the identity on $h_{q(x_2)}$. More explicitly choose closed representatives of the isomorphisms of representables. Equality of their derived classes means their difference is a boundary in the Hom complex by step 4, so there is a chain homotopy between the composites. Such a homotopy is exactly the compatibility datum of the equivalence of the two cospans. The finite-Reedy localization of step 3 identifies their homotopy pullbacks, including their projections.\n\nPut $x=(x'_1,x_2)\\in\\mathcal B$. At any $z\\in\\mathcal B$ this homotopy pullback is\n$$\\mathcal B_1(z_1,x'_1)\\times^h_{\\mathcal B_3(pz_1,qx_2)}\\mathcal B_2(z_2,x_2).$$\nAs in step 5, the first leg is degreewise surjective, so the strict pullback $\\mathcal B(z,x)$ computes it. The canonical map from $h_x$ to this module homotopy pullback is a quasi-isomorphism, naturally in $z$, because it is induced by the two representable projections and the equality $p(x'_1)=q(x_2)$. Thus $F(c,-)\\simeq h_x$ is quasi-representable. Under this identification the counit maps in step 7 are the canonical isomorphisms $u_!h_x=h_{x'_1}$ and $v_!h_x=h_{x_2}$, followed by the chosen derived identifications with $F_1(c,-)$ and $F_2(c,-)$. They are therefore equivalences at every $c$; the same holds for the map to $F_3$. Only this verification is fiberwise: the actual $F$, its $\\mathcal C$ action, the maps and the compatibility homotopy were constructed for whole diagrams in step 7.",
+   "uses": [
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-dg-module-projective-resolution",
+    "lem-coef-dg-module-base-change",
+    "lem-coef-dg-module-diagram-classification",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Sublemma 4.7, printed p. 27: lifting an H0-isomorphism along p and checking the glued module and counits on representables."
+   }
+  },
+  {
+   "text": "Replace the whole module $F$ of step 7 by a functorial whole-diagram projectively cofibrant replacement. Step 2 makes this an object of $\\mathcal W_{\\mathcal C}(\\mathcal B)$; its derived images and cone are unchanged. Step 8 makes its coherent comparison with the original descent datum an equivalence in every factor. This supplies a path in the target homotopy pullback from its image to the originally given point, including the compatibility path, because the cone homotopy of step 7 is retained. Thus every target component is hit. Step 6 proves injectivity on components and isomorphisms on all positive homotopy groups. These two facts say exactly that the comparison is a weak homotopy equivalence, by [def-cbc-enhanced-diagrams-cones]. The comparison's square homotopy is the scalar-extension associator of step 1, since all its cone and adjunction maps used the canonical coend units. This proves the statement with its specified compatibility, rather than merely existence of some equivalence of the two spaces.",
+   "uses": [
+    "lem-coef-dg-module-diagram-classification",
+    "lem-coef-dg-module-base-change",
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-model-weak-equivalence-nerve",
+    "lem-coef-finite-reedy-localization",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Sublemma 4.7, conclusion on printed p. 27; cofibrant replacement remark on printed pp. 27-28 before Corollary 4.8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dg-module-diagram-classification",
+  "lem-coef-dg-module-base-change",
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-model-weak-equivalence-nerve",
+  "lem-coef-finite-reedy-localization",
+  "lem-coef-cosimplicial-frame-mapping",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-dg-module-projective-resolution",
+  "lem-coef-model-infinity-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2: finite enhanced adjunction comparison. Expanded using Toën, The homotopy theory of dg-categories and derived Morita theory, Sublemma 4.7, printed pp. 25-27, and the cofibrant-replacement remark on printed pp. 27-28 (arXiv:math/0408337v7; read online, not archived in the shared literature)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -94,15 +240,66 @@
    "results": "{\"t\": \"2026-10-16T14:12:59Z\", \"tool\": \"grep\", \"query\": \"enriched.*[Kk]an|[Kk]an.*enriched|[Qq]uillen.*[Ee]quivalence|[Dd]wyer|[Bb]isimplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\"], \"digest\": \"80d8c618cea3e9c4\"}",
    "date": "2026-10-16",
    "verdict": "No match. The sole source hit is SingularSet.lean:37, a TODO to prove the geometric realization/singular-set adjunction is a Quillen equivalence; it states none of this node."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?representable|dg.?module.*pullback|moduli.*pullback",
+   "results": "{\"t\": \"2026-10-16T14:48:03Z\", \"tool\": \"grep\", \"query\": \"quasi.?representable|dg.?module.*pullback|moduli.*pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits for the actual query."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-16T14:48:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits for the actual query."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent for moduli of quasi representable differential graded bimodules along a fibration of dg categories",
+   "results": "{\"t\": \"2026-10-16T14:48:04Z\", \"tool\": \"leansearch\", \"query\": \"Descent for moduli of quasi representable differential graded bimodules along a fibration of dg categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.DescendsAlong\", \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"CategoryTheory.MorphismProperty.DescendsAlong.mk\", \"CategoryTheory.Pseudofunctor.DescentData.ofObj\", \"CategoryTheory.MorphismProperty.DescendsAlong.recOn\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.Pseudofunctor.DescentData.iso_hom\", \"CategoryTheory.Pseudofunctor.DescentData.iso\"], \"digest\": \"a94324a7249a14a4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: MorphismProperty/Descent.lean:28-37 assumes a morphism-property descent condition; Sites/Descent/IsStack.lean:70-74 assumes a Grothendieck stack condition for ordinary category values. Stability of fibrations under base change is a model-category closure axiom, not this descent assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nerve of quasi representable dg module diagrams takes pullbacks of dg categories along fibrations to homotopy pullbacks",
+   "results": "{\"t\": \"2026-10-16T14:48:11Z\", \"tool\": \"leanfinder\", \"query\": \"The nerve of quasi representable dg module diagrams takes pullbacks of dg categories along fibrations to homotopy pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.Arrow.cechNerve_map\", \"CategoryTheory.Arrow.mapCechNerve_app\", \"CategoryTheory.Arrow.cechNerve_obj\", \"CategoryTheory.nerveMap\", \"CategoryTheory.Arrow.mapCechNerve\"], \"digest\": \"0f1b89c740d817b8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Quasicategory/Nerve.lean:28-34 only asserts that an ordinary category nerve is a quasicategory; SimplicialSet/Nerve.lean:53-75 defines nerveMap and nerveFunctor, and CechNerve constructs ordinary categorical nerves. None supplies this dg-module theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classifying spaces of representable enriched module diagrams preserve homotopy fiber products of enriched categories",
+   "results": "{\"t\": \"2026-10-16T14:49:14Z\", \"tool\": \"leanfinder\", \"query\": \"Classifying spaces of representable enriched module diagrams preserve homotopy fiber products of enriched categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.HasConicalPullbacks\", \"CategoryTheory.Enriched.HasConicalPullback\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.Enriched.HasConicalProduct\", \"CategoryTheory.Enriched.HasConicalProducts\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor\", \"CategoryTheory.Enriched.FunctorCategory.HasFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom\"], \"digest\": \"ae44673f5b6fddaf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: HasConicalPullback(s) (Enriched/Limits/HasConicalPullbacks.lean:25-41) defines ordinary conical limits; NerveAdjunction.lean:16-36 describes ordinary nerve and homotopy-category functors. These do not establish homotopy descent for quasi-representable dg modules."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dgcat-bimodule-mapping-space",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-qrep-moduli-pullback",
+  "worker": "stage1",
+  "summary": "Checked the whole statement against Toën Sublemma 4.7 and the scalar-extension conventions. Proved reconstruction by unit cones, the full path-space comparison, and essential surjectivity by a whole-diagram homotopy pullback; representables and the relevant maps are calculated explicitly. Reused existing projective-model, base-change, weak-equivalence-nerve, finite-Reedy, derived-adjunction and frame nodes. No new nodes, no circular use of the parent mapping-space theorem or of downstream derived Yoneda. Corrected the source typo F1 for F2 in the gluing formula. Added the projective-model statement dependency because projective cofibrancy was previously cited only indirectly. No statement change. Maintainer reader corrected the systematic printed-page offsets in the proof citations against arXiv:math/0408337v7; no mathematical text or dependency changed.",
+  "blueprint": "Proof paragraph 2: gluing the finite enhanced adjunction comparison; descent of the bimodule moduli in the target argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N7-6523e4305",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-6523e4305 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and route. All nine proof steps pass; no new nodes, cycles, or target weakening found. Corrected systematic Toën printed-page references in the whole-node fix. Detailed mathematical, coefficient-category, base-change, and edge-case checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
