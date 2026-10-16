@@ -9,7 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 public import Sheaf.CategoryTheory.ProperFaceMatchingObject
 import Sheaf.AlgebraicGeometry.SemiRepresentableCoveringPermanence
 import Sheaf.CategoryTheory.SimplicialMatchingObject
-import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
+import all Sheaf.AlgebraicGeometry.HypercoverOneMoreSimplex
+import all Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverGeometry
 
 /-!
 # Matching schemes and one-member semi-representable families
@@ -26,6 +27,158 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped Simplicial
 
 namespace AlgebraicGeometry.Scheme
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
+private noncomputable def inclLimit {C : Type*} [Category* C]
+    {J : Type*} [Category* J] {F : J ⥤ C} {c : Cone F} (hc : IsLimit c) :
+    IsLimit ((FormalCoproduct.incl.{w} C).mapCone c) := by
+  let d (s : Cone (F ⋙ FormalCoproduct.incl.{w} C)) (i : s.pt.I) : Cone F :=
+    { pt := s.pt.obj i
+      π := { app := fun a ↦ (s.π.app a).φ i
+             naturality := fun a b f ↦ by
+               have h := congrArg
+                 (fun g : s.pt ⟶ (FormalCoproduct.incl C).obj (F.obj b) ↦
+                   (show s.pt.obj i ⟶ F.obj b from g.φ i)) (s.w f)
+               simpa [Functor.mapCone, FormalCoproduct.incl] using h.symm } }
+  refine { lift := fun s ↦ ⟨fun _ ↦ PUnit.unit, fun i ↦ hc.lift (d s i)⟩
+           fac := ?_
+           uniq := ?_ }
+  · intro s a
+    apply FormalCoproduct.hom_ext (by rfl)
+    intro i
+    simp [Functor.mapCone, FormalCoproduct.incl, d]
+  · intro s m hm
+    apply FormalCoproduct.hom_ext (by funext i; exact Subsingleton.elim (α := PUnit) _ _)
+    intro i
+    apply hc.hom_ext
+    intro a
+    have h := congrArg
+      (fun g : s.pt ⟶ (FormalCoproduct.incl C).obj (F.obj a) ↦
+        (show s.pt.obj i ⟶ F.obj a from g.φ i)) (hm a)
+    simpa [Functor.mapCone, FormalCoproduct.incl] using h
+private theorem etaleFaces (X : Scheme.{u}) (U : SimplicialObject X.Etale) (n : ℕ) :
+    ∃ (c : Cone (U.properFaceDiagram n)) (μ : U _⦋n⦌ ⟶ c.pt),
+      (n = 0 → c.pt = Etale.mk (𝟙 X)) ∧ Nonempty (IsLimit c) ∧
+      (∀ a : SimplicialObject.ProperFaceCategory n,
+        μ ≫ c.π.app (op a) = U.map a.obj.hom.op) := by
+  classical
+  rcases n with _ | _ | n
+  · let T := Etale.mk (𝟙 X)
+    have ht : IsTerminal T :=
+      Over.mkIdTerminal.isTerminalOfObj (Etale.forget X) T
+    let c : Cone (U.properFaceDiagram 0) :=
+      ⟨T, { app := fun a ↦ (Nat.not_lt_zero _ a.unop.property.1).elim
+            naturality := fun a b f ↦ (Nat.not_lt_zero _ a.unop.property.1).elim }⟩
+    refine ⟨c, ht.from _, fun _ ↦ rfl, ⟨?_⟩, ?_⟩
+    · exact { lift := fun s ↦ ht.from s.pt
+              fac := fun s a ↦ (Nat.not_lt_zero _ a.unop.property.1).elim
+              uniq := fun s m hm ↦ ht.hom_ext _ _ }
+    · intro a
+      exact (Nat.not_lt_zero _ a.property.1).elim
+  · obtain ⟨c, hc, _, _, μ, hμ, _⟩ := SimplicialObject.matching_object_one U
+    obtain ⟨π, hπ, _, hfac, _⟩ :=
+      (SimplicialObject.matching_object_proper_faces_one U c hc.some μ hμ).2
+    exact ⟨Cone.mk c.pt π, μ, by omega, hπ, hfac⟩
+  · obtain ⟨c, hc, _, _, _, μ, hμ, _⟩ :=
+      SimplicialObject.matching_object_succ_succ U n
+    obtain ⟨π, hπ, _, hfac, _⟩ :=
+      (SimplicialObject.matching_object_proper_faces_succ_succ U n c hc.some μ hμ).2
+    exact ⟨Cone.mk c.pt π, μ, by omega, hπ, hfac⟩
+
+private theorem srFaces (X : Scheme.{u})
+    (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (n : ℕ) :
+    ∃ π : (Functor.const _).obj (semiRepresentableMatchingObject K n) ⟶
+        K.properFaceDiagram n,
+      Nonempty (IsLimit (Cone.mk _ π)) ∧
+      (∀ a : SimplicialObject.ProperFaceCategory n,
+        semiRepresentableMatchingMap K n ≫ π.app (op a) = K.map a.obj.hom.op) := by
+  classical
+  rcases n with _ | _ | n
+  · let T := Etale.mk (𝟙 X)
+    have ht : IsTerminal ((FormalCoproduct.incl X.Etale).obj T) :=
+      FormalCoproduct.isTerminalIncl _
+        (Over.mkIdTerminal.isTerminalOfObj (Etale.forget X) T)
+    let π : (Functor.const _).obj (semiRepresentableMatchingObject K 0) ⟶
+        K.properFaceDiagram 0 :=
+      { app := fun a ↦ (Nat.not_lt_zero _ a.unop.property.1).elim
+        naturality := fun a b f ↦ (Nat.not_lt_zero _ a.unop.property.1).elim }
+    refine ⟨π, ⟨?_⟩, fun a ↦ (Nat.not_lt_zero _ a.property.1).elim⟩
+    exact { lift := fun s ↦ ht.from s.pt
+            fac := fun s a ↦ (Nat.not_lt_zero _ a.unop.property.1).elim
+            uniq := fun s m hm ↦ ht.hom_ext _ _ }
+  · let c : Fan (fun _ : Fin 2 ↦ K _⦋0⦌) := limit.cone (Discrete.functor (fun _ : Fin 2 ↦ K _⦋0⦌))
+    have hμ : ∀ i : Fin 2, semiRepresentableMatchingMap K 1 ≫ c.proj i = K.δ i := by
+      intro i
+      change (Pi.lift fun i ↦ K.δ i) ≫ Pi.π _ i = _
+      simp
+    obtain ⟨π, hπ, _, hfac, _⟩ :=
+      (SimplicialObject.matching_object_proper_faces_one K c (limit.isLimit _)
+        (semiRepresentableMatchingMap K 1) hμ).2
+    exact ⟨π, hπ, hfac⟩
+  · let c : Cone (SimplicialObject.matchingBoundaryIndex K n).multicospan :=
+      Multiequalizer.multifork _
+    have hμ : ∀ i : Fin (n + 3), semiRepresentableMatchingMap K (n + 2) ≫
+        c.π.app (WalkingMulticospan.left i) = K.δ i := by
+      intro i
+      simp [semiRepresentableMatchingMap, c]
+    obtain ⟨π, hπ, _, hfac, _⟩ :=
+      (SimplicialObject.matching_object_proper_faces_succ_succ K n c (limit.isLimit _)
+        (semiRepresentableMatchingMap K (n + 2)) hμ).2
+    exact ⟨π, hπ, hfac⟩
+private theorem geometry (X : Scheme.{u}) (U : SimplicialObject X.Etale) :
+    ∃ (M : ℕ → X.Etale)
+      (π : ∀ n : ℕ, (Functor.const _).obj (M n) ⟶ U.properFaceDiagram n)
+      (μ : ∀ n : ℕ, U _⦋n⦌ ⟶ M n),
+      M 0 = Etale.mk (𝟙 X) ∧
+      (∀ n : ℕ,
+        Nonempty (IsLimit ((Etale.forget X).mapCone (Cone.mk (M n) (π n))))) ∧
+      (∀ (n : ℕ) (a : SimplicialObject.ProperFaceCategory n),
+        μ n ≫ (π n).app (op a) = U.map a.obj.hom.op) ∧
+      (∀ n : ℕ,
+        ∃ ψ : semiRepresentableMatchingObject (U ⋙ FormalCoproduct.incl.{w} X.Etale) n ≅
+            (FormalCoproduct.incl.{w} X.Etale).obj (M n),
+          semiRepresentableMatchingMap (U ⋙ FormalCoproduct.incl.{w} X.Etale) n ≫ ψ.hom =
+            (FormalCoproduct.incl.{w} X.Etale).map (μ n)) := by
+  classical
+  choose c μ hzero hlim hfac using etaleFaces X U
+  refine ⟨fun n ↦ (c n).pt, fun n ↦ (c n).π, μ, hzero 0 rfl, ?_, hfac, ?_⟩
+  · intro n
+    let := ProEt.properFace_finCategory n
+    exact ⟨isLimitOfPreserves (Etale.forget X) (hlim n).some⟩
+  · intro n
+    let F := FormalCoproduct.incl.{w} X.Etale
+    obtain ⟨πK, hK, hKfac⟩ := srFaces X (U ⋙ F) n
+    let q : Cone (SimplicialObject.properFaceDiagram (U ⋙ F) n) := F.mapCone (c n)
+    have hq : IsLimit q := inclLimit (hlim n).some
+    let b := hK.some.conePointUniqueUpToIso hq
+    refine ⟨b, ?_⟩
+    apply hq.hom_ext
+    intro a
+    rw [Category.assoc, IsLimit.conePointUniqueUpToIso_hom_comp]
+    change _ = F.map (μ n) ≫ F.map ((c n).π.app a)
+    rw [← F.map_comp, hfac]
+    exact hKfac a.unop
+private theorem inclCov {X : Scheme.{u}} {A B : X.Etale} (f : A ⟶ B) :
+    IsSemiRepresentableCovering ((FormalCoproduct.incl.{w} X.Etale).map f) ↔
+      Surjective f.left := by
+  constructor
+  · intro h
+    have hh := (ofArrows_mem_smallEtaleTopology_iff _).mp (h PUnit.unit)
+    constructor
+    intro y
+    have hy : y ∈ (Set.univ : Set B.left) := Set.mem_univ _
+    rw [← hh] at hy
+    simp only [Set.mem_iUnion, Set.mem_range] at hy
+    obtain ⟨i, x, hx⟩ := hy
+    exact ⟨x, by simpa [FormalCoproduct.incl] using hx⟩
+  · intro h j
+    apply (ofArrows_mem_smallEtaleTopology_iff _).mpr
+    ext y
+    simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
+    obtain ⟨x, hx⟩ := h.surj y
+    refine ⟨⟨PUnit.unit, Subsingleton.elim (α := PUnit) _ _⟩, x, ?_⟩
+    simpa [FormalCoproduct.incl] using hx
 
 /-- Matching objects of one-member families are their scheme-theoretic matching schemes.
 A simplicial object of `X.Etale` is exactly an augmented simplicial `X`-scheme all of whose
@@ -78,6 +231,28 @@ theorem sr_matching_object_one_member (X : Scheme.{u}) (U : SimplicialObject X.E
             Surjective (μ n).left) ∧
       (IsSemiRepresentableHypercover (U ⋙ FormalCoproduct.incl.{w} X.Etale) ↔
         ∀ n : ℕ, Etale (μ n).left ∧ Surjective (μ n).left) := by
-  sorry
+  obtain ⟨M, π, μ, hM0, hlim, hcomp, hiso⟩ := geometry X U
+  have hcov (n : ℕ) :
+      IsSemiRepresentableCovering
+        (semiRepresentableMatchingMap (U ⋙ FormalCoproduct.incl.{w} X.Etale) n) ↔
+          Surjective (μ n).left := by
+    obtain ⟨ψ, hψ⟩ := hiso n
+    constructor
+    · intro h
+      apply (inclCov (μ n)).mp
+      rw [← hψ]
+      exact (semiRepresentableCovering_comp_baseChange _ h).1 _ (covering_of_iso ψ)
+    · intro h
+      have hh := (inclCov.{w} (μ n)).mpr h
+      rw [← hψ] at hh
+      have hi := (semiRepresentableCovering_comp_baseChange _ hh).1 _
+        (covering_of_iso ψ.symm)
+      simpa using hi
+  refine ⟨M, π, μ, hM0, hlim, hcomp, hiso, hcov, ?_⟩
+  constructor
+  · intro h n
+    exact ⟨inferInstance, (hcov n).mp (h n)⟩
+  · intro h n
+    exact (hcov n).mpr (h n).2
 
 end AlgebraicGeometry.Scheme

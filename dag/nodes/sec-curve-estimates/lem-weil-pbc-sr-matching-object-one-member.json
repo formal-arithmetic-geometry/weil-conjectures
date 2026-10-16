@@ -28,106 +28,97 @@
  ],
  "proof": [
   {
-   "text": "(Finite limits in $X_{\\Et}$ and in schemes over $X$.) By [lem-weil-pbc-etale-base-change-finite-limits] (2), applied to $V=X$, the category $X_{\\Et}$ [def-weil-pbc-etale-site] has the final object $\\mathrm{id}_X$, and for morphisms $W_1\\to W\\leftarrow W_2$ of $X_{\\Et}$ the scheme-theoretic fibre product $W_1\\times_WW_2$ [def-pc-fibre-product], with its map to $X$, is etale over $X$ and a fibre product in $X_{\\Et}$; hence $X_{\\Et}$ has finite limits by [lem-weil-pbc-finite-limits-from-terminal-pullbacks] (1). Let $\\mathrm{Sch}/X$ be the category of schemes over $X$ with $X$-morphisms, and $j:X_{\\Et}\\to\\mathrm{Sch}/X$ the inclusion (the morphisms of $X_{\\Et}$ are all $X$-morphisms). $j$ carries final objects to final objects: a final object of $X_{\\Et}$ is isomorphic to $\\mathrm{id}_X$, and $\\mathrm{id}_X$ is final in $\\mathrm{Sch}/X$ (the only $X$-morphism $T\\to X$ is the structure morphism). $j$ carries fibre product squares to fibre product squares: a fibre product square in $X_{\\Et}$ is isomorphic to the one of $W_1\\times_WW_2$, and $W_1\\times_WW_2$ is a fibre product in $\\mathrm{Sch}/X$, because for an $X$-scheme $T$ a pair of morphisms $T\\to W_1$, $T\\to W_2$ agreeing in $W$ consists of $X$-morphisms as soon as one of them is one, and the induced $T\\to W_1\\times_WW_2$ is then an $X$-morphism. By [lem-weil-pbc-finite-limits-from-terminal-pullbacks] (2), $j$ preserves finite limits. Finally every $U_n$ is an object of $X_{\\Et}$ and every $U(\\varphi)$ an $X$-morphism, so $U$ is also a simplicial object $U^{\\mathrm{et}}$ of $X_{\\Et}$ [def-weil-pbc-simplicial-object], with $j\\circ U^{\\mathrm{et}}=U$.",
+   "text": "Construct a limiting proper-face cone in X.Etale in each degree. In degree zero use id_X and the empty diagram. In degree one use matching_object_one and matching_object_proper_faces_one. In degree n+2 use matching_object_succ_succ and matching_object_proper_faces_succ_succ. In every case the chosen matching map has the prescribed components.",
    "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-simplicial-matching-object",
+    "lem-weil-pbc-matching-object-proper-faces",
     "def-weil-pbc-etale-site",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
     "def-weil-pbc-simplicial-object"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Lemma 01G2 (lemma-coprod-prod-SR), statement on SR(C, X): finite limits of C/X from the final object and fibre products; categories.tex Lemma 002O (lemma-finite-limits-exist)"
+    "place": "Simplicial Methods, Tag 0186; Tag 01G2"
    }
   },
   {
-   "text": "(Part (1) and the matching map.) For $n=0$, $M_0(U)=X$ with $\\mathrm{id}_X$, which is etale [lem-weil-pbc-etale-composition-cancellation] (1) (an identity is an open immersion), and $\\mu^U_0$ is the augmentation. Let $n\\geq1$. By step 1 and [lem-weil-pbc-simplicial-matching-object] (1),(3) for $\\mathcal C=X_{\\Et}$, the matching object $M'_n=M_n(U^{\\mathrm{et}})$ of $X_{\\Et}$ with projections $\\mathrm{pr}_i$ and matching morphism $\\mu'_n$ exists. By [lem-weil-pbc-matching-object-proper-faces] (2),(3) for $\\mathcal C=X_{\\Et}$, $(M'_n,(\\pi_\\delta)_\\delta)$ is a limit cone of the diagram $P_n(U^{\\mathrm{et}})$ indexed by the injective order-preserving $\\delta:[k]\\to[n]$ with $k<n$ (these are exactly the injective non-identity ones), and $\\pi_\\delta\\circ\\mu'_n=U(\\delta)$. The diagram $j\\circ P_n(U^{\\mathrm{et}})$ is the diagram in $\\mathrm{Sch}/X$ defining $M_n(U)$ [def-weil-pbc-finite-split-hypercover]; since $j$ preserves finite limits (step 1) and $\\mathcal I_n$ is finite, $(M'_n,(\\pi_\\delta))$ is a limit of it in $\\mathrm{Sch}/X$. So $M_n(U)$ exists, and (limits being unique up to unique isomorphism compatible with the projections) we may take $M_n(U)=M'_n$ with the projections $\\pi_\\delta$; its structure morphism to $X$ is etale since $M'_n$ is an object of $X_{\\Et}$. This is (1). The matching map $\\mu^U_n$ is the unique $X$-morphism with $\\delta$-components $U(\\delta)$; since $\\pi_\\delta\\circ\\mu'_n=U(\\delta)$, $\\mu^U_n=\\mu'_n$.",
+   "text": "Reuse the proved private properFace_finCategory construction from Sheaf.AlgebraicGeometry.ProEtaleAffineAcyclicHypercoverGeometry via import all. It supplies finiteness of the proper-face category and its homs. The inclusion X.Etale→Over X preserves finite limits, so the cone remains limiting over X. Only this helper is used from the geometry module, not its affine hypercover theorem.",
    "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-simplicial-matching-object",
-    "lem-weil-pbc-matching-object-proper-faces",
-    "def-weil-pbc-finite-split-hypercover"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 0186 (lemma-formula-limit) and its proof, for the comparison of the face diagram with the codimension-1/2 diagram"
-   }
-  },
-  {
-   "text": "(One-member families are closed under finite limits.) Let $\\iota:X_{\\Et}\\to\\mathrm{SR}(X)$ be the functor $T\\mapsto\\{T\\}$, $h\\mapsto(\\mathrm{id},(h))$ of [def-weil-pbc-formal-coproduct] (with $\\mathrm{SR}(X)=\\mathrm{SR}(X_{\\Et})$ by [def-weil-pbc-semi-representable-object] (1)). By [lem-weil-pbc-semi-representable-finite-limits] (1) for $\\mathcal C=X_{\\Et}$, $\\iota(\\mathrm{id}_X)=\\{\\mathrm{id}_X\\}$ is final in $\\mathrm{SR}(X)$; as every final object of $X_{\\Et}$ is isomorphic to $\\mathrm{id}_X$, $\\iota$ carries final objects to final objects. For morphisms $A\\to S\\leftarrow B$ of $X_{\\Et}$, [lem-weil-pbc-semi-representable-finite-limits] (2) with one-point index sets $I=J=K$ says that the one-member family $\\{A\\times_SB\\}$ (indexed by the single pair) with the projections $(\\mathrm{id},(p_1))=\\iota(p_1)$, $(\\mathrm{id},(p_2))=\\iota(p_2)$ is a fibre product of $\\iota(A)\\to\\iota(S)\\leftarrow\\iota(B)$ in $\\mathrm{SR}(X)$; since fibre products are unique up to isomorphism, $\\iota$ carries every fibre product square of $X_{\\Et}$ to a fibre product square. By step 1 and [lem-weil-pbc-finite-limits-from-terminal-pullbacks] (2), $\\iota$ preserves finite limits.",
-   "uses": [
-    "def-weil-pbc-formal-coproduct",
-    "def-weil-pbc-semi-representable-object",
-    "lem-weil-pbc-semi-representable-finite-limits",
-    "lem-weil-pbc-finite-limits-from-terminal-pullbacks"
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover-geometry"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Lemma 01G2 (lemma-coprod-prod-SR), proofs of (3) and (6): the fibre product and the final object of SR(C) are computed memberwise, so a fibre product of one-member families has one member"
+    "place": "Tag 01G2; finite limits of the small etale category"
    }
   },
   {
-   "text": "(Part (2).) By its definition $K=\\iota\\circ U^{\\mathrm{et}}$. For $n=0$, $M_0(K)=\\{\\mathrm{id}_X\\}=\\{M_0(U)\\}$ and $\\mu_0$ is the unique morphism $\\{U_0\\}\\to\\{\\mathrm{id}_X\\}$, namely $(\\mathrm{id},(U_0\\to X))=\\iota(\\mu^U_0)$. Let $n\\geq1$. The diagram $D_n(K)$ of [lem-weil-pbc-simplicial-matching-object] defining $M_n(K)$ [def-weil-pbc-semi-representable-object] (4) is $\\iota\\circ D_n(U^{\\mathrm{et}})$ (same index category, objects $\\{U_{n-1}\\}$, $\\{U_{n-2}\\}$, arrows $\\iota(d_i)$). By step 3, $(\\{M'_n\\},(\\iota(\\mathrm{pr}_i))_i)$ is a limit of $D_n(K)$, so by [lem-weil-pbc-simplicial-matching-object] (1) there is a unique isomorphism $\\psi:M_n(K)\\to\\{M'_n\\}=\\{M_n(U)\\}$ with $\\iota(\\mathrm{pr}_i)\\circ\\psi=\\mathrm{pr}^K_i$ for all $i$. Both $\\psi\\circ\\mu_n$ and $\\iota(\\mu'_n)$ are morphisms $K_n\\to\\{M'_n\\}$ whose composites with $\\iota(\\mathrm{pr}_i)$ are $d^K_i=\\iota(d_i)$ (as $\\mathrm{pr}_i\\circ\\mu'_n=d_i$); by the bijection of [lem-weil-pbc-simplicial-matching-object] (2) (for the limit $\\{M'_n\\}$) they are equal. By step 2, $\\iota(\\mu'_n)=(\\mathrm{id},(\\mu^U_n))$. This is (2).",
+   "text": "The singleton inclusion sends any limiting cone to a limiting cone. For an arbitrary cone of formal families, each component of its vertex gives a cone in the original category. Apply the original limiting lift to each component. The factorization and uniqueness equations hold componentwise. No terminal-and-pullback preservation argument is required.",
    "uses": [
-    "lem-weil-pbc-simplicial-matching-object",
-    "def-weil-pbc-semi-representable-object"
+    "def-weil-pbc-formal-coproduct"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Lemma 0186 (lemma-formula-limit): the matching object is determined by the functor of compatible tuples of faces"
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 01G2, memberwise universal properties"
    }
   },
   {
-   "text": "(Part (3).) First, an isomorphism $(\\beta,(f_i)):\\{A_i\\}_{i\\in I}\\to\\{B_j\\}_{j\\in J}$ of $\\mathrm{SR}(X)$ with inverse $(\\beta',(g_j))$ is a covering: the composition rule of [def-weil-pbc-formal-coproduct] gives $\\beta'\\circ\\beta=\\mathrm{id}_I$, $\\beta\\circ\\beta'=\\mathrm{id}_J$, $g_{\\beta(i)}\\circ f_i=\\mathrm{id}$ and $f_{\\beta'(j)}\\circ g_j=\\mathrm{id}$, so for each $j$ the family $\\{f_i:\\beta(i)=j\\}$ is the single isomorphism $f_{\\beta'(j)}$, which is surjective and etale (an isomorphism is an open immersion, [lem-weil-pbc-etale-composition-cancellation] (1)), hence a covering family of $X_{\\Et}$ [def-weil-pbc-etale-site]; so it is a covering by [def-weil-pbc-semi-representable-object] (3). By step 4, $\\iota(\\mu^U_n)=\\psi\\circ\\mu_n$ and $\\mu_n=\\psi^{-1}\\circ\\iota(\\mu^U_n)$ with $\\psi,\\psi^{-1}$ coverings; by [lem-weil-pbc-semi-representable-covering-permanence] (1), $\\mu_n$ is a covering iff $\\iota(\\mu^U_n)$ is. By [def-weil-pbc-semi-representable-object] (3), $\\iota(\\mu^U_n)=(\\mathrm{id},(\\mu^U_n))$ is a covering iff the one-member family $\\{\\mu^U_n:U_n\\to M_n(U)\\}$ is a covering family of $X_{\\Et}$, i.e. iff $\\mu^U_n$ is etale and surjective [def-weil-pbc-etale-site]. As $U_n$ and $M_n(U)$ are etale over $X$ (part (1)) and $\\mu^U_n$ is an $X$-morphism, $\\mu^U_n$ is etale by [lem-weil-pbc-etale-composition-cancellation] (3). So $\\mu_n$ is a covering iff $\\mu^U_n$ is surjective. This is (3).",
+   "text": "The recorded SR matching objects themselves have limiting proper-face cones: in degree zero the terminal family, in degree one the recorded product, and in degree n+2 the recorded multiequalizer. Apply the proper-face comparison to their canonical matching maps. Limit uniqueness compares these cones with the singleton image of the previously constructed etale cone. Equality after every projection proves the matching-map equation.",
    "uses": [
-    "def-weil-pbc-formal-coproduct",
-    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-matching-object-proper-faces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0186 and Definition 01G5"
+   }
+  },
+  {
+   "text": "Reuse the proved private covering_of_iso theorem from Sheaf.AlgebraicGeometry.HypercoverOneMoreSimplex via import all, rather than copying it or covering_of_split_epi. Covering permanence transports the matching covering through the comparison isomorphism and its inverse. For a singleton map the small etale topology criterion says exactly that its underlying scheme map is surjective. Every morphism of X.Etale is etale by cancellation. Only the covering helper is used from the one-more-simplex module, not its main theorem.",
+   "uses": [
+    "lem-weil-pbc-semi-representable-covering-permanence",
     "def-weil-pbc-etale-site",
-    "def-weil-pbc-semi-representable-object",
-    "lem-weil-pbc-semi-representable-covering-permanence"
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-hypercover-one-more-simplex"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Definition 01G3 (definition-covering-SR) of coverings in SR(C, X), for one-member families"
+    "place": "Definition 01G3 and Lemma 01G4"
    }
   },
   {
-   "text": "(Consequence.) By [def-weil-pbc-semi-representable-object] (5), $K$ is a hypercover of $X$ in $\\mathrm{SR}(X)$ iff $\\mu_n$ is a covering for every $n\\geq0$, iff (step 5) $\\mu^U_n$ is surjective for every $n$; since every $\\mu^U_n$ is etale (step 5), this says that every $\\mu^U_n$ is a surjective etale morphism, i.e. an etale covering.",
+   "text": "Unfold IsSemiRepresentableHypercover degree by degree, use the covering equivalence, and insert the etaleness instance for each matching map.",
    "uses": [
     "def-weil-pbc-semi-representable-object"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Definition 01G5 (definition-hypercovering)"
+    "place": "Definition 01G5"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "def-weil-pbc-etale-site",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
-  "def-weil-pbc-simplicial-object",
-  "lem-weil-pbc-etale-composition-cancellation",
   "lem-weil-pbc-simplicial-matching-object",
   "lem-weil-pbc-matching-object-proper-faces",
-  "def-weil-pbc-finite-split-hypercover",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-simplicial-object",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-proetale-affine-acyclic-hypercover-geometry",
   "def-weil-pbc-formal-coproduct",
   "def-weil-pbc-semi-representable-object",
-  "lem-weil-pbc-semi-representable-finite-limits",
-  "lem-weil-pbc-semi-representable-covering-permanence"
+  "lem-weil-pbc-semi-representable-covering-permanence",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-hypercover-one-more-simplex"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/hypercovering.tex",
-  "place": "Lemma 01G2 (lemma-coprod-prod-SR) and Definitions 01G3, 01G5, with simplicial.tex Lemma 0186 (lemma-formula-limit); Stacks states no lemma comparing the matching objects of one-member families with matching schemes, the argument is assembled by the worker from these places"
+  "place": "R1, 2026-10-16 repair: Tags 01G2, 01G3, 01G4, 01G5 and simplicial.tex Tag 0186. The singleton limit comparison is proved directly from component cones; all matching comparisons and covering transport are implemented in Lean. The existing private covering_of_iso and properFace_finCategory helpers are reused through import all; the duplicate local declarations have been removed."
  },
  "mathlib_searches": [
   {
@@ -200,5 +191,15 @@
   "group": "K1",
   "result": "pass",
   "note": "X arbitrary scheme, U simplicial object of X.Etale (all terms etale, augmented); M_n, pi_n cones over properFaceDiagram limiting in Over X with M_0 = id_X, mu_n with face components U(delta); K = U ⋙ FormalCoproduct.incl; (1) M_n in X.Etale, (2) iso psi of semiRepresentableMatchingObject with incl(M_n) carrying the matching map to incl(mu_n), (3) covering iff Surjective, final iff with IsSemiRepresentableHypercover; all n incl. 0; stmt_deps gained only the landed proper-faces node; compile clean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261016T003201-L-3927647",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
