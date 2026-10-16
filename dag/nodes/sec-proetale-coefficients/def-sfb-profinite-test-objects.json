@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-profinite-test-objects",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The test objects $X[S]$",
@@ -13,33 +13,158 @@
   "place": "node def-sfb-profinite-test-objects, order 1539"
  },
  "stmt_deps": [
-  "def-sfb-profinite-to-proetale"
+  "def-sfb-profinite-to-proetale",
+  "def-weil-pbc-small-proetale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-scheme-coproduct-family"
  ],
  "proof": [
   {
-   "text": "Weakly étale morphisms are stable under base change. So base change along\n$\\pi_X$ is a functor $(\\Spec\\Z)_{\\mathrm{proét}}\\to X_{\\mathrm{proét}}$\n([def-weil-pbc-proetale-site]), and $u_X$ is a composite of two functors.",
+   "text": "Put $B=\\operatorname{Spec}\\mathbf Z$. The functor $u$ of [def-sfb-profinite-to-proetale] supplies weakly etale maps $u(S)\\to B$. Their pullbacks $X[S]=u(S)\\times_B X\\to X$ are weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change], and hence are objects of $X_{\\mathrm{proet}}$ by [def-weil-pbc-small-proetale-site]. For a continuous $g:S'\\to S$, define $u_X(g)=u(g)\\times_B\\mathrm{id}_X$. The functoriality clause of [def-pc-fibre-product] gives identities and composition, so this defines exactly the composite functor in the statement. All schemes and profinite sets are taken in the fixed site universe.",
    "uses": [
-    "def-weil-pbc-proetale-site"
+    "def-sfb-profinite-to-proetale",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-pbc-small-proetale-site",
+    "def-pc-fibre-product"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 094U, lemma-base-change-weakly-etale (2); blueprint sk-def-sfb-pullback-from-point, clause 2"
+   }
   },
   {
-   "text": "For the formula, $\\Spec LC(S,\\Z)=\\lim_i\\coprod_{S_i}\\Spec\\Z$ is a cofiltered\nlimit along affine transition morphisms. Fibre products commute with such\nlimits and with finite coproducts, which gives the formula.",
+   "text": "Use the set of finite clopen partitions $P$ of $S$ as the small index set of finite continuous quotients, with $S_P$ the set of nonempty parts; refine partitions for the directed order. It is nonempty (the one-part partition if $S\\ne\\varnothing$, the empty partition otherwise), and the nonempty intersections of parts of two partitions give a common refinement. Each map $q_P:S\\to S_P$ is continuous because its fibres are clopen. Conversely every continuous surjection $q:S\\to Q$ to a finite discrete set has a finite clopen fibre partition $P$, and the map $S_P\\to Q$ sending a part to its value is a unique bijection commuting with the quotient maps. A map between two quotients commuting with their maps from $S$ exists exactly when the source fibre partition refines the target partition, and is then unique by surjectivity. Hence partitions give a small representative category for all finite continuous quotients, with exactly their transition maps. A locally constant $f:S\\to\\mathbf Z$ has open fibres covering the compact space $S$; a finite subcover shows that only finitely many fibres are nonempty. Those fibres are also closed, since their complements are unions of open fibres. Thus $f$ factors through one of these finite quotients. This uses only compactness in the definition of a profinite set and the definition of local constancy.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-profinite-test-objects.md",
+    "place": "statement, finite quotients of S; elementary finite-subcover argument"
+   }
+  },
+  {
+   "text": "For each partition $P$, pullback along the surjection $q_P:S\\to S_P$ embeds $A_P=\\mathbf Z^{S_P}$ into $LC(S,\\mathbf Z)$, compatibly with refinement. Step 2 says every locally constant function is in one of these images. Given any compatible family of unital ring maps $\\phi_P:A_P\\to R$, define $\\phi(f)=\\phi_P(a)$ when $f=q_P^*a$. A common refinement and injectivity of its pullback make this independent of the representation; computing two functions at a common refinement proves preservation of addition and multiplication, and constants give preservation of $0,1$. Surjectivity of the union gives uniqueness. This is precisely the universal property of [def-weil-pbc-category-colimit], so $LC(S,\\mathbf Z)=\\varinjlim_P A_P$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-profinite-test-objects.md",
+    "place": "statement, finite-quotient description; elementary verification of the ring colimit"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-small-colimit-limit] applied to the small directed ring diagram of step 3, $L:=\\operatorname{Spec}LC(S,\\mathbf Z)$ is the limit of $\\operatorname{Spec} A_P$. By [lem-weil-pbc-finite-affine-coproduct-spectrum], $\\operatorname{Spec} A_P\\cong D_P:=\\coprod_{S_P}B$, with each coprojection corresponding to the appropriate product projection. For a refinement $P'\\to P$, the ring map $A_P\\to A_{P'}$ is precomposition with $S_{P'}\\to S_P$; its composite with evaluation at a part of $P'$ is evaluation at its containing part of $P$. The coprojection formula therefore identifies the induced spectrum map with the map of coproducts prescribed by the finite quotient map. All ring maps preserve the constant integers, so all scheme maps commute with the structure maps to $B$. Consequently $L=\\lim_P D_P$ as a diagram over $B$.",
+   "uses": [
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW, lemma-directed-inverse-system-affine-schemes-has-limit; finite coproduct identification in the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Exchanging the two projections defines $D_P\\times_B X\\cong X\\times_B D_P$: the maps in both directions exist by [def-pc-fibre-product], and their composites are identities because both projections are unchanged. For each $P$, [lem-sc-etale-fibre-product-base-change-coproduct], applied over $B$ to the finite family of identity maps $B\\to B$ and $X\\to B$, gives $E_P:=D_P\\times_B X\\cong\\coprod_{S_P}X$. The identification $B\\times_B X\\cong X$ follows directly from [def-pc-fibre-product]. The cited coproduct comparison specifies both projections on each summand, so a refinement carries the copy indexed by $a\\in S_{P'}$ identically to the copy indexed by its image in $S_P$. These are the transition maps in the claimed limit.",
+   "uses": [
+    "lem-sc-etale-fibre-product-base-change-coproduct",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB and 01JC, lemma-glue and lemma-glue-schemes, finite disjoint unions after base change; fibre-product universal property"
+   }
+  },
+  {
+   "text": "The scheme $L\\times_B X$ is the limit of the $E_P$, by the following direct universal-property argument using [def-pc-fibre-product]. Given a compatible cone $h_P:T\\to E_P$, its projections $b_P:T\\to X$ are all equal: project the cone equalities from a common refinement of any two indices to $X$. Write the common map as $b$. Its projections $a_P:T\\to D_P$ form a cone, so step 4 gives a unique $a:T\\to L$. The maps $a$ and $b$ agree over $B$, since this holds after projection to any $D_P$ and the index is nonempty. Thus there is a unique $(a,b):T\\to L\\times_B X$, and its composites to $E_P$ equal $h_P$ by uniqueness in each fibre product. Conversely any map to $L\\times_B X$ gives this cone. Hence $X[S]=L\\times_B X\\cong\\lim_P\\coprod_{S_P}X$ by step 5. Equality in the statement means this canonical isomorphism, compatible with the finite-quotient projections; no affineness or quasi-compactness hypothesis on $X$ was used.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-profinite-test-objects.md",
+    "place": "statement, final limit formula; elementary universal-property argument for base change of this nonempty directed limit"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site"
+  "def-sfb-profinite-to-proetale",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "def-weil-pbc-small-proetale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-sc-etale-fibre-product-base-change-coproduct"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-profinite-test-objects.md",
-  "place": "## Proof"
+  "place": "Statement, composite functor and finite-quotient limit formula; sk-def-sfb-pullback-from-point clause 2. Details supplied by compactness and universal properties, with Stacks Tags 094U, 01YW, 01JB, 01JC."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The functor sending a profinite space S to Spec of locally constant integer functions base changed to a scheme X",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Spec, AlgebraicGeometry.Spec.preimage, AlgebraicGeometry.Spec.toSheafedSpace, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.Spec.toLocallyRingedSpace, AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ, AlgebraicGeometry.Spec.map_base, AlgebraicGeometry.Spec.toTop",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; related general results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEtale\"",
+   "results": "12 hits: AlgebraicGeometry.Scheme.proetalePrecoverage, AlgebraicGeometry.Scheme.proetaleTopology, AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage, AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology, AlgebraicGeometry.Scheme.proetaleTopology_eq_propQCTopology, AlgebraicGeometry.Scheme.etaleTopology_le_proetaleTopology",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; related general results only"
+  },
+  {
+   "tool": "grep",
+   "query": "profiniteToProEtOf|profiniteToScheme|LocallyConstant.*Spec",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme times a profinite set is the inverse limit of finite disjoint unions of the scheme",
+   "results": "8 hits: AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.instFinitaryExtensiveScheme, AlgebraicGeometry.instIsAffineSigmaObjScheme, Profinite.lim, Profinite.asLimit, Profinite.isoAsLimitConeLift, Profinite.instHasExplicitFiniteCoproductsTotallyDisconnectedSpaceCarrier, Profinite.asLimitConeIso",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; related general results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant functions on a compact space factor through a finite discrete quotient, spectrum of their ring",
+   "results": "8 hits: CompHausLike.LocallyConstant.instHasPropCarrierToTopFiber, CompHausLike.LocallyConstant.fiber, CompHausLike.LocallyConstant.locallyConstantIsoContinuousMap, LocallyConstant.range_finite, Profinite.exists_locallyConstant_finite_nonempty, IsLocallyConstant.range_finite, TopologicalSpace.Fiber.instFiniteFiberCoeLocallyConstant, CompHausLike.LocallyConstant.componentHom",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; related general results only"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant|profinite",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant.*(Spec|Scheme)|(Spec|Scheme).*LocallyConstant",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "date": "2026-10-16",
+   "verdict": "second reading: no whole-item match; related results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of the ring of locally constant functions on a Stone space is a cofiltered limit of finite coproducts of Spec Z",
+   "results": "8 hits: Condensed.fintypeCatAsCofan, Profinite.exists_locallyConstant_fin_two, LightCondensed.fintypeCatAsCofan, CompHausLike.LocallyConstant.sigmaIso, Profinite.exists_locallyConstant_finite_aux, CompHausLike.LocallyConstant.counitAppApp, Profinite.exists_locallyConstant, Profinite.exists_locallyConstant_finite_nonempty",
+   "date": "2026-10-16",
+   "verdict": "second reading: no whole-item match; related results only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -57,5 +182,20 @@
   "AlgebraicGeometry.ProEtale.profiniteToProEtOf"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-profinite-test-objects",
+  "worker": "stage1",
+  "summary": "Kept the statement. Defined the base-change functor using existing weakly-etale stability and fibre products. Proved the locally constant ring colimit explicitly using finite clopen partitions, applied existing Spec/coproduct leaves, and wrote the universal-property argument for the limit after arbitrary base change. No new nodes; all non-elementary results already occur in the DAG.",
+  "blueprint": "Realizes the composite-functor sentence and final limit formula of def-sfb-profinite-test-objects, which is clause 2 of sk-def-sfb-pullback-from-point. The current node file has no Proof section; the imported two-step sketch is expanded without changing its route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N1-18454e7bd",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-18454e7bd (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, current blueprint route and source passages. All six steps hold, including arbitrary-X base change and finite-quotient transition maps. Checked empty and finite cases, duplicate candidates and dependency cycles. No corrections or tool_uses needed; detailed review written to review.md."
+ }
 }
