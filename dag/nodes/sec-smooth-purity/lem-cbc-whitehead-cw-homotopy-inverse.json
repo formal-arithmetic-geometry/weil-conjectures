@@ -169,5 +169,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.WhiteheadCWHomotopyInverse",
+  "declaration": "SSet.Enhanced.whitehead_cw_homotopy_inverse",
+  "file": "lean/Sheaf/AlgebraicTopology/WhiteheadCWHomotopyInverse.lean",
+  "statement": "theorem whitehead_cw_homotopy_inverse {X : Type u} [TopologicalSpace X] {Y : Type v} [TopologicalSpace Y] {f : C(X, Y)} (hX : ∃ (Z : TopCat.{w}), T2Space Z ∧ Nonempty (Topology.CWComplex (Set.univ : Set Z)) ∧ Nonempty (ContinuousMap.HomotopyEquiv X Z)) (hY : ∃ (W : TopCat.{z}), T2Space W ∧ Nonempty (Topology.CWComplex (Set.univ : Set W)) ∧ Nonempty (ContinuousMap.HomotopyEquiv Y W)) (hπ₀ : Function.Bijective (componentsMap f)) (hπ : ∀ (n : ℕ), 1 ≤ n → ∀ (x : X), Function.Bijective (homotopyGroupMap f n x)) : ∃ (r : C(Y, X)), ContinuousMap.Homotopic (r.comp f) (ContinuousMap.id X) ∧ ContinuousMap.Homotopic (f.comp r) (ContinuousMap.id Y)",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2c9a4ad0",
+  "group": "N4",
+  "result": "pass",
+  "note": "Item module states Whitehead exactly as the node: arbitrary X:Type u, Y:Type v, given f:C(X,Y); CW-homotopy-type via ∃ Z:TopCat.{w} (free universes w,z), T2Space Z (intrinsic to the node's Hausdorff disk-attachment CW notion, only on the model), Nonempty (Topology.CWComplex univ) (closure-finite, weak topology), Nonempty (X ≃ₕ Z); hπ₀ bijective componentsMap and hπ ∀ n≥1 ∀ x bijective homotopyGroupMap from def-cbc-enhanced-diagrams-cones (read at EnhancedDiagramsCones.lean:75,82); conclusion ∃ r with both unbased Homotopic equations. Empty/disconnected/n=0,1 cases correct; no hollow defs, sorry-only proof, source+blueprint docstrings with 5-step proof, statement verbatim, node unchanged except lean, report has Worker report and Second reading by N4, proof-only non-public import per §3.7, no duplicate CW notion. nt_compile.py --json clean (rc 0, no diagnostics), axioms only sorryAx beyond standard."
  }
 }
