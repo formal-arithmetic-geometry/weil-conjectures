@@ -13,21 +13,42 @@
  ],
  "proof": [
   {
-   "text": "For each covering sieve form the kernel of restriction from P(V) to its matching-family object. Refinement gives a filtered family. AB5 identifies its union with the kernel of the plus unit, since plus is the filtered colimit of matching-family objects. Refining the sieve to a finite B-cover shows that each such kernel is killed by a finite restriction map.",
+   "text": "Use exact filtered colimits to identify the kernel of P(V) to plus P(V) with the union of the kernels of matching-family restrictions. A finite refinement from hcov converts each such kernel into the kernel of the finite Cech augmentation; the hypothesis on b annihilates it. Implemented by kills_kernel_colimit, kills_kernel_toPlus and the opening argument of hom_eq_zero_of_sheafification_zero.",
    "uses": [
     "def-sp-grothendieck-abelian"
    ],
    "elementary": false
   },
   {
-   "text": "Iterate plus transfinitely, using the source library TransfinitePlus and TransfinitePlusSheaf constructions. At a successor step pull back local kernels along the earlier unit. Inductively express the restrictions on each of finitely many covering members as filtered unions of further local kernels. Commute these unions with finite pullbacks and products by AB5, compose the finite covers, and refine again by the given basis hypothesis. Before invoking hcov on a covering member, replace the family by its canonically isomorphic one-fold nerve family, whose members satisfy B literally. Refining the final composite at V restores the stipulated nerve condition. No invariance of B under isomorphism is assumed. Thus the pulled-back kernel is a union of kernels killed on finite B-covers.",
+   "text": "Prove that if the plus unit of K is zero, then plus K(V) is zero whenever covers of V have finite refinements. Choose finite generators of a covering subsieve, index further covers by the finite product of their filtered cover categories, and commute its colimit with the finite product by AB5. The induced map from the original matching object is zero. Each stage kernel becomes zero after composition of its covers with the finite family, hence dies in the plus colimit. Empty families are included. Implemented by matching_ι_of_factor and plus_isZero_of_toPlus_zero.",
    "uses": [
     "def-sp-grothendieck-abelian"
    ],
    "elementary": false
   },
   {
-   "text": "At a limit ordinal AB5 identifies the kernel with the union of earlier kernels. For a sufficiently large regular cardinal the transfinite plus construction is a sheafification. Its value is zero by the hypothesis and uniqueness of sheafification, so the union of locally zero kernels is all of P(V). The hypothesis on b kills each kernel, and hence b.",
+   "text": "Apply the preceding result to the kernel of the plus unit of P. Its plus unit is zero by naturality and the fact that plus preserves monomorphisms. Left exactness then shows that the plus unit of plus P is monic at every B-object. Prove also that plus preserves morphisms monic at B-objects: their kernels vanish on B, and finite refinements show that plus of each such kernel vanishes on B. Replace a finite refinement by its singleton nerve family using diagonals; its members have B literally. Implemented by finite_basis_cover, isZero_matching_of_generators, plus_isZero_on_basis, mono_toPlus_plus_of_finite_basis and plus_map_mono_on_basis.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Iterate plus in the category of presheaves under Q = plus P. The property that Q to R is monic at B-objects is closed under isomorphisms and nonempty filtered colimits by AB5. At successors use naturality: the successor structure map equals the plus unit of Q followed by plus of the previous structure map, a composite of B-component monomorphisms. The transfinite induction principle gives a B-component monomorphism into the final iteration. Implemented by plusUnderSucc, monoOnBasisUnder, monoOnBasisUnder_iso, monoOnBasisUnder_colimits and mono_plusUnderIteration.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a regular cardinal larger than the cardinality of Arrow C at which a separator of A is presentable. The final iteration under Q is a sheaf. Matching-family functors preserve these cardinal-filtered colimits, and matching-family inclusions into the next plus stage interleave the sheaf-condition maps with transitions. Apply IsColimit.isIso_of_interleave. This reuses the source library convergence proof without its SmallCategory C restriction. Implemented by isSheaf_plusUnderIteration.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composite from P through Q into this sheaf factors through sheafification of P, hence is zero. The map from Q(V) into the sheaf value is monic, so the plus unit of P(V) is zero. Apply the first step to the identity of P(V) to conclude b = 0.",
    "uses": [
     "def-sp-grothendieck-abelian"
    ],
@@ -40,8 +61,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/00W1",
-  "place": "Section 7.10, the filtered-colimit local equality description before Lemma 7.10.8 and the finite-composition argument of Theorem 7.10.10 (Tag 00WB); categorical extension using AB5 and transfinite plus, not a claim of verbatim coefficient generality.",
-  "group": "H4",
+  "place": "Section 7.10 local equality and finite composition (00W1/00WB); categorical AB5 argument, plus separatedness, and the source library TransfinitePlusSheaf convergence argument in the under category.",
+  "group": "C4",
   "date": "2026-10-16"
  },
  "mathlib_searches": [
@@ -150,11 +171,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-08cee",
-  "group": "H4",
+  "reviewer": "X-fb755",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261016T090411-L-1838030",
+  "landing": "20261016T101204-L-2230131",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures, proofs, dependencies and helper visibility changes matched the DAG nodes, published originals and change records; all eight modules and the direct importer compiled."
+  "note": "independent Codex review: Delivered module and DAG node matched against packet, repository baseline, Lean compilation, direct importer compilation, and permitted axiom audit."
  }
 }
