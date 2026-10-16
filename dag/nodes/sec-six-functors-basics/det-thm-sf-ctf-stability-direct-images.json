@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-thm-sf-ctf-stability-direct-images",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Pullback, tensor product and direct images on $\\Dctf$ at all coefficient stages",
@@ -12,48 +12,296 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.md",
   "place": "node det-thm-sf-ctf-stability-direct-images, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "sk-prop-sf-existence",
+  "def-weil-closed-immersion",
+  "sk-def-sfb-module-lower-shriek",
+  "det-lem-int-tensor-projection"
+ ],
  "proof": [
   {
-   "text": "(1),(2) *Finite $A$.* Every object of $\\Dctf(X,A)$ has a bounded flat\nconstructible model ([sk-lem-sf-flat-model]): a bounded complex of flat\nconstructible sheaves of $A$-modules in the degrees of its Tor interval.\nPullback is exact and carries flat constructible sheaves to flat\nconstructible sheaves, so it carries such a model to one with the same\ninterval. The tensor product of two such models is the total complex of\ntermwise tensor products, again bounded, flat and constructible, which\ncomputes $\\otimes^{\\mathbf L}$. Extension by zero along a locally closed\nimmersion is exact, preserves flatness (on stalks it is the identity or\nzero) and constructibility. *Integral and rational $\\Lambda$.* Here\n$\\Dctf=\\Dbc$, and pullback, tensor product and extension by zero preserve\n$\\Dbc$ by [sk-lem-int-tensor]; on strata the local models are\nlisse sheaves, which are preserved by these operations.",
+   "text": "Use the admissible rings of [sk-def-localizing-closure], including every finite commutative $\\ell$-primary ring $A$, and the arbitrary characteristic-$p$ field setting of [sk-def-sfb-dc-setting]. All schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. They are therefore qcqs, and every open subset is quasi-compact. By [det-proper-base-change-unbounded-pullback], the exact inverse image $f^*$ preserves $\\Dctf$ for every admissible coefficient. This proves the pullback assertion. For integral and rational coefficients, [det-def-localizing-closure-ctf-equals-bc] gives $\\Dctf=\\Dbc$; this equality will never be used for an arbitrary finite ring $A$.",
    "uses": [
-    "sk-lem-sf-flat-model",
-    "sk-lem-int-tensor"
+    "sk-def-localizing-closure",
+    "sk-def-sfb-dc-setting",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "det-proper-base-change-unbounded-pullback",
+    "det-def-localizing-closure-ctf-equals-bc"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "paragraph 1, pullback and coefficient conventions"
+   }
   },
   {
-   "text": "(3) Proper direct image preserves $\\Dctf(-,\\Lambda)$ by\n[sk-thm-sfb-proper-base-change]. For a quasi-compact open immersion $j$,\n$Rj_*$ preserves $\\Dctf$ by [sk-cor-sf-direct-image-ctf] for finite $A$ and by\n[sk-prop-open-coefficients] for $\\mathcal O_E$, $E$, $\\Qlb$ (with $\\Zl$ and\n$\\Ql$ the case $E=\\Ql$). Choose a compactification $f=p\\circ j$ with $j$ an\nopen immersion and $p$ proper. Then $Rf_*=Rp_*Rj_*$ and $Rf_!=Rp_*j_!$, and\neach factor preserves $\\Dctf$ by the above and (2).",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "(4) This is the restriction part of the existence theorem\n[sk-thm-existence], proved for finite $A$, for $E$, $\\Qlb$, and for\n$\\mathcal O_E$ by the three restriction theorems\n[sk-prop-sf-rf-shriek-preservation], [sk-thm-restriction] and\n[sk-thm-int-restriction].",
+   "text": "For finite $A$, descend $K,L\\in\\Dctf(X,A)$ to the étale site by [det-pe-finite-tor-comparison-noetherian]; $A$ is Noetherian because every ideal is a finite set. Choose ordered Tor intervals $[a,b]$, $[c,d]$. By [lem-sf-etale-flat-constructible], represent the descended objects by bounded complexes $P,Q$ of flat constructible sheaves, zero outside these intervals. Refine the finitely many stratifications of their terms by [lem-weil-pbc-constructible-stratification-intersection]. On each stratum, [lem-weil-pbc-locally-constant-tensor], applied to the flat terms in degree zero, shows that $P^i\\otimes_AQ^j$ is locally constant of finite type. Finite sums and the kernels and cokernels computing cohomology are constructible by [thm-constructible-serre]. Each tensor term is flat: tensoring with $P^i\\otimes_AQ^j$ is the composite of two exact tensor functors; finite sums remain exact. Thus $\\operatorname{Tot}(P\\otimes_AQ)$ is a bounded flat complex, supported in $[a+c,b+d]$. It is K-flat by [lem-pc-bounded-above-flat-kflat-site], so it computes the derived tensor and has this Tor interval against every module sheaf. The monoidal comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies its exact pro-étale pullback with $K\\otimes_A^{\\mathbf L}L$. The Tor comparison equivalence gives the finite-coefficient tensor assertion of (1).",
    "uses": [
-    "sk-thm-existence",
+    "det-pe-finite-tor-comparison-noetherian",
+    "lem-sf-etale-flat-constructible",
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lem-weil-pbc-locally-constant-tensor",
+    "thm-constructible-serre",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "paragraph 1, bounded flat models and total tensor; Stacks Tags 03TT (lemma-when-ctf), 094H (lemma-locally-constant-tensor-product), 03RZ (lemma-constructible-abelian), 06YQ (lemma-bounded-flat-K-flat), 07A4 (lemma-pullback-tensor-product)"
+   }
+  },
+  {
+   "text": "For $\\mathcal O_E$, [det-lem-integral-models-operations](2) gives tensor closure of $\\Dbc$. For $E$ and $\\overline{\\mathbf Q}_\\ell$, [det-thm-sf-pf-field-tensor](1) gives tensor closure of $\\Dbc$. Step 1 identifies these categories with $\\Dctf$, proving the remaining tensor assertions of (1). Taking $E=\\mathbf Q_\\ell$ includes $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$.",
+   "uses": [
+    "det-lem-integral-models-operations",
+    "det-thm-sf-pf-field-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "paragraph 1, integral and rational tensor products"
+   }
+  },
+  {
+   "text": "Let $a:S\\hookrightarrow X$ be a locally closed immersion. Since the schemes are Noetherian, it is quasi-compact; [lem-pqf-qc-immersion-open-closed-factor] factors it as $S\\xrightarrow{u}T\\xrightarrow{i}X$ with $u$ open and $i$ closed. The coefficient sheaves are cartesian by [sk-prop-sfb-cartesian-coefficients]. Apply [lem-weil-pbc-proetale-ringed-open-closed] to the pairs $(T,S)$ and $(X,X\\setminus T)$: $u_!$ and $i_*$ are exact, their restriction back to their support is the identity, and their restrictions to the respective complements are zero. Hence $a_!=i_*u_!$ is exact and acts termwise on the derived category by [lem-weil-pbc-exact-functor-derived-functor]. If $F$ is constructible on $S$, take its finite stratification from [sk-def-sfb-constructible]. The stratum immersions composed with $a$ are immersions by [lem-weil-pbc-proper-fp-permanence](e). Together with $T\\setminus S$ and $X\\setminus T$ these give a finite locally closed stratification of $X$; all its strata are constructible because $X$ is Noetherian. On the source strata the restriction of $a_!F$ is the given finite constant local model, and on the two complementary strata it is zero, by the restriction identities just cited. Therefore $a_!F$ is constructible. For $K\\in\\Dctf(S,\\Lambda)$, exactness gives $H^n(a_!K)=a_!H^n(K)$, so $a_!K$ is bounded constructible. If $K$ has Tor interval $[a_0,b_0]$, then for every target module sheaf $N$, [det-lem-int-tensor-projection] gives $(a_!K)\\otimes^{\\mathbf L}_{\\Lambda_X}N\\simeq a_!(K\\otimes^{\\mathbf L}_{\\Lambda_S}a^*N)$. The pullback $a^*N$ is a sheaf by cartesian coefficients, and exact $a_!$ preserves vanishing outside $[a_0,b_0]$. Thus $a_!K$ has the same Tor interval. This proves (2) uniformly for every admissible coefficient, without replacing $K$ by its cohomology for the Tor test.",
+   "uses": [
+    "lem-pqf-qc-immersion-open-closed-factor",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-proper-fp-permanence",
+    "det-lem-int-tensor-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "paragraph 1, exact locally closed extension, its constructibility and Tor interval; Stacks Tags 01QV (lemma-factor-quasi-compact-immersion), 02V0 (lemma-composition-immersion), 09BM, 09BN, 03DJ"
+   }
+  },
+  {
+   "text": "Let $j:U\\hookrightarrow X$ be open and $A$ finite. Descend $K\\in\\Dctf(U,A)$ of Tor interval $[a,b]$ to an étale complex $C$ by [det-pe-finite-tor-comparison-noetherian]. Its étale direct image $B=Rj_*C$ is bounded constructible by [cor-fin-deligne-open-finite-coefficients], since a power of $\\ell$ kills $A$ and is invertible in $k$. Put $d=\\operatorname{cd}(j)<\\infty$ by [lem-kun-0f10](1). Clause (1) of [det-geo-open-finiteness-ii-amplitude] states $R^qj_*F=0$ for all sheaves $F$ and $q>d$. Consequently $Rj_*$ maps any étale complex with cohomology in $[a,b]$ into degrees $[a,b+d]$: its finite truncation filtration has factors $H^r[-r]$ for $a\\le r\\le b$, each of whose direct images lies in $[r,r+d]$, and the long exact cohomology sequences retain the common bound. For every finitely presented $A$-module $M$, [lem-sf-projection-finite-constant] identifies $B\\otimes_A^{\\mathbf L}M_X$ with $Rj_*(C\\otimes_A^{\\mathbf L}M_U)$, hence bounds it in $[a,b+d]$. Now take any geometric point $x$ of $X$. Stalks are exact by [prop-weil-pbc-geometric-stalks-exact], and their derived tensor comparison is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], so $B_x\\otimes_A^{\\mathbf L}M$ has that bound. Every $A$-module $V$ is the filtered union of its finitely generated submodules; these are finite sets, hence finitely presented over the finite ring $A$. Resolve $B_x$ by a K-flat complex with flat terms using [lem-pc-kflat-resolution] on the one-point ringed site. Tensor commutes with this filtered union termwise, and exact filtered colimits of modules, supplied by [lem-pur-ringed-site-grothendieck-abelian] on that site, commute with cohomology. It follows that $B_x\\otimes_A^{\\mathbf L}V$ has the same bound for arbitrary $V$. For any module sheaf $N$ on $X_{\\mathrm{ét}}$, apply this with $V=N_x$. Exact conservative geometric stalks [lemma-weil-pbc-geometric-stalk-conservative] detect vanishing of $B\\otimes_A^{\\mathbf L}N$, so $B$ has Tor interval $[a,b+d]$ on the étale site. Finally [prop-weil-pbc-comparison-direct-image] identifies $\\nu_X^*B$ with the pro-étale $Rj_*K$, and [lem-exc-comparison-tor-interval] transfers the bound against every pro-étale module sheaf. This proves the finite open direct-image case over the arbitrary standing field.",
+   "uses": [
+    "det-pe-finite-tor-comparison-noetherian",
+    "cor-fin-deligne-open-finite-coefficients",
+    "lem-kun-0f10",
+    "det-geo-open-finiteness-ii-amplitude",
+    "lem-sf-projection-finite-constant",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-exc-comparison-tor-interval",
+    "lem-pc-kflat-resolution",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "paragraph 2, finite open direct image; Stacks Tags 0F10 (lemma-finite-cd), 099R (section-comparison), 06YS (lemma-K-flat-resolution); the finite-constant projection and arbitrary-module stalk test are expanded here"
+   }
+  },
+  {
+   "text": "For $\\mathcal O_E$ and a quasi-compact open immersion $j$, [det-thm-sf-pf-adic-open] gives $Rj_*:\\Dbc(U,\\mathcal O_E)\\to\\Dbc(X,\\mathcal O_E)$, including derived completeness and the reduction comparison. Step 1 translates this to preservation of $\\Dctf$.",
+   "uses": [
+    "det-thm-sf-pf-adic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "paragraph 2, integral open direct image"
+   }
+  },
+  {
+   "text": "The coefficient categories in this step are compared by exact conservative restriction of scalars, which leaves the underlying abelian sheaf unchanged [sk-def-sfb-change-of-scalars]. Exactness follows because kernels and cokernels have the restricted action on the same underlying sheaves. By [lem-weil-pbc-exact-functor-derived-functor], derived restriction is termwise restriction. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to the commuting square of $j$ and the identity-topos ring morphisms defining scalar restriction: $\\operatorname{Res}Rj_*^{\\Lambda'}\\simeq Rj_*^\\Lambda\\operatorname{Res}$. Thus continuity computed after scalar restriction computes the actual direct image in the larger coefficient category. For rational coefficients it suffices to check the generators of [det-lem-integral-models-generators], since $Rj_*$ is triangulated and the rational categories $\\Dbc$ are closed under finite cones and shifts by [det-cor-coefficient-heart-ii-triangulated]. Write an $E$-generator as $M[1/\\ell]$, where $M=a_!L_0$ is an integral constructible sheaf. By [sk-prop-sfb-qlbar-colimit-x], localization is the filtered system $M\\xrightarrow{\\ell}M\\xrightarrow{\\ell}\\cdots$, all in degree zero. Apply [det-pe-bounded-continuity-direct-image] to this diagram: its cohomology comparisons, and exact filtered colimits of module sheaves from [lem-pur-ringed-site-grothendieck-abelian], show that the canonical map $(Rj_*M)[1/\\ell]\\to Rj_*(M[1/\\ell])$ is a quasi-isomorphism after restriction of scalars, hence an isomorphism. By Step 6, $Rj_*M$ is bounded constructible. Localization is flat by [det-prop-sfb-qlbar-colimit-x-invert-ell]; it preserves its cohomology interval and extends the finite constant local presentations of [sk-def-sfb-constructible] on the same finite strata to presentations over $E$. Thus this image is in $\\Dbc(X,E)$. For a $\\overline{\\mathbf Q}_\\ell$-generator, [sk-prop-sfb-qlbar-colimit-x] expresses scalar extension as the filtered colimit over finite $F/E$. By [sk-prop-sfb-cartesian-coefficients], each $F_X$ is finite free over $E_X$, and so $Rj_*$ commutes with scalar extension to $F$ by additivity, after choosing an $E$-basis. The diagram $F_U\\otimes_{E_U}M[1/\\ell]$ again consists of sheaves in degree zero. Bounded continuity therefore gives $Rj_*(\\overline{\\mathbf Q}_{\\ell,U}\\otimes_{E_U}M[1/\\ell])\\simeq\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}Rj_*(M[1/\\ell])$. This filtered scalar extension is flat: tensoring is the filtered colimit of the exact finite-free tensor functors, and filtered colimits are exact. It preserves the bounded cohomology interval and extends the finite constant local presentations to ones over $\\overline{\\mathbf Q}_\\ell$. Hence the image is bounded constructible. Finite cones and shifts conclude both rational open cases, and Step 1 translates them to $\\Dctf$.",
+   "uses": [
+    "det-lem-integral-models-generators",
+    "det-cor-coefficient-heart-ii-triangulated",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "det-pe-bounded-continuity-direct-image",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-change-of-scalars",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "paragraph 2 and sk-prop-open-coefficients.proof.md, rational open case via integral models and bounded continuity; scalar restriction comparison: Stacks Tags 015F and 0D6E"
+   }
+  },
+  {
+   "text": "For proper $p$, finite-coefficient preservation is [det-ctf-finite-proper-localizing](1), for every finite $\\ell$-primary ring $A$. For $\\mathcal O_E$ it is the constructibility conclusion of [det-thm-sfb-proper-base-change-integral](1); for $E$ and $\\overline{\\mathbf Q}_\\ell$ it is [det-thm-sfb-proper-base-change-rational](2). Step 1 translates the integral and rational $\\Dbc$ conclusions to $\\Dctf$. Thus proper direct image preserves $\\Dctf$ at every coefficient stage.",
+   "uses": [
+    "det-ctf-finite-proper-localizing",
+    "det-thm-sfb-proper-base-change-integral",
+    "det-thm-sfb-proper-base-change-rational"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "paragraph 2, proper direct image at all coefficient stages"
+   }
+  },
+  {
+   "text": "Choose the compactification $f=pj$ supplied by [sk-def-sfb-dc-setting], whose intermediate scheme is again in the standing setting. The derived direct-image composition isomorphism [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied to the cartesian coefficient sheaves of [sk-prop-sfb-cartesian-coefficients], gives $Rf_*\\simeq Rp_*Rj_*$. By [sk-def-sfb-module-derived-lower-shriek], the specified compactly supported image is $Rf_!=Rp_*D(j_!)$, where $j_!$ is exact. Steps 5--8 show that the first composite preserves $\\Dctf$, and Steps 4 and 8 show this for the second. This proves (3) for the specified ambient derived functors and compactification.",
+   "uses": [
+    "sk-def-sfb-dc-setting",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-derived-lower-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "paragraph 2, compactification assembly; Stacks Tag 0D6E"
+   }
+  },
+  {
+   "text": "For (4), apply the restriction assertion of [sk-prop-sf-rf-shriek-preservation] for every finite admissible $A$, [sk-thm-int-restriction] for $\\mathcal O_E$, and [sk-thm-restriction] for $E$ and $\\overline{\\mathbf Q}_\\ell$. Each statement explicitly sends $\\Dctf(Y,\\Lambda)$ into $\\Dctf(X,\\Lambda)$ for the exceptional right adjoint; existence on a localizing closure alone is not used as preservation. Taking $E=\\mathbf Q_\\ell$ covers $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$. These conclusions and Steps 1--9 give all four clauses.",
+   "uses": [
     "sk-prop-sf-rf-shriek-preservation",
-    "sk-thm-restriction",
-    "sk-thm-int-restriction"
+    "sk-thm-int-restriction",
+    "sk-thm-restriction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "paragraph 3, the three exceptional restriction theorems"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-sf-flat-model",
-  "sk-lem-int-tensor",
-  "sk-thm-existence",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-dc-setting",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "det-proper-base-change-unbounded-pullback",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-sf-etale-flat-constructible",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-weil-pbc-locally-constant-tensor",
+  "thm-constructible-serre",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "det-lem-integral-models-operations",
+  "det-thm-sf-pf-field-tensor",
+  "lem-pqf-qc-immersion-open-closed-factor",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-proper-fp-permanence",
+  "det-lem-int-tensor-projection",
+  "cor-fin-deligne-open-finite-coefficients",
+  "lem-kun-0f10",
+  "det-geo-open-finiteness-ii-amplitude",
+  "lem-sf-projection-finite-constant",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-exc-comparison-tor-interval",
+  "lem-pc-kflat-resolution",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "det-thm-sf-pf-adic-open",
+  "det-lem-integral-models-generators",
+  "det-cor-coefficient-heart-ii-triangulated",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "det-pe-bounded-continuity-direct-image",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "sk-def-sfb-change-of-scalars",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "det-ctf-finite-proper-localizing",
+  "det-thm-sfb-proper-base-change-integral",
+  "det-thm-sfb-proper-base-change-rational",
+  "sk-def-sfb-module-derived-lower-shriek",
   "sk-prop-sf-rf-shriek-preservation",
-  "sk-thm-restriction",
-  "sk-thm-int-restriction"
+  "sk-thm-int-restriction",
+  "sk-thm-restriction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "all three proof paragraphs, expanded into ten steps"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Dctf|constructible.*Tor|Tor.*constructible",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern topological constructible sets, site and condensed-module infrastructure, or generic derived-category bounds; they do not state this six-operation preservation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\"",
+   "results": "Topology.IsConstructible; Topology.IsLocallyConstructible; Topology.IsConstructible.univ; Topology.IsLocallyConstructible.univ; Topology.IsConstructible.empty; Topology.IsLocallyConstructible.empty; Topology.IsConstructible.isLocallyConstructible; IsRetrocompact.isConstructible",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern topological constructible sets, site and condensed-module infrastructure, or generic derived-category bounds; they do not state this six-operation preservation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible complexes of finite Tor amplitude preserved by pullback tensor locally closed extension by zero and direct images",
+   "results": "DerivedCategory.IsLE; DerivedCategory.IsGE; HomologicalComplex.map_isStrictlySupported; DerivedCategory.TStructure.t; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern topological constructible sets, site and condensed-module infrastructure, or generic derived-category bounds; they do not state this six-operation preservation theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Six operations on constructible sheaves preserve finite Tor dimension for finite and adic coefficients",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; SheafOfModules.Finite.forgetPreservesFiniteLimits; SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf; CategoryTheory.preservesFiniteLimits_presheafToSheaf; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf; PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification; CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits; CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern topological constructible sets, site and condensed-module infrastructure, or generic derived-category bounds; they do not state this six-operation preservation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible finite Tor dimension complexes on etale and proetale sites are stable under the six functors with finite l-adic and rational coefficients",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts; CondensedMod.IsSolid; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.IsEtale.of_comp; CondensedMod.ofSheafProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern topological constructible sets, site and condensed-module infrastructure, or generic derived-category bounds; they do not state this six-operation preservation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible finite Tor amplitude preserved by pullback tensor locally closed extension by zero and direct images",
+   "results": "Condensed.instAB4CondensedMod; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.instMonoidalLightCondSetLightCondModFree; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalCategoryLightCondMod; AlgebraicGeometry.Scheme.Hom.isConstructible_image",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern condensed-module infrastructure, scheme-module adjunctions, or topological constructible images, not this six-operation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Dctf, constructible, Tor amplitude, derived direct image",
+   "results": "none; unknown identifier Dctf",
+   "date": "2026-10-17",
+   "verdict": "no match: Dctf is project-specific and no matching Mathlib declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "Dctf|constructible.*Tor|Tor.*constructible",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "six operations on constructible sheaves preserve finite Tor dimension",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat; CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification; CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf; SheafOfModules.Finite.forgetPreservesFiniteLimits; CategoryTheory.preservesFiniteLimits_presheafToSheaf; SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: generic exactness and sheaf pullback results only; no constructible finite-Tor stability statement"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -74,5 +322,229 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sf-ctf-stability"
+ "unit": "sk-thm-sf-ctf-stability",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-thm-sf-ctf-stability-direct-images",
+  "worker": "stage1",
+  "summary": "Audited all four clauses at every coefficient stage over the arbitrary standing field. Retained arbitrary finite admissible rings. Replaced the locally closed generator argument by exactness, an explicit target stratification and the immersion projection formula. Expanded the étale finite-cohomological-dimension and all-module stalk tests, and corrected the integral proper-image clause citation. No new nodes.",
+  "blueprint": "Paragraph 1: steps 1--4; paragraph 2: steps 5--9; paragraph 3: step 10. Maintainer unit metadata is the older larger theorem; this imported descendant follows its own current main-20261015 source.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Step(s) 1 use this existing statement as a generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "det-proper-base-change-unbounded-pullback",
+    "why": "Step(s) 1 use this existing statement as a generic Inverse image on the localizing categories tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "det-def-localizing-closure-ctf-equals-bc",
+    "why": "Step(s) 1 use this existing statement as a generic $D^b_{ctf}=D^b_c$ for integral and rational coefficients tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Step(s) 2,5 use this existing statement as a generic Tor amplitude under comparison for Noetherian coefficients tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lem-sf-etale-flat-constructible",
+    "why": "Step(s) 2 use this existing statement as a generic Etale bounded flat constructible model tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-stratification-intersection",
+    "why": "Step(s) 2 use this existing statement as a generic Common refinement of two stratifications with constructible strata tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lem-weil-pbc-locally-constant-tensor",
+    "why": "Step(s) 2 use this existing statement as a generic Derived tensor preserves locally constant finite type cohomology tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Step(s) 2 use this existing statement as a generic Constructible sheaves form a weak Serre subcategory tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Step(s) 2 use this existing statement as a generic Bounded-above flat complexes on a ringed site are K-flat tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Step(s) 2,5 use this existing statement as a generic Derived tensor comparison for arbitrary ringed topoi tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "det-lem-integral-models-operations",
+    "why": "Step(s) 3 use this existing statement as a generic Inverse image, tensor product and extension by zero preserve $D^b_c(-,\\mathcal O_E)$ tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "det-thm-sf-pf-field-tensor",
+    "why": "Step(s) 3 use this existing statement as a generic Tensor closure of the rational localizing categories tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lem-pqf-qc-immersion-open-closed-factor",
+    "why": "Step(s) 4 use this existing statement as a generic Quasi-compact immersions factor through an open and a closed immersion tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Step(s) 4,7,9 use this existing statement as a generic Inverse image of the coefficient sheaves tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Step(s) 4 use this existing statement as a generic Ringed pro-etale open-closed localization tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Steps 4 and 7 use exact-functor descent to identify derived extension by zero and derived scalar restriction with their termwise functors."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Step 4 uses only clause (e), closure of immersions under composition, to regard the source strata as locally closed strata in the target. This generic scheme lemma does not replace a stability argument."
+   },
+   {
+    "node": "det-lem-int-tensor-projection",
+    "why": "Step(s) 4 use this existing statement as a generic Projection formula for extension by zero along a locally closed immersion tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "cor-fin-deligne-open-finite-coefficients",
+    "why": "Step(s) 5 use this existing statement as a generic Open direct images with arbitrary finite allowable coefficients tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lem-kun-0f10",
+    "why": "Step(s) 5 use this existing statement as a generic Finite cohomological dimension of finite-type morphisms tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "det-geo-open-finiteness-ii-amplitude",
+    "why": "Step(s) 5 use this existing statement as a generic Bounded amplitude of open direct image on classical torsion sheaves tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lem-sf-projection-finite-constant",
+    "why": "Step(s) 5 use this existing statement as a generic The projection formula with a finitely presented constant coefficient tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Step(s) 5 use this existing statement as a generic Exactness of geometric stalks tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Step(s) 5 use this existing statement as a generic Conservativity of geometric stalks tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Step(s) 5 use this existing statement as a generic Comparison direct image tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lem-exc-comparison-tor-interval",
+    "why": "Step(s) 5 use this existing statement as a generic Site comparison preserves and detects Tor intervals tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Step 5 uses existence of a flat-term K-flat resolution on a one-point ringed site to compute derived tensor of a stalk with a filtered union of scalar modules."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Steps 5 and 7 use exact filtered colimits in module categories, respectively on the point and on the pro-étale site, to commute cohomology with the explicitly described coefficient colimits."
+   },
+   {
+    "node": "det-thm-sf-pf-adic-open",
+    "why": "Step(s) 6 use this existing statement as a generic Integral open direct image preserves constructibility tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "det-lem-integral-models-generators",
+    "why": "Step 7 use this existing statement as a generic Integral generators of $D^b_c(X,E)$ and $D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "det-cor-coefficient-heart-ii-triangulated",
+    "why": "Step(s) 7 use this existing statement as a generic Bounded constructible complexes with field coefficients form a triangulated subcategory tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Step(s) 7 use this existing statement as a generic Comparison with completed coefficients tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "det-pe-bounded-continuity-direct-image",
+    "why": "Step(s) 7 use this existing statement as a generic Higher direct images commute with bounded-below filtered colimits tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "why": "Step(s) 7 use this existing statement as a generic $E_X$ is $\\mathcal O_{E,X}$ with $\\ell$ inverted tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "det-ctf-finite-proper-localizing",
+    "why": "Step(s) 8 use this existing statement as a generic Finite-coefficient proper direct image on the localizing categories tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-integral",
+    "why": "Step(s) 8 use this existing statement as a generic Proper direct image, base change and projection formula for $\\mathcal O_E$ tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-rational",
+    "why": "Step(s) 8 use this existing statement as a generic Proper direct image, base change and projection formula for $E$ and $\\overline{\\mathbf Q}_\\ell$ tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Steps 7 and 9 use the general ringed-topos composition comparison, respectively to compare derived direct image before and after scalar restriction, and to assemble the open and proper factors of a compactification."
+   },
+   {
+    "node": "sk-prop-sf-rf-shriek-preservation",
+    "why": "Step(s) 10 use this existing statement as a generic $f^!$ with finite coefficients tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "sk-thm-int-restriction",
+    "why": "Step(s) 10 use this existing statement as a generic $f^!$ preserves integral constructible complexes tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   },
+   {
+    "node": "sk-thm-restriction",
+    "why": "Step(s) 10 use this existing statement as a generic $f^!$ with rational coefficients tool in the flat-model / open-and-proper / restriction route; the item unit does not supply this separate statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "det-proper-base-change-unbounded-pullback",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-sf-etale-flat-constructible",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-weil-pbc-locally-constant-tensor",
+  "thm-constructible-serre",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "det-lem-integral-models-operations",
+  "det-thm-sf-pf-field-tensor",
+  "lem-pqf-qc-immersion-open-closed-factor",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-proper-fp-permanence",
+  "det-lem-int-tensor-projection",
+  "cor-fin-deligne-open-finite-coefficients",
+  "lem-kun-0f10",
+  "det-geo-open-finiteness-ii-amplitude",
+  "lem-sf-projection-finite-constant",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-exc-comparison-tor-interval",
+  "lem-pc-kflat-resolution",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "det-thm-sf-pf-adic-open",
+  "det-lem-integral-models-generators",
+  "det-cor-coefficient-heart-ii-triangulated",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "det-pe-bounded-continuity-direct-image",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "det-ctf-finite-proper-localizing",
+  "det-thm-sfb-proper-base-change-integral",
+  "det-thm-sfb-proper-base-change-rational",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "sk-prop-sf-rf-shriek-preservation",
+  "sk-thm-int-restriction",
+  "sk-thm-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NL-5551fb7b8",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-5551fb7b8 (reviewer sub-agent of L); spot-checked: I read the item, all ten steps and the statements of all 46 cited nodes against the main-20261015 source and the units; the delivery adds no new nodes. The statement is verbatim and no target is weakened. Steps 1-3: pullback for every admissible ring comes from det-proper-base-change-unbounded-pullback. For finite A, tensor uses the etale flat constructible model, the common refinement of strata, 094H on flat degree-0 terms and K-flatness by 06YQ, giving the interval [a+c,b+d]; this moves to pro-etale by the 07A4 pullback and the Noetherian Tor-comparison equivalence. Dctf=Dbc is used only for the integral and rational rings. Step 4: a_! uses the 01QV factorization, exactness from the open/closed lemma, an explicit stratification and det-lem-int-tensor-projection tested against every sheaf N, so the whole complex is tested; this is correct for nonregular A. Step 5 is needed because cor-sf-direct-image-ctf-proetale covers only k=Fbar_q and A_{E,n}. Its inputs check out: finite open direct image over any field, relative cd from Stacks 0F10(1) (checked in the .tex), uniform vanishing, the finitely presented projection formula, and an arbitrary-module stalk test with K-flat resolutions and filtered colimits, then the comparison isomorphism and Tor transfer. Steps 6-7 follow the route of sk-prop-open-coefficients: integral open preservation, then integral generators, bounded continuity on degree-0 colimits after restriction of scalars (0D6E), flat localization and finite-free extensions. Step 8 checks the finite, integral (1) and rational (2) proper results. Step 9 uses the chosen compactification, Rf_*=Rp_*Rj_*, and Rf_!=Rp_*D(j_!). Step 10 uses the three restriction theorems; the f^! of det-prop-int-brown-adjoint is stated to be that of sk-prop-sf-existence. Edge cases tested: zero objects, empty schemes, identity immersions, A=Z/l^2 and infinite cd(k). All 15 Stacks tags match their labels. There is no cycle, no merged citation, no duplicate and no SGA citation. I accept the declared tool_uses. The unit record sk-thm-sf-ctf-stability is the stale master unit, and lem-pc-bounded-above-flat-kflat-site should cite 06YQ, not 06YS; both are maintainer metadata, not faults of this delivery. No fixes."
+ }
 }

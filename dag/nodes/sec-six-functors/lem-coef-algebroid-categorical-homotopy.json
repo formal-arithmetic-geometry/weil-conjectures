@@ -26,9 +26,117 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $b(T,v)=T\\odot v=\\operatorname{colim}_{T}v$. Distributing tensor over the two colimits gives $(T\\odot v)\\otimes(T'\\odot v')\\simeq(T\\times T')\\odot(v\\otimes v')$, with the singleton giving the unit. These comparisons define a strong monoidal functor $b:\\mathcal S\\times\\mathcal V\\to\\mathcal V$: for any finite list, the comparison is the universal colimit cocone indexed by the product of its spaces, so regrouping or inserting a singleton gives the same cocone and all coherences. The same universal property gives $(T\\times T')\\odot v\\simeq T\\odot(T'\\odot v)$. Apply the external-product statement to $K\\boxtimes B$ and change enrichment by $b$. This constructs $B\\diamond K$ with the claimed object pairs and mapping objects, including its coherent compositions and units. The preceding Fubini comparisons, natural in the operadic diagrams, give the action equivalences $(B\\diamond H)\\diamond K\\simeq B\\diamond(H\\times K)$ and the unit $B\\diamond E^0_{\\mathcal S}\\simeq B$. In spaces this action is the cartesian product of space-enriched algebroids. No symmetry on $\\mathcal V$ is used: the order of the $v$ factors is retained.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-algebroid-external-product",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Corollary 4.3.17 and its spatial action; explicit copower construction"
+   }
+  },
+  {
+   "text": "The copower functor $b$ preserves colimits separately. In $v$ this follows by interchanging colimits; in $T$ the copower universal property is $\\operatorname{Map}_{\\mathcal V}(T\\odot v,w)\\simeq\\operatorname{Map}_{\\mathcal S}(T,\\operatorname{Map}_{\\mathcal V}(v,w))$, so colimits of spaces become limits on mapping out. The bilinear-colimit statement therefore applies to $b$ and the external product from step 1. Thus $-\\diamond K$ preserves small colimits. The algebroid category is presentable by the presentability statement, so the presentable adjoint criterion gives its right adjoint $C^K$ with $\\operatorname{Map}(B\\diamond K,C)\\simeq\\operatorname{Map}(B,C^K)$. Naturality in $K$ gives the contravariant cotensor maps. Applying this adjunction twice gives $\\operatorname{Map}(B,(C^K)^H)\\simeq\\operatorname{Map}((B\\diamond H)\\diamond K,C)\\simeq\\operatorname{Map}(B,C^{H\\times K})$. Yoneda identifies the represented objects and gives the natural iterated-cotensor equivalence. Because these are equivalences of coherent mapping-space bifunctors, the units, counits and composition compatibilities are those of the adjunctions, rather than choices of objectwise bijections.",
+   "uses": [
+    "lem-coef-algebroid-bilinear-colimits",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Corollary 4.3.17 and Definition 4.3.18"
+   }
+  },
+  {
+   "text": "All hom spaces of $E^q_{\\mathcal S}$ are singletons, whose copowers are the original objects. Thus $E^p_{\\mathcal V}\\diamond E^q_{\\mathcal S}$ has $(p+1)(q+1)$ objects and every hom object and composition is the unit and its constraints, giving the stated indiscrete formula. The unit action and adjunction give $C^{E^0_{\\mathcal S}}\\simeq C$. The equivalence-nerve statement identifies $U(A)\\simeq\\operatorname{Map}(E^0_{\\mathcal V},A)$ for any algebroid $A$; hence $U(C^{E^n_{\\mathcal S}})\\simeq\\operatorname{Map}(E^0_{\\mathcal V}\\diamond E^n_{\\mathcal S},C)\\simeq\\operatorname{Map}(E^n_{\\mathcal V},C)$. These identifications commute with maps of finite sets because their hom maps are identities of the tensor unit.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-algebroid-equivalence-nerve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 5.1.4 and 5.5.1; finite indiscrete action formulas"
+   }
+  },
+  {
+   "text": "Use the displayed cylinder maps as the definitions of natural equivalence and categorical equivalence. Let $F:B\\to C$ have pseudo-inverse $G$ with witnesses $GF\\Rightarrow1_B$ and $FG\\Rightarrow1_C$. Restriction of the second witness to an object $c$ gives an equivalence $FGc\\to c$, so the equivalence-nerve criterion makes $F$ essentially surjective. To check full faithfulness fix $x,y\\in U(B)$ and write $\\alpha:B(x,y)\\to C(Fx,Fy)$, $\\gamma:C(Fx,Fy)\\to B(GFx,GFy)$ and $\\delta:B(GFx,GFy)\\to C(FGFx,FGFy)$ for the maps induced by $F,G,F$. Naturality of the first witness says that $\\gamma\\alpha$ is conjugation by its components at $x,y$; it is an equivalence because composition with an equivalence of objects induces equivalences of hom objects. Naturality of the second witness at $Fx,Fy$ says that $\\delta\\gamma$ is likewise an equivalence. In the homotopy category of $\\mathcal V$, $\\alpha(\\gamma\\alpha)^{-1}$ is a right inverse of $\\gamma$, and $(\\delta\\gamma)^{-1}\\delta$ is a left inverse. A left and right inverse coincide, so $\\gamma$ and then $\\alpha$ are invertible. Thus $\\alpha$ is an equivalence in $\\mathcal V$ for every pair, which is full faithfulness. The conjugation identities follow by restricting the cylinder functor to the two objects and their hom object and using its compatibility with composition.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-algebroid-equivalence-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 5.5.1-5.5.2 and Proposition 5.5.3"
+   }
+  },
+  {
+   "text": "For $f:S\\to T$ with $S,T$ nonempty finite, choose $s_0\\in S$ and let $g:T\\to S$ be constant with value $s_0$. Define $h_S:S\\times\\{0,1\\}\\to S$ by $h_S(s,0)=gf(s)$, $h_S(s,1)=s$, and $h_T:T\\times\\{0,1\\}\\to T$ by $h_T(t,0)=fg(t)$, $h_T(t,1)=t$. Step 3 identifies $E_S^{\\mathcal W}\\diamond E^1_{\\mathcal S}$ with $E_{S\\times\\{0,1\\}}^{\\mathcal W}$, and likewise for $T$. Send every hom object by the identity $\\mathbf1\\to\\mathbf1$ and every object by $h_S$ or $h_T$. Unit constraints make these algebroid functors, with endpoints $E_gE_f,1$ and $E_fE_g,1$. They are the required natural equivalences, so $E_g$ is a pseudo-inverse of $E_f$ for both enrichments. This uses identity hom maps, not a claim that the tensor unit of $\\mathcal V$ is terminal.",
+   "uses": [
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Corollary 5.5.6, nonempty finite-set case"
+   }
+  },
+  {
+   "text": "Let $u:K\\to H$ have pseudo-inverse $v:H\\to K$. Contravariance gives $C^u:C^H\\to C^K$ and $C^v:C^K\\to C^H$. For the witness $w_K:K\\times E^1_{\\mathcal S}\\to K$ from $vu$ to $1_K$, apply cotensor contravariance to obtain $C^{w_K}:C^K\\to C^{K\\times E^1_{\\mathcal S}}\\simeq(C^K)^{E^1_{\\mathcal S}}$. Its adjunct is a map $C^K\\diamond E^1_{\\mathcal S}\\to C^K$. Its endpoints are $C^{vu}=C^uC^v$ and $1_{C^K}$, by naturality of the adjunction from step 2. The witness $w_H:H\\times E^1_{\\mathcal S}\\to H$ gives by the explicitly identical construction $C^H\\xrightarrow{C^{w_H}}C^{H\\times E^1_{\\mathcal S}}\\simeq(C^H)^{E^1_{\\mathcal S}}$, whose adjunct has endpoints $C^vC^u$ and $1_{C^H}$. These are the two natural-equivalence witnesses, proving the final cotensor assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Lemma 5.5.7"
+   }
+  },
+  {
+   "text": "We now justify the use of completeness in the remaining mapping-space assertion, without using the completion theorem, which depends on this item. Write $I_n(Z)=\\operatorname{Map}(E^n_{\\mathcal V},Z)$ and $Q=|I_\\bullet(Z)|$. By the equivalence-nerve statement this is a groupoid object. Effectiveness of groupoid objects gives $I_n(Z)\\simeq U(Z)\\times_Q\\cdots\\times_QU(Z)$. For complete $Z$, $U(Z)\\to Q$ is an equivalence, so every augmentation $I_n(Z)\\to Q$ is an equivalence, compatibly with all simplicial maps. Put $A=Z^{E^1_{\\mathcal S}}$. The adjunction and finite formula identify $I_n(A)\\simeq I_{2n+1}(Z)$, where the $2n+2$ objects are ordered as $(0,0),\\ldots,(0,n),(1,0),\\ldots,(1,n)$ in coordinates $(e,i)$ (the two factors have been interchanged). Every simplicial operator is induced by $(e,i)\\mapsto(e,\\theta(i))$, which is monotone even when $\\theta$ is not injective; hence these identifications give a simplicial augmentation $I_\\bullet(A)\\to Q$ that is an equivalence in every degree. Its realization is $Q$ (the simplex indexing category has contractible nerve, since $[0]$ is initial in $\\Delta^{\\mathrm{op}}$). Thus $U(A)=I_0(A)\\to|I_\\bullet(A)|$ is an equivalence, proving $A$ complete. By steps 5-6 the map $j=Z^s:Z\\simeq Z^{E^0_{\\mathcal S}}\\to A$, for $s:E^1_{\\mathcal S}\\to E^0_{\\mathcal S}$, is a categorical equivalence. Step 4 makes it fully faithful and essentially surjective; the nerve criterion gives $I(j)$ an equivalence, and completeness of both ends then gives $U(j)$ an equivalence. The last criterion in the nerve statement now makes $j$ an equivalence of algebroids.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-algebroid-equivalence-nerve",
+    "lem-coef-space-geometric-descent",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Lemmas 5.4.8 and 5.5.8; effectiveness calculation replacing the locality argument"
+   }
+  },
+  {
+   "text": "For any $D$, set $P_D=\\operatorname{Map}(D,Z)$ and $R_D=\\operatorname{Map}(D\\diamond E^1_{\\mathcal S},Z)$. Adjunction identifies the map $q_D:P_D\\to R_D$ induced by $s$ with $\\operatorname{Map}(D,j)$, so step 7 makes $q_D$ an equivalence. The two endpoint restrictions $r_0,r_1:R_D\\to P_D$ satisfy $r_iq_D\\simeq1$ because $sd^i=1$; therefore both are inverses of $q_D$, giving $r_0\\simeq r_1$ naturally in $D$. Given $F:B\\to C$ with inverse $G$ and witnesses $w_B,w_C$, postcomposition of $w_B:B\\diamond E^1_{\\mathcal S}\\to B$ by a variable map $B\\to Z$ gives a map $P_B\\to R_B$ whose endpoints are precomposition by $GF$ and the identity. The homotopy $r_0\\simeq r_1$ makes those two endomorphisms of $P_B$ homotopic. Postcomposing $w_C$ by maps $C\\to Z$ gives, with the same endpoint calculation on $P_C\\to R_C$, a homotopy from precomposition by $FG$ to the identity on $P_C$. Thus $F^*:P_C\\to P_B$ and $G^*:P_B\\to P_C$ are homotopy inverses, proving the mapping-space assertion for every complete $Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition 5.5.9, Lemma 5.5.12 and Theorem 5.5.13"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "lem-coef-algebroid-bilinear-colimits",
+  "lem-coef-algebroid-equivalence-nerve",
+  "lem-coef-algebroid-external-product",
+  "lem-coef-algebroid-presentability",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-space-geometric-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Read online in second reading: Corollary 4.3.17, Definition 4.3.18, Definitions 5.5.1-5.5.2, Proposition 5.5.3, Corollary 5.5.6, Lemmas 5.5.7-5.5.8, Proposition 5.5.9, Lemma 5.5.12 and Theorem 5.5.13. Explicit spatial copower construction and effectiveness argument in step 7 are supplied by the agent using the cited existing nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,10 +186,31 @@
    "results": "{\"t\": \"2026-10-16T16:37:48Z\", \"tool\": \"grep\", \"query\": \"quasicategor.*(local|groupoid|cotensor|colimit)|Rezk|SegalSpace|effective.*groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\"], \"digest\": \"815092eb62aa2ccf\"}",
    "date": "2026-10-16",
    "verdict": "no match: the sole hit is a Rezk bibliographic reference in CategoryTheory/LiftingProperties/PushoutProduct.lean:22, not a declaration of this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Segal|Rezk|cotensor|copower|algebroid",
+   "results": "{\"t\": \"2026-10-16T19:40:41Z\", \"tool\": \"grep\", \"query\": \"Segal|Rezk|cotensor|copower|algebroid\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\", \"Mathlib/CategoryTheory/Subobject/Comma.lean\", \"Mathlib/CategoryTheory/Subobject/Comma.lean\", \"Mathlib/CategoryTheory/Subobject/Comma.lean\", \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Subobject.lean\"], \"digest\": \"c6ec32d13053f695\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: results concern ordinary CategoryTheory enrichment, adjoint functor theorems, or an oplax cotensorator, not operadic infinity-algebroids and their spatial action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor from a presentable category preserving colimits is a left adjoint; enriched functor objects and powers by groupoids",
+   "results": "{\"t\": \"2026-10-16T19:40:45Z\", \"tool\": \"leanfinder\", \"query\": \"A functor from a presentable category preserving colimits is a left adjoint; enriched functor objects and powers by groupoids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"CategoryTheory.Limits.instIsLeftAdjointFunctorColim\", \"CategoryTheory.Functor.leftAdjointObjIsDefined_colimit\", \"CategoryTheory.isLeftAdjoint_of_preservesColimits_of_isSeparating\", \"CategoryTheory.MonoidalClosed.FunctorCategory.adj\", \"CategoryTheory.Functor.leftAdjointObjIsDefined_of_isColimit\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"CategoryTheory.Functor.closed\"], \"digest\": \"c269b59814f807af\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: results concern ordinary CategoryTheory enrichment, adjoint functor theorems, or an oplax cotensorator, not operadic infinity-algebroids and their spatial action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For coherent enriched categories, powers by the walking isomorphism give a cylinder adjunction and preserve categorical homotopy inverses",
+   "results": "{\"t\": \"2026-10-16T19:43:08Z\", \"tool\": \"leanfinder\", \"query\": \"For coherent enriched categories, powers by the walking isomorphism give a cylinder adjunction and preserve categorical homotopy inverses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.eHom_whisker_cancel_inv\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.eHom_whisker_cancel\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"CategoryTheory.eHom_whisker_cancel_inv_assoc\", \"CategoryTheory.Iso.eHomCongr\", \"CategoryTheory.Iso.eHomCongr_inv_comp\"], \"digest\": \"8677d541ce0d2d23\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: results concern ordinary CategoryTheory enrichment, adjoint functor theorems, or an oplax cotensorator, not operadic infinity-algebroids and their spatial action."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-completion",
@@ -89,5 +218,20 @@
   "group": "NK"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-algebroid-categorical-homotopy",
+  "worker": "stage1",
+  "summary": "Eight proof steps using existing external-product, bilinear-colimit, presentability, adjoint, equivalence-nerve and effective-groupoid statements; no new nodes. Expands the full-faithfulness, finite-set cylinder, cotensor witness and complete-target mapping-space arguments.",
+  "blueprint": "Structural support, through the recorded created.item ancestry, for prop-coef-integral-exceptional-adjoint, proof paragraph 2: the finite-coefficient mapping-complex adjunction before R lim. Steps 1-3 construct the spatial action/cotensor calculus; steps 4-8 give its homotopy-invariance and complete-target mapping-space consequences. These foundations support the enriched tensor/localization framework used to realize the ancestor adjunction coherently; the ancestor paragraph does not itself cite Gepner-Haugseng."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NV-59e7b5fcd",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-59e7b5fcd (reviewer sub-agent of L); spot-checked: Read in full: the item (statement and 8 steps), the full statements of all 8 cited nodes, the parent lem-coef-algebroid-completion (steps 2-4 use the item), the unit and chapter, and delivery-errors A-F. Read Gepner-Haugseng arXiv:1312.3178v4 at the cited places: Cor 4.3.17, Def 4.3.18, Lemma 5.1.12, Lemma 5.4.8, Defs 5.5.1-5.5.2, Prop 5.5.3, Prop 5.5.5, Cor 5.5.6, Lemmas 5.5.7-5.5.8, Prop 5.5.9, Lemma 5.5.12, Thm 5.5.13. The statement agrees with these places. The nonempty-set restriction of Cor 5.5.6 is a correct narrowing: E_empty -> E_{*} has no functor back, so it is not a categorical equivalence, and the parent only needs E^n, which has n+1 objects. Step by step: step 1 builds the copower b as strong monoidal from the fact that tensor preserves colimits in each variable, then applies b to the external product; V is never assumed symmetric. Step 2 checks the bilinear-colimit hypotheses with (S,V,V), then applies presentability and the adjoint theorem; the iterated cotensor follows by Yoneda. Step 3: finite formulas via I_0 = U. Step 4: the full-faithfulness argument is the same as GH 5.5.3; essential surjectivity uses the nerve node's objectwise criterion. Step 5: the h_S/h_T cylinders, checked on 1- and 2-point sets. Step 6: GH 5.5.7, with C^{vu} = C^u C^v. Step 7 proves Z^{E^1} complete directly, without completion, so there is no cycle: I_n(Z^{E^1}) = I_{2n+1}(Z) with lexicographic order, which is monotone under non-injective simplicial operators. Step 8 is GH 5.5.12/5.5.13. proof_deps equals the union of uses; all cited nodes are in the item's own unit, so no tool_uses are needed. A dependency walk over 253 nodes finds no cycle. There are no new nodes. The duplicate candidates (enriched-category tensor calculus, enrichment-change adjunction, cellular natural equivalence, rigidification equivalence detection) do not state the item. Blueprint fields are present. No SGA source is used. No fixes."
+ }
 }
