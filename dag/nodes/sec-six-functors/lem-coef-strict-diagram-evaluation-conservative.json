@@ -31,9 +31,127 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\operatorname{Fun}(I,\\mathcal M_c)$. Let $U$ consist of componentwise trivial cofibrations and $V$ of componentwise trivial fibrations in $D$. Identities belong to both lifting classes of a weak factorization system, hence to $W$; two-out-of-three gives composition closure of $W$. The lifting-class closure of [lem-coef-lifting-class-closure] makes $C$ and $C\\cap W$ closed under composition and pushout. The dual pullback and composition assertions for right lifting classes follow directly: a square against a pullback projects to a square against the original right-class map, whose lift pairs with the given base map to give a lift into the pullback; successive right-class maps are handled by two successive lifts. Thus $F\\cap W$ is closed under pullback and composition. In particular composition makes $U,V$ subcategories. Choose the stated functorial factorization of $0\\to X$ to obtain $QX\\to X$ in $F\\cap W$ with $QX$ cofibrant. All these constructions applied pointwise are functors on strict $I$-diagrams: their structural maps are the images of commuting squares under the functorial choices. Pointwise pullbacks and pushouts exist in $\\mathcal M$ because the shapes are finite. This does not assert a model structure on $D$.",
+   "uses": [
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: elementary lifting consequences and pointwise replacements beneath the strict diagram fraction argument"
+   }
+  },
+  {
+   "text": "For a map $w:A\\to B$ in $W_I$, factor it pointwise and functorially as $A\\xrightarrow{u}E\\xrightarrow{v}B$ with $u\\in C$ and $v\\in F\\cap W$. The objects $E(i)$ are cofibrant by composition, and two-out-of-three gives $u\\in U$, while $v\\in V$. A span $X'\\xleftarrow{u}X\\xrightarrow{f}Y$ with $u\\in U$ has the pointwise pushout $Y'=X'\\amalg_XY$: the map $Y\\to Y'$ is in $U$ and $Y'$ is objectwise cofibrant. A cospan $X\\xrightarrow{g}Y\\xleftarrow{v}Y'$ with $v\\in V$ has pointwise pullback $P=X\\times_Y Y'$. Replace $P$ functorially by $QP\\to P$. Then $QP\\to X$ is a composite of trivial fibrations, hence in $V$, and $QP$ is objectwise cofibrant. These are commuting squares in $D$; they exist without properness. The replacement is necessary because the raw pullback need not be cofibrant.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: explicit factorization and square completions for strict cofibrant diagrams"
+   }
+  },
+  {
+   "text": "Write $Q_D:D\\to D[W_I^{-1}]$ for ordinary localization, constructed by finite words in arrows and formal inverses to $W_I$, modulo composition and inverse relations. Every generator $f:X\\to Y$ is the three-arrow word $X\\xleftarrow{1}X\\xrightarrow{f}Y\\xleftarrow{1}Y$; the inverse of $w:Y\\to X$ is $X\\xleftarrow{w}Y\\xrightarrow{1}Y\\xleftarrow{1}Y$. To compose $X\\xleftarrow{a}A\\xrightarrow{f}B\\xleftarrow{b}Y$ and $Y\\xleftarrow{c}C\\xrightarrow{g}E\\xleftarrow{d}Z$, factor $bc:C\\to B$ as $C\\xrightarrow{u}T\\xrightarrow{v}B$ with $u\\in U,v\\in V$. Use step 2 to complete $A\\xrightarrow{f}B\\xleftarrow{v}T$ to $P\\xrightarrow{t}T$, $P\\xrightarrow{p}A$ with $p\\in V$ and $vt=fp$. Push out $u:C\\to T$ against $g:C\\to E$, obtaining $k:T\\to H$ and $j:E\\to H$ with $j\\in U$ and $ku=jg$. The composite is represented by $X\\xleftarrow{ap}P\\xrightarrow{kt}H\\xleftarrow{jd}Z$. Indeed $Q_D(kt)Q_D(p)^{-1}=Q_D(j)Q_D(g)Q_D(bc)^{-1}Q_D(f)$, by the two displayed commuting-square equations. The outer maps $ap,jd$ lie in $W_I$. Induction on the number of generators, with the identity as the empty word, now represents every localized morphism by such a three-arrow word. Only formal inverse algebra is used after the constructions of step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: complete finite-word induction supplying the fraction reduction"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-localization-homotopy-category] to $(D,W_I)$. It identifies $h\\mathcal A_I$ with $D[W_I^{-1}]$, naturally for evaluations. By its essential-surjectivity clause, conjugate any given arrow $a$ by equivalences at its endpoints so that those endpoints are images of strict diagrams. This conjugation preserves both the assumption on the evaluations and the desired conclusion. Steps 2-3 then represent $[a]$ by $Q_D(b)^{-1}Q_D(f)Q_D(a_0)^{-1}$, with $a_0:A\\to X$, $f:A\\to B$, $b:Y\\to B$, and $a_0,b\\in W_I$. The homotopy-category comparison ensures this assertion concerns the given arrow, not merely objects of a localization.",
+   "uses": [
+    "lem-coef-localization-homotopy-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: passage to the ordinary homotopy category and representation of the actual arrow"
+   }
+  },
+  {
+   "text": "Let $\\gamma:\\mathcal M\\to H=\\mathcal M[W^{-1}]$ be ordinary localization, constructed by finite words in a larger universe. The nerve of $\\gamma|_{\\mathcal M_c}$ inverts $W$, so the stated full coherent universal property of $\\mathcal B$ gives $T:\\mathcal B\\to N(H)$ with an equivalence after restriction to $N(\\mathcal M_c)$. Suppose all $\\operatorname{ev}_i^L(a)$ are equivalences. Applying $T$ and homotopy categories to the fraction of step 4, its outer factors become isomorphisms since $a_{0,i},b_i\\in W$. Thus $\\gamma(f_i)$ is an isomorphism for each $i$. Naturality of the comparison in [lem-coef-localization-homotopy-category] identifies this calculation with evaluation of the original class $[a]$, up to the endpoint conjugations already allowed. The next three steps show $f_i\\in W$ from the two smaller ordinary homotopy lemmas, without citing the cyclic general saturation node.",
+   "uses": [
+    "lem-coef-localization-homotopy-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: apply the ordinary localization to each component of the strict fraction"
+   }
+  },
+  {
+   "text": "Fix $i$ and write $u=f_i:A\\to B$; both $A,B$ are cofibrant. Functorially factor $X\\to *$ as $X\\xrightarrow{r_X}RX\\to *$, with $r_X\\in C\\cap W$ and $RX$ fibrant. Then $RA,RB$ are also cofibrant by composition. Naturality gives $Ru\\,r_A=r_Bu$, so $\\gamma(Ru)$ is an isomorphism because $\\gamma(u),\\gamma(r_A),\\gamma(r_B)$ are. Factor $Ru$ as $RA\\xrightarrow{j}E\\xrightarrow{p}RB$, with $j\\in C\\cap W$ and $p\\in F$. Then $E$ is cofibrant (composition with $0\\to RA$) and fibrant (composition with $RB\\to *$). The map $\\gamma(p)$ is invertible. By [lem-coef-model-localization-map-surjective], applied with cofibrant source $RB$ and fibrant target $E$, choose $s:RB\\to E$ with $\\gamma(s)=\\gamma(p)^{-1}$. Hence $\\gamma(ps)=1$.",
+   "uses": [
+    "lem-coef-model-localization-map-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: bifibrant replacement of the fixed component and representation of one inverse"
+   }
+  },
+  {
+   "text": "For each cofibrant $X$, factor its fold map $X\\amalg X\\to X$ as a cofibration $(e_0,e_1):X\\amalg X\\to J_X$ followed by a trivial fibration $c_X:J_X\\to X$. This is a good cylinder: $c_Xe_k=1$ and $c_X\\in W$. Each coproduct injection $X\\to X\\amalg X$ is a cofibration, since its missing summand lifts against any trivial fibration by cofibrancy of $X$; hence each $e_k$ is a cofibration, and two-out-of-three makes it trivial. A good path object for every fibrant $Y$ is obtained by factoring its diagonal $Y\\to Y\\times Y$ into a trivial cofibration followed by a fibration. These choices meet every hypothesis of [lem-coef-localized-good-homotopy-test]. Apply its equality-to-cylinder clause to $ps,1_{RB}:RB\\to RB$. It gives $H:J_{RB}\\to RB$ with $He_0=ps$ and $He_1=1$. Lift the square with top $s:RB\\to E$, left $e_0$, right $p$, and bottom $H$. This yields $V:J_{RB}\\to E$ with $Ve_0=s$ and $pV=H$. Set $t=Ve_1$; then $pt=1_{RB}$, and since $\\gamma(p)$ is invertible, $\\gamma(tp)=1_{\\gamma E}$.",
+   "uses": [
+    "lem-coef-localized-good-homotopy-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: specified good cylinder and lifting square rectify the component inverse to a strict section"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-localized-good-homotopy-test] again, now to $tp,1_E:E\\to E$, with the good cylinder $E\\xrightarrow{d_0,d_1}J_E\\xrightarrow{c_E}E$ just constructed and any good path object for $E$. It gives $G:J_E\\to E$ with $Gd_0=tp$ and $Gd_1=1_E$. The equations $c_Ed_k=1_E$, with $c_E\\in W$, give $d_0,d_1\\in W$. Then $Gd_1=1_E$ gives $G\\in W$, whence $tp=Gd_0\\in W$. In the arrow category, $p:E\\to RB$ is a retract of $tp:E\\to E$: the arrow maps are $(1_E,t)$ and $(1_E,p)$, their squares commute since $pt=1$, and their composite on $p$ is $(1_E,pt)=1_p$. Retract closure gives $p\\in W$. Therefore $Ru=pj\\in W$, and $Ru\\,r_A=r_Bu$ gives $u\\in W$ by two-out-of-three. This proves $f_i\\in W$ for every $i$ by an explicit homotopy and retract calculation; it assumes neither a model structure on the diagram category nor rectification.",
+   "uses": [
+    "lem-coef-localized-good-homotopy-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: second cylinder and explicit arrow retract recover the weak-equivalence condition on each component"
+   }
+  },
+  {
+   "text": "Consequently $f\\in W_I$. In the fraction of step 4 all three arrows now belong to $W_I$, so $[a]$ is invertible in $h\\mathcal A_I$. The equivalence-edge criterion of [lem-coef-localization-homotopy-category] implies that the original arrow $a$ is an equivalence in $\\mathcal A_I$, including the endpoint conjugations. This finishes detection for arbitrary arrows of the coherent localization, not only those originally in the diagram category.",
+   "uses": [
+    "lem-coef-localization-homotopy-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: invert the three fraction factors and return to the given coherent arrow"
+   }
+  },
+  {
+   "text": "The induced comparison has $i$th component $\\operatorname{ev}_i^L$. By [lem-cbc-enhanced-functor-cone-calculus], its image of an arrow is an equivalence exactly when all these components are equivalences, so the just-proved detection assertion is exactly conservativity. When $I$ is empty, $D$ is the terminal ordinary category and $W_I$ is its single identity. The homotopy-category comparison of [lem-coef-localization-homotopy-category] makes $h\\mathcal A_I$ equivalent to the terminal category, so every arrow of $\\mathcal A_I$ is an equivalence. This verifies the vacuous evaluation hypothesis without requiring an object of $I$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-localization-homotopy-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: coherent pointwise interpretation and empty-index edge case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-localization-homotopy-category",
+  "lem-coef-localized-good-homotopy-test",
+  "lem-coef-model-localization-map-surjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2: conservativity input to strict-diagram generation. Agent-written finite fraction construction and componentwise good-cylinder/retract calculation; Cisinski Theorem 7.9.8 motivates the reduction, but its rectification conclusion is not assumed."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -76,10 +194,38 @@
    "results": "{\"t\": \"2026-10-16T20:21:50Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism in the homotopy category of strict model diagrams is invertible whenever each evaluation is invertible without a projective model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.quotient_inverts_homotopyEquivalences\", \"ComplexShape.strictUniversalPropertyFixedTargetQuotient\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopyCategory.isoOfHomotopyEquiv\", \"HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"CategoryTheory.ProjectiveResolution.homotopyEquiv\"], \"digest\": \"2a12fc0a8612f758\"}",
    "date": "2026-10-16",
    "verdict": "no match: CofibrantObject.factorsThroughLocalization and localizerMorphism concern ordinary localizations of one model category, not conservativity of the coherent localization of an arbitrary strict diagram category. Read ModelCategory/CofibrantObjectHomotopy.lean:32-105, including weakEquivalence_toHoCat_map_iff at 87-90 (a weak-equivalence class on a quotient, not this diagram theorem). The evaluation hits in SimplicialSet/SubcomplexColimits.lean:38-61 and Limits/FunctorCategory/Basic.lean concern ordinary componentwise colimits. The second semantic phrasing and refined model-category grep also fail to state the assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Joint conservativity of evaluations on the infinity localization of strict diagrams of cofibrant objects in an arbitrary model category",
+   "results": "{\"t\": \"2026-10-16T21:38:42Z\", \"tool\": \"leanfinder\", \"query\": \"Joint conservativity of evaluations on the infinity localization of strict diagrams of cofibrant objects in an arbitrary model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\"], \"digest\": \"56344747cf1a7c8a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the model-category inclusion/localized-equivalence instances concern a single ordinary category; evaluationPreservesLimits and related hits concern ordinary functor categories. They do not state evaluation conservativity for a coherent localization of arbitrary strict model diagrams. The item is not a Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Rr]eflect|locali[sz].*conserv|conserv.*locali[sz]",
+   "results": "{\"t\": \"2026-10-16T21:38:59Z\", \"tool\": \"grep\", \"query\": \"evaluation.*[Rr]eflect|locali[sz].*conserv|conserv.*locali[sz]\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/FunctorCategory/PreservesLimits.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/CategoryTheory/Action/Limits.lean\", \"Mathlib/CategoryTheory/Action/Limits.lean\", \"Mathlib/CategoryTheory/Functor/RegularEpi.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLimits.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLimits.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/BinaryBiproducts.lean\"], \"digest\": \"de22be3fa143bbb0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the model-category inclusion/localized-equivalence instances concern a single ordinary category; evaluationPreservesLimits and related hits concern ordinary functor categories. They do not state evaluation conservativity for a coherent localization of arbitrary strict model diagrams. The item is not a Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Joint conservativity of object evaluations after localizing strict model category diagrams",
+   "results": "{\"t\": \"2026-10-16T21:39:00Z\", \"tool\": \"leansearch\", \"query\": \"Joint conservativity of object evaluations after localizing strict model category diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.comp\", \"CategoryTheory.MorphismProperty.Localization'\", \"CategoryTheory.Limits.evaluationPreservesLimits\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\", \"CategoryTheory.Limits.evaluation_preservesLimitsOfShape\"], \"digest\": \"2b894ad734e77913\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the model-category inclusion/localized-equivalence instances concern a single ordinary category; evaluationPreservesLimits and related hits concern ordinary functor categories. They do not state evaluation conservativity for a coherent localization of arbitrary strict model diagrams. The item is not a Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CofibrantObject\", \"ReflectsIsomorphisms\"",
+   "results": "{\"t\": \"2026-10-16T21:39:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"CofibrantObject\\\", \\\"ReflectsIsomorphisms\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the model-category inclusion/localized-equivalence instances concern a single ordinary category; evaluationPreservesLimits and related hits concern ordinary functor categories. They do not state evaluation conservativity for a coherent localization of arbitrary strict model diagrams. The item is not a Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-free-diagram-homotopy-density",
@@ -99,5 +245,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-strict-diagram-evaluation-conservative",
+  "worker": "stage1",
+  "summary": "Retained the full statement and empty-index case. Wrote the finite-word three-arrow reduction explicitly. Repaired the former cyclic saturation citation by applying the existing acyclic Mathlib leaves for inverse representation and good-cylinder equality, followed by specified lifts and an arrow-category retract in the proof steps. No duplicate saturation node or edit of another node is needed. Only the general coherent-localization/homotopy-category comparison is new.",
+  "blueprint": "Realizes the conservativity input to free-diagram generation below paragraph 2 of prop-coef-integral-exceptional-adjoint, specifically detection before Cisinski (7.9.8.7), without using the strict/coherent diagram equivalence it is meant to help prove.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only its generic componentwise criterion for equivalences of coherent transformations is used; no geometric route is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-7e742016d",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-7e742016d (reviewer sub-agent of L); spot-checked: I read the delivery in full (AGENTS, stage 1, brief, GOAL, dag-sync, delivery-errors A-F, packet, report, the item, the new node, every cited statement, the parent, the unit and the blueprint ancestor). The item is true and its statement is unchanged; it is the conservativity half of Cisinski Thm 7.9.8. The Cisinski PDF is not in the literature folder and I could not open it, so I did not check the cited pages; I checked the mathematics of every statement and step instead. Small cases checked: empty I, a single object, discrete I, and W equal to the isomorphisms. Step checks: step 1 cites only clauses the lifting-closure leaf has and writes the right-class pullback argument out. Step 2: the cofibrant replacement of the pullback is needed and correct, and no properness is used. Step 3: I recomputed the word composition and the equation Q(kt)Q(p)^-1=Q(j)Q(g)Q(bc)^-1Q(f), and the induction is properly set up. Steps 4, 5 and 9 use the new node's essential surjectivity, its naturality, its identification of hL with C[W^-1] and its equivalence criterion. Step 6 meets every hypothesis of the map-surjective leaf: the localization is of all of M, RB is cofibrant and E is fibrant. Steps 7 and 8: the good cylinder and path object meet the leaf's definitions, the lifting square commutes (ps=He0), pt=1, tp is in W, and the arrow retract (1,t),(1,p) with composite (1,pt)=1 gives p in W, then u in W. Step 10 uses the cone-calculus componentwise criterion; I accept that declared tool use. There is no cycle: 115 dependencies reached, none missing. The new node lem-coef-localization-homotopy-category is true, independent of the item, not a restated clause, and not a duplicate of brown-left-fractions, edge-triangle-presentation, invertible-interval, system-localization-universal, hammock or the trivial-fibration fraction model. Its searches are recorded and its blueprint from/via are correct. Repairs, in fixes/dag/nodes/sec-six-functors/lem-coef-localization-homotopy-category.json: (1) under B2, the statement now says L is a quasicategory, because hL is only defined for quasicategories; (2) I added the missing merged_into:null and lean_audit with state none. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
