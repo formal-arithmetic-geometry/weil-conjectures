@@ -1,0 +1,124 @@
+{
+ "id": "stage3-proetale-comparison-square-paths",
+ "kind": "definition",
+ "title": "Explicit ordinary comparison paths and common derived endpoints",
+ "statement": "For the specified data of [lem-weil-pbc-comparison-pullback], form the two ordinary path isomorphisms by whiskering its square map and its two edge comparisons in their prescribed order. The etale path passes through the etale square first; the pro-etale path passes through the pro-etale square last. Define their common derived source comparison by the exact derived composition maps and their common derived target comparison by those composition maps followed by inverse exactness comparisons to both total left derived pullbacks. These are actual composites, with no object chosen from an existence theorem. Component coherence implies equality of the two ordinary paths by extensionality. Define comparisonSquareDerivedPath by precomposing the exact derived ordinary-path isomorphism with the inverse common source factor and postcomposing with the common target factor; the whole isomorphism is an explicit argument, so equality of paths passes to equality of these composites by congruence.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
+  "place": "Expanded proof step 4"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Construct the paths by the displayed three whiskered isomorphisms. Construct the source and target factors by exact derived composition and exactness comparisons. For path equality, use Iso.ext, NatTrans.ext and component extensionality; expanding the three whiskered maps gives exactly the supplied component equation, with its sides reversed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
+  "place": "Expanded proof step 4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "results": [
+    "CategoryTheory.Functor.mapDerivedCategoryCompIso"
+   ],
+   "date": "2026-10-17",
+   "verdict": "Canonical exact derived composition comparison; no specialized site-path normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor induces a functor on derived categories preserving composition and natural isomorphisms",
+   "results": [
+    "CategoryTheory.Functor.mapDerivedCategory",
+    "CategoryTheory.Functor.mapDerivedCategoryFactorsh"
+   ],
+   "date": "2026-10-17",
+   "verdict": "General exact derivation and localization factors are available."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso_(trans|isoWhisker)|mapDerivedCategoryCompIso_assoc",
+   "results": [
+    "CategoryTheory.Functor.mapDerivedCategoryNatIso_trans",
+    "CategoryTheory.Functor.mapDerivedCategoryNatIso_isoWhiskerLeft",
+    "CategoryTheory.Functor.mapDerivedCategoryNatIso_isoWhiskerRight",
+    "CategoryTheory.Functor.mapDerivedCategoryCompIso_assoc"
+   ],
+   "date": "2026-10-17",
+   "verdict": "The coherence identities needed to normalize each ordinary path are proved."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equality of natural isomorphisms of exact functors induces an equality on derived categories",
+   "date": "2026-10-17",
+   "results": [
+    "CategoryTheory.Functor.leftDerivedNatIso",
+    "CategoryTheory.Functor.rightDerivedNatIso",
+    "CategoryTheory.Functor.mapDerivedCategory.congr_simp",
+    "CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso",
+    "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison.congr_simp",
+    "CategoryTheory.Functor.IsRightDerivedFunctor.congr_simp",
+    "CategoryTheory.Functor.rightDerivedNatTrans.congr_simp",
+    "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh"
+   ],
+   "verdict": "General derivation of isomorphisms and congruence found; no specialized comparison-square path normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareTransport",
+  "date": "2026-10-17",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "stage3-proetale-comparison-square-transport",
+   "place": "explicit path constructions and extensionality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquarePaths",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/BaseChange/ComparisonSquarePaths.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.comparisonSquareEtalePath",
+  "statement": "def comparisonSquareEtalePath (cs : ChosenCartesianSquare g' f' f g) :\n    (Etale.upperStar (ModuleCat.{u + 1} Λ) g ⋙\n        Etale.upperStar (ModuleCat.{u + 1} Λ) f') ⋙ ν^*(X')[ModuleCat.{u + 1} Λ] ≅\n      ν^*(Y)[ModuleCat.{u + 1} Λ] ⋙\n        (upperStar (ModuleCat.{u + 1} Λ) f ⋙ upperStar (ModuleCat.{u + 1} Λ) g')",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T221553-L-1610887",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T221553-L-1610887",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "stage3-proetale-comparison-square-etale-path-normalization",
+ "kind": "statement",
+ "title": "Exact derived normalization of the Etale comparison path",
+ "statement": "For every commutative ring, chosen Cartesian square and bounded-below input, the Etale derived path equals the exact derived image of comparisonSquareEtalePath, precomposed with comparisonSquareSourceIso.inv and postcomposed with comparisonSquareTargetIso.hom. These paths and endpoint factors are the explicit constructions of [stage3-proetale-comparison-square-paths]. This asserts only one path identification; it assumes and concludes no square coherence. The square is supplied by an IsPullback proof. The assertion is HEq between the derived ordinary path composite and the stated component path, retaining their definitionally equal endpoint presentations to avoid expensive kernel conversion.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
+  "place": "Expanded proof step 4"
+ },
+ "stmt_deps": [
+  "stage3-proetale-comparison-square-paths"
+ ],
+ "proof": [
+  {
+   "text": "Expand comparisonSquareEtalePath as the etale square whiskered by the comparison pullback, followed by the edge comparisons at g-prime and f. Apply mapDerivedCategoryNatIso_trans and its left/right whiskering equations. The associativity equation for mapDerivedCategoryCompIso cancels the internal composition factors and leaves comparisonSquareSourceIso, the three exact derived path maps, and the exact-composition part of comparisonSquareTargetIso.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand etaleComparisonSquare, Etale.pullbackSquareComparison and Etale.upperStarPlusComp. The ordinary composition comparison is Etale.upperStarComp. Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app and Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app identify the two composition factors after bounded-below inclusion; equality induction identifies their commutativity transports. Thus the first exact derived map is the displayed image of the etale square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The ordinary edge comparison comparisonCoefficientPullbackIso is definitionally comparisonUpperStarCompUpperStarIso.symm. Expand leftDerivedUpperStarComparisonIso on each edge. Naturality of the inverse exactness comparison for g-prime moves it past the exact derived f-comparison and replaces its outer exact pullback by the total left derived pullback. The two inverse exactness factors left at the endpoint are precisely those in comparisonSquareTargetIso. Associate, cancel inverse-hom pairs, and evaluate at M. This uses no pro-etale square normalization or underived coherence hypothesis.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
+  "place": "Expanded proof step 4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "results": [
+    "CategoryTheory.Functor.mapDerivedCategoryCompIso"
+   ],
+   "date": "2026-10-17",
+   "verdict": "Canonical exact derived composition comparison; no specialized site-path normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor induces a functor on derived categories preserving composition and natural isomorphisms",
+   "results": [
+    "CategoryTheory.Functor.mapDerivedCategory",
+    "CategoryTheory.Functor.mapDerivedCategoryFactorsh"
+   ],
+   "date": "2026-10-17",
+   "verdict": "General exact derivation and localization factors are available."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso_(trans|isoWhisker)|mapDerivedCategoryCompIso_assoc",
+   "results": [
+    "CategoryTheory.Functor.mapDerivedCategoryNatIso_trans",
+    "CategoryTheory.Functor.mapDerivedCategoryNatIso_isoWhiskerLeft",
+    "CategoryTheory.Functor.mapDerivedCategoryNatIso_isoWhiskerRight",
+    "CategoryTheory.Functor.mapDerivedCategoryCompIso_assoc"
+   ],
+   "date": "2026-10-17",
+   "verdict": "The coherence identities needed to normalize each ordinary path are proved."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equality of natural isomorphisms of exact functors induces an equality on derived categories",
+   "date": "2026-10-17",
+   "results": [
+    "CategoryTheory.Functor.leftDerivedNatIso",
+    "CategoryTheory.Functor.rightDerivedNatIso",
+    "CategoryTheory.Functor.mapDerivedCategory.congr_simp",
+    "CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso",
+    "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison.congr_simp",
+    "CategoryTheory.Functor.IsRightDerivedFunctor.congr_simp",
+    "CategoryTheory.Functor.rightDerivedNatTrans.congr_simp",
+    "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh"
+   ],
+   "verdict": "General derivation of isomorphisms and congruence found; no specialized comparison-square path normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareTransport",
+  "date": "2026-10-17",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "stage3-proetale-comparison-square-transport",
+   "place": "Etale path normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareEtalePathNormalization",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/BaseChange/ComparisonSquareEtalePathNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.comparisonSquareEtalePath_normalization",
+  "statement": "theorem comparisonSquareEtalePath_normalization\n    (Λ : Type (u + 1)) [CommRing Λ]\n    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}\n    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g)\n    (M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    HEq\n      (comparisonSquareDerivedPath Λ g' f' f g (comparisonSquareEtalePath Λ\n        { toCommSq := sq.toCommSq, isoPullback := sq.isoPullback,\n          hom_fst := sq.isoPullback_hom_fst, hom_snd := sq.isoPullback_hom_snd }) M)\n      ((DerivedCategory.Plus.ι ⋙ D(ν^*(X')[ModuleCat.{u + 1} Λ])).map\n            ((Etale.pullbackSquareComparison (ModuleCat.{u + 1} Λ) sq.toCommSq).hom.app M) ≫\n          (leftDerivedUpperStarComparisonIso g' Λ).hom.app\n            (D+(Etale.upperStar (ModuleCat.{u + 1} Λ) f).obj M) ≫\n          L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) g').map\n            ((leftDerivedUpperStarComparisonIso f Λ).hom.app M))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T221553-L-1610887",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T221553-L-1610887",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

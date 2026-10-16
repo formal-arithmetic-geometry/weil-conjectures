@@ -5,6 +5,8 @@ module
 
 public import Sheaf.SixFunctors.ProEtale.BaseChange.SmoothBaseChangeComparisons
 public import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
+import Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareEtalePathNormalization
+import Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareProEtalePathNormalization
 
 /-! # Derived transport of a coherent comparison square -/
 
@@ -61,6 +63,16 @@ theorem comparison_square_of_component
         ((leftDerivedUpperStarComparisonIso g Λ).hom.app M) ≫
       (leftDerivedUpperStarSquareIso (ModuleCat.{u + 1} Λ) sq.toCommSq).hom.app
         ((DerivedCategory.Plus.ι ⋙ D(ν^*(Y)[ModuleCat.{u + 1} Λ])).obj M) := by
-  sorry
+  let cs : ChosenCartesianSquare g' f' f g :=
+    { toCommSq := sq.toCommSq
+      isoPullback := sq.isoPullback
+      hom_fst := sq.isoPullback_hom_fst
+      hom_snd := sq.isoPullback_hom_snd }
+  have he : comparisonSquareEtalePath Λ cs = comparisonSquareProEtalePath Λ cs :=
+    comparisonSquarePaths_eq (comparisonSquareData (ModuleCat.{u + 1} Λ) g' f' f g cs) hcomp
+  have hL := comparisonSquareEtalePath_normalization Λ sq M
+  have hR := comparisonSquareProEtalePath_normalization Λ sq M
+  have hd := congrFun (congrArg (comparisonSquareDerivedPath Λ g' f' f g) he) M
+  exact eq_of_heq (HEq.trans (HEq.symm hL) (HEq.trans (heq_of_eq hd) hR))
 
 end AlgebraicGeometry.ProEtale
