@@ -267,5 +267,23 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-5a29d9c8b (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources and unit/chapter route. Verified all seven steps, reversed prism overlaps, inverse-triangle compatibility, arbitrary-base hypotheses and dependency acyclicity. Independent checks passed for dimensions 0–7. No new nodes or repairs; accepted the three declared tool uses. Detailed findings are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightFibrationContractibleFibers",
+  "declaration": "SSet.rightFibration_of_contractible_fibers",
+  "file": "lean/Sheaf/CategoryTheory/RightFibrationContractibleFibers.lean",
+  "statement": "theorem rightFibration_of_contractible_fibers {E S : SSet.{u}} (q : E ⟶ S) (hq : ∀ (n : ℕ) (i : Fin (n + 1)), 1 ≤ n → 0 < i → HasLiftingProperty (horn n i).ι q) (hf : ∀ (s : S _⦋0⦌), KanComplex (pullback (SSet.const (X := Δ[0]) s) q) ∧ Enhanced.IsContractible (pullback (SSet.const (X := Δ[0]) s) q)) : modelCategoryQuillen.I.rlp q",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-719444c0b",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Every clause matches the node and Kerodon 01NU (3)=>(1): arbitrary q with no instances on E or S; right-horn RLP for n>=1, 0<i<=n via Fin(n+1); strict vertex fiber pullback(const s, q) required to be KanComplex and Enhanced.IsContractible (Q15 correctly added the Kan conjunct); conclusion I.rlp q, the recorded match of def-weil-pbc-trivial-kan-fibration, includes dimension 0. Edge cases checked: empty S, empty fiber (excluded by IsContractible), n=0, single universe u. No definitions; proof is sorry only; docstrings carry source, blueprint id and 7-step proof; imports cover the stated proof dependencies (the other three have no Lean record yet); node differs from side only in lean, and lean.statement matches the file verbatim; report has both sections. nt_compile --json exited 0 with no errors or warnings (item 1.5 s). No findings."
  }
 }
