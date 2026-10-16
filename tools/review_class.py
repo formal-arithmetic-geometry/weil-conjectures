@@ -4,6 +4,14 @@
 Usage:  tools/review_class.py <group> <item>      prints "AUTO" or "FULL: <reason>"
         tools/review_class.py list                every delivery branch with its class
 
+Stage 3 since 2026-10-17 (decision of the human: stage-3 deliveries need no reader, only mechanical checks): the class
+comes from tools/stage3_gate.py. A delivery the static checks or the gate refuse (import cycle, sorry put into a proved
+declaration, sorry added without progress, ...) is class AUTO with the reason "compiler-only: gate refuses: ...": the
+batch lander returns it with that message. Class CODEX ("reader required: ...") only where the gate cannot decide (the
+statement of a declaration a DAG node records or several modules use is changed or removed, a unit-route import is
+removed, the delivery cannot be read); the reader is the cc review service (~/weil-review-svc, lane S3). Every other
+delivery is AUTO and lands through tools/batch_land.py, verified by the global build. The text below until "Stage 2"
+describes the classes before 2026-10-17.
 Stage 3 (decision of the human, 2026-10-12: no Claude reviewer in stage 3). An item that is a module of the library
 (Sheaf.<...> or WeilConjectures.<...>) is classified by tools/stage3_delivery.py and gets one of two classes:
   AUTO   the delivery changes only proofs of the item's module: one module, no node file, no change record, nothing
@@ -35,7 +43,7 @@ import os, hashlib, json, pathlib, subprocess, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 if not (ROOT / "dag").exists(): ROOT = pathlib.Path.home() / "weil-conjectures-sheaf"
 SAMPLE = 10
-CACHE_POLICY = "forced-adaptations-v1"
+CACHE_POLICY = "s3gate-v1"
 def git(*a):
     return subprocess.run(["git", "-C", str(ROOT), *a], capture_output=True, text=True).stdout
 def show(ref, path):
@@ -56,18 +64,21 @@ def classify(g: str, item: str, D=None):
             if D is None:   # tools/batch_land.py passes its own reading, so that a delivery is read once
                 D = s3.read_delivery(s2.Git(ROOT), br, "sheaf-dag", g, item)
             why = s3.classify(D, g, item)
+            import stage3_gate as gt
+            # the import cycle is checked by tools/batch_land.py against its own snapshot of the import graph (a scan
+            # here would cost ~15 s per delivery); a cycle is refused there
+            verdict, gwhy = gt.gate(D, g, item, cycle_check=False)
         except Exception as e:   # a delivery the tool cannot read needs a reader
             return "CODEX", "the delivery could not be read: " + repr(e)[:200], head
-        # the human, 2026-10-12: in stage 3 a proof that compiles is checked by the compiler, not by a reader. A reader
-        # is kept only where the compiler cannot see the harm: an existing statement or interface changed, a declaration
-        # removed, a unit-route import removed, a disputed statement, a forbidden keyword, failed static checks.
-        KEEP = ("reader required:", "the static checks fail", "statement changed", "removes declarations", "removes the import of unit-route",
-                "new ", "STATEMENT-DISPUTED", "changes what other modules see")
-        allwhy = why
-        why = [w for w in why if w.startswith(KEEP) and not w.endswith(": (new module)")]
-        # "compiler-only": landed without a reader although it is more than a proof of one module (new lemmas, nodes,
-        # modules); the lander passes --reviewer COMPILER so that the proofs-only guard of AUTO does not revert it
-        return ("AUTO", ("compiler-only: " + "; ".join(allwhy)) if allwhy else "", head) if not why else ("CODEX", "; ".join(why), head)
+        # the human, 2026-10-17: no reader in stage 3; the mechanical gate decides (tools/stage3_gate.py)
+        if verdict == "REFUSE" or D["fails"]:
+            if verdict == "REFUSE" and not any(L == "gate" for L, _ in D["fails"]):
+                D["fails"].extend(("gate", w) for w in gwhy)
+            fl = [f"({L}) {x[:160]}" for L, x in D["fails"][:4]]
+            return "AUTO", "compiler-only: gate refuses (returned by the batch lander): " + "; ".join(fl), head
+        if verdict == "READER":
+            return "CODEX", "reader required: " + "; ".join(gwhy), head
+        return "AUTO", ("compiler-only: " + "; ".join(why)) if why else "", head
     base = git("merge-base", "sheaf-dag", br).strip()
     ch = [l.split("\t") for l in git("diff", "--name-status", f"{base}..{br}").strip().split("\n") if l]
     nodes = [(c[0], c[-1]) for c in ch if c[-1].startswith("dag/nodes/") and c[-1].endswith(".json")]
