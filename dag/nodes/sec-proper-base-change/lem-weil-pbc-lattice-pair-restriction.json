@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-lattice-pair-restriction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Restriction of integral lattice pairs",
+   "via": [
+    "lem-weil-pbc-lattice-class-descent",
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Restriction of integral lattice pairs",
+ "statement": "Let X be a scheme, J its pro-etale topology, R and S sheaves of commutative rings on J, a : R → S a ring-sheaf morphism, and L an S-module sheaf. An integral lattice pair on U consists of a finite locally free R|U-module P and a specified isomorphism S|U ⊗ P ≅ L|U, with the sheafified tensor product. For f : V → U and a lattice pair P on U, restriction of its integral module is finite locally free and scalar extension commutes with this restriction via the canonical sheafification-unit comparison. These give a lattice pair P|V. For every T over V, its embedded image equals the embedded image of P on the object T → V → U. [lem-weil-pbc-lattice-pair-image-classification, def-pur-localized-ringed-site, def-pur-sheaf-tensor-product].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-lattice-pair-image-classification",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Construct the tensor comparison from the restricted sheafification unit. Restriction preserves local bijectivity, hence the comparison is invertible. Pull back finite free basis covers. The comparison on the unit proves the image formula.",
+   "uses": [
+    "lem-weil-pbc-lattice-pair-image-classification",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lattice-pair-image-classification",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B4",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes",
+  "note": "Explicit image-family and compatible-tuple route. Second reading verifies restriction-unit naturality on unit tensors using the existing tensor restriction formulas, avoiding costly definitional comparison of chosen maps. Four local aliases cache existing strong slice sheafification and weak/strong iterated-slice sheafification and local bijectivity instances; all are proved by infer_instance."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Descent of finite locally free sheaves of modules and morphisms along a covering family of slice sites",
+   "results": "8 hits: CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.isFinitePresentation, AlgebraicGeometry.Scheme.Modules.Hom, SheafOfModules.sections, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.pullbackObjFreeIso.",
+   "date": "2026-10-16",
+   "verdict": "The stack descent theorem assumes an already established stack; it does not construct this module descent. Remaining hits are generic definitions and finite-free transport APIs. No exact lattice-class or scalar-extension restriction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite locally free sheaves of modules and morphisms along a covering family of slice sites",
+   "results": "8 hits: isFinitePresentation, mapFree, localGeneratorsDataOfIsFiniteType, LocalGeneratorsData.IsFiniteType.isFiniteType, LocalGeneratorsData.IsFiniteType, IsFiniteType, quasicoherentDataOfIsFinitePresentation, IsFinitePresentation.",
+   "date": "2026-10-16",
+   "verdict": "Generic API only; use local generators and mapFreeIso."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.mapFreeIso",
+   "results": "11 hits: mapFreeIso and its component lemmas, GeneratingSections.map_π_eq, Presentation.map_π_eq and map_relations_I.",
+   "date": "2026-10-16",
+   "verdict": "Use mapFreeIso to transport bases; no exact descent statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyFree|ModuleGlueData|existsUnique_section",
+   "results": "4 hits in CoversTop/Basic: existsUnique_section and section construction. Local search also found SiteModuleCompatibleTuples.",
+   "date": "2026-10-16",
+   "verdict": "Use compatible tuples and sheaf Hom; no duplicate lattice theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeClassDescent",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticePairRestriction",
+  "file": "lean/Sheaf/Paper/LatticePairRestriction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralLatticePair.restrict_image",
+  "statement": "theorem IntegralLatticePair.restrict_image\n    {L : SheafOfModules.{u + 1} 𝓢} (P : IntegralLatticePair a L U)\n    (T : (Over V)ᵒᵖ) :\n    (P.restrict a f).image T = P.image ((Over.map f).op.obj T)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.restrictedTensorUnit",
+   "AlgebraicGeometry.ProEtale.restrictedTensorComparison",
+   "AlgebraicGeometry.ProEtale.restrictedTensorComparison_spec",
+   "AlgebraicGeometry.ProEtale.restrictedTensorUnit_presheaf",
+   "AlgebraicGeometry.ProEtale.restrictedTensorComparison_app_unit",
+   "AlgebraicGeometry.ProEtale.restrictedTensorUnit_injective",
+   "AlgebraicGeometry.ProEtale.restrictedTensorUnit_surjective",
+   "AlgebraicGeometry.ProEtale.restrictedTensorComparison_isIso",
+   "AlgebraicGeometry.ProEtale.postOverMap_continuous",
+   "AlgebraicGeometry.ProEtale.finiteLocallyFree_overMap",
+   "AlgebraicGeometry.ProEtale.IntegralLatticePair.restrict",
+   "AlgebraicGeometry.ProEtale.IntegralLatticePair.restrict_image",
+   "AlgebraicGeometry.ProEtale.restrictionStrongSheafifyOver",
+   "AlgebraicGeometry.ProEtale.restrictionWeakSheafifyOverOver",
+   "AlgebraicGeometry.ProEtale.restrictionWEqualsOverOver",
+   "AlgebraicGeometry.ProEtale.restrictionStrongSheafifyOverOver"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-59995",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-59995",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314760",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and interfaces matched against published declarations, all eight DAG nodes, change records, importer compiles, and permitted axioms."
+ }
+}

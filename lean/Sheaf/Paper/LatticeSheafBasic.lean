@@ -39,6 +39,22 @@ open scoped ChangeOfRings
 
 namespace AlgebraicGeometry.ProEtale
 
+/-- Cache additive sheafification on each slice for the lattice calculations.
+Source: Mathlib, sheafification on small sites.
+(blueprint: lem-weil-pbc-lattice-image-locality).
+Proof: specialize the existing small-site sheafification instance. -/
+local instance latticeWeakSheafifyOver (X : Scheme.{u}) (U : X.ProEt) :
+    HasWeakSheafify ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1} := by
+  infer_instance
+
+/-- Cache the local bijectivity criterion for additive sheafification on slices.
+Source: Mathlib, sheafification on small sites.
+(blueprint: lem-weil-pbc-lattice-image-locality).
+Proof: specialize the existing small-site local-bijectivity instance. -/
+local instance latticeWEqualsOver (X : Scheme.{u}) (U : X.ProEt) :
+    ((Scheme.ProEt.topology X).over U).WEqualsLocallyBijective AddCommGrpCat.{u + 1} := by
+  infer_instance
+
 /-- The commutative-ring version of the continuous coefficient presheaf, with exactly the
 same sections and precomposition maps as `continuousMapRingPresheaf`.
 Source: Bhatt--Scholze, Proposition 6.8.4(6)
@@ -267,7 +283,10 @@ variable {X : Scheme.{u}}
 
 open scoped ChangeOfRings
 
-private noncomputable def latticeTensorUnit
+/-- The sheafification unit for the sectionwise scalar extension on a slice.
+Source: Mathlib's sheafification adjunction, used in Bhatt--Scholze, Proposition 6.8.4(6).
+(blueprint: lem-weil-pbc-lattice-image-locality). -/
+noncomputable def latticeTensorUnit
     (M : SheafOfModules.{u + 1}
       ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U))) :=
   (PresheafOfModules.sheafificationAdjunction
@@ -275,7 +294,12 @@ private noncomputable def latticeTensorUnit
       (S.over U)).obj)).unit.app
     (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} (latticeScalarMap a U) M)
 
-private theorem latticeExtension_unit
+/-- Scalar extension of a morphism commutes with the tensor-unit sections.
+Source: naturality of Mathlib's sheafification adjunction unit.
+(blueprint: lem-weil-pbc-lattice-image-locality).
+Proof: evaluate unit naturality on the sectionwise extended morphism at a pure tensor
+1 ⊗ m, and use the scalar-extension formula for the image of a pure tensor. -/
+theorem latticeExtension_unit
     (M N : SheafOfModules.{u + 1}
       ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (R.over U)))
     (f : M ⟶ N) (T : (Over U)ᵒᵖ) (m : M.val.obj T) :
@@ -351,14 +375,14 @@ private theorem pair_image_eq_of_equivalent {P Q : IntegralLatticePair a L U}
     exact ConcreteCategory.congr_hom h m
 
 
-private noncomputable def pairTensorMap (P : IntegralLatticePair a L U) :
+noncomputable def pairTensorMap (P : IntegralLatticePair a L U) :
     SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1}
       (latticeScalarMap a U) P.module ⟶ (L.over U).val :=
   (PresheafOfModules.sheafificationHomEquiv
     (𝟙 ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
       (S.over U)).obj)) P.rationalization.hom
 
-private noncomputable def pairEmbedding (P : IntegralLatticePair a L U) :
+noncomputable def pairEmbedding (P : IntegralLatticePair a L U) :
     P.module ⟶ (SheafOfModules.restrictScalars.{u + 1}
       ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
         (latticeScalarMap a U))).obj (L.over U) where
@@ -576,6 +600,78 @@ private theorem pairEmbedding_injective
     exact hm.symm.trans (hfg.trans hn)
   exact (((isSheaf_iff_isSheaf_of_type _ _).mp hF).isSeparated _ heq).ext
     (fun _ _ h ↦ h)
+
+/-- The lattice embedding is injective when the coefficient inclusion is injective.
+Source: Bhatt--Scholze, Proposition 6.8.4(6), the integral basis calculation.
+(blueprint: lem-weil-pbc-lattice-image-locality).
+Proof: apply the tensor-unit injectivity calculation already used for image classification. -/
+theorem IntegralLatticePair.embedding_injective
+    (ha : ∀ T, Function.Injective (((latticeScalarMap a U).hom.app T).hom))
+    (P : IntegralLatticePair a L U) (T : (Over U)ᵒᵖ) :
+    Function.Injective ((pairEmbedding a L U P).val.app T) :=
+  pairEmbedding_injective a L U ha P T
+
+/-- Restriction maps preserve the embedded image of a lattice pair.
+Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
+(blueprint: lem-weil-pbc-lattice-image-locality).
+Proof: restrict an integral lift and apply naturality of its embedding. -/
+theorem IntegralLatticePair.map_mem_image
+    (P : IntegralLatticePair a L U) {T W : Over U} (f : W ⟶ T)
+    {x : (L.over U).val.obj (op T)} (hx : x ∈ P.image (op T)) :
+    (L.over U).val.map f.op x ∈ P.image (op W) := by
+  obtain ⟨m, rfl⟩ := hx
+  refine ⟨P.module.val.map f.op m, ?_⟩
+  exact PresheafOfModules.naturality_apply (pairEmbedding a L U P).val f.op m
+
+/-- Membership in the embedded image is local for the slice topology.
+Source: Bhatt--Scholze, Proposition 6.8.4(6), descent of embedded lattices.
+(blueprint: lem-weil-pbc-lattice-image-locality).
+Proof: lift the restricted section uniquely through the injective lattice
+embedding. Uniqueness makes the lifts a matching family in the integral module
+sheaf. Glue them there and use separatedness in the rational module to check
+that the glued lift maps to the original section. -/
+theorem IntegralLatticePair.mem_image_of_locally_mem
+    (ha : ∀ T, Function.Injective (((latticeScalarMap a U).hom.app T).hom))
+    (P : IntegralLatticePair a L U) (T : Over U) (x : (L.over U).val.obj (op T))
+    (s : Sieve T) (hs : s ∈ ((Scheme.ProEt.topology X).over U) T)
+    (hx : ∀ (W : Over U) (f : W ⟶ T), s f →
+      (L.over U).val.map f.op x ∈ P.image (op W)) :
+    x ∈ P.image (op T) := by
+  classical
+  let J := (Scheme.ProEt.topology X).over U
+  let F := P.module.val.presheaf ⋙ forget AddCommGrpCat.{u + 1}
+  let G := (L.over U).val.presheaf ⋙ forget AddCommGrpCat.{u + 1}
+  let e : F ⟶ G := (PresheafOfModules.toPresheaf _ ⋙
+    (Functor.whiskeringRight _ _ _).obj (forget AddCommGrpCat.{u + 1})).map
+      (pairEmbedding a L U P).val
+  have he (W : Over U) : Function.Injective (e.app (op W)) :=
+    pairEmbedding_injective a L U ha P (op W)
+  let t : Presieve.FamilyOfElements F s.arrows :=
+    fun W f hf ↦ (hx W f hf).choose
+  have ht (W : Over U) (f : W ⟶ T) (hf : s f) :
+      e.app (op W) (t f hf) = G.map f.op x := (hx W f hf).choose_spec
+  have hn {W Z : Over U} (g : Z ⟶ W) (m : F.obj (op W)) :
+      e.app (op Z) (F.map g.op m) = G.map g.op (e.app (op W) m) :=
+    ConcreteCategory.congr_hom (e.naturality g.op) m
+  have hc : t.Compatible := by
+    intro W W' Z g g' f f' hf hf' h
+    apply he Z
+    rw [hn, hn, ht _ _ hf, ht _ _ hf']
+    simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, h]
+  have hF : Presieve.IsSheaf J F :=
+    (isSheaf_iff_isSheaf_of_type _ _).mp
+      (Presheaf.isSheaf_comp_of_isSheaf J P.module.val.presheaf
+        (forget AddCommGrpCat.{u + 1}) P.module.isSheaf)
+  let m := (hF _ hs).amalgamate t hc
+  refine ⟨m, ?_⟩
+  have hG : Presieve.IsSheaf J G :=
+    (isSheaf_iff_isSheaf_of_type _ _).mp
+      (Presheaf.isSheaf_comp_of_isSheaf J (L.over U).val.presheaf
+        (forget AddCommGrpCat.{u + 1}) (L.over U).isSheaf)
+  apply (hG.isSeparated _ hs).ext
+  intro W f hf
+  change G.map f.op (e.app (op T) m) = G.map f.op x
+  rw [← hn, Presieve.IsSheafFor.valid_glue _ hc f hf, ht _ _ hf]
 
 private theorem coefficientMap_injective
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-lattice-glued-rationalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "The glued embedding and its scalar extension",
+   "via": [
+    "lem-weil-pbc-lattice-class-descent",
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The glued embedding and its scalar extension",
+ "statement": "Let X be a scheme, J its pro-etale topology, R and S sheaves of commutative rings on J, a : R → S a ring-sheaf morphism, and L an S-module sheaf. An integral lattice pair on U consists of a finite locally free R|U-module P and a specified isomorphism S|U ⊗ P ≅ L|U, with the sheafified tensor product. Suppose the coefficient map is injective on every slice test object, r covers U, and x is a compatible family of represented lattice image families on r. The explicit compatible-tuple integral module M has a morphism e : M → L|U, viewed over R|U, whose restriction along each covering span is the given local embedding composed with the tuple projection. Tensor adjunction followed by sheafification constructs a morphism q : S|U ⊗ M → L|U whose value on the sheafification of 1 ⊗ m is e(m). [lem-weil-pbc-lattice-pair-descent-data, def-pur-sheaf-tensor-product].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-lattice-pair-descent-data",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The tuple transitions make the embeddings agree. Glue them as sections of sheaf Hom; linearity is local. Extend scalars sectionwise by the tensor adjunction and then sheafify. On each unit tensor the new map is the original embedding.",
+   "uses": [
+    "lem-weil-pbc-lattice-pair-descent-data",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lattice-pair-descent-data",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B4",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes",
+  "note": "Explicit image-family and compatible-tuple route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Descent of finite locally free sheaves of modules and morphisms along a covering family of slice sites",
+   "results": "8 hits: CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.isFinitePresentation, AlgebraicGeometry.Scheme.Modules.Hom, SheafOfModules.sections, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.pullbackObjFreeIso.",
+   "date": "2026-10-16",
+   "verdict": "The stack descent theorem assumes an already established stack; it does not construct this module descent. Remaining hits are generic definitions and finite-free transport APIs. No exact lattice-class or scalar-extension restriction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite locally free sheaves of modules and morphisms along a covering family of slice sites",
+   "results": "8 hits: isFinitePresentation, mapFree, localGeneratorsDataOfIsFiniteType, LocalGeneratorsData.IsFiniteType.isFiniteType, LocalGeneratorsData.IsFiniteType, IsFiniteType, quasicoherentDataOfIsFinitePresentation, IsFinitePresentation.",
+   "date": "2026-10-16",
+   "verdict": "Generic API only; use local generators and mapFreeIso."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.mapFreeIso",
+   "results": "11 hits: mapFreeIso and its component lemmas, GeneratingSections.map_π_eq, Presentation.map_π_eq and map_relations_I.",
+   "date": "2026-10-16",
+   "verdict": "Use mapFreeIso to transport bases; no exact descent statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyFree|ModuleGlueData|existsUnique_section",
+   "results": "4 hits in CoversTop/Basic: existsUnique_section and section construction. Local search also found SiteModuleCompatibleTuples.",
+   "date": "2026-10-16",
+   "verdict": "Use compatible tuples and sheaf Hom; no duplicate lattice theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeClassDescent",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticeGluedRationalization",
+  "file": "lean/Sheaf/Paper/LatticeGluedRationalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_gluedLatticeEmbedding",
+  "statement": "theorem exists_gluedLatticeEmbedding (hr : r ∈ (Scheme.ProEt.topology X) U) :\n    ∃ e : gluedLatticeModule a L ha U r x hx ⟶ N,\n      ∀ (i : latticeCoverIndex U r) (W : Over U)\n        (b : W ⟶ latticeCoverObject U r i)\n        (m : (gluedLatticeModule a L ha U r x hx).val.obj (op W)),\n        e.val.app (op W) m = latticeCoverEmbedding a L U r x i W b\n          ((gluedLatticeModuleLocalIso a L ha U r x hx i).hom.val.app\n            (op (Over.mk b)) m)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16",
+  "declarations": [
+   "SheafOfModules.exists_hom_of_coversTop",
+   "AlgebraicGeometry.ProEtale.extendScalars_one",
+   "AlgebraicGeometry.ProEtale.rationalizeEmbeddingPresheaf",
+   "AlgebraicGeometry.ProEtale.rationalizeEmbedding",
+   "AlgebraicGeometry.ProEtale.rationalizeEmbedding_unit",
+   "AlgebraicGeometry.ProEtale.latticeCoverEmbeddingHom",
+   "AlgebraicGeometry.ProEtale.exists_gluedLatticeEmbedding",
+   "AlgebraicGeometry.ProEtale.gluedLatticeEmbedding",
+   "AlgebraicGeometry.ProEtale.gluedLatticeEmbedding_spec",
+   "AlgebraicGeometry.ProEtale.gluedLatticeRationalization"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-59995",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-59995",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314760",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and interfaces matched against published declarations, all eight DAG nodes, change records, importer compiles, and permitted axioms."
+ }
+}

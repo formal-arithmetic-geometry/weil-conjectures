@@ -1,0 +1,165 @@
+{
+ "id": "lem-weil-pbc-lattice-pair-descent-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "The explicit glued integral module",
+   "via": [
+    "lem-weil-pbc-lattice-class-descent",
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The explicit glued integral module",
+ "statement": "Let X be a scheme, J its pro-etale topology, R and S sheaves of commutative rings on J, a : R → S a ring-sheaf morphism, and L an S-module sheaf. An integral lattice pair on U consists of a finite locally free R|U-module P and a specified isomorphism S|U ⊗ P ≅ L|U, with the sheafified tensor product. Suppose the coefficient map is injective on every slice test object. Let r be a covering sieve on U and x a compatible family of represented lattice image families along r. Choose actual representatives of these given classes. Their embeddings have equal ranges on all overlap tests; composing the linear equivalences to their common range gives explicit transitions. The sheaf of all-test-object tuples compatible with restriction and these transitions is a finite locally free R|U-module. Its restrictions to covering objects are canonically isomorphic to the chosen local modules. [lem-weil-pbc-lattice-class-presheaf, def-weil-pbc-site-module-compatible-tuples, lem-weil-pbc-site-module-compatible-tuples].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-lattice-class-presheaf",
+  "def-weil-pbc-site-module-compatible-tuples",
+  "lem-weil-pbc-site-module-compatible-tuples"
+ ],
+ "proof": [
+  {
+   "text": "Choose representatives of the actual given image classes. Injective embeddings with equal ranges give transitions via linear equivalences to their common range. Injectivity proves naturality and cocycles. Use the compatible-tuple sheaf and local isomorphisms. Refine the original cover by local finite free basis covers, transporting free modules along iterated-slice equivalences.",
+   "uses": [
+    "lem-weil-pbc-lattice-class-presheaf",
+    "def-weil-pbc-site-module-compatible-tuples",
+    "lem-weil-pbc-site-module-compatible-tuples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lattice-class-presheaf",
+  "def-weil-pbc-site-module-compatible-tuples",
+  "lem-weil-pbc-site-module-compatible-tuples"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B4",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes",
+  "note": "Explicit image-family and compatible-tuple route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Descent of finite locally free sheaves of modules and morphisms along a covering family of slice sites",
+   "results": "8 hits: CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.isFinitePresentation, AlgebraicGeometry.Scheme.Modules.Hom, SheafOfModules.sections, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.pullbackObjFreeIso.",
+   "date": "2026-10-16",
+   "verdict": "The stack descent theorem assumes an already established stack; it does not construct this module descent. Remaining hits are generic definitions and finite-free transport APIs. No exact lattice-class or scalar-extension restriction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite locally free sheaves of modules and morphisms along a covering family of slice sites",
+   "results": "8 hits: isFinitePresentation, mapFree, localGeneratorsDataOfIsFiniteType, LocalGeneratorsData.IsFiniteType.isFiniteType, LocalGeneratorsData.IsFiniteType, IsFiniteType, quasicoherentDataOfIsFinitePresentation, IsFinitePresentation.",
+   "date": "2026-10-16",
+   "verdict": "Generic API only; use local generators and mapFreeIso."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.mapFreeIso",
+   "results": "11 hits: mapFreeIso and its component lemmas, GeneratingSections.map_π_eq, Presentation.map_π_eq and map_relations_I.",
+   "date": "2026-10-16",
+   "verdict": "Use mapFreeIso to transport bases; no exact descent statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyFree|ModuleGlueData|existsUnique_section",
+   "results": "4 hits in CoversTop/Basic: existsUnique_section and section construction. Local search also found SiteModuleCompatibleTuples.",
+   "date": "2026-10-16",
+   "verdict": "Use compatible tuples and sheaf Hom; no duplicate lattice theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeClassDescent",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticePairDescentData",
+  "file": "lean/Sheaf/Paper/LatticePairDescentData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.gluedLatticeModule_finiteLocallyFree",
+  "statement": "theorem gluedLatticeModule_finiteLocallyFree\n    (hr : r ∈ (Scheme.ProEt.topology X) U) :\n    (gluedLatticeModule a L ha U r x hx).IsFiniteLocallyFree",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.latticeStrongSheafifyOver",
+   "AlgebraicGeometry.ProEtale.latticeWeakSheafifyOverOver",
+   "AlgebraicGeometry.ProEtale.latticeWEqualsOverOver",
+   "AlgebraicGeometry.ProEtale.latticeStrongSheafifyOverOver",
+   "AlgebraicGeometry.ProEtale.commonImageEquiv",
+   "AlgebraicGeometry.ProEtale.commonImageEquiv_spec",
+   "AlgebraicGeometry.ProEtale.latticeCoverIndex",
+   "AlgebraicGeometry.ProEtale.latticeCoverObject",
+   "AlgebraicGeometry.ProEtale.latticeCoverPair",
+   "AlgebraicGeometry.ProEtale.latticeCoverPair_image",
+   "AlgebraicGeometry.ProEtale.latticeCoverModule",
+   "AlgebraicGeometry.ProEtale.latticeCoverEmbedding",
+   "AlgebraicGeometry.ProEtale.latticeCoverEmbedding_injective",
+   "AlgebraicGeometry.ProEtale.latticeCoverEmbedding_range",
+   "AlgebraicGeometry.ProEtale.latticeCoverTransition",
+   "AlgebraicGeometry.ProEtale.latticeCoverTransition_spec",
+   "AlgebraicGeometry.ProEtale.latticeCoverEmbedding_naturality",
+   "AlgebraicGeometry.ProEtale.latticeModuleGlueData",
+   "AlgebraicGeometry.ProEtale.gluedLatticeModule",
+   "AlgebraicGeometry.ProEtale.gluedLatticeModuleLocalIso",
+   "AlgebraicGeometry.ProEtale.gluedLatticeModule_overlap",
+   "AlgebraicGeometry.ProEtale.latticeCoverModule_finiteLocallyFree",
+   "AlgebraicGeometry.ProEtale.latticeCover_coversTop",
+   "AlgebraicGeometry.ProEtale.finiteLocallyFree_of_latticeCover",
+   "AlgebraicGeometry.ProEtale.gluedLatticeModule_finiteLocallyFree"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-59995",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-59995",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314760",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and interfaces matched against published declarations, all eight DAG nodes, change records, importer compiles, and permitted axioms."
+ }
+}

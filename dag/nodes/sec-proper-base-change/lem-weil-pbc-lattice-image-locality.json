@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-lattice-image-locality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Membership in an embedded lattice image is local",
+   "via": [
+    "lem-weil-pbc-lattice-class-descent",
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Membership in an embedded lattice image is local",
+ "statement": "Let X be a scheme, J its pro-etale topology, R and S sheaves of commutative rings on J, a : R → S a ring-sheaf morphism, and L an S-module sheaf. An integral lattice pair on U consists of a finite locally free R|U-module P and a specified isomorphism S|U ⊗ P ≅ L|U, with the sheafified tensor product. Fix U and suppose the coefficient map is injective on every test object of the slice over U. The canonical map from every lattice P to the restriction of L is injective. Its image is preserved by restriction. For T over U, a section z of L(T), and a covering sieve s on T, if each restriction of z along s belongs to the corresponding image of P, then z belongs to the image of P on T. [lem-weil-pbc-lattice-pair-image-classification].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-lattice-pair-image-classification"
+ ],
+ "proof": [
+  {
+   "text": "Lift the section on each covering arrow. Injectivity proves compatibility. The integral module sheaf glues the lifts, and separatedness of the rational module identifies their image with the original section.",
+   "uses": [
+    "lem-weil-pbc-lattice-pair-image-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lattice-pair-image-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B4",
+  "date": "2026-10-16",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), pp. 59–60; Descent and an exact presentation of lattice classes",
+  "note": "Explicit image-family and compatible-tuple route. Second reading caches the existing additive slice sheafification instances locally to avoid repeated inference. Return repair exposes the unchanged tensor-unit definition and its existing naturality theorem for reuse by the rationalization-isomorphism proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Descent of finite locally free sheaves of modules and morphisms along a covering family of slice sites",
+   "results": "8 hits: CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.isFinitePresentation, AlgebraicGeometry.Scheme.Modules.Hom, SheafOfModules.sections, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.pullbackObjFreeIso.",
+   "date": "2026-10-16",
+   "verdict": "The stack descent theorem assumes an already established stack; it does not construct this module descent. Remaining hits are generic definitions and finite-free transport APIs. No exact lattice-class or scalar-extension restriction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite locally free sheaves of modules and morphisms along a covering family of slice sites",
+   "results": "8 hits: isFinitePresentation, mapFree, localGeneratorsDataOfIsFiniteType, LocalGeneratorsData.IsFiniteType.isFiniteType, LocalGeneratorsData.IsFiniteType, IsFiniteType, quasicoherentDataOfIsFinitePresentation, IsFinitePresentation.",
+   "date": "2026-10-16",
+   "verdict": "Generic API only; use local generators and mapFreeIso."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.mapFreeIso",
+   "results": "11 hits: mapFreeIso and its component lemmas, GeneratingSections.map_π_eq, Presentation.map_π_eq and map_relations_I.",
+   "date": "2026-10-16",
+   "verdict": "Use mapFreeIso to transport bases; no exact descent statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyFree|ModuleGlueData|existsUnique_section",
+   "results": "4 hits in CoversTop/Basic: existsUnique_section and section construction. Local search also found SiteModuleCompatibleTuples.",
+   "date": "2026-10-16",
+   "verdict": "Use compatible tuples and sheaf Hom; no duplicate lattice theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeClassDescent",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LatticeSheafBasic",
+  "file": "lean/Sheaf/Paper/LatticeSheafBasic.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralLatticePair.mem_image_of_locally_mem",
+  "statement": "theorem IntegralLatticePair.mem_image_of_locally_mem\n    (ha : ∀ T, Function.Injective (((latticeScalarMap a U).hom.app T).hom))\n    (P : IntegralLatticePair a L U) (T : Over U) (x : (L.over U).val.obj (op T))\n    (s : Sieve T) (hs : s ∈ ((Scheme.ProEt.topology X).over U) T)\n    (hx : ∀ (W : Over U) (f : W ⟶ T), s f →\n      (L.over U).val.map f.op x ∈ P.image (op W)) :\n    x ∈ P.image (op T)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.latticeWeakSheafifyOver",
+   "AlgebraicGeometry.ProEtale.latticeWEqualsOver",
+   "AlgebraicGeometry.ProEtale.latticeTensorUnit",
+   "AlgebraicGeometry.ProEtale.latticeExtension_unit",
+   "AlgebraicGeometry.ProEtale.pairTensorMap",
+   "AlgebraicGeometry.ProEtale.pairEmbedding",
+   "AlgebraicGeometry.ProEtale.IntegralLatticePair.embedding_injective",
+   "AlgebraicGeometry.ProEtale.IntegralLatticePair.map_mem_image",
+   "AlgebraicGeometry.ProEtale.IntegralLatticePair.mem_image_of_locally_mem"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-59995",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-59995",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T134405-L-3314760",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean proofs and interfaces matched against published declarations, all eight DAG nodes, change records, importer compiles, and permitted axioms."
+ }
+}
