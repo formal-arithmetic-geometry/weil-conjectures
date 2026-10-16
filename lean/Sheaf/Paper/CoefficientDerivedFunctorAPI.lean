@@ -66,19 +66,28 @@ end DerivedFunctorAPI
     eqToIso (by rw [← sq.w]) ≪≫
     leftDerivedUpperStarComp Λ g' f
 
-/-- Inverse-image data and square coherence, without a condition on right mates. -/
-structure CoefficientCoherentPullbackData (B : Type) [CommRing B]
+/-- The family of inverse-image comparisons, with generic coefficient interfaces cached. -/
+def CoefficientPullbackFamily (B : Type) [CommRing B]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
     (F : ∀ T : Scheme.{u}, FiniteDiscreteEtalePlus B T ⥤
       DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
-        (condensedRingObj Λ T))) where
-  pullback : ∀ {S T : Scheme.{u}} (h : S ⟶ T),
+        (condensedRingObj Λ T))) : Type _ :=
+  ∀ {S T : Scheme.{u}} (h : S ⟶ T),
     D+(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) h) ⋙
         F S ≅
       F T ⋙
         coefficientDerivedUpperStar Λ h
-  square : ∀ {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y}
+
+/-- Square coherence for a specified family of inverse-image comparisons. -/
+def CoefficientPullbackSquare (B : Type) [CommRing B]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (F : ∀ T : Scheme.{u}, FiniteDiscreteEtalePlus B T ⥤
+      DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+        (condensedRingObj Λ T)))
+    (pullback : CoefficientPullbackFamily B Λ F) : Prop :=
+  ∀ {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y}
       {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : CommSq g' f' f g)
       (K : FiniteDiscreteEtalePlus B Y),
     (F X').map
@@ -93,6 +102,16 @@ structure CoefficientCoherentPullbackData (B : Type) [CommRing B]
         ((pullback g).hom.app K) ≫
       (coefficientAmbientSquare Λ sq).hom.app
         ((F Y).obj K)
+
+/-- Inverse-image data and square coherence, without a condition on right mates. -/
+structure CoefficientCoherentPullbackData (B : Type) [CommRing B]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (F : ∀ T : Scheme.{u}, FiniteDiscreteEtalePlus B T ⥤
+      DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
+        (condensedRingObj Λ T))) where
+  pullback : CoefficientPullbackFamily B Λ F
+  square : CoefficientPullbackSquare B Λ F pullback
 
 /-- Coherent inverse-image data for a finite-discrete realization family. -/
 abbrev FiniteDiscreteCoherentPullbacks (B : Type) [CommRing B]

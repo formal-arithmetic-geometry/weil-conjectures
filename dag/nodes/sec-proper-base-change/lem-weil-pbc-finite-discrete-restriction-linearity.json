@@ -1,0 +1,120 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-discrete-restriction-linearity",
+ "kind": "statement",
+ "title": "Linearity of the normalized coefficient restriction comparison",
+ "statement": "Let B, eR, G and hG be as in [def-weil-pbc-common-finite-discrete-encoding]. For h:S→T and a module-valued pro-etale sheaf N on S, let M=h_* E_S(N), P=E_T(h_*N), and let e:M.X≅P.X be the additive isomorphism obtained by restricting the underlying-sheaf encoding isomorphism at S and composing with its inverse at T. Then act_M followed by e.hom equals Λ_T acting on e.hom followed by act_P, where Λ_T is the pullback of the continuous-function condensed ring. Thus this particular additive isomorphism is linear.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 and Lemma 5.4.1; sectionwise coefficient encoding"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-common-finite-discrete-encoding",
+  "def-weil-pbc-coefficient-derived-functor-api"
+ ],
+ "proof": [
+  {
+   "text": "The sectionwise G and hG identify the original scalar action before and after restriction.",
+   "uses": [
+    "def-weil-pbc-common-finite-discrete-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scheme-ring identifications come from one eR. Naturality of constant-sheaf pullback and its composition comparison identifies the restricted scalar map with condensedPushforwardHom. Substitute in the action equation.",
+   "uses": [
+    "def-weil-pbc-common-finite-discrete-encoding",
+    "def-weil-pbc-coefficient-derived-functor-api"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-common-finite-discrete-encoding",
+  "def-weil-pbc-coefficient-derived-functor-api"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 and Lemma 5.4.1; sectionwise coefficient encoding",
+  "note": "A4: explicit coefficient transport; remaining proof obligations are separate named statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism constant coefficient module encoding commutes with sheaf inverse image and derived pullback",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; ",
+   "verdict": "No complete transport theorem for this common internal-module encoding. Use the proved library adjunction, exact derivation and composition infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "conjugateIsoEquiv",
+   "date": "2026-10-16",
+   "results": "0 hits: ; loogle: unknown identifier 'conjugateIsoEquiv'",
+   "verdict": "No complete transport theorem for this common internal-module encoding. Use the proved library adjunction, exact derivation and composition infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|sheafEncoding|mapMod.*Comp",
+   "date": "2026-10-16",
+   "results": "0 hits: ; ",
+   "verdict": "No complete transport theorem for this common internal-module encoding. Use the proved library adjunction, exact derivation and composition infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coefficient equivalence of module valued sheaves commutes coherently with inverse image and exact derived functors",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app, SheafOfModules.pushforwardNatIso_inv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, SheafOfModules.sheafificationCompPullback, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; ",
+   "verdict": "No complete transport theorem for this common internal-module encoding. Use the proved library adjunction, exact derivation and composition infrastructure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteCoefficientCoherentPullbacks",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-discrete-coherent-pullbacks",
+   "place": "Linearity of the normalized coefficient restriction comparison",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteCoefficientRestriction",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteCoefficientRestriction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteCoefficientRestrictionForgetIso_linear",
+  "statement": "theorem finiteDiscreteCoefficientRestrictionForgetIso_linear\n    {S T : Scheme.{u}} (h : S ⟶ T) (N : FiniteDiscreteProEtaleSheaves B S) :\n    let M := (lowerStar (Profinite.continuousMapRingObj B) h).obj\n      ((finiteDiscreteCoefficientEquivalence B eR G hG S).functor.obj N)\n    let P := (finiteDiscreteCoefficientEquivalence B eR G hG T).functor.obj\n      ((ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) h).obj N)\n    let e := (finiteDiscreteCoefficientRestrictionForgetIso B eR G hG h).app N\n    Mod.act M.X ≫ e.hom = (condensedRingObj (Profinite.continuousMapRingObj B) T) ◁\n      e.hom ≫ Mod.act P.X",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-62b33",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T155153-L-839662",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-62b33",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T155153-L-839662",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean constructions, remaining obligations, signatures and proof dependencies match their DAG nodes; compilation, importer and axiom checks pass."
+ }
+}

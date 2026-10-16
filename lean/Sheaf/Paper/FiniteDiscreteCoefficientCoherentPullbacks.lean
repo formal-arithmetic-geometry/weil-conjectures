@@ -5,6 +5,7 @@ module
 
 public import Sheaf.Paper.FiniteDiscreteCoefficientEncoding
 public import Sheaf.Paper.CoefficientDerivedFunctorAPI
+import Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence
 
 /-! # Coherent pullbacks for the common coefficient realization -/
 
@@ -54,6 +55,8 @@ transport. No direct-image or right-mate assertion is made here. -/
 theorem finiteDiscreteCoefficient_coherentPullbacks [DiscreteTopology B] [Finite B] :
     Nonempty (FiniteDiscreteCoherentPullbacks B
       (finiteDiscreteCoefficientEquivalence B eR G hG)) := by
-  sorry
+  exact ⟨{
+    pullback := finiteDiscreteCoefficientPullbackIso B eR G hG
+    square := finiteDiscreteCoefficientPullbackIso_square B eR G hG }⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

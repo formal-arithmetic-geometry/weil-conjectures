@@ -34,11 +34,7 @@ structure CoefficientComparisonData
     (F : ∀ T : Scheme.{u}, FiniteDiscreteEtalePlus B T ⥤
       DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
         (condensedRingObj Λ T))) where
-  pullback : ∀ {S T : Scheme.{u}} (h : S ⟶ T),
-    D+(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) h) ⋙
-        F S ≅
-      F T ⋙
-        coefficientDerivedUpperStar Λ h
+  pullback : CoefficientPullbackFamily B Λ F
   pushforward : ∀ {S T : Scheme.{u}} (h : S ⟶ T) [QuasiCompact h] [QuasiSeparated h],
     R+(Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) h) ⋙
         F T ≅
@@ -66,21 +62,7 @@ structure CoefficientComparisonData
       (F S).map
         ((Etale.derivedUpperStarLowerStarAdjunctionPlus
           (ModuleCat.{u + 1} (ULift.{u + 1} B)) h).counit.app K)
-  square : ∀ {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y}
-      {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : CommSq g' f' f g)
-      (K : FiniteDiscreteEtalePlus B Y),
-    (F X').map
-        ((Etale.pullbackSquareComparison (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).hom.app K) ≫
-      (pullback g').hom.app
-        (D+(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) f).obj K) ≫
-      (coefficientDerivedUpperStar Λ g').map
-        ((pullback f).hom.app K) =
-    (pullback f').hom.app
-        (D+(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) g).obj K) ≫
-      (coefficientDerivedUpperStar Λ f').map
-        ((pullback g).hom.app K) ≫
-      (coefficientAmbientSquare Λ sq).hom.app
-        ((F Y).obj K)
+  square : CoefficientPullbackSquare B Λ F pullback
 
 /-- Coherent inverse-image comparisons whose canonical right mates are invertible. -/
 structure CoefficientPullbackData
@@ -89,32 +71,14 @@ structure CoefficientPullbackData
     (F : ∀ T : Scheme.{u}, FiniteDiscreteEtalePlus B T ⥤
       DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
         (condensedRingObj Λ T))) where
-  pullback : ∀ {S T : Scheme.{u}} (h : S ⟶ T),
-    D+(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) h) ⋙
-        F S ≅
-      F T ⋙
-        coefficientDerivedUpperStar Λ h
+  pullback : CoefficientPullbackFamily B Λ F
   rightMate : ∀ {S T : Scheme.{u}} (h : S ⟶ T) [QuasiCompact h] [QuasiSeparated h],
     IsIso (mateEquiv
       (Etale.derivedUpperStarLowerStarAdjunctionPlus
         (ModuleCat.{u + 1} (ULift.{u + 1} B)) h)
       (coefficientDerivedAdjunction Λ h)
       (TwoSquare.mk _ _ _ _ (pullback h).inv)).natTrans
-  square : ∀ {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y}
-      {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : CommSq g' f' f g)
-      (K : FiniteDiscreteEtalePlus B Y),
-    (F X').map
-        ((Etale.pullbackSquareComparison (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).hom.app K) ≫
-      (pullback g').hom.app
-        (D+(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) f).obj K) ≫
-      (coefficientDerivedUpperStar Λ g').map
-        ((pullback f).hom.app K) =
-    (pullback f').hom.app
-        (D+(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) g).obj K) ≫
-      (coefficientDerivedUpperStar Λ f').map
-        ((pullback g).hom.app K) ≫
-      (coefficientAmbientSquare Λ sq).hom.app
-        ((F Y).obj K)
+  square : CoefficientPullbackSquare B Λ F pullback
 
 /-- Form the direct-image isomorphisms by taking canonical mates. -/
 noncomputable def CoefficientPullbackData.toComparisonData
