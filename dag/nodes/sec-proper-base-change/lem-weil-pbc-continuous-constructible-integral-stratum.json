@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-continuous-constructible-integral-stratum",
+ "kind": "statement",
+ "title": "An ordinary integral model for a locally finitely presented immersed stratum",
+ "statement": "Let ℓ be prime and E a finite-dimensional normed ℚ_ℓ-algebra which is a normed field. Use the integral and rational condensed coefficients and their inclusion of [def-weil-pbc-continuous-integral-coefficients]. Let X be a scheme with noetherian underlying topological space, let i:Y→X be an immersion, and let F be an internal module over i⁻¹E_X, pro-etale locally a cokernel of a map between two finite free i⁻¹E_X-modules, in the sense of [def-weil-pbc-condensed-e-module-category]. There is an internal i⁻¹O_E,X-module N which is locally finitely presented on a finite constructible locally closed stratification of Y [def-constructible-stratification], such that ordinary extension of scalars along i⁻¹(O_E,X→E_X) sends N to a module isomorphic to F. There is no claim here about arbitrary stratified F or a derived complex.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-constructible-stratification"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13, especially its first paragraph; Proposition 6.8.4(6); local finite-presentation input from Hemo--Richarz--Scholbach, Example 3.1"
+ },
+ "proof": [
+  {
+   "text": "An immersion into the topologically noetherian X has topologically noetherian domain Y. The geometric coefficient-composition isomorphisms identify the rings and map pulled back from X with the continuous coefficient rings on Y. Local triviality for rational finite presentations then makes F lisse. The finite-rank-zero and empty-domain cases use zero.",
+   "uses": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "def-weil-pbc-condensed-e-module-category",
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use etale-local lattices for this lisse module. Choose finitely many affine etale members covering Y and refine Y into finitely many locally closed pieces on which their maps are finite etale. On each such piece finite-etale lattice descent gives a lisse integral model. This uses only topological noetherianity; no locally-noetherian, finite-dimensional-scheme or invertibility-of-ell hypothesis is inserted. Transport between ordinary module sheaves and internal module objects via their sectionwise actions. Lisse integral models have local finite free presentations, hence are constructible in the internal sense.",
+   "uses": [
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-etale-separated-stratified-finite-intermediate",
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the independent gluing lemma on Y to the supplied lattices of these refined pieces. It gives a constructible ordinary integral model on Y. Transport back to the two coefficient rings pulled from X. This proves only the locally finitely presented stratum case and leaves the parent to handle a general finite stratification and the derived comparison.",
+   "uses": [
+    "lem-weil-pbc-continuous-constructible-integral-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-continuous-constructible-integral-gluing",
+  "lem-weil-pbc-etale-separated-stratified-finite-intermediate",
+  "lem-weil-pbc-lisse-lattice-etale-local",
+  "lem-weil-pbc-lisse-lattice-finite-etale-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13, especially its first paragraph; Proposition 6.8.4(6); local finite-presentation input from Hemo--Richarz--Scholbach, Example 3.1",
+  "note": "B4 second reading: source argument specialized to the actual internal coefficient interface; the two independent obligations separate stratum lattice construction from assembly of given stratum models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally finitely presented continuous p-adic sheaf on a noetherian stratum has a constructible integral lattice",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally finitely presented sheaf over continuous p-adic field coefficients has a constructible integral lattice",
+   "date": "2026-10-16",
+   "results": "8 hits: BDeRhamPlus, BDeRham, Profinite.NobelingProof.Nobeling_aux, IsDedekindDomain.FiniteAdeleRing, LocallyConstant.freeOfProfinite, IsDedekindDomain.instDFunLikeFiniteAdeleRingHeightOneSpectrumAdicCompletion, IsDedekindDomain.instTopologicalSpaceFiniteAdeleRing, instCommRingBDeRhamPlus",
+   "verdict": "No matching integral-model or stratum-gluing theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(strat|lattice)|[Ee]xt1.*local|integral.*gluing",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No matching integral-model or stratum-gluing theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousConstructibleIntegralSingle",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-continuous-constructible-integral-single",
+   "place": "Stratumwise lattices",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousConstructibleIntegralStratum",
+  "file": "lean/Sheaf/Paper/ContinuousConstructibleIntegralStratum.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousConstructible_integral_stratum",
+  "statement": "theorem continuousConstructible_integral_stratum (X : Scheme.{u})\n    [TopologicalSpace.NoetherianSpace X] {Y : Scheme.{u}} (i : Y ⟶ X) [IsImmersion i]\n    (F : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      ((ProEtale.upperStar Ab.{u + 1} i).obj\n        (condensedRingObj (Profinite.continuousMapRingObj E) X)))\n    (hF : ProEtale.IsLocallyFinitelyPresented\n      ((ProEtale.upperStar Ab.{u + 1} i).obj\n        (condensedRingObj (Profinite.continuousMapRingObj E) X)) F) :\n    ∃ N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n        ((ProEtale.upperStar Ab.{u + 1} i).obj (condensedRingObj (integralCoeff ℓ E) X)),\n      ProEtale.IsConstructibleModuleObject\n        ((ProEtale.upperStar Ab.{u + 1} i).obj (condensedRingObj (integralCoeff ℓ E) X)) N ∧\n      Nonempty ((Mod.extendScalars\n        ((ProEtale.upperStar Ab.{u + 1} i).map\n          (coefficientMap (integralScalarMap ℓ E) X))).obj N ≅ F)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T023443-L-1241905",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T023443-L-1241905",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

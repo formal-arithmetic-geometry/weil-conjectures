@@ -12,29 +12,33 @@
  ],
  "proof": [
   {
-   "text": "On each of finitely many strata, pass from local finite presentations to finite-rank local systems. Choose constructible integral lattices by Lemma 6.8.13. Refine to a finite open--closed filtration, extend the integral models by zero, and lift the successive Ext1 classes after multiplying by powers of ℓ using bounded-below compactness. Such scalars are invertible over E, so the reconstructed integral sheaf rationalizes to F. Exact coefficient localization and the compact-test continuous-function calculation identify the scalar extension of its degree-zero complex with F[0]. The empty scheme and zero module use zero.",
+   "text": "Unpack constructibility to its finite stratification S and its locally finitely presented restrictions. For each stratum apply the ordinary stratum integral-model theorem. Apply the separate gluing theorem to these supplied models, obtaining a constructible integral module N with ordinary rationalization isomorphic to F.",
    "uses": [
-    "lem-weil-pbc-condensed-lfp-local-triviality",
-    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
-    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-pbc-continuous-integral-coefficients"
+    "lem-weil-pbc-continuous-constructible-integral-stratum",
+    "lem-weil-pbc-continuous-constructible-integral-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Place N in degree zero. Its homology vanishes in every nonzero degree by the derived t-structure and its degree-zero homology is isomorphic to N. Constructibility transports through isomorphisms by transporting finite presentations; a zero module has the zero-by-zero presentation, the identity cover and the one-stratum stratification. Thus N[0] belongs to integralConstructible. Exact ordinary integral scalar extension commutes with the degree-zero embeddings, so its derived extension of N[0] is F[0], as required.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients",
+    "lem-weil-pbc-continuous-integral-scalar-exact"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-condensed-lfp-local-triviality",
-  "lem-weil-pbc-lisse-e-constructible-integral-lattice",
-  "lem-weil-pbc-integral-constructible-bounded-below-compactness",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "def-weil-pbc-continuous-integral-coefficients"
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-continuous-constructible-integral-gluing",
+  "lem-weil-pbc-continuous-constructible-integral-stratum",
+  "lem-weil-pbc-continuous-integral-scalar-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.13 and the sheaf case of Proposition 6.8.14(2); uses Lemma 6.8.12 for Ext1 localization",
-  "note": "A2 second reading: a strictly partial obligation for the bounded dévissage argument; replaces the false unrationalized equivalence claim."
+  "place": "Lemmas 6.8.12--6.8.13 and Proposition 6.8.14(2)",
+  "note": "B4 second reading: actual Lean proof unpacks the stratification, obtains ordinary models per stratum, assembles them, proves bounded degree-zero packaging, and uses the proved exact scalar-extension theorem and upstream singleFunctor comparison. Two smaller ordinary-model holes remain; this is a decomposition, not a net proof gain."
  },
  "mathlib_searches": [
   {
@@ -108,9 +112,9 @@
   "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261016T003157-L-3926386",
+  "landing": "20261016T023443-L-1241905",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-continuous-constructible-integral-gluing",
+ "kind": "statement",
+ "title": "Ordinary integral models assemble from supplied stratum models",
+ "statement": "Let ℓ be prime and E a finite-dimensional normed ℚ_ℓ-algebra which is a normed field. Use the coefficients and inclusion O_E,X→E_X of [def-weil-pbc-continuous-integral-coefficients] and internal modules of [def-weil-pbc-condensed-e-module-category]. Let X be a scheme with noetherian underlying space, F an internal E_X-module, and S a finite constructible locally closed stratification of X [def-constructible-stratification]. Suppose that for every immersion i_a:Y_a→X of S, one is supplied with an internal i_a⁻¹O_E,X-module N_a constructible on Y_a and an isomorphism from its ordinary scalar extension along i_a⁻¹(O_E,X→E_X) to i_a⁻¹F. Then there exists a constructible internal O_E,X-module N whose ordinary scalar extension is isomorphic to F. The conclusion does not assert that the specified N_a themselves glue without rescaling.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-constructible-stratification"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Final filtration/Ext1 paragraph of Lemma 6.8.13 and essential-surjectivity argument of Proposition 6.8.14(2); taking H0 uses Lemma 6.8.2"
+ },
+ "proof": [
+  {
+   "text": "Refine the finite stratification to a finite closed filtration and restrict the supplied integral models to the refined pieces. Extend the open pieces by zero and the closed pieces by direct image. These functors are exact; they preserve constructibility by using the supplied stratifications on the support and zero on its complement. Their coefficient-localization comparisons follow from exact filtered localization and the closed-direct-image filtered-colimit comparison. Thus the associated degree-zero rational pieces have integral bounded constructible models.",
+   "uses": [
+    "def-constructible-stratification",
+    "lem-weil-pbc-module-constructible-pullback",
+    "lem-weil-pbc-module-constructible-extension-zero",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each short exact open--closed localization sequence gives a distinguished triangle. The integral scalar-extension essential image is triangulated, so induction over the finite filtration gives an integral bounded constructible complex K whose rationalization is F[0]. This is the denominator-clearing argument encoded in the existing image-closure theorem; it does not assume essential surjectivity. If there are no pieces the scheme is empty and use zero.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-continuous-constructible-integral-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the degree-zero homology N of K. Bounded constructibility says N is constructible. Exactness of ordinary coefficient localization identifies the degree-zero homology of its derived extension with the ordinary extension of N. Taking degree-zero homology of the isomorphism with F[0] gives the required ordinary scalar-extension isomorphism. No particular preselected lattice on a stratum is required to glue unchanged.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients",
+    "lem-weil-pbc-continuous-integral-scalar-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-continuous-constructible-integral-image",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-weil-pbc-module-constructible-extension-zero",
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Final filtration/Ext1 paragraph of Lemma 6.8.13 and essential-surjectivity argument of Proposition 6.8.14(2); taking H0 uses Lemma 6.8.2",
+  "note": "B4 second reading: source argument specialized to the actual internal coefficient interface; the two independent obligations separate stratum lattice construction from assembly of given stratum models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constructible l-adic sheaf with integral lattices on every stratum admits an integral model by clearing extension denominators",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible module lattice integral coefficients extension by zero strata",
+   "date": "2026-10-16",
+   "results": "8 hits: Profinite.NobelingProof.GoodProducts.spanFin, ChevalleyThm.chevalley_mvPolynomialC, HahnEmbedding.ArchimedeanStrata.baseDomain, Profinite.NobelingProof.spanFinBasis.span, Profinite.NobelingProof.GoodProducts.Basis, Profinite.NobelingProof.GoodProducts.finsuppSum_mem_span_eval, ChevalleyThm.chevalley_polynomialC, Profinite.NobelingProof.GoodProducts.span",
+   "verdict": "No matching integral-model or stratum-gluing theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(strat|lattice)|[Ee]xt1.*local|integral.*gluing",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No matching integral-model or stratum-gluing theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousConstructibleIntegralSingle",
+  "date": "2026-10-16",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-continuous-constructible-integral-single",
+   "place": "Finite open--closed filtration and extension reconstruction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousConstructibleIntegralGluing",
+  "file": "lean/Sheaf/Paper/ContinuousConstructibleIntegralGluing.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousConstructible_integral_gluing",
+  "statement": "theorem continuousConstructible_integral_gluing (X : Scheme.{u})\n    [TopologicalSpace.NoetherianSpace X]\n    (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (S : Scheme.Stratification X)\n    (hmodels : ∀ a : Fin S.n,\n      ∃ N : Mod (Sheaf (Scheme.ProEt.topology (S.domain a)) Ab.{u + 1})\n          ((ProEtale.upperStar Ab.{u + 1} (S.immersion a)).obj\n            (condensedRingObj (integralCoeff ℓ E) X)),\n        ProEtale.IsConstructibleModuleObject\n          ((ProEtale.upperStar Ab.{u + 1} (S.immersion a)).obj\n            (condensedRingObj (integralCoeff ℓ E) X)) N ∧\n        Nonempty ((Mod.extendScalars\n          ((ProEtale.upperStar Ab.{u + 1} (S.immersion a)).map\n            (coefficientMap (integralScalarMap ℓ E) X))).obj N ≅\n          ((ProEtale.upperStar Ab.{u + 1} (S.immersion a)).mapMod\n            (condensedRingObj (Profinite.continuousMapRingObj E) X)).obj F)) :\n    ∃ N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj (integralCoeff ℓ E) X),\n      ProEtale.IsConstructibleModuleObject (condensedRingObj (integralCoeff ℓ E) X) N ∧\n      Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj N ≅ F)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T023443-L-1241905",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T023443-L-1241905",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
