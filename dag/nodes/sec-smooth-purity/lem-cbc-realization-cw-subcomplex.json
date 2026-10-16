@@ -285,5 +285,30 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-3d7e9db49 (reviewer sub-agent of L); spot-checked: Read all seven proof steps and cited statements in full. Checked Stacks 017R, Kerodon realization sources, Mathlib decomposition, unit route and exact archived targets. Normal-form invariance and closed-image induction cover empty, degenerate and identified-boundary cases. No new nodes, circular dependencies or repairs. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9dd8bba3b",
+  "group": "NE",
+  "result": "fix",
+  "note": "Mathematics, hypotheses, universes, edge cases, dependencies, docstrings and verbatim signature verified; per-file compilation reproduced cleanly. review.md records all checks. Complete replacement report in fixes/ repairs five corrupted source references; no Lean or node changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RealizationCWSubcomplex",
+  "declaration": "SSet.realization_cw_subcomplex",
+  "declarations": [
+   "SSet.realizationCharacteristic",
+   "SSet.realizationInterior",
+   "SSet.realizationBarycentricMap",
+   "SSet.realization_cw_subcomplex"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/RealizationCWSubcomplex.lean",
+  "statement": "theorem realization_cw_subcomplex (K : SSet.{u}) : (∀ x : |K|, ∃! (p : Σ n : ℕ, {σ : K _⦋n⦌ // σ ∈ K.nonDegenerate n} × {t : |SSet.stdSimplex.obj ⦋n⦌| // realizationInterior t}), (realizationCharacteristic p.2.1.val) p.2.2.val = x) ∧ (∀ (n : ℕ) (τ : K _⦋n⦌), ∃! (p : Σ m : ℕ, Σ α : ⦋n⦌ ⟶ ⦋m⦌, K _⦋m⦌), Function.Surjective p.2.1.toOrderHom ∧ p.2.2 ∈ K.nonDegenerate p.1 ∧ τ = K.map p.2.1.op p.2.2) ∧ (∀ (n : ℕ) (τ : K _⦋n⦌) (m : ℕ) (α : ⦋n⦌ ⟶ ⦋m⦌) (σ : K _⦋m⦌), τ = K.map α.op σ → realizationCharacteristic τ = realizationCharacteristic σ ∘ realizationBarycentricMap α) ∧ (∀ (n m : ℕ) (α : ⦋n⦌ ⟶ ⦋m⦌) (t : |SSet.stdSimplex.obj ⦋n⦌|) (j : Fin (m + 1)), (⦋m⦌.toTopHomeo (realizationBarycentricMap α t)) j = ∑ i : Fin (n + 1), if α.toOrderHom i = j then (⦋n⦌.toTopHomeo t) i else 0) ∧ (∀ (n m : ℕ) (ρ : K _⦋n⦌) (β : ⦋m⦌ ⟶ ⦋n⦌), realizationCharacteristic (K.map β.op ρ) = realizationCharacteristic ρ ∘ realizationBarycentricMap β) ∧ (∀ B : Set |K|, IsClosed B ↔ ∀ (n : ℕ) (τ : K _⦋n⦌), IsClosed ((realizationCharacteristic τ) ⁻¹' B)) ∧ (∀ A : K.Subcomplex, ∃ e : |A.toSSet| ⟶ |K|, e = SSet.toTop.map A.ι ∧ Topology.IsClosedEmbedding e ∧ (∀ x : |K|, x ∈ Set.range e ↔ ∃ (n : ℕ) (σ : A.toSSet _⦋n⦌), σ.1 ∈ K.nonDegenerate n ∧ ∃ t : |SSet.stdSimplex.obj ⦋n⦌|, realizationInterior t ∧ realizationCharacteristic σ.1 t = x))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The helper declarations give the canonical characteristic and barycentric maps and interior predicate; the theorem states the nondegenerate representative, degeneracy, coordinate, quotient-topology, and simplicial-subcomplex clauses."
  }
 }
