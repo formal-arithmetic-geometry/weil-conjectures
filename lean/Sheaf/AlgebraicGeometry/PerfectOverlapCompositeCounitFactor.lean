@@ -3,10 +3,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapCompositeStageTail
 public import Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare
-import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons
-import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
 import Sheaf.AlgebraicGeometry.PerfectOverlapCompositeStageMap
 import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport
 
@@ -25,11 +21,20 @@ namespace AlgebraicGeometry
 attribute [local irreducible] derivedPullback perfectHomComposition
 attribute [local instance] Functor.additive_of_preserves_binary_products
 attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverModuleAbelian
+private theorem factorComponent {𝒟 : Type*} [Category 𝒟]
+    {P Q R S : 𝒟} (stage : P ⟶ S) (counit : P ⟶ Q) (eta : P ⟶ R)
+    (transport : Q ≅ R) (tail : Q ⟶ S)
+    (hstage : stage = counit ≫ tail) (heta : eta = counit ≫ transport.hom) :
+    stage = eta ≫ transport.inv ≫ tail := by
+  rw [hstage, heta]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
   HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
 
+set_option linter.unusedVariables false in
 /-- Factoring the constructed stage map through the prescribed natural comparison.
 Source: Stacks Project, Tag 08DW, compatibility of restriction with pullback.
 
@@ -100,6 +105,35 @@ theorem perfectOverlapCompositeCounitFactor
     perfectOverlapCompositeStageMap f gk g hgf pX pY b hg U V A B E φU φV a =
       η.hom.app (F a) ≫
         (perfectOverlapStageTransport g f pX pK pY b q hg hf U V r m hmap).inv.app (F a) ≫ D a
-    := by sorry
+    := by
+  intro W s r m eY eK hmap data F apex η σ D a
+  let site : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (g ⁻¹ᵁ W)) ≌
+      SheafOfModules.{u} (moduleRings (g ⁻¹ᵁ W).toScheme.toRingedSpace) :=
+    Scheme.Modules.overEquiv _
+  let counit := (perfectOverlapStageEquivalence g pX pY b hg U V).functor.map
+    (site.mapDerivedCategory.counitIso.hom.app ((derivedPullback r).obj (F a)))
+  have hstage :
+      perfectOverlapCompositeStageMap f gk g hgf pX pY b hg U V A B E φU φV a =
+        counit ≫ D a := by
+    cases a
+    · refine (perfectOverlapCompositeStageMap_false f gk g hgf pX pY b hg U V A B E
+        φU φV).trans ?_
+      dsimp only [F, D, counit, Bool.false_eq_true, ↓reduceIte]
+      unfold perfectOverlapCompositeStageMapAt perfectOverlapCompositeStageTailAt
+      rfl
+    · refine (perfectOverlapCompositeStageMap_true f gk g hgf pX pY b hg U V A B E
+        φU φV).trans ?_
+      dsimp only [F, D, counit, ↓reduceIte]
+      unfold perfectOverlapCompositeStageMapAt perfectOverlapCompositeStageTailAt
+      rfl
+  have heta : η.hom.app (F a) = counit ≫
+      (perfectOverlapStageTransport g f pX pK pY b q hg hf U V r m hmap).hom.app
+        (F a) := by
+    unfold perfectOverlapStageTransport
+    exact perfectOverlapNaturalComparisonOfSquare_hom_app g f pX pK pY b q hg hf
+      U V r m hmap (F a)
+  exact factorComponent _ counit _
+    ((perfectOverlapStageTransport g f pX pK pY b q hg hf U V r m hmap).app (F a))
+    (D a) hstage heta
 
 end AlgebraicGeometry
