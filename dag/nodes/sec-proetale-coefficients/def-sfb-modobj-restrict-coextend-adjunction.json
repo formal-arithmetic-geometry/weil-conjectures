@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-modobj-restrict-coextend-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Restriction of scalars is left adjoint to coextension",
@@ -18,26 +18,238 @@
  ],
  "proof": [
   {
-   "text": "We use elementwise notation for morphisms out of tensor products, as in\n[def-sfb-modobj-coextension]. Identities between maps into\n$\\Hom_{\\mathcal R}(\\mathcal S,N)$ are checked after evaluation.\n- $\\varepsilon_N$ is $\\mathcal R$-linear for the restricted action\n  ([def-sfb-modobj-restriction]): $(\\varphi(r)\\cdot g)(1)=g(\\varphi(r))=r\\cdot g(1)$, by the\n  equalizer condition.\n- Let $f\\colon\\operatorname{Res}_\\varphi M\\to N$ be $\\mathcal R$-linear. The map\n  $s\\mapsto f(sm)$ lies in $\\Hom_{\\mathcal R}(\\mathcal S,N)$, because\n  $f(\\varphi(r)sm)=r\\cdot f(sm)$ by linearity of $f$. The assignment\n  $m\\mapsto(s\\mapsto f(sm))$ is $\\mathcal S$-linear, because\n  $s\\mapsto f(ss'm)$ is $s'\\cdot(s\\mapsto f(sm))$.\n- The two constructions are mutually inverse by the unit law of $\\mathcal S$. Naturality\n  is immediate.",
+   "text": "Put $H_N=\\operatorname{Coext}_\\varphi N$, with equalizer inclusion $i_N:H_N\\to\\underline{\\Hom}(\\mathcal S,N)$ and evaluation $e_N:\\mathcal S\\otimes H_N\\to N$, as in [def-sfb-modobj-coextension]. Write $a=\\mu_{\\mathcal S}\\circ(\\varphi\\otimes\\mathcal S)$. For any object $Y$, curry a map $b:\\mathcal S\\otimes Y\\to N$. Its transpose factors uniquely through $i_N$ precisely when\n$$b\\circ(a\\otimes1_Y)=\\gamma_N\\circ(1_{\\mathcal R}\\otimes b)\\circ\\alpha_{\\mathcal R,\\mathcal S,Y}.$$\nExplicitly, let $p,q$ denote the first and second equalizer arrows in [def-sfb-modobj-coextension], and put $c=\\operatorname{curry}(b)$. Naturality of evaluation and the definitions of $p,q$ give\n$$\\operatorname{uncurry}(p\\circ c)=b\\circ(a\\otimes1_Y),\\qquad\n\\operatorname{uncurry}(q\\circ c)=\\gamma_N\\circ(1_{\\mathcal R}\\otimes b)\\circ\\alpha_{\\mathcal R,\\mathcal S,Y}.$$\nThe first substitutes the source action $a$ into evaluation; the second substitutes $c$ into the defining evaluation composite for $q$ and uses $\\mathrm{ev}\\circ(1_{\\mathcal S}\\otimes c)=b$. Thus injectivity of uncurrying identifies the equalizer equation $p\\circ c=q\\circ c$ with the displayed condition. The equalizer universal property gives the unique factorization. Also maps $u,v:Y\\to H_N$ are equal if $e_N(1_{\\mathcal S}\\otimes u)=e_N(1_{\\mathcal S}\\otimes v)$: injectivity of transposition gives $i_Nu=i_Nv$; then $u$ and $v$ are two factorizations of the same equalizing arrow through $i_N$, so the uniqueness part of the equalizer universal property gives $u=v$. Below, expressions $b(s,y)$ denote these morphisms on ordered tensor factors, with the displayed associators and unitors understood; no assertion that elements separate morphisms is used.",
+   "uses": [
+    "def-sfb-modobj-coextension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-coextension.md",
+    "place": "Coextension definition: closedness and equalizer; preliminary interpretation of the inverse formula"
+   }
+  },
+  {
+   "text": "Define $\\varepsilon_N=e_N\\circ(\\eta_{\\mathcal S}\\otimes1_{H_N})\\circ\\lambda_{H_N}^{-1}$. By [def-sfb-modobj-coextension] the action satisfies $e_N(t,s\\cdot h)=e_N(ts,h)$ and the equalizer condition says $e_N(\\varphi(r)t,h)=r\\cdot e_N(t,h)$. Set $t=1$, by precomposing with the unit in the test factor, to obtain\n$$\\varepsilon_N(\\varphi(r)\\cdot h)=e_N(\\varphi(r),h)=r\\cdot\\varepsilon_N(h).$$\nThis is equality of morphisms $\\mathcal R\\otimes H_N\\to N$, using the unit laws. The action on the source is the restricted action of [def-sfb-modobj-restriction], so $\\varepsilon_N:\\operatorname{Res}_\\varphi H_N\\to N$ is $\\mathcal R$-linear.",
    "uses": [
     "def-sfb-modobj-coextension",
     "def-sfb-modobj-restriction"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restrict-coextend-adjunction.md",
+    "place": "Statement: evaluation at the unit is R-linear (agent expansion)"
+   }
+  },
+  {
+   "text": "For an $\\mathcal S$-linear $g:M\\to H_N$, restriction makes $g$ an $\\mathcal R$-linear map by [def-sfb-modobj-restriction]. Compose it with the $\\mathcal R$-linear $\\varepsilon_N$ of step 2. Composition in the module category [sk-def-sfb-module-objects] therefore defines\n$$A_{M,N}(g)=\\varepsilon_N\\circ\\operatorname{Res}_\\varphi(g):\\operatorname{Res}_\\varphi M\\to N.$$",
+   "uses": [
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restrict-coextend-adjunction.md",
+    "place": "Statement: the forward map g to evaluation composed with restriction"
+   }
+  },
+  {
+   "text": "For an $\\mathcal R$-linear $f:\\operatorname{Res}_\\varphi M\\to N$, form the actual morphism $b_f=f\\circ\\gamma_M:\\mathcal S\\otimes M\\to N$. Module associativity [sk-def-sfb-module-objects] and $\\mathcal R$-linearity for the restricted action [def-sfb-modobj-restriction] give, on $\\mathcal R\\otimes\\mathcal S\\otimes M$,\n$$b_f(\\varphi(r)s,m)=f((\\varphi(r)s)m)=f(\\varphi(r)(sm))=r\\cdot f(sm)=r\\cdot b_f(s,m).$$\nThus $b_f$ satisfies exactly the equalizer criterion in step 1, for the equalizer of [def-sfb-modobj-coextension]. It defines a unique underlying morphism $B_{M,N}(f):M\\to H_N$ with $e_N(s,B_{M,N}(f)(m))=f(sm)$.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-sfb-modobj-restriction",
+    "def-sfb-modobj-coextension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restrict-coextend-adjunction.md",
+    "place": "Statement: inverse formula, factorization through the equalizer (agent expansion)"
+   }
+  },
+  {
+   "text": "The morphism of step 4 is $\\mathcal S$-linear. To compare $B(f)\\circ\\gamma_M$ and the action on $H_N$ composed with $1_{\\mathcal S}\\otimes B(f)$, use the extensionality criterion of step 1. Their evaluations on the ordered factors $\\mathcal S\\otimes\\mathcal S\\otimes M$ are\n$$e_N(t,B(f)(sm))=f(t(sm))=f((ts)m)=e_N(ts,B(f)(m))=e_N(t,s\\cdot B(f)(m)).$$\nThe middle equality is the module associativity law of [sk-def-sfb-module-objects], and the last equality is precisely the source-right-multiplication action of [def-sfb-modobj-coextension]. This proves linearity, without exchanging the two $\\mathcal S$ factors.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-sfb-modobj-coextension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restrict-coextend-adjunction.md",
+    "place": "Statement: inverse formula gives an S-linear morphism (agent expansion)"
+   }
+  },
+  {
+   "text": "The two maps are inverse. By the module unit law [sk-def-sfb-module-objects],\n$$A(B(f))(m)=e_N(1,B(f)(m))=f(1m)=f(m).$$\nFor $\\mathcal S$-linear $g:M\\to H_N$, its linearity and the action formula of [def-sfb-modobj-coextension] give\n$$e_N(s,B(A(g))(m))=A(g)(sm)=e_N(1,g(sm))=e_N(1,s\\cdot g(m))=e_N(s,g(m)).$$\nHere the final equality uses $1s=s$. Extensionality from step 1 now gives $B(A(g))=g$ as underlying morphisms, hence as module morphisms by [sk-def-sfb-module-objects]. Thus $A$ is a bijection with inverse $B$.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-sfb-modobj-coextension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restrict-coextend-adjunction.md",
+    "place": "Statement: bijection with the specified inverse (agent expansion)"
+   }
+  },
+  {
+   "text": "Check naturality explicitly. For $\\mathcal S$-linear $u:M'\\to M$ and $\\mathcal R$-linear $v:N\\to N'$, write $H(v):H_N\\to H_{N'}$ for coextension on morphisms. Restriction leaves underlying maps unchanged [def-sfb-modobj-restriction], while $H(v)$ is postcomposition [def-sfb-modobj-coextension]. Consequently\n$$A_{M',N}(g\\circ u)=A_{M,N}(g)\\circ\\operatorname{Res}_\\varphi(u),\\qquad A_{M,N'}(H(v)\\circ g)=v\\circ A_{M,N}(g).$$\nThe first is associativity of composition; for the second both sides evaluate $g(m)$ at $1$ and then apply $v$. For the inverse maps the evaluation formulas are\n$$e_N(s,B(f\\circ\\operatorname{Res}_\\varphi u)(m'))=f(u(sm'))=f(su(m'))=e_N(s,B(f)(u(m'))),$$\n$$e_{N'}(s,B(v\\circ f)(m))=v(f(sm))=e_{N'}(s,H(v)(B(f)(m))).$$\nThe first uses the definition of module morphism [sk-def-sfb-module-objects]; the second uses postcomposition. By step 1 these are the naturality identities for $B$.",
+   "uses": [
+    "def-sfb-modobj-restriction",
+    "def-sfb-modobj-coextension",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restrict-coextend-adjunction.md",
+    "place": "Statement: naturality in M and N (agent expansion)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-adjunction-of-natural-bijection] with $F=\\operatorname{Res}_\\varphi$, $G=\\operatorname{Coext}_\\varphi$ and $\\Psi_{M,N}=B_{M,N}=A_{M,N}^{-1}$. Steps 3--7 give the required bijections and both naturality laws, for the functors [def-sfb-modobj-restriction] and [def-sfb-modobj-coextension]. Therefore $\\operatorname{Res}_\\varphi\\dashv\\operatorname{Coext}_\\varphi$. Its counit at $N$ is $A_{H_N,N}(1_{H_N})=\\varepsilon_N$, so the adjunction is the specified one.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-sfb-modobj-restriction",
+    "def-sfb-modobj-coextension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit/counit paragraph; application to the constructed bijections"
+   }
   }
  ],
  "proof_deps": [
   "def-sfb-modobj-coextension",
-  "def-sfb-modobj-restriction"
+  "def-sfb-modobj-restriction",
+  "sk-def-sfb-module-objects",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restrict-coextend-adjunction.md",
-  "place": "## Proof"
+  "place": "Statement (evaluation, inverse formula, natural bijection and adjunction), and sk-def-sfb-change-of-scalars clause 3, expanded into ordered-tensor morphism calculations by NI"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictCoextend|coextendScalars|coinduction",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match for module-object coextension adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for modules over monoid objects in a closed monoidal category is left adjoint to coextension of scalars",
+   "results": "ModuleCat.instIsLeftAdjointRestrictScalars; ModuleCat.restrictCoextendScalarsAdj; RestrictScalars; CategoryTheory.Mod_.scalarRestriction; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; ModuleCat.instIsLeftAdjointExtendScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; Rep.instIsLeftAdjointActionModuleCatRes",
+   "date": "2026-10-16",
+   "verdict": "no match at the required generality: ModuleCat.restrictCoextendScalarsAdj concerns ordinary modules over rings (ChangeOfRings.lean:659); Rep results concern k-representations of monoids. The general monoidal Mod.comap construction provides restriction only, not the coextension adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ModuleCat, CategoryTheory.Adjunction",
+   "results": "No hits; loogle: unknown identifier 'CategoryTheory.ModuleCat'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: CategoryTheory.ModuleCat is not an identifier; corrected by the subsequent CategoryTheory.Mod_ query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a closed monoidal category with equalizers restriction of scalars for monoid module objects is left adjoint to coextension defined by internal Hom",
+   "results": "ModuleCat.restrictCoextendScalarsAdj; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply; ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction; ModuleCat.RestrictionCoextensionAdj.unit'; ModuleCat.instIsLeftAdjointRestrictScalars; ModuleCat.instIsRightAdjointCoextendScalars; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; ModuleCat.RestrictionCoextensionAdj.app'",
+   "date": "2026-10-16",
+   "verdict": "no match at the required generality: ModuleCat.restrictCoextendScalarsAdj concerns ordinary modules over rings (ChangeOfRings.lean:659); Rep results concern k-representations of monoids. The general monoidal Mod.comap construction provides restriction only, not the coextension adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictCoextendScalarsAdj|def coextendScalars|def scalarRestriction|coextend",
+   "results": "Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean; Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/CategoryTheory/Monoidal/Mod.lean",
+   "date": "2026-10-16",
+   "verdict": "no match at the required generality: ModuleCat.restrictCoextendScalarsAdj concerns ordinary modules over rings (ChangeOfRings.lean:659); Rep results concern k-representations of monoids. The general monoidal Mod.comap construction provides restriction only, not the coextension adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_, CategoryTheory.Adjunction",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match for module-object coextension adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coinduction of modules over a monoid object in a closed monoidal category is right adjoint to scalar restriction",
+   "results": "Rep.resCoindAdjunction; Rep.instIsRightAdjointCoindFunctor; ModuleCat.restrictCoextendScalarsAdj; Rep.coindResAdjunction; Rep.resCoindAdjunction_counit_app_hom_hom; Rep.resCoindAdjunction_unit_app_hom_hom; Rep.resCoindHomEquiv; Rep.coindVEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match at the required generality: ModuleCat.restrictCoextendScalarsAdj concerns ordinary modules over rings (ChangeOfRings.lean:659); Rep results concern k-representations of monoids. The general monoidal Mod.comap construction provides restriction only, not the coextension adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "^def restrictCoextendScalarsAdj|^def coextendScalars|^def resCoindAdjunction|^noncomputable def resCoindAdjunction",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-16",
+   "verdict": "no match at the required generality: ModuleCat.restrictCoextendScalarsAdj concerns ordinary modules over rings (ChangeOfRings.lean:659); Rep results concern k-representations of monoids. The general monoidal Mod.comap construction provides restriction only, not the coextension adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictCoextendScalarsAdj",
+   "results": "ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-16",
+   "verdict": "no match at the required generality: ModuleCat.restrictCoextendScalarsAdj concerns ordinary modules over rings (ChangeOfRings.lean:659); Rep results concern k-representations of monoids. The general monoidal Mod.comap construction provides restriction only, not the coextension adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "coinduct|coextend|comap.*[Aa]dj|[Aa]dj.*comap",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean; Mathlib/CategoryTheory/Sites/Point/Comap.lean",
+   "date": "2026-10-16",
+   "verdict": "No general monoid-module coextension adjunction: representation hits assume coefficient rings and monoid/group actions; the CategoryTheory grep hits concern homotopy construction and site points, not scalar restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint to comap for modules over a monoid object, obtained from a closed monoidal internal hom and an equalizer",
+   "results": "Rep.instIsLeftAdjointActionModuleCatRes; Rep.instIsRightAdjointActionModuleCatRes; ModuleCat.instIsRightAdjointCoextendScalars; Rep.MonoidalClosed.linearHomEquiv; Rep.MonoidalClosed.linearHomEquivComm; Rep.ihom_coev_app_hom; ModuleCat.instMonoidalClosed; Rep.ihom_ev_app_hom",
+   "date": "2026-10-16",
+   "verdict": "No general monoid-module coextension adjunction: representation hits assume coefficient rings and monoid/group actions; the CategoryTheory grep hits concern homotopy construction and site points, not scalar restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictCoextend|coextend|coinduc|comap.*[Aa]dj",
+   "results": "No hits; searched Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ModuleCat and Rep results concern ring modules or representations; tensor-Hom adjunction/currying results do not assert the internal-module coextension adjunction. Read ChangeOfRings.lean:585–679, Monoidal/Mod.lean:350–415, Monoidal/Closed/Basic.lean:145–204, RepresentationTheory/Coinduced.lean:113–122,303–313."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural bijection between module object morphisms into internal Hom coextension and morphisms from scalar restriction in a closed monoidal category",
+   "results": "ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply; CategoryTheory.MonoidalClosed.curry; ModuleCat.ExtendRestrictScalarsAdj.homEquiv; CategoryTheory.MonoidalClosed.curryHomEquiv'; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; ModuleCat.monoidalClosedHomEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ModuleCat and Rep results concern ring modules or representations; tensor-Hom adjunction/currying results do not assert the internal-module coextension adjunction. Read ChangeOfRings.lean:585–679, Monoidal/Mod.lean:350–415, Monoidal/Closed/Basic.lean:145–204, RepresentationTheory/Coinduced.lean:113–122,303–313."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a morphism of monoid objects in a closed monoidal category is left adjoint to the equalizer internal Hom coextension functor",
+   "results": "CategoryTheory.exp.adjunction; CategoryTheory.ihom.adjunction; CategoryTheory.ihom.instIsLeftAdjointTensorLeft; ModuleCat.restrictCoextendScalarsAdj; CategoryTheory.MonoidalClosed.pre; CategoryTheory.MonoidalClosed.internalHomAdjunction₂; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ModuleCat and Rep results concern ring modules or representations; tensor-Hom adjunction/currying results do not assert the internal-module coextension adjunction. Read ChangeOfRings.lean:585–679, Monoidal/Mod.lean:350–415, Monoidal/Closed/Basic.lean:145–204, RepresentationTheory/Coinduced.lean:113–122,303–313."
+  },
+  {
+   "tool": "grep",
+   "query": "^def restrictCoextendScalarsAdj|^def coextendScalars",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; searched Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ModuleCat and Rep results concern ring modules or representations; tensor-Hom adjunction/currying results do not assert the internal-module coextension adjunction. Read ChangeOfRings.lean:585–679, Monoidal/Mod.lean:350–415, Monoidal/Closed/Basic.lean:145–204, RepresentationTheory/Coinduced.lean:113–122,303–313."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint to scalar restriction for internal modules over associative monoids using an equalizer and a left closed monoidal structure",
+   "results": "ModuleCat.instIsRightAdjointRestrictScalars; ModuleCat.instIsRightAdjointCoextendScalars; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.extendRestrictScalarsAdj; Rep.instIsRightAdjointActionModuleCatRes; ModuleCat.instIsLeftAdjointRestrictScalars; Rep.instIsLeftAdjointActionModuleCatRes; Rep.resCoindAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ModuleCat and Rep results concern ring modules or representations; tensor-Hom adjunction/currying results do not assert the internal-module coextension adjunction. Read ChangeOfRings.lean:585–679, Monoidal/Mod.lean:350–415, Monoidal/Closed/Basic.lean:145–204, RepresentationTheory/Coinduced.lean:113–122,303–313."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction for internal modules: an R-linear map from restricted M to N uniquely curries to an S-linear map M into the equalizer defining internal Hom from S to N",
+   "results": "ModuleCat.instIsRightAdjointRestrictScalars; ModuleCat.instIsLeftAdjointRestrictScalars; ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply; ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction_hom_apply_apply; ModuleCat.extendRestrictScalarsAdj; ModuleCat.ihom_ev_app; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: no match for arbitrary internal modules in a closed monoidal category. ModuleCat.restrictCoextendScalarsAdj and its inverse formulas require ordinary rings and module categories (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:585-679); tensor-Hom evaluation alone is not this adjunction."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -55,5 +267,20 @@
   "CategoryTheory.Mod.restrictCoextendAdjunction"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-restrict-coextend-adjunction",
+  "worker": "stage1",
+  "summary": "Expanded the internal-Hom/equalizer argument into eight steps: tensor-valued factorization and extensionality, R-linearity of unit evaluation, forward map, construction and S-linearity of the inverse, both inverse identities, both naturality laws, and the adjunction. Reused the existing natural-bijection Mathlib leaf and two scalar-change definitions plus the module-object definition. No new nodes and no hypotheses or statement changes. Checked both semantic phrasings and local Mathlib candidates; ordinary ring modules and representations do not cover the general monoidal statement. Revalidated the inherited split against the now-reviewed coextension statement and refreshed stale citation excerpts; repeated the prescribed searches with two internal-module phrasings. Second reading made equalizer cancellation explicit and corrected step source locators to the actual statement clauses; independently searched the inverse/currying formulation.",
+  "blueprint": "Realizes the evaluation, inverse-map and naturality clauses of this blueprint node, expanding the three bullets of the imported proof; keeps clause 3 (Coextension) of sk-def-sfb-change-of-scalars. The current item markdown contains only its statement, so no nonexistent markdown proof section is asserted."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-6521953f8",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-6521953f8 (reviewer sub-agent of L); spot-checked: Reviewed the item, all eight proof steps, four dependencies, blueprint route, Stacks Tag 0037, and Mathlib adjunction source. The equalizer construction, noncommutative tensor order, R-linearity, inverse maps, naturality, and adjunction are correct; no new nodes or repairs are required. Review written to review.md."
+ }
 }

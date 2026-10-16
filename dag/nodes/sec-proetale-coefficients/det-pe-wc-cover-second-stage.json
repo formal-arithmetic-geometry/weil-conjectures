@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-wc-cover-second-stage",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Realizing a Stonean cover of the components",
@@ -14,55 +14,250 @@
  },
  "stmt_deps": [
   "det-pe-wlocal-strict-contractible",
-  "det-pe-stonean-cover"
+  "det-pe-stonean-cover",
+  "det-pe-wlocal-components",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-localization-at-prime"
  ],
  "proof": [
   {
-   "text": "*Preliminaries.* Clopen subsets of $\\operatorname{Spec}C$ correspond to idempotents of $C$,\nand preimages under $\\pi$ of clopen subsets of $P$ are clopen, so $e_U$ exists. A closed\n$Z$ in the profinite space $P$ is the intersection of its clopen neighbourhoods, so\n$\\operatorname{Spec}C_Z=\\bigcap_U\\pi^{-1}(U)=\\pi^{-1}(Z)$, and localizing at idempotents\ndoes not change local rings: $(C_Z)_x=C_x$ for $x\\in\\pi^{-1}(Z)$. Each $f(A)$ is compact,\nhence closed. The partitions $\\mathcal Q$ form a directed set under refinement (common\nrefinements by intersections), and $C_{f(A)}\\to C_{f(A')}$ exists since $f(A')\\subset f(A)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $X=\\operatorname{Spec}C$. The component lemma identifies $P$ with the closed-point space of $X$, in particular $P$ is profinite and $\\pi$ is continuous. The inverse image of a clopen $U\\subseteq P$ is clopen in $X$, so the clopen-idempotent correspondence supplies the unique $e_U$ with $D(e_U)=\\pi^{-1}(U)$. If $V\\subseteq U$, then $e_Ve_U=e_V$: both sides are the idempotent of $D(e_V)\\cap D(e_U)=D(e_V)$. Thus the image of $e_U$ is 1 in $C_{e_V}$, and the localization universal property supplies the transition map. These maps compose uniquely. The clopen neighborhoods of any $Z$ form a small nonempty directed set under reverse inclusion (intersect two, with $P$ a neighborhood).",
+   "uses": [
+    "det-pe-wlocal-components",
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "Preliminaries: component topology and idempotents"
+   }
   },
   {
-   "text": "*1.* Each $C_{e_U}=C[1/e_U]$ is a principal localization, so $C_Z$ is a filtered colimit of\nprincipal localizations, and $D_{\\mathcal Q}$, a finite product of such colimits, is a\nfiltered colimit of finite products of principal localizations (finite products commute\nwith filtered colimits). Hence $D$ is a filtered colimit of finite products of principal\nlocalizations of $C$, i.e. ind-Zariski [def-weil-pbc-ind-etale-algebra], so ind-étale and\nflat ([lem-weil-pbc-ind-etale-stability]). Surjectivity on spectra follows from 2: for\n$x\\in\\operatorname{Spec}C$ choose $s$ with $f(s)=\\pi(x)$.",
+   "text": "For closed $Z\\subseteq P$, let $M_Z=\\{e_U:U\\supseteq Z\\text{ clopen}\\}$. This is a multiplicative subset: $e_P=1$ and $e_Ue_V=e_{U\\cap V}$ by the clopen-idempotent correspondence. A $C$-algebra map into a ring $T$ factors through every $C_{e_U}$ if and only if every element of $M_Z$ maps to a unit; the factorizations are unique and hence compatible. The colimit universal property and localization universal property thus identify $C_Z$ canonically with $M_Z^{-1}C$. By the localization-spectrum embedding lemma its spectrum is the subspace of primes avoiding $M_Z$, namely $\\bigcap_U\\pi^{-1}(U)$. This is $\\pi^{-1}(Z)$: if $p\\notin Z$, a clopen neighborhood of $p$ disjoint from $Z$ exists in the profinite space, and its complement is a neighborhood of $Z$ missing $p$. This proves the required restriction homeomorphism without invoking a general spectrum-colimit theorem.",
    "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-weil-pbc-localization-away-universal-property",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-localization-spectrum-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097C, lemma-construct, proof; localization universal property and clopen neighborhoods."
+   }
+  },
+  {
+   "text": "At $x\\in\\pi^{-1}(Z)$ the colimit-localization theorem gives $(C_Z)_x=\\varinjlim_U(C_{e_U})_{x_U}$. Here each $(C_{e_U})_{x_U}$ is canonically $C_x$. Write $e=e_U$. Since $e\\notin x$, the localization universal property gives a map to $C_x$ sending $(a/e^n)/(b/e^m)$ to $a/b$; here $b\\notin x$ because the denominator is outside $x_U$, and $e/1=1$ in $C_x$ since it is an invertible idempotent. In the other direction $a/b\\mapsto(a/1)/(b/1)$ is defined by inverting $C\\setminus x$. In $C_e$ too the invertible idempotent $e/1$ equals 1, so the two displayed fraction formulas compose to the identity in both directions. A transition $C_{e_U}\\to C_{e_V}$ for $V\\subseteq U$ sends the image of each $a\\in C$ to the image of that same $a$; after prime localization its conjugate under these isomorphisms sends every $a/b\\in C_x$ to $a/b$. Thus this localized diagram is the constant diagram $C_x$ with identity transitions. Its colimit is $C_x$: a compatible cocone on a nonempty directed constant diagram is a single map from $C_x$, since any two indices have a common upper bound. All the isomorphisms are of $C$-algebras.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "Preliminaries: unchanged local rings"
+   }
+  },
+  {
+   "text": "Each $f(A)$ is closed: a part $A$ is closed in compact $S$, its continuous image is compact, and $P$ is Hausdorff. If $Z\\subseteq Z^\\prime$, every neighborhood used for $C_{Z^\\prime}$ also occurs for $C_Z$; the colimit universal property therefore gives a canonical map $C_{Z^\\prime}\\to C_Z$, compatible with inclusions. This supplies exactly the transition maps for refinements in the statement. Common refinements of finite clopen partitions consist of their nonempty intersections, so the partition index is small, nonempty and directed. If $S$ is empty its unique partition is the empty partition; since $f:S\\to P$ exists and is surjective, $P$ is empty too.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "Preliminaries: directed systems and transition maps"
+   }
+  },
+  {
+   "text": "For a fixed partition $\\mathcal Q$, index simultaneously by a choice of clopen neighborhood $U_A\\supseteq f(A)$ for every $A\\in\\mathcal Q$. This finite product of neighborhood index sets is directed; each coordinate projection is cofinal, since all other coordinates can be chosen to be $P$. Filtered colimits commute with finite products of underlying sets, and the comparison here is a ring homomorphism because addition, multiplication and 1 are componentwise. Thus $D_{\\mathcal Q}=\\varinjlim_{(U_A)}\\prod_A C_{e_{U_A}}$ as rings and as $C$-algebras. One can check bijectivity directly as well: a finite tuple of fractions lifts at a tuple of stages, and equality of two such tuples holds after taking an upper bound of their finitely many equality-witness stages. The elementwise colimit and equality lemmas justify these assertions for ring colimits. By the definition, $C\\to D_{\\mathcal Q}$ is ind-Zariski. Stability under filtered colimits then gives $C\\to D$ ind-Zariski, hence ind-etale by the same definition; the stability theorem makes it weakly etale, whose flatness is part of the cited definition.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero",
     "def-weil-pbc-ind-etale-algebra",
     "lem-weil-pbc-ind-etale-stability"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "*1.*: finite stages and ind-Zariski flatness"
+   }
   },
   {
-   "text": "*2.* The spectrum of a filtered colimit of rings is the limit of the spectra. A prime of\n$D_{\\mathcal Q}$ is a part $A\\in\\mathcal Q$ together with a point\n$x\\in\\pi^{-1}(f(A))$. A compatible family is therefore a point $x$ together with a\ndecreasing system of parts $A_{\\mathcal Q}$ with $\\pi(x)\\in f(A_{\\mathcal Q})$ for all\n$\\mathcal Q$. Since clopen partitions separate the points of the compact space $S$, the\n$A_{\\mathcal Q}$ have intersection a single point $s$, and every $s$ arises. Moreover\n$\\bigcap_{\\mathcal Q}f(A_{\\mathcal Q})=\\{f(s)\\}$: if $p$ lies in all $f(A_{\\mathcal Q})$, the\nnonempty compact sets $f^{-1}(p)\\cap A_{\\mathcal Q}$ are directed downwards, so their\nintersection, contained in $\\{s\\}$, is nonempty and $f(s)=p$. Hence the points of\n$\\operatorname{Spec}D$ are the pairs $(x,s)$ with $\\pi(x)=f(s)$. The map to $S$ is\ncontinuous: the idempotents of $D_{\\mathcal Q}$ indexed by the parts give continuous maps\n$\\operatorname{Spec}D\\to\\mathcal Q$, whose limit is the map to $S=\\varprojlim\\mathcal Q$.\nThe local ring at $(x,s)$ is $\\varinjlim_{\\mathcal Q}(C_{f(A_{\\mathcal Q})})_x=C_x$.",
+   "text": "A compatible choice of a part $A_{\\mathcal Q}$ for every partition has the finite intersection property: a common refinement supplies a nonempty part inside any finite selection. Its intersection is nonempty by compactness (otherwise the open complements cover $S$, and a finite subcover contradicts that property). It contains at most one point, because distinct points of a profinite space are separated by a clopen, and its two-part partition separates them. Write the intersection as $\\{s\\}$. If $p\\in\\bigcap_{\\mathcal Q}f(A_{\\mathcal Q})$, the sets $f^{-1}(p)\\cap A_{\\mathcal Q}$ are closed and have the finite intersection property: for any finite list of partitions choose a common refinement $\\mathcal R$; as $p\\in f(A_{\\mathcal R})$, some $t\\in A_{\\mathcal R}$ has $f(t)=p$, and compatibility puts this $t$ in every selected part. Compactness therefore gives a point in their intersection. That point is $s$, and $p=f(s)$. Conversely $f(s)$ belongs to every image. The part maps also identify $S$ topologically with the compatible part families: the maps to finite partitions are continuous and their inverse images include every clopen of $S$, a basis of its profinite topology. For empty $S$ there are no such compatible families, as the empty partition has no part.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "*2.*: the compactness and clopen-separation argument, written out"
+   }
   },
   {
-   "text": "*3.* If $x$ is closed in $\\operatorname{Spec}C$, the closure of $(x,s)$ lies in the preimage\nof $\\{x\\}$ and in the preimage of $\\{s\\}$ ($S$ is Hausdorff), so $(x,s)$ is closed. Let\n$x$ be arbitrary with closed specialization $m$ (unique, as $C$ is w-local), so\n$\\pi(m)=\\pi(x)=f(s)$ by [det-pe-wlocal-components]. The primes of the local ring\n$D_{(m,s)}=C_m$ are generalizations of $(m,s)$; the one corresponding to $x$ lies over $x$\nand over $s$ (a generalization of a point over $s$ lies over $s$, since points of $S$ are\nclosed), so by 2 it is $(x,s)$. Thus every point $(x,s)$ specializes to $(m,s)$, so the\nclosed points are exactly the $(m,s)$ with $m$ closed. Any closed specialization of\n$(x,s)$ lies over $s$ and over a closed specialization of $x$, hence equals $(m,s)$. The\nclosed point set is the preimage of the closed set $(\\operatorname{Spec}C)^c$, so it is\nclosed, and $\\operatorname{Spec}D$ is w-local. The map $(\\operatorname{Spec}D)^c\\to S$,\n$(m,s)\\mapsto s$, is bijective (each component $\\pi^{-1}(f(s))$ of $\\operatorname{Spec}C$\nhas exactly one closed point) and continuous between compact Hausdorff spaces\n([det-pe-wlocal-components]), hence a homeomorphism.",
+   "text": "By the finite-affine-coproduct theorem, $\\operatorname{Spec}D_{\\mathcal Q}$ is the disjoint union over $A\\in\\mathcal Q$ of $\\operatorname{Spec}C_{f(A)}$. By step 2 its points are $(x,A)$ with $\\pi(x)\\in f(A)$, and its topology is the subspace topology from $X\\times\\mathcal Q$ with $\\mathcal Q$ finite discrete. Refinement contraction sends $(x,A^\\prime)$ to $(x,A)$ for $A^\\prime\\subseteq A$, by the definition of the transition maps. A prime $q$ of $D$ contracts to a compatible family $q_{\\mathcal Q}=(x,A_{\\mathcal Q})$. If $S$ is nonempty, the one-part partition has ring $C_P=C$, so all first coordinates are the same $x$. Step 6 supplies a unique $s$ with $\\bigcap_{\\mathcal Q}A_{\\mathcal Q}=\\{s\\}$ and forces $\\pi(x)=f(s)$. For empty $S$, the empty partition has zero ring and no primes. Conversely any pair $(x,s)$ with $\\pi(x)=f(s)$ defines a compatible family of stage primes by choosing the part containing $s$.",
    "uses": [
-    "det-pe-wlocal-components"
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-weil-affine-spectrum"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "*2.*: compatible primes and their topology"
+   }
   },
   {
-   "text": "*4.* By 2 and 3, the local rings of $D$ at closed points are the rings $C_m$, $m$ maximal,\nwhich are strictly henselian; so $D$ is w-strictly local. By 3 and\n[det-pe-wlocal-components], $\\pi_0(\\operatorname{Spec}D)\\cong(\\operatorname{Spec}D)^c\\cong S$,\nwhich is extremally disconnected.",
+   "text": "We construct a prime of $D$ from that stage-prime family rather than assuming a spectrum-limit theorem. Every $d\\in D$ is represented by $d_{\\mathcal Q}\\in D_{\\mathcal Q}$, by the elementwise colimit lemma. Declare $d\\in q$ exactly when $d_{\\mathcal Q}\\in q_{\\mathcal Q}$. This is independent of the representative: two representatives have equal images at a common later stage by the eventual-equality lemma, and contraction compatibility makes membership in the two stage primes equivalent to membership there. Addition and multiplication by arbitrary elements are checked by taking all representatives to one common stage; there $q_{\\mathcal Q}$ is an ideal. Likewise $1\\notin q$, and if $ab\\in q$, represent $a,b$ at one stage; their product represents $ab$, so stage primeness puts $a$ or $b$ in $q$. Thus $q$ is prime and contracts to every prescribed $q_{\\mathcal Q}$. Any prime with these contractions has this same membership test on every element of $D$, so is equal to $q$. Together with step 7 this proves the asserted bijection of points.",
    "uses": [
-    "det-pe-wlocal-components"
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CUE, lemma-inverse-limit-sets, affine compatible-prime construction, written out using the existing colimit leaves."
+   }
+  },
+  {
+   "text": "The bijection is a homeomorphism onto $X\\times_PS$. Its $X$ coordinate is the continuous spectrum map. Each partition coordinate is continuous, since it is the contraction map to $\\operatorname{Spec}D_{\\mathcal Q}$ followed by the map to its finite disjoint-union index $\\mathcal Q$. Step 6 says that these partition coordinates generate the topology of $S$, so the map to $S$ is continuous. For the inverse, the map $(x,s)\\mapsto(x,A_{\\mathcal Q}(s))$ into $\\operatorname{Spec}D_{\\mathcal Q}\\subseteq X\\times\\mathcal Q$ is continuous: on the clopen slice $s\\in A$ it is the map to the subspace $\\pi^{-1}(f(A))\\subseteq X$, and the compatibility equation ensures the image lies there. If $d\\in D$ is represented by $d_{\\mathcal Q}$, the membership construction in step 8 gives that the inverse image of the basic open $D(d)$ is exactly the inverse image of $D(d_{\\mathcal Q})$ under this continuous stage map. It is therefore open. Basic opens form a basis, so the inverse is continuous. This proves the topology claim without any unstated preservation-of-limits result.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CUF, lemma-inverse-limit-top, basic-open proof, applied directly to the partition construction."
+   }
+  },
+  {
+   "text": "At the prime $q=(x,s)$ of $D$, let $q_{\\mathcal Q}$ be its contraction to $D_{\\mathcal Q}$. The colimit-localization theorem gives $D_q=\\varinjlim_{\\mathcal Q}(D_{\\mathcal Q})_{q_{\\mathcal Q}}$. The product-prime-localization theorem identifies the stage local ring with $(C_{f(A_{\\mathcal Q}(s))})_x$, which is $C_x$ by step 3. Under these identifications, $a/b\\in C_x$ is the fraction of the diagonal images of $a,b\\in C$ in the stage local ring, with $b\\notin x$. Refinement maps fix those diagonal images, hence send this fraction to $a/b$ in the next copy of $C_x$. These fractions exhaust $C_x$, so every conjugated transition is the identity. The colimit of this nonempty directed constant diagram is $C_x$ by the cocone argument in step 3. Thus the canonical $C$-algebra map $C_x\\to D_q$ is an isomorphism. This finishes clause 2. Since $f$ is surjective, for every $x\\in X$ there is $s$ with $f(s)=\\pi(x)$, so steps 7–8 make $\\operatorname{Spec}D\\to X$ surjective. Combined with flatness in step 5, the flat-surjective-spectrum criterion gives faithful flatness and finishes clause 1.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "lem-weil-pbc-product-prime-localization",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "*2.*, and the surjectivity conclusion of *1.*"
+   }
+  },
+  {
+   "text": "We now use the topological identification $\\operatorname{Spec}D=X\\times_PS$ from step 9. If $m$ is closed in $X$, then $(m,s)$ is closed, since its singleton is the intersection of the inverse images of the closed singletons $\\{m\\}$ and $\\{s\\}$. For arbitrary $(x,s)$, let $m$ be the unique closed specialization of $x$ in the w-local space $X$. The component lemma gives $\\pi(m)=\\pi(x)=f(s)$. The point $(m,s)$ exists, and $(x,s)$ specializes to it: for each product neighborhood $V\\times W$ of $(m,s)$, $x\\in V$ because $x$ specializes to $m$, and $s\\in W$. Hence if $(x,s)$ is closed then $x=m$. This proves exactly that the closed points are pairs with first coordinate closed. Any closed specialization of $(x,s)$ has form $(m^\\prime,s)$ (Hausdorff $S$ has no nontrivial specializations), with $m^\\prime$ a closed specialization of $x$, hence $m^\\prime=m$. The closed-point set is the inverse image of the closed set $X^c$. Thus $D$ is w-local by the cited definition: closed maximal-point locus and a unique maximal specialization of every prime.",
+   "uses": [
+    "det-pe-wlocal-components",
+    "det-pe-wlocal-strict-contractible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "*3.*: closed points and w-locality"
+   }
+  },
+  {
+   "text": "The component lemma identifies $X^c\\to P$ homeomorphically. Let $m(p)$ be its inverse. Projection $(\\operatorname{Spec}D)^c\\to S$ is a continuous bijection with continuous inverse $s\\mapsto(m(f(s)),s)$ into $X\\times_PS$. It is therefore a homeomorphism. This proves clause 3, without assuming that an arbitrary closed-point space is Hausdorff before verifying w-locality. At a closed point $(m,s)$, step 10 gives $D_{(m,s)}\\simeq C_m$, which is strictly henselian by the w-strict locality of $C$. Consequently $D$ is w-strictly local. Applying the component lemma now to the w-local spectrum of $D$ identifies its component space with $(\\operatorname{Spec}D)^c\\simeq S$. This space is extremally disconnected by hypothesis, so the cited definition makes $D$ w-contractible, proving clause 4. If $C$ is the zero ring, both $P$ and $S$ are empty and the empty partition gives $D=0$; all local-ring assertions are vacuous and the same definitions and flat-surjective criterion apply.",
+   "uses": [
+    "det-pe-wlocal-components",
+    "det-pe-wlocal-strict-contractible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "*3.* and *4.*: topology of closed points and strict locality"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-category-colimit",
   "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away",
+  "det-pe-wlocal-components",
+  "det-pe-wlocal-strict-contractible",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-rings-zero",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
   "lem-weil-pbc-ind-etale-stability",
-  "det-pe-wlocal-components"
+  "lem-weil-pbc-localization-away-universal-property",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-weil-pbc-product-prime-localization",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-spec-localization-away-basic-open"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+  "place": "Preliminaries and *1.*–*4.*, following Stacks Tag 097D (proetale.tex, lemma-construct-profinite) and writing out the partition construction."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "explicit ind-Zariski faithfully flat cover from a Stonean cover of connected components",
+   "results": "Search log records AlgebraicGeometry.flat_and_surjective_SpecMap_iff; RingHom.FaithfullyFlat.iff_flat_and_comap_surjective; Module.FaithfullyFlat.of_specComap_surjective; other faithful-flatness criteria.",
+   "date": "2026-10-16",
+   "verdict": "no match for the explicit partition-colimit construction and all four clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stonean cover of connected components realized by an ind-Zariski faithfully flat algebra with unchanged local rings",
+   "results": "Stonean.of, Stonean, Stonean.fullyFaithfulToCompHaus, Stonean.instProjective, CompHaus.toStonean, IsZariskiLocalAtTarget.of_iSup_eq_top, Scheme.subcanonical_zariskiTopology, Scheme.affineBasisCoverOfAffine.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stonean\", \"Spec\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Stonean|IndZariski|WContractible|PullbackProfinite",
+   "results": "RingTheory: 0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "commutative algebra realizing a pullback of prime spectrum along a map of profinite spaces as an ind etale algebra",
+   "results": "Independent second-reader search: 8 hits; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.etaleLocus; StandardEtalePair.instEtaleRing; StandardEtalePair.HasMap.map; Algebra.mem_etaleLocus_iff; Algebra.exists_etale_of_isEtaleAt; RingHom.Etale.toAlgebra; Algebra.FormallyEtale.instForallOfFinite",
+   "date": "2026-10-16",
+   "verdict": "no match for the prescribed partition-colimit algebra and all four clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "IndZariski|BijectiveOnStalks",
+   "results": "Independent second-reader search: 0 hits; no hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the prescribed partition-colimit algebra and all four clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PrimeSpectrum\", \"colimit\"",
+   "results": "Independent second-reader search: 0 hits; no hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the prescribed partition-colimit algebra and all four clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps"
@@ -77,5 +272,34 @@
   "lem-weil-pbc-ind-etale-stability"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-wc-cover-second-stage",
+  "worker": "stage1",
+  "summary": "Repaired the inherited false partition lemma and duplicate proposed leaves. Twelve proof steps now derive closed-component restrictions directly from localization, construct the partition-colimit prime explicitly from compatible primes using existing elementwise/equality leaves, and check the topology on basic opens. All four conclusions for the prescribed algebra are proved. No new nodes or Mathlib leaves are needed; the item statement is unchanged.",
+  "blueprint": "Steps 1–4 realize the Preliminaries; step 5 realizes ind-Zariski flatness in *1.*, completed by faithful flatness in step 10; steps 6–10 realize *2.*; steps 11–12 realize *3.*; step 12 realizes *4.*. The unit finite-quotient/idempotent route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic stability and ind-etale implies weakly etale; exactly the stability input named in the current blueprint proof."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "why": "Generic localization/filtered-colimit compatibility used for both neighborhood and partition systems; the unit provides no separate algebraic localization-colimit theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q38-c4e721ea9",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-c4e721ea9 (reviewer sub-agent of L); spot-checked: Read all twelve steps, every cited statement, current blueprint route, and source passages in full. Localization compatibility, prime/topology construction, faithful flatness, and empty/zero cases check out. No new nodes or repairs. Both declared generic tool uses accepted; review.md records concrete checks and inherited metadata limitations."
+ }
 }

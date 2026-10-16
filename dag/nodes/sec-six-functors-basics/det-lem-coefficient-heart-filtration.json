@@ -1,58 +1,179 @@
 {
-  "id": "det-lem-coefficient-heart-filtration",
-  "blueprint": {
-    "is": "det-lem-coefficient-heart-filtration",
-    "from": null,
-    "same_as": null
+ "id": "det-lem-coefficient-heart-filtration",
+ "blueprint": {
+  "is": "det-lem-coefficient-heart-filtration",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Filtration of a constructible sheaf by extensions by zero of lisse sheaves",
+ "statement": "Let $X$ be a Noetherian scheme, $\\Lambda=E$ or $\\Qlb$, and $F\\in\\Cons(X,\\Lambda)$. Let\n$S_1,\\dots,S_m$ be a stratification adapted to $F$, ordered as in\n[det-lem-coefficient-heart-common-stratification] (1), so that $V_k=S_1\\cup\\dots\\cup S_k$ is\nopen, with open immersions $v_k\\colon V_k\\hookrightarrow X$, and let $a_k\\colon S_k\\hookrightarrow X$.\nPut $F_k=v_{k!}v_k^*F\\subseteq F$. Then\n$$\n0=F_0\\subseteq F_1\\subseteq\\dots\\subseteq F_m=F,\\qquad F_k/F_{k-1}\\cong a_{k!}(F|_{S_k}),\n$$\nand each $F|_{S_k}$ is lisse.\nHere $V_0=\\varnothing$, and lisse means locally free of finite rank for the pro-étale topology. The category $\\Cons(X,\\Lambda)$ is the category of constructible $\\Lambda_X$-modules of [sk-def-sfb-constructible]. For a locally closed immersion $a\\colon S\\hookrightarrow X$, write $a=i\\circ u$, where $u\\colon S\\hookrightarrow\\overline S$ is open and $i\\colon\\overline S\\hookrightarrow X$ is closed, and define $a_!=i_*u_!$. The inclusions in the filtration need not be strict.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.md",
+  "place": "node det-lem-coefficient-heart-filtration, order None"
+ },
+ "stmt_deps": [
+  "det-lem-coefficient-heart-common-stratification",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "By [sk-prop-sfb-cartesian-coefficients] (1), for every scheme morphism $h:T\\to W$ used below the canonical coefficient map $h^{-1}\\Lambda_W\\to\\Lambda_T$ is an isomorphism. Thus the inverse-image coefficient rings in the localization and base-change statements are the specified $\\Lambda_T$, and module pullback is the exact inverse-image functor; all subsequent functor identifications use these canonical coefficient isomorphisms. Every open subscheme of $X$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], hence quasi-compact, and is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Every open immersion into such a scheme is quasi-compact: its inverse image over an affine open is an open subscheme of a Noetherian scheme, hence quasi-compact by the former node. Thus [det-sf-open-closed-sequence-ring-sheaf] applies with $B=\\Lambda_X$, and also on each $V_k$, with the restricted coefficient ring. Its clause (3) makes the counit $F_k=v_{k!}v_k^*F\\to F$ a monomorphism. For $w\\colon V_{k-1}\\hookrightarrow V_k$, clause (1) gives, naturally in $N$ and $M$,\n$$\\operatorname{Hom}(v_{k!}w_!N,M)\\cong\\operatorname{Hom}(N,w^*v_k^*M)=\\operatorname{Hom}(N,v_{k-1}^*M)\\cong\\operatorname{Hom}(v_{k-1!}N,M).$$\nThe corresponding canonical isomorphism $v_{k!}w_!\\simeq v_{k-1!}$ identifies the composite $v_{k!}w_!w^*v_k^*F\\to v_{k!}v_k^*F\\to F$ with the counit for $v_{k-1}$: both correspond to the identity of $v_{k-1}^*F$ under these adjunction bijections. This gives the inclusion $F_{k-1}\\subseteq F_k$ over $F$. Extension from the empty open is zero (it is the left adjoint from the zero module category), and extension along the identity is the identity, so $F_0=0$ and $F_m=F$.",
+   "uses": [
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
+    "place": "First paragraph: counit subobjects, nested opens and endpoints."
+   }
   },
-  "kind": "statement",
-  "title": "Filtration of a constructible sheaf by extensions by zero of lisse sheaves",
-  "statement": "Let $X$ be a Noetherian scheme, $\\Lambda=E$ or $\\Qlb$, and $F\\in\\Cons(X,\\Lambda)$. Let\n$S_1,\\dots,S_m$ be a stratification adapted to $F$, ordered as in\n[det-lem-coefficient-heart-common-stratification] (1), so that $V_k=S_1\\cup\\dots\\cup S_k$ is\nopen, with open immersions $v_k\\colon V_k\\hookrightarrow X$, and let $a_k\\colon S_k\\hookrightarrow X$.\nPut $F_k=v_{k!}v_k^*F\\subseteq F$. Then\n$$\n0=F_0\\subset F_1\\subset\\dots\\subset F_m=F,\\qquad F_k/F_{k-1}\\cong a_{k!}(F|_{S_k}),\n$$\nand each $F|_{S_k}$ is lisse.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.md",
-    "place": "node det-lem-coefficient-heart-filtration, order None"
+  {
+   "text": "Fix $1\\leq k\\leq m$. Put $G=v_k^*F$, let $w\\colon V_{k-1}\\hookrightarrow V_k$, and let $c\\colon S_k\\hookrightarrow V_k$ be its closed complement. By [det-sf-open-closed-sequence-ring-sheaf] (3),\n$$0\\to w_!w^*G\\to G\\to c_*c^*G\\to0$$\nis exact. All quasi-compactness and quasi-separatedness hypotheses were checked in step 1. Apply the exact functor $v_{k!}$ from clause (1), and use the canonical composition and counit identification proved in step 1. Since $c^*G=F|_{S_k}$, this gives\n$$0\\to F_{k-1}\\to F_k\\to v_{k!}c_*(F|_{S_k})\\to0.$$\nThe first map is the inclusion over $F$ constructed in step 1, so its cokernel is the stated subsheaf quotient $F_k/F_{k-1}$.",
+   "uses": [
+    "det-sf-open-closed-sequence-ring-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
+    "place": "Second paragraph: the localization sequence on V_k and exact v_k!."
+   }
   },
-  "stmt_deps": [
-    "det-lem-coefficient-heart-common-stratification"
-  ],
-  "proof": [
-    {
-      "text": "For an open immersion $v$, the counit $v_!v^*F\\to F$ is injective (check on the open, where\nit is the identity, and on the closed complement, where the source vanishes). For\n$V_{k-1}\\subseteq V_k$, the map $v_{k-1!}v_{k-1}^*F\\to F$ factors through $v_{k!}v_k^*F$, so the\n$F_k$ form an increasing chain of subsheaves with $F_0=0$ and $F_m=F$ (as $V_m=X$).",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Let $w\\colon V_{k-1}\\hookrightarrow V_k$, with closed complement $S_k$ in $V_k$, and\n$c\\colon S_k\\hookrightarrow V_k$. The localization sequence on $V_k$,\n$$\n0\\to w_!w^*G\\to G\\to c_*c^*G\\to0,\\qquad G=v_k^*F,\n$$\nis exact (check on $V_{k-1}$ and on $S_k$, using $w^*w_!=\\mathrm{id}$, $c^*w_!=0$,\n$c^*c_*=\\mathrm{id}$, $w^*c_*=0$ and [det-lem-coefficient-heart-common-stratification] (3)).\nApply the exact functor $v_{k!}$: since $v_{k!}w_!=v_{k-1!}$ and $v_{k!}c_*=a_{k!}$ (the\nfactorization $a_k=i\\circ u$ through the closure and $v_k\\circ c$ give the same extension by\nzero, as both restrict to $F|_{S_k}$ on $S_k$ and to $0$ elsewhere), we get\n$0\\to F_{k-1}\\to F_k\\to a_{k!}(F|_{S_k})\\to0$. Finally $F|_{S_k}$ is lisse by the choice of\nthe stratification ([det-lem-coefficient-heart-closure]).",
-      "uses": [
-        "det-lem-coefficient-heart-common-stratification"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "det-lem-coefficient-heart-common-stratification"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "in_cycle"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-lem-coefficient-heart-common-stratification",
+  {
+   "text": "We identify the last term with $a_{k!}(F|_{S_k})$ by an actual canonical isomorphism. Write $Y=\\overline{S_k}$, $i\\colon Y\\hookrightarrow X$, $u\\colon S_k\\hookrightarrow Y$, and $q\\colon X\\setminus Y\\hookrightarrow X$. Since $S_k$ is closed in $V_k$, the square with sides $c,v_k,u,i$ is Cartesian: $Y\\times_XV_k=S_k$. The closed scheme $Y$ is Noetherian: a finite affine cover of $X$ restricts to closed affines with coordinate rings $A/I$, whose ideals lift to ideals of the Noetherian ring $A$; its underlying closed subspace is quasi-compact. It is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. All open subschemes needed below are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], and their open inclusions are quasi-compact as in step 1.\nFor a $\\Lambda_{S_k}$-module $N$, put $H=v_{k!}c_*N$. Clause (4) of [det-sf-open-closed-sequence-ring-sheaf], applied to the Cartesian square above, and clause (2) on $V_k$ give\n$$i^*H\\simeq u_!c^*c_*N\\simeq u_!N.$$\nThe same open base-change formula along $q$ expresses $q^*H$ as extension from $V_k\\setminus Y$ of the restriction of $c_*N$. That restriction is zero by clause (2), because $V_k\\setminus Y$ is disjoint from $S_k$. Therefore $q^*H=0$. Clause (3) for the pair $(q,i)$ now makes the unit $H\\to i_*i^*H$ an isomorphism. Composing gives\n$$v_{k!}c_*N\\simeq i_*u_!N=a_{k!}N.$$\nSubstitute $N=F|_{S_k}$ in step 2 to obtain $F_k/F_{k-1}\\simeq a_{k!}(F|_{S_k})$. Finally the stratification is adapted to $F$, so [det-lem-coefficient-heart-closure], in its constructible/lisse characterization, says each $F|_{S_k}$ is lisse. If the filtration is regarded inside $\\Cons(X,\\Lambda)$, its terms lie there as well: open base change in clause (4) restricts $F_k$ to $F$ on the earlier strata and to zero on the later ones. For the latter assertion, clause (3) applied to $v_{k!}N$ has its first arrow an isomorphism by clause (1) and the triangle identity; hence the restriction to the closed complement is zero by clause (2). The same adapted stratification therefore verifies constructibility by the cited characterization.",
+   "uses": [
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
     "det-lem-coefficient-heart-closure"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015",
-  "blueprint_detail_nodes": [
-    "det-lem-coefficient-heart-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
+    "place": "Second paragraph: identification v_k! c_* = a_k! and lisseness; comparison expanded via open base change and the localization unit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "det-lem-coefficient-heart-closure",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
+  "place": "First and second proof paragraphs; canonical comparison in step 3 expanded using the cited generic localization theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtration of constructible sheaf by extensions by zero of lisse sheaves",
+   "results": "localCohomology.diagram; Condensed.lanSheafProfinite; CompHausLike.LocallyConstantModule.functor; SheafOfModules.IsFinitePresentation; SheafOfModules.isFinitePresentation; Condensed.profiniteSolid; LightProfinite.hasSheafify; LightCondAb.ofSheafLightProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern condensed or finite-presentation constructions and do not state the constructible-sheaf filtration"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, extension by zero, lisse, Constructible",
+   "results": "0 hits; parser error: expected end of input",
+   "date": "2026-10-16",
+   "verdict": "invalid query; no conclusion about absence from this malformed pattern"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|openClosed|lisse|Constructible in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtration of a constructible sheaf by extension by zero of lisse sheaves",
+   "results": "IsFiltration.rec; MeasureTheory.Filtration.ext; Ideal.Filtration; IsFiltration.F_lt_le_F; IsFiltration.casesOn; IsFiltration.ctorIdx; IsModuleFiltration.toIsFiltration; CategoryTheory.Sheaf.hasFilteredColimitsOfSize",
+   "date": "2026-10-16",
+   "verdict": "no match: only algebraic or measure-theoretic filtrations, no sheaf statement"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|shriek|OpenClosed|openClosed|ConstructibleSheaf",
+   "results": "0 hits; no hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules on a scheme has a finite filtration associated to an increasing finite sequence of open subschemes with successive quotient the extension by zero from the complementary closed stratum",
+   "results": "8 hits; SheafOfModules.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.Presentation.IsFinite; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.GeneratingSections.IsFiniteType.finite",
+   "date": "2026-10-16",
+   "verdict": "No matching filtration statement; finite-type and finite-presentation sheaf declarations concern local generators or presentations, not strata or extensions by zero."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"filtration\"",
+   "results": "0 hits; no hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "in_cycle"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-lem-coefficient-heart-common-stratification",
+  "det-lem-coefficient-heart-closure"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "blueprint_detail_nodes": [
+  "det-lem-coefficient-heart-closure"
+ ],
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-lem-coefficient-heart-filtration",
+  "worker": "stage1",
+  "summary": "Second reader repaired the extension-by-zero comparison using canonical open base change and the localization unit, and proved compatibility of the open-composition isomorphism with the counits. Three explicit steps; no new nodes. Added inline notation for locally closed extension, empty open, lisse, and non-strict inclusions; verified constructibility of filtration terms. Maintainer-reader repair: explicitly cite Cartesian coefficients in step 1 and locate the proof in the separate .proof.md source, with paragraph locations for each step.",
+  "blueprint": "The first paragraph of the current filtration proof is step 1 (counits, nested opens, endpoints). Its second paragraph is steps 2–3 (exact open–closed sequence, exact open extension, and identification with the closure-defined locally closed extension by base change and localization).",
+  "tool_uses": [
+   {
+    "node": "det-sf-open-closed-sequence-ring-sheaf",
+    "why": "Generic open–closed localization for module sheaves over an arbitrary sheaf of rings supplies exactness, adjunction, and the short exact sequence; the coefficient-heart route has no separate node proving this ambient sheaf theorem."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic Noetherian-open result verifies that each V_k is quasi-compact, a hypothesis of the localization tool."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic locally-Noetherian quasi-separatedness verifies the remaining qcqs hypothesis of the localization tool."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "The Cartesian coefficient isomorphism identifies inverse-image coefficient rings with the prescribed E or Qlb coefficient sheaves, so the generic ring-sheaf localization tool applies in the stated module categories."
+   }
   ]
+ },
+ "tool_uses": [
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q42-cd2afa4d7",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-cd2afa4d7 (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements, sources and current blueprint route in full. Verified all three proof steps, canonical base-change/localization maps, coefficient categories, hypotheses, edge cases and duplicate candidates. Supplied corrected whole JSON adding the Cartesian-coefficients citation and precise proof-source locations. Statement unchanged; no new nodes. Detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
