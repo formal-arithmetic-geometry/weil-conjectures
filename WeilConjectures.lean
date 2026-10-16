@@ -4309,12 +4309,11 @@ public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.GenericPoint
 public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.KummerCover
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactificationIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
@@ -4322,9 +4321,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColim
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor

@@ -6,9 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Proper
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 

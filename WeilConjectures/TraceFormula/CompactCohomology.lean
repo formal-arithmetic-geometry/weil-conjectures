@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.TraceFormula.Stalk
+public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 
 /-!
 
