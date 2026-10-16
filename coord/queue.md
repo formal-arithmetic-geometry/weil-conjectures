@@ -1,6 +1,6 @@
 # Work queue
 
-39 items; claim with `tools/claim.py next <group> [--stage N]`.
+40 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (39)
+## Stage 3: modules to prove (40)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -19,36 +19,37 @@
 | `Sheaf.Paper.ContinuousConstructibleIntegralSingle` | 4 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralExchangeEquality` | 4 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralPushComparison` | 4 | 1 | proof |
-| `Sheaf.Paper.FiniteDiscreteExchangeComparison` | 4 | 1 | proof |
 | `Sheaf.Paper.IntegralConstructibleKernels` | 4 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueExchange` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldPresentationCorank` | 6 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleSiteComparison` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedLfpCoefficientModel` | 6 | 1 | proof |
-| `Sheaf.Paper.CondensedLocalPieceHomContinuity` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarLfpMatrixRefinement` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardLocalComparison` | 6 | 1 | proof |
-| `WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic` | 6 | 1 | proof |
+| `Sheaf.Paper.FiniteDiscreteCoefficientExchange` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | 7 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux` | 8 | 1 | proof |
+| `Sheaf.Paper.CondensedLocalPieceCostalkModel` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ContinuousFieldMatrixSheafNormalForm` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionAdjunction` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModel` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 8 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonempty` | 8 | 1 | proof |
+| `Sheaf.Paper.CondensedFiniteFreeHomEvaluation` | 9 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.SupportDimension` | 9 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 10 | 1 | proof |
+| `WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic` | 10 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleSiteComparison` | 11 | 1 | proof |
 | `Sheaf.Paper.KFlatRingedToposPullback` | 11 | 1 | proof |
+| `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | 11 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionAdjunction` | 12 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergCanonicalTruncationComparison` | 12 | 1 | proof |
 | `Sheaf.CategoryTheory.SpectralObjectPageTwoMap` | 12 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses` | 13 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineComparisonCechCocycleDescent` | 13 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 15 | 1 | proof |
 | `Sheaf.CategoryTheory.GoodTruncationTotalBoundaryImage` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
