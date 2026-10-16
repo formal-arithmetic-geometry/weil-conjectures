@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "det-pe-replete-definition",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-def-pe-replete"
+  ]
  },
  "kind": "definition",
  "title": "Replete topos of sheaves on a site",
@@ -12,23 +14,123 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-replete/det-pe-replete-definition.md",
   "place": "node det-pe-replete-definition, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+ ],
  "proof": [
   {
-   "text": "The data are well defined. The displayed presheaf is a sheaf: limits of sheaves commute\nwith the equalizer diagrams expressing the sheaf condition, so the sectionwise limit of\nsheaves satisfies the sheaf condition, and it has the universal property of the limit in\n$\\mathcal T$ because it has it in presheaves and $\\mathcal T$ is a full subcategory. The\ncategorical epimorphisms of $\\mathcal T$ are exactly the locally surjective maps: a\nlocally surjective map is an epimorphism by the sheaf condition (two maps out of $G$ that\nagree after composing with $\\varphi$ agree on every $y$ locally, hence globally);\nconversely, if $\\varphi$ is an epimorphism, its image sheaf $\\operatorname{im}\\varphi$ (the\nsheaf of locally-in-the-image sections) is a subobject through which $\\varphi$ factors,\nand the two maps $G\\rightrightarrows G\\amalg_{\\operatorname{im}\\varphi}G$ agree after\n$\\varphi$, hence are equal; since in a topos every monomorphism is the equalizer of its\ncokernel pair, this forces $\\operatorname{im}\\varphi=G$.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the site, sheaf and natural-transformation conventions of [def-weil-pbc-sites-and-cohomology] (1). For the maps $t_n:F_{n+1}\\to F_n$, the map from $F_b$ to $F_a$ for $a<b$ is the finite composite $t_a\\circ\\cdots\\circ t_{b-1}$; for $a=b$ it is the identity. Associativity gives the functor $\\mathbf N^{\\mathrm{op}}\\to\\mathcal T$. Let $L(V)$ be the displayed set of compatible tuples and restrict each coordinate along a map $V'\\to V$. Naturality of $t_n$ implies that the restricted tuple is compatible, so this defines a presheaf with natural coordinate projections. For any set $S$ with compatible maps $q_n:S\\to F_n(V)$, the unique map $S\\to L(V)$ inducing them is $s\\mapsto(q_n(s))_n$. Thus the displayed set, with its projections, is the limit of the section diagram; compatibility with adjacent transitions implies compatibility with every finite composite.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VH, definition-site; Tag 00VM, definition-sheaf-sets; direct compatible-tuple construction for the opening inverse-sequence and limit formula of the blueprint item"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] (1) to the small index category $\\mathbf N^{\\mathrm{op}}$ and the diagram in step 1. It says that the sectionwise limit presheaf $L$ is a sheaf and that its coordinate projections form a limit in $\\Sh(\\mathcal C)$ and in presheaves. Explicitly, a compatible cone of sheaf morphisms $q_n:H\\to F_n$ induces $q_V:H(V)\\to L(V)$ by $s\\mapsto(q_{n,V}(s))_n$; this is natural since every $q_n$ is natural, and it is unique since its coordinates are prescribed. In particular the projections $p_m$ in the definition are actual sheaf morphisms. This uses no surjectivity hypothesis on the transitions.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00W2, lemma-limit-sheaf and proof; sectionwise compatible tuples specialized to the countable inverse sequence"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] to an arbitrary morphism $\\varphi:F\\to G$ in this same category of set-valued sheaves. Its statement identifies right-cancellability with the covering-and-local-lifts condition displayed in the definition. Consequently the word epimorphism used both for $t_n$ and for $p_m$ agrees with the categorical notion. With the limit and projections from step 2, repleteness is the predicate that for every such inverse sequence, local surjectivity of every transition implies local surjectivity of every projection $p_m$. This is exactly the repleteness clause in the unit; it does not assert that every site has this property.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WM, definition-sheaves-injective-surjective (2); Tag 00WN, lemma-mono-epi-sheaves, epimorphism clause; repleteness predicate as in the current blueprint sk-def-pe-replete/_section.md"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-replete/det-pe-replete-definition.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-replete/det-pe-replete-definition.proof.md",
+  "place": "Opening inverse-sequence construction and limit/sheaf assertion, then categorical epimorphism/local-surjectivity assertion; supplied explicitly using existing general-site Mathlib leaves for Stacks 00W2 and 00WN."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "definition of a replete topos: inverse limits of epimorphic inverse sequences of sheaves have epimorphic projections",
+   "results": "8 hits; CategoryTheory.coherentTopology.epi_π_app_zero_of_epi, CategoryTheory.isRegularEpiCategory_sheaf, LightCondensed.epi_π_app_zero_of_epi, CategoryTheory.Sheaf.ab5ofSize, LightCondensed.ofSheafForgetLightProfinite, CategoryTheory.SheafOfTypes.balanced, CategoryTheory.SheafOfTypes.adhesive, CategoryTheory.Precoherent",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire definition: coherentTopology sequential-limit results impose additional site and effective-epimorphism hypotheses and prove repleteness in a specific situation; other hits give constituents or special coefficient categories, not the repleteness predicate on an arbitrary sheaf topos"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, Limits.limit, Epi",
+   "results": "0 hits; ; loogle: unknown identifier 'Limits.limit'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle rejected Limits.limit as an unknown identifier; no mathematical absence conclusion; rerun below with fully qualified names"
+  },
+  {
+   "tool": "grep",
+   "query": "replete|inverse.*limit.*sheaf|locally.*surjective",
+   "results": "25 hits; Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/LocallyFullyFaithful.lean, Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean, Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean, Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean, Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean; Mathlib/ subdirectory: CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire definition: local-surjectivity and limit APIs are constituents already represented by existing DAG leaves, not a definition of a replete topos"
+  },
+  {
+   "tool": "leansearch",
+   "query": "replete topos inverse sequence epimorphic transition maps limit projection epimorphism",
+   "results": "8 hits; CategoryTheory.coherentTopology.epi_π_app_zero_of_epi, Profinite.instEpiAppDiscreteQuotientCarrierToTopTotallyDisconnectedSpaceπAsLimitCone, LightProfinite.instEpiAppOppositeNatπAsLimitCone, CategoryTheory.ProjectiveResolution.instEpiFNatπ, LightProfinite.surjective_transitionMap, LightProfinite.surjective_transitionMapLE, CategoryTheory.Limits.Concrete.surjective_π_app_zero_of_surjective_map, LightProfinite.proj_comp_transitionMap",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire definition: coherentTopology sequential-limit results impose additional site and effective-epimorphism hypotheses and prove repleteness in a specific situation; other hits give constituents or special coefficient categories, not the repleteness predicate on an arbitrary sheaf topos"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "predicate on a sheaf topos that every countable tower of locally surjective morphisms has locally surjective inverse limit projections",
+   "results": "8 hits; CategoryTheory.Sheaf.locallySurjective, CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, CategoryTheory.Sheaf.IsLocallySurjective, CategoryTheory.Sheaf.instIsLocallySurjectiveAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization, CategoryTheory.Sheaf.isLocallySurjective_comp, CategoryTheory.coherentTopology.isLocallySurjective_iff, LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite, CategoryTheory.extensiveTopology.isLocallySurjective_iff",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire definition: coherentTopology sequential-limit results impose additional site and effective-epimorphism hypotheses and prove repleteness in a specific situation; other hits give constituents or special coefficient categories, not the repleteness predicate on an arbitrary sheaf topos"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"replete\"",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration with replete in its name"
+  },
+  {
+   "tool": "grep",
+   "query": "Replete|replete|isLocallySurjective_iff_epi|createsLimitsOfShape",
+   "results": "10 hits; Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/EpiMono.lean, Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean, Mathlib/CategoryTheory/Sites/Limits.lean; Mathlib/ subdirectory: CategoryTheory/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire definition: local-surjectivity and limit APIs are constituents already represented by existing DAG leaves, not a definition of a replete topos"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.limit, CategoryTheory.Epi",
+   "results": "1 hits; CategoryTheory.coherentTopology.epi_π_app_zero_of_epi",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire definition: coherentTopology sequential-limit results impose additional site and effective-epimorphism hypotheses and prove repleteness in a specific situation; other hits give constituents or special coefficient categories, not the repleteness predicate on an arbitrary sheaf topos"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "categorical property of a topos: countable inverse chains of epimorphisms have epimorphic limit projections",
+   "results": "8 hits; CategoryTheory.coherentTopology.epi_π_app_zero_of_epi, LightProfinite.instEpiAppOppositeNatπAsLimitCone, CategoryTheory.CountableAB4Star, CategoryTheory.instCountableAB4StarOfAB4StarOfSize, CategoryTheory.CountableAB4, CategoryTheory.AB5Star, CategoryTheory.AB5StarOfSize, CategoryTheory.CountableAB4.of_countableAB5",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole definition: coherentTopology.epi_π_app_zero_of_epi concerns a particular coherent site with additional hypotheses; CountableAB4Star concerns products of epimorphisms, and AB5Star concerns exactness of cofiltered limits in an abelian category, not the repleteness predicate for a topos of sets"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -39,5 +141,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-pe-replete"
+ "unit": "sk-def-pe-replete",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-pe-replete-definition",
+  "worker": "stage1",
+  "summary": "Preserved the complete definition verbatim. Named its existing general-site sheaf, sectionwise-limit and epi/local-surjectivity dependencies. Replaced the uncited image/cokernel-pair argument by the already existing exact Mathlib leaf and wrote the elementary compatible-tuple construction and universal map explicitly. No new nodes and no exact project attachment or Mathlib match for the entire definition.",
+  "blueprint": "Step 1 supplies the inverse-sequence and compatible-tuple constructions; step 2 realizes the first two sentences of det-pe-replete-definition.proof.md (sheaf and limit universal property); step 3 realizes its categorical epi/local-surjectivity assertion and the repleteness clause of sk-def-pe-replete. The unit has no proof steps and its own key node is sk-def-pe-replete, so no unit realization metadata is edited.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-b9c9c0690",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-b9c9c0690 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the report, unit sk-def-pe-replete, the main-20261015 blueprint files (_section.md, det-pe-replete-definition.md and .proof.md), every cited node's statement, and the Stacks and Mathlib places cited. The statement matches the blueprint text exactly and agrees with the unit, so nothing is weakened. No target, base-change morphism or coefficient category is involved; this is a definition about sheaves of sets only. Shape: one commit with the item and its report, no new nodes, no unit edit, tool_uses empty. Step 1 cites def-weil-pbc-sites-and-cohomology(1) for the site, sheaf and morphism conventions (Stacks 00VH and 00VM, both confirmed in tags/tags). The finite composites, the compatible-tuple presheaf and its universal map are genuinely elementary. Step 2 cites the Mathlib leaf lem-weil-pbc-site-sheaf-sets-limits-sectionwise(1) (Sites/Limits.lean:139 and :151, read). Its only hypothesis is a small index category, which N^op is, and it needs nothing about the transition maps. Stacks 00W2, lemma-limit-sheaf at sites.tex:1680, says the same. Step 3 cites the Mathlib leaf lem-weil-pbc-site-sheaf-sets-epi-locally-surjective (LocallySurjective.lean:378, isLocallySurjective_iff_epi, read). It states exactly that categorical epimorphisms are the locally surjective maps, matching Stacks 00WM(2) and 00WN at sites.tex:2240 and :2256. This replaces the blueprint proof's uncited image-sheaf and cokernel-pair argument with an exact existing leaf. The unit has no steps, so this is not a route departure; no route statement outside the unit is used and no SGA source is cited. Duplicates: searching dag/nodes for 'replete' finds sk-def-pe-replete, correctly listed under same_as and not cited, plus det-pe-replete-epimorphism and det-pe-replete-on-contractible, which are pro-étale theorems built on this definition and not duplicates. There are no new nodes, so nothing restates a clause of the item. Edge cases checked: a constant identity tower; the one-point site, where the condition reduces to the classical fact about towers of surjections of sets; objects with an empty covering, where every section set is a singleton; and m=0. All are consistent. I made no fixes and wrote no fixes files."
+ }
 }

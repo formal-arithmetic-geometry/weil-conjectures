@@ -26,9 +26,137 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a map $f:X\\to Y$, apply $f$ to every coordinate in the relative-nerve data for $\\Delta_X^{\\mathrm{op}}$. This gives $\\Delta_f^{\\mathrm{op}}$ over $\\Delta^{\\mathrm{op}}$, with fiber map $f^{n+1}$ in degree $n$, commuting with all coordinate-selection maps. The relative-nerve theorem says that these projections are left fibrations and all their edges are cocartesian. Consequently $\\Delta_f^{\\mathrm{op}}$ preserves inert edges, so precomposition preserves inert-preserving algebra functors. Reindexing the same data in families of maps supplies all higher homotopies, and $(g f)^*=f^*g^*$ and $1^*=1$ with these coherences. Thus $X\\mapsto\\operatorname{Alg}_X(\\mathcal V)$ is a coherent contravariant functor on spaces.\n\nWe also verify the generalized-operad hypothesis needed in step 4. Its Segal comparisons are the adjacent-pair identifications $X^{n+1}\\simeq X^2\\times_X\\cdots\\times_X X^2$, with degree-zero fiber $X$. For tuples $x\\in X^{m+1}$, $y\\in X^{n+1}$ and $\\phi:[m]\\to[n]$ in $\\Delta^{\\mathrm{op}}$, put $h=\\phi^{\\mathrm{op}}:[n]\\to[m]$. The $K=\\Delta^0$ cocartesian transport formula in the left fibration identifies the mapping-space fiber over $\\phi$ with\n$$\\operatorname{Map}_{X^{n+1}}\\bigl((x_{h(0)},\\ldots,x_{h(n)}),y\\bigr)\\simeq\\prod_{i=0}^{n}\\operatorname{Path}_X(x_{h(i)},y_i).$$\nRestricting to adjacent pairs gives the same product by gluing the pair path spaces over their shared vertex path spaces. This is precisely the generalized Segal mapping-space condition over the degree-zero fiber; for $n=0$ it is the single vertex path space. Together with the inner-fibration and inert-lift properties of the left fibration, this verifies that $\\Delta_X^{\\mathrm{op}}$ is a generalized nonsymmetric infinity operad. It is small after the same permitted universe enlargement.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-kan-relative-nerve-left-fibration",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definitions 3.1.13, 4.1.1, 4.3.1 and Remark 4.3.2; explicit relative-nerve restriction and generalized Segal mapping-space calculation using cocartesian transport"
+   }
+  },
+  {
+   "text": "Choose an ambient universe in which the category $\\mathcal S_{\\mathcal U}$ of the original small spaces and all the fibers $\\operatorname{Alg}_X(\\mathcal V)$ are small, and a further universe in which their category of fibrations is formed. This is possible because $\\mathcal U$ and $\\mathcal V^\\otimes$ fit in the ambient universe, every $\\Delta_X^{\\mathrm{op}}$ is original-small, and its functor category into the ambient-small $\\mathcal V^\\otimes$ is ambient-small. Thus we use straightening with ambient-small base and fibers; we do not assert that $\\mathcal S_{\\mathcal U}$ is $\\mathcal U$-small. Apply the Cartesian dual of straightening to the functor of step 1: equivalently, unstraighten $X\\mapsto\\operatorname{Alg}_X(\\mathcal V)^{\\mathrm{op}}$ over $\\mathcal S^{\\mathrm{op}}$, then take the opposite total category. This supplies an inner-fibration representative of the total category specified in [def-coef-complete-algebroid], with fiber $\\operatorname{Alg}_X(\\mathcal V)$, and a Cartesian arrow $c_f:f^*B\\to B$ represented by the identity of $f^*B$. Transport is therefore the stated restriction, including its units and compositions. The dual of the mapping-space fiber formula for cocartesian transport, with $K=\\Delta^0$, gives naturally\n$$\\operatorname{hofib}_f\\bigl(\\operatorname{Map}(A,B)\\to\\operatorname{Map}_{\\mathcal S}(X,Y)\\bigr)\\simeq\\operatorname{Map}_{\\operatorname{Alg}_X(\\mathcal V)}(A,f^*B).$$\nIn particular the mapping-space square in the item is a homotopy pullback for $c_f$. The intrinsic formulation and the inner-fibration representative agree by straightening.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definitions 3.6.1 and 4.3.1, Remark 4.3.2; HTT Cartesian straightening and Proposition 2.4.4.2, dual transport formula"
+   }
+  },
+  {
+   "text": "Enlarge universes so that $\\mathcal V$ is small in the intermediate universe and apply monoidal Yoneda. Put $\\widehat{\\mathcal V}=\\mathcal P(\\mathcal V)$ and write $J$ for postcomposition with $j^\\otimes$. The cited diagram assertion, restricted to inert-preserving functors on $\\Delta_X^{\\mathrm{op}}$, makes every fiber functor $J_X$ fully faithful. This restriction has the required size because $X$ was small in the original universe. The unit equivalence identifies $J(E^n_{\\mathcal V})$ with $E^n_{\\widehat{\\mathcal V}}$, compatibly with all finite-set maps. Moreover $J$ is fully faithful on total algebroid mapping spaces: step 2 identifies its fiber over every $f:X\\to Y$ with the equivalence induced by $J_X$, since $J_X(f^*B)=f^*J_Y(B)$. In the larger object-space universe restrict the base to the full subcategory on the original-small spaces. Inclusion of these spaces in the larger universe does not change their mapping spaces: maps and homotopies between the original Kan complexes are the same simplicial maps. Thus both total mapping spaces lie over the same $\\operatorname{Map}(X,Y)$, and the homotopy-fiber detection theorem applies. Hence\n$$\\operatorname{Map}(E^n_{\\mathcal V},A)\\simeq\\operatorname{Map}(E^n_{\\widehat{\\mathcal V}},J A)$$\nis natural in $n$ and $A$. No presentability or colimit hypothesis has been added to $\\mathcal V$.",
+   "uses": [
+    "lem-coef-monoidal-yoneda-embedding",
+    "def-coef-complete-algebroid",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proof of Proposition 5.1.15 and proof of Theorem 5.6.6 (monoidal-presheaf universe enlargement)"
+   }
+  },
+  {
+   "text": "A morphism $\\alpha:A\\to A'$ in a fixed fiber is an equivalence exactly when every $\\alpha_{x,x'}$ is an equivalence. Indeed postcompose with $j$: it preserves these equivalences, and colorwise detection in the presentably monoidal $\\widehat{\\mathcal V}$ says that $J_X(\\alpha)$ is an equivalence of algebras. Full faithfulness of $J_X$ from step 3 reflects invertibility: lift an inverse through its equivalences on mapping spaces, and the two inverse homotopies lift as well. The converse follows by evaluating an inverse of $\\alpha$ at each pair. The colors here are precisely the pairs $(x,x')$ in $X^2$, by the relative-nerve definition.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-operadic-colorwise-sifted-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma A.5.5; only its conservativity clause is used after monoidal Yoneda enlargement"
+   }
+  },
+  {
+   "text": "Represent $F:A\\to B$ over $f$ by $\\alpha:A\\to f^*B$ and factor it as $A\\xrightarrow{\\alpha}f^*B\\xrightarrow{c_f}B$. If $\\alpha$ is an equivalence, the Cartesian mapping-space square for $c_f$ remains a pullback after composing with it, so $F$ is Cartesian. Conversely if $F$ is Cartesian, compare its square with that of $c_f$, and take the fiber over the identity of $X$ for each testing algebra $D$ over $X$. Step 2 then identifies the comparison with\n$$\\operatorname{Map}_{\\operatorname{Alg}_X}(D,A)\\longrightarrow\\operatorname{Map}_{\\operatorname{Alg}_X}(D,f^*B).$$\nIt is an equivalence for every $D$. Full faithfulness of infinity Yoneda implies that $\\alpha$ is an equivalence. Step 4 identifies this condition with equivalence of every $A(x,x')\\to B(fx,fx')$, which is exactly full faithfulness. This proves both directions of the Cartesian-arrow criterion rather than treating it as part of the definition of the total category.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proof of Lemma 5.3.2, with the vertical-factor equivalence detected by infinity Yoneda"
+   }
+  },
+  {
+   "text": "Apply the existing equivalence-nerve theorem to $JA$ in the presentably monoidal $\\widehat{\\mathcal V}$. Step 3 identifies its entire simplicial equivalence nerve with $\\iota_\\bullet A$, over the unchanged object space. In degree zero its evaluation is therefore $\\iota_0A\\simeq X_A$. The same comparison shows that $\\iota_\\bullet A$ is a groupoid object and that the homotopy fiber of $\\iota_1A\\to X_A^2$ at $(a,a')$ identifies with the invertible components of $\\operatorname{Map}_{\\mathcal V}(\\mathbf1,A(a,a'))$: full faithfulness and strong monoidality of $j$ identify this mapping space with $\\operatorname{Map}_{\\widehat{\\mathcal V}}(\\mathbf1,jA(a,a'))$, with its units and composition. Invertible means that some reverse morphism has both composites homotopic to the relevant units. Thus a map $E^1\\to A$ is exactly an equivalence in the underlying category with the mapping spaces specified in the item. These comparisons commute with the two endpoint evaluations and all simplicial operators.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-algebroid-equivalence-nerve",
+    "lem-coef-monoidal-yoneda-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma 5.1.2, Proposition 5.1.17 and Corollary 5.2.7 after the universe enlargement used in Proposition 5.1.15"
+   }
+  },
+  {
+   "text": "A path $\\gamma:a\\to a'$ in $X_A$ gives an equivalence of objects as follows. Take the identity element at $a$ in $\\iota_1A$, whose endpoints are $(a,a)$. Together with the path $(1_a,\\gamma)$ from $(a,a)$ to $(a,a')$, it is a point of the homotopy fiber of $\\iota_1A\\to X_A^2$ at $(a,a')$. The endpoint-compatible identification of step 6 turns this point into an object equivalence from $a$ to $a'$. Equivalently the associated map $\\mathbf1\\to A(a,a')$ transports the unit of $A(a,a)$ in the second coordinate. Under composition in the groupoid object of step 6, a path in the endpoint space restricts the composition homotopy at the identity to that path. Consequently the composites for $\\gamma$ and its reverse are represented by $\\gamma\\gamma^{-1}$ and $\\gamma^{-1}\\gamma$; their contractions to constant paths give the two unit homotopies. Restricting this composition homotopy to two concatenated paths also identifies their composed equivalence with the one assigned to the concatenation.",
+   "uses": [
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Transport-of-units elaboration of Definitions 5.1.8 and 5.3.3; path-space definition of the homotopy fiber"
+   }
+  },
+  {
+   "text": "For $G_\\bullet=\\iota_\\bullet B$, effectivity of groupoid objects in spaces gives $G_1\\simeq G_0\\times_{|G_\\bullet|}G_0$ and surjectivity of $G_0\\to|G_\\bullet|$ on components. Consequently two points $b,b'$ of $X_B\\simeq G_0$ have the same component in $\\iota B$ exactly when the homotopy fiber $(G_1)_{b,b'}$ is nonempty, which by step 6 means an object equivalence between them. The same surjectivity for $\\iota_\\bullet A$ says that every component of $\\iota A$ is represented by an object $a$. Thus surjectivity of $\\pi_0\\iota F$ says precisely that every $b$ is equivalent to some $F(a)$: in one direction choose an object representative $a$ for a preimage component, and in the other use the equivalence to identify the component of $b$ with that of $F(a)$. This includes empty object spaces.",
+   "uses": [
+    "lem-coef-space-geometric-descent",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proof of Lemma 5.3.4; effectiveness of the groupoid object established in step 6"
+   }
+  },
+  {
+   "text": "For a strong monoidal functor $H^\\otimes:\\mathcal V^\\otimes\\to\\mathcal W^\\otimes$, postcomposition takes inert-preserving algebras and their coherent transformations to such algebras and transformations, and does not change object spaces. The equality $H^\\otimes\\circ(B\\circ\\Delta_f^{\\mathrm{op}})=(H^\\otimes\\circ B)\\circ\\Delta_f^{\\mathrm{op}}$ proves compatibility with restriction, including higher coherences. Its mapping-object formula is $(H_*A)(a,a')=H(A(a,a'))$. A fully faithful arrow stays fully faithful because $H$ takes an equivalence and its inverse homotopies to an equivalence. If $b$ is equivalent to $F(a)$ via $E^1_{\\mathcal V}\\to B$, strong monoidality identifies $H_*E^1_{\\mathcal V}$ with $E^1_{\\mathcal W}$; postcomposition gives the required equivalence in $H_*B$. Step 8 therefore proves preservation of essential surjectivity. By step 5 it also preserves Cartesian arrows, so this is a functor of the stated Cartesian fibrations.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition 3.6.12, Lemma 4.3.9 and Lemma 5.7.5, specialized to strong monoidal functors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "lem-coef-kan-relative-nerve-left-fibration",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-monoidal-yoneda-embedding",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-operadic-colorwise-sifted-colimits",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-algebroid-equivalence-nerve",
+  "lem-coef-space-geometric-descent",
+  "def-coef-monoidal-infinity-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Technical enriched-localization prerequisite to proof paragraph 2; detailed synthesis of Gepner-Haugseng 1312.3178v4 and Higher Algebra 4.8.1.10, read online but not archived. Straightening, mapping-fiber, universe and groupoid steps are explicitly cited."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -120,10 +248,45 @@
    "results": "{\"t\": \"2026-10-16T16:07:53Z\", \"tool\": \"grep\", \"query\": \"Algd|AlgCat|CartesianFibration|cartesian.fibration|localization.*pullback|pullback.*localization\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Module.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Limits.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\"], \"digest\": \"da5dc35185445cfa\"}",
    "date": "2026-10-16",
    "verdict": "no match: nine grep hits are comments or constructions involving ordinary algebra categories AlgCat in monoidal categories; no infinity categorical fibration or pullback-localization declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "Algd|CartesianFibration|categorical.algebra|cartesian.fibration",
+   "results": "{\"t\": \"2026-10-16T18:32:08Z\", \"tool\": \"grep\", \"query\": \"Algd|CartesianFibration|categorical.algebra|cartesian.fibration\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/NonPreadditive.lean\", \"Mathlib/CategoryTheory/Preadditive/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Pseudoelements.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\", \"Mathlib/CategoryTheory/Sites/RegularEpi.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.lean\", \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\"], \"digest\": \"d047bd70e1950af9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Enriched/Basic.lean:53-75 and FiberedCategory/Grothendieck.lean:28-88. The returned declarations concern ordinary enriched categories or Cat-valued pseudofunctors, not variable-object-space algebroids in arbitrary monoidal infinity categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fully faithful enriched infinity functors are Cartesian arrows over the category of spaces",
+   "results": "{\"t\": \"2026-10-16T18:32:09Z\", \"tool\": \"leansearch\", \"query\": \"Fully faithful enriched infinity functors are Cartesian arrows over the category of spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.FullyFaithful.faithful\", \"CategoryTheory.Functor.FullyFaithful\", \"CategoryTheory.Functor.FullyFaithful.ctorIdx\", \"CategoryTheory.fullyFaithfulInducedFunctor\", \"CategoryTheory.Functor.FullyFaithful.casesOn\", \"CategoryTheory.Functor.Full\", \"CategoryTheory.Functor.FullyFaithful.ofFullyFaithful\", \"CategoryTheory.Functor.FullyFaithful.homMulEquiv\"], \"digest\": \"aff7c3e40c99d6c7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Enriched/Basic.lean:53-75 and FiberedCategory/Grothendieck.lean:28-88. The returned declarations concern ordinary enriched categories or Cat-valued pseudofunctors, not variable-object-space algebroids in arbitrary monoidal infinity categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-16T18:32:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.Functor.instEnrichedCategoryFunctorType\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedCategory\"], \"digest\": \"e108f53edddd60eb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Enriched/Basic.lean:53-75 and FiberedCategory/Grothendieck.lean:28-88. The returned declarations concern ordinary enriched categories or Cat-valued pseudofunctors, not variable-object-space algebroids in arbitrary monoidal infinity categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorical algebras with variable spaces of objects form a Cartesian fibration with restriction along maps of spaces",
+   "results": "{\"t\": \"2026-10-16T18:32:19Z\", \"tool\": \"leanfinder\", \"query\": \"Categorical algebras with variable spaces of objects form a Cartesian fibration with restriction along maps of spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsCartesianCompOfIsFibered\", \"HasFibers.category\", \"HasFibers.inducedFunctor\", \"HasFibers.canonical\", \"HasFibers.pullbackMap.isCartesian\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsFiberedForget\", \"CategoryTheory.Functor.Fiber.fiberCategory\", \"CategoryTheory.Over.sections\"], \"digest\": \"3c4c286432781475\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Enriched/Basic.lean:53-75 and FiberedCategory/Grothendieck.lean:28-88. The returned declarations concern ordinary enriched categories or Cat-valued pseudofunctors, not variable-object-space algebroids in arbitrary monoidal infinity categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck construction for infinity categories of enriched algebras over object spaces and restriction functors",
+   "results": "{\"t\": \"2026-10-16T18:32:20Z\", \"tool\": \"leanfinder\", \"query\": \"Grothendieck construction for infinity categories of enriched algebras over object spaces and restriction functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.EnrichedCat.bicategory\", \"CategoryTheory.CatEnrichedOrdinary.toBase\", \"CategoryTheory.EnrichedFunctor.forget\", \"CategoryTheory.CatEnrichedOrdinary.instBicategory\", \"CategoryTheory.ForgetEnrichment.enrichedOrdinaryCategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.CatEnriched.instBicategory\"], \"digest\": \"4d1aba6e7cfa1532\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Enriched/Basic.lean:53-75 and FiberedCategory/Grothendieck.lean:28-88. The returned declarations concern ordinary enriched categories or Cat-valued pseudofunctors, not variable-object-space algebroids in arbitrary monoidal infinity categories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-completion-localization",
@@ -131,5 +294,20 @@
   "group": "NX"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-algebroid-object-space-fibration",
+  "worker": "stage1",
+  "summary": "Constructed restriction coherently, applied dual straightening and its mapping-fiber formula, proved the Cartesian/fully-faithful criterion through a vertical factor, and reduced equivalence-nerve assertions to the existing presentable theorem through one new monoidal-Yoneda prerequisite. Wrote the path and groupoid-effectivity arguments and the change-of-enrichment coherences. No statement change, Lean attachment, Mathlib leaf or unsupported generalization from presentability. Explicitly checked the generalized-operad mapping-space hypothesis using the relative-nerve left-fibration theorem and its transport formula. Rechecked the synchronized straightening statement and made its base/fiber size hypotheses explicit by ambient-universe enlargement. Second reading: made the fixed object-space universe and path-composition homotopies explicit; removed unnecessary worker-authored tool_uses metadata (all dependencies share the item unit).",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint in the current main-20261015 blueprint: the middle derived coefficient adjunction, through the existing enrichment/localization ancestry. This item supplies the Cartesian object-space fibration and the equivalence conventions used by the discrete-object localization reduction."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NS-ddf32f494",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-ddf32f494 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-monoidal-yoneda-embedding and all ten cited statements in full; no false statement, gap or circularity found. The item statement is unchanged, still for any monoidal V, with 'monoidal functor' read as strong per def-coef-monoidal-infinity-category. Step 1: the relative-nerve left fibration gives inert preservation and the generalized-operad Segal and mapping-space condition (product of path spaces). Step 2: Cartesian dual of straightening with universes (U',U''); the order of opposites and the hofib formula are correct. Step 3: the new node's diagram clause makes J_X fully faithful; homotopy-fibre detection over the same Map(X,Y) gives Map(E^n,A) = Map(E^n,JA). Steps 4-5: colourwise detection is used only in P(V), and Yoneda gives the vertical-factor criterion, both directions. Step 6: the equivalence-nerve theorem is applied only to JA, its presentable hypothesis met; full faithfulness and strong monoidality of j identify Map(1,A(a,a')). Steps 7-9 are correct elementary deductions. The new node is true (HA 4.8.1.10 with K empty plus the Day description; fully faithful postcomposition restricts to fibres and to the full inert subcategories). It is not a duplicate: universe-embeddings needs a cocomplete V, the segal-localization model has no monoidal Yoneda, and the presheaf-limits node has only the plain Yoneda. It is not a restated item clause. Small cases checked: empty X, V = point, BG, C = point. No cycle across 264 reachable nodes; every dependency is in unit sk-prop-sf-biduality-general, so no tool_uses are needed; no SGA. Source check: GH v4 online text was readable only to section 3.6 (Def 2.4.5/2.4.9 and 3.6.1 confirmed); sections 4-5 were checked mathematically only, and GH and HA stay WANTED. Minor notes, no change made: the HA source should also cite the Delta^op-to-Assoc approximation of HA section 4.1.3, and the new node lacks lean_audit (common, and preflight passed)."
+ }
 }

@@ -1,0 +1,94 @@
+{
+ "id": "lem-coef-monoidal-yoneda-embedding",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite coefficient derived adjunction before R lim, made coherent by the inherited enriched-localization chain. General tool for the object-space-fibration sublemma: embed an arbitrary monoidal enrichment in larger-universe monoidal presheaves before using the presentable equivalence-nerve calculation.",
+   "via": [
+    "lem-coef-algebroid-object-space-fibration",
+    "lem-coef-enriched-completion-localization",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Monoidal infinity Yoneda embedding and full faithfulness on operadic diagrams",
+ "statement": "Use the quasicategories, coherent functors, mapping spaces, universes and nonsymmetric monoidal infinity categories of [def-coef-complete-algebroid]. Fix universes $\\mathcal U\\in\\mathcal U'\\in\\mathcal U''$, and let $\\mathcal C$ be a $\\mathcal U'$-small monoidal infinity category; no colimits in $\\mathcal C$ are assumed. Write $\\mathcal S_{\\mathcal U'}$ for $\\mathcal U'$-small spaces and $\\mathcal P(\\mathcal C)=\\operatorname{Fun}(\\mathcal C^{\\mathrm{op}},\\mathcal S_{\\mathcal U'})$, formed in $\\mathcal U''$. Equip this presheaf category with Day convolution: its tensor is the left Kan extension of $(F,G)\\mapsto((c,d)\\mapsto F(c)\\times G(d))$ along $(\\otimes_{\\mathcal C})^{\\mathrm{op}}$. Here left Kan extension means the functor whose maps into a target functor correspond naturally to maps from the original functor into its restriction. Then $\\mathcal P(\\mathcal C)$ is presentably monoidal relative to $\\mathcal U'$. The Yoneda functor $j(c)=\\operatorname{Map}_{\\mathcal C}(-,c)$ has a fully faithful strong monoidal enhancement\n$$j^\\otimes:\\mathcal C^\\otimes\\longrightarrow\\mathcal P(\\mathcal C)^\\otimes$$\nover $\\Delta^{\\mathrm{op}}$, with coherent equivalences $j(c)\\otimes j(d)\\simeq j(c\\otimes d)$ and $j(\\mathbf1_{\\mathcal C})\\simeq\\mathbf1_{\\mathcal P(\\mathcal C)}$. Fully faithful means equivalence on every mapping space, and strong monoidal means preserving all cocartesian edges. For every $\\mathcal U'$-small simplicial set $K$ and fixed map $a:K\\to\\Delta^{\\mathrm{op}}$, postcomposition induces a fully faithful functor\n$$\\operatorname{Fun}_{/\\Delta^{\\mathrm{op}}}(K,\\mathcal C^\\otimes)\\longrightarrow\\operatorname{Fun}_{/\\Delta^{\\mathrm{op}}}(K,\\mathcal P(\\mathcal C)^\\otimes).$$\nHere the source and target are coherent functors with the specified composite $a$ and transformations over its identity. For any specified collection $I$ of edges of $K$ whose images under $a$ are inert, the same assertion holds on the full subcategories of functors carrying every edge of $I$ to a cocartesian edge over its inert base arrow. All these comparisons are natural under precomposition in $K$.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+  "place": "Proposition 4.8.1.10 with K empty and K-prime all small shapes, in the associative-monoidal case, and Variant 4.8.1.11 (printed pp.710-711); the Day-convolution description of Remark 4.8.1.13 applies with associative rather than symmetric structure. Gepner-Haugseng 1312.3178v4, proof of Theorem 5.6.6 explicitly uses this monoidal Yoneda embedding and the induced fully faithful algebra inclusion. Full faithfulness on coherent diagrams is the fully faithful postcomposition property, using the full-subcategory model of functor categories; restriction to inert-preserving objects is full. Read online; archive WANTED. No Stacks tag states this infinity-categorical theorem."
+ },
+ "stmt_deps": [
+  "def-coef-complete-algebroid"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DayConvolution|monoidalYoneda|yoneda.*[Mm]onoidal|[Mm]onoidal.*yoneda",
+   "results": "{\"t\": \"2026-10-16T18:32:08Z\", \"tool\": \"grep\", \"query\": \"DayConvolution|monoidalYoneda|yoneda.*[Mm]onoidal|[Mm]onoidal.*yoneda\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\"], \"digest\": \"d69e6314dd604d80\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:10-35 and DayConvolution/DayFunctor.lean:10-27; the returned structures use ordinary Category instances, and monoidality of ordinary Yoneda is itself a TODO in DayFunctor.lean. The nerve and coskeleton hits are ordinary categorical full-faithfulness results, not a monoidal infinity-Yoneda embedding or its operadic diagram functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DayConvolution\", \"yoneda\"",
+   "results": "{\"t\": \"2026-10-16T18:32:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"DayConvolution\\\", \\\"yoneda\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:10-35 and DayConvolution/DayFunctor.lean:10-27; the returned structures use ordinary Category instances, and monoidality of ordinary Yoneda is itself a TODO in DayFunctor.lean. The nerve and coskeleton hits are ordinary categorical full-faithfulness results, not a monoidal infinity-Yoneda embedding or its operadic diagram functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monoidal infinity category embeds fully faithfully and strongly monoidally in its category of space valued presheaves",
+   "results": "{\"t\": \"2026-10-16T18:32:09Z\", \"tool\": \"leansearch\", \"query\": \"A monoidal infinity category embeds fully faithfully and strongly monoidally in its category of space valued presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaMonFullyFaithful\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithulι\", \"CategoryTheory.instFaithfulMonFunctorOppositeMonCatYonedaMon\", \"CategoryTheory.yonedaMon\", \"CategoryTheory.instFullMonFunctorOppositeMonCatYonedaMon\", \"CategoryTheory.sheafToPresheafMonoidal\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.ofHasDayConvolutions\", \"CategoryTheory.yonedaMonObj\"], \"digest\": \"7e4ecc68447123ec\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:10-35 and DayConvolution/DayFunctor.lean:10-27; the returned structures use ordinary Category instances, and monoidality of ordinary Yoneda is itself a TODO in DayFunctor.lean. The nerve and coskeleton hits are ordinary categorical full-faithfulness results, not a monoidal infinity-Yoneda embedding or its operadic diagram functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The monoidal Yoneda embedding into presheaves with Day convolution is fully faithful and strong monoidal for any monoidal infinity category",
+   "results": "{\"t\": \"2026-10-16T18:32:19Z\", \"tool\": \"leanfinder\", \"query\": \"The monoidal Yoneda embedding into presheaves with Day convolution is fully faithful and strong monoidal for any monoidal infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithulι\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.ofHasDayConvolutions\", \"CategoryTheory.MonoidalCategory.monoidalOfHasDayConvolutions\", \"CategoryTheory.MonoidalCategory.lawfulDayConvolutionMonoidalCategoryStructOfHasDayConvolutions\", \"CategoryTheory.MonoidalCategory.monoidalOfLawfulDayConvolutionMonoidalCategoryStruct\", \"CategoryTheory.MonoidalCategory.DayFunctor.inst\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.mkLawfulDayConvolutionMonoidalCategoryStruct\"], \"digest\": \"a2df5b6097b9d14f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:10-35 and DayConvolution/DayFunctor.lean:10-27; the returned structures use ordinary Category instances, and monoidality of ordinary Yoneda is itself a TODO in DayFunctor.lean. The nerve and coskeleton hits are ordinary categorical full-faithfulness results, not a monoidal infinity-Yoneda embedding or its operadic diagram functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition with the strong monoidal Yoneda embedding is fully faithful on infinity categories of operadic algebra diagrams",
+   "results": "{\"t\": \"2026-10-16T18:32:20Z\", \"tool\": \"leanfinder\", \"query\": \"Postcomposition with the strong monoidal Yoneda embedding is fully faithful on infinity categories of operadic algebra diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveFunctor.full\", \"CategoryTheory.nerve.instFullCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"AugmentedSimplexCategory.instFullSimplexCategoryInclusion\", \"CategoryTheory.SimplicialObject.Truncated.cosk.full\", \"SimplexCategory.Truncated.inclusion.fullyFaithful\", \"CategoryTheory.SimplicialObject.Truncated.sk.full\"], \"digest\": \"6569600c178b7fbb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:10-35 and DayConvolution/DayFunctor.lean:10-27; the returned structures use ordinary Category instances, and monoidality of ordinary Yoneda is itself a TODO in DayFunctor.lean. The nerve and coskeleton hits are ordinary categorical full-faithfulness results, not a monoidal infinity-Yoneda embedding or its operadic diagram functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong monoidal Yoneda embedding of an arbitrary monoidal infinity category into space valued presheaves with Day convolution",
+   "results": "{\"t\": \"2026-10-16T19:18:41Z\", \"tool\": \"leanfinder\", \"query\": \"Strong monoidal Yoneda embedding of an arbitrary monoidal infinity category into space valued presheaves with Day convolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.DayFunctor.ι_obj\", \"CategoryTheory.MonoidalCategory.LawfulDayConvolutionMonoidalCategoryStruct.ι\", \"CategoryTheory.yonedaMon\", \"CategoryTheory.yonedaMon_obj\", \"CategoryTheory.yonedaMonObj\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.ι\", \"CategoryTheory.MonoidalCategory.monoidalOfHasDayConvolutions\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy\"], \"digest\": \"dc2c313f39be80f7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight hits concern ordinary Category and MonoidalCategory structures. Read DayConvolution/DayFunctor.lean:10–27 and its Category-typed declaration at lines 44–48; its TODO explicitly includes monoidality of ordinary Yoneda. Cartesian/Mon.lean:14–19 concerns Yoneda for monoid objects, not infinity-categorical Day presheaves or fully faithful operadic diagrams."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasicategory C with tensor product, representable space valued functors form a full monoidal subcategory of presheaves under Day convolution",
+   "results": "{\"t\": \"2026-10-16T19:44:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasicategory C with tensor product, representable space valued functors form a full monoidal subcategory of presheaves under Day convolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy₂'\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithulι\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy₂\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.corepresentableByLeft\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy₂'_homEquiv\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.corepresentableByRight\", \"CategoryTheory.MonoidalCategory.monoidalOfHasDayConvolutions\"], \"digest\": \"e14edf1f6b5bc1c1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader query. Read Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:61-89 and 1066-1073 and DayConvolution/DayFunctor.lean:20-27,40-48. These use ordinary Category and MonoidalCategory instances; fullyFaithulι is an assumed structure field, not existence of an infinity-categorical Yoneda enhancement. Ordinary monoidality of Yoneda is explicitly a TODO. None supplies this infinity-category statement or its mapping-space-level diagram assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-algebroid-object-space-fibration",
+  "date": "2026-10-17",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
