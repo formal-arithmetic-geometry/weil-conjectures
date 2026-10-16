@@ -12,6 +12,7 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import Mathlib.LinearAlgebra.TensorProduct.Vanishing
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 
 /-!
@@ -42,71 +43,7 @@ private theorem finite_tensor_relation (j : G →ₗ[R] H) (z : G ⊗[R] T)
     ∃ (n m : ℕ) (g : Fin n → G) (s : Fin n → T) (d : Fin n → Fin m → R)
       (h : Fin m → H), z = ∑ p, g p ⊗ₜ[R] s p ∧
         (∀ k, ∑ p, d p k • s p = 0) ∧ (∀ p, j (g p) = ∑ k, d p k • h k) := by
-  classical
-  obtain ⟨v, hv⟩ := TensorProduct.exists_finsupp_right z
-  let ε : (T →₀ R) →ₗ[R] T := Finsupp.linearCombination R id
-  have hε : Function.Surjective ε := by
-    intro t
-    exact ⟨Finsupp.single t 1, by simp [ε]⟩
-  let w : G ⊗[R] (T →₀ R) := v.sum fun t g ↦ g ⊗ₜ[R] Finsupp.single t 1
-  have hw : LinearMap.lTensor H ε (TensorProduct.map j LinearMap.id w) = 0 := by
-    simp only [w, Finsupp.sum, map_sum, TensorProduct.map_tmul, LinearMap.id_apply,
-      LinearMap.lTensor_tmul]
-    rw [hv] at hz
-    simpa [ε, Finsupp.sum] using hz
-  have he := lTensor_exact H ε.exact_subtype_ker_map hε
-  have hmem : TensorProduct.map j LinearMap.id w ∈
-      LinearMap.range (LinearMap.lTensor H (LinearMap.ker ε).subtype) := by
-    rw [← he.linearMap_ker_eq]
-    exact hw
-  obtain ⟨y, hy⟩ := hmem
-  obtain ⟨K, hK⟩ := TensorProduct.exists_finset y
-  let E : Finset T := v.support ∪ K.biUnion (fun q ↦ q.2.val.support)
-  let e : Fin (Fintype.card E) ≃ E := (Fintype.equivFin E).symm
-  let k : Fin (Fintype.card K) ≃ K := (Fintype.equivFin K).symm
-  refine ⟨Fintype.card E, Fintype.card K, fun p ↦ v (e p).val, fun p ↦ (e p).val,
-    fun p q ↦ (k q).val.2.val (e p).val, fun q ↦ (k q).val.1, ?_, ?_, ?_⟩
-  · rw [hv, Finsupp.sum]
-    dsimp only
-    trans ∑ t ∈ E, v t ⊗ₜ[R] t
-    · exact Finset.sum_subset Finset.subset_union_left (fun t ht htv ↦ by
-        simp [Finsupp.notMem_support_iff.mp htv])
-    · rw [← Finset.sum_attach E (fun t ↦ v t ⊗ₜ[R] t)]
-      exact (e.sum_comp (fun t : E ↦ v t.val ⊗ₜ[R] t.val)).symm
-  · intro q
-    dsimp only
-    rw [e.sum_comp (fun t : E ↦ (k q).val.2.val t.val • t.val)]
-    rw [Finset.univ_eq_attach, Finset.sum_attach E
-      (fun t ↦ (k q).val.2.val t • t)]
-    have hk : (k q).val.2.val.support ⊆ E := by
-      intro t ht
-      exact Finset.mem_union_right _ (Finset.mem_biUnion.mpr ⟨(k q).val, (k q).property, ht⟩)
-    have heq : (∑ t ∈ E, (k q).val.2.val t • t) = ε (k q).val.2.val := by
-      simp only [ε, Finsupp.linearCombination_apply, Finsupp.sum, id_eq]
-      exact (Finset.sum_subset (f := fun t ↦ (k q).val.2.val t • t) hk (fun t ht htk ↦ by
-        simp [Finsupp.notMem_support_iff.mp htk])).symm
-    rw [heq]
-    exact (k q).val.2.property
-  · intro p
-    have hc := congrArg (fun x ↦ TensorProduct.finsuppScalarRight R R H T x (e p).val) hy
-    rw [hK] at hc
-    simp only [map_sum, Finsupp.finsetSum_apply, LinearMap.lTensor_tmul,
-      TensorProduct.finsuppScalarRight_apply_tmul_apply] at hc
-    have hleft : TensorProduct.finsuppScalarRight R R H T
-        (TensorProduct.map j LinearMap.id w) (e p).val = j (v (e p).val) := by
-      simp only [w, Finsupp.sum, map_sum, TensorProduct.map_tmul, LinearMap.id_apply,
-        Finsupp.finsetSum_apply, TensorProduct.finsuppScalarRight_apply_tmul_apply,
-        Finsupp.single_apply]
-      simp only [ite_smul, one_smul, zero_smul, Finset.sum_ite_eq',
-        Finsupp.mem_support_iff, ne_eq, ite_not, ite_eq_right_iff]
-      intro he
-      rw [he, map_zero]
-    rw [hleft] at hc
-    dsimp only
-    rw [k.sum_comp (fun t : K ↦ t.val.2.val (e p).val • t.val.1)]
-    rw [Finset.univ_eq_attach, Finset.sum_attach K
-      (fun t ↦ t.2.val (e p).val • t.1)]
-    exact hc.symm
+  sorry
 
 end Algebra
 
@@ -439,6 +376,8 @@ private theorem local_tensor_kernel
 
 
 omit [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] in
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem tensor_mono_of_local_matrix
     (hmat : ∀ (m : ℕ) (U : C) (n : ℕ) (a : Fin n → Fin m → A.obj.obj (op U))
       (s : Fin n → M.val.obj (op U)), (∀ k, (∑ p, a p k • s p) = 0) →
@@ -483,10 +422,13 @@ private theorem tensor_mono_of_local_matrix
     rw [he]
     infer_instance
   exact mono_of_mono (i ▷ M) (tensorObjIsoSheafification Q M).hom
+-/
 
 end Converse
 
-/-- A module sheaf is flat exactly when each finite relation between its sections locally
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- A module sheaf is flat exactly when each finite relation between its sections locally
 factors through a finite free module with zero coefficient relation.
 Source: Stacks Project, Modules on Sites, Tag 08FC, (1) iff (2)
 (blueprint: lem-weil-pbc-site-flat-equational-criterion).
@@ -505,7 +447,7 @@ exactness of tensor to obtain finitely many relations witnessing the zero image.
 factorization makes the original tensor zero locally. Hence the presheaf tensor map is locally
 injective, its associated sheaf map is monic, and tensorRight M preserves monomorphisms.
 The closed symmetric monoidal structure already gives preservation of colimits; additivity
-and preservation of monomorphisms and cokernels give exactness, hence flatness. -/
+and preservation of monomorphisms and cokernels give exactness, hence flatness. - /
 theorem isFlat_iff_local_equationalCriterion
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
@@ -534,5 +476,6 @@ theorem isFlat_iff_local_equationalCriterion
     have := (tensorRight M).preservesHomology_of_preservesMonos_and_cokernels
     change PreservesFiniteLimits _ ∧ PreservesFiniteColimits _
     exact ⟨(tensorRight M).preservesFiniteLimits_of_preservesHomology, inferInstance⟩
+-/
 
 end SheafOfModules

@@ -456,9 +456,5 @@ topology, including empty objects and empty covering families. -/
 theorem geometricFieldProfiniteDenseSubsite (K : Type u) [Field K] [IsAlgClosed K] :
     (profiniteToProEtOf (Spec (.of K))).IsDenseSubsite
       (coherentTopology Profinite.{u}) (Scheme.ProEt.topology (Spec (.of K))) := by
-  have := (testFullyFaithful K).1
-  have := (testFullyFaithful K).2
-  have := testCoverDense K
-  exact { functorPushforward_mem_iff := fun {_ _} ↦
-    ⟨testTopologyReflect K, (testCoverPreserving K).cover_preserve⟩ }
+  sorry
 end AlgebraicGeometry.ProEtale

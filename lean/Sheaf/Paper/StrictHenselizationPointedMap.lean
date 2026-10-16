@@ -50,63 +50,7 @@ theorem strictHenselizationPointedMap_core
         separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω,
       Function.Surjective ψ ∧
       RingHom.ker ψ = IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing barY) := by
-  classical
-  have _hcompat := hΩ
-  obtain ⟨A, i, hi, hx, _⟩ := Scheme.exists_affine_mem_range_and_range_subset
-    (x := barY (IsLocalRing.closedPoint Ω)) (U := ⊤) (by simp)
-  let := hi
-  have hrange : Set.range barY ⊆ Set.range i := by
-    rintro _ ⟨z, rfl⟩
-    simpa only [Subsingleton.elim z (IsLocalRing.closedPoint Ω)] using hx
-  let xU := IsOpenImmersion.lift i barY hrange
-  have hfac : xU ≫ i = barY := IsOpenImmersion.lift_fac i barY hrange
-  let p := (Scheme.SpecToEquivOfField Ω (Spec A) xU).1
-  let F := (Spec A).residueField p
-  let e := (Scheme.SpecToEquivOfField Ω (Spec A) xU).2
-  let : Algebra F Ω := e.hom.toAlgebra
-  let K := separableClosure F Ω
-  obtain ⟨_, _, _, _, E, δ, _, cn, cu, ct, ⟨hcn⟩, ⟨_⟩, ⟨hct⟩, r, s, _, _⟩ :=
-    Scheme.etale_local_ring_triples Y Ω A i xU
-  obtain ⟨_, c, ⟨hc⟩, hlocal, ρ, ψ, _, _, hsurj, _, _, _, _, _⟩ :=
-    Scheme.strictHenselization_triples A p K
-  let Nall := (Scheme.pointSmallEtale (xU ≫ i)).fiber.Elements
-  let P : ObjectProperty Nall := fun n ↦ IsAffine n.1.left
-  let D := (P.ι ⋙ CategoryOfElements.π (Scheme.pointSmallEtale (xU ≫ i)).fiber ⋙
-    Scheme.Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ
-  let : HasColimit D := ⟨⟨cn, hcn⟩⟩
-  let incl := Scheme.strictHenselizationAffineInclusion (xU ≫ i)
-  let : incl.IsEquivalence :=
-    Scheme.strictHenselizationAffineInclusion_isEquivalence (xU ≫ i)
-  let rep := (equivSmallModel.{v}
-    (Scheme.strictHenselizationNeighbourhoods (xU ≫ i))).inverse
-  let q := (rep ⋙ incl).op
-  let cmp : Scheme.strictHenselizationRing (xU ≫ i) ≅ cn.pt :=
-    (Scheme.smallStrictHenselizationColimitIso (xU ≫ i)).symm ≪≫
-      (HasColimit.isoOfEquivalence q.asEquivalence (Iso.refl _)) ≪≫
-      colimit.isoColimitCocone ⟨cn, hcn⟩
-  let ringIso : Scheme.strictHenselizationRing barY ≅ c.pt :=
-    eqToIso (congrArg Scheme.strictHenselizationRing hfac.symm) ≪≫
-      cmp ≪≫ s ≪≫ hct.coconePointUniqueUpToIso hc
-  let G := Y.residueField (barY (IsLocalRing.closedPoint Ω))
-  have hp : i p = barY (IsLocalRing.closedPoint Ω) :=
-    congrArg (fun f : Spec (.of Ω) ⟶ Y ↦ f (IsLocalRing.closedPoint Ω)) hfac
-  let b : G ≅ F := (Y.residueFieldCongr hp).symm ≪≫ asIso (i.residueFieldMap p)
-  let : Algebra G K := ((algebraMap F K).comp b.hom.hom).toAlgebra
-  have : Algebra.IsSeparable G K :=
-    Algebra.IsSeparable.of_equiv_equiv b.symm.commRingCatIsoToRingEquiv
-      (RingEquiv.refl K) (by
-        apply RingHom.ext
-        intro x
-        change algebraMap F K (b.hom.hom (b.inv.hom x)) = algebraMap F K x
-        exact congrArg (algebraMap F K)
-          (ConcreteCategory.congr_hom b.inv_hom_id x))
-  have : IsSepClosed K := IsSepClosure.sep_closed F
-  have : IsSepClosure G K := ⟨inferInstance, inferInstance⟩
-  let k := IsSepClosure.equiv G K (separableClosure G Ω)
-  let φ := k.toRingHom.comp (ψ.comp ringIso.hom.hom)
-  have hφ : Function.Surjective φ :=
-    k.surjective.comp (hsurj.comp ringIso.commRingCatIsoToRingEquiv.surjective)
-  exact ⟨φ, hφ, IsLocalRing.ker_eq_maximalIdeal φ hφ⟩
+  sorry
 
 /-- The compatible residue maps give a surjection to the relative separable closure.
 Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP

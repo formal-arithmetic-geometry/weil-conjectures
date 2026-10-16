@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 
-import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import Sheaf.AlgebraicGeometry.ConstantExtensionCokernelPresentation
 import WeilConjectures.ConstructibleSheaf.Biproduct
 
