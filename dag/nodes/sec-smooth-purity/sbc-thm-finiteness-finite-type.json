@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sbc-thm-finiteness-finite-type",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finiteness of higher direct images of finite-type morphisms",
@@ -16,38 +16,187 @@
   "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-scheme-conventions",
-  "sbc-def-coefficient-conventions"
+  "sbc-def-coefficient-conventions",
+  "def-weil-pbc-derived-categories",
+  "def-amb-etale-compact-support",
+  "def-kun-topological-krull-dimension"
  ],
  "proof": [
   {
-   "text": "The ordinary direct-image assertion, including the possibly\nnonseparated case, is [thm-dg-finite-type-constructibility].\nFor separated $u$, choose $u=rj$ by\n[thm-nagata-compactification]. The formula of\n[def-amb-etale-compact-support] reads $Ru_!=Rr_*j_!$.\nBy [lem-fin-extension-by-zero], $j_!F$ is constructible;\n[lem-fin-proper-bounded-constructible] makes its proper\ndirect image bounded constructible. Finally\n[lem-dg-compact-support-amplitude] gives the sharp $2d$ bound\nusing the original fibres of $u$. No fibre-dimension bound for\nthe compactification is needed, and no such bound is asserted for\nordinary direct image along a nonproper morphism.",
+   "text": "Use the finite commutative coefficient ring $\\Lambda$ of [sbc-def-coefficient-conventions]: it is annihilated by a positive integer $N$ invertible in the base field $k$, and hence on every scheme over $k$. Put $K=F[0]$ in the ordinary etale derived category. Its only nonzero cohomology sheaf is $\\mathcal H^0(K)=F$, so $K\\in D^b_c(X,\\Lambda)$ by [def-weil-pbc-constructible-complexes]. Apply [thm-dg-finite-type-constructibility] to $u$ and $K$. Its hypotheses are precisely finite-type schemes over the field $k$ and the stated allowable finite coefficients; it imposes no separatedness hypothesis. It gives $Ru_*F\\in D^b_c(Y,\\Lambda)$, proving the first assertion.",
    "uses": [
-    "thm-dg-finite-type-constructibility",
+    "sbc-def-coefficient-conventions",
+    "def-weil-pbc-constructible-complexes",
+    "thm-dg-finite-type-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.md",
+    "place": "Proof, opening sentence: the ordinary direct-image assertion, including the nonseparated case"
+   }
+  },
+  {
+   "text": "For the remaining assertions suppose $u$ is separated. A field is Noetherian, since its only ideals are $0$ and the whole field. By [lem-weil-pbc-finite-type-over-noetherian], $X$ and $Y$ are Noetherian; in particular $Y$ is quasi-compact, and [lem-weil-pbc-locally-noetherian-quasi-separated] makes it quasi-separated. Thus [thm-nagata-compactification] applies to the separated finite-type $u$. By [def-nagata-compactification] its compactification is $X\\xrightarrow{j}\\overline X\\xrightarrow{r}Y$, where $j$ is a quasi-compact open immersion, $r$ is proper, and $rj=u$. The properness definition [def-weil-proper-morphism] includes finite type. To check that $\\overline X$ is of finite type over $k$, use [def-weil-finite-type-morphism]: take a finite affine cover $\\operatorname{Spec}R_i$ of $Y$ with each $R_i$ finitely generated over $k$, then a finite affine cover $\\operatorname{Spec}B_{ia}$ of $r^{-1}(\\operatorname{Spec}R_i)$ with $B_{ia}$ finitely generated over $R_i$. The images of the finite generators of $R_i$ together with the generators of $B_{ia}$ generate $B_{ia}$ over $k$. These finitely many affines cover $\\overline X$, giving the required finite-type structure. The same Noetherian lemma makes $\\overline X$ Noetherian. For each of $X$, $Y$ and $\\overline X$, local Noetherianity gives an affine neighbourhood with Noetherian coordinate ring at every point, and quasi-compactness selects finitely many of these neighbourhoods. Thus these schemes satisfy exactly the finite-Noetherian-affine-cover convention in the compact-support definition and comparison statement used in step 4. No dimension bound on $\\overline X$ or on the fibres of $r$ has been imposed.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
     "thm-nagata-compactification",
-    "def-amb-etale-compact-support",
+    "def-nagata-compactification",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.md",
+    "place": "Proof, second sentence: choose the Nagata compactification; explicit checks of its hypotheses"
+   }
+  },
+  {
+   "text": "By [lem-fin-extension-by-zero], applied to the open immersion $j$ between the finite-type $k$-schemes just obtained, the sheaf $j_!F$ is constructible on $\\overline X_{\\mathrm{et}}$. As a complex in degree zero it is bounded constructible by [def-weil-pbc-constructible-complexes]. Apply [lem-fin-proper-bounded-constructible] to the proper map $r:\\overline X\\to Y$ and this complex, with the same finite coefficients. It follows that $Rr_*(j_!F[0])\\in D^b_c(Y,\\Lambda)$. This uses bounded constructibility for proper direct image without any specified fibre-dimension bound.",
+   "uses": [
     "lem-fin-extension-by-zero",
-    "lem-fin-proper-bounded-constructible",
+    "def-weil-pbc-constructible-complexes",
+    "lem-fin-proper-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.md",
+    "place": "Proof, middle sentences: extension by zero is constructible and proper direct image is bounded constructible"
+   }
+  },
+  {
+   "text": "The chosen-compactification definition [def-amb-etale-compact-support] sends $F[0]$ to $Rr_*Dj_!(F[0])$. The normalization $Dj_!Q_X\\cong Q_{\\overline X}j_!$ in that definition gives $Dj_!(F[0])\\cong (j_!F)[0]$: degreewise extension by zero sends the sole possibly nonzero term $F$ in degree zero to $j_!F$ in degree zero, and sends every zero term and differential to zero. All inputs here are bounded below. The comparison statement [lem-amb-etale-compact-comparisons] applies to this compactifiable separated finite-type map of Noetherian schemes with finite commutative coefficients, and identifies the chosen candidate with the compactification-independent $Ru_!F$. Consequently $Ru_!F\\cong Rr_*(j_!F[0])$ is bounded constructible by step 3: an isomorphism induces isomorphisms on cohomology sheaves and hence preserves their vanishing and finite lisse stratifications. This supplies the compact-support assertion in the same ordinary etale category as the first assertion.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.md",
+    "place": "Proof, formula Ru_! = Rr_* j_!: distinguish the chosen candidate from the comparison-independent functor"
+   }
+  },
+  {
+   "text": "Now assume the geometric fibres of the original map $u$ have dimension at most $d$. The finite ring $\\Lambda$ has positive additive exponent $m$ dividing the annihilating integer $N$ from step 1. Indeed, let $m$ be the additive order of $1_\\Lambda$. Then $N\\cdot 1_\\Lambda=0$ implies $m\\mid N$. For every $a\\in\\Lambda$, $ma=(m1_\\Lambda)a=0$, whereas any integer annihilating the additive group annihilates $1_\\Lambda$ and is divisible by $m$. Hence $m$ is exactly the additive exponent (also $m=1$ for the zero ring). Thus $m$ is invertible on $Y$: writing $N=mt$, if $N$ is a unit then $tN^{-1}$ is an inverse for $m$. Apply [lem-dg-compact-support-amplitude] to $u$, $A=\\Lambda$ and the sheaf $F$. This statement allows every etale $A$-module sheaf, so it applies in particular to this finite constructible one, and gives $R^qu_!F=0$ for every $q>2d$. The dimensional hypothesis in this application is on $u$ itself. The proof therefore never requires a dimension bound for the compactification map $r$.",
+   "uses": [
     "lem-dg-compact-support-amplitude"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.md",
+    "place": "Proof, final sentences: apply the sharp compact-support amplitude bound to the original fibres"
+   }
   }
  ],
  "proof_deps": [
+  "sbc-def-coefficient-conventions",
+  "def-weil-pbc-constructible-complexes",
   "thm-dg-finite-type-constructibility",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
   "thm-nagata-compactification",
-  "def-amb-etale-compact-support",
+  "def-nagata-compactification",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
   "lem-fin-extension-by-zero",
   "lem-fin-proper-bounded-constructible",
+  "def-amb-etale-compact-support",
+  "lem-amb-etale-compact-comparisons",
   "lem-dg-compact-support-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.md",
-  "place": "## Proof"
+  "place": "## Proof, read from the originating server copy during the second reading; expanded into five steps with explicit prerequisite checks"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible direct images finite-type morphism etale sheaves",
+   "results": "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.isConstructible_range_comap, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.LocallyOfFiniteType",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern constructible subsets or scheme morphisms, not constructibility or amplitude of etale derived direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.boundedConstructible, AlgebraicGeometry.Etale",
+   "results": "loogle: unknown identifier 'DerivedCategory.boundedConstructible'",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern; no usable conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|lowerShriek|finite-type",
+   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsZero.*rightDerivedLowerShriek|boundedConstructible",
+   "results": "0 hits in Mathlib",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Does Mathlib prove bounded constructibility of etale derived direct images for finite type morphisms?",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsZero homology rightDerivedLowerShriek",
+   "results": "loogle: Unknown identifier `IsZero`",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern; no usable conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper compact support direct image constructible etale sheaf fibre dimension bound",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, Topology.IsConstructible.image_of_isOpenEmbedding, Topology.IsConstructible.image_of_isClosedEmbedding, Topology.isConstructible_preimage_iff_of_isOpenEmbedding, Topology.IsConstructible.preimage_of_isClosedEmbedding, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern constructible subsets or scheme morphisms, not constructibility or amplitude of etale derived direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"Sheaf\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerStar|rightDerivedLowerShriek|IsConstructibleSheaf",
+   "results": "0 hits in Mathlib",
+   "date": "2026-10-16",
+   "verdict": "no match; independent second-reader search using source-library vocabulary"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(direct|image)|cohomologicalDimension|compactSupport",
+   "results": "In Mathlib/AlgebraicGeometry, 5 hits, all in Morphisms/FinitePresentation.lean at lines 121, 160, 165, 169, 172: Scheme.Hom constructible image/preimage statements.",
+   "date": "2026-10-16",
+   "verdict": "no match: constructible subsets, not sheaf cohomology; independent second-reader vocabulary"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived functor of pushforward preserves bounded complexes with constructible cohomology on the small etale site",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, CategoryTheory.Functor.sheafPushforwardCocontinuous, DerivedCategory.instIsGEObjSingleFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.isHomological_of_localization.",
+   "date": "2026-10-16",
+   "verdict": "no match: general derived categories and sheaf pushforward constructions, no etale bounded-constructibility or compact-support vanishing theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -84,5 +233,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sbc-thm-finiteness-finite-type",
+  "worker": "stage1",
+  "summary": "Kept all three assertions, expanded the imported paragraph into five steps, and reused existing nodes only. Checked the actual Lean declarations, whose ordinary direct-image and sheaf vanishing inputs are sorry, so the item cannot be attached. Added the missing compactification-comparison citation and the Noetherian/quasi-separated hypotheses for Nagata; wrote the finite-type ambient and coefficient-exponent arguments explicitly. Added statement dependencies for ordinary derived categories, compact support, and dimension. Recorded genuine Mathlib searches; the second reader obtained the source markdown from the originating server and verified the statement verbatim. Second reading uses the canonical degree-zero extension-by-zero isomorphism and retains the permitted split_report tool proposals for maintainer registration. Repair audit on 2026-10-16: the supplied return entry is a PASS for a different item and contains no numbered repair requests. Independently rechecked the current source and dependency statements; made the finite Noetherian affine cover consequence explicit in step 2 to meet precisely the compact-support comparison convention. The item statement and all 15 citations are unchanged. Independent second reading: verified the source statement and all five steps against the cited statements; expanded the equality of the additive exponent and the order of the ring unit in step 5. No statement or dependency change.",
+  "blueprint": "Step 1 realizes the opening ordinary-image sentence; step 2 the choice of Nagata compactification; step 3 extension by zero and the proper case; step 4 the compactification formula, with its comparison made explicit; step 5 the final original-fibre amplitude assertion. The sk-prop-sf-cbc unit has no proof steps; this is also exactly the compact-support paragraph of sk-prop-sf-finiteness, with no change to either unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherian preservation checks the schemes needed by the compactification candidates and their comparison; no statement of sk-prop-sf-cbc supplies this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic locally Noetherian quasi-separatedness checks the base hypothesis of Nagata; it is a prerequisite to the imported compactification route, not a replacement of it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-2e9527e59",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-2e9527e59 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all cited node statements, blueprint sources, Stacks locations, unit/chapter route, hypotheses, coefficient category, compactification comparison, edge cases, Mathlib searches, and declared tool uses. No new nodes, false steps, missing citations, duplicate splits, circularity, or route errors found. Review written to review.md."
+ }
 }
