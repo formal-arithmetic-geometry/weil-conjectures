@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-nagata-density-normalization-sheaves",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension by zero through the schematic closure",
@@ -13,52 +13,240 @@
   "place": "node det-nagata-density-normalization-sheaves, order None"
  },
  "stmt_deps": [
-  "det-nagata-density-normalization-setup"
+  "det-nagata-density-normalization-setup",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "det-def-sfb-module-objects-sheaves",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-upper-lower-adjunction",
+  "sk-def-sfb-module-lower-shriek",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-modobj-abelian",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [
   {
-   "text": "*Step 1: the operations are exact.* By\npart (2) of [det-nagata-density-normalization-setup], $\\overline X$ is qcqs,\n$j_V:V\\hookrightarrow\\overline X$ is a quasi-compact open immersion, and\n$i:Z\\hookrightarrow\\overline X$ is its closed complement. The open–closed\nproposition ([sk-prop-sf-open-closed-triangle]) therefore applies to the\npair $(j_V,i)$ on $\\overline X$: $i^*$ and $i_*$ are exact, and every\n$\\Lambda_{\\overline X}$-module sheaf $N$ sits in a natural exact sequence\n\n$$\n0\\longrightarrow j_{V,!}j_V^*N\\longrightarrow N\\xrightarrow{\\ \\eta\\ }\ni_*i^*N\\longrightarrow0 .\n$$\n\nIt applies likewise to the quasi-compact open immersions $j$ and $j_Z$\n(quasi-compact by part (1) of [det-nagata-density-normalization-setup]), so $j_!$ and\n$j_{Z,!}$ are exact.",
+   "text": "The setup gives $\\overline X$ and $Z$ qcqs, $V$ an open with closed complement $i:Z\\hookrightarrow\\overline X$, and $j_Z:X\\hookrightarrow Z$ a quasi-compact open immersion. Quasi-compactness of the morphisms $j_V$ and $j$ is checked as follows. For an affine open $A\\subseteq\\overline X$, [def-weil-open-immersion] identifies $j_V^{-1}(A)$ and $j^{-1}(A)$ with the open subsets $V\\cap A$ and $j(X)\\cap A$ of the Noetherian scheme $\\overline X$; [lem-weil-pbc-noetherian-open-subscheme-noetherian] makes these opens quasi-compact, and [def-weil-finite-type-morphism] then gives that $j_V$ and $j$ are quasi-compact. We read “condensed coefficient ring” in the module-object statement in the commutative sense required by [def-sfb-module-upper-star], [def-sfb-module-lower-star] and [sk-def-sfb-module-lower-shriek]; this is the standing coefficient convention and adds no geometric hypothesis. The hypotheses of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] hold for $T_{\\mathrm{pro\\acute et}}$, $T\\in\\{X,Z,V,\\overline X\\}$: the site is formed inside the universes of [def-weil-pbc-proetale-site] with a small skeleton, and [det-def-sfb-sheaf-tensor-structure] gives abelian sheafification $a$ as a strong symmetric monoidal functor for the sheafified tensor product, so $a(g\\otimes_p h)$ is invertible whenever $a(g)$ and $a(h)$ are (local equivalences are monoidal); $\\Lambda_T$ is a commutative monoid by [sk-def-sfb-pulled-back-coefficients]. Hence, by [def-weil-pbc-internal-abelian-sheaf-module-equivalence], internal modules over the commutative ring object $Λ_T$ are equivalent to sectionwise module sheaves, preserving underlying abelian sheaves, sections, restrictions, and linear maps. Under this equivalence, [def-sfb-module-upper-star] is the ringed inverse image (its scalar extension is along the coefficient isomorphism $α_f$ of [sk-def-sfb-coefficient-morphisms]), [def-sfb-module-lower-star] is the sectionwise direct image, and [sk-def-sfb-module-lower-shriek] is the abelian-sheaf extension by zero with its transported module action. The adjunctions are the actual module adjunctions by [def-sfb-module-upper-lower-adjunction]. Therefore [det-sf-open-closed-sequence-ring-sheaf](1)--(3), applied on $\\overline X$ to $(j_V,i)$ and to $j$ with its closed complement, and on the qcqs scheme $Z$ to $j_Z$ with its closed complement, transports to the internal module categories and gives exact $i_*,j_!,j_{Z,!}$ and the exact sequence\n$$0\\longrightarrow j_{V,!}j_V^*N\\longrightarrow N\\xrightarrow{\\eta_N}i_*i^*N\\longrightarrow0.$$ The exactness of the internal $i^*$ is the transported assertion of [det-sf-open-closed-pullback-limits](2). The transported sequence map is the unit of the module adjunction, since both its underlying sheaf map and its module linearity are the canonical unit maps just identified.",
    "uses": [
-    "det-nagata-density-normalization-setup"
+    "det-nagata-density-normalization-setup",
+    "sk-def-sfb-coefficient-morphisms",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "det-sf-open-closed-pullback-limits",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-module-upper-star",
+    "def-sfb-module-lower-star",
+    "def-sfb-module-upper-lower-adjunction",
+    "sk-def-sfb-module-lower-shriek",
+    "def-weil-pbc-proetale-site",
+    "det-def-sfb-sheaf-tensor-structure",
+    "sk-def-sfb-pulled-back-coefficients"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Step 1"
+   }
   },
   {
-   "text": "*Step 2: base change.* By part (3) of [det-nagata-density-normalization-setup], the\nsquare with sides $j_Z:X\\to Z$, $i:Z\\to\\overline X$, $j:X\\to\\overline X$\nand $\\mathrm{id}_X$ is cartesian. Compatibility of extension by zero with\nbase change in open–closed squares gives a natural isomorphism\n$i^*j_!M\\simeq j_{Z,!}M$.",
+   "text": "The square with top arrow $\\mathrm{id}_X$, bottom arrow $i:Z\\to\\overline X$, and vertical arrows $j_Z,j$ is cartesian by setup clause (3). In the sectionwise module category, clause (4) of [det-sf-open-closed-sequence-ring-sheaf] gives $i^*j_!\\cong j_{Z,!}$ because $Z$ is qcqs. The equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence], together with the coefficient-isomorphism transport in [def-sfb-module-upper-star] and the module adjunction of [def-sfb-module-upper-lower-adjunction], carries this natural transformation to the internal-module pullback and the internal extensions by zero. Hence the resulting canonical isomorphism is the module isomorphism $\\beta_M:i^*j_!M\\xrightarrow{\\sim}j_{Z,!}M$, natural in $M$.",
    "uses": [
-    "det-nagata-density-normalization-setup"
+    "det-nagata-density-normalization-setup",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-module-upper-star",
+    "def-sfb-module-upper-lower-adjunction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Step 2"
+   }
   },
   {
-   "text": "*Step 3: the restriction to $V$ vanishes.* Again by\npart (3) of [det-nagata-density-normalization-setup], $X\\times_{\\overline X}V$ is\nempty, so base change along $j_V$ gives $j_V^*j_!M\\simeq0$: extension by\nzero along $j$ is supported on $X$.",
+   "text": "The setup gives $X\\times_{\\overline X}V=\\varnothing$, and $V$ is qcqs because it is a quasi-compact open of the quasi-separated scheme $\\overline X$. Apply clause (4) of [det-sf-open-closed-sequence-ring-sheaf] to $g=j_V$ and the open immersion $j$. The pullback open is the empty scheme, so the sectionwise extension by zero is the zero module sheaf. Through [def-weil-pbc-internal-abelian-sheaf-module-equivalence] and the definition of $j_!$ in [sk-def-sfb-module-lower-shriek], this identifies the actual internal pullback $j_V^*j_!M$ with the zero internal module.",
    "uses": [
-    "det-nagata-density-normalization-setup"
+    "det-nagata-density-normalization-setup",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "sk-def-sfb-module-lower-shriek",
+    "def-sfb-module-upper-star"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Step 3"
+   }
   },
   {
-   "text": "*Step 4: conclusion for sheaves.* Apply the exact sequence of Step 1 to\n$N=j_!M$. Its first term $j_{V,!}j_V^*j_!M$ vanishes by Step 3, so\n$\\eta:j_!M\\to i_*i^*j_!M$ is injective and surjective, i.e. an isomorphism.\nComposing with $i_*$ of the isomorphism of Step 2 gives\n$j_!M\\simeq i_*j_{Z,!}M$, natural in $M$.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply the internal-module exact sequence from Step 1 to $N=j_!M$. Step 3 makes its first term zero, so $0\\to j_!M\\xrightarrow{\\eta_M}i_*i^*j_!M\\to0$. The category of sectionwise module sheaves of [def-weil-sheaf-of-modules-category] is abelian, and the equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] makes the internal category $\\Mod_{\\Lambda_{\\overline X}}$ abelian with exact sequences corresponding (an equivalence of additive categories preserves kernels and cokernels); hence this unit is a monomorphism and an epimorphism in an abelian category, i.e. an isomorphism. It is the specified unit of $i^*\\dashv i_*$ by the identification in Step 1, rather than a unit from a different sectionwise adjunction. Composing it with $i_*\\beta_M$ gives the required natural isomorphism $j_!M\\xrightarrow{\\sim}i_*j_{Z,!}M$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sfb-module-upper-lower-adjunction",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Step 4"
+   }
   },
   {
-   "text": "*Step 5: complexes.* The functors $j_!$, $j_{Z,!}$ and $i_*$ are exact, so on\nthe derived category they are computed by applying them degreewise to any\nrepresenting complex, and they preserve quasi-isomorphisms. The natural\nisomorphism of Step 4 applied in each degree is compatible with the\ndifferentials by naturality, so it is an isomorphism of complexes\n$j_!K\\simeq i_*j_{Z,!}K$ for every unbounded complex $K$, and it descends to\n$D(\\overline X_{\\mathrm{pro\\acute{e}t}},\\Lambda_{\\overline X})$.",
-   "uses": [],
-   "elementary": null
+   "text": "For an arbitrary integer-indexed complex $K$, apply the natural isomorphism $\\theta=i_*\\beta\\circ\\eta$ in each degree. Naturality gives $\\theta_{K^{n+1}}j_!(d^n)=i_*j_{Z,!}(d^n)\\theta_{K^n}$; multiplying by the inverse components shows that the inverses also commute with differentials, so this is an isomorphism of complexes. The functors are exact by Step 1, hence preserve quasi-isomorphisms by the elementary homology calculation $H^n(FC)\\cong F(H^nC)$. The chain isomorphism therefore descends through the localization defining the unbounded derived category [def-weil-abstract-derived-category], giving $j_!K\\simeq i_*j_{Z,!}K$ in the asserted derived category.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sfb-module-upper-lower-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Step 5"
+   }
   }
  ],
  "proof_deps": [
-  "det-nagata-density-normalization-setup"
+  "def-sfb-module-lower-star",
+  "def-sfb-module-upper-lower-adjunction",
+  "def-sfb-module-upper-star",
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "det-def-sfb-sheaf-tensor-structure",
+  "det-nagata-density-normalization-setup",
+  "det-sf-open-closed-pullback-limits",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-pulled-back-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+  "place": "Steps 1–5, with explicit geometric, coefficient and localization hypotheses"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero through schematic closure open closed pro-etale sheaves",
+   "results": "8 hits; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.liftCoborder_app; AlgebraicGeometry.exists_lift_of_germInjective; AlgebraicGeometry.exists_lift_of_germInjective_aux; AlgebraicGeometry.Scheme.zero_of_zero_cover; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; AlgebraicGeometry.Scheme.OpenCover.ext_elem; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not assert the pro-etale arbitrary-ring extension-through-closure comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Hom, j_!, i_*, open closed",
+   "results": "0 hits; ; loogle: <input>:1:20: expected term",
+   "date": "2026-10-16",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.*zero|open.*closed|j_!",
+   "results": "0 hits; ; subdirectory argument: Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "invalid directory: repeated Mathlib component; not evidence of absence; corrected source searches recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*closed|extension.*zero|ProEtale",
+   "results": "0 hits; ; subdirectory argument: Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "invalid directory: repeated Mathlib component; not evidence of absence; corrected source searches recorded below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero through schematic closure open closed pro-etale module sheaves exactness base change",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.Hom.zero_app; ContinuousLinearMap.extend_zero; AlgebraicGeometry.Scheme.zero_of_zero_cover; AlgebraicGeometry.RingedSpace.res_zero; CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsIsZero; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero; AlgebraicGeometry.Scheme.zeroLocus_isClosed",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not assert the pro-etale arbitrary-ring extension-through-closure comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreservesFiniteLimits, CategoryTheory.IsIso, Scheme",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.PreservesFiniteLimits'",
+   "date": "2026-10-16",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "open closed localization sequence extension by zero base change of sheaves on pro-etale site",
+   "results": "8 hits; Condensed.lanSheafProfinite; SheafOfModules.Presentation.map_π_eq; SheafOfModules.Presentation.map; Condensed.profiniteSolidification; Algebra.FormallyEtale.localization_base; ModuleCat.Tilde.openToLocalization; Algebra.FormallyEtale.localization_map; LightCondensed.lanLightCondSet",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not assert the pro-etale arbitrary-ring extension-through-closure comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso f -> IsIso g",
+   "results": "0 hits; ; loogle: Unknown identifier `IsIso`",
+   "date": "2026-10-16",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtale|extensionByZero|openClosed",
+   "results": "0 hits; ; subdirectory argument: Mathlib",
+   "date": "2026-10-16",
+   "verdict": "invalid directory: repeated Mathlib component; not evidence of absence; corrected source searches recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "extension[Bb]y[Zz]ero|lowerShriek|[Oo]pen[Cc]losed",
+   "results": "0 hits; ; subdirectory argument: CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not assert the pro-etale arbitrary-ring extension-through-closure comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extension[Bb]y[Zz]ero|openClosed|[Ee]xtension.*[Zz]ero",
+   "results": "0 hits; ; subdirectory argument: AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not assert the pro-etale arbitrary-ring extension-through-closure comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extension\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not assert the pro-etale arbitrary-ring extension-through-closure comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extension|Open",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; Mathlib/AlgebraicGeometry/Sites/Etale.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/Sites/Affine.lean; Mathlib/AlgebraicGeometry/Sites/Affine.lean; Mathlib/AlgebraicGeometry/Sites/Affine.lean; subdirectory argument: AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match: returned statements do not assert the pro-etale arbitrary-ring extension-through-closure comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal module object extension by zero open closed adjunction unit",
+   "results": "8 hits including ModuleCat.RestrictionCoextensionAdj.unit and related ModuleCat change-of-rings declarations; none states the pro-etale internal-module extension-through-closure comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ModuleCat, IsIso, adjunction",
+   "results": "0 hits; loogle: unknown identifier CategoryTheory.ModuleCat.",
+   "date": "2026-10-17",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "module object|extension by zero|open closed [Mathlib/CategoryTheory]",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match in Mathlib/CategoryTheory"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -72,5 +260,34 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-lem-nagata-density-normalization"
+ "unit": "sk-lem-nagata-density-normalization",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-nagata-density-normalization-sheaves",
+  "worker": "stage1",
+  "summary": "Repaired the returned E6/C1 fault by routing every operation through the internal module-object category: added the actual module functor definitions, adjunction, lower-shriek definition, internal/sectionwise equivalence, and internal abelianness to the statement and proof dependencies; explicitly matched pullback, pushforward, extension by zero, base-change maps, and the unit. Settled the required commutativity convention openly (the module-object operations used here are defined for commutative condensed rings). Corrected the setup quasi-compactness attribution and retained the Noetherian-open argument. No new nodes.",
+  "blueprint": "Realizes the five steps in det-nagata-density-normalization-sheaves.proof.md: exact operations, base change, vanishing on V, sheaf conclusion, and degreewise complexes.",
+  "tool_uses": [
+   {
+    "node": "det-sf-open-closed-sequence-ring-sheaf",
+    "why": "Generic arbitrary-ring sectionwise open–closed exactness and base-change theorem; after the explicitly cited internal/sectionwise module equivalence and module-operation definitions, it supplies the transported exact sequence and base-change used here."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic equivalence transports the sectionwise open–closed theorem to the internal module-object category and preserves the underlying maps, so it is needed to identify the actual module operations and unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NG-3d56f0d6a",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-3d56f0d6a (reviewer sub-agent of L); spot-checked: Read in full: the item, the main-20261015 blueprint statement and proof (Steps 1-5), the unit sk-lem-nagata-density-normalization and the unit sk-prop-sf-open-closed-triangle, and the statement of every cited node (none has a blueprint_update). The statement matches the blueprint word for word and is not weakened. It uses the internal Mod_{Λ_T} coefficient category, and the base change β_M comes from the cartesian square of setup clause (3). 'Condensed ring' is commutative under the Stacks sheaf-of-rings convention, and the module functors that the statement uses require it. Steps 2, 3 and 5 are correct. Step 2 applies clause (4) of det-sf-open-closed-sequence-ring-sheaf with g=i, Z qcqs and U'=X. Step 3 uses g=j_V with an empty pullback open. Step 5 is a degreewise chain isomorphism followed by the localization Q. I repaired three small faults in the corrected item file. (1) Step 1 claimed j_V is quasi-compact 'by definition'; the Noetherian-open argument now covers j_V as well as j, and the meaningless pair (j,j_Z) is replaced by j on X̄ and j_Z on qcqs Z, each with its closed complement. (2) The hypotheses of the internal/sectionwise equivalence were never checked; Step 1 now cites def-weil-pbc-proetale-site, det-def-sfb-sheaf-tensor-structure and sk-def-sfb-pulled-back-coefficients for them. (3) Step 4 cited lem-sfb-modobj-abelian without checking its hypotheses, and that lemma is off-route and was undeclared; abelianness now comes from def-weil-sheaf-of-modules-category transported along the equivalence. proof_deps is updated to the union of the step uses; the statement and stmt_deps are unchanged. Accepted tool_uses: det-sf-open-closed-sequence-ring-sheaf, because the route's open-closed unit is étale, D_ctf and finite-type only, and def-weil-pbc-internal-abelian-sheaf-module-equivalence, which is an interface definition. No new nodes and no duplicates (det-nagata-density-normalization-pushforward cites the item; the condensed recollement node is D^+ only with no base change). No cycle and no SGA. Edge cases checked: X empty, X = X̄, a disjoint extra component, a non-reduced closure with V empty, and Λ = 0.; 1 file(s) fixed by the reviewer"
+ }
 }
