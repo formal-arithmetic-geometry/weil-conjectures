@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-coefficient-evaluation-derived-left-adjoint",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: compatible finite-level functors; the derived left adjoint of level evaluation used to compare the coherent input systems across the sites.",
+   "via": [
+    "lem-pur-coefficient-system-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived extension from one level of a varying-coefficient system",
+ "statement": "Let $\\mathcal T=\\operatorname{Sh}(\\mathcal C)$ for a small site $\\mathcal C$. Let $O$ be a commutative ring and $\\lambda\\in O$ a non-zero-divisor such that $O\\cong\\varprojlim_{n\\geq1}O/(\\lambda^n)$, and set $A_n=O/(\\lambda^n)$. Write $\\mathsf S_A(\\mathcal T)$ for the category of systems of sheaves of $(A_q)_{\\mathcal T}$-modules $M_q$, with transition maps $M_{q+1}\\to\\operatorname{Res}_{A_{q+1}\\to A_q}M_q$ linear over $(A_{q+1})_{\\mathcal T}$ and compatible componentwise morphisms [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars]. Kernels and cokernels are componentwise. Use the ordinary unbounded derived categories [def-weil-abstract-derived-category]. For $n\\geq1$, let $e_n$ be evaluation at level $n$, which is exact.\n\nDefine $E_n:\\operatorname{Mod}((A_n)_{\\mathcal T})\\to\\mathsf S_A(\\mathcal T)$ by\n$$ (E_nF)_q=\\begin{cases}F\\otimes_{A_n} A_q&q\\leq n,\\\\0&q>n,\\end{cases} $$\nwith quotient-induced transitions, and by tensoring morphisms with the identity [def-pur-sheaf-tensor-product]. Then $E_n\\dashv e_n$. Its total left derived functor $LE_n$ exists and is left adjoint to the termwise derived evaluation $e_n$:\n$$\\operatorname{Hom}_{D(\\mathsf S_A(\\mathcal T))}(LE_nN,M)\\cong\\operatorname{Hom}_{D(\\mathcal T,A_n)}(N,e_nM),$$\nnaturally in both arguments. For a K-flat resolution $P\\to N$ with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules, lem-pc-kflat-resolution], the strict complex of systems $E_nP$ represents $LE_nN$; its differentials and maps are the displayed termwise tensors. Thus $e_qLE_nN\\cong N\\otimes^L_{A_n}A_q$ for $q\\leq n$ and is zero for $q>n$ [lem-pur-derived-change-of-rings].\n\nFor $m\\geq n$ put $C_{mn}=-\\otimes^L_{A_m}A_n$. There is a canonical natural map $\\sigma_{mn}:LE_nC_{mn}\\to LE_m$. On one flat-term K-flat representative $P$ over $A_m$, its components are the identity of $P\\otimes_{A_m}A_q$ for $q\\leq n$, after the canonical tensor associators, and the zero maps for $q>n$. These maps respect identity and composition of indices. For a derived system $M$, let $t^M_{mn}:C_{mn}e_mM\\to e_nM$ be the adjunct, under the derived tensor/restriction adjunction [lem-pc-derived-adjoint-functors], of its transition $e_mM\\to\\operatorname{Res}_{A_m\\to A_n}e_nM$. Under the displayed Hom adjunctions, precomposition with $\\sigma_{mn,N}$ sends $h:N\\to e_mM$ to $t^M_{mn}\\circ C_{mn}(h):C_{mn}N\\to e_nM$.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21: the functors e_n! and (Le_n!, e_n^-1), with indices shifted from n >= 0 to n >= 1. The natural sigma maps are the truncation inclusions in its explicit formula; the Hom identity specifies their adjunction mates."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-derived-adjoint-functors"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Left derived extension from a component of modules over an inverse sequence of rings is left adjoint to evaluation",
+   "results": "ModuleCat.instIsLeftAdjointExtendScalars; localCohomology.diagram; ModuleCat.instIsRightAdjointCoextendScalars; Ext; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.ExtendRestrictScalarsAdj.counit; ModuleCat.extendRestrictScalarsAdj; ModuleCat.RestrictionCoextensionAdj.counit'",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ModuleCat scalar adjunctions, localCohomology.diagram and Ext do not give the unbounded left adjoint in a varying-ring sheaf-system category"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"leftAdjoint\"",
+   "results": "CategoryTheory.coevaluation_comp_leftAdjointMate; CategoryTheory.leftAdjointMate_comp_evaluation; CategoryTheory.coevaluation_comp_leftAdjointMate_assoc; CategoryTheory.leftAdjointMate_comp_evaluation_assoc; CategoryTheory.evaluationLeftAdjoint; CategoryTheory.evaluationIsLeftAdjoint; CategoryTheory.evaluationLeftAdjoint_obj_obj; CategoryTheory.evaluationLeftAdjoint_obj_map",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryTheory/Adjunction/Evaluation.lean:36-72; evaluationLeftAdjoint and evaluationAdjunctionRight are for functors into one fixed category, with no changing coefficient rings or derived scalar extension; rigid duality hits are unrelated"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Aa]djoint|[Aa]djoint.*evaluation",
+   "results": "Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary fixed-category evaluation adjunction in CategoryTheory/Adjunction/Evaluation.lean:36-72 and constant-sheaf/rigid evaluation facts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For modules over a diagram of rings evaluation has a derived left adjoint given by extension of scalars",
+   "results": "ModuleCat.instIsLeftAdjointExtendScalars; ModuleCat.extendScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.ExtendScalars.obj'; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; ModuleCat.instIsLeftAdjointRestrictScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; ModuleCat.extendRestrictScalarsAdj",
+   "date": "2026-10-16",
+   "verdict": "no match: read ModuleCat/ChangeOfRings.lean:400 and 885; these are underived scalar extension/restriction for ordinary modules, not derived varying-ring systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero below an index in a varying ring module tower has total left derived functor adjoint to exact evaluation",
+   "results": "localCohomology.diagram; Ext; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapExtLinearMap_apply; Condensed.profiniteSolidification; CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match: localCohomology.diagram, Ext, mapExactFunctor and leftDerived vanishing concern different constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*([Ll]eft|[Aa]dj)|([Ll]eft|[Aa]dj).*evaluation",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: read Algebra/Category/ModuleCat/Sheaf/Free.lean:19-24; the sole hit is a TODO about terminal-object evaluation, not this theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation|leftKanExtension|leftAdjoint",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Abelian.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Abelian.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: read Presheaf/Pullback.lean:43-51,79-99 and Presheaf.lean:288; these provide ordinary presheaf pullback/pushforward and evaluation, not the unbounded derived system assertion; other hits reflect limits/colimits or construct generators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction for evaluation on modules over a ring valued presheaf with left Kan extension",
+   "results": "PresheafOfModules.freeAdjunction; LightCondensed.freeForgetAdjunction; Condensed.freeForgetAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; PresheafOfModules.freeAdjunction_unit_app; PresheafOfModules.freeAdjunctionUnit; ModuleCat.instIsRightAdjointCoextendScalars; PresheafOfModules.freeAdjunction_homEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match: freeAdjunction is free-module/forgetful adjunction for ring-valued presheaves; condensed free/forgetful and ordinary coextension do not state unbounded derived level extension for changing-ring sheaf systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"Adjunction\"",
+   "results": "CategoryTheory.evaluationAdjunctionLeft; CategoryTheory.evaluationAdjunctionRight; CategoryTheory.evaluationAdjunctionRight_unit_app; CategoryTheory.evaluationAdjunctionLeft_counit_app; CategoryTheory.evaluationAdjunctionLeft_unit_app_app; CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryTheory/Adjunction/Evaluation.lean:36-72; evaluationAdjunctionRight treats a fixed target category, without changing-ring tensor extensions or derived adjunction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-pur-coefficient-system-derived-comparison",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
