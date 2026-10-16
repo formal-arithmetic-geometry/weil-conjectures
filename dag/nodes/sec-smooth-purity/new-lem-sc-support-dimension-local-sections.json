@@ -1,0 +1,143 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.SupportDimension",
+  "date": "2026-10-16",
+  "group": "E3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/04FR",
+  "place": "Lemma 59.31.2; dimension of generic-point closures in Tag 0B1C"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/04FR",
+  "place": "E3 complete Lean proof, with dimension input from Tag 0B1C. Both source tags read online on 2026-10-16. Repair: removed duplicate binary-union theorem; generalized the dimension helper to arbitrary finite closed families with a direct point-closure proof. Second reading: removed the unused lem-kun-etale-lfp dependency; the Lean proof uses Mathlib instances directly."
+ },
+ "id": "new-lem-sc-support-dimension-local-sections",
+ "title": "Sections locally lift through bounded-dimension support kernels",
+ "statement": "Let B be a finite-type scheme over a field K, with structure map b, a a natural number, and N a torsion abelian etale sheaf on B. Suppose for every separably closed field Omega and geometric point s:Spec Omega -> B over a point y of residue transcendence degree greater than a, the inverse image s^*N is zero. For every etale B-object V and section x in N(V), there is a covering sieve R such that every g:W -> V in R admits an open U of B with closed complement of topological Krull dimension at most a and a section t in ker(N -> j_*j^*N)(W) mapping to g^*x, where j:U -> B. This is the local-section form of [lem-sc-support-dimension-union]. The site, inverse image, and dimension are as in [def-weil-pbc-etale-site], [def-weil-pbc-inverse-image], [def-kun-topological-krull-dimension].",
+ "stmt_deps": [
+  "lem-sc-support-dimension-union",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-inverse-image",
+  "def-kun-topological-krull-dimension"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": "lem-sc-support-dimension-union"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale sheaf whose stalks vanish at points of transcendence degree greater than a is a union of subsheaves supported on closed subsets of dimension at most a",
+   "results": "Hits: Algebra.etaleLocus_eq_compl_support, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.isOpen_etaleLocus, Algebra.mem_etaleLocus_iff, Algebra.etaleLocus, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-16",
+   "verdict": "No exact Mathlib match. Use proved source-library API and the recorded dimension lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim",
+   "results": "Hits: topologicalKrullDim, IsHomeomorph.topologicalKrullDim_eq, topologicalKrullDim_zero_of_discreteTopology, Topology.IsInducing.topologicalKrullDim_le, topologicalKrullDim_subspace_le, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero",
+   "date": "2026-10-16",
+   "verdict": "No exact Mathlib match. Use proved source-library API and the recorded dimension lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "support.*dim|dim.*support",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact Mathlib match. Use proved source-library API and the recorded dimension lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of a morphism is contained in the vanishing locus of a section if the pullback section is zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  }
+ ],
+ "proof": [
+  {
+   "text": "Use the proved source-library vanishingLocus API. If y in V is outside the vanishing locus of a section, choose the algebraic-closure geometric point v of V at y. If trdeg_K kappa(V.hom(y)) > a, the hypothesis makes the sheaf (v followed by V.hom)^*N zero, hence its evaluation at Spec Omega is a singleton. Its pulled section is therefore zero. The image-containment lemma forces y into the vanishing locus, contradiction. Thus every point of the closed complement S has image transcendence degree at most a. This is proved in the private helper trdeg_le_of_not_vanishing.",
+   "uses": [
+    "new-lem-sc-pullback-zero-vanishing-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Work on an affine chart of V. Since B is locally of finite type over a field it is locally Noetherian, by Mathlib LocallyOfFiniteType.isLocallyNoetherian. The chart is etale over B; Mathlib instances supply local finite presentation and hence local finite type, so the same theorem makes it locally Noetherian. Affineness supplies compactness, hence IsNoetherian and NoetherianSpace. Such charts cover V. The separate Sheaf theorem etale_lfp_and_finiteType_over_field is not used.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Decompose the closed S into a finite union of nonempty irreducible closed subsets c. By sobriety choose eta(c) generic in c, and let y(c) be its image in B. Continuity sends c into closure({y(c)}). Thus the finite union Z of these closures is closed and contains the image of S. If S is empty this construction uses the empty union. The private helper exists_closed_image_bound carries out this construction.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The helper residueFieldHomOfOver_eq identifies the ground-field maps used by our transcendence degree and Hom.residueFieldAlgebraMap, via germ_stalkMap and residue_residueFieldMap. For each closure({y(c)}), the closed-irreducible dimension theorem gives a natural number d representing both its topological dimension and its transcendence degree. Step 1 gives d <= a. The proved private helper dim_finite_union_le handles an arbitrary finite indexed family of closed subsets of any sober T0 space and any common dimension bound in WithBot ENat. The finite union is closed and sober. Each point z of the union belongs to some member C(i); its closure in the union embeds into C(i), so its dimension is at most the common bound. Taking the supremum of point-closure dimensions proves the finite-union bound, including the empty family. Apply this directly to the image-generic-point closures to obtain dim Z <= a. No binary-union lemma or induction through that special case is used.",
+   "uses": [
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set U=B minus Z. The first projection P=V times_B U -> V has image in the vanishing locus because Z contains the image of S. vanishingLocus_map and eq_zero_of_forall_mem_vanishingLocus show the section restricted along this projection is zero. Regard P also as a B-etale object. pullSection_comp for the identity of P identifies pullback of this zero restriction with the pulled original section. map_unit_app_eq_pullSection on the identity of the U-etale object P identifies the latter with the adjunction unit section. Thus that unit section is zero, as proved in unit_section_eq_zero_of_range.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let R consist of arrows on which the section has a closed support of dimension <= a in the unit-vanishing sense. Naturality of the unit makes R a sieve: further restriction preserves zero, with the same U. Steps 2 through 5 show that every point of V is in an affine chart arrow belonging to R. Scheme.mem_smallEtaleTopology_iff makes R covering. This proves the private exists_covering_section_zero_off_closed. For each arrow in R, apply the proved exists_kernel_ι_app_eq to its zero unit section, obtaining the required t. This final kernel lift proves exists_covering_supportedIn. The torsion hypothesis is retained but not needed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-scheme-sober",
+  "new-lem-sc-pullback-zero-vanishing-locus"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.SupportDimension",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Sites/SupportDimension.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_covering_supportedIn",
+  "statement": "theorem exists_covering_supportedIn {K : Type u} [Field K] (b : B ⟶ Spec (.of K))\n    [LocallyOfFiniteType b] [QuasiCompact b] (a : ℕ)\n    (N : Sheaf B.smallEtaleTopology AddCommGrpCat.{u + 1}) (hN : N.IsTorsion)\n    (hstalk : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ B),\n      (a : Cardinal.{u}) < Scheme.residueFieldTrdeg b (s (IsLocalRing.closedPoint Ω)) →\n        IsZero ((s)^*[AddCommGrpCat.{u + 1}].obj N)) :\n    ∀ (V : B.Etale) (s : N.obj.obj (Opposite.op V)), ∃ R ∈ B.smallEtaleTopology V,\n      ∀ ⦃W : B.Etale⦄ (g : W ⟶ V), R g → ∃ (U : B.Opens)\n        (_ : topologicalKrullDim ((U : Set B)ᶜ : Set B) ≤ a)\n        (t : (supportedIn N U).obj.obj (Opposite.op W)),\n          (supportedInι N U).hom.app _ t = N.obj.map g.op s",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-16",
+  "note": "Existing public source declaration, now proved in full; records the local-section form separately from the Sheaf-root colimit formulation."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T021740-L-1027933",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T021740-L-1027933",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
