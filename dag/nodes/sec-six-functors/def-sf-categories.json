@@ -3,22 +3,115 @@
  "blueprint": {
   "is": "def-sf-categories",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-def-sf-categories"
+  ]
  },
  "kind": "definition",
  "title": "Ambient categories and small subcategories",
- "statement": "Fix a scheme $T$ carrying a coefficient stage $\\Lambda$ and a site — the\n*small étale* or the *small pro-étale* site of\ndef:weil-pbc-etale-site and def:weil-pbc-proetale-site. The\n*ambient* categories are the ordinary derived categories of\n$\\Lambda_T$-modules\n\n$$\nD(T,\\Lambda),\\quad D^+(T,\\Lambda),\\quad D^-(T,\\Lambda),\\quad D^b(T,\\Lambda),\n$$\n\ntogether with, for a set of primes $P$ invertible on $T$, the full\nsubcategory $D^+_{P\\text{-tor}}(T,\\Lambda)$ of complexes whose geometric\nstalks are torsion with prime divisors in $P$\n(sbc-def-derived-categories-with-allowable-torsion). The *small*\ncategories are the full subcategories\n\n$$\n\\Dbc(T,\\Lambda)\\subseteq D^b(T,\\Lambda),\\qquad\n\\Dctf(T,\\Lambda)\\subseteq\\Dbc(T,\\Lambda),\\qquad\nD_c^{[a,b]}(T,\\Lambda)\\subseteq\\Dbc(T,\\Lambda)\n$$\n\nof bounded constructible complexes, of bounded constructible complexes of\nfinite Tor amplitude, and of bounded constructible complexes with cohomology\nconcentrated in $[a,b]$\n(def:weil-finite-torsion-constructibility,\ndef:weil-finite-tor-amplitude,\ndef:weil-constructible-intervals); at the field stages\n$\\Dctf=\\Dbc$ by definition.",
+ "statement": "Let $T$ be a scheme and choose $\\tau=\\mathrm{\\acute et}$ or $\\mathrm{pro\\acute et}$, with small site $T_\\tau$ as in [def-weil-pbc-etale-site] or [def-weil-pbc-proetale-site], using the universes and small skeleton of [def-weil-size-convention]. For a sheaf of commutative rings $R_T$ on that site, let $\\operatorname{Mod}(R_T)$ be the abelian category of sheaves of $R_T$-modules [def-weil-sheaf-of-modules-category]. Its ambient categories are\n$$\nD(T_\\tau,R_T):=D(\\operatorname{Mod}(R_T)),\\qquad\nD^+(T_\\tau,R_T),\\quad D^-(T_\\tau,R_T),\\quad D^b(T_\\tau,R_T),\n$$\nwhere $D$ is the ordinary derived category [def-weil-abstract-derived-category] and the three full subcategories are defined by cohomology vanishing in sufficiently negative degrees, sufficiently positive degrees, and outside a finite interval, respectively [def-weil-pbc-bounded-derived-subcategories]. For a commutative ring $R$, the notation $D(T_\\tau,R)$ uses the constant sheaf $R_T$ [def-weil-pbc-constant-sheaf]; on the etale site this is [def-weil-pbc-derived-categories].\n\nFor a set of primes $P$ invertible on $T$, define $D^+_{P\\text{-tor}}(T_\\tau,R_T)$ to be the full subcategory [def-sf-induced-category] of $D^+(T_\\tau,R_T)$ on the objects $K$ such that, for every integer $i$, every geometric point $\\bar t$ and every element $x$ of the underlying abelian group of $\\mathcal H^i(K)_{\\bar t}$, there is an integer $m>0$ with $mx=0$ and all prime divisors of $m$ in $P$. Here $\\mathcal H^i$ is the cohomology sheaf [def-weil-derived-cohomology-sheaves], and the stalk is [def-weil-pbc-geometric-stalks] for $\\tau=\\mathrm{\\acute et}$ and [def-weil-proetale-geometric-stalk] for $\\tau=\\mathrm{pro\\acute et}$. This extends the abelian-etale notation of [sbc-def-derived-categories-with-allowable-torsion] by applying its elementwise condition to the underlying cohomology stalk groups.\n\nFor the coefficient stages, fix the global finite-field datum [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$, a finite extension $E/\\Ql$ inside it with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\ge1$; put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Suppose $\\ell$ is invertible on $T$ when using the finite-Tor conventions. At $\\Lambda=A_{E,n}$, define the small categories\n$$\nD^b_c(T_\\tau,\\Lambda)\\subseteq D^b(T_\\tau,\\Lambda),\\qquad\nD^b_{ctf}(T_\\tau,\\Lambda)\\subseteq D^b_c(T_\\tau,\\Lambda),\\qquad\nD_c^{[a,b]}(T_\\tau,\\Lambda)\\subseteq D^b_c(T_\\tau,\\Lambda)\n$$\nfor integers $a\\le b$ as follows. The first consists of bounded complexes with constructible cohomology, using [def-weil-pbc-constructible-complexes] on the etale site and [def-weil-finite-torsion-constructibility] on the pro-etale site. The second consists of those objects having finite Tor amplitude: for some integers $u\\le v$, tensoring with every degree-zero $\\Lambda_T$-module sheaf gives cohomology only in $[u,v]$, using [def-kun-tor-amplitude] on the etale site and [def-weil-finite-tor-amplitude] on the pro-etale site. The third consists of the objects $K$ with $\\mathcal H^i(K)=0$ for $i\\notin[a,b]$ [def-weil-constructible-intervals, def-weil-derived-category-cohomological-support]. All these are full subcategories: morphisms, identities and composition are inherited from the containing category [def-sf-induced-category].\n\nAt the integral stage the ambient notation $D(T_{\\mathrm{proet}},\\mathcal O_E)$ instead uses the completed ring sheaf $\\widehat{\\mathcal O}_{E,T}=\\varprojlim_j(A_{E,j})_T$ [def-weil-completed-integral-coefficients]. The small category $D^b_c(T,\\mathcal O_E)$ is the derived-complete category of [def-weil-derived-complete-integral-detailed], including its single cohomological interval bounding all reductions. Its full subcategory $D^b_{ctf}(T,\\mathcal O_E)$ imposes one Tor interval for all reductions, as in [def-weil-finite-tor-amplitude]. At the field stages use\n$$\nD^b_c(T,E):=D^b_c(T,\\mathcal O_E)[1/\\varpi_E],\\qquad\nD^b_c(T,\\Qlb):=\\mathop{\\operatorname{2-colim}}_{E'\\subset\\Qlb,\\ [E':\\Ql]<\\infty}D^b_c(T,E'),\n$$\nwith exactly the scalar-localization and common-stage constructions of [def-weil-rationalization-karoubi] and [def-weil-algebraically-closed-coefficients]. Define $D^b_{ctf}(T,E):=D^b_c(T,E)$ and $D^b_{ctf}(T,\\Qlb):=D^b_c(T,\\Qlb)$ as in [def-weil-finite-tor-amplitude]. For $\\Lambda=\\mathcal O_E,E,\\Qlb$, define $D_c^{[a,b]}(T,\\Lambda)$ as the full subcategory on $D_c^{\\ge a}(T,\\Lambda)\\cap D_c^{\\le b}(T,\\Lambda)$, using the standard pairs and their shifts from [def-weil-constructible-standard-tstructure]. These higher coefficient-stage categories have these pro-etale, localization and common-stage meanings; no identification with constant-coefficient etale categories, or embedding of the localized/common-stage categories in an ordinary constant-coefficient derived category, is part of this definition.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-categories/def-sf-categories.md",
   "place": "node def-sf-categories, order 2385"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-derived-categories",
+  "def-sf-induced-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-proetale-geometric-stalk",
+  "sbc-def-derived-categories-with-allowable-torsion",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-torsion-constructibility",
+  "def-kun-tor-amplitude",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-constructible-intervals",
+  "def-weil-derived-category-cohomological-support",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-standard-tstructure"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|constructibleFiniteTor|constructibleIn|allowableTorsion",
+   "results": "{\"t\": \"2026-10-16T15:06:40Z\", \"tool\": \"grep\", \"query\": \"boundedConstructible|constructibleFiniteTor|constructibleIn|allowableTorsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No complete match. Generic derived-category and t-structure ingredients do not define constructibility, finite Tor amplitude, allowable torsion or the coefficient-stage categories. Read Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:87 and TStructure.lean:35,180; reuse the existing ingredient nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category of constructible etale sheaves finite Tor amplitude bounded cohomology interval",
+   "results": "{\"t\": \"2026-10-16T15:06:40Z\", \"tool\": \"leansearch\", \"query\": \"Derived category of constructible etale sheaves finite Tor amplitude bounded cohomology interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"HasDerivedCategory\", \"HasDerivedCategory.standard\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.instCategory\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.IsLE\"], \"digest\": \"53fccec4178f8e4d\"}",
+   "date": "2026-10-16",
+   "verdict": "No complete match. Generic derived-category and t-structure ingredients do not define constructibility, finite Tor amplitude, allowable torsion or the coefficient-stage categories. Read Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:87 and TStructure.lean:35,180; reuse the existing ingredient nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"constructible\"",
+   "results": "{\"t\": \"2026-10-16T15:06:45Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"constructible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No complete match. Generic derived-category and t-structure ingredients do not define constructibility, finite Tor amplitude, allowable torsion or the coefficient-stage categories. Read Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:87 and TStructure.lean:35,180; reuse the existing ingredient nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible derived categories of etale or pro-etale sheaves with finite Tor amplitude and cohomological interval subcategories",
+   "results": "{\"t\": \"2026-10-16T15:06:46Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded constructible derived categories of etale or pro-etale sheaves with finite Tor amplitude and cohomological interval subcategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.IsLE\", \"DerivedCategory\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\"], \"digest\": \"7e140dcfb861968f\"}",
+   "date": "2026-10-16",
+   "verdict": "No complete match. Generic derived-category and t-structure ingredients do not define constructibility, finite Tor amplitude, allowable torsion or the coefficient-stage categories. Read Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:87 and TStructure.lean:35,180; reuse the existing ingredient nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|torAmplitude",
+   "results": "{\"t\": \"2026-10-16T15:07:03Z\", \"tool\": \"grep\", \"query\": \"constructible|torAmplitude\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No complete match. Generic derived-category and t-structure ingredients do not define constructibility, finite Tor amplitude, allowable torsion or the coefficient-stage categories. Read Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:87 and TStructure.lean:35,180; reuse the existing ingredient nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full subcategory of the derived category of sheaves defined by constructible cohomology and uniform finite tensor amplitude",
+   "results": "{\"t\": \"2026-10-16T15:07:04Z\", \"tool\": \"leanfinder\", \"query\": \"Full subcategory of the derived category of sheaves defined by constructible cohomology and uniform finite tensor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.Q\", \"DerivedCategory.IsGE\", \"HasDerivedCategory.standard\", \"DerivedCategory.IsLE\", \"HasDerivedCategory\", \"DerivedCategory.TStructure.t\", \"DerivedCategory\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\"], \"digest\": \"1c30267472caf048\"}",
+   "date": "2026-10-16",
+   "verdict": "No complete match. Generic derived-category and t-structure ingredients do not define constructibility, finite Tor amplitude, allowable torsion or the coefficient-stage categories. Read Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:87 and TStructure.lean:35,180; reuse the existing ingredient nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "Constructible|FiniteTor|TorAmplitude|AllowableTorsion",
+   "results": "{\"t\": \"2026-10-16T15:22:44Z\", \"tool\": \"grep\", \"query\": \"Constructible|FiniteTor|TorAmplitude|AllowableTorsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Spectral/ConstructibleTopology.lean\", \"Mathlib/Topology/Spectral/ConstructibleTopology.lean\", \"Mathlib/Topology/Spectral/ConstructibleTopology.lean\", \"Mathlib/Topology/Spectral/ConstructibleTopology.lean\", \"Mathlib/Topology/Spectral/ConstructibleTopology.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\"], \"digest\": \"50c3420868ee83a0\"}",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: no complete match. LeanFinder returned adic completion and condensed modules (read Mathlib/Condensed/Module.lean:42); grep returned constructible subsets/topologies, not constructible derived sheaves (read Mathlib/Topology/Constructible.lean:16-26); Loogle returned zero hits. These do not define the finite, completed integral, rationalized and common-stage categories in this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves derived categories over adic coefficient rings using completion and scalar extension",
+   "results": "{\"t\": \"2026-10-16T15:22:46Z\", \"tool\": \"leanfinder\", \"query\": \"Constructible sheaves derived categories over adic coefficient rings using completion and scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"CondensedMod\", \"Condensed.profiniteSolid\", \"AdicCompletion\", \"Condensed.profiniteFree\", \"CondensedMod.ofSheafCompHaus\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CondensedMod.ofSheafProfinite\"], \"digest\": \"d0d1e7b9c5da61b6\"}",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: no complete match. LeanFinder returned adic completion and condensed modules (read Mathlib/Condensed/Module.lean:42); grep returned constructible subsets/topologies, not constructible derived sheaves (read Mathlib/Topology/Constructible.lean:16-26); Loogle returned zero hits. These do not define the finite, completed integral, rationalized and common-stage categories in this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"sheaf\"",
+   "results": "{\"t\": \"2026-10-16T15:23:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Second-reader search: no complete match. LeanFinder returned adic completion and condensed modules (read Mathlib/Condensed/Module.lean:42); grep returned constructible subsets/topologies, not constructible derived sheaves (read Mathlib/Topology/Constructible.lean:16-26); Loogle returned zero hits. These do not define the finite, completed integral, rationalized and common-stage categories in this item."
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -28,5 +121,20 @@
  "blueprint_uses": [],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors",
- "unit": "sk-def-sf-categories"
+ "unit": "sk-def-sf-categories",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sf-categories",
+  "worker": "stage1",
+  "summary": "Split this definition entirely through existing notions, with no new nodes. Expanded ordinary derived/bounded categories, cohomological allowable torsion, full-subcategory morphisms, and finite-stage constructible/Tor/interval conditions. STATEMENT-DISPUTED: the summary conflates constant-coefficient derived categories with completed integral coefficients and rational/common-stage categories; corrected to the explicit coefficient definitions it cites, as explained with a type check and counterexample in report.md. Higher-stage intervals use the existing standard-pair definition. No complete Lean attachment or Mathlib match exists.",
+  "blueprint": "Realizes all paragraphs and displayed category lists of def-sf-categories and the identical sk-def-sf-categories unit. The unit has no proof steps. Its blanket ambient/small-subcategory wording is corrected to its referenced finite, derived-complete, rationalized and common-stage definitions; the precise discrepancy is recorded in the report. No operation or preservation theorem is assumed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q63-16b87a0dc",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-16b87a0dc (reviewer sub-agent of L); spot-checked: Read the full definition, all 26 dependency statements, unit/chapter route, and cited source passages. Completed-integral, scalar-localization, common-stage, finite-Tor and interval conventions check out on small cases. No new nodes, cycles or repairs. No comparison with upstream condensed coefficient categories is assumed. Detailed review written to review.md."
+ }
 }

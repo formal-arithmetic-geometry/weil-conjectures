@@ -3,49 +3,197 @@
  "blueprint": {
   "is": "det-nagata-refinement-morphisms",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Morphisms out of a dense compactification",
- "statement": "Let $f:X\\to S$ be a morphism, let\n$c'=(X\\xrightarrow{j'}\\overline X'\\xrightarrow{p'}S)$ be a dense\ncompactification and $c=(X\\xrightarrow{j}\\overline X\\xrightarrow{p}S)$ a\ncompactification of $f$. Let $h:\\overline X'\\to\\overline X$ be an\n$S$-morphism with $h\\circ j'=j$. Then:\n\n1. $h$ is proper;\n1. $h^{-1}(j(X))=j'(X)$, so $h$ is a refinement $c'\\to c$\n   ([det-nagata-definition-refinement]);\n1. $h$ is the unique $S$-morphism $\\overline X'\\to\\overline X$ with\n   $h\\circ j'=j$.",
+ "statement": "Let $X,S$ be schemes and $f:X\\to S$ a morphism. Let\n$c'=(X\\xrightarrow{j'}\\overline X'\\xrightarrow{p'}S)$ be a dense\ncompactification [def-nagata-dense-compactification] and\n$c=(X\\xrightarrow{j}\\overline X\\xrightarrow{p}S)$ a compactification\n[def-nagata-compactification] of $f$. Assume explicitly that both open\nimmersions $j,j'$ are quasi-compact: their inverse images of affine open\nsubschemes are quasi-compact topological spaces. Thus these are the\ncompactifications to which [det-nagata-definition-refinement] applies.\nLet $h:\\overline X'\\to\\overline X$ be an $S$-morphism, meaning\n$p\\circ h=p'$, with $h\\circ j'=j$. Then:\n\n1. $h$ is proper [def-weil-proper-morphism];\n2. $h^{-1}(j(X))=j'(X)$ as open subschemes of $\\overline X'$, so $h$ is\n   a refinement $c'\\to c$ [det-nagata-definition-refinement];\n3. $h$ is the unique $S$-morphism $\\overline X'\\to\\overline X$ with\n   $h\\circ j'=j$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.md",
   "place": "node det-nagata-refinement-morphisms, order None"
  },
  "stmt_deps": [
+  "def-nagata-compactification",
+  "def-nagata-dense-compactification",
   "det-nagata-definition-refinement",
-  "def-nagata-dense-compactification"
+  "def-weil-proper-morphism"
  ],
  "proof": [
   {
-   "text": "*Properness.* Factor $h$ as the graph\n$\\Gamma_h:\\overline X'\\to\\overline X'\\times_S\\overline X$ followed by the\nsecond projection. Since $p:\\overline X\\to S$ is proper, hence separated,\n$\\Gamma_h$ is a closed immersion, hence proper; the second projection is the\nbase change of the proper morphism $p'$ along $p$, hence proper. So $h$ is\nproper.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Inverse image of $X$.* Put $V=h^{-1}(j(X))$, an open subscheme of\n$\\overline X'$ containing $j'(X)$ because $hj'=j$. Let\n$g=j^{-1}\\circ h|_V:V\\to X$. Then $g\\circ j'=\\mathrm{id}_X$, so\n$j':X\\to V$ is a section of $g$. The composite $V\\to X\\to S$ is the\nrestriction of $p'$ to the open $V$, which is separated; hence $g$ is\nseparated (if a composite $V\\to X\\to S$ is separated, so is $V\\to X$). A\nsection of a separated morphism is a closed immersion, so $j'(X)$ is closed in\n$V$; it is also open. Write $V=j'(X)\\sqcup V''$ with $V''$ open and closed in\n$V$. Restricting the injective map $\\mathcal O_{\\overline X'}\\to\nj'_*\\mathcal O_X$ (density of $c'$) to the open $V''$ gives an injective map\n$\\mathcal O_{V''}\\to 0$, because $j'(X)\\cap V''=\\varnothing$. Hence\n$\\mathcal O_{V''}=0$, i.e. $V''=\\varnothing$, and $V=j'(X)$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Uniqueness.* If $h_1,h_2:\\overline X'\\to\\overline X$ are $S$-morphisms with\n$h_1j'=j=h_2j'$, they agree on the scheme-theoretically dense open\n$j'(X)$, and $\\overline X\\to S$ is separated; by\n[lemma-nagata-ext-scheme-theoretically-dominant-separated] $h_1=h_2$.",
+   "text": "Properness. The two compactifications give proper structure maps $p'$ and $p$ by [def-nagata-compactification]. In particular $p$ is separated by [def-weil-proper-morphism]. Apply [lem-weil-pbc-proper-over-separated] to the triangle $\\overline X'\\xrightarrow{h}\\overline X\\xrightarrow{p}S$, whose composite is $p'$. Its source is proper over $S$ and its target is separated over $S$, so $h$ is proper. This packages exactly the graph factorization of the blueprint's first paragraph (Stacks Tag 01W6).",
    "uses": [
+    "def-nagata-compactification",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-over-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.proof.md",
+    "place": "Proof, Properness; Stacks morphisms.tex, Tag 01W6 (lemma-image-proper-scheme-closed), part (2)"
+   }
+  },
+  {
+   "text": "Form the open subscheme $V=h^{-1}(j(X))$ of $\\overline X'$ and write $i:V\\hookrightarrow\\overline X'$. By [def-weil-open-immersion], $j$ identifies $X$ with its open image. Thus the fibre product $\\overline X'\\times_{\\overline X}X$ is $V$, with second projection $g=j^{-1}\\circ h|_V:V\\to X$ [def-pc-base-change]. Since $h$ is proper by Step 1, [lem-weil-pbc-proper-base-change] makes $g$ proper; it is therefore separated [def-weil-proper-morphism]. The equality $hj'=j$ defines a map $s:X\\to V$ with $is=j'$ and $gs=\\mathrm{id}_X$: the second equality follows by applying the inverse of the isomorphism $X\\simeq j(X)$ to $hj'=j$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.proof.md",
+    "place": "Proof, Inverse image of X, construction of V and g; Stacks morphisms.tex, Tag 01W4 (lemma-base-change-proper)"
+   }
+  },
+  {
+   "text": "The map $s$ of Step 2 is a section of the separated morphism $g$. Hence [lem-weil-pbc-section-separated-closed-immersion] makes $s$ a closed immersion. Its image is exactly $j'(X)$, viewed inside $V$, since $is=j'$. This image is closed by [def-weil-closed-immersion] and open because $j'$ is an open immersion [def-weil-open-immersion]. Consequently the complement $V''=V\\setminus j'(X)$ is open in $V$, and hence open in $\\overline X'$. No assertion that an arbitrary morphism factors through a locally closed subscheme merely from its pointwise image is used: $s$ was constructed through an open subscheme in Step 2.",
+   "uses": [
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.proof.md",
+    "place": "Proof, Inverse image of X, section is closed; Stacks schemes.tex, Tag 01KT (lemma-section-immersion)"
+   }
+  },
+  {
+   "text": "By [def-nagata-dense-compactification] and [def-nagata-scheme-theoretically-dense-open], quasi-compactness of $j'$ identifies its density with injectivity of $\\mathcal O_{\\overline X'}\\to j'_*\\mathcal O_X$. Restrict this injective sheaf map to the open $V''$ from Step 3. For every open $W\\subseteq V''$ its target has sections $\\mathcal O_X((j')^{-1}W)=\\mathcal O_X(\\varnothing)=0$, since $W\\cap j'(X)=\\varnothing$. Thus $\\mathcal O_{V''}=0$. Any affine open $\\operatorname{Spec}A$ of $V''$ then has $A=0$, so has no prime ideals and is empty. Such affine opens cover $V''$, giving $V''=\\varnothing$. Therefore $V=j'(X)$. These opens carry the restrictions of the same structure sheaf of $\\overline X'$, so this is equality of open subschemes, not only of point sets. Together with the two given commutativities and the quasi-compactness hypotheses, it is precisely a refinement in [det-nagata-definition-refinement].",
+   "uses": [
+    "def-nagata-dense-compactification",
+    "def-nagata-scheme-theoretically-dense-open",
+    "det-nagata-definition-refinement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.proof.md",
+    "place": "Proof, Inverse image of X, restriction to V double-prime and vanishing; Stacks morphisms.tex, Tags 01RD (lemma-scheme-theoretically-dense-quasi-compact) and 01RE (lemma-characterize-scheme-theoretically-dense)"
+   }
+  },
+  {
+   "text": "Let $h_1,h_2:\\overline X'\\to\\overline X$ be any two $S$-morphisms with $h_1j'=j=h_2j'$. Both composites with $p$ equal $p'$. The map $p$ is separated because it is proper [def-nagata-compactification, def-weil-proper-morphism], and $j'$ is scheme-theoretically dominant by the density hypothesis [def-nagata-dense-compactification]. Apply [lemma-nagata-ext-scheme-theoretically-dominant-separated] with $s=p$, $T=\\overline X'$, $W=X$, and $\\iota=j'$: its equality over the base and its equality after $\\iota$ are exactly the two displayed identities. It gives $h_1=h_2$. The originally supplied $h$ is one such map, so it is unique.",
+   "uses": [
+    "def-nagata-compactification",
+    "def-weil-proper-morphism",
+    "def-nagata-dense-compactification",
     "lemma-nagata-ext-scheme-theoretically-dominant-separated"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.proof.md",
+    "place": "Proof, Uniqueness; Stacks morphisms.tex, Tag 01RH (lemma-equality-of-morphisms)"
+   }
   }
  ],
  "proof_deps": [
+  "def-nagata-compactification",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-over-separated",
+  "def-weil-open-immersion",
+  "def-pc-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "def-weil-closed-immersion",
+  "def-nagata-dense-compactification",
+  "def-nagata-scheme-theoretically-dense-open",
+  "det-nagata-definition-refinement",
   "lemma-nagata-ext-scheme-theoretically-dominant-separated"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-morphisms.proof.md",
+  "place": "Proof, all three paragraphs; graph properness and section argument verified against Stacks Tags 01W6, 01W4, 01KT, 01RD, 01RE, 01RH"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between compactifications commuting with a schematically dense open is proper, cartesian over the open, and unique",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.ValuativeCriterion.Uniqueness, AlgebraicGeometry.ValuativeCriterion, AlgebraicGeometry.ValuativeCriterion.existence, AlgebraicGeometry.ValuativeCriterion.Existence, AlgebraicGeometry.ValuativeCriterion.uniqueness, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.ValuativeCriterion.iff, AlgebraicGeometry.IsProper",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; properness and section closedness hits are covered by existing DAG Mathlib leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp|graph|section",
+   "results": "Actual search: 5 hits; 27, 30, 111, 121, 124. Subdirectory: AlgebraicGeometry/Morphisms/Proper.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; properness and section closedness hits are covered by existing DAG Mathlib leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsSchemeTheoreticallyDominant",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; properness and section closedness hits are covered by existing DAG Mathlib leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a dense compactification are proper and unique and have no additional preimages of the open source",
+   "results": "Actual search: 8 hits; IsProperMap, AlgebraicGeometry.IsDominant.mk, AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.IsProper.mk, OnePoint.denseRange_coe, OnePoint.isDenseEmbedding_coe, denseRange_preStoneCechUnit, Compactum.instFunLikeHomA",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; properness and section closedness hits are covered by existing DAG Mathlib leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper.of_comp|IsClosedImmersion.of_comp|SchemeTheoreticallyDominant|ext_of",
+   "results": "Actual search: 17 hits; Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean. Subdirectory: AlgebraicGeometry/Morphisms",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; properness and section closedness hits are covered by existing DAG Mathlib leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion.of_comp",
+   "results": "Actual search: 1 hits; AlgebraicGeometry.IsClosedImmersion.of_comp",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; properness and section closedness hits are covered by existing DAG Mathlib leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism from a proper scheme to a separated scheme is proper; a section over a schematically dense quasi-compact open forces the inverse image of that open to equal it",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsProper.of_comp, AlgebraicGeometry.IsProper.of_comp_of_isSeparated, AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.IsProper, AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; properness and section closedness hits are covered by existing DAG Mathlib leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "Compactification|isSchemeTheoreticallyDominant_iff|isIso_iff_ker_eq_bot",
+   "results": "Actual second-reader search: 9 hits; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; subdirectory: AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the complete three-clause item; returned open-immersion and kernel/dominance statements do not assert its inverse-image conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a proper scheme morphism that contains a schematically dense open is an isomorphism onto the inverse image of that open",
+   "results": "Actual second-reader search: 8 hits; AlgebraicGeometry.isIso_of_isOpenImmersion_of_opensRange_eq_top, AlgebraicGeometry.Scheme.Hom.isIso_app, AlgebraicGeometry.Scheme.Hom.opensRange_of_isIso, AlgebraicGeometry.Scheme.Hom.isoOpensRange, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatAppObjOpensOpensFunctor, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE, AlgebraicGeometry.instIsIsoSchemeMorphismRestrict, AlgebraicGeometry.Scheme.Opens.instIsIsoCommRingCatAppLEιTopToScheme",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the complete three-clause item; returned open-immersion and kernel/dominance statements do not assert its inverse-image conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSchemeTheoreticallyDominant, IsPullback",
+   "results": "Actual second-reader search: 0 hits; ; loogle: unknown identifier 'IsPullback'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle did not recognize the pullback identifier; not evidence of absence; followed by the valid class-name query"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSchemeTheoreticallyDominant, CategoryTheory.Limits.IsPullback",
+   "results": "Actual second-reader search: 0 hits; ; loogle: unknown identifier 'CategoryTheory.Limits.IsPullback'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle did not recognize the pullback identifier; not evidence of absence; followed by the valid class-name query"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSchemeTheoreticallyDominant",
+   "results": "Actual second-reader search: 12 hits; AlgebraicGeometry.instIsMultiplicativeSchemeIsSchemeTheoreticallyDominant, AlgebraicGeometry.IsSchemeTheoreticallyDominant, AlgebraicGeometry.instIsSchemeTheoreticallyDominantOfIsIsoScheme, AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_isDominant, AlgebraicGeometry.instIsDominantOfIsSchemeTheoreticallyDominantOfQuasiCompact, AlgebraicGeometry.IsSchemeTheoreticallyDominant.isReduced, AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isDominant, AlgebraicGeometry.IsSchemeTheoreticallyDominant.ker_eq_bot",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the complete three-clause item; returned open-immersion and kernel/dominance statements do not assert its inverse-image conclusion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -63,5 +211,22 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-comp-category"
+ "unit": "sk-prop-nagata-sketch-comp-category",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-nagata-refinement-morphisms",
+  "worker": "stage1",
+  "summary": "Made explicit the quasi-compactness required by the current refinement definition, with the current-compactification mismatch and counterexample documented in report.md. Split the three paragraphs into five steps using existing nodes only: proper-over-separated, proper base change, section closedness, elementary restriction of density, and separated-target rigidity. Checked project declarations; the current general blueprint statement cannot attach because the inverse-image declaration requires quasi-compactness. No new nodes.",
+  "blueprint": "Realizes Proof/Properness by the graph-factorization lemma 01W6 (step 1), Proof/Inverse image of X by V and its section (steps 2-3) and the sheaf-injectivity restriction (step 4), and Proof/Uniqueness by rigidity (step 5). The explicit quasi-compactness is already required by the refinement definition and holds in the parent unit’s finite-type setting.",
+  "tool_uses": [],
+  "statement_dispute": "The current compactification definition drops quasi-compactness, but det-nagata-definition-refinement still requires it. Added j,j′ quasi-compact explicitly to preserve that referenced conclusion and the source proof’s injective-sheaf density argument; see report.md for the non-quasi-compact dense-open counterexample."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q54-db97667a7",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-db97667a7 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, current blueprint updates, and Stacks sources 01W6, 01W4, 01KT, 01RD, 01RE, and 01RH. All five steps hold. The reported quasi-compactness correction resolves a genuine refinement-definition mismatch and preserves the parent unit and sole existing citer. No new nodes, cycles, target changes, or reviewer repairs. Concrete checks recorded in review.md."
+ }
 }
