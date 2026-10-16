@@ -31,9 +31,122 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first record the closure arguments needed below, directly from the cited Joyal weak factorization systems. Isomorphisms are trivial fibrations: their inverses solve every lifting square against a cofibration. Trivial cofibrations are precisely the maps lifting on the left against every fibration. A pushout of such a map is again such a map: a lifting square out of the pushout restricts to one for the original map, and its filler extends over the pushout by its universal property. A coproduct of trivial cofibrations is again a trivial cofibration: restrict a lifting square to each summand, choose its filler, and assemble the fillers by the coproduct universal property. Dually, pullbacks of trivial fibrations are trivial fibrations, since a square into a pullback is a square into the original trivial fibration with its other coordinate prescribed; the resulting filler and that prescribed coordinate give the filler into the pullback. Composites of trivial fibrations are trivial fibrations by two successive lifts. All these are the lifting classes of [lem-coef-joyal-model-structure], so no general closure assertion about arbitrary weak equivalences is being assumed. Every simplicial set is cofibrant, because its initial map is degreewise injective.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01HU",
+    "place": "Remark 4.6.2.7, model-category lifting preparation for its pushout argument; explicit argument supplied by the worker, online source not archived under literature/."
+   }
+  },
+  {
+   "text": "If $u:U\\to V$ is a categorical equivalence and $K$ any small simplicial set, then $u\\times1_K$ is a categorical equivalence. Indeed, for every sufficiently large quasicategory $\\mathcal E$, currying gives the actual simplicial identifications $\\operatorname{Fun}(V\\times K,\\mathcal E)=\\operatorname{Fun}(V,\\operatorname{Fun}(K,\\mathcal E))$ and the corresponding identification for $U$. In degree $r$ these are the bijections between maps $V\\times K\\times\\Delta^r\\to\\mathcal E$ and their curried maps, using the coordinate permutation; these bijections commute with every simplex operator. The restriction is exactly $u^*$ with target $\\operatorname{Fun}(K,\\mathcal E)$, which is a quasicategory by [lem-cbc-internal-hom-quasicategory]. Its $h$ is an equivalence by the defining test for $u$. Products in the other order follow by coordinate permutation, which is an isomorphism and hence a categorical equivalence by step 1. Composing $f\\times1_Y$ with $1_{X'}\\times g$ proves that $f\\times g$ is a categorical equivalence; multiplying it by either $\\Delta^1$ or its boundary preserves this conclusion. No fibrancy of $U,V,K$ is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-internal-hom-quasicategory",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01EE",
+    "place": "Remark 4.5.4.7, exponential proof; explicit argument supplied by the worker, online source not archived under literature/."
+   }
+  },
+  {
+   "text": "The map $f\\amalg g:X\\amalg Y\\to X'\\amalg Y'$ is a categorical equivalence. Apply the cofibrant clause of [lem-coef-brown-split-factorizations] separately to $f$ and $g$. Write the resulting factorizations $f=p_fi_f$, $g=p_gi_g$, with $p_fs_f=1_{X'}$, $p_gs_g=1_{Y'}$, where $p_f,p_g$ are trivial fibrations and $i_f,i_g,s_f,s_g$ are cofibrations. Since $f,g,p_f,p_g$ are weak equivalences, two-out-of-three makes $i_f,i_g,s_f,s_g$ trivial cofibrations. Step 1 makes $i_f\\amalg i_g$ and $s_f\\amalg s_g$ trivial cofibrations. The equation $(p_f\\amalg p_g)(s_f\\amalg s_g)=1$ and two-out-of-three make $p_f\\amalg p_g$ a weak equivalence. Therefore $(p_f\\amalg p_g)(i_f\\amalg i_g)=f\\amalg g$ is a weak equivalence. The factorization hypotheses are exactly the two weak factorization systems of the Joyal model structure; every object is cofibrant by step 1.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01HU",
+    "place": "Remark 4.6.2.7, coproduct component of its cube; explicit argument supplied by the worker, online source not archived under literature/."
+   }
+  },
+  {
+   "text": "Here is an explicit gluing argument for the cube needed in the next step. Consider a map $\\alpha$ of spans $S=(S_X\\leftarrow S_A\\hookrightarrow S_B)$ to $T=(T_X\\leftarrow T_A\\hookrightarrow T_B)$, with the two indicated right legs degreewise injective and all three components of $\\alpha$ categorical equivalences. Put $D=S\\amalg T$ componentwise, with $r:D\\to T$ equal to $(\\alpha,1)$. Factor $r_X$ as a cofibration $h_X:D_X\\hookrightarrow Z_X$ followed by a trivial fibration $p_X:Z_X\\to T_X$. Next factor the induced map $D_A\\to T_A\\times_{T_X}Z_X$ as a cofibration $h_A:D_A\\hookrightarrow Z_A$ followed by a trivial fibration. Projection defines $Z_A\\to Z_X$ and $p_A:Z_A\\to T_A$. The projection $T_A\\times_{T_X}Z_X\\to T_A$ is a pullback of $p_X$, so $p_A$ is a trivial fibration by step 1. Finally factor the induced map $D_B\\amalg_{D_A}Z_A\\to T_B$ as a cofibration into $Z_B$ followed by a trivial fibration $p_B:Z_B\\to T_B$. This defines a span $Z$ and maps $i:S\\to Z$, $s:T\\to Z$, $p:Z\\to T$, with $pi=\\alpha$, $ps=1$. All factorizations exist in the same universe by [lem-coef-joyal-model-structure]. Each component of $p$ is a trivial fibration, hence each component of $i,s$ is a weak equivalence by two-out-of-three. The $X$ and $A$ components of $i,s$ are monomorphisms. For either $u:S\\to Z$ or $u:T\\to Z$, its relative $B$ map $S_B\\amalg_{S_A}Z_A\\to Z_B$ (respectively $T_B\\amalg_{T_A}Z_A\\to Z_B$) is also a monomorphism: in each degree, $D_B\\amalg_{D_A}Z_A$ consists of $Z_A$ and the disjoint complements $S_B\\setminus S_A$, $T_B\\setminus T_A$. Each displayed relative source contains $Z_A$ and just its own complement, and the final factorization into $Z_B$ is injective.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01HU",
+    "place": "Remark 4.6.2.7, supporting homotopy-invariance argument; first half of a direct finite factorization proof; explicit argument supplied by the worker, online source not archived under literature/."
+   }
+  },
+  {
+   "text": "Continue step 4. For either $u:R\\to Z$, where $R=S$ or $T$, the maps $u_X,u_A$ are trivial cofibrations, since they are monomorphisms and weak equivalences. Let $V=R_B\\amalg_{R_A}Z_A$ and let $v:V\\to Z_B$ be its relative $B$ map. The map $R_B\\to V$ is a pushout of $u_A$, hence a trivial cofibration by step 1. Its composite with $v$ is $u_B$, a weak equivalence. Thus $v$ is a weak equivalence by two-out-of-three; it is a monomorphism by step 4, hence a trivial cofibration. On span pushouts, the induced map factors as\n$$R_X\\amalg_{R_A}R_B\\longrightarrow Z_X\\amalg_{R_A}R_B\\cong Z_X\\amalg_{Z_A}V\\longrightarrow Z_X\\amalg_{Z_A}Z_B.$$\nThe first arrow is a pushout of $u_X$ and the last a pushout of $v$, so both are trivial cofibrations. The middle isomorphism follows by the pushout universal property: a map out of either side is a pair of maps out of $Z_X,R_B$ agreeing on $R_A$; the map on $Z_A$ is already prescribed by $Z_A\\to Z_X$. Consequently the induced maps on pushouts for both $i$ and $s$ are weak equivalences. Since $ps=1$, two-out-of-three makes the induced map for $p$ a weak equivalence, and hence also the induced map for $\\alpha=pi$. This proves the gluing assertion with only one injective leg in each span. In particular, no injectivity of the left projection or of $\\alpha$ has been assumed.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01HU",
+    "place": "Remark 4.6.2.7, supporting homotopy-invariance argument; second half of the direct finite factorization proof; explicit argument supplied by the worker, online source not archived under literature/."
+   }
+  },
+  {
+   "text": "Define $A=X\\times\\partial\\Delta^1\\times Y$, $B=X\\times\\Delta^1\\times Y$, and $L=X\\amalg Y$. Here $\\partial\\Delta^1$ is the simplicial subset of the two constant maps to $[1]$; on the zero endpoint send $(x,0,y)$ to $x$, and on the one endpoint send $(x,1,y)$ to $y$. The inclusion $A\\hookrightarrow B$ is degreewise injective. The pushout of the span $L\\leftarrow A\\hookrightarrow B$ is precisely the quotient defining $X\\diamond Y$ in [lem-coef-infinity-blunt-sharp-join-equivalence]. Define $A',B',L'$ in the same way for $X',Y'$. The maps $f\\times1_{\\partial\\Delta^1}\\times g$, $f\\times1_{\\Delta^1}\\times g$, $f\\amalg g$ form a map of these spans: each endpoint projection commutes with $f$ or $g$, and the cylinder inclusion commutes with the product maps. All three maps are weak equivalences by steps 2 and 3. Apply steps 4-5 to conclude that the actual induced map $f\\diamond g:X\\diamond Y\\to X'\\diamond Y'$ is a categorical equivalence. The two left legs are only projections, which is why the one-injective-leg formulation was checked explicitly.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-blunt-sharp-join-equivalence",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01HU",
+    "place": "Remark 4.6.2.7, its displayed cube of endpoint and cylinder spans; explicit argument supplied by the worker, online source not archived under literature/."
+   }
+  },
+  {
+   "text": "For any simplicial sets $U,V$, [lem-coef-infinity-blunt-sharp-join-equivalence] gives the actual comparison $c_{U,V}:U\\diamond V\\to U\\star V$ and, for every sufficiently large quasicategory $\\mathcal E$, a simplicial quasi-inverse to $c_{U,V}^*$ with coherent natural equivalences of both composites with the identity. These induce ordinary natural isomorphisms after $h$. To see this directly from [def-cbc-enhanced-diagrams-cones], evaluate the inverse edge and its two inverse-triangle witnesses at each object to obtain inverse component arrows in $h$. For each source edge the two triangles in its product with $\\Delta^1$ give the naturality square in $h$, since their long edges agree; the square therefore also holds for composites of generating edges. The inverse-triangle witnesses give the inverse equations for the component arrows. Thus $h(c_{U,V}^*)$ is an equivalence of categories, and $c_{U,V}$ is a categorical equivalence in the exact testing convention of [lem-coef-joyal-model-structure]. Apply this to $(X,Y)$ and $(X',Y')$.",
+   "uses": [
+    "lem-coef-infinity-blunt-sharp-join-equivalence",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01HV",
+    "place": "Theorem 4.6.2.8; passing from the existing stronger functor-equivalence statement to the hFun test; explicit argument supplied by the worker, online source not archived under literature/."
+   }
+  },
+  {
+   "text": "There is a strictly commutative comparison square\n$$c_{X',Y'}\\,(f\\diamond g)=(f\\star g)\\,c_{X,Y}.$$\nOn each pure simplex both sides are $f$ or $g$. On a cylinder simplex $(x,t,y)$, put $I_0=t^{-1}(0)$ and $I_1=t^{-1}(1)$, the initial and final ordered blocks. Both composites restrict $f(x)$ to $I_0$ and $g(y)$ to $I_1$ and concatenate them. Equality holds because simplicial maps commute with restrictions, including a block becoming empty. The endpoint relations are respected, so the equality descends to the blunt-join quotient. By steps 6-7, $c_{X',Y'}$, $f\\diamond g$ and $c_{X,Y}$ are categorical equivalences. The two-out-of-three assertion of [lem-coef-joyal-model-structure] first makes their composite $c_{X',Y'}(f\\diamond g)$ a categorical equivalence and then makes $f\\star g$ one. All constructions are degreewise and valid when any factor is empty; no quasicategory or finiteness assumption on the four factors entered the proof.",
+   "uses": [
+    "lem-coef-infinity-blunt-sharp-join-equivalence",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01HW",
+    "place": "Corollary 4.6.2.9, its comparison square and two-out-of-three conclusion; explicit argument supplied by the worker, online source not archived under literature/."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-joyal-model-structure",
+  "def-weil-pbc-category-colimit",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-internal-hom-quasicategory",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-infinity-blunt-sharp-join-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01HW",
+  "place": "Corollary 4.6.2.9 and Remark 4.6.2.7 (01HU), with the requisite one-injective-leg gluing argument expanded directly from the Joyal weak factorization systems. Online sources read 2026-10-17, not archived under literature/; WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,10 +203,80 @@
    "results": "{\"t\": \"2026-10-16T20:08:19Z\", \"tool\": \"grep\", \"query\": \"Joyal|categoricalEquivalence|CategoricalEquivalence|join.*[Ee]quiv|[Ee]quiv.*join\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\"], \"digest\": \"feb76b4d9aa0d6fc\"}",
    "date": "2026-10-16",
    "verdict": "No match: the five hits are in Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean:13-69; read lines 13-77. They concern abstract lifting axioms, not the Joyal model structure or joins."
+  },
+  {
+   "tool": "grep",
+   "query": "join.*[Ee]quiv|[Ee]quiv.*join|categoricalEquivalence|CategoricalEquivalence",
+   "results": "{\"t\": \"2026-10-16T20:36:11Z\", \"tool\": \"grep\", \"query\": \"join.*[Ee]quiv|[Ee]quiv.*join|categoricalEquivalence|CategoricalEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Join/Basic.lean:624-653 (ordinary categorical joins only), Quasicategory/StrictBicategory.lean:13-74 (bicategory construction only), ModelCategory/JoyalTrick.lean:13-85 (abstract lifting trick), and ModelCategory/Instances pushout hits (trivial-cofibration pushouts only). None states homotopicality of joins of arbitrary simplicial sets. The generic span-comparison search was exploratory; its hits also do not state the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Joining two weak equivalences in the Joyal model structure preserves categorical equivalence",
+   "results": "{\"t\": \"2026-10-16T20:36:12Z\", \"tool\": \"leansearch\", \"query\": \"Joining two weak equivalences in the Joyal model structure preserves categorical equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceCompOfIsStableUnderCompositionWeakEquivalences\", \"HomotopicalAlgebra.weakEquivalence_of_precomp\", \"HomotopicalAlgebra.ModelCategory.cm2\", \"HomotopicalAlgebra.weakEquivalence_postcomp_iff\", \"HomotopicalAlgebra.WeakEquivalence.mk\", \"HomotopicalAlgebra.weakEquivalences\", \"CategoryTheory.Functor.isEquivalence_trans\", \"HomotopicalAlgebra.weakEquivalence_precomp_iff\"], \"digest\": \"230ad9f5ac514153\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Join/Basic.lean:624-653 (ordinary categorical joins only), Quasicategory/StrictBicategory.lean:13-74 (bicategory construction only), ModelCategory/JoyalTrick.lean:13-85 (abstract lifting trick), and ModelCategory/Instances pushout hits (trivial-cofibration pushouts only). None states homotopicality of joins of arbitrary simplicial sets. The generic span-comparison search was exploratory; its hits also do not state the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"join\"",
+   "results": "{\"t\": \"2026-10-16T20:36:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"disjoint_nhdsSet_principal\", \"disjoint_principal_nhdsSet\", \"SeparatedNhds.disjoint_nhdsSet\", \"IsCompact.disjoint_nhdsSet_left\", \"IsCompact.disjoint_nhdsSet_right\", \"nhdsSet_prod_le_of_disjoint_cocompact\", \"prod_nhdsSet_le_of_disjoint_cocompact\", \"IsCompact.disjoint_nhdsSet_nhds\"], \"digest\": \"f4b4f5f75c1ca3f3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Join/Basic.lean:624-653 (ordinary categorical joins only), Quasicategory/StrictBicategory.lean:13-74 (bicategory construction only), ModelCategory/JoyalTrick.lean:13-85 (abstract lifting trick), and ModelCategory/Instances pushout hits (trivial-cofibration pushouts only). None states homotopicality of joins of arbitrary simplicial sets. The generic span-comparison search was exploratory; its hits also do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The join of categorical equivalences between arbitrary simplicial sets is a categorical equivalence",
+   "results": "{\"t\": \"2026-10-16T20:36:14Z\", \"tool\": \"leanfinder\", \"query\": \"The join of categorical equivalences between arbitrary simplicial sets is a categorical equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.isEquivalenceMapPair\", \"SSet.instBalanced\", \"SimplexCategory.SkeletalFunctor.isEquivalence\", \"CategoryTheory.Join.mapPairEquiv\", \"SSet.hasColimits\", \"SSet.largeCategory\", \"SSet.Subcomplex.topIso\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\"], \"digest\": \"4077a4cf743b5a37\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Join/Basic.lean:624-653 (ordinary categorical joins only), Quasicategory/StrictBicategory.lean:13-74 (bicategory construction only), ModelCategory/JoyalTrick.lean:13-85 (abstract lifting trick), and ModelCategory/Instances pushout hits (trivial-cofibration pushouts only). None states homotopicality of joins of arbitrary simplicial sets. The generic span-comparison search was exploratory; its hits also do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "isEquivalenceMapPair|def mapPairEquiv",
+   "results": "{\"t\": \"2026-10-16T20:36:52Z\", \"tool\": \"grep\", \"query\": \"isEquivalenceMapPair|def mapPairEquiv\", \"sub\": \"CategoryTheory/Join/Basic.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"634\", \"651\"], \"digest\": \"02601c77ae3f8b6a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Join/Basic.lean:624-653 (ordinary categorical joins only), Quasicategory/StrictBicategory.lean:13-74 (bicategory construction only), ModelCategory/JoyalTrick.lean:13-85 (abstract lifting trick), and ModelCategory/Instances pushout hits (trivial-cofibration pushouts only). None states homotopicality of joins of arbitrary simplicial sets. The generic span-comparison search was exploratory; its hits also do not state the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.QCat",
+   "results": "{\"t\": \"2026-10-16T20:36:53Z\", \"tool\": \"loogle\", \"query\": \"SSet.QCat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.QCat.bicategory\", \"SSet.QCat.strictBicategory\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.QCat.forgetEnrichment.equiv\"], \"digest\": \"afef6015774029a2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Join/Basic.lean:624-653 (ordinary categorical joins only), Quasicategory/StrictBicategory.lean:13-74 (bicategory construction only), ModelCategory/JoyalTrick.lean:13-85 (abstract lifting trick), and ModelCategory/Instances pushout hits (trivial-cofibration pushouts only). None states homotopicality of joins of arbitrary simplicial sets. The generic span-comparison search was exploratory; its hits also do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The simplicial join is homotopical for Joyal weak equivalences in both variables",
+   "results": "{\"t\": \"2026-10-16T20:36:54Z\", \"tool\": \"leanfinder\", \"query\": \"The simplicial join is homotopical for Joyal weak equivalences in both variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_trivialFibrations\"], \"digest\": \"c2fadcdfb98cd96d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Join/Basic.lean:624-653 (ordinary categorical joins only), Quasicategory/StrictBicategory.lean:13-74 (bicategory construction only), ModelCategory/JoyalTrick.lean:13-85 (abstract lifting trick), and ModelCategory/Instances pushout hits (trivial-cofibration pushouts only). None states homotopicality of joins of arbitrary simplicial sets. The generic span-comparison search was exploratory; its hits also do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "join|categorical equivalence|Joyal",
+   "results": "{\"t\": \"2026-10-16T20:37:19Z\", \"tool\": \"grep\", \"query\": \"join|categorical equivalence|Joyal\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Join/Basic.lean:624-653 (ordinary categorical joins only), Quasicategory/StrictBicategory.lean:13-74 (bicategory construction only), ModelCategory/JoyalTrick.lean:13-85 (abstract lifting trick), and ModelCategory/Instances pushout hits (trivial-cofibration pushouts only). None states homotopicality of joins of arbitrary simplicial sets. The generic span-comparison search was exploratory; its hits also do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of spans in a model category which is a weak equivalence on all objects and has cofibration legs induces a weak equivalence on pushouts",
+   "results": "{\"t\": \"2026-10-16T20:37:54Z\", \"tool\": \"leanfinder\", \"query\": \"A map of spans in a model category which is a weak equivalence on all objects and has cofibration legs induces a weak equivalence on pushouts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeCofibrations\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations_1\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\"], \"digest\": \"1f89298d169021e1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Join/Basic.lean:624-653 (ordinary categorical joins only), Quasicategory/StrictBicategory.lean:13-74 (bicategory construction only), ModelCategory/JoyalTrick.lean:13-85 (abstract lifting trick), and ModelCategory/Instances pushout hits (trivial-cofibration pushouts only). None states homotopicality of joins of arbitrary simplicial sets. The generic span-comparison search was exploratory; its hits also do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration|instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration|instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations",
+   "results": "{\"t\": \"2026-10-16T20:41:14Z\", \"tool\": \"grep\", \"query\": \"instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration|instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration|instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"sub\": \"AlgebraicTopology/ModelCategory/Instances.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: grep of generated instance names had no hits because Instances.lean declares these pushout instances anonymously. Read lines 208-218: they concern pushouts of trivial cofibrations, not homotopicality of simplicial joins."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-join-slice-diagram-isomorphisms",
@@ -101,5 +284,29 @@
   "group": "N2"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-join-preserves-categorical-equivalences",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Expanded the Kerodon blunt-to-sharp comparison proof, including products by currying, coproducts via Brown split factorizations, and a full finite factorization proof of gluing along one injective span leg. Avoided a detected cycle through the existing generic cofibrant-colimit comparison. No new nodes and no Mathlib match.",
+  "blueprint": "The place already identified in blueprint.from.place: the categorical-mapping-cylinder supporting argument for the join-slice comparison under the derived coefficient adjunction of prop-coef-integral-exceptional-adjoint, proof paragraph 2. Steps 1-6 supply homotopy invariance of the blunt join; steps 7-8 realize the comparison square of Kerodon 01HW.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-internal-hom-quasicategory",
+    "why": "Its statement supplies that Fun(K,E) is a quasicategory for arbitrary small K, needed to apply the defining categorical-equivalence test in the currying argument. No node of this unit supplies this basic internal-Hom fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-internal-hom-quasicategory"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NL-9b8c0e398",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-9b8c0e398 (reviewer sub-agent of L); spot-checked: I read the statement and all 8 steps in full against Kerodon 01HW, read online 2026-10-17. The statement matches it exactly: arbitrary simplicial sets, the same join formula, and the same hFun test from lem-coef-joyal-model-structure; no target is weakened. Steps 1-3: lifting-class closures; products by currying, with Fun(K,E) a quasicategory by lem-cbc-internal-hom-quasicategory; coproducts via the Brown split-factorization leaf, whose retract hypotheses follow from the Joyal lifting classes. Steps 4-5: I recomputed the gluing construction (D=S+T, factorizations through the pullback, span maps, injectivity of the relative B map from the complement decomposition, two pasting identifications); it is correct, needs one injective leg and no left properness. Step 6: the blunt-join span is exactly the quotient in the cited blunt-sharp node. Step 7: an equivalence edge gives natural isomorphisms after h. Step 8: the comparison square commutes on each simplex, then two-out-of-three. I computed the dependency closures: no cycle, and the claimed cycle through lem-coef-model-cofibrant-colimit-comparison (and lem-coef-all-cofibrant-left-proper) is confirmed. A grep for 01HW/01HU/01HV and join-invariance wording found no duplicate. Small cases: empty factor, and X=Y=Delta^0. All cited nodes are in the unit, are definitions, or have Mathlib status; I accept the tool_use for lem-cbc-internal-hom-quasicategory. Blueprint ancestry (prop-coef-integral-exceptional-adjoint, main-20261015, paragraph 'For K') is checked. No SGA. No fixes."
+ }
 }
