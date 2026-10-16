@@ -31,8 +31,86 @@
   "def-coef-infinity-fibrations",
   "def-coef-infinity-relative-cone"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Put $a=c|_K$, $x=c(*)$, and let $\\alpha:a\\to\\Delta_Kx$ be the coherent cocone induced by the join cocone. The horn/mapping-space equivalence in [lem-coef-infinity-cocartesian-mapping-criterion] converts the given cocartesian fibration to the hypothesis of [lem-coef-infinity-pointwise-cocartesian-transport]. We may therefore use that node's natural homotopy-fiber formulas for objects and for $K$-diagrams. Every strict fiber is a quasicategory: a lifting problem for an inner horn in the fiber is a lifting problem for $p$ over the constant simplex at its base vertex, so its inner-fibration filler remains in that fiber. For an edge $f:b\\to b'$, the transport functor $f_!$ comes with its transport homotopy $H:\\mathcal E_b\\times\\Delta^1\\to\\mathcal E$ over $f$, from the inclusion to $f_!$, whose edges $H|_{\\{y\\}\\times\\Delta^1}$ are cocartesian. Put $\\lambda=H\\circ(c\\times\\mathrm{id}_{\\Delta^1}):c\\to c_f$ with $c_f=f_!c$; it is a coherent transformation of $K^{\\triangleright}$-diagrams over the constant base transformation at $f$ whose vertex components are cocartesian. By the componentwise criterion of [lem-coef-infinity-pointwise-cocartesian-transport] (shape $K^{\\triangleright}$), $\\lambda$ is $p_{K^{\\triangleright}}$-cocartesian, and likewise its restrictions $\\lambda_a$ to $K$ and $\\lambda_x$ to the apex are $p_K$- and $p$-cocartesian; so that node's fiber formulas apply to these very lifts. Write $a_f,x_f,\\alpha_f$ for the boundary, apex and coherent cocone of $c_f$. This is a single compatible choice for all three pieces, and it is literally the cocone $f_!c$ of the statement, so no comparison between different transports is needed.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.3.1.10, transport of the entire given cocone; uses the pointwise transport theorem rather than the source slice comparison."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-relative-cone-constant-test], $c$ is a $p$-colimit diagram if and only if, for every $z\\in\\mathcal E$, the apex square is a homotopy pullback. Write $s=pz$ and abbreviate its four corners by\n$$U_z=\\operatorname{Map}_{\\mathcal E}(x,z),\\quad V_z=\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(a,\\Delta_Kz),\\quad S_z=\\operatorname{Map}_{\\mathcal B}(b,s),\\quad W_z=\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal B)}(\\Delta_Kb,\\Delta_Ks).$$\nThe top map sends $u$ to $\\Delta_K(u)\\alpha$. Since $c$ lies in a strict fiber, $p\\alpha$ is the identity coherent transformation of $\\Delta_Kb$, so the bottom map is exactly $\\delta:S_z\\to W_z$, $f\\mapsto\\Delta_K f$. All these are spaces and the square includes its specified coherent commutativity, as required by that node.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-constant-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.3.1.10, reduction to outgoing-arrow tests; Kerodon 7.1.6.19 (02X1), colimit dual and apex formulation."
+   }
+  },
+  {
+   "text": "Here is the space calculation for that square. Form its path pullback $P_z=V_z\\times^h_{W_z}S_z$ with projection to $S_z$, using the path model of [def-coef-infinity-relative-cone]. The square is a homotopy pullback exactly when its comparison $\\Phi_z:U_z\\to P_z$ is a weak equivalence. By [lem-coef-kan-pullback-path-comparison], $P_z$ is a Kan complex, and its projection to $S_z$ is a map of Kan complexes. Apply [lem-coef-spaces-homotopy-fiber-detection] to $\\Phi_z$ over the identity of the Kan complex $S_z$. It is an equivalence exactly when its map on homotopy fibers is one for every vertex $f\\in S_z$. The homotopy fiber of $P_z\\to S_z$ over $f$ is naturally equivalent to $\\operatorname{hofib}_{\\Delta_K f}(V_z\\to W_z)$: in path data a point is $(v,h,\\gamma,\\lambda)$, where $\\gamma$ joins the image of $v$ to $\\delta h$ and $\\lambda$ joins $h$ to $f$. Compose $\\gamma$ with $\\delta\\lambda$ to obtain the single path to $\\delta f$; conversely take $h=f$ and constant $\\lambda$. Allowing an intermediate endpoint and its path is the contractible path-space factor, so these maps are inverse up to the endpoint-preserving path homotopies, with all higher data. Consequently the condition is precisely that\n$$\\operatorname{hofib}_{f}(U_z\\to S_z)\\longrightarrow\\operatorname{hofib}_{\\Delta_K f}(V_z\\to W_z)$$\nis a weak equivalence for every edge $f:b\\to s$. Empty $S_z$ is covered by the same fiber-detection theorem; no surjectivity or Kan-fibration assumption on either vertical map is needed.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Mapping-space reconstruction of the fiber test in the proof of Proposition 4.3.1.10."
+   }
+  },
+  {
+   "text": "Fix $z$ and $f:b\\to s$, and use the transported cocone $c_f$ chosen in step 1. The object case of [lem-coef-infinity-pointwise-cocartesian-transport] identifies the source homotopy fiber in step 3 with $\\operatorname{Map}_{\\mathcal E_s}(x_f,z)$. Its $K$-diagram case, applied to the constant base transformation $\\Delta_K f$, identifies the target fiber with $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E_s)}(a_f,\\Delta_Kz)$; the strict fiber at a constant base diagram is exactly that functor category by the same node. Under these equivalences the actual fiber comparison is\n$$\\beta_{f,z}:\\operatorname{Map}_{\\mathcal E_s}(x_f,z)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E_s)}(a_f,\\Delta_Kz),\\qquad v\\longmapsto\\Delta_K(v)\\alpha_f.$$\nTo check the map, write the transport cylinder as $\\lambda:c\\to c_f$, with restrictions $\\lambda_a$ and $\\lambda_x$. Its coherent naturality square is $\\alpha_f\\lambda_a\\simeq\\Delta_K(\\lambda_x)\\alpha$. Precomposing $v$ with $\\lambda_x$ and then with $\\alpha$ therefore gives the same transformation and base path as first forming $\\Delta_K(v)\\alpha_f$ and then precomposing with $\\lambda_a$. These are exactly the two precomposition maps in the transport fiber equivalences. The equality is coherent on all simplices because it is the naturality square of that single cylinder, not a separately chosen family of objectwise comparisons. Thus the calculation identifies the comparison map itself.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.3.1.10, comparison after a cocartesian transformation; naturality of the mapping-fiber equivalences."
+   }
+  },
+  {
+   "text": "Assume first that every $f_!c$ is colimiting. For any $z\\in\\mathcal E$ and any $f:b\\to pz$, apply the cocone mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus] in the quasicategory $\\mathcal E_{pz}$. It makes $\\beta_{f,z}$ a weak equivalence, since $c_f$ is the specified transported colimit cocone. Steps 3-4 then make the apex square for this $z$ a homotopy pullback. This holds for all $z$, so step 2 proves that $c$ is a $p$-colimit diagram.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.3.1.10, implication from all transported colimits to a relative colimit."
+   }
+  },
+  {
+   "text": "Conversely suppose $c$ is a $p$-colimit diagram. Steps 2-4 show that $\\beta_{f,z}$ is a weak equivalence whenever $f:b\\to pz$. Fix $b'$ and an edge $f:b\\to b'$, and let $z$ vary over every object of $\\mathcal E_{b'}$. These are exactly the maps $\\beta_{f,z}$ required by the dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus], so $c_f=f_!c$ is a colimit in that fiber. The quantifier includes the degenerate edge at $b$. For $K=\\varnothing$, $\\operatorname{Fun}(K,\\mathcal E_s)$ is the one-point category, so the very same criterion says each $x_f$ is initial; for $K=\\Delta^0$ it says the transported cocone edge is an equivalence. Neither direction has assumed any colimit besides the particular $c_f$, nor weak contractibility of $K$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.3.1.10, reverse implication, with the identity and empty-shape cases explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -61,10 +139,66 @@
    "results": "{\"t\": \"2026-10-16T21:22:02Z\", \"tool\": \"grep\", \"query\": \"[Cc]ocartesian|[Cc]artesian.*[Cc]olimit|[Cc]olimit.*[Cc]artesian\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\"], \"digest\": \"886a3a3192064d07\"}",
    "date": "2026-10-17",
    "verdict": "No match. Read Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:108-145 (ordinary categories and set-valued natural transformations), Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-55 (ordinary Grothendieck construction), and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-77 (ordinary cocartesian morphisms). None states a relative colimit theorem for quasicategories or a coherent extension over an arbitrary simplicial parameter. The AlgebraicTopology grep and Loogle query returned no hits; LeanFinder also returned horn/cell colimits, which are ordinary colimits of simplicial sets, not relative colimits inside quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ocartesian|[Cc]olimit.*[Ff]iber|[Rr]elative.*[Cc]olimit",
+   "results": "{\"t\": \"2026-10-16T21:53:10Z\", \"tool\": \"grep\", \"query\": \"[Cc]ocartesian|[Cc]olimit.*[Ff]iber|[Rr]elative.*[Cc]olimit\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\"], \"digest\": \"886a3a3192064d07\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-55,129-145 and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-77. These quantify over ordinary Category instances, ordinary functors and ordinary cocones. Their fiberwise Grothendieck colimit or ordinary cocartesian universal properties do not state a quasicategorical relative mapping-space square criterion, and do not specialize to it in one line. Two distinct semantic phrasings returned these ordinary results. The quoted Quasicategory/colimit Loogle query returned no hits; the unquoted InnerFibration query failed to resolve that identifier and is not evidence of absence."
+  },
+  {
+   "tool": "loogle",
+   "query": "InnerFibration, colimit, cocartesian",
+   "results": "{\"t\": \"2026-10-16T21:53:10Z\", \"tool\": \"loogle\", \"query\": \"InnerFibration, colimit, cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'InnerFibration'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: the query could not be evaluated because Loogle reported unknown identifier InnerFibration. This query is not used as evidence of absence; the second quoted Quasicategory/colimit query and both semantic searches ran."
+  },
+  {
+   "tool": "leansearch",
+   "query": "fiberwise colimit criterion for relative colimits in a cocartesian fibration",
+   "results": "{\"t\": \"2026-10-16T21:53:11Z\", \"tool\": \"leansearch\", \"query\": \"fiberwise colimit criterion for relative colimits in a cocartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasColimit_of_hasColimit_fiberwiseColimit_of_hasColimit\", \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.fiberwiseColim\", \"CategoryTheory.Limits.hasColimit_fiberwiseColimit\", \"CategoryTheory.Limits.fiberwiseColimit\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone_pt\", \"CategoryTheory.Limits.fiberwiseColimitLimitIso_hom_app\"], \"digest\": \"0471cbb8115c0839\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-55,129-145 and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-77. These quantify over ordinary Category instances, ordinary functors and ordinary cocones. Their fiberwise Grothendieck colimit or ordinary cocartesian universal properties do not state a quasicategorical relative mapping-space square criterion, and do not specialize to it in one line. Two distinct semantic phrasings returned these ordinary results. The quoted Quasicategory/colimit Loogle query returned no hits; the unquoted InnerFibration query failed to resolve that identifier and is not evidence of absence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocone in a fiber of a cocartesian fibration is a relative colimit exactly when all outgoing cocartesian transports are colimits",
+   "results": "{\"t\": \"2026-10-16T21:53:12Z\", \"tool\": \"leanfinder\", \"query\": \"A cocone in a fiber of a cocartesian fibration is a relative colimit exactly when all outgoing cocartesian transports are colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit_pt\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone_ι_app\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit_ι_app\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone_pt\"], \"digest\": \"129f5fb50a585223\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-55,129-145 and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-77. These quantify over ordinary Category instances, ordinary functors and ordinary cocones. Their fiberwise Grothendieck colimit or ordinary cocartesian universal properties do not state a quasicategorical relative mapping-space square criterion, and do not specialize to it in one line. Two distinct semantic phrasings returned these ordinary results. The quoted Quasicategory/colimit Loogle query returned no hits; the unquoted InnerFibration query failed to resolve that identifier and is not evidence of absence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T21:59:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-55,129-145 and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-77. These quantify over ordinary Category instances, ordinary functors and ordinary cocones. Their fiberwise Grothendieck colimit or ordinary cocartesian universal properties do not state a quasicategorical relative mapping-space square criterion, and do not specialize to it in one line. Two distinct semantic phrasings returned these ordinary results. The quoted Quasicategory/colimit Loogle query returned no hits; the unquoted InnerFibration query failed to resolve that identifier and is not evidence of absence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Colimits relative to a functor of infinity categories are detected by homotopy fibers of mapping space squares and cocartesian pushforward",
+   "results": "{\"t\": \"2026-10-16T21:59:12Z\", \"tool\": \"leanfinder\", \"query\": \"Colimits relative to a functor of infinity categories are detected by homotopy fibers of mapping space squares and cocartesian pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.isColimitMapCoconePushoutCoconeEquiv\", \"CategoryTheory.Limits.hasColimit_fiberwiseColimit\", \"CategoryTheory.Limits.hasColimit_of_hasColimit_fiberwiseColimit_of_hasColimit\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"HomotopicalAlgebra.AttachCells.isColimit₂\"], \"digest\": \"b7e94a0150f15dc6\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:35-55,129-145 and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-77. These quantify over ordinary Category instances, ordinary functors and ordinary cocones. Their fiberwise Grothendieck colimit or ordinary cocartesian universal properties do not state a quasicategorical relative mapping-space square criterion, and do not specialize to it in one line. Two distinct semantic phrasings returned these ordinary results. The quoted Quasicategory/colimit Loogle query returned no hits; the unquoted InnerFibration query failed to resolve that identifier and is not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCocartesian|IsUniversalColimit|fiberwiseColimit",
+   "results": "{\"t\": \"2026-10-16T22:27:53Z\", \"tool\": \"grep\", \"query\": \"IsCocartesian|IsUniversalColimit|fiberwiseColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\"], \"digest\": \"34eba18c08c40b59\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Independent second reading: Mathlib/CategoryTheory/Limits/VanKampen.lean:38-68 defines universal colimits by stability under ordinary pullback; Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-77 defines ordinary cocartesian arrows; Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:120-145 concerns ordinary Grothendieck-construction colimits. Their Category hypotheses and set-valued hom types do not give the quasicategorical relative-colimit criterion or its homotopy-fiber comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal cocones in an infinity category over a base detected after pushforward to the target fibers",
+   "results": "{\"t\": \"2026-10-16T22:27:54Z\", \"tool\": \"leanfinder\", \"query\": \"Universal cocones in an infinity category over a base detected after pushforward to the target fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsUniversalColimit\", \"CategoryTheory.IsUniversalColimit.isColimit\", \"CategoryTheory.LiftableCocone\", \"CategoryTheory.Limits.isColimitOfIsPushoutOfIsConnected\", \"CategoryTheory.isUniversalColimit_extendCofan\", \"CategoryTheory.LiftableCocone.liftedCocone\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"HomotopicalAlgebra.AttachCells.isColimit₁\"], \"digest\": \"16c77112d23e30d1\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Independent second reading: Mathlib/CategoryTheory/Limits/VanKampen.lean:38-68 defines universal colimits by stability under ordinary pullback; Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:43-77 defines ordinary cocartesian arrows; Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:120-145 concerns ordinary Grothendieck-construction colimits. Their Category hypotheses and set-valued hom types do not give the quasicategorical relative-colimit criterion or its homotopy-fiber comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cocartesian-section-colimits",
@@ -84,5 +218,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent reconstruction of HTT Proposition 4.3.1.10 (printed pp. 265-266), replacing its slice/right-anodyne diagram with the existing constant-target criterion and an explicit mapping-space homotopy-fiber comparison. Kerodon 7.1.6.19 (02X1) supplies the relative square convention. Online sources are not archived in literature/."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-fiber-relative-colimit-criterion",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six steps prove both directions by the constant-target relative criterion, equivalence detection over the outgoing-edge space, and a natural calculation of the actual fiber map using one cocartesian cylinder. All ingredients are existing DAG nodes; zero new nodes and zero Mathlib leaves.",
+  "blueprint": "Supports paragraph 2 of the main-20261015 prop-coef-integral-exceptional-adjoint proof, the finite-level derived Hom adjunction before inverse limit. This is the historical fiber-colimit/section-colimit infrastructure chain under the coherent finite-level graph adjunction; no unit step or geometric route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic mapping-space universal property for a specified cocone in any quasicategory, used in steps 5-6. The bound unit provides no separate basic coherent-cocone criterion; this does not replace its biduality route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-4787977b1",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-4787977b1 (reviewer sub-agent of L); spot-checked: I read the item statement, all six steps and all eight cited statements in full. Source: HTT Prop 4.3.1.10 (printed p.265, proof p.266), read in the IAS PDF fetched to /tmp. It assumes a locally cocartesian fibration, an arbitrary K, a cocone in X_s and every e:s->s'; the item is its cocartesian special case and is not weakened. Kerodon 02X1 (7.1.6.19) gives the constant-test convention. Small cases agree: K empty or a point, p=id, a product fibration, and the Grothendieck construction over Delta^1 with a non-initial transport. Steps 2, 4, 5 and 6 are correct as written; step 4's naturality square is a restriction of one coherent cylinder. Two repairs. (1) Step 1 (E5/C4): it chose a separate lift c_f and claimed without citation that it represents f_!c. It now takes lambda=H(c x id) from f_!'s transport homotopy, so c_f=f_!c literally, and the componentwise criterion makes lambda and its restrictions cocartesian. (2) Step 3 (C1): homotopy-fiber-detection needs P_z to be a Kan complex. It now cites lem-coef-kan-pullback-path-comparison (same unit, no cycle), which is also added to proof_deps. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus in steps 5-6, a generic cocone criterion already accepted as a tool elsewhere. No SGA, no target node, unit realized fields unchanged. Existing unsplit node lem-coef-local-fiber-relative-colimit-test states the locally-cocartesian generalization; the report missed it, but both nodes predate the delivery and both are kept.; 1 file(s) fixed by the reviewer"
  }
 }
