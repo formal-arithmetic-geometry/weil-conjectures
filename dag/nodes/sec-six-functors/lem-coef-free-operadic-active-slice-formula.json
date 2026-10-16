@@ -20,11 +20,114 @@
  "kind": "statement",
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal I=\\Delta^{\\mathrm{op}}_{\\mathrm{int}}$ for the subcategory of inert base maps. The specified $\\mathcal M_{\\mathrm{triv}}$ is the pullback $\\mathcal M\\times_{\\Delta^{\\mathrm{op}}}\\mathcal I$, viewed over $\\Delta^{\\mathrm{op}}$. Inner horn fillers stay in this pullback: the only new base edge in an inner two-horn is a composite of inert arrows, again inert, and higher inner horns already contain every edge. Inert cocartesian lifts in $\\mathcal M$ stay in the pullback; restricting their mapping-space universal property shows that they remain cocartesian. Here one uses that for an inert $\\rho$ a base map $\\psi$ is inert exactly when $\\psi\\circ\\rho$ is: the opposite of $\\rho$ is an interval inclusion $j\\mapsto a+j$, which is injective with interval image, so its composite with the opposite of $\\psi$ is an interval inclusion exactly when the opposite of $\\psi$ is one. Hence over a non-inert $\\psi$ both fibers of the cocartesian square are empty, and over an inert $\\psi$ they are those of $\\mathcal M$. The fibers and the Segal decompositions are unchanged. The mapping-space Segal condition also restricts: for a base map opposite to $\\phi:[m]\\to[n]$, $m>0$, all its components to $[1]$ are inert exactly when $\\phi(i)-\\phi(i-1)=1$ for each $i$, which is exactly that $\\phi$ is an interval inclusion. For $m=0$ every map $[n]\\to[0]$ is inert, so its original condition is unchanged. Thus this is a generalized operad. It has the same small fibers and zero-fiber as $\\mathcal M$, and $\\tau$ is inert-preserving and the identity on that fiber. These checks use only the operad axioms, the definition of inert, and the cocartesian universal property.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition 3.4.1 and Remark 3.4.3; direct verification for the inert pullback."
+   }
+  },
+  {
+   "text": "Reconstruct an inert algebra from $P$ explicitly. At $y\\in\\mathcal M_{[n]}$ its value in $\\mathcal V^\\otimes_{[n]}\\simeq\\mathcal V^n$ is the tuple $(P(y_1),\\ldots,P(y_n))$, and over $[0]$ it is the unique empty tuple. An arrow over an inert map selects an interval of input colors; factor it through an inert cocartesian lift and then a vertical arrow. On the selected entries the latter gives arrows in $\\mathcal M_{[1]}$; apply $P$ to them. The product mapping-space decomposition in the target specifies the resulting arrow and every simplex from these components. For an arbitrary parameter simplex $\\Delta^k$, perform this construction with $P:\\mathcal M_{[1]}\\times\\Delta^k\\to\\mathcal V$; coordinate selection commutes with all faces, degeneracies, and composition, and all maps involving the target zero-fiber are unique. Hence this gives an inverse on coherent functor categories to restriction to $\\mathcal M_{[1]}$, not just on objects. The source and target Segal equivalences show the two composites equivalent to the identity. Inert maps go to inert maps by construction. Denote this reconstructed algebra by $\\bar P$. Apply [lem-coef-operadic-free-extension] to the inclusion checked in step 1, obtaining $F=\\tau_!\\bar P$ with unit $\\eta:\\bar P\\to\\tau^*F$. Its hypotheses hold: both operads are small, their zero-fibers are the same space, and tensor preserves all small colimits separately.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-operadic-free-extension",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition 3.4.5 (coordinate reconstruction for monoidal target); Theorem A.4.6."
+   }
+  },
+  {
+   "text": "Use [lem-coef-operadic-free-cocone-characterization] with $u=\\tau$ and $X=\\bar P$. It gives an algebra $F_0$ and unit $\\eta_0$ with operadically colimiting active cocones. Its mapping-space property and the adjunction of step 2 give mutually inverse algebra maps $F_0\\to F$ and $F\\to F_0$ carrying their units to one another: each composite corresponds to the original unit and hence to the identity under the same mapping-space equivalence. Consequently $F$ with its specified unit has these cocones as well. For a color $c$ their index is $K_c=\\mathcal M_{\\mathrm{triv}}\\times_{\\mathcal M}(\\mathcal M_{\\mathrm{act}})_{/c}$. Push the diagram $\\bar P|_{K_c}$ along its coherent base transformation to constant $[1]$ using [lem-coef-infinity-pointwise-cocartesian-transport]. This yields a coherent diagram $D_c:K_c\\to\\mathcal V$ and a cocone $D_c\\to F(c)$. The same node's mapping-space fiber formula identifies, for each $w\\in\\mathcal V$, active cocones from $\\bar P|_{K_c}$ to $w$ with coherent cocones from $D_c$ to $w$. Take empty fixed tuples in the new lemma: its restriction equivalence therefore says exactly that $D_c\\to F(c)$ is a colimiting cocone. This is the universal property of a colimit, with all coherent transformations retained. At $y$ over $[n]$, monoidal transport is $D_c(y\\to c)=P(y_1)\\otimes\\cdots\\otimes P(y_n)$, with the empty tensor $\\mathbf1$. The equivalence between this restriction property for every $w$ and initiality in the coherent cocone category of [def-cbc-enhanced-diagrams-cones] is the dual cone criterion of [lem-cbc-enhanced-functor-cone-calculus].",
+   "uses": [
+    "lem-coef-operadic-free-cocone-characterization",
+    "lem-coef-operadic-free-extension",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-coef-monoidal-infinity-category",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition A.4.1, Propositions A.4.3–A.4.4; Definition A.4.8; cocartesian tensor transport."
+   }
+  },
+  {
+   "text": "The index $K_c$ is the disjoint union of the full subcategories $\\mathcal P^{\\mathcal M}_{c,n}$. Indeed, a morphism from $(y\\to c)$ of arity $n$ to $(y'\\to c)$ of arity $m$ projects to an inert map $[n]\\to[m]$. Its opposite has form $j\\mapsto a+j$. The triangle to $c$ lies over the unique active maps to $[1]$; comparing the two endpoints gives $a=0$ and $a+m=n$, hence $m=n$ and the base map is the identity. This also excludes arrows between zero and positive arities. Every simplex has all its vertices of the same arity, so the assertion holds for the entire index infinity-category. All indices are small, being slices and pullbacks of small simplicial sets; the countable union is small in the fixed universe. Presentability supplies their colimits and the countable coproduct. To verify the desired formula with its cocone, a coherent cocone out of $D_c$ is precisely one coherent cocone on each disjoint component; maps out of the coproduct of those component colimits give exactly such families. Thus the coproduct in the statement is a colimit of $D_c$ and step 3 identifies it with $F(c)$. This is a coproduct over the objects $[n]$, not a colimit over all arrows of $\\Delta^{\\mathrm{op}}$. Both directions of this comparison use the mapping-space criterion for colimiting cocones of [lem-cbc-enhanced-functor-cone-calculus], together with $\\operatorname{Fun}(\\coprod_n K_n,\\mathcal V)=\\prod_n\\operatorname{Fun}(K_n,\\mathcal V)$.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-monoidal-infinity-category",
+    "def-coef-presentable-infinity-category",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition A.4.8 and Proposition A.4.9; explicit arity decomposition and colimit universal property."
+   }
+  },
+  {
+   "text": "The cocone of step 3 at $\\alpha:y\\to c$ is obtained by applying $\\eta$ to the tuple $y$ and then the operation $F(\\alpha)$. At $\\operatorname{id}_c$ it is $\\eta_c$ itself, since the operation of the identity arrow is the identity; this proves the unit formula. For $u:P\\to\\tau^*A$, reconstruct its inert-algebra transformation as in step 2. The mapping-space adjunction supplies the adjunct $h:F\\to A$ with $\\tau^*h\\circ\\eta=u$. Naturality of this algebra map at $\\alpha$ gives\n$$h_c\\,F(\\alpha)\\,(\\bigotimes_i\\eta_{y_i})=A(\\alpha)\\,(\\bigotimes_i u_{y_i}).$$\nThese are identities of coherent cocones, since $h$ is a transformation of the operadic functors. The colimit property therefore identifies $h_c$ with precisely the cocone map stated in the item. For $n=0$ the tensor of no maps is $\\operatorname{id}_{\\mathbf1}$, leaving the nullary operation $A(\\alpha):\\mathbf1\\to A(c)$. The identification of maps out of $F(c)$ with cocone maps out of $D_c$ is the mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus].",
+   "uses": [
+    "lem-coef-operadic-free-extension",
+    "def-coef-monoidal-infinity-category",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition A.4.1, Proposition A.4.3, Definition A.4.8: unit and adjunct cocones."
+   }
+  },
+  {
+   "text": "For an active operation $\\beta:(d_1,\\ldots,d_m)\\to c$ and active operations $\\alpha_i:y^{(i)}\\to d_i$ of arities $n_i$, the operad substitution has arity $N=\\sum_i n_i$. Applying the algebra functor $F$ to this substitution gives, on the indicated tensor of generators, the coherent comparison\n$$F(\\beta)\\,\\bigotimes_i\\left(F(\\alpha_i)\\,\\bigotimes_j\\eta_{y^{(i)}_j}\\right)\\simeq F\\bigl(\\beta\\circ(\\alpha_1,\\ldots,\\alpha_m)\\bigr)\\,\\bigotimes_{i,j}\\eta_{y^{(i)}_j}.$$\nThe right side is the cocone leg for the substituted operation in arity $N$, so this equation identifies operations with substitution on the displayed formula. Tensor preserves colimits in each variable: apply that assumption successively to the $m$ factors in step 4 to see that the tensor of the $m$ free values is the iterated colimit of these generator tensors. Hence the comparison on generators determines the comparison of the operations. For $m=0$ there is no tensor factor and the assertion is exactly the nullary cocone leg; empty inner lists insert $\\mathbf1$, using the unit constraints. All diagrams here can be parameterized by an arbitrary simplex in the functor category of $P$ and by any simplex of operations of $\\mathcal M$. The coordinate reconstruction of step 2, functorial transport of step 3, and the adjunction are coherent on those parameters. The colimit universal property identifies the entire spaces of extensions of their cocones. Thus the existing composition simplices of the actual algebra functor $F$, including higher substitution simplices, determine the same simplices under the equivalence of step 4. This proves naturality and all higher coherences, without inferring them just from equalities in a homotopy category. The identification of maps out of a colimit with cocones on its diagram is again the mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus].",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-operadic-free-extension",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-coef-complete-algebroid",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition A.4.3 and Definition A.4.8; substitution and coherent naturality of the operadic algebra functor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-operadic-algebra-presentability",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-operadic-free-extension",
+  "def-coef-complete-algebroid",
+  "lem-coef-operadic-free-cocone-characterization",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "def-coef-presentable-infinity-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Coordinate reconstruction of Proposition 3.4.5 and active-cocone argument underlying Definition A.4.8 and Proposition A.4.9, with explicit arity, unit, adjunct and substitution calculations. Source read online, not archived."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-categorical-algebra-free-monad",
@@ -77,6 +180,65 @@
    "results": "{\"t\": \"2026-10-16T16:08:50Z\", \"tool\": \"grep\", \"query\": \"leftKanExtensionObjIsoColimit|isPointwiseLeftKanExtensionAtExtensionUnitLeft\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean\", \"Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean\"], \"digest\": \"c5e9bbc5d5cb8c42\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:73-81 and Monoidal/ExternalProduct/KanExtension.lean:49-60. These concern ordinary pointwise Kan extensions, not operadic left Kan extensions in a monoidal infinity-category. Leansearch returns ordinary AlgCat.adj and FreeAlgebra.lift; loogle and the operadic source grep return no hits. The second semantic phrasing likewise finds no infinity-operadic formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free algebra for a generalized nonsymmetric infinity operad computed by active operation slices",
+   "results": "{\"t\": \"2026-10-16T17:50:09Z\", \"tool\": \"leanfinder\", \"query\": \"Free algebra for a generalized nonsymmetric infinity operad computed by active operation slices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeAlgebra.Pre\", \"FreeNonUnitalNonAssocAlgebra\", \"FreeAlgebra.Pre.of\", \"FreeNonUnitalNonAssocAlgebra.of\", \"CategoryTheory.Free\", \"FreeAlgebra\", \"FreeAlgebra.ι\", \"FreeSimplexQuiver\"], \"digest\": \"1483d2927729347a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories or ordinary algebras, not generalized nonsymmetric infinity-operads and operadic colimit cocones. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:64-81, Monoidal/ExternalProduct/KanExtension.lean:49-62, Monoidal/Limits/Preserves.lean:41-44, and Algebra/Category/AlgCat/Basic.lean:198-213. These do not specialize to this homotopy-coherent operadic statement. Both semantic phrasings were tried."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Operad\", \"free\"",
+   "results": "{\"t\": \"2026-10-16T17:50:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Operad\\\", \\\"free\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories or ordinary algebras, not generalized nonsymmetric infinity-operads and operadic colimit cocones. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:64-81, Monoidal/ExternalProduct/KanExtension.lean:49-62, Monoidal/Limits/Preserves.lean:41-44, and Algebra/Category/AlgCat/Basic.lean:198-213. These do not specialize to this homotopy-coherent operadic statement. Both semantic phrasings were tried."
+  },
+  {
+   "tool": "grep",
+   "query": "operadic|nonsymmetric|non.symmetric.*operad",
+   "results": "{\"t\": \"2026-10-16T17:50:04Z\", \"tool\": \"grep\", \"query\": \"operadic|nonsymmetric|non.symmetric.*operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories or ordinary algebras, not generalized nonsymmetric infinity-operads and operadic colimit cocones. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:64-81, Monoidal/ExternalProduct/KanExtension.lean:49-62, Monoidal/Limits/Preserves.lean:41-44, and Algebra/Category/AlgCat/Basic.lean:198-213. These do not specialize to this homotopy-coherent operadic statement. Both semantic phrasings were tried."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free operadic algebra active slice colimit in a monoidal infinity category",
+   "results": "{\"t\": \"2026-10-16T17:50:05Z\", \"tool\": \"leansearch\", \"query\": \"Free operadic algebra active slice colimit in a monoidal infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.FreeMonoidalCategory\", \"CommMonCat.FilteredColimits.colimit\", \"MonCat.Colimits.colimit\", \"MonCat.Colimits.ColimitType\", \"CommMonCat.FilteredColimits.colimitCocone\", \"CategoryTheory.Limits.isColimitOfOp\", \"SheafOfModules.isColimitFreeCofan\", \"MonCat.FilteredColimits.colimit\"], \"digest\": \"e43065a81217c344\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories or ordinary algebras, not generalized nonsymmetric infinity-operads and operadic colimit cocones. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:64-81, Monoidal/ExternalProduct/KanExtension.lean:49-62, Monoidal/Limits/Preserves.lean:41-44, and Algebra/Category/AlgCat/Basic.lean:198-213. These do not specialize to this homotopy-coherent operadic statement. Both semantic phrasings were tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise tensor colimits for the free algebra left adjoint from inert operations",
+   "results": "{\"t\": \"2026-10-16T17:50:06Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise tensor colimits for the free algebra left adjoint from inert operations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.free_δ_freeMk\", \"AlgCat.adj\", \"FreeAlgebra.toTensor_ι\", \"ModuleCat.free_μ_freeMk_tmul_freeMk\", \"FreeAlgebra.toTensor\", \"AddCommMonCat.instIsLeftAdjointFree\", \"AlgCat.free\", \"LinearAlgebra.FreeProduct.FreeTensorAlgebra\"], \"digest\": \"3024b7599a2d4f63\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categories or ordinary algebras, not generalized nonsymmetric infinity-operads and operadic colimit cocones. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:64-81, Monoidal/ExternalProduct/KanExtension.lean:49-62, Monoidal/Limits/Preserves.lean:41-44, and Algebra/Category/AlgCat/Basic.lean:198-213. These do not specialize to this homotopy-coherent operadic statement. Both semantic phrasings were tried."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-free-operadic-active-slice-formula",
+  "worker": "stage1",
+  "summary": "Verified the statement against Gepner–Haugseng v4. Reconstructed inert algebras by Segal coordinates, reduced to a general operadically free cocone theorem, used existing pointwise cocartesian transport for the tensor diagram, and proved the arity decomposition, unit, adjunct and substitution identities in the item. One genuinely general operadic Kan-extension prerequisite is new; no clause of this item was made a child. Searched the project, whole DAG and blueprint before creating it. No attachment, Mathlib match or statement correction.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, main-20261015: coherent derived coefficient mapping-complex adjunction before R lim. Through the existing fixed-object rectification/free-monad chain, steps 1–2 identify inert algebras and free extension, steps 3–4 give its active-slice tensor formula, and steps 5–6 retain the specified unit, adjunct and operadic coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 3-6 use its dual cone criterion: a cocone is colimiting (initial in the coherent cocone category of def-cbc-enhanced-diagrams-cones) iff restriction Map(apex,w) -> Map(D, const w) is an equivalence for every w; no node of sk-prop-sf-biduality-general states this generic quasicategorical fact, and the unit's own nodes already use it as a tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NO-64963d316",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-64963d316 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-operadic-free-cocone-characterization and the full statements of all cited nodes. Checked against Gepner–Haugseng arXiv:1312.3178v4 (PDF fetched, text in /tmp only): Def 3.4.1 (M_triv = M x_{Δop} Δop_int, so all arrows over inert maps), Prop 3.4.5, Def A.2.1, Def A.4.1, Props A.4.3/A.4.4, Thm A.4.6, Def A.4.8 and Prop A.4.9 (coproduct over [n] in Δop). The item agrees with its source and is not weakened. The new node's two-sided L⊕T⊕R operadic colimit includes GH's one-sided conditions and holds for presentably monoidal V. The new node is not a duplicate of lem-coef-operadic-free-extension, which states only an abstract adjoint, and it is strictly smaller than the item. No cycle. Small cases checked: the associative operad gives ∐v^{⊗n}; Δop_S gives path sums with 𝟏 only when s=t; arity 0 with no nullary operation gives an initial summand; the endpoint argument forces m=n. Fixes, in fixes/dag/nodes/sec-six-functors/lem-coef-free-operadic-active-slice-formula.json: (C1/C4) steps 3–6 went from 'restriction to Map(D,Δw) is an equivalence for all w' to 'colimiting', but def-cbc defines colimiting as initial in the cocone category. Added lem-cbc-enhanced-functor-cone-calculus to their uses and declared it in split_report.tool_uses as a generic cone criterion, accepted as a tool use as elsewhere in this unit. Step 1 now writes out that for inert ρ, ψ is inert iff ψ∘ρ is inert. proof_deps recomputed. No statement change and no nodes dropped.; 1 file(s) fixed by the reviewer"
+ }
 }
