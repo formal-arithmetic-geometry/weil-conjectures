@@ -22,7 +22,8 @@
   "def-weil-integral-derived-reduction",
   "def-pur-derived-internal-hom",
   "def-kun-topological-krull-dimension",
-  "def-weil-proetale-tor-amplitude"
+  "def-weil-proetale-tor-amplitude",
+  "def-sf-integral-hom-reduction-comparison"
  ],
  "proof": [
   {
@@ -203,5 +204,23 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-3d59cc2b3 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and source passages, unit/chapter route, and archived master targets. All five steps preserve the completed pro-etale coefficient category and exact Tor bound. Small cases, dependency cycles, and duplicate candidates checked; dimension tool use accepted. No new nodes or repairs. Concrete checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6d840ad40",
+  "group": "NH",
+  "result": "fix",
+  "note": "Wrote review.md and three complete replacements under fixes/. Reused the existing Hom-projection theorem to repair H4 duplication. Statement, canonical map, dependencies, universes, and edge cases checked. Both immutable and repaired modules compiled cleanly through scompile.py; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralConstructibleInternalHom",
+  "declaration": "WeilConjectures.integral_constructible_internalHom",
+  "file": "lean/Sheaf/Paper/IntegralConstructibleInternalHom.lean",
+  "statement": "theorem integral_constructible_internalHom (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of D.k))] [IsSeparated (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] (K L : completedIntegralDerivedCategory l E X D hl) (hK : boundedConstructibleDerivedCompleteIntegral D l hl E X K) (hL : boundedConstructibleDerivedCompleteIntegral D l hl E X L) : boundedConstructibleDerivedCompleteIntegral D l hl E X ((homReductionHom (completedIntegralCommRingSheaf l E X D hl)).obj (op K, L)) ∧ (∀ n : ℕ, IsIso (integralHomReductionComparison D l hl E X n K L)) ∧ ∀ a b c e : ℤ, a ≤ b → c ≤ e → ∀ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) → (∀ n : ℕ, HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) ((integralDerivedReduction l E X D hl n).obj K) a b) → (∀ n : ℕ, HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) ((integralDerivedReduction l E X D hl n).obj L) c e) → ∀ n : ℕ, HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) ((integralDerivedReduction l E X D hl n).obj ((homReductionHom (completedIntegralCommRingSheaf l E X D hl)).obj (op K, L))) (c - b - 2 * (d : ℤ)) (e - a + 2 * (d : ℤ))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
