@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-pur-affine-line-orientation-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change of the global orientation",
@@ -14,44 +14,213 @@
  },
  "stmt_deps": [
   "def-pur-conventions",
+  "def-pur-affine-line-datum",
   "thm-pur-affine-line-orientation",
-  "def-coefficient-twists-detailed",
-  "def-sbc-smooth-morphisms",
-  "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof": [
   {
-   "text": "Both $Lv^*\\operatorname{pur}_s$ and $\\operatorname{pur}_{s'}$ are morphisms\n$\\Lambda_{Y'}\\to Rs'^!\\Lambda_{\\mathbf A^1_{Y'}}(1)[2]$: the source and\ntarget of the first are transported by the exceptional base-change\ncomparison of [def-weil-exceptional-adjoint-admissibility] (the\nbase change of a closed immersion is a closed immersion and the\naffine-line datum base-changes, by [lem-pur-gysin-structure] and\n[def-pur-affine-line-datum]). Its pullback to a geometric point\n$\\bar y'$ of $Y'$ is the pullback of the normalization class\n$1$: the Kummer class is compatible with the pullback\n([lem-pur-kummer-coefficient-base-change]) and the rank-one\ncalculation is the one of [thm-pur-rank-one-local-calculation]\ntransported along $Y'\\to Y$, using $s'(\\bar y')=s(\\bar y)$ with\n$\\bar y=v(\\bar y')$. Hence, by the normalization of\n[thm-pur-affine-line-orientation] and the uniqueness of\n[prop-pur-affine-line-orientation-uniqueness], the two morphisms\ncoincide.",
+   "text": "Work with $Y,Y'$ in the fixed separated finite-type $k$-scheme setting, with the same finite coefficient ring $A$ and the affine-line datum [def-pur-affine-line-datum]. Put $X=\\mathbf A^1_Y$, $X'=\\mathbf A^1_{Y'}$, $g=\\mathbf A^1_v$, $Z=s(Y)$, and $Z'=s'(Y')$. On affine charts $g$ sends $t$ to $t'$ and $R'[t']\\otimes_{R[t]}R=R'[t']/(t')=R'$. Hence the square $(s,s',v,g)$ is Cartesian and its open complement is $(\\mathbf G_{m,Y},\\mathbf G_{m,Y'})$. In particular no flatness or reducedness of either base is needed. Set $K=A_Y$, $K'=A_{Y'}$, $F=A_X(1)[2]$, and $F'=A_{X'}(1)[2]$.",
    "uses": [
-    "def-weil-exceptional-adjoint-admissibility",
+    "def-pur-affine-line-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1/prop-pur-affine-line-orientation-base-change.md",
+    "place": "Proof, opening sentence: write the Cartesian square and the coordinate pullback explicitly"
+   }
+  },
+  {
+   "text": "Write $S=Rs_!$, $R=Rs^!$, and $S'=Rs'_!$, $R'=Rs'^!$. The zero sections are proper by [lem-weil-pbc-closed-immersion-proper], so the identity-open compactifications in [def-compact-support-direct-image-detailed] give $S=Rs_*$ and $S'=Rs'_*$. Use the class-restricted adjunction of [def-weil-exceptional-inverse-image] and [thm-sf-ambient-adjoint-class], with counit $\\epsilon:SR\\to\\mathrm{id}$. By [lem-pur-gysin-structure], $RF$ is bounded constructible, in fact a lisse rank-one sheaf in degree zero. Thus $K$ and $RF$ have bounded etale-origin witnesses by [lem-sf-proetale-constructible-origin](ii). Pullback of a finite locally constant sheaf is finite locally constant: a covering which trivializes it pulls back to a covering with the same constant module. Exact finite-level pullback is [def-weil-derived-pullback-tensor-hom], so the primed adjunction also applies to $Lv^*RF$. Put $B=Lg^*$ and $V=Lv^*$. The compact-support exchange [thm-cbc-finite-level-proetale] gives $\\beta_M:BSM\\xrightarrow{\\sim}S'VM$ for $M=K,RF$. Define the exceptional comparison $\\chi_F:VRF\\to R'BF$ as the mate of $\\beta^{-1}$, namely the transpose of $B\\epsilon_F\\circ\\beta_{RF}^{-1}$ under $S'\\dashv R'$, as prescribed in [def-weil-pbc-adjunction-mate]. Exact inverse image preserves the constant sheaf, so $VK=K'$. For the twist, put $m=\\ell^N$ as in the datum. [lem-asd-etale-finite-twist-pullback] identifies etale $g^{-1}\\mu_m$ with $\\mu_m$ on $X'$ and therefore identifies the tensor twists. The comparison-pullback isomorphism [lem-weil-pbc-comparison-pullback], together with the datum's specified comparison $\\nu^{-1}(\\mu_m^{\\mathrm{et}}\\otimes A)\\cong A(1)$, gives $BA_X(1)=A_{X'}(1)$. On root sections the map is $u\\otimes a\\mapsto g^*u\\otimes a$; its compatibility with the coefficient insertion follows by setting $a=1_A$. Exact pullback commutes with the shift, so $BF=F'$. This forms the comparison; no invertibility of $\\chi_F$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-compact-support-direct-image-detailed",
+    "def-weil-exceptional-inverse-image",
+    "thm-sf-ambient-adjoint-class",
     "lem-pur-gysin-structure",
+    "lem-sf-proetale-constructible-origin",
+    "def-weil-derived-pullback-tensor-hom",
+    "thm-cbc-finite-level-proetale",
+    "def-weil-pbc-adjunction-mate",
     "def-pur-affine-line-datum",
-    "lem-pur-kummer-coefficient-base-change",
-    "thm-pur-rank-one-local-calculation",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1/prop-pur-affine-line-orientation-base-change.md",
+    "place": "Proof, opening sentence: replace the inadmissible reference by the actual exceptional-adjunction mate"
+   }
+  },
+  {
+   "text": "The complements of $s$ and $s′$ are quasi-compact open immersions: on every affine base chart they are the principal opens $D(t)$ and $D(t′)$. Thus [lem-exc-proetale-closed-exact] makes $s_*$ and $s′_*$ exact on the finite constant coefficient module sheaves, and identifies $S=Rs_*=s_*$ and $S′=Rs′_*=s′_*$ on the bounded-below categories. For a supported class represented under the natural identification [lem-pur-supported-hom] by $c:SK\\to F$, its pullback to $(X',Z')$ is represented by $Bc\\circ\\beta_K^{-1}:S'K'\\to F'$. This is the supported pullback: in the kernel-of-restriction definition [def-pur-support-cohomology], pullback takes a section vanishing on $X\\setminus Z$ to one vanishing on $X'\\setminus Z'$; the natural derived identification of [lem-pur-supported-hom] reads that map through the canonical closed-support source comparison $\\beta_K$. Write $\\alpha:K\\to RF$ for the transpose of $c$, so $c=\\epsilon_F\\circ S\\alpha$. The transpose of $\\chi_F\\circ V\\alpha$ is, by the definition in step 2 and naturality of $\\beta$,\n$$\nB\\epsilon_F\\circ\\beta_{RF}^{-1}\\circ S'V\\alpha\n =B\\epsilon_F\\circ BS\\alpha\\circ\\beta_K^{-1}\n =B(\\epsilon_F\\circ S\\alpha)\\circ\\beta_K^{-1}\n =Bc\\circ\\beta_K^{-1}.\n$$\nConsequently the exceptional comparison on $V\\alpha$ corresponds exactly to supported-cohomology pullback. The calculation uses only functorial composition and the natural adjunction bijection from step 2; it does not identify ordinary inverse image with $Rs^!$.",
+   "uses": [
+    "lem-exc-proetale-closed-exact",
+    "lem-pur-supported-hom",
+    "def-pur-support-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1/prop-pur-affine-line-orientation-base-change.md",
+    "place": "Proof, opening sentence and geometric-fibre sentence: identify the particular comparison on supported classes, including the transpose calculation"
+   }
+  },
+  {
+   "text": "The class corresponding to $\\operatorname{pur}_s$ is $\\partial\\kappa(t)$ by [thm-pur-affine-line-orientation] and [lem-pur-gysin-structure]. Clause (4) of [prop-pur-gm-relative-kummer] gives $g_U^*\\kappa(t)=\\kappa(t')$ on the punctured lines, with precisely the fixed finite-torsion pro-etale twist. Functoriality in the pair and coefficient sheaf in [thm-pur-with-support-exactness] then gives\n$$\ng_Z^*(\\partial\\kappa(t))=\\partial(g_U^*\\kappa(t))=\\partial\\kappa(t').\n$$\nHere $g_Z^*$ denotes the map on supported cohomology of step 3. Thus step 3 associates to $\\chi_F\\circ V\\operatorname{pur}_s$ the supported coordinate boundary on $X'$.",
+   "uses": [
+    "thm-pur-affine-line-orientation",
+    "lem-pur-gysin-structure",
+    "prop-pur-gm-relative-kummer",
+    "thm-pur-with-support-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1/prop-pur-affine-line-orientation-base-change.md",
+    "place": "Proof, Kummer-class compatibility sentence: use geometric Kummer pullback and functoriality of the support boundary"
+   }
+  },
+  {
+   "text": "For a geometric point $q:\\operatorname{Spec}\\Omega\\to Y'$, the fibre is $\\operatorname{Spec}\\Omega[t']$, its origin is $V(t')$, and its punctured line is $\\operatorname{Spec}\\Omega[t',t'^{-1}]$. The geometric-point clause of [prop-pur-gm-relative-kummer] applies even if $\\Omega$ is not finite over $k$: the coordinate class pulls back to $\\kappa_A(t')$. Apply the pair functoriality of [thm-pur-with-support-exactness] again to the class of step 4. Its supported restriction is $\\partial\\kappa_A(t')$, whose residue is exactly $1_A$ by [thm-pur-rank-one-local-calculation], also in the finite-torsion pro-etale formulation. Hence every geometric restriction of $\\chi_F\\circ V\\operatorname{pur}_s$ is the normalized class $1_A$. This argument uses a single geometric point over $Y'$ and its composite with $v$, with the same algebraically closed field $\\Omega$; it does not assert that $\\Omega$ is the residue field of the image point.",
+   "uses": [
+    "prop-pur-gm-relative-kummer",
+    "thm-pur-with-support-exactness",
+    "thm-pur-rank-one-local-calculation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1/prop-pur-affine-line-orientation-base-change.md",
+    "place": "Proof, geometric-fibre sentence: compute the actual coordinate residue rather than saying it transports"
+   }
+  },
+  {
+   "text": "By [thm-pur-affine-line-orientation], $\\operatorname{pur}_{s'}$ has those same normalized geometric restrictions. The injectivity in [prop-pur-affine-line-orientation-uniqueness], applied over $Y'$, therefore gives\n$$\n\\chi_F\\circ Lv^*(\\operatorname{pur}_s)=\\operatorname{pur}_{s'}\n$$\nafter the constant-source and twist identifications in step 2. This is the asserted equality under the exceptional base-change comparison. For the empty base the Hom group is zero and the same injectivity gives the equality without choosing a geometric point.",
+   "uses": [
     "thm-pur-affine-line-orientation",
     "prop-pur-affine-line-orientation-uniqueness"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1/prop-pur-affine-line-orientation-base-change.md",
+    "place": "Proof, final sentence: conclude by the prescribed global uniqueness"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-exceptional-adjoint-admissibility",
-  "lem-pur-gysin-structure",
   "def-pur-affine-line-datum",
-  "lem-pur-kummer-coefficient-base-change",
-  "thm-pur-rank-one-local-calculation",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-ambient-adjoint-class",
+  "lem-pur-gysin-structure",
+  "lem-sf-proetale-constructible-origin",
+  "def-weil-derived-pullback-tensor-hom",
+  "thm-cbc-finite-level-proetale",
+  "def-weil-pbc-adjunction-mate",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-exc-proetale-closed-exact",
+  "lem-pur-supported-hom",
+  "def-pur-support-cohomology",
   "thm-pur-affine-line-orientation",
+  "prop-pur-gm-relative-kummer",
+  "thm-pur-with-support-exactness",
+  "thm-pur-rank-one-local-calculation",
   "prop-pur-affine-line-orientation-uniqueness"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1/prop-pur-affine-line-orientation-base-change.md",
-  "place": "## Proof"
+  "place": "Expanded original Proof (read on the server): retain geometric-fibre normalization and global uniqueness; supply the supported-class/mate compatibility and repair two invalid citations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fundamental class of the zero section of the affine line is compatible with arbitrary base change via the exceptional inverse image comparison",
+   "results": "AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly; AlgebraicGeometry.AffineSpace.homOverEquiv_apply; RingHom.IsStableUnderBaseChange.pullback_fst_appTop; AlgebraicGeometry.AffineSpace.map_appTop_coord; AlgebraicGeometry.AffineSpace.homOverEquiv; AlgebraicGeometry.AffineSpace.homOfVector; AlgebraicGeometry.AffineSpace.over_over; AlgebraicGeometry.AffineSpace.isPullback_map",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are not the finite-coefficient supported Kummer orientation compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "orientation|kummerBoundary|exceptional.*baseChange",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are not the finite-coefficient supported Kummer orientation compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Kummer boundary fundamental class of a Cartier divisor is natural under base change",
+   "results": "No hits; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\"",
+   "results": "KummerExtension.«termK[_√_]»; KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly; KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk; KummerDedekind.quotMapEquivQuotQuotMap; KummerDedekind.emultiplicity_factors_map_eq_emultiplicity; KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span; KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map; KummerDedekind.quotMapEquivQuotQuotMap_symm_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are not the finite-coefficient supported Kummer orientation compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality under pullback of the supported first Chern class of an effective Cartier divisor and the Kummer connecting homomorphism",
+   "results": "AlgebraicGeometry.Scheme.Hom.naturality_assoc; AlgebraicGeometry.Scheme.Hom.naturality; AlgebraicGeometry.AffineSpace.comp_homOfVector; AlgebraicGeometry.Scheme.Hom.map_appLE; AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst; AlgebraicGeometry.Scheme.Hom.appLE_map",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are not the finite-coefficient supported Kummer orientation compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|fundamentalClass|upperShriek|sixFunctor",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are not the finite-coefficient supported Kummer orientation compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a connecting homomorphism in cohomology with support under inverse image of sheaves, applied to the first Chern class of the coordinate zero divisor",
+   "results": "groupCohomology.mapCocycles₁_comp_i; groupCohomology.mapCocycles₂_comp_i; groupCohomology.toCocycles_comp_isoCocycles₁_hom; groupCohomology.isoCocycles₁_hom_comp_i; groupCohomology.toCocycles_comp_isoCocycles₂_hom; groupCohomology.isoCocycles₁_inv_comp_iCocycles; groupCohomology.mapCocycles₁_comp_i_apply; groupCohomology.δ_apply",
+   "date": "2026-10-15",
+   "verdict": "no match for the finite-coefficient pro-etale supported orientation compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|Chern|cohomologyWithSupport|upperShriek|lowerShriek",
+   "results": "No hits",
+   "date": "2026-10-15",
+   "verdict": "no match for the finite-coefficient pro-etale supported orientation compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint mate of a pullback exchange isomorphism preserves a supported divisor class when the class is natural under inverse image",
+   "results": "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom; AlgebraicGeometry.Scheme.image_preimage_eq_of_isPullback; AlgebraicGeometry.Scheme.Modules.pullbackComp; CategoryTheory.ExponentiableMorphism.homEquiv_symm_apply_eq; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; PresheafOfModules.pullbackComp",
+   "date": "2026-10-15",
+   "verdict": "no match: results do not state supported Kummer orientation compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|Chern|supportedClass|exceptionalInverseImage",
+   "results": "No hits",
+   "date": "2026-10-15",
+   "verdict": "no match: results do not state supported Kummer orientation compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image on etale sheaves commutes with the localization boundary for cohomology supported on a closed subscheme",
+   "results": "Algebra.basicOpen_subset_etaleLocus_iff; AlgebraicGeometry.liftCoborder_app; Algebra.etaleLocus_eq_compl_support; AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away; Algebra.basicOpen_subset_etaleLocus_iff_etale; ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec; AlgebraicGeometry.basicOpenIsoSpecAway_inv_homOfLE",
+   "date": "2026-10-15",
+   "verdict": "no match: results concern etale loci and scheme restrictions, not supported cohomology or exceptional base change"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyWithSupport|supportedRestriction|kummerBoundary|exceptionalBaseChange",
+   "results": "No hits",
+   "date": "2026-10-15",
+   "verdict": "no match: no supported-cohomology or exceptional-base-change declaration"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -93,5 +262,54 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1"
+ "unit": "sk-prop-a1",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "prop-pur-affine-line-orientation-base-change",
+  "worker": "stage1",
+  "summary": "Second reading expanded the prescribed geometric-fibre/uniqueness proof into six steps. Replaced the coefficient-only pullback citation and the admissibility-definition citation by existing geometric Kummer pullback, support functoriality, compact-support exchange and class-adjunction statements; wrote the comparison transpose explicitly. No statement change, new node or Mathlib leaf. Maintainer reader added the exact closed-pushforward citation and its quasi-compact-complement check in step 3; recorded generic tool declarations for review.",
+  "blueprint": "Original Proof opening/source-target sentence -> steps 1-3; Kummer and geometric-fibre sentences -> steps 4-5; normalization/uniqueness final sentence -> step 6. The sk-prop-a1 localization/Kummer route is retained.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Step 2 uses its bounded etale-origin Hom adjunction to form the exceptional mate; it does not replace the Kummer/fibre/uniqueness route."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Step 2 supplies etale-origin witnesses for the bounded rank-one objects required by compact-support exchange."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Step 2 uses canonical compact-support exchange for zero sections; the mate is then computed explicitly in step 3."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Step 2 identifies the actual roots-of-unity tensor twist under geometric pullback."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Step 2 moves the etale twist identification to the pro-etale site with the canonical comparison."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Step 3 identifies derived closed pushforward with the closed-support source of supported Hom; the principal-open complements verify the finiteness hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-ambient-adjoint-class",
+  "lem-sf-proetale-constructible-origin",
+  "thm-cbc-finite-level-proetale",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-exc-proetale-closed-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-c92f37738",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-c92f37738 (reviewer sub-agent of L); spot-checked: Read all six steps, cited statements, master sources, and unit/chapter route. Added the existing closed-pushforward exactness citation and verified its quasi-compact-complement hypothesis. Checked mate direction, finite pro-etale twists, geometric points, edge cases, and absence of dependency cycles. Accepted generic tool uses are documented in review.md; corrected whole-item JSON is under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+ }
 }
