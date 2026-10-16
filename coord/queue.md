@@ -1,6 +1,6 @@
 # Work queue
 
-74 items; claim with `tools/claim.py next <group> [--stage N]`.
+75 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (74)
+## Stage 3: modules to prove (75)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -66,6 +66,7 @@
 | `Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientAdic` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientSupported` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperEtaleDerivedLowerStarCoproducts` | 16 | 1 | proof |
+| `Sheaf.CategoryTheory.CoproductTruncationCouple` | 16 | 1 | proof |
 | `Sheaf.RingTheory.LciConormalFreeRankCodimension` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalCompletionAffineSections` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalFunctionsAffinePushforwardSections` | 17 | 1 | proof |
