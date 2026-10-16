@@ -6,11 +6,8 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionLocalization
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
-import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
+import Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent
+import Sheaf.AlgebraicGeometry.PerfectOverlapProjectionCompositionComponent
 
 /-! # Object compatibility for a composite overlap pullback
 
@@ -29,16 +26,31 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom
+  Scheme.Modules.instCategory
+
+attribute [local instance_reducible] TopologicalSpace.Opens.map
+attribute [local instance_reducible] OrderHomClass.toOrderHom
+attribute [local instance_reducible] TopCat.Hom.frameHom
+attribute [local irreducible] derivedPullback perfectHomComposition
 attribute [local instance] Functor.additive_of_preserves_binary_products
 attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverModuleAbelian
+
+private theorem object_pin_pasting
+    {C : Type*} [Category* C] {A B D H : C}
+    {ψ : A ⟶ B} {ρ : B ⟶ D} {χ : D ⟶ H}
+    {t : A ⟶ D} {z : A ⟶ H}
+    (hs : ψ ≫ ρ = t) (hp : t ≫ χ = z) : ψ ≫ ρ ≫ χ = z := by
+  rw [← Category.assoc, hs, hp]
 
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
   HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
 
+
 set_option maxHeartbeats 1000000 in
--- Comparing the transported diagram evaluates several dependent functor types.
+-- Comparing dependent derived functor types requires additional elaboration steps.
 /-- Canonical restriction transport satisfies the cartesian object comparison.
 Source: Stacks Project, Tags 08DW and 0D5S, the comparison of restricted
 pullbacks in Tag 09RE.
@@ -162,6 +174,17 @@ theorem perfect_overlap_composite_object_pin
         χ'.hom.app
           (if a then (derivedPullback (Y.homOfLE (inf_le_right : W ≤ V))).obj B
           else (derivedPullback (Y.homOfLE (inf_le_left : W ≤ U))).obj A) =
-      η'.hom.app (F a) ≫ (derivedPullback m).map (σ' a).hom := by sorry
+      η'.hom.app (F a) ≫ (derivedPullback m).map (σ' a).hom := by
+  intro W s r m eY eK hmap data F SP SQ τU τV ψ apex η σ ρ
+    σ' ρ' η' χ' hσ hρ hη hχ a
+  rw [hρ]
+  have hs := perfectOverlapCompositeSiteComponent
+    f gk g hgf pX pY b hg U V A B E φU φV
+  have hp := perfectOverlapProjectionCompositionComponent
+    f gk g hgf pX pK pY b q hg hf l U V A B E φU φV
+    hmap σ' η' χ' hσ hη hχ
+  cases a
+  · exact object_pin_pasting hs.1 (hp false)
+  · exact object_pin_pasting hs.2 (hp true)
 
 end AlgebraicGeometry

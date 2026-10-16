@@ -1,0 +1,155 @@
+{
+ "id": "lem-pc-perfect-overlap-projection-composition-component",
+ "kind": "statement",
+ "title": "Compatibility of the projection comparison with a composite restricted pullback.",
+ "statement": "For the two cartesian squares of f and g, compatible map of their pullbacks and the two local objects, the constructed composite stage map followed by the fixed projection comparison equals the natural overlap comparison followed by pullback of the fixed f-stage object comparison. The equation is expressed using the supplied isomorphism parameters and their constructor equalities; it holds on either Boolean branch. It involves no gluing map psi or theta. The local identification data supply only the common source interface.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Compatibility of derived pullback and open restriction; composition as in Tag 0D5S."
+ },
+ "stmt_deps": [
+  "def-pc-perfect-overlap-composite-stage-map",
+  "def-pc-perfect-overlap-composite-transport-api",
+  "def-pc-perfect-overlap-stage-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Substitute the equalities specifying sigma, eta and chi and take either Boolean branch. Expand the constructed stage-map branch and separate the first factor, the stage pullback of the site counit.",
+   "uses": [
+    "def-pc-perfect-overlap-composite-stage-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Express exact overlap restriction by the inclusion-pullback comparison and expand the stage-object comparison. Naturality moves the inclusion comparisons to the outside. The restricted square commutes by cancellation of the larger open immersion; the cartesian middle square is hmap and the outer projection square is baseChangeMap_fst. Apply component associativity of the fixed composition family to the six faces of this prism and cancel common invertible factors. This gives the derived transport followed by pullback of the f-stage comparison. More explicitly, use the six triples (eY.inv followed by jX, rL, fL), (eY.inv,jX,rL), (eY.inv,r,jK), (m,eK.inv,jK), (m,eK.inv followed by jK,fL), and (m,pK,j), where jX,jK are nested inclusions, rL is the restricted gk, fL is f restricted to L, and j is W into L. Postcompose by the common invertible projection-composition factor. Naturality moves the local composition through the first inclusion factor; the six associativity equations and inverse cancellations identify the two remaining paths. Use the existing compositionTo and compositionTo_triangle from PerfectHomComparisonTriangle for named composites; no duplicate composition comparison is needed.",
+   "uses": [
+    "lem-pc-perfect-overlap-nested-pullback-square",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-perfect-overlap-stage-equivalence",
+    "lem-pc-perfect-hom-comparison-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose with the separated site counit. The component formula perfectOverlapNaturalComparisonOfSquare_hom_app identifies the first two factors with eta. Associativity and the parameter equalities finish.",
+   "uses": [
+    "def-pc-perfect-overlap-core-comparisons-api"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-overlap-composite-stage-map",
+  "lem-pc-perfect-overlap-nested-pullback-square",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-perfect-overlap-stage-equivalence",
+  "lem-pc-perfect-hom-comparison-triangle",
+  "def-pc-perfect-overlap-core-comparisons-api"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "C1",
+  "date": "2026-10-16",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Restriction and fixed pullback composition, also Tag 0D5S.",
+  "note": "Second reading C1: reuse the existing named-composite triangle API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality and coherence of composition of derived pullback with restriction to nested open subschemes",
+   "results": "8 hits: AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict, AlgebraicGeometry.Scheme.Hom.map_appLE_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map",
+   "date": "2026-10-16",
+   "verdict": "Constituent restriction, whiskering and naturality APIs; no exact fixed comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerLeft",
+   "results": "12 hits: CategoryTheory.Functor.isoWhiskerLeft, CategoryTheory.Functor.isoWhiskerLeft_refl, CategoryTheory.Functor.isoWhiskerLeft_symm, CategoryTheory.Functor.isoWhiskerLeft_hom, CategoryTheory.Functor.isoWhiskerLeft_inv, CategoryTheory.Functor.isoWhiskerLeft_trans, CategoryTheory.Functor.triangleIso, CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight",
+   "date": "2026-10-16",
+   "verdict": "Constituent restriction, whiskering and naturality APIs; no exact fixed comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "perfectOverlapNestedPullback|openPullbackRestrictionIso|isoWhiskerLeft_trans",
+   "results": "2 hits: Mathlib/CategoryTheory/Whiskering.lean, Mathlib/CategoryTheory/Whiskering.lean",
+   "date": "2026-10-16",
+   "verdict": "Constituent restriction, whiskering and naturality APIs; no exact fixed comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of inverse image functors and naturality of counits for adjoint equivalences in category theory",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF two-open induction: the component equation relating prescribed overlap transport to the cartesian base-change comparison, within the core realization construction.",
+   "via": [
+    "lem-pc-perfect-overlap-composite-object-pin",
+    "lem-pc-perfect-overlap-object-realization-core-of-data",
+    "lem-pc-perfect-overlap-object-realization-core-data",
+    "lem-pc-perfect-overlap-object-realization",
+    "lem-pc-perfect-overlap-hom-presentation",
+    "lem-pc-perfect-overlap-hom-continuity",
+    "lem-pc-perfect-overlap-transition-comparison-core-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapProjectionCompositionComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapProjectionCompositionComponent.lean",
+  "declaration": "AlgebraicGeometry.perfectOverlapProjectionCompositionComponent",
+  "statement": "theorem perfectOverlapProjectionCompositionComponent {X Y K C T S : Scheme.{u}} (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g) (pX : X ⟶ C) (pK : K ⟶ T) (pY : Y ⟶ S) (b : C ⟶ S) (q : T ⟶ S) (hg : IsPullback g pX pY b) (hf : IsPullback f pK pY q) (l : Over.mk b ⟶ Over.mk q) (U V : Y.Opens) (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme) (E : schemeDerivedCategory X) (φU : (derivedPullback (g ∣_ U)).obj A ≅ (schemeOpenRestriction X (g ⁻¹ᵁ U)).mapDerivedCategory.obj E) (φV : (derivedPullback (g ∣_ V)).obj B ≅ (schemeOpenRestriction X (g ⁻¹ᵁ V)).mapDerivedCategory.obj E) : let W := U ⊓ V let s := W.ι ≫ pY let r := gk.resLE (f ⁻¹ᵁ W) (g ⁻¹ᵁ W) (by rw [← Scheme.Hom.comp_preimage, hgf]) let m := baseChangeMap s l let eY := ((isPullback_morphismRestrict g W).paste_vert hg).isoPullback let eK := ((isPullback_morphismRestrict f W).paste_vert hf).isoPullback ∀ hmap : eY.inv ≫ r = m ≫ eK.inv, let data := transportDataOfComposite f gk g hgf U V A B E φU φV let F : Bool → schemeDerivedCategory (f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V).toScheme := fun a ↦ if a then (schemeOpenOverlapRestriction K (homOfLE (inf_le_right : f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V ≤ f ⁻¹ᵁ V))).mapDerivedCategory.obj ((derivedPullback (f ∣_ V)).obj B) else (schemeOpenOverlapRestriction K (homOfLE (inf_le_left : f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V ≤ f ⁻¹ᵁ U))).mapDerivedCategory.obj ((derivedPullback (f ∣_ U)).obj A) let apex := perfectOverlapApexEquivalence g pX pY b hg U V let η := perfectOverlapNaturalComparisonOfSquare g f pX pK pY b q hg hf U V r m hmap let σ : ∀ a : Bool, (perfectOverlapStageEquivalence f pK pY q hf U V).functor.obj (F a) ≅ (derivedPullback (pullback.fst s q)).obj (if a then (derivedPullback (Y.homOfLE (inf_le_right : W ≤ V))).obj B else (derivedPullback (Y.homOfLE (inf_le_left : W ≤ U))).obj A) := fun a ↦ Bool.casesOn a ((perfectOverlapStageObjectIso f pK pY q hf U V U inf_le_left).app A) ((perfectOverlapStageObjectIso f pK pY q hf U V V inf_le_right).app B) ∀ (σ' : ∀ a : Bool, (perfectOverlapStageEquivalence f pK pY q hf U V).functor.obj (F a) ≅ (derivedPullback (pullback.fst s q)).obj (if a then (derivedPullback (Y.homOfLE (inf_le_right : W ≤ V))).obj B else (derivedPullback (Y.homOfLE (inf_le_left : W ≤ U))).obj A)) (η' : data.d.toDiagram.HW ⋙ apex.functor ≅ (perfectOverlapStageEquivalence f pK pY q hf U V).functor ⋙ derivedPullback m) (χ' : derivedPullback (pullback.fst s b) ≅ derivedPullback (pullback.fst s q) ⋙ derivedPullback m), σ' = σ → η' = η → χ' = perfectHomComparison s l → ∀ a : Bool, perfectOverlapCompositeStageMap f gk g hgf pX pY b hg U V A B E φU φV a ≫ χ'.hom.app (if a then (derivedPullback (Y.homOfLE (inf_le_right : W ≤ V))).obj B else (derivedPullback (Y.homOfLE (inf_le_left : W ≤ U))).obj A) = η'.hom.app (F a) ≫ (derivedPullback m).map (σ' a).hom",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.perfectOverlapProjectionCompositionComponent"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d87d9",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T020324-L-853953",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d87d9",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T020324-L-853953",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five delivered Lean modules with their DAG records and proof plans; existing signature unchanged, earlier citation repairs present, all modules and sole direct importer compile cleanly, axioms match the two documented residual holes."
+ }
+}
