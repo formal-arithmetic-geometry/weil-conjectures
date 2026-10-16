@@ -17,17 +17,104 @@
  },
  "kind": "statement",
  "title": "Coherent diagrams and mapping spaces under source attachment",
- "statement": "Let $I$ be a small ordinary category and let $S$ be a set of objects such that every arrow with target in $S$ is an identity. Let $J$ be the full subcategory on objects outside $S$. For $s\\in S$ let $B_s$ be the full subcategory of the coslice $s/I$ obtained by deleting $1_s$, and $t_s:B_s\\to J$ its codomain functor. Let $\\mathcal E$ be an infinity category, modeled by a simplicial set [def-weil-pbc-simplicial-set] with fillers for all inner horns (all faces of a standard simplex except one face that is neither first nor last), and $N$ the ordinary nerve. A coherent diagram $N(I)\\to\\mathcal E$ is determined, up to equivalence including all transformations and higher homotopies, by its restriction $H:N(J)\\to\\mathcal E$, objects $x_s\\in\\mathcal E$, and coherent cones from $x_s$ to $H\\circ N(t_s)$. A cone is a diagram on the left cone of the indexing simplicial set extending the given diagram. If $M_s(H)=\\lim_{N(B_s)}H\\circ N(t_s)$ exists, such a cone is equivalently a map $x_s\\to M_s(H)$; a limit here represents the space of coherent cones by its mapping spaces. This description detects equivalences by equivalence on the restriction and at every $s$.\n\nFor coherent diagrams $P,Q$ for which every $M_s(Q|_J)$ exists, their mapping space is the homotopy pullback\n$$\\operatorname{Map}_{\\operatorname{Fun}(N(I),\\mathcal E)}(P,Q)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(J),\\mathcal E)}(P|_J,Q|_J)\\mathop{\\times}^{h}_{\\prod_{s\\in S}\\operatorname{Map}_{\\mathcal E}(P_s,M_s(Q|_J))}\\prod_{s\\in S}\\operatorname{Map}_{\\mathcal E}(P_s,Q_s).$$\nThe first map to the base takes a transformation on $J$, restricts it along $t_s$, composes with the cone from $P_s$, and uses the limit universal property. The second map postcomposes with $Q_s\\to M_s(Q|_J)$. All identifications are natural and use homotopy pullbacks of spaces, not pullbacks of Hom sets. The indexing categories and sets may be taken in any fixed sufficiently large universe.",
+ "statement": "Let $I$ be a small ordinary category and let $S$ be a set of objects such that every arrow with target in $S$ is an identity. Let $J$ be the full subcategory on objects outside $S$. For $s\\in S$ let $B_s$ be the full subcategory of the coslice $s/I$ obtained by deleting $1_s$, and $t_s:B_s\\to J$ its codomain functor. Let $\\mathcal E$ be an infinity category, modeled by a simplicial set [def-weil-pbc-simplicial-set] with fillers for all inner horns (all faces of a standard simplex except one face that is neither first nor last), and $N$ the ordinary nerve. Coherent functor categories, equivalences and mapping spaces use [def-cbc-enhanced-diagrams-cones]; a homotopy pullback of spaces retains a path between its two maps to the base and all higher homotopies. A coherent diagram $N(I)\\to\\mathcal E$ is determined, up to equivalence including all transformations and higher homotopies, by its restriction $H:N(J)\\to\\mathcal E$, objects $x_s\\in\\mathcal E$, and coherent cones from $x_s$ to $H\\circ N(t_s)$. A cone is a diagram on the left cone of the indexing simplicial set extending the given diagram. If $M_s(H)=\\lim_{N(B_s)}H\\circ N(t_s)$ exists, such a cone is equivalently a map $x_s\\to M_s(H)$; a limit here represents the space of coherent cones by its mapping spaces. This description detects equivalences by equivalence on the restriction and at every $s$.\n\nFor coherent diagrams $P,Q$ for which every $M_s(Q|_J)$ exists, their mapping space is the homotopy pullback\n$$\\operatorname{Map}_{\\operatorname{Fun}(N(I),\\mathcal E)}(P,Q)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(J),\\mathcal E)}(P|_J,Q|_J)\\mathop{\\times}^{h}_{\\prod_{s\\in S}\\operatorname{Map}_{\\mathcal E}(P_s,M_s(Q|_J))}\\prod_{s\\in S}\\operatorname{Map}_{\\mathcal E}(P_s,Q_s).$$\nThe first map to the base takes a transformation on $J$, restricts it along $t_s$, composes with the cone from $P_s$, and uses the limit universal property. The second map postcomposes with $Q_s\\to M_s(Q|_J)$. All identifications are natural and use homotopy pullbacks of spaces, not pullbacks of Hom sets. The indexing categories and sets may be taken in any fixed sufficiently large universe.",
  "source": {
   "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
   "place": "Cisinski, Higher Categories and Homotopical Algebra, online revision read October 16, 2026, Proposition 7.4.2, Proposition 7.4.11 and its proof, printed pp. 358-365, applied to the opposite direct category. The source-attachment and mapping-space formulation records its homotopy Cartesian square of functor infinity categories and cone universal property. No model structure or localization theorem is asserted here; no Stacks tag supplies this infinity-categorical result."
  },
  "stmt_deps": [
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A_s=N(B_s)$ and $C_s=\\Delta^0\\star A_s$. A morphism of $B_s$ from $f:s\\to j$ to $f':s\\to j'$ is an arrow $u:j\\to j'$ with $uf=f'$. Every nonidentity arrow from $s$ lands in $J$, since an arrow into $S$ must be an identity. Thus every nondegenerate chain of $I$ either lies in $J$, or begins at a unique $s\\in S$ and then follows arrows in $J$. Such a chain beginning at $s$ is uniquely the cone on the chain of its successive composites in $B_s$. It follows degree by degree that\n$$N(I)=N(J)\\amalg_{\\coprod_s A_s}\\coprod_s C_s.$$\nThe boundary maps $A_s\\to N(J)$ are $N(t_s)$; they may fail to be injective (parallel arrows are allowed), whereas $\\coprod_s A_s\\to\\coprod_s C_s$ is injective. Deleting the initial $s$-vertex gives the prescribed boundary map; deleting a later vertex composes the corresponding arrows. Repeating vertices gives the degeneracies, so the degreewise identification respects every simplicial operator.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent degreewise verification generalizing the nerve decomposition in Proposition 7.4.2; only the no-incoming-arrow hypothesis is used"
+   }
+  },
+  {
+   "text": "Product with $\\Delta^n$ preserves the pushout in step 1: in each degree it is product of sets with the fixed set $(\\Delta^n)_r$, which preserves disjoint unions and the identifying equivalence relation. Hence a map $N(I)\\times\\Delta^n\\to\\mathcal E$ is exactly a diagram on $N(J)\\times\\Delta^n$ and compatible diagrams on all $C_s\\times\\Delta^n$. This gives an ordinary simplicial pullback describing $\\operatorname{Fun}(N(I),\\mathcal E)$. For each $s$, [lem-coef-infinity-join-cone-calculus] compares $\\operatorname{Fun}(C_s,\\mathcal E)$ with the category of triples $(x_s,F_s,\\lambda_s:\\Delta_{A_s}x_s\\to F_s)$ over the joint vertex-and-boundary projection. Its base-change clause allows $F_s$ to be the restriction $H\\circ N(t_s)$ of the same varying $H:N(J)\\to\\mathcal E$. Thus the comparisons can be made within the pullback just described. Products of their inverse functors and inverse-equation homotopies are formed componentwise, also for infinite $S$. The resulting equivalence identifies that pullback with a diagram $H$, all vertices $x_s$, and coherent cone transformations $\\Delta_{A_s}x_s\\to H\\circ N(t_s)$, including their transformations and higher simplices. This proves the source-attachment description with join cones and transformation cones giving equivalent data.",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.11 proof, fat-join comparison via Proposition 4.2.3 and its equivalence on fibers of restriction isofibrations; the new node explicitly includes the base-change property needed to glue the comparisons"
+   }
+  },
+  {
+   "text": "If $M_s(H)$ exists, its limiting cone $\\nu_s:\\Delta_{A_s}M_s(H)\\to H\\circ N(t_s)$ gives the equivalence\n$$\\operatorname{Map}_{\\mathcal E}(x_s,M_s(H))\\xrightarrow{\\ \\nu_s\\circ\\Delta(-)\\ }\\operatorname{Map}_{\\operatorname{Fun}(A_s,\\mathcal E)}(\\Delta_{A_s}x_s,H\\circ N(t_s))$$\nby [lem-cbc-enhanced-functor-cone-calculus]. The right side is the full space of coherent cones at the fixed vertex. Therefore the equivalence identifies the cone of step 2 with a map to $M_s(H)$, without discarding its homotopies. This is only asserted when the indicated limit exists, including the empty boundary case where the limit is terminal.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Cone universal property in Proposition 7.4.11, expressed by the existing mapping-space limit criterion"
+   }
+  },
+  {
+   "text": "Set $U=\\operatorname{Map}_{\\operatorname{Fun}(N(J),\\mathcal E)}(P|_J,Q|_J)$ and $V_s=\\operatorname{Map}_{\\operatorname{Fun}(A_s,\\mathcal E)}(P\\circ N(t_s),Q\\circ N(t_s))$. Apply [lem-coef-infinity-mapping-excision] to the pushout of step 1. Its sole injectivity requirement holds for the boundary into the disjoint cone pieces. Functor objects on a disjoint union are products, degree by degree; the right-pinched mapping-space definition is also degreewise, so the corresponding mapping spaces are products. We obtain\n$$\\operatorname{Map}_{\\operatorname{Fun}(N(I),\\mathcal E)}(P,Q)\\simeq U\\times^h_{\\prod_sV_s}\\prod_s W_s,$$\nwhere $W_s=\\operatorname{Map}_{\\operatorname{Fun}(C_s,\\mathcal E)}(P|_{C_s},Q|_{C_s})$, and both maps to $V_s$ are actual boundary restrictions. This excision assertion applies to arbitrary small shapes; no finiteness or directness of $I$ or injectivity of $N(t_s)$ has been assumed.",
+   "uses": [
+    "lem-coef-infinity-mapping-excision"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent mapping-space expansion of the homotopy Cartesian square in Proposition 7.4.11; excision applied to the explicitly verified source pushout"
+   }
+  },
+  {
+   "text": "Let $p_s:\\Delta_{A_s}P_s\\to P\\circ N(t_s)$ and $q_s:\\Delta_{A_s}Q_s\\to Q\\circ N(t_s)$ be the cone transformations. Write $T_s=\\operatorname{Map}_{\\operatorname{Fun}(A_s,\\mathcal E)}(\\Delta_{A_s}P_s,Q\\circ N(t_s))$ and $D_s=\\operatorname{Map}_{\\mathcal E}(P_s,Q_s)$. The varying-boundary formula of [lem-coef-infinity-join-cone-calculus], including its boundary projection, gives\n$$W_s\\simeq V_s\\times^h_{T_s}D_s,$$\nwhere $v\\mapsto vp_s$ and $a\\mapsto q_s\\Delta(a)$. Substituting into step 4 cancels the repeated $V_s$ data: a point consists of $u\\in U$, $v_s\\in V_s$, a path from $u|_{A_s}$ to $v_s$, $a_s\\in D_s$, and a path from $v_sp_s$ to $q_s\\Delta(a_s)$. Composing the two paths gives just $u$, all $a_s$, and paths from $(u|_{A_s})p_s$ to $q_s\\Delta(a_s)$. Conversely take $v_s=u|_{A_s}$ and the constant first path. For fixed $u$ the extra choice of $v_s$ and a path starting at $u|_{A_s}$ is contractible by contraction of that path to its starting point. These operations on path spaces retain higher simplices and are inverse up to this contraction. Products assemble these paths componentwise, also for infinite $S$. Thus step 4 becomes $U\\times^h_{\\prod_sT_s}\\prod_sD_s$.",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent path-space substitution in the source-attachment square of Proposition 7.4.11, using the general varying-boundary cone mapping formula"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-enhanced-functor-cone-calculus] to the chosen limit cone of $Q\\circ N(t_s)$ and the vertex $P_s$. It identifies $T_s$ with $\\operatorname{Map}_{\\mathcal E}(P_s,M_s(Q|_J))$. Under this identification $(u|_{A_s})p_s$ is precisely the first map stated in the item, and $q_s\\Delta(a_s)$ corresponds to postcomposition of $a_s$ with $Q_s\\to M_s(Q|_J)$. Substitution in step 5 gives the displayed formula. Naturality follows from the natural restriction and composition assertions of [lem-coef-infinity-mapping-excision] and [lem-coef-infinity-join-cone-calculus], and the mapping-space limit criterion: the displayed identifications use those actual cone maps rather than arbitrary equivalences of spaces.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-excision",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent limit-universal-property identification of the two maps, completing the source-attachment calculation"
+   }
+  },
+  {
+   "text": "By [lem-cbc-enhanced-functor-cone-calculus], a coherent transformation on $N(I)$ is an equivalence if and only if every vertex component is an equivalence. These vertices are exactly the objects of $J$ and the objects $s\\in S$. Applying the same criterion on $N(J)$ shows that this is exactly equivalence of the restriction together with equivalence at every attached vertex. Hence the gluing description detects equivalences as claimed.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Componentwise equivalence criterion, applied to the source-attachment data"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-mapping-excision"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, flat-model enhancement foundations. Source-attachment argument guided by Cisinski 4.2.1-4.2.3 and proof of 7.4.11, expanded to arbitrary small I using a direct degreewise nerve calculation; the varying-cone mapping input is exposed as a statement-only node. External reference is online, not archived in literature/. Source scope: Cisinski, Higher Categories and Homotopical Algebra, revision July 30, 2026, Proposition 7.4.2 (printed pp.358-359) and Proposition 7.4.11 and its proof (printed pp.364-365), read October 16, 2026. These treat finite-length direct categories and finite direct/Reedy fibrant diagrams, respectively. This node is an agent-formulated generalization of their source-attachment argument to arbitrary small categories with the stated no-incoming-arrow hypothesis, not an application of those propositions with their hypotheses omitted. The nerve pushout is proved degreewise in step 1; arbitrary-shape excision and join/comma calculus are separately cited. No model structure or localization theorem is asserted here; no Stacks tag supplies this infinity-categorical result."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,15 +164,158 @@
    "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.Quasicategory.Basic\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"51\", \"text\": \"abbrev QCat := ObjectProperty.FullSubcategory Quasicategory\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"11\", \"text\": \"# The nerve of a category is a quasicategory\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"13\", \"text\": \"In `AlgebraicTopology.Quasicategory.StrictSegal`, we show that any\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"14\", \"text\": \"strict Segal simplicial set is a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"line\": \"19\", \"text\": \"a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.Quasicategory.Basic\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"19\", \"text\": \"condition is a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"33\", \"text\": \"/-- Any `StrictSegal` simplicial set is a `Quasicategory`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"34\", \"text\": \"theorem quasicategory {X : SSet.{u}} (sx : StrictSegal X) : Quasicategory X := by\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"line\": \"35\", \"text\": \"  apply quasicategory_of_filler X\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"14\", \"text\": \"We define 2-truncated quasicategories `Quasicategory₂` by three horn-filling properties,\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"21\", \"text\": \"For a 2-truncated quasicategory `A`, we define a category `HomotopyCategory₂ A` whose\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"44\", \"text\": \"A 2-truncated quasicategory is a 2-truncated simplicial set with the properties:\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"54\", \"text\": \"class Quasicategory₂ (X : Truncated 2) where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"100\", \"text\": \"lemma HomotopicL.symm [Quasicategory₂ X] {x y : X _⦋0⦌₂} {f g : Edge x y} (hfg : HomotopicL f g) :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.Quasicategory.Basic\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"line\": \"76\", \"text\": \"lemma quasicategory_iff_innerFibration (X : SSet.{u}) :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"line\": \"77\", \"text\": \"    Quasicategory X ↔ InnerFibration (terminal.from X) := by\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"line\": \"78\", \"text\": \"  rw [quasicategory_iff_hasLiftingProperty.{u} _ terminalIsTerminal, innerFibration_iff]\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"line\": \"83\", \"text\": \"lemma quasicategory_iff_of_isTerminal\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"15\", \"text\": \"We show that every Kan complex is a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"17\", \"text\": \"In `Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean`,\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"18\", \"text\": \"we show that the nerve of a category is a quasicategory.\"}",
    "date": "2026-10-16",
    "verdict": "no match: GlueData and ordinary pullback-cone results do not concern mapping spaces of functor infinity categories. Quasicategory source hits define horn filling, nerves and truncated homotopy categories, without this cone-attachment formula."
+  },
+  {
+   "tool": "grep",
+   "query": "Functor|Quasicategory|homotopy.*pullback|mapping space",
+   "results": "{\"t\": \"2026-10-16T11:06:53Z\", \"tool\": \"grep\", \"query\": \"Functor|Quasicategory|homotopy.*pullback|mapping space\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"825b46ea2b5124ed\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Source attachment of a category: coherent diagrams are given by a diagram on the complement, source objects, and cones",
+   "results": "{\"t\": \"2026-10-16T11:06:53Z\", \"tool\": \"leansearch\", \"query\": \"Source attachment of a category: coherent diagrams are given by a diagram on the complement, source objects, and cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom\", \"CategoryTheory.Limits.Cocone.category\", \"CategoryTheory.Limits.IsColimit.OfNatIso.colimitCocone\", \"CategoryTheory.Limits.DiagramOfCones.rec\", \"CategoryTheory.Limits.asEmptyCocone\", \"CategoryTheory.Limits.Cocone\", \"CategoryTheory.IsCofiltered.iff_cone_nonempty\", \"CategoryTheory.Limits.DiagramOfCocones.mk.injEq\"], \"digest\": \"3e41e966c3ea6947\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.instQuasicategoryObjIhom, CategoryTheory.Limits.IsLimit, mapping space homotopy pullback",
+   "results": "{\"t\": \"2026-10-16T11:06:53Z\", \"tool\": \"loogle\", \"query\": \"SSet.instQuasicategoryObjIhom, CategoryTheory.Limits.IsLimit, mapping space homotopy pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `mapping`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern: loogle: Unknown identifier `mapping`"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent diagrams under attaching source objects are determined by restriction and coherent cones, with mapping spaces a homotopy pullback",
+   "results": "{\"t\": \"2026-10-16T11:07:04Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent diagrams under attaching source objects are determined by restriction and coherent cones, with mapping spaces a homotopy pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GlueData.vPullbackCone\", \"CategoryTheory.CostructuredArrow.CreatesConnected.mapCone_raiseCone\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c\", \"Profinite.Extend.cocone\", \"CategoryTheory.CostructuredArrow.CreatesConnected.raiseCone\", \"LightProfinite.Extend.cocone\", \"HomotopicalAlgebra.AttachCells.cofan₁\", \"LightProfinite.Extend.cone\"], \"digest\": \"54a11020a782b5c2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory|Functor|IsLimit|Pullback",
+   "results": "{\"t\": \"2026-10-16T11:07:35Z\", \"tool\": \"grep\", \"query\": \"Quasicategory|Functor|IsLimit|Pullback\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\"], \"digest\": \"581b883fb5c4af85\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Source attachment of a category: coherent diagrams are given by a diagram on the complement, source objects, and cones",
+   "results": "{\"t\": \"2026-10-16T11:07:35Z\", \"tool\": \"leansearch\", \"query\": \"Source attachment of a category: coherent diagrams are given by a diagram on the complement, source objects, and cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom\", \"CategoryTheory.Limits.Cocone.category\", \"CategoryTheory.Limits.IsColimit.OfNatIso.colimitCocone\", \"CategoryTheory.Limits.DiagramOfCones.rec\", \"CategoryTheory.Limits.asEmptyCocone\", \"CategoryTheory.Limits.Cocone\", \"CategoryTheory.IsCofiltered.iff_cone_nonempty\", \"CategoryTheory.Limits.DiagramOfCocones.mk.injEq\"], \"digest\": \"3e41e966c3ea6947\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, CategoryTheory.Limits.IsLimit, CategoryTheory.Limits.Pullback",
+   "results": "{\"t\": \"2026-10-16T11:07:35Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, CategoryTheory.Limits.IsLimit, CategoryTheory.Limits.Pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits.Pullback'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern: loogle: unknown identifier 'CategoryTheory.Limits.Pullback'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent diagrams under attaching source objects are determined by restriction and coherent cones, with mapping spaces a homotopy pullback",
+   "results": "{\"t\": \"2026-10-16T11:07:43Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent diagrams under attaching source objects are determined by restriction and coherent cones, with mapping spaces a homotopy pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.AttachCells.cofan₂\", \"HomotopicalAlgebra.AttachCells.cofan₁\", \"CategoryTheory.Limits.isLimitOfIsPullbackOfIsConnected\", \"HomotopicalAlgebra.AttachCells.reindexCellTypes\", \"CategoryTheory.GlueData.vPullbackConeIsLimitOfMap\", \"HomotopicalAlgebra.AttachCells.reindex\", \"CategoryTheory.CostructuredArrow.CreatesConnected.raiseCone\", \"HomotopicalAlgebra.AttachCells.reindex_cofan₂\"], \"digest\": \"957ff1f917a39c6d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"IsPullback\"",
+   "results": "{\"t\": \"2026-10-16T11:33:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"IsPullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces in a quasicategorical comma category are spaces of pairs of arrows with a coherent commutative square",
+   "results": "{\"t\": \"2026-10-16T11:33:48Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces in a quasicategorical comma category are spaces of pairs of arrows with a coherent commutative square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHom\", \"SSet.QCat.bicategory\", \"SSet.QCat\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"SSet.Truncated.Quasicategory₂.fill21\", \"SSet.Quasicategory.hornFilling'\", \"SSet.OneTruncation₂.Hom\"], \"digest\": \"1530a10af30f730a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an infinity category and arbitrary simplicial set K, diagrams on the left cone of K are equivalent to natural transformations from a constant diagram, with maps given by homotopy commutative squares",
+   "results": "{\"t\": \"2026-10-16T11:34:28Z\", \"tool\": \"leanfinder\", \"query\": \"For an infinity category and arbitrary simplicial set K, diagrams on the left cone of K are equivalent to natural transformations from a constant diagram, with maps given by homotopy commutative squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.WithTerminal.coneEquiv\", \"CategoryTheory.WithTerminal.coneEquiv_functor_obj_π_app_of\", \"CategoryTheory.Limits.Cones.whiskeringEquivalence_unitIso\", \"CategoryTheory.Functor.RightExtension.coneAtFunctor\", \"CategoryTheory.Limits.Cones.whiskeringEquivalence_counitIso\", \"CategoryTheory.WithTerminal.coneEquiv_functor_obj_π_app_star\", \"CategoryTheory.WithTerminal.coneEquiv_functor_map_hom\", \"CategoryTheory.Limits.Cones.whiskeringEquivalence_functor\"], \"digest\": \"b68747c96f56ba4b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"join\"",
+   "results": "{\"t\": \"2026-10-16T11:34:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "join|comma|mappingSpace|homSpace|[Pp]inched",
+   "results": "{\"t\": \"2026-10-16T11:34:29Z\", \"tool\": \"grep\", \"query\": \"join|comma|mappingSpace|homSpace|[Pp]inched\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping spaces between homotopy coherent cones with variable bases are pairs of maps and a path between the resulting natural transformations",
+   "results": "{\"t\": \"2026-10-16T11:34:29Z\", \"tool\": \"leansearch\", \"query\": \"Mapping spaces between homotopy coherent cones with variable bases are pairs of maps and a path between the resulting natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.mapOfHomotopy\", \"CochainComplex.mappingCone.triangleMapOfHomotopy_comm₂\", \"CategoryTheory.Functor.mapConeMorphism\", \"CategoryTheory.Limits.Cocone.ι\", \"CategoryTheory.Limits.Cones.postcompose\", \"CochainComplex.mappingCone.map\", \"CategoryTheory.Functor.postcomposeWhiskerLeftMapCone_hom_hom\", \"CochainComplex.mappingCone.map_eq_mapOfHomotopy\"], \"digest\": \"620e22cf09e9f5c1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fat join and ordinary join model equivalent cone infinity categories, and the comma mapping space is a homotopy pullback of its two endpoint mapping spaces",
+   "results": "{\"t\": \"2026-10-16T11:35:02Z\", \"tool\": \"leanfinder\", \"query\": \"Fat join and ordinary join model equivalent cone infinity categories, and the comma mapping space is a homotopy pullback of its two endpoint mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.trans_P\", \"FundamentalGroupoidFunctor.coneDiscreteComp\", \"HomotopicalAlgebra.Cylinder.trans_I\", \"HomotopicalAlgebra.Cylinder.instIsGoodTrans\", \"HomotopicalAlgebra.Cylinder.trans_π\", \"HomotopicalAlgebra.PathObject.trans\", \"HomotopicalAlgebra.Cylinder.trans\"], \"digest\": \"319b7db5c0aeeaf4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "fatJoin|fat.join|[Jj]oin.*[Cc]one|[Cc]one.*[Jj]oin|comma.*[Mm]apping",
+   "results": "{\"t\": \"2026-10-16T11:35:02Z\", \"tool\": \"grep\", \"query\": \"fatJoin|fat.join|[Jj]oin.*[Cc]one|[Cc]one.*[Jj]oin|comma.*[Mm]apping\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/CechNerve.lean\"], \"digest\": \"a87c6d8a6ff7337a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Comma\"",
+   "results": "{\"t\": \"2026-10-16T11:35:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Comma\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary categorical cone equivalences, cell-attachment cocones, and homotopy-category quasicategory enrichment do not state the coherent cone comparison or mapping-space formula; read Quasicategory/StrictBicategory.lean:14-32,49-70 and WithTerminal/Cone.lean:35-54. Fat-join focused grep found only an unrelated Cech-conerve adjunction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-finite-reedy-localization",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-source-gluing",
+  "worker": "stage1",
+  "summary": "Preserve all hypotheses and conclusions; define the enhanced notions through the existing definition. Verify the source-attachment nerve pushout explicitly, including parallel arrows, use existing mapping-space excision, and isolate only the general join-cone/comma calculus as a new unsplit foundation. Expand the homotopy-pullback substitution and identify both actual maps through the limit cones. Second reading makes the relative base-change property of the join-cone comparison explicit and uses it in step 2; it records three independent Mathlib searches and the exact additional Kerodon source places. Current independent second reading confirms the relative comparison and citation scope, checks the repaired shared definition, and records further searches; split_report.tool_uses remains a request for maintainer adjudication, not node-level tool authorization.",
+  "blueprint": "Realizes the source-attachment foundation of the finite Reedy localization induction, beneath proof paragraph 2 of prop-coef-integral-exceptional-adjoint (displayed derived R Hom / R lim adjunction calculation); it makes no change to the unit or geometric coefficient route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory componentwise equivalence and cone/limit mapping-space calculus; no node of this unit duplicates its statements."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-b30d29fec",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-b30d29fec (reviewer sub-agent of L); spot-checked: Read all seven steps, the new node, cited statements, source passages, routes, and exact master targets. Mathematics and edge cases check out; accepted the generic cone-calculus tool use. Corrected the new node’s incomplete provenance/audit metadata in fixes/. Full checks are in review.md; no mathematical statements or targets changed.; 1 file(s) fixed by the reviewer"
+ }
 }
