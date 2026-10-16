@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-def-set",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The fixed setting",
- "statement": "Work with the finite-field datum $(p,a,q,k_0,k)$, $\\ell$, $E$, $\\Oe$,\n$\\varpi_E$, $\\AEn=\\Oe/\\varpi_E^n$ and the coefficient stages\n$\\Lambda\\in\\{\\AEn,\\Oe,E,\\Qlb\\}$ fixed in [sk-def-sf-setting]. Let $X_0/k_0$ be smooth of relative\ndimension $d$, separated of finite type and geometrically connected, put\n$X=X_0\\times_{k_0}k$ and $s=\\Spec k$, and let $a_X:X\\to s$ be the\nstructure morphism. No admissibility hypothesis is imposed on $a_X$: its\nexceptional inverse image $Ra_X^!$ is the constructible exceptional adjoint\nof [sk-def-sf-operations](vi), which exists and preserves\n$\\Dctf$ at every stage for every separated finite-type morphism\n([thm-sf-ambient-adjoint-class], [sk-prop-sf-rf-shriek-preservation],\n[sk-thm-sf-ctf-stability]); the\nambient datum of [sk-def-sf-admissible], which fails for smooth proper\ncurves ([sk-rem-sf-fullcd-scope]), is not used. Properness of $X_0$ is *not* part of this setting: the\nduality results [sk-thm-sf-global-duality], [sk-thm-sf-identification]\nand [sk-thm-derived-duality]\nare formulated with compact supports and never use it. It is imposed\nexplicitly, and only, in [sk-def-trace-cup], [sk-cor-trace],\n[sk-thm-poincare-duality] and the final clause of\n[sk-thm-derived-duality], each of which needs\n$Ra_{X!}\\cong Ra_{X*}$.",
+ "statement": "Work with the finite-field datum $(p,a,q,k_0,k)$, $\\ell$, $E$, $\\Oe$,\n$\\varpi_E$, $\\AEn=\\Oe/\\varpi_E^n$ and the coefficient stages\n$\\Lambda\\in\\{\\AEn,\\Oe,E,\\Qlb\\}$ fixed in [sk-def-sf-setting]. Let $X_0/k_0$ be smooth of relative\ndimension $d$, separated of finite type and geometrically connected, put\n$X=X_0\\times_{k_0}k$ and $s=\\Spec k$, and let $a_X:X\\to s$ be the\nstructure morphism. No admissibility hypothesis is imposed on $a_X$: its\nexceptional inverse image $Ra_X^!$ is the constructible exceptional adjoint\nof [sk-def-sf-operations](vi), which exists and preserves $\\Dctf$ at every\nstage for every separated finite-type morphism ([sk-prop-sf-existence],\n[thm-sf-ambient-adjoint-class], [sk-prop-sf-rf-shriek-preservation],\n[thm-sf-ctf-stability]); the ambient datum of [sk-def-sf-admissible] is not\nused (its full-cohomological-dimension requirement fails for smooth proper\ncurves). Properness of $X_0$ is *not* part of this setting: the duality\nstatements are formulated with compact supports and do not use it. It is\nimposed explicitly only in the later trace, Poincare-duality, and\nderived-duality constructions, where an identification\n$Ra_{X!}\\cong Ra_{X*}$ is needed. ",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-set/_section.md",
   "place": "node sk-def-set, order 2748"
@@ -15,19 +15,75 @@
  "stmt_deps": [
   "sk-def-sf-setting",
   "sk-def-sf-operations",
+  "sk-prop-sf-existence",
   "thm-sf-ambient-adjoint-class",
   "sk-prop-sf-rf-shriek-preservation",
-  "sk-def-sf-admissible",
-  "sk-thm-sf-global-duality",
-  "sk-thm-sf-identification",
-  "sk-prop-sf-existence"
+  "thm-sf-ctf-stability",
+  "sk-def-sf-admissible"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "PoincareDualitySetting fixed geometric datum smooth separated finite type geometrically connected scheme over finite field",
+   "results": "AlgebraicGeometry.Scheme, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension; no Mathlib declaration packages the full fixed setting with coefficients and exceptional adjoint.",
+   "date": "2026-10-17",
+   "verdict": "no match: only component geometric predicates"
+  },
+  {
+   "tool": "loogle",
+   "query": "PoincareDualitySetting, SmoothOfRelativeDimension, GeometricallyConnected",
+   "results": "0 hits; unknown identifier PoincareDualitySetting.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PoincareDualitySetting|SmoothOfRelativeDimension|GeometricallyConnected [Mathlib/AlgebraicGeometry]",
+   "results": "Mathlib/AlgebraicGeometry/Geometrically/Connected.lean:22,40; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:26,135; no PoincareDualitySetting.",
+   "date": "2026-10-17",
+   "verdict": "no match: component predicates only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "fixed setting for Poincare duality: finite-field datum, coefficient stages, smooth separated finite-type geometrically connected scheme and exceptional inverse image",
+   "results": "AlgebraicGeometry.finite_appTop_of_universallyClosed and unrelated algebraic-geometry/category results; no fixed-setting declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality fixed setting includes finite field coefficients and geometric fibre",
+   "results": "Unrelated linear-algebra pairing and duality declarations; no fixed-setting declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SmoothOfRelativeDimension, GeometricallyConnected, IsSeparated, QuasiCompact",
+   "results": "0 hits; unknown identifier SmoothOfRelativeDimension.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricFiber|structureMorphism|modelStructureMorphism [Mathlib/AlgebraicGeometry]",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Etale.lean:97 geometricFiber; no PoincareDualitySetting or structureMorphism package.",
+   "date": "2026-10-17",
+   "verdict": "no match: only generic geometricFiber"
+  },
+  {
+   "tool": "leansearch",
+   "query": "scheme smooth separated quasi-compact geometrically connected over finite field base change algebraic closure",
+   "results": "Base-change stability lemmas for separated, quasi-compact, smooth and smooth relative dimension; no bundled fixed-setting declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match: component stability lemmas only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -63,5 +119,20 @@
   "sk-thm-poincare-duality"
  ],
  "chapter": "sec-poincare-duality",
- "unit": "sk-def-set"
+ "unit": "sk-def-set",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-set",
+  "worker": "stage1",
+  "summary": "Audited the fixed-setting definition against the current main-20261015 blueprint and the slopmaster2 source. The source declaration AlgebraicGeometry.PoincareDualitySetting packages only the geometric model and its smooth, separated, quasi-compact and geometrically connected instances; it does not state the coefficient stages or exceptional-adjoint clauses, so this item is not an attachment. Kept the setting as a definition with no proof steps and repaired its dependencies to cite only existing upstream nodes, removing downstream and operation references that created cycles. Recorded two-phrasing Mathlib searches for the item; no Mathlib declaration states the full fixed setting.",
+  "blueprint": "The statement realizes the sole node text of literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-set/_section.md (finite-field/coefficient datum, geometric setting, unconditional constructible exceptional adjoint, and exclusion of properness). No new nodes are needed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-398281534",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-398281534 (reviewer sub-agent of L); spot-checked: Read in full: the item sk-def-set, the unit record, the main-20261015 _section.md (order 2748) and the master unit text. Also read the full statements of all 7 statement dependencies (sk-def-sf-setting, sk-def-sf-operations (v)/(vi)/warning, sk-prop-sf-existence, thm-sf-ambient-adjoint-class, sk-prop-sf-rf-shriek-preservation, thm-sf-ctf-stability (i)-(vii), sk-def-sf-admissible), and the blueprint sk-thm-sf-ctf-stability and sk-rem-sf-fullcd-scope. The statement matches the current source clause by clause: the finite-field datum and four coefficient stages, X_0 smooth of relative dimension d, separated, finite type and geometrically connected, the base change X = X_0 x_{k_0} k, no admissibility hypothesis, and properness excluded. Ra_X^! is sk-def-sf-operations (vi), which is defined for every separated finite-type morphism; a_X qualifies. Its adjunction is thm-sf-ambient-adjoint-class (2) on the etale-origin class at the finite stage, and preservation of D^b_ctf is thm-sf-ctf-stability (v) at the finite stage and (vii) at the other stages. The replacement sk-thm-sf-ctf-stability -> thm-sf-ctf-stability is correct, since that node carries the unit. The forward references to downstream duality nodes were rightly turned into prose. A reachability check over stmt_deps and proof_deps shows no dependency reaches sk-def-set, so the imported in_cycle flag is resolved. The report prose about removing operation references is inconsistent with the final file, which keeps sk-def-sf-operations, but the files are acyclic. The item is a definition with no proof steps and the delivery creates no new nodes. The slopmaster2 declaration AlgebraicGeometry.PoincareDualitySetting (lines 75-82) is geometry-only and its docstring says it omits the coefficient datum, so not attaching it is correct. Duplicate candidate def-pod-conventions (sec-six-functors) is not the same statement: it assumes admissibility and adds orientation, duals and Frobenius. same_as [] is defensible; the conflict between the two nodes is noted for the maintainer. Edge cases checked: d=0 gives X=Spec k and a_X=id; empty X_0 is excluded by connectedness; nonproper A^1 is allowed; all four stages are covered. The parenthetical 'fails for smooth proper curves' is the source's own wording and is supported by the elliptic-curve warning. No SGA source is cited, no fixes were made, no tool_uses. Full details are in review.md."
+ }
 }
