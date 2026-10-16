@@ -29,9 +29,112 @@
   "def-coef-presentable-infinity-category",
   "lem-coef-infinity-relative-colimit-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-presentable-cardinal-enlargement] to $C$ and the empty set of arrows, and retain its regular cardinal $\\kappa$. Then $C$ is $\\kappa$-accessible and its full subcategory $C^\\kappa$ of all $\\kappa$-compact objects is essentially small. Choose a small infinity category $A$ and an equivalence $A\\simeq C^\\kappa$, and let $i:A\\to C$ be the composite with the full inclusion. Every object of $C$ is a small $\\kappa$-filtered colimit of objects in the image of $i$: this follows from the generating subcategory in the definition of $\\kappa$-accessibility in [def-coef-presentable-infinity-category], whose objects are all in $C^\\kappa$. A $\\kappa$-small diagram in $A$ has a colimit in $C$ by presentability, and its apex is $\\kappa$-compact by [lem-coef-compact-small-colimits]. Write $e:A\\simeq C^\\kappa$ for the chosen equivalence and $t$ for its coherent inverse. The cocone just constructed lies in the full subcategory $C^\\kappa$; applying $t$ and the natural equivalence $1_A\\simeq te$ gives a cocone on the original diagram $q:K\\to A$, with apex $t(c)$. For $b\\in A$, the map $\\operatorname{Map}_A(t(c),b)\\to\\lim_{K^{\\mathrm{op}}}\\operatorname{Map}_A(q(-),b)$ identifies, using $e$ and $et\\simeq1$, with $\\operatorname{Map}_C(c,i(b))\\to\\lim_{K^{\\mathrm{op}}}\\operatorname{Map}_C(iq(-),i(b))$. This is an equivalence by the colimit property of $c$ in $C$. The mapping-space criterion of [lem-coef-infinity-yoneda-presheaf-limits] therefore proves that this cocone is colimiting in $A$. Its image under $i$ is equivalent, by $et\\simeq1$, to the original colimiting cocone with apex $c$, so $i$ preserves it.",
+   "uses": [
+    "lem-coef-presentable-cardinal-enlargement",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-compact-small-colimits",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 5.5.1.1, (1) implies (2)-(4), and proof; Proposition 5.4.2.2 and Corollary 5.3.4.15"
+   }
+  },
+  {
+   "text": "There is a small set of representative $\\kappa$-small simplicial shapes: relabel their nondegenerate simplices by subsets of $\\kappa$, and encode the simplicial operations by functions between the resulting small sets. Here the chosen $\\kappa$ is uncountable, so adjoining all degeneracies still gives fewer than $\\kappa$ simplices. For each representative $K$, maps $K\\to A$ form a small set since $K,A$ are small. Choose a colimiting cocone in $A$ for each such map, using step 1; the collection $R_0$ of these choices is small. Colimiting cocones for a fixed diagram are unique up to coherent equivalence, since their mapping-space universal property represents the same cocone functor. Consequently $R_0$ gives the representatives required in the statement. In the remaining steps let $R$ be any small collection satisfying the statement, not just $R_0$. For any $f:A\\to Z$, sending every member of $R$ to a colimiting cocone is equivalent to preserving every $\\kappa$-small colimit: one direction uses that each member is such a colimit, and the other uses that every such cocone is equivalent to a representative and that equivalences identify its mapping-space universal property. This proves $\\operatorname{Fun}_R(A,Z)=\\operatorname{Fun}_{\\kappa\\text{-colim}}(A,Z)$ as full subcategories, including all transformations.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 5.5.1.1 and Example 5.3.6.8; small representative relations and invariance of the colimit universal property"
+   }
+  },
+  {
+   "text": "Put $\\mathcal P(A)=\\operatorname{Fun}(A^{\\mathrm{op}},\\mathcal S)$ and $y(a)=\\operatorname{Map}_A(-,a)$. The small mapping spaces and all small colimits of $\\mathcal P(A)$ are supplied by [lem-coef-infinity-presheaf-free-cocompletion]; its colimits are computed objectwise by [lem-coef-infinity-yoneda-presheaf-limits]. Restrict the coherent Yoneda functor of [lem-coef-infinity-yoneda-presheaf-limits] along $i^{\\mathrm{op}}$ to obtain $H:C\\to\\mathcal P(A)$ with $H(c)(a)=\\operatorname{Map}_C(i(a),c)$; that node applies because $C$ is locally small and fits in the containing universe. Thus the values are coherently modeled by small spaces. Full faithfulness of $i$ gives a natural equivalence $Hi\\simeq y$. For a small $\\kappa$-filtered diagram $F:I\\to C$, put $M_a=\\operatorname{colim}_{t\\in I}H(F(t))(a)$ in small spaces. By [lem-coef-spaces-small-colimits-universe], the fully faithful inclusion $\\iota:\\mathcal S_{\\mathcal U}\\to\\mathcal S_{\\mathcal U\\prime}$ carries this cocone to a colimit. Compactness of $i(a)$, in the convention of [def-coef-presentable-infinity-category], says that the cocone with apex $\\iota H(\\operatorname{colim}_I F)(a)$ is also colimiting in the larger space category. The canonical comparison $\\iota M_a\\to\\iota H(\\operatorname{colim}_I F)(a)$ is therefore an equivalence. Full faithfulness of $\\iota$ reflects equivalences: lift the inverse through the mapping-space equivalence, and the two inverse equations hold after lifting because those mapping-space maps induce bijections on components. Thus $M_a\\simeq H(\\operatorname{colim}_I F)(a)$ in small spaces. The objectwise colimit criterion therefore says that $H$ preserves these colimits. If $c\\simeq\\operatorname{colim}_{t\\in I}i(p(t))$ is a presentation from step 1, then $H(c)\\simeq\\operatorname{colim}_{t\\in I}y(p(t))$.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-spaces-small-colimits-universe"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 5.3.5.10-5.3.5.11: restricted Yoneda and compact-generator comparison"
+   }
+  },
+  {
+   "text": "The functor $H$ is fully faithful. Indeed, choose the presentation $c\\simeq\\operatorname{colim}_{t\\in I}i(p(t))$ of step 3 and fix $d\\in C$. Applying the mapping-space colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits] first in $\\mathcal P(A)$ and then in $C$, and using [lem-coef-infinity-yoneda-evaluation] in the middle, gives\n$$\\operatorname{Map}_{\\mathcal P(A)}(H(c),H(d))\\simeq\\lim_{t\\in I^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal P(A)}(y(p(t)),H(d))\\simeq\\lim_{t\\in I^{\\mathrm{op}}}\\operatorname{Map}_C(i(p(t)),d)\\simeq\\operatorname{Map}_C(c,d).$$\nThe inverse of this composite is the map induced by $H$, because at each generator it is evaluation of a transformation on the identity and all maps arise from the presentation cocone. Thus these are natural mapping-space equivalences, not just bijections on homotopy classes.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-yoneda-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.11(1), mapping-space proof"
+   }
+  },
+  {
+   "text": "Let $B\\subseteq\\mathcal P(A)$ be the full subcategory on presheaves taking every $\\kappa$-small colimit in $A$ to a limit of spaces. The recognition lemma [lem-coef-infinity-presheaf-ind-criterion] identifies its objects exactly with small $\\kappa$-filtered colimits of representables. Step 3 shows that every $H(c)$ is in $B$. Conversely, if $X\\simeq\\operatorname{colim}_I yp$ is such a presheaf, form $c=\\operatorname{colim}_I ip$ in $C$; step 3 gives $H(c)\\simeq X$. Thus $B$ is precisely the full essential image of $H$. Together with step 4, [lem-coef-infinity-full-essential-image] gives a coherent equivalence $H:C\\simeq B$ and a quasi-inverse, with its natural equivalences. The generators $Hi\\simeq y$ lie in this full subcategory.",
+   "uses": [
+    "lem-coef-infinity-presheaf-ind-criterion",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.5.4 and Proposition 5.3.5.11(2); Ind identification in Example 5.3.6.8"
+   }
+  },
+  {
+   "text": "Use the explicit small-data model in [lem-coef-infinity-relative-colimit-completion]. It realizes $P_R(A)$ as the full subcategory of $\\mathcal P(A)$ on presheaves $X$ local for every map $s_r:\\operatorname{colim}_{K}yq\\to y(a)$ arising from $r=(q:K\\to A\\,,q\\to a)\\in R$, and its generator is $j_R=Ly$, with $L$ the reflector. By [lem-coef-infinity-yoneda-presheaf-limits] and [lem-coef-infinity-yoneda-evaluation], precomposition with $s_r$ is exactly\n$$X(a)\\longrightarrow\\lim_{K^{\\mathrm{op}}}X(q(-)).$$\nStep 2 implies that all these maps are equivalences exactly when $X\\in B$. Hence this explicit model of $P_R(A)$ is $B$. Each $y(a)$ is already in $B$ by step 5. For a full reflective inclusion $u:B\\hookrightarrow\\mathcal P(A)$, adjunction and full faithfulness give $\\operatorname{Map}_B(Lu(b),b')\\simeq\\operatorname{Map}_{\\mathcal P(A)}(u(b),u(b'))\\simeq\\operatorname{Map}_B(b,b')$ naturally in $b'$, so the counit $Lu(b)\\to b$ is an equivalence by the Yoneda criterion. This gives $j_R=Ly\\simeq y$ naturally. Compose the equivalence $P_R(A)=B\\simeq C$ of step 5 to obtain $E$; then $Ej_R\\simeq i$. An equivalence preserves every existing small colimit: testing a cocone against an arbitrary target object, a quasi-inverse identifies its mapping-space colimit criterion on both sides. Therefore $E$ is the required colimit-preserving equivalence, entirely in the original small-colimit universe.",
+   "uses": [
+    "lem-coef-infinity-relative-colimit-completion",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-yoneda-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2 and Example 5.3.6.8: local-presheaf model and identification over A"
+   }
+  },
+  {
+   "text": "For an arbitrary infinity category $Z$ admitting all original-universe small colimits, precomposition with $E:P_R(A)\\simeq C$ gives an equivalence of full coherent functor categories $\\operatorname{Fun}_{\\mathrm{colim}}(C,Z)\\simeq\\operatorname{Fun}_{\\mathrm{colim}}(P_R(A),Z)$. An inverse is precomposition with its quasi-inverse; both preserve the defining class of functors by the preceding colimit argument. Compose this with the unary restriction equivalence of [lem-coef-infinity-relative-colimit-completion] to obtain $\\operatorname{Fun}_{\\mathrm{colim}}(C,Z)\\simeq\\operatorname{Fun}_R(A,Z)$. Since $Ej_R\\simeq i$, the composite is restriction along $i$. The cited restriction equivalence includes transformations and all higher simplices and is natural in $Z$; composition with $E$ and its coherent inverse retains these properties. Here naturality is with respect to colimit-preserving functors between cocomplete targets. The cited node allows arbitrary cocomplete $Z$, so no presentability assumption on $Z$ or enlargement of the class of permitted small diagrams has been used.",
+   "uses": [
+    "lem-coef-infinity-relative-colimit-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.6.2, unary universal property, after the identification of Example 5.3.6.8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-presentable-cardinal-enlargement",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-compact-small-colimits",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-spaces-small-colimits-universe",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-presheaf-ind-criterion",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-relative-colimit-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, cocomplete coefficient tensor foundation through the recorded ancestry. Agent-written detailed presheaf proof, checked against HTT 5.3.5.4, 5.3.5.11, 5.3.6.2, 5.3.6.8 and 5.5.1.1 read online; HTT is WANTED for literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -110,10 +213,38 @@
    "results": "{\"t\": \"2026-10-16T19:43:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ind\\\", \\\"preservesColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.instPreservesColimitsOfShapeFunctorIndLimOfFinCategoryOfHasColimitsOfShape\"], \"digest\": \"98c8e7a7ac02f48a\"}",
    "date": "2026-10-16",
    "verdict": "Second reader: no match. Read the ordinary Category/Type-valued presentability, quotient-colimit and pointwise monoidal hypotheses; they do not specialize to the coherent infinity-category universal property of this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presentable infinity category is freely generated under colimits by its compact objects subject to bounded colimit relations",
+   "results": "{\"t\": \"2026-10-16T20:15:30Z\", \"tool\": \"leanfinder\", \"query\": \"A presentable infinity category is freely generated under colimits by its compact objects subject to bounded colimit relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.presentable\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.isPresentable_of_isCardinalPresentable\", \"CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\"], \"digest\": \"7516415ce541d543\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Presentable/Basic.lean:145-155, LocallyPresentable.lean:34-95 and ColimitPresentation.lean:125-140. These use ordinary categories and set-valued Hom functors; bind refines a presentation of one object. Read Indization/IndObject.lean:209-216: it is the ordinary Type-valued finite-limit recognition theorem. None states the full coherent infinity-functor-category equivalence of the item. The second semantic phrasing Presentable quasicategories are Ind completions... likewise returned the ordinary Ind category and its HasColimits instance, not an exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ind\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T20:15:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ind\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.reindex\", \"CategoryTheory.Limits.ColimitPresentation.reindex_diag\", \"CategoryTheory.Limits.ColimitPresentation.reindex_ι\", \"CategoryTheory.ObjectProperty.ColimitOfShape.reindex\", \"CategoryTheory.ObjectProperty.ColimitOfShape.reindex_toColimitPresentation\", \"CategoryTheory.Limits.MultispanIndex.parallelPairDiagramOfIsColimit\", \"CategoryTheory.Limits.MultispanIndex.fstSigmaMapOfIsColimit\", \"CategoryTheory.Limits.MultispanIndex.sndSigmaMapOfIsColimit\"], \"digest\": \"963d0b4279fdcd25\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Presentable/Basic.lean:145-155, LocallyPresentable.lean:34-95 and ColimitPresentation.lean:125-140. These use ordinary categories and set-valued Hom functors; bind refines a presentation of one object. Read Indization/IndObject.lean:209-216: it is the ordinary Type-valued finite-limit recognition theorem. None states the full coherent infinity-functor-category equivalence of the item. The second semantic phrasing Presentable quasicategories are Ind completions... likewise returned the ordinary Ind category and its HasColimits instance, not an exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*presentation|presentation.*compact|Ind.*colimit|colimit.*Ind",
+   "results": "{\"t\": \"2026-10-16T20:15:58Z\", \"tool\": \"grep\", \"query\": \"compact.*presentation|presentation.*compact|Ind.*colimit|colimit.*Ind\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/ColimitPresentation.lean\", \"Mathlib/CategoryTheory/Presentable/ColimitPresentation.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\"], \"digest\": \"1af6694ea49dee15\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Presentable/Basic.lean:145-155, LocallyPresentable.lean:34-95 and ColimitPresentation.lean:125-140. These use ordinary categories and set-valued Hom functors; bind refines a presentation of one object. Read Indization/IndObject.lean:209-216: it is the ordinary Type-valued finite-limit recognition theorem. None states the full coherent infinity-functor-category equivalence of the item. The second semantic phrasing Presentable quasicategories are Ind completions... likewise returned the ordinary Ind category and its HasColimits instance, not an exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Presentable quasicategories are Ind completions of small categories with bounded colimits",
+   "results": "{\"t\": \"2026-10-16T20:15:58Z\", \"tool\": \"leansearch\", \"query\": \"Presentable quasicategories are Ind completions of small categories with bounded colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPresentable\", \"CategoryTheory.instHasColimitsIndOfHasFiniteColimits\", \"CategoryTheory.Limits.IndObjectPresentation.I\", \"CategoryTheory.Limits.IndObjectPresentation.instSmallCategoryI\", \"CategoryTheory.Limits.IndObjectPresentation.ofCocone_I\", \"CategoryTheory.Limits.IndObjectPresentation.instIsFilteredI\", \"CategoryTheory.Limits.IndObjectPresentation.mk\", \"CategoryTheory.Ind\"], \"digest\": \"8adf4547eaae3c6e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Presentable/Basic.lean:145-155, LocallyPresentable.lean:34-95 and ColimitPresentation.lean:125-140. These use ordinary categories and set-valued Hom functors; bind refines a presentation of one object. Read Indization/IndObject.lean:209-216: it is the ordinary Type-valued finite-limit recognition theorem. None states the full coherent infinity-functor-category equivalence of the item. The second semantic phrasing Presentable quasicategories are Ind completions... likewise returned the ordinary Ind category and its HasColimits instance, not an exact match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cocomplete-monoidal-tensor",
@@ -121,5 +252,21 @@
   "group": "Q43"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-bounded-colimit-presentation",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Chose compact generators with the existing cardinal and closure nodes; wrote out restricted Yoneda full faithfulness and its essential image; identified relative-completion local objects with bounded-limit preserving presheaves. Created only the space-valued presheaf recognition lemma (HTT 5.3.5.4). Checked all cited statements, arbitrary cocomplete targets, original-universe smallness, empty diagrams, Mathlib candidates, duplicate nodes and the blueprint ancestry. Second reading expanded the colimit cocone and mapping-space comparison across the chosen small equivalence, and independently re-searched Mathlib. Also made the compactness universe comparison explicit using the existing small-colimit universe theorem and refreshed full citation quotes.",
+  "blueprint": "Realizes the bounded small-generator presentation needed by step 6 of lem-coef-cocomplete-monoidal-tensor, in the ancestry of paragraph 2 of prop-coef-integral-exceptional-adjoint. The new lemma isolates the Ind-object characterization, not a clause restating the presentation theorem.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-3cb410abd",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-3cb410abd (reviewer sub-agent of L); spot-checked: I read the item and all seven steps, the new node lem-coef-infinity-presheaf-ind-criterion, and the full statement of every cited node: cardinal-enlargement, compact-small-colimits, yoneda-presheaf-limits, presheaf-free-cocompletion, spaces-small-colimits-universe, yoneda-evaluation, full-essential-image, relative-colimit-completion and the three definitions. I also read the unit record, the ancestor's paragraph 2 and the parent's step 6. I checked them against HTT 5.3.5.4, 5.3.5.10-11, 5.3.6.2, 5.3.6.8 and 5.5.1.1. HTT is not in literature/, so the item's proof_origin by:agent with HTT WANTED is correct. This is a pure infinity-categorical lemma: no base-change morphism or coefficient category is involved. The item statement is unchanged. Step checks: step 1's choice of kappa, C^kappa and closure under kappa-small colimits, with the transport across e/t written out, is correct. Step 2's representative set and the invariance argument are elementary. In step 3, restricted Yoneda preserves kappa-filtered colimits; the U to U' compactness bridge goes through the universe node. One small point: the Yoneda node asks for U-small mapping spaces where C is only locally small; I accept this because spaces are taken up to equivalence. Step 4 proves full faithfulness by the colim-evaluation-colim chain, identified with H's own map at the generators. In step 5, the essential image is B by both directions of the new lemma, and full-essential-image applies. In step 6, the small-data local model equals B, Ly is equivalent to y, and E j_R is equivalent to i. Step 7 uses the arbitrary-cocomplete-Z universal property and avoids Prop 5.5.1.9. proof_deps is exactly the union of the step uses. There is no cycle, and every cited statement is in unit sk-prop-sf-biduality-general, so no tool_uses are needed. New node: it is a true, strictly smaller statement of HTT 5.3.5.4 (1)<=>(3). Edge tests pass for A terminal, A=[1] with kappa=omega (where Ind([1]) has exactly the two representables), the initial-object case and the empty presheaf. My own rg searches of dag/nodes and main-20261015 found no duplicate. The candidates sfb-ind-*, accessible-compact-slice-density, compact-approximation and accessible-ind-colimit-extension do not state it. The Mathlib searches (four tools) and the blueprint from/via/same_as fields are correct. FIX: clause (2) of the new node used the notation q:K^triangleright->A, which no cited definition defines (B3). I rewrote it with def-cbc's cocone form, lambda:q->Delta_K a, with the same mathematical content. The whole corrected file is in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-presheaf-ind-criterion.json.; 1 file(s) fixed by the reviewer"
+ }
 }
