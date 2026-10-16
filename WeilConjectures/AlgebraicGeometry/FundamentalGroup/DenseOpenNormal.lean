@@ -15,8 +15,9 @@ Let `X` be a connected locally noetherian scheme whose local rings are integrall
 domains and `j : U ⟶ X` an open immersion with `U` nonempty. A connected finite étale cover `P`
 of `X` has integrally closed local domains as local rings again
 (`AlgebraicGeometry.Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale_of_isDomain`), hence is
-irreducible, so its restriction to `U`, a nonempty open subscheme of `P`, is irreducible, hence connected.
-Consequently the map `π₁(U) → π₁(X)` is surjective (SGA 1, Exp. V, Prop. 8.2; Stacks `0BQM`).
+irreducible, so its restriction to `U`, a nonempty open subscheme of `P`, is irreducible, hence
+connected. Consequently the map `π₁(U) → π₁(X)` is surjective (SGA 1, Exp. V, Prop. 8.2;
+Stacks `0BQM`).
 This is part (1) of the blueprint lemma `lem-wf-dense-open-pi1-surjective`; the regular case is
 `WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpen`.
 
