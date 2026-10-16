@@ -379,5 +379,24 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-1995edda9 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources, and chapter/unit route. Verified all nine steps, noncommutative coefficients, unbounded resolutions, counit/unit maps, naturality, edge cases, duplicate candidates, and acyclicity. Accepted the twelve declared tool uses. No repairs needed; detailed findings are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fa09b79c8",
+  "group": "NL",
+  "result": "pass",
+  "note": "The theorem signature matches the node verbatim; dependencies and adjunctions are correct, no hollow definitions or unintended assumptions were found, and scompile.py compiled both forms cleanly."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle",
+  "declaration": "AlgebraicGeometry.Etale.exists_etale_closedSupportTriangle",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleClosedSupportTriangle.lean",
+  "statement": "theorem exists_etale_closedSupportTriangle (A : Type (u + 1)) [Ring A] [Finite A] {Z T U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] (j : U ⟶ T) [IsOpenImmersion j] (hij : Set.range i.base = (Set.range j.base)ᶜ) : ∃ δ : D(upperStar (ModuleCat.{u + 1} A) j) ⋙ R(lowerStar (ModuleCat.{u + 1} A) j) ⟶ ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint ⋙ R(lowerStar (ModuleCat.{u + 1} A) i)) ⋙ shiftFunctor (_root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) (1 : ℤ), ∀ K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)), Triangle.mk ((Adjunction.ofIsLeftAdjoint (R(lowerStar (ModuleCat.{u + 1} A) i))).counit.app K) ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).unit.app K) (δ.app K) ∈ distTriang _",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the ordinary unbounded derived category of module-valued etale sheaves, as in lem-exc-closed-ambient. The existential boundary is a natural transformation; the first two arrows are the specified canonical adjunction counit and unit. No commutativity, constructibility or boundedness hypothesis."
  }
 }
