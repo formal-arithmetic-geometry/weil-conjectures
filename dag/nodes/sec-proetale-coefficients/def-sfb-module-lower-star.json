@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-sfb-module-lower-star",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Pushforward of module objects",
- "statement": "Let $\\Lambda$ be a commutative condensed ring and $f\\colon X\\to Y$ a morphism of\nschemes, with coefficient rings $\\Lambda_X=p_X^*\\Lambda$\n([sk-def-sfb-pulled-back-coefficients]) and categories of module objects\n$\\Mod_{\\Lambda_X}$ ([sk-def-sfb-module-objects]). The *pushforward of module objects* is\n\n$$\nf_*:=\\operatorname{Res}_{\\eta_f}\\circ\\operatorname{mapMod}(f^{\\Ab}_*)\\colon\n\\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_Y},\n$$\n\nwhere the transport ([sk-def-sfb-transport]) $\\operatorname{mapMod}(f^{\\Ab}_*)$ makes $f^{\\Ab}_*M$ an\n$f^{\\Ab}_*\\Lambda_X$-module through the lax monoidal structure of the pushforward\n$f^{\\Ab}_*$ of abelian sheaves, and $\\operatorname{Res}_{\\eta_f}$ restricts scalars\nalong $\\eta_f\\colon\\Lambda_Y\\to f^{\\Ab}_*\\Lambda_X$ ([sk-def-sfb-coefficient-morphisms]). Thus the underlying sheaf of $f_*M$ is\n$f^{\\Ab}_*M$, and $\\Lambda_Y$ acts by\n\n$$\n\\Lambda_Y\\otimes f^{\\Ab}_*M\\xrightarrow{\\eta_f\\otimes1}\nf^{\\Ab}_*\\Lambda_X\\otimes f^{\\Ab}_*M\\xrightarrow{\\mu}\nf^{\\Ab}_*(\\Lambda_X\\otimes M)\\to f^{\\Ab}_*M .\n$$\n\nThe functor $f_*$ is additive and left exact.",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring and $f\\colon X\\to Y$ a morphism of\nschemes, with coefficient rings $\\Lambda_X=p_X^*\\Lambda$\n([sk-def-sfb-pulled-back-coefficients]) and categories of module objects\n$\\Mod_{\\Lambda_X}$ ([sk-def-sfb-module-objects]). The *pushforward of module objects* is\n\n$$\nf_*:=\\operatorname{Res}_{\\eta_f}\\circ\\operatorname{mapMod}(f^{\\Ab}_*)\\colon\n\\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_Y},\n$$\n\nwhere the transport ([def-sfb-modobj-transport]) $\\operatorname{mapMod}(f^{\\Ab}_*)$ makes $f^{\\Ab}_*M$ an\n$f^{\\Ab}_*\\Lambda_X$-module through the lax monoidal structure of the pushforward\n$f^{\\Ab}_*$ of abelian sheaves ([def-sfb-finite-lower-star],\n[def-sfb-finite-lower-star-lax-monoidal]), and $\\operatorname{Res}_{\\eta_f}$ restricts scalars\n([def-sfb-modobj-restriction]) along $\\eta_f\\colon\\Lambda_Y\\to f^{\\Ab}_*\\Lambda_X$ ([sk-def-sfb-coefficient-morphisms]). Thus the underlying sheaf of $f_*M$ is\n$f^{\\Ab}_*M$, and $\\Lambda_Y$ acts by\n\n$$\n\\Lambda_Y\\otimes f^{\\Ab}_*M\\xrightarrow{\\eta_f\\otimes1}\nf^{\\Ab}_*\\Lambda_X\\otimes f^{\\Ab}_*M\\xrightarrow{\\mu}\nf^{\\Ab}_*(\\Lambda_X\\otimes M)\\to f^{\\Ab}_*M .\n$$\n\nThe functor $f_*$ is additive and left exact.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star.md",
   "place": "node def-sfb-module-lower-star, order 1686"
@@ -15,29 +15,183 @@
  "stmt_deps": [
   "sk-def-sfb-pulled-back-coefficients",
   "sk-def-sfb-module-objects",
-  "sk-def-sfb-transport",
-  "sk-def-sfb-coefficient-morphisms"
+  "def-sfb-modobj-transport",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-sfb-modobj-restriction",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-lower-star-lax-monoidal"
  ],
  "proof": [
   {
-   "text": "Both factors are additive. The pushforward $f^{\\Ab}_*$ is left exact, being a right\nadjoint ([sk-def-sfb-finite-pushforward-pullback]). Finite limits of module objects\nare computed on the underlying sheaves ([sk-prop-sfb-module-category]), so\n$\\operatorname{mapMod}(f^{\\Ab}_*)$ is left exact, and restriction of scalars is exact\n([sk-def-sfb-change-of-scalars]). Hence $f_*$ is left exact.",
+   "text": "Put $F=f^{\\Ab}_*$. The lax monoidal structure of [def-sfb-finite-lower-star-lax-monoidal] and [def-sfb-modobj-transport] give an $F\\Lambda_X$-module with underlying sheaf $FM$ and action $F\\gamma_M\\circ\\mu^F_{\\Lambda_X,M}$. The coefficient map $\\eta_f\\colon\\Lambda_Y\\to F\\Lambda_X$ is a ring morphism by [sk-def-sfb-coefficient-morphisms]. Apply [def-sfb-modobj-restriction] to it. The resulting action is $F\\gamma_M\\circ\\mu^F_{\\Lambda_X,M}\\circ(\\eta_f\\otimes FM)$, exactly the displayed formula; the resulting functor has underlying sheaf $FM$ and sends a module morphism $a$ to $Fa$.",
    "uses": [
-    "sk-def-sfb-change-of-scalars"
+    "def-sfb-finite-lower-star-lax-monoidal",
+    "def-sfb-modobj-transport",
+    "sk-def-sfb-coefficient-morphisms",
+    "def-sfb-modobj-restriction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star.proof.md",
+    "place": "Construction: transport, then restriction; underlying sheaf and displayed action"
+   }
+  },
+  {
+   "text": "Tensoring preserves colimits by [sk-def-sfb-sheaf-tensor], hence zero objects and binary coproducts. Such a functor preserves the biproduct projections (characterized by identity and zero on each summand), and thus diagonals and codiagonals; applying it to $a+b=\\nabla\\circ(a\\oplus b)\\circ\\Delta$ proves additivity of tensoring. The linearity equation in [sk-def-sfb-module-objects] is then closed under sums, negatives and zero by bilinearity of composition, so module Hom groups inherit these operations from the underlying abelian sheaves. By the restriction formula of [def-sfb-finite-lower-star], for module maps $a,b\\colon M\\to N$ and $V\\in Y_{\\mathrm{proét}}$, $(F(a+b))_V=(a+b)_{V\\times_YX}=a_{V\\times_YX}+b_{V\\times_YX}=(Fa+Fb)_V$. Restriction of scalars leaves underlying maps unchanged ([def-sfb-modobj-restriction]), so this equality proves $f_*(a+b)=f_*a+f_*b$; the zero map is treated by the same formula. Thus $f_*$ is additive.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-sheaf-tensor",
+    "def-sfb-finite-lower-star",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star.proof.md",
+    "place": "First sentence: both factors are additive, expanded on sections"
+   }
+  },
+  {
+   "text": "The adjunction of [def-sfb-finite-upper-lower-star-adjunction], with coefficient category $\\Ab$, implies that $F$ preserves zero objects, finite products and kernels directly: for any such underlying sheaf limit $L=\\lim_i M_i$ and any abelian sheaf $T$ on $Y$, the natural bijections $\\operatorname{Hom}(T,FL)\\cong\\operatorname{Hom}(f^*_{\\Ab}T,L)\\cong\\lim_i\\operatorname{Hom}(f^*_{\\Ab}T,M_i)\\cong\\lim_i\\operatorname{Hom}(T,FM_i)$ are exactly the universal property of the image cone. Here finite products and kernels of abelian sheaves exist sectionwise: compatible families of sections in a product glue component by component, and compatible sections killed by a morphism glue to a section still killed by it. In particular $F$ preserves zero objects, finite products, and kernels.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star.proof.md",
+    "place": "Second sentence: the abelian-sheaf pushforward is left exact because it is a right adjoint"
+   }
+  },
+  {
+   "text": "In each abelian-sheaf category tensoring is additive by step 2, so [lem-sfb-modobj-kernels] applies to every module morphism: its kernel is the sheaf kernel with the unique action making the kernel inclusion linear. Applying $f_*$ to a kernel inclusion gives a linear map by step 1 whose underlying map is a kernel by step 3. The uniqueness of the kernel action and its module-kernel universal property in [lem-sfb-modobj-kernels] therefore show that this image inclusion is a module kernel. Thus $f_*$ preserves kernels.",
+   "uses": [
+    "lem-sfb-modobj-kernels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star.proof.md",
+    "place": "Third sentence: kernel actions and their universal property give preservation of kernels"
+   }
+  },
+  {
+   "text": "For a ring object $R$ in either abelian-sheaf category, finite products of $R$-module objects have their underlying sheaf products: give $P=\\prod_i M_i$ the action uniquely characterized by $p_i\\gamma_P=\\gamma_{M_i}(R\\otimes p_i)$. Composing each unit or associativity equation with $p_i$ gives the corresponding axiom of $M_i$ in [sk-def-sfb-module-objects], so the product projections jointly imply the action laws. For linear maps $u_i\\colon T\\to M_i$, the unique underlying map $u\\colon T\\to P$ is linear because $p_i u\\gamma_T=u_i\\gamma_T=\\gamma_{M_i}(R\\otimes u_i)=p_i\\gamma_P(R\\otimes u)$ for every $i$. For an empty index set $P=0$, and the action, its laws, and the universal factorization are unique.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star.proof.md",
+    "place": "Third sentence: construction and universal property of finite products of module objects"
+   }
+  },
+  {
+   "text": "The product comparison $e\\colon f_*(\\prod_i M_i)\\to\\prod_i f_*M_i$ has linear components, hence is linear by step 5, and its underlying sheaf map is invertible by step 3. Its underlying inverse is linear: from $e\\gamma_P=\\gamma_Q(R\\otimes e)$, compose on the left with $e^{-1}$ and on the right with $R\\otimes e^{-1}$ to obtain $\\gamma_P(R\\otimes e^{-1})=e^{-1}\\gamma_Q$. These inverse maps therefore form a module isomorphism. This includes the empty product, so $f_*$ preserves finite products and the zero object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star.proof.md",
+    "place": "Third and fourth sentences: product comparisons are module isomorphisms"
+   }
+  },
+  {
+   "text": "For a finite diagram $D$, put $P=\\prod_i D_i$ and $Q=\\prod_{a\\colon i\\to j}D_j$, with maps $s,t\\colon P\\to Q$ characterized in the $a$ component by $s_a=D(a)p_i$ and $t_a=p_j$. A map $u\\colon T\\to P$ satisfies $(s-t)u=0$ exactly when its components form a cone on $D$; hence the kernel of $s-t$ with its projected maps is the diagram limit. Applying $f_*$ preserves the products by step 6, the difference by step 2, and the kernel by step 4, so the image cone has this same universal property. Thus $f_*$ preserves finite limits and is left exact.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star.proof.md",
+    "place": "Third and fourth sentences: explicit finite-diagram limit construction and preservation"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-change-of-scalars"
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "def-sfb-modobj-transport",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-sfb-modobj-restriction",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-sheaf-tensor",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "lem-sfb-modobj-kernels"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star.proof.md",
+  "place": "Entire proof, with the additivity and finite-limit arguments expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pushforward of module objects along a morphism of schemes via mapMod and restriction of scalars",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: Scheme.Modules.pushforward concerns Zariski structure-sheaf modules, not internal modules over pulled-back condensed coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMod, CategoryTheory.ModuleCat.comap, PreservesFiniteLimits",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.mapMod'",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle reports unknown identifier CategoryTheory.Functor.mapMod; this diagnostic alone is not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|lowerStar|Res_",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match in this grep; the second grep uses the actual CategoryTheory/Monoidal directory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushforward functor module objects condensed ring proetale sheaves additive left exact",
+   "results": "SheafOfModules.pushforward, TopCat.Sheaf.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward, PresheafOfModules.pushforward_obj_obj, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforwardComp, SheafOfModules.pushforward_map_val, CategoryTheory.Functor.sheafPushforwardContinuous",
+   "date": "2026-10-16",
+   "verdict": "no exact match: SheafOfModules.pushforward is a related construction in another coefficient category; identifying that category with internal module objects is an additional theorem, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lax monoidal additive functor induces a left exact functor on internal module objects if it preserves finite limits",
+   "results": "CategoryTheory.instPreservesFiniteLimitsObjFunctorLeftExactFunctor, CategoryTheory.LeftExactFunctor.of, CategoryTheory.leftExactFunctor, AddCommGrpCat.leftExactFunctorForgetEquivalence.instPreservesFiniteLimitsObjLeftExactFunctorTypeFunctorInverseAux, CategoryTheory.AdditiveFunctor.ofLeftExact, CategoryTheory.leftExactFunctor_le_additiveFunctor, CategoryTheory.leftExactFunctor_iff, CategoryTheory.LeftExactFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: results concern the abstract category of left exact functors, not transport of module objects."
+  },
+  {
+   "tool": "grep",
+   "query": "def mapMod|mapMod|Mod.*comap",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: Mon.lean:856 is a TODO for mapMod; Mod.lean:447 is a deprecated alias for scalar restriction, not this pushforward."
+  },
+  {
+   "tool": "loogle",
+   "query": "Mod.comap",
+   "results": "loogle: unknown identifier 'Mod.comap'",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle reports unknown identifier Mod.comap; read the grep hits and semantic candidates instead."
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforward|instance.*[Pp]ushforward|mapMod",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match: pushforward at PushforwardContinuous.lean:44 and right adjoint instances in PullbackContinuous.lean concern SheafOfModules, not the internal Mod category in the statement."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteLimits|def restrictScalars|def comap|def pushforward",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mod.lean",
+   "date": "2026-10-16",
+   "verdict": "CategoryTheory.Mod.comap at Mathlib/CategoryTheory/Monoidal/Mod.lean:403 defines scalar restriction, already represented by def-sfb-modobj-restriction; it does not construct the scheme pushforward or assert the complete item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for internal module objects preserves limits and additive functors on sheaves induce additive functors on modules",
+   "results": "SheafOfModules.forgetPreservesLimitsOfShape, SheafOfModules.forgetPreservesLimitsOfSize, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.restrictScalars, SheafOfModules.instAdditivePresheafOfModulesValRingCatForget, SheafOfModules.createsLimit, SheafOfModules.hasLimit, ModuleCat.preservesLimit_restrictScalars",
+   "date": "2026-10-16",
+   "verdict": "Related SheafOfModules results concern sectionwise modules over a RingCat-valued sheaf; applying them to internal module objects requires a comparison theorem, so they do not state this item."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -61,5 +215,29 @@
   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-module-lower-star",
+  "worker": "stage1",
+  "summary": "Kept the full definition and both asserted properties. Replaced absent umbrella citations by detailed existing nodes; expanded additivity on sections and the finite-limit argument through kernels and finite products. No new nodes and no exact finished-source attachment. Mathlib sheaf-of-modules candidates do not directly state the internal-module construction. Second reading made tensor additivity explicit and separated the kernel, product, comparison and finite-diagram arguments into individually checkable steps.",
+  "blueprint": "Realizes the construction and action formula in def-sfb-module-lower-star.md and every sentence of def-sfb-module-lower-star.proof.md. The surrounding unit retains its mapMod-then-change-scalars route; its pushforward clause is realized here.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-modobj-kernels",
+    "why": "Uses the generic unique module action on an underlying kernel. It expands the blueprint proof's module-category finite-limit assertion; the pushforward unit has no separate kernel statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-modobj-kernels"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q18-dde5e5f05",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-dde5e5f05 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source locations; verified all seven steps, coefficient-map direction, internal-module category, edge cases, duplicate candidates and acyclic dependencies. Accepted lem-sfb-modobj-kernels as a generic tool use. No repairs needed. Detailed findings are in review.md."
+ }
 }
