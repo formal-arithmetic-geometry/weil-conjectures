@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-point-lan-exists",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Left Kan extensions along $u^{\\mathrm{op}}$ exist",
@@ -15,22 +15,169 @@
  "stmt_deps": [
   "def-sfb-profinite-to-proetale"
  ],
- "proof": [
-  {
-   "text": "The value of the pointwise left Kan extension at $V$ is the colimit of\n$F(S)$ over the comma category of pairs $(S,\\ V\\to u(S))$. Both sites are\nessentially small with respect to the universe in which the abelian groups\ntake values. So these comma categories are essentially small, and the\ncolimits exist because $\\Ab$ is cocomplete.",
-   "uses": [],
-   "elementary": null
-  }
- ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-lan-exists.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-lan-exists.proof.md",
+  "place": "Pointwise colimit argument, supplied by the Mathlib declarations recorded in mathlib_match; provenance retained for the existing item as required by preflight."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hasLeftKanExtension_of|hasPointwiseLeftKanExtension_of|hasColimitsOfSize",
+   "results": "2 hits: Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean; Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean; directory Mathlib/CategoryTheory/Functor/KanExtension",
+   "date": "2026-10-16",
+   "verdict": "supporting source search; verified declarations and lines are specified in mathlib_match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left Kan extensions along functors between small categories exist in a cocomplete category",
+   "results": "8 hits: CategoryTheory.Functor.HasLeftKanExtension; CategoryTheory.Functor.leftKanExtension; CategoryTheory.Functor.HasLeftKanExtension.mk; CategoryTheory.Functor.LeftExtension; CategoryTheory.Functor.IsLeftKanExtension; CategoryTheory.Bicategory.LeftExtension.IsKan.hasLeftKanExtension; CategoryTheory.Functor.lan; CategoryTheory.Bicategory.lanIsKan",
+   "date": "2026-10-16",
+   "verdict": "candidates inspected; see the verified specialization in mathlib_match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.HasLeftKanExtension",
+   "results": "12 hits: CategoryTheory.Functor.HasLeftKanExtension; CategoryTheory.Functor.leftKanExtension; CategoryTheory.Functor.hasLeftExtension_iff_of_iso₁; CategoryTheory.Functor.hasLeftExtension_iff_of_iso₂; CategoryTheory.Functor.instIsLeftKanExtensionLeftKanExtensionLeftKanExtensionUnit; CategoryTheory.Functor.leftKanExtensionUnit; CategoryTheory.Functor.HasLeftKanExtension.mk; CategoryTheory.Functor.hasLeftExtension_iff_postcomp₁",
+   "date": "2026-10-16",
+   "verdict": "candidates inspected; see the verified specialization in mathlib_match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between small categories has a left Kan extension with values in abelian groups in a larger universe",
+   "results": "8 hits: CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension; CategoryTheory.Functor.lan; CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits; CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap; CategoryTheory.Functor.pointwiseLeftKanExtension; CategoryTheory.Functor.instHasLeftKanExtension; CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension; CategoryTheory.Abelian.extFunctor",
+   "date": "2026-10-16",
+   "verdict": "candidates inspected; see the verified specialization in mathlib_match"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*[Hh]asPointwise|HasColimit|HasColimitsOfShape|hasLeftKanExtension",
+   "results": "5 hits: 47; 71; 97; 120; 122; directory Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean; the search wrapper misparsed single-file rg output as filenames 47, 71, 97, 120, 122; the source at those lines was read directly",
+   "date": "2026-10-16",
+   "verdict": "no standalone match in these early hits; refined directory search found the instance at line 659"
+  },
+  {
+   "tool": "grep",
+   "query": "HasColimitsOfSize|hasColimitsOfSize|hasColimitsOfShape|hasColimits",
+   "results": "5 hits: Mathlib/Algebra/Category/Grp/Colimits.lean; Mathlib/Algebra/Category/Grp/Colimits.lean; Mathlib/Algebra/Category/Grp/Colimits.lean; Mathlib/Algebra/Category/Grp/AB.lean; Mathlib/Algebra/Category/Grp/AB.lean; directory Mathlib/Algebra/Category/Grp",
+   "date": "2026-10-16",
+   "verdict": "supporting source search; verified declarations and lines are specified in mathlib_match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If all comma category diagrams have colimits, a functor admits a pointwise left Kan extension",
+   "results": "8 hits: CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension; CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt; CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension.hasPointwiseLeftKanExtension; CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension.hasLeftKanExtension; CategoryTheory.Functor.instHasLeftKanExtension; CategoryTheory.Functor.isPointwiseLeftKanExtensionOfIsLeftKanExtension; CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.hasPointwiseLeftKanExtensionAt; CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension.isLeftKanExtension",
+   "date": "2026-10-16",
+   "verdict": "candidates inspected; see the verified specialization in mathlib_match"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*HasLeftKanExtension|instance.*hasLeftKanExtension|instHasLeftKanExtension",
+   "results": "2 hits: Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean; Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean; directory Mathlib/CategoryTheory/Functor/KanExtension; Pointwise.lean:659 (instance HasLeftKanExtension L F), Preserves.lean:130 (requires preservation)",
+   "date": "2026-10-16",
+   "verdict": "match: Pointwise.lean:659 with the automatically available pointwise colimit family described in mathlib_match"
+  },
+  {
+   "tool": "grep",
+   "query": "instance hasColimit \\[Small",
+   "results": "1 hits: Mathlib/Algebra/Category/Grp/Colimits.lean; directory Mathlib/Algebra/Category/Grp; Mathlib/Algebra/Category/Grp/Colimits.lean:283, AddCommGrpCat.hasColimit",
+   "date": "2026-10-16",
+   "verdict": "supporting source search; verified declarations and lines are specified in mathlib_match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of abelian groups has colimits indexed by any category whose type of objects is small",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGrpCat.hasColimit",
+   "results": "4 hits: AddCommGrpCat.hasColimit; AddCommGrpCat.cokernelIsoQuotient; FGModuleCat.instFiniteCarrierSigmaObjModuleCatOfFinite; FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂LinearMapIdObjIsFG",
+   "date": "2026-10-16",
+   "verdict": "candidates inspected; see the verified specialization in mathlib_match"
+  },
+  {
+   "tool": "grep",
+   "query": "def Profinite|abbrev Profinite|structure Profinite",
+   "results": "6 hits: Mathlib/Topology/Category/CompHausLike/Basic.lean; Mathlib/Topology/Category/Profinite/EffectiveEpi.lean; Mathlib/Topology/Category/Profinite/Basic.lean; Mathlib/Topology/Category/Profinite/Basic.lean; Mathlib/Topology/Category/Profinite/Basic.lean; Mathlib/Topology/Category/Profinite/Basic.lean; directory Mathlib/Topology/Category",
+   "date": "2026-10-16",
+   "verdict": "supporting source search; verified declarations and lines are specified in mathlib_match"
+  },
+  {
+   "tool": "grep",
+   "query": "def CostructuredArrow|abbrev CostructuredArrow|structure CostructuredArrow",
+   "results": "25 hits: Mathlib/CategoryTheory/Discrete/StructuredArrow.lean; Mathlib/CategoryTheory/Join/Final.lean; Mathlib/CategoryTheory/MorphismProperty/Comma.lean; Mathlib/CategoryTheory/MorphismProperty/Comma.lean; Mathlib/CategoryTheory/MorphismProperty/Comma.lean; Mathlib/CategoryTheory/MorphismProperty/Comma.lean; Mathlib/CategoryTheory/MorphismProperty/Comma.lean; Mathlib/CategoryTheory/Comma/Presheaf/Colimit.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "supporting source search; verified declarations and lines are specified in mathlib_match"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev ProEt|def ProEt |ProEt :=|ProEt : Type",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "supporting source search; verified declarations and lines are specified in mathlib_match"
+  },
+  {
+   "tool": "grep",
+   "query": "instance small_self|theorem small_self|instance.*Small.*α",
+   "results": "18 hits: Mathlib/Logic/Small/List.lean; Mathlib/Logic/Small/List.lean; Mathlib/Logic/Small/List.lean; Mathlib/Logic/Small/Basic.lean; Mathlib/Logic/Small/Basic.lean; Mathlib/Logic/Small/Basic.lean; Mathlib/Logic/Small/Basic.lean; Mathlib/Logic/Small/Basic.lean; directory Mathlib/Logic/Small",
+   "date": "2026-10-16",
+   "verdict": "supporting source search; verified declarations and lines are specified in mathlib_match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasPointwiseLeftKanExtension L F|instance hasColimitsOfShape|instance hasColimit \\[Small",
+   "results": "10 hits: Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean; Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean; Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean; Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean; Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; directory Mathlib/CategoryTheory/Functor/KanExtension",
+   "date": "2026-10-16",
+   "verdict": "verified the pointwise hypothesis at Pointwise.lean:596 and construction at lines 600–660; supporting source search"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasPointwiseLeftKanExtension\" \"HasLeftKanExtension\"",
+   "results": "0 hits: ; loogle: Function expected at\n  \"HasPointwiseLeftKanExtension\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"HasLeftKanExtension\"",
+   "date": "2026-10-16",
+   "verdict": "invalid query syntax; no mathematical absence claim; corrected with comma-separated strings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor into AddCommGrpCat admits a left Kan extension when each costructured arrow diagram has a colimit",
+   "results": "8 hits: CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension; CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension; CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension; CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits; CategoryTheory.Functor.leftKanExtensionObjIsoColimit; CategoryTheory.Functor.pointwiseLeftKanExtension_obj; CategoryTheory.Functor.pointwiseLeftKanExtension; CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension",
+   "date": "2026-10-16",
+   "verdict": "related pointwise construction and universal-property candidates; read Pointwise.lean:596–660 and retained the existing exact instance match"
+  },
+  {
+   "tool": "grep",
+   "query": "instance hasColimit|instance hasColimitsOfShape",
+   "results": "2 hits: Mathlib/Algebra/Category/Grp/Colimits.lean; Mathlib/Algebra/Category/Grp/Colimits.lean; directory Mathlib/Algebra/Category/Grp",
+   "date": "2026-10-16",
+   "verdict": "verified AddCommGrpCat.hasColimit at Colimits.lean:283–285 and hasColimitsOfShape at line 291; only object smallness required"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasPointwiseLeftKanExtension\", \"HasLeftKanExtension\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no hit for the combined name substrings; the refined instance-name search returned the exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"instHasLeftKanExtension\"",
+   "results": "2 hits: CategoryTheory.Functor.instHasLeftKanExtension; CategoryTheory.Bicategory.Lan.CommuteWith.instHasLeftKanExtensionComp",
+   "date": "2026-10-16",
+   "verdict": "verified exact instance signature against Pointwise.lean:596,659–660; second result is the separate bicategorical API"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.instHasLeftKanExtension",
+  "file": "Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean",
+  "line": 659,
+  "how": "specializes in one line: take L = u.op, C = Profinite.{u}ᵒᵖ, D = (specZ.{u}.ProEt)ᵒᵖ, H = AddCommGrpCat.{u + 1}, and the given F. Its HasPointwiseLeftKanExtension hypothesis unfolds (same file, lines 46–52) to a family of HasColimit instances. Supply this family objectwise by AddCommGrpCat.hasColimit, Mathlib/Algebra/Category/Grp/Colimits.lean:283. Each CostructuredArrow L V has its object type in Type (u + 1), so the sole additional Small.{u + 1} hypothesis is the automatic small_self instance, Mathlib/Logic/Small/Defs.lean:77. No continuity, sheaf condition, finite-limit preservation or smaller-universe essential-smallness theorem is used."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -47,5 +194,20 @@
   "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-point-lan-exists",
+  "worker": "stage1",
+  "summary": "Identified the item as a specialization of Mathlib’s pointwise-to-global left Kan extension instance. Checked the pointwise existence hypothesis by AddCommGrpCat.hasColimit and small_self in the coefficient universe u + 1, matching the upstream master declaration. The named declaration is absent in slopmaster2 and sorried on master, so no project attachment is claimed. Preserved the statement, source, import flags and blueprint metadata, removed the unnecessary imported proof in favor of the Mathlib match, and introduced no nodes.",
+  "blueprint": "Realizes the whole assertion and the colimit argument of lem-sfb-point-lan-exists.proof.md, in part 3 (Inverse image from the point) of sk-def-sfb-pullback-from-point. The comma category is (u.op ↓ V.op), whose objects are pairs (S, V → u(S)); the imported essential-smallness sentence is discharged directly by its object-universe bound and Mathlib colimit instances."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q52-509a0f361",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q52-509a0f361 (reviewer sub-agent of L); spot-checked: Reviewed the item, dependency, blueprint proof and route, exact Mathlib Kan-extension and colimit sources, universes, variance, edge cases, searches, and attachment status. No new nodes, repairs, or tool uses; review.md written."
+ }
 }
