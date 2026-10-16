@@ -5,10 +5,8 @@ Authors: SHEAF groups NV and C3
 -/
 module
 
-public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
-import Sheaf.CategoryTheory.ExactCoupleMorphism
 import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
 import Sheaf.CategoryTheory.ExactFunctorHalfPlane
 import Sheaf.CategoryTheory.FiniteFiltrationInduction
