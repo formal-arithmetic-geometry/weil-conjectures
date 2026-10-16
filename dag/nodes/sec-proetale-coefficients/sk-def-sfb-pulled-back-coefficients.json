@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-def-sfb-pulled-back-coefficients",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Coefficients pulled back from the point",
@@ -18,31 +18,101 @@
  ],
  "proof": [
   {
-   "text": "By [sk-def-sfb-pullback-from-point], $p_X^*$ is strong monoidal. A (lax)\nmonoidal functor sends monoid objects to monoid objects, with the unit and\nmultiplication described above, and morphisms of monoid objects to morphisms\nof monoid objects. The associativity and unit axioms follow from the\ncoherence of the monoidal structure maps. This gives the functor on ring\nobjects.",
+   "text": "Write the given ring object as $(\\Lambda,\\mu,\\eta)$, with multiplication $\\mu:\\Lambda\\otimes\\Lambda\\to\\Lambda$ and unit $\\eta:\\mathbf Z\\to\\Lambda$, as in [sk-def-sfb-ring-object]. By part 4 of [sk-def-sfb-pullback-from-point], $F=p_X^*$ is a strong monoidal braided functor between the indicated categories of abelian sheaves. Denote its tensor and unit comparison isomorphisms by $\\delta_{A,B}:FA\\otimes FB\\to F(A\\otimes B)$ and $\\epsilon:\\mathbf Z\\to F\\mathbf Z$. Define the underlying coefficient object to be $\\Lambda_X=F\\Lambda$, its multiplication to be $\\mu_X=F\\mu\\circ\\delta_{\\Lambda,\\Lambda}$, and its unit to be $\\eta_X=F\\eta\\circ\\epsilon$. All these maps have the domains and codomains in the statement; no commutativity hypothesis on $\\Lambda$ is used.",
    "uses": [
+    "sk-def-sfb-ring-object",
     "sk-def-sfb-pullback-from-point"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pulled-back-coefficients/sk-def-sfb-pulled-back-coefficients.proof.md",
+    "place": "definition and proof, first paragraph: strong monoidal pullback and the unit/multiplication"
+   }
   },
   {
-   "text": "Also by [sk-def-sfb-pullback-from-point], $p_X^*$ is braided. Suppose\n$\\Lambda$ is commutative, i.e. its multiplication is invariant under the\nsymmetry of $\\Lambda\\otimes\\Lambda$. Then the multiplication of $p_X^*\\Lambda$\nis invariant under the symmetry of $p_X^*\\Lambda\\otimes p_X^*\\Lambda$, because\n$p_X^*$ carries one symmetry to the other.",
+   "text": "Apply part 1 of [det-def-sfb-ring-object-transport] with $\\mathcal C=\\Sh(*_{\\mathrm{proét}},\\Ab)$, $\\mathcal D=\\Sh(X_{\\mathrm{proét}},\\Ab)$, $F=p_X^*$ and $R=\\Lambda$. Its hypotheses hold because the strong monoidal structure of step 1 is in particular lax monoidal. Its displayed formulas are exactly $\\mu_X$ and $\\eta_X$, so it gives associativity and both unit laws for these actual maps. Thus the object defined in step 1 is a ring object, rather than merely an unspecified ring structure on $F\\Lambda$.",
    "uses": [
+    "det-def-sfb-ring-object-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pulled-back-coefficients/sk-def-sfb-pulled-back-coefficients.proof.md",
+    "place": "proof, first paragraph: transport of monoid objects and coherence"
+   }
+  },
+  {
+   "text": "For a morphism of ring objects $a:\\Lambda\\to\\Lambda'$, set $a_X=F(a)$. Part 1 of [det-def-sfb-ring-object-transport] says that this map respects the transported multiplication and unit. Explicitly, naturality of $\\delta$ gives $F(a)\\circ\\mu_X=F(a\\circ\\mu)\\circ\\delta_{\\Lambda,\\Lambda}=F(\\mu')\\circ\\delta_{\\Lambda',\\Lambda'}\\circ(F(a)\\otimes F(a))=\\mu'_X\\circ(F(a)\\otimes F(a))$, and $F(a)\\circ\\eta_X=F(a\\circ\\eta)\\circ\\epsilon=\\eta'_X$. The identities $F(\\mathrm{id})=\\mathrm{id}$ and $F(b\\circ a)=F(b)\\circ F(a)$ give the identity and composition laws. This is the claimed functor on ring objects.",
+   "uses": [
+    "det-def-sfb-ring-object-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pulled-back-coefficients/sk-def-sfb-pulled-back-coefficients.proof.md",
+    "place": "proof, first paragraph: morphisms and functoriality"
+   }
+  },
+  {
+   "text": "If $\\Lambda$ is commutative, part 2 of [det-def-sfb-ring-object-transport] applies, since $F$ is braided by [sk-def-sfb-pullback-from-point], part 4. In the present notation its compatibility with the braiding says $\\delta_{\\Lambda,\\Lambda}\\circ\\beta_{F\\Lambda,F\\Lambda}=F(\\beta_{\\Lambda,\\Lambda})\\circ\\delta_{\\Lambda,\\Lambda}$. Consequently $\\mu_X\\circ\\beta_{F\\Lambda,F\\Lambda}=F(\\mu)\\circ F(\\beta_{\\Lambda,\\Lambda})\\circ\\delta_{\\Lambda,\\Lambda}=F(\\mu\\circ\\beta_{\\Lambda,\\Lambda})\\circ\\delta_{\\Lambda,\\Lambda}=F(\\mu)\\circ\\delta_{\\Lambda,\\Lambda}=\\mu_X$. This proves commutativity for the specified ring object.",
+   "uses": [
+    "det-def-sfb-ring-object-transport",
     "sk-def-sfb-pullback-from-point"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pulled-back-coefficients/sk-def-sfb-pulled-back-coefficients.proof.md",
+    "place": "proof, second paragraph: preservation of commutativity"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-pullback-from-point"
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-pullback-from-point",
+  "det-def-sfb-ring-object-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pulled-back-coefficients/_section.md",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pulled-back-coefficients/sk-def-sfb-pulled-back-coefficients.proof.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image functor from condensed abelian groups to pro-etale sheaves sends a condensed ring to a ring object and preserves commutativity",
+   "results": "Eight hits: Condensed.profiniteSolid, Condensed.abForget, Condensed.profiniteFree, CondensedMod.LocallyConstant.functorToPresheaves, CondensedMod, CondensedAb, CondensedMod.ofSheafProfinite, Condensed.forget. These construct or forget condensed modules; none constructs the inverse image to the pro-etale site of a scheme.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMon",
+   "results": "Twelve hits led by CategoryTheory.Functor.mapMon, with type (F : C ⥤ D) [F.LaxMonoidal] : Mon C ⥤ Mon D. Read Mathlib/CategoryTheory/Monoidal/Mon.lean:827 (monObjObj), :852 (map.instIsMonHom), :867 (mapMon). Generic transport has the exact multiplication/unit formulas; it does not construct p_X^*.",
+   "date": "2026-10-16",
+   "verdict": "generic ingredient matches existing det-def-sfb-ring-object-transport; no match for the whole item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lax monoidal functor maps monoid objects to monoid objects and a braided functor preserves commutative monoid objects",
+   "results": "Eight hits including CategoryTheory.Functor.mapCommMon, Functor.Faithful.mapCommMon, Functor.Full.mapCommMon, Functor.mapCommMon_obj_X, Functor.instLaxMonoidalMonMapMon, Functor.Braided.mk, LaxMonoidalFunctor.of, and CommMon.EquivLaxBraidedFunctorPUnit.laxBraidedToCommMon_map. Read Mathlib/CategoryTheory/Monoidal/CommMon_.lean:157 (isCommMonObj_obj) and :169 (mapCommMon); they supply generic braided transport, not p_X^*.",
+   "date": "2026-10-16",
+   "verdict": "generic ingredient matches existing transport node; no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "condensedRingObj|coefficientRing|upperStarFromPoint|def mapMon|def mapCommMon|theorem isCommMonObj_obj",
+   "results": "Fifteen hits; relevant declarations are CategoryTheory.Functor.mapMon at Mathlib/CategoryTheory/Monoidal/Mon.lean:867 and mapCommMon at Mathlib/CategoryTheory/Monoidal/CommMon_.lean:169, plus their functoriality constructions. No condensedRingObj, coefficientRing, or upperStarFromPoint hit. Read the local source around both declarations.",
+   "date": "2026-10-16",
+   "verdict": "no match for the specific coefficient construction; generic categorical ingredient already has a DAG node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of a condensed ring is a ring object on the pro-etale site of a scheme",
+   "results": "Eight hits: AlgebraicGeometry.Spec.preimage, AlgebraicGeometry.StructureSheaf.comap_id', AlgebraicGeometry.LocallyRingedSpace.preimage_basicOpen, CondensedMod, LightCondMod, CategoryTheory.Equivalence.instIsDenseSubsiteRegularTopologyInverse, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality_assoc, Condensed.ofSheafProfinite. These concern schemes, ringed spaces, condensed modules, or equivalences of coherent sites; none constructs the inverse image of a condensed ring to the pro-etale site of a scheme.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item under a second phrasing"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -67,5 +137,29 @@
   "sketch"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-pulled-back-coefficients",
+  "worker": "stage1",
+  "summary": "Kept the complete coefficient definition and all hypotheses. Exposed the maps and verified their ring-object axioms, morphisms, functor laws, and commutativity by the existing general monoidal-transport theorem; no new nodes. Searched project Lean and Mathlib and read the generic mapMon/mapCommMon implementations.",
+  "blueprint": "Realizes the definition and both paragraphs of sk-def-sfb-pulled-back-coefficients.proof.md: strong monoidal transport with its actual maps, ring morphisms and functoriality (steps 1–3), braided commutativity (step 4).",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-ring-object-transport",
+    "why": "Generic transport of monoid objects along a lax monoidal functor; it supplies the coherence theorem explicitly used by the unit proof, without changing its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-ring-object-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N5-5fff33d02",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-5fff33d02 (reviewer sub-agent of L); spot-checked: Read and checked all four steps, cited statements, current blueprint sources, overlap candidates, and archived master coefficient conventions. Transport maps, functoriality, and braided commutativity are correct; edge cases pass. Accepted generic transport tool use. No new nodes or repairs. Full findings recorded in review.md."
+ }
 }

@@ -3,25 +3,124 @@
  "blueprint": {
   "is": "def-sfb-constructible-module",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Constructible modules on the pro-étale site",
- "statement": "In the situation of [def-sfb-locally-finitely-presented], an $\\mathcal R$-module $M$ is\n*constructible* if there is a stratification of $X$ [def-constructible-stratification],\nwith strata given by immersions $g_a\\colon X_a\\to X$, such that, for every $a$, the\n$g_a^*\\mathcal R$-module $\\operatorname{mapMod}(g_a^*)(M)$ is locally finitely presented\nover $g_a^*\\mathcal R$ [def-sfb-locally-finitely-presented].",
+ "statement": "Let $\\mathcal A$ be a closed symmetric monoidal Grothendieck abelian category whose tensor product is additive, and let $X$ be a scheme. Give $\\Sh(X_{\\mathrm{proét}},\\mathcal A)$ the sheaf tensor product of [sk-def-sfb-sheaf-tensor], on the small pro-étale site [def-weil-pbc-proetale-site]. Let $\\mathcal R$ be a ring object [sk-def-sfb-ring-object] of this category and let $M$ be a left $\\mathcal R$-module object [sk-def-sfb-module-objects].\n\nFor a morphism $g\\colon Z\\to X$, write $g^*$ for the pullback of sheaves [def-sfb-finite-upper-star], with its strong monoidal structure [def-sfb-finite-upper-star-monoidal]. Write $\\operatorname{mapMod}(g^*)$ for the transport of module objects [sk-def-sfb-transport]; it sends $M$ to a module over the pulled-back ring object $g^*\\mathcal R$.\n\nThe module $M$ is *constructible* if there is a finite stratification of $X$ [def-constructible-stratification], with strata realized by immersions $g_a\\colon X_a\\to X$, such that, for every $a$, the $g_a^*\\mathcal R$-module $\\operatorname{mapMod}(g_a^*)(M)$ is locally finitely presented over $g_a^*\\mathcal R$ [def-sfb-locally-finitely-presented].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/def-sfb-constructible-module.md",
   "place": "node def-sfb-constructible-module, order 1640"
  },
  "stmt_deps": [
-  "def-sfb-locally-finitely-presented",
-  "def-constructible-stratification"
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-upper-star-monoidal",
+  "sk-def-sfb-transport",
+  "def-constructible-stratification",
+  "def-sfb-locally-finitely-presented"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsConstructible|IsLocallyFinitelyPresented|constructible.*(sheaf|module)|stratif.*module",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean; Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: constructible subsets and scheme image results, not constructible module objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaf of modules on a pro-etale site is locally finitely presented on each stratum of a finite stratification.",
+   "results": "SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.IsFinitePresentation.mk; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.mk; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.IsFinitePresentation.rec; SheafOfModules.IsFinitePresentation.exists_quasicoherentData",
+   "date": "2026-10-16",
+   "verdict": "no match: nearest hits concern local finite presentation or finite type for ordinary sheaves of modules; none defines finite stratifications with locally finitely presented module-object restrictions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\"",
+   "results": "Topology.IsConstructible; Topology.IsConstructible.univ; Topology.IsConstructible.empty; Topology.IsConstructible.isLocallyConstructible; IsRetrocompact.isConstructible; Topology.IsConstructible.compl; Topology.IsConstructible.of_compl; Topology.isConstructible_compl",
+   "date": "2026-10-16",
+   "verdict": "no match: constructible sets only, or no declarations with the queried name; no constructible module predicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible module over a ring object on the pro-etale site: there is a finite stratification such that its pullback to each stratum is locally finitely presented.",
+   "results": "SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.IsFiniteType; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.quasicoherentDataOfIsFinitePresentation; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-16",
+   "verdict": "no match: nearest hits concern local finite presentation or finite type for ordinary sheaves of modules; none defines finite stratifications with locally finitely presented module-object restrictions"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|stratif|IsFinitePresentation",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: local finite presentation of ordinary sheaves of modules, without stratification or arbitrary monoidal coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ConstructibleSheaf\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: constructible sets only, or no declarations with the queried name; no constructible module predicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules over a ring object in a symmetric monoidal abelian category is constructible if it becomes locally finitely presented after restriction to the strata of a finite stratification of a scheme.",
+   "results": "SheafOfModules.IsFiniteType; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.Presentation.IsFinite",
+   "date": "2026-10-16",
+   "verdict": "no match: nearest hits concern local finite presentation or finite type for ordinary sheaves of modules; none defines finite stratifications with locally finitely presented module-object restrictions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module sheaf admits a finite partition into locally closed subschemes on which it has a finite presentation by free modules.",
+   "results": "SheafOfModules.IsFinitePresentation; SheafOfModules.Presentation.IsFinite; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.Presentation; SheafOfModules.isFinitePresentation",
+   "date": "2026-10-16",
+   "verdict": "no exact match: local finite presentations and generator data for ordinary sheaves of modules, without a finite stratification predicate or arbitrary monoidal coefficient category"
+  },
+  {
+   "tool": "grep",
+   "query": "Stratification|IsConstructible",
+   "results": "Mathlib/Topology/Constructible.lean; Mathlib/Topology/Constructible.lean; Mathlib/Topology/Constructible.lean; Mathlib/Topology/Constructible.lean; Mathlib/Topology/Constructible.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match: constructible subsets, spectra and constructible images of scheme morphisms; none defines constructible module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMod\"",
+   "results": "PointedContMDiffMap.instAlgebraSomeENatTopContMDiffMapModelWithCornersSelf; PointedContMDiffMap.instIsScalarTowerSomeENatTopContMDiffMapModelWithCornersSelf; LeftInvariantDerivation.instFunLikeContMDiffMapModelWithCornersSelfSomeENatTop; LeftInvariantDerivation.instLinearMapClassContMDiffMapModelWithCornersSelfSomeENatTop; LeftInvariantDerivation.instCoeDerivationContMDiffMapModelWithCornersSelfSomeENatTop",
+   "date": "2026-10-16",
+   "verdict": "no exact match: the five returned declarations concern smooth maps and derivations on manifolds; none transports module objects or states the constructibility predicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules becomes finitely presented locally on each locally closed piece of a finite partition of a scheme",
+   "results": "SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.Presentation.IsFinite; SheafOfModules.LocalGeneratorsData.IsFiniteType",
+   "date": "2026-10-16",
+   "verdict": "No exact match: ordinary ring-sheaf finite presentations and finite-generator data; no finite stratification predicate for arbitrary monoidal coefficient categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinitelyPresented\", \"Sheaf\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "No hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Constructible|Stratification|IsLocallyFinitelyPresented",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "No hits in Algebra/Category/ModuleCat/Sheaf; ordinary finite-presentation definitions were read directly in Quasicoherent.lean:197–278."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -38,5 +137,20 @@
  "blueprint_lean_not_found": [
   "AlgebraicGeometry.ProEtale.IsConstructible"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-constructible-module",
+  "worker": "stage1",
+  "summary": "Expanded the inherited coefficient setup without changing the predicate, and exposed existing sheaf tensor, ring/module object, pullback, monoidal structure and module transport definitions as statement dependencies. Checked both original dependencies and the current blueprint, distinguished the finite-stalk Lean predicate and finite-constant-local-model unit, and recorded seven actual Mathlib searches. No new nodes or proof claims are introduced.",
+  "blueprint": "The entire definition in def-sfb-constructible-module.md (order 1640), and the restriction/mapMod paragraph of sk-def-sfb-constructible.proof.md. This is a definition split under stages/1-dag.md §3(2); no theorem proof steps are required."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q47-7a020b568",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q47-7a020b568 (reviewer sub-agent of L); spot-checked: Read the full item, report, nine dependency statements, cited sources and chapter/unit route. The coefficient hypotheses and mapMod restriction over the actual pulled-back ring match master. Checked empty, zero, regular and integer-module cases; found no duplicate, missing dependency or cycle. No comparison with finite-stalk or finite-constant-model constructibility is asserted. No repairs needed; detailed checks are in review.md."
+ }
 }

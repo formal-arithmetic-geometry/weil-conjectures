@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-modobj-symmetric-tensor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The symmetric monoidal structure on $\\Mod_{\\mathcal R}(\\mathcal C)$",
@@ -17,16 +17,59 @@
  ],
  "proof": [
   {
-   "text": "Write $\\pi_{M,N}\\colon M\\otimes N\\to M\\otimes_{\\mathcal R}N$ for the projection\n([def-sfb-modobj-relative-tensor]). For the descent, $\\pi_{N,M}\\beta_{M,N}$ must coequalize\nthe two maps $M\\otimes\\mathcal R\\otimes N\\rightrightarrows M\\otimes N$. By naturality of\n$\\beta$, the composite with $(\\gamma_M\\beta_{M,\\mathcal R})\\otimes N$ becomes the action of\n$\\mathcal R$ on the factor $M$ inside $N\\otimes M$. By the hexagon identities, the\ncomposite with $(M\\otimes\\gamma_N)\\alpha$ becomes the action on the factor $N$. The two\nexpressions differ by a double braiding $\\beta_{\\mathcal R,M}\\beta_{M,\\mathcal R}$. This is\nthe identity because $\\mathcal C$ is symmetric, and then the relation defining\n$N\\otimes_{\\mathcal R}M$ identifies them. For a merely braided $\\mathcal C$ the descent\nfails.",
+   "text": "Write $q_{M,N}:M\\otimes N\\to M\\otimes_{\\mathcal R}N$ for the coequalizer projection in [def-sfb-modobj-relative-tensor] and $\\rho_M=\\gamma_M\\beta_{M,\\mathcal R}$. A coequalizer projection $q$ is epi: if $u q=v q$, uniqueness in its universal property gives $u=v$. Each tensoring functor preserves this coequalizer, so $X\\otimes q$ and $q\\otimes X$ are also coequalizer projections and hence epi by the same argument. Composites of these projections are epi, since cancellation can be applied successively. Below juxtaposition of maps denotes composition, with the rightmost map applied first; associators in the displayed abbreviated composites are inserted as in the defining parallel pair. The calculations use naturality and the two hexagon axioms, not a replacement of the category by a strict one.",
    "uses": [
     "def-sfb-modobj-relative-tensor"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-symmetric-tensor.proof.md",
+    "place": "second paragraph (expanded universal-property and coherence calculations)"
+   }
   },
   {
-   "text": "The descended map is $\\mathcal R$-linear. This is checked after precomposing with the\nepimorphism $\\mathcal R\\otimes\\pi_{M,N}$, where it is again naturality of $\\beta$ and the\nrelation in $N\\otimes_{\\mathcal R}M$. The projections, and their tensor products with\nobjects, are epimorphisms because $\\otimes$ preserves coequalizers. So naturality, the\nhexagon identities and $\\beta_{N,M}\\beta_{M,N}=\\mathrm{id}$ can be checked after\nprecomposing with them. There they become the corresponding identities in $\\mathcal C$,\nbecause the associator of $\\otimes_{\\mathcal R}$ is induced by the associator of\n$\\mathcal C$.",
-   "uses": [],
-   "elementary": null
+   "text": "For the descent calculation, put $a=\\rho_M\\otimes N$ and $b=M\\otimes\\gamma_N$, with their defining associator, and let $t=\\beta_{\\mathcal R\\otimes M,N}(\\beta_{M,\\mathcal R}\\otimes N)$, a map from $M\\otimes\\mathcal R\\otimes N$ to $N\\otimes\\mathcal R\\otimes M$. Naturality gives $\\beta_{M,N}a=(N\\otimes\\gamma_M)t$ and $\\beta_{M,N}b=(\\gamma_N\\otimes M)\\beta_{M,\\mathcal R\\otimes N}$. Expanding the two block braidings by their hexagon axioms and cancelling $\\beta_{N,\\mathcal R}\\beta_{\\mathcal R,N}=1$ gives $(\\beta_{N,\\mathcal R}\\otimes M)t=\\beta_{M,\\mathcal R\\otimes N}$. The defining relation of $q_{N,M}$ in [def-sfb-modobj-relative-tensor] is $q_{N,M}(N\\otimes\\gamma_M)=q_{N,M}(\\gamma_N\\otimes M)(\\beta_{N,\\mathcal R}\\otimes M)$. Thus $q_{N,M}\\beta_{M,N}a=q_{N,M}\\beta_{M,N}b$. The coequalizer universal property defines a unique map $c_{M,N}$ satisfying $c_{M,N}q_{M,N}=q_{N,M}\\beta_{M,N}$.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-symmetric-tensor.proof.md",
+    "place": "first paragraph"
+   }
+  },
+  {
+   "text": "The action $\\lambda_{M,N}$ on the relative tensor product in [def-sfb-modobj-relative-tensor] satisfies $\\lambda_{M,N}(\\mathcal R\\otimes q_{M,N})=q_{M,N}(\\gamma_M\\otimes N)$. Precompose the proposed module-linearity equation $c_{M,N}\\lambda_{M,N}=\\lambda_{N,M}(\\mathcal R\\otimes c_{M,N})$ with $\\mathcal R\\otimes q_{M,N}$, an epi by step 1. Its left side becomes\n$$q_{N,M}\\beta_{M,N}(\\gamma_M\\otimes N)=q_{N,M}(N\\otimes\\gamma_M)\\beta_{\\mathcal R\\otimes M,N}=q_{N,M}(\\gamma_N\\otimes M)(\\beta_{N,\\mathcal R}\\otimes M)\\beta_{\\mathcal R\\otimes M,N}=q_{N,M}(\\gamma_N\\otimes M)(\\mathcal R\\otimes\\beta_{M,N}).$$\nThe first equality is naturality, the second is the coequalizer relation, and the third follows by the hexagon expansion $\\beta_{\\mathcal R\\otimes M,N}=(\\beta_{\\mathcal R,N}\\otimes M)(\\mathcal R\\otimes\\beta_{M,N})$ and symmetry. The last expression is the right side after that same precomposition. Cancel the epi. Consequently $c_{M,N}$ is an $\\mathcal R$-module morphism.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-symmetric-tensor.proof.md",
+    "place": "second paragraph (expanded universal-property and coherence calculations)"
+   }
+  },
+  {
+   "text": "For module maps $f:M\\to M'$ and $g:N\\to N'$, precomposing naturality of $c$ with $q_{M,N}$ reduces it to $q_{N',M'}(g\\otimes f)\\beta_{M,N}=q_{N',M'}\\beta_{M',N'}(f\\otimes g)$, which is ambient naturality. Here the induced relative-tensor map is characterized by its composite with $q$ by the defining coequalizer in [def-sfb-modobj-relative-tensor]. Also $c_{N,M}c_{M,N}q_{M,N}=q_{M,N}\\beta_{N,M}\\beta_{M,N}=q_{M,N}$. Cancel $q_{M,N}$. Interchanging $M,N$ yields $c_{M,N}c_{N,M}=1$ as well. Thus these are natural isomorphisms with inverse $c_{N,M}$.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-symmetric-tensor.proof.md",
+    "place": "second paragraph (expanded universal-property and coherence calculations)"
+   }
+  },
+  {
+   "text": "Use the associator induced from the ambient associator in [def-sfb-modobj-relative-tensor]. For the hexagon that moves $M$ past $N\\otimes P$, precompose both sides with the epi $q_{M\\otimes_{\\mathcal R}N,P}(q_{M,N}\\otimes P)$, with ambient reassociation as necessary. Set $Q=q_{N,P\\otimes_{\\mathcal R}M}(N\\otimes q_{P,M})$. By the defining equations of $c$ and of that associator the two composites are $Q\\beta_{M,N\\otimes P}$ and $Q(N\\otimes\\beta_{M,P})(\\beta_{M,N}\\otimes P)$, equal by the first ambient hexagon. For the other hexagon, which moves $M\\otimes N$ past $P$, use the same epi and $Q'=q_{P\\otimes_{\\mathcal R}M,N}(q_{P,M}\\otimes N)$. The two composites are $Q'\\beta_{M\\otimes N,P}$ and $Q'(\\beta_{M,P}\\otimes N)(M\\otimes\\beta_{N,P})$, equal by the second ambient hexagon. Cancel the epis in both cases. The relative unitors $l_M,r_M$, induced from the regular bimodule, satisfy $l_Mq_{\\mathcal R,M}=\\gamma_M$ and $r_Mq_{M,\\mathcal R}=\\rho_M$. Hence $l_Mc_{M,\\mathcal R}q_{M,\\mathcal R}=\\gamma_M\\beta_{M,\\mathcal R}=\\rho_M=r_Mq_{M,\\mathcal R}$, giving the unit compatibility by cancellation. Together with step 4 this supplies the symmetric monoidal structure asserted in the item.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-symmetric-tensor.proof.md",
+    "place": "second paragraph (expanded universal-property and coherence calculations)"
+   }
   }
  ],
  "proof_deps": [
@@ -34,12 +77,83 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-symmetric-tensor.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-symmetric-tensor.proof.md",
+  "place": "first and second paragraphs, with expanded descent, linearity, naturality, both hexagons, and unit calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module objects over a commutative monoid in a symmetric monoidal category form a symmetric monoidal category under tensor product over the monoid",
+   "results": "ModuleCat.MonoidalCategory.symmetricCategory; SemimoduleCat.MonoidalCategory.symmetricCategory; specialized module and semimodule categories only",
+   "date": "2026-10-16",
+   "verdict": "no match in the stated generality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod symmetricCategory, CategoryTheory.Mod braidedCategory",
+   "results": "0 hits; unknown identifier CategoryTheory.Mod.symmetricCategory",
+   "date": "2026-10-16",
+   "verdict": "query rejected (unknown identifier); no absence conclusion from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "symmetricCategory|braidedCategory in Mathlib/CategoryTheory",
+   "results": "0 hits from msearch grep; direct Mathlib results are unrelated graded, pi, sites, arrow structures",
+   "date": "2026-10-16",
+   "verdict": "no match in the stated generality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "symmetric monoidal structure on module category over commutative monoid object via relative tensor product",
+   "results": "ModuleCat.MonoidalCategory.symmetricCategory; ModuleCat.monoidalCategory; ModuleCat.MonoidalCategory.instBraidedCategory; SemimoduleCat.MonoidalCategory.symmetricCategory",
+   "date": "2026-10-16",
+   "verdict": "no match in the stated generality; only ordinary ModuleCat/SemimoduleCat"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "braiding descends through coequalizer to tensor product over commutative monoid object",
+   "results": "CategoryTheory.MonObj.mul_braiding and related commutative monoid identities; no module-object symmetric tensor structure",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod.IsSymmetric.tensorBimod",
+   "results": "0 hits; unknown identifier",
+   "date": "2026-10-16",
+   "verdict": "query rejected (unknown identifier); no absence conclusion from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSymmetric|tensorBimod in Mathlib",
+   "results": "0 hits from msearch grep; Mathlib Bimod has tensorBimod but no IsSymmetric API",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving colimits maps a coequalizer quotient arrow to an epi",
+   "results": "8 hits: CategoryTheory.Limits.map_π_epi, CategoryTheory.preserves_epi_of_preservesColimit, CategoryTheory.preservesEpimorphisms_of_preservesColimitsOfShape, CategoryTheory.Limits.map_π_preserves_coequalizer_inv, CategoryTheory.Limits.map_π_preserves_coequalizer_inv_colimMap, CategoryTheory.Limits.isColimitCoforkMapOfIsColimit, CategoryTheory.Limits.map_π_preserves_coequalizer_inv_colimMap_desc, CategoryTheory.Limits.map_π_preserves_coequalizer_inv_desc; ",
+   "date": "2026-10-16",
+   "verdict": "map_π_epi found and source checked; folded its elementary universal-property argument into step 1"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_π_epi\"",
+   "results": "1 hits: CategoryTheory.Limits.map_π_epi; ",
+   "date": "2026-10-16",
+   "verdict": "map_π_epi found and source checked; folded its elementary universal-property argument into step 1"
+  },
+  {
+   "tool": "grep",
+   "query": "coequalizer projection functor preserves coequalizer epimorphism",
+   "results": "0 hits: ; ",
+   "date": "2026-10-16",
+   "verdict": "no hits for this wording; direct source inspection and semantic/name searches found map_π_epi"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -59,5 +173,21 @@
   "CategoryTheory.Mod.braidedCategory"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-symmetric-tensor",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint descent and linearity/coherence calculations into five steps. Removed the new coequalizer-epi node: its short universal-property proof is step 1. No new nodes or Mathlib leaves are needed.",
+  "blueprint": "Step 2 realizes the first blueprint proof paragraph; steps 1, 3, 4 and 5 expand the second paragraph, including both hexagons and the unit equation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q11-e0bde0215",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-e0bde0215 (reviewer sub-agent of L); spot-checked: Read the full item, cited statement, current blueprint sources and route. Verified all five steps: descent, module-linearity, naturality/inverses, both hexagons and unit compatibility. Small cases and DAG duplicate/cycle checks passed. No new nodes, repairs, coefficient identifications or tool_uses. Detailed findings written to review.md."
+ }
 }
