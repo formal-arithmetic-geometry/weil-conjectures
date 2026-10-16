@@ -1,6 +1,6 @@
 # Work queue
 
-91 items; claim with `tools/claim.py next <group> [--stage N]`.
+94 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (91)
+## Stage 3: modules to prove (94)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -21,10 +21,11 @@
 | `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 5 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 5 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition` | 2 | 2 | proof |
+| `Sheaf.Paper.StrictHenselizationFunctoriality` | 3 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs` | 3 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic` | 3 | 8 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 3 | 10 | proof |
-| `Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap` | 4 | 3 | proof |
+| `Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap` | 4 | 1 | proof |
 | `Sheaf.Paper.StrictHenselizationMapExists` | 4 | 1 | proof |
 | `Sheaf.Paper.StrictHenselizationPointedMap` | 4 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence` | 4 | 3 | proof |
@@ -32,6 +33,7 @@
 | `Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 5 | 5 | proof |
+| `Sheaf.Paper.IntegralScalarContractive` | 5 | 1 | proof |
 | `Sheaf.Paper.StrictHenselizationPointEvaluationPointed` | 5 | 1 | proof |
 | `WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal` | 5 | 16 | proof |
 | `WeilConjectures.Compactification.OverRefinement` | 5 | 2 | proof |
@@ -62,6 +64,7 @@
 | `Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemComparison` | 13 | 2 | proof |
 | `Sheaf.Paper.IntegralResiduePullFlatModel` | 13 | 2 | proof |
 | `Sheaf.Paper.SectionModuleAlgebraicInverseImage` | 13 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemTorsion` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PushforwardSupportClosed` | 14 | 1 | proof |
 | `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareTransport` | 14 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 14 | 1 | proof |
@@ -76,7 +79,6 @@
 | `Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientAdic` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientSupported` | 16 | 1 | proof |
 | `Sheaf.CategoryTheory.CoproductTruncationCouple` | 16 | 1 | proof |
-| `Sheaf.CategoryTheory.FilteredStationaryCycleComparison` | 16 | 1 | proof |
 | `Sheaf.RingTheory.LciConormalFreeRankCodimension` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentKernelIdealProductCompletionZero` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalCompletionAffineSections` | 17 | 1 | proof |
@@ -91,6 +93,7 @@
 | `Sheaf.AlgebraicGeometry.CompatibleQuotientFormalComparisons` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DirectImageBoundedCoherent` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalComparisonFlatTransportSquare` | 19 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SectionsOverQuasiCompactOpen` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineQCohTorAmplitudeDetection` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalCompletionPullbackNormalized` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting` | 21 | 1 | proof |
