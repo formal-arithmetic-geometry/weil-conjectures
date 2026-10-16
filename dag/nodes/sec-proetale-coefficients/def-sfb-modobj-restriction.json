@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-modobj-restriction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Restriction of scalars",
@@ -13,34 +13,56 @@
   "place": "node def-sfb-modobj-restriction, order 1585"
  },
  "stmt_deps": [
-  "sk-def-sfb-module-objects"
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-ring-object"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
   {
-   "text": "Unit law: $\\gamma_N(\\varphi\\otimes N)(\\eta_{\\mathcal R}\\otimes N)\n=\\gamma_N(\\eta_{\\mathcal S}\\otimes N)=\\lambda_N$, since $\\varphi\\eta_{\\mathcal R}=\\eta_{\\mathcal S}$.",
-   "uses": [],
-   "elementary": null
+   "tool": "grep",
+   "query": "def comap|restriction of scalars",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mod.lean:358,362 (action formula),403 (def comap). Searched CategoryTheory/Monoidal.",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Mod.comap at line 403; its construction covers every clause."
   },
   {
-   "text": "Associativity: since $\\varphi\\mu_{\\mathcal R}=\\mu_{\\mathcal S}(\\varphi\\otimes\\varphi)$,\n$$\n\\gamma_N(\\varphi\\otimes N)(\\mu_{\\mathcal R}\\otimes N)\n=\\gamma_N(\\mu_{\\mathcal S}\\otimes N)((\\varphi\\otimes\\varphi)\\otimes N)\n=\\gamma_N(\\mathcal S\\otimes\\gamma_N)\\alpha((\\varphi\\otimes\\varphi)\\otimes N).\n$$\nBy naturality of $\\alpha$ and the interchange law, this is\n$\\gamma_N(\\varphi\\otimes N)\\bigl(\\mathcal R\\otimes\\gamma_N(\\varphi\\otimes N)\\bigr)\\alpha$.",
-   "uses": [],
-   "elementary": null
+   "tool": "leansearch",
+   "query": "Restriction of scalars of module objects in a monoidal category along a monoid homomorphism",
+   "results": "CategoryTheory.Mod_.scalarRestriction, scalarRestriction_hom, scalarRestriction_smul (Mathlib.CategoryTheory.Monoidal.Mod_); also ordinary RestrictScalars and ModuleCat.restrictScalars results.",
+   "date": "2026-10-16",
+   "verdict": "match: semantic results identify the categorical construction, but use the current pinned CategoryTheory.Mod names verified by Loogle and grep, not the historical Mod_ names."
   },
   {
-   "text": "Linearity: for $\\mathcal S$-linear $f\\colon N\\to N'$,\n$f\\gamma_N(\\varphi\\otimes N)=\\gamma_{N'}(\\mathcal S\\otimes f)(\\varphi\\otimes N)\n=\\gamma_{N'}(\\varphi\\otimes N')(\\mathcal R\\otimes f)$.",
-   "uses": [],
-   "elementary": null
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.comap",
+   "results": "CategoryTheory.Mod.comap, comap_obj_X, comap_obj_mod, comap_map_hom in Mathlib.CategoryTheory.Monoidal.Mod.",
+   "date": "2026-10-16",
+   "verdict": "match: the full functor, specialized to the self action; pinned source read at lines 351-410."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for module objects along a morphism of monoid objects in a monoidal category",
+   "results": "CategoryTheory.Mod_.scalarRestriction, comap_obj_mod, comap, scalarRestriction_hom, scalarRestriction_smul, comap_obj_X, comap_map_hom in Mathlib/CategoryTheory/Monoidal/Mod_; Action.res_linear.",
+   "date": "2026-10-16",
+   "verdict": "match: categorical restriction and the full functor found under historical Mod_ names; the pinned source uses CategoryTheory.Mod, verified by Loogle and grep."
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidalLeftAction C C|def scalarRestriction|lemma scalarRestriction_hom",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mod.lean:363 scalarRestriction; :387 scalarRestriction_hom; Mathlib/CategoryTheory/Monoidal/Action/Basic.lean:174 selfLeftAction. Searched CategoryTheory/Monoidal.",
+   "date": "2026-10-16",
+   "verdict": "match: supporting declarations and self action verified in the pinned source."
   }
  ],
- "proof_deps": [],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restriction.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Mod.comap",
+  "file": "Mathlib/CategoryTheory/Monoidal/Mod.lean",
+  "line": 403,
+  "how": "specializes in one line: take D := C with CategoryTheory.selfLeftAction (Mathlib/CategoryTheory/Monoidal/Action/Basic.lean:174). CategoryTheory.Mod.scalarRestriction at Mod.lean:363 defines the action as f tensor identity followed by the old action and proves its unit and associativity laws at lines 365-377. CategoryTheory.Mod.scalarRestriction_hom at line 387 proves linearity. CategoryTheory.Mod.comap at lines 403-410 bundles these into the functor, literally retaining M.X and g.hom."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -57,5 +79,20 @@
   "CategoryTheory.Mod.comap"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-restriction",
+  "worker": "stage1",
+  "summary": "The item is already a Mathlib construction: Mod.comap specializes to the self action of C and gives exactly the stated restriction functor. Read scalarRestriction, scalarRestriction_hom and comap with all hypotheses and formulas. Recorded all actual searches, added the existing monoid-object definition dependency, and removed the imported proof in favor of the Mathlib leaf. No new nodes or Lean files.",
+  "blueprint": "Realizes clause 1 (Restriction) of sk-def-sfb-change-of-scalars and the full statement of def-sfb-modobj-restriction. Its imported unit, associativity and linearity calculations are covered directly by Mathlib Mod.scalarRestriction (lines 363-377), scalarRestriction_hom (387-395), and comap (403-410). The imported node has blueprint.from = null, as required for a blueprint node; the whole-blueprint search found no other node with exactly this full general statement."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-58a93b8dc",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-58a93b8dc (reviewer sub-agent of L); spot-checked: Full review written to review.md. The statement, dependencies, blueprint route, Mathlib leaf match, exact source lines, functor direction, hypotheses, duplicate checks, and edge cases all check out; no repairs or tool_uses accepted."
+ }
 }

@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit: Set detection of the Ext orthogonal of exact flat-cycle complexes.",
+   "place": "Proof paragraph 2, \"derived coefficient adjunction\", before the displayed derived inverse limit: set detection for exact flat-cycle complexes, supplying the smallness input below the flat sheaf model.",
    "via": [
     "lem-coef-flat-complex-cotorsion-pairs",
     "lem-coef-sheaf-flat-model",
@@ -26,11 +26,142 @@
   "def-weil-sheaf-of-modules-category",
   "def-pc-flat-sheaf-modules",
   "def-pc-cochain-complex-modules",
-  "def-pc-acyclic-complex-modules"
+  "def-pc-acyclic-complex-modules",
+  "lem-coef-cotorsion-orthogonality-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal B=\\operatorname{Ch}(\\mathcal A)$. The smallness hypothesis gives the Grothendieck property of $\\mathcal A$ by [lem-pur-ringed-site-grothendieck-abelian]; then [lem-coef-complexes-grothendieck] gives it for $\\mathcal B$. We will use exact filtered colimits in both categories. Colimits of complexes are computed degreewise: take the colimit of each term, induce the differentials from their compatible cocones, and verify $d^2=0$ on each cocone map; the same universal property makes this the colimit complex. Write $|P|=|\\coprod_{n,U}P^n(U)|$.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-coef-complexes-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Infrastructure for paragraph 2; Grothendieck sheaf category: Stacks Tags 03DA/03DB; degreewise construction of colimits of complexes."
+   }
+  },
+  {
+   "text": "Flat sheaves are closed under filtered colimits. Indeed, the tensor-Hom adjunction of [lem-pc-sheaf-modules-tensor-closed] and the colimit universal property give, for every $N,H$, $\\operatorname{Hom}(N\\otimes\\varinjlim F_i,H)\\cong\\varprojlim_i\\operatorname{Hom}(N\\otimes F_i,H)$, naturally in $H$, so $N\\otimes\\varinjlim F_i\\cong\\varinjlim_i(N\\otimes F_i)$. Tensoring a short exact sequence with each flat $F_i$ is exact by [def-pc-flat-sheaf-modules]; exactness of filtered colimits in Step 1 makes the colimit tensor sequence exact. Applying the same exact-colimit argument to $0\\to Z^nP_i\\to P_i^n\\to P_i^{n+1}$ shows $Z^n(\\varinjlim P_i)=\\varinjlim Z^nP_i$, and exactness of $\\varinjlim P_i$ follows by taking colimits of the exact rows $0\\to Z^nP_i\\to P_i^n\\to Z^{n+1}P_i\\to0$. Consequently $\\widetilde{\\mathcal F}$ is closed under small filtered colimits. No claim that sheaf colimits are sectionwise is made.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Elementary adjunction/colimit calculation: Stacks Tags 03EP (sites-modules-lemma-tensor-commute-colimits) and 03EU (sites-modules-lemma-colimits-flat)."
+   }
+  },
+  {
+   "text": "For a degreewise short exact sequence $0\\to U\\to V\\to W\\to0$ with $U$ acyclic, the cycle sequence $0\\to Z^nU\\to Z^nV\\to Z^nW\\to0$ is short exact. By [def-weil-sheaf-of-modules-category], forgetting the module action preserves kernels and cokernels (these have the same sectionwise kernel and sheafified sectionwise cokernel); it therefore preserves and reflects epimorphisms. Apply [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] to the underlying abelian sheaves. To see surjectivity of the cycle map, locally lift a section $w\\in Z^nW$ to $v\\in V^n$. Its differential lies in $Z^{n+1}U$, hence, after a further covering, is $d_Uu$ for $u\\in U^n$ because $U$ is exact. Then $v-u$ is a cycle lifting $w$. The kernel is $Z^nU$ directly. By [lem-weil-pbc-complex-ses-homology-long-exact], if two of $U,V,W$ are acyclic then the third is acyclic. Flat sheaves are closed under extensions by [lem-coef-module-flat-cotorsion-foundation]. Thus extensions of two objects of $\\widetilde{\\mathcal F}$ are in that class. Also if $U,V$ are in it and $Z^nV/Z^nU$ is flat for every $n$, then $W$ is in it and $Z^nW\\cong Z^nV/Z^nU$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-coef-module-flat-cotorsion-foundation",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Elementary cycle lifting plus the cited long exact sequence and flat extension closure; compare Recktenwald Proposition 2.5.37, final paragraph, online."
+   }
+  },
+  {
+   "text": "Choose a uniform bound $\\kappa_0$ from [lem-coef-small-flat-subsheaf] and a cardinal $\\mu_0$ from [lem-coef-small-flat-subextension]. Choose an infinite $\\nu\\geq\\kappa_0,\\mu_0$ and put $\\kappa=2^\\nu$. Then $\\kappa\\geq\\mu_0$ and $\\kappa^{\\mu_0}=(2^\\nu)^{\\mu_0}=2^\\nu=\\kappa$. These cardinals depend only on the site and $R$. If $P\\ne0$ is in $\\widetilde{\\mathcal F}$, some $Z^nP$ is nonzero: otherwise exactness gives $0\\to0\\to P^j\\to0\\to0$ in every degree. Apply [lem-coef-small-flat-subsheaf] to the nonzero flat sheaf $Z^nP$ and obtain $0\\ne L_n\\subseteq Z^nP$, $|L_n|\\leq\\kappa_0\\leq\\kappa$, with $L_n$ and $Z^nP/L_n$ flat. Set $N^n=L_n$ and $N^j=0$ for $j>n$.",
+   "uses": [
+    "lem-coef-small-flat-subsheaf",
+    "lem-coef-small-flat-subextension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Recktenwald Proposition 2.5.37, initial nonzero cycle; fixed cardinal enlargement for all following rows, online."
+   }
+  },
+  {
+   "text": "Construct $N^j\\subseteq P^j$ and $L_j\\subseteq Z^jP$ successively for $j=n-1,n-2,\\ldots$. Given $L_{j+1}$, apply [lem-coef-small-flat-subextension] to the exact row $0\\to Z^jP\\to P^j\\xrightarrow{d^j}Z^{j+1}P\\to0$ and its flat subsheaf $L_{j+1}$. Its hypotheses hold: $P$ is exact, $Z^jP$ is flat, $L_{j+1}$ is flat of size at most $\\kappa$, and the cardinal equation was checked in Step 4. The lemma supplies $N^j\\subseteq(d^j)^{-1}(L_{j+1})$, of size at most $\\kappa$, mapping epimorphically onto $L_{j+1}$, with $L_j=N^j\\cap Z^jP$ and both $L_j,Z^jP/L_j$ flat. The inclusion $L_j\\subseteq N^j$ also shows $|L_j|\\leq\\kappa$, so the next application has the required bound. The differential is the restriction of $d_P$ followed by $L_{j+1}\\hookrightarrow N^{j+1}$. These formulas give $d^2=0$ and the exact rows $0\\to L_j\\to N^j\\to L_{j+1}\\to0$. This is ordinary recursion on $n-j\\in\\mathbf N$, not a choice of a lowest degree.",
+   "uses": [
+    "lem-coef-small-flat-subextension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Recktenwald Proposition 2.5.37, downward construction of equations (10) and (11), online; the new lemma packages only one finite row."
+   }
+  },
+  {
+   "text": "The rows just constructed show $Z^jN=L_j$ for $j\\leq n$ and $Z^jN=0$ for $j>n$, and that $N$ is acyclic. Thus $N\\in\\widetilde{\\mathcal F}$ and $N\\ne0$ since $N^n=L_n\\ne0$. It has $|N|\\leq\\aleph_0\\kappa=\\kappa$. Every quotient $Z^jP/Z^jN$ is flat (for $j>n$ this is $Z^jP$). Step 3 applied to $0\\to N\\to P\\to P/N\\to0$ therefore gives $P/N\\in\\widetilde{\\mathcal F}$. We have proved, by an explicit construction, that every nonzero object of this class has a nonzero subcomplex of size at most $\\kappa$ in the class, with quotient still in the class.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Verification of the preceding construction, corresponding to Recktenwald Proposition 2.5.37 after equation (11), online."
+   }
+  },
+  {
+   "text": "There is a set of isomorphism classes of complexes with $|N|\\leq\\kappa$: in each degree and at each site object replace the section set by a subset of a fixed set of cardinality $\\kappa$, and encode addition, scalar multiplication, restrictions, and differentials by functions between these sets. The indices $\\mathbf Z$, the objects, the arrows, and the sections of $R$ are sets, so the collection of all such structures is a set. Restrict to those satisfying the sheaf, complex, acyclicity and flat-cycle conditions and choose one representative of each isomorphism class. Call this set $S_{\\mathrm{ex}}$; its members are in $\\widetilde{\\mathcal F}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Set of bounded structures; compare the set displayed in Recktenwald Proposition 2.5.37, online."
+   }
+  },
+  {
+   "text": "Every $P\\in\\widetilde{\\mathcal F}$ admits a small continuous filtration $0=P_0\\subseteq\\cdots\\subseteq P_\\lambda=P$ with successive factors isomorphic to members of $S_{\\mathrm{ex}}$. Maintain $P_\\alpha,P/P_\\alpha\\in\\widetilde{\\mathcal F}$. At a successor with $P/P_\\alpha\\ne0$, use Step 6 on that quotient, and take the inverse image of the resulting small subcomplex as $P_{\\alpha+1}$. Then $P_{\\alpha+1}/P_\\alpha$ is that subcomplex and $P/P_{\\alpha+1}$ its quotient; Step 3 gives the asserted membership of $P_{\\alpha+1}$. At a nonzero limit $\\beta$, set $P_\\beta=\\varinjlim_{\\alpha<\\beta}P_\\alpha$. Exactness of filtered colimits embeds this colimit into $P$ and identifies $P/P_\\beta$ with $\\varinjlim_{\\alpha<\\beta}(P/P_\\alpha)$. Step 2 proves both are in the class. The process terminates: subcomplexes of $P$ form a set, since each is a family of subsets of the fixed section sets $P^n(U)$; strict successors cannot be chosen for an ordinal larger than the cardinal of this set. Choose such an ordinal in the fixed universe and stop at the first zero quotient. All colimits used therefore have small ordinal indices. If $P=0$, take $\\lambda=0$.",
+   "uses": [
+    "lem-coef-complexes-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Explicit filtration argument underlying Recktenwald Lemma 2.5.24; filtered-colimit closure from Steps 1-2; no appeal to its unexposed proof."
+   }
+  },
+  {
+   "text": "Let $T\\in S_{\\mathrm{ex}}^{\\perp_1}$ and let $0\\to T\\to E\\xrightarrow{p}P\\to0$ be short exact in $\\mathcal B$, with $P\\in\\widetilde{\\mathcal F}$. Use the filtration of Step 8 to construct compatible maps $s_\\alpha:P_\\alpha\\to E$ with $p s_\\alpha$ the inclusion into $P$. Start with the zero map. Given $s_\\alpha$, apply the lifting clause of [lem-coef-cotorsion-orthogonality-calculus] in the abelian category $\\mathcal B$ to $i:P_\\alpha\\hookrightarrow P_{\\alpha+1}$, $p:E\\twoheadrightarrow P$, $a=s_\\alpha$ and $b:P_{\\alpha+1}\\hookrightarrow P$. Its hypothesis holds because $\\operatorname{Coker}(i)=P_{\\alpha+1}/P_\\alpha$ is isomorphic to an element of $S_{\\mathrm{ex}}$ and $\\operatorname{Ker}(p)=T$. The filler is $s_{\\alpha+1}$, and it agrees with $s_\\alpha$ exactly, so the induction maintains compatibility. At a limit, [def-weil-pbc-category-colimit] supplies the unique map from $P_\\beta$ induced by the compatible $s_\\alpha$; composition with $p$ is the inclusion because it agrees on every cocone map. At $\\lambda$ this gives $p s_\\lambda=1_P$. Thus every such extension splits and $T\\in\\widetilde{\\mathcal F}^{\\perp_1}$.",
+   "uses": [
+    "lem-coef-cotorsion-orthogonality-calculus",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Explicit compatible-splitting proof of the set-detection implication (Recktenwald Lemma 2.5.24, online); lifting statement cited in precisely its mono/epi form."
+   }
+  },
+  {
+   "text": "Since $S_{\\mathrm{ex}}\\subseteq\\widetilde{\\mathcal F}$, an object orthogonal to every member of $\\widetilde{\\mathcal F}$ is orthogonal to every member of $S_{\\mathrm{ex}}$. Combined with Step 9 this proves the asserted equality and its short-exact-sequence interpretation. Every use of an epimorphism in the construction was sheaf-local; no points, boundedness of the original $P$, or sectionwise flatness was assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Reverse inclusion from the definitions of the two orthogonals."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-coef-complexes-grothendieck",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-coef-module-flat-cotorsion-foundation",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-coef-small-flat-subsheaf",
+  "lem-coef-small-flat-subextension",
+  "lem-coef-cotorsion-orthogonality-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction infrastructure. Worker argument following the structure of Recktenwald Proposition 2.5.37 and Lemma 2.5.24, read online but not archived; finite-row lifting and compatible splitting are explicit. WANTED source recorded in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +218,73 @@
    "results": "2 hits: CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsLeftOrthogonal, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsRightOrthogonal",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. Ambient sheaf/Grothendieck, Ext and K-projective/K-injective declarations do not state this cotorsion theorem; generatingMonomorphisms_rlp is for all monomorphisms, and neither a general Ext-detecting set nor the prescribed flat classes are supplied. Kaplansky hits concern dimension, factorization, or topological rings. Loogle orthogonal-closure hits alone cannot supply the theorem and their module is absent from the pinned local Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deconstructible acyclic flat complexes over a ringed site and a set detecting Ext one vanishing",
+   "results": "8 hits: HomologicalComplex.Acyclic, HomologicalComplex.acyclic_iff, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, HomologicalComplex.acyclic_of_isZero, CategoryTheory.Abelian.Ext, CategoryTheory.Abelian.Ext.mk₀, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.ProjectiveResolution.extMk_eq_zero_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: Ext exact sequences, existence of Ext, acyclicity, K-projective/K-injective orthogonality, and closure under finite extensions do not produce a set of exact flat-cycle sheaf complexes detecting Ext one. Read signatures; the Loogle orthogonal closure results have neither a set nor a transfinite-filtration assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "cotorsion|deconstructib|Eklof|pure.*subcomplex",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: Ext exact sequences, existence of Ext, acyclicity, K-projective/K-injective orthogonality, and closure under finite extensions do not produce a set of exact flat-cycle sheaf complexes detecting Ext one. Read signatures; the Loogle orthogonal closure results have neither a set nor a transfinite-filtration assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact complexes of tensor-flat sheaves with flat cycles have right Ext one orthogonal cogenerated by a set",
+   "results": "8 hits: isZero_Ext_succ_of_projective, CategoryTheory.hasInjectiveDimensionLT_iff, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁, CategoryTheory.Abelian.Ext.covariant_sequence_exact₁, CategoryTheory.hasProjectiveDimensionLT_iff, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃",
+   "date": "2026-10-16",
+   "verdict": "no match: Ext exact sequences, existence of Ext, acyclicity, K-projective/K-injective orthogonality, and closure under finite extensions do not produce a set of exact flat-cycle sheaf complexes detecting Ext one. Read signatures; the Loogle orthogonal closure results have neither a set nor a transfinite-filtration assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"orthogonal\"",
+   "results": "2 hits: CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsLeftOrthogonal, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsRightOrthogonal",
+   "date": "2026-10-16",
+   "verdict": "no match: Ext exact sequences, existence of Ext, acyclicity, K-projective/K-injective orthogonality, and closure under finite extensions do not produce a set of exact flat-cycle sheaf complexes detecting Ext one. Read signatures; the Loogle orthogonal closure results have neither a set nor a transfinite-filtration assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A class of pure acyclic complexes is filtered by a set of small complexes and its Ext orthogonal equals their right orthogonal",
+   "results": "8 hits: HomologicalComplex.Acyclic, CochainComplex.IsKProjective.leftOrthogonal, CochainComplex.isKInjective_iff_rightOrthogonal, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, HomotopyCategory.subcategoryAcyclic, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, HomologicalComplex.acyclic_iff, CochainComplex.IsKInjective.rightOrthogonal",
+   "date": "2026-10-16",
+   "verdict": "no match: Ext exact sequences, existence of Ext, acyclicity, K-projective/K-injective orthogonality, and closure under finite extensions do not produce a set of exact flat-cycle sheaf complexes detecting Ext one. Read signatures; the Loogle orthogonal closure results have neither a set nor a transfinite-filtration assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right orthogonal for splitting short exact sequences of pure acyclic complexes of flat module sheaves is determined by a small family",
+   "results": "8 hits: CochainComplex.IsKInjective.rightOrthogonal, CochainComplex.isKInjective_iff_rightOrthogonal, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, Profinite.NobelingProof.succ_exact, CochainComplex.IsKProjective.leftOrthogonal, CategoryTheory.ShortComplex.ShortExact.splittingOfInjective, instHasExtModuleCatOfSmall, CochainComplex.isKProjective_iff_leftOrthogonal",
+   "date": "2026-10-16",
+   "verdict": "no match: K-injective and K-projective homotopy orthogonality does not assert set detection of extension splitting in the abelian complex category. The other hits give ambient Grothendieck structure, splitting with an injective object, existence of Ext for modules, or a Profinite exact sequence; none gives the asserted small family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A set of small exact complexes with flat cycles detects splitting of all extensions by exact flat cycle complexes on a ringed site",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.covariant_sequence_exact₂', CategoryTheory.Abelian.Ext.covariant_sequence_exact₂, Module.FaithfullyFlat.lTensor_reflects_exact, Module.FaithfullyFlat.rTensor_reflects_exact, CategoryTheory.ShortComplex.ShortExact.splittingOfInjective, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, CategoryTheory.Abelian.Ext.covariant_sequence_exact₃'",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned types give ordinary Ext exact sequences, flat tensor exactness, splitting for injective kernels and finite extension closure. None supplies a set detecting extensions from all acyclic flat-cycle complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right Ext one orthogonal of exact flat cycle complexes of sheaves is cogenerated by a set",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mk₀, CategoryTheory.Abelian.Ext, Module.Flat.rTensor_shortComplex_exact, CategoryTheory.ShortComplex.ShortExact.extClass, Module.Flat.lTensor_shortComplex_exact, CategoryTheory.ShortComplex.exact_iff_epi_toCycles, HomologicalComplex.opcycles_right_exact, CategoryTheory.ShortComplex.exact_iff_mono_fromOpcycles",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned types give ordinary Ext exact sequences, flat tensor exactness, splitting for injective kernels and finite extension closure. None supplies a set detecting extensions from all acyclic flat-cycle complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "deconstructib|cotorsion|pure.*complex|Eklof",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned types give ordinary Ext exact sequences, flat tensor exactness, splitting for injective kernels and finite extension closure. None supplies a set detecting extensions from all acyclic flat-cycle complexes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-flat-complex-cotorsion-pairs",
   "by": "worker",
@@ -106,5 +300,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-exact-flat-complex-set-cogeneration",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed bounded nonzero exact flat-cycle subcomplexes by downward recursion using one new finite-row small subextension lemma and the existing small flat subsheaf theorem. Wrote the filtered-colimit calculation, cycle quotient identification, smallness/termination of the filtration and the compatible lifting induction giving Ext set detection. No Lean attachment or Mathlib match. One new unsplit statement; online unarchived source is explicitly WANTED.",
+  "blueprint": "All ten steps serve the words \"derived coefficient adjunction\" in paragraph 2 of prop-coef-integral-exceptional-adjoint, before the derived inverse limit; they expand the set-detection foundation below lem-coef-flat-complex-cotorsion-pairs. The blueprint has no separate proof of this foundation. The current main-20261015 proof retains this paragraph; historical ancestry and the maintainer-owned unit are preserved. No unit realization is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic Grothendieck/AB5 property of module sheaves on a small ringed site; the unit has no replacement of this ambient category theorem."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic tensor-Hom adjunction, used to calculate tensor of filtered colimits; this is a tool, not a different route for a unit step."
+   },
+   {
+    "node": "def-weil-pbc-category-colimit",
+    "why": "Colimit universal property used for tensor comparisons and compatible splittings at limit ordinals."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Generic long exact sequence, used only to preserve acyclicity in short exact sequences of complexes."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "Generic epimorphism/local-surjectivity criterion on an arbitrary site, applied to the underlying abelian sheaves to justify local cycle lifts. No enough-points hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q27-115ddd52d",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-115ddd52d (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked all ten steps, cited statements, Recktenwald §§2.5.24–37, Stacks sources, route, duplicates, and edge cases. The bounded subextension and compatible-splitting arguments are sound; reported source errors are correctly avoided. No repairs needed. Detailed findings and accepted tool uses are in review.md."
  }
 }

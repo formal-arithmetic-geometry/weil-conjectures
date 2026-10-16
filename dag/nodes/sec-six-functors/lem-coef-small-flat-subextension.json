@@ -1,0 +1,135 @@
+{
+ "id": "lem-coef-small-flat-subextension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, \"derived coefficient adjunction\": finite short-exact-row input to the downward bounded flat-cycle subcomplex construction, below the flat model infrastructure.",
+   "via": [
+    "lem-coef-exact-flat-complex-set-cogeneration",
+    "lem-coef-flat-complex-cotorsion-pairs",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bounded flat subextensions over a prescribed small flat subsheaf",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], $R$ a sheaf of commutative rings, and $\\mathcal A=\\operatorname{Mod}(R)$ [def-weil-sheaf-of-modules-category]. Flatness means tensor-flatness [def-pc-flat-sheaf-modules]. For a module sheaf $M$ set $|M|=|\\coprod_{U\\in\\operatorname{Ob}\\mathcal C}M(U)|$. There is an infinite cardinal $\\mu$, depending only on the site and $R$, with the following property for every infinite cardinal $\\kappa\\geq\\mu$ satisfying $\\kappa^\\mu=\\kappa$. Given a short exact sequence $0\\to A\\xrightarrow{i}B\\xrightarrow{q}C\\to0$ in $\\mathcal A$ with $A$ flat, and a flat subsheaf $C_0\\subseteq C$ with $|C_0|\\leq\\kappa$, there is a subsheaf $B_0\\subseteq q^{-1}(C_0)\\subseteq B$ with $|B_0|\\leq\\kappa$ such that $q|_{B_0}:B_0\\to C_0$ is an epimorphism and, writing $A_0=i^{-1}(B_0)$, both $A_0$ and $A/A_0$ are flat. In particular $0\\to A_0\\to B_0\\to C_0\\to0$ is short exact. All section sets and cardinals lie in one fixed universe containing the small site and $R$. Neither enough points nor sectionwise surjectivity of $q$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Agent-formulated finite-row input below paragraph 2. WANTED: Rene Recktenwald, Construction of Six Functor Formalisms (2019), Proposition 2.5.31, Lemmas 2.5.12, 2.5.25 and 2.5.36, and Corollary 1.4.7; https://d-nb.info/1211326829/34, printed pp. 27, 68, 73-77. Read online, not archived. The cardinal condition keeps sheafification within the same bound; this precise finite-row formulation is by the worker. No Stacks tag states the bounded pure-envelope input."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A short exact sequence of sheaves with flat kernel has a bounded cardinality short exact subextension over a prescribed small flat subobject",
+   "results": "8 hits: Module.Flat.rTensor_exact, Module.Flat.lTensor_exact, Module.Flat.rTensor_shortComplex_exact, CategoryTheory.ShortComplex.exact_of_f_is_kernel, SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections, CategoryTheory.ShortComplex.ShortExact.exact, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₂, CategoryTheory.ShortComplex.ShortExact.hasInjectiveDimensionLT_X₂",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned signatures. Single-ring Module.Flat factorization and exactness results do not construct a bounded subextension of sheaves. GeneratingSections.ofEpi transports generators but gives no bounded flat kernel or flat quotient. Precoverage.small_subsheafify_of_small (Subsheaf.lean:118) bounds universes, not these cardinalities or flatness; it alone is not a specialization proving the statement. Kaplansky hits concern UFDs or vector-space dimensions."
+  },
+  {
+   "tool": "grep",
+   "query": "small.*subsheaf|subextension|pure.*sheaf|sheaf.*pure|Kaplansky",
+   "results": "25 hits: Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dimension/ErdosKaplansky.lean, Mathlib/LinearAlgebra/Dimension/ErdosKaplansky.lean, Mathlib/LinearAlgebra/Dimension/ErdosKaplansky.lean, Mathlib/LinearAlgebra/Dimension/ErdosKaplansky.lean, Mathlib/LinearAlgebra/Dimension/ErdosKaplansky.lean, Mathlib/Topology/Algebra/LinearTopology.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned signatures. Single-ring Module.Flat factorization and exactness results do not construct a bounded subextension of sheaves. GeneratingSections.ofEpi transports generators but gives no bounded flat kernel or flat quotient. Precoverage.small_subsheafify_of_small (Subsheaf.lean:118) bounds universes, not these cardinalities or flatness; it alone is not a specialization proving the statement. Kaplansky hits concern UFDs or vector-space dimensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an epimorphism of module sheaves with flat kernel and a small flat subsheaf in its target, there is a uniformly bounded subextension with flat kernel and flat quotient of the original kernel",
+   "results": "8 hits: Module.Flat.of_forall_exists_factorization, Module.Flat.iff_forall_exists_factorization, Module.FaithfullyFlat.range_le_ker_of_exact_rTensor, Module.Flat.exists_factorization_of_isFinitelyPresented, Module.Flat.exists_factorization_of_apply_eq_zero_of_free, SheafOfModules.GeneratingSections.ofEpi_I, SheafOfModules.GeneratingSections.ofEpi, SheafOfModules.GeneratingSections.opEpi_comp",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned signatures. Single-ring Module.Flat factorization and exactness results do not construct a bounded subextension of sheaves. GeneratingSections.ofEpi transports generators but gives no bounded flat kernel or flat quotient. Precoverage.small_subsheafify_of_small (Subsheaf.lean:118) bounds universes, not these cardinalities or flatness; it alone is not a specialization proving the statement. Kaplansky hits concern UFDs or vector-space dimensions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Flat\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned signatures. Single-ring Module.Flat factorization and exactness results do not construct a bounded subextension of sheaves. GeneratingSections.ofEpi transports generators but gives no bounded flat kernel or flat quotient. Precoverage.small_subsheafify_of_small (Subsheaf.lean:118) bounds universes, not these cardinalities or flatness; it alone is not a specialization proving the statement. Kaplansky hits concern UFDs or vector-space dimensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kaplansky small flat subextension of a short exact sequence in a category of sheaves, preserving a prescribed bounded flat quotient",
+   "results": "8 hits: CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, SheafOfModules.instAbelian, CategoryTheory.lan_flat_of_flat, Module.Flat.exists_factorization_of_isFinitelyPresented, Module.flat_of_isLocalized_span, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned signatures. Single-ring Module.Flat factorization and exactness results do not construct a bounded subextension of sheaves. GeneratingSections.ofEpi transports generators but gives no bounded flat kernel or flat quotient. Precoverage.small_subsheafify_of_small (Subsheaf.lean:118) bounds universes, not these cardinalities or flatness; it alone is not a specialization proving the statement. Kaplansky hits concern UFDs or vector-space dimensions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pure\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: read the returned signatures. Single-ring Module.Flat factorization and exactness results do not construct a bounded subextension of sheaves. GeneratingSections.ofEpi transports generators but gives no bounded flat kernel or flat quotient. Precoverage.small_subsheafify_of_small (Subsheaf.lean:118) bounds universes, not these cardinalities or flatness; it alone is not a specialization proving the statement. Kaplansky hits concern UFDs or vector-space dimensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subobject of a sheaf of modules of bounded cardinality can be included in a pure subobject of bounded cardinality",
+   "results": "8 hits: PresheafOfModules.wellPowered, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.largerSubobject, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.top_mem_range, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.le_largerSubobject, ModuleCat.wellPowered_moduleCat, CategoryTheory.Subobject.hasCardinalLT_of_mono",
+   "date": "2026-10-16",
+   "verdict": "no match: PresheafOfModules.wellPowered (Presheaf/Generator.lean:97) only makes subobjects a set. The largerSubobject construction (GrothendieckCategory/EnoughInjectives.lean:161-203) gives pushouts of generating monomorphisms, with neither tensor-purity nor flat kernel/quotient clauses. The other hits concern presentability or cardinality of subobject lattices. None is this prescribed finite-row construction."
+  },
+  {
+   "tool": "grep",
+   "query": "pure.*[Ss]ubmodule|[Ss]ubmodule.*pure|[Ss]ubsheaf.*[Cc]ardinal|[Cc]ardinal.*[Ss]ubsheaf",
+   "results": "1 hits: Mathlib/Topology/Algebra/AsymptoticCone.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the sole hit is Topology/Algebra/AsymptoticCone.lean:285 and uses the pure filter, not tensor-purity or bounded subextensions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Subobject\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle returned no declarations for this broader subobject vocabulary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of sheaves of modules admits a bounded subextension over a specified small flat subsheaf with pure kernel",
+   "results": "8 hits: SheafOfModules.generatorsOfIsCokernelFree_I, Condensed.instAB4CondensedMod, Profinite.NobelingProof.succ_exact, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, Condensed.instAB4StarCondensedMod, Condensed.instAB5CondensedMod, CategoryTheory.Sheaf.instIsGrothendieckAbelian",
+   "date": "2026-10-16",
+   "verdict": "no match: generator presentations, epimorphism/kernel identities, finite presentation and ambient AB axioms have no bounded pure-kernel subextension clause. Read the returned types and pinned sheaf generator source. The restricted grep found no occurrence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat kernel of an epimorphism of sheaves has a bounded pure subobject giving a bounded lift of a small flat subsheaf in the quotient",
+   "results": "8 hits: CategoryTheory.Abelian.epiWithInjectiveKernel, CategoryTheory.ShortComplex.Exact.epi_kernelLift, CategoryTheory.Abelian.epiIsCokernelOfKernel, CategoryTheory.ShortComplex.Exact.lift, CategoryTheory.Limits.factorThruKernelSubobject_comp_kernelSubobjectIso, SheafOfModules.GeneratingSections.ofEpi, CategoryTheory.NonPreadditiveAbelian.epiIsCokernelOfKernel, AlgebraicGeometry.Flat.epi_of_flat_of_surjective",
+   "date": "2026-10-16",
+   "verdict": "no match: generator presentations, epimorphism/kernel identities, finite presentation and ambient AB axioms have no bounded pure-kernel subextension clause. Read the returned types and pinned sheaf generator source. The restricted grep found no occurrence."
+  },
+  {
+   "tool": "grep",
+   "query": "pure|subextension|cardinal",
+   "results": "0 hits: ; directory Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: generator presentations, epimorphism/kernel identities, finite presentation and ambient AB axioms have no bounded pure-kernel subextension clause. Read the returned types and pinned sheaf generator source. The restricted grep found no occurrence."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Subobject",
+   "results": "0 hits: ; loogle: unknown identifier 'Subobject'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle did not recognize Subobject; retried with quoted name substrings, which returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-coef-exact-flat-complex-set-cogeneration",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "def-sfb-subfield-coefficient-ring",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "pur713-def-coefficient-rings"
+  ]
  },
  "kind": "definition",
  "title": "The coefficient ring $E_X$",
@@ -19,9 +21,59 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "padicSubfieldRingObj|condensedRingObj|coefficientRing",
+   "results": "0 hit(s): none",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the scheme pro-etale pullback coefficient ring for a finite embedded p-adic field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a condensed ring of continuous maps to a finite extension of the p-adic numbers onto the pro-etale site of a scheme",
+   "results": "8 hit(s): TopCat.continuousFunctions.pullback, SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback, TopCat.Presheaf.pullback, LocallyConstant.comapRingHom, TopCat.Presheaf.stalkPullbackHom, LocallyConstant.comapₐ",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the scheme pro-etale pullback coefficient ring for a finite embedded p-adic field"
+  },
+  {
+   "tool": "loogle",
+   "query": "CondensedRing, Scheme",
+   "results": "0 hit(s): none; loogle: unknown identifier 'CondensedRing'",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: unknown identifier CondensedRing; superseded by the valid Condensed, RingCat query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme X and a finite extension E of Q_l, the pro-etale coefficient ring is the pullback of the condensed ring of continuous E-valued maps from the point",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.instCategoryEtale, StandardEtalePair.Ring, StandardEtalePair.X, BDeRham, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, BDeRhamPlus",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the scheme pro-etale pullback coefficient ring for a finite embedded p-adic field"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtale|ProEt\\.topology|padicSubfield|Condensed.*Ring",
+   "results": "18 hit(s): Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/Condensed/Module.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Light/Module.lean, Mathlib/Condensed/Light/AB.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/Condensed/AB.lean, Mathlib/Condensed/Epi.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the scheme pro-etale pullback coefficient ring for a finite embedded p-adic field"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, RingCat",
+   "results": "0 hit(s): none",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the scheme pro-etale pullback coefficient ring for a finite embedded p-adic field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define a commutative ring object on the pro-etale topos of a scheme by inverse image of a condensed p-adic coefficient field",
+   "results": "8 hit(s): PreTilt.instCommRing, BDeRham, BDeRhamPlus, instCommRingBDeRhamPlus, PreTilt, StandardEtalePair.instCommRingRing, StandardEtalePair.Ring, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the scheme pro-etale pullback coefficient ring for a finite embedded p-adic field"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -38,5 +90,21 @@
  "blueprint_lean_not_found": [
   "AlgebraicGeometry.ProEtale.padicSubfieldRingObj"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-subfield-coefficient-ring",
+  "worker": "stage1",
+  "summary": "Audited the imported definition against the current main-20261015 blueprint text and the existing DAG dependencies. The statement directly defines E_X as the pullback p_X^* of the condensed ring of continuous E-valued maps and invokes the existing pulled-back-coefficients definition for its commutative ring-object structure; no additional lemma or proof node is required. No sorry-free declaration with this exact project statement was found in slopmaster2. Rechecked all search kinds with msearch.py; generic topological-ring sheaves, module pullback and the Z_l-valued pro-etale sheaf do not state this definition. Recorded the E-clause overlap with pur713-def-coefficient-rings in blueprint.same_as.",
+  "blueprint": "Realizes the complete definition node text in def-sfb-subfield-coefficient-ring.md: the finite extension E, the condensed ring underline E, the assignment E_X := p_X^* underline E, and the commutative ring-object clause via sk-def-sfb-pulled-back-coefficients.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-0228b6558",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-0228b6558 (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements and current blueprint sources in full. Both dependencies supply the topology, pullback and commutative ring structure. Checked edge cases, DAG overlaps, acyclicity and archived master coefficient conventions. No repairs needed; review.md written."
+ }
 }

@@ -3,47 +3,180 @@
  "blueprint": {
   "is": "sk-def-sfb-coefficient-morphisms",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The canonical coefficient morphisms $\\alpha_f$, $\\eta_f$",
- "statement": "Let $\\Lambda$ be a condensed ring, let $f\\colon X\\to Y$ be a morphism of\nschemes, and let $\\Lambda_X$, $\\Lambda_Y$ be the pulled-back coefficient rings\nof [sk-def-sfb-pulled-back-coefficients]. The pullback\n$f^*\\Lambda_Y$ and the pushforward $f_*\\Lambda_X$ are ring objects: $f^*$ is\nstrong monoidal and $f_*$ is lax monoidal\n([sk-def-sfb-finite-pushforward-pullback]). Define\n$$\n\\alpha_f\\colon f^*\\Lambda_Y\\longrightarrow\\Lambda_X,\\qquad\n\\eta_f\\colon\\Lambda_Y\\longrightarrow f_*\\Lambda_X\n$$\nas follows.\n\n- $\\alpha_f$ is the component at $\\Lambda$ of the natural isomorphism\n  $f^*\\circ p_Y^*\\cong p_X^*$ of [sk-def-sfb-pullback-from-point-comp].\n- $\\eta_f$ is the mate of $\\alpha_f$ under the adjunction $f^*\\dashv f_*$: the\n  unit $\\Lambda_Y\\to f_*f^*\\Lambda_Y$ followed by $f_*\\alpha_f$.\n\nBoth are morphisms of ring objects. Moreover, $\\alpha_f$ underlies an\nisomorphism of ring objects $f^*\\Lambda_Y\\cong\\Lambda_X$.",
+ "statement": "Let $\\Lambda$ be a condensed ring, let $f\\colon X\\to Y$ be a morphism of\nschemes, and let $\\Lambda_X$, $\\Lambda_Y$ be the pulled-back coefficient rings\nof [sk-def-sfb-pulled-back-coefficients]. The pullback\n$f^*\\Lambda_Y$ and the pushforward $f_*\\Lambda_X$ are ring objects: $f^*$ is\nstrong monoidal and $f_*$ is lax monoidal\n([def-sfb-finite-upper-star-monoidal],\n[def-sfb-finite-lower-star-lax-monoidal]). Define\n$$\n\\alpha_f\\colon f^*\\Lambda_Y\\longrightarrow\\Lambda_X,\\qquad\n\\eta_f\\colon\\Lambda_Y\\longrightarrow f_*\\Lambda_X\n$$\nas follows.\n\n- $\\alpha_f$ is the component at $\\Lambda$ of the natural isomorphism\n  $f^*\\circ p_Y^*\\cong p_X^*$ of [sk-def-sfb-pullback-from-point-comp].\n- $\\eta_f$ is the mate of $\\alpha_f$ under the adjunction $f^*\\dashv f_*$: the\n  unit $\\Lambda_Y\\to f_*f^*\\Lambda_Y$ followed by $f_*\\alpha_f$\n  ([def-sfb-finite-upper-lower-star-adjunction]).\n\nBoth are morphisms of ring objects. Moreover, $\\alpha_f$ underlies an\nisomorphism of ring objects $f^*\\Lambda_Y\\cong\\Lambda_X$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/_section.md",
   "place": "node sk-def-sfb-coefficient-morphisms, order 857"
  },
  "stmt_deps": [
+  "sk-def-sfb-ring-object",
   "sk-def-sfb-pulled-back-coefficients",
-  "sk-def-sfb-pullback-from-point-comp"
+  "sk-def-sfb-pullback-from-point-comp",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "def-sfb-finite-upper-lower-star-adjunction"
  ],
  "proof": [
   {
-   "text": "The morphism $\\alpha_f$ is [def-sfb-alpha], and it is a morphism of ring\nobjects by [lem-sfb-alpha-ring-hom]. The isomorphism of ring objects is\n[def-sfb-alpha-bundled]. The morphism $\\eta_f$ is [def-sfb-eta], and it is a\nmorphism of ring objects by [lem-sfb-eta-ring-hom].",
+   "text": "Use the coefficient ring objects $\\Lambda_Y=p_Y^*\\Lambda$ and $\\Lambda_X=p_X^*\\Lambda$ of [sk-def-sfb-pulled-back-coefficients]. The functors $f^*$ and $f_*$ have respectively the strong and lax monoidal structures of [def-sfb-finite-upper-star-monoidal] and [def-sfb-finite-lower-star-lax-monoidal], specialized to abelian sheaves. This specialization satisfies the hypotheses: [sk-def-sfb-sheaf-tensor] explicitly gives $\\Ab$, with $\\otimes_{\\mathbf Z}$ and unit $\\mathbf Z$, as a closed symmetric monoidal Grothendieck abelian category and supplies the sheaf tensor products. Apply clause 1 of [det-def-sfb-ring-object-transport] to each functor: for $F=f^*$ or $f_*$, the transported multiplication is $F(\\mu)\\circ\\mu^F$ and the transported unit is $F(\\eta)\\circ\\varepsilon^F$. Thus $f^*\\Lambda_Y$ and $f_*\\Lambda_X$ carry exactly the ring structures specified in the statement.",
    "uses": [
-    "def-sfb-alpha",
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-sfb-finite-upper-star-monoidal",
+    "def-sfb-finite-lower-star-lax-monoidal",
+    "det-def-sfb-ring-object-transport",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/_section.md",
+    "place": "statement, first paragraph: transported ring structures"
+   }
+  },
+  {
+   "text": "Let $c_f:f^*\\circ p_Y^*\\cong p_X^*$ be the comparison of [sk-def-sfb-pullback-from-point-comp]. By [def-sfb-alpha], its component at $\\Lambda$ has source $f^*p_Y^*\\Lambda=f^*\\Lambda_Y$ and target $p_X^*\\Lambda=\\Lambda_X$ and is precisely $\\alpha_f$. This specifies the first map without choosing an inverse or a new comparison.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point-comp",
+    "def-sfb-alpha"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/sk-def-sfb-coefficient-morphisms.proof.md",
+    "place": "First sentence: alpha is def-sfb-alpha"
+   }
+  },
+  {
+   "text": "With the transported source ring structure fixed in step 1, [lem-sfb-alpha-ring-hom] says that this $\\alpha_f$ preserves multiplication and unit. The isomorphism of ring objects in [def-sfb-alpha-bundled] first identifies the two ways of transporting $p_Y^*\\Lambda$ along $f^*$ and then applies the component of the same comparison $c_f$. To check the first identification, write $F=p_Y^*$ and $G=f^*$. By the definition of the composite lax monoidal structure, both transported multiplications are $GF(\\mu_\\Lambda)\\circ G(\\mu^F_{\\Lambda,\\Lambda})\\circ\\mu^G_{F\\Lambda,F\\Lambda}$ and both units are $GF(\\eta_\\Lambda)\\circ G(\\varepsilon^F)\\circ\\varepsilon^G$. The identification therefore has underlying map $\\mathrm{id}_{GF\\Lambda}$. The underlying morphism of the bundled composite is $c_f(\\Lambda)\\circ\\mathrm{id}_{GF\\Lambda}$, hence $c_f(\\Lambda)=\\alpha_f$ as specified in step 2. Hence the claimed ring isomorphism has exactly the required underlying morphism.",
+   "uses": [
     "lem-sfb-alpha-ring-hom",
-    "def-sfb-alpha-bundled",
-    "def-sfb-eta",
+    "def-sfb-alpha-bundled"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/sk-def-sfb-coefficient-morphisms.proof.md",
+    "place": "First two sentences: alpha ring morphism and bundled ring isomorphism"
+   }
+  },
+  {
+   "text": "The adjunction of [def-sfb-finite-upper-lower-star-adjunction], with $\\mathcal A=\\Ab$, has unit $u:\\mathrm{id}\\to f_*f^*$. Define $\\eta_f=f_*(\\alpha_f)\\circ u_{\\Lambda_Y}$. By [def-sfb-eta] this is the stated mate of $\\alpha_f$, with source $\\Lambda_Y$ and target $f_*\\Lambda_X$. In particular the mate is taken for the functors on abelian sheaves, before any change of scalars on module objects.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "def-sfb-eta"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/sk-def-sfb-coefficient-morphisms.proof.md",
+    "place": "Last sentence: eta is def-sfb-eta"
+   }
+  },
+  {
+   "text": "For the lax monoidal ring structure on $f_*\\Lambda_X$ fixed in step 1, [lem-sfb-eta-ring-hom] asserts that the map $\\eta_f$ of step 4 is a morphism of ring objects. Together with step 3 this establishes both ring-morphism assertions and the ring-isomorphism assertion for $\\alpha_f$.",
+   "uses": [
     "lem-sfb-eta-ring-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/sk-def-sfb-coefficient-morphisms.proof.md",
+    "place": "Last sentence: eta ring morphism"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "det-def-sfb-ring-object-transport",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-pullback-from-point-comp",
   "def-sfb-alpha",
   "lem-sfb-alpha-ring-hom",
   "def-sfb-alpha-bundled",
+  "def-sfb-finite-upper-lower-star-adjunction",
   "def-sfb-eta",
   "lem-sfb-eta-ring-hom"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/sk-def-sfb-coefficient-morphisms.proof.md",
+  "place": "Complete proof; ambient ring structures expanded from the adjacent _section.md, first paragraph"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapMonComp|mapMonNatIso|isMonHom_app|Monoidal.*unit",
+   "results": "25 returned hits on monoidal unit and natural-transformation coherence, including Monoidal/NaturalTransformation.lean:81,84,121; no concrete coefficient comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match: these results do not give the complete coefficient-morphism definition with its scheme-specific comparison and ring properties"
+  },
+  {
+   "tool": "grep",
+   "query": "condensedPullbackHom|condensedPushforwardHom|coefficientPullbackIso|mapMonNatTrans",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean:909,1073,1074 and Monoidal/Grp.lean:675. Only generic monoid transport; no concrete coefficient-map names.",
+   "date": "2026-10-16",
+   "verdict": "no match: these results do not give the complete coefficient-morphism definition with its scheme-specific comparison and ring properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical morphisms between condensed coefficient rings pulled back to pro-etale sheaves along a scheme morphism",
+   "results": "SheafOfModules.pullback and pullbackPushforwardAdjunction; Scheme.Hom.toRingCatSheafHom; Scheme.Modules.pullback; CondensedMod.LocallyConstant.functor. These concern supplied ringed-site maps or the structure sheaf, not the present condensed coefficient comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match: these results do not give the complete coefficient-morphism definition with its scheme-specific comparison and ring properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMonNatTrans\"",
+   "results": "CategoryTheory.Functor.mapMonNatTrans and mapMonNatTrans_app_hom (Mathlib.CategoryTheory.Monoidal.Mon). Read Mathlib/CategoryTheory/Monoidal/Mon.lean:909-910.",
+   "date": "2026-10-16",
+   "verdict": "no match: generic lifting of monoidal natural transformations, not the scheme-specific coefficient comparison and its mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical coefficient ring morphisms for a morphism of schemes on pro-etale sheaves, pullback from the point and its adjunction mate are ring homomorphisms",
+   "results": "Hits concern StandardEtalePair.homEquiv and HasMap.map, Scheme.Etale, and IsEtale.of_comp, not coefficient morphisms.",
+   "date": "2026-10-16",
+   "verdict": "no match: these results do not give the complete coefficient-morphism definition with its scheme-specific comparison and ring properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal natural isomorphism induces isomorphisms of monoid objects, and the adjunction unit is a monoid homomorphism",
+   "results": "Adjunction.mapMon, Adjunction.mapMon_unit, Equivalence.mapMon_unitIso, and monoidal unit coherence. Generic results, not the specific comparison from the point.",
+   "date": "2026-10-16",
+   "verdict": "no match: these results do not give the complete coefficient-morphism definition with its scheme-specific comparison and ring properties"
+  },
+  {
+   "tool": "grep",
+   "query": "condensedPullbackHom|condensedPushforwardHom|coefficientPullbackIso|mapMonNatIso|mapMonCompIso",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean:898,917,1073,1074,1089. Read mapMonCompIso, mapMonNatTrans and mapMonNatIso at lines 898-918. These lift supplied functors/comparisons; none provides the present pro-etale comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match: these results do not give the complete coefficient-morphism definition with its scheme-specific comparison and ring properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMonNatIso\"",
+   "results": "CategoryTheory.Functor.mapMonNatIso and its hom/inv app hom lemmas (Mathlib.CategoryTheory.Monoidal.Mon). Read Mathlib/CategoryTheory/Monoidal/Mon.lean:917-918.",
+   "date": "2026-10-16",
+   "verdict": "no match: generic lifting of a supplied monoidal natural isomorphism; does not construct the comparison from the point"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMonCompIso\"",
+   "results": "3 hits: CategoryTheory.Functor.mapMonCompIso, mapMonCompIso_hom_app_hom and mapMonCompIso_inv_app_hom. Read Mathlib/CategoryTheory/Monoidal/Mon.lean:898-899: its component is Mon.mkIso (.refl _).",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic compatibility with composition, without the pro-etale comparison or its adjunction mate; confirms the elementary underlying-identity calculation in step 3"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lax monoidal right adjoint sends a monoid object to a monoid object and the adjunction unit induces a monoid morphism",
+   "results": "8 hits: Adjunction.rightAdjointLaxMonoidal_μ, Adjunction.mapMon_unit, Adjunction.mapMon, Adjunction.rightAdjointLaxMonoidal, Functor.mapMon_obj_mon_one, Functor.obj.η_def, Adjunction.rightAdjointLaxMonoidal_ε, Adjunction.mapMon_counit. Read Mathlib/CategoryTheory/Monoidal/Mon.lean:1065-1074: Adjunction.mapMon requires supplied monoidal functors and a monoidal adjunction; its unit uses mapMonNatTrans a.unit.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: generic monoid lifting does not construct the scheme-specific comparison from the point or specify its component at the condensed coefficient ring"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -73,5 +206,20 @@
   "sketch"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-coefficient-morphisms",
+  "worker": "stage1",
+  "summary": "Checked the main-20261015 coefficient-morphism unit and its five existing child nodes against the master reference and the slopmaster2 source. Reused those nodes, made the ambient ring transport explicit using the existing generic transport theorem, and replaced the nonexistent umbrella citation by its existing monoidal-structure and adjunction components. No mathematical hypotheses or conclusions changed, and no new node was needed.",
+  "blueprint": "Step 1 makes explicit the ambient ring structures in the unit statement; step 2 realizes its alpha bullet; step 3 realizes the first two sentences of its proof (alpha is a ring morphism and a bundled isomorphism); step 4 realizes its eta bullet; step 5 realizes the final ring-morphism assertion. All five original child nodes remain used."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-358250af1",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-358250af1 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements and source locations, unit/chapter route, delivery checks, blueprint, and exact master Lean reference. Verified coefficient category, base-change comparison direction, ring transport, alpha isomorphism, eta mate, hypotheses, edge cases, searches, and acyclicity. No new nodes or faults; review.md records the checks."
+ }
 }
