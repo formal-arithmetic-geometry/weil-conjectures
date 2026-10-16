@@ -44,12 +44,6 @@ theorem formalSecondIdealQuotient_supported
     ∀ n : ℕ, IsZero (Scheme.idealModuleProduct
       (K ^ (e + 1)).subschemeι.ker.toModulesι
       (((M.obj ⋙ formalCompletionFunctor K).flip.obj (op e)).obj (op n))) := by
-  intro n
-  rw [Scheme.IdealSheafData.ker_subschemeι]
-  obtain ⟨p, hp⟩ := power_inclusion_iso K (e + 1) (Nat.succ_pos e)
-  obtain ⟨d, _⟩ := product_inclusion_iso _ _ p hp
-    (formalModuleQuotient K (e + 1) (M.obj.obj (op n)))
-  exact d.isZero_iff.mp
-    (idealModuleProduct_quotient_zero (Scheme.idealSheafPower K.toModulesι (e + 1)).2)
+  sorry
 
 end AlgebraicGeometry

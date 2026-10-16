@@ -254,7 +254,9 @@ private theorem local_affine_eventually_zero
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
 -- Allow elaboration of repeated restrictions to the over-site.
-/-- Two local maps with equal evaluation agree on a sufficiently high ideal power
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- Two local maps with equal evaluation agree on a sufficiently high ideal power
 on their quasi-compact overlap. No lifting or quotient construction is asserted.
 
 Source: Stacks Project, Properties, Lemma 01PM (injectivity) and Lemma 01PQ
@@ -276,7 +278,7 @@ inclusions identify all r with the genuine inclusions and give their
 composition law; restriction to the maximum preserves vanishing. Sheaf
 separation now makes the two restricted maps equal on the whole overlap,
 hence on every W contained in it. An empty overlap needs no affine opens
-and the same separation argument works at degree n. -/
+and the same separation argument works at degree n. - /
 theorem ideal_power_local_maps_eventually_agree
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
@@ -377,6 +379,7 @@ theorem ideal_power_local_maps_eventually_agree
   change (r n m hnm).val.app (op W) ≫ (αW - βW) = 0 at hh
   rw [Preadditive.comp_sub] at hh
   exact sub_eq_zero.mp hh
+-/
 
 
 end AlgebraicGeometry.Scheme

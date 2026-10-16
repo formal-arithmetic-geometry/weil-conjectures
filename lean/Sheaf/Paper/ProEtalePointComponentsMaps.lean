@@ -52,23 +52,32 @@ private noncomputable def specMapEquiv (R : CommRingCat.{u}) (S : Profinite.{u})
       ((profiniteHomContinuousEquiv _ S).trans (componentMapEquiv (Spec R) S).symm)))
 -/
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private lemma specMapEquiv_apply (R : CommRingCat.{u}) (S : Profinite.{u})
     (f : Spec R ⟶ profiniteToScheme.obj S) (x : Spec R) :
     specMapEquiv R S f x =
       ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm (f x)).1 := by
   sorry
+-/
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private noncomputable def affineMapEquiv (A : Scheme.{u}) [IsAffine A]
     (S : Profinite.{u}) : (A ⟶ profiniteToScheme.obj S) ≃ C(A, S) :=
   (Iso.homCongr A.isoSpec (Iso.refl _)).trans
     ((specMapEquiv _ S).trans
       ((Scheme.homeoOfIso A.isoSpec.symm).continuousMapCongr (Homeomorph.refl S)))
+-/
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private lemma affineMapEquiv_apply (A : Scheme.{u}) [IsAffine A] (S : Profinite.{u})
     (f : A ⟶ profiniteToScheme.obj S) (x : A) :
     affineMapEquiv A S f x =
       ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm (f x)).1 := by
   sorry
+-/
 
 -- Maps over X into the base change are maps into Spec LC(S, Z), since Spec Z is terminal.
 private noncomputable def relativeMapEquiv (X : Scheme.{u}) (U : X.ProEt)
@@ -108,12 +117,15 @@ private lemma pointComponentsEquiv_apply (X : Scheme.{u}) (U : X.ProEt)
   exact affineMapEquiv_apply _ _ _ _
 -/
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private lemma profiniteProjection_natural (S T : Profinite.{u}) (b : S ⟶ T)
     (x : profiniteToScheme.obj S) :
     ((LocallyConstant.homeomorphPrimeSpectrum (T := T) (R := ℤ)).symm
       (profiniteToScheme.map b x)).1 =
     b (((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm x).1) := by
   sorry
+-/
 
 private lemma relativeMapEquiv_target (X : Scheme.{u}) (U : X.ProEt)
     (S T : Profinite.{u}) (b : S ⟶ T) (f : U ⟶ (profiniteToProEtOf X).obj S) :

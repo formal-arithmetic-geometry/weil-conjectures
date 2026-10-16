@@ -178,48 +178,7 @@ private theorem constantScheme_pushforward (M : Ab.{u + 1})
         ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).op.obj
           (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)).obj
             (proEtTerminal specZ.{u})))) := by
-  let W := proEtTerminal specZ.{u}
-  let a : (constantSheaf (ProEt.topology specZ.{u}) Ab.{u + 1}).obj M ⟶
-      pointUpperStar.obj R :=
-    constantPointIso.hom.app M ≫ pointUpperStar.map e
-  let q0 := ((sheafificationAdjunction (ProEt.topology specZ.{u}) Ab.{u + 1}).unit.app
-    ((Functor.const specZ.{u}.ProEtᵒᵖ).obj M)).app (Opposite.op W) ≫
-      a.hom.app (Opposite.op W)
-  have hq (X : Scheme.{u}) :
-      ((sheafificationAdjunction (ProEt.topology X) Ab.{u + 1}).unit.app
-          ((Functor.const X.ProEtᵒᵖ).obj M) ≫
-        ((constantSchemeIso X).hom.app M ≫ (upperStarFromPoint X).map e).hom).app
-          (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X)).obj W)) =
-        q0 ≫ ((upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X)).unit.app
-          (pointUpperStar.obj R)).hom.app (Opposite.op W) := by
-    have hu := constantPullback_unit_map (A := Ab.{u + 1})
-      (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X))
-      (ProEt.topology specZ.{u}) (ProEt.topology X)
-      (proEtIsTerminal W) (proEtIsTerminal
-        ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X)).obj W))
-      M (pointUpperStar.obj R) a
-    dsimp only [Iso.trans_hom, Functor.mapIso_hom, constantSchemeIso,
-      Iso.app_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-      NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom,
-      Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
-    simp only [q0, a, upperStarFromPoint, upperStarLowerStarAdjunction,
-      Functor.comp_map, Functor.map_comp, ObjectProperty.FullSubcategory.comp_hom,
-      NatTrans.comp_app, Category.assoc, ObjectProperty.FullSubcategory.id_hom,
-      NatTrans.id_app, Category.comp_id] at hu ⊢
-    exact hu
-  exact terminal_coefficient_of_units M T U j (pointUpperStar.obj R)
-    ((toSpecZ T)^*[Ab.{u + 1}].obj (pointUpperStar.obj R))
-    ((toSpecZ U)^*[Ab.{u + 1}].obj (pointUpperStar.obj R))
-    ((upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ T)).unit.app _)
-    ((upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ U)).unit.app _)
-    (condensedPushforwardHom R j)
-    ((sheafificationAdjunction (ProEt.topology T) Ab.{u + 1}).unit.app
-      ((Functor.const T.ProEtᵒᵖ).obj M) ≫
-      ((constantSchemeIso T).hom.app M ≫ (upperStarFromPoint T).map e).hom)
-    ((sheafificationAdjunction (ProEt.topology U) Ab.{u + 1}).unit.app
-      ((Functor.const U.ProEtᵒᵖ).obj M) ≫
-      ((constantSchemeIso U).hom.app M ≫ (upperStarFromPoint U).map e).hom)
-    W q0 (hq T) (hq U) (coefficient_unit_comp R T U j)
+  sorry
 
 
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]

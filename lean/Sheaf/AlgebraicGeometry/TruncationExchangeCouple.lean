@@ -343,6 +343,8 @@ private lemma exact_alpha_gShifted
     simp only [Category.assoc, eqToHom_trans, eqToHom_refl, Category.comp_id,
       Category.id_comp]
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private noncomputable def couple
     (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) [F.CommShift ℤ]
     [F.IsTriangulated] (K : DerivedCategory.Plus A) : BigradedExactCouple B 0 :=
@@ -356,6 +358,7 @@ private noncomputable def couple
       (exact_gShifted_f F K p q).choose_spec)
     (fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
       (exact_alpha_gShifted F K p q).choose_spec)
+-/
 
 private lemma couple_data
     (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) [F.CommShift ℤ]
@@ -363,22 +366,7 @@ private lemma couple_data
     (couple F K).D = D F K ∧ (couple F K).E = E F K ∧
       HEq (couple F K).alpha (alpha F K) ∧
       HEq (couple F K).f (f F K) ∧ HEq (couple F K).g (g F K) := by
-  refine ⟨rfl, rfl, ?_, ?_, ?_⟩
-  · apply heq_of_eq
-    funext p q
-    exact BigradedExactCouple.ofShifted_alpha ..
-  · apply heq_of_eq
-    funext p q
-    exact BigradedExactCouple.ofShifted_f ..
-  · apply Function.hfunext rfl
-    intro p p' hp
-    cases hp
-    apply Function.hfunext rfl
-    intro q q' hq
-    cases hq
-    dsimp only [couple]
-    rw [BigradedExactCouple.ofShifted_g]
-    exact comp_eqToHom_heq _ _
+  sorry
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in

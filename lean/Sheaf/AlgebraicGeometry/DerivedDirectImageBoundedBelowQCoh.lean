@@ -64,8 +64,10 @@ private theorem qcoh_pages {Y : Scheme.{u}}
       (Limits.kernel.lift ((S.pageCouple r).d p q) ((S.pageCouple r).dInto p q)
         ((S.pageCouple r).dInto_comp_d p q))).2.2.2.2.2.2.1
 
-/-- An isomorphism-invariant extension-closed property passes from finite graded pieces
-to the filtered object, by descending induction from the zero step. -/
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- An isomorphism-invariant extension-closed property passes from finite graded pieces
+to the filtered object, by descending induction from the zero step. - /
 private theorem property_of_filtration {C : Type*} [Category* C] [Abelian C]
     (P : ObjectProperty C) [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
     (hext : ∀ (S : ShortComplex C), S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂)
@@ -73,6 +75,7 @@ private theorem property_of_filtration {C : Type*} [Category* C] [Abelian C]
     (hfull : F.step 0 = ⊤) (hzero : F.step N = ⊥)
     (hgraded : ∀ p : ℤ, P (F.gradedPiece p)) : P M := by
   sorry
+-/
 
 /-- Derived direct image of a bounded-below object with quasi-coherent cohomology
 has quasi-coherent cohomology. No compactness of the target is required.

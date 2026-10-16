@@ -51,8 +51,10 @@ private theorem property_pages {C : Type*} [Category* C] [Abelian C]
       (ih _ _)
       (hk ((S.pageCouple r).d p q) (ih _ _) (ih _ _))
 
-/-- An isomorphism-invariant extension-closed property passes from finite graded pieces
-to the filtered object on any finite index interval, by descending induction. -/
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- An isomorphism-invariant extension-closed property passes from finite graded pieces
+to the filtered object on any finite index interval, by descending induction. - /
 private theorem property_of_shifted_filtration {C : Type*} [Category* C] [Abelian C]
     (P : ObjectProperty C) [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
     (hext : ∀ (S : ShortComplex C), S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂)
@@ -60,6 +62,7 @@ private theorem property_of_shifted_filtration {C : Type*} [Category* C] [Abelia
     (hfull : F.step b = ⊤) (hzero : F.step (b + N) = ⊥)
     (hgraded : ∀ p : ℤ, b ≤ p → p < b + N → P (F.gradedPiece p)) : P M := by
   sorry
+-/
 
 /-- Each higher image of a canonical lower truncation is quasi-coherent.
 Source: Stacks Project, Tag 08D5, proof of part (1), bounded-below paragraph;

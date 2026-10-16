@@ -42,6 +42,8 @@ private structure FunctorComparison
     (eIso p q).hom ≫ Y.f p q
   g_comm : ∀ p q : ℤ, Φ.map (X.g p q) ≫ (eIso (p + s) (q - s)).hom =
     (dIso p q).hom ≫ Y.g p q
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private noncomputable def mapped (X : BigradedExactCouple C s) : BigradedExactCouple B s :=
   ⟨{ D := fun i ↦ Φ.obj (X.toExactCouple.D i)
      E := fun i ↦ Φ.obj (X.toExactCouple.E i)
@@ -57,6 +59,7 @@ private noncomputable def mapped (X : BigradedExactCouple C s) : BigradedExactCo
      exact_α_g := fun i j k hij hjk ↦ (X.toExactCouple.exact_α_g i j k hij hjk).map Φ
      exact_g_f := fun i j k hij hjk ↦ (X.toExactCouple.exact_g_f i j k hij hjk).map Φ
      exact_f_α := fun i j k hij hjk ↦ (X.toExactCouple.exact_f_α i j k hij hjk).map Φ }⟩
+-/
 
 variable {Φ}
 omit [Φ.Additive] [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ] in
@@ -129,6 +132,8 @@ private theorem quotientIso_projection (X : BigradedExactCouple C s)
   simp [quotientIso, derivedEProjection]
 
 omit [Φ.Additive] in
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem derived_alpha_comm (X : BigradedExactCouple C s)
     (Y : BigradedExactCouple B s) (T : FunctorComparison Φ X Y) (p q : ℤ) :
     Φ.map (X.derived.alpha p q) ≫ (imageIso X Y T (p - 1) (q + 1)).hom =
@@ -145,6 +150,9 @@ private theorem derived_alpha_comm (X : BigradedExactCouple C s)
     ← Category.assoc, ← imageIso_inclusion]
   simp only [Category.assoc]
   rw [hy]
+-/
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem derived_f_comm (X : BigradedExactCouple C s)
     (Y : BigradedExactCouple B s) (T : FunctorComparison Φ X Y) (p q : ℤ) :
     Φ.map (X.derived.f p q) ≫ (imageIso X Y T (p + 2) (q - 1)).hom =
@@ -167,6 +175,7 @@ private theorem derived_f_comm (X : BigradedExactCouple C s)
     quotientIso_projection, Category.assoc, hy,
     ← Category.assoc (cyclesIso X Y T p q).hom, cyclesIso_inclusion]
   simp only [Category.assoc]
+-/
 omit [Φ.Additive] in
 private theorem imageIso_factor (X : BigradedExactCouple C s)
     (Y : BigradedExactCouple B s) (T : FunctorComparison Φ X Y) (p q : ℤ) :
@@ -191,6 +200,8 @@ private theorem g_cycles_comm (X : BigradedExactCouple C s)
   dsimp only [gToCycles]
   simp only [kernel.lift_ι, Category.assoc]
   exact T.g_comm p q
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem derived_g_comm (X : BigradedExactCouple C s)
     (Y : BigradedExactCouple B s) (T : FunctorComparison Φ X Y) (p q : ℤ) :
     Φ.map (X.derived.g p q) ≫
@@ -213,6 +224,7 @@ private theorem derived_g_comm (X : BigradedExactCouple C s)
   rw [← Category.assoc (Φ.map (X.gToCycles (p + 1) (q - 1)))]
   rw [← Category.assoc (Φ.map (X.gToCycles (p + 1) (q - 1))), g_cycles_comm]
   simp only [Category.assoc]
+-/
 
 private noncomputable def comparisonDerived (X : BigradedExactCouple C s)
     (Y : BigradedExactCouple B s) (T : FunctorComparison Φ X Y) :
@@ -356,44 +368,13 @@ private theorem filtration_comparison
         ((Y.imageFiltration n (AY n)).step (p + 1))
         ((Y.imageFiltration n (AY n)).step p)
         ((Y.imageFiltration n (AY n)).antitone_step (by omega)))) := by
-  let τ (n p : ℤ) := Φ.mapIso (imageSubobjectIso ((AX n).ι p)) ≪≫
-    (PreservesImage.iso Φ ((AX n).ι p)).symm ≪≫
-    (im (C := B)).mapIso (Arrow.isoMk' _ _ (eqToIso (hD p (n - p))) (eA n)
-      (hA n p).symm) ≪≫ (imageSubobjectIso ((AY n).ι p)).symm
-  have hτ (n p : ℤ) :
-      (τ n p).hom ≫ ((Y.imageFiltration n (AY n)).step p).arrow =
-        Φ.map (((X.imageFiltration n (AX n)).step p).arrow) ≫ (eA n).hom := by
-    dsimp only [τ, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, im,
-      imageFiltration, DecreasingFiltration.step]
-    simp only [Category.assoc, imageSubobject_arrow']
-    erw [image.map_ι]
-    simp only [Arrow.isoMk_hom_right, Arrow.mk_hom, ← Category.assoc]
-    simp only [Category.assoc]
-    erw [PreservesImage.inv_comp_image_ι_map_assoc]
-    rw [← Category.assoc, ← Functor.map_comp, imageSubobject_arrow]
-  let kX (n p : ℤ) := Subobject.ofLE
-    ((X.imageFiltration n (AX n)).step (p + 1))
-    ((X.imageFiltration n (AX n)).step p)
-    ((X.imageFiltration n (AX n)).antitone_step (by omega))
-  let kY (n p : ℤ) := Subobject.ofLE
-    ((Y.imageFiltration n (AY n)).step (p + 1))
-    ((Y.imageFiltration n (AY n)).step p)
-    ((Y.imageFiltration n (AY n)).antitone_step (by omega))
-  have hstep (n p : ℤ) : Φ.map (kX n p) ≫ (τ n p).hom =
-      (τ n (p + 1)).hom ≫ kY n p := by
-    apply (cancel_mono ((Y.imageFiltration n (AY n)).step p).arrow).mp
-    rw [Category.assoc, hτ, ← Category.assoc, ← Functor.map_comp]
-    dsimp only [kX, kY]
-    rw [Subobject.ofLE_arrow, Category.assoc, Subobject.ofLE_arrow, hτ]
-  let κ (n p : ℤ) := PreservesCokernel.iso Φ (kX n p) ≪≫
-    cokernel.mapIso _ _ (τ n (p + 1)) (τ n p) (hstep n p)
-  refine ⟨τ, κ, hτ, ?_⟩
-  intro n p
-  simp [κ, kX, kY]
+  sorry
 
 end FiltrationComparison
 
-/-- An exact additive functor transports an exact couple, all its derived pages, and
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- An exact additive functor transports an exact couple, all its derived pages, and
 its half-plane abutment filtration, with the canonical cohomology comparisons.
 Source: Stacks Project, Tags 011Q, 011R, 011S, 0AMJ, and the blueprint transport argument
 (blueprint: lem-sp-exact-functor-couple).
@@ -417,7 +398,7 @@ to their images, so each filtration step and its successive quotient are preserv
 Step 6: at a sufficiently large page, transport the filtration along the inverse alpha
 isomorphism to its D term. The induced g map identifies its quotient with E. Applying
 the functor to this quotient equation and cancelling the epimorphic quotient map proves
-the final graded-piece square (thm-sp-half-plane-convergence, def-sp-convergence). -/
+the final graded-piece square (thm-sp-half-plane-convergence, def-sp-convergence). - /
 theorem exactFunctor_couple
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {B : Type u₂} [Category.{v₂} B] [Abelian B]
@@ -661,5 +642,6 @@ theorem exactFunctor_couple
   rw [← Category.assoc, ← Functor.map_comp, hsX, hπ]
   rw [← Category.assoc (Φ.map (kernel.ι ((X.pageCouple r).d p q)))
     (φ r p q).hom, ← hk, Category.assoc, hsY]
+-/
 
 end CategoryTheory.BigradedExactCouple

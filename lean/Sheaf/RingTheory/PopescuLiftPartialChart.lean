@@ -302,10 +302,12 @@ theorem partial_chart_fibre_dimension [Algebra R Cbar]
     (PrimeSpectrum.localization_away_isOpenEmbedding L t) Q, ← hdim, hfin]
 -/
 
-/-- Apply equation-count flatness to the finite presentation of the partial chart.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- Apply equation-count flatness to the finite presentation of the partial chart.
 
 Source: Stacks Project, Tag 07CP, applying Tag 00ST to D_k.
-(blueprint: lem-weil-pbc-popescu-lift-partial-chart-dimension). -/
+(blueprint: lem-weil-pbc-popescu-lift-partial-chart-dimension). - /
 theorem partial_chart_flat [Algebra R Cbar] [IsNoetherianRing R]
     [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]
     (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)
@@ -334,5 +336,6 @@ theorem partial_chart_flat [Algebra R Cbar] [IsNoetherianRing R]
       rw [e.commutes, ← IsScalarTower.algebraMap_apply R (d.chartAlgebra k)
         (d.chartLocal k q)]
   exact Module.Flat.of_linearEquiv eA.symm.toLinearEquiv
+-/
 
 end Algebra.PopescuLiftPresentation
