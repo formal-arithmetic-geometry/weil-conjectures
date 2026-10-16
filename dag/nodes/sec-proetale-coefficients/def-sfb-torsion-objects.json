@@ -48,12 +48,18 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-rationalization",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization",
+  "declaration": "CategoryTheory.Rationalization.torsion",
   "declarations": [
    "CategoryTheory.Rationalization.torsion",
    "CategoryTheory.Rationalization.instIsClosedUnderIsomorphismsTorsion"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 18:32 UTC for group NM, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: torsion defines the stated M-torsion object property, and instIsClosedUnderIsomorphismsTorsion gives its closure under isomor"
+  "statement": "def torsion : ObjectProperty C :=",
+  "branch": "slopmaster2",
+  "by": "Q50",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The upstream definition is exactly the M-torsion object property: for a preadditive category C linear over a commutative ring R and M : Submonoid R, torsion M C X is ∃ m ∈ M, m • 𝟙 X = 0. The upstream instance instIsClosedUnderIsomorphismsTorsion supplies closure under isomorphisms, as required by the node. Source: WeilConjectures/CategoryTheory/DerivedCategory/Complete/Rationalization.lean."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -83,5 +89,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a92b37591",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Existing-declaration delivery: CategoryTheory.Rationalization.torsion (fun X ↦ ∃ m ∈ M, m • 𝟙 X = 0 over {R} [CommRing R] (M : Submonoid R) (C) [Category] [Preadditive] [Linear R C]) and instIsClosedUnderIsomorphismsTorsion match the blueprint node exactly; they sit before the Pretriangulated section, so there are no extra assumptions; universes w,u,v are independent. The lean record is complete and its statement verbatim; the item changed only in lean; stmt_deps are empty; the report has real Worker report and Second reading by Q50 sections. nt_compile.py --json against the side overlay compiled the module and a check file (#check/#print plus an Iff.rfl example) cleanly. No duplicate definition; edge cases hold (0∈M, M=⊥, zero object, empty category, zero ring). Informational only: lean_audit keeps the stale module path, preserved as a maintainer field."
  }
 }

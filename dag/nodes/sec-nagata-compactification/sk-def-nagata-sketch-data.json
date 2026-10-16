@@ -118,5 +118,29 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-801e76112 (reviewer sub-agent of L); spot-checked: I read every clause of the item. Its statement is identical to main-20261015 sk-def-nagata-sketch-data/_section.md, and so is the unit statement. The unit records realized.statement=[item] and steps=[], which is correct because the source has no proof paragraphs. Each clause is carried by a cited node, read in full. def-nagata-compactification: its blueprint_update drops quasi-compactness from the general notion, but the item keeps it in its own text. def-nagata-dense-compactification: its update identifies scheme-theoretic dominance with injectivity of O_Xbar->j_*O_X for quasi-compact j, and it reaches the Mathlib leaf def-nagata-scheme-theoretically-dense-open. det-nagata-definition-refinement (reviewed): it states p∘h=p', h∘j'=j and h^{-1}(j(X))=j'(X). There are no new nodes, proof steps or tool_uses. The dependency closure has no cycle and no missing or merged id. def-weil-compactifications-refinements is a different, weaker notion (no density, no inverse-image condition), not a duplicate. Edge cases checked: the identity compactification of a proper f; X empty, which is dense iff Xbar is empty; and the fold map X⊔X->X, which fails the inverse-image condition and is correctly excluded. No target, base-change morphism, coefficient category or SGA source is involved. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ec046c6d",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Existing-declaration binding: the delivery changes only the lean field of the item node (null -> existing:true, AlgebraicGeometry.Compactification.BoundaryCompactification in Sheaf.Compactification.BoundaryRefinement, newtargets-dag, no file field, statement verbatim). Node statement is verbatim the main-20261015 _section.md. Clauses: f arbitrary {X S : Scheme.{u}}; factorization = upstream Compactification (Z,i,g,comm f = i ≫ g); open immersion and proper are fields; quasi-compactness via QuasiCompactObjects; density = IsSchemeTheoreticallyDominant (ker = ⊥), equivalent to injectivity of O -> j_*O for quasi-compact j via app_injective/ker_apply; refinement r : c' ⟶ c gives i_hom (h j' = j) and hom_g (S-morphism); boundaryRefinementProperty is the full inverse-image equality in Scheme.Opens, direction correct. All three stmt_deps used; det-nagata-definition-refinement read in full and matches. Edge cases (empty X, proper f, fold map) and universes (single polymorphic u) are correct. No hollow definitions, docstrings have source/blueprint tags, only sorry is the dependency's IsMultiplicative. nt_compile --json: module 4.5 s and probe with #check of all 4 declarations plus #print 3.7 s, both clean. Worker report and Second reading by Q87 present and accurate. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Compactification.BoundaryRefinement",
+  "declaration": "AlgebraicGeometry.Compactification.BoundaryCompactification",
+  "declarations": [
+   "AlgebraicGeometry.Compactification.QuasiCompactObjects",
+   "AlgebraicGeometry.Compactification.boundaryRefinementProperty",
+   "AlgebraicGeometry.Compactification.BoundaryCompactification",
+   "AlgebraicGeometry.Compactification.DenseBoundaryCompactification"
+  ],
+  "statement": "abbrev BoundaryCompactification {X S : Scheme.{u}} (f : X ⟶ S) : Type (u + 1)",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The already landed definition module of det-nagata-definition-refinement gives exactly the three notions in this sketch: quasi-compact compactifications, boundary-preserving refinements, and scheme-theoretically dense objects. Quasi-compactness is retained by QuasiCompactObjects although the upstream Compactification structure alone does not require it. Under this condition the density predicate is equivalent to injectivity of the structure-sheaf map."
  }
 }

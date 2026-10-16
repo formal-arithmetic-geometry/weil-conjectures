@@ -41,12 +41,18 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.Hom",
+  "declaration": "AlgebraicGeometry.ProEtale.derivedHom",
   "declarations": [
    "AlgebraicGeometry.ProEtale.derivedHom",
    "AlgebraicGeometry.ProEtale.derivedTensorHomAdjunction₂"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 11:00 UTC for group N7, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_2104a988.jsonl.gz: Under the inherited scheme and coefficient hypotheses, derivedHom defines the internal Hom on the specified unbounded derived category"
+  "statement": "noncomputable def derivedHom :\n    (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))ᵒᵖ ⥤\n      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n        DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)",
+  "branch": "slopmaster2",
+  "by": "Q89",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact upstream definition, confirmed against the current scompile.py --source output. In the same scheme/coefficient context as the recorded def-sfb-derived-tensor-sheaves declaration, this is MonoidalClosed.internalHom on the unbounded derived category of A-valued sheaves on Scheme.ProEt.topology X. The accompanying derivedTensorHomAdjunction₂ identifies it as the internal Hom for that very derivedTensor. No new module or duplicate definition is introduced."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -78,5 +84,13 @@
   }
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-derived-tensor-hom"
+ "unit": "sk-def-sfb-derived-tensor-hom",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e6b2ddf3",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Node diff changes only lean (existing: AlgebraicGeometry.ProEtale.derivedHom, side Hom.lean:85-89, with derivedTensorHomAdjunction₂); lean.statement verbatim equals the signature. Hypotheses equal the recorded derivedTensor context (Grothendieck abelian, MonoidalPreadditive, Symmetric, MonoidalClosed, HasFunctorialFlatResolution, X : Scheme), with nothing stronger and u' free. D is the unbounded DerivedCategory of Sheaf (Scheme.ProEt.topology X) A, curried as Dᵒᵖ ⥤ D ⥤ D. nt_compile --json probe compiled side Tensor/Hom and the probe cleanly: derivedHom = MonoidalClosed.internalHom by rfl, derivedTensor = curriedTensor by rfl, derivedTensor ⊣₂ derivedHom typechecks, axioms are propext/choice/Quot.sound only. The DerivedCategory MonoidalClosed instance is a real construction. No duplicate pro-étale derived Hom. Report has Worker report and Second reading by Q89. Only a cosmetic line-number reference to the slopmaster2 copy."
+ }
 }

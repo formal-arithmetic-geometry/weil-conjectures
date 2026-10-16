@@ -262,5 +262,28 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote review.md; no fixes were needed. The item matches Kerodon 019F (Thm 4.4.2.6, Joyal) clause by clause, read online since Kerodon is not archived: Q a quasicategory, both outer orientations, n>=2, converse for every such horn. Kerodon's 'isomorphism' is the item's equivalence edge with two witness triangles. Step 6 is the proof of 01H0 (Prop 4.4.2.13) with D a point; step 5's prescribed-target lift stands in for the isofibration input. Checked by hand: the Lambda^3_3 faces in step 1 agree on edges 23/13/03 and d3=(u,v,id_X). In step 3 the generator is Lambda^{p+m+1}_{p+1+i} with an inner index, including p=0 and m=1. The coslice lifting square in step 4 is exactly the cited pushout-join. All three tetrahedral horns in step 5 have matching overlaps and give (c,a,id_y). The target lift is correct. The horn union in step 6 is correct, including n=2. The face reversal i->n-i in step 7 is correct. Edge cases tested: Q=Delta^0, and N(0->1), where the non-invertible arrow fails the converse. No new nodes, no cycle (dependency closure has 6 nodes), no duplicate: lem-cbc-invertible-prism-extension only generalizes the forward Lambda_0 clause, and slice-right-fibration is the dual absolute statement. The parent cone-calculus node uses the item as stated. I accept tool_uses: lem-coef-infinity-pushout-join-saturation as a generic black-box tool from sk-prop-sf-biduality-general; boundary-cells is a Mathlib leaf. The unit route is unchanged, there is no SGA citation, and this is not a target node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a86f42e67",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Read node (only lean field changed vs side clone; statement unchanged), dep def-cbc-enhanced-diagrams-cones/IsEquivalenceEdge (inverse + both 2-simplex witnesses), Kerodon 019F Thm 4.4.2.6, module, report (Worker report + Second reading by Q14 present). All four clauses match (two forward fillers, two independent converses, n>=2, Quasicategory only); IsInitialHornEdge/IsFinalHornEdge pick the unique [0,1]/[n-1,n] horn edge; edge cases n=2, empty Q, nerve of 0->1 checked; single universe, no autoImplicit; docstrings carry source/blueprint and all 7 proof steps; sorry-only; lean.statement verbatim. nt_compile --json against the side overlay: rc 0, no errors or warnings, deps compiled. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EquivalenceOuterHornFilling",
+  "declaration": "SSet.Enhanced.equivalence_iff_outer_horn_filling",
+  "declarations": [
+   "SSet.Enhanced.IsInitialHornEdge",
+   "SSet.Enhanced.IsFinalHornEdge",
+   "SSet.Enhanced.equivalence_iff_outer_horn_filling"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EquivalenceOuterHornFilling.lean",
+  "statement": "theorem equivalence_iff_outer_horn_filling {Q : SSet.{u}} [Quasicategory Q] : (∀ (n : ℕ), 2 ≤ n → ∀ (σ₀ : (Λ[n, (0 : Fin (n + 1))] : SSet.{u}) ⟶ Q), (∀ (e : (Λ[n, (0 : Fin (n + 1))] : SSet.{u}) _⦋1⦌), IsInitialHornEdge e → IsEquivalenceEdge Q (σ₀.app _ e)) → ∃ σ : (Δ[n] : SSet.{u}) ⟶ Q, σ₀ = Λ[n, 0].ι ≫ σ) ∧ (∀ (f : Q _⦋1⦌), (∀ (n : ℕ), 2 ≤ n → ∀ (σ₀ : (Λ[n, (0 : Fin (n + 1))] : SSet.{u}) ⟶ Q), (∀ (e : (Λ[n, (0 : Fin (n + 1))] : SSet.{u}) _⦋1⦌), IsInitialHornEdge e → σ₀.app _ e = f) → ∃ σ : (Δ[n] : SSet.{u}) ⟶ Q, σ₀ = Λ[n, 0].ι ≫ σ) → IsEquivalenceEdge Q f) ∧ (∀ (n : ℕ), 2 ≤ n → ∀ (σ₀ : (Λ[n, (Fin.last n)] : SSet.{u}) ⟶ Q), (∀ (e : (Λ[n, (Fin.last n)] : SSet.{u}) _⦋1⦌), IsFinalHornEdge e → IsEquivalenceEdge Q (σ₀.app _ e)) → ∃ σ : (Δ[n] : SSet.{u}) ⟶ Q, σ₀ = Λ[n, Fin.last n].ι ≫ σ) ∧ (∀ (f : Q _⦋1⦌), (∀ (n : ℕ), 2 ≤ n → ∀ (σ₀ : (Λ[n, (Fin.last n)] : SSet.{u}) ⟶ Q), (∀ (e : (Λ[n, (Fin.last n)] : SSet.{u}) _⦋1⦌), IsFinalHornEdge e → σ₀.app _ e = f) → ∃ σ : (Δ[n] : SSet.{u}) ⟶ Q, σ₀ = Λ[n, Fin.last n].ι ≫ σ) → IsEquivalenceEdge Q f)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
