@@ -7,6 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.AlgebraicGeometry.ProEtaleModelRingPresentation
 import Sheaf.CategoryTheory.ModuleInverseImageAdjunction
+import Sheaf.CategoryTheory.SheafPullbackForgetComparison
 
 
 @[expose] public section

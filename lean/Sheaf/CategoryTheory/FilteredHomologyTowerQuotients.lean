@@ -13,7 +13,6 @@ import Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
 import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
 import Sheaf.CategoryTheory.FilteredHomologyTowerDifferential
 import all Sheaf.CategoryTheory.FilteredHomologyTowerForwardRepresentatives
-import Sheaf.CategoryTheory.FiniteCycleFormula
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-! # Representative comparisons with the canonical exact-couple tower
