@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-derived-module-underlying-comparison",
+ "kind": "statement",
+ "title": "Derived coefficient-forgetting comparisons respect restriction",
+ "statement": "Let Λ be a commutative ring, T a scheme [def-weil-pbc-scheme-conventions], K a bounded-below complex of étale Λ-module sheaves [def-weil-pbc-derived-categories], and n an integer. For every p:X→T construct a_n(p):U HⁿRΓ(X,p* K) ≅ HⁿRΓ(X,p* S_T K), where S takes underlying abelian sheaves, U takes underlying abelian groups, and inverse image is [def-weil-pbc-derived-inverse-image]. The comparison is obtained by deriving the canonical sectionwise coefficient-forgetting isomorphism, using acyclicity of injective module sheaves, and the canonical exact inverse-image mate. For every f:X→Y, g:Y→T, h:X→T with h=f≫g, these specific constructed comparisons commute with the restriction maps defined as derived adjunction unit, Leray, and inverse-image composition: U(restriction_Λ)≫a_n(h).hom = a_n(g).hom≫restriction_Ab. No inverse system, limit, finite coefficient ring, compactness or affine-transition assumptions are present.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree and its proof; restriction functoriality as in cohomology.tex Tag 01F8 and inverse-image adjunction/composition in sites-modules.tex Tags 03D3, 03D7 and 03D8."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Construct the exact functor S_X taking module sheaves to abelian sheaves, using sheafCompose with forget₂. Finite limits are reflected through sheafToPresheaf; finite colimits are preserved since S_X is left adjoint to coinduction. Sections commute with forgetting through their canonical terminal-section isomorphisms. Injective module sheaves are acyclic for abelian sections by [lem-weil-pbc-etale-module-injective-forget-acyclic]. Thus rightDerivedFunctorPlusBaseChange is invertible and constructs the derived global-sections comparison. Combine it with exact functor homology and bounded/unbounded compatibility to construct moduleUnderlyingCohomologyIso.",
+   "uses": [
+    "lem-weil-pbc-etale-module-injective-forget-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For p:X→T, use the canonical mate upperStarForget₂ and mapDerivedCategoryPlusNatIso with the exact-functor composition isomorphisms to construct moduleUnderlyingPullbackDerivedIso. Its inverse, the section comparison and the bounded/unbounded exact-pullback compatibility construct moduleUnderlyingPullbackIso. No object is selected from a mere existence statement. The general constructed exact-square API [lem-weil-pbc-derived-exact-square-factorization] supplies its localization equation without expanding the geometric functor bodies.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-derived-exact-square-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary adjunction-unit equation unit_comp_lowerStar_map_upperStarForget₂Comparison, evaluated on the terminal site object, gives the underlying-section square. Naturality of the section isomorphism and of the sheaf comparison transports this to global sections; this is underlyingSections_pullback. Cancel the invertible mate to get the underived cube equation. Apply [lem-weil-pbc-right-derived-plus-cube] to the two global-sections pullback transformations and the exact coefficient functors. This proves the derived coefficient square, with no preservation of injectives by coefficient forgetting required. Cancel the exact identity-functor comparisons to obtain the normalized bounded-below restriction square.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-cube"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized section square is transported to unbounded cohomology by sectionsPullbackPlus_compatibility and naturality of the exact coefficient homology isomorphism; this proves moduleUnderlyingCohomology_restriction. The ordinary composition equation for upperStarForget₂Comparison is proved by applying the inverse-image hom equivalence and the upperStarComp unit equations. Apply [lem-weil-pbc-derived-exact-square-factorization] to this ordinary equation to obtain underlyingPullbackDerived_composition. Invert this identity. Naturality of moduleUnderlyingCohomologyIso moves the module inverse-composition factor across the comparison; the inverted identity separates it into the single-pullback coefficient comparison, the image of the g comparison, and the abelian inverse-composition factor. Apply the already-proved cohomology restriction square and naturality of sectionsPullbackDerivedNat. The remaining factors agree definitionally. This proves the full coefficient restriction square in Lean. For the comparison with unbounded restriction, expand the generic derived-unit factorization equations locally at the needed homotopy object; this introduces no new public declaration or duplicated module theorem.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-derived-exact-square-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-module-injective-forget-acyclic",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-right-derived-plus-cube",
+  "lem-weil-pbc-derived-exact-square-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD and naturality of the derived section comparison with the adjunction unit and the composition mate; isolated by F1 from coefficient reduction of derived continuity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Forgetting module coefficients commutes with derived cohomology pullback",
+   "results": "8 results about underived sheaf/presheaf coefficient forgetting and pushforward, including SheafOfModules.forgetToSheafModuleCat and PresheafOfModules.pushforward₀CompToPresheaf. No bounded-below derived restriction square.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of a module sheaf after forgetting coefficients to abelian groups naturally under pullbacks for bounded below complexes",
+   "results": "No matching derived coefficient square; search returned underived module-sheaf inverse-image and scalar restriction constructions. The existing library supplies exact pullback mates and derived base-change APIs, used in the construction.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso",
+   "results": "No result (the name is in the source library extension, not Mathlib).",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*forget|forget.*cohomology; local rg for restriction.*forget, rightDerivedFunctorPlusBaseChange and upperStarForget₂",
+   "results": "Found EtaleModuleCohomologyForget, the injective-forget-acyclic theorem, DerivedForget, and RightDerivedPlusCube. They construct the object comparisons and the bounded-below derived cube; no theorem already supplies the full unbounded restriction square.",
+   "date": "2026-10-16",
+   "verdict": "partial matches used"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedCohomologyContinuity",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-derived-cohomology-continuity",
+   "place": "Proof step 2, module-to-abelian cohomology comparison, and step 4, naturality of canonical restriction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedModuleUnderlyingComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedModuleUnderlyingComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.moduleUnderlyingPullbackIso_naturality",
+  "declarations": [
+   "AlgebraicGeometry.Etale.moduleDerivedRestriction",
+   "AlgebraicGeometry.Etale.moduleUnderlying_preservesFiniteColimits",
+   "AlgebraicGeometry.Etale.moduleUnderlyingSheaf",
+   "AlgebraicGeometry.Etale.moduleUnderlyingSheaf_preservesFiniteLimits",
+   "AlgebraicGeometry.Etale.moduleUnderlyingSheaf_preservesFiniteColimits",
+   "AlgebraicGeometry.Etale.moduleUnderlyingSectionsIso",
+   "AlgebraicGeometry.Etale.moduleUnderlyingPullbackDerivedIso",
+   "AlgebraicGeometry.Etale.moduleUnderlyingGlobalSectionsIso",
+   "AlgebraicGeometry.Etale.moduleUnderlyingCohomologyIso",
+   "AlgebraicGeometry.Etale.moduleUnderlyingPullbackIso",
+   "AlgebraicGeometry.Etale.moduleUnderlyingPullbackIso_naturality"
+  ],
+  "statement": "theorem moduleUnderlyingPullbackIso_naturality (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ) (X Y : Scheme.{u}) (f : X ⟶ Y) (g : Y ⟶ T) (h : X ⟶ T) (hh : h = f ≫ g) : (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).map (moduleDerivedRestriction Λ f g h hh K.obj n) ≫ (moduleUnderlyingPullbackIso Λ T K n X h).hom = (moduleUnderlyingPullbackIso Λ T K n Y g).hom ≫ presentationDerivedMap f g h hh (((moduleUnderlyingSheaf Λ T).mapDerivedCategoryPlus.obj K).obj) n",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T150655-L-4176217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T150655-L-4176217",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-derived-exact-square-factorization",
+ "kind": "statement",
+ "title": "Exact derived squares preserve specified composition identities",
+ "statement": "Let C₀,C₁,C₂,D₀,D₁,D₂ be abelian categories with derived categories [def-weil-pbc-derived-categories]. Let Fᵢⱼ:Cᵢ→Cⱼ, Gᵢⱼ:Dᵢ→Dⱼ (ij=01,12,02) and Uᵢ:Cᵢ→Dᵢ be exact additive functors, with specified composition isomorphisms cF:F₀₂≅F₀₁⋙F₁₂ and cG:G₀₂≅G₀₁⋙G₁₂. Let qᵢⱼ:Uᵢ⋙Gᵢⱼ≅Fᵢⱼ⋙Uⱼ satisfy q₀₂(X);U₂(cF(X))=cG(U₀X);G₁₂(q₀₁(X));q₁₂(F₀₁X) for all X. Construct each derived q as inverse exact-composition comparison, derived ordinary q, and exact-composition comparison. Construct derived cF,cG by derived ordinary c followed by exact-composition comparison. Then precisely the same pasting identity holds at every bounded-below derived object K. The construction has the localization factorization recorded by mapDerivedCategoryPlusSquareIso_fac. There are no schemes, sections, cohomology, coefficient rings or inverse limits in this statement.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "The localization universal property for exact functors; implemented by mapDerivedCategoryPlusCompIso_hom_app_factorsh and mapDerivedCategoryPlusNatIso_hom_app_factorsh in WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Expand the constructed square. Use the composition factorization for L and S to cancel the last composition comparison, then the natural-isomorphism factorization to replace the middle comparison by the localized termwise map. The composition factorization for R and G, precomposed with its inverse comparison, gives the remaining equality. All canceled arrows are specified isomorphisms; the argument does not assume nonzero categories or objects.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The remaining composition theorem: form both derived natural transformations and test on Qh of a bounded-below homotopy object. Postcompose with U₂ applied to the F₁₂ and F₀₁ factors, then the U₂ factor. On the left, the composition factorization for cF and naturality of the U₂ factor reduce to the square factorization for q₀₂. On the right, move the F₀₁ factor across q₁₂ by naturality, then apply the factorization for q₁₂ and q₀₁. Move the termwise q₀₁ across the G₁₂ factor; naturality of the cG comparison and its composition factorization yield the common U₀ and G₀₂ factors. What remains is Qh of the assumed ordinary equation, applied degreewise to a complex representative; it follows by functoriality and extensionality of complex maps. Cancel the three isomorphisms and use localization extensionality, then evaluate at K. Zero categories and zero objects require no exception.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Formal combination of the source-library exact-functor localization equations; F1 extracted a general square API while proving coefficient naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived bounded below exact square composition localization",
+   "results": "No direct matching theorem found; the search returned localization and exact-functor infrastructure only.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived square for four exact functors is compatible with the localization factorization isomorphisms",
+   "results": "Eight results about LocalizerMorphism derivability and Guitart exactness, and rightDerivedFunctorComparison; no matching bounded-below exact square equation.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryPlusSquareIso",
+   "results": "Unknown identifier; no match.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlusSquareIso|mapDerivedCategoryPlusCompIso_hom_app_factorsh",
+   "results": "Mathlib wrapper returned zero hits. Local rg found the source-library composition and natural-isomorphism factorization lemmas, which the proof uses.",
+   "date": "2026-10-16"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedCohomologyContinuity",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-derived-module-underlying-comparison",
+   "place": "Proof step 2: canonical exact inverse-image square and its localization equation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedExactSquare",
+  "file": "lean/Sheaf/CategoryTheory/DerivedExactSquare.lean",
+  "declaration": "CategoryTheory.Functor.mapDerivedCategoryPlusSquareIso_comp",
+  "declarations": [
+   "CategoryTheory.Functor.mapDerivedCategoryPlusSquareIso",
+   "CategoryTheory.Functor.mapDerivedCategoryPlusSquareIso_fac",
+   "CategoryTheory.Functor.mapDerivedCategoryPlusSquareIso_comp"
+  ],
+  "statement": "theorem mapDerivedCategoryPlusSquareIso_comp (q₀₁ : U₀ ⋙ G₀₁ ≅ F₀₁ ⋙ U₁) (q₁₂ : U₁ ⋙ G₁₂ ≅ F₁₂ ⋙ U₂) (q₀₂ : U₀ ⋙ G₀₂ ≅ F₀₂ ⋙ U₂) (cF : F₀₂ ≅ F₀₁ ⋙ F₁₂) (cG : G₀₂ ≅ G₀₁ ⋙ G₁₂) (hq : ∀ X : C₀, q₀₂.hom.app X ≫ U₂.map (cF.hom.app X) = cG.hom.app (U₀.obj X) ≫ G₁₂.map (q₀₁.hom.app X) ≫ q₁₂.hom.app (F₀₁.obj X)) (K : DerivedCategory.Plus C₀) : (mapDerivedCategoryPlusSquareIso U₀ G₀₂ F₀₂ U₂ q₀₂).hom.app K ≫ U₂.mapDerivedCategoryPlus.map ((mapDerivedCategoryPlusNatIso cF ≪≫ mapDerivedCategoryPlusCompIso F₀₁ F₁₂).hom.app K) = (mapDerivedCategoryPlusNatIso cG ≪≫ mapDerivedCategoryPlusCompIso G₀₁ G₁₂).hom.app (U₀.mapDerivedCategoryPlus.obj K) ≫ G₁₂.mapDerivedCategoryPlus.map ((mapDerivedCategoryPlusSquareIso U₀ G₀₁ F₀₁ U₁ q₀₁).hom.app K) ≫ (mapDerivedCategoryPlusSquareIso U₁ G₁₂ F₁₂ U₂ q₁₂).hom.app (F₀₁.mapDerivedCategoryPlus.obj K)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T150655-L-4176217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T150655-L-4176217",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

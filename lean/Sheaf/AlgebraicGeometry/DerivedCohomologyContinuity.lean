@@ -11,20 +11,10 @@ public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.EtaleCohomologyContinuity
-import Sheaf.Paper.HypercoverCohomology
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Sheaf.AlgebraicGeometry.BaseChangeTargetLimitGeometry
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
-import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
-import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.CategoryTheory.TruncationTriangle
-import WeilConjectures.AlgebraicGeometry.HypercoverCohomology
+import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
+import Sheaf.AlgebraicGeometry.DerivedModuleUnderlyingComparison
+import Mathlib.CategoryTheory.Filtered.Final
+import Mathlib.Algebra.Category.ModuleCat.Colimits
 
 /-!
 # Continuity for bounded-below étale complexes
@@ -50,95 +40,16 @@ Source: blueprint sec-proper-base-change/sk-thm-properbasechange,
 lemma lem-weil-pbc-derived-cohomology-continuity
 (blueprint: lem-weil-pbc-derived-cohomology-continuity).
 
-Proof:
-1. Choose $a$ with $\mathcal H^r(K_i)=0$ for $r<a$, using [def-weil-pbc-derived-categories]. The
-   coefficient pullback is exact and agrees with abelian inverse image by [prop-weil-pbc-
-   inverse-image-modules-exact], not merely by the abelian-sheaf exactness theorem. By [lem-sp-
-   exact-functor-preserves-homology] it commutes with cohomology. Canonical truncation has terms
-   $\ker d^b$ at its upper endpoint; exactness preserves that kernel and all its inclusion maps.
-   Thus pullback commutes naturally with $\tau_{\leq b}$, its inclusions, and its cohomology-
-   sheaf projections. All $K_j$ and $K$ have the same lower bound $a$. The category $I/i$ is
-   nonempty (it contains $\mathrm{id}_i$). For $(j\to i)$ and $(k\to i)$ choose a common
-   predecessor in $I$, then equalize its two composites to $i$; this gives a common predecessor
-   in $I/i$. Parallel arrows in $I/i$ are equalized by an equalizer predecessor in $I$. Thus
-   $(I/i)^{\mathrm{op}}$ is filtered, as required for the colimit.
-2. First prove continuity for a module sheaf $F_i$ in degree zero. If $m$ is the additive order
-   of $1\in\Lambda$, then $mF_i=0$, so its underlying abelian sheaf is torsion; coefficient
-   pullback preserves this underlying sheaf by [prop-weil-pbc-inverse-image-modules-exact].
-   Apply [lemma-weil-pbc-etale-cohomology-continuity] to those underlying sheaves. The limit $X$
-   is also qcqs: specialize [lem-sbc-target-limit-geometry] to $S=T=\operatorname{Spec}\mathbf
-   Z$, $p=g=\mathrm{id}_S$, and the given diagram over this terminal scheme. Its pullback
-   functor is the identity, and its conclusion says the limit structure map to $S$ is qcqs,
-   which is precisely that $X$ is qcqs. To identify its cohomology with module-derived
-   cohomology, use both clauses of [thm-weil-pbc-hypercover-cohomology]: for each finite
-   hypercover, the module cochain complex and the abelian cochain complex have exactly the same
-   underlying groups, alternating differentials, and restriction maps. Their kernels, images and
-   quotients therefore agree, and the underlying group of the colimit agrees too: scalar
-   multiplication on a representative is $\lambda[x]=[\lambda x]$. The resulting comparison is
-   the canonical restriction comparison, is $\Lambda$-linear, and is bijective on underlying
-   groups; its inverse is consequently $\Lambda$-linear. For $F_i[-b]$ it gives continuity in
-   degree $r$ as continuity for $F_i$ in degree $r-b\geq0$. For $r-b<0$ both sides vanish by
-   [lem-weil-pbc-derived-functor-negative-vanishing]. Shift compatibility of derived sections
-   comes from [lem-weil-pbc-derived-direct-image-triangulated], applied to the left exact
-   additive sections functor.
-3. The categories of module sheaves are Grothendieck abelian by [lem-weil-pbc-module-sheaves-
-   grothendieck-abelian], and $\Mod(\Lambda)$ is Grothendieck abelian by [lem-weil-pbc-ring-
-   modules-grothendieck-abelian]. Sections at the terminal object are additive and left exact: a
-   section of a kernel is exactly a section annihilated by the given map. Thus the general
-   derived-functor results apply. If $n<a$, [lem-weil-pbc-derived-functor-negative-vanishing]
-   makes every degree-$n$ group zero, proving the assertion. If $n\geq a$, [lem-weil-pbc-
-   derived-functor-truncation-iso] identifies $H^nR\Gamma(\tau_{\leq n}K_j)$ with
-   $H^nR\Gamma(K_j)$, and likewise at $X$. These are the maps induced by the canonical
-   truncation inclusions. It suffices to prove continuity for complexes with cohomology in a
-   finite interval $[a,b]$.
-4. We verify the boundary squares needed for the induction. For any transition $u:Y\to T$,
-   compute restriction on a module complex $L$ using resolutions $L\to I$ and $u^{-1}L\to J$, as
-   $\Gamma(T,I)\xrightarrow{\eta}\Gamma(Y,u^{-1}I)\to\Gamma(Y,J)$. The adjunction unit is that
-   of [prop-weil-pbc-inverse-image-modules-exact], and resolutions are supplied by [prop-weil-
-   pbc-kinjective-resolutions-exist]. Write $s:L\to I$ and $t:u^{-1}L\to J$ for the resolution
-   maps. Exactness makes $u^{-1}s$ a quasi-isomorphism. Apply [lem-sp-kinjective-comparison-
-   principle] in the target module-sheaf category, with K-injective target $J$: there is a
-   unique homotopy class $h:u^{-1}I\to J$ with $h\circ u^{-1}s=t$ in the homotopy category. This
-   is the comparison used above; it does not require $u^{-1}I$ to be K-injective. Uniqueness
-   gives naturality in $L$ and independence of the resolutions. This defines a natural derived
-   restriction transformation; for a composable pair, [lem-weil-pbc-inverse-image-composition-
-   module-linear] identifies the composite unit with the single unit by a module-linear
-   composition isomorphism. The composite resolution comparisons and the single comparison agree
-   after precomposition with the pulled-back resolution of $L$, hence agree up to homotopy by
-   [lem-sp-kinjective-comparison-principle]. For the identity the comparison is the identity up
-   to homotopy by the same uniqueness. Thus the maps form the prescribed stage diagram. By [lem-
-   weil-pbc-kinjective-shift] we may use $I[1]$ and $J[1]$ for $L[1]$. In degree $r$ the unit
-   and comparison then equal the original maps in degree $r+1$, including the shifted
-   differential sign. Hence restriction commutes with the shift isomorphisms. Derived sections
-   are triangulated by [lem-weil-pbc-derived-direct-image-triangulated]. Exact module pullback
-   induces the triangulated derived pullback [def-weil-pbc-derived-inverse-image]. Apply [lem-
-   weil-pbc-commshift-nattrans-triangle-morphism] to this shift-compatible natural
-   transformation, and then [lem-weil-pbc-derived-cohomology-ladder]. Restriction therefore
-   gives a morphism of long exact cohomology sequences, including the connecting arrows;
-   exactness of those sequences is [lem-sf-derived-homology-long-exact]. These arguments apply
-   to all transitions and to the projections to $X$.
-5. For a complex $L_i$ with cohomology supported in $[a,b]$, set $P_t=\tau_{\leq t}L_i$. Start
-   with $P_{a-1}=0$ in the derived category, since all its cohomology is zero by [lem-weil-pbc-
-   truncation-cohomology]; quasi-isomorphisms are inverted by [def-weil-abstract-derived-
-   category]. For $a\leq t\leq b$, [lem-weil-pbc-truncation-triangle] gives the functorial
-   distinguished triangle $P_{t-1}\to P_t\to\mathcal H^t(L_i)[-t]\to P_{t-1}[1]$, and step 1
-   identifies its pullbacks with the corresponding triangles at each stage. Inductively assume
-   comparison is an isomorphism in every degree for $P_{t-1}$; step 2 gives this for $C=\mathcal
-   H^t(L_i)[-t]$. By step 4 the stage sequences and the limit sequence form a commutative
-   ladder. Filtered colimits of $\Lambda$-modules are exact by [lem-weil-pbc-ring-modules-
-   grothendieck-abelian], so the top row remains exact. For each integer $r$, take the five
-   terms $H^{r-1}(C)\to H^r(P_{t-1})\to H^r(P_t)\to H^r(C)\to H^{r+1}(P_{t-1})$, with the top
-   row understood as stage colimits. All four outer vertical arrows are isomorphisms. The middle
-   arrow is an isomorphism by [lem-weil-pbc-five-lemma]. This proves the inductive assertion
-   simultaneously in all degrees. Finally $P_b\to L_i$ is a quasi-isomorphism by [lem-weil-pbc-
-   truncation-cohomology], hence continuity holds for $L_i$.
-6. Apply step 5 to $L_i=\tau_{\leq n}K_i$. Its cohomology is supported in $[a,n]$ by [lem-weil-
-   pbc-truncation-cohomology], and step 1 identifies all its inverse images with the analogous
-   truncations. Step 3 identifies the top and bottom degree-$n$ groups with those for $K_j$ and
-   $K$. The square between these identifications and restriction commutes by the naturality
-   established in step 4, applied to the inclusions $\tau_{\leq n}K_i\to K_i$. Thus the
-   isomorphism obtained is exactly the canonical restriction map in the statement. The case
-   $n<a$ was settled in step 3.
+Proof: Restrict the inverse system along the initial functor `Over.forget i₀`.
+Its limit is still the given cone point, and the restriction inherits quasi-compactness,
+quasi-separatedness and affine transition maps. Forget coefficients to abelian groups.
+The exact underlying-sheaf functor sends the bounded-below complex to a bounded-below
+abelian complex. The constructed cohomology and pullback comparisons identify every
+stage and the cone point. Their naturality identifies all three factors of each
+prescribed restriction map, so `derivedEtaleCohomology_limit` applies to the resulting
+abelian-group cocone. Finally the module-to-abelian-group functor reflects colimits,
+giving the stated module colimit. No additional geometric finiteness statement or
+truncation induction is needed here; those belong to the additive continuity theorem.
 -/
 theorem derived_cohomology_continuity
     {I : Type u} [SmallCategory I] [IsCofiltered I]
@@ -197,6 +108,63 @@ theorem derived_cohomology_continuity
             (Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map i.hom))
             (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app i.left))).inv.app K.obj) ≫
       eY.inv) : Nonempty (IsColimit s) := by
-  sorry
+  let U := forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}
+  let KA := (Etale.moduleUnderlyingSheaf Λ (D.obj i₀)).mapDerivedCategoryPlus.obj K
+  let a := Etale.moduleUnderlyingPullbackIso Λ (D.obj i₀) K n
+  have ha := Etale.moduleUnderlyingPullbackIso_naturality Λ (D.obj i₀) K n
+  let E : Over i₀ ⥤ Scheme.{u} := Over.forget i₀ ⋙ D
+  let d : Cone E := c.whisker (Over.forget i₀)
+  have hd : IsLimit d := (Functor.Initial.isLimitWhiskerEquiv _ c).symm hc
+  let : ∀ i : Over i₀, CompactSpace (E.obj i) :=
+    fun i ↦ inferInstanceAs (CompactSpace (D.obj i.left))
+  let : ∀ i : Over i₀, QuasiSeparatedSpace (E.obj i) :=
+    fun i ↦ inferInstanceAs (QuasiSeparatedSpace (D.obj i.left))
+  let : ∀ {i j : Over i₀} (f : i ⟶ j), IsAffineHom (E.map f) :=
+    fun f ↦ inferInstanceAs (IsAffineHom (D.map f.left))
+  let t : E ⟶ (Functor.const (Over i₀)).obj (D.obj i₀) :=
+    { app := fun i ↦ D.map i.hom
+      naturality := fun i j f ↦ by
+        dsimp [E]
+        simpa only [Category.comp_id, ← D.map_comp] using congrArg D.map f.w }
+  let aF : ∀ i : Over i₀, (F ⋙ U).obj (op i) ≅
+      (Etale.cohomology AddCommGrpCat.{u + 1} (E.obj i) n).obj
+        ((Etale.upperStar AddCommGrpCat.{u + 1} (t.app i)).mapDerivedCategory.obj KA.obj) :=
+    fun i ↦ U.mapIso (e i) ≪≫ a _ (D.map i.hom)
+  let aY := U.mapIso eY ≪≫ a _ (c.π.app i₀)
+  have hmA : ∀ {i j : Over i₀} (f : i ⟶ j), (F ⋙ U).map f.op =
+      (aF j).hom ≫ Etale.presentationDerivedMap (E.map f) (t.app j) (t.app i)
+        ((Category.comp_id _).symm.trans (t.naturality f).symm) KA.obj n ≫
+      (aF i).inv := by
+    intro i j f
+    let w := (congrArg D.map f.w).symm.trans (D.map_comp f.left j.hom)
+    have hmap : F.map f.op = (e j).hom ≫
+        Etale.moduleDerivedRestriction Λ (D.map f.left) (D.map j.hom) (D.map i.hom)
+          w K.obj n ≫ (e i).inv := hm f
+    have hcomp := ha (D.obj i.left) (D.obj j.left) (D.map f.left)
+      (D.map j.hom) (D.map i.hom) w
+    have hr := (Iso.eq_comp_inv (a _ (D.map i.hom))).mpr hcomp
+    change U.map (F.map f.op) = _
+    rw [hmap, Functor.map_comp, Functor.map_comp, hr]
+    simp only [aF, Iso.trans_hom, Iso.trans_inv, Functor.mapIso_hom,
+      Functor.mapIso_inv, Category.assoc]
+    rfl
+  have hsA : ∀ i : Over i₀, (U.mapCocone s).ι.app (op i) =
+      (aF i).hom ≫ Etale.presentationDerivedMap (d.π.app i) (t.app i) (c.π.app i₀)
+        (c.w i.hom).symm KA.obj n ≫ aY.inv := by
+    intro i
+    have hmap : s.ι.app (op i) = (e i).hom ≫
+        Etale.moduleDerivedRestriction Λ (c.π.app i.left) (D.map i.hom) (c.π.app i₀)
+          (c.w i.hom).symm K.obj n ≫ eY.inv := hs i
+    have hcomp := ha c.pt (D.obj i.left) (c.π.app i.left)
+      (D.map i.hom) (c.π.app i₀) (c.w i.hom).symm
+    have hr := (Iso.eq_comp_inv (a _ (c.π.app i₀))).mpr hcomp
+    change U.map (s.ι.app (op i)) = _
+    rw [hmap, Functor.map_comp, Functor.map_comp, hr]
+    simp only [aF, aY, Iso.trans_hom, Iso.trans_inv, Functor.mapIso_hom,
+      Functor.mapIso_inv, Category.assoc]
+    rfl
+  obtain ⟨h⟩ := derivedEtaleCohomology_limit (D.obj i₀) E d hd t (c.π.app i₀)
+    (fun i ↦ c.w i.hom) KA n (F ⋙ U) aF hmA (U.mapCocone s) aY hsA
+  exact ⟨isColimitOfReflects U h⟩
 
 end AlgebraicGeometry
