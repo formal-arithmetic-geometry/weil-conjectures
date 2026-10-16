@@ -322,7 +322,7 @@ def release_gone(before, after):
                 if tracked:
                     subprocess.run(["git", "-C", str(ROOT), "add", "--", *tracked], check=True)
                     if subprocess.run(["git", "-C", str(ROOT), "diff", "--cached", "--quiet", "--", *tracked]).returncode:
-                        subprocess.run(["git", "-C", str(ROOT), "-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "-c", "commit.template=", "commit", "-q", "-m", "Release queue claims closed or retired by upstream sync", "--trailer", "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>", "--", *tracked], check=True)
+                        subprocess.run(["git", "-C", str(ROOT), "-c", "commit.template=", "commit", "-q", "-m", "Release queue claims closed or retired by upstream sync", "--trailer", "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>", "--", *tracked], check=True)
                         (folder / "commit.claims").write_text(subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True))
             print(f"Released {len(saved)} obsolete claims; {len(removed & queued)} items still queued elsewhere retained.")
     return 0
@@ -578,7 +578,11 @@ def main():
             # we deleted a file the source changed (a module of ours replaced it): keep it deleted, say so
             rec["class"] = "deleted-here"
         elif t is None:
-            rec["class"] = "conflict"; rec["conflicts"] = [{"kind": "deleted-by-source", "declaration": None, "line": 0}]
+            if (p, o, t) in ridx:
+                rec["class"] = "resolved"; rec["choice"] = ridx[(p, o, t)]
+                writes.append((p, (rdir / p).read_bytes()))
+            else:
+                rec["class"] = "conflict"; rec["conflicts"] = [{"kind": "deleted-by-source", "declaration": None, "line": 0}]
         elif b is None:
             if (p, o, t) in ridx:
                 rec["class"] = "resolved"; rec["choice"] = ridx[(p, o, t)]
