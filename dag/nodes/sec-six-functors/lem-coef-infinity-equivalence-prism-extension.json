@@ -301,5 +301,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f7c15a83",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Delivery is 3 files (module, node lean record only, Q70 report with Worker report and Second reading sections). All clauses match the node: InnerFibration = lifting against inner horns; unionProd(ofSimplex ε, A) = (Δ1×A)∪({ε}×B), pushout over {ε}×A by unionProd.isPushout; hA all vertices; compat exact; heq is IsEquivalenceEdge of the vertical edge (probe confirmed prismVerticalEdge = h₀(ι₁(id_[1], s0 b)), real data); conclusion exact, same quantifier order. Single universe u forced by Δ1⊗B→C, all variables bound. Edge cases checked: empty B, A=B, discrete B, ε=0, infinite B. lean.statement verbatim; docstrings carry Kerodon 01NX and blueprint; sorry only on the theorem (axioms checked). No duplicate in Mathlib or lean/Sheaf (InvertiblePrismExtension is a different theorem). nt_compile --json exit 0, no errors. Note: the Q70 report says its second reading was by the same session that wrote the module; this review is the independent reading."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EquivalencePrismExtension",
+  "declaration": "SSet.Enhanced.equivalence_prism_extension",
+  "declarations": [
+   "SSet.Enhanced.prismVerticalEdge",
+   "SSet.Enhanced.equivalence_prism_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EquivalencePrismExtension.lean",
+  "statement": "theorem equivalence_prism_extension {B C D : SSet.{u}} [Quasicategory C] [Quasicategory D] (p : C ⟶ D) [SSet.InnerFibration p] (A : B.Subcomplex) (ε : Fin 2) (hA : ∀ b : B _⦋0⦌, b ∈ A.obj (Opposite.op ⦋0⦌)) (h₀ : (SSet.Subcomplex.unionProd (SSet.Subcomplex.ofSimplex (SSet.stdSimplex.obj₀Equiv.symm ε)) A).toSSet ⟶ C) (g : (Δ[1] : SSet.{u}) ⊗ B ⟶ D) (compat : h₀ ≫ p = (SSet.Subcomplex.unionProd (SSet.Subcomplex.ofSimplex (SSet.stdSimplex.obj₀Equiv.symm ε)) A).ι ≫ g) (heq : ∀ b : B _⦋0⦌, IsEquivalenceEdge C (prismVerticalEdge A ε h₀ b (hA b))) : ∃ h : (Δ[1] : SSet.{u}) ⊗ B ⟶ C, (SSet.Subcomplex.unionProd (SSet.Subcomplex.ofSimplex (SSet.stdSimplex.obj₀Equiv.symm ε)) A).ι ≫ h = h₀ ∧ h ≫ p = g",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Includes the canonical prismVerticalEdge helper used by the statement."
  }
 }
