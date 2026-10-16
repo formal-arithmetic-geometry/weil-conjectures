@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-sf-determination-localizing",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Invertibility propagates to the localizing closure",
@@ -12,53 +12,150 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.md",
   "place": "node det-sf-determination-localizing, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-triangulated-subcategory",
+  "def-weil-pbc-category-colimit"
+ ],
  "proof": [
   {
-   "text": "*Shifts.* Since $\\eta$ is a natural transformation of exact functors,\n$\\eta_{K[1]}$ corresponds to $\\eta_K[1]$ under the shift isomorphisms\n$F_a(K[1])\\simeq F_a(K)[1]$, so $K\\in\\mathcal C_\\eta$ if and only if\n$K[1]\\in\\mathcal C_\\eta$.",
+   "text": "Write $\\mathcal D$ for the common domain of $F_1,F_2$: either $\\mathcal T$ or $\\Loc(\\mathcal S)$. All objects at which $\\eta$ is evaluated lie in $\\mathcal D$. The full subcategory $\\mathcal C_\\eta$ is replete: for $u:K\\xrightarrow{\\sim}L$, naturality gives $\\eta_L=F_2(u)\\eta_KF_1(u)^{-1}$; hence invertibility is unchanged by replacing an object by an isomorphic one. It contains zero: exact functors are additive, so $1_{F_a(0)}=F_a(1_0)=F_a(0)=0$. Consequently $F_a(0)$ is a zero object, and the unique map $\\eta_0$ between these two zero objects is invertible.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.proof.md",
+    "place": "Preliminary zero/repleteness checks for the full isomorphism locus; Stacks Tag 0145 (derived-definition-triangulated-category) and Tag 014V (derived-definition-exact-functor-triangulated-categories)."
+   }
+  },
+  {
+   "text": "Let $c_{a,K}:F_a(K[1])\\xrightarrow{\\sim}F_a(K)[1]$ be the specified shift isomorphisms. The assumed shift compatibility is $c_{2,K}\\eta_{K[1]}=\\eta_K[1]c_{1,K}$, so $\\eta_{K[1]}=c_{2,K}^{-1}\\eta_K[1]c_{1,K}$. If $\\eta_K$ has inverse $\\beta_K$, the displayed conjugate has inverse $c_{1,K}^{-1}\\beta_K[1]c_{2,K}$. Conversely the same formula makes $\\eta_K[1]$ invertible if $\\eta_{K[1]}$ is; applying the inverse shift then makes $\\eta_K$ invertible. Thus $K\\in\\mathcal C_\\eta$ if and only if $K[1]\\in\\mathcal C_\\eta$. Apply this equivalence to $K[-1]$ and iterate to obtain stability under every integer shift.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.proof.md",
+    "place": "Shifts paragraph; Stacks Tag 014V and the following definition of a shift-compatible 2-morphism."
+   }
+  },
+  {
+   "text": "For a distinguished triangle $K\\xrightarrow{u}L\\xrightarrow{v}M\\xrightarrow{w}K[1]$ in $\\mathcal D$, apply [lem-sf-triangle-two-out-of-three] to $F_1,F_2,\\eta$. Its hypotheses are precisely the exactness and stated shift compatibility here: the image triangles are distinguished, naturality gives their first two squares, and their connecting square is the identity $c_{2,K}F_2(w)\\eta_M=c_{2,K}\\eta_{K[1]}F_1(w)=\\eta_K[1]c_{1,K}F_1(w)$. Therefore invertibility on any two vertices implies invertibility on the third. Together with zero, repleteness and all shifts from Steps 1-2, this meets the criterion in [def-weil-triangulated-subcategory], including the case with first and third vertices in the subcategory. Hence $\\mathcal C_\\eta$ is triangulated, with the induced distinguished triangles.",
+   "uses": [
+    "lem-sf-triangle-two-out-of-three",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.proof.md",
+    "place": "Cones paragraph; Stacks Tag 014A (derived-lemma-third-isomorphism-triangle) and Tag 05QM (derived-definition-triangulated-subcategory)."
+   }
+  },
+  {
+   "text": "Let $(K_\\alpha)_{\\alpha\\in I}$ be any small family in $\\mathcal C_\\eta$, put $K=\\bigoplus_{\\alpha\\in I}K_\\alpha$, and write $i_\\alpha:K_\\alpha\\to K$ for its inclusions. Preservation of this coproduct means that $(F_a(K),F_a(i_\\alpha))$ is a coproduct cocone. Using the universal property in [def-weil-pbc-category-colimit] for the discrete small category $I$, define $\\beta:F_2(K)\\to F_1(K)$ uniquely by $\\beta F_2(i_\\alpha)=F_1(i_\\alpha)\\eta_{K_\\alpha}^{-1}$. Naturality gives $(\\beta\\eta_K)F_1(i_\\alpha)=F_1(i_\\alpha)$ and $(\\eta_K\\beta)F_2(i_\\alpha)=F_2(i_\\alpha)$ for every $\\alpha$. Coproduct uniqueness yields $\\beta\\eta_K=1$ and $\\eta_K\\beta=1$. Thus $K\\in\\mathcal C_\\eta$. This argument also covers the empty family; no exactness of arbitrary sums of triangles is used.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.proof.md",
+    "place": "Direct sums paragraph, expanded by the defining universal property; Stacks Tag 002F (categories-definition-colimit)."
+   }
+  },
+  {
+   "text": "Suppose $i:K\\to L$ and $p:L\\to K$ are morphisms in $\\mathcal D$ with $pi=1_K$, and $\\eta_L$ is invertible. Set $\\beta_K=F_1(p)\\eta_L^{-1}F_2(i)$. Naturality for $i$ and $p$ gives $\\beta_K\\eta_K=F_1(p)\\eta_L^{-1}\\eta_LF_1(i)=1$ and $\\eta_K\\beta_K=F_2(p)\\eta_L\\eta_L^{-1}F_2(i)=1$. Thus $\\mathcal C_\\eta$ is closed under retracts in its domain, in particular under direct summands: for $L=K\\oplus K'$ use the canonical inclusion and projection, and repeat for $K'$. This explicitly proves the summands assertion rather than using the proof, or the counterexample clause, of the generating-class lemma.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.proof.md",
+    "place": "Summands paragraph: explicit inclusion/projection inverse calculation."
+   }
   },
   {
-   "text": "*Cones.* Let $K\\to L\\to M\\to K[1]$ be distinguished with\n$K,L\\in\\mathcal C_\\eta$. Applying $F_1$ and $F_2$ gives two distinguished\ntriangles, and $\\eta$ gives a morphism between them (exactness of $\\eta$\nmeans the square involving the connecting maps commutes). Two of its three\ncomponents are isomorphisms, so the third is, by\n[lem-sf-triangle-two-out-of-three] (the five lemma for the long exact\n$\\operatorname{Hom}(T,-)$-sequences and Yoneda). Hence $M\\in\\mathcal C_\\eta$;\ntogether with shifts, $\\mathcal C_\\eta$ is a triangulated subcategory.",
+   "text": "Assume $\\mathcal S\\subset\\mathcal C_\\eta$. If $\\mathcal D=\\mathcal T$, Steps 1-4 show that $\\mathcal C_\\eta$ is one of the full replete triangulated subcategories closed under small coproducts and containing $\\mathcal S$; the defining minimality of $\\Loc(\\mathcal S)$ therefore gives $\\Loc(\\mathcal S)\\subset\\mathcal C_\\eta$. If $\\mathcal D=\\Loc(\\mathcal S)$, its triangulated structure is induced from $\\mathcal T$ by [def-weil-triangulated-subcategory], and its coproducts are ambient ones: their objects lie in $\\mathcal D$ by its defining closure, and the ambient universal property still holds after restricting test objects to this full subcategory. To check closure as a subcategory of $\\mathcal T$, take a distinguished triangle in $\\mathcal T$ whose first and third vertices lie in $\\mathcal C_\\eta$; the middle vertex is isomorphic to an object of $\\mathcal D$ by the full-subcategory criterion, and repleteness puts it in $\\mathcal D$. Transport the triangle across that isomorphism, apply Step 3 in $\\mathcal D$, and use repleteness again to put the original middle vertex in $\\mathcal C_\\eta$. Thus $\\mathcal C_\\eta$ is a full replete triangulated subcategory of $\\mathcal T$ closed under its small coproducts. The same minimality gives $\\Loc(\\mathcal S)\\subset\\mathcal C_\\eta$ in this case as well. This is a consequence of the general localizing-closure definition in the statement; the constructible-complex specialization is downstream and is not used as an input.",
    "uses": [
-    "lem-sf-triangle-two-out-of-three"
+    "def-weil-triangulated-subcategory",
+    "def-weil-pbc-category-colimit"
    ],
-   "elementary": false
-  },
-  {
-   "text": "*Direct sums.* Let $(K_\\alpha)$ be a family in $\\mathcal C_\\eta$ with sum\n$K=\\bigoplus_\\alpha K_\\alpha$. Since $F_1$ and $F_2$ preserve direct sums,\nthe canonical maps $c_a:\\bigoplus_\\alpha F_a(K_\\alpha)\\to F_a(K)$ are\nisomorphisms, and naturality of $\\eta$ with respect to the inclusions\n$K_\\alpha\\to K$ gives $\\eta_K\\circ c_1=c_2\\circ\\bigoplus_\\alpha\\eta_{K_\\alpha}$.\nThe sum of isomorphisms is an isomorphism, so $\\eta_K$ is one.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Summands.* If $K\\oplus K'\\in\\mathcal C_\\eta$, then by additivity\n$\\eta_{K\\oplus K'}=\\eta_K\\oplus\\eta_{K'}$, and the inverse composed with the\ninclusion and projection of $K$ inverts $\\eta_K$\n([lem-sf-generating-class-determination]).",
-   "uses": [
-    "lem-sf-generating-class-determination"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Conclusion.* $\\mathcal C_\\eta$ is a triangulated subcategory closed under\ndirect sums containing $\\mathcal S$; $\\Loc(\\mathcal S)$ is the smallest such\nsubcategory, so $\\Loc(\\mathcal S)\\subset\\mathcal C_\\eta$. Taking\n$\\mathcal S=\\Dctf(X,\\Lambda)$ and $\\mathcal T=\\Loc(\\Dctf(X,\\Lambda))$ gives\n[sk-lem-sf-determination].",
-   "uses": [
-    "sk-lem-sf-determination"
-   ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.proof.md",
+    "place": "Conclusion paragraph, both choices of functor domain; Stacks Tag 05QM and Tag 002F for inherited structures."
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-triangulated-category",
   "lem-sf-triangle-two-out-of-three",
-  "lem-sf-generating-class-determination",
-  "sk-lem-sf-determination"
+  "def-weil-triangulated-subcategory",
+  "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.proof.md",
+  "place": "Shifts, Cones, Direct sums, Summands, Conclusion; expanded zero/repleteness, universal-property inverses and restricted-domain minimality."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation exact functors isomorphism locus closed under shifts triangles arbitrary direct sums",
+   "results": "{\"t\": \"2026-10-16T14:21:14Z\", \"tool\": \"leanfinder\", \"query\": \"natural transformation exact functors isomorphism locus closed under shifts triangles arbitrary direct sums\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.IsHomological.exact\", \"CategoryTheory.Functor.essImageDistTriang_mem_of_iso\", \"CategoryTheory.Functor.map_distinguished_op_exact\", \"CategoryTheory.Functor.IsHomological.of_iso\", \"CategoryTheory.Functor.distTriang_iff\", \"CategoryTheory.Functor.map_distinguished\", \"CategoryTheory.Functor.homologicalKernel\"], \"digest\": \"d3f5fcf61d166cc5\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: homological-functor exactness, image triangles and homological kernels do not give the isomorphism locus with arbitrary coproduct closure"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.isIso_app_of_triangEnvelope, CategoryTheory.Limits.Sigma.map_isIso",
+   "results": "{\"t\": \"2026-10-16T14:21:15Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.isIso_app_of_triangEnvelope, CategoryTheory.Limits.Sigma.map_isIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatTrans.isIso_app_of_triangEnvelope'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match established: Loogle reports the first identifier unknown; it is a project declaration, and the isolated Sigma query below is used instead"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_app_of_triangEnvelope|Sigma.map_isIso",
+   "results": "{\"t\": \"2026-10-16T14:21:15Z\", \"tool\": \"grep\", \"query\": \"isIso_app_of_triangEnvelope|Sigma.map_isIso\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/Products.lean\"], \"digest\": \"60563d2eeeed7b8a\"}",
+   "date": "2026-10-16",
+   "verdict": "partial match only: Sigma.map_isIso at Mathlib/CategoryTheory/Limits/Shapes/Products.lean:540-542 states sums of component isomorphisms; it does not state the triangulated localizing-locus theorem. This elementary part is proved from the coproduct definition in Step 4"
+  },
+  {
+   "tool": "leansearch",
+   "query": "invertibility propagates to the localizing closure of a triangulated category",
+   "results": "{\"t\": \"2026-10-16T14:21:16Z\", \"tool\": \"leansearch\", \"query\": \"invertibility propagates to the localizing closure of a triangulated category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.inverts\", \"CategoryTheory.Triangulated.Localization.isTriangulated\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization.StrictUniversalPropertyFixedTarget.inverts\", \"CategoryTheory.MorphismProperty.Q_inverts\", \"CategoryTheory.MorphismProperty.Localization'\", \"CategoryTheory.Localization.inverts\", \"CategoryTheory.Triangulated.Localization.pretriangulated\", \"CategoryTheory.Localization.isoOfHom_id_inv\"], \"digest\": \"7df416e358024f46\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: localization inverts a morphism class and induced triangulations on Verdier localizations concern a different notion of localizing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism locus of a natural transformation between triangulated coproduct preserving functors is a localizing subcategory",
+   "results": "{\"t\": \"2026-10-16T14:24:46Z\", \"tool\": \"leanfinder\", \"query\": \"isomorphism locus of a natural transformation between triangulated coproduct preserving functors is a localizing subcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.essImageDistTriang_mem_of_iso\", \"CategoryTheory.Functor.isHomological_of_localization\", \"CategoryTheory.Functor.distTriang_iff\", \"CategoryTheory.Triangulated.Localization.isTriangulated\", \"CategoryTheory.ObjectProperty.isLocal_trW\", \"CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism\", \"CategoryTheory.Triangulated.Localization.pretriangulated\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\"], \"digest\": \"c5f9296eb7cf615f\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match on second phrasing: Verdier localization, essential images and local objects do not state closure of the component-isomorphism locus under all small coproducts"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Sigma.map_isIso",
+   "results": "{\"t\": \"2026-10-16T14:24:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.Sigma.map_isIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Sigma.map_isIso\"], \"digest\": \"7968fe85c6dca7e8\"}",
+   "date": "2026-10-16",
+   "verdict": "partial match only: Sigma.map_isIso is the generic componentwise-coproduct fact, not this whole item; its source at Products.lean:540-542 was read"
+  },
+  {
+   "tool": "grep",
+   "query": "isoLocus|isIso_app.*(triang|localiz)|localizing|localising",
+   "results": "{\"t\": \"2026-10-16T14:24:47Z\", \"tool\": \"grep\", \"query\": \"isoLocus|isIso_app.*(triang|localiz)|localizing|localising\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\"], \"digest\": \"0cc8d9b37c0b28c1\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: LocalizingSubcategory.lean:12-65 defines relative Verdier localizing subcategories by a factorization condition, not coproduct-closed generated subcategories or natural-transformation isomorphism loci"
+  },
+  {
+   "tool": "grep",
+   "query": "Coproduct.*IsIso|isIso.*Coproduct|PreservesColimit.*isIso|map.*IsIso",
+   "results": "{\"t\": \"2026-10-16T14:30:08Z\", \"tool\": \"grep\", \"query\": \"Coproduct.*IsIso|isIso.*Coproduct|PreservesColimit.*isIso|map.*IsIso\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean\", \"Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean\", \"Mathlib/CategoryTheory/NatIso.lean\", \"Mathlib/CategoryTheory/NatIso.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\"], \"digest\": \"b5a1cc041e519640\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: the broad grep returned functor preservation/reflection of isomorphisms, Yoneda detection, natural isomorphism and comma-category infrastructure; none asserts the localizing isomorphism-locus result"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -73,5 +170,21 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-sf-determination"
+ "unit": "sk-lem-sf-determination",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sf-determination-localizing",
+  "worker": "stage1",
+  "summary": "Preserved the full generic statement, including both functor domains and shift compatibility. Added categorical notion dependencies; proved zero/repleteness, all integer shifts, arbitrary coproduct inverses (including the empty family), retract inverses and both minimality cases explicitly. Retained the existing two-out-of-three node as the sole non-elementary input. Removed the generating-class citation, whose statement does not separately assert the used retract fact, and the downstream constructible specialization. No new nodes or Mathlib leaves.",
+  "blueprint": "Steps 1-2 fill the zero/repleteness checks and realize Shifts; Step 3 realizes Cones; Step 4 realizes Direct sums; Step 5 realizes Summands; Step 6 realizes Conclusion in both stated domains. No clause is moved to a new node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q34-1e3abe8e2",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-1e3abe8e2 (reviewer sub-agent of L); spot-checked: Read the item, report, current blueprint route, cited node statements, Stacks sources, and unit/chapter metadata in full. Verified all six proof steps, hypotheses, shift compatibility, coproduct and retract inverses, both functor domains, edge cases, searches, and duplicate/cycle checks. Wrote review.md; no repairs needed."
+ }
 }
