@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-modobj-extension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Extension of scalars",
@@ -14,28 +14,261 @@
  },
  "stmt_deps": [
   "sk-def-sfb-module-objects",
-  "lem-sfb-modobj-symmetric-bimodules"
+  "lem-sfb-modobj-symmetric-bimodules",
+  "sk-def-sfb-ring-object",
+  "def-weil-pbc-category-colimit"
  ],
  "proof": [
   {
-   "text": "The bimodule axioms for $\\mathcal S$ follow from the associativity and unit laws of\n$\\mu_{\\mathcal S}$, together with $\\varphi$ being a morphism of monoid objects. By\n[lem-sfb-modobj-symmetric-bimodules], $M$ is a bimodule. Since $\\mathcal S\\otimes-$\npreserves coequalizers,\n$$\n\\mathcal S\\otimes(\\mathcal S\\otimes\\mathcal R\\otimes M)\\rightrightarrows\n\\mathcal S\\otimes(\\mathcal S\\otimes M)\\to\\mathcal S\\otimes(\\mathcal S\\otimes_{\\mathcal R}M)\n$$\nis again a coequalizer. The map $\\mu_{\\mathcal S}\\otimes M$ is compatible with both\nparallel maps, by associativity of $\\mu_{\\mathcal S}$. So it descends to an action\n$\\mathcal S\\otimes(\\mathcal S\\otimes_{\\mathcal R}M)\\to\\mathcal S\\otimes_{\\mathcal R}M$. The\nunit and associativity laws hold because they hold before descending and the projections\nare epimorphisms. For an $\\mathcal R$-linear $f$, the map $\\mathcal S\\otimes f$ is\ncompatible with the two parallel maps. So it descends to an $\\mathcal S$-linear map, and\nthis is functorial.",
+   "text": "Write $R=\\mathcal R$, $S=\\mathcal S$, $\\mu=\\mu_S$, $\\eta=\\eta_S$, and $r=\\mu\\circ(S\\otimes\\varphi):S\\otimes R\\to S$. The following are identities of morphisms, with $\\varrho$ denoting the right unitor. The monoid and monoid-morphism axioms of [sk-def-sfb-ring-object] give\n$$\nr\\circ(S\\otimes\\eta_R)=\\varrho_S,\\qquad\nr\\circ(S\\otimes\\mu_R)=r\\circ(r\\otimes R)\\circ\\alpha^{-1}_{S,R,R},\\qquad\nr\\circ(\\mu\\otimes R)=\\mu\\circ(S\\otimes r)\\circ\\alpha_{S,S,R}.\n$$\nThe first equation uses $\\varphi\\eta_R=\\eta$ and the right unit law of $\\mu$; the second uses $\\varphi\\mu_R=\\mu(\\varphi\\otimes\\varphi)$ and associativity of $\\mu$; the third is associativity of $\\mu$ with its last input precomposed by $\\varphi$. Together with the regular left $S$-action $\\mu$, these are precisely the right-module unit and associativity axioms and the commuting-action axiom for the $S$-$R$-bimodule $S$. No commutativity of $S$ or centrality of the image of $\\varphi$ is used.",
    "uses": [
+    "sk-def-sfb-ring-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+    "place": "First sentence: the bimodule axioms for S"
+   }
+  },
+  {
+   "text": "For a left $R$-module $M$ as in [sk-def-sfb-module-objects], [lem-sfb-modobj-symmetric-bimodules] equips it with the right action $\\gamma_M\\beta_{M,R}$ commuting with its left action. Its hypotheses hold because $\\mathcal C$ is braided and $R$ is commutative. In constructing $S\\otimes_R M$ only its original left action $\\gamma_M$ is used.",
+   "uses": [
+    "sk-def-sfb-module-objects",
     "lem-sfb-modobj-symmetric-bimodules"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+    "place": "Second sentence: M is a bimodule"
+   }
+  },
+  {
+   "text": "Put $D_M=(S\\otimes R)\\otimes M$, $B_M=S\\otimes M$, $d_0=r\\otimes M$ and $d_1=(S\\otimes\\gamma_M)\\circ\\alpha_{S,R,M}$. Choose $q_M:B_M\\to Q_M$ to be their coequalizer, which exists by hypothesis. This is the colimit [def-weil-pbc-category-colimit] of the small category with two objects and two parallel nonidentity arrows: a cocone with vertex $Z$ is exactly a map $h:B_M\\to Z$ satisfying $h d_0=h d_1$, with its other leg necessarily $h d_0$. Thus $q_M d_0=q_M d_1$ and each such $h$ factors uniquely through $q_M$. In particular, if $u q_M=v q_M$ then $u=v$, since both are the unique factorization of that same cocone. This proves the cancellation property directly, rather than assuming a separate theorem about epimorphisms.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks tag 002F (categories-definition-colimit), specialized to the parallel-pair category; compare tag 002A (categories-definition-coequalizers)"
+   }
+  },
+  {
+   "text": "For every object $X$, the assumption that $X\\otimes-$ preserves colimits means, applied to the parallel-pair diagram of step 3, that $X\\otimes q_M$ is again a coequalizer of $X\\otimes d_0$ and $X\\otimes d_1$. Its universal property [def-weil-pbc-category-colimit] gives the same cancellation property proved in step 3. Applying the hypothesis twice shows that $S\\otimes q_M$ and $S\\otimes(S\\otimes q_M)$ both permit cancellation; associators identify the latter with $(S\\otimes S)\\otimes q_M$. No assertion that tensoring preserves arbitrary epimorphisms is needed.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+    "place": "Sentence beginning Since S tensor - preserves coequalizers"
+   }
+  },
+  {
+   "text": "Define the multiplication maps\n$$\nt_B=(\\mu\\otimes M)\\circ\\alpha^{-1}_{S,S,M}:S\\otimes B_M\\to B_M,\n$$\n$$\nt_D=((\\mu\\otimes R)\\otimes M)\\circ(\\alpha^{-1}_{S,S,R}\\otimes M)\\circ\\alpha^{-1}_{S,S\\otimes R,M}:S\\otimes D_M\\to D_M.\n$$\nThe third identity of step 1 gives $t_B(S\\otimes d_0)=d_0t_D$. Tensor bifunctoriality, naturality of the associator and its pentagon axiom give $t_B(S\\otimes d_1)=d_1t_D$: on either side the first two $S$ factors are multiplied by $\\mu$, and the $R,M$ factors are acted on by $\\gamma_M$. Thus $h_M=q_Mt_B$ satisfies\n$$\nh_M(S\\otimes d_0)=q_Md_0t_D=q_Md_1t_D=h_M(S\\otimes d_1).\n$$\nBy the universal property [def-weil-pbc-category-colimit] of the preserved coequalizer from step 4, there is a unique map $a_M:S\\otimes Q_M\\to Q_M$ satisfying $a_M(S\\otimes q_M)=q_Mt_B$. This is the required action on the first factor; the equality for $d_0$ uses exactly the associativity law of [sk-def-sfb-ring-object] expanded in step 1.",
+   "uses": [
+    "sk-def-sfb-ring-object",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+    "place": "Sentences saying mu_S tensor M is compatible with the parallel maps and descends to an action"
+   }
+  },
+  {
+   "text": "For the unit axiom, precompose the two maps $\\mathbf1\\otimes Q_M\\to Q_M$ with $\\mathbf1\\otimes q_M$. Tensor bifunctoriality, step 5, the left unit law of $\\mu$ [sk-def-sfb-ring-object], and naturality of the left unitor give respectively\n$$\na_M(\\eta\\otimes Q_M)(\\mathbf1\\otimes q_M)\n=a_M(S\\otimes q_M)(\\eta\\otimes B_M)\n=q_Mt_B(\\eta\\otimes B_M)\n=q_M\\lambda_{B_M}\n=\\lambda_{Q_M}(\\mathbf1\\otimes q_M).\n$$\nHere $t_B(\\eta\\otimes B_M)=\\lambda_{B_M}$ is the left unit law of $\\mu$ tensored with $M$, with the monoidal unitor axiom. Step 4 with $X=\\mathbf1$ proves cancellation of $\\mathbf1\\otimes q_M$ directly from the coequalizer uniqueness in [def-weil-pbc-category-colimit]. It follows that $a_M(\\eta\\otimes Q_M)=\\lambda_{Q_M}$, exactly the unit axiom of [sk-def-sfb-module-objects].",
+   "uses": [
+    "sk-def-sfb-ring-object",
+    "def-weil-pbc-category-colimit",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+    "place": "Sentence on the unit law after descending"
+   }
+  },
+  {
+   "text": "For associativity, precompose the two maps $(S\\otimes S)\\otimes Q_M\\to Q_M$ in the module axiom with $((S\\otimes S)\\otimes q_M)$, which permits cancellation by step 4 with $X=S\\otimes S$ [def-weil-pbc-category-colimit]. Tensor bifunctoriality, associator naturality and the equation defining $a_M$ reduce the composites of $a_M(\\mu\\otimes Q_M)$ and $a_M(S\\otimes a_M)\\alpha_{S,S,Q_M}$ respectively to\n$$\nq_Mt_B(\\mu\\otimes B_M)\\quad\\hbox{and}\\quad q_Mt_B(S\\otimes t_B)\\alpha_{S,S,B_M}.\n$$\nAfter substituting $t_B=(\\mu\\otimes M)\\alpha^{-1}_{S,S,M}$, the two expressions agree by the associativity equation for $\\mu$ [sk-def-sfb-ring-object] tensored with $M$ and the pentagon axiom for $\\alpha$. Thus cancellation gives precisely the associativity axiom of [sk-def-sfb-module-objects], and $(Q_M,a_M)$ is a left $S$-module.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "sk-def-sfb-ring-object",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+    "place": "Sentence on the associativity law after descending"
+   }
+  },
+  {
+   "text": "Let $f:M\\to N$ be $R$-linear in the sense of [sk-def-sfb-module-objects]. Tensor bifunctoriality gives $(S\\otimes f)d_0^M=d_0^N(S\\otimes R\\otimes f)$, and $f\\gamma_M=\\gamma_N(R\\otimes f)$ gives $(S\\otimes f)d_1^M=d_1^N(S\\otimes R\\otimes f)$. Hence $q_N(S\\otimes f)$ coequalizes $d_0^M,d_1^M$. The universal property [def-weil-pbc-category-colimit] produces a unique map $\\bar f:Q_M\\to Q_N$ with $\\bar f q_M=q_N(S\\otimes f)$.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+    "place": "Sentence saying S tensor f is compatible with the parallel maps"
+   }
+  },
+  {
+   "text": "To check that $\\bar f$ is $S$-linear [sk-def-sfb-module-objects], write $t_B^M$ and $t_B^N$ for the maps $t_B$ of step 5 for $M$ and $N$. Precompose the desired equality with $S\\otimes q_M$. Steps 5 and 8, tensor bifunctoriality and associator naturality give\n$$\n\\bar f a_M(S\\otimes q_M)=\\bar f q_Mt_B^M=q_N(S\\otimes f)t_B^M=q_Nt_B^N(S\\otimes(S\\otimes f)).\n$$\nThe other side is explicitly\n$$\na_N(S\\otimes\\bar f)(S\\otimes q_M)=a_N(S\\otimes(\\bar f q_M))=a_N(S\\otimes q_N)(S\\otimes(S\\otimes f))=q_Nt_B^N(S\\otimes(S\\otimes f)).\n$$\nCancel $S\\otimes q_M$ using its coequalizer universal property [def-weil-pbc-category-colimit], obtaining $\\bar f a_M=a_N(S\\otimes\\bar f)$.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+    "place": "Sentence saying the descended map is S-linear"
+   }
+  },
+  {
+   "text": "The maps assigned to $\\mathrm{id}_M$ and $\\mathrm{id}_{Q_M}$ have the same composite $q_M$ with $q_M$, and for $M\\xrightarrow{f}N\\xrightarrow{g}P$ both $\\overline{g f}$ and $\\bar g\\bar f$ have composite $q_P(S\\otimes(g f))$ with $q_M$. Uniqueness in [def-weil-pbc-category-colimit] therefore gives $\\overline{\\mathrm{id}_M}=\\mathrm{id}_{Q_M}$ and $\\overline{g f}=\\bar g\\bar f$. Composition in the module category is underlying composition [sk-def-sfb-module-objects], so the constructed object and morphism assignments define exactly the stated functor $\\operatorname{Ext}_\\varphi$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+    "place": "Final words: this is functorial"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-modobj-symmetric-bimodules"
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-modobj-symmetric-bimodules",
+  "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.proof.md",
+  "place": "Complete expansion of the bimodule, coequalizer-action, and functoriality argument; elementary colimit facts from Stacks tags 002F and 002A."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars for module objects over monoid objects in a braided monoidal category, constructed as a coequalizer tensor product",
+   "results": "8 hits: Rep.linearization_μ_hom; ModuleCat.monoidalCategory; Rep.instMonoidalActionTypeLinearization; ModuleCat.MonoidalCategory.instMonoidalCategoryStruct; ModuleCat.MonModuleEquivalenceAlgebra.inverseObj; ModuleCat.instMonoidalLinear; CategoryTheory.Mod_.scalarRestriction; CategoryTheory.ModObj.regular.",
+   "date": "2026-10-16",
+   "verdict": "no match: restriction and regular module objects or concrete module categories, not internal extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, \"scalar\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars between categories of modules over internal monoid objects by a coequalizer",
+   "results": "8 hits: ModuleCat.extendScalars; ModuleCat.ExtendScalars.obj'; ModuleCat.instHasCoequalizers; ModuleCat.coextendScalars; CategoryTheory.Mod_.scalarRestriction; CommRingCat.moduleCatExtendScalarsPseudofunctor; ModuleCat.CoextendScalars.isModule; comonadicExtendScalars.",
+   "date": "2026-10-16",
+   "verdict": "no match: concrete ring modules do not cover arbitrary internal monoid objects."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|extensionOfScalars|extension.of.scalars",
+   "results": "0 hits in Mathlib/CategoryTheory/Monoidal.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebra homomorphism between internal monoid objects, tensoring a module with the target algebra defines extension of scalars in a monoidal category",
+   "results": "8 hits: ModuleCat.MonModuleEquivalenceAlgebra.inverseObj; AlgCat.instMonoidalCategory; ModuleCat.MonModuleEquivalenceAlgebra.inverseObj_mul; AlgCat.hom_whiskerLeft; ModuleCat.MonModuleEquivalenceAlgebra.functor; AlgCat.hom_whiskerRight; AlgCat.instMonoidalCategoryStruct; ModuleCat.MonModuleEquivalenceAlgebra.inverse.",
+   "date": "2026-10-16",
+   "verdict": "no match: concrete algebra/module constructions, not internal extension."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar|coequal|tensor",
+   "results": "0 hits for the newer-name file Mathlib/CategoryTheory/Monoidal/Mod_.lean; 5 hits in the pinned Mathlib/CategoryTheory/Monoidal/Mod.lean at lines 147, 358, 362, 363, 377, concerning scalarRestriction. The wrapper misformats file-path fields when its sub argument is a file.",
+   "date": "2026-10-16",
+   "verdict": "no match: only scalar restriction. The successful directory-wide extension search is recorded separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_, \"extend\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal module scalar extension S tensor over R M descends the left S action through a coequalizer",
+   "results": "8 hits: TensorProduct.isBaseChange; IsLocalization.tensorProduct_isLocalizedModule; IsLocalizedModule.map_lTensor; IsBaseChange; IsLocalizedModule.rTensor; isBaseChange_tensorProduct_map; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; IsBaseChange.lift.",
+   "date": "2026-10-16",
+   "verdict": "no match: these are concrete semiring/ring modules, not modules internal to an arbitrary monoidal category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal module extension of scalars along a monoid object morphism in a monoidal category",
+   "results": "8 hits: ModuleCat.ExtendScalars.map'; ModuleCat.ExtendScalars.obj'; ModuleCat.extendScalars; CategoryTheory.Mod_.scalarRestriction; CommRingCat.moduleCatExtendScalarsPseudofunctor_map; CategoryTheory.Mod_.scalarRestriction_smul; CategoryTheory.Mod_.scalarRestriction_hom; CategoryTheory.ModObj.smul.",
+   "date": "2026-10-16",
+   "verdict": "no match: concrete ring-module extension and internal scalar restriction. Read pinned ChangeOfRings.lean:366-405 and Monoidal/Mod.lean:350-405; neither states internal extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_, \"scalar\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|scalarExtension|coequalizer|scalarRestriction",
+   "results": "10 hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean:31,37,39,40,42 (general preserved-coequalizer infrastructure); Mathlib/CategoryTheory/Monoidal/Mod.lean:363,387,389,390,392 (scalar restriction).",
+   "date": "2026-10-16",
+   "verdict": "no match for internal extension; the bimodule infrastructure is more general input but does not package the stated scalar-extension functor.",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "def extendScalars|namespace ExtendScalars|def obj",
+   "results": "5 hits in Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:66,366,373,400,407; read 364-405.",
+   "date": "2026-10-16",
+   "verdict": "no match: ModuleCat.extendScalars at line 400 assumes concrete commutative rings R and S, not arbitrary internal monoid objects.",
+   "subdirectory": "Algebra/Category/ModuleCat"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|scalarRestriction|tensorBimod",
+   "results": "10 hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean.",
+   "date": "2026-10-16",
+   "verdict": "no match: Bimod.lean:187,347,356-358 concern tensorBimod; Mod.lean:363,387,389,390,392 concern scalarRestriction. Read both files at the returned declarations.",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal monoid module base change using a balanced tensor product in a monoidal category",
+   "results": "8 hits: Module.Basis.baseChange, CategoryTheory.MonoidalCategory.term_⊗ᵢ_, CategoryTheory.MonoidalCategory.tensorIso, CategoryTheory.MonObj.tensorObj.instTensorObj, TensorProduct.AlgebraTensorModule.distribBaseChange, Bimod.tensorBimod, CategoryTheory.MonObj.instIsMonHomTensorHom, SemimoduleCat.MonoidalCategory.tensorObj_def.",
+   "date": "2026-10-16",
+   "verdict": "no match: tensorBimod is infrastructure for supplied bimodules, while the other hits are concrete modules or tensor/monoid primitives. Read pinned Bimod.lean:192-224,350-395."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\"",
+   "results": "12 hits: LinearMap.extendScalarsOfSurjective, LinearEquiv.extendScalarsOfSurjective, LinearMap.extendScalarsOfSurjective_apply, LinearEquiv.extendScalarsOfSurjective_symm, LinearMap.extendScalarsOfSurjectiveEquiv, LinearEquiv.extendScalarsOfSurjective_apply, AlgEquiv.extendScalarsOfSurjective, AlgHom.extendScalarsOfSurjective.",
+   "date": "2026-10-16",
+   "verdict": "no match: the 12 hits extend linear or algebra morphisms along surjective scalar maps between concrete semirings; none constructs an internal-module functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars for left modules over internal monoid objects in a braided monoidal category via a preserved coequalizer",
+   "results": "8 hits: Bimod.whiskerLeft, CategoryTheory.Mod_.scalarRestriction, Bimod.TensorBimod.actLeft, Bimod.tensorBimod_actLeft, Bimod.tensorBimod, Bimod.tensorBimod_X, Bimod.TensorBimod.actRight, CategoryTheory.Mod_Class.",
+   "date": "2026-10-16",
+   "verdict": "no match: Bimod.tensorBimod and its actions/whiskering require already supplied bimodules; internal scalarRestriction reverses direction. None packages the stated scalar-extension functor from left modules."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -55,5 +288,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-change-of-scalars"
+ "unit": "sk-def-sfb-change-of-scalars",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-extension",
+  "worker": "stage1",
+  "summary": "Expanded the imported one-paragraph construction into ten steps proving the bimodule identities, the exact coequalizer universal property and cancellation, tensor preservation under the given assumption, descent of the action, unit and associativity, descent of morphisms, linearity, and functor laws. Reused the existing module, ring-object, symmetric-bimodule, and Mathlib colimit nodes; created no new nodes. The statement and all imported metadata are retained unchanged. A further audit wrote the right-action associators and the multiplication maps t_B,t_D explicitly, and checked the unit law after the correctly typed precomposition by 1 tensor q. Fresh wrapper searches again found only concrete scalar extension or internal restriction.",
+  "blueprint": "Steps 1–2 realize the first two sentences of def-sfb-modobj-extension.proof.md; steps 3–5 its preserved-coequalizer and descended-action sentences; steps 6–7 its unit and associativity sentence; steps 8–10 its morphism, S-linearity and functoriality sentences. This is clause 2 of sk-def-sfb-change-of-scalars, without its separate adjunction or exactness claims."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q36-6b61fbf50",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-6b61fbf50 (reviewer sub-agent of L); spot-checked: Read the full item, report, four cited statements, current blueprint route, and Stacks 002A/002F. All ten steps check, including typed action descent, preserved-coequalizer cancellation, module laws, and functoriality. No duplicate, cycle, missing hypothesis, or repair found. Noncentral finite-monoid test passed. Detailed findings written to review.md."
+ }
 }

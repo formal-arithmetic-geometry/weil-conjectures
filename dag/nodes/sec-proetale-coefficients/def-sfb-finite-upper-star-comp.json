@@ -3,41 +3,151 @@
  "blueprint": {
   "is": "def-sfb-finite-upper-star-comp",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Composition isomorphism for pullbacks",
- "statement": "For morphisms $h_1\\colon T\\to S$ and $h_2\\colon S\\to R$, the *composition isomorphism*\nof pullbacks\n\n$$\n(h_2\\circ h_1)^*\\xrightarrow{\\ \\sim\\ }h_1^*\\circ h_2^*\n$$\n\nis the conjugate, under the adjunctions of\n[def-sfb-finite-upper-lower-star-adjunction], of the inverse of the composition\nisomorphism $(h_2)_*\\circ(h_1)_*\\cong(h_2\\circ h_1)_*$ of [def-sfb-finite-lower-star-comp].",
+ "statement": "For morphisms $h_1\\colon T\\to S$ and $h_2\\colon S\\to R$, the *composition isomorphism*\nof pullbacks\n\n$$\n(h_2\\circ h_1)^*\\xrightarrow{\\ \\sim\\ }h_1^*\\circ h_2^*\n$$\n\nis the conjugate (the mate with identity intervening functors of\n[def-weil-pbc-adjunction-mate]), under the adjunctions of\n[def-sfb-finite-upper-lower-star-adjunction], of the composition\nisomorphism $(h_2)_*\\circ(h_1)_*\\cong(h_2\\circ h_1)_*$ of [def-sfb-finite-lower-star-comp].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/def-sfb-finite-upper-star-comp.md",
   "place": "node def-sfb-finite-upper-star-comp, order 1514"
  },
  "stmt_deps": [
   "def-sfb-finite-upper-lower-star-adjunction",
-  "def-sfb-finite-lower-star-comp"
+  "def-sfb-finite-lower-star-comp",
+  "def-weil-pbc-adjunction-mate"
  ],
  "proof": [
   {
-   "text": "By [def-sfb-finite-upper-lower-star-adjunction], $(h_2\\circ h_1)^*$ is left adjoint to\n$(h_2\\circ h_1)_*$, and $h_1^*\\circ h_2^*$ is left adjoint to $(h_2)_*\\circ(h_1)_*$.\nThese two right adjoints are isomorphic by [def-sfb-finite-lower-star-comp]. Left\nadjoints are unique up to a unique isomorphism compatible with the adjunctions, and\ntaking conjugates gives the isomorphism.",
+   "text": "Put $L_1=(h_2\\circ h_1)^*$, $R_1=(h_2\\circ h_1)_*$, $L_2=h_1^*\\circ h_2^*$ and $R_2=(h_2)_*\\circ(h_1)_*$. By [def-sfb-finite-upper-lower-star-adjunction], $L_1\\dashv R_1$, $h_2^*\\dashv(h_2)_*$ and $h_1^*\\dashv(h_1)_*$. Apply [def-weil-pbc-composite-adjunction] to the last two adjunctions. Its Hom bijection is\n$$\\operatorname{Hom}(h_1^*h_2^*F,G)\\cong\\operatorname{Hom}(h_2^*F,(h_1)_*G)\\cong\\operatorname{Hom}(F,(h_2)_*(h_1)_*G),$$\nso it supplies $L_2\\dashv R_2$. Denote the units of these two adjunctions by $\\eta_1$ and $\\eta_2$, and the counit of the first by $\\varepsilon_1$.",
    "uses": [
     "def-sfb-finite-upper-lower-star-adjunction",
-    "def-sfb-finite-lower-star-comp"
+    "def-weil-pbc-composite-adjunction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/def-sfb-finite-upper-star-comp.proof.md",
+    "place": "sole proof paragraph, composite adjunction and compatible uniqueness"
+   }
+  },
+  {
+   "text": "Let $\\delta:R_2\\xrightarrow{\\sim}R_1$ be the pushforward composition isomorphism of [def-sfb-finite-lower-star-comp], in its displayed direction. Apply [lem-weil-pbc-conjugate-iso-unit-equation] to the adjunctions of Step 1 and to $\\delta$. It gives a unique natural transformation $c:L_1\\to L_2$ satisfying\n$$R_1(c_F)\\circ\\eta_{1,F}=\\delta_{L_2F}\\circ\\eta_{2,F},$$\nand states that $c$ is a natural isomorphism. Its direction is precisely $(h_2\\circ h_1)^*\\xrightarrow{\\sim}h_1^*\\circ h_2^*$.",
+   "uses": [
+    "def-sfb-finite-lower-star-comp",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/def-sfb-finite-upper-star-comp.proof.md",
+    "place": "sole proof paragraph, composite adjunction and compatible uniqueness"
+   }
+  },
+  {
+   "text": "Specialize [def-weil-pbc-adjunction-mate] to identity intervening functors, taking its first adjunction to be $L_2\\dashv R_2$ and its second to be $L_1\\dashv R_1$. Its inverse mate sends $\\delta:R_2\\to R_1$ to the transformation with component\n$$m_F=\\varepsilon_{1,L_2F}\\circ L_1(\\delta_{L_2F}\\circ\\eta_{2,F}).$$\nWrite $a_F=\\delta_{L_2F}\\circ\\eta_{2,F}$. Naturality of $\\eta_1$ and the triangle identity give\n$$R_1(m_F)\\circ\\eta_{1,F}=R_1(\\varepsilon_{1,L_2F})\\circ R_1L_1(a_F)\\circ\\eta_{1,F}=R_1(\\varepsilon_{1,L_2F})\\circ\\eta_{1,R_1L_2F}\\circ a_F=a_F.$$\nThus $m$ has the unit equation of Step 2 and equals $c$ by [lem-weil-pbc-conjugate-iso-unit-equation]. This proves the defining conjugate characterization with the forward pushforward compositor. The inverse pushforward compositor has the reverse pullback mate, so its mate must be inverted to obtain $c$.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/def-sfb-finite-upper-star-comp.proof.md",
+    "place": "sole proof paragraph, composite adjunction and compatible uniqueness"
+   }
   }
  ],
  "proof_deps": [
   "def-sfb-finite-upper-lower-star-adjunction",
-  "def-sfb-finite-lower-star-comp"
+  "def-weil-pbc-composite-adjunction",
+  "def-sfb-finite-lower-star-comp",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-adjunction-mate"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/def-sfb-finite-upper-star-comp.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/def-sfb-finite-upper-star-comp.proof.md",
+  "place": "proof paragraph"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical isomorphism between left adjoints induced by an isomorphism of right adjoints, conjugate equivalence",
+   "results": "CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv; CategoryTheory.conjugateIsoEquiv; CategoryTheory.Bicategory.conjugateIsoEquiv; CategoryTheory.conjugateEquiv_iso; CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso; CategoryTheory.conjugateIsoEquiv_apply_hom; CategoryTheory.Bicategory.conjugateEquiv_iso; CategoryTheory.Bicategory.conjugateIsoEquiv_apply_hom",
+   "date": "2026-10-16",
+   "verdict": "match: conjugateIsoEquiv and conjugateEquiv_leftAdjointCompIso_inv; leftAdjointCompIso itself was located by grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointUniq, CategoryTheory.conjugateEquiv",
+   "results": "0 hits; loogle: unknown identifier 'Adjunction.leftAdjointUniq'",
+   "date": "2026-10-16",
+   "verdict": "unavailable identifier; this query is not used for the match"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv|leftAdjointUniq",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:48,66,72,76,82; Mathlib/CategoryTheory/Adjunction/Unique.lean:36,40; Mathlib/CategoryTheory/Adjunction/Mates.lean:275,350",
+   "date": "2026-10-16",
+   "verdict": "match: leftAdjointCompIso and conjugateEquiv source declarations found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition isomorphism of pullback functors induced by composition isomorphism of right adjoints and adjunctions",
+   "results": "CategoryTheory.Over.pullbackComp; SheafOfModules.pullbackComp; CategoryTheory.ChosenPullbacksAlong.pullbackComp; AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-16",
+   "verdict": "related pullback compositions; abstract adjunction match verified by the subsequent searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback composition isomorphism from pushforward composition isomorphism under adjunctions",
+   "results": "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; CategoryTheory.ChosenPullbacksAlong.pullbackComp; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom",
+   "date": "2026-10-16",
+   "verdict": "related specializations; abstract leftAdjointCompIso is the applicable declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natIsoOfRightAdjointNatIso",
+   "results": "CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso (Mathlib/CategoryTheory/Adjunction/Opposites.lean:96); CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.ofNatIsoRight",
+   "date": "2026-10-16",
+   "verdict": "match in general form: right-adjoint isomorphisms induce left-adjoint isomorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso'",
+   "date": "2026-10-16",
+   "verdict": "unavailable identifier; declaration located by LeanFinder and grep"
+  },
+  {
+   "tool": "grep",
+   "query": "natIsoOfRightAdjointNatIso",
+   "results": "Mathlib/CategoryTheory/Adjunction/Opposites.lean:96,106",
+   "date": "2026-10-16",
+   "verdict": "match: confirms the general right-adjoint-to-left-adjoint construction"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_conjugateEquiv_symm|def comp|def conjugateIsoEquiv",
+   "results": "{\"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Additive.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"]}",
+   "date": "2026-10-16",
+   "verdict": "confirmed the direction-reversing mate and unit formula in source"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_conjugateEquiv_symm",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.unit_conjugateEquiv_symm\"]}",
+   "date": "2026-10-16",
+   "verdict": "confirmed the direction-reversing mate and unit formula in source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mate of natural transformation between right adjoints reverses direction, unit identity for conjugation",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.unit_conjugateEquiv_symm\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.mateEquiv_symm_apply\", \"CategoryTheory.conjugateEquiv_symm_apply_app\", \"CategoryTheory.Bicategory.conjugateEquiv_apply\", \"CategoryTheory.conjugateEquiv_symm_comm\", \"CategoryTheory.mateEquiv_counit_symm\"]}",
+   "date": "2026-10-16",
+   "verdict": "confirmed the direction-reversing mate and unit formula in source"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -58,5 +168,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-finite-pushforward-pullback"
+ "unit": "sk-def-sfb-finite-pushforward-pullback",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-finite-upper-star-comp",
+  "worker": "stage1",
+  "summary": "Second reading corrected the imported inverse-direction conjugation error, supplied the composite adjunction via its existing Mathlib definition node, and proved the mate identification by the unit equation and triangle identity. No new nodes.",
+  "blueprint": "Realizes the sole proof paragraph in three steps: the two adjunctions, compatible uniqueness using the pushforward compositor, and an explicit mate calculation. The imported statement is corrected by a type check against Stacks 0B65 and the upstream upperStarComp construction; the inverse compositor has the reverse mate."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-0fbc8c306",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-0fbc8c306 (reviewer sub-agent of L); spot-checked: Read all required packet, DAG, blueprint, cited-node, Stacks, Mathlib, and source files. The three-step split is complete and well typed; the corrected compositor direction matches the exact upperStarComp construction, arbitrary Grothendieck-abelian coefficients, and all edge cases. The original inverse wording was a genuine source-direction error and is explicitly corrected in the node/report. No duplicates, route violations, SGA citations, or repairable faults found."
+ }
 }

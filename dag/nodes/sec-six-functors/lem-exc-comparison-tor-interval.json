@@ -3,55 +3,197 @@
  "blueprint": {
   "is": "lem-exc-comparison-tor-interval",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Site comparison preserves and detects Tor intervals",
- "statement": "Let $A$ be finite and let $K\\in D^+(T_{\\Et},A)$.\nFor integers $a\\leq b$, $K$ has\nTor amplitude\nin $[a,b]$ if and only if its\npullback\n$\\nu_T^*K$ has Tor amplitude in the same interval on\nthe full pro-etale site. The derived categories are the\nordinary ones of [def-weil-pbc-derived-categories].",
+ "statement": "Let $T$ be a scheme, let $A$ be a finite commutative ring, and let $K\\in D^+(T_{\\mathrm{Et}},A)$ in the ordinary derived category [def-weil-pbc-derived-categories]. Use the full small pro-etale site and its ordinary derived category $D(T_{\\mathrm{proet}},A)$ [def-weil-pbc-proetale-site], and the comparison inverse image $\\nu_T^*$ [def-weil-pbc-site-comparison-morphism], applied termwise on derived categories [def-sf-comparison-derived-pullback]. For integers $a\\leq b$, $K$ has Tor amplitude in $[a,b]$ [def-kun-tor-amplitude] if and only if $\\nu_T^*K$ has Tor amplitude in $[a,b]$ [def-weil-proetale-tor-amplitude]. Thus the test is against every module sheaf on the respective site, with no constructibility or etale-origin restriction on the pro-etale test sheaves.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-cor-sf-direct-image-ctf/lem-exc-comparison-tor-interval.md",
   "place": "node lem-exc-comparison-tor-interval, order 2193"
  },
  "stmt_deps": [
   "def-weil-pbc-derived-categories",
-  "def-weil-pbc-site-comparison-morphism"
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sf-comparison-derived-pullback",
+  "def-kun-tor-amplitude",
+  "def-weil-proetale-tor-amplitude"
  ],
  "proof": [
   {
-   "text": "We record the bounded-flat-model argument. If $K$ has\nTor amplitude $[a,b]$, take a bounded-above flat\nresolution $P$ with $P^q=0$ for $q>b$.\nSuch a resolution is constructed by free module sheaves\non site objects, successively covering cycles and kernels.\nIt is exact in degrees below $a$. Put\n$Q=\\operatorname{coker}(P^{a-1}\\to P^a)$.\nFor every module sheaf $N$, the flat resolution ending\nin $P^a\\to Q$ computes\n\n$$\n\\operatorname{Tor}_1(Q,N)\n=\\mathcal H^{a-1}(P\\otimes N)=0,\n$$\n\nby [def-weil-finite-tor-amplitude]. Hence $Q$\nis flat, and $[Q\\to P^{a+1}\\to\\cdots\\to P^b]$\nis a flat representative of $K$ in precisely this interval.\nBy [lem-exc-constant-inverse-image-flat], its termwise\npullback is still flat. Exactness in\n[prop-weil-pbc-site-comparison-finite-level] makes it\na representative of $\\nu_T^*K$. Tensoring this bounded\nflat complex with any pro-etale module sheaf gives no\ncohomology outside $[a,b]$, proving one implication.",
-   "uses": [
-    "def-weil-finite-tor-amplitude",
-    "lem-exc-constant-inverse-image-flat",
-    "prop-weil-pbc-site-comparison-finite-level"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the converse, testing $\\nu_T^*K$ with the coefficient\nring first gives its cohomological bound $[a,b]$.\nExactness of $\\nu_T^*$ and the sheaf unit isomorphism\nin [prop-weil-pbc-site-comparison-finite-level] make\n$\\nu_T^*$ conservative on sheaves, hence give the same\ncohomological bound for $K$. Take a bounded-above flat\nresolution of $K$ and of an arbitrary etale module\nsheaf $N$. Their pullbacks remain flat by\n[lem-exc-constant-inverse-image-flat].\nExact inverse image commutes with ordinary tensor and\nthe direct sums in these resolutions, giving\n\n$$\n\\nu_T^*(K\\otimes_A^LN)\n=\\nu_T^*K\\otimes_A^L\\nu_T^*N\n$$\n\nfor the derived tensor in [def-weil-derived-tensor].\nThe right side has the stipulated Tor bound. Conservativity\non its cohomology sheaves gives that bound on the left\nbefore pullback as well. This applies to every $N$,\nproving the converse. The derived comparison used here\nis the ordinary one of [thm-weil-pbc-site-comparison].",
+   "text": "Put $F=\\nu_T^*$. By [prop-weil-pbc-site-comparison-finite-level], $F$ is exact and every module sheaf $M$ has $M\\cong\\nu_{T,*}FM$. Consequently $FM=0$ implies $M=0$. Part (3) of [lem-sf-comparison-pullback-exact] gives $\\mathcal H^i(FC)\\cong F\\mathcal H^i(C)$ for every complex $C$ and integer $i$. The derived functor here is termwise $F$ by [def-sf-comparison-derived-pullback]. Hence vanishing of each cohomology sheaf is preserved and reflected; there is no boundedness restriction in this calculation.",
    "uses": [
     "prop-weil-pbc-site-comparison-finite-level",
-    "lem-exc-constant-inverse-image-flat",
-    "def-weil-derived-tensor",
-    "thm-weil-pbc-site-comparison"
+    "lem-sf-comparison-pullback-exact",
+    "def-sf-comparison-derived-pullback"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099T, lemma-fully-faithful; Tag 099V, lemma-relative-comparison (termwise inverse image); elementary kernel/image argument"
+   }
+  },
+  {
+   "text": "Assume that $K$ has Tor amplitude in $[a,b]$ [def-kun-tor-amplitude]. Choose a representing complex $C$ and a K-flat resolution $R\\to C$ with flat terms by [lem-pc-kflat-resolution]. By the formula in [def-kun-derived-tensor], $K\\otimes_A^{\\mathbf L}A_T[0]$ is represented by $R\\otimes_A A_T[0]\\cong R$, so $\\mathcal H^i(K)=0$ outside $[a,b]$. Replace $C$ by its upper smart truncation: retain $C^i$ for $i<b$, use $\\ker(d^b)$ in degree $b$, and zero above $b$. The inclusion is a quasi-isomorphism since $\\mathcal H^i(C)=0$ for $i>b$. Apply [lem-pc-kflat-bounded-flat-replacement] to this complex, with $N=b$, obtaining a quasi-isomorphism $P\\to\\tau_{\\leq b}C$ with flat terms and $P^i=0$ for $i>b$. By [lem-pc-bounded-above-flat-kflat-site], $P$ is K-flat, so $P\\otimes_A N$ computes $K\\otimes_A^{\\mathbf L}N$ for every etale module sheaf $N$.",
+   "uses": [
+    "def-kun-tor-amplitude",
+    "lem-pc-kflat-resolution",
+    "def-kun-derived-tensor",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FZ (definition-tor-amplitude), 08G1 (lemma-tor-amplitude), 06YS (lemma-K-flat-resolution), 06YQ (lemma-bounded-flat-K-flat); upper smart truncation written out"
+   }
+  },
+  {
+   "text": "For every etale module sheaf $N$, the Tor bound gives $\\mathcal H^{a-1}(P\\otimes_A N)=0$. Apply [lem-weil-pbc-site-flat-opcycles-tor-criterion] on the etale site with $\\mathcal O=A_T$ and $n=a$ to conclude that $Q=P^a/\\operatorname{im}(d^{a-1})$ is flat. Form $B$ with $B^a=Q$, $B^i=P^i$ for $a<i\\leq b$, and zero otherwise, with the induced differentials. The projection $P\\to B$ induces an isomorphism on cohomology in degrees $i\\geq a$ by the kernel/image formulas, and both sides have zero cohomology below $a$ because $P$ represents $K$. Thus $B$ represents $K$ and is a flat complex supported precisely within $[a,b]$.",
+   "uses": [
+    "lem-weil-pbc-site-flat-opcycles-tor-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G0, lemma-last-one-flat; Tag 08G1, lemma-tor-amplitude, lower smart truncation; existing universal-tensor opcycle criterion specialized at n=a"
+   }
+  },
+  {
+   "text": "By [lem-exc-constant-inverse-image-flat] every term of $FB$ is flat, and by exactness [prop-weil-pbc-site-comparison-finite-level] the termwise pullback of the quasi-isomorphism just constructed is a quasi-isomorphism. Thus $FB$ represents $\\nu_T^*K$ by [def-sf-comparison-derived-pullback]. It is zero outside $[a,b]$, and is K-flat by [lem-pc-bounded-above-flat-kflat-site] on the full small pro-etale site. For an arbitrary pro-etale $A_T$-module sheaf $M$, [def-weil-derived-tensor] therefore computes $\\nu_T^*K\\otimes_A^{\\mathbf L}M$ by $FB\\otimes_A M$. This complex has zero terms outside $[a,b]$, so its cohomology vanishes there. This proves the forward implication, with all test sheaves allowed as required by [def-weil-proetale-tor-amplitude].",
+   "uses": [
+    "lem-exc-constant-inverse-image-flat",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-sf-comparison-derived-pullback",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-weil-derived-tensor",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-exc-comparison-tor-interval.proof.md",
+    "place": "First paragraph: pull back the bounded flat model; K-flat computation justified by Stacks Tags 06YQ and 06YU"
+   }
+  },
+  {
+   "text": "Part (1) of [lem-sf-comparison-pullback-exact] identifies $\\nu_T^{-1}A_{T,\\mathrm{Et}}\\cong A_{T,\\mathrm{proet}}$ as ring sheaves and identifies ringed module pullback with $F$. Exactness then identifies $LF$ with termwise $F$: the augmentation from a K-flat resolution is a quasi-isomorphism after $F$, so it becomes an isomorphism in the derived category. This is the unbounded derived functor of [def-sf-comparison-derived-pullback]. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to this constant-coefficient ringed comparison morphism to obtain, for every etale module sheaf $N$, a canonical isomorphism\n$$F(K\\otimes_A^{\\mathbf L}N)\\cong FK\\otimes_A^{\\mathbf L}FN.$$\nThe site-size hypotheses of that lemma hold by choosing the skeletons in the common larger universe specified in [def-weil-pbc-proetale-site] and [def-weil-pbc-site-comparison-morphism]. In particular, $FN$ is an ordinary pro-etale module sheaf in degree zero. No boundedness of $K\\otimes_A^{\\mathbf L}N$ is needed: the cited tensor theorem holds on unbounded derived categories.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "def-sf-comparison-derived-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0G7E, lemma-pullback-K-flat; constant-ring specialization of the comparison geometric morphism"
+   }
+  },
+  {
+   "text": "Conversely assume $FK$ has Tor amplitude in $[a,b]$ [def-weil-proetale-tor-amplitude]. For any etale module sheaf $N$, its inverse image $FN$ is a pro-etale module sheaf placed in degree zero. The isomorphism of step 5 gives, for $i\\notin[a,b]$,\n$$F\\mathcal H^i(K\\otimes_A^{\\mathbf L}N)\\cong\\mathcal H^i(FK\\otimes_A^{\\mathbf L}FN)=0.$$\nHere the first identification uses the kernel/image calculation of step 1. The sheaf unit isomorphism of [prop-weil-pbc-site-comparison-finite-level] then gives $\\mathcal H^i(K\\otimes_A^{\\mathbf L}N)=0$. Since $N$ was arbitrary, this is exactly the etale Tor-amplitude condition [def-kun-tor-amplitude]. Together with step 4 it proves the equivalence.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-exc-comparison-tor-interval.proof.md",
+    "place": "Second paragraph: tensor comparison and conservativity; omit the unnecessary boundedness preliminary by using the unbounded tensor theorem"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-finite-tor-amplitude",
-  "lem-exc-constant-inverse-image-flat",
   "prop-weil-pbc-site-comparison-finite-level",
+  "lem-sf-comparison-pullback-exact",
+  "def-sf-comparison-derived-pullback",
+  "def-kun-tor-amplitude",
+  "lem-pc-kflat-resolution",
+  "def-kun-derived-tensor",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-site-flat-opcycles-tor-criterion",
+  "lem-exc-constant-inverse-image-flat",
   "def-weil-derived-tensor",
-  "thm-weil-pbc-site-comparison"
+  "def-weil-proetale-tor-amplitude",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-cor-sf-direct-image-ctf/lem-exc-comparison-tor-interval.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-exc-comparison-tor-interval.proof.md",
+  "place": "Both proof paragraphs, with hidden flat-resolution and tensor-comparison inputs supplied by the existing Stacks nodes (06YS, 06YQ, 08G0, 08G1, 07A4)."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor.amplitude",
+   "results": "0 hits; first results: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the etale/pro-etale equivalence of Tor intervals; hits concern sites alone, ordinary projective Tor, t-structure bounds, or unrelated dimension notions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "0 hits; first results: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the etale/pro-etale equivalence of Tor intervals; hits concern sites alone, ordinary projective Tor, t-structure bounds, or unrelated dimension notions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image preserves and detects Tor amplitude for etale to proetale comparison",
+   "results": "8 hits; first results: CategoryTheory.MorphismProperty.inverseImage, CategoryTheory.MorphismProperty.instHasTwoOutOfThreePropertyInverseImage, Algebra.FormallyEtale.instTensorProduct, CategoryTheory.MorphismProperty.IsMultiplicative.instInverseImage, CategoryTheory.MorphismProperty.RespectsIso.inverseImage, CategoryTheory.MorphismProperty.inverseImage_equivalence_inverse_eq_map_functor, CategoryTheory.MorphismProperty.IsStableUnderComposition.inverseImage, CategoryTheory.MorphismProperty.instIsStableUnderRetractsInverseImage",
+   "date": "2026-10-16",
+   "verdict": "no match for the etale/pro-etale equivalence of Tor intervals; hits concern sites alone, ordinary projective Tor, t-structure bounds, or unrelated dimension notions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact inverse image functor from etale to proetale module sheaves preserves and reflects Tor amplitude in a fixed interval",
+   "results": "8 hits; first results: CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, Rep.isZero_Tor_succ_of_projective, Algebra.FormallyEtale.comp, DerivedCategory.isGE_Q_obj_iff, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-16",
+   "verdict": "no match for the etale/pro-etale equivalence of Tor intervals; hits concern sites alone, ordinary projective Tor, t-structure bounds, or unrelated dimension notions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor dimension of a complex of sheaves is unchanged under conservative exact tensor inverse image of ringed topoi",
+   "results": "8 hits; first results: CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.Functor.exact_tfae, CategoryTheory.GrothendieckTopology.W.transport_isMonoidal",
+   "date": "2026-10-16",
+   "verdict": "no match for the etale/pro-etale equivalence of Tor intervals; hits concern sites alone, ordinary projective Tor, t-structure bounds, or unrelated dimension notions"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(tensor|flat)|tor.*dimension|TorAmplitude",
+   "results": "25 hits; first results: Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/Logic/Nontrivial/Defs.lean, Mathlib/Analysis/InnerProductSpace/Adjoint.lean, Mathlib/Analysis/InnerProductSpace/Spectrum.lean, Mathlib/Analysis/InnerProductSpace/Spectrum.lean, Mathlib/Analysis/InnerProductSpace/Spectrum.lean, Mathlib/Analysis/InnerProductSpace/Spectrum.lean, Mathlib/Analysis/InnerProductSpace/Spectrum.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the etale/pro-etale equivalence of Tor intervals; hits concern sites alone, ordinary projective Tor, t-structure bounds, or unrelated dimension notions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proetale\"",
+   "results": "12 hits; first results: AlgebraicGeometry.Scheme.proetalePrecoverage, AlgebraicGeometry.Scheme.proetaleTopology, AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage, AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology, AlgebraicGeometry.Scheme.proetaleTopology_eq_propQCTopology, AlgebraicGeometry.Scheme.etaleTopology_le_proetaleTopology",
+   "date": "2026-10-16",
+   "verdict": "no match for the etale/pro-etale equivalence of Tor intervals; hits concern sites alone, ordinary projective Tor, t-structure bounds, or unrelated dimension notions"
+  },
+  {
+   "tool": "grep",
+   "query": "HasTorAmplitude|torAmplitude|TorDimension|torDimension|KFlat",
+   "results": "0 hits; first results: ",
+   "date": "2026-10-16",
+   "verdict": "No declarations matching Tor-amplitude, Tor-dimension or K-flat vocabulary in the pinned Mathlib source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully exact pullback of module sheaves reflects bounded Tor dimension, bounded complex of flat sheaves",
+   "results": "8 hits; first results: Module.FaithfullyFlat.lTensor_reflects_exact, Module.FaithfullyFlat.rTensor_reflects_exact, Condensed.instAB4CondensedMod, Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, Module.FaithfullyFlat.lTensor_exact_iff_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Condensed.instAB4StarCondensedMod, Module.FaithfullyFlat.rTensor_exact_iff_exact",
+   "date": "2026-10-16",
+   "verdict": "No match: the semantic hits concern faithfully flat ordinary modules or exact products/coproducts of condensed modules, not Tor amplitude of sheaf complexes under site comparison."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -82,5 +224,64 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-cor-sf-direct-image-ctf"
+ "unit": "sk-cor-sf-direct-image-ctf",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-comparison-tor-interval",
+  "worker": "stage1",
+  "summary": "Audited current and historical blueprint, Lean comparison API, Stacks ringed-site flat/Tor arguments, and every cited node statement. Reused existing flat replacements, universal opcycle criterion, K-flatness and unbounded tensor comparison; no new nodes. Expanded notions to ordinary full-site Tor amplitude for arbitrary finite commutative A; no constructibility assumptions introduced. Six proof steps with verbatim citation packet.",
+  "blueprint": "Current main-20261015 lemma-exc-comparison-tor-interval.proof.md: first paragraph realized by steps 2-4 (flat resolution, flat lower cokernel, termwise inverse image); second paragraph realized by steps 1,5,6 (exact conservative inverse image and derived tensor comparison). These realize the unchanged direct-image unit step transferring Tor bounds in both directions.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General ringed-site K-flat flat-term resolution for the unit test in step 2; no node in this unit states resolution existence."
+   },
+   {
+    "node": "lem-pc-kflat-bounded-flat-replacement",
+    "why": "General ringed-site bounded-above flat replacement at upper degree b; supplies the resolution construction hidden in the first blueprint paragraph."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General K-flatness criterion used on both sites; the item unit has no such homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-flat-opcycles-tor-criterion",
+    "why": "General flat-cokernel criterion supplies the lower smart truncation in the prescribed bounded-flat-model proof, without constructibility assumptions."
+   },
+   {
+    "node": "lem-exc-constant-inverse-image-flat",
+    "why": "Comparison inverse image preserves flat module sheaves, exactly the tool explicitly cited by the blueprint proof."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General ringed-topos tensor comparison on unbounded derived categories; makes the second blueprint paragraph rigorous without imposing a false bounded-below condition on the tensor."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "The exactness and sheaf unit isomorphism explicitly used by the blueprint; sufficient for reflection of vanishing without applying derived full faithfulness to an unbounded tensor."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "General comparison constant-ring, exactness and cohomology theorem; supplies the ringed-site identification for the tensor theorem without changing the prescribed flat-model route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-site-flat-opcycles-tor-criterion",
+  "lem-exc-constant-inverse-image-flat",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-sf-comparison-pullback-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q43-96f517de7",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q43-96f517de7 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint routes and source passages. All six steps pass, including bounded flat truncation and unbounded tensor comparison. Checked edge cases, duplicates, cycles and master target coefficient categories. Accepted eight declared tool uses; no repairs or new nodes. Findings recorded in review.md."
+ }
 }
