@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-module-upper-lower-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The adjunction $f^*\\dashv f_*$ on module objects",
@@ -16,30 +16,141 @@
   "def-sfb-module-upper-star",
   "def-sfb-module-lower-star",
   "sk-def-sfb-transport",
-  "sk-def-sfb-change-of-scalars"
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "sk-def-sfb-coefficient-morphisms"
  ],
  "proof": [
   {
-   "text": "The adjunction $f^*_{\\Ab}\\dashv f^{\\Ab}_*$ is monoidal\n([sk-def-sfb-finite-pushforward-pullback]), so it lifts to module objects as stated\n([sk-def-sfb-transport]); a composite of adjunctions is an adjunction. For the\ndisplayed isomorphism: transport along $f^{\\Ab}_*$ commutes with restriction of\nscalars, $\\operatorname{mapMod}(f^{\\Ab}_*)\\circ\\operatorname{Res}_{\\alpha_f}\\cong\n\\operatorname{Res}_{f^{\\Ab}_*\\alpha_f}\\circ\\operatorname{mapMod}(f^{\\Ab}_*)$, and\nrestrictions of scalars compose,\n$\\operatorname{Res}_u\\circ\\operatorname{Res}_{f^{\\Ab}_*\\alpha_f}\n=\\operatorname{Res}_{f^{\\Ab}_*\\alpha_f\\circ u}$. Since $\\eta_f$ is the mate of\n$\\alpha_f$, i.e. $\\eta_f=f^{\\Ab}_*\\alpha_f\\circ u$\n([sk-def-sfb-coefficient-morphisms]), the right-hand side is\n$\\operatorname{Res}_{\\eta_f}\\circ\\operatorname{mapMod}(f^{\\Ab}_*)=f_*$.",
+   "text": "Put $F=f^*_{\\Ab}$, $G=f^{\\Ab}_*$, $R=\\Lambda_Y$, $S=\\Lambda_X$, and $\\alpha=\\alpha_f\\colon FR\\to S$. The adjunction $F\\dashv G$ on abelian sheaves is [def-sfb-finite-upper-lower-star-adjunction]; with its stated strong/lax monoidal structures it is monoidal by [lem-sfb-finite-monoidal-adjunction]. Apply [def-sfb-modobj-transport-adjunction] to this adjunction and the monoid $R$. It gives a monoid morphism $u\\colon R\\to GFR$ and a natural bijection $B_{M,P}\\colon\\operatorname{Hom}_{FR}(FM,P)\\cong\\operatorname{Hom}_R(M,LP)$, where $L=\\operatorname{Res}_u\\circ\\operatorname{mapMod}(G)$ and $P$ is any $FR$-module. By [sk-def-sfb-coefficient-morphisms], $\\alpha$ is an isomorphism of ring objects and $\\eta_f=G\\alpha\\circ u$.",
    "uses": [
-    "sk-def-sfb-transport",
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "lem-sfb-finite-monoidal-adjunction",
+    "def-sfb-modobj-transport-adjunction",
     "sk-def-sfb-coefficient-morphisms"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-lower-adjunction.proof.md",
+    "place": "Proof, opening sentence: lift the monoidal adjunction; final sentence: the mate relation"
+   }
+  },
+  {
+   "text": "Use the extension of scalars already appearing in the definition [def-sfb-module-upper-star], so $f^*M=\\operatorname{Ext}_{\\alpha}(FM)=S\\otimes_{FR}FM$. Applying [def-sfb-modobj-extend-restrict-adjunction] to $\\alpha\\colon FR\\to S$ gives a natural bijection $A_{M,N}\\colon\\operatorname{Hom}_S(f^*M,N)\\cong\\operatorname{Hom}_{FR}(FM,\\operatorname{Res}_{\\alpha}N)$. Explicitly it sends $h$ to $\\operatorname{Res}_{\\alpha}(h)\\circ u_{FM}$, with $u_{FM}$ the extension-of-scalars unit in that cited statement. The source ring $FR$ is commutative: $S$ is commutative by [sk-def-sfb-pulled-back-coefficients], and $\\alpha$ is a ring isomorphism by step 1. Explicitly, $\\alpha\\circ\\mu_{FR}=\\mu_S\\circ(\\alpha\\otimes\\alpha)=\\mu_S\\circ\\tau_{S,S}\\circ(\\alpha\\otimes\\alpha)=\\mu_S\\circ(\\alpha\\otimes\\alpha)\\circ\\tau_{FR,FR}=\\alpha\\circ\\mu_{FR}\\circ\\tau_{FR,FR}$, using commutativity of $S$ and naturality of the symmetry $\\tau$; cancel the isomorphism $\\alpha$. The tensor product on the abelian sheaf categories is the symmetric monoidal, colimit-preserving tensor of [sk-def-sfb-sheaf-tensor]; these are the scalar-extension functors used in the given definition of $f^*$.",
+   "uses": [
+    "def-sfb-module-upper-star",
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-lower-adjunction.md",
+    "place": "Statement, the extension/restriction adjunction bullet and final concrete Hom correspondence"
+   }
+  },
+  {
+   "text": "For an $S$-module $N$ with action $\\gamma_N$, expand the actions using [def-sfb-modobj-transport] and [def-sfb-modobj-restriction]. The underlying object of $L(\\operatorname{Res}_{\\alpha}N)$ is $GN$, and its $R$-action is\n$$\nG\\gamma_N\\circ G(\\alpha\\otimes1_N)\\circ\\mu^G_{FR,N}\\circ(u\\otimes1_{GN})\n=G\\gamma_N\\circ\\mu^G_{S,N}\\circ(G\\alpha\\otimes1_{GN})\\circ(u\\otimes1_{GN})\n=G\\gamma_N\\circ\\mu^G_{S,N}\\circ((G\\alpha\\circ u)\\otimes1_{GN}).\n$$\nThe first equality is naturality of the lax monoidal structure map $\\mu^G$ in its first variable, and the second is functoriality of tensor. Substituting $G\\alpha\\circ u=\\eta_f$ from [sk-def-sfb-coefficient-morphisms] gives exactly the action in [def-sfb-module-lower-star]. On a module morphism $h$, both functors act as $Gh$. Thus the identity on $GN$ is an $R$-linear isomorphism, natural in $N$, giving $i\\colon L\\circ\\operatorname{Res}_{\\alpha}\\cong f_*$. This calculation also explicitly proves the transport/restriction compatibility and composition of restrictions used in the blueprint; neither is taken as an uncited theorem.",
+   "uses": [
+    "def-sfb-modobj-transport",
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-coefficient-morphisms",
+    "def-sfb-module-lower-star"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-lower-adjunction.proof.md",
+    "place": "Proof, displayed transport/restriction isomorphism and composition of restrictions"
+   }
+  },
+  {
+   "text": "For $M\\in\\operatorname{Mod}_R$ and $N\\in\\operatorname{Mod}_S$, define\n$$\n\\Phi_{M,N}(h)=i_N\\circ B_{M,\\operatorname{Res}_{\\alpha}N}(A_{M,N}(h)).\n$$\nThis is a bijection: its inverse sends $k\\colon M\\to f_*N$ to $A_{M,N}^{-1}(B_{M,\\operatorname{Res}_{\\alpha}N}^{-1}(i_N^{-1}\\circ k))$. Naturality in $M$ follows from naturality of $A$ and $B$ under precomposition; naturality in $N$ follows from their naturality under postcomposition together with $i_{N'}\\circ L(\\operatorname{Res}_{\\alpha}h)=f_*h\\circ i_N$. Hence these natural Hom-bijections define the required adjunction $f^*\\dashv f_*$. By construction its bijection is the composite of the extension/restriction and lifted monoidal-adjunction bijections, followed by the identity-underlying-sheaf isomorphism of step 3. It therefore is precisely the transported composite adjunction specified in the statement, and its two stages give the stated concrete correspondence of linear maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-lower-adjunction.proof.md",
+    "place": "Proof, opening sentence: a composite of adjunctions; Statement, final concrete description"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-transport",
-  "sk-def-sfb-coefficient-morphisms"
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "lem-sfb-finite-monoidal-adjunction",
+  "def-sfb-modobj-transport-adjunction",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-sfb-module-upper-star",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-sheaf-tensor",
+  "def-sfb-modobj-transport",
+  "def-sfb-modobj-restriction",
+  "def-sfb-module-lower-star"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-lower-adjunction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-lower-adjunction.proof.md",
+  "place": "Proof, expanded into the lifted Hom-bijection, extension/restriction bijection, action calculation, and natural composite"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "CategoryTheory.Adjunction.comp, comp_homEquiv and related formulas, Mathlib/CategoryTheory/Adjunction/Basic.lean; generic composition only.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary (pre)sheaves of modules or generic adjunction operations do not give this specified adjunction of internal module objects without an additional equivalence and compatibility proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction between inverse image and direct image of sheaves of modules over a sheaf of commutative rings",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction and PullbackConstruction.adjunction; Scheme.Modules.pullbackPushforwardAdjunction; TopCat.Sheaf.instIsLeftAdjointPullback.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary (pre)sheaves of modules or generic adjunction operations do not give this specified adjunction of internal module objects without an additional equivalence and compatibility proof"
+  },
+  {
+   "tool": "grep",
+   "query": "mapModAdjunction|extendRestrictAdjunction|upperStarLowerStarAdjunction|ofNatIsoRight",
+   "results": "CategoryTheory.Adjunction.homEquiv_ofNatIsoRight_apply and related formulas in Mathlib/CategoryTheory/Adjunction/Basic.lean:521-529; generic change of right adjoint only.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary (pre)sheaves of modules or generic adjunction operations do not give this specified adjunction of internal module objects without an additional equivalence and compatibility proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of module objects over a commutative condensed coefficient ring on the pro-etale site is left adjoint to pushforward, by composing monoidal transport and extension of scalars",
+   "results": "PresheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary (pre)sheaves of modules or generic adjunction operations do not give this specified adjunction of internal module objects without an additional equivalence and compatibility proof"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|mapModAdjunction|extendRestrictAdjunction|pullbackPushforwardAdjunction",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:60, pullbackPushforwardAdjunction; also presheaf adjunction and related results; no mapModAdjunction or extendRestrictAdjunction for internal module objects.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary (pre)sheaves of modules or generic adjunction operations do not give this specified adjunction of internal module objects without an additional equivalence and compatibility proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a monoidal adjunction F left adjoint to G and a monoid R, compose the induced module adjunction with extension restriction of scalars along a ring homomorphism F R to S",
+   "results": "ModuleCat.extendRestrictScalarsAdj; ModuleCat.restrictCoextendScalarsAdj and unit/counit/HomEquiv lemmas, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary (pre)sheaves of modules or generic adjunction operations do not give this specified adjunction of internal module objects without an additional equivalence and compatibility proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal adjunction induces an adjunction on modules over monoid objects, followed by base change of scalars",
+   "results": "Eight semantic hits, including CategoryTheory.Adjunction.mapMon, CategoryTheory.Mod_.scalarRestriction, ModuleCat.instIsLeftAdjointExtendScalars, and ordinary ModuleCat restriction/coextension adjunctions.",
+   "date": "2026-10-16",
+   "verdict": "no match: monoid adjunction and restriction constructions do not state this specified adjunction of internal module functors; the two categorical hits were also searched in the pinned Mathlib source and are absent there"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMon|scalarRestriction|mapModAdjunction",
+   "results": "0 hits in the pinned Mathlib CategoryTheory/Monoidal source for mapMon|scalarRestriction|mapModAdjunction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -62,5 +173,20 @@
   "AlgebraicGeometry.ProEtale.CondensedRing.upperStarLowerStarAdjunction"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-module-upper-lower-adjunction",
+  "worker": "stage1",
+  "summary": "Checked current blueprint and both read-only source checkouts. No exact slopmaster2 attachment and no exact Mathlib specialization. Reused the existing lifted monoidal adjunction and scalar-extension adjunction; expanded the right-adjoint identification into the lax-structure naturality calculation and composed the natural Hom-bijections explicitly. No new nodes or statement change.",
+  "blueprint": "Opening proof sentence realized by steps 1, 2, 4; transport/restriction and restriction composition by step 3; mate relation by steps 1 and 3; concrete correspondence by steps 2 and 4."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q20-56df78428",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q20-56df78428 (reviewer sub-agent of L); spot-checked: Read the required governance, DAG, delivery files, report, item, route, every cited statement, and cited blueprint sources. Verified all four proof steps, hypotheses, base-change morphism, coefficient category, action calculation, Hom-bijection composition, edge cases, duplicate searches, and route compliance. Wrote review.md. No Lean/build operations or project mutations performed."
+ }
 }
