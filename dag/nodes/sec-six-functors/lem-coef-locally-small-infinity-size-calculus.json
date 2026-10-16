@@ -30,41 +30,196 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a small quasicategory $G_0$ and a functor equivalence $e:G_0\\to\\mathcal G$, with inverse $t$ and coherent natural equivalences of the composites with the identities. These data exist by the given essential smallness, as defined in [def-coef-presentable-infinity-category]. Write $j:\\mathcal G\\hookrightarrow\\mathcal E$ for the full inclusion and $g_a=j e(a)$ for $a\\in(G_0)_0$. The set of these indices is small. For each $g\\in\\mathcal G$, the comparison $e t(g)\\simeq g$ gives an equivalence $g_{t(g)}\\simeq j(g)$ in $\\mathcal E$. If $\\mathcal G$ is empty, $G_0$ is empty too; no nonemptiness is being assumed.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.1.7, printed p.423: use a small model of the essentially small subcategory. Agent expansion; this precise general variant is not asserted verbatim in HTT."
+   }
+  },
+  {
+   "text": "There is a small set $T$ of simplicial sets containing an isomorphic representative of every $\\beta$-small simplicial set. Here is a coding argument, including $\\beta=\\omega$. Every $n$-simplex is a degeneracy of a nondegenerate simplex of some dimension $m\\le n$, by successively removing a degeneracy whenever one exists. For each fixed $n$ there are finitely many surjections $[n]\\twoheadrightarrow[m]$. Thus if the total number of nondegenerate simplices is less than $\\beta$, each degree has cardinal at most $\\beta$. Choose a small set $B$ of cardinal $\\beta$. Up to degreewise bijections, each degree is a subset of $B$, and each simplicial operator is a function between two such subsets. The countable family of degrees and operators can be coded by subsets and graphs in the fixed small set $\\mathbb N\\times\\mathbb N\\times B\\times B$, together with the degree subsets. The codes satisfying the simplicial identities and the nondegenerate-simplex bound form a subset of a small power set. Take these codes as $T$. The empty simplicial set is among them. For every $K\\in T$, the simplicial maps $K\\to G_0$ form a small set: they are the families of functions $K_n\\to(G_0)_n$ satisfying the simplicial equations. Consequently the pairs $(K,p)$ with $K\\in T$ and $p:K\\to G_0$ have a small index set $A$. This counts all coherence simplices, not only vertices and arrows.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.9, proof opening, printed p.426: expand the bounded-diagram counting argument. Agent expansion; this precise general variant is not asserted verbatim in HTT."
+   }
+  },
+  {
+   "text": "Every diagram $q:K\\to\\mathcal G$ with $K$ $\\beta$-small is represented by one of the pairs in $A$ up to isomorphism of its shape and coherent equivalence of its image in $\\mathcal E$. Indeed choose a simplicial isomorphism $a:K_0\\xrightarrow{\\sim}K$ with $K_0\\in T$ and put $p=t q a$. Whiskering the specified comparison $e t\\simeq\\mathrm{id}_{\\mathcal G}$ by $q a$, then by $j$, gives a transformation $j e p\\simeq j q a$. This is an equivalence in $\\operatorname{Fun}(K_0,\\mathcal E)$: its components are equivalences, so the vertex criterion in [lem-cbc-enhanced-functor-cone-calculus] applies. That same node ensures this functor simplicial set is a quasicategory for arbitrary simplicial $K_0$. Changing the shape by the actual isomorphism $a$ identifies the two functor categories and the two cocone categories degree by degree, including their constant-diagram maps and evaluations. Its inverse is restriction along $a^{-1}$, so it also identifies which cocones are initial.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.9, proof opening, printed p.426; Proposition 1.2.7.3 and the coherent cocone definitions supply the diagram comparison. Agent expansion; this precise general variant is not asserted verbatim in HTT."
+   }
+  },
+  {
+   "text": "Coherently equivalent diagrams have the same possible colimit apices, and all colimit apices of a fixed diagram are equivalent. To check the first assertion, let $\\alpha:p\\xrightarrow{\\sim}q$ be an equivalence in $D=\\operatorname{Fun}(K,\\mathcal E)$ and let $\\lambda:q\\to\\Delta_K x$ be colimiting. Compose to obtain $\\lambda\\alpha:p\\to\\Delta_Kx$ (choose an inner-triangle filler in $D$). For any $y\\in\\mathcal E$, the colimit test in the dual assertion of [lem-cbc-enhanced-functor-cone-calculus] gives an equivalence $\\operatorname{Map}_{\\mathcal E}(x,y)\\to\\operatorname{Map}_D(q,\\Delta_Ky)$. Precomposition with $\\alpha$ is an equivalence from this last space to $\\operatorname{Map}_D(p,\\Delta_Ky)$: precomposition with an inverse edge is its homotopy inverse, by associativity and units in [lem-coef-infinity-mapping-composition], applied to $D$. The composite is the map induced by $\\lambda\\alpha$, up to the composition homotopy. The same colimit test proves this cocone colimiting. Applying the argument to an inverse of $\\alpha$ proves the converse. For the second assertion, [lem-cbc-enhanced-functor-cone-calculus] says that the full subcategory of initial objects in the cocone category is a contractible Kan complex when nonempty. Hence any two colimiting cocones are equivalent there; the apex projection is a simplicial functor and preserves an equivalence together with its inverse-triangle witnesses. Their apices are therefore equivalent in $\\mathcal E$. These arguments do not assume any further colimits exist.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.9, proof opening, printed p.426; expand invariance and uniqueness of existing colimits using their mapping-space universal property. Agent expansion; this precise general variant is not asserted verbatim in HTT."
+   }
+  },
+  {
+   "text": "Let $A'\\subseteq A$ consist of exactly the pairs $(K,p)$ for which $j e p$ admits a colimit in $\\mathcal E$. This is a small set. For each such pair choose one existing colimiting cocone and call its apex $L_{K,p}$. This is a small-indexed family of objects in the larger universe; no choice is made for a diagram without a colimit. Steps 3 and 4 show that every apex in the first clause is equivalent to one of these $L_{K,p}$, and each chosen apex belongs to that clause. Thus its full replete subcategory is exactly the full subcategory on objects equivalent to this small-indexed family. Apply [lem-coef-infinity-small-full-subcategory] to the locally small $\\mathcal E$ and that family. This proves the bounded-colimit clause. If $A'$ is empty the cited node explicitly allows the empty family. When $\\mathcal G$ is empty, the empty diagram remains in $A$; it contributes precisely when $\\mathcal E$ has an initial object.",
+   "uses": [
+    "lem-coef-infinity-small-full-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.1.7, printed p.423, and the bounded-apex argument in Proposition 5.4.2.9, printed p.426. Agent expansion; this precise general variant is not asserted verbatim in HTT."
+   }
+  },
+  {
+   "text": "For the retract clause, [lem-coef-infinity-mapping-composition] supplies the ordinary category $h\\mathcal E$ with $\\operatorname{Hom}_{h\\mathcal E}(x,y)=\\pi_0\\operatorname{Map}_{\\mathcal E}(x,y)$, and says that invertible morphism classes are precisely equivalence edges. Its hom sets are small up to bijection: local smallness provides a small space equivalent to each mapping space, hence a small set of its components. The condition on $i,r$ in the statement is exactly $[r][i]=1_x$ in this category. If $g\\in\\mathcal G$ and $g\\simeq g_a$ is one of the equivalences of step 1, represented in $h\\mathcal E$ by mutually inverse arrows $s:g\\to g_a$ and $u:g_a\\to g$, replace $[i]$ by $s[i]$ and $[r]$ by $[r]u$. Their composite is $[r]us[i]=1_x$. Thus every homotopy retract in question is a splitting of an idempotent on one of the small family $g_a$, in $h\\mathcal E$.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.2.4, printed pp.424-425, small retract-envelope assertion; the ordinary homotopy-category reduction is written out rather than assuming coherent idempotent completeness. Agent expansion; this precise general variant is not asserted verbatim in HTT."
+   }
+  },
+  {
+   "text": "For each $a$, choose a small set in bijection with $\\operatorname{End}_{h\\mathcal E}(g_a)$. The pairs $(a,e)$ with $e^2=e$ therefore form a small set $I$. Restrict to the subset $I'\\subseteq I$ for which there actually exist an object $x_e$ and arrows $i_e:x_e\\to g_a$, $r_e:g_a\\to x_e$ in $h\\mathcal E$ with $r_e i_e=1_{x_e}$ and $i_e r_e=e$, and choose one such triple for each member of $I'$. A retract $x\\xrightarrow{i}g_a\\xrightarrow{r}x$ with $ri=1_x$ yields $e=ir$ and $e^2=i(ri)r=ir$, so $(a,e)\\in I'$. Compare it with the chosen splitting: set $v=r_e i:x\\to x_e$ and $w=r i_e:x_e\\to x$. Then $wv=r(i_e r_e)i=r e i=r(ir)i=1_x$, and $vw=r_e(ir)i_e=r_e e i_e=r_e(i_e r_e)i_e=1_{x_e}$. These are ordinary categorical calculations in the category supplied in step 6. Thus $x$ and $x_e$ are isomorphic in $h\\mathcal E$, and hence equivalent in $\\mathcal E$ by [lem-coef-infinity-mapping-composition]. Only idempotents with an existing splitting were selected; no claim that an arbitrary homotopy idempotent splits has entered.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 5.1.4 and Lemma 5.4.2.4, printed pp.424-425; explicit uniqueness-of-a-splitting calculation for the weaker homotopy-retract relation used here. Agent expansion; this precise general variant is not asserted verbatim in HTT."
+   }
+  },
+  {
+   "text": "Every chosen $x_e$ is a homotopy retract of its $g_a\\in\\mathcal G$: the arrows $i_e,r_e$ in $h\\mathcal E$ have edge representatives by [lem-coef-infinity-mapping-composition], and their equation means exactly the component equality required by the statement. The homotopy-retract property is invariant under equivalence of $x$: if $b:x'\\xrightarrow{\\sim}x_e$ in $h\\mathcal E$, use $i_e b:x'\\to g_a$ and $b^{-1}r_e:g_a\\to x'$; their composite is $b^{-1}(r_e i_e)b=1_{x'}$. Step 7 shows conversely that every object in the retract clause is equivalent to a chosen $x_e$. Its full subcategory is therefore exactly the full subcategory on the replete closure of the small family $(x_e)_{e\\in I'}$. Apply [lem-coef-infinity-small-full-subcategory] in the locally small $\\mathcal E$. The empty-family case includes $\\mathcal G=\\varnothing$. This proves the second clause without requiring an idempotent completion of $\\mathcal E$.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-small-full-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.1.7, printed p.423; complete the small-retract-envelope argument underlying Lemma 5.4.2.4. Agent expansion; this precise general variant is not asserted verbatim in HTT."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-small-full-subcategory"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "General size-calculus infrastructure below proof paragraph 2, through lem-coef-presentable-cardinal-enlargement; expanded from HTT Proposition 5.4.2.9 and the retract counting principle. HTT was read online, not downloaded; the present two-clause variant is an agent proof."
+ },
  "mathlib_searches": [
   {
+   "tool": "grep",
+   "query": "essentiallySmall.*(Retract|Colimits)|IsQuasicategory",
+   "results": "[grep] OK 0 hit(s); recorded hits: ; Mathlib subdirectory: AlgebraicTopology/Quasicategory",
+   "date": "2026-10-16",
+   "verdict": "no match: results are ordinary categories with Hom sets or simplicial-set colimits, not coherent bounded colimits and homotopy retracts in a locally small quasicategory. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean:32-50 and Retract.lean:89-157; these are related ordinary-category results, not a one-line specialization proving this item."
+  },
+  {
    "tool": "leansearch",
-   "query": "In a locally small infinity category a full subcategory with a small set of equivalence classes is essentially small and retract closures of essentially small subcategories are essentially small",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ObjectProperty.instEssentiallySmallRetractClosureOfLocallySmall\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Retract\", \"type\": \"[ObjectProperty.EssentiallySmall.{w} P] [LocallySmall.{w} C] : ObjectProperty.EssentiallySmall.{w} P.retractClosure\", \"doc\": \"If $\\\\mathcal{C}$ is a locally small category and $P$ is an essentially small object property on $\\\\mathcal{C}$, then the retract closure of $P$ (the property of being a retract of an object satisfying \"}\n  {\"name\": \"CategoryTheory.locallySmall_self\", \"module\": \"Mathlib.CategoryTheory.EssentiallySmall\", \"type\": \"(C : Type u) [Category.{v} C] : LocallySmall.{v} C\", \"doc\": \"A category that is locally small (i.e., its hom-sets are small types) and has a small class of objects is essentially small, meaning it is equivalent to a small category.\"}\n  {\"name\": \"CategoryTheory.essentiallySmall_fullSubcategory_mem\", \"module\": \"Mathlib.CategoryTheory.EssentiallySmall\", \"type\": \"(s : Set C) [Small.{w} s] [LocallySmall.{w} C] : EssentiallySmall.{w} (ObjectProperty.FullSubcategory (· ∈ s))\", \"doc\": \"If $\\\\mathcal{C}$ is a locally small category and $s$ is a small set of objects in $\\\\mathcal{C}$, then the full subcategory of $\\\\mathcal{C}$ consisting of the objects in $s$ is essentially small. This \"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instEssentiallySmallFullSubcategoryOfLocallySmallOfEssentiallySmall_1\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Small\", \"type\": \"(P : ObjectProperty C) [LocallySmall.{w} C] [ObjectProperty.EssentiallySmall.{w} P] :\\n  EssentiallySmall.{w} P.FullSubcategory\", \"doc\": \"If $\\\\mathcal{C}$ is a locally small category and $P$ is an essentially small object property on $\\\\mathcal{C}$, then the full subcategory of $\\\\mathcal{C}$ consisting of objects satisfying $P$ is itself\"}\n  {\"name\": \"CategoryTheory.EssentiallySmall.mk\", \"module\": \"Mathlib.CategoryTheory.EssentiallySmall\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C],\\n  (∃ S x, Nonempty (C ≌ S)) → CategoryTheory.EssentiallySmall.{w, v, u} C\", \"doc\": \"If there exists a small category $ S $ such that $ C $ is equivalent to $ S $, then $ C $ is essentially small.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instEssentiallySmallFullSubcategoryOfLocallySmallOfEssentiallySmall\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Small\", \"type\": \"(P : ObjectProperty C) [LocallySmall.{w} C] [ObjectProperty.EssentiallySmall.{w} P] :\\n  EssentiallySmall.{w} P.FullSubcategory\", \"doc\": \"For any category $\\\\mathcal{C}$ that is locally small and an object property $P$ that is essentially small, the full subcategory of $\\\\mathcal{C}$ consisting of objects satisfying $P$ is itself essentia\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.EssentiallySmall\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Small\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.ObjectProperty C → Prop\", \"doc\": \"For a category $\\\\mathcal{C}$ and an object property $P$ on $\\\\mathcal{C}$, the proposition that $P$ is essentially small, meaning it holds for all objects isomorphic to those in a small full subcategor\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.EssentiallySmall.mk\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Small\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.ObjectProperty C},\\n  (∃ Q, ∃ (_ : CategoryTheory.ObjectProperty.Small.{w, v, u} Q), P ≤ Q.isoClosure) →\\n    CategoryTheory.ObjectProperty.EssentiallySmall.{w, v, u} P\", \"doc\": \"For a category $\\\\mathcal{C}$ and an object property $P$, if there exists a small property $Q$ such that $P$ holds for all objects isomorphic to those satisfying $Q$, then $P$ is essentially small.\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: semantic searches found ordinary ObjectProperty retract and colimit-cardinal closure smallness instances (Retract.lean and ColimitsCardinalClosure.lean), and Loogle found the ordinary retract-closure instance. Read their Category C / Hom-set hypotheses; these do not give a small quasicategory equivalent to the coherent full subcategory, nor arbitrary simplicial indexing, by a one-line specialization. Quasicategory grep finds only stability of a morphism property under retracts in InnerFibration.lean:66."
+   "query": "Essential smallness of the closure under colimits of bounded diagrams and homotopy retracts in a locally small infinity category",
+   "results": "[leansearch] OK 8 hit(s); recorded hits: CategoryTheory.ObjectProperty.colimitsCardinalClosure, CategoryTheory.locallySmall_self, CategoryTheory.ObjectProperty.instEssentiallySmallColimitsClosureOfSmallOfLocallySmall, CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeColimitsCardinalClosureCategoryFamily, CategoryTheory.Limits.HasColimitsOfShape.of_essentiallySmall, CategoryTheory.ObjectProperty.isClosedUnderColimitsOfShape_colimitsCardinalClosure, CategoryTheory.locallySmall_of_essentiallySmall, CategoryTheory.ObjectProperty.instSmallStrictColimitsOfShapeOfSmallOfLocallySmall",
+   "date": "2026-10-16",
+   "verdict": "no match: results are ordinary categories with Hom sets or simplicial-set colimits, not coherent bounded colimits and homotopy retracts in a locally small quasicategory. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean:32-50 and Retract.lean:89-157; these are related ordinary-category results, not a one-line specialization proving this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.colimitsCardinalClosure, CategoryTheory.ObjectProperty.retractClosure",
+   "results": "[loogle] OK 0 hit(s); recorded hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: results are ordinary categories with Hom sets or simplicial-set colimits, not coherent bounded colimits and homotopy retracts in a locally small quasicategory. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean:32-50 and Retract.lean:89-157; these are related ordinary-category results, not a one-line specialization proving this item."
   },
   {
    "tool": "leanfinder",
-   "query": "The colimits of diagrams of bounded small simplicial size in an essentially small quasicategory form an essentially small collection",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.hasColimitsOfShape_of_essentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Limits/EssentiallySmall\", \"type\": \"∀ (J : Type u₂) [inst : CategoryTheory.Category.{v₂, u₂} J] (C : Type u₁) [inst_1 : CategoryTheory.Category.{v₁, u₁} C]\\n  [CategoryTheory.EssentiallySmall.{w₁, v₂, u₂} J] [CategoryTheory.Limits.HasColimitsOfSize.{w₁, w₁, v₁, u₁} C],\\n  CategoryTheory.Limits.HasColimitsOfShape J C\", \"doc\": \"If $\\\\mathcal{J}$ is an essentially small category and $\\\\mathcal{C}$ has colimits of a certain size, then $\\\\mathcal{C}$ has all colimits of shape $\\\\mathcal{J}$.\"}\n  {\"name\": \"SSet.hasColimits\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"CategoryTheory.Limits.HasColimits SSet\", \"doc\": \"The category of simplicial sets admits all colimits, meaning that every diagram in this category has a colimit object.\"}\n  {\"name\": \"CategoryTheory.Limits.HasColimitsOfShape.of_essentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Limits/HasLimits\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimitsOfSize.{v₁, u₁, v, u} C]\\n  (J : Type u₂) [inst_2 : CategoryTheory.Category.{v₂, u₂} J] [CategoryTheory.EssentiallySmall.{u₁, v₂, u₂} J]\\n  [CategoryTheory.LocallySmall.{v₁, v₂, u₂} J], CategoryTheory.Limits.Has\", \"doc\": \"If $\\\\mathcal{J}$ is an essentially small and locally small category, then the category $\\\\mathcal{C}$ admits all colimits of diagrams $F: \\\\mathcal{J} \\\\to \\\\mathcal{C}$.\"}\n  {\"name\": \"SSet.Truncated.hasColimits\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"∀ {n : ℕ}, CategoryTheory.Limits.HasColimits (SSet.Truncated n)\", \"doc\": \"For any natural number $ n $, the category of $ n $-truncated simplicial sets has all colimits.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instEssentiallySmallColimitsClosureOfSmallOfLocallySmall\", \"module\": \"Mathlib/CategoryTheory/ObjectProperty/ColimitsClosure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (P : CategoryTheory.ObjectProperty C) {α : Type t}\\n  (J : α → Type u') [inst_1 : (a : α) → CategoryTheory.Category.{v', u'} (J a)]\\n  [CategoryTheory.ObjectProperty.EssentiallySmall.{w, v, u} P] [CategoryTheory.LocallySmall.{w, v, u} C]\\n  [Smal\", \"doc\": \"Given an object property $ P $ on a locally small category $ \\\\mathcal{C} $, if $ P $ is essentially small, the category $ \\\\mathcal{C} $ has a small class of objects $ \\\\alpha $, and each hom-category $\"}\n  {\"name\": \"CategoryTheory.finallySmall_of_essentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Limits/FinallySmall\", \"type\": \"∀ (J : Type u) [inst : CategoryTheory.Category.{v, u} J] [CategoryTheory.EssentiallySmall.{w, v, u} J],\\n  CategoryTheory.FinallySmall J\", \"doc\": \"If a category $ J $ is essentially small (i.e., equivalent to a small category), then it satisfies the condition of being finally small (i.e., equivalent to a small category up to finality).\"}\n  {\"name\": \"SSet.Truncated.largeCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"(n : ℕ) → CategoryTheory.LargeCategory (SSet.Truncated n)\", \"doc\": \"For any natural number $ n $, the $ n $-truncated simplicial sets form a category. This category consists of functors from the opposite of the truncated simplex category $ \\\\Delta_{\\\\leq n}^{\\\\text{op}} \"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instEssentiallySmallColimitsCardinalClosureOfLocallySmall\", \"module\": \"Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (P : CategoryTheory.ObjectProperty C) (κ : Cardinal.{w})\\n  [CategoryTheory.ObjectProperty.EssentiallySmall.{w, v, u} P] [CategoryTheory.LocallySmall.{w, v, u} C],\\n  CategoryTheory.ObjectProperty.EssentiallySmall.{w, v, u} (P.colimitsCardinalCl\", \"doc\": \"Given an essentially small object property $P$ on a locally small category $\\\\mathcal{C}$ and a cardinal $\\\\kappa$, the colimit closure of $P$ under diagrams indexed by small categories with arrow categ\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: semantic searches found ordinary ObjectProperty retract and colimit-cardinal closure smallness instances (Retract.lean and ColimitsCardinalClosure.lean), and Loogle found the ordinary retract-closure instance. Read their Category C / Hom-set hypotheses; these do not give a small quasicategory equivalent to the coherent full subcategory, nor arbitrary simplicial indexing, by a one-line specialization. Quasicategory grep finds only stability of a morphism property under retracts in InnerFibration.lean:66."
+   "query": "In a locally small quasicategory the colimits of bounded small simplicial diagrams in an essentially small full subcategory and its homotopy retracts form essentially small full subcategories",
+   "results": "[leanfinder] OK 8 hit(s); recorded hits: SSet.Truncated.hasColimits, CategoryTheory.SimplicialObject.Truncated.instHasColimitsOfShape, SSet.Truncated.HomotopyCategory.multiplicativeClosure_morphismPropertyHomMk, SSet.Truncated.instCategoryHomotopyCategory₂, CategoryTheory.SimplicialObject.Truncated.instHasColimits, CategoryTheory.ObjectProperty.instEssentiallySmallFullSubcategoryOfLocallySmallOfEssentiallySmall, CategoryTheory.ObjectProperty.instEssentiallySmallFullSubcategoryOfLocallySmallOfEssentiallySmall_1, CategoryTheory.Limits.HasColimitsOfShape.of_essentiallySmall",
+   "date": "2026-10-16",
+   "verdict": "no match: results are ordinary categories with Hom sets or simplicial-set colimits, not coherent bounded colimits and homotopy retracts in a locally small quasicategory. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean:32-50 and Retract.lean:89-157; these are related ordinary-category results, not a one-line specialization proving this item."
+  },
+  {
+   "tool": "grep",
+   "query": "instEssentiallySmall.*(Retract|Colimits)",
+   "results": "[grep] OK 0 hit(s); recorded hits: ; Mathlib subdirectory: CategoryTheory/ObjectProperty",
+   "date": "2026-10-16",
+   "verdict": "no match: results are ordinary categories with Hom sets or simplicial-set colimits, not coherent bounded colimits and homotopy retracts in a locally small quasicategory. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean:32-50 and Retract.lean:89-157; these are related ordinary-category results, not a one-line specialization proving this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An essentially small subcategory of a locally small infinity category has only a small set of homotopy retracts and only a small set of colimits indexed by simplicial sets of bounded cardinality",
+   "results": "[leanfinder] OK 8 hit(s); recorded hits: CategoryTheory.SmallObject.locallySmall, CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.locallySmall, CategoryTheory.Equivalence.instPrecoherentSmallModel, CategoryTheory.Limits.HasColimitsOfShape.of_essentiallySmall, CategoryTheory.ObjectProperty.instEssentiallySmallColimitsCardinalClosureOfLocallySmall, CategoryTheory.instLocallySmallSmallModel, CategoryTheory.finallySmall_of_essentiallySmall, SSet.Finite.instIsFinitelyPresentable",
+   "date": "2026-10-16",
+   "verdict": "no match: results are ordinary categories with Hom sets or simplicial-set colimits, not coherent bounded colimits and homotopy retracts in a locally small quasicategory. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean:32-50 and Retract.lean:89-157; these are related ordinary-category results, not a one-line specialization proving this item."
   },
   {
    "tool": "loogle",
    "query": "\"EssentiallySmall\", \"retract\"",
-   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.ObjectProperty.instEssentiallySmallRetractClosureOfLocallySmall\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Retract\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (P : CategoryTheory.ObjectProperty C) [CategoryTheory.ObjectProperty.EssentiallySmall.{w, v, u} P] [CategoryTheory.LocallySmall.{w, v, u} C] : CategoryTheory.ObjectProperty.EssentiallySmall.{w, v, u} P.retractClosure\", \"doc\": \"\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: semantic searches found ordinary ObjectProperty retract and colimit-cardinal closure smallness instances (Retract.lean and ColimitsCardinalClosure.lean), and Loogle found the ordinary retract-closure instance. Read their Category C / Hom-set hypotheses; these do not give a small quasicategory equivalent to the coherent full subcategory, nor arbitrary simplicial indexing, by a one-line specialization. Quasicategory grep finds only stability of a morphism property under retracts in InnerFibration.lean:66."
+   "results": "[loogle] OK 1 hit(s); recorded hits: CategoryTheory.ObjectProperty.instEssentiallySmallRetractClosureOfLocallySmall",
+   "date": "2026-10-16",
+   "verdict": "no match: results are ordinary categories with Hom sets or simplicial-set colimits, not coherent bounded colimits and homotopy retracts in a locally small quasicategory. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean:32-50 and Retract.lean:89-157; these are related ordinary-category results, not a one-line specialization proving this item."
   },
   {
    "tool": "grep",
-   "query": "[Ee]ssentially[Ss]mall|[Ii]dempotent|[Rr]etract",
-   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"line\": \"66\", \"text\": \"  IsStableUnderRetracts\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: semantic searches found ordinary ObjectProperty retract and colimit-cardinal closure smallness instances (Retract.lean and ColimitsCardinalClosure.lean), and Loogle found the ordinary retract-closure instance. Read their Category C / Hom-set hypotheses; these do not give a small quasicategory equivalent to the coherent full subcategory, nor arbitrary simplicial indexing, by a one-line specialization. Quasicategory grep finds only stability of a morphism property under retracts in InnerFibration.lean:66."
+   "query": "retractClosure|colimitsCardinalClosure",
+   "results": "[grep] OK 11 hit(s); recorded hits: Mathlib/CategoryTheory/ObjectProperty/ClosureShift.lean, Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean, Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean, Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean, Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean, Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean, Mathlib/CategoryTheory/ObjectProperty/Retract.lean, Mathlib/CategoryTheory/ObjectProperty/Retract.lean; Mathlib subdirectory: CategoryTheory/ObjectProperty",
+   "date": "2026-10-16",
+   "verdict": "no match: results are ordinary categories with Hom sets or simplicial-set colimits, not coherent bounded colimits and homotopy retracts in a locally small quasicategory. Read Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean:32-50 and Retract.lean:89-157; these are related ordinary-category results, not a one-line specialization proving this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local smallness and a small family of vertices imply essential smallness of the full quasicategory of their retracts and colimit objects",
+   "results": "[leanfinder] OK 8 hit(s); recorded hits: CategoryTheory.essentiallySmall_of_small_of_locallySmall, CategoryTheory.locallySmall_of_essentiallySmall, CategoryTheory.essentiallySmall_iff, CategoryTheory.finallySmall_of_essentiallySmall, instEssentiallySmallLightDiagram, CategoryTheory.initiallySmall_of_essentiallySmall, CategoryTheory.instLocallySmallSmallModel, CategoryTheory.ObjectProperty.instEssentiallySmallTopOfEssentiallySmall",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search. Hits concern ordinary categories with Hom sets; they do not state essential smallness of a full quasicategory for arbitrary coherent simplicial diagrams. Read ColimitsCardinalClosure.lean:32-50 and Retract.lean:89-157."
+  },
+  {
+   "tool": "grep",
+   "query": "EssentiallySmall|SmallModel",
+   "results": "[grep] OK 0 hit(s); recorded hits: ; Mathlib subdirectory: AlgebraicTopology/Quasicategory",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search. Hits concern ordinary categories with Hom sets; they do not state essential smallness of a full quasicategory for arbitrary coherent simplicial diagrams. Read ColimitsCardinalClosure.lean:32-50 and Retract.lean:89-157."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EssentiallySmall\", \"colimits\"",
+   "results": "[loogle] OK 8 hit(s); recorded hits: CategoryTheory.Limits.HasColimitsOfShape.of_essentiallySmall, CategoryTheory.Limits.hasColimitsOfShape_of_essentiallySmall, CategoryTheory.ObjectProperty.instEssentiallySmallColimitsClosureOfSmallOfLocallySmall, CategoryTheory.hasColimitsEssentiallySmallSite, CategoryTheory.Functor.preservesColimitsOfShape_of_isCardinalAccessible_of_essentiallySmall, CategoryTheory.preservesColimitsOfShape_of_isCardinalPresentable_of_essentiallySmall, CategoryTheory.ObjectProperty.instEssentiallySmallColimitsCardinalClosureOfLocallySmall, CategoryTheory.instIsStableUnderColimitsOfShapeIsCardinalPureOfEssentiallySmallOfIsCardinalFiltered",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search. Hits concern ordinary categories with Hom sets; they do not state essential smallness of a full quasicategory for arbitrary coherent simplicial diagrams. Read ColimitsCardinalClosure.lean:32-50 and Retract.lean:89-157."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presentable-cardinal-enlargement",
@@ -72,5 +227,20 @@
   "group": "Q16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-locally-small-infinity-size-calculus",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Both clauses proved by explicit small-family counting: choose a small model of G, code bounded simplicial shapes and all coherent diagrams, compare existing colimits via their universal mapping-space criterion, then use the existing small-full-subcategory result. For homotopy retracts pass to hE, count existing splittings of its small sets of idempotents and write the two inverse equations. Empty shapes, empty G, beta=omega and nonsplitting idempotents are included. No new nodes and no attachment. Mathlib searches confirm ordinary-category analogues only.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: general presentability/accessibility infrastructure reached via the recorded ancestry; realizes bounded-colimit and retract-envelope counting used in lem-coef-presentable-cardinal-enlargement. No unit route or coefficient category changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NV-f4c657f0e",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-f4c657f0e (reviewer sub-agent of L); spot-checked: Read the item in full: 8 steps, the full statements of all 5 cited nodes, the unit sk-prop-sf-biduality-general, the citer lem-coef-presentable-cardinal-enlargement (it uses both clauses under exactly the item's hypotheses) and the blueprint ancestor prop-coef-integral-exceptional-adjoint. The statement is true and unchanged; it covers bounded-colimit apices and homotopy retracts of an essentially small G in a locally small E. There is no coefficient category or base-change morphism, so no target-node comparison applies. Steps checked: (1) the small model e:G0->G, empty G included; (2) shape coding: Eilenberg-Zilber with finitely many surjections per degree gives |K_n|<=beta, codes lie in a small power set, beta=omega included; (3) p=tqa and the whiskered comparison is an equivalence by the component criterion; (4) colimit invariance through the dual mapping-space test plus associativity and units applied in Fun(K,E), and apex uniqueness from contractible initial objects; directions checked; (5) A' covers exactly the existing colimits, both inclusions hold, then the small-full-subcategory lemma applies with the empty family allowed; (6) hE hom sets are small, transfer by r u s i = r i; (7) uniqueness of splittings, wv=r e i=1 and vw=r_e e i_e=1, iso in hE gives an equivalence; (8) invariance under b: x'->x_e, b^-1(r_e i_e)b=1. Edge cases: E empty, G empty with E terminal, E discrete, beta=omega, a non-split idempotent; all hold. No new nodes. DAG and blueprint searches found no duplicate, so same_as [] is correct. Mathlib searches record all three kinds, with only ordinary-category analogues. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) for arbitrary-shape functor and cocone calculus, as already accepted in three nodes of this unit. HTT is not archived and its cited pages were not checked here; the proof is a complete agent proof, correctly labelled by=agent, with WANTED recorded. No fixes."
+ }
 }

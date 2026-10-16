@@ -29,9 +29,58 @@
  "stmt_deps": [
   "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any small set $X$ with $\\mu=|X|<\\beta$, let $R_\\xi$ be the family of ranges of all functions $\\xi\\to X$, for each ordinal $\\xi<\\alpha$ (viewing $\\alpha$ as its initial ordinal). The range map is surjective onto $R_\\xi$, so $|R_\\xi|\\leq\\mu^{|\\xi|}<\\beta$ by the power hypothesis, since $|\\xi|<\\alpha$. Moreover $\\mathcal P_{<\\alpha}(X)=\\bigcup_{\\xi<\\alpha}R_\\xi$: each range has size at most $|\\xi|$, and every subset of size $\\nu<\\alpha$ has a bijective enumeration by the initial ordinal of size $\\nu$. The empty subset is the range of the unique function from $0$, including when $X=\\varnothing$. There are $\\alpha<\\beta$ indices. The regular-cardinal union convention explicitly given in [lem-coef-small-directed-superset], applied to $\\beta$, therefore gives $|\\mathcal P_{<\\alpha}(X)|<\\beta$. Taking $E_X=\\mathcal P_{<\\alpha}(X)$ gives a cofinal family of this size: each member is contained in itself.",
+   "uses": [
+    "lem-coef-small-directed-superset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.2.8, successor-stage size bound, printed pp. 425-426; explicit range-counting argument supplying the cofinal-family hypothesis of the existing Mathlib leaf"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-small-directed-superset] with $(\\sigma,\\tau,I,S)=(\\alpha,\\beta,A,T)$. The cardinals are infinite regular with $\\alpha<\\beta$, Step 1 supplies its cofinal-family hypothesis for every small set of size less than $\\beta$, and the assumed upper-bound condition on $A$ is exactly its poset $\\alpha$-filteredness, including the empty subset. It produces $T\\subseteq B\\subseteq A$ with $|B|<\\beta$ and with every subset of $B$ of size less than $\\alpha$ bounded above in $B$. This is the asserted enlargement, in the inherited order.",
+   "uses": [
+    "lem-coef-small-directed-superset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean",
+    "place": "Cardinal.SharplyLT.exists_isCardinalFiltered_set_of_exists_cofinal, lines 241-261; the existing leaf packages the transfinite closure construction of HTT Lemma 5.4.2.8"
+   }
+  },
+  {
+   "text": "The collection $\\mathscr B$ is the subset of $\\mathcal P(A)$ cut out by the stated size and upper-bound conditions. It is small because $A$ and its power set belong to the fixed universe, and inclusion restricts to a partial order on it. For every $a\\in A$, the singleton $\\{a\\}$ has size $1<\\beta$; Step 2 applied to it gives a member containing $a$. Thus $\\bigcup_{B\\in\\mathscr B}B=A$. Step 2 applied to $T=\\varnothing$ also gives a member of $\\mathscr B$; it is nonempty even when proving the empty-family upper-bound clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.2.8, covering and family of all subsets; direct set-theoretic verification"
+   }
+  },
+  {
+   "text": "Let $\\mathscr F\\subseteq\\mathscr B$ have $|\\mathscr F|<\\beta$, and set $T_{\\mathscr F}=\\bigcup_{C\\in\\mathscr F}C\\subseteq A$. Every $C\\in\\mathscr F$ has size less than $\\beta$, so the regular-cardinal union convention of [lem-coef-small-directed-superset] gives $|T_{\\mathscr F}|<\\beta$. Apply Step 2 to obtain $B\\in\\mathscr B$ containing $T_{\\mathscr F}$. For every $C\\in\\mathscr F$, $C\\subseteq T_{\\mathscr F}\\subseteq B$, so $B$ is an upper bound in the inclusion order. If $\\mathscr F=\\varnothing$, its union is empty and the same application of Step 2 supplies an upper bound. An indexed family with fewer than $\\beta$ terms has fewer than $\\beta$ distinct members, so this proves the assertion for families as well.",
+   "uses": [
+    "lem-coef-small-directed-superset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.2.8, final filtered-family assertion and the reduction to enlargements; regularity and explicit union argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-small-directed-superset"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma 5.4.2.8 and Proposition 5.4.2.9, printed pp. 425-426; explicit cardinal counting and family argument, using the existing Mathlib cofinal-family closure lemma. HTT was read online but is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -67,10 +116,52 @@
    "results": "[grep] OK 0 hit(s); searched CategoryTheory/Presentable/SharplyLT/Lemmas.lean, which is absent in this pinned source.",
    "date": "2026-10-17",
    "verdict": "no pinned match: the online Loogle result from that path is unavailable in the pinned checkout."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If alpha is less than beta regular and mu to the nu is less than beta for mu less than beta and nu less than alpha, a small subset of an alpha directed poset has an alpha directed beta small enlargement",
+   "results": "{\"t\": \"2026-10-16T21:22:47Z\", \"tool\": \"leanfinder\", \"query\": \"If alpha is less than beta regular and mu to the nu is less than beta for mu less than beta and nu less than alpha, a small subset of an alpha directed poset has an alpha directed beta small enlargement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCardinalLT.exists_regular_cardinal_forall\", \"CategoryTheory.isCardinalFiltered_preorder\", \"HasCardinalLT.Set.instIsCardinalFiltered\", \"HasCardinalLT.Set.instIsFilteredOfFactIsRegular\", \"HasCardinalLT.exists_regular_cardinal\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.hP\", \"CategoryTheory.InitiallySmall.exists_small_weakly_initial_set\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.iSup\"], \"digest\": \"f5c40a17cac118e4\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole item: the pinned cofinal-family closure theorem at Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean:241-261 is already the existing Mathlib leaf lem-coef-small-directed-superset. It requires the all-small-sets cofinal-family condition proved by the explicit range count in Step 1; it does not include the covering-poset family assertion. Cardinal.SharplyLT at lines 49-53 is defined by categorical accessibility, so it cannot be substituted for the exponent hypothesis without a theorem. Reuse the existing leaf rather than creating a duplicate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small cardinal bounded directed subsets of a filtered poset under cardinal exponent bounds",
+   "results": "{\"t\": \"2026-10-16T21:22:47Z\", \"tool\": \"leansearch\", \"query\": \"Small cardinal bounded directed subsets of a filtered poset under cardinal exponent bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCardinalLT.Set.isFiltered_of_aleph0_le\", \"Cardinal.mk_bounded_subset_le\", \"Cardinal.bddAbove_of_small\", \"CategoryTheory.isCardinalFiltered_preorder\", \"CategoryTheory.IsCardinalFiltered.of_le\", \"Filter.IsBoundedUnder.le_of_finite\", \"Cardinal.bddAbove_iff_small\", \"HasCardinalLT.Set.instIsCardinalFiltered\"], \"digest\": \"45f07e2259a4c606\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole item: the pinned cofinal-family closure theorem at Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean:241-261 is already the existing Mathlib leaf lem-coef-small-directed-superset. It requires the all-small-sets cofinal-family condition proved by the explicit range count in Step 1; it does not include the covering-poset family assertion. Cardinal.SharplyLT at lines 49-53 is defined by categorical accessibility, so it cannot be substituted for the exponent hypothesis without a theorem. Reuse the existing leaf rather than creating a duplicate."
+  },
+  {
+   "tool": "loogle",
+   "query": "Cardinal.SharplyLT",
+   "results": "{\"t\": \"2026-10-16T21:22:47Z\", \"tool\": \"loogle\", \"query\": \"Cardinal.SharplyLT\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Cardinal.SharplyLT\", \"Cardinal.SharplyLT.le\", \"Cardinal.SharplyLT.lt\", \"Cardinal.SharplyLT.isCardinalAccessible_cardinalDirectedPoset\", \"Cardinal.SharplyLT.isCardinalAccessibleCategory\", \"Cardinal.SharplyLT.trans\", \"Cardinal.SharplyLT.isCardinalFilteredGenerator\", \"Cardinal.SharplyLT.mk\"], \"digest\": \"31249936fa1338b7\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole item: the pinned cofinal-family closure theorem at Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean:241-261 is already the existing Mathlib leaf lem-coef-small-directed-superset. It requires the all-small-sets cofinal-family condition proved by the explicit range count in Step 1; it does not include the covering-poset family assertion. Cardinal.SharplyLT at lines 49-53 is defined by categorical accessibility, so it cannot be substituted for the exponent hypothesis without a theorem. Reuse the existing leaf rather than creating a duplicate."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isCardinalFiltered_set|hasCardinalLT_iUnion|hasCardinalLT.*(powerset|setCardinal)|mk_setCardinalLT",
+   "results": "{\"t\": \"2026-10-16T21:23:14Z\", \"tool\": \"grep\", \"query\": \"exists_isCardinalFiltered_set|hasCardinalLT_iUnion|hasCardinalLT.*(powerset|setCardinal)|mk_setCardinalLT\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean\", \"Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean\", \"Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\"], \"digest\": \"269a9503ec5834c6\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole item: the pinned cofinal-family closure theorem at Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean:241-261 is already the existing Mathlib leaf lem-coef-small-directed-superset. It requires the all-small-sets cofinal-family condition proved by the explicit range count in Step 1; it does not include the covering-poset family assertion. Cardinal.SharplyLT at lines 49-53 is defined by categorical accessibility, so it cannot be substituted for the exponent hypothesis without a theorem. Reuse the existing leaf rather than creating a duplicate."
+  },
+  {
+   "tool": "grep",
+   "query": "public lemma exists_isCardinalFiltered_set_of_exists_cofinal|public structure SharplyLT",
+   "results": "{\"t\": \"2026-10-16T21:26:10Z\", \"tool\": \"grep\", \"query\": \"public lemma exists_isCardinalFiltered_set_of_exists_cofinal|public structure SharplyLT\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\"], \"digest\": \"aefb6acca549dabb\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole item: the pinned cofinal-family closure theorem at Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean:241-261 is already the existing Mathlib leaf lem-coef-small-directed-superset. It requires the all-small-sets cofinal-family condition proved by the explicit range count in Step 1; it does not include the covering-poset family assertion. Cardinal.SharplyLT at lines 49-53 is defined by categorical accessibility, so it cannot be substituted for the exponent hypothesis without a theorem. Reuse the existing leaf rather than creating a duplicate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_isCardinalFiltered_set_of_exists_cofinal\"",
+   "results": "{\"t\": \"2026-10-16T21:26:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"exists_isCardinalFiltered_set_of_exists_cofinal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Cardinal.SharplyLT.exists_isCardinalFiltered_set_of_exists_cofinal\"], \"digest\": \"5809d5f9491dc4c6\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match for the whole item: the pinned cofinal-family closure theorem at Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean:241-261 is already the existing Mathlib leaf lem-coef-small-directed-superset. It requires the all-small-sets cofinal-family condition proved by the explicit range count in Step 1; it does not include the covering-poset family assertion. Cardinal.SharplyLT at lines 49-53 is defined by categorical accessibility, so it cannot be substituted for the exponent hypothesis without a theorem. Reuse the existing leaf rather than creating a duplicate."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presentable-cardinal-enlargement",
@@ -78,5 +169,20 @@
   "group": "Q16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-sharp-filtered-poset-subsets",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Counted all lower-cardinal-small subsets by ranges of functions, then reused the existing Mathlib leaf lem-coef-small-directed-superset for the non-elementary transfinite closure. Proved smallness, covering, and upper bounds for all beta-small families, explicitly including the empty subset and empty family. No new nodes or project Lean attachments.",
+  "blueprint": "Realizes the accessible-localization infrastructure of proof paragraph 2 of prop-coef-integral-exceptional-adjoint, through the inherited ancestor chain: the HTT Proposition 5.4.2.9 decomposition used in Step 5 of lem-coef-presentable-cardinal-enlargement. Steps 1-2 supply the small filtered enlargements of Lemma 5.4.2.8; Steps 3-4 prove the covering and filteredness of their whole indexing poset. No unit or chapter route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NX-c27ffa7aa",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-c27ffa7aa (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its one cited node and the Mathlib source behind it. The statement is unchanged; I found no new nodes, no fixes needed and no tool uses to accept. Statement: α<β are infinite regular cardinals with μ^ν<β for μ<β, ν<α, and A is an α-filtered poset (every subset of size <α, the empty one included, has an upper bound). This is HTT Lemma 5.4.2.8 and Adámek–Rosický Thm 2.11 (iii)→(iv). HTT is not archived here; I checked the numbering against the parent and sibling nodes, which agree. Both citers apply it with exactly these hypotheses: lem-coef-presentable-cardinal-enlargement steps 5-6 and lem-coef-accessible-functor-presentability-ranks step 4. Step 1: P_{<α}(X) is the union over ξ<α of the sets R_ξ of ranges of maps ξ→X. Each R_ξ has size at most μ^{|ξ|}<β, there are α<β indices, and β is regular, so the union has size <β. This step is elementary. I checked X empty (0^0=1) and finite μ with infinite ν. Step 2: the substitution (σ,τ,I,S)=(α,β,A,T) into lem-coef-small-directed-superset is exact. I checked it against Cardinal.SharplyLT.exists_isCardinalFiltered_set_of_exists_cofinal at Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean:241-261: its hypothesis h is the cofinal-family condition, it needs IsCardinalFiltered on a PartialOrder, and it concludes A⊆B, B κ₁-filtered and |B|<κ₂. It does not need SharplyLT, and the step uses only the node's statement. Step 3: 𝓑 is small; it covers A by applying Step 2 to singletons, and is nonempty by applying it to T=∅. Step 4: by regularity the union of fewer than β members has size <β, and Step 2 bounds it; the empty family and repeated members are handled. Duplicates: I searched with rg for filtered subsets, cofinal family, sharply, 5.4.2.8 and Adámek. The sharp-accessibility-enlargement and poset-reindex nodes state different things, and the item reuses the leaf instead of restating it. Route: the only dependency is a Mathlib leaf in the same unit, and nothing cites SGA. One report error: 'Second reading by NX' says created.item was changed to the item, but the file still has the parent, lem-coef-presentable-cardinal-enlargement. The file is correct for an existing node, so I made no repair."
+ }
 }
