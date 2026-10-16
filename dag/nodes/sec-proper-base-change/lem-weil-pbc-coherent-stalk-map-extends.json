@@ -1,183 +1,179 @@
 {
- "id": "lem-weil-pbc-coherent-stalk-map-extends",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
-   "via": [
-    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
-    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
-    "lem-weil-pbc-finite-surjective-affine-target",
-    "lem-weil-pbc-surjective-universally-closed-affine-target",
-    "lem-weil-pbc-thickening-affine-scheme",
-    "lem-weil-pbc-thickening-integral",
-    "lem-weil-pbc-thickening-finite-cartesian",
-    "lem-weil-pbc-finite-etale-lifting-complete",
-    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-   ]
+  "id": "lem-weil-pbc-coherent-stalk-map-extends",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-finite-etale-lifting",
+      "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+      "via": [
+        "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+        "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+        "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+        "lem-weil-pbc-finite-surjective-affine-target",
+        "lem-weil-pbc-surjective-universally-closed-affine-target",
+        "lem-weil-pbc-thickening-affine-scheme",
+        "lem-weil-pbc-thickening-integral",
+        "lem-weil-pbc-thickening-finite-cartesian",
+        "lem-weil-pbc-finite-etale-lifting-complete",
+        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "A map of stalks of coherent modules comes from a map on a neighbourhood",
- "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], $\\mathcal F,\\mathcal G$ coherent $\\mathcal O_X$-modules [pqf-def-coherent], $x\\in X$, and $\\psi:\\mathcal G_x\\to\\mathcal F_x$ a homomorphism of $\\mathcal O_{X,x}$-modules (stalks as in [def-weil-pbc-module-stalk]). Then there are an open neighbourhood $U$ of $x$ and a homomorphism of $\\mathcal O_U$-modules $\\varphi:\\mathcal G|_U\\to\\mathcal F|_U$ [def-weil-sheaf-of-modules-category] (restrictions $\\mathcal F|_U(V)=\\mathcal F(V)$ for $V\\subseteq U$ open) whose stalk map at $x$ is $\\varphi_x=\\psi$.",
- "source": {
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 01Y4 (label lemma-map-stalks-local-map); its proof: Lemma 01XZ (lemma-coherent-Noetherian) and Modules, Lemma stalk-internal-hom"
- },
- "stmt_deps": [
-  "pqf-def-locnoeth",
-  "pqf-def-coherent",
-  "def-weil-pbc-module-stalk",
-  "def-weil-sheaf-of-modules-category"
- ],
- "proof": [
-  {
-   "text": "The coherent source G is finite type directly by [pqf-def-coherent]. Choose finite local generating sections using IsFiniteType.exists_localGeneratorsData. Reindex each finite generator family by ULift (Fin n), so the coherence kernel clause applies. Invoke Scheme.Modules.isFinitePresentation_of_generators_kernel, the existing proved private helper of the module for [pqf-lem-coherent-ft-locnoeth], made available by a proof-only import all. It constructs finite local cokernel presentations from the finite generators and finite-type kernels [def-weil-pbc-module-finite-type-presentation]. Assemble these presentations using IsFinitePresentation.of_coversTop. This proves G.IsFinitePresentation without using local Noetherianity.",
-   "uses": [
+  "kind": "statement",
+  "title": "A map of stalks of coherent modules comes from a map on a neighbourhood",
+  "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], $\\mathcal F,\\mathcal G$ coherent $\\mathcal O_X$-modules [pqf-def-coherent], $x\\in X$, and $\\psi:\\mathcal G_x\\to\\mathcal F_x$ a homomorphism of $\\mathcal O_{X,x}$-modules (stalks as in [def-weil-pbc-module-stalk]). Then there are an open neighbourhood $U$ of $x$ and a homomorphism of $\\mathcal O_U$-modules $\\varphi:\\mathcal G|_U\\to\\mathcal F|_U$ [def-weil-sheaf-of-modules-category] (restrictions $\\mathcal F|_U(V)=\\mathcal F(V)$ for $V\\subseteq U$ open) whose stalk map at $x$ is $\\varphi_x=\\psi$.",
+  "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01Y4 (label lemma-map-stalks-local-map); its proof: Lemma 01XZ (lemma-coherent-Noetherian) and Modules, Lemma stalk-internal-hom"
+  },
+  "stmt_deps": [
+    "pqf-def-locnoeth",
+    "pqf-def-coherent",
+    "def-weil-pbc-module-stalk",
+    "def-weil-sheaf-of-modules-category"
+  ],
+  "proof": [
+    {
+      "text": "The coherent source G is finite type directly by [pqf-def-coherent]. Choose finite local generating sections using IsFiniteType.exists_localGeneratorsData. Reindex each finite generator family by ULift (Fin n), so the coherence kernel clause applies. Invoke Scheme.Modules.isFinitePresentation_of_generators_kernel, the existing proved private helper of the module for [pqf-lem-coherent-ft-locnoeth], made available by a proof-only import all. It constructs finite local cokernel presentations from the finite generators and finite-type kernels [def-weil-pbc-module-finite-type-presentation]. Assemble these presentations using IsFinitePresentation.of_coversTop. This proves G.IsFinitePresentation without using local Noetherianity.",
+      "uses": [
+        "pqf-def-coherent",
+        "def-weil-pbc-module-finite-type-presentation",
+        "pqf-lem-coherent-ft-locnoeth"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Cohomology of Schemes, Lemma Tag 01XZ (lemma-coherent-Noetherian), lines 2225-2270, equivalence of (1) and (3), invoked in proof of Lemma Tag 01Y4 (lemma-map-stalks-local-map), lines 2392-2407; local presentation expanded"
+      }
+    },
+    {
+      "text": "Apply [lem-weil-pbc-stalk-internal-hom-finite-presentation] to G and F. Surjectivity of the supplied linear equivalence gives a preimage t of the linear map psi. Represent t by a germ of an internal-Hom section phi on U containing x, using Mathlib's TopCat.Presheaf.exists_germ_eq [def-weil-pbc-module-stalk]. By [def-pur-sheaf-hom], phi is a morphism on the over-site. Turn it into a morphism of restricted scheme modules by applying Scheme.Modules.overEquiv U, conjugated by overFunctorEquiv U.",
+      "uses": [
+        "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+        "def-pur-sheaf-hom",
+        "def-weil-pbc-module-stalk"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Cohomology of Schemes, proof of Lemma Tag 01Y4 (lemma-map-stalks-local-map), lines 2403-2407, using Modules Lemma Tag 01CP (lemma-stalk-internal-hom), lines 3619-3678"
+      }
+    },
+    {
+      "text": "For m in G_x, represent its image under restrictStalkNatIso.inv by a section s on an open V of U. The hom formula germ_restrictStalkNatIso_hom_app and the inverse-hom identity show that the germ of s on the image open in X equals m. Evaluate the formula of [lem-weil-pbc-stalk-internal-hom-finite-presentation] at phi and s; since the germ of phi is t and e t = psi, its value is psi m. On the other hand, the germ formula for the stalk functor [def-pc-module-stalk-functor], followed by germ_restrictStalkNatIso_hom_app for F, gives exactly the same germ for the transported restricted morphism. Their equality proves the displayed pointwise conclusion.",
+      "uses": [
+        "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+        "def-pc-module-stalk-functor",
+        "def-weil-pbc-module-stalk"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Cohomology of Schemes, conclusion of Lemma Tag 01Y4 (lemma-map-stalks-local-map), lines 2392-2407"
+      }
+    }
+  ],
+  "proof_deps": [
     "pqf-def-coherent",
     "def-weil-pbc-module-finite-type-presentation",
-    "pqf-lem-coherent-ft-locnoeth"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma Tag 01XZ (lemma-coherent-Noetherian), lines 2225-2270, equivalence of (1) and (3), invoked in proof of Lemma Tag 01Y4 (lemma-map-stalks-local-map), lines 2392-2407; local presentation expanded"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-stalk-internal-hom-finite-presentation] to G and F. Surjectivity of the supplied linear equivalence gives a preimage t of the linear map psi. Represent t by a germ of an internal-Hom section phi on U containing x, using Mathlib's TopCat.Presheaf.exists_germ_eq [def-weil-pbc-module-stalk]. By [def-pur-sheaf-hom], phi is a morphism on the over-site. Turn it into a morphism of restricted scheme modules by applying Scheme.Modules.overEquiv U, conjugated by overFunctorEquiv U.",
-   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
     "lem-weil-pbc-stalk-internal-hom-finite-presentation",
     "def-pur-sheaf-hom",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma Tag 01Y4 (lemma-map-stalks-local-map), lines 2403-2407, using Modules Lemma Tag 01CP (lemma-stalk-internal-hom), lines 3619-3678"
-   }
-  },
-  {
-   "text": "For m in G_x, represent its image under restrictStalkNatIso.inv by a section s on an open V of U. The hom formula germ_restrictStalkNatIso_hom_app and the inverse-hom identity show that the germ of s on the image open in X equals m. Evaluate the formula of [lem-weil-pbc-stalk-internal-hom-finite-presentation] at phi and s; since the germ of phi is t and e t = psi, its value is psi m. On the other hand, the germ formula for the stalk functor [def-pc-module-stalk-functor], followed by germ_restrictStalkNatIso_hom_app for F, gives exactly the same germ for the transported restricted morphism. Their equality proves the displayed pointwise conclusion.",
-   "uses": [
-    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
-    "def-pc-module-stalk-functor",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, conclusion of Lemma Tag 01Y4 (lemma-map-stalks-local-map), lines 2392-2407"
-   }
-  }
- ],
- "proof_deps": [
-  "pqf-def-coherent",
-  "def-weil-pbc-module-finite-type-presentation",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-stalk-internal-hom-finite-presentation",
-  "def-pur-sheaf-hom",
-  "def-weil-pbc-module-stalk",
-  "def-pc-module-stalk-functor"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma Tag 01Y4, using the coherent-to-finite-presentation construction of Tag 01XZ and Modules Tag 01CP; Lean reconstruction by A4, 2026-10-13. Repair reuses Scheme.Modules.isFinitePresentation_of_generators_kernel through import all instead of duplicating its proof; the remaining argument uses explicit germ formulas."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "map of stalks of coherent modules extends to a morphism of sheaves on an open neighbourhood",
-   "results": "ModuleCat.Tilde.toOpen_germ_apply, ModuleCat.Tilde.toStalk (Mathlib.AlgebraicGeometry.Modules.Tilde), LocallyRingedSpace.Hom.stalkMap, stalkMap_germ_apply (Geometry.RingedSpace.LocallyRingedSpace), PresheafedSpace.Hom.stalkMap, Scheme.Hom.stalkMap",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "stalk of sheaf Hom of finitely presented module equals Hom of stalks; a homomorphism of stalks comes from a morphism of sheaves on a neighbourhood",
-   "results": "ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, Tilde.toStalk, Tilde.stalkToFiberLinearMap, stalkToFiberLinearMap_toStalk, toStalk_comp_stalkToFiberLinearMap_assoc (Mathlib.AlgebraicGeometry.Modules.Tilde)",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'stalk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/*.lean; rg -ln 'IsFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
-   "results": "IsFinitePresentation only in Quasicoherent.lean and Generators.lean, without stalks; no sheaf Hom stalk lemma, no coherent modules",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "group": "H1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of H1; spot-checked by L: L: 01Y4 via the stalk of the internal Hom of a finitely presented module (01CP, new node)"
- },
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-weil-pbc-coherent-stalk-map-extends",
-  "worker": "stage1",
-  "summary": "Read Cohomology of Schemes 01Y4 and 01XZ, and Modules 01CP. Expanded the coherent-to-finite-presentation reduction locally, then applied the new unsplit 01CP node to take a germ of internal Hom representing the stalk map. Its representative is the required morphism on a neighbourhood. Searches of the DAG and whole blueprint found no 01CP node or blueprint duplicate. The item itself has no exact Mathlib match.",
-  "blueprint": "The item supplies the coherent stalk-map extension used by lem-weil-pbc-coherent-generic-point-ideal-inclusion, descended through the recorded via chain from step 7 of thm-weil-pbc-finite-etale-lifting (Stacks 0GS2 essential-surjectivity route). The blueprint has no matching statement for 01Y4 or 01CP."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.CoherentStalkMapExtends",
-  "declaration": "AlgebraicGeometry.exists_open_hom_of_coherent_stalk_map",
-  "file": "lean/Sheaf/AlgebraicGeometry/CoherentStalkMapExtends.lean",
-  "statement": "theorem exists_open_hom_of_coherent_stalk_map {X : Scheme.{u}} [IsLocallyNoetherian X] (F G : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (hG : RingedSpace.IsCoherent X.toRingedSpace G) (x : X) (ψ : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj G ⟶ (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F) : ∃ (U : X.Opens) (hx : x ∈ U) (φ : (Scheme.Modules.restrictFunctor U.ι).obj G ⟶ (Scheme.Modules.restrictFunctor U.ι).obj F), ∀ m : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj G, ψ m = ConcreteCategory.hom ((Scheme.Modules.restrictStalkNatIso U.ι ((⟨x, hx⟩ : (U : Scheme)))).hom.app F) ((RingedSpace.moduleStalkFunctor (U : Scheme).toRingedSpace ⟨x, hx⟩).map φ (ConcreteCategory.hom ((Scheme.Modules.restrictStalkNatIso U.ι ((⟨x, hx⟩ : (U : Scheme)))).inv.app G) m))",
-  "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-11",
-  "existing": false,
-  "fixed_by": "R-csm1302"
- },
- "reviewed_lean": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "R-csm1302",
-  "group": "H1",
-  "result": "fix",
-  "note": "locnoeth instance; F,G X.Modules coherent via RingedSpace.IsCoherent; psi and phi_x switched to RingedSpace.moduleStalkFunctor (MODULE STALKS form, K1 ab9999373); U open with x in U; phi on restrictFunctor U.ι (J1 form); tied equation psi = restrictStalkNatIso.hom ∘ phi_x ∘ restrictStalkNatIso.inv elementwise; rfl-checked moduleStalkFunctor.map = Ab stalk map of mapPresheaf"
- },
- "reviewed_proof": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "AUTO",
-  "group": "K2",
-  "result": "pass",
-  "landing": "20261016T221615-L-1616521",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.isFinitePresentation_of_coherent"
+    "def-weil-pbc-module-stalk",
+    "def-pc-module-stalk-functor"
   ],
-  "sorry_after": []
- }
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma Tag 01Y4, using the coherent-to-finite-presentation construction of Tag 01XZ and Modules Tag 01CP; Lean reconstruction by A4, 2026-10-13. Repair reuses Scheme.Modules.isFinitePresentation_of_generators_kernel through import all instead of duplicating its proof; the remaining argument uses explicit germ formulas."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "map of stalks of coherent modules extends to a morphism of sheaves on an open neighbourhood",
+      "results": "ModuleCat.Tilde.toOpen_germ_apply, ModuleCat.Tilde.toStalk (Mathlib.AlgebraicGeometry.Modules.Tilde), LocallyRingedSpace.Hom.stalkMap, stalkMap_germ_apply (Geometry.RingedSpace.LocallyRingedSpace), PresheafedSpace.Hom.stalkMap, Scheme.Hom.stalkMap",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "stalk of sheaf Hom of finitely presented module equals Hom of stalks; a homomorphism of stalks comes from a morphism of sheaves on a neighbourhood",
+      "results": "ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, Tilde.toStalk, Tilde.stalkToFiberLinearMap, stalkToFiberLinearMap_toStalk, toStalk_comp_stalkToFiberLinearMap_assoc (Mathlib.AlgebraicGeometry.Modules.Tilde)",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'stalk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/*.lean; rg -ln 'IsFinitePresentation' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
+      "results": "IsFinitePresentation only in Quasicoherent.lean and Generators.lean, without stalks; no sheaf Hom stalk lemma, no coherent modules",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "group": "H1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of H1; spot-checked by L: L: 01Y4 via the stalk of the internal Hom of a finitely presented module (01CP, new node)"
+  },
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-weil-pbc-coherent-stalk-map-extends",
+    "worker": "stage1",
+    "summary": "Read Cohomology of Schemes 01Y4 and 01XZ, and Modules 01CP. Expanded the coherent-to-finite-presentation reduction locally, then applied the new unsplit 01CP node to take a germ of internal Hom representing the stalk map. Its representative is the required morphism on a neighbourhood. Searches of the DAG and whole blueprint found no 01CP node or blueprint duplicate. The item itself has no exact Mathlib match.",
+    "blueprint": "The item supplies the coherent stalk-map extension used by lem-weil-pbc-coherent-generic-point-ideal-inclusion, descended through the recorded via chain from step 7 of thm-weil-pbc-finite-etale-lifting (Stacks 0GS2 essential-surjectivity route). The blueprint has no matching statement for 01Y4 or 01CP."
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.CoherentStalkMapExtends",
+    "declaration": "AlgebraicGeometry.exists_open_hom_of_coherent_stalk_map",
+    "file": "lean/Sheaf/AlgebraicGeometry/CoherentStalkMapExtends.lean",
+    "statement": "theorem exists_open_hom_of_coherent_stalk_map {X : Scheme.{u}} [IsLocallyNoetherian X] (F G : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (hG : RingedSpace.IsCoherent X.toRingedSpace G) (x : X) (ψ : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj G ⟶ (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F) : ∃ (U : X.Opens) (hx : x ∈ U) (φ : (Scheme.Modules.restrictFunctor U.ι).obj G ⟶ (Scheme.Modules.restrictFunctor U.ι).obj F), ∀ m : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj G, ψ m = ConcreteCategory.hom ((Scheme.Modules.restrictStalkNatIso U.ι ((⟨x, hx⟩ : (U : Scheme)))).hom.app F) ((RingedSpace.moduleStalkFunctor (U : Scheme).toRingedSpace ⟨x, hx⟩).map φ (ConcreteCategory.hom ((Scheme.Modules.restrictStalkNatIso U.ι ((⟨x, hx⟩ : (U : Scheme)))).inv.app G) m))",
+    "branch": "sheaf-dag",
+    "by": "H1",
+    "date": "2026-10-11",
+    "existing": false,
+    "fixed_by": "R-csm1302"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "R-csm1302",
+    "group": "H1",
+    "result": "fix",
+    "note": "locnoeth instance; F,G X.Modules coherent via RingedSpace.IsCoherent; psi and phi_x switched to RingedSpace.moduleStalkFunctor (MODULE STALKS form, K1 ab9999373); U open with x in U; phi on restrictFunctor U.ι (J1 form); tied equation psi = restrictStalkNatIso.hom ∘ phi_x ∘ restrictStalkNatIso.inv elementwise; rfl-checked moduleStalkFunctor.map = Ab stalk map of mapPresheaf"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "A4",
+    "result": "pass",
+    "landing": "20261013T025257-L-3421247",
+    "kind": "proof",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  }
 }

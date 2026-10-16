@@ -15632,7 +15632,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:16 L: merged deliver/J3/Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat (stage 3; reviewer PASS; first push; landing 20261016T221613-L-1616160 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/J4/Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation (stage 3; reviewer PASS; first push; landing 20261016T221614-L-1616260 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/K1/Sheaf.CategoryTheory.ExactFunctorHalfPlane (stage 3; reviewer PASS; first push; landing 20261016T221614-L-1616409 (proof); batch 20261016T221550; modules 1; new nodes 0)
-- 22:16 L: merged deliver/K2/Sheaf.AlgebraicGeometry.CoherentStalkMapExtends (stage 3; reviewer PASS; first push; landing 20261016T221615-L-1616521 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/K2/Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemTorsion (stage 3; reviewer PASS; first push; landing 20261016T221615-L-1616737 (interface); batch 20261016T221550; modules 3; new nodes 0; change records: coord/changes/K2-second-adic-torsion-cokernel-restoration.md)
 - 22:16 L: merged deliver/K4/Sheaf.AlgebraicGeometry.Sites.FieldHigherDirectImageStalk (stage 3; reviewer PASS; first push; landing 20261016T221617-L-1617064 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/M1/Sheaf.AlgebraicGeometry.TorsionLocalModelRestriction (stage 3; reviewer PASS; first push; landing 20261016T221617-L-1617167 (proof); batch 20261016T221550; modules 1; new nodes 0)
@@ -15660,3 +15659,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:47 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
 
 - 06:48 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
+
+- 06:50 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
