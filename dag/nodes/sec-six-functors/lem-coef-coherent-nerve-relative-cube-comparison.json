@@ -30,9 +30,141 @@
   "lem-coef-coherent-nerve-comparison",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S=\\Delta^n$, $A=\\partial\\Delta^n$, $B=\\mathfrak C[S]$, $A'=\\mathfrak C[A]$, $Q=(\\Delta^1)^{n-1}$ and $T=\\partial Q$. A chain of subsets containing $0,n$ is uniquely a tuple of weakly increasing zero-one strings, one for each interior vertex: its $j$th coordinate records membership of $j$. This identifies $B(0,n)$ with $Q$ in every degree and commutes with simplicial operators. Omitting $j$ gives the face $t_j=0$. Union composition through $j$ identifies $B(0,j)\\times B(j,n)$ with the face $t_j=1$: the inverse splits a subset at $j$. For $n=1$ there are no coordinates, so $Q=\\Delta^0$ and $T=\\varnothing$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5, subset-poset and union-composition formulas; Lemma 5.4.1.1, definition of the induced cubical boundary."
+   }
+  },
+  {
+   "text": "Here is the relative enriched presentation, including its universal property. The map $A'\\to B$ is the identity on objects and on every mapping simplicial set except $(0,n)$; at $(0,n)$ it is $T\\hookrightarrow Q$. For a proper interval $[i,j]\\ne[0,n]$, its whole subset-poset mapping set occurs in the face with vertex set $[i,j]$, and all its other appearances are identified by the face-intersection maps. The endpoint mapping data contributed by a proper face containing $0,n$ omit some interior $j$ and hence lie on $t_j=0$. Additional endpoint arrows obtained by composition through an interior $j$ lie on $t_j=1$, by step 1. These are all possible composites: split a chain of composable intervals at any intermediate object. Conversely every zero face occurs in the face omitting $j$, and every one face occurs as composition through $j$. On intersections of two zero faces, both descriptions restrict to the common omitted-vertex face. On intersections of a zero and a one face they restrict the two factors of that same composition. On intersections of two one faces, splitting at $j<k$ gives the same three-factor union, with equality supplied by associativity. Thus compatible proper-face functors are exactly enriched functors out of the displayed category with endpoint mapping set $T$ and the other mapping sets those of $B$. This verifies its colimit universal property, rather than just its image in $B$, and proves the asserted presentation of $A'$. The argument includes $n=1$, where $A'$ is the discrete two-object category.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5; proof of Theorem 2.2.5.1, verification (C), cube-boundary attachment, expanded by its universal property."
+   }
+  },
+  {
+   "text": "Adjoint $b$ to an enriched functor $\\beta:A'\\to D$. Step 2 shows that all maps except the endpoint mapping map are already prescribed by $\\beta$. Its restriction on $T$ is $a_b$. The zero faces have the omission formula and the one faces the composition formula from step 1, and their intersection agreements were checked in step 2. A map $g:Q\\to D(x,y)$ extending $a_b$ therefore extends $\\beta$ uniquely to an enriched functor $B\\to D$. Indeed the only new composition conditions are composites through an interior vertex, and these are precisely the one-face conditions; compositions involving the endpoint mapping object as a factor have only an identity as the other factor. Adjunction gives the desired simplex extension, and restriction to $(0,n)$ is inverse to this construction. This proves the actual bijection of extensions, before passing to homotopy.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5 and Lemma 5.4.1.1, correspondence of extensions."
+   }
+  },
+  {
+   "text": "Put $Z=N_{\\mathrm{hc}}D$, which is a quasicategory because $D$ is locally Kan. Let $F$ be the strict fiber at $b$ of $\\operatorname{Fun}(S,Z)\\to\\operatorname{Fun}(A,Z)$. Restriction is an isofibration by [lem-coef-infinity-isofibration-exponentiation], so $F$ is a quasicategory: lift an inner horn over the constant simplex at $b$. On cores restriction is a Kan fibration by [lem-coef-infinity-core-kan-fibration]; its fiber $K$ over $b$ is Kan, since a horn lifting problem in the fiber is the corresponding lifting problem with constant bottom simplex. Every edge of $F$ has identity components at every vertex of $S$, because $n\\geq1$ puts every vertex in $A$. The pointwise-equivalence criterion therefore places each such edge in $K$. Conversely the edges of $K$ are edges of $F$. Hence the equivalence relation generated by relative $\\Delta^1$-homotopies is the edge-component relation of $K$. In a Kan complex inverse and composite edges are obtained by filling the outer and inner $2$-horns, so any finite zigzag has an edge with the same endpoints. Every such edge is an equivalence with its two inverse triangles in $K$, hence in $F$. Conversely an equivalence edge in $F$ is already one of the relative homotopies. We have proved that two extensions are related by the equivalence relation generated by homotopies $S\\times\\Delta^1\\to Z$ constant at $b$ on $A\\times\\Delta^1$ exactly when there is an equivalence edge between them in $F$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-core-kan-fibration",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.1.1, identification of relative simplicial homotopy with Joyal relative homotopy; local Kan and the all-vertices condition made explicit."
+   }
+  },
+  {
+   "text": "Factor the fold $S\\amalg_A S\\to S$ in the Joyal model structure as a cofibration $k:S\\amalg_A S\\to E$ followed by a trivial fibration $p:E\\to S$. Its two sections agree on $A$. Since $k$ is degreewise injective and $p$ is a categorical equivalence, this is a categorical mapping cylinder in the precise sense of [lem-coef-relative-categorical-cylinder-criterion]. That node and step 4 give: the two simplex extensions have the same relative class exactly when there is a map $h:E\\to Z$ restricting to them on the two ends. The restrictions on $A$ are $b$ exactly, not merely up to equivalence.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-relative-categorical-cylinder-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.1.1, relative Joyal cylinder; cylinder characterization expanded using the existing relative-cylinder criterion."
+   }
+  },
+  {
+   "text": "Apply $\\mathfrak C$ to this cylinder. It preserves its pushout, because it is the colimit-defined left adjoint in [lem-coef-coherent-nerve-comparison]. The same node's Quillen assertion says that $\\mathfrak C[k]:B\\amalg_{A'}B\\to\\mathfrak C[E]$ is a Bergner cofibration. The map $\\mathfrak C[p]:\\mathfrak C[E]\\to B$ is a Dwyer--Kan equivalence by [lem-coef-rigidification-equivalence-detection], since $p$ is a categorical equivalence. It is a retraction of both ends. Thus $\\mathfrak C[E]$ is a good enriched cylinder for $B$ relative to $A'$. Adjunction identifies extensions $h:E\\to Z$ with enriched functors $\\mathfrak C[E]\\to D$ with their two endpoint functors prescribed: naturality identifies the endpoint restrictions and the common restriction $\\beta$ on $A'$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-rigidification-equivalence-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.1.1, passage through the coherent-nerve Quillen adjunction; Theorem 2.2.5.1."
+   }
+  },
+  {
+   "text": "Construct a second cylinder explicitly. Let $I=\\Delta^1$ and form the simplicial pushout $R=(Q\\times I)\\amalg_{T\\times I}T$, where $T\\times I\\to T$ is projection. The induced map $Q\\amalg_T Q\\to R$ from the two ends is degreewise injective: only pairs over $T$ are identified, and these are already identified between the two ends. There is a projection $r:R\\to Q$ and sections $u_0,u_1$. The inclusion $(Q\\times\\{0\\})\\amalg_{T\\times\\{0\\}}(T\\times I)\\to Q\\times I$ is anodyne by [lem-coef-sset-anodyne-pushout-product], applied to $T\\hookrightarrow Q$ and the endpoint horn $\\{0\\}\\hookrightarrow I$. Push it out by projection on $T\\times I$ and the identity on $Q\\times\\{0\\}$. The resulting map is $u_0:Q\\to R$. Anodyne maps are trivial cofibrations in the Kan--Quillen model structure: the cited Kan model identifies fibrations with the horn-injective maps, and its weak factorization system identifies their left lifting class with trivial cofibrations. Pushouts preserve that left lifting class, by restricting a lifting square to the pushout legs. Thus $u_0$ is a weak homotopy equivalence; $ru_0=1_Q$ and two-out-of-three show that $r$ is a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.1.1, enriched relative cylinder; standard endpoint-horn pushout-product construction, written explicitly."
+   }
+  },
+  {
+   "text": "Define $B_R$ to have objects $0,\\ldots,n$, endpoint mapping set $R$, and all other mapping sets those of $B$. For compositions through an interior vertex use the one-face map into $T\\hookrightarrow R$; all other nonidentity compositions are those already in $A'$. Associativity follows from the intersection checks in step 2, and endpoint identities act as identities. Equivalently $B_R=A'\\amalg_{U(T)}U(R)$, where $U(L)$ is the two-object simplicial category having $L$ as its sole nonidentity mapping set and its objects sent to $0,n$; an enriched functor out of this pushout is a functor out of $A'$ and a simplicial map from $R$ to the mapping set between its images of $0,n$, agreeing on $T$. Every composite through an interior vertex factors through $T$, and no nonidentity arrow precedes $0$ or follows $n$, so these data define every composition and impose precisely the stated relations. The two ends give $B\\amalg_{A'}B\\to B_R$, which replaces only $Q\\amalg_T Q$ by $R$. This is a Bergner cofibration. To check its defining left lifting property, let $P:C\\to C'$ be any Bergner trivial fibration and fix a lifting square. Its maps on mapping sets are Kan fibrations and weak homotopy equivalences, hence Kan--Quillen trivial fibrations. The objects and all other mapping data of the lift are already fixed on $A'$. The missing endpoint map is exactly a lifting problem for the monomorphism $Q\\amalg_T Q\\hookrightarrow R$ against $C(c_0,c_n)\\to C'(Pc_0,Pc_n)$; it has a filler by the Kan--Quillen weak factorization system. The agreement on $T$ supplies all composition relations. Finally $B_R\\to B$ is a Dwyer--Kan equivalence: it is the identity on objects and all mapping sets except $(0,n)$, where it is $r$ from step 7; on $\\pi_0$ it is therefore an isomorphism. This makes $B_R$ another good enriched cylinder with exactly the same prescribed ends.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.1.1 and Theorem 2.2.5.1, relative enriched cell attachment; cofibration and weak-equivalence checks written out."
+   }
+  },
+  {
+   "text": "We compare these two enriched cylinders by lifting, so no relative homotopy theorem is left implicit. In any model category, suppose $V_1,V_2$ are good cylinders relative to the same $A'\\to B$: their endpoint inclusions $B\\amalg_{A'}B\\to V_i$ are cofibrations and their projections $c_i:V_i\\to B$ are weak equivalences. Let $D$ be fibrant and suppose $H_1:V_1\\to D$ has the prescribed ends. Factor $c_1$ as a trivial cofibration $j:V_1\\to V'_1$ followed by a fibration $q:V'_1\\to B$. Two-out-of-three makes $q$ a trivial fibration. Fibrancy extends $H_1$ across $j$ to $H'_1:V'_1\\to D$. The two ends of $V_2$ map to $V'_1$ by $j$ times the ends of $V_1$; they agree on $A'$, and their composite with $q$ is the fold to $B$. Lift along the cofibration $B\\amalg_{A'}B\\to V_2$ against $q$ to obtain $V_2\\to V'_1$ over $B$. Composing with $H'_1$ gives the desired extension on $V_2$ with both ends unchanged. For the converse, start with $H_2:V_2\\to D$, factor $c_2$ as a trivial cofibration $j_2:V_2\\to V'_2$ followed by a fibration $q_2:V'_2\\to B$, and use two-out-of-three to make $q_2$ trivial. Extend $H_2$ across $j_2$ by fibrancy. Use $j_2$ composed with the endpoint inclusion into $V_2$ as the map from $B\\amalg_{A'}B$ to $V'_2$, and $c_1$ as the map from $V_1$ to $B$. They give a lifting square for $B\\amalg_{A'}B\\to V_1$ against $q_2$; its lift composed with the extended $H_2$ supplies the map $V_1\\to D$ with the prescribed ends. Apply this argument to $\\mathfrak C[E]$ and $B_R$ in the Bergner structure from [lem-coef-coherent-nerve-comparison]. Its fibration description makes $D\\to *$ a fibration: the mapping maps are Kan fibrations, and the only target equivalence to lift is lifted by an identity at each object. Thus the required fibrancy follows from local Kan. All the factorizations and lifts used here are exactly the model-category weak factorization systems.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.1.1, comparison of relative left-homotopy cylinders, expanded directly from the model axioms."
+   }
+  },
+  {
+   "text": "By the presentation in step 8, an enriched functor $B_R\\to D$ extending the two given endpoint functors is exactly a map $R\\to D(x,y)$ extending the two cube maps and agreeing with $a_b$ on $T$. The pushout formula of step 7 identifies this with a map $Q\\times\\Delta^1\\to D(x,y)$ constant at $a_b$ on $T\\times\\Delta^1$, with those endpoint cube maps. Steps 5, 6 and 9 therefore identify equality of relative simplex classes with existence of such a relative cube homotopy. In particular a simplex-homotopy generator gives a cube-homotopy generator. Conversely a cube-homotopy generator gives equality of simplex classes. Applying these implications along finite zigzags proves the claimed equivalence for the generated relations, and step 3's bijection then descends to a bijection of quotient sets. If there are no extensions, both extension sets are empty by step 3 and the quotient assertion is vacuous. When $n=1$, $A'$ is discrete, $Q$ is a point and $R=\\Delta^1$; the argument identifies classes of edges with fixed endpoints with components of $D(x,y)$. No step required that this Kan complex be small in a smaller universe, nor that $x\\ne y$ in $D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.1.1, conclusion; the generated equivalence relations, empty extensions and the one-dimensional case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-relative-categorical-cylinder-criterion",
+  "lem-coef-rigidification-equivalence-detection",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma 5.4.1.1, printed p.419 / PDF p.436; Section 1.1.5 and proof of Theorem 2.2.5.1 (C). Expanded argument via two explicit relative enriched cylinders and the model lifting axioms. HTT is online and not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +207,66 @@
    "results": "{\"t\": \"2026-10-16T21:55:06Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial nerve simplex extensions are cubical paths in enriched hom objects with boundary fixed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Path.arrow\", \"SSet.spine\", \"SSet.Path\", \"CategoryTheory.SimplicialNerve\", \"SSet.StrictSegal.spineToSimplex\", \"SSet.Truncated.Path.arrow\", \"SSet.StrictSegalCore.spineToSimplex\", \"SSet.StrictSegal.spineToDiagonal\"], \"digest\": \"bcd985a6653d63f9\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search. SimplicialNerve is the enriched nerve definition, while Path, spine and StrictSegal concern edge strings and ordinary-category nerve recognition. SimplicialNerve.lean:12-39 explicitly leaves its locally-Kan quasicategory theorem as a project; none of these declarations states the relative cubical homotopy comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|relative.*[Hh]omotop|[Hh]omotop.*relative",
+   "results": "{\"t\": \"2026-10-16T22:34:15Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|relative.*[Hh]omotop|[Hh]omotop.*relative\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\"], \"digest\": \"220b8af1e750ffa9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-39,193-200 and SimplicialSet/RelativeMorphism.lean:83-127. The former defines the enriched nerve and lists even the locally-Kan quasicategory assertion as future work. The latter defines relative interval homotopies and their quotient. The ordinary nerve/StrictSegal, thickening, and abstract model-cylinder hits do not assert this enriched fixed-boundary cube correspondence or compare its homotopies."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative homotopy classes of simplex extensions in a simplicial nerve are relative homotopy classes of cubical maps in the enriched hom space",
+   "results": "{\"t\": \"2026-10-16T22:34:15Z\", \"tool\": \"leansearch\", \"query\": \"Relative homotopy classes of simplex extensions in a simplicial nerve are relative homotopy classes of cubical maps in the enriched hom space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"SSet.RelativeMorphism.HomotopyClass\", \"SSet.Truncated.nerve₂Adj\", \"SSet.RelativeMorphism.Homotopy.ext\", \"SSet.RelativeMorphism.Homotopy.mk.injEq\", \"SSet.RelativeMorphism.homotopyClass\", \"SSet.RelativeMorphism.Homotopy\", \"SSet.RelativeMorphism.Homotopy.h\"], \"digest\": \"3349bd13ba8e433e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-39,193-200 and SimplicialSet/RelativeMorphism.lean:83-127. The former defines the enriched nerve and lists even the locally-Kan quasicategory assertion as future work. The latter defines relative interval homotopies and their quotient. The ordinary nerve/StrictSegal, thickening, and abstract model-cylinder hits do not assert this enriched fixed-boundary cube correspondence or compare its homotopies."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialNerve",
+   "results": "{\"t\": \"2026-10-16T22:34:16Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialNerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\"], \"digest\": \"36e7d315fa3504e3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-39,193-200 and SimplicialSet/RelativeMorphism.lean:83-127. The former defines the enriched nerve and lists even the locally-Kan quasicategory assertion as future work. The latter defines relative interval homotopies and their quotient. The ordinary nerve/StrictSegal, thickening, and abstract model-cylinder hits do not assert this enriched fixed-boundary cube correspondence or compare its homotopies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed boundary extensions of a simplex into a homotopy coherent nerve correspond to maps from a cube into the endpoint simplicial mapping space up to relative homotopy",
+   "results": "{\"t\": \"2026-10-16T22:34:17Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed boundary extensions of a simplex into a homotopy coherent nerve correspond to maps from a cube into the endpoint simplicial mapping space up to relative homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.SimplicialNerve\", \"SSet.stdSimplex.isoNerve_hom_app_apply\"], \"digest\": \"41b7f47c51450d6f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-39,193-200 and SimplicialSet/RelativeMorphism.lean:83-127. The former defines the enriched nerve and lists even the locally-Kan quasicategory assertion as future work. The latter defines relative interval homotopies and their quotient. The ordinary nerve/StrictSegal, thickening, and abstract model-cylinder hits do not assert this enriched fixed-boundary cube correspondence or compare its homotopies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first to last mapping simplicial set of the thickening of a simplex is the nerve of the Boolean subset poset, a product of simplicial intervals",
+   "results": "{\"t\": \"2026-10-16T22:34:36Z\", \"tool\": \"leanfinder\", \"query\": \"The first to last mapping simplicial set of the thickening of a simplex is the nerve of the Boolean subset poset, a product of simplicial intervals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.functor_map\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"SSet.stdSimplex.isoNerve\", \"SSet.prodStdSimplex.isoNerve\", \"CategoryTheory.SimplicialThickening\", \"CategoryTheory.SimplicialThickening.functor\", \"SSet.stdSimplex.isoNerve_hom_app_apply\", \"CategoryTheory.SimplicialThickening.instSimplicialCategory\"], \"digest\": \"752ddc1b18223286\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-39,193-200 and SimplicialSet/RelativeMorphism.lean:83-127. The former defines the enriched nerve and lists even the locally-Kan quasicategory assertion as future work. The latter defines relative interval homotopies and their quotient. The ordinary nerve/StrictSegal, thickening, and abstract model-cylinder hits do not assert this enriched fixed-boundary cube correspondence or compare its homotopies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent nerve relative boundary homotopy classes simplicial category mapping objects",
+   "results": "{\"t\": \"2026-10-16T23:02:39Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent nerve relative boundary homotopy classes simplicial category mapping objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerve\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"CategoryTheory.nerve.functorOfNerveMap_obj\"], \"digest\": \"62a62a67b3bb5d1e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader checked the returned enriched nerve definition in Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-39,193-200 and the relative homotopy quotient in SimplicialSet/RelativeMorphism.lean:83-127. The ordinary nerve declarations do not concern enriched mapping objects. None states the relative simplex-to-cube comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\"",
+   "results": "{\"t\": \"2026-10-16T23:02:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\"], \"digest\": \"36e7d315fa3504e3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader checked the returned enriched nerve definition in Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-39,193-200 and the relative homotopy quotient in SimplicialSet/RelativeMorphism.lean:83-127. The ordinary nerve declarations do not concern enriched mapping objects. None states the relative simplex-to-cube comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialThickening|SimplicialNerve",
+   "results": "{\"t\": \"2026-10-16T23:02:54Z\", \"tool\": \"grep\", \"query\": \"SimplicialThickening|SimplicialNerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"3358c6b085bd02b6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader checked the returned enriched nerve definition in Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-39,193-200 and the relative homotopy quotient in SimplicialSet/RelativeMorphism.lean:83-127. The ordinary nerve declarations do not concern enriched mapping objects. None states the relative simplex-to-cube comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-boundary-extension-small-classes",
@@ -98,5 +286,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-coherent-nerve-relative-cube-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged; zero new nodes. Expanded the subset-poset relative cell presentation and the actual extension bijection. Proved the homotopy clause with an explicit collapsed cubical cylinder, the existing relative categorical cylinder criterion, and a direct lifting comparison of good enriched cylinders. Read every cited statement, checked the all-vertices and local Kan hypotheses, and tested n=1, n=2, repeated endpoint objects and empty extension sets. No Lean attachment or Mathlib match was found.",
+  "blueprint": "Realizes the relative simplex/cube homotopy comparison used in the fixed-boundary counting step of HTT 5.4.1.2, below the inherited paragraph-2 mapping-complex foundation of prop-coef-integral-exceptional-adjoint. Steps 1-3 expand the cubical boundary and extension correspondence; steps 4-10 expand HTT 5.4.1.1 rather than delegate its conclusion. The historical ancestry and unit route are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-6032fa265",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-6032fa265 (reviewer sub-agent of L); spot-checked: Read the item, all 10 steps, the statements of all 10 cited nodes, the citer lem-coef-infinity-boundary-extension-small-classes (step 3), the unit and chapter records, and the possible duplicate lem-coef-simplicial-relative-homotopy-invariance (a different statement, unsplit). The delivery has 0 new nodes and leaves the statement unchanged; this is not a target node, so there is no base-change morphism or coefficient category to compare. The source is HTT 5.4.1.1 / 1.1.5 / 2.2.5.1, which is online only and not in literature/, so I could not open it; the agent proof_origin and the WANTED line are correct. No SGA source. Tested the statement: for n=1, T is empty and the classes are pi_0 D(x,y); for n=2, extensions are paths from b(02) to the composite, taken rel endpoints; empty extension sets and x=y also check. n>=1 is required by step 4, where every vertex lies in the boundary. Step checks: (2) the colimit universal property of C[boundary of Delta^n], including the 0/0, 0/1 and 1/1 face intersections; (4) every edge of the fiber F has degenerate components, so it is a pointwise equivalence, lies in the core and so in the Kan fiber K; reversing and composing inside K gives equivalence edges in F, and F is exactly the relative functor simplicial set of the cylinder criterion; (5) the Joyal factorization of the fold meets that criterion's hypotheses; (6) C preserves the pushout, is left Quillen, and the detection node gives the DK equivalence; (7) pushing out the pushout-product gives exactly u_0 into R=(QxI) glued to T along TxI, and anodyne maps are Kan-Quillen trivial cofibrations; (8) B_R adds no new composites, and the endpoint lift is a mono against a trivial Kan fibration; (9) checked both lifting squares of the cylinder comparison, and D is Bergner-fibrant because it is locally Kan; (10) the two generated relations correspond. Route: every cited statement node is in sk-prop-sf-biduality-general, and def-cbc is only a definition; no tool_uses declared or needed. proof_deps equals the union of the step uses; no cycle (the item is not reachable from its 232 dependencies). Mathlib searches cover all three kinds. No fixes."
  }
 }

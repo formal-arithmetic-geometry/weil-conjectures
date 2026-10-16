@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sf-reduction-flat-model",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Reduction of the flat model",
@@ -14,36 +14,165 @@
  },
  "stmt_deps": [
   "lem-sf-flat-model",
+  "def-weil-l-adic-coefficient-extension",
   "def-weil-finite-tor-amplitude",
+  "def-weil-proetale-tor-amplitude",
+  "def-kun-tor-amplitude",
   "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-proetale-site",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
   "lem-pur-derived-change-of-rings"
  ],
  "proof": [
   {
-   "text": "The complex $P$ is bounded and flat, hence K-flat by the argument of\n[lem-sf-flat-model]: for an acyclic complex $Q$ of\n$A_{E,n}$-module sheaves each $P^q\\otimes_{A_{E,n}}Q$ is acyclic,\nbecause $P^q\\otimes_{A_{E,n}}-$ is exact by flatness, and the total\ncomplex of a double complex one of whose directions is acyclic is acyclic.\nTherefore the derived tensor product $K\\otimes^L_{A_{E,n}}A_{E,m}$ is\ncomputed by the ordinary tensor complex\n$P\\otimes_{A_{E,n}}A_{E,m}$ with the constant sheaf $A_{E,m}$ placed in\ndegree zero, by [def-weil-derived-tensor]; this is the displayed\nisomorphism, and its terms sit in degrees $[a,b]$ because those of $P$\ndo.\nEach term $P^q\\otimes_{A_{E,n}}A_{E,m}$ is flat over $A_{E,m}$:\nflatness is the condition of [lem-exc-constant-inverse-image-flat],\nthat tensoring with the sheaf preserves injections of module sheaves; for\nan injection $N'\\to N$ of $A_{E,m}$-module sheaves the map\n$(P^q\\otimes_{A_{E,n}}A_{E,m})\\otimes_{A_{E,m}}N'\\to (P^q\\otimes_{A_{E,n}}A_{E,m})\\otimes_{A_{E,m}}N$ is, by associativity of\nthe tensor product, the map $P^q\\otimes_{A_{E,n}}N'\\to P^q\\otimes_{A_{E,n}}N$ of $A_{E,n}$-module sheaves, and that is\ninjective because $P^q$ is flat over $A_{E,n}$.\nThe reduction $K_m$ is therefore isomorphic to a bounded complex of flat\n$A_{E,m}$-module sheaves concentrated in $[a,b]$, and the equivalence\nof [lem-sf-flat-model] turns that flat model into finite Tor amplitude\nof $K_m$ in $[a,b]$, which is the last assertion.",
+   "text": "Work on either of the two sites, and put $R=(A_{E,n})_T$ and $S=(A_{E,m})_T$. The quotient homomorphism $A_{E,n}\\to A_{E,m}$ is induced by the identity of $\\mathcal O_E$, since $\\varpi_E^n=\\varpi_E^m\\varpi_E^{n-m}$ gives $(\\varpi_E^n)\\subseteq(\\varpi_E^m)$ for $m\\le n$; it induces the coefficient-ring-sheaf morphism $\\varphi:R\\to S$. Choose the site skeleton and module values in the ambient coefficient universe of [def-weil-size-convention]. The site is therefore essentially small in that universe, as required by the K-flatness lemma; the finite coefficient rings are viewed in the same universe. The given $P$ is bounded above by $b$ and has flat terms. Apply [lem-weil-pbc-independent-bounded-flat-kflat] on this ringed site to conclude that $P$ is K-flat. This is the precise bounded-above-flat result needed in the first sentence of the blueprint proof; no assertion about arbitrary unbounded double complexes is used.",
    "uses": [
-    "lem-sf-flat-model",
-    "def-weil-derived-tensor",
-    "lem-exc-constant-inverse-image-flat"
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-size-convention",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; blueprint proof, first sentence"
+   }
+  },
+  {
+   "text": "Let $Q_R,Q_S$ denote passage from complexes to the corresponding derived categories. By [lem-pur-derived-change-of-rings], derived extension of scalars along $\\varphi$ is computed by ordinary termwise change of rings on the K-flat complex $P$. Apply the derived functor to the given isomorphism $K\\cong Q_R(P)$, and compute its value at $P$ (using the identity K-flat resolution of $P$). This gives, in $D(S)$, $K_m\\cong Q_S(P\\otimes_R S)$. Thus the reduction retains its $S$-module structure; we do not identify an object of $D(S)$ with its restriction to $D(R)$. This proves the displayed derived-category isomorphism.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, for the identity morphism of topoi with coefficient map R to S"
+   }
+  },
+  {
+   "text": "Set $P_m=P\\otimes_R S$ with termwise differentials $d_P^q\\otimes1$. Apply [lem-pur-kflat-change-of-rings] to the same $\\varphi$ and $P$: the K-flatness proved in step 1 and the assumed flatness of every $P^q$ give that $P_m$ is K-flat over $S$ and every $P_m^q=P^q\\otimes_R S$ is a flat $S$-module sheaf. The support assertion is elementary from the sheafified sectionwise tensor definition [def-pur-sheaf-tensor-product]: if $q\\notin[a,b]$, then $P^q=0$, so the presheaf with sections $P^q(U)\\otimes_{R(U)}S(U)$ is zero and its sheafification is zero. Therefore $P_m^q=0$ outside $[a,b]$. Together with step 2 this is exactly the required bounded flat model.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat; sites-modules.tex Tag 03EK, section-tensor-product"
+   }
+  },
+  {
+   "text": "For any sheaf $M$ of $S$-modules placed in degree zero, use the K-flat representative $P_m$ of step 3 in the derived-tensor construction: [def-weil-derived-tensor] on the pro-etale site, or [def-kun-derived-tensor] on the etale site. It computes $K_m\\otimes_S^L M$ as $Q_S(P_m\\otimes_S M[0])$. By [def-pc-tensor-complex-sheaves] the degree-$q$ term is $P_m^q\\otimes_S M$, because the only nonzero degree of $M[0]$ is zero. This term vanishes when $q\\notin[a,b]$. In such a degree its cohomology is zero: its kernel is a subobject of the zero degree-$q$ term and the quotient by the incoming image is therefore zero, by [def-weil-derived-cohomology-sheaves]. This is the defining test for Tor amplitude in $[a,b]$, [def-weil-proetale-tor-amplitude] or [def-kun-tor-amplitude], respectively. It establishes the last assertion, in fact from the supplied bounded flat model alone.",
+   "uses": [
+    "def-weil-derived-tensor",
+    "def-kun-derived-tensor",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-proetale-tor-amplitude",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and preceding construction; Tag 08FZ, definition-tor-amplitude"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sf-flat-model",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-size-convention",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "def-pur-sheaf-tensor-product",
   "def-weil-derived-tensor",
-  "lem-exc-constant-inverse-image-flat"
+  "def-kun-derived-tensor",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proetale-tor-amplitude",
+  "def-kun-tor-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-sf-flat-model/lem-sf-reduction-flat-model.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/lem-sf-reduction-flat-model.proof.md",
+  "place": "Complete proof, made precise using Stacks Tags 06YQ, 06YY, 0G7E, 06YU and 08FZ"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of flat sheaves remains a bounded flat model after derived extension of scalars along a ring homomorphism",
+   "results": "8 hits: ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CategoryTheory.lan_flat_of_flat, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.flat_of_isLocalized_span",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary-module flatness or unrelated results; none gives derived coefficient reduction of sheaf complexes on both sites"
+  },
+  {
+   "tool": "grep",
+   "query": "flatModel|kFlat_of_bounded|QObjTensorSingle|quotSMulTop",
+   "results": "Subdirectory Mathlib/Algebra/Homology. 0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary-module flatness or unrelated results; none gives derived coefficient reduction of sheaf complexes on both sites"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|IsFlat|KFlat|kFlat",
+   "results": "Subdirectory Mathlib/Algebra/Category/ModuleCat/Sheaf. 1 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary-module flatness or unrelated results; none gives derived coefficient reduction of sheaf complexes on both sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor reduction of a bounded complex of flat sheaves of modules computes extension of scalars and preserves Tor amplitude",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.rTensor_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.lTensor_exact, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, instFinitePresentationTensorProduct, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary-module flatness or unrelated results; none gives derived coefficient reduction of sheaf complexes on both sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, ObjectProperty.flat",
+   "results": "0 hits: . loogle: unknown identifier 'ObjectProperty.flat'",
+   "date": "2026-10-16",
+   "verdict": "query rejected: unknown identifier ObjectProperty.flat; no valid pattern result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of a flat module sheaf is flat and the derived tensor of a bounded flat complex is computed termwise",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary-module flatness or unrelated results; none gives derived coefficient reduction of sheaf complexes on both sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, TensorProduct",
+   "results": "12 hits: Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left, Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right, LinearIndependent.tmul_of_flat_left, LinearIndependent.tmul_of_flat_right, TensorProduct.LinearIndepOn.tmul_of_flat_left, TensorProduct.LinearIndepOn.tmul_of_flat_right, TensorProduct.nontrivial_of_linearMap_injective_of_flat_left, TensorProduct.nontrivial_of_linearMap_injective_of_flat_right",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary-module flatness or unrelated results; none gives derived coefficient reduction of sheaf complexes on both sites"
+  },
+  {
+   "tool": "grep",
+   "query": "instTensorProduct|lTensor_shortComplex_exact|rTensor_shortComplex_exact",
+   "results": "Subdirectory Mathlib/RingTheory/Flat. 5 hits: Mathlib/RingTheory/Flat/Stability.lean, Mathlib/RingTheory/Flat/CategoryTheory.lean, Mathlib/RingTheory/Flat/CategoryTheory.lean, Mathlib/RingTheory/Flat/CategoryTheory.lean, Mathlib/RingTheory/Flat/CategoryTheory.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary-module flatness or unrelated results; none gives derived coefficient reduction of sheaf complexes on both sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed site tensor extension of scalars sends bounded complexes of flat modules to flat complexes and computes the derived functor",
+   "results": "Second reader: 8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_preservesFiniteLimits_tensorLeft, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary-module flatness/exactness declarations do not give derived extension of scalars for sheaf complexes on a ringed site; sheaf source grep returned no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|flatModel|baseChange",
+   "results": "Second reader: 0 hits: . Subdirectory Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary-module flatness/exactness declarations do not give derived extension of scalars for sheaf complexes on a ringed site; sheaf source grep returned no hits"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -109,5 +238,39 @@
   "group": "Q34",
   "result": "pass",
   "note": "Reviewed node, dependencies, source locations, declarations, docstrings, edge cases, universes, and canonical reduction constructions. scompile.py passed sandbox and library checks with exit 0; no substantive or mechanical defects found."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-reduction-flat-model",
+  "worker": "stage1",
+  "summary": "Kept the source statement. Checked both upstream attachment candidates against the recorded ringed-site coefficient and constructibility interfaces; neither supplies the exact whole item. Replaced the imported single paragraph by four steps using existing general ringed-site results, with direct degreewise support and Tor-amplitude arguments. No new nodes. Removed the citation to inverse-image flatness, whose statement does not assert change-of-rings preservation, and supplied the missing bounded-flat K-flatness theorem. Kept coefficient reduction in the target module category.",
+  "blueprint": "Current main-20261015 proof: step 1 realizes bounded flat implies K-flat; step 2 realizes the computation of reduction; step 3 realizes termwise flatness and support; step 4 realizes the final Tor-amplitude implication.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "General ringed-site bounded-above flat implies K-flat, including independent universes; the unit does not state this auxiliary theorem."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "General derived extension of scalars computed on K-flat complexes, preserving target coefficient structure; not an alternate route to a unit step."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "General ringed-site coefficient change preserves K-flat complexes with flat terms; supplies the generic flatness fact in the blueprint argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-258d6d4f8",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-258d6d4f8 (reviewer sub-agent of L); spot-checked: Read the item, all four steps and every cited node's statement in full. The statement is unchanged: verbatim equal to current main-20261015 lem-sf-reduction-flat-model.md and to the base and live node. There are no new nodes. stmt_deps already had lem-pur-derived-change-of-rings in the base, so K_m is read in D(A_{E,m}); read via restriction of scalars to A_{E,n} instead, the Tor-amplitude conclusion would be false (Z/l is not flat over Z/l^2). The derived category is D(Mod(A_T)) on both sites (def-weil-finite-torsion-constructibility, def-weil-pbc-derived-categories), matching the change-of-rings lemma. Step 1: lem-weil-pbc-independent-bounded-flat-kflat agrees with Stacks 06YQ (lemma-bounded-flat-K-flat). Its hypotheses hold: P^i=0 for i>b, flat terms in the def-pc-flat-sheaf-modules sense, and essential smallness via def-weil-size-convention. The quotient map A_{E,n}->A_{E,m} is elementary from def-weil-l-adic-coefficient-extension. Step 2: lem-pur-derived-change-of-rings clause (2), applied to the identity K-flat resolution, agrees with Stacks 06YY and assumes no flatness of R->S. Step 3: lem-pur-kflat-change-of-rings agrees with Stacks 0G7E for the identity topos; both hypotheses are present. Support follows from the sheafified-presheaf definition in def-pur-sheaf-tensor-product. Step 4 is genuinely elementary: degree q of Tot(P_m (x) M[0]) is P_m^q (x) M, and this is exactly the Tor-amplitude test in def-weil-proetale-tor-amplitude and def-kun-tor-amplitude (blueprint updates checked). It correctly avoids applying the lem-sf-flat-model equivalence to K_m, whose constructibility is unproved. The route matches the unit step (ii)=>(i). Dropping lem-exc-constant-inverse-image-flat fixes a C4 citation fault. Edge cases checked: m=n; P=0 or T empty; a=b; an acyclic flat complex over Z/l^2 reduced to F_l; A[0] reduced to F_l[0]. Upstream Etale.reductionModIdeal_flatModel (Sheaf(ModuleCat), a different constructibility predicate, etale site only, restriction-of-scalars output) is not an exact attachment. Accepted tool_uses: lem-weil-pbc-independent-bounded-flat-kflat, lem-pur-derived-change-of-rings and lem-pur-kflat-change-of-rings, all generic ringed-site black boxes. No fixes."
  }
 }
