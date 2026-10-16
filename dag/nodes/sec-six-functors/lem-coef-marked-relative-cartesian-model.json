@@ -28,7 +28,8 @@
  "stmt_deps": [
   "lem-coef-marked-point-cartesian-model",
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "def-coef-coherent-nerve-infrastructure"
  ],
  "proof": [
   {
@@ -284,5 +285,57 @@
   "group": "Q112",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-a90e2e7e9 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes and every cited statement in full. I checked them against HTT (Remark 3.1.1.10, Remark 3.1.3.1, Prop 3.1.3.3, Prop 3.1.3.5 with its whole proof, Lemma 3.1.3.6, Prop 3.1.3.7 proof (1)-(3), Remark 3.1.3.9, Props 3.1.4.1-3.1.4.2, Cor 3.1.4.4, Prop 3.3.1.1, Cor 3.3.1.2, Prop 3.3.1.3, Cor 3.3.1.4), read locally with pdftotext. Statement repairs: both are correct and neither is a weakening. (a) def-coef-infinity-fibrations restricts cartesian fibrations to quasicategories, which would exclude id over Λ^2_1; the item now uses the arbitrary-base horn definition. (b) 'Kan enrichment' was false over a point: Map^♯((Δ^0)^♯,(Δ^1)^♯)=Δ^1, which is not Kan; it is now Kan only for fibrant targets, as in Remark 3.1.3.1. The two citers use only the clauses that were kept. Steps: 1-7 follow the proofs of 3.1.3.5, 3.1.3.7 and 3.1.4.1, and every hypothesis of the recognition theorem is checked. 9-10 follow 3.1.4.2-3.1.4.4. 13 follows the proof of 3.3.1.4 without Joyal right properness. 14 is the opposite construction. proof_deps equals the union of uses, the graph is acyclic, all cited statements are in the item's unit and tool_uses is empty. New nodes: the relative calculus is true, including the converse on base-changed cartesian edges, and generalizes the point and cocartesian-quasicategory lemmas. The saturation node is 3.1.3.7(1) plus A.2.6.14, with the fiber criterion as a hypothesis that Steps 3-4 discharge. The simplex extension is exactly the n≥1 step of 3.1.3.5; I checked that r automatically preserves cartesian edges. The base-equivalence node is 3.3.1.2-3.3.1.3; its conclusions are true even without its extra hypotheses, so it introduces no cycle. Its future split cannot cite the straightening nodes, which depend on this item, and needs a straightening-free route (HTT 3.2.2.7 or Kerodon flatness). No duplicates, no SGA, all four searches recorded, no fixes needed. Minor: the item's source.place (a maintainer-owned field) still mentions a sandbox download, which is cosmetic."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MarkedRelativeCartesianModel",
+  "declaration": "SSet.Marked.Over.marked_relative_cartesian_model",
+  "declarations": [
+   "SSet.Marked.Over",
+   "SSet.Marked.Over.productLeft",
+   "SSet.Marked.Over.mapSharp",
+   "SSet.Marked.Over.mapFlat",
+   "SSet.Marked.Over.productMapLeft",
+   "SSet.Marked.Over.mapSharpPre",
+   "SSet.Marked.Over.mapVertex",
+   "SSet.Marked.Over.HasSharpPath",
+   "SSet.Marked.Over.IsDistinguishedEdge",
+   "SSet.Marked.Over.relativeFibration",
+   "SSet.Marked.Over.IsNaturallyFibrant",
+   "SSet.Marked.Over.toBase",
+   "SSet.Marked.Over.cof",
+   "SSet.Marked.Over.weak",
+   "SSet.Marked.Over.unmark",
+   "SSet.Marked.Over.funOver",
+   "SSet.Marked.Over.PreservesMarkings",
+   "SSet.Marked.Over.cartesianFunctors",
+   "SSet.Marked.Over.push",
+   "SSet.Marked.Over.pullObject",
+   "SSet.Marked.Over.pull",
+   "SSet.Marked.Over.fiberMap",
+   "SSet.Marked.Over.categoricalEquivalences",
+   "SSet.Marked.Over.pullbackComparison",
+   "SSet.Marked.Over.oppositeObject",
+   "SSet.Marked.Over.opposite",
+   "SSet.Marked.Over.tensor",
+   "SSet.Marked.Over.IsPushoutProduct",
+   "SSet.Marked.Over.RelativeCartesianModelStatement",
+   "SSet.Marked.Over.marked_relative_cartesian_model"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MarkedRelativeCartesianModel.lean",
+  "statement": "theorem marked_relative_cartesian_model (S : SSet.{u}) : Nonempty (RelativeCartesianModelStatement false S) ∧ Nonempty (RelativeCartesianModelStatement true S) ∧ (∀ {X Y : Over S} (f : X ⟶ Y), weak true f ↔ weak false (opposite.map f)) ∧ (∀ X : Over S, IsNaturallyFibrant true X ↔ IsNaturallyFibrant false (opposite.obj X))",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading replaces unconstrained Prop fields and absolute mapping objects with the existing slice category, actual relative mapping simplices, ModelCategory axioms, normalized enrichment, canonical degreewise pullback, fiber/inverse criteria and the opposite cocartesian structure. Categorical equivalence reuses CoherentNerve.IsCategoricalEquivalence.",
+  "fixed_by": "NT-stage2-cc-40914b5f1"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40914b5f1",
+  "group": "Q10",
+  "result": "fix",
+  "note": "Checked all 16 node clauses against the declarations of the four statement dependencies and against HTT 3.1.3.3-3.1.4.4, 3.3.1.4 and 3.1.3.9: arbitrary base, slice category over S^sharp, final-horn cartesian edges for n>=2, relative sharp mapping space, test-object weak equivalences, actual ModelCategory with monomorphism cofibrations, fibrations by RLP, left proper, combinatorial, SM7, fibrant objects exactly the naturally marked ones, Kan only for fibrant targets, core-of-full-subcategory with identity formula, fiberwise and marked-inverse criteria, base-change Quillen adjunction with degreewise pullback, Joyal homotopy pullback via the existing IsCategoricalEquivalence, cocartesian opposite. All correct. No extra hypotheses, no universe restriction, no hollow definitions, one sorry, docstrings present, lean.statement verbatim, all 30 declarations exist, report has both sections. F1 (conventions/imports): the stated proof dependency lem-coef-marked-anodyne-lifting-calculus (module Sheaf.AlgebraicTopology.MarkedAnodyneLiftingCalculus, in the delivery base) was not imported. fixes/MarkedRelativeCartesianModel.lean adds that private import and changes nothing else. nt_compile is clean for both the delivered file (3.1 s) and the fixed file (3.2 s), with no errors or warnings."
  }
 }
