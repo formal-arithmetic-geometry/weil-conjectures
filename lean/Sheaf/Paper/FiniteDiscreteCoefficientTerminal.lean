@@ -142,8 +142,6 @@ private theorem terminal_coefficient_of_units (M : Ab.{u + 1})
   exact coefficient_comp q0 _ _ _ _ _ _ _ _ hT hU hc'
     (constant_lowerStarComp M T U j HU qU W)
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private theorem coefficient_unit_comp
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     (T U : Scheme.{u}) (j : U ⟶ T) :
@@ -155,10 +153,10 @@ private theorem coefficient_unit_comp
       (eqToHom (congrArg (lowerStar Ab.{u + 1}) (comp_toSpecZ j).symm)).app _ ≫
         (lowerStarComp Ab.{u + 1} j (toSpecZ T)).inv.app
           ((toSpecZ U)^*[Ab.{u + 1}].obj (pointUpperStar.obj R)) := by
-  rw [condensedPushforwardHom_def, condensedPullbackHom_eq]
+  rw [← unitAlgHom_comp_map_condensedPullbackHom, Functor.map_comp,
+    condensedPullbackHom_eq]
   exact unit_comp_lowerStar_map_unit_comp_upperStarComp Ab.{u + 1}
     j (toSpecZ U) (toSpecZ T) (comp_toSpecZ j) (pointUpperStar.obj R)
--/
 
 private theorem constantScheme_pushforward (M : Ab.{u + 1})
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -178,7 +176,48 @@ private theorem constantScheme_pushforward (M : Ab.{u + 1})
         ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).op.obj
           (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)).obj
             (proEtTerminal specZ.{u})))) := by
-  sorry
+  let W := proEtTerminal specZ.{u}
+  let a : (constantSheaf (ProEt.topology specZ.{u}) Ab.{u + 1}).obj M ⟶
+      pointUpperStar.obj R :=
+    constantPointIso.hom.app M ≫ pointUpperStar.map e
+  let q0 := ((sheafificationAdjunction (ProEt.topology specZ.{u}) Ab.{u + 1}).unit.app
+    ((Functor.const specZ.{u}.ProEtᵒᵖ).obj M)).app (Opposite.op W) ≫
+      a.hom.app (Opposite.op W)
+  have hq (X : Scheme.{u}) :
+      ((sheafificationAdjunction (ProEt.topology X) Ab.{u + 1}).unit.app
+          ((Functor.const X.ProEtᵒᵖ).obj M) ≫
+        ((constantSchemeIso X).hom.app M ≫ (upperStarFromPoint X).map e).hom).app
+          (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X)).obj W)) =
+        q0 ≫ ((upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X)).unit.app
+          (pointUpperStar.obj R)).hom.app (Opposite.op W) := by
+    have hu := constantPullback_unit_map (A := Ab.{u + 1})
+      (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X))
+      (ProEt.topology specZ.{u}) (ProEt.topology X)
+      (proEtIsTerminal W) (proEtIsTerminal
+        ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X)).obj W))
+      M (pointUpperStar.obj R) a
+    dsimp only [Iso.trans_hom, Functor.mapIso_hom, constantSchemeIso,
+      Iso.app_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+      NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom,
+      Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    simp only [q0, a, upperStarFromPoint, upperStarLowerStarAdjunction,
+      Functor.comp_map, Functor.map_comp, ObjectProperty.FullSubcategory.comp_hom,
+      NatTrans.comp_app, Category.assoc, ObjectProperty.FullSubcategory.id_hom,
+      NatTrans.id_app, Category.comp_id] at hu ⊢
+    exact hu
+  exact terminal_coefficient_of_units M T U j (pointUpperStar.obj R)
+    ((toSpecZ T)^*[Ab.{u + 1}].obj (pointUpperStar.obj R))
+    ((toSpecZ U)^*[Ab.{u + 1}].obj (pointUpperStar.obj R))
+    ((upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ T)).unit.app _)
+    ((upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ U)).unit.app _)
+    (condensedPushforwardHom R j)
+    ((sheafificationAdjunction (ProEt.topology T) Ab.{u + 1}).unit.app
+      ((Functor.const T.ProEtᵒᵖ).obj M) ≫
+      ((constantSchemeIso T).hom.app M ≫ (upperStarFromPoint T).map e).hom)
+    ((sheafificationAdjunction (ProEt.topology U) Ab.{u + 1}).unit.app
+      ((Functor.const U.ProEtᵒᵖ).obj M) ≫
+      ((constantSchemeIso U).hom.app M ≫ (upperStarFromPoint U).map e).hom)
+    W q0 (hq T) (hq U) (coefficient_unit_comp R T U j)
 
 
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
