@@ -391,5 +391,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-87d736099 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all nine proof steps, cited DAG statements, Stacks sources, blueprint route, Mathlib searches, edge cases, duplication, and delivery metadata. The cardinal construction, local finite-system reflection, flatness of the subsheaf and quotient, and arbitrary-site sheafification arguments are correct; no repair is needed. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8afb92720",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Wrote review.md. Verified the immutable statement, dependencies, sources, universes, edge cases, docstrings, report sections, and verbatim signature. Per-file scompile.py reproduction passed. No landing faults; project clones and branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.SmallFlatSubsheaf",
+  "declaration": "SheafOfModules.exists_small_flat_subsheaf",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/SmallFlatSubsheaf.lean",
+  "statement": "theorem exists_small_flat_subsheaf {C : Type u} [SmallCategory C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) (R : Sheaf J.toGrothendieck CommRingCat.{u}) : ∃ κ : Cardinal.{u}, Cardinal.aleph0 ≤ κ ∧ ∀ F : ringedSiteModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj R), ¬ IsZero F → IsFlatOnSite (J := J.toGrothendieck) (R := R) F → ∃ (P : ringedSiteModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (i : P ⟶ F), Mono i ∧ ¬ IsZero P ∧ Cardinal.mk (Σ U : C, P.val.obj (op U)) ≤ κ ∧ IsFlatOnSite (J := J.toGrothendieck) (R := R) P ∧ IsFlatOnSite (J := J.toGrothendieck) (R := R) (cokernel i)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
