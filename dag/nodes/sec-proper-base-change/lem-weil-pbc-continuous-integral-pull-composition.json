@@ -13,14 +13,14 @@
  ],
  "proof": [
   {
-   "text": "Before deriving, restriction of scalars commutes with the pushforward composition comparison: apply Mod.hom_ext; all coefficient comparison components are identities and both paths have the same underlying sheaf pushforward composition component.",
+   "text": "Before deriving, restriction of scalars commutes with the pushforward composition comparison. The private calculation comap_lowerStar_comp applies Mod.hom_ext: all coefficient comparison components are identities and both paths have the same underlying sheaf pushforward composition component.",
    "uses": [
     "def-weil-pbc-condensed-e-module-category"
    ],
    "elementary": false
   },
   {
-   "text": "Right derive that square with the specified composition units. The pushforwards preserve K-injective complexes because their left adjoints are exact. On K-injective representatives the units are invertible, so cancel the units and use the underived equality. Naturality extends the equality to every derived object. The exact restriction identification R(Res)≅D(Res) is characterized by its unit and respects this equality.",
+   "text": "Right derive that square with the specified composition units. The private calculations comp_unit_app, comp_map_fac and comp_fac identify the composite unit and its factorization through the exact-functor and pushforward composition comparisons. The calculation square_fac characterizes the derived restriction/pushforward comparison by that unit. In square_comp, test on K-injective representatives using Localization.natTrans_ext, cancel the invertible composite unit, and use the degreewise underived square and naturality. Pushforwards and coefficient restrictions preserve K-injectives because their left adjoints are exact. Instantiating this generic calculation gives derived_comap_comp.",
    "uses": [
     "def-weil-pbc-continuous-integral-comparisons",
     "lem-weil-pbc-continuous-integral-scalar-exact"
@@ -28,7 +28,7 @@
    "elementary": false
   },
   {
-   "text": "Conjugate the equality through the scalar and pullback adjunctions. Conjugation reverses composition, interchanges left and right whiskering and reverses associators. The underived pullback composition is conjugate to pushforward composition; the right-derived composition conjugation theorem identifies its derived conjugate with the specified exact left-derived comparison. Restrict through the fully faithful bounded constructible inclusions to obtain precisely the displayed isomorphism identity.",
+   "text": "Conjugate the equality through the scalar and pullback adjunctions. The private calculation pull_comparison_pasting uses conjugateEquiv_comp and its whiskering and associator formulas. The calculation derived_lowerStar_conjugate identifies the specified left-derived pullback composition with the conjugate right-derived pushforward comparison, using rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv and derived_eq_ofNatIsoLeft. Together these give derived_pull_comp for arbitrary flat condensed coefficient changes. Finally bounded_comp_hom identifies the bounded constructible composition map with the ambient derived map. Apply Iso.ext and ObjectProperty.hom_ext, substitute these identifications, and evaluate the ambient natural-transformation equality at K.",
    "uses": [
     "def-weil-pbc-adjunction-mate",
     "def-weil-pbc-condensed-e-module-category",
@@ -47,7 +47,7 @@
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Remark 6.8.15; canonical ChangeOfCoefficients and derived pullback-composition constructions",
-  "note": "F1: the remaining strictly smaller composition-coherence part of the target adjunct argument. The underived composition and generic conjugation pasting calculations have been checked in Lean in the worker scratchpad; derived normalization remains."
+  "note": "C2: the existing three-step route is now fully implemented by proved private calculations in ContinuousIntegralPullComposition. The derived unit normalization, conjugation pasting and bounded restriction all compile. The original theorem statement is unchanged, and no new sorry obligations are introduced."
  },
  "mathlib_searches": [
   {
@@ -148,11 +148,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-ebd7d",
-  "group": "F1",
+  "reviewer": "X-20683",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261016T054835-L-156980",
+  "landing": "20261016T064221-L-582079",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compiled, direct importer compiled against adapted dependencies, DAG proof fields match Lean, and only permitted interface additions/expected sorryAx remain."
+  "note": "independent Codex review: Unchanged theorem signature matches the node; proof and DAG steps agree. Delivery compiled cleanly (50.3 s); axiom probe found only propext, Classical.choice, Quot.sound. Direct importer Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct compiled against the delivery (29.9 s)."
  }
 }
