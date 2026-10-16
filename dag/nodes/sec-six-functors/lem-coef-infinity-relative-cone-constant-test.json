@@ -1,0 +1,105 @@
+{
+ "id": "lem-coef-infinity-relative-cone-constant-test",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: derived coefficient adjunction, via the stable enhancement and finite pushout grid of lem-coef-suspension-square-comparison; local cone filling in the mapping-space universal property of pointwise Kan diagrams. Proposition 7.1.6.9 (02X4); Proposition 7.2.2.9 (02XT), Corollary 7.2.2.2 and Corollary 7.2.1.13 specialized to indexing equivalences; Corollary 7.2.2.5 (02XV) and the mapping-space criterion, Proposition 5.1.2.1 (01TL), and the equivalence criterion, Proposition 5.1.1.9 (01TB); opposite duality of Definition 7.1.6.1 and Remark 7.1.6.2, using the natural pinch comparisons of 4.6.5.10. Supporting constant-target/source mapping-space test, Kerodon 02X1, used to compare anodyne restrictions and a one-edge cone without asserting any of clauses (1)-(4).",
+   "via": [
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-relative-kan-existence",
+    "lem-coef-infinity-kan-mapping-restriction",
+    "lem-coef-infinity-finite-poset-kan-extension",
+    "lem-coef-suspension-square-comparison",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Constant-target and constant-source tests for relative universal cones",
+ "statement": "Use the simplicial sets, quasicategories, coherent transformations, spaces and right-pinched mapping spaces of [def-cbc-enhanced-diagrams-cones], the relative universal diagrams and joins of [def-coef-infinity-relative-cone], and the quasicategory and Kan-mapping-space assertions of [lem-cbc-enhanced-functor-cone-calculus]. Let $p:D\\to B$ be any functor of quasicategories, let $K$ be any small simplicial set, and let $q:K^{\\triangleright}\\to D$, with $f=q|_K$ and $x=q(*)$. Write $\\alpha:f\\to\\Delta_Kx$ for the coherent cocone obtained by precomposition with $K\\times\\Delta^1\\to K^{\\triangleright}$, retaining the initial $K$-vertices labelled $0$ and sending the vertices labelled $1$ to the apex. Then $q$ is a $p$-colimit diagram if and only if for every vertex $z$ of $D$ the following square of spaces is a homotopy pullback:\n$$\\begin{array}{ccc}\n\\operatorname{Map}_D(x,z)&\\xrightarrow{u\\mapsto\\Delta_K(u)\\alpha}&\\operatorname{Map}_{\\operatorname{Fun}(K,D)}(f,\\Delta_Kz)\\\\\n\\downarrow&&\\downarrow\\\\\n\\operatorname{Map}_B(px,pz)&\\xrightarrow{v\\mapsto\\Delta_K(v)(p\\alpha)}&\\operatorname{Map}_{\\operatorname{Fun}(K,B)}(pf,\\Delta_K(pz)).\n\\end{array}$$\nComposition and commutativity here include their coherent homotopies. For a homotopy-commuting square, the path-pullback comparison sends a point to its two images together with the specified path between their images in the lower-right corner; this comparison must be a weak homotopy equivalence, and all higher simplices of the path data are retained. Equivalently, in the all-diagrams testing square defining a $p$-colimit diagram, it suffices to take the target diagram to be constant at each $z$ on $K^{\\triangleright}$. The passage between these two tests is natural in $p$ and in restriction along any simplicial map $L\\to K$, including the induced coherent cocones; the apex is unchanged by restriction. Dually, if $q:K^{\\triangleleft}\\to D$ has apex $x$ and boundary $f$, it is a $p$-limit diagram if and only if, for every vertex $z$ of $D$, the square with upper row\n$$\\operatorname{Map}_D(z,x)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K,D)}(\\Delta_Kz,f)$$\nand lower row the corresponding square in $B$, induced by its coherent cone, is a homotopy pullback. Equivalently, only constant source test diagrams are needed. All objects lie in fixed sufficiently large universes. No fibration hypothesis on $p$ and no existence of any other limits or colimits is assumed.",
+ "source": {
+  "document": "https://kerodon.net/tag/02X1",
+  "place": "Proposition 7.1.6.19, equivalence of conditions (2) and (3), and its colimit dual; apex form obtained from the constant-diagram test by restriction to the cone vertex (the cone-vertex inclusion is one-sided anodyne; restriction gives the constant-target mapping-space equivalence). Coherent cocones use 4.6.5.10. Kerodon identifiers, not Stacks tags; read online, archival source WANTED."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative universal diagrams can be tested only against constant diagrams using mapping spaces",
+   "results": "{\"t\": \"2026-10-16T20:18:50Z\", \"tool\": \"leanfinder\", \"query\": \"Relative universal diagrams can be tested only against constant diagrams using mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.IsTerminal.ofExistsUnique\", \"CategoryTheory.MorphismProperty.relative.rep\", \"CategoryTheory.SolutionSetCondition\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.D₄_P\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.IsTerminal.hlift\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.D₂_P\", \"CategoryTheory.Functor.relativelyRepresentable\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.D₂\"], \"digest\": \"dcbc7c91453bf7dd\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned types concern ordinary categorical universal/Van Kampen colimits, ordinary constant-functor limits and adjunctions, or colimits of relative cell complexes. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:29-137: only primitive horn filling is provided, with no relative universal-cone mapping-space criterion. The AlgebraicTopology grep and joint Quasicategory/Map Loogle query returned no hits. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative colimit of a coherent diagram is characterized by the homotopy cartesian square tested at constant target diagrams",
+   "results": "{\"t\": \"2026-10-16T20:20:27Z\", \"tool\": \"leanfinder\", \"query\": \"A relative colimit of a coherent diagram is characterized by the homotopy cartesian square tested at constant target diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsVanKampenColimit\", \"CategoryTheory.isVanKampenColimit_of_evaluation\", \"HomotopicalAlgebra.AttachCells.isColimit₂\", \"HomotopicalAlgebra.AttachCells.isColimit₁\", \"CategoryTheory.Limits.isColimitOfIsPushoutOfIsConnected\", \"CategoryTheory.BinaryCofan.isVanKampen_iff\", \"CategoryTheory.IsUniversalColimit.isPullback_of_isColimit_left\", \"CategoryTheory.IsUniversalColimit.isPullback_of_isColimit_right\"], \"digest\": \"59d6ed6ca4e11bb1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned types concern ordinary categorical universal/Van Kampen colimits, ordinary constant-functor limits and adjunctions, or colimits of relative cell complexes. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:29-137: only primitive horn filling is provided, with no relative universal-cone mapping-space criterion. The AlgebraicTopology grep and joint Quasicategory/Map Loogle query returned no hits. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative limits of quasicategories tested at constant source diagrams",
+   "results": "{\"t\": \"2026-10-16T20:20:24Z\", \"tool\": \"leansearch\", \"query\": \"Relative limits of quasicategories tested at constant source diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasLimit_const_of_isConnected\", \"CategoryTheory.Limits.constLimAdj\", \"CategoryTheory.Limits.limitConstTerminal\", \"CategoryTheory.Functor.IsEventuallyConstantTo.hasLimit\", \"CategoryTheory.Limits.isLimitConstCone\", \"CategoryTheory.Limits.instHasLimitObjFunctorConstTerminal\", \"CategoryTheory.Limits.hasLimitsOfShape_iff_isLeftAdjoint_const\", \"CategoryTheory.Limits.preservesLimits_const\"], \"digest\": \"8b4cb8ce2a2d135c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned types concern ordinary categorical universal/Van Kampen colimits, ordinary constant-functor limits and adjunctions, or colimits of relative cell complexes. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:29-137: only primitive horn filling is provided, with no relative universal-cone mapping-space criterion. The AlgebraicTopology grep and joint Quasicategory/Map Loogle query returned no hits. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Map\"",
+   "results": "{\"t\": \"2026-10-16T20:20:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned types concern ordinary categorical universal/Van Kampen colimits, ordinary constant-functor limits and adjunctions, or colimits of relative cell complexes. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:29-137: only primitive horn filling is provided, with no relative universal-cone mapping-space criterion. The AlgebraicTopology grep and joint Quasicategory/Map Loogle query returned no hits. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]elative.*[Cc]olimit|[Cc]olimit.*[Cc]onstant|[Ll]imit.*[Cc]onstant",
+   "results": "{\"t\": \"2026-10-16T20:20:23Z\", \"tool\": \"grep\", \"query\": \"[Rr]elative.*[Cc]olimit|[Cc]olimit.*[Cc]onstant|[Ll]imit.*[Cc]onstant\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned types concern ordinary categorical universal/Van Kampen colimits, ordinary constant-functor limits and adjunctions, or colimits of relative cell complexes. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:35-103 and InnerFibration.lean:29-137: only primitive horn filling is provided, with no relative universal-cone mapping-space criterion. The AlgebraicTopology grep and joint Quasicategory/Map Loogle query returned no hits. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces out of an infinity categorical relative colimit satisfy a homotopy pullback universal property for each object",
+   "results": "{\"t\": \"2026-10-16T20:52:26Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces out of an infinity categorical relative colimit satisfy a homotopy pullback universal property for each object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsUniversalColimit.isPullback_of_isColimit_right\", \"CategoryTheory.IsUniversalColimit.isPullback_of_isColimit_left\", \"CategoryTheory.IsVanKampenColimit\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"CategoryTheory.IsUniversalColimit.nonempty_isColimit_of_isPullback_left\", \"CategoryTheory.IsUniversalColimit.nonempty_isColimit_of_isPullback_right\", \"CategoryTheory.IsUniversalColimit.isPullback_prod_of_isColimit\"], \"digest\": \"203b0db6261d1030\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search. Loogle and the source grep returned zero hits. LeanFinder returned ordinary Van Kampen/universal colimits or the all-horn Quillen generators, primitive Quasicategory and KanComplex definitions, and model-category lifting lemmas. Their returned types do not assert relative mapping-space universality or a right-anodyne factorization of an indexing equivalence. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"constant\"",
+   "results": "{\"t\": \"2026-10-16T20:53:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"constant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search. Loogle and the source grep returned zero hits. LeanFinder returned ordinary Van Kampen/universal colimits or the all-horn Quillen generators, primitive Quasicategory and KanComplex definitions, and model-category lifting lemmas. Their returned types do not assert relative mapping-space universality or a right-anodyne factorization of an indexing equivalence. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAnodyne|RightAnodyne|IsRelativeColimit|RelativeLimit|homotopyPullback",
+   "results": "{\"t\": \"2026-10-16T20:52:21Z\", \"tool\": \"grep\", \"query\": \"rightAnodyne|RightAnodyne|IsRelativeColimit|RelativeLimit|homotopyPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search. Loogle and the source grep returned zero hits. LeanFinder returned ordinary Van Kampen/universal colimits or the all-horn Quillen generators, primitive Quasicategory and KanComplex definitions, and model-category lifting lemmas. Their returned types do not assert relative mapping-space universality or a right-anodyne factorization of an indexing equivalence. No exact match or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-relative-cone-equivalence",
+  "date": "2026-10-17",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

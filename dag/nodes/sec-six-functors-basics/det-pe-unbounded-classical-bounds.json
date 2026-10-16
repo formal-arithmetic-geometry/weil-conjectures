@@ -3,60 +3,322 @@
  "blueprint": {
   "is": "det-pe-unbounded-classical-bounds",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Uniform cohomological bounds in the finite-type range",
- "statement": "Let $k$ be a finite or algebraically closed field, $X$ and $Y$ schemes of finite\ntype over $k$, $g\\colon X\\to Y$ a morphism of finite type, and put\n$e_X=2\\dim X+1$, $e_Y=2\\dim Y+1$. Let $G$ be a torsion sheaf on $X_{\\Et}$.\n\n1. If $U=\\varprojlim_iU_i$ is a pro-étale affine presentation of an object of\n   $X_{\\Proet}$ ($U_i$ affine étale over $X$), then\n   $H^q(U_{\\Proet},(\\nu_X^*G)|_U)=0$ for $q>e_X$.\n2. If $V=\\varprojlim_iV_i$ is a pro-étale affine presentation of an object of\n   $Y_{\\Proet}$ ($V_i$ affine étale over $Y$), then\n   $H^q\\bigl((X\\times_YV)_{\\Proet},(\\nu_X^*G)|_{X\\times_YV}\\bigr)=0$ for\n   $q>e_X$.\n3. $R^qg_{\\Et,*}G=0$ for $q>e_X$.\n\nThe same statements hold with $X$ replaced by $Y$ and $e_X$ by $e_Y$.",
+ "statement": "Let $k$ be a finite or algebraically closed field, let $X,Y$ be schemes of finite type over $k$ [def-weil-finite-type-morphism], and let $g:X\\to Y$ be a morphism of finite type. Use small sites in a common larger universe [def-weil-pbc-proetale-site]. For a finite-type $k$-scheme $T$ put $d_T=\\dim T$ if $T\\ne\\varnothing$ and $d_T=0$ if $T=\\varnothing$, and put $e_T=2d_T+1$; dimension is topological Krull dimension [def-kun-topological-krull-dimension]. Let $G$ be a torsion abelian sheaf on $X_{\\Et}$, where torsion means every local section is locally killed by a positive integer [def-weil-pbc-etale-sheaves], without a uniform annihilator. Write $\\nu_T:T_{\\Proet}\\to T_{\\Et}$ for comparison [def-weil-pbc-site-comparison-morphism]. Restrictions along a scheme map mean the corresponding inverse images [def-weil-pbc-inverse-image, def-weil-proetale-inverse-image]. Cohomology means right-derived global sections [def-weil-pbc-etale-cohomology, def-weil-pbc-sites-and-cohomology].\n\n1. If $U=\\varprojlim_iU_i$ is a pro-étale affine presentation over $X$ [sk-def-pe-morphisms], with $U$ an object of $X_{\\Proet}$ and $U_i$ affine étale over $X$, then $H^q(U_{\\Proet},(\\nu_X^*G)|_U)=0$ for $q>e_X$.\n2. If $V=\\varprojlim_iV_i$ is such a presentation over $Y$, with $V$ an object of $Y_{\\Proet}$ and $V_i$ affine étale over $Y$, then, writing $T=X\\times_YV$ for the fibre product [def-pc-fibre-product],\n$$H^q(T_{\\Proet},(\\nu_X^*G)|_T)=0\\qquad(q>e_X).$$\n3. The higher direct image [def-weil-pbc-direct-image] satisfies $R^qg_{\\Et,*}G=0$ for $q>e_X$.\n\nEach presentation has a small nonempty cofiltered index category and affine transition maps. The same assertions apply with $Y$ as source, a torsion sheaf on $Y_{\\Et}$, and bound $e_Y$ (and any finite-type map from $Y$ to a finite-type $k$-scheme).",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.md",
   "place": "node det-pe-unbounded-classical-bounds, order None"
  },
  "stmt_deps": [
-  "def-sc-etale-torsion-cd"
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-sites-and-cohomology",
+  "sk-def-pe-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image"
  ],
  "proof": [
   {
-   "text": "By [det-base-field-cd-finite-field], $\\operatorname{cd}_{\\rm tor}(k)\\leq1$. Let $W$\nbe a scheme of finite type over $k$ admitting an étale morphism to $X$. Then\n$\\dim W\\leq\\dim X$, since étale morphisms have discrete fibres and are\nopen, and [thm-sc-finite-type-torsion-cd] gives\n$\\operatorname{cd}_{\\rm tor}(W)\\leq2\\dim X+1=e_X$.",
+   "text": "First prove the all-torsion field bound that the opening paragraph needs, rather than infer it from a bound for a single prime. Choose a separable closure and an algebraic closure of $k$ containing it. The additive stalk equivalence [lem-exc-abelian-sheaves-gmodules] and the natural invariant-section formula [lem-exc-field-sections-stalk-invariants] identify derived sections with derived invariants: an additive equivalence and its inverse preserve kernels and cokernels by their universal properties, and preserve injectives by the Hom lifting criterion. Applying the equivalence to an injective resolution therefore gives an injective resolution and the section complexes are naturally isomorphic. By [det-base-field-cd-cochains], part 1, $H^s(k_{\\Et},F)=H^s(G_k,F_{\\bar k})$. A torsion sheaf has torsion stalk: a germ is represented by a section and a covering on which that section is killed supplies an integer killing the germ.",
    "uses": [
-    "thm-sc-finite-type-torsion-cd"
+    "lem-exc-abelian-sheaves-gmodules",
+    "lem-exc-field-sections-stalk-invariants",
+    "det-base-field-cd-cochains"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04JQ (lemma-equivalence-abelian-sheaves-point), 04JM (lemma-global-sections-point), 03QU (lemma-compare-cohomology-point)"
+   }
   },
   {
-   "text": "*(1).* Each $U_i$ is affine étale over $X$, hence of finite type over $k$, so\n$\\operatorname{cd}_{\\rm tor}(U_i)\\leq e_X$ for all $i$. The scheme $U$ is the limit\nof the qcqs schemes $U_i$ along affine transition maps, so\n[lem-sc-cd-affine-limit] gives $\\operatorname{cd}_{\\rm tor}(U)\\leq e_X$. The slice\n$X_{\\Proet}/U$ is $U_{\\Proet}$ and $(\\nu_X^*G)|_U\\cong\\nu_U^*(G|_U)$, so the\ncohomology comparison ([sk-prop-sf-comparison]) gives\n$H^q(U_{\\Proet},(\\nu_X^*G)|_U)\\cong H^q(U_{\\Et},G|_U)=0$ for $q>e_X$.",
+   "text": "If $k$ is finite, [det-base-field-cd-galois-group] identifies $G_k$ with $\\widehat{\\mathbf Z}$. Pullback of cochains along this topological group isomorphism commutes with the written cochain differential and has inverse pullback along its inverse. For a torsion discrete module $M$, every element $x$ has finite orbit: its open stabilizer contains a coordinate kernel $\\ker(\\widehat{\\mathbf Z}\\to C_m)$, since a basic open neighbourhood restricts finitely many coordinates and their least common multiple dominates them. If $ex=0$, the subgroup generated by its orbit of size $t$ is an image of $(\\mathbf Z/e)^t$, hence finite and stable. Finite sums of such subgroups are finite. They form a small nonempty directed family (a subset of the power set of $M$, containing zero), whose union is $M$. Part 2 of [det-base-field-cd-cochains] reduces vanishing to finite stable modules.",
+   "uses": [
+    "det-base-field-cd-galois-group",
+    "det-base-field-cd-cochains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+    "place": "Reduction to finite modules; Consequences, finite-field Galois group"
+   }
+  },
+  {
+   "text": "For a finite stable module $A$, choose $e\\ge1$ with $eA=0$. The intersection of the finitely many open stabilizers is an open action kernel, containing a coordinate kernel $K_m$; hence the action factors through $C_m$. Coordinate kernels $K_n$, $m\\mid n$, are cofinal among open normal subgroups acting trivially on $A$: given such an $N$, a basic neighbourhood gives $K_d\\subseteq N$, and $K_{\\operatorname{lcm}(m,d)}\\subseteq N$. Projections onto $C_n$ are surjective, since compatible residues of integers give every residue. Thus part 3 of [det-base-field-cd-cochains] gives $H^s(\\widehat{\\mathbf Z},A)=\\varinjlim_{m\\mid n}H^s(C_n,A)$. For $s\\ge2$, inflation from $n$ to $en$ is zero by the final clause of [det-base-field-cd-inflation], with multiplier $r=e$. Every colimit class therefore becomes zero. Together with steps 1–2 this proves $H^s(k,F)=0$ for every torsion sheaf and $s>1$. If $k$ is algebraically closed it is separably closed, and [lem-sf-separably-closed-torsion-cd] gives the stronger vanishing for $s>0$. In both cases $\\operatorname{cd}_{\\rm tor}(k)\\le1$, in exactly the all-torsion sense of [def-sc-etale-torsion-cd].",
+   "uses": [
+    "det-base-field-cd-cochains",
+    "det-base-field-cd-inflation",
+    "lem-sf-separably-closed-torsion-cd",
+    "def-sc-etale-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+    "place": "Finite modules; Consequences"
+   }
+  },
+  {
+   "text": "By [lem-kun-dimension-finite-type], X and Y have finite Krull dimension. The definition [def-kun-dimension] uses the same chains of nonempty irreducible closed subsets as [def-kun-topological-krull-dimension], so their dimensions agree. A nonempty scheme has a length-zero chain by [lem-sc-scheme-sober] applied to a point closure; hence each nonempty source dimension is a nonnegative integer and e_X and e_Y are finite nonnegative integers. Record the finite-type and quasi-separated hypotheses before applying a limit theorem. A field is Noetherian since its only ideals are zero and the unit ideal. Hence [lem-weil-pbc-finite-type-over-noetherian] makes $X,Y$ Noetherian. Every affine étale $W\\to X$ or $W\\to Y$ is of finite type over $k$: étale is locally finitely presented [def-weil-etale-morphism], hence locally finitely generated; composing finite generating sets gives local finite type over $k$, and $W$ is quasi-compact because it is affine [def-weil-finite-type-morphism]. For $T_i=X\\times_YV_i$, first show quasi-compactness. Cover $Y$ by finitely many affine opens $Y_b$. By finite type of $g$, each $g^{-1}(Y_b)$ has a finite affine cover by schemes whose coordinate rings are finitely generated over the ring of $Y_b$. Since $V_i$ is a finite-type affine $k$-scheme, it is Noetherian by the cited theorem; its open inverse image of each $Y_b$ has a finite affine cover. The products of these two finite covers give a finite affine cover of $T_i$, using [lem-weil-pbc-fibre-product-affine-spectra]. These are open subsets covering $T_i$: for opens $A\\subseteq X$ and $B\\subseteq V_i$ mapping to a common open of $Y$, the open $p_X^{-1}(A)\\cap p_V^{-1}(B)$, with its restricted structure sheaf, has the fibre-product universal property for $A,B$ over that open. Every point lies in such a pair, so their finite collection covers. In particular $T_i$ is quasi-compact. Its map to $X$ is étale by base change (used explicitly in step 5), so it is locally of finite type over $k$ via $X$; together these give finite type. Thus all stage schemes are Noetherian by the same cited theorem and are qcqs: intersections of affine opens are opens of a Noetherian topological space, hence quasi-compact. The topological assertion follows from [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]: among complements of finite unions from an open cover choose a minimal one; adding each other open cannot shrink it, so that finite union covers the given open. Quasi-separatedness also follows directly from [lem-weil-pbc-locally-noetherian-quasi-separated]. No separatedness of $X,Y,g$ and no compatibility of $g$ with the given $k$-structures is used.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "def-kun-dimension",
+    "def-kun-topological-krull-dimension",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-etale-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian); affine definitions of finite type and base change"
+   }
+  },
+  {
+   "text": "For any étale morphism $a:W\\to X$, [lem-sc-etale-local-dimension] applied on affine neighbourhoods gives $\\dim\\mathcal O_{W,w}=\\dim\\mathcal O_{X,a(w)}$. By [lem-sc-scheme-stalk-dimension-generalization-chains], every chain of generalizations beginning at $w$ has length at most $\\dim X$. Conversely, any finite chain of irreducible closed subsets of $W$ gives a chain of their generic points, which exist uniquely by [lem-sc-scheme-sober], beginning at the generic point of the smallest member. The same cited chain formula bounds its length by $\\dim X$. The definition [def-kun-topological-krull-dimension] then gives $\\dim W\\le\\dim X$. This works for nonseparated schemes and does not require the image of $a$ to be closed. For $W=T_i$ use étale stability under base change [lem-weil-pbc-etale-base-change-finite-limits].",
+   "uses": [
+    "lem-sc-etale-local-dimension",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QP (lemma-dimension-etale-extension); Properties Tag 02IZ (lemma-codimension-local-ring)"
+   }
+  },
+  {
+   "text": "Suppose $X\\ne\\varnothing$. For every nonempty finite-type $W$ étale over $X$, steps 3 and 5 allow [thm-sc-finite-type-torsion-cd] with $c=1$, yielding $\\operatorname{cd}_{\\rm tor}(W)\\le2\\dim W+1\\le e_X$. For empty $W$, all sheaves and their section complexes on the empty small site are zero (the empty covering forces the group of sections on its sole object to be zero), so this bound holds as well. In particular it holds for every $U_i$ and $T_i$. Pullbacks of $G$ are torsion by [lem-weil-pbc-inverse-image-torsion]; there is no finite coefficient ring, constructibility, invertibility, or fixed exponent assumption in the dimension theorem.",
+   "uses": [
+    "thm-sc-finite-type-torsion-cd",
+    "lem-weil-pbc-inverse-image-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.proof.md",
+    "place": "Opening paragraph: uniform finite-type bound"
+   }
+  },
+  {
+   "text": "For part 1, the $U_i$ are qcqs by step 4, and the transition maps are affine as stipulated in the presentation. Step 6 bounds their torsion cohomological dimensions by the same $e_X$. Applying [lem-sc-cd-affine-limit] gives $\\operatorname{cd}_{\\rm tor}(U)\\le e_X$. Let $u:U\\to X$ and put $G_U=u_{\\Et}^{-1}G$, which is torsion by [lem-weil-pbc-inverse-image-torsion]. The comparison-pullback isomorphism [lem-weil-pbc-comparison-pullback] identifies $u_{\\Proet}^{-1}\\nu_X^*G$ with $\\nu_U^*G_U$. For compatibility with the source restriction notation, [lem-weil-proetale-weakly-etale-localization] identifies the slice over $U$ with $U_{\\Proet}$. The inverse image formula in [def-weil-proetale-inverse-image] equals restriction here: for an object $W\\to U$, the index category of maps $W\\to Z\\times_XU$ has initial object $Z=W$ with its graph map; the opposite indexing category therefore has terminal object $W$. The presheaf colimit is $F(W)$ with its restriction maps and is already a sheaf by the localization equivalence. Apply the global-sections comparison of [sk-prop-sf-comparison] with the discrete ring $\\mathbf Z$ and the complex $G_U[0]$: it gives $H^q(U_{\\Proet},\\nu_U^*G_U)=H^q(U_{\\Et},G_U)=0$ for $q>e_X$. This proves part 1 without claiming that $U$ is of finite type.",
    "uses": [
     "lem-sc-cd-affine-limit",
-    "sk-prop-sf-comparison"
+    "lem-weil-pbc-inverse-image-torsion",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-proetale-weakly-etale-localization",
+    "sk-prop-sf-comparison",
+    "def-weil-proetale-inverse-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.proof.md",
+    "place": "Part (1): affine limit and cohomology comparison"
+   }
   },
   {
-   "text": "*(2).* Each $V_i$ is affine and étale over $Y$, hence of finite type over $k$, and\n$X\\times_YV_i$ is of finite type over $k$ and étale over $X$. So\n$\\operatorname{cd}_{\\rm tor}(X\\times_YV_i)\\leq e_X$. The scheme\n$X\\times_YV=\\varprojlim_iX\\times_YV_i$ is a limit of qcqs schemes along affine\ntransition maps (base changes of the affine maps $V_j\\to V_i$), and\n[lem-sc-cd-affine-limit] and the cohomology comparison conclude as in (1).",
+   "text": "For part 2, put $T=X\\times_YV$ and $T_i=X\\times_YV_i$. The canonical equality $T=\\varprojlim_iT_i$ follows directly from the universal properties: a map to either side is a map to $X$ and a compatible family of maps to $V_i$ whose composites to $Y$ agree. The transition $T_j\\to T_i$ is the base change of the affine map $V_j\\to V_i$, by the same fibre-product universal property. It is affine by part (1) of [lem-weil-pbc-affine-morphism-permanence], applied with $V_j\\to V_i$ and $T_i\\to V_i$. Each $T_i$ is qcqs by step 4 and has torsion dimension at most $e_X$ by step 6. Thus [lem-sc-cd-affine-limit] gives $\\operatorname{cd}_{\\rm tor}(T)\\le e_X$. This use of the limit lemma imposes no finite-type assumption on $V$ or $T$.",
    "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-morphism-permanence",
     "lem-sc-cd-affine-limit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.proof.md",
+    "place": "Part (2): base change of the affine limit; Stacks Tag 01SD (lemma-base-change-affine)"
+   }
   },
   {
-   "text": "*(3).* The sheaf $R^qg_{\\Et,*}G$ is the sheafification of\n$V\\mapsto H^q((X\\times_YV)_{\\Et},G)$ on affine étale $V\\to Y$. Each\n$X\\times_YV$ is of finite type over $k$ and étale over $X$, so these groups vanish\nfor $q>e_X$.\n\nThe statements for $Y$ are the case $g=\\mathrm{id}_Y$.",
+   "text": "Let $t:T\\to X$. Set $G_T=t_{\\Et}^{-1}G$. It is torsion by [lem-weil-pbc-inverse-image-torsion], and [lem-weil-pbc-comparison-pullback] identifies $(\\nu_X^*G)|_T$ with $\\nu_T^*G_T$. Apply [sk-prop-sf-comparison] on the scheme $T$, with coefficients $\\mathbf Z$ and $G_T[0]$. Together with step 8 this gives $H^q(T_{\\Proet},(\\nu_X^*G)|_T)=H^q(T_{\\Et},G_T)=0$ for $q>e_X$, proving part 2. The comparison is valid on an arbitrary scheme, and is only being used on a sheaf placed in degree zero, not on an unbounded complex.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-torsion",
+    "lem-weil-pbc-comparison-pullback",
+    "sk-prop-sf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.proof.md",
+    "place": "Part (2): comparison for the actual pulled-back coefficient"
+   }
+  },
+  {
+   "text": "For part 3, [lem-weil-pbc-higher-direct-image-sheafified-presheaf] identifies $R^qg_{\\Et,*}G$ with the sheafification of $W\\mapsto H^q(X\\times_YW,G)$, where this initially means derived section-evaluation on the object $X\\times_YW$ of $X_{\\Et}$. The object is étale by [lem-weil-pbc-etale-base-change-finite-limits]. Apply [lem-weil-pbc-cohomology-over-object-localization] and the slice-site equivalence [lem-weil-pbc-etale-site-localization-open]; together with [lem-weil-pbc-etale-inverse-image-restriction], they identify this group with $H^q((X\\times_YW)_{\\Et},a_{\\Et}^{-1}G)$ for its projection $a$ to $X$. For affine étale $W\\to Y$, the finite-type and dimension arguments of steps 4–6 give zero for $q>e_X$. Every étale object of $Y$ has an affine open covering, itself an étale covering; hence every section of the displayed presheaf restricts to zero on a covering. The presheaf therefore sheafifies to zero, as required: any map from it to an abelian sheaf sends each section to a locally zero section, which is zero by the separatedness axiom; the universal property [def-weil-pbc-sheafification] then forces the identity of its sheafification to be zero. The sheafification theorem has no qcqs hypothesis on $g$.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.proof.md",
+    "place": "Part (3): higher-direct-image presheaf and affine étale basis"
+   }
+  },
+  {
+   "text": "If $X=\\varnothing$, then $U$, every $T_i$, and $X\\times_YV$ are empty. The only abelian sheaf on their small sites is zero by the empty covering axiom, so all cohomology groups in parts 1–2 vanish. The direct-image functor from the zero abelian category is zero, and its right derived functors are zero, proving part 3. Thus $e_X=1$ is a valid bound in this case and excludes no scheme. Finally the preceding argument was for an arbitrary finite-type source and target over $k$. Repeat it with source $Y$, any torsion sheaf on $Y$, and an arbitrary finite-type map from $Y$ to a finite-type $k$-scheme. This gives the promised $e_Y$ assertions. Taking the identity map suffices for the absolute assertion for $Y$.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.proof.md",
+    "place": "Last sentence; explicit empty-source case"
+   }
   }
  ],
  "proof_deps": [
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-exc-field-sections-stalk-invariants",
+  "det-base-field-cd-cochains",
+  "det-base-field-cd-galois-group",
+  "det-base-field-cd-inflation",
+  "lem-sf-separably-closed-torsion-cd",
+  "def-sc-etale-torsion-cd",
+  "lem-kun-dimension-finite-type",
+  "def-kun-dimension",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-pc-fibre-product",
+  "lem-sc-etale-local-dimension",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
   "thm-sc-finite-type-torsion-cd",
+  "lem-weil-pbc-inverse-image-torsion",
   "lem-sc-cd-affine-limit",
-  "sk-prop-sf-comparison"
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-proetale-weakly-etale-localization",
+  "sk-prop-sf-comparison",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-sheafification"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.proof.md",
+  "place": "Complete opening paragraph and parts (1)–(3), with the all-torsion field argument expanded from sk-lem-base-field-cd-finite-field.proof.md and Stacks Tags 04JQ, 04JM, 03QU, 07QP, 02IZ, 01T6, 03Q8, 099W"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uniform vanishing bounds for torsion etale cohomology of finite type schemes over finite or algebraically closed fields and classical proetale sheaves",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.instForallOfFinite, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, StandardEtalePair.instFormallyEtaleRing, AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.subsingleton_h1Cotangent",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern definitions, cotangent cohomology, structure-sheaf limits or generic derived vanishing, not the three uniform etale/proetale torsion bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.H, AlgebraicGeometry.Scheme",
+   "results": "0 hits: . loogle: unknown identifier 'Sheaf.H'",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern definitions, cotangent cohomology, structure-sheaf limits or generic derived vanishing, not the three uniform etale/proetale torsion bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|subsingleton_H_of_two_mul|etale.*vanish",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern definitions, cotangent cohomology, structure-sheaf limits or generic derived vanishing, not the three uniform etale/proetale torsion bounds"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Torsion etale cohomology vanishes above twice the dimension plus one over a finite field",
+   "results": "8 hits: Algebra.Etale.finitePresentation, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.formallyEtale, RingHom.Etale, Algebra.formallyEtale_iff, Algebra.isOpen_etaleLocus",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern definitions, cotangent cohomology, structure-sheaf limits or generic derived vanishing, not the three uniform etale/proetale torsion bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every torsion abelian sheaf on the small etale site of a finite field higher cohomology vanishes in degrees greater than one",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace, CategoryTheory.Sheaf.cohomologyPresheafFunctor, groupCohomology.H1ofAutOnUnitsUnique, CategoryTheory.Sheaf.instAddCommGroupH, DerivedCategory.isZero_of_isGE, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern definitions, cotangent cohomology, structure-sheaf limits or generic derived vanishing, not the three uniform etale/proetale torsion bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomological dimension of a proetale affine limit for classical torsion coefficients is bounded by the dimension of the finite type source",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.instForallOfFinite, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.FormallySmooth.iff_subsingleton_and_projective, Algebra.formallyEtale_iff, Algebra.formallySmooth_iff, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.IsStandardSmoothOfRelativeDimension.out",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern definitions, cotangent cohomology, structure-sheaf limits or generic derived vanishing, not the three uniform etale/proetale torsion bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, AlgebraicGeometry.Scheme",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations define generic sheaf cohomology, algebraic etaleness, structure-sheaf limit calculations or derived boundedness, and do not assert these torsion etale/proetale dimension bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|cohomological.dimension|torsion.*cohomology",
+   "results": "0 hits in Mathlib/AlgebraicGeometry: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations define generic sheaf cohomology, algebraic etaleness, structure-sheaf limit calculations or derived boundedness, and do not assert these torsion etale/proetale dimension bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology of a torsion abelian sheaf on a scheme of finite type over a finite field is zero above dimension bound",
+   "results": "8 hits: CategoryTheory.Sheaf.H, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.etaleTopology, RingHom.Etale, Algebra.Etale.finitePresentation, SheafOfModules.IsFiniteType.mk, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations define generic sheaf cohomology, algebraic etaleness, structure-sheaf limit calculations or derived boundedness, and do not assert these torsion etale/proetale dimension bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "Sheaf\\.H|cohomologyPresheaf|CohomologicalDimension",
+   "results": "25 hits: Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Light/Basic.lean, Mathlib/Condensed/Light/Epi.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/SheafHom.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations define generic sheaf cohomology, algebraic etaleness, structure-sheaf limit calculations or derived boundedness, and do not assert these torsion etale/proetale dimension bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of arbitrary torsion etale abelian sheaves under a finite type morphism vanish in degrees above twice the source dimension plus one",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.Sheaf.H, DerivedCategory.isZero_of_isGE, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.isGE_iff, Algebra.etaleLocus_eq_compl_support, DerivedCategory.isLE_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations define generic sheaf cohomology, algebraic etaleness, structure-sheaf limit calculations or derived boundedness, and do not assert these torsion etale/proetale dimension bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|def H |cohomologicalDimension",
+   "results": "10 hits in Mathlib/CategoryTheory/Sites/SheafCohomology: Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations define generic sheaf cohomology, algebraic etaleness, structure-sheaf limit calculations or derived boundedness, and do not assert these torsion etale/proetale dimension bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "7 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyFunctor, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations define generic sheaf cohomology, algebraic etaleness, structure-sheaf limit calculations or derived boundedness, and do not assert these torsion etale/proetale dimension bounds."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -76,5 +338,115 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-pe-unbounded-classical"
+ "unit": "sk-prop-pe-unbounded-classical",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-pe-unbounded-classical-bounds",
+  "worker": "stage1",
+  "summary": "Expanded the all-torsion finite-field argument using existing cochain, inflation and Galois-module nodes; replaced missing citations by existing statements, supplied étale dimension and qcqs checks, identified the actual pulled-back coefficients, and proved the higher-direct-image clause through sheafification on an affine basis. No new nodes. Corrected only the undefined empty-source arithmetic by setting d_empty=0; preserved all nonempty bounds and all torsion coefficients. Re-audited the inherited attempt: cited the existing finite-dimension theorem and identified its dimension convention, and replaced the unsupported local-affineness inference by the existing affine-base-change theorem.",
+  "blueprint": "Opening field/dimension paragraph is realized by steps 1–6; part (1) by step 7; part (2) by steps 8–9; part (3) by step 10; final Y sentence and empty schemes by step 11. This realizes unit step 1 along its stated absolute-bound/affine-limit/comparison route.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-abelian-sheaves-gmodules",
+    "why": "Generic abelian etale sheaves on a field and discrete g-modules supplies exactly the cited sheaf, dimension or localization fact; no statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-exc-field-sections-stalk-invariants",
+    "why": "Generic sections over a finite separable field extension are stalk invariants supplies exactly the cited sheaf, dimension or localization fact; no statement of this unit supplies this general tool."
+   },
+   {
+    "node": "det-base-field-cd-cochains",
+    "why": "General continuous-cochain comparison and directed-union/finite-quotient formulas supply the all-torsion field bound; the single-prime field statement does not state it."
+   },
+   {
+    "node": "det-base-field-cd-galois-group",
+    "why": "General finite-field absolute Galois group calculation used in the opening field bound."
+   },
+   {
+    "node": "det-base-field-cd-inflation",
+    "why": "Generic cyclic inflation calculation kills each finite-quotient class in degree at least two."
+   },
+   {
+    "node": "lem-sf-separably-closed-torsion-cd",
+    "why": "Generic torsion cohomological dimension of a separably closed field supplies exactly the cited sheaf, dimension or localization fact; no statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Generic étale localizations preserve dimension supplies exactly the cited sheaf, dimension or localization fact; no statement of this unit supplies this general tool."
+   },
+   {
+    "node": "thm-sc-finite-type-torsion-cd",
+    "why": "Generic finite-type all-torsion dimension bound is explicitly the blueprint opening paragraph input."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-torsion",
+    "why": "Generic inverse image of a torsion etale sheaf is torsion supplies exactly the cited sheaf, dimension or localization fact; no statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-sc-cd-affine-limit",
+    "why": "Generic affine-transition limit theorem is explicitly the blueprint input for parts (1) and (2)."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic comparison inverse image commutes with scheme pullback supplies exactly the cited sheaf, dimension or localization fact; no statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic the small pro-etale site of a weakly etale x-scheme is the localization of x_proet supplies exactly the cited sheaf, dimension or localization fact; no statement of this unit supplies this general tool."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "The unit explicitly calls for bounded-below etale/proetale cohomology comparison, here only for degree-zero torsion sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+    "why": "Generic higher direct images as sheafified cohomology presheaves supplies exactly the cited affine-product, section-evaluation or localization fact; no statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "Generic cohomology over an object is cohomology on its localized site supplies exactly the cited affine-product, section-evaluation or localization fact; no statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic the localized small etale site at an etale open is the small etale site of the open supplies exactly the cited affine-product, section-evaluation or localization fact; no statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic inverse image along an etale morphism is restriction supplies exactly the cited affine-product, section-evaluation or localization fact; no statement of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finiteness of the topological dimension of each finite-type source makes e_X and e_Y finite integer bounds; no node of this unit states this scheme-dimension fact."
+   }
+  ],
+  "route_note": "Unit step 1 says \"Since X and Y are separated over k\", although its statement and this detail assume only finite type. For example the affine line with doubled origin, glued from two copies of A^1_k on D(t), is of finite type over k and is not separated: the diagonal closure contains the pair of distinct origins. The separated-Cech sentence cannot be used under the stated hypotheses. The present split realizes the same step 1 uniform bounds by the all-torsion absolute-bound/affine-limit/comparison argument explicitly supplied by this detail’s own main-20261015 proof; no unit or chapter statement is changed."
+ },
+ "tool_uses": [
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-exc-field-sections-stalk-invariants",
+  "det-base-field-cd-cochains",
+  "det-base-field-cd-galois-group",
+  "det-base-field-cd-inflation",
+  "lem-sf-separably-closed-torsion-cd",
+  "lem-sc-etale-local-dimension",
+  "thm-sc-finite-type-torsion-cd",
+  "lem-weil-pbc-inverse-image-torsion",
+  "lem-sc-cd-affine-limit",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-proetale-weakly-etale-localization",
+  "sk-prop-sf-comparison",
+  "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-d59425836",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-d59425836 (reviewer sub-agent of L); spot-checked: Read in full: the item and its 11 steps, every cited node's statement (34 proof deps, 12 stmt deps), the main-20261015 statement and proof of the item and of det-base-field-cd-finite-field, unit sk-prop-pe-unbounded-classical, and Stacks 07QP, 03Q8 and 099W. The other cited tags (04JQ/04JM/03QU/02IZ/01T6/01SD/01I4/01JQ) were checked against their labels in tags/tags. The statement correction sets d_empty=0 so e_empty=1. It leaves the bound unchanged on nonempty schemes, the empty case is trivial, and all three citers treat the empty X separately. The new 'affine transitions' clause adds nothing, since the U_i are affine, and the Y sentence generalizes the source's g=id_Y. Nothing is weakened. Steps 1-3 prove cd_tor(k)<=1 for all torsion, including p-torsion, from det-base-field-cd-galois-group/cochains (parts 2-3)/inflation (final clause with r=e) and lem-sf-separably-closed-torsion-cd. No existing DAG node states this all-torsion bound; sk-lem-base-field-cd is single-prime only. Steps 4-6: finite dimension, Noetherian qcqs stages (T_i is of finite type over k via its etale projection to X, without assuming g is k-linear), dim W<=dim X through 07QP and generalization chains (valid without separatedness), then thm-sc-finite-type-torsion-cd with c=1. Steps 7-9: lem-sc-cd-affine-limit hypotheses hold; comparison-pullback; the inverse image equals slice restriction because (W,graph) is initial in I_W; sk-prop-sf-comparison for Z and G[0] in D^+. Steps 10-11: 03Q8 presheaf, object-localization identifications, a locally zero presheaf sheafifies to zero by the universal property, and the empty site. Mechanical checks: proof_deps equals the union of uses, no cycle, no SGA, Mathlib searches of all kinds recorded. All off-route statements are declared in tool_uses and I accept them all as generic black-box tools. route_note: the claim 'X,Y separated' in unit step 1 is unjustified (doubled-origin line); this should go to HUMAN.md. Maintainer observation, not a fault: the blueprint label det-base-field-cd-finite-field has no DAG node. No new nodes, no fixes."
+ }
 }
