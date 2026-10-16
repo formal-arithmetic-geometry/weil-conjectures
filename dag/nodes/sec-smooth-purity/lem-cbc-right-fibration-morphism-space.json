@@ -15,7 +15,10 @@
  },
  "kind": "statement",
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-pinch-comparison",
+  "def-weil-pbc-trivial-kan-fibration"
  ],
  "proof": [
   {
@@ -215,5 +218,54 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read the whole item, the new node lem-cbc-right-fibration-space-fiber and the statements of all 8 cited nodes, plus unit sk-prop-sf-cbc and the main-20261015 blueprint proof of thm-cbc-finite-level-proetale. The item's statement and stmt_deps are byte-identical to the base copy, and live still has the item unsplit. Sources checked online: Kerodon 01NV (Cor 4.4.3.8, a right fibration over a Kan base is a Kan fibration), 0154 (Prop 4.2.5.4, right fibration plus right anodyne gives a trivial Kan fibration) and 0106 (Prop 3.4.0.7, strict fiber to homotopy fiber is a weak equivalence when one leg is a Kan fibration). Step checks: (2) Lambda^1_1={1} is a right horn; pulling back rho along a->(a,e') gives exactly r, which is trivial Kan, so the lift fibers are contractible and nonempty. (3) The section space is trivial Kan over a point by lifting against A x boundary into A x simplex, using the Mathlib leaf SSet.rlp_monomorphisms. (4) L equals E_x x_E E^arr_{e'} degreewise, s is a right fibration over the Kan base E_x, and its strict fiber is U_E(e,e'). (5) Both uses of fiber detection have all spaces Kan, sigma is a weak equivalence by 2-out-of-3, and path orientation is kept throughout. (6) E'_{x'}=E_x and L'=A' x_A L, with s'sigma'=s sigma f strictly. The new node is true and correctly sourced. I tested it on empty X, a point base and a discrete base; {0}->Delta^1 shows the Kan-base hypothesis is needed. It is not a duplicate of right-fibration-fibers, right-fibration-contractible-fibers, kan-fibration-fiber-criterion or homotopy-fiber-detection, and it does not restate a clause of the item. Nothing cited depends back on the item. I accept the 5 declared tool_uses (generic simplicial results from sk-prop-sf-biduality-general). No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a45abdc84",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Repair of the RETURN at 24b0f5a3de8e (H3/H9/H11) is complete. Lift space is a concrete pullback (fixedTargetArrows with the right-pinch base); I.rlp trivial-Kan projection, contractible Kan vertex fibers and section space, and a section are all asserted. Transport is sigma >> rfLiftSource for every section, with no free existential T. The equivalence is a zigzag Map_E -> hofib(source) <- hofib(sigma;source) with both legs characterized and weak equivalences (checked true via right properness and fiber detection). Total target family and arbitrary simplicial pullback clauses are true; non-quasicategory B' is a harmless true generalization. Hypotheses exact (right horns 0<i<=n, two quasicategories, one universe u). RFIsPinch matches right_pinch_comparison verbatim. No hollow defs, single sorry, source/blueprint docstrings present, imports all used. lean.statement verbatim; three added stmt_deps are landed with no cycle. Report has Worker report and Second reading by Q42. nt_compile --json: rc 0, module 2.0 s, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightFibrationMorphismSpace",
+  "declaration": "SSet.Enhanced.right_fibration_morphism_space",
+  "declarations": [
+   "SSet.Enhanced.baseChangeFiberMap",
+   "SSet.Enhanced.rfLiftArrow",
+   "SSet.Enhanced.rfLiftBase",
+   "SSet.Enhanced.rfLiftSpace",
+   "SSet.Enhanced.rfLiftProjection",
+   "SSet.Enhanced.rfLiftSource",
+   "SSet.Enhanced.rfLiftInclusion",
+   "SSet.Enhanced.rfSectionSpace",
+   "SSet.Enhanced.rfTotalArrow",
+   "SSet.Enhanced.rfTotalBase",
+   "SSet.Enhanced.rfTotalLiftSpace",
+   "SSet.Enhanced.rfTotalProjection",
+   "SSet.Enhanced.rfTotalSource",
+   "SSet.Enhanced.rfTotalInclusion",
+   "SSet.Enhanced.rfTargetInsertion",
+   "SSet.Enhanced.RFCoherentTargets",
+   "SSet.Enhanced.RFCoherentPullback",
+   "SSet.Enhanced.rfFiberInclusion",
+   "SSet.Enhanced.RFIsPinch",
+   "SSet.Enhanced.RFConstantComparison",
+   "SSet.Enhanced.RFComparisonNaturality",
+   "SSet.Enhanced.RFSectionFiberMap",
+   "SSet.Enhanced.RFSectionFiberNaturality",
+   "SSet.Enhanced.RightFibrationLiftChoices",
+   "SSet.Enhanced.RightFibrationTransportClause",
+   "SSet.Enhanced.RFTransportProperty",
+   "SSet.Enhanced.RightFibrationMorphismSpaceData",
+   "SSet.Enhanced.right_fibration_morphism_space"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RightFibrationMorphismSpace.lean",
+  "statement": "theorem right_fibration_morphism_space {B E : SSet.{u}} [Quasicategory B] [Quasicategory E] (p : E ⟶ B) (hp : ∀ (n : ℕ) (i : Fin (n + 1)), 1 ≤ n → 0 < i → HasLiftingProperty (horn n i).ι p) : RightFibrationMorphismSpaceData p",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair of return at 24b0f5a3de8e, independently second-read by Q42: concrete fixed-target-arrow pullback lift space; trivial Kan projection and contractible lift and section spaces; canonical natural weak-equivalence zigzag for every section-induced transport; total lift family over Map_B(x,y) × E_y with contractible coherent sections and exact fixed-target restrictions; source and full-arrow compatibility for both fixed-target and total sections under every simplicial base change. Only lean and permitted landed/Mathlib stmt_deps additions change; no mathematical node statement correction."
  }
 }
