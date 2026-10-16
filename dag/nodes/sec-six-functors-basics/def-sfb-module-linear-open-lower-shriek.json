@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-module-linear-open-lower-shriek",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Linear extension by zero",
@@ -16,32 +16,149 @@
   "sk-def-sfb-pulled-back-coefficients",
   "sk-def-sfb-module-objects",
   "sk-def-sfb-transport",
-  "lem-sfb-open-projection-formula"
+  "lem-sfb-open-projection-formula",
+  "sk-def-sfb-finite-lower-shriek",
+  "def-sfb-finite-upper-star",
+  "sk-def-sfb-sheaf-tensor"
  ],
  "proof": [
   {
-   "text": "The pullback $j^*_{\\Ab}$ is strong monoidal and the projection formula holds\n([lem-sfb-open-projection-formula]), so the linearization of\n[sk-def-sfb-transport] applies to $P=j^{\\Ab}_!$ and $S=j^*_{\\Ab}$: it produces the\nmodule structure displayed above (associativity and unitality of the action follow\nfrom the coherence of the projection isomorphism), and it lifts the adjunction\n$j^{\\Ab}_!\\dashv j^*_{\\Ab}$ to $j^{\\mathrm{lin}}_!\\dashv\n\\operatorname{mapMod}(j^*_{\\Ab})$. The extension by zero $j^{\\Ab}_!$ is exact\n([sk-def-sfb-finite-lower-shriek]), and finite limits and colimits of module objects\nare computed on underlying sheaves ([sk-prop-sfb-module-category]), so\n$j^{\\mathrm{lin}}_!$ is exact.",
+   "text": "Put $\\mathcal C=\\Sh(U_{\\mathrm{proét}},\\Ab)$, $\\mathcal D=\\Sh(X_{\\mathrm{proét}},\\Ab)$, and $\\mathcal B=\\Lambda_X$. The pulled-back-coefficient construction gives the monoid object $\\mathcal B$ (commutative since $\\Lambda$ is). For the sheaf tensor products, $S=j^*_{\\Ab}\\colon\\mathcal D\\to\\mathcal C$ is strong monoidal by [def-sfb-finite-upper-star-monoidal]. For the open immersion $j$, [sk-def-sfb-finite-lower-shriek] supplies the exact functor $P=j^{\\Ab}_!\\colon\\mathcal C\\to\\mathcal D$ and its adjunction $P\\dashv S$. Thus $S\\mathcal B=j^*\\Lambda_X$ has its transported monoid structure, and these are exactly the coefficient objects in the displayed source and target.",
+   "uses": [
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-sfb-finite-upper-star-monoidal",
+    "sk-def-sfb-finite-lower-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
+    "place": "Proof, linearization and lifted adjunction; final exactness argument"
+   }
+  },
+  {
+   "text": "The isomorphisms of [lem-sfb-open-projection-formula] are the canonical projection-formula maps for this adjunction. Clause 4 of [sk-def-sfb-transport] says that invertibility of these canonical maps makes them a coherent projection formula; hence clause 3 applies with $\\mathcal B=\\Lambda_X$. Define $j^{\\mathrm{lin}}_!=P_{\\mathcal B}$. On an object $(M,\\gamma_M)$ its underlying object is $PM$ and its action is $\\mathcal B\\otimes PM\\xrightarrow{\\pi_{\\mathcal B,M}^{-1}}P(S\\mathcal B\\otimes M)\\xrightarrow{P\\gamma_M}PM$, precisely the action in the statement. Unitality and associativity are part of that linearization assertion. On a module morphism $a\\colon M\\to N$, use $Pa$. Naturality of $\\pi^{-1}$ and the identity $a\\gamma_M=\\gamma_N(S\\mathcal B\\otimes a)$ give $Pa\\,P\\gamma_M\\,\\pi^{-1}_{\\mathcal B,M}=P\\gamma_N\\,\\pi^{-1}_{\\mathcal B,N}(\\mathcal B\\otimes Pa)$, so this is a module morphism. The identity and composition equations are those of $P$. Consequently forgetting modules identifies the constructed functor with $j^{\\Ab}_!$ on both objects and morphisms.",
    "uses": [
     "lem-sfb-open-projection-formula",
     "sk-def-sfb-transport",
-    "sk-def-sfb-finite-lower-shriek"
+    "sk-def-sfb-module-objects"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
+    "place": "Proof, linearization and lifted adjunction; final exactness argument"
+   }
+  },
+  {
+   "text": "Apply clause 4 of [sk-def-sfb-transport] to the same adjunction $P\\dashv S$ and the canonical invertible projection-formula maps from step 2. It identifies the linearized right adjoint with $\\operatorname{mapMod}(S)$ and gives $P_{\\mathcal B}\\dashv\\operatorname{mapMod}(S)$. Here the right-hand functor sends a $\\mathcal B$-module $N$ to the $S\\mathcal B$-module $SN$, with action induced by the strong monoidal structure of $S$. With the substitutions in step 1, this is exactly the asserted adjunction to $\\operatorname{mapMod}(j^*_{\\Ab})$, without changing scalars to $\\Lambda_U$.",
+   "uses": [
+    "sk-def-sfb-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
+    "place": "Proof, linearization and lifted adjunction; final exactness argument"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-sheaves-enough-injectives] to the small pro-étale sites of $U$ and $X$ (using their small skeletons as in [def-weil-pbc-proetale-site]); it gives that $\\mathcal C$ and $\\mathcal D$ are abelian. For the sheaf tensor products, [det-def-sfb-sheaf-tensor-closed] gives additivity in each variable and preservation of colimits by tensoring with any sheaf. In particular $S\\mathcal B\\otimes-$ and $\\mathcal B\\otimes-$ are right exact. The underlying functor $P$ is exact by [sk-def-sfb-finite-lower-shriek]; it is additive: as a left adjoint it preserves the initial (zero) object and binary coproducts, which in abelian categories are biproducts; now use the formula $a+b=\\nabla\\circ(a\\oplus b)\\circ\\Delta$. Step 2 gives $U_{\\mathcal B}\\circ P_{\\mathcal B}=P\\circ U_{S\\mathcal B}$, including the equality on morphisms. All hypotheses of [det-prop-sfb-module-pullback-exact-lifted] now hold with $\\mathcal R=S\\mathcal B$, $\\mathcal S=\\mathcal B$, $F=P$, and $G=P_{\\mathcal B}$. Its conclusion gives that $j^{\\mathrm{lin}}_!$ is additive and exact, preserving finite limits and finite colimits.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-weil-pbc-proetale-site",
+    "det-def-sfb-sheaf-tensor-closed",
+    "sk-def-sfb-finite-lower-shriek",
+    "det-prop-sfb-module-pullback-exact-lifted"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
+    "place": "Proof, linearization and lifted adjunction; final exactness argument"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-finite-upper-star-monoidal",
+  "sk-def-sfb-finite-lower-shriek",
   "lem-sfb-open-projection-formula",
   "sk-def-sfb-transport",
-  "sk-def-sfb-finite-lower-shriek"
+  "sk-def-sfb-module-objects",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-weil-pbc-proetale-site",
+  "det-def-sfb-sheaf-tensor-closed",
+  "det-prop-sfb-module-pullback-exact-lifted"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
+  "place": "Proof, expanded using the existing general exact-lift lemma det-prop-sfb-module-pullback-exact-lifted"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "linearization|linearOpenImmersionLowerShriek|extension.by.zero",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not construct projection-formula linear extension by zero on pro-etale module objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Linear extension by zero of sheaves of modules on the pro etale site",
+   "results": "ModuleCat.tildeInModuleCat; DFinsupp.lmk; TrivSqZeroExt.inrHom; Function.ExtendByZero.linearMap; AlgebraicGeometry.RingedSpace.res_zero; SheafOfModules.over; Function.ExtendByZero.linearMap_apply; PresheafOfModules.Sheafify.zero_smul",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not construct projection-formula linear extension by zero on pro-etale module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, Functor.Linear",
+   "results": "No hits; loogle: unknown identifier 'Functor.Linear'",
+   "date": "2026-10-16",
+   "verdict": "unavailable: invalid query (unknown Functor.Linear identifier); not evidence of absence; repeated with another query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for module objects over a ring object along an open immersion using the projection formula is exact and left adjoint to pullback",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; PresheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctor; SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not construct projection-formula linear extension by zero on pro-etale module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "mapModLeft|HasProjectionFormula|preservesFiniteLimits.*mapMod|creates.*Mod|Mod.*creates",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not construct projection-formula linear extension by zero on pro-etale module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMod\"",
+   "results": "PointedContMDiffMap.instAlgebraSomeENatTopContMDiffMapModelWithCornersSelf; PointedContMDiffMap.instIsScalarTowerSomeENatTopContMDiffMapModelWithCornersSelf; LeftInvariantDerivation.instFunLikeContMDiffMapModelWithCornersSelfSomeENatTop; LeftInvariantDerivation.instLinearMapClassContMDiffMapModelWithCornersSelfSomeENatTop; LeftInvariantDerivation.instCoeDerivationContMDiffMapModelWithCornersSelfSomeENatTop",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not construct projection-formula linear extension by zero on pro-etale module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint satisfying the projection formula lifts to a functor on module objects and the lifted functor is left adjoint to the monoidal pullback functor on modules",
+   "results": "PresheafOfModules.pullback; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; ModuleCat.adj; ModuleCat.instIsLeftAdjointExtendScalars; ModuleCat.instMonoidalClosed; PresheafOfModules.pullbackPushforwardAdjunction; LightCondensed.instMonoidalClosedLightCondMod; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not construct projection-formula linear extension by zero on pro-etale module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an adjunction P left adjoint to a strong monoidal S satisfying the projection formula, the induced functor on modules over a monoid preserves finite limits when P does",
+   "results": "instHasFiniteLimitsLightCondMod; Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier; ModuleCat.instPreservesFiniteLimitsLocalizationLocalizedModule_functor; PresheafOfModules.toPresheaf_preservesFiniteLimits; Module.Flat.iff_preservesFiniteLimits_tensorLeft; PresheafOfModules.evaluation_preservesFiniteLimits; SheafOfModules.Finite.forgetPreservesFiniteLimits; FGModuleCat.instPreservesFiniteLimitsModuleCatForget₂",
+   "date": "2026-10-16",
+   "verdict": "no match: finite-limit instances for concrete module sheaves or tensor functors do not construct the projection-formula lift for module objects on the pro-etale site"
+  },
+  {
+   "tool": "grep",
+   "query": "mapModLeft|HasProjectionFormula|openImmersionLowerShriek",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: finite-limit instances for concrete module sheaves or tensor functors do not construct the projection-formula lift for module objects on the pro-etale site"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -63,5 +180,39 @@
   "AlgebraicGeometry.ProEtale.CondensedRing.linearOpenImmersionLowerShriek"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-module-linear-open-lower-shriek",
+  "worker": "stage1",
+  "summary": "Checked current blueprint construction and master reference, found no completed slopmaster2 attachment. Retained the statement, exposed monoidal pullback and coherent linearization, supplied the morphism formula and lifted adjunction, and repaired the missing module-category citation by citing existing general exact-lift, sheaf tensor and abelian-sheaf results. No new nodes.",
+  "blueprint": "Steps 1–3 realize the linear extension-by-zero clause of sk-def-sfb-module-lower-shriek and the first sentence of this node's proof; step 4 realizes its final exactness sentence.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-module-pullback-exact-lifted",
+    "why": "General lift-of-exact-functor theorem supplies exactly the module exactness argument of the unit, with F the abelian extension by zero."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "General site theorem supplies abelianity of abelian sheaves; only that clause is used."
+   },
+   {
+    "node": "det-def-sfb-sheaf-tensor-closed",
+    "why": "The existing sheaf tensor theorem supplies additivity and right exactness needed for module exactness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "det-def-sfb-sheaf-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q12-286c8c028",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-286c8c028 (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements and sources, and current chapter/unit route in full. All four steps are valid; canonical projection-map direction and coefficients Mod_{j^*Lambda_X} agree with master. Exact-lift hypotheses, edge cases, duplicates and dependency cycles checked. Three declared generic tool uses accepted. No repairs needed; details in review.md."
+ }
 }

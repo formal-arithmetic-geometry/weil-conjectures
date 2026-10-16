@@ -3,7 +3,10 @@
  "blueprint": {
   "is": "sk-def-sfb-qlbar-condensed",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "det-def-sfb-qlbar-condensed-definition",
+   "pur713-def-qbar-ring"
+  ]
  },
  "kind": "definition",
  "title": "The condensed ring $\\underline{\\overline{\\mathbf Q}}_\\ell$",
@@ -14,40 +17,173 @@
  },
  "stmt_deps": [
   "sk-def-sfb-condensed-ring",
-  "sk-def-sfb-ring-object"
+  "sk-def-sfb-ring-object",
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "def-sfb-continuous-map-condensed-ring"
  ],
  "proof": [
   {
-   "text": "**Subring.** If $a$ takes values in $E$ and $b$ in $F$, then $a\\pm b$ and $ab$ take\nvalues in the compositum $EF$, which is a finite subextension. Constants lie in\n$\\mathbf Q_\\ell$. So $\\underline{\\Qlb}(S)$ is a subring of $C(S,\\Qlb)$, commutative since\n$\\Qlb$ is. It is stable under precomposition, because $(a\\circ u)(S')\\subseteq a(S)$. So\n$\\underline{\\Qlb}$ is a subpresheaf of rings of $C(-,\\Qlb)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Finite subextensions and the ambient ring. By [det-def-sfb-qlbar-condensed-subextensions], the compositum of finitely many finite subextensions is finite and contains each of them. The base field $\\mathbf Q_\\ell$ is itself a finite subextension, so the inclusion poset is nonempty, and the two-field case gives directedness. Apply [def-sfb-continuous-map-condensed-ring] to the topological field $\\Qlb$: $F(S)=C(S,\\Qlb)$, with precomposition and pointwise operations, is a sheaf of commutative rings on the site of profinite sets.",
+   "uses": [
+    "det-def-sfb-qlbar-condensed-subextensions",
+    "def-sfb-continuous-map-condensed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/sk-def-sfb-qlbar-condensed.proof.md",
+    "place": "Subring: finite compositum and ambient continuous-map ring"
+   }
   },
   {
-   "text": "**Sheaf.** The presheaf $C(-,\\Qlb)$ is a sheaf, being the condensed ring of the\ntopological ring $\\Qlb$ ([sk-def-sfb-condensed-ring]). A subpresheaf $G$ of a sheaf $F$ is\na sheaf if, for every covering sieve $R$ on $S$, every section $a\\in F(S)$ whose\nrestrictions along all arrows of $R$ lie in $G$ already lies in $G(S)$. A covering sieve\nof $*_{\\mathrm{proét}}$ contains a finite family $\\{\\pi_i\\colon S_i\\to S\\}$ with\n$\\coprod_iS_i\\to S$ surjective. If each $a\\circ\\pi_i$ takes values in a finite\nsubextension $E_i$, then $a$ takes values in the compositum of the finitely many $E_i$,\nwhich is again a finite subextension. So $a\\in\\underline{\\Qlb}(S)$. Hence\n$\\underline{\\Qlb}$ is a sheaf of commutative rings. By part 3 of\n[sk-def-sfb-ring-object], its underlying abelian sheaf is a commutative ring object.",
+   "text": "Subring and restrictions. Put $G(S)=\\{a\\in F(S)\\mid a(S)\\subseteq E\\text{ for some finite subextension }E\\}$. If $a(S)\\subseteq E$ and $b(S)\\subseteq E'$, their sums, negatives and products lie in the finite compositum $EE'$ by [det-def-sfb-qlbar-condensed-subextensions]. These operations already belong to $F(S)$ by [def-sfb-continuous-map-condensed-ring]. The constant functions $0,1$, and all constants in $\\mathbf Q_\\ell$, satisfy the condition with $E=\\mathbf Q_\\ell$. Thus $G(S)$ is a commutative subring. For $u:S'\\to S$, $(a\\circ u)(S')\\subseteq a(S)\\subseteq E$, so precomposition restricts to a ring homomorphism $G(S)\\to G(S')$. Identity and composite restrictions agree because composition of functions does; this defines exactly the presheaf in the statement.",
    "uses": [
+    "det-def-sfb-qlbar-condensed-subextensions",
+    "def-sfb-continuous-map-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/sk-def-sfb-qlbar-condensed.proof.md",
+    "place": "Subring: closure and restrictions"
+   }
+  },
+  {
+   "text": "Sheaf gluing without sheafification. Let $R$ be any covering sieve on a profinite set $S$ and let $(b_u)$ be a matching family with $b_u\\in G(T)$ for every $u:T\\to S$ in $R$. Under $G\\subseteq F$, it is a matching family in the sheaf $F$ of [def-sfb-continuous-map-condensed-ring], so it has a unique glue $a\\in F(S)$. By [sk-def-sfb-condensed-ring], $R$ contains a finite family $\\pi_i:S_i\\to S$ whose images jointly cover $S$. For each $i$, choose a finite subextension $E_i$ containing the image of $b_{\\pi_i}=a\\circ\\pi_i$. Let $E$ be their finite compositum, using [det-def-sfb-qlbar-condensed-subextensions]. For every $s\\in S$, choose $i$ and $t\\in S_i$ with $\\pi_i(t)=s$; then $a(s)=b_{\\pi_i}(t)\\in E_i\\subseteq E$. Consequently $a\\in G(S)$. Its restrictions along all of $R$ equal $b_u$, since they do in $F$, and any two glues in $G$ agree by uniqueness in $F$. When the chosen family is empty, joint surjectivity forces $S=\\varnothing$ and the unique empty function satisfies the image condition with $E=\\mathbf Q_\\ell$. Thus the presheaf just constructed itself satisfies the sheaf condition. Because its operations are the pointwise ring operations and its restrictions are ring homomorphisms, these same unique glues make it a sheaf of commutative rings.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring",
     "sk-def-sfb-condensed-ring",
+    "det-def-sfb-qlbar-condensed-subextensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/sk-def-sfb-qlbar-condensed.proof.md",
+    "place": "Sheaf: covering-sieve descent by a finite jointly surjective family"
+   }
+  },
+  {
+   "text": "Underlying ring object. Apply clause 3 of [sk-def-sfb-ring-object] to the sheaf of rings $G$ just constructed, on the site $*_{\\mathrm{proét}}$. Its underlying abelian sheaf is a ring object of $\\Sh(*_{\\mathrm{proét}},\\Ab)$, commutative because every section ring $G(S)$ is commutative. This is the asserted condensed ring and ring object, with the stated sections, restrictions and operations.",
+   "uses": [
     "sk-def-sfb-ring-object"
    ],
-   "elementary": false
-  },
-  {
-   "text": "**Why not $C(-,\\Qlb)$.** The inclusion $\\underline{\\Qlb}\\subseteq C(-,\\Qlb)$ is strict.\nLet $S=\\{0\\}\\cup\\{1/n:n\\ge1\\}$, a convergent sequence and hence a profinite set. Choose\n$\\varpi_n\\in\\Qlb$ with $\\varpi_n^n=\\ell$. The polynomial $x^n-\\ell$ is Eisenstein, so\n$[\\mathbf Q_\\ell(\\varpi_n):\\mathbf Q_\\ell]=n$. Set $a(1/n)=\\ell^n\\varpi_n$ and $a(0)=0$.\nSince $|\\ell^n\\varpi_n|=\\ell^{-n-1/n}\\to0$, $a$ is continuous. But its values have\nunbounded degree over $\\mathbf Q_\\ell$, so they lie in no finite subextension. This is\nwhy $\\underline{\\Qlb}$ is defined by the finiteness condition rather than as\n$C(-,\\Qlb)$.",
-   "uses": [],
-   "elementary": null
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/sk-def-sfb-qlbar-condensed.proof.md",
+    "place": "Sheaf: final sentence applying ring-object clause 3"
+   }
   }
  ],
  "proof_deps": [
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "def-sfb-continuous-map-condensed-ring",
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-ring-object"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/sk-def-sfb-qlbar-condensed.proof.md",
+  "place": "Subring and Sheaf; expanded gluing with the existing detail statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "padicAlgClCondensedRing|padicAlgClRingObj|finiteIntermediateFieldValued|PadicAlgCl",
+   "results": "Mathlib/NumberTheory/Padics/Complex.lean:22,28,53,54,56. Read definition at 54 and normed-field structure at 68; this is the topological field only, not the condensed subring.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous maps from profinite sets to the algebraic closure of p-adic numbers with image in one finite subextension form a sheaf of rings",
+   "results": "Condensed.lanSheafProfinite (Mathlib.Condensed.Discrete.Colimit), Condensed.isSheafProfinite, smooth sheaves and Spec.structureSheaf. Read lanSheafProfinite: it uses locally constant maps, not continuous maps with image in a finite field extension.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CondensedRing, IntermediateField",
+   "results": "0 hits; loogle: unknown identifier 'CondensedRing'. This identifier query is inconclusive; retried with name substrings.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: unknown identifier; retried with substring query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The condensed ring of continuous functions from a profinite set to an algebraic closure of the p-adic numbers whose image lies in a finite extension",
+   "results": "Rerun 2026-10-16: 8 hits: Condensed.profiniteSolid, Condensed.profiniteFree, PadicAlgCl, PadicComplex, BDeRham, BDeRhamPlus, instCommRingBDeRhamPlus, PadicComplex.instAlgebraPadic. Read PadicAlgCl and its normedField structure: these supply the ambient field, not the finite-subextension-valued condensed ring.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(intermediate|subextension)|intermediate.*finite|algebraic.*closure",
+   "results": "0 hits in Mathlib/Condensed.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finite\", \"condensed\"",
+   "results": "Condensed.isSheafProfinite, ProfiniteCompHaus.equivalence, StoneanProfinite equivalence/instances, lanSheafProfinite and finite limit/colimit instances. None defines the finite-subextension-valued ring.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a topological field algebraic over a base field, the presheaf of continuous maps from compact profinite spaces with image in a finite dimensional intermediate field is a condensed commutative ring",
+   "results": "CondensedMod.ofSheafProfinite and ofSheafCompHaus (Mathlib/Condensed/Explicit), Condensed.locallyConstantPresheaf and free/solid functors; none supplies the finite-subextension-valued presheaf or its sheaf property.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subpresheaf|Subpresheaf|IntermediateField|finiteDimensional",
+   "results": "0 hits in Mathlib/Condensed.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subpresheaf of continuous ring valued functions cut out by membership in a directed union of subrings satisfies descent for finite jointly surjective covers of profinite spaces",
+   "results": "8 hits, including Condensed.lanSheafProfinite, LightProfinite.hasSheafify_type, Condensed.isSheafProfinite, LightProfinite.hasSheafify, CondensedMod.ofSheafProfinite, Condensed.isColimitLocallyConstantPresheaf_desc_apply, TopCat.toSheafCompHausLike and LightCondensed.isColimitLocallyConstantPresheaf_desc_apply. The generic sheaf constructors and locally constant presheaves do not state finite-subextension descent.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IntermediateField.*ContinuousMap|ContinuousMap.*IntermediateField|finiteIntermediateFieldValued",
+   "results": "0 hits in Mathlib. Independent second-reader search.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions whose range is contained in one finite dimensional intermediate field form a sheaf for finite surjective covers of compact totally disconnected spaces",
+   "results": "8 hits: Condensed.lanSheafProfinite, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstant.functor, Condensed.isSheafProfinite, Condensed.locallyConstantPresheaf, topCatToSheafCompHausLike, TopCat.toSheafCompHausLike, CompHausLike.LocallyConstant.counit_app_val. Read Mathlib/Condensed/Discrete/Colimit.lean:171-179 and Mathlib/Condensed/TopComparison.lean:110-132: locally constant sheaves and the full continuous-function sheaf, respectively, not the finite-subextension-valued subring.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered union of subfields of a topological field defines a subring of the condensed continuous function sheaf by requiring each section to factor through one subfield",
+   "results": "8 hits: continuousSubring, AlgebraicGeometry.StructureSheaf.sectionsSubring, CondensedMod, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.sectionsSubring, RingCat.sectionsSubring, CondensedMod.ofSheafCompHaus, CondensedMod.ofSheafStonean, LightCondMod. Read Mathlib/Topology/ContinuousMap/Algebra.lean:403-405 (all continuous functions), Mathlib/Algebra/Category/Ring/Limits.lean:292-299 (compatible sections of a diagram), and Mathlib/Condensed/Explicit.lean:76-83,108-114 (descent supplied as input). None states the finite-subextension condition and its sheaf property. Independent second-reader search.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"subring\"",
+   "results": "0 hits, successful service response. Independent second-reader search.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(range|image)|((range|image).*(field|subring))",
+   "results": "0 hits in Mathlib/Condensed. Independent second-reader search.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -70,5 +206,20 @@
   "sketch"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-qlbar-condensed",
+  "worker": "stage1",
+  "summary": "Kept the definition and every asserted property unchanged. Reused the existing finite-compositum and continuous-map condensed-ring nodes; expanded the subring and covering-sieve gluing arguments, including the empty-cover case, and cited clause 3 of the ring-object node. No new nodes. Removed the optional strict-inclusion example from the proof because it is not asserted by this definition. No exact project attachment or Mathlib match was found.",
+  "blueprint": "Steps 1-2 realize Subring in the companion sk-def-sfb-qlbar-condensed.proof.md, including directed finite subextensions. Step 3 expands its Sheaf paragraph into actual matching-family gluing, including the empty cover. Step 4 realizes the last ring-object sentence. The optional Why not C(-,Qlb) example is not an assertion of the item and is omitted."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N5-8e1e907d2",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-8e1e907d2 (reviewer sub-agent of L); spot-checked: Read the item, report, four cited node statements, and current blueprint sources in full. Verified all four steps, finite-cover descent, empty cases, ring-object category, duplicate candidates, and absence of dependency cycles. No repairs or tool_uses required. Concrete checks and the archived-master comparison limits are recorded in review.md."
+ }
 }

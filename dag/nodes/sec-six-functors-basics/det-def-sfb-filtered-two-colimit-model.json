@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-def-sfb-filtered-two-colimit-model",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The category $\\mathcal C_\\infty$ of a directed pseudofunctor and its comparison functor",
@@ -13,34 +13,173 @@
   "place": "node det-def-sfb-filtered-two-colimit-model, order None"
  },
  "stmt_deps": [
-  "det-def-sfb-filtered-two-colimit-cocone"
+  "det-def-sfb-filtered-two-colimit-cocone",
+  "def-weil-pbc-category-colimit"
  ],
  "proof": [
   {
-   "text": "**The colimit is filtered.** The set $\\{k\\in I:k\\ge i,j\\}$ is nonempty and directed because $I$ is\ndirected. By normalization $t_{kk}=\\mathrm{id}$, and for $k\\le k'\\le k''$,\n$$\nt_{k'k''}t_{kk'}(g)=\\tau_{jk'k''}T_{k'k''}(\\tau_{jkk'})\\,T_{k'k''}T_{kk'}(g)\\,T_{k'k''}(\\tau_{ikk'})^{-1}\\tau_{ik'k''}^{-1}\n=\\tau_{jkk''}\\,T_{kk''}(g)\\,\\tau_{ikk''}^{-1}=t_{kk''}(g),\n$$\nusing the cocycle identity at $x$ (indices $i\\le k\\le k'\\le k''$) and at $y$ (indices\n$j\\le k\\le k'\\le k''$), and naturality of $\\tau_{kk'k''}\\colon T_{k'k''}T_{kk'}\\Rightarrow T_{kk''}$. So $(H_k,t_{kk'})$ is a functor on a\ndirected set, and $[k,g]=[k',g']$ if and only if $t_{km}(g)=t_{k'm}(g')$ for some $m\\ge k,k'$.",
+   "text": "For fixed $a=(i,x)$ and $b=(j,y)$ write $J_{ab}=\\{k\\in I:i\\le k,\\ j\\le k\\}$. This is a set, is nonempty by directedness, and any two of its elements have an upper bound still in $J_{ab}$. Its category has at most one arrow between any two objects, so parallel arrows are already equal. Thus it is a small filtered category. For $k\\le n\\le p$, put $A_{a;k,n}=\\tau_{ikn,x}$ and $A_{b;k,n}=\\tau_{jkn,y}$. The cocycle axiom says\n$$A_{b;n,p}T_{np}(A_{b;k,n})=A_{b;k,p}\\tau_{knp,T_{jk}y},$$\nwith the analogous identity for $a$. Consequently\n$$t_{np}(t_{kn}(g))=A_{b;k,p}\\tau_{knp,T_{jk}y}\\,T_{np}T_{kn}(g)\\,\\tau_{knp,T_{ik}x}^{-1}A_{a;k,p}^{-1}=A_{b;k,p}T_{kp}(g)A_{a;k,p}^{-1}=t_{kp}(g),$$\nwhere the middle equality is naturality of $\\tau_{knp}$. Normalization gives $t_{kk}(g)=g$. Hence the displayed Hom sets and transition maps form a diagram of sets indexed by $J_{ab}$.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "The colimit is filtered: index category and transition laws"
+   }
   },
   {
-   "text": "**Composition.** Each $t_{mm'}$ preserves composition and identities, being conjugation of the\nfunctor $T_{mm'}$ by isomorphisms. Hence $[m,t_{k'm}(h)t_{km}(g)]$ does not change when $m$ is\nreplaced by $m'\\ge m$, so any two choices of $m$ give the same class (pass to a common upper bound).\nReplacing $g$ by $t_{kn}(g)$ or $h$ by $t_{k'n}(h)$ does not change the result either, by\n$t_{nm}t_{kn}=t_{km}$; so composition is well defined. Associativity and unitality follow by computing\nall composites at one common stage $m$, where they are associativity and unitality in\n$\\mathcal C_m$, and $t_{im}(\\mathrm{id}_x)=\\mathrm{id}$.",
-   "uses": [],
-   "elementary": null
+   "text": "The set colimit can be constructed as the quotient of $\\coprod_{k\\in J_{ab}}H_k$ by eventual equality: $(k,g)\\sim(n,h)$ if there is $p\\ge k,n$ with $t_{kp}(g)=t_{np}(h)$. Reflexivity uses $p=k$, symmetry reverses the equality, and transitivity follows by moving two equality witnesses to one upper bound and using the transition law in step 1. The coprojections are compatible, and any compatible family $u_k:H_k\\to S$ factors uniquely by $[k,g]\\mapsto u_k(g)$, since eventual equality implies equality of these values. This is exactly the colimit universal property of [def-weil-pbc-category-colimit]. In any chosen colimit, [lem-weil-pbc-filtered-colimit-sets-elementwise] gives representatives $[k,g]$ and the same common-stage equality criterion. This justifies the Hom-set construction without assuming existence of any colimit over a large category.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "The colimit is filtered: set colimit and equality of classes; Stacks Tag 04AX, section-directed-colimits"
+   }
   },
   {
-   "text": "**The comparison functor.** For $k\\le k'$, compatibility gives\n$\\theta_{ik',x}^{-1}=\\Phi_{k'}(\\tau_{ikk',x})\\circ\\theta_{kk',T_{ik}x}^{-1}\\circ\\theta_{ik,x}^{-1}$, and\nsimilarly for $y$. Therefore\n$$\n\\theta_{jk',y}\\Phi_{k'}(t_{kk'}g)\\theta_{ik',x}^{-1}\n=\\theta_{jk,y}\\,\\theta_{kk',T_{jk}y}\\,\\Phi_{k'}T_{kk'}(g)\\,\\theta_{kk',T_{ik}x}^{-1}\\,\\theta_{ik,x}^{-1}\n=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1},\n$$\nby naturality of $\\theta_{kk'}\\colon\\Phi_{k'}T_{kk'}\\Rightarrow\\Phi_k$. So $\\Phi$ is well defined on\nclasses. It sends $[i,\\mathrm{id}_x]$ to $\\theta_{ii}\\Phi_i(\\mathrm{id})\\theta_{ii}^{-1}=\\mathrm{id}$, and,\ncomputing a composite at a common stage $m$,\n$\\Phi([m,h_m])\\Phi([m,g_m])=\\theta_{lm,z}\\Phi_m(h_m)\\theta_{jm,y}^{-1}\\theta_{jm,y}\\Phi_m(g_m)\\theta_{im,x}^{-1}=\\Phi([m,h_mg_m])$.",
+   "text": "For three fixed objects $a=(i,x)$, $b=(j,y)$, $c=(l,z)$ and a stage $m$ above all three indices, write $g_m:T_{im}x\\to T_{jm}y$ and $h_m:T_{jm}y\\to T_{lm}z$. For $m\\le p$, direct cancellation of the middle isomorphisms gives\n$$t^{ac}_{mp}(h_mg_m)=\\tau_{lmp,z}T_{mp}(h_mg_m)\\tau_{imp,x}^{-1}=\\bigl(\\tau_{lmp,z}T_{mp}(h_m)\\tau_{jmp,y}^{-1}\\bigr)\\bigl(\\tau_{jmp,y}T_{mp}(g_m)\\tau_{imp,x}^{-1}\\bigr)=t^{bc}_{mp}(h_m)t^{ab}_{mp}(g_m).$$\nHere the superscripts specify the pair of objects determining $t$. Likewise $t^{aa}_{mp}(\\mathrm{id}_{T_{im}x})=\\mathrm{id}_{T_{ip}x}$, because a functor preserves identities and conjugating an identity by an isomorphism gives an identity.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Composition: transition maps preserve composable products and identities"
+   }
+  },
+  {
+   "text": "Define the composite by the formula in the statement. If $m$ and $n$ are two upper bounds of the representative stages $k,k'$, choose $p\\ge m,n$. By steps 1 and 3 the images in stage $p$ of both proposed composite representatives are exactly $t_{k'p}(h)t_{kp}(g)$, so their classes agree. If $[k,g]=[r,\\widetilde g]$ and $[k',h]=[s,\\widetilde h]$, the equality criterion of [lem-weil-pbc-filtered-colimit-sets-elementwise] gives witnesses $u\\ge k,r$ and $v\\ge k',s$. Choose $p$ above $u,v$ and the two stages used to form the proposed composites. At $p$ the two representatives of each input agree by step 1. Their products therefore agree, by step 3, proving independence of representatives and of the common stage simultaneously.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Composition: independence of the common stage and representatives"
+   }
+  },
+  {
+   "text": "For three composable classes choose one stage above their three representative stages. By step 4 both bracketings of their composite are represented there by the two bracketings of the same three morphisms in that stage category, and are equal by its associativity. For $a=(i,x)$, normalization $T_{ii}=\\mathrm{Id}$ makes $[i,\\mathrm{id}_x]$ a morphism $a\\to a$; at every later stage $m$ it is represented by $\\tau_{iim,x}T_{im}(\\mathrm{id}_x)\\tau_{iim,x}^{-1}=\\mathrm{id}_{T_{im}x}$. Thus left and right composition with it reduce to the identity laws at a common stage. The pair objects, Hom sets, composition, and identities now define an ordinary category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Composition: associativity and identity laws"
+   }
+  },
+  {
+   "text": "For a representative $g\\in H_k$ the map $P_k(g)=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1}$ has source $\\Phi_i(x)$ and target $\\Phi_j(y)$ by [det-def-sfb-filtered-two-colimit-cocone]. For $k\\le n$, cocone compatibility, applied to $i\\le k\\le n$ and $j\\le k\\le n$, gives\n$$\\theta_{in,x}^{-1}=\\Phi_n(\\tau_{ikn,x})\\theta_{kn,T_{ik}x}^{-1}\\theta_{ik,x}^{-1},\\qquad\n\\theta_{jn,y}=\\theta_{jk,y}\\theta_{kn,T_{jk}y}\\Phi_n(\\tau_{jkn,y})^{-1}.$$\nSubstitute these and $t_{kn}(g)=\\tau_{jkn,y}T_{kn}(g)\\tau_{ikn,x}^{-1}$. The two pairs of inverse $\\Phi_n(\\tau)$ factors cancel, and naturality of the cocone isomorphism $\\theta_{kn}:\\Phi_nT_{kn}\\Rightarrow\\Phi_k$ gives\n$$P_n(t_{kn}(g))=\\theta_{jk,y}\\theta_{kn,T_{jk}y}\\Phi_nT_{kn}(g)\\theta_{kn,T_{ik}x}^{-1}\\theta_{ik,x}^{-1}=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1}=P_k(g).$$\nBy [lem-weil-pbc-filtered-colimit-sets-elementwise], equal classes have representatives equal at a common stage; the displayed invariance therefore makes $\\Phi([k,g])=P_k(g)$ independent of representatives.",
+   "uses": [
+    "det-def-sfb-filtered-two-colimit-cocone",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "The comparison functor: types, compatibility, naturality and descent to classes"
+   }
+  },
+  {
+   "text": "Set $\\Phi(i,x)=\\Phi_i(x)$ on objects. Normalization and functoriality of $\\Phi_i$ give $\\Phi([i,\\mathrm{id}_x])=\\theta_{ii,x}\\Phi_i(\\mathrm{id}_x)\\theta_{ii,x}^{-1}=\\mathrm{id}_{\\Phi_i(x)}$. For a composable pair use step 4 to represent both morphisms at one stage $m$, say $g_m:T_{im}x\\to T_{jm}y$ and $h_m:T_{jm}y\\to T_{lm}z$. Step 6 allows their images to be computed at $m$, and\n$$\\Phi([m,h_m])\\Phi([m,g_m])=\\theta_{lm,z}\\Phi_m(h_m)\\theta_{jm,y}^{-1}\\theta_{jm,y}\\Phi_m(g_m)\\theta_{im,x}^{-1}=\\theta_{lm,z}\\Phi_m(h_mg_m)\\theta_{im,x}^{-1}=\\Phi([m,h_mg_m]).$$\nThis proves that the comparison assignment is a functor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "The comparison functor: preservation of identities and composition"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "det-def-sfb-filtered-two-colimit-cocone"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+  "place": "All three blueprint proof paragraphs, expanded into seven steps; the set-colimit quotient is checked directly using Stacks Tag 04AX (section-directed-colimits)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit model category of a directed coherent pseudofunctor with Hom sets as colimits",
+   "results": "CategoryTheory.FinallySmall.FilteredFinalModel; CategoryTheory.FinallySmall.instCategoryFilteredFinalModel; CategoryTheory.FinallySmall.instIsFilteredFilteredFinalModel; CategoryTheory.Limits.ColimitPresentation.bind; CategoryTheory.FinallySmall.instFinalFilteredFinalModelFromFilteredFinalModel; CategoryTheory.FinallySmall.fromFilteredFinalModel; CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom; CategoryTheory.Limits.ColimitPresentation.instNonemptyTotalOfIsFiltered",
+   "date": "2026-10-16",
+   "verdict": "no match for the category model"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CategoryCocone, CategoryTheory.Limits.Types.FilteredColimit",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.CategoryCocone'",
+   "date": "2026-10-16",
+   "verdict": "query error; not evidence of absence; valid quoted-name search below"
+  },
+  {
+   "tool": "grep",
+   "query": "CategoryCocone|FilteredTwoColimit|two.?colimit",
+   "results": "0 hits (subdirectory Mathlib/)",
+   "date": "2026-10-16",
+   "verdict": "invalid search scope: an extra Mathlib/ prefix selected a nonexistent directory; rerun with correct relative scope below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary category constructed from a directed pseudofunctor by filtered colimits of Hom sets",
+   "results": "CategoryTheory.Limits.IndObjectPresentation.mk; CategoryTheory.Limits.HasFilteredColimits; CategoryTheory.Pseudofunctor.CoGrothendieck; CategoryTheory.Pseudofunctor.CoGrothendieck.categoryStruct; CategoryTheory.Pseudofunctor.CoGrothendieck.Hom; CategoryTheory.Limits.instHasFilteredColimitsOfSizeFunctor; CategoryTheory.isFiltered_of_nonempty_limit_colimit_to_colimit_limit; MonCat.FilteredColimits.M.mk",
+   "date": "2026-10-16",
+   "verdict": "no match for the category model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category with objects pairs (i,x), morphisms represented by eventual Hom maps under a directed system",
+   "results": "DirectLimit; DirectLimit.exists_eq_mk; DirectLimit.exists_eq_mk₂; FirstOrder.Language.DirectLimit; DirectLimit.exists_eq_mk₃; DirectLimit.map₀; DirectLimit.setoid; DirectLimit.map₀_def",
+   "date": "2026-10-16",
+   "verdict": "no match for the category model"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Cat CategoryTheory.Functor CategoryTheory.NatIso",
+   "results": "0 hits; loogle: Function expected at\n  CategoryTheory.Cat\nbut this term has type\n  Type (max (?u.1 + 1) ?u.1 (?u.2 + 1))\n\nNote: Expected a function because this term is being applied to the argument\n  CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "query error; not evidence of absence; valid quoted-name search below"
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredColimit|isColimit_eq_iff|colimit_eq_iff",
+   "results": "0 hits (subdirectory Mathlib/CategoryTheory/)",
+   "date": "2026-10-16",
+   "verdict": "invalid search scope: an extra Mathlib/ prefix selected a nonexistent directory; rerun with correct relative scope below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of Hom sets defines composition and a comparison functor from the resulting category",
+   "results": "CategoryTheory.Limits.ColimitPresentation.Total.Hom.comp; CategoryTheory.Limits.ColimitPresentation.Total.Hom.comp_hom; AddGrpCat.FilteredColimits.colimitCocone; MonCat.FilteredColimits.colimit; AddCommGrpCat.FilteredColimits.colimitCocone; CategoryTheory.Ind.lim; RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; CommGrpCat.FilteredColimits.colimit",
+   "date": "2026-10-16",
+   "verdict": "no match for the category model"
+  },
+  {
+   "tool": "grep",
+   "query": "CategoryCocone|FilteredTwoColimit|two.?colimit",
+   "results": "Mathlib/Algebra/Colimit/DirectLimit.lean; Mathlib/CategoryTheory/Limits/MonoCoprod.lean; Mathlib/CategoryTheory/Limits/IsLimit.lean; Mathlib/CategoryTheory/Monoidal/Limits/Cokernels.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the category model"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit_eq_iff|colimit_eq_iff|jointly_surjective",
+   "results": "Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean; Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean (subdirectory CategoryTheory/Limits/Types)",
+   "date": "2026-10-16",
+   "verdict": "matches the already existing set-colimit leaf; does not state the category model"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CoGrothendieck\"",
+   "results": "CategoryTheory.Pseudofunctor.CoGrothendieck.«term∫ᶜ_»; CategoryTheory.Pseudofunctor.CoGrothendieck; CategoryTheory.Pseudofunctor.CoGrothendieck.base; CategoryTheory.Pseudofunctor.CoGrothendieck.category; CategoryTheory.Pseudofunctor.CoGrothendieck.categoryStruct; CategoryTheory.Pseudofunctor.CoGrothendieck.Hom; CategoryTheory.Pseudofunctor.CoGrothendieck.forget; CategoryTheory.Pseudofunctor.CoGrothendieck.instInhabitedHom",
+   "date": "2026-10-16",
+   "verdict": "no match: CoGrothendieck arrows contain a base arrow and a fiber arrow, not eventual Hom classes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -51,5 +190,21 @@
   "det-def-sfb-filtered-two-colimit-cocone"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-def-sfb-filtered-two-colimit-model",
+  "worker": "stage1",
+  "summary": "Preserved the normalized coherent pseudofunctor model statement. Expanded the three blueprint proof paragraphs into seven explicit steps: transition coherence, a small set-colimit quotient, transition products, representative independence, category laws, comparison descent, and functor laws. Reused two existing Mathlib leaves and the cocone definition; no new nodes. Corrected failed search scopes and retained their diagnostics honestly.",
+  "blueprint": "Steps 1–2 realize “The colimit is filtered”; steps 3–5 realize “Composition”; steps 6–7 realize “The comparison functor” in the current blueprint proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q34-58be6b44f",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-58be6b44f (reviewer sub-agent of L); spot-checked: Read the item, all seven proof steps, cited statements, current blueprint route, and cited Stacks/Mathlib sources in full. Coherence, quotient descent, category laws, and comparison functor calculations check out, including noncommutative S3 tests. No new nodes, cycles, missing citations, or repairs. Detailed review written to review.md."
+ }
 }

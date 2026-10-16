@@ -3,25 +3,127 @@
  "blueprint": {
   "is": "def-sfb-dc-tensor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "$\\otimes^{\\mathrm L}$ on $D_{\\mathrm{cons}}$",
- "statement": "Let $X$ be a scheme of the setting, and let $\\Lambda$ be a commutative condensed ring such that\nthe derived tensor product $-\\otimes^{\\mathrm L}_{\\Lambda_X}-$ of [sk-def-sfb-derived-tensor-hom]\ncarries pairs of bounded constructible complexes to bounded constructible complexes. By\n[lem-sfb-dc-tensor-preserves] this holds for $\\Lambda=\\underline{\\cO}_E,\\underline E,\\underline{\\Qlb}$.\nThe derived tensor product\n\n$$\n-\\otimes^{\\mathrm L}-\\colon D_{\\mathrm{cons}}(X,\\Lambda)\\times D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda)\n$$\n\nis its restriction in both variables. For fixed $K$, the functor $K\\otimes^{\\mathrm L}-$ commutes\nwith the inclusions.",
+ "statement": "Let $X$ be a scheme of the setting of [sk-def-sfb-dc-setting], and let $\\Lambda$ be a commutative condensed ring such that\nthe derived tensor product $-\\otimes^{\\mathrm L}_{\\Lambda_X}-$ of [sk-def-sfb-derived-tensor-hom]\ncarries pairs of bounded constructible complexes to bounded constructible complexes. By\n[lem-sfb-dc-tensor-preserves] this holds for $\\Lambda=\\underline{\\cO}_E,\\underline E$ with $E/\\mathbf Q_\\ell$ a finite\nsubextension of the fixed $\\Qlb$ ([sk-def-sfb-condensed-ring]), and for\n$\\Lambda=\\underline{\\Qlb}$ ([sk-def-sfb-qlbar-condensed]).\nThe derived tensor product\n\n$$\n-\\otimes^{\\mathrm L}-\\colon D_{\\mathrm{cons}}(X,\\Lambda)\\times D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda)\n$$\n\nis its restriction in both variables. For fixed $K\\in D_{\\mathrm{cons}}(X,\\Lambda)$, the functor $K\\otimes^{\\mathrm L}-$ commutes\nwith the inclusions.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-tensor.md",
   "place": "node def-sfb-dc-tensor, order 1789"
  },
  "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-bounded-constructible",
   "sk-def-sfb-derived-tensor-hom",
   "lem-sfb-dc-tensor-preserves"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructibleTensor|boundedConstructible.*[Tt]ensor|[Tt]ensor.*boundedConstructible",
+   "results": "No hits for bounded constructible tensor names in pinned Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match by specific names; see generic lift specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product restricted to bounded constructible complexes of sheaves of modules over a condensed coefficient ring",
+   "results": "HomologicalComplex.tensorObj and HasTensor; instAbelianCondensedMod; LightCondensed monoidal and closed module structures; LightCondMod, Condensed and countable AB4Star. These do not state the restriction.",
+   "date": "2026-10-16",
+   "verdict": "no match for specialized wording"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.lift",
+   "results": "CategoryTheory.ObjectProperty.lift, liftCompιIso, lift_obj_obj, lift_map, ι_obj_lift_obj, ι_obj_lift_map (Mathlib.CategoryTheory.ObjectProperty.FullSubcategory); also faithful/full lift and essential-image hits.",
+   "date": "2026-10-16",
+   "verdict": "generalization: lift is the required restriction for the product source category; liftCompιIso supplies inclusion compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict the derived tensor bifunctor on sheaves of modules over a condensed ring to the full subcategory of bounded constructible complexes, assuming it preserves that subcategory",
+   "results": "LightCondensed monoidal/closed structures, monoidal sheafification, Grothendieck abelian and free-module structures; no bounded constructible restriction declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match for specialized wording"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bifunctor preserving a full subcategory in both variables induces a bifunctor on the full subcategory and commutes with its inclusion",
+   "results": "Repeated on 2026-10-16: CategoryTheory.FullSubcategory.hasForget₂ and hasForget (Mathlib/CategoryTheory/ConcreteCategory/Basic); Pseudofunctor.ObjectProperty fullsubcategory map; ObjectProperty.ιOfLE_obj_obj, ιOfLE_map, instMonoidalFullSubcategoryιOfLE and full_ι; wideInducedFunctor. The earlier logged run returned ObjectProperty.lift; this repeated run does not return the construction.",
+   "date": "2026-10-16",
+   "verdict": "no match in the repeated run; use the more direct predicate-lift phrasing below and the Loogle result"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|def liftCompιIso|theorem lift_comp|lemma lift_comp",
+   "results": "Pinned Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean: lift at line 159 and liftCompιIso at line 165; source read at lines 151–171. Also liftCompιOfLEIso at line 183.",
+   "date": "2026-10-16",
+   "verdict": "match: generic construction and compatibility specialize one clause each"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|def liftCompιIso|lemma ι_obj_lift_obj|lemma ι_obj_lift_map",
+   "results": "Pinned Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean: lift at line 159 and liftCompιIso at line 165; source read at lines 151–171. The single-file grep additionally prints ι_obj_lift_obj at 167 and ι_obj_lift_map at 170; its wrapper parses the bare line-number field as file because rg omits the filename for one file.",
+   "date": "2026-10-16",
+   "verdict": "match: generic construction and compatibility specialize one clause each"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a functor into the full subcategory defined by an object predicate when every image object satisfies the predicate",
+   "results": "CategoryTheory.ObjectProperty.lift, lift_map, lift_obj_obj, ι_obj_lift_obj, instFullFullSubcategoryLift, instFaithfulFullSubcategoryLift and ι in Mathlib/CategoryTheory/ObjectProperty/FullSubcategory; unrelated Functor.Liftp in Mathlib/Control/Functor. Read pinned FullSubcategory.lean lines 151–171.",
+   "date": "2026-10-16",
+   "verdict": "generalization: ObjectProperty.lift applied to the product source category is exactly the conditional restriction; liftCompιIso at line 165 supplies inclusion compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict the codomain of a functor to a full subcategory when every object in its image satisfies a predicate",
+   "results": "Eight hits, led by CategoryTheory.ObjectProperty.lift, followed by full/faithful lift instances, inclusion and inclusion-of-properties functors, full-subcategory forgetful structures and Subfunctor.toFunctor.",
+   "date": "2026-10-16",
+   "verdict": "match: generic codomain restriction supplies the construction"
+  },
+  {
+   "tool": "grep",
+   "query": "liftCompιIso|def lift :",
+   "results": "The logged directory search in CategoryTheory/ObjectProperty returned seven hits, including Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:159 (lift), :165 (liftCompιIso), and :174/:177 (full/faithful consequences), plus Shift.lean uses. An earlier full-source run of the same pattern returned twenty-five hits, including these declarations and unrelated lifts. The defining source was read at lines 151–171.",
+   "date": "2026-10-16",
+   "verdict": "match at the recorded pinned Mathlib lines"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a functor F from C to D and a predicate P on objects of D, construct a functor C to the full subcategory of P using proofs P (F.obj X)",
+   "results": "Eight hits; first is CategoryTheory.ObjectProperty.lift, followed by lift_obj_obj, ι_obj_lift_obj, full and faithful lift instances, Subfunctor.toFunctor and wide induced-category constructions. Independently read pinned FullSubcategory.lean:153–170.",
+   "date": "2026-10-16",
+   "verdict": "match: predicate-preserving functor lift specializes to the product source category"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftCompιIso\"",
+   "results": "Two hits: CategoryTheory.ObjectProperty.liftCompιIso and commShift_liftCompιIso_hom. The first identifies (P.lift F hF).comp P.ι with F.",
+   "date": "2026-10-16",
+   "verdict": "match for compatibility clause; pinned definition at FullSubcategory.lean:165"
+  },
+  {
+   "tool": "grep",
+   "query": "hF : ∀ X, P|def liftCompιIso",
+   "results": "Seven hits, including Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:154 for the exact preservation hypothesis and :165 for liftCompιIso; other five hits concern unrelated predicates in algebra, affine spaces and convexity.",
+   "date": "2026-10-16",
+   "verdict": "match: hypothesis and identity comparison read in pinned source"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ObjectProperty.lift",
+  "file": "Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean",
+  "line": 159,
+  "how": "specializes in one line: put D = D(Mod_{Λ_X}), P = bounded constructible, C = P.FullSubcategory × P.FullSubcategory, and F = (P.ι.prod P.ι) ⋙ T for the uncurried ambient derived tensor functor T of sk-def-sfb-derived-tensor-hom; define the restriction by P.lift F (fun KL => h KL.1.property KL.2.property), where h is the preservation hypothesis in the item. The compatibility clause is CategoryTheory.ObjectProperty.liftCompιIso, same file line 165, specialized to F_K = P.ι ⋙ T(K,-); its components are identities. Lines 167 and 170 give literal equality on underlying objects and morphisms. The coefficient examples invoke the existing node lem-sfb-dc-tensor-preserves, not a new Mathlib preservation assertion."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -32,5 +134,20 @@
   "lem-sfb-dc-tensor-preserves",
   "sk-def-sfb-derived-tensor-hom"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-dc-tensor",
+  "worker": "stage1",
+  "summary": "Checked current blueprint definition and its unit, searched slopmaster2 and read upstream master as reference only. Classified the conditional restriction construction as the one-line product-category specialization of Mathlib ObjectProperty.lift (159), with liftCompιIso (165) for compatibility. Retained the existing preservation lemma and added missing statement dependencies for the setting, coefficient notions, pulled-back ring and full subcategory. No statement change and no new nodes. Second reading made explicit the finite-subextension binder for E and membership of fixed K, as required by the unit and preservation statement; conditional construction unchanged.",
+  "blueprint": "The definition paragraph of def-sfb-dc-tensor and the restriction/commuting-inclusion paragraphs of sk-def-sfb-dc-restricted-functors: apply generic full-subcategory lift to the product category; specialize its identity compatibility to fixed K. Preservation is the hypothesis, supplied in the listed coefficient examples by lem-sfb-dc-tensor-preserves."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q54-d56fdc8b3",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-d56fdc8b3 (reviewer sub-agent of L); spot-checked: Read the item, report, seven cited statements and source places, and chapter/unit route in full. Mathlib ObjectProperty.lift:159 and liftCompιIso:165 exactly supply the conditional restriction and compatibility. Checked coefficient categories, target signatures and base-change direction, edge cases, duplicates and cycles. No new nodes or repairs; detailed checks are in review.md."
+ }
 }
