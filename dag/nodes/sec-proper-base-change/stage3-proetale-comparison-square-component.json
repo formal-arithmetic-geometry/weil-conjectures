@@ -1,0 +1,127 @@
+{
+ "id": "stage3-proetale-comparison-square-component",
+ "kind": "statement",
+ "title": "Underived coefficient square coherence for commutative rings",
+ "statement": "For any commutative ring Λ, any Cartesian square of schemes and any étale module sheaf F on the lower-right corner, the component of comparisonSquareData (ModuleCat Λ) commutes.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
+  "place": "Expanded proof step 4"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already proved generic comparison_coherent to ModuleCat Λ and project its Cartesian-square clause at X′, X, Y′, Y, g′, f′, f, g, cs and F. The proof is available through a proof-only import all; its category hypotheses are satisfied for modules over any commutative ring, without a finiteness instance.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/ComparisonPullbackCoherence.lean",
+  "place": "comparison_coherent, third conjunct; reused through import all in the E1 second reading"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquare",
+  "date": "2026-10-16",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "stage3-proetale-comparison-square",
+   "place": "underived transport",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareComponent",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/BaseChange/ComparisonSquareComponent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.comparison_square_component_of_commRing",
+  "statement": "theorem comparison_square_component_of_commRing\n    (Λ : Type (u + 1)) [CommRing Λ]\n    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}\n    {f : X ⟶ Y} {g : Y' ⟶ Y}\n    (cs : ChosenCartesianSquare g' f' f g)\n    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    ComparisonSquareComponent\n      (comparisonSquareData (ModuleCat.{u + 1} Λ) g' f' f g cs) F",
+  "by": "E1",
+  "date": "2026-10-16",
+  "branch": "sheaf-dag"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback comparison isomorphisms for sheaves commute around a cartesian square of sites",
+   "date": "2026-10-16",
+   "results": [
+    "CategoryTheory.Limits.pullbackComparison",
+    "CategoryTheory.Limits.instIsIsoPullbackComparison",
+    "SheafOfModules.pullbackComp",
+    "PresheafOfModules.pullbackComp",
+    "CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e",
+    "CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.mkIso",
+    "CategoryTheory.GrothendieckTopology.overMapPullbackComp",
+    "CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.asSquare_iso"
+   ],
+   "verdict": "Generic pullback composition and derived-category functoriality APIs found; no project-specific comparison-square theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*(comp|congr)|ComparisonSquareComponent",
+   "date": "2026-10-16",
+   "results": [
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean"
+   ],
+   "verdict": "Generic pullback composition and derived-category functoriality APIs found; no project-specific comparison-square theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equality of natural transformations of exact functors induces an equality on derived categories",
+   "date": "2026-10-16",
+   "results": [
+    "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+    "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+    "CategoryTheory.Abelian.Ext.mapExactFunctor",
+    "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+    "CategoryTheory.Functor.mapDerivedCategoryFactors",
+    "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+    "CategoryTheory.Functor.mapDerivedCategory",
+    "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory"
+   ],
+   "verdict": "Generic pullback composition and derived-category functoriality APIs found; no project-specific comparison-square theorem."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T160648-L-933634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261016T160648-L-933634",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

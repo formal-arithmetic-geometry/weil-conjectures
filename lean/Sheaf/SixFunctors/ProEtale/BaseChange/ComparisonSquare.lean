@@ -6,6 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.SixFunctors.ProEtale.BaseChange.SmoothBaseChangeComparisons
+import Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareComponent
+import Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareTransport
 
 /-! # Compatibility of canonical derived site comparisons -/
 
@@ -43,5 +45,13 @@ theorem comparison_square {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X}
         ((leftDerivedUpperStarComparisonIso g Λ).hom.app M) ≫
       (leftDerivedUpperStarSquareIso (ModuleCat.{u + 1} Λ) sq.toCommSq).hom.app
         ((DerivedCategory.Plus.ι ⋙ D(ν^*(Y)[ModuleCat.{u + 1} Λ])).obj M) := by
-  sorry
+  let cs : ChosenCartesianSquare g' f' f g :=
+    { toCommSq := sq.toCommSq
+      isoPullback := sq.isoPullback
+      hom_fst := sq.isoPullback_hom_fst
+      hom_snd := sq.isoPullback_hom_snd }
+  apply comparison_square_of_component Λ sq M
+  intro F
+  exact comparison_square_component_of_commRing Λ cs F
+
 end AlgebraicGeometry.ProEtale
