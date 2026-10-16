@@ -29,7 +29,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-mapping-composition",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-right-fibration-fibers"
  ],
  "proof": [
   {
@@ -244,5 +245,37 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianMappingFiber",
+  "declaration": "SSet.Enhanced.cartesian_mapping_fiber",
+  "declarations": [
+   "SSet.Enhanced.CartesianMappingFrame",
+   "SSet.Enhanced.CartesianMappingFrame.inclusion",
+   "SSet.Enhanced.CartesianMappingFrame.domain",
+   "SSet.Enhanced.CartesianMappingFrame.total",
+   "SSet.Enhanced.CartesianMappingFrame.baseMap",
+   "SSet.Enhanced.CartesianMappingFrame.baseEdge",
+   "SSet.Enhanced.CartesianMappingFrame.codomain",
+   "SSet.Enhanced.cartesianTriangleCollapse",
+   "SSet.Enhanced.IsCartesianPostcomposition",
+   "SSet.Enhanced.IsCartesianMappingComparison",
+   "SSet.Enhanced.cartesian_mapping_fiber"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianMappingFiber.lean",
+  "statement": "theorem cartesian_mapping_fiber {B : SSet.{u}} [Quasicategory B] {s t : B _⦋0⦌} (F : CartesianMappingFrame B s t) [Quasicategory F.E] [InnerFibration F.p] (he : IsCartesianEdge F.p (SSet.yonedaEquiv.symm F.e.1)) : ∃ c : F.domain ⟶ F.codomain, IsCartesianMappingComparison F c ∧ ∀ (F' : CartesianMappingFrame B s t) [Quasicategory F'.E] [InnerFibration F'.p] (_he' : IsCartesianEdge F'.p (SSet.yonedaEquiv.symm F'.e.1)) (T : F.E ⟶ F'.E) (hT : T ≫ F'.p = F.p) (_hw : (rightFibrationFiberMap F.p F'.p T hT s).app _ F.w = F'.w) (_hy : (rightFibrationFiberMap F.p F'.p T hT s).app _ F.y = F'.y) (_hz : T.app _ F.z = F'.z) (_hee : T.app _ F.e.1 = F'.e.1) (c' : F'.domain ⟶ F'.codomain), IsCartesianMappingComparison F' c' → ∃ (a : F.domain ⟶ F'.domain) (m : F.total ⟶ F'.total) (h : F.codomain ⟶ F'.codomain), (∀ (n : SimplexCategoryᵒᵖ) (x : F.domain.obj n), (a.app n x).1 = (rightFibrationFiberMap F.p F'.p T hT s).app _ x.1) ∧ (∀ (n : SimplexCategoryᵒᵖ) (x : F.total.obj n), (m.app n x).1 = T.app _ x.1) ∧ (∀ (n : SimplexCategoryᵒᵖ) (x : F.codomain.obj n), (h.app n x).1.1 = m.app n x.1.1 ∧ (h.app n x).1.2 = x.1.2) ∧ Nonempty (SSet.Homotopy (c ≫ h) (a ≫ c'))",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The comparison is characterized by a simplicial section of the explicit relative triangle correspondence and constant homotopy-fiber paths. Naturality uses the existing rightFibrationFiberMap (a canonical pullback map with no right-fibration hypothesis); its node is added to stmt_deps. The induced mapping-space and homotopy-fiber maps are uniquely specified in every degree, with existence included in the conclusion. Helpers package only this node's data; no arbitrary map, hollow definition, global cartesian-lift assumption, or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9026aa588",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Checked every clause of SSet.Enhanced.cartesian_mapping_fiber against the node and Kerodon 01U8/01U7/0329. Inner fibration of quasicategories in one universe u; horn-cartesian edge via IsCartesianEdge (final horns n>=2 with edge {n-1,n}=e); strict fiber = pullback(const s) p; right-pinched mappingSpace; homotopyFiber with paths from the image to f. The relative-triangle predicate has the right faces and edges (delta_last = input, delta_{n+1} = output, edge n+1->n+2 = e), base f∘collapse, appendLast∘appendLast operators and a constant path. It is satisfiable and identified with the composition class by proof step 6. IsWeakHomotopyEquivalence and the four Kan conjuncts are present. Naturality fixes a/m/h by their coordinates (rightFibrationFiberMap, T, same path) and gives SSet.Homotopy (c≫h) (a≫c') for every admissible c'; this is true via section homotopies into a Kan target. Only e and T(e) are assumed cartesian. Edge cases (empty mapping spaces or spaces, point base, p=id, w=y, degenerate edges, n=0) are covered, with no universe restriction. Node diff: only lean, plus stmt_deps gaining the landed same-unit lem-coef-infinity-right-fibration-fibers (allowed by §5, acyclic). lean.statement is verbatim. Docstrings with source and blueprint, no hollow definitions, only the item sorry, no pro-etale. Both report sections present. nt_compile.py --json on the snapshot file: rc 0, no errors or warnings (2.3 s). No findings."
  }
 }

@@ -216,5 +216,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FiniteMarkedFibrancyCriterion",
+  "declaration": "SSet.Marked.finite_marked_fibrancy_criterion",
+  "declarations": [
+   "SSet.Marked.finiteMarkedGenerators",
+   "SSet.Marked.finite_marked_fibrancy_criterion"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/FiniteMarkedFibrancyCriterion.lean",
+  "statement": "theorem finite_marked_fibrancy_criterion (Z : Marked.{u}) : finiteMarkedGenerators.rlp (toPoint Z) ↔ (Quasicategory Z.underlying ∧ ∀ e : Z.underlying _⦋1⦌, e ∈ Z.marking ↔ Enhanced.IsEquivalenceEdge Z.underlying e)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3407f6890",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node and HTT 3.1.3.7(1)/3.1.1.6. finiteMarkedGenerators = (i) flatMap inner horns 0<i<n, (ii) finalMarkedHorn n (dim n+1>=1, final edge plus degeneracies, induced horn marking), (iii) triangleMarkingMap, and flatToMarked markedEquivalenceDetector (coequalizer d1σ=s0e, d2σ=s1e, marks [0,1]); family (iv) is absent and the helper is anodyneGenerators with (iv) replaced by the detector. toPoint Z into sharp Δ[0] uses Mathlib rlp; the conclusion (Mathlib SSet.Quasicategory plus marking iff IsEquivalenceEdge) has the same body as the existing IsNaturallyFibrant, so there is no duplicate notion. Single bound universe u, no extra hypotheses. Statement true in both directions; empty Z, n=0/1, wrongly marked N([1]) and unmarked groupoid isomorphism all behave correctly. The node differs from the base only by the lean record and lean.statement matches the file verbatim. Docstrings carry the source place, the blueprint tag and the four proof steps; only sorry; no pro-etale content. Report has Worker report and Second reading by Q02. nt_compile.py --json on the snapshot against the side overlay: rc=0, no errors or warnings, 1.3 s. No findings requiring a fix."
  }
 }

@@ -432,5 +432,36 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AssociativeWordFiltration",
+  "declaration": "CategoryTheory.tensor_word_free_associative_filtration",
+  "declarations": [
+   "CategoryTheory.AssociativeWordFiltration.power",
+   "CategoryTheory.AssociativeWordFiltration.concat",
+   "CategoryTheory.AssociativeWordFiltration.blockLength",
+   "CategoryTheory.AssociativeWordFiltration.blocks",
+   "CategoryTheory.AssociativeWordFiltration.flatten",
+   "CategoryTheory.AssociativeWordFiltration.insertBlocks",
+   "CategoryTheory.AssociativeWordFiltration.alternating",
+   "CategoryTheory.AssociativeWordFiltration.Filtration",
+   "CategoryTheory.AssociativeWordFiltration.Construction",
+   "CategoryTheory.tensor_word_free_associative_filtration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AssociativeWordFiltration.lean",
+  "statement": "theorem tensor_word_free_associative_filtration {C : Type u} [Category.{v} C] [MonoidalCategory C] [HasColimits C] (leftAdj : ∀ X : C, ((tensoringLeft C).obj X).IsLeftAdjoint) (rightAdj : ∀ X : C, ((tensoringRight C).obj X).IsLeftAdjoint) : Nonempty (AssociativeWordFiltration.Construction C)",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The helper definitions and structures specify this node’s ordered word construction and filtration. They reuse Mathlib Mon, Monad.Algebra, Cofan/IsColimit, CreatesColimit and pushoutProduct; every monad and free-algebra operation is characterized on all word summands. No theorem other than this node is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b5345f51",
+  "group": "Q84",
+  "result": "pass",
+  "note": "I matched every node clause to the Lean: the hypotheses (HasColimits, i.e. U-small colimits; non-symmetric MonoidalCategory; IsLeftAdjoint for tensoringLeft and tensoringRight) are none stronger than the node's. The monad, free algebra, adjunction and algebra equivalence are fixed on every word length by monad_mul, free_mul, algebra_one and algebra_mul, including empty words; I checked the reverse-list block convention and the definitional typing. preserves_filtered and creates_filtered are for J : Type v; initial_algebra is IsInitial Mon.trivial. In the pushout filtration, Filtration is a colimit with initial_leg = inA.hom, and isPushout is correctly oriented on q_{n+1} = alternating (j=initial.to A.X), left-bracketed with n copies of f and n+1 of j; Mathlib's pushoutProduct agrees with the node's (L⊗M)⨿(K⊗N)→L⊗N. The node differs from the side clone only in lean; the statement is verbatim and all 10 declarations are listed. The definitions are not hollow, the theorem is the only sorry, and the docstrings carry source and blueprint plus the 15-step plan. The dependency records are Mathlib matches and no duplicate was found. nt_compile.py: 1.9 s, no diagnostics. Only a cosmetic stale 'superseded' report section remains."
  }
 }

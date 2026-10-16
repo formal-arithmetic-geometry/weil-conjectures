@@ -27,7 +27,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-relative-cone"
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-blunt-sharp-join-equivalence"
  ],
  "proof": [],
  "proof_deps": [],
@@ -218,5 +219,48 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeJoin",
+  "declaration": "SSet.Enhanced.relativeJoin",
+  "declarations": [
+   "SSet.Enhanced.relativeJoinRho_naturality",
+   "SSet.Enhanced.relativeJoinRho",
+   "SSet.Enhanced.relativeJoinEndpoint",
+   "SSet.Enhanced.relativeJoin_endpoints",
+   "SSet.Enhanced.relativeJoinRho_natural",
+   "SSet.Enhanced.relativeJoinSubcomplex",
+   "SSet.Enhanced.relativeJoin",
+   "SSet.Enhanced.relativeJoinFst",
+   "SSet.Enhanced.relativeJoinSnd",
+   "SSet.Enhanced.relativeJoinProjection",
+   "SSet.Enhanced.relativeJoinLift",
+   "SSet.Enhanced.relativeJoinInl",
+   "SSet.Enhanced.relativeJoinInr",
+   "SSet.Enhanced.relativeJoinMap",
+   "SSet.Enhanced.relativeJoinIdentityIso",
+   "SSet.Enhanced.joinBlockCollapse",
+   "SSet.Enhanced.joinBlockWord",
+   "SSet.Enhanced.existsUnique_joinBlockParameter",
+   "SSet.Enhanced.joinBlockParameter",
+   "SSet.Enhanced.relativeJoinFiber",
+   "SSet.Enhanced.relativeJoinFiberCone_compatible",
+   "SSet.Enhanced.relativeJoinFiberCone"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeJoin.lean",
+  "statement": "def relativeJoin {A B C : SSet.{u}} (f : A ⟶ C) (g : B ⟶ C) : SSet.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Degreewise pullback with the prescribed splitting formula, projections, inclusions, induced maps, identity-base isomorphism and strict-fiber cone. Reuses the landed bluntSharpCylinderSimplex for the splitting formula; its owning node is added to stmt_deps. Five named construction proof obligations are recorded in declarations, with source and complete proof docstrings. joinBlockParameter is chosen only from an existence-and-uniqueness theorem specifying every convolution representative, hence is determined up to equality. No quasicategory or universal-cone assertion is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9650cfaef",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Read node, 3 stmt_deps and their Lean records, the full module, the report (Worker report + Second reading by Q111), and the reused helper bodies (bluntSharpCylinderSimplex/Ordinal, orderedJoinFunctor, joinAugmentation, joinGenerator, orderedJoinInl/Inr, rightJoinCone). All 12 node clauses match: rho_C = generator of (s,s) restricted along the 0/1 vertex selection (initial zero block, final one block, empty block via the augmentation element); degreewise pullback subcomplex with coordinatewise operators; p_C; i_A/i_B lifted with constant endpoints; relativeJoinMap with ha, hb in node order; identity-base iso with both inverse laws proved; strict fibre via pullback along yonedaEquiv.symm c; block parameter via an exists-unique theorem pinned on every convolution representative (data determined up to equality, not hollow); j_c = ((r*c)(w),(eps,c_n)) into relativeJoin f (id C). The five sorry'd construction theorems are each true. Edge cases (degrees 0/1, empty A/B/C, C=Delta0, empty fibre, any u) covered. Node: statement unchanged, only lean and stmt_deps (added landed blunt-sharp owner) changed; no DAG cycle; no duplicate in Mathlib, side or slopmaster2. nt_compile.py --json on the snapshot file: rc 0, no diagnostics (2.9 s). No fixes needed; cosmetic only: the letter 'a' is overloaded in the node text."
  }
 }

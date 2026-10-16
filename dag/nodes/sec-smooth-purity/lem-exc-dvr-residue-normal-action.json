@@ -264,5 +264,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FiniteDVRResidueNormalAction",
+  "declaration": "IsDiscreteValuationRing.residue_normal_action",
+  "declarations": [
+   "IsDiscreteValuationRing.residueNormalLiesOverInstance",
+   "IsDiscreteValuationRing.residueNormalBaseField",
+   "IsDiscreteValuationRing.residueNormalQuotientField",
+   "IsDiscreteValuationRing.residueNormalActionHom",
+   "IsDiscreteValuationRing.residue_normal_action"
+  ],
+  "file": "lean/Sheaf/FieldTheory/FiniteDVRResidueNormalAction.lean",
+  "statement": "theorem residue_normal_action (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (L : Type w) [Field L] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [FiniteDimensional K L] [IsGalois K L] (n : Ideal (integralClosure A L)) [n.IsMaximal] : Normal (A ⧸ IsLocalRing.maximalIdeal A) (integralClosure A L ⧸ n) ∧ Function.Surjective (residueNormalActionHom A K L n)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses Mathlib canonical integralClosure action and Ideal.Quotient.stabilizerHom; helper declarations expose the maximal-ideal contraction and quotient field instances."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80c5369a1",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Matches Stacks 09ED (1)-(2) clause by clause: DVR A, IsFractionRing K, FiniteDimensional+IsGalois L/K (normal+separable), integralClosure A L, maximal n, k=A/m_A, E=B/n with algebraOfLiesOver; D=stabilizer of n in Gal(L/K) under the canonical restriction action (rfl); rho=Ideal.Quotient.stabilizerHom with rho(sigma)(bbar)=overline(sigma b) by rfl; conclusion Normal k E and Surjective rho, no residue separability, universes u v w independent. Helpers carry real data; the LiesOver instance is a one-term Mathlib application as in landed stage-2 modules; the field instances are defeq to Ideal.Quotient.field; the only sorry is the item theorem. Docstrings give source/blueprint and the 5 proof steps; lean.statement verbatim; Worker report and Second reading by Q34 present; citer lem-exc-dvr-inertia-order-prime-part consistent. nt_compile.py clean (1.7 s), probe module compiled. No findings."
  }
 }
