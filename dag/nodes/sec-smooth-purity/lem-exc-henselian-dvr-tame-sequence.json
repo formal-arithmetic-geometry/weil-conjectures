@@ -20,11 +20,93 @@
   "def-exc-excellent-ring",
   "def-sc-discrete-valuation-ring",
   "def-weil-pbc-henselian-terminology",
-  "def-weil-l-adic-numbers"
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-pd-separable-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every finite Galois subextension $L/F$ in $F^{\\mathrm{sep}}$, let $B_L$ be the integral closure of $R$ in $L$. By [lem-exc-finite-dvr-tame-inertia], $B_L$ is finite over $R$, and its localizations at maximal ideals are DVRs with residue fields finite over $k$. Apply [lem-weil-pbc-finite-over-henselian-local-product] to $R\\to B_L$. Discard any zero factors in the product decomposition. Since $B_L$ is a nonzero domain, at least one factor remains, and two remaining factors would give a nontrivial idempotent. Thus exactly one factor remains. Thus $B_L$ is local, hence itself a DVR; its residue field equals $k$ because $k$ is algebraically closed. Every $F$-automorphism stabilizes its unique maximal ideal and acts identically on that residue field, so $D_L=I_L=G_L=\\operatorname{Gal}(L/F)$. The finite inertia lemma gives $P_L\\triangleleft G_L$, a finite $p$-group, and a surjective uniformizer character $\\chi_L:G_L\\to\\mu_{n_L}(k)$ with kernel $P_L$, where $e_L=q_Ln_L$, $q_L$ is a power of $p$ and $n_L$ is prime to $p$.",
+   "uses": [
+    "lem-exc-finite-dvr-tame-inertia",
+    "lem-weil-pbc-finite-over-henselian-local-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BUA (lemma-structure-decomposition), finite-level setup, and 0BUB (lemma-structure-decomposition-separable-closure); more-algebra.tex Tags 09E8, 09EE and algebra.tex Tag 04GH"
+   }
+  },
+  {
+   "text": "For $M\\supseteq L$ finite Galois over $F$, let $\\mathfrak n_M$ be the unique maximal ideal of $B_M$. By Step 1, $\\mathfrak n_M$ contracts to the maximal ideal of $R$. Hence the quotient $B_L/(\\mathfrak n_M\\cap B_L)$ is a finite-dimensional domain over $k$, so it is a field: multiplication by any nonzero element is injective and hence surjective. Thus $\\mathfrak n_M\\cap B_L$ is maximal and equals the unique maximal ideal of $B_L$. Apply [lem-exc-finite-tame-character-tower]. Restriction is surjective on $G_M\\to G_L$ and $P_M\\to P_L$, and $n_L\\mid n_M$. Replace the raw character by $\\chi_{L,\\mathrm{can}}=\\chi_L^{q_L}$; the tower lemma gives\n$$\\chi_{L,\\mathrm{can}}(\\sigma|_L)=\\chi_{M,\\mathrm{can}}(\\sigma)^{n_M/n_L}.$$\nThus the exact sequences $1\\to P_L\\to G_L\\to\\mu_{n_L}(k)\\to1$ form an inverse system with surjective transitions on kernels, middle groups and quotients. The identity and composition laws on $G_L$ and $P_L$ are those of restriction. On the root groups, an identity inclusion has exponent $n_L/n_L=1$, and for $N\\supseteq M\\supseteq L$ the composite power exponent is $(n_N/n_M)(n_M/n_L)=n_N/n_L$, proving the same laws there. The indexing set is the set of finite Galois subfields in the fixed set $F^{\\mathrm{sep}}$, ordered by inclusion; its nonemptiness and directedness are supplied by [lem-exc-galois-krull-finite-limit] (the bottom field and finite Galois composita).",
+   "uses": [
+    "lem-exc-finite-tame-character-tower",
+    "lem-exc-galois-krull-finite-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BUA (lemma-structure-decomposition), finite-system and canonical-character diagrams; more-algebra.tex Tags 0BU7 and 0BU8"
+   }
+  },
+  {
+   "text": "Choose a uniformizer $\\pi$ of $R$. For each positive integer $m$ prime to $p$, [lem-exc-tame-root-extension] supplies a cyclic Galois field $L_m=F(\\pi^{1/m})$ of degree and ramification index $m$, embedded in $F^{\\mathrm{sep}}$. Consequently $n_{L_m}=m$. In particular every positive integer prime to $p$ occurs among the tame indices, not merely as an order bounded by a tame index. The same lemma also supplies the henselian lifting of the roots of unity required by the blueprint.",
+   "uses": [
+    "lem-exc-tame-root-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BUB (lemma-structure-decomposition-separable-closure), uniformizer splitting-field paragraph; blueprint lem-exc-dvr-galois.proof.md, tame-level realization"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-infinite-tame-inverse-limit] to the exact inverse system in Step 2, with $I_L=G_L$ and $C_L=\\mu_{n_L}(k)$. All its groups are finite, each $P_L$ is a $p$-group, and every transition is surjective by Step 2. Identify $G$ topologically with $\\varprojlim_LG_L$ using [lem-exc-galois-krull-finite-limit] for the Galois extension $F^{\\mathrm{sep}}/F$. We obtain a continuous surjection $G\\to C=\\varprojlim_L\\mu_{n_L}(k)$ with kernel $P=\\varprojlim_LP_L$, closed and normal in $G$, a topological isomorphism $G/P\\cong C$, and the assertion that every finite continuous quotient of $P$ has $p$-power order.",
+   "uses": [
+    "lem-exc-infinite-tame-inverse-limit",
+    "lem-exc-galois-krull-finite-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BUA (lemma-structure-decomposition), inverse-limit exactness paragraph; fields.tex Tag 0BU2 (lemma-infinite-galois-limit)"
+   }
+  },
+  {
+   "text": "Here the limit $C$ is the full prime-to-$p$ root limit $T=\\varprojlim_{(m,p)=1}\\mu_m(k)$. Explicitly, a compatible family $(z_m)_m$ in $T$ maps to $(z_{n_L})_L$ in $C$. Conversely, for $(c_L)_L\\in C$ and an order $m$ choose any finite Galois $L$ with $m\\mid n_L$ (Step 3 gives one with equality) and set $z_m=c_L^{n_L/m}$. Given two choices, a common finite Galois overfield and the transition formula of Step 2 show that these expressions agree. For $m\\mid m'$, choose a common overfield for the two choices and compute $z_{m'}^{m'/m}=z_m$. Both constructions are homomorphisms, inverse to each other: recovering a coordinate $c_L$ permits choosing that very $L$ at order $n_L$. Each output coordinate depends on a single input coordinate through a power map between finite discrete groups; both maps are therefore continuous in the inverse-limit topologies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BUB (lemma-structure-decomposition-separable-closure), cofinality of the tame indices; explicit two-sided coordinate identification"
+   }
+  },
+  {
+   "text": "Use [lem-exc-tame-roots-product] to choose compatible primitive roots in $k$ and a topological-group isomorphism $T\\cong\\prod_{r\\ne p}(\\mathbf Z_r,+)$. Compose it with the continuous surjection of Step 4 and the coordinate isomorphism of Step 5. This gives $\\theta$ with the same closed normal kernel $P$ and the required topological quotient. The finite-quotient assertion is already furnished by Step 4. The last identification uses the permitted choice of primitive roots, so it asserts no canonical trivialization of the Tate twist.",
+   "uses": [
+    "lem-exc-tame-roots-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BUB tame root limit; fields.tex Tag 09HW (section-roots-of-1) and algebra.tex Tag 00DT (lemma-chinese-remainder), via the compatible-root product lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-finite-dvr-tame-inertia",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-exc-finite-tame-character-tower",
+  "lem-exc-galois-krull-finite-limit",
+  "lem-exc-tame-root-extension",
+  "lem-exc-infinite-tame-inverse-limit",
+  "lem-exc-tame-roots-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tags 0BUA (lemma-structure-decomposition) and 0BUB (lemma-structure-decomposition-separable-closure), with the finite-character scaling of more-algebra.tex Tags 0BU7, 0BU8 and the compatible-root product identification."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -109,15 +191,67 @@
    "results": "[grep] OK 1 hit(s); Mathlib/RingTheory/Valuation/RamificationGroup.lean:50 noncomputable def inertiaSubgroup (A : ValuationSubring L) : Subgroup (A.decompositionSubgroup K) :=; searched Mathlib/RingTheory. Read the complete 54-line source.",
    "date": "2026-10-16",
    "verdict": "No match: the declaration defines the inertia subgroup as a kernel and gives no tame quotient or pro-p assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A henselian discretely valued field with algebraically closed residue field of characteristic p has pro-p wild inertia and tame quotient the product of Z_r for primes different from p",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Tilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(K : Type u₁) →\\n  [inst : Field K] →\\n    (v : Valuation K NNReal) →\\n      (O : Type u₂) →\\n        [inst_1 : CommRing O] →\\n          [inst_2 : Algebra O K] → v.Integers O → (p : ℕ) → [Fact (Nat.Prime p)] → [hvp : Fact (v ↑p ≠ 1)] → Type u₂\", \"doc\": \"Given a commutative ring $ O $, a prime number $ p $, and a valuation $ v $ on $ O $ satisfying $ v(p) \\neq 1 $, the tilt is defined as the fraction ring of the pretilt of $ O $ modulo $ p $. The preti\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}\n  {\"name\": \"PreTilt.isDomain\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ (K : Type u₁) [inst : Field K] (v : Valuation K NNReal) (O : Type u₂) [inst_1 : CommRing O] [inst_2 : Algebra O K],\\n  v.Integers O → ∀ (p : ℕ) [inst : Fact (Nat.Prime p)] [inst_3 : Fact ¬IsUnit ↑p], IsDomain (PreTilt O p)\", \"doc\": \"For a commutative ring $ O $ and prime $ p $, the pretilt $ \\\\mathrm{PreTilt}(O, p) $ (defined as the perfection of $ O/(p) $ consisting of sequences $ (f_n) $ with $ f_n = f_{n+1}^p $) has no zero div\"}\n  {\"name\": \"Tilt.instField\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(K : Type u₁) →\\n  [inst : Field K] →\\n    (v : Valuation K NNReal) →\\n      (O : Type u₂) →\\n        [inst_1 : CommRing O] →\\n          [inst_2 : Algebra O K] →\\n            (hv : v.Integers O) →\\n              (p : ℕ) → [inst_3 : Fact (Nat.Prime p)] → [hvp : Fact (v ↑p ≠ 1)] → Field (Tilt K v O hv p)\", \"doc\": \"Given a field $ K $ equipped with a valuation $ v $ trivial on a commutative ring $ O $, and a prime $ p $ such that $ v(p) \\neq 1 $, the tilt of $ K $ with respect to $ v $, $ O $, and $ p $ is a fiel\"}\n  {\"name\": \"ValuationSubring.inertiaSubgroup\", \"module\": \"Mathlib/RingTheory/Valuation/RamificationGroup\", \"type\": \"(K : Type u_1) →\\n  {L : Type u_2} →\\n    [inst : Field K] →\\n      [inst_1 : Field L] →\\n        [inst_2 : Algebra K L] → (A : ValuationSubring L) → Subgroup ↥(ValuationSubring.decompositionSubgroup K A)\", \"doc\": \"The inertia subgroup of a valuation subring $ A $ is the subgroup of its decomposition subgroup consisting of all $ K $-algebra automorphisms of $ L $ that act trivially on the residue field of $ A $.\"}\n  {\"name\": \"PreTilt.instPerfectRing\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ (O : Type u₂) [inst : CommRing O] (p : ℕ) [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p],\\n  PerfectRing (PreTilt O p) p\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo a prime $ p $, defined as the perfection of the quotient ring $ O/(p) $, is a perfect ring with respect to $ p $. This means every element in the pretilt\"}\n  {\"name\": \"PreTilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(O : Type u₂) → [CommRing O] → ℕ → Type u₂\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo $ p $ is defined as the perfection of the quotient ring $ O/(p) $ with respect to the prime $ p $. This perfection consists of all sequences $ (f_n)_{n \\\\\"}\n  {\"name\": \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"module\": \"Mathlib/NumberTheory/LocalField/Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : ValuativeRel K] [inst_2 : TopologicalSpace K]\\n  [inst_3 : IsNonarchimedeanLocalField K], Finite (IsLocalRing.ResidueField ↥(ValuativeRel.valuation K).integer)\", \"doc\": \"For any non-Archimedean local field $ K $, its residue field (obtained by quotienting the valuation ring $ \\\\mathcal{O}_K $ by its unique maximal ideal) is a finite field.\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: none of these definitions, finite order formulas, perfectoid constructions or profinite packaging states the tame/wild sequence with full product quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inertiaSubgroup\", \"IsPGroup\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "No match: none of these definitions, finite order formulas, perfectoid constructions or profinite packaging states the tame/wild sequence with full product quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "wild.*inertia|tame.*inertia|inertiaSubgroup",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Valuation/RamificationGroup.lean\", \"line\": \"50\", \"text\": \"noncomputable def inertiaSubgroup (A : ValuationSubring L) : Subgroup (A.decompositionSubgroup K) :=\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: none of these definitions, finite order formulas, perfectoid constructions or profinite packaging states the tame/wild sequence with full product quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The maximal tame quotient of the absolute Galois group of a strictly henselian discrete valuation field is the prime-to-p completion of the integers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Field.absoluteGaloisGroupAbelianization\", \"module\": \"Mathlib.FieldTheory.AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The topological abelianization of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is the quotient of the group by the closure of its commutator subgroup, equipped with the quotient topology ind\"}\n  {\"name\": \"IsGalois.normalAutEquivQuotient\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \"[FiniteDimensional K L] [IsGalois K L] (H : Subgroup Gal(L/K)) [Subgroup.Normal H] :\\n  Gal(L/K) ⧸ H ≃* Gal(fixedField H/K)\", \"doc\": \"Given a Galois field extension $ L/K $ and a normal subgroup $ H $ of the Galois group $ \\\\text{Gal}(L/K) $, the quotient group $ \\\\text{Gal}(L/K)/H $ is isomorphic to the Galois group $ \\\\text{Gal}(E/K)\"}\n  {\"name\": \"krullTopology_isTotallySeparated\", \"module\": \"Mathlib.FieldTheory.KrullTopology\", \"type\": \"{K L : Type*} [Field K] [Field L] [Algebra K L] [Algebra.IsIntegral K L] : IsTotallySeparated (Set.univ : Set Gal(L/K))\", \"doc\": \"For fields $ K $ and $ L $ with $ L $ being an integral algebra over $ K $, the Galois group $ \\\\text{Gal}(L/K) $ equipped with the Krull topology is totally separated.\"}\n  {\"name\": \"PadicInt.adicCompletionIntegersEquiv\", \"module\": \"Mathlib.NumberTheory.Padics.HeightOneSpectrum\", \"type\": \"(p : Nat.Primes) : ℤ_[p] ≃A[ℤ] ((primesEquiv (R := R)).symm p).adicCompletionIntegers ℚ\", \"doc\": \"For any prime number $ p $, there is a continuous algebra equivalence between the ring of $ p $-adic integers $ \\\\mathbb{Z}_p $ and the adic completion integers at the height one prime ideal correspond\"}\n  {\"name\": \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"(p : Ideal R) [p.IsMaximal] (P : Ideal S) [P.LiesOver p] [P.IsMaximal] [Algebra.IsSeparable (R ⧸ p) (S ⧸ P)] :\\n  (p.primesOver S).ncard * Nat.card (P.toAddSubgroup.inertia G) * Module.finrank (R ⧸ p) (S ⧸ P) = Nat.card G\", \"doc\": \"For a maximal ideal $ p $ in a commutative ring $ R $ and a maximal ideal $ P $ in a commutative ring $ S $ lying over $ p $, if the algebra $ S/P $ is separable over $ R/p $, then the product of the \"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \": ValuationSubring (v.adicCompletion K)\", \"doc\": \"The valuation subring of the adic completion of a Dedekind domain's fraction field with respect to a height one prime ideal, consisting of all elements in the completion whose valuation is less than o\"}\n  {\"name\": \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"module\": \"Mathlib.Topology.Algebra.Valued.LocallyCompact\", \"type\": \"[IsDiscreteValuationRing 𝒪[K]] (h : Finite 𝓀[K]) (n : ℕ) : Finite (𝒪[K] ⧸ 𝓂[K] ^ n)\", \"doc\": \"Let $\\\\mathcal{O}_K$ be the ring of integers of a discrete valuation field $K$ with maximal ideal $\\\\mathfrak{m}_K$ and residue field $k_K = \\\\mathcal{O}_K/\\\\mathfrak{m}_K$. If the residue field $k_K$ is \"}\n  {\"name\": \"Field.instTopologicalSpaceAbsoluteGaloisGroup\", \"module\": \"Mathlib.FieldTheory.AbsoluteGaloisGroup\", \"type\": \": TopologicalSpace (G_K K)\", \"doc\": \"The absolute Galois group of a field $ K $ is equipped with the Krull topology, which is generated by a basis of subgroups fixing finite intermediate field extensions between $ K $ and its algebraic c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: none of these definitions, finite order formulas, perfectoid constructions or profinite packaging states the tame/wild sequence with full product quotient."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-dvr-galois",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-henselian-dvr-tame-sequence",
+  "worker": "stage1",
+  "summary": "Rebuilt the earlier split after reading the Stacks finite/infinite ramification proofs. Added the finite tower/scaled-character lemma and one exact Mathlib leaf for Krull reconstruction; reused finite henselian algebra decomposition instead of treating locality as a definition. Spelled out the cofinal coordinate identification, supplied explicit finite-quotient/topology hypotheses, corrected source places and reran every new-node search with a real Mathlib subdirectory. The item statement is unchanged. Second reading made the generic inverse-system statement self-contained, introduced the tower valuations explicitly, allowed zero product factors, and checked contractions over the base maximal ideal.",
+  "blueprint": "lem-exc-dvr-galois.proof.md first paragraph: Step 1 finite normalization and inertia; second paragraph: Steps 2 and 4 compatible finite inverse limits, Step 3 uniformizer root extensions, Steps 5 and 6 full prime-to-p product identification.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "Step 1 uses the finite-algebra decomposition over a henselian local ring only to deduce locality of the finite integral-closure domain; no node of sk-prop-a1-kummer supplies this general ring-theoretic decomposition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-over-henselian-local-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-06f4b0f59",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-06f4b0f59 (reviewer sub-agent of L); spot-checked: Read the whole delivery and every source at the cited places: more-algebra 09E8, 09EE with its full proof, 0BU7 with its proof, 0BU8; pione 0BUA full proof and the 0BUB statement; Mathlib Profinite.lean:300-341 and GaloisClosure.lean:85-97; the blueprint main-20261015 lem-exc-dvr-galois proof; the unit record and the parent's use of the item. Item statement: unchanged and true; it is the henselian, algebraically-closed-residue case of 0BUB and gives exactly what the parent step uses. Step 1: the 04GH product lemma (zero factors allowed) plus the domain-idempotent argument makes B_L local, so D=I=G; the inertia character comes from 09EE. Step 2: 0BU7 surjections on D, I, P; I checked the scaled formula q_L*e_M/e_L = q_M*n_M/n_L myself; the identity and composition laws hold; directedness comes from the Lattice/OrderBot instances. Step 3: Eisenstein irreducibility, henselian lifting of mu_m, cyclic extension with e=m, so the tame indices are cofinal; m=1 holds and p|m is correctly excluded. Step 4: every hypothesis of the inverse-limit node is supplied; G is identified with lim G_L by continuousMulEquivToLimit (exact leaf, lines 323-327). Step 5: correctly elementary; choice-independence through a common overfield, both composites are the identity, continuity holds coordinatewise. Step 6: composes with the compatible-root/CRT product isomorphism. All five unsplit new nodes are true, self-contained, strictly smaller than the item and not restatements of it; small cases tested (L=K, p-power e, p=2 with e_L=3, e_M=6, singleton systems, m=1). The duplicate search over the existing DAG (tags 09EE/0BU7/0BU8/0BUA/0BUB/0BU2/09HW/09E8 and the Kummer, root, inertia and profinite candidates, including the lem-sbc root nodes and lem-sc-primitive-root) found no duplicate. Accepted tool use: lem-weil-pbc-finite-over-henselian-local-product (generic 04GH locality lemma, reviewed; the same tool is already declared in this unit by lem-exc-punctured-curve-branches). No SGA; no slopmaster2 attachment exists. No fixes written."
+ }
 }
