@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-thm-rationality",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Rationality of the zeta series",
@@ -13,29 +13,221 @@
   "place": "node sk-thm-rationality, order 3232"
  },
  "stmt_deps": [
-  "sk-def-roots",
-  "sk-def-zeta"
+  "sk-def-zeta",
+  "def-weil-finite-type-morphism",
+  "def-weil-polynomial-ring",
+  "def-weil-polynomial-coefficient",
+  "def-weil-formal-power-series",
+  "def-weil-polynomial-as-power-series",
+  "def-weil-coefficientwise-ring-hom-map"
  ],
  "proof": [
   {
-   "text": "[sk-thm-tracetodeterminant] factors $Z$ as a finite product of the rational\nfunctions $P_{i,\\ell}^{\\pm1}$ over $\\Ql$, so $Z\\in\\Ql(T)$; write\n$Z=A_\\ell/B_\\ell$ with $A_\\ell,B_\\ell\\in\\Ql[T]$, $B_\\ell(0)=1$. By\n[sk-prop-criterion] (applied over $\\Ql$) the Hankel matrix $\\mathcal H(Z)$\nhas finite rank $r<\\infty$. Now all $z_n$ lie in $\\Z$ by [sk-prop-euler],\nso every $r'\\times r'$ minor of $\\mathcal H(Z)$ with $r'>r$ is an integer\nmatrix whose $\\Ql$-rank is $<r'$, hence whose determinant is $0$ in $\\Z$; rank\nis unchanged by field extension, so $\\rank_{\\Q}\\mathcal H(Z)\\le r$ as well.\nApplying [sk-prop-criterion] over the prime field $\\Q$ gives\n$Z\\in\\Q(T)$. Integrality of the coefficients is [sk-prop-euler].",
+   "text": "The original first sentence invokes the theorem sk-thm-tracetodeterminant, which assumes smoothness, properness and geometric connectedness; these hypotheses are absent here. For example, $X_0=\\mathbf A^1_{\\mathbf F_q}$ satisfies this theorem's hypothesis but is not proper, and a line with doubled origin is an allowed nonseparated example. We repair that inapplicable inference using compact supports on affine pieces, without adding any hypothesis. The finite field is Noetherian (its only ideals are $0$ and the whole field), so [lem-weil-pbc-finite-type-over-noetherian] makes $X_0$ Noetherian. By [lem-zl-affine-partition], choose a finite partition $X_0=\\coprod_{j=1}^sY_{0,j}$ by locally closed reduced affine subschemes. Each inclusion is locally of finite type by clause (2) of [lem-weil-pbc-immersion-base-change-lft]; composition remains locally of finite type by clause (e) of [lem-weil-pbc-proper-fp-permanence]. By [lem-weil-pbc-lft-affine-pairs], applied to the affine source and the affine field spectrum, writing $Y_{0,j}=\\operatorname{Spec}B_j$ gives a finitely generated $\\mathbf F_q$-algebra $B_j$. The single affine chart is then the finite affine cover required by [def-weil-finite-type-morphism], so $Y_{0,j}$ is finite type over $\\mathbf F_q$. It is separated over that field by [lem-weil-pbc-affine-source-morphism-separated]. Empty pieces may be discarded; if $X_0$ is empty, the empty partition is allowed.",
    "uses": [
-    "sk-thm-tracetodeterminant"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-zl-affine-partition",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-finite-type-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01T5 (lemma-immersion-locally-finite-type), 01T3 (lemma-composition-finite-type); affine partition: main blueprint lem-zl-affine-partition; separatedness: Schemes Tag 01KN; Tag 01T2 (lemma-locally-finite-type-characterize)"
+   }
+  },
+  {
+   "text": "For every finite extension $L/\\mathbf F_q$, every $L$-valued point of $X_0$ factors through exactly one $Y_{0,j}$. Indeed, its image $x$ lies in exactly one stratum. Write that stratum as a reduced closed subscheme of an open neighbourhood $U$ of $x$. The point factors through $U$, since its inverse image is all of $\\operatorname{Spec}L$. On an affine neighbourhood $\\operatorname{Spec}A\\subseteq U$ of $x$, let $I\\subseteq A$ define the stratum and let $\\alpha:A\\to L$ define the point. Membership $x\\in V(I)$ says $I\\subseteq\\ker\\alpha$, so $\\alpha$ factors uniquely through $A/I$. This gives a factorization through the stratum; it is unique because the quotient map is surjective and the open restriction is unique. Thus $X_0(L)=\\coprod_jY_{0,j}(L)$ as sets. These sets are finite by [lem-weil-point-counts-finite]. Consequently $N_n(X_0)=\\sum_jN_n(Y_{0,j})$ for every $n\\geq1$. Substituting this equality into the exponential definition [sk-def-zeta] and applying the finite-sum identity [lem-weil-power-series-exp-hom] gives $Z(X_0,T)=\\prod_jZ(Y_{0,j},T)$ in $\\mathbf Q[[T]]$. The empty sum gives $Z(\\varnothing,T)=1$.",
+   "uses": [
+    "lem-weil-point-counts-finite",
+    "sk-def-zeta",
+    "lem-weil-power-series-exp-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-normalization/lem-zl-affine-partition.proof.md",
+    "place": "The first-cover-member partition; point-factorization argument supplied here; exponential finite-sum rule as in Milne Theorem 27.6, p. 156"
+   }
+  },
+  {
+   "text": "The series of [prop-euler-product] is the zeta series of [def-weil-point-counts-zeta]; for a finite-type $\\mathbf F_q$-scheme it is the series $Z$ of [sk-def-zeta] used here. Both are $\\exp(\\sum_{n\\geq1}N_nT^n/n)$ in $\\mathbf Q[[T]]$ with $N_n=\\#\\operatorname{Hom}_{\\mathbf F_q}(\\operatorname{Spec}\\mathbf F_{q^n},-)$. In the first, $\\mathbf F_{q^n}$ is the splitting field of $T^{q^n}-T$, realized in $k$ as $\\{a:a^{q^n}=a\\}$; in the second it is the subfield of $k$ with $q^n$ elements. These are the same subfield, so the two Hom sets coincide. The convention of [sk-def-zeta] that $N_n=0$ for an infinite set never applies, since [def-weil-point-counts-zeta] states that these sets are finite for finite-type schemes. Both nodes define $\\deg(x)=[\\kappa(x):\\mathbf F_q]$. Apply [prop-euler-product] to the original finite-type scheme $X_0$ and separately to each $Y_{0,j}$. It yields $Z(X_0,T)\\in1+T\\mathbf Z[[T]]$ and $Z(Y_{0,j},T)=\\prod_{y\\in|Y_{0,j}|}(1-T^{\\deg(y)})^{-1}$, with coefficientwise locally finite products. In particular the coefficients $z_n$ of $Z(X_0,T)=\\sum_{n\\geq0}z_nT^n$ are integers and $z_0=1$.",
+   "uses": [
+    "prop-euler-product",
+    "def-weil-point-counts-zeta",
+    "sk-def-zeta"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-euler/prop-euler-product.md",
+    "place": "Closed-point product and integrality for every finite-type scheme"
+   }
+  },
+  {
+   "text": "Choose a prime $\\ell\\neq p$ (take $2$ if $p\\neq2$, otherwise $3$) and put $E=\\mathbf Q_\\ell$. For $Y_j=Y_{0,j}\\times_{\\mathbf F_q}\\overline{\\mathbf F}_q$, take the constant $E$-Weil sheaf with the canonical structure [def-weil-constant-weil-structure]. Its integral model is the constant $\\mathbf Z_\\ell$ coefficient object; at every finite level Frobenius fixes each constant section, and these maps commute with reduction. Explicitly, the level-$n$ object is the rank-one free $A_n=\\mathbf Z_\\ell/\\ell^n$ coefficient module in degree zero. Its derived reduction to $A_m$ for $m\\leq n$ is $A_n\\otimes^{\\mathrm L}_{A_n}A_m=A_m$ in degree zero, and the identity Frobenius reduces to the identity. Thus these levels form the compatible normalized Weil datum required by [sk-thm-trace-transport]. No comparison between different Frobenius types is needed here. The pullback of a constant sheaf along any morphism is canonically the constant sheaf, so the canonical isomorphism serves as the finite-level Weil map. This holds for the model Frobenius $\\Phi_1$ of [sk-d-weil] and for the semilinear geometric Frobenius $g_Y$ of [def-weil-constant-weil-structure] clause 1 alike. In both cases the induced stalk endomorphism at a fixed geometric point is the identity of $A_{E,n}$. The $E$-stage of this tower is the rationalization of $\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$, which is $E_Y$ by clauses 2 and 4 of [def-weil-constant-weil-structure]. The same object, in the coefficient category $D^b_{c,\\mathrm W}(Y,E)$ used by [def-weil-constant-weil-structure], is the one to which [prop-cohomological-finiteness] is applied below. That category is also the formalism of the current blueprint's realization of [sk-thm-trace-transport] (thm-trf-trace-formula-e, thm-trf-l-function-euler-product, with $Lg_\\gamma^*$). Only finite-dimensionality and boundedness are taken from [prop-cohomological-finiteness], not its Frobenius action. Every local Frobenius acts as the identity on its one-dimensional stalk. Hence its local determinant is $1-T^{\\deg(y)}$. By [prop-euler-product], its $L$-series is precisely the coefficientwise image of $Z(Y_{0,j},T)$ in $E[[T]]$; the locally finite products commute with the coefficient map since any fixed coefficient uses only finitely many factors. Clause (b) of [sk-thm-trace-transport] gives\n$$\\iota Z(Y_{0,j},T)=\\prod_i\\det(1-TF\\mid H_c^i(Y_j,E))^{(-1)^{i+1}}.$$\nHere $\\iota:\\mathbf Q\\hookrightarrow E$ and its coefficientwise extension are as in [def-weil-coefficientwise-ring-hom-map]. The cohomology is finite-dimensional and zero outside a finite interval by [prop-cohomological-finiteness], applied to the separated finite-type scheme $Y_{0,j}$ and its constant $E$-Weil sheaf. Thus put $A_{j,\\ell}=\\prod_{i\\text{ odd}}\\det(1-TF\\mid H_c^i)$ and $B_{j,\\ell}=\\prod_{i\\text{ even}}\\det(1-TF\\mid H_c^i)$ in $E[T]$. Their constant terms are $1$, since evaluating each determinant at $T=0$ gives the determinant of the identity. The displayed identity says $B_{j,\\ell}\\,\\iota Z(Y_{0,j},T)=A_{j,\\ell}$. No identification of compact with ordinary cohomology is used.",
+   "uses": [
+    "def-weil-constant-weil-structure",
+    "sk-thm-trace-transport",
+    "prop-euler-product",
+    "def-weil-coefficientwise-ring-hom-map",
+    "prop-cohomological-finiteness",
+    "sk-d-weil"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/_section.md",
+    "place": "Clause (b), specialized to the constant E-Weil sheaf; its proof Step 5 supplies the finite compact-cohomology product"
+   }
+  },
+  {
+   "text": "Set $A_\\ell=\\prod_jA_{j,\\ell}$ and $B_\\ell=\\prod_jB_{j,\\ell}$ in $E[T]$. Multiply the finitely many identities from Step 4 and use the product identity of Step 2. The coefficientwise map is a ring homomorphism by [def-weil-coefficientwise-ring-hom-map], so $B_\\ell\\,\\iota Z(X_0,T)=A_\\ell$ and $B_\\ell(0)=\\prod_j1=1$. Empty products equal $1$. Thus the image of $Z(X_0,T)$ has a normalized rational presentation over $E$.",
+   "uses": [
+    "def-weil-coefficientwise-ring-hom-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+    "place": "First sentence, finite rational product; now the compact-support product over the affine partition"
+   }
+  },
+  {
+   "text": "By [prop-weil-rationality-criterion], the presentation in Step 5 implies finite Hankel rank over $E$: there is an integer $r\\geq0$ bounding the ranks of all finite square submatrices of $(\\iota(z_{a+b}))_{a,b\\geq0}$. This is exactly the finite-submatrix meaning of Hankel rank in [def-weil-hankel-matrix]. Since $E=\\mathbf Q_\\ell$ has characteristic zero by [lem-weil-integers-injective-char-zero], $\\mathbf Q\\hookrightarrow E$ is a field extension. For every finite square submatrix $M=(z_{a+b})$ with entries in $\\mathbf Q$ (indeed in $\\mathbf Z$ by Step 3), [lem-weil-matrix-rank-field-extension] gives $\\operatorname{rank}_{\\mathbf Q}M=\\operatorname{rank}_{E}\\iota(M)\\leq r$. Therefore the Hankel rank of the original rational-coefficient series is finite as well. This compares each finite matrix; it does not assert a base-change theorem for an infinite product of vector spaces.",
+   "uses": [
+    "prop-weil-rationality-criterion",
+    "def-weil-hankel-matrix",
+    "lem-weil-integers-injective-char-zero",
+    "lem-weil-matrix-rank-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Lemma 27.9, pp. 156–157, descent of the Hankel determinant/rank condition"
+   }
+  },
+  {
+   "text": "Apply [prop-weil-rationality-criterion] once more, now over $\\mathbf Q$, to the finite Hankel rank from Step 6. There are $a,b\\in\\mathbf Q[T]$ with $b(0)=1$ and $bZ(X_0,T)=a$ in $\\mathbf Q[[T]]$. In particular $Z(X_0,T)\\in\\mathbf Q(T)$.",
+   "uses": [
+    "prop-weil-rationality-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+    "place": "Last two sentences: rationality criterion over the prime field"
+   }
+  },
+  {
+   "text": "Step 3 gives $Z(X_0,T)\\in1+T\\mathbf Z[[T]]$ and Step 7 gives rationality over $\\mathbf Q$. Apply [prop-weil-integral-rational-series], the integral Fatou theorem, to this series. It produces $A,B\\in\\mathbf Z[T]$ with $A(0)=B(0)=1$ and $BZ=A$; the theorem even supplies coprimality and uniqueness, which are not required here. Apply the coefficientwise inclusions [def-weil-coefficientwise-ring-hom-map] and the polynomial inclusion [def-weil-polynomial-as-power-series] to read that identity in $\\mathbf Q[[T]]$. This proves the requested integral presentation and the final membership $Z\\in\\mathbf Q(T)\\cap(1+T\\mathbf Z[[T]])$. Merely clearing the denominators of the rational polynomials in Step 7 would not justify $B(0)=1$; the Fatou input supplies precisely this missing normalization.",
+   "uses": [
+    "prop-weil-integral-rational-series",
+    "def-weil-coefficientwise-ring-hom-map",
+    "def-weil-polynomial-as-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-weil-integral-rational-series.md",
+    "place": "Normalized integral presentation (missing from the imported rationality proof); compare Milne Proposition 27.11, p. 158"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-tracetodeterminant"
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-zl-affine-partition",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-finite-type-morphism",
+  "lem-weil-point-counts-finite",
+  "sk-def-zeta",
+  "lem-weil-power-series-exp-hom",
+  "prop-euler-product",
+  "def-weil-point-counts-zeta",
+  "def-weil-constant-weil-structure",
+  "sk-thm-trace-transport",
+  "def-weil-coefficientwise-ring-hom-map",
+  "prop-cohomological-finiteness",
+  "sk-d-weil",
+  "prop-weil-rationality-criterion",
+  "def-weil-hankel-matrix",
+  "lem-weil-integers-injective-char-zero",
+  "lem-weil-matrix-rank-field-extension",
+  "prop-weil-integral-rational-series",
+  "def-weil-polynomial-as-power-series"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+  "place": "Original Hankel-descent paragraph, repaired at its first sentence for arbitrary finite-type schemes using affine partition and compact supports, and completed by integral Fatou normalization"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "zetaSeries_rational|rational.*zeta|zeta.*rational",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not concern finite-type-scheme zeta rationality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Hasse Weil zeta function of a finite type scheme over a finite field is rational with integer numerator and denominator",
+   "results": "NumberField.dedekindZeta, ArithmeticFunction.zeta, RatFunc.num, RatFunc.isCoprime_num_denom, ArithmeticFunction.isMultiplicative_zeta, RatFunc.num_div_denom, RatFunc.denom, RatFunc.numDenom",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not concern finite-type-scheme zeta rationality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The zeta power series of any scheme of finite type over a finite field is a quotient of integer polynomials with denominator constant coefficient one",
+   "results": "Polynomial.existsUnique_hilbertPoly, Polynomial.coeff_mul_invOneSubPow_eq_hilbertPoly_eval, LaurentSeries.exists_Polynomial_intValuation_lt, FunctionField.inftyValuation.polynomial, RatFunc.laurentAux_ofFractionRing_mk, DenomsClearable, denomsClearable_of_natDegree_le, Function.FactorizedRational.meromorphicNFOn_univ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not concern finite-type-scheme zeta rationality"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries, Polynomial, IsFiniteField",
+   "results": "loogle: unknown identifier 'IsFiniteField'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier IsFiniteField; corrected in the later Loogle query"
+  },
+  {
+   "tool": "grep",
+   "query": "HasseWeil|Hasse.Weil|zetaSeries|Dwork",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not concern finite-type-scheme zeta rationality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dwork rationality theorem for Hasse Weil zeta functions of algebraic varieties over finite fields",
+   "results": "ZMod.LFunction, NumberField.dedekindZeta, ZMod.completedLFunction_eq, ZMod.LFunction_residue_one, ZMod.completedLFunction₀, NumberField.tendsto_sub_one_mul_dedekindZeta_nhdsGT, ZMod.completedLFunction, ArithmeticFunction.vonMangoldt.LFunctionResidueClassAux",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not concern finite-type-scheme zeta rationality"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, PowerSeries",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not concern finite-type-scheme zeta rationality"
+  },
+  {
+   "tool": "grep",
+   "query": "Scheme.*zeta|zeta.*Scheme|Zeta.*Rational",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results do not state finite-type-scheme zeta rationality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationality of the counting generating series for schemes of finite type over finite fields via compactly supported cohomology",
+   "results": "Polynomial.cardPowDegreeIsAdmissible, Polynomial.existsUnique_hilbertPoly, ChevalleyThm.MvPolynomialC.numBound, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results do not state finite-type-scheme zeta rationality"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -67,5 +259,44 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-rationality"
+ "unit": "sk-thm-rationality",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-thm-rationality",
+  "worker": "stage1",
+  "summary": "Kept the current main-20261015 finite-type statement unchanged. Replaced the inapplicable smooth-proper trace identity by the existing compact-support Euler-product formula on the existing finite affine partition, wrote the point-count/product and finite-matrix descent arguments, and supplied the omitted integral Fatou step. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Steps 1–5 repair and realize the original first sentence (rational product over Q_l); Steps 6–7 realize the Hankel finite-rank descent and prime-field criterion; Step 3 realizes Euler integrality; Step 8 supplies the normalization demanded by the current main statement but missing from the imported proof. The old unit record still states only the smooth-proper special case; this unchanged stronger theorem realizes that special case and its one proof paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-affine-partition",
+    "why": "Finite affine partition of the Noetherian source, needed to apply the separated compact-support formula without imposing separatedness on X_0; no node in the rationality unit supplies it."
+   },
+   {
+    "node": "sk-thm-trace-transport",
+    "why": "Clause (b) supplies the compact-support trace-to-determinant formula for each separated affine stratum. This repairs the established scope failure of sk-thm-tracetodeterminant for nonproper or nonsmooth X_0."
+   },
+   {
+    "node": "prop-cohomological-finiteness",
+    "why": "Finite-dimensionality and boundedness of compact cohomology for the constant E-Weil sheaf on each separated finite-type stratum; the smooth-proper family does not provide these groups."
+   },
+   {
+    "node": "lem-weil-matrix-rank-field-extension",
+    "why": "Step 6 compares the rank of each finite integral Hankel submatrix over Q and over Q_l. This generic linear-algebra fact (rank unchanged by field extension) is stated by no node in the rationality unit's route, whose source paragraph asserts it inline."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-affine-partition",
+  "sk-thm-trace-transport",
+  "prop-cohomological-finiteness",
+  "lem-weil-matrix-rank-field-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-075fddae2",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-075fddae2 (reviewer sub-agent of L); spot-checked: Read the item, the unit, the report and every cited node statement. The item statement matches main-20261015 sk-thm-rationality word for word (finite type; integral A,B with B(0)=1), with no weakening. The route departure is an established scope error: sk-thm-tracetodeterminant needs smooth, proper and connected, which fails for A^1 and the doubled-origin line. The repair uses sk-thm-trace-transport (b), which is on the unit's route, applied to each separated affine stratum from lem-zl-affine-partition. Step 1: the 01T6/01T5/01T3/01T2/01KN leaves were checked against Stacks tags. Steps 6-7 follow Milne Lemma 27.9 and Cor. 27.8 (pp. 156-157). Step 8 applies the Fatou node correctly. No new nodes and no cycle. Repaired 2 faults and added 1 clarification. (C4/E6) Step 3 identified the Z of prop-euler-product (def-weil-point-counts-zeta) with the sk-def-zeta series without saying so; added the identification (same subfield F_{q^n}, finite sets, same degree) and the citations, matching the Q20 fix on sk-thm-weil1. (C8) lem-weil-matrix-rank-field-extension (unit sk-thm-weil1, split, not closed) was an undeclared off-route tool; added it to split_report.tool_uses. Clarification, Step 4: made the Weil datum explicit. The canonical constant-sheaf pullback serves for both the sk-d-weil model Frobenius and g_Y. The E-stage object is E_Y by clauses 2 and 4 of def-weil-constant-weil-structure. This is the D^b_{c,W}(Y,E) formalism of the blueprint's own thm-trf-trace-formula-e and thm-trf-l-function-euler-product. Only finite-dimensionality is taken from prop-cohomological-finiteness. Admissibility is a theorem by def-trf-admissibility. Also cites sk-d-weil. Edge cases checked: the empty scheme, Spec F_q, A^1, the doubled-origin line and a nilpotent thickening.; 1 file(s) fixed by the reviewer"
+ }
 }
