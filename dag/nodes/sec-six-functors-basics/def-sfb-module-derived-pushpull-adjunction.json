@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-module-derived-pushpull-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The derived adjunction $Lf^*\\dashv Rf_*$ on module objects",
@@ -19,26 +19,162 @@
  ],
  "proof": [
   {
-   "text": "This is the general derivation of adjunctions: let $F\\dashv G$ be additive functors\nbetween abelian categories, $F\\colon\\mathcal C\\to\\mathcal D$, where $F$ is left\nderivable via K-flat resolutions and $G$ right derivable via K-injective resolutions\n([sk-def-sfb-derived-categories]). The adjunction $F\\dashv G$ induces an adjunction\n$K(F)\\dashv K(G)$ on homotopy categories of complexes. Composing the counit of $LF$,\n$LF\\circ Q\\to Q\\circ K(F)$, with the unit of $RG$, $Q\\circ K(G)\\to RG\\circ Q$, and with\nthe unit and counit of $K(F)\\dashv K(G)$ gives natural maps\n$\\mathrm{id}\\to RG\\circ LF$ and $LF\\circ RG\\to\\mathrm{id}$ on the derived categories;\nevaluating on K-flat resp. K-injective representatives, where the counit of $LF$ and\nthe unit of $RG$ are isomorphisms, shows the triangle identities. Apply this to\n$f^*\\dashv f_*$; the K-flat hypothesis on $f^*$ is\n[lem-sfb-module-upper-star-kflat-quasi-iso].",
+   "text": "Work on the small skeletons of the pro-étale sites in the size convention of [def-weil-pbc-proetale-site]. For either scheme $T=X,Y$, put $\\mathcal C_T=\\Sh(T_{\\mathrm{proét}},\\Ab)$. Its closed symmetric monoidal structure and the preservation of colimits by either tensor functor are [sk-def-sfb-sheaf-tensor]. Its Grothendieck abelian structure follows from [lem-weil-pbc-ring-sheaves-grothendieck] applied to the constant sheaf of rings $\\mathbf Z$: a sheaf of abelian groups has exactly one compatible $\\mathbf Z$-module structure, namely repeated addition. Thus this is the same category, with the same morphisms.",
    "uses": [
-    "sk-def-sfb-derived-categories",
-    "lem-sfb-module-upper-star-kflat-quasi-iso"
+    "def-weil-pbc-proetale-site",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-ring-sheaves-grothendieck"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/sk-prop-sfb-module-category.proof.md",
+    "place": "Part 4: abelian sheaves on the pro-étale site"
+   }
+  },
+  {
+   "text": "For an object $U$ of the chosen site let $\\mathbf Z_U$ be the sheafified free abelian presheaf on $U$. Its tensor functor preserves finite limits by [lem-weil-pbc-free-sheaf-flat], taking $P=\\mathbf Z$; tensoring with $\\mathbf Z$ is the identity. It also preserves cokernels by [sk-def-sfb-sheaf-tensor], so is exact; symmetry gives exactness on the other side. Thus $\\mathbf Z_U$ is flat. Define $P_T(M)=\\bigoplus_{(U,s),\\ s\\in M(U)}\\mathbf Z_U$, with evaluation $P_T(M)\\to M$. A morphism $h:M\\to N$ sends the summand $(U,s)$ identically to the summand $(U,h_U(s))$, so this is a functor and evaluation is natural. Evaluation is an epimorphism: each section $s\\in M(U)$ is the image of the generator indexed by $(U,s)$. Tensor distributes over this coproduct by the closedness in [sk-def-sfb-sheaf-tensor]. Direct sums of exact sequences are exact here: write a direct sum as the filtered colimit of its finite subsums, using exact filtered colimits from [lem-weil-pbc-ring-sheaves-grothendieck]. Hence every $P_T(M)$ is flat. This supplies the functorial flat resolutions required below.",
+   "uses": [
+    "lem-weil-pbc-free-sheaf-flat",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-ring-sheaves-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/sk-prop-sfb-module-category.proof.md",
+    "place": "Part 4: the functorial epimorphism from the sum of free abelian sheaves"
+   }
+  },
+  {
+   "text": "By [sk-def-sfb-pulled-back-coefficients], $\\Lambda_T=p_T^*\\Lambda$ is a commutative ring object because $\\Lambda$ is commutative. By [sk-def-sfb-module-objects], $\\Mod_{\\Lambda_T}$ is the category of module objects over the pulled-back commutative ring object in $\\mathcal C_T$. Apply [lem-sfb-modobj-grothendieck] to get its Grothendieck abelian structure, [def-sfb-modobj-symmetric-tensor] for the symmetric relative tensor product, and [def-sfb-modobj-internal-hom] for its closedness. Their hypotheses hold by step 1: $\\mathcal C_T$ is closed symmetric monoidal and Grothendieck abelian, and tensor preserves colimits in each variable, hence finite biproducts and is additive. Apply [lem-sfb-modobj-flat-resolutions] to the functor of step 2 to obtain functorial flat resolutions in $\\Mod_{\\Lambda_T}$. The closed relative tensor product preserves colimits in each variable by [lem-weil-pbc-left-adjoint-preserves-colimits]. It preserves zero objects and finite biproducts and therefore is additive: addition of two maps is the composite of their direct sum with the diagonal and codiagonal, all of which are preserved. This Grothendieck category has countable coproducts and exact filtered colimits. The poset $(\\mathbf Z,\\leq)$ is filtered (any two integers have their maximum as an upper bound), so its indexed colimits are exact. Thus all the tensor-additivity, countable-coproduct and exact $\\mathbf Z$-indexed-colimit hypotheses in [sk-def-sfb-derived-categories] hold.",
+   "uses": [
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-module-objects",
+    "lem-sfb-modobj-grothendieck",
+    "def-sfb-modobj-symmetric-tensor",
+    "def-sfb-modobj-internal-hom",
+    "lem-sfb-modobj-flat-resolutions",
+    "sk-def-sfb-derived-categories",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/sk-prop-sfb-module-category.proof.md",
+    "place": "Parts 3 and 4: module Grothendieck, closed monoidal, and flat-resolution structures"
+   }
+  },
+  {
+   "text": "Take $F=f^*:\\Mod_{\\Lambda_Y}\\to\\Mod_{\\Lambda_X}$ and $G=f_*:\\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_Y}$. They are additive by [def-sfb-module-upper-star] and [def-sfb-module-lower-star], and [def-sfb-module-upper-lower-adjunction] supplies $F\\dashv G$. These are the full underived module functors, including extension and restriction of scalars, rather than the underlying abelian-sheaf functors.",
+   "uses": [
+    "def-sfb-module-upper-star",
+    "def-sfb-module-lower-star",
+    "def-sfb-module-upper-lower-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/def-sfb-module-derived-pushpull-adjunction.proof.md",
+    "place": "Proof: specialization of the general derived adjunction"
+   }
+  },
+  {
+   "text": "The termwise functor $F$ sends quasi-isomorphisms between K-flat complexes to quasi-isomorphisms by [lem-sfb-module-upper-star-kflat-quasi-iso]. The left-derived-functor clause of [sk-def-sfb-derived-categories], with the structural hypotheses checked in step 3, therefore constructs $LF$ on the unbounded derived categories, computed on K-flat resolutions in $\\Mod_{\\Lambda_Y}$. The right-derived-functor clause of the same node applies to $G$: the Grothendieck category $\\Mod_{\\Lambda_X}$ from step 3 has K-injective resolutions. It constructs $RG$ on the unbounded derived categories, computed on K-injective resolutions in $\\Mod_{\\Lambda_X}$.",
+   "uses": [
+    "lem-sfb-module-upper-star-kflat-quasi-iso",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/def-sfb-module-derived-pushpull-adjunction.proof.md",
+    "place": "Proof: specialization of the general derived adjunction"
+   }
+  },
+  {
+   "text": "Apply the Derived adjunctions clause of [sk-def-sfb-derived-categories] to $F\\dashv G$ from step 4. The source of $F$ has all the monoidal and flat-resolution hypotheses by step 3, its K-flat quasi-isomorphism hypothesis is step 5, and its target has K-injective resolutions by step 5. This gives the induced adjunction $LF\\dashv RG$, hence $Lf^*\\dashv Rf_*$. Define the adjunction in this node to be this specialization of the general construction. Its left and right functors are exactly the total derived functors of the composites in step 4, with the resolutions specified in step 5; no factorization through derived abelian sheaves is used.",
+   "uses": [
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/def-sfb-module-derived-pushpull-adjunction.proof.md",
+    "place": "Proof: specialization of the general derived adjunction"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-free-sheaf-flat",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-modobj-grothendieck",
+  "def-sfb-modobj-symmetric-tensor",
+  "def-sfb-modobj-internal-hom",
+  "lem-sfb-modobj-flat-resolutions",
   "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-upper-lower-adjunction",
   "lem-sfb-module-upper-star-kflat-quasi-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/def-sfb-module-derived-pushpull-adjunction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/def-sfb-module-derived-pushpull-adjunction.proof.md",
+  "place": "Proof; with the module-category hypotheses expanded from the proof of sk-prop-sfb-module-category, Parts 3–4"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedAdjunction|derived.*[Aa]djunction|[Aa]djunction.*derived",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match; related general or underived result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left and right derived functors of an adjoint pair are adjoint",
+   "results": "CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.rightDerived, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη.congr_simp",
+   "date": "2026-10-16",
+   "verdict": "no exact match; related general or underived result"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"derived\"",
+   "results": "CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+   "date": "2026-10-16",
+   "verdict": "no exact match; related general or underived result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction of functors descends to an adjunction between their total left and right derived functors",
+   "results": "CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derivedε",
+   "date": "2026-10-16",
+   "verdict": "no exact match; related general or underived result"
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def derived|def derivedAdjunction",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match; related general or underived result"
+  },
+  {
+   "tool": "grep",
+   "query": "CondensedRing|derivedAdjunction",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback is left adjoint to derived pushforward for module objects over pulled-back condensed rings on the pro-etale site",
+   "results": "SheafOfModules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-16",
+   "verdict": "no exact match; related general or underived result"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -58,5 +194,89 @@
   "AlgebraicGeometry.ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-module-derived-pushpull-adjunction",
+  "worker": "stage1",
+  "summary": "Reuse the existing general derived-adjunction clause, check its module-category and resolution hypotheses using existing nodes, and specify its specialization as the definition. No new nodes. Neither the generic finite-coefficient Lean adjunction nor the conditional Mathlib absolute-derived-adjunction theorem states the complete item.",
+  "blueprint": "The proof paragraph invokes general derivation of adjunctions: steps 1–3 check the category hypotheses, step 4 supplies the underived module adjunction, step 5 checks derivability, and step 6 specializes the existing general theorem.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-proetale-site",
+    "why": "Generic foundation used to verify the module category hypotheses of the existing derived-adjunction theorem; this does not replace the unit route."
+   },
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "Generic foundation used to verify the module category hypotheses of the existing derived-adjunction theorem; this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic foundation used to verify the module category hypotheses of the existing derived-adjunction theorem; this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-free-sheaf-flat",
+    "why": "Generic foundation used to verify the module category hypotheses of the existing derived-adjunction theorem; this does not replace the unit route."
+   },
+   {
+    "node": "sk-def-sfb-module-objects",
+    "why": "Generic foundation used to verify the module category hypotheses of the existing derived-adjunction theorem; this does not replace the unit route."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Generic foundation used to verify the module category hypotheses of the existing derived-adjunction theorem; this does not replace the unit route."
+   },
+   {
+    "node": "def-sfb-modobj-symmetric-tensor",
+    "why": "Generic foundation used to verify the module category hypotheses of the existing derived-adjunction theorem; this does not replace the unit route."
+   },
+   {
+    "node": "def-sfb-modobj-internal-hom",
+    "why": "Generic foundation used to verify the module category hypotheses of the existing derived-adjunction theorem; this does not replace the unit route."
+   },
+   {
+    "node": "lem-sfb-modobj-flat-resolutions",
+    "why": "Generic foundation used to verify the module category hypotheses of the existing derived-adjunction theorem; this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic foundation used to verify the module category hypotheses of the existing derived-adjunction theorem; this does not replace the unit route."
+   },
+   {
+    "node": "def-sfb-module-upper-star",
+    "why": "Generic foundation used to verify the module category hypotheses of the existing derived-adjunction theorem; this does not replace the unit route."
+   },
+   {
+    "node": "def-sfb-module-lower-star",
+    "why": "Generic foundation used to verify the module category hypotheses of the existing derived-adjunction theorem; this does not replace the unit route."
+   }
+  ]
+ },
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Adjunction.derived",
+  "file": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+  "how": "Lines 144–150: applies after supplying absolute derived-functor composition hypotheses. It does not supply the condensed module categories, the underived adjunction, or K-flat/K-injective derivability, so is not a one-line specialization of the complete item."
+ },
+ "tool_uses": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-free-sheaf-flat",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-modobj-grothendieck",
+  "def-sfb-modobj-symmetric-tensor",
+  "def-sfb-modobj-internal-hom",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-lower-star"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q11-459a9ab9f",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-459a9ab9f (reviewer sub-agent of L); spot-checked: Read all six steps, all sixteen cited statements, current blueprint sources, Stacks locations, and exact master module/base-change constructions. Hypotheses and coefficient categories agree; edge cases pass. No new nodes, repairs, or target weakening. Full findings and accepted tool_uses are in review.md."
+ }
 }
