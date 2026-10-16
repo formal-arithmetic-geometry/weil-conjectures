@@ -217,25 +217,33 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-a0c998980 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources; all five steps and the new Mathlib leaf check out. Supplied fixes add the existing linear-functor definition citation, document additivity instances, and restore the accepted completeness tool declaration. Item statement unchanged; no duplicate, cycle, or unsupported coefficient comparison. Details in review.md.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-b3e608ed1",
-  "group": "NU",
+  "reviewer": "NT-stage2-Codex-fbed1231d",
+  "group": "Q11",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable files, all five statement dependencies, source correspondence, canonical scalar action, universes, edge cases, docstrings, and verbatim signature. scompile.py server confirmation passed after a stale local-overlay failure. No fixes needed; no repository or branch changes."
+  "note": "Full source, node, dependency, Lean, edge-case, docstring, hollow-definition, and report audit completed; recorded five-file scompile/server evidence is clean. Fresh rerun was blocked only by the live library lacking a sibling .olean, with no substantive delivery defect found."
  },
  "lean": {
   "module": "Sheaf.Paper.IntegralConstructibleLinear",
-  "declaration": "WeilConjectures.integralConstructible_linear",
-  "file": "lean/Sheaf/Paper/IntegralConstructibleLinear.lean",
-  "statement": "theorem integralConstructible_linear (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : AlgebraicGeometry.Scheme.{u}) : ∃ c : ∀ U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ, Padic.coefficientExtensionIntegers l E →+* (completedIntegralCoefficientSheaf l E Y D hl).obj.obj U, (∀ (U V : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) (f : U ⟶ V) (a : Padic.coefficientExtensionIntegers l E), (completedIntegralCoefficientSheaf l E Y D hl).obj.map f (c U a) = c V a) ∧ (∀ (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) (n : ℕ) (a : Padic.coefficientExtensionIntegers l E), ((completedIntegralCoefficientProjection l E Y D hl n).hom.app U) (c U a) = ((toSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y) ((Functor.const (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))).app U) (ULift.up ((Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))) a))) ∧ ∃ (_ : Linear (Padic.coefficientExtensionIntegers l E) (completedIntegralModuleSheaves l E Y D hl)), (∀ (M N : completedIntegralModuleSheaves l E Y D hl) (f : M ⟶ N) (a : Padic.coefficientExtensionIntegers l E) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) (x : M.val.obj U), (a • f).val.app U x = c U a • f.val.app U x) ∧ ∃ (_ : Linear (Padic.coefficientExtensionIntegers l E) (completedIntegralDerivedCategory l E Y D hl)), Functor.Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory.Q (C := completedIntegralModuleSheaves l E Y D hl)) ∧ (∀ m : ℤ, Functor.Linear (Padic.coefficientExtensionIntegers l E) (shiftFunctor (completedIntegralDerivedCategory l E Y D hl) m)) ∧ Functor.Linear (Padic.coefficientExtensionIntegers l E) (boundedConstructibleDerivedCompleteIntegral D l hl E Y).ι ∧ (∀ m : ℤ, Functor.Linear (Padic.coefficientExtensionIntegers l E) (shiftFunctor (boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y) m))",
-  "branch": "newtargets-dag",
-  "by": "NU",
-  "date": "2026-10-15",
-  "existing": false,
+  "declaration": "WeilConjectures.integralCoefficientLinear_existsUnique",
   "declarations": [
    "WeilConjectures.integralConstructibleTriangulatedStructure",
-   "WeilConjectures.integralConstructible_linear"
-  ]
+   "WeilConjectures.integralConstructible_linear",
+   "WeilConjectures.integralCoefficientLinear_existsUnique",
+   "WeilConjectures.integralCoefficientLinear",
+   "WeilConjectures.integralCoefficientShift_linear",
+   "WeilConjectures.integralConstructibleLinear",
+   "WeilConjectures.integralConstructibleClosedIso",
+   "WeilConjectures.integralConstructibleTriangulated",
+   "WeilConjectures.integralConstructibleShift_linear"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralConstructibleLinear.lean",
+  "statement": "theorem integralCoefficientLinear_existsUnique : ∃! s : Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (integralTowerModules l E Y)), (fun [linearInst : Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (integralTowerModules l E Y))] ↦ ∀ (a : Padic.coefficientExtensionIntegers l E) (K K' : DerivedCategory (integralTowerModules l E Y)) (f : K ⟶ K'), a • f = (integralScalarDerivedAction l E Y a).app K ≫ f) (linearInst := s)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "§1(B), second-reading compatibility repair: retain the published integralConstructible_linear theorem and integralConstructibleTriangulatedStructure declaration verbatim. Its existential instance interface requires the auxiliary finite-field datum and does not expose a chosen action shared with integralScalarDerivedAction or reusable linear instances. Add the unique constant-section characterization, canonical ambient action independent of that auxiliary datum, inherited subcategory instances, and shift-linearity interface needed by scalar localization; mathematical objects and hypotheses are unchanged."
  }
 }

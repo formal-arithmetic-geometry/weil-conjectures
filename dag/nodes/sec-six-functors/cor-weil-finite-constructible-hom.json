@@ -210,5 +210,28 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-68de8fecc (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, source passages, and unit/chapter route in full. Verified biduality–currying, both duality bounds, tensor preservation, and canonical pro-etale internal-Hom comparison with Tor-interval reflection/preservation. Edge cases pass; no new nodes, circular dependencies, target weakening, or repairs. Concrete checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f0ad0aee0",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Verified node/source alignment, all hypotheses and conclusions, dependency interfaces, universes, edge cases, docstrings, searches, permitted sorry-only proofs, and per-file scompile evidence. No fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteConstructibleHom",
+  "declaration": "WeilConjectures.finite_constructible_derivedHom_etale",
+  "declarations": [
+   "WeilConjectures.finite_constructible_derivedHom_etale",
+   "WeilConjectures.finite_constructible_derivedHom_proEtale"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteConstructibleHom.lean",
+  "statement": "theorem finite_constructible_derivedHom_etale (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b c e : ℤ) (_hab : a ≤ b) (_hce : c ≤ e) (K L : Etale.DerivedCategoryModule (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) X) (_hK : @Etale.DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) _ (@Finite.of_equiv _ _ (Padic.finite_coefficientExtensionRing l E n hn) Equiv.ulift.symm) X K) (_hL : @Etale.DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) _ (@Finite.of_equiv _ _ (Padic.finite_coefficientExtensionRing l E n hn) Equiv.ulift.symm) X L) (_hKt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) X a b K) (_hLt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) X c e L) : @Etale.DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) _ (@Finite.of_equiv _ _ (Padic.finite_coefficientExtensionRing l E n hn) Equiv.ulift.symm) X (((Etale.derivedHom (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) X).obj (op K)).obj L) ∧ Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) X (c - b - 2 * (d : ℤ)) (e - a + 2 * (d : ℤ)) (((Etale.derivedHom (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) X).obj (op K)).obj L)",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The two declarations jointly state the etale and pro-etale cases. The etale case uses the recorded isBoundedConstructible predicate and canonical ULift of the quotient ring; its explicit Tor intervals imply finite Tor amplitude. The pro-etale case uses the recorded finiteTorConstructible predicate and derivedInternalHomOfUniverses on the original small site, preserving its distinct object and morphism universes. Both conclusions include the precise dimension-dependent interval, and therefore also finite Tor amplitude."
  }
 }

@@ -18,7 +18,8 @@
   "def-pur-localized-ringed-site",
   "def-weil-pbc-strict-perfect-coefficient-package",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-projection-restriction"
  ],
  "proof": [
   {
@@ -232,5 +233,31 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-668717fa7 (reviewer sub-agent of L); spot-checked: Read the full item, report, dependency statements, unit/chapter route, and cited sources. Verified all five steps, projection-map normalization, K-flat comparisons, homotopy signs, and edge cases. No new nodes or repairs. Accepted five generic tool uses. Condensed-coefficient target comparisons remain separate obligations; inherited downstream cycles are documented in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b43a96c08",
+  "group": "NG",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all three immutable modules, dependency declarations, sources, normalization, universes, edge cases, and pilot gates. All three files passed scompile.py with server confirmation after a stale local-overlay failure. No delivery faults found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenImmersionTensorPiece",
+  "declaration": "SheafOfModules.openImmersionTensor_iso",
+  "declarations": [
+   "SheafOfModules.openTensorCoefficients",
+   "SheafOfModules.openTensorSource",
+   "SheafOfModules.openTensorTarget",
+   "SheafOfModules.openTensorRestrictionComparison",
+   "SheafOfModules.openTensorFormula",
+   "SheafOfModules.openImmersionTensor_iso"
+  ],
+  "file": "lean/Sheaf/Paper/OpenImmersionTensorPiece.lean",
+  "statement": "theorem openImmersionTensor_iso {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) [QuasiCompact c.i] (R : Sheaf (ProEt.topology c.Z) CommRingCat.{u + 1}) (a : TensorModel R) (b : TensorModel (R.over (ProEt.mk c.i))) (r : Restriction R (ProEt.mk c.i)) (t : openTensorRestrictionComparison R (ProEt.mk c.i) a b r) : openTensorFormula R (ProEt.mk c.i) a b r t",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

@@ -190,22 +190,37 @@
   }
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact",
-  "declaration": "SheafOfModules.localizedModule_adjunction_exact",
-  "file": "lean/Sheaf/CategoryTheory/LocalizedModuleAdjunctionExact.lean",
-  "statement": "theorem localizedModule_adjunction_exact {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (O : Sheaf J.toGrothendieck CommRingCat.{u}) (U : C) : PreservesFiniteLimits (overFunctor.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O) U) ∧ PreservesFiniteColimits (overFunctor.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O) U) ∧ PreservesFiniteLimits (extensionByZeroPresheaf.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O) U ⋙ PresheafOfModules.sheafification.{u} (𝟙 ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O).obj)) ∧ PreservesFiniteColimits (extensionByZeroPresheaf.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O) U ⋙ PresheafOfModules.sheafification.{u} (𝟙 ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O).obj)) ∧ Nonempty (Adjunction (extensionByZeroPresheaf.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O) U ⋙ PresheafOfModules.sheafification.{u} (𝟙 ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O).obj)) (overFunctor.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O) U))",
-  "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-11",
-  "existing": false
+  "module": "Sheaf.CategoryTheory.LocalizedModuleExactIndependent",
+  "declaration": "SheafOfModules.localizedModuleExactIndependent",
+  "declarations": [
+   "SheafOfModules.localizedModuleExtension",
+   "SheafOfModules.localizedModuleRestriction",
+   "SheafOfModules.localizedModuleExactIndependent",
+   "SheafOfModules.localizedModuleExtension_additive",
+   "SheafOfModules.localizedModuleExtension_limits",
+   "SheafOfModules.localizedModuleExtension_colimits",
+   "SheafOfModules.localizedModuleRestriction_additive",
+   "SheafOfModules.localizedModuleRestriction_limits",
+   "SheafOfModules.localizedModuleRestriction_colimits",
+   "SheafOfModules.localizedModuleAdjunctionIndependent_existsUnique",
+   "SheafOfModules.localizedModuleAdjunctionIndependent",
+   "SheafOfModules.localizedModuleDerivedAdjunction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LocalizedModuleExactIndependent.lean",
+  "statement": "theorem localizedModuleExactIndependent : (localizedModuleExtension R U).Additive ∧ PreservesFiniteLimits (localizedModuleExtension R U) ∧ PreservesFiniteColimits (localizedModuleExtension R U) ∧ (localizedModuleRestriction R U).Additive ∧ PreservesFiniteLimits (localizedModuleRestriction R U) ∧ PreservesFiniteColimits (localizedModuleRestriction R U)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Section 1(B): the recorded theorem only treats SmallCategory C and coefficients in that same universe, and does not expose a canonical adjunction. This module retains the actual extensionByZeroPresheaf followed by sheafification and overFunctor, at object universe u+1 and Hom universe u. It states their exactness and the unique adjunction normalized by direct-sum insertion and the sheafification unit, then constructs its termwise derived adjunction by localization. The former module is publicly reexported."
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "R-sra2",
-  "group": "H1",
+  "reviewer": "NT-stage2-Codex-b43a96c08",
+  "group": "NG",
   "result": "pass",
-  "note": "site = recorded Precoverage form of def-weil-pbc-sites-and-cohomology (4 instances, J.toGrothendieck); O : Sheaf CommRingCat via sheafCompose forget₂; j_U^* = SheafOfModules.overFunctor on R.over U (localized topology); j_U! = extensionByZeroPresheaf ⋙ PresheafOfModules.sheafification (𝟙 _) tied, not an abstract left adjoint; exactness of both as PreservesFiniteLimits ∧ PreservesFiniteColimits; Nonempty (j_! ⊣ j^*) gives natural homEquiv in F and G (EXTENSION BY ZERO line form); no let/letI, inline instance, notation, choose or tautological conjunct; universe u common"
+  "note": "Wrote review.md. Checked all three immutable modules, dependency declarations, sources, normalization, universes, edge cases, and pilot gates. All three files passed scompile.py with server confirmation after a stale local-overlay failure. No delivery faults found."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

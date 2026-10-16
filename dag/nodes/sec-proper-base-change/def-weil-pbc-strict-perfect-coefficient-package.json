@@ -118,48 +118,25 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-ab475fbcc (reviewer sub-agent of L); spot-checked: Read the complete definition, report, twelve dependency statements, source passages, and unit/chapter route. Verified Stacks 08FL/08G5/0657, finite-projective retractions, idempotent identities, constant-sheaf construction, and edge cases. No new nodes or repairs needed. Checked master target hypotheses and base-change arrow; this definition asserts no comparison between ordinary constant and condensed coefficients. Detailed findings are in review.md."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-3be8fd8e9",
-  "group": "NC",
+  "reviewer": "NT-stage2-Codex-b43a96c08",
+  "group": "NG",
   "result": "pass",
-  "note": "Wrote review.md. Checked all statement clauses, 13 dependencies, source passages, exact declarations, records, docstrings, universes, edge cases, and pilot gates. Snapshot files match the immutable commit. Server-only compilation reproduced cleanly in 9.6 seconds plus a 1.0-second dependency overlay. No delivery errors found; no repository or branch changes."
+  "note": "Wrote review.md. Checked all three immutable modules, dependency declarations, sources, normalization, universes, edge cases, and pilot gates. All three files passed scompile.py with server confirmation after a stale local-overlay failure. No delivery faults found."
  },
  "lean": {
-  "module": "Sheaf.Paper.StrictPerfectCoefficientPackage",
-  "declaration": "SheafOfModules.StrictPerfectCoefficientRepresentation",
+  "module": "Sheaf.Paper.StrictPerfectPackageOnSite",
+  "declaration": "SheafOfModules.StrictPerfectCoefficientPackageOnSite",
   "declarations": [
-   "SheafOfModules.StrictPerfectCoefficientPackage",
-   "SheafOfModules.StrictPerfectCoefficientPackage.e",
-   "SheafOfModules.IsLocallyStrictPerfectComplex",
-   "SheafOfModules.IsPerfectOnRingedSite",
-   "SheafOfModules.StrictPerfectCoefficientRepresentation",
-   "ModuleCat.StrictPerfectCoefficientPackage",
-   "ModuleCat.StrictPerfectCoefficientRepresentation",
-   "SheafOfModules.strictPerfectConstantPresheaf",
-   "SheafOfModules.strictPerfectConstantPresheaf_additive",
-   "SheafOfModules.strictPerfectConstantSheaf",
-   "SheafOfModules.strictPerfectConstantSheaf_additive",
-   "SheafOfModules.strictPerfectConstantComplex",
-   "SheafOfModules.strictPerfectConstantCoordinateComponent_map_add",
-   "SheafOfModules.strictPerfectConstantCoordinateComponent_map_smul",
-   "SheafOfModules.strictPerfectConstantCoordinateComponent",
-   "SheafOfModules.strictPerfectConstantCoordinate_naturality",
-   "SheafOfModules.strictPerfectConstantCoordinate",
-   "SheafOfModules.strictPerfectConstantFiniteFreeComparison",
-   "SheafOfModules.strictPerfectConstantFiniteFreeComparison_isIso",
-   "SheafOfModules.strictPerfectConstant_splitting",
-   "ModuleCat.StrictPerfectCoefficientPackage.constant",
-   "SheafOfModules.StrictPerfectCoefficientPackage.identities",
-   "ModuleCat.StrictPerfectCoefficientPackage.e",
-   "ModuleCat.StrictPerfectCoefficientPackage.identities"
+   "SheafOfModules.StrictPerfectCoefficientPackageOnSite"
   ],
-  "file": "lean/Sheaf/Paper/StrictPerfectCoefficientPackage.lean",
-  "statement": "structure StrictPerfectCoefficientRepresentation (R : Sheaf J CommRingCat.{u}) (U : C) [HasDerivedCategory.{w} (SheafOfModules.{u} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))] (Q : DerivedCategory (SheafOfModules.{u} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)))",
+  "file": "lean/Sheaf/Paper/StrictPerfectPackageOnSite.lean",
+  "statement": "structure StrictPerfectCoefficientPackageOnSite {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{r}) (F : CochainComplex (SheafOfModules.{r} R) ℤ)",
   "branch": "newtargets-dag",
-  "by": "NC",
-  "date": "2026-10-15",
+  "by": "NG",
+  "date": "2026-10-16",
   "existing": false,
-  "note": "The localized commutative-ring representation is the main record; the module also defines the chosen degreewise splitting data, local perfectness, global ring packages, and their explicit constant-sheaf transport. General splitting data make sense over any ring sheaf; the localized representation and local-perfectness definitions use commutative ring sheaves exactly as stated."
+  "note": "Section 1(B): StrictPerfectCoefficientPackage binds site object, morphism, and coefficient universes to the same u. The actual small pro-etale site has object universe u+1 and morphism universe u, so that interface cannot instantiate its finite-free splittings. This module reexports the recorded interface and supplies its identical degreewise splitting structure with independent site and coefficient universes; the finite tuple sheaf and splitting relation are unchanged."
  }
 }
