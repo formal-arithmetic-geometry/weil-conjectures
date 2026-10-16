@@ -7,7 +7,6 @@ public import Sheaf.Paper.HypercoverResolutionModel
 import Sheaf.CategoryTheory.RingedHypercoverInjectiveAugmentationRing
 import Sheaf.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.CategoryTheory.Sites.Equivalence
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 

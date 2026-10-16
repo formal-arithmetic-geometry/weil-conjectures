@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.EtaleHypercover
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 
 /-!
 # Products of étale hypercovers
