@@ -25,9 +25,126 @@
   "def-cbc-enhanced-cartesian-fibration",
   "lem-coef-cocartesian-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $S=N(C)$ and choose one universe containing $C,Q$ and all fibres and mapping objects to be used, with a larger universe for their collections. The operators defining $R_C(D)$ preserve its equations: for $I\\subseteq J$, restriction of $t_{\\theta(J)}\\Delta(\\theta|_J)$ to $\\Delta^I$ equals $D(\\sigma(\\max\\theta(I))\\to\\sigma(\\max\\theta(J)))t_{\\theta(I)}\\Delta(\\theta|_I)$. Composition of two operators is composition of their monotone maps. For $i_D$, restriction to $I\\subseteq J$ satisfies the required equation by $D(\\sigma(0)\\to\\sigma(\\max J))=D(\\sigma(\\max I)\\to\\sigma(\\max J))D(\\sigma(0)\\to\\sigma(\\max I))$. To compare $i_D$ with an operator $\\theta$, the formula for $G_C(D)$ in [def-cbc-enhanced-cartesian-fibration] first applies $D(\\sigma(0)\\to\\sigma(\\theta(0)))$ to $\\theta^*\\tau$; the remaining map to $D(\\sigma(\\theta(\\max J)))$ composes to the same $D(\\sigma(0)\\to\\sigma(\\theta(\\max J)))$. Thus $i_D$ is simplicial. The fibre over $c$ is $D(c)$: on a constant string the equations say $t_J=t_{[n]}|_{\\Delta^J}$. The fibre map of $i_D$ is the identity.",
+   "uses": [
+    "def-cbc-enhanced-cartesian-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.2.5.2 and Remarks 3.2.5.4/7: explicit operators and comparison formula; compare the mapping-simplex formula of §3.2.2, dualized."
+   }
+  },
+  {
+   "text": "Give each $D(c)$ the marking of its equivalences, writing $F(c)=D(c)^\\natural$. A simplicial map preserves inverse edges and their two triangle witnesses, so the maps $D(f)$ preserve this marking. By [lem-coef-marked-point-cartesian-model], these are fibrant objects of the absolute marked model, so $F$ is projectively fibrant. Apply [lem-cbc-marked-relative-nerve-quillen]. Its explicit relative nerve is exactly $R_C(D)$, and its edge marking is exactly that an edge $t_{\\{0,1\\}}$ in the last fibre is an equivalence. The right Quillen property and [lem-coef-marked-relative-cartesian-model] make $r$ a cocartesian fibration and identify this marking with all its cocartesian edges. The derived comparison with unstraightening, followed by [lem-coef-cocartesian-straightening], gives a coherent equivalence $\\kappa_D:D\\simeq\\operatorname{St}_S(r)$, with coherently identified identity fibre maps and the transport $D(f)$. For a marked edge $(f,s_0x)$ of $G_C(D)$, its image has $t_{\\{0,1\\}}=s_0D(f)x$, so is cocartesian. This also verifies that $i_D$ is a marked map.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-cbc-marked-relative-nerve-quillen",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.2.5.12, Proposition 3.2.5.18(2), Corollary 3.2.5.20; derive the cocartesian-fibration and marking clauses of Proposition 3.2.5.21."
+   }
+  },
+  {
+   "text": "Fix any simplex $\\sigma:\\Delta^n\\to N(C)$, corresponding to a functor $[n]\\to C$. Degreewise pullback identifies $G_C(D)\\times_S\\Delta^n$ with $G_{[n]}(D\\sigma)$: an $m$-simplex is a monotone $\\rho:[m]\\to[n]$ and $\\tau\\in D(\\sigma(\\rho(0)))_m$, with the operators and marking of [def-cbc-enhanced-cartesian-fibration]. The pullback $r_\\sigma$ is a cocartesian fibration by [lem-coef-marked-relative-cartesian-model]. The map $(i_D)_\\sigma$ preserves marked edges by step 2 and is the identity on all vertex fibres by step 1. To apply the existing Cartesian mapping-simplex theorem [lem-coef-cartesian-mapping-simplex-presentation], take opposites and identify $(\\Delta^n)^{\\mathrm{op}}$ with $\\Delta^n$ by vertex reversal. Put $A_j=D(\\sigma(j))$ and $B_j=A_{n-j}^{\\mathrm{op}}$. The transitions form $B_0\\leftarrow\\cdots\\leftarrow B_n$. More explicitly, an $m$-simplex of the reversed source over $\\alpha:[m]\\to[n]$ corresponds to $\\rho(j)=n-\\alpha(m-j)$ and $\\tau\\in(A_{n-\\alpha(m)})_m$, hence to $a\\in(B_{\\alpha(m)})_m$. For $\\theta:[k]\\to[m]$, the operator on the unreversed source is $\\theta^{\\mathrm{rev}}(l)=m-\\theta(k-l)$. Its first vertex is $\\rho(\\theta^{\\mathrm{rev}}(0))=n-\\alpha(\\theta(k))$. Thus the operator on $a$ first restricts by $\\theta$ in the opposite simplicial set and then applies the chain map $B_{\\alpha(m)}\\to B_{\\alpha\\theta(k)}$. This is exactly the last-vertex operator in the cited mapping-simplex statement. Reversal takes a degenerate fibre edge to a degenerate fibre edge, so the markings also agree. Thus the opposite of $(i_D)_\\sigma$ is a marked map from its $M^m(B)$ into the Cartesian fibration $r_\\sigma^{\\mathrm{op}}$, with identity fibre maps. The theorem makes it a Cartesian equivalence. Taking opposites back, as in the relative-model theorem, makes $(i_D)_\\sigma$ a relative cocartesian weak equivalence. Degenerate base simplices are included, and no injectivity or fibrancy of $G$ is assumed.",
+   "uses": [
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-cartesian-mapping-simplex-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.2.2.6 and Proposition 3.2.2.14, cocartesian dual obtained by taking opposite fibres and reversing the simplex vertices."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-marked-mapping-simplex-descent] to the marked map $i_D$ over the small quasicategory $S=N(C)$, using step 3 for every simplex. It gives, for every $q:Q\\to S$, an equivalence of the full marked mapping quasicategories from $R_C(D)$ and $G_C(D)$ into $Q$. With the marking of step 2 on $R_C(D)$ these are precisely $\\operatorname{Fun}^{\\mathrm{cocart}}_{/S}(R_C(D),Q)$ and $\\operatorname{Fun}^{\\mathrm{mark}}_{/S}(G_C(D),Q)$ in the statement. The degree-$k$ map is $H\\mapsto H\\circ(i_D\\times\\mathrm{id}_{\\Delta^k})$. Thus it is the claimed precomposition comparison on all transformations and higher simplices. No inference from an equivalence on cores alone is being made.",
+   "uses": [
+    "lem-cbc-marked-mapping-simplex-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Marked relative-model skeletal descent, using the criterion of Proposition 3.1.3.3 and the gluing mechanism of Proposition 3.2.2.8."
+   }
+  },
+  {
+   "text": "For a strict presentation $\\varphi$, essential surjectivity of step 4 supplies a cocartesian map $h:R_C(D)\\to Q$ together with a coherent natural equivalence $\\epsilon:h i_D\\simeq\\varphi$ over $S$. Restricting to $c$ and using $(i_D)_c=\\mathrm{id}$ gives $h_c\\simeq\\varphi_c$, so $h_c$ is an equivalence. The fibre criterion in [lem-coef-marked-relative-cartesian-model] makes $h$ an equivalence in $\\operatorname{coCart}(S)$. Define $\\alpha_\\varphi=\\operatorname{St}(h)\\kappa_D$ using [lem-coef-cocartesian-straightening]. It is an equivalence. The fibre identification is $\\varphi_c$ via $\\epsilon_c$. Evaluating the entire transformation $\\epsilon$ on a marked edge $(f,s_0x)$ gives the comparison of $h(i_D(f,s_0x))$ with $\\varphi(f,s_0x)$, with the fibre identifications inserted. On every higher simplex its restriction is the corresponding higher naturality datum, because $\\epsilon$ is a simplexwise transformation over $S$, not a list of unrelated edge homotopies. This realizes the prescribed components and transport edges with all their coherence.",
+   "uses": [
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.2.5.20 and Proposition 3.2.5.21(3), together with the fibrewise equivalence criterion for marked fibrations (§3.1.3)."
+   }
+  },
+  {
+   "text": "Let $\\eta:D\\to D'$ be strict. Define $R(\\eta)$ on a relative-nerve simplex by $t_J\\mapsto\\eta_{\\sigma(\\max J)}t_J$. Naturality of $\\eta$ verifies its compatibility equations and gives the strict identity $R(\\eta)i_D=i_{D'}G(\\eta)$; this identity uses the displayed formula for $i_D$ on each $J$, not just its action on vertices. $R(\\eta)$ preserves cocartesian edges because a functor of the fibre quasicategories preserves equivalences. Postcomposition by any cocartesian $g:Q\\to Q'$ commutes with the map in step 4 in every parameter degree: $gH(i_D\\times1)=(gH)(i_D\\times1)$. Similarly, precomposition by $R(\\eta)$ and $G(\\eta)$ gives a commuting square of the same restriction functors. These equalities commute with every monotone operator on $\\Delta^k$. Together with the diagram naturality in [lem-cbc-marked-relative-nerve-quillen], they prove the stated postcomposition and strict-transformation compatibility of the mapping comparison.",
+   "uses": [
+    "lem-cbc-marked-relative-nerve-quillen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remarks 3.2.5.4/14/16: explicit naturality of the relative nerve and the comparison with unstraightening."
+   }
+  },
+  {
+   "text": "Choose extensions $(h,\\epsilon)$ and $(h',\\epsilon')$ for $\\varphi$ and $\\varphi'$. Under the hypothesis $g\\varphi=\\varphi'G(\\eta)$, the restrictions of $g h$ and $h'R(\\eta)$ along $i_D$ are coherently equivalent: use $g\\epsilon$, this strict hypothesis, and the inverse of $\\epsilon'G(\\eta)$ in that order. The mapping-space clause of [lem-cbc-enhanced-functor-cone-calculus] applied to the equivalence in step 4 with target $Q'$ gives equivalences of Kan mapping spaces; in particular it lifts the displayed comparison to a transformation $\\lambda:g h\\to h'R(\\eta)$ together with its specified restriction equivalence. Lift the inverse comparison by the same mapping-space equivalence. The two inverse equations lift as well, because the induced maps on those mapping spaces are equivalences. These witnesses make $\\lambda$ a coherent natural equivalence $g h\\simeq h'R(\\eta)$. The space of such lifts with its specified restriction equivalence is contractible: it is the homotopy fibre over that equivalence of an equivalence of Kan mapping spaces, hence contractible by [lem-coef-space-contractible-fiber-equivalence]. Hence the lift retains all higher compatibility data. Apply the functor [lem-coef-cocartesian-straightening] and the naturality $\\operatorname{St}(R(\\eta))\\kappa_D\\simeq\\kappa_{D'}\\eta$ from [lem-cbc-marked-relative-nerve-quillen]. Substitution gives\n$$\\operatorname{St}(g)\\alpha_\\varphi=\\operatorname{St}(gh)\\kappa_D\\simeq\\operatorname{St}(h')\\operatorname{St}(R(\\eta))\\kappa_D\\simeq\\alpha_{\\varphi'}\\eta.$$\nThis is the requested natural equivalence; it compares exactly the given presentations because its restriction was built from $g\\epsilon$, the specified equality, and $\\epsilon'$.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-cbc-marked-relative-nerve-quillen",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-contractible-fiber-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.3 and Corollary 3.2.5.20: mapping-space full faithfulness and naturality of the classifying comparison."
+   }
+  },
+  {
+   "text": "Finally let $u:C'\\to C$. On both sides of $R_{C'}(Du)=N(u)^*R_C(D)$, an $n$-simplex is $\\sigma:[n]\\to C'$ and the same family $t_J$ valued in $D(u\\sigma(\\max J))$. The operators and marked-edge tests agree. The identical check using the first vertex gives $G_{C'}(Du)=N(u)^*G_C(D)$ by [def-cbc-enhanced-cartesian-fibration], and the formula for $i_D$ becomes the formula for $i_{Du}$. A strict presentation pulls back to one because its vertex maps remain $\\varphi_{u(c')}$ and pullback preserves cocartesian edges [lem-coef-marked-relative-cartesian-model]. Pull back $h$ and $\\epsilon$; they are an extension and equivalence for this pulled-back presentation. The base-change clauses of [lem-cbc-marked-relative-nerve-quillen] and [lem-coef-cocartesian-straightening] identify the resulting $\\alpha$ with $\\alpha_\\varphi N(u)$. For the choices themselves, restrict the equivalence of step 4 to maximal Kan cores. Its quasi-inverse and its inverse-triangle transformations restrict to these cores, so the induced map is an equivalence of Kan spaces. The space of pairs $(h,\\epsilon)$ extending a specified presentation is its homotopy fibre over that presentation, hence is contractible by [lem-coef-space-contractible-fiber-equivalence]. In particular a previously chosen extension of the pulled-back presentation is equivalent to the pulled-back pair, including the specified equivalence to the presentation. These identifications are coherent: iterated pullback reindexes each $\\sigma,t_J$ by the same composite functor, and all lifted comparisons come from the equivalences of full mapping quasicategories, whose induced maps on Kan mapping spaces are equivalences by [lem-cbc-enhanced-functor-cone-calculus] and whose homotopy fibres of choices are contractible by [lem-coef-space-contractible-fiber-equivalence]. Thus identities, composites and higher compatibilities agree, proving every pullback and naturality clause.",
+   "uses": [
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-cbc-marked-relative-nerve-quillen",
+    "lem-coef-cocartesian-straightening",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-space-contractible-fiber-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remarks 3.2.5.7/14 and natural base change for straightening: degreewise pullback identities and their coherence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-marked-mapping-simplex-descent",
+  "lem-cbc-marked-relative-nerve-quillen",
+  "lem-coef-cartesian-mapping-simplex-presentation",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-space-contractible-fiber-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Source-checked assembly of HTT §§3.1.3, 3.2.2 and 3.2.5; the local-to-global marked formulation is explicit in its separate unsplit node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -98,10 +215,87 @@
    "results": "{\"t\": \"2026-10-16T19:43:45Z\", \"tool\": \"grep\", \"query\": \"relativeNerve|relative_nerve|mappingSimplex|mapping_simplex|cocartesianSections|cocartesian_sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: source grep returned zero declarations for this pattern."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CocartesianFibration\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve full faithfulness and ordinary cocartesian morphisms do not compare marked simplicial presentations of quasicategorical cocartesian fibrations."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeNerve|relative_nerve|mappingSimplex|mapping_simplex|straightening",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve full faithfulness and ordinary cocartesian morphisms do not compare marked simplicial presentations of quasicategorical cocartesian fibrations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked mapping simplex strict presentations determine the coherent diagram of a cocartesian fibration",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsStronglyCocartesian.map.congr_simp\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  (p p_1 : CategoryTheory.Functor 𝒳 𝒮) (e_p : p = p_1) {R S : 𝒮} {a b : 𝒳} (f f_1 : R ⟶ S) (e_f : f = f_1)\\n  (φ φ_1 : a ⟶ b) (e_φ : φ = φ_1) [inst_2 : p.IsStronglyCocartesian f φ] \", \"doc\": \"Given categories $\\\\mathcal{S}$ and $\\\\mathcal{X}$, a functor $p: \\\\mathcal{X} \\\\to \\\\mathcal{S}$, and a strongly cocartesian morphism $g: a \\\\to b$ in $\\\\mathcal{X}$ lifting $f: R \\\\to S$ in $\\\\mathcal{S}$, f\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.fac\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \": φ ≫ IsCocartesian.map p f φ φ' = φ'\", \"doc\": \"Given a cocartesian morphism $\\\\varphi : a \\\\to b$ over $f : R \\\\to S$ in $\\\\mathcal{X}$, and a morphism $\\\\varphi' : a \\\\to b'$ lifting $f$, the composition of $\\\\varphi$ with the unique morphism $\\\\chi : b \"}\n  {\"name\": \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Fibered\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳}\\n  {p : CategoryTheory.Functor 𝒳 𝒮} [self : p.IsFibered], p.IsPreFibered\", \"doc\": \"If a functor $ F : \\\\mathcal{X} \\\\to \\\\mathcal{S} $ is a Cartesian fibration (fibered), then it satisfies the axioms of a pre-fibration.\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.map.congr_simp\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  (p p_1 : CategoryTheory.Functor 𝒳 𝒮) (e_p : p = p_1) {R S : 𝒮} {a b : 𝒳} (f f_1 : R ⟶ S) (e_f : f = f_1)\\n  (φ φ_1 : a ⟶ b) (e_φ : φ = φ_1) [inst_2 : p.IsCocartesian f φ] {b' : 𝒳}\", \"doc\": \"Given equal functors $ p = p_1 : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, equal morphisms $ f = f_1 : R \\\\to S $ in $ \\\\mathcal{S} $, equal cocartesian lifts $ \\\\varphi = \\\\varphi_1 : a \\\\to b $ in $ \\\\mathcal{X} $, \"}\n  {\"name\": \"SSet.StrictSegal.quasicategory'\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\", \"type\": \"(X : SSet.{u}) [IsStrictSegal X] : Quasicategory X\", \"doc\": \"Every simplicial set satisfying the strict Segal condition is a quasi-category. Specifically, if a simplicial set $X$ satisfies the strict Segal condition (which imposes constraints on the compatibili\"}\n  {\"name\": \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"[p.IsStronglyCocartesian f φ] : p.IsCocartesian f φ\", \"doc\": \"If a morphism $ g $ in $ \\\\mathcal{X} $ is strongly cocartesian over a morphism $ f $ in $ \\\\mathcal{S} $ with respect to a functor $ F: \\\\mathcal{X} \\\\to \\\\mathcal{S} $, then $ g $ is cocartesian over $ f\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithFibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"CategoryTheory.Functor.IsStronglyCocartesian.map_comp_map\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"{S' S'' : 𝒮} {b' b'' : 𝒳} {f' : R ⟶ S'} {f'' : R ⟶ S''} {g : S ⟶ S'} {g' : S' ⟶ S''} (H : f' = f ≫ g)\\n  (H' : f'' = f' ≫ g') (φ' : a ⟶ b') (φ'' : a ⟶ b'') [IsStronglyCocartesian p f' φ'] [IsHomLift p f'' φ''] :\\n  map p f φ H φ' ≫ map p f' φ' H' φ'' = map p f φ (show f'' = f ≫ (g ≫ g') by rwa [← asso\", \"doc\": \"Given categories $\\\\mathcal{S}$ and $\\\\mathcal{X}$, a functor $p: \\\\mathcal{X} \\\\to \\\\mathcal{S}$, and strongly cocartesian morphisms $\\\\phi: a \\\\to b$ and $\\\\phi': b \\\\to b''$ lifting compatible compositions \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve full faithfulness and ordinary cocartesian morphisms do not compare marked simplicial presentations of quasicategorical cocartesian fibrations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from a relative nerve to a marked simplicial Grothendieck construction is an equivalence of functor quasicategories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Nerve.nerveFunctor₂.FullyFaithful\", \"doc\": \"The nerve functor from the category of small categories to 2-truncated simplicial sets is fully faithful, meaning it induces a bijection between functors $\\\\mathcal{C} \\\\to \\\\mathcal{D}$ and natural tran\"}\n  {\"name\": \"CategoryTheory.nerveFunctor.fullyfaithful\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.nerveFunctor.FullyFaithful\", \"doc\": \"The nerve functor from the category of small categories $\\\\mathsf{Cat}$ to the category of simplicial sets $\\\\mathsf{SSet}$ is fully faithful, meaning it induces a bijection between hom-sets $\\\\mathsf{Ca\"}\n  {\"name\": \"CategoryTheory.nerve.homEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {x y : CategoryTheory.ComposableArrows C 0} →\\n      SSet.Edge x y ≃ (CategoryTheory.nerveEquiv x ⟶ CategoryTheory.nerveEquiv y)\", \"doc\": \"For any two objects $x$ and $y$ in a category $\\\\mathcal{C}$, there is a canonical equivalence between the set of edges (1-simplices) between the corresponding 0-simplices in the nerve of $\\\\mathcal{C}$\"}\n  {\"name\": \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.nerveFunctor.comp SSet.hoFunctor ≅ CategoryTheory.Functor.id CategoryTheory.Cat\", \"doc\": \"The composition of the nerve functor from small categories to 2-truncated simplicial sets and the homotopy category functor is naturally isomorphic to the identity functor on the category of small cat\"}\n  {\"name\": \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Reflective CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from the category of small categories to the category of simplicial sets is reflective, with its left adjoint given by the homotopy category functor for 2-truncated simplicial sets. \"}\n  {\"name\": \"SSet.OneTruncation₂.nerveEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve C)) ≃ C\", \"doc\": \"The 2-truncated nerve of a category $\\\\mathcal{C}$, obtained by restricting the nerve simplicial set to dimensions $\\\\leq 2$, is canonically equivalent to $\\\\mathcal{C}$. This establishes that the data o\"}\n  {\"name\": \"SSet.OneTruncation₂.nerveHomEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X Y : SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve C))} →\\n      (X ⟶ Y) ≃ (SSet.OneTruncation₂.nerveEquiv X ⟶ SSet.OneTruncation₂.nerveEquiv Y)\", \"doc\": \"For any two objects $X$ and $Y$ in the 2-truncated nerve of a category $\\\\mathcal{C}$, there is a canonical equivalence between the set of morphisms (1-simplices) from $X$ to $Y$ in the truncated nerve\"}\n  {\"name\": \"CategoryTheory.nerveFunctor.full\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.nerveFunctor.Full\", \"doc\": \"The nerve functor from the category of small categories to the category of simplicial sets is full. This means that for any two small categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, every simplicial map b\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve full faithfulness and ordinary cocartesian morphisms do not compare marked simplicial presentations of quasicategorical cocartesian fibrations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked Grothendieck mapping simplex relative nerve of a diagram of quasicategories and cocartesian straightening",
+   "results": "8 hits, including CategoryTheory.Nerve.quasicategory, CategoryTheory.Nerve.nerveFunctor₂, CategoryTheory.nerveFunctor, CategoryTheory.nerve, CategoryTheory.Nerve.strictSegal, CategoryTheory.SimplicialNerve and two StrictSegal coskeleton declarations. Read the nerve and quasicategory signatures; no marked relative comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary nerve full faithfulness and ordinary cocartesian morphisms do not compare marked simplicial presentations of quasicategorical cocartesian fibrations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CocartesianFibration\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category nerves, ordinary fibrations, or unmarked simplicial/model definitions do not state this marked quasicategorical comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeNerve|relative_nerve|mappingSimplex|mapping_simplex|straightening",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category nerves, ordinary fibrations, or unmarked simplicial/model definitions do not state this marked quasicategorical comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked mapping simplex strict presentations determine the coherent diagram of a cocartesian fibration",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsStronglyCocartesian.map.congr_simp\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  (p p_1 : CategoryTheory.Functor 𝒳 𝒮) (e_p : p = p_1) {R S : 𝒮} {a b : 𝒳} (f f_1 : R ⟶ S) (e_f : f = f_1)\\n  (φ φ_1 : a ⟶ b) (e_φ : φ = φ_1) [inst_2 : p.IsStronglyCocartesian f φ] \", \"doc\": \"Given categories $\\\\mathcal{S}$ and $\\\\mathcal{X}$, a functor $p: \\\\mathcal{X} \\\\to \\\\mathcal{S}$, and a strongly cocartesian morphism $g: a \\\\to b$ in $\\\\mathcal{X}$ lifting $f: R \\\\to S$ in $\\\\mathcal{S}$, f\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.fac\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \": φ ≫ IsCocartesian.map p f φ φ' = φ'\", \"doc\": \"Given a cocartesian morphism $\\\\varphi : a \\\\to b$ over $f : R \\\\to S$ in $\\\\mathcal{X}$, and a morphism $\\\\varphi' : a \\\\to b'$ lifting $f$, the composition of $\\\\varphi$ with the unique morphism $\\\\chi : b \"}\n  {\"name\": \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Fibered\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳}\\n  {p : CategoryTheory.Functor 𝒳 𝒮} [self : p.IsFibered], p.IsPreFibered\", \"doc\": \"If a functor $ F : \\\\mathcal{X} \\\\to \\\\mathcal{S} $ is a Cartesian fibration (fibered), then it satisfies the axioms of a pre-fibration.\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.map.congr_simp\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  (p p_1 : CategoryTheory.Functor 𝒳 𝒮) (e_p : p = p_1) {R S : 𝒮} {a b : 𝒳} (f f_1 : R ⟶ S) (e_f : f = f_1)\\n  (φ φ_1 : a ⟶ b) (e_φ : φ = φ_1) [inst_2 : p.IsCocartesian f φ] {b' : 𝒳}\", \"doc\": \"Given equal functors $ p = p_1 : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, equal morphisms $ f = f_1 : R \\\\to S $ in $ \\\\mathcal{S} $, equal cocartesian lifts $ \\\\varphi = \\\\varphi_1 : a \\\\to b $ in $ \\\\mathcal{X} $, \"}\n  {\"name\": \"SSet.StrictSegal.quasicategory'\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\", \"type\": \"(X : SSet.{u}) [IsStrictSegal X] : Quasicategory X\", \"doc\": \"Every simplicial set satisfying the strict Segal condition is a quasi-category. Specifically, if a simplicial set $X$ satisfies the strict Segal condition (which imposes constraints on the compatibili\"}\n  {\"name\": \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"[p.IsStronglyCocartesian f φ] : p.IsCocartesian f φ\", \"doc\": \"If a morphism $ g $ in $ \\\\mathcal{X} $ is strongly cocartesian over a morphism $ f $ in $ \\\\mathcal{S} $ with respect to a functor $ F: \\\\mathcal{X} \\\\to \\\\mathcal{S} $, then $ g $ is cocartesian over $ f\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithFibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"CategoryTheory.Functor.IsStronglyCocartesian.map_comp_map\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"{S' S'' : 𝒮} {b' b'' : 𝒳} {f' : R ⟶ S'} {f'' : R ⟶ S''} {g : S ⟶ S'} {g' : S' ⟶ S''} (H : f' = f ≫ g)\\n  (H' : f'' = f' ≫ g') (φ' : a ⟶ b') (φ'' : a ⟶ b'') [IsStronglyCocartesian p f' φ'] [IsHomLift p f'' φ''] :\\n  map p f φ H φ' ≫ map p f' φ' H' φ'' = map p f φ (show f'' = f ≫ (g ≫ g') by rwa [← asso\", \"doc\": \"Given categories $\\\\mathcal{S}$ and $\\\\mathcal{X}$, a functor $p: \\\\mathcal{X} \\\\to \\\\mathcal{S}$, and strongly cocartesian morphisms $\\\\phi: a \\\\to b$ and $\\\\phi': b \\\\to b''$ lifting compatible compositions \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category nerves, ordinary fibrations, or unmarked simplicial/model definitions do not state this marked quasicategorical comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from a relative nerve to a marked simplicial Grothendieck construction is an equivalence of functor quasicategories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.OneTruncation₂.nerveEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve C)) ≃ C\", \"doc\": \"The 2-truncated nerve of a category $\\\\mathcal{C}$, obtained by restricting the nerve simplicial set to dimensions $\\\\leq 2$, is canonically equivalent to $\\\\mathcal{C}$. This establishes that the data o\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C ≃ (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a natural equivalence between the category of functors from the homotopy category of $X$ to $\\\\mathcal{C}$ and the category o\"}\n  {\"name\": \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ (X : CategoryTheory.Cat) (a : SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve ↑X))),\\n  (SSet.OneTruncation₂.ofNerve₂.natIso.hom.app X).obj a = SSet.OneTruncation₂.nerveEquiv a\", \"doc\": \"For any small category $\\\\mathcal{C}$ and any element $a$ in the 2-truncated simplicial set obtained by truncating the nerve of $\\\\mathcal{C}$, applying the hom-component of the natural isomorphism betw\"}\n  {\"name\": \"CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {C D : Type u} [inst : CategoryTheory.SmallCategory C] [inst_1 : CategoryTheory.SmallCategory D]\\n  (F : CategoryTheory.Functor C D),\\n  CategoryTheory.nerve.functorOfNerveMap ((SSet.truncation 2).map (CategoryTheory.nerveMap F)) = F\", \"doc\": \"For any functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between small categories, applying the functor reconstruction from 2-truncated nerve natural transformations to the 2-truncated nerve of $F$ recovers \"}\n  {\"name\": \"SSet.OneTruncation₂.ofNerve₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{u, u} C] →\\n    CategoryTheory.ReflQuiv.of (SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve C))) ≅\\n      CategoryTheory.ReflQuiv.of C\", \"doc\": \"The reflexive quiver constructed from the 2-truncated nerve of a category $\\\\mathcal{C}$ is isomorphic to the reflexive quiver of $\\\\mathcal{C}$ itself. This isomorphism is induced by the canonical equi\"}\n  {\"name\": \"SSet.OneTruncation₂.nerveHomEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X Y : SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve C))} →\\n      (X ⟶ Y) ≃ (SSet.OneTruncation₂.nerveEquiv X ⟶ SSet.OneTruncation₂.nerveEquiv Y)\", \"doc\": \"For any two objects $X$ and $Y$ in the 2-truncated nerve of a category $\\\\mathcal{C}$, there is a canonical equivalence between the set of morphisms (1-simplices) from $X$ to $Y$ in the truncated nerve\"}\n  {\"name\": \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_map\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ (X : CategoryTheory.Cat)\\n  {X_1 Y : ↑(CategoryTheory.Quiv.of (SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve ↑X))))}\\n  (a : X_1 ⟶ Y), (SSet.OneTruncation₂.ofNerve₂.natIso.hom.app X).map a = SSet.OneTruncation₂.nerveHomEquiv a\", \"doc\": \"For any small category $\\\\mathcal{C}$ and morphism $a$ in the 2-truncated nerve of $\\\\mathcal{C}$, the natural isomorphism between the composition of the 2-truncated nerve functor and the truncation-to-\"}\n  {\"name\": \"SSet.OneTruncation₂.ofNerve₂.natIso\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"CategoryTheory.Nerve.nerveFunctor₂.comp SSet.oneTruncation₂ ≅ CategoryTheory.ReflQuiv.forget\", \"doc\": \"The natural isomorphism asserting that the composition of the 2-truncated nerve functor from small categories to 2-truncated simplicial sets followed by the truncation functor to reflexive quivers is \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category nerves, ordinary fibrations, or unmarked simplicial/model definitions do not state this marked quasicategorical comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked Grothendieck mapping simplex relative nerve of a diagram of quasicategories and cocartesian straightening",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.nerve.functorOfNerveMap\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{C D : Type u} →\\n  [inst : CategoryTheory.SmallCategory C] →\\n    [inst_1 : CategoryTheory.SmallCategory D] →\\n      (CategoryTheory.Nerve.nerveFunctor₂.obj (CategoryTheory.Cat.of C) ⟶\\n          CategoryTheory.Nerve.nerveFunctor₂.obj (CategoryTheory.Cat.of D)) →\\n        CategoryTheory.Functor C D\", \"doc\": \"Given a natural transformation $\\\\phi$ between the 2-truncated nerves of small categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, this defines a functor $\\\\mathcal{C} \\\\to \\\\mathcal{D}$ by mapping objects via th\"}\n  {\"name\": \"CategoryTheory.nerveMap\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"{C D : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Category.{v, u} D] →\\n      CategoryTheory.Functor C D → (CategoryTheory.nerve C ⟶ CategoryTheory.nerve D)\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ and a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, the nerve map $N(F)$ is the simplicial map between the nerves $N(\\\\mathcal{C})$ and $N(\\\\mathcal{D})$ that\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C → (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For a 2-truncated simplicial set $X$ and a category $\\\\mathcal{C}$, this function constructs a morphism from $X$ to the 2-truncated nerve of $\\\\mathcal{C}$ by lifting a functor $F: X.\\\\text{HomotopyCateg\"}\n  {\"name\": \"CategoryTheory.nerveFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"CategoryTheory.Functor CategoryTheory.Cat SSet\", \"doc\": \"The nerve functor is a functor from the category of small categories to the category of simplicial sets. It maps each category $\\\\mathcal{C}$ to its nerve, a simplicial set where each $n$-simplex corre\"}\n  {\"name\": \"CategoryTheory.nerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → SSet\", \"doc\": \"The nerve functor sends a category $\\\\mathcal{C}$ to its nerve, a simplicial set where each $n$-simplex corresponds to a composable sequence of $n$ morphisms in $\\\\mathcal{C}$. For a simplicial operator\"}\n  {\"name\": \"CategoryTheory.Nerve.nerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"CategoryTheory.Functor CategoryTheory.Cat (SSet.Truncated 2)\", \"doc\": \"The functor from the category of small categories to 2-truncated simplicial sets, obtained by composing the nerve functor (which maps a category to its simplicial nerve) with the truncation functor th\"}\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category nerves, ordinary fibrations, or unmarked simplicial/model definitions do not state this marked quasicategorical comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked Grothendieck mapping simplex relative nerve of a diagram of quasicategories and cocartesian straightening",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.nerve.functorOfNerveMap\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{C D : Type u} →\\n  [inst : CategoryTheory.SmallCategory C] →\\n    [inst_1 : CategoryTheory.SmallCategory D] →\\n      (CategoryTheory.Nerve.nerveFunctor₂.obj (CategoryTheory.Cat.of C) ⟶\\n          CategoryTheory.Nerve.nerveFunctor₂.obj (CategoryTheory.Cat.of D)) →\\n        CategoryTheory.Functor C D\", \"doc\": \"Given a natural transformation $\\\\phi$ between the 2-truncated nerves of small categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, this defines a functor $\\\\mathcal{C} \\\\to \\\\mathcal{D}$ by mapping objects via th\"}\n  {\"name\": \"CategoryTheory.nerveMap\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"{C D : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Category.{v, u} D] →\\n      CategoryTheory.Functor C D → (CategoryTheory.nerve C ⟶ CategoryTheory.nerve D)\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ and a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, the nerve map $N(F)$ is the simplicial map between the nerves $N(\\\\mathcal{C})$ and $N(\\\\mathcal{D})$ that\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C → (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For a 2-truncated simplicial set $X$ and a category $\\\\mathcal{C}$, this function constructs a morphism from $X$ to the 2-truncated nerve of $\\\\mathcal{C}$ by lifting a functor $F: X.\\\\text{HomotopyCateg\"}\n  {\"name\": \"CategoryTheory.nerveFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"CategoryTheory.Functor CategoryTheory.Cat SSet\", \"doc\": \"The nerve functor is a functor from the category of small categories to the category of simplicial sets. It maps each category $\\\\mathcal{C}$ to its nerve, a simplicial set where each $n$-simplex corre\"}\n  {\"name\": \"CategoryTheory.nerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → SSet\", \"doc\": \"The nerve functor sends a category $\\\\mathcal{C}$ to its nerve, a simplicial set where each $n$-simplex corresponds to a composable sequence of $n$ morphisms in $\\\\mathcal{C}$. For a simplicial operator\"}\n  {\"name\": \"CategoryTheory.Nerve.nerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"CategoryTheory.Functor CategoryTheory.Cat (SSet.Truncated 2)\", \"doc\": \"The functor from the category of small categories to 2-truncated simplicial sets, obtained by composing the nerve functor (which maps a category to its simplicial nerve) with the truncation functor th\"}\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category nerves, ordinary fibrations, or unmarked simplicial/model definitions do not state this marked quasicategorical comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-cocartesian-sections-limit",
@@ -109,5 +303,54 @@
   "group": "NI"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-strict-presentation-transport-representation",
+  "worker": "stage1",
+  "summary": "Retained the assigned statement. Gave an eight-step argument from explicit simplicial formulas, a relative-nerve Quillen theorem, the existing Cartesian mapping-simplex theorem applied to opposite fibres and reversed vertices, and marked simplex descent. Added explicit citations for full faithfulness on Kan mapping spaces and contractibility of homotopy fibres of equivalences. Two independent foundations remain statement-only; the draft duplicate local comparison node was removed. Second reading expanded the reversal operators and the inverse/triangle witnesses for the lifted comparison; it retained the statement and both new foundations.",
+  "blueprint": "Realizes the opening compactification-choice infrastructure of thm-cbc-finite-level-proetale, through lem-cbc-grothendieck-hypersheaf-sections, lem-cbc-grothendieck-presheaf-coherent-straightening and lem-cbc-cocartesian-sections-limit: marked strict presentations determine coherent transport. No geometric or coefficient route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-marked-point-cartesian-model",
+    "why": "Absolute marked fibrant objects identify the equivalence marking on each quasicategory fibre; the compact-support unit has no model-category theorem."
+   },
+   {
+    "node": "lem-coef-marked-relative-cartesian-model",
+    "why": "Relative marked model fibrancy, pullback and fibrewise detection of equivalences are generic model tools absent from this unit."
+   },
+   {
+    "node": "lem-coef-cocartesian-straightening",
+    "why": "Use the existing classifying equivalence, including its action on maps and base change; the compact-support unit has no general straightening theorem."
+   },
+   {
+    "node": "lem-coef-cartesian-mapping-simplex-presentation",
+    "why": "The general local marked comparison is used on opposite fibres with reversed simplex vertices; no local compact-support unit result gives this simplicial theorem."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "An equivalence of quasicategories induces equivalences of their Kan mapping spaces; this generic coherent functor theorem justifies lifting presentation comparisons."
+   },
+   {
+    "node": "lem-coef-space-contractible-fiber-equivalence",
+    "why": "Homotopy fibres of equivalences of Kan spaces are contractible; this generic space theorem justifies coherent uniqueness of lifts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-cartesian-mapping-simplex-presentation",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-space-contractible-fiber-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-a2424efc2",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-a2424efc2 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, all ten cited statements, the parent lem-cbc-cocartesian-sections-limit, unit sk-prop-sf-cbc, chapter sec-smooth-purity, and HTT (2009 text) at 3.1.3.1-3.1.3.3, §3.2.2 (3.2.2.6-3.2.2.8, 3.2.2.14) and §3.2.5 (3.2.5.2-3.2.5.21). Item statement: R_C(D) is HTT Def 3.2.5.2; the fibration, cocartesian-edge and classification clauses are Prop 3.2.5.21; the i_D comparison is the global cocartesian form of Remark 3.2.5.3 with Prop 3.2.2.14; Fun^cocart and Fun^mark are Map^flat into Q^natural. The statement is not weakened, and the parent uses exactly these clauses. Step 1: recomputed that i_D is simplicial (max theta(J)=theta(max J)); fibre maps are identities. Step 2: same as HTT's proof of 3.2.5.21 (equivalence-marked fibres are fibrant, the right Quillen functor gives a fibrant object, fibrant objects are Z^natural); kappa_D from Cor 3.2.5.20. Step 3: re-derived the reversal (rho(j)=n-alpha(m-j), B_j=A_{n-j}^op, theta^rev gives transition B_{alpha(m)} to B_{alpha theta(k)} after theta^*), which matches the M^m operator of lem-coef-cartesian-mapping-simplex-presentation; markings correspond; no fibrancy is needed. Step 4: the descent hypotheses hold for every simplex; the conclusion is the full Map^flat equivalence. Step 5: the fibre criterion between fibrant objects makes h an equivalence. Steps 6-8: naturality formulas, lift of the comparison g eps / equality / (eps' G(eta))^-1 with contractible lift spaces, and pullback via HTT Remark 3.2.5.7, all checked. proof_deps equals the union of the uses lists; no cycle. New node lem-cbc-marked-relative-nerve-quillen = HTT 3.2.5.12/3.2.5.13/3.2.5.18(2)/3.2.5.20/3.2.5.14; it generalizes lem-coef-kan-relative-nerve-left-fibration (Kan values only) and does not duplicate it. New node lem-cbc-marked-mapping-simplex-descent is true: the cell induction of HTT 3.2.2.8 run in the left proper relative model, plus 3.1.3.3; DAG grep finds no duplicate. Both are statement-only, with correct blueprint from/via, 14 searches each and correct created fields. Tool uses accepted: point and relative marked models, straightening, cartesian mapping-simplex presentation, contractible-fibre lemma; lem-cbc-enhanced-functor-cone-calculus is in the item's own unit, so its declaration is unnecessary but harmless. No fixes written."
+ }
 }

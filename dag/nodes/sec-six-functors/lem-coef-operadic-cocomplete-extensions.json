@@ -28,9 +28,101 @@
   "def-coef-complete-algebroid",
   "lem-coef-operadic-algebra-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an $\\mathcal M$-algebra $B$. For every colour $n\\in\\mathcal N_{[1]}$, use the active slice $K_n$ and diagram $T_n$ of [lem-coef-operadic-free-cocone-criterion]. They are small: slices and homotopy pullbacks of the given small operads remain in the smaller universe. The unique active arrows from each $[r]$ to $[1]$ form a coherent base transformation from the base of $T_n$ to the constant $[1]$-diagram. Apply [lem-coef-infinity-pointwise-cocartesian-transport] to the monoidal cocartesian fibration of [def-coef-monoidal-infinity-category]. This gives a coherent cocartesian transformation $T_n\\to D_n$ with $D_n:K_n\\to\\mathcal V$. At $(m,\\alpha)$, if $m$ lies over $[r]$, its value is $B(m_1)\\otimes\\cdots\\otimes B(m_r)$; at $r=0$ it is the tensor unit. The arrows and higher simplices of $D_n$ are given by this coherent transport, rather than by choosing unrelated tensors at vertices.",
+   "uses": [
+    "lem-coef-operadic-free-cocone-criterion",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions A.4.1 and A.2.1; cocartesian push to the unary fibre in Proposition A.2.10 Read online; agent reconstruction, archive WANTED."
+   }
+  },
+  {
+   "text": "We record the elementary unary criterion needed below, using the operadic-cocone definition of [def-coef-operadic-correspondence]. Let $T:K\\to\\mathcal V^\\otimes_{\\mathrm{act}}$ have unary cocartesian push $D$, and let $T\\to v$ be an active cocone with unary push $D\\to v$. By the precomposition equivalence of [lem-coef-infinity-pointwise-cocartesian-transport], active cocones $T\\to w$ are equivalent to transformations $D\\to\\operatorname{const}_K(w)$, and active arrows from the unary apex to $w$ are $\\operatorname{Map}_{\\mathcal V}(v,w)$. For a fixed tuple $L$, put $\\ell=\\bigotimes L$, with $\\ell=\\mathbf1$ for the empty tuple. The same precomposition equivalence applied to the diagram $L\\oplus T$ identifies its active cocones with transformations $\\ell\\otimes D\\to\\operatorname{const}_K(w)$; applied to $T\\oplus L$ it gives transformations $D\\otimes\\ell\\to\\operatorname{const}_K(w)$. These identifications follow from the cocartesian tensor transports and their composition in [def-coef-monoidal-infinity-category], and they intertwine restriction along the cocone. Consequently, if $D\\to v$ is colimiting and tensoring separately preserves its colimit, the dual mapping-space cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] makes both context restriction maps equivalences. Conversely, take the empty context to deduce that $D\\to v$ is colimiting by that same criterion. Thus the active cocone is operadically colimiting exactly when its unary push is colimiting, under the stated tensor preservation. This is the mapping-space calculation of Gepner--Haugseng Proposition A.2.10, written here rather than made a new node.",
+   "uses": [
+    "def-coef-operadic-correspondence",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-coef-monoidal-infinity-category",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition A.2.1, Corollary A.2.7 and Proposition A.2.10; elementary deduction from the cited transport and cocone statements, agent reconstruction, archive WANTED."
+   }
+  },
+  {
+   "text": "Let $\\bar D_n$ be a colimiting cocone on $D_n$ with apex $c_n$, which exists by cocompleteness since $K_n$ is small. Compose $T_n\\to D_n$ with this cocone; the cocartesian precomposition equivalence in [lem-coef-infinity-pointwise-cocartesian-transport] makes it an active cocone $\\bar T_n$ with apex $c_n$ whose unary push is $\\bar D_n$. Tensoring on either side preserves these $K_n$-colimits by hypothesis. The elementary criterion of step 2 therefore makes $\\bar T_n$ operadically colimiting in the sense of [def-coef-operadic-correspondence]. Its base is the canonical cone specified in [lem-coef-operadic-free-cocone-criterion], because each active arrow to $[1]$ is unique in the base and the construction retained its coherent transformation. This works also when $K_n$ is empty, with $c_n$ initial. Now apply the conditional assembly assertion of [lem-coef-operadic-free-cocone-criterion]: $u$ is inert-preserving as a map of generalized operads, its zero-fibres are Kan, and $u_{[0]}$ is an equivalence, exactly as required. It produces an $\\mathcal N$-algebra $A_B$ and $\\eta_B:B\\to u^*A_B$ with all active slice cocones operadically colimiting. No choice of independent operations or coherence on the $c_n$ is being assumed; assembly is precisely the conditional theorem used here.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-coef-operadic-correspondence",
+    "lem-coef-operadic-free-cocone-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition A.2.10, Proposition A.4.4 and Theorem A.4.6 Read online; agent reconstruction, archive WANTED."
+   }
+  },
+  {
+   "text": "The final assertion of [lem-coef-operadic-free-cocone-criterion] identifies, by the specified map $h\\mapsto u^*h\\circ\\eta_B$, $\\operatorname{Map}(A_B,C)$ with $\\operatorname{Map}(B,u^*C)$ for every $C$. Apply the opposite assertion of [lem-coef-parametric-universal-arrows] to $u^*$, taking its full domain of universal arrows: it assembles these pairs into a coherent functor $u_!^{\\mathcal V}$ with unit $\\eta$ and the coherent-diagram mapping-space adjunction. Choose the functorial pairs among the operadically free pairs of step 3; any comparison compatible with their universal arrows is an equivalence by the same mapping-space property, so their active colimit property is retained. Thus $A_B=u_!^{\\mathcal V}B$ has the required unit-induced adjunction. For $B\\in\\operatorname{Alg}_{\\mathcal M}(\\mathcal W)$, push its small active slice diagram to $D_n^{\\mathcal W}$ by the same cited transport statement, take its ordinary colimit in $\\mathcal W$, and use separate tensor preservation in $\\mathcal W$ in the context calculation of step 2. Conditional assembly and its mapping-space property then give a universal pair in $\\mathcal W$ for every $B$. Applying the dual parametric assertion to these pairs gives the coherent $u_!^{\\mathcal W}$ and its unit.",
+   "uses": [
+    "lem-coef-operadic-free-cocone-criterion",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition A.4.3 and Corollary A.4.5; coherent assembly of universal arrows Read online; agent reconstruction, archive WANTED."
+   }
+  },
+  {
+   "text": "Write $A_B=u_!^{\\mathcal V}B$, and take its operadically colimiting active cocone at $n$. Apply the empty-context part of the operadic-cocone definition [def-coef-operadic-correspondence] and the unary criterion of step 2: its coherent unary push is an ordinary colimit cocone. The mapping-space comparisons in that criterion are those of [lem-coef-infinity-pointwise-cocartesian-transport] and [lem-cbc-enhanced-functor-cone-calculus]. Strong monoidality, in [def-coef-monoidal-infinity-category], says that $F$ preserves the cocartesian edges used for this push; hence the unary push of its image is the image under $F$ of that colimit cocone. This is colimiting because the underlying $F$ preserves all small colimits. Tensor in $\\mathcal W$ preserves the same small colimits separately, so the context calculation of step 2, now in $\\mathcal W$, makes the image active cocone operadically colimiting. This last application tests arbitrary tuples in $\\mathcal W$, not only tuples in the image of $F$. Its underlying diagram is exactly the active diagram for $F_{*,\\mathcal M}B$, and its cone is induced by $F_{*,\\mathcal M}\\eta_B$, since postcomposition and restriction commute. The mapping-space assertion of [lem-coef-operadic-free-cocone-criterion] consequently makes $(F_{*,\\mathcal N}A_B,F_{*,\\mathcal M}\\eta_B)$ a universal arrow from $F_{*,\\mathcal M}B$ to $u^*$ in $\\mathcal W$.",
+   "uses": [
+    "def-coef-operadic-correspondence",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-operadic-free-cocone-criterion",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Corollary A.2.9 and Lemma A.4.7, expanded using Proposition A.2.10 Read online; agent reconstruction, archive WANTED."
+   }
+  },
+  {
+   "text": "Compare the universal arrow of step 5 with the chosen one $(u_!^{\\mathcal W}F_{*,\\mathcal M}B,\\eta^{\\mathcal W}_{F_{*,\\mathcal M}B})$. The adjunction gives a map $\\beta_B:u_!^{\\mathcal W}F_{*,\\mathcal M}B\\to F_{*,\\mathcal N}u_!^{\\mathcal V}B$ whose adjunct is $F_{*,\\mathcal M}\\eta_B$ after the canonical identification $F_{*,\\mathcal M}u^*\\simeq u^*F_{*,\\mathcal N}$. In the reverse direction the universal arrow of step 5 gives $\\gamma_B$ satisfying $u^*\\gamma_B\\circ F_{*,\\mathcal M}\\eta_B\\simeq\\eta^{\\mathcal W}_{F_{*,\\mathcal M}B}$. The two composites have the same adjuncts as the respective identities. The mapping-space equivalences of [lem-coef-operadic-free-cocone-criterion] therefore supply homotopies $\\gamma_B\\beta_B\\simeq\\mathrm{id}$ and $\\beta_B\\gamma_B\\simeq\\mathrm{id}$. To retain naturality and higher homotopies, apply the dual coherent-diagram formula of [lem-coef-parametric-universal-arrows] to $u^*:\\operatorname{Alg}_{\\mathcal N}(\\mathcal W)\\to\\operatorname{Alg}_{\\mathcal M}(\\mathcal W)$, with diagram shape $K=\\operatorname{Alg}_{\\mathcal M}(\\mathcal V)$ (its universe clause permits enlarging the ambient universe), taking as its two coherent diagrams $F_{*,\\mathcal M}:K\\to\\operatorname{Alg}_{\\mathcal M}(\\mathcal W)$ and $F_{*,\\mathcal N}u_!^{\\mathcal V}:K\\to\\operatorname{Alg}_{\\mathcal N}(\\mathcal W)$. It takes the coherent transformation $F_{*,\\mathcal M}\\eta:F_{*,\\mathcal M}\\to F_{*,\\mathcal M}u^*u_!^{\\mathcal V}=u^*F_{*,\\mathcal N}u_!^{\\mathcal V}$ (postcomposition and restriction commute) to a coherent transformation $\\beta:u_!^{\\mathcal W}F_{*,\\mathcal M}\\to F_{*,\\mathcal N}u_!^{\\mathcal V}$; by its compatibility with evaluation at vertices, its component at $B$ is the $\\beta_B$ above, so its defining adjunct is exactly the displayed composite in the statement. Each $\\beta_B$ is an equivalence by the pointwise argument just given. By the criterion of [lem-cbc-enhanced-functor-cone-calculus] that a coherent transformation is an equivalence in the functor category if and only if all its vertex components are equivalences (applied in the enlarged universe, in which $K$ is small), $\\beta$ is an equivalence of functors, including all higher homotopies. No separately constructed coherent inverse is needed.",
+   "uses": [
+    "lem-coef-operadic-free-cocone-criterion",
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Lemma A.4.7: identification of the specified mate and compatibility with the unit Read online; agent reconstruction, archive WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-operadic-free-cocone-criterion",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "def-coef-monoidal-infinity-category",
+  "def-coef-operadic-correspondence",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-parametric-universal-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Reconstruction of Theorem A.4.6 and Lemma A.4.7 via Propositions A.2.10, A.4.3 and A.4.4. Source read online; archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +158,38 @@
    "results": "{\"t\": \"2026-10-16T18:25:04Z\", \"tool\": \"leanfinder\", \"query\": \"Beck Chevalley equivalence for free operadic algebra extension and strong monoidal cocontinuous change of base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.freeFunctorCompPullbackIso\", \"Condensed.freeForgetAdjunction\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"SheafOfModules.mapFree\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\"], \"digest\": \"04f6b978fc1435e7\"}",
    "date": "2026-10-16",
    "verdict": "no match: Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:78 and Preserves.lean:30-82 concern ordinary functors and ordinary left Kan extensions. The DayConvolution and ExternalProduct hits also use ordinary categories. SheafOfModules.freeFunctorCompPullbackIso is about modules. None supplies a free infinity-operadic algebra extension or its coefficient-change mate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free operadic extensions along maps of small generalized nonsymmetric infinity operads in cocomplete monoidal infinity categories and compatibility with strong monoidal colimit preserving coefficient change",
+   "results": "{\"t\": \"2026-10-16T20:48:39Z\", \"tool\": \"leanfinder\", \"query\": \"Free operadic extensions along maps of small generalized nonsymmetric infinity operads in cocomplete monoidal infinity categories and compatibility with strong monoidal colimit preserving coefficient change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Free.ext\", \"id_tensor_π_preserves_coequalizer_inv_colimMap_desc\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"π_tensor_id_preserves_coequalizer_inv_colimMap_desc\", \"SheafOfModules.ιFree_freeMap\", \"CategoryTheory.Cat.freeMapCompIso\", \"SheafOfModules.ιFree_freeMap_assoc\", \"CategoryTheory.Free.liftUnique\"], \"digest\": \"b22ed89ccc1d5a2a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the ordinary Category hypotheses of Functor/KanExtension/Adjunction.lean:37-81 and Preserves.lean:30-82 and Monoidal/Cartesian/FunctorCategory.lean. Ordinary ring/module free algebras and ordinary Kan extensions do not state a generalized infinity-operadic free extension or its coherent coefficient-change mate."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.lanAdjunction, CategoryTheory.Functor.PreservesLeftKanExtension, CategoryTheory.Free.ext",
+   "results": "{\"t\": \"2026-10-16T20:48:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.lanAdjunction, CategoryTheory.Functor.PreservesLeftKanExtension, CategoryTheory.Free.ext\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the ordinary Category hypotheses of Functor/KanExtension/Adjunction.lean:37-81 and Preserves.lean:30-82 and Monoidal/Cartesian/FunctorCategory.lean. Ordinary ring/module free algebras and ordinary Kan extensions do not state a generalized infinity-operadic free extension or its coherent coefficient-change mate."
+  },
+  {
+   "tool": "grep",
+   "query": "Operad|operadic|lanAdjunction|leftKanExtensionObjIsoColimit",
+   "results": "{\"t\": \"2026-10-16T20:48:40Z\", \"tool\": \"grep\", \"query\": \"Operad|operadic|lanAdjunction|leftKanExtensionObjIsoColimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/GuitartExact/KanExtension.lean\", \"Mathlib/CategoryTheory/GuitartExact/KanExtension.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\"], \"digest\": \"bb8b41cd1a238558\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the ordinary Category hypotheses of Functor/KanExtension/Adjunction.lean:37-81 and Preserves.lean:30-82 and Monoidal/Cartesian/FunctorCategory.lean. Ordinary ring/module free algebras and ordinary Kan extensions do not state a generalized infinity-operadic free extension or its coherent coefficient-change mate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free operadic extension under a map of infinity operads commutes with a strong monoidal colimit preserving functor",
+   "results": "{\"t\": \"2026-10-16T20:48:41Z\", \"tool\": \"leansearch\", \"query\": \"Free operadic extension under a map of infinity operads commutes with a strong monoidal colimit preserving functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.map\", \"CategoryTheory.Limits.isColimitOfPreserves\", \"CategoryTheory.FreeMonoidalCategory.project\", \"CategoryTheory.FreeMonoidalCategory.tensorFunc\", \"CategoryTheory.FreeMonoidalCategory.inclusion\", \"CategoryTheory.Limits.PreservesColimit.mk\", \"CategoryTheory.instPreservesColimitsTensorLeft\", \"Action.Functor.mapActionPreservesColimit_of_preserves\"], \"digest\": \"739f896b7f0ccf17\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read the ordinary Category hypotheses of Functor/KanExtension/Adjunction.lean:37-81 and Preserves.lean:30-82 and Monoidal/Cartesian/FunctorCategory.lean. Ordinary ring/module free algebras and ordinary Kan extensions do not state a generalized infinity-operadic free extension or its coherent coefficient-change mate."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-cocontinuous-base-change",
@@ -77,5 +197,29 @@
   "group": "Q15"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-cocomplete-extensions",
+  "worker": "stage1",
+  "summary": "The unchanged statement is proved in six steps from active slice colimits. Second reading removed the unary-detection prerequisite: step 2 derives it from existing coherent cocartesian transport, the operadic-cocone definition and the dual cocone mapping-space criterion. One new statement-only prerequisite retains the genuinely non-elementary conditional assembly/universal-property theorem without presentability. The mate and its inverse are identified through their adjuncts in the coherent functor category. Independent logged searches found no Mathlib match or project attachment.",
+  "blueprint": "main-20261015 prop-coef-integral-exceptional-adjoint, proof paragraph 2: derived coefficient adjunction in the displayed R Hom computation before R lim, through the inherited enriched tensor/change-of-enrichment ancestry. This split supplies free operadic extensions and their specified coefficient-change mate without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 2, 5 and 6 use only its statement as a generic black box: the dual mapping-space criterion for colimit cocones and the componentwise criterion for equivalences of coherent transformations; no node of sk-prop-sf-biduality-general states these generic quasicategorical facts (already accepted as a tool on the parent lem-coef-algebroid-cocontinuous-base-change and on lem-coef-operadic-free-cocone-characterization)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-edc502601",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-edc502601 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Gepner–Haugseng arXiv:1312.3178v4 (PDF fetched read-only, text extracted in /tmp): Defs. A.2.1 and A.4.1, Cor. A.2.9, Props. A.2.10, A.4.3 and A.4.4, Thm. A.4.6, Lem. A.4.7. The item statement matches A.4.6 plus A.4.3 plus A.4.7 in every respect: small operads (choose a large enough κ), Kan zero-fibres, u_[0] an equivalence, tensor cocontinuous separately in each variable, F strong monoidal and cocontinuous, the same mate direction, and the adjunct F_*η followed by F_*u^*≃u^*F_*. No statement change and no presentability. The new node lem-coef-operadic-free-cocone-criterion is GH A.4.4 plus A.4.3 specialised to the target V^⊗. K_n = M_act ×_{N_act} (N_act)_{/n} equals GH's A ×_B (B^act)_{/b}, and the canonical base cocone matches GH's 'lying over (A^act)/b^◁ → B^act → Δ^op'. I tested it on u=id (the terminal object (n,id) gives the free pair (B,id)), empty slices, empty operads and nullary inputs. Its form passes B1–B9; it is not a restatement of the item and has no cycle. It is not a duplicate: lem-coef-operadic-free-cocone-characterization assumes presentability, though its steps 3, 5 and 6 are presentability-free and give the later split of the new node. Kan-filling (correspondence level), Q55 lem-coef-operadic-active-colimit-extension-criterion (ordinary operads) and free-extension and the active-slice formula (presentable) are different statements. Steps 1–5 check out. Step 2, which folds in GH A.2.10, is acceptable as an elementary step: the one-sided contexts match A.2.1, and the id_L⊕λ cocartesian concatenation argument is the same few lines as characterization step 2. Step 5 follows GH's proof of A.4.7 and needs no essential surjectivity of F. Repaired (E5/C4): step 6 claimed the parametric lemma 'similarly produces γ' as a coherent inverse in the functor category, which no cited statement gives. I replaced this with the componentwise equivalence criterion of lem-cbc-enhanced-functor-cone-calculus, applied to the coherent β, whose components are equivalences pointwise; this is valid after the universe enlargement the parametric lemma permits. I added that node to step 6's uses. Accepted tool use, declared in split_report.tool_uses: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc, outside the route), statement only, in steps 2, 5 and 6; it is already accepted on the parent and on the characterization node. Fixed file: fixes/dag/nodes/sec-six-functors/lem-coef-operadic-cocomplete-extensions.json (proof and split_report only). No SGA. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

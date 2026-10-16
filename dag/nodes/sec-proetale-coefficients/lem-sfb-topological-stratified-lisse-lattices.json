@@ -24,9 +24,102 @@
   "def-weil-l-adic-coefficient-extension",
   "def-pc-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every open subset of a Noetherian topological space is quasi-compact: otherwise successive finite unions from an open cover without a finite subcover give a strictly increasing chain of opens. Thus $X$ is quasi-compact and its affine-open intersections are quasi-compact, so it is quasi-separated. Both $E$ and $\\mathcal O_E$ are totally disconnected: two distinct points are separated by clopen ultrametric balls. Apply [lem-weil-pbc-continuous-coefficient-realizations] to identify their pulled condensed coefficient rings with the continuous-function coefficient sheaves, compatibly with the inclusion. These identifications hold on all the schemes below. Transporting an action along a ring isomorphism preserves its finite-free charts and tensor products: the same bases and bilinear maps define them after transport. By [def-weil-pbc-internal-abelian-sheaf-module-equivalence], internal module objects over these commutative coefficient sheaves and ordinary sheafwise module objects have the same underlying sheaves, sections, restrictions, and linear maps. Thus we may read internal module objects as ordinary module sheaves: evaluating an action gives the sectionwise scalar multiplication, and conversely a bilinear sectionwise action induces the internal action by the sheaf tensor universal property. Hence the given $L$ is a lisse module for the continuous rational coefficients.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.1, 6.8.3; coefficient comparison before Lemma 6.8.13"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-continuous-etale-local-lattice] to this internal rational module. Its hypotheses hold: the finite extension $E/\\mathbf Q_\\ell$ carries its usual normed-field structure, is finite dimensional, and $X$ is topologically Noetherian. It gives a qcqs scheme $U$, an étale surjection $p:U\\to X$, a pro-étale locally finite free integral module $M$, and an isomorphism $B_U\\otimes_{A_U}M\\simeq p^*L$. The comparison of step 1 commutes with the integral-to-rational map, so this is the scalar extension for the pulled condensed coefficient rings $A_U$ and $B_U$. Varying finite ranks, including zero, are permitted by the cited theorem.",
+   "uses": [
+    "lem-weil-pbc-continuous-etale-local-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6); Lemma 6.8.13 first paragraph, étale-cover reduction"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-stratified-finite] to $p:U\\to X$; both source and target are qcqs by steps 1 and 2. It gives finitely many constructible locally closed strata $S_a$ and finite étale maps $p_a:U_a=U\\times_X S_a\\to S_a$. These maps are surjective. Indeed for a point $s\\in S_a$ over $x\\in X$, choose $u\\in U$ over $x$. The nonzero tensor product $\\kappa(u)\\otimes_{\\kappa(x)}\\kappa(s)$ has a prime ideal, yielding a point in the fibre product over $s$. Each $S_a$ is topologically Noetherian: a closed subspace inherits stabilization of open chains, and an open subspace does too, since its opens are opens of the ambient space. Thus the Noetherian-space hypothesis needed for descent is retained.",
+   "uses": [
+    "lem-weil-pbc-etale-stratified-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S0 (lemma-etale-stratified-finite)"
+   }
+  },
+  {
+   "text": "Pull $M$ back to each $U_a$, obtaining $M_a$. The composite $U_a\\to U\\xrightarrow{p}X$ equals $U_a\\xrightarrow{p_a}S_a\\hookrightarrow X$, so the composition isomorphisms of module pullbacks [def-sfb-module-upper-star-comp] identify the pullback of $p^*L$ to $U_a$ with $p_a^*(L|_{S_a})$. By [lem-weil-pbc-continuous-locally-free-pullback], both $M_a$ and $L|_{S_a}$ remain locally finite free, with ranks allowed to vary. By [sk-prop-sfb-cartesian-coefficients](1), the inverse images of both coefficient rings identify with the coefficient rings on the new scheme; the module pullback is the lift of ordinary sheaf inverse image. The definition of module pullback [def-sfb-module-upper-star], together with the strong monoidal inverse-image structure [def-sfb-finite-upper-star-monoidal], identifies the pulled scalar-extension object with $B_{U_a}\\otimes_{A_{U_a}}M_a$. The scalar-extension isomorphism therefore pulls back to $B_{U_a}\\otimes_{A_{U_a}}M_a\\simeq p_a^{-1}(L|_{S_a})$. To check this compatibility explicitly, on a chart $M\\simeq A_U^r$ use the basis $e_i$. Scalar extension has basis $1\\otimes e_i$, and pulling back yields the corresponding bases over $A_{U_a}$ and $B_{U_a}$. The matrices for the original rational isomorphism and its inverse pull back to matrices whose products are still the identity. Thus the pulled map is an isomorphism on these charts. These maps agree on overlaps, since they come from the same original map, and their inverses glue by the sheaf axiom.",
+   "uses": [
+    "lem-weil-pbc-continuous-locally-free-pullback",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-sfb-module-upper-star",
+    "def-sfb-finite-upper-star-monoidal",
+    "def-sfb-module-upper-star-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13 first paragraph, restriction to strata; inverse-image coefficient identifications"
+   }
+  },
+  {
+   "text": "Fix a nonempty stratum $S_a$. The field $E$ is finite over $\\mathbf Q_\\ell$, $S_a$ is topologically Noetherian, $p_a$ is finite étale surjective, $L|_{S_a}$ is lisse, and $M_a$ is a lisse integral model of its inverse image. Therefore [lem-weil-pbc-lisse-lattice-finite-etale-descent] supplies a lisse integral module $N_a$ and an isomorphism $\\theta_a:B_{S_a}\\otimes_{A_{S_a}}N_a\\simeq L|_{S_a}$. Its statement requires no descent datum on $M_a$, so none has been assumed here. The descent theorem is stated for sectionwise module sheaves over the continuous-function rings, so pass through the specified encoding [def-weil-pbc-continuous-coefficient-module-encoding], the equivalence assembled from the two identifications of step 1. It sends regular modules to unit sheaves, finite biproducts to free sheaves, and commutes with restriction of scalars, hence with its left adjoint, extension of scalars. Its compatibility with restriction to slices [lem-weil-pbc-continuous-module-encoding-slice-freeness] shows that the encoded $M_a$ and $L|_{S_a}$ are locally free of finite rank. By [lem-weil-pbc-continuous-module-encoding-restriction] for the étale map $p_a$, the encoding of $p_a^*(L|_{S_a})$ is the inverse image of the encoding of $L|_{S_a}$, so the isomorphism of step 4 becomes the hypothesis of the descent theorem. Conversely, [lem-weil-pbc-continuous-module-encoding-lattices], applied to the identity of $S_a$ and the integral module sheaf $N_a$ with its rationalization isomorphism, makes the inverse encoding of $N_a$ a pro-étale locally finite free internal integral module whose ordinary scalar extension is isomorphic to $L|_{S_a}$. Write $N_a$ and $\\theta_a$ again for this internal module and isomorphism.",
+   "uses": [
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-continuous-module-encoding-slice-freeness",
+    "lem-weil-pbc-continuous-module-encoding-restriction",
+    "lem-weil-pbc-continuous-module-encoding-lattices"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13 first paragraph, finite étale descent"
+   }
+  },
+  {
+   "text": "The map $n\\mapsto\\theta_a(1\\otimes n)$ is injective. On a pro-étale cover trivializing $N_a\\simeq A_{S_a}^r$, the map before $\\theta_a$ is the coordinatewise inclusion $A_{S_a}^r\\to B_{S_a}^r$. This is injective because $C(V,\\mathcal O_E)\\to C(V,E)$ is injective for every $V$. If two sections have equal images, their restrictions to this cover are equal; the sheaf uniqueness axiom then makes them equal. Define $L_{0,a}$ as the image submodule. The injective map identifies it with $N_a$, so it is lisse. Its inclusion induces precisely $\\theta_a$ under this identification, hence becomes the required isomorphism after scalar extension. Do this for the finitely many nonempty strata and discard empty ones. For $X=\\varnothing$ use the empty partition; the same coordinate calculation with $r=0$ includes rank-zero modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13 first paragraph, realizing the integral model as a lattice submodule"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-etale-local-lattice",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "lem-weil-pbc-etale-stratified-finite",
+  "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+  "sk-prop-sfb-cartesian-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-module-upper-star",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-module-upper-star-comp",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-weil-pbc-continuous-module-encoding-slice-freeness",
+  "lem-weil-pbc-continuous-module-encoding-restriction",
+  "lem-weil-pbc-continuous-module-encoding-lattices"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13, first paragraph; Definitions 6.8.1, 6.8.3 and Proposition 6.8.4(6); Stacks Tag 03S0 for stratification"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -111,10 +204,52 @@
    "results": "8 hits; Profinite.NobelingProof.Nobeling_aux, Condensed.finFree, LocallyConstant.freeOfProfinite, SheafOfModules.IsFiniteType.exists_localGeneratorsData, CompHausLike.LocallyConstantModule.functor, Condensed.profiniteFree, CondensedMod.LocallyConstant.functorToPresheaves, CondensedMod.LocallyConstant.functor",
    "date": "2026-10-16",
    "verdict": "no match: locally constant function modules, sheaf generators and complete lattices of submodules do not construct integral lisse forms on a finite stratification"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]isse|[Ss]tratif.*[Ll]attice|[Ll]attice.*[Ss]tratif",
+   "results": "3 hits: Mathlib/Topology/MetricSpace/MetricSeparated.lean, Mathlib/Topology/MetricSpace/Cover.lean, Mathlib/Data/Rel/Separated.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: only general locally free sheaf definitions, locally constant function modules, algebraic rank results and local-field properties; none supplies stratified integral lisse lattices"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every locally free finite rank rational pro-etale sheaf has integral lattices after finite locally closed stratification",
+   "results": "8 hits: SheafOfModules.IsFiniteType.mk, Module.isLocallyConstant_rankAtStalk, Module.finrank_of_isLocalizedModule_of_free, SheafOfModules.IsFiniteType.exists_localGeneratorsData, Module.isLocallyConstant_rankAtStalk_freeLocus, SheafOfModules.ιFree, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, SheafOfModules.IsFiniteType",
+   "date": "2026-10-17",
+   "verdict": "no match: only general locally free sheaf definitions, locally constant function modules, algebraic rank results and local-field properties; none supplies stratified integral lisse lattices"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lisse sheaf of p-adic vector spaces on a topologically noetherian scheme has an integral lattice on each stratum of a finite constructible stratification",
+   "results": "8 hits: LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Profinite.NobelingProof.Nobeling_aux, CompHausLike.LocallyConstantModule.functor, SheafOfModules.IsFiniteType, CondensedMod.ofSheafStonean, AlgebraicGeometry.IsIntegral.component_integral, CondensedMod.ofSheafProfinite, LocallyConstant.freeOfProfinite",
+   "date": "2026-10-17",
+   "verdict": "no match: only general locally free sheaf definitions, locally constant function modules, algebraic rank results and local-field properties; none supplies stratified integral lisse lattices"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsLocallyFree\"",
+   "results": "11 hits: SheafOfModules.IsLocallyFree, SheafOfModules.LocalGeneratorsData.IsLocallyFreeData, SheafOfModules.LocalGeneratorsData.isLocallyFree, SheafOfModules.IsLocallyFree.exists_isLocallyFreeData, SheafOfModules.IsLocallyFree.mk, SheafOfModules.LocalGeneratorsData.IsLocallyFreeData.shrink, SheafOfModules.instIsQuasicoherentOfIsLocallyFree, SheafOfModules.instIsLocallyFreeFree",
+   "date": "2026-10-17",
+   "verdict": "no match: only general locally free sheaf definitions, locally constant function modules, algebraic rank results and local-field properties; none supplies stratified integral lisse lattices"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]attice|[Ll]isse|[Ss]tratif",
+   "results": "0 hits: ; subdirectory AlgebraicGeometry/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match: only general locally free sheaf definitions, locally constant function modules, algebraic rank results and local-field properties; none supplies stratified integral lisse lattices"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite rank local systems over a nonarchimedean field admit locally free valuation ring forms on finitely many locally closed pieces",
+   "results": "8 hits: Module.isLocallyConstant_rankAtStalk_freeLocus, Module.isLocallyConstant_rankAtStalk, Profinite.NobelingProof.Nobeling_aux, LocallyConstant.freeOfProfinite, Module.rankAtStalk_eq_finrank_of_free, SheafOfModules.IsFiniteType.exists_localGeneratorsData, IsNonarchimedeanLocalField.instIsRankLeOne, IsNonarchimedeanLocalField.toLocallyCompactSpace",
+   "date": "2026-10-17",
+   "verdict": "no match: only general locally free sheaf definitions, locally constant function modules, algebraic rank results and local-field properties; none supplies stratified integral lisse lattices"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-sfb-extend-scalars-localization",
@@ -122,5 +257,69 @@
   "group": "NL"
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-thm-sfb-rationalization-comparison"
+ "unit": "sk-thm-sfb-rationalization-comparison",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-topological-stratified-lisse-lattices",
+  "worker": "stage1",
+  "summary": "Rechecked the earlier attempt against Bhatt–Scholze and Stacks 03S0. Reused existing étale-local lattice, stratification, pullback and finite-étale descent statements. Added explicit coefficient and module transport, Noetherian strata, the base-changed scalar-extension isomorphism, and the injective map realizing each integral model as a submodule. No new nodes.",
+  "blueprint": "Realizes thm-sfb-extend-scalars-localization.proof.md, Essential surjectivity: existence of integral lattices on finitely many strata; the source argument is Bhatt–Scholze Lemma 6.8.13 first paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "The canonical comparison identifies the condensed and continuous coefficient models, compatibly with the integral inclusion; no such comparison is supplied by the rationalization unit."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-etale-local-lattice",
+    "why": "Generic étale-local existence theorem from Bhatt–Scholze Proposition 6.8.4(6), needed before stratification."
+   },
+   {
+    "node": "lem-weil-pbc-etale-stratified-finite",
+    "why": "Generic Stacks 03S0 morphism stratification used to turn the étale cover into finite étale covers."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-locally-free-pullback",
+    "why": "Generic preservation of locally finite free modules on pulling to the strata."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Coefficient inverse images identify with the new coefficient rings; the module pullback lifts sheaf inverse image, needed to match the descent hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "why": "Generic finite étale lattice descent, with no datum on the chosen lattice required; supplies each stratum model."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-module-encoding-restriction",
+    "why": "Compatibility of the continuous-coefficient module encoding with inverse image along the étale map p_a, needed to state the descent hypothesis in its sectionwise convention; no node of the rationalization unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-module-encoding-slice-freeness",
+    "why": "Local finite freeness transfers between internal modules and their sectionwise encodings; generic tool for the convention change of step 5."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-module-encoding-lattices",
+    "why": "Converts the sectionwise lisse integral model returned by finite étale descent back to an internal lisse module with its rationalization isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-etale-local-lattice",
+  "lem-weil-pbc-etale-stratified-finite",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+  "lem-weil-pbc-continuous-module-encoding-restriction",
+  "lem-weil-pbc-continuous-module-encoding-slice-freeness",
+  "lem-weil-pbc-continuous-module-encoding-lattices"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-3000f7e7e",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-3000f7e7e (reviewer sub-agent of L); spot-checked: I read the whole delivery, its sources and every cited statement. The item's statement, stmt_deps and blueprint field are identical to the side base node, which is still unsplit. Source checks: the route follows Bhatt–Scholze 1309.1198, the first paragraph of the proof of Lemma 6.8.13 together with Proposition 6.8.4(6), Definitions 6.8.1 and 6.8.3, and Lemma 6.8.2. The stratification step matches Stacks 03S0 (lemma-etale-stratified-finite), and the split realizes the essential-surjectivity paragraph of the blueprint main-20261015 proof of thm-sfb-extend-scalars-localization. The coefficient category is the same in both frameworks: the sfb and pbc pullbacks from the point are the same sheafified Lan construction, both use internal modules, and the two topologies on the finite extension E agree. The item is not a target, so there is no base-change map to compare. Hypotheses checked: qcqs follows from topological Noetherianity, E and O_E are totally disconnected, surjectivity of each p_a holds by the residue-field argument, each stratum is Noetherian, and the finite étale descent lemma requires no descent datum. Step 6 is elementary and correct: the map is injective on charts, and the image is a submodule that is a lattice. Edge cases tested: the empty scheme, rank 0, varying ranks, a one-point scheme, and the nodal curve with no global lattice. There are no new nodes and no cycle. sk-lem-stratified-lattice is a special case, not a duplicate, and lem-weil-pbc-continuous-lisse-stratified-lattices is weaker. I repaired two missing citations (C1/E5). First, step 4 used the composition of module pullbacks U_a→U→X = U_a→S_a→X without a citation; it now cites def-sfb-module-upper-star-comp. Second, step 5's switch between internal and sectionwise modules for the descent theorem was only asserted; it now cites def-weil-pbc-continuous-coefficient-module-encoding and the three lemmas lem-weil-pbc-continuous-module-encoding-restriction, -slice-freeness and -lattices. I updated proof_deps and added those three lemmas to tool_uses. I accept the original six tool uses.; 1 file(s) fixed by the reviewer"
+ }
 }
