@@ -24,16 +24,14 @@
  ],
  "proof": [
   {
-   "text": "Supply the hypotheses of the source generic flat-resolution theorem for sheaves of modules. Construct the tensor-hom adjunction using currying of presheaf-linear maps and the sheafification adjunction. Sheafifications of free presheaves on representables form a separating family; filtered colimits are exact because the forgetful functor to sheaves of abelian groups preserves them and reflects exactness. The free presheaf on the underlying sections of a module is sectionwise free, hence tensor-flat. The monoidal sheafification adjunction transfers this flatness to its sheafification. Evaluation followed by the counit is an epimorphism, naturally in the module, giving a functorial flat resolution. All these constructions are proved locally in the Lean module, with separate object and morphism universes.",
+   "text": "Construct the tensor-hom adjunction for coefficient-universe-r sheaves of modules. Essential smallness of the site makes the local hom modules r-small; shrink these modules, transport restriction maps, and transfer their sheaf condition. Curry and uncurry presheaf-linear maps, then use sheafification to obtain the adjunction. This construction is proved locally in the Lean module and does not identify the site object, site morphism, or coefficient universes.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply the already proved generic declaration CochainComplex.exists_quasiIso_flat_kFlat, whose attachment is [lem-pc-source-module-kflat-resolution], to obtain P and p:P to G, with p a quasi-isomorphism, P termwise flat, and P categorically K-flat. Although that node describes the module-category specialization, its attached Lean theorem is generic and applies directly with the hypotheses constructed in step 1.",
-   "uses": [
-    "lem-pc-source-module-kflat-resolution"
-   ],
-   "elementary": false
+   "text": "Sheafify the free presheaf on the underlying sections of each module. Evaluation is an epimorphism and is natural, while the free presheaf is sectionwise flat. The monoidal sheafification comparison and finite-limit preservation transfer flatness to its sheafification, giving a functorial flat cover. Integer-indexed colimits of module sheaves are exact by the exact forgetful functor to sheaves of abelian groups. Apply the existing reduced left-resolution construction to the inclusion of flat modules: its resolution augmentation is a quasi-isomorphism, its terms are colimits of flat modules, and its resolution complex is categorically K-flat. Use the underlying resolution API directly rather than the wrapper that assumes a Grothendieck instance in the hom universe. These deductions and category hypotheses are proved in the item module from the source library and Mathlib.",
+   "uses": [],
+   "elementary": true
   },
   {
    "text": "Choose a flat epimorphism q_i:Q_i to G^i for every integer i. Explicitly construct D with D^i=Q_i direct-sum Q_(i-1) and differential from the first summand identically into the next second summand. Sending the second summand back to the preceding first summand is a contracting homotopy. The maps [q_i,q_(i-1) followed by d_G] define a chain map a:D to G which is epi in each degree. Set K=P direct-sum D and f=[p,a]. Inclusion and projection, together with this contracting homotopy, exhibit P and K as homotopy equivalent, and the inclusion followed by f is p. Consequently f is a quasi-isomorphism and is epi in every degree. Finite sums of flat objects are flat, so all terms of K are flat. These formulas and identities are proved directly, without a boundedness assumption.",
@@ -41,20 +39,18 @@
    "elementary": true
   },
   {
-   "text": "Categorical K-flatness descends to the homotopy category, hence transfers from P to K along the homotopy equivalence of step 3. For any acyclic Z, the map from the zero complex to Z is a quasi-isomorphism. Tensoring it on the right with K remains a quasi-isomorphism by categorical K-flatness. Its source is zero because tensoring is additive, so its target is acyclic. This is exactly the IsKFlat assertion in the statement; the right half of categorical termwise flatness is exactly the required exactness of tensorRight.",
+   "text": "Categorical K-flatness descends to the homotopy category, hence transfers to the epicified resolution along the homotopy equivalence of step 3. For an acyclic Z, the map from the zero complex to Z is a quasi-isomorphism. Tensoring it on the right with the resolution remains a quasi-isomorphism by categorical K-flatness. Its source is zero because tensoring is additive, so its target is acyclic. This is IsKFlatIndependentCoefficients. The right half of termwise categorical flatness supplies exactly the required exactFunctor assertion for tensorRight in each degree.",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-pc-source-module-kflat-resolution"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "B2",
-  "date": "2026-10-15",
-  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
-  "place": "CochainComplex.exists_quasiIso_flat_kFlat, applied to sheaves of modules using explicitly proved category hypotheses; contractible disk augmentation as in Stacks Derived Categories Tag 06XX; implements the General specialization of the resolution node."
+  "group": "J2",
+  "date": "2026-10-16",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean; lean/Sheaf/Algebra/Homology/KFlatResolutionGeneral.lean; Stacks Project Tags 06YS, 06XX, 03EK",
+  "place": "Independent-coefficient adaptation: shrink internal hom into r; use the reduced left-resolution API with exact integer-indexed colimits; contractible disk augmentation makes the map degreewise epic. All local steps are fully proved, with no split-off statements."
  },
  "mathlib_searches": [
   {
@@ -143,13 +139,13 @@
   "declarations": [
    "CochainComplex.exists_isKFlatResolutionIndependentCoefficients"
   ],
-  "statement": "theorem exists_isKFlatResolutionIndependentCoefficients {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] {R : Sheaf J CommRingCat.{r}} (G : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) : ∃ (K : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (f : K ⟶ G), CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) K ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (K.X i)) ∧ QuasiIso f ∧ (∀ i : ℤ, Epi (f.f i))",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatResolutionIndependentCoefficients.lean",
+  "statement": "theorem exists_isKFlatResolutionIndependentCoefficients\n    {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]\n    {J : GrothendieckTopology C}\n    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{r}]\n    [HasSheafify J AddCommGrpCat.{r}]\n    {R : Sheaf J CommRingCat.{r}}\n    (G : CochainComplex (SheafOfModules.{r}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) :\n    letI := SheafOfModules.isMonoidal_W_independentCoefficients R\n    ∃ (K : CochainComplex (SheafOfModules.{r}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ)\n      (f : K ⟶ G), CochainComplex.IsKFlatIndependentCoefficients K ∧\n        (∀ i : ℤ, exactFunctor _ _\n          (@MonoidalCategory.tensorRight _ _ (SheafOfModules.monoidalCategory R) (K.X i))) ∧\n        QuasiIso f ∧ (∀ i : ℤ, Epi (f.f i))",
   "branch": "newtargets-dag",
-  "by": "Q28",
-  "date": "2026-10-15",
+  "by": "J2",
+  "date": "2026-10-16",
   "existing": false,
-  "note": "§1(B), returned-delivery repair: the immutable overlay lacked IsKFlatResolutionIndependentCoefficients and server artifacts exposed the older two-universe IsKFlat. Restore the recorded canonical independent-coefficient K-flat predicates and use those names throughout the paired reduction/adjunction packet. Site universes t+1 and t and coefficient universe max u (t+1) remain independent; all tensor formulas, universal properties and mathematical hypotheses are preserved.",
-  "file": "lean/Sheaf/Algebra/Homology/KFlatResolutionIndependentCoefficients.lean"
+  "note": "Proof of the existing independent-coefficient theorem, with its signature and all four conclusions unchanged. The previous attachment text mentioned IsKFlat and IsFlatOnSite instead of the live IsKFlatIndependentCoefficients and exactFunctor clauses; this metadata now quotes the live signature. All added helpers are private and proved."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
@@ -160,13 +156,13 @@
   "note": "Reviewed node, source, dependencies, Lean declarations, edge cases, docstrings, searches, and all nine scompile.py checks; no findings."
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-cb8de",
-  "group": "B2",
+  "reviewer": "X-0a427",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261015T154150-L-158307",
+  "landing": "20261016T054837-L-157689",
   "kind": "interface",
-  "note": "independent Codex review: Unchanged General theorem signature and four conclusions matched the delivered proof and recorded route; compilation is clean and axioms are exactly propext, Classical.choice, Quot.sound."
+  "note": "independent Codex review: Delivered module, node, change record, and report matched against the packet and clone; compilation passed, all 18 direct importers compiled with the delivered interface, and the axiom probe found only propext, Classical.choice, and Quot.sound."
  }
 }
