@@ -3,17 +3,18 @@
  "blueprint": {
   "is": "def-weil-exceptional-inverse-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Exceptional inverse image notation",
- "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal\nO_E$ and uniformizer $\\varpi_E$, and an integer $n\\in\\mathbf Z_{\\geq1}$, with\n$A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $S$ be a scheme on which $\\ell$ is\ninvertible, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $S$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $S$-morphism; in every use of this blueprint $S=\\Spec k$\nwith $k$ a field, so that $X$ and $Y$ are Noetherian. *No ambient datum is\nassumed.* Let $f^{\\times}:D(Y_{\\mathrm{et}},A)\\to D(X_{\\mathrm{et}},A)$ be the\nright adjoint of the etale compact-support functor\n$Rf^{\\mathrm{et}}_!=Rp_{\\mathrm{et},*}j^{\\mathrm{et}}_!$ attached to a\ncompactification, which exists unconditionally by Brown representability on\nthe ordinary etale derived categories of the Noetherian schemes $X,Y$ (the\netale exceptional adjoint, thm-amb-etale-exceptional-adjoint of the smooth\nduality chapter). Use finite-torsion constructibility\n[def-weil-finite-torsion-constructibility] and the compact-support direct image\n[def-compact-support-direct-image-detailed]. On the small pro-etale sites\n[def-weil-pbc-proetale-site], with $\\nu_X,\\nu_Y$ the comparison morphisms\n[def-weil-pbc-site-comparison-morphism], *define*\n\n$$\n Rf_n^!:=\\nu_X^*\\,f^{\\times}\\,R\\nu_{Y,*}:\n D^+(Y_{\\mathrm{proet}},A_{E,n})\\longrightarrow D^+(X_{\\mathrm{proet}},A_{E,n}),\n$$\n\nthe etale right adjoint transported along the etale/pro-etale comparison;\non $D^b_c(Y,A_{E,n})$, every object of which is of etale origin,\n$L\\cong\\nu_Y^*G$, this is $Rf_n^!L=\\nu_X^*f^{\\times}G$, and one restricts to\n\n$$\n Rf_n^!:D^b_c(Y,A_{E,n})\\longrightarrow D^b_c(X,A_{E,n}).\n$$\n\nFor $\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$, use respectively derived inverse\nlimits, rationalization, and the common-stage construction\n[def-weil-algebraically-closed-coefficients] of the compatible finite-level\nfunctors, and define\n\n$$\n Rf^!:D^b_c(Y,\\Lambda)\\longrightarrow D^b_c(X,\\Lambda).\n$$\n\nFor $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_c(Y,\\Lambda)$, characterize the\nresulting functor by the natural adjunction isomorphisms\n\n$$\n \\Hom_Y(Rf_!K,L)\\cong\\Hom_X(K,Rf^!L).\n$$\n\nThe two defining properties of this functor are theorems, not hypotheses.\nThe adjunction isomorphism holds for every bounded-below $K$ of etale origin\n(in particular every $K\\in D^b_c(X,A_{E,n})$) and every bounded-below $L$,\nwith units and counits compatible with refinements of the compactification:\nthis is thm-sf-ambient-adjoint-class (the etale adjunction transported by the\ncompact-support comparison and the full faithfulness of $\\nu^*$ on $D^+$).\nThe displayed typing — that $Rf_n^!$ carries $D^b_c(Y,A_{E,n})$ into\n$D^b_c(X,A_{E,n})$, and finite-Tor objects\n[def-weil-finite-tor-amplitude] into finite-Tor objects, with explicit bounds\n$[a,b]\\mapsto[a-2D,b+2\\dim Y+1]$ independent of $n$ — is\nthm-sf-preservation-class, proved by localizing on affine charts and composing\nthe closed-immersion and smooth cases; the primary source for the\npreservation of constructibility and of finite Tor dimension with the\nnon-regular coefficient rings $\\mathcal O_E/\\varpi_E^n$ is Zheng,\narXiv:1006.3810, Prop. 2.29(2), 3.16, 3.21 and Lemma 3.18. These are the\nanalogues, for the constructible functor, of clauses (2) and (3) of\n[def-weil-exceptional-adjoint-admissibility], and the stage-independence of the\nconstants is what makes the normalized systems of the integral stage well\ndefined.\n\n*Relation to the ambient datum.* The ambient exceptional right adjoint datum\n[def-weil-ambient-exceptional-adjoint] is *not* assumed anywhere in this\ndefinition, and it is false in general: for the structure morphism of an\nelliptic curve over $\\overline{\\mathbf F}_p$ with $A=\\mathbf F_r$ the functor\n$Rf_*=Rf_!$ has no right adjoint on $D(X_{\\mathrm{proet}},A)$, nor on $D^+$\n(rem:sf-ambient-counterexample in the six-functors chapter). When the datum\nhappens to hold together with the preservation clauses of\n[def-weil-exceptional-adjoint-admissibility], the restriction of the ambient\n$Rf_n^{\\times}$ to $D^b_c(Y,A_{E,n})$ agrees with $Rf_n^!$ by uniqueness of\nadjoints; no statement of this blueprint needs this.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal\nO_E$ and uniformizer $\\varpi_E$, and an integer $n\\in\\mathbf Z_{\\geq1}$, with\n$A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Use the global finite-field datum [def-weil-finite-field-fiber], with\n$k$ the fixed algebraic closure of the finite field of characteristic $p$\nand $\\ell\\ne p$, and put $S=\\Spec k$. Let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $S$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $S$-morphism. Thus $X,Y$ are Noetherian [lem-weil-pbc-finite-type-over-noetherian]; the\nNoetherian assertion is made in this field-base setting, not for an arbitrary\nbase on which $\\ell$ is invertible. *No ambient datum is\nassumed.* Let $f^{\\times}:D(Y_{\\mathrm{et}},A)\\to D(X_{\\mathrm{et}},A)$ be the\nright adjoint of the etale compact-support functor\n$Rf^{\\mathrm{et}}_!=Rp_{\\mathrm{et},*}j^{\\mathrm{et}}_!$ attached to a\ncompactification, which exists unconditionally by Brown representability on\nthe ordinary etale derived categories of the Noetherian schemes $X,Y$ (the\netale exceptional adjoint [thm-amb-etale-exceptional-adjoint]). Use finite-torsion constructibility\n[def-weil-finite-torsion-constructibility] and the compact-support direct image\n[def-compact-support-direct-image-detailed]. On the small pro-etale sites\n[def-weil-pbc-proetale-site], with $\\nu_X,\\nu_Y$ the comparison morphisms\n[def-weil-pbc-site-comparison-morphism], *define*\n\n$$\n Rf_n^!:=\\nu_X^*\\,f^{\\times}\\,R\\nu_{Y,*}:\n D^+(Y_{\\mathrm{proet}},A_{E,n})\\longrightarrow D^+(X_{\\mathrm{proet}},A_{E,n}),\n$$\n\nthe etale right adjoint transported along the etale/pro-etale comparison.\nIts bounded-below domain is justified independently of the restriction:\nfor $L\\in D^{\\geq a}(Y_{\\mathrm{et}},A_n)$, place $L$ at all levels\n$m\\geq n$ by restriction of scalars $A_m\\to A_n$, with identity\ntransitions, and put zero at levels $m<n$. This is a bounded-below\ncoefficient system. The uniform lower-bound assertion of\n[lem-pur-etale-coefficient-system-adjoint], followed by evaluation at\n$n$, puts $f_n^\\times L$ in $D^{\\geq a-c_f}$. Derived direct image\n$R\\nu_{Y,*}$ preserves a lower bound and $\\nu_X^*$ is exact, so the\nfinite composite indeed has the displayed $D^+$ typing;\non $D^b_c(Y,A_{E,n})$, every object of which is of etale origin\n[lem-sf-proetale-constructible-origin], $L\\cong\\nu_Y^*G$, the unit\n$G\\xrightarrow{\\sim}R\\nu_{Y,*}\\nu_Y^*G$\n[thm-weil-pbc-site-comparison] identifies this value with\n$\\nu_X^*f^{\\times}G$. The ambient composite is defined first; its constructible preservation is\nthe separate property explained below, permitting the restriction\n\n$$\n Rf_n^!:D^b_c(Y,A_{E,n})\\longrightarrow D^b_c(X,A_{E,n}).\n$$\n\nFor integral coefficients use $R_T=\\widehat{\\mathcal O}_{E,T}$\n[def-weil-completed-integral-coefficients] and the category\n[def-weil-derived-complete-integral-detailed]. The integral construction is\nmade on derived categories of actual coefficient systems, before asserting\nits constructible typing. Write $\\mathsf S_A(T_\\tau)$, for\n$\\tau\\in\\{\\mathrm{et},\\mathrm{proet}\\}$, for the abelian category of strict\nsystems of $(A_n)_T$-modules of\n[lem-pur-coefficient-system-derived-comparison].\n\nThere is a derived reduction functor\n$$\\mathcal R_Y:D(\\operatorname{Mod}(R_Y))\\longrightarrow\nD(\\mathsf S_A(Y_{\\mathrm{proet}})).$$\nCompute it from one K-flat representative $P$ with flat terms [lem-pc-kflat-resolution]\nby the strict system $P\\otimes_{R_Y}(A_n)_Y$, with transitions\n$1\\otimes(A_{n+1}\\to A_n)$, as in\n[def-weil-integral-derived-reduction, def-weil-integral-reduction-tower].\nThis is a functor to the derived category of systems: termwise tensor\nrespects shifts, cones and chain homotopies; a quasi-isomorphism between\nK-flat representatives becomes a quasi-isomorphism at every level\n[lem-pur-derived-change-of-rings], hence of systems since their cohomology\nis levelwise. The resolving-class theorem\n[lem-pur-left-derived-from-kflat-class] therefore gives this functor and\nits action on morphisms independently of the representative. It is\nnormalized: $P\\otimes_{R_Y}(A_m)_Y$ is K-flat with flat\nterms over $(A_m)_Y$ by\n[lem-weil-pbc-ringed-topoi-derived-tensor-pullback], so ordinary further\ntensor computes its derived reduction. At $m\\geq n$ the balancing\nisomorphism sends $(x\\otimes b)\\otimes a$ to\n$x\\otimes q_{m,n}(b)a$, with inverse\n$x\\otimes a\\mapsto(x\\otimes1)\\otimes a$.\nFor $r\\geq m\\geq n$, the two successive balancing maps send\n$((x\\otimes b)\\otimes c)\\otimes a$ to\n$x\\otimes q_{r,n}(b)q_{m,n}(c)a$, which is also the direct\nbalancing map after tensor reassociation, since\n$q_{m,n}q_{r,m}=q_{r,n}$. This proves the quotient cocycle;\napplying a chain map to $x$ commutes with both formulas, proving naturality. This is also the construction\nof [def-weil-pbc-adic-coefficient-datum], retaining the finite-level\nmodule actions instead of immediately forgetting them.\n\nLet $G_{f,A}$ be the ordinary etale right adjoint on the derived category\nof coefficient systems supplied by\n[lem-pur-etale-coefficient-system-adjoint], with evaluation\n$e_nG_{f,A}\\cong f_n^\\times e_n$. Apply the derived comparison of systems\n[lem-pur-coefficient-system-derived-comparison] and form the functor\n$$\\mathcal T_f=\\nu_{X,A}^*\\,G_{f,A}\\,R\\nu_{Y,A,*}\\,\\mathcal R_Y.\n$$\nLet $U_X:\\mathsf S_A(X_{\\mathrm{proet}})\\to\n\\operatorname{Tow}_{R_X}(X)$ forget to the strict system of $R_X$-modules\nby the projections $R_X\\to(A_n)_X$\n[def-weil-integral-derived-restriction-of-scalars,\ndef-weil-pbc-adic-coefficient-datum]. This functor is exact, since its\nkernels and cokernels have the same underlying sheaves levelwise, so\ntermwise application induces $DU_X$ on derived categories\n[lem-sf-exact-functor-derived-triangulated]. Define the integral functor by\n$$ Rf^!_{\\mathcal O_E}=R\\varprojlim\\circ DU_X\\circ\\mathcal T_f.\n$$\nHere the inverse limit is the functor on $D(\\operatorname{Tow}_{R_X}(X))$\ncomputed by a K-injective tower resolution followed by termwise inverse\nlimit [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. In particular its\ninput is an actual derived strict tower and every arrow is the image of an\narrow under the displayed composite of functors. This does not require a\nlift of a diagram given only in the ordinary derived category.\n\nEvaluation gives, naturally in $L$,\n$$e_n\\mathcal T_fL\\cong\\nu_X^*f_n^\\times R\\nu_{Y,*}L_n=Rf_n^!L_n,\n\\qquad L_n=L\\otimes^L_{R_Y}(A_n)_Y.$$\nThus the object formula is\n$$Rf^!_{\\mathcal O_E}L=R\\varprojlim_n\\operatorname{Res}_n(Rf_n^!L_n).$$\nFor integral constructible $L$, its reductions are uniformly bounded below\nand of etale origin [def-weil-derived-complete-integral-detailed,\nlem-sf-proetale-constructible-origin]. The last clause of\n[lem-pur-coefficient-system-derived-comparison] shows that\n$R\\nu_{Y,A,*}\\mathcal R_YL$ is a bounded-below normalized system.\n[lem-pur-etale-coefficient-system-adjoint] then supplies its normalized\nexceptional image; exact inverse image preserves normalization. The\nresult, including $DU_X\\mathcal T_fL$ as its coherent realization, is a\nnormalized tower in [def-coef-normalized-dvr-tower]. The effectivity\nstatement [lem-coef-normalized-dvr-effectivity] supplies its integral\nreductions and derived completeness. Its finite-level constructibility\nand common bounds follow from the locality argument below; consequently\nthe integral value lies in $D^b_c(X,\\mathcal O_E)$. This constructs the\nintegral functor without using lem-coef-finite-exceptional or\nprop-coef-integral-exceptional-adjoint as premises. Those downstream\nstatements describe its duality, adjunction and coefficient comparisons.\nIn particular [lem-coef-integral-residue-tor] puts the reductions of an\nintegral input in the finite-Tor domain of the former comparison.\n\nFor $E$-coefficients pass to scalar localization\n[def-weil-rationalization-karoubi]: on an integral representative use\n$Rf^!_{\\mathcal O_E}$, and on a localized morphism $u\\otimes a$ use\n$Rf^!_{\\mathcal O_E}(u)\\otimes a$. For $\\Qlb$-coefficients use the\ncommon-stage category [def-weil-algebraically-closed-coefficients]: send\n$(E,L)$ to $(E,Rf_E^!L)$ and a morphism represented over a common finite\nextension $F$ to its image under $Rf_F^!$, using the scalar comparisons of\n[lem-pur-etale-coefficient-system-adjoint] on the coefficient systems to\nidentify the source and target. Indeed $\\mathcal O_F/\\varpi_E^n\\mathcal O_F$\nis finite free over $A_{E,n}$; the displayed system comparison is coherent\nin successive field extensions. Such finite-free tensor commutes with\nfinite direct sums, and hence with the derived limit here (as a functor\nit is a finite direct sum after choosing a basis); the subsequence of\npowers $\\varpi_F^{e(F/E)n}$ is cofinal. More explicitly, after forgetting\nto fixed completed coefficients the subsequence functor on strict towers\nhas an exact left adjoint that repeats the n-th object in the finite\nblock preceding its selected index. It therefore preserves K-injective\ncomplexes: a map into its image from an acyclic complex is adjoint to a\nmap from the acyclic repeated-block complex, hence is null homotopic.\nThe ordinary inverse limits of a tower and this subsequence agree by\ncompatible families, so their K-injective computations of derived limit\nagree naturally as well. The natural comparisons therefore\npass to the integral functors and then their scalar localizations. The\ncommon-stage map is consequently independent of its representative.\nlem-coef-rational-operations is a downstream identification of these\noperations, rather than the construction premise for their map action.\nThus for $\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$ define\n\n$$\n Rf^!:D^b_c(Y,\\Lambda)\\longrightarrow D^b_c(X,\\Lambda).\n$$\n\nFor $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_c(Y,\\Lambda)$, characterize the\nresulting functor by the natural adjunction isomorphisms\n\n$$\n \\Hom_Y(Rf_!K,L)\\cong\\Hom_X(K,Rf^!L).\n$$\n\nThe two defining properties of this functor are theorems, not hypotheses.\nThe adjunction isomorphism holds for every bounded-below $K$ of etale origin\n(in particular every $K\\in D^b_c(X,A_{E,n})$) and every bounded-below $L$,\nwith units and counits compatible with refinements of the compactification:\nat the finite coefficient stage this is [thm-sf-ambient-adjoint-class] (the etale adjunction transported by the\ncompact-support comparison and the full faithfulness of $\\nu^*$ on $D^+$).\nThe constructible typing and finite-Tor preservation\n[def-weil-finite-tor-amplitude] are properties of\nthe ambient finite formula already defined above. We establish these properties directly from ordinary etale closed-support\nand smooth-purity statements, before restricting the functor. The downstream\nthm-sf-preservation-class is not a prerequisite. For arbitrary $Y$ here,\ntake a finite affine open cover $v_i:V_i\\hookrightarrow Y$ and\nput $u_i:X_i=f^{-1}(V_i)\\hookrightarrow X$ and $f_i:X_i\\to V_i$.\nThe needed target restriction of the ordinary etale adjoint follows from\nthe existing statements, not from source locality alone. For a\nbounded-below $H$ on $X_i$ and $L$ on $Y$, the successive adjunctions give\n$$\n\\begin{aligned}\n\\operatorname{Hom}(H,u_i^*f_n^\\times L)\n&=\\operatorname{Hom}(u_{i,!}H,f_n^\\times L)\\\\\n&=\\operatorname{Hom}(Rf_{!,n}^{\\mathrm{et}}u_{i,!}H,L)\\\\\n&=\\operatorname{Hom}(v_{i,!}Rf_{i,!,n}^{\\mathrm{et}}H,L)\\\\\n&=\\operatorname{Hom}(Rf_{i,!,n}^{\\mathrm{et}}H,v_i^*L)\\\\\n&=\\operatorname{Hom}(H,f_{i,n}^\\times v_i^*L).\n\\end{aligned}\n$$\nThe exact derived open-extension adjunction is stated in\n[lem-amb-etale-adjoint-locality], the middle compact-support composition\nisomorphism is [lem-amb-etale-compact-comparisons] applied to\n$f u_i=v_i f_i$, and the remaining adjunctions are\n[thm-amb-etale-exceptional-adjoint]. These are natural bijections, so the\ntwo bounded-below representing objects are canonically isomorphic.\nOn constructible inputs, use their etale origins and\n[lem-sf-proetale-constructible-origin] to read the restrictions on the\npro-etale site: restriction of $\\nu_X^*H$ to $X_i$ is\n$\\nu_{X_i}^*(H|_{X_i})$, since both are sheafification of the same\nrestricted inverse-image presheaf in\n[def-weil-pbc-site-comparison-morphism], and these inverse images are exact.\nIn particular the value of the already defined ambient\ncomposite restricts to the corresponding finite composite for $f_i$.\nHere is the ordinary etale preservation argument on each such target open,\nusing only prerequisites which do not refer to this definition. Finite type\nand [lem-weil-pbc-finite-type-over-noetherian] make $Y$, $X$, and their\nopen subschemes Noetherian [lem-weil-pbc-noetherian-open-subscheme-noetherian]. By [def-weil-finite-type-morphism], choose a\nfinite affine cover $V_i=\\operatorname{Spec}B_i$ of $Y$ and a finite\ncover of $X_i$ by affine $U=\\operatorname{Spec}C$. Each $C$ is a finitely\ngenerated $B_i$-algebra by [lem-weil-pbc-lft-affine-pairs]. Choose generators\n$c_1,\\ldots,c_{d_U}$. The surjection $B_i[t_1,\\ldots,t_{d_U}]\\to C$,\n$t_r\\mapsto c_r$, gives a closed immersion\n$i_U:U\\hookrightarrow P_U=\\mathbf A^{d_U}_{V_i}$, by\n[def-weil-closed-immersion, def-sbc-affine-space]. Write\n$\\pi_U:P_U\\to V_i$ and $s_U:U\\hookrightarrow X_i$, so that\n$f_i s_U=\\pi_U i_U$. Discard empty $U$ and empty $V_i$.\nAll these schemes are Noetherian, and the open complements in $P_U$\nare quasi-compact. The projections are smooth of pure relative dimension\n$d_U$ [sbc-lem-affine-space-smooth]. They are separated and finite type;\nNagata [thm-nagata-compactification] supplies the compactifications needed\nfor their ordinary etale adjoints.\n\nSet $e_i=\\dim V_i$. These are finite nonnegative integers on nonempty\ncharts [lem-kun-dimension-finite-type]. The Noetherian polynomial-dimension\nformula [lem-sf-noetherian-polynomial-dimension] and its identification\nwith scheme dimension [lem-weil-pbc-spec-topological-krull-dimension-ring]\ngive $\\dim P_U=e_i+d_U$. For the complementary open\n$j_U:W_U\\hookrightarrow P_U$, open-subspace dimension monotonicity\n[lem-weil-pbc-open-subspace-dimension-monotone] gives\n$\\dim W_U\\leq e_i+d_U$. Thus\n[lem-sf-etale-direct-image-vanishing] gives\n$$R^qj_{U,*}M=0\\quad(q>c_U),\\qquad c_U=2(e_i+d_U),$$\nfor every ordinary etale $A_n$-module sheaf $M$.\nFor a constructible sheaf $F$ on $W_U$, placed in degree zero,\n[thm-dg-finite-type-constructibility] says that $Rj_{U,*}F$ has\nconstructible cohomology, so every $R^qj_{U,*}F$ is constructible.\nHere $W_U$ and $P_U$ are finite type over $k$ and $A_n$ is finite and\nannihilated by a power of $\\ell$ invertible in $k$. These are precisely\nthe two hypotheses needed for [lem-exc-closed-amplitude] and\n[prop-exc-closed-tor]. Consequently the ordinary etale closed adjoint\n$i_U^\\times$ carries constructible cohomological intervals $[r,t]$\ninto $[r,t+c_U+1]$, and it carries bounded constructible inputs of Tor\namplitude $[r,t]$ into bounded constructible outputs of Tor amplitude\n$[r,t+c_U+1]$. Indeed choose the compactification\n$U\\xrightarrow{\\mathrm{id}}U\\xrightarrow{i_U}P_U$ in\n[def-amb-etale-compact-support]; its compact-support functor is\n$Ri_{U,*}=i_{U,*}$ by [lemma-weil-pbc-finite-direct-image-exact] and\n[lem-weil-pbc-closed-immersion-finite]. Thus the adjoint of\n[thm-amb-etale-exceptional-adjoint] is exactly the ordinary closed\nadjoint used in those two bound statements, by its natural Hom bijections.\nThe Tor statement is taken from the theorem, not inferred by tensoring\nan unproved projection-formula triangle.\n\nBy [thm-asd-smooth-tensor], the ordinary etale adjoint of $\\pi_U$ is\n$$\\pi_U^\\times L\\cong\\pi_U^*L\\otimes_{A_n}L_U[2d_U],$$\nwhere $L_U$ is an etale locally constant free rank-one $A_n$-sheaf.\nPullback preserves finite locally constant sheaves and their finite\nstratifications [lemma-constructible-pullback-stratification,\nlemma-constructible-pullback-constant]; it is exact\n[prop-weil-pbc-inverse-image-modules-exact]. Tensor by $L_U$ is locally\ntensor by $A_n$, hence exact, and preserves finite locally constant\nstrata after intersecting the finitely many input strata. Thus on\nbounded constructible inputs the cohomological interval changes from\n$[a,b]$ to $[a-2d_U,b-2d_U]$. For Tor bounds use\n[lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; on any slice, the\ninverse-image functor is exact and tensor by the displayed rank-one\nline has exact inverse given by its dual line. The Tor interval is\ntherefore also shifted by $-2d_U$. Equivalently test after restriction\nto opens trivializing $L_U$, where this is the shift of the pullback\nof a flat model [lem-sf-flat-model].\n\nFor completeness the required adjoint-composition identification is made\nbefore the constructible restriction. For $H\\in D^+(U_{\\mathrm{et}},A_n)$\nand $L\\in D^+(V_{i,\\mathrm{et}},A_n)$, the open adjunction and compact-support\ncomposition [lem-amb-etale-adjoint-locality,\nlem-amb-etale-compact-comparisons] give natural bijections\n$$\\begin{aligned}\n\\operatorname{Hom}(H,s_U^*f_i^\\times L)\n&\\cong\\operatorname{Hom}(s_{U,!}H,f_i^\\times L)\\\\\n&\\cong\\operatorname{Hom}(Rf_{i,!}s_{U,!}H,L)\\\\\n&\\cong\\operatorname{Hom}(R\\pi_{U,!}i_{U,*}H,L)\\\\\n&\\cong\\operatorname{Hom}(H,i_U^\\times\\pi_U^\\times L).\n\\end{aligned}$$\nThe last line uses the two ordinary etale adjunctions\n[thm-amb-etale-exceptional-adjoint, lem-exc-closed-ambient]. Both\nrepresenting objects are bounded below: the ordinary finite adjoints\npreserve a lower bound up to a finite shift, and for the right hand\nobject this also follows from smooth purity and the closed-support\nbound. Hence Yoneda in $D^+$ identifies them. On a bounded constructible\ninput the bounds just proved for smooth then closed give\n$$s_U^*f_i^\\times L\\in D_c^{[a-2d_U,\\,b-2d_U+c_U+1]}\n   =D_c^{[a-2d_U,\\,b+2e_i+1]}.$$\nFor a bounded constructible input with Tor interval $[a,b]$, exactly the\nsame interval is a Tor bound by [prop-exc-closed-tor]. No previously\nrestricted exceptional functor is used in this calculation.\n\nFor nonempty $X_i$, put $D_i=\\max_{U\\subset X_i}d_U$. The finitely many\nsource charts give the common interval $[a-2D_i,b+2e_i+1]$ for $f_i^\\times$.\nCohomology vanishing is detected on an open cover. To glue constructibility,\norder this finite source cover, intersect each local finite stratification\nwith $U\\setminus\\bigcup_{U'\\text{ earlier}}U'$, and use the resulting\nfinite locally closed constructible pieces. Their locally constant finite\nmodule descriptions are inherited from the local stratifications. For\nTor amplitude restrict a tensor with an arbitrary degree-zero module\nsheaf to these opens; restriction commutes with derived tensor by\n[lem-weil-pbc-ringed-topoi-derived-tensor-pullback], so vanishing is\nagain detected locally. The site comparison preserves constructibility\n[lem-sf-proetale-constructible-origin] and preserves and reflects the\nsame Tor interval [lem-sf-comparison-tor-amplitude]. It therefore gives\nthese bounds for the finite composite on $X_i$ as well.\n\nThe target-open Hom calculation above now applies for arbitrary $Y$.\nFor input interval $[a,b]$, take the minimum of the finitely many lower\nendpoints $a-2D_i$ and the maximum of the upper endpoints $b+2e_i+1$.\nRepeat the source-cover gluing argument for the finite cover $(X_i)$.\nThis proves bounded constructible typing and finite-Tor preservation\nwithout separatedness of $Y$. Every chart integer, dimension and bound\nis independent of $n$. Thus the same intervals apply to all reductions\nof an integral input, which is the missing boundedness and\nconstructibility premise needed for the integral restriction above.\nEmpty charts are discarded, and for empty $X$ all outputs are zero.\nFor nonempty $Y$ the dimension bound is finite, and\n$e_i\\leq\\dim Y$ by open-subspace dimension monotonicity. With\n$D=\\max_iD_i$ the displayed uniform bound can consequently be widened to\n$$[a,b]\\longmapsto[a-2D,b+2\\dim Y+1].$$\nFor empty $Y$ also $X$ is empty; no dimension of an empty scheme or\nmaximum over an empty cover is needed.\n\nThis is the ordinary etale smooth/closed route in Zheng,\narXiv:1006.3810, Proposition 3.16(2) and Proposition 2.29(2), made\nexplicit using the existing bound statements. It supplies an acyclic\nprerequisite for the restriction. The named thm-sf-preservation-class\nis only a downstream summary of these properties; it is not applied.\nThe conclusions are the analogues of clauses (2) and (3) of\n[def-weil-exceptional-adjoint-admissibility]. Normalization and the\ncoherent realization of the integral output are supplied by the system\nconstruction before its inverse limit, as above.\n\n*Relation to the ambient datum.* The ambient exceptional right adjoint datum\n[def-weil-ambient-exceptional-adjoint] is *not* assumed anywhere in this\ndefinition, and it is false in general: for the structure morphism of an\nelliptic curve over $\\overline{\\mathbf F}_p$ with $A=\\mathbf F_r$ and $r\\ne p$ the functor\n$Rf_*=Rf_!$ has no right adjoint on $D(X_{\\mathrm{proet}},A)$, nor on $D^+$\n(rem:sf-ambient-counterexample in the six-functors chapter). At a finite coefficient stage, the optional ambient datum is attached to a\nchosen compactification $c=(j,p)$: its right adjoint $G_c$ is adjoint to\n$F_c=Rp_*j_!$ on the ordinary unbounded pro-etale derived categories.\nIts comparisons for every refinement, including their unit, counit,\nidentity and composition equations, are part of that datum; they are not\ninferred by extending an etale-origin comparison to all ambient inputs.\nSuppose that datum holds and that this same $G_c$ satisfies clauses (2)\nand (3) of [def-weil-exceptional-adjoint-admissibility]. Clause (2), with\nits signed bounds and zero-interval convention, puts $G_cL$ in $D^b_c(X,A)$\nfor every $L\\in D^b_c(Y,A)$. For such $L$ and every\n$K\\in D^b_c(X,A)$ compare the natural bijections\n$$\n \\operatorname{Hom}_X(K,G_cL)\n \\cong\\operatorname{Hom}_Y(F_cK,L)\n \\cong\\operatorname{Hom}_X(K,Rf_n^!L).\n$$\nThe first is the assumed adjunction of the ambient datum. For the second,\n$F_cK=Rf_{!,n}K$ at the same chosen compactification\n[def-compact-support-direct-image-detailed], and the bounded-below\netale-origin adjunction is [thm-sf-ambient-adjoint-class]; bounded\nconstructible $K$ has that origin by [lem-sf-proetale-constructible-origin].\nBoth representing objects are in the full category $D^b_c(X,A)$, so\nYoneda identifies them naturally in $L$. Clause (3) restricts this\nidentification further to $D^b_{ctf}$. This conditional identification at\nfinite coefficients asserts neither the ambient datum nor its additional\nintegral or scalar-extension compatibility requirements; none is a premise\nof the construction above, and no statement of this blueprint needs the\nconditional identification.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-exceptional-inverse-image.md",
   "place": "node def-weil-exceptional-inverse-image, order 1489"
  },
  "stmt_deps": [
   "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
   "def-weil-finite-torsion-constructibility",
   "def-compact-support-direct-image-detailed",
   "def-weil-pbc-proetale-site",
@@ -21,14 +22,164 @@
   "def-weil-algebraically-closed-coefficients",
   "def-weil-finite-tor-amplitude",
   "def-weil-exceptional-adjoint-admissibility",
-  "def-weil-ambient-exceptional-adjoint"
+  "def-weil-ambient-exceptional-adjoint",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-sf-ambient-adjoint-class",
+  "def-weil-integral-derived-reduction",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-finite-field-fiber",
+  "lem-sf-proetale-constructible-origin",
+  "thm-weil-pbc-site-comparison",
+  "def-weil-integral-reduction-tower",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-integral-derived-restriction-of-scalars",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-sbc-affine-space",
+  "lem-coef-integral-residue-tor",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-closed-immersion",
+  "sbc-lem-affine-space-smooth",
+  "thm-nagata-compactification",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-sf-etale-direct-image-vanishing",
+  "thm-dg-finite-type-constructibility",
+  "lem-exc-closed-amplitude",
+  "prop-exc-closed-tor",
+  "def-amb-etale-compact-support",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-closed-immersion-finite",
+  "thm-asd-smooth-tensor",
+  "lemma-constructible-pullback-stratification",
+  "lemma-constructible-pullback-constant",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-flat-model",
+  "lem-exc-closed-ambient",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constructible exceptional inverse image functor on pro-etale derived categories",
+   "results": "AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.etaleTopology; no exceptional inverse-image declaration",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, DerivedCategory, Adjunction",
+   "results": "0 hits; loogle reported unknown identifier 'Adjunction'",
+   "date": "2026-10-16",
+   "verdict": "query error; repeated with the valid qualified CategoryTheory.Adjunction query"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional inverse image|rightDerivedUpperShriek",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exceptional inverse image functor transported from etale to pro-etale via comparison",
+   "results": "service unavailable",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint to compact support derived functor on constructible sheaves",
+   "results": "CondensedSet.compactlyGeneratedAdjunction; LightCondSet.LocallyConstant.adjunction; CompHausLike.LocallyConstant.adjunction; no relevant declaration",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightAdjoint, CategoryTheory.Adjunction",
+   "results": "0 hits; loogle reported unknown identifier 'Functor.rightAdjoint'",
+   "date": "2026-10-16",
+   "verdict": "query error; repeated with the valid qualified CategoryTheory.Adjunction query"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriek",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right adjoint transported along etale proetale comparison",
+   "results": "service unavailable",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck duality extraordinary pullback of sheaves",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback; CategoryTheory.Functor.sheafPullback; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; TopCat.Sheaf.pullbackPushforwardAdjunction; SheafOfModules.pullback; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullbackIso",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Adjunction\"",
+   "results": "CategoryTheory.Adjunction.id; CategoryTheory.Adjunction.instInhabitedId; CategoryTheory.Adjunction; CategoryTheory.Adjunction.CoreHomEquiv; CategoryTheory.Adjunction.CoreHomEquivUnitCounit; CategoryTheory.Adjunction.CoreUnitCounit; CategoryTheory.Adjunction.instIsLeftAdjointLeftAdjoint; CategoryTheory.Adjunction.instIsRightAdjointRightAdjoint",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extraordinary|upperShriek|UpperShriek|exceptionalInverse",
+   "results": "Mathlib/Geometry/Manifold/Bordism.lean; Mathlib/Geometry/Manifold/Bordism.lean",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|UpperShriek|extraordinary|exceptional",
+   "results": "Mathlib/Probability/CondVar.lean; Mathlib/LinearAlgebra/Transvection/Generation.lean; Mathlib/LinearAlgebra/Transvection/Generation.lean; Mathlib/LinearAlgebra/Transvection/Generation.lean; Mathlib/LinearAlgebra/Transvection/Generation.lean; Mathlib/LinearAlgebra/Transvection/Generation.lean; Mathlib/LinearAlgebra/Matrix/Cartan.lean; Mathlib/LinearAlgebra/Matrix/Cartan.lean; ordinary sheaf adjunctions or unrelated uses of exceptional, not extraordinary inverse image",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Adjunction\", \"Sheaf\"",
+   "results": "CategoryTheory.Adjunction.sheafPushforwardContinuous; CategoryTheory.Adjunction.sheafPushforwardContinuous_counit_app_hom_app; CategoryTheory.Adjunction.sheafPushforwardContinuous_unit_app_hom_app; ordinary sheaf adjunctions or unrelated uses of exceptional, not extraordinary inverse image",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extraordinary inverse image right adjoint of derived pushforward with proper support",
+   "results": "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pushforwardPushforwardAdj; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso; CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify; CategoryTheory.Functor.sheafAdjunctionCocontinuous; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.pullbackPushforwardAdjunction; ordinary sheaf adjunctions or unrelated uses of exceptional, not extraordinary inverse image",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -90,5 +241,21 @@
   "group": "NY",
   "result": "pass",
   "note": "Statement, dependencies, declarations, universes, edge cases, canonical maps, report sections, and compiler evidence checked; no findings."
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-weil-exceptional-inverse-image",
+  "worker": "stage1",
+  "summary": "Repair C1/C6 and D4: removed the use of thm-sf-preservation-class as a construction prerequisite. Derived ordinary etale preservation directly from existing acyclic closed-support amplitude/Tor lemmas, finite-type direct-image constructibility and vanishing, and ordinary smooth purity. Wrote the natural Hom identifications for source charts, the interval calculation, and source/target finite-cover assembly before restricting the finite and integral functors. Kept the two independently sourced system prerequisites and all coefficient categories and inputs. The downstream summary theorem is expressly a pointer, never an applied premise.",
+  "blueprint": "Unit sk-def-sf-operations clause (vi), finite transported adjoint followed by normalized systems and coefficient passage. The preservation paragraph of blueprint order 1489 explicitly calls for affine charts and composition of closed-immersion and smooth cases. The replacement writes that route below the constructible notation, avoiding the downstream theorem which already names that notation. The two existing new system nodes realize the adic paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N6-c37c52489",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-c37c52489 (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full; source checks, edge cases, dependency checks, and exact master target comparisons are recorded in review.md. Supplied corrected JSON files completing metadata for both new nodes. Statements and dependencies are unchanged; no mathematical blocker found.; 2 file(s) fixed by the reviewer"
  }
 }
