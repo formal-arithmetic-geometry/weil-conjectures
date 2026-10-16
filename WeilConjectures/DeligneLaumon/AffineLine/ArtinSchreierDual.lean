@@ -11,6 +11,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.GeometricSMul
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.ArtinSchreierDual
+public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 
 /-!
@@ -35,18 +36,6 @@ open scoped ProEtale
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-namespace WeilSheaf
-
-variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-
-/-- Isomorphic lisse Weil sheaves have isomorphic duals. -/
-noncomputable def dualIsoOfIso {F F' : WeilSheaf k₀ l X} (hF : F.IsLisse) (hF' : F'.IsLisse)
-    (e : F ≅ F') : F.dual hF ≅ F'.dual hF' :=
-  ObjectProperty.isoMk _
-    (ProEtaleWeilSheaf.ihomMapIsoLeft ((ObjectProperty.ι _).mapIso e).symm _)
-
-end WeilSheaf
-
 /-- **The inverse character**: `ℒ_{ψ⁻¹(a x)} ≅ ℒ_{ψ(-a x)}`.
 (blueprint: `lem-fd-as-characters`, the clause `ℒ_{ψ^{-1},f} ≅ ℒ_{ψ,-f}` for `f = a x`) -/
 theorem nonempty_iso_artinSchreier_inv (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
@@ -69,7 +58,7 @@ theorem nonempty_iso_dual_dual_artinSchreier_inv (ψ : AddChar k₀ (PadicAlgCl 
   obtain ⟨e₂⟩ := nonempty_iso_dual_artinSchreier_neg ψ⁻¹ (-1)
   obtain ⟨e₃⟩ := nonempty_iso_artinSchreier_inv ψ 1
   rw [neg_neg] at e₂
-  exact ⟨WeilSheaf.dualIsoOfIso _ (isLisse_artinSchreier ψ⁻¹ (-1)) e₁ ≪≫ e₂ ≪≫ e₃⟩
+  exact ⟨WeilSheaf.dualIsoOfIso e₁ _ (isLisse_artinSchreier ψ⁻¹ (-1)) ≪≫ e₂ ≪≫ e₃⟩
 
 /-- **The double dual of a geometric linear character.** For `b ∈ k̄`, the double dual of the
 geometric sheaf `ℒ_{ψ⁻¹(b x)}` on `𝔸¹_{k̄}` is a geometric linear character `ℒ_{ψ(a x)}`, namely

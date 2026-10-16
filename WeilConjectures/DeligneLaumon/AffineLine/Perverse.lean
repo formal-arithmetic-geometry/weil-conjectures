@@ -459,6 +459,9 @@ theorem simple_punctualObj_iff (G : WeilSheaf k₀ l X) (hG : G.support.Finite) 
       (WeilSheaf.singleTriangle_distinguished hSe) (isCurvePerverse_toComplex_obj _ hc).2
     have h1 : IsIso (ObjectProperty.homMk (WeilSheaf.toComplex.map i) :
         punctualObj G' hG' ⟶ punctualObj G hG) ↔ IsIso i := by
+      have : (ObjectProperty.ι
+          (IsCurvePerverse : ObjectProperty (WeilComplex k₀ l X))).ReflectsIsomorphisms :=
+        reflectsIsomorphisms_of_full_and_faithful _
       rw [← isIso_iff_of_reflects_iso _ (ObjectProperty.ι _),
         ← isIso_iff_of_reflects_iso i WeilSheaf.toComplex]
       exact Iff.rfl
