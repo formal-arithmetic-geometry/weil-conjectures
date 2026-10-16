@@ -3,40 +3,156 @@
  "blueprint": {
   "is": "cor-coef-integral-internal-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integral constructible internal Hom",
- "statement": "For $K,L\\in D^b_c(X,R)$, the ambient\n$R\\mathcal Hom_R(K,L)$ lies in $D^b_c(X,R)$ and its\nreductions are the corresponding finite internal Homs. If the\nreduction Tor intervals of $K,L$ are $[a,b]$, $[c,e]$\nand $\\dim X\\leq d$, one output interval is\n$[c-b-2d,e-a+2d]$.",
+ "statement": "Fix the global finite-field datum with $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi=\\varpi_E$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme [def-weil-proper-morphism, def-weil-finite-type-morphism]. Put $A_n=R/(\\varpi^n)$ for $n\\geq1$ and $\\widehat R_X=\\varprojlim_n(A_n)_X$ on the small pro-etale site of $X$ [def-weil-completed-integral-coefficients]. Work in the ambient derived category of $\\widehat R_X$-modules, with the full subcategory $D^b_c(X,R)$ of derived-complete complexes whose finite reductions are bounded constructible and have cohomological supports in one interval independent of $n$ [def-weil-derived-complete-integral-detailed]. For an ambient complex $M$ write $M_n=M\\otimes^L_{\\widehat R_X}(A_n)_X$ for its reduction in $D(X_{\\mathrm{proet}},A_n)$ [def-weil-integral-derived-reduction].\n\nFor every $K,L\\in D^b_c(X,R)$, their ambient derived internal Hom $H=R\\mathcal Hom_{\\widehat R_X}(K,L)$ [def-pur-derived-internal-hom] belongs to $D^b_c(X,R)$. For every $n\\geq1$ the canonical evaluation-defined comparison is an isomorphism in $D(X_{\\mathrm{proet}},A_n)$,\n$$\n H_n\\xrightarrow{\\sim}R\\mathcal Hom_{(A_n)_X}(K_n,L_n).\n$$\nMore precisely, let $a\\leq b$ and $c\\leq e$ be integers and $d\\geq0$ an integer with $\\dim X\\leq d$, where dimension is topological Krull dimension [def-kun-topological-krull-dimension]. If every $K_n$ has Tor amplitude in $[a,b]$ over $(A_n)_X$ and every $L_n$ has Tor amplitude in $[c,e]$ [def-weil-proetale-tor-amplitude], then every $H_n$ has Tor amplitude in $[c-b-2d,e-a+2d]$, uniformly in $n$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-integral-internal-hom.md",
   "place": "node cor-coef-integral-internal-hom, order 2147"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-pur-derived-internal-hom",
+  "def-kun-topological-krull-dimension",
+  "def-weil-proetale-tor-amplitude"
+ ],
  "proof": [
   {
-   "text": "Completeness and the canonical reductions follow from\n[lem-coef-integral-hom-reduction]. The input reductions are\nfinite-Tor by [lem-coef-integral-residue-tor]. Their internal\nHoms are constructible with the stated uniform bound by\n[cor-weil-finite-constructible-hom]. These are exactly the\nremaining conditions on the integral output.",
+   "text": "By [def-weil-derived-complete-integral-detailed], $K$ and $L$ are derived complete, and $K_1,L_1$ are bounded constructible. Choose integers $\\alpha\\leq\\beta$ and $\\gamma\\leq\\epsilon$ containing their respective cohomological supports; the zero complex permits any such interval. Apply [lem-coef-integral-residue-tor] separately to $K$ and $L$. It gives Tor amplitude $[\\alpha,\\beta]$ for every $K_n$ and $[\\gamma,\\epsilon]$ for every $L_n$. The coefficient ring is the stipulated DVR $\\mathcal O_E$, and $\\ell$ is invertible on $X$ because $X$ is over a field of characteristic $p\\ne\\ell$. The reductions are therefore finite-Tor bounded constructible complexes on the pro-etale site.",
    "uses": [
-    "lem-coef-integral-hom-reduction",
-    "lem-coef-integral-residue-tor",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-integral-internal-hom.md",
+    "place": "## Proof, second sentence: input reductions are finite-Tor"
+   }
+  },
+  {
+   "text": "Set $H=R\\mathcal Hom_{\\widehat R_X}(K,L)$. Apply [lem-coef-integral-hom-reduction] in the ambient category of modules over the completed coefficient sheaf. Since $L$ is derived complete, $H$ is derived complete. For each $n\\geq1$ the same lemma gives the canonical evaluation-defined, $A_n$-linear isomorphism $H_n\\cong R\\mathcal Hom_{(A_n)_X}(K_n,L_n)$. This is exactly the reduction assertion of the item; no perfectness of $K$ on the entire site is required.",
+   "uses": [
+    "lem-coef-integral-hom-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-integral-internal-hom.md",
+    "place": "## Proof, first sentence: completeness and canonical reductions"
+   }
+  },
+  {
+   "text": "The scheme $X$ is of finite type over the field $k$, so [lem-kun-dimension-finite-type] gives $\\dim X<\\infty$. With dimension as the supremum of finite lengths of chains of nonempty irreducible closed subsets [def-kun-topological-krull-dimension], choose an integer $d_0\\geq0$ with $\\dim X\\leq d_0$; for $X=\\emptyset$, whose dimension is $-\\infty$, take $d_0=0$. This bound depends only on $X$, not on the reduction level.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-integral-internal-hom.md",
+    "place": "## Proof, third sentence: a fixed dimension bound for the uniform finite-level estimate"
+   }
+  },
+  {
+   "text": "For every $n\\geq1$, apply the pro-etale assertion of [cor-weil-finite-constructible-hom] to $K_n,L_n$, with $A=A_{E,n}$ and the intervals from step 1. Its hypotheses hold: $X$ is separated finite type over $\\overline{\\mathbf F}_q$, the torsion prime is different from $p$, and both input reductions are bounded constructible of finite Tor amplitude. Thus $R\\mathcal Hom_{(A_n)_X}(K_n,L_n)$ is bounded constructible, with Tor amplitude in $[\\gamma-\\beta-2d_0,\\epsilon-\\alpha+2d_0]$. By the isomorphism in step 2, this is also true of $H_n$. The same application with any supplied intervals $[a,b],[c,e]$ and any supplied dimension bound $d$ yields $[c-b-2d,e-a+2d]$, proving the quantitative clause. All these are Tor intervals over $A_n$, without changing to Tor amplitude after restriction to $R$.",
+   "uses": [
     "cor-weil-finite-constructible-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-integral-internal-hom.md",
+    "place": "## Proof, third sentence: constructibility and the stated uniform bound"
+   }
+  },
+  {
+   "text": "Write $u=\\gamma-\\beta-2d_0$ and $v=\\epsilon-\\alpha+2d_0$, so $u\\leq v$. In the definition of Tor amplitude [def-weil-proetale-tor-amplitude], take the degree-zero sheaf $M=(A_n)_X$. To see that this tests the cohomology of $H_n$ itself, use a K-flat representative $P\\to H_n$ as in [def-weil-derived-tensor]: the degreewise maps $P\\otimes_{(A_n)_X}(A_n)_X\\to P$, $x\\otimes r\\mapsto rx$, with inverse $x\\mapsto x\\otimes1$, commute with differentials. Hence $H_n\\otimes^L_{A_n}(A_n)_X\\cong H_n$, and $\\mathcal H^i(H_n)=0$ outside $[u,v]$ for every $n$. Step 2 gives derived completeness, and step 4 gives bounded constructibility of every reduction. Together with this single cohomological interval, these are precisely the three conditions defining $H\\in D^b_c(X,R)$ in [def-weil-derived-complete-integral-detailed].",
+   "uses": [
+    "def-weil-proetale-tor-amplitude",
+    "def-weil-derived-tensor",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-integral-internal-hom.md",
+    "place": "## Proof, final sentence: the remaining conditions on the integral output"
+   }
   }
  ],
  "proof_deps": [
-  "lem-coef-integral-hom-reduction",
+  "def-weil-derived-complete-integral-detailed",
   "lem-coef-integral-residue-tor",
-  "cor-weil-finite-constructible-hom"
+  "lem-coef-integral-hom-reduction",
+  "lem-kun-dimension-finite-type",
+  "def-kun-topological-krull-dimension",
+  "cor-weil-finite-constructible-hom",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-tensor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-coef-integral-internal-hom.md",
-  "place": "## Proof"
+  "place": "## Proof, expanded on the original reduction / residue-Tor / finite internal-Hom route"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedComplete|boundedConstructible|torAmplitude|constructible.*Hom|Hom.*constructible",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: results concern generic derived categories, local cohomology, condensed modules or constructible subsets, not the integral pro-etale constructible internal-Hom theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom preserves constructible adic sheaves",
+   "results": "0 hits: none; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived internal Hom of derived complete constructible integral adic sheaves has constructible reductions with uniform Tor amplitude",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod; localCohomology.diagram; CondensedMod.IsSolid; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.left_fac_of_isStrictlyGE",
+   "date": "2026-10-16",
+   "verdict": "no match: results concern generic derived categories, local cohomology, condensed modules or constructible subsets, not the integral pro-etale constructible internal-Hom theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"Hom\"",
+   "results": "12 hits: DerivedCategory.instEssSurjHomotopyCategoryIntUpQh; DerivedCategory.instCommShiftHomotopyCategoryIntUpQh; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso; DerivedCategory.instAdditiveHomotopyCategoryIntUpQh; DerivedCategory.singleFunctorIsoCompQ_hom_app; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; DerivedCategory.singleFunctorsPostcompQIso_hom_hom; DerivedCategory.singleFunctorsPostcompQIso_inv_hom",
+   "date": "2026-10-16",
+   "verdict": "no match: results concern generic derived categories, local cohomology, condensed modules or constructible subsets, not the integral pro-etale constructible internal-Hom theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "adic|internalHom|derivedHom",
+   "results": "7 hits: Mathlib/Algebra/Homology/HomologicalComplex.lean; Mathlib/Algebra/Homology/HomologicalComplex.lean; Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean (Mathlib subdirectory: Algebra/Homology)",
+   "date": "2026-10-16",
+   "verdict": "no match: results concern generic derived categories, local cohomology, condensed modules or constructible subsets, not the integral pro-etale constructible internal-Hom theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adic constructible derived category closed under derived sheaf Hom and compatible with reduction modulo powers of a uniformizer",
+   "results": "8 hits: localCohomology; localCohomology.diagram; localCohomology.ofSelfLERadical; localCohomology.ofDiagram; CondensedMod.IsSolid; DerivedCategory.exists_iso_Q_obj_of_isGE; LightCondensed.instIsGrothendieckAbelianLightCondMod; DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-16",
+   "verdict": "no match: results concern generic derived categories, local cohomology, condensed modules or constructible subsets, not the integral pro-etale constructible internal-Hom theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "12 hits: Topology.IsConstructible; Topology.IsLocallyConstructible; Topology.IsConstructible.univ; Topology.IsLocallyConstructible.univ; Topology.IsConstructible.empty; Topology.IsLocallyConstructible.empty; Topology.IsConstructible.isLocallyConstructible; IsRetrocompact.isConstructible",
+   "date": "2026-10-16",
+   "verdict": "no match: results concern generic derived categories, local cohomology, condensed modules or constructible subsets, not the integral pro-etale constructible internal-Hom theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -63,5 +179,29 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "cor-coef-integral-internal-hom",
+  "worker": "stage1",
+  "summary": "Made the implicit finite-field, scheme, completed pro-etale coefficient and reduction conventions explicit; expanded the original argument into uniform input Tor bounds, ambient completeness and canonical reduction, a finite dimension bound, finite-level internal-Hom estimates, and the defining uniform cohomological condition. Reused all three original proof lemmas and one existing dimension tool; no new nodes. The tagged slopmaster2 theorem contains sorry and concerns discrete etale coefficients, so is not an attachment.",
+  "blueprint": "Steps 1 and 2 realize the second and first sentences respectively of the single original proof paragraph; steps 3 and 4 expand its third sentence; step 5 proves its final sentence. The statement keeps the original integral category and the exact interval [c-b-2d,e-a+2d].",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic dimension finiteness for a finite-type scheme over a field, needed to choose one bound before proving integral constructibility; the biduality unit has no statement providing this geometric bound."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q05-3d59cc2b3",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-3d59cc2b3 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and source passages, unit/chapter route, and archived master targets. All five steps preserve the completed pro-etale coefficient category and exact Tor bound. Small cases, dependency cycles, and duplicate candidates checked; dimension tool use accepted. No new nodes or repairs. Concrete checks recorded in review.md."
+ }
 }
