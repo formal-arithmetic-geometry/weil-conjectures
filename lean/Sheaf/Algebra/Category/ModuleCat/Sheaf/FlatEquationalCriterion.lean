@@ -375,9 +375,9 @@ private theorem local_tensor_kernel
   exact TensorProduct.sum_tmul_eq_zero_of_vanishesTrivially _ hvan
 
 
-omit [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+omit [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] in
 private theorem tensor_mono_of_local_matrix
     (hmat : ∀ (m : ℕ) (U : C) (n : ℕ) (a : Fin n → Fin m → A.obj.obj (op U))
       (s : Fin n → M.val.obj (op U)), (∀ k, (∑ p, a p k • s p) = 0) →

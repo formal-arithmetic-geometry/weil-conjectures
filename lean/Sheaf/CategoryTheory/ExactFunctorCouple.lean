@@ -115,9 +115,9 @@ private theorem quotientIso_projection (X : BigradedExactCouple C s)
       (cyclesIso X Y T p q).hom ≫ Y.derivedEProjection p q := by
   simp [quotientIso, derivedEProjection]
 
-omit [Φ.Additive] in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
+omit [Φ.Additive] in
 private theorem derived_alpha_comm (X : BigradedExactCouple C s)
     (Y : BigradedExactCouple B s) (T : FunctorComparison Φ X Y) (p q : ℤ) :
     Φ.map (X.derived.alpha p q) ≫ (imageIso X Y T (p - 1) (q + 1)).hom =
