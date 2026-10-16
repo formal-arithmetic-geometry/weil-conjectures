@@ -30,9 +30,86 @@
   "lem-coef-coherent-nerve-comparison",
   "def-coef-zigzag-homotopy-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the product consequence of [lem-coef-bisimplicial-diagonal-equivalence]. If $f:X\\to X'$ is a weak homotopy equivalence and $K$ is any simplicial set, form the bisimplicial sets $X_p\\times K_q$ and $X'_p\\times K_q$. For fixed $q$, their map in the $p$ direction is a disjoint union of copies of $f$. Realization of this disjoint union is the disjoint union of realizations: each simplex stays in its indexed summand, so path components and all based homotopy groups are computed in that summand. Thus it is a weak homotopy equivalence, including when the index set is empty. The diagonal theorem gives $f\\times1_K:X\\times K\\to X'\\times K$ a weak homotopy equivalence. Factor $f\\times g$ as $(1\\times g)(f\\times1)$ and use closure of weak equivalences under composition in the model structure of [lem-coef-kan-quillen-right-proper]. By induction this proves preservation of weak homotopy equivalences by finite products, including the empty product (the point). The same summand argument proves preservation by any coproduct indexed by a fixed small set.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof 10.6(ii): product and disjoint-union argument, with the diagonal theorem written explicitly."
+   }
+  },
+  {
+   "text": "For either pair $(C,W)=(A,U)$ or $(B,V)$ put $E^w_{C,p}(a,b)=Z_w^{(C_p,W_p)}(a,b)$ using [def-coef-zigzag-homotopy-calculus]. Applying an operator of $C,W$ to arrows defines the simplicial diagram of categories $E^w_C(a,b)$. A $q$-simplex of its ordinary nerve is a string of $q$ commuting vertical diagrams, hence exactly the rectangular diagram defining $D^w_{C,W}(a,b)_{p,q}$. Composing the string is deletion of a row, and inserting an identity is repetition of a row. Thus $\\mathsf N(E^w_C(a,b))=\\operatorname{diag}D^w_{C,W}(a,b)$, naturally in $S$. For length zero $E$ is the terminal category if $a=b$ and the empty category otherwise; its map under $S$ is the identity. For $w=(+)$ every vertical arrow is an endpoint identity, so each $E_p$ is the discrete category on $C_p(a,b)$ and $\\mathsf N(E)=C(a,b)$. For $w=(-)$ it is the discrete category on $W_p(b,a)$ and $\\mathsf N(E)=W(b,a)$. The hypotheses on $S$ prove the conclusion for all words of length zero or one.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 5.1 and Lemma 5.7: identify the nerve and start induction on word length."
+   }
+  },
+  {
+   "text": "For nonempty words $u,v$ fix $x,y$ and, for a varying $z$, set $L_p(z)=E^u_{C,p}(x,z)$ and $R_p(z)=E^v_{C,p}(z,y)$. The action of $h:z\\to z'$ in $W_p$ is composition at the free endpoint. $L$ is covariant when the last letter of $u$ is $+$ (postcompose its last arrow with $h$), and contravariant when it is $-$ (precompose its last arrow with $h$). $R$ is contravariant when the first letter of $v$ is $+$ (precompose its first arrow with $h$), and covariant when it is $-$ (postcompose its first arrow with $h$). Leave all other arrows fixed. Apply the same operation to the endpoint square of a morphism. Commutation of that square shows this is a functor; associativity and identities give strict functoriality in $h$. The simplicial operators preserve composition, so these endpoint functors are transfunctors on $W$ in the explicit sense of [lem-coef-two-sided-simplicial-grothendieck-invariance]. The maps induced by $S$ commute strictly with every endpoint action and simplicial operator.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus",
+    "lem-coef-two-sided-simplicial-grothendieck-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Examples 9.3 and 10.3: endpoint actions and their simplicial compatibility; left-to-right word convention."
+   }
+  },
+  {
+   "text": "Let $*$ denote the constant transfunctor with value the terminal category. With the left-to-right word convention, the following degreewise two-sided Grothendieck constructions (as defined in [lem-coef-two-sided-simplicial-grothendieck-invariance]) are isomorphic to $E^{uv}_C(x,y)$:\n$$\\begin{array}{c|c}\n(\\operatorname{last}(u),\\operatorname{first}(v))&E^{uv}_C(x,y)\\\\\n(+,+)&R\\otimes_W L\\\\\n(-,-)&L\\otimes_W R\\\\\n(+,-)&*\\otimes_W(L\\times R)\\\\\n(-,+)&(L\\times R)\\otimes_W *.\n\\end{array}$$\nOn objects concatenate the left and right diagrams at their common endpoint $z$. A morphism of the concatenated diagram consists of the vertical arrow $h:z\\to z'$ at the cut and the two restrictions of its commuting squares. In the $(+,+)$ case those restrictions are $r\\to R(h)r'$ and $L(h)l\\to l'$; in the $(-,-)$ case they are $l\\to L(h)l'$ and $R(h)r\\to r'$; in the $(+,-)$ case they are $L(h)l\\to l'$ and $R(h)r\\to r'$; in the $(-,+)$ case they are $l\\to L(h)l'$ and $r\\to R(h)r'$. These are exactly the three-component morphisms of the respective construction. Conversely, glue those restrictions and the given $h$ to recover every square. These operations are inverse on objects and morphisms. Composition is vertical composition and gives the composition formula in the cited definition; the simplicial operators preserve the two restrictions and $h$. Hence these are isomorphisms of simplicial diagrams of categories, natural under $S$. No identity column is removed and no adjacent columns are composed.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus",
+    "lem-coef-two-sided-simplicial-grothendieck-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 9.4 and Example 10.3: all four joins, with directions reversed from the printed word convention."
+   }
+  },
+  {
+   "text": "Induct on $l\\geq2$, assuming the asserted weak equivalence for every word of length less than $l$ and every pair of endpoints in $O$. Write $w=uv$ with $u$ of length $l-1$ and $v$ the last letter, so both words are nonempty. In Step 4 use $W=U$ for $C=A$ and $W=V$ for $C=B$. The base functor $H=S|_U:U\\to V$ fixes the small object set $O$ and is a weak homotopy equivalence on every mapping set by the second hypothesis. Step 3 supplies strict transformations from the $A$-side endpoint transfunctors to pullbacks of the $B$-side endpoint transfunctors. At every $z$, the induction hypothesis for $(x,z)$ and $(z,y)$ gives weak equivalences on the diagonal nerves of $L$ and $R$. In the mixed-sign cases, the nerve and its diagonal commute with binary products because a composable string in a product category is a pair of strings; Step 1 therefore gives the required weak equivalence on the $L\\times R$ fiber. The terminal transfunctor comparison is the identity. Thus every hypothesis of [lem-coef-two-sided-simplicial-grothendieck-invariance] holds in each of the four rows, and it gives a weak homotopy equivalence on the diagonal nerves of their total constructions. All fiber categories are small: their objects and morphisms are finite diagrams in the small categories $A_p,B_p$, and taking their families over small $O$ fits the fixed larger universe of that node.",
+   "uses": [
+    "lem-coef-two-sided-simplicial-grothendieck-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Lemma 5.7, using Example 10.3 and Propositions 10.4–10.5: simultaneous induction for all endpoints."
+   }
+  },
+  {
+   "text": "Under the isomorphisms in Step 4, the functor on total constructions in Step 5 sends each component arrow in both subdiagrams and the cut arrow $h$ to its image under $S$. It is therefore exactly the functor $E^w_A(x,y)\\to E^w_B(x,y)$, not a chosen comparison with the same endpoints. Step 2 identifies its diagonal nerve with the specified map $\\operatorname{diag}D^w_{A,U}(x,y)\\to\\operatorname{diag}D^w_{B,V}(x,y)$. This completes the induction, including the zero- and one-letter cases already checked. Identity columns and equal-direction neighbors were allowed throughout, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Conclusion of Lemma 5.7: identify the induced map on unreduced fixed-word diagrams."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-kan-quillen-right-proper",
+  "def-coef-zigzag-homotopy-calculus",
+  "lem-coef-two-sided-simplicial-grothendieck-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Explicit word-length induction and all four Grothendieck joins following Lemma 5.7, Proposition 9.4, Example 10.3 and Propositions 10.4–10.5, printed pp.24,31,33–34. Source read online; no local archival copy exists. Product step supplied using the existing diagonal theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -89,10 +166,45 @@
    "results": "{\"t\": \"2026-10-16T17:10:18Z\", \"tool\": \"grep\", \"query\": \"hammock|Dwyer|zigzag.{0,20}(nerve|colimit)|properFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/IsConnected.lean\", \"Mathlib/CategoryTheory/Limits/IsConnected.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\"], \"digest\": \"e50bfa334ac78b2b\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search. Generic enriched functor-category Hom equivalences, simplicial-object colimit existence and ordinary colimit zigzags do not state fixed-shape relative homotopy invariance or the reduction/properness of hammock graphs. Read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:58–89, AlgebraicTopology/SimplicialCategory/SimplicialObject.lean:35–44, CategoryTheory/Enriched/FunctorCategory.lean:48–100, and AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean:39–67."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|transfunctor|[Tt]wo[Ss]idedGrothendieck",
+   "results": "{\"t\": \"2026-10-16T18:31:43Z\", \"tool\": \"grep\", \"query\": \"hammock|transfunctor|[Tt]wo[Ss]idedGrothendieck\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The hits concern ordinary nerve edges, the truncated nerve adjunction, or classifying spaces of monoids; none compares fixed-word hammock diagonals. Read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:40-82 and SimplicialNerve.lean:30-100; these define ordinary/coherent nerves, not the asserted homotopy-invariance theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy invariance of the nerve of fixed length zigzag diagram categories in simplicial categories",
+   "results": "{\"t\": \"2026-10-16T18:31:43Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy invariance of the nerve of fixed length zigzag diagram categories in simplicial categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.instCategoryObjOppositeSimplexCategoryNerve\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"0840d7c770ed7c8a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The hits concern ordinary nerve edges, the truncated nerve adjunction, or classifying spaces of monoids; none compares fixed-word hammock diagonals. Read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:40-82 and SimplicialNerve.lean:30-100; these define ordinary/coherent nerves, not the asserted homotopy-invariance theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"Grothendieck\"",
+   "results": "{\"t\": \"2026-10-16T18:31:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"Grothendieck\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The hits concern ordinary nerve edges, the truncated nerve adjunction, or classifying spaces of monoids; none compares fixed-word hammock diagonals. Read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:40-82 and SimplicialNerve.lean:30-100; these define ordinary/coherent nerves, not the asserted homotopy-invariance theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak equivalences of simplicial category pairs induce weak equivalences on fixed word hammock diagram nerves",
+   "results": "{\"t\": \"2026-10-16T18:31:54Z\", \"tool\": \"leanfinder\", \"query\": \"Weak equivalences of simplicial category pairs induce weak equivalences on fixed word hammock diagram nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerve.homEquiv_edgeMk_map_nerveMap\", \"CategoryTheory.nerve.homEquiv_apply\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerve.functorOfNerveMap_map\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\"], \"digest\": \"a75754c5f4413461\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The hits concern ordinary nerve edges, the truncated nerve adjunction, or classifying spaces of monoids; none compares fixed-word hammock diagonals. Read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:40-82 and SimplicialNerve.lean:30-100; these define ordinary/coherent nerves, not the asserted homotopy-invariance theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of simplicial categories inducing weak equivalences on each morphism simplicial set preserves the classifying space of a fixed zigzag word with marked vertical arrows",
+   "results": "{\"t\": \"2026-10-16T18:32:06Z\", \"tool\": \"leanfinder\", \"query\": \"A map of simplicial categories inducing weak equivalences on each morphism simplicial set preserves the classifying space of a fixed zigzag word with marked vertical arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover_map\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerve.homEquiv_edgeMk_map_nerveMap\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_eq_strictMap\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_map_homMk\", \"SSet.Truncated.HomotopyCategory.lift\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\"], \"digest\": \"16bba6044876deb4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The hits concern ordinary nerve edges, the truncated nerve adjunction, or classifying spaces of monoids; none compares fixed-word hammock diagonals. Read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:40-82 and SimplicialNerve.lean:30-100; these define ordinary/coherent nerves, not the asserted homotopy-invariance theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-hammock-pair-homotopy-invariance",
@@ -100,5 +212,21 @@
   "group": "Q50"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-fixed-hammock-graph-homotopy-invariance",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. No exact project attachment or Mathlib match. Wrote an induction for all words and endpoints, including zero/one-letter cases, explicit endpoint actions, four join identifications, product preservation and the actual induced map. One new statement-only structural input is the two-sided simplicial Grothendieck invariance theorem of DK 10.4–10.5, not another hammock-word assertion.",
+  "blueprint": "Realizes the auxiliary simplicial localization mapping-space foundation below prop-coef-integral-exceptional-adjoint, current proof paragraph 2 and its displayed derived coefficient-adjunction/limit calculation, via the recorded frame/localization ancestry. Expands the fixed-word DK 5.7 input through DK 9.4 and 10.3–10.5; no unit or chapter route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-3a599467b",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-3a599467b (reviewer sub-agent of L); spot-checked: I read the item, its six steps and the new node lem-coef-two-sided-simplicial-grothendieck-invariance in full. I also read the four cited nodes (all in unit sk-prop-sf-biduality-general, so no tool uses) and the parent hammock-pair node, which uses the item exactly as stated. The item statement matches DK's fixed-type hammock statement: unrestricted forward columns, backward and vertical arrows in U, identity endpoints, no reduction, both local weak-equivalence hypotheses. Step 1: the diagonal theorem with directions exchanged gives f×1_K; factoring f×g and composing gives products; the coproduct argument holds. Step 2: the nerve of Z_w(C_p,W_p) matches the rectangles; the + and − words give discrete categories on C_p(a,b) and W_p(b,a), so lengths 0 and 1 follow from the hypotheses. Step 3: I checked all four endpoint variances by their square equations. Step 4: I checked each of the four joins against the morphism shape (h, a→F(h)a', G(h)b→b'), and composition in the (+,+) case. Step 5: the induction over all endpoints satisfies every hypothesis of the new node, with H=S|_U; Step 1 covers the L×R fibers. Step 6: the induced functor is S on every arrow. New node: true. Degreewise it is a two-sided bar construction (Thomason/BK); taking diagonals turns the comparison into a levelwise weak equivalence of coproducts of products of N F(z), V(z,z') and N G(z), so the diagonal theorem applies. This is DK 10.4 composed with 10.5. It passed the tests: empty O, terminal fibers (which give the existing clause of lem-coef-diagonal-coherent-nerve-comparison as a special case, not a duplicate), discrete V, empty fibers. It is statement-only, self-contained and searched in all three Mathlib kinds. A DAG grep for transfunctor, two-sided, Grothendieck and Thomason found no duplicate; the ordinary-base Thomason, aspherical, BK and zigzag-concatenation nodes differ in scope. It does not restate a clause of the item and creates no cycle. Limitation: DK has no local copy and the network is blocked here, so I could not open the cited pages. The proof is marked by:agent with a WANTED line, and I checked the mathematics independently. No fixes made; cosmetic note only: z\\prime would read better as z'."
+ }
 }
