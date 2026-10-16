@@ -3,59 +3,336 @@
  "blueprint": {
   "is": "det-lem-int-tensor-projection",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Projection formula for extension by zero along a locally closed immersion",
- "statement": "Let $\\Lambda$ be a condensed ring, $X$ a standing scheme, and\n$a=i\\circ u\\colon S\\hookrightarrow X$ a locally closed immersion, with\n$u\\colon S\\hookrightarrow\\overline S$ open and $i\\colon\\overline S\\hookrightarrow X$ closed, and\n$a_!=i_*u_!$. For $M\\in\\D(S_{\\mathrm{proét}},\\Lambda)$ and $L\\in\\D(X_{\\mathrm{proét}},\\Lambda)$\nthere is a natural isomorphism\n$$\n(a_!M)\\otimes^{\\mathbf L}_{\\Lambda_X}L\\simeq a_!\\bigl(M\\otimes^{\\mathbf L}_{\\Lambda_S}a^*L\\bigr)\n\\quad\\text{in }\\D(X_{\\mathrm{proét}},\\Lambda).\n$$",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], $X$ a standing scheme [sk-def-sfb-dc-setting], and\n$a=i\\circ u\\colon S\\hookrightarrow X$ a locally closed immersion, with\n$u\\colon S\\hookrightarrow\\overline S$ open and $i\\colon\\overline S\\hookrightarrow X$ closed, and\n$a_!=i_*u_!$. For $M\\in\\D(S_{\\mathrm{proét}},\\Lambda)$ and $L\\in\\D(X_{\\mathrm{proét}},\\Lambda)$\nthere is a natural isomorphism\n$$\n(a_!M)\\otimes^{\\mathbf L}_{\\Lambda_X}L\\simeq a_!\\bigl(M\\otimes^{\\mathbf L}_{\\Lambda_S}a^*L\\bigr)\n\\quad\\text{in }\\D(X_{\\mathrm{proét}},\\Lambda).\n$$\nHere $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], $\\D(T_{\\mathrm{proét}},\\Lambda)=D(\\Mod_{\\Lambda_T})$ is the unbounded derived category [sk-def-sfb-derived-categories], and the tensor is the relative K-flat derived tensor [def-sfb-derived-tensor-modules]. The functors $u_!$ [def-sfb-module-open-lower-shriek], $i_*$ [def-sfb-module-lower-star], and $a^*$ [def-sfb-module-upper-star] act termwise on complexes, using their exactness for these immersions.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.md",
   "place": "node det-lem-int-tensor-projection, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-derived-tensor-modules",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-upper-star"
+ ],
  "proof": [
   {
-   "text": "Throughout we use [sk-prop-sf-open-closed-triangle]: for an open immersion $j$\nwith closed complement $i$, the functors $j^*$, $j_!$, $i^*$, $i_*$ are exact,\n$j^*j_!=\\mathrm{id}$, $i^*i_*=\\mathrm{id}$, $i^*j_!=0$, $j^*i_*=0$, and a morphism of\nmodule sheaves on $X$ that becomes an isomorphism after $j^*$ and after $i^*$\nis an isomorphism (apply the localization sequence to its kernel and\ncokernel). Inverse images $j^*$, $i^*$ are compatible with tensor products,\nsince the coefficient sheaves are pulled back\n([sk-prop-sfb-cartesian-coefficients]).",
+   "text": "Work with actual module sheaves over the ring sheaf $B=\\Lambda_Y$. A module object in abelian sheaves is precisely such a sheaf: evaluating its action gives $B(V)\\times M(V)\\to M(V)$ with the module axioms and semilinear restrictions; conversely the sectionwise bilinear actions induce $B\\otimes M\\to M$ through the sheafified tensor of [sk-def-sfb-sheaf-tensor]. The module-object equations become the sectionwise module equations in both directions. Morphisms coincide because their action square is exactly sectionwise linearity. A balanced bilinear map has the same universal property in both descriptions, and [def-pur-sheaf-tensor-product] realizes it by sheafifying the sectionwise relative tensor; hence the identification preserves relative tensor. Thus it also identifies complexes and their quasi-isomorphisms. By [lem-sfb-alpha-iso], $f^{-1}\\Lambda_Y\\cong\\Lambda_T$ for every immersion $f:T\\to Y$, without restricting $\\Lambda$ to finite or discrete coefficients. The pullback formula of [def-sfb-module-upper-star] therefore identifies $f^*$ with inverse image followed by transport across this ring isomorphism. The pushforward action of [def-sfb-module-lower-star] is the usual ringed direct-image action. For extension by zero, [def-sfb-module-linear-open-lower-shriek] specifies the action $B\\otimes j^{\\Ab}_!M\\cong j^{\\Ab}_!(j^*B\\otimes M)\\to j^{\\Ab}_!M$. On a section in the extension presheaf summand indexed by a factorization $V\\to U$, this sends $b\\otimes m$ to $b|_U m$; on the zero summand there is only the zero map. Sheafification gives exactly the ringed extension action. Restriction along the invertible $\\alpha_j$ in [def-sfb-module-open-lower-shriek] identifies its coefficients with $\\Lambda_U$. Hence the ringed-site lemmas below apply to the specified module-object functors.",
    "uses": [
-    "sk-prop-sfb-cartesian-coefficients"
+    "sk-def-sfb-module-objects",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sfb-alpha-iso",
+    "def-sfb-module-upper-star",
+    "def-sfb-module-lower-star",
+    "def-sfb-module-open-lower-shriek",
+    "sk-def-sfb-sheaf-tensor",
+    "def-pur-sheaf-tensor-product",
+    "def-sfb-module-linear-open-lower-shriek"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "First paragraph: coefficient identification and exact module operations"
+   }
   },
   {
-   "text": "*Open immersions, sheaves.* Let $j\\colon V\\hookrightarrow Y$ be open, $M$ a\n$\\Lambda_V$-module and $N$ a $\\Lambda_Y$-module. The identity of $M\\otimes j^*N$,\nviewed as a map $M\\otimes j^*N\\to j^*j_!M\\otimes j^*N=j^*(j_!M\\otimes N)$, is\nadjoint under $j_!\\dashv j^*$ to a natural map\n$\\theta\\colon j_!(M\\otimes j^*N)\\to j_!M\\otimes N$. After $j^*$ it is the identity;\nafter $i^*$ both sides vanish ($i^*(j_!M\\otimes N)=i^*j_!M\\otimes i^*N=0$). So $\\theta$\nis an isomorphism.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Closed immersions, sheaves.* Let $i\\colon T\\hookrightarrow Y$ be closed, $M$ a\n$\\Lambda_T$-module and $N$ a $\\Lambda_Y$-module. The unit of $i^*\\dashv i_*$ gives\n$i_*M\\otimes N\\to i_*i^*(i_*M\\otimes N)=i_*(M\\otimes i^*N)$. After $i^*$ it is the\nidentity of $M\\otimes i^*N$, and after $j^*$ both sides vanish. So it is an\nisomorphism.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Derived version.* Represent $L$ by a K-flat complex $Q$ of $\\Lambda_X$-modules\n([sk-def-sfb-derived-tensor-hom]). Inverse image along an open or closed\nimmersion preserves K-flatness: if $C$ is acyclic on the subscheme, then\n$C\\otimes j^*Q=j^*(j_!C\\otimes Q)$, respectively $C\\otimes i^*Q=i^*(i_*C\\otimes Q)$ by the\nsheaf formulas, and $j_!C$, $i_*C$ are acyclic. Applying the sheaf formulas\ntermwise to the double complexes gives\n$j_!M\\otimes Q\\simeq j_!(M\\otimes j^*Q)$ and $i_*M\\otimes Q\\simeq i_*(M\\otimes i^*Q)$ for any\ncomplex $M$; since $Q$, $j^*Q$, $i^*Q$ are K-flat and $j_!$, $i_*$ are exact, these\nare the derived isomorphisms $j_!M\\otimes^{\\mathbf L}L\\simeq j_!(M\\otimes^{\\mathbf L}j^*L)$ and\n$i_*M\\otimes^{\\mathbf L}L\\simeq i_*(M\\otimes^{\\mathbf L}i^*L)$.",
+   "text": "The standing schemes are separated and finite type over a field [sk-def-sfb-dc-setting]. A field is Noetherian (its ideals are $0$ and $(1)$), so [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. Its closed subscheme $\\overline S$ is likewise finite type over the field: on the finitely many affine finite-type charts of $X$, take quotient coordinate rings. The same lemma makes $\\overline S$ Noetherian. Every open subscheme of either is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian], including after restriction to any affine chart. Thus $u$ and the open complements of each closed immersion used below are quasi-compact. These ambient schemes are qcqs: they are quasi-compact, and the intersection of two affine opens is an open subscheme of a Noetherian scheme and hence quasi-compact by the same open-subscheme lemma. This verifies the quasi-compact-complement and qcqs hypotheses needed below; no boundedness or constructibility is imposed on $M,L$.",
    "uses": [
-    "sk-def-sfb-derived-tensor-hom"
+    "sk-def-sfb-dc-setting",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "First paragraph: hypotheses of open–closed localization"
+   }
   },
   {
-   "text": "*Locally closed immersions.* Combining,\n$$\na_!M\\otimes^{\\mathbf L}L=i_*(u_!M)\\otimes^{\\mathbf L}L\\simeq i_*\\bigl(u_!M\\otimes^{\\mathbf L}i^*L\\bigr)\n\\simeq i_*u_!\\bigl(M\\otimes^{\\mathbf L}u^*i^*L\\bigr)=a_!(M\\otimes^{\\mathbf L}a^*L).\n$$\nAll maps are natural in $M$ and $L$.",
-   "uses": [],
-   "elementary": null
+   "text": "For a complementary pair $j:V\\hookrightarrow Y$, $i:T\\hookrightarrow Y$, [lem-weil-pbc-proetale-ringed-open-closed] supplies $j_!\\dashv j^*$, the identities $j^*j_!=1$, $i^*i_*=1$, $i^*j_!=0$, $j^*i_*=0$, exactness of $j_!,i_*$, and $0\\to j_!j^*N\\to N\\to i_*i^*N\\to0$ for every $B$-module sheaf. Exactness of $j^*,i^*$ with the actual coefficient identifications is [lem-weil-pbc-proetale-immersion-limit-preservation]. If both restrictions of a morphism are invertible, its kernel and cokernel have zero restrictions by exactness; their displayed localization sequences force them to be zero. Thus the two restrictions detect isomorphisms. This uses the ringed pro-etale sequence (Stacks Tags 09AA, 09BM, 09BN, 09AH), not geometric-stalk conservativity.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "First paragraph: exactness, support identities, and joint detection"
+   }
+  },
+  {
+   "text": "Inverse image commutes with relative tensor by [lem-weil-pbc-ringed-topoi-module-pullback-tensor] (Stacks Tag 03EL). It also preserves coproducts: it is left adjoint to the module direct image [def-sfb-module-upper-lower-adjunction], so apply [lem-weil-pbc-left-adjoint-preserves-colimits]. The same colimit lemma applies to $j_!\\dashv j^*$ from step 3. Finally $i_*$ preserves small filtered colimits by the qcqs clause of [lem-weil-pbc-proetale-ringed-open-closed]. It preserves finite direct sums since it is additive and exact. Writing $\\bigoplus_{a\\in A}N_a=\\varinjlim_{F\\subset A,\\ F\\text{ finite}}\\bigoplus_{a\\in F}N_a$ now shows that $i_*$ preserves all coproducts needed to totalize unbounded tensor complexes. The finite-subset index is a small filtered poset in the fixed module universe.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-sfb-module-upper-lower-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "First and derived paragraphs: monoidal pullback and coproducts"
+   }
+  },
+  {
+   "text": "For sheaves $P$ on $V$ and $N$ on $Y$, form $\\theta:j_!(P\\otimes_{j^*B}j^*N)\\to j_!P\\otimes_B N$ as the $j_!\\dashv j^*$ adjoint of $P\\otimes j^*N\\to j^*j_!P\\otimes j^*N\\cong j^*(j_!P\\otimes N)$, using the unit and the tensor comparison of [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. Its $j^*$-restriction is the identity under $j^*j_!=1$, by the adjunction triangle identity. Its $i^*$-restriction has both source and target zero: use $i^*j_!=0$ and the same tensor comparison. The identities and joint detection in step 3, supplied by [lem-weil-pbc-proetale-ringed-open-closed] and exact restriction, make $\\theta$ an isomorphism. The construction is natural in both sheaves because the unit and tensor comparison are natural. Invert $\\theta$ to obtain $j_!P\\otimes_BN\\cong j_!(P\\otimes_{j^*B}j^*N)$.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Open immersions, sheaves"
+   }
+  },
+  {
+   "text": "For sheaves $P$ on $T$ and $N$ on $Y$, use the unit of $i^*\\dashv i_*$ [def-sfb-module-upper-lower-adjunction] to form $\\psi:i_*P\\otimes_BN\\to i_*i^*(i_*P\\otimes_BN)\\cong i_*(P\\otimes_{i^*B}i^*N)$. Here the last identification is the tensor comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor] followed by the invertible closed counit. Under $i^*i_*=1$, the restriction $i^*\\psi$ is the identity, by the triangle identity for this counit and unit. Both $j^*$-restrictions vanish since $j^*i_*=0$. The support identities and joint detection of step 3 again make $\\psi$ an isomorphism. Every map used is natural in $P,N$.",
+   "uses": [
+    "def-sfb-module-upper-lower-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Closed immersions, sheaves"
+   }
+  },
+  {
+   "text": "Write $r=j^*$ and $e=j_!$, or $r=i^*$ and $e=i_*$. For arbitrary complexes $P,Q$, steps 5 and 6 give $eP^p\\otimes_BQ^q\\cong e(P^p\\otimes_{rB}rQ^q)$, naturally in $p,q$. By the coproduct preservation proved in step 4 they sum over $p+q=n$ to an isomorphism $\\operatorname{Tot}(eP\\otimes_BQ)\\cong e\\operatorname{Tot}(P\\otimes_{rB}rQ)$. The total differential is $d_P\\otimes1+(-1)^p1\\otimes d_Q$ [def-pc-tensor-complex-sheaves]; naturality of the sheaf maps for $d_P$ and $d_Q$, and additivity of $e$, show that the isomorphism commutes with both summands and their signs. Likewise $r$ commutes with total tensor by step 4. Thus these are chain isomorphisms on unbounded complexes, not merely degreewise identifications. We also use the signed symmetry $P^p\\otimes Q^q\\to Q^q\\otimes P^p$, $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$: the identities $(-1)^{(p+1)q}=(-1)^{pq+q}$ and $(-1)^{p(q+1)+p}=(-1)^{pq}$ check its two differential terms, and its square is the identity. This allows the K-flat tests below with either order of the factors.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version: termwise maps and totalization"
+   }
+  },
+  {
+   "text": "If $Q$ is K-flat on $Y$ and $C$ is acyclic on the subscheme, then $eC$ is acyclic by exactness of $e$ (step 3). K-flatness [def-pc-kflat-complex] makes $eC\\otimes_BQ$ acyclic. Apply exact $r$ and use the totalized tensor comparison and $re=1$ to identify $r(eC\\otimes_BQ)\\cong C\\otimes_{rB}rQ$. This proves $rQ$ K-flat. Moreover, if $Q^q$ is flat, apply the sheaf comparison to a short exact sequence $C'\\to C\\to C''$ on the subscheme: $e$ takes it to an exact sequence, tensoring with $Q^q$ preserves exactness, and applying exact $r$ identifies the result with tensoring the original sequence by $rQ^q$. Hence $rQ^q$ is flat by [def-pc-flat-sheaf-modules].",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version: inverse image preserves K-flatness"
+   }
+  },
+  {
+   "text": "For completeness $e$ also preserves flat-term K-flat complexes. If $P$ is K-flat and $C$ is acyclic on $Y$, exactness makes $rC$ acyclic. Step 7 identifies $eP\\otimes_BC$ with $e(P\\otimes_{rB}rC)$, which is acyclic: the signed symmetry of step 7 identifies $P\\otimes rC$ with $rC\\otimes P$, acyclic by K-flatness of $P$, and $e$ is exact. The same symmetry identifies $C\\otimes eP$ with $eP\\otimes C$. Thus $eP$ is K-flat [def-pc-kflat-complex]. If $P^p$ is flat, the sheaf formula identifies tensoring by $eP^p$ with the composite $e(P^p\\otimes_{rB}r(-))$. Each of its three functors is exact, so $eP^p$ is flat [def-pc-flat-sheaf-modules].",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version: flat-term models and resolution changes"
+   }
+  },
+  {
+   "text": "Choose flat-term K-flat representatives $P,Q$ of $M,L$ by [lem-pc-kflat-resolution], on the respective small ringed pro-etale sites. Exact functors act termwise on derived categories by [lem-weil-pbc-exact-functor-derived-factorization]. By steps 8 and 9, $eP$ and $rQ$ are also flat-term K-flat. Consequently the tensor computations of [lem-weil-pbc-site-derived-tensor-descent] identify step 7 with $eM\\otimes_B^{\\mathbf L}L\\cong e(M\\otimes_{rB}^{\\mathbf L}rL)$. These are the relative derived tensors of [def-sfb-derived-tensor-modules] and [lem-sfb-derived-tensor-modules-derived], not tensor over the integers or completed tensor. On the flat-term K-flat complexes on the subscheme and on $Y$, step 7 is a natural chain isomorphism. It passes to their homotopy categories: an additive termwise functor carries $f-g=dh+hd$ to the same equation, and tensoring a homotopy in the first variable uses $h\\otimes1$, while in the second variable it uses $(-1)^p1\\otimes h$ on the summand with first degree $p$. Let $A$ denote the transported coefficient ring on the subscheme and $B$ that on $Y$. Apply the resolving-class localization equivalence of [lem-weil-pbc-site-derived-tensor-descent] separately to $\\mathcal P_A$ and $\\mathcal P_B$. Both sides of step 7 send each variable's quasi-isomorphisms to isomorphisms, by its tensor-computation clause and the exactness of $e,r$. The naturality square for a quasi-isomorphism therefore also commutes for its inverse, by multiplying the square by the inverse vertical maps. Morphisms of either localization are generated by homotopy-category morphisms and these inverses, so the square commutes for every morphism, first in the $\\mathcal P_A$ variable and then in the $\\mathcal P_B$ variable. The product of the two equivalences identifies these localizations with $D(A)\\times D(B)$, giving the natural isomorphism and its inverse on precisely the two different derived categories needed here. This proves independence of representatives without applying a same-ring bifunctor clause to different sites.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-sfb-derived-tensor-modules",
+    "lem-sfb-derived-tensor-modules-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Derived version: resolution computation and naturality"
+   }
+  },
+  {
+   "text": "Apply step 10 first to the closed immersion $i$ with input $u_!M$ and $L$, and then to the open immersion $u$ with input $M$ and $i^*L$. This gives $i_*u_!M\\otimes_{\\Lambda_X}^{\\mathbf L}L\\cong i_*(u_!M\\otimes_{\\Lambda_{\\overline S}}^{\\mathbf L}i^*L)\\cong i_*u_!(M\\otimes_{\\Lambda_S}^{\\mathbf L}u^*i^*L)$. The composition identification $u^*i^*\\cong a^*$ is [def-sfb-module-upper-star-comp]; exactness lets it act termwise. Substitute $a_!=i_*u_!$ to obtain exactly the displayed formula. Each isomorphism is natural in both variables by step 10 and the natural composition identification.",
+   "uses": [
+    "def-sfb-module-upper-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+    "place": "Locally closed immersions"
+   }
   }
  ],
  "proof_deps": [
-  "sk-prop-sfb-cartesian-coefficients",
-  "sk-def-sfb-derived-tensor-hom"
+  "sk-def-sfb-module-objects",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-alpha-iso",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-open-lower-shriek",
+  "sk-def-sfb-sheaf-tensor",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-module-linear-open-lower-shriek",
+  "sk-def-sfb-dc-setting",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "def-sfb-module-upper-lower-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-sfb-derived-tensor-modules",
+  "lem-sfb-derived-tensor-modules-derived",
+  "def-sfb-module-upper-star-comp"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
+  "place": "First paragraph; Open immersions, sheaves; Closed immersions, sheaves; Derived version; Locally closed immersions. Details of totalization and resolving-class descent supplied explicitly."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projection formula for extension by zero along a locally closed immersion derived tensor",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.liftCoborder_app, ModuleCat.Tilde.res_apply, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left, AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι_assoc, AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned statements; none states the locally closed relative derived projection formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectionFormula, LowerShriek, derivedTensor",
+   "results": "0 hits: ; loogle: unknown identifier 'ProjectionFormula'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle did not recognize the requested identifier; this query supplies no evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "projection formula.*extension by zero|lowerShriek.*Projection",
+   "results": "0 hits: ; requested Mathlib subdirectory SixFunctors (not present; empty grep is not absence evidence)",
+   "date": "2026-10-16",
+   "verdict": "unavailable: the requested source subdirectory does not exist; this query supplies no evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived projection formula for extension by zero along a locally closed immersion",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AddGroupExtension.rightHom_inl, LieAlgebra.Extension.proj_incl, AlgebraicGeometry.isImmersion_eq_inf, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.instIsClosedImmersionSndScheme, AlgebraicGeometry.Scheme.image_zeroLocus, AlgebraicGeometry.IsOpenImmersion.instπWalkingCospanSchemeCospanOne",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned statements; none states the locally closed relative derived projection formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "j shriek tensor derived pullback projection formula",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackIso",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned statements; none states the locally closed relative derived projection formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "isIso_derivedOpenImmersionLowerShriekProjectionMap",
+   "results": "0 hits: ; loogle: unknown identifier 'isIso_derivedOpenImmersionLowerShriekProjectionMap'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle did not recognize the requested identifier; this query supplies no evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedOpenImmersionLowerShriekProjection|isIso_derivedOpenImmersion",
+   "results": "0 hits: ; requested Mathlib subdirectory WeilConjectures (not present; empty grep is not absence evidence)",
+   "date": "2026-10-16",
+   "verdict": "unavailable: the requested source subdirectory does not exist; this query supplies no evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection.formula|[Ll]owerShriek|extension.by.zero|derivedTensor",
+   "results": "4 hits: Mathlib/NumberTheory/MulChar/Basic.lean:144; Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean:146; Mathlib/RingTheory/WittVector/Identities.lean:20,98",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned statements; none states the locally closed relative derived projection formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso, SheafOfModules.sheafificationCompPullback, SheafOfModules.conjugateEquiv_pullbackId_hom, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned statements; none states the locally closed relative derived projection formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed embedding of ringed topoi satisfies the unbounded derived tensor projection formula for arbitrary coefficient modules",
+   "results": "8 hits: LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the returned statements; none states the locally closed relative derived projection formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product with extension by zero of sheaves of modules is extension by zero of tensor with restriction",
+   "results": "{\"t\": \"2026-10-16T13:17:24Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product with extension by zero of sheaves of modules is extension by zero of tensor with restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"SheafOfModules.mapFree\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"PresheafOfModules.Monoidal.tensorObj\"], \"digest\": \"4e25fb0976b91437\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned change-of-rings, free-module, and presheaf tensor declarations do not state the sheaf immersion projection formula or its unbounded relative derived version"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*[Tt]ensor|[Tt]ensor.*[Ee]xtensionByZero|[Tt]ensor.*[Cc]losedImmersion",
+   "results": "{\"t\": \"2026-10-16T13:17:23Z\", \"tool\": \"grep\", \"query\": \"SheafOfModules.*[Tt]ensor|[Tt]ensor.*[Ee]xtensionByZero|[Tt]ensor.*[Cc]losedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\"], \"digest\": \"d2fa8e3da6172c5b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned change-of-rings, free-module, and presheaf tensor declarations do not state the sheaf immersion projection formula or its unbounded relative derived version"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-16T13:18:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"PresheafOfModulesOfCommRing.Monoidal.tensorObj\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj\", \"PresheafOfModulesOfCommRing.tensorObj_obj\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObjMap\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom_app\"], \"digest\": \"472095a607843e3b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned change-of-rings, free-module, and presheaf tensor declarations do not state the sheaf immersion projection formula or its unbounded relative derived version"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural derived tensor projection formula for extension by zero along an open or closed immersion of ringed pro-etale topoi",
+   "results": "Presentation maps, Zariski module restriction counit, scheme pullback tensor maps, and light-condensed internal projectivity; none states a derived projection isomorphism. Returned names: SheafOfModules.Presentation.map_π_eq, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, LightCondensed.ihomPoints_symm_comp, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|[Ll]owerShriek|[Ee]xtensionByZero",
+   "results": "No hits in the full Mathlib tree. Returned names: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unbounded derived tensor projection formula for extension by zero along a locally closed immersion",
+   "results": "Lie extension projection, projective Tor vanishing, scheme kernel under base change, higher left-derived projective vanishing, coherent topology projection and standard open scalar extension; none is the item. Returned names: LieAlgebra.Extension.proj_incl, CategoryTheory.isZero_Tor_succ_of_projective, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, Algebra.instIsStandardOpenImmersionTensorProduct, CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|lowerShriek|projectionFormula",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No matching declaration in the existing Mathlib/CategoryTheory directory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for modules over a sheaf of rings commutes with tensor product after restricting the second factor, also for unbounded derived categories",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObjMap, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, PresheafOfModules.Monoidal.tensorObj, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.monoidalCategory, CategoryTheory.Functor.mapExactFunctor_smul",
+   "date": "2026-10-16",
+   "verdict": "No exact match: presheaf tensor definitions, change-of-scalars adjunction, light-condensed monoidal structures and the map on Ext do not state an immersion projection formula."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -70,5 +347,64 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-int-tensor"
+ "unit": "sk-lem-int-tensor",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-lem-int-tensor-projection",
+  "worker": "stage1",
+  "summary": "Repaired the missing commutativity convention, using the chapter and relative-tensor definitions. Reused ringed pro-etale open–closed localization in place of the nonexistent imported citation; identified its arbitrary sheaf-ring coefficients with the module-object operations. Wrote the open and closed adjunction maps, restriction tests, coproduct and totalization argument, K-flat and flat-term preservation, and natural resolving-class descent explicitly. No new nodes. Chapter and unit fields are absent on the imported base and no unit record exists for sk-lem-int-tensor; this maintainer metadata issue is reported without editing it. Second reader adds explicit tensor/action definition citations, signed symmetry, homotopy formulas and separate localization in each coefficient category; invalid inherited search queries are classified without absence claims.",
+  "blueprint": "Steps 1–4 realize the first paragraph; step 5 the open-sheaf paragraph; step 6 the closed-sheaf paragraph; steps 7–10 the unbounded derived paragraph, including its implicit coproduct and naturality requirements; step 11 the final composition paragraph. The unit sk-lem-int-tensor tensor-product paragraph uses precisely this open/closed termwise then K-flat route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic ringed pro-etale open–closed identities, exactness, localization sequence and qcqs filtered-colimit preservation; replaces a missing DAG citation to the same route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic exact immersion inverse image with arbitrary sheaf coefficient ring; checks exactness after the coefficient isomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic underived relative tensor comparison used to construct and test the actual maps."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic small-ringed-site flat-term K-flat resolution existence, with the actual ring sheaves Lambda_T."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site resolving-class localization and natural derived tensor computation; ensures naturality in both variables."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherian theorem verifies the standing-scheme hypotheses for localization."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic Noetherian-open quasi-compactness verifies every open-complement condition."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic adjunction tool to pass sheaf projection formulas to direct-sum total tensors."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q48-616389b89",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q48-616389b89 (reviewer sub-agent of L); spot-checked: Read the complete mathematics, cited statements and sources. All eleven steps check, including relative condensed coefficients, coproduct totalization, K-flat preservation and two-site derived descent. No new nodes or repairs. review.md records accepted tool uses and the inherited missing transitive ID def-weil-pbc-etale-morphism."
+ }
 }

@@ -22,9 +22,101 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Fun}(S,\\mathscr C)$ and $\\mathcal B=\\operatorname{Fun}_{\\mathrm{eq}}(K,\\mathscr C)$. Both are quasicategories by [lem-cbc-enhanced-functor-cone-calculus], the latter being a full subcategory of $\\operatorname{Fun}(K,\\mathscr C)$. Every edge $f:x\\to y$ of $S$ has a two-sided inverse with the required witnesses: fill $\\Lambda^2_0$ with edges $01=f$ and $02=\\operatorname{id}_x$ to obtain $g:y\\to x$ and the triangle for $gf=\\operatorname{id}_x$. On vertices $(x,y,x,y)$, take this triangle as face $d_3$, the degenerate triangle $(\\operatorname{id}_x,f,f)$ as $d_1$, and the degenerate triangle $(f,\\operatorname{id}_y,f)$ as $d_2$. These faces agree on their shared edges and form $\\Lambda^3_0$; its Kan filler supplies face $d_0=(g,f,\\operatorname{id}_y)$, the other inverse witness. A simplicial map preserves these equations and hence equivalences. Thus restriction along $q$ has image in $\\mathcal B$ and defines the stated functor $R:\\mathcal A\\to\\mathcal B$. We keep all simplices of this full subcategory; no condition is imposed on its transformation edges.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice: typing the enhanced restriction functor; Scholze Lecture II, basic facts (1), (3)-(5), printed pp.14-15."
+   }
+  },
+  {
+   "text": "For any small simplicial set $L$ and quasicategory $\\mathcal D$, there is an equality of simplicial subsets\n$$\\operatorname{Fun}_{\\mathrm{eq}}(L,\\mathcal D)^{\\simeq}=\\operatorname{Fun}(L,\\mathcal D^{\\simeq}).$$\nIndeed an $n$-simplex on the left is a map $H:L\\times\\Delta^n\\to\\mathcal D$ which sends horizontal edges at every parameter vertex to equivalences, and sends each parameter edge to a pointwise equivalence by [lem-cbc-enhanced-functor-cone-calculus]. A mixed edge $(a,b)$ is the composite of $(a,\\operatorname{id})$ and $(\\operatorname{id},b)$, as witnessed by the corresponding $2$-simplex in the product. Its image is consequently invertible as well (the inverse of a composite is the reverse composite of the two inverses). Thus every edge maps to an equivalence, which is exactly factorization through the core. Conversely such a factorization makes horizontal edges invertible and makes each parameter transformation a pointwise equivalence, hence an equivalence by the cited node. An equivalence edge in the ambient functor category between objects of the full subcategory is also an equivalence in that subcategory: its inverse has the same endpoints, and both inverse-witness triangles have only those vertices, so fullness includes all three simplices. When $L=S$, all diagrams already invert its edges by step 1, giving $\\operatorname{Fun}(S,\\mathcal D)^{\\simeq}=\\operatorname{Fun}(S,\\mathcal D^{\\simeq})$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DA",
+    "place": "Kerodon 4.4.3.23 (01DA), mixed-edge argument, with the all-edges-inverted condition replacing the Kan assumption on L."
+   }
+  },
+  {
+   "text": "Let $T$ be any small simplicial set in a sufficiently large fixed universe and set $\\mathcal D_T=\\operatorname{Fun}(T,\\mathscr C)$, a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]. Simplicial currying and permutation of the product factors identify\n$$\\operatorname{Fun}(T,\\mathcal A)=\\operatorname{Fun}(S,\\mathcal D_T),\\qquad \\operatorname{Fun}(T,\\mathcal B)=\\operatorname{Fun}_{\\mathrm{eq}}(K,\\mathcal D_T).$$\nFor the second identity, an $n$-simplex on either side is the same map $K\\times T\\times\\Delta^n\\to\\mathscr C$ subject to the same condition: for every edge $a$ of $K$ and vertices $t$ of $T$ and $i$ of $\\Delta^n$, its restriction to $(a,t,i)$ is an equivalence. On the right this is precisely the pointwise criterion for the image of $a$ in $\\operatorname{Fun}(T,\\mathscr C)$ to be an equivalence. For a monotone map $\\alpha:[m]\\to[n]$, both descriptions restrict the same map by $\\operatorname{id}_K\\times\\operatorname{id}_T\\times\\Delta(\\alpha)$; hence the identifications commute with every simplicial operator. Precomposition by $q$ changes only the $K$ or $S$ coordinate, so they also commute with $R$. Taking cores and using step 2 therefore identifies $\\operatorname{Fun}(T,R)^{\\simeq}$ with restriction along $q$ from $\\operatorname{Fun}(S,\\mathcal D_T^{\\simeq})$ to $\\operatorname{Fun}(K,\\mathcal D_T^{\\simeq})$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01MS",
+    "place": "Kerodon 6.3.1.13 (01MS), proof of (4) implies (2), with its currying identification written explicitly."
+   }
+  },
+  {
+   "text": "The core $\\mathcal D_T^{\\simeq}$ is Kan by [lem-cbc-enhanced-functor-cone-calculus]. Apply [lem-cbc-kan-mapping-homotopy-invariance] to $u=q$ and $Z=\\mathcal D_T^{\\simeq}$. Its hypotheses hold because $q$ is a weak homotopy equivalence in exactly the geometric-realization sense used by that node. With step 3 this proves, for every $T$, a bijection\n$$\\pi_0\\operatorname{Fun}(T,\\mathcal A)^{\\simeq}\\xrightarrow{\\ \\pi_0(R\\circ-)\\ }\\pi_0\\operatorname{Fun}(T,\\mathcal B)^{\\simeq}.$$\nThis is a statement for every parameter shape, not just $T=\\Delta^0$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-kan-mapping-homotopy-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01MY",
+    "place": "Core comparison in Kerodon 6.3.1.21 (01MY), using 3.1.7.17 (03PJ) and the realization comparison 3.6.4.3 (03X7)."
+   }
+  },
+  {
+   "text": "Enlarge the universe once so that $T=\\mathcal A$ and $T=\\mathcal B$ are allowed; the construction of step 3 and the lemma of step 4 apply in that universe as well. Surjectivity in step 4 for $T=\\mathcal B$ gives a functor $G:\\mathcal B\\to\\mathcal A$ and a coherent natural equivalence $RG\\simeq\\operatorname{id}_{\\mathcal B}$. Here a path of vertices in the core can be made into one equivalence edge by reversing and composing edges using Kan $2$-horn fillings; thus equality in $\\pi_0$ gives exactly such an equivalence. Precompose this equivalence with $R$ to get $RGR\\simeq R$. Injectivity in step 4 for $T=\\mathcal A$ gives $GR\\simeq\\operatorname{id}_{\\mathcal A}$. These two equivalences exhibit $G$ as a quasi-inverse to $R$ in the sense of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01MS",
+    "place": "Explicit two-test-object inverse argument for the criterion used in Kerodon 6.3.1.13 (01MS)."
+   }
+  },
+  {
+   "text": "By [lem-cbc-enhanced-functor-cone-calculus], the functor equivalence $R$ of step 5 induces equivalences on all mapping spaces. The mapping spaces on the right are those of the full subcategory $\\mathcal B$, whose definition retains arbitrary coherent transformations between its objects. In particular this conclusion includes noninvertible transformations: only the edges within each $K$-diagram were required to be equivalences.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice: full enhanced, rather than ordinary homotopy-category, independence."
+   }
+  },
+  {
+   "text": "Finally restriction and postcomposition are the simplicial maps given by composition. For composable maps of shapes $r:L\\to K$ and $q:K\\to S$, the identity $(q\\circ r)^*=r^*q^*$ holds on every simplex; identity maps induce identity restrictions. For an enhanced functor $U:\\mathscr C\\to\\mathscr E$, one likewise has $U_*q^*=q^*U_*$ on every simplex. These maps restrict to the full edge-inverting subcategories since $U$ preserves inverse equations. All iterated identities are equalities of maps on the products with $\\Delta^n$, so they supply the usual coherent compatibility at every dimension. The equivalences established above are these restriction maps themselves; no functorial choice of their inverses is needed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice: coherence from simplicial composition and the internal functor definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-mapping-homotopy-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Opening compactification choice, realized via the mixed-edge core identity and the explicit two-test-object inverse argument. Online Kerodon 01DA, 01MS and 01MY checked; archived versions are wanted."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,15 +166,59 @@
    "results": "{\"t\": \"2026-10-16T08:21:10Z\", \"tool\": \"grep\", \"query\": \"(classifying|realization|nerve).*(directed|filtered|contractib)|(localiz|groupoid).*(quasicategor|KanComplex)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\"], \"digest\": \"726206dcdfb5a9d7\"}",
    "date": "2026-10-16",
    "verdict": "no match: model-category fibrancy and Brown factorizations do not state all-edge localization with its full enhanced functor-category universal property. Read CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean:62-104 and CategoryTheory/Localization/Predicate.lean:14-56: these give ordinary groupoids and ordinary localized categories only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a weak homotopy equivalence to a Kan complex is an equivalence of infinity categories of diagrams inverting all edges",
+   "results": "{\"t\": \"2026-10-16T10:58:14Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction along a weak homotopy equivalence to a Kan complex is an equivalence of infinity categories of diagrams inverting all edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"SSet.Truncated.nerve₂Adj\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"SSet.hoFunctor\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.Truncated.HomotopyCategory.mkNatIso\"], \"digest\": \"b6afe24a16a12977\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: homotopy categories and ordinary category localizations do not assert an equivalence of full quasicategorical functor categories with arbitrary coherent transformations. Read Quasicategory/Basic.lean:34-63 and Localization/Predicate.lean:14-56; the latter uses ordinary categories."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.completion|quasicategor.*localiz|localiz.*quasicategor",
+   "results": "{\"t\": \"2026-10-16T10:58:48Z\", \"tool\": \"grep\", \"query\": \"groupoid.completion|quasicategor.*localiz|localiz.*quasicategor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: homotopy categories and ordinary category localizations do not assert an equivalence of full quasicategorical functor categories with arbitrary coherent transformations. Read Quasicategory/Basic.lean:34-63 and Localization/Predicate.lean:14-56; the latter uses ordinary categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Kan replacement of a simplicial set localizes its infinity category at all edges",
+   "results": "{\"t\": \"2026-10-16T10:58:49Z\", \"tool\": \"leansearch\", \"query\": \"A Kan replacement of a simplicial set localizes its infinity category at all edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.KanComplex.hornFilling\", \"SSet.KanComplex\", \"SSet.instQuasicategoryOfKanComplex\", \"CategoryTheory.Functor.q_isLocalization\", \"SSet.toTop\", \"CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"CategoryTheory.SimplicialObject.isCoskeletal_iff\"], \"digest\": \"0c73444177b8f3ef\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: homotopy categories and ordinary category localizations do not assert an equivalence of full quasicategorical functor categories with arbitrary coherent transformations. Read Quasicategory/Basic.lean:34-63 and Localization/Predicate.lean:14-56; the latter uses ordinary categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KanComplex\", \"weakEquivalence\"",
+   "results": "{\"t\": \"2026-10-16T10:58:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"KanComplex\\\", \\\"weakEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: homotopy categories and ordinary category localizations do not assert an equivalence of full quasicategorical functor categories with arbitrary coherent transformations. Read Quasicategory/Basic.lean:34-63 and Localization/Predicate.lean:14-56; the latter uses ordinary categories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-cofiltered-coherent-equivalence-diagrams",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-cbc-simplicial-groupoid-localization",
+  "worker": "stage1",
+  "summary": "Kept the statement and its full coherent transformation clause. Reused the existing enhanced functor/cone calculus and split to one genuinely smaller simplicial homotopy-invariance lemma. Wrote the mixed-edge core identity, parameterized currying, and a direct construction of the inverse using surjectivity at B and injectivity at A. Checked the geometric-realization weak-equivalence convention against Kerodon 03X7. No Lean attachment or complete Mathlib match was found. Repair of returned head af1a15b1ee: re-read the current enhanced-definition and calculus statements, refreshed all citation quotations, made compatibility with the explicit internal-Hom operators visible in step 3, and corrected the main-20261015 ancestor location. The statement and dependency sets are unchanged.",
+  "blueprint": "thm-cbc-finite-level-proetale, proof opening \"Choose a compactification c=(j,p)\": coherent independence of this compactification choice via the existing local compact-support-extension/cofiltered-diagram split. Read the current main-20261015 ancestor at literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md and the historical master snapshot. The opening choice is the same; historical blueprint ancestry and the maintainer-owned unit are retained. No blueprint_update is present on the item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-b637d0129",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-b637d0129 (reviewer sub-agent of L); spot-checked: The mathematics and citations check out, but proof steps 3 (parameterized currying) and 5 (two-test-object quasi-inverse construction) are substantive and were incorrectly marked elementary. Corrected full DAG JSON is in fixes/dag/nodes/sec-smooth-purity/lem-cbc-simplicial-groupoid-localization.json; review is in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

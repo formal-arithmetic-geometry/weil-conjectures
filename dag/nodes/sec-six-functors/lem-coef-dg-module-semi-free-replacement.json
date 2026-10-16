@@ -24,9 +24,108 @@
  "stmt_deps": [
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an object $U$ and integer $s$, write $h_U[-s]=\\mathcal B(-,U)[-s]$ with generator $e=1_U$ in degree $s$. The unit is closed: the chain-map composition identity gives $d(1_U)=d(1_U)1_U+1_Ud(1_U)=2d(1_U)$, hence $d(1_U)=0$. At an object $V$, elements are finite sums $ea$ with $a\\in\\mathcal B(V,U)$ and $|ea|=s+|a|$. Its differential is $d(ea)=(-1)^s e\\,d_{\\mathcal B}a$. A prescribed homogeneous value $e\\mapsto z\\in N(U)^s$ extends uniquely to a graded right-module map by $ea\\mapsto za$; when $dz=0$, this is a dg-module map since $d_N(za)=(-1)^s z\\,d_{\\mathcal B}a$. This is a direct computation with the representable, shift, and module definitions in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, §13.3 (printed p. 33) and §14.8 (printed p. 36); explicit generator expansion of successive attachments for right modules."
+   }
+  },
+  {
+   "text": "Set $P_0=0$. Let $I_1$ be the set of triples $(U,s,z)$ where $U$ is an object of $\\mathcal B$, $s\\in\\mathbf Z$, and $z\\in M(U)^s$ satisfies $dz=0$. These are sets in the universes of [def-weil-size-convention]. Form the objectwise direct sum $P_1=\\bigoplus_{(U,s,z)\\in I_1}h_U[-s]$. Its generator $e_{U,s,z}$ has degree $s$ and differential zero. Step 1 defines a dg-module map $q_1:P_1\\to M$ by $q_1(e_{U,s,z}a)=za$. In particular every cocycle of $M(U)$ has a specified cocycle lift in $P_1(U)$.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, §13.3 (printed p. 33) and §14.8 (printed p. 36); explicit generator expansion of successive attachments for right modules."
+   }
+  },
+  {
+   "text": "Inductively, suppose that $P_i$ and a dg-module map $q_i:P_i\\to M$ have been constructed, for $i\\geq1$. Take the set $J_i$ of all tuples $(U,r,x,y)$ with $x\\in P_i(U)^r$, $dx=0$, $y\\in M(U)^{r-1}$ and $q_i(x)=d_My$. Form the graded right module\n$$P_{i+1}^{\\#}=P_i^{\\#}\\oplus\\bigoplus_{(U,r,x,y)\\in J_i}h_U[1-r]^{\\#}.$$\nFor the new generator $t=t_{U,r,x,y}$ of degree $r-1$, prescribe\n$$d(t a)=x a+(-1)^{r-1}t\\,d_{\\mathcal B}a,$$\nand retain the old differential on $P_i$. The superscript $\\#$ means that the differential has been forgotten. For each new summand at an object $V$, the coefficient maps $a\\mapsto xa$ into $P_i(V)$ and $a\\mapsto d_{\\mathcal B}a$ into the same shifted representable are additive maps on $\\mathcal B(V,U)$ itself. Thus the formula respects all additive relations in that complex, even if it has torsion; no basis over $\\mathbf Z$ is chosen. All direct sums consist of finite-support sums, so these operators combine to an additive degree-one operator at each object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, §13.3 (printed p. 33) and §14.8 (printed p. 36); explicit generator expansion of successive attachments for right modules."
+   }
+  },
+  {
+   "text": "The operator in Step 3 squares to zero: on a new generator multiple $ta$ its square is\n$$d^2(ta)=(-1)^r x\\,d_{\\mathcal B}a+(-1)^{r-1}x\\,d_{\\mathcal B}a=0,$$\nusing $dx=0$ and $d_{\\mathcal B}^2=0$; it squares to zero on the old summand by induction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, §13.3 (printed p. 33) and §14.8 (printed p. 36); explicit generator expansion of successive attachments for right modules."
+   }
+  },
+  {
+   "text": "For homogeneous composable $a,b$, expand $d_{\\mathcal B}(ab)=(d_{\\mathcal B}a)b+(-1)^{|a|}a\\,d_{\\mathcal B}b$ in the formula for $d(tab)$. The result is $d(ta)b+(-1)^{r-1+|a|}(ta)d_{\\mathcal B}b$, which is exactly the dg-module action identity. The old summand already satisfies this identity. Thus $P_{i+1}$ is a right dg module. Units and associativity of the graded action are inherited summand by summand from $P_i$ and the representables.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, §13.3 (printed p. 33) and §14.8 (printed p. 36); explicit generator expansion of successive attachments for right modules."
+   }
+  },
+  {
+   "text": "Define $q_{i+1}$ on the old summand to be $q_i$ and on a new generator multiple by $q_{i+1}(ta)=ya$. These formulas give a graded module map by the generator-to-value calculation in Step 1, which does not require the value $y$ to be closed. Then\n$$q_{i+1}d(ta)=q_i(x)a+(-1)^{r-1}y\\,d_{\\mathcal B}a=d_M(ya),$$\nsince $q_i(x)=d_My$. Hence $q_{i+1}$ is a dg-module map extending $q_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, §13.3 (printed p. 33) and §14.8 (printed p. 36); explicit generator expansion of successive attachments for right modules."
+   }
+  },
+  {
+   "text": "The inclusion $P_i\\hookrightarrow P_{i+1}$ is a dg-module inclusion and splits as a graded module map by projection onto the first summand of Step 3. Modulo $P_i$, the term $xa$ in the new differential vanishes. Therefore the quotient differential is $d(ta)=(-1)^{r-1}t\\,d_{\\mathcal B}a$, the differential of $h_U[1-r]$. Consequently\n$$P_{i+1}/P_i\\cong\\bigoplus_{(U,r,x,y)\\in J_i}h_U[1-r]$$\nas dg modules. In addition, every cycle $x\\in P_i(U)^r$ whose image under $q_i$ is the boundary $d_My$ becomes the boundary $d(t_{U,r,x,y}1_U)=x1_U+(-1)^{r-1}t_{U,r,x,y}d(1_U)=x$ in $P_{i+1}(U)$, using the closed unit from Step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, §13.3 (printed p. 33) and §14.8 (printed p. 36); explicit generator expansion of successive attachments for right modules."
+   }
+  },
+  {
+   "text": "Repeat Steps 3–7 by induction on $i\\geq1$. Take the increasing union $P(V)=\\bigcup_iP_i(V)$ at each object $V$, with differential and actions inherited from the stages. They are well-defined because every inclusion is a dg-module map; their identities hold at the stage containing the elements in question. The compatible maps $q_i$ define a dg-module map $q:P\\to M$. The filtration starting with $P_0=0$ is exhaustive by this definition of $P$. Its first quotient is the direct sum in Step 2, and all later quotients and graded splittings are given in Step 7. Thus $P$ is semi-free exactly as defined in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, §13.3 (printed p. 33) and §14.8 (printed p. 36); explicit generator expansion of successive attachments for right modules."
+   }
+  },
+  {
+   "text": "Fix an object $U$ and an integer $r$. Each class in $H^r(M(U))$ has a cocycle representative $z\\in M(U)^r$. The generator $e_{U,r,z}\\in P_1(U)^r\\subseteq P(U)^r$ is closed and maps to $z$ by Step 2, so $H^r(q(U))$ is surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, §13.3 (printed p. 33) and §14.8 (printed p. 36); explicit generator expansion of successive attachments for right modules."
+   }
+  },
+  {
+   "text": "For injectivity, let a closed $x\\in P(U)^r$ map to a boundary $d_My$. Since $P$ is an increasing union, $x$ belongs to some $P_i(U)$ with $i\\geq1$. The inclusion $P_i(U)\\to P(U)$ is injective, so $dx=0$ already in $P_i(U)$. The tuple $(U,r,x,y)$ belongs to $J_i$, and Step 7 supplies $t_{U,r,x,y}\\in P_{i+1}(U)^{r-1}$ with $dt=x$. Thus the class of $x$ is zero. This proves injectivity, and hence $H^r(q(U))$ is an isomorphism for every $U,r$. The map $q$ is therefore the required objectwise quasi-isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld, DG quotients of DG categories, §13.3 (printed p. 33) and §14.8 (printed p. 36); explicit generator expansion of successive attachments for right modules."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2: explicit generator construction following the successive-cell method of Drinfeld §§13.3 and 14.8, with all differential, quotient, and cohomology calculations written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,10 +196,80 @@
    "results": "{\"t\": \"2026-10-16T12:46:19Z\", \"tool\": \"leanfinder\", \"query\": \"Derived quotient by acyclic dg modules computes mapping complexes from homotopically projective modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.Qh_map_bijective\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"DerivedCategory.Q\", \"DerivedCategory.Qh\", \"CochainComplex.IsKProjective.homotopyZero\", \"HomotopyEquiv.isKProjective\"], \"digest\": \"868de05f7dcce0f8\"}",
    "date": "2026-10-16",
    "verdict": "no match: inspected Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:39-65. These concern ordinary cochain complexes in an abelian category, not graded modules over a dg category, semi-free representable filtrations, or enhanced dg quotients. CochainComplex.isKProjective_of_projective moreover requires a bounded-above complex of projective objects. The dg-module/quotient vocabulary grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?free|dg.?module|homotopically.?projective",
+   "results": "{\"t\": \"2026-10-16T14:01:54Z\", \"tool\": \"grep\", \"query\": \"semi.?free|dg.?module|homotopically.?projective\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary projective resolutions or ordinary complexes, not semi-free dg-category modules. Read Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean and Algebra/Homology/HomotopyCategory/KProjective.lean; neither states the target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semi-free resolution of a module over a differential graded category",
+   "results": "{\"t\": \"2026-10-16T14:01:55Z\", \"tool\": \"leansearch\", \"query\": \"Semi-free resolution of a module over a differential graded category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.projectiveResolution\", \"CategoryTheory.ProjectiveResolution.instHasProjectiveResolution\", \"CategoryTheory.HasProjectiveResolutions.out\", \"CategoryTheory.ProjectiveResolution.of_def\", \"CategoryTheory.ProjectiveResolution.ofComplex\", \"CategoryTheory.InjectiveResolution.of_def\", \"CategoryTheory.projectiveResolution\", \"CategoryTheory.projectiveResolutions\"], \"digest\": \"9dc35e0e4905e306\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary projective resolutions or ordinary complexes, not semi-free dg-category modules. Read Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean and Algebra/Homology/HomotopyCategory/KProjective.lean; neither states the target."
+  },
+  {
+   "tool": "loogle",
+   "query": "SemiFree, DGModule, ProjectiveResolution",
+   "results": "{\"t\": \"2026-10-16T14:01:55Z\", \"tool\": \"loogle\", \"query\": \"SemiFree, DGModule, ProjectiveResolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SemiFree'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid query: loogle: unknown identifier 'SemiFree'; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every right dg module over a small dg category admits a semi-free resolution",
+   "results": "{\"t\": \"2026-10-16T14:01:57Z\", \"tool\": \"leanfinder\", \"query\": \"Every right dg module over a small dg category admits a semi-free resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasProjectiveResolutions\", \"CategoryTheory.HasProjectiveResolution\", \"ModuleCat.projectiveResolution\", \"CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions\", \"CategoryTheory.ProjectiveResolution.instHasProjectiveResolution\", \"CategoryTheory.HasProjectiveResolution.out\", \"CategoryTheory.HasProjectiveResolutions.out\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\"], \"digest\": \"f1e5f1216b40676f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary projective resolutions or ordinary complexes, not semi-free dg-category modules. Read Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean and Algebra/Homology/HomotopyCategory/KProjective.lean; neither states the target."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?free|dg.?module|differential.?graded",
+   "results": "{\"t\": \"2026-10-16T14:17:33Z\", \"tool\": \"grep\", \"query\": \"semi.?free|dg.?module|differential.?graded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\"], \"digest\": \"b00540e86065b3f2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary K-projectivity of cochain complexes, Dold–Kan constructions, and differential graded objects do not construct semi-free modules over a dg category. Read KProjective.lean:29–54, Projective/Resolution.lean:35–68, and DifferentialObject.lean:12–28."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofibrant cellular replacement of differential graded presheaves by sums of shifted representables",
+   "results": "{\"t\": \"2026-10-16T14:17:34Z\", \"tool\": \"leanfinder\", \"query\": \"Cofibrant cellular replacement of differential graded presheaves by sums of shifted representables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂\", \"HomologicalComplex.evalCompCoyonedaCorepresentative\", \"AlgebraicTopology.DoldKan.Γ₀'\", \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"AlgebraicTopology.DoldKan.Γ₀_obj_obj\", \"AlgebraicTopology.DoldKan.Γ₀.obj_obj\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand\"], \"digest\": \"f8a07ab6256683e4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary K-projectivity of cochain complexes, Dold–Kan constructions, and differential graded objects do not construct semi-free modules over a dg category. Read KProjective.lean:29–54, Projective/Resolution.lean:35–68, and DifferentialObject.lean:12–28."
+  },
+  {
+   "tool": "grep",
+   "query": "semifree|semi_free|cellular.*resolution|DGModule|DifferentialGradedModule",
+   "results": "{\"t\": \"2026-10-16T14:34:36Z\", \"tool\": \"grep\", \"query\": \"semifree|semi_free|cellular.*resolution|DGModule|DifferentialGradedModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader read KProjective.lean:29-54, Projective/Resolution.lean:35-68, LeftResolution/Basic.lean:29-65 and 190-196, Presheaf/Free.lean:36-52 and Presheaf/Generator.lean:54-76. These state ordinary K-projectivity, nonnegative object resolutions, or free presheaves over a presheaf of rings. None constructs a dg-category module replacement filtered by shifted representables. Loogle and the independent dg-cell vocabulary grep returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Enriched\", \"Module\"",
+   "results": "{\"t\": \"2026-10-16T14:34:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Enriched\\\", \\\"Module\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader read KProjective.lean:29-54, Projective/Resolution.lean:35-68, LeftResolution/Basic.lean:29-65 and 190-196, Presheaf/Free.lean:36-52 and Presheaf/Generator.lean:54-76. These state ordinary K-projectivity, nonnegative object resolutions, or free presheaves over a presheaf of rings. None constructs a dg-category module replacement filtered by shifted representables. Loogle and the independent dg-cell vocabulary grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential graded functor into cochain complexes has a resolution filtered by coproducts of shifted Yoneda functors",
+   "results": "{\"t\": \"2026-10-16T14:34:37Z\", \"tool\": \"leanfinder\", \"query\": \"A differential graded functor into cochain complexes has a resolution filtered by coproducts of shifted Yoneda functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.LeftResolution.chainComplexFunctor\", \"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.cochainComplex\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CategoryTheory.InjectiveResolution.cochainComplex\", \"CategoryTheory.InjectiveResolution.cocomplex\", \"CategoryTheory.Abelian.LeftResolution\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\"], \"digest\": \"51286a07bf94e92c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader read KProjective.lean:29-54, Projective/Resolution.lean:35-68, LeftResolution/Basic.lean:29-65 and 190-196, Presheaf/Free.lean:36-52 and Presheaf/Generator.lean:54-76. These state ordinary K-projectivity, nonnegative object resolutions, or free presheaves over a presheaf of rings. None constructs a dg-category module replacement filtered by shifted representables. Loogle and the independent dg-cell vocabulary grep returned zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolve an enriched presheaf on a differential graded category by successive free cells",
+   "results": "{\"t\": \"2026-10-16T14:35:05Z\", \"tool\": \"leansearch\", \"query\": \"Resolve an enriched presheaf on a differential graded category by successive free cells\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.ofComplex\", \"PresheafOfModules.freeObj\", \"CategoryTheory.Sheaf.freeYoneda\", \"ModuleCat.projectiveResolution\", \"CategoryTheory.ProjectiveResolution.of\", \"CategoryTheory.HasProjectiveResolutions\", \"PresheafOfModules.freeYoneda\", \"PresheafOfModules.freeObj_obj\"], \"digest\": \"40d809b25d9ff1d9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader read KProjective.lean:29-54, Projective/Resolution.lean:35-68, LeftResolution/Basic.lean:29-65 and 190-196, Presheaf/Free.lean:36-52 and Presheaf/Generator.lean:54-76. These state ordinary K-projectivity, nonnegative object resolutions, or free presheaves over a presheaf of rings. None constructs a dg-category module replacement filtered by shifted representables. Loogle and the independent dg-cell vocabulary grep returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-module-projective-resolution",
   "by": "worker",
@@ -116,5 +285,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-dg-module-semi-free-replacement",
+  "worker": "stage1",
+  "summary": "Expanded the right dg-module semi-free resolution explicitly. The first stage has a generator for every target cocycle. At each successor stage a generator of degree r−1 is attached for every cycle x of degree r with image dy, with dt=x and q(t)=y. The proof checks the differential square, action Leibniz identity, chain-map identity, graded splittings and shifted-representable quotients, then proves cohomology surjectivity and injectivity directly in the union. Three initially proposed auxiliary nodes were folded into the proof because their construction/calculation arguments are elementary. No new nodes and no Mathlib leaves.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2: projective dg-module models used for the finite derived mapping-complex adjunction before total inverse limit."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-deda04b01",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-deda04b01 (reviewer sub-agent of L); spot-checked: Read the complete mathematics and wrote review.md. All ten construction, sign, quotient, and cohomology steps check out against Drinfeld §§13.3/14.8; Stacks 09KP is correctly limited to comparison. No new nodes, circular dependencies, hidden flatness assumptions, or target weakening found. Historical unit mismatch remains documented; no fixes required."
  }
 }

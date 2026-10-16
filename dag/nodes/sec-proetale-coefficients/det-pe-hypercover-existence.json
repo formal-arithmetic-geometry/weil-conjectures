@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-hypercover-existence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Hypercovers by single w-contractible affines",
@@ -19,43 +19,227 @@
   ]
  },
  "stmt_deps": [
-  "det-pe-wlocal-strict-contractible"
+  "sk-def-pe-site",
+  "det-pe-wlocal-strict-contractible",
+  "det-pe-weak-contractible-equivalences",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-coskeleton"
  ],
  "proof": [
   {
-   "text": "*1.* $\\operatorname{Spec}D=\\bigsqcup_j\\operatorname{Spec}D_j$ is a finite disjoint union of\nclopen pieces. Its closed points are the union of those of the pieces, hence closed; every\npoint specializes only inside its piece, hence to exactly one closed point; and the local\nrings at closed points are those of the $D_j$, strictly henselian. Its space of components\nis the finite disjoint union of the $\\pi_0(\\operatorname{Spec}D_j)$; the closure of an open\nsubset is computed piecewise, so extremal disconnectedness is preserved.",
-   "uses": [],
-   "elementary": null
+   "text": "For clause 1, identify $\\operatorname{Spec}(\\prod_{j\\in J}D_j)$ with $\\coprod_{j\\in J}\\operatorname{Spec}D_j$ by [lem-weil-pbc-finite-affine-coproduct-spectrum]. The summands are open and closed by [lem-weil-pbc-scheme-coproduct-family]. Thus the closed-point set is the finite union of the closed-point sets of the summands, hence closed, and each point has exactly the same specializations and local ring as in its summand. The w-local and strictly henselian local-ring requirements of [det-pe-wlocal-strict-contractible] hold piecewise. Connected components cannot cross an open-and-closed summand; their quotient topology is the disjoint-union topology. Closure of an open in this finite disjoint union is the union of its closures in the summands, which are open. This proves extremal disconnectedness and hence w-contractibility. For $J=\\varnothing$ the product is the zero ring, its spectrum and component space are empty, and all requirements are vacuous.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "det-pe-wlocal-strict-contractible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-existence.proof.md",
+    "place": "Proof, part 1: finite products and the geometric definition of w-contractibility"
+   }
   },
   {
-   "text": "*2.* By [det-pe-wcb-cover], $V$ has a covering by maps\n$\\operatorname{Spec}D_i\\to\\operatorname{Spec}B_i\\subset V$ with $\\operatorname{Spec}B_i$\nranging over all affine opens and $B_i\\to D_i$ faithfully flat. As $V$ is quasi-compact,\nfinitely many affine opens $\\operatorname{Spec}B_1,\\dots,\\operatorname{Spec}B_k$ cover\n$V$. Put $D=D_1\\times\\dots\\times D_k$, w-contractible by 1. The map\n$\\operatorname{Spec}D\\to V$ is weakly étale, and $\\{\\operatorname{Spec}D\\to V\\}$ is a\npro-étale covering: for an affine open $W\\subset V$ the sets $W\\cap\\operatorname{Spec}B_j$\nare covered by finitely many opens that are standard in both $W$ and\n$\\operatorname{Spec}B_j$ (a standard fact on affine opens of a scheme), and the preimage in $\\operatorname{Spec}D_j$\nof such a standard open $D(h)$ is the affine $\\operatorname{Spec}(D_j)_h$, surjecting\nonto $D(h)$.",
+   "text": "Apply [det-pe-wcb-cover] to the quasi-compact object $V$. Write its covering maps as $A_i=\\operatorname{Spec}D_i\\to B_i=\\operatorname{Spec}R_i\\subset V$, with $D_i$ w-contractible and $R_i\\to D_i$ faithfully flat. By [lem-weil-pbc-faithfully-flat-surjective-spectrum], the image of $A_i$ in $V$ is exactly $B_i$. The covering condition [def-weil-pbc-proetale-covering] implies joint surjectivity, so the affine opens $B_i$ cover $V$. Choose finitely many $B_{i_1},\\ldots,B_{i_k}$ covering $V$. The corresponding $A_{i_j}$ are affine qcqs site objects, and their scheme disjoint union $A$ is a site object by [lem-weil-pbc-proetale-qcqs-finite-family-geometry]. The component maps give $A\\to V$ by [lem-weil-pbc-scheme-coproduct-family]. The spectrum-product identification of [lem-weil-pbc-finite-affine-coproduct-spectrum] and step 1 identify $A$ with $\\operatorname{Spec}D$ for the w-contractible ring $D=\\prod_{j=1}^kD_{i_j}$. The map $A\\to V$ is weakly étale by [lem-trf-weakly-etale-between-objects].",
    "uses": [
-    "det-pe-wcb-cover"
+    "det-pe-wcb-cover",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-trf-weakly-etale-between-objects"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-existence.proof.md",
+    "place": "Proof, part 2: choose finitely many affine charts and form the product ring"
+   }
   },
   {
-   "text": "*3.* Fibre products of quasi-compact, quasi-separated objects over the quasi-separated $U$\nare quasi-compact and quasi-separated, and so are equalizers ($A\\times_{B\\times_UB}B$ for\ntwo maps $A\\rightrightarrows B$, the diagonal of $B/U$ being quasi-compact). Hence finite\nlimits over $U$ of quasi-compact, quasi-separated objects (which exist in\n$X_{\\mathrm{proét}}$ by part 1 of [det-pe-topos-functoriality-site]) are quasi-compact and\nquasi-separated. Build $W_\\bullet$ by induction on the simplicial degree, using the split\nconstruction: let $N_0\\to U$ be a covering as in 2 and $W_0=N_0$. Given the $r$-truncated\nsimplicial object $W_{\\leq r}$ with all terms of the required form, let\n$M_{r+1}=(\\operatorname{cosk}_rW_{\\leq r})_{r+1}$, a finite limit of the $W_i$, $i\\leq r$,\nover $U$; it is quasi-compact and quasi-separated, so 2 gives a covering\n$N_{r+1}=\\operatorname{Spec}D'\\to M_{r+1}$ with $D'$ w-contractible. Put\n\n$$\nW_{r+1}=N_{r+1}\\sqcup\\bigsqcup_{\\sigma\\colon[r+1]\\twoheadrightarrow[k],\\ k\\leq r}N_k ,\n$$\n\nwith degeneracies and faces defined as in the standard construction of split\nhypercoverings (Stacks, Tag 09A1, and the general construction of hypercoverings in\nStacks, Chapter Hypercoverings). The map $W_{r+1}\\to M_{r+1}$ restricts on $N_{r+1}$ to a\ncovering, hence is a covering. Finally $W_{r+1}$ is a finite disjoint union of spectra of\nw-contractible rings, hence the spectrum of a w-contractible ring by 1, and it is weakly\ncontractible by [det-pe-weak-contractible-equivalences].",
+   "text": "Check the finite-refinement condition for $A\\to V$, without assuming $V$ quasi-separated. Fix an affine open $H\\subset V$. For every $x\\in H$, choose $j$ with $x\\in B_{i_j}$, and use [lem-weil-pbc-affine-opens-basis] to choose an affine open $P_x$ with $x\\in P_x\\subset H\\cap B_{i_j}$. Since $H$ is quasi-compact, finitely many such $P_x$ cover $H$. The map $A_{i_j}\\to B_{i_j}$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine]; hence its inverse image of $P_x$ is an affine open of $A_{i_j}$ and therefore of $A$. Its image is exactly $P_x$, by the surjectivity established in step 2. These finitely many affine opens of $A$ have images with union exactly $H$. Together with weak étaleness, [def-weil-pbc-proetale-covering] proves that $\\{A\\to V\\}$ is a covering. This proves clause 2; if $V=\\varnothing$, the empty choice gives $A=\\operatorname{Spec}(0)$ and the same covering condition is vacuous.",
    "uses": [
-    "det-pe-topos-functoriality-site",
-    "det-pe-weak-contractible-equivalences"
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-pbc-proetale-covering"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-existence.proof.md",
+    "place": "Proof, part 2: affine-test-open covering verification, replacing the unnecessary simultaneous-standard-open refinement"
+   }
+  },
+  {
+   "text": "For clause 3 let $\\mathcal D$ be the full subcategory of qcqs objects of $X_{\\mathrm{proét}}$, with finite pro-étale covering families. By [lem-weil-pbc-proetale-qcqs-finite-family-geometry], it has scheme fibre products, and $\\mathcal D/U$ has finite limits computed as scheme limits and agreeing with the limits in the full site slice. Let $\\mathcal B$ be its set of affine spectra of w-contractible rings, in the size convention of [def-weil-size-convention]. Step 3 supplies a singleton $\\mathcal B$-cover of every object of $\\mathcal D$. Adjoining an arrow from a $\\mathcal B$-object to a finite cover preserves the cover, by the finite-adjoining clause of the same geometry node. Thus all hypotheses of the finite-basis hypercover construction are satisfied; there is no assumption that the base scheme $X$ is qcqs.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A1, lemma-w-contractible-hypercovering, proof of (2), qcqs subsite paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-finite-basis-hypercover-existence] to $\\mathcal D$, its finite covering precoverage, $\\mathcal B$, and $U$. It gives an augmented simplicial formal family $K$ over $U$, with $K_n=\\{A_{n,i}\\to U\\}_{i\\in I_n}$, every $I_n$ finite, every $A_{n,i}=\\operatorname{Spec}D_{n,i}$ with $D_{n,i}$ w-contractible, and componentwise covering matching arrows in every degree. All simplicial identities, including the degeneracy identities required by the split-skeleton construction, are supplied by this cited theorem. Its degree-zero matching family is $\\{\\operatorname{id}_U\\}$.",
+   "uses": [
+    "lem-weil-pbc-site-finite-basis-hypercover-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 094K, lemma-w-contractible; the finite split-skeleton construction of Tag 0DAV, lemma-hypercovering-object"
+   }
+  },
+  {
+   "text": "Realize each finite formal family $\\{T_i\\to U\\}$ by the scheme disjoint union $\\coprod_iT_i\\to U$, and each formal family morphism by its component maps and the coproduct mapping property [lem-weil-pbc-scheme-coproduct-family]. This is a functor $R$ to $\\mathcal D/U$; the identity and composition equations hold on every coprojection. The finite-family terminal object and pullback formulas are given by [lem-weil-pbc-semi-representable-finite-limits]. Realization sends the terminal family $\\{\\operatorname{id}_U\\}$ to $U$. For a formal cospan $(\\alpha,f_i):\\{T_i\\}\\to\\{S_j\\}\\leftarrow\\{T'_k\\}:(\\beta,g_k)$, distribute the actual scheme pullback over its finite coproducts by [lem-sc-etale-fibre-product-base-change-coproduct]. A pair of components has empty pullback when $\\alpha(i)\\ne\\beta(k)$, because the corresponding summands of $\\coprod_jS_j$ are disjoint open subschemes, and otherwise its pullback is $T_i\\times_{S_{\\alpha(i)}}T'_k$. Hence the resulting scheme pullback is precisely the realization of the formal pullback. All objects involved lie in $\\mathcal D/U$ by [lem-weil-pbc-proetale-qcqs-finite-family-geometry]. Restricting to finite families, the finite-limit formulas have finite index sets. Therefore [lem-weil-pbc-finite-limits-from-terminal-pullbacks] implies that $R$ preserves their finite limits.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-semi-representable-finite-limits",
+    "lem-sc-etale-fibre-product-base-change-coproduct",
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "lem-weil-pbc-finite-limits-from-terminal-pullbacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0DB2, remark-take-unions-hypercovering-X, condition (b); finite-family limits as in Tag 01G2, lemma-coprod-prod-SR"
+   }
+  },
+  {
+   "text": "Put $W_n=R(K_n)$ and apply $R$ to every simplicial operator and the augmentation. Functoriality gives a simplicial object $W_\\bullet\\to U$. Work in $\\mathcal D/U$, whose terminal object is $U$. The finite-basis theorem in step 5 defines the formal matching family as the limit over all proper injective faces $\\delta:[l]\\hookrightarrow[n]$, $l<n$. This diagram is finite; step 6 identifies its realization with the scheme limit $M_n$ of the same proper-face diagram. To compare with the coskeleton, [lem-weil-pbc-coskeleton-matching-tuples] describes its degree-$n$ term by compatible families over all ordinal maps $\\alpha:[k]\\to[n]$ with $k<n$. Factor $\\alpha$ uniquely as $\\delta\\circ q$, where $q:[k]\\twoheadrightarrow[l]$ is surjective and $\\delta:[l]\\hookrightarrow[n]$ enumerates its ordered image; then $l<n$. Given a compatible proper-face family $(x_\\delta:Z\\to W_l)_\\delta$, define $x_\\alpha=W(q)\\circ x_\\delta$. For $\\psi:[k']\\to[k]$ with $k'<n$, factor $q\\circ\\psi=i\\circ q'$ through its ordered image, with $i$ injective and $q'$ surjective. The proper-face compatibility gives $x_{\\delta\\circ i}=W(i)\\circ x_\\delta$, hence $x_{\\alpha\\circ\\psi}=W(q')\\circ W(i)\\circ x_\\delta=W(\\psi)\\circ W(q)\\circ x_\\delta=W(\\psi)\\circ x_\\alpha$. Conversely, compatibility of an all-map family with $q$ forces $x_\\alpha=W(q)\\circ x_\\delta$; restriction and extension are inverse. This bijection is natural in $Z$, so the two representing limits are canonically isomorphic. The family of components of the realized matching arrow is $(W(\\delta))_\\delta$; extension sends it to $(W(\\alpha))_\\alpha$, which is exactly the canonical coskeleton morphism by the cited theorem. Thus $M_n\\cong(\\operatorname{cosk}_{n-1}\\operatorname{sk}_{n-1}W)_n$ for $n\\ge1$. For $n=1$ both indexing descriptions consist of the two maps $[0]\\to[1]$, so $M_1=W_0\\times_UW_0$ with no face relation in degree $-1$. In degree zero the matching target is $U$.",
+   "uses": [
+    "lem-weil-pbc-coskeleton-matching-tuples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex; literature/stacks-project/simplicial.tex",
+    "place": "Tag 0DB2, remark-take-unions-hypercovering-X, finite-limit comparison; Tag 0183, lemma-existence-cosk, all-ordinal-map universal property; explicit image factorization gives the proper-face comparison"
+   }
+  },
+  {
+   "text": "The realized matching arrows are actual pro-étale singleton coverings, as follows directly from the componentwise covering assertion in step 5. Write one finite formal matching family as $\\{M_j\\}_{j\\in J}$, so its actual target is $M=\\coprod_jM_j$. The corresponding actual source is $W_n=\\coprod_iA_{n,i}$. For each affine open $H\\subset M$, choose affine neighborhoods $P_x\\subset H\\cap M_j$ of its points using [lem-weil-pbc-affine-opens-basis] and the open-and-closed summands of [lem-weil-pbc-scheme-coproduct-family]. Finitely many $P_x$ cover $H$. For each $P_x\\subset M_j$, the covering family $\\{A_{n,i}\\to M_j\\mid\\alpha(i)=j\\}$ has, by [def-weil-pbc-proetale-covering], finitely many affine opens of its sources whose images have union exactly $P_x$. Each is an affine open of $W_n$. Combining them over the finitely many $P_x$ gives the required finite affine refinement over $H$. The arrow $W_n\\to M$ is weakly étale by [lem-trf-weakly-etale-between-objects], since source and target are site objects. This proves its singleton covering condition, including the empty matching family. This includes degree zero: take $J$ to be a singleton and $M_j=U$; the componentwise covering supplied by step 5 refines each selected $P_x\\subset H\\subset U$ by finitely many affine opens of the $A_{0,i}$, whose images together cover $H$ exactly. Under the matching isomorphisms of step 7, these are precisely the coverings required in clause 3.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-proetale-covering",
+    "lem-trf-weakly-etale-between-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex; literature/stacks-project/proetale.tex",
+    "place": "Tag 0DB2, condition (c), verified directly using the pro-étale covering definition; Tag 09A1, final disjoint-union paragraph"
+   }
+  },
+  {
+   "text": "Finally [lem-weil-pbc-finite-affine-coproduct-spectrum] gives $W_n\\cong\\operatorname{Spec}(\\prod_{i\\in I_n}D_{n,i})$. The product ring is w-contractible by step 1, and every such affine object is weakly contractible by the final assertion of [det-pe-weak-contractible-equivalences]. Choose these spectra as representatives of $W_n$, conjugating each simplicial operator by the chosen isomorphisms; the middle inverse-isomorphism pairs cancel in every composition, so the simplicial identities persist. The induced isomorphism on matching limits commutes with their projections by the limit universal property, so each new matching map is the old matching map composed with source and target isomorphisms. For an affine open $H$ in the new target, its isomorphic image in the old target is affine; the finite affine source opens refining that image pull back to affine opens of the new source, with images whose union is exactly $H$. The new map is weakly étale by [lem-trf-weakly-etale-between-objects], and [def-weil-pbc-proetale-covering] therefore proves that it is a covering. Hence every term has the required form $W_n=\\operatorname{Spec}D_n$.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "det-pe-weak-contractible-equivalences",
+    "lem-trf-weakly-etale-between-objects",
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-existence.proof.md",
+    "place": "Proof, part 3, final two sentences: finite products and weak contractibility"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "det-pe-wlocal-strict-contractible",
   "det-pe-wcb-cover",
-  "det-pe-topos-functoriality-site",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-pbc-proetale-covering",
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-trf-weakly-etale-between-objects",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "def-weil-size-convention",
+  "lem-weil-pbc-site-finite-basis-hypercover-existence",
+  "lem-weil-pbc-semi-representable-finite-limits",
+  "lem-sc-etale-fibre-product-base-change-coproduct",
+  "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+  "lem-weil-pbc-coskeleton-matching-tuples",
   "det-pe-weak-contractible-equivalences"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-existence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-hypercover/det-pe-hypercover-existence.proof.md",
+  "place": "Parts 1–3, expanded with the finite-family construction of Stacks Tags 094K, 0DAV and 0DB2; the affine-basis refinement avoids any quasi-separatedness assumption in clause 2."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "w.?contractible|weakly.?contractible|hypercover",
+   "results": "Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/Gluing.lean; Mathlib/AlgebraicGeometry/Gluing.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; inspected Mathlib/AlgebraicGeometry/Sites/Proetale.lean:52-63,105-109 (site and finite-limit definitions, no w-contractible hypercover existence).",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists a hypercover of a quasi compact quasi separated scheme in the proetale topology by affine weakly contractible objects",
+   "results": "AlgebraicGeometry.Scheme.quasiCompactCover; AlgebraicGeometry.QuasiCompactCover.of_finite; AlgebraicGeometry.quasiCompactCover_iff; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.Scheme.quasiCompactCover_iff; AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen; AlgebraicGeometry.Scheme.affineCover; AlgebraicGeometry.QuasiCompactCover.of_isOpenMap",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject, AlgebraicGeometry.Scheme",
+   "results": "loogle: unknown identifier 'SimplicialObject'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier; no mathematical absence conclusion from this query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact quasi separated object of the proetale site admits a simplicial hypercover by single affine w-contractible schemes",
+   "results": "AlgebraicGeometry.QuasiCompactCover; AlgebraicGeometry.Scheme.quasiCompactCover; AlgebraicGeometry.QuasiCompactCover.inst; AlgebraicGeometry.QuasiCompactCover.singleton; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X; AlgebraicGeometry.QuasiCompactCover.homCover; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.Scheme.AffineCover",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "w.?[Cc]ontractible|[Ww]eakly.?[Cc]ontractible|proetale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; inspected Mathlib/AlgebraicGeometry/Sites/Proetale.lean:52-63,105-109 (site and finite-limit definitions, no w-contractible hypercover existence).",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Splitting",
+   "results": "CategoryTheory.SimplicialObject.Splitting; CategoryTheory.SimplicialObject.Splitting.N; CategoryTheory.SimplicialObject.Split.mk; CategoryTheory.SimplicialObject.Split.mk'; CategoryTheory.SimplicialObject.Split.s; CategoryTheory.SimplicialObject.Split.mk'_X; CategoryTheory.SimplicialObject.Split.mk'_s; CategoryTheory.SimplicialObject.Splitting.cofan; read Mathlib/AlgebraicTopology/SimplicialObject/Split.lean:16-40 (splitting structure only).",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite disjoint unions of w-contractible affine schemes form the terms of a split hypercover in the pro-etale site",
+   "results": "AlgebraicGeometry.Scheme.GlueData.oneHypercover_X; AlgebraicGeometry.QuasiCompactCover; AlgebraicGeometry.Scheme.GlueData.oneHypercover; AlgebraicGeometry.Scheme.GlueData.oneHypercover_I₀; AlgebraicGeometry.Scheme.GlueData.oneHypercover_Y; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀; AlgebraicGeometry.Scheme.GlueData.oneHypercover_I₁",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "IsWContractible|Projective.*Hypercover|Hypercover.*exists|exists.*Hypercover",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean\", \"Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean\", \"Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean\", \"Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean\", \"Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean\"], \"digest\": \"4d938ca259cb0cf8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; results concern affine covers and zero/one hypercovers, not all-degree w-contractible hypercovers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite split simplicial hypercover with projective affine schemes in the weakly etale topology exists over each qcqs scheme",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.GlueData.oneHypercover\", \"AlgebraicGeometry.QuasiCompactCover.homCover\"], \"digest\": \"85b5e30895c92060\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; results concern affine covers and zero/one hypercovers, not all-degree w-contractible hypercovers"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -76,5 +260,64 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-pe-hypercover"
+ "unit": "sk-prop-pe-hypercover",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-hypercover-existence",
+  "worker": "stage1",
+  "summary": "Expanded all three clauses into nine steps using existing nodes only. Verified the finite product geometric criterion, the affine-basis finite-refinement argument for arbitrary quasi-compact V, the finite-basis formal split-skeleton construction, finite-limit preservation under scheme disjoint-union realization, and actual singleton matching covers. No target statement changed. The imported reference to site axioms did not provide qcqs finite limits; the existing finite-family geometry theorem does. Second reading expanded the proper-face/coskeleton compatibility calculation, handled degree one explicitly, and verified coverings after changing representatives; the redundant proper-face lemma citation was removed.",
+  "blueprint": "Part 1 is step 1; part 2 is steps 2–3; part 3 is steps 4–9. The formal finite split construction and its disjoint-union realization are precisely the finite-skeleton route of the blueprint and Stacks 09A1, made explicit using 094K/0DAV/0DB2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "why": "Provides the qcqs slice limits, finite disjoint unions and finite-adjoining property required by the same hypercover route; the imported site-axiom node does not state these qcqs conclusions."
+   },
+   {
+    "node": "lem-weil-pbc-site-finite-basis-hypercover-existence",
+    "why": "Generic categorical finite split-skeleton construction used by Stacks 09A1 itself, specialized to spectra of w-contractible rings."
+   },
+   {
+    "node": "lem-weil-pbc-coskeleton-matching-tuples",
+    "why": "Generic coskeleton limit universal property; supplies the all-ordinal-map family to compare with the proper-face matching diagram."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Scheme coproduct mapping property and disjoint open summands, used for finite ring products and realizing the formal hypercover."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine-neighborhood basis used to verify finite fpqc refinements explicitly."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic affineness theorem ensuring that inverse images of the chosen affine opens under the faithfully flat affine maps are affine."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Generic faithful-flatness consequence establishing the exact image of each selected affine chart cover."
+   },
+   {
+    "node": "lem-trf-weakly-etale-between-objects",
+    "why": "Generic permanence fact ensures that every assembled map between site objects is weakly étale."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-weil-pbc-site-finite-basis-hypercover-existence",
+  "lem-weil-pbc-coskeleton-matching-tuples",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-trf-weakly-etale-between-objects"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q24-b4f42ae7e",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q24-b4f42ae7e (reviewer sub-agent of L); spot-checked: Reviewed full item, report, cited nodes, blueprint/unit route, Stacks sources, edge cases, and recorded searches. The repaired affine-neighborhood argument correctly handles non-quasi-separated V; all nine proof steps and dependencies check, with no duplicate, cycle, weakened target, unsupported claim, or SGA citation. Review written to review.md."
+ }
 }
