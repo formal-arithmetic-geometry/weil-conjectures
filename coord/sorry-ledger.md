@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1291**, closure **26**, holes in definitions **3**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1288**, closure **24**, holes in definitions **3**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -44,22 +44,22 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1097 | 23 |
+| Sheaf | 1094 | 21 |
 | WeilConjectures | 194 | 3 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2285 | 750 | 1535 | 103 | 17 |
-| 660345513 (Application of proof-dependency imports) | library | 2239 | 748 | 1491 | 91 | 17 |
-| 660345513 (Application of proof-dependency imports) | closure | 1981 | 24 | 1957 | 57 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2285 | 747 | 1538 | 103 | 17 |
+| 660345513 (Application of proof-dependency imports) | library | 2239 | 745 | 1494 | 91 | 17 |
+| 660345513 (Application of proof-dependency imports) | closure | 1981 | 22 | 1959 | 57 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3636 |
+| proved | 3639 |
 | decomposed | 52 |
-| moved | 4021 |
+| moved | 4022 |
 | pruned | 132 |
 | other | 609 |
 
@@ -68,7 +68,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | group | landings | closed | added | net | moved share |
 |---|---:|---:|---:|---:|---:|
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
-| A2 | 120 | 118 | 86 | 32 | 61/120 (50.8%) |
+| A2 | 121 | 119 | 86 | 33 | 61/121 (50.4%) |
 | A3 | 125 | 121 | 81 | 40 | 56/125 (44.8%) |
 | A4 | 74 | 78 | 47 | 31 | 37/74 (50.0%) |
 | B2 | 128 | 134 | 86 | 48 | 54/128 (42.2%) |
@@ -77,13 +77,13 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | C1 | 143 | 146 | 109 | 37 | 73/143 (51.0%) |
 | C2 | 125 | 120 | 84 | 36 | 57/125 (45.6%) |
 | C3 | 117 | 122 | 80 | 42 | 56/117 (47.9%) |
-| C4 | 55 | 56 | 33 | 23 | 21/55 (38.2%) |
+| C4 | 56 | 57 | 34 | 23 | 22/56 (39.3%) |
 | D2 | 139 | 139 | 89 | 50 | 61/139 (43.9%) |
 | D3 | 109 | 120 | 70 | 50 | 50/109 (45.9%) |
 | D4 | 68 | 65 | 47 | 18 | 28/68 (41.2%) |
 | E1 | 160 | 189 | 104 | 85 | 80/160 (50.0%) |
 | E2 | 124 | 119 | 85 | 34 | 60/124 (48.4%) |
-| E3 | 113 | 116 | 95 | 21 | 59/113 (52.2%) |
+| E3 | 114 | 117 | 95 | 22 | 59/114 (51.8%) |
 | E4 | 50 | 57 | 27 | 30 | 19/50 (38.0%) |
 | F1 | 145 | 151 | 107 | 44 | 71/145 (49.0%) |
 | F2 | 148 | 157 | 98 | 59 | 61/148 (41.2%) |
@@ -92,7 +92,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | G1 | 141 | 141 | 112 | 29 | 75/141 (53.2%) |
 | G2 | 139 | 137 | 91 | 46 | 63/139 (45.3%) |
 | G3 | 102 | 105 | 66 | 39 | 45/102 (44.1%) |
-| G4 | 57 | 49 | 31 | 18 | 20/57 (35.1%) |
+| G4 | 58 | 50 | 31 | 19 | 20/58 (34.5%) |
 | H1 | 135 | 132 | 106 | 26 | 74/135 (54.8%) |
 | H2 | 114 | 111 | 92 | 19 | 66/114 (57.9%) |
 | H3 | 121 | 136 | 97 | 39 | 67/121 (55.4%) |
@@ -179,12 +179,11 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | Sheaf.Paper.CondensedFiniteLocalSubmodules | 8 | 1 | C1 |
 | Sheaf.Paper.CondensedQbarScalarPullback | 8 | 1 | C2 |
 | Sheaf.Paper.FiniteDiscreteDerivedCoefficientData | 8 | 1 | E1 |
-| Sheaf.Paper.CondensedQbarFieldEvaluationLinearity | 9 | 1 | C4 |
+| Sheaf.Paper.CondensedQbarFieldCoefficientSquare | 10 | 1 | C4 |
 | Sheaf.Paper.IntegralResidueTensorGeometry | 10 | 1 | A4 |
 | Sheaf.Paper.ProEtaleLisseOrigin | 10 | 1 | D3 |
 | Sheaf.AlgebraicGeometry.ConstructiblePartitionLocalClosedStratum | 11 | 1 | D4 |
 | Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk | 11 | 1 | E2 |
-| Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk | 11 | 1 | E3 |
 | Sheaf.CategoryTheory.SiteConstantModuleIsomSheaf | 11 | 1 | E4 |
 | Sheaf.Paper.ContinuousLatticeIntersectionSplitData | 11 | 1 | B2 |
 | Sheaf.Paper.IntegralResiduePullSquare | 11 | 1 | B2 |
@@ -192,6 +191,7 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | Sheaf.Paper.LatticeClassDescent | 12 | 1 | B4 |
 | Sheaf.Paper.ProEtaleLocallyConstantSheaf | 12 | 2 | F4 |
 | WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange | 12 | 1 | G1 |
+| WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint | 12 | 1 | G2 |
 
 Modules pruned since the imports baseline:
 
