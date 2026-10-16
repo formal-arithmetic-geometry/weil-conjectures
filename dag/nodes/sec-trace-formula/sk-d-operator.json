@@ -3,25 +3,106 @@
  "blueprint": {
   "is": "sk-d-operator",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Global operators",
- "statement": "For an endocorrespondence with $c_2$ proper, the\nunit, proper identification, and exceptional counit\ndefine\n\n$$\n\\begin{aligned}\nT_c(u):R\\Gamma_c(X,K)&\\longrightarrow R\\Gamma_c(X,Rc_{2*}c_2^*K)\n\\simeq R\\Gamma_c(C,c_2^*K)\\\\\n&\\xrightarrow{u}R\\Gamma_c(C,c_1^!K)\n\\simeq R\\Gamma_c(X,Rc_{1!}c_1^!K)\\longrightarrow R\\Gamma_c(X,K).\n\\end{aligned}\n$$",
+ "statement": "Use the coefficient and derived-category notation $A$, $D(Z,A)$ of [sk-d-setup]. Fix the pro-étale geometric operations over the base scheme $s$ of [sk-d-six], so that $f^*$ and $f^!$ already denote derived functors. Let $X$ be an $s$-scheme, let $K\\in D(X,A)$, and let $(C,c_1,c_2,u)$ be an endocorrespondence of $(X,K)$ of [sk-d-corr]: $c_1,c_2:C\\to X$ are $s$-morphisms, $c_1$ is compactifiable [def-nagata-compactifiable] with the given adjunction $Rc_{1!}\\dashv c_1^!$, and $u:c_2^*K\\to c_1^!K$. Assume that the ordinary leg $c_2$ is proper [def-weil-proper-morphism]. Write $a_X:X\\to s$, $a_C:C\\to s$, with $a_Xc_1=a_C=a_Xc_2$, and $R\\Gamma_c(Z,M)=Ra_{Z!}M$ as in [sk-d-six], using the functors and comparison data supplied there.\n\nLet $\\eta_2:\\mathrm{id}\\to Rc_{2*}c_2^*$ be the unit of $c_2^*\\dashv Rc_{2*}$, let $\\varepsilon_1:Rc_{1!}c_1^!\\to\\mathrm{id}$ be the exceptional counit, and let $P_2:Rc_{2!}\\xrightarrow{\\sim}Rc_{2*}$ be the proper comparison of [sk-d-six]. The composition comparisons of that package give\n$$\n\\mu_i:Ra_{X!}Rc_{i!}\\xrightarrow{\\sim}R(a_Xc_i)_!=Ra_{C!}\\quad(i=1,2).\n$$\nDefine the global operator $T_c(u)\\in\\operatorname{End}(R\\Gamma_c(X,K))$ as the following composite:\n$$\n\\begin{aligned}\nRa_{X!}K&\\xrightarrow{Ra_{X!}(\\eta_{2,K})}\nRa_{X!}Rc_{2*}c_2^*K\n\\xrightarrow{Ra_{X!}(P_{2,c_2^*K}^{-1})}\nRa_{X!}Rc_{2!}c_2^*K\n\\xrightarrow{\\mu_{2,c_2^*K}}\nRa_{C!}c_2^*K\\\\\n&\\xrightarrow{Ra_{C!}(u)}Ra_{C!}c_1^!K\n\\xrightarrow{\\mu_{1,c_1^!K}^{-1}}Ra_{X!}Rc_{1!}c_1^!K\n\\xrightarrow{Ra_{X!}(\\varepsilon_{1,K})}Ra_{X!}K.\n\\end{aligned}\n$$\nAll maps are components of the specified adjunctions and comparison isomorphisms, or functor images of those maps and of $u$; this is a definition in the ambient derived category, without a bounded-constructibility or finite-Tor hypothesis on $K$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/_section.md",
   "place": "node sk-d-operator, order 2631"
  },
  "stmt_deps": [
   "sk-d-corr",
-  "sk-d-six"
+  "sk-d-six",
+  "sk-d-setup",
+  "def-nagata-compactifiable",
+  "def-weil-proper-morphism"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "global operator on compactly supported cohomology of an endocorrespondence",
+   "results": "continuousCohomology, ContinuousCohomology.MultiInd.complex, ContinuousCohomology.homogeneousCochains, CompactlySupportedContinuousMap.compLinearMap, ContinuousCohomology.I_obj_V_topologicalSpace, groupCohomology, ContinuousCohomology.MultiInd.d, groupCohomology.inhomogeneousCochains",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "globalOperator, DerivedCategory, CategoryTheory",
+   "results": "0 hits; loogle: unknown identifier 'globalOperator'; invalid name pattern, superseded by second pattern",
+   "date": "2026-10-17",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "globalOperator|compact.?support",
+   "results": "0 hits; subdirectory argument WeilConjectures; initial scope argument is not a subdirectory under Mathlib, so this query is not evidence of absence",
+   "date": "2026-10-17",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactly supported cohomology global operator correspondence unit proper pushforward exceptional counit",
+   "results": "CompHausLike.LocallyConstant.adjunction_unit, SheafOfModules.pushforwardSections_unitHomEquiv, CompHausLike.LocallyConstant.adjunction_left_triangle, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CompHausLike.LocallyConstant.counit_app_val, LightCondSet.topCatAdjunctionUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, LightCondSet.topCatAdjunctionUnit_val_app_apply",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.NatTrans, DerivedCategory",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.?support|exceptional.?counit|proper.?comparison",
+   "results": "0 hits; subdirectory argument Mathlib; initial scope argument is not a subdirectory under Mathlib, so this query is not evidence of absence",
+   "date": "2026-10-17",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "global operator of a correspondence compact support cohomology",
+   "results": "CompactlySupported.term_→C_c_, compactlySupported_eq_top_of_isCompact, hasCompactSupport_iff_eventuallyEq, hasCompactSupport_def, HasCompactSupport.of_compactSpace, HasCompactSupport, CompactlySupportedContinuousMapClass, HasCompactSupport.comp_isClosedEmbedding",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalOperator|compact.?support|exceptional.?counit|proper.?comparison",
+   "results": "0 hits; scope AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalOperator|lowerShriek|UpperShriek|LowerShriek",
+   "results": "0 hits; scope all Mathlib",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\"",
+   "results": "0 hits; independent second-reader name-fragment search",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "correspondence|cohomologicalCorrespondence",
+   "results": "2 hits in scope AlgebraicGeometry: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean:166 (comment on a topological correspondence), Mathlib/AlgebraicGeometry/PullbackCarrier.lean:19 (point-set bijection); neither defines a six-functor global operator",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -64,5 +145,22 @@
     "AlgebraicGeometry.ProEtale.Correspondence.globalOperator"
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-d-operator",
+  "worker": "stage1",
+  "summary": "Definition split through the existing correspondence and geometric-operation package, retaining arbitrary K in D(X,A). Expanded all six arrows, proper-comparison orientation, both composition comparisons and the structural-map equalities. No proof theorem is asserted: the operator is a concrete composite of supplied morphisms. No new node is needed, and the stricter ctf Lean definition is not an attachment.",
+  "blueprint": "The item realizes literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/_section.md, the complete displayed composite and its opening unit/proper-identification/exceptional-counit description. The existing def-trf-global-operator node realizes the detailed five-arrow construction; this unit has no numbered proof steps.",
+  "tool_uses": [],
+  "statement_change": "Expanded the sketch by its given adjunction components, proper-comparison inverse and composition comparisons; retained its ambient K in D(X,A) and proper c₂ hypotheses, without importing the detailed ctf-node restrictions."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-f0ef268c4",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-f0ef268c4 (reviewer sub-agent of L); spot-checked: I read the item, its unit and the main-20261015 sketch section (same displayed composite as in master/), plus the stmt_deps sk-d-corr, sk-d-six, sk-d-setup, def-nagata-compactifiable/compactification and def-weil-proper-morphism, the detailed def-trf-global-operator and the cited Lean Correspondence.lean:809-866 and Defs.lean. Checked: all six arrows have matching sources and targets. They are the unit of c2^*⊣Rc2*, the inverse of the proper comparison P2 at c2^*K (c2 proper, hence compactifiable), μ2 from Rg_!Rf_!≃R(gf)_! with a_X c2=a_C, Ra_C!(u) with u:c2^*K→c1^!K oriented as in sk-d-corr, μ1^{-1} at c1^!K, and Ra_X!(ε1) from the exceptional adjunction in sk-d-corr. Small cases: the identity correspondence gives the identity by the sk-d-six coherence clauses; u=0 and K=0 give zero. No new nodes, no proof steps, no SGA, no cycle. No duplicate: rg finds only users plus the narrower def-trf-global-operator. The unit realized fields are correct and the search records are honest. One thing for stage 2: the master Lean globalOperator needs K ctf and geometric/compactifiable X and C, because the Lean package fields properComparison and lowerShriekComp exist only on Dᵇctf. The item uses arbitrary K ∈ D(X,A). I accepted this because the blueprint sketch, sk-d-corr (K∈D(X,A)) and the sk-d-six DAG statement (comparison isomorphisms with no ctf qualifier) all support it, and the report names the difference. When the node is stated in Lean, either it needs a recorded correction or sk-d-six's scope must be settled first. No changes."
  }
 }
