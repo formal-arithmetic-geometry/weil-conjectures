@@ -12,25 +12,36 @@
  ],
  "proof": [
   {
-   "text": "Integral constructible modules form a weak Serre class, so integral bounded constructible complexes are closed under shifts and cones. The derived scalar-extension functor is triangulated and preserves zero. The compact-test coefficient localization calculation identifies it with inversion of ℓ. Lemma 6.8.12 identifies rational Hom between images with the localization of integral Hom. Hence any morphism between images, multiplied by a sufficiently large power of ℓ, lifts to an integral morphism. Its integral cone is bounded constructible. Multiplication by that power on the rational source is invertible, so its scalar-extended cone is isomorphic to the cone of the original morphism. Rotation and endpoint isomorphisms give triangulated closure of the entire essential image, without claiming full faithfulness before rationalizing.",
+   "text": "Use lem-weil-pbc-integral-constructible-serre to give the integral bounded constructible full subcategory its triangulated structure. The actual derived extension is triangulated by its extension-restriction adjunction, hence preserves zero and commutes with shifts. Essential-image witnesses give zero and shift closure.",
    "uses": [
     "lem-weil-pbc-integral-constructible-serre",
-    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
     "def-weil-pbc-continuous-integral-coefficients"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply lem-weil-pbc-continuous-constructible-integral-denominators to any morphism between images. It gives an integral lift after multiplication by a power of ℓ. Multiplication by ℓ is invertible on rational coefficient modules: prove it on continuous E-valued functions, transport through the coefficient pullback, tensor the regular-module isomorphism with any module, and then test on derived homology. Powers are therefore invertible on every rational derived object.",
+   "uses": [
+    "lem-weil-pbc-continuous-constructible-integral-denominators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Complete the integral morphism to a distinguished triangle in the bounded constructible category and apply scalar extension. The source automorphism given by multiplication by ℓ^n identifies its first arrow with the given morphism. The triangle isomorphism axiom identifies the third vertices. Combine with arbitrary essential-image endpoint isomorphisms. Rotation gives the required triangulated object property.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-integral-constructible-serre",
-  "lem-weil-pbc-integral-constructible-bounded-below-compactness",
-  "def-weil-pbc-continuous-integral-coefficients"
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-continuous-constructible-integral-denominators",
+  "lem-weil-pbc-integral-constructible-serre"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.12 and the denominator-clearing part of Proposition 6.8.14(2), before essential surjectivity",
-  "note": "A2 second reading: a strictly partial obligation for the bounded dévissage argument; replaces the false unrationalized equivalence claim."
+  "place": "Lemma 6.8.12 and Proposition 6.8.14(2)",
+  "note": "A4 Lean proof from the proved actual coefficient telescope and denominator calculation; the only new hole is uniformly bounded-below sequential integral Hom continuity. No fullness of integral scalar extension is assumed."
  },
  "mathlib_searches": [
   {
@@ -103,11 +114,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
+  "reviewer": "X-8828e",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261016T003157-L-3926386",
+  "landing": "20261016T024743-L-1401577",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs, imports and remaining sheaf-source hole against the DAG, published module and cited source; verified compilation, direct importer and axioms."
  }
 }

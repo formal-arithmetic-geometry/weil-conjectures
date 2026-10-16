@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-integral-constructible-sequential-hom",
+ "kind": "statement",
+ "title": "Finite-stage factorization for bounded-below integral constructible Hom",
+ "statement": "Let ℓ be prime, E a finite normed extension of ℚ_ℓ and X a scheme with Noetherian underlying space. In the ordinary uncompleted derived category of internal modules over R=condensedRingObj(integralCoeff ℓ E) X from def-weil-pbc-continuous-integral-coefficients, let K be bounded constructible. Let D be a sequential diagram of cochain complexes of R-modules with a colimit cocone c, and assume there is one integer a with Q(D_n) in D≥a for every n. Every map K→Q(c.pt) equals g followed by Q(c.ι_n) for some n and some g:K→Q(D_n).",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.12 and Proposition 6.8.14(2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Lift the natural-number sequence to AsSmall(ℕ) using its categorical equivalence. Whiskering transports the given colimit cocone and the common cohomological lower bound.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-weil-pbc-integral-constructible-sheaf-hom to every constructible cohomology sheaf of K. The Hom-colimit property is closed under source isomorphisms and shifts and contains zero. Distinguished extension closure follows from the filtered long exact Hom sequence. Apply the proved source-library DerivedCategory.prop_of_bounded to this triangulated object property, using boundedness and constructibility of every cohomology object of K.",
+   "uses": [
+    "lem-weil-pbc-integral-constructible-sheaf-hom",
+    "def-weil-pbc-continuous-integral-coefficients",
+    "def-weil-pbc-hom-colimit-property",
+    "lem-weil-pbc-hom-colimit-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At shift zero the resulting Hom cocone is a colimit of additive groups. The concrete filtered-colimit representative theorem gives a stage and a morphism representing the specified map. Naturality of the shift-zero isomorphism removes the zero shift, and the indexing equivalence returns an ordinary natural-number stage with exactly the original cocone leg.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-hom-colimit-property",
+  "lem-weil-pbc-hom-colimit-extension",
+  "lem-weil-pbc-integral-constructible-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.12 and Proposition 6.8.14(2)",
+  "note": "A4 Lean proof of bounded complex-source continuity from the sheaf-source geometric input, using the existing bounded devissage API and the concrete filtered-colimit representative theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "essential image triangulated functor morphisms lift after multiplication by a scalar denominator",
+   "date": "2026-10-16",
+   "results": "; CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.Functor.essImageDistTriang_mem_of_iso, CategoryTheory.Functor.contractible_mem_essImageDistTriang, CategoryTheory.Functor.essImageDistTriang, CategoryTheory.ObjectProperty.instHasLeftCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated, CategoryTheory.Triangulated.Localization.isTriangulated",
+   "verdict": "No integral constructible sequential Hom continuity or coefficient denominator theorem. The essential-image API and exact-functor comparisons are used in the proved reductions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage",
+   "date": "2026-10-16",
+   "results": "; CategoryTheory.Functor.essImage, CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage, CategoryTheory.Functor.essImage.witness, CategoryTheory.Functor.obj_mem_essImage, CategoryTheory.Functor.EssSurj.mem_essImage, CategoryTheory.Functor.EssSurj.mk, CategoryTheory.Functor.toEssImage, CategoryTheory.Functor.essImage.ofIso",
+   "verdict": "No integral constructible sequential Hom continuity or coefficient denominator theorem. The essential-image API and exact-functor comparisons are used in the proved reductions."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*[Tt]riangulated|[Tt]riangulated.*essImage",
+   "date": "2026-10-16",
+   "results": "; Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+   "verdict": "No integral constructible sequential Hom continuity or coefficient denominator theorem. The essential-image API and exact-functor comparisons are used in the proved reductions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an additive monoidal category if multiplication by an integer is an isomorphism on a ring object it is an isomorphism on any module over this ring",
+   "date": "2026-10-16",
+   "results": "; CategoryTheory.Linear.instMonoHSMulHomOfInvertible, CategoryTheory.Preadditive.smul_iso_hom, CategoryTheory.Preadditive.instSMulUnitsIntIso, ModuleCat.MonoidalCategory.tensorUnit_isModule, Module.Invertible.left, CategoryTheory.Linear.instEpiHSMulHomOfInvertible, instInvertibleCarrierOutModuleCatValSkeleton, Module.Invertible.right",
+   "verdict": "No integral constructible sequential Hom continuity or coefficient denominator theorem. The essential-image API and exact-functor comparisons are used in the proved reductions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsIso, CategoryTheory.Retract",
+   "date": "2026-10-16",
+   "results": "loogle: unknown identifier 'CategoryTheory.Limits.IsIso'; ",
+   "verdict": "No integral constructible sequential Hom continuity or coefficient denominator theorem. The essential-image API and exact-functor comparisons are used in the proved reductions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom from a bounded constructible complex commutes with filtered colimits uniformly bounded below, localizing coefficients clears denominators in morphisms",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error; ",
+   "verdict": "No integral constructible sequential Hom continuity or coefficient denominator theorem. The essential-image API and exact-functor comparisons are used in the proved reductions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.isColimitOfPreserves",
+   "date": "2026-10-16",
+   "results": "; CategoryTheory.Limits.isColimitOfPreserves, CategoryTheory.preserves_desc_mapCocone, CategoryTheory.Comma.coconeOfPreserves_pt_hom, CategoryTheory.Comma.coconeOfPreserves_ι_app_left, CategoryTheory.Comma.coconeOfPreserves_ι_app_right, SheafOfModules.Presentation.map_relations_I, SSet.relativeCellComplexOfMono_isColimit",
+   "verdict": "No integral constructible sequential Hom continuity or coefficient denominator theorem. The essential-image API and exact-functor comparisons are used in the proved reductions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a constructible integral sheaf complex commutes with uniformly bounded below sequential filtered colimits",
+   "date": "2026-10-16",
+   "results": "; DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "verdict": "No integral constructible sequential Hom continuity or coefficient denominator theorem. The essential-image API and exact-functor comparisons are used in the proved reductions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousConstructibleIntegralImage",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-continuous-constructible-integral-image",
+   "place": "Denominator clearing and triangulated image closure",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralConstructibleSequentialHom",
+  "file": "lean/Sheaf/Paper/IntegralConstructibleSequentialHom.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralConstructible_hom_sequential_colimit",
+  "statement": "theorem integralConstructible_hom_sequential_colimit (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] (K : integralConstructible ℓ E X) (D : ℕ ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (integralCoeff ℓ E) X)) ℤ) (c : Cocone D) (hc : Nonempty (IsColimit c)) (hD : ∃ a : ℤ, ∀ n : ℕ, (DerivedCategory.Q.obj (D.obj n)).IsGE a) (f : K.obj ⟶ DerivedCategory.Q.obj c.pt) : ∃ (n : ℕ) (g : K.obj ⟶ DerivedCategory.Q.obj (D.obj n)), g ≫ DerivedCategory.Q.map (c.ι.app n) = f",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-8828e",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T024743-L-1401577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-8828e",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T024743-L-1401577",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs, imports and remaining sheaf-source hole against the DAG, published module and cited source; verified compilation, direct importer and axioms."
+ }
+}
