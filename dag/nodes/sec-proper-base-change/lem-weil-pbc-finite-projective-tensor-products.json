@@ -19,7 +19,8 @@
  "stmt_deps": [
   "def-weil-pbc-adic-coefficient-datum",
   "def-weil-pbc-derived-inverse-limit",
-  "def-weil-derived-tensor"
+  "def-weil-derived-tensor",
+  "def-weil-pbc-strict-perfect-coefficient-package"
  ],
  "proof": [
   {
@@ -162,5 +163,33 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ebec3abf9",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Wrote review.md. Verified source, all statement dependencies, canonical constructions, hypotheses, conclusions, universes, edge cases, report sections, and verbatim signature. Per-file scompile.py reproduction passed without errors or warnings. No fixes required; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteProjectiveTensorProducts",
+  "declaration": "AlgebraicGeometry.Scheme.finiteProjectiveTensorProducts",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteProjectiveTensorComplexRight",
+   "AlgebraicGeometry.Scheme.finiteProjectiveTensorComplexRight_inverts",
+   "AlgebraicGeometry.Scheme.finiteProjectiveTensorRight",
+   "AlgebraicGeometry.Scheme.finiteProjectiveTensorRightComparison",
+   "AlgebraicGeometry.Scheme.finiteProjectiveTensorRightMap_exists",
+   "AlgebraicGeometry.Scheme.finiteProjectiveTensorRightMap",
+   "AlgebraicGeometry.Scheme.finiteProjectiveTensorProducts"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteProjectiveTensorProducts.lean",
+  "statement": "theorem finiteProjectiveTensorProducts (P : CochainComplex (adicDatumModules T d) ℤ) (hb : ∃ a b : ℤ, ∀ j : ℤ, j < a ∨ b < j → IsZero (P.X j)) (p : SheafOfModules.StrictPerfectCoefficientPackageOnSite ((adicLisseForget T).obj (adicDatumRing T d)) P) (C : ℕ → adicDatumDerived T d) : IsIso (piComparison (finiteProjectiveTensorRight T d P hb p) C) ∧ ∀ (P' : CochainComplex (adicDatumModules T d) ℤ) (hb' : ∃ a b : ℤ, ∀ j : ℤ, j < a ∨ b < j → IsZero (P'.X j)) (p' : SheafOfModules.StrictPerfectCoefficientPackageOnSite ((adicLisseForget T).obj (adicDatumRing T d)) P') (e : (completedConstantQ _).obj P ⟶ (completedConstantQ _).obj P') (C' : ℕ → adicDatumDerived T d) (f : ∀ n : ℕ, C n ⟶ C' n), (finiteProjectiveTensorRight T d P hb p).map (Limits.Pi.map f) ≫ (finiteProjectiveTensorRightMap T d P P' hb hb' p p' e).app (∏ᶜ C') ≫ piComparison (finiteProjectiveTensorRight T d P' hb' p') C' = piComparison (finiteProjectiveTensorRight T d P hb p) C ≫ Limits.Pi.map (fun n ↦ (finiteProjectiveTensorRight T d P hb p).map (f n) ≫ (finiteProjectiveTensorRightMap T d P P' hb hb' p p' e).app (C' n))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Representative formulation: P is the given globally bounded finite-free retract representative of E. The localization lift, with its explicit comparison on every complex, is the canonical functor (-) tensor-derived E in D(Mod(A_T)). piComparison is induced by actual product projections. For every derived coefficient map e, finiteProjectiveTensorRightMap is uniquely fixed by its formula on all representing roofs and K-flat test complexes; the final equation is naturality in e and the family. Positive family level n+1 is encoded by n : ℕ. Adds the landed independent-universe splitting-package node; no statement correction."
  }
 }

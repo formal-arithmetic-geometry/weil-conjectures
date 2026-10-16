@@ -29,7 +29,9 @@
   "def-weil-pbc-direct-image",
   "def-weil-proetale-inverse-image",
   "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived"
+  "lem-weil-pbc-kinjective-total-derived",
+  "def-exc-proetale-sections-with-support",
+  "lem-weil-extension-by-zero-exact"
  ],
  "proof": [
   {
@@ -448,5 +450,28 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-1473c7227 (reviewer sub-agent of L); spot-checked: Read the full item, report, 42 cited statements, source locations, and unit/chapter route. All ten proof steps check; pro-etale localization avoids geometric-stalk conservativity, and the Noetherian scope covers existing applications. No new nodes, cycles, or repairs. Condensed target coefficients remain distinct. Detailed checks and accepted tool uses are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3a6834de9",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all 19 statement dependencies, source alignment, canonical constructions, universes, edge cases, docstrings, reports, and verbatim signatures. All three modules compile cleanly through scompile.py. No fixes required; no project or branch changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StratumAmbientHom",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_stratumAmbientHomIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.nonempty_stratumAmbientHomIso",
+   "AlgebraicGeometry.ProEtale.nonempty_stratumAmbientHomIso"
+  ],
+  "file": "lean/Sheaf/Paper/StratumAmbientHom.lean",
+  "statement": "theorem Etale.nonempty_stratumAmbientHomIso (A : Type (u + 1)) [CommRing A] [Finite A] {S U X : Scheme.{u}} (i : S ⟶ U) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] : Nonempty ((((Etale.lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctor ⋙ (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory).op.prod (𝟭 (Etale.DerivedCategoryModule A X))) ⋙ Functor.uncurry.obj (Etale.derivedHom (ModuleCat.{u + 1} A) X) ≅ ((𝟭 (Etale.DerivedCategoryModule A S)ᵒᵖ).prod ((Etale.upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategory ⋙ (Etale.lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctor.rightAdjoint)) ⋙ Functor.uncurry.obj (Etale.derivedHom (ModuleCat.{u + 1} A) S) ⋙ (Etale.lowerStar (ModuleCat.{u + 1} A) (i ≫ j)).rightDerivedFunctor)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "States both choices of site as natural isomorphisms of bifunctors on the whole ordinary unbounded derived categories. The pro-etale formula uses the recorded intrinsic constant-ring category and canonical coefficient maps. Imports the published intrinsic extension-by-zero exactness module and reuses its instances; no extension-by-zero replacement module is delivered."
  }
 }

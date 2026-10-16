@@ -232,19 +232,23 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-e35f708bc",
-  "group": "Q42",
+  "reviewer": "NT-stage2-Codex-3a6834de9",
+  "group": "Q29",
   "result": "pass",
-  "note": "Checked source, all statement dependencies, exact declarations, coefficient presentations, universes, edge cases, docstrings, report sections, and verbatim signature. scompile reproduction passed without warnings. No substantive defects found; branch head unchanged."
+  "note": "Wrote review.md. Checked immutable statements, all 19 statement dependencies, source alignment, canonical constructions, universes, edge cases, docstrings, reports, and verbatim signatures. All three modules compile cleanly through scompile.py. No fixes required; no project or branch changes made."
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.ClosedImmersion",
-  "declaration": "AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction",
-  "statement": "noncomputable def derivedLowerStarClosedUpperShriekAdjunction\n    (hij : IsCompl (Set.range i.base) (Set.range j.base)) :\n    ((i)_*[ModuleCat.{u + 1} R]).rightDerivedFunctor ⊣\n      (closedUpperShriek (ModuleCat.{u + 1} R) i j).rightDerivedFunctor",
-  "branch": "slopmaster2",
-  "by": "Q42",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleIntrinsicClosedAmbient",
+  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicClosedAmbientAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfIntrinsicClosedAmbientAdjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleIntrinsicClosedAmbient.lean",
+  "statement": "theorem sfIntrinsicClosedAmbientAdjunction (A : Type u) [CommRing A] [Finite A] {Z U T : Scheme.{u}} [IsNoetherian T] (i : Z ⟶ T) [IsClosedImmersion i] (j : U ⟶ T) [IsOpenImmersion j] (_hij : IsCompl (Set.range i) (Set.range j)) : PreservesFiniteColimits (sfConstantModuleDirectImage i A) ∧ Nonempty ((sfConstantModuleDirectImage i A).rightDerivedFunctor ⊣ (sfIntrinsicClosedUpperShriek i j A).rightDerivedFunctor)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
   "date": "2026-10-16",
-  "existing": true,
-  "note": "Existing unbounded closed-support adjunction. Its surrounding binders are {R : Type (u + 1)} [Ring R] {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]. Apply with R = ULift A for the finite commutative coefficient ring; Noetherian X supplies QuasiCompact j. IsCompl of the two underlying ranges says that j is the complementary open. The left rightDerivedFunctor is canonically isomorphic to the termwise induced functor by exactness, using rightDerivedFunctorIsoMapDerivedCategory. The right side is the total right derived functor of closedUpperShriek, the already-recorded sections-with-support construction. Sheaf (ProEt.topology X) (ModuleCat R) is the constant-coefficient module-sheaf presentation of the same notion as modules over the constant sheaf; no boundedness or constructibility predicate occurs. No duplicate statement module is written."
+  "existing": false,
+  "note": "§1(B), second reading against the current base: the dependency now records the existing upstream ProEtale.derivedLowerStarClosedUpperShriekAdjunction on fixed-scalar ModuleCat-valued sheaves. Its legacy star imports collide with the finite-coefficient imports of the published intrinsic extension-by-zero interface, and its functors do not accept intrinsic SheafOfModules objects. This module states the same ordinary unbounded closed-support adjunction for the actual constant-ring module categories used by proEtaleDerivedCategory. Its right adjoint is the total right derived functor of the canonical kernel construction; exactness identifies derived closed direct image with termwise direct image. No boundedness, constructibility, or extra coefficient hypothesis is imposed."
  }
 }

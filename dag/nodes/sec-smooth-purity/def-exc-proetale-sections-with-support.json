@@ -74,27 +74,32 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-closed-unit",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleSupportedSections",
-  "declaration": "AlgebraicGeometry.ProEtale.finiteSupportedSections",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleIntrinsicClosedSupport",
+  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicClosedUpperShriek",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.finiteSupportedSections",
-   "AlgebraicGeometry.ProEtale.finiteSupportedSectionsι",
-   "AlgebraicGeometry.ProEtale.finiteClosedUpperShriek"
+   "AlgebraicGeometry.Scheme.sfConstantCoefficientIso",
+   "AlgebraicGeometry.Scheme.sfConstantModulePullback",
+   "AlgebraicGeometry.Scheme.sfConstantModuleDirectImage",
+   "AlgebraicGeometry.Scheme.sfConstantModuleAdjunction",
+   "AlgebraicGeometry.Scheme.sfIntrinsicSectionsWithSupport",
+   "AlgebraicGeometry.Scheme.sfIntrinsicSectionsWithSupport_additive",
+   "AlgebraicGeometry.Scheme.sfIntrinsicClosedUpperShriek",
+   "AlgebraicGeometry.Scheme.sfIntrinsicClosedUpperShriek_additive"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSupportedSections.lean",
-  "statement": "def finiteSupportedSections (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X U : Scheme.{u}} (j : U ⟶ X) : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ) ⥤ Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleIntrinsicClosedSupport.lean",
+  "statement": "def sfIntrinsicClosedUpperShriek {Z U T : Scheme.{u}} (i : Z ⟶ T) (j : U ⟶ T) (A : Type u) [CommRing A] [Finite A] : proEtaleRingModules T (proEtaleConstantRing T A) ⥤ proEtaleRingModules Z (proEtaleConstantRing Z A)",
   "branch": "newtargets-dag",
-  "by": "N0",
+  "by": "Q29",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Section 1(B): the attached closedUpperShriek/sectionsWithSupport module imports legacy UpperLowerStar.Defs. Importing it with the recorded finite-coefficient dependencies fails both locally and on the server: the environment already contains AlgebraicGeometry.ProEtale.«term(_)_*[_]». This module states the same finite-constant-module kernel functor and its closed inverse image through the published compatible FiniteCoefficient.UpperLowerStar.Defs. The kernel is taken in the functor category, with canonical induced morphisms and inclusion; no data or functor laws are postponed."
+  "note": "§1(B), second reading against the current base: the recorded ProEtale.finiteSupportedSections/finiteClosedUpperShriek in Sheaf.AlgebraicGeometry.ProEtaleSupportedSections act on fixed-scalar ModuleCat-valued sheaves. They do not accept the intrinsic SheafOfModules objects of the published proEtaleDerivedCategory and sfIntrinsicExtensionByZero interfaces used here. This module supplies the same canonical unit-kernel and closed module inverse image in that intrinsic presentation, using the published arbitrary-ring operations and uniquely tensor-unit-normalized adjunction. The formerly recorded legacy closed-support module also conflicts with the finite-coefficient star imports. No new site, coefficient object, or arbitrary map is introduced."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-7f39baf6e",
-  "group": "N0",
+  "reviewer": "NT-stage2-Codex-3a6834de9",
+  "group": "Q29",
   "result": "pass",
-  "note": "Statement, dependencies, constructions, universes, edge cases, docstrings, report sections, and compiler evidence all checked; delivery passes."
+  "note": "Wrote review.md. Checked immutable statements, all 19 statement dependencies, source alignment, canonical constructions, universes, edge cases, docstrings, reports, and verbatim signatures. All three modules compile cleanly through scompile.py. No fixes required; no project or branch changes made."
  }
 }
