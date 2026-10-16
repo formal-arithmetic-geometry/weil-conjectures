@@ -248,5 +248,28 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-6c3073d27 (reviewer sub-agent of L); spot-checked: Read and verified all six steps and cited statements against current blueprint and Stacks 09BK/09BL, 09AA, 03D2/03D3, and limit/colimit sources. Arbitrary-ring coefficients and canonical evaluation are preserved; edge cases and dependency cycles checked. No new nodes or repairs. review.md records the inherited stale unit metadata separately."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.ClosedInverseImageLimits",
+  "declaration": "AlgebraicGeometry.Scheme.closed_inverseImage_preserves_limits",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AffineProEt.closedSiteLiftOver",
+   "AlgebraicGeometry.Scheme.closed_inverseImage_preserves_limits"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/ClosedInverseImageLimits.lean",
+  "statement": "theorem closed_inverseImage_preserves_limits {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (i : Z ⟶ X) [IsClosedImmersion i] (_hU : IsCompact ((Set.range i)ᶜ)) (B : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) [MonObj B] : (∀ (A : Type u) [CommRing A] (I : Ideal A) (a : Spec (.of A) ⟶ X) [IsOpenImmersion a] (z : Spec (.of (A ⧸ I)) ⟶ Z) (_hchart : IsPullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) z a i) (V : (Spec (.of (A ⧸ I))).AffineProEt), (ProEt.topology Z).IsWeaklyContractible.{u + 1} ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ i).obj (AffineProEt.closedSiteLiftOver A I a V)) → ∀ F : Mod (Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}) B, IsIso (((proEtaleSheafAdjunction i AddCommGrpCat.{u + 1}).unit.app F.X).hom.app (op (AffineProEt.closedSiteLiftOver A I a V)))) ∧ PreservesFiniteLimits ((ProEtale.upperStar AddCommGrpCat.{u + 1} i).mapMod B) ∧ PreservesFiniteColimits ((ProEtale.upperStar AddCommGrpCat.{u + 1} i).mapMod B) ∧ PreservesLimitsOfSize.{u + 1, u + 1} ((ProEtale.upperStar AddCommGrpCat.{u + 1} i).mapMod B) ∧ PreservesColimitsOfSize.{u + 1, u + 1} ((ProEtale.upperStar AddCommGrpCat.{u + 1} i).mapMod B)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The arbitrary ring and module sheaves use the existing tensor monoid/module objects in abelian sheaves, an equivalent encoding of the dependency ringedSiteModules, including noncommutative rings. The unit uses the recorded proEtaleSheafAdjunction; the functor uses the definitionally equal ProEtale.upperStar head so that its published monoidal instance is synthesized. Clause (1) evaluates the canonical unit on the henselian lift, whose closed fibre is canonically V by the affine chart square. All current statement and stated proof dependencies are imported; det-pe-topos-functoriality-inverse-image has no recorded module and is omitted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1c12ec7e4",
+  "group": "NO",
+  "result": "pass",
+  "note": "All statement clauses, dependencies, docstrings, edge cases, and universe bounds checked; scompile.py passed with no errors or warnings."
  }
 }
