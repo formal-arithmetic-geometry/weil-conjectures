@@ -1,6 +1,6 @@
 # Work queue
 
-61 items; claim with `tools/claim.py next <group> [--stage N]`.
+62 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (61)
+## Stage 3: modules to prove (62)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -27,6 +27,7 @@
 | `Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap` | 4 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence` | 4 | 3 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisUnit` | 5 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 5 | 5 | proof |
 | `Sheaf.Paper.IntegralScalarContractive` | 5 | 1 | proof |
 | `WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal` | 5 | 16 | proof |
