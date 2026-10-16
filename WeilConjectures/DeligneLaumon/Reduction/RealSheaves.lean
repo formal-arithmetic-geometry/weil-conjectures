@@ -7,11 +7,15 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Bertini
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
+public import WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
+public import WeilConjectures.DeligneLaumon.Reduction.FiniteEtaleChart
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
 public import WeilConjectures.DeligneLaumon.Reduction.RealCurve
 public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
 public import WeilConjectures.WeilSheaf.LisseLocus
+public import WeilConjectures.WeilSheaf.UpperStarExact
+public import WeilConjectures.WeilSheaf.UpperStarFiniteEtale
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
 
 /-!
@@ -287,6 +291,187 @@ theorem isMixed_of_forall_exists_isMixed_upperStar_opensι
       Scheme.IdealSheafData.coe_support_vanishingIdeal]; exact isCompl_bot_top)
     (isMixedOfWeightsAtMost_of_isEmpty _ w) hw⟩
 
+/-- Mixedness is preserved by pullback along any morphism of `k₀`-schemes: the pullback is exact
+and preserves punctual purity. -/
+theorem IsMixed.upperStar {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    [Y.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l Y}
+    (hF : F.IsMixed ι) (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] :
+    ((WeilSheaf.upperStar φ).obj F).IsMixed ι :=
+  let ⟨w, hw⟩ := hF
+  ⟨w, hw.map (WeilSheaf.upperStar φ) fun _ _ hG ↦ hG.upperStar φ⟩
+
+/-- Mixedness is invariant under isomorphism. -/
+theorem IsMixed.of_iso {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {F G : WeilSheaf k₀ l X}
+    (hF : F.IsMixed ι) (e : F ≅ G) : G.IsMixed ι :=
+  let ⟨w, hw⟩ := hF
+  ⟨w, hw.of_iso e⟩
+
+/-- If the pullback of `G` along an open immersion `k` is mixed, then so is its restriction to
+the open image of `k`. -/
+theorem IsMixed.upperStar_opensRange_ι {W T : Scheme.{u}} [W.Over (Spec (CommRingCat.of k₀))]
+    [T.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (W ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))] {k : W ⟶ T} [IsOpenImmersion k]
+    [k.IsOver (Spec (CommRingCat.of k₀))] {G : WeilSheaf k₀ l T}
+    (h : ((WeilSheaf.upperStar k).obj G).IsMixed ι) :
+    ((WeilSheaf.upperStar k.opensRange.ι).obj G).IsMixed ι := by
+  have hk : k.isoOpensRange.inv ≫ k = k.opensRange.ι :=
+    (Iso.inv_comp_eq _).2 (Scheme.Hom.isoOpensRange_hom_ι k).symm
+  have : k.isoOpensRange.inv.IsOver (Spec (CommRingCat.of k₀)) := ⟨by
+    rw [← comp_over k, ← Category.assoc, hk, comp_over]⟩
+  obtain ⟨e₁⟩ := nonempty_upperStar_congr_iso (l := l) hk G
+  obtain ⟨e₂⟩ := nonempty_upperStar_comp_iso (l := l) k.isoOpensRange.inv k G
+  exact (h.upperStar k.isoOpensRange.inv).of_iso (e₂.symm ≪≫ e₁)
+
+/-- **Purity of the irreducible constituents of a real lisse sheaf on a smooth affine scheme**:
+the lisse-stratum step of `thm-zl-real-mixed-by-curves`. Let `X₀` be a smooth geometrically
+connected affine scheme of dimension `d ≥ 2` over `k₀` and `𝒢` an `ι`-real lisse Weil sheaf on
+`X₀`. Every irreducible lisse subquotient `𝒢₂ / 𝒢₁` of lisse Weil subsheaves `𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢` is
+punctually `ι`-pure of some weight (curve testing + purity on curves + descent of a constant
+field extension). This is the higher-dimensional analogue of
+`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel`. -/
+theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth {X₀ : Scheme.{u}}
+    [X₀.Over (Spec (CommRingCat.of k₀))] [IsAffine X₀] {d : ℕ} (hd : 2 ≤ d)
+    [SmoothOfRelativeDimension d (X₀ ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (X₀ ↘ Spec (CommRingCat.of k₀))]
+    [IsSeparated (X₀ ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X₀ ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X₀ ↘ Spec (CommRingCat.of k₀))]
+    {𝒢 : WeilSheaf k₀ l X₀} (h𝒢 : 𝒢.IsLisse) (hreal : 𝒢.IsReal ι) {𝒢₁ 𝒢₂ : WeilSheaf k₀ l X₀}
+    (i : 𝒢₁ ⟶ 𝒢₂) (j : 𝒢₂ ⟶ 𝒢) [Mono i] [Mono j] (h₁ : 𝒢₁.IsLisse) (h₂ : 𝒢₂.IsLisse)
+    (hirr : (cokernel i).IsIrreducibleLisse) :
+    ∃ w : ℝ, (cokernel i).IsPunctuallyPureOfWeight ι w := by
+  sorry
+
+/-- **Real lisse sheaves on smooth affine schemes are mixed.** Let `X₀` be a smooth geometrically
+connected affine scheme of dimension `d ≥ 2` over `k₀` and `𝒢` an `ι`-real lisse Weil sheaf on
+`X₀`. Then `𝒢` is `ι`-mixed: the successive quotients of a filtration with irreducible lisse
+quotients are punctually pure
+(`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth`)
+(blueprint: `thm-zl-real-mixed-by-curves`, the lisse stratum). -/
+theorem IsReal.isMixed_of_isLisse_of_smooth {X₀ : Scheme.{u}}
+    [X₀.Over (Spec (CommRingCat.of k₀))] [IsAffine X₀] {d : ℕ} (hd : 2 ≤ d)
+    [SmoothOfRelativeDimension d (X₀ ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (X₀ ↘ Spec (CommRingCat.of k₀))]
+    [IsSeparated (X₀ ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X₀ ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X₀ ↘ Spec (CommRingCat.of k₀))]
+    {𝒢 : WeilSheaf k₀ l X₀} (hreal : 𝒢.IsReal ι) (h𝒢 : 𝒢.IsLisse) : 𝒢.IsMixed ι := by
+  obtain ⟨n, H, φ, h0, ⟨e⟩, hmono, hlisse, hirr⟩ := h𝒢.exists_filtration_isIrreducibleLisse
+  have hpure (i : Fin n) : ∃ w : ℝ, (cokernel (φ i)).IsPunctuallyPureOfWeight ι w := by
+    obtain ⟨ψ, hψ⟩ := exists_mono_of_chain φ hmono e i.succ
+    have := hmono i
+    exact hreal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth hd h𝒢 (φ i) ψ (hlisse _)
+      (hlisse _) (hirr i)
+  choose w hw using hpure
+  refine ⟨∑ i, |w i|, n, H, φ, h0, ⟨e⟩, hmono, fun i ↦ ⟨w i, ?_, hw i⟩⟩
+  exact (le_abs_self _).trans
+    (Finset.single_le_sum (fun j _ ↦ abs_nonneg (w j)) (Finset.mem_univ i))
+
+/-- An `ι`-real Weil sheaf on a nonempty open subscheme of `𝔸ᵈ` over `k₀`, `d ≥ 2`, is `ι`-mixed
+on a nonempty open: it is lisse on a dense open, which contains a nonempty affine open, smooth
+and geometrically connected over `k₀` (blueprint: `thm-zl-real-mixed-by-curves`). -/
+theorem IsReal.exists_isMixed_upperStar_opensι_of_two_le {d : ℕ} (hd : 2 ≤ d)
+    (O : 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)).Opens) [Nonempty O]
+    {G : WeilSheaf k₀ l O} (hG : G.IsReal ι) :
+    ∃ O' : O.toScheme.Opens, (O' : Set O).Nonempty ∧
+      ((WeilSheaf.upperStar O'.ι).obj G).IsMixed ι := by
+  have := isNoetherian_of_locallyOfFiniteType
+    (𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))
+  have : LocallyOfFiniteType (O.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over O.ι]; infer_instance
+  have : QuasiCompact (O.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over O.ι]; infer_instance
+  obtain ⟨U, hU, hlisse⟩ := exists_dense_isLisse_upperStar G
+  obtain ⟨x, hx⟩ := hU.nonempty
+  obtain ⟨V, hV, hxV, hVU⟩ := exists_isAffineOpen_mem_and_subset hx
+  have : IsAffine V.toScheme := hV
+  have : Nonempty V := ⟨⟨x, hxV⟩⟩
+  have : (O.toScheme.homOfLE hVU).IsOver (Spec (CommRingCat.of k₀)) := ⟨by
+    rw [← comp_over U.ι, Scheme.homOfLE_ι_assoc, comp_over]⟩
+  have hVlisse : ((WeilSheaf.upperStar V.ι).obj G).IsLisse := by
+    rw [isLisse_upperStar_congr (O.toScheme.homOfLE_ι hVU).symm, isLisse_upperStar_comp_iff]
+    exact hlisse.upperStar _
+  have hv : V.toScheme ↘ Spec (CommRingCat.of k₀) =
+      (V.ι ≫ O.ι) ≫ 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀) := by
+    rw [Category.assoc, comp_over O.ι, comp_over V.ι]
+  have : SmoothOfRelativeDimension d (V.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    have := AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin d))
+      (Spec (CommRingCat.of k₀))
+    rw [Nat.card_ulift, Nat.card_eq_fintype_card, Fintype.card_fin] at this
+    have : SmoothOfRelativeDimension (0 + d) ((V.ι ≫ O.ι) ≫
+        𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀)) :=
+      inferInstance
+    rw [zero_add] at this
+    rwa [hv]
+  have : GeometricallyConnected (V.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    have := GeometricallyIrreducible.comp_of_isOpenImmersion (V.ι ≫ O.ι)
+      (𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))
+    rw [hv]; exact GeometricallyConnected.of_geometricallyIrreducible _
+  have : IsSeparated (V.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [hv]; infer_instance
+  have : LocallyOfFiniteType (V.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [hv]; infer_instance
+  have : QuasiCompact (V.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [hv]; infer_instance
+  exact ⟨V, ⟨x, hxV⟩, (hG.upperStar V.ι).isMixed_of_isLisse_of_smooth hd hVlisse⟩
+
+/-- An `ι`-real Weil sheaf on a nonempty reduced separated `k₀`-scheme `T` of finite type is
+`ι`-mixed on a nonempty open of `T` (blueprint: `thm-zl-real-mixed-by-curves`, the step on a
+nonempty open). A nonempty open `W` of `T` is finite étale over a nonempty open `O` of some `𝔸ᵈ`
+(`AlgebraicGeometry.exists_isFinite_etale_to_affineSpace`) by `π : W ⟶ O`. The direct image
+`π_* (G|W)` is real, hence mixed on a nonempty open `O'` of `O`; pulling back, `π^* π_* (G|W)` is
+mixed over `π⁻¹ O'`, and so is its quotient `G|W` under the counit of `π^* ⊣ π_*`, an
+epimorphism since `π` is finite étale. -/
+theorem IsReal.exists_isMixed_upperStar_opensι (T : Scheme.{u})
+    [T.Over (Spec (CommRingCat.of k₀))] [IsReduced T] [Nonempty T]
+    [IsSeparated (T ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (T ↘ Spec (CommRingCat.of k₀))] {G : WeilSheaf k₀ l T} (hG : G.IsReal ι) :
+    ∃ U : T.Opens, (U : Set T).Nonempty ∧ ((WeilSheaf.upperStar U.ι).obj G).IsMixed ι := by
+  obtain ⟨W, j, d, O, π, hj, hW, hπf, hπe, hπs, hcomm⟩ :=
+    exists_isFinite_etale_to_affineSpace T (T ↘ Spec (CommRingCat.of k₀))
+  have := isNoetherian_of_locallyOfFiniteType
+    (𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))
+  let : W.Over (Spec (CommRingCat.of k₀)) := ⟨j ≫ T ↘ Spec (CommRingCat.of k₀)⟩
+  have : j.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : π.IsOver (Spec (CommRingCat.of k₀)) := ⟨by rw [← comp_over O.ι]; exact hcomm⟩
+  have : LocallyOfFiniteType (W ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (LocallyOfFiniteType (j ≫ _))
+  have : LocallyOfFiniteType (O.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over O.ι]; infer_instance
+  have : QuasiCompact (O.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over O.ι]; infer_instance
+  have : QuasiSeparated (O.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over O.ι]; infer_instance
+  have : Nonempty O := ⟨π.base (Classical.arbitrary W)⟩
+  set GW := (WeilSheaf.upperStar j).obj G
+  obtain ⟨O', ⟨o, ho⟩, hmix⟩ := exists_isMixed_upperStar_opensι_of_affineSpace
+    (fun _ hd O _ _ hG ↦ hG.exists_isMixed_upperStar_opensι_of_two_le hd O) O
+    ((hG.upperStar j).lowerStar_of_isFinite π)
+  -- pull back along `π' : π⁻¹ O' ⟶ O'`
+  have : (π ∣_ O').IsOver (Spec (CommRingCat.of k₀)) := ⟨by
+    rw [← comp_over O'.ι, morphismRestrict_ι_assoc, comp_over π, comp_over (π ⁻¹ᵁ O').ι]⟩
+  obtain ⟨e₁⟩ := nonempty_upperStar_comp_iso (l := l) (π ∣_ O') O'.ι
+    ((WeilSheaf.lowerStar π).obj GW)
+  obtain ⟨e₂⟩ := nonempty_upperStar_congr_iso (l := l) (morphismRestrict_ι π O')
+    ((WeilSheaf.lowerStar π).obj GW)
+  obtain ⟨e₃⟩ := nonempty_upperStar_comp_iso (l := l) (π ⁻¹ᵁ O').ι π
+    ((WeilSheaf.lowerStar π).obj GW)
+  obtain ⟨w, hw⟩ := (hmix.upperStar (π ∣_ O')).of_iso (e₁.symm ≪≫ e₂ ≪≫ e₃)
+  -- the counit of `π^* ⊣ π_*` is an epimorphism since `π` is finite étale
+  have := epi_upperStarLowerStarAdjunction_counit_app_of_finite_etale (l := l) π GW
+  have h₂ : ((WeilSheaf.upperStar (π ⁻¹ᵁ O').ι).obj GW).IsMixed ι :=
+    ⟨w, hw.of_epi ((WeilSheaf.upperStar (π ⁻¹ᵁ O').ι).map
+      ((upperStarLowerStarAdjunction (k₀ := k₀) (l := l) π).counit.app GW))⟩
+  obtain ⟨e₄⟩ := nonempty_upperStar_comp_iso (l := l) (π ⁻¹ᵁ O').ι j G
+  obtain ⟨p, hp⟩ := hπs.surj ⟨o, ho⟩
+  refine ⟨((π ⁻¹ᵁ O').ι ≫ j).opensRange, ⟨j.base p, ⟨⟨p, ?_⟩, rfl⟩⟩,
+    (h₂.of_iso e₄.symm).upperStar_opensRange_ι⟩
+  rw [Scheme.Hom.mem_preimage, hp]
+  exact ho
+
 /-- Every constructible `ι`-real Weil sheaf on a separated finite-type `k₀`-scheme is `ι`-mixed
 (blueprint: `sk-i-dl-general-real`, `thm-zl-real-mixed-by-curves`).
 
@@ -306,7 +491,8 @@ theorem IsReal.isMixed {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   -- TODO: the lisse-stratum step needs the dictionary between lisse pro-étale Weil sheaves and
   -- Weil-group representations, finite constant-field extensions of Weil sheaves with the
   -- trace splitting, and the descent of the curves of curve testing to a finite field.
-  isMixed_of_forall_exists_isMixed_upperStar_opensι (fun _ _ _ _ _ _ _ _ _ ↦ sorry) hF
+  isMixed_of_forall_exists_isMixed_upperStar_opensι
+    (fun T _ _ _ _ _ _ _ hG ↦ hG.exists_isMixed_upperStar_opensι T) hF
 
 end WeilSheaf
 
