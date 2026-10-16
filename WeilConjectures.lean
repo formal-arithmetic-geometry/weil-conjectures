@@ -2663,8 +2663,10 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.FundamentalGrou
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LisseRepAbelian
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalPolynomial
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystemsExact
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.MiddleExtension
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
@@ -2682,6 +2684,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamental
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationDual
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationSections
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationStalk
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationTensor
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPath
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPathFrobenius
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPathFrobeniusElement
@@ -3138,6 +3141,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategor
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subcategory
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
@@ -3381,6 +3385,7 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Invariants
 public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
+public import WeilConjectures.Mathlib.RepresentationTheory.LinHom
 public import WeilConjectures.Mathlib.RepresentationTheory.Semisimple
 public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.Mathlib.RingTheory.AdicCompletion.Basic
@@ -4476,6 +4481,7 @@ public import WeilConjectures.WeilSheaf.GlobalSectionsUpperStar
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.LFunction
+public import WeilConjectures.WeilSheaf.LisseAbelian
 public import WeilConjectures.WeilSheaf.LisseDuality
 public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.LisseLocus

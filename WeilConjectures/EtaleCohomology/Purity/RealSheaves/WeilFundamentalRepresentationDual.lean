@@ -186,7 +186,7 @@ lemma evaluationPairing_frobStalkIso (F : WeilSheaf K l C) (hF : F.IsLisse)
     ((M.mono B.frobPath).hom.app (F.toLisse hF)).hom v)) h
   simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
     ModuleCat.MonoidalCategory.tensorHom_tmul] at h'
-  have e := M.mono_evaluationPairing B.frobPath (F.toLisse hF) hF.dual d v
+  have e := M.mono_evaluationPairing B.frobPath (F.toLisse hF) (LisseSheaf.unit l) hF.dual d v
   rw [Mod.evaluationPairing_apply, Mod.evaluationPairing_apply] at e
   have u := congrArg (fun f ↦ f.hom (Mod.evaluationPairing (stalkFunctor l B.t) F.obj.carrier
     (AdicSheaf.unit l _) d v)) (mono_comp_stalkFrobTransport_unit M (B := B))
@@ -241,7 +241,7 @@ lemma dualStalkLinearMap_rep (F : WeilSheaf K l C) (hF : F.IsLisse) (g : Aut (fi
       (Mod.evaluationPairing (stalkFunctor l B.t) F.obj.carrier (AdicSheaf.unit l _)
         (((M.mono g).hom.app ⟨_, hF.dual⟩).hom d)
         (((M.mono g).hom.app (F.toLisse hF)).hom v))).down = _
-  have e := M.mono_evaluationPairing g (F.toLisse hF) hF.dual d v
+  have e := M.mono_evaluationPairing g (F.toLisse hF) (LisseSheaf.unit l) hF.dual d v
   rw [mono_hom_app_unit] at e
   exact congrArg (fun x ↦ ((asIso (unitSection l B.t)).symm.toLinearEquiv x).down) e
 

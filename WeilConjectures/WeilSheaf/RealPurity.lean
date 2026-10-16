@@ -257,7 +257,7 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight
         exact_mod_cast topologicalKrullDim_le_of_smoothOfRelativeDimension
           (C ↘ Spec (CommRingCat.of k₀)) 1 }
   obtain ⟨W⟩ := WeilGroup.nonempty (C ↘ Spec (CommRingCat.of k₀))
-  obtain ⟨e, hst, -, -⟩ := W.exists_equivalence_isLisse l
+  obtain ⟨e, hst, -, -, -⟩ := W.exists_equivalence_isLisse l
   -- the subquotient `𝒢₂ / 𝒢₁` in the category of lisse Weil sheaves
   let G : ObjectProperty.FullSubcategory (fun F : WeilSheaf k₀ l C ↦ F.IsLisse) := ⟨𝒢, h𝒢⟩
   let G₁ : ObjectProperty.FullSubcategory (fun F : WeilSheaf k₀ l C ↦ F.IsLisse) := ⟨𝒢₁, h₁⟩

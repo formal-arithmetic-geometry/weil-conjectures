@@ -11,6 +11,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamental
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationDual
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationSections
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationStalk
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationTensor
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 
 /-!
@@ -119,7 +120,14 @@ representation:
   path);
 * it is compatible with duals: the representation of `ℱ^∨` is the contragredient of that of `ℱ`;
 * the global sections `H⁰(C̄, ℱ)` are the invariants `V ^ {π₁(C)}`, compatibly with the
-  Frobenius `ρ (γ)` of the degree-one lift `γ` (`p-real-sections`, for `U₀ = C₀`). -/
+  Frobenius `ρ (γ)` of the degree-one lift `γ` (`p-real-sections`, for `U₀ = C₀`; for a general
+  open `U₀ ⊆ C₀` see
+  `AlgebraicGeometry.WeilGroup.exists_globalSections_upperStar_linearEquiv_invariants`);
+* it is compatible with tensor products: the representation of `ℱ ⊗ 𝒢` is the tensor product of
+  those of `ℱ` and `𝒢`.
+
+It is exact, as is any equivalence between these abelian categories
+(`AlgebraicGeometry.WeilGroup.isLisse_shortExact_iff`). -/
 theorem exists_equivalence_isLisse :
     ∃ e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse) ≌
         ObjectProperty.FullSubcategory (W.isLisseRep l),
@@ -134,7 +142,11 @@ theorem exists_equivalence_isLisse :
         ∃ f : F.obj.globalSections.carrier ≃ₗ[PadicAlgCl l]
             Representation.invariants ((e.functor.obj F).obj.ρ.comp W.geometric.subtype),
           ∀ v, (f (F.obj.globalSections.frobenius v) : (e.functor.obj F).obj.V) =
-            (e.functor.obj F).obj.ρ W.frobeniusLift (f v)) := by
+            (e.functor.obj F).obj.ρ W.frobeniusLift (f v)) ∧
+      (∀ F G : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse),
+        Nonempty ((e.functor.obj ⟨F.obj.tensorObj G.obj F.property,
+            F.property.tensorObj G.property⟩).obj.ρ.Equiv
+          ((e.functor.obj F).obj.ρ.tprod (e.functor.obj G).obj.ρ))) := by
   have : ConnectedSpace (C ↘ Spec (.of K)).geometricFiber :=
     GeometricallyConnected.geometrically_connectedSpace (f := C ↘ Spec (.of K))
       (Scheme.specAlgebraicClosure K).hom (C ↘ Spec (.of K)).geometricFiberProj
@@ -153,7 +165,7 @@ theorem exists_equivalence_isLisse :
       (f F).symm (fundamentalRep M D F.obj F.property g w) =
         (e.functor.obj F).obj.ρ g ((f F).symm w) := by
     rw [LinearEquiv.symm_apply_eq, hf, LinearEquiv.apply_symm_apply]
-  refine ⟨e, fun F x ↦ ?_, fun F ↦ ?_, fun F ↦ ?_⟩
+  refine ⟨e, fun F x ↦ ?_, fun F ↦ ?_, fun F ↦ ?_, fun F G ↦ ?_⟩
   · -- the stalk at `x̄`, transported to the base point along a path `π`
     obtain ⟨π⟩ := PreGaloisCategory.nonempty_iso_of_fiberFunctor
       (Scheme.FiniteEtale.fiber ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x))
@@ -220,6 +232,18 @@ theorem exists_equivalence_isLisse :
     change (f F).symm (a (F.obj.globalSections.frobenius v) : _) = _
     rw [ha, hf']
     rfl
+  · -- tensor products
+    obtain ⟨b⟩ := nonempty_equiv_fundamentalRep_tensorObj D F.obj G.obj F.property G.property
+    let fF : (e.functor.obj F).obj.ρ.Equiv (fundamentalRep M D F.obj F.property) :=
+      .mk (f F) fun g ↦ LinearMap.ext (hf F g)
+    let fG : (e.functor.obj G).obj.ρ.Equiv (fundamentalRep M D G.obj G.property) :=
+      .mk (f G) fun g ↦ LinearMap.ext (hf G g)
+    let fT : (e.functor.obj ⟨F.obj.tensorObj G.obj F.property,
+        F.property.tensorObj G.property⟩).obj.ρ.Equiv
+        (fundamentalRep M D (F.obj.tensorObj G.obj F.property)
+          (F.property.tensorObj G.property)) :=
+      .mk (f _) fun g ↦ LinearMap.ext (hf _ g)
+    exact ⟨(fT.trans b).trans (Representation.Equiv.tprodCongr fF.symm fG.symm)⟩
 
 /-- The linear isomorphism underlying an isomorphism of representations. -/
 private noncomputable def repLinearEquivOfIso {k G : Type*} [CommRing k] [Monoid G]
@@ -263,7 +287,7 @@ theorem exists_weilSheaf_of_isLisse {V : Type u} [AddCommGroup V] [Module (Padic
           Representation.Coinvariants (ρ.comp W.geometric.subtype),
         ∀ v, f ((F.geometricCoinvariants hF).frobenius v) =
           ρ.toCoinvariants W.geometric W.frobeniusLift (f v) := by
-  obtain ⟨e, hst, hdu, hse⟩ := W.exists_equivalence_isLisse l
+  obtain ⟨e, hst, hdu, hse, -⟩ := W.exists_equivalence_isLisse l
   let X : ObjectProperty.FullSubcategory (W.isLisseRep l) := ⟨Rep.of ρ, inferInstance, hρ⟩
   set F := e.inverse.obj X
   set ρF := (e.functor.obj F).obj.ρ
