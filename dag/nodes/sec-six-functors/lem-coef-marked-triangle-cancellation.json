@@ -31,9 +31,86 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=(\\Delta^2,\\{\\text{degenerate edges},[0,2],[1,2]\\})$, $B=(\\Delta^2)^\\sharp$, and $i:A\\to B$. First replace the Kan generators in the definition of $W$ by a small set: take one representative of each countable Kan complex, together with the finite generators (i)--(iii), and call the resulting set $J$. Every edge of any small Kan complex $K$ lies in a countable Kan subcomplex. Indeed, start with that edge and its faces and degeneracies, and repeatedly add one filler in $K$ for each horn in the current countable subcomplex, including all faces and degeneracies of the chosen fillers. There are countably many horns at each stage. The union after countably many stages is Kan because a horn has finitely many nondegenerate simplices and therefore occurs at some finite stage. Well-order the edges of $K$ and, for each edge, push out the countable Kan marking generator for such a subcomplex along its inclusion into $K$ with the markings already added. Each pushout keeps the underlying simplicial set $K$ and adds the images of those marked edges. The resulting transfinite composite is $K^\\flat\\to K^\\sharp$. Thus $J$ generates exactly $W$. In particular, lifting against $J$ implies lifting against every generator in the statement: lifts extend across a pushout by its universal property, across a continuous transfinite chain by successive compatible lifts, and across a retract by the retraction maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.1.1.3; explicit countable Kan-subcomplex and marking-pushout argument."
+   }
+  },
+  {
+   "text": "In the category of small marked simplicial sets, small colimits are degreewise simplicial colimits with the marked edges the images of marked edges of the inputs. This follows directly by testing whether the induced maps preserve marked edges; degenerate edges are included automatically. Hom sets and all these colimits lie in the fixed universe. Every map of $J$ is degreewise injective, and its domain has countably many simplices. In a continuous $\\aleph_1$-chain of pushouts of coproducts of $J$-maps, a map from such a domain factors through one stage: bound the countably many stages at which its simplices and required marked edges appear. The regularity of $\\aleph_1$ gives a bound below $\\aleph_1$; the same argument detects equality of two maps. These are exactly the smallness hypotheses of [lem-coef-small-object-cell-factorization], with $I=J$ and $\\kappa=\\aleph_1$. It factors $i$ as $A\\xrightarrow{j} Z\\xrightarrow{p}B$, with $j$ a $J$-cell map and $p$ lifting against $J$. A coproduct attachment can be serialized by well-ordering its summands, so $j\\in W$. Step 1 makes $p$ lift every marked generator. Generator (i) therefore makes $p$ an inner fibration; generator (ii), for $n\\geq2$, makes every marked edge $p$-cartesian in the horn sense of [def-coef-infinity-fibrations]. Its $n=1$ case supplies a marked lift with specified target of every base edge. The underlying $B=\\Delta^2$ is a quasicategory: compatible inner horns in the nerve of the linear order $[2]$ extend to the corresponding nondecreasing chain. Consequently $Z$ is a quasicategory too, by filling the image inner horn in $B$ and lifting that filler through $p$.",
+   "uses": [
+    "lem-coef-small-object-cell-factorization",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.1.1.3, Proposition A.1.2.5; proof of Proposition 3.1.1.6, conditions (A), (C), and marked implies cartesian."
+   }
+  },
+  {
+   "text": "Let $\\sigma:\\Delta^2\\to Z$ be the underlying map of $j$, and write $f=\\sigma_{01}$, $g=\\sigma_{12}$ and $h=\\sigma_{02}$. The edges $g,h$ are marked, hence $p$-cartesian by Step 2. Apply the composition clause of [lem-coef-infinity-cocartesian-composition-initiality] to $p^{\\mathrm{op}}:Z^{\\mathrm{op}}\\to B^{\\mathrm{op}}$ and $\\sigma^{\\mathrm{op}}$. Opposite reverses the vertex order and sends an $n$-horn of index $r$ to the horn of index $n-r$; thus the horn definition in [def-coef-infinity-fibrations] identifies $p$-cartesian edges with $p^{\\mathrm{op}}$-cocartesian edges. Both opposite simplicial sets are quasicategories and $p^{\\mathrm{op}}$ is inner, by this same reversal of inner horns. The first consecutive edge in $\\sigma^{\\mathrm{op}}$ is $g^{\\mathrm{op}}$, the second is $f^{\\mathrm{op}}$, and the long edge is $h^{\\mathrm{op}}$. Since the first and long edges are cocartesian, the cited equivalence makes the second cocartesian. Hence $f$ is $p$-cartesian.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.1.1.7 and Proposition 2.4.1.7, expressed by the existing opposite-variance composition lemma."
+   }
+  },
+  {
+   "text": "Choose a marked edge $f':z'_0\\to z_1$ over $[0,1]$ with target $z_1=\\sigma(1)$, using the $n=1$ marked-generator lift of Step 2. There is a triangle $\\tau$ with $d_0\\tau=f'$, $d_1\\tau=f$ and $p\\tau=s_0[0,1]$: solve the type-(ii) $n=2$ horn whose edges $[0,2]$ and $[1,2]$ are $f,f'$ and whose base vertices are $(0,0,1)$. Its required marked final edge is $f'$, so this is an allowed marked lifting problem. Put $a=d_2\\tau:z_0\\to z'_0$. The two edges $f,f'$ are $p$-cartesian. Apply [lem-coef-infinity-cocartesian-composition-initiality] to the opposite of this triangle, exactly as in Step 3: $f'$ is the last consecutive edge before reversal and $f$ is the long edge, so $a$ is $p$-cartesian. The edge $a$ lies in $F=Z\\times_B\\{0\\}$. The fiber $F$ is a quasicategory, since its inner horns lift against $p$ over the constant simplex at $0$. Every final outer horn in $F$ ending in $a$ fills in $F$: use the $p$-cartesian horn condition of [def-coef-infinity-fibrations] over the constant base simplex. By the converse outer-horn criterion of [lem-cbc-equivalence-outer-horn-filling], $a$ is an equivalence in $F$.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 3.1.1.6, the cartesian implies marked argument in (B); Proposition 2.4.1.7 and Proposition 1.2.4.3."
+   }
+  },
+  {
+   "text": "The structure map $F\\to\\Delta^0$ is an isofibration in the sense of [lem-coef-infinity-core-kan-fibration]: $F$ is a quasicategory by Step 4, so inner horns lift, and the only edge of $\\Delta^0$ is degenerate and lifts at any $c$ to the degenerate edge $s_0c$, an equivalence with inverse $s_0c$ witnessed by $s_0s_0c$. That node makes $F^\\simeq\\to(\\Delta^0)^\\simeq=\\Delta^0$ a Kan fibration, so the core $K=F^\\simeq$ is a Kan complex; $a$ is one of its edges by Step 4. Use generator (iv) in the square whose upper map $K^\\flat\\to Z$ is the inclusion and whose lower map $K^\\sharp\\to B$ is constant at $0$. The lower map preserves markings, and Step 2 gives a marked lift $K^\\sharp\\to Z$. Its underlying map is forced to be the same inclusion, because $K^\\flat\\to K^\\sharp$ is the underlying identity. Thus $a$ is marked. In the triangle $\\tau$ of Step 4, the consecutive edges $a,f'$ are now both marked. Lifting generator (iii), with upper map $\\tau$ and lower map $p\\tau$ into the fully marked $B$, marks the remaining long edge $f$. Again its underlying map stays $\\tau$, since generator (iii) is the underlying identity.",
+   "uses": [
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 3.1.1.6(B), the core-Kan generator and consecutive-edge marking generator."
+   }
+  },
+  {
+   "text": "The underlying map of $j$ now preserves every marking of $B$: its only nondegenerate edges are $[0,1],[0,2],[1,2]$, whose images are $f,h,g$, all marked. It therefore gives a marked map $s:B\\to Z$ with $si=j$ and $ps=1_B$, since $pj=i$ and $i$ is the underlying identity. In the arrow category the pairs $(1_A,s):i\\to j$ and $(1_A,p):j\\to i$ have composite $(1_A,ps)=1_i$. Hence $i$ is a retract of $j\\in W$, and the defining retract closure of $W$ proves the assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.1.1.7; explicit arrow-category retraction after the small-object factorization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-small-object-cell-factorization",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-coef-infinity-core-kan-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded proof of Corollary 3.1.1.7 using Remark 3.1.1.3, the forward implication of Proposition 3.1.1.6 and the opposite form of Proposition 2.4.1.7; HTT was read online and is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,10 +167,73 @@
    "results": "{\"t\": \"2026-10-16T18:48:02Z\", \"tool\": \"grep\", \"query\": \"marked.*(triangle|edge)|marking.*(triangle|anodyne)|MarkedAnodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/SimpleGraph/DeleteEdges.lean\"], \"digest\": \"a37a937af437bc73\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reading semantic hits are the unmarked horn₃₂/horn₃₁ desc and face maps in HornColimits.lean, not membership of a marking extension in a saturated marked class. Loogle returned zero hits. The sole grep hit is an unrelated SimpleGraph/DeleteEdges.lean comment at line 64."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marking the missing edge of a two simplex whose two final edges are marked is marked anodyne",
+   "results": "8 hits: SSet.horn₂₂.ι₀₂, SSet.horn₂₂.ι₁₂, SSet.horn.primitiveTriangle, horn₂₀ and horn₂₁ face inclusions, horn₃₂.ι₃ (Mathlib/AlgebraicTopology/SimplicialSet/HornColimits and Horn).",
+   "date": "2026-10-17",
+   "verdict": "no match: the horn hits are unmarked simplicial inclusions and desc maps; the model-category hits assume a model structure and do not construct the marked class in the statement. Read HornColimits.lean and ModelCategory/Basic.lean; neither supplies this marked cancellation inclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"marked\"",
+   "results": "OK 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: the horn hits are unmarked simplicial inclusions and desc maps; the model-category hits assume a model structure and do not construct the marked class in the statement. Read HornColimits.lean and ModelCategory/Basic.lean; neither supplies this marked cancellation inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "MarkedAnodyne|marked.anodyne|marked.{0,30}triangle",
+   "results": "OK 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: the horn hits are unmarked simplicial inclusions and desc maps; the model-category hits assume a model structure and do not construct the marked class in the statement. Read HornColimits.lean and ModelCategory/Basic.lean; neither supplies this marked cancellation inclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The marked triangle cancellation inclusion belongs to the weakly saturated class of marked anodyne maps",
+   "results": "8 hits, all general model-category declarations: HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemCofibrationsTrivialFibrations, instIsWeakFactorizationSystemTrivialCofibrationsFibrations, trivialFibrations_sub_fibrations, trivialFibrations_sub_weakEquivalences, mem_trivialCofibrations, trivialCofibrations_sub_cofibrations, mem_trivialCofibrations_iff, trivialCofibrations_sub_weakEquivalences.",
+   "date": "2026-10-17",
+   "verdict": "no match: the horn hits are unmarked simplicial inclusions and desc maps; the model-category hits assume a model structure and do not construct the marked class in the statement. Read HornColimits.lean and ModelCategory/Basic.lean; neither supplies this marked cancellation inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancellation law for marked cartesian edges in a simplicial two simplex via weakly saturated horn inclusions",
+   "results": "8 hits: SSet.horn₃₂.exists_desc, horn₃₁.desc, horn₃₂.ι₁_desc, horn₃₂.ι₀_desc, horn₃₂.ι₃_desc, horn₃₁.exists_desc, horn₂₁.sq, horn₃₁.ι₂_desc, all Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.",
+   "date": "2026-10-17",
+   "verdict": "no match: the horn hits are unmarked simplicial inclusions and desc maps; the model-category hits assume a model structure and do not construct the marked class in the statement. Read HornColimits.lean and ModelCategory/Basic.lean; neither supplies this marked cancellation inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "def ι₀₂|def ι₁₂|instIsWeakFactorizationSystemTrivialCofibrationsFibrations",
+   "results": "OK 0 hits; subdirectory argument AlgebraicTopology.",
+   "date": "2026-10-17",
+   "verdict": "no match: the horn hits are unmarked simplicial inclusions and desc maps; the model-category hits assume a model structure and do not construct the marked class in the statement. Read HornColimits.lean and ModelCategory/Basic.lean; neither supplies this marked cancellation inclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "MarkedSSet|MarkedSimplicial|marked.anodyne|marked.*[Cc]artesian",
+   "results": "{\"t\": \"2026-10-16T20:28:57Z\", \"tool\": \"grep\", \"query\": \"MarkedSSet|MarkedSimplicial|marked.anodyne|marked.*[Cc]artesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader queries returned only unmarked Quillen horns, quasicategory inner-horn fillers, and horn colimit maps; Loogle and grep found no marked-cartesian declarations. Read CategoryWithFibrations.lean lines 37-56 and Quasicategory/Basic.lean horn-filling clauses. These do not state a marking extension or marked weak saturation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Cartesian\"",
+   "results": "{\"t\": \"2026-10-16T20:28:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Cartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader queries returned only unmarked Quillen horns, quasicategory inner-horn fillers, and horn colimit maps; Loogle and grep found no marked-cartesian declarations. Read CategoryWithFibrations.lean lines 37-56 and Quasicategory/Basic.lean horn-filling clauses. These do not state a marking extension or marked weak saturation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak saturation of marked simplicial horn inclusions implies cancellation of marked composable edges",
+   "results": "{\"t\": \"2026-10-16T20:29:04Z\", \"tool\": \"leanfinder\", \"query\": \"Weak saturation of marked simplicial horn inclusions implies cancellation of marked composable edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.horn.edge\", \"SSet.quasicategory_of_filler\", \"SSet.horn₃₂.ι₀_desc\", \"SSet.horn₃₂.ι₁_desc\", \"SSet.horn₃₂.exists_desc\"], \"digest\": \"8463869f90d8e298\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader queries returned only unmarked Quillen horns, quasicategory inner-horn fillers, and horn colimit maps; Loogle and grep found no marked-cartesian declarations. Read CategoryWithFibrations.lean lines 37-56 and Quasicategory/Basic.lean horn-filling clauses. These do not state a marking extension or marked weak saturation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-anodyne-lifting-calculus",
@@ -101,5 +241,29 @@
   "group": "Q48"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-triangle-cancellation",
+  "worker": "stage1",
+  "summary": "Expanded HTT cancellation into six steps with no new nodes: countable small generation; small-object factorization; cartesian cancellation by the existing cocartesian lemma on opposites; a marked lift and equivalence comparison; core marking and the composition generator; explicit arrow retract. All non-elementary inputs reuse existing nodes; no model-structure node that depends on this item is cited. Statement unchanged.",
+  "blueprint": "Technical marked-anodyne sublemma serving the displayed integral coefficient-adjunction/inverse-limit argument of prop-coef-integral-exceptional-adjoint, through the finite-adjunction-diagram-realization and marked-point model ancestry. The six steps realize Corollary 3.1.1.7 in the existing from.place, retaining the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Its converse final-outer-horn criterion identifies the comparison edge in the fiber as an equivalence; no node of the biduality unit gives this simplicial equivalence criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-equivalence-outer-horn-filling"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-fde72cd29",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-fde72cd29 (reviewer sub-agent of L); spot-checked: I read the whole delivery and HTT, which I fetched read-only into /tmp and deleted after: Def 3.1.1.1, Rem 3.1.1.3, Prop 3.1.1.6 with proof (pp.149-150), Cor 3.1.1.7 with proof (p.150), Prop 2.4.1.7. Statement: the four generators and the weakly saturated closure match Def 3.1.1.1. The map matches Cor 3.1.1.7, since (Λ²₂)^♯⊔(Δ²)^♭ marks exactly [0,2] and [1,2]. Cartesian, not coanodyne, convention. Unchanged. Steps: 1 (countable Kan generators, elementary) is correct. 2: the small-object hypotheses hold (countable domains, cf(ω₁)>ω, monic chain maps), and generators (i)/(ii) give an inner fibration, marked edges cartesian and n=1 marked lifts; Z is a quasicategory. 3: on σ^op, u=g^op, v=f^op, w=h^op, which fits exactly the cancellation clause of lem-coef-infinity-cocartesian-composition-initiality, so f is cartesian. 4: an allowed type-(ii) horn over s₀[0,1], then cancellation on τ^op gives a cartesian; the fiber is a quasicategory and the converse of lem-cbc-equivalence-outer-horn-filling makes a an equivalence. 5: generator (iv) on the core marks a, and generator (iii) marks f; this is HTT 3.1.1.6(B) verbatim. 6: the arrow retract is correct. No new nodes; no cycle (traversal of every cited node); no duplicate. Nodes that would close a cycle (point/relative model, relative anodyne calculus, coanodyne) are correctly not cited. Tool use lem-cbc-equivalence-outer-horn-filling is accepted: no in-unit outer-horn criterion. FIX (C7): step 5 took core-Kan from off-unit lem-cbc-enhanced-functor-cone-calculus while in-unit lem-coef-infinity-core-kan-fibration (no path to item) gives it, and the tool_use claim that the unit had no such node was false. Step 5 now applies that node to the isofibration F→Δ⁰, written out. proof_deps recomputed and that tool_use entry removed; nothing else changed. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-marked-triangle-cancellation.json.; 1 file(s) fixed by the reviewer"
+ }
 }
