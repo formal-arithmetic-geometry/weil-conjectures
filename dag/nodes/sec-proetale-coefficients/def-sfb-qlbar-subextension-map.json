@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-qlbar-subextension-map",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The inclusions $\\underline E\\to\\underline F$",
@@ -19,24 +19,115 @@
  ],
  "proof": [
   {
-   "text": "Both $E$ and $F$ carry the topology restricted from $\\Qlb$, so the inclusion\n$E\\subseteq F$ is a continuous ring homomorphism. Then\n[def-sfb-continuous-map-condensed-ring-map] gives a morphism of condensed rings, hence of\nring objects. It also gives the functoriality, since the inclusion\n$E\\subseteq E$ is $\\mathrm{id}_E$ and $(F\\subseteq H)\\circ(E\\subseteq F)=(E\\subseteq H)$.",
+   "text": "Write $j_{E,F}:E\\hookrightarrow F$ for the field inclusion. The topology on each field is the subspace topology from $\\Qlb$, as specified in [def-sfb-padic-subfield-condensed-ring]. For an open $U\\subseteq F$, write $U=F\\cap V$ with $V$ open in $\\Qlb$. Then $j_{E,F}^{-1}(U)=E\\cap V$ is open in $E$, so $j_{E,F}$ is continuous. It preserves $0,1,+,\\cdot$ because both fields have the operations induced from $\\Qlb$; it is therefore a continuous ring homomorphism.",
+   "uses": [
+    "def-sfb-padic-subfield-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/def-sfb-qlbar-subextension-map.proof.md",
+    "place": "first sentence: continuity of the inclusion"
+   }
+  },
+  {
+   "text": "Apply [def-sfb-continuous-map-condensed-ring-map] to $j_{E,F}$. This defines $\\iota_{E,F}$ as a morphism of condensed rings, and as a morphism of their underlying ring objects, with section map, for every profinite set $S$, $C(S,E)\\to C(S,F)$ given by $a\\mapsto j_{E,F}\\circ a$. In particular it has exactly the source and target of the item. At each section it preserves the ring operations, and for $u:S'\\to S$ the equality $(j_{E,F}\\circ a)\\circ u=j_{E,F}\\circ(a\\circ u)$ describes its naturality.",
    "uses": [
     "def-sfb-continuous-map-condensed-ring-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/def-sfb-qlbar-subextension-map.proof.md",
+    "place": "second sentence: application of the continuous-map construction"
+   }
+  },
+  {
+   "text": "The inclusions satisfy $j_{E,E}=\\mathrm{id}_E$ and $j_{F,H}\\circ j_{E,F}=j_{E,H}$ as functions, hence as continuous ring homomorphisms. The strict functoriality in [def-sfb-continuous-map-condensed-ring-map] consequently gives $\\iota_{E,E}=\\mathrm{id}$ and $\\iota_{F,H}\\circ\\iota_{E,F}=\\iota_{E,H}$. Explicitly, on every section $a:S\\to E$ these equations are $j_{E,E}\\circ a=a$ and $j_{F,H}\\circ(j_{E,F}\\circ a)=j_{E,H}\\circ a$. Thus they are equalities of the specified morphisms, not merely isomorphisms between constructions.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/def-sfb-qlbar-subextension-map.proof.md",
+    "place": "third sentence: strict identity and composition laws"
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-padic-subfield-condensed-ring",
   "def-sfb-continuous-map-condensed-ring-map"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/def-sfb-qlbar-subextension-map.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/def-sfb-qlbar-subextension-map.proof.md",
+  "place": "def-sfb-qlbar-subextension-map.proof.md, first–third sentences; elementary details expanded from the source proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "padicSubfield|continuousMapRingSheafMap|topCatToCondensed.*map",
+   "results": "0 hits in Mathlib/.",
+   "date": "2026-10-16",
+   "verdict": "no match: related constructions do not supply the condensed ring-object morphism and its laws directly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous inclusion of topological fields induces a natural ring homomorphism on condensed rings of continuous maps, preserving identities and composition",
+   "results": "8 hits: TopCat.continuousFunctions.map (Mathlib.Topology.Sheaves.CommRingCat), ContinuousMap.C, BoundedContinuousFunction.C, LocallyConstant.comapRingHom, UniformSpace.Completion.mapRingHom, ContinuousMap.coeFnRingHom, LocallyConstant.toContinuousMapAlgHom, RingHom.compLeftContinuous_apply_apply. The postcomposition map is relevant but is not a morphism of condensed rings.",
+   "date": "2026-10-16",
+   "verdict": "no match: related constructions do not supply the condensed ring-object morphism and its laws directly"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, RingHom",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: related constructions do not supply the condensed ring-object morphism and its laws directly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of finite subextensions of the algebraic closure of the p-adic numbers induces a strictly functorial morphism of condensed ring objects by postcomposition",
+   "results": "8 hits: profiniteToCondensed (Mathlib/Condensed/Functors), Condensed.finFree, Condensed.profiniteSolidCounit, BDeRhamPlus, Condensed.profiniteSolid, Condensed.profiniteFree, Condensed.profiniteSolidification, LightProfinite.toCondensed. None constructs the requested morphism of condensed ring objects.",
+   "date": "2026-10-16",
+   "verdict": "no match: related constructions do not supply the condensed ring-object morphism and its laws directly"
+  },
+  {
+   "tool": "grep",
+   "query": "topCatToCondensed|top.*ToCondensed|continuousFunctions|compLeftContinuous",
+   "results": "10 hits in Mathlib/Condensed/: topCatToCondensedSet and TopCat.toCondensedSet in TopComparison.lean (lines 140,146), adjunction references in TopCatAdjunction.lean, and a functor reference in Solid.lean. Read TopComparison.lean: the functor is set-valued and does not state the ring-object construction.",
+   "date": "2026-10-16",
+   "verdict": "no match: related constructions do not supply the condensed ring-object morphism and its laws directly"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.continuousFunctions.map",
+   "results": "1 hit: TopCat.continuousFunctions.map, Mathlib.Topology.Sheaves.CommRingCat, locally read at lines 224-230; postcomposition is a ring homomorphism for one source space, not a condensed ring-object morphism.",
+   "date": "2026-10-16",
+   "verdict": "no match: related constructions do not supply the condensed ring-object morphism and its laws directly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor from topological rings to condensed rings sends a continuous ring homomorphism to postcomposition on sections",
+   "results": "8 hits: TopCat.commRingYoneda and TopCat.continuousFunctions.map (Mathlib/Topology/Sheaves/CommRingCat); CondensedMod.LocallyConstant.functor, LightCondensed.forget, Condensed.forget, CondensedMod.LocallyConstant.functorToPresheaves, LightCondensed.forget_obj_val_map, Condensed.underlying_map. Read CommRingCat.lean lines 224-254: commRingYoneda produces presheaves on TopCat, not condensed ring objects.",
+   "date": "2026-10-16",
+   "verdict": "no match: related constructions do not supply the condensed ring-object morphism and its laws directly"
+  },
+  {
+   "tool": "grep",
+   "query": "def map|def commRingYoneda",
+   "results": "2 hits in Mathlib/Topology/Sheaves/CommRingCat.lean, lines 224 and 237 (the search wrapper printed these line numbers in the file column because its root was a file). Read the definitions: pointwise postcomposition and the topological-ring-valued Yoneda presheaf, respectively; neither states the condensed ring-object map.",
+   "date": "2026-10-16",
+   "verdict": "no match: related constructions do not supply the condensed ring-object morphism and its laws directly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous ring homomorphism induces a morphism of condensed ring objects by postcomposition",
+   "results": "8 hits: TopCat.continuousFunctions.map, CommRingCat.HomTopology.continuous_precomp, CondensedMod, CondensedMod.LocallyConstant.functor, Condensed.profiniteFree, Condensed.forget, and related declarations. None directly states the requested finite-subextension condensed ring-object map with strict laws.",
+   "date": "2026-10-16",
+   "verdict": "no match: related constructions do not supply the requested condensed ring-object specialization directly"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -58,5 +149,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sfb-qlbar-colimit-point"
+ "unit": "sk-prop-sfb-qlbar-colimit-point",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-qlbar-subextension-map",
+  "worker": "stage1",
+  "summary": "Retained the exact statement and all three statement dependencies. Expanded the inclusion construction into continuity in the inherited topology, application of the existing general continuous-ring-map construction, and explicit strict identity/composition equations. No new nodes: these are elementary specializations of existing definitions. Done-checkout searches found no attachment; master declarations were read only as reference. Mathlib searches found related presheaf/set constructions but no direct condensed ring-object specialization. Repair after landing refusal: re-read the current general-map statement, including its explicit profinite-section and target-ring quantifiers, and revalidated both uses; refreshed their verbatim citation quotes and made the section quantifier explicit in step 2.",
+  "blueprint": "Realizes the topologies, postcomposition, underlying ring-object, identity and composition clauses of the current node and the first paragraph of sk-prop-sfb-qlbar-colimit-point; no change to the unit or chapter route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-8093ca7f3",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-8093ca7f3 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited nodes, blueprint proof sources, unit/chapter route, delivery rules, and archived master target declarations. Verified inherited-topology continuity, postcomposition on every profinite section, underlying ring-object morphism, strict identity/composition, edge cases, acyclicity, duplicate/generalization candidates, Mathlib searches, coefficient categories, and base-change morphisms. No new nodes or repairs are needed; review.md records the checks."
+ }
 }
