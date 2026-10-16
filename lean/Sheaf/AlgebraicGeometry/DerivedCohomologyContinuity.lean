@@ -6,15 +6,8 @@ Authors: SHEAF group NX
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-public import Mathlib.CategoryTheory.Comma.Over.Basic
-public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
 import Sheaf.AlgebraicGeometry.DerivedModuleUnderlyingComparison
-import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.Algebra.Category.ModuleCat.Colimits
 
 /-!
 # Continuity for bounded-below étale complexes
