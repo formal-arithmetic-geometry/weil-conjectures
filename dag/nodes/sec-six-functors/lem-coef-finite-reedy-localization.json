@@ -24,9 +24,129 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a direct $I$, define $\\lambda_i(f):X_i\\coprod_{L_iX}L_iY\\to Y_i$. Apply [lem-coef-direct-wfs-extension] first to $(C,F\\cap W)$ and then to $(C\\cap W,F)$. This gives two functorial diagram WFS: (relative $C$, objectwise $F\\cap W$) and (relative $C\\cap W$, objectwise $F$). The latter left class is exactly the intersection of relative $C$ with objectwise $W$. In one direction the cited node makes its maps objectwise trivial cofibrations. For the converse induct on increasing degree. Suppose $f$ is relative $C$, objectwise $W$, and its lower relative latching maps are trivial cofibrations. The nonidentity slice over $i$ is direct, and the latching map for the pullback of $f$ at an object $(j\\to i)$ is exactly $\\lambda_j(f)$: its incoming nonidentity slice is the incoming slice over $j$. Hence the colimit clause of the cited node makes $L_if:L_iX\\to L_iY$ a trivial cofibration. Its pushout $X_i\\to X_i\\coprod_{L_iX}L_iY$ is a trivial cofibration by the lifting definition (a square against a fibration pulls back to a lifting square for $L_if$). Two-out-of-three with $f_i$ now makes $\\lambda_i(f)$ a weak equivalence and therefore a trivial cofibration. The induction starts with empty latching categories. Objectwise $W$ has two-out-of-three and retract closure; the diagram category is complete and cocomplete by pointwise universal properties. These two WFS are precisely all model axioms. Factoring the initial map shows the asserted characterization of cofibrant diagrams.",
+   "uses": [
+    "lem-coef-direct-wfs-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Section 5.1, proof of Theorem 5.1.3, with Proposition 5.1.4 and Corollary 5.1.5; explicit trivial-left-class induction"
+   }
+  },
+  {
+   "text": "Apply step 1 to $I^{\\mathrm{op}}$ and $\\mathcal M^{\\mathrm{op}}$. Opposites interchange limits and colimits, cofibrations and fibrations, and the two lifting/factorization systems. Under $\\operatorname{Fun}(I,\\mathcal M)^{\\mathrm{op}}=\\operatorname{Fun}(I^{\\mathrm{op}},\\mathcal M^{\\mathrm{op}})$ the relative latching map is the opposite of $X_i\\to Y_i\\times_{M_iY}M_iX$. Thus for inverse $I$ we obtain the model structure with objectwise cofibrations and weak equivalences and relative matching fibrations. The terminal-map case gives exactly the stated fibrant-object criterion. The colimit clause of [lem-coef-direct-wfs-extension], under the same duality, says that $\\lim_I$ takes relative matching (trivial) fibrations to (trivial) fibrations. For a Reedy fibrant diagram $Y$ every $M_iY$ and $Y_i$ is fibrant: induct upward from vertices with no outgoing arrows, and apply this dual colimit clause to the outgoing nonidentity coslice. The codomain functor from that coslice identifies its matching category at $(i\\to j)$ with the outgoing nonidentity coslice at $j$, so the restricted diagram is Reedy fibrant. This also verifies the restriction assertion for each outgoing boundary used below.",
+   "uses": [
+    "lem-coef-direct-wfs-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 5.1.3 and dual of Corollary 5.1.5; explicit outgoing-coslice identification"
+   }
+  },
+  {
+   "text": "For inverse $I$, the constant functor preserves cofibrations and trivial cofibrations, since those are objectwise. Hence $\\operatorname{const}_I\\dashv\\lim_I$ is Quillen. For direct $I$, the constant functor preserves fibrations and trivial fibrations, since those are objectwise; its ordinary adjunction $\\operatorname{colim}_I\\dashv\\operatorname{const}_I$ is Quillen. Apply [lem-coef-model-infinity-derived-adjunction] to both pairs. This gives adjunctions on their infinity localizations and the replacement formulas, with actual derived units and counits. Constant diagrams preserve all weak equivalences, so their derived functors are directly localized constants. At this point we have not yet identified the localization of the diagram category with coherent diagrams; that identification will identify these constants and their cones.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.30 and paragraph 7.5.25, after the Quillen verification of Hovey Corollary 5.1.6"
+   }
+  },
+  {
+   "text": "For the inverse case, write $\\mathcal D_I=\\operatorname{Fun}(I,\\mathcal M)[W_I^{-1}]_\\infty$ and let $E_I:\\mathcal D_I\\to\\operatorname{Fun}(N(I),\\mathcal C)$ be the evaluation/localization functor. It exists because an objectwise weak-equivalence transformation becomes an equivalence. We prove simultaneously by induction on maximal nonidentity chain length $h(I)$ that $E_I$ is an equivalence and that the ordinary limit of a Reedy fibrant diagram, with its cone, is the coherent limit. Give the empty category height $-1$. For empty $I$, both diagram infinity categories are terminal. The inverse adjunction of step 3, supplied by [lem-coef-model-infinity-derived-adjunction], identifies the terminal object of $\\mathcal M$ with a terminal object of $\\mathcal C$, including its empty cone. For nonempty $I$, let $S$ consist of the vertices at which a chain of maximal length starts and put $J=I\\setminus S$. No nonidentity arrow enters $S$. Each $B_s=(s/I)\\setminus\\{1_s\\}$ and $J$ has strictly smaller height, although $B_s$ may have more objects than $I$ because of parallel arrows. All are finite. This is why the induction is on height, not on number of objects.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Finite-direct length filtration in 7.4.1 and proof of Theorem 7.6.17; empty-shape adjunction from 7.5.30"
+   }
+  },
+  {
+   "text": "Assume both inductive assertions for smaller height and take a coherent $H:N(I)\\to\\mathcal C$. Its restriction to $J$ is equivalent to $E_JY'$ for a strict Reedy fibrant diagram $Y'$, by the induction and a fibrant replacement in step 2. For $s\\in S$, step 2 makes $Y'\\circ t_s$ Reedy fibrant on $B_s$. The inductive limit assertion on $B_s$ therefore identifies $qM_sY'$ and its cone with the coherent boundary limit. By [lem-coef-infinity-source-gluing], the remaining data of $H$ are its vertices and maps to these boundary limits. Represent $H_s$ by a cofibrant object $A_s$ (choose a representative of the localization and a cofibrant replacement). Because $M_sY'$ is fibrant, [lem-coef-cosimplicial-frame-mapping] represents each specified boundary map by an actual map $A_s\\to M_sY'$, with a path to that map in its mapping space. Factor it as a trivial cofibration $A_s\\to Y_s$ followed by a fibration $Y_s\\to M_sY'$. The latter maps and $Y'$ define a strict diagram $Y:I\\to\\mathcal M$, via the matching limit projections, and it is Reedy fibrant. The paths just chosen identify its boundary cones with those of $H$. The equivalence criterion in the gluing node, applied with the equivalence on $J$ and $qA_s\\simeq qY_s$ at each $s$, gives $E_IY\\simeq H$. Thus $E_I$ is essentially surjective.",
+   "uses": [
+    "lem-coef-infinity-source-gluing",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proof of Theorem 7.6.17, essential-surjectivity induction using Proposition 7.4.11; actual-map representatives supplied by Hovey frames/Hinich 1.3.3"
+   }
+  },
+  {
+   "text": "To compute mapping spaces in $\\mathcal D_I$, take $X$ cofibrant in the inverse model and $Y$ Reedy fibrant. Choose a cosimplicial frame $X^\\bullet$ in that model by [lem-coef-cosimplicial-frame-mapping]. Restriction to $J$ and evaluation at each $s$ preserve cofibrations and trivial cofibrations. The right adjoint to evaluation at $s$ sends $A$ to the diagram with value $\\prod_{j\\to s}A$ at $j$. The right adjoint to restriction extends a $J$-diagram by its boundary matching limit at each $s\\in S$; its adjunction follows by the defining universal property of those limits. Thus both have right adjoints and are left Quillen, and the cited frame theorem sends this frame to frames. Naturality for a transformation into $Y$ says exactly that its value at $s$ and its restriction to $J$ induce the same map to $M_sY$. Applying this in every cosimplicial degree gives the strict pullback of simplicial sets\n$$H_I(X^\\bullet,Y)=H_J(X^\\bullet|_J,Y|_J)\\times_{\\prod_s H(X_s^\\bullet,M_sY)}\\prod_s H(X_s^\\bullet,Y_s).$$\nEvery term is a Kan model of its derived mapping space by the cited node; the right-to-base map is a product of Kan fibrations since $Y_s\\to M_sY$ is a fibration between fibrant objects. Hence this strict pullback is a homotopy pullback. This derives the local mapping-space formula from strict naturality, rather than assuming the diagram comparison we are proving.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 5.2.8 and Corollary 5.4.4; Hinich Theorem 1.3.3; strict naturality at source vertices"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-source-gluing] to $E_IX,E_IY$. The coherent boundary limit for $Y$ is $qM_sY$ by the inductive limit assertion on $B_s$, so its mapping-space formula has exactly the same base and right factor as step 6, up to their framed mapping-space equivalences. Its left factor agrees with step 6 by the inductive full faithfulness of $E_J$. The maps to the base also agree: on both sides the first map composes the cone $X_s\\to X\\circ t_s$ with the restriction of a transformation on $J$ and then takes its boundary-limit map; the second postcomposes with $Y_s\\to M_sY$. The naturality and evaluation compatibility in [lem-coef-cosimplicial-frame-mapping] identify these maps, including their homotopies. Taking homotopy pullbacks now proves that the actual comparison on mapping spaces induced by $E_I$ is an equivalence. Every pair of objects in $\\mathcal D_I$ can be represented with source cofibrant and target fibrant by the model replacements. Thus $E_I$ is fully faithful on all mapping spaces. Together with step 5 it is an equivalence of infinity categories, not just an equivalence of homotopy categories.",
+   "uses": [
+    "lem-coef-infinity-source-gluing",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proof of Theorem 7.6.17, expanded mapping-space comparison using the source-attachment square of Proposition 7.4.11 and framed mapping spaces"
+   }
+  },
+  {
+   "text": "Complete the induction by its limit assertion. Under $E_I$, directly localized constant diagrams agree with $\\operatorname{const}_{N(I)}$, because evaluation at every vertex and every composable string is the original constant diagram. The inverse derived adjunction from step 3 therefore identifies $\\mathbf R\\lim_I$ with the right adjoint to coherent constants. Explicitly, its natural equivalence\n$$\\operatorname{Map}_{\\mathcal C}(Z,q\\lim_IY)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(I),\\mathcal C)}(\\operatorname{const}Z,E_IY)$$\nfor Reedy fibrant $Y$ is the coherent-cone universal property. The derived counit is represented by the ordinary limit cone $\\operatorname{const}(\\lim_IY)\\to Y$, with a cofibrant replacement on its source if needed; directly localized constants take that replacement to an equivalence. Hence the cone itself has the claimed universal property. The formula for arbitrary $D$ follows by taking $Y=RD$. [lem-coef-model-infinity-derived-adjunction] supplies both the replacement calculation and this identification of the derived counit; no identification of cones merely on the homotopy category is made. This proves both inductive assertions at height $h(I)$ and closes the finite induction.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.30, construction of the counit, and paragraph 7.5.25, after the finite-diagram induction"
+   }
+  },
+  {
+   "text": "For direct $I$, apply the proved inverse comparison to $I^{\\mathrm{op}}$ and $\\mathcal M^{\\mathrm{op}}$, then take opposites. To check that localization commutes with opposites, let $\\mathcal A$ be any category with weak equivalences $V$ and write $\\mathcal L=\\mathcal A[V^{-1}]_\\infty$. For any test infinity category $\\mathcal T$, opposite functors and transformations give\n$$\\operatorname{Fun}(\\mathcal L^{\\mathrm{op}},\\mathcal T)\\simeq\\operatorname{Fun}(\\mathcal L,\\mathcal T^{\\mathrm{op}})^{\\mathrm{op}}\\simeq\\operatorname{Fun}_{V}(\\mathcal A,\\mathcal T^{\\mathrm{op}})^{\\mathrm{op}}\\simeq\\operatorname{Fun}_{V^{\\mathrm{op}}}(\\mathcal A^{\\mathrm{op}},\\mathcal T),$$\nwhere the subscript means the full infinity subcategory of functors inverting the indicated arrows. Thus $\\mathcal L^{\\mathrm{op}}$ has the required localization universal property. Substitute first $(\\mathcal A,V)=(\\mathcal M,W)$ and then $(\\operatorname{Fun}(I,\\mathcal M),W_I)$ to identify both localized opposites. An $n$-simplex of $N(I^{\\mathrm{op}})$ is the reversed composable string of the corresponding simplex of $N(I)$; reversing the target arrows and transformations therefore gives $\\operatorname{Fun}(N(I^{\\mathrm{op}}),\\mathcal C^{\\mathrm{op}})^{\\mathrm{op}}\\simeq\\operatorname{Fun}(N(I),\\mathcal C)$. At each vertex this is the original evaluation, and on each string it is its original localized composition data. Hence dualizing the inverse equivalence gives the canonical direct comparison, including its mapping spaces.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent argument from the opposite/localization universal properties, dualizing the inverse induction"
+   }
+  },
+  {
+   "text": "Finally use the direct derived adjunction of step 3 and the direct comparison of step 9. [lem-coef-model-infinity-derived-adjunction] identifies its right adjoint with coherent constants and computes its left adjoint by $q\\operatorname{colim}_I(QD)$. The derived unit is the ordinary universal cocone $QD\\to\\operatorname{const}\\operatorname{colim}_I(QD)$, localized and precomposed with the inverse of the localized replacement $QD\\to D$; it is therefore the specified coherent colimit cocone of $E_ID$. Its mapping-space adjunction gives the colimit universal property. Empty $I$ is already included in steps 1-3 and in the opposite of the empty inverse case, so this also proves the initial/terminal cases without a nonemptiness assumption.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.30 and dual of paragraph 7.5.25; Hovey Corollary 5.1.6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-direct-wfs-extension",
+  "lem-coef-infinity-source-gluing",
+  "lem-coef-model-infinity-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, model-localization foundation expanded using Hovey Section 5.1, 5.2 and 5.4, Cisinski 7.4.11 and 7.5.30, and Hinich 1.3.3. Explicit simultaneous induction on inverse-diagram height replaces a direct invocation of Cisinski 7.6.17. External references are not archived in shared literature/; WANTED entries are in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,15 +196,58 @@
    "results": "{\"t\": \"2026-10-16T07:54:55Z\", \"tool\": \"grep\", \"query\": \"quasicategory|reedy|excisive|loop.*suspension\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"9b340826eeb0500f\"}",
    "date": "2026-10-16",
    "verdict": "no match: inspected Quasicategory/Basic.lean:34-42, the Quasicategory directory, and Reedy/Basic.lean:21-24; the hits define quasicategories and Reedy structures but do not state these coherent comparison or finite-(co)limit theorems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Reedy diagrams in a model category present functors into its infinity categorical localization",
+   "results": "{\"t\": \"2026-10-16T08:19:34Z\", \"tool\": \"leanfinder\", \"query\": \"Finite Reedy diagrams in a model category present functors into its infinity categorical localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\"], \"digest\": \"6881249f6632503c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Reedy/Basic.lean:21-24 lists the diagram model structure as TODO. Read model homotopy-category and ordinary derived-adjunction candidates; none states coherent diagram rectification with mapping spaces and the coherent (co)cone comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reedy\"",
+   "results": "{\"t\": \"2026-10-16T08:19:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Reedy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Language.instToSnapshotTreeDynamicSnapshot\", \"Lean.Core.CoreM.parIterGreedy\", \"Lean.Core.CoreM.parIterGreedyWithCancel\", \"Lean.Meta.MetaM.parIterGreedy\", \"Lean.Meta.MetaM.parIterGreedyWithCancel\", \"Lean.Elab.Term.TermElabM.parIterGreedy\", \"Lean.Elab.Tactic.TacticM.parIterGreedy\", \"Lean.Elab.Term.TermElabM.parIterGreedyWithCancel\"], \"digest\": \"7b07fbcaebad8dcc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Reedy/Basic.lean:21-24 lists the diagram model structure as TODO. Read model homotopy-category and ordinary derived-adjunction candidates; none states coherent diagram rectification with mapping spaces and the coherent (co)cone comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The infinity localization of a model category has homotopy colimits computed by Reedy cofibrant replacement",
+   "results": "{\"t\": \"2026-10-16T08:19:35Z\", \"tool\": \"leansearch\", \"query\": \"The infinity localization of a model category has homotopy colimits computed by Reedy cofibrant replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\"], \"digest\": \"49caf855ca824efb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Reedy/Basic.lean:21-24 lists the diagram model structure as TODO. Read model homotopy-category and ordinary derived-adjunction candidates; none states coherent diagram rectification with mapping spaces and the coherent (co)cone comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent diagrams indexed by a finite inverse category can be represented by strict Reedy fibrant diagrams in any model category",
+   "results": "{\"t\": \"2026-10-16T08:24:36Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent diagrams indexed by a finite inverse category can be represented by strict Reedy fibrant diagrams in any model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.IsFibrant\", \"HomotopicalAlgebra.fibrantObjects\", \"HomotopicalAlgebra.FibrantObject\", \"HomotopicalAlgebra.bifibrantObjects\", \"HomotopicalAlgebra.Cylinder.instIsFibrantIOfIsVeryGood\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.BifibrantObject\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\"], \"digest\": \"0d9919af85206b8b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Reedy/Basic.lean:21-24 lists the diagram model structure as TODO. Read model homotopy-category and ordinary derived-adjunction candidates; none states coherent diagram rectification with mapping spaces and the coherent (co)cone comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-pointed-model-stability",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-finite-reedy-localization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Ten steps construct the two diagram WFS and identify their trivial classes, dualize, verify Quillen pairs, and prove coherent rectification by simultaneous height induction on equivalence and actual limit cones. Full faithfulness is derived from framed strict-natural-transformation pullbacks. Four statement-only general foundations are new; no child restates a direct/inverse comparison or a derived (co)limit clause. All search hits, exact cited statements, and parallel-arrow/empty cases checked.",
+  "blueprint": "Realizes the finite model-localization foundation beneath proof paragraph 2 of prop-coef-integral-exceptional-adjoint, in the derived coefficient adjunction before the displayed R Hom / R lim calculation. The unit and chapter route and all coefficient categories are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N6-5db6a0103",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-5db6a0103 (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. Checked all ten steps and four new nodes against Hovey, Cisinski, and Hinich; verified induction, mapping-space compatibility, empty/parallel-arrow cases, dependencies, duplicates, route, and exact master target signatures. No repairs or accepted tool_uses."
+ }
 }
