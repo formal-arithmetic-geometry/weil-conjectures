@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-lem-brown-hypotheses",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Hypotheses of Brown representability",
- "statement": "For every admissible $\\Lambda$, the category $\\Loc(\\Dctf(X,\\Lambda))$ is locally small and triangulated, has\narbitrary direct sums, and has split idempotents. The thick category $\\Dctf(X,\\Lambda)$ is essentially small,\nand a small skeleton is a set of compact generators of $\\Loc(\\Dctf(X,\\Lambda))$.",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\neq\\ell$, and let $X$ be a separated scheme of finite type over $k$ in the standing setting [sk-def-sfb-dc-setting]. Fix an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ inside it, with valuation ring $\\mathcal O_E$. Let $\\Lambda$ be one of $A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\overline{\\mathbf Q}_\\ell$, where $A$ is a finite commutative ring annihilated by a power of $\\ell$, with the condensed coefficient structures of [sk-def-localizing-closure]. Then $\\Loc(\\Dctf(X,\\Lambda))$ is locally small and triangulated, has arbitrary direct sums, and has split idempotents. The thick [pur9-def-thick] category $\\Dctf(X,\\Lambda)$ is essentially small, and a small skeleton (any one) is a set of compact generators of $\\Loc(\\Dctf(X,\\Lambda))$: each of its objects is compact in $\\Loc(\\Dctf(X,\\Lambda))$ [def-pc-compact-object], and the family generates $\\Loc(\\Dctf(X,\\Lambda))$ [def-pc-generators].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/_section.md",
   "place": "node sk-lem-brown-hypotheses, order 1540",
@@ -19,38 +19,118 @@
   ]
  },
  "stmt_deps": [
-  "sk-def-localizing-closure"
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure",
+  "pur9-def-thick",
+  "def-pc-compact-object",
+  "def-pc-generators"
  ],
  "proof": [
   {
-   "text": "The ambient category is the derived category of a Grothendieck abelian category of module sheaves, hence\nlocally small, and so is its full subcategory $\\Loc(\\Dctf(-,\\Lambda))$. It has direct sums by definition, so\nidempotents split (Stacks, Tag 05QW) ([det-brown-hypotheses-ambient]). Constructibility and finite Tor\namplitude are preserved by shifts, cones and direct summands. For essential smallness: the admissible\nconstructible hearts have a set of representatives, and bounded complexes with such cohomology are obtained\nby finitely many extensions classified by ambient Hom sets; the full subcategory with finite Tor amplitude\nis contained in this set. The truncations used here are those of the ambient category\n([det-brown-hypotheses-small]).",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Compactness for finite $A$ is [sk-prop-ctf-finite-compact]. For $E$ and $\\Qlb$ it is\n[sk-thm-constructible-compactness], and for $\\mathcal O_E$ it is [sk-prop-int-compactness]; in the integral and\nrational cases $\\Dctf=\\Dbc$. Finally, suppose $K\\in\\Loc(\\Dctf(X,\\Lambda))$ receives no nonzero maps from shifts\nof objects of a small skeleton. The objects $M$ with $\\Hom(M[n],K)=0$ for all $n$ form a localizing\nsubcategory containing $\\Dctf$, hence containing $K$. Thus $\\mathrm{id}_K=0$, and the skeleton generates\n([det-brown-hypotheses-generation]).",
+   "text": "Fix the standing datum $(p,\\ell,k)$ and a separated finite-type $k$-scheme $X$ as in [sk-def-sfb-dc-setting], and fix one of the displayed admissible coefficient rings $\\Lambda$. The coefficient list, condensed topologies, pulled-back ring object $\\Lambda_X$, unbounded module-object ambient category $\\mathcal T=D(\\Mod_{\\Lambda_X})$, constructible finite-Tor subcategory $\\mathcal S=\\Dctf(X,\\Lambda)$, replete localizing intersection, and fixed small indexing universe are exactly those specified by [sk-def-localizing-closure]. Put $\\mathcal L=\\Loc(\\mathcal S)$. All direct sums below use this fixed universe; no derived-completeness condition is added.",
    "uses": [
-    "sk-thm-constructible-compactness"
+    "sk-def-sfb-dc-setting",
+    "sk-def-localizing-closure"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/_section.md",
+    "place": "item statement and proof first paragraph; standing scheme setting and localizing-closure definitions"
+   }
   },
   {
-   "text": "For integral coefficients, compactness is proved in the integral chapter, and only the structural,\nExt-continuity and compactness results of that chapter are used here. Their proofs use local coefficient\nmodels, sections with closed support and torsion cohomological bounds; since $f^!$ and open direct image play\nno role in them, the forward reference is not circular.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [det-brown-hypotheses-ambient] to this finite-type standing scheme and admissible $\\Lambda$: $\\mathcal L=\\Loc(\\Dctf(X,\\Lambda))$ is locally small and triangulated, has arbitrary direct sums, and has split idempotents. Apply [det-brown-hypotheses-small] under the same hypotheses: $\\Dctf(X,\\Lambda)$ is thick and essentially small. Choose one representative of each isomorphism class in this essentially small category; their full subcategory is a small skeleton, so small skeletons exist. Let $G$ be any small skeleton of $\\Dctf(X,\\Lambda)$.",
+   "uses": [
+    "det-brown-hypotheses-ambient",
+    "det-brown-hypotheses-small"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+    "place": "first paragraph"
+   }
+  },
+  {
+   "text": "Apply [det-brown-hypotheses-generation] to this finite-type standing scheme, admissible $\\Lambda$, and small skeleton $G$. Every object of $G$ is compact in $\\Loc(\\Dctf(X,\\Lambda))$. Moreover, for every $K\\in\\Loc(\\Dctf(X,\\Lambda))$, if $\\Hom(C[n],K)=0$ for every $C\\in G$ and every $n\\in\\mathbf Z$, then $K=0$. The first clause is compactness of each object of $G$ in the sense of [def-pc-compact-object]. For the second, $\\mathcal L$ has direct sums, and $\\Hom(\\bigoplus_{C\\in G}C,K[-n])=\\prod_{C\\in G}\\Hom(C[n],K)$ for every $n\\in\\mathbf Z$; so every nonzero $K\\in\\mathcal L$ admits an integer $n$ and a nonzero morphism $\\bigoplus_{C\\in G}C\\to K[-n]$, i.e. the family $G$ generates $\\mathcal L$ in the sense of [def-pc-generators]. Since the standing datum and $\\Lambda$ were arbitrary, the conclusions hold throughout the stated range.",
+   "uses": [
+    "det-brown-hypotheses-generation",
+    "def-pc-compact-object",
+    "def-pc-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+    "place": "second paragraph"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-constructible-compactness"
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure",
+  "det-brown-hypotheses-ambient",
+  "det-brown-hypotheses-small",
+  "det-brown-hypotheses-generation",
+  "def-pc-compact-object",
+  "def-pc-generators"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/_section.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "locally small triangulated category arbitrary direct sums split idempotents compact generators",
+   "results": "8 hits: CategoryTheory.Triangulated.Subcategory; ObjectProperty.IsTriangulatedClosed₁/₂/₃; calculus-of-fractions instances; Pretriangulated.instHasFiniteCoproducts; DerivedCategory.TStructure.t. None states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.LocallySmall, Triangulated, HasCoproducts, compact generator",
+   "results": "0 hits; unknown identifier Triangulated",
+   "date": "2026-10-16",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "idempotent.*split|compact.*generator|Loc.*Dctf Mathlib",
+   "results": "The query ran with subdirectory Mathlib, which resolves to Mathlib/Mathlib and is absent; the empty output does not establish a source-search result. Superseded by the second reader CategoryTheory grep below.",
+   "date": "2026-10-16",
+   "verdict": "invalid search root"
+  },
+  {
+   "tool": "leansearch",
+   "query": "locally small triangulated category with direct sums and split idempotents and compact generators",
+   "results": "CategoryTheory.IsTriangulated; CategoryTheory.IsGrothendieckAbelian.locallySmall; CategoryTheory.LocallySmall; no project-specific declaration",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An essentially small thick subcategory of constructible sheaves gives a set of compact generators for its localizing triangulated subcategory",
+   "results": "8 hits: sheaf Grothendieck-abelian structure, derived-category representatives, and localization interfaces; none states this constructible compact-generation theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"compact\", \"generator\"",
+   "results": "12 hits for IsCompactlyGenerated.BooleanGenerators in complete lattices; none is about triangulated categories",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Brown|CompactGenerator|compactly.?generated|Dctf|localizing subcategory",
+   "results": "3 hits in CategoryTheory: author name Thomas Browning only; no theorem matches",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -79,5 +159,20 @@
   "det-brown-hypotheses-small"
  ],
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-brown-hypotheses"
+ "unit": "sk-lem-brown-hypotheses",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-brown-hypotheses",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by restoring the finite-type standing setting suppressed by the imported item. The statement now fixes distinct characteristic and coefficient primes and a separated finite-type scheme over the standing field, with the full admissible coefficient list. The proof first unpacks that setting and the localizing-closure definition, then applies the ambient, smallness and generation detail statements under the finite-type hypotheses. The countable disjoint-union counterexample is excluded by this correction; no new nodes are needed. Maintainer reader (2026-10-17): cited the definition nodes for thick, compact and generators in the statement and made the generation step land on def-pc-generators explicitly.",
+  "blueprint": "The corrected statement restores the standing hypotheses implicit in the chapter and realizes the item proof: Step 1 unpacks the standing scheme and localizing-closure definitions; Step 2 realizes the first paragraph through the ambient and smallness detail statements; Step 3 realizes the second paragraph through the generation detail statement. The third source paragraph remains a route explanation and adds no conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-f96bbd611",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-f96bbd611 (reviewer sub-agent of L); spot-checked: I read the full source unit sk-lem-brown-hypotheses (main-20261015: _section.md, the item proof, and the ambient, small and generation detail statements and proofs), the full statements of the five cited nodes, the three compactness nodes bound in the unit's realized step 2, and the citers. The statement changes only by making two hypotheses explicit. The admissible-coefficient list A, Z_l, O_E, Q_l, E, Qlbar matches sk-thm-sf-ctf-stability and sk-def-localizing-closure; sk-def-sf-admissible is about morphisms, so not citing it is correct. The other is the standing separated finite-type setting of sk-def-sfb-dc-setting; the source's own small-detail proof assumes it ('the Noetherian scheme X'), and every citer (sk-prop-sf-existence, det-sf-existence-brown) uses the item only for such schemes. The worker's counterexample, a countable disjoint union of geometric points, checks out: Hom(A_X, sum_i j_{i!}A) is the product of the A, not the direct sum, so the setting is needed and nothing is weakened. Small cases hold: the empty scheme, one geometric point, the non-regular ring A=Z/l^2, and Z_l, Q_l as the case E=Q_l. Step 1 only unpacks two definitions and is elementary. Step 2 uses exactly what the ambient detail states (locally small, triangulated, sums, split idempotents) and what the small detail states (thick, essentially small), plus an elementary skeleton choice. Step 3 uses the generation detail for an arbitrary skeleton. The route stays inside the unit, there is no cycle, no new node, no SGA and no tool use. This is not a target, so the base-change check does not apply; the coefficient category is D(Mod over Lambda_X) on the pro-etale site throughout. Repaired one fault, B3: the restated statement used 'thick', 'compact' and 'generators' without definition nodes. fixes/dag/nodes/sec-six-functors-basics/sk-lem-brown-hypotheses.json cites pur9-def-thick, def-pc-compact-object and def-pc-generators in the statement and stmt_deps. Step 2 now lets G be any small skeleton. Step 3 shows the vanishing criterion is generation in the sense of def-pc-generators (via Hom of the sum of G into K[-n] being the product of the Hom(C[n],K)) and cites both definitions; proof_deps is the union of uses again. One minor report inaccuracy: the unit's realized step 2 also binds det-ctf-finite-compact-proetale, sk-thm-constructible-compactness and det-prop-int-compactness-compact. That is correct and needs no change. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
