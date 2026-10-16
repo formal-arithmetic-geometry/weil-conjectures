@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, finite-coefficient mapping-complex adjunction infrastructure: HTT Proposition 5.4.2.2, Proposition 5.4.2.9 and its proof, Remark 5.4.2.11, and Corollary 5.3.4.15. Bounded-retract conclusion from the generating family in the proof of 5.4.2.9 and the compact-retract argument of Lemma 5.4.2.4",
+   "place": "Infrastructure of the finite-coefficient mapping-complex adjunction in proof paragraph 2 of prop-coef-integral-exceptional-adjoint, expanded along the recorded via chain: sharp accessibility enlargement and bounded filtered-subdiagram retracts. The ancestor paragraph does not itself state the HTT argument.",
    "via": [
     "lem-coef-infinity-compact-approximation",
     "lem-coef-accessible-infinity-pullback",
@@ -28,9 +28,142 @@
  "stmt_deps": [
   "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-infinity-sharp-accessibility-enlargement] with $\\lambda=\\alpha$ and $\\kappa=\\beta$. The stated exponent inequality, regularity, and $\\alpha$-accessibility are exactly its hypotheses, so $\\mathcal C$ is $\\beta$-accessible. In particular it admits small $\\beta$-filtered colimits. We prove the bounded-retract assertion below rather than putting that clause into a new node.",
+   "uses": [
+    "lem-coef-infinity-sharp-accessibility-enlargement",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.9; accessibility conventions of Proposition 5.4.2.2"
+   }
+  },
+  {
+   "text": "To use the existing cofinality and assembly nodes with their actual cocompleteness hypotheses, keep the original smaller universe $\\mathcal U$ fixed, choose a further universe $\\mathcal V$ containing $\\mathcal C$ and its mapping spaces, and form $\\mathcal D=\\operatorname{Fun}(\\mathcal C,\\mathcal S_{\\mathcal V})^{\\mathrm{op}}$ in a still larger universe. Apply [lem-coef-infinity-yoneda-presheaf-limits] with space universe $\\mathcal V$: the functor category has all $\\mathcal V$-small limits, computed objectwise. By the opposite-category assertions of [lem-coef-infinity-relative-cone-equivalence], $\\mathcal D$ therefore admits all $\\mathcal V$-small colimits, in particular every $\\mathcal U$-small colimit. In Steps 3 and 7, the cofinality and assembly nodes retain $\\mathcal U$ as the meaning of small, with an ambient universe large enough to contain $\\mathcal D$; neither node requires its target to be locally $\\mathcal U$-small. The opposite of Yoneda for $\\mathcal C^{\\mathrm{op}}$ is a fully faithful coherent functor $j:\\mathcal C\\to\\mathcal D$, $j(c)=\\operatorname{Map}_{\\mathcal C}(c,-)$. It preserves every existing $\\mathcal U$-small colimit: contravariant representables take such a colimit to a limit, and limits in the functor category are objectwise. It also reflects colimiting cocones. Indeed, if a cocone $H\\to z$ becomes colimiting under $j$, for every $t\\in\\mathcal C$ its mapping-space comparison is the equivalence $\\operatorname{Map}_{\\mathcal C}(z,t)\\simeq\\operatorname{Map}_{\\mathcal D}(jz,jt)\\simeq\\lim_{a\\in L^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal D}(jH(a),jt)\\simeq\\lim_{a\\in L^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal C}(H(a),t)$, where $L$ is the small indexing shape. The mapping-space criterion in the same Yoneda node proves reflection. The extra universe is used only for this testing category; all indexing shapes and both cardinals remain in $\\mathcal U$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent expansion using Proposition 5.1.3.1, Proposition 5.1.2.2, and the mapping-space criterion for existing colimits"
+   }
+  },
+  {
+   "text": "Fix a $\\beta$-compact object $x$. By $\\alpha$-accessibility as defined in [def-coef-presentable-infinity-category], choose a $\\mathcal U$-small $\\alpha$-filtered diagram $F:I\\to\\mathcal C$ of $\\alpha$-compact objects and a colimiting cocone $F\\to x$. Apply [lem-coef-infinity-cofinal-kappa-poset] with $\\kappa=\\alpha$ to obtain $u:N(A)\\to I$, with $A$ small and every subset of size less than $\\alpha$ having an upper bound, including the empty subset. Apply its colimit-invariance clause to $jF$ in the cocomplete category $\\mathcal D$ of Step 2. Because $j$ preserves the chosen colimit, the restricted cocone $jFu\\to jx$ is colimiting. Reflection from Step 2 gives a colimiting cocone $G=Fu:N(A)\\to\\mathcal C$ with apex $x$. Its values are still $\\alpha$-compact. We have not applied the cited cofinality assertion directly to a category without all small colimits.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-cofinal-kappa-poset",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.1.18 in the 2009 HTT.pdf edition; the existing cofinal-poset node labels its source 5.3.1.16, a metadata discrepancy reported in report.md."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-sharp-filtered-poset-subsets] to $A$ and the given $(\\alpha,\\beta)$. Its exponent and regularity hypotheses are precisely ours. Let $\\mathscr B$ be its small poset of $\\beta$-small $\\alpha$-filtered subsets $B\\subseteq A$, ordered by inclusion. It covers $A$ and every family of fewer than $\\beta$ such subsets has an upper bound. In particular it is nonempty, and each $B$ is nonempty: the upper-bound condition for the empty subset requires an element of $B$. No initial object or empty filtered diagram in $\\mathcal C$ is required.",
+   "uses": [
+    "lem-coef-sharp-filtered-poset-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.2.8 and the directed subsets in Proposition 5.4.2.9"
+   }
+  },
+  {
+   "text": "The nerves $N(B)$ are $\\alpha$-filtered and $N(\\mathscr B)$ is $\\beta$-filtered. Explicitly, a map from a simplicial set with fewer than the relevant cardinal many nondegenerate simplices into a poset nerve has fewer than that cardinal many vertices in its image; choose an upper bound and append that bound to each chain to extend the map to a coherent cocone. This includes the empty simplicial set because the posets are nonempty. Also $N(B)$ is $\\beta$-small: its nondegenerate simplices are finite strictly increasing chains, and their number is at most $\\sum_{n<\\omega}|B|^{n+1}<\\beta$ since $\\beta$ is uncountable and regular. Finally $N(A)=\\bigcup_{B\\in\\mathscr B}N(B)$: every finite chain lies in some $B$ by the subset-containment assertion of Step 4. These are direct checks from the nerve, smallness, and filteredness definitions in [def-cbc-enhanced-diagrams-cones] and [def-coef-presentable-infinity-category].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Example 5.3.1.8; finite-chain count for the uncountable upper cardinal"
+   }
+  },
+  {
+   "text": "For each $B\\in\\mathscr B$, the small $\\alpha$-filtered diagram $G|_{N(B)}$ has a colimiting cocone with apex $y_B$ in $\\mathcal C$, by the small filtered-colimit clause of [def-coef-presentable-infinity-category]. This is the only existence assertion needed here. Under $j$ each chosen cocone remains colimiting by Step 2. We do not need the additional assertion that $y_B$ is $\\beta$-compact.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.9, colimits on the small filtered subsets"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-directed-cover-colimit-assembly] with $K=N(A)$, indexing poset $\\mathscr B$, subsets $K_B=N(B)$, ambient category $\\mathcal D$, and diagram $jG$. The hypotheses now hold: $\\mathcal D$ has all $\\mathcal U$-small colimits, $\\mathscr B$ is small, nonempty and directed, and Step 5 proved the directed-cover equality. Use the cocones with apices $jy_B$ from Step 6. The node gives a coherent diagram $H:N(\\mathscr B)\\to\\mathcal D$ with $H(B)=jy_B$ and a colimiting compatible cocone $H\\to jx$, using the colimiting cocone $jG\\to jx$ from Step 3.",
+   "uses": [
+    "lem-coef-directed-cover-colimit-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.3.4, Remark 4.2.3.9 and Corollary 4.2.3.10; applied in the cocomplete testing category"
+   }
+  },
+  {
+   "text": "Let $\\mathcal D_0$ be the full essential image of $j$. Every vertex of the entire cocone $H\\to jx$ belongs to $\\mathcal D_0$, so the cocone factors through that full subcategory. By [lem-coef-infinity-full-essential-image], $j_0:\\mathcal C\\to\\mathcal D_0$ has a coherent quasi-inverse $k$, with coherent equivalences $kj_0\\simeq1_{\\mathcal C}$ and $j_0k\\simeq1_{\\mathcal D_0}$. Apply $k$ to this cocone and identify its apex $k(jx)$ with $x$. This gives a coherent diagram $Q:N(\\mathscr B)\\to\\mathcal C$, with $Q(B)\\simeq y_B$, and a cocone $Q\\to x$ whose image under $j$ is naturally equivalent to $H\\to jx$. The objectwise criterion in [lem-cbc-enhanced-functor-cone-calculus] makes this an equivalence of coherent diagrams; its mapping-space equivalences identify the corresponding cocone universal properties. Thus $jQ\\to jx$ is colimiting, and the reflection calculation of Step 2 shows $Q\\to x$ is colimiting in $\\mathcal C$. This step supplies the higher coherence of the transition maps, rather than merely choosing pairwise arrows between the $y_B$.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent descent of the directed-cover construction through the full essential image; Yoneda and the coherent equivalence criterion"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-compact-stage-factorization] with $\\gamma=\\beta$, category $\\mathcal C$, diagram $Q$, colimit apex $x$, and morphism $1_x$. Local smallness and existence of small $\\beta$-filtered colimits follow from Step 1. The index is small and $\\beta$-filtered by Steps 4 and 5; $x$ is $\\beta$-compact by choice. Hence some $B\\in\\mathscr B$ admits $v:x\\to Q(B)$ such that the composite with the cocone leg $s:Q(B)\\to x$ is homotopic to $1_x$. The cited statement explicitly requires no compactness of the objects $Q(B)$.",
+   "uses": [
+    "lem-coef-infinity-compact-stage-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Identity-factorization argument in Lemma 5.4.2.4"
+   }
+  },
+  {
+   "text": "Choose the equivalence $e:Q(B)\\to y_B$ from Step 8 and its inverse $d$. Set $i=ev$ and $r=sd$. The inverse homotopy $de\\simeq1_{Q(B)}$ and the homotopy $sv\\simeq1_x$ yield $ri=sdev\\simeq sv\\simeq1_x$, so these arrows with this homotopy exhibit the required retract. The object $y_B$ is the colimit of $G|_{N(B)}$; Step 5 proved its indexing shape is $\\beta$-small and $\\alpha$-filtered, and Step 3 proved every value is $\\alpha$-compact. These establish precisely the bounded-retract clause for the arbitrary $x$ fixed in Step 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Conclusion of the bounded filtered-subdiagram and compact-stage argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-directed-cover-colimit-assembly",
+  "lem-coef-infinity-cofinal-kappa-poset",
+  "lem-coef-infinity-compact-stage-factorization",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-sharp-accessibility-enlargement",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-sharp-filtered-poset-subsets"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Proposition 5.4.2.9 and the identity-factorization argument of Lemma 5.4.2.4; agent expansion through opposite Yoneda to meet the existing cofinality and assembly nodes’ cocompleteness hypotheses. PDF read online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,10 +213,59 @@
    "results": "{\"t\": \"2026-10-16T20:46:29Z\", \"tool\": \"leanfinder\", \"query\": \"Sharp cardinal inequality yields bounded filtered colimit retract presentations for presentable objects in accessible categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable\", \"HasCardinalLT.isCardinalPresentable\", \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.presentable\"], \"digest\": \"2e03ee795af56f22\"}",
    "date": "2026-10-17",
    "verdict": "Second reading: no match. The returned declarations assume ordinary Category instances and Type-valued Hom/presheaves. Read Mathlib/CategoryTheory/Presentable/Basic.lean:43-77 and Limits/Indization/IndObject.lean:53-70. They do not state the corresponding theorem for quasicategories, coherent mapping spaces or space-valued right fibrations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.isPresentable_eq_retractClosure",
+   "results": "{\"t\": \"2026-10-16T22:22:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.isPresentable_eq_retractClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.isPresentable_eq_retractClosure\"], \"digest\": \"15d7428fe49a7e9a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned accessibility, presentability and retract-closure results concern ordinary categories and Type-valued Hom functors, not arbitrary quasicategories and coherent mapping spaces. Read CardinalFilteredPresentation.lean (IsCardinalFilteredGenerator and isPresentable_eq_retractClosure) and Basic.lean:149 (IsCardinalPresentable). No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every compact object in an accessible quasicategory is a retract of a bounded filtered colimit of smaller compact objects",
+   "results": "{\"t\": \"2026-10-16T22:22:24Z\", \"tool\": \"leanfinder\", \"query\": \"Every compact object in an accessible quasicategory is a retract of a bounded filtered colimit of smaller compact objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone.surjective\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"SSet.Finite.exists_epi_from_isCardinalPresentable\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.isPresentable_eq_retractClosure\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.ObjectProperty.ind_iff_exists\", \"CategoryTheory.IsFinitelyAccessibleCategory.instIsDenseFullSubcategoryIsFinitelyPresentableι\"], \"digest\": \"190f24b2035b887b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned accessibility, presentability and retract-closure results concern ordinary categories and Type-valued Hom functors, not arbitrary quasicategories and coherent mapping spaces. Read CardinalFilteredPresentation.lean (IsCardinalFilteredGenerator and isPresentable_eq_retractClosure) and Basic.lean:149 (IsCardinalPresentable). No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isPresentable_eq_retractClosure|uniformization|IsCardinalPresentable",
+   "results": "{\"t\": \"2026-10-16T22:23:14Z\", \"tool\": \"grep\", \"query\": \"isPresentable_eq_retractClosure|uniformization|IsCardinalPresentable\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"94a5922da630c785\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned accessibility, presentability and retract-closure results concern ordinary categories and Type-valued Hom functors, not arbitrary quasicategories and coherent mapping spaces. Read CardinalFilteredPresentation.lean (IsCardinalFilteredGenerator and isPresentable_eq_retractClosure) and Basic.lean:149 (IsCardinalPresentable). No exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact object of an accessible infinity category is a retract of a small filtered colimit of smaller compact objects",
+   "results": "{\"t\": \"2026-10-16T22:23:20Z\", \"tool\": \"leansearch\", \"query\": \"A compact object of an accessible infinity category is a retract of a small filtered colimit of smaller compact objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFinitelyPresentable\", \"CategoryTheory.Limits.isIndObject_iff\", \"CategoryTheory.ObjectProperty.isStableUnderRetracts_colimitsCardinalClosure\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.ObjectProperty.isFinitelyPresentable\", \"CategoryTheory.Functor.isFinitelyAccessible_iff_preservesFilteredColimits\", \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\"], \"digest\": \"9315de61a0eef05a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned accessibility, presentability and retract-closure results concern ordinary categories and Type-valued Hom functors, not arbitrary quasicategories and coherent mapping spaces. Read CardinalFilteredPresentation.lean (IsCardinalFilteredGenerator and isPresentable_eq_retractClosure) and Basic.lean:149 (IsCardinalPresentable). No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sharp cardinal enlargement in accessible infinity categories and bounded compact object presentations",
+   "results": "{\"t\": \"2026-10-16T22:24:04Z\", \"tool\": \"leanfinder\", \"query\": \"Sharp cardinal enlargement in accessible infinity categories and bounded compact object presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsAccessibleCategory.exists_cardinal\", \"CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.Functor.IsAccessible.exists_cardinal\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.AreCardinalFilteredGenerators\", \"CategoryTheory.IsCardinalPresentable\"], \"digest\": \"c09e0b07132e51a8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned accessibility, presentability and retract-closure results concern ordinary categories and Type-valued Hom functors, not arbitrary quasicategories and coherent mapping spaces. Read CardinalFilteredPresentation.lean (IsCardinalFilteredGenerator and isPresentable_eq_retractClosure) and Basic.lean:149 (IsCardinalPresentable). No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCardinalPresentable|IsCardinalAccessible|Retract",
+   "results": "{\"t\": \"2026-10-16T22:42:46Z\", \"tool\": \"grep\", \"query\": \"IsCardinalPresentable|IsCardinalAccessible|Retract\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"35cc29356b4d24f6\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The sole hit is Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:66, deriving IsStableUnderRetracts for the morphism property innerFibrations, not accessibility or compact-object retract presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Presentability ranks and retracts of filtered colimits in quasicategories with space valued hom functors",
+   "results": "{\"t\": \"2026-10-16T22:42:48Z\", \"tool\": \"leanfinder\", \"query\": \"Presentability ranks and retracts of filtered colimits in quasicategories with space valued hom functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"CategoryTheory.Retract.isCardinalPresentable\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.isPresentable_eq_retractClosure\", \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.instIsStableUnderRetractsIsCardinalPresentable\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\"], \"digest\": \"b5ebd54a7f02882e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The returned presentability and retract declarations assume an ordinary Category and Type-valued Hom. Read Mathlib/CategoryTheory/Presentable/Basic.lean:145-149 and CardinalFilteredPresentation.lean:129-136; they do not assert mapping-space compactness or coherent colimits of arbitrary quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-compact-approximation",
@@ -103,5 +285,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-accessible-infinity-rank-calculus",
+  "worker": "stage1",
+  "summary": "Reused existing sharp enlargement, filtered-poset subset, cofinality, directed-cover assembly and compact-stage factorization statements. Repaired the prior attempt’s missing cocompleteness hypotheses by constructing an opposite-Yoneda testing category and explicitly descending the assembled coherent cocone through the existing full-essential-image equivalence. Removed the unused compactness of the stage colimits and the erroneous empty-filtered-subset assertion. Unchanged statement, no new nodes. Second reading clarified the separate space/index universes in Step 2 and independently rechecked all ten steps and seventeen citation statements.",
+  "blueprint": "Realizes accessibility infrastructure along the recorded ancestry below the finite mapping-complex adjunction of prop-coef-integral-exceptional-adjoint, proof paragraph 2; the HTT proof is an expanded descendant argument, not literal text in that blueprint paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent-diagram equivalence and mapping-space calculus used only to descend the colimiting cocone through a fully faithful essential-image equivalence; this is not a replacement of a geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-d6c314d36",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-d6c314d36 (reviewer sub-agent of L); spot-checked: I read in full the item, all 11 cited statements (each existing, unmerged and reviewed), the unit and chapter records, both users and the HTT places. HTT is not archived, so I checked 5.4.2.9, 5.4.2.8, 5.3.1.18 and the factorization in 5.4.2.4 from my knowledge of the text. The statement matches HTT 5.4.2.9 and its proof, and is neither weakened nor strengthened; 'beta uncountable' adds nothing because alpha<beta with alpha infinite already forces it. Step 1: the enlargement node with lambda=alpha, kappa=beta has exactly our hypotheses. Step 2: D=Fun(C,S_V)^op has all U-small colimits (objectwise limits plus opposite clause 4). The opposite Yoneda map j is fully faithful, preserves existing colimits and reflects them by the mapping-space chain. Step 3: the cofinality node's cocomplete-target hypothesis is checked in D; preservation and then reflection give G=Fu->x. Step 4: all hypotheses of the subset node hold; each B is nonempty because the empty subset needs an upper bound. Step 5: the nerve checks are elementary (cone point at an upper bound; at most max(aleph0,|B|)<beta strict chains; the containment clause gives N(A) as the union of the N(B)). Step 6: stage colimits exist by alpha-filtered colimits. Step 7: every hypothesis of the assembly node holds in D. Step 8: the full subcategory contains the whole cocone; descend by the quasi-inverse k, then transfer colimit-ness by the componentwise equivalence and Yoneda naturality, then reflect. Relative-cone clause (1) would be a slightly cleaner citation, but no change is needed. Step 9: the compact-stage factorization with gamma=beta gives sv~1. Step 10: ri=sdev~sv~1. I found no cycle, no duplicate (searched the DAG and the blueprint; same_as [] confirmed) and no new nodes. The ancestor and via chain are correct and no SGA source is used. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus as a generic coherent-diagram calculus. Outside this delivery, the cofinality node's source misnumbers HTT 5.3.1.18 as 5.3.1.16; that is for the node's owner. No fixes."
  }
 }
