@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sf-tensor-ctf",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The derived tensor product on the finite-Tor subcategories",
@@ -20,50 +20,141 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sf-flat-model] fix an isomorphism $K\\cong P$ with $P$ a\nbounded complex of flat $A_X$-module sheaves, $P^q=0$ for\n$q\\notin[a,b]$. Such a $P$ is K-flat, so by\n[def-weil-derived-tensor] the object $K\\otimes_A^LM$ is computed by\nthe ordinary tensor complex $P\\otimes_AM$.",
+   "text": "Work on $X_{\\mathrm{proet}}$ with the constant ring sheaf $A_X$. Since $X$ is a $k$-scheme of characteristic $p$ and $\\ell\\ne p$, $\\ell$ is invertible on $X$. By [lem-sf-flat-model], choose a complex $P$ of flat $A_X$-module sheaves concentrated in $[a,b]$ and an isomorphism $K\\cong P$ in the derived category. Apply [lem-pc-bounded-above-flat-kflat-site] to the ringed site $(X_{\\mathrm{proet}},A_X)$: $P$ is bounded above by $b$, so it is K-flat. The computation of [def-weil-derived-tensor], together with invariance under derived isomorphisms from [lem-weil-derived-tensor-functorial], therefore computes $K\\otimes_A^L M$ by $\\operatorname{Tot}(P\\otimes_A M_0)$ for any representative complex $M_0$ of $M$.",
    "uses": [
     "lem-sf-flat-model",
-    "def-weil-derived-tensor"
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-weil-derived-tensor",
+    "lem-weil-derived-tensor-functorial"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.md",
+    "place": "## Proof, first paragraph"
+   }
   },
   {
-   "text": "*(ii).* Apply [lem-sf-flat-model] again to obtain a bounded flat\nmodel $Q$ of $M$ with $Q^r=0$ for $r\\notin[c,d]$. Then\n$K\\otimes_A^LM\\cong P\\otimes_AQ$, the total complex of the double complex\nwith terms $P^q\\otimes_AQ^r$; each of these terms is flat, the tensor\nproduct of a flat sheaf with a flat sheaf being flat, and they occur only in\ntotal degree $q+r\\in[a+c,b+d]$. So $P\\otimes_AQ$ is a bounded complex of\nflat sheaves concentrated in $[a+c,b+d]$, and [lem-sf-flat-model]\ngives finite Tor amplitude in $[a+c,b+d]$ for $K\\otimes_A^LM$;\nbounded constructibility is (i).",
+   "text": "For (i), [def-weil-finite-torsion-constructibility] gives integers $c'<d'$ such that $\\mathcal H^i(M)=0$ outside $[c',d']$. From any representative $M_0$ form its good upper truncation $B=\\tau_{\\le d'}M_0$, with $B^{d'}=\\ker(d_{M_0}^{d'})$, unchanged terms below $d'$, and zero terms above. Form $C=\\tau_{\\ge c'}B$, with $C^{c'}=\\operatorname{coker}(d_B^{c'-1})$, unchanged terms above $c'$, and zero terms below. The inclusion $B\\to M_0$ preserves cohomology in degrees at most $d'$ and removes only the zero cohomology in degrees above $d'$. Since $c'<d'$, the projection $B\\to C$ preserves cohomology in degrees at least $c'$ (at $c'$ it identifies both cohomology sheaves with $\\ker(d_B^{c'})/\\operatorname{im}(d_B^{c'-1})$) and removes only the zero cohomology below $c'$. Thus both maps are quasi-isomorphisms. Hence $C$ represents $M$ and is concentrated in $[c',d']$. By step 1 the tensor is represented by $\\operatorname{Tot}(P\\otimes_A C)$. Its degree-$t$ term is $\\bigoplus_{q+r=t}P^q\\otimes_A C^r$ [def-pc-tensor-complex-sheaves], which is zero outside $[a+c',b+d']$. Thus the tensor has bounded cohomology.",
    "uses": [
-    "lem-sf-flat-model"
+    "def-weil-finite-torsion-constructibility",
+    "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.md",
+    "place": "## Proof, (i), boundedness"
+   }
   },
   {
-   "text": "*(i), boundedness.* Since $M$ is bounded constructible, its\ncohomology sheaves vanish outside an interval $[c',d']$, and the\ntruncation $\\sigma_{\\geq c'}\\sigma_{\\leq d'}M$ is a bounded complex $C$ of\n$A_X$-module sheaves with $M\\cong C$ and $C^i=0$ for\n$i\\notin[c',d']$. Then $K\\otimes_A^LM\\cong P\\otimes_AC$, a complex whose\nterms occur only in the finite range $[a+c',b+d']$; hence\n$K\\otimes_A^LM$ is bounded.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*(i), constructibility.* The functor $-\\otimes_A^L-$ is exact on\ntriangulated categories, and a bounded constructible complex is built from\nthe shifts $\\mathcal H^p(K)[-p]$, respectively $\\mathcal H^q(M)[-q]$, of\nits constructible cohomology sheaves by finitely many extensions, the\nsuccessive quotients of the filtration by the truncations $\\tau_{\\geq p}$.\nIt therefore suffices to show that\n$\\mathcal H^r(F\\otimes_A^LG)$ is constructible for constructible sheaves\n$F$ and $G$ in single degrees: this is\n[lem-sf-tor-sheaf-constructible]. The propagation through the\nextensions is the long exact cohomology sequence of a distinguished\ntriangle, in which each cohomology sheaf of the middle term is an extension\nof a subobject of a cohomology sheaf of one outer term by a quotient of a\ncohomology sheaf of the other; constructible sheaves are closed under\nkernels, cokernels and extensions, which is the weak Serre property of\n[thm-constructible-serre] of the proper-base-change chapter,\nin the definition-level form of\n[def-weil-finite-torsion-constructibility] on the pro-étale site\n(local constancy is a condition local for the topology, and the constant\nsheaves form an abelian category). Hence $\\mathcal H^r(K\\otimes_A^LM)$ is\nconstructible for every $r$, which with the boundedness just proved is\n(i).",
+   "text": "For constructibility in (i), apply [lem-pur-finite-tensor-constructible-cohomology] with $T=X$, $L=M$ and the given $A=\\mathcal O_E/\\varpi_E^n$. Its hypotheses hold: $n\\ge1$, $\\ell$ is invertible on $X$ by step 1, and $K$ and $M$ are bounded constructible in the intrinsic finite-torsion category (membership in $D^b_{ctf}$ includes membership in $D^b_c$). It states that every cohomology sheaf of $K\\otimes_A^L M$ is constructible on the pro-etale site. With boundedness from step 2, the defining condition [def-weil-finite-torsion-constructibility] proves $K\\otimes_A^L M\\in D^b_c(X,A)$.",
    "uses": [
-    "lem-sf-tor-sheaf-constructible",
-    "thm-constructible-serre",
+    "lem-pur-finite-tensor-constructible-cohomology",
     "def-weil-finite-torsion-constructibility"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.md",
+    "place": "## Proof, (i), constructibility"
+   }
+  },
+  {
+   "text": "For (ii), [lem-sf-flat-model] applied to $M$ supplies a flat complex $Q$ concentrated in $[c,d]$ and isomorphic to $M$ in the derived category. The computation of [def-weil-derived-tensor] and functoriality [lem-weil-derived-tensor-functorial] represent $K\\otimes_A^L M$ by $R=\\operatorname{Tot}(P\\otimes_A Q)$. By [def-pc-tensor-complex-sheaves], $R^t=\\bigoplus_{q+r=t}P^q\\otimes_A Q^r$. Each summand is flat [def-pc-flat-sheaf-modules]: its tensor functor is, by tensor associativity, the composite of the two exact tensor functors for $P^q$ and $Q^r$. There are only finitely many nonzero summands in each total degree. Tensoring a finite direct sum is the finite direct sum of those tensor functors. Applied to a short exact sequence, its kernel and cokernel are the direct sums of the summand kernels and cokernels, so the result remains short exact. Thus $R^t$ is flat. A nonzero summand requires $a\\le q\\le b$ and $c\\le r\\le d$, hence $a+c\\le t\\le b+d$. Thus $R$ is a bounded flat model in $[a+c,b+d]$. The tensor is already bounded constructible by (i), so the reverse implication of [lem-sf-flat-model] gives its Tor amplitude in this interval. Together these prove membership in $D^b_{ctf}(X,A)$.",
+   "uses": [
+    "lem-sf-flat-model",
+    "def-weil-derived-tensor",
+    "lem-weil-derived-tensor-functorial",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.md",
+    "place": "## Proof, (ii)"
+   }
   }
  ],
  "proof_deps": [
   "lem-sf-flat-model",
+  "lem-pc-bounded-above-flat-kflat-site",
   "def-weil-derived-tensor",
-  "lem-sf-tor-sheaf-constructible",
-  "thm-constructible-serre",
-  "def-weil-finite-torsion-constructibility"
+  "lem-weil-derived-tensor-functorial",
+  "def-weil-finite-torsion-constructibility",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-finite-tensor-constructible-cohomology",
+  "def-pc-flat-sheaf-modules"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-sf-tensor-ctf.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor product preserves bounded constructible complexes and finite Tor amplitude",
+   "results": "CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, HomologicalComplex tensor infrastructure; none states this sheaf-theoretic theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory torAmplitudeIn, tensorObj, IsConstructibleSheaf",
+   "results": "unknown identifier torAmplitudeIn; no matching theorem",
+   "date": "2026-10-16",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedTensor|torAmplitudeIn|constructible",
+   "results": "0 hits in Mathlib/CategoryTheory (the logged subdirectory)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived tensor product of bounded constructible complexes finite Tor amplitude",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|torAmplitude|constructible.*tensor|tensor.*constructible",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, tensorObj",
+   "results": "loogle: unknown identifier 'tensorObj'",
+   "date": "2026-10-16",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring two bounded complexes of flat objects preserves the sum of the support intervals",
+   "results": "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasTensorOfHasTensorX, HomologicalComplex.HasTensor, HomologicalComplex.tensorObj, HomologicalComplex.ιTensorObj; tensor totalization infrastructure only, no sheaf constructibility theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.tensorObj",
+   "results": "HomologicalComplex.tensorObj, HomologicalComplex.rightUnitor, HomologicalComplex.leftUnitor, HomologicalComplex.rightUnitor', HomologicalComplex.ιTensorObj, HomologicalComplex.leftUnitor', HomologicalComplex.associator, HomologicalComplex.tensorHom; ordinary tensor complex and its structural maps only, no constructibility or derived Tor-amplitude conclusion",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of constructible sheaf complexes with a complex of finite Tor dimension is bounded constructible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -99,5 +190,39 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-tensor-ctf",
+  "worker": "stage1",
+  "summary": "Audited the finite-torsion pro-etale statement against the blueprint. Reused flat models and the existing ringed-site K-flat criterion, wrote the good-truncation boundedness argument and the finite-direct-sum flatness calculation, and reused the pro-etale constructible-cohomology lemma instead of the inapplicable etale-only weak-Serre citation. No new nodes. After the merge-lock return, reread all current statement and proof dependencies and verified every earlier verbatim citation against the current DAG; expanded the endpoint cohomology calculation for good truncations and the finite-sum exactness calculation before repackaging on the latest origin/newtargets-dag.",
+  "blueprint": "Realizes the four proof paragraphs of the blueprint node: flat model computation; boundedness; constructibility; and the second flat model giving the summed Tor interval.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-finite-tensor-constructible-cohomology",
+    "why": "This reviewed cross-unit pro-etale lemma directly supplies constructibility of every cohomology sheaf of the derived tensor; the item's imported etale Serre citation does not apply to the pro-etale coefficient category."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site K-flat criterion needed to compute tensor using the bounded flat model; no node of the item unit states this infrastructure result."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Generic bounded-flat-model characterization on the same small pro-etale module category, explicitly invoked by the blueprint proof in both amplitude directions. Its unit sk-lem-sf-flat-model is outside the transitive route of sk-prop-sf-biduality-general; this tool supplies the models without changing that route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-finite-tensor-constructible-cohomology",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sf-flat-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N0-0b0101fe3",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-0b0101fe3 (reviewer sub-agent of L); spot-checked: Read the full mathematics, cited statements, sources, and unit/chapter route. All four proof steps and edge cases check out. Repaired one C8 route declaration: added lem-sf-flat-model to split_report.tool_uses in the corrected whole item JSON. Statement and proof unchanged; no new nodes. Concrete checks and existing dependency metadata issues are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
