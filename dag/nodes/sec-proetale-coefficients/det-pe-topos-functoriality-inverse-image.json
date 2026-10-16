@@ -175,5 +175,30 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-e5f8fbc66 (reviewer sub-agent of L); spot-checked: Read all five proof steps, cited statements, local sources, and unit/chapter route. Checked coefficients, Kan-extension variance, composition mate, edge cases, and acyclicity. Accepted the underlying-sets comparison tool. Corrected proof authorship metadata and added three actual Mathlib search records. Whole corrected JSON and detailed review.md written; statement unchanged, no new nodes.; 1 file(s) fixed by the reviewer"
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-finite-pushforward-pullback"
+ "unit": "sk-def-sfb-finite-pushforward-pullback",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7a9af0d98",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Wrote review.md. All five clauses, dependencies, canonical constructions, universes, edge cases, docstrings, and verbatim signature checked. Immutable module reproduced a clean per-file scompile.py compile. No defects found; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage",
+  "declaration": "AlgebraicGeometry.ProEtale.toposFunctorialityInverseImage",
+  "statement": "theorem toposFunctorialityInverseImage {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) : (PreservesFiniteLimits (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) ∧ ∀ (V : Y.ProEt) (R : Presieve V), R ∈ Scheme.ProEt.precoverage Y V → Presieve.map (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) R ∈ Scheme.ProEt.precoverage X ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj V)) ∧ Nonempty (setPullback f ⊣ lowerStar (Type (u + 1)) f) ∧ PreservesColimits (setPullback f) ∧ PreservesFiniteLimits (setPullback f) ∧ (Nonempty (upperStar AddCommGrpCat.{u + 1} f ⋙ sheafCompose (Scheme.ProEt.topology X) (forget AddCommGrpCat.{u + 1}) ≅ sheafCompose (Scheme.ProEt.topology Y) (forget AddCommGrpCat.{u + 1}) ⋙ setPullback f) ∧ PreservesFiniteLimits (upperStar AddCommGrpCat.{u + 1} f) ∧ PreservesFiniteColimits (upperStar AddCommGrpCat.{u + 1} f)) ∧ ∀ F : Sheaf (Scheme.ProEt.topology Z) (Type (u + 1)), (setPullbackAdjunction (f ≫ g)).unit.app F ≫ (lowerStar (Type (u + 1)) (f ≫ g)).map ((setPullbackComp f g).hom.app F) = ((setPullbackAdjunction g).comp (setPullbackAdjunction f)).unit.app F ≫ (lowerStarComp (Type (u + 1)) f g).hom.app ((setPullback g ⋙ setPullback f).obj F)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.setPullback",
+   "AlgebraicGeometry.ProEtale.setPullbackAdjunction",
+   "AlgebraicGeometry.ProEtale.setPullbackComp",
+   "AlgebraicGeometry.ProEtale.toposFunctorialityInverseImage"
+  ],
+  "note": "Second reading reuses lowerStar and lowerStarComp at sets, specializes exactness to abelian groups, states the underlying-sets comparison and covering-family preservation, and characterizes the canonical inverse-image compositor by its unit equation. No node statement change.",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleToposFunctorialityInverseImage.lean"
+ }
 }
