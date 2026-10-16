@@ -597,37 +597,19 @@ lemma isIso_condensedPullbackHom_of_isOpenImmersion {U X : Scheme.{u}} (j : U �
     [IsOpenImmersion j] : IsIso (condensedPullbackHom Λ j) :=
   inferInstance
 
-omit [MonObj Λ] in
 /-- The canonical coefficient morphism `η_f : Λ_Y ⟶ f_* Λ_X`: the mate of `α_f` under the
 adjunction `f^* ⊣ f_*`, the unit `Λ_Y ⟶ f_* f^* Λ_Y` followed by `f_* α_f`. -/
-theorem condensedPushforwardHom_exists :
-    ∃ e : (condensedRingObj Λ Y ⟶ (f)_*[Ab.{u + 1}].obj (condensedRingObj Λ X)), e =
-      (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app (condensedRingObj Λ Y) ≫
-    (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f) :=
-  ⟨_, rfl⟩
-
-/-- The canonical coefficient map, kept behind its exact equality API. This avoids
-unfolding the inverse-image adjunction when checking sectionwise calculations.
-The proved equality specifies the witness uniquely. -/
 noncomputable def condensedPushforwardHom :
     condensedRingObj Λ Y ⟶ (f)_*[Ab.{u + 1}].obj (condensedRingObj Λ X) :=
-  Classical.choose (condensedPushforwardHom_exists Λ f)
-
-omit [MonObj Λ] in
-/-- The coefficient map is the explicit unit followed by the image of the comparison. -/
-theorem condensedPushforwardHom_def :
-    condensedPushforwardHom Λ f =
-      (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app (condensedRingObj Λ Y) ≫
-    (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f) :=
-  Classical.choose_spec (condensedPushforwardHom_exists Λ f)
+  (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom (condensedRingObj Λ Y) ≫
+    (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f)
 
 /-- `η_f` is a morphism of ring objects, for the ring object structure of `f_* Λ_X` induced by
 the lax monoidal structure of `f_*`. -/
-instance isMonHom_condensedPushforwardHom : IsMonHom (condensedPushforwardHom Λ f) := by
-  rw [condensedPushforwardHom_def]
-  exact inferInstanceAs (IsMonHom
-    ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom
-      (condensedRingObj Λ Y) ≫ (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f)))
+instance isMonHom_condensedPushforwardHom : IsMonHom (condensedPushforwardHom Λ f) :=
+  inferInstanceAs (IsMonHom
+    ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom (condensedRingObj Λ Y) ≫
+      (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f)))
 
 omit [MonObj Λ] in
 /-- `η_f` is the mate of `α_f`: it is the unit `Λ_Y ⟶ f_* f^* Λ_Y` followed by `f_* α_f`. -/
@@ -636,7 +618,7 @@ lemma unitAlgHom_comp_map_condensedPullbackHom :
     (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom (condensedRingObj Λ Y) ≫
       (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f) =
         condensedPushforwardHom Λ f :=
-  (condensedPushforwardHom_def Λ f).symm
+  rfl
 
 omit [MonObj Λ] in
 /-- The canonical coefficient morphism `α_f` is the composition isomorphism
@@ -658,28 +640,11 @@ lemma condensedPullbackHom_eq :
     (comp_toSpecZ f) Λ
 
 omit [MonObj Λ] in
-/-- The coefficient pushforward map satisfies the composition unit law. This is the
-adjunction API for the defining equation of `condensedPushforwardHom`.
-Source: the inverse-image composition adjunction; Bhatt--Scholze, Section 5.3. -/
-lemma unit_comp_map_condensedPushforwardHom :
-    (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ Y)).unit.app
-        (pointUpperStar.obj Λ) ≫
-      (toSpecZ Y)_*[Ab.{u + 1}].map (condensedPushforwardHom Λ f) =
-    (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X)).unit.app
-        (pointUpperStar.obj Λ) ≫
-      (eqToHom (congrArg (lowerStar Ab.{u + 1}) (comp_toSpecZ f).symm)).app _ ≫
-        (lowerStarComp Ab.{u + 1} f (toSpecZ Y)).inv.app
-          ((toSpecZ X)^*[Ab.{u + 1}].obj (pointUpperStar.obj Λ)) := by
-  rw [condensedPushforwardHom_def, condensedPullbackHom_eq]
-  exact unit_comp_lowerStar_map_unit_comp_upperStarComp Ab.{u + 1}
-    f (toSpecZ X) (toSpecZ Y) (comp_toSpecZ f) (pointUpperStar.obj Λ)
-
-omit [MonObj Λ] in
 /-- `η` of the identity is the identification `Λ_X ≅ (𝟙 X)_* Λ_X`. -/
 lemma condensedPushforwardHom_id (X : Scheme.{u}) :
     condensedPushforwardHom Λ (𝟙 X) =
       (ProEtale.lowerStarId Ab.{u + 1} X).inv.app (condensedRingObj Λ X) := by
-  rw [condensedPushforwardHom_def, condensedPullbackHom_eq]
+  rw [condensedPushforwardHom, condensedPullbackHom_eq]
   exact unitCompUpperStarComp_id Ab.{u + 1} (toSpecZ X) (comp_toSpecZ (𝟙 X))
     (pointUpperStar.obj Λ)
 
@@ -690,7 +655,7 @@ lemma condensedPushforwardHom_comp {Z : Scheme.{u}} (g : Y ⟶ Z) :
     condensedPushforwardHom Λ (f ≫ g) =
       condensedPushforwardHom Λ g ≫ (g)_*[Ab.{u + 1}].map (condensedPushforwardHom Λ f) ≫
         (ProEtale.lowerStarComp Ab.{u + 1} f g).hom.app (condensedRingObj Λ X) := by
-  rw [condensedPushforwardHom_def, condensedPushforwardHom_def, condensedPushforwardHom_def,
+  rw [condensedPushforwardHom, condensedPushforwardHom, condensedPushforwardHom,
     condensedPullbackHom_eq, condensedPullbackHom_eq, condensedPullbackHom_eq]
   exact unitCompUpperStarComp_comp Ab.{u + 1} f g (toSpecZ X) (toSpecZ Y) (toSpecZ Z)
     (comp_toSpecZ f) (comp_toSpecZ g) (comp_toSpecZ (f ≫ g)) (pointUpperStar.obj Λ)

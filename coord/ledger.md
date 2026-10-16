@@ -15561,5 +15561,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:15 L: merged deliver/A4/Sheaf.Paper.FiniteDiscreteCoefficientDirectImageConjugation (stage 3; reviewer PASS; first push; landing 20261016T161556-L-1021334 (proof); batch 20261016T161554; modules 1; new nodes 0)
 - 16:57 L: merged deliver/C4/Sheaf.Paper.CondensedQbarFieldCoefficientSquare (stage 3; reviewer PASS; first push; landing 20261016T165726-L-1400418 (interface); batch 20261016T165723; modules 2; new nodes 1)
 - 17:13 L: returned deliver/D3/Sheaf.Paper.FiniteDiscreteCoefficientSections (reviewer RETURN: (reviewer X-f8441, head f8441b42a) 5 / reader gate: `Sheaf/Paper/ContinuousChartSchemeNaturality.lean` does not compile )
-- 17:18 L: merged deliver/D2/Sheaf.Paper.FiniteDiscreteCoefficientRestriction (stage 3; reviewer PASS; first push; landing 20261016T171805-L-1680750 (interface); batch 20261016T171803; modules 1; new nodes 0; change records: coord/changes/finite-discrete-coefficient-restriction-proof-settings.md)
-- 17:18 L: merged deliver/D3/Sheaf.Paper.FiniteDiscreteCoefficientSections (stage 3; reviewer PASS; after a return; landing 20261016T171806-L-1680950 (interface); batch 20261016T171803; modules 8; new nodes 1; change records: coord/changes/D3-coefficient-pushforward-api.md, coord/changes/D3-finite-discrete-comparison-api.md)
+
+- 01:27 L: batch 20261016T171803 dependency take-out

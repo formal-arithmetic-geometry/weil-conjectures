@@ -1,172 +1,177 @@
 {
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "id": "lem-weil-pbc-finite-discrete-coefficient-sections",
- "kind": "statement",
- "title": "The constant coefficient map on sections commutes with direct image",
- "statement": "For every topological commutative ring B, fixed coefficient identification eR at the profinite point, scheme morphism j:U→T, and object V of T_proet, the sheafification unit followed by the pulled constant-ring identification on T and the direct-image coefficient map equals the corresponding unit and identification on U evaluated on the base change of V. There is no module, encoding functor, finiteness or discreteness assumption.",
- "source": {
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AK"
- },
- "stmt_deps": [
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
- ],
- "proof": [
-  {
-   "text": "Apply the coefficient comparison at the pullback of the terminal pro-etale object over Spec Z.",
-   "uses": [
-    "lem-weil-pbc-finite-discrete-coefficient-terminal"
-   ],
-   "elementary": false
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "id": "lem-weil-pbc-finite-discrete-coefficient-sections",
+  "kind": "statement",
+  "title": "The constant coefficient map on sections commutes with direct image",
+  "statement": "For every topological commutative ring B, fixed coefficient identification eR at the profinite point, scheme morphism j:U→T, and object V of T_proet, the sheafification unit followed by the pulled constant-ring identification on T and the direct-image coefficient map equals the corresponding unit and identification on U evaluated on the base change of V. There is no module, encoding functor, finiteness or discreteness assumption.",
+  "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AK"
   },
-  {
-   "text": "Use the arrow from this object to V in the opposite site, naturality of condensedPushforwardHom, and naturality of maps from constant presheaves to propagate the equality to V.",
-   "uses": [],
-   "elementary": true
+  "stmt_deps": [
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+  ],
+  "proof": [
+    {
+      "text": "Expand the constantSchemeIso into the conjugate of the terminal-section comparison. The unit identity for conjugate natural transformations identifies the coefficient map with its canonical terminal-section description.",
+      "uses": [
+        "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply the unit identity for composition of inverse-image adjunctions along j and the maps to Spec Z. The site pullback composition isomorphism gives the same terminal map by terminal uniqueness.",
+      "uses": [],
+      "elementary": true
+    },
+    {
+      "text": "Naturality of upperStarFromPointComp in the condensed abelian coefficient sheaf moves the fixed eR through this equality. Evaluate the resulting presheaf equality at V.",
+      "uses": [],
+      "elementary": true
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AK",
+    "note": "D2: explicit stage-3 reduction using the fixed encoding and existing sheaf APIs."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "A cokernel of a morphism between constant finite module sheaves is locally constant with finite stalks",
+      "date": "2026-10-16",
+      "results": "8 hits: CompHausLike.LocallyConstantModule.functor, SheafOfModules.relationsOfIsCokernelFree, SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.relationsOfIsCokernelFree_I, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_s, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf",
+      "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
+    },
+    {
+      "tool": "loogle",
+      "query": "\"IsLocallyConstantSheaf\", \"cokernel\"",
+      "date": "2026-10-16",
+      "results": "0 hits: ",
+      "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
+    },
+    {
+      "tool": "grep",
+      "query": "sheafEncoding|IsLocallyConstantSheaf.*cokernel|biproductIsoPi",
+      "date": "2026-10-16",
+      "results": "6 hits: Mathlib/Algebra/Category/Grp/Biproducts.lean, Mathlib/Algebra/Category/Grp/Biproducts.lean, Mathlib/Algebra/Category/Grp/Biproducts.lean, Mathlib/Algebra/Category/ModuleCat/Biproducts.lean, Mathlib/Algebra/Category/ModuleCat/Biproducts.lean, Mathlib/Algebra/Category/ModuleCat/Biproducts.lean",
+      "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
+    },
+    {
+      "tool": "loogle",
+      "query": "\"mapMod\", \"comap\"",
+      "date": "2026-10-16",
+      "results": "0 hits: ",
+      "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A sectionwise equivalence between internal modules over a constant ring sheaf and module valued sheaves commutes with inverse image",
+      "date": "2026-10-16",
+      "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.map_ιFree_mapFree_hom",
+      "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
+    },
+    {
+      "tool": "leansearch",
+      "query": "A sectionwise equivalence of internal modules over a constant ring sheaf preserves finite presentations and commutes with inverse image; cokernels between constant finite module sheaves are locally constant.",
+      "date": "2026-10-16",
+      "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.IsFinitePresentation, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.Presentation.IsFinite.mk, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+      "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
+    },
+    {
+      "tool": "leansearch",
+      "query": "The canonical isomorphism between pullback of a constant sheaf and the constant sheaf is compatible with composition of pullbacks and adjunction units.",
+      "date": "2026-10-16",
+      "results": "8 hits: CategoryTheory.constantCommuteCompose, CategoryTheory.ChosenPullbacksAlong.pullbackComp, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, PresheafOfModules.pullback_id_comp, PresheafOfModules.pullback_comp_id",
+      "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
+    },
+    {
+      "tool": "loogle",
+      "query": "\"unit_conjugateEquiv_symm\"",
+      "results": "1 hits: CategoryTheory.unit_conjugateEquiv_symm",
+      "date": "2026-10-16",
+      "verdict": "Independent D2 second reading: generic conjugation unit law is available; the external SheafOfModules and constant-composition results do not state this coefficient-section identity. Also searched both project Lean roots for coefficient units, constant pullback units, and encoding restrictions; no duplicate found."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Compatibility of constant sheaf pullback isomorphism with the unit of inverse image direct image adjunction along composition",
+      "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, CategoryTheory.constantCommuteCompose, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.freeFunctorCompPullbackIso",
+      "date": "2026-10-16",
+      "verdict": "Independent D2 second reading: generic conjugation unit law is available; the external SheafOfModules and constant-composition results do not state this coefficient-section identity. Also searched both project Lean roots for coefficient units, constant pullback units, and encoding restrictions; no duplicate found."
+    },
+    {
+      "tool": "grep",
+      "query": "constant.*(Pullback|pullback).*(unit|Unit)|unit.*constantSheaf|constantSheaf.*unit",
+      "results": "9 hits: Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Basic.lean, Mathlib/Condensed/Discrete/Basic.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+      "date": "2026-10-16",
+      "verdict": "Independent D2 second reading: generic conjugation unit law is available; the external SheafOfModules and constant-composition results do not state this coefficient-section identity. Also searched both project Lean roots for coefficient units, constant pullback units, and encoding restrictions; no duplicate found."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.Paper.FiniteDiscreteConstructibleEncoding",
+    "date": "2026-10-16",
+    "group": "D2"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-finite-extension",
+      "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin; finite discrete coefficient step: Compatible coefficient encodings and sheaf-level origin; H2: Finite local presentations under the common coefficient encoding; D2: The constant coefficient map on sections commutes with direct image",
+      "via": [
+        "lem-weil-pbc-finite-discrete-constructible-encoding",
+        "lem-weil-pbc-finite-discrete-coefficient-realization",
+        "lem-weil-pbc-finite-discrete-exchange-comparison",
+        "lem-weil-pbc-integral-finite-exchange-comparison",
+        "new-proper-continuous-basechange-app",
+        "nt-target-proetale-e"
+      ]
+    },
+    "same_as": []
+  },
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.Paper.FiniteDiscreteCoefficientSections",
+    "file": "lean/Sheaf/Paper/FiniteDiscreteCoefficientSections.lean",
+    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteCoefficient_coefficientUnit_pushforward",
+    "statement": "theorem finiteDiscreteCoefficient_coefficientUnit_pushforward\n    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}\n      (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj\n        (RingCat.of (ULift.{u + 1} B))) ≅ Profinite.continuousMapRingObj.{u} B)\n    (T U : Scheme.{u}) (j : U ⟶ T) (V : T.ProEtᵒᵖ) :\n    ((sheafificationAdjunction (ProEt.topology T) Ab.{u + 1}).unit.app\n        ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B))) ≫\n      (finiteDiscreteSchemeRingIso B T eR).hom.hom).app V ≫\n        (condensedPushforwardHom (Profinite.continuousMapRingObj.{u} B) j).hom.app V =\n    ((sheafificationAdjunction (ProEt.topology U) Ab.{u + 1}).unit.app\n        ((Functor.const U.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B))) ≫\n      (finiteDiscreteSchemeRingIso B U eR).hom.hom).app\n        ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).op.obj V)",
+    "branch": "sheaf-dag",
+    "by": "D2",
+    "date": "2026-10-16"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none"
+    },
+    "slopmaster2": {
+      "state": "none"
+    }
+  },
+  "reviewed": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "D2",
+    "result": "pass",
+    "landing": "20261016T145216-L-3934865",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "D2",
+    "result": "pass",
+    "landing": "20261016T145216-L-3934865",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "lem-weil-pbc-finite-discrete-coefficient-terminal"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AK",
-  "note": "D3: strict terminal specialization followed by a complete Lean naturality argument."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "A cokernel of a morphism between constant finite module sheaves is locally constant with finite stalks",
-   "date": "2026-10-16",
-   "results": "8 hits: CompHausLike.LocallyConstantModule.functor, SheafOfModules.relationsOfIsCokernelFree, SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.relationsOfIsCokernelFree_I, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_s, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf",
-   "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"IsLocallyConstantSheaf\", \"cokernel\"",
-   "date": "2026-10-16",
-   "results": "0 hits: ",
-   "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
-  },
-  {
-   "tool": "grep",
-   "query": "sheafEncoding|IsLocallyConstantSheaf.*cokernel|biproductIsoPi",
-   "date": "2026-10-16",
-   "results": "6 hits: Mathlib/Algebra/Category/Grp/Biproducts.lean, Mathlib/Algebra/Category/Grp/Biproducts.lean, Mathlib/Algebra/Category/Grp/Biproducts.lean, Mathlib/Algebra/Category/ModuleCat/Biproducts.lean, Mathlib/Algebra/Category/ModuleCat/Biproducts.lean, Mathlib/Algebra/Category/ModuleCat/Biproducts.lean",
-   "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"mapMod\", \"comap\"",
-   "date": "2026-10-16",
-   "results": "0 hits: ",
-   "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A sectionwise equivalence between internal modules over a constant ring sheaf and module valued sheaves commutes with inverse image",
-   "date": "2026-10-16",
-   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.map_ιFree_mapFree_hom",
-   "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
-  },
-  {
-   "tool": "leansearch",
-   "query": "A sectionwise equivalence of internal modules over a constant ring sheaf preserves finite presentations and commutes with inverse image; cokernels between constant finite module sheaves are locally constant.",
-   "date": "2026-10-16",
-   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.IsFinitePresentation, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.Presentation.IsFinite.mk, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
-   "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
-  },
-  {
-   "tool": "leansearch",
-   "query": "The canonical isomorphism between pullback of a constant sheaf and the constant sheaf is compatible with composition of pullbacks and adjunction units.",
-   "date": "2026-10-16",
-   "results": "8 hits: CategoryTheory.constantCommuteCompose, CategoryTheory.ChosenPullbacksAlong.pullbackComp, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, PresheafOfModules.pullback_id_comp, PresheafOfModules.pullback_comp_id",
-   "verdict": "Use the proved library categorical and locally constant sheaf APIs; no direct replacement found."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"unit_conjugateEquiv_symm\"",
-   "results": "1 hits: CategoryTheory.unit_conjugateEquiv_symm",
-   "date": "2026-10-16",
-   "verdict": "Independent D2 second reading: generic conjugation unit law is available; the external SheafOfModules and constant-composition results do not state this coefficient-section identity. Also searched both project Lean roots for coefficient units, constant pullback units, and encoding restrictions; no duplicate found."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Compatibility of constant sheaf pullback isomorphism with the unit of inverse image direct image adjunction along composition",
-   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, CategoryTheory.constantCommuteCompose, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.freeFunctorCompPullbackIso",
-   "date": "2026-10-16",
-   "verdict": "Independent D2 second reading: generic conjugation unit law is available; the external SheafOfModules and constant-composition results do not state this coefficient-section identity. Also searched both project Lean roots for coefficient units, constant pullback units, and encoding restrictions; no duplicate found."
-  },
-  {
-   "tool": "grep",
-   "query": "constant.*(Pullback|pullback).*(unit|Unit)|unit.*constantSheaf|constantSheaf.*unit",
-   "results": "9 hits: Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Basic.lean, Mathlib/Condensed/Discrete/Basic.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
-   "date": "2026-10-16",
-   "verdict": "Independent D2 second reading: generic conjugation unit law is available; the external SheafOfModules and constant-composition results do not state this coefficient-section identity. Also searched both project Lean roots for coefficient units, constant pullback units, and encoding restrictions; no duplicate found."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.Paper.FiniteDiscreteConstructibleEncoding",
-  "date": "2026-10-16",
-  "group": "D2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-finite-extension",
-   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin; finite discrete coefficient step: Compatible coefficient encodings and sheaf-level origin; H2: Finite local presentations under the common coefficient encoding; D2: The constant coefficient map on sections commutes with direct image",
-   "via": [
-    "lem-weil-pbc-finite-discrete-constructible-encoding",
-    "lem-weil-pbc-finite-discrete-coefficient-realization",
-    "lem-weil-pbc-finite-discrete-exchange-comparison",
-    "lem-weil-pbc-integral-finite-exchange-comparison",
-    "new-proper-continuous-basechange-app",
-    "nt-target-proetale-e"
-   ]
-  },
-  "same_as": []
- },
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Paper.FiniteDiscreteCoefficientSections",
-  "file": "lean/Sheaf/Paper/FiniteDiscreteCoefficientSections.lean",
-  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteCoefficient_coefficientUnit_pushforward",
-  "statement": "theorem finiteDiscreteCoefficient_coefficientUnit_pushforward\n    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}\n      (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj\n        (RingCat.of (ULift.{u + 1} B))) ≅ Profinite.continuousMapRingObj.{u} B)\n    (T U : Scheme.{u}) (j : U ⟶ T) (V : T.ProEtᵒᵖ) :\n    ((sheafificationAdjunction (ProEt.topology T) Ab.{u + 1}).unit.app\n        ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B))) ≫\n      (finiteDiscreteSchemeRingIso B T eR).hom.hom).app V ≫\n        (condensedPushforwardHom (Profinite.continuousMapRingObj.{u} B) j).hom.app V =\n    ((sheafificationAdjunction (ProEt.topology U) Ab.{u + 1}).unit.app\n        ((Functor.const U.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B))) ≫\n      (finiteDiscreteSchemeRingIso B U eR).hom.hom).app\n        ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).op.obj V)",
-  "branch": "sheaf-dag",
-  "by": "D2",
-  "date": "2026-10-16"
- },
- "lean_audit": {
-  "master": {
-   "state": "none"
-  },
-  "slopmaster2": {
-   "state": "none"
-  }
- },
- "reviewed": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D2",
-  "result": "pass",
-  "landing": "20261016T145216-L-3934865",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D3",
-  "result": "pass",
-  "landing": "20261016T171806-L-1680950",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

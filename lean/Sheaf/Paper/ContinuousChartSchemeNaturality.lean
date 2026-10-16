@@ -75,7 +75,7 @@ theorem continuousChart_scheme_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
   rw [hchart]
   simp only [adjX, Adjunction.comp_homEquiv]
   erw [Equiv.trans_apply]
-  simp only [condensedPushforwardHom_def, Category.assoc]
+  simp only [condensedPushforwardHom, Adjunction.unitAlgHom, Category.assoc]
   erw [hleft, pointUpperStarLowerStarAdjunction.homEquiv_naturality_right]
   have hchartY :
       (pointUpperStarLowerStarAdjunction.comp
