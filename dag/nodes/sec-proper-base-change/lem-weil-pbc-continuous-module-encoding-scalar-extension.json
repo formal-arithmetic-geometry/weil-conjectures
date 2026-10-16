@@ -14,7 +14,7 @@
  },
  "proof": [
   {
-   "text": "Use the tensor universal property on each section to construct inverse Hom bijections between maps out of the sectionwise change-of-rings presheaf and scalar-restricted module maps. Verify naturality using the pure-tensor formula for changeOfRingsMap; compose with the sheafification Hom bijection. Adjunction.leftAdjointOfEquiv constructs a functor whose object function is exactly changeOfRings and whose right adjoint is scalar restriction.",
+   "text": "Use Classical.choose_spec of the proved public exists_changeOfRingsMap theorem to recover the pure-tensor restriction formula, without importing any private upstream theorem. Sectionwise HomEquiv.toRestrictScalars sends f to m ↦ f(1 tensor m); its naturality follows from that formula and naturality_apply. Sectionwise HomEquiv.fromExtendScalars gives the inverse, whose naturality follows by ExtendScalars.hom_ext and the same formula on 1 tensor m. The inverse laws are the sectionwise homEquiv inverse laws. Compose this equivalence with sheafificationHomEquiv; sheafificationAdjunction.homEquiv_naturality_right proves naturality in the target. Adjunction.leftAdjointOfEquiv and adjunctionOfEquivLeft give the required functor with object function exactly changeOfRings.",
    "uses": [
     "def-pur-sheaf-tensor-product"
    ],
@@ -43,9 +43,11 @@
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "M2",
+  "date": "2026-10-17",
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tag 03D7 (extension-restriction adjunction), Tags 03EK and 03EL (sheafified tensor and pullback); Bhatt--Scholze, Section 6.8",
-  "note": "Stage-3 E4: fully proved from existing library and Mathlib declarations; no new proof obligation."
+  "note": "Repair after the e47efb5a5 sync: fully construct the two private data definitions and restore the site adjunction from public source and Mathlib APIs. All three original holes closed; no new obligation or change of statement. The redundant direct TensorProduct wrapper import is removed."
  },
  "mathlib_searches": [
   {
@@ -128,10 +130,10 @@
   "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E4",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261016T114443-L-2638351",
-  "kind": "interface",
+  "landing": "20261016T221618-L-1617414",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

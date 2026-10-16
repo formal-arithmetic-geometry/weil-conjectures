@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ContinuousCoefficientModuleEncoding
-import all Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-! # Scalar extension under continuous module encodings
 
@@ -31,17 +30,33 @@ variable {C : Type v} [Category.{w} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
   {A B : Sheaf J CommRingCat.{u}} (α : A ⟶ B)
 
+private theorem scalarExtensionMap_tmul {U V : Cᵒᵖ} (i : U ⟶ V)
+    (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
+    (s : B.obj.obj U) (m : M.val.obj U) :
+    changeOfRingsMap α M i (s ⊗ₜ[A.obj.obj U, (α.hom.app U).hom] m) =
+      B.obj.map i s ⊗ₜ[A.obj.obj V, (α.hom.app V).hom] M.val.map i m :=
+  Classical.choose_spec (exists_changeOfRingsMap α M i) s m
+
 private noncomputable def tensorToRestrict
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
     (N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))
     (f : changeOfRingsPresheaf α M ⟶ N.val) :
-    M ⟶ (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)).obj N := by
-  sorry
+    M ⟶ (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)).obj N where
+  val :=
+    { app := fun U ↦ ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars
+        (α.hom.app U).hom (f.app U)
+      naturality := by
+        intro U V i
+        ext m
+        change f.app V ((1 : B.obj.obj V) ⊗ₜ[A.obj.obj V, (α.hom.app V).hom]
+            M.val.map i m) =
+          N.val.map i (f.app U ((1 : B.obj.obj U) ⊗ₜ[A.obj.obj U, (α.hom.app U).hom] m))
+        have h := PresheafOfModules.naturality_apply f i
+          ((1 : B.obj.obj U) ⊗ₜ[A.obj.obj U, (α.hom.app U).hom] m)
+        change f.app V (changeOfRingsMap α M i _) = N.val.map i (f.app U _) at h
+        rw [scalarExtensionMap_tmul, map_one] at h
+        exact h }
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private noncomputable def tensorFromRestrict
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
     (N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))
@@ -58,7 +73,7 @@ private noncomputable def tensorFromRestrict
         (changeOfRingsMap α M i _) =
       N.val.map i (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
         («R» := A.obj.obj U) («S» := B.obj.obj U) (α.hom.app U).hom (g.val.app U) _)
-    rw [changeOfRingsMap_tmul]
+    rw [scalarExtensionMap_tmul]
     simp only [map_one]
     let : Module (A.obj.obj V) (B.obj.obj V) :=
       Module.compHom (B.obj.obj V) (α.hom.app V).hom
@@ -76,14 +91,27 @@ private noncomputable def tensorFromRestrict
       N.val.map i ((1 : B.obj.obj U) • (show N.val.obj U from g.val.app U m))
     simp only [one_smul]
     exact PresheafOfModules.naturality_apply g.val i m
--/
 
 private noncomputable def tensorHomEquiv
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
     (N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) :
     (changeOfRings α M ⟶ N) ≃
-      (M ⟶ (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)).obj N) := by
-  sorry
+      (M ⟶ (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)).obj N) :=
+  (PresheafOfModules.sheafificationHomEquiv (𝟙 _)).trans
+    { toFun := tensorToRestrict α M N
+      invFun := tensorFromRestrict α M N
+      left_inv := by
+        intro f
+        ext U x
+        exact ConcreteCategory.congr_hom
+          ((ModuleCat.ExtendRestrictScalarsAdj.homEquiv
+            (α.hom.app U).hom).symm_apply_apply (f.app U)) x
+      right_inv := by
+        intro g
+        ext U x
+        exact ConcreteCategory.congr_hom
+          ((ModuleCat.ExtendRestrictScalarsAdj.homEquiv
+            (α.hom.app U).hom).apply_symm_apply (g.val.app U)) x }
 
 /-- The sheafified sectionwise tensor product is left adjoint to scalar restriction
 on any small ringed site. Source: Stacks Project, Modules on Sites, Tag 03D7.
@@ -97,7 +125,22 @@ theorem exists_siteChangeOfRingsAdjunction :
         SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)),
       (∀ M, F.obj M = changeOfRings α M) ∧
       Nonempty (F ⊣ restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)) := by
-  sorry
+  let e := tensorHomEquiv α
+  have he : ∀ M N N' (g : N ⟶ N') (f : changeOfRings α M ⟶ N),
+      e M N' (f ≫ g) = e M N f ≫
+        (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)).map g := by
+    intro M N N' g f
+    ext U m
+    change (PresheafOfModules.sheafificationHomEquiv (𝟙 _)
+        (f ≫ g)).app U ((1 : B.obj.obj U) ⊗ₜ[A.obj.obj U, (α.hom.app U).hom] m) =
+      g.val.app U ((PresheafOfModules.sheafificationHomEquiv (𝟙 _)
+        f).app U ((1 : B.obj.obj U) ⊗ₜ[A.obj.obj U, (α.hom.app U).hom] m))
+    have h := (PresheafOfModules.sheafificationAdjunction
+      (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B).obj)).homEquiv_naturality_right
+        (X := changeOfRingsPresheaf α M) f g
+    exact ConcreteCategory.congr_hom (congrArg (fun k ↦ k.app U) h) _
+  exact ⟨Adjunction.leftAdjointOfEquiv e he, fun _ ↦ rfl,
+    ⟨Adjunction.adjunctionOfEquivLeft e he⟩⟩
 
 end
 end SheafOfModules
