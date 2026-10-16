@@ -36,7 +36,8 @@
   "def-weil-pbc-adic-coefficient-datum",
   "lem-weil-pbc-sequential-tower-evaluation-full",
   "def-weil-pbc-derived-inverse-limit",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-pbc-intrinsic-completion"
  ],
  "proof": [
   {
@@ -250,5 +251,66 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-9c05dd6da (reviewer sub-agent of L); spot-checked: Mathematics and sources were read in full. The four new nodes had incomplete created metadata; corrected whole JSON files are under fixes/dag/nodes/sec-proper-base-change/, adding by=worker, date=2026-10-14, and group=NJ.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ReconstructionUniformTower",
+  "declaration": "AlgebraicGeometry.Scheme.reconstructionUniformTower",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.uniformTowers_grothendieck",
+   "AlgebraicGeometry.Scheme.UniformAdicTowerData",
+   "AlgebraicGeometry.Scheme.localReductionLevel",
+   "AlgebraicGeometry.Scheme.localReductionStep_exists",
+   "AlgebraicGeometry.Scheme.localReductionStep",
+   "AlgebraicGeometry.Scheme.localReductionModuleTower",
+   "AlgebraicGeometry.Scheme.localReductionModuleTower_additive",
+   "AlgebraicGeometry.Scheme.LocalReductionDerivedData",
+   "AlgebraicGeometry.Scheme.localReductionDerived_exists",
+   "AlgebraicGeometry.Scheme.localReductionDerivedData",
+   "AlgebraicGeometry.Scheme.localReductionDerived",
+   "AlgebraicGeometry.Scheme.localReductionCounit",
+   "AlgebraicGeometry.Scheme.localReductionComplexCounit",
+   "AlgebraicGeometry.Scheme.localReductionEvaluation_exists",
+   "AlgebraicGeometry.Scheme.localReductionEvaluation",
+   "AlgebraicGeometry.Scheme.uniformTowerLimit",
+   "AlgebraicGeometry.Scheme.uniformTowerLimit_additive",
+   "AlgebraicGeometry.Scheme.uniformTowerRlim",
+   "AlgebraicGeometry.Scheme.uniformConstantTower",
+   "AlgebraicGeometry.Scheme.uniformConstantTower_additive",
+   "AlgebraicGeometry.Scheme.uniformTowerAdjunction",
+   "AlgebraicGeometry.Scheme.uniformConstantEvaluation",
+   "AlgebraicGeometry.Scheme.uniformTowerProjection",
+   "AlgebraicGeometry.Scheme.uniformLocalRings",
+   "AlgebraicGeometry.Scheme.uniformLocalRing",
+   "AlgebraicGeometry.Scheme.uniformLocalProjections_naturality",
+   "AlgebraicGeometry.Scheme.uniformLocalProjections",
+   "AlgebraicGeometry.Scheme.uniformModuleTowerPull",
+   "AlgebraicGeometry.Scheme.uniformModuleTowerPull_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.uniformModuleTowerPull_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.uniformTowerPull",
+   "AlgebraicGeometry.Scheme.uniformPullEvaluation",
+   "AlgebraicGeometry.Scheme.uniformLocalTower",
+   "AlgebraicGeometry.Scheme.uniformLocalUnit",
+   "AlgebraicGeometry.Scheme.uniformLocalLevel",
+   "AlgebraicGeometry.Scheme.UniformLocalEquipment",
+   "AlgebraicGeometry.Scheme.uniformReconstructionCounit",
+   "AlgebraicGeometry.Scheme.uniformReconstructionLimit",
+   "AlgebraicGeometry.Scheme.UniformReconstructionFamily",
+   "AlgebraicGeometry.Scheme.reconstructionUniformTower"
+  ],
+  "file": "lean/Sheaf/Paper/ReconstructionUniformTower.lean",
+  "statement": "theorem reconstructionUniformTower {k : Type u} [Field k] (X : Scheme.{u}) (fX : X ⟶ Spec (.of k)) (_hX : LocallyOfFiniteType fX ∧ QuasiCompact fX) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (S : LocallyClosedStratification X) : ∃ φ : UniformReconstructionFamily X d S, (∀ (M : AdicTower X d) (W : UniformAdicTowerData d M S) (α : Fin S.n) (U : (S.domain α).ProEt) (f : U ⟶ ⊤_ (S.domain α).ProEt) (hf : W.cover α f), Nonempty (UniformLocalEquipment (U.hom ≫ S.immersion α) d M (W.model α U f hf)) ∧ ∀ E : UniformLocalEquipment (U.hom ≫ S.immersion α) d M (W.model α U f hf), ∀ n : ℕ, (φ M W α U f hf E).hom ≫ CategoryTheory.Functor.map (adicTowerPullback (U.hom ≫ S.immersion α) (pbcAdicCompletion X d)) (uniformTowerProjection X (pbcAdicCompletion X d) M.tower n) ≫ (uniformPullEvaluation (U.hom ≫ S.immersion α) d n).inv.app M.tower = uniformLocalUnit (U.hom ≫ S.immersion α) d (W.model α U f hf).complex n ≫ (pbcTowerEvaluation U.left (uniformLocalRing (U.hom ≫ S.immersion α) d) n).map E.comparison.inv) ∧ (∀ (M : AdicTower X d) (W : UniformAdicTowerData d M S), (∀ (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (C : CochainComplex (pbcModules X (pbcAdicCompletion X d)) ℤ) (e : DerivedCategory.Q.obj C ≅ uniformReconstructionLimit d M), IsDerivedCompleteIntrinsic X d r a ha (uniformReconstructionLimit d M) C e) ∧ (∀ n : ℕ, IsIso (uniformReconstructionCounit d M n)) ∧ (∀ (b a : ℕ) (hab : a ≤ b), (pbcDerivedExtend (pbcAdicQuotient X d b a hab)).map (uniformReconstructionCounit d M b) ≫ (M.normalization b a hab).hom = (pbcReductionNormalization (pbcAdicProjection X d b) (pbcAdicQuotient X d b a hab) (pbcAdicProjection X d a) (pbcAdicProjection_comp X d b a hab) (uniformReconstructionLimit d M)).hom ≫ uniformReconstructionCounit d M a) ∧ ∀ q : ℤ, q < W.lower ∨ W.upper < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (uniformReconstructionLimit d M))) ∧ (∀ (M N : AdicTower X d) (W : UniformAdicTowerData d M S) (V : UniformAdicTowerData d N S) (α : Fin S.n) (U : (S.domain α).ProEt) (f : U ⟶ ⊤_ (S.domain α).ProEt) (hf : W.cover α f) (hf' : V.cover α f) (E : UniformLocalEquipment (U.hom ≫ S.immersion α) d M (W.model α U f hf)) (E' : UniformLocalEquipment (U.hom ≫ S.immersion α) d N (V.model α U f hf')) (v : M.tower ⟶ N.tower) (h : DerivedCategory.Q.obj (W.model α U f hf).complex ⟶ DerivedCategory.Q.obj (V.model α U f hf').complex), (uniformTowerPull (U.hom ≫ S.immersion α) d).map v ≫ E'.comparison.hom = E.comparison.hom ≫ (localReductionDerived U.left (uniformLocalRing (U.hom ≫ S.immersion α) d) (uniformLocalRings (U.hom ≫ S.immersion α) d) (uniformLocalProjections (U.hom ≫ S.immersion α) d)).map h → h ≫ (φ N V α U f hf' E').hom = (φ M W α U f hf E).hom ≫ (adicTowerPullback (U.hom ≫ S.immersion α) (pbcAdicCompletion X d)).map ((uniformTowerRlim X (pbcAdicCompletion X d)).map v))",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair of returned file timeout: package the universally characterized K-flat derived pair as LocalReductionDerivedData and project its functor and explicitly typed counit, avoiding repeated nested choice reduction. Reuse the currently recorded intrinsic-completion and sequential-limit interfaces. All canonical normalizations, conclusion clauses and small-site universes are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-96debb9c6",
+  "group": "NU",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, declarations, edge cases, report sections, and scompile.py sandbox/library compilation all checked successfully."
  }
 }
