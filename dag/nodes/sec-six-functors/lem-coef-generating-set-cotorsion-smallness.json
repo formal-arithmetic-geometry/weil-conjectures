@@ -22,7 +22,8 @@
   "place": "Agent-formulated generic smallness/filtration tool for proof paragraph 2. WANTED: Saorin and Stovicek, On exact categories and applications to triangulated adjoints and model structures, arXiv:1005.3248v2, Proposition 2.7, Theorem 2.13 and Corollary 2.15; Gillespie, A Quillen Approach to Derived Categories and Tensor Products, arXiv:math/0607769, Lemma 3.4. Both read online, not archived. No Stacks tag states the strongly homological-set construction."
  },
  "stmt_deps": [
-  "def-sp-grothendieck-abelian"
+  "def-sp-grothendieck-abelian",
+  "lem-coef-small-cotorsion-model-recognition"
  ],
  "proof": [
   {
@@ -292,5 +293,23 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-d037209c0 (reviewer sub-agent of L); spot-checked: Read the item, all eleven steps, the new node, cited statements, and relevant sources. Mathematics, hypotheses, filtrations, edge cases, and dependency closure check out; no duplicate or restated split found. Corrected only missing new-node provenance/bookkeeping fields under fixes/dag/nodes. Full findings are in review.md; no target statements changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-611537c05",
+  "group": "NF",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, Lean module, docstrings, edge cases, report sections, and universes. scompile.py passed sandbox and library compiles with only the permitted sorry; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GeneratingSetCotorsionSmallness",
+  "declaration": "CategoryTheory.Cotorsion.complete_small_of_set_cogenerated",
+  "file": "lean/Sheaf/CategoryTheory/GeneratingSetCotorsionSmallness.lean",
+  "statement": "theorem complete_small_of_set_cogenerated {B : Type u} [Category.{v} B] [Abelian B] [IsGrothendieckAbelian.{v} B] {ι : Type v} (S : ι → B) (T L : ObjectProperty B) (G : B) (hT : ∀ V : B, T V ↔ ∀ s : ι, ExtOneOrthogonal (S s) V) (hL : ∀ U : B, L U ↔ ∀ V : B, T V → ExtOneOrthogonal U V) (hG : L G) (hgen : ∀ X : B, ∃ (H : Type v) (p : (∐ fun _ : H ↦ G) ⟶ X), Epi p) : IsCotorsionPair L T ∧ IsComplete L T ∧ (∃ (I : Type v) (A D : I → B) (i : ∀ s : I, A s ⟶ D s), (∀ s : I, Mono (i s) ∧ (Nonempty (cokernel (i s) ≅ G) ∨ ∃ t : ι, Nonempty (cokernel (i s) ≅ S t))) ∧ (MorphismProperty.ofHoms i).rlp = epimorphismsWithKernel T) ∧ (∀ X : B, L X ↔ ∃ Y : B, Nonempty (Retract X Y) ∧ ∃ (J : Type v) (_ : LinearOrder J) (_ : OrderBot J) (_ : SuccOrder J) (_ : WellFoundedLT J), ∃ c : MorphismProperty.TransfiniteCompositionOfShape (monomorphismsWithCokernel (fun Q : B ↦ Nonempty (Q ≅ G) ∨ ∃ s : ι, Nonempty (Q ≅ S s))) J (0 : (0 : B) ⟶ Y), ∀ j : J, Mono (c.incl.app j))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
