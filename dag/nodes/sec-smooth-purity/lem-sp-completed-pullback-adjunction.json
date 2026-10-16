@@ -26,9 +26,102 @@
   "def-pur-sheaf-tensor-product",
   "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=u^{-1}$ and $G=u_*$ on constant-$A$ module sheaves. The ring identification in the statement makes the tensor-formula adjunction of [lem-weil-pbc-ringed-topoi-module-adjunction] precisely $F\\dashv G$, with $F$ exact. Thus $F$ preserves acyclic complexes and quasi-isomorphisms, and its termwise functor descends to $Lu^*$. For a complex $N$, choose a functorial K-injective resolution $N\\to J$ by [prop-pur-kinjective-resolutions-exist]. Since $F$ is exact, [lem-weil-pbc-right-adjoint-preserves-kinjective] says $GJ$ is K-injective. For every complex $M$, the termwise adjunction respects differentials and chain homotopies, giving\n$$\\operatorname{Hom}_{D(\\mathcal D,A)}(FM,N)=\\operatorname{Hom}_{K(\\mathcal D,A)}(FM,J)\\cong\\operatorname{Hom}_{K(\\mathcal C,A)}(M,GJ)=\\operatorname{Hom}_{D(\\mathcal C,A)}(M,Ru_*N).$$\nThe two outer bijections are [lem-weil-pbc-kinjective-hom-derived]. The termwise adjunction is natural, and the functorial resolution and localization preserve these naturality equations. This fixes the ordinary derived adjunction, without any boundedness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; exact constant-coefficient specialization; derived.tex Tags 08BJ and 070I"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-noetherian-ring], choose a finite generating list $a_1,\\ldots,a_r$ of $I$, allowing the empty list when $I=0$. On each site apply [lem-weil-pbc-ringed-koszul-completion-reflector] to $\\mathcal O=\\underline A$ and these global sections. Its local completeness condition is exactly the condition in the item, and its unit $\\eta_K$ gives the natural reflector Hom bijection. The last paragraph of [lem-weil-pbc-constant-completion-equivalence], specialized to $\\mathcal O=\\underline A$, identifies this Koszul reflector with $R\\lim_{n\\geq1}(K\\otimes^L_A\\underline{A/I^n})$, respecting the unit. This proves the asserted quotient-tower model and completion map; no change of coefficient ring is needed here.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M, lemma-naive-completion, proof: finite generators and Koszul/quotient comparison"
+   }
+  },
+  {
+   "text": "For a global scalar $a\\in A$, let $X(H,a)$ be the strict constant tower on a representative of $H$, with every transition multiplication by $a$, and put $T(H,a)=R\\lim X(H,a)$. These are independent of the representative since a quasi-isomorphism induces a levelwise quasi-isomorphism of strict towers. We compute restriction using the strict-tower derived-limit convention of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. By [lem-pur-site-restriction-module-adjunction-exact], restriction $j_U^*$ is exact and has an exact left adjoint $j_{U!}$. Apply both functors levelwise to towers. Their adjunction is still an adjunction: the levelwise adjuncts satisfy the transition equations because the original Hom bijections are natural in both variables. Exactness is levelwise. Thus [lem-weil-pbc-right-adjoint-preserves-kinjective] says that levelwise $j_U^*$ preserves K-injective tower complexes. For a K-injective tower resolution $X(H,a)\\to Q_\\bullet$, its restriction is therefore a K-injective resolution of $X(H|_U,a|_U)$. Moreover $j_U^*$ commutes with underived inverse limits: maps $B\\to j_U^*\\lim Q_n$ correspond successively to maps $j_{U!}B\\to\\lim Q_n$, compatible families $j_{U!}B\\to Q_n$, and compatible families $B\\to j_U^*Q_n$. Applied in every complex degree this proves, on these actual resolutions,\n$$T(H,a)|_U=j_U^*\\lim Q_n\\cong\\lim j_U^*Q_n=T(H|_U,a|_U).$$\nThe comparison respects the scalar transitions because restriction sends the map $a$ to $a|_U$. By [lem-weil-pbc-local-hom-tower-criterion], $T(H,a)=0$ is consequently equivalent to vanishing of $R\\mathcal Hom_{\\underline A_U}(\\underline A_U[1/a],H|_U)$ for every $U$. For the reverse implication the restrictions of $T(H,a)$ vanish. Since restriction is exact, the restriction of every cohomology sheaf is zero; a section over $U$ is then zero by evaluation at the terminal object $U\\to U$ of the slice. Thus all cohomology sheaves vanish, and the map $0\\to T(H,a)$ is a quasi-isomorphism, hence becomes invertible in [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-local-hom-tower-criterion",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, lemma-hom-from-Af, applied on every slice; sites-modules.tex Tag 03DJ, lemma-extension-by-zero; sites-cohomology.tex Tag 0941, lemma-derived-limit-is-ok; exact levelwise restriction computation supplied explicitly."
+   }
+  },
+  {
+   "text": "Let $N$ be derived $I$-complete on $\\mathcal D$. For each generator $a_i$ chosen in Step 2, Step 3 gives $T(N,a_i)=0$. Apply [lem-weil-ringed-tower-pushforward-limit-comparison] to its multiplication tower. Using the functorial K-injective representative $J$ of Step 1, represent this tower by $X=X(J,a_i)$ and take a K-injective tower resolution $X\\to Q_\\bullet$ to compute $Ru_*^{\\operatorname{Tow}}X$. Evaluation at $n$ has an exact left adjoint: it sends a module $B$ to the tower with $B$ in positions $1,\\ldots,n$, identity transitions there, and zero in higher positions. Its adjunction follows since a tower map out of this tower is uniquely determined by its $n$th component, and it is exact because tower exactness is levelwise. Thus [lem-weil-pbc-right-adjoint-preserves-kinjective] makes every $Q_n$ K-injective. Each $J\\to Q_n$ is a quasi-isomorphism between K-injective complexes, hence a homotopy equivalence by [lem-weil-pbc-kinjective-hom-derived]. Applying the additive functor $u_*$ preserves its homotopy inverse and the homotopy equations. Therefore the actual tower map $u_*^{\\operatorname{Tow}}X\\to u_*^{\\operatorname{Tow}}Q_\\bullet$ is a levelwise quasi-isomorphism, and represents an isomorphism to $Ru_*^{\\operatorname{Tow}}X$. This identifies the whole tower, including transitions, with the multiplication tower of $Ru_*N$. Constant-$A$ direct image is $A$-linear, so the transitions are exactly multiplication by $a_i$, not merely unspecified maps between isomorphic objects. The cited comparison gives\n$$T(Ru_*N,a_i)\\cong Ru_*T(N,a_i)=0.$$\nStep 3 implies vanishing of the localized derived internal Hom for each $a_i$ on every slice of $\\mathcal C$. The sheaf-of-ideals assertion [lem-weil-pbc-ringed-derived-complete-elements-ideal] then gives the same vanishing for every local section of $I\\underline A$: that ideal sheaf is locally generated by the $a_i$. Thus $Ru_*N$ is derived $I$-complete. This argument uses no projection formula for $A/I^n$ and no hypothesis that those quotients are perfect.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099J, lemma-pushforward-derived-complete, preservation assertion; multiplication-tower proof via Tag 0997 and sites-cohomology.tex Tag 0A07, lemma-Rf-commutes-with-Rlim"
+   }
+  },
+  {
+   "text": "Write $F=Lu^*$, $G=Ru_*$, and $C=C_{\\mathcal D}$. For $M\\in D_{\\mathrm{comp}}(\\mathcal C,A)$ and $N\\in D_{\\mathrm{comp}}(\\mathcal D,A)$, Step 2 and then Step 1 give\n$$\\operatorname{Hom}(CFM,N)\\xrightarrow{\\ h\\mapsto h\\eta_{FM}\\ }\\operatorname{Hom}(FM,N)\\xrightarrow{\\sim}\\operatorname{Hom}(M,GN).$$\nBoth bijections are natural. Step 4 makes $GN$ an object of the source complete category; since both complete categories are full subcategories, these are their actual Hom sets. The composite is the required adjunction $CF\\dashv G$ on complete objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099K, lemma-pushforward-derived-complete-adjoint, displayed Hom bijections"
+   }
+  },
+  {
+   "text": "Let $\\alpha:\\mathrm{id}\\to GF$ and $\\beta:FG\\to\\mathrm{id}$ be the unit and counit of Step 1, and let $\\eta:\\mathrm{id}\\to C$ be the completion unit of Step 2. The new unit at $M$ is\n$$M\\xrightarrow{\\alpha_M}GFM\\xrightarrow{G\\eta_{FM}}GCFM.$$\nIt is the image of $\\mathrm{id}_{CFM}$ under the composite bijection of Step 5. The new counit at a complete $N$ is the unique map $e_N:CFGN\\to N$ with\n$$e_N\\eta_{FGN}=\\beta_N;$$\nexistence and uniqueness are the reflector bijection. It is the inverse image of $\\mathrm{id}_{GN}$ under Step 5. Naturality of $\\alpha$ and $\\eta$ gives naturality of the new unit. For a map $t:N\\to N'$ of complete objects, precomposing both $t e_N$ and $e_{N'}CFG(t)$ with $\\eta_{FGN}$ gives $t\\beta_N=\\beta_{N'}FG(t)$; uniqueness in the reflector bijection gives their equality. Finally the two triangle identities are the inverse-bijection identities of Step 5 applied to identity maps. Thus this is precisely the adjunction normalized by the two specified Hom bijections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099K, lemma-pushforward-derived-complete-adjoint, universal-property argument with explicit unit and counit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-noetherian-ring",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-local-hom-tower-criterion",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099M and 099N, clauses (1),(2), with the reflector/Hom route of algebraization.tex Tag 099K. Steps 3–4 supply an explicit multiplication-tower proof of preservation using Tags 0997, 0998 and sites-cohomology.tex 0A07; Steps 5–6 expand the universal-property adjunction and normalization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -120,15 +213,128 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc",
    "date": "2026-10-15",
    "verdict": "no exact match: the actual hits concern ordinary sheaf/structure-module adjunctions, abstract derived adjunctions or local-cohomology diagrams; none gives the derived-completion or strict proper/open interface"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*completion|completion.*derived|derivedComplete|local.hom.tower",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no exact match: abstract derived adjunction requires derived-functor data; it gives neither the completion reflector nor local derived-completeness preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact adjunction induces an adjunction on unbounded derived categories computed using K injective resolutions",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "date": "2026-10-16",
+   "verdict": "no exact match: abstract derived adjunction requires derived-functor data; it gives neither the completion reflector nor local derived-completeness preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"derived\"",
+   "results": "12 hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+   "date": "2026-10-16",
+   "verdict": "no exact match: abstract derived adjunction requires derived-functor data; it gives neither the completion reflector nor local derived-completeness preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right derived functor of a right adjoint preserves local derived adic completeness and completed inverse image is its left adjoint",
+   "results": "8 hits: CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_of_isIso; CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit; CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison",
+   "date": "2026-10-16",
+   "verdict": "no exact match: abstract derived adjunctions require the derived-functor data; reflectorAdjunction assumes reflectivity, and none supplies the local adic-completion reflector and preservation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"reflector\"",
+   "results": "3 hits: CategoryTheory.coreflectorAdjunction; CategoryTheory.reflectorAdjunction; DeltaGenerated.coreflectorAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no exact match: abstract derived adjunctions require the derived-functor data; reflectorAdjunction assumes reflectivity, and none supplies the local adic-completion reflector and preservation theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "adic|DerivedComplete|derivedComplete|completionAdjunction",
+   "results": "25 hits: Mathlib/NumberTheory/PellMatiyasevic.lean; Mathlib/NumberTheory/SumTwoSquares.lean; Mathlib/NumberTheory/SumTwoSquares.lean; Mathlib/NumberTheory/SumTwoSquares.lean; Mathlib/NumberTheory/SumTwoSquares.lean; Mathlib/NumberTheory/SumTwoSquares.lean; Mathlib/NumberTheory/SumFourSquares.lean; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match: broad adic search found ordinary padic and completion vocabulary only"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedComplete|derivedComplete|completionAdjunction|[Dd]erived.{0,20}[Cc]omplet",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: no derived-completeness/completion-adjunction declaration"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "fix-lem-exchanges",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sp-completed-pullback-adjunction",
+  "worker": "stage1",
+  "summary": "Six steps give the ordinary K-injective adjunction, quotient completion reflector, global/local strict-tower criterion, preservation of completeness, restricted Hom bijection and explicit normalized unit/counit. Second reading computes restriction on K-injective strict towers and supplies an actual levelwise quasi-isomorphism for the derived image of multiplication towers. No new nodes or statement changes.",
+  "blueprint": "Realizes fix-lem-exchanges Proof Steps 2 and 3 at the integral coefficient stage: completion reflector and ordinary derived adjunction, preservation of the complete domain, and the normalized unit/counit needed for mate calculus.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "The ordinary module adjunction is a generic tool needed for Step 1. No statement of this compact-support unit supplies that foundational interface."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Unbounded resolutions on arbitrary small ringed sites are needed in Step 1. No statement of this compact-support unit supplies that foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Step 2 needs the generic ringed-site completion reflector, rather than a pro-etale special case. No statement of this compact-support unit supplies that foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Step 2 uses its constant-coefficient Koszul/quotient comparison, including its unit. No statement of this compact-support unit supplies that foundational interface."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Step 3 needs the generic exact extension/restriction adjunction on slice sites. No statement of this compact-support unit supplies that foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Step 3 needs the strict-tower K-injective realization of total derived inverse limit on arbitrary ringed sites. No statement of this compact-support unit supplies that foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-local-hom-tower-criterion",
+    "why": "Step 3 uses the general ringed-site multiplication-tower/localized-Hom criterion. No statement of this compact-support unit supplies that foundational interface."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Step 4 needs direct image commuting with strict derived limits for arbitrary ringed topoi. No statement of this compact-support unit supplies that foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+    "why": "Step 4 passes from global ideal generators to every local ideal section. No statement of this compact-support unit supplies that foundational interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-local-hom-tower-criterion",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-ringed-derived-complete-elements-ideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N2-df3b987dc",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-df3b987dc (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, unit/chapter route, and cited sources. All six steps are valid, including strict-tower preservation and normalized unit/counit. No new nodes, missing dependencies, cycles back to the item, or target weakening found. Accepted nine declared generic tool uses. Concrete source checks and edge cases are recorded in review.md."
+ }
 }
