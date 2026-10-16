@@ -3,38 +3,280 @@
  "blueprint": {
   "is": "lem-sf-hom-finite-projective",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-pod-finite-projective-tensor-hom"
+  ]
  },
  "kind": "statement",
  "title": "Internal Hom with a finite projective module",
- "statement": "In the setting of [def-sf-datum], let $P$ be a finite projective\n$\\Lambda_X$-module on the site of $X$, put\n$P^\\vee=\\mathcal H om_X(P,\\Lambda_X)$, and let\n$N\\in D^b_{ctf}(X,\\Lambda)$. Then the canonical map\n$P^\\vee\\otimes^L_{\\Lambda_X}N\\to R\\mathcal H om_X(P,N)$ of the\ntensor–internal-Hom adjunction is an isomorphism, natural in $P$ and $N$,\nand the canonical map $P\\to P^{\\vee\\vee}$ is an isomorphism.",
+ "statement": "Fix primes $p$ and $\\ell\\ne p$, an integer $a\\geq1$, $q=p^a$, and $k=\\overline{\\mathbf F}_q$. Fix a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and an integer $n\\geq1$; put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Let $X$ be a separated finite-type $k$-scheme, in the geometric domain of the operation datum [def-fix-six-functor-datum] (separated and finite type as in [def-weil-proper-morphism, def-weil-finite-type-morphism]), equipped with the coefficient category $D^b_{ctf}(X,\\Lambda)$ of a six-functor datum [def-sf-datum], whose tensor and internal-Hom operations are those specified below. Let $P$ be a finite projective\n$\\Lambda_X$-module on the site of $X$, put\n$P^\\vee=\\mathcal H om_X(P,\\Lambda_X)$, and let\n$N\\in D^b_{ctf}(X,\\Lambda)$. Then the canonical map\n$P^\\vee\\otimes^L_{\\Lambda_X}N\\to R\\mathcal H om_X(P,N)$ of the\ntensor–internal-Hom adjunction is an isomorphism, natural in $P$ and $N$,\nand the canonical map $P\\to P^{\\vee\\vee}$ is an isomorphism. Here finite projective has the local sheaf meaning: every object of the coefficient site has a covering on each member of which $P$ is a direct summand of $\\Lambda_X^{\\oplus r}$ for some finite $r\\geq0$, with ranks allowed to vary. At the integral stage the coefficient sheaf is completed, and at rational and algebraically closed stages use the scalar-localization and common-stage conventions of [def-weil-site-perfect-complex] in degree zero and the operations of [def-weil-derived-pullback-tensor-hom]. For finite and integral coefficients $\\mathcal H om$ is ordinary sheaf Hom [def-pur-sheaf-hom]. At the two field stages $P^\\vee$ and $P^{\\vee\\vee}$ are interpreted by the corresponding coefficient internal-Hom functor into the unit in the scalar-localized/common-stage category; their local degree-zero finite-projective presentations use the displayed ordinary dual formula. This does not mean modules over a discrete constant field sheaf. All sites are taken small in the universe of [def-weil-size-convention].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.md",
   "place": "node lem-sf-hom-finite-projective, order 2082"
  },
  "stmt_deps": [
-  "def-sf-datum"
+  "def-sf-datum",
+  "def-weil-site-perfect-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-sheaf-hom",
+  "def-weil-size-convention",
+  "def-fix-six-functor-datum",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
  ],
  "proof": [
   {
-   "text": "For $P=\\Lambda_X^r$ finite free the displayed map is the coordinate\nidentification of $N^{\\oplus r}$ with itself and $P\\to P^{\\vee\\vee}$ is the\nidentity. Both constructions are exact functors of $P$ and preserve direct\nsummands, a retract being preserved by the internal Hom and by the tensor\nproduct with the canonical maps inherited by the retraction. The assertions\nare local on the site and stable under restriction, so they hold for a\ngeneral finite projective $P$, which is locally a direct summand of a finite\nfree module; naturality in $N$ is the naturality of the tensor and\ninternal-Hom functors of [def-weil-derived-pullback-tensor-hom].",
+   "text": "First work with an arbitrary small ringed site $(\\mathcal C,R)$ and ordinary derived tensor; this includes finite coefficients and the ambient ringed site of completed integral coefficients. Write $D(P)=\\mathcal Hom_R(P,R)$. The local sheaf meaning of the hypothesis supplies, over a cover of every object, maps $i:P\\to F=R^{\\oplus r}$ and $p:F\\to P$ with $pi=1$. Restriction to a slice is exact, so it commutes with cohomology, and ordinary Hom restricts by its defining slice formula. Sheaf tensor restricts by the module-pullback tensor comparison. For derived tensor choose K-flat resolutions with flat terms of both factors; the pullback-preserves-K-flat lemma applied to slice restriction says their restrictions are again such resolutions. The ringed-site derived-tensor descent theorem identifies the ordinary tensor of these resolutions with the derived tensor, naturally in both variables, so the module tensor restriction comparison computes the derived one. Derived internal Hom restricts by the ringed internal-Hom restriction lemma. Thus all comparisons used below restrict to the corresponding comparisons on slices. A complex whose cohomology sheaves vanish on a cover of every object is acyclic: every section of each cohomology sheaf restricts to zero on that cover, and is zero by the sheaf separatedness axiom. This is the local test we will use, and does not assume that $P$ is projective for global Hom.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom"
+    "def-weil-size-convention",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-hom",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-site-derived-tensor-descent"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U), 0G7E (lemma-pullback-K-flat), 06YS (lemma-K-flat-resolution); sites-modules.tex Tags 03DJ and 03EL; blueprint locality sentence"
+   }
+  },
+  {
+   "text": "For $F=R^{\\oplus r}$ and any module sheaf $B$, evaluating a linear map on the standard basis gives $D(F)=R^{\\oplus r}$ and $\\mathcal Hom_R(F,B)=B^{\\oplus r}$ on every slice. The additive tensor functor gives $D(F)\\otimes_R B=B^{\\oplus r}$. The map $c_{F,B}:D(F)\\otimes_R B\\to\\mathcal Hom_R(F,B)$ is the identity in these coordinates: $\\phi\\otimes b$ sends $x$ to $\\phi(x)b$, and $e_j^*\\otimes b$ has value $b$ on $e_j$ and zero on the other basis elements. Its inverse sends $h$ to $\\sum_{j=1}^r e_j^*\\otimes h(e_j)$. The bidual map $\\delta_F:F\\to D^2(F)$ sends $x$ to $(\\phi\\mapsto\\phi(x))$ and is the identity in the double-dual bases. These are sheaf maps since restricting sections commutes with all these formulas. They include $r=0$: both sides are zero. The tensor-Hom adjunction identifies $c_{F,B}$ with the map obtained by evaluating $D(F)$ on $F$ and multiplying the result on $B$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04TT (section-internal-hom) and 03EO (lemma-internal-hom-adjoint-tensor); sites-cohomology.tex Tag 08JJ (lemma-dual-perfect-complex), final finite-free calculation; blueprint finite-free sentence"
+   }
+  },
+  {
+   "text": "For the displayed summand $P$ of $F$, define $A_B(E)=D(E)\\otimes_R B$ and $H_B(E)=\\mathcal Hom_R(E,B)$, both contravariant in $E$. The same evaluation formula defines $c_{E,B}$ for every sheaf $E$. For $u:E\\to E'$ its naturality is the equality $\\phi(u(x))b=(\\phi\\circ u)(x)b$, and for $v:B\\to B'$ it is $v(\\phi(x)b)=\\phi(x)v(b)$. Consequently an inverse to $c_{P,B}$ is\n$$A_B(i)\\,c_{F,B}^{-1}\\,H_B(p).$$\nIndeed $c_{P,B}A_B(i)=H_B(i)c_{F,B}$ and $H_B(p)c_{P,B}=c_{F,B}A_B(p)$; multiplying gives $H_B(i)H_B(p)=H_B(pi)=1$ and $A_B(i)A_B(p)=A_B(pi)=1$. Likewise $D(p):D(P)\\to D(F)$ and $D(i):D(F)\\to D(P)$ split $D(P)$ off $D(F)$. Naturality $D^2(u)\\delta_E=\\delta_{E'}u$ follows by evaluating both sides at a functional. Thus an inverse to $\\delta_P$ is $p\\delta_F^{-1}D^2(i)$: composition in either order reduces to $pi=1$. This proves the ordinary tensor-Hom and ordinary bidual assertions on each splitting slice, with no choice of complement or basis for $P$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ (lemma-dual-perfect-complex), direct-summand reduction, specialized to degree zero; blueprint retraction sentence"
+   }
+  },
+  {
+   "text": "The preceding ordinary maps are defined globally by evaluation, so their local inverses agree on further restrictions (two inverses to the same map are equal), and glue to global inverse sheaf maps. Moreover $D(P)\\otimes_R-$ is exact. On a splitting slice it is a retract, as a functor, of $R^{\\oplus r}\\otimes_R-=(-)^{\\oplus r}$; for any complex $M^\\bullet$ its tensor complex therefore splits off $(M^\\bullet)^{\\oplus r}$. Finite sums commute with kernels and images, and taking the two complementary summands of a split complex commutes with kernels and images as well. Hence, if $M^\\bullet$ is acyclic, so is $D(P)\\otimes_R M^\\bullet$ on each slice, and hence globally by step 1. This proves directly from the definition that $D(P)[0]$ is K-flat. For $P[0]$ the chain maps $i\\otimes1:P\\otimes_R M^\\bullet\\to(M^\\bullet)^{\\oplus r}$ and $p\\otimes1$ have product $1$ on $P\\otimes_R M^\\bullet$, so its cohomology is a summand of $H^j(M^\\bullet)^{\\oplus r}=0$ for every $j$; step 1 gives global acyclicity and hence K-flatness of $P[0]$. Finally $c_{P,-}$ identifies $\\mathcal Hom_R(P,-)$ with the exact functor $D(P)\\otimes_R-$ on sheaves. An exact additive functor commutes with the kernels and images defining cohomology, so it sends quasi-isomorphisms of complexes to quasi-isomorphisms. None of these arguments asks for an exact global-sections functor.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, proof, finite-free/direct-summand argument; Tag 06YN (definition-K-flat); blueprint preservation-of-summands and locality sentences"
+   }
+  },
+  {
+   "text": "Choose a K-flat representative $M^\\bullet$ of $N$ with flat terms using the K-flat resolution theorem, and choose a K-injective resolution $\\alpha:M^\\bullet\\to I^\\bullet$. By the ringed-site derived-tensor descent theorem, applied to the two K-flat, termwise flat complexes $D(P)[0]$ and $M^\\bullet$ (step 4), $D(P)\\otimes_R^L N$ is represented by $D(P)\\otimes_R M^\\bullet$. By the definition of derived internal Hom, $R\\mathcal Hom_R(P,N)$ is represented by $\\mathcal Hom_R(P,I^\\bullet)$. Step 3 in every degree gives the chain isomorphism $c_{P,M}:D(P)\\otimes_R M^\\bullet\\to\\mathcal Hom_R(P,M^\\bullet)$: since $P$ has degree zero, the Hom differential is postcomposition with $d_M$, with no precomposition term, and $d_M(\\phi(x)m)=\\phi(x)d_M(m)$. Postcompose with $\\mathcal Hom_R(P,\\alpha)$, a quasi-isomorphism by step 4. The resulting quasi-isomorphism represents the claimed derived comparison. It is the canonical map in the statement: its uncurried representative sends $(\\phi\\otimes m)\\otimes x$ to $\\alpha(\\phi(x)m)$, which is exactly the ordinary evaluation pairing followed by the resolution map. Currying by the tensor-Hom adjunction and passing to the derived category therefore produces the specified evaluation map, rather than an unspecified isomorphism of the two objects. In particular the ordinary and derived dual of $P$ agree, and the second assertion is the ordinary sheaf map $\\delta_P$ of step 3.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A5 (section-unbounded), 08J7 (section-internal-hom), 0A8X (section-hom-complexes), 06YU (definition-derived-tor), and 08JJ (lemma-dual-perfect-complex), degree-zero specialization"
+   }
+  },
+  {
+   "text": "For maps $u:P\\to P'$ between finite projective sheaves and $v:M^\\bullet\\to (M')^\\bullet$, the two comparison composites on $\\phi\\otimes m$ both give $x\\mapsto\\phi(u(x))v(m)$. This proves the simultaneous contravariant naturality in $P$ and covariant naturality in $N$ on complexes. Functorial K-injective resolutions preserve these equations; passage to localization preserves them as well, including morphisms represented by roofs, since an equality with a quasi-isomorphism also holds after its inverse is inserted. Thus the comparison is natural in the finite-projective module variable $P$ and the derived variable $N$ on the asserted domain. The inverse is natural too, by multiplying the naturality square by the two inverse maps. Restriction preserves the evaluation formulas, so the global sheaf and cohomology local tests of step 1 apply to these particular canonical maps. This completes the proof with ordinary derived tensor on the coefficient ringed site, with no boundedness, constructibility or finite-Tor assumption on the second variable needed for this calculation.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ (lemma-dual-perfect-complex), functorial evaluation isomorphism; blueprint naturality and locality sentences"
+   }
+  },
+  {
+   "text": "At the integral stage put $R=\\widehat{\\mathcal O}_{E,X}$, $R_n=(A_{E,n})_X$, and $N_n=N\\otimes_R^L R_n$. Here $N$ is derived complete. The tensor operation in the coefficient category is the completed one $R\\varprojlim_n\\operatorname{Res}_n((D(P)\\otimes_R R_n)\\otimes^L_{R_n}N_n)$, whereas internal Hom is the ambient ringed-site Hom. On a splitting slice $D(P)$ is a summand of $R^{\\oplus r}$. Reduction tensors the maps of that splitting, preserving their product $1$; the displayed tower is therefore the corresponding summand of $N_n^{\\oplus r}$. The cone model for the derived limit uses sectionwise products and $1-s$. The finite-coordinate bijection $\\prod_n(M_n^{\\oplus r})\\cong(\\prod_nM_n)^{\\oplus r}$ commutes with $1-s$, and hence with its cone and shift. These operations preserve a displayed splitting too, since they preserve compositions and identities. It follows that tensoring by the finite-projective $D(P)$ commutes with this derived-limit model. Apply the finite-free completed-scalar comparison with $L=E$ and $K=N$: its last clause says that the specified canonical completion map $N\\to R\\varprojlim_n\\operatorname{Res}_nN_n$ is an isomorphism. Its hypothesis that $N$ is derived complete holds by the integral coefficient category. Consequently on a free slice the completion comparison is $N^{\\oplus r}\\to(R\\varprojlim_n\\operatorname{Res}_nN_n)^{\\oplus r}$, the $r$-fold sum of that specified canonical map; its inverse goes in the opposite direction. The retraction identities of step 3 restrict this comparison and its inverse to the summand. Thus the natural completion comparison $D(P)\\otimes_R^L N\\to D(P)\\widehat\\otimes_R^L N$ is invertible. Restrictions preserve the sectionwise products and cones, and are exact, so this verification is local on the site. Composing its inverse with step 5 gives the integral comparison. The evaluations agree before and after completion: choose the flat K-flat representative $M^\\bullet$ of step 5 and the strict reductions $M_n^\\bullet=M^\\bullet\\otimes_R R_n$ in the operations definition. At level $n$ both evaluations send $\\bar\\phi\\otimes m_n$ and $\\bar x$ to $\\bar\\phi(\\bar x)m_n$, as equal chain maps, and these equalities commute strictly with the reduction maps. On a free slice the completion map is the finite sum of the canonical strict-cone maps of the completed-scalar comparison (each has zero shifted-product component); the coordinate evaluation commutes with both product components and $1-s$. The two composites are therefore equal maps of the strict cone models themselves. Inserting $i,p$ gives the identical equality on the summand. After inversion of the completion map this identifies step 5 with the specified completed tensor-Hom comparison; it does not infer equality of derived maps merely from equality of their reductions. Biduality remains the ordinary biduality of the completed ring sheaf proved above.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-complete",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.11, Lemma 3.4.12 and Definition 3.5.2, pp. 22-24; integral finite-free/summand specialization of the blueprint calculation"
+   }
+  },
+  {
+   "text": "At the rational stage the operations on integral representatives and their maps are rationalized as specified in the coefficient-operations definition. Applying rationalization to an inverse preserves both inverse equations, so the finite-free calculation and its canonical evaluation description persist. For an actual splitting of $P$ in the localized category one uses that splitting itself in the inverse formula of step 3; that formula is an identity of composites of functorial maps and does not require lifting its idempotent or splitting to the integral category. Explicitly, with $A_N(T)=D(T)\\otimes^L N$ and $H_N(T)=R\\mathcal Hom(T,N)$ in the localized category, the inverse on each splitting slice is $A_N(i)c_{F,N}^{-1}H_N(p)$; naturality of evaluation reduces both composites to the image of $pi=1$. The bidual inverse there is $p\\delta_F^{-1}D^2(i)$, whose two composites are $1$ by naturality of $\\delta$. These are the canonical comparison and bidual maps restricted to that slice. Here one must justify local detection after rationalization, rather than apply the ordinary-module test of step 1 directly to a raw scalar localization. The field $k$ is Noetherian because its only ideals are $0,k$. The locally-Noetherian finite-type lemma applies to $X\\to\\operatorname{Spec}k$, and the qcqs-over-affine lemma gives quasi-compactness of $X$. Choose a finite subcover from the locally Noetherian affine cover: $X$ is Noetherian. The finite-type dimension lemma gives finite dimension; $\\ell$ is a unit in $k$ and hence on $X$. The integral stratified-perfect characterization therefore identifies the integral category here with the completed constructible category used in the existing condensed-E realization theorem, with exactly the same ring sheaf and reductions. Their raw rationalizations agree on objects and Hom groups. That theorem supplies a fully faithful equivalence $J_X$, induced by derived extension of scalars to the continuous $E$ ring sheaf, into a full subcategory of the derived category of sheaves of modules. For a slice, restriction of this derived scalar extension is scalar extension of the restriction: restrict flat K-flat representatives and use the tensor restriction comparison of step 1. On a fractional arrow $u/\\varpi^b$ both orders give $\\varpi^{-b}$ times the restricted scalar extension of $u$. This defines the needed scalar-extension functor on the raw localized slice category, whether or not the slice scheme is of finite type. Thus a rational morphism whose restrictions are invertible has $J_X$-image locally invertible. The cone of that image has locally zero cohomology sheaves, hence is zero by the separatedness test of step 1; its image is invertible. Full faithfulness of $J_X$ reflects this: lift the image inverse and use faithfulness on its two composites. Apply this to the two displayed rational maps. This proves the rational assertions without asserting that raw rationalization automatically has sheaf descent or identifying it with discrete constant-field sheaves. At the algebraically closed stage the finite projective input, the second variable, and the maps in these finite formulas are represented over a common finite extension. Use the coefficient-operation scalar-extension comparisons to put them over that extension. They carry evaluation to evaluation: this holds on a free presentation by the formula $\\phi(x)m$, and for a summand follows by inserting its maps $i,p$ into that formula. Consequently the isomorphisms just proved are the specified canonical maps at the common stage. Their inverse identities and naturality equations remain identities after any further scalar extension, and hence in the directed colimit of Hom groups defining the algebraically closed coefficient category. These are exactly the scalar-localization and common-stage constructions of the datum, so no equivalence with a different coefficient category is used.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-site-perfect-complex",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-pur-integral-operations-scalar-extension",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "def-weil-pbc-condensed-e-module-category",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.md",
+    "place": "Proof, finite-free identity, preservation by retractions, and naturality, interpreted with the rationalization/common-stage conventions; coefficient operations definition and scalar-extension comparisons; Bhatt–Scholze Proposition 6.8.14(2), pp. 61–62, via the existing realization and integral-category identification nodes, for rational local detection"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-size-convention",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-hom",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-site-perfect-complex",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-integral-operations-scalar-extension",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-condensed-e-realization",
+  "def-weil-pbc-condensed-e-module-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-finite-projective.md",
-  "place": "## Proof"
+  "place": "Expanded finite-free, direct-summand, restriction and naturality argument; ringed-site calculation follows Stacks Tag 08JJ (sites-cohomology.tex, lemma-dual-perfect-complex), with explicit completed and formal rational coefficient interpretations."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|instIsReflexiveOfFiniteOfProjective|derivedInternalHom|rhom",
+   "results": "25 hits; Mathlib/LinearAlgebra/CliffordAlgebra/Equivs.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary modules, underived/light-condensed internal Hom, or unrelated names; none states the ringed-site derived comparison and ordinary sheaf biduality with these coefficient conventions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of a finite projective sheaf equals tensor product with its dual",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite projective sheaf of modules P on a ringed site, derived internal Hom from P equals tensor product with its dual and P is canonically isomorphic to its double dual",
+   "results": "8 hits; LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.ihomPoints, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary modules, underived/light-condensed internal Hom, or unrelated names; none states the ringed-site derived comparison and ordinary sheaf biduality with these coefficient conventions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Module.Finite",
+   "results": "12 hits; IsAzumaya.mk, Module.Finite.exists_comp_eq_id_of_projective, Module.instIsReflexiveOfFiniteOfProjective, Module.dual_finite, Module.dual_projective, dualTensorHomEquiv, dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv, lTensorHomEquivHomLTensor",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary modules, underived/light-condensed internal Hom, or unrelated names; none states the ringed-site derived comparison and ordinary sheaf biduality with these coefficient conventions"
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|instIsReflexiveOfFiniteOfProjective",
+   "results": "12 hits; Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Dual/Defs.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary modules, underived/light-condensed internal Hom, or unrelated names; none states the ringed-site derived comparison and ordinary sheaf biduality with these coefficient conventions"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|[Rr][Hh]om|[Kk][Ff]lat",
+   "results": "13 hits; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary modules, underived/light-condensed internal Hom, or unrelated names; none states the ringed-site derived comparison and ordinary sheaf biduality with these coefficient conventions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dualizable sheaf module tensor dual is internal Hom derived category finite locally free double dual evaluation isomorphism",
+   "results": "8 hits; LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_apply, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedLightCondMod, FGModuleCat.FGModuleCatCoevaluation, LightCondensed.ihomPoints_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary modules, underived/light-condensed internal Hom, or unrelated names; none states the ringed-site derived comparison and ordinary sheaf biduality with these coefficient conventions"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bderivedInternalHom\\b|\\bRHom\\b|\\bIsKFlat\\b|\\bKFlat\\b",
+   "results": "0 hits; none",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary modules, underived/light-condensed internal Hom, or unrelated names; none states the ringed-site derived comparison and ordinary sheaf biduality with these coefficient conventions"
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def dualTensorHomEquiv|instance.*IsReflexive|dual_projective|dual_finite",
+   "results": "12 hits; Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Defs.lean, Mathlib/LinearAlgebra/Dual/Defs.lean, Mathlib/LinearAlgebra/Dual/Defs.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary modules, underived/light-condensed internal Hom, or unrelated names; none states the ringed-site derived comparison and ordinary sheaf biduality with these coefficient conventions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite projective sheaf internal Hom tensor dual biduality",
+   "results": "8 hits; LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.ihomPoints, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module duality and light-condensed closedness do not state the ringed-site derived and completed/common-stage comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizable|IsDualizable|dualTensorHomEquiv",
+   "results": "0 hits in Mathlib/Algebra/Category/ModuleCat/Sheaf/.",
+   "date": "2026-10-16",
+   "verdict": "no match in the sheaf-module source directory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualTensorHomEquiv\"",
+   "results": "12 hits; dualTensorHomEquivOfBasis, dualTensorHomEquiv, dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv, dualTensorHomEquiv_eq_dualTensorHomEquivOfBasis, dualTensorHomEquivOfBasis_toLinearMap, toLinearMap_dualTensorHomEquiv, dualTensorHomEquiv_tmul, coe_dualTensorHomEquivOfBasis",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module duality and light-condensed closedness do not state the ringed-site derived and completed/common-stage comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -57,5 +299,109 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-rf-shriek-preservation"
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-hom-finite-projective",
+  "worker": "stage1",
+  "summary": "Expanded the imported one-paragraph argument into eight steps: exact localization of the derived models, free coordinates, explicit inverses on summands, K-flatness and exact internal Hom, the canonical derived evaluation map, naturality, completed integral tensor, and formal rational/common-stage coefficients. Clarified the local finite-projective convention without changing the hypotheses or conclusions. No new nodes; reused all required existing notions and generic tools. No exact project attachment or Mathlib leaf found. Second reading makes the inherited separated finite-type scheme domain explicit and supplies the previously missing rational local-conservativity argument through existing integral characterization and fully faithful continuous-coefficient realization, with their geometric hypotheses verified.",
+  "blueprint": "Proof sentence 1 is realized in step 2; preservation of summands in steps 3-5; restriction/locality in steps 1, 4 and 6; naturality in steps 3 and 6. Steps 7-8 make the coefficient-stage conventions of def-sf-datum explicit, without replacing any step of the exceptional-pullback preservation unit.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-site, homological-algebra or coefficient-construction input to the finite-free/summand argument. Its statement supplies the property explicitly invoked; no node of the exceptional-pullback preservation unit states this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic ringed-site, homological-algebra or coefficient-construction input to the finite-free/summand argument. Its statement supplies the property explicitly invoked; no node of the exceptional-pullback preservation unit states this general tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site, homological-algebra or coefficient-construction input to the finite-free/summand argument. Its statement supplies the property explicitly invoked; no node of the exceptional-pullback preservation unit states this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ringed-site, homological-algebra or coefficient-construction input to the finite-free/summand argument. Its statement supplies the property explicitly invoked; no node of the exceptional-pullback preservation unit states this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ringed-site, homological-algebra or coefficient-construction input to the finite-free/summand argument. Its statement supplies the property explicitly invoked; no node of the exceptional-pullback preservation unit states this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site, homological-algebra or coefficient-construction input to the finite-free/summand argument. Its statement supplies the property explicitly invoked; no node of the exceptional-pullback preservation unit states this general tool."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic ringed-site, homological-algebra or coefficient-construction input to the finite-free/summand argument. Its statement supplies the property explicitly invoked; no node of the exceptional-pullback preservation unit states this general tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site, homological-algebra or coefficient-construction input to the finite-free/summand argument. Its statement supplies the property explicitly invoked; no node of the exceptional-pullback preservation unit states this general tool."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic ringed-site, homological-algebra or coefficient-construction input to the finite-free/summand argument. Its statement supplies the property explicitly invoked; no node of the exceptional-pullback preservation unit states this general tool."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Generic ringed-site, homological-algebra or coefficient-construction input to the finite-free/summand argument. Its statement supplies the property explicitly invoked; no node of the exceptional-pullback preservation unit states this general tool."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic ringed-site, homological-algebra or coefficient-construction input to the finite-free/summand argument. Its statement supplies the property explicitly invoked; no node of the exceptional-pullback preservation unit states this general tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic ringed-site, homological-algebra or coefficient-construction input to the finite-free/summand argument. Its statement supplies the property explicitly invoked; no node of the exceptional-pullback preservation unit states this general tool."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic geometric or coefficient-realization tool used only to justify local detection of the rational finite-free/summand comparison; it does not replace any exceptional-inverse-image unit step."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic geometric or coefficient-realization tool used only to justify local detection of the rational finite-free/summand comparison; it does not replace any exceptional-inverse-image unit step."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic geometric or coefficient-realization tool used only to justify local detection of the rational finite-free/summand comparison; it does not replace any exceptional-inverse-image unit step."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic geometric or coefficient-realization tool used only to justify local detection of the rational finite-free/summand comparison; it does not replace any exceptional-inverse-image unit step."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-e-realization",
+    "why": "Generic geometric or coefficient-realization tool used only to justify local detection of the rational finite-free/summand comparison; it does not replace any exceptional-inverse-image unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-operations-scalar-extension",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-condensed-e-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-b1bb324c2",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-b1bb324c2 (reviewer sub-agent of L); spot-checked: Read all required instructions, the item, unit/chapter route, every proof step and cited DAG statement, the exact master blueprint, Stacks Tags 08JJ/08JI/08JB/08J7/06YU/06YS/0G7E, and Bhatt–Scholze pp. 22–24. Checked edge cases, coefficient stages, completed-tensor base change, rational/common-stage categories, citations, searches, duplicates, and route consistency. No repairs needed; review written to review.md."
+ }
 }
