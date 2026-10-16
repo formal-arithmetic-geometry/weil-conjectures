@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-normalization-extends-cover",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extending a finite cover by normalization",
@@ -14,34 +14,175 @@
  },
  "stmt_deps": [
   "def-fin-normalization-extension",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sc-function-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion"
  ],
  "proof": [
   {
-   "text": "By [lem-fin-etale-normal-components], connectedness\nmakes $P$ normal integral. Its function field is\nfinite over that of $V$, because the map is finite.\nOn an affine open $\\operatorname{Spec}B\\subset V$, write\nits inverse image as $\\operatorname{Spec}D$. Here $D$\nis a normal domain, finite and integral over $B$, with\nfraction field $k(P)$. An element of $k(P)$ integral\nover $B$ is also integral over $D$, hence belongs to\n$D$; conversely every element of $D$ is integral over\n$B$. Thus $D$ is exactly the integral closure of\n$B$. This identifies the restrictions of the construction\nin [def-fin-normalization-extension]; it glues because\nthe identifications are the identity inside the function\nfield. The total extension is finite by\n[lem-fin-normalization-extension-finite] and has normal\nintegral source in the sense of\n[def-sbc-normal-dominant-galois].",
+   "text": "Write $k$ for the base field and $f:P\\to V$ for the cover. The scheme $\\operatorname{Spec}k$ is Noetherian: its ring has just the ideals $(0)$ and $(1)$, and its underlying space is a singleton. Hence $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Its open subscheme $V$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The finite morphism $f$ is proper by [lem-weil-pbc-finite-proper], and therefore of finite type by [def-weil-proper-morphism]. Applying [lem-weil-pbc-finite-type-over-noetherian] to $f$ shows that $P$ is Noetherian.",
    "uses": [
-    "lem-fin-etale-normal-components",
-    "def-fin-normalization-extension",
-    "lem-fin-normalization-extension-finite",
-    "def-sbc-normal-dominant-galois"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01WN (lemma-finite-proper); properties.tex, Tags 01OV and 01OW (Noetherian schemes and their open subschemes)"
+   }
+  },
+  {
+   "text": "The open $V$ is normal integral in the sense of [def-sbc-normal-dominant-galois]. Apply [lem-fin-etale-normal-components] to the etale map $P\\to V$, using the Noetherian hypothesis proved in step 1. It writes $P$ as a finite disjoint union of open-and-closed normal integral schemes. Here connected means nonempty and connected. There is at least one component, and two nonempty components would partition $P$ into two nonempty open-and-closed subsets. Thus there is exactly one component: $P$ is integral and all its local rings are integrally closed domains.",
+   "uses": [
+    "def-sbc-normal-dominant-galois",
+    "lem-fin-etale-normal-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.md",
+    "place": "Proof, first sentence; compare properties.tex, Tag 033M (lemma-normal-Noetherian)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-morphism-open-map], the image of the nonempty scheme $P$ is a nonempty open of the integral scheme $V$, hence is dense. If $\\eta_P$ is the generic point of $P$, continuity gives $f(P)\\subseteq\\overline{\\{f(\\eta_P)\\}}$; consequently $f(\\eta_P)$ is the generic point of $V$. Let $U=\\operatorname{Spec}B$ be any nonempty affine open of $V$. Its inverse image $W=f^{-1}U$ is nonempty (it contains $\\eta_P$), affine, and of the form $\\operatorname{Spec}D$ with $D$ finite over $B$, by [def-weil-finite-integral-morphism]. The affine function-field theorem [lem-sc-integral-function-field-affine-fraction] identifies $\\operatorname{Frac}(B)=k(V)=k(X)$ and $\\operatorname{Frac}(D)=k(P)$ through germs at the generic points. The equality $k(V)=k(X)$ uses that a nonempty open of an integral scheme contains the same generic point and has the same stalk there, since an open subscheme has the restricted structure sheaf [def-weil-open-immersion]. Since $f(\\eta_P)=\\eta_V$, the ring map $B\\to D$ takes the zero prime of $D$ to the zero prime of $B$ and is injective. The restricted morphism $W\\to U$ is etale: [lem-weil-pbc-open-preimage-fibre-product] identifies it with base change of $f$, and [lem-weil-pbc-etale-scheme-base-change] applies. Now [lem-weil-pbc-etale-algebra-residue-field-separable], with $\\mathfrak q=(0)\\subset D$ and $\\mathfrak p=(0)\\subset B$, says exactly that $L=k(P)$ is a finite separable extension of $K=k(X)$, with the structural field inclusion induced by $f$.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-weil-finite-integral-morphism",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-algebra-residue-field-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 03WT (lemma-etale-open), 02GO (lemma-base-change-etale), 02GL (lemma-etale-over-field), 01RV (lemma-integral-scheme-rational-functions); schemes.tex, Tag 01JR (lemma-open-fibre-product); blueprint proof, sentences 2-4"
+   }
+  },
+  {
+   "text": "The finite extension in step 3 allows the construction $\\nu:N\\to X$ of [def-fin-normalization-extension]. Over each $U=\\operatorname{Spec}B\\subset V$ as in step 3 it is $\\operatorname{Spec}C$, where $C$ is the integral closure of $B$ in $L=k(P)$. Regard $D=\\Gamma(W,\\mathcal O_P)$ as a subring of $L$ through its generic germ. Every $d\\in D$ is integral over $B$ by [lem-weil-pbc-finite-algebra-is-integral], since $D$ is a finite $B$-module, so $D\\subseteq C$. Conversely, let $a\\in C$. For every $w\\in W$, [lem-sc-integral-scheme-stalks-in-function-field] identifies $\\mathcal O_{P,w}$ with a subring of $L$ having fraction field $L$. The monic equation for $a$ over $B$ is also a monic equation over $\\mathcal O_{P,w}$: its coefficients map through $B\\to D\\to\\mathcal O_{P,w}$, compatibly with their generic germs. By step 2 and the meaning of normality in [def-sbc-normal-dominant-galois], integrally closedness of this local ring implies $a\\in\\mathcal O_{P,w}$. Thus $a$ lies in the image of every local ring on the nonempty open $W$. Applying [lem-sc-function-field-sections-glue] to the integral scheme $P$ and the open $W$ gives a section $d\\in D$ whose generic germ is $a$. Therefore $C=D$ inside $L$, as $B$-algebras.",
+   "uses": [
+    "def-fin-normalization-extension",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-sbc-normal-dominant-galois",
+    "lem-sc-function-field-sections-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.md",
+    "place": "Proof, affine integral-closure comparison; expanded using algebra.tex, Tag 00GK (lemma-finite-is-integral), and properties.tex, Tag 0358 (lemma-normal-integral-sections)"
+   }
+  },
+  {
+   "text": "For an affine cover $V=\\bigcup_iU_i$, write $U_i=\\operatorname{Spec}B_i$, $N_i=\\nu^{-1}U_i=\\operatorname{Spec}C_i$ and $W_i=f^{-1}U_i=\\operatorname{Spec}D_i$. Step 4 identifies $C_i=D_i$ inside $L$, compatibly with $B_i$. By [def-weil-affine-spectrum] the identity ring maps give inverse isomorphisms $\\phi_i:N_i\\to W_i$ over $U_i$. On a nonempty principal open $D(b)\\subset U_i$ the coordinate rings are $(C_i)_b=(D_i)_b$ inside $L$, using the localization identifications in [def-fin-normalization-extension] and the affine structure sheaf; the restricted comparison is again the identity. To check overlaps without assuming $U_i\\cap U_j$ affine, put $T_{ij}=\\nu^{-1}(U_i\\cap U_j)$. Both $\\phi_i|_{T_{ij}}$ and $\\phi_j|_{T_{ij}}$ land in $W_j$, since they are over $V$. Cover $T_{ij}$ by nonempty affine opens $A$. The scheme $N_i$ is integral because it is isomorphic to the integral open $W_i$ of $P$; identify its function field with $L$ through $\\phi_i$. Thus $\\Gamma(A,\\mathcal O_{N_i})\\to L$ is injective by [lem-sc-integral-scheme-stalks-in-function-field]. Each of the two maps $A\\to W_j=\\operatorname{Spec}D_j$ induces a ring map $D_j\\to\\Gamma(A,\\mathcal O_{N_i})$ whose composite to $L$ is the inclusion $D_j\\subset L$: the generic field maps of both $\\phi_i$ and $\\phi_j$ are the identity, since they extend the identities on $C_i=D_i$ and $C_j=D_j$, whose fraction fields are $L$. Injectivity therefore makes the two ring maps equal, and [def-weil-affine-spectrum] makes the two morphisms $A\\to W_j$ equal. The uniqueness clause of [lem-weil-pbc-scheme-morphism-gluing] gives equality on $T_{ij}$. These equal restricted isomorphisms have equal inverses on $f^{-1}(U_i\\cap U_j)$; empty overlaps require no check. Apply the same gluing node to the $\\phi_i$ followed by $W_i\\hookrightarrow P$, and to their inverses followed by $N_i\\hookrightarrow\\nu^{-1}V$. Their composites are locally identities, so uniqueness gives inverse global morphisms. Their composites to $V$ agree locally and hence globally as well. The resulting isomorphism $\\nu^{-1}V\\cong P$ is over $V$. Finally [lem-weil-pbc-open-preimage-fibre-product], applied to $\\nu:N\\to X$ and $V\\subseteq X$, identifies $\\nu^{-1}V$ with $N\\times_XV$, proving the claimed restriction.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-fin-normalization-extension",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.md",
+    "place": "Proof, sentences beginning \"This identifies the restrictions\" and \"it glues\"; schemes.tex, Tag 01JA and Lemma 01JB (lemma-glue, mapping properties)"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-proper-morphism",
+  "def-sbc-normal-dominant-galois",
   "lem-fin-etale-normal-components",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "def-weil-finite-integral-morphism",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
   "def-fin-normalization-extension",
-  "lem-fin-normalization-extension-finite",
-  "def-sbc-normal-dominant-galois"
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sc-function-field-sections-glue",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-morphism-gluing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.md",
-  "place": "## Proof"
+  "place": "Proof, affine integral-closure argument, expanded with the cited Stacks results"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of an integral scheme in the function field of a connected finite etale cover of a normal open restricts to that cover",
+   "results": "Relative-normalization construction, comparison and integral-source instances in Mathlib.AlgebraicGeometry.Normalization; no identification of the given cover with normalization in its function field.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalizationPullback",
+   "results": "Seven hits including normalizationPullback, instIsIsoNormalizationPullbackOfSmooth, and comparison identities in Mathlib.AlgebraicGeometry.Normalization. These concern relative normalization under smooth base change, not the field-normalization comparison needed here.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationPullback|normalization.*[Ii]so|[Ii]so.*normalization",
+   "results": "Mathlib/AlgebraicGeometry/Normalization.lean:204,217,220 and ZariskisMainTheorem.lean:119-132; normalizationObjIso describes integral closure in sections of a source, not the required cover in its function field.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalization in a finite field extension restricts to a finite etale cover over a normal open subscheme",
+   "results": "normalizationDesc, toNormalization, fromNormalization, instIsIsoToNormalizationOfIsIntegralHom and normalizationOpenCover (Mathlib.AlgebraicGeometry.Normalization); no match for the whole item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalization in a field extension of an integral scheme agrees with any finite normal integral cover having that function field",
+   "results": "instIsIntegralNormalization, normalizationDesc, comparison identities, normalizationOpenCover and normalization.hom_ext; no theorem giving this field-normalization identification.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dominant morphism between integral schemes with normal source identifies the source with the normalization of the target in its function field",
+   "results": "Eight hits, including instIsIsoToNormalizationOfIsIntegralHom, normalizationDesc and instIsIntegralNormalization. These concern relative normalization of a scheme morphism; none states the required identification with normalization in the function field.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalizationObjIso",
+   "results": "Five hits. Read Mathlib/AlgebraicGeometry/Normalization.lean:220-225: the closure is in sections of the source, not in its function field, so this does not state the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationObjIso|normalization.*[Ff]unctionField|[Ff]unctionField.*normalization",
+   "results": "Five hits in Mathlib/AlgebraicGeometry/Normalization.lean:220,232,236,261,270, all relative-normalization section comparisons. No exact or one-line match.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -70,5 +211,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-fin-normalization-extends-cover",
+  "worker": "stage1",
+  "summary": "Preserved the statement and expanded the affine integral-closure proof. Supplied Noetherian hypotheses before using normal components, proved dominance before identifying generic residue fields, reused the etale residue-field Mathlib leaf to obtain the finite function-field extension, and made the monic-equation and gluing arguments explicit. No new nodes. Second reading makes overlap equality an explicit comparison of ring maps into one affine target; the spectrum equivalence and injective generic germs justify the check.",
+  "blueprint": "Steps 1-2 justify the first sentence of the imported proof; step 3 justifies its function-field and affine-cover assertions; step 4 proves the integral-closure equality; step 5 realizes the restriction and gluing sentences. The final finiteness and global normality remarks of the imported proof are not clauses of this item and are not needed for its conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q02-582079739",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-582079739 (reviewer sub-agent of L); spot-checked: Read the full mathematics, cited statements, source passages, and unit/chapter route. All five steps hold, including the structural field inclusion and gluing over V without separatedness. No new nodes, duplicate replacement, or dependency cycle found. Accept lem-fin-etale-normal-components as a generic tool use. Detailed checks are in review.md."
+ }
 }
