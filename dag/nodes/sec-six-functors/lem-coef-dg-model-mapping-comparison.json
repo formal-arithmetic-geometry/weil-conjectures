@@ -24,9 +24,107 @@
   "def-weil-abstract-derived-category",
   "lem-coef-enhanced-localization-universal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal H(A,B)=\\underline{\\operatorname{Hom}}_{\\mathcal M}(A,B)$. The initial and terminal objects agree: in the underlying preadditive category, the identity of an initial object is its zero endomorphism, so every morphism into it is zero and it is terminal. Write this zero object as $0$. For every complex $K$, the tensor adjunction identifies maps $K\\to\\mathcal H(P,0)$ with maps $K\\otimes P\\to0$, a singleton; the cotensor adjunction identifies maps $K\\to\\mathcal H(0,I)$ with maps $0\\to I^K$, also a singleton. Thus both Hom complexes are terminal complexes, hence zero. Apply the assumed mapping axiom to $0\\to P$ and $I\\to0$. For cofibrant $P$, $\\mathcal H(P,-)$ sends trivial fibrations to surjective quasi-isomorphisms; for fibrant $I$, $\\mathcal H(-,I)$ sends trivial cofibrations to surjective quasi-isomorphisms. Extend to weak equivalences on the required domains using [lem-coef-brown-split-factorizations], with the following explicit argument. For a weak equivalence $u:P\\to P'$ between cofibrant objects, its Brown factorization is $u=pi$ with $p:Z\\to P'$ a trivial fibration, $i:P\\to Z$ a cofibration and $s:P'\\to Z$ a cofibration satisfying $ps=1$. Two-out-of-three makes $i,s$ trivial cofibrations, and $Z$ is cofibrant. Thus $\\mathcal H(i,I)$ and $\\mathcal H(s,I)$ are quasi-isomorphisms. The equation $\\mathcal H(s,I)\\mathcal H(p,I)=1$ makes $\\mathcal H(p,I)$ a quasi-isomorphism, and then so is $\\mathcal H(u,I)$. For a weak equivalence $v:I\\to I'$ between fibrant objects, use the dual Brown factorization $v=pi$ with $i:I\\to Z$ a trivial cofibration and $p:Z\\to I'$ a fibration admitting a fibration retraction $r:Z\\to I$ of $i$. Now $p,r$ are trivial fibrations and $Z$ is fibrant. Hence $\\mathcal H(P,p)$ and $\\mathcal H(P,r)$ are quasi-isomorphisms, the equation $\\mathcal H(P,r)\\mathcal H(P,i)=1$ makes $\\mathcal H(P,i)$ one, and consequently $\\mathcal H(P,v)$ is one. This proves both weak-equivalence invariance assertions for the mixed Hom bifunctor.",
+   "uses": [
+    "lem-coef-brown-split-factorizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; agent-supplied dg-model foundation: Brown argument for mixed Hom invariance"
+   }
+  },
+  {
+   "text": "Construct an auxiliary dg category $\\mathcal R_c$ whose objects are all trivial fibrations $p:P\\to X$ with $P$ cofibrant. Put\n$$\\mathcal R_c(p,p')=\\mathcal H(P,P')\\times_{\\mathcal H(P,X')}\\mathcal H(X,X'),$$\nwhere the two maps are postcomposition by $p'$ and precomposition by $p$. A homogeneous element is a pair $(a,b)$ satisfying $p'a=bp$. Differential and composition are componentwise; for composable pairs, $p''a'a=b'p'a=b'bp$, so composition stays in the pullback and its associativity and units follow from those of $\\mathcal M$. There are dg functors $a_c:\\mathcal R_c\\to\\mathcal M_c$, $(P\\to X)\\mapsto P$, and $\\pi_c:\\mathcal R_c\\to\\mathcal M$, $(P\\to X)\\mapsto X$, with a dg natural transformation $p:j_ca_c\\to\\pi_c$ whose components are the displayed resolution maps. Here $j_c$ is the inclusion. Declare a closed degree-zero square to belong to $W_c$ exactly when its $X$-component is in $W$; the equation $p'a=bp$ and two-out-of-three say equivalently that its $P$-component is in $W$. Thus both projections preserve the specified weak equivalences.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; agent-supplied dg-model foundation: dg category of all cofibrant resolutions and its two projections"
+   }
+  },
+  {
+   "text": "The map $\\mathcal H(P,P')\\to\\mathcal H(P,X')$ is a degreewise surjective quasi-isomorphism by step 1, since $P$ is cofibrant and $p'$ is a trivial fibration. Its pullback $\\mathcal R_c(p,p')\\to\\mathcal H(X,X')$ has the same kernel and is again a degreewise surjective quasi-isomorphism. Here is the degreewise complex calculation, with cohomological differentials. Let $f:A\\to B$ be a surjective quasi-isomorphism and $K=\\ker f$. For $z\\in K^n$ closed, injectivity of $H^n(f)$ gives $z=da$. Then $f(a)$ is closed. Surjectivity of $H^{n-1}(f)$ gives a closed $c\\in A^{n-1}$ and $b\\in B^{n-2}$ with $f(a)-f(c)=db$. Lift $b$ to $t\\in A^{n-2}$; then $a-c-dt\\in K^{n-1}$ bounds $z$. Thus $K$ is acyclic. Conversely, for a surjection with acyclic kernel, a lift $a$ of a target cycle has $da\\in K$; write $da=dk$ in $K$ and replace $a$ by $a-k$. A closed $a$ mapping to $db$ becomes a closed kernel element after subtracting the differential of a lift of $b$, hence is itself a boundary modulo that differential. This proves surjectivity and injectivity on cohomology. A pullback of $f$ is degreewise surjective and has kernel $K$, so this converse proves the assertion for the displayed pullback. In particular every closed degree-zero $X\\to X'$ lifts to a closed square. Every $X$ is the image of an object of $\\mathcal R_c$, by factoring $0\\to X$ as a cofibration followed by a trivial fibration. Consequently $\\pi_c$ is a dg quasi-equivalence. Use the derived-enrichment convention in [lem-coef-derived-enriched-yoneda]: dg categories are regarded up to quasi-equivalence, defined there by mapping quasi-isomorphisms and essential surjectivity on $H^0$. Thus $\\pi_c$ is an equivalence of their derived chain enrichments. Moreover it identifies the full enhanced subcategories of weak-equivalence-inverting functors. Indeed restriction along the quasi-equivalence identifies all enhanced functor categories before imposing the condition. If a functor downstairs inverts $W$, its restriction inverts $W_c$. Conversely, let $F$ upstairs invert $W_c$, and let $G$ downstairs correspond to it, with the specified equivalence $F\\simeq G\\pi_c$. For any $b:X\\to X'$ in $W$, choose resolutions over its actual endpoints and lift $b$ to a closed square $u$; then $u\\in W_c$ by definition. Naturality of the specified comparison identifies $G(b)$, up to equivalences at its endpoints, with $F(u)$, so $G(b)$ is an equivalence. These are full subcategories, hence the equivalence on all functors restricts to an equivalence on the required subcategories. Applying the universal property of [lem-coef-enhanced-localization-universal] now gives\n$$\\overline\\pi_c:\\mathcal R_c[W_c^{-1}]\\simeq\\mathcal M[W^{-1}],$$\nwith the same conclusion on all enhanced transformation objects and diagrams.",
+   "uses": [
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; agent-supplied dg-model foundation: quasi-equivalence calculation and localization of the resolution category"
+   }
+  },
+  {
+   "text": "Let $L=\\mathcal M[W^{-1}]$ and $L_c=\\mathcal M_c[W^{-1}]$, and put bars on localized functors. Define $S_c=\\overline a_c\\,\\overline\\pi_c^{-1}:L\\to L_c$. Localizing $p:j_ca_c\\to\\pi_c$ makes it an equivalence, because its components lie in $W$. Hence $\\overline j_cS_c\\simeq1_L$. For the other composite, restrict $\\mathcal R_c$ to objects $P\\to X$ with $X$ cofibrant. For this restriction the map on Hom complexes is the pullback of $\\mathcal H(P,P')\\to\\mathcal H(P,X')$, a surjective quasi-isomorphism since $P$ is cofibrant and $p'$ is a trivial fibration. Its kernel is acyclic by step 3, giving quasi-fully-faithfulness and lifting of every closed degree-zero map. Factoring $0\\to X$ for each cofibrant $X$ supplies an object over every such $X$. Thus its target projection $\\pi_c^c$ is a quasi-equivalence onto $\\mathcal M_c$; lifting each weak equivalence to a closed square shows that it identifies the weak-equivalence-inverting functor subcategories, so its localization is an equivalence. Its inclusion $k$ into $\\mathcal R_c$ satisfies $\\pi_ck=j_c\\pi_c^c$. The transformation $p$ on this restricted category takes values entirely in $\\mathcal M_c$ and has weak-equivalence components there, so $\\overline a_c\\,\\overline k\\simeq\\overline\\pi_c^c$. Compose this equality with $(\\overline\\pi_c^c)^{-1}$ and use $\\overline\\pi_c\\,\\overline k=\\overline j_c\\,\\overline\\pi_c^c$ to get $S_c\\overline j_c\\simeq1_{L_c}$. All these comparisons are enhanced natural equivalences: [lem-coef-enhanced-localization-universal] applies to the specified dg transformations and to their diagrams. This proves the localized cofibrant inclusion equivalence without selecting a dg replacement functor.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; agent-supplied dg-model foundation: two inverse comparisons for the cofibrant inclusion"
+   }
+  },
+  {
+   "text": "Carry out the fibrant construction for each of two explicit domains: let $\\mathcal D$ be either $\\mathcal M$ or its full dg subcategory $\\mathcal M_c$, and let $\\mathcal E$ be the full subcategory of objects of $\\mathcal D$ that are fibrant. Let $\\mathcal R$ have objects trivial cofibrations $j:X\\to I$ with $X\\in\\mathcal D$ and $I$ fibrant. In the cofibrant-domain case $I$ is also cofibrant, because $0\\to X\\to I$ is a composite of cofibrations. Thus $I\\in\\mathcal E$ in both cases. Put\n$$\\mathcal R(j,j')=\\mathcal H(X,X')\\times_{\\mathcal H(X,I')}\\mathcal H(I,I'),$$\nwith relation $j'b=aj$. Differential preserves this relation because $j,j'$ are closed; for composable pairs, $j''b'b=a'j'b=a'aj$, so componentwise composition defines a dg category. The projection to $\\mathcal H(X,X')$ is a pullback of the degreewise surjective quasi-isomorphism $\\mathcal H(I,I')\\to\\mathcal H(X,I')$, obtained from the trivial cofibration $j$ and fibrant $I'$ by the mapping axiom. The acyclic-kernel calculation of step 3 therefore proves that this projection is a surjective quasi-isomorphism, including surjectivity on closed degree-zero maps. Factoring $X\\to0$ gives such an object over every $X\\in\\mathcal D$. Consequently the source projection $\\pi:\\mathcal R\\to\\mathcal D$ is a dg quasi-equivalence. Declare a closed square weakly equivalent exactly when $b\\in W$; the equation $j'b=aj$ and two-out-of-three make this equivalent to $a\\in W$. Every weak equivalence in $\\mathcal D$ lifts to a closed square by the surjectivity on cycles just proved, so restriction along $\\pi$ identifies exactly the weak-equivalence-inverting enhanced functors. By [lem-coef-derived-enriched-yoneda] and [lem-coef-enhanced-localization-universal], its localization $\\overline\\pi$ is an equivalence. Write $e:\\mathcal E\\to\\mathcal D$ for inclusion and $a:\\mathcal R\\to\\mathcal E$ for the target projection. The dg natural transformation $j:\\pi\\to ea$ has weak-equivalence components. Define $S=\\overline a\\,\\overline\\pi^{-1}$; localizing $j$ gives $\\overline eS\\simeq1$. To check the other composite, let $\\mathcal R^{\\mathcal E}$ restrict the objects to $X\\in\\mathcal E$, with inclusion $k$ and source projection $\\pi^{\\mathcal E}$. The Hom projection is still the same pullback of $\\mathcal H(I,I')\\to\\mathcal H(X,I')$ for trivial $j$ and fibrant $I'$, and every $X\\in\\mathcal E$ has a fibrant resolution with $I\\in\\mathcal E$; hence $\\overline\\pi^{\\mathcal E}$ is an equivalence by the preceding cycle-lifting and universal-property argument. Now $\\pi k=e\\pi^{\\mathcal E}$, while $j$ restricted to this category lies in $\\mathcal E$ and gives $\\overline a\\,\\overline k\\simeq\\overline\\pi^{\\mathcal E}$. Thus\n$$S\\overline e\\simeq\\overline a\\,\\overline k(\\overline\\pi^{\\mathcal E})^{-1}\\simeq1.$$\nThe cited localization theorem applies to these actual dg transformations and their composition diagrams. Taking $\\mathcal D=\\mathcal M$ proves $\\mathcal M_f[W^{-1}]\\simeq L$; taking $\\mathcal D=\\mathcal M_c$ proves $\\mathcal M_{cf}[W^{-1}]\\simeq\\mathcal M_c[W^{-1}]\\simeq L$. No model structure on either full subcategory is used.",
+   "uses": [
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; agent-supplied dg-model foundation: fibrant resolution category and bifibrant restriction"
+   }
+  },
+  {
+   "text": "Every weak equivalence $w:A\\to B$ between bifibrant objects is already an equivalence in their dg category interpreted with derived enrichment. Indeed step 1 makes $\\mathcal H(w,A):\\mathcal H(B,A)\\to\\mathcal H(A,A)$ a quasi-isomorphism. On $H^0$, lift $[1_A]$ to a class $[g]$, represented by a closed degree-zero map $g:B\\to A$, so $[gw]=[1_A]$. Also $\\mathcal H(w,B)$ is a quasi-isomorphism, hence injective on $H^0$. Since $[(wg)w]=[w]=[1_Bw]$, this injectivity gives $[wg]=[1_B]$. Thus $[g]$ is a two-sided inverse in $H^0$, which is precisely the equivalence condition for a dg category's derived enrichment as in [lem-coef-derived-enriched-yoneda]. In the universal property of [lem-coef-enhanced-localization-universal], every enhanced functor from this category already inverts these maps. Its localization is therefore equivalent to itself. Combine with step 5 to obtain the enhanced equivalence $\\mathcal M_{cf}\\simeq L$ induced by the inclusion.",
+   "uses": [
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; agent-supplied dg-model foundation: weak equivalences of bifibrant objects and the unlocalized dg presentation"
+   }
+  },
+  {
+   "text": "The localization functor $\\ell:\\mathcal M\\to L$ supplies the canonical comparison\n$$\\gamma_{P,I}:\\mathcal H(P,I)\\longrightarrow\\underline{\\operatorname{Hom}}_L(\\ell P,\\ell I)$$\nin $\\mathbf D(\\mathbf Z)$, natural on the entire dg bifunctor $\\mathcal M_c^{\\mathrm{op}}\\times\\mathcal M_f$. To prove it an equivalence, choose a trivial cofibration $j:P\\to J$ with $J$ fibrant. Since $P$ is cofibrant, $J$ is bifibrant. Choose a trivial fibration $p:R\\to I$ with $R$ cofibrant. Since $I$ is fibrant, $R$ is bifibrant. The comparisons form commuting squares with\n$$\\mathcal H(P,I)\\xleftarrow{j^*}\\mathcal H(J,I)\\xleftarrow{p_*}\\mathcal H(J,R).$$\nThe first arrow is a quasi-isomorphism by the mapping axiom for the trivial cofibration $j$ and fibrant $I$. The second is one by the axiom for cofibrant $J$ and the trivial fibration $p$. The corresponding arrows between mapping objects in $L$ are equivalences because $\\ell j$ and $\\ell p$ are equivalences. Finally $\\gamma_{J,R}$ is an equivalence by the fully faithful bifibrant presentation of step 6. The commuting squares and two-out-of-three prove $\\gamma_{P,I}$ an equivalence. Hence the original canonical bifunctor comparison is pointwise an equivalence, so is an enhanced natural equivalence by [lem-coef-enhanced-localization-universal]. Compatibility with composition follows from that of the single enriched functor $\\ell$: for cofibrant $P,J$ and fibrant $J,I$, the two routes from $\\mathcal H(J,I)\\otimes\\mathcal H(P,J)$ to the localized mapping object are the images of the same composition map. In derived enrichment these maps use derived tensor, with its canonical map to the ordinary tensor presentation. All higher composition diagrams are the images of the corresponding dg diagrams, not newly chosen objectwise inverses.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; agent-supplied dg-model foundation: mixed mapping comparison and its composition diagrams"
+   }
+  },
+  {
+   "text": "For cofibrant replacements $q_X:QX\\to X$ and fibrant replacements $t_Y:Y\\to TY$, apply step 7 to $(QX,TY)$ and use the equivalences $\\ell q_X,\\ell t_Y$. Explicitly the mapping equivalence in $L$ sends $f:\\ell QX\\to\\ell TY$ to $(\\ell t_Y)^{-1}f(\\ell q_X)^{-1}:\\ell X\\to\\ell Y$. This gives\n$$\\mathcal H(QX,TY)\\simeq\\underline{\\operatorname{Hom}}_L(\\ell X,\\ell Y).$$\nStep 1 already proves that the mixed Hom bifunctor inverts inherited weak equivalences in each variable. Thus the multivariable assertion of [lem-coef-enhanced-localization-universal] extends that bifunctor, its comparison, and its specified composition diagrams along the localized cofibrant and fibrant domains. If $Q,T$ are only ordinary functorial factorizations, obtain enhanced lifts through the resolution spans of steps 2-5 rather than applying a nonexistent dg functor $Q$ or $T$. More explicitly, a strict ordinary diagram of the chosen factorizations gives objects and closed degree-zero squares in $\\mathcal R_c$ or $\\mathcal R_f$; those squares compose strictly. Linearizing its indexing category gives a dg category concentrated in degree zero, and these squares define a dg functor from that category to the resolution category. Thus this is an actual enhanced diagram before any inversion. The localized projections identify it with its projected diagram, with the specified identification. For a general enhanced indexing diagram, use an inverse of $\\overline\\pi_c$ or $\\overline\\pi_f$ instead: an equivalence induces equivalences on its diagram categories, so its lift together with the specified projection is unique up to a contractible space of choices. This constructs the coherent replacement model through the spans, without treating the ordinary functors $Q,T$ as dg functors or promoting diagrams given only in a homotopy category. General functorial replacements with weak-equivalence comparison maps give the same result: the displayed pointwise formula uses only cofibrancy of $QX$, fibrancy of $TY$ and invertibility of $q_X,t_Y$ in $L$. For a different pair $Q',T'$, compose its canonical comparison to this same mapping bifunctor in $L$ with the inverse of the preceding comparison. This defines the comparison of choices on whole enhanced diagrams. The contractible extension spaces and compatibility with substitution in [lem-coef-enhanced-localization-universal] supply its coherent naturality and all iterated comparisons. In particular the cocycle diagram for three choices is the diagram obtained by inserting the same comparison and its inverse; all its higher compatibilities are inherited from that specified diagram. No enrichment of a chosen replacement functor is required.",
+   "uses": [
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2; agent-supplied dg-model foundation: replacement formula and coherent choice comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-derived-enriched-yoneda",
+  "lem-coef-enhanced-localization-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2 motivates the coefficient mapping comparison but contains no general enriched model theorem. The proof here is the explicit dg resolution-square construction, Brown split factorization, and the existing enhanced localization universal property. Stacks Tag 09T5 (derived.tex, lemma-derived-adjoint-functors) is only an ordinary-adjunction prototype, not a source for an enriched assertion."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -90,15 +188,87 @@
    "date": "2026-10-16",
    "results": "1 hits: Mathlib/AlgebraicTopology/SimplicialNerve.lean",
    "verdict": "no match: CofibrantObjectHomotopy.lean:60-76,241-275 constructs ordinary quotient categories and resolutions. Homotopy.lean compares left and right homotopy classes. SimplicialNerve.lean:14-38 defines a simplicial nerve and lists quasicategory foundations as future work; none states a derived Hom-complex comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential graded model category has derived mapping complexes computed by cofibrant fibrant replacements",
+   "results": "[leanfinder] OK 8 hit(s): HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution_map, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.resolution, DerivedCategory.right_fac, HomotopicalAlgebra.CofibrantObject.HoCat, DerivedCategory.Qh, DerivedCategory.left_fac, HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the reported ordinary model-category resolutions, quotient homotopy categories and ordinary derived-category fractions. They do not give a chain-enriched localization, the commuting-square dg resolution construction, or the mixed mapping-complex comparison; CofibrantObjectHomotopy.lean:55-90,241-275 and BrownLemma.lean:40-120 were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopicalAlgebra\"",
+   "results": "[loogle] OK 12 hit(s): HomotopicalAlgebra.CategoryWithCofibrations, HomotopicalAlgebra.CategoryWithFibrations, HomotopicalAlgebra.CategoryWithWeakEquivalences, HomotopicalAlgebra.cofibrations, HomotopicalAlgebra.fibrations, HomotopicalAlgebra.weakEquivalences, HomotopicalAlgebra.CategoryWithCofibrations.cofibrations, HomotopicalAlgebra.CategoryWithCofibrations.mk",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the reported ordinary model-category resolutions, quotient homotopy categories and ordinary derived-category fractions. They do not give a chain-enriched localization, the commuting-square dg resolution construction, or the mixed mapping-complex comparison; CofibrantObjectHomotopy.lean:55-90,241-275 and BrownLemma.lean:40-120 were read."
+  },
+  {
+   "tool": "grep",
+   "query": "dgCategory|DgCategory|homotopyFunctionComplex|derivedMappingComplex|bifibrant",
+   "results": "[grep] OK 17 hit(s): Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean, Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean, Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean, Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean, Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean, Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the reported ordinary model-category resolutions, quotient homotopy categories and ordinary derived-category fractions. They do not give a chain-enriched localization, the commuting-square dg resolution construction, or the mixed mapping-complex comparison; CofibrantObjectHomotopy.lean:55-90,241-275 and BrownLemma.lean:40-120 were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded localization mapping complex cofibrant fibrant model category",
+   "results": "[leansearch] OK 8 hit(s): HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj, HomotopicalAlgebra.ModelCategory.mk', HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap, HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences, HomotopicalAlgebra.ModelCategory.categoryWithCofibrations",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the reported ordinary model-category resolutions, quotient homotopy categories and ordinary derived-category fractions. They do not give a chain-enriched localization, the commuting-square dg resolution construction, or the mixed mapping-complex comparison; CofibrantObjectHomotopy.lean:55-90,241-275 and BrownLemma.lean:40-120 were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched category of cofibrant resolutions commuting squares trivial fibration projection quasi equivalence differential graded",
+   "results": "[leanfinder] OK 8 hit(s): HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.resolution, HomotopicalAlgebra.CofibrantObject.HoCat, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap, HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap_fac",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the reported ordinary model-category resolutions, quotient homotopy categories and ordinary derived-category fractions. They do not give a chain-enriched localization, the commuting-square dg resolution construction, or the mixed mapping-complex comparison; CofibrantObjectHomotopy.lean:55-90,241-275 and BrownLemma.lean:40-120 were read."
+  },
+  {
+   "tool": "grep",
+   "query": "dgCategory|DgCategory|enriched.*localization|localization.*enriched|derivedMappingComplex|homotopyFunctionComplex",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the reported ordinary model-category resolutions, quotient homotopy categories and ordinary derived-category fractions. They do not give a chain-enriched localization, the commuting-square dg resolution construction, or the mixed mapping-complex comparison; CofibrantObjectHomotopy.lean:55-90,241-275 and BrownLemma.lean:40-120 were read."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiEquivalence|QuasiEquivalence|enriched.*[Mm]odel|[Mm]odel.*enriched",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: independently read CofibrantObjectHomotopy.lean:55-90,238-290; the results construct ordinary quotient homotopy categories, ordinary localization functors and ordinary natural isomorphisms, without dg mapping complexes or enriched localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category enriched over chain complexes with a model structure presents its enriched localization on cofibrant fibrant objects",
+   "results": "[leanfinder] OK 8 hit(s): HomotopicalAlgebra.CofibrantObject.HoCat; HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization; HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization; HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism; HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism; HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences; HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences; HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution",
+   "date": "2026-10-16",
+   "verdict": "no match: independently read CofibrantObjectHomotopy.lean:55-90,238-290; the results construct ordinary quotient homotopy categories, ordinary localization functors and ordinary natural isomorphisms, without dg mapping complexes or enriched localization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-derived-quillen-calculus",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-dg-model-mapping-comparison",
+  "worker": "stage1",
+  "summary": "Proved the dg model comparison by explicit dg categories of trivial-fibration cofibrant resolutions and trivial-cofibration fibrant resolutions, with commuting-square mapping complexes. Their projections are quasi-equivalences by the assumed enriched lifting axiom and a written-out pullback calculation. Existing Brown factorization gives mixed Hom invariance; existing enhanced localization and derived dg conventions provide the coherent universal properties. The proof constructs both inverse comparisons, proves weak equivalences bifibrant are already invertible, and identifies the mixed and replacement mapping complexes naturally. No new nodes, no alteration of the statement, and no assumed enriched replacement functors. Mathlib and project searches found no attachment or enriched theorem match. Second reading expands the tensor/cotensor zero-object argument, the acyclic-kernel calculation, both fibrant inverse comparisons, and the precise construction of enhanced diagrams from replacement spans.",
+  "blueprint": "Realizes the derived coefficient adjunction at mapping-complex level in proof paragraph 2 of prop-coef-integral-exceptional-adjoint, through lem-coef-finite-adjunction-diagram-realization, lem-coef-semilinear-derived-sections and lem-coef-dg-derived-quillen-calculus. This is an added generic foundation, not a replacement of the unit or chapter route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q04-69b1de78f",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-69b1de78f (reviewer sub-agent of L); spot-checked: Read all eight proof steps, direct dependency statements, blueprint sources, pinned Brown factorizations, and archived master targets. Resolution pullbacks, weak-equivalence lifting, inverse comparisons, and coherent mapping identifications check out. No new nodes, cycles, duplicate splits, or target/coefficient changes. Detailed checks and scope limitations are recorded in review.md; no fixes required."
+ }
 }
