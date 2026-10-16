@@ -207,5 +207,24 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-b0de72232 (reviewer sub-agent of L); spot-checked: Read all required instructions, packet/report, blueprint item and unit route, the immutable item and every cited DAG statement, plus the cited Stacks locations. Verified all four proof steps, hypotheses, exact comparison morphism, coefficient category, source route, acyclicity, duplicate/generalization checks, and edge cases including d=0, q=0, empty fibres, zero sheaf, identity map, boundary q=2d, and N=1. No new nodes or repairs were needed. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperDirectImageComparisonFinitude",
+  "declaration": "AlgebraicGeometry.Etale.properDirectImage_comparison_finitude",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperDirectImageComparisonFinitude.lean",
+  "statement": "theorem properDirectImage_comparison_finitude (k : Type u) [Field k] (N : ℕ) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (hcoeff : IsSmoothBaseChangeCoefficients N Λ (Spec (.of k))) {X S : Scheme.{u}} [S.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (f : X ⟶ S) [IsProper f] (d : ℕ) (hfib : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), topologicalKrullDim ↥(pullback f s) ≤ (d : WithBot ℕ∞)) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : Scheme.IsConstructibleEtaleModuleSheaf F) : (∀ (q : ℕ) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), (∃ (sourceIso : (Sheaf.Γ (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((baseChangeSourceFunctor Λ s f q).obj F) ≅ ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj (higherDirectImage Λ f q F)) (targetIso : (Sheaf.Γ (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((baseChangeTargetFunctor Λ (pullback.fst f s) (pullback.snd f s) q).obj F) ≅ (cohomology (ModuleCat.{u + 1} Λ) (pullback f s) q).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f s)).obj F))), IsIso (sourceIso.inv ≫ (Sheaf.Γ (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).map (baseChangeHomologyMap Λ (IsPullback.of_hasPullback f s) q F) ≫ targetIso.hom)) ∧ Finite ((cohomology (ModuleCat.{u + 1} Λ) (pullback f s) q).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f s)).obj F))) ∧ (2 * d < q → IsZero ((cohomology (ModuleCat.{u + 1} Λ) (pullback f s) q).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f s)).obj F))))) ∧ (∀ q : ℕ, Scheme.IsConstructibleEtaleModuleSheaf (higherDirectImage Λ f q F) ∧ (2 * d < q → IsZero (higherDirectImage Λ f q F)))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "All clauses (i)-(ii), using the exact geometric-stalk comparison presentation recorded by cor-weil-pbc-geometric-fiber-finite. Coefficient conventions are imposed on Spec k, so the prime-to-characteristic assumption remains present even for an empty base."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0a2f96551",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all clauses, dependencies, sources, edge cases, universes, report sections, and verbatim signature. Immutable module compiled cleanly through scompile.py; no corrections needed."
  }
 }

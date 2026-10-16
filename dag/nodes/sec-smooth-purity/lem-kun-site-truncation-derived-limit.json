@@ -398,5 +398,23 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-3c5941a69 (reviewer sub-agent of L); spot-checked: Full delivery, source, DAG dependency, route, edge-case, base-category, and citation checks completed. All nine proof steps are sound; no new nodes or repairs are needed. The report’s WANTED note is stale because the local Stacks sources are present, but this does not affect correctness."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteTruncationDerivedLimit",
+  "declaration": "CategoryTheory.site_truncation_isDerivedLimitTriangle",
+  "file": "lean/Sheaf/CategoryTheory/SiteTruncationDerivedLimit.lean",
+  "statement": "theorem site_truncation_isDerivedLimitTriangle {C : Type c} [Category.{v} C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) [HasSheafify J.toGrothendieck AddCommGrpCat.{max c v r}] [J.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] (R : Sheaf J.toGrothendieck RingCat.{max c v r}) (_hcomm : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) [HasDerivedCategory.{w} (ringedSiteModules.{max c v r} R)] (E : DerivedCategory (ringedSiteModules.{max c v r} R)) (hE : ∃ (d : ℕ) (B : Set C), (∀ U : C, ∃ S : Presieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → V ∈ B) ∧ ∀ (V : C), V ∈ B → ∀ (p : ℤ), (d : ℤ) < p → ∀ (q : ℤ), q < 0 → ∀ (I : CochainComplex (ringedSiteModules.{max c v r} R) ℤ) (ι : (CochainComplex.singleFunctor (ringedSiteModules.{max c v r} R) 0).obj ((DerivedCategory.homologyFunctor (ringedSiteModules.{max c v r} R) q).obj E) ⟶ I), I.IsKInjective → QuasiIso ι → IsZero (((SheafOfModules.toSheaf R ⋙ sheafToPresheaf J.toGrothendieck AddCommGrpCat.{max c v r} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{max c v r}).obj (op V)).mapHomologicalComplex (ComplexShape.up ℤ)).obj I |>.homology p)) : ∃ (_ : HasProduct (fun n : ℕ ↦ ((DerivedCategory.TStructure.t (C := ringedSiteModules.{max c v r} R)).truncGE (-(n : ℤ))).obj E)), ∃ δ : (∏ᶜ (fun n : ℕ ↦ ((DerivedCategory.TStructure.t (C := ringedSiteModules.{max c v r} R)).truncGE (-(n : ℤ))).obj E)) ⟶ E⟦(1 : ℤ)⟧, IsDerivedLimitTriangle (fun n : ℕ ↦ ((DerivedCategory.TStructure.t (C := ringedSiteModules.{max c v r} R)).natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (Int.neg_le_neg (Int.ofNat_le.mpr (Nat.le_succ n)))).app E) E (Pi.lift (fun n : ℕ ↦ ((DerivedCategory.TStructure.t (C := ringedSiteModules.{max c v r} R)).truncGEπ (-(n : ℤ))).app E)) δ",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-72ada494c",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Statement, dependencies, source correspondence, edge cases, docstrings, report sections, and compiler evidence all checked; no substantive or mechanical errors found."
  }
 }

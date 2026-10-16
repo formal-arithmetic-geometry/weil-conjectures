@@ -340,5 +340,30 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-ec3d3d09b (reviewer sub-agent of L); spot-checked: Reviewed the item, all eight proof steps, every cited node, the unit route, source records, Mathlib leaf, edge cases, coefficient annihilation, and chart-base repair. No mathematical or structural fault remains; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenComplementUnconditional",
+  "declaration": "AlgebraicGeometry.Scheme.hasOpenComplementCondition_of_isSepClosed",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.hasOpenComplementCondition_of_isSepClosed",
+   "AlgebraicGeometry.Scheme.hasOpenComplementCondition_finiteStage",
+   "AlgebraicGeometry.Scheme.hasOpenComplementCondition_affineChart",
+   "AlgebraicGeometry.Scheme.hasOpenComplementCondition_emptyChart"
+  ],
+  "file": "lean/Sheaf/Paper/OpenComplementUnconditional.lean",
+  "statement": "theorem hasOpenComplementCondition_of_isSepClosed (k : Type u) [Field k] [IsSepClosed k] {T V : Scheme.{u}} [T.Over (Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] (d : ℕ) (hdim : topologicalKrullDim T ≤ (d : WithBot ℕ∞)) (j : V ⟶ T) [IsOpenImmersion j] [QuasiCompact j] (A : Type (u + 1)) [CommRing A] [Finite A] (ℓ : ℕ) (hprime : ℓ.Prime) (hchar : ℓ ≠ ringChar k) (hkill : ∃ r : ℕ, 1 ≤ r ∧ (ℓ ^ r : ℕ) • (1 : A) = 0) : HasOpenComplementCondition A j (2 * d)",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The main assertion quantifies over all finite prime-power-torsion rings after fixing d. The additional declarations record finite-stage uniformity, the affine-chart dimension inequality and constant, and the empty-chart convention. The finite-stage statements existentially supply the Finite instance of the actual published coefficient ring; this is not an additional assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-da44d6530",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Wrote review.md. All four statements match the node and source; dependencies, universes, edge cases, docstrings, and verbatim signature checked. Snapshot scompile.py sandbox/library passes succeeded without warnings. No fixes needed; branch unchanged."
  }
 }

@@ -19,7 +19,9 @@
   "def-weil-proetale-locally-constant-sheaf",
   "def-weil-finite-tor-amplitude",
   "def-weil-etale-morphism",
-  "def-coefficient-twists-detailed"
+  "def-coefficient-twists-detailed",
+  "def-asd-finite-etale-tate-sheaf",
+  "def-weil-pbc-proetale-modules"
  ],
  "proof": [
   {
@@ -343,5 +345,38 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-1a2c658e1 (reviewer sub-agent of L); spot-checked: Read the full item, unit, cited DAG statements, blueprint sources, and supporting literature. The statement and coefficient conventions match the master source; all ten proof steps have appropriate cited dependencies, valid clopen shift reduction, sheaf-map gluing, overlap compatibility, normalization, and fibre identification. Edge cases and delivery-errors A–F checks pass. Review written to review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AffineLineInvariance",
+  "declaration": "WeilConjectures.affineLine_invariance",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.a1RingFinite",
+   "WeilConjectures.PurityFiniteSetting.a1Category",
+   "WeilConjectures.PurityFiniteSetting.a1Ctf",
+   "WeilConjectures.PurityFiniteSetting.a1Pullback",
+   "WeilConjectures.PurityFiniteSetting.a1PullbackComp",
+   "WeilConjectures.PurityFiniteSetting.a1SectionComparison",
+   "WeilConjectures.PurityFiniteSetting.a1OneBaseChange",
+   "WeilConjectures.PurityFiniteSetting.a1RankOne",
+   "WeilConjectures.PurityFiniteSetting.a1TateLine",
+   "WeilConjectures.PurityFiniteSetting.a1TwistedSheaf",
+   "WeilConjectures.PurityFiniteSetting.a1FibreComparison",
+   "WeilConjectures.affineLine_invariance"
+  ],
+  "file": "lean/Sheaf/Paper/AffineLineInvariance.lean",
+  "statement": "theorem affineLine_invariance (P : PurityFiniteSetting.{u}) (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of P.field.k))] [IsSeparated (Y ↘ Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of P.field.k))] (F : P.a1Category (AffineSpace (ULift.{u} (Fin 1)) Y)) (C : P.a1Category Y) (hF : P.a1Ctf _ F) (hC : P.a1Ctf Y C) (θ : (P.a1Pullback (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)).obj F ≅ C) {I : Type v} (U : I → Scheme.{u}) (u : ∀ α : I, U α ⟶ Y) [∀ α : I, Etale (u α)] [∀ α : I, IsSeparated (u α ≫ Y ↘ Spec (CommRingCat.of P.field.k))] [∀ α : I, LocallyOfFiniteType (u α ≫ Y ↘ Spec (CommRingCat.of P.field.k))] [∀ α : I, QuasiCompact (u α ≫ Y ↘ Spec (CommRingCat.of P.field.k))] (hcover : ∀ y : Y, ∃ α : I, ∃ x : U α, u α x = y) (hshape : ∀ α : I, ∃ (L : Sheaf (ProEt.topology (AffineSpace (ULift.{u} (Fin 1)) (U α))) (ModuleCat.{u + 1} P.Coefficient)) (m n : ℤ), P.a1RankOne _ L ∧ Nonempty ((P.a1Pullback (AffineSpace.map (ULift.{u} (Fin 1)) (u α))).obj F ≅ ((DerivedCategory.singleFunctor _ 0).obj (P.a1TwistedSheaf _ L m))⟦n⟧)) (κloc : ∀ α : I, (P.a1Pullback (AffineSpace.map (ULift.{u} (Fin 1)) (u α))).obj F ≅ (P.a1Pullback (AffineSpace.map (ULift.{u} (Fin 1)) (u α))).obj ((P.a1Pullback (AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y)).obj C)) (hnormal : ∀ α : I, ((P.a1Pullback (AffineSpace.oneSection (ULift.{u} (Fin 1)) (U α))).mapIso (κloc α) ≪≫ (P.a1OneBaseChange (u α)).app ((P.a1Pullback (AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y)).obj C) ≪≫ (P.a1Pullback (u α)).mapIso ((P.a1SectionComparison (AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y) (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y) (AffineSpace.oneSection_comp_over _ _)).app C)) = (P.a1OneBaseChange (u α)).app F ≪≫ (P.a1Pullback (u α)).mapIso θ) : ∃ κ : F ≅ (P.a1Pullback (AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y)).obj C, (∀ α : I, (P.a1Pullback (AffineSpace.map (ULift.{u} (Fin 1)) (u α))).mapIso κ = κloc α) ∧ (∀ κ' : F ≅ (P.a1Pullback (AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y)).obj C, (∀ α : I, (P.a1Pullback (AffineSpace.map (ULift.{u} (Fin 1)) (u α))).mapIso κ' = κloc α) → κ' = κ) ∧ P.a1FibreComparison Y F C κ (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y) (AffineSpace.oneSection_comp_over _ _) = θ ∧ (∀ κ' : F ≅ (P.a1Pullback (AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y)).obj C, P.a1FibreComparison Y F C κ' (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y) (AffineSpace.oneSection_comp_over _ _) = θ → κ' = κ) ∧ ∃ e : (P.a1Pullback (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)).obj F ≅ (P.a1Pullback (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)).obj F, e = P.a1FibreComparison Y F C κ (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y) (AffineSpace.zeroSection_comp_over _ _) ≪≫ θ.symm",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Finite coefficient setting required by def-pur-conventions. The canonical intrinsic realization transports the recorded Dctf predicate to fixed-scalar sheaves on the same small pro-etale site. Helpers specialize published exact inverse image, its composition/identity comparisons and the published signed finite Tate sheaf; no new ambient operation, abstract twist datum or arbitrary comparison is postulated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-696433dc8",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Statement, dependencies, universes, edge cases, docstrings, helper constructions, report sections, and compiler evidence checked; no fixes required."
  }
 }

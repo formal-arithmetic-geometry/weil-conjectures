@@ -83,5 +83,37 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "module": "Sheaf.Paper.SfCompactSupportRestrictionOfScalars",
+  "declaration": "AlgebraicGeometry.Scheme.sfCompactSupportRestriction_comp",
+  "statement": "theorem sfCompactSupportRestriction_comp (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hl : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (c : Compactification f) (φ : A →+* B) (ψ : B →+* C) (K : proEtaleDerivedCategory X C) : (sfAmbientCompactSupportCandidate A c).map ((sfDerivedCoefficientRestrictionComp X φ ψ).hom.app K) ≫ (sfCompactSupportRestriction c (ψ.comp φ)).hom.app K = (sfCompactSupportRestriction c φ).hom.app ((proEtaleCoefficientRestrictScalars X ψ).mapDerivedCategory.obj K) ≫ (proEtaleCoefficientRestrictScalars Y φ).mapDerivedCategory.map ((sfCompactSupportRestriction c ψ).hom.app K) ≫ (sfDerivedCoefficientRestrictionComp Y φ ψ).hom.app ((sfAmbientCompactSupportCandidate C c).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-16",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/SfCompactSupportRestrictionOfScalars.lean",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfFixedRestriction",
+   "AlgebraicGeometry.Scheme.sfRealizationRestriction_existsUnique",
+   "AlgebraicGeometry.Scheme.sfRealizationRestriction",
+   "AlgebraicGeometry.Scheme.sfInverseRealizationRestriction",
+   "AlgebraicGeometry.Scheme.sfFixedOpenRestriction",
+   "AlgebraicGeometry.Scheme.sfOpenRestriction",
+   "AlgebraicGeometry.Scheme.sfDerivedImageRestriction",
+   "AlgebraicGeometry.Scheme.sfCompactSupportRestriction",
+   "AlgebraicGeometry.Scheme.sfCoefficientRestrictionComp",
+   "AlgebraicGeometry.Scheme.sfDerivedCoefficientRestrictionComp",
+   "AlgebraicGeometry.Scheme.sfCompactSupportRestriction_comp"
+  ],
+  "note": "Unstated prerequisite supplied in this packet as authorized by the human on 2026-10-16. The actual normalized natural isomorphism is sfCompactSupportRestriction; its construction composes the exact extension-by-zero coefficient square and the recorded K-injective direct-image comparison. The theorem states composition coherence with the source separated finite-type and invertibility hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9d5fdcbc8",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable delivery, all statement dependencies, source correspondence, canonical transitions, universes, edge cases, records, and docstrings. Both modules compile cleanly through scompile.py. No fixes needed; branch unchanged.; reverted the delivery's change of existing node(s) def-weil-derived-complete-integral-detailed (--revert-nodes; kept as on newtargets-dag)"
+ }
 }

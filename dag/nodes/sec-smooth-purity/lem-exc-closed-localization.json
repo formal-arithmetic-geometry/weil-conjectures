@@ -153,5 +153,23 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-b468e910f (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources, and unit/chapter route in full. Verified all three steps and edge cases. Repaired the unsupported étale-comparison citation and missing LeanSearch attempt; recorded the service failure as unavailable. Statement unchanged; no new nodes or cycles. Corrected JSON and concrete checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClosedLocalization",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtale_closed_localization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClosedLocalization.lean",
+  "statement": "theorem proEtale_closed_localization {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (W : X.ProEt) (Λ : Type (u + 1)) [CommRing Λ] : ∃ alpha : lowerStar (ModuleCat.{u + 1} Λ) i ⋙ localizationRestriction (ModuleCat.{u + 1} Λ) W.hom W.prop ≅ localizationRestriction (ModuleCat.{u + 1} Λ) (pullback.fst i W.hom) inferInstance ⋙ lowerStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom), ∃ beta : upperStar (ModuleCat.{u + 1} Λ) i ⋙ localizationRestriction (ModuleCat.{u + 1} Λ) (pullback.fst i W.hom) inferInstance ≅ localizationRestriction (ModuleCat.{u + 1} Λ) W.hom W.prop ⋙ upperStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom), (∀ (G : Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ)) (T : W.left.ProEt), (alpha.hom.app G).hom.app (op T) = G.obj.map (((MorphismProperty.Over.pullbackMapComparison W.prop (inferInstance : WeaklyEtale (pullback.fst i W.hom)) (IsPullback.of_hasPullback i W.hom).flip.toCommSq).app T).op)) ∧ (∀ F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ), (localizationRestriction (ModuleCat.{u + 1} Λ) W.hom W.prop).map ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app F) ≫ alpha.hom.app ((upperStar (ModuleCat.{u + 1} Λ) i).obj F) ≫ (lowerStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).map (beta.hom.app F) = (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).unit.app ((localizationRestriction (ModuleCat.{u + 1} Λ) W.hom W.prop).obj F)) ∧ (∀ G : Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ), (upperStar (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).map (alpha.inv.app G) ≫ beta.inv.app ((lowerStar (ModuleCat.{u + 1} Λ) i).obj G) ≫ (localizationRestriction (ModuleCat.{u + 1} Λ) (pullback.fst i W.hom) inferInstance).map ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).counit.app G) = (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (pullback.snd i W.hom)).counit.app ((localizationRestriction (ModuleCat.{u + 1} Λ) (pullback.fst i W.hom) inferInstance).obj G))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4e4b51302",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, report sections, and canonical declarations checked; scompile.py passed with no warnings or errors."
  }
 }

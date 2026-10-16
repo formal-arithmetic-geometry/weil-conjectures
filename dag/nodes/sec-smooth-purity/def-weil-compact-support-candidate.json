@@ -118,15 +118,14 @@
   "summary": "Checked against the master blueprint node (order 1472; slopmaster2 blueprint has no file for it) and against the source repository's Lean AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification (WeilConjectures/SixFunctors/ProEtale/Derived/LowerShriek.lean lines 86-100, same lines on master and slopmaster2, sorry-free), which is D(i_!) followed by R(g_*) for a compactification (Z, g proper, i open immersion, f = i >> g), with sheaves valued in any Grothendieck abelian category A (specializing to sheaves of A_{E,n}-modules). The definition is split into: coefficients A_{E,n} (def-weil-l-adic-coefficient-extension, replacing def-weil-finite-torsion-constructibility, which is stated only for the finite-field datum), the derived categories D(T_proet, A) (def-weil-pbc-proetale-site), Comp(f) (def-weil-compactifications-refinements), j_! (def-weil-extension-by-zero) with its exactness (lem-weil-extension-by-zero-exact) and the induced functor on derived categories (Mathlib leaf lem-sf-exact-functor-derived-triangulated, Functor.mapDerivedCategory), R\\bar f_{*,n} (def-weil-derived-direct-image), and, for the scope remark only, the subcategory D^+_et (def-sf-etale-origin-subcategory, which carries the etale-origin witness, so def-weil-pbc-etale-origin-witness is no longer cited directly). The scope remark is rewritten as a remark: its claims that D^+_et contains the finite-torsion constructible complexes and that the functor is independent of c there are properties proved elsewhere (lem-sf-proetale-constructible-origin, prop-compactification-coherence-detailed, which depends on this node), not part of the definition, and were dropped from it. No new node was needed."
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek",
-  "declaration": "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification",
-  "branch": "slopmaster2",
-  "line": 87,
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification"
-  ],
-  "sorry_free": true,
-  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  "module": "Sheaf.AlgebraicGeometry.AmbientExceptionalRightAdjoint",
+  "declaration": "AlgebraicGeometry.Scheme.sfAmbientCompactSupportCandidate",
+  "statement": "def sfAmbientCompactSupportCandidate\n    (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (d : Compactification f) : proEtaleDerivedCategory X A ⥤ proEtaleDerivedCategory Y A",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "§1(B): the recorded older generic sheaf-valued candidate cannot be imported with the intrinsic finite-coefficient framework because its old UpperLowerStar module duplicates notation declarations. The already published intrinsic candidate is exactly termwise extension by zero followed by the K-injective derived direct image of the proper factor, on the required constant-ring module categories, for the specified compactification."
  },
  "reviewed": {
   "date": "2026-10-09",
@@ -134,5 +133,13 @@
   "result": "pass"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9d5fdcbc8",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable delivery, all statement dependencies, source correspondence, canonical transitions, universes, edge cases, records, and docstrings. Both modules compile cleanly through scompile.py. No fixes needed; branch unchanged.; reverted the delivery's change of existing node(s) def-weil-derived-complete-integral-detailed (--revert-nodes; kept as on newtargets-dag)"
+ }
 }
