@@ -87,14 +87,6 @@ theorem ideal_power_quotient_local_lifting
       ∃ (m : ℕ) (h : n ≤ m), r n m h ≫ φ ≫ q n m h = 0) ∧
     (∀ s : Γ(F, U), ∃ (n : ℕ) (φ : (idealSheafPower ι n).1 ⟶ cokernel (a n)),
       (cokernel.π (a n)).app U s = φ.app U (one n)) := by
-  constructor
-  · intro n φ hφ
-    have : (A n).IsQuasicoherent := hqc n
-    have : (cokernel (a n)).IsQuasicoherent := Modules.isQuasicoherent_cokernel (a n)
-    obtain ⟨m, h, hm⟩ := ideal_power_evaluation_eventually_zero
-      ι (cokernel (a n)) U one r hU hone hr n φ hφ
-    exact ⟨m, h, by rw [← Category.assoc, hm, zero_comp]⟩
-  · exact ideal_power_quotient_local_lifting_section
-      ι F U one r hU hone hr A a hmono hqc hann hquot q hq
+  sorry
 
 end AlgebraicGeometry.Scheme
