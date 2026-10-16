@@ -7,7 +7,10 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.AlgebraicIndependent.Basic
+public import Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.ZetaSeries
 
 import WeilConjectures.PointCount
