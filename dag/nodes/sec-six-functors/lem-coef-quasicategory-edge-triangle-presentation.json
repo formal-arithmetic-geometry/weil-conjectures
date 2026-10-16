@@ -10,55 +10,100 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take the quasicategory $D=Q$ in [lem-coef-homotopy-category-triangle-calculus]. Define a functor $F:hQ\\to hD$ by $F(x)=x$ and by sending each finite edge word to the identical word; both presentations impose the same degenerate-edge identity and $2$-simplex relations, so this map is well-defined and preserves concatenation. The identical assignment in the reverse direction is its inverse, since both composites fix every word; in particular $F([u])=[u]$ and $F([v]\\circ[u])=[v]\\circ[u]$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-homotopy-category-triangle-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Remark 1.4.8, final paragraph (printed p.17), identity and triangle relations for the category associated to a simplicial set; Theorem 1.6.6 identifies it with the edge-class category."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-homotopy-category-triangle-calculus] with $D=Q$, using the given quasicategory hypothesis. For a morphism $a:x\\to y$ of $hQ$, its image $F(a)$ under step 1 is $[f]$ for a single edge $f:x\\to y$ by the first conclusion; applying the inverse gives $a=[f]$ in $hQ$. For the prescribed edges put $(f,g,h)=(u,v,w)$ in the second conclusion. That conclusion supplies a $2$-simplex in the same simplicial set $D=Q$ with those exact edges if and only if $[v]\\circ[u]=[w]$ in $hD$. The functor $F$ and its inverse preserve these edge classes and composition, so this equation holds in $hD$ if and only if it holds in $hQ$, proving the required equivalence.",
+   "uses": [
+    "lem-coef-homotopy-category-triangle-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemmas 1.6.2 and 1.6.4 and Theorem 1.6.6, printed pp.21-25."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-homotopy-category-triangle-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Remark 1.4.8 (printed p.17), paragraphs 1.6.1 and 1.6.5, Lemmas 1.6.2 and 1.6.4, and Theorem 1.6.6 (printed pp.21-25)."
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "iso.*[eE]dge|[eE]dge.*[iI]so|IsIso|preserves.*[Pp]roduct|homMk",
-   "results": "{\"t\": \"2026-10-16T19:44:57Z\", \"tool\": \"grep\", \"query\": \"iso.*[eE]dge|[eE]dge.*[iI]so|IsIso|preserves.*[Pp]roduct|homMk\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"6bcf10db22175676\"}",
+   "tool": "leanfinder",
+   "query": "For a quasicategory, every morphism in the generated homotopy category is represented by one edge, and equality of a composite of two edge classes with a third edge is equivalent to existence of a 2-simplex with those edges",
+   "results": "{\"t\": \"2026-10-16T21:23:54Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasicategory, every morphism in the generated homotopy category is represented by one edge, and equality of a composite of two edge classes with a third edge is equivalent to existence of a 2-simplex with those edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.instSetoidEdge\", \"SSet.Truncated.HomotopicR\", \"SSet.Truncated.Edge.CompStruct.nonempty_iff\", \"SSet.OneTruncation₂.HoRel₂.mk\", \"SSet.Truncated.HomotopicL\", \"SSet.Truncated.Edge.CompStruct.comp_unique\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.OneTruncation₂.HoRel₂.of_compStruct\"], \"digest\": \"58673503d0217b60\"}",
    "date": "2026-10-16",
-   "verdict": "partial match, not a leaf: read Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean:210-310. HomotopyCategory₂.homMk_surjective at line 245 and Edge.CompStruct.nonempty_iff at line 295 state the two clauses for the separately constructed edge-quotient category. SimplicialSet/HomotopyCat.lean:19-40 defines the generated homotopy category. No declaration identifying these two categories was found in either file. That agreement is the Boardman-Vogt theorem, not a one-line specialization; preservesFiniteProducts is a different claim."
+   "verdict": "partial candidate, not a leaf: Mathlib supplies edge-quotient declarations but not the comparison with the generated hQ presentation."
   },
   {
    "tool": "leansearch",
-   "query": "For quasicategories the homotopy category has edges modulo homotopy and an edge is an equivalence iff it is an isomorphism in the homotopy category; homotopy category preserves finite products",
-   "results": "{\"t\": \"2026-10-16T19:44:57Z\", \"tool\": \"leansearch\", \"query\": \"For quasicategories the homotopy category has edges modulo homotopy and an edge is an equivalence iff it is an isomorphism in the homotopy category; homotopy category preserves finite products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"SSet.Truncated.instSetoidEdge\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"SSet.Truncated.instCategoryHomotopyCategory₂\"], \"digest\": \"799fd456347b18f3\"}",
+   "query": "For a quasicategory, every morphism in the generated homotopy category is represented by one edge and a composition equality of edge classes is equivalent to a 2-simplex",
+   "results": "{\"t\": \"2026-10-16T21:23:54Z\", \"tool\": \"leansearch\", \"query\": \"For a quasicategory, every morphism in the generated homotopy category is represented by one edge and a composition equality of edge classes is equivalent to a 2-simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory₂.homMk\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk\", \"SSet.Quasicategory\", \"SSet.Truncated.Edge.CompStruct.ofHomotopyCategory₂Fac\", \"SSet.Truncated.HomotopyCategory.homMk\", \"HomotopyCategory.quasiIso.congr_simp\", \"SSet.Truncated.HomotopicR\", \"SSet.Truncated.HomotopicL.congr_homotopyCategory₂HomMk\"], \"digest\": \"f9c8a3e735f4b35c\"}",
    "date": "2026-10-16",
-   "verdict": "partial match, not a leaf: read Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean:210-310. HomotopyCategory₂.homMk_surjective at line 245 and Edge.CompStruct.nonempty_iff at line 295 state the two clauses for the separately constructed edge-quotient category. SimplicialSet/HomotopyCat.lean:19-40 defines the generated homotopy category. No declaration identifying these two categories was found in either file. That agreement is the Boardman-Vogt theorem, not a one-line specialization; preservesFiniteProducts is a different claim."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Every morphism in the homotopy category of a quasicategory is represented by an edge and an edge is invertible precisely when its class is an isomorphism",
-   "results": "{\"t\": \"2026-10-16T19:45:03Z\", \"tool\": \"leanfinder\", \"query\": \"Every morphism in the homotopy category of a quasicategory is represented by an edge and an edge is invertible precisely when its class is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_of_edge\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"SSet.Truncated.HomotopyCategory.homMk\", \"SSet.Truncated.HomotopyCategory₂.instCategoryStruct\", \"SSet.Truncated.instCategoryHomotopyCategory₂\", \"SSet.Truncated.HomotopyCategory₂.homMk_surjective\"], \"digest\": \"b2301c99eb783c9a\"}",
-   "date": "2026-10-16",
-   "verdict": "partial match, not a leaf: read Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean:210-310. HomotopyCategory₂.homMk_surjective at line 245 and Edge.CompStruct.nonempty_iff at line 295 state the two clauses for the separately constructed edge-quotient category. SimplicialSet/HomotopyCat.lean:19-40 defines the generated homotopy category. No declaration identifying these two categories was found in either file. That agreement is the Boardman-Vogt theorem, not a one-line specialization; preservesFiniteProducts is a different claim."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The fundamental category of a simplicial set satisfying inner horn filling is computed by homotopy classes of edges and triangles",
-   "results": "{\"t\": \"2026-10-16T20:23:20Z\", \"tool\": \"leanfinder\", \"query\": \"The fundamental category of a simplicial set satisfying inner horn filling is computed by homotopy classes of edges and triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryOfKanComplex\", \"SSet.Truncated.HomotopyCategory\", \"SSet.Truncated.instCategoryHomotopyCategory\", \"SSet.QCat\", \"SSet.Truncated.HomotopyCategory.mk\", \"SSet.Truncated.HomotopyCategory₂\", \"SSet.Truncated.instCategoryHomotopyCategory₂\", \"SSet.hoFunctor\"], \"digest\": \"fe708d050613be83\"}",
-   "date": "2026-10-17",
-   "verdict": "partial candidate, not a leaf: read Quasicategory/TwoTruncated.lean:21-28, 242-245, 283-297 and SimplicialSet/HomotopyCat.lean:224-241, 301-305, 349-379. The former proves the two clauses for the edge-quotient category; the latter defines the generated category and proves only the forward composition relation and its universal property. TwoTruncated.lean:28 explicitly marks their comparison as TODO. No returned declaration supplies the generated-category converse triangle criterion."
-  },
-  {
-   "tool": "grep",
-   "query": "HomotopyCategory₂.*[Ee]quiv|[Ee]quiv.*HomotopyCategory₂|ofHomotopyCategory₂Fac|homMk_surjective",
-   "results": "{\"t\": \"2026-10-16T20:24:35Z\", \"tool\": \"grep\", \"query\": \"HomotopyCategory₂.*[Ee]quiv|[Ee]quiv.*HomotopyCategory₂|ofHomotopyCategory₂Fac|homMk_surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"f67b1049a255ffb7\"}",
-   "date": "2026-10-17",
-   "verdict": "partial candidate, not a leaf: read Quasicategory/TwoTruncated.lean:21-28, 242-245, 283-297 and SimplicialSet/HomotopyCat.lean:224-241, 301-305, 349-379. The former proves the two clauses for the edge-quotient category; the latter defines the generated category and proves only the forward composition relation and its universal property. TwoTruncated.lean:28 explicitly marks their comparison as TODO. No returned declaration supplies the generated-category converse triangle criterion."
+   "verdict": "partial candidate, not a leaf: returned HomotopyCategory₂ and edge composition declarations do not identify the generated hQ."
   },
   {
    "tool": "loogle",
-   "query": "SSet.Truncated.Edge.CompStruct, SSet.Truncated.HomotopyCategory",
-   "results": "{\"t\": \"2026-10-16T20:24:36Z\", \"tool\": \"loogle\", \"query\": \"SSet.Truncated.Edge.CompStruct, SSet.Truncated.HomotopyCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homMk_comp_homMk\", \"SSet.Truncated.HomotopyCategory.homMk_comp_homMk_assoc\", \"SSet.Truncated.HomotopyCategory.lift\", \"SSet.Truncated.HomotopyCategory.lift_obj_mk\", \"SSet.Truncated.HomotopyCategory.lift_map_homMk\"], \"digest\": \"aee05c7df78509f1\"}",
-   "date": "2026-10-17",
-   "verdict": "partial candidate, not a leaf: read Quasicategory/TwoTruncated.lean:21-28, 242-245, 283-297 and SimplicialSet/HomotopyCat.lean:224-241, 301-305, 349-379. The former proves the two clauses for the edge-quotient category; the latter defines the generated category and proves only the forward composition relation and its universal property. TwoTruncated.lean:28 explicitly marks their comparison as TODO. No returned declaration supplies the generated-category converse triangle criterion."
+   "query": "SSet.Truncated.HomotopyCategory₂.homMk_surjective, SSet.Truncated.Edge.CompStruct.nonempty_iff",
+   "results": "{\"t\": \"2026-10-16T21:23:55Z\", \"tool\": \"loogle\", \"query\": \"SSet.Truncated.HomotopyCategory₂.homMk_surjective, SSet.Truncated.Edge.CompStruct.nonempty_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no direct match: the query returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "HomotopyCategory₂|Edge.CompStruct|homMk_surjective|nonempty_iff",
+   "results": "{\"t\": \"2026-10-16T21:23:55Z\", \"tool\": \"grep\", \"query\": \"HomotopyCategory₂|Edge.CompStruct|homMk_surjective|nonempty_iff\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"8e8f488d64a606da\"}",
+   "date": "2026-10-16",
+   "verdict": "partial match, not a leaf: grep found Mathlib TwoTruncated declarations, but no generated-category comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a simplicial set satisfying inner horn filling, compare categorification by the nerve left adjoint with the category of homotopy classes of edges",
+   "results": "{\"t\": \"2026-10-16T21:38:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a simplicial set satisfying inner horn filling, compare categorification by the nerve left adjoint with the category of homotopy classes of edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\"], \"digest\": \"489a7ec56d3a8912\"}",
+   "date": "2026-10-16",
+   "verdict": "Partial candidates only: nerveAdjunction and functorEquiv describe the nerve adjunction for the generated category; they do not supply the comparison with edge homotopy classes or the converse triangle criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyCategory₂_fac\"",
+   "results": "{\"t\": \"2026-10-16T21:39:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"homotopyCategory₂_fac\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.Truncated.Edge.CompStruct.homotopyCategory₂_fac\"], \"digest\": \"2075afa9187c7054\"}",
+   "date": "2026-10-16",
+   "verdict": "Partial candidate only: homotopyCategory₂_fac proves the triangle-to-equation direction for the edge-class category, not the generated presentation or its converse."
+  },
+  {
+   "tool": "grep",
+   "query": "hoFunctor₂|homotopyCategory₂_fac|TODO",
+   "results": "{\"t\": \"2026-10-16T21:39:18Z\", \"tool\": \"grep\", \"query\": \"hoFunctor₂|homotopyCategory₂_fac|TODO\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/WellApproximable.lean\", \"Mathlib/SetTheory/Ordinal/Arithmetic.lean\", \"Mathlib/SetTheory/Ordinal/Arithmetic.lean\", \"Mathlib/SetTheory/Ordinal/Arithmetic.lean\", \"Mathlib/NumberTheory/LucasLehmer.lean\", \"Mathlib/Lean/Name.lean\", \"Mathlib/SetTheory/Ordinal/Exponential.lean\"], \"digest\": \"d5bfb2cff2519638\"}",
+   "date": "2026-10-16",
+   "verdict": "The unrestricted query was truncated to 25 unrelated TODO hits; no absence conclusion follows from this search."
+  },
+  {
+   "tool": "grep",
+   "query": "hoFunctor₂|homotopyCategory₂_fac|TODO",
+   "results": "{\"t\": \"2026-10-16T21:39:39Z\", \"tool\": \"grep\", \"query\": \"hoFunctor₂|homotopyCategory₂_fac|TODO\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"411da27abd86043d\"}",
+   "date": "2026-10-16",
+   "verdict": "Partial candidates only: TwoTruncated.lean:28 explicitly marks comparison with the generated HomotopyCategory as TODO; lines 274 and 295-297 provide triangle criteria for HomotopyCategory₂ only."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-joyal-quasicategory-characterizations",
@@ -69,7 +114,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, displayed derived R Hom / R lim calculation: coherent diagram realization through finite-Reedy localization, at the source-attachment join/cone comparison. Legitimate ordinary pullback of the cone comparison over a varying joint endpoint base. Identification of Joyal fibrations and weak equivalences between quasicategories, used to factor the graph of the comparison. At this identification, single-edge representatives and triangle realization convert isomorphisms in hFun into the actual coherent equivalence edges required by the weak-equivalence clause.",
+   "place": "Proof paragraph 2: the identification of the Joyal/quasicategorical comparison uses single-edge representatives and triangle realization to convert equations in the generated homotopy category into actual coherent 2-simplices.",
    "via": [
     "lem-coef-joyal-quasicategory-characterizations",
     "lem-coef-infinity-isofibration-base-change",
@@ -94,5 +139,21 @@
   "file": "Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
   "lines": "245, 295-297",
   "why_not_leaf": "These apply to the edge-quotient HomotopyCategory₂; the generated hQ in the statement needs the Boardman-Vogt comparison with that category."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-quasicategory-edge-triangle-presentation",
+  "worker": "stage1",
+  "summary": "No finished Lean declaration was found. The existing DAG node lem-coef-homotopy-category-triangle-calculus states the same edge-word presentation theorem explicitly, so no duplicate node is introduced. Step 1 writes the mutually inverse maps on words identifying the two presentations; step 2 substitutes D=Q and (f,g,h)=(u,v,w) in that existing theorem, with the edge representatives and equations checked under these maps. Both readers checked Cisinski; the second reader corrected the presentation reference to Remark 1.4.8 and independently searched Mathlib. Its generated/edge-class comparison remains TODO. The archived Cisinski copy is still wanted.",
+  "blueprint": "The two steps realize the parent proof paragraph's single-edge-representative and triangle-realization clauses at the generated homotopy-category comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-20acac9f0",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-20acac9f0 (reviewer sub-agent of L); spot-checked: I read the item, its two-step split and the cited nodes lem-coef-homotopy-category-triangle-calculus and def-cbc-enhanced-diagrams-cones in full. I checked them against Cisinski CatLR.pdf, the online text read on 2026-10-17 (it is not archived; the report lists it as WANTED): Remark 1.4.8 (the generators-and-relations description of tau(X)), 1.6.3–1.6.5, Lemma 1.6.4, and Theorem 1.6.6 with its proof (pp.21–25). Clause 1 follows from tau(X)≅ho(X), whose morphisms are classes of single edges. Clause 2 follows because the proof of 1.6.6 shows that whether gf~h holds depends only on [f],[g],[h]. So the converse gives a 2-simplex with the exact prescribed edges, and the item is not weakened. The edge orientation [0,1]/[1,2]/[0,2] matches. Step 1 is correctly marked elementary: the cited node's hD (edge words modulo degenerate edge = identity and the 2-simplex relation) is the same presentation as the item's hQ, so the identity on words is an isomorphism. Step 2 uses only the two conclusion sentences of the cited statement, with D=Q and (f,g,h)=(u,v,w), and transfers them across that isomorphism with the argument written out (E5 is satisfied). The delivery creates no new node. The cited node is a same-day existing duplicate of the item (Q07, unsplit, same unit, same Cisinski places). Citing it follows the brief's rule that a restatement of an existing node is cited, not re-created. This is not D1, D2 or D4: the cited node existed before this split and has no proof_deps, so there is no cycle. The maintainer may still merge the two nodes under stages §2 'Duplicates', but that is not a delivery fault. Small cases check out: the empty simplicial set, Δ⁰, and nerves of categories, including degenerate edges. Gluing two edges end to end without a 2-simplex shows the quasicategory hypothesis is needed, and the item has it. The Mathlib verdict (HomotopyCategory₂ candidates, comparison marked TODO, not a leaf) is correct. tool_uses is empty, as it should be within the same unit. No SGA is cited. No fixes were made."
  }
 }

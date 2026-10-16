@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: Proposition 4.3.5 and Remark 4.3.4; graph/operadic algebra construction of section 4.3, with limits as in Higher Algebra section 3.2.2; supporting general theorem: Proposition 4.1.7; Corollary 3.2.14 (ordinary operadic replacement); Remark 4.3.2; Corollary 4.2.8 and Definition 4.3.3 (colors). Supporting argument for this split: Remark 4.2.5, citing Dwyer–Kan, Homotopy theory and simplicial groupoids, Theorems 2.5 and 3.3. Read online; not archived in literature/. No Stacks tag states this infinity-categorical result.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, finite-coefficient mapping-complex adjunction before R lim; the inherited chain to many-object operadic accessibility uses Gepner--Haugseng Remark 4.2.5 to replace a small object space by a fibrant strict simplicial groupoid. This split supplies that existence by cofibrant rigidification, degreewise inversion, and Ex-infinity on mapping sets.",
    "via": [
     "lem-coef-many-object-operad-accessibility",
     "lem-coef-algebroid-presentability",
@@ -28,9 +28,92 @@
   "def-coef-complete-algebroid",
   "lem-coef-coherent-nerve-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Represent the given small space by its Kan complex $X$, and put $A=\\mathfrak C[X]$. In the Joyal model structure $\\varnothing\\to X$ is a monomorphism, hence a cofibration. The left Quillen functor $\\mathfrak C$ preserves this initial map and cofibrations, so $A$ is Bergner-cofibrant. The derived unit of the Quillen equivalence gives $X\\simeq\\mathbf RN_{\\mathrm{hc}}(A)=N_{\\mathrm{hc}}(RA)$. This last nerve is itself Kan. The mapping-space and composition comparisons identify its homotopy category with $\\pi_0(RA)$. The derived-unit map is the identity on vertices, since rigidification and $R$ keep those objects, and induces bijections on hom sets of homotopy categories. For an arrow class $a:x\\to y$ in $\\pi_0(RA)$, lift it along this bijection to a class $f:x\\to y$ in $hX$. Filling the outer $2$-horn with edges $f$ and $\\mathrm{id}_x$ gives a left inverse $g$, and filling the other outer $2$-horn with $f$ and $\\mathrm{id}_y$ gives a right inverse $h$. In $hX$ these coincide because $g=g(fh)=(gf)h=h$. The image of $g$ is therefore a two-sided inverse of $a$, so $\\pi_0(RA)$ is a groupoid. The Kan conclusion now follows from the locally Kan/groupoid clause of the coherent-nerve comparison. Thus the derived unit is an equivalence between spaces, not merely between arbitrary quasicategories.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and its proof, printed pp.89-92; Proposition 1.2.5.1; derived-unit computation as in Appendix A.2.5."
+   }
+  },
+  {
+   "text": "Let $O=\\operatorname{Ob}A$, and form the degreewise ordinary groupoid completion $B=A[A^{-1}]$ with this same object set. Every simplicial operator on $A$ extends uniquely to $B$, sending each formal inverse to the inverse of the image, so $B$ is a strict simplicial groupoid with constant objects. Apply the total-inversion clause of [lem-coef-cofibrant-simplicial-inversion] to the cofibrant pair $A\\xrightarrow{\\mathrm{id}}A$ on $O$; the identity is a cofibration. It gives a weak homotopy equivalence $\\mathbf RN_{\\mathrm{hc}}(A)\\to\\mathbf RN_{\\mathrm{hc}}(B)$ and says that the target is Kan. There is no assumption here that the original mapping sets of $A$ were Kan.",
+   "uses": [
+    "lem-coef-cofibrant-simplicial-inversion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Sections 9.1-9.2, printed p.279; use the existing coherent-nerve formulation of cofibrant inversion."
+   }
+  },
+  {
+   "text": "Write $F=\\operatorname{Ex}^{\\infty}$. Keep $O$ as object set and define $G(x,y)=F(B(x,y))$. If $c_{P,Q}:F(P\\times Q)\\xrightarrow{\\cong}FP\\times FQ$ and $c_0:F(*)\\xrightarrow{\\cong}*$ are the canonical comparisons, define composition by $F(m)\\circ c_{P,Q}^{-1}$, identities by $F(e_x)\\circ c_0^{-1}$, and inversion by $F(i_{x,y}):F(B(x,y))\\to F(B(y,x))$. These operations satisfy the strict groupoid equations: after the canonical product comparisons, associativity is $F(m\\circ(m\\times1))=F(m\\circ(1\\times m))$, and the two inverse equations are the images of $m(i(a),a)=e$ and $m(a,i(a))=e$. The unit equations are also preserved: writing $e_x:*\\to B(x,x)$ and $p:B(x,y)\\to *$, the original equations are $m\\circ\\langle e_y p,\\mathrm{id}\\rangle=\\mathrm{id}$ and $m\\circ\\langle\\mathrm{id},e_x p\\rangle=\\mathrm{id}$, and applying $F$ gives the corresponding two equations on $G(x,y)$. Product projections and diagonals are preserved by the canonical comparisons; their iterated comparisons agree because their projections agree. Thus the displayed associative, unit, and inverse equations are equalities of simplicial maps. Consequently every degree of $G$ is an ordinary groupoid and all its simplicial operators preserve inverses.",
+   "uses": [
+    "lem-coef-ex-infinity-finite-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZA",
+    "place": "Proposition 3.3.6.4: preservation of finite limits, applied to the composition, identity and inverse equations."
+   }
+  },
+  {
+   "text": "For each ordered pair $(x,y)$, the Kan-replacement theorem makes $G(x,y)$ Kan and makes $B(x,y)\\to G(x,y)$ a weak homotopy equivalence. Naturality of this unit, including its compatibility with the canonical product comparisons, makes these maps an enriched functor $u:B\\to G$ identity on $O$. Its map on each hom set of $\\pi_0$ is bijective and its object map is the identity, so $\\pi_0u$ is an equivalence. Thus $u$ is a Dwyer--Kan equivalence. This also proves that $G$ is fibrant in the meaning required by the item.",
+   "uses": [
+    "lem-coef-ex-infinity-finite-products",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZA",
+    "place": "Construction 3.3.6.1 and Propositions 3.3.6.4, 3.3.6.7, 3.3.6.9; the Dwyer--Kan condition is the definition in the cited comparison node."
+   }
+  },
+  {
+   "text": "The derived coherent nerve inverts the Dwyer--Kan equivalence $u$, giving $\\mathbf RN_{\\mathrm{hc}}(B)\\simeq\\mathbf RN_{\\mathrm{hc}}(G)$. Since $G$ is already locally Kan, the right-derived-functor calculation may use $G$ itself as fibrant replacement, giving $\\mathbf RN_{\\mathrm{hc}}(G)\\simeq N_{\\mathrm{hc}}G$; this does not assert that the specified functor $R$ literally fixes $G$. Each arrow of $\\pi_0G$ has the inverse induced by the strict inverse in degree zero. Hence $\\pi_0G$ is a groupoid and the coherent-nerve comparison says that $N_{\\mathrm{hc}}G$ is Kan. These comparisons are therefore equivalences between spaces.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1; Proposition 1.2.5.1; Appendix A.2.5, computation of the right derived functor on fibrant objects."
+   }
+  },
+  {
+   "text": "Combining the preceding equivalences of spaces gives $X\\simeq\\mathbf RN_{\\mathrm{hc}}(A)\\simeq\\mathbf RN_{\\mathrm{hc}}(B)\\simeq N_{\\mathrm{hc}}G$, and invert the composite to obtain the requested equivalence. All constructions stay in $\\mathcal U$: $\\mathfrak C[X]$ is the colimit over the small set of simplices of $X$ of its small simplex rigidifications; each groupoid completion uses finite signed words in small arrow sets and a quotient; each $F(B(x,y))$ uses maps out of finite subdivided simplices and a countable colimit. The object set remains the small set $O$. For $X=\\varnothing$ all three categories are empty and the conclusion is the identity on the empty space. No basepoint, connectedness, or nonempty mapping-set assumption was used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Remark 4.2.5, existence conclusion; universe bookkeeping for the explicit construction in steps 1-5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-complete-algebroid",
+  "lem-coef-cofibrant-simplicial-inversion",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-ex-infinity-finite-products",
+  "lem-coef-model-infinity-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Remark 4.2.5, existence of fibrant simplicial-groupoid models, proved here from the existing cofibrant-inversion, coherent-nerve and Ex-infinity nodes rather than restated as a new model-equivalence node. Supporting online sources: Dwyer--Kan I Section 9.2; HTT Theorem 2.2.5.1; Kerodon Section 3.3.6. Not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +156,66 @@
    "results": "{\"t\": \"2026-10-16T20:26:00Z\", \"tool\": \"leanfinder\", \"query\": \"Every homotopy type has a simplicial groupoid presentation with Kan hom spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.Truncated.HomotopyCategory.lift_obj_mk\", \"SSet.Truncated.HomotopyCategory\", \"SSet.Truncated.HomotopyCategory₂\", \"SSet.Truncated.HomotopyCategory.cases_on\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"SSet.Truncated.HomotopyCategory.mk\", \"SSet.hoFunctor\"], \"digest\": \"aba16223d750c982\"}",
    "date": "2026-10-17",
    "verdict": "no match: QCat and truncated homotopy categories do not give simplicial-groupoid presentations of every space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every small space admits a fibrant strict simplicial groupoid whose homotopy coherent nerve is equivalent to it",
+   "results": "{\"t\": \"2026-10-16T21:23:51Z\", \"tool\": \"leanfinder\", \"query\": \"Every small space admits a fibrant strict simplicial groupoid whose homotopy coherent nerve is equivalent to it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.QCat\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.FibrantObject.ι\"], \"digest\": \"32790ceac48556aa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The hits concern ordinary or truncated nerves, quasicategories, and general model-category cofibrant/fibrant objects; none constructs strict simplicial groupoids presenting all spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialNerve, CategoryTheory.Groupoid",
+   "results": "{\"t\": \"2026-10-16T21:23:52Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialNerve, CategoryTheory.Groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: No declaration returned for the joint coherent-nerve/groupoid pattern."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.*groupoid|groupoid.*simplicial|cofibrant.*inver",
+   "results": "{\"t\": \"2026-10-16T21:23:52Z\", \"tool\": \"grep\", \"query\": \"simplicial.*groupoid|groupoid.*simplicial|cofibrant.*inver\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/StrictInitial.lean\"], \"digest\": \"2527ba7ebf10fff0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the hits: SimplicialNerve.lean:193 defines the nerve only; StrictSegal.lean:34 gives the inner horn condition, and StrictInitial.lean:32 is a TODO. No presentation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "def SimplicialNerve|theorem quasicategory|def QCat",
+   "results": "{\"t\": \"2026-10-16T21:24:31Z\", \"tool\": \"grep\", \"query\": \"def SimplicialNerve|theorem quasicategory|def QCat\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"3281b6210e2ec9f6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read the hits: SimplicialNerve.lean:193 defines the nerve only; StrictSegal.lean:34 gives the inner horn condition, and StrictInitial.lean:32 is a TODO. No presentation theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every Kan complex is equivalent to the homotopy coherent nerve of a simplicial groupoid with Kan mapping spaces",
+   "results": "{\"t\": \"2026-10-16T21:24:31Z\", \"tool\": \"leansearch\", \"query\": \"Every Kan complex is equivalent to the homotopy coherent nerve of a simplicial groupoid with Kan mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryOfKanComplex\", \"SSet.KanComplex\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.Idempotents.DoldKan.N_map\", \"CategoryTheory.Idempotents.DoldKan.N_obj\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\"], \"digest\": \"59743f2849afc7b8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Kan implies quasicategory, ordinary nerve/homotopy-category adjunction, and Dold--Kan results do not give the strict simplicial-groupoid presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict simplicial groupoid completion of a cofibrant simplicial category preserves its classifying space and models every Kan homotopy type",
+   "results": "{\"t\": \"2026-10-16T21:24:34Z\", \"tool\": \"leanfinder\", \"query\": \"Strict simplicial groupoid completion of a cofibrant simplicial category preserves its classifying space and models every Kan homotopy type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor\", \"SSet.QCat\", \"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.hoFunctor₂\", \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\"], \"digest\": \"9bffdd93001fd39a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The hits concern ordinary or truncated nerves, quasicategories, and general model-category cofibrant/fibrant objects; none constructs strict simplicial groupoids presenting all spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any Kan complex can be represented by a category enriched in Kan complexes whose morphisms are strictly invertible",
+   "results": "Eight semantic hits: SSet.QCat, the enrichment and simplicial-category instances for simplicial objects and SSet, ordinary nerve quasicategory, and SSet. Read Mathlib/AlgebraicTopology/SimplicialCategory/SimplicialObject.lean lines 34-41 and Quasicategory/Nerve.lean line 32: these construct enrichment and inner-horn fillers, not strict-groupoid presentations of arbitrary Kan complexes.",
+   "date": "2026-10-16",
+   "verdict": "no_match"
+  },
+  {
+   "tool": "grep",
+   "query": "coherentNerve|homotopyCoherentNerve|simplicialGroupoid|loopGroup",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no_match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-many-object-operad-accessibility",
@@ -84,5 +223,20 @@
   "group": "Q46"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-groupoid-models",
+  "worker": "stage1",
+  "summary": "No exact project Lean declaration was found. Reused four existing same-unit comparison/calculus lemmas and two definition nodes; created no new nodes. The six-step argument explicitly retains strict inverses under product-preserving Ex-infinity, distinguishes arbitrary local replacement from strict groupoid replacement, and checks all universes and the empty space. Corrected only doubled TeX escapes in the imported statement. Six actual msearch queries were read and appended; none states the result. Independent second reading expanded the inverse-class and unit-law arguments and recorded two additional actual searches; no statement or dependency changed.",
+  "blueprint": "Realizes the inherited support for the second proof paragraph of prop-coef-integral-exceptional-adjoint, via many-object operadic accessibility: Gepner--Haugseng Remark 4.2.5 (existence of a fibrant simplicial groupoid with given space as coherent nerve). Steps 1-2 build its homotopy type, steps 3-4 supply strict inverses and local Kan fibrancy, and steps 5-6 identify the coherent nerve and check size."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NO-60d850580",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-60d850580 (reviewer sub-agent of L); spot-checked: I read the item, all six cited nodes (def-cbc-enhanced-diagrams-cones, def-coef-complete-algebroid, lem-coef-coherent-nerve-comparison, lem-coef-cofibrant-simplicial-inversion, lem-coef-ex-infinity-finite-products, lem-coef-model-infinity-derived-adjunction), the only citer lem-coef-many-object-operad-accessibility, and the blueprint ancestor prop-coef-integral-exceptional-adjoint (main-20261015, proof paragraph 2). The statement is true (the Dwyer-Kan comparison in coherent-nerve form) and is not weakened; it includes the empty space and needs no basepoint. Step 1: C[X] is Bergner-cofibrant. The derived unit is an equivalence by the Quillen equivalence and is the identity on vertices. Outer horns show pi_0(RA) is a groupoid, so the Kan clause applies. Step 2: the inversion node is applied to the identity cofibration; its hypotheses hold and its statement explicitly gives the weak equivalence and the Kan target. Step 3: correctly marked elementary; applying the finite-product-preserving Ex^infty to the groupoid equations, including both unit laws. Step 4: I checked enrichment directly as m_G(u x u) = F(m)u = u m; u is a Dwyer-Kan equivalence and G is fibrant. Step 5: weak equivalences between fibrant objects are preserved (Bergner-fibrant means locally Kan), and the step never assumes R fixes G. Step 6: smallness and the empty case are correct. Small cases checked: empty space, point, discrete space, non-connected space. No cycle, all cited theorems are in the item's unit, no duplicate (I searched with rg for simplicial groupoid, Dwyer-Kan, loop group and Ex^infty), all four kinds of Mathlib search are recorded, and no SGA source is used. The external sources (GH 4.2.5, DK I 9, HTT 2.2.5.1, Kerodon 3.3.6) are not archived locally; they are WANTED, proof_origin is agent, and I checked the steps against my own knowledge of these results. No fixes were made and no tool_uses were declared."
+ }
 }
