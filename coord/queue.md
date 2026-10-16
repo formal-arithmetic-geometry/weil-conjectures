@@ -1,6 +1,6 @@
 # Work queue
 
-15 items; claim with `tools/claim.py next <group> [--stage N]`.
+16 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (15)
+## Stage 3: modules to prove (16)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -24,6 +24,7 @@
 | `Sheaf.Paper.IntegralResidueScalarRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.InverseImageModuleFlat` | 12 | 1 | proof |
-| `WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange` | 12 | 1 | proof |
 | `Sheaf.Paper.ProEtaleUniformModelEtaleCover` | 13 | 1 | proof |
+| `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonCounit` | 13 | 1 | proof |
+| `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquare` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
