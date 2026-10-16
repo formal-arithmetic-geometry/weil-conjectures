@@ -1,0 +1,115 @@
+{
+ "id": "lem-sf-constant-module-unit-locally-bijective",
+ "kind": "statement",
+ "title": "The constant-module unit is locally bijective",
+ "statement": "Let (C,J) be a small site, Λ a commutative ring, and M a Λ-module. Let F(M) be the constant module sheaf [def-sf-site-constant-module-functor]. Restrict its section modules along the ring sheafification unit Λ→underlineΛ(U) to obtain a presheaf P_M of Λ-modules. The unit η_M:const(M)→P_M is locally injective and locally surjective. Its underlying additive map is the ordinary additive sheafification unit, and its values are natural in M.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 093T: module sheafification unit and constant module sheaf construction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sf-site-constant-module-functor",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Construct the additive unit as toSheafify J of the constant additive presheaf underlying M. Use the generic local injectivity and local surjectivity instances for this unit. Restrict the scalar action of F(M)(U) along the ring unit at U; the module restriction maps give a Λ-module presheaf. The module-sheafification adjunction unit gives η_M as a linear natural transformation. Its underlying function is definitionally the additive unit, so their equalizer and image sieves agree. The additive unit instances therefore prove both properties for η_M. Naturality in M follows by applying the additive toSheafify_naturality equation to a constant section.",
+   "uses": [
+    "def-sf-site-constant-module-functor",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-site-constant-module-functor",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 093T: module sheafification unit and constant module sheaf construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The linear sheafification unit of a constant module is locally injective and locally surjective",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.Presheaf.isLocallySurjective_toSheafify', CategoryTheory.GrothendieckTopology.instIsLocallyInjectiveToSheafify, CategoryTheory.Sheaf.locallyInjective, CategoryTheory.GrothendieckTopology.instIsLocallySurjectiveToSheafify, CategoryTheory.Presheaf.isLocallyInjective_toSheafify', CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff, CategoryTheory.Presheaf.isLocallyInjective_toSheafify, PresheafOfModules.instIsLocallyInjectiveToSheafify",
+   "verdict": "Use the existing locally bijective additive sheafification unit. The new declarations identify its underlying function with the linear unit after restricting along the constant-ring unit, for the project constant-module functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toSheafify\", \"IsLocallySurjective\"",
+   "date": "2026-10-16",
+   "results": "4 hits: CategoryTheory.Presheaf.isLocallySurjective_toSheafify', CategoryTheory.Presheaf.isLocallySurjective_toSheafify, CategoryTheory.GrothendieckTopology.instIsLocallySurjectiveToSheafify, PresheafOfModules.instIsLocallySurjectiveToSheafify",
+   "verdict": "Use the existing locally bijective additive sheafification unit. The new declarations identify its underlying function with the linear unit after restricting along the constant-ring unit, for the project constant-module functor."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationAdjunction|toSheafify|IsLocallySurjective",
+   "date": "2026-10-16",
+   "results": "5 hits: 36, 55, 58, 85, 96",
+   "verdict": "Use the existing locally bijective additive sheafification unit. The new declarations identify its underlying function with the linear unit after restricting along the constant-ring unit, for the project constant-module functor."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteConstantModuleIsomSheaf",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proetale-constructible-origin",
+   "place": "Proof, constant-module trivializations in the Isom paragraph of Stacks 099Y, using Modules on Sites 093T(1),(2): The constant-module unit is locally bijective",
+   "via": [
+    "lem-sf-site-constant-module-isom-sheaf",
+    "lem-sf-proetale-locally-constant-origin"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteConstantModuleUnit",
+  "file": "lean/Sheaf/CategoryTheory/SiteConstantModuleUnit.lean",
+  "declaration": "CategoryTheory.siteConstantModuleUnitSections_locallyBijective",
+  "declarations": [
+   "CategoryTheory.siteConstantModuleUnit",
+   "CategoryTheory.siteConstantModuleUnit_naturality",
+   "CategoryTheory.siteConstantModuleSections",
+   "CategoryTheory.siteConstantModuleUnitSections",
+   "CategoryTheory.siteConstantModuleUnitSections_locallyBijective"
+  ],
+  "statement": "theorem siteConstantModuleUnitSections_locallyBijective (M : ModuleCat.{u} Λ) : Presheaf.IsLocallyInjective J (siteConstantModuleUnitSections J Λ M) ∧ Presheaf.IsLocallySurjective J (siteConstantModuleUnitSections J Λ M)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T131234-L-3106505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T131234-L-3106505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

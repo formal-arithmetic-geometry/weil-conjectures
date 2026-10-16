@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-local-module-hom-sheaf",
+ "kind": "statement",
+ "title": "Local module Hom is a sheaf",
+ "statement": "Let (C,J) be a small site [def-weil-pbc-sites-and-cohomology], let R be a sheaf of rings, and let M,N be sheaves of R-modules [def-weil-sheaf-of-modules-category]. Define H(U) to consist of natural additive maps between the restrictions of M and N to C/U [def-pur-localized-ringed-site] that are linear over R(V) at every V over U, with restriction by precomposition on slices. Then H is a sheaf of sets, and H(U) is canonically equivalent to the set of R|U-linear morphisms M|U to N|U.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093T, proof of (1): the internal Hom sheaf; its local-linearity construction expanded using Mathlib Sites.SheafHom."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Take Mathlib presheafHom of the underlying additive presheaves. Its section over U is an additive natural transformation on C/U. Impose sectionwise R-linearity, a predicate stable under all restriction maps. PresheafOfModules.homMk and forgetting linearity give inverse equivalences with module-sheaf maps on C/U. Restriction evaluation, composition, and identities agree by componentwise extensionality.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib Presheaf.IsSheaf.hom makes the ambient additive Hom presheaf a sheaf. Apply Subfunctor.isSheaf_iff. For a locally linear additive map, fix V over U, r in R(V), and x in M(V). The restrictions of the two sides of linearity to the pullback covering sieve agree by local linearity and naturality. Separatedness of N gives their equality over V, proving locality of the predicate and hence the sheaf condition.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093T, proof of (1): the internal Hom sheaf; its local-linearity construction expanded using Mathlib Sites.SheafHom."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local morphisms of sheaves of modules form a sheaf, and linear maps from a finitely presented module lift locally along a locally bijective map from a constant presheaf",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.W, PresheafOfModules.IsLocallyInjective, SheafOfModules.IsFinitePresentation.mk, PresheafOfModules.sheafification_map, PresheafOfModules.homEquivOfIsLocallyBijective, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply",
+   "verdict": "Mathlib provides the additive presheafHom and its sheaf theorem, which the proof uses; the linearity subpresheaf, its equivalence with ringed-slice module maps, and the module Isom construction are not these declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules on any ringed site, the presheaf of morphisms on slices is a sheaf, and so is the presheaf of isomorphisms",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.Hom, SheafOfModules.instCategory, SheafOfModules.over, SheafOfModules.Hom.ext_iff, SheafOfModules.Hom.ext, SheafOfModules.isSheaf, SheafOfModules.Hom.mk.inj, SheafOfModules.forgetToSheafModuleCat",
+   "verdict": "Mathlib provides the additive presheafHom and its sheaf theorem, which the proof uses; the linearity subpresheaf, its equivalence with ringed-slice module maps, and the module Isom construction are not these declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"presheafHom\", \"IsSheaf\"",
+   "date": "2026-10-16",
+   "results": "4 hits: CategoryTheory.presheafHom_isSheafFor, CategoryTheory.PresheafHom.IsSheafFor.app, CategoryTheory.PresheafHom.IsSheafFor.app_cond, CategoryTheory.PresheafHom.IsSheafFor.exists_app",
+   "verdict": "Mathlib provides the additive presheafHom and its sheaf theorem, which the proof uses; the linearity subpresheaf, its equivalence with ringed-slice module maps, and the module Isom construction are not these declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHom|presheafHom|homEquivOfIsLocallyBijective",
+   "date": "2026-10-16",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean",
+   "verdict": "Mathlib provides the additive presheafHom and its sheaf theorem, which the proof uses; the linearity subpresheaf, its equivalence with ringed-slice module maps, and the module Isom construction are not these declarations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteConstantModuleIsomSheaf",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proetale-constructible-origin",
+   "place": "Proof, constant-module trivializations in the Isom paragraph of Stacks 099Y, using Modules on Sites 093T(1),(2): Local module Hom is a sheaf",
+   "via": [
+    "lem-sf-site-constant-module-isom-sheaf",
+    "lem-sf-proetale-locally-constant-origin"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.LocalModuleHom",
+  "file": "lean/Sheaf/CategoryTheory/LocalModuleHom.lean",
+  "declaration": "SheafOfModules.localHom_isSheaf",
+  "declarations": [
+   "SheafOfModules.localHomSubfunctor",
+   "SheafOfModules.localHom",
+   "SheafOfModules.localHomEquiv",
+   "SheafOfModules.localHomEquiv_map_app",
+   "SheafOfModules.localHom_isSheaf",
+   "SheafOfModules.localHomComp",
+   "SheafOfModules.localHomId",
+   "SheafOfModules.localHomComp_map",
+   "SheafOfModules.localHomId_map"
+  ],
+  "statement": "theorem localHom_isSheaf : Presheaf.IsSheaf J (localHom M N)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T131234-L-3106505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T131234-L-3106505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

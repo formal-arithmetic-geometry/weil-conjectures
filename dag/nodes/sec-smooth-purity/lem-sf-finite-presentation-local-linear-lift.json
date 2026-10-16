@@ -1,0 +1,116 @@
+{
+ "id": "lem-sf-finite-presentation-local-linear-lift",
+ "kind": "statement",
+ "title": "Local linear lifting for a finitely presented source",
+ "statement": "Let (C,J) be a small site [def-weil-pbc-sites-and-cohomology], Λ a commutative ring, M,N Λ-modules, P a presheaf of Λ-modules, and η:const(N)→P a linear natural transformation that is locally injective and locally surjective on underlying sets. Assume M is finitely presented. For every U and linear a:M→P(U), the sieve of arrows f:V→U for which there is a linear g:M→N with η_V∘g=P(f)∘a is covering.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093T, proof of (1), finite presentation and kernel argument, expanded as lifting finitely many generators and relations."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite generating set s and finitely generated kernel of p:Λ^(s)→M from Module.FinitePresentation.out. The span condition makes p surjective. Each a(s_i) has a covering image sieve under η. Intersect these finitely many covering sieves. On each arrow f in the intersection choose lifts n_i in N. Their linear extension q:Λ^(s)→N satisfies η_V q=P(f) a p, as checked on every basis vector and scalar.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose finitely many generators t of ker p. For each r in t, p(r)=0, so η_V(q(r))=η_V(0). Local injectivity of η makes the equality sieve of q(r) and zero covering. Intersect these finitely many sieves. On an arrow k in this intersection all q(r) vanish in N, since the source presheaf is constant. Hence ker p≤ker q. The quotient map from Λ^(s)/ker p to N, composed with the inverse of the first isomorphism theorem equivalence with M, gives g:M→N. For z in Λ^(s), g(p z)=q z. Surjectivity of p and naturality of η give η_W g=P(k≫f) a. Upward closure and transitivity of J prove that the entire lift sieve is covering. Empty generator or relation sets use the empty finite intersection, the maximal covering sieve, so the zero module is included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093T, proof of (1), finite presentation and kernel argument, expanded as lifting finitely many generators and relations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local morphisms of sheaves of modules form a sheaf, and linear maps from a finitely presented module lift locally along a locally bijective map from a constant presheaf",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.W, PresheafOfModules.IsLocallyInjective, SheafOfModules.IsFinitePresentation.mk, PresheafOfModules.sheafification_map, PresheafOfModules.homEquivOfIsLocallyBijective, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply",
+   "verdict": "No arbitrary-site finite-presentation lifting or constant-module Hom comparison is stated by these hits. Use Mathlib finite presentation by generators and relations and locally bijective morphism APIs to prove the result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from a finitely presented module lift locally through a locally bijective natural transformation from a constant presheaf of modules",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.Presentation.map_generators_I, SheafOfModules.IsFinitePresentation",
+   "verdict": "No arbitrary-site finite-presentation lifting or constant-module Hom comparison is stated by these hits. Use Mathlib finite presentation by generators and relations and locally bijective morphism APIs to prove the result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FinitePresentation\", \"IsLocallySurjective\"",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No arbitrary-site finite-presentation lifting or constant-module Hom comparison is stated by these hits. Use Mathlib finite presentation by generators and relations and locally bijective morphism APIs to prove the result."
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.*[Ll]ocal|[Ll]ocal.*FinitePresentation|FinitePresentation.out",
+   "date": "2026-10-16",
+   "results": "5 hits: Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean",
+   "verdict": "No arbitrary-site finite-presentation lifting or constant-module Hom comparison is stated by these hits. Use Mathlib finite presentation by generators and relations and locally bijective morphism APIs to prove the result."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteConstantModuleIsomSheaf",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proetale-constructible-origin",
+   "place": "Proof, constant-module trivializations in the Isom paragraph of Stacks 099Y, using Modules on Sites 093T(1),(2): Local linear lifting for a finitely presented source",
+   "via": [
+    "lem-sf-site-constant-module-isom-sheaf",
+    "lem-sf-proetale-locally-constant-origin"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FinitePresentationLocalLift",
+  "file": "lean/Sheaf/CategoryTheory/FinitePresentationLocalLift.lean",
+  "declaration": "CategoryTheory.finitePresentation_linearLiftSieve_mem",
+  "declarations": [
+   "CategoryTheory.linearLiftSieve",
+   "CategoryTheory.finitePresentation_linearLiftSieve_mem"
+  ],
+  "statement": "theorem finitePresentation_linearLiftSieve_mem [Module.FinitePresentation Λ M] [Presheaf.IsLocallyInjective J η] [Presheaf.IsLocallySurjective J η] {U : Cᵒᵖ} (a : M ⟶ P.obj U) : linearLiftSieve η a ∈ J U.unop",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T131234-L-3106505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T131234-L-3106505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

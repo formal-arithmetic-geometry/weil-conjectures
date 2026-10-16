@@ -1,0 +1,122 @@
+{
+ "id": "lem-sf-constant-module-over-hom-ext",
+ "kind": "statement",
+ "title": "Maps on slices from a constant module are determined by constants",
+ "statement": "Let (C,J) be a small site, Λ a commutative ring, M,N Λ-modules, U an object, and a,b:F(M)|U→F(N)|U maps of underlineΛ|U-module sheaves, where F is [def-sf-site-constant-module-functor]. If a and b have the same value on η_M(x) at the terminal object U/U for every x in M, then a=b. Evaluation there on η_M gives a Λ-linear map M→P_N(U), where P_N and η_M are as in [lem-sf-constant-module-unit-locally-bijective].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 093T: uniqueness in module sheafification, restricted to slices and evaluated on constants."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sf-site-constant-module-functor",
+  "def-pur-localized-ringed-site",
+  "lem-sf-constant-module-unit-locally-bijective"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate a at U/U and compose with the module unit. Restrict scalars along the ring unit to see that this is a Λ-linear map. For every V→U, naturality of a,b and η_M transports equality at U/U to equality on every constant η_M(x) over V.",
+   "uses": [
+    "lem-sf-constant-module-unit-locally-bijective",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any section s of F(M) over V, local surjectivity of η_M gives a covering image sieve on which s restricts to a constant η_M(x). The equality from the first step and naturality of a,b show their values on s agree after every restriction in that covering sieve. Separatedness of F(N) gives equality on s over V. Componentwise extensionality proves a=b.",
+   "uses": [
+    "lem-sf-constant-module-unit-locally-bijective",
+    "def-sf-site-constant-module-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-sf-site-constant-module-functor",
+  "lem-sf-constant-module-unit-locally-bijective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 093T: uniqueness in module sheafification, restricted to slices and evaluated on constants."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equality of maps from a constant module sheaf on a slice is determined on constant sections",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.const_congr, AlgebraicGeometry.StructureSheaf.const_ext, SheafOfModules.hom_ext_iff, PresheafOfModules.sections_ext_iff, AlgebraicGeometry.Scheme.Modules.hom_ext_iff, PresheafOfModules.sheafifyMap.congr_simp, AlgebraicGeometry.Scheme.Modules.hom_ext, AlgebraicGeometry.StructureSheaf.res_const",
+   "verdict": "The ordinary hom_ext lemmas compare all components; homEquivOfIsLocallyBijective is global. The new result checks only constant sections at the terminal object of a specified slice, then proves all-component equality using local surjectivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"hom_ext\"",
+   "date": "2026-10-16",
+   "results": "5 hits: PresheafOfModules.hom_ext, PresheafOfModules.hom_ext_iff, PresheafOfModules.free_hom_ext, SheafOfModules.hom_ext, SheafOfModules.hom_ext_iff",
+   "verdict": "The ordinary hom_ext lemmas compare all components; homEquivOfIsLocallyBijective is global. The new result checks only constant sections at the terminal object of a specified slice, then proves all-component equality using local surjectivity."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquivOfIsLocallyBijective|naturality_apply|hom_ext",
+   "date": "2026-10-16",
+   "results": "3 hits: 55, 117, 221",
+   "verdict": "The ordinary hom_ext lemmas compare all components; homEquivOfIsLocallyBijective is global. The new result checks only constant sections at the terminal object of a specified slice, then proves all-component equality using local surjectivity."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteConstantModuleIsomSheaf",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proetale-constructible-origin",
+   "place": "Proof, constant-module trivializations in the Isom paragraph of Stacks 099Y, using Modules on Sites 093T(1),(2): Maps on slices from a constant module are determined by constants",
+   "via": [
+    "lem-sf-site-constant-module-isom-sheaf",
+    "lem-sf-proetale-locally-constant-origin"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteConstantModuleOverHom",
+  "file": "lean/Sheaf/CategoryTheory/SiteConstantModuleOverHom.lean",
+  "declaration": "CategoryTheory.siteConstantModule_over_hom_ext",
+  "declarations": [
+   "CategoryTheory.siteConstantModuleLocalMap",
+   "CategoryTheory.siteConstantModule_over_hom_ext"
+  ],
+  "statement": "theorem siteConstantModule_over_hom_ext (U : C) (a b : ((siteConstantModuleFunctor J Λ).obj M).over U ⟶ ((siteConstantModuleFunctor J Λ).obj N).over U) (h : ∀ x : M, a.val.app (op (Over.mk (𝟙 U))) ((siteConstantModuleUnit J Λ M).app (op U) x) = b.val.app (op (Over.mk (𝟙 U))) ((siteConstantModuleUnit J Λ M).app (op U) x)) : a = b",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T131234-L-3106505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T131234-L-3106505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-constant-module-hom-locally-surjective",
+ "kind": "statement",
+ "title": "Local surjectivity of the constant module Hom comparison",
+ "statement": "Let (C,J) be a small site, Λ a commutative ring, M a finitely presented Λ-module, and N any Λ-module. For the constant module functor F [def-sf-site-constant-module-functor], the canonical map const(HomΛ(M,N))→H(F(M),F(N)) [lem-sf-local-module-hom-sheaf] sending a map to its induced sheaf map on every slice is locally surjective.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093T, proof of (1), finite presentation case, using the expanded lifting and uniqueness arguments."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sf-site-constant-module-functor",
+  "lem-sf-local-module-hom-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Represent a section x of local Hom over U by a slice map a:F(M)|U→F(N)|U. Evaluate a on constant sections at U/U to obtain a linear φ:M→P_N(U). The unit const(N)→P_N is locally bijective. Apply finite-presentation local linear lifting to φ; its lift sieve is covering.",
+   "uses": [
+    "lem-sf-local-module-hom-sheaf",
+    "lem-sf-constant-module-unit-locally-bijective",
+    "lem-sf-constant-module-over-hom-ext",
+    "lem-sf-finite-presentation-local-linear-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On any arrow f:V→U in that lift sieve choose the linear g:M→N. The induced constant-module sheaf map and the restriction of a agree on every constant section at V/V: this is the lift equation, the naturality of a, and the naturality of η_M and η_N. The constant-section extensionality theorem identifies these slice maps. Thus the lift sieve lies in the image sieve of x, and upward closure of J proves local surjectivity.",
+   "uses": [
+    "lem-sf-constant-module-over-hom-ext",
+    "lem-sf-constant-module-unit-locally-bijective",
+    "lem-sf-local-module-hom-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constant-module-over-hom-ext",
+  "lem-sf-constant-module-unit-locally-bijective",
+  "lem-sf-finite-presentation-local-linear-lift",
+  "lem-sf-local-module-hom-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093T, proof of (1), finite presentation case, using the expanded lifting and uniqueness arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local morphisms of sheaves of modules form a sheaf, and linear maps from a finitely presented module lift locally along a locally bijective map from a constant presheaf",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.W, PresheafOfModules.IsLocallyInjective, SheafOfModules.IsFinitePresentation.mk, PresheafOfModules.sheafification_map, PresheafOfModules.homEquivOfIsLocallyBijective, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply",
+   "verdict": "No arbitrary-site finite-presentation lifting or constant-module Hom comparison is stated by these hits. Use Mathlib finite presentation by generators and relations and locally bijective morphism APIs to prove the result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from a finitely presented module lift locally through a locally bijective natural transformation from a constant presheaf of modules",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.Presentation.map_generators_I, SheafOfModules.IsFinitePresentation",
+   "verdict": "No arbitrary-site finite-presentation lifting or constant-module Hom comparison is stated by these hits. Use Mathlib finite presentation by generators and relations and locally bijective morphism APIs to prove the result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FinitePresentation\", \"IsLocallySurjective\"",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No arbitrary-site finite-presentation lifting or constant-module Hom comparison is stated by these hits. Use Mathlib finite presentation by generators and relations and locally bijective morphism APIs to prove the result."
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.*[Ll]ocal|[Ll]ocal.*FinitePresentation|FinitePresentation.out",
+   "date": "2026-10-16",
+   "results": "5 hits: Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean",
+   "verdict": "No arbitrary-site finite-presentation lifting or constant-module Hom comparison is stated by these hits. Use Mathlib finite presentation by generators and relations and locally bijective morphism APIs to prove the result."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteConstantModuleIsomSheaf",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proetale-constructible-origin",
+   "place": "Proof, constant-module trivializations in the Isom paragraph of Stacks 099Y, using Modules on Sites 093T(1),(2): Local surjectivity of the constant module Hom comparison",
+   "via": [
+    "lem-sf-site-constant-module-isom-sheaf",
+    "lem-sf-proetale-locally-constant-origin"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteConstantModuleHomSurjective",
+  "file": "lean/Sheaf/CategoryTheory/SiteConstantModuleHomSurjective.lean",
+  "declaration": "CategoryTheory.siteConstantModuleHom_locallySurjective",
+  "declarations": [
+   "CategoryTheory.siteConstantModuleHom_locallySurjective"
+  ],
+  "statement": "theorem siteConstantModuleHom_locallySurjective {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ] (M N : ModuleCat.{u} Λ) [Module.FinitePresentation Λ M] : Presheaf.IsLocallySurjective J (SheafOfModules.constantLocalHom (siteConstantModuleFunctor J Λ) M N)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T131234-L-3106505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T131234-L-3106505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

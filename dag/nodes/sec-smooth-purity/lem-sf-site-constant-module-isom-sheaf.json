@@ -27,76 +27,40 @@
  ],
  "proof": [
   {
-   "text": "For any two module sheaves $F,G$, put $H(F,G)(U)=\\operatorname{Hom}_{\\underline\\Lambda|_U}(F|_U,G|_U)$, with restrictions by relocalization. This is a sheaf of abelian groups: for compatible maps on a covering $\\{U_i\\to U\\}$, and a section $s\\in F(V)$ over $V\\to U$, apply the local maps to $s$ on $V\\times_U U_i$. Their values agree on double overlaps and glue uniquely in $G(V)$. Uniqueness gives naturality in $V$, addition and linearity, since each required equality holds on that covering. The glued map is unique by the same argument. The localized-site definition identifies the covers and the relocalizations used here. The same construction glues inverses of compatible local isomorphisms; each composite equals the identity because its restrictions do. Hence the presheaf $\\mathcal I$ in the statement is a sheaf of sets, identified with the sheaf of pairs $(f,g)\\in H(\\underline M,\\underline N)\\times H(\\underline N,\\underline M)$ satisfying $gf=1_M$ and $fg=1_N$.",
+   "text": "Use the explicit presheaf of actual isomorphisms between F(M) and F(N) on ringed slices. Its restriction is the canonical conjugation by overFunctorMap, so the equivalences with the required slice isomorphisms are identity equivalences. It is a sheaf because local forward maps and inverse maps glue in the two local Hom sheaves.",
    "uses": [
-    "def-pur-localized-ringed-site",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-sf-local-module-isom-sheaf"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093T, lemma-locally-constant, inverse-pair description in the last paragraph of the proof; gluing written out"
-   }
+   "elementary": false
   },
   {
-   "text": "Finite free sources. On $\\mathcal C/U$, a morphism from the constant presheaf $\\Lambda^b$ to $\\underline N|_U$, linear over the constant ring presheaf, is exactly a tuple $(s_1,\\ldots,s_b)\\in\\underline N(U)^b$: take the images of the standard basis at the terminal object $U/U$, and at every $V/U$ use their restrictions. The module-sheafification universal property extends this uniquely to a morphism from $\\underline{\\Lambda^b}_{\\mathcal C/U}$ linear over the constant ring sheaf. The constant-restriction isomorphism identifies this source with $\\underline{\\Lambda^b}|_U$, compatibly with its generators and constant maps. Thus $H(\\underline{\\Lambda^b},\\underline N)(U)=\\underline N(U)^b$, naturally in $U$. Sheafification preserves finite products by [lem-weil-pbc-sheafification-exact], giving $\\underline{N^b}\\cong(\\underline N)^b$. Since $\\operatorname{Hom}_\\Lambda(\\Lambda^b,N)=N^b$ by evaluation on the basis, the canonical Hom comparison is an isomorphism for finite free sources. For $b=0$ the tuple is empty and the Hom sheaf is zero.",
+   "text": "Apply local injectivity of the constant Hom comparison to M→N and to both endomorphism modules, since finite presentation implies finite generation. Apply local surjectivity to M→N and N→M using finite presentation of the two sources. The generic inverse-pair argument then proves that the constant Isom presheaf map to the local Isom sheaf is locally bijective.",
    "uses": [
-    "lem-pc-sites-module-sheafification-interface",
-    "lem-weil-pbc-site-constant-restriction",
-    "lem-weil-pbc-sheafification-exact"
+    "lem-sf-constant-module-hom-locally-injective",
+    "lem-sf-constant-module-hom-locally-surjective",
+    "lem-sf-constant-local-module-isom-bijective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093T, lemma-locally-constant, proof of (1), finite free case; module interface Tag 03CY"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose a finite presentation $\\Lambda^a\\xrightarrow{d}\\Lambda^b\\to M\\to0$. Sheafify the constant presheaf sequence: exactness of abelian sheafification and its preservation of cokernels give $\\underline{\\Lambda^a}\\xrightarrow{\\underline d}\\underline{\\Lambda^b}\\to\\underline M\\to0$. The module interface gives the constant ring actions and linearity of these maps; the module category's sectionwise kernels and sheafified cokernels show that this is also a cokernel diagram of $\\underline\\Lambda$-modules. Restricting to any slice preserves that diagram: apply the constant-restriction isomorphisms to the same presentation sheafified on the slice. Therefore a map $\\underline M|_U\\to\\underline N|_U$ is uniquely a map $\\underline{\\Lambda^b}|_U\\to\\underline N|_U$ whose composite with $\\underline d|_U$ is zero, by the cokernel universal property. Consequently $H(\\underline M,\\underline N)$ is the sectionwise kernel of the map between the two finite free Hom sheaves. In modules, $\\operatorname{Hom}_\\Lambda(M,N)$ is likewise the kernel of $N^b\\to N^a$: a tuple gives a map precisely when it kills the relations $d(e_j)$, and then factors uniquely through the quotient $M$. Sheafification preserves this kernel. Step 2 identifies both maps $\\underline{N^b}\\to\\underline{N^a}$ with the matrix $d$ acting by precomposition. Their kernels therefore identify canonically, proving $\\underline{\\operatorname{Hom}_\\Lambda(M,N)}\\cong H(\\underline M,\\underline N)$. These comparisons send constant maps to their induced sheaf maps, so preserve identities and composition: the two expressions for a composite agree on pairs of constant presheaf sections. The underlying-set interface identifies each constant Hom module with its set sheafification, and set sheafification preserves the product of the two constant presheaves. Its universal property then implies equality of the two maps on that product of constant sheaves. Identities have the same compatibility directly from their constant sections. The argument requires finite presentation only of the source. Apply it with sources $M$ and $N$ to get both Hom comparisons, and with equal sources to get both endomorphism comparisons.",
+   "text": "Extend this canonical presheaf map to the constant set sheaf by sheafifyLift. The equation toSheafify_sheafifyLift identifies its composite with the set-sheafification unit with the original constant Isom map. Because the unit is locally bijective, the induced sheaf morphism is locally bijective too. The Mathlib criterion Sheaf.isLocallyBijective_iff_isIso makes it an isomorphism. Evaluate the factorization equation on a constant isomorphism to obtain precisely the stated canonical-section formula.",
    "uses": [
-    "lem-weil-pbc-sheafification-exact",
-    "lem-pc-sites-module-sheafification-interface",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-site-constant-restriction",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-sheafification-sets-exact",
-    "lem-pc-sites-sheafification-underlying-sets"
+    "def-weil-pbc-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093T, lemma-locally-constant, proof of (1), the two kernel sequences"
-   }
-  },
-  {
-   "text": "Let $E=\\operatorname{Hom}_\\Lambda(M,N)\\times\\operatorname{Hom}_\\Lambda(N,M)$ and $D=\\operatorname{End}_\\Lambda(M)\\times\\operatorname{End}_\\Lambda(N)$. The set $P$ of mutually inverse pairs is the equalizer of $E\\rightrightarrows D$, with maps $(f,g)\\mapsto(gf,fg)$ and the constant map $(f,g)\\mapsto(1_M,1_N)$. It is canonically $\\operatorname{Isom}_\\Lambda(M,N)$, since the inverse of an isomorphism is unique. Apply set-valued sheafification to this finite-limit diagram of constant presheaves. By [lem-weil-pbc-sheafification-sets-exact] its equalizer is $\\underline P$ and its products are the products of the constant set sheaves. By [lem-pc-sites-sheafification-underlying-sets], the constant sets underlying the Hom modules coincide with the underlying sets of their constant abelian sheaves. Step 3 identifies those sheaves with the Hom and endomorphism sheaves, with the two diagram maps becoming composition and the two identities. Thus the sheafified equalizer is precisely the inverse-pair sheaf of step 1, namely $\\mathcal I$. The resulting isomorphism sends a constant inverse pair to its sheafified pair, and hence is the canonical map in the statement. No assumption of full faithfulness of the global constant-sheaf functor is used.",
-   "uses": [
-    "lem-weil-pbc-sheafification-sets-exact",
-    "lem-pc-sites-sheafification-underlying-sets"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093T, lemma-locally-constant, proof of (2), inverse-pair description; finite limits Tag 00WJ"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-localized-ringed-site",
   "def-weil-pbc-sheafification",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-weil-pbc-sheafification-exact",
-  "lem-weil-pbc-sheafification-sets-exact",
-  "lem-weil-pbc-site-constant-restriction"
+  "lem-sf-constant-local-module-isom-bijective",
+  "lem-sf-constant-module-hom-locally-injective",
+  "lem-sf-constant-module-hom-locally-surjective",
+  "lem-sf-local-module-isom-sheaf"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 093T, lemma-locally-constant, proof of (1) and (2), with finite-free and gluing arguments expanded"
+  "place": "Tag 093T, proof of (1) and (2), with finite-presentation Hom comparison expanded into local lifting of finitely many generators and relations, and Isom treated as inverse pairs."
  },
  "mathlib_searches": [
   {
@@ -318,5 +282,15 @@
   "by": "NP",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T131234-L-3106505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
