@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-stonean-cover",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Stonean covers of compact Hausdorff spaces",
@@ -13,34 +13,163 @@
   "place": "node det-pe-stonean-cover, order None"
  },
  "stmt_deps": [
+  "lem-weil-pbc-ultrafilter-compact-hausdorff-basis",
   "det-pe-stonean-projective"
  ],
  "proof": [
   {
-   "text": "*1.* $\\widehat E\\cap\\widehat F=\\widehat{E\\cap F}$ and $\\beta D\\setminus\\widehat E=\n\\widehat{D\\setminus E}$ (an ultrafilter contains exactly one of $E$, $D\\setminus E$), so the\n$\\widehat E$ form a basis of clopen sets. Two distinct ultrafilters are separated by some $E$\ncontained in one and not the other, giving disjoint basic opens $\\widehat E$,\n$\\widehat{D\\setminus E}$; so $\\beta D$ is Hausdorff. For compactness, let\n$\\{\\widehat{E_i}\\}$ be a family of basic closed sets with the finite intersection\nproperty; then the $E_i$ have the finite intersection property (as\n$\\widehat{E_{i_1}}\\cap\\dots\\cap\\widehat{E_{i_n}}=\\widehat{E_{i_1}\\cap\\dots\\cap E_{i_n}}$\nis nonempty iff the intersection is nonempty), so they lie in an ultrafilter, which belongs\nto all $\\widehat{E_i}$. Density: a nonempty $\\widehat E$ has $E\\neq\\emptyset$ and contains\nthe principal ultrafilter at any $d\\in E$.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lem-weil-pbc-ultrafilter-compact-hausdorff-basis] with $S=D$. Its maximal proper filters are exactly the ultrafilters in the statement, and its basic set $[E]$ is $\\widehat E$. Thus $\\beta D$ is compact Hausdorff and the $\\widehat E$ form a clopen basis.",
+   "uses": [
+    "lem-weil-pbc-ultrafilter-compact-hausdorff-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-stonean/det-pe-stonean-cover.proof.md",
+    "place": "Proof paragraph 1: compact Hausdorff ultrafilter topology and clopen basis"
+   }
   },
   {
-   "text": "*2.* Let $O=\\bigcup_i\\widehat{E_i}$ be open and $E=\\bigcup_iE_i$. Then $O\\subset\\widehat E$,\nwhich is closed, so $\\overline O\\subset\\widehat E$. Conversely let $\\mathfrak p\\in\\widehat E$\nand $\\widehat F$ a basic neighbourhood of $\\mathfrak p$. Then $E\\cap F\\in\\mathfrak p$ is\nnonempty; a point $d\\in E_i\\cap F$ gives a principal ultrafilter in $\\widehat{E_i}\\cap\n\\widehat F\\subset O\\cap\\widehat F$. So $\\overline O=\\widehat E$ is open.",
-   "uses": [],
-   "elementary": null
+   "text": "Write $p(d)=\\{E\\subseteq D:d\\in E\\}$ for the principal ultrafilter. This family is a proper filter; if $A$ does not contain $d$, its complement belongs to $p(d)$, so adjoining $A$ would force the empty set into the filter. Hence $p(d)$ is maximal proper. A nonempty basic open $\\widehat E$ has $E\\ne\\varnothing$, since a proper filter never contains the empty set. Choose $d\\in E$; then $p(d)\\in\\widehat E$. By the basis in [lem-weil-pbc-ultrafilter-compact-hausdorff-basis], every nonempty open contains such a basic open and hence a principal ultrafilter. This proves density.",
+   "uses": [
+    "lem-weil-pbc-ultrafilter-compact-hausdorff-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-stonean/det-pe-stonean-cover.proof.md",
+    "place": "Proof paragraph 1, last sentence: density of principal ultrafilters"
+   }
   },
   {
-   "text": "*3.* In a compact Hausdorff space every ultrafilter on the underlying set converges to\nexactly one point (compactness gives a cluster point, which is a limit for an ultrafilter;\nHausdorff gives uniqueness). The principal ultrafilter at $t$ converges to $t$, so $\\pi$\nextends the identity and is surjective. Continuity: let $\\pi(\\mathfrak p)=t$ and $W\\ni t$\nopen; choose an open $W'\\ni t$ with $\\overline{W'}\\subset W$ (regularity). Then\n$W'\\in\\mathfrak p$, and every $\\mathfrak q\\in\\widehat{W'}$ contains $\\overline{W'}$, so its\nlimit lies in the closed set $\\overline{W'}\\subset W$. Thus $\\pi(\\widehat{W'})\\subset W$.",
+   "text": "By the clopen basis of [lem-weil-pbc-ultrafilter-compact-hausdorff-basis], write an arbitrary open set as $O=\\bigcup_i\\widehat{E_i}$ and set $E=\\bigcup_i E_i$. Upward closure of filters gives $O\\subseteq\\widehat E$, so $\\overline O\\subseteq\\widehat E$ because $\\widehat E$ is closed. Conversely, if $\\mathfrak p\\in\\widehat E$ and $\\widehat F$ is a basic neighbourhood of $\\mathfrak p$, then $E\\cap F\\in\\mathfrak p$ and thus $E\\cap F\\ne\\varnothing$. Choose $d\\in E\\cap F$ and an index $i$ with $d\\in E_i$. Then $p(d)\\in\\widehat F\\cap\\widehat{E_i}\\subseteq\\widehat F\\cap O$. Every neighbourhood of $\\mathfrak p$ contains a basic one, so it meets $O$; therefore $\\mathfrak p\\in\\overline O$. Consequently $\\overline O=\\widehat E$ is open, proving extremal disconnectedness. If the family is empty, both sides are empty, since no proper filter contains $\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-ultrafilter-compact-hausdorff-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-stonean/det-pe-stonean-cover.proof.md",
+    "place": "Proof paragraph 2: the explicit equality between the closure of an open union and a basic clopen"
+   }
+  },
+  {
+   "text": "The space $\\beta D$ is compact Hausdorff by step 1 and extremally disconnected by step 3. In [det-pe-stonean-projective], implication $1\\Rightarrow2$ gives projectivity for continuous surjections of compact Hausdorff spaces, and the final assertion gives total disconnectedness and profiniteness.",
+   "uses": [
+    "det-pe-stonean-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-stonean/det-pe-stonean-cover.md",
+    "place": "Statement clause 2, final implication: profiniteness and projectivity from det-pe-stonean-projective"
+   }
+  },
+  {
+   "text": "Let $f:D\\to T$ be the identity on underlying sets. Apply [lem-weil-pbc-ultrafilter-continuous-extension] with $S=D$ and $K=T$ to obtain a continuous map $g:\\beta D\\to T$ such that $g(p(d))=d$ for every $d\\in D$. Its hypotheses hold because $T$ is compact Hausdorff; $D$ is merely a set and no continuity of $f$ is required.",
+   "uses": [
+    "lem-weil-pbc-ultrafilter-continuous-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-stonean/det-pe-stonean-cover.proof.md",
+    "place": "Proof paragraph 3: continuous extension of the identity from the underlying discrete set"
+   }
+  },
+  {
+   "text": "For any $\\mathfrak p\\in\\beta D$ and any open neighbourhood $V$ of $g(\\mathfrak p)$, continuity of $g$ makes $g^{-1}(V)$ open and containing $\\mathfrak p$. By the basis in [lem-weil-pbc-ultrafilter-compact-hausdorff-basis], choose $E\\in\\mathfrak p$ with $\\widehat E\\subseteq g^{-1}(V)$. For every $d\\in E$, the principal ultrafilter $p(d)$ lies in $\\widehat E$, and hence $d=g(p(d))\\in V$ by step 5. Thus $E\\subseteq V$ on the underlying set $D$, so $V\\in\\mathfrak p$ by upward closure. Since every neighbourhood contains an open neighbourhood, $\\mathfrak p$ converges to $g(\\mathfrak p)$ in $T$. This identifies the limit for the actual map $g$ just constructed; no particular choice of extension is assumed.",
+   "uses": [
+    "lem-weil-pbc-ultrafilter-compact-hausdorff-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-stonean/det-pe-stonean-cover.proof.md",
+    "place": "Proof paragraph 3, first sentence: existence of an ultrafilter limit, here verified directly for the continuous extension"
+   }
+  },
+  {
+   "text": "If the same proper ultrafilter converged to two distinct points of $T$, Hausdorffness would give disjoint open neighbourhoods of those points. Both would belong to the ultrafilter, forcing their empty intersection to belong to it, a contradiction. Thus step 6 gives the unique limit of every $\\mathfrak p$, and $\\pi=g$ is exactly the map in the statement. It is continuous by step 5. The equality $\\pi(p(t))=t$ from step 5 proves both extension of the underlying identity and surjectivity. These arguments also cover $T=D=\\varnothing$: there is no proper filter on the empty set, so $\\beta D=\\varnothing$ and the empty map is surjective.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-stonean/det-pe-stonean-cover.proof.md",
+    "place": "Proof paragraph 3: uniqueness, agreement on principal ultrafilters, continuity and surjectivity"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-ultrafilter-compact-hausdorff-basis",
+  "det-pe-stonean-projective",
+  "lem-weil-pbc-ultrafilter-continuous-extension"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-stonean/det-pe-stonean-cover.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-stonean/det-pe-stonean-cover.proof.md",
+  "place": "Proof paragraphs 1–3; paragraph 3 is expanded using the existing continuous-extension leaf and an elementary basis argument"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ultrafilter_compact|ultrafilterBasis_is_basis|denseRange_pure|ultrafilter_extend_eq_iff|projective_ultrafilter",
+   "results": "18 hits: Mathlib/Topology/Category/Profinite/Projective.lean, Mathlib/Topology/Category/Profinite/Projective.lean, Mathlib/Topology/Category/Profinite/Projective.lean, Mathlib/Topology/Category/Profinite/Projective.lean, Mathlib/Topology/Category/CompHaus/Projective.lean, Mathlib/Topology/Category/CompHaus/Projective.lean, Mathlib/Topology/Category/CompHaus/Projective.lean, Mathlib/Topology/Category/CompHaus/Projective.lean; searched Mathlib/Topology",
+   "date": "2026-10-16",
+   "verdict": "component matches: compactness at StoneCech.lean:95, basis at :62, density at :137, projectivity at CompHaus/Projective.lean:41. No result giving all clauses of the item; inspected actual types and retained the blueprint closure argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ultrafilter_extend\"",
+   "results": "4 hits: continuous_ultrafilter_extend, ultrafilter_extend_pure, ultrafilter_extend_extends, ultrafilter_extend_eq_iff",
+   "date": "2026-10-16",
+   "verdict": "component match: continuous_ultrafilter_extend, ultrafilter_extend_pure, ultrafilter_extend_extends and ultrafilter_extend_eq_iff; the first two are already carried by the existing extension leaf. This split identifies any extension by a direct neighbourhood argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact Hausdorff space is covered by the extremally disconnected space of ultrafilters on its underlying set",
+   "results": "8 hits: CompHaus.presentation, StoneCech, CompactT2.projective_iff_extremallyDisconnected, ExtremallyDisconnected.mk, ultrafilter_compact, Ultrafilter.t2Space, instCompactSpacePreStoneCech, instCompactSpaceStoneCech",
+   "date": "2026-10-16",
+   "verdict": "component matches: CompHaus.presentation is a definition of a Stonean object, not the full three-clause statement; compact and T2 instances are already recorded by an existing leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The space of all ultrafilters of a set with membership clopen basis is compact Hausdorff and extremally disconnected and the limit map onto a compact Hausdorff space is a continuous surjection",
+   "results": "8 hits: Stonean.stoneCechObj, CompHaus.projective_ultrafilter, StoneCech.projective, topToCompHaus_obj, Compactum.lim_eq_str, Compactum.str, instTopologicalSpaceStoneCech, Profinite.projective_ultrafilter",
+   "date": "2026-10-16",
+   "verdict": "component matches; inspected the pinned declarations, but no single full-item result or one-line full-item specialization. Reuse existing compact-Hausdorff-basis and continuous-extension leaves and prove the remaining clauses explicitly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closure of an open subset of the ultrafilter space equals the basic clopen indexed by the union of its basic open subsets",
+   "results": "8 hits: ultrafilter_isClosed_basic, Compactum.isClosed_cl, Compactum.cl_eq_closure, TopologicalSpace.isTopologicalBasis_clopens, ExtremallyDisconnected.open_closure, mem_closure_iff_ultrafilter, isClopen_iUnion₂, Compactum.isClosed_iff",
+   "date": "2026-10-16",
+   "verdict": "second phrasing: no exact closure-formula match; ultrafilter_isClosed_basic and general closure lemmas are components. The formula is proved as an elementary step from the existing clopen-basis leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "presentation|toStonean",
+   "results": "13 hits: Mathlib/Topology/Category/Stonean/Adjunctions.lean, Mathlib/Topology/Category/Stonean/Adjunctions.lean, Mathlib/Topology/Category/Stonean/Adjunctions.lean, Mathlib/Topology/Category/Stonean/EffectiveEpi.lean, Mathlib/Topology/Category/Stonean/EffectiveEpi.lean, Mathlib/Topology/Category/Stonean/EffectiveEpi.lean, Mathlib/Topology/Category/Stonean/EffectiveEpi.lean, Mathlib/Topology/Category/Stonean/EffectiveEpi.lean; searched Mathlib/Topology/Category/Stonean",
+   "date": "2026-10-16",
+   "verdict": "component constructions: read CompHaus.presentation at Basic.lean:200 and presentation.π at :206; their underlying space/map are projectivePresentation, not a theorem stating all clopen-basis, density and unique-limit clauses. Reuse existing component leaves and give the remaining arguments explicitly."
+  },
+  {
+   "tool": "grep",
+   "query": "isTopologicalBasis.*[Uu]ltrafilter|ultrafilterBasis_is_basis|ultrafilter_extend_pure|continuous_ultrafilter_extend",
+   "results": "9 hits: Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Category/CompHaus/Projective.lean, Mathlib/Topology/Category/CompHaus/Projective.lean, Mathlib/Topology/Category/Profinite/Projective.lean; searched Mathlib/Topology",
+   "date": "2026-10-16",
+   "verdict": "Second reader: Read StoneCech.lean:54–99 and :169–198: the existing two Mathlib leaves state the required compact-Hausdorff clopen-basis and continuous-extension inputs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ultrafilter_isClosed_basic\"",
+   "results": "1 hits: ultrafilter_isClosed_basic",
+   "date": "2026-10-16",
+   "verdict": "Second reader: One exact component match for closed basic membership sets, already carried by the basis leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any function into a compact T2 space extends continuously from principal ultrafilters to all ultrafilters",
+   "results": "8 hits: continuous_ultrafilter_extend, preStoneCechCompat, continuous_stoneCechExtend, stoneCechExtend, continuous_preStoneCechExtend, preStoneCechExtend, ultrafilter_extend_eq_iff, ultrafilter_extend_extends",
+   "date": "2026-10-16",
+   "verdict": "Second reader: The continuous_ultrafilter_extend and ultrafilter_extend_extends types match the existing extension leaf; ultrafilter_extend_eq_iff is unnecessary because steps 6–7 prove the limit identification directly."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -49,5 +178,34 @@
   "det-pe-stonean-projective"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-stonean-cover",
+  "worker": "stage1",
+  "summary": "Preserved all three clauses. Reused the existing compact-Hausdorff clopen-basis and continuous-extension Mathlib leaves and the blueprint Gleason node. Wrote out density, the closure formula proving extremal disconnectedness, and a direct identification of any continuous principal extension with the unique ultrafilter-limit map. Removed both uncommitted provisional nodes: one was an elementary clause of the item, and the other was unnecessary and was previously applied to an unspecified extension. No new nodes are needed.",
+  "blueprint": "Proof paragraph 1 is realized by steps 1–2; paragraph 2 by step 3 and its projectivity consequence by step 4; paragraph 3 by steps 5–7, including an explicit neighbourhood argument identifying the extension with the unique-limit map.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ultrafilter-compact-hausdorff-basis",
+    "why": "Generic Mathlib topology tool for the exact ultrafilter model; no other node in this sketch supplies the compact Hausdorff clopen basis."
+   },
+   {
+    "node": "lem-weil-pbc-ultrafilter-continuous-extension",
+    "why": "Generic Mathlib continuous-extension tool for a set map to a compact Hausdorff target; used to expand the limit-map construction below the sketch, with its limit characterization proved in the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ultrafilter-compact-hausdorff-basis",
+  "lem-weil-pbc-ultrafilter-continuous-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q58-d49f4b93b",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-d49f4b93b (reviewer sub-agent of L); spot-checked: Reviewed the complete item, cited statements, blueprint route, Stacks Tags 0908/090C/090D, and pinned Mathlib StoneCech declarations. All seven proof steps are valid with hypotheses checked, including empty and infinite cases; no duplicate or restated node remains, no SGA is used, and no repairs are needed. Review written to review.md."
+ }
 }
