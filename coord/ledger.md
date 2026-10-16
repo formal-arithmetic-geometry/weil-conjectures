@@ -15330,3 +15330,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:11 L: merged deliver/N2/Sheaf.CategoryTheory.CartanEilenbergComparisonIndependence (stage 3; reviewer PASS; after a return; landing 20261016T011146-L-266083 (interface); batch 20261016T011139; modules 2; new nodes 1)
 
 - 09:19 L: batch 20261016T011139 dependency take-out
+- 01:37 L: returned deliver/XR65519786246dce9c/Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux (reviewer RETURN: (reviewer X-b3aeb, head b3aeb0542) A3 — Unnecessary forced adaptation: original HomComparison compiles cleanly against t)
