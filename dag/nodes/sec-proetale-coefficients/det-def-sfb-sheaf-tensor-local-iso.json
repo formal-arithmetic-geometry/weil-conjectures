@@ -132,5 +132,23 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-0f9ada593 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, current blueprint proofs and chapter/unit route. All four proof steps are valid, including symmetry, unit comparison direction and non-flat small cases; no cycle or new duplicate node. Corrected only the missing Mathlib search records using actual logged searches. Whole corrected JSON and detailed review.md are saved under the review directory.; 1 file(s) fixed by the reviewer"
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-sheaf-tensor"
+ "unit": "sk-def-sfb-sheaf-tensor",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafificationTensorLocalIso",
+  "file": "lean/Sheaf/CategoryTheory/SheafificationTensorLocalIso.lean",
+  "declaration": "CategoryTheory.sheafification_tensor_local_iso",
+  "statement": "theorem sheafification_tensor_local_iso {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C] (J : GrothendieckTopology C) {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{w} A] [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A] [MonoidalPreadditive A] [HasWeakSheafify J A] : (∀ {F G : Cᵒᵖ ⥤ A} (g : F ⟶ G), J.W (A := A) g ↔ (IsIso ((presheafToSheaf J A).map g) ∧ ∀ (H : Sheaf J A), Function.Bijective (fun h : G ⟶ (sheafToPresheaf J A).obj H => g ≫ h))) ∧ (∀ {F F' : Cᵒᵖ ⥤ A} (g : F ⟶ F') (F₀ : Cᵒᵖ ⥤ A), J.W (A := A) g → J.W (A := A) (MonoidalCategoryStruct.tensorHom (𝟙 F₀) g) ∧ J.W (A := A) (MonoidalCategoryStruct.tensorHom g (𝟙 F₀))) ∧ (∀ {F F' G G' : Cᵒᵖ ⥤ A} (g : F ⟶ F') (h : G ⟶ G'), J.W (A := A) g → J.W (A := A) h → J.W (A := A) (MonoidalCategoryStruct.tensorHom g h)) ∧ (∀ (F G : Cᵒᵖ ⥤ A), J.W (A := A) (MonoidalCategoryStruct.tensorHom (toSheafify J F) (toSheafify J G)) ∧ IsIso ((presheafToSheaf J A).map (MonoidalCategoryStruct.tensorHom (toSheafify J F) (toSheafify J G))))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3c98ff23b",
+  "group": "NH",
+  "result": "pass",
+  "note": "Audited immutable sources, dependencies, every hypothesis and conclusion, universes, edge cases, docstrings, report sections, and verbatim signature. scompile.py passed in the local side overlay; no repository mutation."
+ }
 }
