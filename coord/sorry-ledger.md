@@ -59,7 +59,7 @@ No closure delta is quoted across 660345513: proof-dependency imports changed th
 |---|---:|
 | proved | 3649 |
 | decomposed | 52 |
-| moved | 4027 |
+| moved | 4028 |
 | pruned | 133 |
 | other | 609 |
 
@@ -74,7 +74,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | B2 | 129 | 135 | 86 | 49 | 54/129 (41.9%) |
 | B3 | 146 | 153 | 91 | 62 | 63/146 (43.2%) |
 | B4 | 68 | 71 | 47 | 24 | 32/68 (47.1%) |
-| C1 | 143 | 146 | 109 | 37 | 73/143 (51.0%) |
+| C1 | 144 | 147 | 110 | 37 | 74/144 (51.4%) |
 | C2 | 126 | 121 | 84 | 37 | 57/126 (45.2%) |
 | C3 | 117 | 122 | 80 | 42 | 56/117 (47.9%) |
 | C4 | 56 | 57 | 34 | 23 | 22/56 (39.3%) |
@@ -176,7 +176,7 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis | 4 | 1 | A3 |
 | Sheaf.Paper.CoefficientExchangeFromComparisons | 7 | 1 | C3 |
 | Sheaf.Paper.FiniteDiscreteConstructibleEncoding | 7 | 1 | D2 |
-| Sheaf.Paper.CondensedFiniteLocalSubmodules | 8 | 1 | C1 |
+| Sheaf.Paper.CondensedFiniteFamilyHomDescent | 9 | 1 | — |
 | Sheaf.Paper.FiniteDiscreteCoefficientCoherentPullbacks | 9 | 1 | A4 |
 | Sheaf.Paper.FiniteDiscreteCoefficientDirectImageOrigin | 9 | 1 | D2 |
 | Sheaf.Paper.CondensedQbarFieldCoefficientSquare | 10 | 1 | C4 |
@@ -185,8 +185,8 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | Sheaf.Paper.IntegralResidueTensorRouteModel | 11 | 1 | B4 |
 | Sheaf.Paper.InverseImageModuleFlat | 12 | 1 | C2 |
 | Sheaf.Paper.ProEtaleUniformModelEtaleCover | 13 | 1 | D3 |
-| Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonCounit | 13 | 1 | — |
-| Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquare | 13 | 1 | — |
+| Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonCounit | 13 | 1 | D4 |
+| Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquare | 13 | 1 | E1 |
 | Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent | 41 | 1 | B3 |
 
 Modules pruned since the imports baseline:
