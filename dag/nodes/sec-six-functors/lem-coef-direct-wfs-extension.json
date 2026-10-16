@@ -262,5 +262,36 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-3c865a588 (reviewer sub-agent of L); spot-checked: Mathematics checks pass, including all nine proof steps, Hovey source locations, small cases, route, and Mathlib closure declarations. Repairable faults: the new `lem-coef-lifting-class-closure` node omitted required source, stmt_deps, created metadata, and lean_audit fields; steps 5, 6, and 9 were incorrectly marked elementary. Corrected whole DAG JSON files are under fixes/dag/nodes/sec-six-functors/, and review.md records the checks.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-db36761cf",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Statement, source alignment, dependencies, universes, edge cases, documentation, report sections, and per-file compilation all verified."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DirectWeakFactorization",
+  "declaration": "CategoryTheory.finite_direct_weakFactorizationSystem",
+  "declarations": [
+   "CategoryTheory.coefLatchingIndex",
+   "CategoryTheory.coefLatchingProjection",
+   "CategoryTheory.coefLatchingIndexFinite",
+   "CategoryTheory.coefLatchingIndexHomFinite",
+   "CategoryTheory.coefLatchingColimits",
+   "CategoryTheory.coefLatchingCocone",
+   "CategoryTheory.coefLatchingTo",
+   "CategoryTheory.coefRelativeLatchingArrow",
+   "CategoryTheory.coefDirectLeftClass",
+   "CategoryTheory.coefDiagramColimitArrow"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DirectWeakFactorization.lean",
+  "statement": "theorem finite_direct_weakFactorizationSystem (degree : K → ℕ) (hdegree : ∀ (i j : K) (a : i ⟶ j), (¬ ∃ h : i = j, a = eqToHom h) → degree i < degree j) (L R : MorphismProperty B) [L.IsWeakFactorizationSystem R] [L.HasFunctorialFactorization R] : (coefDirectLeftClass (K := K) L).IsWeakFactorizationSystem (R.functorCategory K) ∧ (coefDirectLeftClass (K := K) L).HasFunctorialFactorization (R.functorCategory K) ∧ (∀ {X Y : K ⥤ B} (f : X ⟶ Y), coefDirectLeftClass L f → (∀ k : K, L (f.app k)) ∧ L (coefDiagramColimitArrow f).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The auxiliary declarations construct the canonical latching and colimit arrows of this statement. Finite-slice instances and Mathlib HasColimitsOfShape.of_small permit standard HasColimits B with independent indexing universes. The only postponed theorem is the node itself."
  }
 }
