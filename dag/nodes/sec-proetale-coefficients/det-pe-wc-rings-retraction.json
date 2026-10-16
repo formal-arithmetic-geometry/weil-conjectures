@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-wc-rings-retraction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Retraction of a faithfully flat ind-étale algebra over a w-contractible ring",
@@ -15,55 +15,223 @@
  "stmt_deps": [
   "det-pe-wlocal-strict-contractible",
   "det-pe-wc-rings-w-local-refinement",
-  "def-weil-pbc-retained-localization"
+  "def-weil-pbc-retained-localization",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-faithfully-flat-ring-map"
  ],
  "proof": [
   {
-   "text": "*Choice of components.* By [det-pe-wlocal-components], $T$ and $R^c:=(\\operatorname{Spec}R)^c$\nare profinite and $R^c\\cong\\pi_0(\\operatorname{Spec}R)$, which is extremally disconnected\nbecause $R$ is w-contractible. The map $T\\to R^c$ is continuous and surjective\n([det-pe-wc-rings-w-local-refinement], 3). By [det-pe-stonean-projective] (1 $\\Rightarrow$ 3)\nit has a continuous section $\\sigma$. Its image $T'=\\sigma(R^c)$ is compact, hence closed\nin $T$ and in $\\operatorname{Spec}B'$, and $T'\\to R^c$ is a continuous bijection of compact\nHausdorff spaces, hence a homeomorphism.",
+   "text": "Write $X^c=(\\operatorname{Spec}R)^c$ and $T=(\\operatorname{Spec}B')^c$. By [det-pe-wlocal-strict-contractible], $R$ is w-local and $X^c$ is extremally disconnected. The refinement [det-pe-wc-rings-w-local-refinement] makes $\\operatorname{Spec}B'$ w-local and sends all its closed points to closed points of $\\operatorname{Spec}R$, surjectively. The continuous spectrum map therefore restricts to a continuous surjection $p:T\\to X^c$. By [det-pe-wlocal-components], both closed-point spaces are profinite, hence compact Hausdorff. Apply clause (3) of [det-pe-stonean-projective] to obtain a continuous $\\sigma:X^c\\to T$ with $p\\sigma=\\mathrm{id}$.",
    "uses": [
-    "det-pe-wlocal-components",
+    "det-pe-wlocal-strict-contractible",
     "det-pe-wc-rings-w-local-refinement",
+    "det-pe-wlocal-components",
     "det-pe-stonean-projective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-retraction.proof.md",
+    "place": "Choice of components, first four sentences"
+   }
   },
   {
-   "text": "*The algebra $B''$.* By [lem-weil-pbc-retained-localization], $B'\\to B''$ is ind-Zariski,\nthe points of $\\operatorname{Spec}B''$ are the points of $\\operatorname{Spec}B'$\ngeneralizing a point of $T'$, with unchanged local rings, and $\\operatorname{Spec}B''$ is\nw-local with closed point set $T'$. By [lem-weil-pbc-ind-etale-stability], $R\\to B''$ is\nind-étale, in particular flat.",
+   "text": "Set $T'=\\sigma(X^c)$. Its points are exactly the fixed points of $\\sigma p:T\\to T$: one implication uses $p\\sigma=\\mathrm{id}$ and the other writes a fixed point as $\\sigma(p(t))$. This set is closed: for a nonfixed $t$, choose disjoint neighborhoods of $t$ and $\\sigma p(t)$ in the Hausdorff space $T$; intersect the first with the inverse image of the second under $\\sigma p$ to obtain an open neighborhood disjoint from the fixed-point set. Since $T$ is closed in $\\operatorname{Spec}B'$ by w-locality, $T'$ is also Zariski closed there. The restrictions of $p$ and $\\sigma$ are continuous inverse maps between $T'$ and $X^c$, proving the required homeomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-retraction.proof.md",
+    "place": "Choice of components, last sentence, with closedness and inverse written explicitly"
+   }
+  },
+  {
+   "text": "Now fix ANY closed subset $T'\\subseteq T$ for which $p|_{T'}$ is a homeomorphism onto $X^c$, not just the image chosen above. It is closed in $\\operatorname{Spec}B'$ because $T$ is closed. Put $C=B''=B'_{[T']}$, with its canonical $R$-algebra map $f:R\\to C$. By [lem-weil-pbc-retained-localization], $B'\\to C$ is ind-Zariski, $C$ is w-local, its closed points are indexed by $t\\in T'$, its primes are pairs $(t,y)$ with $y\\subseteq t$, and $C_{(t,y)}\\cong B'_y$ canonically. An ind-Zariski map is ind-étale by its presentation in [def-weil-pbc-ind-etale-algebra]. Since $R\\to B'$ is ind-étale by [det-pe-wc-rings-w-local-refinement], composition stability in [lem-weil-pbc-ind-etale-stability] makes $f$ ind-étale, hence weakly étale. The definition of weakly étale in [def-weil-pbc-ind-etale-algebra] in particular makes $f$ flat.",
    "uses": [
     "lem-weil-pbc-retained-localization",
+    "def-weil-pbc-ind-etale-algebra",
+    "det-pe-wc-rings-w-local-refinement",
     "lem-weil-pbc-ind-etale-stability"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-retraction.proof.md",
+    "place": "The algebra B double prime, both sentences"
+   }
   },
   {
-   "text": "*Bijectivity on spectra and local rings.* Let $t\\in T'$ lie over $\\mathfrak m\\in R^c$.\nSince $R$ is w-strictly local, $R_{\\mathfrak m}$ is strictly henselian, so\n$R_{\\mathfrak m}\\to B''_t=B'_t$ is an isomorphism by [det-pe-wc-rings-local-iso]. The\npoints of $\\operatorname{Spec}B''$ generalizing $t$ are the primes of $B''_t$, so they map\nbijectively onto the primes of $R_{\\mathfrak m}$, i.e. onto the primes $\\mathfrak p\\subset\n\\mathfrak m$ of $R$, with $R_{\\mathfrak p}\\to B''_{\\mathfrak q}$ an isomorphism (a\nlocalization of $R_{\\mathfrak m}\\cong B''_t$). Every point of $\\operatorname{Spec}B''$\ngeneralizes exactly one $t\\in T'$ (w-locality), every prime $\\mathfrak p$ of $R$ lies in\nexactly one maximal ideal $\\mathfrak m$ (w-locality of $R$), and $t\\mapsto\\mathfrak m$ is a\nbijection $T'\\to R^c$. Hence $\\operatorname{Spec}B''\\to\\operatorname{Spec}R$ is bijective,\nand $R_{\\mathfrak q\\cap R}\\to B''_{\\mathfrak q}$ is an isomorphism for every prime\n$\\mathfrak q$ of $B''$.",
+   "text": "For $t\\in T'$ write $\\widetilde t$ for its corresponding closed point of $\\operatorname{Spec}C$ and $\\mathfrak m=p(t)$. The contraction of $\\widetilde t$ to $R$ is $\\mathfrak m$, because the retained point is $(t,t)$ and its contraction to $B'$ is $t$. The ring $R_{\\mathfrak m}$ is strictly henselian by [det-pe-wlocal-strict-contractible]. Apply [det-pe-wc-rings-local-iso] to the weakly étale map $R\\to C$, the maximal ideal $\\mathfrak m$ and the prime $\\widetilde t$ above it: the CANONICAL map $R_{\\mathfrak m}\\to C_{\\widetilde t}$ is an isomorphism.",
    "uses": [
+    "lem-weil-pbc-retained-localization",
+    "det-pe-wlocal-strict-contractible",
     "det-pe-wc-rings-local-iso"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-retraction.proof.md",
+    "place": "Bijectivity on spectra and local rings, first two sentences"
+   }
   },
   {
-   "text": "*$R\\to B''$ is an isomorphism.* It suffices that $R_{\\mathfrak p}\\to\nB''\\otimes_RR_{\\mathfrak p}$ is an isomorphism for every prime $\\mathfrak p$ of $R$. Let\n$\\mathfrak q$ be the unique prime of $B''$ over $\\mathfrak p$. The primes of\n$B''\\otimes_RR_{\\mathfrak p}$ are the primes $\\mathfrak q'$ of $B''$ with\n$\\mathfrak q'\\cap R\\subset\\mathfrak p$. For such $\\mathfrak q'$, going down for the flat map\n$R\\to B''$ gives a prime $\\mathfrak q''\\subset\\mathfrak q$ with\n$\\mathfrak q''\\cap R=\\mathfrak q'\\cap R$; by injectivity $\\mathfrak q''=\\mathfrak q'$, so\n$\\mathfrak q'\\subset\\mathfrak q$. Hence $B''\\otimes_RR_{\\mathfrak p}$ is local with maximal\nideal $\\mathfrak q$, so it equals its localization $B''_{\\mathfrak q}$, and\n$R_{\\mathfrak p}\\to B''_{\\mathfrak q}$ is an isomorphism by the previous step.\n\nThe composite $B\\to B'\\to B''\\xrightarrow{\\ \\sim\\ }R$ (inverse of $R\\to B''$) is an\n$R$-algebra map whose composite with $R\\to B$ is the identity.",
+   "text": "By [lem-weil-pbc-primes-of-localization], primes of $C_{\\widetilde t}$ correspond, by contraction, to primes of $C$ contained in $\\widetilde t$, and primes of $R_{\\mathfrak m}$ to primes of $R$ contained in $\\mathfrak m$. The canonical isomorphism of the preceding step therefore gives a bijection between these two sets of generalizations. Every prime of either w-local ring lies under exactly one maximal ideal, by [det-pe-wlocal-strict-contractible]; the maximal ideals of $C$ are indexed by $T'$, and $T'\\to X^c$ is bijective. Taking the union of the preceding bijections over these disjoint sets gives bijectivity of $\\operatorname{Spec}C\\to\\operatorname{Spec}R$. Moreover if $\\mathfrak q\\subseteq\\widetilde t$ contracts to $\\mathfrak p\\subseteq\\mathfrak m$, localize $R_{\\mathfrak m}\\cong C_{\\widetilde t}$ at the corresponding primes. The resulting localizations are $R_{\\mathfrak p}$ and $C_{\\mathfrak q}$. Indeed, for $A=R$ or $C$, with the corresponding primes $P\\subseteq M$, a fraction $a/s\\in A_M$ belongs to $PA_M$ exactly when $a\\in P$, since $s\\notin M$ and $P\\subseteq M$. In the iterated localization the mutually inverse fraction maps are $(a/s)/(b/t)\\mapsto at/(sb)$ and $a/u\\mapsto(a/1)/(u/1)$; here $b,u\\notin P$ and $s,t\\notin M$, so all displayed denominators are allowed. These formulas identify the structural maps, as also supplied by [lem-weil-pbc-localization-of-localization]. Hence the canonical $R_{\\mathfrak p}\\to C_{\\mathfrak q}$ is an isomorphism for every prime $\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "det-pe-wlocal-strict-contractible",
+    "lem-weil-pbc-retained-localization",
+    "lem-weil-pbc-localization-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-retraction.proof.md",
+    "place": "Bijectivity on spectra and local rings, remaining sentences"
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak p\\in\\operatorname{Spec}R$ and its unique inverse image $\\mathfrak q\\in\\operatorname{Spec}C$. Put $S=f(R\\setminus\\mathfrak p)$ and $D=S^{-1}C$. By [lem-weil-pbc-localization-spectrum-embedding], the primes of $D$ correspond to primes $\\mathfrak q'$ of $C$ whose contractions $\\mathfrak p'$ lie inside $\\mathfrak p$: disjointness from $S$ is exactly that containment. Going down for the flat map $f$, supplied by [lem-sc-flat-going-down], gives a prime $\\mathfrak q''\\subseteq\\mathfrak q$ over $\\mathfrak p'$. Injectivity on spectra gives $\\mathfrak q''=\\mathfrak q'$, so every such $\\mathfrak q'$ is contained in $\\mathfrak q$. The fractions with numerator in $\\mathfrak q$ form a proper prime ideal $Q=\\mathfrak qD$: denominators avoid $\\mathfrak q$, and $c/s\\in Q$ exactly when $c\\in\\mathfrak q$. For well-definedness, an equality $c/s=c'/s'$ gives $v(s' c-sc')=0$ for some $v\\in S$; primality and $v,s,s'\\notin\\mathfrak q$ show $c\\in\\mathfrak q$ if and only if $c'\\in\\mathfrak q$. The same membership test proves $Q$ proper and prime. Every prime of $D$ is contained in $Q$, since every numerator of a fraction in it lies in its contraction $\\mathfrak q'\\subseteq\\mathfrak q$. A maximal ideal containing $Q$ exists by [lem-weil-pbc-proper-ideal-contained-in-maximal]; since it is also contained in $Q$, it equals $Q$. Thus $Q$ is the unique maximal ideal of $D$. For each $c\\notin\\mathfrak q$, $c/1$ is a unit in $D$: otherwise its proper principal ideal lies in a maximal ideal by the same cited lemma, necessarily $\\mathfrak qD$, contradicting contraction to $\\mathfrak q$. The map $D\\to C_{\\mathfrak q}$ sends $c/s$ to $c/s$ because $S\\cap\\mathfrak q=\\varnothing$. Its inverse sends $c/u\\in C_{\\mathfrak q}$ to $(c/1)(u/1)^{-1}\\in D$, using the units just proved for $u\\notin\\mathfrak q$. The fraction equality relations make both maps well-defined; each composite fixes $c/1$ and every inverted denominator, hence fixes every fraction. They commute with $R_{\\mathfrak p}$, so the localized map $R_{\\mathfrak p}\\to D$ is the isomorphism $R_{\\mathfrak p}\\to C_{\\mathfrak q}$ established above.",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-retraction.proof.md",
+    "place": "R to B double prime is an isomorphism, localization and going-down argument; expanded fraction inverses"
+   }
+  },
+  {
+   "text": "Regard $f:R\\to C$ as an $R$-linear map. Its module localization at $\\mathfrak p$ is exactly $R_{\\mathfrak p}\\to f(R\\setminus\\mathfrak p)^{-1}C$ from the preceding step: both send $r/s$ to $f(r)/f(s)$, and the module and ring localizations of $C$ have the identical fraction relation $c/s=c'/s'$ if some $u\\notin\\mathfrak p$ annihilates $f(s')c-f(s)c'$, as in [def-weil-pbc-module-localization]. These maps are bijective for all primes, in particular all maximal ideals. Apply [lem-weil-pbc-linear-map-bijective-at-maximal-localizations] to conclude that $f$ is bijective, hence a ring isomorphism. Its inverse is an $R$-algebra isomorphism because $f$ is the structural map.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-retraction.proof.md",
+    "place": "R to B double prime is an isomorphism, initial local criterion, completed after the localized calculation"
+   }
+  },
+  {
+   "text": "Let $j:B\\to B'\\to C$ be the composite. The map $\\rho=f^{-1}j:B\\to R$ is an $R$-algebra map. For every $r\\in R$, the structural compatibilities give $j(r)=f(r)$, and therefore $\\rho(r)=f^{-1}(f(r))=r$. This is the required retraction. The choice in step 3 was arbitrary, so the isomorphism assertion holds for every $T'$ specified in the statement.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-retraction.proof.md",
+    "place": "Final displayed composite and retraction identity"
+   }
   }
  ],
  "proof_deps": [
-  "det-pe-wlocal-components",
+  "det-pe-wlocal-strict-contractible",
   "det-pe-wc-rings-w-local-refinement",
+  "det-pe-wlocal-components",
   "det-pe-stonean-projective",
   "lem-weil-pbc-retained-localization",
+  "def-weil-pbc-ind-etale-algebra",
   "lem-weil-pbc-ind-etale-stability",
-  "det-pe-wc-rings-local-iso"
+  "det-pe-wc-rings-local-iso",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-retraction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-wc-rings/det-pe-wc-rings-retraction.proof.md",
+  "place": "All four proof paragraphs, with the last paragraph expanded using Stacks Tags 097E, 00HS, 00E3 and 00HN"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A linear map of modules is bijective if its localization at each prime ideal is bijective",
+   "results": "IsLocalizedModule.map_bijective_iff_localizedModuleMap_bijective, bijective_of_isLocalized_maximal, IsLocalizedModule.fromLocalizedModule.bij, bijective_of_isLocalization_isMaximal, injective_of_localized_span, bijective_of_isLocalized_span, bijective_of_localized_maximal, LocalizedModule.map_surjective",
+   "date": "2026-10-16",
+   "verdict": "No match for the item; generic local criterion found and the existing node lem-weil-pbc-linear-map-bijective-at-maximal-localizations is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "bijective.*(local|Localized)|of_localization.*[Bb]ijective|bijective_of",
+   "results": "Mathlib/RingTheory/Localization/Module.lean, Mathlib/RingTheory/Localization/Module.lean, Mathlib/RingTheory/Localization/Module.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/Pi.lean, Mathlib/RingTheory/Localization/Away/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "No match for the item; generic local criterion found and the existing node lem-weil-pbc-linear-map-bijective-at-maximal-localizations is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule, Function.Bijective",
+   "results": "IsLocalizedModule.comp_iff_of_bijective_left, IsLocalizedModule.comp_iff_of_bijective_right, IsLocalizedModule.fromLocalizedModule.bij, IsLocalizedModule.map_bijective_iff_localizedModuleMap_bijective, exists_bijective_map_powers, Module.FinitePresentation.exists_notMem_bijective",
+   "date": "2026-10-16",
+   "verdict": "No match for the item; generic local criterion found and the existing node lem-weil-pbc-linear-map-bijective-at-maximal-localizations is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of modules is bijective if all its localizations at prime ideals are bijective",
+   "results": "bijective_of_localized_maximal, IsLocalizedModule.map_bijective_iff_localizedModuleMap_bijective, bijective_of_localized_span, bijective_of_isLocalized_maximal, bijective_of_isLocalized_span, Module.FinitePresentation.exists_notMem_bijective, IsLocalizedModule.fromLocalizedModule.bij, RingHom.Bijective.ofLocalizationSpan",
+   "date": "2026-10-16",
+   "verdict": "No match for the item; generic local criterion found and the existing node lem-weil-pbc-linear-map-bijective-at-maximal-localizations is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WContractible\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: no w-contractible retained-localization retraction theorem among these hits."
+  },
+  {
+   "tool": "grep",
+   "query": "WContractible|w.contractible|retained.localization|IndEtale.*retraction",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: no w-contractible retained-localization retraction theorem among these hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every faithfully flat ind etale algebra over a w contractible ring admits a retraction by selecting closed components",
+   "results": "Algebra.FormallyEtale.instFormallySmooth, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.iff_comp_bijective, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, RingHom.formallyEtale_algebraMap, StandardEtalePair.instFormallyEtaleRing, Algebra.Extension.formallySmooth_iff_split_injection",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: no w-contractible retained-localization retraction theorem among these hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A w contractible commutative ring has a section for every faithfully flat ind etale algebra",
+   "results": "Algebra.Etale.recOn, RingHom.Etale, Algebra.Etale, Algebra.Etale.formallyEtale, Algebra.FormallyEtale.instFormallySmooth, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.finitePresentation, Algebra.FormallyEtale.of_unramified_and_smooth",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: no w-contractible retained-localization retraction theorem among these hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IndEtale\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: no w-contractible retained-localization retraction theorem among these hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An extremally disconnected compact Hausdorff closed point space selects components of an ind etale algebra to give an isomorphism with the base ring",
+   "results": "StandardEtalePair.homEquiv, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, StandardEtalePresentation.lift_bijective, StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.homEquiv_apply_coe, Algebra.mem_etaleLocus_iff, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.etaleLocus_eq_univ_iff",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: no w-contractible retained-localization retraction theorem among these hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]nd.?[Ee]tale|[Ww]Contractible|[Ww]StrictlyLocal",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no declaration for the full retained-localization assertion; hits concern ordinary etale algebras only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ind-étale cover of a strictly local ring with extremally disconnected space of maximal ideals splits",
+   "results": "RingHom.Etale.propertyIsLocal, RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, Algebra.Etale, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, StandardEtalePresentation.lift_bijective, Algebra.Etale.of_isLocalizationAway, Algebra.Etale.of_isLocalization_Away",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no declaration for the full retained-localization assertion; hits concern ordinary etale algebras only."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -82,5 +250,34 @@
   "def-weil-pbc-retained-localization"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-wc-rings-retraction",
+  "worker": "stage1",
+  "summary": "Preserved every statement clause and the component-selection/retained-localization route. Expanded the proof into eight steps; supplied the missing going-down and local-to-global citations from existing Mathlib leaves, justified the arbitrary retained subset, and wrote the localization inverses and retraction identity. No new nodes and no statement correction.",
+  "blueprint": "Realizes det-pe-wc-rings-retraction.proof.md: Choice of components in steps 1-2; The algebra B double prime in step 3; Bijectivity on spectra and local rings in steps 4-5; R to B double prime is an isomorphism and the retraction in steps 6-8. These realize the component-selection and restriction clause of sk-prop-pe-wc-rings.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-retained-localization",
+    "why": "Generic retained-localization point and local-ring calculation explicitly required by this blueprint unit; no separate node in sk-prop-pe-wc-rings states that construction."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic composition and ind-etale-to-weakly-etale stability for the retained algebra; the unit uses this as an algebraic tool and supplies no competing stability theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-retained-localization",
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q40-18ccd7789",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-18ccd7789 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route and Stacks sources. All eight steps check out, including canonical source-prime localization and the assertion for every qualifying closed subset. No new nodes, cycles, weakening or repairs. Both declared tool uses accepted. Detailed review written to review.md."
+ }
 }
