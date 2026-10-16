@@ -7,8 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselization
 public import Mathlib.AlgebraicGeometry.ResidueField
-import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.Paper.StrictHenselizationPointEvaluationPointed
 import Sheaf.Paper.StrictHenselizationPointEvaluationProperties
 
@@ -50,7 +48,9 @@ theorem strictHenselizationPointedMap_core
         separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω,
       Function.Surjective ψ ∧
       RingHom.ker ψ = IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing barY) := by
-  sorry
+  let ψ := Scheme.strictHenselizationPointEvaluationToSep barY hΩ
+  have hp := Scheme.strictHenselizationPointEvaluationToSep_surjective barY hΩ
+  exact ⟨ψ, hp, IsLocalRing.ker_eq_maximalIdeal ψ hp⟩
 
 /-- The compatible residue maps give a surjection to the relative separable closure.
 Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP
