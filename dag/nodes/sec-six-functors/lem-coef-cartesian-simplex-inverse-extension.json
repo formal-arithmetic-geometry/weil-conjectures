@@ -30,9 +30,179 @@
   "lem-coef-relative-marked-anodyne-calculus",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S=\\Delta^n$, $A=X_\\partial$, $B=Y_\\partial$, $p:X\\to S$ and $q:Y\\to S$. The nerve of the ordered category $[n]$ is a quasicategory: an inner horn specifies its ordered vertices and therefore its unique simplex. Thus $X,Y$ are quasicategories by the relative cartesian-fibration calculus. Pullback to any face $\\tau:\\Delta^k\\hookrightarrow S$ is cartesian, with exactly the pulled-back natural marking; its total spaces $X_\\tau,Y_\\tau$ are again quasicategories. The map $f_\\tau$ preserves cartesian edges and has the given fiber equivalences at its vertices. Work in the Joyal model structure throughout the unmarked part of this proof; all simplicial sets are cofibrant since the empty inclusion is a monomorphism.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, simplex reduction; preliminary quasicategory and marking checks."
+   }
+  },
+  {
+   "text": "For each face $\\tau$ and vertices $x,z\\in X_\\tau$ over $s,t$, compare $\\operatorname{Map}_{X_\\tau}(x,z)$ and $\\operatorname{Map}_{Y_\\tau}(f x,f z)$ over the identical Kan base $\\operatorname{Map}_{\\Delta^k}(s,t)$. For a vertex $\\alpha:s\\to t$ of that base, choose a cartesian lift $e:w\\to z$ in $X_\\tau$. Its image $f(e)$ is cartesian in $Y_\\tau$. The natural cartesian mapping-fiber formula identifies the induced map on homotopy fibers over $\\alpha$ with\n$$\\operatorname{Map}_{(X_\\tau)_s}(x,w)\\longrightarrow\\operatorname{Map}_{(Y_\\tau)_s}(f x,f w).$$\nThis is an equivalence because the given fiber functor is an equivalence and equivalences induce equivalences of mapping spaces. The homotopy-fiber detection theorem, with identity map on the base, now shows that the map of total mapping spaces is an equivalence. This includes the case when the base mapping space is empty. Hence every $f_\\tau$ is fully faithful.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cartesian-mapping-fiber",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.4.4.4 and its proof, expanded using Proposition 2.4.4.2; the existing natural mapping-fiber node supplies that proposition."
+   }
+  },
+  {
+   "text": "For any vertex $y\\in Y_\\tau$ over $s$, a quasi-inverse of the fiber equivalence supplies $x\\in(X_\\tau)_s$ and an equivalence $f(x)\\simeq y$ in that fiber. Its inverse triangles remain inverse triangles in $Y_\\tau$, so this is also an equivalence of total-space objects. Thus the full essential image of $f_\\tau$ is all of $Y_\\tau$. The full-essential-image theorem applied to the fully faithful functor of step 2 supplies a coherent quasi-inverse on the whole target. The Joyal quasicategory characterization makes $f_\\tau$ a categorical equivalence. In particular $f:X\\to Y$ is one.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-full-essential-image",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.4.4.4, essential surjectivity and conclusion."
+   }
+  },
+  {
+   "text": "Also $f_\\partial:A\\to B$ is a categorical equivalence; do not assume the boundary itself is a quasicategory. Prove, simultaneously for every subcomplex $T\\subseteq\\partial\\Delta^n$, that $X_T\\to Y_T$ is a categorical equivalence by induction on the finite number of nondegenerate simplices of $T$. For $T=\\varnothing$ it is an isomorphism. Attach the missing faces in increasing dimension. If $T'=T\\cup_{\\partial\\tau}\\tau$, then both preimages are degreewise pushouts of the spans $X_T\\leftarrow X_{\\partial\\tau}\\hookrightarrow X_\\tau$ and $Y_T\\leftarrow Y_{\\partial\\tau}\\hookrightarrow Y_\\tau$. Indeed each degree is the union of the two inverse-image subsets, with intersection exactly the inverse image of $\\partial\\tau$. All six objects are Joyal-cofibrant; the displayed right legs are monomorphisms. The map on the face is weak by step 3, and the maps on $T$ and $\\partial\\tau$ are weak by induction, since those have fewer simplices. Clause (b) of the cofibrant-span comparison gives the desired weak equivalence on $T'$. A vertex attachment has empty boundary and is covered by the same argument. Take $T=\\partial\\Delta^n$.",
+   "uses": [
+    "lem-coef-model-cofibrant-colimit-comparison",
+    "lem-coef-joyal-model-structure",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, weak equivalence of the boundary mapping-cylinder comparison, with finite face gluing written out; homotopy pushout calculus A.2.4."
+   }
+  },
+  {
+   "text": "Form the unmarked simplicial pushouts\n$$C=Y\\amalg_{X\\times\\{0\\}}(X\\times\\Delta^1),\\qquad C_0=B\\amalg_{A\\times\\{0\\}}(A\\times\\Delta^1)\\amalg_{A\\times\\{1\\}}X,$$\nand put $D=(A\\times\\Delta^1)\\cup(X\\times\\{1\\})\\subseteq E=X\\times\\Delta^1$. Their evident maps to $S$ ignore the interval. The given $r_\\partial,h_\\partial$ and $1_X$ glue to $\\psi_0:C_0\\to X$: at time zero the agreement is exactly $h_\\partial|_0=r_\\partial f_\\partial$, and at time one it is $h_\\partial|_1=1_A$. Let $j:C_0\\to C$, $i:D\\hookrightarrow E$, $a:D\\to C_0$ and $b:E\\to C$ be the canonical maps. We have $ja=bi$. The map $j$ is a monomorphism even though $f$ need not be: degreewise, pushing out $X\\times\\{0\\}\\hookrightarrow E$ replaces the time-zero copy by $Y$, and $C_0$ is the subset consisting of $B$ and the image of $D$. A point of $D$ at time zero belongs to $A$, and $f^{-1}(B)=A$ because $f$ lies over $S$. Thus precisely the same identifications occur in $C_0$ and in $C$, proving injectivity.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, definition of Z and Z-prime (here C and C_0); degreewise gluing and injectivity."
+   }
+  },
+  {
+   "text": "The map $a:D\\to C_0$ is the pushout of $f_\\partial:A\\to B$ along the monomorphism $A=A\\times\\{0\\}\\hookrightarrow D$. The map $b:E\\to C$ is the pushout of $f:X\\to Y$ along $X=X\\times\\{0\\}\\hookrightarrow E$. The Joyal model structure has all objects cofibrant, so the all-cofibrant left-properness theorem applies to it. Steps 3 and 4 therefore make both $a$ and $b$ categorical equivalences. No right properness of the Joyal model structure is asserted or used.",
+   "uses": [
+    "lem-coef-all-cofibrant-left-proper",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, replacement by a weakly equivalent inclusion; Proposition A.2.4.2."
+   }
+  },
+  {
+   "text": "There is an extension $H:E\\to X$ of $\\psi_0a:D\\to X$ over $S$. Apply the equivalence-prism extension theorem to the inner fibration $p:X\\to S$, the subset $A\\subseteq X$, and terminal endpoint $\\epsilon=1$, exchanging the two product factors. This subset contains every vertex of $X$ because $n\\geq1$ and every vertex of $S$ belongs to its boundary. On the prism domain use $h_\\partial$ on $A\\times\\Delta^1$ and $1_X$ on $X\\times\\{1\\}$. At each vertex the vertical edge is an equivalence: restriction of $h_\\partial$ to the corresponding vertex fiber is an edge of the sharp mapping core and hence has equivalence components in that quasicategory. Its inverse triangles remain inverse triangles in $X$. The prescribed bottom map is $p\\operatorname{pr}_X:E\\to S$. All domain and base agreements are exact, so the theorem gives the required $H$.",
+   "uses": [
+    "lem-coef-infinity-equivalence-prism-extension",
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, final prism extension; Proposition 3.1.1.5. The existing vertex-containing inner-fibration prism theorem supplies this exact extension."
+   }
+  },
+  {
+   "text": "Strictify the extension across $j$ explicitly. Write $[-,-]_r$ for Joyal right homotopy classes as in the cited Mathlib leaf. Since $b:E\\to C$ is a weak equivalence between cofibrant objects and $X$ is fibrant, surjectivity of $b^*$ gives a class represented by $\\psi_1:C\\to X$ with $[\\psi_1b]=[H]$. Consequently\n$$[\\psi_1ja]=[\\psi_1bi]=[Hi]=[\\psi_0a].$$\nInjectivity of $a^*$ gives $[\\psi_1j]=[\\psi_0]$. The single-right-homotopy criterion and the good-path-object clause represent this equality by a good right homotopy from $\\psi_1j$ to $\\psi_0$. Apply homotopy extension along the cofibration $j:C_0\\hookrightarrow C$, with first endpoint extension $\\psi_1$. The second endpoint is a map $\\psi:C\\to X$ satisfying $\\psi j=\\psi_0$ exactly. This use of the two general Mathlib leaves is the concrete homotopy-class calculation behind HTT A.2.3.1.",
+   "uses": [
+    "lem-coef-model-weak-equivalence-homotopy-classes",
+    "lem-coef-model-right-homotopy-extension",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, strictification by Proposition A.2.3.1; Mathlib Homotopy.lean:200 and RightHomotopy.lean:183, :233, :324."
+   }
+  },
+  {
+   "text": "Set $r=\\psi|_Y$ and $h=\\psi|_{X\\times\\Delta^1}$. The pushout relation gives $h|_0=rf$, and the copy of $X$ in $C_0$ gives $h|_1=1_X$; also $r|_B=r_\\partial$ and $h|_{A\\times\\Delta^1}=h_\\partial$ exactly. Although step 8 worked in the unmarked model category, $\\psi$ is automatically over $S$. Indeed $C_0$ contains every vertex of $C$, so $p\\psi$ and the prescribed map $C\\to\\Delta^n$ agree on vertices. A simplex of $\\Delta^n=N([n])$ is determined by its ordered vertices, so these maps agree on every simplex. All vertical edges of $h$ are the already prescribed boundary edges since $A$ contains every vertex of $X$. They are equivalences by step 7. The pointwise-equivalence theorem makes $h$ a coherent natural equivalence from $rf$ to $1_X$ in $\\operatorname{Fun}(X,X)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, automatic base compatibility and vertical equivalences for n>0."
+   }
+  },
+  {
+   "text": "It remains to verify the markings. Since $f$ is a categorical equivalence and $rf$ is coherently equivalent to $1_X$, the quasicategory characterization and two-out-of-three make $r$ a categorical equivalence; it has a coherent quasi-inverse and is fully faithful and essentially surjective. Apply the existing cocartesian mapping-square criterion to the opposites $q^{\\mathrm{op}}:Y^{\\mathrm{op}}\\to S^{\\mathrm{op}}$ and $p^{\\mathrm{op}}:X^{\\mathrm{op}}\\to S^{\\mathrm{op}}$. For a cartesian edge $e$ of $Y$, its opposite is cocartesian. For every test vertex $y$ of $Y^{\\mathrm{op}}$, full faithfulness of $r^{\\mathrm{op}}$ identifies the two top mapping spaces in its criterion with those for $r(y)$ and $r(e)^{\\mathrm{op}}$, and the bottom spaces are unchanged because $r$ lies over $S$. Homotopy pullback invariance transfers the criterion. Every test vertex of $X^{\\mathrm{op}}$ is equivalent to some $r(y)$; precomposition by that equivalence and its image in $S^{\\mathrm{op}}$ induces equivalences on all four mapping spaces, with inverse induced by the inverse edge. The mapping-composition theorem supplies associativity, units and the inverse triangles up to simplicial homotopy, so these compositions are homotopy equivalences. When chosen mapping-space compositions make a comparison commute only up to the specified homotopy, use the path-space definition of the homotopy pullback: concatenate the comparison homotopy with its path coordinate. Concatenation with the reversed homotopy gives an inverse up to homotopy by contracting a path followed by its reverse. Thus replacing a strictly commuting representative by this homotopic representative preserves the comparison equivalence. Together with the cited invariance for strict maps, this transfers the criterion once again. Thus it holds for every test vertex, proving that $r(e)$ is cartesian. Opposites reverse the horn definitions and inverse triangles, so no straightening or relative marked model structure has been used. Hence $r:Y^\\natural\\to X^\\natural$ is marked.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, marking check expanded using Proposition 2.4.4.3; opposite of the existing cocartesian criterion."
+   }
+  },
+  {
+   "text": "Finally $h$ is a marked map $X^\\natural\\times(\\Delta^1)^\\sharp\\to X^\\natural$. For a cartesian edge $e:x\\to x'$ and a constant interval edge, its image is $rf(e)$ or $e$, which is cartesian by step 10. For the interval edge $0\\to1$, consider the product triangle with vertices $(x,0),(x',0),(x',1)$. Its first edge maps to $rf(e)$, which is marked, and its second to the prescribed vertical edge at $x'$, also marked because it comes from $h_\\partial$. The third edge is exactly $h(e,0\\to1)$. The marked triangle generator (iii) and the relative lifting criterion force this third edge to be marked: the underlying 2-simplex is already fixed, so lifting against the marking-addition generator changes no simplex. This covers every marked edge of the product, including degenerate $e$. By the definition of the relative sharp mapping complex, this marked cylinder is the required edge $h:rf\\to1_X$, with its exact boundary restriction from step 9.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.5, upgrade to the required marked homotopy; Definition 3.1.1.1(3) and Remark 3.1.1.10."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-relative-marked-anodyne-calculus",
+  "lem-coef-joyal-model-structure",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-cartesian-mapping-fiber",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-model-cofibrant-colimit-comparison",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-all-cofibrant-left-proper",
+  "lem-coef-infinity-equivalence-prism-extension",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-model-weak-equivalence-homotopy-classes",
+  "lem-coef-model-right-homotopy-extension",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, marked simplicial foundations for finite-coefficient adjunction. Agent-written expansion of HTT Proposition 3.1.3.5 (3) => (2), printed pp.156-157, read online but not archived; Corollary 2.4.4.4 is proved here from existing nodes and A.2.3.1 is implemented using two Mathlib leaves."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +245,50 @@
    "results": "{\"t\": \"2026-10-16T20:04:43Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a homotopy inverse relative to a subcomplex in a simplicial category of fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Homotopy.extendEquiv\", \"HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension\", \"Homotopy.ofExtend_extend\", \"SSet.RelativeMorphism.Homotopy.h\", \"SSet.RelativeMorphism.Homotopy.ext\", \"SSet.RelativeMorphism.Homotopy.ext_iff\", \"SSet.RelativeMorphism.Homotopy\", \"SSet.RelativeMorphism.Homotopy.h₁\"], \"digest\": \"20b6c2354e71880e\"}",
    "date": "2026-10-16",
    "verdict": "No match: ModelCategory/RightHomotopy.lean:183 homotopy_extension extends a homotopy of one map with a given extension of one endpoint. It does not construct the inverse map and its prescribed composite homotopy for Cartesian fibrations or supply the fiber-equivalence input."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fiberwise equivalence of Cartesian fibrations over a simplex admits a homotopy inverse extending a specified inverse and equivalence homotopy on its boundary",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [hf : HomotopicalAlgebra.Fibration f] {n : ℕ} (i : Fin (n + 2)),\\n  CategoryTheory.HasLiftingProperty (SSet.horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.BinaryProduct.inverse_map_mkHom_homMk_homMk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal\", \"type\": \"∀ {X Y : SSet.Truncated 2}\\n  {x₀ x₁ : X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Edge.tensor._proof_1 })}\\n  (e : SSet.Truncated.Edge x₀ x₁)\\n  {y₀ y₁ : Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Edge.tensor._proof_1 })}\\n  (e' : SSet.\", \"doc\": \"For 2-truncated simplicial sets $X$ and $Y$, the inverse of the binary product functor $X.\\\\text{HomotopyCategory} \\\\times Y.\\\\text{HomotopyCategory} \\\\to (X \\\\times Y).\\\\text{HomotopyCategory}$ maps the pr\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence\", \"type\": \"∀ {A : Type u_2} [inst : CategoryTheory.Category.{v_2, u_2} A] [inst_1 : CategoryTheory.Abelian A]\\n  {Y : CategoryTheory.SimplicialObject A},\\n  AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex.homotopyInvHomId =\\n    (Homotopy.ofEq ⋯).trans (AlgebraicTopology.Dol\", \"doc\": \"For any simplicial object $Y$ in an abelian category $\\\\mathcal{A}$, the homotopy equivalence between the normalized Moore complex $N[Y]$ and the alternating face map complex $K[Y]$ includes a homotopy\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.BinaryProduct.inverse_map_mkHom_id_homMk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal\", \"type\": \"∀ {X Y : SSet.Truncated 2}\\n  (x : X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Edge.tensor._proof_1 }))\\n  {y₀ y₁ : Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Edge.tensor._proof_1 })}\\n  (e : SSet.Truncated.Edge y₀ y₁),\\n  (SSet.Truncate\", \"doc\": \"For a 2-truncated simplicial set $ X $, an object $ x $ in its 0-simplices, and an edge $ e $ between 0-simplices $ y_0 $ and $ y_1 $ in another 2-truncated simplicial set $ Y $, the inverse of the bi\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence\", \"type\": \"∀ {A : Type u_2} [inst : CategoryTheory.Category.{v_2, u_2} A] [inst_1 : CategoryTheory.Abelian A]\\n  {Y : CategoryTheory.SimplicialObject A},\\n  AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex.homotopyHomInvId =\\n    Homotopy.ofEq ⋯\", \"doc\": \"For any simplicial object $Y$ in an abelian category $\\\\mathcal{A}$, the normalized Moore complex $N[Y]$ and the alternating face map complex $K[Y]$ are homotopy equivalent. This equivalence is establi\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.BinaryProduct.inverse_map_mkHom_homMk_id\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal\", \"type\": \"∀ {X Y : SSet.Truncated 2}\\n  {x₀ x₁ : X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Edge.tensor._proof_1 })}\\n  (e : SSet.Truncated.Edge x₀ x₁)\\n  (y : Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Edge.tensor._proof_1 })),\\n  (SSet.Truncate\", \"doc\": \"For 2-truncated simplicial sets $X$ and $Y$, the inverse of the binary product functor $X.\\\\text{HomotopyCategory} \\\\times Y.\\\\text{HomotopyCategory} \\\\to (X \\\\times Y).\\\\text{HomotopyCategory}$ maps the pr\"}\n  {\"name\": \"SSet.RelativeMorphism.Homotopy.ofEq_h\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism\", \"type\": \"∀ {X Y : SSet} {A : X.Subcomplex} {B : Y.Subcomplex} {φ : A.toSSet ⟶ B.toSSet} {f g : SSet.RelativeMorphism A B φ}\\n  (h : f = g),\\n  (SSet.RelativeMorphism.Homotopy.ofEq h).h =\\n    CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.SemiCartesianMonoidalCategory.fst X (SSet.stdSimplex.obj (Simpl\", \"doc\": \"Given equal relative morphisms $ f = g $ between simplicial set pairs $(X,A)$ and $(Y,B)$, the induced homotopy is constructed by composing the left projection morphism from the standard 1-simplex wit\"}\n  {\"name\": \"HomotopicalAlgebra.Cylinder.LeftHomotopy.covering_homotopy\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {A E B : C}\\n  {P : HomotopicalAlgebra.Cylinder A} {f₀ f₁ : A ⟶ B} [HomotopicalAlgebra.IsCofibrant A] [P.IsGood]\\n  (h : P.LeftHomotopy f₀ f₁) (p : E ⟶ B) [HomotopicalAlgebra.Fibration p] (l₀ : A ⟶ E\", \"doc\": \"In a model category $\\\\mathcal{C}$, given a cofibrant object $A$ with a good cylinder object $P$, a fibration $p: E \\\\to B$, and morphisms $f_0, f_1: A \\\\to B$ connected by a left homotopy $h: P \\\\to B$, \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern Kan horn lifting, relative-homotopy definitions, ordinary fibered categories, or chain homotopy. None provides the prescribed marked inverse and its exact boundary homotopy for cartesian fibrations of quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, Homotopy",
+   "sub": "",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"SSet.Homotopy.chainComplexMap\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Homology.HomotopyInvariance\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preadditive C] [CategoryTheory.Limits.HasCoproducts C] {X Y : SSet} {f g : X ⟶ Y} (H : SSet.Homotopy f g) (R : C) : Homotopy (SSet.chainComplexMap f R) (SSet.chainComplexMap g R)\", \"doc\": \"If `f` and `g` are homotopic maps of simplicial sets, then they induce chain-homotopic\\nmaps on the singular chain complexes with coefficients in `R`.\\n\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Homotopy.sSetChainComplexMap\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Homology.HomotopyInvariance\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preadditive C] [CategoryTheory.Limits.HasCoproducts C] {X Y : SSet} {f g : X ⟶ Y} (H : CategoryTheory.SimplicialObject.Homotopy f g) (R : C) : Homotopy (SSet.chainComplexMap f R) (SSet.chainComplexMap g R)\", \"doc\": \"If `f` and `g` are simplicially homotopic maps of simplicial sets,\\nthen they induce chain-homotopic maps on the singular chain complexes\\nwith coefficients in `R`. The assumption is in `SimplicialObjec\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern Kan horn lifting, relative-homotopy definitions, ordinary fibered categories, or chain homotopy. None provides the prescribed marked inverse and its exact boundary homotopy for cartesian fibrations of quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.{0,40}(fibr|homotop)|marked.{0,30}inverse",
+   "sub": "AlgebraicTopology",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern Kan horn lifting, relative-homotopy definitions, ordinary fibered categories, or chain homotopy. None provides the prescribed marked inverse and its exact boundary homotopy for cartesian fibrations of quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a prescribed inverse and natural equivalence homotopy from a simplex boundary for Cartesian fibrations",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.cosimplicialSimplicialEquiv_inverse_obj\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor SimplexCategoryᵒᵖ Cᵒᵖ),\\n  (CategoryTheory.cosimplicialSimplicialEquiv C).inverse.obj F = Opposite.op F.unop\", \"doc\": \"The inverse of the natural equivalence between the opposite category of cosimplicial objects in a category $\\\\mathcal{C}$ and the category of simplicial objects in $\\\\mathcal{C}^\\\\text{op}$ maps a simpli\"}\n  {\"name\": \"SimplexCategory.revEquivalence\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.Rev\", \"type\": \": SimplexCategory ≌ SimplexCategory\", \"doc\": \"The equivalence between the simplex category $\\\\Delta$ and itself given by the reversal functor, which acts as its own inverse up to natural isomorphism. Specifically, applying the reversal functor twi\"}\n  {\"name\": \"Homotopy.extendEquiv\", \"module\": \"Mathlib.Algebra.Homology.Embedding.ExtendHomotopy\", \"type\": \"(e : c.Embedding c') [e.IsRelIff] : Homotopy f g ≃ Homotopy (extendMap f e) (extendMap g e)\", \"doc\": \"Given a shape embedding $ e: c \\\\to c' $, this establishes an equivalence between homotopies of original chain maps $ f,g: C \\\\to D $ and homotopies of their extended versions $ \\\\text{extendMap} f e, \\\\t\"}\n  {\"name\": \"CategoryTheory.cosimplicialSimplicialEquiv_inverse_map\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] {X Y : CategoryTheory.Functor SimplexCategoryᵒᵖ Cᵒᵖ}\\n  (α : X ⟶ Y),\\n  (CategoryTheory.cosimplicialSimplicialEquiv C).inverse.map α =\\n    Quiver.Hom.op { app := fun X_1 => (α.app (Opposite.op X_1)).unop, naturality := ⋯ }\", \"doc\": \"The inverse equivalence between the opposite category of cosimplicial objects in a category $\\\\mathcal{C}$ and the category of simplicial objects in $\\\\mathcal{C}^\\\\text{op}$ maps natural transformations\"}\n  {\"name\": \"SimplexCategory.revEquivalence_inverse\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.Rev\", \"type\": \"SimplexCategory.revEquivalence.inverse = SimplexCategory.rev\", \"doc\": \"The inverse of the reversal equivalence on the simplex category $\\\\Delta$ is the reversal functor itself, establishing that applying the reversal functor twice is naturally isomorphic to the identity f\"}\n  {\"name\": \"CategoryTheory.simplicialCosimplicialAugmentedEquiv_inverse\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C],\\n  (CategoryTheory.simplicialCosimplicialAugmentedEquiv C).inverse = CategoryTheory.cosimplicialToSimplicialAugmented C\", \"doc\": \"The inverse of the equivalence between the opposite category of augmented simplicial objects in a category $\\\\mathcal{C}$ and the category of augmented cosimplicial objects in $\\\\mathcal{C}^{\\\\text{op}}$\"}\n  {\"name\": \"CategoryTheory.simplicialCosimplicialEquiv_inverse_map\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] {X Y : CategoryTheory.Functor SimplexCategory Cᵒᵖ} (η : X ⟶ Y),\\n  (CategoryTheory.simplicialCosimplicialEquiv C).inverse.map η = (CategoryTheory.NatTrans.leftOp η).op\", \"doc\": \"For any category $\\\\mathcal{C}$ and natural transformations $\\\\eta$ between functors $X, Y: \\\\Delta \\\\to \\\\mathcal{C}^\\\\text{op}$, the inverse map of the equivalence between the opposite category of simplic\"}\n  {\"name\": \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_inv\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  (p : CategoryTheory.Functor 𝒳 𝒮) {R S : 𝒮} {a b : 𝒳} (f : R ⟶ S) (φ : a ⟶ b) [inst_2 : p.IsCartesian f φ] {a' : 𝒳}\\n  (φ' : a' ⟶ b) [inst_3 : p.IsCartesian f φ'],\\n  (CategoryTheor\", \"doc\": \"Given a functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, if $ \\\\phi : a \\\\to b $ and $ \\\\phi' : a' \\\\to b $ are Cartesian morphisms over the same morphism $ f : R \\\\to S $ in $ \\\\mathcal{S} $, then the inverse \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern Kan horn lifting, relative-homotopy definitions, ordinary fibered categories, or chain homotopy. None provides the prescribed marked inverse and its exact boundary homotopy for cartesian fibrations of quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative extension of a marked homotopy inverse across a base simplex",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Homotopy.extend\", \"module\": \"Mathlib/Algebra/Homology/Embedding/ExtendHomotopy\", \"type\": \"{ι : Type u_1} →\\n  {ι' : Type u_2} →\\n    {c : ComplexShape ι} →\\n      {c' : ComplexShape ι'} →\\n        {C : Type u_3} →\\n          [inst : CategoryTheory.Category.{v_1, u_3} C] →\\n            [inst_1 : CategoryTheory.Limits.HasZeroObject C] →\\n              [inst_2 : CategoryTheory.Preadditive C] →\\n   \", \"doc\": \"Given a homotopy $\\\\phi$ between chain maps $f,g: K \\\\to L$ in a preadditive category and a complex shape embedding $e: c \\\\to c'$, this constructs a homotopy between the extended chain maps $f_{\\\\text{ex\"}\n  {\"name\": \"SSet.RelativeMorphism.Homotopy.h\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism\", \"type\": \"{X Y : SSet} →\\n  {A : X.Subcomplex} →\\n    {B : Y.Subcomplex} →\\n      {φ : A.toSSet ⟶ B.toSSet} →\\n        {f g : SSet.RelativeMorphism A B φ} →\\n          f.Homotopy g →\\n            (CategoryTheory.MonoidalCategoryStruct.tensorObj X (SSet.stdSimplex.obj (SimplexCategory.mk 1)) ⟶ Y)\", \"doc\": \"A morphism from the product of a simplicial set $X$ with the standard 1-simplex $\\\\Delta^1$ to $Y$, representing a homotopy between relative morphisms $f,g:(X,A)\\\\to(Y,B)$ that restricts to the given ma\"}\n  {\"name\": \"Homotopy.ofExtend\", \"module\": \"Mathlib/Algebra/Homology/Embedding/ExtendHomotopy\", \"type\": \"{ι : Type u_1} →\\n  {ι' : Type u_2} →\\n    {c : ComplexShape ι} →\\n      {c' : ComplexShape ι'} →\\n        {C : Type u_3} →\\n          [inst : CategoryTheory.Category.{v_1, u_3} C] →\\n            [inst_1 : CategoryTheory.Limits.HasZeroObject C] →\\n              [inst_2 : CategoryTheory.Preadditive C] →\\n   \", \"doc\": \"Given a shape embedding $ e: c \\to c' $ and a homotopy $ h $ between extended chain maps $ \\\\text{extendMap} f e $ and $ \\\\text{extendMap} g e $, this constructs a homotopy between the original chain map\"}\n  {\"name\": \"SSet.RelativeMorphism.Homotopy.ext\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism\", \"type\": \"∀ {X Y : SSet} {A : X.Subcomplex} {B : Y.Subcomplex} {φ : A.toSSet ⟶ B.toSSet} {f g : SSet.RelativeMorphism A B φ}\\n  {x y : f.Homotopy g}, x.h = y.h → x = y\", \"doc\": \"Given simplicial sets $X$ and $Y$, subcomplexes $A \\\\subseteq X$ and $B \\\\subseteq Y$, a morphism $\\\\phi: A \\\\to B$, and two relative morphisms $f,g: (X,A) \\\\to (Y,B)$, any two homotopies between $f$ and $\"}\n  {\"name\": \"SSet.RelativeMorphism.Homotopy\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism\", \"type\": \"{X Y : SSet} →\\n  {A : X.Subcomplex} →\\n    {B : Y.Subcomplex} → {φ : A.toSSet ⟶ B.toSSet} → SSet.RelativeMorphism A B φ → SSet.RelativeMorphism A B φ → Type u\", \"doc\": \"Given simplicial sets $X$ and $Y$, subcomplexes $A \\\\subseteq X$ and $B \\\\subseteq Y$, a morphism $\\\\phi: A \\\\to B$, and two relative morphisms $f,g: (X,A) \\\\to (Y,B)$, this defines the type of homotopies \"}\n  {\"name\": \"Homotopy.extendEquiv\", \"module\": \"Mathlib/Algebra/Homology/Embedding/ExtendHomotopy\", \"type\": \"{ι : Type u_1} →\\n  {ι' : Type u_2} →\\n    {c : ComplexShape ι} →\\n      {c' : ComplexShape ι'} →\\n        {C : Type u_3} →\\n          [inst : CategoryTheory.Category.{v_1, u_3} C] →\\n            [inst_1 : CategoryTheory.Limits.HasZeroObject C] →\\n              [inst_2 : CategoryTheory.Preadditive C] →\\n   \", \"doc\": \"Given a shape embedding $ e: c \\\\to c' $, this establishes an equivalence between homotopies of original chain maps $ f,g: C \\\\to D $ and homotopies of their extended versions $ \\\\text{extendMap} f e, \\\\t\"}\n  {\"name\": \"Homotopy.extend_ofExtend\", \"module\": \"Mathlib/Algebra/Homology/Embedding/ExtendHomotopy\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Preadditive C] {K L : HomologicalComplex C c} {f g : K ⟶ L} {e : c.Embedding c'}\\n  [\", \"doc\": \"Given a complex shape embedding $ e: c \\to c' $ and a homotopy $ h $ between extended chain maps $ f_{\\\\text{ext}} $ and $ g_{\\\\text{ext}} $, extending the homotopy $ \\\\text{ofExtend}(h) $ via $ e $ recov\"}\n  {\"name\": \"Homotopy.extend_hom_eq\", \"module\": \"Mathlib/Algebra/Homology/Embedding/ExtendHomotopy\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Preadditive C] {K L : HomologicalComplex C c} {f g : K ⟶ L} (h : Homotopy f g)\\n  (e \", \"doc\": \"Given a homotopy $\\\\phi$ between chain maps $f,g: K \\\\to L$ in a preadditive category and a complex shape embedding $e: c \\\\to c'$, the hom-component of the extended homotopy $\\\\phi_{\\\\text{ext}}$ at indic\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern Kan horn lifting, relative-homotopy definitions, ordinary fibered categories, or chain homotopy. None provides the prescribed marked inverse and its exact boundary homotopy for cartesian fibrations of quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-relative-cartesian-model",
@@ -86,5 +296,20 @@
   "group": "Q112"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cartesian-simplex-inverse-extension",
+  "worker": "stage1",
+  "summary": "Kept the statement and its exact boundary requirement. Expanded the HTT mapping-cylinder argument in eleven steps. Proved the total-space and boundary categorical equivalences from existing mapping-fiber, full-essential-image and gluing nodes, so no new quasicategorical lemmas are needed. Reused the opposite cocartesian mapping criterion to check the inverse marking and the marked triangle generator to check every cylinder edge. Added only two Mathlib leaves for homotopy classes and homotopy extension. All source, hypothesis, duplicate, cycle and edge-case checks are recorded in report.md.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, the finite-coefficient R Hom adjunction before R lim, through the existing blueprint.from.via chain: the simplex-relative inverse construction used by lem-coef-marked-relative-cartesian-model. No chapter/unit route or unit record changes."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NY-e5adde795",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-e5adde795 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps, the full statements of all 21 cited nodes and both new leaves. The item statement is unchanged and matches the HTT 3.1.3.5 simplex step with boundary data; n>=1 is used only to put every vertex in the boundary. Checks per step: (2) the roles and naturality clause of the cartesian mapping-fiber lemma are right, and fiber detection with identity base covers the empty case. (4) The induction removes a top simplex, so T∩τ=∂τ and the degreewise union is a pushout; all hypotheses of comparison (b) hold. (5) j is injective even for non-injective f: the pieces are disjoint because D∩X×{0}=A×{0}. (6) a and b are cobase changes along monomorphisms; only left properness is used. (7) The vertical edges are equivalences because Map^♯_{Δ^0}(Δ^0,X_i^♮) is the core of X_i (relative calculus). (8) Surjectivity, precomposition, injectivity, a good path object and homotopy extension give ψj=ψ0 exactly. (9) Maps into N([n]) are determined by vertices. (10) The cartesian criterion is transferred through opposites, with the homotopy-commuting comparisons written out. (11) Generator (iii) forces the mixed product edges to be marked. Leaves checked against pinned Mathlib: Homotopy.lean:200 precomp_bijective_of_weakEquivalence; RightHomotopy.lean:306 mk_surjective and :324 mk_eq_mk_iff; :233 exists_good_pathObject and :183 homotopy_extension; PathObject.lean:140 and :178. Both are exact and have the right hypotheses. Searching the DAG for duplicates (localized-good-homotopy-test, localization-map-surjective, relative-categorical-cylinder-criterion, cofibration-local-mapping-test) found none. The only existing fiberwise-equivalence statement is in marked-relative-cartesian-model, which would be circular, and the worker correctly avoided it. Script check: no cycle. No SGA. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (generic clause that equivalences induce mapping-space equivalences, in steps 2 and 10). Two maintainer-field remarks, not repairable via fixes: the item's source.place still names a stale 'HTT-second-reading.pdf in the delivery sandbox', and the new nodes lack a lean_audit key."
+ }
 }
