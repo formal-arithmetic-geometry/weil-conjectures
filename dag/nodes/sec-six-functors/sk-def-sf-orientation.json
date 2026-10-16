@@ -3,24 +3,85 @@
  "blueprint": {
   "is": "sk-def-sf-orientation",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-sf-orientation"
+  ]
  },
  "kind": "definition",
  "title": "Orientation: an interface record",
- "statement": "An *orientation* for a smooth separated finite-type $f:X\\to Y$ of pure\nrelative dimension $d$ is an isomorphism\n$\\gamma_{f,\\Lambda_Y}:Lf^*\\Lambda_Y(d)[2d]\\xrightarrow{\\sim}Rf^!\\Lambda_Y$,\nnatural in $Y$ and compatible with composition, étale base change, finite\nreduction, scalar extension and the pro-étale realization; for $f=a_X$ it\nreads $\\omega_{X,\\Lambda}\\cong\\Lambda_X(d)[2d]$.\n\nIn this blueprint the orientation is not an assumption: it is constructed as\n[sk-thm-smooth-purity] (§[sec-smooth-purity]), with the tensor form and the\nbase change for $R^!$ in [sk-prop-cohsm] and the remaining coefficient stages\nin [sk-thm-purity-transport].",
+ "statement": "Work in the six-functor setting of [def-sf-datum]: finite-type schemes over the fixed algebraic closure $k$ of a finite field of characteristic $p$, with $\\ell\\ne p$, and coefficient stages $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Use its constructible finite-Tor categories, coefficient comparison data, derived operations, and structure morphisms $a_X:X\\to\\operatorname{Spec}k$. For every scheme $S$ in this setting, let $\\Lambda_S$ be its coefficient object; Tate twists and shifts use the conventions of [def-coefficient-twists-detailed] and [def-sf-datum], so $K(m)=K\\otimes^L_{\\Lambda_S}\\Lambda_S(m)$ for $K$ on $S$. In particular the integral coefficient object is the completed one and the algebraically closed coefficient stage is interpreted at a common finite extension.\n\nFor a smooth separated finite-type morphism $f:X\\to Y$ of pure relative dimension $d\\geq0$, an *orientation* is the component at $(f,\\Lambda)$ of an orientation datum [def-sf-orientation]. Its isomorphism in $D^b_{ctf}(X,\\Lambda)$ is\n$$\n\\gamma_{f,\\Lambda_Y}:Lf^*\\Lambda_Y(d)[2d]\\xrightarrow{\\sim}Rf^!\\Lambda_Y.\n$$\nThe family is natural in the base $Y$ and compatible with composition of smooth morphisms, etale base change, finite reduction, scalar extension and the pro-etale realization, in the sense of [def-sf-orientation], using the comparison maps of [def-sf-datum] at their defined coefficient stages. On the affine-line projection it is the canonical orientation specified in [def-sf-orientation]. Thus the compatibility conditions are conditions on the whole family, not on an isolated isomorphism for one $f$. For $f=a_X$, with $X$ smooth separated of pure dimension $d$ over $k$, the same isomorphism, read in the reverse direction and with $\\omega_{X,\\Lambda}=Ra_X^!\\Lambda$ as in [def-sf-datum], reads\n$$\n\\omega_{X,\\Lambda}\\cong\\Lambda_X(d)[2d].\n$$\n\nFor the concrete system, existence of this canonical family is a theorem, not an extra assumption of the six-functor interface. The source's construction pointers are finite smooth purity [thm-pur-finite-coefficient-smooth-purity], the tensor and base-change statements [thm-pur-cohomological-smoothness], and the remaining coefficient stages [sk-thm-purity-transport]. These are forward pointers to the verification of the interface, not prerequisites for defining orientation data.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-orientation/_section.md",
   "place": "node sk-def-sf-orientation, order 2487"
  },
  "stmt_deps": [
-  "sk-thm-purity-transport"
+  "def-sf-datum",
+  "def-coefficient-twists-detailed",
+  "def-sf-orientation"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.NatIso",
+   "results": "No hits: Loogle reported unknown identifier CategoryTheory.NatIso. This malformed pattern is inconclusive and was replaced by CategoryTheory.Iso, CategoryTheory.Functor.",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: unknown identifier; rerun with valid names"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.?twist|smooth.?purity|orientation.?datum|dualizing.?complex",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity orientation exceptional inverse image shifted Tate twist compatible with base change",
+   "results": "Eight hits on stability of smoothness under base change, including AlgebraicGeometry.isSmooth_isStableUnderBaseChange and AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:126,173: morphism-property stability, not a purity orientation datum.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An orientation datum for smooth morphisms is a natural purity isomorphism from twisted shifted pullback of the coefficient unit to exceptional inverse image compatible with composition base change and coefficient extension",
+   "results": "Eight hits, including AlgebraicGeometry.Scheme.Modules.pseudofunctor, its composition formulas, and SheafOfModules.pullbackObjUnitToUnit. Read Mathlib/AlgebraicGeometry/Modules/Sheaf.lean and Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean: ordinary module sheaves and their pullback, without exceptional pullback, Tate twists or orientation families.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck Verdier smooth purity orientation isomorphism Tate twist dualizing complex compatible family of six functors",
+   "results": "Eight hits on derived shifts, scheme-module pullback composition, free-module pullback, and DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE. None defines the geometric purity orientation or coefficient compatibilities.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso, CategoryTheory.Functor",
+   "results": "Twelve hits, headed by CategoryTheory.Functor.mapIso and its identity/composition/inverse formulas. Read Mathlib/CategoryTheory/Iso.lean:473: mapping an existing isomorphism under a functor, not the orientation datum.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.*six|six.*formalism|exceptional.*inverse|upper.?shriek",
+   "results": "One hit: Mathlib/CategoryTheory/Adjunction/Mates.lean:40. Read lines 30–42: six operations appear as motivation only and are explicitly not developed there.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -43,5 +104,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors",
- "unit": "sk-def-sf-orientation"
+ "unit": "sk-def-sf-orientation",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-sf-orientation",
+  "worker": "stage1",
+  "summary": "One-level definition split with no new nodes: reused def-sf-datum for the operation/coefficient/dualizing setting, def-coefficient-twists-detailed for actual Tate objects, and def-sf-orientation for the coherent family. Restored the ambient hypotheses and affine-line normalization explicit in the detailed source, distinguished family compatibilities from one isolated isomorphism, and retained purity existence as forward construction pointers using current DAG ids rather than the absent sk-thm-smooth-purity and sk-prop-cohsm ids. The source existence pointer is not a definitional prerequisite. No exact full project attachment or Mathlib match: the Lean Orientation is finite-coefficient and individual-morphism only; separate finite-coefficient predicates do not supply the entire multistage constructed family.",
+  "blueprint": "main-20261015/blueprint/sec-six-functors/sk-def-sf-orientation/_section.md, both paragraphs; detailed def-sf-orientation.md, definition and affine-line normalization. The unit is a definition and has zero proof steps. Its statement is realized by sk-def-sf-orientation; the construction paragraph remains a forward pointer to the smooth-purity chapter and no construction route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NG-417730752",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-417730752 (reviewer sub-agent of L); spot-checked: Read the whole delivery. It has one commit: the item, the unit (only realized/realized_by changed, steps [] since the unit has no proof) and the report with both review sections. No new nodes. Source: main-20261015 sec-six-functors/sk-def-sf-orientation/_section.md (order 2487) and the detailed def-sf-orientation.md (order 2391). The master copy has the same defining text. Clause by clause: (1) the ambient setting (k, l != p, the four stages, finite-type k-schemes, D^b_ctf, a_X, omega = Ra_X^! Lambda) matches def-sf-datum and, through it, def-fix-six-functor-datum. (2) Lambda_S and K(m) match def-coefficient-twists-detailed: completed O_E sheaf, common-stage Qbar_l, l invertible on k-schemes. (3) gamma: Lf^* Lambda_Y(d)[2d] -> Rf^! Lambda_Y is word for word the source and lies in D^b_ctf. (4) Reading an orientation as a component of the def-sf-orientation family, with comparisons only at the stages where A5 defines them, matches the detailed definition and is not a weakening. (5) The affine-line normalization comes from the detailed source and is named in the report. (6) The f = a_X inversion is correct, and X is made separated. (7) The forward pointers thm-pur-finite-coefficient-smooth-purity, thm-pur-cohomological-smoothness and sk-thm-purity-transport say what is claimed. They correctly replace the non-node ids sk-thm-smooth-purity and sk-prop-cohsm and are rightly not stmt_deps. No SGA source is cited. Edge cases checked: d=0 (etale), d=1, X empty, f=id, all four stages. stmt_deps exist, form no cycle, and are used only for their statements. Duplicate check: def-sf-orientation is cited and in same_as; the pur9 and affine-line orientation nodes are different objects. The slopmaster2 Orientation (Orientation.lean:85-175) is finite-coefficient, single-isomorphism and has extra hypotheses, so there is no exact attachment. The eight recorded Mathlib searches cover all three kinds. No fixes and no tool_uses. Maintainer remarks only: consider putting the three forward-pointer ids in the pointers field, and the report's STATEMENT-DISPUTED label is really a context restoration."
+ }
 }

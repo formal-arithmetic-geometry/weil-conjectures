@@ -3,56 +3,211 @@
  "blueprint": {
   "is": "det-prop-diagonal-tower-trace",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The $\\ell$-adic trace of the projective line and the integration identities",
- "statement": "Let $q:\\mathbf P^1_Y\\to Y$ be the projection, let $p_1,p_2$ be the two\nprojections of $W=\\mathbf P^1_Y\\times_Y\\mathbf P^1_Y$, and let $\\delta_{\\Zl}$ be\nthe morphism of [det-prop-diagonal-tower-limit].\n\n1. In the derived category of inverse systems on $Y_{\\mathrm{proét}}$, the unit\n   and the class of a section give an isomorphism\n   $\\mathbf Z/\\ell^\\bullet\\oplus\\mathbf Z/\\ell^\\bullet(-1)[-2]\\xrightarrow{\\sim}Rq_*\\mathbf Z/\\ell^\\bullet$.\n   Twisting by $(1)[2]$, projecting onto the second summand and applying\n   $R\\varprojlim$ defines a $\\Zl$-linear trace\n   $\\operatorname{Tr}_q:Rq_*\\Zl(1)[2]\\to\\Zl$ in $D(Y_{\\mathrm{proét}},\\Zl)$ whose\n   reductions are the torsion traces of [sk-lem-geo-p1-cohomology]. The same\n   construction over $\\mathbf P^1_Y$ gives $\\operatorname{Tr}_{p_i}$.\n2. For $i=1,2$,\n   $\\operatorname{Tr}_{p_i}\\circ Rp_{i*}(\\delta_{\\Zl})=1_{\\Zl}$ in\n   $D((\\mathbf P^1_Y)_{\\mathrm{proét}},\\Zl)$, where $Rp_{i*}\\Delta_*\\Zl=\\Zl$.",
+ "statement": "Fix a prime $\\ell$ and work with separated finite-type schemes over a field $k$ of characteristic $p>0$, $p\\ne\\ell$, in the standing setting [sk-def-sfb-dc-setting]. All schemes below are Noetherian. For each such scheme $T$, write $A_{n,T}=(\\mathbf Z/\\ell^n)_T$ for the constant finite coefficient sheaf and $A_{\\bullet,T}=(A_{n,T})_{n\\ge1}$ with quotient transitions. The derived category of inverse systems means the ordinary derived category of strict towers of sheaves of $\\underline{\\mathbf Z_\\ell}$-modules, as in [det-prop-diagonal-tower-system]. Finite twists, their compatible transitions, and integral twists are those of [sk-def-sp-tate-twist]. Write $\\Zl_T=\\varprojlim_n A_{n,T}$ for the completed coefficient sheaf, identified with the pulled-back condensed coefficient sheaf by [det-prop-sfb-qlbar-colimit-x-integral-limit]; it is distinguished from $\\underline{\\mathbf Z_\\ell}$. The trace and identities below concern completed coefficients.\n\nLet $q:\\mathbf P^1_Y\\to Y$ be the projection, let $p_1,p_2$ be the two\nprojections of $W=\\mathbf P^1_Y\\times_Y\\mathbf P^1_Y$, and let $\\delta_{\\Zl}$ be\nthe morphism of [det-prop-diagonal-tower-limit].\n\n1. In the derived category of inverse systems on $Y_{\\mathrm{proét}}$, the unit\n   and the class of a section give an isomorphism\n   $\\mathbf Z/\\ell^\\bullet\\oplus\\mathbf Z/\\ell^\\bullet(-1)[-2]\\xrightarrow{\\sim}Rq_*\\mathbf Z/\\ell^\\bullet$.\n   Twisting by $(1)[2]$, projecting onto the second summand and applying\n   $R\\varprojlim$ defines a $\\Zl$-linear trace\n   $\\operatorname{Tr}_q:Rq_*\\Zl(1)[2]\\to\\Zl$ in $D(Y_{\\mathrm{proét}},\\Zl)$ whose\n   reductions are the torsion traces of [sk-lem-geo-p1-cohomology]. The same\n   construction over $\\mathbf P^1_Y$ gives $\\operatorname{Tr}_{p_i}$.\n2. For $i=1,2$,\n   $\\operatorname{Tr}_{p_i}\\circ Rp_{i*}(\\delta_{\\Zl})=1_{\\Zl}$ in\n   $D((\\mathbf P^1_Y)_{\\mathrm{proét}},\\Zl)$, where $Rp_{i*}\\Delta_*\\Zl=\\Zl$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.md",
   "place": "node det-prop-diagonal-tower-trace, order None"
  },
  "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "det-prop-diagonal-tower-system",
+  "sk-def-sp-tate-twist",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
   "det-prop-diagonal-tower-limit",
   "sk-lem-geo-p1-cohomology"
  ],
  "proof": [
   {
-   "text": "(1) The map of systems\n$(1,h_\\bullet):\\mathbf Z/\\ell^\\bullet\\oplus\\mathbf Z/\\ell^\\bullet(-1)[-2]\\to Rq_*\\mathbf Z/\\ell^\\bullet$,\nwhere $h_\\bullet$ is the class of a section built as in\n[det-prop-diagonal-tower-system] from the Cartier extension of the section\n(a morphism of systems by the same construction), is defined in the derived\ncategory of inverse systems. Derived direct image of a system is computed\nlevelwise ([det-prop-diagonal-tower-limit](1)), and at level $n$ the map is the\nisomorphism of [sk-lem-geo-p1-cohomology] (compare\n[thm-amb-p1-decomposition]). Cohomology of systems is computed levelwise, so\nits cone is acyclic and the map is an isomorphism. Twisting by $(1)[2]$ and\ncomposing its inverse with the projection to the summand\n$\\mathbf Z/\\ell^\\bullet$ gives the trace on systems, and $R\\varprojlim$ gives\n$\\operatorname{Tr}_q$. Since $Rq_*$ commutes with $R\\varprojlim$, its source is\n$Rq_*\\Zl(1)[2]$ and its target $\\Zl$; derived direct image preserves derived\ncompleteness, so source and target are complete, and the equivalence of\n[det-prop-diagonal-tower-limit](3) makes it linear over the completed\ncoefficient sheaf on $Y$. Its level-$n$ reduction is the projection of\n[def-amb-p1-trace], the torsion trace.",
+   "text": "Put $P=\\mathbf P^1_Y$. The first-Chern-class construction of [det-sp-tower-classes](2), specialized to $E=\\mathbf Q_\\ell$ and $L=\\mathcal O_P(1)$, supplies a single morphism of varying-coefficient derived systems, not merely a compatible family in the individual derived categories. Use its adjoint and the unit to form $b_\\bullet=(1,h_\\bullet)$. For the standard section $s=[1:0]:Y\\hookrightarrow P$, its image has equations $t_0=x_1/x_0$ on $U_0=(x_0\\ne0)$ and $t_1=1$ on $U_1=(x_1\\ne0)$. The generators $e_i=t_i^{-1}$ of its Cartier line bundle satisfy $e_0=(x_0/x_1)e_1$ on the overlap, which is the transition of $\\mathcal O_P(1)$. Thus $\\mathcal O_P(s(Y))=\\mathcal O_P(1)$. For each $n\\geq1$, apply [sk-lem-geo-cartier] with $Z=P$, $D=s(Y)$, $r=n$, and $R=\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$. This is a finite commutative $R$-algebra; $\\ell$ is invertible on $P$. The section is effective Cartier: $x_1/x_0$ is the polynomial coordinate on $U_0$, hence a non-zero-divisor over any base ring, and its ideal is the unit ideal on $U_1$. The cited theorem uses the ordinary small pro-etale module category and the finite line $\\nu_P^*(\\mu_{\\ell^n}\\otimes_{A_{n,P}}A_{n,P})$. The canonical tensor-unit isomorphism $z\\otimes a\\mapsto az$ identifies this with $\\nu_P^*\\mu_{\\ell^n}=A_{n,P}(1)$, so both the coefficient category and the target of its Cartier morphism are exactly the ones used here. Extension from $R$ to $\\Lambda=R$ is the identity scalar-extension functor under that same tensor-unit identification. Its composite with the restriction unit is the Kummer boundary of the generator torsor of $\\mathcal O_P(s(Y))=\\mathcal O_P(1)$, so it is the evaluated Chern class used in $b_n$. This agrees with the positive Cartier normalization $t^{-1}\\mapsto+1$ recorded in [det-prop-diagonal-tower-system]. This invocation is only at finite levels: the coherent system morphism itself was supplied by [det-sp-tower-classes](2), not inferred from equality of finite-level derived morphisms. Exactness and cohomology in the varying-coefficient system category are levelwise by [det-sp-coefficient-towers-abelian]. Evaluation of derived direct image is levelwise by [lem-pur-coefficient-system-derived-comparison], including its unit. At level $n$, [sk-lem-geo-p1-cohomology] with $r=n$ and $\\Lambda=\\mathbf Z/\\ell^n$ identifies $b_n$ as an isomorphism. The cone of $b_\\bullet$ therefore has every cohomology system zero, so $b_\\bullet$ is an isomorphism. Finally restrict scalars from the ring system $A_\\bullet$ to the constant system $\\underline{\\mathbf Z_\\ell}$; restriction is exact, since kernels and cokernels keep their underlying groups. The canonical direct-image comparisons in [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied on the tower topoi also to these restriction-of-scalars morphisms, identify the resulting map with the asserted map in the constant-coefficient tower category. No faithfulness of derived evaluation is used.",
    "uses": [
+    "det-sp-tower-classes",
+    "sk-lem-geo-cartier",
     "det-prop-diagonal-tower-system",
-    "det-prop-diagonal-tower-limit",
+    "det-sp-coefficient-towers-abelian",
+    "lem-pur-coefficient-system-derived-comparison",
     "sk-lem-geo-p1-cohomology",
-    "thm-amb-p1-decomposition",
-    "def-amb-p1-trace"
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+    "place": "paragraph (1), construction of (1,h_bullet) and levelwise cone argument"
+   }
   },
   {
-   "text": "(2) By [det-prop-diagonal-tower-limit](1) the composite\n$\\operatorname{Tr}_{p_i}\\circ Rp_{i*}(\\delta)$ is $R\\varprojlim$ of the\ncorresponding composite of morphisms of systems,\n$e_\\bullet:\\mathbf Z/\\ell^\\bullet=Rp_{i*}\\Delta_*\\mathbf Z/\\ell^\\bullet\\to\\mathbf Z/\\ell^\\bullet$,\nin the derived category of inverse systems on\n$(\\mathbf P^1_Y)_{\\mathrm{proét}}$. The object $\\mathbf Z/\\ell^\\bullet$ is\nconcentrated in degree $0$, and endomorphisms of an object in degree $0$ in a\nderived category of an abelian category are its endomorphisms in the abelian\ncategory. Here these are endomorphisms of inverse systems of sheaves, that is,\ncompatible families of endomorphisms of the levels $\\mathbf Z/\\ell^n$. So\n$e_\\bullet$ is determined by its levels, and at each level it is the\nidentity by the torsion integration identities of\n[sk-prop-geo-p1-adjunction] (compare [lem-amb-p1-diagonal-integrals]). Hence\n$e_\\bullet=1$ and $R\\varprojlim e_\\bullet=1_{\\Zl}$. (For morphisms between\narbitrary objects of the derived category of inverse systems, equality at\nevery level would not imply equality; this is why the identity is checked on\nan object in degree $0$.)",
+   "text": "The twisting and second-summand projection in [det-sp-tower-classes](4), for $E=\\mathbf Q_\\ell$, give the system trace $t_{q,\\bullet}$. Concretely the twisted isomorphism has source $A_{\\bullet,Y}(1)[2]\\oplus A_{\\bullet,Y}$ and target $Rq_*A_{\\bullet,P}(1)[2]$; compose its inverse with $\\operatorname{pr}_2$. This is the twist of the map just constructed, with the inverse-image/direct-image projection identification built into that cited splitting. Its evaluation is the projection defining the finite trace in [sk-lem-geo-p1-cohomology], because evaluation preserves composition, inverses, units and the prescribed twisting construction. The same construction applies to $p_1,p_2$, which are projective lines over $P$. Thus all three traces are morphisms of systems before taking a limit.",
    "uses": [
-    "det-prop-diagonal-tower-limit",
-    "lem-amb-p1-diagonal-integrals"
+    "det-sp-tower-classes",
+    "sk-lem-geo-p1-cohomology",
+    "lem-pur-coefficient-system-derived-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+    "place": "paragraph (1), twisting the splitting and defining the trace on systems"
+   }
+  },
+  {
+   "text": "Write $C_T=\\underline{\\mathbf Z_\\ell}$ and $R_T=\\Zl_T$. For the coefficient tower the quotient maps are epimorphisms; for its twist the maps are epimorphisms by [lem-pur-twist-sheaf-locally-free](1). Therefore [det-pe-milnor-epimorphic], with ring sheaf $C_T$, identifies $R\\varprojlim A_{\\bullet,T}=R_T$ and $R\\varprojlim A_{\\bullet,T}(1)=R_T(1)$, for $T=Y,P,W$. The latter also identifies the transition maps with the roots-of-unity power maps. Apply $R\\varprojlim$ to $t_{q,\\bullet}$. The canonical natural comparison [lem-weil-ringed-tower-pushforward-limit-comparison], applied with constant coefficient sheaves $C_P,C_Y$, identifies the resulting source with $Rq_*\\operatorname{Res} R_P(1)[2]$ and the target with $\\operatorname{Res} R_Y$. It commutes with all tower projections. This is a trace over the discrete constant ring at this point. The completed coefficient identification is [det-prop-sfb-qlbar-colimit-x-integral-limit] with $E=\\mathbf Q_\\ell$.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "det-pe-milnor-epimorphic",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+    "place": "paragraph (1), applying Rlim and identifying the source and target; Stacks 0A07"
+   }
+  },
+  {
+   "text": "We now obtain the asserted completed-coefficient trace and check its reductions as actual morphisms. The source coefficient line $R_P(1)$ is derived complete and has derived reduction $A_{n,P}(1)$ by [lem-pur-twist-sheaf-locally-free](4). The target $R_Y$ is also derived complete: its ordinary reductions are $A_{n,Y}$ by [lem-weil-pbc-constant-completion-equivalence], its derived reductions are ordinary since it is the free rank-one module over itself, and the preceding epimorphic-tower limit computation identifies its canonical completion unit with an isomorphism. Apply [prop-weil-pbc-direct-image-limits] in its completed-coefficient categories to $R_P(1)[2]$; it makes $Rq_*R_P(1)[2]$ complete. Its coefficient-datum hypotheses for $(\\mathbf Z_\\ell,(\\ell))$ hold: [lem-weil-pbc-standard-quotients-perfect] gives the finite perfect quotients, and [lem-weil-l-adic-extension-integers-dvr](2), with $E=\\mathbf Q_\\ell$, makes $\\mathbf Z_\\ell$ a principal ideal domain. Every ideal is therefore generated by one element, which is the Noetherian condition. Restriction to constant coefficients commutes with derived direct image by the ringed-topos composition comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The equivalence [sk-lem-integral-models](1), with $E=\\mathbf Q_\\ell$, therefore lifts the trace of step 3 uniquely to $\\operatorname{Tr}_q:Rq_*R_P(1)[2]\\to R_Y$. The finite-reduction and limit-unit comparisons of [lem-weil-pbc-constant-completion-equivalence], together with the projection-compatible finite-reduction isomorphisms of [prop-weil-pbc-direct-image-limits], identify its reduction with $t_{q,n}$. Indeed the square for $R\\varprojlim t_{q,\\bullet}$ and the $n$th tower projections commutes by naturality; adjunction of those projections under extension/restriction of coefficients gives exactly the reduced map, and the just cited comparisons identify the two adjoints with $t_{q,n}$. By step 2 this is the torsion trace of [sk-lem-geo-p1-cohomology]. This argument also applies to $p_1,p_2$.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "sk-lem-integral-models",
+    "sk-lem-geo-p1-cohomology",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+    "place": "paragraph (1), completeness, completed linearity and finite reduction; Stacks 099N, 093M, 099I"
+   }
+  },
+  {
+   "text": "Let $c_\\bullet$ be the system diagonal class of [det-prop-diagonal-tower-system](4), and form $e_{i,\\bullet}=t_{p_i,\\bullet}\\circ Rp_{i*}c_\\bullet$ after the canonical source identification $Rp_{i*}\\Delta_*A_{\\bullet,P}=A_{\\bullet,P}$. This identification follows from $p_i\\Delta=\\mathrm{id}_P$ and [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The replacement of $R\\Delta_*$ by $\\Delta_*$ is justified by [lem-exc-proetale-closed-exact]: the diagonal is the closed Cartier divisor cut out by $x_0y_1-x_1y_0$, and its complement is quasi-compact since $W$ is Noetherian. Apply this exactness first in the category of varying-coefficient systems $A_\\bullet$: kernels and cokernels are levelwise, so $\\Delta_{A,*}$ is exact there and $R\\Delta_{A,*}A_{\\bullet,P}=\\Delta_{A,*}A_{\\bullet,P}$. Let $U_T$ be restriction from $A_{\\bullet,T}$-modules to towers of $C_T=\\underline{\\mathbf Z_\\ell}$-modules. It is exact on underlying sheaves. The equality of underived composites $U_W\\Delta_{A,*}=\\Delta_{C,*}U_P$, together with the ringed-topos composition comparison just cited, gives $R\\Delta_{C,*}A_{\\bullet,P}=U_W\\Delta_{A,*}A_{\\bullet,P}=\\Delta_*A_{\\bullet,P}$. Thus the needed identification in the constant-coefficient tower category does not require exactness of $\\Delta_*$ on arbitrary $C_T$-module sheaves. The varying-coefficient source identifications commute with evaluation by [lem-pur-coefficient-system-derived-comparison]; their restrictions do so by the same composition comparisons. Evaluate the constant-coefficient composite, using [lem-weil-ringed-tower-pushforward-limit-comparison] for levelwise derived direct image. At level $n$ the class is the torsion diagonal class by [det-prop-diagonal-tower-system](4), the trace is $t_{p_i,n}$ by step 2, and restriction of the finite-coefficient equality of [det-sp-p1-trace](3) gives $e_{i,n}=\\mathrm{id}$ in $D(P_{\\mathrm{proet}},C_P)$. This last citation is explicitly a pro-etale finite-coefficient assertion; it is not an unproved transport of the ordinary etale identity.",
+   "uses": [
+    "det-prop-diagonal-tower-system",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-exc-proetale-closed-exact",
+    "lem-pur-coefficient-system-derived-comparison",
+    "det-sp-p1-trace",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+    "place": "paragraph (2), construction and evaluation of the endomorphism e_bullet"
+   }
+  },
+  {
+   "text": "The source and target of $e_{i,\\bullet}$ are the system $A_{\\bullet,P}$ in degree zero. Apply [lem-weil-pbc-derived-single-fully-faithful] to the abelian category of system sheaves. It identifies $e_{i,\\bullet}$ with a unique actual system-sheaf endomorphism. Such a morphism is a family commuting with the quotient transitions; equality is componentwise by the definition of that category. Step 5 says every component is the identity, hence $e_{i,\\bullet}=\\mathrm{id}$ already in the system derived category. Apply $R\\varprojlim$. The natural direct-image/limit comparison [lem-weil-ringed-tower-pushforward-limit-comparison] carries this composite to $\\operatorname{Tr}_{p_i}\\circ Rp_{i*}(\\delta_{\\Zl})$, since [det-prop-diagonal-tower-limit](3) identifies $R\\varprojlim c_\\bullet$ with $\\delta_{\\Zl}$. Its source identification is the same one obtained by limiting the composition identification in step 5. Thus the composite is the identity after restriction to constant coefficients. The equivalence on complete objects [sk-lem-integral-models](1) is faithful, so the identity holds over the completed coefficient sheaf as claimed. Equality of arbitrary morphisms of derived systems was never inferred from their evaluated equalities: the degree-zero full faithfulness is essential here.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "det-prop-diagonal-tower-limit",
+    "sk-lem-integral-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+    "place": "paragraph (2), degree-zero full faithfulness, equality of systems, then Rlim; Stacks 06XS(2)"
+   }
   }
  ],
  "proof_deps": [
-  "det-prop-diagonal-tower-system",
+  "det-pe-milnor-epimorphic",
   "det-prop-diagonal-tower-limit",
+  "det-prop-diagonal-tower-system",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-p1-trace",
+  "det-sp-tower-classes",
+  "lem-exc-proetale-closed-exact",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "prop-weil-pbc-direct-image-limits",
+  "sk-lem-geo-cartier",
   "sk-lem-geo-p1-cohomology",
-  "thm-amb-p1-decomposition",
-  "def-amb-p1-trace",
-  "lem-amb-p1-diagonal-integrals"
+  "sk-lem-integral-models"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraphs (1)-(2), expanded using the cited existing DAG interfaces and Stacks 0A07, 099N, 093M, 099I and 06XS"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TateTwist|cycleClass|proetale|projectiveLine.*trace|trace.*projectiveLine",
+   "results": "10 hits; top: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary algebraic adic completion, generic derived-category structure, other cohomology theories, or definitions of the pro-etale site; none states the projective-line system trace and integration identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "l adic trace for projective line cohomology defined by section class and inverse limit",
+   "results": "8 hits; top: AdicCompletion, IsAdicComplete.of_lift, AdicCompletion.subring, AdicCompletion.of, AdicCompletion.of_apply, AdicCompletion.lift, AdicCompletion.eval, AdicCompletion.eval_lift_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary algebraic adic completion, generic derived-category structure, other cohomology theories, or definitions of the pro-etale site; none states the projective-line system trace and integration identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"Projective\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary algebraic adic completion, generic derived-category structure, other cohomology theories, or definitions of the pro-etale site; none states the projective-line system trace and integration identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective line cohomology decomposition and l adic trace with diagonal integration identities in derived inverse systems of pro etale sheaves",
+   "results": "8 hits; top: BDeRhamPlus, LightCondensed.isColimitLocallyConstantPresheaf_desc_apply, Condensed.isColimitLocallyConstantPresheaf_desc_apply, LightProfinite.proj_comp_transitionMap, Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq_δ, Algebra.Generators.H1Cotangent.δ_map, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary algebraic adic completion, generic derived-category structure, other cohomology theories, or definitions of the pro-etale site; none states the projective-line system trace and integration identities"
+  },
+  {
+   "tool": "grep",
+   "query": "projective|trace|Chern",
+   "results": "0 hits; top: ",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary algebraic adic completion, generic derived-category structure, other cohomology theories, or definitions of the pro-etale site; none states the projective-line system trace and integration identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory",
+   "results": "12 hits; top: DerivedCategory, instCategoryDerivedCategory, DerivedCategory.instHasZeroObject, DerivedCategory.instPreadditive, DerivedCategory.instHasShiftInt, DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary algebraic adic completion, generic derived-category structure, other cohomology theories, or definitions of the pro-etale site; none states the projective-line system trace and integration identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace morphism for cohomology of projective space defined by a Chern class and derived inverse limit of finite coefficients",
+   "results": "8 hits; top: Rep.standardComplex.x_projective, Algebra.Generators.H1Cotangent.δ, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Rep.FiniteCyclicGroup.groupCohomologyπEven, CategoryTheory.ProjectiveResolution.cochainComplex_d, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, Rep.FiniteCyclicGroup.groupCohomologyπOdd, groupCohomology",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern ordinary algebraic adic completion, generic derived-category structure, other cohomology theories, or definitions of the pro-etale site; none states the projective-line system trace and integration identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integration along a projective space projection in etale cohomology with adic coefficients, normalized by the hyperplane Chern class",
+   "results": "8 hits; top: BDeRham, BDeRhamPlus, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ_ΓToStalk, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+   "date": "2026-10-16",
+   "verdict": "no match: retrieved perfectoid-period rings and projective-spectrum coordinate maps"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(trace|integrat)|Chern|Gysin",
+   "results": "15 hits; top: Mathlib/Probability/Moments/SubGaussian.lean, Mathlib/Probability/Moments/SubGaussian.lean, Mathlib/Probability/Moments/SubGaussian.lean, Mathlib/Probability/Moments/SubGaussian.lean, Mathlib/Probability/Moments/SubGaussian.lean, Mathlib/Probability/Moments/Basic.lean, Mathlib/Probability/Moments/Basic.lean, Mathlib/Probability/Moments/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: textual hits are Chernoff bounds, matcher names and canonical-topology sieve names"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -71,5 +226,99 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-diagonal-tower"
+ "unit": "sk-prop-diagonal-tower",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-prop-diagonal-tower-trace",
+  "worker": "stage1",
+  "summary": "Expanded the two imported paragraphs into six steps using existing coherent coefficient-system constructions, finite pro-etale projective-line identities and degree-zero full faithfulness. Distinguished constant and completed coefficient sheaves, made standing hypotheses explicit, and verified reduction via actual limit projections. No new nodes or attachments. See report.md for the statement-context correction and source audit. Second reading expands the section chart calculation and distinguishes finite-system closed exactness from constant-tower derived comparison. Repair after the landing refusal: revalidated the now finite-coefficient Cartier statement at r=n and Lambda=Z/ell^n, made its hypotheses and normalization explicit in step 1, and refreshed its verbatim citation against the current DAG. All other retained citation statements agree with the current DAG. Renewed repair revalidation explicitly identifies the Cartier finite Tate line and identity coefficient extension by tensor-unit maps; its citation now retains the complete hypothesis-and-Chern-equation prefix actually used, omitting unused naturality clauses.",
+  "blueprint": "Steps 1-4 realize paragraph (1): coherent section class, levelwise splitting, trace on systems, limit, completed linearity and reduction. Steps 5-6 realize paragraph (2): supported source identification, finite integration, degree-zero equality of systems, and passage to the completed identity. This is unit steps 8-9, without editing the unit record because this item is not its key node.",
+  "tool_uses": [
+   {
+    "node": "det-sp-tower-classes",
+    "why": "Only the existing coherent Chern-class and twisted splitting interfaces are used; the item still proves the limit trace, its reductions and integration identities. This is the same tower-construction tool used by the blueprint."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "The generic abelian and exact-evaluation structure of varying-coefficient towers is needed while forming the coherent class."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "The generic levelwise direct-image theorem includes units and counits for varying coefficients; the unit has no such categorical theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Canonical derived direct-image composition supplies scalar-restriction and p_i Delta identifications without replacing the geometric route."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "The roots-of-unity transitions, reductions and completeness of the integral coefficient line are generic coefficient facts."
+   },
+   {
+    "node": "det-pe-milnor-epimorphic",
+    "why": "The generic epimorphic-tower theorem identifies the derived and ordinary limits on Y and P as well as W."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "The item needs the projection-compatible Rlim comparison for towers over the discrete constant coefficient ring."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Generic identification of completed integral coefficients with the inverse limit of finite constant quotients."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "The generic finite-reduction and completion-unit comparisons distinguish the constant and completed coefficient categories."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Only its completed-coefficient completeness and finite-reduction clauses are used; the constant-coefficient tower comparison is cited separately."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Checks the finite-perfect-quotient hypotheses of the completed direct-image tool."
+   },
+   {
+    "node": "sk-lem-integral-models",
+    "why": "The generic equivalence on complete objects provides unique linearity and faithfulness after restriction."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Generic exactness of closed direct image with quasi-compact complement identifies the supported source."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "The generic degree-zero Hom identification is essential to equality of system morphisms."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Checks the Noetherian coefficient-ring hypothesis by the existing DVR/PID theorem with E=Q_l."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-tower-classes",
+  "det-sp-coefficient-towers-abelian",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-twist-sheaf-locally-free",
+  "det-pe-milnor-epimorphic",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "sk-lem-integral-models",
+  "lem-exc-proetale-closed-exact",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NS-e59e1b2e1",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-e59e1b2e1 (reviewer sub-agent of L); spot-checked: I read the item in full, all 6 stmt_deps and all 20 proof_deps statements, the main-20261015 trace statement with proof paragraphs (1)-(2), the unit sk-prop-diagonal-tower (steps 7-8) and the unit sk-prop-geo-p1-adjunction. In Stacks I checked 06XS(2), 0A07 and 09BM at their labels. Statement: both clauses are kept verbatim. The added preamble matches sk-def-sfb-dc-setting (char p>0, p≠ℓ) and separates the completed Ẑ_ℓ from the constant underline Z_ℓ, so nothing is weakened. The char-ℓ remark (μ_ℓ=0) is correct. Step 1: det-sp-tower-classes(2) gives a coherent tower c1 (E=Q_ℓ). The chart check works: t0=x1/x0, t1=1, e0=(x0/x1)e1, which is the O(1) transition. sk-lem-geo-cartier is used only at r=n, Λ=Z/ℓ^n, and the non-zero-divisor hypothesis holds over any base. Levelwise evaluation and cone conservativity are correct. Restriction of scalars commutes with Rq_* by the ringed-topos composition lemma. Step 2: the splitting and projection of det-sp-tower-classes(4) evaluate to the finite (G3). Step 3: surjective μ transitions plus Milnor with ring C_T, and the ringed tower/limit comparison is valid for constant rings. Step 4: the hypotheses of prop-weil-pbc-direct-image-limits hold at (Z_ℓ,(ℓ)): torsion, finite perfect quotients, Noetherian via PID. Completeness of R_Y comes from the completion lemma plus Milnor, and the unique lift from sk-lem-integral-models(1). Step 5: Δ is closed with Noetherian W, so its complement is retrocompact and 09BM exactness applies levelwise. Then p_iΔ=id, and the finite identity is det-sp-p1-trace(3), which is on route. Step 6: degree-zero full faithfulness (06XS(2)) on towers and on each level, then R lim and det-prop-diagonal-tower-limit(3), and the faithful complete equivalence gives the identity over Ẑ_ℓ. Edge cases: Y=∅, Y=Spec k̄ (degree +1), n=1, ℓ=2. proof_deps equals the union of uses, every cited id exists and none is merged, there is no cycle, no new nodes, and no SGA source. I accept all 15 declared tool_uses, including det-sp-tower-classes, which supplies the coherent class the blueprint describes only as the 'same construction'. Points for maintenance: det-sp-tower-classes(4) overlaps clause 1; prop-weil-pbc-direct-image-limits does not introduce its objects; det-sp-p1-trace states no hypotheses. No fixes."
+ }
 }

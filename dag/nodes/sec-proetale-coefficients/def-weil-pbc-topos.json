@@ -3,7 +3,7 @@
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-pe-topos-functoriality-site",
@@ -74,6 +74,64 @@
    "results": "8 hits; CategoryTheory.typeEquiv, CategoryTheory.Sheaf, CategoryTheory.typesGrothendieckTopology_eq_canonical, CategoryTheory.hasSheafComposeEssentiallySmallSite, CategoryTheory.hasSheafifyEssentiallySmallSite, CategoryTheory.Sheaf.canonicalTopology, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall, CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_obj_α",
    "date": "2026-10-17",
    "verdict": "no match: typeEquiv is one specific sheaf equivalence; Sheaf defines sheaves, not the predicate of admitting a small-site presentation; Grothendieck.lean:51 remains a TODO correspondence."
+  },
+  {
+   "tool": "grep",
+   "query": "GrothendieckTopos|Grothendieck.*[Tt]opos|[Tt]opos.*Grothendieck",
+   "results": "2 hits in Mathlib/CategoryTheory; Mathlib/CategoryTheory/Sites/Point/Category.lean, Mathlib/CategoryTheory/Sites/Grothendieck.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: Sites/Grothendieck.lean:51 discusses the intended correspondence; Topos/Sheaf.lean:15-34 and its classifier declarations concern elementary topos structure, not the predicate of admitting a small-site presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrothendieckTopos\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no GrothendieckTopos declaration returned."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Grothendieck topos is a category equivalent to the category of set valued sheaves on a small site",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.typesGrothendieckTopology, CategoryTheory.GrothendieckTopology.ext_iff, TopCat.Sheaf, CategoryTheory.GrothendieckTopology.Subcanonical.of_isSheaf_yoneda_obj, CategoryTheory.Sheaf, CategoryTheory.GrothendieckTopology.ext",
+   "date": "2026-10-17",
+   "verdict": "no match: GrothendieckTopology and Sheaf define ingredients, typeEquiv is one particular equivalence (Sites/Types.lean:166), and isGrothendieckAbelian_of_essentiallySmall concerns abelian coefficients (GrothendieckAxioms/Sheaf.lean:76-82); none defines when an arbitrary category admits a small-site presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "Topos|topos|topoi",
+   "results": "25 hits in Mathlib/CategoryTheory; Mathlib/CategoryTheory/Topos/Sheaf.lean, Mathlib/CategoryTheory/Topos/Sheaf.lean, Mathlib/CategoryTheory/Groupoid/FreeGroupoid.lean, Mathlib/CategoryTheory/Groupoid/FreeGroupoid.lean, Mathlib/CategoryTheory/Groupoid/FreeGroupoid.lean, Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/CategoryTheory/Adjunction/Quadruple.lean, Mathlib/CategoryTheory/Adjunction/Quadruple.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: Sites/Grothendieck.lean:51 discusses the intended correspondence; Topos/Sheaf.lean:15-34 and its classifier declarations concern elementary topos structure, not the predicate of admitting a small-site presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck topos definition category equivalent to sheaves of sets on a small site",
+   "results": "8 hits; CategoryTheory.typeEquiv, CategoryTheory.Sheaf, CategoryTheory.typesGrothendieckTopology_eq_canonical, CategoryTheory.instHasSheafifyType, CategoryTheory.GrothendieckTopology.yonedaULift, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall, CategoryTheory.GrothendieckTopology.yoneda, CategoryTheory.hasSheafComposeEssentiallySmallSite",
+   "date": "2026-10-17",
+   "verdict": "no match: GrothendieckTopology and Sheaf define ingredients, typeEquiv is one particular equivalence (Sites/Types.lean:166), and isGrothendieckAbelian_of_essentiallySmall concerns abelian coefficients (GrothendieckAxioms/Sheaf.lean:76-82); none defines when an arbitrary category admits a small-site presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category admitting a small site presentation as sheaves of types up to equivalence is a Grothendieck topos",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.instSubcanonicalCanonicalTopology, CategoryTheory.GrothendieckTopology.Subcanonical, CategoryTheory.Equivalence.precoherent_isSheaf_iff_of_essentiallySmall, CategoryTheory.coherentTopology.subcanonical, CategoryTheory.Sheaf.canonicalTopology, CategoryTheory.Equivalence.preregular_isSheaf_iff_of_essentiallySmall, CategoryTheory.typesGrothendieckTopology_eq_canonical, CategoryTheory.hasSheafifyEssentiallySmallSite",
+   "date": "2026-10-17",
+   "verdict": "no match: GrothendieckTopology and Sheaf define ingredients, typeEquiv is one particular equivalence (Sites/Types.lean:166), and isGrothendieckAbelian_of_essentiallySmall concerns abelian coefficients (GrothendieckAxioms/Sheaf.lean:76-82); none defines when an arbitrary category admits a small-site presentation."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-weil-pbc-topos",
+  "worker": "stage1",
+  "summary": "Checked every clause of this definition against Stacks Sites 00YX (sieves), 00Z4 (topologies), 00Z8 (sheaves), 00XA (topoi), and 00VI (size), and read the existing size-convention dependency. The existing statement already spells out the site and sheaf notions, so it is retained verbatim. It has no assertion needing a proof, no child lemma, and no additional definition dependency. Project-source searches found no attachment; two semantic phrasings, LeanSearch, Loogle and source grep found no Mathlib definition of the complete small-site-presentation predicate. No new nodes or unit changes.",
+  "blueprint": "This definition supplies the phrase Grothendieck topos in det-pe-topos-functoriality-site, proof paragraph *3*, after the size convention, exactly as blueprint.from.place specifies. The unit sk-def-sfb-finite-pushforward-pullback uses that site lemma in its first step. No alternative proof route, Giraud theorem, reflective-subcategory theorem, or SGA source is used.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-ND-8c9d938bf",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-8c9d938bf (reviewer sub-agent of L); spot-checked: I read the item def-weil-pbc-topos in full. It is a definition only: no new nodes, proof=[], and its one stmt_dep is def-weil-size-convention (read: U in V, V-small skeletons). I checked it clause by clause against Stacks sites.tex. Sieve and pullback agree with 00YX definition-sieve (l.10877) and 00Z2. Topology axioms (i)/(ii)/(iii) are 00Z4 definition-topology (l.10993) axioms (3)/(1)/(2) in a different order, same content. The explicit unique-amalgamation sheaf condition agrees with 00Z8 definition-sheaf-sets-topology (l.11088) and the sentence after it. 'Equivalent to Sh(D,J;Sets_V) for a V-small D' is 00XA definition-topos (l.2942) up to equivalence, with the size rule of 00VI (l.708). The item makes no hidden existence, sheafification or Giraud claim, cites no SGA source, and no coefficient category or base-change morphism is involved. blueprint.from.place correctly names main-20261015 det-pe-topos-functoriality-site proof paragraph 3, 'Grothendieck topos'. The unit route is sk-def-sfb-finite-pushforward-pullback step 1 through that parent. Edge cases checked: the empty category gives the terminal topos; a one-object category with only the maximal sieve gives Sh = Sets_V; adding the empty covering sieve gives the singleton sheaf only. So there is no implicit nonemptiness. Mathlib: the recorded LeanSearch, LeanFinder, Loogle and grep searches are all there. My own rg finds no GrothendieckTopos predicate; Sites/Grothendieck.lean:45-51 is only a TODO; Topos/ covers subobject classifiers only. split with no mathlib_match is the correct status. Duplicates: rg over dag/nodes for topos and sieve definitions finds no other node defining a Grothendieck topos or a sieve topology, so same_as=[] stands. Not a fault of this delivery: parent step 1 builds a covering-family site, and steps 3-4 silently treat it as the generated sieve topology (Stacks 00ZC/00ZD). No fixes."
+ }
 }

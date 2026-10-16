@@ -31,9 +31,118 @@
   "lem-coef-simplicial-small-chunks",
   "lem-coef-coherent-nerve-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=U^{cf}$ and write $M(X,Y)=\\underline{\\operatorname{Map}}_{\\mathcal A}(X,Y)$. We use the following immediate consequences of the model weak factorization systems: right lifting classes are closed under pullback and composition (pull back a lifting problem, or solve its two successive lifting problems), and left lifting classes under composition by the dual argument. In particular, products of fibrant objects are fibrant: the product projection is a pullback of a terminal fibration. For $B\\in T$, apply chunk property (a) to the two identity maps of $B$, obtaining $B\\xrightarrow{j_B}Z_B\\xrightarrow{r_B}B\\times B$. The object $Z_B$ lies in $U$, is cofibrant since $j_B$ is a cofibration with cofibrant source, and is fibrant since $r_B$ is a fibration with fibrant target. Each component $r_{B,i}$ is weak because $r_{B,i}j_B=1_B$ and $j_B$ is weak. Thus $r_B$ is an object of $P(U)$. The enriched functoriality in the chunk definition gives the specified enriched $\\tau$. Strict componentwise composition preserves the two displayed commutativity equations defining the mapping sets of $P(U)$, so these equations define a simplicial category and enriched endpoint functors. The two identities $\\pi_0\\tau=\\pi_1\\tau=1_T$ follow on objects and all mapping simplices from the functorial factorization.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-simplicial-small-chunks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.4.7 and Theorem A.3.4.8, printed pp.886-888; simplicial-set specialization of the proof."
+   }
+  },
+  {
+   "text": "For objects $x=(Z\\xrightarrow{(p,q)}B\\times C)$ and $y=(Z'\\xrightarrow{(p',q')}B'\\times C')$ of $P(U)$, put $E=M(B,B')\\times M(C,C')$, $D=M(Z,B')\\times M(Z,C')$, and $F=M(Z,Z')$. The defining equations give the strict pullback formula $M_{P(U)}(x,y)=E\\times_DF$, with $v:E\\to D$ given by $(b,c)\\mapsto(bp,cq)$ and $u:F\\to D$ given by $a\\mapsto(p'a,q'a)$. Here mapping into the product identifies $D$ with $M(Z,B'\\times C')$. SM7, applied to the cofibration $\\varnothing\\to Z$ and the fibration $(p',q')$, says that $u$ is a Kan fibration. Its pullback to $E$ is exactly the local mapping map of $(\\pi_0,\\pi_1)$, so this local map is a Kan fibration. All the individual $M(X,Y)$ displayed here are Kan by SM7 for $\\varnothing\\to X$ and $Y\\to *$, since all six objects are bifibrant; consequently $E,D,F$ are Kan. Products of Kan complexes are Kan by filling each horn coordinatewise; pulling back the fibration $u$ shows that $M_{P(U)}(x,y)$ is Kan too.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.4.7 and Theorem A.3.4.8, printed pp.886-888; simplicial-set specialization of the proof."
+   }
+  },
+  {
+   "text": "The precomposition maps $p^*:M(B,B')\\to M(Z,B')$ and $q^*:M(C,C')\\to M(Z,C')$ are weak homotopy equivalences. Indeed the natural derived-mapping comparison identifies each with precomposition by the image of the corresponding model weak equivalence in the infinity localization. That image is invertible. Composing with an inverse gives a homotopy inverse on mapping spaces: associativity and the inverse equations identify both composites with the identity, using the composition and unit homotopies of [lem-coef-infinity-mapping-composition]. Thus both precomposition maps are equivalences of spaces. The same is true of $v=p^*\\times q^*$: factor it as $p^*\\times1$ followed by $1\\times q^*$; each is the pullback of a weak equivalence along a product projection of Kan complexes, which is a Kan fibration, and apply right properness twice. Since $u$ is a Kan fibration, right properness now applied to $v$ shows that the pullback projection $k:E\\times_DF\\to F$ is a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.4.7 and Theorem A.3.4.8, printed pp.886-888; simplicial-set specialization of the proof."
+   }
+  },
+  {
+   "text": "The component $p':Z'\\to B'$ is a fibration: it is the composite of $(p',q')$ and $B'\\times C'\\to B'$, the latter being a pullback of the terminal fibration of $C'$. It is weak by the definition of the objects of $P(U)$, hence a trivial fibration. Applying SM7 to $\\varnothing\\to Z$ and $p'$ shows that $p'_*:F\\to M(Z,B')$ is a trivial Kan fibration. Let $r:E\\times_DF\\to M(B,B')$ be the first endpoint mapping map. The equality $p^*r=p'_*k$ follows from $p'a=bp$. The right side is a weak equivalence by Step 3 and the preceding SM7 application; $p^*$ is weak by Step 3, so two-out-of-three gives that $r$ is weak. This proves that $\\pi_0:P(U)\\to T$ is locally a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.4.7 and Theorem A.3.4.8, printed pp.886-888; simplicial-set specialization of the proof."
+   }
+  },
+  {
+   "text": "A weak homotopy equivalence of mapping sets gives a bijection on components. Thus Step 4 says that $\\pi_0$ is fully faithful on component categories; it is essentially surjective because its strict section $\\tau$ hits every object of $T$. Therefore $\\pi_0$ is a Dwyer--Kan equivalence. The equation $\\pi_0\\tau=1_T$ and two-out-of-three for Bergner weak equivalences imply that $\\tau$ is also a Dwyer--Kan equivalence. In particular the functor on component categories induced by $\\pi_0$ reflects isomorphisms: lift the inverse of the image by fullness, and use faithfulness to check both inverse equations.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.4.7 and Theorem A.3.4.8, printed pp.886-888; simplicial-set specialization of the proof."
+   }
+  },
+  {
+   "text": "For bifibrant objects $X,Y$ of $\\mathcal A$ in $U$, a vertex $f:X\\to Y$ is invertible in $\\pi_0T$ if and only if it is a model weak equivalence. To check both implications without assuming $U$ closed under weak-equivalence zigzags, use the natural mapping-space representation for bifibrant objects and its compatibility with composition. It identifies $\\pi_0T$ with the full subcategory on these objects in the component category of the infinity localization. An invertible component is an equivalence edge by [lem-coef-infinity-mapping-composition]. The image of a model weak equivalence is an equivalence by the defining property of localization, proving one implication. Conversely choose an ordinary localization $\\gamma:\\mathcal A\\to\\mathcal H$ at the model weak equivalences, enlarging universes as allowed. Its nerve factors through the infinity localization: this is the universal property applied with target $N\\mathcal H$, because $\\gamma$ sends weak equivalences to isomorphisms. Hence an equivalence image of $f$ maps to an isomorphism $\\gamma(f)$. The detection theorem now implies that $f$ is a model weak equivalence.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.4.7 and Theorem A.3.4.8, printed pp.886-888; simplicial-set specialization of the proof."
+   }
+  },
+  {
+   "text": "Consider the equivalence-lifting requirement for $(\\pi_0,\\pi_1)$ at $x=(Z,p,q)$, with target object $(B_1,C_1)$ of $T\\times T$. Represent the specified two invertible component classes by vertices $f:B\\to B_1$ and $g:C\\to C_1$ of the corresponding mapping sets. Step 6 says that these actual maps are weak equivalences. Apply chunk property (a) to $fp:Z\\to B_1$ and $gq:Z\\to C_1$, giving $Z\\xrightarrow{j}Z_1\\xrightarrow{(p_1,q_1)}B_1\\times C_1$ with $j$ a trivial cofibration, $(p_1,q_1)$ a fibration, and $Z_1\\in U$. As in Step 1, $Z_1$ is cofibrant and fibrant. Since $p_1j=fp$ and $q_1j=gq$, two-out-of-three says that $p_1,q_1$ are weak. We therefore obtain $y=(Z_1,p_1,q_1)\\in P(U)$ and the morphism $\\alpha=(j,f,g):x\\to y$, with endpoints exactly $f,g$. Its first endpoint is invertible in $\\pi_0T$ by Step 6. The fully faithful functor on components of Step 5 reflects isomorphisms, so $[\\alpha]$ is invertible in $\\pi_0P(U)$. This is the required lift, even for a chosen representative vertex rather than merely its component.",
+   "uses": [
+    "lem-coef-simplicial-small-chunks",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.4.7 and Theorem A.3.4.8, printed pp.886-888; simplicial-set specialization of the proof."
+   }
+  },
+  {
+   "text": "Step 2 verifies the local Kan-fibration condition for $(\\pi_0,\\pi_1)$, and Step 7 verifies its equivalence-lifting condition. These are exactly the two conditions for a Bergner fibration. Together with Step 5 and the strict endpoint identities of Step 1, this gives the required factorization of the diagonal of $T$ as a Bergner weak equivalence followed by a Bergner fibration. All constructions used only the objectwise cofibrancy and fibrancy inside $T$, never cofibrancy of the simplicial category $T$. If $U$ is empty then $T,P(U)$ are empty, the mapping and lifting conditions are vacuous, and the same conclusion holds.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.4.7 and Theorem A.3.4.8, printed pp.886-888; simplicial-set specialization of the proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-small-chunks",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-model-localization-detects-weak-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Online reading of HTT Notation A.3.4.7 and Theorem A.3.4.8, printed pp.886-888; unarchived source, WANTED in report. The proof spells out the simplicial-set pullback calculation and the equivalence-lifting check."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +178,52 @@
    "results": "{\"t\": \"2026-10-16T18:33:11Z\", \"tool\": \"leanfinder\", \"query\": \"The simplicial category of fibrant weak equivalence spans in a full chunk is a path object for its cofibrant fibrant subcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood\", \"HomotopicalAlgebra.PathObject.ofFactorizationData\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.ofFactorizationData_P\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.IsGood\", \"HomotopicalAlgebra.PathObject\"], \"digest\": \"fe98528cc49d1a9d\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned PathObject constructions factor a diagonal in a model category already supplied as an instance; they do not construct a Bergner path object whose objects are weak-equivalence spans in a chunk. Grep hits for chunk concern lists and graph regularity. Read Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean and SimplicialNerve.lean:14-34; no Bergner structure or chunk span construction is supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|chunk|span.*[Pp]ath|[Pp]ath.*[Ss]pan",
+   "results": "{\"t\": \"2026-10-16T19:43:56Z\", \"tool\": \"grep\", \"query\": \"Bergner|chunk|span.*[Pp]ath|[Pp]ath.*[Ss]pan\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\"], \"digest\": \"6bd51a9afc00699b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic PathObject and homotopy-category constructions do not supply the span simplicial category, its Bergner fibration or its DK-equivalence property. The grep hits concern subpaths of simplicial-set paths, not spans."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The simplicial category of trivial fibration spans is a path object in the Bergner model structure",
+   "results": "{\"t\": \"2026-10-16T19:43:57Z\", \"tool\": \"leansearch\", \"query\": \"The simplicial category of trivial fibration spans is a path object in the Bergner model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.ofFactorizationData\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.PathObject.ofFactorizationData_P\", \"HomotopicalAlgebra.PathObject.trans\", \"HomotopicalAlgebra.trivialFibrations\", \"HomotopicalAlgebra.PathObject.instIsVeryGoodOfFactorizationData\"], \"digest\": \"72b2f47e55efedcd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic PathObject and homotopy-category constructions do not supply the span simplicial category, its Bergner fibration or its DK-equivalence property. The grep hits concern subpaths of simplicial-set paths, not spans."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PathObject\", \"SimplicialCategory\"",
+   "results": "{\"t\": \"2026-10-16T19:43:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"PathObject\\\", \\\"SimplicialCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic PathObject and homotopy-category constructions do not supply the span simplicial category, its Bergner fibration or its DK-equivalence property. The grep hits concern subpaths of simplicial-set paths, not spans."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bergner path object for a simplicial category of cofibrant fibrant objects constructed from weak equivalence spans",
+   "results": "{\"t\": \"2026-10-16T19:44:06Z\", \"tool\": \"leanfinder\", \"query\": \"Bergner path object for a simplicial category of cofibrant fibrant objects constructed from weak equivalence spans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.ofFactorizationData\", \"HomotopicalAlgebra.PathObject\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood\", \"HomotopicalAlgebra.PathObject.exists_very_good\", \"HomotopicalAlgebra.PrepathObject\", \"HomotopicalAlgebra.PathObject.instIsVeryGoodOfFactorizationData\", \"HomotopicalAlgebra.PathObject.instNonempty\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\"], \"digest\": \"3601f5b910117770\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic PathObject and homotopy-category constructions do not supply the span simplicial category, its Bergner fibration or its DK-equivalence property. The grep hits concern subpaths of simplicial-set paths, not spans."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dwyer Kan equivalence and equivalence lifting for enriched categories of fibrant spans in a simplicial model category",
+   "results": "{\"t\": \"2026-10-16T19:44:29Z\", \"tool\": \"leanfinder\", \"query\": \"Dwyer Kan equivalence and equivalence lifting for enriched categories of fibrant spans in a simplicial model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\"], \"digest\": \"d6a1918a00442578\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic PathObject and homotopy-category constructions do not supply the span simplicial category, its Bergner fibration or its DK-equivalence property. The grep hits concern subpaths of simplicial-set paths, not spans."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "--help",
+   "results": "{\"t\": \"2026-10-16T19:56:26Z\", \"tool\": \"leanfinder\", \"query\": \"--help\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib.WhatsNew.commandWhatsnewIn__\", \"command#long_names_\", \"Mathlib.GuardExceptions.parseCmd\", \"Mathlib.PrintSorries.printSorriesStx\", \"Mathlib.Tactic.Translate.translationHint\", \"Mathlib.Linter.linter.docPrime\", \"Mathlib.PrintSorries.command#printSorriesIn_\", \"Mathlib.Tactic.Hint.hintStx\"], \"digest\": \"d6f7d028fbe303e8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic PathObject and homotopy-category constructions do not supply the span simplicial category, its Bergner fibration or its DK-equivalence property. The grep hits concern subpaths of simplicial-set paths, not spans."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-diagram-equivalence-classes",
@@ -80,5 +231,20 @@
   "group": "Q35"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-chunk-span-path-object",
+  "worker": "stage1",
+  "summary": "Checked HTT A.3.4.7-A.3.4.8 and all cited node statements. Split by explicit pullback mapping calculation, right properness, component equivalence and chunk-factorization lifting. No new nodes, no statement change, no Lean attachment. Avoided the apparent forward reference in the source by proving the endpoint DK equivalence before equivalence lifting.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, historical proof paragraph 2 (derived coefficient adjunction before the RHom/Rlim calculation), through enriched-diagram rectification and the diagram-class comparison: the present eight steps supply the specified path object used in lem-coef-simplicial-diagram-equivalence-classes Steps 1-3. Current main-20261015 ancestor is a statement-only node in sk-thm-sf-package; retained the supplied historical ancestry and unit metadata."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-69740107e",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-69740107e (reviewer sub-agent of L); spot-checked: I read the item and all eight steps in full, plus the statements of all seven cited nodes. All are in the item's unit sk-prop-sf-biduality-general, so there are no tool_uses. Checks: step 1, Z_B is bifibrant in U by chunk functoriality and pi_i tau = 1. Step 2, M_P = E x_D F, and u = (p',q')_* is a Kan fibration by SM7. Step 3, p^* is weak via the localization; v is weak by two pullbacks of Kan product projections; k is weak by right properness along u. Step 4, p' is a trivial fibration, p^* r = p'_* k, and two-out-of-three gives r weak. Steps 5 and 6, the DK criterion and the detection theorem, with no zigzag closure of U. Step 7, the lift (j,f,g) is built through the chunk factorization of (fp,gq), with no circularity. Step 8 matches the Bergner fibration clauses exactly. Edge cases tested: empty U, one bifibrant object, U = sSet; no counterexample found. A grep for path object and Bergner fibration finds no duplicate. There are no new nodes, no SGA, and no fixes. Reservation: HTT A.3.4.7-A.3.4.8 is not archived and network access is blocked here, so I could not open the source. Instead I checked the statement independently for truth and for unweakened hypotheses. The proof is correctly marked agent-written, with a WANTED line in the report."
+ }
 }
