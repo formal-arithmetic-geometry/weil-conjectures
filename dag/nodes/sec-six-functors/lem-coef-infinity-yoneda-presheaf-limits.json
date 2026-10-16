@@ -27,81 +27,171 @@
   "def-coef-complete-algebroid",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $F:J\\to\\mathcal S$ with $J$ small. By [lem-coef-space-transport-classification] choose its left-fibration representative $E_F\\to J$ with small total simplicial set, and put $M=\\operatorname{Fun}_{/J}(J,E_F)$. This is a small Kan complex: it is the mapping complex over $J$ from the identity left fibration to $E_F$, and in each degree it is a subset of the set of maps between two small simplicial sets. For a small Kan complex $X$, the same classification, its constant-functor clause and the exponential identity of simplicial sets give\n$$\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal S)}(\\Delta_JX,F)\\simeq\\operatorname{Fun}_{/J}(J\\times X,E_F)=\\operatorname{Fun}(X,M)\\simeq\\operatorname{Map}_{\\mathcal S}(X,M).$$\nThe last comparison is the classification over a point, which identifies its mapping complex with maps between Kan complexes. These comparisons are natural in $X$. Write $\\Phi_X$ for the displayed equivalence from transformations to maps into $M$, and choose $\\lambda:\\Delta_JM\\to F$ with $\\Phi_M(\\lambda)\\simeq1_M$. For $a:X\\to M$, naturality and composition compatibility give $\\Phi_X(\\lambda\\circ\\Delta_Ja)\\simeq\\Phi_M(\\lambda)\\circ a\\simeq a$, on the entire mapping space. Since $\\Phi_X$ is an equivalence, composition with $\\lambda$ is its inverse and is therefore an equivalence. The limiting-cone criterion of [lem-cbc-enhanced-functor-cone-calculus] makes this a limit. For $J=\\varnothing$ the section complex is a point, so the construction includes the terminal object.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05QM",
+    "place": "Limits-of-spaces construction, section-space model; comparison with arbitrary constant Kan-complex diagrams"
+   }
+  },
+  {
+   "text": "Fix small $J$, a simplicial parameter $K$ in a sufficiently large universe, and a diagram $P:J\\to\\operatorname{Fun}(K,\\mathcal V)$. Currying, given degreewise by rearranging the factors $J\\times K\\times\\Delta^n$, gives $\\widetilde P:K\\to\\operatorname{Fun}(J,\\mathcal V)$. Let $\\mathcal D_0$ be the full subcategory of $J$-diagrams admitting a limit, and assume every $\\widetilde P(k)$ belongs to it; fullness makes $\\widetilde P$ factor through $\\mathcal D_0$. Apply [lem-coef-parametric-universal-arrows] with $T=\\Delta_J:\\mathcal V\\to\\operatorname{Fun}(J,\\mathcal V)$. A limiting cone is precisely a universal arrow $\\Delta_J l\\to Q$, by [lem-cbc-enhanced-functor-cone-calculus], so the hypothesis holds on $\\mathcal D_0$. Its parameter clause supplies $L=R\\widetilde P:K\\to\\mathcal V$ and a cone $\\lambda:\\Delta_J L\\to P$ such that, for every $A:K\\to\\mathcal V$,\n$$\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal V)}(A,L)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(J,\\operatorname{Fun}(K,\\mathcal V))}(\\Delta_JA,P).$$\nHence $\\lambda$ is a limit by the same cone criterion, and each evaluated cone is its universal-arrow component, hence is limiting. For any other cone $\\mu:\\Delta_JH\\to P$, this equivalence gives a comparison $u:H\\to L$ carrying $\\lambda\\Delta_Ju$ to $\\mu$. If $\\mu$ is limiting, its universal property at $L$ gives $v:L\\to H$ with $\\mu\\circ\\Delta_Jv\\simeq\\lambda$. Then $\\lambda\\circ\\Delta_J(u\\circ v)\\simeq\\mu\\circ\\Delta_Jv\\simeq\\lambda$; the equivalence for $\\lambda$ at $L$ gives $u\\circ v\\simeq1_L$. Also $\\mu\\circ\\Delta_J(v\\circ u)\\simeq\\lambda\\circ\\Delta_Ju\\simeq\\mu$; the equivalence for $\\mu$ at $H$ gives $v\\circ u\\simeq1_H$. If $u$ is an equivalence, its mapping-space maps are equivalences and the cone criterion makes $\\mu$ limiting. By the vertexwise-equivalence criterion of [lem-cbc-enhanced-functor-cone-calculus], $u$ is an equivalence exactly when every $u(k)$ is one; applying the preceding universal-property argument at $k$ says exactly that every $\\mu(k)$ is limiting. This proves existence and the objectwise characterization without assuming that all $J$-limits in $\\mathcal V$ exist, and without assuming $K$ is small in the smaller universe.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05QG",
+    "place": "Agent argument through partial universal arrows; pointwise limit assertion dual to the stated colimit assertion"
+   }
+  },
+  {
+   "text": "Apply Step 2 to $\\mathcal V^{\\mathrm{op}}$ and $K^{\\mathrm{op}}$. Reversing simplicial orders identifies $\\operatorname{Fun}(K,\\mathcal V)^{\\mathrm{op}}$ with $\\operatorname{Fun}(K^{\\mathrm{op}},\\mathcal V^{\\mathrm{op}})$ and reverses cones into cocones. Thus the same existence and recognition assertions hold for colimits. With $K=\\Delta^1$, evaluation at its two vertices gives exactly the source and target colimit statements. Finally take $\\mathcal V=\\mathcal S$, $K=\\mathcal E$ or $\\mathcal E^{\\mathrm{op}}$, and use Step 1: both space-valued functor categories have small limits, regardless of their larger size. Only the diagram shape $J$ and values of $F$ in Step 1 were required to be small.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05QG",
+    "place": "Opposite and universe specializations of Step 2"
+   }
+  },
+  {
+   "text": "For $p:J\\to\\mathcal E$ and $x\\in\\mathcal E$, use the source-fixed arrow left fibration over $\\mathcal E$ classified by $H_{\\mathcal E}(x,-)$ in [lem-coef-space-transport-classification], and pull it back along $p$. Its section complex is exactly the arrow mapping complex from $\\Delta_Jx$ to $p$: an $n$-simplex is a map $J\\times\\Delta^n\\times\\Delta^1\\to\\mathcal E$ with source constantly $x$ and target $p$ on $J$, constant in the other factors at that endpoint. By [lem-coef-infinity-pinch-comparison] in $\\operatorname{Fun}(J,\\mathcal E)$, this is naturally equivalent to $\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal E)}(\\Delta_Jx,p)$. Apply the mapping-complex clause of [lem-coef-space-transport-classification] with the constant one-point functor as source. It identifies this section complex with $\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal S)}(\\Delta_J\\Delta^0,H_{\\mathcal E}(x,p(-)))$. The equivalence $\\Phi_{\\Delta^0}$ of Step 1 identifies the latter space with the small limit of $H_{\\mathcal E}(x,p(-))$. This also covers a pulled-back arrow fibration whose total space is only $\\mathcal U'$-small: it is its section space, rather than its total space, that is equivalent to the small limit model. These identifications carry postcomposition of a map $x\\to l$ with a given cone to its induced compatible family, including its higher coherence. The cone criterion of [lem-cbc-enhanced-functor-cone-calculus] therefore gives exactly\n$$l\\text{ is the apex of the specified limiting cone}\\ \\Longleftrightarrow\\ \\operatorname{Map}_{\\mathcal E}(x,l)\\xrightarrow{\\sim}\\lim_J\\operatorname{Map}_{\\mathcal E}(x,p(-))\\quad\\text{for every }x.$$\nA cocone $p\\to\\Delta_Jc$ is a cone in $\\mathcal E^{\\mathrm{op}}$ on $p^{\\mathrm{op}}:J^{\\mathrm{op}}\\to\\mathcal E^{\\mathrm{op}}$. Applying the proved cone test there, and identifying $\\operatorname{Map}_{\\mathcal E^{\\mathrm{op}}}(x,c)$ with $\\operatorname{Map}_{\\mathcal E}(c,x)$, gives $\\operatorname{Map}_{\\mathcal E}(c,x)\\simeq\\lim_{J^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal E}(p(-),x)$ exactly when that cocone is colimiting. Applying the forward directions to existing limit or colimit cones proves the two representable-preservation assertions.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05QM",
+    "place": "Section models and the mapping-space tests for cones; the argument uses arbitrary fixed-source arrow families"
+   }
+  },
+  {
+   "text": "Curry the coherent bifunctor of [lem-coef-space-transport-classification] to obtain $j(e)=H_{\\mathcal E}(-,e)$ and choose the equivalent right-fibration model $\\mathcal E_{/e}\\to\\mathcal E$ supplied there and in [lem-coef-infinity-slice-right-fibration]. For any $F:\\mathcal E^{\\mathrm{op}}\\to\\mathcal S$ represented by $q:E_F\\to\\mathcal E$, classification gives\n$$\\operatorname{Map}(j(e),F)\\simeq\\operatorname{Fun}_{/\\mathcal E}(\\mathcal E_{/e},E_F).$$\nThe identity vertex $1_e$ is final in $\\mathcal E_{/e}$: apply [lem-coef-infinity-slice-equivalence-final] to the equivalence edge $1_e$. Thus $\\{1_e\\}\\hookrightarrow\\mathcal E_{/e}$ is right anodyne by [lem-coef-infinity-terminal-anodyne]. Apply [lem-coef-infinity-right-fibration-exponentiation] to $q$ and this inclusion, and pull its displayed map back over the fixed base map $\\mathcal E_{/e}\\to\\mathcal E$. This yields the restriction map\n$$\\operatorname{Fun}_{/\\mathcal E}(\\mathcal E_{/e},E_F)\\longrightarrow(E_F)_e\\simeq F(e)$$\nas a trivial Kan fibration. Its lifting property survives the pullback by solving the same lifting square upstairs and retaining its prescribed base map. By [lem-weil-pbc-trivial-kan-homotopy-equivalence] it is a homotopy equivalence. All these arguments may be made in $\\mathcal U'$; they do not require $\\mathcal E$ to be $\\mathcal U$-small. Now take $F=j(e')$. The composite is evaluation at $1_e$, so its composite with the map induced by $j$ on $\\operatorname{Map}_{\\mathcal E}(e,e')$ is $u\\mapsto u\\circ1_e$, naturally homotopic to the identity on that entire mapping space. Since evaluation is an equivalence, the map induced by $j$ is an equivalence. This proves full faithfulness, with the actual Yoneda map identified rather than an unspecified equivalence between the two spaces.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-slice-equivalence-final",
+    "lem-coef-infinity-terminal-anodyne",
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03MR",
+    "place": "Yoneda by restriction of maps of right fibrations to the identity vertex of the representable slice"
+   }
+  },
+  {
+   "text": "The equivalences in Step 1 are the transport comparison followed by the simplicial exponential identity; Step 2 uses the specified universal-arrow transformation and its evaluation compatibility; Step 4 restricts the same arrow family and takes its section complex. Thus precomposing in the testing object, or changing the coherent diagram, commutes with these comparisons up to the coherences already supplied by transport and universal arrows. The canonical comparison of each cone with the chosen limit is defined by its own universal property, not by a choice of independent objectwise identifications. The opposite constructions retain the same compatibilities. This proves the stated naturality in diagrams and testing objects. Explicitly, for $a:x'\\to x$, a family $(b_j:x\\to p(j))$ restricts to $(b_j\\circ a)$; for a coherent transformation $t:p\\to p'$, it maps to $(t_j\\circ b_j)$. The comparison of a specified cone $\\lambda$ sends $f:x\\to l$ to $(\\lambda_j\\circ f)$. These formulas commute by the composition and unit coherences in the transport node. For higher simplices use the representing simplicial mapping complexes in the transport classification: composition of simplicial maps and restriction along $\\Delta^m\\to\\Delta^n$ commute. The coherent classification comparison carries these identities to the arrow families displayed in Step 4 and gives the corresponding coherent compatibility on spaces. No strictly chosen composition operation in $\\mathcal E$ is needed.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03NQ",
+    "place": "Naturality of transport, evaluation and universal-arrow comparisons used in Steps 1-5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-space-transport-classification",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-slice-equivalence-final",
+  "lem-coef-infinity-terminal-anodyne",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, foundational coherent mapping-space calculus; proof assembled from the online sources recorded at the steps, not from an archived foundational proof."
+ },
  "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "The infinity categorical Yoneda embedding is fully faithful and limits of space valued presheaves are computed pointwise",
-   "results": "{\"t\": \"2026-10-16T13:37:10Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity categorical Yoneda embedding is fully faithful and limits of space valued presheaves are computed pointwise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instPreservesLimitsIndYoneda\", \"CategoryTheory.Ind.yoneda.fullyFaithful\", \"CategoryTheory.yoneda_preservesLimits\", \"CategoryTheory.uliftYonedaFunctor_preservesLimits\", \"CategoryTheory.Limits.limYoneda\", \"TopCat.instHasLimitsOfShapePresheaf\", \"CategoryTheory.yonedaFunctor_preservesLimits\", \"CategoryTheory.yoneda_preservesLimit\"], \"digest\": \"37537231a260a0e0\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected hits; CategoryTheory.yoneda fullyFaithful and ordinary presheaf pointwise-limit declarations concern Type-valued ordinary functors. SSet.hasLimits is for the ordinary category of simplicial sets, not limits in the infinity category of spaces; Quasicategory hits do not state the asserted Yoneda calculus."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"yoneda\", \"FullyFaithful\"",
-   "results": "{\"t\": \"2026-10-16T13:37:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"yoneda\\\", \\\"FullyFaithful\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Coyoneda.fullyFaithful\", \"CategoryTheory.Coyoneda.ULiftCoyoneda.fullyFaithful\", \"CategoryTheory.ULiftYoneda.fullyFaithful\", \"CategoryTheory.Yoneda.fullyFaithful\", \"CategoryTheory.Functor.FullyFaithful.compUliftCoyonedaCompWhiskeringLeft\", \"CategoryTheory.Functor.FullyFaithful.compUliftYonedaCompWhiskeringLeft\", \"CategoryTheory.Coyoneda.fullyFaithful_preimage\", \"CategoryTheory.Yoneda.fullyFaithful_preimage\"], \"digest\": \"0419118857b62938\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: inspected hits; CategoryTheory.yoneda fullyFaithful and ordinary presheaf pointwise-limit declarations concern Type-valued ordinary functors. SSet.hasLimits is for the ordinary category of simplicial sets, not limits in the infinity category of spaces; Quasicategory hits do not state the asserted Yoneda calculus."
-  },
   {
    "tool": "grep",
    "query": "yoneda|limit|presheaf",
-   "results": "{\"t\": \"2026-10-16T13:37:06Z\", \"tool\": \"grep\", \"query\": \"yoneda|limit|presheaf\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"a5c06bf7152e36ef\"}",
+   "results": "{\"t\": \"2026-10-16T16:30:58Z\", \"tool\": \"grep\", \"query\": \"yoneda|limit|presheaf\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"a5c06bf7152e36ef\"}",
    "date": "2026-10-16",
-   "verdict": "no match: inspected hits; CategoryTheory.yoneda fullyFaithful and ordinary presheaf pointwise-limit declarations concern Type-valued ordinary functors. SSet.hasLimits is for the ordinary category of simplicial sets, not limits in the infinity category of spaces; Quasicategory hits do not state the asserted Yoneda calculus."
+   "verdict": "no match: ordinary Type-valued Yoneda and limits, simplex Yoneda and the ordinary homotopy-category functor are not the infinity-categorical assertion. Read Yoneda.lean, Limits/Yoneda.lean and Quasicategory/Basic.lean; a second semantic phrasing likewise yields no coherent-space-valued theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"yoneda\"",
+   "results": "{\"t\": \"2026-10-16T16:31:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"yoneda\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary Type-valued Yoneda and limits, simplex Yoneda and the ordinary homotopy-category functor are not the infinity-categorical assertion. Read Yoneda.lean, Limits/Yoneda.lean and Quasicategory/Basic.lean; a second semantic phrasing likewise yields no coherent-space-valued theorem."
   },
   {
    "tool": "leansearch",
-   "query": "Pointwise limits and Yoneda embedding for quasicategories",
-   "results": "{\"t\": \"2026-10-16T13:37:07Z\", \"tool\": \"leansearch\", \"query\": \"Pointwise limits and Yoneda embedding for quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaJointlyReflectsLimits\", \"CategoryTheory.Limits.limYoneda\", \"CategoryTheory.yoneda_preservesLimit\", \"CategoryTheory.yoneda_preservesLimits\", \"CategoryTheory.yoneda_preservesLimitsOfShape\", \"CategoryTheory.yonedaFunctor_preservesLimits\", \"CategoryTheory.Functor.representableByCompYonedaObjOfIsLimit\", \"CategoryTheory.Limits.pointwiseIsColimit\"], \"digest\": \"ab758c215c91c98a\"}",
+   "query": "Yoneda embedding and pointwise limits of infinity categories of space valued functors",
+   "results": "{\"t\": \"2026-10-16T16:31:02Z\", \"tool\": \"leansearch\", \"query\": \"Yoneda embedding and pointwise limits of infinity categories of space valued functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yoneda\", \"CategoryTheory.yonedaJointlyReflectsLimits\", \"CategoryTheory.yoneda_preservesLimit\", \"CategoryTheory.Limits.yonedaCompLimIsoCocones\", \"CategoryTheory.Limits.limYoneda\", \"CategoryTheory.Yoneda.yoneda_full\", \"CategoryTheory.yoneda_preservesLimits\", \"CategoryTheory.yonedaFunctor_preservesLimits\"], \"digest\": \"fe56625039b59424\"}",
    "date": "2026-10-16",
-   "verdict": "no match: inspected hits; CategoryTheory.yoneda fullyFaithful and ordinary presheaf pointwise-limit declarations concern Type-valued ordinary functors. SSet.hasLimits is for the ordinary category of simplicial sets, not limits in the infinity category of spaces; Quasicategory hits do not state the asserted Yoneda calculus."
+   "verdict": "no match: ordinary Type-valued Yoneda and limits, simplex Yoneda and the ordinary homotopy-category functor are not the infinity-categorical assertion. Read Yoneda.lean, Limits/Yoneda.lean and Quasicategory/Basic.lean; a second semantic phrasing likewise yields no coherent-space-valued theorem."
   },
   {
    "tool": "leanfinder",
-   "query": "Space valued functors on a quasicategory admit pointwise homotopy limits and mapping out of colimits gives limits",
-   "results": "{\"t\": \"2026-10-16T13:37:09Z\", \"tool\": \"leanfinder\", \"query\": \"Space valued functors on a quasicategory admit pointwise homotopy limits and mapping out of colimits gives limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.QCat.bicategory\", \"SSet.hasLimits\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.hoFunctor\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\"], \"digest\": \"ec367638fe3edb93\"}",
+   "query": "Infinity categorical Yoneda fully faithful space valued presheaves objectwise limits and mapping spaces detect limits",
+   "results": "{\"t\": \"2026-10-16T16:31:03Z\", \"tool\": \"leanfinder\", \"query\": \"Infinity categorical Yoneda fully faithful space valued presheaves objectwise limits and mapping spaces detect limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Ind.yoneda.fullyFaithful\", \"CategoryTheory.ULiftYoneda.fullyFaithful\", \"CategoryTheory.Yoneda.fullyFaithful\", \"CategoryTheory.fullyFaithfulShrinkYoneda\", \"CategoryTheory.Yoneda.yoneda_full\", \"CategoryTheory.GrothendieckTopology.fullyFaithfulUliftYoneda\", \"CategoryTheory.GrothendieckTopology.yonedaFullyFaithful\", \"CategoryTheory.instFullIndYoneda\"], \"digest\": \"c49c84a75892db56\"}",
    "date": "2026-10-16",
-   "verdict": "no match: inspected hits; CategoryTheory.yoneda fullyFaithful and ordinary presheaf pointwise-limit declarations concern Type-valued ordinary functors. SSet.hasLimits is for the ordinary category of simplicial sets, not limits in the infinity category of spaces; Quasicategory hits do not state the asserted Yoneda calculus."
+   "verdict": "no match: ordinary Type-valued Yoneda and limits, simplex Yoneda and the ordinary homotopy-category functor are not the infinity-categorical assertion. Read Yoneda.lean, Limits/Yoneda.lean and Quasicategory/Basic.lean; a second semantic phrasing likewise yields no coherent-space-valued theorem."
   },
   {
    "tool": "leanfinder",
-   "query": "Small limits and colimits in infinity functor categories are computed pointwise in the target quasicategory",
-   "results": "{\"t\": \"2026-10-16T13:47:24Z\", \"tool\": \"leanfinder\", \"query\": \"Small limits and colimits in infinity functor categories are computed pointwise in the target quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"SSet.hoFunctor.preservesTerminal\", \"SSet.hoFunctor.preservesTerminal'\", \"SSet.hasLimits\", \"SSet.hasColimits\", \"SSet.QCat.catEnrichedOrdinaryCategory\"], \"digest\": \"883cc5a5b8508225\"}",
+   "query": "Homotopy coherent functor quasicategory limits evaluated at vertices Yoneda equivalence mapping spaces",
+   "results": "{\"t\": \"2026-10-16T16:31:04Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent functor quasicategory limits evaluated at vertices Yoneda equivalence mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.yonedaEquiv\", \"SSet.hoFunctor\", \"SSet.yonedaEquiv_comp\", \"SSet.hoFunctor.preservesTerminal\", \"SSet.hoFunctor.terminalIso\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.hoFunctor.unitHomEquiv\"], \"digest\": \"f133091fcc020b82\"}",
    "date": "2026-10-16",
-   "verdict": "no match: returned hoFunctor finite-product preservation, SSet.hasLimits and SSet.hasColimits concern ordinary simplicial sets and homotopy categories. Quasicategory/StrictBicategory.lean:53 gives Cat-enriched ordinary structure, not pointwise coherent (co)limit tests."
-  },
-  {
-   "tool": "grep",
-   "query": "pointwise|colimit|[Ff]unctor",
-   "results": "{\"t\": \"2026-10-16T13:47:20Z\", \"tool\": \"grep\", \"query\": \"pointwise|colimit|[Ff]unctor\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"7751adfddfd09596\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: returned hoFunctor finite-product preservation, SSet.hasLimits and SSet.hasColimits concern ordinary simplicial sets and homotopy categories. Quasicategory/StrictBicategory.lean:53 gives Cat-enriched ordinary structure, not pointwise coherent (co)limit tests."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Fully faithful Yoneda embedding of quasicategories detects limits through mapping spaces",
-   "results": "{\"t\": \"2026-10-16T15:24:34Z\", \"tool\": \"leanfinder\", \"query\": \"Fully faithful Yoneda embedding of quasicategories detects limits through mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasLimits\", \"SSet.Truncated.hasLimits\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.Quasicategory\", \"CategoryTheory.SimplicialObject.Truncated.instHasLimits\", \"CategoryTheory.SimplicialObject.Truncated.instHasLimitsOfShape\", \"SSet.QCat\"], \"digest\": \"3ed59e81aff84873\"}",
-   "date": "2026-10-16",
-   "verdict": "No match: SSet.hasLimits concerns ordinary limits in the category of simplicial sets; Quasicategory.Basic:64 uses the simplex Yoneda equivalence, not the infinity Yoneda embedding."
-  },
-  {
-   "tool": "grep",
-   "query": "[Yy]oneda|[Pp]reserves[Ll]imits",
-   "results": "{\"t\": \"2026-10-16T15:25:21Z\", \"tool\": \"grep\", \"query\": \"[Yy]oneda|[Pp]reserves[Ll]imits\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"e3d663bcd305a6be\"}",
-   "date": "2026-10-16",
-   "verdict": "No match: SSet.hasLimits concerns ordinary limits in the category of simplicial sets; Quasicategory.Basic:64 uses the simplex Yoneda equivalence, not the infinity Yoneda embedding."
+   "verdict": "no match: ordinary Type-valued Yoneda and limits, simplex Yoneda and the ordinary homotopy-category functor are not the infinity-categorical assertion. Read Yoneda.lean, Limits/Yoneda.lean and Quasicategory/Basic.lean; a second semantic phrasing likewise yields no coherent-space-valued theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presentable-infinity-adjoints",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-yoneda-presheaf-limits",
+  "worker": "stage1",
+  "summary": "Recovered the identical unsplit assigned JSON from a delivery-tool worktree because the shared read-only export lacks it. Preserved its statement and historical ancestry. Proved space limits by small section complexes, arbitrary parameter pointwise limits by partial universal arrows, mapping-space cone tests by source-arrow sections, and full faithfulness by restriction along the identity slice vertex. Reused the existing cone, pinch, slice, anodyne and trivial-fibration nodes. Added two general statement-only foundations after actual searches; no Mathlib leaves or project attachment. Checked larger-domain/smaller-fiber sizes, empty shapes and higher naturality. Second reader made composition transport explicit, computed the cone induced by the section-space identity, wrote both inverse identities and the dual mapping test, and checked the possibly large representative against a small section model.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, Proof paragraph 2, the first and last R Hom to R inverse-limit comparisons, supplying coherent mapping functors and limit universal properties. The current main-20261015 proof has the same displayed mapping-limit calculation. No unit/chapter route change.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cone recognition or simplicial homotopy equivalence tool, not a replacement for an integral-coefficient unit step."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic coherent cone recognition or simplicial homotopy equivalence tool, not a replacement for an integral-coefficient unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-155fcf1c6",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-155fcf1c6 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. The item statement (HTT 5.1.2.2/5.1.2.3, 5.1.3.1-2, 4.2.4) is unchanged and nothing is weakened. Only the evaluated diagrams need limits, and the different sizes (small J, large E or K, small mapping spaces) are kept apart. Step 1: sections M=Fun_{/J}(J,E_F) of a small representative are a small Kan complex. The exponential identity holds degreewise, and choosing lambda with Phi_M(lambda)~1 makes a->lambda.Delta(a) an equivalence, so the cone criterion applies; J empty gives a point. Step 2: currying gives P~:K->Fun(J,V), and D0 is the diagrams admitting a limit. By cone calculus, limiting cones are exactly universal arrows for Delta_J, so the parametric node applies. Both inverse identities and the vertexwise-equivalence argument are correct, and large K uses the stated universe enlargement. Step 3: an elementary dualization through Fun(K,V)^op=Fun(K^op,V^op), plus K=Delta^1 and V=S. Step 4: sections of the pulled-back source-arrow fibration are exactly U_{Fun(J,E)}(Delta x,p). Pinch comparison, the pullback and mapping-complex clauses of transport, and Phi_{Delta^0} identify this with lim_J Map(x,p(-)), so the cone criterion gives the claim; the cocone case goes through E^op. Step 5: 1_e is an equivalence edge, so it is final in E_{/e} (slice-equivalence-final), hence right anodyne (terminal-anodyne). The fiber of exponentiation's rho over the projection is restriction to (E_F)_e, a trivial Kan fibration and so a homotopy equivalence (08NS node). The postcomposition clause makes the composite u->u.1_e, which proves full faithfulness. Step 6: naturality bookkeeping from the stated coherence clauses. lem-coef-space-transport-classification is true straightening for left fibrations, with Kan mapping complexes Fun_{/A}(E_F,E_G) and the Hom bifunctor with its slice and arrow models. It is not a duplicate of the relative-nerve, exponentiation, slice, arrow-target, fibers or cbc Grothendieck straightening nodes. lem-coef-parametric-universal-arrows is true: partial universal arrows assemble into a contractible choice, and the Fun(K,-) mapping formula follows. It strictly generalizes the unsplit total local-adjoint and pointwise-adjoint criteria, which give neither the partial domain nor the parameter formula that Step 2 needs, so it is not a restatement. The graph has no cycle (44-node closure). Both nodes have correct blueprint from/via fields and same_as=[], after a search of the main-20261015 blueprint that found no infinity-categorical Yoneda node, and all three kinds of Mathlib search; my own grep found only the ordinary 1-categorical PartialAdjoint. No SGA is used. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc) and lem-weil-pbc-trivial-kan-homotopy-equivalence (sk-prop-h2), both generic tools that the unit does not cite. No fixes were needed."
+ }
 }
