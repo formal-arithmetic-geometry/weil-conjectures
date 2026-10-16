@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-lem-coefficient-finite-descent-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Morphisms in $D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ descend to a finite extension",
@@ -12,45 +12,187 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.md",
   "place": "node det-lem-coefficient-finite-descent-hom, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-change-of-scalars",
+  "def-weil-abstract-derived-category",
+  "def-sfb-derived-extend-subfield",
+  "def-sfb-derived-extend-to-qlbar"
+ ],
  "proof": [
   {
-   "text": "(1) $F_X$ and $\\QbarX$ are flat over $E_X$ ([lem-sfb-subfield-flat], [lem-sfb-qlbar-flat]),\nso extension of scalars is exact on complexes and is left adjoint to the exact restriction of\nscalars on the derived categories (the module-level adjunction applied termwise). For\n$F\\subseteq F'$ the adjunction isomorphisms are compatible with the transition maps\n$D_F\\to D_{F'}$, since extension of scalars along $E\\to F\\to F'$ is the composite.",
+   "text": "(1) Work in the small pro-étale site in a universe containing its skeleton and the set of finite subextensions. Put $R=E_X$, and let $B$ be either $F_X$ or $\\QbarX$. The closed symmetric sheaf tensor of [sk-def-sfb-sheaf-tensor] is additive and preserves colimits. The ordinary extension/restriction adjunction of [sk-def-sfb-change-of-scalars] therefore applies; restriction is exact, and extension is right exact. The finite-limit preservation in [lem-sfb-subfield-flat] and [lem-sfb-qlbar-flat], respectively, makes extension exact as well. Thus both termwise functors preserve quasi-isomorphisms. Apply the localization defining the derived category in [def-weil-abstract-derived-category] to their unit and counit: naturality holds for images of complex maps and also for inverses of quasi-isomorphisms, and the two triangle identities remain identities after localization. This gives an adjunction on the derived categories without any K-flat-resolution hypothesis. Its bijection is\n$$\\alpha_B(f)=\\operatorname{Res}(f)\\circ\\eta_C^B,\\qquad \\eta_C^B:C\\longrightarrow\\operatorname{Res}(B\\otimes_R C),\\quad c\\longmapsto1\\otimes c.$$\nThe inverse is $g\\longmapsto\\epsilon\\circ(B\\otimes_R g)$, with $\\epsilon(b\\otimes n)=bn$. These formulas and the triangle identities prove clause (1); termwise restriction commutes with every shift.\n\nHere is how the functors of the statement are these termwise ones. In the statement $C_F=T_{E,F}C$ and $C_{\\Qlb}=T_{E,\\Qlb}C$ are the derived extensions of scalars of [def-sfb-derived-extend-subfield] and [def-sfb-derived-extend-to-qlbar], and $\\operatorname{Res}$ is termwise restriction. Both module-level extensions were just shown exact, so the exact-functor clause of [sk-def-sfb-derived-categories] gives natural isomorphisms $T_{E,F}\\cong D(F_X\\otimes_{E_X}-)$ and $T_{E,\\Qlb}\\cong D(\\QbarX\\otimes_{E_X}-)$ with the termwise functors, and likewise $T_{F,F'}$ and $T_{F,\\Qlb}$ for the intermediate stages. Transporting the adjunction above along these isomorphisms gives clause (1) for $T_{E,F}$ and $T_{E,\\Qlb}$; all computations below are made with the termwise functors. The extension map to $\\Qlb$ in clause (3) sends $f\\colon C_F\\to D_F[r]$ to $\\theta_{D[r]}\\circ T_{F,\\Qlb}(f)\\circ\\theta_C^{-1}$, where $\\theta\\colon T_{F,\\Qlb}T_{E,F}\\cong T_{E,\\Qlb}$ is the comparison of [def-sfb-derived-extend-comp-iso]; that definition takes $\\theta$ termwise from the isomorphism $\\operatorname{Ext}_{F_X\\to\\QbarX}\\operatorname{Ext}_{E_X\\to F_X}\\cong\\operatorname{Ext}_{E_X\\to\\QbarX}$ carrying the composite unit to the unit. The transitivity isomorphism displayed below, for $B=F_X$ and $B'=\\QbarX$, sends $1\\otimes(1\\otimes m)$ to $1\\otimes m$, so it carries the composite unit $m\\mapsto1\\otimes(1\\otimes m)$ to the unit $m\\mapsto1\\otimes m$. By the uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] (the case of one right adjoint and $\\delta=\\mathrm{id}$) it is that isomorphism. Hence the map $f\\mapsto f_{B'}$ used below is exactly the extension map of clause (3).\n\nHere is the transition calculation. For $B\\to B'$ arising from $F\\subseteq F'$ or $F\\subseteq\\Qlb$, the transitivity isomorphism is\n$$B'\\otimes_B(B\\otimes_R M)\\longrightarrow B'\\otimes_R M,\\quad b'\\otimes(b\\otimes m)\\longmapsto b'i(b)\\otimes m,$$\nwith inverse $b'\\otimes m\\longmapsto b'\\otimes(1\\otimes m)$. Both maps are balanced and inverse on the displayed generators, hence on the sheaf tensors and termwise on complexes. The coefficient transition $t_M:B\\otimes_R M\\to B'\\otimes_R M$ sends $b\\otimes m$ to $i(b)\\otimes m$. Thus $t_C\\eta_C^B=\\eta_C^{B'}$. Naturality of the $B\\to B'$ extension unit, first on complexes and then on their localization, gives $\\operatorname{Res}(f_{B'})t_C=t_{D[r]}\\operatorname{Res}(f)$. Consequently\n$$\\alpha_{B'}(f_{B'})=t_{D[r]}\\alpha_B(f).$$\nThis proves compatibility with all finite transition maps and with the maps to $\\Qlb$.",
    "uses": [
     "lem-sfb-subfield-flat",
-    "lem-sfb-qlbar-flat"
+    "lem-sfb-qlbar-flat",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-abstract-derived-category",
+    "def-sfb-derived-extend-subfield",
+    "def-sfb-derived-extend-to-qlbar",
+    "def-sfb-derived-extend-comp-iso",
+    "sk-def-sfb-derived-categories",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
+    "place": "proof, paragraph (1)"
+   }
   },
   {
-   "text": "(2) Tensor products commute with colimits and $\\QbarX=\\varinjlim_FF_X$ as $E_X$-modules\n([sk-prop-sfb-qlbar-colimit-x]); the index poset of finite $F\\supseteq E$ is filtered. Each\n$D^n\\otimes F_X$ vanishes where $D^n$ does.",
+   "text": "(2) Let $I$ be the poset of finite subextensions $F\\subseteq\\Qlb$ containing $E$. It is a set, contains $E$, and is directed by finite composita [det-def-sfb-qlbar-condensed-subextensions]. Restricting the coefficient colimit of [sk-prop-sfb-qlbar-colimit-x] to $I$ does not change it: a cocone on $I$ extends to every finite subfield $H$ by $H_X\\to(EH)_X$ followed by its cocone leg. For $H\\subseteq H'$ the required compatibility follows in $(EH')_X$; if $H$ contains $E$, the extension is the original cocone. These two operations are inverse.\n\nWe use this colimit as one of $R$-modules, not just as rings. The module objects identify with ordinary module sheaves: by the sheafified sectionwise tensor in [sk-def-sfb-sheaf-tensor], an internal action is exactly a compatible sectionwise bilinear action. By [lem-weil-pbc-module-sheaves-colimits-forgetful], module colimits are sheafified sectionwise colimits. For this filtered diagram of $R$-algebras, the sectionwise module colimit has ring multiplication: move two representatives to a common finite stage and multiply there; independence and the ring laws follow at a common stage. Sheafification extends these operations and their equations, so this module colimit is also the ring colimit (a compatible ring cocone induces the module map, which preserves multiplication by its displayed formula). Its vertex is therefore $\\QbarX$ with its specified $R$-action.\n\nFor a fixed $R$-module $M$, the relative tensor of [def-sfb-modobj-relative-tensor] is a coequalizer built from the ambient sheaf tensor. That tensor preserves colimits by [sk-def-sfb-sheaf-tensor]. Taking the colimit of these coequalizers is the coequalizer of the colimits: maps out of either object are exactly compatible families of maps satisfying the same balancing equation. Hence\n$$\\varinjlim_{F\\in I}(F_X\\otimes_R M)\\cong(\\varinjlim_{F\\in I}F_X)\\otimes_R M\\cong\\QbarX\\otimes_R M.$$\nApply this degreewise to $M=D^n$. The maps are induced by $b\\otimes m\\mapsto i(b)\\otimes m$, and the differential is $b\\otimes m\\mapsto b\\otimes d(m)$, so the displayed isomorphisms commute with differentials. If $D^n=0$ for $n<a$, each tensor term is zero in those degrees, proving the common lower bound and clause (2).",
    "uses": [
-    "sk-prop-sfb-qlbar-colimit-x"
+    "sk-prop-sfb-qlbar-colimit-x",
+    "det-def-sfb-qlbar-condensed-subextensions",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-sfb-modobj-relative-tensor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
+    "place": "proof, paragraph (2)"
+   }
   },
   {
-   "text": "(3) By (1) the map becomes\n$\\varinjlim_F\\Hom_{D(X,E)}(C,D^\\bullet\\otimes F_X[r])\\to\\Hom_{D(X,E)}(C,(\\varinjlim_FD^\\bullet\\otimes F_X)[r])$,\nusing (2) and that $D^\\bullet\\otimes\\QbarX$ represents $D_{\\Qlb}$ by flatness. This is bijective by\n[sk-lem-constructible-ext-continuity] (1), applied to $C\\in\\Dbc(X,E)$ and the filtered system\nof (2). Unwinding the adjunctions, the bijection is the map induced by extension of scalars.",
+   "text": "(3) The standing setting [sk-def-sfb-dc-setting] makes $X$ finite type over a field $k$. A field is Noetherian since its only ideals are $0$ and $k$, and $\\operatorname{Spec}k$ has one point and is quasi-compact. Therefore [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian, as required by [sk-lem-constructible-ext-continuity]. The same continuity statement explicitly includes every $C\\in\\Dbc(X,E)$, so its hypothesis on the source object holds.\n\nChoose a bounded complex $D^\\bullet$ representing $D$. For completeness, bounded cohomology suffices for this choice: take any representative $K$ and integers $a<b$ outside which its cohomology vanishes. First replace its degree-$b$ term by $\\ker d^b$ and set all higher terms to zero; the resulting complex maps to $K$ inducing the same cohomology. Then replace degree $a$ by $\\operatorname{coker}d^{a-1}$ and set lower terms to zero; the first truncated complex maps to this bounded complex, again inducing the same cohomology. Both maps are quasi-isomorphisms, giving the required representative. The boundedness used here is that of [sk-def-sfb-bounded-constructible].\n\nPut $K_F^\\bullet=F_X\\otimes_{E_X}D^\\bullet$, regarded by restriction as $E_X$-modules. By (2) these form a small filtered diagram with a common lower bound and termwise colimit $\\QbarX\\otimes_{E_X}D^\\bullet$. Exactness in (1) shows these complexes represent $\\operatorname{Res}D_F$ and $\\operatorname{Res}D_{\\Qlb}$. Apply [sk-lem-constructible-ext-continuity] with $\\Lambda=\\underline E$ and $q=r$ to obtain\n$$\\varinjlim_F\\Hom_{D(X,E)}(C,K_F^\\bullet[r])\\xrightarrow{\\sim}\\Hom_{D(X,E)}(C,(\\QbarX\\otimes_{E_X}D^\\bullet)[r]).$$\nThe transition identity $\\alpha_{B'}(f_{B'})=t_{D[r]}\\alpha_B(f)$ proved in (1) identifies its source diagram with the diagram of $\\Hom_{D(X,F)}(C_F,D_F[r])$. Taking $B'=\\QbarX$ in that same identity identifies every cocone leg with extension of scalars to $\\Qlb$. Thus this bijection is precisely the map of clause (3), for every integer $r$.",
    "uses": [
+    "sk-def-sfb-dc-setting",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "sk-def-sfb-bounded-constructible",
     "sk-lem-constructible-ext-continuity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
+    "place": "proof, paragraph (3)"
+   }
   }
  ],
  "proof_deps": [
   "lem-sfb-subfield-flat",
   "lem-sfb-qlbar-flat",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-abstract-derived-category",
+  "def-sfb-derived-extend-subfield",
+  "def-sfb-derived-extend-to-qlbar",
+  "def-sfb-derived-extend-comp-iso",
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
   "sk-prop-sfb-qlbar-colimit-x",
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-sfb-modobj-relative-tensor",
+  "sk-def-sfb-dc-setting",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sk-def-sfb-bounded-constructible",
   "sk-lem-constructible-ext-continuity"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.proof.md",
+  "place": "Three numbered proof paragraphs, with explicit exact-adjunction localization, coefficient-colimit and canonical-map calculations supplied in the second reading."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient extension of scalars Hom derived category filtered colimit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"Ext\", \"instHasExtModuleCatOfSmall\", \"CategoryTheory.Abelian.Ext.instModule\", \"CategoryTheory.Functor.mapExtLinearMap\", \"localCohomology.ofDiagram\", \"CategoryTheory.Functor.mapExtLinearMap_apply\", \"CategoryTheory.Functor.mapExtLinearMap_coe\"]}",
+   "date": "2026-10-16",
+   "verdict": "No exact match for this three-clause pro-etale coefficient descent statement; hits are generic adjunction, colimit, Ext or derived-category infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, derived extension restriction adjunction, Hom colimit",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `derived`\", \"top\": []}",
+   "date": "2026-10-16",
+   "verdict": "query rejected; inconclusive, followed by valid searches"
+  },
+  {
+   "tool": "grep",
+   "query": "extension of scalars.*restriction|filtered.*Hom.*constructible",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-16",
+   "verdict": "No exact match for this three-clause pro-etale coefficient descent statement; hits are generic adjunction, colimit, Ext or derived-category infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphisms in bounded constructible derived category descend to finite coefficient extension",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.DescendsAlong\", \"HasDerivedCategory.standard\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"DerivedCategory.Q\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"DerivedCategory.TStructure.t\"]}",
+   "date": "2026-10-16",
+   "verdict": "No exact match for this three-clause pro-etale coefficient descent statement; hits are generic adjunction, colimit, Ext or derived-category infrastructure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of derived Hom from bounded constructible complex",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.right_fac\", \"DerivedCategory.left_fac\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CategoryTheory.hasExt_of_hasDerivedCategory\"]}",
+   "date": "2026-10-16",
+   "verdict": "No exact match for this three-clause pro-etale coefficient descent statement; hits are generic adjunction, colimit, Ext or derived-category infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colimitLimitIso",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π\", \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π_assoc\"]}",
+   "date": "2026-10-16",
+   "verdict": "No exact match for this three-clause pro-etale coefficient descent statement; hits are generic adjunction, colimit, Ext or derived-category infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "Hom.*colimit|colimit.*Hom",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-16",
+   "verdict": "No exact match for this three-clause pro-etale coefficient descent statement; hits are generic adjunction, colimit, Ext or derived-category infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars finite field derived category Hom adjunction",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\"]}",
+   "date": "2026-10-16",
+   "verdict": "No exact match for this three-clause pro-etale coefficient descent statement; hits are generic adjunction, colimit, Ext or derived-category infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Cc]olimit|[Cc]olimit.*constructible|adjunction.*[Ll]ocaliz|[Ll]ocaliz.*adjunction",
+   "results": "{\"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\"]}",
+   "date": "2026-10-16",
+   "verdict": "No exact match for this three-clause pro-etale coefficient descent statement; hits are generic adjunction, colimit, Ext or derived-category infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Localization",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Localization'\", \"top\": []}",
+   "date": "2026-10-16",
+   "verdict": "query rejected; inconclusive, followed by valid searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact scalar extension and restriction adjunction on derived categories of sheaves of modules, with filtered colimits in the coefficient ring",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.PullbackConstruction.adjunction\", \"Condensed.freeForgetAdjunction\", \"SheafOfModules.instIsLeftAdjointPullback\", \"ModuleCat.extendRestrictScalarsAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsRightAdjointPushforward\", \"LightCondensed.freeForgetAdjunction\"]}",
+   "date": "2026-10-16",
+   "verdict": "No exact match for this three-clause pro-etale coefficient descent statement; hits are generic adjunction, colimit, Ext or derived-category infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.localization",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.localization\", \"CategoryTheory.Adjunction.localization_counit_app\", \"CategoryTheory.Adjunction.localization_unit_app\"]}",
+   "date": "2026-10-16",
+   "verdict": "No exact match for this three-clause pro-etale coefficient descent statement; hits are generic adjunction, colimit, Ext or derived-category infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered union of p-adic coefficient fields induces a colimit isomorphism on morphisms between bounded constructible complexes of sheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitLimitIso\", \"instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\", \"instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsIsomorphisms\", \"AddMonCat.FilteredColimits.colimitCoconeIsColimit\", \"CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup\"]}",
+   "date": "2026-10-16",
+   "verdict": "No exact match for this three-clause pro-etale coefficient descent statement; hits are generic adjunction, colimit, Ext or derived-category infrastructure."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "in_cycle"
@@ -66,5 +208,34 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sfb-qlbar-two-colimit"
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-lem-coefficient-finite-descent-hom",
+  "worker": "stage1",
+  "summary": "Second reading repaired the three blueprint paragraphs without changing the statement or creating nodes. Expanded exact scalar adjunction by localization, explicit transitivity and naturality, cofinality of fields containing E, the ring-to-module colimit identification and tensor-colimit argument, bounded representative construction, and Noetherian hypotheses for Ext continuity. The canonical-map identification is now an explicit equation. Maintainer reader fix: bound $C_F$, $C_{\\Qlb}$ to the unit's derived extensions $T_{E,F}$, $T_{E,\\Qlb}$ and identified the clause-(3) map with the comparison of def-sfb-derived-extend-comp-iso; added step sources; reduced the declared tool uses to the two off-route statements.",
+  "blueprint": "The three proof paragraphs of sk-lem-coefficient-finite-descent-hom.md are realized by steps 1, 2 and 3 respectively.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-subfield-flat",
+    "why": "Finite-stage flatness of F_X over E_X, cited by the blueprint item itself; its unit sk-prop-sfb-cartesian-coefficients is not cited by the two-colimit unit and no node of the unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic module-sheaf colimits give the underlying module colimit required in the unit tensor-colimit sentence; the coefficient proposition states the colimit only as rings."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-subfield-flat",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: Read in full: the main-20261015 item .md and .proof.md, the unit sk-thm-sfb-qlbar-two-colimit (statement and paragraph (2)), and the statement of every cited node. The item statement is verbatim and not weakened. The coefficient category is D(Mod_{Λ_X}) over pulled-back condensed E_X/F_X/QbarX throughout. Small cases checked: C=0, D=0, F=E, C=D=E_X with r=0, r<0. Step 1: the change-of-scalars hypotheses hold (braided, coequalizers, ⊗ preserves colimits, E_X commutative). Exactness comes from lem-sfb-subfield-flat and lem-sfb-qlbar-flat. The localized adjunction (Mathlib Adjunction.localization, Localization/Adjunction.lean 48-125) and the transition equation α_{B'}(f_{B'})=t α_B(f) are correct. Step 2: the cofinality of fields containing E, the ring-to-module colimit via lem-weil-pbc-module-sheaves-colimits-forgetful (2)(3) and the coequalizer/tensor-colimit argument are correct. Step 3: the Noetherian hypothesis comes from finite type over a field via lem-weil-pbc-finite-type-over-noetherian; continuity covers every bounded constructible C for Λ=E; the τ≤b, τ≥a bounded representative is correct; q=r. There are no new nodes, no duplicates (lem-sfb-constructible-cocone-hom-surj/inj are consumers), no SGA, and the graph is acyclic. Three repairs, in fixes/: (1) C_F and C_Qlb were not tied to the unit's derived-extension nodes T_{E,F} and T_{E,Qlb}, which the reviewed consumer det-lem-coefficient-finite-descent-objects uses. The clause-(3) map had never been identified with def-sfb-derived-extend-comp-iso. I added both T definitions to stmt_deps. Step 1 now identifies T with the termwise functor by the exact-functor clause of sk-def-sfb-derived-categories. It shows the termwise transitivity isomorphism is unit-compatible, so by lem-weil-pbc-conjugate-iso-unit-equation it is the comparison θ (C4/E6). (2) I added the missing step sources (.proof.md, paragraph k). (3) I reverted the unit realized/realized_by placeholder binding to the empty base, because this item is not the unit's key node. Accepted tool_uses: lem-sfb-subfield-flat, which was not declared and is cited by the blueprint item itself, and lem-weil-pbc-module-sheaves-colimits-forgetful. I removed the declared definition and in-route entries from split_report.tool_uses.; 2 file(s) fixed by the reviewer"
+ }
 }
