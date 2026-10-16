@@ -2080,11 +2080,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Principal
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.QuotPowTriangle
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationTStructure
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.ReductionCone
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.SmulInvertible
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.TensorQuotPow
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Truncation
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
@@ -3793,11 +3791,6 @@ public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleIndEtale
 public import WeilConjectures.RingTheory.ProjectiveSymmetricCoefficientIntersection
 public import WeilConjectures.RingTheory.ProjectiveSymmetricConormalReductionExact
 public import WeilConjectures.RingTheory.ProjectiveSymmetricPresentationConormalEquiv
-public import WeilConjectures.RingTheory.Purity.FreeOfRegularPair
-public import WeilConjectures.RingTheory.Purity.NormalRegularPair
-public import WeilConjectures.RingTheory.Purity.Saturation
-public import WeilConjectures.RingTheory.Purity.UnramifiedOfRegularPair
-public import WeilConjectures.RingTheory.Purity.ZariskiNagata
 public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 public import WeilConjectures.RingTheory.QuotientSectionFactorTransfer
 public import WeilConjectures.RingTheory.Regular.Hartogs
