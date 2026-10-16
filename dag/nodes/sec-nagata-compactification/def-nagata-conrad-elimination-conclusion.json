@@ -3,15 +3,15 @@
  "blueprint": {
   "is": null,
   "from": {
-   "node": null,
-   "place": "unspecified",
+   "node": "thm-nagata-conrad-elimination",
+   "place": "Conclusion of the theorem statement, order 220: existence of a V-admissible blow-up quasi-dominating Y and extending f; used as a predicate in proof paragraph 3 by the blow-up-base-change and closed-target reductions.",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The conclusion of the elimination theorem, as a predicate on the data",
- "statement": "Let $S$ be qcqs, let $X$ and $Y$ be qcqs $S$-schemes with $Y\\to S$ separated and of finite type, let $U\\subseteq V\\subseteq X$ be dense open subschemes whose open immersions into $X$ are quasi-compact, let $p\\colon Y\\to X$ be a morphism and let $f\\colon U\\to Y$ be a section of $p$ over $U$. We say that *the conclusion of [thm-nagata-conrad-elimination] holds for the data $(X,U,V,p,f)$* when there exists a $V$-admissible blow-up $\\widetilde X\\to X$ ([def-nagata-admissible-blowup]) such that $\\widetilde X$ quasi-dominates $Y$ ([def-nagata-conrad-quasi-domination]) in a manner extending $f\\colon U\\to Y$.",
+ "statement": "Let $S$ be qcqs, let $X$ and $Y$ be qcqs $S$-schemes with $Y\\to S$ separated and of finite type, let $U\\subseteq V\\subseteq X$ be dense open subschemes whose open immersions into $X$ are quasi-compact, let $p\\colon Y\\to X$ be a morphism and let $f\\colon U\\to Y$ be a section of $p$ over $U$. We say that *the conclusion of the elimination theorem holds for the data $(X,U,V,p,f)$* when there exist a $V$-admissible blow-up $\\pi\\colon\\widetilde X\\to X$ ([def-nagata-admissible-blowup]) and a quasi-domination $(W,g)$ of $\\widetilde X$ over $Y$ relative to $S$ ([def-nagata-conrad-quasi-domination]), where $\\widetilde X$ has its $S$-structure through $\\pi$, such that $\\pi^{-1}(U)\\subseteq W$ and\n\n$$\ng|_{\\pi^{-1}(U)}=f\\circ\\pi_U,\\qquad\n\\pi_U\\colon\\pi^{-1}(U)\\to U.\n$$\n\nHere $\\pi_U$ is the restriction of $\\pi$. Thus the extension condition compares morphisms with the same source, the inverse image of $U$ in the blow-up.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/thm-nagata-conrad-elimination.md",
   "place": "the conclusion of the statement of thm-nagata-conrad-elimination, order 220; the predicate that lemma-nagata-conrad-blowup-base-change-reduction and lemma-nagata-conrad-closed-target-reduction refer to"
@@ -22,9 +22,94 @@
  ],
  "proof": [],
  "proof_deps": [],
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi.?domination|admissible.*blow|elimination.*indeterminacy",
+   "results": "No hits. The earlier single-file RationalMap.lean path is not present in this checkout; the follow-up at Birational/RationalMap.lean locates PartialMap.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists an admissible blow-up with a dense open morphism whose graph is closed extending a partial section",
+   "results": "Hits: AlgebraicGeometry.Scheme.PartialMap.mk, AlgebraicGeometry.Scheme.PartialMap.mk.congr_simp, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE, AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι, AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver, AlgebraicGeometry.Scheme.Hom.toPartialMap, AlgebraicGeometry.Scheme.PartialMap.restrict_equiv. These concern representatives of rational maps, dense-open partial maps, or the valuative criterion; none defines the existential admissible-blow-up/closed-graph extension predicate. PartialMap source read at Mathlib/AlgebraicGeometry/Birational/RationalMap.lean:43–57.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conclusion predicate for elimination of indeterminacy: an admissible blowup admits a quasi-domination extending a partial section",
+   "results": "Hits: AlgebraicGeometry.Scheme.RationalMap.exists_rep, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.ValuativeCriterion.existence, AlgebraicGeometry.Scheme.RationalMap.mem_domain, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over. These concern representatives of rational maps, dense-open partial maps, or the valuative criterion; none defines the existential admissible-blow-up/closed-graph extension predicate. PartialMap source read at Mathlib/AlgebraicGeometry/Birational/RationalMap.lean:43–57.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure PartialMap|def exists_rep|theorem exists_rep|exists_partialMap_over",
+   "results": "No hits. The earlier single-file RationalMap.lean path is not present in this checkout; the follow-up at Birational/RationalMap.lean locates PartialMap.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define a predicate saying a blowup away from an open set resolves a rational map with closed graph and extends its given domain",
+   "results": "Hits: AlgebraicGeometry.Scheme.RationalMap.exists_rep, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.mem_domain, AlgebraicGeometry.Scheme.RationalMap.toPartialMap, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over, AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over, AlgebraicGeometry.Scheme.RationalMap. These concern representatives of rational maps, dense-open partial maps, or the valuative criterion; none defines the existential admissible-blow-up/closed-graph extension predicate. PartialMap source read at Mathlib/AlgebraicGeometry/Birational/RationalMap.lean:43–57.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PartialMap\"",
+   "results": "PartialMap, PartialMap.IsOver, RationalMap.toPartialMap, PartialMap.toRationalMap_surjective and related rational-map declarations. Read PartialMap in Mathlib/AlgebraicGeometry/Birational/RationalMap.lean:43–57; no admissible-blow-up or closed-graph predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "structure PartialMap|exists_rep|exists_partialMap_over|dense_domain",
+   "results": "Mathlib/AlgebraicGeometry/Birational/RationalMap.lean:47 structure PartialMap and :50 dense_domain; read lines 43–57. Dense-open maps only, with no closed-graph or admissible-blow-up condition.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A modification preserving a specified open set and a dense open map to a separated scheme with closed graph, agreeing with a prescribed map",
+   "results": "Eight hits: AlgebraicGeometry.ext_of_isDominant_of_isSeparated', AlgebraicGeometry.ext_of_isDominant_of_isSeparated, AlgebraicGeometry.ext_of_isDominant, AlgebraicGeometry.IsSeparated, AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver, AlgebraicGeometry.IsSeparated.instResLE. These assert separated-target extensionality or restriction of a partial map over a base; none packages an admissible blow-up with a closed-graph extension.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RationalMap\"",
+   "results": "Twelve rational-map declarations; top hits: AlgebraicGeometry.Scheme.RationalMap, AlgebraicGeometry.Scheme.RationalMap.id, AlgebraicGeometry.Scheme.RationalMap.domain, AlgebraicGeometry.Scheme.Hom.toRationalMap, AlgebraicGeometry.Scheme.PartialMap.toRationalMap, AlgebraicGeometry.Scheme.RationalMap.representative, AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective, AlgebraicGeometry.Scheme.RationalMap.openCoverDomain. Read PartialMap and IsOver at Mathlib/AlgebraicGeometry/Birational/RationalMap.lean:43–57 and RationalMap at 370–378: maps on dense opens and their germ quotient, not this blow-up/closed-graph predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiDomination|IsAdmissible|exists.*blowup|admissible.*extension",
+   "results": "Twenty-five displayed hits, all IsAdmissible terminology for absolute values or Bourbaki-Witt order theory; none about schemes. Followed by a search restricted to AlgebraicGeometry to exclude truncation.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?domination|admissible|blowup|modification",
+   "results": "Seven hits, all comments or admissible variable changes in EllipticCurve/ModelsWithJ.lean and EllipticCurve/VariableChange.lean. No scheme blow-up or quasi-domination predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "maintainer",
@@ -44,5 +129,21 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-thm-nagata-sketch-conrad"
+ "unit": "sk-thm-nagata-sketch-conrad",
+ "proof_origin": null,
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-nagata-conrad-elimination-conclusion",
+  "worker": "stage1",
+  "summary": "Checked the conclusion predicate against Conrad Definition 2.1 and Theorem 2.4, pp. 11–13, and the blueprint elimination statement and its two reductions. Retained every input hypothesis and the two existing definition dependencies. Made the existential quasi-domination witness and its induced S-structure explicit, and wrote extension as g restricted to the inverse image of U equals f composed with the restricted blow-up map. This is a proposition-valued definition, not an existence theorem, and requires no proof or new nodes. Independent Mathlib and whole-blueprint searches found no exact predicate; filled missing blueprint provenance.",
+  "blueprint": "Packages precisely the conclusion of thm-nagata-conrad-elimination (order 220), used in its proof paragraph 3 to phrase the two reduction lemmas without a cyclic dependency on the theorem. The parent unit is sk-thm-nagata-sketch-conrad. No unit proof step is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-ebb72d953",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-ebb72d953 (reviewer sub-agent of L); spot-checked: Read the complete definition, both cited definitions, unit/chapter route, report, Conrad Definition 2.1 and Theorem 2.4, and Stacks Tag 080K. Extension equation and S-structure are correct; edge cases, duplicate candidates, and dependency cycles checked. No new nodes, proof gaps, repairs, or accepted tool_uses. Detailed review written to review.md."
+ }
 }
