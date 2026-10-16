@@ -20,7 +20,8 @@
   "place": "Agent-formulated general foundations for the opening compactification choice. WANTED: coherent comma mapping-space formula, mapping-space characterization of limits, componentwise equivalences and contractibility of terminal-object spaces. Functor-category closure is stated in Scholze, Six-Functor Formalisms, Lecture II, basic fact (1), printed p.14. Online checks: Kerodon Proposition 4.6.5.5 (Tag 01L0) for pinched mapping spaces, Corollary 4.7.3.14 (Tag 02HM) for the terminal/initial-object subcategory, and Corollary 4.6.8.18 (Tag 02R3) for the slice version of the fiber formula. The general comma formula and cone criterion remain the stated agent-formulated foundations, not claims attributed to that slice result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pinch-comparison"
  ],
  "proof": [
   {
@@ -234,5 +235,46 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q60-9cd263e32 (reviewer sub-agent of L); spot-checked: Read all ten steps, seven new nodes, cited statements and sources. Checked horn hypotheses, mapping-space models, transport orientation, empty cases, duplicates, and master coefficient categories. The 16-node dependency closure is acyclic; both declared generic tool uses are accepted. No repairs needed. Full assessment written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnhancedFunctorConeCalculus",
+  "declaration": "SSet.Enhanced.enhanced_functor_cone_calculus",
+  "declarations": [
+   "SSet.Enhanced.ComponentwiseEquivalence",
+   "SSet.Enhanced.FunctorEquivalenceMappingSpaces",
+   "SSet.Enhanced.QuasicategoryMappingSpaceAssertions",
+   "SSet.Enhanced.calculusFiber",
+   "SSet.Enhanced.calculusMoving",
+   "SSet.Enhanced.calculusFixed",
+   "SSet.Enhanced.calculusTransport",
+   "SSet.Enhanced.calculusTransportValue",
+   "SSet.Enhanced.calculusApex",
+   "SSet.Enhanced.calculusFiberInclusion",
+   "SSet.Enhanced.CalculusComparison",
+   "SSet.Enhanced.CalculusComparisonNaturality",
+   "SSet.Enhanced.CalculusTransportFormula",
+   "SSet.Enhanced.calculusCommaArrow",
+   "SSet.Enhanced.CalculusCommaFiberIdentification",
+   "SSet.Enhanced.ConeMappingSpaceFormula",
+   "SSet.Enhanced.CoconeMappingSpaceFormula",
+   "SSet.Enhanced.ConeLimitCriterion",
+   "SSet.Enhanced.CoconeColimitCriterion",
+   "SSet.Enhanced.enhanced_functor_cone_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnhancedFunctorConeCalculus.lean",
+  "statement": "theorem enhanced_functor_cone_calculus (K C : SSet.{u}) [Quasicategory C] : Quasicategory ((ihom K).obj C) ∧ QuasicategoryMappingSpaceAssertions ∧ ComponentwiseEquivalence K C ∧ FunctorEquivalenceMappingSpaces ∧ (∀ F : K ⟶ C, Quasicategory (coneCategory F) ∧ Quasicategory (coconeCategory F) ∧ ConeMappingSpaceFormula F ∧ CoconeMappingSpaceFormula F ∧ (∀ (μ : (coneCategory F) _⦋0⦌), IsLimiting F μ ↔ ConeLimitCriterion μ) ∧ (∀ (μ : (coconeCategory F) _⦋0⦌), IsColimiting F μ ↔ CoconeColimitCriterion μ)) ∧ (∀ (Q : SSet.{u}) [Quasicategory Q], (∀ h : ∃ t : Q _⦋0⦌, IsTerminal Q t, KanComplex (fullSubcomplex Q (IsTerminal Q)).toSSet ∧ IsContractible (fullSubcomplex Q (IsTerminal Q)).toSSet) ∧ (∀ h : ∃ t : Q _⦋0⦌, IsInitial Q t, KanComplex (fullSubcomplex Q (IsInitial Q)).toSSet ∧ IsContractible (fullSubcomplex Q (IsInitial Q)).toSSet))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Repair of 42035e965406: canonical coherent transport spans, specified diagram-fiber isomorphisms and natural constant-path comparisons replace arbitrary maps; the universal tests use the same span; the full terminal and initial subcategories themselves are contractible Kan. Helpers belong to this node, with real construction data. The existing pinch-comparison node is added as a statement dependency for its canonical arrow models."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c821e0e26",
+  "group": "NK",
+  "result": "pass",
+  "note": "Every node clause checked against the Lean and the dependency definitions. The repaired cone/cocone formulas use a canonical span: a left leg unique after arrowMappingSpaceInclusion (a trivial fibration, since the apex projection is a right/left fibration), the real source/target map r, a unique iso from the comma fiber to U_D(Δx,F)/U_D(F,Δx), and a fiber comparison fixed in both coordinates. ConeLimitCriterion/CoconeColimitCriterion test r for every x and are true (r is a Kan fibration with fibers U_P(l,μ)); the old counterexamples resolve correctly. Terminal/initial full subcategories are asserted Kan and contractible. Edge cases (empty K, empty fibers, n=0, universes) are covered. The node changes only lean and stmt_deps (adds the landed lem-coef-infinity-pinch-comparison, allowed). The statement is verbatim, the 20 declarations match, imports are allowed proof-dependency imports, docstrings are complete, nothing is hollow, the only sorry is the theorem. The report has a real Worker report and Second reading by NK. nt_compile --json of the snapshot module: rc 0, no diagnostics (1.8 s). No blocking findings; CalculusComparisonNaturality adds no content (harmless)."
  }
 }
