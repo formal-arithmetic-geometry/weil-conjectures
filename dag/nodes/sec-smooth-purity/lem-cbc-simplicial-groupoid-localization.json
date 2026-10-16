@@ -220,5 +220,23 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-b637d0129 (reviewer sub-agent of L); spot-checked: The mathematics and citations check out, but proof steps 3 (parameterized currying) and 5 (two-test-object quasi-inverse construction) are substantive and were incorrectly marked elementary. Corrected full DAG JSON is in fixes/dag/nodes/sec-smooth-purity/lem-cbc-simplicial-groupoid-localization.json; review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-324d6e8e5",
+  "group": "NL",
+  "result": "pass",
+  "note": "All statement clauses, dependencies, docstrings, edge cases, report sections, and compiler evidence checked; no defects found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialGroupoidLocalization",
+  "declaration": "SSet.Enhanced.simplicial_groupoid_localization",
+  "statement": "theorem simplicial_groupoid_localization {K S : SSet.{u}} (q : K ⟶ S) [SSet.KanComplex S] (hq : IsWeakHomotopyEquivalence q) : ∀ (C : SSet.{u}), C.Quasicategory → ∃ e : (ihom S).obj C ⟶ (equivalenceDiagrams K C).toSSet, e ≫ (equivalenceDiagrams K C).ι = (MonoidalClosed.pre q).app C ∧ IsFunctorEquivalence e ∧ IsFullyFaithful e ∧ (∀ (L : SSet.{u}) (p : L ⟶ K), (MonoidalClosed.pre (p ≫ q)).app C = e ≫ (equivalenceDiagrams K C).ι ≫ (MonoidalClosed.pre p).app C) ∧ (∀ (D : SSet.{u}), D.Quasicategory → ∀ f : C ⟶ D, e ≫ (equivalenceDiagrams K C).ι ≫ (ihom K).map f = (ihom S).map f ≫ (MonoidalClosed.pre q).app D)",
+  "by": "NL",
+  "date": "2026-10-16",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/SimplicialGroupoidLocalization.lean",
+  "branch": "newtargets-dag"
  }
 }
