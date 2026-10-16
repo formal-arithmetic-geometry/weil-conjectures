@@ -4,11 +4,10 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1298**, closure **17**, holes in definitions **4**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1299**, closure **24**, holes in definitions **3**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility::AlgebraicGeometry.ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper` (instance, line 1353)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek::AlgebraicGeometry.ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj` (instance, line 175)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek::AlgebraicGeometry.ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj` (instance, line 192)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek::AlgebraicGeometry.ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj` (instance, line 183)
@@ -45,24 +44,24 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1102 | 15 |
-| WeilConjectures | 196 | 2 |
+| Sheaf | 1104 | 22 |
+| WeilConjectures | 195 | 2 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2284 | 756 | 1528 | 103 | 17 |
-| 660345513 (Application of proof-dependency imports) | library | 2238 | 754 | 1484 | 91 | 17 |
-| 660345513 (Application of proof-dependency imports) | closure | 1981 | 17 | 1964 | 57 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2284 | 757 | 1527 | 103 | 17 |
+| 660345513 (Application of proof-dependency imports) | library | 2238 | 755 | 1483 | 91 | 17 |
+| 660345513 (Application of proof-dependency imports) | closure | 1981 | 22 | 1959 | 57 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3628 |
+| proved | 3629 |
 | decomposed | 52 |
-| moved | 4015 |
+| moved | 4017 |
 | pruned | 131 |
-| other | 608 |
+| other | 609 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
@@ -72,7 +71,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | A2 | 120 | 118 | 86 | 32 | 61/120 (50.8%) |
 | A3 | 124 | 120 | 80 | 40 | 55/124 (44.4%) |
 | A4 | 73 | 77 | 47 | 30 | 37/73 (50.7%) |
-| B2 | 127 | 133 | 85 | 48 | 53/127 (41.7%) |
+| B2 | 128 | 134 | 86 | 48 | 54/128 (42.2%) |
 | B3 | 145 | 152 | 89 | 63 | 62/145 (42.8%) |
 | B4 | 67 | 70 | 47 | 23 | 32/67 (47.8%) |
 | C1 | 143 | 146 | 109 | 37 | 73/143 (51.0%) |
@@ -85,17 +84,17 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | E1 | 160 | 189 | 104 | 85 | 80/160 (50.0%) |
 | E2 | 123 | 118 | 85 | 33 | 60/123 (48.8%) |
 | E3 | 112 | 113 | 95 | 18 | 59/112 (52.7%) |
-| E4 | 48 | 55 | 27 | 28 | 19/48 (39.6%) |
+| E4 | 49 | 56 | 27 | 29 | 19/49 (38.8%) |
 | F1 | 145 | 151 | 107 | 44 | 71/145 (49.0%) |
 | F2 | 148 | 157 | 98 | 59 | 61/148 (41.2%) |
-| F3 | 98 | 100 | 62 | 38 | 43/98 (43.9%) |
+| F3 | 99 | 100 | 63 | 37 | 43/99 (43.4%) |
 | F4 | 62 | 57 | 42 | 15 | 28/62 (45.2%) |
 | G1 | 141 | 141 | 112 | 29 | 75/141 (53.2%) |
 | G2 | 139 | 137 | 91 | 46 | 63/139 (45.3%) |
 | G3 | 102 | 105 | 66 | 39 | 45/102 (44.1%) |
 | G4 | 57 | 49 | 31 | 18 | 20/57 (35.1%) |
 | H1 | 135 | 132 | 106 | 26 | 74/135 (54.8%) |
-| H2 | 113 | 110 | 89 | 21 | 65/113 (57.5%) |
+| H2 | 114 | 111 | 92 | 19 | 66/114 (57.9%) |
 | H3 | 121 | 136 | 97 | 39 | 67/121 (55.4%) |
 | H4 | 59 | 56 | 42 | 14 | 31/59 (52.5%) |
 | J1 | 124 | 131 | 75 | 56 | 53/124 (42.7%) |
@@ -174,21 +173,24 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 |---|---:|---:|---|
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 1 | A2 |
 | Sheaf.Paper.CondensedQbarExchangeEquality | 3 | 1 | XR0d56945a24047e2a |
-| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility | 5 | 1 | F3 |
-| Sheaf.Paper.FiniteDiscreteCoefficientExchange | 6 | 1 | H2 |
+| Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis | 4 | 1 | — |
+| Sheaf.Paper.CoefficientExchangeFromComparisons | 7 | 1 | — |
 | Sheaf.Paper.CondensedLocalModelGluing | 7 | 1 | A3 |
 | Sheaf.Paper.CondensedQbarFunctionCoefficients | 7 | 1 | B3 |
-| Sheaf.Paper.ContinuousEtaleLocalLattices | 7 | 1 | B2 |
+| Sheaf.Paper.FiniteDiscreteConstructibleEncoding | 7 | 1 | — |
+| Sheaf.Paper.FiniteDiscreteDerivedCoefficientData | 8 | 1 | — |
 | Sheaf.Paper.IntegralResidueProjectionNormalization | 8 | 1 | D3 |
+| WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf | 8 | 1 | — |
+| Sheaf.AlgebraicGeometry.ComparisonDirectImage | 9 | 3 | — |
 | Sheaf.AlgebraicGeometry.CondensedFieldGeometricRegularCoefficient | 9 | 1 | A4 |
-| Sheaf.Paper.IntegralMatrixPointwiseRank | 9 | 1 | E4 |
+| Sheaf.Paper.ContinuousModuleEncodingLattices | 9 | 1 | — |
+| Sheaf.AlgebraicGeometry.DerivedCohomologyContinuity | 10 | 1 | — |
 | Sheaf.Paper.RingedTopoiTensorComparisonConstruction | 10 | 1 | A2 |
+| Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear | 11 | 1 | — |
 | Sheaf.Paper.ContinuousLatticeIntersectionSplitData | 11 | 1 | B2 |
-| Sheaf.Paper.LatticeClassDescent | 11 | 1 | B4 |
-| Sheaf.Paper.LatticePairMatrixAtBasis | 13 | 1 | C2 |
-| Sheaf.CategoryTheory.CategoricalFiniteCoverLocalZero | 15 | 1 | C4 |
-| Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent | 40 | 1 | D2 |
-| Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent | 41 | 1 | C1 |
+| Sheaf.Paper.LatticeClassDescent | 12 | 1 | B4 |
+| Sheaf.CategoryTheory.CategoricalFiniteCoverLocalZero | 14 | 1 | C4 |
+| Sheaf.Paper.LatticePairMatrixAtBasis | 14 | 1 | C2 |
 
 Modules pruned since the imports baseline:
 
@@ -284,7 +286,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields`
 - `Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints`
 - `Sheaf.AlgebraicGeometry.EtaleFieldGsets`
-- `Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear`
 - `Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives`
 - `Sheaf.AlgebraicGeometry.EtaleNormalComponents`
 - `Sheaf.AlgebraicGeometry.EtaleOpenFpqcDescent`
@@ -350,7 +351,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.InvertibleTensorQcoherent`
 - `Sheaf.AlgebraicGeometry.IsAffineOfFiniteClosedCover`
 - `Sheaf.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange`
-- `Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist`
 - `Sheaf.AlgebraicGeometry.LftOverFieldIsolatedPointResidueFinite`
 - `Sheaf.AlgebraicGeometry.MatchingObjectFibreProduct`
 - `Sheaf.AlgebraicGeometry.ModuleCechVanishingBasis`
@@ -504,7 +504,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.SiteFilteredColimitSections`
 - `Sheaf.CategoryTheory.SiteLerayDegenerate`
 - `Sheaf.CategoryTheory.SiteMorphismComposition`
-- `Sheaf.CategoryTheory.SitePullbackAbelianExact`
 - `Sheaf.CategoryTheory.SiteSystemStrictification`
 - `Sheaf.CategoryTheory.Sites.BinaryContractedProductPresentation`
 - `Sheaf.CategoryTheory.Sites.CoherentContractedPowers`
@@ -561,7 +560,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.FiniteHypercoverDescent`
 - `Sheaf.Paper.FiniteSplitEtaleHypercover`
 - `Sheaf.Paper.GaloisLisseRepresentations`
-- `Sheaf.Paper.HypercoverCohomology`
 - `Sheaf.Paper.HypercoverCohomologyColimit`
 - `Sheaf.Paper.HypercoverFreeResolution`
 - `Sheaf.Paper.ImagePresheafSheafificationIso`
