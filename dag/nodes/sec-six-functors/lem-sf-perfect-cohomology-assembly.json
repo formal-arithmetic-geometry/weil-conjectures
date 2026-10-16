@@ -20,9 +20,79 @@
   "def-weil-abstract-derived-category",
   "def-pc-perfect-ring-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a cochain complex $C$ and fix an isomorphism $e:Q(C)\\xrightarrow{\\sim} K$ in the localization of [def-weil-abstract-derived-category]. Write $f_i:H^i(Q(C))\\xrightarrow{\\sim}H^i(C)$ for the cohomology-factorization isomorphism. Fix the identifications $\\eta_i=H^i(e)\\circ f_i^{-1}:H^i(C)\\xrightarrow{\\sim}H^i(K)$ throughout the proof. Choose integers $a\\le b$ with $H^i(C)=0$ for $i<a$ or $i>b$; when all cohomology vanishes, any $a=b$ is allowed. For each integer $r$ set $K_r=Q(\\tau_{\\le r}C)$, using the explicit truncation in [lem-weil-pbc-truncation-triangle]. In degrees $i<r$ the cohomology of this truncation is $H^i(C)$: at $i=r-1$ replacing the target of $d^{r-1}$ by $\\ker d^r$ does not change its kernel. At $i=r$ it is $\\ker d^r/\\operatorname{im}d^{r-1}=H^r(C)$, and above $r$ its terms are zero. Thus $H^i(K_r)=H^i(K)$ for $i\\le r$ and is zero for $i>r$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, canonical truncation of cochain complexes; setup for more-algebra Tag 066U."
+   }
+  },
+  {
+   "text": "The starting object $K_{a-1}$ is perfect: Step 1 makes $\\tau_{\\le a-1}C$ acyclic, so the map from the zero complex to it is a quasi-isomorphism by [def-weil-abstract-derived-category] and hence becomes an isomorphism in $D(A)$. The zero complex is itself a bounded finite-projective model. The same definition shows that composing a representing isomorphism with an isomorphism of derived objects preserves perfectness [def-pc-perfect-ring-complex]. This also proves the assertion immediately when $K$ has zero cohomology in every degree.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066U, lemma-cohomology-perfect, zero base of the finite canonical-truncation induction."
+   }
+  },
+  {
+   "text": "For every $r\\in[a,b]$, the hypothesis makes $H^r(K)[0]$ isomorphic to a bounded finite-projective complex $P_r$, say with bounds $u_r,v_r$ [def-pc-perfect-ring-complex]. The shifted complex $P_r[-r]$ has term $P_r^{i-r}$ in degree $i$, differential $(-1)^r d_{P_r}$, and bounds $u_r+r,v_r+r$; its terms are still the same finitely generated projective modules. As $Q$ commutes with shifts [def-weil-abstract-derived-category], shifting the representing isomorphism exhibits $H^r(K)[-r]$ as a perfect object. Only these finitely many shifts are needed, so no uniform bound on all the chosen resolutions is assumed.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066U, lemma-cohomology-perfect; shift computation from the bounded finite-projective definition in Tag 0656, section-perfect."
+   }
+  },
+  {
+   "text": "For each $r=a,\\ldots,b$, apply [lem-weil-pbc-truncation-triangle] with the abelian category of $A$-modules, the complex $C$, and $q=r$. Its statement gives the distinguished triangle $K_{r-1}\\to K_r\\to H^r(C)[-r]\\to K_{r-1}[1]$. Induct on $j=0,\\ldots,b-a+1$ to prove that $K_{a+j-1}$ is perfect. The base $j=0$ is Step 2. If $j<b-a+1$, put $r=a+j$; the first term $K_{r-1}$ is perfect by the induction hypothesis. The isomorphism $H^r(C)\\cong H^r(K)$ from Step 1 gives a chain isomorphism between the complexes with these modules in degree $r$ (its only nonzero component is this module isomorphism). Compose it with the finite-projective model from Step 3; thus the third term $H^r(C)[-r]$ is perfect. Apply [lem-sf-perfect-ring-triangle-closure] to obtain perfectness of $K_r$. This proves the induction step, including any gaps with $H^r(K)=0$.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-sf-perfect-ring-triangle-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066U, lemma-cohomology-perfect, canonical-truncation induction using Tag 066R, lemma-two-out-of-three-perfect; triangles are derived Tag 08J5."
+   }
+  },
+  {
+   "text": "At the last index Step 4 gives a bounded finite-projective model for $K_b$. The canonical inclusion $\\tau_{\\le b}C\\to C$ induces the identity on $H^i(C)$ for $i\\le b$ by the calculation in Step 1; for $i>b$ both cohomology modules vanish. It is therefore a quasi-isomorphism, so its image is an isomorphism $Q(\\tau_{\\le b}C)\\xrightarrow{\\sim}Q(C)$ [def-weil-abstract-derived-category]. Compose this with the fixed $e:Q(C)\\xrightarrow{\\sim}K$ from Step 1 to get $K_b\\cong K$, and then compose with the model of $K_b$. The resulting isomorphism with a bounded complex of finitely generated projective $A$-modules is exactly perfectness of $K$ [def-pc-perfect-ring-complex].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066U, lemma-cohomology-perfect, last canonical truncation agrees with the original bounded-cohomology object."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-abstract-derived-category",
+  "lem-sf-perfect-ring-triangle-closure",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066U, lemma-cohomology-perfect, canonical truncations and finite induction, with its cited triangle-closure Tag 066R and derived Remark 08J5."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,15 +142,88 @@
    "results": "0 hits in Mathlib/Algebra/Homology/DerivedCategory.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded derived complex over a commutative ring is perfect if all of its cohomology modules are perfect",
+   "results": "{\"t\": \"2026-10-16T01:25:14Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded derived complex over a commutative ring is perfect if all of its cohomology modules are perfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_iff\", \"CochainComplex.IsKProjective\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\"], \"digest\": \"a124958214409793\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no assertion of perfectness from perfect cohomology; support, projective-resolution, K-projectivity and perfect-field/ring search hits have different statements"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"Perfect\"",
+   "results": "{\"t\": \"2026-10-16T01:25:15Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"Perfect\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no assertion of perfectness from perfect cohomology; support, projective-resolution, K-projectivity and perfect-field/ring search hits have different statements"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|cohomology_perfect|perfect.*cohomology",
+   "results": "{\"t\": \"2026-10-16T01:25:15Z\", \"tool\": \"grep\", \"query\": \"IsPerfect|cohomology_perfect|perfect.*cohomology\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no assertion of perfectness from perfect cohomology; support, projective-resolution, K-projectivity and perfect-field/ring search hits have different statements"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded cohomology with perfect cohomology modules implies a perfect complex over a ring",
+   "results": "{\"t\": \"2026-10-16T01:25:16Z\", \"tool\": \"leansearch\", \"query\": \"Bounded cohomology with perfect cohomology modules implies a perfect complex over a ring\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex whose cohomology modules each admit a bounded finite projective resolution is quasi isomorphic to a bounded finite projective complex",
+   "results": "{\"t\": \"2026-10-16T01:25:52Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded complex whose cohomology modules each admit a bounded finite projective resolution is quasi isomorphic to a bounded finite projective complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"CategoryTheory.ProjectiveResolution.quasiIso\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.isKProjective_iff_of_iso\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.isKProjective_iff_leftOrthogonal\"], \"digest\": \"690a29cb2db9b753\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no assertion of perfectness from perfect cohomology; support, projective-resolution, K-projectivity and perfect-field/ring search hits have different statements"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"perfect\"",
+   "results": "{\"t\": \"2026-10-16T01:25:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"perfect\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Aesop.ScriptGenerated.perfect\", \"Aesop.Script.DynStructureM.State.perfect\", \"Aesop.Script.StaticStructureM.State.perfect\", \"Nat.Perfect\", \"Nat.perfect_iff_sum_properDivisors\", \"Nat.perfect_iff_sum_divisors_eq_two_mul\", \"PerfectField\", \"PerfectRing\"], \"digest\": \"e78912e3b969c136\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no assertion of perfectness from perfect cohomology; support, projective-resolution, K-projectivity and perfect-field/ring search hits have different statements"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|PerfectComplex|perfect complex",
+   "results": "{\"t\": \"2026-10-16T01:25:54Z\", \"tool\": \"grep\", \"query\": \"IsPerfect|PerfectComplex|perfect complex\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no assertion of perfectness from perfect cohomology; support, projective-resolution, K-projectivity and perfect-field/ring search hits have different statements"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-coefficient-frobenius",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-perfect-cohomology-assembly",
+  "worker": "stage1",
+  "summary": "Rechecked after the 02:30 UTC merge-lock return against the current DAG and delivery worktree. The commutative-ring statement and dependency statements still support the five-step Tag 066U induction. Made the fixed representative isomorphism, its cohomology identifications, the empty-support bounds, and the final localization/composition maps explicit. Retained the single statement-only Tag 066R prerequisite and its checked sorry-free project attachment candidate; no new dependency or hypothesis was introduced.",
+  "blueprint": "Realizes the second proof paragraph of lem-weil-coefficient-frobenius: after cohomology modules have finite-projective resolutions, the assertion that bounded finite cohomology gives a perfect complex. Steps 1-2 set up its Tag 066U finite truncation base, Step 3 handles shifts, Step 4 carries the actual finite induction, and Step 5 identifies the last truncation with K. The enclosing unit has no numbered steps to realize and this is not its key statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic canonical truncation triangles for any abelian category, including the exact third vertex H^q(C)[-q]. The biduality unit has no such construction; this is the canonical-truncation tool explicitly required by Tag 066U, not a replacement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-65e8a7ae4",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-65e8a7ae4 (reviewer sub-agent of L); spot-checked: Read the item, sole new node, cited statements, report, route, and source mathematics in full. Stacks 066U/066R and 08J5 support all five steps; edge cases and whole-DAG duplicate checks found no defect. Accepted the generic truncation tool use. No coefficient-category comparison or target weakening is asserted. Detailed checks are in review.md; no fixes needed."
+ }
 }
