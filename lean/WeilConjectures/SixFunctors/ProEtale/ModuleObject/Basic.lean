@@ -578,7 +578,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The canonical coefficient morphism `α_f : f^* Λ_Y ⟶ Λ_X`: the component at `Λ` of the
 comparison isomorphism `f^* ∘ p_Y^* ≅ p_X^*`, which on the test objects is the canonical
 isomorphism `X ×_Y Y[S] ≅ X[S]`. -/
-noncomputable abbrev condensedPullbackHom :
+noncomputable def condensedPullbackHom :
     (f)^*[Ab.{u + 1}].obj (condensedRingObj Λ Y) ⟶ condensedRingObj Λ X :=
   Functor.compAlgHom (upperStarFromPoint Y) (f)^*[Ab.{u + 1}] (upperStarFromPointComp f).hom Λ
 

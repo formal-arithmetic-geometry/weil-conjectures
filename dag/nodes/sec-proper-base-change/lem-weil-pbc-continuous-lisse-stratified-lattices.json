@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-continuous-lisse-stratified-lattices",
+ "kind": "statement",
+ "title": "Lisse integral lattices on a finite stratification",
+ "statement": "Let ℓ be prime, E a finite-dimensional normed ℚ_ℓ-algebra which is a normed field, and X a scheme with noetherian underlying topological space. Use the continuous integral and rational coefficient rings and their inclusion of [def-weil-pbc-continuous-integral-coefficients]. Let P be an internal rational module on X which is pro-etale locally finite free in the sense of [def-weil-pbc-condensed-e-module-category]. There is a finite constructible locally closed stratification S of X [def-constructible-stratification]. On each domain S_a there is an internal constructible integral module M_a whose ordinary rational scalar extension is isomorphic to the canonical coefficient pullback of P to S_a. This supplies only the models of the strata; reconstructing P globally is not asserted. Ranks may vary or be zero and X may be empty.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-constructible-stratification"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6); Lemma 6.8.13, first paragraph"
+ },
+ "proof": [
+  {
+   "text": "Choose a qcqs etale surjection U→X with a locally finite free integral lattice by the etale-local lattice theorem.",
+   "uses": [
+    "lem-weil-pbc-continuous-etale-local-lattice"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing theorem that a qcqs etale morphism is finite etale after restriction to a finite locally closed constructible stratification. Its pullbacks remain surjective. Each stratum is topologically noetherian by its immersion into X.",
+   "uses": [
+    "lem-weil-pbc-etale-stratified-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back P and the lattice to each cartesian square. Local freeness is preserved: pull back a trivializing cover and its finite biproduct isomorphisms, and transport coefficients across the monoidal composition isomorphism. Scalar-change compatibility and pullback composition give the rationalization isomorphism on the finite etale cover. The functor interfaces are packaged as explicitly constructed structures to avoid expanding their adjunction constructions. Reuse the already-proved private free_comap, free_of_iso and free_pullback_comp_iff helpers of the local-triviality module through a proof-only import all for coefficient restriction, free-module transport and pullback composition.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category",
+    "def-weil-pbc-continuous-integral-coefficients",
+    "lem-weil-pbc-condensed-lfp-local-triviality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply finite etale lattice descent on each stratum. A locally finite free integral module is locally finitely presented, using the zero relation module and the zero-cokernel isomorphism. The one-part identity stratification then proves constructibility.",
+   "uses": [
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-continuous-etale-local-lattice",
+  "lem-weil-pbc-etale-stratified-finite",
+  "lem-weil-pbc-lisse-lattice-finite-etale-descent"
+ ],
+ "proof_origin": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6); Lemma 6.8.13, first paragraph",
+  "by": "agent",
+  "note": "C4: internal continuous coefficient interface; source argument below the proper-base-change unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integral lattices in continuous p-adic local systems exist on a finite stratification of a noetherian scheme",
+   "date": "2026-10-16",
+   "results": "Eight hits concerning PadicInt and real/integer lattices; none states the sheaf result.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFiniteLocallyFree\"",
+   "date": "2026-10-16",
+   "results": "0 hits",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*stratif|stratif.*lattice|lisse.*integral",
+   "date": "2026-10-16",
+   "results": "0 hits",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousConstructibleIntegralStratum",
+  "date": "2026-10-16",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-continuous-constructible-integral-stratum",
+   "place": "Lisse integral lattices on a finite stratification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousLisseStratifiedLattices",
+  "file": "lean/Sheaf/Paper/ContinuousLisseStratifiedLattices.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousLisse_stratified_lattices",
+  "statement": "theorem continuousLisse_stratified_lattices\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj\n        (condensedRingObj (Profinite.continuousMapRingObj E) X))\n        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) :\n    ∃ S : Scheme.Stratification X, ∀ s : Fin S.n,\n      ∃ M : Mod (Sheaf (Scheme.ProEt.topology (S.domain s)) Ab.{u + 1})\n          (condensedRingObj (integralCoeff ℓ E) (S.domain s)),\n        ProEtale.IsConstructibleModuleObject\n          (condensedRingObj (integralCoeff ℓ E) (S.domain s)) M ∧\n        Nonempty ((Mod.extendScalars\n          (coefficientMap (integralScalarMap ℓ E) (S.domain s))).obj M ≅\n            (CondensedRing.upperStar (Profinite.continuousMapRingObj E)\n              (S.immersion s)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-21055",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261016T064222-L-582225",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-21055",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261016T064222-L-582225",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements, proofs, lattice obligations and DAG records against the packet, published sources and cited mathematics; verified compilation, axioms, eight direct importers and the declared reducibility repair."
+ }
+}

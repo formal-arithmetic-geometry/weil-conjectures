@@ -33,6 +33,17 @@
  ],
  "proof": [
   {
+   "text": "For the internal continuous-coefficient Lean attachment, first apply the proved internal abelian sheaf-module equivalence and the canonical continuous coefficient realizations. The given finite-extension norm is the unique extension of the p-adic norm, so its closed unit ball is the valuation ring in the statement. Identify the reconstructed section-ring sheaves and compare finite free modules, their local trivializations, ordinary scalar extension and the etale-slice pullbacks. The generic equivalence and continuous realizations are already proved; these specific compatibilities are part of this remaining descent obligation. Perform the following sum-of-sheet-lattices construction in the sectionwise encoding and transfer its result back to internal modules.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients",
+    "def-weil-pbc-condensed-e-module-category",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-weil-l-adic-extension-absolute-value"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Choose an etale covering family $(u_a:U_a\\to X)_a$ splitting $p$, by [lem-weil-pbc-finite-etale-etale-local-split], so that $Y\\times_XU_a=\\coprod_{j\\in J_a}U_a$. Surjectivity of $p$ implies $J_a\\ne\\varnothing$ whenever $U_a$ is nonempty; discard empty members. This is also a covering of the pro-etale site: the continuous etale inclusion of [def-weil-pbc-site-comparison-morphism] sends etale coverings to pro-etale coverings. Use the slice identification in [lem-weil-pbc-proetale-restriction-injectives] for $p$ and the $u_a$. The inverse-image formula of [def-weil-proetale-inverse-image] agrees with slice restriction here: on an object $V\\to W$, a representative section on $Z\\to X$ with a map $V\\to W\\times_X Z$ restricts along $V\\to Z$ to a section on the underlying $X$-object $V$. Conversely a section on $V$ represents an inverse-image section using $Z=V$ and the graph $V\\to W\\times_X V$. Restriction identifies these two constructions in the colimit, and the result is already a sheaf on the slice. These mutually inverse maps commute with module operations. In these slices the restrictions of $A_X$ and $E_X$ are exactly $A_{U_a}$ and $E_{U_a}$, since both formulas on an object $V$ remain $C(|V|,A)$ and $C(|V|,E)$. This verifies the completed, continuous coefficients directly; the constant-coefficient clauses of the slice lemma are not being applied to $A_X$ or $E_X$. The same applies to each sheet over $U_a$.",
    "uses": [
     "lem-weil-pbc-finite-etale-etale-local-split",
@@ -113,23 +124,29 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-etale-etale-local-split",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "def-weil-proetale-inverse-image",
   "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-continuous-integral-coefficients",
   "def-weil-pbc-etale-site",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
   "lem-sc-dvr-fg-torsionfree-free",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-proetale-restriction-injectives",
   "lem-weil-pbc-site-module-sheaf-gluing"
  ],
  "proof_origin": {
-  "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.13, first paragraph: explicit finite-etale sum of sheet lattices supplies the representation-extension argument; Stacks Tags 04HN and 04TR"
+  "place": "Proposition 6.8.4(6); Lemma 6.8.13, first paragraph",
+  "by": "agent",
+  "note": "C4 realizes this existing finite-etale descent node in internal modules over the continuous coefficients. The old Lean attachment names an absent file. The mathematical statement and detailed finite-sum-of-sheet-lattices argument are retained; an initial coefficient/module conversion step records the compatibilities required by the internal attachment. No descent datum or degree prime to ell is imposed."
  },
  "mathlib_searches": [
   {
@@ -269,13 +286,23 @@
   "note": "Wrote review.md. Audited the immutable statement, all nine dependencies, sources, universes, edge cases, docstrings, and dependency repair. Both delivered Lean files compile cleanly through scompile.py with the local side overlay. No fixes required; branch unchanged."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.LisseLatticeFiniteEtaleDescent",
-  "declaration": "AlgebraicGeometry.ProEtale.exists_lisse_lattice_finite_etale_descent",
-  "file": "lean/Sheaf/AlgebraicGeometry/LisseLatticeFiniteEtaleDescent.lean",
-  "statement": "theorem exists_lisse_lattice_finite_etale_descent (l : ℕ) [Fact l.Prime] (E : Type) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] (L : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseFieldSheaf l E X))) (hL : L.IsFiniteLocallyFree) {Y : Scheme.{u}} (p : Y ⟶ X) [IsFinite p] [Etale p] [Surjective p] (hM : ∃ M : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseIntegerSheaf l E Y)), M.IsFiniteLocallyFree ∧ Nonempty ((SheafOfModules.changeOfRings.{u, u + 1, u + 1} (lisseIntegerToField l E Y) M).val ≅ (PresheafOfModules.pushforward.{u + 1, u, u, u + 1, u + 1, u + 1} (lisseEtaleCoefficientIdentification l E p)).obj L.val)) : ∃ M₀ : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseIntegerSheaf l E X)), M₀.IsFiniteLocallyFree ∧ Nonempty ((SheafOfModules.changeOfRings.{u, u + 1, u + 1} (lisseIntegerToField l E X) M₀).val ≅ L.val)",
-  "branch": "newtargets-dag",
-  "by": "NY",
-  "date": "2026-10-15",
-  "existing": false
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent",
+  "file": "lean/Sheaf/Paper/ContinuousFiniteEtaleLatticeDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousLisse_finiteEtale_lattice",
+  "statement": "theorem continuousLisse_finiteEtale_lattice\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj\n        (condensedRingObj (Profinite.continuousMapRingObj E) X))\n        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P))\n    {U : Scheme.{u}} (p : U ⟶ X) [IsFinite p] [Etale p] [Surjective p]\n    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) U))\n    (hM : ∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : D.I₀,\n        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj\n          (condensedRingObj (integralCoeff ℓ E) U))\n          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M))\n    (e : Nonempty ((Mod.extendScalars\n      (coefficientMap (integralScalarMap ℓ E) U)).obj M ≅\n        (CondensedRing.upperStar (Profinite.continuousMapRingObj E) p).obj P)) :\n    ∃ N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj (integralCoeff ℓ E) X),\n      (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj\n          (condensedRingObj (integralCoeff ℓ E) X))\n          (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj N)) ∧\n      Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).obj N ≅ P)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-16"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-21055",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261016T064222-L-582225",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements, proofs, lattice obligations and DAG records against the packet, published sources and cited mathematics; verified compilation, axioms, eight direct importers and the declared reducibility repair."
  }
 }

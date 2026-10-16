@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-continuous-etale-local-lattice",
+ "kind": "statement",
+ "title": "A lisse continuous module has a lattice on a qcqs etale cover",
+ "statement": "Let ell be prime, E a finite dimensional normed Q_ell algebra which is a normed field, and X a scheme with noetherian underlying topological space. Use the continuous integral and rational coefficients and their map of [def-weil-pbc-continuous-integral-coefficients]. Suppose P is an internal module over the rational coefficient ring on X, locally finite free on a pro-etale cover in the module sense of [def-weil-pbc-condensed-e-module-category]. There are a quasi-compact quasi-separated scheme U, an etale surjection p:U→X, and an internal integral module M on U which is pro-etale locally finite free, together with an isomorphism from its ordinary scalar extension to the canonical coefficient pullback p^*P. Ranks may vary and may be zero; the empty scheme is allowed. No descent or stratification is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6); Lemma 6.8.13, first paragraph"
+ },
+ "proof": [
+  {
+   "text": "Use the proved sectionModuleEquivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] to encode an internal module as a sectionwise module sheaf over its reconstructed section-ring sheaf, with the same underlying sheaf. Identify this reconstructed ring with the continuous-function coefficient ring, transport finite free modules and their pro-etale trivializing covers, and compare ordinary scalar extension and inverse images by their adjunctions. The given norm equals the spectral norm by uniqueness of a norm on a finite extension; the integral coefficient ring is its closed unit ball. These coefficient, local-freeness, scalar-extension and pullback compatibilities are part of this remaining obligation; the generic sheaf-module equivalence itself is already proved and is to be reused.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients",
+    "def-weil-pbc-condensed-e-module-category",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Proposition 6.8.4(6), as in the existing etale-local lattice node, to get lattices on an etale covering family. This only supplies individual lattices, with no compatibility between them.",
+   "uses": [
+    "lem-weil-pbc-lisse-lattice-etale-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Refine each covering member by affine open neighborhoods. Their images form an open cover because etale maps are open. Noetherianity makes X compact, so finitely many suffice. The finite disjoint union of these affine neighborhoods is quasi-compact and quasi-separated and remains etale and surjective. Sheaves and their rationalization isomorphisms assemble on this disjoint union. Use the zero module in rank zero and the empty cover for an empty base.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-lisse-lattice-etale-local"
+ ],
+ "proof_origin": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6); Lemma 6.8.13, first paragraph",
+  "by": "agent",
+  "note": "C4: internal continuous coefficient interface; source argument below the proper-base-change unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integral lattices in continuous p-adic local systems exist on a finite stratification of a noetherian scheme",
+   "date": "2026-10-16",
+   "results": "Eight hits concerning PadicInt and real/integer lattices; none states the sheaf result.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFiniteLocallyFree\"",
+   "date": "2026-10-16",
+   "results": "0 hits",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*stratif|stratif.*lattice|lisse.*integral",
+   "date": "2026-10-16",
+   "results": "0 hits",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousConstructibleIntegralStratum",
+  "date": "2026-10-16",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-continuous-constructible-integral-stratum",
+   "place": "A lisse continuous module has a lattice on a qcqs etale cover",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousEtaleLocalLattices",
+  "file": "lean/Sheaf/Paper/ContinuousEtaleLocalLattices.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousLisse_etale_lattice",
+  "statement": "theorem continuousLisse_etale_lattice\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (hP : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj\n        (condensedRingObj (Profinite.continuousMapRingObj E) X))\n        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod _).obj P)) :\n    ∃ (U : Scheme.{u}) (p : U ⟶ X), Etale p ∧ Surjective p ∧\n      CompactSpace U ∧ QuasiSeparatedSpace U ∧\n      ∃ M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n          (condensedRingObj (integralCoeff ℓ E) U),\n      (∃ D : Scheme.Cover.{u} Scheme.proetalePrecoverage U, ∀ s : D.I₀,\n        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (D.f s)).obj\n          (condensedRingObj (integralCoeff ℓ E) U))\n          (((ProEtale.upperStar Ab.{u + 1} (D.f s)).mapMod _).obj M)) ∧\n      Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) U)).obj M ≅\n        (CondensedRing.upperStar (Profinite.continuousMapRingObj E) p).obj P)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-21055",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261016T064222-L-582225",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-21055",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261016T064222-L-582225",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements, proofs, lattice obligations and DAG records against the packet, published sources and cited mathematics; verified compilation, axioms, eight direct importers and the declared reducibility repair."
+ }
+}
