@@ -173,8 +173,6 @@ private theorem filtered_class_preimage
   rw [hSB, sup_comm, inf_eq_right.mpr
     (sup_le (inf_le_inf_left A hB) (inf_le_inf_right Z hA))]
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private theorem quotient_kernel
     {C : Type u} [Category.{v} C] [Abelian C] {X T : C}
     (B Z : Subobject X) (h : B ≤ Z) (z : T ⟶ (Z : C)) :
@@ -189,9 +187,10 @@ private theorem quotient_kernel
     apply Subobject.map_obj_injective Z.arrow
     rw [← Subobject.inf_eq_map_pullback, inf_eq_right.mpr h, Subobject.map_mk]
     simp [b]
-  rw [← BigradedExactCouple.pullback_kernelSubobject, hk, ← hp,
-    ← Subobject.pullback_comp]
--/
+  have hkernel : (Subobject.pullback z).obj (kernelSubobject (cokernel.π b)) =
+      kernelSubobject (z ≫ cokernel.π b) := by
+    simpa only [comp_zero] using pullback_equalizer (cokernel.π b) 0 z
+  rw [← hkernel, hk, ← hp, ← Subobject.pullback_comp]
 
 /-- The page projection and graded homology projection kill the same actual cycles.
 Source: Stacks Project, Homology, Tag 012K, Equation 12.24.5.2;
@@ -245,7 +244,119 @@ private theorem stationary_projection_kernel
       kernelSubobject ((F.step q : CochainComplex C ℤ).homologyπ (q + p) ≫ a q ≫
         cokernel.π (Subobject.ofLE (H.step (q + 1)) (H.step q)
           (H.antitone_step (Int.le_add_one (le_refl q))))) := by
-  sorry
+  classical
+  have _hr := hr
+  have _hupper := hupper
+  let n := q + p
+  let A := F.complexStep q n
+  let A' := F.complexStep (q + 1) n
+  let Z := (Subobject.pullback (K.d n (n + 1))).obj ⊥
+  let B := imageSubobject (K.d (n - 1) n)
+  let S := A ⊓ Z
+  let D := (A ⊓ B) ⊔ (A' ⊓ Z)
+  let i := (F.step q).arrow.f n
+  let a' := Subobject.ofLE (F.step (q + 1)) (F.step q)
+    (F.antitone_step (Int.le_add_one le_rfl))
+  let π := (F.complexQuotientπ q (q + 1) (by omega)).f n
+  let P := Subobject.pullback i
+  have hS : S ≤ Subobject.mk i := by
+    simpa only [S, A, i, DecreasingFiltration.complexStep, imageSubobject_mono] using
+      (inf_le_left : S ≤ A)
+  let j := Subobject.ofLEMk S i hS
+  have ha' : a'.f n ≫ i = (F.step (q + 1)).arrow.f n := by
+    simpa only [HomologicalComplex.comp_f] using
+      congrArg (fun f ↦ f.f n) (Subobject.ofLE_arrow
+        (F.antitone_step (Int.le_add_one (le_refl q))))
+  have hA : A' ≤ Subobject.mk i := by
+    simpa only [A', i, DecreasingFiltration.complexStep, imageSubobject_mono] using
+      Subobject.mk_le_mk_of_comm (a'.f n) ha'
+  have hAa : A' ≤ A := by
+    simpa only [A, i, DecreasingFiltration.complexStep, imageSubobject_mono] using hA
+  have hA' : P.obj A' = Subobject.mk (a'.f n) := by
+    apply Subobject.map_obj_injective i
+    rw [DecreasingFiltration.map_pullback_mono, Subobject.map_mk,
+      inf_eq_right.mpr hA]
+    simpa only [A', DecreasingFiltration.complexStep, imageSubobject_mono] using
+      Subobject.mk_eq_mk_of_comm _ _ (Iso.refl _) (by simpa using ha')
+  have hB : B ≤ Z := by
+    apply (Subobject.imageSubobject_le_iff _ _).2
+    apply pullback_factors
+    rw [Subobject.bot_factors_iff_zero]
+    exact K.d_comp_d _ _ _
+  have hD : A ⊓ B ≤ S := inf_le_inf_left A hB
+  have hpre : (Subobject.pullback (j ≫ π)).obj
+      ((Subobject.«exists» π).obj (P.obj ((A ⊓ B) ⊔ A'))) =
+      (Subobject.pullback S.arrow).obj D := by
+    rw [Subobject.pullback_comp, DecreasingFiltration.filtered_preimage F q n, ← hA']
+    rw [sup_eq_right.mpr (P.monotone (le_sup_right : A' ≤ (A ⊓ B) ⊔ A'))]
+    rw [← Subobject.pullback_comp, Subobject.ofLEMk_comp]
+    apply Subobject.map_obj_injective S.arrow
+    rw [← Subobject.inf_eq_map_pullback, ← Subobject.inf_eq_map_pullback,
+      DecreasingFiltration.subobject_modular S (A ⊓ B) A' hD]
+    have hSA : S ⊓ A' = A' ⊓ Z := by
+      change (A ⊓ Z) ⊓ A' = _
+      calc
+        (A ⊓ Z) ⊓ A' = (A ⊓ A') ⊓ Z := by ac_rfl
+        _ = A' ⊓ Z := by rw [inf_eq_right.mpr hAa]
+    rw [hSA, inf_eq_right.mpr (sup_le hD (inf_le_inf_right Z hAa))]
+  let L : CochainComplex C ℤ := F.step q
+  have hs : S.Factors (L.iCycles n ≫ i) := by
+    apply (Subobject.inf_factors _).mpr
+    constructor
+    · exact imageSubobject_factors_comp_self _ _
+    · apply (pullback_factors_iff _ _ _).mpr
+      apply (Subobject.bot_factors_iff_zero _).mpr
+      dsimp only [i]
+      rw [Category.assoc, (F.step q).arrow.comm, ← Category.assoc,
+        HomologicalComplex.iCycles_d, zero_comp]
+  let s := Subobject.factorThru S (L.iCycles n ≫ i) hs
+  have hsj : s ≫ j = L.iCycles n := by
+    apply (cancel_mono i).mp
+    simp only [Category.assoc, j, Subobject.ofLEMk_comp, s, Subobject.factorThru_arrow]
+  have hkpage : kernelSubobject (z ≫ filteredComplexPageπ K F r (q, p)) =
+      (Subobject.pullback s).obj ((Subobject.pullback S.arrow).obj D) := by
+    rw [filteredComplexPageπ, quotient_kernel, hz]
+    have hb : F.complexBoundaries q n r =
+        (Subobject.«exists» π).obj (P.obj ((A ⊓ B) ⊔ A')) := by
+      dsimp only [n] at *
+      simp only [DecreasingFiltration.complexBoundaries, hlower,
+        Subobject.exists_obj_top]
+      rfl
+    change (Subobject.pullback (L.iCycles n ≫ π)).obj (F.complexBoundaries q n r) = _
+    rw [hb, ← hsj, Category.assoc, Subobject.pullback_comp, hpre]
+  have hszero : S.arrow ≫ K.d n (n + 1) = 0 := by
+    apply (Subobject.bot_factors_iff_zero _).mp
+    apply (pullback_factors_iff _ _ _).mp
+    exact Subobject.factors_right_of_inf_factors S.factors_self
+  let k := K.liftCycles S.arrow (n + 1) (by simp) hszero
+  have hk : k ≫ K.iCycles n = S.arrow := K.liftCycles_i _ _ _ _
+  have hcoh := filtered_class_preimage K F q n k hk
+  rw [Subobject.pullback_comp] at hcoh
+  have hcycles : HomologicalComplex.cyclesMap (F.step q).arrow n = s ≫ k := by
+    apply (cancel_mono (K.iCycles n)).mp
+    rw [HomologicalComplex.cyclesMap_i, Category.assoc, hk]
+    exact (Subobject.factorThru_arrow _ _ hs).symm
+  have hH (t : ℤ) : H.step t =
+      (Subobject.«exists» c.hom).obj ((F.cohomologyImage n).step t) := by
+    have : Epi (a t) := hepi t
+    change H.step t = (Subobject.«exists» c.hom).obj
+      (imageSubobject (HomologicalComplex.homologyMap (F.step t).arrow n))
+    rw [← Subobject.exists_obj_top, Subobject.exists_obj_comp,
+      Subobject.exists_obj_top, ← ha t, imageSubobject_comp_of_epi,
+      imageSubobject_mono, Subobject.mk_arrow]
+  have htransport : (Subobject.pullback c.hom).obj (H.step (q + 1)) =
+      (F.cohomologyImage n).step (q + 1) := by
+    rw [hH, Subobject.exists_iso_map, Subobject.pullback_map_self]
+  have hkH : kernelSubobject (L.homologyπ n ≫ a q ≫
+      cokernel.π (Subobject.ofLE (H.step (q + 1)) (H.step q)
+        (H.antitone_step (Int.le_add_one (le_refl q))))) =
+      (Subobject.pullback s).obj ((Subobject.pullback S.arrow).obj D) := by
+    rw [← Category.assoc, quotient_kernel, Category.assoc, ha q,
+      ← Category.assoc, HomologicalComplex.homologyπ_naturality, hcycles]
+    simp only [Category.assoc]
+    rw [Subobject.pullback_comp, Subobject.pullback_comp, Subobject.pullback_comp,
+      htransport, hcoh]
+  exact hkpage.trans hkH.symm
 
 private theorem actual_cycles_cover
     {C : Type u} [Category.{v} C] [Abelian C]
