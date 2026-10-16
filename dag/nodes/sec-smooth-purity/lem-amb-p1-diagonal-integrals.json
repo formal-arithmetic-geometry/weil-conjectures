@@ -392,5 +392,31 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-02637d96f (reviewer sub-agent of L); spot-checked: Reviewed the item, all seven proof steps, cited node statements, blueprint/unit route, source locations, Mathlib searches, and edge cases. The finite ordinary-etale coefficient repair and corrected exchange/stalk arguments are sound; review.md records the full audit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalIntegrals",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLine_diagonal_integrals",
+  "declarations": [
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalProjection",
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalChart",
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalTrace",
+   "AlgebraicGeometry.Etale.projectiveLineDiagonalAlpha",
+   "AlgebraicGeometry.Etale.projectiveLine_diagonal_integrals"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineDiagonalIntegrals.lean",
+  "statement": "theorem projectiveLine_diagonal_integrals (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) : ∃ hI : (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible, ∃ κ : Ext ((lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine S ↘ S))).obj (ordinaryFiniteConstant A (ProjectiveLine S))) (Scheme.finiteEtaleTateLine (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA) 2, SupportedKummerBoundary A N hA (pullback.diagonal (ProjectiveLine S ↘ S)) hI (by simpa using hS.map ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫ (ProjectiveLine S ↘ S)).appTop.hom) κ ∧ ∀ a : Bool, projectiveLineDiagonalAlpha A S a ≫ (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map (supportedExactDerivedMap (lowerStar (ModuleCat.{u + 1} A) (pullback.diagonal (ProjectiveLine S ↘ S))) (ordinaryFiniteConstant A (ProjectiveLine S)) (Scheme.finiteEtaleTateLine (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N A hA) κ) ≫ projectiveLineDiagonalTrace N hN A hA S hS a = 𝟙 (ordinaryFiniteUnit A (ProjectiveLine S))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The supported Ext class is existentially exhibited with the dependency's uniquely determining SupportedKummerBoundary predicate. Its exact derived realization is delta. Boolean indices false/true are p1/p2; the trace is the recorded trace transported along the canonical base-change chart. Alpha is the composite of the two normalized constant-object units, equal to the canonical composition identification because p_a Delta = id."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c57345815",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable source, all statement dependencies, canonical maps, hypotheses, edge cases, universes, docstrings, report sections, and verbatim signature. Byte-identical per-file scompile.py reproduction passed with no diagnostics. No fixes needed; branch unchanged."
  }
 }
