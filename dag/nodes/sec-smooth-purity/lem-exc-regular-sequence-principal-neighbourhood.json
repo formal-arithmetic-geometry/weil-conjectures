@@ -174,5 +174,24 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q24-9a6e9d49e (reviewer sub-agent of L); spot-checked: Reviewed the complete item, six proof steps, all cited DAG statements, Stacks Tags 061L, 00IK, 00CS, 00LF, localization definitions, unit route, delivery errors A–F, searches, and edge cases. The specialization M=R is valid; localization, finite-kernel, denominator-product, injectivity, and nonzero-quotient arguments are sound, with no duplicate or new nodes. Wrote review.md. No Lean, build, git, ssh, or live-project operations used."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularSequencePrincipalNeighbourhood",
+  "declaration": "RingTheory.exists_isRegular_localizationAway_of_isRegular_localizationAtPrime",
+  "statement": "theorem exists_isRegular_localizationAway_of_isRegular_localizationAtPrime (R : Type u) [CommRing R] [IsNoetherianRing R] (p : Ideal R) [p.IsPrime] (r : ℕ) (x : Fin r → R) (hreg : RingTheory.Sequence.IsRegular (Localization.AtPrime p) (List.ofFn (fun i ↦ algebraMap R (Localization.AtPrime p) (x i)))) : ∃ g : R, g ∉ p ∧ RingTheory.Sequence.IsRegular (Localization.Away g) (List.ofFn (fun i ↦ algebraMap R (Localization.Away g) (x i)))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-16",
+  "existing": false,
+  "file": "lean/Sheaf/RingTheory/RegularSequencePrincipalNeighbourhood.lean",
+  "fixed_by": "NT-stage2-Codex-f03dff607"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f03dff607",
+  "group": "N5",
+  "result": "fix",
+  "note": "Mathematics and verbatim Lean signature verified. Complete fixes expand the six-step proof docstring and add proof-dependency imports. Original and replacement compile cleanly through scompile.py. Findings and evidence recorded in review.md; branch unchanged."
  }
 }
