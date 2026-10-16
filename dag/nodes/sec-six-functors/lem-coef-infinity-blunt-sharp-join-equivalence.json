@@ -1,0 +1,89 @@
+{
+ "id": "lem-coef-infinity-blunt-sharp-join-equivalence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction: coherent enhancement of coefficient diagrams, via the finite-shape generation argument and the right-pinch comparison used in lem-coef-infinity-anodyne-cocones. The total slice diagonal equivalence used before taking fibers in the proof of Kerodon Proposition 4.6.5.10. Supporting general blunt-to-sharp join comparison, Kerodon Theorem 4.6.2.8, used in the diagram-class proof of Theorem 4.6.4.19. This is generic coherent-diagram infrastructure under the historical ancestry, not a literal assertion in the ancestor paragraph.",
+   "via": [
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-anodyne-cocones",
+    "lem-coef-infinity-final-index-colimit",
+    "lem-coef-infinity-finite-shape-generation",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The blunt-to-sharp join comparison is a categorical equivalence",
+ "statement": "Use small simplicial sets, standard simplices, quasicategories, internal functor simplicial sets and functor equivalences as in [def-cbc-enhanced-diagrams-cones]. Let $X,Y$ be arbitrary small simplicial sets in the fixed universe. Define the sharp join by\n$$(X\\star Y)_n=X_n\\amalg Y_n\\amalg\\coprod_{a+b+1=n}X_a\\times Y_b,$$\nwhere $a,b\\geq0$ and the operators restrict the ordered block of $X$-vertices followed by the ordered block of $Y$-vertices; an empty block is represented by the corresponding pure $X$- or $Y$-simplex. Define $X\\diamond Y$ degreewise as the quotient of $X\\amalg(X\\times\\Delta^1\\times Y)\\amalg Y$ identifying $(x,0,y)$ with $x$ and $(x,1,y)$ with $y$, with induced simplicial operators. On an $n$-simplex $(x,t,y)$ of the cylinder, where $t:[n]\\to[1]$, restrict $x$ to the initial block $t^{-1}(0)$ and $y$ to the final block $t^{-1}(1)$ and concatenate them. Together with the inclusions on the pure summands, this defines the comparison $c_{X,Y}:X\\diamond Y\\to X\\star Y$, which is the identity on the two distinguished copies of $X$ and $Y$.\nFor every quasicategory $\\mathcal E$ in a sufficiently large universe, precomposition induces a functor equivalence\n$$c_{X,Y}^{*}:\\operatorname{Fun}(X\\star Y,\\mathcal E)\\longrightarrow\\operatorname{Fun}(X\\diamond Y,\\mathcal E).$$\nHere functor equivalence has the quasi-inverse and coherent natural equivalence meaning of the cited definition. No quasicategory, nonemptiness or finiteness assumption is imposed on $X$ or $Y$.",
+ "source": {
+  "document": "https://kerodon.net/tag/05YH",
+  "place": "Example 4.6.4.9, functor-category formulation of the blunt-to-sharp categorical equivalence (Theorem 4.6.2.8); the comparison is defined in Notation 4.6.2.3. Read the example and both referenced statements online 2026-10-17. Kerodon, not the Stacks Project; not archived under literature/."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any simplicial sets X and Y the comparison from their fat or blunt join to their ordinary sharp join induces an equivalence of functor quasicategories into every quasicategory",
+   "results": "{\"t\": \"2026-10-16T17:28:26Z\", \"tool\": \"leanfinder\", \"query\": \"For any simplicial sets X and Y the comparison from their fat or blunt join to their ordinary sharp join induces an equivalence of functor quasicategories into every quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.isEquivalenceMapPair\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.Join.isoMkFunctor\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\", \"SSet.Truncated.HomotopyCategory.functorEquiv\"], \"digest\": \"f0d174e66e166fcf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits and Mathlib/CategoryTheory/Join/Basic.lean:624-653 (mapPairEquiv and isEquivalenceMapPair), and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:280-301. The join declarations compare joins of ordinary categories under equivalences of their factors; the nerve adjunction only treats ordinary nerves. Neither is the blunt-to-sharp comparison for arbitrary simplicial sets into arbitrary quasicategories. Loogle returns neighborhood-filter declarations; the focused simplicial-source grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"join\"",
+   "results": "{\"t\": \"2026-10-16T17:28:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"disjoint_nhdsSet_principal\", \"disjoint_principal_nhdsSet\", \"SeparatedNhds.disjoint_nhdsSet\", \"IsCompact.disjoint_nhdsSet_left\", \"IsCompact.disjoint_nhdsSet_right\", \"nhdsSet_prod_le_of_disjoint_cocompact\", \"prod_nhdsSet_le_of_disjoint_cocompact\", \"IsCompact.disjoint_nhdsSet_nhds\"], \"digest\": \"f4b4f5f75c1ca3f3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits and Mathlib/CategoryTheory/Join/Basic.lean:624-653 (mapPairEquiv and isEquivalenceMapPair), and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:280-301. The join declarations compare joins of ordinary categories under equivalences of their factors; the nerve adjunction only treats ordinary nerves. Neither is the blunt-to-sharp comparison for arbitrary simplicial sets into arbitrary quasicategories. Loogle returns neighborhood-filter declarations; the focused simplicial-source grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "blunt|fat.?join|join.*categorical|categorical.*join",
+   "results": "{\"t\": \"2026-10-16T17:28:18Z\", \"tool\": \"grep\", \"query\": \"blunt|fat.?join|join.*categorical|categorical.*join\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits and Mathlib/CategoryTheory/Join/Basic.lean:624-653 (mapPairEquiv and isEquivalenceMapPair), and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:280-301. The join declarations compare joins of ordinary categories under equivalences of their factors; the nerve adjunction only treats ordinary nerves. Neither is the blunt-to-sharp comparison for arbitrary simplicial sets into arbitrary quasicategories. Loogle returns neighborhood-filter declarations; the focused simplicial-source grep has zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison map from the fat join of two simplicial sets to their join is a categorical equivalence",
+   "results": "{\"t\": \"2026-10-16T17:28:18Z\", \"tool\": \"leansearch\", \"query\": \"The canonical comparison map from the fat join of two simplicial sets to their join is a categorical equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.isEquivalenceMapPair\", \"CategoryTheory.Join.mapPairEquiv\", \"CategoryTheory.Join.mapPairEquiv_inverse\", \"CategoryTheory.Join.opEquiv\", \"CategoryTheory.Join.mapPairEquiv_functor\", \"CategoryTheory.Join.mapPair\", \"CategoryTheory.Join.inclRightFullyFaithful\", \"CategoryTheory.Join.mkNatIso_hom\"], \"digest\": \"4819afc58bb39fd9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits and Mathlib/CategoryTheory/Join/Basic.lean:624-653 (mapPairEquiv and isEquivalenceMapPair), and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:280-301. The join declarations compare joins of ordinary categories under equivalences of their factors; the nerve adjunction only treats ordinary nerves. Neither is the blunt-to-sharp comparison for arbitrary simplicial sets into arbitrary quasicategories. Loogle returns neighborhood-filter declarations; the focused simplicial-source grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along the fat join to join comparison is an equivalence of infinity categories of diagrams",
+   "results": "{\"t\": \"2026-10-16T17:28:28Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction along the fat join to join comparison is an equivalence of infinity categories of diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsEquivalenceLightDiagram'LightDiagramToLightFunctor\", \"CategoryTheory.Join.isEquivalenceMapPair\", \"CategoryTheory.Join.structuredArrowEquiv\", \"CategoryTheory.Join.mapPairEquiv\", \"CategoryTheory.Join.costructuredArrowEquiv\", \"CategoryTheory.Join.isoMkFunctor\", \"CategoryTheory.Join.inclRightFullyFaithful\", \"CategoryTheory.Join.mapPairEquiv_functor\"], \"digest\": \"399996f4b026ca55\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits and Mathlib/CategoryTheory/Join/Basic.lean:624-653 (mapPairEquiv and isEquivalenceMapPair), and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:280-301. The join declarations compare joins of ordinary categories under equivalences of their factors; the nerve adjunction only treats ordinary nerves. Neither is the blunt-to-sharp comparison for arbitrary simplicial sets into arbitrary quasicategories. Loogle returns neighborhood-filter declarations; the focused simplicial-source grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "isEquivalenceMapPair|def mapPairEquiv",
+   "results": "{\"t\": \"2026-10-16T17:28:50Z\", \"tool\": \"grep\", \"query\": \"isEquivalenceMapPair|def mapPairEquiv\", \"sub\": \"CategoryTheory/Join/Basic.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"634\", \"651\"], \"digest\": \"02601c77ae3f8b6a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits and Mathlib/CategoryTheory/Join/Basic.lean:624-653 (mapPairEquiv and isEquivalenceMapPair), and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:280-301. The join declarations compare joins of ordinary categories under equivalences of their factors; the nerve adjunction only treats ordinary nerves. Neither is the blunt-to-sharp comparison for arbitrary simplicial sets into arbitrary quasicategories. Loogle returns neighborhood-filter declarations; the focused simplicial-source grep has zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-slice-arrow-equivalence",
+  "date": "2026-10-17",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

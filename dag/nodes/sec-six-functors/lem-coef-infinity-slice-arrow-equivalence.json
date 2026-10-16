@@ -28,9 +28,93 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the actual map and its equation over the base, using the degreewise constructions of [def-cbc-enhanced-diagrams-cones]. For every $\\alpha:[m]\\to[n]$, one has $\\rho_n(\\alpha\\times\\mathrm{id})=\\alpha^+\\rho_m$: both maps take $(a,0)$ to $\\alpha(a)$ and $(a,1)$ to $n+1$. Thus $\\sigma\\mapsto\\sigma\\rho_n$ commutes with every simplicial operator. Its restriction to the top layer is the constant simplex at $y$, so it lies in $T_y$; its restriction to the bottom layer is the entire initial face of $\\sigma$. Consequently $q_y\\delta_y=p_y$ as simplicial maps, including all degeneracies. Factor interchange changes only the order of coordinates in the internal-hom convention.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02GH",
+    "place": "Construction 4.6.4.15; explicit formula for the point-indexed slice diagonal."
+   }
+  },
+  {
+   "text": "The join slice $S_y$ is a quasicategory directly from the inner-horn axiom in [def-cbc-enhanced-diagrams-cones]. More precisely $p_y$ is a right fibration: a right-horn lifting problem with $\\Lambda_i^m\\hookrightarrow\\Delta^m$, $0<i\\leq m$, specifies the initial $m$-face in $\\mathcal C$ from the base simplex and all coned faces except the $i$th from the slice horn. Their intersections agree, so together they are $\\Lambda_i^{m+1}\\to\\mathcal C$. This horn is inner since $0<i<m+1$, and its filler gives the slice lift. For an inner horn in $S_y$, first fill its projection in $\\mathcal C$ and then use this right-fibration lifting property. For $T_y$, [lem-coef-infinity-arrow-target-right-fibration] applies to precisely the given arrow pullback and says $q_y$ is a right fibration. Fill the projection of any inner horn in $T_y$ in $\\mathcal C$ and lift that filler along $q_y$. Thus both total spaces are quasicategories; no assumptions on their fibers are needed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-arrow-target-right-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KQ",
+    "place": "Proposition 4.6.4.13 for the fixed-target arrow projection; the right-slice horn calculation expands Kerodon Proposition 4.3.6.1 (018F)."
+   }
+  },
+  {
+   "text": "For any small simplicial set $J$, form its right cone $J^{\\triangleright}$ by concatenating simplices of $J$ with constant simplices at a new last vertex $*$. Let $\\mathcal A_J=\\operatorname{Fun}(J^{\\triangleright},\\mathcal C)\\times_{\\mathcal C}\\{y\\}$, with projection evaluation at $*$. Maps $e:J\\to S_y$ are in bijection with vertices $F_e$ of $\\mathcal A_J$: for every $a:\\Delta^n\\to J$ set $F_ea^{\\triangleright}=e_n(a)$; compatibility of these simplices is exactly $e\\alpha=\\alpha^+e$, and they cover the cone. Conversely restrict a cone map to these coned simplices. Also define the blunt right cone $B_J=(J\\times\\Delta^1)\\amalg_{J\\times\\{1\\}}\\{*\\}$. A vertex of $\\operatorname{Fun}(J,T_y)$ is exactly a map $B_J\\to\\mathcal C$ sending $*$ to $y$: transpose the internal functor by the product rule in [def-cbc-enhanced-diagrams-cones]. In every parameter degree $r$ the same rule identifies $\\operatorname{Fun}(J,T_y)$ with the strict fiber at $y$ of $\\operatorname{Fun}(B_J,\\mathcal C)$. The comparison $c_J:B_J\\to J^{\\triangleright}$ sends $(a,t)$ to the concatenation of the initial $0$-block of $t$ with the last-vertex $1$-block. On the cone on $a:\\Delta^n\\to J$ this is exactly $\\rho_n$. Hence precomposition by $c_J$ sends $F_e$ to the vertex $\\delta_y e$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02GH",
+    "place": "Construction 4.6.4.15 and Remark 4.6.4.16; explicit specialization of blunt and ordinary joins to a point. This is a degreewise universal-property calculation, not an assertion that the two diagram simplicial sets in the first bijection are isomorphic."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-blunt-sharp-join-equivalence] with $X=J$, $Y=\\Delta^0$, and $\\mathcal E=\\mathcal C$. Its sharp and blunt joins are precisely $J^{\\triangleright}$ and $B_J$ from step 3, and its comparison restricts on every coned simplex to $\\rho_n$. It gives a functor equivalence\n$$u_J:\\operatorname{Fun}(J^{\\triangleright},\\mathcal C)\\longrightarrow\\operatorname{Fun}(B_J,\\mathcal C).$$\nBoth restriction maps to the distinguished vertex $\\{*\\}$ are isofibrations between quasicategories by [lem-coef-infinity-isofibration-exponentiation], applied to the degreewise injective inclusions $\\{*\\}\\hookrightarrow J^{\\triangleright}$ and $\\{*\\}\\hookrightarrow B_J$. Identify $\\operatorname{Fun}(\\Delta^0,\\mathcal C)$ with $\\mathcal C$ by evaluation. Since $c_J$ is the identity on $\\{*\\}$, these restrictions satisfy $\\operatorname{ev}_*u_J=\\operatorname{ev}_*$ strictly. Apply [lem-coef-infinity-isofibration-base-change] with these two restriction maps, base $\\mathcal S=\\mathcal C$, test quasicategory $\\mathcal R=\\Delta^0$, and $h(*)=y$. Its conclusion gives an equivalence of the ordinary simplicial fibers\n$$r_J:\\mathcal A_J\\longrightarrow\\operatorname{Fun}(B_J,\\mathcal C)\\times_{\\operatorname{ev}_*,\\mathcal C}\\{y\\}\\cong\\operatorname{Fun}(J,T_y).$$\nThe last isomorphism is the degreewise calculation in step 3. Thus $r_J$ sends $F_e$ to $\\delta_y e$, and the cone vertex is constant throughout each parameter simplex. This uses base change along two isofibrations, not preservation of arbitrary strict fibers by an equivalence.",
+   "uses": [
+    "lem-coef-infinity-blunt-sharp-join-equivalence",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KU",
+    "place": "Proof of Theorem 4.6.4.19, final diagram: Theorem 4.6.2.8 (01HV), restriction isofibrations (01F3), and invariance of isofibration pullbacks (03PM). Point-indexed specialization with all fiber maps identified."
+   }
+  },
+  {
+   "text": "By [lem-cbc-internal-hom-quasicategory] and step 2, $\\operatorname{Fun}(J,S_y)$ and $\\operatorname{Fun}(J,T_y)$ are quasicategories for every small $J$. The fiber category $\\mathcal A_J$ is a quasicategory by step 4's base-change theorem. Pass to equivalence classes of vertices, where two vertices represent the same class when there is a coherent natural equivalence between them. For $\\operatorname{Fun}(J,S_y)$ and $\\mathcal A_J$, [lem-coef-join-slice-diagram-isomorphisms] says exactly that the object bijection $e\\mapsto F_e$ from step 3 preserves and reflects this relation. Hence it induces a bijection of classes. The functor $r_J$ of step 4 also induces a bijection of classes: a quasi-inverse gives surjectivity and, applied to an equivalence between two images and followed by the inverse's natural equivalence with the identity, gives injectivity. By $r_J(F_e)=\\delta_y e$, their composite is precisely the map induced by postcomposition with $\\delta_y$. Therefore this postcomposition is bijective on equivalence classes of $J$-diagrams for every small $J$. All equivalences of cone diagrams fix the vertex throughout. The equivalence convention is that of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-cbc-internal-hom-quasicategory",
+    "lem-coef-join-slice-diagram-isomorphisms",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KU",
+    "place": "Proof of Theorem 4.6.4.19, the displayed map on components of functor cores, with Lemma 4.6.4.25 (01KV) specialized to a point; expanded as classes of naturally equivalent objects."
+   }
+  },
+  {
+   "text": "Use that bijectivity only for $J=T_y$ and $J=S_y$, both small quasicategories by step 2. Surjectivity for $J=T_y$ produces $g:T_y\\to S_y$ and a coherent natural equivalence $\\delta_yg\\simeq\\mathrm{id}_{T_y}$. Whisker this equivalence on the right by $\\delta_y$. This gives a coherent natural equivalence between $\\delta_y(g\\delta_y)$ and $\\delta_y=\\delta_y\\mathrm{id}_{S_y}$; the inverse and its two triangle witnesses are whiskered by the same substitution. Injectivity for $J=S_y$ now gives $g\\delta_y\\simeq\\mathrm{id}_{S_y}$. These are exactly the quasi-inverse and the two coherent natural equivalences in [def-cbc-enhanced-diagrams-cones], so $\\delta_y$ is an equivalence. Its strict equation over $\\mathcal C$ was already verified in step 1. The assertion requires no chosen quasi-inverse over $\\mathcal C$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01KU",
+    "place": "Proof of Theorem 4.6.4.19; agent expansion of equivalence recognition from bijectivity on diagram isomorphism classes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-internal-hom-quasicategory",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-blunt-sharp-join-equivalence",
+  "lem-coef-infinity-isofibration-base-change",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-join-slice-diagram-isomorphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01KU",
+  "place": "Proof of Theorem 4.6.4.19 specialized to K=Delta^0, yielding Corollary 4.6.4.20 (02VT). The generic blunt-to-sharp comparison, restriction isofibrations and base-change invariance are separate cited statements; the diagonal, object correspondence and quasi-inverse argument are expanded here. Online sources not archived under literature/, see report WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -94,15 +178,74 @@
    "results": "{\"t\": \"2026-10-16T14:02:32Z\", \"tool\": \"grep\", \"query\": \"RightFibration|IsRightFibration|rightFibration|right_fibration|slice.*diagonal|fat.*slice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: read CategoryTheory/Comma/Over/Basic.lean:365-389,600-618. CostructuredArrow.isEquivalence_toOver and Over.iteratedSliceEquiv concern ordinary categories, while nerve.homEquiv concerns only nerve edges. The two Loogle hits concern compact topological spaces and open covers; neither has simplicial sets or quasicategories among its hypotheses. The independent full-source grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasicategory the join slice over a vertex is equivalent by the slice diagonal to the arrow category with fixed target",
+   "results": "{\"t\": \"2026-10-16T14:36:09Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasicategory the join slice over a vertex is equivalent by the slice diagonal to the arrow category with fixed target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.ofDiagEquivalence'\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.Join.costructuredArrowEquiv\", \"CategoryTheory.nerve.homEquiv_apply\", \"CategoryTheory.Over.iteratedSliceEquiv\", \"CategoryTheory.nerve.mk₁_homEquiv_apply\", \"CategoryTheory.Join.structuredArrowEquiv\", \"CategoryTheory.CostructuredArrow.isEquivalence_toOver\"], \"digest\": \"6267b8b727f2dc6e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Comma/Over/Basic.lean:365-389,600-618,1372-1405 and WithTerminal/Cone.lean:35-54,108-120. These results concern ordinary categories, or cones on ordinary-category diagrams, rather than arbitrary quasicategories. NerveAdjunction.lean:283-300 concerns maps into ordinary nerves and gives no relative join-slice theorem. The focused simplicial-source grep found zero matches. The Loogle query has no simplicial match; its only returned declarations, when nonempty, are neighborhood-filter lemmas about nhdsSet. The second semantic phrasing likewise supplies no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"slice\"",
+   "results": "{\"t\": \"2026-10-16T14:36:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"slice\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Comma/Over/Basic.lean:365-389,600-618,1372-1405 and WithTerminal/Cone.lean:35-54,108-120. These results concern ordinary categories, or cones on ordinary-category diagrams, rather than arbitrary quasicategories. NerveAdjunction.lean:283-300 concerns maps into ordinary nerves and gives no relative join-slice theorem. The focused simplicial-source grep found zero matches. The Loogle query has no simplicial match; its only returned declarations, when nonempty, are neighborhood-filter lemmas about nhdsSet. The second semantic phrasing likewise supplies no match."
+  },
+  {
+   "tool": "grep",
+   "query": "sliceDiagonal|fatSlice|overcategory|slice.*[Ee]quiv|[Ee]quiv.*slice",
+   "results": "{\"t\": \"2026-10-16T14:36:02Z\", \"tool\": \"grep\", \"query\": \"sliceDiagonal|fatSlice|overcategory|slice.*[Ee]quiv|[Ee]quiv.*slice\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Comma/Over/Basic.lean:365-389,600-618,1372-1405 and WithTerminal/Cone.lean:35-54,108-120. These results concern ordinary categories, or cones on ordinary-category diagrams, rather than arbitrary quasicategories. NerveAdjunction.lean:283-300 concerns maps into ordinary nerves and gives no relative join-slice theorem. The focused simplicial-source grep found zero matches. The Loogle query has no simplicial match; its only returned declarations, when nonempty, are neighborhood-filter lemmas about nhdsSet. The second semantic phrasing likewise supplies no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The slice diagonal compares the join overcategory to the fixed target fiber of the arrow infinity category",
+   "results": "{\"t\": \"2026-10-16T14:36:03Z\", \"tool\": \"leansearch\", \"query\": \"The slice diagonal compares the join overcategory to the fixed target fiber of the arrow infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullback.diagonal\", \"CategoryTheory.Join.inclRightFullyFaithful\", \"CategoryTheory.Arrow.hasLimit\", \"CategoryTheory.Join.costructuredArrowEquiv\", \"CategoryTheory.Limits.pullback.diagonalObj\", \"CategoryTheory.StructuredArrow.ofDiagEquivalence'\", \"CategoryTheory.CostructuredArrow.commaToGrothendieckPrecompFunctor_obj_fiber\", \"CategoryTheory.Over.iteratedSliceEquiv_counitIso\"], \"digest\": \"18231a015274903e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Comma/Over/Basic.lean:365-389,600-618,1372-1405 and WithTerminal/Cone.lean:35-54,108-120. These results concern ordinary categories, or cones on ordinary-category diagrams, rather than arbitrary quasicategories. NerveAdjunction.lean:283-300 concerns maps into ordinary nerves and gives no relative join-slice theorem. The focused simplicial-source grep found zero matches. The Loogle query has no simplicial match; its only returned declarations, when nonempty, are neighborhood-filter lemmas about nhdsSet. The second semantic phrasing likewise supplies no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fat overcategory and the join model of an infinity category over an object are equivalent quasicategories",
+   "results": "{\"t\": \"2026-10-16T14:36:10Z\", \"tool\": \"leanfinder\", \"query\": \"The fat overcategory and the join model of an infinity category over an object are equivalent quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.costructuredArrowEquiv\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.Join.structuredArrowEquiv\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Nerve.cosk₂Iso\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.QCat\"], \"digest\": \"2d41af794dd36a3f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Comma/Over/Basic.lean:365-389,600-618,1372-1405 and WithTerminal/Cone.lean:35-54,108-120. These results concern ordinary categories, or cones on ordinary-category diagrams, rather than arbitrary quasicategories. NerveAdjunction.lean:283-300 concerns maps into ordinary nerves and gives no relative join-slice theorem. The focused simplicial-source grep found zero matches. The Loogle query has no simplicial match; its only returned declarations, when nonempty, are neighborhood-filter lemmas about nhdsSet. The second semantic phrasing likewise supplies no match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-pinch-comparison",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-slice-arrow-equivalence",
+  "worker": "stage1",
+  "summary": "Repair of returned head 0449e8799f: rebased the sandbox fields against the current read-only DAG; replaced the backward cone-calculus route with the general blunt-to-sharp join comparison followed by existing restriction-isofibration and base-change lemmas. Removed the unlanded fixed-vertex comparison specialization. Added the independent internal-hom closure citation, regenerated verbatim citations, and rechecked all current dependency statements. The specified diagonal and full item statement are unchanged.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 and its displayed derived coefficient adjunction, also present in main-20261015/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md. The inherited via chain records generic coherent-diagram infrastructure; Kerodon supplies this auxiliary slice comparison. No chapter or unit route, coefficient category, target or base-change morphism is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-internal-hom-quasicategory",
+    "why": "Generic closure of internal functor simplicial sets under the inner-horn condition, used in step 5; the local unit supplies no such closure statement. This is a tool and does not replace a geometric step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-internal-hom-quasicategory"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, and checked Kerodon online (it is not archived): 01HV (Thm 4.6.2.8), 01KV (Lemma 4.6.4.25) and 02VT (Cor 4.6.4.20). The item statement is Cor 4.6.4.20 with the strict q_y delta_y = p_y. S_y is C_{/y}. T_y is the oriented fiber product C x_C {y}, whose n-simplices are the maps from Delta^n blunt-joined with Delta^0. rho_n is the comparison c, so delta_y is the 02GH slice diagonal. Nothing is weakened, and no coefficient category or base-change morphism is involved. Step 1: rho_n(alpha x id) = alpha^+ rho_m holds on both layers. Step 2: the base face plus all coned faces except d_i make Lambda^{m+1}_i, which is inner because i <= m < m+1. So p_y is a right fibration without the cyclic slice-right-fibration node, and q_y is a right fibration exactly as the arrow-target node states. Step 3: the join-slice correspondence holds degreewise. Fun(J,T_y) is the strict fiber at y of Fun(B_J,C) because products preserve the pushout, and c_J^* F_e = delta_y e. Step 4: every hypothesis of isofibration-exponentiation (the 'in particular' clause) and of isofibration-base-change holds (base C, R = Delta^0, h = y), and the pullbacks are A_J and Fun(J,T_y). Step 5: lem-cbc-internal-hom-quasicategory is a Mathlib leaf, and its tool_use is accepted. The new 01KV node is exactly Lemma 4.6.4.25 with K = Delta^0 and F = y, since Fun_{K/}(J*K,C) = A_J. The bijection of equivalence classes follows. Step 6: the surjectivity, whiskering and injectivity argument gives the quasi-inverse in the sense of def-cbc. New node blunt-sharp-join-equivalence is the functor-category form of 01HV and is true; the empty cases are the identity. It is distinct from blunt-join-comparison (theta_i for a right anodyne i) and from join-cone-calculus (a fixed-point left cone, whose proof is cyclic). New node join-slice-diagram-isomorphisms: I tested J empty and J = Delta^0 with C the nerve of an ordinary category. Both new nodes are statement-only and self-contained, have correct blueprint from/via and real searches, and do not restate a clause of the item. The dependency closure has 12 nodes and no cycle. Only the item cites the new nodes. No SGA source is used. No fixes were needed."
+ }
 }
