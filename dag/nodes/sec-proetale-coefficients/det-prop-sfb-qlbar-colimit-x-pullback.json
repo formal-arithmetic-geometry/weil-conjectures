@@ -1,68 +1,270 @@
 {
-  "id": "det-prop-sfb-qlbar-colimit-x-pullback",
-  "blueprint": {
-    "is": "det-prop-sfb-qlbar-colimit-x-pullback",
-    "from": null,
-    "same_as": null
+ "id": "det-prop-sfb-qlbar-colimit-x-pullback",
+ "blueprint": {
+  "is": "det-prop-sfb-qlbar-colimit-x-pullback",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The coefficient comparisons commute with inverse image",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and a finite subextension $E\\subseteq\\Qlb$ with ring of integers $\\cO_E$ and uniformizer $\\pi_E$. Use the condensed coefficient rings of [sk-def-sfb-condensed-ring] and [sk-def-sfb-qlbar-condensed], and their pulled-back ring sheaves $\\Lambda_Z=p_Z^*\\Lambda$ of [sk-def-sfb-pulled-back-coefficients]. In particular, $E_Z$ and $\\overline{\\mathbf Q}_{\\ell,Z}$ are [def-sfb-subfield-coefficient-ring] and [def-sfb-qlbar-coefficient-ring]. The finite-subextension cocone is [def-sfb-qlbar-x-cocone].\n\nLet $f\\colon X\\to Y$ be a morphism of schemes and let\n$\\alpha_f\\colon f^{-1}\\Lambda_Y\\xrightarrow{\\sim}\\Lambda_X$ be the canonical isomorphism\ninduced by $p_Y\\circ f=p_X$ ([sk-def-sfb-pullback-from-point-comp]), for\n$\\Lambda=\\underline{\\cO_E},\\underline E,\\underline{\\Qlb}$. Index the integral system by $n\\ge1$. Then, under $\\alpha_f$ and the\ncanonical isomorphisms $f^{-1}(T_Y)\\cong T_X$ for constant sheaves:\n\n1. $f^{-1}$ of the isomorphism $\\cO_{E,Y}\\cong\\varprojlim_n(\\cO_E/\\pi_E^n)_Y$ is the\n   isomorphism $\\cO_{E,X}\\cong\\varprojlim_n(\\cO_E/\\pi_E^n)_X$\n   ([det-prop-sfb-qlbar-colimit-x-integral-limit]); in particular $f^{-1}$ carries the\n   limit $\\varprojlim_n(\\cO_E/\\pi_E^n)_Y$ to $\\varprojlim_n(\\cO_E/\\pi_E^n)_X$;\n2. $f^{-1}$ of $E_Y\\cong\\cO_{E,Y}[1/\\ell]$ is $E_X\\cong\\cO_{E,X}[1/\\ell]$\n   ([det-prop-sfb-qlbar-colimit-x-invert-ell]);\n3. $f^{-1}$ of $\\overline{\\mathbf Q}_{\\ell,Y}\\cong\\varinjlim_EE_Y$ is\n   $\\QbarX\\cong\\varinjlim_EE_X$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.md",
+  "place": "node det-prop-sfb-qlbar-colimit-x-pullback, order None"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-pullback-from-point-comp",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-subfield-coefficient-ring",
+  "def-sfb-qlbar-coefficient-ring",
+  "def-sfb-qlbar-x-cocone"
+ ],
+ "proof": [
+  {
+   "text": "Representable inverse images, including their maps. Write $h_V$ for the sheaf represented by $V\\in Y_{\\mathrm{proét}}$. It is a sheaf by [det-pe-topos-functoriality-site](2). For every sheaf of sets $G$ on $X$, adjunction and the formula for $f_*$ in [det-pe-topos-functoriality-inverse-image](2), followed by Yoneda [lem-galois-yoneda-hom-bijection], give\n$$\\operatorname{Hom}(f^{-1}h_V,G)=\\operatorname{Hom}(h_V,f_*G)=(f_*G)(V)=G(V\\times_YX)=\\operatorname{Hom}(h_{V\\times_YX},G).$$\nThe bijections are natural in $V$ and $G$, so $f^{-1}h_V\\cong h_{V\\times_YX}$, and a map $V\\to W$ pulls back to its base change. This last assertion follows directly by precomposing the displayed bijections with $h_V\\to h_W$ and using the naturality formula in the cited Yoneda statement.",
+   "uses": [
+    "det-pe-topos-functoriality-site",
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
+    "place": "second paragraph: inverse image of a representable; naturality made explicit"
+   }
   },
-  "kind": "statement",
-  "title": "The coefficient comparisons commute with inverse image",
-  "statement": "Let $f\\colon X\\to Y$ be a morphism of schemes and let\n$\\alpha_f\\colon f^{-1}\\Lambda_Y\\xrightarrow{\\sim}\\Lambda_X$ be the canonical isomorphism\ninduced by $p_Y\\circ f=p_X$ ([sk-def-sfb-pullback-from-point-comp]), for\n$\\Lambda=\\underline{\\cO_E},\\underline E,\\underline{\\Qlb}$. Then, under $\\alpha_f$ and the\ncanonical isomorphisms $f^{-1}(T_Y)\\cong T_X$ for constant sheaves:\n\n1. $f^{-1}$ of the isomorphism $\\cO_{E,Y}\\cong\\varprojlim_n(\\cO_E/\\pi_E^n)_Y$ is the\n   isomorphism $\\cO_{E,X}\\cong\\varprojlim_n(\\cO_E/\\pi_E^n)_X$\n   ([det-prop-sfb-qlbar-colimit-x-integral-limit]); in particular $f^{-1}$ carries the\n   limit $\\varprojlim_n(\\cO_E/\\pi_E^n)_Y$ to $\\varprojlim_n(\\cO_E/\\pi_E^n)_X$;\n2. $f^{-1}$ of $E_Y\\cong\\cO_{E,Y}[1/\\ell]$ is $E_X\\cong\\cO_{E,X}[1/\\ell]$\n   ([det-prop-sfb-qlbar-colimit-x-invert-ell]);\n3. $f^{-1}$ of $\\overline{\\mathbf Q}_{\\ell,Y}\\cong\\varinjlim_EE_Y$ is\n   $\\QbarX\\cong\\varinjlim_EE_X$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.md",
-    "place": "node det-prop-sfb-qlbar-colimit-x-pullback, order None"
-  },
-  "stmt_deps": [
-    "sk-def-sfb-pullback-from-point-comp",
+  {
+   "text": "Identify the integral cone and its coefficient isomorphism. For a profinite set $S$, [sk-def-sfb-pullback-from-point](2) writes $Z[S]=B(S)\\times_{\\operatorname{Spec}\\mathbf Z}Z$, where $B(S)=\\operatorname{Spec}LC(S,\\mathbf Z)$. Thus $Y[S]\\times_YX\\cong X[S]$, naturally in $S$, by associating these fibre products. By Step 1 and [det-prop-sfb-qlbar-colimit-x-integral-limit](1),(2), the inverse images of the representing sheaves for $Y[\\cO_E]$ and $Y[\\cO_E/\\pi_E^n]$ are those for $X[\\cO_E]$ and $X[\\cO_E/\\pi_E^n]$.\n\nHere is the check of the chosen identifications and their maps on abelian sheaves. For any of the profinite rings $S=\\cO_E$ or $\\cO_E/\\pi_E^n$, the condensed set underlying $\\underline S$ is $h_S$. By the adjunction in [sk-def-sfb-pullback-from-point](4) and [lem-galois-yoneda-hom-bijection], maps $p_Z^*\\underline S\\to G$ of abelian sheaves correspond to elements $\\xi\\in G(Z[S])$ satisfying\n$$G(Z[+])(\\xi)=G(Z[\\mathrm{pr}_1])(\\xi)+G(Z[\\mathrm{pr}_2])(\\xi),\\qquad G(Z[0])(\\xi)=0.$$\nThese are exactly the conditions that the transformation represented by $\\xi$ be additive. Since $u_Z$ preserves finite products, Yoneda gives the same description for maps from $h_{Z[S]}$, endowed with the group operations induced by $S$, to $G$. This constructs the canonical representing identification in the integral-limit statement. Precomposing with a continuous ring map $S\\to T$ replaces $\\xi\\in G(Z[T])$ by its restriction along $Z[S]\\to Z[T]$. In particular the reduction and transition maps are the maps of these representing schemes, and the finite-level identifications are the canonical constant-sheaf identifications.\n\nFinally [def-sfb-finite-upper-star-comp] defines the composition isomorphism by taking the mate of the right-adjoint composition map; [def-sfb-finite-lower-star-comp] gives that map as restriction along the associativity isomorphism of fibre products. After the restriction to the point in [sk-def-sfb-pullback-from-point](4), its value is exactly $G(Y[S]\\times_YX)=G(X[S])$. Under the preceding Yoneda descriptions this sends each universal element to the same universal element on the associated fibre product. Therefore the representing-sheaf base-change identification is the component $\\alpha_f$ defined in [sk-def-sfb-pullback-from-point-comp], with the same equality for every reduction map.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point",
     "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell"
-  ],
-  "proof": [
-    {
-      "text": "(2) and (3). The isomorphisms are $p_Y^*$, resp. $p_X^*$, applied to the colimit\npresentations $\\underline E=\\varinjlim(\\underline{\\cO_E}\\xrightarrow{\\ell}\\cdots)$ and\n$\\underline{\\Qlb}=\\varinjlim_E\\underline E$ on the point. Since\n$f^{-1}\\circ p_Y^*\\cong p_X^*$ by the natural isomorphism $\\alpha$ of\n[sk-def-sfb-pullback-from-point-comp], and $f^{-1}$ preserves colimits (it is a left\nadjoint), $f^{-1}$ of the colimit presentation over $Y$ is identified, via the components\nof $\\alpha$, with the colimit presentation over $X$. Naturality of $\\alpha$ in the\ncondensed ring gives the compatibility of all structure maps.",
-      "uses": [
-        "sk-def-sfb-pullback-from-point-comp"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "(1). For $V\\in Y_{\\mathrm{proét}}$, the inverse image $f^{-1}$ of the sheaf represented by\n$V$ is the sheaf represented by $V\\times_YX$ (inverse image along the continuous,\nfinite-limit preserving base change functor, and subcanonicity). Apply this to\n$V=Y[\\cO_E]=\\varprojlim_n\\coprod_{\\cO_E/\\pi_E^n}Y$: since fibre products commute with\nlimits, $Y[\\cO_E]\\times_YX=\\varprojlim_n\\coprod_{\\cO_E/\\pi_E^n}X=X[\\cO_E]$. Likewise\n$f^{-1}$ of the sheaf represented by $\\coprod_{\\cO_E/\\pi_E^n}Y$ is represented by\n$\\coprod_{\\cO_E/\\pi_E^n}X$, i.e. $f^{-1}((\\cO_E/\\pi_E^n)_Y)=(\\cO_E/\\pi_E^n)_X$. Hence $f^{-1}$\nof the representing-scheme identification of\n[det-prop-sfb-qlbar-colimit-x-integral-limit] over $Y$ is the one over $X$, and, as\n$X[\\cO_E]$ represents $\\varprojlim_n(\\cO_E/\\pi_E^n)_X$, $f^{-1}$ preserves this particular\nlimit. The identification of the representing scheme with $p_X^*\\underline{\\cO_E}$ is the\ncomponent of $\\alpha_f$ at $\\underline{\\cO_E}$, because both come from\n$u_Y(S)\\times_YX=u_X(S)$ for profinite $S$. Ring structures match by naturality.",
-      "uses": [
-        "det-prop-sfb-qlbar-colimit-x-integral-limit"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
     "sk-def-sfb-pullback-from-point-comp",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.md",
-    "place": "## Proof"
+    "lem-galois-yoneda-hom-bijection",
+    "def-sfb-finite-upper-star-comp",
+    "def-sfb-finite-lower-star-comp",
+    "sk-def-sfb-condensed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
+    "place": "second paragraph: representing schemes and identification with the component of alpha"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "in_cycle"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
+  {
+   "text": "Conclude (1) by the limit universal property. Put $A_{n,Z}=(\\cO_E/\\pi_E^n)_Z$, and let $\\beta_Z:\\cO_{E,Z}\\xrightarrow{\\sim}\\lim_n A_{n,Z}$ be [det-prop-sfb-qlbar-colimit-x-integral-limit](3). Let $c:f^{-1}(\\lim_n A_{n,Y})\\to\\lim_n A_{n,X}$ be the canonical comparison whose $n$-th projection is $f^{-1}$ of the $n$-th projection, followed by the finite-level identification of Step 2. That step gives, for each $n$, equality of the projections of $c\\circ f^{-1}\\beta_Y$ and $\\beta_X\\circ\\alpha_f$. Hence $c\\circ f^{-1}\\beta_Y=\\beta_X\\circ\\alpha_f$. All three other arrows are isomorphisms, so $c$ is an isomorphism. This proves preservation of this particular inverse limit. The reductions preserve $0,1,+,\\cdot$, so their componentwise equalities prove the equality as ring maps as well.",
+   "uses": [
     "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "sk-def-sfb-pullback-from-point-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
+    "place": "second paragraph: compatibility of the limit comparisons and their ring structures"
+   }
+  },
+  {
+   "text": "For (2), use the actual localization cocone. Write $\\varphi_Z:\\cO_{E,Z}\\to E_Z$ for [def-sfb-integers-to-subfield]. The isomorphism of [det-prop-sfb-qlbar-colimit-x-invert-ell] has legs $\\ell^{-m}\\varphi_Z$. Naturality of [sk-def-sfb-pullback-from-point-comp] gives $\\alpha_{f,E}\\circ f^{-1}\\varphi_Y=\\varphi_X\\circ\\alpha_{f,\\cO_E}$. These additive maps commute with multiplication by $\\ell$, and with its inverse on $E_Z$; consequently the same equality holds with $\\varphi$ replaced by $\\ell^{-m}\\varphi$, for every $m$. Use the module colimit in the localization statement in its stated category. For $\\Lambda=\\underline{\\cO_E}$, [def-sfb-module-upper-star] gives module pullback as $B\\otimes_A f^{-1}M$, where $A=f^{-1}\\cO_{E,Y}$ and $B=\\cO_{E,X}$. Since $\\alpha_{f,\\cO_E}:A\\cong B$, the balanced maps $b\\otimes m\\mapsto\\alpha_{f,\\cO_E}^{-1}(b)m$ and $m\\mapsto1\\otimes m$ are inverse; hence its underlying abelian sheaf is $f^{-1}M$, with the scalar action specified through $\\alpha$. The adjunction of [def-sfb-module-upper-lower-adjunction] preserves the localization colimit: for any $B$-module $N$, maps from its pulled-back vertex to $N$ correspond to maps from the original vertex to $f_*N$, and therefore to compatible maps from each original term to $f_*N$, and then to compatible maps from each pulled-back term to $N$. Thus the identified cocone is a colimit in $B$-modules. The two maps from its colimit to $E_X$ agree on each leg, hence agree by uniqueness of a map from a colimit. Their inverses give exactly the orientation in (2); monoidality of the cited composition isomorphism identifies the ring structures.",
+   "uses": [
+    "def-sfb-integers-to-subfield",
     "det-prop-sfb-qlbar-colimit-x-invert-ell",
     "sk-def-sfb-pullback-from-point-comp",
-    "sk-prop-sfb-cartesian-coefficients"
-  ],
-  "uses_not_cited": [
-    "sk-prop-sfb-cartesian-coefficients"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015",
-  "blueprint_forward_refs": [
-    "sk-prop-sfb-cartesian-coefficients"
+    "def-sfb-module-upper-star",
+    "def-sfb-module-upper-lower-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
+    "place": "first paragraph: localization presentation and compatibility of every structure map"
+   }
+  },
+  {
+   "text": "Record directly the point-colimit universal property used in (3). Let $Q=\\underline{\\Qlb}$ with the finite-subextension definition of [sk-def-sfb-qlbar-condensed]. For a cocone of additive sheaf maps $t_E:\\underline E\\to H$, define $t_S(a)=(t_E)_S(a)$ whenever $a(S)\\subseteq E$. Such an $E$ exists by the definition of $Q(S)$, and corestriction to $E$ is continuous because $E$ has the subspace topology specified in [sk-def-sfb-condensed-ring]. If two fields work, their finite compositum works and the cocone equalities identify the two values. The same common-field argument proves additivity, and precomposition proves naturality in $S$. Thus $t:Q\\to H$ is the unique additive sheaf map extending all $t_E$. This is the colimit universal property in abelian sheaves. The diagram and its legs are precisely [def-sfb-qlbar-subextension-map] and [def-sfb-qlbar-subextension-to-qlbar]. The index is a set: its objects are subfields of the fixed set $\\Qlb$, so no large-category colimit is being assumed.",
+   "uses": [
+    "sk-def-sfb-qlbar-condensed",
+    "sk-def-sfb-condensed-ring",
+    "def-sfb-qlbar-subextension-map",
+    "def-sfb-qlbar-subextension-to-qlbar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/sk-prop-sfb-qlbar-colimit-point.proof.md",
+    "place": "point-colimit proof: union of finite-subextension-valued sections"
+   }
+  },
+  {
+   "text": "For (3), first apply the adjunction in [sk-def-sfb-pullback-from-point](4) to Step 5. Maps $p_Z^*Q\\to H$ correspond to maps $Q\\to p_{Z*}H$, hence to compatible maps $\\underline E\\to p_{Z*}H$, hence to compatible maps $E_Z\\to H$. Thus [def-sfb-qlbar-x-cocone] is a colimit cocone. Under [sk-def-sfb-pullback-from-point-comp], naturality for each inclusion $\\underline E\\to\\underline F$ identifies the diagrams after $f^{-1}$, and naturality for every $j_E:\\underline E\\to Q$ identifies their legs:\n$$\\alpha_{f,Q}\\circ f^{-1}(p_Y^*j_E)=p_X^*j_E\\circ\\alpha_{f,E}.$$\nTo check colimit preservation in abelian sheaves, use [def-sfb-finite-upper-lower-star-adjunction] with $\\mathcal A=\\Ab$: maps from $f^{-1}$ of the vertex to an abelian sheaf $H$ correspond to maps from the vertex to $f_*H$, hence to compatible maps from all $E_Y$ to $f_*H$, hence to compatible maps from all $f^{-1}E_Y$ to $H$. This proves the pulled-back cocone is a colimit in the required category. The displayed leg equalities identify it with the colimit cocone over $X$. Equality on its legs proves equality of the comparison isomorphisms, giving (3). To check that the colimits here are colimits of rings as asserted, use [sk-def-sfb-sheaf-tensor](2): tensor product preserves colimits in both arguments. Thus maps out of the tensor square of either colimit are determined by their composites with every pair of legs $E_Z\\otimes F_Z$. Choose a finite compositum $K$ containing $E$ and $F$. On this pair the multiplication is the composite through $K_Z\\otimes K_Z\\to K_Z$, followed by its leg. Any ring cocone therefore induces an additive map from the colimit which respects multiplication: both proposed multiplication maps agree on each such pair by this formula. It preserves the unit because every leg preserves the unit, so it is the unique ring map extending the cocone. For the pulled-back diagram, monoidality of $\\alpha$ identifies this same formula with the one over $X$. The equality of comparison maps already proved on individual legs is consequently an equality of the canonical ring comparison maps.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point",
+    "def-sfb-qlbar-x-cocone",
+    "sk-def-sfb-pullback-from-point-comp",
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
+    "place": "first paragraph: finite-subextension colimit and compatibility of all structure maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-topos-functoriality-site",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-galois-yoneda-hom-bijection",
+  "sk-def-sfb-pullback-from-point",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "sk-def-sfb-pullback-from-point-comp",
+  "def-sfb-finite-upper-star-comp",
+  "def-sfb-finite-lower-star-comp",
+  "sk-def-sfb-condensed-ring",
+  "def-sfb-integers-to-subfield",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-upper-lower-adjunction",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-qlbar-subextension-map",
+  "def-sfb-qlbar-subextension-to-qlbar",
+  "def-sfb-qlbar-x-cocone",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "sk-def-sfb-sheaf-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
+  "place": "both proof paragraphs; expanded by adjunction, Yoneda, and cone/cocone universal properties"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical inverse image identifications of pro-etale coefficient sheaves from condensed rings commute with their integral inverse limit, localization and filtered colimit presentations",
+   "results": "Eight hits, led by LightCondensed.isoLocallyConstantOfIsColimit_inv and Condensed.isoLocallyConstantOfIsColimit_inv, concern locally constant presheaves, not this coefficient-comparison statement.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "padicAlgCl|upperStarFromPoint|condensedPullbackHom",
+   "results": "Five hits in Mathlib/NumberTheory/Padics/Complex.lean, including PadicAlgCl at line 54; this defines an algebraic closure, not coefficient sheaf comparisons.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of pro-etale sheaves commutes with coefficient inverse limits and localization of p-adic integers",
+   "results": "Eight hits include Condensed.ofSheafProfinite, Condensed.isoLocallyConstantOfIsColimit, and equivalence-of-coherent-site formulas. None gives these three coefficient comparisons.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, ProEtale",
+   "results": "loogle: unknown identifier 'ProEtale'",
+   "date": "2026-10-16",
+   "verdict": "query rejected: loogle: unknown identifier 'ProEtale'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a natural isomorphism between inverse image functors identifies projection maps of a coefficient limit and structure maps of coefficient colimits",
+   "results": "Eight hits are general limit-colimit comparison identities (including CategoryTheory.Limits.ι_colimitLimitIso_limit_π and colimitHomIsoLimitYoneda_inv_comp_π), not this theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?[ée]tale|proEtale|proetale|padicSubfieldRingObj|isColimitPadicAlgCl",
+   "results": "Ten hits in Mathlib/AlgebraicGeometry/Sites/Proetale.lean and ElladicCohomology.lean. Read ellAdicSheaf and the cohomology definitions: these do not assert compatibility of these presentations.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.Limits.limitComparison",
+   "results": "loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-16",
+   "verdict": "query rejected: loogle: unknown identifier 'CategoryTheory.NatIso'"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colimitComparison",
+   "results": "loogle: unknown identifier 'CategoryTheory.Limits.colimitComparison'",
+   "date": "2026-10-16",
+   "verdict": "query rejected: loogle: unknown identifier 'CategoryTheory.Limits.colimitComparison'"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"iso\"",
+   "results": "Twelve hits in Mathlib.CategoryTheory.Limits.IsLimit, including IsColimit.uniqueUpToIso, ofIsoColimit, and coconePointUniqueUpToIso. General universal-property facts, not the coefficient comparison theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint between sheaf categories takes a representable sheaf to the representable of the image object and the comparison is natural in morphisms",
+   "results": "Eight hits include CategoryTheory.Sheaf.adjunction and CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous. Read Sites/Adjunction.lean and Sites/Pullback.lean: these give general adjunction constructions, not the three coefficient comparison compatibilities.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "padicAlgClRingObj|isColimitPadic|upperStarFromPointComp|IsColimit.ofIsoColimit",
+   "results": "25 displayed hits for the general IsColimit.ofIsoColimit API; no displayed hit states a coefficient comparison. The general cocone transport operation cannot supply the integral representing-scheme or coefficient-map identifications.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "in_cycle"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "sk-def-sfb-pullback-from-point-comp",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "uses_not_cited": [
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "blueprint_forward_refs": [
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-prop-sfb-qlbar-colimit-x-pullback",
+  "worker": "stage1",
+  "summary": "Expanded the representable inverse-image calculation and checked every projection and cocone leg. Removed the unused cyclic cartesian-coefficients dependency. Added explicit ambient coefficient parameters and definition dependencies. No new nodes: the point-colimit calculation is written as an elementary universal-property step from the finite-subextension definition; its blueprint theorem has no DAG file in this snapshot. Second reading added the explicit additive Yoneda and mate checks, used module adjunction for localization, and proved abelian colimit preservation with its own adjunction. The finite-subextension ring-colimit check now cites tensor colimit preservation and checks multiplication on pairs of legs.",
+  "blueprint": "Steps 1–3 realize the second paragraph (integral representable limit); Steps 4 and 6 realize the first paragraph (localization and filtered-colimit naturality); Step 5 writes out the point-colimit input.",
+  "tool_uses": [
+   {
+    "node": "det-pe-topos-functoriality-site",
+    "why": "Uses only subcanonicity to apply Yoneda to pro-etale representables."
+   },
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Generic inverse-image adjunction, pushforward formula, and colimit preservation needed for the coefficient presentations."
+   }
   ]
+ },
+ "tool_uses": [
+  "det-pe-topos-functoriality-site",
+  "det-pe-topos-functoriality-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-587e5beac",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-587e5beac (reviewer sub-agent of L); spot-checked: Read the complete mathematics and all 22 cited statements against current blueprint sources. Verified canonical α, finite-level projections, module-localization legs, and abelian/ring colimit comparisons; checked edge cases and dependency closures. No new nodes, cycles, duplicate statements, or repairs needed. Accepted both declared generic tool uses. Detailed checks are in review.md."
+ }
 }
