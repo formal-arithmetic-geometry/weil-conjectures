@@ -27,10 +27,14 @@ commuting with the structure isomorphisms.
 ## Stalks
 
 Let `Ω` be a separably closed field and `x̄ : Spec Ω ⟶ X` a geometric point which is fixed by
-`e` up to an automorphism `σ` of `Spec Ω`, that is `x̄ ≫ e = σ ≫ x̄`. The pullback `σ^*` on
-`Mod_{Spec Ω}` is canonically isomorphic to the identity
-(`ProEtale.CondensedRing.padicAlgClUpperStarIsoId`), so the stalk `x̄^* F` of a Weil sheaf is a
-Weil object for the identity functor `𝟭` of `Mod_{Spec Ω}`, with structure isomorphism
+`e` up to an endomorphism `σ` of `Spec Ω`, that is `x̄ ≫ e = σ ≫ x̄`. The pullback `σ^*` on
+`Mod_{Spec Ω}` is isomorphic to the identity
+(`ProEtale.CondensedRing.upperStarIsoIdOfIsSepClosed`): the pullback
+`p^* : Mod_{ℚ̲̄_ℓ} ⥤ Mod_{Spec Ω}` from condensed `ℚ̲̄_ℓ`-modules
+(`ProEtale.CondensedRing.upperStarFromPointMod`) is an equivalence and satisfies
+`p^* ⋙ σ^* ≅ p^*` (`ProEtale.CondensedRing.upperStarFromPointModComp`). So the stalk
+`x̄^* F` of a Weil sheaf is a Weil object for the identity functor `𝟭` of `Mod_{Spec Ω}`, with
+structure isomorphism
 ```
 x̄^* F ≅ σ^* x̄^* F ≅ (σ ≫ x̄)^* F = (x̄ ≫ e)^* F ≅ x̄^* e^* F --x̄^* φ_F--> x̄^* F,
 ```
@@ -57,18 +61,17 @@ Frobenius action is `ProEtale.CondensedRing.WeilSheaf.frobeniusStalkFunctor`.
 
 - `ProEtale.CondensedRing.WeilSheaf`: the category of Weil sheaves of `ℚ̄_ℓ`-modules.
 - `ProEtale.CondensedRing.WeilSheaf.stalkFunctor`: the stalk at a geometric point fixed by `e`
-  up to an automorphism of `Spec Ω`, a functor `WeilSheaf ℓ e ⥤ IsoAlgebra (𝟭 Mod_{Spec Ω})`.
+  up to an endomorphism of `Spec Ω`, a functor `WeilSheaf ℓ e ⥤ IsoAlgebra (𝟭 Mod_{Spec Ω})`.
 - `ProEtale.CondensedRing.WeilSheaf.frobeniusStalkFunctor`: the stalk of a Weil sheaf for the
   geometric Galois Frobenius at the geometric point over a `k`-rational point,
   a functor `WeilSheaf ℓ f.geometricFrobeniusOver ⥤ IsoAlgebra (𝟭 Mod_{Spec k̄})`.
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.padicAlgClUpperStarIsoId`: the pullback along an automorphism of the
-  spectrum of a separably closed field is isomorphic to the identity. The pro-étale site of
-  `Spec Ω` is equivalent to profinite sets, through `S ↦ Spec C(S, Ω)`, and base change along
-  `σ` acts on it through the canonical isomorphisms `C(S, Ω) ⊗_{Ω, σ} Ω ≅ C(S, Ω)`.
-- `ProEtale.CondensedRing.weilStalkComparison`: the composite displayed above.
+- `ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod`: for `Ω` separably closed, the
+  pullback `p^*` from condensed `Λ`-modules to `Λ`-modules on `(Spec Ω)_proét` is an
+  equivalence, the pro-étale site of `Spec Ω` being equivalent to profinite sets through
+  `S ↦ Spec C(S, Ω)`. This is the only sorry: the comparison isomorphisms are constructed.
 
 -/
 
@@ -86,7 +89,67 @@ namespace ProEtale.CondensedRing
 
 open Scheme
 
+/-! ### The pullback from the point on module objects -/
+
+section PointModule
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+/-- The pullback `p_X^* : Mod_Λ ⥤ Mod_{Λ_X}` from condensed `Λ`-modules to module objects over
+`Λ_X = p_X^* Λ`: the strong monoidal functor `p_X^*` applied to module objects. -/
+noncomputable def upperStarFromPointMod (X : Scheme.{u}) :
+    Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ ⥤
+      Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) :=
+  (upperStarFromPoint X).mapMod
+
+/-- The comparison `p_Y^* ⋙ f^* ≅ p_X^*` on module objects. Writing `f^* = mapMod(f^*) ⋙ Ext_{α_f}`,
+it is the composite of
+1. `mapMod(p_Y^*) ⋙ mapMod(f^*) ≅ mapMod(p_X^*) ⋙ Res_{α_f}`, the module version
+   `Functor.mapModCompIso` of the comparison `upperStarFromPointComp f : p_Y^* ⋙ f^* ≅ p_X^*`,
+   whose component at `Λ` is `α_f`;
+2. `Res_{α_f} ⋙ Ext_{α_f} ≅ Res_{α_f} ⋙ Res_{α_f⁻¹} ≅ 𝟭`, extension of scalars along the
+   isomorphism `α_f` being restriction of scalars along its inverse
+   (`Mod.extendScalarsIsoComapInv`), and the unit of the equivalence
+   `Mod.comapEquivalenceOfIsIso α_f`. -/
+noncomputable def upperStarFromPointModComp {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    upperStarFromPointMod Λ Y ⋙ (f)^*⟦Λ⟧ ≅ upperStarFromPointMod Λ X :=
+  (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight
+      (Functor.mapModCompIso (upperStarFromPoint Y) (f)^*[Ab.{u + 1}]
+        (upperStarFromPointComp f).hom Λ) _ ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _
+      (Functor.isoWhiskerLeft _ (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f)) ≪≫
+        (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ f)).unitIso.symm) ≪≫
+    Functor.rightUnitor _
+
+variable {Ω : Type u} [Field Ω]
+
+/-- For a separably closed field `Ω`, the pullback `p^* : Mod_Λ ⥤ Mod_{Λ_{Spec Ω}}` from
+condensed `Λ`-modules is an equivalence: the pro-étale site of `Spec Ω` is equivalent to
+profinite sets, through `S ↦ Spec C(S, Ω)`. -/
+instance isEquivalence_upperStarFromPointMod [IsSepClosed Ω] :
+    (upperStarFromPointMod Λ (Spec (.of Ω))).IsEquivalence :=
+  sorry
+
+/-- For a separably closed field `Ω`, the pullback `σ^*` of `Λ`-modules along an endomorphism
+`σ` of `Spec Ω` is isomorphic to the identity: writing `P = p^*` for the equivalence
+`upperStarFromPointMod Λ (Spec Ω)` with inverse `P⁻¹`, it is the composite
+`σ^* ≅ P⁻¹ ⋙ P ⋙ σ^* ≅ P⁻¹ ⋙ P ≅ 𝟭` of the counit of `P` and `upperStarFromPointModComp σ`. -/
+noncomputable def upperStarIsoIdOfIsSepClosed [IsSepClosed Ω] (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) :
+    (σ)^*⟦Λ⟧ ≅ 𝟭 _ :=
+  (Functor.leftUnitor _).symm ≪≫
+    Functor.isoWhiskerRight
+      (upperStarFromPointMod Λ (Spec (.of Ω))).asEquivalence.counitIso.symm _ ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (upperStarFromPointModComp Λ σ) ≪≫
+    (upperStarFromPointMod Λ (Spec (.of Ω))).asEquivalence.counitIso
+
+end PointModule
+
 variable (ℓ : ℕ) [Fact ℓ.Prime]
+
+/-! ### Weil sheaves and their stalks -/
 
 section Stalk
 
@@ -99,45 +162,45 @@ and morphisms are morphisms of module objects commuting with the structure isomo
 abbrev WeilSheaf : Type _ :=
   IsoAlgebra (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧
 
-variable {Ω : Type u} [Field Ω] [hΩ : IsSepClosed Ω] (σ : Spec (.of Ω) ≅ Spec (.of Ω))
-
-include hΩ
-
-/-- The pullback `σ^*` of `ℚ̲̄_ℓ`-modules along an automorphism `σ` of the spectrum of a
-separably closed field `Ω` is isomorphic to the identity. See the module docstring for the
-argument. -/
-noncomputable def padicAlgClUpperStarIsoId :
-    (σ.hom)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ 𝟭 _ :=
-  sorry
-
-variable (x : Spec (.of Ω) ⟶ X.left)
+variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (σ : Spec (.of Ω) ⟶ Spec (.of Ω))
+  (x : Spec (.of Ω) ⟶ X.left)
 
 /-- The Frobenius comparison of the stalk at a geometric point `x̄` fixed by `e` up to an
-automorphism `σ` of `Spec Ω`: `x̄^* ≅ e^* ⋙ x̄^*`, that is `x̄^* F ≅ x̄^* e^* F`, the composite of
-`padicAlgClUpperStarIsoId`, the composition isomorphisms of the pullback and
+endomorphism `σ` of `Spec Ω`: `x̄^* ≅ e^* ⋙ x̄^*`, the composite
+```
+x̄^* ≅ x̄^* ⋙ σ^* ≅ (σ ≫ x̄)^* = (x̄ ≫ e)^* ≅ e^* ⋙ x̄^*
+```
+of `upperStarIsoIdOfIsSepClosed σ`, the composition isomorphisms `upperStarComp` and
 `x̄ ≫ e = σ ≫ x̄`. -/
-noncomputable def weilStalkComparison (_hx : x ≫ e.hom.left = σ.hom ≫ x) :
+noncomputable def weilStalkComparison (hx : x ≫ e.hom.left = σ ≫ x) :
     (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ⋙ 𝟭 _ ≅
       (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ⋙ (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  sorry
+  Functor.isoWhiskerLeft _ (upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj ℓ) σ).symm ≪≫
+    (upperStarComp (Profinite.padicAlgClRingObj ℓ) σ x).symm ≪≫
+    eqToIso (congrArg (upperStar (Profinite.padicAlgClRingObj ℓ)) hx.symm) ≪≫
+    upperStarComp (Profinite.padicAlgClRingObj ℓ) x e.hom.left
 
-/-- The stalk `x̄^* F` at a geometric point `x̄ : Spec Ω ⟶ X` fixed by `e` up to an automorphism
+/-- The stalk `x̄^* F` at a geometric point `x̄ : Spec Ω ⟶ X` fixed by `e` up to an endomorphism
 `σ` of `Spec Ω` of a Weil sheaf `(F, φ_F)`, as a Weil object for the identity functor: its
 structure isomorphism is the automorphism `x̄^* F ≅ x̄^* e^* F ≅ x̄^* F` given by
 `weilStalkComparison` and `x̄^* φ_F`. -/
-noncomputable def WeilSheaf.stalkFunctor (hx : x ≫ e.hom.left = σ.hom ≫ x) :
+noncomputable def WeilSheaf.stalkFunctor (hx : x ≫ e.hom.left = σ ≫ x) :
     WeilSheaf ℓ e ⥤
       IsoAlgebra (𝟭 (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) Ab.{u + 1})
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of Ω))))) :=
   IsoAlgebra.mapOfNatIso (weilStalkComparison ℓ e σ x hx)
 
-omit hΩ in
 @[simp]
-lemma WeilSheaf.stalkFunctor_obj_carrier (hx : x ≫ e.hom.left = σ.hom ≫ x)
-    (F : WeilSheaf ℓ e) :
+lemma WeilSheaf.stalkFunctor_obj_carrier (hx : x ≫ e.hom.left = σ ≫ x) (F : WeilSheaf ℓ e) :
     ((WeilSheaf.stalkFunctor ℓ e σ x hx).obj F).carrier =
       (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.obj F.carrier :=
   rfl
+
+lemma WeilSheaf.stalkFunctor_obj_str (hx : x ≫ e.hom.left = σ ≫ x) (F : WeilSheaf ℓ e) :
+    ((WeilSheaf.stalkFunctor ℓ e σ x hx).obj F).str =
+      (weilStalkComparison ℓ e σ x hx).app F.carrier ≪≫
+        (x)^*⟦Profinite.padicAlgClRingObj ℓ⟧.mapIso F.str :=
+  IsoAlgebra.mapOfNatIso_obj_str _ F
 
 end Stalk
 
@@ -199,7 +262,7 @@ noncomputable def WeilSheaf.frobeniusStalkFunctor (x₀ : Spec (.of k) ⟶ X₀)
       IsoAlgebra (𝟭 (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of (AlgebraicClosure k))))
         Ab.{u + 1})
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of (AlgebraicClosure k)))))) :=
-  WeilSheaf.stalkFunctor ℓ f.geometricFrobeniusOver (geometricFrobeniusField k)
+  WeilSheaf.stalkFunctor ℓ f.geometricFrobeniusOver (geometricFrobeniusField k).hom
     (f.geometricPointOfSection x₀ hx₀)
     (f.geometricPointOfSection_comp_geometricFrobenius x₀ hx₀)
 

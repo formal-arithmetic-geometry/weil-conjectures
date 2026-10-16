@@ -55,14 +55,31 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   (e : X ≅ X) (n : ℤ)
 
 /-- The Frobenius comparison of the `n`-th homology sheaf: `Hⁿ ⋙ e^* ≅ Le^* ⋙ Hⁿ` on
-`Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, that is `e^* Hⁿ(K) ≅ Hⁿ(Le^* K)`, obtained from the identification of `Le^*` with
-the levelwise pullback and the commutation of the exact functor `e^*` with homology. -/
+`Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, that is `e^* Hⁿ(K) ≅ Hⁿ(Le^* K)`, the composite
+```
+Hⁿ(-) ⋙ e^* ≅ D(e^*) ⋙ Hⁿ(-) ≅ L(e^*) ⋙ Hⁿ(-) ≅ Hⁿ(Le^* -)
+```
+of the commutation `Functor.mapDerivedCategoryHomologyFunctorIso` of the exact functor `e^*`
+with homology, the identification `leftDerivedUpperStarIsoMapDerivedCategory` of the derived
+pullback with the levelwise pullback, and the compatibility
+`boundedConstructibleUpperStarCompatibility` of `Le^*` with the inclusion `ι` of
+`Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. -/
 noncomputable def weilHomologyComparison :
     ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ n) ⋙
         (e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom ⋙
         ((boundedConstructible _).ι ⋙ DerivedCategory.homologyFunctor _ n) :=
-  sorry
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _
+      ((e.hom.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧.mapDerivedCategoryHomologyFunctorIso n ≪≫
+        Functor.isoWhiskerRight
+          (leftDerivedUpperStarIsoMapDerivedCategory (Profinite.padicAlgClRingObj ℓ)
+            e.hom.left).symm _) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight
+      (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ
+        e.hom).symm _ ≪≫
+    Functor.associator _ _ _
 
 /-- The `n`-th homology sheaf `Hⁿ(K)` of a Weil object `(K, φ_K)` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, as a Weil
 sheaf: its structure isomorphism is `e^* Hⁿ(K) ≅ Hⁿ(Le^* K) ≅ Hⁿ(K)` given by
