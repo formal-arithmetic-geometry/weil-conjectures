@@ -30,9 +30,105 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-hammock-graph-colimit-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Q$ for the chosen generating graph of $C$ and choose a vertex $v_0$ (nonemptiness). For each edge $e$ use two distinct signed letters $e,e^{-1}$, even when $e$ is a loop; different generators remain distinct. Reduce a composable signed walk by scanning its letters from left to right, erasing the last letter of the accumulated word exactly when the next letter is its inverse, and appending otherwise. Appending a letter and then its inverse returns the same accumulated reduced word: if the first appends, the second erases it; if the first erases, the second restores it. Thus insertion or deletion of any adjacent inverse pair anywhere in a walk leaves the final reduced word unchanged. The output is itself reduced, so it is the unique reduced representative under these operations. In particular $\\operatorname{red}(\\operatorname{red}(u)v)=\\operatorname{red}(uv)$. Endpoints are preserved by each erasure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Comparison Lemma 2.3, proof Section 5.8(ii), printed p.25; explicit reduced-word and rectangle-lifting details supplied by the worker."
+   }
+  },
+  {
+   "text": "Define the vertices of $\\widetilde Q$ to be reduced signed walks starting at $v_0$. For a vertex $w$ ending at the source of a positive generator $e$, put one positively oriented edge $(w,e):w\\to\\operatorname{red}(we)$. Its endpoint projection to $e$ defines $p:\\widetilde Q\\to Q$. Every undirected edge changes word length by one. Every nonempty vertex has precisely one neighboring vertex of smaller length, namely its last-letter deletion; the signed last letter specifies the edge and its orientation uniquely. Repeated deletion connects every vertex to the empty word. An undirected simple cycle would have a vertex of maximal length with two distinct edges to smaller-length neighbors, contradicting this uniqueness. Consequently the underlying graph is a nonempty tree (a connected graph without a cycle has exactly one simple path between two vertices: two distinct simple paths would contain a cycle). This also excludes loops and parallel edges upstairs. All vertex and edge collections are small sets of finite words.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Comparison Lemma 2.3, proof Section 5.8(ii), printed p.25; explicit reduced-word and rectangle-lifting details supplied by the worker."
+   }
+  },
+  {
+   "text": "A signed edge $s$ lifts from $w$ to $\\operatorname{red}(ws)$. For $s=e$ this is the defined edge $(w,e)$; for $s=e^{-1}$ it is the reverse of $(\\operatorname{red}(we^{-1}),e)$, whose target is $w$ by step 1. These are the only possible lifts, since the projected letter and starting vertex specify that edge. Iterating proves unique lifting of every finite signed walk from its initial vertex, and reversing a walk gives unique lifting with prescribed final vertex as well. Connectedness of $Q$ supplies a signed walk from $v_0$ to each vertex, whose reduction lies over that vertex, so $p$ is surjective on vertices. Let $\\widetilde C$ be the free category on $\\widetilde Q$ and send a positive edge word to its projected word. Concatenation and empty words make this a functor $q:\\widetilde C\\to C$. Every arrow of $C$ is a unique positive generator word, hence has a unique lift with prescribed source or prescribed target. This is the asserted covering functor. Word length is preserved under projection of categorical arrows, so $q$ reflects identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Comparison Lemma 2.3, proof Section 5.8(ii), printed p.25; explicit reduced-word and rectangle-lifting details supplied by the worker."
+   }
+  },
+  {
+   "text": "Let $G$ be the groupoid completion of $\\widetilde C$. By [lem-coef-free-category-groupoid-nerve], the canonical map $N\\widetilde C\\to NG$ is a weak homotopy equivalence; its hypothesis is only that $\\widetilde C$ is the free category of a small graph. Present $G$ by signed generating-edge walks with neighboring inverse letters cancelled: send the inverse of a positive word to its reversed inverse-letter word; concatenation and these inverse relations give mutually inverse maps between this presentation and the groupoid completion. In a tree every reduced walk is simple, since a repeated vertex would give a reduced closed walk and hence a cycle. Thus step 2 gives precisely one arrow of $G$ between any two vertices. In particular the empty-word vertex $r$ is terminal. The unique arrows $z\\to r$ form a natural transformation $\\mathrm{id}_G\\Rightarrow\\operatorname{const}_r$, because there is only one arrow with each pair of endpoints. Apply [lem-coef-nerve-natural-homotopy-equivalence] with the functors between $G$ and the one-object identity category: their composites have this natural transformation and the identity transformation. It contracts $|NG|$ to the point $r$.",
+   "uses": [
+    "lem-coef-free-category-groupoid-nerve",
+    "lem-coef-nerve-natural-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Comparison Lemma 2.3, proof Section 5.8(ii), printed p.25; explicit reduced-word and rectangle-lifting details supplied by the worker."
+   }
+  },
+  {
+   "text": "For completeness, obtain actual contractibility of the realization rather than just vanishing homotopy groups. The nondegenerate-simplex representatives, face relations, and final topology in [lem-cbc-realization-cw-subcomplex] give the usual CW structure on each of $|N\\widetilde C|$ and $|NG|$: attach one closed simplex for each nondegenerate simplex in dimension order; its interior is a cell, its boundary is the finite union of its faces, and a degenerate face factors through a lower-dimensional nondegenerate simplex. A closed Euclidean simplex is a disk and its boundary is a sphere, and the stated final topology is precisely the weak topology for these characteristic maps. Thus these realizations meet the CW hypothesis of [lem-cbc-whitehead-cw-homotopy-inverse]. The canonical realization map of step 4 induces bijections on components and all based homotopy groups by the weak-equivalence conclusion of [lem-coef-free-category-groupoid-nerve]. Whitehead therefore makes it a homotopy equivalence. Compose its homotopy inverse with the contraction of $|NG|$ in step 4 to contract $|N\\widetilde C|$.",
+   "uses": [
+    "lem-cbc-realization-cw-subcomplex",
+    "lem-cbc-whitehead-cw-homotopy-inverse",
+    "lem-coef-free-category-groupoid-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Comparison Lemma 2.3, proof Section 5.8(ii), printed p.25; explicit reduced-word and rectangle-lifting details supplied by the worker."
+   }
+  },
+  {
+   "text": "Fix $x,y$ and $\\widetilde x$ over $x$. By [lem-coef-hammock-graph-colimit-presentation], a $k$-simplex is a finite commutative rectangular diagram with $k+1$ rows and endpoint vertical arrows identities. Lift the top horizontal signed walk starting at $\\widetilde x$ using step 3. Lift the downward vertical arrows from this row, and then proceed row by row. To check the next horizontal arrow, write the top and bottom rightward words as $a,c$ and the left and right downward words as $b,d$. Commutativity downstairs is the literal positive-word equality $ad=bc$. For a top-left lift represented by $w$, the two lower-right candidates are $\\operatorname{red}(wad)$ and $\\operatorname{red}(wbc)$, so they coincide by step 1. Their lifted composites coincide as arrows too: they lift the same positive word with the same source, and step 3 gives uniqueness. For a leftward column the square instead gives $ab=dc$, with the top-right and bottom-right as the sources of the horizontal words; use the same argument starting at the top-right vertex and unique lifting with prescribed target. Thus the lifted rows and downward arrows form a commutative rectangle. The vertical identity at $x$ forces every row to start at $\\widetilde x$; the identity at $y$ forces every row to end at the same $\\widetilde y$ over $y$. No weak-equivalence restriction is lost, since the pairs are $(\\widetilde C,\\widetilde C)$ and $(C,C)$.",
+   "uses": [
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Comparison Lemma 2.3, proof Section 5.8(ii), printed p.25; explicit reduced-word and rectangle-lifting details supplied by the worker."
+   }
+  },
+  {
+   "text": "The reduction operations of [lem-coef-hammock-graph-colimit-presentation] are deletion of entirely identity columns and composition of adjacent columns with equal direction. An identity lifts to an identity by the empty-word construction, and $q$ reflects identities by step 3. Therefore a column is entirely identities upstairs exactly when it is so downstairs, and a reduced hammock projects to a reduced hammock. Composing neighboring same-direction arrows concatenates positive words; lifting their concatenation gives the same lifted arrow as composing their lifts, by the uniqueness in step 3. Deleting an identity column identifies equal lifted vertices and leaves the same diagram. These observations also apply to every intermediate reduction after row deletion. Hence lifting commutes with reduction, with no change of endpoints, and the rectangle construction in step 6 gives a reduced lifted hammock of the required type.",
+   "uses": [
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Comparison Lemma 2.3, proof Section 5.8(ii), printed p.25; explicit reduced-word and rectangle-lifting details supplied by the worker."
+   }
+  },
+  {
+   "text": "Projection of the lifted diagram is the original diagram. Conversely any hammock above it with source $\\widetilde x$ must have the same top row by unique lifting of its finite signed walk; its downward arrows and each subsequent row are then forced by the same uniqueness, so it is the lift constructed in step 6. This gives inverse degreewise functions between $H(C,C)(x,y)$ and the coproduct over $\\widetilde y\\in q^{-1}(y)$. The operators in [lem-coef-hammock-graph-colimit-presentation] delete rows and compose intervening vertical arrows, or repeat rows with identity vertical arrows, and then reduce. Lifted composites and identities agree with the composites and identities of lifted arrows by step 3, and step 7 handles the ensuing reductions. Row deletion and repetition preserve the common lifted endpoints. Thus the inverse degreewise functions commute with every face and degeneracy, giving the claimed simplicial isomorphism. When a length-zero hammock occurs ($x=y$), its lift has target $\\widetilde x$ and only this coproduct summand contains that lift. The pair map is $q$ itself, with all arrows in both distinguished subcategories.",
+   "uses": [
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Comparison Lemma 2.3, proof Section 5.8(ii), printed p.25; explicit reduced-word and rectangle-lifting details supplied by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-free-category-groupoid-nerve",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-cbc-realization-cw-subcomplex",
+  "lem-cbc-whitehead-cw-homotopy-inverse",
+  "lem-coef-hammock-graph-colimit-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Expanded proof of the universal-cover reduction in Section 5.8(ii), printed p.25; graph construction and simplicial lifting checked explicitly, using existing DAG homotopy theorems."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -82,10 +178,45 @@
    "results": "{\"t\": \"2026-10-16T19:43:16Z\", \"tool\": \"grep\", \"query\": \"[Hh]ammock|[Ff]ree.*[Ss]implicial|[Zz]igzag.*[Cc]ontract\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second reading; path/free-groupoid and model-category declarations do not state this reduced-hammock assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|universal.*cover|covering.*tree",
+   "results": "{\"t\": \"2026-10-16T21:50:27Z\", \"tool\": \"grep\", \"query\": \"hammock|universal.*cover|covering.*tree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/Algebra/Torsor/Defs.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"61e6cfb1159c0a73\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give the universal extension of free categories, groupoid completion, nerves, or EG; none gives this connected tree cover together with the reduced-hammock coproduct isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal cover of a free category and unique lifting of reduced hammocks",
+   "results": "{\"t\": \"2026-10-16T21:50:28Z\", \"tool\": \"leansearch\", \"query\": \"Universal cover of a free category and unique lifting of reduced hammocks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.FreeGroupoid.lift_unique\", \"CategoryTheory.Free.liftUnique\", \"CategoryTheory.CommSq.LiftStruct.mk.noConfusion\", \"CategoryTheory.FreeGroupoid.strictUniversalPropertyFixedTarget\", \"CategoryTheory.FreeGroupoid.lift_comp\", \"Quiver.FreeGroupoid.lift_unique\", \"CategoryTheory.FreeGroupoid.lift\", \"CategoryTheory.FreeGroupoid.functorEquiv\"], \"digest\": \"d8833d043d04f985\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give the universal extension of free categories, groupoid completion, nerves, or EG; none gives this connected tree cover together with the reduced-hammock coproduct isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Paths\", \"lift\"",
+   "results": "{\"t\": \"2026-10-16T21:50:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"Paths\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.Paths.lift\", \"CategoryTheory.Paths.lift_spec\", \"CategoryTheory.Paths.lift_unique\", \"CategoryTheory.Paths.lift_nil\", \"CategoryTheory.Paths.lift_toPath\", \"CategoryTheory.Paths.lift_cons\", \"CategoryTheory.Paths.liftNatTrans\", \"CategoryTheory.Paths.liftNatTrans_app\"], \"digest\": \"259b3dbf80e42287\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give the universal extension of free categories, groupoid completion, nerves, or EG; none gives this connected tree cover together with the reduced-hammock coproduct isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique lifting of commutative rectangular zigzag diagrams along the universal covering of a free path category",
+   "results": "{\"t\": \"2026-10-16T21:50:39Z\", \"tool\": \"leanfinder\", \"query\": \"Unique lifting of commutative rectangular zigzag diagrams along the universal covering of a free path category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Paths.lift_unique\", \"CategoryTheory.Paths.lift_spec\", \"Quiver.FreeGroupoid.lift_unique\", \"CategoryTheory.Paths.lift_toPath\", \"IsFreeGroupoid.unique_lift\", \"CategoryTheory.pathsHomRel\", \"CategoryTheory.Paths.lift_cons\", \"CategoryTheory.toQuotientPaths\"], \"digest\": \"7035896d9210c828\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give the universal extension of free categories, groupoid completion, nerves, or EG; none gives this connected tree cover together with the reduced-hammock coproduct isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected free category has a universal tree cover and its reduced hammock mapping simplicial sets decompose over the lifts of the target",
+   "results": "{\"t\": \"2026-10-16T21:50:39Z\", \"tool\": \"leanfinder\", \"query\": \"A connected free category has a universal tree cover and its reduced hammock mapping simplicial sets decompose over the lifts of the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"SSet.Truncated.HomotopyCategory.lift\", \"CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat\", \"SimplexCategoryGenRel.toSimplexCategory\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\", \"SSet.Truncated.HomotopyCategory.lift_obj_mk\"], \"digest\": \"96bf3209d7095cd0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give the universal extension of free categories, groupoid completion, nerves, or EG; none gives this connected tree cover together with the reduced-hammock coproduct isomorphism."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-free-factor-hammock-comparison",
@@ -105,5 +236,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-free-factor-hammock-universal-cover-reduction",
+  "worker": "stage1",
+  "summary": "Replaced the earlier two proposed clause-level nodes by an explicit reduced-word graph-cover construction and existing free-category groupoid-nerve and natural-homotopy statements. Proved the covering tree, nerve contractibility, square lifting, reflection of reducedness, and simplicial inverse maps. No statement change and no new nodes.",
+  "blueprint": "The paragraph beginning For K in the current prop-coef-integral-exceptional-adjoint proof, with the displayed derived-coefficient adjunction, is the historical ancestor. Through finite-adjunction diagrams and cosimplicial-frame mapping spaces, this item realizes precisely Dwyer–Kan Comparison Lemma 2.3 Section 5.8(ii) after W=C and connected-component restriction; steps 1–3 construct the cover, 4–5 prove nerve contractibility, and 6–8 prove hammock lifting.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-cw-subcomplex",
+    "why": "Generic nondegenerate-simplex and final-topology description supplies the CW structure of nerve realizations; the item’s unit has no statement giving this full description."
+   },
+   {
+    "node": "lem-cbc-whitehead-cw-homotopy-inverse",
+    "why": "Generic Whitehead theorem upgrades the already established nerve weak equivalence to an actual homotopy equivalence of realizations; this only clarifies the contractibility clause and replaces no unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-cw-subcomplex",
+  "lem-cbc-whitehead-cw-homotopy-inverse"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-b24a2b032",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-b24a2b032 (reviewer sub-agent of L); spot-checked: PASS. I read all eight steps in full and they are correct. Unchecked: Dwyer–Kan, Calculating simplicial localizations §5.8(ii) is not in literature/ and the service blocks network access, so I could not read it. The proof is correctly marked agent-written (WANTED recorded) and the statement is unchanged; I verified it independently. Steps 1–3 (reduced signed words, the tree of reduced walks from v0, graph covering with unique lifting for a given source or target, surjectivity from connectedness, q reflects identities): correct. Cases checked: one vertex, one edge, one loop (integer-line cover), two parallel edges, infinite connected graph. Step 4: lem-coef-free-category-groupoid-nerve gives NC~ -> NG a weak equivalence. G is indiscrete on a tree, and lem-coef-nerve-natural-homotopy-equivalence with id => const_r contracts |NG|. Under the def-cbc 'contractible = weakly contractible' convention that already proves the clause. Step 5 (CW structure plus Whitehead) is correct but more than needed. I accept its two declared tool_uses, lem-cbc-realization-cw-subcomplex and lem-cbc-whitehead-cw-homotopy-inverse: sec-six-functors uses sec-smooth-purity and four other six-functors nodes already cite them. Steps 6–8: rightward ad=bc and leftward ab=dc rectangle lifting, preservation of reducedness, compatibility with faces and degeneracies, and the length-0 case: correct. proof_deps equals the union of uses; no cycle (the item is not in the 248-node dependency closure). The parent comparison's step 3 uses the statement exactly. No new nodes, no fixes, and no DAG node duplicates the item. One cosmetic point: the report says created.item was changed to this item, but the file correctly keeps the parent item."
  }
 }
