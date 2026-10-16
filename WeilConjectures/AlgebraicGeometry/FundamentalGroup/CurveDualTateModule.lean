@@ -54,6 +54,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}} [X.Over (Spec (
   [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
   {l : ℕ} [Fact l.Prime] (hl : (l : k) ≠ 0)
 
+omit [IsAlgClosed k] [Fact l.Prime] in
 include hl in
 lemma natCast_pow_ne_zero_of_natCast_ne_zero (n : ℕ) : ((l ^ n : ℕ) : k) ≠ 0 := by
   rw [Nat.cast_pow]
@@ -67,7 +68,7 @@ noncomputable def picTorsionByPowEquiv (n : ℕ) :
       AddSubgroup.torsionBy (Additive X.Pic) ((l : ℤ) ^ n) :=
   AddEquiv.addSubgroupCongr (by rw [Nat.cast_pow])
 
-omit [Fact l.Prime] in
+omit [Fact l.Prime] [ConnectedSpace X] in
 @[simp]
 lemma coe_picTorsionByPowEquiv_symm_apply (n : ℕ)
     (y : AddSubgroup.torsionBy (Additive X.Pic) ((l : ℤ) ^ n)) :
@@ -105,7 +106,7 @@ lemma sheafHPicTorsionDualAddEquiv_classH1 (n : ℕ)
       t.picPairing (natCast_pow_ne_zero_of_natCast_ne_zero hl n)
         ((picTorsionByPowEquiv X l n).symm y) := by
   rw [picPairing_apply, ← AddMonoidHom.comp_apply,
-    ← charPairing_eq s G _ t (sheafHEquivContinuousMonoidHom_classH1 s G t)]
+    ← charPairing_eq s G _ t (sheafHEquivContinuousMonoidHom_classH1 s G t).symm]
   rfl
 
 /-- **Compatibility with reduction.** Under the finite-level isomorphisms, the reduction
@@ -118,24 +119,24 @@ lemma sheafHPicTorsionDualAddEquiv_map_reduction (n : ℕ)
         ⟨(l : ℤ) • (y : Additive X.Pic), AddSubgroup.zsmul_mem_torsionBy_pow y.2⟩ =
       ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n))
         (sheafHPicTorsionDualAddEquiv s G hl (n + 1) x y) := by
-  obtain ⟨T', hT'⟩ := (bijective_classH1 (M := ULift.{u + 1} (ZMod (l ^ (n + 1)))) (Y := X)).2 x
-  obtain ⟨T, hT⟩ := (bijective_classH1 (M := ULift.{u + 1} (ZMod (l ^ n))) (Y := X)).2
-    (Sheaf.H.map (constantZModPowReduction X l n) 1 x)
+  obtain ⟨T', rfl⟩ := (bijective_classH1 (M := ULift.{u + 1} (ZMod (l ^ (n + 1)))) (Y := X)).2 x
   induction T' using Quotient.inductionOn with | h t' => ?_
+  obtain ⟨T, hT⟩ := (bijective_classH1 (M := ULift.{u + 1} (ZMod (l ^ n))) (Y := X)).2
+    (Sheaf.H.map (constantZModPowReduction X l n) 1 (classH1 _ X ⟦t'⟧))
   induction T using Quotient.inductionOn with | h t => ?_
-  have hmon := (map_constantZModPowReduction_eq_iff l s G n x _).1 hT.symm
-  rw [← hT, ← hT', sheafHEquivContinuousMonoidHom_classH1] at hmon
+  have hmon := (map_constantZModPowReduction_eq_iff l s G n _ _).1 hT.symm
   simp only [sheafHEquivContinuousMonoidHom_classH1] at hmon
-  rw [← hT, ← hT', sheafHPicTorsionDualAddEquiv_classH1, sheafHPicTorsionDualAddEquiv_classH1]
+  rw [← hT, sheafHPicTorsionDualAddEquiv_classH1, sheafHPicTorsionDualAddEquiv_classH1]
   exact picPairing_zsmul_of_monodromy s G _ _ t t' hmon ((picTorsionByPowEquiv X l (n + 1)).symm y)
     ((picTorsionByPowEquiv X l n).symm ⟨_, AddSubgroup.zsmul_mem_torsionBy_pow y.2⟩).2
 
 omit [GeometricallyIntegral (X ↘ Spec (.of k))] [Nonempty X] in
+include hl in
 /-- `Pic(X)[ℓⁿ]` has `ℓ ^ (2 g n)` elements, as `H¹(X, μ_{ℓⁿ}) ≅ (ℤ/ℓⁿ)^{2g}`. -/
 lemma natCard_picTorsionBy [Nonempty X] (n : ℕ) :
     Nat.card (AddSubgroup.torsionBy (Additive X.Pic) ((l : ℤ) ^ n)) =
       l ^ (2 * (X ↘ Spec (.of k)).genus * n) := by
-  obtain ⟨e⟩ := nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one (X := X) (l ^ n)
+  obtain ⟨e⟩ := nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one (k := k) (X := X) (l ^ n)
     (natCast_pow_ne_zero_of_natCast_ne_zero hl n)
   rw [← Nat.card_congr ((kummerTorsionEquiv (l ^ n)
     (natCast_pow_ne_zero_of_natCast_ne_zero hl n)).trans (picTorsionByPowEquiv X l n)).toEquiv,
@@ -146,7 +147,7 @@ include hl in
 /-- The `ℓ`-power torsion of `Pic(X)` is `ℓ`-divisible. -/
 lemma exists_zsmul_eq_of_pow_zsmul_eq_zero [Nonempty X] (n : ℕ) (y : Additive X.Pic)
     (hy : (l : ℤ) ^ n • y = 0) : ∃ z, (l : ℤ) • z = y :=
-  AddCommGroup.exists_zsmul_eq_of_natCard_torsionBy l (Additive X.Pic)
+  AddCommGroup.exists_zsmul_eq_of_natCard_torsionBy
     (Fact.out : l.Prime).ne_zero (natCard_picTorsionBy hl) n y hy
 
 /-- Blueprint `lem-wf-curve-h1-dual-tate-module`: Untwisted integral classes form the dual Tate
@@ -157,18 +158,20 @@ reductions with the inverse limit along the duals of multiplication by `ℓ`. -/
 noncomputable def sheafHOneLimitAddEquivTorsionDualLimit :
     sheafHOneLimit X l ≃+ AddCommGroup.torsionDualLimit l (Additive X.Pic) where
   toFun x := ⟨fun n ↦ sheafHPicTorsionDualAddEquiv s G hl n (x.1 n), fun n y ↦ by
-    rw [← x.2 n]
-    exact sheafHPicTorsionDualAddEquiv_map_reduction s G hl n _ y⟩
+    exact (congrArg (fun w ↦ sheafHPicTorsionDualAddEquiv s G hl n w
+      ⟨_, AddSubgroup.zsmul_mem_torsionBy_pow y.2⟩) (x.2 n)).symm.trans
+        (sheafHPicTorsionDualAddEquiv_map_reduction s G hl n _ y)⟩
   invFun ψ := ⟨fun n ↦ (sheafHPicTorsionDualAddEquiv s G hl n).symm (ψ.1 n), fun n ↦ by
     refine (sheafHPicTorsionDualAddEquiv s G hl n).injective (AddMonoidHom.ext fun y ↦ ?_)
     obtain ⟨z, hz⟩ := exists_zsmul_eq_of_pow_zsmul_eq_zero hl (n + 1) y.1 (by
-      rw [pow_succ, mul_smul, (Submodule.mem_torsionBy_iff _ _).1 y.2, smul_zero])
+      rw [pow_succ', mul_smul, (Submodule.mem_torsionBy_iff _ _).1 y.2, smul_zero])
     have hz' : z ∈ AddSubgroup.torsionBy (Additive X.Pic) ((l : ℤ) ^ (n + 1)) :=
       (Submodule.mem_torsionBy_iff _ _).2 (by
         rw [pow_succ, mul_smul, hz, (Submodule.mem_torsionBy_iff _ _).1 y.2])
     have hy : y = ⟨(l : ℤ) • z, AddSubgroup.zsmul_mem_torsionBy_pow hz'⟩ := Subtype.ext hz.symm
-    rw [hy, sheafHPicTorsionDualAddEquiv_map_reduction, AddEquiv.apply_symm_apply,
-      AddEquiv.apply_symm_apply]
+    rw [hy]
+    refine (sheafHPicTorsionDualAddEquiv_map_reduction s G hl n _ ⟨z, hz'⟩).trans ?_
+    rw [AddEquiv.apply_symm_apply, AddEquiv.apply_symm_apply]
     exact (ψ.2 n ⟨z, hz'⟩).symm⟩
   left_inv x := Subtype.ext (funext fun n ↦ AddEquiv.symm_apply_apply _ _)
   right_inv ψ := Subtype.ext (funext fun n ↦ AddEquiv.apply_symm_apply _ _)
@@ -203,7 +206,8 @@ lemma toZModPow_sheafHOneLimitAddEquivDualTateModule_apply (x : sheafHOneLimit X
     PadicInt.toZModPow n (sheafHOneLimitAddEquivDualTateModule s G hl x t) =
       sheafHPicTorsionDualAddEquiv s G hl n (x.1 n)
         (AddCommGroup.tateModule.coordTorsion t n) :=
-  AddCommGroup.tateModule.toZModPow_torsionDualLimitAddEquiv_apply _ _ t n
+  AddCommGroup.tateModule.toZModPow_torsionDualLimitAddEquiv_apply
+    (exists_zsmul_eq_of_pow_zsmul_eq_zero hl) (sheafHOneLimitAddEquivTorsionDualLimit s G hl x) t n
 
 section Transport
 
