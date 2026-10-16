@@ -228,5 +228,24 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-db97667a7 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, current blueprint updates, and Stacks sources 01W6, 01W4, 01KT, 01RD, 01RE, and 01RH. All five steps hold. The reported quasi-compactness correction resolves a genuine refinement-definition mismatch and preserves the parent unit and sole existing citer. No new nodes, cycles, target changes, or reviewer repairs. Concrete checks recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Compactification.DenseRefinementMorphisms",
+  "declaration": "AlgebraicGeometry.denseCompactification_refinement_morphisms",
+  "file": "lean/Sheaf/Compactification/DenseRefinementMorphisms.lean",
+  "statement": "theorem denseCompactification_refinement_morphisms {X S : Scheme.{u}} {f : X ⟶ S} (c' c : Compactification.QuasiCompactObjects f) (hc' : IsSchemeTheoreticallyDominant c'.obj.i) (h : c'.obj.Z ⟶ c.obj.Z) (hS : h ≫ c.obj.g = c'.obj.g) (hj : c'.obj.i ≫ h = c.obj.i) : IsProper h ∧ Compactification.boundaryRefinementProperty f (ObjectProperty.homMk (X := c') (Y := c) ⟨h, hj, hS⟩) ∧ ∀ (h' : c'.obj.Z ⟶ c.obj.Z), h' ≫ c.obj.g = c'.obj.g → c'.obj.i ≫ h' = c.obj.i → h' = h",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses QuasiCompactObjects to retain both explicit quasi-compact open immersions; the middle conjunct is the recorded boundaryRefinementProperty, definitionally equality of inverse-image opens. Uniqueness quantifies over arbitrary ambient scheme morphisms satisfying the two triangles."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e1b9215db",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, report sections, and compiler evidence checked; no findings."
  }
 }
