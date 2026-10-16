@@ -1,0 +1,94 @@
+{
+ "id": "lem-coef-dg-free-cell-mapping-fibre",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md: use the reduction of integral compact supports in [lem-coef-integral-compact-support] and derived coefficient adjunction to compute the three displayed derived Hom objects. This supplies the generic dg-quotient mapping-complex infrastructure through the recorded intervening nodes.",
+   "via": [
+    "lem-coef-dg-quotient-hom-cone",
+    "lem-coef-dg-module-projective-resolution",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Mapping-space fibres of a free dg-cell attachment",
+ "statement": "Use the small dg categories, cofibrant objects and localization at quasi-equivalences of [lem-coef-dgcat-model-structure], and derived mapping spaces as in [lem-coef-cosimplicial-frame-mapping]. Let $\\mathcal B$ be cofibrant and let $I$ be a small set. For each $i\\in I$, choose objects $s_i,t_i\\in\\mathcal B$, an integer $n_i$, and a closed element $z_i\\in\\mathcal B(s_i,t_i)^{n_i+1}$. Form $\\mathcal B[e_i]$ by freely adjoining arrows $e_i:s_i\\to t_i$ of degree $n_i$ with $d(e_i)=z_i$, using the word construction of [lem-coef-dgcat-free-cell-calculus], with no additional relations. Then $\\mathcal B\\to\\mathcal B[e_i]$ is a cofibration and $\\mathcal B[e_i]$ is cofibrant. For any small dg category $\\mathcal E$ and strict dg functor $F:\\mathcal B\\to\\mathcal E$, the homotopy fibre over $F$ of\n$$\\operatorname{Map}_{\\mathrm{qe}}(\\mathcal B[e_i],\\mathcal E)\\longrightarrow\\operatorname{Map}_{\\mathrm{qe}}(\\mathcal B,\\mathcal E)$$\nis naturally equivalent to\n$$\\prod_{i\\in I}\\operatorname{Path}_{0,F(z_i)}\\operatorname{Map}_{\\mathbf D(\\mathbf Z)}\\bigl(\\mathbf Z[-n_i-1],\\mathcal E(Fs_i,Ft_i)\\bigr).$$\nHere $\\mathbf D(\\mathbf Z)$ is the enhanced localization of cochains at quasi-isomorphisms, with cochain convention as in [def-weil-abstract-derived-category], and $\\mathbf Z[m]$ has $\\mathbf Z$ in degree $-m$, and $\\operatorname{Path}_{a,b}(S)$ is the homotopy fibre of the endpoint map $S^{\\Delta^1}\\to S\\times S$ over $(a,b)$; a closed degree-$n_i+1$ element gives the indicated point. The product of an empty family is a point. The comparison is natural under dg functors and under homotopy coherent variation of $F$.",
+ "source": {
+  "document": "https://arxiv.org/pdf/math/0210114",
+  "place": "Drinfeld §§13.4-13.6 (free dg attachments and lifting); homotopy-fibre refinement via cosimplicial frames. Supports prop-coef-integral-exceptional-adjoint proof paragraph 2, through the recorded ancestry: computation of the free contracting-cell mapping spaces."
+ },
+ "stmt_deps": [
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-dgcat-free-cell-calculus",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "homotopy fiber of restriction of functors after freely adjoining a dg arrow with prescribed differential",
+   "results": "{\"t\": \"2026-10-16T15:06:07Z\", \"tool\": \"leanfinder\", \"query\": \"homotopy fiber of restriction of functors after freely adjoining a dg arrow with prescribed differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.Embedding.extendHomotopyFunctor\", \"HomologicalComplex.homotopyCofiber.X\", \"HomologicalComplex.homotopyCofiber.inlX\", \"HomotopyCategory.composableArrowsFunctor\", \"HomologicalComplex.homotopyCofiber.inr\", \"HomologicalComplex.homotopyCofiber.inrX\", \"HomologicalComplex.homotopyCofiber.descEquiv\", \"HomologicalComplex.homotopyCofiber.desc\"], \"digest\": \"72182e44bd0c66d4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are ordinary homotopy cofibres and extension of ordinary complexes, not free dg-category cell attachments; read HomotopyCofiber.lean and Enriched/Basic.lean:58-68."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\", \"hom\"",
+   "results": "{\"t\": \"2026-10-16T15:06:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.EnrichedCategory.Hom\", \"CategoryTheory.MonoidalClosed.enrichedCategorySelf_hom\"], \"digest\": \"141f0166bf3aec06\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCategory.Hom is the strict enrichment field, not a derived mapping-space calculation; read Enriched/Basic.lean:58-68."
+  },
+  {
+   "tool": "grep",
+   "query": "dg.?quotient|DGCategory|semi.?free|twisted.?complex|differential graded categor",
+   "results": "{\"t\": \"2026-10-16T15:06:03Z\", \"tool\": \"grep\", \"query\": \"dg.?quotient|DGCategory|semi.?free|twisted.?complex|differential graded categor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: whole pinned Mathlib source has no hits for these dg-category constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free attachment of an arrow to a differential graded category computes paths between the prescribed differential and zero in the target morphism complex",
+   "results": "{\"t\": \"2026-10-16T15:06:03Z\", \"tool\": \"leansearch\", \"query\": \"Free attachment of an arrow to a differential graded category computes paths between the prescribed differential and zero in the target morphism complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.extend.d_none_eq_zero'\", \"CategoryTheory.DifferentialObject.d_squared_apply_assoc\", \"HomologicalComplex.Hom.sqTo\", \"CochainComplex.augment_d_zero_one\", \"CategoryTheory.DifferentialObject.ctorIdx\", \"CategoryTheory.DifferentialObject.HomSubtype\", \"CategoryTheory.DifferentialObject.Hom.mk\", \"CategoryTheory.ShortComplex.toComposableArrows_obj\"], \"digest\": \"5e67cb5790da017d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned HomologicalComplex and DifferentialObject maps; these are ordinary complexes or differential objects, not derived mapping spaces of dg categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy lifting a chosen nullhomotopy of a cocycle along a free extension of differential graded categories",
+   "results": "{\"t\": \"2026-10-16T15:24:47Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy lifting a chosen nullhomotopy of a cocycle along a free extension of differential graded categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.liftHomotopy\", \"Homotopy.mkCoinductive\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc\", \"CochainComplex.HomComplex.Cochain.ofHomotopy\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.mappingCone.lift\", \"CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne\", \"CochainComplex.mappingCone.ofHom_lift\"], \"digest\": \"971220daeb2e7495\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: fresh second-reader search returns ordinary cochain homotopies and mapping cones. Read CochainComplex.mappingCone.liftHomotopy in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean:535-546; it constructs a homotopy between given maps into a complex cone, not a homotopy fibre of restriction between dg-category mapping spaces. Enriched/Basic.lean:58-68 gives only the strict enrichment fields."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Enriched\", \"homotopy\"",
+   "results": "{\"t\": \"2026-10-16T15:25:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Enriched\\\", \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: fresh second-reader Loogle query returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "twisted.?complex|pretriangulated|differential.?graded|two.?sided.?bar|semi.?free",
+   "results": "{\"t\": \"2026-10-16T15:25:11Z\", \"tool\": \"grep\", \"query\": \"twisted.?complex|pretriangulated|differential.?graded|two.?sided.?bar|semi.?free\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\"], \"digest\": \"49311228a49d9b61\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: fresh second-reader source search returned ordinary pretriangulated-category instances and subcategory definitions. Read CategoryTheory/Localization/Triangulated.lean:35-63 and CategoryTheory/Triangulated/Subcategory.lean:50-85; they assume an ordinary triangulated source and do not state any dg free-cell, module bar or finite twisted-hull theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dg-quotient-hom-cone",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

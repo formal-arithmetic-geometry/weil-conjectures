@@ -1,0 +1,92 @@
+{
+ "id": "lem-coef-dg-finite-twisted-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md: use the reduction of integral compact supports in [lem-coef-integral-compact-support] and derived coefficient adjunction to compute the three displayed derived Hom objects. This supplies the generic dg-quotient mapping-complex infrastructure through the recorded intervening nodes.",
+   "via": [
+    "lem-coef-dg-quotient-hom-cone",
+    "lem-coef-dg-module-projective-resolution",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Functorial finite twisted complexes and their homotopy categories",
+ "statement": "Use small dg categories and quasi-equivalences as in [lem-coef-dgcat-model-structure], with the cochain convention of [def-weil-abstract-derived-category]. For a small dg category $\\mathcal B$, let $\\operatorname{pretr}(\\mathcal B)$ have objects finite expressions $T=(\\bigoplus_{i=1}^m B_i[r_i],q)$, including $m=0$, where $r_i\\in\\mathbf Z$ and $q$ is a strictly upper triangular degree-$1$ matrix of shifted morphisms satisfying $dq+q^2=0$. Between $T=(\\bigoplus B_i[r_i],q)$ and $T'=(\\bigoplus B'_j[r'_j],q')$, the mapping complex is the matrix complex on the shifted mapping complexes of $\\mathcal B$, with\n$$d(f)=d_{\\mathrm{shifted}}f+q'f-(-1)^{|f|}fq,$$\nand composition is matrix multiplication with the shifted Koszul conventions. The embedding $\\mathcal B\\to\\operatorname{pretr}(\\mathcal B)$ on single unshifted summands is fully faithful on mapping complexes. Formal shifts and cones make $H^0\\operatorname{pretr}(\\mathcal B)$ a triangulated category: its distinguished triangles are those isomorphic to the formal cone triangles. A dg functor $F:\\mathcal B\\to\\mathcal E$ induces a dg functor $\\operatorname{pretr}(F)$ by applying $F$ to matrix entries; it commutes with formal zero, shifts and cones, and $H^0\\operatorname{pretr}(F)$ is exact. The construction $\\operatorname{pretr}$ preserves quasi-equivalences. If $\\mathcal B$ is pretriangulated, meaning its representable modules are closed up to homotopy equivalence under zero, shifts and cones, the embedding $\\mathcal B\\to\\operatorname{pretr}(\\mathcal B)$ is a quasi-equivalence. These constructions are functorial in dg functors.",
+ "source": {
+  "document": "https://arxiv.org/pdf/math/0210114",
+  "place": "Drinfeld §§2.4-2.5 (one-sided finite twisted complexes, their triangulated homotopy category, invariance); compare Keller §4.5. Supports prop-coef-integral-exceptional-adjoint proof paragraph 2 through the inherited dg-quotient ancestry: finite cone functoriality for the final pretriangulated localization clause."
+ },
+ "stmt_deps": [
+  "lem-coef-dgcat-model-structure",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A dg functor extends to finite twisted complexes by applying the functor to each matrix entry and induces an exact functor on pretriangulated hulls",
+   "results": "{\"t\": \"2026-10-16T15:06:08Z\", \"tool\": \"leanfinder\", \"query\": \"A dg functor extends to finite twisted complexes by applying the functor to each matrix entry and induces an exact functor on pretriangulated hulls\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDifferentialObject\", \"CategoryTheory.Functor.mapTriangulatedSpectralObject\", \"CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor\", \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"CategoryTheory.Functor.mapDifferentialObject_obj_obj\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.map_distinguished_op_exact\", \"CategoryTheory.Functor.isHomological_of_localization\"], \"digest\": \"c790e776ff582a13\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: mapDifferentialObject acts on an ordinary category with shift; ordinary homological/triangulated functors do not construct a dg pretriangulated hull. Read DifferentialObject.lean and Triangulated/Functor.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pretriangulated\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-16T15:06:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pretriangulated\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.contractibleTriangleFunctor\", \"CategoryTheory.Pretriangulated.contractibleTriangleFunctor_obj\", \"CategoryTheory.Pretriangulated.contractibleTriangleFunctor_map_hom₁\", \"CategoryTheory.Pretriangulated.contractibleTriangleFunctor_map_hom₂\", \"CategoryTheory.Pretriangulated.Triangle.functorMk\", \"CategoryTheory.Pretriangulated.contractibleTriangleFunctor_map_hom₃\", \"CategoryTheory.Pretriangulated.Triangle.functorMk_obj\", \"CategoryTheory.Pretriangulated.Triangle.functorMk_map_hom₁\"], \"digest\": \"ebabac90795044c5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits build functors of triangles in an already pretriangulated ordinary category. No finite twisted-complex dg hull is constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "twisted.?complex|pretriangulated.?hull|dg.?functor|DGCategory",
+   "results": "{\"t\": \"2026-10-16T15:06:03Z\", \"tool\": \"grep\", \"query\": \"twisted.?complex|pretriangulated.?hull|dg.?functor|DGCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: whole pinned Mathlib source grep returned zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of differential graded functors to pretriangulated envelopes and preservation of mapping cone objects",
+   "results": "{\"t\": \"2026-10-16T15:06:04Z\", \"tool\": \"leansearch\", \"query\": \"Extension of differential graded functors to pretriangulated envelopes and preservation of mapping cone objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone\", \"CategoryTheory.Functor.IsTriangulated.map_distinguished\", \"CategoryTheory.Functor.IsTriangulated\", \"CategoryTheory.Functor.map_distinguished\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'\", \"CochainComplex.mappingCone.mapHomologicalComplexIso\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\"], \"digest\": \"ed9f7319bc61389f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CochainComplex.mappingCone.mapHomologicalComplexIso applies an additive functor termwise to ordinary complexes, while Functor.IsTriangulated assumes the exactness to be constructed here. Read the types in MappingCone.lean and Triangulated/Functor.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pretriangulated envelope by upper triangular matrices of shifted morphisms preserves quasi equivalences of dg categories",
+   "results": "{\"t\": \"2026-10-16T15:24:47Z\", \"tool\": \"leanfinder\", \"query\": \"Pretriangulated envelope by upper triangular matrices of shifted morphisms preserves quasi equivalences of dg categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instPretriangulated\", \"DerivedCategory.instIsTriangulated\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"CategoryTheory.Equivalence.IsTriangulated.mk''\", \"CategoryTheory.Equivalence.IsTriangulated.mk'\", \"HomotopyCategory.instPretriangulatedIntUp\", \"DerivedCategory.mem_distTriang_iff\", \"HomotopyCategory.instIsTriangulatedIntUp\"], \"digest\": \"ca034662b3926c10\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: fresh second-reader search returns triangulated structures on ordinary derived and homotopy categories. Read Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:169-178 and CategoryTheory/Triangulated/Subcategory.lean:50-85; they do not construct a finite matrix hull of a dg category or prove its quasi-equivalence invariance."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Triangulated\", \"Enriched\"",
+   "results": "{\"t\": \"2026-10-16T15:25:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Triangulated\\\", \\\"Enriched\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: fresh second-reader Loogle query returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "twisted.?complex|pretriangulated|differential.?graded|two.?sided.?bar|semi.?free",
+   "results": "{\"t\": \"2026-10-16T15:25:11Z\", \"tool\": \"grep\", \"query\": \"twisted.?complex|pretriangulated|differential.?graded|two.?sided.?bar|semi.?free\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\"], \"digest\": \"49311228a49d9b61\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: fresh second-reader source search returned ordinary pretriangulated-category instances and subcategory definitions. Read CategoryTheory/Localization/Triangulated.lean:35-63 and CategoryTheory/Triangulated/Subcategory.lean:50-85; they assume an ordinary triangulated source and do not state any dg free-cell, module bar or finite twisted-hull theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dg-quotient-hom-cone",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

@@ -1,0 +1,93 @@
+{
+ "id": "lem-coef-dg-two-sided-bar-derived-tensor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md: use the reduction of integral compact supports in [lem-coef-integral-compact-support] and derived coefficient adjunction to compute the three displayed derived Hom objects. This supplies the generic dg-quotient mapping-complex infrastructure through the recorded intervening nodes.",
+   "via": [
+    "lem-coef-dg-quotient-hom-cone",
+    "lem-coef-dg-module-projective-resolution",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived dg-module tensor and its flat bar model",
+ "statement": "Use the cochain convention of [def-weil-abstract-derived-category] and small dg categories over $\\mathbf Z$ as in [lem-coef-dgcat-model-structure]. Let $\\mathcal B$ be such a category, $G$ a right dg $\\mathcal B$-module and $F$ a left dg $\\mathcal B$-module: their values are cochain complexes, with unital associative chain-map actions $G(V)\\otimes\\mathcal B(U,V)\\to G(U)$ and $\\mathcal B(U,V)\\otimes F(U)\\to F(V)$. Their balanced tensor is the direct sum $\\bigoplus_U G(U)\\otimes F(U)$ modulo $(ga)\\otimes f=g\\otimes(af)$. A semi-free module has an exhaustive increasing filtration starting at zero, split on underlying graded modules, whose successive dg quotients are direct sums of shifted representables; such replacements exist by [lem-coef-dg-module-semi-free-replacement], also for left modules by passage to the opposite category. Tensoring either semi-free input with an objectwise quasi-isomorphism of the other input is a quasi-isomorphism. If $P\\to G$ and $Q\\to F$ are semi-free replacements, then\n$$P\\otimes_{\\mathcal B}F\\ \\longleftarrow\\ P\\otimes_{\\mathcal B}Q\\ \\longrightarrow\\ G\\otimes_{\\mathcal B}Q$$\nare quasi-isomorphisms. They define the derived balanced tensor, natural in the two modules and invariant under objectwise quasi-isomorphisms in both inputs.\n\nAssume in addition that every $\\mathcal B(U,V)$ is homotopically flat over $\\mathbf Z$, meaning its tensor with any acyclic complex is acyclic, and that at least one of $F,G$ is objectwise homotopically flat over $\\mathbf Z$. The unnormalized two-sided bar total complex $B(G,\\mathcal B,F)$ represents $G\\otimes^{\\mathbf L}_{\\mathcal B}F$. Its simplicial degree $n\\geq0$ is\n$$\\bigoplus_{U_0,\\ldots,U_n}G(U_n)\\otimes\\mathcal B(U_{n-1},U_n)\\otimes\\cdots\\otimes\\mathcal B(U_0,U_1)\\otimes F(U_0),$$\nWrite this tensor complex as $V_n$ and put $B=\\bigoplus_{n\\geq0}V_n[n]$, so simplicial degree $n$ lowers the cochain degree by $n$. On $V_n[n]$ the internal differential is $(-1)^n d_{V_n}$. For $n\\geq1$ its other component is $\\sum_{i=0}^n(-1)^i\\partial_i:V_n[n]\\to V_{n-1}[n-1]$: numbering the factors from the left by $0,\\ldots,n+1$, $\\partial_i$ merges adjacent factors $i,i+1$ by the right action when $i=0$, composition when $0<i<n$, and the left action when $i=n$. This component is zero on $V_0$. Degeneracies insert units. The augmentation to $G\\otimes_{\\mathcal B}F$ is the quotient map on $V_0$ and zero on $V_n$ for $n>0$. The comparison with the derived balanced tensor is natural in module maps. The complex $B[1]$, rather than $B$, has $n+1$ suspensions in the summand indexed by $V_n$.",
+ "source": {
+  "document": "https://arxiv.org/pdf/math/0210114",
+  "place": "Drinfeld §§14.3-14.8 (balanced tensor, semi-free homotopical flatness), §3.6(i) (bar model under flatness), and §1.3.1. Supports prop-coef-integral-exceptional-adjoint proof paragraph 2: derived evaluation of the restricted representable modules."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-dg-module-semi-free-replacement"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two sided bar construction over a homotopically flat differential graded category computes derived tensor of modules when one input is objectwise homotopically flat",
+   "results": "{\"t\": \"2026-10-16T15:06:04Z\", \"tool\": \"leanfinder\", \"query\": \"Two sided bar construction over a homotopically flat differential graded category computes derived tensor of modules when one input is objectwise homotopically flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.tensorObj\", \"CategoryTheory.Tor'_obj_obj\", \"HomologicalComplex.HasTensor\"], \"digest\": \"b6e2ff98d82dea27\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are ordinary tensor-complex associativity and Tor; read Algebra/Homology/Monoidal.lean and CategoryTheory/Monoidal/Tor.lean:40-70, which do not treat dg-module balanced tensors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"barComplex\"",
+   "results": "{\"t\": \"2026-10-16T15:06:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"barComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Rep.barComplex\", \"Rep.barComplex.d\", \"Rep.barComplex.isoStandardComplex\", \"Rep.barComplex.d_def\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"Rep.barComplex.d_single\"], \"digest\": \"576ec8ac9e40af03\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Rep.barComplex and its resolution describe group representations, not arbitrary several-object dg categories; read RepresentationTheory/Homological/Resolution.lean, Rep.barComplex definition and its differential."
+  },
+  {
+   "tool": "grep",
+   "query": "bar.?construction|two.?sided.?bar|semi.?free|[Kk]Flat|derived.?tensor",
+   "results": "{\"t\": \"2026-10-16T15:06:02Z\", \"tool\": \"grep\", \"query\": \"bar.?construction|two.?sided.?bar|semi.?free|[Kk]Flat|derived.?tensor\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: source grep in Algebra/Homology returned zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived balanced tensor of right and left modules over a dg category by semi free resolutions and bar complexes",
+   "results": "{\"t\": \"2026-10-16T15:06:03Z\", \"tool\": \"leansearch\", \"query\": \"Derived balanced tensor of right and left modules over a dg category by semi free resolutions and bar complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barResolution\", \"Rep.barResolution_complex\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"HomologicalComplex.tensorObj\", \"Bimod.TensorBimod.X\"], \"digest\": \"53608085e48a71d2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Rep.barResolution is the group case; Tor derives the tensor of objects of an ordinary abelian category and Bimod.TensorBimod.X is an underived coequalizer. None states the derived dg-module bar comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded two sided simplicial bar resolution computes tensor product derived from flat differential graded modules",
+   "results": "{\"t\": \"2026-10-16T15:24:46Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded two sided simplicial bar resolution computes tensor product derived from flat differential graded modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barResolution_complex\", \"CategoryTheory.Tor'_obj_obj\", \"HomologicalComplex.coinvariantsTensorObj\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"Rep.torIso\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso\"], \"digest\": \"790077628ec677a2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: fresh second-reader search returns group representation bar resolutions and ordinary Tor. Read Mathlib/RepresentationTheory/Homological/Resolution.lean:412-434 and Mathlib/CategoryTheory/Monoidal/Tor.lean:38-54: their statements concern a group representation or ordinary monoidal abelian objects, not unbounded modules over arbitrary dg categories or this bar comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bar\", \"quasiIso\"",
+   "results": "{\"t\": \"2026-10-16T15:25:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"bar\\\", \\\"quasiIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: fresh second-reader Loogle query returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "twisted.?complex|pretriangulated|differential.?graded|two.?sided.?bar|semi.?free",
+   "results": "{\"t\": \"2026-10-16T15:25:11Z\", \"tool\": \"grep\", \"query\": \"twisted.?complex|pretriangulated|differential.?graded|two.?sided.?bar|semi.?free\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\"], \"digest\": \"49311228a49d9b61\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: fresh second-reader source search returned ordinary pretriangulated-category instances and subcategory definitions. Read CategoryTheory/Localization/Triangulated.lean:35-63 and CategoryTheory/Triangulated/Subcategory.lean:50-85; they assume an ordinary triangulated source and do not state any dg free-cell, module bar or finite twisted-hull theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dg-quotient-hom-cone",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

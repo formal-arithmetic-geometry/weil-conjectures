@@ -27,9 +27,111 @@
   "lem-coef-dg-enrichment-rectification",
   "lem-coef-enhanced-localization-universal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-dgcat-model-structure] to obtain an identity-on-objects cofibrant replacement $p:\\mathcal C_c\\to\\mathcal C$. Let $\\mathcal A_c$ be the full subcategory on the objects of $\\mathcal A$. Thus $p|_{\\mathcal A_c}$ is an identity-on-objects quasi-equivalence and all mapping complexes of $\\mathcal C_c$, hence of $\\mathcal A_c$, are homotopically flat. Over $\\mathcal C_c$ freely adjoin, simultaneously for $A\\in\\mathcal A_c$, generators $\\varepsilon_A:A\\to A$ of degree $-1$ with $d\\varepsilon_A=1_A$, and call the resulting dg category $Q$. The free-cell construction [lem-coef-dgcat-free-cell-calculus] supplies the word composition and filtration; for several generators iterate the attachment and take the colimit over finite subsets. It creates no objects. The differential squares to zero because it does so on the original morphisms and on each generator, and its Leibniz extension is a derivation. The quotient arrow $j$ will be the derived enriched composite $\\mathcal C\\simeq\\mathcal C_c\\to Q$, using [lem-coef-dg-enrichment-rectification]; it need not be a strict functor from the unreplaced dg category.",
+   "uses": [
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-dgcat-free-cell-calculus",
+    "lem-coef-dg-enrichment-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld §§3.1, 3.5 and 13.5; homotopically flat replacement is made before adjoining any contraction."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-dg-free-cell-mapping-fibre] with $n_A=-1$ and $z_A=1_A$. For a strict $F:\\mathcal C_c\\to\\mathcal E$, the homotopy fibre of restriction from $Q$ is the product, over $A$, of paths from zero to $1_{F(A)}$ in $\\operatorname{Map}_{\\mathbf D(\\mathbf Z)}(\\mathbf Z,\\mathcal E(F(A),F(A)))$. If $F(A)$ is not contractible this path space is empty. If $d h_A=1_{F(A)}$, left multiplication $u\\mapsto h_Au$ contracts the entire endomorphism complex, since $d(h_Au)+h_A d(u)=u$. Hence that mapping space, and the path fibre between its two points, is contractible. It follows that restriction on dg-category mapping spaces is an equivalence onto the union of components of functors annihilating every $A$. This proves existence and uniqueness with all homotopies of extensions at the level of mapping spaces, rather than inferring it from a strict correspondence of functors and chosen contractions.",
+   "uses": [
+    "lem-coef-dg-free-cell-mapping-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld §1.6, Keller §4.4 refined universal properties; explicit free-cell fibre computation."
+   }
+  },
+  {
+   "text": "We now recover entire enriched functor categories. By [lem-coef-enriched-category-tensor-calculus] and [lem-coef-dg-enrichment-rectification], for each small enriched category $\\mathcal J$ we may use a dg model of $\\operatorname{Fun}(\\mathcal J,\\mathcal E)$ as target in Step 2 and curry the result. An object of this functor category is contractible exactly when all its values are contractible. Indeed the full enriched subcategory $\\mathcal E_0$ of contractible objects has zero mapping objects: in a dg model, multiplication by a contraction of the target contracts every Hom complex into it. If nonempty $\\mathcal E_0$ is equivalent to the one-object category with zero mapping complex, so every diagram in it is contractible; if it is empty only an empty-domain diagram is possible, and that functor category is the same one-object zero category. Full-subcategory factorization and currying from the tensor-calculus node show the converse by evaluation and show that diagrams with contractible values factor through $\\mathcal E_0$. Consequently the mapping-space result for every $\\mathcal J$ identifies $\\operatorname{Map}(\\mathcal J,\\operatorname{Fun}(Q,\\mathcal E))$ with the mapping space into the full enriched subcategory of $\\operatorname{Fun}(\\mathcal C_c,\\mathcal E)$ on functors annihilating $\\mathcal A_c$. These tests imply an equivalence of those enriched categories: test with each of the two categories to construct an inverse and check the two inverse identities. Thus restriction retains noninvertible transformations as well as all higher homotopies. Transport along $p$ gives precisely the enhanced annihilation universal property stated for $j$.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-dg-enrichment-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Keller §4.4 refined properties and §4.3 (internal Hom); the argument tests all enriched parameters instead of upgrading only degree-zero transformations."
+   }
+  },
+  {
+   "text": "For later descent record explicitly the tensor comparison for $v=p|_{\\mathcal A_c}$. Let $G$ be a right dg $\\mathcal A$-module and $F$ a left dg $\\mathcal A$-module. Derived tensor is computed by either semi-free input, with invariance in both inputs, by [lem-coef-dg-two-sided-bar-derived-tensor]. Choose a semi-free left resolution $P\\to v^*F$ using [lem-coef-dg-module-semi-free-replacement] on the opposite category. Define $v_!P$ by extension of scalars, the coend $\\mathcal A(v(-),-)\\otimes_{\\mathcal A_c}P$. The coend relations give an adjunction and send a representable at $A$ to the representable at $vA$, by evaluation $a\\otimes b\\mapsto ab$ with inverse $c\\mapsto c\\otimes1_A$. Extension preserves the graded-split semi-free filtration. The unit $P\\to v^*v_!P$ is an objectwise quasi-isomorphism: on each successive quotient it is a direct sum of shifts of the mapping-complex quasi-isomorphisms for $v$; the cone of the unit on each filtration quotient is therefore acyclic. For a degreewise exact extension of two acyclic complexes, lift a primitive of the image of a cycle in the quotient and subtract its differential; the residual cycle lies in the acyclic subcomplex and is again a boundary. Induction makes every finite filtration stage of the unit cone acyclic; every cycle in its union lies in such a stage and is a boundary there. This proves the assertion without any convergence assumption. The adjoint $v_!P\\to F$ is therefore a quasi-isomorphism, since its restriction composed with the unit is $P\\to v^*F$, and $v$ has the same object set. Finally the balanced relations give $G\\otimes_{\\mathcal A}v_!P\\cong v^*G\\otimes_{\\mathcal A_c}P$. Applying the cited semi-free tensor comparison gives a natural identification of derived tensors over $\\mathcal A$ and $\\mathcal A_c$. This argument establishes the necessary base-change comparison without citing a module-model theorem whose proof depends on this item.",
+   "uses": [
+    "lem-coef-dg-two-sided-bar-derived-tensor",
+    "lem-coef-dg-module-semi-free-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld §§14.3-14.4, 14.8-14.12 and 2.7; filtration proof of the identity-on-objects quasi-equivalence comparison."
+   }
+  },
+  {
+   "text": "Put $G_c(A)=\\mathcal C_c(A,Y)$ and $F_c(A)=\\mathcal C_c(X,A)$. Their values, and all mapping complexes of $\\mathcal A_c$, are homotopically flat by Step 1, so [lem-coef-dg-two-sided-bar-derived-tensor] gives the unnormalized direct-sum bar model $B=\\bigoplus_{n\\geq0}V_n[n]$ for their derived tensor. Write a homogeneous tensor in $V_n$ as $x=a_0\\otimes\\cdots\\otimes a_{n+1}$, where $a_0\\in G_c(A_n)$, $a_{n+1}\\in F_c(A_0)$ and the intermediate factors are the successive morphisms of $\\mathcal A_c$ in descending order. The word formula of [lem-coef-dgcat-free-cell-calculus] identifies the length-zero part of $Q(X,Y)$ with $\\mathcal C_c(X,Y)$. Define a graded isomorphism from $B[1]$ onto its positive-length part by\n$$\\Phi_n(x)=(-1)^{\\alpha_n(x)}a_0\\varepsilon_{A_n}a_1\\varepsilon_{A_{n-1}}\\cdots a_n\\varepsilon_{A_0}a_{n+1},\\qquad \\alpha_n(x)=n+\\sum_{j=0}^{n+1}(n+1-j)|a_j|.$$\nHere there are $n+1$ contractions, so the degree is $\\sum_j|a_j|-n-1$, as required for $V_n[n+1]$. Put $S_i=\\sum_{j=0}^i|a_j|$. In the word differential the term differentiating $a_j$ has sign $(-1)^{S_{j-1}-j}$, with $S_{-1}=0$. Differentiating $a_j$ changes $\\alpha_n$ by $n+1-j$; these two exponents identify the internal differential with $(-1)^{n+1}d_{V_n}$, the internal part of $-d_B$. Deleting contraction number $i$ from the left has sign $(-1)^{S_i-i}$. For $n\\geq1$, merging $a_i,a_{i+1}$ changes the exponent by $\\alpha_n(x)-\\alpha_{n-1}(\\partial_i x)=S_i+1$ modulo $2$, hence the induced coefficient is $(-1)^{i+1}$. This is exactly the negative of the bar face coefficient $(-1)^i$. For $n=0$ the deletion lands in length zero with sign $(-1)^{|a_0|+S_0}=1$, giving composition $a_0a_1$. Thus the full word complex is $\\mathcal C_c(X,Y)\\oplus B[1]$ with differential\n$$\\begin{pmatrix}d_{\\mathcal C_c}&\\mathrm{ev}\\\\0&-d_B\\end{pmatrix},$$\nwhere $\\mathrm{ev}$ is composition on $V_0$ and zero on higher bar degrees. This is the mapping cone of evaluation, and inclusion of its length-zero summand is the map induced by the word quotient functor.",
+   "uses": [
+    "lem-coef-dg-two-sided-bar-derived-tensor",
+    "lem-coef-dgcat-free-cell-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld §§3.1 and 3.6(i): unnormalized word/bar differential; the quotient includes its length-zero summand."
+   }
+  },
+  {
+   "text": "The maps $G_c\\to v^*h_Y$ and $F_c\\to v^*h^X$ induced by $p$ are objectwise quasi-isomorphisms. The invariance and naturality in [lem-coef-dg-two-sided-bar-derived-tensor], followed by the comparison of Step 4, identify $B$ with $h_Y\\otimes^{\\mathbf L}_{\\mathcal A}h^X$. The morphism $\\mathcal C_c(X,Y)\\to\\mathcal C(X,Y)$ is also a quasi-isomorphism. All these maps commute with evaluation because $p(gf)=p(g)p(f)$; hence the cone triangle from Step 5 becomes exactly the displayed cofiber sequence of the statement, with its first arrow evaluation and its second arrow induced by $j$. Precomposition in $X$ and postcomposition in $Y$ act on every word and every bar factor and commute with the Leibniz differential, so the comparison is natural in both variables. Semi-free tensor invariance gives independence of input resolutions; the enhanced universal property of Step 3 identifies different quotient models compatibly with their maps. No flatness of $\\mathcal C$ was used: all underived bar computations took place over the locally flat replacement $\\mathcal C_c$.",
+   "uses": [
+    "lem-coef-dg-two-sided-bar-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld §§1.3.1-1.3.3, 3.5-3.6 and 14.8-14.12; compatibility with both arrows and both variables."
+   }
+  },
+  {
+   "text": "Suppose $\\mathcal C$ is pretriangulated. For any derived enriched $F:\\mathcal C\\to\\mathcal E$, choose a strict representative on a cofibrant replacement as allowed by [lem-coef-dgcat-model-structure] and [lem-coef-dg-enrichment-rectification]. Apply [lem-coef-dg-finite-twisted-extension] to extend it to finite twisted complexes. That node says that pretriangulated hulls preserve quasi-equivalences, contain the original categories fully faithfully, and that their induced homotopy-category functors are exact. Therefore $F(\\operatorname{Cone}(f))$ is identified in the target hull with the formal cone of $F(f)$ even when $\\mathcal E$ itself is not pretriangulated. By [lem-kun-distinguished-cone-zero], $F(f)$ is invertible if and only if that object is zero, equivalently its identity is a boundary in the target dg hull. Full faithfulness of the original target embedding identifies this with contractibility of $F(\\operatorname{Cone}(f))$ in $\\mathcal E$. If $F$ annihilates $\\mathcal A$, this holds for every $f$ whose cone is homotopy equivalent to an object of $\\mathcal A$. Conversely the zero object of $\\mathcal C$ is preserved up to contractibility by the finite-twisted extension, and for each $A\\in\\mathcal A$ the map $0\\to A$ has cone homotopy equivalent to $A$. Inverting these maps forces $F(A)$ contractible. Thus the two classes of functors are exactly the same. Their full enriched subcategories, including transformations, are equal. Step 3 and [lem-coef-enhanced-localization-universal] now identify $j$ with the enhanced localization at the indicated maps. We assert localization AT this class, not that the class lists every map inverted after saturation; closure under retracts is not assumed or needed.",
+   "uses": [
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-dg-enrichment-rectification",
+    "lem-coef-dg-finite-twisted-extension",
+    "lem-kun-distinguished-cone-zero",
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0210114",
+    "place": "Drinfeld §§2.4-2.5 and §1.6; Keller §4.5; cone-zero test in the target pretriangulated hull."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dg-enrichment-rectification",
+  "lem-coef-dg-finite-twisted-extension",
+  "lem-coef-dg-free-cell-mapping-fibre",
+  "lem-coef-dg-module-semi-free-replacement",
+  "lem-coef-dg-two-sided-bar-derived-tensor",
+  "lem-coef-dgcat-free-cell-calculus",
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-enhanced-localization-universal",
+  "lem-coef-enriched-category-tensor-calculus",
+  "lem-kun-distinguished-cone-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/math/0210114",
+  "place": "Drinfeld §§1.3, 1.6, 2.4-2.5, 3.1, 3.5-3.6, 13.5-13.6 and 14.3-14.12; Keller §§4.3-4.5 read online. Full enriched universality is obtained by parameter testing, not from a strict-functor correspondence."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -86,10 +188,31 @@
    "results": "{\"t\": \"2026-10-16T12:46:19Z\", \"tool\": \"leanfinder\", \"query\": \"Derived quotient by acyclic dg modules computes mapping complexes from homotopically projective modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.Qh_map_bijective\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"DerivedCategory.Q\", \"DerivedCategory.Qh\", \"CochainComplex.IsKProjective.homotopyZero\", \"HomotopyEquiv.isKProjective\"], \"digest\": \"868de05f7dcce0f8\"}",
    "date": "2026-10-16",
    "verdict": "no match: inspected Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:39-65. These concern ordinary cochain complexes in an abelian category, not graded modules over a dg category, semi-free representable filtrations, or enhanced dg quotients. CochainComplex.isKProjective_of_projective moreover requires a bounded-above complex of projective objects. The dg-module/quotient vocabulary grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping complex in a Drinfeld dg quotient is the cofiber of evaluation from the derived tensor of restricted representable dg modules",
+   "results": "{\"t\": \"2026-10-16T15:14:27Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping complex in a Drinfeld dg quotient is the cofiber of evaluation from the derived tensor of restricted representable dg modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.monoidalCategory\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.monoidalCategoryStruct\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"CategoryTheory.Tor\", \"HomologicalComplex.instHasTensorTensorUnit\", \"HomologicalComplex.instHasTensorTensorUnit_1\"], \"digest\": \"f19332b3e8e6ec56\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary tensor-complex and Tor declarations or the unrelated Drinfeld center; inspected Monoidal.lean:286-304, Monoidal/Tor.lean:40-70 and Monoidal/Center.lean:70-110. None states a dg quotient or its evaluation-cone formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-16T15:14:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"mappingCone\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary tensor-complex and Tor declarations or the unrelated Drinfeld center; inspected Monoidal.lean:286-304, Monoidal/Tor.lean:40-70 and Monoidal/Center.lean:70-110. None states a dg quotient or its evaluation-cone formula."
+  },
+  {
+   "tool": "grep",
+   "query": "Drinfeld|dg.?quotient|DGCategory|semi.?free",
+   "results": "{\"t\": \"2026-10-16T15:14:27Z\", \"tool\": \"grep\", \"query\": \"Drinfeld|dg.?quotient|DGCategory|semi.?free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\"], \"digest\": \"07f319179c70f800\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary tensor-complex and Tor declarations or the unrelated Drinfeld center; inspected Monoidal.lean:286-304, Monoidal/Tor.lean:40-70 and Monoidal/Center.lean:70-110. None states a dg quotient or its evaluation-cone formula."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-module-projective-resolution",
   "by": "worker",
@@ -105,5 +228,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-dg-quotient-hom-cone",
+  "worker": "stage1",
+  "summary": "Replaced the prior underived quotient argument: first choose a locally flat cofibrant dg model, compute contraction-cell fibres, test all enriched parameter categories to obtain coherent universality, compare derived tensors by a semi-free filtration, and identify the full word differential with the evaluation cone. The final pretriangulated assertion uses finite twisted complexes and the existing distinguished-cone-zero theorem, without an erroneous assertion about exactly which nonsaturated maps are inverted. Three supporting statement-only nodes; no new definition or clause of the item is deferred. Second reading fixes the bar suspension convention and supplies the all-length Koszul signs and an elementwise filtration argument.",
+  "blueprint": "Realizes the generic derived mapping-complex calculation supporting paragraph 2 of prop-coef-integral-exceptional-adjoint (derived coefficient adjunction before total inverse limit), via the inherited four intervening nodes. It changes neither the unit statement nor the unit proof route.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-distinguished-cone-zero",
+    "why": "Generic cone-zero test applied in the homotopy category of the target dg pretriangulated hull; the coefficient-adjunction unit has no distinct statement of this triangulated tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-distinguished-cone-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q49-340fef6d2",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q49-340fef6d2 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited statements; checked Drinfeld/Keller sources, all seven steps, three new nodes, target coefficients and base-change direction. No duplicates or cycles found; 6,660 cone-sign checks passed. Accepted the cone-zero tool use. Detailed review written to review.md; no repairs needed."
  }
 }
