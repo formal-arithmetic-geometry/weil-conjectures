@@ -20,18 +20,122 @@
  },
  "kind": "statement",
  "title": "Mapping-space criterion for a horn-cocartesian edge",
- "statement": "Use quasicategories, right-pinched mapping spaces, spaces and coherent composition as in [def-cbc-enhanced-diagrams-cones], and inner fibrations and horn-cocartesian edges as in [def-coef-infinity-fibrations]. Let $p:E\\to B$ be an inner fibration between quasicategories in a fixed universe, and let $s:x\\to y$ be an edge of $E$. The edge $s$ is $p$-cocartesian in the horn-lifting sense if and only if, for every vertex $z$ of $E$, precomposition with $s$ and with $p(s)$ gives a homotopy pullback square\n$$\\begin{array}{ccc}\n\\operatorname{Map}_E(y,z)&\\longrightarrow&\\operatorname{Map}_E(x,z)\\\\\n\\downarrow&&\\downarrow\\\\\n\\operatorname{Map}_B(p(y),p(z))&\\longrightarrow&\\operatorname{Map}_B(p(x),p(z)).\n\\end{array}$$\nA homotopy pullback square of spaces means that the canonical map from its upper left corner to the path-space homotopy fiber product of the other three corners is a weak homotopy equivalence. No existence of other cocartesian lifts is assumed.",
+ "statement": "Use quasicategories, right-pinched mapping spaces and spaces as in [def-cbc-enhanced-diagrams-cones], composition of mapping spaces (precomposition by an edge) as in [lem-coef-infinity-mapping-composition], and inner fibrations and horn-cocartesian edges as in [def-coef-infinity-fibrations]. Let $p:E\\to B$ be an inner fibration between quasicategories in a fixed universe, and let $s:x\\to y$ be an edge of $E$. The edge $s$ is $p$-cocartesian in the horn-lifting sense if and only if, for every vertex $z$ of $E$, precomposition with $s$ and with $p(s)$ gives a homotopy pullback square\n$$\\begin{array}{ccc}\n\\operatorname{Map}_E(y,z)&\\longrightarrow&\\operatorname{Map}_E(x,z)\\\\\n\\downarrow&&\\downarrow\\\\\n\\operatorname{Map}_B(p(y),p(z))&\\longrightarrow&\\operatorname{Map}_B(p(x),p(z)).\n\\end{array}$$\nA homotopy pullback square of spaces means that the canonical map from its upper left corner to the path-space homotopy fiber product of the other three corners is a weak homotopy equivalence. No existence of other cocartesian lifts is assumed.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
   "place": "Proposition 2.4.4.3, printed p. 131, opposite-category dual; Proposition 2.4.1.8 and Remark 2.4.1.4 identify the cartesian-edge definition with its horn criterion. Read online 2026-10-17. No Stacks tag states this quasicategorical assertion; WANTED: archived source."
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We use join coslices to give a strict representative of the coherent square, as in the dual of HTT's proof. For a diagram $a:K\\to C$, put $(C_{a/})_m=\\{h:K\\star\\Delta^m\\to C\\mid h|_K=a\\}$, with restriction operators on $\\Delta^m$, and let its projection to $C$ restrict to that last factor. The join is the degreewise join specified by [lem-coef-infinity-anodyne-cocones]. For vertices $v,z$, write $L_C(v,z)=(C_{v/})\\times_C\\{z\\}$; explicitly these are maps $\\Delta^{m+1}\\to C$ with first vertex $v$ and entire remaining face constant at $z$. We will use the following consequence of the cited pushout-join assertion. For any monomorphism $i:K\\hookrightarrow K'$ and inner fibration $p:C\\to D$, restriction gives a left fibration\n$$C_{a/}\\longrightarrow C_{(a|_K)/}\\times_{D_{(pa|_K)/}}D_{pa/},\\qquad a:K'\\to C.$$\nIndeed, lifting a left horn $\\Lambda_j^m$, $0\\leq j<m$, amounts exactly to extending across\n$$(K'\\star\\Lambda_j^m)\\cup_{K\\star\\Lambda_j^m}(K\\star\\Delta^m)\\hookrightarrow K'\\star\\Delta^m.$$\nThis is inner anodyne by the opposite of the cited pushout-join assertion. To see precisely what this dualization does, define $X^{\\mathrm{op}}_r=X_r$ with operator for $\\alpha:[u]\\to[r]$ given by the operator for $\\alpha^{\\mathrm{rev}}(a)=r-\\alpha(u-a)$ on $X$. Reversal takes $\\Lambda_j^m$ to $\\Lambda_{m-j}^m$, interchanges the two join factors, and preserves inner horns. It therefore converts a left-horn inclusion in the second factor into the right-anodyne inclusion in the first factor required by that assertion. An inner fibration lifts an inner-anodyne map: extend along the generating horns, use the previously chosen compatible extensions at each successor stage and their union at a limit stage, and pass to a retract. Taking $K=\\varnothing$ and $D=\\Delta^0$ also proves that every $C_{a/}\\to C$ is a left fibration when $C$ is a quasicategory. These constructions only use $p$ being inner; they impose no existence of cocartesian lifts.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.2.1 and Lemma 2.1.2.3, applied to coslices; dual pushout-join argument written out."
+   }
+  },
+  {
+   "text": "Apply Step 1 with $K=\\{0\\}\\subset K'=\\Delta^1$ and $a=s$. This gives a left fibration\n$$\\phi:E_{s/}\\longrightarrow Q:=E_{x/}\\times_{B_{p(x)/}}B_{p(s)/}.$$\nBy [def-weil-pbc-trivial-kan-fibration], $\\phi$ is a trivial Kan fibration exactly when it lifts every $\\partial\\Delta^m\\hookrightarrow\\Delta^m$, including $m=0$. Such a lifting problem is, by the displayed coslice definition, exactly a lifting problem over $B$ for\n$$(\\Delta^1\\star\\partial\\Delta^m)\\cup_{\\{0\\}\\star\\partial\\Delta^m}(\\{0\\}\\star\\Delta^m)\\hookrightarrow\\Delta^1\\star\\Delta^m.$$\nNumber the vertices $0,1,2,\\ldots,m+2$, with the first two carrying $s$. The domain contains the face omitting $1$ and every face omitting a vertex $2,\\ldots,m+2$, and omits exactly the face omitting $0$. It is therefore $\\Lambda_0^{m+2}\\hookrightarrow\\Delta^{m+2}$ with prescribed edge $\\{0,1\\}=s$. Conversely every horn in the definition of $p$-cocartesian is obtained this way by $m=n-2$. Consequently the horn-cocartesian condition on $s$ is equivalent to $\\phi$ being a trivial Kan fibration. In particular the dimension-zero boundary test is the $\\Lambda_0^2$ test, so no lifting condition has been lost.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 2.4.1.1 and Remark 2.4.1.4, opposite dual; boundary/horn correspondence in the proof of Proposition 2.4.4.3."
+   }
+  },
+  {
+   "text": "For each vertex $z$ of $E$, restrict the last-factor projection to define\n$$T_E(s,z)=E_{s/}\\times_E\\{z\\},\\qquad T_B(p(s),p(z))=B_{p(s)/}\\times_B\\{p(z)\\}.$$\nThe fiber of $\\phi$ over the vertex $z$ of this projection is the map\n$$\\phi_z:T_E(s,z)\\longrightarrow L_E(x,z)\\times_{L_B(p(x),p(z))}T_B(p(s),p(z)).$$\nAll four spaces here are Kan. Indeed, the coslice projections are left fibrations by Step 1, hence their vertex fibers are left fibrations over a point; apply [lem-cbc-right-fibration-space-fiber] after the reversal defined in Step 1. The same relative-coslice construction, with $K=\\varnothing$ and $K'=\\{x\\}$, says that $L_E(x,z)\\to L_B(p(x),p(z))$ is a left fibration. Its target is Kan, so the same reversed right-fibration result makes it a Kan fibration. Thus the displayed pullback is Kan, and $\\phi_z$ is a left fibration over that Kan complex, hence a Kan fibration too. Pullbacks preserve lifting properties directly: pull a horn problem back to the original map and use its filler. This justifies every restriction just made.\n\nNow $\\phi$ is trivial if and only if every $\\phi_z$ is a weak homotopy equivalence. In the forward direction its restrictions are trivial Kan fibrations, and [lem-cbc-kan-fibration-fiber-criterion] makes them weak equivalences. Conversely, if every $\\phi_z$ is a weak equivalence, that same criterion says all its vertex fibers are contractible Kan complexes. Every vertex of $Q$ projects to some $z\\in E_0$, and its fiber for $\\phi$ equals its fiber for $\\phi_z$. Hence all vertex fibers of the left fibration $\\phi$ are contractible. The reversed form of [lem-coef-right-fibration-contractible-fibers] makes $\\phi$ a trivial Kan fibration. Reversal preserves Kan conditions, boundary lifting, and weak contractibility: on realizations it is the homeomorphism reversing barycentric coordinates. This also covers empty vertex fibers without assuming a lift exists in advance.",
+   "uses": [
+    "lem-cbc-right-fibration-space-fiber",
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "lem-coef-right-fibration-contractible-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 2.4.4.3, fiberwise test; Lemma 2.1.3.3 and Lemma 2.1.3.4, with left/right reversal."
+   }
+  },
+  {
+   "text": "For each $z$ consider the strictly commutative square\n$$\\begin{array}{ccc}T_E(s,z)&\\longrightarrow&L_E(x,z)\\\\\n\\downarrow&&\\downarrow\\\\\nT_B(p(s),p(z))&\\longrightarrow&L_B(p(x),p(z)).\\end{array}$$\nThe horizontal maps restrict to the initial vertex of $s$ or $p(s)$; the vertical maps apply $p$. Its ordinary pullback comparison is exactly $\\phi_z$. Its right vertical map is a Kan fibration by Step 3. Therefore [lem-coef-kan-pullback-path-comparison] identifies that ordinary pullback with the path-space homotopy pullback by a weak homotopy equivalence. Two-out-of-three for the induced maps on components and homotopy groups shows that this strict square is a homotopy pullback if and only if $\\phi_z$ is a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 2.4.4.3, final paragraph; Lemma 2.4.4.1 in its dual form."
+   }
+  },
+  {
+   "text": "Restriction to the final vertex $1$ of $s$ gives $r_1:E_{s/}\\to E_{y/}$. It is a trivial Kan fibration. A boundary lifting problem for it becomes the inclusion\n$$(\\Delta^1\\star\\partial\\Delta^m)\\cup_{\\{1\\}\\star\\partial\\Delta^m}(\\{1\\}\\star\\Delta^m)\\hookrightarrow\\Delta^1\\star\\Delta^m.$$\nHere $\\{1\\}\\hookrightarrow\\Delta^1$ is the generating right horn $\\Lambda_1^1\\hookrightarrow\\Delta^1$. The first assertion of [lem-coef-infinity-anodyne-cocones], with the other inclusion the boundary inclusion, makes this join inclusion inner anodyne. Since $E$ is a quasicategory it has the required filler (the extension argument of Step 1). For $B$, replace the prescribed map $s$ by $p(s)$ in this very inclusion; its inner-anodyne property is unchanged, and the quasicategory horn fillers of $B$ supply the extensions. Restricting over $z$ or $p(z)$ and using [lem-weil-pbc-trivial-kan-homotopy-equivalence] consequently gives natural equivalences\n$$T_E(s,z)\\xrightarrow{r_1}L_E(y,z),\\qquad T_B(p(s),p(z))\\xrightarrow{r_1}L_B(p(y),p(z)).$$\nThe statement applies also to $m=0$: the join inclusion is the inner horn $\\Lambda_1^2$, not an unproved existence of a cocartesian lift.",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones",
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.2.5 (right-anodyne coslice variant), derived here from Lemma 2.1.2.3; used in the dual proof of Proposition 2.4.4.3."
+   }
+  },
+  {
+   "text": "We identify the horizontal maps of Step 4, including their coherent commutativity data, rather than choosing an arbitrary homotopy of maps. Put $U_C(a,b)=\\{a\\}\\times_{C,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,C)\\times_{\\operatorname{ev}_1,C}\\{b\\}$. The right-pinch equivalence $j^R:\\operatorname{Map}_C(a,b)\\to U_C(a,b)$ is [lem-coef-infinity-pinch-comparison]. Its application to $C^{\\mathrm{op}}$, followed by reversal, gives a natural left-pinch equivalence $j^L:L_C(a,b)\\to U_C(a,b)$. Explicitly $j^L$ precomposes with the monotone map $[1]\\times[m]\\to[m+1]$ sending $(0,i)$ to $0$ and $(1,i)$ to $i+1$. Indeed $\\operatorname{Map}_{C^{\\mathrm{op}}}(b,a)^{\\mathrm{op}}=L_C(a,b)$ and $U_{C^{\\mathrm{op}}}(b,a)^{\\mathrm{op}}=U_C(a,b)$ by the definitions; reflection preserves the homotopy equivalences, as explained in Step 3.\n\nFor $t\\in T_C(s,z)_m$, precompose $t:\\Delta^{m+2}\\to C$ with the monotone map $[2]\\times[m]\\to[m+2]$ sending $(0,i)\\mapsto0$, $(1,i)\\mapsto1$, $(2,i)\\mapsto i+2$. This produces a simplex of the triangle space $V(x,y,z)$ from [lem-coef-infinity-mapping-composition]. Its three edge restrictions are respectively the constant edge $s$, $j^Lr_1(t)$, and $j^Lr_0(t)$, where $r_0$ restricts to the initial vertex of $s$. The defining equation for composition in that node identifies the homotopy class represented by the span\n$$L_C(y,z)\\xleftarrow{\\ r_1\\ }T_C(s,z)\\xrightarrow{\\ r_0\\ }L_C(x,z)$$\nwith precomposition by $s$, under the pinch equivalences. To specify the coherence as well, use the roof $U_C(y,z)\\xleftarrow{j^Lr_1}T_C(s,z)\\xrightarrow{j^Lr_0}U_C(x,z)$, whose left leg is a homotopy equivalence by Step 5 and the pinch comparison. The prism map to $V(x,y,z)$ just constructed has consecutive-edge restriction $(j^Lr_1,s)$ and composite-edge restriction $j^Lr_0$, so this roof is a composition representative with its triangle witness. Applying $p$ to the whole prism gives precisely the prism for $p(s)$, simplex by simplex. Thus the roofs for $E$ and $B$, and the maps between them, form one strictly commuting diagram. Inverting their left legs gives the coherent precomposition square. This fixes its commutativity data; the composition-class equation alone would specify only its arrows. The natural right-pinch maps $j^R$ then give the presentation on the right-pinched spaces used in the item.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 2.4.4.3, paragraph specifying the strict representative; Kerodon Construction 4.6.5.1 (01KX), Proposition 4.6.5.10 (01L5), and Composition of Morphisms (01PF), Construction 4.6.8.9. Explicit prism comparison supplied by the worker."
+   }
+  },
+  {
+   "text": "We compute the homotopy-pullback test using the strict roof presentation specified in Step 6. First replace the two right corners of Step 4 by $U_E(x,z)$ and $U_B(p(x),p(z))$, composing the horizontal maps with $j^L$. There is a strict map from the old square to this square: identity on its two left corners and $j^L$ on its two right corners. The three-corner cospans therefore satisfy exactly the strict commutation equations of [lem-coef-kan-homotopy-pullback-invariance], and all three corner maps are homotopy equivalences. The induced map of path homotopy pullbacks is a weak equivalence; the fourth-corner comparison maps commute with it, so two-out-of-three proves that the two strict squares have the same homotopy-pullback test.\n\nThe new square is the simultaneous roof representative of the canonical coherent precomposition square: its two left corners are $T_E(s,z)$ and $T_B(p(s),p(z))$, related naturally by $j^Lr_1$ to the intended arrow mapping spaces at $y$ and $p(y)$. To compute a homotopy limit for a square given by these roofs, retain this strict representative before inverting those equivalences. To use right-pinched spaces, retain also the natural roofs $L_C(a,z)\\xrightarrow{j^L}U_C(a,z)\\xleftarrow{j^R}\\operatorname{Map}_C(a,z)$ at every corner. Every comparison in this presentation commutes with $p$ on simplices, so the same strict-cospan invariance applies to each change of model. The resulting comparison is therefore the one for the stipulated coherent square. No arbitrary commutation homotopy, and no purported simplicial operation concatenating interval paths, is needed. Combining Steps 2, 3 and 4 now gives\n$$s\\text{ is horn-}p\\text{-cocartesian}\\iff\\phi\\text{ is trivial}\\iff(\\forall z,\\ \\phi_z\\text{ is a weak equivalence})\\iff(\\forall z,\\ \\text{the stated mapping square is a homotopy pullback}).$$\nNeither direction used existence of cocartesian lifts of any other edge.",
+   "uses": [
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Dual of Proposition 2.4.4.3, conclusion; explicit path-model comparison for the coherent representatives."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-anodyne-cocones",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-right-fibration-contractible-fibers",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-kan-homotopy-pullback-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Detailed coslice proof following Proposition 2.4.4.3, opposite dual, pp. 131-132; the source is read online but not archived in literature/. The join and fiberwise arguments are written out using existing DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -67,10 +171,59 @@
    "results": "{\"t\": \"2026-10-16T18:01:09Z\", \"tool\": \"leanfinder\", \"query\": \"Relative outer horn fillers for an edge are equivalent to the universal property on mapping spaces for an inner fibration of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₁.desc\", \"SSet.quasicategory_of_filler\", \"SSet.horn₃₂.desc\"], \"digest\": \"bfd642c0694bf12a\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary CategoryTheory.Functor.IsCocartesian uses Hom sets (FiberedCategory/Cocartesian.lean:44-60), while SSet.Quasicategory.hornFilling (Quasicategory/Basic.lean:33-48) only gives inner-horn filling. Quillen fibrations require all horns. No relative cocartesian-edge/mapping-space equivalence for quasicategories was returned by either phrasing, Loogle, or grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inner fibration of quasicategories an edge is cocartesian exactly when every target mapping space square is a homotopy pullback",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳}\\n  {p : CategoryTheory.Functor 𝒳 𝒮} {R S : 𝒮} {a b : 𝒳} {f : R ⟶ S} {φ : a ⟶ b} [self : p.IsCocartesian f φ],\\n  p.IsHomLift f φ\", \"doc\": \"If a morphism $\\\\phi : a \\\\to b$ in category $\\\\mathcal{X}$ is cocartesian over a morphism $f : R \\\\to S$ in category $\\\\mathcal{S}$ with respect to a functor $p : \\\\mathcal{X} \\\\to \\\\mathcal{S}$, then the fu\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"{𝒮 : Type u₁} →\\n  {𝒳 : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳] →\\n        CategoryTheory.Functor 𝒳 𝒮 → {R S : 𝒮} → {a b : 𝒳} → (R ⟶ S) → (a ⟶ b) → Prop\", \"doc\": \"Given a functor from category $\\\\mathcal{X}$ to category $\\\\mathcal{S}$, this proposition asserts that a morphism $g : a \\\\to b$ in $\\\\mathcal{X}$ is cocartesian over a morphism $f : R \\\\to S$ in $\\\\mathcal\"}\n  {\"name\": \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  (p : CategoryTheory.Functor 𝒳 𝒮) {R S : 𝒮} {a b : 𝒳} (f : R ⟶ S) (φ : a ⟶ b) [p.IsStronglyCocartesian f φ],\\n  p.IsCocartesian f φ\", \"doc\": \"If a morphism $ g $ in $ \\\\mathcal{X} $ is strongly cocartesian over a morphism $ f $ in $ \\\\mathcal{S} $ with respect to a functor $ F: \\\\mathcal{X} \\\\to \\\\mathcal{S} $, then $ g $ is cocartesian over $ f\"}\n  {\"name\": \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳}\\n  {p : CategoryTheory.Functor 𝒳 𝒮} {R S : 𝒮} {a b : 𝒳} {f : R ⟶ S} {φ : a ⟶ b} [self : p.IsStronglyCocartesian f φ],\\n  p.IsHomLift f φ\", \"doc\": \"Given categories $\\\\mathcal{S}$ and $\\\\mathcal{X}$, a functor $p: \\\\mathcal{X} \\\\to \\\\mathcal{S}$, and morphisms $f: R \\\\to S$ in $\\\\mathcal{S}$ and $\\\\phi: a \\\\to b$ in $\\\\mathcal{X}$, if $\\\\phi$ is strongly co\"}\n  {\"name\": \"CategoryTheory.Functor.IsStronglyCocartesian\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"{𝒮 : Type u₁} →\\n  {𝒳 : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳] →\\n        CategoryTheory.Functor 𝒳 𝒮 → {R S : 𝒮} → {a b : 𝒳} → (R ⟶ S) → (a ⟶ b) → Prop\", \"doc\": \"Given categories $\\\\mathcal{S}$ and $\\\\mathcal{X}$, a functor $F: \\\\mathcal{X} \\\\to \\\\mathcal{S}$, and morphisms $f: R \\\\to S$ in $\\\\mathcal{S}$ and $g: a \\\\to b$ in $\\\\mathcal{X}$, this predicate asserts that\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.map\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"{𝒮 : Type u₁} →\\n  {𝒳 : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳] →\\n        (p : CategoryTheory.Functor 𝒳 𝒮) →\\n          {R S : 𝒮} →\\n            {a b : 𝒳} →\\n              (f : R ⟶ S) → (φ : a ⟶ b) → [p.IsCocartesian f φ] → {b' : 𝒳\", \"doc\": \"Given a cocartesian morphism $\\\\varphi : a \\\\to b$ over $f : R \\\\to S$ in $\\\\mathcal{X}$, and a morphism $\\\\varphi' : a \\\\to b'$ lifting $f$, this is the unique morphism $\\\\chi : b \\\\to b'$ in $\\\\mathcal{X}$ l\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  (p : CategoryTheory.Functor 𝒳 𝒮) {R S : 𝒮} {a b : 𝒳} (f : R ⟶ S) (φ : a ⟶ b) [inst_2 : p.IsCocartesian f φ] {b' : 𝒳}\\n  (φ' : a ⟶ b') [inst_3 : p.IsHomLift f φ'],\\n  p.IsHomLift (C\", \"doc\": \"Given a cocartesian morphism $\\\\varphi : a \\\\to b$ over $f : R \\\\to S$ in $\\\\mathcal{X}$, and a morphism $\\\\varphi' : a \\\\to b'$ lifting $f$, the unique morphism $\\\\chi : b \\\\to b'$ lifting $\\\\text{id}_S$ (gua\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.fac\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  (p : CategoryTheory.Functor 𝒳 𝒮) {R S : 𝒮} {a b : 𝒳} (f : R ⟶ S) (φ : a ⟶ b) [inst_2 : p.IsCocartesian f φ] {b' : 𝒳}\\n  (φ' : a ⟶ b') [inst_3 : p.IsHomLift f φ'],\\n  CategoryTheory\", \"doc\": \"Given a cocartesian morphism $\\\\varphi : a \\\\to b$ over $f : R \\\\to S$ in $\\\\mathcal{X}$, and a morphism $\\\\varphi' : a \\\\to b'$ lifting $f$, the composition of $\\\\varphi$ with the unique morphism $\\\\chi : b \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned IsCocartesian declarations concern ordinary Hom-set universal properties; Quasicategory inner-horn and general model-category lifting results do not state the relative mapping-space criterion. Read Cocartesian.lean:46-74 and InnerFibration.lean:29-74 in the pinned Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCocartesian\", \"Quasicategory\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned IsCocartesian declarations concern ordinary Hom-set universal properties; Quasicategory inner-horn and general model-category lifting results do not state the relative mapping-space criterion. Read Cocartesian.lean:46-74 and InnerFibration.lean:29-74 in the pinned Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|coCartesian|mapping.*pullback|pullback.*mapping",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned IsCocartesian declarations concern ordinary Hom-set universal properties; Quasicategory inner-horn and general model-category lifting results do not state the relative mapping-space criterion. Read Cocartesian.lean:46-74 and InnerFibration.lean:29-74 in the pinned Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cocartesian edge horn lifting equivalent to homotopy Cartesian mapping spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳}\\n  {p : CategoryTheory.Functor 𝒳 𝒮} {R S : 𝒮} {a b : 𝒳} {f : R ⟶ S} {φ : a ⟶ b} [self : p.IsCocartesian f φ],\\n  p.IsHomLift f φ\", \"doc\": \"If a morphism $\\\\phi : a \\\\to b$ in category $\\\\mathcal{X}$ is cocartesian over a morphism $f : R \\\\to S$ in category $\\\\mathcal{S}$ with respect to a functor $p : \\\\mathcal{X} \\\\to \\\\mathcal{S}$, then the fu\"}\n  {\"name\": \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳}\\n  {p : CategoryTheory.Functor 𝒳 𝒮} {R S : 𝒮} {a b : 𝒳} {f : R ⟶ S} {φ : a ⟶ b} [self : p.IsStronglyCocartesian f φ],\\n  p.IsHomLift f φ\", \"doc\": \"Given categories $\\\\mathcal{S}$ and $\\\\mathcal{X}$, a functor $p: \\\\mathcal{X} \\\\to \\\\mathcal{S}$, and morphisms $f: R \\\\to S$ in $\\\\mathcal{S}$ and $\\\\phi: a \\\\to b$ in $\\\\mathcal{X}$, if $\\\\phi$ is strongly co\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \": IsHomLift p (𝟙 S) (IsCocartesian.map p f φ φ')\", \"doc\": \"Given a cocartesian morphism $\\\\varphi : a \\\\to b$ over $f : R \\\\to S$ in $\\\\mathcal{X}$, and a morphism $\\\\varphi' : a \\\\to b'$ lifting $f$, the unique morphism $\\\\chi : b \\\\to b'$ lifting $\\\\text{id}_S$ (gua\"}\n  {\"name\": \"CategoryTheory.Functor.IsCartesian.toIsHomLift\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳}\\n  {p : CategoryTheory.Functor 𝒳 𝒮} {R S : 𝒮} {a b : 𝒳} {f : R ⟶ S} {φ : a ⟶ b} [self : p.IsCartesian f φ],\\n  p.IsHomLift f φ\", \"doc\": \"If a morphism $\\\\phi : a \\\\to b$ in $\\\\mathcal{X}$ is Cartesian over a morphism $f : R \\\\to S$ in $\\\\mathcal{S}$ with respect to a functor $p : \\\\mathcal{X} \\\\to \\\\mathcal{S}$, then $p$ satisfies the hom-lift\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.map.congr_simp\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  (p p_1 : CategoryTheory.Functor 𝒳 𝒮) (e_p : p = p_1) {R S : 𝒮} {a b : 𝒳} (f f_1 : R ⟶ S) (e_f : f = f_1)\\n  (φ φ_1 : a ⟶ b) (e_φ : φ = φ_1) [inst_2 : p.IsCocartesian f φ] {b' : 𝒳}\", \"doc\": \"Given equal functors $ p = p_1 : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, equal morphisms $ f = f_1 : R \\\\to S $ in $ \\\\mathcal{S} $, equal cocartesian lifts $ \\\\varphi = \\\\varphi_1 : a \\\\to b $ in $ \\\\mathcal{X} $, \"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.mk\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  {p : CategoryTheory.Functor 𝒳 𝒮} {R S : 𝒮} {a b : 𝒳} {f : R ⟶ S} {φ : a ⟶ b} [toIsHomLift : p.IsHomLift f φ],\\n  (∀ {b' : 𝒳} (φ' : a ⟶ b') [p.IsHomLift f φ'],\\n      ∃! χ, p.IsHomL\", \"doc\": \"Given a functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, if a morphism $ \\\\varphi : a \\\\to b $ in $ \\\\mathcal{X} $ satisfies the hom-lifting property for $ f : R \\\\to S $ in $ \\\\mathcal{S} $, and for every suc\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift.congr_simp\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Grothendieck\", \"type\": \"∀ {𝒮 : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} 𝒮]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete 𝒮ᵒᵖ) CategoryTheory.Cat} {R S : 𝒮}\\n  {a : ↑(F.obj { as := Opposite.op S })} (f : R ⟶ S) {a' : F.CoGrothendieck} (g g_1 : a'.base ⟶ R) (e_g : g = g_1)\\n  (φ' φ'_1 : a' ⟶ {\", \"doc\": \"Given a category $\\\\mathcal{S}$, a pseudofunctor $F: (\\\\mathcal{S}^{\\\\text{op}})_{\\\\text{disc}} \\\\to \\\\mathsf{Cat}$, objects $R, S \\\\in \\\\mathcal{S}$, and elements $a' \\\\in \\\\int^c F$, if morphisms $g, g_1: a'.\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm4a\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C] {A B X Y : C}\\n  (i : A ⟶ B) (p : X ⟶ Y) [HomotopicalAlgebra.Cofibration i] [HomotopicalAlgebra.WeakEquivalence i]\\n  [HomotopicalAlgebra.Fibration p], CategoryTheory.HasLiftingProperty i p\", \"doc\": \"In a model category $\\\\mathcal{C}$, if $i: A \\\\to B$ is a cofibration and a weak equivalence, and $p: X \\\\to Y$ is a fibration, then the pair $(i, p)$ satisfies the lifting property: for any commutative \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned IsCocartesian declarations concern ordinary Hom-set universal properties; Quasicategory inner-horn and general model-category lifting results do not state the relative mapping-space criterion. Read Cocartesian.lean:46-74 and InnerFibration.lean:29-74 in the pinned Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian|cocartesian|homotopy.*pullback|mapping.?space",
+   "results": "{\"t\": \"2026-10-16T20:02:43Z\", \"tool\": \"grep\", \"query\": \"cartesian|cocartesian|homotopy.*pullback|mapping.?space\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\"], \"digest\": \"16b6bbd98402e776\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. LeanFinder and Loogle return ordinary IsStronglyCocartesian Hom-set universal properties, read in Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:62-74 and 170-179; the Quasicategory grep returns only a cartesian-closed future-work comment in StrictBicategory.lean:28. None states the relative quasicategory mapping-space criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStronglyCocartesian\"",
+   "results": "{\"t\": \"2026-10-16T20:02:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStronglyCocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\", \"CategoryTheory.Functor.IsStronglyCocartesian.comp\", \"CategoryTheory.Functor.IsStronglyCocartesian.codomainIsoOfBaseIso\"], \"digest\": \"b733b7ac5665fd37\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. LeanFinder and Loogle return ordinary IsStronglyCocartesian Hom-set universal properties, read in Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:62-74 and 170-179; the Quasicategory grep returns only a cartesian-closed future-work comment in StrictBicategory.lean:28. None states the relative quasicategory mapping-space criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strongly cocartesian morphism for an inner fibration is characterized by homotopy fibers of maps between morphism spaces",
+   "results": "{\"t\": \"2026-10-16T20:02:52Z\", \"tool\": \"leanfinder\", \"query\": \"A strongly cocartesian morphism for an inner fibration is characterized by homotopy fibers of maps between morphism spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.ext\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.fac\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\"], \"digest\": \"47a2d75b4522c8c3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. LeanFinder and Loogle return ordinary IsStronglyCocartesian Hom-set universal properties, read in Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:62-74 and 170-179; the Quasicategory grep returns only a cartesian-closed future-work comment in StrictBicategory.lean:28. None states the relative quasicategory mapping-space criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-arrow-source-fibers",
@@ -78,5 +231,39 @@
   "group": "Q17"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cocartesian-mapping-criterion",
+  "worker": "stage1",
+  "summary": "Replaced the earlier attempt's invocation of the whole HTT criterion by the actual coslice proof: identify boundary lifts with prescribed initial horns, derive relative coslice left fibrations from the existing pushout-join lemma, test triviality on Kan vertex fibers, compare ordinary and path pullbacks, and match the coherent precomposition square by explicit triangle prisms and natural pinch equivalences. No new node; unchanged item statement. Online HTT and Kerodon sources read; proof marked agent because they are not archived locally. Second reading specifies the simultaneous natural roof presentation in Steps 6-7, applies strict-cospan invariance there, and expands the B-version of the endpoint lifting argument.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient mapping-complex adjunction before the displayed derived inverse limit; presentable coherent adjunction infrastructure reached through lem-coef-presentable-infinity-adjoints. HTT proof of Lemma 5.5.5.14, first paragraph, printed p. 491: pushout stability gives source evaluation cocartesian and the fiber square homotopy Cartesian; Proposition 3.3.1.3 and Corollary 3.3.1.4 (dually). Read online; not archived in literature/. No Stacks tag states this coherent assertion. The source-evaluation pushout lift: converting its mapping-space universal property into the horn-cocartesian condition (HTT Proposition 2.4.4.3, dual).",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Generic simplicial/Kan homotopy tool used in the coslice proof; this unit has no alternate statement of this foundational fact and no geometric step of the unit is replaced."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Generic simplicial/Kan homotopy tool used in the coslice proof; this unit has no alternate statement of this foundational fact and no geometric step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic simplicial/Kan homotopy tool used in the coslice proof; this unit has no alternate statement of this foundational fact and no geometric step of the unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-b995cbcde",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-b995cbcde (reviewer sub-agent of L); spot-checked: Read the whole item, all 7 steps and the full statement of each of the 12 cited nodes, plus the unit and chapter records and the 4 citers. The proof correctly follows the dual of HTT Prop 2.4.4.3 (2.1.2.3, 2.1.2.5). HTT is not archived locally, so by:agent with a WANTED line is right. Step 1: the left-horn pushout-join follows by reversal from the first assertion of anodyne-cocones (Λ^m_j reverses to Λ^m_{m-j}, a right horn; join factors swap). Step 2: the vertex count gives exactly Λ_0^{m+2} with 01=s, and m=0 gives Λ_0^2, matching vertex surjectivity. Step 3: Kan conditions are established before the fiber criterion is used; every vertex of Q lies over some z; contractible-fibers allows a non-Kan base. Step 4: the strict pullback comparison is literally φ_z, and the path comparison applies because the right leg is a Kan fibration. Step 5: {1}⊂Δ^1 is Λ^1_1, the first join assertion applies directly, and endpoint y is correct. Step 6: I re-derived j^L from j^R by reversal; the prism lands in V(x,y,z) with edges (s, j^L r_1, j^L r_0); the composition equation at s gives the class identity; strict compatibility with p supplies the coherence a square of classes lacks (example A=Z, B=C=pt, D=S^1). Step 7: the cospan map (j^L, id, j^L) commutes strictly, so invariance applies. Small cases agree: identity edge, B=pt (equivalence edges), and N([1]) with s:0→1, where Map(1,0)=∅→pt and the Λ^2_0 horn has no filler. No new nodes, no cycle, Mathlib absent (only ordinary IsCocartesian). The three declared tool uses (sk-prop-sf-cbc ×2, sk-prop-h2) are generic and accepted. FIX (B3): the statement cited def-cbc-enhanced-diagrams-cones for 'coherent composition', which that node does not define. The corrected item points that phrase to lem-coef-infinity-mapping-composition and adds it to stmt_deps (it is already in proof_deps; no cycle). The mathematical content is unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }

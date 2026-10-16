@@ -3,54 +3,232 @@
  "blueprint": {
   "is": "det-proper-base-change-unbounded-pullback",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Inverse image on the localizing categories",
- "statement": "Let $\\Lambda$ be admissible and $g\\colon Y'\\to Y$ a morphism. The inverse image\n$g^*\\colon\\D(Y_{\\mathrm{proét}},\\Lambda)\\to\\D(Y'_{\\mathrm{proét}},\\Lambda)$ is exact, preserves direct sums, maps\n$\\Dctf(Y,\\Lambda)$ into $\\Dctf(Y',\\Lambda)$, and hence restricts to an exact sum-preserving functor\n$\\Loc(\\Dctf(Y,\\Lambda))\\to\\Loc(\\Dctf(Y',\\Lambda))$.",
+ "statement": "Fix distinct primes $p$ and $\\ell$ and a field $k$ of characteristic $p$. Let $Y,Y'$ be separated schemes of finite type over $k$ and $g:Y'\\to Y$ a $k$-morphism [sk-def-sfb-dc-setting]. Let $\\Lambda$ be admissible: a finite commutative ring $A$ killed by a power of $\\ell$, or $\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\overline{\\mathbf Q}_\\ell$, where $E/\\mathbf Q_\\ell$ is finite and $\\mathcal O_E$ is its valuation ring. Use the condensed coefficient sheaves, unbounded derived categories, and small direct sums of [sk-def-localizing-closure]. For $\\Lambda=\\overline{\\mathbf Q}_\\ell$, use specifically the condensed ring of continuous maps valued in some finite subextension [sk-def-sfb-qlbar-condensed]. Write $\\Dctf$ for bounded constructible complexes of finite Tor amplitude [sk-def-sfb-constructible], and $\\Loc$ for their localizing closure [sk-def-localizing-closure].\n\nThe inverse image $g^*=Lg^*:D(Y_{\\mathrm{pro\\acute et}},\\Lambda)\\to D(Y'_{\\mathrm{pro\\acute et}},\\Lambda)$ [sk-def-sfb-module-derived-pushpull] is exact as a triangulated functor [def-weil-triangulated-category], preserves arbitrary small direct sums, maps $\\Dctf(Y,\\Lambda)$ into $\\Dctf(Y',\\Lambda)$, and hence restricts to an exact sum-preserving functor $\\Loc(\\Dctf(Y,\\Lambda))\\to\\Loc(\\Dctf(Y',\\Lambda))$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.md",
   "place": "node det-proper-base-change-unbounded-pullback, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "def-weil-triangulated-category",
+  "sk-def-sfb-qlbar-condensed"
+ ],
  "proof": [
   {
-   "text": "*Exactness and sums.* By [sk-prop-sfb-cartesian-coefficients], $g^*\\Lambda_Y=\\Lambda_{Y'}$, so the module\ninverse image is the exact inverse image of sheaves; it is computed termwise, is an exact functor of\ntriangulated categories, and is a left adjoint (of $Rg_*$), hence preserves direct sums.",
+   "text": "*Exactness and sums.* By [sk-prop-sfb-cartesian-coefficients], the coefficient map $g^{-1}\\Lambda_Y\\to\\Lambda_{Y'}$ is invertible and the module inverse image is exact. Apply [lem-weil-pbc-exact-functor-derived-factorization] to this exact functor: its termwise functor descends to a triangulated functor on the unbounded derived categories. For any K-flat resolution $P\\to K$, exactness makes the termwise map $g^*P\\to g^*K$ a quasi-isomorphism. The resolution computation in [sk-def-sfb-derived-categories] therefore identifies this descended functor with the total derived pullback $Lg^*$ of [sk-def-sfb-module-derived-pushpull]. The latter node supplies $Lg^*\\dashv Rg_*$, so [lem-weil-pbc-left-adjoint-preserves-colimits] gives preservation of every existing small coproduct. Such coproducts exist here: module objects over the commutative coefficient ring are ordinary sheaves of modules, hence form a Grothendieck abelian category by [lem-pur-ringed-site-grothendieck-abelian]; [lem-kun-grothendieck-derived-coproducts] supplies the small derived coproducts, including the empty one. The small sites are taken in the fixed universe of [sk-def-localizing-closure].",
    "uses": [
-    "sk-prop-sfb-cartesian-coefficients"
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "sk-def-sfb-derived-categories",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-kun-grothendieck-derived-coproducts",
+    "sk-def-localizing-closure"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "Exactness and sums"
+   }
   },
   {
-   "text": "*Constructible complexes.* For finite $A$: by [sk-lem-sf-flat-model], $K\\in\\Dctf(Y,A)$ is a bounded complex of\nflat constructible sheaves, and $g^*$ preserves flatness (stalks are unchanged), constructibility\n(pull back the stratification) and boundedness, so $g^*K\\in\\Dctf(Y',A)$. For $\\mathcal O_E$, $E$, $\\Qlb$ (where\n$\\Dctf=\\Dbc$): by [sk-def-sfb-dc-restricted-functors], $g^*$ preserves bounded constructible complexes, via\nthe local coefficient models on strata.",
+   "text": "*Finite-coefficient constructibility and Tor amplitude.* Let $A$ be finite and killed by a power of $\\ell$, and $K\\in\\Dctf(Y,A)$. By [lem-sfb-dc-upper-star-preserves], $Lg^*K$ is bounded constructible: $g$ is a morphism of the field setting in [sk-def-sfb-dc-setting]. Choose $a\\le b$ bounding the Tor amplitude of $K$ [sk-def-sfb-constructible]. We realize the source's flat-model argument by the general bounded-flat-model construction, valid over the stated field $k$. On the ringed site $(Y_{\\mathrm{pro\\acute et}},A_Y)$, [lem-pur-ringed-site-grothendieck-abelian] and [lem-pc-sheaf-modules-tensor-closed] give an additive symmetric closed monoidal Grothendieck category of modules. The functorial bounded-above flat replacements of [lem-pc-kflat-bounded-flat-replacement], applied to $M[0]$ with upper bound zero, give a functor $F$ with flat values and a natural epimorphism $F(M)\\to M$. Set $M_0=M$ and $M_{r+1}=\\ker(F(M_r)\\to M_r)$ for $r\\ge0$. The differential $F(M_{r+1})\\to F(M_r)$ is the composite through $M_{r+1}\\hookrightarrow F(M_r)$; the resulting augmented complex is exact, and naturality and functoriality of kernels give functorial flat resolutions. Thus all hypotheses of [lem-sc-source-tor-amplitude-flat-model] hold, and it gives $K\\cong Q(P)$ with flat $P^i$ and $P^i=0$ outside $[a,b]$. By [lem-pc-bounded-above-flat-kflat-site], $P$ is K-flat. The morphism of pro-étale topoi [def-weil-proetale-inverse-image], together with the coefficient isomorphism of [sk-prop-sfb-cartesian-coefficients], is a morphism of ringed topoi, so [lem-weil-pbc-ringed-topos-kflat-pullback] says that $g^*P$ is K-flat with flat terms. Exactness from step 1 makes $Q(g^*P)$ represent $Lg^*K$, and its terms still vanish outside $[a,b]$. The reverse implication of the flat-model criterion [lem-sc-source-tor-amplitude-flat-model] is not needed: directly, K-flat derived tensor is computed by tensoring a K-flat argument [sk-def-sfb-derived-tensor-hom]. For any $A_{Y'}$-module sheaf $N$, $Lg^*K\\otimes^{\\mathbf L}N[0]$ is represented by the ordinary complex with terms $g^*P^i\\otimes N$. These terms vanish outside $[a,b]$, so its cohomology vanishes there. This tests every sheaf $N$ on $Y'$, and proves finite Tor amplitude. Together with bounded constructibility it proves $Lg^*K\\in\\Dctf(Y',A)$.",
    "uses": [
-    "sk-lem-sf-flat-model",
-    "sk-def-sfb-dc-restricted-functors"
+    "lem-sfb-dc-upper-star-preserves",
+    "sk-def-sfb-dc-setting",
+    "sk-def-sfb-constructible",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-sc-source-tor-amplitude-flat-model",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-weil-proetale-inverse-image",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "sk-def-sfb-derived-tensor-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "Constructible complexes, finite A"
+   }
   },
   {
-   "text": "*Localizing closures.* Apply [det-proper-image-localizing-principle].",
+   "text": "*Integral and field coefficients.* For $\\Lambda=\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\overline{\\mathbf Q}_\\ell$, [det-def-localizing-closure-ctf-equals-bc] identifies $\\Dctf(T,\\Lambda)$ with $\\Dbc(T,\\Lambda)$ for $T=Y,Y'$. Both schemes are qcqs: finite type of their structure maps means that they are quasi-compact [def-weil-finite-type-morphism], since the base $\\operatorname{Spec}k$ is affine; quasi-separatedness follows from separatedness because the diagonal is a closed immersion, hence proper and quasi-compact [def-weil-proper-morphism; lem-weil-pbc-proper-fp-permanence]. The field setting is [sk-def-sfb-dc-setting]. The preservation assertion for $Lf^*$ in [sk-def-sfb-dc-restricted-functors] applies to every condensed $\\Lambda$ and to our $k$-morphism $g$; it therefore takes $\\Dbc(Y,\\Lambda)$ into $\\Dbc(Y',\\Lambda)$. Via the two category equalities this is the required preservation of $\\Dctf$. Pullback here is the ambient, uncompleted inverse image of step 1.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc",
+    "sk-def-sfb-dc-setting",
+    "sk-def-sfb-dc-restricted-functors",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "Constructible complexes, $\\mathcal O_E$, $E$, and $\\Qlb$"
+   }
+  },
+  {
+   "text": "*Localizing closures.* Apply [det-proper-image-localizing-principle] with $\\mathcal T=D(Y_{\\mathrm{pro\\acute et}},\\Lambda)$, $\\mathcal T'=D(Y'_{\\mathrm{pro\\acute et}},\\Lambda)$, $F=Lg^*$, $\\mathcal G=\\Dctf(Y,\\Lambda)$ and $\\mathcal G'=\\Dctf(Y',\\Lambda)$. Step 1 supplies exactness, small sums in both ambient categories, and their preservation; steps 2 and 3 supply $F(\\mathcal G)\\subseteq\\mathcal G'\\subseteq\\Loc(\\mathcal G')$. The cited statement therefore gives the asserted image of $\\Loc(\\mathcal G)$ and the exact, sum-preserving restriction.",
    "uses": [
     "det-proper-image-localizing-principle"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "Localizing closures"
+   }
   }
  ],
  "proof_deps": [
-  "sk-prop-sfb-cartesian-coefficients",
-  "sk-lem-sf-flat-model",
+  "def-weil-finite-type-morphism",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proper-morphism",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-proper-image-localizing-principle",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sc-source-tor-amplitude-flat-model",
+  "lem-sfb-dc-upper-star-preserves",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-constructible",
   "sk-def-sfb-dc-restricted-functors",
-  "det-proper-image-localizing-principle"
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-prop-sfb-cartesian-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+  "place": "## Proof; all three paragraphs expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of sheaves is exact preserves direct sums and sends bounded constructible finite Tor complexes to bounded constructible complexes",
+   "results": "CategoryTheory.Sheaf exact-colimit infrastructure and derived-category functor constructions; no declaration states this condensed-coefficient constructibility theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor preserves colimits left adjoint",
+   "results": "Unknown identifier `preserves`; no usable result for this query.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|Dctf|constructible.*pullback|inverse.*image.*exact [Mathlib/CategoryTheory]",
+   "results": "0 hit(s) for the requested condensed/pro-etale theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact inverse image functor of sheaves preserves arbitrary coproducts and bounded constructible complexes",
+   "results": "CategoryTheory.Sheaf colimit instances and Condensed.hasExactColimitsOfShape; none states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, PreservesColimit, IsTriangulated",
+   "results": "Unknown identifier `PreservesColimit`; no usable result for this query.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesColimit|preserves.*colimit|IsLeftAdjoint [Mathlib/CategoryTheory]",
+   "results": "25 generic category-theory hits, none states the condensed/pro-etale theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|TorAmplitude|localizing",
+   "results": "{\"t\": \"2026-10-16T17:15:16Z\", \"tool\": \"grep\", \"query\": \"constructible|TorAmplitude|localizing\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Sites/Over.lean\"], \"digest\": \"ef8688e785293f5d\"} Read the returned signatures: generic exact-derived functors and scheme structure-sheaf pullbacks do not assert preservation of constructible finite-Tor condensed-coefficient complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "{\"t\": \"2026-10-16T17:15:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapDerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.mapDerivedCategoryIdIso\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId\"], \"digest\": \"5aea1ca0da86b696\"} Read the returned signatures: generic exact-derived functors and scheme structure-sheaf pullbacks do not assert preservation of constructible finite-Tor condensed-coefficient complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a perfect constructible sheaf complex along a morphism of schemes preserves finite tensor amplitude and coproducts",
+   "results": "{\"t\": \"2026-10-16T17:15:18Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of a perfect constructible sheaf complex along a morphism of schemes preserves finite tensor amplitude and coproducts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\"], \"digest\": \"1e4b52fd639fb9ac\"} Read the returned signatures: generic exact-derived functors and scheme structure-sheaf pullbacks do not assert preservation of constructible finite-Tor condensed-coefficient complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|Constructible.*[Pp]ullback|[Pp]ullback.*Constructible",
+   "date": "2026-10-16",
+   "results": "{\"t\": \"2026-10-16T19:04:14Z\", \"tool\": \"grep\", \"query\": \"TorAmplitude|Constructible.*[Pp]ullback|[Pp]ullback.*Constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No hits returned.",
+   "verdict": "no exact match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocalizingSubcategory\"",
+   "date": "2026-10-16",
+   "results": "{\"t\": \"2026-10-16T19:04:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocalizingSubcategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No hits returned.",
+   "verdict": "no exact match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact inverse image on derived categories of sheaves preserves bounded constructible complexes with finite Tor dimension and all coproducts",
+   "date": "2026-10-16",
+   "results": "{\"t\": \"2026-10-16T19:04:16Z\", \"tool\": \"leanfinder\", \"query\": \"An exact inverse image on derived categories of sheaves preserves bounded constructible complexes with finite Tor dimension and all coproducts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\"], \"digest\": \"68f1b96befce1d5c\"} The eight hits concern generic exact-derived functors and Grothendieck sheaf categories; none states constructible finite-Tor preservation and the localizing restriction.",
+   "verdict": "no exact match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of sheaves of modules along a morphism of ringed topoi preserves perfect complexes and bounded Tor amplitude",
+   "date": "2026-10-16",
+   "results": "{\"t\": \"2026-10-16T20:01:38Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of sheaves of modules along a morphism of ringed topoi preserves perfect complexes and bounded Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"digest\": \"ebffd0383f25bcbe\"} The eight signatures give underived module-sheaf pullback, composition, and free-module comparisons, not finite-Tor constructible preservation or a localizing restriction.",
+   "verdict": "no exact match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"IsTriangulated\"",
+   "date": "2026-10-16",
+   "results": "{\"t\": \"2026-10-16T20:01:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapDerivedCategory\\\", \\\"IsTriangulated\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\"], \"digest\": \"0738c238480b553b\"} The single signature supplies generic exact-derived triangulated functoriality, already carried by lem-weil-pbc-exact-functor-derived-factorization; it does not state this item.",
+   "verdict": "no exact match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn.*[Pp]ullback|[Pp]ullback.*torAmplitudeIn|[Cc]onstructible.*upperStar",
+   "date": "2026-10-16",
+   "results": "{\"t\": \"2026-10-16T20:01:32Z\", \"tool\": \"grep\", \"query\": \"torAmplitudeIn.*[Pp]ullback|[Pp]ullback.*torAmplitudeIn|[Cc]onstructible.*upperStar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No hits returned.",
+   "verdict": "no exact match for the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -66,5 +244,59 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-proper-base-change-unbounded"
+ "unit": "sk-prop-proper-base-change-unbounded",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-proper-base-change-unbounded-pullback",
+  "worker": "stage1",
+  "summary": "Second reading checked the current statements and sources, clarified the finite-subextension algebraic-closure coefficient, expanded the exact-derived identification and functorial flat-resolution construction, and retained all four proof steps. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the three paragraphs of the current blueprint pullback proof: step 1 exactness and sums, steps 2–3 finite-flat-model and integral/field preservation, step 4 localizing closure. The finite case uses the generic bounded-flat-model construction to avoid assuming the global algebraic-closure finite-field datum. The imported field setting is made explicit; unit realization is left to maintenance because this item is only a component of the proper-base-change unit.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ringed-site module category hypothesis for derived coproducts and flat models."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic existence of arbitrary coproducts in the unbounded derived category."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic tensor structure for the bounded-flat-model criterion."
+   },
+   {
+    "node": "lem-pc-kflat-bounded-flat-replacement",
+    "why": "Generic functorial flat resolution construction required by the bounded-flat-model criterion."
+   },
+   {
+    "node": "lem-sc-source-tor-amplitude-flat-model",
+    "why": "Generic bounded flat representative avoids the narrower finite-field hypothesis in the unit flat-constructible-model interface."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic K-flatness criterion for the bounded flat representative."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic ringed-topos preservation of flat terms and K-flatness, testing arbitrary modules on the target."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-sc-source-tor-amplitude-flat-model",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-94d880294",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-94d880294 (reviewer sub-agent of L); spot-checked: I read the item, the blueprint item and its proof, the unit, all 24 cited statements, the master Proper.lean and Stacks 08G1/0G7E. Statement: it keeps all four conclusions of the blueprint and adds only the standing field setting (sk-def-sfb-dc-setting). The master target file imposes that same setting, all seven DAG citers work in it, and both constructibility interfaces need it. For Q̄_ℓ the item uses the finite-subextension condensed ring, which is the master's padicAlgClRingObj (Proper.lean 31-35, 109-117) and the convention of sk-prop-sfb-cartesian-coefficients. Step 1: the Cartesian iso and exact module pullback, the mapDerivedCategory factorization, LF≅D(F) for exact F, Lg^*⊣Rg_*, Stacks 0038, and Grothendieck plus derived coproducts including the empty sum. All hypotheses checked. Step 2: lem-sfb-dc-upper-star-preserves uses the same constructibility predicate as the item. The generic flat model (08G1) replaces the blueprint's sk-lem-sf-flat-model, which assumes k = F̄_q and is off-route anyway. I checked the functorial flat resolution, bounded flat ⇒ K-flat, K-flat pullback (0G7E) and the Tor test over every target module. Step 3: Dctf=Dbc for the five rings, with qcqs derived from finite type and separated, plus Lf^* preservation for every Λ. Step 4: the hypotheses of the localizing principle are exactly steps 1-3. No new nodes. Route: every cited statement is on the unit route except lem-kun-grothendieck-derived-coproducts, which I accept as a generic tool use; the other six requested tool uses are already on the route. No SGA source. Small cases checked: zero complex, empty scheme and empty sum, the field case, and Z/ℓ^2 [A→ℓ A]. No fixes were needed."
+ }
 }

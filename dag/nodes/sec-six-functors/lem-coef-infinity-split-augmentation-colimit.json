@@ -24,9 +24,87 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a splitting extension $\\widetilde X:N(D)^{\\mathrm{op}}\\to\\mathcal E$, where $D=\\Delta_{-\\infty}$. Write $j:\\Delta\\to D$ for adjoining the distinguished least element, and $r:D\\to\\Delta$ for forgetting which least element is distinguished, while retaining that element in the underlying ordered set. Thus $r([m])=[m+1]$, including $r([-1])=[0]$. A map $j([n])\\to[m]$ in $D$ is uniquely determined by its restriction $[n]\\to\\{-\\infty\\}\\cup[m]=r([m])$; conversely every such monotone restriction extends uniquely by sending the adjoined least element to $-\\infty$. This gives bijections $\\operatorname{Hom}_D(j([n]),[m])=\\operatorname{Hom}_\\Delta([n],r([m]))$. Precomposition and postcomposition are restriction and composition of these same set maps, so the bijections are natural. Hence $j\\dashv r$ and $r^{\\mathrm{op}}\\dashv j^{\\mathrm{op}}$. In particular the functor along which we will restrict is the right adjoint $j^{\\mathrm{op}}:\\Delta^{\\mathrm{op}}\\to D^{\\mathrm{op}}$, not $r^{\\mathrm{op}}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 4.7.2.1 and Definition 4.7.2.2; agent expansion by the adjoining/forgetting least-element adjunction."
+   }
+  },
+  {
+   "text": "Put $J=N(D^{\\mathrm{op}})$ and $t=[-1]$. Nerves are identified with the opposite nerves in the statement by reversing strings. The nerve of any ordinary category has inner-horn fillers: consecutive arrows specify a string, its omitted composite is fixed by composition, and associativity makes its other faces agree. The right-pinched mapping space in an ordinary nerve is the discrete simplicial set of arrows, since all arrows in the initial constant face are identities. There is exactly one arrow $[m]\\to t$ in $D^{\\mathrm{op}}$: oppositely it is the unique pointed monotone map from $\\{-\\infty\\}$ to $\\{-\\infty\\}\\cup[m]$. Thus each $\\operatorname{Map}_J([m],t)$ is a point, and $t$ is final. The unique arrows define a natural transformation $\\mathrm{id}_{D^{\\mathrm{op}}}\\to\\mathrm{const}_t$, since both composites in each naturality square are the unique arrow to $t$. Its nerve, followed by $\\widetilde X$, is a coherent cocone $a:\\widetilde X\\to\\Delta_J X_{-1}$ with $a_t=1_{X_{-1}}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 4.7.2.1; explicit ordinary-nerve and terminal-vertex calculation from the definitions."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-final-index-colimit], $\\widetilde X$ has a colimiting cocone $b$ with vertex $X_{-1}$ and $b_t=1$. We must check the particular cocone $a$, rather than merely the existence of some colimit. For $e\\in\\mathcal E$ put $H(e)=\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal E)}(\\widetilde X,\\Delta_J e)$. The dual cocone criterion in [lem-cbc-enhanced-functor-cone-calculus] says that composition with $b$ gives an equivalence $c_b:\\operatorname{Map}_{\\mathcal E}(X_{-1},e)\\to H(e)$. Evaluation $v:H(e)\\to\\operatorname{Map}_{\\mathcal E}(X_{-1},e)$ at $t$ satisfies $v c_b\\simeq1$ because $b_t=1$, so $v$ is an equivalence. Composition with $a$ defines $c_a:\\operatorname{Map}_{\\mathcal E}(X_{-1},e)\\to H(e)$, and evaluation gives $v c_a\\simeq1$ because $a_t=1$. Two-out-of-three now makes $c_a$ an equivalence for every $e$; the same cocone criterion makes $a$ colimiting. These identities hold on mapping spaces by coherent functoriality of evaluation and composition, not merely on homotopy classes.",
+   "uses": [
+    "lem-coef-infinity-final-index-colimit",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XY",
+    "place": "Corollary 7.2.3.6, final-object colimit clause; agent mapping-space argument fixing the specific cocone."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-right-adjoint-reindexing] to the ordinary adjunction $r^{\\mathrm{op}}\\dashv j^{\\mathrm{op}}$ of Step 1 and the coherent cocone $a$ of Step 3. The ordinary categories are small: their objects are indexed by integers $m\\geq-1$ and every morphism set is a set of maps between finite sets. The restricted cocone is therefore colimiting. Its boundary diagram is $\\widetilde X\\circ N(j^{\\mathrm{op}})=X|_{N(\\Delta)^{\\mathrm{op}}}$. Its augmentation is exactly the specified augmentation of $X$: each component is the image of the unique arrow $[n]\\to[-1]$ in $\\Delta_+^{\\mathrm{op}}$, which is also the unique arrow to $t$ used to define $a$. The equality includes every coherence simplex, since both cocones are restrictions of the same nerve of the natural transformation to $t$. Hence $X$ is a colimit diagram with its stated vertex and augmentation.",
+   "uses": [
+    "lem-coef-infinity-right-adjoint-reindexing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 4.1.3.1 and Propositions 4.1.1.7-8, applied to the explicit ordinary adjunction; compare Lemma 6.1.3.16."
+   }
+  },
+  {
+   "text": "Apply the colimit mapping-space criterion of [lem-coef-infinity-yoneda-presheaf-limits] to the small coherent diagram $N(\\Delta)^{\\mathrm{op}}\\to\\mathcal E$ and the augmentation just proved colimiting. It gives $\\operatorname{Map}_{\\mathcal E}(X_{-1},e)\\simeq\\lim_{[n]\\in\\Delta}\\operatorname{Map}_{\\mathcal E}(X_n,e)$. The direction of the limit index is $\\Delta$, the opposite of the simplicial index $\\Delta^{\\mathrm{op}}$. The comparison is composition with the augmentation and is natural in $e$, as asserted by the cited node. The same node supplies the small limits in spaces; no colimit-completeness of $\\mathcal E$ has been used.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Mapping-space colimit criterion; HTT 5.1.3.1-2 and 4.2.4.8 in the cited foundation."
+   }
+  },
+  {
+   "text": "For a coherent functor $Q:\\mathcal E\\to\\mathcal F$, put $p_Q=Q\\widetilde X:J\\to\\mathcal F$ and $a_Q=Qa:p_Q\\to\\Delta_J QX_{-1}$. The cocone $a_Q$ is obtained by applying $p_Q$ to the nerve of the unique-arrow transformation $\\mathrm{id}_{D^{\\mathrm{op}}}\\to\\mathrm{const}_t$; its component at $t$ is the identity of $QX_{-1}$. The vertex $t$ is final in $J$, so [lem-coef-infinity-final-index-colimit] supplies a colimiting cocone $b_Q$ for $p_Q$ with vertex $QX_{-1}$ and identity component at $t$. For $f\\in\\mathcal F$, set $H_Q(f)=\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal F)}(p_Q,\\Delta_J f)$ and let $v_Q:H_Q(f)\\to\\operatorname{Map}_{\\mathcal F}(QX_{-1},f)$ be evaluation at $t$. By the dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus], composition with $b_Q$ is an equivalence $c_{b_Q}:\\operatorname{Map}_{\\mathcal F}(QX_{-1},f)\\to H_Q(f)$. Since $v_Qc_{b_Q}\\simeq1$, $v_Q$ is an equivalence. Composition with $a_Q$ satisfies $v_Qc_{a_Q}\\simeq1$ as well, so two-out-of-three makes $c_{a_Q}$ an equivalence. The cocone criterion makes $a_Q$ colimiting. Apply [lem-coef-infinity-right-adjoint-reindexing] to $r^{\\mathrm{op}}\\dashv j^{\\mathrm{op}}$ and $a_Q$ to obtain a colimiting restricted cocone with vertex $QX_{-1}$. Postcomposition with the simplicial map $Q$ commutes with restriction on every simplex; hence this restricted diagram and cocone are exactly $QX$ and its given augmentation, including all coherences. Only the displayed cocones have been constructed; no existence of other colimits in either target is assumed.",
+   "uses": [
+    "lem-coef-infinity-final-index-colimit",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-right-adjoint-reindexing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 4.7.2.4; preservation follows by postcomposing the splitting extension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-coef-infinity-right-adjoint-reindexing",
+  "lem-coef-infinity-yoneda-presheaf-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, middle derived mapping-complex adjunction, coherent bar foundation. Agent proof via the adjoining/forgetting least-element adjunction, checked against online HA 4.7.2.1-4 and HTT 4.1.1.7-8, 4.1.3.1, 6.1.3.16; these books are not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +140,52 @@
    "results": "{\"t\": \"2026-10-16T18:32:21Z\", \"tool\": \"grep\", \"query\": \"quasicategor.*(monad|bar|split)|(monad|bar|split).*quasicategor\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: ExtraDegeneracy.lean:72-83 is a structure in an ordinary category, not a coherent extension into an arbitrary quasicategory. SimplicialObject/Split.lean:210-234 describes coproducts of nondegenerate summands, not split augmented coherent colimits. Neither supplies the asserted mapping-space universal property or absoluteness. The refined AlgebraicTopology grep had zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "extra.degeneracy|split.*colimit|colimit.*split",
+   "results": "{\"t\": \"2026-10-16T19:38:38Z\", \"tool\": \"grep\", \"query\": \"extra.degeneracy|split.*colimit|colimit.*split\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Split.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Split.lean\"], \"digest\": \"fd968342263f167f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read ExtraDegeneracy.lean:72-83 (ordinary-category structure) and SimplicialObject/Split.lean:210-234 (coproducts of nondegenerate summands). These do not give colimits of coherent diagrams in an arbitrary quasicategory. The second semantic phrasing returns ordinary augmentations and extra-degeneracy data; the refined quasicategory grep is empty."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split augmented simplicial diagrams in infinity categories are colimit diagrams",
+   "results": "{\"t\": \"2026-10-16T19:38:39Z\", \"tool\": \"leansearch\", \"query\": \"Split augmented simplicial diagrams in infinity categories are colimit diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Splitting.isColimit'\", \"SimplicialObject.Splitting.isColimit\", \"SimplicialObject.Splitting.mk\", \"SimplicialObject.Splitting.ι_desc\", \"SimplicialObject.Splitting.recOn\", \"SimplicialObject.Split\", \"SimplicialObject.Splitting.casesOn\", \"SimplicialObject.Split.casesOn\"], \"digest\": \"803eddfd340a5261\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read ExtraDegeneracy.lean:72-83 (ordinary-category structure) and SimplicialObject/Split.lean:210-234 (coproducts of nondegenerate summands). These do not give colimits of coherent diagrams in an arbitrary quasicategory. The second semantic phrasing returns ordinary augmentations and extra-degeneracy data; the refined quasicategory grep is empty."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExtraDegeneracy\"",
+   "results": "{\"t\": \"2026-10-16T19:38:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"ExtraDegeneracy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"SSet.Augmented.StandardSimplex.nonempty_extraDegeneracy_stdSimplex\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.ofIso\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map\", \"CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\"], \"digest\": \"fc8fbaed6331b127\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read ExtraDegeneracy.lean:72-83 (ordinary-category structure) and SimplicialObject/Split.lean:210-234 (coproducts of nondegenerate summands). These do not give colimits of coherent diagrams in an arbitrary quasicategory. The second semantic phrasing returns ordinary augmentations and extra-degeneracy data; the refined quasicategory grep is empty."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split augmented simplicial diagram in a quasicategory is an absolute colimit preserved by every functor",
+   "results": "{\"t\": \"2026-10-16T19:38:48Z\", \"tool\": \"leanfinder\", \"query\": \"A split augmented simplicial diagram in a quasicategory is an absolute colimit preserved by every functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Split\", \"SimplicialObject.Splitting.isColimit\", \"SimplicialObject.Splitting.isColimit'\", \"SimplicialObject.Splitting\", \"SimplicialObject.Split.X\", \"SimplicialObject.Split.s\", \"SimplicialObject.Splitting.mk.inj\", \"SimplicialObject.Split.mk'\"], \"digest\": \"d5a826308d1d636f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read ExtraDegeneracy.lean:72-83 (ordinary-category structure) and SimplicialObject/Split.lean:210-234 (coproducts of nondegenerate summands). These do not give colimits of coherent diagrams in an arbitrary quasicategory. The second semantic phrasing returns ordinary augmentations and extra-degeneracy data; the refined quasicategory grep is empty."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategor.*(split|augmentation|colimit)|(split|augmentation|colimit).*quasicategor",
+   "results": "{\"t\": \"2026-10-16T19:39:06Z\", \"tool\": \"grep\", \"query\": \"quasicategor.*(split|augmentation|colimit)|(split|augmentation|colimit).*quasicategor\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read ExtraDegeneracy.lean:72-83 (ordinary-category structure) and SimplicialObject/Split.lean:210-234 (coproducts of nondegenerate summands). These do not give colimits of coherent diagrams in an arbitrary quasicategory. The second semantic phrasing returns ordinary augmentations and extra-degeneracy data; the refined quasicategory grep is empty."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented coherent simplicial object with extra degeneracies realizes to its augmentation in any infinity category",
+   "results": "{\"t\": \"2026-10-16T19:39:09Z\", \"tool\": \"leanfinder\", \"query\": \"An augmented coherent simplicial object with extra degeneracies realizes to its augmentation in any infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.point\", \"CategoryTheory.SimplicialObject.augment_right\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.mk.inj\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"CategoryTheory.SimplicialObject.augment_hom_zero\", \"CategoryTheory.SimplicialObject.augment_left\"], \"digest\": \"eb418282e359a449\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read ExtraDegeneracy.lean:72-83 (ordinary-category structure) and SimplicialObject/Split.lean:210-234 (coproducts of nondegenerate summands). These do not give colimits of coherent diagrams in an arbitrary quasicategory. The second semantic phrasing returns ordinary augmentations and extra-degeneracy data; the refined quasicategory grep is empty."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-monadic-bar",
@@ -73,5 +193,29 @@
   "group": "NI"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-split-augmentation-colimit",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the ordinary adjoining/forgetting least-element adjunction, proved that the specified augmentation is the terminal-value colimit of the splitting extension, and restricted it along the opposite right adjoint. Reused existing final-index and mapping-space foundations; one new statement-only generic right-adjoint reindexing node. Checked the canonical cocone, opposite directions, smallness, empty augmentation degree and arbitrary postcomposition. No Lean changes or compilation.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint, the middle finite-level derived mapping-complex adjunction before the inverse limit: generic split coherent simplicial colimit foundation used by the monadic bar comparison. This realizes its inherited supporting foundation, without replacing a geometric/coefficient route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic mapping-space characterization of coherent colimit cocones is needed to identify the actual augmentation; the unit has no alternative foundational cocone criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-24c45d2f7",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-24c45d2f7 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-infinity-right-adjoint-reindexing, all four cited statements, the unit and the parent monadic-bar in full. Sources were checked on the extracted public PDFs: HA 4.7.2.1-4 (p. 677-678) and HTT 6.1.3.16, 4.1.1.7-8 and 4.1.3.1. The item statement matches HA, including the least-element convention, the definition of 'split' and absoluteness. Step 1: j adds a least element, r forgets which element is distinguished, j ⊣ r, so r^op ⊣ j^op; checked at m=-1 and n=m=0, and j is not full. Step 2: in the nerve of D^op the vertex t=[-1] is final and the right-pinched mapping spaces are discrete; the cocone a with a_t=1 is the nerve of the unique-arrow transformation. Step 3: final-index plus the cone-calculus criterion, then two-out-of-three, fixes the specific cocone. Step 4: R=j^op, L=r^op is the right direction; the restricted transformation is the nerve of Δ^op×[1]→Δ_+^op→D^op, which strictly equals the augmentation cocone. Step 5: the dual Yoneda clause gives a limit over Δ; universes are enlargeable. Step 6: the argument is written out for QX̃, with no 'similarly' gap. The new node is true by HTT 4.1.3.1 (j/R has initial object (Lj,η_j)) with 4.1.1.7-8, and HTT itself uses this left-adjoint argument. It was tested on the identity adjunction, a terminal object picked out by R, and the empty case. It is statement-only and self-contained, its blueprint from/via is correct, and it has 3 kinds of logged searches with Mathlib's final_of_isRightAdjoint correctly judged ordinary-only. It is not a clause of the item. It is not a duplicate of filtered-cofinal-pullback, anodyne-cocones (needs right anodyne), kan-mapping-restriction (needs full), sifted-nerve or cocone-restriction-initial. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus as the generic cocone criterion, already a tool use of the same-unit yoneda node. There is no cycle (walked 237 dependency nodes), all cited nodes are split and unmerged, and no SGA is used. No changes were made."
+ }
 }

@@ -1,0 +1,106 @@
+{
+ "id": "lem-coef-ordinary-two-sided-bar-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient-adjunction and inverse-limit calculation: auxiliary localization mapping-space foundation; ordinary two-sided bar comparison (Dwyer–Kan Proposition 9.5), used in proof 10.6 before taking the simplicial-degree diagonal.",
+   "via": [
+    "lem-coef-two-sided-simplicial-grothendieck-invariance",
+    "lem-coef-fixed-hammock-graph-homotopy-invariance",
+    "lem-coef-hammock-pair-homotopy-invariance",
+    "lem-coef-dk-cofibrant-localization-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ordinary two-sided categorical bar and Grothendieck nerve comparison",
+ "statement": "Use small ordinary categories, their nerves $NA$ (strings of composable arrows), and weak homotopy equivalences as in [def-coef-zigzag-homotopy-calculus]; use the simplex category $\\Delta$ and simplicial sets of [def-weil-pbc-simplicial-set]. Fix a small category $C$, functors $F:C^{\\mathrm{op}}\\to\\mathrm{Cat}$ and $G:C\\to\\mathrm{Cat}$, and small values in a fixed larger universe. Let $E(C,F,G)$ have objects $(a,c,b)$ with $a\\in F(c)$, $b\\in G(c)$ and morphisms $(a,c,b)\\to(a',c',b')$ given by $h:c\\to c'$, $u:a\\to F(h)a'$, $v:G(h)b\\to b'$. Composition with $(h',u',v')$ is $(h'h,F(h)(u')u,v'G(h')(v))$, and identities are identities in the three components.\n\nDefine the trisimplicial set\n$$T(C,F,G)_{i,k,j}=\\coprod_{c_0\\xrightarrow{h_1}\\cdots\\xrightarrow{h_k}c_k}N_iF(c_k)\\times N_jG(c_0).$$\nThe $i,j$ directions are the ordinary nerve operators. In the $k$ direction an interior face composes adjacent base arrows, $d_0$ deletes $c_0$ and applies $G(h_1)$ to its nerve factor, $d_k$ deletes $c_k$ and applies $F(h_k)$ to its nerve factor; degeneracies repeat a base vertex with an identity arrow. Write $B(C,F,G)_r=T(C,F,G)_{r,r,r}$, with all three operators applied together. There is a finite zigzag of weak homotopy equivalences between $B(C,F,G)$ and $NE(C,F,G)$, of a fixed shape and natural in all these data. Precisely, the intermediate simplicial sets and every arrow of the zigzag are functorial under a functor $H:C'\\to C$ and natural transformations $\\alpha:F'\\Rightarrow F H^{\\mathrm{op}}$, $\\beta:G'\\Rightarrow GH$; their maps commute with every zigzag arrow, preserve identities and composition in $(H,\\alpha,\\beta)$, and at the two ends are the map of $B$ applying $H$ to the base chain and $\\alpha,\\beta$ to the endpoint nerve factors and the nerve of the functor $E(C',F',G')\\to E(C,F,G)$ applying $(\\alpha,H,\\beta)$ to the three components. No equivalence hypothesis on $H,\\alpha,\\beta$ is needed for this naturality.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Dwyer–Kan, Calculating simplicial localizations, Definition 9.1, Proposition 9.5 and its proof 9.7–9.10, printed pp.31–33 (PDF pp.15–17). The chain c_0→…→c_k is the source chain W_k→…→W_0 with indices reversed. The comparison is the natural zigzag constructed there; no Stacks tag states this homotopy-theoretic comparison."
+ },
+ "stmt_deps": [
+  "def-coef-zigzag-homotopy-calculus",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an ordinary small category C and functors F from C opposite to categories and G from C to categories, the diagonal of the two-sided bar of their nerves is weakly equivalent to the nerve of the two-sided Grothendieck construction",
+   "results": "{\"t\": \"2026-10-16T19:49:41Z\", \"tool\": \"leanfinder\", \"query\": \"For an ordinary small category C and functors F from C opposite to categories and G from C to categories, the diagonal of the two-sided bar of their nerves is weakly equivalent to the nerve of the two-sided Grothendieck construction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerve.functorOfNerveMap_obj\", \"SSet.OneTruncation₂.nerveEquiv_symm_apply_obj\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerve.nerveFunctor₂_map_functorOfNerveMap\"], \"digest\": \"720c37c3a292a226\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Ordinary nerve adjunction/product comparisons, enriched hom definitions and ordinary fiberwise-colimit isomorphisms do not state the two-sided bar-to-nerve weak equivalence. Read Mathlib/CategoryTheory/Grothendieck.lean:61–140, CategoryTheory/Functor/KanExtension/Adjunction.lean:124–138, AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:30–105. The second phrasing returns classifyingSpaceUniversalCover for a monoid, not arbitrary category-valued endpoint functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"nerve\"",
+   "results": "{\"t\": \"2026-10-16T19:49:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"nerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Ordinary nerve adjunction/product comparisons, enriched hom definitions and ordinary fiberwise-colimit isomorphisms do not state the two-sided bar-to-nerve weak equivalence. Read Mathlib/CategoryTheory/Grothendieck.lean:61–140, CategoryTheory/Functor/KanExtension/Adjunction.lean:124–138, AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:30–105. The second phrasing returns classifyingSpaceUniversalCover for a monoid, not arbitrary category-valued endpoint functors."
+  },
+  {
+   "tool": "grep",
+   "query": "Thomason|Grothendieck.*nerve|nerve.*Grothendieck|two.?sided.*bar|transfunctor",
+   "results": "{\"t\": \"2026-10-16T19:49:51Z\", \"tool\": \"grep\", \"query\": \"Thomason|Grothendieck.*nerve|nerve.*Grothendieck|two.?sided.*bar|transfunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Ordinary nerve adjunction/product comparisons, enriched hom definitions and ordinary fiberwise-colimit isomorphisms do not state the two-sided bar-to-nerve weak equivalence. Read Mathlib/CategoryTheory/Grothendieck.lean:61–140, CategoryTheory/Functor/KanExtension/Adjunction.lean:124–138, AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:30–105. The second phrasing returns classifyingSpaceUniversalCover for a monoid, not arbitrary category-valued endpoint functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dwyer Kan Proposition 9.5: the ordinary two-sided categorical Grothendieck construction has nerve naturally weakly equivalent to the two-sided trisimplicial bar of the fiber nerves",
+   "results": "{\"t\": \"2026-10-16T19:49:31Z\", \"tool\": \"leansearch\", \"query\": \"Dwyer Kan Proposition 9.5: the ordinary two-sided categorical Grothendieck construction has nerve naturally weakly equivalent to the two-sided trisimplicial bar of the fiber nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftKanExtensionIsoFiberwiseColimit\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerve.instFaithfulCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence\", \"CategoryTheory.nerve.instFullCatTruncatedOfNatNatNerveFunctor₂\"], \"digest\": \"2fdfe907a8ba384e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Ordinary nerve adjunction/product comparisons, enriched hom definitions and ordinary fiberwise-colimit isomorphisms do not state the two-sided bar-to-nerve weak equivalence. Read Mathlib/CategoryTheory/Grothendieck.lean:61–140, CategoryTheory/Functor/KanExtension/Adjunction.lean:124–138, AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:30–105. The second phrasing returns classifyingSpaceUniversalCover for a monoid, not arbitrary category-valued endpoint functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The classifying space of the two-sided category of triples a in F(c), c, b in G(c) is modeled by a bar construction whose simplices are base chains and independent chains in the endpoint fibers",
+   "results": "{\"t\": \"2026-10-16T19:49:56Z\", \"tool\": \"leanfinder\", \"query\": \"The classifying space of the two-sided category of triples a in F(c), c, b in G(c) is modeled by a bar construction whose simplices are base chains and independent chains in the endpoint fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"SSet.QCat\", \"CategoryTheory.SimplicialCategory.sHom\", \"classifyingSpaceUniversalCover.compForgetAugmented\", \"CategoryTheory.nerve\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerveFunctor\"], \"digest\": \"273d18e36f55b8f9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Ordinary nerve adjunction/product comparisons, enriched hom definitions and ordinary fiberwise-colimit isomorphisms do not state the two-sided bar-to-nerve weak equivalence. Read Mathlib/CategoryTheory/Grothendieck.lean:61–140, CategoryTheory/Functor/KanExtension/Adjunction.lean:124–138, AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:30–105. The second phrasing returns classifyingSpaceUniversalCover for a monoid, not arbitrary category-valued endpoint functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"homotopy\"",
+   "results": "{\"t\": \"2026-10-16T19:58:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.OneHypercover.exists_nonempty_homotopy\"], \"digest\": \"fe07ade032acc099\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. The single result CategoryTheory.GrothendieckTopology.OneHypercover.exists_nonempty_homotopy (Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean:271) is a refinement homotopy between maps of 1-hypercovers, not the two-sided categorical bar comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Thomason homotopy colimit theorem for the category of elements of category valued diagrams, nerve compared with diagonal simplicial replacement",
+   "results": "{\"t\": \"2026-10-16T19:58:59Z\", \"tool\": \"leanfinder\", \"query\": \"Thomason homotopy colimit theorem for the category of elements of category valued diagrams, nerve compared with diagonal simplicial replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp_assoc\"], \"digest\": \"709c238ea58c7116\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. Read Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:393–440: nerveAdjunction, nerveFunctorCompHoFunctorIso and the product comparison instances are ordinary nerve/homotopy-category adjunction results. They contain neither arbitrary endpoint diagrams F,G nor a bar-to-total-nerve weak equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyColimit|HomotopyColimit|two.?sided|Thomason",
+   "results": "{\"t\": \"2026-10-16T20:00:28Z\", \"tool\": \"grep\", \"query\": \"homotopyColimit|HomotopyColimit|two.?sided|Thomason\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Triangulated/Functor.lean\", \"Mathlib/CategoryTheory/Triangulated/TriangleShift.lean\", \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\"], \"digest\": \"86ea5c7b5b81f8a2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader grep of Mathlib/CategoryTheory. Thirteen hits are assert_not_exists TwoSidedIdeal checks or the tensor-unit comment in Monoidal/Category.lean:130; none states a classifying-space or categorical bar comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-two-sided-simplicial-grothendieck-invariance",
+  "date": "2026-10-17",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
