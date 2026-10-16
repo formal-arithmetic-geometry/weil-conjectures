@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "cor-pur-affine-space-purity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Affine-space purity",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\n$A=A_{E,n}$, let $d\\geq0$, and let $K\\in D^b_{ctf}(Y,\\Lambda)$. The\ncomparison\n\n$$\n\\gamma_{p_d,K}:Lp_d^*K(d)[2d]\\xrightarrow{\\ \\sim\\ }Rp_d^!K\n$$\n\nof [def-pur-affine-space-comparison] is an isomorphism.",
+ "statement": "In the finite-coefficient purity conventions of [def-pur-conventions], put\n$\\Lambda=A=A_{E,n}$ with $n\\geq1$, and assume\n$e(E/\\mathbf Q_\\ell)\\mid n$, as in [def-pur-affine-line-datum].\nLet $Y$ be a separated finite-type $k$-scheme\n[def-weil-scheme-morphism-properties], let $d\\geq0$, and let\n$K\\in D^b_{ctf}(Y,A)$. The comparison\n\n$$\n\\gamma_{p_d,K}:Lp_d^*K(d)[2d]\\longrightarrow Rp_d^!K\n$$\n\nof [def-pur-affine-space-comparison] is an isomorphism.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-purity.md",
   "place": "node cor-pur-affine-space-purity, order 1978"
@@ -16,32 +16,118 @@
   "def-pur-conventions",
   "def-pur-affine-space-comparison",
   "def-coefficient-twists-detailed",
-  "def-sbc-smooth-morphisms",
-  "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-pur-affine-line-datum"
  ],
  "proof": [
   {
-   "text": "By induction on $d$: the case $d=0$ is the identity, and for\n$d\\geq1$ the composition law [prop-pur-affine-space-composition-law]\nexpresses $\\gamma_{p_d,K}$ as the composite of the isomorphism\n$\\gamma_{p_{d-1},Rp_1^!K}$ (the induction hypothesis applied to the\n$(d-1)$-fold affine space over the base-changed line) with the affine-line\npurity isomorphism $\\gamma_{p_1,K}$ of [thm-pur-affine-line-purity],\nboth conjugated by invertible reassociation isomorphisms; hence\n$\\gamma_{p_d,K}$ is an isomorphism.",
+   "text": "Induct on the affine dimension with the claim quantified over every separated finite-type $k$-scheme $T$ in [def-pur-affine-space-comparison] and every $M\\in D^b_{ctf}(T,A)$, with the fixed finite coefficient ring $\\Lambda=A=A_{E,n}$, $n\\geq1$, and $e(E/\\mathbf Q_\\ell)\\mid n$. For every such $T$, the standard affine line, zero section, coordinate and punctured complement form the datum of [def-pur-affine-line-datum], with the same integer $N=n/e(E/\\mathbf Q_\\ell)\\geq1$. Thus the affine-line theorem is applicable over every base quantified over in the induction. At dimension zero the definition gives $p_0=\\mathrm{id}_T$ and $\\gamma_{p_0,M}=\\mathrm{id}_M$. At dimension one the ordered composite has one affine-line factor; the identity composition, pullback and twist unit identifications in that definition identify it with $\\gamma_{p_1,M}$ of [thm-pur-affine-line-purity]. Thus the claim holds in dimensions zero and one.",
    "uses": [
-    "prop-pur-affine-space-composition-law",
+    "def-pur-affine-space-comparison",
+    "def-pur-affine-line-datum",
     "thm-pur-affine-line-purity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-finite-existence/cor-pur-affine-space-purity.proof.md",
+    "place": "induction paragraph, with dimensions 0 and 1 separated to meet the positive-block hypotheses"
+   }
+  },
+  {
+   "text": "Let $d\\geq2$ and assume the claim in dimension $d-1$ for every such base and input. Put $T=\\mathbf A^1_Y$, let $p:T\\to Y$ be its projection, and let $q:\\mathbf A^{d-1}_T\\to T$ be the projection, so $pq=p_d$ under the ordered coordinate identification in [prop-pur-affine-space-composition-law]. The schemes and projections are separated finite type as specified in [def-pur-affine-space-comparison]; on affine charts they are polynomial algebras and their diagonals are cut out by coordinate differences. Apply clause (2) of [thm-sf-preservation-class] to $p$ to obtain $M=Rp^!K\\in D^b_{ctf}(T,A)$. The universally quantified induction hypothesis therefore gives that $\\gamma_{q,M}$ is an isomorphism, while the fixed divisibility hypothesis supplies the affine-line datum over $Y$ by [def-pur-affine-line-datum], so [thm-pur-affine-line-purity] gives that $\\gamma_{p,K}$ is an isomorphism. Both block lengths $d-1$ and $1$ are positive, so [prop-pur-affine-space-composition-law] gives, after its specified source reassociation $J$,\n$$\n\\gamma_{p_d,K}=c_{p,q}^{-1}\\circ\\gamma_{q,M}\\circ\\bigl(Lq^*(\\gamma_{p,K})(d-1)[2d-2]\\bigr)\\circ J.\n$$\nThe third factor has inverse $Lq^*(\\gamma_{p,K}^{-1})(d-1)[2d-2]$, because a functor preserves the two inverse equations. The other factors are the isomorphisms $c_{p,q}^{-1}$, $\\gamma_{q,M}$ and $J$. Composing their inverses in reverse order supplies an inverse to the displayed map. This proves the induction step and hence the assertion for all $d\\geq0$.",
+   "uses": [
+    "def-pur-affine-space-comparison",
+    "def-pur-affine-line-datum",
+    "prop-pur-affine-space-composition-law",
+    "thm-sf-preservation-class",
+    "thm-pur-affine-line-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-finite-existence/cor-pur-affine-space-purity.proof.md",
+    "place": "induction paragraph, block lengths d-1 and 1; domain of the induction input made explicit"
+   }
   }
  ],
  "proof_deps": [
+  "def-pur-affine-space-comparison",
+  "def-pur-affine-line-datum",
+  "thm-pur-affine-line-purity",
   "prop-pur-affine-space-composition-law",
-  "thm-pur-affine-line-purity"
+  "thm-sf-preservation-class"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-purity.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-finite-existence/cor-pur-affine-space-purity.proof.md",
+  "place": "induction paragraph (base cases and domains expanded)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For finite ramified coefficient ring O_E modulo varpi^n with ramification index dividing n, the canonical affine space purity comparison is an isomorphism",
+   "results": "8 hits: Ideal.quotientRangePowQuotSuccInclusionEquiv, Ideal.Quotient.algebraMap_quotient_pow_ramificationIdx, Ideal.Quotient.algebraMap_quotient_of_ramificationIdx_neZero, RingOfIntegers.ZModXQuotSpanEquivQuotSpan, RingOfIntegers.ZModXQuotSpanEquivQuotSpanPair, Ideal.Factors.piQuotientEquiv_map, Ideal.Quotient.algebraQuotientOfRamificationIdxNeZero, Ideal.Quotient.algebraQuotientPowRamificationIdx. Read the returned types and descriptions: none states affine-space purity or isomorphy of the specified comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "12 hits: Lean.Compiler.LCNF.Purity, Lean.Compiler.LCNF.tacticPurity_tac, Lean.Compiler.LCNF.Purity.impure, Lean.Compiler.LCNF.Purity.pure, Lean.Compiler.LCNF.instDecidableEqPurity, Lean.Compiler.LCNF.instHashablePurity, Lean.Compiler.LCNF.instInhabitedPurity, Lean.Compiler.LCNF.instToStringPurity. Read the returned types and descriptions: none states affine-space purity or isomorphy of the specified comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|dualizing|upperShriek",
+   "results": "0 hits: . Directory: AlgebraicGeometry. Read the returned types and descriptions: none states affine-space purity or isomorphy of the specified comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical purity morphism for an affine space projection on bounded constructible complexes of finite Tor amplitude is an isomorphism",
+   "results": "8 hits: HomologicalComplex.isIso_pOpcycles, AlgebraicGeometry.AffineSpace.toSpecMvPoly, HomologicalComplex.pOpcyclesIso, HomologicalComplex.isIso_πTruncGE_iff, HomologicalComplex.instIsIsoιTruncLEOfIsStrictlySupported, HomologicalComplex.instIsIsoπTruncGEOfIsStrictlySupported, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass. Read the returned types and descriptions: none states affine-space purity or isomorphy of the specified comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative dualizing complex of an affine space projection is the Tate twist by its dimension shifted by twice its dimension",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv, AlgebraicGeometry.AffineSpace.isoOfIsAffine, AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord. Read the returned types and descriptions: none states affine-space purity or isomorphy of the specified comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical morphism from the shifted Tate twisted inverse image to the exceptional inverse image for an iterated affine line projection is invertible",
+   "results": "Independent second reading: 8 hits. Returned names: CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over, AlgebraicGeometry.AffineSpace.SpecIso_inv_over, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over_assoc, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord, AlgebraicGeometry.AffineSpace.SpecIso_inv_over_assoc, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map. Read returned types/descriptions; these concern ordinary scheme affine spaces, mapping cones, ordinary left-derived functors, Euclidean projections, or Lean state machinery, and none states invertibility of the specified etale/pro-etale purity comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tate\"",
+   "results": "Independent second reading: 12 hits. Returned names: Lean.Macro.State, Lean.Macro.instInhabitedState, Lean.Macro.State.macroScope, EStateM.dummySave, _private.Init.Prelude.0.Lean.Macro.State.expandedMacroDecls, EStateM, EStateM.Backtrackable, EStateM.Result. Read returned types/descriptions; these concern ordinary scheme affine spaces, mapping cones, ordinary left-derived functors, Euclidean projections, or Lean state machinery, and none states invertibility of the specified etale/pro-etale purity comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriek|TateTwist|purity",
+   "results": "Independent second reading: 0 hits. Returned names: . Searched AlgebraicGeometry; no matching declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an affine space projection the purity natural transformation between derived inverse image with Tate shift and exceptional inverse image is an isomorphism",
+   "results": "Independent second reading: 8 hits. Returned names: CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, AlgebraicGeometry.AffineSpace.toSpecMvPoly, EuclideanGeometry.orthogonalProjection_map, AlgebraicGeometry.AffineSpace.map_toSpecMvPoly, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over. Read returned types/descriptions; these concern ordinary scheme affine spaces, mapping cones, ordinary left-derived functors, Euclidean projections, or Lean state machinery, and none states invertibility of the specified etale/pro-etale purity comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -79,5 +165,60 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-an"
+ "unit": "sk-prop-an",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-pur-affine-space-purity",
+  "worker": "stage1",
+  "summary": "Repair E1/E7/F4: made explicit the blueprint standing coefficient hypothesis e(E/Q_l) dividing n, added the affine-line datum as a statement dependency, and verified it before each use of affine-line purity. Audited all six current citers: three unrestricted uses need follow-up, while the compatibility proposition inherits the domain, the chart lemma has e=1, and the current projection-agreement node already limits the named maps to divisible levels. Retained the checked d=0,1 base cases and d>=2 two-block induction. C8: removed the worker tool_uses declaration; requested the preservation tool acceptance in report.md only. Rebased the retained split-owned fields on the current shared node, preserving its maintainer fields. No new nodes.",
+  "blueprint": "Main-20261015 cor-pur-affine-space-purity and its proof in sk-lem-sp-finite-existence: the identity and affine-line base cases and the two-block induction. The coefficient restriction is the standing hypothesis explicitly assumed from now on in def-pur-affine-line-datum in sk-def-purity-conv, in both blueprint snapshots. The historical sk-prop-an Step 6 route is retained.",
+  "statement_correction": {
+   "old_statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\n$A=A_{E,n}$, let $d\\geq0$, and let $K\\in D^b_{ctf}(Y,\\Lambda)$. The\ncomparison\n\n$$\n\\gamma_{p_d,K}:Lp_d^*K(d)[2d]\\xrightarrow{\\ \\sim\\ }Rp_d^!K\n$$\n\nof [def-pur-affine-space-comparison] is an isomorphism.",
+   "what": "STATEMENT-DISPUTED: the unqualified imported statement forgets the standing e(E/Q_l) dividing n hypothesis of the named affine-line theorem. At e=2,n=3 its datum would require N=3/2, not an integer. This is a failed application/domain check, not a counterexample to an independently constructed all-level purity theorem. Explicitly restore the source standing hypothesis, as repair (a) authorized in the return.",
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-affine-line-datum.md",
+    "place": "paragraph defining N: the hypothesis e(E/Q_l) divides n is assumed from now on (line 28); cor-pur-affine-space-purity and its induction proof in sk-lem-sp-finite-existence"
+   },
+   "citers": [
+    {
+     "id": "cor-pur-affine-space-zero-section-purity",
+     "holds": false,
+     "note": "The current statement is unrestricted in n, and asserts that the named affine-space comparison is an isomorphism. Its use of the corrected corollary requires e(E/Q_l) dividing n; otherwise a separate all-level argument is needed. The normalized orientation also refers to the same restricted affine-line datum."
+    },
+    {
+     "id": "thm-pur-regular-immersion-purity",
+     "holds": false,
+     "note": "Step 3 identifies the structural maps on the linear model with the named affine-space comparisons and invokes their isomorphy without a coefficient restriction. The present argument is justified only on e(E/Q_l) dividing n; the all-level conclusion needs a separate extension/finite-reduction argument."
+    },
+    {
+     "id": "thm-pur-trace-normalization-transitivity",
+     "holds": false,
+     "note": "The normalization step uses the corollary and the named normalized affine-line classes at arbitrary A_E,n. The corollary now supports that step only at divisible levels; transport to other levels must be made explicit. This does not assert that transitivity or the normalization theorem itself is false."
+    },
+    {
+     "id": "prop-pur-affine-space-purity-compatibilities",
+     "holds": true,
+     "note": "Its statement begins In the situation of cor-pur-affine-space-purity, so it inherits e(E/Q_l) dividing n. Its affine-line and composition-law applications remain in that situation."
+    },
+    {
+     "id": "det-sp-finite-existence-chart",
+     "holds": true,
+     "note": "The coefficients are Z/ell^n, the specialization E=Q_l, uniformizer ell and ramification index 1. Hence 1 divides every n and clause (2) can still cite affine-space purity."
+    },
+    {
+     "id": "lem-pur-projection-purity-agreement",
+     "holds": true,
+     "note": "The current node constructs Gamma at every n and explicitly identifies it with the named affine-space comparison only on e(E/Q_l) dividing n. Its citation of this corollary is already confined to exactly that domain; it does not use this corollary as an all-level isomorphy theorem."
+    }
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-5c548c63f",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-5c548c63f (reviewer sub-agent of L); spot-checked: The repair answers the previous RETURN (E1/E7/F4/C8). Statement: it now assumes e(E/Q_l)|n explicitly. This is the source's own standing hypothesis, 'assumed from now on' at def-pur-affine-line-datum.md:28 in both snapshots, and the datum precedes the corollary in blueprint order (1892<1978; 2236<2322). The restriction is needed: thm-pur-affine-line-purity is stated over the datum's Y, and its proof's first step takes r=n/e, which fails at e=2,n=3 (N=3/2). The change is recorded in statement_correction with all six citers, and I confirmed by scanning the DAG that there are exactly six. The three citers marked holds:false (zero-section purity, regular-immersion purity, trace-normalization transitivity) are imported, so still unsplit. Projection-agreement already restricts its identification to e|n, the chart node has e=1, and compatibilities inherits the hypothesis. Maintainer note: unit sk-prop-an (ii) is all-level, and sk-def-purity-conv allows any N with l^N A=0. Those three citers should route through thm-amb-vector-bundle-purity and the all-level Gamma of lem-pur-projection-purity-agreement, or through a level reduction. Step 1: d=0 is the defined identity. d=1 is c_0^{-1} composed with the affine-line comparison and the I_0 isomorphism; affine-line purity applies over every separated finite-type base at the fixed e|n. Step 2: the composition law with blocks (d-1,1), both >=1 for d>=2, gives exactly the displayed formula, including the twist and shift (d-1)[2d-2], the direction of c and the reassociation J. thm-sf-preservation-class(2) puts Rp^!K in D^b_ctf over A^1_Y, using the same constructible Rf^!. The induction hypothesis is quantified over all bases. Accepted tool_use: thm-sf-preservation-class (clause 2; no sk-prop-an node gives preservation). There are no new nodes and no SGA source, and the route follows unit Step 6. Edge cases checked: d=0..3, empty Y, K=0, and e,n = (1,any), (2,2), (2,3 excluded). No fixes."
+ }
 }

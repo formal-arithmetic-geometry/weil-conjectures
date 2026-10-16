@@ -31,69 +31,148 @@
   "def-weil-size-convention",
   "lem-coef-marked-anodyne-lifting-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume the stated right lifting property. Every underlying inner horn map to $Q$ is a marked map from its minimally marked horn, so lifting against (i) makes $Q$ a quasicategory by [def-cbc-enhanced-diagrams-cones]. Let $f$ be a marked edge. Every final outer horn with final edge $f$ is a marked map from the domain of (ii), and its lift supplies an underlying filler. This holds for every $n\\geq2$. The converse final-outer-horn criterion of [lem-cbc-equivalence-outer-horn-filling] therefore makes $f$ an equivalence. Thus the marking contains no non-equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.6, proof of (A) and the first implication in (B), specialized to a point; Proposition 1.2.4.3 and its opposite."
+   }
+  },
+  {
+   "text": "Now let $f:x\\to y$ be any equivalence of $Q$, without assuming it marked. By the inverse-triangle definition in [def-cbc-enhanced-diagrams-cones], choose $g:y\\to x$ and a triangle $\\tau$ on vertices $(y,x,y)$ with edges $g,f,\\mathrm{id}_y$. Form a horn $\\Lambda_3^3\\to Q$ on vertices $(x,y,x,y)$ by prescribing its faces $d_0=\\tau$, $d_1=s_0f$, and $d_2=s_1f$. The faces $d_0,d_1$ meet on $[2,3]$, where both prescriptions give $f$; $d_0,d_2$ meet on $[1,3]$, where both give $\\mathrm{id}_y$; and $d_1,d_2$ meet on $[0,3]$, where both give $f$. Thus the prescriptions agree on every intersection. Its final edge $[2,3]=f$ is an equivalence. The forward final-outer-horn assertion of [lem-cbc-equivalence-outer-horn-filling], with $n=3$, supplies a filler $\\sigma$. Hence $d_1\\sigma=s_0f$ and $d_2\\sigma=s_1f$. By the defining corepresenting property of the finite detector in [lem-coef-marked-anodyne-lifting-calculus], the pair $(\\sigma,f)$ gives an underlying map $u:A\\to Q$. The edge $[0,1]$ maps to $f$, as is seen on the face $d_2\\sigma=s_1f$. This construction uses an unmarked horn filler and does not assume the conclusion that $f$ is marked.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-equivalence-outer-horn-filling",
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7(1), finite detector and extension of an equivalence to A; explicit final-outer-3-horn argument using Proposition 1.2.4.3 instead of a weak-equivalence extension argument."
+   }
+  },
+  {
+   "text": "The underlying map $u$ of Step 2 defines a marked map $A^\\flat\\to Z$, because its only marked edges are degeneracies. Put it in the lifting square against $A^\\flat\\to A$, with the unique bottom map to $(\\Delta^0)^\\sharp$. A diagonal $A\\to Z$ has the same underlying map $u$, since the left map is the identity on underlying simplicial sets. The added marked edge $[0,1]$ of $A$ must therefore map to a marked edge of $Z$. Its image is $f$. Every equivalence is consequently marked; together with Step 1 this proves $Z=Q^\\natural$.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.3.7(1), use of the finite detector inclusion to force the equivalence marking, specialized to a point."
+   }
+  },
+  {
+   "text": "Conversely suppose $Z=Q^\\natural$. The lifting characterization in [lem-coef-marked-anodyne-lifting-calculus] gives lifting against every marked-anodyne map, in particular (i), (ii), and (iii). For completeness the extra detector map requires no membership in that class: for any underlying $u:A\\to Q$, write its defining pair as $(\\sigma,e)$. The equations $d_1\\sigma=s_0e$ and $d_2\\sigma=s_1e$ give $[0,1]=[2,3]=[0,3]=e$ and make $[0,2]$ and $[1,3]$ identity edges. Write $e:x\\to y$; the vertices of $\\sigma$ are then $(x,y,x,y)$. With $g=[1,2]:y\\to x$, the remaining faces $d_3\\sigma$ and $d_0\\sigma$ witness $g\\circ e=\\mathrm{id}_x$ and $e\\circ g=\\mathrm{id}_y$, respectively. Thus the image of the one additional marked edge $[0,1]$ is an equivalence, by [def-cbc-enhanced-diagrams-cones]. Every marked map $A^\\flat\\to Q^\\natural$ therefore extends, with unchanged underlying map, to $A\\to Q^\\natural$. This supplies the last required lift. All horns and the detector are finite, and all constructions take place inside the fixed input universe; the argument also applies to the empty quasicategory.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.6, point-case reverse implication; Proposition 3.1.3.7(1), inverse triangles of the finite detector."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-cbc-equivalence-outer-horn-filling"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Propositions 3.1.1.6 and 3.1.3.7(1), read online 2026-10-17; explicit finite horn argument for the detector, with no archived HTT copy available."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A quasicategory with marked edges has lifting against finite marked horn inclusions precisely when its marked edges are the equivalences",
-   "results": "{\"t\": \"2026-10-16T19:44:46Z\", \"tool\": \"leanfinder\", \"query\": \"A quasicategory with marked edges has lifting against finite marked horn inclusions precisely when its marked edges are the equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.Quasicategory\\u2082\", \"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory\", \"SSet.StrictSegal.quasicategory\", \"SSet.modelCategoryQuillen.horn_\\u03b9_mem_J\", \"SSet.StrictSegal\"], \"digest\": \"8090703842b6aaa6\"}",
+   "query": "A marked simplicial set lifts finite marked horns and the inverse witness detector if and only if it is a quasicategory marked at all equivalences",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Truncated.Quasicategory₂\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated\", \"type\": \"SSet.Truncated 2 → Prop\", \"doc\": \"A 2-truncated simplicial set is a quasicategory, which is a simplicial set satisfying the horn-filling conditions that characterize weak ∞-categories.\"}\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $X$ is a quasi-category if every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ extending it, for all $0 < k < n$.\"}\n  {\"name\": \"SSet.quasicategory_of_filler\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ (S : SSet),\\n  (∀ ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S),\\n      0 < i →\\n        i < Fin.last (n + 2) →\\n          ∃ σ,\\n            ∀ (j : Fin (n + 3)) (h : j ≠ i),\\n              CategoryTheory.SimplicialObject.δ S j σ =\\n                σ₀.app (Opposite.op (SimplexCategory.\", \"doc\": \"A simplicial set $ S $ is a quasicategory if for every inner horn $ \\\\Lambda^k[n] \\\\to S $ with $ 0 < k < n $, there exists a filler $ \\\\Delta[n] \\\\to S $ extending it.\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ {S : SSet} [S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 1)⦄,\\n  0 < i →\\n    i < Fin.last n →\\n      ∀ (σ₀ : (SSet.horn n i).toSSet ⟶ S), ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn n i).ι σ\", \"doc\": \"For any quasicategory $ S $ and for any inner horn $ \\\\Lambda^i[n] $ (where $ 0 < i < n $), every morphism $ \\\\sigma_0 : \\\\Lambda^i[n] \\\\to S $ admits an extension $ \\\\sigma : \\\\Delta[n] \\\\to S $ such that $\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling'\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ {S : SSet} [self : S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S),\\n  0 < i → i < Fin.last (n + 2) → ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 2) i).ι σ\", \"doc\": \"In a quasi-category $ S $, for any inner horn $ \\\\Lambda^i[n+2] \\\\to S $ with $ 0 < i < n+2 $, there exists a filler $ \\\\Delta[n+2] \\\\to S $ such that the composition of the canonical inclusion $ \\\\Lambda^\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.Quasicategory\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the quasicategory condition: every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ for all\"}\n  {\"name\": \"SSet.modelCategoryQuillen.J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property in the category of simplicial sets generated by all horn inclusions, defined as the supremum over all dimensions $n$ of the inclusions of the $i$-th horn $\\\\Lambda[n+1, i]$ into t\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}",
    "date": "2026-10-17",
-   "verdict": "no match: unmarked Quasicategory.hornFilling supplies only inner-horn fillers; the hits do not state the marked outer-horn and finite A-detector criterion."
+   "verdict": "no match: the returned declarations concern unmarked inner horns or Kan fibrations, not marked outer-horn lifting and the finite detector. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean, including quasicategory_iff_hasLiftingProperty at line 84."
   },
   {
    "tool": "loogle",
-   "query": "\"marked\"",
-   "results": "{\"t\": \"2026-10-16T19:44:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"marked\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Lean.isMarkedMeta\", \"Lean.isMarkedBorrowed\", \"Lean.Meta.Grind.throwNotMarkedWithGrindAttribute\", \"Lean.Meta.Grind.isMarkedSubsingletonApp\", \"Lean.Meta.Grind.isMarkedSubsingletonConst\"], \"digest\": \"1ad1bc5ce4ae47d5\"}",
+   "query": "SSet.Quasicategory, HasLiftingProperty",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'HasLiftingProperty'",
    "date": "2026-10-17",
-   "verdict": "no match: unmarked Quasicategory.hornFilling supplies only inner-horn fillers; the hits do not state the marked outer-horn and finite A-detector criterion."
+   "verdict": "invalid query: Loogle reports unknown identifier HasLiftingProperty; corrected by the second Loogle query."
   },
   {
    "tool": "grep",
-   "query": "marked|CartesianFibration|Quasicategory",
-   "results": "{\"t\": \"2026-10-16T19:44:47Z\", \"tool\": \"grep\", \"query\": \"marked|CartesianFibration|Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean\", \"Mathlib/Tactic/Attr/Register.lean\", \"Mathlib/Tactic/Explode.lean\", \"Mathlib/Tactic/ClickSuggestions/Unfold.lean\", \"Mathlib/Tactic/ClickSuggestions/Unfold.lean\", \"Mathlib/Tactic/FunProp.lean\", \"Mathlib/Tactic/Translate/Core.lean\", \"Mathlib/Tactic/Translate/Core.lean\"], \"digest\": \"b9f378657064d7a9\"}",
+   "query": "MarkedSSet|markedSimplicial|marked.*[Ff]ibr|[Ff]ibr.*marked",
+   "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-17",
-   "verdict": "no match: unmarked Quasicategory.hornFilling supplies only inner-horn fillers; the hits do not state the marked outer-horn and finite A-detector criterion."
+   "verdict": "no match: no marked simplicial-set fibrancy declaration found."
   },
   {
    "tool": "leansearch",
-   "query": "Finite marked horn lifting characterizes a quasicategory marked exactly on its invertible edges",
-   "results": "{\"t\": \"2026-10-16T19:46:07Z\", \"tool\": \"leansearch\", \"query\": \"Finite marked horn lifting characterizes a quasicategory marked exactly on its invertible edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.Quasicategory.hornFilling\", \"SSet.quasicategory_of_filler\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.mk\", \"SSet.Quasicategory.recOn\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.StrictSegal.quasicategory'\"], \"digest\": \"f74e4c1f101d4ace\"}",
+   "query": "Marked quasicategories are characterized by right lifting against finite marked horn and inverse witness inclusions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.quasicategory_of_filler\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \"(S : SSet)\\n  (filler :\\n    ∀ ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (Λ[n + 2, i] : SSet) ⟶ S) (_h0 : 0 < i) (_hn : i < Fin.last (n + 2)),\\n      ∃ σ : S _⦋n + 2⦌, ∀ (j) (h : j ≠ i), S.δ j σ = σ₀.app _ (horn.face i j h)) :\\n  Quasicategory S\", \"doc\": \"A simplicial set $ S $ is a quasicategory if for every inner horn $ \\\\Lambda^k[n] \\\\to S $ with $ 0 < k < n $, there exists a filler $ \\\\Delta[n] \\\\to S $ extending it.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": fibrations SSet.{u} = J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsWeakFactorizationSystem.rlp\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.WeakFactorizationSystem\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {W₁ W₂ : CategoryTheory.MorphismProperty C}\\n  [self : W₁.IsWeakFactorizationSystem W₂], W₁.rlp = W₂\", \"doc\": \"In a weak factorization system $(L, R)$ in a category $C$, the class $R$ consists precisely of all morphisms satisfying the right lifting property with respect to $L$, i.e., $R = \\\\{ f \\\\mid \\\\text{$f$ h\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \"{S : SSet} [Quasicategory S] ⦃n : ℕ⦄ ⦃i : Fin (n + 1)⦄ (h0 : 0 < i) (hn : i < Fin.last n) (σ₀ : (Λ[n, i] : SSet) ⟶ S) :\\n  ∃ σ : Δ[n] ⟶ S, σ₀ = Λ[n, i].ι ≫ σ\", \"doc\": \"For any quasicategory $ S $ and for any inner horn $ \\\\Lambda^i[n] $ (where $ 0 < i < n $), every morphism $ \\\\sigma_0 : \\\\Lambda^i[n] \\\\to S $ admits an extension $ \\\\sigma : \\\\Delta[n] \\\\to S $ such that $\"}\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $X$ is a quasi-category if every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ extending it, for all $0 < k < n$.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": Fibration f ↔ J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling'\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \"∀ {S : SSet} [self : S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S),\\n  0 < i → i < Fin.last (n + 2) → ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 2) i).ι σ\", \"doc\": \"In a quasi-category $ S $, for any inner horn $ \\\\Lambda^i[n+2] \\\\to S $ with $ 0 < i < n+2 $, there exists a filler $ \\\\Delta[n+2] \\\\to S $ such that the composition of the canonical inclusion $ \\\\Lambda^\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \"[hf : Fibration f] {n : ℕ} (i : Fin (n + 2)) : HasLiftingProperty (horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}",
    "date": "2026-10-17",
-   "verdict": "no match: unmarked Quasicategory.hornFilling supplies only inner-horn fillers; the hits do not state the marked outer-horn and finite A-detector criterion."
+   "verdict": "no match: the returned declarations concern unmarked inner horns or Kan fibrations, not marked outer-horn lifting and the finite detector. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean, including quasicategory_iff_hasLiftingProperty at line 84."
   },
   {
    "tool": "leanfinder",
-   "query": "fibrant marked simplicial objects lifting finite horns invertible morphisms",
-   "results": "{\"t\": \"2026-10-16T20:23:01Z\", \"tool\": \"leanfinder\", \"query\": \"fibrant marked simplicial objects lifting finite horns invertible morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory.hornFilling\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.Truncated.liftOfStrictSegal.hσ'₁\"], \"digest\": \"54c4445411ecb5c9\"}",
+   "query": "Naturally marked infinity categories have right lifting against marked outer horns and a finite walking equivalence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [hf : HomotopicalAlgebra.Fibration f] {n : ℕ} (i : Fin (n + 2)),\\n  CategoryTheory.HasLiftingProperty (SSet.horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.quasicategory_of_filler\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ (S : SSet),\\n  (∀ ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S),\\n      0 < i →\\n        i < Fin.last (n + 2) →\\n          ∃ σ,\\n            ∀ (j : Fin (n + 3)) (h : j ≠ i),\\n              CategoryTheory.SimplicialObject.δ S j σ =\\n                σ₀.app (Opposite.op (SimplexCategory.\", \"doc\": \"A simplicial set $ S $ is a quasicategory if for every inner horn $ \\\\Lambda^k[n] \\\\to S $ with $ 0 < k < n $, there exists a filler $ \\\\Delta[n] \\\\to S $ extending it.\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ {S : SSet} [S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 1)⦄,\\n  0 < i →\\n    i < Fin.last n →\\n      ∀ (σ₀ : (SSet.horn n i).toSSet ⟶ S), ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn n i).ι σ\", \"doc\": \"For any quasicategory $ S $ and for any inner horn $ \\\\Lambda^i[n] $ (where $ 0 < i < n $), every morphism $ \\\\sigma_0 : \\\\Lambda^i[n] \\\\to S $ admits an extension $ \\\\sigma : \\\\Delta[n] \\\\to S $ such that $\"}\n  {\"name\": \"SSet.modelCategoryQuillen.J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property in the category of simplicial sets generated by all horn inclusions, defined as the supremum over all dimensions $n$ of the inclusions of the $i$-th horn $\\\\Lambda[n+1, i]$ into t\"}\n  {\"name\": \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ (n : ℕ) (i : Fin (n + 2)), SSet.modelCategoryQuillen.J (SSet.horn (n + 1) i).ι\", \"doc\": \"For any natural number $ n $ and index $ 0 \\\\leq i \\\\leq n+1 $, the inclusion morphism $ \\\\Lambda^{i}[n+1] \\\\to \\\\Delta[n+1] $ of the $ i $-th horn into the standard $ (n+1) $-simplex is a generating acycl\"}\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"SSet → Prop\", \"doc\": \"A simplicial set $X$ is a quasi-category if every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ extending it, for all $0 < k < n$.\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling'\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ {S : SSet} [self : S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S),\\n  0 < i → i < Fin.last (n + 2) → ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 2) i).ι σ\", \"doc\": \"In a quasi-category $ S $, for any inner horn $ \\\\Lambda^i[n+2] \\\\to S $ with $ 0 < i < n+2 $, there exists a filler $ \\\\Delta[n+2] \\\\to S $ such that the composition of the canonical inclusion $ \\\\Lambda^\"}\n  {\"name\": \"SSet.KanComplex.hornFilling\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex\", \"type\": \"∀ {S : SSet} [S.KanComplex] {n : ℕ} {i : Fin (n + 2)} (σ₀ : (SSet.horn (n + 1) i).toSSet ⟶ S),\\n  ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 1) i).ι σ\", \"doc\": \"For any Kan complex $ S $, every horn inclusion $ \\\\Lambda^{i}_{n+1} \\\\to S $ admits a filler: there exists a simplex $ \\\\sigma: \\\\Delta^{n+1} \\\\to S $ such that $ \\\\sigma_0 = \\\\Lambda^{i}_{n+1} \\\\xhookrighta\"}",
    "date": "2026-10-17",
-   "verdict": "no match: Quasicategory.hornFilling and quasicategory_iff_hasLiftingProperty characterize only inner-horn lifting for unmarked sets; neither these nor the general fibrancy definitions include the marked outer horns and A detector."
+   "verdict": "no match: the returned declarations concern unmarked inner horns or Kan fibrations, not marked outer-horn lifting and the finite detector. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean, including quasicategory_iff_hasLiftingProperty at line 84."
   },
   {
    "tool": "loogle",
    "query": "\"Quasicategory\"",
-   "results": "{\"t\": \"2026-10-16T20:23:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.quasicategory_of_hasLiftingProperty\", \"SSet.Quasicategory.hasLiftingProperty\", \"SSet.quasicategory_iff_hasLiftingProperty\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.mk\"], \"digest\": \"1f27f0f0176f40b2\"}",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SSet.Quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" (S : SSet) : Prop\", \"doc\": \"A simplicial set `S` is a *quasicategory* if it satisfies the following horn-filling condition:\\nfor every `n : ℕ` and `0 < i < n`,\\nevery map of simplicial sets `σ₀ : Λ[n, i] → S` can be extended to a \"}\n  {\"name\": \"SSet.instQuasicategoryOfKanComplex\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" (S : SSet) [S.KanComplex] : S.Quasicategory\", \"doc\": \"Every Kan complex is a quasicategory. \"}\n  {\"name\": \"SSet.quasicategory_of_hasLiftingProperty\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" (S : SSet) {X : SSet} (t : CategoryTheory.Limits.IsTerminal X) (h : ∀ {n : ℕ} {i : Fin (n + 1)}, 0 < i → i < Fin.last n → CategoryTheory.HasLiftingProperty (SSet.horn n i).ι (t.from S)) : S.Quasicategory\", \"doc\": \"\"}\n  {\"name\": \"SSet.Quasicategory.hasLiftingProperty\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" (S : SSet) [S.Quasicategory] {X : SSet} (t : CategoryTheory.Limits.IsTerminal X) {n : ℕ} {i : Fin (n + 1)} (h0 : 0 < i) (hn : i < Fin.last n) : CategoryTheory.HasLiftingProperty (SSet.horn n i).ι (t.from S)\", \"doc\": \"\"}\n  {\"name\": \"SSet.quasicategory_iff_hasLiftingProperty\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" (S : SSet) {X : SSet} (t : CategoryTheory.Limits.IsTerminal X) : S.Quasicategory ↔ ∀ {n : ℕ} {i : Fin (n + 1)}, 0 < i → i < Fin.last n → CategoryTheory.HasLiftingProperty (SSet.horn n i).ι (t.from S)\", \"doc\": \"\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" {S : SSet} [S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 1)⦄ (h0 : 0 < i) (hn : i < Fin.last n) (σ₀ : (SSet.horn n i).toSSet ⟶ S) : ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn n i).ι σ\", \"doc\": \"\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling'\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" {S : SSet} [self : S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S) (_h0 : 0 < i) (_hn : i < Fin.last (n + 2)) : ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 2) i).ι σ\", \"doc\": \"\"}\n  {\"name\": \"SSet.Quasicategory.mk\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" {S : SSet} (hornFilling' : ∀ ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S), 0 < i → i < Fin.last (n + 2) → ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 2) i).ι σ) : S.Quasicategory\", \"doc\": \"\"}\n  {\"name\": \"SSet.quasicategory_of_filler\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.Basic\", \"type\": \" (S : SSet) (filler : ∀ ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S), 0 < i → i < Fin.last (n + 2) → ∃ σ, ∀ (j : Fin (n + 3)) (h : j ≠ i), (CategoryTheory.ConcreteCategory.hom (CategoryTheory.SimplicialObject.δ S j)) σ = (CategoryTheory.ConcreteCategory.hom (σ₀.app (Opposite.op \", \"doc\": \"\"}\n  {\"name\": \"SSet.Truncated.Quasicategory₂\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.TwoTruncated\", \"type\": \" (X : SSet.Truncated 2) : Prop\", \"doc\": \"A 2-truncated quasicategory is a 2-truncated simplicial set with the properties:\\n* (2, 1)-filling: given two consecutive `Edge`s `e₀₁` and `e₁₂`, there exists a `CompStruct`\\n  with (0, 1)-edge `e₀₁` a\"}\n  {\"name\": \"SSet.Truncated.Quasicategory₂.fill21\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.TwoTruncated\", \"type\": \" {X : SSet.Truncated 2} [self : X.Quasicategory₂] {x₀ x₁ x₂ : X.obj (Opposite.op { obj := { len := 0 }, property := SSet.Truncated.Quasicategory₂._proof_1 })} (e₀₁ : SSet.Truncated.Edge x₀ x₁) (e₁₂ : SSet.Truncated.Edge x₁ x₂) : Nonempty ((e₀₂ : SSet.Truncated.Edge x₀ x₂) × e₀₁.CompStruct e₁₂ e₀₂)\", \"doc\": \"\"}\n  {\"name\": \"SSet.Truncated.Quasicategory₂.fill31\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.TwoTruncated\", \"type\": \" {X : SSet.Truncated 2} [self : X.Quasicategory₂] {x₀ x₁ x₂ x₃ : X.obj (Opposite.op { obj := { len := 0 }, property := SSet.Truncated.Quasicategory₂._proof_1 })} {e₀₁ : SSet.Truncated.Edge x₀ x₁} {e₁₂ : SSet.Truncated.Edge x₁ x₂} {e₂₃ : SSet.Truncated.Edge x₂ x₃} {e₀₂ : SSet.Truncated.Edge x₀ x₂} {e\", \"doc\": \"\"}",
    "date": "2026-10-17",
-   "verdict": "no match: Quasicategory.hornFilling and quasicategory_iff_hasLiftingProperty characterize only inner-horn lifting for unmarked sets; neither these nor the general fibrancy definitions include the marked outer horns and A detector."
+   "verdict": "no match: the returned declarations concern unmarked inner horns or Kan fibrations, not marked outer-horn lifting and the finite detector. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean, including quasicategory_iff_hasLiftingProperty at line 84."
   },
   {
    "tool": "grep",
-   "query": "markedSimplicial|MarkedSSet|CategoricalEquivalence|categoricalEquivalence",
-   "results": "{\"t\": \"2026-10-16T20:23:02Z\", \"tool\": \"grep\", \"query\": \"markedSimplicial|MarkedSSet|CategoricalEquivalence|categoricalEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "quasicategory_iff_hasLiftingProperty|marked|equivalence|outer",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"line\": \"24\", \"text\": \"As an enriched ordinary category, there is an equivalence `QCat.forgetEnrichment.equiv`\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"line\": \"78\", \"text\": \"  rw [quasicategory_iff_hasLiftingProperty.{u} _ terminalIsTerminal, innerFibration_iff]\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"18\", \"text\": \"We prove that for 2-truncated quasicategories, both homotopy relations are equivalence\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"25\", \"text\": \"* `HomotopyCategory A` has morphisms given by equivalence classes of paths in the underlying\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"200\", \"text\": \"Left homotopy is an equivalence relation on the edges of `A`.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"237\", \"text\": \"by taking its equivalence class.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"line\": \"242\", \"text\": \"Every morphism in the homotopy category `HomotopyCategory₂ A` is the equivalence class of\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"84\", \"text\": \"lemma quasicategory_iff_hasLiftingProperty (S : SSet) {X : SSet} (t : Limits.IsTerminal X) :\"}",
    "date": "2026-10-17",
-   "verdict": "no match: Quasicategory.hornFilling and quasicategory_iff_hasLiftingProperty characterize only inner-horn lifting for unmarked sets; neither these nor the general fibrancy definitions include the marked outer horns and A detector."
+   "verdict": "no match: the returned declarations concern unmarked inner horns or Kan fibrations, not marked outer-horn lifting and the finite detector. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean, including quasicategory_iff_hasLiftingProperty at line 84."
   },
   {
    "tool": "leansearch",
-   "query": "Marked simplicial set is fibrant exactly if its underlying simplicial set is a quasicategory with all isomorphisms marked",
-   "results": "{\"t\": \"2026-10-16T20:24:43Z\", \"tool\": \"leansearch\", \"query\": \"Marked simplicial set is fibrant exactly if its underlying simplicial set is a quasicategory with all isomorphisms marked\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"HomotopicalAlgebra.IsFibrant.congr_simp\", \"HomotopicalAlgebra.IsFibrant\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.KanComplex\", \"SSet.quasicategory_of_filler\", \"HomotopicalAlgebra.isFibrant_iff\"], \"digest\": \"59ced4ddab6858b3\"}",
+   "query": "The fibrant objects of marked simplicial sets over a point are infinity categories with precisely their invertible arrows marked",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
    "date": "2026-10-17",
-   "verdict": "no match: Quasicategory.hornFilling and quasicategory_iff_hasLiftingProperty characterize only inner-horn lifting for unmarked sets; neither these nor the general fibrancy definitions include the marked outer horns and A detector."
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "MarkedSSet|[Mm]arked.*[Ss]implicial|[Ss]tratified|[Oo]uter.*[Hh]orn",
+   "results": "{\"t\": \"2026-10-16T21:39:17Z\", \"tool\": \"grep\", \"query\": \"MarkedSSet|[Mm]arked.*[Ss]implicial|[Ss]tratified|[Oo]uter.*[Hh]orn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: grep found no marked/stratified simplicial-set or outer-horn declaration; Loogle hits are compiler/metaprogramming markings; LeanFinder hits are unmarked Quillen fibrations, Kan complexes and strict Segal sets. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:44-91 and Quasicategory/Basic.lean:34-88; these do not characterize the marked objects in this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"marked\"",
+   "results": "{\"t\": \"2026-10-16T21:39:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"marked\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Lean.isMarkedMeta\", \"Lean.isMarkedBorrowed\", \"Lean.Meta.Grind.throwNotMarkedWithGrindAttribute\", \"Lean.Meta.Grind.isMarkedSubsingletonApp\", \"Lean.Meta.Grind.isMarkedSubsingletonConst\"], \"digest\": \"1ad1bc5ce4ae47d5\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: grep found no marked/stratified simplicial-set or outer-horn declaration; Loogle hits are compiler/metaprogramming markings; LeanFinder hits are unmarked Quillen fibrations, Kan complexes and strict Segal sets. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:44-91 and Quasicategory/Basic.lean:34-88; these do not characterize the marked objects in this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrancy criterion for stratified simplicial sets with thin edges all and only the isomorphisms",
+   "results": "{\"t\": \"2026-10-16T21:39:18Z\", \"tool\": \"leanfinder\", \"query\": \"Fibrancy criterion for stratified simplicial sets with thin edges all and only the isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.IsStrictSegal\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.StrictSegal.isCoskeletal\", \"SSet.modelCategoryQuillen.J\", \"SSet.KanComplex\"], \"digest\": \"e0ec9cf86fdaab73\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: grep found no marked/stratified simplicial-set or outer-horn declaration; Loogle hits are compiler/metaprogramming markings; LeanFinder hits are unmarked Quillen fibrations, Kan complexes and strict Segal sets. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:44-91 and Quasicategory/Basic.lean:34-88; these do not characterize the marked objects in this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-saturation-perfect-equivalences",
@@ -101,5 +180,29 @@
   "group": "Q49"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-finite-marked-fibrancy-criterion",
+  "worker": "stage1",
+  "summary": "Verified the finite marked criterion against HTT online. Reused the existing marked lifting calculus and equivalence outer-horn criterion. Wrote the missing extension of any equivalence to the finite detector as a single final outer 3-horn filler, then decoded the marking lift. No statement correction and no new nodes. Repeated Mathlib and project searches; the unmarked inner-horn characterization covers only a proper part of the item. Independent second reading names each pairwise horn-face intersection and the vertices of the two inverse identities; three additional Mathlib searches find no marked criterion.",
+  "blueprint": "Realizes the foundation of the finite marked saturation used in the coherent derived coefficient-adjunction/inverse-limit calculation of prop-coef-integral-exceptional-adjoint, proof paragraph 2. The four steps identify exactly the output of the finite saturation; they stay below its existing technical ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Generic final-outer-horn characterization of equivalence edges, used both to detect marked equivalences and to construct the finite detector witness; the coefficient-biduality unit has no other statement giving this simplicial fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-equivalence-outer-horn-filling"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-f19333eea",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-f19333eea (reviewer sub-agent of L); spot-checked: I read the item, its four proof steps and the full statements of the four nodes it cites (def-cbc-enhanced-diagrams-cones, lem-coef-marked-anodyne-lifting-calculus, lem-cbc-equivalence-outer-horn-filling, def-weil-size-convention). The delivery adds no new nodes and leaves the statement unchanged. Step 1: lifting against (i) gives inner fillers. For n>=2 the edge [n-1,n] lies in face d0 of the final horn, so any final horn ending in a marked f is a valid lifting problem for (ii). The converse clause of the outer-horn node then makes f an equivalence. Step 2: I checked the 3-horn on vertices (x,y,x,y) by hand. The faces are d0 = tau = (g,f,id_y), d1 = s0 f and d2 = s1 f. They agree on the shared edges [2,3]=f, [1,3]=id_y and [0,3]=f, and the final edge is f. The filler sigma satisfies the defining relations of the calculus node's detector A, and [0,1] maps to f. Step 3 is correctly marked elementary: A-flat to A is the identity on underlying simplicial sets, so any diagonal keeps the map u and forces f to be marked. Step 4: (i)-(iii) follow from the calculus node's stated characterization of the full class. The relations of A force vertices 0=2, 1=3, the edges [0,1]=[2,3]=[0,3]=e and degenerate [0,2],[1,3], and d3, d0 are the two inverse triangles. Small cases behave correctly: the empty set (lifting vacuous), the n=1 case of (ii), degenerate f, N(0->1) with a non-equivalence marked (the (1,0,1) final horn has no filler), and a groupoid nerve with an unmarked isomorphism (fails the detector lift). No duplicate exists: the DAG nodes that mention the detector and the HTT places state the model structure, the relative versions or the full-class criterion, and those need (iv). No cycle: the closures of the four cited nodes do not contain the item. I accept the declared tool use of lem-cbc-equivalence-outer-horn-filling; the same node is already an accepted tool use in six nodes of this unit. HTT is not archived locally, so the WANTED line and proof_origin by agent are correct; I checked the proof against the DAG's own definition of A instead. No marked simplicial sets exist in Mathlib; I confirmed this by grep. No SGA is used, the item is not a target node, and I made no fixes."
+ }
 }
