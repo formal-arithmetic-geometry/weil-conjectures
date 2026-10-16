@@ -3,43 +3,112 @@
  "blueprint": {
   "is": "sk-lem-geometry",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-pur-dnc-section-geometry"
+  ]
  },
  "kind": "statement",
  "title": "Geometry of the deformation of a section",
- "statement": "In the conventions of [sk-def-purity-conv] let $g:V\\to B$ be smooth of pure\nrelative dimension $d$ with closed section $s$, and let $N_s\\to B$ be the\nnormal bundle of $s$ with zero section $0_N$ and projection $\\pi_N$. Then:\n\n1. **(1)** *the fibres.* The fibre of $\\widetilde g$ over $1$ is\n$(g:V\\to B,s)$ and the fibre over $0$ is $(\\pi_N:N_s\\to B,0_N)$; writing\n$i_0,i_1:B\\to\\Aaf^1_B$ for the two sections, base change gives\n$Li_1^{*}\\mathcal F\\simeq\\mathcal C(g,s)$ and\n$Li_0^{*}\\mathcal F\\simeq\\mathcal C(\\pi_N,0_N)$.\n1. **(2)** *coordinates.* Since $s$ is a section of a smooth map, there\nare étale-locally coordinates $x_1,\\dots,x_d$ on $V$ over $B$ in which $s$\nis $x_i=0$; on the deformation chart $u_i=x_i/t$, so $\\widetilde g$ is smooth\nof pure relative dimension $d$.\n1. **(3)** *the punctured trivialization.* Over $\\mathbf G_{m,B}$ the\ndeformation space is canonically $V\\times_B\\mathbf G_{m,B}$ with\n$\\widetilde s=s\\times1$, so base change gives a canonical\n$\\kappa^{\\circ}:j^{*}\\mathcal F\\xrightarrow{\\ \\sim\\ }j^{*}a^{*}\\mathcal C(g,s)$,\nwhere $a:\\Aaf^1_B\\to B$.\n1. **(4)** *the standard pair.* For $(\\Aaf^d_B\\to B,0)$ the deformation\nspace is $\\Aaf^d_B\\times_B\\Aaf^1_B$ with $x_k=tu_k$, the family object is\n$a^{*}0^{*}\\omega_{\\Aaf^d_B/B}$, and $0^{*}\\omega_{\\Aaf^d_B/B}=\\Lambda(d)[2d]$\nby the purity isomorphism of [sk-prop-an]\n($\\omega_{\\Aaf^d_B/B}\\cong\\Lambda(d)[2d]$, pulled back along the zero\nsection).\n1. **(5)** *base change.* All of this commutes with base change in $B$\nand with étale localization.",
+ "statement": "In the conventions of [sk-def-purity-conv] let $g:V\\to B$ be smooth of pure\nrelative dimension $d$ with closed section $s$, and let $N_s\\to B$ be the\nnormal bundle of $s$ with zero section $0_N$ and projection $\\pi_N$. Then:\n\n1. **(1)** *the fibres.* The fibre of $\\widetilde g$ over $1$ is\n$(g:V\\to B,s)$ and the fibre over $0$ is $(\\pi_N:N_s\\to B,0_N)$; writing\n$i_0,i_1:B\\to\\Aaf^1_B$ for the two sections, base change gives\n$Li_1^{*}\\mathcal F\\simeq\\mathcal C(g,s)$ and\n$Li_0^{*}\\mathcal F\\simeq\\mathcal C(\\pi_N,0_N)$.\n1. **(2)** *coordinates.* Since $s$ is a section of a smooth map, there\nare étale-locally coordinates $x_1,\\dots,x_d$ on $V$ over $B$ in which $s$\nis $x_i=0$; on the deformation chart $u_i=x_i/t$, so $\\widetilde g$ is smooth\nof pure relative dimension $d$.\n1. **(3)** *the punctured trivialization.* Over $\\mathbf G_{m,B}$ the\ndeformation space is canonically $V\\times_B\\mathbf G_{m,B}$ with\n$\\widetilde s=s\\times1$, so base change gives a canonical\n$\\kappa^{\\circ}:j^{*}\\mathcal F\\xrightarrow{\\ \\sim\\ }j^{*}a^{*}\\mathcal C(g,s)$,\nwhere $a:\\Aaf^1_B\\to B$.\n1. **(4)** *the standard pair.* For $(\\Aaf^d_B\\to B,0)$ the deformation\nspace is $\\Aaf^d_B\\times_B\\Aaf^1_B$ with $x_k=tu_k$, the family object is\n$a^{*}0^{*}\\omega_{\\Aaf^d_B/B}$, and $0^{*}\\omega_{\\Aaf^d_B/B}=\\Lambda(d)[2d]$\nby the purity isomorphism of [cor-pur-vector-bundle-purity]\n($\\omega_{\\Aaf^d_B/B}\\cong\\Lambda(d)[2d]$, pulled back along the zero\nsection).\n1. **(5)** *base change.* All of this commutes with base change in $B$\nand with étale localization.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/_section.md",
   "place": "node sk-lem-geometry, order 1944"
  },
  "stmt_deps": [
-  "sk-def-purity-conv"
+  "sk-def-purity-conv",
+  "cor-pur-vector-bundle-purity"
  ],
  "proof": [
   {
-   "text": "*Rees description.* The blow-up of [sk-def-purity-conv] with the\nstrict transform of the closed fibre deleted is\n$\\Spec_V\\bigl(\\bigoplus_{r\\in\\Z}\\mathcal I_s^{\\,r}t^{-r}\\bigr)$, with\n$\\mathcal I_s^{\\,r}=\\mathcal O_V$ for $r\\le0$ and $\\widetilde g$ induced by\n$t$. Inverting $t$ gives $\\mathcal O_V[t,t^{-1}]$, which is (3) and the\nfibre $V$ over $1$; setting $t=0$ gives\n$\\bigoplus_{r\\ge0}\\mathcal I_s^{\\,r}/\\mathcal I_s^{\\,r+1}$, the normal cone,\na vector bundle because a section of a smooth map is a regular immersion.\nThis is (1), the comparison of fibres being base change for $\\omega$\n([sk-prop-cohsm] (G12)).",
+   "text": "The conventions [sk-def-purity-conv] define the normal cone from the ideal of $s$, the blow-up deformation, $\\mathcal C(g,s)=Ls^*\\omega_g$, and $\\mathcal F=L\\widetilde s^*\\omega_{\\widetilde g}$. Their exceptional inverse image is the constructible finite-coefficient functor of [sk-def-sf-operations](vi), on finite-type $k$-schemes. These are the finite $A=\\mathcal O_E/\\varpi^n$ coefficient and geometric conventions of [lem-pur-dnc-section-geometry]. Apply that existing same-unit theorem to $(g,s)$ with the normal bundle determined by the ideal of $s$. Its first clause identifies the geometric fibres and gives $Li_1^*\\mathcal F\\simeq\\mathcal C(g,s)$ and $Li_0^*\\mathcal F\\simeq\\mathcal C(\\pi_N,0_N)$. Its second clause gives the relative étale coordinates $u_i=x_i/t$ and smoothness of pure dimension $d$; its third gives the canonical punctured trivialization of the pair and the family object; its fifth gives arbitrary base change, including étale localization. These are clauses (1), (2), (3), and (5) here. The theorem concerns the ideal-defined normal cone, not an arbitrary auxiliary normal-cone datum.",
    "uses": [
-    "sk-def-purity-conv"
+    "sk-def-purity-conv",
+    "sk-def-sf-operations",
+    "lem-pur-dnc-section-geometry"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/sk-lem-geometry.proof.md",
+    "place": "Rees description"
+   }
   },
   {
-   "text": "*Coordinates.* A closed section of a smooth map is étale-locally\n$x_i=0$ in relative coordinates $x_1,\\dots,x_d$ (the relative local\nlinearization). On the chart $u_i=x_i/t$ the extended Rees algebra is\n$\\mathcal O[u_1,\\dots,u_d,t]/(tu_i-x_i)$, in which each $x_i$ is eliminated,\nso the chart is $\\Aaf^d\\times\\Aaf^1$ over the base and $\\widetilde g$ is the\nlast projection; this is (2), and the remaining charts give the same\ncomputation after substituting a generator of the centre. Item (4) is this\ncomputation for the standard pair together with [sk-prop-an], and (5) is\nthe base-change behaviour of the Rees algebra, of the punctured\ntrivialization and of the normal cone.",
-   "uses": [],
-   "elementary": null
+   "text": "For the standard pair, clause (4) of [lem-pur-dnc-section-geometry] gives $\\mathcal D_0(\\mathbf A^d_B)=\\mathbf A^d_B\\times_B\\mathbf A^1_B$, with $x_k=tu_k$, and identifies $\\mathcal F$ with $a^*(0^*\\omega_{\\mathbf A^d_B/B})$. Apply [cor-pur-vector-bundle-purity] to the trivial rank-$d$ vector bundle $\\pi:\\mathbf A^d_B\\to B$ with zero section $0$. Its stated special case $\\omega_\\pi\\simeq\\Lambda_{\\mathbf A^d_B}(d)[2d]$ pulls back to $0^*\\omega_\\pi\\simeq\\Lambda_B(d)[2d]$. Pulling this once more along $a$ gives the asserted standard family object. The purity theorem's base-change compatibility gives compatibility of this identification. Only finite coefficients $A$ are used.",
+   "uses": [
+    "lem-pur-dnc-section-geometry",
+    "cor-pur-vector-bundle-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/sk-lem-geometry.proof.md",
+    "place": "Coordinates"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-purity-conv"
+  "sk-def-purity-conv",
+  "sk-def-sf-operations",
+  "lem-pur-dnc-section-geometry",
+  "cor-pur-vector-bundle-purity"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-geometry/sk-lem-geometry.proof.md",
+  "place": "Rees description and Coordinates"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Geometry of deformation to the normal cone of a smooth section: fibres, local coordinates, punctured trivialization, standard pair, and base change",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, hom_trivializationAt_target, ContMDiffFiberwiseLinear.locality_aux₂, SmoothBumpCovering.embeddingPiTangent, Manifold.Elab.totalSpaceMk, ContMDiffFiberwiseLinear.locality_aux₁, contMDiffFiberwiseLinear",
+   "date": "2026-10-16",
+   "verdict": "no match: smooth-chart and manifold-trivialization results do not state the DNC geometry/family-object theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DeformationToNormalConeData, SmoothOfRelativeDimension, IsPullback",
+   "results": "0 hits: ; loogle: unknown identifier 'DeformationToNormalConeData'",
+   "date": "2026-10-16",
+   "verdict": "query rejected: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "DeformationToNormalCone|normal.?cone|extended.?Rees",
+   "results": "0 hits: ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: no deformation-to-normal-cone or extended-Rees terminology in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "deformation to normal cone of a smooth section with fibre identifications and punctured trivialization",
+   "results": "8 hits: Trivialization.contMDiffAt_iff, Trivialization.contMDiffOn_section_baseSet_iff, Trivialization.contMDiffAt_section_iff, MDifferentiableWithinAt.change_section_trivialization, Trivialization.mdifferentiableWithinAt_section_iff, ContMDiffSection.coeFn_mk, ContMDiffSection.coe_injective, Trivialization.mdifferentiableOn_section_baseSet_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: smooth-chart and manifold-trivialization results do not state the DNC geometry/family-object theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth scheme morphism with closed section the extended Rees algebra gives a smooth deformation from the original scheme to the normal bundle compatible with arbitrary base change",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.smoothLocus, Algebra.basicOpen_subset_smoothLocus_iff, Algebra.IsSmoothAt",
+   "date": "2026-10-16",
+   "verdict": "no match: smooth-chart and manifold-trivialization results do not state the DNC geometry/family-object theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"deformation\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration with the quoted deformation name"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth scheme morphism with closed section the extended Rees algebra gives a smooth deformation from the original scheme to the normal bundle compatible with arbitrary base change",
+   "results": "8 hits on resumption: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion",
+   "date": "2026-10-16",
+   "verdict": "no match: these local-standard-smoothness declarations give no deformation, fibre identification, or derived-family comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -64,5 +133,29 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-lem-geometry"
+ "unit": "sk-lem-geometry",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-geometry",
+  "worker": "stage1",
+  "summary": "Preserved all five geometric and family-object assertions. Replaced the dangling unit reference sk-prop-an by its existing vector-bundle purity node. Reused the existing same-unit geometry theorem rather than duplicating it; checked that the finite-coefficient constructible functor and finite-type k-scheme conventions agree via sk-def-sf-operations(vi). Reported the read-only Lean source arbitrary-NormalConeData/sorry discrepancy separately, without changing the source-correct canonical normal bundle statement. No new nodes.",
+  "blueprint": "The Rees description paragraph realizes clauses (1), (2), (3), and (5); the Coordinates paragraph realizes clause (4) using vector-bundle purity.",
+  "tool_uses": [
+   {
+    "node": "cor-pur-vector-bundle-purity",
+    "why": "The Coordinates paragraph explicitly invokes the vector-bundle purity result from unit sk-prop-an; this item has no replacement for that generic purity input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-pur-vector-bundle-purity"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NI-b5c647c39",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-b5c647c39 (reviewer sub-agent of L); spot-checked: PASS, no changes and no new nodes. Statement: the item matches main-20261015 sk-lem-geometry/_section.md clause by clause. The only change replaces the dangling [sk-prop-an] reference by [cor-pur-vector-bundle-purity], which keeps the same formula and hypotheses and is the node the blueprint's lem-pur-dnc-section-geometry (4) cites. Coefficients and functors: sk-def-purity-conv with sk-def-sf-operations(vi) defines Rf^! = nu^* f^x Rnu_* on D^b_ctf(-, A_{E,n}) for separated finite-type maps of finite-type k-schemes. This is the same functor as def-weil-exceptional-inverse-image under def-pur-conventions, and the deformation space, family object and normal cone are defined the same way as in def-pur-dnc-section-family and def-pur-normal-bundle. So the hypotheses are exactly those of def-pur-section-invariant and lem-pur-dnc-section-geometry, with none missing on either side. Step 1: the statement of the same-unit lem-pur-dnc-section-geometry, clauses (1), (2), (3) and (5), gives item clauses (1), (2), (3) and (5). 'Etale localization' in (5) means etale localization on B in this chapter: prop-pur-dnc-family-constancy (4) and thm-pur-dnc-invariance say so, and the sole proof citer sk-thm-dnc does its own etale charts on V and takes only base-change identifications from (5). Etale localization on B is base change along an etale B'->B, which the cited clause (5) covers. Step 2: lem-pur-dnc-section-geometry (4) gives the standard-pair space and family object, cor-pur-vector-bundle-purity with rank r=d gives omega = Lambda(d)[2d], and pulling back along the zero section is elementary. Route: cor-pur-vector-bundle-purity is in unit sk-prop-an, which unit sk-lem-geometry cites, so it is on route and the declared tool_use is unnecessary; no tool_use needs recording. No cycle (dependency traversal of the four cited nodes never reaches the item). No SGA is used. Lean: nonempty_deformationToNormalConeData (DeformationToNormalCone.lean:168-172) is sorry, quantifies over an arbitrary NormalConeData and has no family-object clauses, so it cannot be attached (B10). The DeformationSpace/Coordinates module recorded in lem-pur-dnc-section-geometry's audit is absent from this checkout. Small cases checked: d=0 (D = A^1_B plus W x G_m, F = Lambda), d=1 over a point (D = A^2, F = Lambda(1)[2]), empty B. lem-pur-dnc-section-geometry, the blueprint's expanded form of this sketch, could later be merged with the item, but that is not a fault of this delivery. Details in review.md."
+ }
 }
