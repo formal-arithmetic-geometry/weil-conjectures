@@ -211,5 +211,31 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-d67ddac1b (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited interfaces. Verified Kerodon slice comparison, strict-fiber invariance, all six steps, horn directions, naturality, empty cases, duplicate candidates, unit route and archived target typing. No repairs or tool_uses needed; concrete checks are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-82f5f63d4",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement clauses, dependency declarations, canonical prism, naturality, edge cases, universes, docstrings, and verbatim signature. Immutable module compiled cleanly in sandbox and library modes through scompile.py. No substantive or landing defects; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightPinchComparison",
+  "declaration": "SSet.Enhanced.right_pinch_comparison",
+  "declarations": [
+   "SSet.Enhanced.arrowEndpoints",
+   "SSet.Enhanced.arrowMappingSpace",
+   "SSet.Enhanced.arrowMappingSpaceInclusion",
+   "SSet.Enhanced.rightPinchPrism",
+   "SSet.Enhanced.right_pinch_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RightPinchComparison.lean",
+  "statement": "theorem right_pinch_comparison : ∃ j : ∀ (D : SSet.{u}) [Quasicategory D] (x y : D _⦋0⦌), mappingSpace D x y ⟶ arrowMappingSpace D x y, ∀ (D : SSet.{u}) [Quasicategory D] (x y : D _⦋0⦌), (∀ (n : SimplexCategoryᵒᵖ) (s : (mappingSpace D x y).obj n), MonoidalClosed.uncurry (SSet.yonedaEquiv.symm ((j D x y ≫ arrowMappingSpaceInclusion D x y).app n s)) = rightPinchPrism n.unop.len ≫ SSet.yonedaEquiv.symm s.1) ∧ KanComplex (mappingSpace D x y) ∧ KanComplex (arrowMappingSpace D x y) ∧ (∃ r : arrowMappingSpace D x y ⟶ mappingSpace D x y, Nonempty (SSet.Homotopy (j D x y ≫ r) (𝟙 _)) ∧ Nonempty (SSet.Homotopy (r ≫ j D x y) (𝟙 _))) ∧ (∀ (E : SSet.{u}) [Quasicategory E] (f : D ⟶ E), j D x y ≫ arrowMappingSpaceInclusion D x y ≫ (ihom Δ[1]).map f = mappingSpaceMap f x y ≫ j E (f.app _ x) (f.app _ y) ≫ arrowMappingSpaceInclusion E (f.app _ x) (f.app _ y))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The existential supplies a family of canonical inclusions, uniquely specified in every degree by the displayed prism formula after the monomorphic arrow-space inclusion. It has no arbitrary comparison-map hypothesis. The conclusion gives actual inverse maps and simplicial homotopies, not merely weak homotopy equivalence. Helpers belong to this node; the sole postponed theorem is this node itself."
  }
 }
