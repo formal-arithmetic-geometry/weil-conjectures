@@ -1,18 +1,350 @@
 {
-  "id": "sbc-def-admissible-lattices",
-  "blueprint": {
-    "is": "sbc-def-admissible-lattices",
-    "from": null,
-    "same_as": []
+ "id": "sbc-def-admissible-lattices",
+ "blueprint": {
+  "is": "sbc-def-admissible-lattices",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Admissible lattices in the square",
+ "statement": "Let\n$$\n\\begin{array}{ccc}\nX&\\xleftarrow{h}&Y\\\\\nf\\downarrow&&\\downarrow e\\\\\nS&\\xleftarrow{g}&T\n\\end{array}\n\\qquad Y\\simeq X\\times_S T\n$$\nbe a base-change square [sbc-def-base-change-square], with $f$ smooth\n[def-sbc-smooth-morphisms] and $g$ quasi-compact and quasi-separated\n[def-weil-pbc-scheme-conventions]. Fix a prime $\\ell$, a finite extension\n$E/\\mathbf Q_\\ell$, its ring of integers $A=\\mathcal O_E$, and a uniformizer\n$\\varpi$ [def-weil-l-adic-coefficient-extension]. Assume that $T$ is\nnoetherian of finite dimension and $\\ell$ is invertible on $T$, as required\nfor the integral and rational categories below.\n\nFor $n\\geq0$ put $A_n=A/(\\varpi^{n+1})$. On each corner $U$ of the square\nwrite $(A_n)_U$ for the finite coefficient sheaf and\n$\\widehat A_U=\\varprojlim_{n\\geq0}(A_n)_U$. These are the coefficient\nsheaves of [def-weil-pbc-adic-coefficient-datum], with its positive index\nreplaced by $n+1$. The finite coefficient sheaves are canonically the\nconstant ring sheaves, and use the inverse-image identifications of\n[lem-weil-pbc-profinite-coefficient-inverse-image]. Use the integral full\nsubcategory $\\Dbc(T_{\\Proet},A)$ of\n[def-weil-pbc-bounded-constructible-complete] and its raw rationalization\n$\\Dbc(T,E)=\\Dbc(T_{\\Proet},A)[1/\\varpi]$ of\n[def-weil-pbc-rational-category]; write $L[\\varpi^{-1}]$ for the image of\n$L$ under this scalar-localization functor.\n\nAn *integral lattice* for an object $K_E\\in\\Dbc(T,E)$ is a pair\n$(L,\\alpha)$ consisting of $L\\in\\Dbc(T_{\\Proet},A)$ and a chosen\nisomorphism\n$$\n\\alpha:L[\\varpi^{-1}]\\xrightarrow{\\sim}K_E\n\\quad\\text{in }\\Dbc(T,E).\n$$\nThe comparison with the idempotent-pair presentation is specified below.\n\nDefine the reduction by derived extension of scalars along\n$\\widehat A_T\\to(A_n)_T$ [def-weil-pbc-adic-coefficient-datum]:\n$$\nL_n=L\\otimes^L_{\\widehat A_T}(A_n)_T\n\\in D(T_{\\Proet},A_n).\n$$\nIn particular the integral tensor uses the completed coefficient sheaf,\nnot the constant sheaf associated to the abstract ring $A$.\nThe lattice is *finite-level etale admissible* if for every $n\\geq0$\nthere exist $M_n\\in\\Dbc(T_{\\Et},A_n)$ and an isomorphism\n$\\nu_T^*M_n\\xrightarrow{\\sim}L_n$ in $D(T_{\\Proet},A_n)$.\nHere the etale bounded constructible category is\n[def-weil-pbc-constructible-complexes], and $\\nu_T^*$ is the derived\ncomparison inverse image of [def-weil-pbc-proetale-modules]. Thus the\ncondition means membership in its essential image; it does not add\nchosen witnesses to the lattice datum.\n\nFor any arrow $u:U\\to V$ of the square, the subscript $n$ denotes\ncoefficients $(A_n)_U,(A_n)_V$, not a new morphism of schemes. The\nfunctors $Lu_n^*$ and $Ru_{n,*}$ are the ordinary uncompleted derived\noperations of [def-weil-pbc-proetale-operations], with the finite\ncoefficient identifications above. The lattice is *square-constructibly\nadmissible* if it is finite-level etale admissible and there exist integers\n$a\\leq b$ such that, for every $n\\geq0$, all four objects\n$$\n\\begin{aligned}\nRg_{n,*}L_n&\\in D(S_{\\Proet},A_n),\\\\\nLf_n^*Rg_{n,*}L_n&\\in D(X_{\\Proet},A_n),\\\\\nLe_n^*L_n&\\in D(Y_{\\Proet},A_n),\\\\\nRh_{n,*}Le_n^*L_n&\\in D(X_{\\Proet},A_n)\n\\end{aligned}\n$$\nhave constructible cohomology sheaves in the sense of\n[def-weil-proetale-constructible-sheaf], and have\n$\\mathcal H^i=0$ for every $i\\notin[a,b]$\n[def-weil-derived-cohomology-sheaves]. The same interval works for every\n$n$ and every one of the four objects. No common stratification or\nidentification of these four families with reductions of integral\npushforwards is imposed by this condition.\n\nFinally, the presentation of $\\Dbc(T,E)$-objects by integral lattices is equivalent to the classical idempotent-pair presentation. Precisely, put $\\mathcal C=\\Dbc(T,E)$ with its raw rationalization above. The canonical functor\n$$\nJ:\\mathcal C\\longrightarrow\\Kar(\\mathcal C),\\qquad\nK\\longmapsto(K,\\operatorname{id}_K),\\qquad u\\longmapsto u\n$$\ninto the Karoubi envelope [def-weil-karoubi-envelope] is the exact equivalence of triangulated categories supplied by [thm-weil-pbc-finite-stage-karoubian]. An object of the latter category is a pair $(M,e)$ with $M\\in\\mathcal C$ and $e^2=e\\in\\operatorname{End}_{\\mathcal C}(M)$; its morphisms to $(N,d)$ are the rational morphisms $u:M\\to N$ satisfying $u=d\\,u\\,e$. Every such pair is isomorphic to $J(L[\\varpi^{-1}])$ for an integral object $L\\in\\Dbc(T_{\\Proet},A)$. A chosen lattice isomorphism $\\alpha:L[\\varpi^{-1}]\\xrightarrow{\\sim}K_E$ gives an isomorphism $J(\\alpha):J(L[\\varpi^{-1}])\\xrightarrow{\\sim}J(K_E)$. This is an equivalence of the two object presentations with rational morphisms; the finite-level and square admissibility predicates retain the definitions given above.\n",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-def-admissible-lattices.md",
+  "place": "node sbc-def-admissible-lattices, order 1444"
+ },
+ "stmt_deps": [
+  "sbc-def-base-change-square",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-karoubi-envelope",
+  "thm-weil-pbc-finite-stage-karoubian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EssImage",
+   "results": "No hits; loogle: unknown identifier 'CategoryTheory.EssImage'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.EssImage'"
   },
-  "kind": "definition",
-  "title": "Admissible lattices in the square",
-  "statement": "Let\n$$\n\\begin{array}{ccc}\nX&\\xleftarrow{h}&Y\\\\\nf\\downarrow&&\\downarrow e\\\\\nS&\\xleftarrow{g}&T\n\\end{array}\n\\qquad Y\\simeq X\\times_S T\n$$\nbe a base-change square [sbc-def-base-change-square], with $f$ smooth\n[def-sbc-smooth-morphisms] and $g$ quasi-compact and quasi-separated\n[def-weil-pbc-scheme-conventions]. Fix a prime $\\ell$, a finite extension\n$E/\\mathbf Q_\\ell$, its ring of integers $A=\\mathcal O_E$, and a uniformizer\n$\\varpi$ [def-weil-l-adic-coefficient-extension]. Assume that $T$ is\nnoetherian of finite dimension and $\\ell$ is invertible on $T$, as required\nfor the integral and rational categories below.\n\nFor $n\\geq0$ put $A_n=A/(\\varpi^{n+1})$. On each corner $U$ of the square\nwrite $(A_n)_U$ for the finite coefficient sheaf and\n$\\widehat A_U=\\varprojlim_{n\\geq0}(A_n)_U$. These are the coefficient\nsheaves of [def-weil-pbc-adic-coefficient-datum], with its positive index\nreplaced by $n+1$. The finite coefficient sheaves are canonically the\nconstant ring sheaves, and use the inverse-image identifications of\n[lem-weil-pbc-profinite-coefficient-inverse-image]. Use the integral full\nsubcategory $\\Dbc(T_{\\Proet},A)$ of\n[def-weil-pbc-bounded-constructible-complete] and its raw rationalization\n$\\Dbc(T,E)=\\Dbc(T_{\\Proet},A)[1/\\varpi]$ of\n[def-weil-pbc-rational-category]; write $L[\\varpi^{-1}]$ for the image of\n$L$ under this scalar-localization functor.\n\nAn *integral lattice* for an object $K_E\\in\\Dbc(T,E)$ is a pair\n$(L,\\alpha)$ consisting of $L\\in\\Dbc(T_{\\Proet},A)$ and a chosen\nisomorphism\n$$\n\\alpha:L[\\varpi^{-1}]\\xrightarrow{\\sim}K_E\n\\quad\\text{in }\\Dbc(T,E).\n$$\nThe comparison with an idempotent-pair presentation in a Karoubi envelope\nis a separate assertion, not part of this definition.\n\nDefine the reduction by derived extension of scalars along\n$\\widehat A_T\\to(A_n)_T$ [def-weil-pbc-adic-coefficient-datum]:\n$$\nL_n=L\\otimes^L_{\\widehat A_T}(A_n)_T\n\\in D(T_{\\Proet},A_n).\n$$\nIn particular the integral tensor uses the completed coefficient sheaf,\nnot the constant sheaf associated to the abstract ring $A$.\nThe lattice is *finite-level etale admissible* if for every $n\\geq0$\nthere exist $M_n\\in\\Dbc(T_{\\Et},A_n)$ and an isomorphism\n$\\nu_T^*M_n\\xrightarrow{\\sim}L_n$ in $D(T_{\\Proet},A_n)$.\nHere the etale bounded constructible category is\n[def-weil-pbc-constructible-complexes], and $\\nu_T^*$ is the derived\ncomparison inverse image of [def-weil-pbc-proetale-modules]. Thus the\ncondition means membership in its essential image; it does not add\nchosen witnesses to the lattice datum.\n\nFor any arrow $u:U\\to V$ of the square, the subscript $n$ denotes\ncoefficients $(A_n)_U,(A_n)_V$, not a new morphism of schemes. The\nfunctors $Lu_n^*$ and $Ru_{n,*}$ are the ordinary uncompleted derived\noperations of [def-weil-pbc-proetale-operations], with the finite\ncoefficient identifications above. The lattice is *square-constructibly\nadmissible* if it is finite-level etale admissible and there exist integers\n$a\\leq b$ such that, for every $n\\geq0$, all four objects\n$$\n\\begin{aligned}\nRg_{n,*}L_n&\\in D(S_{\\Proet},A_n),\\\\\nLf_n^*Rg_{n,*}L_n&\\in D(X_{\\Proet},A_n),\\\\\nLe_n^*L_n&\\in D(Y_{\\Proet},A_n),\\\\\nRh_{n,*}Le_n^*L_n&\\in D(X_{\\Proet},A_n)\n\\end{aligned}\n$$\nhave constructible cohomology sheaves in the sense of\n[def-weil-proetale-constructible-sheaf], and have\n$\\mathcal H^i=0$ for every $i\\notin[a,b]$\n[def-weil-derived-cohomology-sheaves]. The same interval works for every\n$n$ and every one of the four objects. No common stratification or\nidentification of these four families with reductions of integral\npushforwards is imposed by this condition.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-def-admissible-lattices.md",
-    "place": "node sbc-def-admissible-lattices, order 1444"
+  {
+   "tool": "grep",
+   "query": "admissible.?lattice|integral.?lattice|constructible.*(adic|sheaf)|adic.*constructible",
+   "results": "Mathlib/LinearAlgebra/RootSystem/OfBilinear.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
   },
-  "stmt_deps": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattices in bounded constructible rational l-adic complexes with etale reductions and uniformly constructible base change systems",
+   "results": "BDeRhamPlus, BDeRham, instCommRingBDeRhamPlus, AlgebraicGeometry.AffineSpace.not_isIntegralHom, Algebra.zariskisMainProperty_iff, AlgebraicGeometry.IsIntegralHom, mem_completeIntegralClosure, AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty",
+   "date": "2026-10-16",
+   "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral lattice in a constructible l-adic derived category with finite level etale reductions",
+   "results": "No hits; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category of constructible sheaves of modules on the pro etale site, rationalization and integral lattice",
+   "results": "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functor, localCohomology.diagram, LightCondensed.free, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, Condensed.profiniteSolid",
+   "date": "2026-10-16",
+   "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage",
+   "results": "CategoryTheory.Functor.essImage, CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage, CategoryTheory.Functor.essImage.witness, CategoryTheory.Functor.obj_mem_essImage, CategoryTheory.Functor.EssSurj.mem_essImage, CategoryTheory.Functor.EssSurj.mk, CategoryTheory.Functor.toEssImage, CategoryTheory.Functor.essImage.ofIso",
+   "date": "2026-10-16",
+   "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|essImage",
+   "results": "Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; scope Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory",
+   "results": "DerivedCategory, instCategoryDerivedCategory, DerivedCategory.instHasZeroObject, DerivedCategory.instPreadditive, DerivedCategory.instHasShiftInt, DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
+  },
+  {
+   "tool": "grep",
+   "query": "def essImage|constructible.*(sheaf|complex)|AdmissibleLattice|IntegralLattice",
+   "results": "Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean; scope Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
+  },
+  {
+   "tool": "grep",
+   "query": "AdmissibleLattice|admissible.?lattice|integral.?lattice",
+   "results": "Mathlib/LinearAlgebra/RootSystem/OfBilinear.lean:16: integral lattice with an arbitrary reflexive module equipped with a bilinear form.",
+   "date": "2026-10-15",
+   "verdict": "no match: root-system integral lattices do not define lattices in constructible l-adic derived categories or the four square systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "admissible lattice derived constructible etale",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardEtale.nonempty_standardEtalePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"StandardEtalePair.instEtaleRing\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.isOpen_etaleLocus\", \"StandardEtalePresentation.P\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: all eight results concern standard etale/smooth algebra presentations and their properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.essImage",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.essImage'\", \"top\": []}",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier 'Functor.essImage'; no absence inference"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage.witness",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.essImage.witness\", \"CategoryTheory.Functor.essImage.getIso\"]}",
+   "date": "2026-10-16",
+   "verdict": "generic essential-image witnesses and getIso only, not the admissible-lattice definition"
+  },
+  {
+   "tool": "grep",
+   "query": "Admissible|lattice",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Simple.lean\", \"Mathlib/CategoryTheory/Simple.lean\", \"Mathlib/CategoryTheory/Simple.lean\", \"Mathlib/CategoryTheory/Simple.lean\", \"Mathlib/CategoryTheory/Skeletal.lean\", \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: subobject lattices, order instances and admissible morphisms of t-structure subcategories"
+  },
+  {
+   "tool": "grep",
+   "query": "AdmissibleLattice|IntegralLattice|admissible.?lattice|integral.?lattice",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/OfBilinear.lean\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits are generic category, module, or valuation constructions and do not state the complete admissible-lattice definition or its coefficient-specific equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral lattice in a rationalized derived category of constructible pro etale sheaves with bounded constructible finite reductions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory.standard\", \"DerivedCategory\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"IsZLattice\", \"IsZLattice.mk\", \"DerivedCategory.isLE_Q_obj_iff\", \"ZLattice.module_free\", \"ZLattice.module_finite\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits are generic category, module, or valuation constructions and do not state the complete admissible-lattice definition or its coefficient-specific equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.essImage\", \"CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage\", \"CategoryTheory.Functor.essImage.witness\", \"CategoryTheory.Functor.obj_mem_essImage\", \"CategoryTheory.Functor.EssSurj.mem_essImage\", \"CategoryTheory.Functor.EssSurj.mk\", \"CategoryTheory.Functor.toEssImage\", \"CategoryTheory.Functor.essImage.ofIso\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits are generic category, module, or valuation constructions and do not state the complete admissible-lattice definition or its coefficient-specific equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattice for a bounded constructible rational l-adic complex whose finite reductions are etale constructible and whose base change square systems have a uniform cohomological bound",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightCondMod\", \"Profinite.NobelingProof.succ_exact\", \"CondensedMod\", \"Profinite.NobelingProof.Nobeling_aux\", \"LightCondMod.LocallyConstant.functor\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits are generic category, module, or valuation constructions and do not state the complete admissible-lattice definition or its coefficient-specific equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|admissible|lattice",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}; scope Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits are generic category, module, or valuation constructions and do not state the complete admissible-lattice definition or its coefficient-specific equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lattice in the localization of an integral category at a uniformizer, with constructible finite coefficient reductions and uniformly bounded pushforward and pullback",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem\", \"instIsPrincipalIdealRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"Set.integer\", \"Set.coe_integer\", \"IsDedekindDomain.HeightOneSpectrum.instInhabitedSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits are generic category, module, or valuation constructions and do not state the complete admissible-lattice definition or its coefficient-specific equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "def essImage|toKaroubi_isEquivalence|constructible.*(complex|sheaf)",
+   "results": "{\"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Idempotents/Karoubi.lean\", \"Mathlib/CategoryTheory/EssentialImage.lean\", \"Mathlib/CategoryTheory/EssentialImage.lean\", \"Mathlib/CategoryTheory/EssentialImage.lean\", \"Mathlib/CategoryTheory/EssentialImage.lean\", \"Mathlib/CategoryTheory/EssentialImage.lean\"]}; scope Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits are generic category, module, or valuation constructions and do not state the complete admissible-lattice definition or its coefficient-specific equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIdempotentComplete, CategoryTheory.Idempotents.toKaroubi",
+   "results": "{\"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.instEssSurjKaroubiToKaroubiOfIsIdempotentComplete\", \"CategoryTheory.Idempotents.toKaroubi_isEquivalence\", \"CategoryTheory.Idempotents.instIsEquivalenceFunctorKaroubiObjWhiskeringLeftToKaroubi\", \"CategoryTheory.Idempotents.whiskeringLeft_obj_preimage_app\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits are generic category, module, or valuation constructions and do not state the complete admissible-lattice definition or its coefficient-specific equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "AdmissibleLattice|IntegralLattice|constructible.*(sheaf|complex)",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}; scope Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "invalid grep scope: msearch already appends Mathlib/, so this searched a nonexistent Mathlib/Mathlib/CategoryTheory; no absence inference; repeated with CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage, CategoryTheory.Idempotents.toKaroubi_isEquivalence",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-16",
+   "verdict": "no simultaneous match for the two-name pattern; individual generic declarations were read and do not state the coefficient-specific lattice definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Admissible lattice in a rationalized derived category of constructible pro etale sheaves with bounded finite reductions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.IsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.IsLE\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"LightCondAb.ofSheafLightProfinite\", \"DerivedCategory.isLE_Q_obj_iff\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: the actual hits concern abstract bounded complex representatives, condensed modules, ordinary Z-lattices, or integral/perfectoid algebra; none gives this l-adic constructible-lattice definition and its four finite systems"
+  },
+  {
+   "tool": "grep",
+   "query": "AdmissibleLattice|IntegralLattice|constructible.*(sheaf|complex)",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}; scope CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match in the valid CategoryTheory scope; no admissible-lattice or constructible-sheaf-complex definition hit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral lattice for a rational l-adic derived constructible complex with uniformly bounded constructible reductions in a base change square",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"ZLattice.module_free\", \"IsZLattice.mk\", \"ZLattice.module_finite\", \"IsZLattice.congr_simp\", \"IsZLattice\", \"ZLattice.comap\", \"IsZLattice.casesOn\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: the actual hits concern abstract bounded complex representatives, condensed modules, ordinary Z-lattices, or integral/perfectoid algebra; none gives this l-adic constructible-lattice definition and its four finite systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral model for a constructible complex after inverting the uniformizer, and equivalence with pairs consisting of an integral complex and a rational idempotent",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"PreTilt.untiltFun\", \"WeierstrassCurve.integralModel\", \"PreTilt.exists_smodEq_untiltAux\", \"WeierstrassCurve.exists_isIntegral\", \"IsIntegral.isAlmostIntegral\", \"Polynomial.isIntegral_isLocalization_polynomial_quotient\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: the actual hits concern abstract bounded complex representatives, condensed modules, ordinary Z-lattices, or integral/perfectoid algebra; none gives this l-adic constructible-lattice definition and its four finite systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.essImage\", \"CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage\", \"CategoryTheory.Functor.essImage.witness\", \"CategoryTheory.Functor.obj_mem_essImage\", \"CategoryTheory.Functor.EssSurj.mem_essImage\", \"CategoryTheory.Functor.EssSurj.mk\", \"CategoryTheory.Functor.toEssImage\", \"CategoryTheory.Functor.essImage.ofIso\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: generic essential-image construction only"
+  },
+  {
+   "tool": "grep",
+   "query": "AdmissibleLattice|IntegralLattice|admissible.?lattice",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral models for bounded constructible rational l-adic sheaf complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.integralModel\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"AlgebraicGeometry.IsIntegral.casesOn\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"CondensedSet.LocallyConstant.iso\", \"LightCondensed.IsDiscrete\", \"Condensed.lanSheafProfinite\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: elliptic integral models, integral schemes, abstract derived Hom, and condensed sheaves are different notions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral lattice in a bounded constructible l-adic derived category whose finite reductions satisfy uniform bounds in a base change square",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"CondensedMod\", \"CondensedMod.IsSolid\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.profiniteSolid\", \"localCohomology.diagram\", \"LightCondensed.instCountableAB4StarLightCondMod\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract derived-category bounds and condensed modules do not define an admissible l-adic lattice"
+  },
+  {
+   "tool": "grep",
+   "query": "AdmissibleLattice|IntegralLattice|admissible.?lattice|integral.?lattice",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/OfBilinear.lean\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: the sole hit is the root-system lattice discussion in Mathlib/LinearAlgebra/RootSystem/OfBilinear.lean:16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattice in a rational l-adic constructible derived category with finite-level etale reductions and uniform base change bounds",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"WittVector.StandardOneDimIsocrystal\", \"WittVector.Isocrystal\", \"CondensedMod.IsSolid\", \"Condensed.profiniteSolid\", \"Condensed.finFree\", \"instCommRingBDeRhamPlus\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: period rings, Witt-vector isocrystals and solid condensed modules do not define constructible l-adic lattices and the four square systems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral model of a rationalized constructible pro etale complex, with bounded finite coefficient reductions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.integralModel\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"Condensed.lanSheafProfinite\", \"Algebra.FormallyEtale.pi_iff\", \"Algebra.FormallyEtale.instTensorProduct\", \"Condensed.lanCondensedSet\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"CondensedMod.IsSolid.mk\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract bounded complex representatives, elliptic integral models, condensed sheaves and etale constructions do not state this lattice definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Idempotents.toKaroubi",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.toKaroubi\", \"CategoryTheory.Idempotents.fullyFaithfulToKaroubi\", \"CategoryTheory.Idempotents.instFaithfulKaroubiToKaroubi\", \"CategoryTheory.Idempotents.instFullKaroubiToKaroubi\", \"CategoryTheory.Idempotents.instPreservesEpimorphismsKaroubiToKaroubi\", \"CategoryTheory.Idempotents.instPreservesMonomorphismsKaroubiToKaroubi\", \"CategoryTheory.Idempotents.instEssSurjKaroubiToKaroubiOfIsIdempotentComplete\", \"CategoryTheory.Idempotents.toKaroubi_isEquivalence\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: toKaroubi and full faithfulness are generic; toKaroubi_isEquivalence requires idempotent completeness, so it does not establish this coefficient-specific property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lattice in a localized category is an integral sheaf complex isomorphic after inverting a uniformizer, whose reductions are bounded constructible",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.Localizations\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.IsLE\", \"ModuleCat.Tilde.isLocallyFraction\", \"ModuleCat.Tilde.isFraction\", \"DerivedCategory.IsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match: module localizations and bounded derived representatives do not state the finite-coefficient lattice and four-system admissibility definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Idempotents.toKaroubi_isEquivalence",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.toKaroubi_isEquivalence\"]}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: the generic equivalence assumes IsIdempotentComplete; it supplies neither the coefficient category nor either admissibility predicate"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibl.*lattice|lattice.*constructibl|square.*admissib|admissib.*square",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits in the Mathlib source"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1444,
+ "blueprint_uses": [
+  "sbc-def-base-change-square"
+ ],
+ "uses_not_cited": [
+  "sbc-def-base-change-square"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sbc-def-admissible-lattices",
+  "worker": "stage1",
+  "summary": "NH current-blueprint repair of the existing accepted definition, not a replacement split: preserve the integral-lattice datum, completed coefficient convention, the two admissibility predicates, and the domain hypotheses verbatim; restore the final equivalence assertion required by blueprint_update by citing its already existing statement node thm-weil-pbc-finite-stage-karoubian. Add that theorem and the Karoubi-envelope definition as constituent dependencies and remove the unused witness-compatibility dependency. Claims inside definitions are carried by statement nodes, so the comparison is not given a second proof in this definition. No new nodes, no Mathlib leaves, and no Lean attachment or Lean work.",
+  "blueprint": "Current main-20261015 sbc-def-admissible-lattices.md: all definition paragraphs are retained from the accepted split. The newly added final paragraph is realized by the already existing exact-equivalence statement thm-weil-pbc-finite-stage-karoubian, with the Karoubi-envelope definition specifying its object and rational-morphism presentations. This is a definition split, so it has no proof steps; the explicit section-retraction computation is recorded in report.md for review. The historical sk-rem-rest binding is left unchanged; its coefficient-stage route contains this construction.",
+  "tool_uses": [],
+  "statement_change": {
+   "date": "2026-10-16",
+   "by": "NH stage 1",
+   "old_statement": "Let\n$$\n\\begin{array}{ccc}\nX&\\xleftarrow{h}&Y\\\\\nf\\downarrow&&\\downarrow e\\\\\nS&\\xleftarrow{g}&T\n\\end{array}\n\\qquad Y\\simeq X\\times_S T\n$$\nbe a base-change square [sbc-def-base-change-square], with $f$ smooth\n[def-sbc-smooth-morphisms] and $g$ quasi-compact and quasi-separated\n[def-weil-pbc-scheme-conventions]. Fix a prime $\\ell$, a finite extension\n$E/\\mathbf Q_\\ell$, its ring of integers $A=\\mathcal O_E$, and a uniformizer\n$\\varpi$ [def-weil-l-adic-coefficient-extension]. Assume that $T$ is\nnoetherian of finite dimension and $\\ell$ is invertible on $T$, as required\nfor the integral and rational categories below.\n\nFor $n\\geq0$ put $A_n=A/(\\varpi^{n+1})$. On each corner $U$ of the square\nwrite $(A_n)_U$ for the finite coefficient sheaf and\n$\\widehat A_U=\\varprojlim_{n\\geq0}(A_n)_U$. These are the coefficient\nsheaves of [def-weil-pbc-adic-coefficient-datum], with its positive index\nreplaced by $n+1$. The finite coefficient sheaves are canonically the\nconstant ring sheaves, and use the inverse-image identifications of\n[lem-weil-pbc-profinite-coefficient-inverse-image]. Use the integral full\nsubcategory $\\Dbc(T_{\\Proet},A)$ of\n[def-weil-pbc-bounded-constructible-complete] and its raw rationalization\n$\\Dbc(T,E)=\\Dbc(T_{\\Proet},A)[1/\\varpi]$ of\n[def-weil-pbc-rational-category]; write $L[\\varpi^{-1}]$ for the image of\n$L$ under this scalar-localization functor.\n\nAn *integral lattice* for an object $K_E\\in\\Dbc(T,E)$ is a pair\n$(L,\\alpha)$ consisting of $L\\in\\Dbc(T_{\\Proet},A)$ and a chosen\nisomorphism\n$$\n\\alpha:L[\\varpi^{-1}]\\xrightarrow{\\sim}K_E\n\\quad\\text{in }\\Dbc(T,E).\n$$\nThe comparison with an idempotent-pair presentation in a Karoubi envelope\nis a separate assertion, not part of this definition.\n\nDefine the reduction by derived extension of scalars along\n$\\widehat A_T\\to(A_n)_T$ [def-weil-pbc-adic-coefficient-datum]:\n$$\nL_n=L\\otimes^L_{\\widehat A_T}(A_n)_T\n\\in D(T_{\\Proet},A_n).\n$$\nIn particular the integral tensor uses the completed coefficient sheaf,\nnot the constant sheaf associated to the abstract ring $A$.\nThe lattice is *finite-level etale admissible* if for every $n\\geq0$\nthere exist $M_n\\in\\Dbc(T_{\\Et},A_n)$ and an isomorphism\n$\\nu_T^*M_n\\xrightarrow{\\sim}L_n$ in $D(T_{\\Proet},A_n)$.\nHere the etale bounded constructible category is\n[def-weil-pbc-constructible-complexes], and $\\nu_T^*$ is the derived\ncomparison inverse image of [def-weil-pbc-proetale-modules]. Thus the\ncondition means membership in its essential image; it does not add\nchosen witnesses to the lattice datum.\n\nFor any arrow $u:U\\to V$ of the square, the subscript $n$ denotes\ncoefficients $(A_n)_U,(A_n)_V$, not a new morphism of schemes. The\nfunctors $Lu_n^*$ and $Ru_{n,*}$ are the ordinary uncompleted derived\noperations of [def-weil-pbc-proetale-operations], with the finite\ncoefficient identifications above. The lattice is *square-constructibly\nadmissible* if it is finite-level etale admissible and there exist integers\n$a\\leq b$ such that, for every $n\\geq0$, all four objects\n$$\n\\begin{aligned}\nRg_{n,*}L_n&\\in D(S_{\\Proet},A_n),\\\\\nLf_n^*Rg_{n,*}L_n&\\in D(X_{\\Proet},A_n),\\\\\nLe_n^*L_n&\\in D(Y_{\\Proet},A_n),\\\\\nRh_{n,*}Le_n^*L_n&\\in D(X_{\\Proet},A_n)\n\\end{aligned}\n$$\nhave constructible cohomology sheaves in the sense of\n[def-weil-proetale-constructible-sheaf], and have\n$\\mathcal H^i=0$ for every $i\\notin[a,b]$\n[def-weil-derived-cohomology-sheaves]. The same interval works for every\n$n$ and every one of the four objects. No common stratification or\nidentification of these four families with reductions of integral\npushforwards is imposed by this condition.",
+   "old_stmt_deps": [
     "sbc-def-base-change-square",
     "def-sbc-smooth-morphisms",
     "def-weil-pbc-scheme-conventions",
@@ -27,200 +359,83 @@
     "def-weil-proetale-constructible-sheaf",
     "def-weil-derived-cohomology-sheaves",
     "def-weil-pbc-witness-compatibility"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.EssImage",
-      "results": "No hits; loogle: unknown identifier 'CategoryTheory.EssImage'",
-      "date": "2026-10-16",
-      "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.EssImage'"
-    },
-    {
-      "tool": "grep",
-      "query": "admissible.?lattice|integral.?lattice|constructible.*(adic|sheaf)|adic.*constructible",
-      "results": "Mathlib/LinearAlgebra/RootSystem/OfBilinear.lean",
-      "date": "2026-10-16",
-      "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Integral lattices in bounded constructible rational l-adic complexes with etale reductions and uniformly constructible base change systems",
-      "results": "BDeRhamPlus, BDeRham, instCommRingBDeRhamPlus, AlgebraicGeometry.AffineSpace.not_isIntegralHom, Algebra.zariskisMainProperty_iff, AlgebraicGeometry.IsIntegralHom, mem_completeIntegralClosure, AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty",
-      "date": "2026-10-16",
-      "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Integral lattice in a constructible l-adic derived category with finite level etale reductions",
-      "results": "No hits; service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived category of constructible sheaves of modules on the pro etale site, rationalization and integral lattice",
-      "results": "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functor, localCohomology.diagram, LightCondensed.free, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, Condensed.profiniteSolid",
-      "date": "2026-10-16",
-      "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor.essImage",
-      "results": "CategoryTheory.Functor.essImage, CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage, CategoryTheory.Functor.essImage.witness, CategoryTheory.Functor.obj_mem_essImage, CategoryTheory.Functor.EssSurj.mem_essImage, CategoryTheory.Functor.EssSurj.mk, CategoryTheory.Functor.toEssImage, CategoryTheory.Functor.essImage.ofIso",
-      "date": "2026-10-16",
-      "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible|essImage",
-      "results": "Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; scope Mathlib/AlgebraicGeometry/Sites",
-      "date": "2026-10-16",
-      "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
-    },
-    {
-      "tool": "loogle",
-      "query": "DerivedCategory",
-      "results": "DerivedCategory, instCategoryDerivedCategory, DerivedCategory.instHasZeroObject, DerivedCategory.instPreadditive, DerivedCategory.instHasShiftInt, DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor",
-      "date": "2026-10-16",
-      "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
-    },
-    {
-      "tool": "grep",
-      "query": "def essImage|constructible.*(sheaf|complex)|AdmissibleLattice|IntegralLattice",
-      "results": "Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/EssentialImage.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean; scope Mathlib/CategoryTheory",
-      "date": "2026-10-16",
-      "verdict": "no match for the full admissible-lattice definition; generic categorical or coefficient constructions only"
-    },
-    {
-      "tool": "grep",
-      "query": "AdmissibleLattice|admissible.?lattice|integral.?lattice",
-      "results": "Mathlib/LinearAlgebra/RootSystem/OfBilinear.lean:16: integral lattice with an arbitrary reflexive module equipped with a bilinear form.",
-      "date": "2026-10-15",
-      "verdict": "no match: root-system integral lattices do not define lattices in constructible l-adic derived categories or the four square systems"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "admissible lattice derived constructible etale",
-      "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardEtale.nonempty_standardEtalePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"StandardEtalePair.instEtaleRing\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.isOpen_etaleLocus\", \"StandardEtalePresentation.P\"]}",
-      "date": "2026-10-16",
-      "verdict": "no match: all eight results concern standard etale/smooth algebra presentations and their properties"
-    },
-    {
-      "tool": "loogle",
-      "query": "Functor.essImage",
-      "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.essImage'\", \"top\": []}",
-      "date": "2026-10-16",
-      "verdict": "invalid query: unknown identifier 'Functor.essImage'; no absence inference"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor.essImage.witness",
-      "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.essImage.witness\", \"CategoryTheory.Functor.essImage.getIso\"]}",
-      "date": "2026-10-16",
-      "verdict": "generic essential-image witnesses and getIso only, not the admissible-lattice definition"
-    },
-    {
-      "tool": "grep",
-      "query": "Admissible|lattice",
-      "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Simple.lean\", \"Mathlib/CategoryTheory/Simple.lean\", \"Mathlib/CategoryTheory/Simple.lean\", \"Mathlib/CategoryTheory/Simple.lean\", \"Mathlib/CategoryTheory/Skeletal.lean\", \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"Mathlib/CategoryTheory/Generator/Basic.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\"]}",
-      "date": "2026-10-16",
-      "verdict": "no match: subobject lattices, order instances and admissible morphisms of t-structure subcategories"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1444,
-  "blueprint_uses": [
-    "sbc-def-base-change-square"
-  ],
-  "uses_not_cited": [
-    "sbc-def-base-change-square"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-rem-rest",
-  "split_report": {
+   ],
+   "what": "Restore the final equivalence paragraph of blueprint_update/main-20261015, which the accepted older statement explicitly excluded. No hypotheses or admissibility conditions change. The equivalence is between the raw rational category and its Karoubi envelope, with rational Hom groups, not between categories having only integral morphisms. The exact assertion is already carried by thm-weil-pbc-finite-stage-karoubian and is cited rather than made a duplicate statement or a proof inside this definition. Remove the extraneous WIT definition dependency: the statement imposes no WIT condition.",
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-sbc-coefficients/sbc-def-admissible-lattices.md",
+    "place": "Final paragraph: equivalence of the integral-lattice and Karoubi idempotent-pair presentations"
+   },
+   "previous": {
     "date": "2026-10-16",
-    "item": "sbc-def-admissible-lattices",
-    "worker": "stage1",
-    "summary": "Split this definition using thirteen existing constituent nodes and no new nodes. Made the source square, zero-based quotient indexing, completed coefficient ring sheaf, comparison functor, four finite-level object types and common bounds explicit. Repaired omitted category-domain hypotheses on T and retained only a forward note about the separate Karoubi comparison. Project searches find no exact attachment; the logged Mathlib searches provide generic categorical constructions, not this lattice notion. Recorded the verbatim imported statement, old dependencies, precise category-domain correction and complete direct-citer audit in split_report.statement_change. No Lean work is part of this stage-1 delivery.",
-    "blueprint": "Realizes the whole master definition sbc-def-admissible-lattices.md: integral object with a chosen rational isomorphism; each reduction in the bounded-constructible etale essential image; and constructible cohomology of the four systems in one common interval. Compared slopmaster2 32_smooth_base_change.tex lines 1230–1261, whose labels (X,Y,X_prime,Y_prime; f,g,v,f_prime) become (T,S,Y,X; g,f,e,h). The older text defines a Karoubi-pair lattice, while the master node deliberately uses the raw-rationalization presentation; no equivalence theorem is asserted here. STATEMENT-DISPUTED: the import omitted the domain of its integral/rational categories; T is now explicitly noetherian finite-dimensional with ell invertible, precisely as their definition nodes require.",
-    "statement_change": {
-      "date": "2026-10-16",
-      "by": "NL stage 1",
-      "old_statement": "In a base-change square with $f$\nsmooth and $g$ quasi-compact and quasi-separated, and for\n$E/\\mathbf Q_\\ell$ finite with ring of integers $\\mathcal O_E$ and\nuniformizer $\\varpi$, an\n*integral lattice* for $K_E\\in\\Dbc(T,E)$ is an object\n$L\\in\\Dbc(T_{\\Proet},\\mathcal O_E)$ together with an isomorphism\n\n$$\nL[\\varpi^{-1}]\\xrightarrow{\\ \\sim\\ }K_E\n\\quad\\text{in }\\Dbc(T,E).\n$$\n\n(The equivalence of this presentation with the classical presentation\nby pairs $(L,e)$ with $e^2=e$ in the Karoubi envelope of the\nrationalized category is the corresponding statement below.) The lattice is\n*finite-level etale admissible* if each reduction\n$L_n=L\\otimes^L_{\\mathcal O_E}A_n$ lies in the essential image of\n$\\Dbc(T_{\\Et},A_n)$; it is *square-constructibly admissible* if in\naddition the finite-level systems\n$Rg_{n,*}L_n$, $Lf_n^*Rg_{n,*}L_n$, $Le_n^*L_n$,\n$Rh_{n,*}Le_n^*L_n$ are constructible in one common finite\ncohomological interval.",
-      "old_stmt_deps": [
-        "sbc-def-base-change-square"
-      ],
-      "what": "STATEMENT-DISPUTED: the imported integral and rational constructible category symbols have no specified domain. In the existing constituent definitions they require T noetherian finite-dimensional with ell invertible. The identity square on Spec F_ell satisfies the imported geometric hypotheses but violates that category domain. State this domain explicitly on T; specify the completed coefficient sheaf, quotient indexing A/(varpi^(n+1)), essential-image functor, and the four object types. Keep the raw (L,alpha) lattice presentation and common interval from the master, without asserting the separate Karoubi comparison. The finite-dimensionality addition has an unresolved impact on the sole direct citer, recorded below.",
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-def-admissible-lattices.md",
-        "place": "node sbc-def-admissible-lattices, order 1444"
-      },
-      "citers": [
-        {
-          "id": "sbc-thm-e-coefficient-smooth-base-change",
-          "holds": false,
-          "note": "The four-system predicate and raw rationalization are unchanged, but the citer explicitly assumes only noetherian schemes and invertibility of ell, not finite dimension of T. Noetherianity alone does not supply finite dimension. Its category-domain hypotheses need review; independently, its exchange belongs on X although it prints S. The citer is not edited."
-        }
-      ]
-    }
-  },
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-Codex-NL-323aa6f7b",
-    "group": "NL",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-323aa6f7b (reviewer sub-agent of L); spot-checked: Read the complete definition, thirteen cited statements, master and older sources, and unit/chapter route. Coefficients, four output corners, uniform bounds, and domain correction agree. No new nodes, duplicates, missing dependencies, or cycles found. Existing consumer issues are explicitly disclosed. Full checks recorded in review.md; no fixes required."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.AdmissibleLattices",
-    "declaration": "AlgebraicGeometry.Scheme.IntegralLattice.IsSquareConstructiblyAdmissible",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.IntegralLattice",
-      "AlgebraicGeometry.Scheme.IntegralLattice.reduction",
-      "AlgebraicGeometry.Scheme.IntegralLattice.IsFiniteLevelEtaleAdmissible",
-      "AlgebraicGeometry.Scheme.sbcIntrinsicConstructibleIn",
-      "AlgebraicGeometry.Scheme.IntegralLattice.IsSquareConstructiblyAdmissible"
+    "by": "NL stage 1",
+    "old_statement": "In a base-change square with $f$\nsmooth and $g$ quasi-compact and quasi-separated, and for\n$E/\\mathbf Q_\\ell$ finite with ring of integers $\\mathcal O_E$ and\nuniformizer $\\varpi$, an\n*integral lattice* for $K_E\\in\\Dbc(T,E)$ is an object\n$L\\in\\Dbc(T_{\\Proet},\\mathcal O_E)$ together with an isomorphism\n\n$$\nL[\\varpi^{-1}]\\xrightarrow{\\ \\sim\\ }K_E\n\\quad\\text{in }\\Dbc(T,E).\n$$\n\n(The equivalence of this presentation with the classical presentation\nby pairs $(L,e)$ with $e^2=e$ in the Karoubi envelope of the\nrationalized category is the corresponding statement below.) The lattice is\n*finite-level etale admissible* if each reduction\n$L_n=L\\otimes^L_{\\mathcal O_E}A_n$ lies in the essential image of\n$\\Dbc(T_{\\Et},A_n)$; it is *square-constructibly admissible* if in\naddition the finite-level systems\n$Rg_{n,*}L_n$, $Lf_n^*Rg_{n,*}L_n$, $Le_n^*L_n$,\n$Rh_{n,*}Le_n^*L_n$ are constructible in one common finite\ncohomological interval.",
+    "old_stmt_deps": [
+     "sbc-def-base-change-square"
     ],
-    "file": "lean/Sheaf/Paper/AdmissibleLattices.lean",
-    "statement": "def IntegralLattice.IsSquareConstructiblyAdmissible {X Y S : Scheme.{u}} {h : Y ⟶ X} {e : Y ⟶ T} {f : X ⟶ S} {g : T ⟶ S} (_sq : ChosenCartesianSquare h e f g) [Smooth f] [QuasiCompact g] [QuasiSeparated g] {K : PbcRationalDerivedCategory l E T hdim hl} (L : IntegralLattice l E T hdim hl K) : Prop",
-    "branch": "newtargets-dag",
-    "by": "Q06",
-    "date": "2026-10-16",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-05abf5292",
-    "group": "Q06",
-    "result": "pass",
-    "note": "Statement, dependencies, edge cases, docstrings, universes, and canonical operations checked; all four files compiled locally and with server confirmation."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In a base-change square with $f$\nsmooth and $g$ quasi-compact and quasi-separated, and for\n$E/\\mathbf Q_\\ell$ finite with ring of integers $\\mathcal O_E$ and\nuniformizer $\\varpi$, an\n*integral lattice* for $K_E\\in\\Dbc(T,E)$ is an object\n$L\\in\\Dbc(T_{\\Proet},\\mathcal O_E)$ together with an isomorphism\n\n$$\nL[\\varpi^{-1}]\\xrightarrow{\\ \\sim\\ }K_E\n\\quad\\text{in }\\Dbc(T,E).\n$$\n\nThe lattice is\n*finite-level etale admissible* if each reduction\n$L_n=L\\otimes^L_{\\mathcal O_E}A_n$ lies in the essential image of\n$\\Dbc(T_{\\Et},A_n)$; it is *square-constructibly admissible* if in\naddition the finite-level systems\n$Rg_{n,*}L_n$, $Lf_n^*Rg_{n,*}L_n$, $Le_n^*L_n$,\n$Rh_{n,*}Le_n^*L_n$ are constructible in one common finite\ncohomological interval.\n\nThis presentation of $\\Dbc(T,E)$-objects by integral lattices is equivalent\nto the classical presentation by pairs $(L,e)$ with $e^2=e$ in the Karoubi\nenvelope of the rationalized category.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+    "what": "STATEMENT-DISPUTED: the imported integral and rational constructible category symbols have no specified domain. In the existing constituent definitions they require T noetherian finite-dimensional with ell invertible. The identity square on Spec F_ell satisfies the imported geometric hypotheses but violates that category domain. State this domain explicitly on T; specify the completed coefficient sheaf, quotient indexing A/(varpi^(n+1)), essential-image functor, and the four object types. Keep the raw (L,alpha) lattice presentation and common interval from the master, without asserting the separate Karoubi comparison. The finite-dimensionality addition has an unresolved impact on the sole direct citer, recorded below.",
+    "source": {
+     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-def-admissible-lattices.md",
+     "place": "node sbc-def-admissible-lattices, order 1444"
+    },
+    "citers": [
+     {
+      "id": "sbc-thm-e-coefficient-smooth-base-change",
+      "holds": false,
+      "note": "The four-system predicate and raw rationalization are unchanged, but the citer explicitly assumes only noetherian schemes and invertibility of ell, not finite dimension of T. Noetherianity alone does not supply finite dimension. Its category-domain hypotheses need review; independently, its exchange belongs on X although it prints S. The citer is not edited."
+     }
+    ]
+   },
+   "citers": [
+    {
+     "id": "sbc-thm-e-coefficient-smooth-base-change",
+     "holds": true,
+     "note": "All lattice data and admissibility predicates used by this citer are unchanged. Its current statement explicitly assumes finite dimension of T (and X), resolving the older audit concern; the restored presentation comparison requires no additional hypothesis."
+    },
+    {
+     "id": "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch",
+     "holds": true,
+     "note": "All lattice data used at each finite coefficient stage are unchanged. This citer already assumes noetherian finite-dimensional schemes and invertibility of ell, so the explicit raw-to-Karoubi comparison is compatible with its chosen identity-idempotent presentation."
+    }
+   ]
   }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-4b7a55b7a",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-4b7a55b7a (reviewer sub-agent of L); spot-checked: Read the item, all 15 cited statements and source locations, current and master blueprint routes, unit/chapter route, and delivery rules. Verified hypotheses, coefficient base-change maps, four operations and output corners, Karoubi equivalence, direct consumers, edge cases, searches, and acyclic reachability. No new nodes, proof steps, duplicates, SGA citations, or repairs are present. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdmissibleLattices",
+  "declaration": "AlgebraicGeometry.Scheme.IntegralLattice.IsSquareConstructiblyAdmissible",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IntegralLattice",
+   "AlgebraicGeometry.Scheme.IntegralLattice.reduction",
+   "AlgebraicGeometry.Scheme.IntegralLattice.IsFiniteLevelEtaleAdmissible",
+   "AlgebraicGeometry.Scheme.sbcIntrinsicConstructibleIn",
+   "AlgebraicGeometry.Scheme.IntegralLattice.IsSquareConstructiblyAdmissible"
+  ],
+  "file": "lean/Sheaf/Paper/AdmissibleLattices.lean",
+  "statement": "def IntegralLattice.IsSquareConstructiblyAdmissible {X Y S : Scheme.{u}} {h : Y ⟶ X} {e : Y ⟶ T} {f : X ⟶ S} {g : T ⟶ S} (_sq : ChosenCartesianSquare h e f g) [Smooth f] [QuasiCompact g] [QuasiSeparated g] {K : PbcRationalDerivedCategory l E T hdim hl} (L : IntegralLattice l E T hdim hl K) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-05abf5292",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Statement, dependencies, edge cases, docstrings, universes, and canonical operations checked; all four files compiled locally and with server confirmation."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In a base-change square with $f$\nsmooth and $g$ quasi-compact and quasi-separated, and for\n$E/\\mathbf Q_\\ell$ finite with ring of integers $\\mathcal O_E$ and\nuniformizer $\\varpi$, an\n*integral lattice* for $K_E\\in\\Dbc(T,E)$ is an object\n$L\\in\\Dbc(T_{\\Proet},\\mathcal O_E)$ together with an isomorphism\n\n$$\nL[\\varpi^{-1}]\\xrightarrow{\\ \\sim\\ }K_E\n\\quad\\text{in }\\Dbc(T,E).\n$$\n\nThe lattice is\n*finite-level etale admissible* if each reduction\n$L_n=L\\otimes^L_{\\mathcal O_E}A_n$ lies in the essential image of\n$\\Dbc(T_{\\Et},A_n)$; it is *square-constructibly admissible* if in\naddition the finite-level systems\n$Rg_{n,*}L_n$, $Lf_n^*Rg_{n,*}L_n$, $Le_n^*L_n$,\n$Rh_{n,*}Le_n^*L_n$ are constructible in one common finite\ncohomological interval.\n\nThis presentation of $\\Dbc(T,E)$-objects by integral lattices is equivalent\nto the classical presentation by pairs $(L,e)$ with $e^2=e$ in the Karoubi\nenvelope of the rationalized category.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }
