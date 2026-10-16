@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-def-sfb-derived-extension-of-scalars",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived extension of scalars",
@@ -14,30 +14,211 @@
  },
  "stmt_deps": [
   "sk-def-sfb-change-of-scalars",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-objects",
+  "det-def-sfb-ring-object-monoid",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-sfb-modobj-flat-resolutions",
+  "def-sp-grothendieck-abelian"
  ],
  "proof": [
   {
-   "text": "$\\Mod_{\\mathcal R}$ and $\\Mod_{\\mathcal S}$ are closed symmetric monoidal Grothendieck\nabelian categories with functorial flat resolutions [sk-prop-sfb-module-category]. So\nleft derived functors exist for functors preserving K-flat quasi-isomorphisms, and right\nderived functors exist for all additive functors [sk-def-sfb-derived-categories].\nExtension of scalars preserves K-flat quasi-isomorphisms [lem-sfb-extend-scalars-kflat],\nso $L(\\operatorname{Ext}_\\varphi)$ is defined. The adjunction with the right derived\nrestriction is [def-sfb-derived-extend-restrict-adjunction]. That right derived functor\nis the termwise one [def-sfb-derived-restrict-levelwise], which gives the adjunction\n[def-sfb-derived-extend-levelwise-adjunction].",
+   "text": "Write $\\mathcal A_T=\\Mod_T(\\mathcal C)$ for $T=\\mathcal R,\\mathcal S$. The modules and their morphisms are those of [sk-def-sfb-module-objects]. By [lem-sfb-modobj-grothendieck], both $\\mathcal A_T$ are Grothendieck abelian. By [def-sfb-modobj-internal-hom], their relative tensor products are closed symmetric monoidal: $M\\otimes_T-$ has right adjoint $\\Hom_T(M,-)$. By [lem-sfb-modobj-flat-resolutions], the assumed functorial flat resolution of $\\mathcal C$ supplies one in each $\\mathcal A_T$. All three assertions apply because $T$ is commutative and the ambient tensor is additive in each variable.",
    "uses": [
-    "sk-def-sfb-derived-categories",
-    "lem-sfb-extend-scalars-kflat"
+    "sk-def-sfb-module-objects",
+    "lem-sfb-modobj-grothendieck",
+    "def-sfb-modobj-internal-hom",
+    "lem-sfb-modobj-flat-resolutions"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/sk-def-sfb-derived-extension-of-scalars.proof.md",
+    "place": "First sentence: module-category hypotheses; replace the missing summary node sk-prop-sfb-module-category by its existing detail statements"
+   }
+  },
+  {
+   "text": "Here are the extra colimit and additivity checks required by [def-sfb-left-derived-functor]. A Grothendieck category has all small colimits and exact filtered colimits by [def-sp-grothendieck-abelian], hence countable coproducts and exact $\\mathbf Z$-indexed colimits, since $(\\mathbf Z,\\leq)$ is filtered. A functor $H$ with right adjoint $J$ preserves colimits: for any small diagram $(X_i)$, the natural identifications $\\Hom(H(\\operatorname{colim}_iX_i),Y)=\\Hom(\\operatorname{colim}_iX_i,JY)=\\lim_i\\Hom(X_i,JY)=\\lim_i\\Hom(HX_i,Y)$ give precisely the colimit universal property. Apply this first to tensoring in $\\mathcal C$ (closedness is assumed), and then to $M\\otimes_T-$ using the adjunction in [def-sfb-modobj-internal-hom]; symmetry gives the assertion for the other variable. Additivity of the relative tensor follows directly from its coequalizer in [def-sfb-modobj-relative-tensor]: precomposing the map induced by $f+g$ with the coequalizer projection gives the sum of the composites for $f$ and $g$, by the assumed additivity of the ambient tensor. Uniqueness in the coequalizer universal property makes these induced maps equal. For the zero map, its induced map precomposed with the projection is zero, so uniqueness gives the zero map. For maps $f,g:M\\to M\\prime$ in the first variable with $N$ fixed, the defining composites are $(f\\otimes 1_N)$ and $(g\\otimes 1_N)$ followed by the projection for $M\\prime\\otimes_T N$; ambient additivity gives $(f+g)\\otimes 1_N=(f\\otimes 1_N)+(g\\otimes 1_N)$. Uniqueness through the projection for $M\\otimes_T N$ gives $(f+g)\\otimes_T 1_N=(f\\otimes_T 1_N)+(g\\otimes_T 1_N)$. The composite induced by $0\\otimes 1_N=0$ is zero, so $0\\otimes_T 1_N=0$ as well.",
+   "uses": [
+    "def-sfb-left-derived-functor",
+    "def-sp-grothendieck-abelian",
+    "def-sfb-modobj-internal-hom",
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/sk-def-sfb-derived-extension-of-scalars.proof.md",
+    "place": "First two sentences: verify the hypotheses of left derivation rather than assuming that Grothendieck alone supplies tensor compatibility"
+   }
+  },
+  {
+   "text": "Put $E=\\operatorname{Ext}_\\varphi$ and $U=\\operatorname{Res}_\\varphi$. The coequalizer and induced morphisms of [def-sfb-modobj-extension] define $E$ under the colimit hypotheses verified in step 2. If $f,g:M\\to N$, precomposing $E(f+g)$ with $\\mathcal S\\otimes M\\to E(M)$ gives the sum of the composites for $E(f)$ and $E(g)$, since $\\mathcal S\\otimes-$ is additive. Uniqueness through the coequalizer gives $E(f+g)=E(f)+E(g)$. For the zero map, $E(0)$ precomposed with the projection is zero because $\\mathcal S\\otimes 0=0$; uniqueness through that projection gives $E(0)=0$. Clause 1 of [sk-def-sfb-change-of-scalars] makes restriction the identity on underlying objects and morphisms, so restriction is additive. The ordinary adjunction in clause 2 and the exactness assertion in clause 4 of that same node give $E\\dashv U$ and exactness of $U$. Their hypotheses hold: $\\mathcal C$ is symmetric and closed, has equalizers and coequalizers since it is Grothendieck abelian, and its tensors preserve colimits by step 2. The revised clause 2 only asserts preservation of existing finite colimits before assuming their existence; this proof does not use right exactness of extension. The module categories are already Grothendieck abelian by step 1, and the conclusion used from clause 4 is exactness of restriction.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/sk-def-sfb-derived-extension-of-scalars.proof.md",
+    "place": "Second sentence and the references to ordinary extension and restriction: identify the additive functors and their ordinary adjunction"
+   }
+  },
+  {
+   "text": "For every quasi-isomorphism $s:P\\to P'$ between K-flat complexes in $\\mathcal A_{\\mathcal R}$, [lem-sfb-extend-scalars-kflat] gives that $E(s)$ is a quasi-isomorphism in $\\mathcal A_{\\mathcal S}$. Thus [def-sfb-left-derived-functor] applies to $E$, with its source hypotheses verified in steps 1 and 2 and additivity verified in step 3. Define $\\mathcal S\\otimes^{\\mathrm L}_{\\mathcal R}-:=LE$. The cited construction supplies its derived counit, invertible on K-flat complexes. In particular, for any K-flat resolution $P\\to K$ it supplies $LE(K)\\cong E(P)=\\mathcal S\\otimes_{\\mathcal R}P$ in $D(\\mathcal A_{\\mathcal S})$. This is the claimed computation on the unbounded derived category; no flatness of $\\mathcal S$ over $\\mathcal R$ is assumed.",
+   "uses": [
+    "lem-sfb-extend-scalars-kflat",
+    "def-sfb-left-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/sk-def-sfb-derived-extension-of-scalars.proof.md",
+    "place": "Sentence 3: extension preserves K-flat quasi-isomorphisms, and L(Ext) is defined and computed on K-flat resolutions"
+   }
+  },
+  {
+   "text": "The source $\\mathcal A_{\\mathcal S}$ of $U$ is Grothendieck by step 1. Hence [lem-sfb-grothendieck-k-injective] gives K-injective resolutions there and [def-sfb-right-derived-functor] defines $RU$. Since $U$ is exact by step 3, [def-sfb-right-derived-exact] supplies a canonical natural isomorphism $\\rho:RU\\xrightarrow{\\sim}D(U)$, where $D(U)$ is termwise restriction. This uses resolutions in the source of restriction, namely $\\mathcal S$-modules, and does not require restriction itself to preserve K-injectives.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective",
+    "def-sfb-right-derived-functor",
+    "def-sfb-right-derived-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/sk-def-sfb-derived-extension-of-scalars.proof.md",
+    "place": "Sentence 5: the right derived restriction is the termwise functor"
+   }
+  },
+  {
+   "text": "Apply the derived-adjunction clause of [sk-def-sfb-derived-categories] to the ordinary adjunction $E\\dashv U$ from step 3. Its left-functor hypotheses are exactly steps 1, 2 and 4, and its K-injective hypothesis on the target of $E$ is step 5. It gives natural bijections $a_{K,N}:\\Hom_{D(\\mathcal A_{\\mathcal S})}(LE(K),N)\\xrightarrow{\\sim}\\Hom_{D(\\mathcal A_{\\mathcal R})}(K,RU(N))$. Thus the derived adjunction follows from the existing general statement, rather than introducing another node for the same clause of this item.",
+   "uses": [
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/sk-def-sfb-derived-extension-of-scalars.proof.md",
+    "place": "Sentence 4: derive the ordinary extension/restriction adjunction"
+   }
+  },
+  {
+   "text": "For $K\\in D(\\mathcal A_{\\mathcal R})$ and $N\\in D(\\mathcal A_{\\mathcal S})$, send $h:LE(K)\\to N$ to $\\rho_N\\circ a_{K,N}(h):K\\to D(U)(N)$, using the isomorphism $\\rho$ of [def-sfb-right-derived-exact] from step 5. The inverse sends $b:K\\to D(U)(N)$ to $a_{K,N}^{-1}(\\rho_N^{-1}\\circ b)$. These are inverse because $a_{K,N}$ is a bijection and $\\rho_N^{-1}\\rho_N=1=\\rho_N\\rho_N^{-1}$. Naturality in both variables follows from naturality of $a$ and $\\rho$. They give the claimed adjunction $\\mathcal S\\otimes^{\\mathrm L}_{\\mathcal R}-\\dashv D(\\operatorname{Res}_\\varphi)$.",
+   "uses": [
+    "def-sfb-right-derived-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/sk-def-sfb-derived-extension-of-scalars.proof.md",
+    "place": "Final sentence: explicit change of the right adjoint along the canonical natural isomorphism"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-derived-categories",
-  "lem-sfb-extend-scalars-kflat"
+  "sk-def-sfb-module-objects",
+  "lem-sfb-modobj-grothendieck",
+  "def-sfb-modobj-internal-hom",
+  "lem-sfb-modobj-flat-resolutions",
+  "def-sfb-left-derived-functor",
+  "def-sp-grothendieck-abelian",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-modobj-extension",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-extend-scalars-kflat",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
+  "def-sfb-right-derived-exact",
+  "sk-def-sfb-derived-categories"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/sk-def-sfb-derived-extension-of-scalars.proof.md",
+  "place": "Whole proof; existing module-structure details replace its missing summary citation, and the general derived-adjunction statement replaces the redundant clause nodes"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor extension of scalars is left adjoint to restriction of scalars for modules over ring objects",
+   "results": "ModuleCat.extendRestrictScalarsAdj; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; ModuleCat.instIsLeftAdjointRestrictScalars; ModuleCat.instIsLeftAdjointExtendScalars; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.instIsRightAdjointRestrictScalars; PresheafOfModules.restrictScalarsObj; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: ordinary module adjunctions and abstract derived-functor interfaces do not supply this unbounded K-flat construction for module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedFunctor",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.leftDerivedFunctor'",
+   "date": "2026-10-16",
+   "verdict": "query rejected: Loogle reported an unknown identifier, so this query alone is inconclusive; the subsequent valid Adjunction.derived query and two semantic phrasings were checked separately"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedExtend|derived.*[Ee]xtend|leftDerivedFunctor|KFlat",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: ordinary module adjunctions and abstract derived-functor interfaces do not supply this unbounded K-flat construction for module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars between module objects in a closed symmetric monoidal Grothendieck abelian category computed on K-flat resolutions is left adjoint to exact restriction of scalars",
+   "results": "ModuleCat.instIsLeftAdjointExtendScalars; ModuleCat.extendRestrictScalarsAdj; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; comonadicExtendScalars; ModuleCat.instIsLeftAdjointRestrictScalars; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.ExtendRestrictScalarsAdj.homEquiv; ModuleCat.instIsRightAdjointRestrictScalars",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: ordinary module adjunctions and abstract derived-functor interfaces do not supply this unbounded K-flat construction for module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derived_unit",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: ordinary module adjunctions and abstract derived-functor interfaces do not supply this unbounded K-flat construction for module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|extendRestrictAdjunction|KFlat",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: ordinary module adjunctions and abstract derived-functor interfaces do not supply this unbounded K-flat construction for module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total left derived functor of extension of scalars for module objects using unbounded K-flat complexes and derived adjunction",
+   "results": "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; Ext; CategoryTheory.Tor; CategoryTheory.Tor'; CategoryTheory.Functor.totalLeftDerivedCounit; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_obj; CategoryTheory.Functor.totalLeftDerived",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: ordinary module adjunctions and abstract derived-functor interfaces do not supply this unbounded K-flat construction for module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "totalLeftDerived|extendRestrictScalarsAdj",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Descent.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: ordinary module adjunctions and abstract derived-functor interfaces do not supply this unbounded K-flat construction for module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived extension of scalars for internal modules over commutative algebra objects using K-flat resolutions has exact restriction as right adjoint",
+   "results": "ModuleCat.instIsRightAdjointRestrictScalars; ModuleCat.instIsRightAdjointCoextendScalars; ModuleCat.extendRestrictScalarsAdj; comonadicExtendScalars; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.instIsLeftAdjointExtendScalars; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: ordinary ring-module adjunctions do not construct the unbounded K-flat left derived functor for internal modules"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|derivedExtend|extendRestrictScalarsAdj",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:885 (ordinary extendRestrictScalarsAdj), its uses at :888 and in Monoidal/Adjunction.lean:52,55,58,116,124 and Descent.lean:65; no KFlat or derivedExtend hit",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: ordinary ring-module adjunctions do not construct the unbounded K-flat left derived functor for internal modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive left adjoint between internal module categories admits an unbounded derived extension of scalars computed on K-flat resolutions",
+   "results": "ModuleCat.instIsLeftAdjointExtendScalars; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; comonadicExtendScalars; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; Ext; DerivedCategory.instLinearHomotopyCategoryIntUpQh; DerivedCategory.instLinearCochainComplexIntQ; ModuleCat.instIsRightAdjointCoextendScalars",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: results concern ordinary ring modules, linearity of exact derived functors, or other constructions; none constructs the unbounded K-flat functor for internal module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesKFlatQuasiIso|derivedExtend|extendRestrictScalarsAdj",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: results concern ordinary ring modules, linearity of exact derived functors, or other constructions; none constructs the unbounded K-flat functor for internal module objects"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -73,5 +254,34 @@
   "def-sfb-derived-restrict-levelwise"
  ],
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-derived-extension-of-scalars"
+ "unit": "sk-def-sfb-derived-extension-of-scalars",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-derived-extension-of-scalars",
+  "worker": "stage1",
+  "summary": "Preserved the definition and all its assertions. Expanded the imported paragraph into seven steps, using existing module-structure and derived-functor nodes, checking additivity and colimit hypotheses explicitly, and spelling out the final natural Hom bijection. No new nodes are needed; all Mathlib queries were run through msearch.py. No matching complete declaration exists in the read-only slopmaster2 checkout. Repair: revalidated the changed ordinary-scalar node against its reviewed live statement, refreshed the step-3 quotation, and explicitly separated the unchanged adjunction/exact-restriction conclusions from its corrected finite-colimit qualification. Landing repair: refreshed the item from the current base while retaining only split-owned edits, revalidated all cited statements, and included the existing unit record with only realized/realized_by filled so it is a file of the delivery. Independent second reading: expanded the zero-map and first-variable additivity calculations in steps 2 and 3, and reran semantic and source Mathlib searches; no statement, dependency or unit-route change.",
+  "blueprint": "The proof file first sentence is realized by steps 1-2, its left-derived existence and K-flat preservation by steps 3-4, the derived-adjunction sentence by step 6, its termwise-identification sentence by step 5, and its final adjunction by step 7. The item is itself a blueprint unit: blueprint.from stays null. Searches for derived extension and modobj found only specialized coefficient extensions and existing strict subclauses, not a second equivalent item.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "The imported unit proof explicitly uses the module-category structure summary, whose DAG node is absent. This existing detail lemma supplies Grothendieck abelianness as a generic module-category tool; the derived-scalar unit has no such statement."
+   },
+   {
+    "node": "lem-sfb-modobj-flat-resolutions",
+    "why": "The same module-category summary sentence needs inheritance of functorial flat resolutions. This existing detail lemma gives exactly that generic structure assertion; no node in the derived-scalar unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-modobj-flat-resolutions"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-42173ba67",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-42173ba67 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, unit/chapter route, report, cited node statements and blueprint sources. All seven proof steps have correct hypotheses and dependencies; derived extension, K-flat computation, exact restriction, and the derived adjunction are valid. Checked edge cases including zero coefficients, zero complexes, identity coefficients, fields, and Z→Z/2. No new nodes, duplicates, cycles, route violations, SGA citations, or delivery-errors A–F were found. Wrote review.md."
+ }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-derived-monoidal",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The derived category of a monoidal Grothendieck abelian category is monoidal",
@@ -12,27 +12,164 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.md",
   "place": "node lem-sfb-derived-monoidal, order 1615"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sfb-preserves-kflat-quasi-iso"
+ ],
  "proof": [
   {
-   "text": "Since $\\mathcal C$ is closed, $X\\otimes-$ and $-\\otimes X$ are left adjoints, so they\npreserve all colimits. In particular they preserve the countable coproducts and the\nexact $\\mathbf Z$-indexed colimits used to build K-flat resolutions\n[sk-def-sfb-derived-categories]. So the K-flat complexes form a left derivability\nstructure for the quasi-isomorphisms of $K(\\mathcal C)$. They are stable under the\ntensor product: if $P,P'$ are K-flat, then $(P\\otimes P')\\otimes-=P\\otimes(P'\\otimes-)$\npreserves quasi-isomorphisms, and similarly on the right. They also contain the unit.\nA quasi-isomorphism between K-flat complexes stays a quasi-isomorphism after tensoring\nwith a K-flat complex. So the tensor product of complexes, restricted to K-flat\ncomplexes, descends to $D(\\mathcal C)$; this is $-\\otimes^{\\mathrm L}-$. It is the\ntwo-variable left derived functor, and the iterated tensor products are the left\nderived functors of the iterated tensor products of complexes, in three and four\nvariables. The constraints of $K(\\mathcal C)$ restrict to K-flat complexes and descend,\nand the coherence identities descend with them. The resolution maps make the\nlocalization functor lax monoidal.",
+   "text": "By [def-sp-grothendieck-abelian], $C$ has small colimits and exact filtered colimits. The ordered set $\\mathbf Z$ is filtered, since $\\max(a,b)$ bounds each pair, so its colimits are exact; countable coproducts also exist. Closedness means $X\\otimes-$ has a right adjoint. The braiding identifies $-\\otimes X$ with $X\\otimes-$, so it too has a right adjoint. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to each of these adjunctions: both tensor functors preserve the colimits required for total tensors and K-flat resolutions. All categories and colimits are taken in the fixed size convention for the derived localization.",
    "uses": [
-    "sk-def-sfb-derived-categories"
+    "def-sp-grothendieck-abelian",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "First two sentences: closedness and the colimits required for K-flat resolutions; Stacks Tag 0038, categories.tex, lemma-adjoint-exact, is the colimit tool"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-total-tensor-homotopy] with the colimits just verified. Write $A=K(C)$, $I=\\mathbf1[0]$, and $Q:A\\to D(C)$ for the localization of [def-weil-abstract-derived-category]. Its monoidal product is the direct-sum total tensor of complexes. Apply [lem-sfb-kflat-derivability] using the given functorial flat resolutions and the colimit preservation from step 1. Thus the full subcategory $P\\subset A$ of two-sided K-flat objects is a left derivability structure, and for every $X\\in A$ there is a quasi-isomorphism $p:P_X\\to X$ with $P_X\\in P$. This uses the homotopy-category part of the cited theorem; we do not assume a resolution functor descends to homotopy classes.",
+   "uses": [
+    "lem-sfb-total-tensor-homotopy",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-kflat-derivability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "First three sentences: obtain the K-flat left derivability structure on K(C)"
+   }
+  },
+  {
+   "text": "By [def-sfb-preserves-kflat-quasi-iso], K-flat means tensoring on either side preserves every quasi-isomorphism. Hence $I$ is K-flat, since $I\\otimes-$ and $-\\otimes I$ are isomorphic to the identity by the unitors from [lem-sfb-total-tensor-homotopy]. If $P,P'$ are K-flat and $s$ is a quasi-isomorphism, then $(P\\otimes P')\\otimes s$ is conjugate by the associator to $P\\otimes(P'\\otimes s)$, hence is a quasi-isomorphism; on the other side $s\\otimes(P\\otimes P')$ is conjugate to $(s\\otimes P)\\otimes P'$. Thus $P\\otimes P'$ is K-flat. Conjugating preserves quasi-isomorphisms because each cohomology functor preserves isomorphisms.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-sfb-total-tensor-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Sentences on stability under tensor and containment of the unit"
+   }
+  },
+  {
+   "text": "Consider $F(X,Y)=Q(X\\otimes Y)$. When $P,P'$ are K-flat, changing either coordinate by a quasi-isomorphism gives a quasi-isomorphism after tensoring, by the defining preservation property in [def-sfb-preserves-kflat-quasi-iso]. Apply [lem-sfb-multivariable-derived-calculus] with $n=2$ and the two K-flat inclusions supplied by [lem-sfb-kflat-derivability]. It gives a bifunctor $B:D(C)\\times D(C)\\to D(C)$ and a natural counit $\\mu_{X,Y}:B(QX,QY)\\to Q(X\\otimes Y)$ with the two-variable total left derived universal property, invertible whenever $X,Y$ are K-flat. Put $X\\otimes^{\\mathrm L}Y=B(X,Y)$. This constructs the tensor bifunctor before choosing its monoidal constraints.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-sfb-kflat-derivability",
+    "lem-sfb-multivariable-derived-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Sentences on descent of the tensor bifunctor and its two-variable derived universal property"
+   }
+  },
+  {
+   "text": "We check computation with only one K-flat argument. Let $f:P\\to P'$ be a quasi-isomorphism between K-flat objects and $Y$ arbitrary. Choose $r:R\\to Y$ with $R$ K-flat using [lem-sfb-kflat-derivability]. In the naturality square for tensor, the vertical maps $P\\otimes r$ and $P'\\otimes r$ and the top map $f\\otimes R$ are quasi-isomorphisms by [def-sfb-preserves-kflat-quasi-iso]. Hence the bottom map $f\\otimes Y$ is one too: apply each $H^k$ to the square and solve for that map using the inverses of the other three. For the other order, let $g:P\\to P^{\\prime}$ be a quasi-isomorphism of K-flat complexes and choose $s:S\\to X$ with $S$ K-flat. In the square with top map $S\\otimes g$, bottom map $X\\otimes g$, and vertical maps $s\\otimes P$ and $s\\otimes P^{\\prime}$, the top and both vertical maps are quasi-isomorphisms by the two-sided K-flat property. Applying $H^k$ and solving that square proves that $X\\otimes g$ is a quasi-isomorphism. Thus $F$ restricted to $P\\times A$, or to $A\\times P$, inverts every coordinate quasi-isomorphism. The mixed cases of [lem-sfb-multivariable-derived-calculus], with one identity inclusion, supply derived functors $C_{P,A}$ and $C_{A,P}$ whose counits are invertible on the corresponding mixed pairs. Each mixed counit is therefore invertible on $P\\times P$ as well. The criterion in [lem-sfb-multivariable-derived-calculus] then makes both $C_{P,A}$ and $B$ universal for the same two-variable functor with respect to the $P\\times P$ derivability structure. The universal bijection gives a unique natural isomorphism between each mixed functor and $B$ whose composite with $\\mu$ is the mixed counit on every pair of objects; hence $\\mu_{P,Y}$ and $\\mu_{X,P}$ are invertible whenever $P$ is K-flat. Given $p:P\\to X$ as above, the isomorphism $Qp$ gives\n$$ B(QX,QY)\\cong B(QP,QY)\\xrightarrow[\\sim]{\\mu_{P,Y}} Q(P\\otimes Y),\n$$\nFor a resolution $q:P_Y\\to Y$, use $B(1,(Qq)^{-1})$ followed by $\\mu_{X,P_Y}$ to obtain $B(QX,QY)\\cong Q(X\\otimes P_Y)$ instead. No flatness or boundedness condition on the other argument has been used.",
+   "uses": [
+    "lem-sfb-kflat-derivability",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-sfb-multivariable-derived-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Computation by replacing either argument; mixed-resolution argument underlying the K-flat comparison"
+   }
+  },
+  {
+   "text": "For each parenthesization $t$ of a tensor word on three or four variables, let $T_t$ be the corresponding iterated product of complexes and $B_t$ the same iteration of $B$. Compose the binary counits recursively to obtain $\\mu_t:B_t(QX_1,\\ldots,QX_n)\\to Q(T_t(X_1,\\ldots,X_n))$: at a root with subtrees $u,v$, first apply $B(\\mu_u,\\mu_v)$ and then $\\mu_{T_u,T_v}$. At a tuple of K-flat objects every intermediate $T_u$ is K-flat by step 3, so this composite is invertible. The criterion of [lem-sfb-multivariable-derived-calculus] for $n=3,4$ proves that each $(B_t,\\mu_t)$ is the derived functor of $QT_t$. The same criterion for $n=1$ shows that $B(QI,-)$ with $\\mu_{I,-}$ derives $Q(I\\otimes-)$, and $B(-,QI)$ derives $Q(-\\otimes I)$; $\\mu$ is invertible on K-flat tests and $I$ is K-flat. Finally $(\\operatorname{id}_{D(C)},\\operatorname{id}_Q)$ derives $Q$ since its counit is invertible everywhere. In each case the test functor inverts quasi-isomorphisms on K-flat tuples by the preservation definition [def-sfb-preserves-kflat-quasi-iso] and step 3.",
+   "uses": [
+    "lem-sfb-multivariable-derived-calculus",
+    "def-sfb-preserves-kflat-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Sentence on iterated derived tensor products in three and four variables, including the unit specializations"
+   }
+  },
+  {
+   "text": "Derive the associator of $K(C)$ from [lem-sfb-total-tensor-homotopy] by [lem-sfb-multivariable-derived-calculus], between the two derived trifunctors of step 6. This gives an isomorphism $\\alpha^D:B(B(-,-),-)\\cong B(-,B(-,-))$ characterized, for every $X,Y,Z\\in A$, by\n$$ \\mu_{X,Y\\otimes Z}\\circ B(1,\\mu_{Y,Z})\\circ\\alpha^D_{QX,QY,QZ}=Q(\\alpha_{X,Y,Z})\\circ\\mu_{X\\otimes Y,Z}\\circ B(\\mu_{X,Y},1). $$\nDerive the unitors likewise to obtain $\\lambda^D:B(QI,-)\\cong\\operatorname{id}$ and $\\rho^D:B(-,QI)\\cong\\operatorname{id}$, characterized by\n$$\\lambda^D_{QX}=Q(\\lambda_X)\\circ\\mu_{I,X},\\qquad\\rho^D_{QX}=Q(\\rho_X)\\circ\\mu_{X,I}.$$\nFor a tuple of K-flat representatives, identify each parenthesized $B_t$ with $QT_t$ by the invertible $\\mu_t$. If an associator edge is applied at the root, its comparison identity is the displayed associator equation. If it is applied within a proper subtree, apply that subtree identity inside $B$; functoriality of $B$ and naturality of the root counit give the identity for the whole tree. Thus every pentagon edge $e^D_{t,t'}:B_t\\to B_{t'}$ satisfies\n$$\\mu_{t'}\\circ e^D_{t,t'}=Q(e_{t,t'})\\circ\\mu_t.$$\nFor a path of edges, substitute $e^D_{t,t'}=\\mu_{t'}^{-1}Q(e_{t,t'})\\mu_t$; each adjacent $\\mu_t\\mu_t^{-1}$ cancels. Each path composite is therefore $\\mu_{\\mathrm{end}}^{-1}Q(e_{\\mathrm{path}})\\mu_{\\mathrm{start}}$. The two paths agree by the pentagon on $K(C)$. For the triangle, the unitor equations above and naturality of $\\mu$ show that postcomposing its left path by $\\mu_{X,Y}$ gives\n$$Q((1_X\\otimes\\lambda_Y)\\circ\\alpha_{X,I,Y})\\circ\\mu_{X\\otimes I,Y}\\circ B(\\mu_{X,I},1),$$\nand postcomposing its right path gives\n$$Q(\\rho_X\\otimes1_Y)\\circ\\mu_{X\\otimes I,Y}\\circ B(\\mu_{X,I},1).$$\nThese agree by the original triangle; cancel the invertible $\\mu_{X,Y}$. The cited calculus says natural transformations on $D(C)^n$ are determined on such tuples, so pentagon and triangle hold for all objects. Thus $(D(C),B,QI,\\alpha^D,\\lambda^D,\\rho^D)$ is monoidal, with constraints induced from complexes.",
+   "uses": [
+    "lem-sfb-total-tensor-homotopy",
+    "lem-sfb-multivariable-derived-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Sentences on descending the constraints and their coherence identities"
+   }
+  },
+  {
+   "text": "Equip $Q$ with multiplication $\\mu_{X,Y}:QX\\otimes^{\\mathrm L}QY\\to Q(X\\otimes Y)$ and unit $\\varepsilon:\\mathbf1_{D(C)}=QI\\to QI$ equal to the identity. Naturality of the multiplication is the naturality of the derived counit from [lem-sfb-multivariable-derived-calculus]. The associativity axiom for this lax monoidal functor is exactly the displayed associator factorization equation in step 7. Its two unit axioms are exactly the displayed formulas for $\\lambda^D$ and $\\rho^D$, since $\\varepsilon$ is the identity. Hence $Q:K(C)\\to D(C)$ is lax monoidal with the same multiplication whose universal property and K-flat computation were proved in steps 4 and 5.",
+   "uses": [
+    "lem-sfb-multivariable-derived-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Last sentence: the resolution comparisons make the localization functor lax monoidal"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-derived-categories"
+  "def-sp-grothendieck-abelian",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-total-tensor-homotopy",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-kflat-derivability",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-sfb-multivariable-derived-calculus"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+  "place": "Entire proof, expanded at the K-flat derivability, multivariable universal properties, one-variable computation, and coherence steps"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The unbounded derived category of a monoidal Grothendieck abelian category with functorial flat resolutions has a derived monoidal structure computed by K-flat resolutions.",
+   "results": "Hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Tor_obj, HasDerivedCategory.standard, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Tor'_obj_obj, DerivedCategory.instLinear, DerivedCategory.instLinearHomotopyCategoryIntUpQh, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; ordinary monoidal localization requires all quasi-isomorphisms stable under tensor, which is not assumed; Tor is not the unbounded derived tensor"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.HasDerivedMonoidalCategory",
+   "results": "Hits: . loogle: unknown identifier 'CategoryTheory.Functor.HasDerivedMonoidalCategory'",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; ordinary monoidal localization requires all quasi-isomorphisms stable under tensor, which is not assumed; Tor is not the unbounded derived tensor"
+  },
+  {
+   "tool": "grep",
+   "query": "HasDerivedMonoidalCategory|kFlat_derivesMonoidal|IsLeftDerivabilityStructure|HasFunctorialFlatResolution",
+   "results": "Hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean. Directory: Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; ordinary monoidal localization requires all quasi-isomorphisms stable under tensor, which is not assumed; Tor is not the unbounded derived tensor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived category admits a monoidal structure from K-flat resolutions and the localization functor is lax monoidal.",
+   "results": "Hits: HasDerivedCategory.standard, CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory, CategoryTheory.Localization.Monoidal.monoidalCategoryStruct, CategoryTheory.LaxMonoidalFunctor.noConfusion, CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory_1, CategoryTheory.Localization.Monoidal.toMonoidalCategory, CategoryTheory.LocalizedMonoidal, CategoryTheory.Localization.Monoidal.instEssSurjLocalizedMonoidalToMonoidalCategory",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; ordinary monoidal localization requires all quasi-isomorphisms stable under tensor, which is not assumed; Tor is not the unbounded derived tensor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed braided monoidal abelian category with functorial flat resolutions has a left derived tensor product with associative unit constraints.",
+   "results": "Hits: CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor_map, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorLeftObjFunctorTensorBifunctor",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item; ordinary monoidal localization requires all quasi-isomorphisms stable under tensor, which is not assumed; Tor is not the unbounded derived tensor"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -52,5 +189,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-derived-tensor-hom"
+ "unit": "sk-def-sfb-derived-tensor-hom",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-derived-monoidal",
+  "worker": "stage1",
+  "summary": "Replaced the single imported paragraph by eight steps following its K-flat route. Exposed the homotopy tensor, K-flat resolution theorem and generic multivariable derived calculus as three strictly supporting statements, plus the Mathlib definition leaf for left derivability. Reused the existing K-flat definition, Grothendieck and localization definitions, and colimit-preservation leaf. Proved the mixed K-flat comparison by a naturality square and two-out-of-three, and wrote the associator/unit equations that establish coherence and lax monoidality. The item statement is unchanged. No attachment is claimed.",
+  "blueprint": "Steps 1-2 realize the first three sentences; step 3 realizes stability and unit; steps 4-6 realize descent, either-argument computation and the two/three/four-variable derived claims; steps 7-8 realize constraints, coherence and the lax monoidal localization. No route change."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-70562df0d",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-70562df0d (reviewer sub-agent of L); spot-checked: Read all mathematics and sources; eight steps and four new nodes are sound. Corrected B6: inaccurate Mathlib source-line references in the derivability definition leaf. Statements and proof unchanged. Full checks in review.md; whole corrected JSON under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+ }
 }
