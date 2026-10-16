@@ -65,8 +65,9 @@ following.
   content of the lisse sheaf–representation equivalence used by the rest of the block is
   recorded by the closure properties
   `AlgebraicGeometry.WeilGroup.isLisseRep.isClosedUnderKernels` and its companions together
-  with `AlgebraicGeometry.WeilGroup.isLisseRep_shortExact_iff`, since the source category of
-  that equivalence — lisse `ℚ̄_ℓ`-Weil sheaves — cannot be written down here.
+  with `AlgebraicGeometry.WeilGroup.isLisseRep_shortExact_iff`. The equivalence itself, from lisse
+  Weil sheaves, is `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`; its exactness is
+  `AlgebraicGeometry.WeilGroup.isLisse_shortExact_iff`.
   Closure under extensions is *not* recorded: inside `Rep ℚ̄_ℓ W(C₀)` it fails, since a
   discontinuous additive character `c` of `π₁(C)` (for instance of a quotient `ℤ_ℓ`) gives the
   non-lisse extension `g ↦ !![1, c g; 0, 1]` of the trivial line by itself. An extension of
@@ -79,11 +80,11 @@ following.
   `𝒪_E`-module structure on `V` is the restriction of scalars along
   `𝒪_E → E → ℚ̄_ℓ`, introduced by `letI` inside the statement.
 
-- In `AlgebraicGeometry.WeilGroup.globalSections_eq_invariants` the global sections
-  `H⁰(U, F|_U)` are rendered, following the proof sketch, as the `π₁(U)`-equivariant maps
-  from the constant rank-one sheaf, i.e. as
-  `AlgebraicGeometry.WeilGroup.globalSections`. Mathlib's `CategoryTheory.Sheaf.H` is not
-  applicable, as the lisse `ℚ̄_ℓ`-sheaf `F` itself is unavailable.
+- `AlgebraicGeometry.WeilGroup.globalSections_eq_invariants` is the representation-theoretic
+  step of the proof sketch: the `π₁(U)`-equivariant maps from the trivial line
+  (`AlgebraicGeometry.WeilGroup.globalSections`) are the invariants. The statement about the
+  étale global sections `H⁰(Ū, F|_U)` of a lisse Weil sheaf is
+  `AlgebraicGeometry.WeilGroup.exists_globalSections_upperStar_linearEquiv_invariants`.
 
 The open subcurve `U₀ ⊆ C₀`, its Weil group `W(U₀)` and the restriction homomorphism
 `W(U₀) → W(C₀)` enter through `AlgebraicGeometry.WeilGroup.Restriction`, which is also what
@@ -1399,7 +1400,8 @@ This is the form in which the exactness of the geometric-generic-stalk equivalen
 
 The forgetful functor is faithful and exact, since kernels and cokernels of representations
 are computed on the underlying vector spaces, so it preserves and reflects short exactness;
-the lisse hypotheses are not needed. -/
+the lisse hypotheses are not needed. The exactness of the equivalence with lisse Weil sheaves
+itself is `AlgebraicGeometry.WeilGroup.isLisse_shortExact_iff`. -/
 theorem isLisseRep_shortExact_iff (S : ShortComplex (Rep.{u} (PadicAlgCl l) W.carrier))
     (_h₁ : W.isLisseRep l S.X₁) (_h₂ : W.isLisseRep l S.X₂) (_h₃ : W.isLisseRep l S.X₃) :
     S.ShortExact ↔ (S.map (forget₂ (Rep.{u} (PadicAlgCl l) W.carrier)
@@ -1528,7 +1530,9 @@ For a lisse Weil representation `(V, ρ)` and a restriction `R` of Weil groups a
 open `U₀ ⊆ C₀`, the global sections `H⁰(U, F|_U) = Hom_{π₁(U)}(𝟙, V)` are the invariants
 `V ^ (π₁(U))`, by evaluation at `1`: an equivariant map `ℚ̄_ℓ → V` is determined by the
 image of `1`, which is fixed by `π₁(U)`, and every fixed vector arises this way. The finiteness
-and lisse hypotheses are not needed for this.
+and lisse hypotheses are not needed for this. The corresponding statement for the étale global
+sections of a lisse Weil sheaf is
+`AlgebraicGeometry.WeilGroup.exists_globalSections_upperStar_linearEquiv_invariants`.
 
 Both sides carry a residual action of the geometric Frobenius `F = ρ (res γ)`
 (`AlgebraicGeometry.WeilGroup.comp_mem_globalSections` and
