@@ -22,9 +22,95 @@
   "def-sp-left-exact-additive",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $d(A)=\\max(\\{0\\}\\cup\\{q>0:R^qF(A)\\ne0\\})$. The maximum exists and is at most $N$ by hypothesis. By [lem-weil-pbc-derived-functor-injective-vanishing], injectives have degree zero; enough injectives therefore provides every required degree-zero embedding. Apply [lem-weil-pbc-derived-functor-long-exact] to $0\\to A\\to B\\to C\\to0$. If $q>\\max\\{d(A)-1,d(B)\\}$, then $q>0$, $R^qF(B)=0$, and $R^{q+1}F(A)=0$, so exactness forces $R^qF(C)=0$. Hence $d(C)\\leq\\max\\{d(A)-1,d(B)\\}$ (truncated subtraction). Applied to $0\\to A\\to A\\oplus B\\to B\\to0$, the same long exact sequence gives $d(A\\oplus B)\\leq\\max\\{d(A),d(B)\\}$. Thus all hypotheses of the bounded degree-function replacement lemma hold, including for $N=0$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K7, lemma-unbounded-right-derived, second proof paragraph: degree function and verification of the hypotheses of 07K6."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-degree-zero-complex-replacement] with $D=N$ and the function in Step 1. Every complex $K$ is consequently the source of a quasi-isomorphism $K\\to L$ with $R^qF(L^r)=0$ for every $q>0$ and $r\\in\\mathbf Z$. Call these complexes termwise $F$-acyclic, and let $\\mathcal I$ be their class. There is no bound on the cochain degrees of $K$ or $L$.",
+   "uses": [
+    "lem-sf-degree-zero-complex-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 07K6 (lemma-replace-resolution) and 07K7, construction of termwise right-acyclic replacements."
+   }
+  },
+  {
+   "text": "The existing [lem-kun-pointwise-finite-cd-exact-complex] applies with a singleton indexing set, $r_*=\\operatorname{id}_{\\mathcal B}$ and $d_*=N$. The identity functor preserves monomorphisms, and the singleton identity family detects zero objects; its required pointwise vanishing is exactly the assumption $R^qF(A)=0$ for $q>N$. Therefore, if a termwise $F$-acyclic complex $T$ is exact, then $F(T)$ is exact. Only enough injectives in $\\mathcal A$ is used by this cited statement; no Grothendieck hypothesis is introduced.",
+   "uses": [
+    "lem-kun-pointwise-finite-cd-exact-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K7, quasi-isomorphism preservation claim, using its finite-dimension shifting argument in the existing pointwise exact-complex lemma."
+   }
+  },
+  {
+   "text": "Let $s:L\\to M$ be a quasi-isomorphism between members of $\\mathcal I$. Its cone is exact by [lem-pur-quasi-iso-cone-acyclic]. Its terms are $M^r\\oplus L^{r+1}$, and these are $F$-acyclic: in the long exact sequence of [lem-weil-pbc-derived-functor-long-exact] for $0\\to M^r\\to M^r\\oplus L^{r+1}\\to L^{r+1}\\to0$, both outer objects in each positive derived degree vanish. Step 3 gives that $F(\\operatorname{Cone}(s))$ is exact. Because $F$ is additive, its canonical finite-biproduct identification carries the cone differential matrix to $\\begin{pmatrix}F(d_M)&F(s)\\\\0&-F(d_L)\\end{pmatrix}$, so $F(\\operatorname{Cone}(s))\\cong\\operatorname{Cone}(F(s))$. Applying the same cone criterion in $\\mathcal B$ proves that $F(s)$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, lemma-acyclic, and Tag 07K7, quasi-isomorphism preservation claim."
+   }
+  },
+  {
+   "text": "Let $G:K(\\mathcal A)\\to D(\\mathcal B)$ send a complex $K$ to $Q_{\\mathcal B}(F(K))$. For a homotopy $f-g=d_Mh+hd_K$, additivity gives $F(f)-F(g)=F(d_M)F(h)+F(h)F(d_K)$; hence $G$ is defined on the homotopy category. The identity $F(-d_K)=-F(d_K)$ identifies $F(K[1])$ with $F(K)[1]$. Step 4 identifies the cone differentials, and additivity preserves the cone inclusion and the signed projection. Thus termwise $F$ carries cone triangles to cone triangles. By [lem-pur-homotopy-category-triangulated], these triangles and their isomorphic copies are precisely the distinguished triangles in $K(\\mathcal A)$, and $Q_{\\mathcal B}$ is exact. Consequently $G$ is exact. Step 2 gives right replacements by $\\mathcal I$, and Step 4 shows that $G$ inverts quasi-isomorphisms between its members. The criterion [lem-sf-right-derived-from-adapted-complexes] gives the unbounded total right derived functor $RF$ and, for every $L\\in\\mathcal I$, the computation $RF(Q_{\\mathcal A}L)\\cong Q_{\\mathcal B}F(L)$. This establishes existence on all of $D(\\mathcal A)$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-right-derived-from-adapted-complexes",
+    "lem-pur-homotopy-category-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN, lemma-find-existence-computes, applied as in the proof of 07K7 (1)-(2)."
+   }
+  },
+  {
+   "text": "Represent $E$ by $L\\in\\mathcal I$ via Step 2; then $H^r(L)=0$ for $r>t$. Put $Z^r=\\ker(d_L^r)$. For every $r\\geq t$, exactness at degree $r+1$ gives $0\\to Z^r\\to L^r\\to Z^{r+1}\\to0$. By [lem-weil-pbc-derived-functor-long-exact] and the positive-degree acyclicity of $L^r$, its connecting morphisms give $R^pF(Z^{r+1})\\cong R^{p+1}F(Z^r)$ for $p\\geq1$. Since $F$ preserves kernels, the cycles of $F(L)$ at $i$ are $F(Z^i)$. The degree-zero start of the same long exact sequence, with $R^0F\\cong F$ from [lem-sp-derived-well-defined], identifies $H^i(F(L))=\\operatorname{coker}(F(L^{i-1})\\to F(Z^i))\\cong R^1F(Z^{i-1})$ whenever $i>t$. If $i>t+N$, iterate the displayed connecting isomorphisms $N$ times to obtain $R^1F(Z^{i-1})\\cong R^{N+1}F(Z^{i-N-1})=0$. Every sequence used has index $r\\geq i-N-1\\geq t$; when $N=0$ no iteration is needed and the vanishing is $R^1F=0$. Finally Step 5 computes $H^i(RF(E))$ as $H^i(F(L))$, proving the asserted bound.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K7 (4)(c); explicit dimension-shifting proof of the upper bound via cycles, with the long exact sequences of Tag 015B (lemma-higher-derived-functors)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-sf-degree-zero-complex-replacement",
+  "lem-kun-pointwise-finite-cd-exact-complex",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-weil-abstract-derived-category",
+  "lem-sf-right-derived-from-adapted-complexes",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-sp-derived-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 07K7 proof, using its 07K6 replacement and 06XN localization route; the cone check uses the existing pointwise dimension-shifting lemma, and the upper bound is proved explicitly by finite dimension shifting rather than a spectral sequence."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -88,15 +174,94 @@
    "results": "9 hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
    "date": "2026-10-16",
    "verdict": "no match: the hits are generic derived-functor Kan-extension and adjunction infrastructure; none asserts a cohomological amplitude bound"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|finite.*cohomological|rightDerived.*IsLE|IsLE.*rightDerived",
+   "results": "9 hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary object right derived functors and standard t-structure support APIs do not assert unbounded finite-cohomological-dimension amplitude."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite cohomological dimension unbounded total right derived functor upper cohomology bound",
+   "results": "8 hits: CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.projectiveDimension_ne_top_iff, CategoryTheory.injectiveDimension_ne_top_iff, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary object right derived functors and standard t-structure support APIs do not assert unbounded finite-cohomological-dimension amplitude."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "12 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.NatTrans.rightDerived",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary object right derived functors and standard t-structure support APIs do not assert unbounded finite-cohomological-dimension amplitude."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left exact functor with higher derived functors zero above N has an unbounded total right derived functor sending cohomology bounded above by t to cohomology bounded above by t plus N",
+   "results": "8 hits: DerivedCategory.IsLE, DerivedCategory.IsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isZero_of_isLE, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.TStructure.t, DerivedCategory.isLE_iff, DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary object right derived functors and standard t-structure support APIs do not assert unbounded finite-cohomological-dimension amplitude."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform vanishing of all higher right derived functors above degree N implies the derived image of a coconnective unbounded complex is coconnective in degree N",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, DerivedCategory.isZero_of_isGE, DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary object right derived functors and standard t-structure support APIs do not assert unbounded finite-cohomological-dimension amplitude."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sf-projection-finite-constant",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-rf-shriek-preservation"
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-finite-cd-derived-upper-bound",
+  "worker": "stage1",
+  "summary": "Kept the exact enough-injectives hypotheses and both existence and upper-bound conclusions. Proved degree-function conditions, supplied 07K6 replacements, reused the existing pointwise exact-complex result to verify quasi-isomorphism preservation, and used 06XN to derive globally. Proved the bound by explicit finite dimension shifting of cycles; no bounded-below spectral sequence or unbounded K-injective existence hypothesis is assumed. Two strictly smaller, statement-only tools are new.",
+  "blueprint": "Proof, third paragraph of lem-sf-projection-finite-constant: the uniform cohomological-dimension assertion Rf_*D^{≤t} ⊆ D^{≤t+N} on bounded-above complexes. Steps 1–5 justify existence and the acyclic model; Step 6 proves the precise upper bound needed there.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-derived-functor-injective-vanishing",
+    "why": "Generic vanishing on injectives supplies degree-zero embeddings; the unit has no generic derived-functor lemma."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic object-derived long exact sequences verify the degree function and give dimension shifting; no unit-specific replacement exists."
+   },
+   {
+    "node": "lem-kun-pointwise-finite-cd-exact-complex",
+    "why": "Its singleton identity specialization proves exactness after F for an unbounded acyclic complex; the statement only assumes injective resolutions, as required here."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic cone criterion tests quasi-isomorphisms before and after applying F."
+   },
+   {
+    "node": "lem-sp-derived-well-defined",
+    "why": "Generic R^0F≅F identification identifies the beginning of the long exact sequence with the cokernel calculating cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-kun-pointwise-finite-cd-exact-complex",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sp-derived-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q09-099c10085",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-099c10085 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and checked Stacks 07K6, 07K7, 06XN, cited statements, route, duplicates and edge cases. All six proof steps pass, including N=0 and the upper-bound boundary. Corrected missing creation and initial Lean-audit metadata in both new nodes; statements and dependencies unchanged. Full checks recorded in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
