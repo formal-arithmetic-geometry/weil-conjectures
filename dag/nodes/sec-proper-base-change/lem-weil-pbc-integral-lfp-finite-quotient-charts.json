@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-integral-lfp-finite-quotient-charts",
+ "kind": "statement",
+ "title": "Uniform torsion exponent from local eventual charts",
+ "statement": "Let ℓ be prime, E a finite normed Q_ℓ-extension, X a scheme with noetherian underlying space, and P locally finitely presented over its continuous integral coefficient ring [def-weil-pbc-continuous-integral-coefficients]. There is one N such that image(ℓ^N id_P) becomes finite free on a pro-etale cover and the underlying set sheaf of cokernel(ℓ^N id_P) becomes a constant finite set sheaf on a pro-etale cover. Empty schemes and zero quotients are allowed.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8 integral coefficient framework; quasi-compact covering refinement and inverse-image adjunctions"
+ },
+ "proof": [
+  {
+   "text": "Obtain local charts and a bound on each chart valid for every larger exponent.",
+   "uses": [
+    "lem-weil-pbc-integral-lfp-local-torsion-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib QuasiCompactCover.exists_hom to the cover with its quasi-compact condition forgotten. Noetherianity makes X compact and quasi-separated. The resulting finite affine weakly etale cover has quasi-compact arrows and hence is a pro-etale cover by QuasiCompactCover.of_finite and Cover.ofQuasiCompactCover.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take the finite supremum of the bounds on the retained source charts. It is at least every such bound, including when the index type is empty.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Pull back the image free bases along the refining arrows and use the proved free_pullback_comp_iff coefficient comparison.",
+   "uses": [
+    "lem-weil-pbc-condensed-constructible-serre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For finite quotient set charts, compare composite inverse image by conjugating the direct-image composition isomorphism under adjunctions. Use the existing upstream Functor.constantSheafsheafPullbackIso and the generic sheafPullbackIso to compare constant sheaves with the constructed inverse image. The pro-etale base-change functor preserves terminal objects by its finite-limit preservation instance. Compose these comparisons with the finite constant chart isomorphisms.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-lfp-local-torsion-charts",
+  "lem-weil-pbc-condensed-constructible-serre",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8 integral coefficient framework; quasi-compact covering refinement and inverse-image adjunctions",
+  "note": "D4: globalizes the local eventual charts by a finite affine refinement and a finite maximum. The inverse-image comparisons use adjunction uniqueness and the existing upstream constant-sheaf pullback comparison. All steps are proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cover of a compact scheme in the quasi compact topology has a refinement by finitely many affine schemes",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.QuasiCompactCover.of_finite, AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.Scheme.instInhabitedOpenCover, AlgebraicGeometry.QuasiCompactCover.inst, AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen, AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact, AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens, AlgebraicGeometry.quasiCompactCover_iff",
+   "verdict": "Use the cited generic APIs where they apply; no complete integral pro-etale chart or resolution theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pro etale covering of a quasi compact quasi separated scheme admits a finite affine refinement",
+   "date": "2026-10-16",
+   "results": "8 hits: AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.quasiCompactCover_iff, AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered, AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen, AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact, AlgebraicGeometry.QuasiCompactCover.of_finite",
+   "verdict": "Use the cited generic APIs where they apply; no complete integral pro-etale chart or resolution theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_hom|ofQuasiCompactCover|quasiCompact_of_compactSpace",
+   "date": "2026-10-16",
+   "results": "15 hits: Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "verdict": "Use the cited generic APIs where they apply; no complete integral pro-etale chart or resolution theorem was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLfpLocallyFreeResolution",
+  "date": "2026-10-16",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-to-rational transport in the second proof paragraph: integral constructible sheaf Hom continuity, via finite local resolutions, finite stratification, and the common lower bound reduction. D4 reduction: Uniform torsion exponent from local eventual charts.",
+   "via": [
+    "lem-weil-pbc-integral-lfp-eventual-free-image",
+    "lem-weil-pbc-integral-lfp-locally-free-resolution",
+    "lem-weil-pbc-integral-constructible-sheaf-hom",
+    "lem-weil-pbc-continuous-constructible-integral-image",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLfpFiniteQuotientCharts",
+  "file": "lean/Sheaf/Paper/IntegralLfpFiniteQuotientCharts.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_lfp_finite_quotient_charts",
+  "statement": "theorem integral_lfp_finite_quotient_charts\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (CondensedRing.integralCoeff ℓ E) X))\n    (hP : IsLocallyFinitelyPresented\n      (condensedRingObj (CondensedRing.integralCoeff ℓ E) X) P) :\n    ∃ N : ℕ,\n      (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n        Mod.IsFree ((upperStar Ab.{u + 1} (C.f s)).obj\n          (condensedRingObj (CondensedRing.integralCoeff ℓ E) X))\n          (((upperStar Ab.{u + 1} (C.f s)).mapMod _).obj\n            (image ((ℓ ^ N) • 𝟙 P)))) ∧\n      (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n        ∃ n : ℕ, Nonempty\n          ((Scheme.proEtaleSheafInverseImage (C.f s) (Type (u + 1))).obj\n            ((Mod.forget _ ⋙ sheafCompose (Scheme.ProEt.topology X)\n              (forget Ab.{u + 1})).obj (cokernel ((ℓ ^ N) • 𝟙 P))) ≅\n            (constantSheaf (Scheme.ProEt.topology (C.X s)) (Type (u + 1))).obj\n              (ULift.{u + 1} (Fin n))))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-89293",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T073459-L-1080136",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-89293",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T073459-L-1080136",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five node signatures and proof records with delivered Lean; verified unchanged existing signature, clean compilation of delivery and direct importer, and expected axiom dependencies."
+ }
+}

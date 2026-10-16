@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-module-object-free-generators",
+ "kind": "statement",
+ "title": "Canonical free generators and finite locally constant charts",
+ "statement": "Let X be a scheme, R a monoid object in abelian sheaves on X_proet, and M an internal R-module as in [def-weil-pbc-condensed-e-module-category]. Construct B(M) by first forgetting M to its sheaf of sets, then applying the sheafified free abelian group functor and the free R-module functor. The counit B(M)→M is epimorphic. If the underlying sheaf of sets of M pulls back on a pro-etale cover to constant sheaves on finite sets, B(M) is finite free on that same cover. Neither commutativity of R nor noetherianity of X is needed. All functors and maps are constructed without choosing witnesses from an unproved existence theorem.",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, integral finite-resolution globalization; Mathlib free abelian, module-object, constant-sheaf and inverse-image adjunctions"
+ },
+ "proof": [
+  {
+   "text": "Compose the sheafified free abelian group adjunction with the free internal R-module adjunction. Define B(M) by applying this explicit composite left adjoint to the underlying sheaf of sets, and define its map to M as the counit. The right adjoint is faithful, so Mathlib Adjunction.counit_epi_of_R_faithful proves the epimorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The composite free functor commutes with inverse image, by uniqueness of left adjoints: the two composite right adjoints forget and push forward on exactly the same sections.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compare constant sheaf followed by free abelian sheaf with free abelian group followed by constant sheaf, again by uniqueness of adjoints. The free abelian group on one point is the tensor unit; the free R-module on that unit is the regular module by the right unitor and monoidal coherence.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A finite set is a finite coproduct of singletons. The composite left adjoint preserves this coproduct; the target finite coproduct is the biproduct of regular modules. Pull back the supplied finite constant charts and compose these actual isomorphisms, yielding finite freeness. This includes the zero-element set and empty covers.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, integral finite-resolution globalization; Mathlib free abelian, module-object, constant-sheaf and inverse-image adjunctions",
+  "note": "D4: constructs the composite sheafified-free-abelian and free-module adjunction and its actual counit. Faithfulness proves the counit epimorphic; uniqueness of left adjoints and finite coproduct preservation prove the finite constant generator comparison. All definitions and proofs are complete."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The free module sheaf on the underlying finite locally constant sheaf of sets is locally finite free and its counit is an epimorphism",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.ιFree, SheafOfModules.free, SheafOfModules.GeneratingSections.epi, SheafOfModules.freeFunctor_obj, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.freeCofan, SheafOfModules.unit, SheafOfModules.freeFunctor",
+   "verdict": "Use the cited generic APIs where they apply; no complete integral pro-etale chart or resolution theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left adjoint from sheaves of sets to module objects preserves finite coproducts and commutes with inverse image",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.mapFree, LightCondensed.freeForgetAdjunction, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, Condensed.freeForgetAdjunction",
+   "verdict": "Use the cited generic APIs where they apply; no complete integral pro-etale chart or resolution theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "counit_epi_of_R_faithful|PreservesCoproduct.iso|leftAdjointUniq",
+   "date": "2026-10-16",
+   "results": "21 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Galois/EssSurj.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean",
+   "verdict": "Use the cited generic APIs where they apply; no complete integral pro-etale chart or resolution theorem was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLfpLocallyFreeResolution",
+  "date": "2026-10-16",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-to-rational transport in the second proof paragraph: integral constructible sheaf Hom continuity, via finite local resolutions, finite stratification, and the common lower bound reduction. D4 reduction: Canonical free generators and finite locally constant charts.",
+   "via": [
+    "lem-weil-pbc-integral-lfp-locally-free-resolution",
+    "lem-weil-pbc-integral-constructible-sheaf-hom",
+    "lem-weil-pbc-continuous-constructible-integral-image",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleObjectFreeGenerators",
+  "file": "lean/Sheaf/Paper/ModuleObjectFreeGenerators.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.moduleObjectFreeGenerators_locallyFree",
+  "statement": "theorem moduleObjectFreeGenerators_locallyFree\n    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)\n    (hM : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : C.I₀,\n      ∃ n : ℕ, Nonempty\n        ((Scheme.proEtaleSheafInverseImage (C.f i) (Type (u + 1))).obj\n          ((Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X)\n            (forget Ab.{u + 1})).obj M) ≅\n          (constantSheaf (Scheme.ProEt.topology (C.X i)) (Type (u + 1))).obj\n            (ULift.{u + 1} (Fin n)))) :\n    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : C.I₀,\n      Mod.IsFree ((upperStar Ab.{u + 1} (C.f i)).obj R)\n        (((upperStar Ab.{u + 1} (C.f i)).mapMod R).obj\n          (moduleObjectFreeGenerators R M))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.moduleObjectGeneratorAdjunction",
+   "AlgebraicGeometry.ProEtale.moduleObjectFreeGenerators",
+   "AlgebraicGeometry.ProEtale.moduleObjectFreeGeneratorsπ",
+   "AlgebraicGeometry.ProEtale.moduleObjectFreeGeneratorsπ_epi",
+   "AlgebraicGeometry.ProEtale.moduleObjectFreeGenerators_locallyFree"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-89293",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T073459-L-1080136",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-89293",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T073459-L-1080136",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five node signatures and proof records with delivered Lean; verified unchanged existing signature, clean compilation of delivery and direct importer, and expected axiom dependencies."
+ }
+}

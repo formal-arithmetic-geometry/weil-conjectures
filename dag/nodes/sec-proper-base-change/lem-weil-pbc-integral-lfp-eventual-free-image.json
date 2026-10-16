@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-integral-lfp-eventual-free-image",
+ "kind": "statement",
+ "title": "Eventual free image and canonical finite residue generators",
+ "statement": "Let ℓ be prime, E a finite normed Q_ℓ-extension, X topologically noetherian, R_X the integral coefficient ring [def-weil-pbc-continuous-integral-coefficients], and P a locally finitely presented internal R_X-module. There exists N such that image(ℓ^N id_P) is pro-etale locally finite free and B(cokernel(ℓ^N id_P)) is pro-etale locally finite free, where B is the actual canonical free-generator construction [lem-weil-pbc-module-object-free-generators]. This does not assert existence of a resolution of P.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-module-object-free-generators"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3), integral finite-resolution step expanded by canonical generators"
+ },
+ "proof": [
+  {
+   "text": "Choose N and the locally finite free image and finite constant quotient charts of the uniform quotient-chart theorem.",
+   "uses": [
+    "lem-weil-pbc-integral-lfp-finite-quotient-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved finite-constant-generator comparison to the quotient. It supplies locally finite free canonical generators, with their existing counit epimorphism. Retain the image cover unchanged.",
+   "uses": [
+    "lem-weil-pbc-module-object-free-generators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-lfp-finite-quotient-charts",
+  "lem-weil-pbc-module-object-free-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3), integral finite-resolution step expanded by canonical generators",
+  "note": "D4: categorical construction, proved rationalization and principal-quotient arithmetic helpers, and the explicit local linear algebra reduction. The source supplies the integral coefficient framework; the expanded reduction is written by the agent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The free module sheaf on the underlying finite locally constant sheaf of sets is locally finite free and its counit is an epimorphism",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.ιFree, SheafOfModules.free, SheafOfModules.GeneratingSections.epi, SheafOfModules.freeFunctor_obj, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.freeCofan, SheafOfModules.unit, SheafOfModules.freeFunctor",
+   "verdict": "Use the cited generic APIs where they apply; no complete integral pro-etale chart or resolution theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finitely presented sheaf over the continuous integers of a finite p adic extension on a noetherian scheme, some power of p has locally free image and finite locally constant cokernel",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+   "verdict": "Use the cited generic APIs where they apply; no complete integral pro-etale chart or resolution theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*(bound|annihilat)|finite.*locally.*constant.*cokernel",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Use the cited generic APIs where they apply; no complete integral pro-etale chart or resolution theorem was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLfpLocallyFreeResolution",
+  "date": "2026-10-16",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-to-rational transport in the second proof paragraph: integral constructible sheaf Hom continuity, via finite local resolutions, finite stratification, and the common lower bound reduction. D4 reduction: Eventual free image and canonical finite residue generators.",
+   "via": [
+    "lem-weil-pbc-integral-lfp-locally-free-resolution",
+    "lem-weil-pbc-integral-constructible-sheaf-hom",
+    "lem-weil-pbc-continuous-constructible-integral-image",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLfpEventualFreeImage",
+  "file": "lean/Sheaf/Paper/IntegralLfpEventualFreeImage.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_lfp_eventual_free_image",
+  "statement": "theorem integral_lfp_eventual_free_image\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (CondensedRing.integralCoeff ℓ E) X))\n    (hP : IsLocallyFinitelyPresented\n      (condensedRingObj (CondensedRing.integralCoeff ℓ E) X) P) :\n    ∃ N : ℕ,\n      (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n        Mod.IsFree ((upperStar Ab.{u + 1} (C.f s)).obj\n          (condensedRingObj (CondensedRing.integralCoeff ℓ E) X))\n          (((upperStar Ab.{u + 1} (C.f s)).mapMod _).obj\n            (image ((ℓ ^ N) • 𝟙 P)))) ∧\n      (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n        Mod.IsFree ((upperStar Ab.{u + 1} (C.f s)).obj\n          (condensedRingObj (CondensedRing.integralCoeff ℓ E) X))\n          (((upperStar Ab.{u + 1} (C.f s)).mapMod _).obj\n            (moduleObjectFreeGenerators _ (cokernel ((ℓ ^ N) • 𝟙 P)))))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-89293",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T073459-L-1080136",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-89293",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T073459-L-1080136",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five node signatures and proof records with delivered Lean; verified unchanged existing signature, clean compilation of delivery and direct importer, and expected axiom dependencies."
+ }
+}

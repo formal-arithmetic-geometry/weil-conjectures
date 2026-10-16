@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-integral-lfp-local-torsion-charts",
+ "kind": "statement",
+ "title": "Local eventual image freeness and finite quotient charts",
+ "statement": "Let ℓ be prime, E a finite normed Q_ℓ-extension, X a scheme with noetherian underlying space, and P a locally finitely presented module over R_X, the continuous integral coefficient ring [def-weil-pbc-continuous-integral-coefficients]. There exists a pro-etale cover C of X such that on each member C_s there is a bound N_s with the following property for every n≥N_s: the pullback of image(ℓ^n id_P) is finite free over the pulled-back integral coefficient ring, and the pullback of the underlying set sheaf of cokernel(ℓ^n id_P) is isomorphic to the constant sheaf on some finite set. The bound may vary with s; this theorem makes no global choice of exponent and constructs no epimorphism or resolution.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3), local finite DVR resolution; continuous Smith elimination and finite discrete quotients expanded by the agent"
+ },
+ "proof": [
+  {
+   "text": "Choose local finite presentations and extend scalars to E. Finite presentation is preserved by extension. Apply field local triviality to the rational cokernel and refine the presentation and rational free covers simultaneously.",
+   "uses": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize the entries as continuous O_E-valued functions. Geometric-field evaluation computes pointwise rational cokernel dimensions. On each rational free chart this fixes the rank; zero rank makes the matrix zero. Otherwise choose a nonzero maximal-norm entry and shrink so its norm is constant and dominates every entry.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "lem-weil-pbc-integral-matrix-analytic-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Divide the selected row and column by this dominating entry and perform elementary invertible operations. The proved integralColumnDivides supplies the column quotient from its componentwise norm bounds, and integralPivotCokernelIso supplies the actual categorical block diagonalization. Iterate on the smaller source rank; rational cokernel freeness is preserved by the Schur-complement comparison. Retain the analytic entry bounds through the explicit finite-biproduct basis split; the abstract pivot-cover interface alone does not retain column divisibility. This diagonalizes the presentation locally, with all nonzero diagonal functions of constant nonzero norm.",
+   "uses": [
+    "lem-weil-pbc-finite-biproduct-pivot",
+    "lem-weil-pbc-integral-matrix-entry-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved integralCyclicLocalChart handles every nonzero rank-one pivot: shrink to a neighborhood of constant positive norm, compare the pivot with its nonzero value at one point using a continuous unit in both directions, identify its categorical cokernel with the finite discrete principal quotient, and choose an eventual annihilating power by norm convergence of powers of ℓ. Thus this step needs no DVR factorization theorem. Combine the cyclic summands and take the maximum of their bounds.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The proved scalarImageBiprodIso and scalarCokernelBiprodIso identify, for n≥N_s, the image with the free summand and the quotient with its scalar quotient plus the torsion summand. The proved integralFiniteFreeQuotientSetConstant identifies the finite-free scalar quotient with a finite constant set. The principal quotient coefficient ring is finite discrete because its nonzero principal ideal is open and O_E is compact; division and discrete lifting identify its categorical cokernel. The proved finiteSetBiproduct and integralCyclicBiproductChart combine finite constant set charts and torsion bounds; integralDiagonalLocalChart proves both scalar assertions for the full free-plus-cyclic diagonal form. What remains is presentation diagonalization and transport through coefficient and underlying-set pullback comparisons. Zero matrices and zero ranks use the free and zero-module cases; empty members impose no conditions.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "lem-weil-pbc-integral-matrix-analytic-cover",
+  "lem-weil-pbc-finite-biproduct-pivot",
+  "lem-weil-pbc-integral-matrix-entry-properties",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3), local finite DVR resolution; continuous Smith elimination and finite discrete quotients expanded by the agent",
+  "note": "D4: categorical construction, proved rationalization and principal-quotient arithmetic helpers, and the explicit local linear algebra reduction. The source supplies the integral coefficient framework; the expanded reduction is written by the agent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a locally finitely presented integral p adic local system, a sufficiently high power of p has locally finite free image and finite locally constant cokernel",
+   "date": "2026-10-16",
+   "results": "8 hits: IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, instFinitePresentationAway, instFinitePresentationLocalizationLocalizedModule, PadicInt, SheafOfModules.isFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, Module.free_of_flat_of_isLocalRing",
+   "verdict": "Use the cited generic APIs where they apply; no complete integral pro-etale chart or resolution theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finitely presented sheaf over the continuous integers of a finite p adic extension on a noetherian scheme, some power of p has locally free image and finite locally constant cokernel",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+   "verdict": "Use the cited generic APIs where they apply; no complete integral pro-etale chart or resolution theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*(bound|annihilat)|finite.*locally.*constant.*cokernel",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Use the cited generic APIs where they apply; no complete integral pro-etale chart or resolution theorem was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLfpLocallyFreeResolution",
+  "date": "2026-10-16",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-to-rational transport in the second proof paragraph: integral constructible sheaf Hom continuity, via finite local resolutions, finite stratification, and the common lower bound reduction. D4 reduction: Local eventual image freeness and finite quotient charts.",
+   "via": [
+    "lem-weil-pbc-integral-lfp-finite-quotient-charts",
+    "lem-weil-pbc-integral-lfp-eventual-free-image",
+    "lem-weil-pbc-integral-lfp-locally-free-resolution",
+    "lem-weil-pbc-integral-constructible-sheaf-hom",
+    "lem-weil-pbc-continuous-constructible-integral-image",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLfpLocalTorsionCharts",
+  "file": "lean/Sheaf/Paper/IntegralLfpLocalTorsionCharts.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_lfp_local_torsion_charts",
+  "statement": "theorem integral_lfp_local_torsion_charts\n    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (CondensedRing.integralCoeff ℓ E) X))\n    (hP : IsLocallyFinitelyPresented\n      (condensedRingObj (CondensedRing.integralCoeff ℓ E) X) P) :\n    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      ∃ N : ℕ, ∀ n : ℕ, N ≤ n →\n        Mod.IsFree ((upperStar Ab.{u + 1} (C.f s)).obj\n          (condensedRingObj (CondensedRing.integralCoeff ℓ E) X))\n          (((upperStar Ab.{u + 1} (C.f s)).mapMod _).obj\n            (image ((ℓ ^ n) • 𝟙 P))) ∧\n        ∃ k : ℕ, Nonempty\n          ((Scheme.proEtaleSheafInverseImage (C.f s) (Type (u + 1))).obj\n            ((Mod.forget _ ⋙ sheafCompose (Scheme.ProEt.topology X)\n              (forget Ab.{u + 1})).obj (cokernel ((ℓ ^ n) • 𝟙 P))) ≅\n            (constantSheaf (Scheme.ProEt.topology (C.X s)) (Type (u + 1))).obj\n              (ULift.{u + 1} (Fin k)))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-89293",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T073459-L-1080136",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-89293",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T073459-L-1080136",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five node signatures and proof records with delivered Lean; verified unchanged existing signature, clean compilation of delivery and direct importer, and expected axiom dependencies."
+ }
+}
