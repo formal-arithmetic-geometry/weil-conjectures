@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-modobj-extension-along-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Extension along an isomorphism is restriction along the inverse",
@@ -13,30 +13,166 @@
   "place": "node def-sfb-modobj-extension-along-iso, order 1594"
  },
  "stmt_deps": [
-  "def-sfb-modobj-restriction-equivalence"
+  "def-sfb-modobj-restriction-equivalence",
+  "def-sfb-modobj-extension"
  ],
  "proof": [
   {
-   "text": "$\\operatorname{Res}_{\\varphi^{-1}}$ is a quasi-inverse of $\\operatorname{Res}_\\varphi$\n([def-sfb-modobj-restriction-equivalence]), so it is left adjoint to\n$\\operatorname{Res}_\\varphi$. So is $\\operatorname{Ext}_\\varphi$, by\n[def-sfb-modobj-extend-restrict-adjunction]. Left adjoints are unique up to a unique\nnatural isomorphism compatible with the adjunctions.",
+   "text": "Put $R=\\operatorname{Res}_\\varphi$ and $I=\\operatorname{Res}_{\\varphi^{-1}}$. By [def-sfb-modobj-restriction-equivalence], $R:\\Mod_{\\mathcal S}(\\mathcal C)\\to\\Mod_{\\mathcal R}(\\mathcal C)$ is an equivalence with quasi-inverse $I$. Apply [lem-weil-pbc-quasi-inverse-adjoint] with $F=R$ and $G=I$: its left-adjoint clause supplies an adjunction $b:I\\dashv R$. This uses the equivalence isomorphisms, rather than assuming arbitrary chosen quasi-inverse isomorphisms already satisfy the triangle identities.",
+   "uses": [
+    "def-sfb-modobj-restriction-equivalence",
+    "lem-weil-pbc-quasi-inverse-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension-along-iso.proof.md",
+    "place": "Proof, first sentence: the inverse restriction is a quasi-inverse and hence a left adjoint; categorical fact as in Stacks Tags 001J and 0037, realized by the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "The hypotheses inherited from [def-sfb-modobj-restriction-equivalence] include all those of extension of scalars: $\\mathcal C$ is braided, has coequalizers, both tensor functors preserve colimits, and $\\mathcal R$ is commutative. Thus [def-sfb-modobj-extend-restrict-adjunction] applies to the same morphism $\\varphi$ and supplies the adjunction $a:\\operatorname{Ext}_\\varphi\\dashv R$. Its statement identifies the left adjoint with the tensor-coequalizer extension functor used in the conclusion.",
    "uses": [
     "def-sfb-modobj-restriction-equivalence",
     "def-sfb-modobj-extend-restrict-adjunction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension-along-iso.proof.md",
+    "place": "Proof, second sentence: extension of scalars is left adjoint to restriction"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-conjugate-iso-unit-equation] to the adjunctions $a$ and $b$ from steps 2 and 1, with $L_1=\\operatorname{Ext}_\\varphi$, $L_2=I$, $R_1=R_2=R$ and $\\delta=\\mathrm{id}_R$. It gives a natural isomorphism $c:\\operatorname{Ext}_\\varphi\\xrightarrow{\\sim}I$, characterized by $R(c_M)\\circ\\eta_{a,M}=\\eta_{b,M}$. In particular, substituting the definition of $I$ gives the required natural isomorphism of functors $\\Mod_{\\mathcal R}(\\mathcal C)\\to\\Mod_{\\mathcal S}(\\mathcal C)$.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension-along-iso.proof.md",
+    "place": "Proof, final sentence: uniqueness of left adjoints compatible with their adjunctions; Stacks Tag 0B65, lemma-transformation-between-functors-and-adjoints, via the cited Mathlib leaf"
+   }
   }
  ],
  "proof_deps": [
   "def-sfb-modobj-restriction-equivalence",
-  "def-sfb-modobj-extend-restrict-adjunction"
+  "lem-weil-pbc-quasi-inverse-adjoint",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension-along-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension-along-iso.proof.md",
+  "place": "entire proof paragraph, with the two categorical facts supplied by existing Mathlib leaves"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extendScalarsIsoComapInv|extendScalars|comapEquivalenceOfIsIso",
+   "results": "0 hits; none",
+   "date": "2026-10-16",
+   "verdict": "no match for the item in Mathlib CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars along an isomorphism of monoid objects is restriction along its inverse",
+   "results": "8 hits; CategoryTheory.Mod_.scalarRestriction, RestrictScalars, ModuleCat.RestrictScalars.obj', ModuleCat.restrictScalars, RestrictScalars.opModule, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, CategoryTheory.Mod_.comap, CategoryTheory.Mod_.comap_obj_mod",
+   "date": "2026-10-16",
+   "verdict": "no match: scalar restriction exists, but the hits do not state the general module-object extension comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits; CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-16",
+   "verdict": "match for the generic categorical fact already covered by lem-weil-pbc-conjugate-iso-unit-equation; not a standalone Mathlib match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars for module objects along an isomorphism of monoid objects is naturally isomorphic to restriction of scalars along the inverse",
+   "results": "8 hits; ModuleCat.homEquiv_extendScalarsId, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.restrictScalarsCongr_inv_app, CategoryTheory.Mod_.scalarRestriction_hom, ModuleCat.ExtendRestrictScalarsAdj.unit, CategoryTheory.Mod_.scalarRestriction, ModuleCat.restrictScalarsId'App_inv_naturality_assoc, CategoryTheory.Mod_.comap_obj_mod",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ModuleCat results and scalar restriction do not identify the general tensor-coequalizer extension functor"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|toAdjunction",
+   "results": "14 hits; Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean",
+   "date": "2026-10-16",
+   "verdict": "match for the two reused categorical Mathlib leaves; no identification of the module-object extension construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two functors left adjoint to the same functor are naturally isomorphic",
+   "results": "8 hits; CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.homEquiv_leftAdjointUniq_hom_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit, CategoryTheory.Adjunction.rightAdjointUniq_inv_app",
+   "date": "2026-10-16",
+   "verdict": "match for the generic categorical fact already covered by lem-weil-pbc-conjugate-iso-unit-equation; not a standalone Mathlib match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For module objects in a braided monoidal category, tensor extension along an invertible monoid map equals inverse scalar restriction",
+   "results": "8 hits; CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.scalarRestriction_smul, CategoryTheory.Mod_.comap_obj_mod, CategoryTheory.Mod_.scalarRestriction_hom, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.extendScalarsId_inv_app_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: results concern scalar restriction and ordinary ring modules, not the general module-object extension functor"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarRestriction|def comap|extendScalars|extension of scalars",
+   "results": "5 hits; Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: Mathlib/CategoryTheory/Monoidal/Mod.lean:363, :387, :407 define restriction and its functor, without the extension comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|comap.*[Ii]so|scalar.*[Ee]xtension",
+   "results": "2 hits; Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Pi/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "No match for the item: Sites/Point/Comap.lean:69 concerns a site-point fiber, and Pi/Basic.lean:111 concerns evaluation on a product category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.toAdjunction",
+   "results": "12 hits; CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.refl_toAdjunction, CategoryTheory.Equivalence.toAdjunction_counit, CategoryTheory.Equivalence.toAdjunction_unit, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.WithTerminal.isLimitEquiv_apply_lift_left, CategoryTheory.WithInitial.isColimitEquiv_apply_desc_right, CategoryTheory.WithInitial.isColimitEquiv_symm_apply_desc",
+   "date": "2026-10-16",
+   "verdict": "Confirms the existing quasi-inverse-adjoint Mathlib leaf; the symmetric equivalence supplies the direction used in step 1. No direct match for the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint to an equivalence is naturally isomorphic to its inverse functor",
+   "results": "8 hits; CategoryTheory.Functor.adjunction, CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.isLeftAdjoint_functor, CategoryTheory.Equivalence.isLeftAdjoint_inverse, CategoryTheory.Functor.isLeftAdjoint_of_isEquivalence, CategoryTheory.Adjunction.toEquivalence_inverse, CategoryTheory.Adjunction.isEquivalence_left_of_isEquivalence_right, CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1",
+   "date": "2026-10-16",
+   "verdict": "Generic equivalence-adjunction results only; Equivalence.toAdjunction (Basic.lean:719) is already represented by lem-weil-pbc-quasi-inverse-adjoint. No module-object extension comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars for module objects along an isomorphism of monoid objects is naturally isomorphic to restriction of scalars along the inverse",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.unit_app; CategoryTheory.Mod_.scalarRestriction_hom; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; CategoryTheory.Mod_.scalarRestriction_smul; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.ExtendRestrictScalarsAdj.homEquiv.",
+   "date": "2026-10-16",
+   "verdict": "no match: restriction alone and ordinary commutative-ring modules do not identify the general module-object tensor-coequalizer extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits in Mathlib.CategoryTheory.Adjunction.Unique: CategoryTheory.Adjunction.leftAdjointUniq, leftAdjointUniq_refl, leftAdjointUniq_inv_app, leftAdjointUniq_hom_counit, unit_leftAdjointUniq_hom, leftAdjointUniq_trans, leftAdjointUniq_trans_app, leftAdjointUniq_hom_app_counit, unit_leftAdjointUniq_hom_app, leftAdjointUniq_hom_app_counit_assoc, leftAdjointUniq_trans_assoc, leftAdjointUniq_trans_app_assoc (all under CategoryTheory.Adjunction).",
+   "date": "2026-10-16",
+   "verdict": "match for the common-right-adjoint clause of the existing leaf lem-weil-pbc-conjugate-iso-unit-equation; not a direct match for the module-object item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For module objects in a braided monoidal category, tensor extension along an invertible monoid map equals inverse scalar restriction",
+   "results": "8 hits: CategoryTheory.Mod_.scalarRestriction; CategoryTheory.Mod_.scalarRestriction_smul; CategoryTheory.Mod_.comap_obj_mod; CategoryTheory.Mod_.scalarRestriction_hom; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; ModuleCat.extendScalarsId_inv_app_apply.",
+   "date": "2026-10-16",
+   "verdict": "no match: scalar restriction and ordinary commutative-ring module results do not supply this general extension comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarRestriction|def comap|extendScalars|extension of scalars",
+   "results": "5 hits in Mathlib/CategoryTheory/Monoidal/Mod.lean:363 scalarRestriction, :387 scalarRestriction_hom, :389 and :390 scalarRestriction instances, :392 scalarRestriction instance. Searched CategoryTheory/Monoidal; read Mod.lean:350-430, including comap at :407.",
+   "date": "2026-10-16",
+   "verdict": "no match for extension along an isomorphism; the source constructs scalar restriction only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -54,5 +190,20 @@
   "CategoryTheory.Mod.extendScalarsIsoComapInv"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-extension-along-iso",
+  "worker": "stage1",
+  "summary": "Kept the statement and all hypotheses, added the extension-functor definition to statement dependencies, and expanded the imported adjoint-uniqueness argument into three sourced steps. Reused the existing quasi-inverse-adjoint and conjugate-iso-unit-equation Mathlib leaves, introducing no nodes. Checked project Lean names and concepts, the current blueprint statement and proof, the cited node statements, local Stacks categorical sources, and the pinned Mathlib adjunction declarations. The imported definition classification and missing chapter/unit metadata are maintainer-owned and are reported, not modified.",
+  "blueprint": "Current main-20261015 node proof: first sentence realized by step 1 (quasi-inverse gives a left adjoint), second sentence by step 2 (extension-restriction adjunction), final sentence by step 3 (unique unit-compatible comparison). The unit sk-def-sfb-change-of-scalars clause 5 is followed exactly."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q37-c810b6014",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-c810b6014 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, current blueprint route, Stacks locations and Mathlib sources. All three steps preserve hypotheses and functor directions; the unit-compatible comparison is valid. Finite ring and Set-action checks pass. No new nodes, duplicates, cycles or repairs. Detailed review written to review.md."
+ }
 }

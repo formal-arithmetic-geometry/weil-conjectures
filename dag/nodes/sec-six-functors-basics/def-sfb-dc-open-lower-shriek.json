@@ -3,25 +3,86 @@
  "blueprint": {
   "is": "def-sfb-dc-open-lower-shriek",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "$j_!$ on $D_{\\mathrm{cons}}$",
- "statement": "Let $\\Lambda$ be a commutative condensed ring and let $j\\colon U\\to X$ be an open immersion of\nthe setting. The extension by zero\n\n$$\nj_!\\colon D_{\\mathrm{cons}}(U,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda)\n$$\n\nis the restriction of the levelwise functor $D(j_!)$ of the exact extension by zero of\n[sk-def-sfb-module-lower-shriek]. It preserves bounded constructible complexes by\n[lem-sfb-dc-open-lower-shriek-preserves], and it commutes with the inclusions.",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring ([sk-def-sfb-condensed-ring]) and let $j\\colon U\\to X$ be an open immersion of the setting of [sk-def-sfb-dc-setting]. Write $\\iota_T\\colon D_{\\mathrm{cons}}(T,\\Lambda)\\hookrightarrow D(\\Mod_{\\Lambda_T})$, for $T=U,X$, for the full-subcategory inclusions of [sk-def-sfb-bounded-constructible]. Let $J=D(j_!)\\colon D(\\Mod_{\\Lambda_U})\\to D(\\Mod_{\\Lambda_X})$ be the levelwise functor of the exact extension by zero of [sk-def-sfb-module-lower-shriek], with $D(-)$ as in [sk-def-sfb-derived-categories].\n\nDefine the extension by zero\n$$\nj_!\\colon D_{\\mathrm{cons}}(U,\\Lambda)\\to D_{\\mathrm{cons}}(X,\\Lambda)\n$$\nas the restriction of $J$: its value at an object $K$ is the ambient object $J(\\iota_U K)$ equipped with the bounded-constructibility property supplied by [lem-sfb-dc-open-lower-shriek-preserves], and its value at a morphism $a\\colon K\\to L$ is $J(\\iota_U a)$, regarded as a morphism in the full subcategory. The compatibility with the inclusions is the canonical natural isomorphism\n$$\n\\iota_X\\circ j_!\\cong J\\circ\\iota_U\n$$\nwhose component at $K$ is the identity of $J(\\iota_U K)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/def-sfb-dc-open-lower-shriek.md",
   "place": "node def-sfb-dc-open-lower-shriek, order 1785"
  },
  "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-derived-categories",
   "sk-def-sfb-module-lower-shriek",
   "lem-sfb-dc-open-lower-shriek-preserves"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|openImmersionLowerShriek|ObjectProperty.lift",
+   "results": "Generic ObjectProperty.lift uses only, including Mathlib/Algebra/Homology/CochainComplexPlus.lean:143; no result states this condensed-coefficient functor.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrict an exact extension by zero functor to bounded constructible derived categories of sheaves of modules",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_zero, ShortComplex.Exact.map and Functor.leftDerivedZeroIsoSelf; these do not construct the specified restricted extension by zero.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.lift",
+   "results": "CategoryTheory.ObjectProperty.lift and liftCompιIso, Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:159,165, read in source. They require preservation as an input; they do not prove preservation or define the specific ambient functor.",
+   "date": "2026-10-16",
+   "verdict": "generic construction only; no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion restricted to the bounded constructible derived category of modules over a commutative condensed ring",
+   "results": "Earlier logged run found AlgebraicGeometry.Scheme.Modules.restrictFunctor (Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:348, source read), which restricts structure-sheaf modules in the opposite direction. Repeated run found Condensed.profiniteSolid, Condensed.free, LightCondensed.free, CondensedMod.LocallyConstant.functor and related functors over an ordinary ring; none is the specified pro-etale derived module-object extension by zero.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|liftCompιIso|boundedConstructible|openImmersionLowerShriek",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:159 defines lift by obj X := ⟨F.obj X, hF X⟩ and map f := homMk (F.map f); line 165 gives liftCompιIso by Iso.refl. Also incidental uses in ObjectProperty/Shift.lean. Read lines 150–172.",
+   "date": "2026-10-16",
+   "verdict": "generic construction only; no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving an object property restricts to the corresponding full subcategory and commutes with the inclusion",
+   "results": "Repeated run found CategoryTheory.ObjectProperty.lift, liftCompιIso, ι_obj_lift_obj, ι_obj_lift_map, liftCompιOfLEIso, instFullFullSubcategoryLift and ιOfLE object/map formulas. Source FullSubcategory.lean:159-172 read; this generic restriction requires the problem-specific ambient functor and preservation input.",
+   "date": "2026-10-16",
+   "verdict": "generic construction only; no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|openImmersionLowerShriek",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Factor a functor through the full subcategory on a predicate when every image object satisfies the predicate",
+   "results": "8 hits: CategoryTheory.ObjectProperty.lift and its object/map formulas, full/faithful instances, and unrelated Functor.Liftp. Read Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:150–172: lift at 159 wraps F.obj with hF and maps by F.map; liftCompιIso at 165 is Iso.refl. These implement the generic construction but require the specific ambient extension by zero and preservation theorem as inputs.",
+   "date": "2026-10-16",
+   "verdict": "generic construction only; no match for the whole item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -32,5 +93,20 @@
   "lem-sfb-dc-open-lower-shriek-preserves",
   "sk-def-sfb-module-lower-shriek"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-dc-open-lower-shriek",
+  "worker": "stage1",
+  "summary": "Read the main-20261015 definition and restricted-functors unit, checked the upstream master construction and its sorried preservation input, and found no matching slopmaster2 declaration. Made the existing setting, full-subcategory and termwise-derived-functor dependencies explicit. Described the object and morphism data and identity compatibility without adding a theorem or duplicating the existing preservation lemma. No change of hypotheses or mathematical meaning; no new nodes.",
+  "blueprint": "Realizes the extension-by-zero clause and the restriction/commutation paragraph of sk-def-sfb-dc-restricted-functors, and the whole definition def-sfb-dc-open-lower-shriek. Its proof list stays empty because this is a definition; well-definedness is the existing lemma lem-sfb-dc-open-lower-shriek-preserves."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q52-070026e20",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q52-070026e20 (reviewer sub-agent of L); spot-checked: Read the item, all six dependency statements, current blueprint sources and route in full. Verified object and morphism restriction, preservation input, identity compatibility, hypotheses and edge cases. No new nodes, duplicate definition, cycle through the item, or repair needed. No target coefficient-category comparison is certified. Detailed checks are in review.md."
+ }
 }

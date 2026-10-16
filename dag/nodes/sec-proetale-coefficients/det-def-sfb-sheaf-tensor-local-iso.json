@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-def-sfb-sheaf-tensor-local-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Objectwise tensoring preserves sheafification-isomorphisms",
@@ -13,45 +13,96 @@
   "place": "node det-def-sfb-sheaf-tensor-local-iso, order None"
  },
  "stmt_deps": [
-  "det-def-sfb-sheaf-tensor-presheaf"
+  "det-def-sfb-sheaf-tensor-presheaf",
+  "def-weil-pbc-sheafification"
  ],
  "proof": [
   {
-   "text": "The equivalence of the two descriptions of $W$: $\\Hom(g,H)\\cong\\Hom(a(g),H)$ for sheaves $H$, so\nby Yoneda in $\\Sh(C,\\mathcal A)$, $a(g)$ is invertible if and only if $\\Hom(g,H)$ is bijective for\nall sheaves $H$.",
-   "uses": [],
-   "elementary": null
+   "text": "Write $g:P\\to Q$ and $u=a(g):aP\\to aQ$. For each sheaf $H$, the sheafification adjunction identifies the precomposition map $g^*:\\Hom(Q,H)\\to\\Hom(P,H)$ with $u^*:\\Hom(aQ,H)\\to\\Hom(aP,H)$. If $u$ is invertible then all these maps are bijective. Conversely, assume they are bijective. Taking $H=aP$, surjectivity supplies $v:aQ\\to aP$ with $v\\circ u=1_{aP}$. Taking $H=aQ$, injectivity and $(u\\circ v)\\circ u=u=1_{aQ}\\circ u$ give $u\\circ v=1_{aQ}$. Thus $u$ is invertible, proving the characterization of $W$.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-local-iso.proof.md",
+    "place": "The equivalence of the two descriptions of W"
+   }
   },
   {
-   "text": "1. Let $H$ be a sheaf. By the adjunction of [det-def-sfb-sheaf-tensor-presheaf],\n   $\\Hom(F\\otimes_pg,H)\\cong\\Hom(g,[F,H])$ naturally. The presheaf $[F,H]$ is a sheaf by\n   [det-def-sfb-sheaf-tensor-hom-sheaf], so this map is bijective, and $F\\otimes_pg\\in W$. The\n   objectwise symmetry identifies $g\\otimes_pF$ with $F\\otimes_pg$, giving the second claim.",
+   "text": "Let $g:P\\to Q$ lie in $W$, and let $H$ be a sheaf. The natural tensor--internal-hom adjunction of [det-def-sfb-sheaf-tensor-presheaf] identifies precomposition by $F\\otimes_p g$ on maps to $H$ with precomposition by $g$ on maps to $[F,H]$. By [det-def-sfb-sheaf-tensor-hom-sheaf], $[F,H]$ is a sheaf, so the latter map is bijective. Step 1 gives $F\\otimes_p g\\in W$. Write $c_{P,F}:P\\otimes_pF\\to F\\otimes_pP$ for the objectwise symmetry from [det-def-sfb-sheaf-tensor-presheaf]. Its naturality gives $g\\otimes_pF=c_{Q,F}^{-1}\\circ(F\\otimes_pg)\\circ c_{P,F}$. Applying $a$ expresses $a(g\\otimes_pF)$ as a composite of isomorphisms, proving $g\\otimes_pF\\in W$.",
    "uses": [
     "det-def-sfb-sheaf-tensor-presheaf",
     "det-def-sfb-sheaf-tensor-hom-sheaf"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-local-iso.proof.md",
+    "place": "Proof of clause 1"
+   }
   },
   {
-   "text": "2. Write $g\\otimes_ph=(F'\\otimes_ph)\\circ(g\\otimes_pG)$. Both factors lie in $W$ by 1, and $W$\n   is closed under composition.",
+   "text": "For $g:F\\to F\\prime$ and $h:G\\to G\\prime$ in $W$, functoriality of the objectwise tensor gives $g\\otimes_ph=(F\\prime\\otimes_ph)\\circ(g\\otimes_pG)$. Both factors lie in $W$ by clause 1. Since $a$ is a functor, it sends this composite to the composite of the two isomorphisms $a$ supplies, so $W$ is closed under composition and $g\\otimes_ph\\in W$.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-local-iso.proof.md",
+    "place": "Proof of clause 2"
+   }
   },
   {
-   "text": "3. The map is $\\eta_F\\otimes_p\\eta_G$, with $\\eta$ the unit of $a$, and $a(\\eta_F)$, $a(\\eta_G)$\n   are isomorphisms; so 2 applies.",
-   "uses": [],
-   "elementary": null
+   "text": "For each presheaf $F$ and each sheaf $H$, the universal property in [def-weil-pbc-sheafification] states precisely that precomposition with the unit $\\eta_F:F\\to aF$ gives a bijection $\\Hom(aF,H)\\to\\Hom(F,H)$. Step 1 therefore gives $\\eta_F\\in W$, and the same argument with $G$ gives $\\eta_G\\in W$. Clause 2 applied to these units shows that $\\eta_F\\otimes_p\\eta_G:F\\otimes_pG\\to aF\\otimes_paG$ lies in $W$. By definition of $W$, its sheafification $a(F\\otimes_pG)\\to a(aF\\otimes_paG)$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-local-iso.proof.md",
+    "place": "Proof of clause 3"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-sheafification",
   "det-def-sfb-sheaf-tensor-presheaf",
   "det-def-sfb-sheaf-tensor-hom-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-local-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-local-iso.proof.md",
+  "place": "The complete proof, with the precomposition, tensor--Hom, composition, symmetry, and unit arguments made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "whiskerLeft|whiskerRight|tensor.*[Ss]heaf|[Ss]heaf.*tensor",
+   "results": "{\"t\": \"2026-10-16T13:17:21Z\", \"tool\": \"grep\", \"query\": \"whiskerLeft|whiskerRight|tensor.*[Ss]heaf|[Ss]heaf.*tensor\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Map.lean\", \"Mathlib/CategoryTheory/Sites/Point/Map.lean\"], \"digest\": \"8d96abe8a7973b77\"}",
+   "date": "2026-10-16",
+   "verdict": "Related component results. Read Sites/Monoidal.lean:124-159 and Sites/Localization.lean:33-89. Tensor stability is present under enriched-end existence hypotheses; identification and existence of these ends for the present essentially small site are supplied by the existing presheaf node, not a one-line match recorded here. Retain the explicit split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of presheaves preserves morphisms inverted by sheafification and the tensor product of sheafification units is inverted by sheafification",
+   "results": "{\"t\": \"2026-10-16T13:17:22Z\", \"tool\": \"leansearch\", \"query\": \"Tensor product of presheaves preserves morphisms inverted by sheafification and the tensor product of sheafification units is inverted by sheafification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"PresheafOfModules.sheafification_map\", \"PresheafOfModules.Monoidal.tensorObj\", \"PresheafOfModules.sheafification\", \"CategoryTheory.sheafificationIso\", \"CategoryTheory.plusPlusAdjunction\", \"PresheafOfModules.sheafifyMap\", \"PresheafOfModules.sheafify\"], \"digest\": \"531529af3dc38c18\"}",
+   "date": "2026-10-16",
+   "verdict": "Related monoidal sheafification and module-specific results; no exact whole-item match among the returned results."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.W",
+   "results": "{\"t\": \"2026-10-16T13:17:22Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.GrothendieckTopology.W\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.W\", \"CategoryTheory.GrothendieckTopology.W_toSheafify\", \"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\", \"CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms\", \"CategoryTheory.Sieve.W_shrinkFunctor_ι_of_mem\", \"CategoryTheory.GrothendieckTopology.W_eq_isLocal_range_sheafToPresheaf_obj\", \"CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction\", \"CategoryTheory.GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso\"], \"digest\": \"8b99be92816b20e1\"}",
+   "date": "2026-10-16",
+   "verdict": "Localization.lean supplies the Hom characterization and unit membership in W. Tensor clauses additionally require the monoidal/end API; these are related component results, not an exact whole-item declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma whiskerLeft|lemma whiskerRight|lemma W_iff|lemma W_adj_unit_app|lemma W_toSheafify",
+   "results": "{\"t\": \"2026-10-16T13:18:08Z\", \"tool\": \"grep\", \"query\": \"lemma whiskerLeft|lemma whiskerRight|lemma W_iff|lemma W_adj_unit_app|lemma W_toSheafify\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/LocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\"], \"digest\": \"f7becd94b1d44f28\"}",
+   "date": "2026-10-16",
+   "verdict": "Related component results. Read Sites/Monoidal.lean:124-159 and Sites/Localization.lean:33-89. Tensor stability is present under enriched-end existence hypotheses; identification and existence of these ends for the present essentially small site are supplied by the existing presheaf node, not a one-line match recorded here. Retain the explicit split."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -63,5 +114,21 @@
   "det-def-sfb-sheaf-tensor-hom-sheaf"
  ],
  "proof_split_by": "list",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-def-sfb-sheaf-tensor-local-iso",
+  "worker": "stage1",
+  "summary": "No new nodes were needed. Four steps give the Hom characterization of W with an explicit two-sided inverse, tensor stability by the tensor--Hom adjunction and a displayed symmetry conjugation, closure under composition, and the unit comparison directly from the sheafification universal property.",
+  "blueprint": "Realizes the equivalence paragraph and clauses 1, 2, and 3 of det-def-sfb-sheaf-tensor-local-iso.proof.md.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q58-0f9ada593",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-0f9ada593 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, current blueprint proofs and chapter/unit route. All four proof steps are valid, including symmetry, unit comparison direction and non-flat small cases; no cycle or new duplicate node. Corrected only the missing Mathlib search records using actual logged searches. Whole corrected JSON and detailed review.md are saved under the review directory.; 1 file(s) fixed by the reviewer"
+ }
 }

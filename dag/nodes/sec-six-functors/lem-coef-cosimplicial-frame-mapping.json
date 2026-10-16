@@ -35,9 +35,163 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Factor $0\\to V$ as $0\\to QV\\xrightarrow{\\sim}V$ with $QV$ cofibrant and the last map a trivial fibration. Factor $V\\to *$ as a trivial cofibration $V\\xrightarrow{\\sim}RV$ followed by a fibration. Since the localization inverts these maps, $qV\\simeq qQV\\simeq qRQV$ and $qV\\simeq qRV$. This proves both assertions about object representatives, directly from the two factorization axioms. The functorial $Q$ preserves weak equivalences: for $w:V\\to V'$ use $q_{V'}Qw=wq_V$ and two-out-of-three. On the full subcategory of cofibrant objects its restriction and the inclusion are inverse after localization, since the natural transformations $Q\\to1$ have weak-equivalence components. This assertion uses the universal property including natural transformations, not just its set of objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Section 1.1 factorization axioms and Section 1.2 replacements"
+   }
+  },
+  {
+   "text": "Give $\\Delta$ degree $n$, with lowering maps the surjections and raising maps the injections; every order-preserving map factors uniquely through its ordered image. Put $(\\ell X)^n=\\coprod_{0\\leq j\\leq n}X$, with the evident fold map $\\ell X\\to\\operatorname{const}X$. Use [lem-coef-reedy-model-structure] to factor it into a Reedy cofibration $\\ell X\\to S^\\bullet$ and a Reedy trivial fibration $S^\\bullet\\to\\operatorname{const}X$, keeping the degree-zero factorization $X\\xrightarrow{1}X\\xrightarrow{1}X$. Explicitly, after degrees $<n$ have been constructed, factor\n$$ (\\ell X)^n\\amalg_{L_n\\ell X}L_nS\\longrightarrow X\\times_{M_n\\operatorname{const}X}M_nS $$\ninto a cofibration followed by a trivial fibration; the degree-extension statement makes this a compatible functor and augmentation. For $n>0$, $L_n\\ell X\\to(\\ell X)^n$ is an isomorphism, since each vertex factors through $[0]$ and the latching identifications identify its repeated occurrences. Thus the left source is $L_nS$. At $n=0$ the latching map is $0\\to X$, a cofibration by the hypothesis on $X$. The objectwise assertion for Reedy trivial fibrations makes every $S^n\\to X$ a trivial fibration. Hence $S$ is a frame as defined in the item, with the stronger augmentation property needed later. This construction is functorial. In the opposite model category it gives, for fibrant $Y$, a Reedy fibrant simplicial object $B_\\bullet$ with $B_0=Y$ and $\\operatorname{const}Y\\to B_\\bullet$ a Reedy trivial cofibration, hence objectwise a trivial cofibration. Indeed the right adjoint to degree-zero evaluation has degree $n$ the product of $n+1$ copies of $Y$, is Reedy fibrant, and the dual factorization ends in this diagram.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 5.2.8 and its fixed-degree-zero induction, printed pp. 127-128"
+   }
+  },
+  {
+   "text": "Let $A^\\bullet$ be any frame on the cofibrant $X$, not necessarily the special one just constructed. Define $V_A(K)=\\int^{[n]\\in\\Delta}K_n\\cdot A^n$, where $K_n\\cdot A^n$ denotes the coproduct of copies indexed by $K_n$. Concretely this is the coequalizer of $\\coprod_{\\theta:[m]\\to[n]}K_n\\cdot A^m\\rightrightarrows\\coprod_n K_n\\cdot A^n$, using the simplicial operator on $K$ in one arrow and $A(\\theta)$ in the other. Giving a map out of this coequalizer is exactly giving maps $K_n\\to\\operatorname{Hom}(A^n,Y)$ compatible with all operators. Hence $V_A\\dashv H(A,-)$ and $V_A$ preserves colimits. The same formula gives $V_A(\\Delta^n)=A^n$; for the boundary only the proper injective faces are needed, so $V_A(\\partial\\Delta^n)=L_nA$. The boundary criterion of [lem-coef-simplicial-boundary-collapse-test] now shows that $V_A$ sends monomorphisms to cofibrations. The collapse to $\\Delta^0$ is the augmentation $A^n\\to X$, a weak equivalence by the frame hypothesis, so that criterion also makes every horn image a trivial cofibration.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.1.5; Proposition 5.4.1; Proposition 3.6.8 and Corollary 5.4.4"
+   }
+  },
+  {
+   "text": "A lifting problem for a horn inclusion against $H(A,p)$ is, by the adjunction of step 3, exactly a lifting problem for $V_A(\\Lambda_i^n)\\to A^n$ against $p$. Since that left map is a trivial cofibration, any fibration $p$ admits the required lift. If $p$ is a trivial fibration, the same argument for boundaries works because $L_nA\\to A^n$ is a cofibration. The Kan-Quillen characterizations in [lem-coef-kan-quillen-right-proper] identify the resulting maps as Kan fibrations and trivial Kan fibrations, respectively. Taking $p:Y\\to *$ proves $H(A,Y)$ is Kan whenever $Y$ is fibrant. This proves the fibration clause even before restricting both endpoints to fibrant objects.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 5.4.4, with its adjoint lifting argument"
+   }
+  },
+  {
+   "text": "We will need invariance under weak equivalences rather than only trivial (co)fibrations. For a weak equivalence $f:Y\\to Z$ of fibrant objects, use the fibrant factorization of [lem-coef-brown-split-factorizations]: $f=pi$ with $i:Y\\to V$ a trivial cofibration, $p:V\\to Z$ a fibration, and $r:V\\to Y$ a fibration with $ri=1$. The object $V$ is fibrant, and two-out-of-three gives that $p,r$ are weak equivalences. Step 4 makes $H(A,p)$ and $H(A,r)$ weak equivalences. Since $H(A,r)H(A,i)=1$, two-out-of-three makes $H(A,i)$ a weak equivalence, hence so is $H(A,f)$. Apply steps 3-4 in $\\mathcal M^{\\mathrm{op}}$: if $B_\\bullet$ is a simplicial frame on a fibrant $Y$, the contravariant $J(-)=\\operatorname{Hom}(-,B_\\bullet)$ sends trivial cofibrations to trivial Kan fibrations. For a weak equivalence $f:X\\to X'$ of cofibrant objects, the cofibrant Brown factorization gives $f=pi$, $ps=1$ with $i,s$ cofibrations. Two-out-of-three makes both $i,s$ trivial cofibrations. Thus $J(i),J(s)$ are weak equivalences and $J(s)J(p)=1$ implies $J(p)$ is one too; consequently $J(f)$ is a weak equivalence. All intermediate cofibrant/fibrant conditions follow by composition of the specified cofibrations/fibrations.",
+   "uses": [
+    "lem-coef-brown-split-factorizations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 1.1.12; the explicit Brown argument used in Proposition 5.4.7"
+   }
+  },
+  {
+   "text": "For a frame $A$ and the simplicial frame $B$ of step 2, set $D_{m,n}=\\operatorname{Hom}(A^m,B_n)$. Each $B_n$ is fibrant, all its structure maps are weak equivalences, and $Y\\to B_n$ is one too. Step 5 says that the map from the constant simplicial diagram on $H(A,Y)$ to $n\\mapsto H(A,B_n)$ is degreewise a weak homotopy equivalence. By [lem-coef-bisimplicial-diagonal-equivalence],\n$$H(A,Y)\\longrightarrow\\operatorname{diag}D$$\nis a weak homotopy equivalence. Every $A^m$ is cofibrant by [lem-coef-reedy-model-structure], and all maps between degrees of $A$ are weak equivalences by the augmentation and two-out-of-three. The dual half of step 5 and the same diagonal theorem also give $\\operatorname{Hom}(X,B_\\bullet)\\to\\operatorname{diag}D$ as a weak homotopy equivalence. If $a:A\\to A'$ is a map of frames whose degree-zero map is a weak equivalence, its components are weak equivalences between cofibrant objects. Applying the dual half of step 5 degree by degree to $\\operatorname{Hom}(A'^m,B_\\bullet)\\to\\operatorname{Hom}(A^m,B_\\bullet)$ and then the diagonal theorem shows that the induced map on these diagonals is a weak equivalence. The square with the preceding $H(-,Y)$ comparisons and two-out-of-three therefore prove $H(A',Y)\\to H(A,Y)$ a weak equivalence. This supplies the independence of frames used next.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.4.7 and Corollary 5.4.8; diagonal argument written for arbitrary frames"
+   }
+  },
+  {
+   "text": "The map $\\ell X\\to A$ induced by $A^0=X$ is a Reedy cofibration: in degree zero its relative latching map is $1_X$, and in every positive degree it is $L_nA\\to A^n$. The lifting axiom in the Reedy model of [lem-coef-reedy-model-structure], against $S\\to\\operatorname{const}X$ from step 2, produces a map $A\\to S$ over $X$, with degree-zero component $1_X$. All its components are weak equivalences by the two augmentations. Step 6 identifies $H(A,Y)$ with $H(S,Y)$ and then with $\\operatorname{diag}\\operatorname{Hom}(S^\\bullet,B_\\bullet)$. The special hypotheses are now verified: $S$ is Reedy cofibrant, $B$ Reedy fibrant, and their augmentation/coaugmentation maps are objectwise trivial fibration/trivial cofibration, respectively. None of these properties was silently assumed for the original arbitrary frame $A$.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 5.2.8, Reedy lifting, and Proposition 5.4.7"
+   }
+  },
+  {
+   "text": "Use [lem-coef-special-resolution-zigzag-nerve] for the special pair $(S,B)$. It compares the diagonal just obtained to the nerve of $\\mathcal T(X,Y)$, whose objects are $X\\xleftarrow{p}V\\xrightarrow{h}W\\xleftarrow{i}Y$ with $p$ a trivial fibration and $i$ a trivial cofibration. The intermediate comparison is the resolution-indexed diagram of the discrete sets $\\operatorname{Hom}(S^m,B_n)$: the category $I(S,B)$ stated in the cited node (the two Grothendieck constructions) retains both chosen resolution indices and the map, and forgetting the indices gives precisely such a zigzag. This is why the special degreewise augmentation hypotheses in step 7, rather than merely objectwise weak equivalences, were required. Apply [lem-coef-special-hammock-reduction] to identify this nerve with $L^H(\\mathcal M,W)(X,Y)$ by reduction of those diagrams to hammocks. Finally [lem-coef-hammock-infinity-localization] identifies that hammock mapping object with the mapping space of the universal infinity localization. The composite is\n$$H(A,Y)\\simeq H(S,Y)\\simeq\\operatorname{diag}\\operatorname{Hom}(S,B)\\simeq N\\mathcal T(X,Y)\\simeq L^H(\\mathcal M,W)(X,Y)\\simeq\\operatorname{Map}_{\\mathcal M_\\infty}(qX,qY).$$\nThese are equivalences of spaces, not an identification of sets of homotopy classes.",
+   "uses": [
+    "lem-coef-special-resolution-zigzag-nerve",
+    "lem-coef-special-hammock-reduction",
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Propositions 3.5 and 3.7, realizing Dwyer-Kan 7.2; Hinich Proposition 1.2.1 for the last comparison"
+   }
+  },
+  {
+   "text": "Choose the special resolutions functorially by step 2. The comparison of [lem-coef-special-resolution-zigzag-nerve] is natural under maps of these resolutions; the endpoint actions on the special zigzags and their comparison with composition of hammocks are supplied by [lem-coef-special-hammock-reduction]. The comparison with the universal localization in [lem-coef-hammock-infinity-localization] respects its maps and composition homotopies. Thus step 8 is natural in the homotopy theory of both inputs. For other choices of $A$, the maps over $X$ in step 7 and the weak-equivalence invariance from step 6 give the same comparison in that homotopy theory. All normalization maps are identities in degree zero. In particular a vertex $f\\in H(A,Y)_0=\\operatorname{Hom}(X,Y)$ goes to the zigzag with identity outer arrows, hence to $q(f)$ by the last two cited statements. Every component of a simplicial set contains a vertex, so every component of the identified mapping space has an actual representative $X\\to Y$.",
+   "uses": [
+    "lem-coef-special-resolution-zigzag-nerve",
+    "lem-coef-special-hammock-reduction",
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.7(ii), Lemma 3.4 and normalization on vertices; Hinich Section 1.2"
+   }
+  },
+  {
+   "text": "Let $E\\xrightarrow{p}C\\xleftarrow{g}D$ be Kan complexes with $p$ a Kan fibration. Factor $g$ as a trivial cofibration $D\\to D'$ followed by a Kan fibration $D'\\to C$. The pullback of $D\\to D'$ along the Kan fibration $E\\times_C D'\\to D'$ is a weak homotopy equivalence by right properness in [lem-coef-kan-quillen-right-proper]. Its source is exactly $E\\times_C D$. Its target $E\\times_C D'$ is the homotopy pullback by the fibrant replacement description in that node. This proves the strict-pullback assertion without any properness assumption on $\\mathcal M$. For a finite family of Kan fibrations, a horn lifting problem for the product is exactly the corresponding family of horn lifting problems; choose their fillers and take their product. For the empty family the product map is the identity on the terminal simplicial set, so the assertion includes that case.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 3.1.28; proof of Corollary 3.8.4, printed pp. 123-124"
+   }
+  },
+  {
+   "text": "Let $T:\\mathcal M\\rightleftarrows\\mathcal N:U$ be the indicated adjunction. Since $T$ preserves initial objects and cofibrations, it sends cofibrant objects to cofibrant objects. For a weak equivalence $f$ between cofibrant objects use [lem-coef-brown-split-factorizations] to write $f=pi$, $ps=1$ with $i,s$ cofibrations. Both are weak equivalences by two-out-of-three, so $Ti,Ts$ are trivial cofibrations and $Tp\\,Ts=1$ makes $Tp$ a weak equivalence. Hence $Tf$ is a weak equivalence. Every degree of a frame is cofibrant by [lem-coef-reedy-model-structure]; since $T$ preserves colimits,\n$$L_n(TA)\\cong T(L_nA),$$\nand its latching maps are cofibrations. Its augmentations $TA^n\\to TX$ are weak equivalences by the Brown argument, and its degree-zero augmentation is the identity. Thus $TA$ is a frame on $TX$. As in step 1, localizing the restriction of $T$ to cofibrant objects defines its derived functor on $\\mathcal M_\\infty$.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 1.1.12; Theorem 5.6.2, beginning of proof on preservation of frames"
+   }
+  },
+  {
+   "text": "We verify compatibility on the actual weak-equivalence diagrams, without assuming that $T$ preserves trivial fibrations. First replace the fibrant target $Y$ by a trivial fibration $Y_c\\to Y$ with $Y_c$ cofibrant. It is also fibrant; step 4 identifies the two source mapping complexes. Choose the special $S$ on $X$ and the special $B$ on $Y_c$ of step 2. Every $S^m$ and $B_n$ is cofibrant, the latter because $Y_c\\to B_n$ is a trivial cofibration. Thus $T$ preserves all weak equivalences in their resolution diagrams by step 11. Let $r:TY_c\\to Z$ be a trivial cofibration with $Z$ fibrant, and choose special resolutions $S'$ on $TX$ and $B'$ on $Z$ in $\\mathcal N$. Reedy lifting from $\\ell(TX)\\to TS$ against the Reedy trivial fibration $S'\\to\\operatorname{const}(TX)$ gives $a:TS\\to S'$ over $TX$, with $a^0=1$. All $a^m$ are weak equivalences by two-out-of-three. Since $T$ preserves colimits and (trivial) cofibrations, it preserves the relative latching formulas of [lem-coef-reedy-model-structure]. Thus $\\operatorname{const}(TY_c)\\to TB$ is a Reedy trivial cofibration. Lift this against $B'\\to *$, starting from $\\operatorname{const}(TY_c)\\xrightarrow{r}\\operatorname{const}Z\\to B'$, to obtain $b:TB\\to B'$ with $b_0=r$. Keeping this prescribed degree-zero lift uses the same degree-extension formula; all higher lifts have trivial-cofibration left maps and fibration right maps. Every $b_n$ is a weak equivalence, since $b_nT(i_n)=i'_nr$ and all the latter factors are weak equivalences.\n\nHere is the comparison of mapping-space maps, with the contravariance in the first variable kept explicit. Write\n$$D_{m,n}=\\operatorname{Hom}_{\\mathcal M}(S^m,B_n),\\qquad E_{m,n}=\\operatorname{Hom}_{\\mathcal N}(TS^m,B'_n),\\qquad D'_{m,n}=\\operatorname{Hom}_{\\mathcal N}(S'^m,B'_n).$$\nThere are maps of bisimplicial sets\n$$D\\xrightarrow{\\ h\\mapsto b_nT(h)\\ } E\\xleftarrow{\\ h'\\mapsto h'a^m\\ }D'.$$\nAll simplicial operators commute with these formulas by naturality of $a,b$ and functoriality of $T$. The second map is a weak equivalence on diagonals by the dual Brown invariance in step 5, since $a^m$ is a weak equivalence between cofibrant objects and $B'$ is a simplicial frame; apply [lem-coef-bisimplicial-diagonal-equivalence]. On frame complexes the maps are $H(S,Y_c)\\to H(TS,Z)\\leftarrow H(S',Z)$, respectively $h\\mapsto rT(h)$ and precomposition with $a$. Their maps into the corresponding diagonals form commuting squares because $b_nT(i_n)=i'_nr$; all these vertical comparisons are equivalences by step 6. Thus this span gives the claimed simplicial map on mapping spaces.\n\nIt remains to check that this is the localization action. The general, hypothesis-free diagonal/index-category comparison explicitly stated in [lem-coef-special-resolution-zigzag-nerve] applies also to $E$ and to $\\operatorname{Hom}(TS,TB)$; here no claim is made that the transported augmentation is a trivial fibration. For any of these pairs with weak-equivalence augmentations, forgetting the indices sends $(m,n,h)$ to its length-three zigzag in $L^H$; a string of arrows of $I$ is a commutative hammock, since its outer augmentation equations make its vertical arrows weak equivalences. This is a simplicial map by the face/degeneracy definition in [lem-coef-hammock-infinity-localization]. Applying $T$ to the index-forgetting diagrams for $(S,B)$ is legitimate in the relative subcategory of cofibrant objects and gives $TX\\leftarrow TS^m\\to TB_n\\leftarrow TY_c$. The maps $b_n$ compare this to $TX\\leftarrow TS^m\\to B'_n\\leftarrow Z$, using $b_nT(i_n)=i'_nr$. The maps $a^m$ compare the latter diagrams for $h'a^m$ with $TX\\leftarrow S'^m\\xrightarrow{h'}B'_n\\leftarrow Z$, using $p'^ma^m=T(p^m)$. In each comparison the indicated maps are vertical weak equivalences in commutative hammocks. Inserting these rows gives the simplicial homotopies; if the endpoint moves by $r$, use postcomposition by its length-one hammock, as in [lem-coef-special-hammock-reduction]. Consequently the span of diagonals above agrees with the literal action of $T$ on hammocks, followed by this endpoint replacement. Naturality of the general index comparison and of the localization comparison in [lem-coef-hammock-infinity-localization] identifies that action with the localized relative functor. Only the special pairs $(S,B)$ and $(S',B')$ use the special index-forgetting equivalence; no such equivalence is assumed for $(TS,TB)$ or $(TS,B') alone. Finally steps 6-7 transfer the conclusion from $S$ to any original frame $A$. These are comparisons of simplicial diagrams, not just a test on vertices. Inverting the source replacement $Y_c\\to Y$ gives precisely the action of the derived functor defined on cofibrant objects in step 11. Taking $T$ to be an evaluation or restriction functor with the stipulated left Quillen adjunction proves the last clause. Only the stated model axioms have been used.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-special-resolution-zigzag-nerve",
+    "lem-coef-special-hammock-reduction",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low Lemma 1.4, Definition 1.5, Theorem 1.6, Lemma 3.4 and Proposition 3.7: mixed-variance Hom span, general index-category comparison and vertical hammock rows; comparison lifts use Hovey Theorem 5.2.5; localization functoriality uses Hinich Proposition 1.2.1. The latter sources are specified in the cited Reedy and hammock-localization nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-special-resolution-zigzag-nerve",
+  "lem-coef-special-hammock-reduction",
+  "lem-coef-hammock-infinity-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction: agent synthesis of Hovey 3.6.8 and 5.2-5.6, Low 3.4-3.7, and Hinich 1.2, read online; offline copies WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,15 +241,65 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-16",
    "verdict": "no match: the semantic hits are cofibrant resolutions and ordinary homotopy-category functors; source grep finds no frame/function-complex or hammock-localization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cosimplicial frames compute Kan mapping complexes in the universal infinity localization of any model category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialObject.cosk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F] →\\n        CategoryTheory.Functor (CategoryTheory.SimplicialObject C) (Cat\", \"doc\": \"The coskeleton functor for simplicial objects in a category $\\\\mathcal{C}$, defined as the composition of the truncation functor (which discards data above dimension $n$) followed by the right Kan exte\"}\n  {\"name\": \"SSet.cosk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"ℕ → CategoryTheory.Functor SSet SSet\", \"doc\": \"For a natural number $n$, the coskeleton functor $\\\\text{cosk}_n$ is a functor from the category of simplicial sets to itself. It is defined as the composition of the truncation functor (which discards\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Truncated.cosk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F] →\\n        CategoryTheory.Functor (CategoryTheory.SimplicialObject.Truncat\", \"doc\": \"The coskeleton functor for $ n $-truncated simplicial objects in a category $ \\\\mathcal{C} $, defined as the right Kan extension along the opposite of the inclusion functor $ \\\\Delta_{\\\\leq n} \\\\hookright\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {X : CategoryTheory.SimplicialObject C} {n : ℕ}\\n  [self : X.IsCoskeletal n],\\n  CategoryTheory.Functor.IsRightKanExtension X\\n    (CategoryTheory.CategoryStruct.id ((SimplexCategory.Truncated.inclusion n).op.comp X))\", \"doc\": \"If a simplicial object $ X $ in a category $ \\\\mathcal{C} $ is coskeletal at level $ n $, then $ X $ is the right Kan extension of its restriction to the truncated simplex category $ \\\\Delta_{\\\\leq n} $ \"}\n  {\"name\": \"CategoryTheory.SimplicialObject.isCoskeletal_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.SimplicialObject C) (n : ℕ),\\n  X.IsCoskeletal n ↔\\n    CategoryTheory.Functor.IsRightKanExtension X\\n      (CategoryTheory.CategoryStruct.id ((SimplexCategory.Truncated.inclusion n).op.comp X))\", \"doc\": \"A simplicial object $X$ in a category $\\\\mathcal{C}$ is coskeletal at level $n$ if and only if $X$ is the right Kan extension of its restriction to the truncated simplex category $\\\\Delta_{\\\\leq n}$ alon\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C]\\n  {D : Type u_2} [inst_2 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [L.IsLocalization (HomotopicalAlgebra.weakEquivalences C)],\\n  (HomotopicalAlgebra.Cofibrant\", \"doc\": \"Given a category $\\\\mathcal{C}$ with weak equivalences and a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with respect to weak equivalences, the composition of the inclusion functor $\\\\iota : \"}\n  {\"name\": \"CategoryTheory.SimplicialObject.sk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasLeftKanExtension F] →\\n        CategoryTheory.Functor (CategoryTheory.SimplicialObject C) (Cate\", \"doc\": \"The functor that maps a simplicial object in a category $\\\\mathcal{C}$ to its skeletal approximation by first truncating it to dimension $n$ (discarding simplicial data above $n$) and then extending th\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C]\\n  {D : Type u_2} [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  (L : CategoryTheory.Functor (HomotopicalAlgebra.CofibrantObject.HoCat C) D)\\n  [L.IsLocalization (HomotopicalAlgebra.weakEqui\", \"doc\": \"In a model category $\\\\mathcal{C}$, if $L$ is a functor from the homotopy category of cofibrant objects $\\\\mathrm{HoCat}(\\\\mathcal{C})$ to another category $D$ that localizes with respect to weak equival\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give cosimplicial objects, cofibrant replacements and ordinary localizations, not the frame/Kan mapping-space statement in infinity localization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\", \"ModelCategory\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give cosimplicial objects, cofibrant replacements and ordinary localizations, not the frame/Kan mapping-space statement in infinity localization."
+  },
+  {
+   "tool": "grep",
+   "query": "cosimplicial.*fram|homotopy.*function.*complex|functionComplex",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give cosimplicial objects, cofibrant replacements and ordinary localizations, not the frame/Kan mapping-space statement in infinity localization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cosimplicial frames give homotopy function complexes without simplicial enrichment",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.CosimplicialObject\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max v u)\", \"doc\": \"A cosimplicial object in a category $ \\\\mathcal{C} $ is a functor from the simplex category $ \\\\Delta $ to $ \\\\mathcal{C} $, where $ \\\\Delta $ has finite ordinals $ [n] = \\\\{0, 1, \\\\dots, n\\\\} $ as objects a\"}\n  {\"name\": \"CategoryTheory.CosimplicialObject.instCategory\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \": Category (CosimplicialObject C)\", \"doc\": \"For any category $\\\\mathcal{C}$, the cosimplicial objects in $\\\\mathcal{C}$ (i.e., functors from the simplex category $\\\\Delta$ to $\\\\mathcal{C}$) form a category where: (1) morphisms are natural transfor\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialCategory.Basic\", \"type\": \": Cᵒᵖ ⥤ C ⥤ SSet.{v}\", \"doc\": \"The simplicial hom-functor is a functor from the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of functors $[\\\\mathcal{C}, \\\\mathbf{SSet}]$, assigning to each object $X \\\\in \\\\mathcal{C}^{\\\\t\"}\n  {\"name\": \"CategoryTheory.simplicialCosimplicialEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \": (SimplicialObject C)ᵒᵖ ≌ CosimplicialObject Cᵒᵖ\", \"doc\": \"The opposite category of simplicial objects in a category $\\\\mathcal{C}$ is naturally equivalent to the category of cosimplicial objects in the opposite category $\\\\mathcal{C}^\\\\text{op}$. This equivalen\"}\n  {\"name\": \"CategoryTheory.CosimplicialObject.instHasColimits\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"[HasColimits C] : HasColimits (CosimplicialObject C)\", \"doc\": \"If a category $ \\\\mathcal{C} $ has all colimits, then the category of cosimplicial objects in $ \\\\mathcal{C} $ (i.e., functors from the simplex category $ \\\\Delta $ to $ \\\\mathcal{C} $) also has all colim\"}\n  {\"name\": \"CategoryTheory.cosimplicialSimplicialEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \": (CosimplicialObject C)ᵒᵖ ≌ SimplicialObject Cᵒᵖ\", \"doc\": \"There is a natural equivalence between the opposite category of cosimplicial objects in a category $\\\\mathcal{C}$ and the category of simplicial objects in the opposite category $\\\\mathcal{C}^\\\\text{op}$\"}\n  {\"name\": \"CategoryTheory.CosimplicialObject.δ\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"{n} (i : Fin (n + 2)) : X ^⦋n⦌ ⟶ X ^⦋n + 1⦌\", \"doc\": \"For a cosimplicial object $X$ in a category $\\\\mathcal{C}$, the face map $\\\\delta^i: X^n \\\\to X^{n+1}$ is obtained by applying the functor $X$ to the simplex category's face map $\\\\delta^i: [n] \\\\to [n+1]$\"}\n  {\"name\": \"CategoryTheory.CosimplicialObject.instHasLimits\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"[HasLimits C] : HasLimits (CosimplicialObject C)\", \"doc\": \"If a category $ \\\\mathcal{C} $ has all limits, then the category of cosimplicial objects in $ \\\\mathcal{C} $ (i.e., functors from the simplex category $ \\\\Delta $ to $ \\\\mathcal{C} $) also has all limits.\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give cosimplicial objects, cofibrant replacements and ordinary localizations, not the frame/Kan mapping-space statement in infinity localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cosimplicial resolution sends fibrations of fibrant objects to Kan fibrations of localized mapping spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] (X : C),\\n  HomotopicalAlgebra.Fibration (HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj X)\", \"doc\": \"For any object $ X $ in a model category $ \\\\mathcal{C} $, the cofibrant replacement morphism $ p : X' \\\\to X $ is a fibration. This morphism arises from a cofibrant replacement where $ X' $ is a cofibr\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasTerminal C] (X : HomotopicalAlgebra.FibrantObject C),\\n  HomotopicalAlgebra.IsFibrant (HomotopicalAlgebra.FibrantObject.ι.obj X)\", \"doc\": \"Every object in the full subcategory of fibrant objects in a category with cofibrations is fibrant, meaning the unique morphism from the object to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      CategoryTheory.LocalizerMorphism (HomotopicalAlgebra.weakEquivalences C)\\n        (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject.HoCat C))\", \"doc\": \"The morphism of localizers between the weak equivalences of a model category $\\\\mathcal{C}$ and the weak equivalences of its homotopy category of cofibrant objects, constructed via the resolution funct\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution C).functor =\\n    HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"doc\": \"The morphism of localizers between the weak equivalences of a model category $\\\\mathcal{C}$ and the weak equivalences of its homotopy category of cofibrant objects, constructed via the resolution funct\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      CategoryTheory.Functor C (HomotopicalAlgebra.CofibrantObject.HoCat C)\", \"doc\": \"The canonical functor from a model category $\\\\mathcal{C}$ to its homotopy category of cofibrant objects, which sends each object $X$ to its cofibrant replacement $X'$ and each morphism to its equivale\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureCofibrant\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.localizerMorphism C).arrow.HasLeftResolutions\", \"doc\": \"For a model category $\\\\mathcal{C}$, the arrow category of its full subcategory of cofibrant objects admits left resolutions with respect to the arrow weak equivalences. This means that for every morph\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.ι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C] →\\n      [inst_2 : CategoryTheory.Limits.HasTerminal C] → CategoryTheory.Functor (HomotopicalAlgebra.FibrantObject C) C\", \"doc\": \"The inclusion functor from the full subcategory of fibrant objects in a category with cofibrations to the original category, mapping each fibrant object and morphism between them to themselves.\"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {A : C}\\n  [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C] (P : HomotopicalAlgebra.PathObject A)\\n  [inst_2 : CategoryTheory.Limits.HasBinaryProduct A A] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryThe\", \"doc\": \"The underlying object $P$ of a path object in a category with weak equivalences and fibrations is fibrant, meaning the unique morphism from $P$ to the terminal object is a fibration.\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give cosimplicial objects, cofibrant replacements and ordinary localizations, not the frame/Kan mapping-space statement in infinity localization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-finite-reedy-localization",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-cosimplicial-frame-mapping",
+  "worker": "stage1",
+  "summary": "Checked arbitrary, unenriched model hypotheses against Hovey; constructed fixed-degree-zero special frames by Reedy factorization; proved Kan lifting using the boundary-and-collapse criterion, Brown and diagonal invariance explicitly; compared special double resolutions to special zigzags, then hammocks and universal infinity localization; proved pullback/product and left Quillen compatibility. Seven genuine technical statement-only children, no clause moved into a frame-comparison child. No exact project attachment or Mathlib match. No statement change.",
+  "blueprint": "Nearest blueprint ancestor prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2: the first and last derived coefficient mapping-limit comparisons. This supplies the cosimplicial-frame foundation of the finite-diagram/model enhancement used for that calculation; no change to the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-c55dbd41c",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-c55dbd41c (reviewer sub-agent of L); spot-checked: Read all mathematics and cited sources. No false statements, cycles, or restated splits found. Supplied provenance repairs, corrected step 12’s source URL, and added an arbitrary-relative-category localization reference without weakening statements. Full checks and corrected JSON files are in review.md and fixes/dag/nodes/.; 8 file(s) fixed by the reviewer"
+ }
 }

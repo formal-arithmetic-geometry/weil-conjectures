@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-adjunction-projection-formula",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The projection formula of an adjunction",
@@ -18,24 +18,225 @@
  ],
  "proof": [
   {
-   "text": "The maps are isomorphisms by assumption. Each of the remaining identities is checked after\ntransposing along $P\\dashv S$\n([def-sfb-adjunction-has-projection-formula]). Naturality in $L$ and in $M$ becomes\nnaturality of $\\mu^S$ and of the unit. The unit compatibility becomes unitality of $\\mu^S$\ntogether with a triangle identity. The associativity compatibility becomes the\nassociativity axiom of $\\mu^S$ together with naturality.",
+   "text": "Write $u$ for the adjunction unit and omit the superscript $S$ on $\\mu$. For $X,X'\\in\\mathcal C$, $Y,Y'\\in\\mathcal D$, $a:X'\\to X$, $b:Y\\to Y'$, and $x:PX\\to Y$, write $T(x):X\\to SY$ for its adjoint. By the definition of an adjunction, $T$ is a bijection natural in $X,Y$, so\n$$T(b\\circ x\\circ P(a))=S(b)\\circ T(x)\\circ a,\\qquad T(\\mathrm{id}_{PX})=u_X.$$\nIn particular $T(x)=S(x)\\circ u_X$. By [def-sfb-adjunction-has-projection-formula], the prescribed map $\\pi_{L,M}$ is characterized by\n$$T(\\pi_{L,M})=H_{L,M}:=\\mu_{L,PM}\\circ(\\mathrm{id}_{SL}\\otimes u_M).$$\nAll $\\pi_{L,M}$ are isomorphisms by the assumed projection-formula property. Use these maps and their unique inverses as the isomorphism data.",
    "uses": [
     "def-sfb-adjunction-has-projection-formula"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-adjunction-projection-formula.proof.md",
+    "place": "Proof, first sentence and transposition setup; unit clause 4"
+   }
+  },
+  {
+   "text": "For $f:L\\to L'$, the transposes of the two sides of naturality in $L$ are equal:\n$$\\begin{aligned}\nT(\\pi_{L',M}\\circ P(Sf\\otimes\\mathrm{id}_M))\n&=\\mu_{L',PM}\\circ(Sf\\otimes u_M)\\\\\n&=S(f\\otimes\\mathrm{id}_{PM})\\circ\\mu_{L,PM}\\circ(\\mathrm{id}_{SL}\\otimes u_M)\n=T((f\\otimes\\mathrm{id}_{PM})\\circ\\pi_{L,M}).\n\\end{aligned}$$\nThe middle equality is the naturality axiom of the tensorator $\\mu$ in its first variable, composed with $\\mathrm{id}_{SL}\\otimes u_M$. Injectivity of $T$ gives the required equality.",
+   "uses": [
+    "def-sfb-adjunction-has-projection-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-adjunction-projection-formula.proof.md",
+    "place": "Proof, naturality in L"
+   }
+  },
+  {
+   "text": "For $g:M\\to M'$, naturality of $u$ says $u_{M'}\\circ g=SP(g)\\circ u_M$. Therefore\n$$\\begin{aligned}\nT(\\pi_{L,M'}\\circ P(\\mathrm{id}_{SL}\\otimes g))\n&=\\mu_{L,PM'}\\circ(\\mathrm{id}_{SL}\\otimes(u_{M'}\\circ g))\\\\\n&=S(\\mathrm{id}_L\\otimes P(g))\\circ\\mu_{L,PM}\\circ(\\mathrm{id}_{SL}\\otimes u_M)\n=T((\\mathrm{id}_L\\otimes P(g))\\circ\\pi_{L,M}).\n\\end{aligned}$$\nHere the second equality substitutes the displayed unit naturality and then the naturality axiom of $\\mu$ in its second variable. Injectivity of $T$ proves naturality in $M$.",
+   "uses": [
+    "def-sfb-adjunction-has-projection-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-adjunction-projection-formula.proof.md",
+    "place": "Proof, naturality in M"
+   }
+  },
+  {
+   "text": "For the unit condition of [def-sfb-projection-formula], let $\\epsilon:S\\mathbf1\\to\\mathbf1$ be the inverse monoidal unit map of $S$ and put $q_M=\\lambda_M\\circ(\\epsilon\\otimes\\mathrm{id}_M):S\\mathbf1\\otimes M\\to M$. The left unit axiom of the strong monoidal functor, composed with the inverse unit map, is\n$$S(\\lambda_{PM})\\circ\\mu_{\\mathbf1,PM}\n=\\lambda_{SPM}\\circ(\\epsilon\\otimes\\mathrm{id}_{SPM}).$$\nConsequently, by naturality of the left unitor,\n$$\\begin{aligned}\nT(\\lambda_{PM}\\circ\\pi_{\\mathbf1,M})\n&=\\lambda_{SPM}\\circ(\\epsilon\\otimes u_M)\\\\\n&=u_M\\circ\\lambda_M\\circ(\\epsilon\\otimes\\mathrm{id}_M)\n=T(P(q_M)).\n\\end{aligned}$$\nThe last equality is naturality of $T$ applied to $\\mathrm{id}_{PM}$ and $q_M$. Thus injectivity gives exactly the required unit condition.",
+   "uses": [
+    "def-sfb-adjunction-has-projection-formula",
+    "def-sfb-projection-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-adjunction-projection-formula.proof.md",
+    "place": "Proof, unit compatibility"
+   }
+  },
+  {
+   "text": "For associativity in [def-sfb-projection-formula], fix $L,L',M$, set $N=SL'\\otimes M$ and\n$$a=\\alpha_{SL,SL',M}\\circ(\\delta_{L,L'}\\otimes\\mathrm{id}_M):S(L\\otimes L')\\otimes M\\to SL\\otimes N,$$\nwhere $\\delta_{L,L'}=\\mu_{L,L'}^{-1}$. The transpose of the right-hand composite in that definition is\n$$\\begin{aligned}\nT((\\mathrm{id}_L\\otimes\\pi_{L',M})\\circ\\pi_{L,N}\\circ P(a))\n&=S(\\mathrm{id}_L\\otimes\\pi_{L',M})\\circ H_{L,N}\\circ a\\\\\n&=\\mu_{L,L'\\otimes PM}\\circ(\\mathrm{id}_{SL}\\otimes H_{L',M})\\circ a.\n\\end{aligned}$$\nThe second equality is tensorator naturality followed by $S(\\pi_{L',M})\\circ u_N=T(\\pi_{L',M})=H_{L',M}$. Thus no compatibility of the unit with tensor products, and no monoidal structure on $P$, has been assumed.",
+   "uses": [
+    "def-sfb-adjunction-has-projection-formula",
+    "def-sfb-projection-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-adjunction-projection-formula.proof.md",
+    "place": "Proof, associativity compatibility: transpose the right-hand composite"
+   }
+  },
+  {
+   "text": "Expand $H_{L',M}$ in the final expression of the preceding step. Naturality of the associator with respect to $u_M$, followed by the associativity axiom of $\\mu$, gives the explicit equality\n$$\\begin{aligned}\n&\\mu_{L,L'\\otimes PM}\\circ(\\mathrm{id}_{SL}\\otimes H_{L',M})\\circ a\\\\\n&=\\mu_{L,L'\\otimes PM}\\circ(\\mathrm{id}_{SL}\\otimes\\mu_{L',PM})\\circ\\alpha_{SL,SL',SPM}\\circ(\\delta_{L,L'}\\otimes u_M)\\\\\n&=S(\\alpha_{L,L',PM})\\circ\\mu_{L\\otimes L',PM}\\circ(\\mu_{L,L'}\\otimes\\mathrm{id}_{SPM})\\circ(\\delta_{L,L'}\\otimes u_M)\\\\\n&=S(\\alpha_{L,L',PM})\\circ\\mu_{L\\otimes L',PM}\\circ(\\mathrm{id}_{S(L\\otimes L')}\\otimes u_M)\n=T(\\alpha_{L,L',PM}\\circ\\pi_{L\\otimes L',M}).\n\\end{aligned}$$\nThe last line cancels $\\mu_{L,L'}\\circ\\delta_{L,L'}=\\mathrm{id}$ using bifunctoriality of tensor. Injectivity of $T$ now gives the associativity condition with exactly the domains and orientation in [def-sfb-projection-formula].",
+   "uses": [
+    "def-sfb-adjunction-has-projection-formula",
+    "def-sfb-projection-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-adjunction-projection-formula.proof.md",
+    "place": "Proof, associativity compatibility: tensorator associativity and inverse cancellation"
+   }
+  },
+  {
+   "text": "The isomorphisms of step 1, their naturality in steps 2 and 3, and the unit and associativity identities in steps 4 and 6 supply precisely all the data and conditions of [def-sfb-projection-formula]. This defines the projection formula for $P$ relative to $S$. Explicitly, for either naturality square put $A=P(Sf\\otimes\\mathrm{id}_M)$ and $B=f\\otimes\\mathrm{id}_{PM}$ (step 2), or $A=P(\\mathrm{id}_{SL}\\otimes g)$ and $B=\\mathrm{id}_L\\otimes P(g)$ (step 3). The equality $\\pi'\\circ A=B\\circ\\pi$ gives\n$$A\\circ\\pi^{-1}=\\pi'^{-1}\\circ\\pi'\\circ A\\circ\\pi^{-1}=\\pi'^{-1}\\circ B\\circ\\pi\\circ\\pi^{-1}=\\pi'^{-1}\\circ B,$$\nwhich is inverse naturality in each variable.",
+   "uses": [
+    "def-sfb-projection-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-adjunction-projection-formula.proof.md",
+    "place": "Proof, conclusion; unit clause 4"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-adjunction-has-projection-formula"
+  "def-sfb-adjunction-has-projection-formula",
+  "def-sfb-projection-formula"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-adjunction-projection-formula.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-adjunction-projection-formula.proof.md",
+  "place": "Proof, expanded into explicit adjunction-transpose calculations, following unit sk-def-sfb-transport clause 4"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|ProjectionFormula",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: no projection formula declaration in Mathlib category theory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula coherence for an adjunction with monoidal right adjoint",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε, CategoryTheory.Functor.Monoidal.μ_fst, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.IsMonoidal.mk, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern monoidal adjunctions, scalar or Cartesian special cases, or individual monoidal axioms; none states the full coherent projection formula for arbitrary monoidal categories with only S strong monoidal"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Monoidal",
+   "results": "CategoryTheory.Adjunction.map_η_comp_η, CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.Adjunction.map_η_comp_η_assoc, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.mapAddMon, CategoryTheory.Adjunction.mapMon",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern monoidal adjunctions, scalar or Cartesian special cases, or individual monoidal axioms; none states the full coherent projection formula for arbitrary monoidal categories with only S strong monoidal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction with strong monoidal right adjoint has natural projection formula maps compatible with unit and associativity",
+   "results": "CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern monoidal adjunctions, scalar or Cartesian special cases, or individual monoidal axioms; none states the full coherent projection formula for arbitrary monoidal categories with only S strong monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "left_unitality|associativity|homEquiv_naturality",
+   "results": "Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/End.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern monoidal adjunctions, scalar or Cartesian special cases, or individual monoidal axioms; none states the full coherent projection formula for arbitrary monoidal categories with only S strong monoidal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius reciprocity canonical comparison morphism of left adjoint to a tensor functor is coherent as a module functor",
+   "results": "ModuleCat.RestrictionCoextensionAdj.unit', Rep.MonoidalClosed.linearHomEquivComm, ModuleCat.restrictCoextendScalarsAdj, Rep.MonoidalClosed.linearHomEquiv, Rep.MonoidalClosed.linearHomEquivComm_hom, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, ModuleCat.instMonoidalClosed",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern monoidal adjunctions, scalar or Cartesian special cases, or individual monoidal axioms; none states the full coherent projection formula for arbitrary monoidal categories with only S strong monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "linear.*[Aa]dj|[Aa]dj.*linear|Frobenius|projection.*[Ff]ormula",
+   "results": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: frobeniusMorphism is restricted to Cartesian monoidal categories and does not state general unit and associativity coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear, CategoryTheory.Adjunction",
+   "results": "CategoryTheory.Adjunction.extLinearEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern monoidal adjunctions, scalar or Cartesian special cases, or individual monoidal axioms; none states the full coherent projection formula for arbitrary monoidal categories with only S strong monoidal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical Frobenius comparison of a left adjoint to a monoidal functor defines a morphism of module actions, preserving associators and unitors",
+   "results": "CategoryTheory.frobeniusMorphism, CategoryTheory.Adjunction.mapMon, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected frobeniusMorphism in Monoidal/Closed/Functor.lean (Cartesian monoidal hypotheses), the unrelated regular-category image comparison, and the monoidal-adjunction constructions; none states this coherent projection formula for arbitrary monoidal categories"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusMorphism|ProjectionFormula|projectionFormulaMap",
+   "results": "Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected frobeniusMorphism in Monoidal/Closed/Functor.lean (Cartesian monoidal hypotheses), the unrelated regular-category image comparison, and the monoidal-adjunction constructions; none states this coherent projection formula for arbitrary monoidal categories"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusMorphism|ProjectionFormula|projectionFormulaMap",
+   "results": "Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the monoidal-adjunction hypotheses and the Cartesian-only Frobenius comparison; none states the coherent projection formula for arbitrary monoidal categories with only the right adjoint strong monoidal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula coherence for an adjunction with monoidal right adjoint",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε, CategoryTheory.Functor.Monoidal.μ_fst, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.IsMonoidal.mk, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the monoidal-adjunction hypotheses and the Cartesian-only Frobenius comparison; none states the coherent projection formula for arbitrary monoidal categories with only the right adjoint strong monoidal"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Monoidal",
+   "results": "CategoryTheory.Adjunction.map_η_comp_η, CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.Adjunction.map_η_comp_η_assoc, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.mapAddMon, CategoryTheory.Adjunction.mapMon",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the monoidal-adjunction hypotheses and the Cartesian-only Frobenius comparison; none states the coherent projection formula for arbitrary monoidal categories with only the right adjoint strong monoidal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction with strong monoidal right adjoint has natural projection formula maps compatible with unit and associativity",
+   "results": "CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc, CategoryTheory.Adjunction.map_η_comp_η_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the monoidal-adjunction hypotheses and the Cartesian-only Frobenius comparison; none states the coherent projection formula for arbitrary monoidal categories with only the right adjoint strong monoidal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical Frobenius comparison of a left adjoint to a monoidal functor defines a morphism of module actions, preserving associators and unitors",
+   "results": "CategoryTheory.frobeniusMorphism, CategoryTheory.Adjunction.mapMon, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected the monoidal-adjunction hypotheses and the Cartesian-only Frobenius comparison; none states the coherent projection formula for arbitrary monoidal categories with only the right adjoint strong monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "module.*[Ff]unctor|[Ff]unctor.*strength|[Ff]robenius|projection.?formula",
+   "results": "Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/Monoidal/Bimon_.lean, Mathlib/CategoryTheory/Monoidal/Internal/Module.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader inspected local Monoidal/Functor.lean axioms and monoidal-adjunction hypotheses, Closed/Functor.lean Cartesian hypotheses, Rigid/Basic.lean exact-pairing adjunction, RegularCategory/Basic.lean subobject comparison, and Braided/Reflection.lean reflective symmetric-closed setting; none states the general canonical coherent projection formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobeniusMorphism\"",
+   "results": "CategoryTheory.frobeniusMorphism, CategoryTheory.frobeniusMorphism_iso_of_preserves_binary_products, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.Regular.frobeniusMorphism, CategoryTheory.Regular.instIsRegularEpiFrobeniusMorphism, CategoryTheory.Regular.frobeniusMorphism_isPullback",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader inspected local Monoidal/Functor.lean axioms and monoidal-adjunction hypotheses, Closed/Functor.lean Cartesian hypotheses, Rigid/Basic.lean exact-pairing adjunction, RegularCategory/Basic.lean subobject comparison, and Braided/Reflection.lean reflective symmetric-closed setting; none states the general canonical coherent projection formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical strength of a left adjoint induced by a strong monoidal right adjoint satisfies module functor coherence",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.mapMon, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit",
+   "date": "2026-10-16",
+   "verdict": "no match: second reader inspected local Monoidal/Functor.lean axioms and monoidal-adjunction hypotheses, Closed/Functor.lean Cartesian hypotheses, Rigid/Basic.lean exact-pairing adjunction, RegularCategory/Basic.lean subobject comparison, and Braided/Reflection.lean reflective symmetric-closed setting; none states the general canonical coherent projection formula"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -53,5 +254,20 @@
   "CategoryTheory.Adjunction.projectionFormula"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-adjunction-projection-formula",
+  "worker": "stage1",
+  "summary": "Expanded the imported coherence assertion into seven elementary calculations from the adjunction bijection and the strong monoidal axioms. Checked both existing definition statements, the current blueprint node and unit clause 4, and the upstream master reference implementation; no exact slopmaster2 attachment or Mathlib match was found. No statement change and no new nodes.",
+  "blueprint": "Realizes the first sentence (invertibility), naturality sentence (steps 2-3), unit sentence (step 4), and associativity sentence (steps 5-6) of def-sfb-adjunction-projection-formula.proof.md; packages the result in step 7. This is unit sk-def-sfb-transport clause 4."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q06-8532bf056",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-8532bf056 (reviewer sub-agent of L); spot-checked: Read the full item, seven proof steps, both cited definitions, current blueprint chapter/unit route, and source locations. Mate directions, naturality, unit and associativity calculations are correct; scalar-twisted vector-space tests pass. No new nodes, circularity, duplicate replacement, target weakening, or SGA use. No repairs or tool_uses needed. Detailed checks written to review.md."
+ }
 }

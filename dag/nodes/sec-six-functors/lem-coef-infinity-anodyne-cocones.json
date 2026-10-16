@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, derived coefficient adjunction: stable enhancement of the flat models; finite-shape induction, evaluation of an attached simplex at its final vertex. Right anodyne maps preserve coherent cocones and give inner anodyne joins.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction: finite-shape control of coherent diagrams in the stable flat-model enhancement. Right-anodyne join and coherent cocone restriction in the finite-shape induction.",
    "via": [
     "lem-coef-infinity-final-index-colimit",
     "lem-coef-infinity-finite-shape-generation",
@@ -26,9 +26,98 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First compute the generating case $i:\\Lambda_i^n\\hookrightarrow\\Delta^n$, $n\\geq1$, $0<i\\leq n$, and $k:\\partial\\Delta^q\\hookrightarrow\\Delta^q$, $q\\geq0$. A monotone map into the ordinal concatenation $[n]\\star[q]=[n+q+1]$ splits uniquely into the initial block and the final block, giving $\\Delta^n\\star\\Delta^q=\\Delta^{n+q+1}$ by the join formula in the statement. By the horn definition of [def-cbc-enhanced-diagrams-cones], the first part $\\Lambda_i^n\\star\\Delta^q$ is the union of the codimension-one faces omitting a vertex $j\\leq n$, $j\\ne i$. The second part $\\Delta^n\\star\\partial\\Delta^q$ adds exactly the codimension-one faces omitting a vertex $j>n$. Their intersection is $\\Lambda_i^n\\star\\partial\\Delta^q$, so the pushout is their union: the horn $\\Lambda_i^{n+q+1}$. Since $0<i\\leq n<n+q+1$, this is an inner horn. This includes $q=0$, when the second part is $\\Delta^n$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, final generating calculation; the ordinal identification of Lemma 4.3.6.16 is written out here."
+   }
+  },
+  {
+   "text": "For a fixed boundary inclusion $k:\\partial\\Delta^q\\hookrightarrow\\Delta^q$, [lem-coef-infinity-pushout-join-saturation] says that the class of monomorphisms $i$ with inner-anodyne $\\theta_{i,k}$ is weakly saturated. Step 1 puts all generating right horns in this class; the definition of right anodyne in the item therefore puts every right-anodyne $i$ in it. Now fix such an $i$. The same saturation lemma says that the class of $k$ with inner-anodyne $\\theta_{i,k}$ is weakly saturated, and the preceding argument puts every boundary inclusion in it. Apply [lem-coef-infinity-monomorphism-boundary-cells] to any monomorphism $K\\hookrightarrow L$. Its skeletal presentation attaches coproducts of boundary inclusions and then takes the countable composite. A coproduct of boundary inclusions lies in the class as well: well-order its set of summands, start with the coproduct of their domains, and successively replace each domain by its codomain; each successor map is a pushout of one boundary inclusion and the limit is the coproduct of the codomains. Pushout and transfinite-composition closure now put every skeletal successor map and its composite $K\\hookrightarrow L$ in the class. This proves the pushout-join assertion for the given $i$ and every monomorphism $k$.",
+   "uses": [
+    "lem-coef-infinity-pushout-join-saturation",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, the two saturation reductions; Proposition 1.5.5.14 (0077), relative skeletal presentation."
+   }
+  },
+  {
+   "text": "For the cocone clause, fix $p:B\\to\\mathcal C$ and $T\\in\\mathcal C$. Let $q_T:E_T\\to\\mathcal C$ be the fixed-target arrow projection of [lem-coef-infinity-arrow-target-right-fibration], which is a right fibration. For $H=B,A$ put $p_B=p$, $p_A=p\\circ i$, and let $S_H$ be the fiber over $p_H$ of $\\operatorname{Fun}(H,E_T)\\to\\operatorname{Fun}(H,\\mathcal C)$. These fibers use the constant simplices at $p_H$; their $n$-simplices are maps $H\\times\\Delta^n\\to E_T$ over $p_H\\circ\\mathrm{pr}_H$, by [def-cbc-enhanced-diagrams-cones]. Apply [lem-coef-infinity-right-fibration-exponentiation] with $E=E_T$, $S=\\mathcal C$, and the given right-anodyne $i$. Pull its displayed map back along $S_A\\to\\operatorname{Fun}(B,\\mathcal C)\\times_{\\operatorname{Fun}(A,\\mathcal C)}\\operatorname{Fun}(A,E_T)$, sending a section $s$ to $(p,s)$. Its pullback is precisely restriction $r:S_B\\to S_A$. Thus $r$ is a trivial Kan fibration: each lifting square for a boundary inclusion maps to one for the exponential map; its filler together with the prescribed base simplex is a filler in the pullback. This is the boundary-lifting definition in [def-weil-pbc-trivial-kan-fibration], including dimension zero.",
+   "uses": [
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0154",
+    "place": "Proposition 4.2.5.4 and Proposition 4.6.4.13 (01KQ); the section-space pullback used in the proof of Proposition 7.2.1.3 (02N3)."
+   }
+  },
+  {
+   "text": "For $H=A,B$, put $D_H=\\operatorname{Fun}(H,\\mathcal C)$; this is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus], with no assumption on $H$ beyond smallness. Unwind $E_T$, curry the maps in Step 3, and use the canonical permutation of product factors: an $n$-simplex of $S_H$ is precisely a map $H\\times\\Delta^n\\times\\Delta^1\\to\\mathcal C$ restricting at $0$ to $p_H\\circ\\mathrm{pr}_H$ and at $1$ to the constant $T$. Hence $S_H$ is exactly the arrow mapping space $U_{D_H}(p_H,\\Delta_HT)$ defined in [lem-coef-infinity-pinch-comparison]. That lemma supplies natural homotopy equivalences of Kan complexes $j_H:\\operatorname{Map}_{D_H}(p_H,\\Delta_HT)\\to S_H$. Naturality for the restriction functor $D_B\\to D_A$ gives the commuting square with upper map the item’s mapping-space restriction and lower map $r$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10 and the internal-functor identification of the unpinched arrow mapping spaces; compare the section-space argument of Proposition 7.2.2.1, (6) and (7)."
+   }
+  },
+  {
+   "text": "The trivial Kan fibration $r:S_B\\to S_A$ is a homotopy equivalence, as can be checked without any colimit existence. By [lem-weil-pbc-trivial-kan-lifts-monomorphisms], lifting against $\\varnothing\\hookrightarrow S_A$ gives a section $s:S_A\\to S_B$. Lift against the degreewise injective inclusion $S_B\\times\\partial\\Delta^1\\hookrightarrow S_B\\times\\Delta^1$, with endpoint maps $s\\circ r$ and $\\mathrm{id}_{S_B}$ and base map $r\\circ\\mathrm{pr}_{S_B}$. The lift is a simplicial homotopy between $s\\circ r$ and the identity, while $r\\circ s=\\mathrm{id}_{S_A}$. Thus $r$ induces bijections on components and isomorphisms on all homotopy groups. In Step 4’s square, both vertical maps $j_H$ have the same property by [lem-coef-infinity-pinch-comparison]. Commutativity therefore gives bijections on components and isomorphisms on homotopy groups for the upper restriction map as well: on each group its map is $(j_A)_*^{-1}r_*(j_B)_*$. This is the required equivalence of Kan complexes in the convention of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02N3",
+    "place": "Proposition 7.2.1.3, first-direction argument; explicit section/homotopy proof of the trivial-fibration implication, with pinch comparison 01L5."
+   }
+  },
+  {
+   "text": "Finally let $R:D_B\\to D_A$ be restriction. The equality $R\\circ\\Delta_B=\\Delta_A$ follows in every simplicial degree by precomposing with $i\\times\\mathrm{id}_{\\Delta^n}$. Consequently the restriction maps in the statement vary with $T$ through the constant-diagram functors, rather than through any chosen inverse of an equivalence. For an edge $T\\to T'$ and any coherent simplex witnessing postcomposition of a cocone $p\\to\\Delta_BT$, precomposing that simplex with $i$ gives the corresponding witness in $D_A$. The same equality holds for every higher simplex, so all the composition homotopies and their compatibilities restrict too. By the meanings of coherent transformations and higher simplices in [def-cbc-enhanced-diagrams-cones], this is precisely naturality in $T$ and compatibility with coherent postcomposition.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02NR",
+    "place": "Naturality of the precomposition construction; written out from the internal functor and constant-diagram definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-pushout-join-saturation",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, displayed derived coefficient adjunction; finite-shape enhancement infrastructure. The explicit simplicial argument follows Kerodon 018J and the right-fibration section-space proof of 02N3, with 01KQ, 0154 and 01L5; these online sources are not locally archived."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -116,7 +205,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-final-index-colimit",
   "by": "worker",
@@ -132,5 +221,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-anodyne-cocones",
+  "worker": "stage1",
+  "summary": "Replaced the earlier attempted split after reading Kerodon: the horn/boundary join calculation is now an elementary item step; an exact Mathlib boundary-cell leaf supplies arbitrary monomorphism generation. For cocones, general fixed-target arrow right fibrations and exponential lifting give a trivial fibration on section spaces. A separately cited natural pinch comparison identifies these sections with the specified mapping spaces; an explicit section-and-homotopy argument proves equivalence. All helper notions are defined inline or by their actual definition nodes, no cofinality notion or clause-restating cofinal cocone helper remains, and the item statement is unchanged.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint, derived coefficient adjunction: the inherited finite-shape enhancement branch. Steps 1–2 prove the right-anodyne join clause, Steps 3–5 establish coherent-cocone restriction independently of colimit existence, and Step 6 proves compatibility. This is below the fixed unit level.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only its statement that Fun(H,C) is a quasicategory for every small H is used, to apply the generic pinch comparison. No statement of this unit supplies that general functor-category theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-006106137",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-006106137 (reviewer sub-agent of L); spot-checked: Read all six statements, every proof step, cited statements, sources, and unit/chapter route. Mathematics checks passed, including 5,840 finite horn/join checks; no duplicate, restated split, missing dependency, or cycle found. Corrected the pinch helper’s blueprint reference from Construction 4.6.5.6 to 4.6.5.7 under fixes/. Accepted the declared functor-category tool use. Full findings are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

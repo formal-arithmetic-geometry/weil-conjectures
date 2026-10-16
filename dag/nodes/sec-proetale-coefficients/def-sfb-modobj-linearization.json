@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-modobj-linearization",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Linearization of a functor with a projection formula",
@@ -14,43 +14,220 @@
  },
  "stmt_deps": [
   "def-sfb-projection-formula",
+  "det-def-sfb-ring-object-monoid",
+  "det-def-sfb-ring-object-transport",
   "sk-def-sfb-module-objects"
  ],
  "proof": [
   {
-   "text": "We use the notation of [def-sfb-projection-formula]. The monoid $S\\mathcal B$ has unit\n$S(\\eta_{\\mathcal B})\\epsilon^{-1}$ and multiplication\n$S(\\mu_{\\mathcal B})\\delta_{\\mathcal B,\\mathcal B}^{-1}$.",
+   "text": "Write $B=\\mathcal B$, $R=SB$, and let $\\mu_B,\\eta_B$ be the multiplication and unit of $B$. Apply [det-def-sfb-ring-object-transport], clause 1, to the strong monoidal functor $S\\colon\\mathcal D\\to\\mathcal C$. Its lax structure maps are $\\delta^{-1}$ and $\\epsilon^{-1}$ in the notation of [def-sfb-projection-formula]. Thus $R$ is a monoid object with\n$$\\mu_R=S(\\mu_B)\\circ\\delta_{B,B}^{-1},\\qquad \\eta_R=S(\\eta_B)\\circ\\epsilon^{-1}.$$\nFor an $R$-module $M$, denote its given action by $\\gamma_M$. Put $\\phi_{L,M}=\\pi_{L,M}^{-1}$ and define the proposed action $a_M=P(\\gamma_M)\\circ\\phi_{B,M}\\colon B\\otimes PM\\to PM$. These formulas specify the data without any choice.",
+   "uses": [
+    "det-def-sfb-ring-object-transport",
+    "def-sfb-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearization.md",
+    "place": "displayed action; monoid structure supplied by det-def-sfb-ring-object-transport, clause 1"
+   }
+  },
+  {
+   "text": "We will use inverse naturality of [def-sfb-projection-formula]. For $u\\colon L\\to L'$ and $v\\colon M\\to M'$ it gives\n$$\\phi_{L',M}\\circ(u\\otimes\\mathrm{id}_{PM})=P(Su\\otimes\\mathrm{id}_M)\\circ\\phi_{L,M},$$\n$$\\phi_{L,M'}\\circ(\\mathrm{id}_L\\otimes Pv)=P(\\mathrm{id}_{SL}\\otimes v)\\circ\\phi_{L,M}.$$\nIndeed, the forward naturality equality is $\\pi'\\circ P(t)=t'\\circ\\pi$; composing on the left by $(\\pi')^{-1}$ and on the right by $\\pi^{-1}$ gives $P(t)\\circ\\pi^{-1}=(\\pi')^{-1}\\circ t'$. This proves both displayed equalities by cancellation of inverse isomorphisms.",
    "uses": [
     "def-sfb-projection-formula"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-projection-formula.md",
+    "place": "naturality in L and M, inverted by cancellation"
+   }
   },
   {
-   "text": "Unit law. By naturality of $\\pi$ in $L$,\n$$\nP(\\gamma_M)\\pi^{-1}_{\\mathcal B,M}(\\eta_{\\mathcal B}\\otimes PM)\n=P\\bigl(\\gamma_M(S\\eta_{\\mathcal B}\\otimes M)\\bigr)\\pi^{-1}_{\\mathbf 1,M}.\n$$\nThe unit law of $M$ gives $\\gamma_M(S\\eta_{\\mathcal B}\\otimes M)=\\lambda_M(\\epsilon\\otimes M)$.\nBy the unit compatibility of $\\pi$, the right side is therefore $\\lambda_{PM}$.",
-   "uses": [],
-   "elementary": null
+   "text": "For the unit, use the module unit axiom in [sk-def-sfb-module-objects] and the formula $\\eta_R=S\\eta_B\\circ\\epsilon^{-1}$ from step 1. Precomposing $\\gamma_M\\circ(\\eta_R\\otimes\\mathrm{id}_M)=\\lambda_M$ with $\\epsilon\\otimes\\mathrm{id}_M$ yields\n$$\\gamma_M\\circ(S\\eta_B\\otimes\\mathrm{id}_M)=\\lambda_M\\circ(\\epsilon\\otimes\\mathrm{id}_M).$$\nInverse naturality at $u=\\eta_B$ (step 2) and the unit compatibility in [def-sfb-projection-formula] now give\n$$\\begin{aligned}\na_M\\circ(\\eta_B\\otimes\\mathrm{id}_{PM})\n&=P\\bigl(\\gamma_M\\circ(S\\eta_B\\otimes\\mathrm{id}_M)\\bigr)\\circ\\phi_{\\mathbf1,M}\\\\\n&=P\\bigl(\\lambda_M\\circ(\\epsilon\\otimes\\mathrm{id}_M)\\bigr)\\circ\\phi_{\\mathbf1,M}\n=\\lambda_{PM}\\circ\\pi_{\\mathbf1,M}\\circ\\phi_{\\mathbf1,M}=\\lambda_{PM}.\n\\end{aligned}$$\nThus $a_M$ is unital; only functoriality and inverse cancellation were used in the equalities.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-sfb-projection-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-projection-formula.md",
+    "place": "unit compatibility, applied to the module unit axiom"
+   }
   },
   {
-   "text": "Associativity. Naturality of $\\pi$ in $L$, applied to $\\mu_{\\mathcal B}$, reduces the\nassociativity of the action to the associativity of $\\gamma_M$ for the multiplication of\n$S\\mathcal B$. This multiplication involves $\\delta_{\\mathcal B,\\mathcal B}$. The\nassociativity compatibility of $\\pi$, together with naturality of $\\pi$ in $M$ applied to\n$\\gamma_M$, identifies the two sides.",
-   "uses": [],
-   "elementary": null
+   "text": "For associativity set\n$$c_M=\\alpha_{R,R,M}\\circ(\\delta_{B,B}\\otimes\\mathrm{id}_M)\\colon S(B\\otimes B)\\otimes M\\to R\\otimes(R\\otimes M).$$\nThe module associativity axiom in [sk-def-sfb-module-objects], precomposed with $\\delta_{B,B}\\otimes\\mathrm{id}_M$, and $\\mu_R\\circ\\delta_{B,B}=S\\mu_B$ from step 1 give\n$$\\gamma_M\\circ(S\\mu_B\\otimes\\mathrm{id}_M)=\\gamma_M\\circ(\\mathrm{id}_R\\otimes\\gamma_M)\\circ c_M.\\tag{A}$$\nThe associativity compatibility in [def-sfb-projection-formula] is\n$$\\alpha_{B,B,PM}\\circ\\pi_{B\\otimes B,M}=(\\mathrm{id}_B\\otimes\\pi_{B,M})\\circ\\pi_{B,R\\otimes M}\\circ P(c_M).$$\nCompose this equality on the left with $\\phi_{B,R\\otimes M}\\circ(\\mathrm{id}_B\\otimes\\phi_{B,M})$ and on the right with $\\phi_{B\\otimes B,M}$. Cancellation, using that tensoring is a functor, gives\n$$P(c_M)\\circ\\phi_{B\\otimes B,M}=\\phi_{B,R\\otimes M}\\circ(\\mathrm{id}_B\\otimes\\phi_{B,M})\\circ\\alpha_{B,B,PM}.\\tag{B}$$\nBoth (A) and (B) are direct substitutions in the cited axioms.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-sfb-projection-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-projection-formula.md",
+    "place": "associativity compatibility, inverted; module associativity"
+   }
   },
   {
-   "text": "Linearity of $Pf$ is naturality of $\\pi$ in $M$.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply inverse naturality at $u=\\mu_B$ from step 2, then (A), then (B) from step 4, and finally inverse naturality in $M$ at $v=\\gamma_M\\colon R\\otimes M\\to M$:\n$$\\begin{aligned}\na_M\\circ(\\mu_B\\otimes\\mathrm{id}_{PM})\n&=P\\bigl(\\gamma_M\\circ(S\\mu_B\\otimes\\mathrm{id}_M)\\bigr)\\circ\\phi_{B\\otimes B,M}\\\\\n&=P\\gamma_M\\circ P(\\mathrm{id}_R\\otimes\\gamma_M)\\circ P(c_M)\\circ\\phi_{B\\otimes B,M}\\\\\n&=P\\gamma_M\\circ P(\\mathrm{id}_R\\otimes\\gamma_M)\\circ\\phi_{B,R\\otimes M}\\circ(\\mathrm{id}_B\\otimes\\phi_{B,M})\\circ\\alpha_{B,B,PM}\\\\\n&=P\\gamma_M\\circ\\phi_{B,M}\\circ(\\mathrm{id}_B\\otimes P\\gamma_M)\\circ(\\mathrm{id}_B\\otimes\\phi_{B,M})\\circ\\alpha_{B,B,PM}\\\\\n&=a_M\\circ(\\mathrm{id}_B\\otimes a_M)\\circ\\alpha_{B,B,PM}.\n\\end{aligned}$$\nThe naturality used here is precisely that of [def-sfb-projection-formula]; the penultimate-to-last equality is functoriality of $B\\otimes-$. The equality is the action associativity axiom of [sk-def-sfb-module-objects]. Together with step 3, it makes $(PM,a_M)$ a $B$-module. No strictness or symmetry of the monoidal categories is assumed.",
+   "uses": [
+    "def-sfb-projection-formula",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearization.md",
+    "place": "the assertion that the displayed action makes PM a module; explicit associativity calculation"
+   }
+  },
+  {
+   "text": "Let $f\\colon M\\to N$ be an $R$-linear map. The morphism condition of [sk-def-sfb-module-objects] is $f\\circ\\gamma_M=\\gamma_N\\circ(\\mathrm{id}_R\\otimes f)$. Apply $P$ and use inverse naturality from [def-sfb-projection-formula] (step 2) at $v=f$ to obtain\n$$\\begin{aligned}\nPf\\circ a_M\n&=P(f\\circ\\gamma_M)\\circ\\phi_{B,M}\\\\\n&=P\\gamma_N\\circ P(\\mathrm{id}_R\\otimes f)\\circ\\phi_{B,M}\n=P\\gamma_N\\circ\\phi_{B,N}\\circ(\\mathrm{id}_B\\otimes Pf)\n=a_N\\circ(\\mathrm{id}_B\\otimes Pf).\n\\end{aligned}$$\nThis is exactly $B$-linearity of $Pf$.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-sfb-projection-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearization.md",
+    "place": "the assertion that Pf is B-linear"
+   }
+  },
+  {
+   "text": "Define $P_B$ on objects by $(M,\\gamma_M)\\mapsto(PM,a_M)$ and on morphisms by $f\\mapsto Pf$, as justified in steps 3, 5 and 6. By [sk-def-sfb-module-objects], identities and composition of module morphisms are the underlying ones in their monoidal category. Hence $P_B(\\mathrm{id}_M)=P(\\mathrm{id}_M)=\\mathrm{id}_{PM}$ and $P_B(g\\circ f)=P(g\\circ f)=Pg\\circ Pf$. Equal underlying morphisms are equal module morphisms because their linearity conditions are properties. If $U_R,U_B$ are the forgetful functors, then both $U_B\\circ P_B$ and $P\\circ U_R$ send $M$ to $PM$ and $f$ to $Pf$. Thus they agree, proving the claimed commutation with forgetful functors.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearization.md",
+    "place": "definition of P_B and commutation with the forgetful functors"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-projection-formula"
+  "det-def-sfb-ring-object-transport",
+  "def-sfb-projection-formula",
+  "sk-def-sfb-module-objects"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-linearization.md",
-  "place": "## Proof"
+  "place": "displayed action and functor; explicit verification from def-sfb-projection-formula and sk-def-sfb-module-objects"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ProjectionFormula|mapModLeft|ModObj|ModuleObject",
+   "results": "10 hits: Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean",
+   "date": "2026-10-16",
+   "verdict": "No match: module-object axioms in Mathlib/CategoryTheory/Monoidal/Mod.lean:59-66 and trivial Cartesian actions in Cartesian/Mod.lean:35; no projection-formula linearization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projection formula linearizes a functor to a functor between module objects over a monoid in monoidal categories",
+   "results": "8 hits: MvQPF.Prj.mvfunctor, CategoryTheory.ActionCategory.π, CategoryTheory.Functor.Monoidal.μ_fst, CategoryTheory.FreeMonoidalCategory.instMonoidalProject, CategoryTheory.StructuredArrow.proj_map, CategoryTheory.CostructuredArrow.grothendieckProj, CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.functor, CategoryTheory.ActionCategory.π_map",
+   "date": "2026-10-16",
+   "verdict": "No match: projection functors and monoidal functor-category monoid equivalence do not lift P via a projection formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectionFormula\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No match: zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projection formula for a functor relative to a strong monoidal functor lifts the functor to categories of module objects over a monoid",
+   "results": "8 hits: CategoryTheory.Mod_.comap, CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_Class, CategoryTheory.Mod_.X, CategoryTheory.Mod_.forget, CategoryTheory.Mod_.comap_obj_X, CategoryTheory.Mod_.comap_obj_mod, CoalgCat.MonoidalCategory.inducingFunctorData",
+   "date": "2026-10-16",
+   "verdict": "No match: Mod_.comap and scalarRestriction restrict scalars within a fixed ambient category; Mod_Class, X and forget only describe modules; CoalgCat inducingFunctorData gives a monoidal structure on coalgebras."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|ProjectionFormula|projection.formula|lineariz",
+   "results": "1 hits: Mathlib/CategoryTheory/Monoidal/Mon.lean",
+   "date": "2026-10-16",
+   "verdict": "No match: only Mathlib/CategoryTheory/Monoidal/Mon.lean:856, a TODO for mapMod, not a declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"Functor\"",
+   "results": "12 hits: ModuleCat.MonoidalCategory.instBraidedSemimoduleCatFunctorEquivalenceSemimoduleCat, ModuleCat.restrictScalarsEquivalenceOfRingEquiv_functor, CategoryTheory.instLinearModuleCatObjOppositeFunctorLinearCoyoneda, CategoryTheory.instLinearOppositeModuleCatObjFunctorLinearYoneda, PresheafOfModules.instFaithfulFunctorOppositeAbToPresheaf, PresheafOfModules.instAdditiveFunctorOppositeAbToPresheaf, PresheafOfModules.instPreservesLimitsOfSizeFunctorOppositeAbToPresheaf, PresheafOfModules.instPreservesLimitsOfShapeFunctorOppositeAbToPresheaf",
+   "date": "2026-10-16",
+   "verdict": "No match: hits concern ordinary ModuleCat functors, linear Yoneda, presheaves of modules and localization; none accepts an arbitrary projection formula between monoidal categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport an action of an internal monoid along the isomorphism P(S B tensor M) isomorphic to B tensor P M, natural and compatible with associativity and unit",
+   "results": "8 hits: Action.leftRegularTensorIso, Rep.instMonoidalActionTypeLinearization, Rep.linearization_μ_hom, Action.leftRegularTensorIso_hom_hom, Rep.linearization_δ_hom, CategoryTheory.Mod_.scalarRestriction, Action.tensor_ρ, Rep.tensor_ρ",
+   "date": "2026-10-16",
+   "verdict": "No match: group-action isomorphisms and representation linearization have additional concrete hypotheses; scalar restriction changes a monoid within one ambient category. None constructs the functor in the item."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarRestriction|def comap|def linearization|leftRegularTensorIso|def functorObj",
+   "results": "24 hits: Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/Monoidal/Internal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Internal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Internal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Internal/FunctorCategory.lean, Mathlib/CategoryTheory/Pi/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "No match: read Mod.lean:363-413, Internal/FunctorCategory.lean:51-74 and Action/Monoidal.lean:230-245; respectively restriction of scalars, evaluation of a monoid-valued functor and a group-action isomorphism, not this construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor of module categories induced by a natural tensor projection isomorphism with unit and associativity compatibility",
+   "results": "8 hits: ModuleCat.monoidalCategory, ModuleCat.MonoidalCategory.instMonoidalCategoryStruct, CategoryTheory.Functor.CoreMonoidal.mk, CategoryTheory.Functor.CoreMonoidal.ofBifunctor, CategoryTheory.Monoidal.InducingFunctorData.μIso, CategoryTheory.unitOfTensorIsoUnit, PresheafOfModules.monoidalCategory, CategoryTheory.MonoidalCategory.tensorUnitRight",
+   "date": "2026-10-16",
+   "verdict": "No match: CoreMonoidal requires isomorphisms P(X) tensor P(Y) to P(X tensor Y); the item instead has P(S L tensor M) to L tensor P(M). Other hits are ordinary module monoidal structures and tensor-unit functors."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectionFormula|mapModLeft|module.*functor|functor.*module",
+   "results": "25 hits: concrete condensed-module, sheaf-module and ordinary module functors; no ProjectionFormula or mapModLeft declaration. Exact tool output summarized in searches.jsonl, digest b019a0572b260eed.",
+   "date": "2026-10-16",
+   "verdict": "No match: these functors concern fixed concrete module categories, not coherent projection-formula linearization between arbitrary monoidal categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary functor with coherent tensor module constraints sends internal left modules over S B to internal left modules over B",
+   "results": "8 hits: CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.comap, CategoryTheory.Mod_.forget, CategoryTheory.Mod_.comap_obj_mod, CategoryTheory.Mod_.X, CategoryTheory.Mod_Class, CategoryTheory.Mod_.comap_obj_X, CategoryTheory.Mod_.regular.",
+   "date": "2026-10-16",
+   "verdict": "No match: scalarRestriction and comap change scalars within a fixed category with a monoidal action; the remaining declarations describe modules, their underlying objects and the forgetful functor. None lifts an arbitrary P across different ambient categories."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectionFormula|mapModLeft|mapMod|lineariz",
+   "results": "1 hits: Mathlib/CategoryTheory/Monoidal/Mon.lean; actual search digest d51e109d108009b8",
+   "date": "2026-10-16",
+   "verdict": "No match: the sole hit is the mapMod TODO in Mathlib/CategoryTheory/Monoidal/Mon.lean:856, not a declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a functor with a coherent projection formula to a functor on internal module objects in monoidal categories",
+   "results": "8 hits: CategoryTheory.Functor.Monoidal.lift_μ_assoc, CategoryTheory.Functor.Monoidal.lift_μ, FGModuleCat.ulift, Mathlib.Tactic.Coherence.LiftObj_tensor, CategoryTheory.Mod_.forget, Mathlib.Tactic.Coherence.LiftObj_of, CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPost, CategoryTheory.isInternallyProjective; actual search digest f8808be71fa773fb",
+   "date": "2026-10-16",
+   "verdict": "No match: Cartesian lift identities require a monoidal functor and concern product maps; FGModuleCat.ulift changes universes; forget forgets an existing action; the remaining hits concern coherence, localization or projectivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectionFormula\"",
+   "results": "0 hits: ; actual search digest 4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "verdict": "No match: zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projection formula for an arbitrary functor P relative to a strong monoidal functor S induces a functor from internal S B modules to internal B modules",
+   "results": "8 hits: CategoryTheory.Mod_.comap, CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.forget, CategoryTheory.Mod_Class, CategoryTheory.Mod_.X, CategoryTheory.Mod_, CategoryTheory.Mod_.comap_obj_X, CategoryTheory.Mod_.comap_obj_mod; actual search digest 2bdcc2846d34c423",
+   "date": "2026-10-16",
+   "verdict": "No match: comap and scalarRestriction keep the ambient module category fixed and change its coefficient monoid; the other hits define modules or forget their structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given isomorphisms P(S L tensor M) to L tensor P M satisfying unit and associativity, define a B action on P M by inverse projection followed by P of the S B action",
+   "results": "8 hits: Bimod.TensorBimod.actRight, Bimod.TensorBimod.actLeft, Bimod.tensorBimod_actLeft, Bimod.tensorBimod, Bimod.tensorBimod_actRight, TensorProduct.CompatibleSMul.unit, Bimod.LeftUnitorBimod.hom, Rep.instMonoidalActionTypeLinearization; actual search digest 9aed7b7d33fa22dc",
+   "date": "2026-10-16",
+   "verdict": "No match: bimodule tensor actions use coequalizers in one ambient monoidal category; CompatibleSMul is a scalar compatibility lemma; representation linearization has concrete ring and monoid hypotheses. None lifts an arbitrary functor with the stated projection constraints."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -68,5 +245,29 @@
   "CategoryTheory.Functor.ProjectionFormula.mapModLeft"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-linearization",
+  "worker": "stage1",
+  "summary": "Checked the main-20261015 construction, the precise projection-formula axioms and module-object axioms, upstream master reference and slopmaster2 source. Reused the existing monoid-transport statement; inverted naturality and associativity by cancellation, wrote the complete unit/associativity/linearity calculations, and verified functoriality and the forgetful square. No new nodes or statement changes. Mathlib searches in two phrasings found no match.",
+  "blueprint": "Realizes sk-def-sfb-transport clause 3 (left linearization only), and all clauses of def-sfb-modobj-linearization: displayed action, module laws, linear maps, functor and forgetful square. The imported vague associativity paragraph is expanded in steps 4-5.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-ring-object-transport",
+    "why": "Clause 1 supplies transport of the coefficient monoid along the given strong monoidal S. This is a generic monoid-transport tool; it does not replace the projection-formula linearization route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-ring-object-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-0d681a417",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-0d681a417 (reviewer sub-agent of L); spot-checked: Read the complete mathematics and current blueprint sources. All seven steps correctly establish module laws, linearity, functoriality and the forgetful square. Checked tensor constraints, noncommutative and zero-module cases, duplicates and dependency cycles. Accepted monoid-transport clause 1 as a generic tool. No repairs needed; detailed checks are in review.md."
+ }
 }

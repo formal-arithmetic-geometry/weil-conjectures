@@ -3,34 +3,119 @@
  "blueprint": {
   "is": "lem-sfb-coefficient-map-comp",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The coefficient change of a composite",
- "statement": "For morphisms $a\\colon\\Lambda\\to\\Lambda'$ and $b\\colon\\Lambda'\\to\\Lambda''$ of condensed\nabelian groups (in particular of condensed rings) and every scheme $X$, the coefficient changes\nof [def-sfb-coefficient-map] satisfy $(b\\circ a)_X=b_X\\circ a_X$.",
+ "statement": "For morphisms $a\\colon\\Lambda\\to\\Lambda'$ and $b\\colon\\Lambda'\\to\\Lambda''$ of condensed\nabelian groups (in particular of condensed rings) and every scheme $X$, the coefficient changes\nof [def-sfb-coefficient-map] satisfy $(b\\circ a)_X=b_X\\circ a_X$.\nHere, for an arbitrary morphism $c$ of condensed abelian groups, $c_X:=p_X^*c$, with $p_X^*$ the functor of [sk-def-sfb-pullback-from-point]; for condensed rings this is exactly [def-sfb-coefficient-map].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/lem-sfb-coefficient-map-comp.md",
   "place": "node lem-sfb-coefficient-map-comp, order 1723"
  },
  "stmt_deps": [
-  "def-sfb-coefficient-map"
+  "def-sfb-coefficient-map",
+  "sk-def-sfb-pullback-from-point"
  ],
- "proof": [
-  {
-   "text": "$(b\\circ a)_X=p_X^*(b\\circ a)=p_X^*b\\circ p_X^*a$, since the functor $p_X^*$ preserves\ncomposition.",
-   "uses": [],
-   "elementary": null
-  }
- ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-change/lem-sfb-coefficient-map-comp.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of coefficient maps induced by inverse image functor p_X^* on condensed abelian groups",
+   "results": "8 hits: Condensed.freeAb, LightCondensed.ihomPoints_symm_comp, CondensedMod.LocallyConstant.functorToPresheaves, LightCondensed.forget_obj_val_map, LightCondensed.ihom_map_val_app, CondensedMod.hom_naturality_apply, CondensedMod.LocallyConstant.functor, Condensed.profiniteFree",
+   "date": "2026-10-16",
+   "verdict": "no match among the returned hits; the subsequent general functor-law search supplies the match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functor preserves composition map of ring objects",
+   "results": "8 hits: RingCat.ofHom_comp, RingCat.hom_comp, RingCat.comp_apply, CommRingCat.comp_apply, CommRingCat.ofHom_comp, CommRingCat.hom_comp, CommSemiRingCat.ofHom_comp, CommSemiRingCat.comp_apply",
+   "date": "2026-10-16",
+   "verdict": "no match among the returned hits; the subsequent general functor-law search supplies the match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map (f ≫ g) = Functor.map f ≫ Functor.map g",
+   "results": "0 hits: ; loogle: <input>:1:15: expected token",
+   "date": "2026-10-16",
+   "verdict": "invalid query; corrected with the subsequent declaration-name query"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "6 hits: CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp, PresheafOfModules.map_comp_assoc, PresheafOfModules.mk, PresheafOfModulesOfCommRing.mk, AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Functor.map_comp, after unfolding coefficient change and specializing to p_X^*"
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp|map_comp",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/Basic.lean, Mathlib/CategoryTheory/PathCategory/Basic.lean, Mathlib/CategoryTheory/PathCategory/Basic.lean, Mathlib/CategoryTheory/PathCategory/Basic.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match among the returned hits; the subsequent general functor-law search supplies the match"
+  },
+  {
+   "tool": "grep",
+   "query": "Functor.*composition",
+   "results": "25 hits: Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean, Mathlib/CategoryTheory/Category/ReflQuiv.lean, Mathlib/CategoryTheory/Category/Quiv.lean, Mathlib/CategoryTheory/Category/Quiv.lean, Mathlib/CategoryTheory/Category/Quiv.lean, Mathlib/CategoryTheory/Category/Quiv.lean, Mathlib/CategoryTheory/Category/Quiv.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match among the returned hits; the subsequent general functor-law search supplies the match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of coefficient maps induced by inverse image functor",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.StructureSheaf.comap_comp, SheafOfModules.pullbackComp, PrimeSpectrum.comap_comp, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app', AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app, AlgebraicGeometry.Scheme.Hom.comp_preimage",
+   "date": "2026-10-16",
+   "verdict": "no match among the returned hits; the subsequent general functor-law search supplies the match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a functor preserves composition,",
+   "results": "8 hits: Functor.Comp.comp_map, CategoryTheory.Functor.map_comp_assoc, CategoryTheory.Functorial.map_comp, CategoryTheory.Functor.map_comp, CategoryTheory.FunctorToTypes.map_comp_apply, Functor.map_comp_map, Functor.Comp.functor, CategoryTheory.functorial_comp",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Functor.map_comp, after unfolding coefficient change and specializing to p_X^*"
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp|preserves composition",
+   "results": "5 hits: 38, 48, 49, 56, 58; searched Mathlib/CategoryTheory/Functor/Basic.lean; single-file grep output parsed the line numbers as file fields; the next directory-scoped search confirms the file and line correctly.",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Functor.map_comp, after unfolding coefficient change and specializing to p_X^*"
+  },
+  {
+   "tool": "grep",
+   "query": "A functor preserves composition|^  map_comp : ∀",
+   "results": "3 hits: Mathlib/CategoryTheory/Functor/Basic.lean, Mathlib/CategoryTheory/Functor/Basic.lean, Mathlib/CategoryTheory/Functor/Functorial.lean; searched Mathlib/CategoryTheory/Functor; Mathlib/CategoryTheory/Functor/Basic.lean:48-49 gives CategoryTheory.Functor.map_comp; also Functorial.lean:34.",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Functor.map_comp, after unfolding coefficient change and specializing to p_X^*"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_comp\", CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_comp_assoc, CategoryTheory.eqToHom_map_comp, CategoryTheory.eqToHom_map_comp_assoc, CategoryTheory.Functor.map_comp_heq', CategoryTheory.Functor.map_comp_heq, CategoryTheory.Functor.map_comp_apply, CategoryTheory.eqToHom_map_comp_apply",
+   "date": "2026-10-16",
+   "verdict": "match: independent second-reader search confirms CategoryTheory.Functor.map_comp; pinned source read at Mathlib/CategoryTheory/Functor/Basic.lean:49"
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp : ∀.*map.*≫",
+   "results": "2 hits: Mathlib/CategoryTheory/Functor/Functorial.lean, Mathlib/CategoryTheory/Functor/Basic.lean; searched Mathlib/CategoryTheory/Functor",
+   "date": "2026-10-16",
+   "verdict": "match: independent second-reader search confirms CategoryTheory.Functor.map_comp; pinned source read at Mathlib/CategoryTheory/Functor/Basic.lean:49"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.map_comp",
+  "file": "Mathlib/CategoryTheory/Functor/Basic.lean",
+  "line": 49,
+  "how": "specializes in one line: instantiate the functor law at F = p_X^* and the composable arrows a, b, unfolding c_X := F.map c. Lines 40-49 define Functor and its map_comp field; line 49 gives F.map (a ≫ b) = F.map a ≫ F.map b, which is the stated equation in diagrammatic composition order. The assertion is in the category of abelian sheaves, also when a and b underlie ring morphisms."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -47,5 +132,20 @@
   "AlgebraicGeometry.ProEtale.coefficientMap_comp"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-coefficient-map-comp",
+  "worker": "stage1",
+  "summary": "Read the current blueprint statement, its one-line proof and its parent unit. No matching project declaration was found in slopmaster2. The entire assertion is a one-line specialization of Mathlib Functor.map_comp at the inverse-image functor, so record the item itself as a Mathlib leaf and create no nodes. Clarified coefficient-map notation for arbitrary condensed abelian groups without changing any quantifier or conclusion; the cited definition is written only for rings. Recorded all actual searches, including an invalid initial Loogle query and a grep output formatting issue.",
+  "blueprint": "Realizes the unique paragraph of lem-sfb-coefficient-map-comp.proof.md and the coefficient-composition clause of sk-def-sfb-coefficient-change/_section.md by Mathlib Functor.map_comp. No unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N4-7c5b749ab",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-7c5b749ab (reviewer sub-agent of L); spot-checked: Read the item, report, cited definitions, current blueprint route, and Mathlib source in full. Functor.map_comp specializes exactly, with correct coefficient category and composition order. Checked edge cases, duplicate candidates, and dependency cycles. No new nodes, repairs, or accepted tool_uses. Wrote review.md."
+ }
 }
