@@ -533,5 +533,37 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-814fa2acd (reviewer sub-agent of L); spot-checked: Read both nodes and checked all ten steps against SGA XVII 6.2.1–6.2.3, cited Stacks statements, and the unit/master-source route. Mathematics accepted, including nonreduced multiplicities and nonflat coefficient changes. Supplied corrected JSON for missing new-node metadata and an irrelevant Step 9 source reference. Detailed checks and accepted tool uses are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a250674f7",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all 16 statement dependencies, source clauses, 11 declarations, edge cases, universes, docstrings, and verbatim signature. scompile.py reproduced clean sandbox and library compiles. No delivery errors found; branch and clones unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiFiniteFlatWeightedTrace",
+  "declaration": "AlgebraicGeometry.Etale.quasiFiniteFlatWeightedTrace",
+  "declarations": [
+   "AlgebraicGeometry.Etale.weightedTraceFibrePoint",
+   "AlgebraicGeometry.Etale.weightedTraceMultiplicity",
+   "AlgebraicGeometry.Etale.weightedTraceCoordinate",
+   "AlgebraicGeometry.Etale.IsQuasiFiniteFlatWeightedTrace",
+   "AlgebraicGeometry.Etale.WeightedTraceBaseChange",
+   "AlgebraicGeometry.Etale.WeightedTraceComposition",
+   "AlgebraicGeometry.Etale.weightedTraceScalarComparison",
+   "AlgebraicGeometry.Etale.WeightedTraceCoefficientChange",
+   "AlgebraicGeometry.Etale.WeightedTraceEtaleNormalization",
+   "AlgebraicGeometry.Etale.WeightedTraceRank",
+   "AlgebraicGeometry.Etale.quasiFiniteFlatWeightedTrace"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiFiniteFlatWeightedTrace.lean",
+  "statement": "theorem quasiFiniteFlatWeightedTrace (B : Type (u + 1)) [CommRing B] [Finite B] {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsSeparated f] [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] (hq : f.IsQuasiFinite) : PreservesFiniteLimits (lowerShriek (ModuleCat.{u + 1} B) f) ∧ PreservesFiniteColimits (lowerShriek (ModuleCat.{u + 1} B) f) ∧ Nonempty (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) 0 ⋙ rightDerivedLowerShriek (ModuleCat.{u + 1} B) f ≅ lowerShriek (ModuleCat.{u + 1} B) f ⋙ DerivedCategory.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B)) 0) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y), IsFinite (pullback.snd f y) ∧ Finite (pullback f y : Scheme.{u}) ∧ Function.Bijective (weightedTraceFibrePoint f y) ∧ ∀ x : (pullback f y : Scheme.{u}), IsArtinianRing ((pullback f y).presheaf.stalk x) ∧ IsFiniteLength ((pullback f y).presheaf.stalk x) ((pullback f y).presheaf.stalk x) ∧ IsIso ((pullback.snd f y).residueFieldMap x)) ∧ (∀ (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B)) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y), Function.Bijective (fun a ↦ fun t : f.GeometricFiber y ↦ (weightedTraceCoordinate B f F y t) a)) ∧ (∃! τ : upperStar (ModuleCat.{u + 1} B) f ⋙ lowerShriek (ModuleCat.{u + 1} B) f ⟶ 𝟭 (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B)), IsQuasiFiniteFlatWeightedTrace B f τ) ∧ ∀ τ : upperStar (ModuleCat.{u + 1} B) f ⋙ lowerShriek (ModuleCat.{u + 1} B) f ⟶ 𝟭 (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B)), IsQuasiFiniteFlatWeightedTrace B f τ → WeightedTraceBaseChange B f τ ∧ WeightedTraceComposition B f τ ∧ WeightedTraceCoefficientChange B f τ ∧ WeightedTraceEtaleNormalization B f τ ∧ WeightedTraceRank B f τ",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The helper definitions spell out the canonical restriction-of-germs coordinates and the trace compatibility equations. The theorem states every clause simultaneously. Comparisons for composition, base change, scalar restriction, and the etale normalization are characterized by their maps into ordinary direct image."
  }
 }

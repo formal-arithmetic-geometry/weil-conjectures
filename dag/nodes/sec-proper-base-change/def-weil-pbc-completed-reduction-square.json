@@ -136,5 +136,39 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-24c1d4aa3 (reviewer sub-agent of L); spot-checked: Read the item, blueprint, unit/chapter route, all fourteen cited node statements and sources, relevant Stacks locations, and recorded searches. The completed reduction square is well typed: coefficient categories, ordered chi and tau comparisons, finite reductions, and all four edges check out. Edge cases K=0, n=1, I=0, zero quotients, and identity square pass. No duplicate or circular definition, unsupported theorem claim, new node, or accepted tool_use was found. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5b4a04e01",
+  "group": "NB",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable module, all 14 dependencies, sources, canonical composites, hypotheses, universes, edge cases, docstrings and verbatim signature. Both scompile.py checks passed without diagnostics. No fixes needed; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedReductionSquare",
+  "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedReductionSquare",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.quotientCompletion",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.quotientCompletionEvaluation",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.quotientCompletionReduction",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullCompletionIso",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullReduction",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completionDirectImageComparison",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completionDirectImageComparison_isIso",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedDirectImageReduction_isIso",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedReductionSigma_isIso",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedReductionSigma",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedReductionTau",
+   "AlgebraicGeometry.Scheme.CompletedReductionSquareEdges",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedReductionSquare"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedReductionSquare.lean",
+  "statement": "def AdicCoefficientDatum.completedReductionSquare [IsProper f] (K : d.derived X) (hK : d.TowerComplete X K) (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj K)) (n : ℕ) : CompletedReductionSquareEdges ((d.reduction Y' n).obj ((d.completedPull g).obj ((d.push f).obj K))) ((d.reduction Y' n).obj ((d.push f').obj ((d.completedPull g').obj K))) (d.fourCorners (f := f) (f' := f') (g := g) (g' := g') K n 1) (d.fourCorners (f := f) (f' := f') (g := g) (g' := g') K n 3)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the current published datum-indexed strict towers and finite etale-origin witness. Owning-node helpers define the canonical quotient completion, evaluation adjunct and completed-pullback comparison; named postponed isomorphism theorems are exactly the sigma, chi and rho invertibility clauses of this node. All existing dependency modules are imported unchanged; no statement correction."
  }
 }
